@@ -18,8 +18,8 @@ pool:
 
 variables:
   displayName: 'Figma broker build'
-  imageName: '$(Build.Repository.Name):$(Build.BuildId)-$(Build.SourceBranchName)'
+  imageName: '$(Build.Repository.Name)-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
 
 steps:
-- script: docker build -f Dockerfile -t $(imageName) .
+- script: docker build -f Dockerfile -t $(imageName) ./figma-broker
   displayName: 'docker build'
