@@ -20,6 +20,7 @@ variables:
   displayName: 'Figma broker build'
   imageName: '$(Build.Repository.Name)-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
 
+
 steps:
-- script: docker build -f Dockerfile -t $(imageName) .
+- script: docker build -f ./figma-broker/Dockerfile -t $(imageName) ./figma-broker
   displayName: 'docker build'
