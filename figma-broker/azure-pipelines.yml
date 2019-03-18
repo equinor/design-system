@@ -3,10 +3,7 @@
 # Add steps that use Docker Compose, tag images, push to a registry, run an image, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 name: figma-broker
-variables:
-  displayName: 'Figma broker build'
-  imageName: '$(Build.Repository.Name)-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
-  root: /figma-broker
+
 
 trigger:
   batch: true
@@ -16,11 +13,17 @@ trigger:
       - features/*
   paths:
     include:
-      - $(root)
+    # This cant be variable
+      - /figma-broker
+
+variables:
+  displayName: 'Figma broker build'
+  imageName: '$(Build.Repository.Name)-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
+  rootFolder: /figma-broker
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- script: docker build -f .$(root)/Dockerfile -t $(imageName) .$(root)
+- script: docker build -f .$(rootFolder)/Dockerfile -t $(imageName) .$(rootFolder)
   displayName: 'docker build'
