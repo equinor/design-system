@@ -8,8 +8,6 @@ trigger:
     # This cant be a variable
       - /figma-broker
 pr:
-  include:
-    - feature/*
   paths:
     include:
     - /figma-broker/*
