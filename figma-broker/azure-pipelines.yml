@@ -6,15 +6,14 @@ trigger:
   paths:
     include:
     # This cant be a variable
-      - /figma-broker
+      - figma-broker
 pr:
   paths:
     include:
-    - /figma-broker/*
+    - figma-broker/*
 
 variables:
   imageName: 'eds-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
-  rootFolder: /figma-broker
 
 pool:
   vmImage: 'Ubuntu-16.04'
