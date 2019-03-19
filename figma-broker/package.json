@@ -1,0 +1,24 @@
+{
+  "name": "figma-broker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e mjs --ignore figma --ignore tokens --inspect=33455 --experimental-modules --no-warnings index.mjs",
+    "start": "node --experimental-modules index.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "koa": "^2.7.0",
+    "koa-body": "^4.0.8",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "node-fetch": "^2.3.0",
+    "rimraf": "^2.6.3",
+    "simple-git": "^1.107.0",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v15.5.0"
+  }
+}
