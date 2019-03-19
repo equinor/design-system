@@ -15,6 +15,10 @@ trigger:
     include:
     # This cant be a variable
       - /figma-broker
+pr:
+  paths:
+    exclude:
+    - /storefront
 
 variables:
   imageName: 'eds-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'

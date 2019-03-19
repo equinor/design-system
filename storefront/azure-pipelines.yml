@@ -13,6 +13,10 @@ trigger:
     include:
       - /storefront
       - /common
+pr:
+  paths:
+    exclude:
+    - /figma-broker
 
 pool:
   vmImage: 'Ubuntu-16.04'
