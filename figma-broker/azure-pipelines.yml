@@ -8,9 +8,11 @@ trigger:
     # This cant be a variable
       - /figma-broker
 pr:
+  include:
+    - feature/*
   paths:
     include:
-    - /figma-broker
+    - /figma-broker/*
 
 variables:
   imageName: 'eds-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
