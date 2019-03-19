@@ -1,5 +1,5 @@
 
-name: eds-figma-broker
+name: $(Build.BuildId)
 
 trigger:
   batch: true
@@ -25,7 +25,7 @@ steps:
   inputs:
     azureSubscriptionEndpoint: 'eds-rg-dev'
     azureContainerRegistry: edscontainers.azurecr.io
-    imageName: '$(Build.Repository.Name):$(Build.BuildId)-$(Build.SourceBranchName)'
+    imageName: '$(imageName)'
     includeLatestTag: true
     command: Build an image
   env:
@@ -37,4 +37,4 @@ steps:
     azureSubscriptionEndpoint: 'eds-rg-dev'
     azureContainerRegistry: edscontainers.azurecr.io
     command: Push an image
-    imageName: '$(Build.Repository.Name):$(Build.BuildId)-$(Build.SourceBranchName)'
+    imageName: '$(imageName)'
