@@ -16,8 +16,8 @@ trigger:
       - /common
 pr:
   paths:
-    exclude:
-    - /figma-broker
+    include:
+    - /common
 
 variables:
   imageName: 'eds-common:$(Build.BuildId)-$(Build.SourceBranchName)'

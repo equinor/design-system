@@ -15,8 +15,9 @@ trigger:
       - /common
 pr:
   paths:
-    exclude:
-    - /figma-broker
+    include:
+    - /common
+    - /storefront
 
 pool:
   vmImage: 'Ubuntu-16.04'

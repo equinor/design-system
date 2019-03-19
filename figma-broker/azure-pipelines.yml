@@ -17,8 +17,8 @@ trigger:
       - /figma-broker
 pr:
   paths:
-    exclude:
-    - /storefront
+    include:
+    - /figma-broker
 
 variables:
   imageName: 'eds-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
