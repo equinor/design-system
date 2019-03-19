@@ -1,5 +1,11 @@
-FROM node:11-alpine
+FROM node:11 as builder
+# RUN apt-get install -y git
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
 
-RUN echo "building figma broker"
+ENV PORT=9001
+EXPOSE 9001
 
-
+CMD [ "npm", "start" ]
