@@ -6,11 +6,10 @@ const options = () => ({
     "X-Figma-Token": process.env.FIGMA_TOKEN
   }
 });
-const isUnderConstrution = items => items.filter(x => /^🚧/.test(x.name));
-const isFinished = items => items.filter(x => /^✅/.test(x.name));
+const isUnderConstrution = x => /^🚧/.test(x.name);
 
 export const processFigmaFile = result =>
-  isUnderConstrution(result.document.children);
+  result.document.children.filter(x => !isUnderConstrution(x));
 
 export async function fetchFigmaFile(fileId) {
   let data = {};

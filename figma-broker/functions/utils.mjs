@@ -13,14 +13,18 @@ export const camelize = str => {
 
 const removeForbiddenCharacters = str => {
   if (str) {
-    return str.replace(/[|]|[.]|[-]|[–]|[—]|[\s]/g, "");
+    return str.replace(/[|]|[.]|[-]|[–]|[—]/g, "");
   } else {
     throw new Error("No string for formatName()!");
   }
 };
 
 export const getFigmaNamePath = str => {
-  const path = formatName(str).split("/");
+  const path = removeForbiddenCharacters(str)
+    .toLowerCase()
+    .trim()
+    .replace(/[\s+]/g, "-")
+    .split("/");
   const name = path.pop();
   return { name, path: pathToString(path) };
 };
@@ -29,7 +33,8 @@ export const formatName = str =>
   removeForbiddenCharacters(str)
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-");
+    .replace(/[\s+]/g, "-")
+    .replace(/[/]/g, "--");
 
 export const pathToString = str =>
   str.reduce((acc, val) => `${acc}/${val}`, "");
