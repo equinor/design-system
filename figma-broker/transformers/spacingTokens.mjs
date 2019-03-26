@@ -4,11 +4,17 @@ export const makeSpacingTokens = spacingTokens =>
   spacingTokens
     .filter(x => x.type === "COMPONENT")
     .map(spacing => {
-      const spacer = spacing.children.find(x => /^Spacer/.test(x.name));
-      const height = spacingString(spacer.absoluteBoundingBox.height);
+      let name,
+        value = "";
+      try {
+        name = formatName(spacing.name);
+        value = spacingString(spacing.absoluteBoundingBox.height);
+      } catch (error) {
+        throw Error(`Height not found for ${name}`);
+      }
       return {
-        name: formatName(spacing.name),
-        value: height
+        name,
+        value
       };
     })
     .reduce((acc, { name, value }) => {

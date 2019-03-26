@@ -26,6 +26,12 @@ export const makeTokens = figmaPages => {
         value: makeSpacingTokens(page.children)
       });
     }
+    if (fixedPageName === "placeholder") {
+      tokens.push({
+        name: "placeholder",
+        value: makeSpacingTokens(page.children)
+      });
+    }
   });
 
   return tokens;
