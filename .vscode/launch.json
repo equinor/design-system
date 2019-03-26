@@ -9,7 +9,7 @@
       "request": "attach",
       "name": "Attach",
       "port": 33455,
-      "restart": false
+      "restart": true
     },
     {
       "type": "node",
