@@ -1,0 +1,285 @@
+@custom-media --small (min-width: 600px);
+@custom-media --large (min-width: 1200px);
+
+:root {
+    --borderColor: silver;
+    --bgColor: whitesmoke;
+    --sidebarBgColor: white;
+    --sidebarShadowColor: #666;
+    --headerHeight: 64px;
+    --tocWidth: 167px;
+    --sidebarWidth: 240px;
+    --black: #333;
+}
+
+html {
+    box-sizing: border-box;
+    background-color: var(--bgColor);
+}
+
+body {
+    margin: 0;    
+    font-family: 
+        system-ui /*  */,
+        "Segoe UI",
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        Helvetica,
+        Arial,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol";
+}
+
+h1, h2, h3, h4, h5, h6 {    
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+
+
+.Page {
+
+    display: grid;
+
+    grid-template-areas: 
+        'header'
+        'main';
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--headerHeight) 1fr;
+
+    @media (--small) {        
+        grid-template-areas: 
+            'header header'
+            'main toc';
+        grid-template-columns: 1fr var(--tocWidth);
+        grid-template-rows: var(--headerHeight) 1fr;
+    }
+
+    @media (--large) {        
+        grid-template-areas: 
+            'sidebar header header'
+            'sidebar main toc';
+        grid-template-columns: var(--sidebarWidth) 1fr var(--tocWidth);
+        grid-template-rows: var(--headerHeight) 1fr;
+    }
+}
+
+.Burger {
+    width: 24px;
+    height: 20px;
+    display: block;
+    margin-right: 2rem;
+    background: repeating-linear-gradient(
+        var(--black),
+        var(--black) 4px,
+        transparent 4px, 
+        transparent 8px
+    );    
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+        content: "\00a0";
+        width: 48px;
+        height: 48px;
+        top: -14px;
+        left: -12px;
+        position: absolute;
+        z-index: -1;        
+    }
+
+    @media (--large) {
+        display: none;
+    }
+}
+
+.MenuToggler {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.Header {
+    height: 64px;
+    position: fixed;   
+    left: 0;
+    top: 0;
+    width: 100vw;
+    background-color: var(--bgColor);
+    border-bottom: 1px solid var(--borderColor);    
+    display: flex;
+    align-items: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    &-title {
+        line-height: 1;
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    @media (--large) {
+        left: var(--sidebarWidth);
+    }
+
+}
+
+.Sidebar {         
+    z-index: 1;        
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;    
+    display: none;
+
+    &-content {
+        background-color: var(--sidebarBgColor);
+        border-right: 1px solid var(--borderColor);
+        box-shadow: 0 0 30px 0 var(--sidebarShadowColor); 
+        z-index: 1;
+        margin-top: -1px; /* remove if logo in sidebar */
+
+        position: fixed;
+        top: 0;
+        left: 0;        
+
+        width: var(--sidebarWidth);
+        height: 100vh;
+
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+
+        @media (--large) {
+            box-shadow: none;
+        }     
+    }
+
+    &-veil {        
+        background-color: rgba(0, 0, 0, 0.3);                
+        position: fixed; 
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        
+        @media (--large) {
+            display: none;            
+        }
+    }
+
+    .MenuToggler:checked ~ & {        
+        display: block;
+    }
+
+    @media (--large) {
+        display: block;
+        position: relative;        
+        width: auto;
+        grid-area: sidebar;        
+
+        .MenuToggler ~ & {
+            display: grid;
+        }
+    }
+
+    &-menu {
+        margin-top: 0;
+        list-style-type: none;
+        padding-left: 0;
+
+        &Item {
+            border-top: 1px solid var(--borderColor);
+        }
+
+        & .Sidebar-menu {
+            display: none;
+        }
+    }
+
+    &-trigger {        
+        font-family: Roboto;        
+        padding: 1rem 1rem 1rem 2rem;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &--indented {
+            padding-left: 3rem;            
+        }
+    }
+
+    &-menuArrow {
+        width: 13px;
+        height: 13px;
+
+        path {
+            stroke: black;
+            stroke-width: 1px;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+}
+
+.TOC {
+    display: none;
+    background: var(--bgColor);
+    position: fixed;
+    top: var(--headerHeight);
+    right: 0;
+    left: auto;
+    width: var(--tocWidth);
+    height: calc(100vh - var(--headerHeight));
+    grid-area: toc;
+    padding-top: 2rem;
+    padding-right: 3rem;
+    
+    @media (--small) {
+        display: block;
+    }
+}
+
+.Main {
+    grid-area: main;
+    background-color: whitesmoke;
+    padding: 2rem 3rem;
+
+    & * + * {
+        margin-top: 1.5em;        
+    }
+}
+
+.SubMenuToggler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    visibility: hidden;
+
+    &:checked ~ {
+        .Sidebar-menu {
+            display: block;
+        }
+        .Sidebar-trigger {
+            .Sidebar-menuArrow {
+                transform: rotate(90deg);
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "postcss-parcel-starter",
+  "version": "1.0.0",
+  "description": "Quick prototyping setup using postcss and parcel",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "rimraf dist && parcel build src/index.html"
+  },
+  "keywords": [
+    "parcel",
+    "postcss",
+    "starter"
+  ],
+  "author": "Victor Nystad",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.5.0",
+    "parcel-bundler": "^1.12.3",
+    "postcss-custom-media": "^7.0.7",
+    "postcss-nested": "^4.1.2",
+    "rimraf": "^2.6.3",
+    "stylelint-config-recommended": "^2.1.0"
+  }
+}
