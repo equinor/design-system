@@ -18,8 +18,8 @@ html {
 }
 
 body {
-    margin: 0;    
-    font-family: 
+    margin: 0;
+    font-family:
         system-ui /*  */,
         "Segoe UI",
         Roboto,
@@ -34,7 +34,7 @@ body {
         "Segoe UI Symbol";
 }
 
-h1, h2, h3, h4, h5, h6 {    
+h1, h2, h3, h4, h5, h6 {
     font-family: Roboto;
     font-weight: 500;
 }
@@ -43,28 +43,24 @@ h1, h2, h3, h4, h5, h6 {
     box-sizing: inherit;
 }
 
-
-
 .Page {
-
     display: grid;
-
-    grid-template-areas: 
+    grid-template-areas:
         'header'
         'main';
     grid-template-columns: 1fr;
     grid-template-rows: var(--headerHeight) 1fr;
 
-    @media (--small) {        
-        grid-template-areas: 
+    @media (--small) {
+        grid-template-areas:
             'header header'
             'main toc';
         grid-template-columns: 1fr var(--tocWidth);
         grid-template-rows: var(--headerHeight) 1fr;
     }
 
-    @media (--large) {        
-        grid-template-areas: 
+    @media (--large) {
+        grid-template-areas:
             'sidebar header header'
             'sidebar main toc';
         grid-template-columns: var(--sidebarWidth) 1fr var(--tocWidth);
@@ -80,9 +76,9 @@ h1, h2, h3, h4, h5, h6 {
     background: repeating-linear-gradient(
         var(--black),
         var(--black) 4px,
-        transparent 4px, 
+        transparent 4px,
         transparent 8px
-    );    
+    );
     position: relative;
     cursor: pointer;
 
@@ -93,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
         top: -14px;
         left: -12px;
         position: absolute;
-        z-index: -1;        
+        z-index: -1;
     }
 
     @media (--large) {
@@ -111,12 +107,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .Header {
     height: 64px;
-    position: fixed;   
+    position: fixed;
     left: 0;
     top: 0;
     width: 100vw;
     background-color: var(--bgColor);
-    border-bottom: 1px solid var(--borderColor);    
+    border-bottom: 1px solid var(--borderColor);
     display: flex;
     align-items: center;
     padding-left: 3rem;
@@ -134,13 +130,13 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-.Sidebar {         
-    z-index: 1;        
+.Sidebar {
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 100vw;    
+    width: 100vw;
     display: none;
 
     &-content {
@@ -152,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
 
         position: fixed;
         top: 0;
-        left: 0;        
+        left: 0;
 
         width: var(--sidebarWidth);
         height: 100vh;
@@ -162,31 +158,31 @@ h1, h2, h3, h4, h5, h6 {
 
         @media (--large) {
             box-shadow: none;
-        }     
+        }
     }
 
-    &-veil {        
-        background-color: rgba(0, 0, 0, 0.3);                
-        position: fixed; 
+    &-veil {
+        background-color: rgba(0, 0, 0, 0.3);
+        position: fixed;
         left: 0;
         top: 0;
         width: 100vw;
         height: 100vh;
-        
+
         @media (--large) {
-            display: none;            
+            display: none;
         }
     }
 
-    .MenuToggler:checked ~ & {        
+    .MenuToggler:checked ~ & {
         display: block;
     }
 
     @media (--large) {
         display: block;
-        position: relative;        
+        position: relative;
         width: auto;
-        grid-area: sidebar;        
+        grid-area: sidebar;
 
         .MenuToggler ~ & {
             display: grid;
@@ -207,8 +203,8 @@ h1, h2, h3, h4, h5, h6 {
         }
     }
 
-    &-trigger {        
-        font-family: Roboto;        
+    &-trigger {
+        font-family: Roboto;
         padding: 1rem 1rem 1rem 2rem;
         text-decoration: none;
         color: inherit;
@@ -219,7 +215,7 @@ h1, h2, h3, h4, h5, h6 {
         justify-content: space-between;
 
         &--indented {
-            padding-left: 3rem;            
+            padding-left: 3rem;
         }
     }
 
@@ -249,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
     grid-area: toc;
     padding-top: 2rem;
     padding-right: 3rem;
-    
+
     @media (--small) {
         display: block;
     }
@@ -261,7 +257,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2rem 3rem;
 
     & * + * {
-        margin-top: 1.5em;        
+        margin-top: 1.5em;
     }
 }
 
@@ -283,3 +279,4 @@ h1, h2, h3, h4, h5, h6 {
         }
     }
 }
+

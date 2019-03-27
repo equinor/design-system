@@ -9,6 +9,7 @@
         "editor.tabSize": 4
     },
     "yaml.schemas": {
-        "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
-    },
+        "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml"
+    }
 }
+
