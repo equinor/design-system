@@ -1,5 +1,6 @@
 import { makeColorToken } from "../transformers/colorTokens";
 import { makeSpacingTokens } from "../transformers/spacingTokens";
+import { makeElevationTokens } from "../transformers/elevationTokens";
 
 const fixPageName = name =>
   name
@@ -23,12 +24,6 @@ export const makeTokens = figmaPages => {
     if (fixedPageName === "spacing") {
       tokens.push({
         name: "spacings",
-        value: makeSpacingTokens(page.children)
-      });
-    }
-    if (fixedPageName === "placeholder") {
-      tokens.push({
-        name: "placeholder",
         value: makeSpacingTokens(page.children)
       });
     }
