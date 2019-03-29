@@ -1,5 +1,5 @@
 {
-    "spacer-horizontal--xxx-lage": "48px",
+    "spacer-horizontal--xxx-large": "48px",
     "spacer-horizontal--xx-large": "40px",
     "spacer-horizontal--x-large": "32px",
     "spacer-horizontal--large": "24px",
@@ -7,7 +7,7 @@
     "spacer-horizontal--small": "8px",
     "spacer-horizontal--x-small": "4px",
     "spacer-horizontal--xx-small": "2px",
-    "spacer-vertical--xxx-lage": "48px",
+    "spacer-vertical--xxx-large": "48px",
     "spacer-vertical--xx-large": "40px",
     "spacer-vertical--x-large": "32px",
     "spacer-vertical--large": "24px",

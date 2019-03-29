@@ -2,6 +2,8 @@ import { formatName } from "../functions/utils";
 
 export const makeSpacingTokens = spacingTokens =>
   spacingTokens
+    .filter(x => x.type === "FRAME")
+    .reduce((acc, x) => [...acc, ...x.children], [])
     .filter(x => x.type === "COMPONENT")
     .map(spacing => {
       let name,
@@ -10,7 +12,7 @@ export const makeSpacingTokens = spacingTokens =>
         name = formatName(spacing.name);
         value = spacingString(spacing.absoluteBoundingBox.height);
       } catch (error) {
-        throw Error(`Height not found for ${name}`);
+        throw Error(`Height not found for ${name}. ${error.message}`);
       }
       return {
         name,
