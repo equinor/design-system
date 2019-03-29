@@ -27,6 +27,13 @@ export const makeTokens = figmaPages => {
         value: makeSpacingTokens(page.children)
       });
     }
+
+    if (fixedPageName === "elevation") {
+      tokens.push({
+        name: "elevation",
+        value: makeElevationTokens(page.children)
+      });
+    }
   });
 
   return tokens;
