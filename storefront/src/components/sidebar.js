@@ -7,7 +7,6 @@ const Sidebar = ({ siteTitle }) => (
         <label className="Sidebar-veil" for="MenuToggler"></label>
         <div className="Sidebar-content">
             <ul className="Sidebar-menu">
-                <Link className="Sidebar-trigger" to="/">Home is where the ❤️ is</Link>
                 <li className="Sidebar-menuItem">
                     <input className="SubMenuToggler" type="checkbox" id="SubMenuToggler-1" />
                     <label for="SubMenuToggler-1" className="Sidebar-trigger" href="#">
