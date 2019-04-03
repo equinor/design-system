@@ -26,7 +26,7 @@ export const getFigmaNamePath = str => {
     .replace(/[\s+]/g, "-")
     .split("/");
   const name = path.pop();
-  return { name, path: pathToString(path) };
+  return { name, path: pathToString(path), };
 };
 
 export const formatName = str =>

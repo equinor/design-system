@@ -1,6 +1,6 @@
-import { makeColorToken } from "../transformers/colorTokens";
-import { makeSpacingTokens } from "../transformers/spacingTokens";
-import { makeElevationTokens } from "../transformers/elevationTokens";
+import { makeColorToken, } from "../transformers/colorTokens";
+import { makeSpacingTokens, } from "../transformers/spacingTokens";
+import { makeElevationTokens, } from "../transformers/elevationTokens";
 
 const fixPageName = name =>
   name
@@ -17,21 +17,21 @@ export const makeTokens = figmaPages => {
     if (fixedPageName === "color") {
       tokens.push({
         name: "colors",
-        value: makeColorToken(page.children)
+        value: makeColorToken(page.children),
       });
     }
 
     if (fixedPageName === "spacing") {
       tokens.push({
         name: "spacings",
-        value: makeSpacingTokens(page.children)
+        value: makeSpacingTokens(page.children),
       });
     }
 
     if (fixedPageName === "elevation") {
       tokens.push({
         name: "elevation",
-        value: makeElevationTokens(page.children)
+        value: makeElevationTokens(page.children),
       });
     }
   });

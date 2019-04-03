@@ -9,7 +9,7 @@ import fs from "fs";
 export const createFolder = dir => {
   if (dir) {
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+      fs.mkdirSync(dir, { recursive: true, });
     }
   } else {
     throw new Error("No directory specified for createFolder()!");

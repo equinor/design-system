@@ -1,10 +1,10 @@
-import { writeFile } from "./file.mjs";
+import { writeFile, } from "./file.mjs";
 import fetch from "node-fetch";
 
 const options = () => ({
   headers: {
-    "X-Figma-Token": process.env.FIGMA_TOKEN
-  }
+    "X-Figma-Token": process.env.FIGMA_TOKEN,
+  },
 });
 const isUnderConstrution = x => /^🚧/.test(x.name);
 

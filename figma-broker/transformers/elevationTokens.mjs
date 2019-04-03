@@ -1,11 +1,11 @@
-import { formatName } from "../functions/utils";
+import { formatName, } from "../functions/utils";
 
 export const makeElevationTokens = elevationTokens =>
   elevationTokens
     .filter(x => x.type === "FRAME")
-    .reduce((acc, x) => [...acc, ...x.children], [])
+    .reduce((acc, x) => [...acc, ...x.children,], [])
     .filter(x => /^token-row/.test(x.name.toLowerCase()))
-    .reduce((acc, x) => [...acc, ...x.children], [])
+    .reduce((acc, x) => [...acc, ...x.children,], [])
     .filter(x => x.type === "RECTANGLE")
     .map(row => {
       let name,
@@ -16,7 +16,7 @@ export const makeElevationTokens = elevationTokens =>
           .reduce(
             (acc, val) => [
               ...acc,
-              `${unitString(val.offset, val.radius)} ${colorString(val.color)}`
+              `${unitString(val.offset, val.radius)} ${colorString(val.color)}`,
             ],
             []
           )
@@ -26,15 +26,15 @@ export const makeElevationTokens = elevationTokens =>
       }
       return {
         name,
-        value
+        value,
       };
     })
-    .reduce((acc, { name, value }) => {
+    .reduce((acc, { name, value, }) => {
       acc[name] = value;
       return acc;
     }, {});
 
-const colorString = ({ r, g, b, a }) =>
+const colorString = ({ r, g, b, a, }) =>
   `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${a.toFixed(2) * 1})`;
 
 const unitString = (offset, radius) =>

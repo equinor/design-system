@@ -11,14 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^6.2.0",
     "koa": "^2.7.0",
     "koa-body": "^4.0.8",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "node-fetch": "^2.3.0",
-    "rimraf": "^2.6.3",
-    "simple-git": "^1.107.0",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v15.5.0"
+    "ramda": "^0.26.1",
+    "rimraf": "^2.6.3"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0",
+    "eslint": "^5.16.0"
   }
 }

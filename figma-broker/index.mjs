@@ -4,8 +4,6 @@ import Koa from "koa";
 import KoaRouter from "koa-router";
 import KoaLogger from "koa-logger";
 import KoaBody from "koa-body";
-import simplegit from "simple-git";
-import rimraf from "rimraf";
 
 import {
   fetchFigmaFile,
@@ -13,13 +11,12 @@ import {
   fetchFigmaComponents,
   processFigmaComponents,
   processFigmaAssets,
-  fetchFigmaImages
+  fetchFigmaImages,
 } from "./functions/figma";
-import { createFolder } from "./functions/folder";
-import { makeTokens } from "./functions/tokens";
-import { writeTokens, writeComponents } from "./functions/file";
-import { makeComponents } from "./transformers/components";
-import { makeAssets, saveAssets } from "./functions/assets";
+import { makeTokens, } from "./functions/tokens";
+import { writeTokens, writeComponents, } from "./functions/file";
+import { makeComponents, } from "./transformers/components";
+import { makeAssets, saveAssets, } from "./functions/assets";
 
 dotenv.config();
 
@@ -33,7 +30,7 @@ const logger = new KoaLogger();
 const PATHS = {
   TOKENS: "../common/tokens",
   ASSETS: "../common/assets",
-  COMPONENTS: "../common/components"
+  COMPONENTS: "../common/components",
 };
 
 router
@@ -62,7 +59,7 @@ async function createTokens(ctx) {
 }
 
 async function getTokens(ctx) {
-  const tokens = [{ name: "TODO 🙈" }];
+  const tokens = [{ name: "TODO 🙈", },];
   ctx.response.body = JSON.stringify(tokens);
 }
 
@@ -88,13 +85,14 @@ async function createAssets(ctx) {
   const figmaAssets = processFigmaAssets(data);
   const assets = makeAssets(figmaAssets);
 
+  const { images, } = await fetchFigmaImages(
     assetsFileId,
     assets.map(x => x.value.id).toString()
   );
 
   const updatedAssets = assets.map(x => ({
     ...x,
-    assetUrl: images[x.value.id]
+    assetUrl: images[x.value.id],
   }));
 
   saveAssets(updatedAssets, PATHS.ASSETS);

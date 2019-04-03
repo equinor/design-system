@@ -1,12 +1,13 @@
 import fs from "fs";
-import { createFolder } from "./folder";
+import { createFolder, } from "./folder";
 
 const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`;
 
 const write = (file, path, name, ext) => {
-  fs.writeFile(getFilePath(path, name, ext), file, "utf-8", error => {
+  const filePath = getFilePath(path, name, ext);
+  fs.writeFile(filePath, file, "utf-8", error => {
     if (error) {
-      throw new Error("Error in write(): ", { error, filePath });
+      throw new Error("Error in write(): ", { error, filePath, });
     }
   });
 };
@@ -37,12 +38,12 @@ export const readFile = (path, name, ext, callback) => {
 };
 
 export const writeTokens = (tokens, savePath) =>
-  tokens.forEach(({ value, name }) =>
+  tokens.forEach(({ value, name, }) =>
     writeFile(JSON.stringify(value, null, 4), savePath, name, "json")
   );
 
 export const writeComponents = (components, savePath) =>
-  components.forEach(({ value, name, path }) =>
+  components.forEach(({ value, name, path, }) =>
     writeFile(
       JSON.stringify(value, null, 4),
       `${savePath}/${path}`,

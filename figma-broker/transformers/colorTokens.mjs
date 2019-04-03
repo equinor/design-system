@@ -1,13 +1,13 @@
-import { formatName } from "../functions/utils";
+import { formatName, } from "../functions/utils";
 
 export const makeColorToken = colorTokens =>
   colorTokens
     .filter(x => x.type === "FRAME")
     .map(color => ({
       name: formatName(color.name),
-      value: colorString(color.backgroundColor)
+      value: colorString(color.backgroundColor),
     }))
-    .reduce((acc, { name, value }) => {
+    .reduce((acc, { name, value, }) => {
       acc[name] = value;
       return acc;
     }, {});
