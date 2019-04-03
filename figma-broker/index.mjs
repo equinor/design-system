@@ -1,4 +1,5 @@
 #!/usr/bin/env NODE_NO_WARNINGS=1 node
+/* eslint-disable no-unused-vars */
 import dotenv from "dotenv";
 import Koa from "koa";
 import KoaRouter from "koa-router";
@@ -22,16 +23,15 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 const TEAM_ID = "590517879490131675";
-
-const app = new Koa();
-const router = new KoaRouter();
-const logger = new KoaLogger();
-
 const PATHS = {
   TOKENS: "../common/tokens",
   ASSETS: "../common/assets",
   COMPONENTS: "../common/components",
 };
+
+const app = new Koa();
+const router = new KoaRouter();
+const logger = new KoaLogger();
 
 router
   .post("/tokens", KoaBody(), createTokens)
