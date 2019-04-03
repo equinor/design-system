@@ -1,18 +1,18 @@
 import { formatName, } from "../functions/utils";
 
-export const makeElevationTokens = elevationTokens =>
-  elevationTokens
+const getChildren = (acc, x) => [...acc, ...x.children,];
+
+export const makeElevationTokens = documents =>
+  documents
     .filter(x => x.type === "FRAME")
-    .reduce((acc, x) => [...acc, ...x.children,], [])
-    .filter(x => /^token-row/.test(x.name.toLowerCase()))
-    .reduce((acc, x) => [...acc, ...x.children,], [])
+    .reduce(getChildren, [])
     .filter(x => x.type === "RECTANGLE")
-    .map(row => {
+    .map(x => {
       let name,
         value = "";
       try {
-        name = formatName(row.name);
-        value = row.effects
+        name = formatName(x.name);
+        value = x.effects
           .reduce(
             (acc, val) => [
               ...acc,
