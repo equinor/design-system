@@ -23,7 +23,9 @@ import { makeAssets, saveAssets } from "./functions/assets";
 
 dotenv.config();
 
-const port = process.env.PORT;
+const PORT = process.env.PORT;
+const TEAM_ID = "590517879490131675";
+
 const app = new Koa();
 const router = new KoaRouter();
 const logger = new KoaLogger();
@@ -67,8 +69,7 @@ async function getTokens(ctx) {
 // Components
 
 async function createComponents(ctx) {
-  const teamId = "590517879490131675";
-  const data = await fetchFigmaComponents(teamId);
+  const data = await fetchFigmaComponents(TEAM_ID);
 
   const figmaComponents = processFigmaComponents(data);
   const components = makeComponents(figmaComponents);
@@ -81,14 +82,13 @@ async function createComponents(ctx) {
 // Assets
 
 async function createAssets(ctx) {
-  const assesFileId = "BQjYMxdSdgRkdhKTDDU7L4KU";
-  const data = await fetchFigmaFile(assesFileId);
+  const assetsFileId = "BQjYMxdSdgRkdhKTDDU7L4KU";
+  const data = await fetchFigmaFile(assetsFileId);
 
   const figmaAssets = processFigmaAssets(data);
   const assets = makeAssets(figmaAssets);
 
-  const { images } = await fetchFigmaImages(
-    assesFileId,
+    assetsFileId,
     assets.map(x => x.value.id).toString()
   );
 
@@ -102,6 +102,7 @@ async function createAssets(ctx) {
   ctx.response.body = JSON.stringify(updatedAssets);
 }
 
-app.listen(port);
+app.listen(PORT);
 
-console.log("Started Figma Broker 😄");
+// eslint-disable-next-line no-console
+console.info("Started Figma Broker 😄");
