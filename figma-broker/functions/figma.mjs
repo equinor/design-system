@@ -53,7 +53,7 @@ export async function fetchFigmaComponents(teamId) {
 }
 
 export const processFigmaAssets = result =>
-  isUnderConstrution(result.document.children);
+  result.document.children.filter(x => !isUnderConstrution(x));
 
 export async function fetchFigmaImages(fileId, ids) {
   let data = {};
