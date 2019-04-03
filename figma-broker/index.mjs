@@ -36,7 +36,7 @@ const PATHS = {
 router
   .post("/tokens", KoaBody(), createTokens)
   .get("/tokens", KoaBody(), getTokens)
-  .post("/components", KoaBody(), createComponents)
+  // .post("/components", KoaBody(), createComponents)
   .post("/assets", KoaBody(), createAssets);
 
 app
@@ -65,16 +65,16 @@ async function getTokens(ctx) {
 
 // Components
 
-async function createComponents(ctx) {
-  const data = await fetchFigmaComponents(TEAM_ID);
+// async function createComponents(ctx) {
+//   const data = await fetchFigmaComponents(TEAM_ID);
 
-  const figmaComponents = processFigmaComponents(data);
-  const components = makeComponents(figmaComponents);
+//   const figmaComponents = processFigmaComponents(data);
+//   const components = makeComponents(figmaComponents);
 
-  writeComponents(components, PATHS.COMPONENTS);
+//   writeComponents(components, PATHS.COMPONENTS);
 
-  ctx.response.body = JSON.stringify(components);
-}
+//   ctx.response.body = JSON.stringify(components);
+// }
 
 // Assets
 
