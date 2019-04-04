@@ -15,9 +15,16 @@ import {
   fetchFigmaImages,
 } from "./functions/figma";
 import { makeTokens, } from "./functions/tokens";
-import { writeTokens, writeComponents, } from "./functions/file";
+import {
+  writeTokens,
+  writeComponents,
+  readTokens,
+  writeFile,
+} from "./functions/file";
 import { makeComponents, } from "./transformers/components";
 import { makeAssets, saveAssets, } from "./functions/assets";
+import { jsonToSassString, } from "./transformers/jsonToSass";
+import { jsonToCssString, } from "./transformers/jsonToCss";
 
 dotenv.config();
 
@@ -27,6 +34,8 @@ const PATHS = {
   TOKENS: "../common/tokens",
   ASSETS: "../common/assets",
   COMPONENTS: "../common/components",
+  SASS: "../common/public/sass",
+  CSS: "../common/public/css",
 };
 
 const app = new Koa();
@@ -37,7 +46,8 @@ router
   .post("/tokens", KoaBody(), createTokens)
   .get("/tokens", KoaBody(), getTokens)
   // .post("/components", KoaBody(), createComponents)
-  .post("/assets", KoaBody(), createAssets);
+  .post("/assets", KoaBody(), createAssets)
+  .post("/transform-tokens", KoaBody(), transformTokens);
 
 app
   .use(logger)
@@ -98,6 +108,24 @@ async function createAssets(ctx) {
   saveAssets(updatedAssets, PATHS.ASSETS);
 
   ctx.response.body = JSON.stringify(updatedAssets);
+}
+
+// Transform tokens
+
+async function transformTokens(ctx) {
+  const tokens = readTokens(PATHS.TOKENS);
+  const transformed = tokens.map(file => ({
+    ...file,
+    sassString: jsonToSassString(file.data),
+    cssString: jsonToCssString(file.data),
+  }));
+
+  transformed.forEach(file => {
+    writeFile(file.sassString, PATHS.SASS, file.fileName, "scss");
+    writeFile(file.cssString, PATHS.CSS, file.fileName, "css");
+  });
+
+  ctx.response.body = JSON.stringify(transformed);
 }
 
 app.listen(PORT);
