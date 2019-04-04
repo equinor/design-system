@@ -116,8 +116,8 @@ async function transformTokens(ctx) {
   const tokens = readTokens(PATHS.TOKENS);
   const transformed = tokens.map(file => ({
     ...file,
-    sassString: jsonToSassString(file.data),
-    cssString: jsonToCssString(file.data),
+    sassString: jsonToSassString(file.tokens),
+    cssString: jsonToCssString(file.tokens),
   }));
 
   transformed.forEach(file => {
