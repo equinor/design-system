@@ -25,3 +25,9 @@ yarn develop
 ```
 
 4. Edit Page 2 in `src/pages/page-2.mdx`
+
+---
+
+## Resources
+
+- [Reach Router]: https://reach.tech/router/api/Link

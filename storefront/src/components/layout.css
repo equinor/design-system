@@ -5,6 +5,7 @@
     --borderColor: silver;
     --backgroundColor: whitesmoke;
     --Sidebar-backgroundColor: white;
+    --Sidebar-activeLink-backgroundColor: gainsboro;
     --Sidebar-shadowColor: #666;
     --Header-height: 64px;
     --Toc-width: 167px;
@@ -35,6 +36,7 @@ body {
         "Segoe UI Symbol";
     font-kerning: normal;
     font-feature-settings: "kern", "liga";
+    color: var(--black);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -132,6 +134,11 @@ th, td {
         font-size: 1.5rem;
     }
 
+    &-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
     @media (--large) {
         left: var(--Sidebar-width);
     }
@@ -224,6 +231,10 @@ th, td {
 
         &--indented {
             padding-left: 3rem;
+        }
+
+        &.is-active {
+            background-color: var(--Sidebar-activeLink-backgroundColor);
         }
     }
 
