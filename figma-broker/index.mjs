@@ -121,7 +121,7 @@ async function transformTokens(ctx) {
   }));
 
   transformed.forEach(file => {
-    writeFile(file.sassString, PATHS.SASS, file.fileName, "scss");
+    writeFile(file.sassString, PATHS.SASS, `_${file.fileName}`, "scss");
     writeFile(file.cssString, PATHS.CSS, file.fileName, "css");
   });
 
