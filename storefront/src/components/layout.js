@@ -6,7 +6,7 @@ import Header from './header'
 import Sidebar from './sidebar'
 import './layout.css'
 
-const Layout = ({ children }) => (
+const Layout = ({ children, location }) => (
     <StaticQuery
         query={graphql`
             query SiteTitleQuery {
@@ -20,10 +20,10 @@ const Layout = ({ children }) => (
         render={data => (
             <div className="Page">
                 <input id="MenuToggler" className="MenuToggler" type="checkbox" />
-                <Header siteTitle={data.site.siteMetadata.title} />
-                <Sidebar />
-                <nav class="TOC">TOC</nav>
-                <main class="Main">
+                <Header />
+                <Sidebar location={ location } />
+                <nav className="TOC">TOC</nav>
+                <main className="Main">
                     {children}
                 </main>
             </div>
