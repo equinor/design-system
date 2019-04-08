@@ -5,131 +5,156 @@
     <meta charset="utf-8" />
     <title>Equinor Design System</title>
     <meta name="description" content="Equinor Design System" />
+    <link
+      rel="stylesheet"
+      href="node_modules/@equinor-internal/equinor-font/index.css"
+    />
   </head>
 
   <style>
-    html {
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    @import "@equinor-internal/equinor-font";
+
     body {
+      font-family: Equinor;
       margin: 0 auto;
       max-width: 900px;
     }
+
+    em {
+      font-weight: 700;
+      font-style: italic;
+    }
+
     main {
       margin: 32px;
     }
     h1 {
       font-size: 2.5em;
+      font-weight: 300;
+    }
+    section {
+      margin-bottom: 32px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    img {
+      height: 100px;
     }
   </style>
 
   <body>
     <main>
-      <h1><a id="Introduction_0"></a>Equinor Design System</h1>
-      <p>
-        The Equinor Design System (EDS) will be a collection of reusable
-        components that can be assembled in different combinations to design and
-        build any number of products, apps, and web-applications. All design and
-        code components will be high-quality, production-grade and
-        accessibility-tested. This will allow Equinor to manage design at scale
-        by creating a single source of truth for teams to design, prototype and
-        develop.
-      </p>
-      <strong>
-        The EDS is being built for new projects. A “new project” is a project
-        that is started after the first version on the EDS is released.
-      </strong>
-      <br />
-      <br />
-      <hr />
-      <h2><a id="For_designers_9"></a>For designers</h2>
-      <p>
-        The EDS will be the official design library for all of Equinor’s
-        internal products, apps, and web-applications. It includes resources to
-        create consistent user interfaces for Equinor based of it’s guidelines
-        and components. The first release will include a selection of Design
-        Tokens, Assets, and Desktop UI.
-      </p>
-      <br />
-
-      <h3><a id="While_you_wait_16"></a>While you wait</h3>
-      <p>
-        Continue using the same tools and processes as you have been. Still
-        eager to prepare? Familiarize yourself with
-        <a href="https://www.figma.com">Figma</a> - this will be your tool for
-        designing and prototyping within the EDS. The Figma Organization
-        Licenses will be available with the first release of the EDS - more
-        information on this will come later.
-      </p>
-      <br />
-
-      <h3><a id="What_is_Figma_24"></a>What is Figma</h3>
-      <p>
-        <a href="https://www.figma.com">Figma</a> is a collaborative interface
-        design tool for UI design and prototyping. It increases efficiency with
-        the added flexibility of Team Libraries (The EDS) with components,
-        styles, and fonts automatically distributed.
-      </p>
-      <p>
-        <strong>Platform agnostic</strong><br />
-        Figma is browser based. It can also be downloaded as a stand-alone
-        application for MacOS, Windows, Chromebook and Linux.
-      </p>
-      <p>
-        <strong>Real-time Collaboration</strong><br />
-        Figma allows you to edit along with your team, seeing what they are
-        doing in real-time.
-      </p>
-      <p>
-        <strong>Communication</strong><br />
-        Figma allows your team to leave contextual feedback by commenting
-        directly in the design file.
-      </p>
-      <p>
-        <strong>Prototyping</strong><br />
-        Figma allows you to quickly create and share your prototype to others
-        for review or testing.
-      </p>
-      <p>
-        <strong>Development</strong><br />
-        Figma allows your development team to always have view access to the
-        current files and prototypes.
-      </p>
-      <br />
-      <hr />
-      <h2><a id="For_developers_45"></a>For developers</h2>
-      <p>
-        The EDS will provide the official UI components for all of Equinor’s
-        internal products, apps, and web-applications. Developers should use the
-        EDS to easily sew together new prototypes, while focusing on application
-        logic rather than frontend components. There will be two different
-        implementations built that will be started and maintained by the core
-        EDS team - hopefully with further development from the Equinor
-        Development Community.
-      </p>
-      <ol>
-        <li>CSS library</li>
-        <li>A React library</li>
-      </ol>
-      <p>
-        The CSS + React libraries will be available via Package Manager and CDN
-      </p>
-      <br />
-
-      <h3><a id="While_you_wait_57"></a>While you wait</h3>
-      <p>
-        Continue using the same tools as you have been. Once the first design
-        package is ready, a subset of the designed components will be built by
-        the core team. When that subset is ready, all developers will be both
-        invited and encouraged to help with the implementation.
-      </p>
-      <br />
-
-      <h3><a id="Upgrading_64"></a>Upgrading</h3>
-      <p>
-        We aim to make upgrading to the EDS as smooth as possible. Your team can
-        choose to integrate with the EDS via CDN or a Package Manager.
-      </p>
+      <header>
+        <h1>
+          Equinor Design System
+        </h1>
+        <img src="./Equinor_PRIMARY_logo_RGB_RED.png" />
+      </header>
+      <article>
+        <section>
+          <p>
+            The Equinor Design System (EDS) will be a collection of reusable
+            components that can be assembled in different combinations to design
+            and build any number of products, apps, and web-applications. All
+            design and code components will be high-quality, production-grade
+            and accessibility-tested. This will allow Equinor to manage design
+            at scale by creating a single source of truth for teams to design,
+            prototype and develop.
+          </p>
+          <strong>
+            The EDS is being built for new projects. A “new project” is a
+            project that is started after the first version on the EDS is
+            released.
+          </strong>
+        </section>
+        <hr />
+        <section>
+          <h2>For designers</h2>
+          <p>
+            The EDS will be the official design library for all of Equinor’s
+            internal products, apps, and web-applications. It includes resources
+            to create consistent user interfaces for Equinor based of it’s
+            guidelines and components. The first release will include a
+            selection of Design Tokens, Assets, and Desktop UI.
+          </p>
+          <h3>While you wait</h3>
+          <p>
+            Continue using the same tools and processes as you have been. Still
+            eager to prepare? Familiarize yourself with
+            <a href="https://www.figma.com">Figma</a> - this will be your tool
+            for designing and prototyping within the EDS. The Figma Organization
+            Licenses will be available with the first release of the EDS - more
+            information on this will come later.
+          </p>
+          <h3>What is Figma</h3>
+          <p>
+            <a href="https://www.figma.com">Figma</a> is a collaborative
+            interface design tool for UI design and prototyping. It increases
+            efficiency with the added flexibility of Team Libraries (The EDS)
+            with components, styles, and fonts automatically distributed.
+          </p>
+          <h4>Platform agnostic</h4>
+          <p>
+            Figma is browser based. It can also be downloaded as a stand-alone
+            application for MacOS, Windows, Chromebook and Linux.
+          </p>
+          <h4>Real-time Collaboration</h4>
+          <p>
+            Figma allows you to edit along with your team, seeing what they are
+            doing in real-time.
+          </p>
+          <h4>Communication</h4>
+          <p>
+            Figma allows your team to leave contextual feedback by commenting
+            directly in the design file.
+          </p>
+          <h4>Prototyping</h4>
+          <p>
+            Figma allows you to quickly create and share your prototype to
+            others for review or testing.
+          </p>
+          <h4>Development</h4>
+          <p>
+            Figma allows your development team to always have view access to the
+            current files and prototypes.
+          </p>
+        </section>
+        <section>
+          <h2>For developers</h2>
+          <p>
+            The EDS will provide the official UI components for all of Equinor’s
+            internal products, apps, and web-applications. Developers should use
+            the EDS to easily sew together new prototypes, while focusing on
+            application logic rather than frontend components. There will be two
+            different implementations built that will be started and maintained
+            by the core EDS team - hopefully with further development from the
+            Equinor Development Community.
+          </p>
+          <ol>
+            <li>CSS library</li>
+            <li>A React library</li>
+          </ol>
+          <p>
+            The CSS + React libraries will be available via Package Manager and
+            CDN
+          </p>
+          <h3>While you wait</h3>
+          <p>
+            Continue using the same tools as you have been. Once the first
+            design package is ready, a subset of the designed components will be
+            built by the core team. When that subset is ready, all developers
+            will be both invited and encouraged to help with the implementation.
+          </p>
+          <h3>Upgrading</h3>
+          <p>
+            We aim to make upgrading to the EDS as smooth as possible. Your team
+            can choose to integrate with the EDS via CDN or a Package Manager.
+          </p>
+        </section>
+      </article>
     </main>
   </body>
 </html>
