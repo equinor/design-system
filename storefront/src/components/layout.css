@@ -37,6 +37,7 @@ body {
     font-kerning: normal;
     font-feature-settings: "kern", "liga";
     color: var(--black);
+    overflow-y: scroll;
 }
 
 h1, h2, h3, h4, h5, h6 {
