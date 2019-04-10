@@ -43,6 +43,60 @@
     img {
       height: 100px;
     }
+    body {
+      font-family: Equinor;
+      margin: 0 auto;
+      max-width: 50em; /* max-width optimized for legibility is actually about 30ems, but that doesn’t look good with just one column */
+      line-height: 1.5;
+      color: #333;
+    }
+    a {
+      color: inherit;
+    }
+    * {
+      margin-top: 1em;
+      margin-bottom: 0;
+    }
+    hr + * > :first-child,
+    h4 + p,
+    li + li {
+      margin-top: 0;
+    }
+    strong, h2, h3 {
+      font-weight: 500;
+    }
+    h4 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 2.25rem;
+    }
+    h1 {
+      font-size: 3.375rem;
+      font-weight: 300;
+    }
+    hr {
+      border: none;
+      height: 0;
+      border-top: 1px solid #ccc;
+      margin: 2.5rem 0;
+    }
+    main {
+      margin: 2rem 5%;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .logo {
+      width: 79px;
+      height: 65px;
+    }
   </style>
 
   <body>
