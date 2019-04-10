@@ -2,6 +2,7 @@ import { makeColorToken, } from "../transformers/colorTokens";
 import { makeSpacingTokens, } from "../transformers/spacingTokens";
 import { makeElevationTokens, } from "../transformers/elevationTokens";
 import { makeClickboundsTokens, } from "../transformers/clickboundsTokens";
+import { makeTextTokens, } from "../transformers/textTokens";
 
 const fixPageName = name =>
   name
@@ -38,6 +39,12 @@ export const makeTokens = figmaPages => {
         tokens.push({
           name: "clickbounds",
           value: makeClickboundsTokens(page.children),
+        });
+        break;
+      case "text":
+        tokens.push({
+          name: "text",
+          value: makeTextTokens(page.children),
         });
         break;
       default:
