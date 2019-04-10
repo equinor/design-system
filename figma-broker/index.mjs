@@ -121,8 +121,8 @@ async function transformTokens(ctx) {
   }));
 
   transformed.forEach(file => {
-    writeFile(file.sassString, PATHS.SASS, `_${file.fileName}`, "scss");
-    writeFile(file.cssString, PATHS.CSS, file.fileName, "css");
+    writeFile(file.sassString, PATHS.SASS, `_${file.name}`, "scss");
+    writeFile(file.cssString, PATHS.CSS, file.name, "css");
   });
 
   ctx.response.body = JSON.stringify(transformed);

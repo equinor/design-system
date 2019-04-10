@@ -54,6 +54,7 @@ export const writeComponents = (components, savePath) =>
 
 export const readTokens = path =>
   fs.readdirSync(path).map(fileName => ({
-    fileName,
+    name: fileName.replace(/.json/, ""),
+    extension: "json",
     tokens: JSON.parse(fs.readFileSync(`${path}/${fileName}`)),
   }));
