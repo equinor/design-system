@@ -12,41 +12,14 @@
   </head>
 
   <style>
-    @import "@equinor-internal/equinor-font";
-
-    body {
-      font-family: Equinor;
-      margin: 0 auto;
-      max-width: 900px;
-    }
-
     em {
       font-weight: 700;
       font-style: italic;
     }
-
-    main {
-      margin: 32px;
-    }
-    h1 {
-      font-size: 2.5em;
-      font-weight: 300;
-    }
-    section {
-      margin-bottom: 32px;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    img {
-      height: 100px;
-    }
     body {
       font-family: Equinor;
       margin: 0 auto;
-      max-width: 50em; /* max-width optimized for legibility is actually about 30ems, but that doesn’t look good with just one column */
+      max-width: 50em;
       line-height: 1.5;
       color: #333;
     }
@@ -62,7 +35,9 @@
     li + li {
       margin-top: 0;
     }
-    strong, h2, h3 {
+    strong,
+    h2,
+    h3 {
       font-weight: 500;
     }
     h4 {
@@ -105,7 +80,11 @@
         <h1>
           Equinor Design System
         </h1>
-        <img class="logo" alt="" src="https://webviz-cdn.azureedge.net/logos/equinor-logo-primary.svg#red" />
+        <img
+          class="logo"
+          alt=""
+          src="https://webviz-cdn.azureedge.net/logos/equinor-logo-primary.svg#red"
+        />
       </header>
       <article>
         <section>
@@ -118,11 +97,13 @@
             at scale by creating a single source of truth for teams to design,
             prototype and develop.
           </p>
-          <p><strong>
-            An MVP (Minimum viable product) will be released first for new
-            projects willing to pilot, so that we can collect feedback and make
-            adjustments before being available at a larger scale.
-          </strong></p>
+          <p>
+            <strong>
+              An MVP (Minimum viable product) will be released first for new
+              projects willing to pilot, so that we can collect feedback and
+              make adjustments before being available at a larger scale.
+            </strong>
+          </p>
         </section>
         <hr />
         <section>
