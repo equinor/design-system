@@ -11,9 +11,10 @@
 //   "lineHeightPx": 48,
 //   "lineHeightPercent": 128
 // },
+
 const rootSize = 16;
 
-export const jsonToSassClassString = json =>
+export const jsonToCssClassString = json =>
   Object.entries(json).reduce(
     (acc, [name, value,]) =>
       `${acc}.${name} {
@@ -26,6 +27,7 @@ export const jsonToSassClassString = json =>
 }\n`,
     `:root {\nfont-size: ${rootSize}px;\n}\n`
   );
+
 const pxToRem = unit => parseFloat((unit / rootSize).toFixed(3));
 
 const textTransform = textCase => {

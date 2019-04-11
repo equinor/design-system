@@ -23,9 +23,7 @@ import {
 } from "./functions/file";
 import { makeComponents, } from "./transformers/components";
 import { makeAssets, saveAssets, } from "./functions/assets";
-import { jsonToSassString, } from "./transformers/jsonToSass";
-import { jsonToCssString, } from "./transformers/jsonToCss";
-import { jsonToSassClassString, } from "./transformers/jsonToSassClass";
+import { convert, } from "./functions/public";
 
 dotenv.config();
 
@@ -113,21 +111,9 @@ async function createAssets(ctx) {
 
 // Transform tokens
 
-const sassConverter = name => {
-  if (name === "text") {
-    return jsonToSassClassString;
-  }
-  return jsonToSassString;
-};
-
 async function transformTokens(ctx) {
   const tokens = readTokens(PATHS.TOKENS);
-  const transformed = tokens.map(file => ({
-    ...file,
-    sassString: sassConverter(file.name)(file.tokens),
-    cssString: jsonToCssString(file.tokens),
-  }));
-
+  const transformed = convert(tokens);
   transformed.forEach(file => {
     writeFile(file.sassString, PATHS.SASS, `_${file.name}`, "scss");
     writeFile(file.cssString, PATHS.CSS, file.name, "css");
