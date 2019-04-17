@@ -309,11 +309,21 @@ th, td {
   list-style-type: none;
   padding-left: 0;
   display: flex;
+  flex-direction: column;
+
+  @media(--large) {
+    flex-direction: row;
+  }
 }
 
 .Tab {
   margin: 0;
-  margin-right: -1px;
+  margin-bottom: -1px;
+
+  @media(--large) {
+    margin-right: -1px;
+    margin-bottom: 0;
+  }
 }
 
 .Tab-link {
@@ -332,7 +342,7 @@ th, td {
 /* debug */
 
 .DebugDefList {
-
+  display: none; /* change to grid to display debug info */
   position: absolute;
   right: 1rem;
   bottom: 1rem;
@@ -346,7 +356,6 @@ th, td {
     text-transform: uppercase;
   }
 
-  display: grid;
   width: 40em;
   grid-template-columns: 10em auto;
   & > * {
