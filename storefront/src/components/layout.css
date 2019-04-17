@@ -2,7 +2,7 @@
 @custom-media --large (min-width: 1200px);
 
 :root {
-    --borderColor: silver;
+    --borderColor: lightgrey;
     --backgroundColor: whitesmoke;
     --Sidebar-backgroundColor: white;
     --Sidebar-activeLink-backgroundColor: gainsboro;
@@ -11,6 +11,9 @@
     --Toc-width: 167px;
     --Sidebar-width: 240px;
     --black: #333;
+    --tab-backgroundColor: #fff;
+    --tab-isSelected-backgroundColor: var(--Sidebar-activeLink-backgroundColor);
+    --tab-borderColor: var(--borderColor);
 }
 
 html {
@@ -298,4 +301,69 @@ th, td {
             }
         }
     }
+}
+
+/* tabs */
+
+.Tabs {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+}
+
+.Tab {
+  margin: 0;
+  margin-right: -1px;
+}
+
+.Tab-link {
+  padding: 1em 2em;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background-color: var(--tab-backgroundColor);
+  border: 1px solid var(--tab-borderColor);
+}
+
+.Tab-link.is-selected {
+  background-color: var(--tab-isSelected-backgroundColor);
+}
+
+/* debug */
+
+.DebugDefList {
+
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: small;
+
+  &::before {
+    content: "Debug:";
+    position: absolute;
+    top: -2.5em;
+    left: 0;
+    text-transform: uppercase;
+  }
+
+  display: grid;
+  width: 40em;
+  grid-template-columns: 10em auto;
+  & > * {
+    margin-top: 0;
+  }
+  & dt {
+    &:not(:first-of-type) {
+      margin-top: 1em;
+    }
+    &::after {
+      content: ':';
+    }
+  }
+  & dd {
+    &:not(:first-of-type) {
+      margin-top: 1em;
+    }
+    margin-left: 0;
+  }
 }

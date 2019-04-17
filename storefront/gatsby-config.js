@@ -25,9 +25,24 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
+                name: `content`,
+                path: `${__dirname}/src/content`
+            }
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
                 name: `pages`,
                 path: `${__dirname}/src/pages`
             }
+        },
+        'gatsby-transformer-yaml',
+        {
+          resolve: `gatsby-source-filesystem`,
+          options: {
+            name: `data`,
+            path: `${__dirname}/src/data`
+          }
         },
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
