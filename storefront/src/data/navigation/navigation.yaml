@@ -24,7 +24,8 @@
     - Onboarding
 - title: Assets
   subNav:
-    - Icons
+    - App icons
+    - System icons
     - Logo
 - title: Component status
   subNav:
