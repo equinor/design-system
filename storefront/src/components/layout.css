@@ -163,7 +163,6 @@ th, td {
         border-right: 1px solid var(--borderColor);
         box-shadow: 0 0 30px 0 var(--Sidebar-shadowColor);
         z-index: 1;
-        margin-top: -1px; /* remove if logo in sidebar */
 
         position: fixed;
         top: 0;
@@ -214,7 +213,9 @@ th, td {
         padding-left: 0;
 
         &Item {
+          &--borderTop {
             border-top: 1px solid var(--borderColor);
+          }
         }
 
         & .Sidebar-menu {
@@ -224,7 +225,7 @@ th, td {
 
     &-trigger {
         font-family: Roboto;
-        padding: 1rem 1rem 1rem 2rem;
+        padding: 0.85rem 1rem 0.85rem 2rem;
         text-decoration: none;
         color: inherit;
         cursor: pointer;
@@ -235,6 +236,12 @@ th, td {
 
         &--indented {
             padding-left: 3rem;
+        }
+
+        &--small {
+          font-size: 0.8125em;
+          padding-top: 0.65rem;
+          padding-bottom: 0.65rem;
         }
 
         &.is-active {
@@ -327,7 +334,7 @@ th, td {
 }
 
 .Tab-link {
-  padding: 1em 2em;
+  padding: 0.85em 2em;
   display: block;
   text-decoration: none;
   color: inherit;

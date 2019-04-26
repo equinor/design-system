@@ -43,7 +43,9 @@ const Sidebar = ({ location }) => {
             data.allNavigationYaml.edges.map((item, index) =>
               <li
                 key={kebabify(item.node.title)}
-                className='Sidebar-menuItem'
+                className={classNames('Sidebar-menuItem', {
+                  'Sidebar-menuItem--borderTop': index > 0
+                })}
               >
                 <input
                   className='SubMenuToggler'
@@ -63,7 +65,7 @@ const Sidebar = ({ location }) => {
                     item.node.subNav && item.node.subNav.map(subItem => (
                       <li key={kebabify(subItem)} className='Sidebar-menuItem'>
                         <Link
-                          className='Sidebar-trigger Sidebar-trigger--indented'
+                          className='Sidebar-trigger Sidebar-trigger--small'
                           to={`/${kebabify(item.node.title)}/${kebabify(subItem)}/`}
                           activeClassName='is-active'
                           partiallyActive
