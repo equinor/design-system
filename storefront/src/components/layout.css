@@ -2,7 +2,7 @@
 @custom-media --large (min-width: 1200px);
 
 :root {
-    --borderColor: silver;
+    --borderColor: lightgrey;
     --backgroundColor: whitesmoke;
     --Sidebar-backgroundColor: white;
     --Sidebar-activeLink-backgroundColor: gainsboro;
@@ -11,6 +11,9 @@
     --Toc-width: 167px;
     --Sidebar-width: 240px;
     --black: #333;
+    --tab-backgroundColor: #fff;
+    --tab-isSelected-backgroundColor: var(--Sidebar-activeLink-backgroundColor);
+    --tab-borderColor: var(--borderColor);
 }
 
 html {
@@ -37,6 +40,7 @@ body {
     font-kerning: normal;
     font-feature-settings: "kern", "liga";
     color: var(--black);
+    overflow-y: scroll;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -159,7 +163,6 @@ th, td {
         border-right: 1px solid var(--borderColor);
         box-shadow: 0 0 30px 0 var(--Sidebar-shadowColor);
         z-index: 1;
-        margin-top: -1px; /* remove if logo in sidebar */
 
         position: fixed;
         top: 0;
@@ -210,7 +213,9 @@ th, td {
         padding-left: 0;
 
         &Item {
+          &--borderTop {
             border-top: 1px solid var(--borderColor);
+          }
         }
 
         & .Sidebar-menu {
@@ -220,7 +225,7 @@ th, td {
 
     &-trigger {
         font-family: Roboto;
-        padding: 1rem 1rem 1rem 2rem;
+        padding: 0.85rem 1rem 0.85rem 2rem;
         text-decoration: none;
         color: inherit;
         cursor: pointer;
@@ -231,6 +236,12 @@ th, td {
 
         &--indented {
             padding-left: 3rem;
+        }
+
+        &--small {
+          font-size: 0.8125em;
+          padding-top: 0.65rem;
+          padding-bottom: 0.65rem;
         }
 
         &.is-active {
@@ -297,4 +308,78 @@ th, td {
             }
         }
     }
+}
+
+/* tabs */
+
+.Tabs {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+
+  @media(--large) {
+    flex-direction: row;
+  }
+}
+
+.Tab {
+  margin: 0;
+  margin-bottom: -1px;
+
+  @media(--large) {
+    margin-right: -1px;
+    margin-bottom: 0;
+  }
+}
+
+.Tab-link {
+  padding: 0.85em 2em;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background-color: var(--tab-backgroundColor);
+  border: 1px solid var(--tab-borderColor);
+}
+
+.Tab-link.is-selected {
+  background-color: var(--tab-isSelected-backgroundColor);
+}
+
+/* debug */
+
+.DebugDefList {
+  display: none; /* change to grid to display debug info */
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: small;
+
+  &::before {
+    content: "Debug:";
+    position: absolute;
+    top: -2.5em;
+    left: 0;
+    text-transform: uppercase;
+  }
+
+  width: 40em;
+  grid-template-columns: 10em auto;
+  & > * {
+    margin-top: 0;
+  }
+  & dt {
+    &:not(:first-of-type) {
+      margin-top: 1em;
+    }
+    &::after {
+      content: ':';
+    }
+  }
+  & dd {
+    &:not(:first-of-type) {
+      margin-top: 1em;
+    }
+    margin-left: 0;
+  }
 }

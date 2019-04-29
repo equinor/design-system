@@ -1,0 +1,59 @@
+- title: Getting Started
+  subNav:
+    - About EDS
+    - For designers
+    - For developers
+    - For project managers and owners
+- title: Guidelines
+  subNav:
+    - Accessibility
+    - Color
+    - Elevation
+    - Grid
+    - Interaction
+    - Shape
+    - Spacing
+    - Theme
+    - Typography
+- title: Patterns
+  subNav:
+    - Common actions
+    - Data formats
+    - Empty states
+    - Launch screens
+    - Loading
+    - Onboarding
+- title: Assets
+  subNav:
+    - App icons
+    - System icons
+    - Logo
+- title: Component status
+  subNav:
+    - Overview
+    - Roadmap
+    - Whats new
+- title: Components
+  subNav:
+    - Buttons
+    - Cards
+    - Divider
+    - Empty
+    - Navigation
+    - Notifications
+    - Popovers
+    - Progress indicators
+    - Scrim
+    - Selection controls
+    - Slider
+    - Table
+    - Text inputs
+    - Tooltip
+- title: Help
+  subNav:
+    - Support
+    - Resources
+    - FAQ
+- title: Contributing
+  subNav:
+    - General notes
