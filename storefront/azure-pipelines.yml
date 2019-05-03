@@ -3,29 +3,44 @@
 # Add steps that use Docker Compose, tag images, push to a registry, run an image, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 name: eds-storefront
+
 trigger:
   batch: true
-  branches:
-    include:
-      - master
-      - features/*
   paths:
     include:
-      - /storefront
-      - /common
+      - /storefront/*
+      - /common/*
 pr:
   paths:
     include:
-    - /common
-    - /storefront
+    - common/*
+    - storefront/*
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)'
-  rootFolder: /storefront
+- group: eds-build-tokens
+- name: IMAGE_NAME
+  value: eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)
 
 steps:
-- script: docker build -f .$(rootFolder)/Dockerfile -t $(imageName) .$(rootFolder)
-  displayName: 'Docker build'
+- task: Docker@1
+  displayName: 'Build an image'
+  inputs:
+    azureSubscriptionEndpoint: 'eds-rg-dev'
+    azureContainerRegistry: edscontainers.azurecr.io
+    imageName: '$(IMAGE_NAME)'
+    arguments: '--build-arg $(EQUINOR_NPM_TOKEN)' # variable from eds-build-tokens
+    includeLatestTag: true
+    command: Build an image
+  env:
+    BUILD_DATE: $(Date:yyyyMMdd)
+
+- task: Docker@1
+  displayName: 'Push an image'
+  inputs:
+    azureSubscriptionEndpoint: 'eds-rg-dev'
+    azureContainerRegistry: edscontainers.azurecr.io
+    command: Push an image
+    imageName: '$(IMAGE_NAME)'
