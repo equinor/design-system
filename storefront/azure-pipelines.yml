@@ -25,17 +25,17 @@ variables:
   value: eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)
 
 steps:
+- script: docker build -f .$(rootFolder)/Dockerfile -t $(imageName) --build-arg $(EQUINOR_NPM_TOKEN) .$(rootFolder)
+  displayName: 'Docker build'
+
 - task: Docker@1
-  displayName: 'Build an image'
+  displayName: 'Tag an image'
   inputs:
     azureSubscriptionEndpoint: 'eds-rg-dev'
     azureContainerRegistry: edscontainers.azurecr.io
     imageName: '$(IMAGE_NAME)'
-    arguments: '--build-arg $(EQUINOR_NPM_TOKEN)' # variable from eds-build-tokens
     includeLatestTag: true
-    command: Build an image
-  env:
-    BUILD_DATE: $(Date:yyyyMMdd)
+    command: Tag image
 
 - task: Docker@1
   displayName: 'Push an image'
