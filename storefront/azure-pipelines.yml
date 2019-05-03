@@ -25,7 +25,7 @@ variables:
   value: eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)
 
 steps:
-- script: docker build -f .$(rootFolder)/Dockerfile -t $(imageName) --build-arg $(EQUINOR_NPM_TOKEN) .$(rootFolder)
+- script: docker build -f ./storefront/Dockerfile -t $(imageName) --build-arg $(EQUINOR_NPM_TOKEN) .$(rootFolder)
   displayName: 'Docker build'
 
 - task: Docker@1
