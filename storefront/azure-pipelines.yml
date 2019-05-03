@@ -8,9 +8,16 @@ trigger:
   batch: true
   paths:
     include:
-      - /storefront/*
-      - /common/*
+      - storefront/*
+      - common/*
 pr:
+  branches:
+    include:
+    - feature/*
+    - release/*
+    - develop
+    - master
+
   paths:
     include:
     - common/*
