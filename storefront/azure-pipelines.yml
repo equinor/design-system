@@ -8,8 +8,8 @@ trigger:
   batch: true
   paths:
     include:
-      - storefront/*
-      - common/*
+      - storefront/
+      - common/
 pr:
   branches:
     include:
@@ -20,8 +20,8 @@ pr:
 
   paths:
     include:
-    - common/*
-    - storefront/*
+    - common/
+    - storefront/
 
 pool:
   vmImage: 'Ubuntu-16.04'
