@@ -383,3 +383,8 @@ th, td {
     margin-left: 0;
   }
 }
+
+.ModeBadge {
+  color: silver;
+  margin-left: 1rem;
+}
