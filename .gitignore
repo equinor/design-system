@@ -1,3 +1,4 @@
 dist
 .cache
 node_modules
+!libraries/react/packages/node_modules
