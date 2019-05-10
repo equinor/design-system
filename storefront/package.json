@@ -7,6 +7,7 @@
         "@mdx-js/mdx": "^0.20.3",
         "@mdx-js/tag": "^0.20.3",
         "autoprefixer": "^9.5.0",
+        "babel-plugin-styled-components": "^1.10.0",
         "classnames": "^2.2.6",
         "gatsby": "^2.3.23",
         "gatsby-image": "^2.0.34",
@@ -28,7 +29,8 @@
         "prop-types": "^15.7.2",
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
-        "react-helmet": "^5.2.0"
+        "react-helmet": "^5.2.0",
+        "styled-components": "^4.2.0"
     },
     "keywords": [
         "gatsby"

@@ -1,10 +1,13 @@
 # EDS-ui version
 version: 0.0.1
 
+# Summary for screen readers
+summary: The statuses for each component in the Equinor Design System
+
 # Table headers
 headers:
-  - Figma
   - Component
+  - Figma
   - Vanilla
   - React
 
