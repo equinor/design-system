@@ -34,7 +34,7 @@ variables:
   value: /storefront
 
 steps:
-- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) .$(ROOT_FOLDER) --build-arg $(EQUINOR_NPM_TOKEN)
+- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) .$(ROOT_FOLDER) --build-arg EQUINOR_NPM_TOKEN=$(EQUINOR_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
   displayName: 'Docker build'
 
 - task: Docker@1

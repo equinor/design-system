@@ -10,6 +10,7 @@ RUN npm i --quiet
 
 # build
 COPY . .
+ARG GATSBY_STAGE
 ENV NODE_ENV=production
 RUN npm run build
 
