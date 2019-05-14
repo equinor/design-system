@@ -1,6 +1,6 @@
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
-import pkg from "./package.json.js.js";
+import pkg from "./package.json";
 
 const peerDeps = Object.keys(pkg.peerDependencies || {});
 
