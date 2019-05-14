@@ -18,7 +18,16 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <h1>{ page.frontmatter.title }</h1>
+      <h1>
+        { page.frontmatter.title }
+        {
+          page.frontmatter.mode !== 'publish' &&
+          <span className={ `ModeBadge ModeBadge--${ page.frontmatter.mode }` }>
+            { page.frontmatter.mode && `(${ page.frontmatter.mode })` }
+          </span>
+        }
+
+      </h1>
       {
         !(page.frontmatter.tabs === null) && (
           <ul className="Tabs">
@@ -50,7 +59,9 @@ export default ({ data }) => {
         <dt>linkSlug</dt>
         <dd>{ linkSlug }</dd>
       </dl>
-      <MDXRenderer>{ page.code.body }</MDXRenderer>
+      {
+        (process.env.GATSBY_STAGE === 'dev' || page.frontmatter.mode === 'publish') && <MDXRenderer>{ page.code.body }</MDXRenderer>
+      }
     </Layout>
   )
 }
@@ -69,6 +80,7 @@ export const query = graphql`
       frontmatter {
         title
         tabs
+        mode
       }
     }
   }
