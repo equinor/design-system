@@ -1,13 +1,13 @@
 - title: Getting Started
   subNav:
-    - About EDS
-    - For designers
-    - For developers
-    - For project managers and owners
+    - About
+    - Designers
+    - Developers
+    - Project managers and owners
 - title: Guidelines
   subNav:
     - Accessibility
-    - Color
+    - Colour
     - Elevation
     - Grid
     - Interaction
@@ -28,13 +28,9 @@
     - App icons
     - System icons
     - Logo
-- title: Component status
-  subNav:
-    - Overview
-    - Roadmap
-    - Whats new
 - title: Components
   subNav:
+    - Component status
     - Buttons
     - Cards
     - Divider
@@ -49,6 +45,10 @@
     - Table
     - Text inputs
     - Tooltip
+- title: Updates
+  subNav:
+    - Release information
+    - Roadmap
 - title: Help
   subNav:
     - Support
@@ -57,3 +57,4 @@
 - title: Contributing
   subNav:
     - General notes
+    - Documentation
