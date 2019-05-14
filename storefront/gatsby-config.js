@@ -12,6 +12,13 @@ module.exports = {
             resolve: `gatsby-mdx`,
             options: {
                 defaultLayouts: { default: path.resolve('./src/components/layout.js') },
+                globalScope: `
+                import ComponentStatus from '${__dirname}/src/components/ComponentStatus';
+
+                export default {
+                    ComponentStatus,
+                }
+                `
             },
         },
         'gatsby-plugin-react-helmet',

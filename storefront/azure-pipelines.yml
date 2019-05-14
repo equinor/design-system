@@ -3,29 +3,53 @@
 # Add steps that use Docker Compose, tag images, push to a registry, run an image, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 name: eds-storefront
+
 trigger:
   batch: true
+  paths:
+    include:
+      - storefront/
+      - common/
+pr:
   branches:
     include:
-      - master
-      - features/*
+    - feature/*
+    - release/*
+    - develop
+    - master
+
   paths:
     include:
-      - /storefront
-      - /common
-pr:
-  paths:
-    include:
-    - /common
-    - /storefront
+    - common/
+    - storefront/
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)'
-  rootFolder: /storefront
+- group: eds-build-tokens
+- name: IMAGE_NAME
+  value: eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)
+- name: ROOT_FOLDER
+  value: /storefront
 
 steps:
-- script: docker build -f .$(rootFolder)/Dockerfile -t $(imageName) .$(rootFolder)
+- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) .$(ROOT_FOLDER) --build-arg $(EQUINOR_NPM_TOKEN)
   displayName: 'Docker build'
+
+- task: Docker@1
+  displayName: 'Tag an image'
+  inputs:
+    azureSubscriptionEndpoint: 'eds-rg-dev'
+    azureContainerRegistry: edscontainers.azurecr.io
+    imageName: '$(IMAGE_NAME)'
+    includeLatestTag: true
+    command: Tag image
+
+- task: Docker@1
+  displayName: 'Push an image'
+  inputs:
+    azureSubscriptionEndpoint: 'eds-rg-dev'
+    azureContainerRegistry: edscontainers.azurecr.io
+    command: Push an image
+    imageName: '$(IMAGE_NAME)'
