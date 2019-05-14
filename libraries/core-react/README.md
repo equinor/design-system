@@ -1,4 +1,4 @@
-# @eds-ui/core
+# @eds-ui/core-react
 
 React components that implement Equinor's Design.
 
