@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import styled from 'styled-components'
+import { readableColor } from 'polished'
 
 const ComponentStatus = () => {
   const data = useStaticQuery(graphql`
@@ -15,6 +16,7 @@ const ComponentStatus = () => {
             components {
               component
               status {
+                documentation
                 figma
                 vanilla
                 react
@@ -75,11 +77,11 @@ const ComponentStatus = () => {
   )
 }
 
+const textColor = '#3d3d3d'
+
 const Table = styled.table`
   border-collapse: collapse;
-  * + * {
-    margin-top: 0;
-  }
+  color: ${textColor};
 `
 
 Table.displayName = 'Table'
@@ -121,10 +123,10 @@ const Td = styled.td`
 Td.displayName = 'TableCell'
 
 const badgeBgColors = {
-  underConstruction: 'lightgrey',
-  updating: 'lightgrey',
-  new: 'lightgrey',
-  notAvailable: 'lightgrey'
+  notAvailable: '#dcdcdc',
+  underConstruction: '#ffe7d6',
+  new: '#007079',
+  available: '#e6faec'
 }
 
 const Badges = styled.div`
@@ -137,6 +139,7 @@ Badges.displayName = 'Badges'
 
 const Badge = styled.span`
   background: ${({ variant }) => badgeBgColors[variant]};
+  color: ${({ variant }) => readableColor(badgeBgColors[variant], textColor, '#fff')};
   margin-top: 0 !important; /* TODO: Remove lobotomized owl selector */
   font-size: 0.625em;
   border-radius: 1em;
