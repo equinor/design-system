@@ -77,6 +77,8 @@ components:
     status: *defaultStatus
   - component: Progress indicators
     status: *defaultStatus
+  - component: Scrim
+    status: *defaultStatus
   - component: Selection controls
     status: *defaultStatus
   - component: Slider

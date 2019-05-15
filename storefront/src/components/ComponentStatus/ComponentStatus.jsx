@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import styled from 'styled-components'
 import { readableColor } from 'polished'
 
+
 const ComponentStatus = () => {
   const data = useStaticQuery(graphql`
     query ComponentStatusQuery {
