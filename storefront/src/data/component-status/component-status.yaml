@@ -54,44 +54,36 @@ components:
       react:
         - *1
   - component: Divider
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Navigation: App launcher"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Navigation: Breadcrumbs"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Navigation: Pagination"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Navigation: Table of contents"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Navigation: Tabs"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Navigation: Top bar"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Notification: Banner"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Notification: Dialog"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: "Notification: Snackbar"
-    status: &defaultStatus
+    status: *defaultStatus
   - component: Popovers
-    status: &defaultStatus
+    status: *defaultStatus
   - component: Progress indicators
-    status: &defaultStatus
-  - component: Scrim
-        - *3
-      figma:
-        - *4
-      vanilla:
-        - *1
-      react:
-        - *1
+    status: *defaultStatus
   - component: Selection controls
-    status: &defaultStatus
+    status: *defaultStatus
   - component: Slider
-    status: &defaultStatus
+    status: *defaultStatus
   - component: Table
-    status: &defaultStatus
+    status: *defaultStatus
   - component: Text inputs
-    status: &defaultStatus
+    status: *defaultStatus
   - component: Tooltip
-    status: &defaultStatus
+    status: *defaultStatus
