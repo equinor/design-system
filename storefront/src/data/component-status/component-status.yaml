@@ -78,7 +78,15 @@ components:
   - component: Progress indicators
     status: *defaultStatus
   - component: Scrim
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Selection controls
     status: *defaultStatus
   - component: Slider
