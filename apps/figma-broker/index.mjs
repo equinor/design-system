@@ -30,11 +30,11 @@ dotenv.config();
 const PORT = process.env.PORT;
 const TEAM_ID = "590517879490131675";
 const PATHS = {
-  TOKENS: "../common/tokens",
-  ASSETS: "../common/assets",
-  COMPONENTS: "../common/components",
-  SASS: "../common/public/sass",
-  CSS: "../common/public/css",
+  TOKENS: "../../common/tokens",
+  ASSETS: "../../common/assets",
+  COMPONENTS: "../../common/components",
+  SASS: "../../common/public/sass",
+  CSS: "../../common/public/css",
 };
 
 const app = new Koa();
