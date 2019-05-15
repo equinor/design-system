@@ -36,36 +36,184 @@ components:
   - component: Buttons
     status:
       documentation:
+        - *3
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Cards
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Divider
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Navigation: App launcher
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Navigation: Breadcrumbs
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Navigation: Pagination
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Navigation: Table of contents
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Navigation: Tabs
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+- component: Navigation: Top bar
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+- component: Notification: Banner
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+ - component: Notification: Dialog
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+ - component: Notification: Snackbar
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Popovers
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Progress indicators
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Scrim
+        - *3
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Selection controls
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Slider
         - *1
       figma:
-        - *2
+        - *1
       vanilla:
-        - *3
+        - *1
       react:
-        - *4
-  - component: Cards
-    status: *defaultStatus
-  - component: Divider
-    status: *defaultStatus
-  - component: Empty
-    status: *defaultStatus
-  - component: Navigation
-    status: *defaultStatus
-  - component: Notifications
-    status: *defaultStatus
-  - component: Popovers
-    status: *defaultStatus
-  - component: Progress indicators
-    status: *defaultStatus
-  - component: Scrim
-    status: *defaultStatus
-  - component: Selection controls
-    status: *defaultStatus
-  - component: Slider
-    status: *defaultStatus
+        - *1
   - component: Table
-    status: *defaultStatus
-  - component: Text inputs
-    status: *defaultStatus
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
+- component: Text inputs
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Tooltip
-    status: *defaultStatus
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
