@@ -6,6 +6,12 @@ name: eds-storefront
 
 trigger:
   batch: "true"
+  branches:
+    include:
+    - feature/*
+    - release/*
+    - develop
+    - master
   paths:
     include:
       - storefront
