@@ -55,7 +55,7 @@ components:
         - *1
   - component: Divider
     status: &defaultStatus
-  - component: Navigation":" App launcher
+  - component: "Navigation: App launcher"
     status: &defaultStatus
   - component: Navigation":" Breadcrumbs
     status: &defaultStatus
