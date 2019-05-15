@@ -63,7 +63,7 @@ components:
     status: &defaultStatus
   - component: "Navigation: Table of contents"
     status: &defaultStatus
-  - component: "Navigation: Tabs
+  - component: "Navigation: Tabs"
     status: &defaultStatus
   - component: "Navigation: Top bar"
     status: &defaultStatus
