@@ -1,30 +1,12 @@
-# Gatsby Starter MDX Basic
+# EDS Storefront
 
-View this starter [live on Netlify](https://gatsby-starter-mdx-basic.netlify.com/)
+## Gettings started
 
-This starter build MDX support into the
-[gatsby-default-starter](https://github.com/gatsbyjs/gatsby-starter-default). Its
-README also applies here.
+  cp .env.template .env
 
-1. Create a new Gatsby site using this starter
+Edit .env to use prod or dev stage
 
-```sh
-gatsby new my-site https://github.com/ChristopherBiscardi/gatsby-starter-mdx-basic
-```
-
-2. Install dependencies
-
-```sh
-yarn
-```
-
-3. Run the develop script
-
-```sh
-yarn develop
-```
-
-4. Edit Page 2 in `src/pages/page-2.mdx`
+  npm start
 
 ---
 

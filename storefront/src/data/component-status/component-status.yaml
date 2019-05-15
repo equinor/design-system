@@ -7,62 +7,86 @@ summary: The statuses for each component in the Equinor Design System
 # Table headers
 headers:
   - Component
+  - Documentation
   - Figma
   - Vanilla
   - React
 
 # Some constants. Makes it easer to rephrase the status text at a later stage.
 states:
-  1: &1 Under construction
-  2: &2 Updating
-  3: &3 New
-  4: &4 Not available
+  1: &1 Not available
+  2: &2 New
+  3: &3 Under construction
+  4: &4 Available
 
 # Some predefined statuses
 statuses:
   default: &defaultStatus
-    figma:
-      - *4
-    vanilla:
-      - *4
-    react:
-      - *4
-  started in figma: &figmaStarted
+    documentation:
+      - *1
     figma:
       - *1
     vanilla:
-      - *4
-    react:
-      - *4
-  multiple states simultaneously: &multiStatusExample
-    figma:
-      - *1
-      - *3
-    vanilla:
       - *1
     react:
-      - *4
+      - *1
 
 # This is the actual list of components.
 components:
   - component: Buttons
-    status: *figmaStarted
+    status:
+      documentation:
+        - *4
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Cards
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Divider
-    status: *multiStatusExample
-  - component: Empty
     status: *defaultStatus
-  - component: Navigation
+  - component: "Navigation: App launcher"
     status: *defaultStatus
-  - component: Notifications
+  - component: "Navigation: Breadcrumbs"
+    status: *defaultStatus
+  - component: "Navigation: Pagination"
+    status: *defaultStatus
+  - component: "Navigation: Table of contents"
+    status: *defaultStatus
+  - component: "Navigation: Tabs"
+    status: *defaultStatus
+  - component: "Navigation: Top bar"
+    status: *defaultStatus
+  - component: "Notification: Banner"
+    status: *defaultStatus
+  - component: "Notification: Dialog"
+    status: *defaultStatus
+  - component: "Notification: Snackbar"
     status: *defaultStatus
   - component: Popovers
     status: *defaultStatus
   - component: Progress indicators
     status: *defaultStatus
   - component: Scrim
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Selection controls
     status: *defaultStatus
   - component: Slider

@@ -23,6 +23,7 @@
         "gatsby-transformer-sharp": "^2.1.17",
         "gatsby-transformer-yaml": "^2.1.11",
         "mdx-component-autolink-header": "0.0.1",
+        "polished": "^3.3.0",
         "postcss-custom-media": "^7.0.7",
         "postcss-import": "^12.0.1",
         "postcss-nested": "^4.1.2",

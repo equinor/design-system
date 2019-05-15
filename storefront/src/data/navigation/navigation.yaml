@@ -34,9 +34,18 @@
     - Buttons
     - Cards
     - Divider
-    - Empty
-    - Navigation
-    - Notifications
+    - Expansion panel
+    - Link
+    - List
+    - Navigation app launcher
+    - Navigation breadcrumbs
+    - Navigation pagination
+    - Navigation table of contents
+    - Navigation tabs
+    - Navigation top bar
+    - Notification banner
+    - Notification dialog
+    - Notification snackbar
     - Popovers
     - Progress indicators
     - Scrim
