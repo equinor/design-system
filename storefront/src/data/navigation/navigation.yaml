@@ -11,9 +11,11 @@
     - Elevation
     - Grid
     - Interaction
+    - Motion
     - Shape
     - Spacing
     - Theme
+    - Tokens
     - Typography
 - title: Patterns
   subNav:
