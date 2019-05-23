@@ -59,6 +59,21 @@ components:
         - *1
   - component: Divider
     status: *defaultStatus
+  - component: Expansion panel
+    status: *defaultStatus
+  - component: List
+    status: *defaultStatus
+  - component: Link
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Navigation: App launcher"
     status: *defaultStatus
   - component: "Navigation: Breadcrumbs"
