@@ -12,13 +12,13 @@ mode: draft
 A card displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways to accomplish thier use case. 
 
 
-## Usage
+## Guidelines
 
-The card container itself is the only required block in a card. 
-Cards align to the grid columns, so their width is fluid.
+The `card/container` itself is the only required block in a card. Cards align to the grid columns, so their width is fluid.
+However content blocks within the card sit within the grid. There are four avaliable `card/container` options: `default`, `info`, `danger`and `warning`.
 
 
-## Card blocks
+## Content
 
 
 ### Title
@@ -26,11 +26,9 @@ Cards align to the grid columns, so their width is fluid.
 Title blocks can have: 
 * Title
 * Subtitle
-* Image 
 * Avatar
 * Metadata
   * Tags, badges and free text
-* Dividers
 * Overflow menu
 
 
@@ -38,7 +36,7 @@ Title blocks can have:
 
 Supporting text blocks can have: 
 * Supporting text
-  * Should not containe multiple paragraphs
+  * Should not contain multiple paragraphs
   * Use inline links with high caution
 
 
@@ -48,7 +46,7 @@ Rich media blocks can have:
 * Graph
 * Table
 * Image
-  * Not if already used in header
+  * within the gird or full width
 * Dividers
 
 
@@ -63,13 +61,12 @@ Action blocks can have:
 * Chips
 
 
-
 ### Cards are not for: 
-* top bars
-* sidesheets
-* nav drawers
-* lists
-* nested cards
-* galleries
+* Top bars
+* Sidesheets
+* Nav drawers
+* Lists
+* Nested cards
+* Galleries
 * Text over photography or illustrations 
-* grouping large sets of information 
+* Grouping large sets of information 
