@@ -6,20 +6,24 @@ tabs:
 mode: draft
 ---
 
-**A card displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways to accomplish thier use case.**
+**A card displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways.**
 
 ***
 
 ## Guidelines
 
 The `card/container` itself is the only required block in a card. Cards align to the grid columns, so their width is fluid.
-However content blocks within the card sit within the grid. There are four avaliable `card/container` options: `default`, `info`, `danger`and `warning`.
+However content blocks within the card sit within the container's own grid. There are four avaliable `card/container` options: `default`, `info`, `danger`and `warning`.
 
 
 ## Content
 
 
 ### Title
+
+
+There are twelve title block to choose between: `Avatar H6 caption`, `Avatar H6 caption action`, `Overline H6`, `Overline H6 action`, `Overline H6 avatar`, `H4 body short`, `H4 body short action`, `H4 body short avatar`, `H5 body short`, `H5 body short action` and `H5 body short avatar`.
+
 
 Title blocks can have: 
 * Title
@@ -32,6 +36,8 @@ Title blocks can have:
 
 ### Supporting text
 
+There are two supporting text blocks to choose between: `supporting-text/middle` which is to be used when it is sandwiched inbetween other blocks and `supporting-text/last` which is to be used when it is the last block. 
+
 Supporting text blocks can have: 
 * Supporting text
   * Should not contain multiple paragraphs
@@ -40,15 +46,20 @@ Supporting text blocks can have:
 
 ### Rich media
 
+There are three rich media blocks to choose between: `rich-media/middle` which is to be used when it is sandwiched inbetween other blocks, `rich-media/last` which is to be used when it is the last block and `rich-media/leading-image` which is to be used when it is the first block. The `rich-media/middle` and `rich-media/last` blocks are placeholder blocks, meaning that you can add your own rich content to them. 
+
+
 Rich media blocks can have: 
 * Graph
 * Table
 * Image
-  * within the gird or full width
+  * within the gird when between blocks and full width when leading
 * Dividers
 
 
 ### Actions
+
+There are three action blocks to choose between: `actions/buttons`, `actions/icons` and `actions/meta`.
 
 Action blocks can have: 
 * Supplemental actions
