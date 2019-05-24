@@ -41,8 +41,8 @@
     - Cards
     - Divider
     - Expansion panel
-    - Link
-    - List
+    - Links
+    - Lists
     - Navigation app launcher
     - Navigation breadcrumbs
     - Navigation pagination
@@ -71,5 +71,5 @@
     - FAQ
 - title: Contributing
   subNav:
-    - General notes
-    - Documentation
+    - Overview
+    - Designers
