@@ -2,15 +2,16 @@
 title: Accessibility
 tabs:
   - Overview
-  - Designers
-  - Developers
+  - Usage
 mode: publish
 ---
 
 
-We firmly believe that all digital interfaces should be inclusive and accessible for everyone - regardless of impairments or abilities. 
+All digital interfaces should be inclusive and accessible for everyone---regardless of impairments or abilities. 
 Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. 
 Please use this section as a guide to help ensure that your experiences meet or exceed the standards for accessibility. 
+
+The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.0](https://www.w3.org/TR/WCAG20/) and [Difi.no](https://uu.difi.no) AA level requirements. While the components built are accessible, as a customer of the EDS there are things you need to remember when creating layouts and prototypes, and combining components. 
 
 
 ## What is accessibility?
@@ -43,33 +44,82 @@ There are also different types of situations that need consideration.
 * Lighting issues
 
 
-## Validating your work
+## Guidelines
+
+
+### Spacing
+
+To comply with accessibility guidelines, all interactive components are to have at least 8px between them. This is to prevent users from accidentally clicking the wrong place.
+
+:warning: `IMAGE EXAMPLE`
+
+
+### Consistent headings
+
+Strive to make your menus and hierarchies consistent. 
+Use H1, H2, H3 etc., in the correct order. This helps all users navigate and browse the page efficiently.
+
+
+### Form validating inline
+
+Make sure to use the `helper text` when validation fails. Keep the `helper text` short and to the point.  
+
+
+### Text and its meaning
+
+Remember that text can be both visible and invisible `alt text`. 
+Make sure all text is meaningful in its context.
+
+
+### Call to actions
+
+Provide descriptive labels - action verbs are good. 
+
+Here is an example: 
+
+Acceptable: **See all platforms** _Indicates what will happen_  
+Not acceptable: **All platforms** _Does not indicate what will happen_  
+
+If a button's text says "See all platforms", make sure you send the user to a page with all platforms. 
+Be consistent with how you use verbs and which terms you use. 
+
+
+### Images
+
+Important information should not be in or over images. 
+Make sure to always caption your image. 
+
+
+### Colour
+
+Use the colours provided in the EDS. They have been tested to make sure that your work will be WCAG 2.0 compliant.
+
+Many users have trouble distuingishing colours from each other, so make sure colour is not the only way you convey certain information. 
+For example, danger should not be indicated by red colour alone.
+
+#### Exceptions  
+If you need to use additional colours for domain-specific requirements, charts or graphs, make sure to test your colours for contrast. 
+Use high contrast, as this both increases readability in general and assists users with impaired sight. 
+
+
+### Navigation Order 
+
+Place components on the page in order of importance - the order that element receives focus should be logical and predictable. Try to keep navigation to a minimum of steps and make all steps clear.
+
+Try navigating your own solution by only using a keyboard. Can you navigate? Can you perform all the important tasks? Can you tell where the keyboard focus is? 
+Do your items follow the order you think? Generally, focus travels up to down, left to right. Test it out by using your `tab`key.
+
+
+### Validating your work
 
 The EDS is only a foundation for accessible design and development. 
 Accessibility is the responsibility of the entire team - designers and developers have specific responsibilities listed in the related sections. 
+
 Please familiarise yourself with the guidelines from [WCAG 2.0](https://www.w3.org/TR/WCAG20/) and [Difi.no](https://uu.difi.no) to verify your interfaces meet the AA level requirements. 
 
+#### Tools and resources
 
-<!-- 
-# Overview
-
-Designing and building for accessibility means making sure that people with everyone, including people with disabilities can use the solutions we make. 
-
-We strongly believe that all IT applications in Equinor should be accessible to anyone. "We treat everyone with fairness, respect and digniity." These words can be found in the [Equinor book](https://www.equinor.com/en/about-us.html#our-values) and they resonnate well with the accessibility guidelines in the Equinor Design System.
-
-## General accessibility goals
-
-* Enable projects utilising the EDS to deliver a good user experience to all users and across all devices.
-
-* The code and design delivered will adhere to the global accessibility principles of Perceivable, Operable, Understandable and Robust.
-
-## What kind of disabilities?
-
-There are many disabilities that need to be considered, while vision and other physical disabilities are the most common. Although we design with these mind, other groups with temporary disabilities or environmental disabilites will also be considered. For example, limited screen size or lighting issues (too much or too little).
-
-Designing for accessibility serves all these user groups and helps make a great user experience. 
-
-## WCAG
-
-The EDS is commited to following the [WCAG 2.0 AA standard](https://www.w3.org/TR/WCAG20/)
--->
+Here are some resources to help you validate your work:  
+[WebAIM](https://webaim.org/)   
+[Are my colours accessible?](https://www.aremycoloursaccessible.com/)   
+[The A11Y Project](https://a11yproject.com/) 

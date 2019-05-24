@@ -18,6 +18,7 @@ states:
   2: &2 New
   3: &3 Under construction
   4: &4 Available
+  5: &5 "-"
 
 # Some predefined statuses
 statuses:
@@ -37,8 +38,10 @@ components:
     status:
       documentation:
         - *4
+        - *2
       figma:
         - *4
+        - *2
       vanilla:
         - *1
       react:
@@ -48,13 +51,29 @@ components:
       documentation:
         - *3
       figma:
-        - *3
+        - *4
+        - *2
       vanilla:
         - *1
       react:
         - *1
   - component: Divider
     status: *defaultStatus
+  - component: Expansion panel
+    status: *defaultStatus
+  - component: List
+    status: *defaultStatus
+  - component: Link
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Navigation: App launcher"
     status: *defaultStatus
   - component: "Navigation: Breadcrumbs"
@@ -80,9 +99,11 @@ components:
   - component: Scrim
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
+        - *2
       vanilla:
         - *1
       react:
