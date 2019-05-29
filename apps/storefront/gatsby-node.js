@@ -1,24 +1,28 @@
-const path = require('path');
-const { createFilePath } = require(`gatsby-source-filesystem`);
-const { copy } = require('fs-extra');
+const path = require('path')
+const { createFilePath } = require(`gatsby-source-filesystem`)
+const { copy } = require('fs-extra')
 const { graphql } = require('gatsby')
 
 // Method that creates nodes based on the file system that we can use in our templates
 exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions;
+  const { createNodeField } = actions
   // If the node type (file) is a markdown file
   if (node.internal.type === 'Mdx') {
-    const dir = path.resolve(__dirname, '');
-    const fileNode = getNode(node.parent);
+    const dir = path.resolve(__dirname, '')
+    const fileNode = getNode(node.parent)
     const slug = createFilePath({
       node,
       getNode,
       basePath: `content`,
       trailingSlash: false,
-    });
+    })
 
-    const currentPage = slug.split('/').pop();
-    const currentCategory = slug.split('/').filter( item => item.length > 0 ).shift() || 'homepage'
+    const currentPage = slug.split('/').pop()
+    const currentCategory =
+      slug
+        .split('/')
+        .filter((item) => item.length > 0)
+        .shift() || 'homepage'
 
     console.log('currentPage', currentPage)
     console.log('currentCategory', currentCategory)
@@ -28,14 +32,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node,
       name: `slug`,
       value: slug,
-    });
+    })
 
     // example: react
     createNodeField({
       node,
       name: `currentPage`,
       value: currentPage,
-    });
+    })
 
     createNodeField({
       node,
@@ -43,11 +47,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       value: currentCategory,
     })
   }
-};
+}
 
 // Method that creates the pages for our website
 exports.createPages = async ({ actions, graphql }) => {
-  const { createRedirect, createPage } = actions;
+  const { createRedirect, createPage } = actions
 
   const result = await graphql(`
     {
@@ -74,9 +78,9 @@ exports.createPages = async ({ actions, graphql }) => {
   const pages = result.data.allMdx.edges
 
   pages.map(({ node }) => {
-    const slug = node.fields.slug;
-    const currentPage = node.fields.currentPage;
-    const tabs = node.frontmatter.tabs === null ? [] : node.frontmatter.tabs;
+    const slug = node.fields.slug
+    const currentPage = node.fields.currentPage
+    const tabs = node.frontmatter.tabs === null ? [] : node.frontmatter.tabs
 
     /**
      * index-pages are called the same as the folder, this removes the last segment
@@ -85,7 +89,7 @@ exports.createPages = async ({ actions, graphql }) => {
     const currentPath =
       node.frontmatter.tabs === null
         ? slug.slice(0, slug.lastIndexOf(currentPage))
-        : slug;
+        : slug
 
     createPage({
       path: currentPath,
@@ -94,15 +98,21 @@ exports.createPages = async ({ actions, graphql }) => {
         slug,
         currentPage,
       },
-    });
+    })
 
     /* we have tabs */
     if (tabs.length > 1) {
-      const indexFilename = tabs[0].toLowerCase().split(' ').join('-');
+      const indexFilename = tabs[0]
+        .toLowerCase()
+        .split(' ')
+        .join('-')
       const isIndex = currentPath.lastIndexOf(indexFilename) > 0
 
       if (isIndex) {
-        const pathToParentDir = currentPath.slice(0, currentPath.lastIndexOf(indexFilename))
+        const pathToParentDir = currentPath.slice(
+          0,
+          currentPath.lastIndexOf(indexFilename),
+        )
 
         /* create index page for category */
         createPage({
@@ -112,7 +122,7 @@ exports.createPages = async ({ actions, graphql }) => {
             slug,
             currentPage: `${pathToParentDir}${indexFilename}`,
           },
-        });
+        })
 
         /**
          * Redirects from parent directory to the first page in tab-group.
@@ -131,5 +141,5 @@ exports.createPages = async ({ actions, graphql }) => {
         // });
       }
     }
-  });
-};
+  })
+}
