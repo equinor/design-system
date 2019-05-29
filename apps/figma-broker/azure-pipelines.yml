@@ -6,7 +6,7 @@ trigger:
   paths:
     include:
     # This cant be a variable
-      - figma-broker/*
+      - apps/figma-broker/*
 
 
 variables:

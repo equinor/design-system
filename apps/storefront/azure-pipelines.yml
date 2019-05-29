@@ -15,7 +15,7 @@ trigger:
     - master
   paths:
     include:
-      - storefront
+      - apps/storefront
       - common
 
 pr:
@@ -29,7 +29,7 @@ pr:
   paths:
     include:
     - common
-    - storefront
+    - apps/storefront
 
 pool:
   vmImage: 'Ubuntu-16.04'
@@ -39,7 +39,7 @@ variables:
 - name: IMAGE_NAME
   value: eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)
 - name: ROOT_FOLDER
-  value: /storefront
+  value: /apps/storefront
 
 steps:
 - script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) .$(ROOT_FOLDER) --build-arg EQUINOR_NPM_TOKEN=$(EQUINOR_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
