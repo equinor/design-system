@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/core-react.cjs.js",
-  "module": "src/index.js",
+  "module": "dist/core-react.es.js",
   "browser": "dist/core-react.umd.js",
   "scripts": {
     "build": "rollup -c",
