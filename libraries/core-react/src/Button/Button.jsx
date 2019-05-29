@@ -1,28 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 const getBackground = ({ variant }) => {
-  if (variant === "secondary") {
-    return "green;";
+  if (variant === 'secondary') {
+    return 'green;'
   }
-  return "red";
-};
+  return 'red'
+}
 
 const Button = styled.button`
   background: ${getBackground};
   color: white;
-`;
+`
 
 Button.propTypes = {
   /** Specifies which variant to use */
-  variant: PropTypes.oneOf(["primary", "secondary"])
-};
+  variant: PropTypes.oneOf(['primary', 'secondary']),
+}
 
 Button.defaultProps = {
-  variant: "primary"
-};
+  variant: 'primary',
+}
 
-Button.displayName = "eds-button";
+Button.displayName = 'eds-button'
 
-export default Button;
+export default Button
