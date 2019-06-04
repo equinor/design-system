@@ -7,8 +7,5 @@
     "*.json": "jsonc"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "[mdx]": {
-    "files.trimTrailingWhitespace": false
-  }
+  "editor.formatOnSave": true
 }

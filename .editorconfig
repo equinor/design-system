@@ -9,5 +9,5 @@ insert_final_newline = true
 max_line_length = 80
 trim_trailing_whitespace = true
 
-[*.{md,mdx,markdown}]
+[*{md,mdx,markdown}]
 trim_trailing_whitespace = false
