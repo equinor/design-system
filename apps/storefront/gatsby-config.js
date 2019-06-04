@@ -15,9 +15,11 @@ module.exports = {
                 defaultLayouts: { default: path.resolve('./src/components/layout.js') },
                 globalScope: `
                 import ComponentStatus from '${__dirname}/src/components/ComponentStatus';
+                import Embed from '${__dirname}/src/components/embed';
 
                 export default {
                     ComponentStatus,
+                    Embed
                 }
                 `
             },
