@@ -19,6 +19,7 @@ dependencies:
   gatsby-source-filesystem: 2.0.38
   gatsby-transformer-sharp: 2.1.21
   gatsby-transformer-yaml: 2.1.12
+  github-markdown-css: 3.0.1
   mdx-component-autolink-header: 0.0.1
   polished: 3.4.0
   postcss-custom-media: 7.0.8
@@ -5603,6 +5604,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-l/tdlr/eiXMxPyDoKI75oWf6ZM4=
+  /github-markdown-css/3.0.1:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-9G5CIPsHoyk5ObDsb/H4KTi23J8KE1oDd4KYU51qwqeM+lKWAiO7abpSgCkyWswgmSKBiuE7/4f8xUz7f2qAiQ==
   /github-slugger/1.2.1:
     dependencies:
       emoji-regex: 6.1.1
@@ -12883,6 +12890,7 @@ specifiers:
   gatsby-source-filesystem: ^2.0.28
   gatsby-transformer-sharp: ^2.1.21
   gatsby-transformer-yaml: ^2.1.11
+  github-markdown-css: ^3.0.1
   mdx-component-autolink-header: 0.0.1
   polished: ^3.3.0
   postcss-custom-media: ^7.0.7
