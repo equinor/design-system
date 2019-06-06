@@ -93,7 +93,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
     createPage({
       path: currentPath,
-      component: path.resolve(`./src/templates/page.js`),
+      component: path.resolve(`./src/templates/page.jsx`),
       context: {
         slug,
         currentPage,
@@ -117,7 +117,7 @@ exports.createPages = async ({ actions, graphql }) => {
         /* create index page for category */
         createPage({
           path: pathToParentDir,
-          component: path.resolve(`./src/templates/page.js`),
+          component: path.resolve(`./src/templates/page.jsx`),
           context: {
             slug,
             currentPage: `${pathToParentDir}${indexFilename}`,

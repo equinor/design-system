@@ -21,8 +21,4 @@ Embed.propTypes = {
   url: PropTypes.string.isRequired,
 }
 
-Embed.defaultProps = {
-  url: '',
-}
-
 export default Embed

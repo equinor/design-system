@@ -6,6 +6,12 @@ plugins:
 env:
   browser: true
   node: true
+globals:
+  test: true
+  expect: true
 rules:
   prettier/prettier:
     - error
+  no-unused-vars:
+    - error
+    - varsIgnorePattern: ^React$
