@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import styled from 'styled-components'
 import { readableColor } from 'polished'
 
-
 const ComponentStatus = () => {
   const data = useStaticQuery(graphql`
     query ComponentStatusQuery {
@@ -32,47 +31,48 @@ const ComponentStatus = () => {
   const headers = data.allComponentStatusYaml.edges[0].node.headers
   const summary = data.allComponentStatusYaml.edges[0].node.summary
   const components = data.allComponentStatusYaml.edges[0].node.components
-  const camelify = title => title.toLowerCase().split(' ').map((word, index) => (
-    index > 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word
-  )).join('')
+  const camelify = (title) =>
+    title
+      .toLowerCase()
+      .split(' ')
+      .map((word, index) =>
+        index > 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word,
+      )
+      .join('')
 
   return (
     <Table summary={summary}>
       <thead>
         <Tr>
-          {
-            headers.map((text, index) => (
-              <ThH key={camelify(text)} scope='col'>{ text }</ThH>
-            ))
-          }
+          {headers.map((text, index) => (
+            <ThH key={camelify(text)} scope="col">
+              {text}
+            </ThH>
+          ))}
         </Tr>
       </thead>
       <tbody>
-        {
-          components.map((component, index) => (
-            <Tr key={component.component + index}>
-              <ThV key={component.component + index} scope='row'>{ component.component }</ThV>
-              {
-                Object.values(component.status).map((statuses, index) => (
-                  <Td key={camelify(statuses.join('-')) + index}>
-                    <Badges>
-                      {
-                        statuses.map((status, index) => (
-                          <Badge
-                            key={camelify(status) + index}
-                            variant={camelify(status)}
-                          >
-                            { status }
-                          </Badge>
-                        ))
-                      }
-                    </Badges>
-                  </Td>
-                ))
-              }
-            </Tr>
-          ))
-        }
+        {components.map((component, index) => (
+          <Tr key={component.component + index}>
+            <ThV key={component.component + index} scope="row">
+              {component.component}
+            </ThV>
+            {Object.values(component.status).map((statuses, index) => (
+              <Td key={camelify(statuses.join('-')) + index}>
+                <Badges>
+                  {statuses.map((status, index) => (
+                    <Badge
+                      key={camelify(status) + index}
+                      variant={camelify(status)}
+                    >
+                      {status}
+                    </Badge>
+                  ))}
+                </Badges>
+              </Td>
+            ))}
+          </Tr>
+        ))}
       </tbody>
     </Table>
   )
@@ -89,7 +89,8 @@ Table.displayName = 'Table'
 
 const Tr = styled.tr`
   tbody &:nth-child(odd) {
-    th, td {
+    th,
+    td {
       background: white;
     }
   }
@@ -104,7 +105,7 @@ const cellPadding = `
 const ThH = styled.th`
   text-align: left;
   ${cellPadding}
-  font-weight: 500;
+  font-weight: 500 !important;
 `
 
 ThH.displayName = 'TableHeaderHorizontal'
@@ -112,7 +113,7 @@ ThH.displayName = 'TableHeaderHorizontal'
 const ThV = styled.th`
   text-align: left;
   ${cellPadding}
-  font-weight: 400;
+  font-weight: 400 !important;
 `
 
 ThV.displayName = 'TableHeaderVertical'
@@ -127,7 +128,7 @@ const badgeBgColors = {
   notAvailable: '#dcdcdc',
   underConstruction: '#ffe7d6',
   new: '#007079',
-  available: '#e6faec'
+  available: '#e6faec',
 }
 
 const Badges = styled.div`
@@ -140,7 +141,8 @@ Badges.displayName = 'Badges'
 
 const Badge = styled.span`
   background: ${({ variant }) => badgeBgColors[variant]};
-  color: ${({ variant }) => readableColor(badgeBgColors[variant], textColor, '#fff')};
+  color: ${({ variant }) =>
+    readableColor(badgeBgColors[variant], textColor, '#fff')};
   margin-top: 0 !important; /* TODO: Remove lobotomized owl selector */
   font-size: 0.625em;
   border-radius: 1em;
