@@ -67,7 +67,8 @@ components:
   - component: Link
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -84,7 +85,17 @@ components:
   - component: "Navigation: Table of contents"
     status: *defaultStatus
   - component: "Navigation: Tabs"
-    status: *defaultStatus
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Navigation: Top bar"
     status: *defaultStatus
   - component: "Notification: Banner"
@@ -120,7 +131,8 @@ components:
   - component: Tooltip
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
