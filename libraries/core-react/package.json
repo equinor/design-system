@@ -6,7 +6,7 @@
   "module": "dist/core-react.es.js",
   "browser": "dist/core-react.umd.js",
   "scripts": {
-    "lint": "eslint ./src",
+    "lint": "eslint ./src/**/*.{jsx,js}",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "jest"
@@ -50,9 +50,7 @@
   },
   "jest": {
     "verbose": true,
-    "setupFilesAfterEnv": [
-      "jest-enzyme"
-    ],
+    "setupFilesAfterEnv": ["jest-enzyme"],
     "testEnvironment": "enzyme",
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"
