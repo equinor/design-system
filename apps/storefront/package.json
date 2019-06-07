@@ -1,6 +1,6 @@
 {
-  "name": "gatsby-starter-mdx-basic",
-  "description": "Equinor Design System",
+  "name": "Equinor Design System",
+  "description": "The storefront for the Equinor Design System",
   "version": "0.0.1",
   "author": "",
   "dependencies": {
