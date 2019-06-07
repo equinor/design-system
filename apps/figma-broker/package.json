@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -e mjs --ignore figma --ignore tokens --inspect=33455 --experimental-modules --no-warnings index.mjs",
+    "dev": "nodemon -e mjs --inspect=33455 --experimental-modules --no-warnings index.mjs",
     "start": "node --experimental-modules index.mjs"
   },
   "author": "",

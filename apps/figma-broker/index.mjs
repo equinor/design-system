@@ -1,10 +1,10 @@
 #!/usr/bin/env NODE_NO_WARNINGS=1 node
 /* eslint-disable no-unused-vars */
-import dotenv from "dotenv";
-import Koa from "koa";
-import KoaRouter from "koa-router";
-import KoaLogger from "koa-logger";
-import KoaBody from "koa-body";
+import dotenv from 'dotenv'
+import Koa from 'koa'
+import KoaRouter from 'koa-router'
+import KoaLogger from 'koa-logger'
+import KoaBody from 'koa-body'
 
 import {
   fetchFigmaFile,
@@ -13,63 +13,64 @@ import {
   processFigmaComponents,
   processFigmaAssets,
   fetchFigmaImages,
-} from "./functions/figma";
-import { makeTokens, } from "./functions/tokens";
+} from './functions/figma'
+import { makeTokens } from './files/design-tokens'
+import { makeAssets, saveAssets } from './files/assets'
 import {
   writeTokens,
   writeComponents,
   readTokens,
   writeFile,
-} from "./functions/file";
-import { makeComponents, } from "./transformers/components";
-import { makeAssets, saveAssets, } from "./functions/assets";
-import { convert, } from "./functions/public";
+} from './functions/file'
+import { makeComponents } from './transformers/components'
+import { convert } from './functions/public'
 
-dotenv.config();
+dotenv.config()
 
-const PORT = process.env.PORT;
-const TEAM_ID = "590517879490131675";
+const PORT = process.env.PORT || 9001
+const TEAM_ID = '590517879490131675'
+const COMMON_DIR = '../../common'
 const PATHS = {
-  TOKENS: "../common/tokens",
-  ASSETS: "../common/assets",
-  COMPONENTS: "../common/components",
-  SASS: "../common/public/sass",
-  CSS: "../common/public/css",
-};
+  TOKENS: COMMON_DIR + '/tokens',
+  ASSETS: COMMON_DIR + '/assets',
+  COMPONENTS: COMMON_DIR + '/components',
+  SASS: COMMON_DIR + '/public/sass',
+  CSS: COMMON_DIR + '/public/css',
+}
 
-const app = new Koa();
-const router = new KoaRouter();
-const logger = new KoaLogger();
+const app = new Koa()
+const router = new KoaRouter()
+const logger = new KoaLogger()
 
 router
-  .post("/tokens", KoaBody(), createTokens)
-  .get("/tokens", KoaBody(), getTokens)
+  .post('/tokens', KoaBody(), createTokens)
+  .get('/tokens', KoaBody(), getTokens)
   // .post("/components", KoaBody(), createComponents)
-  .post("/assets", KoaBody(), createAssets)
-  .post("/transform-tokens", KoaBody(), transformTokens);
+  .post('/assets', KoaBody(), createAssets)
+  .post('/transform-tokens', KoaBody(), transformTokens)
 
 app
   .use(logger)
   .use(router.routes())
-  .use(router.allowedMethods());
+  .use(router.allowedMethods())
 
 // Tokens
 
 async function createTokens(ctx) {
-  const tokensFileId = "0TbIXrrObWj80Cf7KucKYFL0";
-  const data = await fetchFigmaFile(tokensFileId);
+  const tokensFileId = '0TbIXrrObWj80Cf7KucKYFL0'
+  const data = await fetchFigmaFile(tokensFileId)
 
-  const figmaPages = processFigmaFile(data);
-  const tokens = makeTokens(figmaPages);
+  const figmaPages = processFigmaFile(data)
+  const tokens = makeTokens(figmaPages)
 
-  writeTokens(tokens, PATHS.TOKENS);
+  writeTokens(tokens, PATHS.TOKENS)
 
-  ctx.response.body = JSON.stringify(tokens);
+  ctx.response.body = JSON.stringify(tokens)
 }
 
 async function getTokens(ctx) {
-  const tokens = [{ name: "TODO 🙈", },];
-  ctx.response.body = JSON.stringify(tokens);
+  const tokens = [{ name: 'TODO 🙈' }]
+  ctx.response.body = JSON.stringify(tokens)
 }
 
 // Components
@@ -88,41 +89,41 @@ async function getTokens(ctx) {
 // Assets
 
 async function createAssets(ctx) {
-  const assetsFileId = "BQjYMxdSdgRkdhKTDDU7L4KU";
-  const data = await fetchFigmaFile(assetsFileId);
+  const assetsFileId = 'BQjYMxdSdgRkdhKTDDU7L4KU'
+  const data = await fetchFigmaFile(assetsFileId)
 
-  const figmaAssets = processFigmaAssets(data);
-  const assets = makeAssets(figmaAssets);
+  const figmaAssets = processFigmaAssets(data)
+  const assets = makeAssets(figmaAssets)
 
-  const { images, } = await fetchFigmaImages(
+  const { images } = await fetchFigmaImages(
     assetsFileId,
-    assets.map(x => x.value.id).toString()
-  );
+    assets.map((x) => x.value.id).toString(),
+  )
 
-  const updatedAssets = assets.map(x => ({
+  const updatedAssets = assets.map((x) => ({
     ...x,
     assetUrl: images[x.value.id],
-  }));
+  }))
 
-  saveAssets(updatedAssets, PATHS.ASSETS);
+  saveAssets(updatedAssets, PATHS.ASSETS)
 
-  ctx.response.body = JSON.stringify(updatedAssets);
+  ctx.response.body = JSON.stringify(updatedAssets)
 }
 
 // Transform tokens
 
 async function transformTokens(ctx) {
-  const tokens = readTokens(PATHS.TOKENS);
-  const transformed = convert(tokens);
-  transformed.forEach(file => {
-    writeFile(file.sassString, PATHS.SASS, `_${file.name}`, "scss");
-    writeFile(file.cssString, PATHS.CSS, file.name, "css");
-  });
+  const tokens = readTokens(PATHS.TOKENS)
+  const transformed = convert(tokens)
+  transformed.forEach((file) => {
+    writeFile(file.sassString, PATHS.SASS, `_${file.name}`, 'scss')
+    writeFile(file.cssString, PATHS.CSS, file.name, 'css')
+  })
 
-  ctx.response.body = JSON.stringify(transformed);
+  ctx.response.body = JSON.stringify(transformed)
 }
 
-app.listen(PORT);
+app.listen(PORT)
 
 // eslint-disable-next-line no-console
-console.info("Started Figma Broker 😄");
+console.info('Started Figma Broker 😄')
