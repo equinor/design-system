@@ -1,5 +1,4 @@
-import { getFigmaNamePath } from './../../functions/utils'
-
+import { getFigmaNamePath } from '@utils'
 import { fetchFile } from './../../functions/figma'
 import { writeFile } from './../../functions/file.mjs'
 

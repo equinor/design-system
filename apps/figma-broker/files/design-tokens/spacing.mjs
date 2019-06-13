@@ -1,4 +1,4 @@
-import { formatName } from '../../functions/utils'
+import { formatName } from '@utils'
 
 export const makeSpacingTokens = (spacingTokens) =>
   spacingTokens

@@ -1,4 +1,4 @@
-FROM node:11 as builder
+FROM node:12 as builder
 # RUN apt-get install -y git
 WORKDIR /app
 COPY package*.json ./

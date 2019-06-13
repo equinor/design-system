@@ -1,4 +1,4 @@
-import { formatName } from '../../functions/utils'
+import { formatName } from '@utils'
 
 const getChildren = (acc, x) => [...acc, ...x.children]
 

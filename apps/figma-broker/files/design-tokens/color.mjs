@@ -1,4 +1,4 @@
-import { formatName } from '../../functions/utils'
+import { formatName } from '@utils'
 import { map, multiply } from 'ramda'
 
 const getChildren = (acc, x) => [...acc, ...x.children]
