@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -e mjs --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js",
+    "dev": "nodemon --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js",
     "start": "node --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js"
   },
   "author": "",
