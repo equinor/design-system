@@ -2,7 +2,7 @@
 name: $(Build.BuildId)
 
 trigger:
-  batch: true
+  batch: "true"
   paths:
     include:
     # This cant be a variable
