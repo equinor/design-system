@@ -24,6 +24,7 @@ import {
 } from './functions/file'
 import { makeComponents } from './transformers/components'
 import { convert } from './functions/public'
+import files from './files.json'
 
 dotenv.config()
 
@@ -57,8 +58,7 @@ app
 // Tokens
 
 async function createTokens(ctx) {
-  const tokensFileId = '0TbIXrrObWj80Cf7KucKYFL0'
-  const data = await fetchFigmaFile(tokensFileId)
+  const data = await fetchFigmaFile(files.tokens)
 
   const figmaPages = processFigmaFile(data)
   const tokens = makeTokens(figmaPages)
@@ -89,14 +89,13 @@ async function getTokens(ctx) {
 // Assets
 
 async function createAssets(ctx) {
-  const assetsFileId = 'BQjYMxdSdgRkdhKTDDU7L4KU'
-  const data = await fetchFigmaFile(assetsFileId)
+  const data = await fetchFigmaFile(files.assets)
 
   const figmaAssets = processFigmaAssets(data)
   const assets = makeAssets(figmaAssets)
 
   const { images } = await fetchFigmaImages(
-    assetsFileId,
+    files.assets,
     assets.map((x) => x.value.id).toString(),
   )
 
