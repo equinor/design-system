@@ -1,12 +1,6 @@
-import { getFigmaNamePath } from '@utils'
+import { getFigmaNamePath, fixPageName } from '@utils'
 import { fetchFile } from './../../functions/figma'
 import { writeFile } from './../../functions/file.mjs'
-
-const fixPageName = (name) =>
-  name
-    .replace(/(🚧*)(✅*)/, '')
-    .toLowerCase()
-    .trim()
 
 const getAssetsPaths = (assets) =>
   assets.map((x) => ({ ...getFigmaNamePath(x.name), value: x }))

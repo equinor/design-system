@@ -3,12 +3,7 @@ import { makeSpacingTokens } from './spacing'
 import { makeElevationTokens } from './elevation'
 import { makeClickboundsTokens } from './clickbounds'
 import { makeTextTokens } from './typography'
-
-const fixPageName = (name) =>
-  name
-    .replace(/(🚧*)(✅*)/, '')
-    .toLowerCase()
-    .trim()
+import { fixPageName } from '@utils'
 
 export const makeTokens = (figmaPages) => {
   const tokens = []
