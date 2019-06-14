@@ -15,16 +15,12 @@ import {
   fetchFigmaImages,
 } from './functions/figma'
 import { makeTokens } from './files/design-tokens'
+import { makeDesktopComponents } from './files/desktop-ui'
 import { makeAssets, saveAssets } from './files/assets'
-import {
-  writeTokens,
-  writeComponents,
-  readTokens,
-  writeFile,
-} from './functions/file'
+import { readTokens, writeFile, writeResults } from './functions/file'
 import { makeComponents } from './transformers/components'
 import { convert } from './functions/public'
-import files from './files.json'
+import file from './files.json'
 
 dotenv.config()
 
@@ -35,6 +31,7 @@ const PATHS = {
   TOKENS: COMMON_DIR + '/tokens',
   ASSETS: COMMON_DIR + '/assets',
   COMPONENTS: COMMON_DIR + '/components',
+  COMPONENTS_DESKTOP: COMMON_DIR + '/desktop-ui',
   SASS: COMMON_DIR + '/public/sass',
   CSS: COMMON_DIR + '/public/css',
 }
@@ -49,6 +46,7 @@ router
   // .post("/components", KoaBody(), createComponents)
   .post('/assets', KoaBody(), createAssets)
   .post('/transform-tokens', KoaBody(), transformTokens)
+  .post('/desktop-ui', KoaBody(), createDesktopComponents)
 
 app
   .use(logger)
@@ -58,12 +56,12 @@ app
 // Tokens
 
 async function createTokens(ctx) {
-  const data = await fetchFigmaFile(files.tokens)
+  const data = await fetchFigmaFile(file.tokens)
 
   const figmaPages = processFigmaFile(data)
   const tokens = makeTokens(figmaPages)
 
-  writeTokens(tokens, PATHS.TOKENS)
+  writeResults(tokens, PATHS.TOKENS)
 
   ctx.response.body = JSON.stringify(tokens)
 }
@@ -89,13 +87,13 @@ async function getTokens(ctx) {
 // Assets
 
 async function createAssets(ctx) {
-  const data = await fetchFigmaFile(files.assets)
+  const data = await fetchFigmaFile(file.assets)
 
   const figmaAssets = processFigmaAssets(data)
   const assets = makeAssets(figmaAssets)
 
   const { images } = await fetchFigmaImages(
-    files.assets,
+    file.assets,
     assets.map((x) => x.value.id).toString(),
   )
 
@@ -120,6 +118,19 @@ async function transformTokens(ctx) {
   })
 
   ctx.response.body = JSON.stringify(transformed)
+}
+
+// Desktop UI
+
+async function createDesktopComponents(ctx) {
+  const data = await fetchFigmaFile(file.desktop)
+
+  const figmaPages = processFigmaFile(data)
+  const components = makeDesktopComponents(figmaPages)
+
+  writeResults(components, PATHS.COMPONENTS_DESKTOP)
+
+  ctx.response.body = JSON.stringify(components)
 }
 
 app.listen(PORT)

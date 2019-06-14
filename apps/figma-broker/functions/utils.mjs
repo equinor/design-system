@@ -1,3 +1,5 @@
+import * as R from 'ramda'
+
 export const camelize = (str) => {
   if (str) {
     return str
@@ -44,3 +46,10 @@ export const fixPageName = (name) =>
     .replace(/(🚧*)(✅*)/, '')
     .toLowerCase()
     .trim()
+
+export const colortoRgba = (color) => {
+  const { r, g, b, a } = R.map((x) => Math.round(x * 100) / 100, color)
+  const rgbColors = R.map((x) => Math.round(x * 255), { r, g, b })
+
+  return `rgba(${rgbColors.r}, ${rgbColors.g}, ${rgbColors.b}, ${a * 1})`
+}
