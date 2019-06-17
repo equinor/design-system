@@ -11,7 +11,7 @@ export const makeDesktopComponents = (figmaPages) => {
     switch (fixedPageName) {
       case 'buttons primary color':
         components.push({
-          name: 'buttons primary color',
+          name: 'buttons-primary',
           value: makeButtonsComponent(data),
         })
       default:

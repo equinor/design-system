@@ -1,28 +1,28 @@
-import { getFigmaNamePath, fixPageName } from '@utils'
-import { fetchFile } from './../../functions/figma'
-import { writeFile } from './../../functions/file.mjs'
+import { getFigmaNamePath, fixPageName, formatName } from '@utils'
+import { makeAssetTokens } from './icon'
 
-const getAssetsPaths = (assets) =>
-  assets.map((x) => ({ ...getFigmaNamePath(x.name), value: x }))
+// const getAssetsPaths = (assets) =>
+//   assets.map((x) => ({ ...getFigmaNamePath(x.name), value: x }))
 
-export const makeAssets = (figmaAssets) => {
+export const getAssets = (figmaAssets) => {
   const assets = []
 
   figmaAssets.forEach((page) => {
     const fixedPageName = fixPageName(page.name)
 
     if (fixedPageName === 'system icons') {
-      const data = page.children.filter((x) => x.type === 'COMPONENT')
-      assets.push(...getAssetsPaths(data))
+      const data = page.children
+        .filter((x) => x.type === 'FRAME')
+        .map((icongroup) =>
+          makeAssetTokens(icongroup.children, formatName(icongroup.name)),
+        )
+        .reduce((acc, val) => [...acc, ...val])
+      assets.push({
+        name: 'system-icons',
+        value: data,
+      })
     }
   })
 
   return assets
-}
-
-export async function saveAssets(assets, savePath) {
-  assets.forEach(async function({ name, path, assetUrl }) {
-    const asset = await fetchFile(assetUrl)
-    writeFile(asset, `${savePath}/${path}`, name, 'svg')
-  })
 }

@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { createFolder } from './folder'
+import fetch from 'node-fetch'
 
 const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`
 
@@ -42,12 +43,22 @@ export const readTokens = (path) =>
     tokens: JSON.parse(fs.readFileSync(`${path}/${fileName}`)),
   }))
 
-export const writeResults = (results, savePath) =>
+export const writeResults = (results, savePath, extension = 'json') =>
   results.forEach(({ value, name, path = '' }) =>
     writeFile(
       JSON.stringify(value, null, 4),
       `${savePath}/${path}`,
       name,
-      'json',
+      extension,
     ),
   )
+
+export async function writeResultsGroup(resultsGroup, savePath) {
+  await resultsGroup.forEach(async function({ name, path, assetUrl }) {
+    const asset = await fetchFile(assetUrl)
+  })
+}
+
+export async function fetchFile(url) {
+  return await fetch(url).then((res) => res.text())
+}

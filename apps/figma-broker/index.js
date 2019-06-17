@@ -9,18 +9,21 @@ import KoaBody from 'koa-body'
 import {
   fetchFigmaFile,
   processFigmaFile,
-  fetchFigmaComponents,
-  processFigmaComponents,
-  processFigmaAssets,
-  fetchFigmaImages,
+  fetchFigmaImageUrls,
 } from './functions/figma'
-import { makeTokens } from './files/design-tokens'
-import { makeDesktopComponents } from './files/desktop-ui'
-import { makeAssets, saveAssets } from './files/assets'
-import { readTokens, writeFile, writeResults } from './functions/file'
+import {
+  readTokens,
+  writeFile,
+  writeResults,
+  fetchFile,
+} from './functions/file'
 import { makeComponents } from './transformers/components'
 import { convert } from './functions/public'
 import file from './files.json'
+// Files
+import { makeTokens } from './files/design-tokens'
+import { makeDesktopComponents } from './files/desktop-ui'
+import { getAssets } from './files/assets'
 
 dotenv.config()
 
@@ -89,22 +92,50 @@ async function getTokens(ctx) {
 async function createAssets(ctx) {
   const data = await fetchFigmaFile(file.assets)
 
-  const figmaAssets = processFigmaAssets(data)
-  const assets = makeAssets(figmaAssets)
+  const figmaPages = processFigmaFile(data)
+  const assetPages = getAssets(figmaPages)
 
-  const { images } = await fetchFigmaImages(
-    file.assets,
-    assets.map((x) => x.value.id).toString(),
+  // Update with svg image urls from Figma
+  const assetsWithUrl = await Promise.all(
+    assetPages.map(async (assetPage) => {
+      const ids = assetPage.value.map((x) => x.id)
+      const result = await fetchFigmaImageUrls(file.assets, ids)
+      if (!result.err) {
+        return {
+          ...assetPage,
+          value: assetPage.value.map((asset) => ({
+            ...asset,
+            url: result.images[asset.id],
+          })),
+        }
+      }
+      return assetPage
+    }),
+  )
+  // Fetch svg image as string for each asset
+  const assetsWithSvg = await Promise.all(
+    assetsWithUrl.map(async (assetPage) => ({
+      ...assetPage,
+      value: await Promise.all(
+        assetPage.value.map(async (asset) => {
+          const svg = await fetchFile(asset.url)
+          return {
+            ...asset,
+            svg,
+          }
+        }),
+      ),
+    })),
   )
 
-  const updatedAssets = assets.map((x) => ({
-    ...x,
-    assetUrl: images[x.value.id],
-  }))
+  // const updatedAssets = assets.map((x) => ({
+  //   ...x,
+  //   assetUrl: images[x.value.id],
+  // }))
 
-  saveAssets(updatedAssets, PATHS.ASSETS)
+  // writeResults({}, PATHS.ASSETS, 'svg')
 
-  ctx.response.body = JSON.stringify(updatedAssets)
+  ctx.response.body = JSON.stringify(assetsWithSvg)
 }
 
 // Transform tokens
