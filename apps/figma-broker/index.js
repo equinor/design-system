@@ -5,6 +5,7 @@ import Koa from 'koa'
 import KoaRouter from 'koa-router'
 import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
+import SVGO from 'svgo'
 
 import {
   fetchFigmaFile,
@@ -16,6 +17,7 @@ import {
   writeFile,
   writeResults,
   fetchFile,
+  writeResultsIndividually,
 } from './functions/file'
 import { makeComponents } from './transformers/components'
 import { convert } from './functions/public'
@@ -24,6 +26,7 @@ import file from './files.json'
 import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
 import { getAssets } from './files/assets'
+import { FILE } from 'dns'
 
 dotenv.config()
 
@@ -42,6 +45,13 @@ const PATHS = {
 const app = new Koa()
 const router = new KoaRouter()
 const logger = new KoaLogger()
+const svgo = new SVGO({
+  plugins: [
+    { removeUselessStrokeAndFill: true },
+    { removeDoctype: true },
+    { removeAttrs: { attrs: '(stroke|fill)' } },
+  ],
+})
 
 router
   .post('/tokens', KoaBody(), createTokens)
@@ -57,7 +67,6 @@ app
   .use(router.allowedMethods())
 
 // Tokens
-
 async function createTokens(ctx) {
   const data = await fetchFigmaFile(file.tokens)
 
@@ -118,22 +127,19 @@ async function createAssets(ctx) {
       ...assetPage,
       value: await Promise.all(
         assetPage.value.map(async (asset) => {
-          const svg = await fetchFile(asset.url)
+          const svgDirty = await fetchFile(asset.url)
+          const svgClean = await svgo.optimize(svgDirty)
           return {
             ...asset,
-            svg,
+            value: svgClean.data,
           }
         }),
       ),
     })),
   )
 
-  // const updatedAssets = assets.map((x) => ({
-  //   ...x,
-  //   assetUrl: images[x.value.id],
-  // }))
-
-  // writeResults({}, PATHS.ASSETS, 'svg')
+  // Write svg to files
+  writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
 
   ctx.response.body = JSON.stringify(assetsWithSvg)
 }

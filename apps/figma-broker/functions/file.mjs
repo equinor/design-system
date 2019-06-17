@@ -46,16 +46,20 @@ export const readTokens = (path) =>
 export const writeResults = (results, savePath, extension = 'json') =>
   results.forEach(({ value, name, path = '' }) =>
     writeFile(
-      JSON.stringify(value, null, 4),
+      extension === 'json' ? JSON.stringify(value, null, 4) : value,
       `${savePath}/${path}`,
       name,
       extension,
     ),
   )
 
-export async function writeResultsGroup(resultsGroup, savePath) {
-  await resultsGroup.forEach(async function({ name, path, assetUrl }) {
-    const asset = await fetchFile(assetUrl)
+export const writeResultsIndividually = (
+  results,
+  savePath,
+  extension = 'json',
+) => {
+  results.forEach(({ value, name }) => {
+    writeResults(value, `${savePath}/${name}`, extension)
   })
 }
 

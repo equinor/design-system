@@ -22,6 +22,18 @@ export const getAssets = (figmaAssets) => {
         value: data,
       })
     }
+    if (fixedPageName === 'product icons') {
+      const data = page.children
+        .filter((x) => x.type === 'FRAME')
+        .map((icongroup) =>
+          makeAssetTokens(icongroup.children, formatName(icongroup.name)),
+        )
+        .reduce((acc, val) => [...acc, ...val])
+      assets.push({
+        name: 'product-icons',
+        value: data,
+      })
+    }
   })
 
   return assets
