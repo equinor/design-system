@@ -23,6 +23,7 @@ devDependencies:
   rollup: 1.12.4
   rollup-plugin-babel: 4.3.2
   rollup-plugin-commonjs: 9.3.4
+  rollup-plugin-json: 4.0.0
   rollup-plugin-node-resolve: 4.2.4
   styled-components: 4.2.0
 lockfileVersion: 5
@@ -4882,6 +4883,12 @@ packages:
       rollup: '>=0.56.0'
     resolution:
       integrity: sha512-DTZOvRoiVIHHLFBCL4pFxOaJt8pagxsVldEXBOn6wl3/V21wVaj17HFfyzTsQUuou3sZL3lEJZVWKPFblJfI6w==
+  /rollup-plugin-json/4.0.0:
+    dependencies:
+      rollup-pluginutils: 2.8.1
+    dev: true
+    resolution:
+      integrity: sha512-hgb8N7Cgfw5SZAkb3jf0QXii6QX/FOkiIq2M7BAQIEydjHvTyxXHQiIzZaTFgx1GK0cRCHOCBHIyEkkLdWKxow==
   /rollup-plugin-node-resolve/4.2.4:
     dependencies:
       '@types/resolve': 0.0.8
@@ -4898,6 +4905,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-3nRf3buQGR9qz/IsSzhZAJyoK663kzseps8itkYHr+Z7ESuaffEPfgRinxbCRA0pf0gzLqkNKkSb8aNVTq75NA==
+  /rollup-pluginutils/2.8.1:
+    dependencies:
+      estree-walker: 0.6.1
+    dev: true
+    resolution:
+      integrity: sha512-J5oAoysWar6GuZo0s+3bZ6sVZAC0pfqKz68De7ZgDi5z63jOVZn1uJL/+z1jeKHNbGII8kAyHF5q8LnxSX5lQg==
   /rollup/1.12.4:
     dependencies:
       '@types/estree': 0.0.39
@@ -5753,5 +5766,6 @@ specifiers:
   rollup: ^1.11.3
   rollup-plugin-babel: ^4.3.2
   rollup-plugin-commonjs: ^9.3.4
+  rollup-plugin-json: ^4.0.0
   rollup-plugin-node-resolve: ^4.2.3
   styled-components: ^4.2.0

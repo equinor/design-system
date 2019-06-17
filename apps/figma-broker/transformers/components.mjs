@@ -1,4 +1,4 @@
-import { getFigmaNamePath, } from "../functions/utils";
+import { getFigmaNamePath } from '@utils'
 
-export const makeComponents = components =>
-  components.map(x => ({ ...getFigmaNamePath(x.name), value: x, }));
+export const makeComponents = (components) =>
+  components.map((x) => ({ ...getFigmaNamePath(x.name), value: x }))
