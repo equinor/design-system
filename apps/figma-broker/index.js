@@ -19,7 +19,6 @@ import {
   fetchFile,
   writeResultsIndividually,
 } from './functions/file'
-import { makeComponents } from './transformers/components'
 import { convert } from './functions/public'
 import file from './files.json'
 // Files
@@ -47,9 +46,10 @@ const router = new KoaRouter()
 const logger = new KoaLogger()
 const svgo = new SVGO({
   plugins: [
-    { removeUselessStrokeAndFill: true },
     { removeDoctype: true },
-    { removeAttrs: { attrs: '(stroke|fill)' } },
+    { removeUnknownsAndDefaults: true },
+    { removeUselessStrokeAndFill: true },
+    { removeAttrs: { attrs: '(stroke|fill|fill-rule|clip-rule)' } },
   ],
 })
 
@@ -140,6 +140,8 @@ async function createAssets(ctx) {
 
   // Write svg to files
   writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
+  // Write token
+  writeResults(assetsWithSvg, PATHS.ASSETS)
 
   ctx.response.body = JSON.stringify(assetsWithSvg)
 }
