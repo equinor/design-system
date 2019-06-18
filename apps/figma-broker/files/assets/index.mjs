@@ -1,8 +1,12 @@
-import { getFigmaNamePath, fixPageName, formatName } from '@utils'
+import { fixPageName } from '@utils'
 import { makeAssetTokens } from './icon'
+import * as R from 'ramda'
 
-// const getAssetsPaths = (assets) =>
-//   assets.map((x) => ({ ...getFigmaNamePath(x.name), value: x }))
+const getAssetTokens = R.pipe(
+  R.filter((x) => x.type === 'FRAME'),
+  R.map(({ children, name }) => makeAssetTokens(children, name)),
+  R.flatten,
+)
 
 export const getAssets = (figmaAssets) => {
   const assets = []
@@ -11,23 +15,15 @@ export const getAssets = (figmaAssets) => {
     const fixedPageName = fixPageName(page.name)
 
     if (fixedPageName === 'system icons') {
-      const data = page.children
-        .filter((x) => x.type === 'FRAME')
-        .map((icongroup) => makeAssetTokens(icongroup.children, icongroup.name))
-        .reduce((acc, val) => [...acc, ...val])
       assets.push({
         name: 'system-icons',
-        value: data,
+        value: getAssetTokens(page.children),
       })
     }
     if (fixedPageName === 'product icons') {
-      const data = page.children
-        .filter((x) => x.type === 'FRAME')
-        .map((icongroup) => makeAssetTokens(icongroup.children, icongroup.name))
-        .reduce((acc, val) => [...acc, ...val])
       assets.push({
         name: 'product-icons',
-        value: data,
+        value: getAssetTokens(page.children),
       })
     }
   })
