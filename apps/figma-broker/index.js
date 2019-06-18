@@ -139,7 +139,8 @@ async function createAssets(ctx) {
   )
 
   // Write svg to files
-  writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
+  // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
+  // writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
   // Write token
   writeResults(assetsWithSvg, PATHS.ASSETS)
 

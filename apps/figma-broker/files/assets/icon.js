@@ -1,6 +1,6 @@
 import { formatName } from '@utils'
 
-export const makeAssetTokens = (assets, path) =>
+export const makeAssetTokens = (assets, groupName) =>
   assets
     .filter((x) => x.type === 'COMPONENT')
     .map((x) => ({
@@ -8,5 +8,6 @@ export const makeAssetTokens = (assets, path) =>
       value: '',
       id: x.id,
       url: '',
-      path,
+      path: formatName(groupName),
+      group: groupName,
     }))

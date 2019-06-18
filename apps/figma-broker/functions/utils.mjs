@@ -37,6 +37,7 @@ export const formatName = (str) =>
     .trim()
     .replace(/[\s+]/g, '-')
     .replace(/[/]/g, '--')
+    .replace('---', '-')
 
 export const pathToString = (str) =>
   str.reduce((acc, val) => `${acc}/${val}`, '')

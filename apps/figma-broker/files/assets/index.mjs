@@ -13,9 +13,7 @@ export const getAssets = (figmaAssets) => {
     if (fixedPageName === 'system icons') {
       const data = page.children
         .filter((x) => x.type === 'FRAME')
-        .map((icongroup) =>
-          makeAssetTokens(icongroup.children, formatName(icongroup.name)),
-        )
+        .map((icongroup) => makeAssetTokens(icongroup.children, icongroup.name))
         .reduce((acc, val) => [...acc, ...val])
       assets.push({
         name: 'system-icons',
@@ -25,9 +23,7 @@ export const getAssets = (figmaAssets) => {
     if (fixedPageName === 'product icons') {
       const data = page.children
         .filter((x) => x.type === 'FRAME')
-        .map((icongroup) =>
-          makeAssetTokens(icongroup.children, formatName(icongroup.name)),
-        )
+        .map((icongroup) => makeAssetTokens(icongroup.children, icongroup.name))
         .reduce((acc, val) => [...acc, ...val])
       assets.push({
         name: 'product-icons',
