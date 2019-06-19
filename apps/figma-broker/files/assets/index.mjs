@@ -1,28 +1,32 @@
-import { getFigmaNamePath, fixPageName } from '@utils'
-import { fetchFile } from './../../functions/figma'
-import { writeFile } from './../../functions/file.mjs'
+import { fixPageName } from '@utils'
+import { makeAssetTokens } from './icon'
+import * as R from 'ramda'
 
-const getAssetsPaths = (assets) =>
-  assets.map((x) => ({ ...getFigmaNamePath(x.name), value: x }))
+const getAssetTokens = R.pipe(
+  R.filter((x) => x.type === 'FRAME'),
+  R.map(({ children, name }) => makeAssetTokens(children, name)),
+  R.flatten,
+)
 
-export const makeAssets = (figmaAssets) => {
+export const getAssets = (figmaAssets) => {
   const assets = []
 
   figmaAssets.forEach((page) => {
     const fixedPageName = fixPageName(page.name)
 
     if (fixedPageName === 'system icons') {
-      const data = page.children.filter((x) => x.type === 'COMPONENT')
-      assets.push(...getAssetsPaths(data))
+      assets.push({
+        name: 'system-icons',
+        value: getAssetTokens(page.children),
+      })
+    }
+    if (fixedPageName === 'product icons') {
+      assets.push({
+        name: 'product-icons',
+        value: getAssetTokens(page.children),
+      })
     }
   })
 
   return assets
-}
-
-export async function saveAssets(assets, savePath) {
-  assets.forEach(async function({ name, path, assetUrl }) {
-    const asset = await fetchFile(assetUrl)
-    writeFile(asset, `${savePath}/${path}`, name, 'svg')
-  })
 }

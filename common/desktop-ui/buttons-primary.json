@@ -29,7 +29,6 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 16,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"
@@ -58,7 +57,6 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 8,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"
@@ -76,7 +74,6 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 8,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"
@@ -94,7 +91,6 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 8,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"
@@ -112,17 +108,12 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 8,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"
     },
     "outlined-left-icon": {
         "clickbound": 48,
-        "cornerRadius": 4,
-        "background": "rgba(222, 237, 237, 1)",
-        "borderColor": "rgba(0, 112, 120, 1)",
-        "borderWidth": 1,
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -130,17 +121,12 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 8,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"
     },
     "ghost-left-icon": {
         "clickbound": 48,
-        "cornerRadius": 4,
-        "background": "rgba(222, 237, 237, 1)",
-        "borderColor": "",
-        "borderWidth": 1,
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -148,7 +134,6 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 8,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"
@@ -166,7 +151,6 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "spacing": 16,
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
         "focusStyle": "dashed"

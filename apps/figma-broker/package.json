@@ -20,7 +20,8 @@
     "koa-router": "^7.4.0",
     "node-fetch": "^2.3.0",
     "ramda": "^0.26.1",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "svgo": "^1.2.2"
   },
   "aliases": {
     "@root": ".",

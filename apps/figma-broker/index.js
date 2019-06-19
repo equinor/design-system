@@ -5,22 +5,27 @@ import Koa from 'koa'
 import KoaRouter from 'koa-router'
 import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
+import SVGO from 'svgo'
 
 import {
   fetchFigmaFile,
   processFigmaFile,
-  fetchFigmaComponents,
-  processFigmaComponents,
-  processFigmaAssets,
-  fetchFigmaImages,
+  fetchFigmaImageUrls,
 } from './functions/figma'
-import { makeTokens } from './files/design-tokens'
-import { makeDesktopComponents } from './files/desktop-ui'
-import { makeAssets, saveAssets } from './files/assets'
-import { readTokens, writeFile, writeResults } from './functions/file'
-import { makeComponents } from './transformers/components'
+import {
+  readTokens,
+  writeFile,
+  writeResults,
+  fetchFile,
+  writeResultsIndividually,
+} from './functions/file'
 import { convert } from './functions/public'
 import file from './files.json'
+// Files
+import { makeTokens } from './files/design-tokens'
+import { makeDesktopComponents } from './files/desktop-ui'
+import { getAssets } from './files/assets'
+import { FILE } from 'dns'
 
 dotenv.config()
 
@@ -39,6 +44,14 @@ const PATHS = {
 const app = new Koa()
 const router = new KoaRouter()
 const logger = new KoaLogger()
+const svgo = new SVGO({
+  plugins: [
+    { removeDoctype: true },
+    { removeUnknownsAndDefaults: true },
+    { removeUselessStrokeAndFill: true },
+    { removeAttrs: { attrs: '(stroke|fill|fill-rule|clip-rule)' } },
+  ],
+})
 
 router
   .post('/tokens', KoaBody(), createTokens)
@@ -54,7 +67,6 @@ app
   .use(router.allowedMethods())
 
 // Tokens
-
 async function createTokens(ctx) {
   const data = await fetchFigmaFile(file.tokens)
 
@@ -89,22 +101,50 @@ async function getTokens(ctx) {
 async function createAssets(ctx) {
   const data = await fetchFigmaFile(file.assets)
 
-  const figmaAssets = processFigmaAssets(data)
-  const assets = makeAssets(figmaAssets)
+  const figmaPages = processFigmaFile(data)
+  const assetPages = getAssets(figmaPages)
 
-  const { images } = await fetchFigmaImages(
-    file.assets,
-    assets.map((x) => x.value.id).toString(),
+  // Update with svg image urls from Figma
+  const assetsWithUrl = await Promise.all(
+    assetPages.map(async (assetPage) => {
+      const ids = assetPage.value.map((x) => x.id)
+      const result = await fetchFigmaImageUrls(file.assets, ids)
+      if (!result.err) {
+        return {
+          ...assetPage,
+          value: assetPage.value.map((asset) => ({
+            ...asset,
+            url: result.images[asset.id],
+          })),
+        }
+      }
+      return assetPage
+    }),
+  )
+  // Fetch svg image as string for each asset
+  const assetsWithSvg = await Promise.all(
+    assetsWithUrl.map(async (assetPage) => ({
+      ...assetPage,
+      value: await Promise.all(
+        assetPage.value.map(async (asset) => {
+          const svgDirty = await fetchFile(asset.url)
+          const svgClean = await svgo.optimize(svgDirty)
+          return {
+            ...asset,
+            value: svgClean.data,
+          }
+        }),
+      ),
+    })),
   )
 
-  const updatedAssets = assets.map((x) => ({
-    ...x,
-    assetUrl: images[x.value.id],
-  }))
+  // Write svg to files
+  // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
+  // writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
+  // Write token
+  writeResults(assetsWithSvg, PATHS.ASSETS)
 
-  saveAssets(updatedAssets, PATHS.ASSETS)
-
-  ctx.response.body = JSON.stringify(updatedAssets)
+  ctx.response.body = JSON.stringify(assetsWithSvg)
 }
 
 // Transform tokens
