@@ -38,10 +38,10 @@
 - title: Components
   subNav:
     - Component status
+    - Accordion
     - Buttons
     - Cards
     - Divider
-    - Expansion panel
     - Links
     - Lists
     - Navigation app launcher
