@@ -49,6 +49,9 @@ export const fixPageName = (name) =>
     .trim()
 
 export const colortoRgba = (color) => {
+  if (!color) {
+    return 'transparent'
+  }
   const { r, g, b, a } = R.map((x) => Math.round(x * 100) / 100, color)
   const rgbColors = R.map((x) => Math.round(x * 255), { r, g, b })
 

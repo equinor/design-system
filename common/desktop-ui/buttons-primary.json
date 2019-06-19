@@ -1,8 +1,7 @@
 {
     "outlined": {
-        "clickbound": 48,
         "cornerRadius": 4,
-        "background": "rgba(222, 237, 237, 1)",
+        "background": "transparent",
         "borderColor": "rgba(0, 112, 120, 1)",
         "borderWidth": 1,
         "typography": {
@@ -14,13 +13,19 @@
         },
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed"
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     },
     "ghost": {
-        "clickbound": 48,
         "cornerRadius": 4,
-        "background": "rgba(222, 237, 237, 1)",
-        "borderColor": "",
+        "background": "transparent",
+        "borderColor": "transparent",
         "borderWidth": 1,
         "typography": {
             "font": "Equinor-Medium",
@@ -31,24 +36,30 @@
         },
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed"
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     },
     "ghost-icon": {
-        "clickbound": 48,
-        "typography": {},
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed",
-        "cornerRadius": 100,
-        "background": "rgba(222, 237, 237, 1)",
-        "borderColor": "",
-        "borderWidth": 1
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     },
     "contained-right-icon": {
-        "clickbound": 48,
         "cornerRadius": 4,
-        "background": "rgba(0, 79, 84, 1)",
-        "borderColor": "",
+        "background": "rgba(0, 112, 120, 1)",
+        "borderColor": "transparent",
         "borderWidth": 1,
         "typography": {
             "font": "Equinor-Medium",
@@ -59,12 +70,18 @@
         },
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed"
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(0, 79, 84, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     },
     "outlined-right-icon": {
-        "clickbound": 48,
         "cornerRadius": 4,
-        "background": "rgba(222, 237, 237, 1)",
+        "background": "transparent",
         "borderColor": "rgba(0, 112, 120, 1)",
         "borderWidth": 1,
         "typography": {
@@ -76,13 +93,19 @@
         },
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed"
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     },
     "ghost-right-icon": {
-        "clickbound": 48,
         "cornerRadius": 4,
-        "background": "rgba(222, 237, 237, 1)",
-        "borderColor": "",
+        "background": "transparent",
+        "borderColor": "transparent",
         "borderWidth": 1,
         "typography": {
             "font": "Equinor-Medium",
@@ -93,13 +116,19 @@
         },
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed"
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     },
     "contained-left-icon": {
-        "clickbound": 48,
         "cornerRadius": 4,
-        "background": "rgba(0, 79, 84, 1)",
-        "borderColor": "",
+        "background": "rgba(0, 112, 120, 1)",
+        "borderColor": "transparent",
         "borderWidth": 1,
         "typography": {
             "font": "Equinor-Medium",
@@ -110,39 +139,19 @@
         },
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed"
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(0, 79, 84, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     },
     "outlined-left-icon": {
-        "clickbound": 48,
-        "typography": {
-            "font": "Equinor-Medium",
-            "fontSize": 14,
-            "fontWeight": 500,
-            "letterSpacing": 0,
-            "lineHeight": 16
-        },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": "dashed"
-    },
-    "ghost-left-icon": {
-        "clickbound": 48,
-        "typography": {
-            "font": "Equinor-Medium",
-            "fontSize": 14,
-            "fontWeight": 500,
-            "letterSpacing": 0,
-            "lineHeight": 16
-        },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": "dashed"
-    },
-    "contained": {
-        "clickbound": 48,
         "cornerRadius": 4,
-        "background": "rgba(0, 79, 84, 1)",
-        "borderColor": "",
+        "background": "transparent",
+        "borderColor": "rgba(0, 112, 120, 1)",
         "borderWidth": 1,
         "typography": {
             "font": "Equinor-Medium",
@@ -153,6 +162,59 @@
         },
         "focusColor": "rgba(0, 112, 120, 1)",
         "focusWidth": 2,
-        "focusStyle": "dashed"
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
+    },
+    "ghost-left-icon": {
+        "cornerRadius": 4,
+        "background": "transparent",
+        "borderColor": "transparent",
+        "borderWidth": 1,
+        "typography": {
+            "font": "Equinor-Medium",
+            "fontSize": 14,
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": 16
+        },
+        "focusColor": "rgba(0, 112, 120, 1)",
+        "focusWidth": 2,
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
+    },
+    "contained": {
+        "cornerRadius": 4,
+        "background": "rgba(0, 112, 120, 1)",
+        "borderColor": "transparent",
+        "borderWidth": 1,
+        "typography": {
+            "font": "Equinor-Medium",
+            "fontSize": 14,
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": 16
+        },
+        "focusColor": "rgba(0, 112, 120, 1)",
+        "focusWidth": 2,
+        "focusStyle": {
+            "type": "dashed",
+            "width": 2,
+            "gap": 8
+        },
+        "hoverBackground": "rgba(0, 79, 84, 1)",
+        "pressedColor": "rgba(0, 0, 0, 1)",
+        "pressedOpacity": 0.2
     }
 }
