@@ -6,7 +6,7 @@ tabs:
 mode: draft
 ---
 
-**Ingress**
+***Selection controls* allow users to select options, make decisions and set preferences. **
 <!--One to two sentences as an introduction to the component-->
 
 ***
@@ -14,10 +14,13 @@ mode: draft
 ## Guidelines
 <!--List how to use it, sizes, widths, grid interactions, color allowances -->
 
+Selection controls are to be visible and understandable at a quick glance. Selected options are more viable than unselected. 
+
 
 **Don't**
 <!--Bullet point list if needed -->
 
+  * Do not mix different selection controls within a grouped lists. 
 
 ## Variations 
 <!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
@@ -25,6 +28,12 @@ mode: draft
 
 ### Switch
 
+Switches allow users to toggle a single item on or off, taking immediate action. 
+
+**Don't**
+<!--Bullet point list if needed -->
+
+* Do not nest switches, use checkboxes instead. 
 
 #### Switch on
 <Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A976" />
@@ -35,6 +44,15 @@ mode: draft
 
 
 ### Checkbox
+
+Checkboxes allow users to select one or more items from a list. Checkboxes can be used to turn an option on or off, taking immediate effect.
+
+Checkboxes can be nested children.
+  * When a parent checkbox is selected, all following children are selected. 
+  * When a parent checkbox is unselected, all following children are unselected. 
+  * When a child is unselected while other children are selected, the parent checkbox becomes indeterminate. 
+ 
+
 
 #### Checkbox selected
 <Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A978" />
@@ -47,6 +65,14 @@ mode: draft
 
 
 ### Radio button
+
+Radio buttons allow users to choose one single option from a list of options. 
+
+
+**Don't**
+<!--Bullet point list if needed -->
+
+* Do not use radio buttons when the user can select more than one item. 
 
 #### Radio button selected
 
