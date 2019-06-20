@@ -1,5 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import json from 'rollup-plugin-json'
 import pkg from './package.json'
 
 const peerDeps = Object.keys(pkg.peerDependencies || {})
@@ -15,6 +16,7 @@ export default [
       format: 'umd',
     },
     plugins: [
+      json(),
       resolve({
         extensions: ['.jsx'],
       }),
@@ -25,6 +27,7 @@ export default [
     input: 'src/index.js',
     external: peerDeps,
     plugins: [
+      json(),
       resolve({
         extensions: ['.jsx'],
       }),

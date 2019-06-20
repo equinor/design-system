@@ -1,60 +1,68 @@
-import fs from "fs";
-import { createFolder, } from "./folder";
+import fs from 'fs'
+import { createFolder } from './folder'
+import fetch from 'node-fetch'
 
-const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`;
+const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`
 
 const write = (file, path, name, ext) => {
-  const filePath = getFilePath(path, name, ext);
-  fs.writeFile(filePath, file, "utf-8", error => {
+  const filePath = getFilePath(path, name, ext)
+  fs.writeFile(filePath, file, 'utf-8', (error) => {
     if (error) {
-      throw new Error("Error in write(): ", { error, filePath, });
+      throw new Error('Error in write(): ', { error, filePath })
     }
-  });
-};
+  })
+}
 
 export const writeFile = (file, path, name, ext) => {
   if (file && path && name) {
-    createFolder(path);
-    write(file, path, name, ext);
+    createFolder(path)
+    write(file, path, name, ext)
   } else {
-    throw new Error(
-      "Missing required parameters to correctly run writeFile()!"
-    );
+    throw new Error('Missing required parameters to correctly run writeFile()!')
   }
-};
+}
 
 export const readFile = (path, name, ext, callback) => {
   fs.readFile(getFilePath(path, name, ext), (err, data) => {
     if (err) {
-      callback(err);
-      return;
+      callback(err)
+      return
     }
     try {
-      callback(null, JSON.parse(data));
+      callback(null, JSON.parse(data))
     } catch (exception) {
-      callback(exception);
+      callback(exception)
     }
-  });
-};
+  })
+}
 
-export const writeTokens = (tokens, savePath) =>
-  tokens.forEach(({ value, name, }) =>
-    writeFile(JSON.stringify(value, null, 4), savePath, name, "json")
-  );
+export const readTokens = (path) =>
+  fs.readdirSync(path).map((fileName) => ({
+    name: fileName.replace(/.json/, ''),
+    extension: 'json',
+    tokens: JSON.parse(fs.readFileSync(`${path}/${fileName}`)),
+  }))
 
-export const writeComponents = (components, savePath) =>
-  components.forEach(({ value, name, path, }) =>
+export const writeResults = (results, savePath, extension = 'json') =>
+  results.forEach(({ value, name, path = '' }) =>
     writeFile(
-      JSON.stringify(value, null, 4),
+      extension === 'json' ? JSON.stringify(value, null, 4) : value,
       `${savePath}/${path}`,
       name,
-      "json"
-    )
-  );
+      extension,
+    ),
+  )
 
-export const readTokens = path =>
-  fs.readdirSync(path).map(fileName => ({
-    name: fileName.replace(/.json/, ""),
-    extension: "json",
-    tokens: JSON.parse(fs.readFileSync(`${path}/${fileName}`)),
-  }));
+export const writeResultsIndividually = (
+  results,
+  savePath,
+  extension = 'json',
+) => {
+  results.forEach(({ value, name }) => {
+    writeResults(value, `${savePath}/${name}`, extension)
+  })
+}
+
+export async function fetchFile(url) {
+  return await fetch(url).then((res) => res.text())
+}
