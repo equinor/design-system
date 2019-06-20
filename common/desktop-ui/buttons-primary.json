@@ -1,6 +1,7 @@
 {
     "outlined": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "transparent",
         "borderColor": "rgba(0, 112, 120, 1)",
         "borderWidth": 1,
@@ -28,6 +29,7 @@
     },
     "ghost": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "transparent",
         "borderColor": "transparent",
         "borderWidth": 1,
@@ -67,6 +69,7 @@
     },
     "contained-right-icon": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "rgba(0, 112, 120, 1)",
         "borderColor": "transparent",
         "borderWidth": 1,
@@ -95,6 +98,7 @@
     },
     "outlined-right-icon": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "transparent",
         "borderColor": "rgba(0, 112, 120, 1)",
         "borderWidth": 1,
@@ -122,6 +126,7 @@
     },
     "ghost-right-icon": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "transparent",
         "borderColor": "transparent",
         "borderWidth": 1,
@@ -150,6 +155,7 @@
     },
     "contained-left-icon": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "rgba(0, 112, 120, 1)",
         "borderColor": "transparent",
         "borderWidth": 1,
@@ -177,6 +183,7 @@
     },
     "outlined-left-icon": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "transparent",
         "borderColor": "rgba(0, 112, 120, 1)",
         "borderWidth": 1,
@@ -205,6 +212,7 @@
     },
     "ghost-left-icon": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "transparent",
         "borderColor": "transparent",
         "borderWidth": 1,
@@ -233,6 +241,7 @@
     },
     "contained": {
         "cornerRadius": 4,
+        "height": 36,
         "background": "rgba(0, 112, 120, 1)",
         "borderColor": "transparent",
         "borderWidth": 1,
