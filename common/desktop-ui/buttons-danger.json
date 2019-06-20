@@ -3,11 +3,11 @@
         "height": 36,
         "background": "transparent",
         "border": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(235, 0, 0, 1)",
             "width": 1,
             "radius": 4
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(235, 0, 0, 1)",
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -26,7 +26,7 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "hoverBackground": "rgba(255, 194, 194, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
@@ -38,7 +38,7 @@
             "width": 1,
             "radius": 4
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(235, 0, 0, 1)",
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -57,25 +57,13 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
-    },
-    "ghost-icon": {
-        "clickbound": 48,
-        "focus": {
-            "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
-            "width": 2,
-            "gap": 8
-        },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "hoverBackground": "rgba(255, 194, 194, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
     "contained-right-icon": {
         "height": 36,
-        "background": "rgba(0, 112, 120, 1)",
+        "background": "rgba(235, 0, 0, 1)",
         "border": {
             "color": "transparent",
             "width": 1,
@@ -101,7 +89,7 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(0, 79, 84, 1)",
+        "hoverBackground": "rgba(179, 13, 46, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
@@ -109,11 +97,11 @@
         "height": 36,
         "background": "transparent",
         "border": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(235, 0, 0, 1)",
             "width": 1,
             "radius": 4
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(235, 0, 0, 1)",
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -123,6 +111,7 @@
         },
         "spacing": {
             "left": 16,
+            "right": 16,
             "icon": 8
         },
         "clickbound": 48,
@@ -132,7 +121,7 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "hoverBackground": "rgba(255, 194, 194, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
@@ -144,7 +133,7 @@
             "width": 1,
             "radius": 4
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(235, 0, 0, 1)",
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -164,13 +153,13 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "hoverBackground": "rgba(255, 194, 194, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
     "contained-left-icon": {
         "height": 36,
-        "background": "rgba(0, 112, 120, 1)",
+        "background": "rgba(235, 0, 0, 1)",
         "border": {
             "color": "transparent",
             "width": 1,
@@ -186,7 +175,8 @@
         },
         "spacing": {
             "left": 16,
-            "right": 16
+            "right": 16,
+            "icon": 8
         },
         "clickbound": 48,
         "focus": {
@@ -195,7 +185,7 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(0, 79, 84, 1)",
+        "hoverBackground": "rgba(179, 13, 46, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
@@ -203,11 +193,11 @@
         "height": 36,
         "background": "transparent",
         "border": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(235, 0, 0, 1)",
             "width": 1,
             "radius": 4
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(235, 0, 0, 1)",
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -227,7 +217,7 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "hoverBackground": "rgba(255, 194, 194, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
@@ -239,7 +229,7 @@
             "width": 1,
             "radius": 4
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(235, 0, 0, 1)",
         "typography": {
             "font": "Equinor-Medium",
             "fontSize": 14,
@@ -259,13 +249,13 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
+        "hoverBackground": "rgba(255, 194, 194, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
     "contained": {
         "height": 36,
-        "background": "rgba(0, 112, 120, 1)",
+        "background": "rgba(235, 0, 0, 1)",
         "border": {
             "color": "transparent",
             "width": 1,
@@ -290,7 +280,7 @@
             "width": 2,
             "gap": 8
         },
-        "hoverBackground": "rgba(0, 79, 84, 1)",
+        "hoverBackground": "rgba(179, 13, 46, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     }

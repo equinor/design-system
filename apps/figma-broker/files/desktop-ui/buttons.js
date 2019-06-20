@@ -27,17 +27,19 @@ const buildProps = (states) => {
     if (button) {
       const button_ = R.head(button.children)
       const { cornerRadius, strokeWeight, absoluteBoundingBox } = button_
-      const {height} = absoluteBoundingBox
+      const { height } = absoluteBoundingBox
       const fill = button_.fills.find(withType('solid')) || fallback
       const stroke = button_.strokes.find(withType('solid')) || fallback
 
       buttonProps = {
         ...buttonProps,
-        cornerRadius,
         height,
         background: colortoRgba(fill.color),
-        borderColor: colortoRgba(stroke.color),
-        borderWidth: strokeWeight,
+        border: {
+          color: colortoRgba(stroke.color),
+          width: strokeWeight,
+          radius: cornerRadius,
+        },
       }
     }
 
@@ -49,9 +51,11 @@ const buildProps = (states) => {
         letterSpacing,
         lineHeightPx,
       } = label.style
+      const fill = label.fills.find(withType('solid')) || fallback
 
       buttonProps = {
         ...buttonProps,
+        color: colortoRgba(fill.color),
         typography: {
           font: fontPostScriptName,
           fontSize,
