@@ -57,3 +57,20 @@ export const colortoRgba = (color) => {
 
   return `rgba(${rgbColors.r}, ${rgbColors.g}, ${rgbColors.b}, ${a * 1})`
 }
+
+export const getSpacingValue = (name, box) => {
+  if (R.test(/Vertical/, name)) {
+    return box.width
+  }
+  if (R.test(/Horizontal/, name)) {
+    return box.height
+  }
+  return 0
+}
+
+export const withName = R.curry((regExp, node) =>
+  R.test(new RegExp(regExp, 'i'), node.name),
+)
+export const withType = R.curry((regExp, node) =>
+  R.test(new RegExp(regExp, 'i'), node.type),
+)

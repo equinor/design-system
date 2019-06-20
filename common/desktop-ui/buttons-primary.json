@@ -11,10 +11,14 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -34,10 +38,14 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -46,13 +54,14 @@
         "pressedOpacity": 0.2
     },
     "ghost-icon": {
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
+        "hoverBackground": "rgba(222, 237, 237, 1)",
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
@@ -68,10 +77,15 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16,
+            "icon": 8
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -91,10 +105,14 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "icon": 8
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -114,10 +132,15 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16,
+            "icon": 8
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -137,10 +160,14 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -160,10 +187,15 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16,
+            "icon": 8
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -183,10 +215,15 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16,
+            "icon": 8
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },
@@ -206,10 +243,14 @@
             "letterSpacing": 0,
             "lineHeight": 16
         },
-        "focusColor": "rgba(0, 112, 120, 1)",
-        "focusWidth": 2,
-        "focusStyle": {
+        "spacing": {
+            "left": 16,
+            "right": 16
+        },
+        "clickbound": 48,
+        "focus": {
             "type": "dashed",
+            "color": "rgba(0, 112, 120, 1)",
             "width": 2,
             "gap": 8
         },

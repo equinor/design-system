@@ -1,129 +1,34 @@
-import { formatName, colortoRgba } from '@utils'
+import {
+  formatName,
+  colortoRgba,
+  getSpacingValue,
+  withName,
+  withType,
+} from '@utils'
 import * as R from 'ramda'
-import { relative } from 'path'
 
-const getChildren = (acc, x) => [...acc, ...x.children]
-
-const componentId = ({ componentId }) => componentId
-
-const getComponents = R.pipe(
-  R.reduce(getChildren, []),
-  R.groupBy(componentId),
-  R.mapObjIndexed((comps, id) =>
-    id === 'undefined' ? comps : R.mergeAll(comps),
-  ),
-)
-
-const componentToProp = ([id, comps]) => {
-  if (id === 'undefined') {
-    // handles components without name
-    const text = R.pipe(
-      R.filter((x) => x.type === 'TEXT'),
-      R.mergeAll,
-      (x) => (R.isEmpty(x) ? { style: {} } : x),
-    )(comps)
-
-    const {
-      fontPostScriptName,
-      fontSize,
-      fontWeight,
-      letterSpacing,
-      lineHeightPx,
-    } = text.style
-
-    return {
-      typography: {
-        font: fontPostScriptName,
-        fontSize,
-        fontWeight,
-        letterSpacing,
-        lineHeight: lineHeightPx,
-      },
-    }
-  } else {
-    const name = formatName(comps.name)
-
-    if (R.test(/button/, name)) {
-      const comp = comps.children[0]
-      const fill = comp.fills.find((x) => x.type === 'SOLID')
-      const stroke = comp.strokes.find((x) => x.type === 'SOLID')
-      const { cornerRadius, strokeWeight } = comp
-
-      return {
-        cornerRadius,
-        background: colortoRgba(fill.color),
-        borderColor: stroke ? colortoRgba(stroke.color) : '',
-        borderWidth: strokeWeight,
-      }
-    }
-    // TODO: Get Fonda to fix spacing components, left & right spacer name would be best
-    if (R.test(/space/, name)) {
-      const { width } = comps.absoluteBoundingBox
-      const { horizontal } = comps.constraints
-
-      return { spacing: width }
-    }
-    // TODO: Get Fonda to fix naming
-    if (R.test(/clickbound|standard/, name)) {
-      const { height } = comps.absoluteBoundingBox
-      return {
-        clickbound: height,
-      }
-    }
-
-    if (R.test(/focused/, name)) {
-      const comp = comps.children[0]
-      const fill = comp.fills.find((x) => x.type === 'SOLID')
-      const stroke = comp.strokes.find((x) => x.type === 'SOLID')
-      const { strokeDashes, strokeWeight } = comp
-      // TODO: Figure out how to properly extract dashed border
-      const focusStyle = typeof strokeDashes === 'undefined' ? '' : 'dashed'
-      return {
-        focusColor: stroke ? colortoRgba(stroke.color) : '',
-        focusWidth: strokeWeight,
-        focusStyle,
-      }
-    }
-
-    if (R.test(/dots/, name)) {
-      return {}
-    }
-
-    if (R.test(/hover-hand/, name)) {
-      return {}
-    }
-    if (R.test(/placeholder/, name)) {
-      return {}
-    }
-
-    console.log(`Missing clause: ${name}`)
-  }
-}
-
-const fallback = {
-  // color: { r: 1, g: 1, b: 1, a: 1 },
-}
+const fallback = {}
 
 const buildProps = (states) => {
   let buttonProps = {}
 
-  const pressed = states.find((x) => x.name === 'Pressed')
-  const hovered = states.find((x) => x.name === 'Hover')
-  const focused = states.find((x) => x.name === 'Focused')
-  const loading = states.find((x) => x.name === 'Loading')
-  const enabled = states.find((x) => x.name === 'Enabled')
+  const pressed = R.find(withName('pressed'), states)
+  const hovered = R.find(withName('hover'), states)
+  const focused = R.find(withName('focused'), states)
+  const enabled = R.find(withName('enabled'), states)
 
   if (enabled) {
     const components = enabled.children
-    const button = R.find((x) => x.name === 'Button', components)
-    const label = R.find((x) => x.name === 'Label', components)
-    const spacers = R.filter((x) => R.test(/Spacing/, x.name), components)
+    const button = R.find(withName('button'), components)
+    const label = R.find(withName('label'), components)
+    const spacing = R.filter(withName('spacing'), components)
+    const clickbounds = R.find(withName('clickbounds'), components)
 
     if (button) {
-      const button_ = button.children[0]
-      const fill = button_.fills.find((x) => x.type === 'SOLID') || fallback
-      const stroke = button_.strokes.find((x) => x.type === 'SOLID') || fallback
+      const button_ = R.head(button.children)
       const { cornerRadius, strokeWeight } = button_
+      const fill = button_.fills.find(withType('solid')) || fallback
+      const stroke = button_.strokes.find(withType('solid')) || fallback
 
       buttonProps = {
         ...buttonProps,
@@ -155,27 +60,61 @@ const buildProps = (states) => {
       }
     }
 
-    if (spacers.length > 0) {
-      console.log(spacers)
+    if (spacing.length > 0) {
+      // Spacing can be used in any form, so we create an object
+      // with names prefixed with "Spacing" in figma
+      const spacingProps = R.reduce(
+        (acc, val) => {
+          const spacer = R.head(val.children)
+          if (spacer) {
+            const name = R.head(R.match(/(?<=Spacing\s).*/i, val.name))
+            const spacingValue = getSpacingValue(
+              spacer.name,
+              spacer.absoluteBoundingBox,
+            )
+            return {
+              ...acc,
+              [name]: spacingValue,
+            }
+          }
+          return acc
+        },
+        {},
+        spacing,
+      )
+
+      buttonProps = {
+        ...buttonProps,
+        spacing: spacingProps,
+      }
+    }
+
+    if (clickbounds) {
+      const clickbound = R.head(clickbounds.children)
+      const { height } = clickbound.absoluteBoundingBox
+
+      buttonProps = {
+        ...buttonProps,
+        clickbound: height,
+      }
     }
   }
 
   if (focused) {
-    const focus = R.find((x) => x.name === 'Focused', focused.children)
+    const focus = R.find(withName('focused'), focused.children)
 
     if (focus) {
-      const focus_ = focus.children[0]
-      const stroke = focus_.strokes.find((x) => x.type === 'SOLID') || fallback
-      const { strokeDashes, strokeWeight } = focus_
+      const focus_ = R.head(focus.children)
+      const { strokeDashes } = focus_
       const [dashWidth, dashGap] = strokeDashes
+      const stroke = focus_.strokes.find(withType('solid')) || fallback
       const focusStyle = typeof strokeDashes === 'undefined' ? '' : 'dashed'
 
       buttonProps = {
         ...buttonProps,
-        focusColor: colortoRgba(stroke.color),
-        focusWidth: strokeWeight,
-        focusStyle: {
+        focus: {
           type: focusStyle,
+          color: colortoRgba(stroke.color),
           width: dashWidth,
           gap: dashGap,
         },
@@ -184,11 +123,11 @@ const buildProps = (states) => {
   }
 
   if (hovered) {
-    const hover = R.find((x) => x.name === 'Button', hovered.children)
+    const hover = R.find(withName('button'), hovered.children)
 
     if (hover) {
-      const hover_ = hover.children[0]
-      const fill = hover_.fills.find((x) => x.type === 'SOLID') || fallback
+      const hover_ = R.head(hover.children)
+      const fill = hover_.fills.find(withType('solid')) || fallback
 
       buttonProps = {
         ...buttonProps,
@@ -198,19 +137,13 @@ const buildProps = (states) => {
   }
 
   if (pressed) {
-    const pressedOverlay = R.find(
-      (x) => x.name === 'Pressed Overlay',
-      pressed.children,
-    )
+    const pressedOverlay = R.find(withName('pressed overlay'), pressed.children)
 
     if (pressedOverlay) {
-      const pressedOverlay_ = R.find(
-        (x) => R.test(/Overlay/, x.name),
-        pressedOverlay.children,
-      ).children[0]
-
-      const fill =
-        pressedOverlay_.fills.find((x) => x.type === 'SOLID') || fallback
+      const pressedOverlay_ = R.head(
+        R.find(withName('overlay'), pressedOverlay.children).children,
+      )
+      const fill = pressedOverlay_.fills.find(withType('solid')) || fallback
       const opacity = Math.round(fill.opacity * 100) / 100
 
       buttonProps = {
@@ -226,11 +159,10 @@ const buildProps = (states) => {
 
 export const makeButtonsComponent = (buttons) =>
   buttons
-    .filter((x) => x.type === 'FRAME')
-    .map((x) => {
-      const states = x.children.filter((x) => x.type === 'COMPONENT')
-
-      const name = formatName(x.name)
+    .filter(withType('frame'))
+    .map((node) => {
+      const name = formatName(node.name)
+      const states = R.filter(withType('component'), node.children)
       const buttonProps = buildProps(states)
 
       return {
