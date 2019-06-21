@@ -17,7 +17,7 @@ const Base = ({ base }) => {
     return ``
   }
 
-  const { border, spacing, typography } = base
+  const { border, spacing, typography, focus } = base
 
   return `
     height: ${base.height}px;
@@ -46,12 +46,21 @@ const Base = ({ base }) => {
       content: '';
     }
 
+    &:hover {
+      background: ${base.hoverBackground};
+    }
+
+    &:focus {
+      outline-offset: ${focus.width}px;
+      outline: ${focus.width}px ${focus.type} ${focus.color};
+    }
 
 `
 }
 
 const ButtonBase = styled.button.attrs(() => ({
   type: 'button',
+  aria: 'button',
 }))`
   ${Base}
   position:relative;
@@ -65,7 +74,6 @@ const ButtonBase = styled.button.attrs(() => ({
     min-height: auto;
     content: '';
   }
-
 `
 
 // TODO:
