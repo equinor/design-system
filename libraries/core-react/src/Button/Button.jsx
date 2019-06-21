@@ -39,7 +39,7 @@ const Base = ({ base }) => {
 
     &::after {
       position: absolute;
-      top:0;
+      top:-6px;
       left:0;
       width: 100%;
       height: ${base.clickbound}px;
@@ -54,6 +54,7 @@ const ButtonBase = styled.button.attrs(() => ({
   type: 'button',
 }))`
   ${Base}
+  position:relative;
   cursor: pointer;
   text-align: center;
   &::before {
@@ -64,6 +65,7 @@ const ButtonBase = styled.button.attrs(() => ({
     min-height: auto;
     content: '';
   }
+
 `
 
 // TODO:
