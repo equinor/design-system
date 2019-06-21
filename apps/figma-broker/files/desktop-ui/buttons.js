@@ -16,9 +16,10 @@ const buildProps = (states) => {
   const hovered = R.find(withName('hover'), states)
   const focused = R.find(withName('focused'), states)
   const enabled = R.find(withName('enabled'), states)
+  const disabled = R.find(withName('disabled'), states)
 
-  if (enabled) {
-    const components = enabled.children
+  if (enabled || disabled) {
+    const components = (enabled || disabled).children
     const button = R.find(withName('button'), components)
     const label = R.find(withName('label'), components)
     const spacing = R.filter(withName('spacing'), components)

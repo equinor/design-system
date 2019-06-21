@@ -4,14 +4,19 @@ import styled from 'styled-components'
 import primaryButtonTokens from '../../../../common/desktop-ui/buttons-primary.json'
 import secondaryButtonTokens from '../../../../common/desktop-ui/buttons-secondary.json'
 import dangerButtonTokens from '../../../../common/desktop-ui/buttons-danger.json'
+import disabledButtonTokens from '../../../../common/desktop-ui/buttons-disabled.json'
 
 const colors = {
   primary: primaryButtonTokens,
   secondary: secondaryButtonTokens,
   danger: dangerButtonTokens,
+  disabled: disabledButtonTokens,
 }
 
-const Base = ({ base }) => {
+// TODO: Is there a better way to handle css properties without
+// bloating with ${props => props.base.focus.color} etc...
+// Using simple template string for now, but missing css syntax highlight :(
+const Base = ({ base, baseDisabled: disabled }) => {
   if (!base) {
     // TODO: What to do when base does not exist
     return ``
@@ -55,6 +60,25 @@ const Base = ({ base }) => {
       outline: ${focus.width}px ${focus.type} ${focus.color};
     }
 
+    &:disabled {
+      cursor: not-allowed;
+      background: ${disabled.background};
+      color: ${disabled.color};
+
+      border-radius: ${disabled.border.radius}px;
+      border-color: ${disabled.border.color};
+      border-width: ${disabled.border.width}px;
+
+      font-family: ${disabled.typography.font};
+      font-size: ${disabled.typography.fontSize}px;
+      font-weight: ${disabled.typography.fontWeight};
+      line-height: ${disabled.typography.lineHeight}px;
+      letter-spacing: ${disabled.typography.letterSpacing}px;
+
+      &:hover {
+        background: ${disabled.background};
+      }
+    }
 `
 }
 
@@ -85,9 +109,15 @@ const ButtonBase = styled.button.attrs(() => ({
 const Button = ({ variant, children, disabled, className, color }) => {
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
+  const baseDisabled = colors.disabled[variant] || {}
 
   return (
-    <ButtonBase className={className} base={base} disabled={disabled}>
+    <ButtonBase
+      base={base}
+      baseDisabled={baseDisabled}
+      className={className}
+      disabled={disabled}
+    >
       {children}
     </ButtonBase>
   )
