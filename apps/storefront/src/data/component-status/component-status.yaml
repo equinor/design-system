@@ -56,7 +56,7 @@ components:
       vanilla:
         - *1
       react:
-        - *1
+        - *3
   - component: Cards
     status:
       documentation:
