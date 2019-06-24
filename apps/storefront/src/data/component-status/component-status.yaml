@@ -35,7 +35,16 @@ statuses:
 # This is the actual list of components.
 components:
   - component: Accordion
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Buttons
     status:
       documentation:
@@ -61,7 +70,17 @@ components:
       react:
         - *1
   - component: Divider
-    status: *defaultStatus
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1  
   - component: List
     status: *defaultStatus
   - component: Link
@@ -76,16 +95,54 @@ components:
         - *1
       react:
         - *1
+  - component: "Menu"  
+      status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Navigation: App launcher"
     status: *defaultStatus
   - component: "Navigation: Breadcrumbs"
     status: *defaultStatus
   - component: "Navigation: Navigation Drawer"
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Navigation: Pagination"
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Navigation: Table of contents"
-    status: *defaultStatus
+      status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        _ *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Navigation: Tabs"
     status:
       documentation:
@@ -99,7 +156,16 @@ components:
       react:
         - *1
   - component: "Navigation: Top bar"
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: "Notification: Banner"
     status: *defaultStatus
   - component: "Notification: Dialog"
@@ -123,13 +189,30 @@ components:
       react:
         - *1
   - component: Selection controls
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Slider
     status: *defaultStatus
   - component: Table
     status: *defaultStatus
   - component: Text inputs
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Tooltip
     status:
       documentation:
