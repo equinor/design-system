@@ -30,9 +30,11 @@ const ComponentStatus = () => {
     }
   `)
 
-  const { headers } = data.allComponentStatusYaml.edges[0].node
-  const { summary } = data.allComponentStatusYaml.edges[0].node
-  const { components } = data.allComponentStatusYaml.edges[0].node
+  const {
+    headers,
+    summary,
+    components,
+  } = data.allComponentStatusYaml.edges[0].node
 
   return (
     <Table summary={summary}>
