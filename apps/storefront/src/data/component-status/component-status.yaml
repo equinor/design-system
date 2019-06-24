@@ -80,6 +80,8 @@ components:
     status: *defaultStatus
   - component: "Navigation: Breadcrumbs"
     status: *defaultStatus
+  - component: "Navigation: Navigation Drawer"
+    status: *defaultStatus
   - component: "Navigation: Pagination"
     status: *defaultStatus
   - component: "Navigation: Table of contents"
