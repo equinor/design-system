@@ -7,6 +7,7 @@
   --Sidebar-backgroundColor: white;
   --Sidebar-activeLink-backgroundColor: gainsboro;
   --Sidebar-shadowColor: #666;
+  --Banner-height: 40px;
   --Header-height: 64px;
   --Toc-width: 167px;
   --Sidebar-width: 240px;
@@ -58,25 +59,28 @@ td {
 .Page {
   display: grid;
   grid-template-areas:
+    'banner'
     'header'
     'main';
   grid-template-columns: 1fr;
-  grid-template-rows: var(--Header-height) 1fr;
+  grid-template-rows: var(--Banner-height) var(--Header-height) 1fr;
 
   @media (--small) {
     grid-template-areas:
+      'banner banner'
       'header header'
       'main toc';
     grid-template-columns: 1fr var(--Toc-width);
-    grid-template-rows: var(--Header-height) 1fr;
+    grid-template-rows: var(--Banner-height) var(--Header-height) 1fr;
   }
 
   @media (--large) {
     grid-template-areas:
+      'banner banner banner'
       'sidebar header header'
       'sidebar main toc';
     grid-template-columns: var(--Sidebar-width) 1fr var(--Toc-width);
-    grid-template-rows: var(--Header-height) 1fr;
+    grid-template-rows: var(--Banner-height) var(--Header-height) 1fr;
   }
 }
 
@@ -121,7 +125,7 @@ td {
   height: 64px;
   position: fixed;
   left: 0;
-  top: 0;
+  top: var(--Banner-height);
   width: 100vw;
   background-color: var(--backgroundColor);
   border-bottom: 1px solid var(--borderColor);
@@ -150,7 +154,7 @@ td {
   z-index: 1;
   position: fixed;
   top: 0;
-  left: 0;
+  left: var(--Banner-height);
   height: 100vh;
   width: 100vw;
   display: none;
@@ -162,7 +166,7 @@ td {
     z-index: 1;
 
     position: fixed;
-    top: 0;
+    top: var(--Banner-height);
     left: 0;
 
     width: var(--Sidebar-width);
@@ -180,7 +184,7 @@ td {
     background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
     left: 0;
-    top: 0;
+    top: var(--Banner-height);
     width: 100vw;
     height: 100vh;
 
