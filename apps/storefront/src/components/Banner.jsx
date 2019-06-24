@@ -33,6 +33,10 @@ const Wrapper = styled.div`
       overflow: hidden;
       white-space: nowrap;
     }
+
+    @media (min-width: 1200px) {
+      padding-left: 2rem;
+    }
   }
 
   & > :last-child {
