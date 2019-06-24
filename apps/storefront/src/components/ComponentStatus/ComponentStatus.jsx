@@ -1,9 +1,11 @@
+/* eslint-disable react/no-array-index-key */
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import styled from 'styled-components'
 import { readableColor } from 'polished'
+import { camelify, kebabify } from '../../utils'
 
 const ComponentStatus = () => {
   const data = useStaticQuery(graphql`
@@ -28,17 +30,9 @@ const ComponentStatus = () => {
     }
   `)
 
-  const headers = data.allComponentStatusYaml.edges[0].node.headers
-  const summary = data.allComponentStatusYaml.edges[0].node.summary
-  const components = data.allComponentStatusYaml.edges[0].node.components
-  const camelify = (title) =>
-    title
-      .toLowerCase()
-      .split(' ')
-      .map((word, index) =>
-        index > 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word,
-      )
-      .join('')
+  const { headers } = data.allComponentStatusYaml.edges[0].node
+  const { summary } = data.allComponentStatusYaml.edges[0].node
+  const { components } = data.allComponentStatusYaml.edges[0].node
 
   return (
     <Table summary={summary}>
@@ -55,7 +49,9 @@ const ComponentStatus = () => {
         {components.map((component, index) => (
           <Tr key={component.component + index}>
             <ThV key={component.component + index} scope="row">
-              {component.component}
+              <Link to={`/components/${kebabify(component.component)}`}>
+                {component.component}
+              </Link>
             </ThV>
             {Object.values(component.status).map((statuses, index) => (
               <Td key={camelify(statuses.join('-')) + index}>
