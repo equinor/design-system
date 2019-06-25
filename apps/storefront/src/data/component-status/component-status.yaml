@@ -96,7 +96,7 @@ components:
       react:
         - *1
   - component: "Menu"  
-      status:
+    status:
       documentation:
         - *3
       figma:
