@@ -23,33 +23,32 @@ const Base = ({ base, baseDisabled: disabled }) => {
   }
 
   const { border, spacing, typography, focus } = base
-  const clickboundOffset = (base.clickbound - base.height) / 2
 
   return `
-    height: ${base.height}px;
+    height: ${base.height};
     background: ${base.background};
     color: ${base.color};
 
-    border-radius: ${border.radius}px;
+    border-radius: ${border.radius};
     border-color: ${border.color};
-    border-width: ${border.width}px;
+    border-width: ${border.width};
 
-    padding-left: ${spacing.left}px;
-    padding-right: ${spacing.right}px;
+    padding-left: ${spacing.left};
+    padding-right: ${spacing.right};
 
-    font-family: ${typography.font};
-    font-size: ${typography.fontSize}px;
+    font-family: ${typography.fontFamily};
+    font-size: ${typography.fontSize};
     font-weight: ${typography.fontWeight};
-    line-height: ${typography.lineHeight}px;
-    letter-spacing: ${typography.letterSpacing}px;
+    line-height: ${typography.lineHeight};
+    letter-spacing: ${typography.letterSpacing};
     text-align: ${typography.textAlign};
 
     &::after {
       position: absolute;
-      top:-${clickboundOffset}px;
+      top:-${base.clickboundOffset};
       left:0;
       width: 100%;
-      height: ${base.clickbound}px;
+      height: ${base.clickbound};
       content: '';
     }
 
@@ -58,8 +57,8 @@ const Base = ({ base, baseDisabled: disabled }) => {
     }
 
     &:focus {
-      outline-offset: ${focus.width}px;
-      outline: ${focus.width}px ${focus.type} ${focus.color};
+      outline-offset: ${focus.width};
+      outline: ${focus.width} ${focus.type} ${focus.color};
     }
 
     &:disabled {
@@ -67,16 +66,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
       background: ${disabled.background};
       color: ${disabled.color};
 
-      border-radius: ${disabled.border.radius}px;
       border-color: ${disabled.border.color};
-      border-width: ${disabled.border.width}px;
-
-      font-family: ${disabled.typography.font};
-      font-size: ${disabled.typography.fontSize}px;
-      font-weight: ${disabled.typography.fontWeight};
-      line-height: ${disabled.typography.lineHeight}px;
-      letter-spacing: ${disabled.typography.letterSpacing}px;
-      text-align: ${disabled.typography.textAlign};
 
       &:hover {
         background: ${disabled.background};

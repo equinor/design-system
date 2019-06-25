@@ -9,6 +9,12 @@ import * as R from 'ramda'
 
 const fallback = {}
 
+const rootFontSize = 16
+
+const px = (unit) => `${unit}px`
+const em = (unit) => `${unit}em`
+const rem = (unit) => `${unit}rem`
+
 const buildProps = (states) => {
   let buttonProps = {}
 
@@ -34,36 +40,39 @@ const buildProps = (states) => {
 
       buttonProps = {
         ...buttonProps,
-        height,
+        height: px(height),
         background: colortoRgba(fill.color),
         border: {
           color: colortoRgba(stroke.color),
-          width: strokeWeight,
-          radius: cornerRadius,
+          width: px(strokeWeight),
+          radius: px(cornerRadius),
         },
       }
     }
 
     if (label) {
       const {
-        fontPostScriptName,
+        fontFamily,
         fontSize,
         fontWeight,
         letterSpacing,
-        lineHeightPx,
         textAlignHorizontal = 'center',
+        lineHeightPercentFontSize,
       } = label.style
       const fill = label.fills.find(withType('solid')) || fallback
 
+      const fontSizeRem = (fontSize / rootFontSize).toFixed(3)
+      const lineHeightEm = (lineHeightPercentFontSize / 100).toFixed(3)
+      const letterSpacingEm = (letterSpacing / fontSizeRem).toFixed(3)
       buttonProps = {
         ...buttonProps,
         color: colortoRgba(fill.color),
         typography: {
-          font: fontPostScriptName,
-          fontSize,
+          fontFamily,
+          fontSize: rem(fontSizeRem),
           fontWeight,
-          letterSpacing,
-          lineHeight: lineHeightPx,
+          letterSpacing: letterSpacing ? em(letterSpacingEm) : 0,
+          lineHeight: em(lineHeightEm),
           textAlign: R.toLower(textAlignHorizontal),
         },
       }
@@ -71,7 +80,7 @@ const buildProps = (states) => {
 
     if (spacing.length > 0) {
       // Spacing can be used in any form, so we create an object
-      // with names prefixed with "Spacing" in figma
+      // with names prefixed with "Spacing" in figma´
       const spacingProps = R.reduce(
         (acc, val) => {
           const spacer = R.head(val.children)
@@ -83,7 +92,7 @@ const buildProps = (states) => {
             )
             return {
               ...acc,
-              [name]: spacingValue,
+              [name]: px(spacingValue),
             }
           }
           return acc
@@ -101,10 +110,12 @@ const buildProps = (states) => {
     if (clickbounds) {
       const clickbound = R.head(clickbounds.children)
       const { height } = clickbound.absoluteBoundingBox
+      const clickboundOffset = (height - parseInt(buttonProps.height, 10)) / 2
 
       buttonProps = {
         ...buttonProps,
-        clickbound: height,
+        clickbound: px(height),
+        clickboundOffset: px(clickboundOffset),
       }
     }
   }
@@ -124,8 +135,8 @@ const buildProps = (states) => {
         focus: {
           type: focusStyle,
           color: colortoRgba(stroke.color),
-          width: dashWidth,
-          gap: dashGap,
+          width: px(dashWidth),
+          gap: px(dashGap),
         },
       }
     }
