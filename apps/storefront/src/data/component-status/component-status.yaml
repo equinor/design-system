@@ -34,6 +34,17 @@ statuses:
 
 # This is the actual list of components.
 components:
+  - component: Accordion
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Buttons
     status:
       documentation:
@@ -45,7 +56,7 @@ components:
       vanilla:
         - *1
       react:
-        - *1
+        - *3
   - component: Cards
     status:
       documentation:
@@ -59,10 +70,6 @@ components:
       react:
         - *1
   - component: Divider
-    status: *defaultStatus
-  - component: Expansion panel
-    status: *defaultStatus
-  - component: Links
     status:
       documentation:
         - *4
@@ -74,17 +81,9 @@ components:
         - *1
       react:
         - *1
-  - component: Lists
+  - component: List
     status: *defaultStatus
-  - component: 'Navigation app launcher'
-    status: *defaultStatus
-  - component: 'Navigation breadcrumbs'
-    status: *defaultStatus
-  - component: 'Navigation pagination'
-    status: *defaultStatus
-  - component: 'Navigation table of contents'
-    status: *defaultStatus
-  - component: 'Navigation tabs'
+  - component: Link
     status:
       documentation:
         - *4
@@ -96,13 +95,82 @@ components:
         - *1
       react:
         - *1
-  - component: 'Navigation top bar'
+  - component: 'Menu'
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: 'Navigation: App launcher'
     status: *defaultStatus
-  - component: 'Notification banner'
+  - component: 'Navigation: Breadcrumbs'
     status: *defaultStatus
-  - component: 'Notification dialog'
+  - component: 'Navigation: Navigation Drawer'
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: 'Navigation: Pagination'
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: 'Navigation: Table of contents'
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: 'Navigation: Tabs'
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: 'Navigation: Top bar'
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: 'Notification: Banner'
     status: *defaultStatus
-  - component: 'Notification snackbar'
+  - component: 'Notification: Dialog'
+    status: *defaultStatus
+  - component: 'Notification: Snackbar'
     status: *defaultStatus
   - component: Popovers
     status: *defaultStatus
@@ -121,13 +189,30 @@ components:
       react:
         - *1
   - component: Selection controls
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Slider
     status: *defaultStatus
   - component: Table
     status: *defaultStatus
   - component: Text inputs
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Tooltip
     status:
       documentation:

@@ -38,13 +38,14 @@
 - title: Components
   subNav:
     - Component status
+    - Accordion
     - Buttons
     - Cards
     - Divider
-    - Expansion panel
     - Links
     - Lists
     - Navigation app launcher
+    - Navigation navigation drawer
     - Navigation breadcrumbs
     - Navigation pagination
     - Navigation table of contents

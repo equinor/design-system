@@ -6,7 +6,7 @@ tabs:
 mode: draft
 ---
 
-**Ingress**
+***Selection controls* allow users to select options, make decisions and set preferences.**
 <!--One to two sentences as an introduction to the component-->
 
 ***
@@ -14,22 +14,79 @@ mode: draft
 ## Guidelines
 <!--List how to use it, sizes, widths, grid interactions, color allowances -->
 
+Selection controls are to be visible and understandable at a quick glance. Selected options are more visable than unselected. Selection controls are always accompanied with a clear label. Make sure that the labels are surrounded with a `Clickbound` that activates the selection control as well as the control itself.
+
 
 **Don't**
 <!--Bullet point list if needed -->
 
+* Do not mix different selection controls within a grouped list. 
+* Do not use a selection control without a label.
+* Do not resize any of the selection controls. 
 
 ## Variations 
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
 
 
-### Varitaion name
-<!--One ### heading per frame in Figma, explaning each componnet in that frame. One 'content' section per variation if needed -->
+### Switch
 
-:warning: Collapsible mega embed coming soon
+Switches allow users to toggle a single item between two possible states, taking immediate action. The most common states for a switch is "on/off". There are two variations of the switch provided, `Small switch` and `Switch`. The small switch is best for tight spaces and should be used with caution. 
+
+**Don't**
+<!--Bullet point list if needed -->
+
+* Do not nest switches, use checkboxes instead. 
+
+#### Small switch on
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A976" />
+
+#### Small switch off
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A977" />
+
+#### Switch on
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1471%3A2" />
+
+#### Switch off
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1471%3A14" />
 
 
-#### Content
+### Checkbox
+
+Checkboxes allow users to select one or more items from a list. Checkboxes can be used to turn an option on or off. Generally, checkboxes are used with a confirmation action, however, they can also take immediate effect. The default state of a checkbox is having no option selected. 
+
+Checkboxes can be nested children.
+  * When a parent checkbox is selected, all following children are selected. 
+  * When a parent checkbox is unselected, all following children are unselected. 
+  * When a child is unselected while other children are selected, the parent checkbox becomes indeterminate. 
+ 
 
 
+#### Checkbox selected
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A978" />
 
-## Interactions
+#### Checkbox unselected
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A979" />
+
+#### Checkbox indeterminate
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A980" />
+
+
+### Radio button
+
+Radio buttons allow users to choose one single option from a list of mutually exclusive options. The default state of a radio button is to have one option selected. 
+
+
+**Don't**
+<!--Bullet point list if needed -->
+
+* Do not use radio buttons when the user can select more than one item. 
+* Do not use a radio button without one item being selected by default. 
+
+#### Radio button selected
+
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A981" />
+
+#### Radio button unselected
+
+<Embed url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A982" />
+
