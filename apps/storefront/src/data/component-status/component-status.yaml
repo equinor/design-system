@@ -18,7 +18,7 @@ states:
   2: &2 New
   3: &3 Under construction
   4: &4 Available
-  5: &5 "-"
+  5: &5 '-'
 
 # Some predefined statuses
 statuses:
@@ -62,9 +62,7 @@ components:
     status: *defaultStatus
   - component: Expansion panel
     status: *defaultStatus
-  - component: List
-    status: *defaultStatus
-  - component: Link
+  - component: Links
     status:
       documentation:
         - *4
@@ -76,15 +74,17 @@ components:
         - *1
       react:
         - *1
-  - component: "Navigation: App launcher"
+  - component: Lists
     status: *defaultStatus
-  - component: "Navigation: Breadcrumbs"
+  - component: 'Navigation app launcher'
     status: *defaultStatus
-  - component: "Navigation: Pagination"
+  - component: 'Navigation breadcrumbs'
     status: *defaultStatus
-  - component: "Navigation: Table of contents"
+  - component: 'Navigation pagination'
     status: *defaultStatus
-  - component: "Navigation: Tabs"
+  - component: 'Navigation table of contents'
+    status: *defaultStatus
+  - component: 'Navigation tabs'
     status:
       documentation:
         - *4
@@ -96,13 +96,13 @@ components:
         - *1
       react:
         - *1
-  - component: "Navigation: Top bar"
+  - component: 'Navigation top bar'
     status: *defaultStatus
-  - component: "Notification: Banner"
+  - component: 'Notification banner'
     status: *defaultStatus
-  - component: "Notification: Dialog"
+  - component: 'Notification dialog'
     status: *defaultStatus
-  - component: "Notification: Snackbar"
+  - component: 'Notification snackbar'
     status: *defaultStatus
   - component: Popovers
     status: *defaultStatus
