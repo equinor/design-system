@@ -18,7 +18,7 @@ states:
   2: &2 New
   3: &3 Under construction
   4: &4 Available
-  5: &5 "-"
+  5: &5 '-'
 
 # Some predefined statuses
 statuses:
@@ -80,7 +80,7 @@ components:
       vanilla:
         - *1
       react:
-        - *1  
+        - *1
   - component: List
     status: *defaultStatus
   - component: Link
@@ -95,7 +95,7 @@ components:
         - *1
       react:
         - *1
-  - component: "Menu"  
+  - component: 'Menu'
     status:
       documentation:
         - *3
@@ -106,11 +106,11 @@ components:
         - *1
       react:
         - *1
-  - component: "Navigation: App launcher"
+  - component: 'Navigation: App launcher'
     status: *defaultStatus
-  - component: "Navigation: Breadcrumbs"
+  - component: 'Navigation: Breadcrumbs'
     status: *defaultStatus
-  - component: "Navigation: Navigation Drawer"
+  - component: 'Navigation: Navigation Drawer'
     status:
       documentation:
         - *3
@@ -121,7 +121,7 @@ components:
         - *1
       react:
         - *1
-  - component: "Navigation: Pagination"
+  - component: 'Navigation: Pagination'
     status:
       documentation:
         - *3
@@ -132,18 +132,18 @@ components:
         - *1
       react:
         - *1
-  - component: "Navigation: Table of contents"
-      status:
+  - component: 'Navigation: Table of contents'
+    status:
       documentation:
         - *3
       figma:
         - *4
-        _ *2
+        - *2
       vanilla:
         - *1
       react:
         - *1
-  - component: "Navigation: Tabs"
+  - component: 'Navigation: Tabs'
     status:
       documentation:
         - *4
@@ -155,7 +155,7 @@ components:
         - *1
       react:
         - *1
-  - component: "Navigation: Top bar"
+  - component: 'Navigation: Top bar'
     status:
       documentation:
         - *3
@@ -166,11 +166,11 @@ components:
         - *1
       react:
         - *1
-  - component: "Notification: Banner"
+  - component: 'Notification: Banner'
     status: *defaultStatus
-  - component: "Notification: Dialog"
+  - component: 'Notification: Dialog'
     status: *defaultStatus
-  - component: "Notification: Snackbar"
+  - component: 'Notification: Snackbar'
     status: *defaultStatus
   - component: Popovers
     status: *defaultStatus
