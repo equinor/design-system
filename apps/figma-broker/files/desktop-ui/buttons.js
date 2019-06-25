@@ -51,6 +51,7 @@ const buildProps = (states) => {
         fontWeight,
         letterSpacing,
         lineHeightPx,
+        textAlignHorizontal = 'center',
       } = label.style
       const fill = label.fills.find(withType('solid')) || fallback
 
@@ -63,6 +64,7 @@ const buildProps = (states) => {
           fontWeight,
           letterSpacing,
           lineHeight: lineHeightPx,
+          textAlign: R.toLower(textAlignHorizontal),
         },
       }
     }

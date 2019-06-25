@@ -23,6 +23,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
   }
 
   const { border, spacing, typography, focus } = base
+  const clickboundOffset = (base.clickbound - base.height) / 2
 
   return `
     height: ${base.height}px;
@@ -41,10 +42,11 @@ const Base = ({ base, baseDisabled: disabled }) => {
     font-weight: ${typography.fontWeight};
     line-height: ${typography.lineHeight}px;
     letter-spacing: ${typography.letterSpacing}px;
+    text-align: ${typography.textAlign};
 
     &::after {
       position: absolute;
-      top:-6px;
+      top:-${clickboundOffset}px;
       left:0;
       width: 100%;
       height: ${base.clickbound}px;
@@ -74,6 +76,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
       font-weight: ${disabled.typography.fontWeight};
       line-height: ${disabled.typography.lineHeight}px;
       letter-spacing: ${disabled.typography.letterSpacing}px;
+      text-align: ${disabled.typography.textAlign};
 
       &:hover {
         background: ${disabled.background};
@@ -86,10 +89,11 @@ const ButtonBase = styled.button.attrs(() => ({
   type: 'button',
   aria: 'button',
 }))`
+  margin: 0;
+  padding: 0;
   ${Base}
-  position:relative;
+  position: relative;
   cursor: pointer;
-  text-align: center;
   &::before {
     position: absolute;
     top: 0;
@@ -106,7 +110,14 @@ const ButtonBase = styled.button.attrs(() => ({
 // - Use ThemeProvider
 // - Set attr on button
 
-const Button = ({ variant, children, disabled, className, color }) => {
+const Button = ({
+  variant,
+  children,
+  disabled,
+  className,
+  color,
+  ...other
+}) => {
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
@@ -117,6 +128,7 @@ const Button = ({ variant, children, disabled, className, color }) => {
       baseDisabled={baseDisabled}
       className={className}
       disabled={disabled}
+      {...other}
     >
       {children}
     </ButtonBase>
