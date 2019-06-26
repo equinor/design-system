@@ -102,6 +102,14 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: '5',
+        matomoUrl: 'https://matomo.sdpaks.equinor.com',
+        siteUrl: 'https://eds.equinor.com/',
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
