@@ -1,5 +1,5 @@
 {
-  "name": "@eds-ui/core-react",
+  "name": "@equinor/eds-core-react",
   "version": "0.0.1",
   "description": "",
   "main": "dist/core-react.cjs.js",
