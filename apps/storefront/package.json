@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "author": "",
   "dependencies": {
+    "@gatsby-contrib/gatsby-plugin-elasticlunr-search": "^2.3.0",
     "@mdx-js/mdx": "^0.20.3",
     "@mdx-js/tag": "^0.20.3",
     "@reach/router": "^1.2.1",
