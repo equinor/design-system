@@ -1,5 +1,5 @@
 {
-  "name": "@eds-ui/core",
+  "name": "@equinor/eds-core",
   "version": "0.0.1",
   "scripts": {
     "lint": "eslint ./src"

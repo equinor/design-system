@@ -1,5 +1,5 @@
 {
-  "name": "eds-react-storybook",
+  "name": "@equinor/eds-storybook-react",
   "version": "0.0.1",
   "scripts": {
     "start": "start-storybook",

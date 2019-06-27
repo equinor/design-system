@@ -1,5 +1,5 @@
 {
-  "name": "figma-broker",
+  "name": "@equinor/eds-figma-broker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
