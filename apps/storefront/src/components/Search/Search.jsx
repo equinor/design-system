@@ -30,10 +30,16 @@ export default class Search extends Component {
                 <Link
                   to={
                     '/' +
-                    page.slug.substr(0, page.slug.lastIndexOf(page.currentPage))
+                    (!page.tabs
+                      ? page.slug.substr(
+                          0,
+                          page.slug.lastIndexOf(page.currentPage),
+                        )
+                      : page.slug)
                   }
                 >
                   {page.searchTitle || page.title}
+                  {page.tabs ? ': ' + page.currentPage : null}
                 </Link>
               </li>
             ))}

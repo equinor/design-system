@@ -120,6 +120,7 @@ module.exports = {
           Mdx: {
             // content: (node) => node.rawBody,
             currentPage: (node) => node.fields.currentPage,
+            tabs: (node) => node.frontmatter.tabs,
             slug: (node) => node.fields.slug,
             title: (node) => node.frontmatter.title,
             searchTitle: (node) => node.frontmatter.searchTitle,
