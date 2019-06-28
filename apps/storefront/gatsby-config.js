@@ -110,6 +110,24 @@ module.exports = {
         siteUrl: 'https://eds.equinor.com/',
       },
     },
+    {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        // Fields to index
+        fields: [`title`],
+        resolvers: {
+          // For any node of type MarkdownRemark, list how to resolve the fields` values
+          Mdx: {
+            // content: (node) => node.rawBody,
+            currentPage: (node) => node.fields.currentPage,
+            tabs: (node) => node.frontmatter.tabs,
+            slug: (node) => node.fields.slug,
+            title: (node) => node.frontmatter.title,
+            searchTitle: (node) => node.frontmatter.searchTitle,
+          },
+        },
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

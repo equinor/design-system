@@ -1,13 +1,17 @@
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql, useStaticQuery, StaticQuery } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { kebabify } from '../../utils'
 import './Sidebar.css'
+import Search from '../Search/Search'
 
 const Sidebar = ({ location }) => {
   const data = useStaticQuery(graphql`
     query SidebarQuery {
+      siteSearchIndex {
+        index
+      }
       allNavigationYaml {
         edges {
           node {
@@ -43,6 +47,11 @@ const Sidebar = ({ location }) => {
     <nav className="Sidebar">
       <label className="Sidebar-veil" htmlFor="MenuToggler" />
       <div className="Sidebar-content">
+        <ul className="Sidebar-menu">
+          <li>
+            <Search searchIndex={data.siteSearchIndex.index} />
+          </li>
+        </ul>
         <ul className="Sidebar-menu">
           {data.allNavigationYaml.edges.map((item, index) => (
             <li
