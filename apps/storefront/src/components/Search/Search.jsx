@@ -49,20 +49,15 @@ export default class Search extends Component {
     )
   }
   getOrCreateIndex = () =>
-    this.index
-      ? this.index
-      : // Create an elastic lunr index and hydrate with graphql query results
-        Index.load(this.props.searchIndex)
+    this.index ? this.index : Index.load(this.props.searchIndex)
 
   search = (evt) => {
     const query = evt.target.value
     this.index = this.getOrCreateIndex()
     this.setState({
       query,
-      // Query the index with search string to get an [] of IDs
       results: this.index
         .search(query, {})
-        // Map over each ID and return the full document
         .map(({ ref }) => this.index.documentStore.getDoc(ref)),
     })
   }
