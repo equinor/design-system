@@ -1,0 +1,6 @@
+/* easier on the eyes when previewing markdown in vs code */
+
+body {
+  background-color: #333;
+  color: #ccc !important;
+}
