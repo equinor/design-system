@@ -28,7 +28,7 @@ To be able to install packages from the internal NPM repository, there are a few
 
 ### PNPM
 
-We use pnpm as the package manager, because it’s fast, space efficient, and has some very useful commands when working with a monorepo – so you should start off by installing it globally:
+We use [pnpm][] as the package manager, because it’s fast, space efficient, and has some very useful commands when working with a monorepo – so you should start off by installing it globally:
 
 ```bash
 $ npm i -g pnpm
@@ -37,3 +37,5 @@ $ npm i -g pnpm
 It is possible to change directory into one of the subdirectories and run pnpm commands from there, but if’s usually better to run most commands from the root, and use `--filter` to single out the package you’re working on. So to install all the dependencies in all the packages simultaneosly, run `pnpm m i`, which is the shorthand version of `pnpm multi install`.
 
 If you would like to start the storefront then, you would run `pnpm --filter @equinor/eds-storefront run start`, and if you want to install some devDependency, `pnpm --filter @equinor/eds-storefront i -D <some-module>`.
+
+[pnpm]: https://pnpm.js.org
