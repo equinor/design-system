@@ -208,7 +208,8 @@ components:
       documentation:
         - *3
       figma:
-        - *3
+        - *4
+        - *2
       vanilla:
         - *1
       react:
