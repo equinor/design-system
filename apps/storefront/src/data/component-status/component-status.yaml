@@ -167,7 +167,15 @@ components:
       react:
         - *1
   - component: 'Notification Banner'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: 'Notification Dialog'
     status: *defaultStatus
   - component: 'Notification Snackbar'
@@ -175,7 +183,16 @@ components:
   - component: Popovers
     status: *defaultStatus
   - component: Progress indicators
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Scrim
     status:
       documentation:
@@ -200,8 +217,16 @@ components:
       react:
         - *1
   - component: Slider
-    status: *defaultStatus
-  - component: Table
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1  - component: Table
     status: *defaultStatus
   - component: Text inputs
     status:
