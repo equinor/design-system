@@ -226,7 +226,8 @@ components:
       vanilla:
         - *1
       react:
-        - *1  - component: Table
+        - *1  
+  - component: Table
     status: *defaultStatus
   - component: Text inputs
     status:
