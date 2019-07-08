@@ -1,4 +1,4 @@
-# @eds-ui/core-react
+# @equinor/eds-core-react
 
 The React implementation of the Equinor Design System, still in early alpha so by no means ready for production.
 

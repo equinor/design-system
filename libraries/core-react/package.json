@@ -5,6 +5,11 @@
   "main": "dist/core-react.cjs.js",
   "module": "dist/core-react.es.js",
   "browser": "dist/core-react.umd.js",
+  "homepage": "https://github.com/equinor/design-system/tree/prerelease/libraries/core-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system"
+  },
   "scripts": {
     "lint": "eslint ./src/**/*.{jsx,js}",
     "build": "rollup -c",
