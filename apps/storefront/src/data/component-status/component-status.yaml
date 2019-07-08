@@ -229,7 +229,16 @@ components:
       react:
         - *1  
   - component: Table
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1  
   - component: Text inputs
     status:
       documentation:
