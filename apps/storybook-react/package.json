@@ -6,7 +6,7 @@
     "lint": "eslint stories/**/*.jsx"
   },
   "dependencies": {
-    "@eds-ui/core-react": "^0.0.1",
+    "@equinor/eds-core-react": "^0.0.1-alpha.1",
     "@storybook/react": "^5.1.1",
     "babel-runtime": "^6.26.0",
     "core-js": "2",
