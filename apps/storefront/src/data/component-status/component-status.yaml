@@ -180,7 +180,16 @@ components:
   - component: 'Notification Dialog'
     status: *defaultStatus
   - component: 'Notification Snackbar'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Popovers
     status: *defaultStatus
   - component: Progress indicators
