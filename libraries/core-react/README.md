@@ -22,6 +22,7 @@ const App = () => (
 
     <h2>Contained (default)</h2>
 
+    <Button>Primary</Button>
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
     <Button disabled>Disabled</Button>
