@@ -1,0 +1,9 @@
+name: eds-static
+description: Files published to eds-static.equinor.com
+scripts:
+  build: copyfiles --flat 'node_modules/@equinor-internal/*/Equinor-*.woff?(2)' dist/fonts
+dependencies:
+  '@equinor-internal/equinor-font': ^1.0.2
+  '@equinor-internal/equinor-logo': ^1.0.6
+devDependencies:
+  copyfiles: ^2.1.1
