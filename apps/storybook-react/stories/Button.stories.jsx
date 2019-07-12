@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Button } from '@eds-ui/core-react'
+import { Button } from '@equinor/eds-core-react'
 import './button.css'
 
 storiesOf('Button', module).add('Demo', () => (

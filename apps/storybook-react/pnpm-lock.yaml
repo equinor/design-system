@@ -1,6 +1,5 @@
 dependencies:
-  '@eds-ui/core-react': 'link:../../libraries/core-react'
-  '@equinor-internal/equinor-font': 1.0.0
+  '@equinor/eds-core-react': 'link:../../libraries/core-react'
   '@storybook/react': 5.1.9_47c491123fa06df145fcb5ec199efb44
   babel-runtime: 6.26.0
   core-js: 2.6.9
@@ -19,6 +18,8 @@ devDependencies:
   eslint-plugin-react: 7.13.0_eslint@5.16.0
   prettier: 1.18.2
 lockfileVersion: 5.1
+optionalDependencies:
+  '@equinor-internal/equinor-font': 1.0.0
 packages:
   /@babel/code-frame/7.0.0:
     dependencies:
@@ -1642,6 +1643,7 @@ packages:
       integrity: sha512-n/VQ4mbfr81aqkx/XmVicOLjviMuy02eenSdJY33SVA7S2J42EU0P1H0mOogfYedb3wXA0d/LVtBrgTSm04WEA==
   /@equinor-internal/equinor-font/1.0.0:
     dev: false
+    optional: true
     resolution:
       integrity: sha512-NQa3LvhyMrSV5K3eKKl7K923DGxtRJsgAT6XK6pBmJ+AiYktMZZN6Rm1YiSfy7Hyx1INUM4qF+qI/zH4OYu9gA==
   /@mrmlnc/readdir-enhanced/2.2.1:
@@ -8935,8 +8937,8 @@ packages:
       integrity: sha512-S+Zk8DEWE6oKpV+vI3qWkaK+jSbIK86pCwe2IF/xwIpQ8jEuxpw9NyaGjmp9+BoJv5FV2piqCDcoCtStppiq2A==
 specifiers:
   '@babel/core': ^7.4.4
-  '@eds-ui/core-react': ^0.0.1
   '@equinor-internal/equinor-font': ^1.0.0
+  '@equinor/eds-core-react': ^0.0.1-alpha.1
   '@storybook/react': ^5.1.1
   babel-loader: ^8.0.6
   babel-runtime: ^6.26.0
