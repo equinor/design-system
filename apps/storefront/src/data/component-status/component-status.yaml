@@ -187,7 +187,16 @@ components:
       react:
         - *1
   - component: 'Notification Dialog'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: 'Notification Snackbar'
     status:
       documentation:
