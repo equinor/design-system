@@ -1,27 +1,25 @@
-import { formatName } from '@utils'
+import * as R from 'ramda'
+import { formatName, withType, pickChildren, toDict } from '@utils'
 
-const getChildren = (acc, x) => [...acc, ...x.children]
+const toTypographyTokens = R.pipe(
+  R.filter(withType('frame')),
+  pickChildren,
+  R.filter(withType('text')),
+  R.map((x) => {
+    let name
+    let value = ''
+    try {
+      name = formatName(x.name)
+      value = x.style
+    } catch (error) {
+      throw Error(`Height not found for ${name}. ${error.message}`)
+    }
+    return {
+      name,
+      value,
+    }
+  }),
+  toDict,
+)
 
-export const makeTextTokens = (documents) =>
-  documents
-    .filter((x) => x.type === 'FRAME')
-    .reduce(getChildren, [])
-    .filter((x) => x.type === 'TEXT')
-    .map((x) => {
-      let name
-      let value = ''
-      try {
-        name = formatName(x.name)
-        value = x.style
-      } catch (error) {
-        throw Error(`Height not found for ${name}. ${error.message}`)
-      }
-      return {
-        name,
-        value,
-      }
-    })
-    .reduce((acc, { name, value }) => {
-      acc[name] = value
-      return acc
-    }, {})
+export const makeTextTokens = (typographies) => toTypographyTokens(typographies)

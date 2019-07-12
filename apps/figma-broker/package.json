@@ -24,6 +24,7 @@
   },
   "aliases": {
     "@root": ".",
-    "@utils": "./functions/utils.js"
+    "@utils": "./functions/utils.js",
+    "@units": "./functions/units.js"
   }
 }

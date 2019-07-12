@@ -1,27 +1,25 @@
-import { formatName } from '@utils'
+import * as R from 'ramda'
+import { formatName, withType, pickChildren, toDict } from '@utils'
+import { px } from '@units'
 
-export const makeSpacingTokens = (spacingTokens) =>
-  spacingTokens
-    .filter((x) => x.type === 'FRAME')
-    .reduce((acc, x) => [...acc, ...x.children], [])
-    .filter((x) => x.type === 'COMPONENT')
-    .map((spacing) => {
-      let name
-      let value = ''
-      try {
-        name = formatName(spacing.name)
-        value = spacingString(spacing.absoluteBoundingBox.height)
-      } catch (error) {
-        throw Error(`Height not found for ${name}. ${error.message}`)
-      }
-      return {
-        name,
-        value,
-      }
-    })
-    .reduce((acc, { name, value }) => {
-      acc[name] = value
-      return acc
-    }, {})
-
-const spacingString = (spacing) => `${spacing}px`
+const toSpacingTokens = R.pipe(
+  R.filter(withType('frame')),
+  pickChildren,
+  R.filter(withType('component')),
+  R.map((spacing) => {
+    let name
+    let value = ''
+    try {
+      name = formatName(spacing.name)
+      value = px(spacing.absoluteBoundingBox.height)
+    } catch (error) {
+      throw Error(`Height not found for ${name}. ${error.message}`)
+    }
+    return {
+      name,
+      value,
+    }
+  }),
+  toDict,
+)
+export const makeSpacingTokens = (spacings) => toSpacingTokens(spacings)

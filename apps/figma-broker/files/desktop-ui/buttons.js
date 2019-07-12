@@ -190,7 +190,4 @@ export const makeButtonsComponent = (buttons) =>
         value: buttonProps,
       }
     })
-    .reduce((acc, { name, value }) => {
-      acc[name] = value
-      return acc
-    }, {})
+    .reduce((acc, { name, value }) => ({ ...acc, [name]: value }), {})

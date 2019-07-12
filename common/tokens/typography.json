@@ -8,7 +8,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 48,
-        "lineHeightPercent": 128
+        "lineHeightPercent": 128,
+        "lineHeightPercentFontSize": 150,
+        "lineHeightUnit": "PIXELS"
     },
     "heading--h2": {
         "fontFamily": "Equinor",
@@ -19,7 +21,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 40,
-        "lineHeightPercent": 121.90476989746094
+        "lineHeightPercent": 121.90476989746094,
+        "lineHeightPercentFontSize": 142.85714721679688,
+        "lineHeightUnit": "PIXELS"
     },
     "heading--h3": {
         "fontFamily": "Equinor",
@@ -30,7 +34,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 40,
-        "lineHeightPercent": 142.22222900390625
+        "lineHeightPercent": 142.22222900390625,
+        "lineHeightPercentFontSize": 166.6666717529297,
+        "lineHeightUnit": "PIXELS"
     },
     "heading--h4": {
         "fontFamily": "Equinor",
@@ -41,7 +47,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 32,
-        "lineHeightPercent": 136.5333251953125
+        "lineHeightPercent": 136.5333251953125,
+        "lineHeightPercentFontSize": 160,
+        "lineHeightUnit": "PIXELS"
     },
     "heading--h5": {
         "fontFamily": "Equinor",
@@ -52,7 +60,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0.20000000298023224,
         "lineHeightPx": 24,
-        "lineHeightPercent": 113.77777862548828
+        "lineHeightPercent": 113.77777862548828,
+        "lineHeightPercentFontSize": 133.3333282470703,
+        "lineHeightUnit": "PIXELS"
     },
     "heading--h6": {
         "fontFamily": "Equinor",
@@ -63,7 +73,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0.20000000298023224,
         "lineHeightPx": 24,
-        "lineHeightPercent": 128
+        "lineHeightPercent": 128,
+        "lineHeightPercentFontSize": 150,
+        "lineHeightUnit": "PIXELS"
     },
     "navigation--menu-title": {
         "fontFamily": "Equinor",
@@ -74,18 +86,22 @@
         "textAlignVertical": "CENTER",
         "letterSpacing": 0.20000000298023224,
         "lineHeightPx": 16,
-        "lineHeightPercent": 85.33333587646484
+        "lineHeightPercent": 85.33333587646484,
+        "lineHeightPercentFontSize": 100,
+        "lineHeightUnit": "PIXELS"
     },
     "navigation--menu-tabs": {
         "fontFamily": "Equinor",
-        "fontPostScriptName": "Equinor-Regular",
-        "fontWeight": 400,
+        "fontPostScriptName": "Equinor-Medium",
+        "fontWeight": 500,
         "fontSize": 16,
         "textAlignHorizontal": "LEFT",
         "textAlignVertical": "CENTER",
         "letterSpacing": 0.20000000298023224,
         "lineHeightPx": 16,
-        "lineHeightPercent": 85.33333587646484
+        "lineHeightPercent": 85.33333587646484,
+        "lineHeightPercentFontSize": 100,
+        "lineHeightUnit": "PIXELS"
     },
     "navigation--menu-label": {
         "fontFamily": "Equinor",
@@ -96,7 +112,9 @@
         "textAlignVertical": "CENTER",
         "letterSpacing": 0,
         "lineHeightPx": 16,
-        "lineHeightPercent": 124.1212158203125
+        "lineHeightPercent": 124.1212158203125,
+        "lineHeightPercentFontSize": 145.4545440673828,
+        "lineHeightUnit": "PIXELS"
     },
     "navigation--drawer-first-level": {
         "fontFamily": "Equinor",
@@ -107,7 +125,9 @@
         "textAlignVertical": "CENTER",
         "letterSpacing": 0.10000000149011612,
         "lineHeightPx": 16,
-        "lineHeightPercent": 113.77777862548828
+        "lineHeightPercent": 113.77777862548828,
+        "lineHeightPercentFontSize": 133.3333282470703,
+        "lineHeightUnit": "PIXELS"
     },
     "navigation--drawer-second-level": {
         "fontFamily": "Equinor",
@@ -118,29 +138,23 @@
         "textAlignVertical": "CENTER",
         "letterSpacing": 0.20000000298023224,
         "lineHeightPx": 16,
-        "lineHeightPercent": 113.77777862548828
-    },
-    "navigation--drawer-child-level": {
-        "fontFamily": "Equinor",
-        "fontPostScriptName": "Equinor-Regular",
-        "fontWeight": 400,
-        "fontSize": 12,
-        "textAlignHorizontal": "LEFT",
-        "textAlignVertical": "CENTER",
-        "letterSpacing": 0.30000001192092896,
-        "lineHeightPx": 16,
-        "lineHeightPercent": 113.77777862548828
+        "lineHeightPercent": 113.77777862548828,
+        "lineHeightPercentFontSize": 133.3333282470703,
+        "lineHeightUnit": "PIXELS"
     },
     "navigation--button": {
         "fontFamily": "Equinor",
         "fontPostScriptName": "Equinor-Medium",
         "fontWeight": 500,
+        "textDecoration": "UNDERLINE",
         "fontSize": 14,
         "textAlignHorizontal": "LEFT",
         "textAlignVertical": "CENTER",
         "letterSpacing": 0,
         "lineHeightPx": 16,
-        "lineHeightPercent": 97.52381134033203
+        "lineHeightPercent": 97.52381134033203,
+        "lineHeightPercentFontSize": 114.28571319580078,
+        "lineHeightUnit": "PIXELS"
     },
     "input--label": {
         "fontFamily": "Equinor",
@@ -151,7 +165,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 16,
-        "lineHeightPercent": 113.77777862548828
+        "lineHeightPercent": 113.77777862548828,
+        "lineHeightPercentFontSize": 133.3333282470703,
+        "lineHeightUnit": "PIXELS"
     },
     "input--text": {
         "fontFamily": "Equinor",
@@ -162,7 +178,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0.4000000059604645,
         "lineHeightPx": 24,
-        "lineHeightPercent": 128
+        "lineHeightPercent": 128,
+        "lineHeightPercentFontSize": 150,
+        "lineHeightUnit": "PIXELS"
     },
     "input--text-monospaced": {
         "fontFamily": "Equinor",
@@ -173,7 +191,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 1,
         "lineHeightPx": 24,
-        "lineHeightPercent": 128
+        "lineHeightPercent": 128,
+        "lineHeightPercentFontSize": 150,
+        "lineHeightUnit": "PIXELS"
     },
     "input--helper": {
         "fontFamily": "Equinor",
@@ -184,7 +204,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0.20000000298023224,
         "lineHeightPx": 16,
-        "lineHeightPercent": 124.1212158203125
+        "lineHeightPercent": 124.1212158203125,
+        "lineHeightPercentFontSize": 145.4545440673828,
+        "lineHeightUnit": "PIXELS"
     },
     "paragraph--body-short": {
         "fontFamily": "Equinor",
@@ -195,8 +217,10 @@
         "textAlignHorizontal": "LEFT",
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
-        "lineHeightPx": 18,
-        "lineHeightPercent": 96
+        "lineHeightPx": 20,
+        "lineHeightPercent": 106.66667175292969,
+        "lineHeightPercentFontSize": 125,
+        "lineHeightUnit": "PIXELS"
     },
     "paragraph--caption": {
         "fontFamily": "Equinor",
@@ -207,7 +231,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 16,
-        "lineHeightPercent": 97.52381134033203
+        "lineHeightPercent": 97.52381134033203,
+        "lineHeightPercentFontSize": 114.28571319580078,
+        "lineHeightUnit": "PIXELS"
     },
     "paragraph--overline": {
         "fontFamily": "Equinor",
@@ -219,7 +245,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 1.100000023841858,
         "lineHeightPx": 16,
-        "lineHeightPercent": 136.5333251953125
+        "lineHeightPercent": 136.5333251953125,
+        "lineHeightPercentFontSize": 160,
+        "lineHeightUnit": "PIXELS"
     },
     "paragraph--ingress": {
         "fontFamily": "Equinor",
@@ -230,7 +258,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 24,
-        "lineHeightPercent": 113.77777862548828
+        "lineHeightPercent": 113.77777862548828,
+        "lineHeightPercentFontSize": 133.3333282470703,
+        "lineHeightUnit": "PIXELS"
     },
     "paragraph--body-long": {
         "fontFamily": "Equinor",
@@ -242,7 +272,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 24,
-        "lineHeightPercent": 128
+        "lineHeightPercent": 128,
+        "lineHeightPercentFontSize": 150,
+        "lineHeightUnit": "PIXELS"
     },
     "table--cell-header": {
         "fontFamily": "Equinor",
@@ -253,7 +285,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 24,
-        "lineHeightPercent": 146.28570556640625
+        "lineHeightPercent": 146.28570556640625,
+        "lineHeightPercentFontSize": 171.42857360839844,
+        "lineHeightUnit": "PIXELS"
     },
     "table--cell-text": {
         "fontFamily": "Equinor",
@@ -264,7 +298,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 24,
-        "lineHeightPercent": 146.28570556640625
+        "lineHeightPercent": 146.28570556640625,
+        "lineHeightPercentFontSize": 171.42857360839844,
+        "lineHeightUnit": "PIXELS"
     },
     "table--cell-numeric-monospaced": {
         "fontFamily": "Equinor",
@@ -275,7 +311,9 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 20,
-        "lineHeightPercent": 142.22222900390625
+        "lineHeightPercent": 142.22222900390625,
+        "lineHeightPercentFontSize": 166.6666717529297,
+        "lineHeightUnit": "PIXELS"
     },
     "ui--tooltip": {
         "fontFamily": "Equinor",
@@ -286,17 +324,21 @@
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
         "lineHeightPx": 16,
-        "lineHeightPercent": 113.77777862548828
+        "lineHeightPercent": 113.77777862548828,
+        "lineHeightPercentFontSize": 133.3333282470703,
+        "lineHeightUnit": "PIXELS"
     },
     "ui--snackbar": {
         "fontFamily": "Equinor",
-        "fontPostScriptName": "Equinor-Regular",
-        "fontWeight": 400,
-        "fontSize": 12,
+        "fontPostScriptName": "Equinor-Medium",
+        "fontWeight": 500,
+        "fontSize": 16,
         "textAlignHorizontal": "LEFT",
         "textAlignVertical": "TOP",
         "letterSpacing": 0,
-        "lineHeightPx": 16,
-        "lineHeightPercent": 113.77777862548828
+        "lineHeightPx": 24,
+        "lineHeightPercent": 128,
+        "lineHeightPercentFontSize": 150,
+        "lineHeightUnit": "PIXELS"
     }
 }

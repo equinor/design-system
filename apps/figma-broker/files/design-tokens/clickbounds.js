@@ -1,30 +1,28 @@
-import { formatName } from '@utils'
+import * as R from 'ramda'
+import { formatName, withType, pickChildren, toDict } from '@utils'
+import { px } from '@units'
 
-const getChildren = (acc, x) => [...acc, ...x.children]
+const toHeightTokens = R.pipe(
+  R.filter(withType('frame')),
+  pickChildren,
+  R.filter(withType('component')),
+  pickChildren,
+  R.map((x) => {
+    let name
+    let value = ''
+    try {
+      name = formatName(x.name)
+      value = px(x.absoluteBoundingBox.height)
+    } catch (error) {
+      throw Error(`Height not found for ${name}. ${error.message}`)
+    }
+    return {
+      name,
+      value,
+    }
+  }),
+  toDict,
+)
 
-export const makeClickboundsTokens = (documents) =>
-  documents
-    .filter((x) => x.type === 'FRAME')
-    .reduce(getChildren, [])
-    .filter((x) => x.type === 'COMPONENT')
-    .reduce(getChildren, [])
-    .map((x) => {
-      let name
-      let value = ''
-      try {
-        name = formatName(x.name)
-        value = pxString(x.absoluteBoundingBox.height)
-      } catch (error) {
-        throw Error(`Height not found for ${name}. ${error.message}`)
-      }
-      return {
-        name,
-        value,
-      }
-    })
-    .reduce((acc, { name, value }) => {
-      acc[name] = value
-      return acc
-    }, {})
-
-const pxString = (unit) => `${unit}px`
+export const makeClickboundsTokens = (clickbounds) =>
+  toHeightTokens(clickbounds)

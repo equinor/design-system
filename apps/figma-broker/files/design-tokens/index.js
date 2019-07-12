@@ -37,9 +37,9 @@ export const makeTokens = (figmaPages) => {
           value: makeClickboundsTokens(data),
         })
         break
-      case 'text':
+      case 'typography':
         tokens.push({
-          name: 'text',
+          name: 'typography',
           value: makeTextTokens(data),
         })
         break

@@ -1,32 +1,10 @@
 import * as R from 'ramda'
 
-export const camelize = (str) => {
-  if (str) {
-    return str
-      .toLowerCase()
-      .replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) =>
-        index === 0 ? letter.toLowerCase() : letter.toUpperCase(),
-      )
-      .replace(/\s+/g, '')
-  }
-  throw new Error('No string provided to camelize()!')
-}
-
 const removeForbiddenCharacters = (str) => {
   if (str) {
     return str.replace(/[|]|[.]|[-]|[–]|[—]/g, '')
   }
   throw new Error('No string for formatName()!')
-}
-
-export const getFigmaNamePath = (str) => {
-  const path = removeForbiddenCharacters(str)
-    .toLowerCase()
-    .trim()
-    .replace(/[\s+]/g, '-')
-    .split('/')
-  const name = path.pop()
-  return { name, path: pathToString(path) }
 }
 
 export const formatName = (str) =>
@@ -36,9 +14,6 @@ export const formatName = (str) =>
     .replace(/[\s+]/g, '-')
     .replace(/[/]/g, '--')
     .replace('---', '-')
-
-export const pathToString = (str) =>
-  str.reduce((acc, val) => `${acc}/${val}`, '')
 
 export const fixPageName = (name) =>
   name
@@ -71,4 +46,17 @@ export const withName = R.curry((regExp, node) =>
 )
 export const withType = R.curry((regExp, node) =>
   R.test(new RegExp(regExp, 'i'), node.type),
+)
+
+export const pickChildren = R.curry(R.reduce)(
+  (acc, x) => [...acc, ...x.children],
+  [],
+)
+
+export const toDict = R.curry(R.reduce)(
+  (acc, { name, value }) => ({
+    ...acc,
+    [name]: value,
+  }),
+  {},
 )
