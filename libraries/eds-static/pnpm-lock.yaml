@@ -1,18 +1,58 @@
 dependencies:
-  '@equinor-internal/equinor-font': 1.0.2
+  '@equinor-internal/equinor-bold': 2.0.0
+  '@equinor-internal/equinor-bolditalic': 2.0.0
+  '@equinor-internal/equinor-font': 2.0.0
+  '@equinor-internal/equinor-italic': 2.0.0
+  '@equinor-internal/equinor-light': 2.0.0
+  '@equinor-internal/equinor-lightitalic': 2.0.0
   '@equinor-internal/equinor-logo': 1.0.6
+  '@equinor-internal/equinor-medium': 2.0.0
+  '@equinor-internal/equinor-mediumitalic': 2.0.0
+  '@equinor-internal/equinor-regular': 2.0.0
 devDependencies:
   copyfiles: 2.1.1
 lockfileVersion: 5.1
 packages:
-  /@equinor-internal/equinor-font/1.0.2:
+  /@equinor-internal/equinor-bold/2.0.0:
     dev: false
     resolution:
-      integrity: sha512-squYunoaR3o6oQpZl0H9O1863Gis15Glck9IEVuAPUv5CP3HmSOn91OaK+ZhhqPedQPo0TJ1deVP3+eIG5AUYA==
+      integrity: sha512-4ZUZdcjINkNLosAUdNIQ8SIkyn4Abzr8zZii+QPfNzRMXWQFyR5/nsfSvLcCHS3C5DQjtVNSt32CKrdlxymUhg==
+  /@equinor-internal/equinor-bolditalic/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-N16eX90hDkXelJFuEpFab1lf60333j9EKTpd9Ll2aNwqzln56UXCoLuLQHtu+yJBOszZ6WHHa2fc/7TnO+PP3A==
+  /@equinor-internal/equinor-font/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-7NEh69zT3NZIP8L6l7jUH3NHF4KKSa6bfBNqtZChnnTD0x0fH9FPYsKvFghOCG/BJ0SnCAcIoauXw8UeJB2mEg==
+  /@equinor-internal/equinor-italic/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-4wK+6oNujf4e1QzE7f5f8/BdacYmLI6uYw7f2KztpGihScNKuz9Ib/sRmgKds99dfT2wk4xe1C+jIQSCG6GWJw==
+  /@equinor-internal/equinor-light/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-HIV/BATNwis0z3EY7jQ+KU6H6uxbYr5HxYxXUJf2ebYOy7MIsFYeRsOtNqhg8pcnd2k57K9o0x+Tf0lP8xQhYw==
+  /@equinor-internal/equinor-lightitalic/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-NKkYQ4GSSbXF//U9zolFOTWg6dR5+hdboMRL1oZRHsvPukl1wX3GXWQ1hkJGYKDVmnVYVBhDEKllVbSUZ7Vi9w==
   /@equinor-internal/equinor-logo/1.0.6:
     dev: false
     resolution:
       integrity: sha512-pGzeZbqocnrQyZNi8ukIO/SOFuN6rE05g2IQq0mBS/KAHnJ7JGeJ1R/yWQDolGZ+Hb6YDxgig3ox0u3Uf/S/7w==
+  /@equinor-internal/equinor-medium/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-djbTMRSoTBCfc3NV8UdAn8jLsmX6zSRgZZWLtr82bX1i9Clb9Vzqqjn5pKwhLZOM7UuPGnTQ0aRmOKW0RHMU2w==
+  /@equinor-internal/equinor-mediumitalic/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-awJGwcvREEXjsA4/qnEWq+ahGTu4Nktw3B658TI08OuzcYBD6UN6fPIhILdxbFThwMWD51rPwuCBPmRf8WQtBw==
+  /@equinor-internal/equinor-regular/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-xYEm/21XxU93Y4Rm8q4oiwSpsEWQ0MUDG32o1Q77h01MTo8iVNiOPPPTTgEHOqpsl3Go7aJC/8oIVgnyXup76w==
   /ansi-regex/4.1.0:
     dev: true
     engines:
@@ -530,6 +570,14 @@ packages:
     resolution:
       integrity: sha512-HG/DWAJa1PAnHT9JAhNa8AbAv3FPaiLzioSjCcmuXXhP8MlpHO5vwls4g4j6n30Z74GVQj8Xa62dWVx1QCGklg==
 specifiers:
-  '@equinor-internal/equinor-font': ^1.0.2
+  '@equinor-internal/equinor-bold': ^2.0.0
+  '@equinor-internal/equinor-bolditalic': ^2.0.0
+  '@equinor-internal/equinor-font': ^2.0.0
+  '@equinor-internal/equinor-italic': ^2.0.0
+  '@equinor-internal/equinor-light': ^2.0.0
+  '@equinor-internal/equinor-lightitalic': ^2.0.0
   '@equinor-internal/equinor-logo': ^1.0.6
+  '@equinor-internal/equinor-medium': ^2.0.0
+  '@equinor-internal/equinor-mediumitalic': ^2.0.0
+  '@equinor-internal/equinor-regular': ^2.0.0
   copyfiles: ^2.1.1
