@@ -1,5 +1,15 @@
 name: eds
 scripts:
-  build: "pnpm --filter @equinor/eds-core-react run build"
-  bump: "pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version prerelease"
-  publish: "pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag alpha --access public"
+  build: pnpm --filter @equinor/eds-core-react run build
+  bump: >-
+    pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
+    prerelease
+  publish: >-
+    pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
+    alpha --access public
+devDependencies:
+  eslint: ^6.0.1
+  eslint-config-airbnb: ^17.1.1
+  eslint-config-prettier: ^6.0.0
+  eslint-plugin-prettier: ^3.1.0
+  prettier: ^1.18.2

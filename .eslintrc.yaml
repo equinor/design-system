@@ -15,3 +15,15 @@ rules:
   no-unused-vars:
     - error
     - varsIgnorePattern: ^React$
+  # Not everything needs a default export, for example utils files
+  import/prefer-default-export:
+    - off
+  # Disabled to allow use of trailing underscore convetion to denote a variable is related to another
+  no-underscore-dangle:
+    - off
+  # Primarily a problem in pre es6 / ES2016. Disabled since es6+ is widely adopted now
+  no-use-before-define:
+    - off
+  # Problems using node aliases, mjs files and local npm packages so disabling import-rules for now
+  import/no-unresolved:
+    - off
