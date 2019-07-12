@@ -4,21 +4,19 @@ export const camelize = (str) => {
   if (str) {
     return str
       .toLowerCase()
-      .replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
-        return index == 0 ? letter.toLowerCase() : letter.toUpperCase()
-      })
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) =>
+        index === 0 ? letter.toLowerCase() : letter.toUpperCase(),
+      )
       .replace(/\s+/g, '')
-  } else {
-    throw new Error('No string provided to camelize()!')
   }
+  throw new Error('No string provided to camelize()!')
 }
 
 const removeForbiddenCharacters = (str) => {
   if (str) {
     return str.replace(/[|]|[.]|[-]|[–]|[—]/g, '')
-  } else {
-    throw new Error('No string for formatName()!')
   }
+  throw new Error('No string for formatName()!')
 }
 
 export const getFigmaNamePath = (str) => {

@@ -6,8 +6,8 @@ export const makeSpacingTokens = (spacingTokens) =>
     .reduce((acc, x) => [...acc, ...x.children], [])
     .filter((x) => x.type === 'COMPONENT')
     .map((spacing) => {
-      let name,
-        value = ''
+      let name
+      let value = ''
       try {
         name = formatName(spacing.name)
         value = spacingString(spacing.absoluteBoundingBox.height)

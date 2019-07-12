@@ -1,5 +1,5 @@
+import { map } from 'ramda'
 import { formatName } from '@utils'
-import { map, multiply } from 'ramda'
 
 const getChildren = (acc, x) => [...acc, ...x.children]
 
@@ -9,8 +9,8 @@ export const makeColorToken = (colorTokens) =>
     .reduce(getChildren, [])
     .filter((x) => x.type === 'RECTANGLE')
     .map((x) => {
-      let name = '',
-        value = ''
+      let name = ''
+      let value = ''
       try {
         name = formatName(x.name)
         const fill = x.fills.find((x) => x.type === 'SOLID')

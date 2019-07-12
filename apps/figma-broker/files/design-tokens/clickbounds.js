@@ -9,8 +9,8 @@ export const makeClickboundsTokens = (documents) =>
     .filter((x) => x.type === 'COMPONENT')
     .reduce(getChildren, [])
     .map((x) => {
-      let name,
-        value = ''
+      let name
+      let value = ''
       try {
         name = formatName(x.name)
         value = pxString(x.absoluteBoundingBox.height)

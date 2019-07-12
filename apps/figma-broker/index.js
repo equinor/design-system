@@ -25,20 +25,20 @@ import file from './files.json'
 import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
 import { getAssets } from './files/assets'
-import { FILE } from 'dns'
 
 dotenv.config()
 
 const PORT = process.env.PORT || 9001
-const TEAM_ID = '590517879490131675'
+const TEAM_ID = process.env.FIGMA_TEAM_ID || ''
+
 const COMMON_DIR = '../../common'
+
 const PATHS = {
-  TOKENS: COMMON_DIR + '/tokens',
-  ASSETS: COMMON_DIR + '/assets',
-  COMPONENTS: COMMON_DIR + '/components',
-  COMPONENTS_DESKTOP: COMMON_DIR + '/desktop-ui',
-  SASS: COMMON_DIR + '/public/sass',
-  CSS: COMMON_DIR + '/public/css',
+  TOKENS: `${COMMON_DIR}/tokens`,
+  ASSETS: `${COMMON_DIR}/assets`,
+  COMPONENTS_DESKTOP: `${COMMON_DIR}/components`,
+  SASS: `${COMMON_DIR}/public/sass`,
+  CSS: `${COMMON_DIR}/public/css`,
 }
 
 const app = new Koa()
@@ -55,8 +55,6 @@ const svgo = new SVGO({
 
 router
   .post('/tokens', KoaBody(), createTokens)
-  .get('/tokens', KoaBody(), getTokens)
-  // .post("/components", KoaBody(), createComponents)
   .post('/assets', KoaBody(), createAssets)
   .post('/transform-tokens', KoaBody(), transformTokens)
   .post('/desktop-ui', KoaBody(), createDesktopComponents)
@@ -77,24 +75,6 @@ async function createTokens(ctx) {
 
   ctx.response.body = JSON.stringify(tokens)
 }
-
-async function getTokens(ctx) {
-  const tokens = [{ name: 'TODO 🙈' }]
-  ctx.response.body = JSON.stringify(tokens)
-}
-
-// Components
-
-// async function createComponents(ctx) {
-//   const data = await fetchFigmaComponents(TEAM_ID);
-
-//   const figmaComponents = processFigmaComponents(data);
-//   const components = makeComponents(figmaComponents);
-
-//   writeComponents(components, PATHS.COMPONENTS);
-
-//   ctx.response.body = JSON.stringify(components);
-// }
 
 // Assets
 
@@ -152,9 +132,9 @@ async function createAssets(ctx) {
 async function transformTokens(ctx) {
   const tokens = readTokens(PATHS.TOKENS)
   const transformed = convert(tokens)
-  transformed.forEach((file) => {
-    writeFile(file.sassString, PATHS.SASS, `_${file.name}`, 'scss')
-    writeFile(file.cssString, PATHS.CSS, file.name, 'css')
+  transformed.forEach((token) => {
+    writeFile(token.sassString, PATHS.SASS, `_${token.name}`, 'scss')
+    writeFile(token.cssString, PATHS.CSS, token.name, 'css')
   })
 
   ctx.response.body = JSON.stringify(transformed)
@@ -176,4 +156,4 @@ async function createDesktopComponents(ctx) {
 app.listen(PORT)
 
 // eslint-disable-next-line no-console
-console.info('Started Figma Broker 😄')
+console.info('Started Figma Broker 👨🏻‍💼💼🎉')

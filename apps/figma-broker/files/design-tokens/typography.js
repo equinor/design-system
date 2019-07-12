@@ -8,8 +8,8 @@ export const makeTextTokens = (documents) =>
     .reduce(getChildren, [])
     .filter((x) => x.type === 'TEXT')
     .map((x) => {
-      let name,
-        value = ''
+      let name
+      let value = ''
       try {
         name = formatName(x.name)
         value = x.style

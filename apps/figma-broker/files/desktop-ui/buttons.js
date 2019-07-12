@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import {
   formatName,
   colortoRgba,
@@ -5,7 +6,6 @@ import {
   withName,
   withType,
 } from '@utils'
-import * as R from 'ramda'
 
 const fallback = {}
 

@@ -8,8 +8,8 @@ export const makeElevationTokens = (documents) =>
     .reduce(getChildren, [])
     .filter((x) => x.type === 'RECTANGLE')
     .map((x) => {
-      let name,
-        value = ''
+      let name
+      let value = ''
       try {
         name = formatName(x.name)
         value = x.effects
