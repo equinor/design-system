@@ -12,7 +12,7 @@ trigger:
     - feature/eds-static
   paths:
     include:
-      - libraries/eds-static    
+      - libraries/eds-static
 
 pool:
   vmImage: 'ubuntu-latest'
