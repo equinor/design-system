@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: eds-static-$(Build.BuildId)
+
+trigger:
+  batch: "true"
+  branches:
+    include:
+    - develop
+  paths:
+    include:
+      - libraries/eds-static    
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  displayName: ‘Install Node.js’
+  inputs:
+    versionSpec: ‘12.x’
+- script: curl -L https://unpkg.com/@pnpm/self-installer | node
+- script: pnpm install
+- script: pnpm run build
