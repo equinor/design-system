@@ -19,9 +19,10 @@ pool:
 
 steps:
 - task: NodeTool@0
-  displayName: ‘Install Node.js’
-  inputs:
-    versionSpec: ‘8.x’
+  displayName: 'Install Node.js'
+  inputs:    
+    versionSpec: '8.x'
+
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
 - script: pnpm install
 - script: pnpm run build
