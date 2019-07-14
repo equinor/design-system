@@ -16,7 +16,7 @@ steps:
     versionSpec: '8.x'
 
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
-- script: pnpm install
-  workingDirectory: libraries/eds-static
-- script: pnpm run build
-  workingDirectory: libraries/eds-static
+- script: echo pwd
+  workingDirectory: libraries
+- script: echo pwd
+  workingDirectory: libaries/eds-static
