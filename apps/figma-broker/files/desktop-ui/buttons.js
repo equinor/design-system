@@ -1,13 +1,13 @@
 import * as R from 'ramda'
+import { propName, withName, withType } from '@utils'
+import { px } from '@units'
 import {
-  propName,
+  toTypography,
+  toSpacer,
+  toFocus,
+  toOverlay,
   colortoRgba,
-  getSpacingValue,
-  withName,
-  withType,
-} from '@utils'
-
-import { toTypography, rootFontSize, px, em, rem } from '@units'
+} from '@transformers'
 
 const fallback = {}
 
@@ -64,7 +64,7 @@ const buildProps = (states) => {
           const spacer = R.head(val.children)
           if (spacer) {
             const name = R.head(R.match(/(?<=Spacing\s).*/i, val.name))
-            const spacingValue = getSpacingValue(
+            const spacingValue = toSpacer(
               spacer.name,
               spacer.absoluteBoundingBox,
             )
@@ -103,19 +103,9 @@ const buildProps = (states) => {
 
     if (focus) {
       const focus_ = R.head(focus.children)
-      const { strokeDashes } = focus_
-      const [dashWidth, dashGap] = strokeDashes
-      const stroke = focus_.strokes.find(withType('solid')) || fallback
-      const focusStyle = typeof strokeDashes === 'undefined' ? '' : 'dashed'
-
       buttonProps = {
         ...buttonProps,
-        focus: {
-          type: focusStyle,
-          color: colortoRgba(stroke.color),
-          width: px(dashWidth),
-          gap: px(dashGap),
-        },
+        focus: toFocus(focus_),
       }
     }
   }
@@ -141,13 +131,10 @@ const buildProps = (states) => {
       const pressedOverlay_ = R.head(
         R.find(withName('overlay'), pressedOverlay.children).children,
       )
-      const fill = pressedOverlay_.fills.find(withType('solid')) || fallback
-      const opacity = Math.round(fill.opacity * 100) / 100
 
       buttonProps = {
         ...buttonProps,
-        pressedColor: colortoRgba(fill.color),
-        pressedOpacity: opacity,
+        ...toOverlay(pressedOverlay_),
       }
     }
   }

@@ -1,6 +1,7 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict, colortoRgba } from '@utils'
+import { propName, withType, pickChildren, toDict } from '@utils'
 import { px } from '@units'
+import { colortoRgba } from '@transformers'
 
 const toBoxShadow = (offset, radius, color) =>
   `${px(offset.x)} ${px(offset.y)} ${px(radius)} ${colortoRgba(color)}`

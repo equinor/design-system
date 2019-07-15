@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import { propName, withType, pickChildren, toDict } from '@utils'
-import { toTypography } from '@units'
+import { toTypography } from '@transformers'
 
 const toTypographyTokens = R.pipe(
   R.filter(withType('frame')),

@@ -4,6 +4,7 @@ import { makeElevationTokens } from './elevation'
 import { makeClickboundsTokens } from './clickbounds'
 import { makeTextTokens } from './typography'
 import { makeShapeTokens } from './shape'
+import { makeStatesTokens } from './states'
 import { fixPageName } from '@utils'
 
 export const makeTokens = (figmaPages) => {
@@ -48,6 +49,12 @@ export const makeTokens = (figmaPages) => {
         tokens.push({
           name: 'shape',
           value: makeShapeTokens(data),
+        })
+        break
+      case 'interaction: states':
+        tokens.push({
+          name: 'states',
+          value: makeStatesTokens(data),
         })
         break
       default:

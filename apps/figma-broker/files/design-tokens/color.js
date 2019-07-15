@@ -1,5 +1,6 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict, colortoRgba } from '@utils'
+import { propName, withType, pickChildren, toDict } from '@utils'
+import { colortoRgba } from '@transformers'
 
 const toColorTokens = R.pipe(
   R.filter(withType('frame')),
