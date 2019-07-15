@@ -2,16 +2,19 @@ import * as R from 'ramda'
 import { formatName, withType, pickChildren, toDict, colortoRgba } from '@utils'
 import { px } from '@units'
 
+const toBoxShadow = (offset, radius, color) =>
+  `${px(offset.x)} ${px(offset.y)} ${px(radius)} ${colortoRgba(color)}`
+
 const toElevationTokens = R.pipe(
   R.filter(withType('frame')),
   pickChildren,
   R.filter(withType('rectangle')),
-  R.map((x) => {
+  R.map((node) => {
     let name = ''
     let value = ''
     try {
-      name = formatName(x.name)
-      value = x.effects
+      name = formatName(node.name)
+      value = node.effects
         .reduce(
           (acc, val) => [
             ...acc,
@@ -32,6 +35,3 @@ const toElevationTokens = R.pipe(
 )
 
 export const makeElevationTokens = (documents) => toElevationTokens(documents)
-
-const toBoxShadow = (offset, radius, color) =>
-  `${px(offset.x)} ${px(offset.y)} ${px(radius)} ${colortoRgba(color)}`

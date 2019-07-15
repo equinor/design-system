@@ -7,12 +7,12 @@ const toHeightTokens = R.pipe(
   pickChildren,
   R.filter(withType('component')),
   pickChildren,
-  R.map((x) => {
+  R.map((node) => {
     let name
     let value = ''
     try {
-      name = formatName(x.name)
-      value = px(x.absoluteBoundingBox.height)
+      name = formatName(node.name)
+      value = px(node.absoluteBoundingBox.height)
     } catch (error) {
       throw Error(`Height not found for ${name}. ${error.message}`)
     }

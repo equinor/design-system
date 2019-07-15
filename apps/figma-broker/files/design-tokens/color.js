@@ -5,12 +5,12 @@ const toColorTokens = R.pipe(
   R.filter(withType('frame')),
   pickChildren,
   R.filter(withType('rectangle')),
-  R.map((x) => {
+  R.map((node) => {
     let name = ''
     let value = ''
     try {
-      name = formatName(x.name)
-      const fill = R.find(withType('solid'), x.fills)
+      name = formatName(node.name)
+      const fill = R.find(withType('solid'), node.fills)
       value = colortoRgba(fill.color)
     } catch (error) {
       throw Error(`Error parsing color for ${name}. ${error.message}`)

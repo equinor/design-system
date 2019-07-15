@@ -6,12 +6,12 @@ const toSpacingTokens = R.pipe(
   R.filter(withType('frame')),
   pickChildren,
   R.filter(withType('component')),
-  R.map((spacing) => {
+  R.map((node) => {
     let name
     let value = ''
     try {
-      name = formatName(spacing.name)
-      value = px(spacing.absoluteBoundingBox.height)
+      name = formatName(node.name)
+      value = px(node.absoluteBoundingBox.height)
     } catch (error) {
       throw Error(`Height not found for ${name}. ${error.message}`)
     }
