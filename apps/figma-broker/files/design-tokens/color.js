@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { formatName, withType, pickChildren, toDict, colortoRgba } from '@utils'
+import { propName, withType, pickChildren, toDict, colortoRgba } from '@utils'
 
 const toColorTokens = R.pipe(
   R.filter(withType('frame')),
@@ -9,7 +9,7 @@ const toColorTokens = R.pipe(
     let name = ''
     let value = ''
     try {
-      name = formatName(node.name)
+      name = propName(node.name)
       const fill = R.find(withType('solid'), node.fills)
       value = colortoRgba(fill.color)
     } catch (error) {

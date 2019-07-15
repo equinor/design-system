@@ -67,9 +67,9 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "ghost-icon": {
+    "ghost_icon": {
         "clickbound": "48px",
-        "clickboundOffset": "NaNpx",
+        "clickboundOffset": "",
         "focus": {
             "type": "dashed",
             "color": "rgba(0, 112, 120, 1)",
@@ -80,7 +80,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "contained-right-icon": {
+    "contained_right_icon": {
         "height": "36px",
         "background": "rgba(0, 112, 120, 1)",
         "border": {
@@ -115,7 +115,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "outlined-right-icon": {
+    "outlined_right_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -149,7 +149,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "ghost-right-icon": {
+    "ghost_right_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -184,7 +184,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "contained-left-icon": {
+    "contained_left_icon": {
         "height": "36px",
         "background": "rgba(0, 112, 120, 1)",
         "border": {
@@ -218,7 +218,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "outlined-left-icon": {
+    "outlined_left_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -253,7 +253,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "ghost-left-icon": {
+    "ghost_left_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {

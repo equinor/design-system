@@ -2,11 +2,17 @@ import * as R from 'ramda'
 import { colortoRgba, withType } from './utils'
 
 const fallback = {}
+const defaultToEmpty = R.defaultTo('')
+const unitProcessor = (val, unit) => {
+  const number = defaultToEmpty(val)
+  return R.isEmpty(number) ? number : `${number}${unit}`
+}
 
 export const rootFontSize = 16
-export const px = (unit) => `${unit}px`
-export const em = (unit) => `${unit}em`
-export const rem = (unit) => `${unit}rem`
+
+export const px = (val) => unitProcessor(val, 'px')
+export const em = (val) => unitProcessor(val, 'em')
+export const rem = (val) => unitProcessor(val, 'rem')
 
 export const toTypography = (figmaNode) => {
   const {

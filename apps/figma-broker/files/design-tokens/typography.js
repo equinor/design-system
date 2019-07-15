@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { formatName, withType, pickChildren, toDict } from '@utils'
+import { propName, withType, pickChildren, toDict } from '@utils'
 import { toTypography } from '@units'
 
 const toTypographyTokens = R.pipe(
@@ -10,10 +10,10 @@ const toTypographyTokens = R.pipe(
     let name
     let value = ''
     try {
-      name = formatName(node.name)
+      name = propName(node.name)
       value = toTypography(node)
     } catch (error) {
-      throw Error(`Height not found for ${name}. ${error.message}`)
+      throw Error(`Error parsing typography for ${name}. ${error.message}`)
     }
     return {
       name,

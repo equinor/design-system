@@ -1,5 +1,5 @@
 {
-    "heading--h1": {
+    "heading__h1": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "2.000rem",
@@ -8,7 +8,7 @@
         "lineHeight": "1.500em",
         "textAlign": "left"
     },
-    "heading--h2": {
+    "heading__h2": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.750rem",
@@ -17,7 +17,7 @@
         "lineHeight": "1.429em",
         "textAlign": "left"
     },
-    "heading--h3": {
+    "heading__h3": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.500rem",
@@ -26,7 +26,7 @@
         "lineHeight": "1.667em",
         "textAlign": "left"
     },
-    "heading--h4": {
+    "heading__h4": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.250rem",
@@ -35,7 +35,7 @@
         "lineHeight": "1.600em",
         "textAlign": "left"
     },
-    "heading--h5": {
+    "heading__h5": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.125rem",
@@ -44,7 +44,7 @@
         "lineHeight": "1.333em",
         "textAlign": "left"
     },
-    "heading--h6": {
+    "heading__h6": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -53,7 +53,7 @@
         "lineHeight": "1.500em",
         "textAlign": "left"
     },
-    "navigation--menu-title": {
+    "navigation__menu_title": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -62,7 +62,7 @@
         "lineHeight": "1.000em",
         "textAlign": "left"
     },
-    "navigation--menu-tabs": {
+    "navigation__menu_tabs": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -71,7 +71,7 @@
         "lineHeight": "1.000em",
         "textAlign": "left"
     },
-    "navigation--menu-label": {
+    "navigation__menu_label": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.688rem",
@@ -80,7 +80,7 @@
         "lineHeight": "1.455em",
         "textAlign": "left"
     },
-    "navigation--drawer-first-level": {
+    "navigation__drawer_first_level": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.750rem",
@@ -89,7 +89,7 @@
         "lineHeight": "1.333em",
         "textAlign": "left"
     },
-    "navigation--drawer-second-level": {
+    "navigation__drawer_second_level": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.750rem",
@@ -98,7 +98,7 @@
         "lineHeight": "1.333em",
         "textAlign": "left"
     },
-    "navigation--button": {
+    "navigation__button": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.875rem",
@@ -107,7 +107,7 @@
         "lineHeight": "1.143em",
         "textAlign": "left"
     },
-    "input--label": {
+    "input__label": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.750rem",
@@ -116,7 +116,7 @@
         "lineHeight": "1.333em",
         "textAlign": "left"
     },
-    "input--text": {
+    "input__text": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -125,7 +125,7 @@
         "lineHeight": "1.500em",
         "textAlign": "left"
     },
-    "input--text-monospaced": {
+    "input__text_monospaced": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -134,7 +134,7 @@
         "lineHeight": "1.500em",
         "textAlign": "left"
     },
-    "input--helper": {
+    "input__helper": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.688rem",
@@ -143,7 +143,7 @@
         "lineHeight": "1.455em",
         "textAlign": "left"
     },
-    "paragraph--body-short": {
+    "paragraph__body_short": {
         "color": "rgba(0, 112, 120, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -152,7 +152,7 @@
         "lineHeight": "1.250em",
         "textAlign": "left"
     },
-    "paragraph--caption": {
+    "paragraph__caption": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.875rem",
@@ -161,7 +161,7 @@
         "lineHeight": "1.143em",
         "textAlign": "left"
     },
-    "paragraph--overline": {
+    "paragraph__overline": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.625rem",
@@ -170,7 +170,7 @@
         "lineHeight": "1.600em",
         "textAlign": "left"
     },
-    "paragraph--ingress": {
+    "paragraph__ingress": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.125rem",
@@ -179,7 +179,7 @@
         "lineHeight": "1.333em",
         "textAlign": "left"
     },
-    "paragraph--body-long": {
+    "paragraph__body_long": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -188,7 +188,7 @@
         "lineHeight": "1.500em",
         "textAlign": "left"
     },
-    "table--cell-header": {
+    "table__cell_header": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.875rem",
@@ -197,7 +197,7 @@
         "lineHeight": "1.714em",
         "textAlign": "left"
     },
-    "table--cell-text": {
+    "table__cell_text": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.875rem",
@@ -206,7 +206,7 @@
         "lineHeight": "1.714em",
         "textAlign": "left"
     },
-    "table--cell-numeric-monospaced": {
+    "table__cell_numeric_monospaced": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.750rem",
@@ -215,7 +215,7 @@
         "lineHeight": "1.667em",
         "textAlign": "left"
     },
-    "ui--tooltip": {
+    "ui__tooltip": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.750rem",
@@ -224,7 +224,7 @@
         "lineHeight": "1.333em",
         "textAlign": "left"
     },
-    "ui--snackbar": {
+    "ui__snackbar": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",

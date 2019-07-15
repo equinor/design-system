@@ -49,11 +49,11 @@
         "clickbound": "48px",
         "clickboundOffset": "6px"
     },
-    "ghost-icon": {
+    "ghost_icon": {
         "clickbound": "48px",
-        "clickboundOffset": "NaNpx"
+        "clickboundOffset": ""
     },
-    "contained-right-icon": {
+    "contained_right_icon": {
         "height": "36px",
         "background": "rgba(235, 235, 235, 1)",
         "border": {
@@ -79,7 +79,7 @@
         "clickbound": "48px",
         "clickboundOffset": "6px"
     },
-    "outlined-right-icon": {
+    "outlined_right_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -105,7 +105,7 @@
         "clickbound": "48px",
         "clickboundOffset": "6px"
     },
-    "ghost-right-icon": {
+    "ghost_right_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -131,7 +131,7 @@
         "clickbound": "48px",
         "clickboundOffset": "6px"
     },
-    "contained-left-icon": {
+    "contained_left_icon": {
         "height": "36px",
         "background": "rgba(235, 235, 235, 1)",
         "border": {
@@ -157,7 +157,7 @@
         "clickbound": "48px",
         "clickboundOffset": "6px"
     },
-    "outlined-left-icon": {
+    "outlined_left_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -183,7 +183,7 @@
         "clickbound": "48px",
         "clickboundOffset": "6px"
     },
-    "ghost-left-icon": {
+    "ghost_left_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {

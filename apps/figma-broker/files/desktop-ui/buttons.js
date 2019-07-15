@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import {
-  formatName,
+  propName,
   colortoRgba,
   getSpacingValue,
   withName,
@@ -159,7 +159,7 @@ export const makeButtonsComponent = (buttons) =>
   buttons
     .filter(withType('frame'))
     .map((node) => {
-      const name = formatName(node.name)
+      const name = propName(node.name)
       const states = R.filter(withType('component'), node.children)
       const buttonProps = buildProps(states)
 

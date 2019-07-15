@@ -67,7 +67,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "contained-right-icon": {
+    "contained_right_icon": {
         "height": "36px",
         "background": "rgba(36, 56, 69, 1)",
         "border": {
@@ -102,7 +102,7 @@
         "pressedColor": "rgba(255, 255, 255, 1)",
         "pressedOpacity": 0.4
     },
-    "outlined-right-icon": {
+    "outlined_right_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -137,7 +137,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "ghost-right-icon": {
+    "ghost_right_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -172,7 +172,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "contained-left-icon": {
+    "contained_left_icon": {
         "height": "36px",
         "background": "rgba(36, 56, 69, 1)",
         "border": {
@@ -207,7 +207,7 @@
         "pressedColor": "rgba(255, 255, 255, 1)",
         "pressedOpacity": 0.4
     },
-    "outlined-left-icon": {
+    "outlined_left_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
@@ -242,7 +242,7 @@
         "pressedColor": "rgba(0, 0, 0, 1)",
         "pressedOpacity": 0.2
     },
-    "ghost-left-icon": {
+    "ghost_left_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {

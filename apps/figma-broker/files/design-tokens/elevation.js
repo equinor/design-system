@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { formatName, withType, pickChildren, toDict, colortoRgba } from '@utils'
+import { propName, withType, pickChildren, toDict, colortoRgba } from '@utils'
 import { px } from '@units'
 
 const toBoxShadow = (offset, radius, color) =>
@@ -13,7 +13,7 @@ const toElevationTokens = R.pipe(
     let name = ''
     let value = ''
     try {
-      name = formatName(node.name)
+      name = propName(node.name)
       value = node.effects
         .reduce(
           (acc, val) => [
@@ -34,4 +34,4 @@ const toElevationTokens = R.pipe(
   toDict,
 )
 
-export const makeElevationTokens = (documents) => toElevationTokens(documents)
+export const makeElevationTokens = (elevations) => toElevationTokens(elevations)

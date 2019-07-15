@@ -1,5 +1,5 @@
 {
-    "clickbounds--jumbo--base": "88px",
-    "clickbounds--default--base": "48px",
-    "clickbounds--default--input": "56px"
+    "clickbounds__jumbo__base": "88px",
+    "clickbounds__default__base": "48px",
+    "clickbounds__default__input": "56px"
 }

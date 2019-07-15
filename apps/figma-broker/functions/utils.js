@@ -13,13 +13,21 @@ export const formatName = (str) =>
     .trim()
     .replace(/[\s+]/g, '-')
     .replace(/[/]/g, '--')
-    .replace('---', '-')
+    .replace('___', '--')
 
 export const fixPageName = (name) =>
   name
     .replace(/(🚧*)(✅*)/, '')
     .toLowerCase()
     .trim()
+
+export const propName = (str) =>
+  removeForbiddenCharacters(str)
+    .toLowerCase()
+    .trim()
+    .replace(/[\s+]/g, '_')
+    .replace(/[/]/g, '__')
+    .replace('___', '__')
 
 export const colortoRgba = (color) => {
   if (!color) {
