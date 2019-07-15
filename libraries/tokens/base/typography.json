@@ -1,0 +1,236 @@
+{
+    "heading--h1": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "2.000rem",
+        "fontWeight": 700,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em",
+        "textAlign": "left"
+    },
+    "heading--h2": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.750rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.429em",
+        "textAlign": "left"
+    },
+    "heading--h3": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.500rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.667em",
+        "textAlign": "left"
+    },
+    "heading--h4": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.250rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.600em",
+        "textAlign": "left"
+    },
+    "heading--h5": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.125rem",
+        "fontWeight": 500,
+        "letterSpacing": "0.178em",
+        "lineHeight": "1.333em",
+        "textAlign": "left"
+    },
+    "heading--h6": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 500,
+        "letterSpacing": "0.200em",
+        "lineHeight": "1.500em",
+        "textAlign": "left"
+    },
+    "navigation--menu-title": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": "0.200em",
+        "lineHeight": "1.000em",
+        "textAlign": "left"
+    },
+    "navigation--menu-tabs": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 500,
+        "letterSpacing": "0.200em",
+        "lineHeight": "1.000em",
+        "textAlign": "left"
+    },
+    "navigation--menu-label": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.688rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.455em",
+        "textAlign": "left"
+    },
+    "navigation--drawer-first-level": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 700,
+        "letterSpacing": "0.133em",
+        "lineHeight": "1.333em",
+        "textAlign": "left"
+    },
+    "navigation--drawer-second-level": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 500,
+        "letterSpacing": "0.267em",
+        "lineHeight": "1.333em",
+        "textAlign": "left"
+    },
+    "navigation--button": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": "1.143em",
+        "textAlign": "left"
+    },
+    "input--label": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.333em",
+        "textAlign": "left"
+    },
+    "input--text": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": "0.400em",
+        "lineHeight": "1.500em",
+        "textAlign": "left"
+    },
+    "input--text-monospaced": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": "1.000em",
+        "lineHeight": "1.500em",
+        "textAlign": "left"
+    },
+    "input--helper": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.688rem",
+        "fontWeight": 400,
+        "letterSpacing": "0.291em",
+        "lineHeight": "1.455em",
+        "textAlign": "left"
+    },
+    "paragraph--body-short": {
+        "color": "rgba(0, 112, 120, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.250em",
+        "textAlign": "left"
+    },
+    "paragraph--caption": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.143em",
+        "textAlign": "left"
+    },
+    "paragraph--overline": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.625rem",
+        "fontWeight": 500,
+        "letterSpacing": "1.760em",
+        "lineHeight": "1.600em",
+        "textAlign": "left"
+    },
+    "paragraph--ingress": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.125rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.333em",
+        "textAlign": "left"
+    },
+    "paragraph--body-long": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 700,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em",
+        "textAlign": "left"
+    },
+    "table--cell-header": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": "1.714em",
+        "textAlign": "left"
+    },
+    "table--cell-text": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.714em",
+        "textAlign": "left"
+    },
+    "table--cell-numeric-monospaced": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.667em",
+        "textAlign": "left"
+    },
+    "ui--tooltip": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": "1.333em",
+        "textAlign": "left"
+    },
+    "ui--snackbar": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em",
+        "textAlign": "left"
+    }
+}

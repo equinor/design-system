@@ -13,26 +13,30 @@ export const makeDesktopComponents = (figmaPages) => {
         components.push({
           name: 'buttons-primary',
           value: makeButtonsComponent(data),
+          path: 'button',
         })
-        break;
+        break
       case 'buttons secondary color':
         components.push({
           name: 'buttons-secondary',
           value: makeButtonsComponent(data),
+          path: 'button',
         })
-        break;
+        break
       case 'buttons danger color':
         components.push({
           name: 'buttons-danger',
           value: makeButtonsComponent(data),
+          path: 'button',
         })
-        break;
+        break
       case 'buttons disabled':
         components.push({
           name: 'buttons-disabled',
           value: makeButtonsComponent(data),
+          path: 'button',
         })
-        break;
+        break
       default:
         break
     }

@@ -1,0 +1,237 @@
+{
+    "outlined": {
+        "height": "36px",
+        "background": "transparent",
+        "border": {
+            "color": "rgba(219, 219, 219, 1)",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "ghost": {
+        "height": "36px",
+        "background": "transparent",
+        "border": {
+            "color": "transparent",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "ghost-icon": {
+        "clickbound": "48px",
+        "clickboundOffset": "NaNpx"
+    },
+    "contained-right-icon": {
+        "height": "36px",
+        "background": "rgba(235, 235, 235, 1)",
+        "border": {
+            "color": "transparent",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px",
+            "icon": "8px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "outlined-right-icon": {
+        "height": "36px",
+        "background": "transparent",
+        "border": {
+            "color": "rgba(219, 219, 219, 1)",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px",
+            "icon": "8px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "ghost-right-icon": {
+        "height": "36px",
+        "background": "transparent",
+        "border": {
+            "color": "transparent",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px",
+            "icon": "8px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "contained-left-icon": {
+        "height": "36px",
+        "background": "rgba(235, 235, 235, 1)",
+        "border": {
+            "color": "transparent",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px",
+            "icon": "8px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "outlined-left-icon": {
+        "height": "36px",
+        "background": "transparent",
+        "border": {
+            "color": "rgba(219, 219, 219, 1)",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px",
+            "icon": "8px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "ghost-left-icon": {
+        "height": "36px",
+        "background": "transparent",
+        "border": {
+            "color": "transparent",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px",
+            "icon": "8px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    },
+    "contained": {
+        "height": "36px",
+        "background": "rgba(235, 235, 235, 1)",
+        "border": {
+            "color": "transparent",
+            "width": "1px",
+            "radius": "4px"
+        },
+        "color": "rgba(112, 112, 112, 1)",
+        "typography": {
+            "color": "rgba(112, 112, 112, 1)",
+            "fontFamily": "Equinor",
+            "fontSize": "0.875rem",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "lineHeight": "1.143em",
+            "textAlign": "center"
+        },
+        "spacing": {
+            "left": "16px",
+            "right": "16px"
+        },
+        "clickbound": "48px",
+        "clickboundOffset": "6px"
+    }
+}
