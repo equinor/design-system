@@ -230,11 +230,10 @@ components:
         - *1
       react:
         - *1
-  - component: Scrim
+  - component: Search
     status:
       documentation:
-        - *4
-        - *2
+        - *3
       figma:
         - *4
         - *2
@@ -253,7 +252,19 @@ components:
         - *1
       react:
         - *1
-  - component: Slider
+  - component: Scrim
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+   - component: Slider
     status:
       documentation:
         - *3
