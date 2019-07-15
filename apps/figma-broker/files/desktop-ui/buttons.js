@@ -7,13 +7,9 @@ import {
   withType,
 } from '@utils'
 
+import { toTypography, rootFontSize, px, em, rem } from '@units'
+
 const fallback = {}
-
-const rootFontSize = 16
-
-const px = (unit) => `${unit}px`
-const em = (unit) => `${unit}em`
-const rem = (unit) => `${unit}rem`
 
 const buildProps = (states) => {
   let buttonProps = {}
@@ -51,30 +47,12 @@ const buildProps = (states) => {
     }
 
     if (label) {
-      const {
-        fontFamily,
-        fontSize,
-        fontWeight,
-        letterSpacing,
-        textAlignHorizontal = 'center',
-        lineHeightPercentFontSize,
-      } = label.style
       const fill = label.fills.find(withType('solid')) || fallback
 
-      const fontSizeRem = (fontSize / rootFontSize).toFixed(3)
-      const lineHeightEm = (lineHeightPercentFontSize / 100).toFixed(3)
-      const letterSpacingEm = (letterSpacing / fontSizeRem).toFixed(3)
       buttonProps = {
         ...buttonProps,
         color: colortoRgba(fill.color),
-        typography: {
-          fontFamily,
-          fontSize: rem(fontSizeRem),
-          fontWeight,
-          letterSpacing: letterSpacing ? em(letterSpacingEm) : 0,
-          lineHeight: em(lineHeightEm),
-          textAlign: R.toLower(textAlignHorizontal),
-        },
+        typography: toTypography(label),
       }
     }
 
