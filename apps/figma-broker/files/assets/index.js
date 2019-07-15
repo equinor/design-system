@@ -1,6 +1,6 @@
+import * as R from 'ramda'
 import { fixPageName } from '@utils'
 import { makeAssetTokens } from './icon'
-import * as R from 'ramda'
 
 const getAssetTokens = R.pipe(
   R.filter((x) => x.type === 'FRAME'),

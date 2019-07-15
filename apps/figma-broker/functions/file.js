@@ -1,6 +1,6 @@
 import fs from 'fs'
-import { createFolder } from './folder'
 import fetch from 'node-fetch'
+import { createFolder } from './folder'
 
 const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`
 
@@ -64,5 +64,5 @@ export const writeResultsIndividually = (
 }
 
 export async function fetchFile(url) {
-  return await fetch(url).then((res) => res.text())
+  return fetch(url).then((res) => res.text())
 }

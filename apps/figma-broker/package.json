@@ -12,8 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^6.2.0",
-    "eslint": "^5.16.0",
+    "dotenv": "^8.0.0",
     "koa": "^2.7.0",
     "koa-body": "^4.0.8",
     "koa-logger": "^3.2.0",
@@ -25,6 +24,7 @@
   },
   "aliases": {
     "@root": ".",
-    "@utils": "./functions/utils.mjs"
+    "@utils": "./functions/utils.js",
+    "@units": "./functions/units.js"
   }
 }
