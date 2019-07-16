@@ -1,73 +1,357 @@
 {
-    "text__static_icons__primary": "rgba(61, 61, 61, 1)",
-    "text__static_icons__secondary": "rgba(87, 87, 87, 1)",
-    "text__static_icons__tertiary": "rgba(255, 255, 255, 1)",
-    "ui_background__default": "rgba(255, 255, 255, 1)",
-    "ui_background__light": "rgba(247, 247, 247, 1)",
-    "ui_background__scrim": "rgba(0, 0, 0, 1)",
-    "ui_background__medium": "rgba(219, 219, 219, 1)",
-    "ui_background__info": "rgba(214, 235, 245, 1)",
-    "ui_background__warning": "rgba(255, 232, 214, 1)",
-    "ui_background__danger": "rgba(255, 194, 194, 1)",
-    "infographic_substitute__purple_berry": "rgba(140, 18, 89, 1)",
-    "infographic_substitute__pink_rose": "rgba(227, 74, 115, 1)",
-    "infographic_substitute__pink_salmon": "rgba(255, 145, 168, 1)",
-    "infographic_substitute__green_cucumber": "rgba(0, 94, 87, 1)",
-    "infographic_substitute__green_succulent": "rgba(0, 150, 122, 1)",
-    "infographic_substitute__green_mint": "rgba(64, 212, 143, 1)",
-    "infographic_substitute__blue_ocean": "rgba(0, 64, 135, 1)",
-    "infographic_substitute__blue_overcast": "rgba(0, 133, 196, 1)",
-    "infographic_substitute__blue_sky": "rgba(82, 191, 255, 1)",
-    "infographic_primary__moss_green_100": "rgba(0, 112, 120, 1)",
-    "infographic_primary__moss_green_55": "rgba(115, 176, 181, 1)",
-    "infographic_primary__moss_green_34": "rgba(168, 207, 209, 1)",
-    "infographic_primary__moss_green_21": "rgba(201, 224, 227, 1)",
-    "infographic_primary__moss_green_13": "rgba(222, 237, 237, 1)",
-    "infographic_primary__energy_red_100": "rgba(235, 0, 56, 1)",
-    "infographic_primary__energy_red_55": "rgba(255, 125, 153, 1)",
-    "infographic_primary__energy_red_34": "rgba(255, 173, 191, 1)",
-    "infographic_primary__energy_red_21": "rgba(255, 204, 214, 1)",
-    "infographic_primary__energy_red_13": "rgba(255, 224, 232, 1)",
-    "infographic_primary__weathered_red": "rgba(125, 0, 36, 1)",
-    "infographic_primary__slate_blue": "rgba(36, 56, 69, 1)",
-    "infographic_primary__spruce_wood": "rgba(255, 232, 214, 1)",
-    "infographic_primary__mist_blue": "rgba(214, 235, 245, 1)",
-    "infographic_primary__lichen_green": "rgba(230, 250, 237, 1)",
-    "logo__fill_positive": "rgba(235, 0, 56, 1)",
-    "logo__fill_negative": "rgba(255, 255, 255, 1)",
-    "interactive_primary__activated_highlight": "rgba(230, 250, 237, 1)",
-    "interactive_primary__resting": "rgba(0, 112, 120, 1)",
-    "interactive_primary__hover": "rgba(0, 79, 84, 1)",
-    "interactive_secondary__activated_highlight": "rgba(214, 235, 245, 1)",
-    "interactive_secondary__resting": "rgba(36, 56, 69, 1)",
-    "interactive_secondary__hover": "rgba(23, 36, 46, 1)",
-    "interactive__danger__activated_highlight": "rgba(255, 194, 194, 1)",
-    "interactive__danger__resting": "rgba(235, 0, 0, 1)",
-    "interactive__danger__hover": "rgba(179, 13, 46, 1)",
-    "interactive_warning__activated_highlight": "rgba(255, 232, 214, 1)",
-    "interactive_warning__resting": "rgba(255, 145, 0, 1)",
-    "interactive_warning__hover": "rgba(173, 97, 0, 1)",
-    "interactive_warning__link": "rgba(173, 97, 0, 1)",
-    "interactive_success__activated_highlight": "rgba(230, 250, 237, 1)",
-    "interactive_success__resting": "rgba(74, 184, 71, 1)",
-    "interactive_success__hover": "rgba(54, 130, 51, 1)",
-    "interactive_success__link": "rgba(54, 130, 51, 1)",
-    "interactive_table__cell__fill_resting": "rgba(255, 255, 255, 1)",
-    "interactive_table__cell__fill_hover": "rgba(230, 250, 237, 1)",
-    "interactive_table__cell__fill_activated": "rgba(219, 219, 219, 1)",
-    "interactive_table__header__fill_activated": "rgba(235, 235, 235, 1)",
-    "interactive_table__header__fill_hover": "rgba(219, 219, 219, 1)",
-    "interactive_table__header__fill_resting": "rgba(247, 247, 247, 1)",
-    "interactive__disabled__link": "rgba(112, 112, 112, 1)",
-    "interactive__text_highlight": "rgba(214, 235, 245, 1)",
-    "interactive__focus_border": "rgba(0, 112, 120, 1)",
-    "interactive__disabled__border": "rgba(219, 219, 219, 1)",
-    "interactive__disabled__fill": "rgba(235, 235, 235, 1)",
-    "interactive__link_on_interactive_colors": "rgba(255, 255, 255, 1)",
-    "interactive__icon_on_interactive_colors": "rgba(255, 255, 255, 1)",
-    "interactive__link_in_snackbars": "rgba(168, 207, 209, 1)",
-    "interactive__pressed_overlay_dark": "rgba(0, 0, 0, 1)",
-    "interactive_field__fill_resting": "rgba(87, 87, 87, 1)",
-    "interactive_field__fill_hover": "rgba(242, 242, 242, 1)",
-    "interactive_field__fill_activated": "rgba(219, 219, 219, 1)"
+    "text__static_icons__primary": {
+        "rgba": "rgba(61, 61, 61, 1)",
+        "hex": "#3d3d3d",
+        "hsl": "hsl(0,0%,23.9%)"
+    },
+    "text__static_icons__secondary": {
+        "rgba": "rgba(87, 87, 87, 1)",
+        "hex": "#575757",
+        "hsl": "hsl(0,0%,34.1%)"
+    },
+    "text__static_icons__tertiary": {
+        "rgba": "rgba(255, 255, 255, 1)",
+        "hex": "#ffffff",
+        "hsl": "hsl(0,0%,100%)"
+    },
+    "ui_background__default": {
+        "rgba": "rgba(255, 255, 255, 1)",
+        "hex": "#ffffff",
+        "hsl": "hsl(0,0%,100%)"
+    },
+    "ui_background__light": {
+        "rgba": "rgba(247, 247, 247, 1)",
+        "hex": "#f7f7f7",
+        "hsl": "hsl(0,0%,96.9%)"
+    },
+    "ui_background__scrim": {
+        "rgba": "rgba(0, 0, 0, 1)",
+        "hex": "#000000",
+        "hsl": "hsl(0,0%,0%)"
+    },
+    "ui_background__medium": {
+        "rgba": "rgba(219, 219, 219, 1)",
+        "hex": "#dbdbdb",
+        "hsl": "hsl(0,0%,85.9%)"
+    },
+    "ui_background__info": {
+        "rgba": "rgba(214, 235, 245, 1)",
+        "hex": "#d6ebf5",
+        "hsl": "hsl(199,60.8%,90%)"
+    },
+    "ui_background__warning": {
+        "rgba": "rgba(255, 232, 214, 1)",
+        "hex": "#ffe8d6",
+        "hsl": "hsl(26,100%,92%)"
+    },
+    "ui_background__danger": {
+        "rgba": "rgba(255, 194, 194, 1)",
+        "hex": "#ffc2c2",
+        "hsl": "hsl(0,100%,88%)"
+    },
+    "infographic_substitute__purple_berry": {
+        "rgba": "rgba(140, 18, 89, 1)",
+        "hex": "#8c1259",
+        "hsl": "hsl(325,77.2%,31%)"
+    },
+    "infographic_substitute__pink_rose": {
+        "rgba": "rgba(227, 74, 115, 1)",
+        "hex": "#e34a73",
+        "hsl": "hsl(344,73.2%,59%)"
+    },
+    "infographic_substitute__pink_salmon": {
+        "rgba": "rgba(255, 145, 168, 1)",
+        "hex": "#ff91a8",
+        "hsl": "hsl(347,100%,78.4%)"
+    },
+    "infographic_substitute__green_cucumber": {
+        "rgba": "rgba(0, 94, 87, 1)",
+        "hex": "#005e57",
+        "hsl": "hsl(176,100%,18.4%)"
+    },
+    "infographic_substitute__green_succulent": {
+        "rgba": "rgba(0, 150, 122, 1)",
+        "hex": "#00967a",
+        "hsl": "hsl(169,100%,29.4%)"
+    },
+    "infographic_substitute__green_mint": {
+        "rgba": "rgba(64, 212, 143, 1)",
+        "hex": "#40d48f",
+        "hsl": "hsl(152,63.2%,54.1%)"
+    },
+    "infographic_substitute__blue_ocean": {
+        "rgba": "rgba(0, 64, 135, 1)",
+        "hex": "#004087",
+        "hsl": "hsl(212,100%,26.5%)"
+    },
+    "infographic_substitute__blue_overcast": {
+        "rgba": "rgba(0, 133, 196, 1)",
+        "hex": "#0085c4",
+        "hsl": "hsl(199,100%,38.4%)"
+    },
+    "infographic_substitute__blue_sky": {
+        "rgba": "rgba(82, 191, 255, 1)",
+        "hex": "#52bfff",
+        "hsl": "hsl(202,100%,66.1%)"
+    },
+    "infographic_primary__moss_green_100": {
+        "rgba": "rgba(0, 112, 120, 1)",
+        "hex": "#007078",
+        "hsl": "hsl(184,100%,23.5%)"
+    },
+    "infographic_primary__moss_green_55": {
+        "rgba": "rgba(115, 176, 181, 1)",
+        "hex": "#73b0b5",
+        "hsl": "hsl(185,30.8%,58%)"
+    },
+    "infographic_primary__moss_green_34": {
+        "rgba": "rgba(168, 207, 209, 1)",
+        "hex": "#a8cfd1",
+        "hsl": "hsl(183,30.8%,73.9%)"
+    },
+    "infographic_primary__moss_green_21": {
+        "rgba": "rgba(201, 224, 227, 1)",
+        "hex": "#c9e0e3",
+        "hsl": "hsl(187,31.7%,83.9%)"
+    },
+    "infographic_primary__moss_green_13": {
+        "rgba": "rgba(222, 237, 237, 1)",
+        "hex": "#deeded",
+        "hsl": "hsl(180,29.4%,90%)"
+    },
+    "infographic_primary__energy_red_100": {
+        "rgba": "rgba(235, 0, 56, 1)",
+        "hex": "#eb0038",
+        "hsl": "hsl(346,100%,46.1%)"
+    },
+    "infographic_primary__energy_red_55": {
+        "rgba": "rgba(255, 125, 153, 1)",
+        "hex": "#ff7d99",
+        "hsl": "hsl(347,100%,74.5%)"
+    },
+    "infographic_primary__energy_red_34": {
+        "rgba": "rgba(255, 173, 191, 1)",
+        "hex": "#ffadbf",
+        "hsl": "hsl(347,100%,83.9%)"
+    },
+    "infographic_primary__energy_red_21": {
+        "rgba": "rgba(255, 204, 214, 1)",
+        "hex": "#ffccd6",
+        "hsl": "hsl(348,100%,90%)"
+    },
+    "infographic_primary__energy_red_13": {
+        "rgba": "rgba(255, 224, 232, 1)",
+        "hex": "#ffe0e8",
+        "hsl": "hsl(345,100%,93.9%)"
+    },
+    "infographic_primary__weathered_red": {
+        "rgba": "rgba(125, 0, 36, 1)",
+        "hex": "#7d0024",
+        "hsl": "hsl(343,100%,24.5%)"
+    },
+    "infographic_primary__slate_blue": {
+        "rgba": "rgba(36, 56, 69, 1)",
+        "hex": "#243845",
+        "hsl": "hsl(204,31.4%,20.6%)"
+    },
+    "infographic_primary__spruce_wood": {
+        "rgba": "rgba(255, 232, 214, 1)",
+        "hex": "#ffe8d6",
+        "hsl": "hsl(26,100%,92%)"
+    },
+    "infographic_primary__mist_blue": {
+        "rgba": "rgba(214, 235, 245, 1)",
+        "hex": "#d6ebf5",
+        "hsl": "hsl(199,60.8%,90%)"
+    },
+    "infographic_primary__lichen_green": {
+        "rgba": "rgba(230, 250, 237, 1)",
+        "hex": "#e6faed",
+        "hsl": "hsl(141,66.7%,94.1%)"
+    },
+    "logo__fill_positive": {
+        "rgba": "rgba(235, 0, 56, 1)",
+        "hex": "#eb0038",
+        "hsl": "hsl(346,100%,46.1%)"
+    },
+    "logo__fill_negative": {
+        "rgba": "rgba(255, 255, 255, 1)",
+        "hex": "#ffffff",
+        "hsl": "hsl(0,0%,100%)"
+    },
+    "interactive_primary__activated_highlight": {
+        "rgba": "rgba(230, 250, 237, 1)",
+        "hex": "#e6faed",
+        "hsl": "hsl(141,66.7%,94.1%)"
+    },
+    "interactive_primary__resting": {
+        "rgba": "rgba(0, 112, 120, 1)",
+        "hex": "#007078",
+        "hsl": "hsl(184,100%,23.5%)"
+    },
+    "interactive_primary__hover": {
+        "rgba": "rgba(0, 79, 84, 1)",
+        "hex": "#004f54",
+        "hsl": "hsl(184,100%,16.5%)"
+    },
+    "interactive_secondary__activated_highlight": {
+        "rgba": "rgba(214, 235, 245, 1)",
+        "hex": "#d6ebf5",
+        "hsl": "hsl(199,60.8%,90%)"
+    },
+    "interactive_secondary__resting": {
+        "rgba": "rgba(36, 56, 69, 1)",
+        "hex": "#243845",
+        "hsl": "hsl(204,31.4%,20.6%)"
+    },
+    "interactive_secondary__hover": {
+        "rgba": "rgba(23, 36, 46, 1)",
+        "hex": "#17242e",
+        "hsl": "hsl(206,33.3%,13.5%)"
+    },
+    "interactive__danger__activated_highlight": {
+        "rgba": "rgba(255, 194, 194, 1)",
+        "hex": "#ffc2c2",
+        "hsl": "hsl(0,100%,88%)"
+    },
+    "interactive__danger__resting": {
+        "rgba": "rgba(235, 0, 0, 1)",
+        "hex": "#eb0000",
+        "hsl": "hsl(0,100%,46.1%)"
+    },
+    "interactive__danger__hover": {
+        "rgba": "rgba(179, 13, 46, 1)",
+        "hex": "#b30d2e",
+        "hsl": "hsl(348,86.5%,37.6%)"
+    },
+    "interactive_warning__activated_highlight": {
+        "rgba": "rgba(255, 232, 214, 1)",
+        "hex": "#ffe8d6",
+        "hsl": "hsl(26,100%,92%)"
+    },
+    "interactive_warning__resting": {
+        "rgba": "rgba(255, 145, 0, 1)",
+        "hex": "#ff9100",
+        "hsl": "hsl(34,100%,50%)"
+    },
+    "interactive_warning__hover": {
+        "rgba": "rgba(173, 97, 0, 1)",
+        "hex": "#ad6100",
+        "hsl": "hsl(34,100%,33.9%)"
+    },
+    "interactive_warning__link": {
+        "rgba": "rgba(173, 97, 0, 1)",
+        "hex": "#ad6100",
+        "hsl": "hsl(34,100%,33.9%)"
+    },
+    "interactive_success__activated_highlight": {
+        "rgba": "rgba(230, 250, 237, 1)",
+        "hex": "#e6faed",
+        "hsl": "hsl(141,66.7%,94.1%)"
+    },
+    "interactive_success__resting": {
+        "rgba": "rgba(74, 184, 71, 1)",
+        "hex": "#4ab847",
+        "hsl": "hsl(118,44.3%,50%)"
+    },
+    "interactive_success__hover": {
+        "rgba": "rgba(54, 130, 51, 1)",
+        "hex": "#368233",
+        "hsl": "hsl(118,43.6%,35.5%)"
+    },
+    "interactive_success__link": {
+        "rgba": "rgba(54, 130, 51, 1)",
+        "hex": "#368233",
+        "hsl": "hsl(118,43.6%,35.5%)"
+    },
+    "interactive_table__cell__fill_resting": {
+        "rgba": "rgba(255, 255, 255, 1)",
+        "hex": "#ffffff",
+        "hsl": "hsl(0,0%,100%)"
+    },
+    "interactive_table__cell__fill_hover": {
+        "rgba": "rgba(230, 250, 237, 1)",
+        "hex": "#e6faed",
+        "hsl": "hsl(141,66.7%,94.1%)"
+    },
+    "interactive_table__cell__fill_activated": {
+        "rgba": "rgba(219, 219, 219, 1)",
+        "hex": "#dbdbdb",
+        "hsl": "hsl(0,0%,85.9%)"
+    },
+    "interactive_table__header__fill_activated": {
+        "rgba": "rgba(235, 235, 235, 1)",
+        "hex": "#ebebeb",
+        "hsl": "hsl(0,0%,92.2%)"
+    },
+    "interactive_table__header__fill_hover": {
+        "rgba": "rgba(219, 219, 219, 1)",
+        "hex": "#dbdbdb",
+        "hsl": "hsl(0,0%,85.9%)"
+    },
+    "interactive_table__header__fill_resting": {
+        "rgba": "rgba(247, 247, 247, 1)",
+        "hex": "#f7f7f7",
+        "hsl": "hsl(0,0%,96.9%)"
+    },
+    "interactive__disabled__link": {
+        "rgba": "rgba(112, 112, 112, 1)",
+        "hex": "#707070",
+        "hsl": "hsl(0,0%,43.9%)"
+    },
+    "interactive__text_highlight": {
+        "rgba": "rgba(214, 235, 245, 1)",
+        "hex": "#d6ebf5",
+        "hsl": "hsl(199,60.8%,90%)"
+    },
+    "interactive__focus_border": {
+        "rgba": "rgba(0, 112, 120, 1)",
+        "hex": "#007078",
+        "hsl": "hsl(184,100%,23.5%)"
+    },
+    "interactive__disabled__border": {
+        "rgba": "rgba(219, 219, 219, 1)",
+        "hex": "#dbdbdb",
+        "hsl": "hsl(0,0%,85.9%)"
+    },
+    "interactive__disabled__fill": {
+        "rgba": "rgba(235, 235, 235, 1)",
+        "hex": "#ebebeb",
+        "hsl": "hsl(0,0%,92.2%)"
+    },
+    "interactive__link_on_interactive_colors": {
+        "rgba": "rgba(255, 255, 255, 1)",
+        "hex": "#ffffff",
+        "hsl": "hsl(0,0%,100%)"
+    },
+    "interactive__icon_on_interactive_colors": {
+        "rgba": "rgba(255, 255, 255, 1)",
+        "hex": "#ffffff",
+        "hsl": "hsl(0,0%,100%)"
+    },
+    "interactive__link_in_snackbars": {
+        "rgba": "rgba(168, 207, 209, 1)",
+        "hex": "#a8cfd1",
+        "hsl": "hsl(183,30.8%,73.9%)"
+    },
+    "interactive__pressed_overlay_dark": {
+        "rgba": "rgba(0, 0, 0, 1)",
+        "hex": "#000000",
+        "hsl": "hsl(0,0%,0%)"
+    },
+    "interactive_field__fill_resting": {
+        "rgba": "rgba(87, 87, 87, 1)",
+        "hex": "#575757",
+        "hsl": "hsl(0,0%,34.1%)"
+    },
+    "interactive_field__fill_hover": {
+        "rgba": "rgba(242, 242, 242, 1)",
+        "hex": "#f2f2f2",
+        "hsl": "hsl(0,0%,94.9%)"
+    },
+    "interactive_field__fill_activated": {
+        "rgba": "rgba(219, 219, 219, 1)",
+        "hex": "#dbdbdb",
+        "hsl": "hsl(0,0%,85.9%)"
+    }
 }
