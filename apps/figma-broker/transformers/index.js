@@ -21,16 +21,23 @@ export const toTypography = (figmaNode) => {
   const fontSizeRem = (fontSize / rootFontSize).toFixed(3)
   const lineHeightEm = (lineHeightPercentFontSize / 100).toFixed(3)
   const letterSpacingEm = (letterSpacing / fontSizeRem).toFixed(3)
+  const textAlignLens = R.lensProp('textAlign')
+  const textAlign = R.toLower(textAlignHorizontal)
 
-  return {
+  let typography = {
     color: colortoRgba(fill.color),
     fontFamily,
     fontSize: rem(fontSizeRem),
     fontWeight,
     letterSpacing: letterSpacing ? em(letterSpacingEm) : 0,
     lineHeight: em(lineHeightEm),
-    textAlign: R.toLower(textAlignHorizontal),
   }
+
+  if (textAlign !== 'left') {
+    typography = R.set(textAlignLens, textAlign, typography)
+  }
+
+  return typography
 }
 
 export const toSpacer = (name, box) => {

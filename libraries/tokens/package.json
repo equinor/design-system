@@ -1,10 +1,6 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.0.1",
-  "description": "",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "AGPL",
-  "dependencies": {}
+  "version": "0.0.1-alpha.1",
+  "description": "Design tokens for the Equinor Design System",
+  "scripts": {}
 }

@@ -1,37 +1,37 @@
 {
     "circle": {
-        "height": "40px",
-        "width": "40px",
+        "minHeight": "40px",
+        "minWidth": "40px",
         "borderRadius": "100px"
     },
     "button": {
-        "height": "36px",
-        "width": "112px",
+        "minHeight": "36px",
+        "minWidth": "112px",
         "borderRadius": "4px"
     },
     "corners": {
-        "height": "36px",
-        "width": "112px",
+        "minHeight": "36px",
+        "minWidth": "112px",
         "borderRadius": "4px"
     },
     "icon_button": {
-        "height": "48px",
-        "width": "48px",
+        "minHeight": "48px",
+        "minWidth": "48px",
         "borderRadius": "100px"
     },
     "field": {
-        "height": "56px",
-        "width": "294px",
+        "minHeight": "56px",
+        "minWidth": "294px",
         "borderRadius": ""
     },
     "straight": {
-        "height": "36px",
-        "width": "112px",
+        "minHeight": "36px",
+        "minWidth": "112px",
         "borderRadius": ""
     },
     "caret": {
-        "height": "8px",
-        "width": "6px",
+        "minHeight": "8px",
+        "minWidth": "6px",
         "borderRadius": ""
     }
 }

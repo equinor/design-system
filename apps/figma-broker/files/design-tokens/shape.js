@@ -15,14 +15,14 @@ const toShapeTokens = R.pipe(
       const component = R.head(node.children)
 
       const values = {
-        height: px(component.absoluteBoundingBox.height),
-        width: px(component.absoluteBoundingBox.width),
+        minHeight: px(component.absoluteBoundingBox.height),
+        minWidth: px(component.absoluteBoundingBox.width),
         borderRadius: px(component.cornerRadius),
       }
 
       value = values
     } catch (error) {
-      throw Error(`Error parsing shaope for ${name}. ${error.message}`)
+      throw Error(`Error parsing shape for ${name}. ${error.message}`)
     }
     return {
       name,
