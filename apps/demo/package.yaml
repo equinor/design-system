@@ -1,0 +1,8 @@
+name: eds-demo-app
+version: 0.0.1
+scripts:
+  dev: eleventy --serve
+  build: eleventy
+dependencies:
+  '@11ty/eleventy': ^0.8.3
+  '@11ty/eleventy-plugin-syntaxhighlight': ^2.0.3
