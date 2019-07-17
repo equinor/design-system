@@ -16,5 +16,5 @@ RUN pnpm run build
 # host
 FROM nginx:1.15.8-alpine
 WORKDIR /app
-COPY --from=builder /app/_site/cdn /app
+COPY --from=builder /app/dist/cdn /app
 COPY nginx.conf /etc/nginx/conf.d/default.conf
