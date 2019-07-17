@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>${title}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css">
+    <link
+      rel="stylesheet"
+      href="https://eds-static.equinor.com/font/equinor-font.css"
+    />
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      body {
+        margin: 4rem;
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+      .markdown-body {
+        max-width: 70rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      pre[class^="language"] {
+        font-size: 0.75rem;
+      }
+    </style>
+  </head>
+  <body class="markdown-body">
+    ${content}
+  </body>
+</html>

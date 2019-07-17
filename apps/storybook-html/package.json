@@ -1,0 +1,16 @@
+{
+  "name": "@equinor/eds-storybook-html",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "start-storybook -c ./"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@storybook/html": "^5.1.9",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.1.4"
+  },
+  "dependencies": {
+    "emotion": "^10.0.14"
+  }
+}
