@@ -1,9 +1,12 @@
-FROM node:12-alpine as builder
+FROM node:11-alpine as builder
 WORKDIR /app
 
-# install pacakges
+# install packges
 COPY package*.yaml ./
-RUN curl -sL https://unpkg.com/@pnpm/self-installer | node<Paste>
+RUN apk add --update \
+    curl \
+    && rm -rf /var/cache/apk/*
+RUN curl -sL https://unpkg.com/@pnpm/self-installer | node
 RUN pnpm install
 
 # build
@@ -13,5 +16,5 @@ RUN pnpm run build
 # host
 FROM nginx:1.15.8-alpine
 WORKDIR /app
-COPY --from=builder /app/public /app
+COPY --from=builder /app/_site/cdn /app
 COPY nginx.conf /etc/nginx/conf.d/default.conf
