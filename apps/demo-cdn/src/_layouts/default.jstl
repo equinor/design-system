@@ -7,21 +7,27 @@
     <title>${title}</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css">
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/font/equinor-font.css"
     />
     <!-- <link -->
-      <!-- rel="stylesheet" -->
-      <!-- href="https://eds-static.equinor.com/font/equinor-font.css" -->
+    <!-- rel="stylesheet" -->
+    <!-- href="https://eds-static.equinor.com/font/equinor-font.css" -->
     <!-- /> -->
     <style>
       html {
         box-sizing: border-box;
       }
-      *, *:before, *:after {
+      *,
+      *:before,
+      *:after {
         box-sizing: inherit;
       }
       body {
@@ -30,12 +36,17 @@
         padding-right: 5%;
       }
       .markdown-body {
-        max-width: 70rem;
+        max-width: 75rem;
         margin-left: auto;
         margin-right: auto;
       }
-      pre[class^="language"] {
+      pre[class^='language'] {
         font-size: 0.75rem;
+      }
+      abbr {
+        cursor: help;
+        text-decoration: none;
+        border-bottom: 1px dotted gray;
       }
     </style>
   </head>
