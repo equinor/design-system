@@ -7,6 +7,8 @@ layout: default
 
 This is some text about the Equinor CDN
 
+> Note: Viewing the source-code will show that we use a temporary url for the CDN – but it will be https://eds-static.equinor.com once everything is in place.
+
 ## The Equinor font
 
 <div style="font-family: Equinor; font-size: 1.125em">

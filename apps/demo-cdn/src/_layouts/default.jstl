@@ -11,8 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css">
     <link
       rel="stylesheet"
-      href="https://eds-static.equinor.com/font/equinor-font.css"
+      href="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/font/equinor-font.css"
     />
+    <!-- <link -->
+      <!-- rel="stylesheet" -->
+      <!-- href="https://eds-static.equinor.com/font/equinor-font.css" -->
+    <!-- /> -->
     <style>
       html {
         box-sizing: border-box;

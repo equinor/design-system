@@ -7,7 +7,7 @@ RUN apk add --update \
     curl \
     && rm -rf /var/cache/apk/*
 RUN curl -sL https://unpkg.com/@pnpm/self-installer | node
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # build
 COPY . .
