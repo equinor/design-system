@@ -5,7 +5,7 @@ layout: default
 
 # Equinor CDN
 
-This is some text about the Equinor CDN, just testing automatic deployment.
+This is some text about the Equinor CDN, just testing automatic deployment with Azure Pipelines.
 
 > Note: Viewing the source-code will show that we use a temporary url for the CDN – but it will be https://eds-static.equinor.com once everything is in place.
 
