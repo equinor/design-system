@@ -1,6 +1,5 @@
 import * as R from 'ramda'
 import { propName, withType, pickChildren, toDict } from '@utils'
-import { px } from '@units'
 import { toFocus, toOverlay } from '@transformers'
 
 const toStatesTokens = R.pipe(
@@ -21,7 +20,7 @@ const toStatesTokens = R.pipe(
         value = toFocus(component)
       }
     } catch (error) {
-      throw Error(`Error parsing shaope for ${name}. ${error.message}`)
+      throw Error(`Error parsing shape for ${name}. ${error.message}`)
     }
     return {
       name,
