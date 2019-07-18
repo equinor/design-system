@@ -128,7 +128,7 @@
         "lineHeight": "1.455em"
     },
     "paragraph__body_short": {
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(0, 112, 121, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
         "fontWeight": 400,

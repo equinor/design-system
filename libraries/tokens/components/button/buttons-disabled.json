@@ -3,13 +3,13 @@
         "height": "36px",
         "background": "transparent",
         "border": {
-            "color": "rgba(219, 219, 219, 1)",
+            "color": "rgba(220, 220, 220, 1)",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -32,9 +32,9 @@
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -55,15 +55,15 @@
     },
     "contained_right_icon": {
         "height": "36px",
-        "background": "rgba(235, 235, 235, 1)",
+        "background": "rgba(234, 234, 234, 1)",
         "border": {
             "color": "transparent",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -83,13 +83,13 @@
         "height": "36px",
         "background": "transparent",
         "border": {
-            "color": "rgba(219, 219, 219, 1)",
+            "color": "rgba(220, 220, 220, 1)",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -113,9 +113,9 @@
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -133,15 +133,15 @@
     },
     "contained_left_icon": {
         "height": "36px",
-        "background": "rgba(235, 235, 235, 1)",
+        "background": "rgba(234, 234, 234, 1)",
         "border": {
             "color": "transparent",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -161,13 +161,13 @@
         "height": "36px",
         "background": "transparent",
         "border": {
-            "color": "rgba(219, 219, 219, 1)",
+            "color": "rgba(220, 220, 220, 1)",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -191,9 +191,9 @@
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -211,15 +211,15 @@
     },
     "contained": {
         "height": "36px",
-        "background": "rgba(235, 235, 235, 1)",
+        "background": "rgba(234, 234, 234, 1)",
         "border": {
             "color": "transparent",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(112, 112, 112, 1)",
+        "color": "rgba(111, 111, 111, 1)",
         "typography": {
-            "color": "rgba(112, 112, 112, 1)",
+            "color": "rgba(111, 111, 111, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,

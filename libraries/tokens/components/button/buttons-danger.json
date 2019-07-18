@@ -25,13 +25,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(255, 194, 194, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(255, 193, 193, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "ghost": {
         "height": "36px",
@@ -59,13 +58,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(255, 194, 194, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(255, 193, 193, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "contained_right_icon": {
         "height": "36px",
@@ -94,13 +92,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(179, 13, 46, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(179, 13, 47, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "outlined_right_icon": {
         "height": "36px",
@@ -129,13 +126,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(255, 194, 194, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(255, 193, 193, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "ghost_right_icon": {
         "height": "36px",
@@ -164,13 +160,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(255, 194, 194, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(255, 193, 193, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "contained_left_icon": {
         "height": "36px",
@@ -199,13 +194,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(179, 13, 46, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(179, 13, 47, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "outlined_left_icon": {
         "height": "36px",
@@ -234,13 +228,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(255, 194, 194, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(255, 193, 193, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "ghost_left_icon": {
         "height": "36px",
@@ -269,13 +262,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(255, 194, 194, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(255, 193, 193, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "contained": {
         "height": "36px",
@@ -303,12 +295,11 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(179, 13, 46, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(179, 13, 47, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     }
 }

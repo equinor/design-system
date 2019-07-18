@@ -3,13 +3,13 @@
         "height": "36px",
         "background": "transparent",
         "border": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(0, 112, 121, 1)",
         "typography": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -25,13 +25,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(222, 237, 238, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "ghost": {
         "height": "36px",
@@ -41,9 +40,9 @@
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(0, 112, 121, 1)",
         "typography": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -59,30 +58,28 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(222, 237, 238, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "ghost_icon": {
         "clickbound": "48px",
         "clickboundOffset": "",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(222, 237, 238, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "contained_right_icon": {
         "height": "36px",
-        "background": "rgba(0, 112, 120, 1)",
+        "background": "rgba(0, 112, 121, 1)",
         "border": {
             "color": "transparent",
             "width": "1px",
@@ -107,25 +104,24 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(0, 79, 84, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(0, 79, 85, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "outlined_right_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(0, 112, 121, 1)",
         "typography": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -141,13 +137,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(222, 237, 238, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "ghost_right_icon": {
         "height": "36px",
@@ -157,9 +152,9 @@
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(0, 112, 121, 1)",
         "typography": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -176,17 +171,16 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(222, 237, 238, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "contained_left_icon": {
         "height": "36px",
-        "background": "rgba(0, 112, 120, 1)",
+        "background": "rgba(0, 112, 121, 1)",
         "border": {
             "color": "transparent",
             "width": "1px",
@@ -210,25 +204,24 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(0, 79, 84, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(0, 79, 85, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "outlined_left_icon": {
         "height": "36px",
         "background": "transparent",
         "border": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(0, 112, 121, 1)",
         "typography": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -245,13 +238,12 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(222, 237, 238, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "ghost_left_icon": {
         "height": "36px",
@@ -261,9 +253,9 @@
             "width": "1px",
             "radius": "4px"
         },
-        "color": "rgba(0, 112, 120, 1)",
+        "color": "rgba(0, 112, 121, 1)",
         "typography": {
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
@@ -280,17 +272,16 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(222, 237, 237, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(222, 237, 238, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     },
     "contained": {
         "height": "36px",
-        "background": "rgba(0, 112, 120, 1)",
+        "background": "rgba(0, 112, 121, 1)",
         "border": {
             "color": "transparent",
             "width": "1px",
@@ -314,12 +305,11 @@
         "clickboundOffset": "6px",
         "focus": {
             "type": "dashed",
-            "color": "rgba(0, 112, 120, 1)",
+            "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(0, 79, 84, 1)",
-        "pressedColor": "rgba(0, 0, 0, 1)",
-        "pressedOpacity": 0.2
+        "hoverBackground": "rgba(0, 79, 85, 1)",
+        "pressedColor": "rgba(0, 0, 0, 0.2)"
     }
 }
