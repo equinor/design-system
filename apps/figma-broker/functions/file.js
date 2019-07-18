@@ -46,7 +46,7 @@ export const readTokens = (path) =>
 export const writeResults = (results, savePath, extension = 'json') =>
   results.forEach(({ value, name, path = '' }) =>
     writeFile(
-      extension === 'json' ? JSON.stringify(value, null, 4) : value,
+      extension === 'json' ? `${JSON.stringify(value, null, 4)}\n` : value,
       `${savePath}/${path}`,
       name,
       extension,

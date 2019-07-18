@@ -25,6 +25,7 @@
   "aliases": {
     "@root": ".",
     "@utils": "./functions/utils.js",
-    "@units": "./functions/units.js"
+    "@units": "./functions/units.js",
+    "@transformers": "./transformers/index.js"
   }
 }

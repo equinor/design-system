@@ -1,9 +1,12 @@
 import * as R from 'ramda'
-import { formatName, withType, pickChildren, toDict, colortoRgba } from '@utils'
+import { propName, withType, pickChildren, toDict } from '@utils'
 import { px } from '@units'
+import { fillToRgba } from '@transformers'
 
-const toBoxShadow = (offset, radius, color) =>
-  `${px(offset.x)} ${px(offset.y)} ${px(radius)} ${colortoRgba(color)}`
+const toBoxShadow = (effect) =>
+  `${px(effect.offset.x)} ${px(effect.offset.y)} ${px(
+    effect.radius,
+  )} ${fillToRgba(effect)}`
 
 const toElevationTokens = R.pipe(
   R.filter(withType('frame')),
@@ -13,15 +16,9 @@ const toElevationTokens = R.pipe(
     let name = ''
     let value = ''
     try {
-      name = formatName(node.name)
+      name = propName(node.name)
       value = node.effects
-        .reduce(
-          (acc, val) => [
-            ...acc,
-            toBoxShadow(val.offset, val.radius, val.color),
-          ],
-          [],
-        )
+        .reduce((acc, effect) => [...acc, toBoxShadow(effect)], [])
         .toString()
     } catch (error) {
       throw Error(`Error parsing elevation for ${name}. ${error.message}`)
@@ -34,4 +31,4 @@ const toElevationTokens = R.pipe(
   toDict,
 )
 
-export const makeElevationTokens = (documents) => toElevationTokens(documents)
+export const makeElevationTokens = (elevations) => toElevationTokens(elevations)

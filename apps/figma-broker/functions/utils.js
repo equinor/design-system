@@ -13,7 +13,7 @@ export const formatName = (str) =>
     .trim()
     .replace(/[\s+]/g, '-')
     .replace(/[/]/g, '--')
-    .replace('---', '-')
+    .replace('___', '--')
 
 export const fixPageName = (name) =>
   name
@@ -21,29 +21,18 @@ export const fixPageName = (name) =>
     .toLowerCase()
     .trim()
 
-export const colortoRgba = (color) => {
-  if (!color) {
-    return 'transparent'
-  }
-  const { r, g, b, a } = R.map((x) => Math.round(x * 100) / 100, color)
-  const rgbColors = R.map((x) => Math.round(x * 255), { r, g, b })
-
-  return `rgba(${rgbColors.r}, ${rgbColors.g}, ${rgbColors.b}, ${a * 1})`
-}
-
-export const getSpacingValue = (name, box) => {
-  if (R.test(/Vertical/, name)) {
-    return box.width
-  }
-  if (R.test(/Horizontal/, name)) {
-    return box.height
-  }
-  return 0
-}
+export const propName = (str) =>
+  removeForbiddenCharacters(str)
+    .toLowerCase()
+    .trim()
+    .replace(/[\s+]/g, '_')
+    .replace(/[/]/g, '__')
+    .replace('___', '__')
 
 export const withName = R.curry((regExp, node) =>
   R.test(new RegExp(regExp, 'i'), node.name),
 )
+
 export const withType = R.curry((regExp, node) =>
   R.test(new RegExp(regExp, 'i'), node.type),
 )

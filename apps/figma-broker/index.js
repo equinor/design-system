@@ -32,11 +32,13 @@ const PORT = process.env.PORT || 9001
 const TEAM_ID = process.env.FIGMA_TEAM_ID || ''
 
 const COMMON_DIR = '../../common'
+const TOKENS_DIR = '../../libraries/tokens/'
+const ASSETS_DIR = '../../libraries/eds-static/'
 
 const PATHS = {
-  TOKENS: `${COMMON_DIR}/tokens`,
-  ASSETS: `${COMMON_DIR}/assets`,
-  COMPONENTS_DESKTOP: `${COMMON_DIR}/components`,
+  TOKENS: `${TOKENS_DIR}/base`,
+  ASSETS: `${ASSETS_DIR}/assets`,
+  COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
 }
