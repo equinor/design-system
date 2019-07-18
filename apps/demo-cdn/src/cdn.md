@@ -80,13 +80,13 @@ When it comes to the logo we have made some changes to the original format. Inst
 
 #### Primary
 
-<img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#red" style="width: 200px; margin: 38px; margin-left: 0;" />
+<img src="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/logo/equinor-logo-primary.svg#red" style="width: 200px; margin: 38px; margin-left: 0;" />
 
 <div style="background-color: #ff1243; display: inline-block">
-  <img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#white" style="width: 200px; margin: 38px; background-color: transparent" />
+  <img src="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/logo/equinor-logo-primary.svg#white" style="width: 200px; margin: 38px; background-color: transparent" />
 </div>
 
-<img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg" style="width: 200px; margin: 38px;" />
+<img src="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/logo/equinor-logo-primary.svg" style="width: 200px; margin: 38px;" />
 
 ```html
 <!-- The primary logo in red -->
