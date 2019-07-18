@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import { propName, withType, pickChildren, toDict } from '@utils'
-import { colortoRgba, colorToHex, colorToHsl } from '@transformers'
+import { fillToRgba, fillToHex, fillToHsla } from '@transformers'
 
 const toColorTokens = R.pipe(
   R.filter(withType('frame')),
@@ -11,11 +11,11 @@ const toColorTokens = R.pipe(
     let value = ''
     try {
       name = propName(node.name)
-      const { color } = R.find(withType('solid'), node.fills)
+      const fill = R.find(withType('solid'), node.fills)
       value = {
-        rgba: colortoRgba(color),
-        hex: colorToHex(color),
-        hsl: colorToHsl(color),
+        hex: fillToHex(fill),
+        hsla: fillToHsla(fill),
+        rgba: fillToRgba(fill),
       }
     } catch (error) {
       throw Error(`Error parsing color for ${name}. ${error.message}`)

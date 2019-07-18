@@ -6,7 +6,7 @@ import {
   toSpacer,
   toFocus,
   toOverlay,
-  colortoRgba,
+  fillToRgba,
 } from '@transformers'
 
 const fallback = {}
@@ -37,9 +37,9 @@ const buildProps = (states) => {
       buttonProps = {
         ...buttonProps,
         height: px(height),
-        background: colortoRgba(fill.color),
+        background: fillToRgba(fill),
         border: {
-          color: colortoRgba(stroke.color),
+          color: fillToRgba(stroke),
           width: px(strokeWeight),
           radius: px(cornerRadius),
         },
@@ -51,7 +51,7 @@ const buildProps = (states) => {
 
       buttonProps = {
         ...buttonProps,
-        color: colortoRgba(fill.color),
+        color: fillToRgba(fill),
         typography: toTypography(label),
       }
     }
@@ -119,7 +119,7 @@ const buildProps = (states) => {
 
       buttonProps = {
         ...buttonProps,
-        hoverBackground: colortoRgba(fill.color),
+        hoverBackground: fillToRgba(fill),
       }
     }
   }
