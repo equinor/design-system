@@ -39,13 +39,6 @@ export const makeDesktopComponents = (figmaFile) => {
           path: 'button',
         })
         break
-      case 'tables':
-        components.push({
-          name: 'tables',
-          value: makeTablesComponent(data),
-          path: 'tables',
-        })
-        break
       default:
         break
     }
