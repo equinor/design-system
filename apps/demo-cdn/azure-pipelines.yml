@@ -7,17 +7,11 @@ name: eds-cdn-demo-$(Build.BuildId)
 
 trigger:
   batch: "true"
-  branches:
-    include:
-    - feature/demo-cdn
   paths:
     include:
       - apps/demo-cdn
 
 pr:
-  branches:
-    include:
-    - feature/demo-cdn
   paths:
     include:
     - apps/demo-cdn
