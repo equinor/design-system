@@ -1,4 +1,4 @@
-import { propName } from '@utils'
+import { propName, formatName } from '@utils'
 
 export const makeAssetTokens = (assets, groupName) =>
   assets

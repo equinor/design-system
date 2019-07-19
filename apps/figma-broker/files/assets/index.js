@@ -8,10 +8,11 @@ const getAssetTokens = R.pipe(
   R.flatten,
 )
 
-export const getAssets = (figmaAssets) => {
+export const getAssets = (figmaFile) => {
   const assets = []
+  const { pages } = figmaFile
 
-  figmaAssets.forEach((page) => {
+  pages.forEach((page) => {
     const fixedPageName = fixPageName(page.name)
 
     if (fixedPageName === 'system icons') {

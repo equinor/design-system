@@ -70,8 +70,8 @@ app
 async function createTokens(ctx) {
   const data = await fetchFigmaFile(file.tokens)
 
-  const figmaPages = processFigmaFile(data)
-  const tokens = makeTokens(figmaPages)
+  const figmaFile = processFigmaFile(data)
+  const tokens = makeTokens(figmaFile)
 
   writeResults(tokens, PATHS.TOKENS)
 
@@ -83,8 +83,8 @@ async function createTokens(ctx) {
 async function createAssets(ctx) {
   const data = await fetchFigmaFile(file.assets)
 
-  const figmaPages = processFigmaFile(data)
-  const assetPages = getAssets(figmaPages)
+  const figmaFile = processFigmaFile(data)
+  const assetPages = getAssets(figmaFile)
 
   // Update with svg image urls from Figma
   const assetsWithUrl = await Promise.all(
@@ -147,8 +147,8 @@ async function transformTokens(ctx) {
 async function createDesktopComponents(ctx) {
   const data = await fetchFigmaFile(file.desktop)
 
-  const figmaPages = processFigmaFile(data)
-  const components = makeDesktopComponents(figmaPages)
+  const figmaFile = processFigmaFile(data)
+  const components = makeDesktopComponents(figmaFile)
 
   writeResults(components, PATHS.COMPONENTS_DESKTOP)
 
