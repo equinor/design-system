@@ -49,7 +49,7 @@
         border-bottom: 1px dotted gray;
       }
       p {
-        max-width: 40em;
+        max-width: 50em;
       }
     </style>
   </head>
