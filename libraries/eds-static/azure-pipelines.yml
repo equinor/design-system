@@ -5,6 +5,17 @@
 
 name: eds-static-$(Build.BuildId)
 
+trigger:
+  batch: "true"
+  paths:
+    include:
+      - apps/eds-static
+
+pr:
+  paths:
+    include:
+    - apps/eds-static
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -16,7 +27,3 @@ steps:
     versionSpec: '8.x'
 
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
-- script: pnpm install
-  workingDirectory: ./libraries/eds-static
-- script: pnpm run build
-  workingDirectory: ./libraries/eds-static
