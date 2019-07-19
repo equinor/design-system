@@ -44,6 +44,7 @@
     - Divider
     - Links
     - Lists
+    - Menu
     - Navigation app launcher
     - Navigation navigation drawer
     - Navigation breadcrumbs
@@ -56,8 +57,10 @@
     - Notification snackbar
     - Popovers
     - Progress indicators
-    - Scrim
+    - Search
     - Selection controls
+    - Scrim
+    - Sidesheet
     - Slider
     - Table
     - Text fields

@@ -107,9 +107,27 @@ components:
       react:
         - *1
   - component: 'Navigation App launcher'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: 'Navigation Breadcrumbs'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: 'Navigation Navigation Drawer'
     status:
       documentation:
@@ -178,12 +196,61 @@ components:
       react:
         - *1
   - component: 'Notification Dialog'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: 'Notification Snackbar'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Popovers
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Progress indicators
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Search
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
+  - component: Selection controls
     status:
       documentation:
         - *3
@@ -206,7 +273,7 @@ components:
         - *1
       react:
         - *1
-  - component: Selection controls
+  - component: Side sheet
     status:
       documentation:
         - *3
