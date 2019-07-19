@@ -7,11 +7,17 @@ name: eds-static-$(Build.BuildId)
 
 trigger:
   batch: "true"
+  branches:
+    include:
+    - feature/eds-static
   paths:
     include:
       - apps/eds-static
 
 pr:
+  branches:
+    include:
+    - feature/eds-static
   paths:
     include:
     - apps/eds-static
