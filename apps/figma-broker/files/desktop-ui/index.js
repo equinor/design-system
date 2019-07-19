@@ -1,10 +1,12 @@
 import { fixPageName } from '@utils'
 import { makeButtonsComponent } from './buttons'
+import { makeTablesComponent } from './tables'
 
-export const makeDesktopComponents = (figmaPages) => {
+export const makeDesktopComponents = (figmaFile) => {
   const components = []
+  const { pages } = figmaFile
 
-  figmaPages.forEach((page) => {
+  pages.forEach((page) => {
     const fixedPageName = fixPageName(page.name)
     const data = page.children
 

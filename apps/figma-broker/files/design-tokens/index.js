@@ -7,10 +7,11 @@ import { makeShapeTokens } from './shape'
 import { makeStatesTokens } from './states'
 import { fixPageName } from '@utils'
 
-export const makeTokens = (figmaPages) => {
+export const makeTokens = (figmaFile) => {
   const tokens = []
+  const { pages, getStyle } = figmaFile
 
-  figmaPages.forEach((page) => {
+  pages.forEach((page) => {
     const fixedPageName = fixPageName(page.name)
     const data = page.children
 
@@ -18,43 +19,43 @@ export const makeTokens = (figmaPages) => {
       case 'color':
         tokens.push({
           name: 'colors',
-          value: makeColorToken(data),
+          value: makeColorToken(data, getStyle),
         })
         break
       case 'spacing':
         tokens.push({
           name: 'spacings',
-          value: makeSpacingTokens(data),
+          value: makeSpacingTokens(data, getStyle),
         })
         break
       case 'elevation':
         tokens.push({
           name: 'elevation',
-          value: makeElevationTokens(data),
+          value: makeElevationTokens(data, getStyle),
         })
         break
       case 'clickbounds':
         tokens.push({
           name: 'clickbounds',
-          value: makeClickboundsTokens(data),
+          value: makeClickboundsTokens(data, getStyle),
         })
         break
       case 'typography':
         tokens.push({
           name: 'typography',
-          value: makeTextTokens(data),
+          value: makeTextTokens(data, getStyle),
         })
         break
       case 'shape':
         tokens.push({
           name: 'shape',
-          value: makeShapeTokens(data),
+          value: makeShapeTokens(data, getStyle),
         })
         break
       case 'interaction: states':
         tokens.push({
           name: 'states',
-          value: makeStatesTokens(data),
+          value: makeStatesTokens(data, getStyle),
         })
         break
       default:

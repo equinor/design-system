@@ -1,5 +1,5 @@
 {
-    "text__static_icons__primary": {
+    "text__static_icons__default": {
         "hex": "#3d3d3d",
         "hsla": "hsla(0, 0%, 23.9%, 1)",
         "rgba": "rgba(61, 61, 61, 1)"
@@ -14,7 +14,7 @@
         "hsla": "hsla(0, 0%, 43.5%, 1)",
         "rgba": "rgba(111, 111, 111, 1)"
     },
-    "text__static_icons__primarywhite": {
+    "text__static_icons__primary_white": {
         "hex": "#ffffff",
         "hsla": "hsla(0, 0%, 100%, 1)",
         "rgba": "rgba(255, 255, 255, 1)"
@@ -189,7 +189,7 @@
         "hsla": "hsla(0, 0%, 100%, 1)",
         "rgba": "rgba(255, 255, 255, 1)"
     },
-    "interactive_primary__activated_highlight": {
+    "interactive_primary__selected_highlight": {
         "hex": "#e6faec",
         "hsla": "hsla(138, 66.7%, 94.1%, 1)",
         "rgba": "rgba(230, 250, 236, 1)"
@@ -209,7 +209,7 @@
         "hsla": "hsla(184, 32%, 90.2%, 1)",
         "rgba": "rgba(222, 237, 238, 1)"
     },
-    "interactive_secondary__activated_highlight": {
+    "interactive_secondary__highlight": {
         "hex": "#d5eaf4",
         "hsla": "hsla(199, 58.5%, 89.6%, 1)",
         "rgba": "rgba(213, 234, 244, 1)"
@@ -219,12 +219,12 @@
         "hsla": "hsla(206, 32.1%, 20.8%, 1)",
         "rgba": "rgba(36, 55, 70, 1)"
     },
-    "interactive_secondary__hover": {
+    "interactive_secondary__link_hover": {
         "hex": "#17242f",
         "hsla": "hsla(208, 34.3%, 13.7%, 1)",
         "rgba": "rgba(23, 36, 47, 1)"
     },
-    "interactive__danger__activated_highlight": {
+    "interactive__danger__highlight": {
         "hex": "#ffc1c1",
         "hsla": "hsla(0, 100%, 87.8%, 1)",
         "rgba": "rgba(255, 193, 193, 1)"
@@ -239,7 +239,12 @@
         "hsla": "hsla(348, 86.5%, 37.6%, 1)",
         "rgba": "rgba(179, 13, 47, 1)"
     },
-    "interactive_warning__activated_highlight": {
+    "interactive_danger__text": {
+        "hex": "#b30d2f",
+        "hsla": "hsla(348, 86.5%, 37.6%, 1)",
+        "rgba": "rgba(179, 13, 47, 1)"
+    },
+    "interactive_warning__highlight": {
         "hex": "#ffe7d6",
         "hsla": "hsla(25, 100%, 92%, 1)",
         "rgba": "rgba(255, 231, 214, 1)"
@@ -254,12 +259,12 @@
         "hsla": "hsla(34, 100%, 33.9%, 1)",
         "rgba": "rgba(173, 98, 0, 1)"
     },
-    "interactive_warning__link": {
+    "interactive_warning__text": {
         "hex": "#ad6200",
         "hsla": "hsla(34, 100%, 33.9%, 1)",
         "rgba": "rgba(173, 98, 0, 1)"
     },
-    "interactive_success__activated_highlight": {
+    "interactive_success__highlight": {
         "hex": "#e6faec",
         "hsla": "hsla(138, 66.7%, 94.1%, 1)",
         "rgba": "rgba(230, 250, 236, 1)"
@@ -274,7 +279,7 @@
         "hsla": "hsla(118, 44.1%, 35.1%, 1)",
         "rgba": "rgba(53, 129, 50, 1)"
     },
-    "interactive_success__link": {
+    "interactive_success__text": {
         "hex": "#358132",
         "hsla": "hsla(118, 44.1%, 35.1%, 1)",
         "rgba": "rgba(53, 129, 50, 1)"
@@ -309,7 +314,7 @@
         "hsla": "hsla(0, 0%, 96.9%, 1)",
         "rgba": "rgba(247, 247, 247, 1)"
     },
-    "interactive__disabled__link": {
+    "interactive__disabled__text": {
         "hex": "#6f6f6f",
         "hsla": "hsla(0, 0%, 43.5%, 1)",
         "rgba": "rgba(111, 111, 111, 1)"
@@ -319,7 +324,7 @@
         "hsla": "hsla(199, 58.5%, 89.6%, 1)",
         "rgba": "rgba(213, 234, 244, 1)"
     },
-    "interactive__focus_border": {
+    "interactive__focus": {
         "hex": "#007079",
         "hsla": "hsla(184, 100%, 23.7%, 1)",
         "rgba": "rgba(0, 112, 121, 1)"
@@ -355,9 +360,9 @@
         "rgba": "rgba(0, 0, 0, 0.2)"
     },
     "interactive_field__fill_resting": {
-        "hex": "#565656",
-        "hsla": "hsla(0, 0%, 33.7%, 1)",
-        "rgba": "rgba(86, 86, 86, 1)"
+        "hex": "#f7f7f7",
+        "hsla": "hsla(0, 0%, 96.9%, 1)",
+        "rgba": "rgba(247, 247, 247, 1)"
     },
     "interactive_field__fill_hover": {
         "hex": "#f3f3f3",
@@ -368,5 +373,10 @@
         "hex": "#dcdcdc",
         "hsla": "hsla(0, 0%, 86.3%, 1)",
         "rgba": "rgba(220, 220, 220, 1)"
+    },
+    "tabs__inactive_text": {
+        "hex": "#565656",
+        "hsla": "hsla(0, 0%, 33.7%, 1)",
+        "rgba": "rgba(86, 86, 86, 1)"
     }
 }

@@ -68,65 +68,75 @@ app
 
 // Tokens
 async function createTokens(ctx) {
-  const data = await fetchFigmaFile(file.tokens)
+  try {
+    const data = await fetchFigmaFile(file.tokens)
 
-  const figmaPages = processFigmaFile(data)
-  const tokens = makeTokens(figmaPages)
+    const figmaFile = processFigmaFile(data)
+    const tokens = makeTokens(figmaFile)
 
-  writeResults(tokens, PATHS.TOKENS)
+    writeResults(tokens, PATHS.TOKENS)
 
-  ctx.response.body = JSON.stringify(tokens)
+    ctx.response.body = JSON.stringify(tokens)
+  } catch (err) {
+    ctx.response.status = err.status || 500
+    ctx.response.body = err.message
+  }
 }
 
 // Assets
 
 async function createAssets(ctx) {
-  const data = await fetchFigmaFile(file.assets)
+  try {
+    const data = await fetchFigmaFile(file.assets)
 
-  const figmaPages = processFigmaFile(data)
-  const assetPages = getAssets(figmaPages)
+    const figmaFile = processFigmaFile(data)
+    const assetPages = getAssets(figmaFile)
 
-  // Update with svg image urls from Figma
-  const assetsWithUrl = await Promise.all(
-    assetPages.map(async (assetPage) => {
-      const ids = assetPage.value.map((x) => x.id)
-      const result = await fetchFigmaImageUrls(file.assets, ids)
-      if (!result.err) {
-        return {
-          ...assetPage,
-          value: assetPage.value.map((asset) => ({
-            ...asset,
-            url: result.images[asset.id],
-          })),
-        }
-      }
-      return assetPage
-    }),
-  )
-  // Fetch svg image as string for each asset
-  const assetsWithSvg = await Promise.all(
-    assetsWithUrl.map(async (assetPage) => ({
-      ...assetPage,
-      value: await Promise.all(
-        assetPage.value.map(async (asset) => {
-          const svgDirty = await fetchFile(asset.url)
-          const svgClean = await svgo.optimize(svgDirty)
+    // Update with svg image urls from Figma
+    const assetsWithUrl = await Promise.all(
+      assetPages.map(async (assetPage) => {
+        const ids = assetPage.value.map((x) => x.id)
+        const result = await fetchFigmaImageUrls(file.assets, ids)
+        if (!result.err) {
           return {
-            ...asset,
-            value: svgClean.data,
+            ...assetPage,
+            value: assetPage.value.map((asset) => ({
+              ...asset,
+              url: result.images[asset.id],
+            })),
           }
-        }),
-      ),
-    })),
-  )
+        }
+        return assetPage
+      }),
+    )
+    // Fetch svg image as string for each asset
+    const assetsWithSvg = await Promise.all(
+      assetsWithUrl.map(async (assetPage) => ({
+        ...assetPage,
+        value: await Promise.all(
+          assetPage.value.map(async (asset) => {
+            const svgDirty = await fetchFile(asset.url)
+            const svgClean = await svgo.optimize(svgDirty)
+            return {
+              ...asset,
+              value: svgClean.data,
+            }
+          }),
+        ),
+      })),
+    )
 
-  // Write svg to files
-  // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-  // writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
-  // Write token
-  writeResults(assetsWithSvg, PATHS.ASSETS)
+    // Write svg to files
+    // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
+    // writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
+    // Write token
+    writeResults(assetsWithSvg, PATHS.ASSETS)
 
-  ctx.response.body = JSON.stringify(assetsWithSvg)
+    ctx.response.body = JSON.stringify(assetsWithSvg)
+  } catch (err) {
+    ctx.response.status = err.status || 500
+    ctx.response.body = err.message
+  }
 }
 
 // Transform tokens
@@ -145,14 +155,19 @@ async function transformTokens(ctx) {
 // Desktop UI
 
 async function createDesktopComponents(ctx) {
-  const data = await fetchFigmaFile(file.desktop)
+  try {
+    const data = await fetchFigmaFile(file.desktop)
 
-  const figmaPages = processFigmaFile(data)
-  const components = makeDesktopComponents(figmaPages)
+    const figmaFile = processFigmaFile(data)
+    const components = makeDesktopComponents(figmaFile)
 
-  writeResults(components, PATHS.COMPONENTS_DESKTOP)
+    writeResults(components, PATHS.COMPONENTS_DESKTOP)
 
-  ctx.response.body = JSON.stringify(components)
+    ctx.response.body = JSON.stringify(components)
+  } catch (err) {
+    ctx.response.status = err.status || 500
+    ctx.response.body = err.message
+  }
 }
 
 app.listen(PORT)

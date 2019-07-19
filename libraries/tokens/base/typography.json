@@ -1,9 +1,17 @@
 {
-    "heading__h1": {
+    "heading__h1_bold": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "2.000rem",
         "fontWeight": 700,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em"
+    },
+    "heading__h1": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "2.000rem",
+        "fontWeight": 400,
         "letterSpacing": 0,
         "lineHeight": "1.500em"
     },
@@ -63,7 +71,7 @@
         "letterSpacing": "0.200em",
         "lineHeight": "1.000em"
     },
-    "navigation__menu_label": {
+    "navigation__label": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.688rem",
@@ -71,7 +79,7 @@
         "letterSpacing": 0,
         "lineHeight": "1.455em"
     },
-    "navigation__drawer_first_level": {
+    "navigation__drawer_active": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.750rem",
@@ -79,7 +87,7 @@
         "letterSpacing": "0.133em",
         "lineHeight": "1.333em"
     },
-    "navigation__drawer_second_level": {
+    "navigation__drawer_inactive": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.750rem",
@@ -88,6 +96,22 @@
         "lineHeight": "1.333em"
     },
     "navigation__button": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": "1.143em"
+    },
+    "navigation__breadcrumb": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": "1.143em"
+    },
+    "navigation__breadcrumb_hover": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "0.875rem",
@@ -127,8 +151,8 @@
         "letterSpacing": "0.291em",
         "lineHeight": "1.455em"
     },
-    "paragraph__body_short": {
-        "color": "rgba(0, 112, 121, 1)",
+    "paragraph__body_short_italic": {
+        "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
         "fontWeight": 400,
@@ -142,6 +166,38 @@
         "fontWeight": 400,
         "letterSpacing": 0,
         "lineHeight": "1.143em"
+    },
+    "paragraph__body_short": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.250em"
+    },
+    "paragraph__body_short_bold_italic": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 700,
+        "letterSpacing": 0,
+        "lineHeight": "1.250em"
+    },
+    "paragraph__body_short_bold": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 700,
+        "letterSpacing": 0,
+        "lineHeight": "1.250em"
+    },
+    "paragraph__body_short_link": {
+        "color": "rgba(0, 112, 121, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.250em"
     },
     "paragraph__overline": {
         "color": "rgba(61, 61, 61, 1)",
@@ -160,6 +216,38 @@
         "lineHeight": "1.333em"
     },
     "paragraph__body_long": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em"
+    },
+    "paragraph__body_long_link": {
+        "color": "rgba(0, 112, 121, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em"
+    },
+    "paragraph__body_long_italic": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em"
+    },
+    "paragraph__body_long_bold": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "1.000rem",
+        "fontWeight": 700,
+        "letterSpacing": 0,
+        "lineHeight": "1.500em"
+    },
+    "paragraph__body_long_bold_italic": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -200,6 +288,14 @@
         "lineHeight": "1.333em"
     },
     "ui__snackbar": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.333em"
+    },
+    "ui__accordion_header": {
         "color": "rgba(61, 61, 61, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
