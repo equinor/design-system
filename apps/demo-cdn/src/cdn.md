@@ -110,13 +110,13 @@ When it comes to the logo we have made some changes to the original format. Inst
 
 #### Horizontal
 
-<img src="https://eds-static.equinor.com/logo/equinor-logo-horizontal.svg#red" style="width: 256px; margin: 33px; margin-left: 0;" />
+<img src="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/logo/equinor-logo-horizontal.svg#red" style="width: 256px; margin: 33px; margin-left: 0;" />
 
 <div style="background-color: #ff1243; display: inline-block">
-  <img src="https://eds-static.equinor.com/logo/equinor-logo-horizontal.svg#white" style="width: 256px; margin: 33px; background-color: transparent" />
+  <img src="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/logo/equinor-logo-horizontal.svg#white" style="width: 256px; margin: 33px; background-color: transparent" />
 </div>
 
-<img src="https://eds-static.equinor.com/logo/equinor-logo-horizontal.svg" style="width: 256px; margin: 33px;" />
+<img src="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/logo/equinor-logo-horizontal.svg" style="width: 256px; margin: 33px;" />
 
 ```html
 <!-- The horizontal logo in red -->
