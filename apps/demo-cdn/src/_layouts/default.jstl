@@ -40,16 +40,28 @@
         margin-left: auto;
         margin-right: auto;
       }
-      pre[class^='language'] {
-        font-size: 0.75rem;
-      }
       abbr {
         cursor: help;
         text-decoration: none;
         border-bottom: 1px dotted gray;
       }
       p {
-        max-width: 50em;
+        font-size: 1.125rem;
+        line-height: 1.8em;
+      }
+      p + p,
+      pre {
+        margin-top: 1.5em !important;
+      }
+      h1 {
+        font-weight: 300 !important;
+        font-size: 3rem !important;
+      }
+      h2 {
+        margin-top: 2em !important;
+      }
+      h4 {
+        text-transform: uppercase;
       }
     </style>
   </head>
