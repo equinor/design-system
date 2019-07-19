@@ -107,7 +107,16 @@ components:
       react:
         - *1
   - component: 'Navigation App launcher'
-    status: *defaultStatus
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: 'Navigation Breadcrumbs'
     status:
       documentation:
