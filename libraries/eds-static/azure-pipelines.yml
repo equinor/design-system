@@ -9,18 +9,20 @@ trigger:
   batch: "true"
   branches:
     include:
+    - develop
     - feature/eds-static
   paths:
     include:
-      - apps/eds-static
+      - libraries/eds-static
 
 pr:
   branches:
     include:
+    - develop
     - feature/eds-static
   paths:
     include:
-    - apps/eds-static
+    - libraries/eds-static
 
 pool:
   vmImage: 'ubuntu-latest'
