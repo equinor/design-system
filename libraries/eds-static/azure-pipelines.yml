@@ -27,6 +27,10 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+- name: ROOTFOLDER
+  value: /libraries/eds-static
+
 steps:
 
 - task: NodeTool@0
@@ -37,8 +41,11 @@ steps:
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
   displayName: 'Install pnpm'
 
-- script: pnpm install --frozen-lockfile
-  displayName: 'pnpm install --frozen-lockfile'
+- script: pnpm --filter $(ROOTFOLDER) install --frozen-lockfile
+  displayName: 'pnpm install'
 
-- script: ls -la
+- script: pnpm --filter $(ROOTFOLDER) run build
+  displayName: 'pnpm run build'
+
+- script: ls -la $(ROOTFOLDER)
   displayName: ls -la
