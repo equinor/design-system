@@ -38,4 +38,7 @@ steps:
   displayName: 'Install pnpm'
 
 - script: pnpm install --frozen-lockfile
-  displayName: 'pnpm install'
+  displayName: 'pnpm install --frozen-lockfile'
+
+- script: ls -la
+  displayName: ls -la
