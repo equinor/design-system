@@ -30,6 +30,8 @@ pool:
 variables:
 - name: ROOTFOLDER
   value: /libraries/eds-static
+- name: EQUINOR_INTERNAL_NPM_TOKEN
+  value: $(EQUINOR_NPM_TOKEN)
 
 steps:
 
@@ -37,6 +39,8 @@ steps:
   displayName: 'Install Node.js'
   inputs:    
     versionSpec: '8.x'
+
+- script: npm 
 
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
   displayName: 'Install pnpm'
