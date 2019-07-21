@@ -35,7 +35,7 @@ steps:
     versionSpec: '8.x'
 
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
-  displayName: 'Install PNPM'
+  displayName: 'Install pnpm'
 
 - script: pnpm install --frozen-lockfile
   displayName: 'pnpm install'
