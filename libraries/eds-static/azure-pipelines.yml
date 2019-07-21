@@ -40,8 +40,6 @@ steps:
   inputs:    
     versionSpec: '8.x'
 
-- script: npm 
-
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
   displayName: 'Install pnpm'
 
