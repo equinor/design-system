@@ -294,7 +294,18 @@ components:
       vanilla:
         - *1
       react:
-        - *1  
+        - *1
+  - component: Stepper
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Table
     status:
       documentation:
