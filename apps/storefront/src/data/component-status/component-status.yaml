@@ -187,7 +187,8 @@ components:
   - component: 'Notification Banner'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
