@@ -1,7 +1,11 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.0.1-alpha.1",
-  "author": { "name": "EDS Core Team", "email": "fg_eds@equinor.com" },
+  "version": "0.0.1-alpha.2",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "license": "AGPL",
   "description": "Design tokens for the Equinor Design System",
   "scripts": {}
 }
