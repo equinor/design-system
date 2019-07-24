@@ -98,7 +98,8 @@ components:
   - component: 'Menu'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -131,7 +132,8 @@ components:
   - component: 'Navigation Navigation Drawer'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -176,7 +178,8 @@ components:
   - component: 'Navigation Top bar'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -187,7 +190,8 @@ components:
   - component: 'Notification Banner'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -294,7 +298,18 @@ components:
       vanilla:
         - *1
       react:
-        - *1  
+        - *1
+  - component: Stepper
+    status:
+      documentation:
+        - *3
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Table
     status:
       documentation:
