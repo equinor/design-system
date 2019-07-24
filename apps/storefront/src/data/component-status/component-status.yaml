@@ -98,7 +98,8 @@ components:
   - component: 'Menu'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -131,7 +132,8 @@ components:
   - component: 'Navigation Navigation Drawer'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -176,7 +178,8 @@ components:
   - component: 'Navigation Top bar'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
