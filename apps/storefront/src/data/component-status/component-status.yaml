@@ -145,7 +145,8 @@ components:
   - component: 'Navigation Pagination'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -203,7 +204,8 @@ components:
   - component: 'Notification Dialog'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -214,7 +216,8 @@ components:
   - component: 'Notification Snackbar'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -225,7 +228,8 @@ components:
   - component: Popovers
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -292,7 +296,8 @@ components:
   - component: Slider
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
