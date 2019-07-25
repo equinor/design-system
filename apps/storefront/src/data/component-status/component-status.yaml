@@ -37,7 +37,8 @@ components:
   - component: Accordion
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -324,7 +325,8 @@ components:
   - component: Text inputs
     status:
       documentation:
-        - *3
+        - *4
+        - *2        
       figma:
         - *4
         - *2
