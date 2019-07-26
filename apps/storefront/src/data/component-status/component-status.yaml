@@ -122,7 +122,8 @@ components:
   - component: 'Navigation Breadcrumbs'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
