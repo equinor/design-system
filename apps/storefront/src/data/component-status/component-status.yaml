@@ -95,7 +95,17 @@ components:
       react:
         - *1
   - component: List
-    status: *defaultStatus
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Link
     status:
       documentation:
