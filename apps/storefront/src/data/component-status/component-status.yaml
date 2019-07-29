@@ -70,6 +70,18 @@ components:
         - *1
       react:
         - *1
+  - component: Chips
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Divider
     status:
       documentation:
