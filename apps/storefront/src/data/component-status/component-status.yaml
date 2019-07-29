@@ -180,7 +180,8 @@ components:
   - component: 'Navigation Table of contents'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -263,7 +264,8 @@ components:
   - component: Progress indicators
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -274,7 +276,8 @@ components:
   - component: Search
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -285,7 +288,8 @@ components:
   - component: Selection controls
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -308,7 +312,8 @@ components:
   - component: Side sheet
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -342,7 +347,8 @@ components:
   - component: Table
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
