@@ -7,7 +7,7 @@ mode: draft
 ---
 
 
-**Intro here.**
+***Chips* are advanced badges that are represent discrete information.**
 <!--One to two sentences as an introduction to the component-->
 
 ***
@@ -15,12 +15,15 @@ mode: draft
 ## Guidelines
 <!--List how to use it, sizes, widths, grid interactions, colour allowances -->
 
+Chips allow users to make selections, preform an action, complete tasks, filter content, input information, and attribute information. Chips can transform from free text or pre-defined text.  
+
 
 
 **Don't** 
 <!--Bullet point list if needed -->
 
-* 
+* Do not use chips as call-to-action buttons. 
+*
 
 ## Variations 
 <!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
@@ -29,9 +32,21 @@ mode: draft
 <Embed url="" />
 
 
-### Variation 
+### Choice chips
+
+When there are at least two pre-defined options to choose between, choice chips can be used to signify the users choice. A single selection can be choosen. Unslected pre-defined choices should used the `Enabled` `Text` chip and selected attributes switch to the `Selected` `Text` chip. 
 
 
-## Interaction
+### Filter chips
 
-## Content
+Multiple pre-defined attributes can listed for the user to choose from. Unslected pre-defined attributes should used the `Enabled` `Text` or the `Enabled` `Icon + text + close` chip and selected attributes switch to the `Selected` `Icon + text` or the `Selected` `Icon + text + close` chip. 
+
+
+### Input chips
+
+Input chips are used as tags to represent complex information---such as a person, place or thing. Input chips are not pre-defined, but defined by the user allowing the user to create and edit mulitple chips. When pressed, input chips transform into editable text. When the editable text is no longer in focus, it transforms back into a chip. Input chips are dismissable, meaning the user can delete the input. Both the `Avatar + text + close` chip and the `Icon + text + close` chip can be used as input chips. If a text input is not recongnized or validated, it can switch to the `Error` state.  
+
+
+### Action chips
+
+Action chips trigger actions related to the label. Action chips are not dismissable and use the `Icon + text` chip. 
