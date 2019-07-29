@@ -7,7 +7,7 @@ mode: draft
 ---
 
 
-***Chips* are advanced badges that are represent discrete information.**
+***Chips*, also known as tags or badges, are advanced badges that are represent discrete information.**
 <!--One to two sentences as an introduction to the component-->
 
 ***
@@ -18,12 +18,11 @@ mode: draft
 Chips allow users to make selections, preform an action, complete tasks, filter content, input information, and attribute information. Chips can transform from free text or pre-defined text.  
 
 
-
 **Don't** 
 <!--Bullet point list if needed -->
 
 * Do not use chips as call-to-action buttons. 
-*
+
 
 ## Variations 
 <!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
@@ -31,22 +30,32 @@ Chips allow users to make selections, preform an action, complete tasks, filter 
 
 <Embed url="" />
 
+### Badge chips
+
+Badge chips contain numeric values and show a running tally. Only use the `Selected` (which has a role of "Selected or active") `Text` chip for badge chips. The colors are allowed to be changed from the default color provided, however, it is up to the designer to ensure that the colors chosen are accessible. 
+
+
+### Tag chips
+
+Tags are used for items that need to be labeled, categorised, or organised using keywords that describe them. Use the `Selected` (which has a role of "Selected or active") `Text` chip for tag chips. The colors are allowed to be changed from the default color provided, however, it is up to the designer to ensure that the colors chosen are accessible. 
+
+
 
 ### Choice chips
 
-When there are at least two pre-defined options to choose between, choice chips can be used to signify the users choice. A single selection can be choosen. Unslected pre-defined choices should used the `Enabled` `Text` chip and selected attributes switch to the `Selected` `Text` chip. 
+When there are at least two pre-defined options to choose between, choice chips can be used to signify the users choice. A single selection can be made. Unselected pre-defined choices should used the `Enabled` `Text` chip and selected chips switch to the `Selected` `Text` chip. Selecting a choice chips automatically deselects all other chips in the set. 
 
 
 ### Filter chips
 
-Multiple pre-defined attributes can listed for the user to choose from. Unslected pre-defined attributes should used the `Enabled` `Text` or the `Enabled` `Icon + text + close` chip and selected attributes switch to the `Selected` `Icon + text` or the `Selected` `Icon + text + close` chip. 
+Multiple pre-defined keywords can be listed for the user to choose from. Multiple chips can be selected or unselected. Unselected pre-defined chips should used the `Enabled` `Text` or the `Enabled` `Icon + text + close` chip and selected chips switch to the `Selected` `Icon + text` or the `Selected` `Icon + text + close` chip. The icon helps indicate that the chip is selected, consider using `System icons > UI action > Done`. 
 
 
 ### Input chips
 
-Input chips are used as tags to represent complex information---such as a person, place or thing. Input chips are not pre-defined, but defined by the user allowing the user to create and edit mulitple chips. When pressed, input chips transform into editable text. When the editable text is no longer in focus, it transforms back into a chip. Input chips are dismissable, meaning the user can delete the input. Both the `Avatar + text + close` chip and the `Icon + text + close` chip can be used as input chips. If a text input is not recongnized or validated, it can switch to the `Error` state.  
+Input chips are used as tags to represent complex information---such as a person, place or thing. Input chips are not pre-defined, but defined by the user allowing the user to create and edit multiple chips. When pressed, input chips transform into editable text. When the editable text is no longer in focus, it transforms back into a chip. Input chips are removable, meaning the user can delete the input. Both the `Avatar + text + close` chip and the `Icon + text + close` chip can be used as input chips. If a text input is not recognised or validated, it can switch to the `Error` state.  
 
 
 ### Action chips
 
-Action chips trigger actions related to the label. Action chips are not dismissable and use the `Icon + text` chip. 
+When there are at least two pre-defined options to choose between action chips trigger actions related to the primary content. Action chips are not removable but can appear dynamically. Use the `Icon + text` chip. Action chips can show progress. While the action is being processed, replace the icon with the `Progress indicator > Circular`.
