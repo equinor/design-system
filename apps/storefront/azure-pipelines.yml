@@ -5,6 +5,9 @@
 
 name: eds-storefront-$(Build.BuildId)
 
+pool:
+  vmImage: 'Ubuntu-16.04'
+
 trigger:
   batch: "true"
   branches:
@@ -16,7 +19,6 @@ trigger:
   paths:
     include:
       - apps/storefront
-      - common
 
 pr:
   branches:
@@ -28,11 +30,9 @@ pr:
 
   paths:
     include:
-    - common
     - apps/storefront
 
-pool:
-  vmImage: 'Ubuntu-16.04'
+
 
 variables:
 - group: eds-build-tokens
@@ -44,10 +44,10 @@ variables:
   value: /apps/storefront
 
 steps:
-- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) .$(ROOT_FOLDER) --build-arg EQUINOR_NPM_TOKEN=$(EQUINOR_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
-  displayName: 'Docker build'
+- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) .$(ROOT_FOLDER) --build-arg NPM_TOKEN=$(EQUINOR_INTERNAL_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
+  displayName: 'Docker build image'
 
-- script: docker login -u $(DOCKER_REGISTRY_NAME) -p $(DOCKER_REGISTRY_PASSWORD) $(DOCKER_REGISTRY)
+- script: echo $(DOCKER_REGISTRY_PASSWORD) | docker login -u $(DOCKER_REGISTRY_NAME) --password-stdin $(DOCKER_REGISTRY)
   displayName: 'Docker login registry'
 
 - script: docker push $(IMAGE_NAME)
