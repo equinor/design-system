@@ -38,7 +38,7 @@ export const withType = R.curry((regExp, node) =>
 )
 
 export const pickChildren = R.curry(R.reduce)(
-  (acc, x) => [...acc, ...x.children],
+  (acc, x) => [...acc, ...(x.children || [])],
   [],
 )
 

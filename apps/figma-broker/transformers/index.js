@@ -1,10 +1,12 @@
 import * as R from 'ramda'
-import { withType } from '@utils'
+import { withType, propName } from '@utils'
 import { px } from '@units'
 import { fillToRgba } from './colors'
 
-export { toTypography } from './typography'
-export { fillToHex, fillToHsla, fillToRgba } from './colors'
+export * from './typography'
+export * from './colors'
+export * from './borders'
+export * from './spacings'
 
 const fallback = {}
 
