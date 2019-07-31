@@ -133,7 +133,8 @@ components:
   - component: 'Navigation App launcher'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -336,7 +337,8 @@ components:
   - component: Stepper
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
