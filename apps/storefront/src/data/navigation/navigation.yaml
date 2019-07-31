@@ -41,6 +41,7 @@
     - Accordion
     - Buttons
     - Cards
+    - Chips
     - Divider
     - Links
     - Lists
@@ -60,7 +61,7 @@
     - Search
     - Selection controls
     - Scrim
-    - Sidesheet
+    - Side sheet
     - Slider
     - Stepper
     - Table
@@ -77,4 +78,7 @@
     - FAQ
 - title: Contributing
   subNav:
-    - Overview
+    - About
+    - Designers
+    - Developers
+    - Documentation

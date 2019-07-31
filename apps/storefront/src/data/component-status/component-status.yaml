@@ -37,7 +37,8 @@ components:
   - component: Accordion
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -69,6 +70,18 @@ components:
         - *1
       react:
         - *1
+  - component: Chips
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Divider
     status:
       documentation:
@@ -82,7 +95,17 @@ components:
       react:
         - *1
   - component: List
-    status: *defaultStatus
+    status:
+      documentation:
+        - *4
+        - *2
+      figma:
+        - *4
+        - *2
+      vanilla:
+        - *1
+      react:
+        - *1
   - component: Link
     status:
       documentation:
@@ -110,7 +133,8 @@ components:
   - component: 'Navigation App launcher'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -121,7 +145,8 @@ components:
   - component: 'Navigation Breadcrumbs'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -129,7 +154,7 @@ components:
         - *1
       react:
         - *1
-  - component: 'Navigation Navigation Drawer'
+  - component: 'Navigation Navigation drawer'
     status:
       documentation:
         - *4
@@ -144,7 +169,8 @@ components:
   - component: 'Navigation Pagination'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -155,7 +181,8 @@ components:
   - component: 'Navigation Table of contents'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -202,7 +229,8 @@ components:
   - component: 'Notification Dialog'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -213,7 +241,8 @@ components:
   - component: 'Notification Snackbar'
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -224,7 +253,8 @@ components:
   - component: Popovers
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -235,7 +265,8 @@ components:
   - component: Progress indicators
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -246,7 +277,8 @@ components:
   - component: Search
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -257,7 +289,8 @@ components:
   - component: Selection controls
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -280,7 +313,8 @@ components:
   - component: Side sheet
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -291,7 +325,8 @@ components:
   - component: Slider
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -302,7 +337,8 @@ components:
   - component: Stepper
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -313,7 +349,8 @@ components:
   - component: Table
     status:
       documentation:
-        - *3
+        - *4
+        - *2
       figma:
         - *4
         - *2
@@ -324,7 +361,8 @@ components:
   - component: Text inputs
     status:
       documentation:
-        - *3
+        - *4
+        - *2        
       figma:
         - *4
         - *2
