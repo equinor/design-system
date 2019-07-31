@@ -20,8 +20,7 @@
         },
         "spacings": {
             "spacing_left": "16px",
-            "spacing_right": "16px",
-            "spacing_bottom": "24px"
+            "spacing_right": "16px"
         },
         "clickbound": "48px",
         "clickboundOffset": "0px",

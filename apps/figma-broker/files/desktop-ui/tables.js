@@ -13,6 +13,11 @@ import {
 
 const fallback = {}
 
+const head = R.pipe(
+  R.defaultTo([]),
+  R.head,
+)
+
 const buildProps = (states) => {
   let props = {}
 
@@ -31,15 +36,9 @@ const buildProps = (states) => {
     const label = R.find(withName('label'), components)
 
     const spacings = R.filter((x) => {
-      let value = false
-      let child = R.head(x.children || []) || { name: '' }
-      try {
-        value = withName('spacing|spacer', child)
-      } catch (error) {
-        console.log(error.message)
-      }
+      const child = head(x.children) || { name: '' }
 
-      return value
+      return withName('spacing|spacer', child)
     }, components)
     const clickbounds = R.find(withName('clickbound'), components)
     const borders = R.filter(withName('border'), components)

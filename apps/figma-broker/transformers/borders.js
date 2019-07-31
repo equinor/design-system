@@ -23,8 +23,8 @@ export const toBorders = (figmaNodes) => {
     (acc, val) => {
       const { absoluteBoundingBox, cornerRadius, fills } = R.head(val.children)
 
-      const [_, side] = R.match(/([\s\S]*?)(Border)/i, val.name)
-      const side_ = propName(side)
+      const match = R.match(/[^Border\s].*/, val.name)
+      const side = propName(R.head(match))
 
       const fill = fills.find(withType('solid')) || fallback
       let border = {
@@ -33,7 +33,7 @@ export const toBorders = (figmaNodes) => {
         width: 0,
       }
 
-      switch (side_) {
+      switch (side) {
         case 'bottom':
         case 'top':
           border = {
@@ -54,7 +54,7 @@ export const toBorders = (figmaNodes) => {
       }
       return {
         ...acc,
-        [side_]: border,
+        [side]: border,
       }
     },
     {},
