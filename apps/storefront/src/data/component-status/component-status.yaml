@@ -94,7 +94,7 @@ components:
         - *1
       react:
         - *1
-  - component: List
+  - component: Links
     status:
       documentation:
         - *4
@@ -106,7 +106,7 @@ components:
         - *1
       react:
         - *1
-  - component: Link
+  - component: Lists
     status:
       documentation:
         - *4
@@ -358,7 +358,7 @@ components:
         - *1
       react:
         - *1  
-  - component: Text inputs
+  - component: Text fields
     status:
       documentation:
         - *4
