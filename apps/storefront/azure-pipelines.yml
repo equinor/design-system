@@ -36,8 +36,10 @@ pool:
 
 variables:
 - group: eds-build-tokens
+- name: DOCKER_REGISTRY
+  value: $(DOCKER_REGISTRY_NAME).azurecr.io
 - name: IMAGE_NAME
-  value: eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)
+  value: $(DOCKER_REGISTRY)/eds-storefront:$(Build.BuildId)-$(Build.SourceBranchName)
 - name: ROOT_FOLDER
   value: /apps/storefront
 
@@ -45,19 +47,8 @@ steps:
 - script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) .$(ROOT_FOLDER) --build-arg EQUINOR_NPM_TOKEN=$(EQUINOR_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
   displayName: 'Docker build'
 
-- task: Docker@1
-  displayName: 'Tag an image'
-  inputs:
-    azureSubscriptionEndpoint: 'eds-rg-dev'
-    azureContainerRegistry: edscontainers.azurecr.io
-    imageName: '$(IMAGE_NAME)'
-    includeLatestTag: true
-    command: Tag image
+- script: docker login -u $(DOCKER_REGISTRY_NAME) -p $(DOCKER_REGISTRY_PASSWORD) $(DOCKER_REGISTRY)
+  displayName: 'Docker login registry'
 
-- task: Docker@1
-  displayName: 'Push an image'
-  inputs:
-    azureSubscriptionEndpoint: 'eds-rg-dev'
-    azureContainerRegistry: edscontainers.azurecr.io
-    command: Push an image
-    imageName: '$(IMAGE_NAME)'
+- script: docker push $(IMAGE_NAME)
+  displayName: 'Docker push to registry'
