@@ -11,22 +11,75 @@ mode: publish
 ## Applying to use Figma
 
 * Go to [AccessIT](https://accessit.equinor.com), search and apply for Figma access.
-* It will say there is a yearly cost, this cost is only activated if you are given editor access from your Figam team admin. 
+* It will say there is a yearly cost, this cost is only activated if you are given editor access from your Figma team admin. 
 * If it asks for a reason when you are applying, write in the comment that you are a designer or developer working on 'project name'.
 * It will be approved but it might take some time until you get the acceptance email.
 * When you get that email saying it was approved read through all the instructions. 
-* Log into Figma with your Equinor email (you will have to make an account). You will have to use the SAML SSO (single sign on with your Authenticator code).
-* Have your team admin add you to your team or search for the team you wish to join and request access. 
+* Log into Figma with your Equinor email, you will have to make an account. You will have to use the SAML SSO, single sign on with your Authenticator code.
+* You will have two tabs in your Figma account. The way to know the tabs apart is the Equinor tab will say "Equinor" and have the logo, while your personal tab will have your name and your initials. The first tab is your Equinor area, which is for projects shared with everyone. One thing to note, is that you can not transfer projects or files from your personal area to the Equinor area. The second tabs is your personal area, which is 100% your area to play around in Figma for free and test things out in private. If your account is deactivated, all your Equinor tab drafts will be transferred to the Equinor Figma admins---so this area should only be used for work files. 
+* Have your team admin add you to your team OR search for the team you wish to join and request access. 
 
 
-### Setting up a team in Figma
+## Setting up a team in Figma
 
-* :warning: Information coming soon / section under construction
-* When to make a new team or use a team that is already there?
-* Closed vs open teams
-* Inviting members
-    * Viewer
-    * Editor
-* Team administrator responsibilites
-    * True-up
-* Deleting default project folder from Figma called "Design System"
+Search first to make sure there is not already the team you are wanting. Projects should not be mixed, so make a team per project. There is no limit in Figma for the amount of teams created---however, there is no need for duplicates. To create a team, click the "Create New Team" button that is at the end of the teams lists popup. Give the team an appropriate name, knowing that anyone in Figma can see the name. You will also need to choose the "Access within the organisation". 
+
+
+### Access types
+
+> #### Open teams
+
+> **Visibility**: Everyone within your organisation can see the "open" team listed, join it, and see all of the projects or documents inside.
+
+> **Permissions**: Members who choose to join an open team will be given view access (with the ability to comment, inspect and export assets) by default so they can't accidentally edit something. Team admins can grant edit access to the team to individual people as necessary.
+
+> **Good for**: Companies that want to foster a highly collaborative environment. When people have a window into what other teams are working on, they have the opportunity to work more cross-functionally and they can maintain consistent patterns across different products or projects.
+
+
+> #### Closed teams
+
+**Visibility**: Everyone in the organization can see that the "closed" team exists from the "View all teams" modal, but non-members will not be able to immediately see or join the projects and documents inside.
+
+> **Permissions**: Users who wish to join a closed team need to request access to see projects. Team admins can permit or deny these requests and give the users the appropriate amount of access (view or edit).
+
+**Good for**: This type will be best suited for teams who can't share their work with the entire organization, but can still benefit from everyone knowing about their existence. This gives people a destination to go if they do require access.
+
+
+> #### Secret teams
+
+> **Visibility**: No one can see that a "secret" team exists within the Figma organization, unless they are the creator or have been specifically invited to join.
+
+> **Permissions**: Owners of secret teams need to individually invite the members they want to have access. They can also set the appropriate view or edit permissions for each user.
+
+> **Good for**: This is great for top secret projects that only a very specific subset of users require access to. Think of work done leading up to an acquisition or something that cannot have org-wide knowledge. This access type can be changed at any point to give these teams more visibility when the timing is right.
+
+> Via [Figma](https://www.figma.com/blog/getting-started-with-teams-in-figma-organization/#team-access-types-and-visibility "Figma blog on Org Teams")
+
+
+### Responsibilities
+
+As the creator of a team, you are by default the team "Owner". This comes with responsibilities. As an Owner, you can also transfer the ownership to another Admin, which will make them the Owner and you an admin. If you transfer the admin role to another, please make sure to inform them of these responsibilities.  You are in charge of the member access of your team. Depending on the type of team access you choose, this could be more or less work. 
+
+By default in Figma, there is a project folder called "Design System" in each new team created. Please delete this whole folder, it is not the EDS and can cause confusion. 
+
+
+#### Members
+
+Members are any users that have been added to the Equinor Figma Organisation---their email needs to be an Equinor email. 
+
+Members are able to: 
+
+* View and comment on files and projects they have access to. 
+* View a list of *all* teams in the Equinor Figma Organisation.
+* Access the EDS components, styles and fonts.  
+
+
+#### Member management
+
+* By default, members add to your team will be added as a "Viewer".
+* It is the Owners's choice to upgrade the "Viewer" to "Editor" or "Admin". If you are unable to upgrade a Viewer to and Editor, reach out the the EDS team on Slack. 
+* Users are currently able to upgrade themselves to an Editor by transferring a file into the team from their drafts. However, this can be blocked on a user-by-user basis from the Admins of the Equinor Figma Organisation. 
+* As the team Owner, it is your responsibility to make sure that *only* those who need it are Editors. Owners, Admins and Editors incur a monthly cost to Equinor---however, Viewers do not. You are able to upgrade someone to an Editor and downgrade them within the same billing cycle. 
+  * If an Editor is on an extended leave, change their account to Viewer and upgrade them when they return. 
+  * If a team member is no longer part of the team, remove them from the team. 
+
