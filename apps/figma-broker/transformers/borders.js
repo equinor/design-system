@@ -3,6 +3,8 @@ import { withType, propName } from '@utils'
 import { px } from '@units'
 import { fillToRgba } from './colors'
 
+const fallback = {}
+
 export const toBorder = (figmaNode) => {
   if (figmaNode.strokes.length === 0) return null
   const { cornerRadius, strokeWeight, strokes } = figmaNode
@@ -23,8 +25,8 @@ export const toBorders = (figmaNodes) => {
     (acc, val) => {
       const { absoluteBoundingBox, cornerRadius, fills } = R.head(val.children)
 
-      const match = R.match(/[^Border\s].*/, val.name)
-      const side = propName(R.head(match))
+      const match = R.replace(/border/gi, '', val.name).trim()
+      const side = propName(match)
 
       const fill = fills.find(withType('solid')) || fallback
       let border = {

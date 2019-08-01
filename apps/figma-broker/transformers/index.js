@@ -1,7 +1,11 @@
 import * as R from 'ramda'
-import { withType, propName } from '@utils'
+import { withType, withName, instanceOfComponent, isNotNil } from '@utils'
 import { px } from '@units'
 import { fillToRgba } from './colors'
+
+import { toTypography } from './typography'
+import { toBorders } from './borders'
+import { toSpacings } from './spacings'
 
 export * from './typography'
 export * from './colors'
@@ -60,3 +64,51 @@ export const toHover = (figmaNode) => {
 }
 
 export const toActive = (figmaNode) => {}
+
+export const toText = (figmaNode) => {
+  const fill = figmaNode.fills.find(withType('solid')) || fallback
+
+  return {
+    color: fillToRgba(fill),
+    typography: toTypography(figmaNode),
+  }
+}
+
+export const toField = (figmaNode) => {
+  const components = figmaNode.children
+  const shape = R.find(instanceOfComponent('shape'), components)
+  const spacings = R.filter(instanceOfComponent('spacing'), components)
+  const clickbound = R.find(instanceOfComponent('clickbound'), components)
+  const text = R.find(withType('text'), components)
+  const border = R.filter(withName('border'), components)
+
+  let height = ''
+  let background = ''
+
+  if (shape) {
+    const component_ = R.head(shape.children)
+    const fill = component_.fills.find(withType('solid')) || fallback
+
+    height = px(component_.absoluteBoundingBox.height)
+    background = fillToRgba(fill)
+  }
+
+  const transformations = {
+    border: toBorders,
+    text: toText,
+    spacings: toSpacings,
+    clickbound: (x) => toClickBound(x, height),
+  }
+
+  const data = {
+    height,
+    background,
+    border,
+    text,
+    spacings,
+    clickbound,
+  }
+
+  // We remove remove keys for undefined data and run transformations
+  return R.evolve(transformations, R.pickBy(isNotNil, data))
+}

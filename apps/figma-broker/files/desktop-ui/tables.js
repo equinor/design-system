@@ -8,14 +8,16 @@ import {
 } from '@utils'
 import { px } from '@units'
 import {
-  toTypography,
-  toFocus,
-  toOverlay,
-  toBorders,
-  toSpacings,
-  toClickBound,
-  toHover,
   fillToRgba,
+  toBorders,
+  toClickBound,
+  toFocus,
+  toHover,
+  toOverlay,
+  toSpacings,
+  toText,
+  toField,
+  toTypography,
 } from '@transformers'
 
 const fallback = {}
@@ -34,10 +36,11 @@ const buildProps = (states) => {
   if (enabled || disabled) {
     const components = (enabled || disabled).children
 
-    const shape = R.find(withName('straight'), components)
-    const label = R.find(withName('label'), components)
-    const spacings = R.filter(instanceOfComponent('spacing|spacer'), components)
+    const shape = R.find(instanceOfComponent('shape'), components)
+    const spacings = R.filter(instanceOfComponent('spacing'), components)
     const clickbound = R.find(instanceOfComponent('clickbound'), components)
+    const text = R.find(withType('text'), components)
+    const field = R.find(withName('field'), components)
     const borders = R.filter(withName('border'), components)
 
     if (shape) {
@@ -58,13 +61,17 @@ const buildProps = (states) => {
       }
     }
 
-    if (label) {
-      const fill = label.fills.find(withType('solid')) || fallback
-
+    if (text) {
       props = {
         ...props,
-        color: fillToRgba(fill),
-        typography: toTypography(label),
+        text: toText(text),
+      }
+    }
+
+    if (field) {
+      props = {
+        ...props,
+        field: toField(field),
       }
     }
 

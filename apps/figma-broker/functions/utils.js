@@ -57,3 +57,5 @@ export const toDict = R.curry(R.reduce)(
 
 export const instanceOfComponent = (name) =>
   R.curry((x) => withName(name, head(x.children) || { name: '' }))
+
+export const isNotNil = R.complement(R.isNil)

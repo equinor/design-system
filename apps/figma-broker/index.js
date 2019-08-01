@@ -155,19 +155,19 @@ async function transformTokens(ctx) {
 // Desktop UI
 
 async function createDesktopComponents(ctx) {
-  try {
-    const data = await fetchFigmaFile(file.desktop)
+  // try {
+  const data = await fetchFigmaFile(file.desktop)
 
-    const figmaFile = processFigmaFile(data)
-    const components = makeDesktopComponents(figmaFile)
+  const figmaFile = processFigmaFile(data)
+  const components = makeDesktopComponents(figmaFile)
 
-    writeResults(components, PATHS.COMPONENTS_DESKTOP)
+  writeResults(components, PATHS.COMPONENTS_DESKTOP)
 
-    ctx.response.body = JSON.stringify(components)
-  } catch (err) {
-    ctx.response.status = err.status || 500
-    ctx.response.body = err.message
-  }
+  ctx.response.body = JSON.stringify(components)
+  // } catch (err) {
+  //   ctx.response.status = err.status || 500
+  //   ctx.response.body = err.message
+  // }
 }
 
 app.listen(PORT)
