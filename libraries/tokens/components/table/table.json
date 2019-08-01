@@ -22,15 +22,57 @@
             "spacing_left": "16px",
             "spacing_right": "16px"
         },
-        "clickbound": "48px",
-        "clickboundOffset": "0px",
+        "clickbound": {
+            "height": "48px",
+            "offset": "0px"
+        },
+        "active": {
+            "background": "rgba(234, 234, 234, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(0, 112, 121, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            },
+            "color": "rgba(0, 112, 121, 1)",
+            "typography": {
+                "color": "rgba(0, 112, 121, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.875rem",
+                "fontWeight": 500,
+                "letterSpacing": 0,
+                "lineHeight": "1.714em"
+            }
+        },
+        "disabled": {
+            "background": "rgba(247, 247, 247, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            },
+            "color": "rgba(111, 111, 111, 1)",
+            "typography": {
+                "color": "rgba(111, 111, 111, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.875rem",
+                "fontWeight": 500,
+                "letterSpacing": 0,
+                "lineHeight": "1.714em"
+            }
+        },
         "focus": {
             "type": "dashed",
             "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(220, 220, 220, 1)"
+        "hover": {
+            "background": "rgba(220, 220, 220, 1)"
+        }
     },
     "cell_monospaced_numeric": {
         "height": "48px",
@@ -55,15 +97,57 @@
             "spacing_left": "16px",
             "spacing_right": "16px"
         },
-        "clickbound": "48px",
-        "clickboundOffset": "0px",
+        "clickbound": {
+            "height": "48px",
+            "offset": "0px"
+        },
+        "active": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(0, 112, 121, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            },
+            "color": "rgba(0, 112, 121, 1)",
+            "typography": {
+                "color": "rgba(0, 112, 121, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.750rem",
+                "fontWeight": 400,
+                "letterSpacing": 0,
+                "lineHeight": "1.667em"
+            }
+        },
+        "disabled": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            },
+            "color": "rgba(111, 111, 111, 1)",
+            "typography": {
+                "color": "rgba(111, 111, 111, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.750rem",
+                "fontWeight": 400,
+                "letterSpacing": 0,
+                "lineHeight": "1.667em"
+            }
+        },
         "focus": {
             "type": "dashed",
             "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(230, 250, 236, 1)"
+        "hover": {
+            "background": "rgba(230, 250, 236, 1)"
+        }
     },
     "header_icon": {
         "height": "48px",
@@ -79,15 +163,39 @@
             "spacing_left": "16px",
             "spacing_right": "16px"
         },
-        "clickbound": "48px",
-        "clickboundOffset": "0px",
+        "clickbound": {
+            "height": "48px",
+            "offset": "0px"
+        },
+        "active": {
+            "background": "rgba(234, 234, 234, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(0, 112, 121, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            }
+        },
+        "disabled": {
+            "background": "rgba(247, 247, 247, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            }
+        },
         "focus": {
             "type": "dashed",
             "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(220, 220, 220, 1)"
+        "hover": {
+            "background": "rgba(220, 220, 220, 1)"
+        }
     },
     "cell_icon": {
         "height": "48px",
@@ -103,15 +211,39 @@
             "spacing_left": "16px",
             "spacing_right": "16px"
         },
-        "clickbound": "48px",
-        "clickboundOffset": "0px",
+        "clickbound": {
+            "height": "48px",
+            "offset": "0px"
+        },
+        "active": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(0, 112, 121, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            }
+        },
+        "disabled": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            }
+        },
         "focus": {
             "type": "dashed",
             "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(230, 250, 236, 1)"
+        "hover": {
+            "background": "rgba(230, 250, 236, 1)"
+        }
     },
     "cell_placeholder": {
         "height": "48px",
@@ -127,15 +259,39 @@
             "spacing_left": "16px",
             "spacing_right": "16px"
         },
-        "clickbound": "48px",
-        "clickboundOffset": "0px",
+        "clickbound": {
+            "height": "48px",
+            "offset": "0px"
+        },
+        "active": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(0, 112, 121, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            }
+        },
+        "disabled": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            }
+        },
         "focus": {
             "type": "dashed",
             "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(230, 250, 236, 1)"
+        "hover": {
+            "background": "rgba(230, 250, 236, 1)"
+        }
     },
     "cell_input": {
         "height": "48px",
@@ -151,9 +307,33 @@
             "spacing_left": "16px",
             "spacing_right": "16px"
         },
-        "clickbound": "48px",
-        "clickboundOffset": "0px",
-        "hoverBackground": "rgba(230, 250, 236, 1)"
+        "clickbound": {
+            "height": "48px",
+            "offset": "0px"
+        },
+        "active": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            }
+        },
+        "disabled": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            }
+        },
+        "hover": {
+            "background": "rgba(230, 250, 236, 1)"
+        }
     },
     "cell_text": {
         "height": "48px",
@@ -178,14 +358,56 @@
             "spacing_left": "16px",
             "spacing_right": "16px"
         },
-        "clickbound": "48px",
-        "clickboundOffset": "0px",
+        "clickbound": {
+            "height": "48px",
+            "offset": "0px"
+        },
+        "active": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(0, 112, 121, 1)",
+                    "radius": 0,
+                    "width": "2px"
+                }
+            },
+            "color": "rgba(0, 112, 121, 1)",
+            "typography": {
+                "color": "rgba(0, 112, 121, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.875rem",
+                "fontWeight": 500,
+                "letterSpacing": 0,
+                "lineHeight": "1.714em"
+            }
+        },
+        "disabled": {
+            "background": "rgba(255, 255, 255, 1)",
+            "border": {
+                "bottom": {
+                    "color": "rgba(220, 220, 220, 1)",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            },
+            "color": "rgba(111, 111, 111, 1)",
+            "typography": {
+                "color": "rgba(111, 111, 111, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.875rem",
+                "fontWeight": 500,
+                "letterSpacing": 0,
+                "lineHeight": "1.714em"
+            }
+        },
         "focus": {
             "type": "dashed",
             "color": "rgba(0, 112, 121, 1)",
             "width": "2px",
             "gap": "8px"
         },
-        "hoverBackground": "rgba(230, 250, 236, 1)"
+        "hover": {
+            "background": "rgba(230, 250, 236, 1)"
+        }
     }
 }

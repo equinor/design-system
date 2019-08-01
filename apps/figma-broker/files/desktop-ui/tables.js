@@ -1,22 +1,24 @@
 import * as R from 'ramda'
-import { propName, withName, withType, toDict, pickChildren } from '@utils'
+import {
+  propName,
+  withName,
+  withType,
+  toDict,
+  instanceOfComponent,
+} from '@utils'
 import { px } from '@units'
 import {
   toTypography,
-  toSpacer,
   toFocus,
   toOverlay,
   toBorders,
   toSpacings,
+  toClickBound,
+  toHover,
   fillToRgba,
 } from '@transformers'
 
 const fallback = {}
-
-const head = R.pipe(
-  R.defaultTo([]),
-  R.head,
-)
 
 const buildProps = (states) => {
   let props = {}
@@ -27,24 +29,19 @@ const buildProps = (states) => {
   const focused = R.find(withName('focus'), states)
   const hovered = R.find(withName('hover'), states)
 
-  const pressed = R.find(withName('pressed'), states)
   const filled = R.find(withName('filled'), states)
 
   if (enabled || disabled) {
     const components = (enabled || disabled).children
-    const component = R.find(withName('straight'), components)
+
+    const shape = R.find(withName('straight'), components)
     const label = R.find(withName('label'), components)
-
-    const spacings = R.filter((x) => {
-      const child = head(x.children) || { name: '' }
-
-      return withName('spacing|spacer', child)
-    }, components)
-    const clickbounds = R.find(withName('clickbound'), components)
+    const spacings = R.filter(instanceOfComponent('spacing|spacer'), components)
+    const clickbound = R.find(instanceOfComponent('clickbound'), components)
     const borders = R.filter(withName('border'), components)
 
-    if (component) {
-      const component_ = R.head(component.children)
+    if (shape) {
+      const component_ = R.head(shape.children)
       const fill = component_.fills.find(withType('solid')) || fallback
 
       props = {
@@ -55,11 +52,9 @@ const buildProps = (states) => {
     }
 
     if (borders.length > 0) {
-      const border = toBorders(borders)
-
       props = {
         ...props,
-        border,
+        border: toBorders(borders),
       }
     }
 
@@ -80,27 +75,101 @@ const buildProps = (states) => {
       }
     }
 
-    if (clickbounds) {
-      const clickbound = R.head(clickbounds.children)
-      const { height } = clickbound.absoluteBoundingBox
-      const clickboundOffset = (height - parseInt(props.height, 10)) / 2
-
+    if (clickbound) {
       props = {
         ...props,
-        clickbound: px(height),
-        clickboundOffset: px(clickboundOffset),
+        clickbound: toClickBound(clickbound, props.height),
       }
     }
   }
 
+  if (active) {
+    const components = active.children
+    const shape = R.find(withName('straight'), components)
+    const label = R.find(withName('label'), components)
+    const borders = R.filter(withName('border'), components)
+
+    let active_ = {}
+    if (shape) {
+      const component_ = R.head(shape.children)
+      const fill = component_.fills.find(withType('solid')) || fallback
+
+      active_ = {
+        ...active_,
+        background: fillToRgba(fill),
+      }
+    }
+
+    if (borders.length > 0) {
+      active_ = {
+        ...active_,
+        border: toBorders(borders),
+      }
+    }
+
+    if (label) {
+      const fill = label.fills.find(withType('solid')) || fallback
+
+      active_ = {
+        ...active_,
+        color: fillToRgba(fill),
+        typography: toTypography(label),
+      }
+    }
+
+    props = {
+      ...props,
+      active: active_,
+    }
+  }
+
+  if (disabled) {
+    const components = disabled.children
+    const shape = R.find(withName('straight'), components)
+    const label = R.find(withName('label'), components)
+    const borders = R.filter(withName('border'), components)
+
+    let disabled_ = {}
+    if (shape) {
+      const component_ = R.head(shape.children)
+      const fill = component_.fills.find(withType('solid')) || fallback
+
+      disabled_ = {
+        ...disabled_,
+        background: fillToRgba(fill),
+      }
+    }
+
+    if (borders.length > 0) {
+      disabled_ = {
+        ...disabled_,
+        border: toBorders(borders),
+      }
+    }
+
+    if (label) {
+      const fill = label.fills.find(withType('solid')) || fallback
+
+      disabled_ = {
+        ...disabled_,
+        color: fillToRgba(fill),
+        typography: toTypography(label),
+      }
+    }
+
+    props = {
+      ...props,
+      disabled: disabled_,
+    }
+  }
+
   if (focused) {
-    const focus = R.find(withName('focused'), focused.children)
+    const focus = R.find(instanceOfComponent('focused'), focused.children)
 
     if (focus) {
-      const focus_ = R.head(focus.children)
       props = {
         ...props,
-        focus: toFocus(focus_),
+        focus: toFocus(focus),
       }
     }
   }
@@ -109,27 +178,9 @@ const buildProps = (states) => {
     const hover = R.find(withName('straight'), hovered.children)
 
     if (hover) {
-      const hover_ = R.head(hover.children)
-      const fill = hover_.fills.find(withType('solid')) || fallback
-
       props = {
         ...props,
-        hoverBackground: fillToRgba(fill),
-      }
-    }
-  }
-
-  if (pressed) {
-    const pressedOverlay = R.find(withName('pressed overlay'), pressed.children)
-
-    if (pressedOverlay) {
-      const pressedOverlay_ = R.head(
-        R.find(withName('overlay'), pressedOverlay.children).children,
-      )
-
-      props = {
-        ...props,
-        ...toOverlay(pressedOverlay_),
+        hover: toHover(hover),
       }
     }
   }
@@ -142,9 +193,7 @@ const toTablesComponent = R.pipe(
   R.map((node) => {
     const name = propName(node.name)
     const states = R.filter(withType('component'), node.children)
-    console.log(`BUILD PROPS FOR: ${name}`)
     const tableProps = buildProps(states)
-    console.log(`================================ \n`)
 
     return {
       name,

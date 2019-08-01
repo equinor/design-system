@@ -1,5 +1,10 @@
 import * as R from 'ramda'
 
+const head = R.pipe(
+  R.defaultTo([]),
+  R.head,
+)
+
 const removeForbiddenCharacters = (str) => {
   if (str) {
     return str.replace(/[|]|[.]|[-]|[–]|[—]/g, '')
@@ -49,3 +54,6 @@ export const toDict = R.curry(R.reduce)(
   }),
   {},
 )
+
+export const instanceOfComponent = (name) =>
+  R.curry((x) => withName(name, head(x.children) || { name: '' }))
