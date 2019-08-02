@@ -66,6 +66,7 @@ export const toHover = (figmaNode) => {
 export const toActive = (figmaNode) => {}
 
 export const toText = (figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
   const fill = figmaNode.fills.find(withType('solid')) || fallback
 
   return {
@@ -74,41 +75,36 @@ export const toText = (figmaNode) => {
   }
 }
 
-export const toField = (figmaNode) => {
+export const toShape = (figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
+  const shape = R.head(figmaNode.children)
+  const fill = shape.fills.find(withType('solid')) || fallback
+
+  return {
+    height: px(shape.absoluteBoundingBox.height),
+    background: fillToRgba(fill),
+  }
+}
+
+export const toBase = (figmaNode) => {
   const components = figmaNode.children
-  const shape = R.find(instanceOfComponent('shape'), components)
-  const spacings = R.filter(instanceOfComponent('spacing'), components)
-  const clickbound = R.find(instanceOfComponent('clickbound'), components)
-  const text = R.find(withType('text'), components)
-  const border = R.filter(withName('border'), components)
+  const shape = toShape(R.find(instanceOfComponent('shape'), components))
 
-  let height = ''
-  let background = ''
-
-  if (shape) {
-    const component_ = R.head(shape.children)
-    const fill = component_.fills.find(withType('solid')) || fallback
-
-    height = px(component_.absoluteBoundingBox.height)
-    background = fillToRgba(fill)
+  const data = {
+    ...shape,
+    borders: R.filter(withName('border'), components),
+    text: R.find(withType('text'), components),
+    spacings: R.filter(instanceOfComponent('spacing'), components),
+    clickbound: R.find(instanceOfComponent('clickbound'), components),
   }
 
   const transformations = {
-    border: toBorders,
+    borders: toBorders,
     text: toText,
     spacings: toSpacings,
-    clickbound: (x) => toClickBound(x, height),
+    clickbound: (x) => toClickBound(x, shape.height),
   }
 
-  const data = {
-    height,
-    background,
-    border,
-    text,
-    spacings,
-    clickbound,
-  }
-
-  // We remove remove keys for undefined data and run transformations
+  // We remove remove keys with undefined data before running transformations
   return R.evolve(transformations, R.pickBy(isNotNil, data))
 }
