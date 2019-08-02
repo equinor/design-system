@@ -21,6 +21,7 @@ import {
 const fallback = {}
 
 const buildProps = (states) => {
+  // states
   const enabled = R.find(withName('enabled'), states)
   const active = R.find(withName('active'), states)
   const disabled = R.find(withName('disabled'), states)
@@ -29,6 +30,7 @@ const buildProps = (states) => {
 
   const filled = R.find(withName('filled'), states)
 
+  // data
   const shape = toShape(R.find(instanceOfComponent('shape'), enabled.children))
   const activeShape = toShape(
     R.find(instanceOfComponent('shape'), active.children),
@@ -36,7 +38,6 @@ const buildProps = (states) => {
   const disabledShape = toShape(
     R.find(instanceOfComponent('shape'), disabled.children),
   )
-
   const activeLabel = toText(R.find(withName('label'), active.children))
   const disabledLabel = toText(R.find(withName('label'), disabled.children))
 
@@ -61,6 +62,7 @@ const buildProps = (states) => {
     hover: R.find(withName('straight'), hovered.children),
   })
 
+  // transformations
   const transformations = {
     borders: toBorders,
     text: toText,
