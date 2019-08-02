@@ -357,12 +357,12 @@ components:
       vanilla:
         - *1
       react:
-        - *1  
+        - *3
   - component: Text fields
     status:
       documentation:
         - *4
-        - *2        
+        - *2
       figma:
         - *4
         - *2
