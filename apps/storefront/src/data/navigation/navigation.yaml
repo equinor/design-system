@@ -10,11 +10,9 @@
     - Colour
     - Elevation
     - Grid
-    - Interaction
     - Motion
     - Shape
     - Spacing
-    - Theme
     - Tokens
     - Typography
 - title: Patterns
@@ -27,7 +25,8 @@
     - Onboarding
 - title: Assets
   subNav:
-    - Brand illustrations 
+    - Brand illustrations
+    - Charts
     - Image placeholder
     - Infographics
     - Logo
