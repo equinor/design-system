@@ -15,14 +15,6 @@
     - Spacing
     - Tokens
     - Typography
-- title: Patterns
-  subNav:
-    - Common actions
-    - Data formats
-    - Empty states
-    - Launch screens
-    - Loading
-    - Onboarding
 - title: Assets
   subNav:
     - Brand illustrations
@@ -66,6 +58,14 @@
     - Table
     - Text fields
     - Tooltip
+- title: Patterns
+  subNav:
+    - Common actions
+    - Data formats
+    - Empty states
+    - Launch screens
+    - Loading
+    - Onboarding
 - title: Updates
   subNav:
     - Release information
