@@ -5,6 +5,9 @@
 
 name: eds-static-$(Build.BuildId)
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 trigger:
   batch: "true"
   branches:
@@ -24,10 +27,10 @@ pr:
     include:
     - libraries/eds-static
 
-pool:
-  vmImage: 'ubuntu-latest'
+
 
 variables:
+- group: eds-build-tokens
 - name: ROOTFOLDER
   value: /libraries/eds-static
 
@@ -35,13 +38,13 @@ steps:
 
 - task: NodeTool@0
   displayName: 'Install Node.js'
-  inputs:    
+  inputs:
     versionSpec: '8.x'
 
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
   displayName: 'Install pnpm'
 
-- script: EQUINOR_INTERNAL_NPM_TOKEN=$(EQUINOR_NPM_TOKEN) pnpm --filter .$(ROOTFOLDER) install --frozen-lockfile
+- script: EQUINOR_INTERNAL_NPM_TOKEN=$(EQUINOR_INTERNAL_NPM_TOKEN) pnpm --filter .$(ROOTFOLDER) install --frozen-lockfile
   displayName: 'pnpm install'
 
 - script: pnpm --filter .$(ROOTFOLDER) run build
