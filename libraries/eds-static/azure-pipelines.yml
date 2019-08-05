@@ -44,7 +44,7 @@ steps:
 - script: curl -L https://unpkg.com/@pnpm/self-installer | node
   displayName: 'Install pnpm'
 
-- script: EQUINOR_INTERNAL_NPM_TOKEN=$(EQUINOR_INTERNAL_NPM_TOKEN) pnpm --filter .$(ROOTFOLDER) install --frozen-lockfile
+- script: EQUINOR_INTERNAL_NPM_TOKEN=$(EQUINOR_INTERNAL_NPM_TOKEN) pnpm --filter .$(ROOTFOLDER) install --frozen-lockfile --registry=https://npm.equinor.com
   displayName: 'pnpm install'
 
 - script: pnpm --filter .$(ROOTFOLDER) run build
