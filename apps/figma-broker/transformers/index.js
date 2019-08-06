@@ -46,7 +46,7 @@ export const toOverlay = (figmaNode) => {
   }
 }
 
-export const toClickBound = (figmaNode, componentHeight) => {
+export const toClickBound = (componentHeight, figmaNode) => {
   const clickbound = R.head(figmaNode.children)
   const { height } = clickbound.absoluteBoundingBox
   const offset = (height - parseInt(componentHeight, 10)) / 2
@@ -65,13 +65,14 @@ export const toHover = (figmaNode) => {
 
 export const toActive = (figmaNode) => {}
 
-export const toText = (figmaNode) => {
+export const toText = (getStyle, figmaNode) => {
   if (R.isNil(figmaNode)) return {}
   const fill = figmaNode.fills.find(withType('solid')) || fallback
+  const { name } = getStyle(figmaNode.styles.text)
 
   return {
     color: fillToRgba(fill),
-    typography: toTypography(figmaNode),
+    typography: toTypography(figmaNode, name),
   }
 }
 
@@ -86,7 +87,7 @@ export const toShape = (figmaNode) => {
   }
 }
 
-export const toBase = (figmaNode) => {
+export const toField = (getStyle, figmaNode) => {
   const components = figmaNode.children
   const shape = toShape(R.find(instanceOfComponent('shape'), components))
 
@@ -100,9 +101,9 @@ export const toBase = (figmaNode) => {
 
   const transformations = {
     borders: toBorders,
-    text: toText,
+    text: (x) => toText(getStyle, x),
     spacings: toSpacings,
-    clickbound: (x) => toClickBound(x, shape.height),
+    clickbound: (x) => toClickBound(shape.height, x),
   }
 
   // We remove remove keys with undefined data before running transformations

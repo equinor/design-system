@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { withType } from '@utils'
+import { withType, withName } from '@utils'
 import { rootFontSize, rem, em } from '@units'
 import { fillToRgba } from './colors'
 
@@ -7,7 +7,8 @@ export { fillToHex, fillToHsla, fillToRgba } from './colors'
 
 const fallback = {}
 
-export const toTypography = (figmaNode) => {
+export const toTypography = (figmaNode, name) => {
+  let typography = {}
   const {
     fontFamily,
     fontSize,
@@ -16,8 +17,18 @@ export const toTypography = (figmaNode) => {
     textAlignHorizontal = 'center',
     lineHeightPercentFontSize,
   } = figmaNode.style
-
   const { fills } = figmaNode
+
+  const isMonospaced = withName('monospaced', {
+    name: R.isNil(name) ? figmaNode.name : name,
+  })
+
+  if (isMonospaced) {
+    typography = {
+      ...typography,
+      fontFeature: "'tnum' on, 'lnum' on",
+    }
+  }
 
   const fill = R.find(withType('solid'), fills) || fallback
 
@@ -27,7 +38,8 @@ export const toTypography = (figmaNode) => {
   const textAlignLens = R.lensProp('textAlign')
   const textAlign = R.toLower(textAlignHorizontal)
 
-  let typography = {
+  typography = {
+    ...typography,
     color: fillToRgba(fill),
     fontFamily,
     fontSize: rem(fontSizeRem),
