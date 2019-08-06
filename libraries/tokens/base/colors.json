@@ -224,17 +224,17 @@
         "hsla": "hsla(208, 34.3%, 13.7%, 1)",
         "rgba": "rgba(23, 36, 47, 1)"
     },
-    "interactive__danger__highlight": {
+    "interactive_danger__highlight": {
         "hex": "#ffc1c1",
         "hsla": "hsla(0, 100%, 87.8%, 1)",
         "rgba": "rgba(255, 193, 193, 1)"
     },
-    "interactive__danger__resting": {
+    "interactive_danger__resting": {
         "hex": "#eb0000",
         "hsla": "hsla(0, 100%, 46.1%, 1)",
         "rgba": "rgba(235, 0, 0, 1)"
     },
-    "interactive__danger__hover": {
+    "interactive_danger__hover": {
         "hex": "#b30d2f",
         "hsla": "hsla(348, 86.5%, 37.6%, 1)",
         "rgba": "rgba(179, 13, 47, 1)"

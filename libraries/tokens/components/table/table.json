@@ -89,12 +89,13 @@
         "text": {
             "color": "rgba(61, 61, 61, 1)",
             "typography": {
+                "fontFeature": "'tnum' on, 'lnum' on",
                 "color": "rgba(61, 61, 61, 1)",
                 "fontFamily": "Equinor",
-                "fontSize": "0.750rem",
+                "fontSize": "0.875rem",
                 "fontWeight": 400,
                 "letterSpacing": 0,
-                "lineHeight": "1.667em"
+                "lineHeight": "1.429em"
             }
         },
         "spacings": {
@@ -109,12 +110,13 @@
             "background": "rgba(255, 255, 255, 1)",
             "color": "rgba(0, 112, 121, 1)",
             "typography": {
+                "fontFeature": "'tnum' on, 'lnum' on",
                 "color": "rgba(0, 112, 121, 1)",
                 "fontFamily": "Equinor",
-                "fontSize": "0.750rem",
+                "fontSize": "0.875rem",
                 "fontWeight": 400,
                 "letterSpacing": 0,
-                "lineHeight": "1.667em"
+                "lineHeight": "1.429em"
             },
             "borders": {
                 "bottom": {
@@ -128,12 +130,13 @@
             "background": "rgba(255, 255, 255, 1)",
             "color": "rgba(111, 111, 111, 1)",
             "typography": {
+                "fontFeature": "'tnum' on, 'lnum' on",
                 "color": "rgba(111, 111, 111, 1)",
                 "fontFamily": "Equinor",
-                "fontSize": "0.750rem",
+                "fontSize": "0.875rem",
                 "fontWeight": 400,
                 "letterSpacing": 0,
-                "lineHeight": "1.667em"
+                "lineHeight": "1.429em"
             },
             "borders": {
                 "bottom": {
