@@ -1,5 +1,10 @@
 import * as R from 'ramda'
 
+const head = R.pipe(
+  R.defaultTo([]),
+  R.head,
+)
+
 const removeForbiddenCharacters = (str) => {
   if (str) {
     return str.replace(/[|]|[.]|[-]|[–]|[—]/g, '')
@@ -38,7 +43,7 @@ export const withType = R.curry((regExp, node) =>
 )
 
 export const pickChildren = R.curry(R.reduce)(
-  (acc, x) => [...acc, ...x.children],
+  (acc, x) => [...acc, ...(x.children || [])],
   [],
 )
 
@@ -49,3 +54,10 @@ export const toDict = R.curry(R.reduce)(
   }),
   {},
 )
+
+export const instanceOfComponent = (name) =>
+  R.curry((x) => withName(name, head(x.children) || { name: '' }))
+
+export const isNotNil = R.complement(R.isNil)
+export const isNotEmpty = R.complement(R.isEmpty)
+export const removeNilAndEmpty = R.curry(R.pickBy)(R.both(isNotEmpty, isNotNil))

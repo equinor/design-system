@@ -13,7 +13,7 @@ export const makeTextTokens = (typographies, getStyle) =>
       try {
         const style = getStyle(node.styles.text)
         name = propName(style.name)
-        value = toTypography(node)
+        value = toTypography(node, name)
       } catch (error) {
         throw Error(`Error parsing typography for ${name}. ${error.message}`)
       }

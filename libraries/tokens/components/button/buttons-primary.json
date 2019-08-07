@@ -98,7 +98,7 @@
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "icon": "8px"
+            "right icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -131,7 +131,7 @@
         },
         "spacing": {
             "left": "16px",
-            "icon": "8px"
+            "right icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -165,7 +165,7 @@
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "icon": "8px"
+            "right icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -198,7 +198,8 @@
         },
         "spacing": {
             "left": "16px",
-            "right": "16px"
+            "right": "16px",
+            "left icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -232,7 +233,7 @@
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "icon": "8px"
+            "left icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -266,7 +267,7 @@
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "icon": "8px"
+            "left icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",

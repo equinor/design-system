@@ -136,6 +136,7 @@
         "lineHeight": "1.500em"
     },
     "input__text_monospaced": {
+        "fontFeature": "'tnum' on, 'lnum' on",
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
         "fontSize": "1.000rem",
@@ -166,6 +167,14 @@
         "fontWeight": 400,
         "letterSpacing": 0,
         "lineHeight": "1.143em"
+    },
+    "paragraph__meta": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.625rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.600em"
     },
     "paragraph__body_short": {
         "color": "rgba(61, 61, 61, 1)",
@@ -271,13 +280,30 @@
         "letterSpacing": 0,
         "lineHeight": "1.714em"
     },
-    "table__cell_numeric_monospaced": {
+    "table__cell_text_bold": {
         "color": "rgba(0, 0, 0, 1)",
         "fontFamily": "Equinor",
-        "fontSize": "0.750rem",
+        "fontSize": "0.875rem",
+        "fontWeight": 700,
+        "letterSpacing": 0,
+        "lineHeight": "1.714em"
+    },
+    "table__cell_text_link": {
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
         "fontWeight": 400,
         "letterSpacing": 0,
-        "lineHeight": "1.667em"
+        "lineHeight": "1.714em"
+    },
+    "table__cell_numeric_monospaced": {
+        "fontFeature": "'tnum' on, 'lnum' on",
+        "color": "rgba(0, 0, 0, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.875rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.429em"
     },
     "ui__tooltip": {
         "color": "rgba(61, 61, 61, 1)",
@@ -302,5 +328,21 @@
         "fontWeight": 500,
         "letterSpacing": 0,
         "lineHeight": "1.500em"
+    },
+    "ui__chip__badge": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.333em"
+    },
+    "ui__chart": {
+        "color": "rgba(61, 61, 61, 1)",
+        "fontFamily": "Equinor",
+        "fontSize": "0.750rem",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": "1.333em"
     }
 }

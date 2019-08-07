@@ -4,6 +4,11 @@
         "minWidth": "40px",
         "borderRadius": "100px"
     },
+    "rounded": {
+        "minHeight": "40px",
+        "minWidth": "80px",
+        "borderRadius": "100px"
+    },
     "button": {
         "minHeight": "36px",
         "minWidth": "112px",

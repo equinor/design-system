@@ -4,7 +4,7 @@ import { makeTablesComponent } from './tables'
 
 export const makeDesktopComponents = (figmaFile) => {
   const components = []
-  const { pages } = figmaFile
+  const { pages, getStyle } = figmaFile
 
   pages.forEach((page) => {
     const fixedPageName = fixPageName(page.name)
@@ -14,29 +14,36 @@ export const makeDesktopComponents = (figmaFile) => {
       case 'buttons primary color':
         components.push({
           name: 'buttons-primary',
-          value: makeButtonsComponent(data),
+          value: makeButtonsComponent(data, getStyle),
           path: 'button',
         })
         break
       case 'buttons secondary color':
         components.push({
           name: 'buttons-secondary',
-          value: makeButtonsComponent(data),
+          value: makeButtonsComponent(data, getStyle),
           path: 'button',
         })
         break
       case 'buttons danger color':
         components.push({
           name: 'buttons-danger',
-          value: makeButtonsComponent(data),
+          value: makeButtonsComponent(data, getStyle),
           path: 'button',
         })
         break
       case 'buttons disabled':
         components.push({
           name: 'buttons-disabled',
-          value: makeButtonsComponent(data),
+          value: makeButtonsComponent(data, getStyle),
           path: 'button',
+        })
+        break
+      case 'tables':
+        components.push({
+          name: 'table',
+          value: makeTablesComponent(data, getStyle),
+          path: 'table',
         })
         break
       default:

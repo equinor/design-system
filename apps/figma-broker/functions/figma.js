@@ -20,6 +20,7 @@ export const processFigmaFile = (result) => ({
   ...result,
   pages: result.document.children.filter((x) => !isUnderConstrution(x)),
   getStyle: R.curry((styles, id) => styles[id])(result.styles),
+  getComponent: R.curry((components, id) => components[id])(result.components),
 })
 
 export async function fetchFigmaFile(fileId) {

@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { propName, withName, withType } from '@utils'
+import { propName, withName, withType, instanceOfComponent } from '@utils'
 import { px } from '@units'
 import {
   toTypography,
@@ -16,16 +16,16 @@ const buildProps = (states) => {
 
   const pressed = R.find(withName('pressed'), states)
   const hovered = R.find(withName('hover'), states)
-  const focused = R.find(withName('focused'), states)
+  const focused = R.find(withName('focus'), states)
   const enabled = R.find(withName('enabled'), states)
   const disabled = R.find(withName('disabled'), states)
 
   if (enabled || disabled) {
     const components = (enabled || disabled).children
-    const button = R.find(withName('button'), components)
+    const button = R.find(instanceOfComponent('shape'), components)
     const label = R.find(withName('label'), components)
-    const spacing = R.filter(withName('spacing'), components)
-    const clickbounds = R.find(withName('clickbounds'), components)
+    const spacing = R.filter(instanceOfComponent('spacing'), components)
+    const clickbounds = R.find(instanceOfComponent('clickbound'), components)
 
     if (button) {
       const button_ = R.head(button.children)
@@ -99,19 +99,19 @@ const buildProps = (states) => {
   }
 
   if (focused) {
-    const focus = R.find(withName('focused'), focused.children)
+    const focus = R.find(instanceOfComponent('focused'), focused.children)
 
     if (focus) {
       const focus_ = R.head(focus.children)
       buttonProps = {
         ...buttonProps,
-        focus: toFocus(focus_),
+        focus: toFocus(focus),
       }
     }
   }
 
   if (hovered) {
-    const hover = R.find(withName('button'), hovered.children)
+    const hover = R.find(instanceOfComponent('shape'), hovered.children)
 
     if (hover) {
       const hover_ = R.head(hover.children)
@@ -129,7 +129,8 @@ const buildProps = (states) => {
 
     if (pressedOverlay) {
       const pressedOverlay_ = R.head(
-        R.find(withName('overlay'), pressedOverlay.children).children,
+        R.find(instanceOfComponent('pressed'), pressedOverlay.children)
+          .children,
       )
 
       buttonProps = {
