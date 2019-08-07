@@ -25,6 +25,8 @@ export const toSpacer = (name, box) => {
 }
 
 export const toFocus = (figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
+
   const focus = R.head(figmaNode.children)
   const { strokeDashes, strokes } = focus
   const stroke = strokes.find(withType('solid')) || fallback
@@ -40,6 +42,8 @@ export const toFocus = (figmaNode) => {
 }
 
 export const toOverlay = (figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
+
   const fill = figmaNode.fills.find(withType('solid')) || fallback
   return {
     pressedColor: fillToRgba(fill),
@@ -47,6 +51,8 @@ export const toOverlay = (figmaNode) => {
 }
 
 export const toClickBound = (componentHeight, figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
+
   const clickbound = R.head(figmaNode.children)
   const { height } = clickbound.absoluteBoundingBox
   const offset = (height - parseInt(componentHeight, 10)) / 2
@@ -55,6 +61,8 @@ export const toClickBound = (componentHeight, figmaNode) => {
 }
 
 export const toHover = (figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
+
   const hover = R.head(figmaNode.children)
   const fill = hover.fills.find(withType('solid')) || fallback
 
@@ -67,6 +75,7 @@ export const toActive = (figmaNode) => {}
 
 export const toText = (getStyle, figmaNode) => {
   if (R.isNil(figmaNode)) return {}
+
   const fill = figmaNode.fills.find(withType('solid')) || fallback
   const { name } = getStyle(figmaNode.styles.text)
 
@@ -78,6 +87,7 @@ export const toText = (getStyle, figmaNode) => {
 
 export const toShape = (figmaNode) => {
   if (R.isNil(figmaNode)) return {}
+
   const shape = R.head(figmaNode.children)
   const fill = shape.fills.find(withType('solid')) || fallback
 
@@ -88,6 +98,8 @@ export const toShape = (figmaNode) => {
 }
 
 export const toField = (getStyle, figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
+
   const components = figmaNode.children
   const shape = toShape(R.find(instanceOfComponent('shape'), components))
 

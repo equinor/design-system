@@ -45,6 +45,11 @@ const buildProps = (states, getStyle) => {
   const activeLabel = toText(R.find(withName('label'), active.children))
   const disabledLabel = toText(R.find(withName('label'), disabled.children))
 
+  const focus = toFocus(
+    R.find(instanceOfComponent('focused'), focused.children),
+  )
+  const hover = toHover(R.find(withName('straight'), hovered.children))
+
   // data
   const data = removeNil({
     ...shape,
@@ -57,31 +62,45 @@ const buildProps = (states, getStyle) => {
       background: activeShape.background,
       ...activeLabel,
       borders: R.filter(withName('border'), active.children),
+      field: R.find(withName('field'), active.children),
     }),
     disabled: removeNil({
       background: disabledShape.background,
       ...disabledLabel,
       borders: R.filter(withName('border'), disabled.children),
+      field: R.find(withName('field'), disabled.children),
     }),
-    focus: R.find(instanceOfComponent('focused'), focused.children),
-    hover: R.find(withName('straight'), hovered.children),
+    focus: removeNil({
+      ...focus,
+      field: R.find(withName('field'), focused.children),
+    }),
+    hover: removeNil({
+      ...hover,
+      field: R.find(withName('field'), hovered.children),
+    }),
   })
 
   // transformations
   const transformations = {
     borders: toBorders,
-    text: (x) => toText(x),
+    text: toText,
     spacings: toSpacings,
     clickbound: (x) => toClickBound(shape.height, x),
-    field: (x) => toField(x),
+    field: toField,
     active: {
       borders: toBorders,
+      field: toField,
     },
     disabled: {
       borders: toBorders,
+      field: toField,
     },
-    focus: toFocus,
-    hover: toHover,
+    focus: {
+      field: toField,
+    },
+    hover: {
+      field: toField,
+    },
   }
 
   return R.evolve(transformations, data)
