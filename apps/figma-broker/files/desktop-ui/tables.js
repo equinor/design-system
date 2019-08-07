@@ -5,7 +5,7 @@ import {
   withType,
   toDict,
   instanceOfComponent,
-  isNotNil,
+  removeNilAndEmpty,
 } from '@utils'
 import {
   toBorders,
@@ -27,12 +27,13 @@ const buildProps = (states, getStyle) => {
   const disabled = R.find(withName('disabled'), states)
   const focused = R.find(withName('focus'), states)
   const hovered = R.find(withName('hover'), states)
-  const filled = R.find(withName('filled'), states)
+  const filled = R.find(withName('filled'), states) || { children: [] }
 
   // functions
-  const removeNil = R.curry(R.pickBy)(isNotNil)
   const toText = R.curry(toText_)(getStyle)
-  const toField = R.curry(toField_)(getStyle)
+  const toField = R.curry(toField_)(getStyle)(
+    R.find(withName('field'), filled.children),
+  )
 
   // pre transformed data
   const shape = toShape(R.find(instanceOfComponent('shape'), enabled.children))
@@ -51,30 +52,30 @@ const buildProps = (states, getStyle) => {
   const hover = toHover(R.find(withName('straight'), hovered.children))
 
   // data
-  const data = removeNil({
+  const data = removeNilAndEmpty({
     ...shape,
     borders: R.filter(withName('border'), enabled.children),
-    text: R.find(withType('text'), enabled.children),
+    text: toText(R.find(withType('text'), enabled.children)),
     spacings: R.filter(instanceOfComponent('spacing'), enabled.children),
     clickbound: R.find(instanceOfComponent('clickbound'), enabled.children),
     field: R.find(withName('field'), enabled.children),
-    active: removeNil({
+    active: removeNilAndEmpty({
       background: activeShape.background,
       ...activeLabel,
       borders: R.filter(withName('border'), active.children),
       field: R.find(withName('field'), active.children),
     }),
-    disabled: removeNil({
+    disabled: removeNilAndEmpty({
       background: disabledShape.background,
       ...disabledLabel,
       borders: R.filter(withName('border'), disabled.children),
       field: R.find(withName('field'), disabled.children),
     }),
-    focus: removeNil({
+    focus: removeNilAndEmpty({
       ...focus,
       field: R.find(withName('field'), focused.children),
     }),
-    hover: removeNil({
+    hover: removeNilAndEmpty({
       ...hover,
       field: R.find(withName('field'), hovered.children),
     }),
@@ -83,7 +84,6 @@ const buildProps = (states, getStyle) => {
   // transformations
   const transformations = {
     borders: toBorders,
-    text: toText,
     spacings: toSpacings,
     clickbound: (x) => toClickBound(shape.height, x),
     field: toField,

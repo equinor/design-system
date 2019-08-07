@@ -329,7 +329,7 @@
                 }
             },
             "text": {
-                "color": "rgba(111, 111, 111, 1)",
+                "color": "rgba(61, 61, 61, 1)",
                 "typography": {
                     "color": "rgba(111, 111, 111, 1)",
                     "fontFamily": "Equinor",
@@ -337,7 +337,8 @@
                     "fontWeight": 400,
                     "letterSpacing": "0.400em",
                     "lineHeight": "1.500em"
-                }
+                },
+                "colorPlaceholder": "rgba(111, 111, 111, 1)"
             },
             "spacings": {
                 "spacing_right": "8px",
@@ -372,7 +373,8 @@
                         "fontWeight": 400,
                         "letterSpacing": "0.400em",
                         "lineHeight": "1.500em"
-                    }
+                    },
+                    "colorPlaceholder": "rgba(61, 61, 61, 1)"
                 },
                 "spacings": {
                     "spacing_right": "8px",
@@ -392,9 +394,8 @@
             "field": {
                 "height": "36px",
                 "background": "rgba(247, 247, 247, 1)",
-                "borders": {},
                 "text": {
-                    "color": "rgba(111, 111, 111, 1)",
+                    "color": "rgba(61, 61, 61, 1)",
                     "typography": {
                         "color": "rgba(111, 111, 111, 1)",
                         "fontFamily": "Equinor",
@@ -402,7 +403,8 @@
                         "fontWeight": 400,
                         "letterSpacing": "0.400em",
                         "lineHeight": "1.500em"
-                    }
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
                 },
                 "spacings": {
                     "spacing_right": "8px",
@@ -414,9 +416,8 @@
             "field": {
                 "height": "36px",
                 "background": "rgba(247, 247, 247, 1)",
-                "borders": {},
                 "text": {
-                    "color": "rgba(111, 111, 111, 1)",
+                    "color": "rgba(61, 61, 61, 1)",
                     "typography": {
                         "color": "rgba(111, 111, 111, 1)",
                         "fontFamily": "Equinor",
@@ -424,7 +425,8 @@
                         "fontWeight": 400,
                         "letterSpacing": "0.400em",
                         "lineHeight": "1.500em"
-                    }
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
                 },
                 "spacings": {
                     "spacing_right": "8px",
@@ -445,7 +447,7 @@
                     }
                 },
                 "text": {
-                    "color": "rgba(111, 111, 111, 1)",
+                    "color": "rgba(61, 61, 61, 1)",
                     "typography": {
                         "color": "rgba(111, 111, 111, 1)",
                         "fontFamily": "Equinor",
@@ -453,7 +455,8 @@
                         "fontWeight": 400,
                         "letterSpacing": "0.400em",
                         "lineHeight": "1.500em"
-                    }
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
                 },
                 "spacings": {
                     "spacing_right": "8px",
