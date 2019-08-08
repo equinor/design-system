@@ -1,0 +1,16 @@
+{
+  "name": "@equinor/eds-core-powerbi",
+  "version": "0.0.1-alpha.1",
+  "description": "Power BI themes implementation of Equinor Design System ",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system"
+  },
+  "license": "AGPL-3.0-or-later",
+  "scripts": {},
+  "keywords": ["eds", "design system", "equinor", "power-bi"]
+}

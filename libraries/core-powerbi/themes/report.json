@@ -1,0 +1,31 @@
+{
+  "name": "Equinor Report Theme",
+  "dataColors": [
+    "#8c1159",
+    "#e24973",
+    "#ff92a8",
+    "#005f57",
+    "#00977b",
+    "#40d38f",
+    "#004088",
+    "#0084c4",
+    "#52c0ff",
+    "#007079",
+    "#73b1b5",
+    "#a8ced1",
+    "#c9e0e2",
+    "#deedee",
+    "#eb0037",
+    "#ff7d98",
+    "#ffaebf",
+    "#ffcdd7",
+    "#7d0023",
+    "#243746",
+    "#ffe7d6",
+    "#d5eaf4",
+    "#e6faec"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#f7f7f7",
+  "tableAccent": "#dcdcdc"
+}
