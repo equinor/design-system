@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "Design tokens for the Equinor Design System",
   "author": {
     "name": "EDS Core Team",
