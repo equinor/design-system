@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict } from '@utils'
+import { propName, withType, pickChildren, toDictDeep } from '@utils'
 import { px } from '@units'
 import { fillToRgba } from '@transformers'
 
@@ -30,5 +30,6 @@ export const makeElevationTokens = (elevations, getStyle) =>
         value,
       }
     }),
-    toDict,
+    toDictDeep,
+    R.view(R.lensProp('elevation')),
   )(elevations)

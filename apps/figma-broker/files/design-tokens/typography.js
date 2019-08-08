@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict } from '@utils'
+import { propName, withType, pickChildren, toDictDeep } from '@utils'
 import { toTypography } from '@transformers'
 
 export const makeTextTokens = (typographies, getStyle) =>
@@ -22,5 +22,5 @@ export const makeTextTokens = (typographies, getStyle) =>
         value,
       }
     }),
-    toDict,
+    toDictDeep,
   )(typographies)

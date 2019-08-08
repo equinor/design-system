@@ -3,9 +3,9 @@ import {
   propName,
   withName,
   withType,
-  toDict,
   instanceOfComponent,
   removeNilAndEmpty,
+  toDictDeep,
 } from '@utils'
 import {
   toBorders,
@@ -119,5 +119,5 @@ export const makeTablesComponent = (tables, getStyle) =>
         value: tableProps,
       }
     }),
-    toDict,
+    toDictDeep,
   )(tables)

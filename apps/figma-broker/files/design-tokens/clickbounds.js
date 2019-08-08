@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict } from '@utils'
+import { propName, withType, pickChildren, toDictDeep } from '@utils'
 import { px } from '@units'
 
 const toHeightTokens = R.pipe(
@@ -21,7 +21,8 @@ const toHeightTokens = R.pipe(
       value,
     }
   }),
-  toDict,
+  toDictDeep,
+  R.view(R.lensProp('clickbounds')),
 )
 
 export const makeClickboundsTokens = (clickbounds) =>

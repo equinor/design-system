@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict } from '@utils'
+import { propName, withType, pickChildren, toDictDeep } from '@utils'
 import { fillToRgba, fillToHex, fillToHsla } from '@transformers'
 
 export const makeColorToken = (colors, getStyle) =>
@@ -29,5 +29,5 @@ export const makeColorToken = (colors, getStyle) =>
         value,
       }
     }),
-    toDict,
+    toDictDeep,
   )(colors)

@@ -54,6 +54,20 @@ export const toDict = R.curry(R.reduce)(
   }),
   {},
 )
+export const toDictDeep = R.curry(R.reduce)(
+  (acc, { name, value }) =>
+    R.set(
+      R.pipe(
+        R.split(new RegExp(/(^[^_]+)/)),
+        R.filter(R.complement(R.isEmpty)),
+        R.map(R.curry(R.replace)(/\_*/, '')),
+        R.lensPath,
+      )(name),
+      value,
+      acc,
+    ),
+  {},
+)
 
 export const instanceOfComponent = (name) =>
   R.curry((x) => withName(name, head(x.children) || { name: '' }))
