@@ -1,3 +1,5 @@
+dependencies:
+  '@equinor/eds-tokens': 'link:../tokens'
 devDependencies:
   '@babel/cli': 7.5.0_@babel+core@7.5.0
   '@babel/core': 7.5.0
@@ -5863,6 +5865,7 @@ specifiers:
   '@babel/core': ^7.4.4
   '@babel/preset-env': ^7.4.4
   '@babel/preset-react': ^7.0.0
+  '@equinor/eds-tokens': ^0.0.1-alpha.4
   babel-plugin-styled-components: ^1.10.0
   enzyme: ^3.9.0
   enzyme-adapter-react-16: ^1.13.0

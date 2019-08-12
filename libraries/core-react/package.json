@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.6",
   "description": "The React implementation of the Equinor Design System",
   "main": "dist/core-react.cjs.js",
   "module": "dist/core-react.es.js",
@@ -56,7 +56,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "@equinor/eds-tokens": "^0.0.1-alpha.4"
   },
   "jest": {
     "verbose": true,
@@ -67,5 +68,8 @@
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"
     }
+  },
+  "dependencies": {
+    "@equinor/eds-tokens": "^0.0.1-alpha.4"
   }
 }

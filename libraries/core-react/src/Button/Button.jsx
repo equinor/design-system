@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import primaryButtonTokens from '../tokens/buttons-primary.json'
-import secondaryButtonTokens from '../tokens/buttons-secondary.json'
-import dangerButtonTokens from '../tokens/buttons-danger.json'
-import disabledButtonTokens from '../tokens/buttons-disabled.json'
+import primaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-primary.json'
+import secondaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-secondary.json'
+import dangerButtonTokens from '@equinor/eds-tokens/components/button/buttons-danger.json'
+import disabledButtonTokens from '@equinor/eds-tokens/components/button/buttons-disabled.json'
 
 const colors = {
   primary: primaryButtonTokens,

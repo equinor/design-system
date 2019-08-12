@@ -1,10 +1,10 @@
 name: eds
 scripts:
   build: pnpm --filter @equinor/eds-core-react run build
-  bump: >-
+  bump:core-react: >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
     prerelease
-  publish: >-
+  publish:core-react: >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
 devDependencies:
