@@ -12,13 +12,6 @@ function readPackage(pkg, context) {
     }
     context.log('Added missing dependencies for enzyme-adapter-react-16')
   }
-  if (pkg.name === 'eslint') {
-    pkg.dependencies = {
-      ...pkg.dependencies,
-      'eslint-import-resolver-node': '0.3.2',
-    }
-    context.log('Added missing dependencies for eslint-plugin-import')
-  }
 
   return pkg
 }
