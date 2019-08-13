@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import typography from '@equinor/eds-tokens/base/typography.json'
 
 const { heading, paragraph } = typography
-const { h1, h2, h3, h4, h5, h6 } = heading
-const { caption, meta, overline, ingress, body_short, body_long } = paragraph
 
 const variants = [
   'h1',
