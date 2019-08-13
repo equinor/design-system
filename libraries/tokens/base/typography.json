@@ -5,7 +5,6 @@
             "fontFamily": "Equinor",
             "fontSize": "2.000rem",
             "fontWeight": 700,
-            "letterSpacing": 0,
             "lineHeight": "1.500em"
         },
         "h1": {
@@ -13,7 +12,6 @@
             "fontFamily": "Equinor",
             "fontSize": "2.000rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.500em"
         },
         "h2": {
@@ -21,7 +19,6 @@
             "fontFamily": "Equinor",
             "fontSize": "1.750rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.429em"
         },
         "h3": {
@@ -29,7 +26,6 @@
             "fontFamily": "Equinor",
             "fontSize": "1.500rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.667em"
         },
         "h4": {
@@ -37,7 +33,6 @@
             "fontFamily": "Equinor",
             "fontSize": "1.250rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.600em"
         },
         "h5": {
@@ -45,7 +40,7 @@
             "fontFamily": "Equinor",
             "fontSize": "1.125rem",
             "fontWeight": 500,
-            "letterSpacing": "0.178em",
+            "letterSpacing": "0.013em",
             "lineHeight": "1.333em"
         },
         "h6": {
@@ -53,7 +48,7 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 500,
-            "letterSpacing": "0.200em",
+            "letterSpacing": "0.013em",
             "lineHeight": "1.500em"
         }
     },
@@ -63,7 +58,7 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": "0.200em",
+            "letterSpacing": "0.013em",
             "lineHeight": "1.000em"
         },
         "menu_tabs": {
@@ -71,7 +66,7 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 500,
-            "letterSpacing": "0.200em",
+            "letterSpacing": "0.013em",
             "lineHeight": "1.000em"
         },
         "label": {
@@ -79,7 +74,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.688rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.455em"
         },
         "drawer_active": {
@@ -87,7 +81,7 @@
             "fontFamily": "Equinor",
             "fontSize": "0.750rem",
             "fontWeight": 700,
-            "letterSpacing": "0.133em",
+            "letterSpacing": "0.006em",
             "lineHeight": "1.333em"
         },
         "drawer_inactive": {
@@ -95,7 +89,7 @@
             "fontFamily": "Equinor",
             "fontSize": "0.750rem",
             "fontWeight": 500,
-            "letterSpacing": "0.267em",
+            "letterSpacing": "0.013em",
             "lineHeight": "1.333em"
         },
         "button": {
@@ -103,7 +97,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em"
         },
         "breadcrumb": {
@@ -111,7 +104,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em"
         },
         "breadcrumb_hover": {
@@ -119,8 +111,8 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
-            "lineHeight": "1.143em"
+            "lineHeight": "1.143em",
+            "textDecoration": "UNDERLINE"
         }
     },
     "input": {
@@ -129,7 +121,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.750rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.333em"
         },
         "text": {
@@ -137,7 +128,7 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": "0.400em",
+            "letterSpacing": "0.025em",
             "lineHeight": "1.500em"
         },
         "text_monospaced": {
@@ -146,7 +137,7 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": "1.000em",
+            "letterSpacing": "0.063em",
             "lineHeight": "1.500em"
         },
         "helper": {
@@ -154,7 +145,7 @@
             "fontFamily": "Equinor",
             "fontSize": "0.688rem",
             "fontWeight": 400,
-            "letterSpacing": "0.291em",
+            "letterSpacing": "0.013em",
             "lineHeight": "1.455em"
         }
     },
@@ -164,15 +155,14 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
-            "lineHeight": "1.250em"
+            "lineHeight": "1.250em",
+            "fontStyle": "italic"
         },
         "caption": {
             "color": "rgba(61, 61, 61, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.143em"
         },
         "meta": {
@@ -180,7 +170,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.625rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.600em"
         },
         "body_short": {
@@ -188,7 +177,6 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.250em"
         },
         "body_short_bold_italic": {
@@ -196,15 +184,14 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 700,
-            "letterSpacing": 0,
-            "lineHeight": "1.250em"
+            "lineHeight": "1.250em",
+            "fontStyle": "italic"
         },
         "body_short_bold": {
             "color": "rgba(61, 61, 61, 1)",
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 700,
-            "letterSpacing": 0,
             "lineHeight": "1.250em"
         },
         "body_short_link": {
@@ -212,23 +199,23 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
-            "lineHeight": "1.250em"
+            "lineHeight": "1.250em",
+            "textDecoration": "UNDERLINE"
         },
         "overline": {
             "color": "rgba(61, 61, 61, 1)",
             "fontFamily": "Equinor",
             "fontSize": "0.625rem",
             "fontWeight": 500,
-            "letterSpacing": "1.760em",
-            "lineHeight": "1.600em"
+            "letterSpacing": "0.069em",
+            "lineHeight": "1.600em",
+            "textTransform": "UPPERCASE"
         },
         "ingress": {
             "color": "rgba(61, 61, 61, 1)",
             "fontFamily": "Equinor",
             "fontSize": "1.125rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.333em"
         },
         "body_long": {
@@ -236,7 +223,6 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.500em"
         },
         "body_long_link": {
@@ -244,23 +230,22 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
-            "lineHeight": "1.500em"
+            "lineHeight": "1.500em",
+            "textDecoration": "UNDERLINE"
         },
         "body_long_italic": {
             "color": "rgba(61, 61, 61, 1)",
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
-            "lineHeight": "1.500em"
+            "lineHeight": "1.500em",
+            "fontStyle": "italic"
         },
         "body_long_bold": {
             "color": "rgba(61, 61, 61, 1)",
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 700,
-            "letterSpacing": 0,
             "lineHeight": "1.500em"
         },
         "body_long_bold_italic": {
@@ -268,8 +253,8 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 700,
-            "letterSpacing": 0,
-            "lineHeight": "1.500em"
+            "lineHeight": "1.500em",
+            "fontStyle": "italic"
         }
     },
     "table": {
@@ -278,7 +263,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.714em"
         },
         "cell_text": {
@@ -286,7 +270,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.714em"
         },
         "cell_text_bold": {
@@ -294,7 +277,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 700,
-            "letterSpacing": 0,
             "lineHeight": "1.714em"
         },
         "cell_text_link": {
@@ -302,8 +284,8 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
-            "lineHeight": "1.714em"
+            "lineHeight": "1.714em",
+            "textDecoration": "UNDERLINE"
         },
         "cell_numeric_monospaced": {
             "fontFeature": "'tnum' on, 'lnum' on",
@@ -311,7 +293,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.429em"
         }
     },
@@ -321,7 +302,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.750rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.333em"
         },
         "snackbar": {
@@ -329,7 +309,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.750rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.333em"
         },
         "accordion_header": {
@@ -337,7 +316,6 @@
             "fontFamily": "Equinor",
             "fontSize": "1.000rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.500em"
         },
         "chip__badge": {
@@ -345,7 +323,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.750rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.333em"
         },
         "chart": {
@@ -353,7 +330,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.750rem",
             "fontWeight": 400,
-            "letterSpacing": 0,
             "lineHeight": "1.333em"
         }
     }

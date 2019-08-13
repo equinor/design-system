@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { Button } from '@equinor/eds-core-react'
 import './button.css'
 
-storiesOf('Button', module).add('Demo', () => (
+storiesOf('Components', module).add('Button', () => (
   <div className="btn-container">
     <h1>Variations</h1>
 
