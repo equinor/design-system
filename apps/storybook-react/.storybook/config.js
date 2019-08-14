@@ -1,5 +1,6 @@
-import { configure } from '@storybook/react'
+import { configure, addDecorator } from '@storybook/react'
 import '@equinor-internal/equinor-font'
+import { withA11y } from '@storybook/addon-a11y'
 
 function loadStories() {
   const req = require.context('../stories', true, /\.stories\.jsx$/)
@@ -7,3 +8,5 @@ function loadStories() {
 }
 
 configure(loadStories, module)
+
+addDecorator(withA11y)

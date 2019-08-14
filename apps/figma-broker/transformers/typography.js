@@ -1,6 +1,6 @@
 import * as R from 'ramda'
-import { withType, withName } from '@utils'
-import { rootFontSize, rem, em } from '@units'
+import { withType, withName, removeNilAndEmpty } from '@utils'
+import { rootFontSize, rem, em, px } from '@units'
 import { fillToRgba } from './colors'
 
 export { fillToHex, fillToHsla, fillToRgba } from './colors'
@@ -16,6 +16,9 @@ export const toTypography = (figmaNode, name) => {
     letterSpacing,
     textAlignHorizontal = 'center',
     lineHeightPercentFontSize,
+    textDecoration,
+    textCase,
+    italic,
   } = figmaNode.style
   const { fills } = figmaNode
 
@@ -34,7 +37,7 @@ export const toTypography = (figmaNode, name) => {
 
   const fontSizeRem = (fontSize / rootFontSize).toFixed(3)
   const lineHeightEm = (lineHeightPercentFontSize / 100).toFixed(3)
-  const letterSpacingEm = (letterSpacing / fontSizeRem).toFixed(3)
+  const letterSpacingEm = (letterSpacing / rootFontSize).toFixed(3)
   const textAlignLens = R.lensProp('textAlign')
   const textAlign = R.toLower(textAlignHorizontal)
 
@@ -44,13 +47,16 @@ export const toTypography = (figmaNode, name) => {
     fontFamily,
     fontSize: rem(fontSizeRem),
     fontWeight,
-    letterSpacing: letterSpacing ? em(letterSpacingEm) : 0,
+    letterSpacing: letterSpacing ? em(letterSpacingEm) : null,
     lineHeight: em(lineHeightEm),
+    textDecoration,
+    textTransform: textCase ? `${textCase}CASE` : null,
+    fontStyle: italic ? 'italic' : null,
   }
 
   if (textAlign !== 'left') {
     typography = R.set(textAlignLens, textAlign, typography)
   }
 
-  return typography
+  return removeNilAndEmpty(typography)
 }
