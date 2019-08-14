@@ -87,11 +87,11 @@ const Base = ({ typography, link }) => {
   return base
 }
 
-const TextBase = styled.p`
+const TypographyBase = styled.p`
   ${Base}
 `
 
-const Text = ({ variant, children, bold, italic, link, ...other }) => {
+const Typography = ({ variant, children, bold, italic, link, ...other }) => {
   const as = getElementType(variant, link)
   const variantName = toComplexVariantName(variant, bold, italic, link)
   let typography = variantToken[variantName]
@@ -109,13 +109,13 @@ const Text = ({ variant, children, bold, italic, link, ...other }) => {
     )
   }
   return (
-    <TextBase as={as} typography={typography} link={link} {...other}>
+    <TypographyBase as={as} typography={typography} link={link} {...other}>
       {children}
-    </TextBase>
+    </TypographyBase>
   )
 }
 
-Text.propTypes = {
+Typography.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
@@ -130,11 +130,11 @@ Text.propTypes = {
   link: PropTypes.bool,
 }
 
-Text.defaultProps = {
+Typography.defaultProps = {
   variant: 'h1',
   className: '',
 }
 
-Text.displayName = 'eds-text'
+Typography.displayName = 'eds-text'
 
-export default Text
+export default Typography
