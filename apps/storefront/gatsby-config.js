@@ -87,10 +87,12 @@ module.exports = {
       resolve: `gatsby-plugin-postcss`,
       options: {
         postCssPlugins: [
+          /* eslint-disable global-require */
           require('postcss-import'),
           require('autoprefixer'),
           require('postcss-custom-media'),
           require('postcss-nested'),
+          /* eslint-enable global-require */
         ],
       },
     },
