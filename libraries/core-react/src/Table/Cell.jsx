@@ -5,28 +5,41 @@ import tableTokens from '@equinor/eds-tokens/components/table/table.json'
 
 const { header, cell } = tableTokens
 
-const getTokens = (as) => {
+const variants = {
+  header: {
+    text: header.text,
+  },
+  cell: {
+    text: cell.text,
+    numeric: cell.monospaced_numeric,
+    icon: cell.icon,
+    input: cell.input,
+  },
+}
+
+const getTokens = (as, variant) => {
   switch (as) {
     case 'th':
-      return header.text
+      return variants.header[variant]
     case 'td':
     default:
-      return cell.text
+      return variants.cell[variant]
   }
 }
 
 const getBorderTemplate = (borders) =>
   Object.keys(borders).reduce((acc, val) => {
     const { color, width } = borders[val]
-    return `${acc} border-${val}: ${width} solid ${color}`
+    return `${acc} border-${val}: ${width} solid ${color}; \n`
   }, '')
 
 const Base = ({ tokens }) => {
-  const { background, height, text, spacings, borders } = tokens
+  const { background, height, text, spacings, borders, hover } = tokens
   const { typography } = text
-  return `
+  let base = `
   background: ${background};
   min-height: ${height};
+  height: ${height};
 
   color: ${text.color};
   font-family: ${typography.fontFamily};
@@ -37,8 +50,30 @@ const Base = ({ tokens }) => {
   padding-left: ${spacings.spacing_left};
   padding-right: ${spacings.spacing_right};
 
+  &:hover {
+    background: ${hover.background}
+  }
   ${getBorderTemplate(borders)}
+
   `
+
+  if (typography.fontStyle) {
+    base = base + `font-style: ${typography.fontStyle};`
+  }
+  if (typography.letterSpacing) {
+    base = base + `letter-spacing: ${typography.letterSpacing};`
+  }
+  if (typography.textTransform) {
+    base = base + `text-transform: ${typography.textTransform};`
+  }
+  if (typography.textDecoration) {
+    base = base + `text-decoration: ${typography.textDecoration};`
+  }
+  if (typography.fontFeature) {
+    base = base + ` font-feature-settings: ${typography.fontFeature};`
+  }
+
+  return base
 }
 
 const TableBase = styled.td`
@@ -46,8 +81,8 @@ const TableBase = styled.td`
 `
 
 const TableCell = (props) => {
-  const { children, as } = props
-  const tokens = getTokens(as)
+  const { children, as, variant } = props
+  const tokens = getTokens(as, variant)
   return (
     <TableBase as={as} tokens={tokens} {...props}>
       {children}
