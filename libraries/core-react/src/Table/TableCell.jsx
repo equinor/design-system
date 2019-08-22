@@ -5,6 +5,8 @@ import styled from 'styled-components'
 const TableBase = styled.td``
 
 const TableCell = (props) => {
+  const { children } = props
+
   return <TableBase {...props}>{children}</TableBase>
 }
 
