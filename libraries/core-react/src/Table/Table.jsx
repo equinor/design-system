@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const TableBase = styled.table``
+const TableBase = styled.table`
+  border-spacing: 0;
+  border-collapse: collapse;
+`
 
 const Table = (props) => {
   const { children } = props

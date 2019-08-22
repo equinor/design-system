@@ -1,8 +1,8 @@
 import Table from './Table'
-import Body from './TableBody'
-import Cell from './TableCell'
-import Head from './TableHead'
-import Row from './TableRow'
+import Body from './Body'
+import Cell from './Cell'
+import Head from './Head'
+import Row from './Row'
 
 Table.Body = Body
 Table.Cell = Cell

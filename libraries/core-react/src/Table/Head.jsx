@@ -1,26 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Cell from './Cell'
 
-const TableBase = styled.td``
+const TableBase = styled.thead``
 
-const TableCell = (props) => {
+const TableHead = (props) => {
   const { children } = props
 
   return <TableBase {...props}>{children}</TableBase>
 }
 
-TableCell.propTypes = {
+TableHead.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node.isRequired,
 }
 
-TableCell.defaultProps = {
+TableHead.defaultProps = {
   className: '',
 }
 
-TableCell.displayName = 'eds-table-cell'
+TableHead.displayName = 'eds-table-head'
 
-export default TableCell
+export default TableHead

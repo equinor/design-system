@@ -15,18 +15,29 @@ storiesOf('Components', module).add('Table', () => (
         <Table>
           <Head>
             <Row>
-              <Cell>Col 1</Cell>
-              <Cell>Col 2</Cell>
+              <Cell as="th" scope="col"></Cell>
+              <Cell as="th" scope="col">
+                Empire
+              </Cell>
+              <Cell as="th" scope="col">
+                Republic
+              </Cell>
             </Row>
           </Head>
           <Body>
             <Row>
-              <Cell>Value 1</Cell>
-              <Cell>Value 2</Cell>
+              <Cell as="th" scope="row">
+                Jedi
+              </Cell>
+              <Cell></Cell>
+              <Cell>Luke Skywalker</Cell>
             </Row>
             <Row>
-              <Cell>Value 1.2</Cell>
-              <Cell>Value 2.2</Cell>
+              <Cell as="th" scope="row">
+                Sith
+              </Cell>
+              <Cell>Darth Vader</Cell>
+              <Cell></Cell>
             </Row>
           </Body>
         </Table>
