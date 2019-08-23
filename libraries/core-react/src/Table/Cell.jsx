@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import tableTokens from '@equinor/eds-tokens/components/table/table.json'
+import { typographyTemplate } from './../_common/templates'
 
 const { header, cell } = tableTokens
 
@@ -27,7 +28,7 @@ const getTokens = (as, variant) => {
   }
 }
 
-const getBorderTemplate = (borders) =>
+const borderTemplate = (borders) =>
   Object.keys(borders).reduce((acc, val) => {
     const { color, width } = borders[val]
     return `${acc} border-${val}: ${width} solid ${color}; \n`
@@ -41,38 +42,12 @@ const Base = ({ tokens }) => {
   min-height: ${height};
   height: ${height};
 
-  color: ${text.color};
-  font-family: ${typography.fontFamily};
-  font-size: ${typography.fontSize};
-  font-weight: ${typography.fontWeight};
-  line-height: ${typography.lineHeight};
+  padding-left: ${spacings.left};
+  padding-right: ${spacings.right};
 
-  padding-left: ${spacings.spacing_left};
-  padding-right: ${spacings.spacing_right};
-
-  &:hover {
-    background: ${hover.background}
-  }
-  ${getBorderTemplate(borders)}
-
+  ${borderTemplate(borders)}
+  ${typographyTemplate(typography)}
   `
-
-  if (typography.fontStyle) {
-    base = base + `font-style: ${typography.fontStyle};`
-  }
-  if (typography.letterSpacing) {
-    base = base + `letter-spacing: ${typography.letterSpacing};`
-  }
-  if (typography.textTransform) {
-    base = base + `text-transform: ${typography.textTransform};`
-  }
-  if (typography.textDecoration) {
-    base = base + `text-decoration: ${typography.textDecoration};`
-  }
-  if (typography.fontFeature) {
-    base = base + ` font-feature-settings: ${typography.fontFeature};`
-  }
-
   return base
 }
 
