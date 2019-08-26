@@ -13,7 +13,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
@@ -46,7 +45,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
@@ -79,14 +77,13 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "right icon": "8px"
+            "right_icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -113,14 +110,13 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "right icon": "8px"
+            "right_icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -147,14 +143,13 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "right icon": "8px"
+            "right_icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -181,14 +176,13 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "left icon": "8px"
+            "left_icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -215,14 +209,13 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "left icon": "8px"
+            "left_icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -249,14 +242,13 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },
         "spacing": {
             "left": "16px",
             "right": "16px",
-            "left icon": "8px"
+            "left_icon": "8px"
         },
         "clickbound": "48px",
         "clickboundOffset": "6px",
@@ -283,7 +275,6 @@
             "fontFamily": "Equinor",
             "fontSize": "0.875rem",
             "fontWeight": 500,
-            "letterSpacing": 0,
             "lineHeight": "1.143em",
             "textAlign": "center"
         },

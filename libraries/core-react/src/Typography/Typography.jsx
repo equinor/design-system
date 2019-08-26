@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import typography from '@equinor/eds-tokens/base/typography.json'
+import { typographyTemplate } from './../_common/templates'
 
 const { heading, paragraph } = typography
 
@@ -61,28 +62,9 @@ const toComplexVariantName = (
 const Base = ({ typography, link }) => {
   let base = `
   margin: 0;
-  color: ${typography.color};
-  font-family: ${typography.fontFamily};
-  font-size: ${typography.fontSize};
-  font-weight: ${typography.fontWeight};
-  line-height: ${typography.lineHeight};
-  `
 
-  if (typography.fontStyle) {
-    base = base + `font-style: ${typography.fontStyle};`
-  }
-  if (typography.letterSpacing) {
-    base = base + `letter-spacing: ${typography.letterSpacing};`
-  }
-  if (typography.textTransform) {
-    base = base + `text-transform: ${typography.textTransform};`
-  }
-  if (typography.textDecoration) {
-    base = base + `text-decoration: ${typography.textDecoration};`
-  }
-  if (link) {
-    base = base + 'cursor: pointer;'
-  }
+  ${typographyTemplate(typography, link)}
+  `
 
   return base
 }
