@@ -1,0 +1,310 @@
+{
+    "input": {
+        "spacings": {
+            "helper_without_icon": "8px",
+            "helper_with_icon": "8px",
+            "label": "8px"
+        },
+        "field": {
+            "height": "36px",
+            "background": "rgba(247, 247, 247, 1)",
+            "borders": {
+                "bottom": {
+                    "color": "transparent",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            },
+            "text": {
+                "color": "rgba(61, 61, 61, 1)",
+                "typography": {
+                    "color": "rgba(111, 111, 111, 1)",
+                    "fontFamily": "Equinor",
+                    "fontSize": "1.000rem",
+                    "fontWeight": 400,
+                    "letterSpacing": "0.025em",
+                    "lineHeight": "1.500em"
+                },
+                "colorPlaceholder": "rgba(111, 111, 111, 1)"
+            },
+            "spacings": {
+                "right": "8px",
+                "right_icon": "8px",
+                "left": "8px"
+            }
+        },
+        "clickbound": {
+            "height": "56px",
+            "offset": ""
+        },
+        "active": {
+            "color": "rgba(111, 111, 111, 1)",
+            "typography": {
+                "color": "rgba(111, 111, 111, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.750rem",
+                "fontWeight": 400,
+                "lineHeight": "1.333em"
+            },
+            "field": {
+                "height": "36px",
+                "background": "rgba(247, 247, 247, 1)",
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(61, 61, 61, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(61, 61, 61, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        },
+        "disabled": {
+            "color": "rgba(111, 111, 111, 1)",
+            "typography": {
+                "color": "rgba(111, 111, 111, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.750rem",
+                "fontWeight": 400,
+                "lineHeight": "1.333em"
+            },
+            "field": {
+                "height": "36px",
+                "background": "rgba(247, 247, 247, 1)",
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(111, 111, 111, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        },
+        "focus": {
+            "field": {
+                "height": "36px",
+                "background": "rgba(247, 247, 247, 1)",
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(111, 111, 111, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        },
+        "hover": {
+            "field": {
+                "height": "36px",
+                "background": "rgba(247, 247, 247, 1)",
+                "borders": {
+                    "bottom": {
+                        "color": "transparent",
+                        "radius": 0,
+                        "width": "1px"
+                    }
+                },
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(111, 111, 111, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        }
+    },
+    "area": {
+        "spacings": {
+            "helper_without_icon": "8px",
+            "helper_with_icon": "8px",
+            "label": "8px"
+        },
+        "field": {
+            "height": "76px",
+            "background": "rgba(247, 247, 247, 1)",
+            "borders": {
+                "bottom": {
+                    "color": "transparent",
+                    "radius": 0,
+                    "width": "1px"
+                }
+            },
+            "text": {
+                "color": "rgba(61, 61, 61, 1)",
+                "typography": {
+                    "color": "rgba(111, 111, 111, 1)",
+                    "fontFamily": "Equinor",
+                    "fontSize": "1.000rem",
+                    "fontWeight": 400,
+                    "letterSpacing": "0.025em",
+                    "lineHeight": "1.500em"
+                },
+                "colorPlaceholder": "rgba(111, 111, 111, 1)"
+            },
+            "spacings": {
+                "right": "8px",
+                "right_icon": "8px",
+                "left": "8px"
+            }
+        },
+        "clickbound": {
+            "height": "56px",
+            "offset": ""
+        },
+        "active": {
+            "color": "rgba(111, 111, 111, 1)",
+            "typography": {
+                "color": "rgba(111, 111, 111, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.750rem",
+                "fontWeight": 400,
+                "lineHeight": "1.333em"
+            },
+            "field": {
+                "height": "76px",
+                "background": "rgba(247, 247, 247, 1)",
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(61, 61, 61, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(61, 61, 61, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        },
+        "disabled": {
+            "color": "rgba(111, 111, 111, 1)",
+            "typography": {
+                "color": "rgba(111, 111, 111, 1)",
+                "fontFamily": "Equinor",
+                "fontSize": "0.750rem",
+                "fontWeight": 400,
+                "lineHeight": "1.333em"
+            },
+            "field": {
+                "height": "76px",
+                "background": "rgba(247, 247, 247, 1)",
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(111, 111, 111, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        },
+        "focus": {
+            "field": {
+                "height": "76px",
+                "background": "rgba(247, 247, 247, 1)",
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(111, 111, 111, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        },
+        "hover": {
+            "field": {
+                "height": "76px",
+                "background": "rgba(247, 247, 247, 1)",
+                "borders": {
+                    "bottom": {
+                        "color": "transparent",
+                        "radius": 0,
+                        "width": "1px"
+                    }
+                },
+                "text": {
+                    "color": "rgba(61, 61, 61, 1)",
+                    "typography": {
+                        "color": "rgba(111, 111, 111, 1)",
+                        "fontFamily": "Equinor",
+                        "fontSize": "1.000rem",
+                        "fontWeight": 400,
+                        "letterSpacing": "0.025em",
+                        "lineHeight": "1.500em"
+                    },
+                    "colorPlaceholder": "rgba(111, 111, 111, 1)"
+                },
+                "spacings": {
+                    "right": "8px",
+                    "right_icon": "8px",
+                    "left": "8px"
+                }
+            }
+        }
+    }
+}

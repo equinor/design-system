@@ -117,6 +117,6 @@ Typography.defaultProps = {
   className: '',
 }
 
-Typography.displayName = 'eds-text'
+Typography.displayName = 'eds-typography'
 
 export default Typography

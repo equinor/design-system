@@ -2,4 +2,5 @@
 export { default as Button } from './Button'
 export { default as Typography } from './Typography'
 export { default as Table } from './Table'
+export { default as TextField } from './TextField'
 /* eslint-enable */

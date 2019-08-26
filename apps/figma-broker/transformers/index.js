@@ -80,15 +80,23 @@ export const toHover = (figmaNode) => {
 export const toActive = (figmaNode) => {}
 
 export const toText = (getStyle, figmaNode) => {
-  if (R.isNil(figmaNode)) return {}
+  let node = figmaNode
+  if (R.isNil(node)) return {}
 
-  const fill = figmaNode.fills.find(withType('solid')) || fallback
-  const { name } = getStyle(figmaNode.styles.text)
-
-  return {
-    color: fillToRgba(fill),
-    typography: toTypography(figmaNode, name),
+  if (node.type === 'GROUP') {
+    node = R.find(withName('label'), node.children)
   }
+
+  if (R.isNil(figmaNode.fills)) {
+    console.log('no fills!')
+  }
+  const fill = (node.fills || []).find(withType('solid')) || fallback
+  const { name } = getStyle(node.styles.text)
+
+  return removeNilAndEmpty({
+    color: fillToRgba(fill),
+    typography: toTypography(node, name),
+  })
 }
 
 export const toShape = (figmaNode) => {
