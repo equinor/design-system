@@ -26,8 +26,6 @@ We know that equinor.com is currently using Amazon Cloudfront, one of many CDN p
 
 Developers always find a way to make life easier for them, and we’ve seen more than one example of projects in the company that upload the Equinor fonts to Github because that’s convinient. We _do_ have an internal <abbr title="Node Package Manager">NPM</abbr> repository where the fonts and logos can be installed for authorized developers but the processs is very cumbersome and not in widespread use. And sometimes installed NPM modules is not an option if the usage is web based tools that are hosted by third parties. Perhaps a developer want to sketch something out in Codepen for example, and need to see how something looks with the correct font.
 
-> Note: Viewing the source-code will show that we use a temporary url for the CDN – but it will be https://eds-static.equinor.com once everything is in place.
-
 ## Usage
 
 We have provided some examples of how fonts and logos would be used from a CDN. For the sake of demonstration these files are served from a CDN in Azure with a temporary url but we have used eds-static in the example texts for clarity.
