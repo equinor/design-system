@@ -3,38 +3,34 @@ title: Equinor CDN
 layout: default
 ---
 
-# Equinor brand assets
+# Equinor brand assets from a <abbr title="content delivery network">CDN</abbr>
 
 > TL;DR Hosting brand assets such as the fonts and the logo in a CDN would give COMM greater control over which versions of the assets are in use in production, improve download speed for the end user, and simplify usage of brand assets for developers.
 
-The purpose of a CDN (Content Delivery Network) is to serve static files such as graphic elements, fonts, videos etc. for use in web applications and websites. The files are usually globally distributed – meaning that there is a network of servers which hold copies of the files – and serve the ones that are closest to the end user. This improves page load for the end user, and also takes the load of the servers that host the web application itself.
+The purpose of a CDN (Content Delivery Network) is to serve static files such as graphic elements, fonts, videos etc. for use in web applications and websites from a globally distributed network of servers. The users are then served copies of the files from the server closest to where they are in the world, which significantly improves page loads, and also takes the load of the servers that run the web application itself.
 
 Looking at other design systems, Scania for example provides both fonts and logos from a CDN. On one hand that does mean that anyone can use the Scania font on their web page if they wanted to by including the link to the css-file in the header in the html-document as documented in [their styleguide](https://scania.github.io/corporate-ui-docs/styleguide/typography/). But on the other hand, when it’s on the web anyone with sufficient level of skills can view the source of the CSS-file and manage to download the assets – that goes for equinor.com as well.
 
 <div style="font-family: 'Scania Sans'; font-weight: bold">
-  <p>This is Scania Sans</p>
+  <p>«This is Scania Sans»</p>
 </div>
 
-## Security
-
-## Caching
-
-
-
-## Version control
-
-To comply with WCAG guidelines, the digital version of the Energy Red brand colour had to be updated. This is a good example of where a CDN would have helped us make sure that change rippled through every application and website in Equinor that used that colour because we would have one single source of truth. The same goes for the logo, using Scania as an example again they provide a css-file one can include in the html-document with the logo in different formats. This file also contains the following comment, aimed at developers, which explains the rationale behind using a css-file for the logos (emphasis mine): 
+To comply with WCAG guidelines, the digital version of the Energy Red brand colour had to be updated. This is a good example of where a CDN would have helped us make sure that change rippled through every application and website in Equinor that used that colour because we would have one single source of truth. The same goes for the logo, using Scania as an example again they provide a css-file one can include in the html-document with the logo in different formats. This file also contains the following comment, aimed at developers, which explains the rationale behind using a css-file for the logos (emphasis mine):
 > «The Scania symbol and wordmark should be used in accordance to the guidelines specified in the Brand Manual. <strong>We do not want our logotype to be downloaded to local servers as updates to the logotype is made to these centraly stored versions</strong>.»
 
 <div class="scania logotype-vertical-lockup"></div>
 
-In our case, we recommend using svg-files which is demonstrated by the end of this document, but the principle is the same.
+As you can see from this example Scanias CDN is open for everyone. We must add that it _is_ possible to restrict usage to certain URL through a method called CORS – so that for example only applications that are from whitelisted domains such as equinor.com are allowed to use them if that is a requirement from COMM.
 
+We know that equinor.com is currently using Amazon Cloudfront, one of many CDN providers. In EDS however, since we already use Microsoft Azure in our infrastructure, using Azure CDN would be a better option. The url for the CDN would then be https://eds-static.equinor.com if this is something we want to go forward with.
 
+Developers always find a way to make life easier for them, and we’ve seen more than one example of projects in the company that upload the Equinor fonts to Github because that’s convinient. We _do_ have an internal <abbr title="Node Package Manager">NPM</abbr> repository where the fonts and logos can be installed for authorized developers but the processs is very cumbersome and not in widespread use. And sometimes installed NPM modules is not an option if the usage is web based tools that are hosted by third parties. Perhaps a developer want to sketch something out in Codepen for example, and need to see how something looks with the correct font.
 
 > Note: Viewing the source-code will show that we use a temporary url for the CDN – but it will be https://eds-static.equinor.com once everything is in place.
 
 ## Usage
+
+We have provided some examples of how fonts and logos would be used from a CDN. For the sake of demonstration these files are served from a CDN in Azure with a temporary url but we have used eds-static in the example texts for clarity.
 
 ### The Equinor font
 
@@ -145,14 +141,14 @@ When it comes to the logo we have made some changes to the original format. Inst
 
 ---
 
-We hope you approve of our suggestion to provide these assets from a CDN, and that you can help us promote the CDN and the internal NPM in the Communication Toolbox.
+We hope you by this see the benefits of having an Equinor CDN, and that we have your approval to move forward with cost analysis and risk assessment.
 
 Best regards,  
 [Victor Nystad](mailto:vnys@equinor.com),  
-The EDS Core Team
+On behalf of the EDS core team
 
----
+<!--
 
 ## Resources:
 
-- <https://towardsdatascience.com/cnd-content-delivery-networks-b4e6998216cc>
+- <https://towardsdatascience.com/cnd-content-delivery-networks-b4e6998216cc> -->
