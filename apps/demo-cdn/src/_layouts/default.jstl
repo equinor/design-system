@@ -17,6 +17,14 @@
       rel="stylesheet"
       href="https://edsstoragedev.blob.core.windows.net/eds-blob-cdn/font/equinor-font.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://static.scania.com/resources/fonts/scania-sans/scania-sans.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://static.scania.com/resources/logotype/scania/logotype-stylesheet/scania-logotype.css"
+    />
     <!-- <link -->
     <!-- rel="stylesheet" -->
     <!-- href="https://eds-static.equinor.com/font/equinor-font.css" -->

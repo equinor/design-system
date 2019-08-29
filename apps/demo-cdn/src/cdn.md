@@ -5,14 +5,32 @@ layout: default
 
 # Equinor brand assets
 
-> TL;DR Hosting brand assets such as the fonts and the logo in a CDN would improve download speed for the end user, give COMM greater control over which versions of the assets are in use in production, and simplify usage of brand assets for developers.
+> TL;DR Hosting brand assets such as the fonts and the logo in a CDN would give COMM greater control over which versions of the assets are in use in production, improve download speed for the end user, and simplify usage of brand assets for developers.
 
 The purpose of a CDN (Content Delivery Network) is to serve static files such as graphic elements, fonts, videos etc. for use in web applications and websites. The files are usually globally distributed – meaning that there is a network of servers which hold copies of the files – and serve the ones that are closest to the end user. This improves page load for the end user, and also takes the load of the servers that host the web application itself.
 
-Add text about:
-- Security
-- Caching
-- Version control
+Looking at other design systems, Scania for example provides both fonts and logos from a CDN. On one hand that does mean that anyone can use the Scania font on their web page if they wanted to by including the link to the css-file in the header in the html-document as documented in [their styleguide](https://scania.github.io/corporate-ui-docs/styleguide/typography/). But on the other hand, when it’s on the web anyone with sufficient level of skills can view the source of the CSS-file and manage to download the assets – that goes for equinor.com as well.
+
+<div style="font-family: 'Scania Sans'; font-weight: bold">
+  <p>This is Scania Sans</p>
+</div>
+
+## Security
+
+## Caching
+
+
+
+## Version control
+
+To comply with WCAG guidelines, the digital version of the Energy Red brand colour had to be updated. This is a good example of where a CDN would have helped us make sure that change rippled through every application and website in Equinor that used that colour because we would have one single source of truth. The same goes for the logo, using Scania as an example again they provide a css-file one can include in the html-document with the logo in different formats. This file also contains the following comment, aimed at developers, which explains the rationale behind using a css-file for the logos (emphasis mine): 
+> «The Scania symbol and wordmark should be used in accordance to the guidelines specified in the Brand Manual. <strong>We do not want our logotype to be downloaded to local servers as updates to the logotype is made to these centraly stored versions</strong>.»
+
+<div class="scania logotype-vertical-lockup"></div>
+
+In our case, we recommend using svg-files which is demonstrated by the end of this document, but the principle is the same.
+
+
 
 > Note: Viewing the source-code will show that we use a temporary url for the CDN – but it will be https://eds-static.equinor.com once everything is in place.
 
