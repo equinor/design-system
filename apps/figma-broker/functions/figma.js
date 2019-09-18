@@ -29,9 +29,8 @@ export async function fetchFigmaFile(fileId) {
   return fetch(url, options()).then(handleResponse)
 }
 
-export async function fetchFigmaImageUrls(fileId, ids) {
+export async function fetchFigmaImageUrls(fileId, ids, format = 'svg') {
   // https://www.figma.com/developers/docs#get-images-endpoint
-  const url = `https://api.figma.com/v1/images/${fileId}?ids=${ids}&format=svg`
-
+  const url = `https://api.figma.com/v1/images/${fileId}?ids=${ids}&format=${format}`
   return fetch(url, options()).then(handleResponse)
 }

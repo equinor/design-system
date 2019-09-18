@@ -6,7 +6,11 @@ import KoaRouter from 'koa-router'
 import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
 import SVGO from 'svgo'
-
+import childProcess from 'child_process'
+import fs from 'fs'
+import readline from 'readline'
+import { Readable, PassThrough } from 'stream'
+import * as R from 'ramda'
 import {
   fetchFigmaFile,
   processFigmaFile,
@@ -20,7 +24,7 @@ import {
   writeResultsIndividually,
 } from './functions/file'
 import { convert } from './functions/public'
-import file from './files.json'
+import FILE_ID from './files.json'
 // Files
 import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
@@ -60,6 +64,7 @@ router
   .post('/assets', KoaBody(), createAssets)
   .post('/transform-tokens', KoaBody(), transformTokens)
   .post('/desktop-ui', KoaBody(), createDesktopComponents)
+  .post('/images', KoaBody(), fetchFigmaImages)
 
 app
   .use(logger)
@@ -69,7 +74,7 @@ app
 // Tokens
 async function createTokens(ctx) {
   try {
-    const data = await fetchFigmaFile(file.tokens)
+    const data = await fetchFigmaFile(FILE_ID.tokens)
 
     const figmaFile = processFigmaFile(data)
     const tokens = makeTokens(figmaFile)
@@ -87,7 +92,7 @@ async function createTokens(ctx) {
 
 async function createAssets(ctx) {
   try {
-    const data = await fetchFigmaFile(file.assets)
+    const data = await fetchFigmaFile(FILE_ID.assets)
 
     const figmaFile = processFigmaFile(data)
     const assetPages = getAssets(figmaFile)
@@ -96,7 +101,7 @@ async function createAssets(ctx) {
     const assetsWithUrl = await Promise.all(
       assetPages.map(async (assetPage) => {
         const ids = assetPage.value.map((x) => x.id)
-        const result = await fetchFigmaImageUrls(file.assets, ids)
+        const result = await fetchFigmaImageUrls(FILE_ID.assets, ids)
         if (!result.err) {
           return {
             ...assetPage,
@@ -156,7 +161,7 @@ async function transformTokens(ctx) {
 
 async function createDesktopComponents(ctx) {
   // try {
-  const data = await fetchFigmaFile(file.desktop)
+  const data = await fetchFigmaFile(FILE_ID.desktop)
 
   const figmaFile = processFigmaFile(data)
   const components = makeDesktopComponents(figmaFile)
@@ -168,6 +173,59 @@ async function createDesktopComponents(ctx) {
   //   ctx.response.status = err.status || 500
   //   ctx.response.body = err.message
   // }
+}
+
+/**
+ * @param binary Buffer
+ * returns readableInstanceStream Readable
+ */
+function bufferToStream(binary) {
+  const readableInstanceStream = new Readable({
+    read() {
+      this.push(binary)
+      this.push(null)
+    },
+  })
+
+  return readableInstanceStream
+}
+
+async function fetchFigmaImages(ctx) {
+  const { exec } = childProcess
+  const lines = []
+
+  const command = exec(
+    `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
+    (err, stdout, stderr) => {
+      if (err) {
+        console.error(err)
+      } else {
+        readline
+          .createInterface({
+            input: bufferToStream(stdout),
+          })
+          .on('line', (line) => lines.push(line))
+          .on('close', () => {
+            ;(async () => {
+              for await (const line of lines) {
+                try {
+                  const id = R.head(R.match(/(?<=node-id=).*/g, line))
+                  const fileId = R.head(R.match(/[^/]+(?=\/)/g, line))
+                  console.log(`id: ${id}, fileId: ${fileId}`)
+                  // console.log(line)
+                } catch (error) {
+                  console.error(error.message)
+                }
+              }
+            })()
+          })
+      }
+    },
+  )
+
+  command.on('close', (code) => {
+    console.log(`Figma link parse finished with code ${code}`)
+  })
 }
 
 app.listen(PORT)
