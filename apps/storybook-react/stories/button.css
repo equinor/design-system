@@ -1,10 +1,5 @@
-.btn-container {
-  margin: 32px;
-}
-
-.btn-group {
-  margin-top: 48px;
-}
-.btn-group > button {
+.group > button {
+  margin-top: 16px;
   margin-right: 32px;
+  margin-bottom: 16px;
 }

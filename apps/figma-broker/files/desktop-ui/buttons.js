@@ -3,7 +3,7 @@ import { propName, withName, withType, instanceOfComponent } from '@utils'
 import { px } from '@units'
 import {
   toTypography,
-  toSpacer,
+  toSpacings,
   toFocus,
   toOverlay,
   fillToRgba,
@@ -57,31 +57,9 @@ const buildProps = (states) => {
     }
 
     if (spacing.length > 0) {
-      // Spacing can be used in any form, so we create an object
-      // with names prefixed with "Spacing" in figma´
-      const spacingProps = R.reduce(
-        (acc, val) => {
-          const spacer = R.head(val.children)
-          if (spacer) {
-            const name = R.head(R.match(/(?<=Spacing\s).*/i, val.name))
-            const spacingValue = toSpacer(
-              spacer.name,
-              spacer.absoluteBoundingBox,
-            )
-            return {
-              ...acc,
-              [name]: px(spacingValue),
-            }
-          }
-          return acc
-        },
-        {},
-        spacing,
-      )
-
       buttonProps = {
         ...buttonProps,
-        spacing: spacingProps,
+        spacing: toSpacings(spacing),
       }
     }
 

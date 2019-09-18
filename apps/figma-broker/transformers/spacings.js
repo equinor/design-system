@@ -8,7 +8,7 @@ export const toSpacings = (spacings) =>
       const { constraints, children, name } = val
       const { absoluteBoundingBox, name: childName } = R.head(children)
       const { horizontal, vertical } = constraints
-      const name_ = propName(name)
+      const name_ = propName(name).replace('spacing_', '')
 
       // Top or Bottom spacer
       if (R.test(/Horizontal/, childName)) {

@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "author": "",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "@mdx-js/mdx": "^0.20.3",
     "@mdx-js/tag": "^0.20.3",
     "@reach/router": "^1.2.1",
@@ -38,9 +39,7 @@
     "remark-emoji": "^2.0.2",
     "styled-components": "^4.2.0"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -51,7 +50,6 @@
     "lint": "eslint ./src/**/*.jsx"
   },
   "devDependencies": {
-    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.3.0",

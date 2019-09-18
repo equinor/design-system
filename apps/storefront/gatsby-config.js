@@ -1,5 +1,6 @@
 require('dotenv').config()
 const path = require('path')
+
 const emoji = require(`remark-emoji`)
 
 module.exports = {
@@ -28,10 +29,12 @@ module.exports = {
         globalScope: `
           import ComponentStatus from '${__dirname}/src/components/ComponentStatus';
           import Embed from '${__dirname}/src/components/embed';
+          import Video from '${__dirname}/src/components/video';
 
           export default {
               ComponentStatus,
-              Embed
+              Embed,
+              Video
           }
           `,
       },
@@ -84,10 +87,12 @@ module.exports = {
       resolve: `gatsby-plugin-postcss`,
       options: {
         postCssPlugins: [
+          /* eslint-disable global-require */
           require('postcss-import'),
           require('autoprefixer'),
           require('postcss-custom-media'),
           require('postcss-nested'),
+          /* eslint-enable global-require */
         ],
       },
     },

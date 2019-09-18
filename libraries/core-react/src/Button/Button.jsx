@@ -5,6 +5,7 @@ import primaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-p
 import secondaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-secondary.json'
 import dangerButtonTokens from '@equinor/eds-tokens/components/button/buttons-danger.json'
 import disabledButtonTokens from '@equinor/eds-tokens/components/button/buttons-disabled.json'
+import { typographyTemplate } from './../_common/templates'
 
 const colors = {
   primary: primaryButtonTokens,
@@ -36,12 +37,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
     padding-left: ${spacing.left};
     padding-right: ${spacing.right};
 
-    font-family: ${typography.fontFamily};
-    font-size: ${typography.fontSize};
-    font-weight: ${typography.fontWeight};
-    line-height: ${typography.lineHeight};
-    letter-spacing: ${typography.letterSpacing};
-    text-align: ${typography.textAlign};
+    ${typographyTemplate(typography)}
 
     &::after {
       position: absolute;
