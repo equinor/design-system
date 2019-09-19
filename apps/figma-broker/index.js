@@ -7,10 +7,9 @@ import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
 import SVGO from 'svgo'
 import childProcess from 'child_process'
-import fs from 'fs'
-import readline from 'readline'
-import { Readable, PassThrough } from 'stream'
 import * as R from 'ramda'
+import util from 'util'
+
 import {
   fetchFigmaFile,
   processFigmaFile,
@@ -29,6 +28,7 @@ import FILE_ID from './files.json'
 import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
 import { getAssets } from './files/assets'
+import { isNotEmpty } from '@utils'
 
 dotenv.config()
 
@@ -175,57 +175,53 @@ async function createDesktopComponents(ctx) {
   // }
 }
 
-/**
- * @param binary Buffer
- * returns readableInstanceStream Readable
- */
-function bufferToStream(binary) {
-  const readableInstanceStream = new Readable({
-    read() {
-      this.push(binary)
-      this.push(null)
-    },
-  })
-
-  return readableInstanceStream
-}
-
 async function fetchFigmaImages(ctx) {
-  const { exec } = childProcess
-  const lines = []
+  const exec = util.promisify(childProcess.exec)
 
-  const command = exec(
-    `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
-    (err, stdout, stderr) => {
-      if (err) {
-        console.error(err)
-      } else {
-        readline
-          .createInterface({
-            input: bufferToStream(stdout),
-          })
-          .on('line', (line) => lines.push(line))
-          .on('close', () => {
-            ;(async () => {
-              for await (const line of lines) {
-                try {
-                  const id = R.head(R.match(/(?<=node-id=).*/g, line))
-                  const fileId = R.head(R.match(/[^/]+(?=\/)/g, line))
-                  console.log(`id: ${id}, fileId: ${fileId}`)
-                  // console.log(line)
-                } catch (error) {
-                  console.error(error.message)
-                }
-              }
-            })()
-          })
-      }
-    },
-  )
+  async function main() {
+    const { stdout, stderr } = await exec(
+      `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
+    )
+    const prAll = (ps) => Promise.all(ps)
 
-  command.on('close', (code) => {
-    console.log(`Figma link parse finished with code ${code}`)
-  })
+    if (stderr) {
+      console.error(`error: ${stderr}`)
+    }
+
+    const imageIdsByFileId = R.pipe(
+      R.split(`\n`),
+      R.filter(isNotEmpty),
+      R.map((line) => ({
+        id: R.replace('%3A', ':', R.head(R.match(/(?<=node-id=).*/g, line))),
+        fileId: R.head(R.match(/[^/]+(?=\/)/g, line)),
+      })),
+      R.groupBy(R.view(R.lensProp('fileId'))),
+    )(stdout)
+
+    const imageWithUrls = await Promise.all([
+      R.pipe(
+        R.mapObjIndexed(async (images, fileId) => {
+          const ids = images.map((x) => x.id).toString()
+          const result = await fetchFigmaImageUrls(fileId, ids)
+          if (!result.err) {
+            const updated = images.map((image) => ({
+              ...image,
+              url: result.images[image.id],
+            }))
+            console.log(`updated images!`)
+            return updated
+          }
+          return images
+        }),
+      )(imageIdsByFileId),
+    ])
+
+    return imageWithUrls
+  }
+
+  const result = await main()
+
+  ctx.response.body = result
 }
 
 app.listen(PORT)
