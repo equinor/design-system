@@ -21,6 +21,7 @@ import {
   writeResults,
   fetchFile,
   writeResultsIndividually,
+  writeUrlToFile,
 } from './functions/file'
 import { convert } from './functions/public'
 import FILE_ID from './files.json'
@@ -28,7 +29,7 @@ import FILE_ID from './files.json'
 import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
 import { getAssets } from './files/assets'
-import { isNotEmpty } from '@utils'
+import { isNotEmpty, isNotNil } from '@utils'
 
 dotenv.config()
 
@@ -45,6 +46,7 @@ const PATHS = {
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
+  IMAGES: `${COMMON_DIR}/public/images`,
 }
 
 const app = new Koa()
@@ -177,49 +179,59 @@ async function createDesktopComponents(ctx) {
 
 async function fetchFigmaImages(ctx) {
   const exec = util.promisify(childProcess.exec)
+  // find all figma urls defined in storefront files
+  const { stdout, stderr } = await exec(
+    `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
+  )
 
-  async function main() {
-    const { stdout, stderr } = await exec(
-      `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
-    )
-    const prAll = (ps) => Promise.all(ps)
-
-    if (stderr) {
-      console.error(`error: ${stderr}`)
-    }
-
-    const imageIdsByFileId = R.pipe(
-      R.split(`\n`),
-      R.filter(isNotEmpty),
-      R.map((line) => ({
-        id: R.replace('%3A', ':', R.head(R.match(/(?<=node-id=).*/g, line))),
-        fileId: R.head(R.match(/[^/]+(?=\/)/g, line)),
-      })),
-      R.groupBy(R.view(R.lensProp('fileId'))),
-    )(stdout)
-
-    const imageWithUrls = await Promise.all([
-      R.pipe(
-        R.mapObjIndexed(async (images, fileId) => {
-          const ids = images.map((x) => x.id).toString()
-          const result = await fetchFigmaImageUrls(fileId, ids)
-          if (!result.err) {
-            const updated = images.map((image) => ({
-              ...image,
-              url: result.images[image.id],
-            }))
-            console.log(`updated images!`)
-            return updated
-          }
-          return images
-        }),
-      )(imageIdsByFileId),
-    ])
-
-    return imageWithUrls
+  if (stderr) {
+    console.error(`error: ${stderr}`)
   }
+  // Parse figma urls node & file id
+  const imageIdsByFileId = R.pipe(
+    R.split(`\n`),
+    R.filter(isNotEmpty),
+    R.map((line) => {
+      const id = R.replace(
+        '%3A',
+        ':',
+        R.head(R.match(/(?<=node-id=).*/g, line)),
+      )
+      const name = R.replace(':', '_', id)
+      const fileId = R.head(R.match(/[^/]+(?=\/)/g, line))
+      return {
+        id,
+        name,
+        fileId,
+      }
+    }),
+    R.groupBy(R.view(R.lensProp('fileId'))),
+  )(stdout)
 
-  const result = await main()
+  // Fetch figma image url for each node id
+  const imagesWithUrls = await Promise.all(
+    Object.keys(imageIdsByFileId).map(async (fileId) => {
+      const images = imageIdsByFileId[fileId]
+      const ids = images.map((x) => x.id).toString()
+      const result = await fetchFigmaImageUrls(fileId, ids, 'png')
+
+      if (!result.err) {
+        const updated = images.map((image) => ({
+          ...image,
+          url: result.images[image.id],
+        }))
+        return updated
+      }
+      return images
+    }),
+  )
+
+  const result = R.pipe(
+    R.values,
+    R.flatten,
+  )(imagesWithUrls)
+
+  writeUrlToFile(result, PATHS.IMAGES, 'png')
 
   ctx.response.body = result
 }

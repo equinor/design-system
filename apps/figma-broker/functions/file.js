@@ -13,6 +13,23 @@ const write = (file, path, name, ext) => {
   })
 }
 
+const stream = (url, path, name, ext) =>
+  fetch(url).then((res) => {
+    const filePath = getFilePath(path, name, ext)
+    var file = fs.createWriteStream(filePath)
+    res.body.pipe(file)
+  })
+
+export const writeFileStream = (url, path, name, ext) => {
+  if (url && path && name) {
+    createFolder(path)
+    stream(url, path, name, ext)
+  } else {
+    throw new Error(
+      'Missing required parameters to correctly run writeFileStream()!',
+    )
+  }
+}
 export const writeFile = (file, path, name, ext) => {
   if (file && path && name) {
     createFolder(path)
@@ -66,3 +83,10 @@ export const writeResultsIndividually = (
 export async function fetchFile(url) {
   return fetch(url).then((res) => res.text())
 }
+
+export const writeUrlToFile = (results, savePath, extension = 'json') =>
+  results.forEach(({ url, name, path = '' }) => {
+    if (url) {
+      writeFileStream(url, `${savePath}/${path}`, name, extension)
+    }
+  })
