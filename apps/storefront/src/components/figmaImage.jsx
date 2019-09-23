@@ -4,7 +4,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 const Image = styled.img`
-  height: 450px;
   width: 800px;
   border: none;
   background-color: #ebebeb !important;
