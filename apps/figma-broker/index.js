@@ -37,8 +37,9 @@ const PORT = process.env.PORT || 9001
 const TEAM_ID = process.env.FIGMA_TEAM_ID || ''
 
 const COMMON_DIR = '../../common'
-const TOKENS_DIR = '../../libraries/tokens/'
-const ASSETS_DIR = '../../libraries/eds-static/'
+const TOKENS_DIR = '../../libraries/tokens'
+const ASSETS_DIR = '../../libraries/eds-static'
+const STOREFRONT_DIR = '../storefront'
 
 const PATHS = {
   TOKENS: `${TOKENS_DIR}/base`,
@@ -46,7 +47,7 @@ const PATHS = {
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
-  IMAGES: `${COMMON_DIR}/public/images`,
+  IMAGES: `${STOREFRONT_DIR}/src/images/figma`,
 }
 
 const app = new Koa()
@@ -197,8 +198,8 @@ async function fetchFigmaImages(ctx) {
         ':',
         R.head(R.match(/(?<=node-id=).*/g, line)),
       )
-      const name = R.replace(':', '_', id)
       const fileId = R.head(R.match(/[^/]+(?=\/)/g, line))
+      const name = `${fileId}.${R.replace(':', '_', id)}`
       return {
         id,
         name,

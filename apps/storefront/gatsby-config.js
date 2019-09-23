@@ -30,11 +30,13 @@ module.exports = {
           import ComponentStatus from '${__dirname}/src/components/ComponentStatus';
           import Embed from '${__dirname}/src/components/embed';
           import Video from '${__dirname}/src/components/video';
+          import FigmaImage from '${__dirname}/src/components/figmaImage';
 
           export default {
               ComponentStatus,
               Embed,
-              Video
+              Video,
+              FigmaImage
           }
           `,
       },
