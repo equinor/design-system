@@ -7,6 +7,7 @@ const Container = styled.div`
   display: block;
   width: 100%;
   padding: 16px;
+  margin-bottom: 24px;
   text-align: center;
   font-size: 18px;
   background-color: #ebebeb !important;
