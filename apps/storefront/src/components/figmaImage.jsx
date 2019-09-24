@@ -3,16 +3,24 @@ import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
-const Image = styled.img`
-  width: 800px;
-  border: none;
-  background-color: #ebebeb !important;
+const Container = styled.div`
+  display: block;
+  width: 100%;
   padding: 16px;
-`
-const MissingImage = styled(Image)`
   text-align: center;
-  vertical-align: center;
   font-size: 18px;
+  background-color: #ebebeb !important;
+`
+
+const Link = styled(Container)`
+  cursor: pointer;
+  &:hover {
+    background-color: #e1e1e1 !important;
+  }
+`
+
+const Image = styled.img`
+  background: transparent !important;
 `
 
 const parseUrl = (url) => {
@@ -52,9 +60,11 @@ const Embed = ({ url }) => {
   const imageUrl = image ? image.node.publicURL : ''
 
   return imageUrl ? (
-    <Image src={imageUrl} />
+    <Link as="a" href={url} target="_blank">
+      <Image src={imageUrl} alt="Go to Figma" />
+    </Link>
   ) : (
-    <MissingImage as="div">Missing image</MissingImage>
+    <Container>Missing image</Container>
   )
 }
 
