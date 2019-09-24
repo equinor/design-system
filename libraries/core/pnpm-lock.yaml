@@ -1,11 +1,11 @@
 devDependencies:
   eslint: 5.16.0
-  eslint-config-airbnb-base: 13.1.0
-  eslint-config-prettier: 4.3.0
-  eslint-plugin-import: 2.17.3
-  eslint-plugin-prettier: 3.1.0
+  eslint-config-airbnb-base: 13.1.0_b9c15d5ecc35a9cc5906bba99cc6b1ca
+  eslint-config-prettier: 4.3.0_eslint@5.16.0
+  eslint-plugin-import: 2.17.3_eslint@5.16.0
+  eslint-plugin-prettier: 3.1.0_eslint@5.16.0+prettier@1.17.1
   prettier: 1.17.1
-lockfileVersion: 5
+lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.0.0:
     dependencies:
@@ -247,8 +247,10 @@ packages:
       node: '>=0.8.0'
     resolution:
       integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
-  /eslint-config-airbnb-base/13.1.0:
+  /eslint-config-airbnb-base/13.1.0_b9c15d5ecc35a9cc5906bba99cc6b1ca:
     dependencies:
+      eslint: 5.16.0
+      eslint-plugin-import: 2.17.3_eslint@5.16.0
       eslint-restricted-globals: 0.1.1
       object.assign: 4.1.0
       object.entries: 1.1.0
@@ -260,8 +262,9 @@ packages:
       eslint-plugin-import: ^2.14.0
     resolution:
       integrity: sha512-XWwQtf3U3zIoKO1BbHh6aUhJZQweOwSt4c2JrPDg9FP3Ltv3+YfEv7jIDB8275tVnO/qOHbfuYg3kzw6Je7uWw==
-  /eslint-config-prettier/4.3.0:
+  /eslint-config-prettier/4.3.0_eslint@5.16.0:
     dependencies:
+      eslint: 5.16.0
       get-stdin: 6.0.0
     dev: true
     hasBin: true
@@ -285,12 +288,13 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-14tltLm38Eu3zS+mt0KvILC3q8jyIAH518MlG+HO0p+yK885Lb1UHTY/UgR91eOyGdmxAPb+OLoW4znqIT6Ndw==
-  /eslint-plugin-import/2.17.3:
+  /eslint-plugin-import/2.17.3_eslint@5.16.0:
     dependencies:
       array-includes: 3.0.3
       contains-path: 0.1.0
       debug: 2.6.9
       doctrine: 1.5.0
+      eslint: 5.16.0
       eslint-import-resolver-node: 0.3.2
       eslint-module-utils: 2.4.0
       has: 1.0.3
@@ -305,8 +309,10 @@ packages:
       eslint: 2.x - 5.x
     resolution:
       integrity: sha512-qeVf/UwXFJbeyLbxuY8RgqDyEKCkqV7YC+E5S5uOjAp4tOc8zj01JP3ucoBM8JcEqd1qRasJSg6LLlisirfy0Q==
-  /eslint-plugin-prettier/3.1.0:
+  /eslint-plugin-prettier/3.1.0_eslint@5.16.0+prettier@1.17.1:
     dependencies:
+      eslint: 5.16.0
+      prettier: 1.17.1
       prettier-linter-helpers: 1.0.0
     dev: true
     engines:

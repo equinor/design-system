@@ -44,12 +44,18 @@ const Sidebar = ({ location }) => {
       <label className="Sidebar-veil" htmlFor="MenuToggler" />
       <div className="Sidebar-content">
         <ul className="Sidebar-menu">
+          <li className="Sidebar-menuItem">
+            <Link to="/" className="Sidebar-trigger">
+              Home
+            </Link>
+          </li>
           {data.allNavigationYaml.edges.map((item, index) => (
             <li
               key={kebabify(item.node.title)}
-              className={classNames('Sidebar-menuItem', {
-                'Sidebar-menuItem--borderTop': index > 0,
-              })}
+              className={classNames(
+                'Sidebar-menuItem',
+                'Sidebar-menuItem--borderTop',
+              )}
             >
               <input
                 className="SubMenuToggler"
