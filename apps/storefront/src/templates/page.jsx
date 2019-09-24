@@ -64,6 +64,18 @@ const Page = ({ data }) => {
         page.frontmatter.mode === 'publish') && (
         <MDXRenderer>{page.code.body}</MDXRenderer>
       )}
+      <p style={{ marginTop: '3rem' }}>
+        <a
+          href={`https://github.com/equinor/design-system/tree/develop/apps/storefront/src/content/${
+            slug === '/' ? `index` : slug
+          }.mdx`}
+        >
+          <span role="img" aria-label="Pencil">
+            ✏️
+          </span>{' '}
+          Edit this page on GitHub
+        </a>
+      </p>
     </Layout>
   )
 }
