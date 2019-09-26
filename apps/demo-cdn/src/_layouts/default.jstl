@@ -71,6 +71,21 @@
       h4 {
         text-transform: uppercase;
       }
+      header {
+        border-bottom: 1px solid #eaecef;
+        padding-bottom: 0.3rem;
+        margin-bottom: 2rem;
+      }
+      header h1 {
+        display: inline-block;
+        margin: 0;
+        border-bottom: none !important;
+        padding-bottom: 0;
+      }
+      header img {
+        width: 150px;
+        float: right;
+      }
     </style>
   </head>
   <body class="markdown-body">
