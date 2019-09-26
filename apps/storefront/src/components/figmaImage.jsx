@@ -2,26 +2,38 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
-
+import figmaSvg from '../assets/figma.svg'
+import externalLinkSvg from '../assets/external_link.svg'
+// TODO ^Change these icons to use eds-icons when library is available
 const Container = styled.div`
   display: block;
   width: 100%;
   padding: 16px;
   margin-bottom: 24px;
-  text-align: center;
   font-size: 18px;
   background-color: #ebebeb !important;
 `
 
-const Link = styled(Container)`
+const Link = styled.a`
   cursor: pointer;
-  &:hover {
-    background-color: #e1e1e1 !important;
-  }
 `
 
 const Image = styled.img`
+  margin-left: 4px;
   background: transparent !important;
+`
+
+// .Main class is disrubting top margin on second img child
+const Title = styled(Link)`
+  padding: 4px;
+  > * {
+    margin-top: 0 !important;
+    height: 18px;
+    margin-right: 8px;
+  }
+  &:hover {
+    border-bottom: 1px solid #000;
+  }
 `
 
 const parseUrl = (url) => {
@@ -61,11 +73,20 @@ const Embed = ({ url }) => {
   const imageUrl = image ? image.node.publicURL : ''
 
   return imageUrl ? (
-    <Link as="a" href={url} target="_blank">
-      <Image src={imageUrl} alt="Go to Figma" />
-    </Link>
+    <Container>
+      <Title href={url} target="_blank">
+        <Image src={figmaSvg} alt="Figma" />
+        <Image src={externalLinkSvg} alt="External link" />
+      </Title>
+      <Image src={imageUrl} alt="" />
+    </Container>
   ) : (
-    <Container>Missing image</Container>
+    <Container>
+      <span role="img" aria-label="See no evil">
+        🙈
+      </span>
+      Ops! Can&apos;t find the image, but you could still try Figma.
+    </Container>
   )
 }
 
