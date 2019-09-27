@@ -1,4 +1,5 @@
 import fs from 'fs'
+import del from 'del'
 import fetch from 'node-fetch'
 import { createFolder } from './folder'
 
@@ -90,3 +91,5 @@ export const writeUrlToFile = (results, savePath, extension = 'json') =>
       writeFileStream(url, `${savePath}/${path}`, name, extension)
     }
   })
+
+export const deletePaths = del

@@ -22,6 +22,7 @@ import {
   fetchFile,
   writeResultsIndividually,
   writeUrlToFile,
+  deletePaths,
 } from './functions/file'
 import { convert } from './functions/public'
 import FILE_ID from './files.json'
@@ -251,6 +252,12 @@ async function fetchFigmaImages(ctx) {
   // Wait for Figma to start endpoints
   await sleep(2000)
 
+  // Reset figme images
+  await deletePaths([PATHS.IMAGES], {
+    force: true,
+  })
+
+  // Save content of url as file
   writeUrlToFile(images, PATHS.IMAGES, 'png')
 
   ctx.response.body = images
