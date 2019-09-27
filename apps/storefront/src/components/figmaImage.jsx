@@ -51,7 +51,7 @@ const parseUrl = (url) => {
   return `${fileId}.${nodeId}`
 }
 
-const Embed = ({ url }) => {
+const FigmaImage = ({ url }) => {
   const data = useStaticQuery(graphql`
     {
       allFile(
@@ -93,9 +93,9 @@ const Embed = ({ url }) => {
   )
 }
 
-Embed.propTypes = {
+FigmaImage.propTypes = {
   /** Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed */
   url: PropTypes.string.isRequired,
 }
 
-export default Embed
+export default FigmaImage

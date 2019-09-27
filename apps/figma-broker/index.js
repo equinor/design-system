@@ -60,7 +60,7 @@ router
   .post('/assets', KoaBody(), createAssets)
   .post('/transform-tokens', KoaBody(), transformTokens)
   .post('/desktop-ui', KoaBody(), createDesktopComponents)
-  .post('/images', KoaBody(), fetchFigmaImages)
+  .post('/figma-images', KoaBody(), fetchFigmaImages)
 
 app
   .use(logger)
