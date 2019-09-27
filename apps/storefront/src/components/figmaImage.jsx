@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -72,20 +73,22 @@ const Embed = ({ url }) => {
   const image = data.allFile.edges.find((x) => x.node.name === imageName)
   const imageUrl = image ? image.node.publicURL : ''
 
-  return imageUrl ? (
+  return (
     <Container>
       <Title href={url} target="_blank">
         <Image src={figmaSvg} alt="Figma" />
         <Image src={externalLinkSvg} alt="External link" />
       </Title>
-      <Image src={imageUrl} alt="" />
-    </Container>
-  ) : (
-    <Container>
-      <span role="img" aria-label="See no evil">
-        🙈
-      </span>
-      Ops! Can&apos;t find the image, but you could still try Figma.
+      {imageUrl ? (
+        <Image src={imageUrl} alt="" />
+      ) : (
+        <div>
+          <Image as="span" role="img" aria-label="See no evil">
+            🙈
+          </Image>
+          Ops! Can&apos;t find the image, but you could still try Figma.
+        </div>
+      )}
     </Container>
   )
 }
