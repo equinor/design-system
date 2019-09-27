@@ -29,7 +29,7 @@ import FILE_ID from './files.json'
 import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
 import { getAssets } from './files/assets'
-import { isNotEmpty, isNotNil } from '@utils'
+import { isNotEmpty, sleep } from '@utils'
 
 dotenv.config()
 
@@ -47,20 +47,12 @@ const PATHS = {
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
-  IMAGES: `${STOREFRONT_DIR}/src/images/figma`,
+  IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
 }
 
 const app = new Koa()
 const router = new KoaRouter()
 const logger = new KoaLogger()
-const svgo = new SVGO({
-  plugins: [
-    { removeDoctype: true },
-    { removeUnknownsAndDefaults: true },
-    { removeUselessStrokeAndFill: true },
-    { removeAttrs: { attrs: '(stroke|fill|fill-rule|clip-rule)' } },
-  ],
-})
 
 router
   .post('/tokens', KoaBody(), createTokens)
@@ -95,6 +87,15 @@ async function createTokens(ctx) {
 
 async function createAssets(ctx) {
   try {
+    const svgo = new SVGO({
+      plugins: [
+        { removeDoctype: true },
+        { removeUnknownsAndDefaults: true },
+        { removeUselessStrokeAndFill: true },
+        { removeAttrs: { attrs: '(stroke|fill|fill-rule|clip-rule)' } },
+      ],
+    })
+
     const data = await fetchFigmaFile(FILE_ID.assets)
 
     const figmaFile = processFigmaFile(data)
@@ -117,6 +118,9 @@ async function createAssets(ctx) {
         return assetPage
       }),
     )
+    // Wait for Figma to start endpoints
+    await sleep(2000)
+
     // Fetch svg image as string for each asset
     const assetsWithSvg = await Promise.all(
       assetsWithUrl.map(async (assetPage) => ({
@@ -136,7 +140,7 @@ async function createAssets(ctx) {
 
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-    // writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
+    writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
     // Write token
     writeResults(assetsWithSvg, PATHS.ASSETS)
 
@@ -180,7 +184,7 @@ async function createDesktopComponents(ctx) {
 
 async function fetchFigmaImages(ctx) {
   const exec = util.promisify(childProcess.exec)
-  // find all figma urls defined in storefront files
+  // find all figma urls defined in storefront content files
   const { stdout, stderr } = await exec(
     `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
   )
@@ -188,6 +192,7 @@ async function fetchFigmaImages(ctx) {
   if (stderr) {
     console.error(`error: ${stderr}`)
   }
+
   // Parse figma urls node & file id
   const imageIdsByFileId = R.pipe(
     R.split(`\n`),
@@ -200,6 +205,7 @@ async function fetchFigmaImages(ctx) {
       )
       const fileId = R.head(R.match(/[^/]+(?=\/)/g, line))
       const name = `${fileId}.${R.replace(':', '_', id)}`
+
       return {
         id,
         name,
@@ -217,24 +223,37 @@ async function fetchFigmaImages(ctx) {
       const result = await fetchFigmaImageUrls(fileId, ids, 'png')
 
       if (!result.err) {
-        const updated = images.map((image) => ({
-          ...image,
-          url: result.images[image.id],
-        }))
-        return updated
+        const imagesWithUrl = images.map((image) => {
+          const url = result.images[image.id]
+
+          if (!url) {
+            console.log(
+              `Missing url, fileId: ${image.fileId}, nodeId: ${image.id}`,
+            )
+          }
+
+          return {
+            ...image,
+            url,
+          }
+        })
+        return imagesWithUrl
       }
       return images
     }),
   )
 
-  const result = R.pipe(
+  const images = R.pipe(
     R.values,
     R.flatten,
   )(imagesWithUrls)
 
-  writeUrlToFile(result, PATHS.IMAGES, 'png')
+  // Wait for Figma to start endpoints
+  await sleep(2000)
 
-  ctx.response.body = result
+  writeUrlToFile(images, PATHS.IMAGES, 'png')
+
+  ctx.response.body = images
 }
 
 app.listen(PORT)
