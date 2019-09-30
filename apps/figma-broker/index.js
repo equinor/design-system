@@ -6,6 +6,9 @@ import KoaRouter from 'koa-router'
 import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
 import SVGO from 'svgo'
+import childProcess from 'child_process'
+import * as R from 'ramda'
+import util from 'util'
 
 import {
   fetchFigmaFile,
@@ -18,13 +21,16 @@ import {
   writeResults,
   fetchFile,
   writeResultsIndividually,
+  writeUrlToFile,
+  deletePaths,
 } from './functions/file'
 import { convert } from './functions/public'
-import file from './files.json'
+import FILE_ID from './files.json'
 // Files
 import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
 import { getAssets } from './files/assets'
+import { isNotEmpty, sleep } from '@utils'
 
 dotenv.config()
 
@@ -32,8 +38,9 @@ const PORT = process.env.PORT || 9001
 const TEAM_ID = process.env.FIGMA_TEAM_ID || ''
 
 const COMMON_DIR = '../../common'
-const TOKENS_DIR = '../../libraries/tokens/'
-const ASSETS_DIR = '../../libraries/eds-static/'
+const TOKENS_DIR = '../../libraries/tokens'
+const ASSETS_DIR = '../../libraries/eds-static'
+const STOREFRONT_DIR = '../storefront'
 
 const PATHS = {
   TOKENS: `${TOKENS_DIR}/base`,
@@ -41,25 +48,19 @@ const PATHS = {
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
+  IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
 }
 
 const app = new Koa()
 const router = new KoaRouter()
 const logger = new KoaLogger()
-const svgo = new SVGO({
-  plugins: [
-    { removeDoctype: true },
-    { removeUnknownsAndDefaults: true },
-    { removeUselessStrokeAndFill: true },
-    { removeAttrs: { attrs: '(stroke|fill|fill-rule|clip-rule)' } },
-  ],
-})
 
 router
   .post('/tokens', KoaBody(), createTokens)
   .post('/assets', KoaBody(), createAssets)
   .post('/transform-tokens', KoaBody(), transformTokens)
   .post('/desktop-ui', KoaBody(), createDesktopComponents)
+  .post('/figma-images', KoaBody(), fetchFigmaImages)
 
 app
   .use(logger)
@@ -69,7 +70,7 @@ app
 // Tokens
 async function createTokens(ctx) {
   try {
-    const data = await fetchFigmaFile(file.tokens)
+    const data = await fetchFigmaFile(FILE_ID.tokens)
 
     const figmaFile = processFigmaFile(data)
     const tokens = makeTokens(figmaFile)
@@ -87,7 +88,16 @@ async function createTokens(ctx) {
 
 async function createAssets(ctx) {
   try {
-    const data = await fetchFigmaFile(file.assets)
+    const svgo = new SVGO({
+      plugins: [
+        { removeDoctype: true },
+        { removeUnknownsAndDefaults: true },
+        { removeUselessStrokeAndFill: true },
+        { removeAttrs: { attrs: '(stroke|fill|fill-rule|clip-rule)' } },
+      ],
+    })
+
+    const data = await fetchFigmaFile(FILE_ID.assets)
 
     const figmaFile = processFigmaFile(data)
     const assetPages = getAssets(figmaFile)
@@ -96,7 +106,7 @@ async function createAssets(ctx) {
     const assetsWithUrl = await Promise.all(
       assetPages.map(async (assetPage) => {
         const ids = assetPage.value.map((x) => x.id)
-        const result = await fetchFigmaImageUrls(file.assets, ids)
+        const result = await fetchFigmaImageUrls(FILE_ID.assets, ids)
         if (!result.err) {
           return {
             ...assetPage,
@@ -109,6 +119,9 @@ async function createAssets(ctx) {
         return assetPage
       }),
     )
+    // Wait for Figma to start endpoints
+    await sleep(2000)
+
     // Fetch svg image as string for each asset
     const assetsWithSvg = await Promise.all(
       assetsWithUrl.map(async (assetPage) => ({
@@ -128,7 +141,7 @@ async function createAssets(ctx) {
 
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-    // writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
+    writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
     // Write token
     writeResults(assetsWithSvg, PATHS.ASSETS)
 
@@ -156,7 +169,7 @@ async function transformTokens(ctx) {
 
 async function createDesktopComponents(ctx) {
   // try {
-  const data = await fetchFigmaFile(file.desktop)
+  const data = await fetchFigmaFile(FILE_ID.desktop)
 
   const figmaFile = processFigmaFile(data)
   const components = makeDesktopComponents(figmaFile)
@@ -168,6 +181,86 @@ async function createDesktopComponents(ctx) {
   //   ctx.response.status = err.status || 500
   //   ctx.response.body = err.message
   // }
+}
+
+async function fetchFigmaImages(ctx) {
+  const exec = util.promisify(childProcess.exec)
+  // find all figma urls defined in storefront content files
+  const { stdout, stderr } = await exec(
+    `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
+  )
+
+  if (stderr) {
+    console.error(`error: ${stderr}`)
+  }
+
+  // Parse figma urls node & file id
+  const imageIdsByFileId = R.pipe(
+    R.split(`\n`),
+    R.filter(isNotEmpty),
+    R.map((line) => {
+      const id = R.replace(
+        '%3A',
+        ':',
+        R.head(R.match(/(?<=node-id=).*/g, line)),
+      )
+      const fileId = R.head(R.match(/[^/]+(?=\/)/g, line))
+      const name = `${fileId}.${R.replace(':', '_', id)}`
+
+      return {
+        id,
+        name,
+        fileId,
+      }
+    }),
+    R.groupBy(R.view(R.lensProp('fileId'))),
+  )(stdout)
+
+  // Fetch figma image url for each node id
+  const imagesWithUrls = await Promise.all(
+    Object.keys(imageIdsByFileId).map(async (fileId) => {
+      const images = imageIdsByFileId[fileId]
+      const ids = images.map((x) => x.id).toString()
+      const result = await fetchFigmaImageUrls(fileId, ids, 'png')
+
+      if (!result.err) {
+        const imagesWithUrl = images.map((image) => {
+          const url = result.images[image.id]
+
+          if (!url) {
+            console.log(
+              `Missing url, fileId: ${image.fileId}, nodeId: ${image.id}`,
+            )
+          }
+
+          return {
+            ...image,
+            url,
+          }
+        })
+        return imagesWithUrl
+      }
+      return images
+    }),
+  )
+
+  const images = R.pipe(
+    R.values,
+    R.flatten,
+  )(imagesWithUrls)
+
+  // Wait for Figma to start endpoints
+  await sleep(2000)
+
+  // Reset figme images
+  await deletePaths([PATHS.IMAGES], {
+    force: true,
+  })
+
+  // Save content of url as file
+  writeUrlToFile(images, PATHS.IMAGES, 'png')
+
+  ctx.response.body = images
 }
 
 app.listen(PORT)

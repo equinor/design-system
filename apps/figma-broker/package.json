@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "del": "^5.1.0",
     "dotenv": "^8.0.0",
     "koa": "^2.7.0",
     "koa-body": "^4.0.8",

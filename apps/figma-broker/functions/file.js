@@ -1,4 +1,5 @@
 import fs from 'fs'
+import del from 'del'
 import fetch from 'node-fetch'
 import { createFolder } from './folder'
 
@@ -13,6 +14,23 @@ const write = (file, path, name, ext) => {
   })
 }
 
+const stream = (url, path, name, ext) =>
+  fetch(url).then((res) => {
+    const filePath = getFilePath(path, name, ext)
+    var file = fs.createWriteStream(filePath)
+    res.body.pipe(file)
+  })
+
+export const writeFileStream = (url, path, name, ext) => {
+  if (url && path && name) {
+    createFolder(path)
+    stream(url, path, name, ext)
+  } else {
+    throw new Error(
+      'Missing required parameters to correctly run writeFileStream()!',
+    )
+  }
+}
 export const writeFile = (file, path, name, ext) => {
   if (file && path && name) {
     createFolder(path)
@@ -46,7 +64,7 @@ export const readTokens = (path) =>
 export const writeResults = (results, savePath, extension = 'json') =>
   results.forEach(({ value, name, path = '' }) =>
     writeFile(
-      extension === 'json' ? `${JSON.stringify(value, null, 4)}\n` : value,
+      extension === 'json' ? `${JSON.stringify(value, null, 2)}\n` : value,
       `${savePath}/${path}`,
       name,
       extension,
@@ -66,3 +84,12 @@ export const writeResultsIndividually = (
 export async function fetchFile(url) {
   return fetch(url).then((res) => res.text())
 }
+
+export const writeUrlToFile = (results, savePath, extension = 'json') =>
+  results.forEach(({ url, name, path = '' }) => {
+    if (url) {
+      writeFileStream(url, `${savePath}/${path}`, name, extension)
+    }
+  })
+
+export const deletePaths = del

@@ -75,3 +75,8 @@ export const instanceOfComponent = (name) =>
 export const isNotNil = R.complement(R.isNil)
 export const isNotEmpty = R.complement(R.isEmpty)
 export const removeNilAndEmpty = R.curry(R.pickBy)(R.both(isNotEmpty, isNotNil))
+
+export const sleep = (ms) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })

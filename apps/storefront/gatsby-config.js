@@ -30,11 +30,13 @@ module.exports = {
           import ComponentStatus from '${__dirname}/src/components/ComponentStatus';
           import Embed from '${__dirname}/src/components/embed';
           import Video from '${__dirname}/src/components/video';
+          import FigmaImage from '${__dirname}/src/components/figmaImage';
 
           export default {
               ComponentStatus,
               Embed,
-              Video
+              Video,
+              FigmaImage
           }
           `,
       },
@@ -45,8 +47,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `assets`,
+        path: `${__dirname}/src/assets`,
       },
     },
     {
@@ -74,13 +76,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'gatsby-default-mdx-basic',
-        short_name: 'starter',
+        name: 'Equinor Design System',
+        short_name: 'EDS',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#fff',
+        theme_color: '#000',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
       },
     },
     {
