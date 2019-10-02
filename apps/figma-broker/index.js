@@ -40,6 +40,7 @@ const TEAM_ID = process.env.FIGMA_TEAM_ID || ''
 const COMMON_DIR = '../../common'
 const TOKENS_DIR = '../../libraries/tokens'
 const ASSETS_DIR = '../../libraries/eds-static'
+const ICONS_DIR = '../../libraries/icons'
 const STOREFRONT_DIR = '../storefront'
 
 const PATHS = {
@@ -49,6 +50,7 @@ const PATHS = {
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
   IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
+  ICONS: `${STOREFRONT_DIR}/src/assets/icons`,
 }
 
 const app = new Koa()
@@ -88,13 +90,20 @@ async function createTokens(ctx) {
 
 async function createAssets(ctx) {
   try {
+    const plugins = [
+      // { removeDoctype: true },
+      // { cleanupAttrs: true },
+      // { removeUnknownsAndDefaults: true },
+      // { removeUselessStrokeAndFill: true },
+      { removeAttrs: { attrs: '(fill)' } },
+      { removeViewBox: false },
+    ]
     const svgo = new SVGO({
-      plugins: [
-        { removeDoctype: true },
-        { removeUnknownsAndDefaults: true },
-        { removeUselessStrokeAndFill: true },
-        { removeAttrs: { attrs: '(stroke|fill|fill-rule|clip-rule)' } },
-      ],
+      plugins,
+    })
+    const svgoDataUri = new SVGO({
+      datauri: 'base64',
+      plugins,
     })
 
     const data = await fetchFigmaFile(FILE_ID.assets)
@@ -120,19 +129,23 @@ async function createAssets(ctx) {
       }),
     )
     // Wait for Figma to start endpoints
-    await sleep(2000)
+    await sleep(10000)
 
     // Fetch svg image as string for each asset
     const assetsWithSvg = await Promise.all(
-      assetsWithUrl.map(async (assetPage) => ({
+      [R.head(assetsWithUrl)].map(async (assetPage) => ({
         ...assetPage,
         value: await Promise.all(
           assetPage.value.map(async (asset) => {
             const svgDirty = await fetchFile(asset.url)
             const svgClean = await svgo.optimize(svgDirty)
+            const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
+
             return {
               ...asset,
               value: svgClean.data,
+              dirty: svgDirty,
+              datauri: svgCleanDataUri.data,
             }
           }),
         ),
@@ -141,9 +154,9 @@ async function createAssets(ctx) {
 
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-    writeResultsIndividually(assetsWithSvg, PATHS.ASSETS, 'svg')
+    // writeResultsIndividually(assetsWithSvg, PATHS.ICONS_DIR, 'svg')
     // Write token
-    writeResults(assetsWithSvg, PATHS.ASSETS)
+    writeResults(assetsWithSvg, PATHS.ICONS)
 
     ctx.response.body = JSON.stringify(assetsWithSvg)
   } catch (err) {

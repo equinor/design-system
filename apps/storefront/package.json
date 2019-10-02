@@ -28,6 +28,7 @@
     "gatsby-transformer-sharp": "^2.1.21",
     "gatsby-transformer-yaml": "^2.1.11",
     "github-markdown-css": "^3.0.1",
+    "js-file-download": "^0.4.8",
     "mdx-component-autolink-header": "0.0.1",
     "polished": "^3.3.0",
     "postcss-custom-media": "^7.0.7",
