@@ -1,4 +1,4 @@
-import { propName, formatName } from '@utils'
+import { propName } from '@utils'
 
 export const makeAssetTokens = (assets, groupName) =>
   assets
@@ -8,6 +8,6 @@ export const makeAssetTokens = (assets, groupName) =>
       value: '',
       id: x.id,
       url: '',
-      path: formatName(groupName),
+      path: propName(groupName),
       group: groupName,
     }))

@@ -91,10 +91,10 @@ async function createTokens(ctx) {
 async function createAssets(ctx) {
   try {
     const plugins = [
-      // { removeDoctype: true },
-      // { cleanupAttrs: true },
-      // { removeUnknownsAndDefaults: true },
-      // { removeUselessStrokeAndFill: true },
+      { removeDoctype: true },
+      { cleanupAttrs: true },
+      { removeUnknownsAndDefaults: true },
+      { removeUselessStrokeAndFill: true },
       { removeAttrs: { attrs: '(fill)' } },
       { removeViewBox: false },
     ]
@@ -144,7 +144,6 @@ async function createAssets(ctx) {
             return {
               ...asset,
               value: svgClean.data,
-              dirty: svgDirty,
               datauri: svgCleanDataUri.data,
             }
           }),
@@ -154,7 +153,7 @@ async function createAssets(ctx) {
 
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-    // writeResultsIndividually(assetsWithSvg, PATHS.ICONS_DIR, 'svg')
+    //writeResultsIndividually(assetsWithSvg, PATHS.ICONS, 'svg')
     // Write token
     writeResults(assetsWithSvg, PATHS.ICONS)
 
