@@ -114,5 +114,6 @@ export const knobs = () => (
 )
 
 knobs.story = {
+  name: 'With knobs',
   decorators: [withKnobs],
 }
