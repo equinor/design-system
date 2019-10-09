@@ -1,11 +1,15 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import { Table, Typography } from '@equinor/eds-core-react'
 import './../style.css'
 
 const { Body, Row, Cell, Head } = Table
 
-storiesOf('Components', module).add('Table', () => (
+export default {
+  title: 'Components|Table',
+  component: Table,
+}
+
+export const simpleTable = () => (
   <div className="container">
     <Typography variant="h1" bold>
       Table
@@ -42,4 +46,4 @@ storiesOf('Components', module).add('Table', () => (
       </div>
     </div>
   </div>
-))
+)
