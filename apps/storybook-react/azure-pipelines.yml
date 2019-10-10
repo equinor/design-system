@@ -7,8 +7,13 @@ name: eds-storybook-react-$(Build.BuildId)
 
 trigger:
   batch: 'true'
+  tags:
+    include:
+    - storybook-react
   branches:
-    include: refs/tags/storybook-react
+    include:
+      - develop
+      - feature/storybook-react
   paths:
     include:
       - apps/storybook-react
