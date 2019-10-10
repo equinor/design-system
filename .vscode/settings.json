@@ -4,7 +4,9 @@
     "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
   },
   "files.associations": {
-    "*.json": "jsonc"
+    "*.json": "jsonc",
+    "[Dd]ockerfile*": "dockerfile",
+    "docker-compose*": "yaml"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
