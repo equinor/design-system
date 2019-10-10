@@ -12,5 +12,6 @@ export default create({
 
   brandTitle: 'Equinor Design System - Core React',
   brandUrl: 'https://eds.equinor.com',
-  brandImage: 'https://eds-static.equinor.com/logo/equinor-logo-horizontal.svg',
+  brandImage:
+    'https://eds-static.equinor.com/logo/equinor-logo-horizontal.svg#red',
 })
