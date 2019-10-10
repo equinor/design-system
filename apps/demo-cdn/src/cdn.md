@@ -23,7 +23,7 @@ These resources could then be imported into [Codepen](https://codepen.io) if a d
 
 ## Usage
 
-We have provided some examples of how fonts and logos would be used from a CDN. For the sake of demonstration these files are served from a CDN in Azure with a temporary url but we have used the url https://eds-static.equinor.com in the example texts since that’s what we would like the official CDN url to be.
+We have provided some examples of how fonts and logos would be used from a CDN. For the sake of demonstration these files are served from a CDN in Azure with a temporary url but we have used the url <https://eds-static.equinor.com> in the example texts since that’s what we would like the official CDN url to be.
 
 ### The Equinor font
 
@@ -69,7 +69,7 @@ body {
 
 ### The Equinor logo
 
-When it comes to the logo we have made some changes to the original format. Instead of having one file for each colour, we have written css in the svg-file itself that enables us to switch between the colours by appended the colour name to the end of the file name. The advantage of this approach is that we only need two files for the logo, one for primary and one for horizontal, instead of six files. Also to keep the file size down and make it easier to align the logo to other elements, excess margins have been removed from the svg-files and added with css instead. Here are examples of using both variations of the logo in all three colours:
+When it comes to the logo we have made some changes to the original format. Instead of having one file for each colour, we have written css in the svg-file itself that enables us to switch between the colours by appended the colour name to the end of the file name. The advantage of this approach is that we only need two files for the logo, one for primary and one for horizontal, instead of six files. Also to keep the file size down and make it easier to align the logo to other elements, excess margins have been removed from the svg-files and added with css instead. Note that the colour keyword in the url corresponds to the exact colour as specified in the internal css inside the svg. Here are examples of using both variations of the logo in all three available colours:
 
 
 #### Primary

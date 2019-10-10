@@ -25,10 +25,6 @@
       rel="stylesheet"
       href="https://static.scania.com/resources/logotype/scania/logotype-stylesheet/scania-logotype.css"
     />
-    <!-- <link -->
-    <!-- rel="stylesheet" -->
-    <!-- href="https://eds-static.equinor.com/font/equinor-font.css" -->
-    <!-- /> -->
     <style>
       html {
         box-sizing: border-box;
