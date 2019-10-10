@@ -1,50 +1,119 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import { Button, Typography } from '@equinor/eds-core-react'
+import styled from 'styled-components'
+import { withKnobs, select, text } from '@storybook/addon-knobs'
 import './../style.css'
 import './button.css'
 
-storiesOf('Components', module).add('Button', () => (
-  <div className="container">
-    <Typography variant="h1" bold>
-      Variations
-    </Typography>
-    <div className="">
-      <div className="group">
-        <Typography variant="h2">Contained (default)</Typography>
-        <Button>Primary</Button>
-        <Button color="secondary">Secondary</Button>
-        <Button color="danger">Danger</Button>
-        <Button disabled>Disabled</Button>
-      </div>
+export default {
+  title: 'Components|Button',
+  component: Button,
+}
 
-      <div className="group">
-        <Typography variant="h2">Outlined</Typography>
-        <Button variant="outlined">Primary</Button>
-        <Button variant="outlined" color="secondary">
-          Secondary
-        </Button>
-        <Button variant="outlined" color="danger">
-          Danger
-        </Button>
-        <Button variant="outlined" disabled>
-          Disabled
-        </Button>
-      </div>
+const VARIANT = {
+  CONTAINED: 'contained',
+  OUTLINED: 'outlined',
+  GHOST: 'ghost',
+}
 
-      <div className="group">
-        <Typography variant="h2">Ghost</Typography>
-        <Button variant="ghost">Primary</Button>
-        <Button variant="ghost" color="secondary">
-          Secondary
-        </Button>
-        <Button variant="ghost" color="danger">
-          Danger
-        </Button>
-        <Button variant="ghost" disabled>
-          Disabled
-        </Button>
-      </div>
-    </div>
-  </div>
-))
+const COLOR = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  DANGER: 'danger',
+  DISABLED: 'disabled',
+}
+
+const Wrapper = styled.div`
+  margin: 32px;
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(4, fit-content(100%));
+`
+
+export const allButtons = () => (
+  <Wrapper>
+    <Button>Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="danger">Danger</Button>
+    <Button disabled>Disabled</Button>
+
+    <Button variant="outlined">Primary</Button>
+    <Button variant="outlined" color="secondary">
+      Secondary
+    </Button>
+    <Button variant="outlined" color="danger">
+      Danger
+    </Button>
+    <Button variant="outlined" disabled>
+      Disabled
+    </Button>
+    <Button variant="ghost">Primary</Button>
+    <Button variant="ghost" color="secondary">
+      Secondary
+    </Button>
+    <Button variant="ghost" color="danger">
+      Danger
+    </Button>
+    <Button variant="ghost" disabled>
+      Disabled
+    </Button>
+  </Wrapper>
+)
+export const contained = () => (
+  <Wrapper>
+    <Button>Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="danger">Danger</Button>
+    <Button disabled>Disabled</Button>
+  </Wrapper>
+)
+
+contained.story = {
+  name: 'Contained (default)',
+}
+
+export const outlined = () => (
+  <Wrapper>
+    <Button variant="outlined">Primary</Button>
+    <Button variant="outlined" color="secondary">
+      Secondary
+    </Button>
+    <Button variant="outlined" color="danger">
+      Danger
+    </Button>
+    <Button variant="outlined" disabled>
+      Disabled
+    </Button>
+  </Wrapper>
+)
+
+export const ghost = () => (
+  <Wrapper>
+    <Button variant="ghost">Primary</Button>
+    <Button variant="ghost" color="secondary">
+      Secondary
+    </Button>
+    <Button variant="ghost" color="danger">
+      Danger
+    </Button>
+    <Button variant="ghost" disabled>
+      Disabled
+    </Button>
+  </Wrapper>
+)
+
+export const knobs = () => (
+  <Wrapper>
+    <Button
+      color={select('Color', [...Object.values(COLOR)])}
+      variant={select('Variant', [...Object.values(VARIANT)])}
+    >
+      {text('Label', 'Some label')}
+    </Button>
+  </Wrapper>
+)
+
+knobs.story = {
+  name: 'With knobs',
+  decorators: [withKnobs],
+}
