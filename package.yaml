@@ -1,4 +1,6 @@
 name: eds
+engines:
+  pnpm: ">=4"
 scripts:
   build: pnpm --filter @equinor/eds-core-react run build
   bump:core-react: >-
