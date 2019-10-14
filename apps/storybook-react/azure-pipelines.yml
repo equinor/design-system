@@ -13,7 +13,6 @@ trigger:
   branches:
     include:
       - develop
-      - feature/storybook-react
   paths:
     include:
       - apps/storybook-react
@@ -22,7 +21,6 @@ pr:
   branches:
     include:
       - develop
-      - feature/storybook-react
   paths:
     include:
       - apps/storybook-react
