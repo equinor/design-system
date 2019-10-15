@@ -2,7 +2,7 @@ FROM node:12 as builder
 WORKDIR /app
 
 # install pnpm
-RUN curl -sL https://unpkg.com/@pnpm/self-installer | node
+RUN npm install -g pnpm
 
 COPY ./package.yaml ./
 COPY ./pnpm-workspaces.yaml ./

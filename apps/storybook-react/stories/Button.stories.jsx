@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Typography } from '@equinor/eds-core-react'
+import { Button } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import './../style.css'
@@ -106,7 +106,11 @@ export const knobs = () => (
   <Wrapper>
     <Button
       color={select('Color', [...Object.values(COLOR)])}
-      variant={select('Variant', [...Object.values(VARIANT)])}
+      variant={select(
+        'Variant',
+        [...Object.values(VARIANT)],
+        VARIANT.CONTAINED,
+      )}
     >
       {text('Label', 'Some label')}
     </Button>
