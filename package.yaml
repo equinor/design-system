@@ -2,6 +2,7 @@ name: eds
 engines:
   pnpm: ">=4"
 scripts:
+  init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
   bump:core-react: >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
