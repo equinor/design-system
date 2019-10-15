@@ -1,6 +1,9 @@
 {
   "name": "@equinor/eds-figma-broker",
   "version": "1.0.0",
+  "engines": {
+    "pnpm": ">=4"
+  },
   "description": "",
   "main": "index.js",
   "type": "module",

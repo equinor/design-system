@@ -1,5 +1,7 @@
 name: eds-static
 description: Files published to eds-static.equinor.com
+engines:
+  pnpm: '>=4'
 scripts:
   build: pnpm run copyfont & pnpm run copylogo
   copyfont: >-

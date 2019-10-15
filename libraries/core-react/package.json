@@ -1,13 +1,13 @@
 {
   "name": "@equinor/eds-core-react",
   "version": "0.0.1-alpha.6",
+  "engines": {
+    "pnpm": ">=4"
+  },
   "description": "The React implementation of the Equinor Design System",
   "main": "dist/core-react.cjs.js",
   "module": "dist/core-react.es.js",
   "browser": "dist/core-react.umd.js",
-  "publishConfig": {
-    "browser": "dist/core-react.umd.js"
-  },
   "homepage": "https://github.com/equinor/design-system/tree/prerelease/libraries/core-react",
   "repository": {
     "type": "git",

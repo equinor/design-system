@@ -2,6 +2,9 @@
   "name": "@equinor/eds-storefront",
   "description": "The storefront for the Equinor Design System",
   "version": "0.0.1",
+  "engines": {
+    "pnpm": ">=4"
+  },
   "author": "",
   "dependencies": {
     "@mdx-js/mdx": "^0.20.3",
@@ -40,9 +43,7 @@
     "remark-emoji": "^2.0.2",
     "styled-components": "^4.2.0"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",

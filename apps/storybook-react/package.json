@@ -1,6 +1,9 @@
 {
   "name": "@equinor/eds-storybook-react",
   "version": "0.0.1",
+  "engines": {
+    "pnpm": ">=4"
+  },
   "scripts": {
     "start": "start-storybook -p 9000 --ci",
     "build": "build-storybook -c .storybook -o dist",

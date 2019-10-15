@@ -1,6 +1,9 @@
 {
   "name": "@equinor/eds-tokens",
   "version": "0.0.1-alpha.4",
+  "engines": {
+    "pnpm": ">=4"
+  },
   "description": "Design tokens for the Equinor Design System",
   "author": {
     "name": "EDS Core Team",
@@ -12,9 +15,5 @@
   },
   "license": "AGPL-3.0-or-later",
   "scripts": {},
-  "keywords": [
-    "eds",
-    "design system",
-    "equinor"
-  ]
+  "keywords": ["eds", "design system", "equinor"]
 }
