@@ -1,5 +1,8 @@
 name: eds
+engines:
+  pnpm: ">=4"
 scripts:
+  init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
   bump:core-react: >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
@@ -7,6 +10,15 @@ scripts:
   publish:core-react: >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
+  storybook-build: >-
+    pnpm --filter @equinor/eds-core-react install &&
+    pnpm --filter @equinor/eds-core-react run build &&
+    pnpm --filter @equinor/eds-storybook-react install &&
+    pnpm --filter @equinor/eds-storybook-react run build
+  storybook-run: pnpm --filter @equinor/eds-storybook-react run start
+  dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
+  storybook-docker-run: docker run -p 8080:80 eds/storybook-react
+  storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
 devDependencies:
   eslint: ^6.0.1
   eslint-config-airbnb: ^17.1.1

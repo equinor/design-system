@@ -1,12 +1,35 @@
-import { configure, addDecorator } from '@storybook/react'
-import '@equinor-internal/equinor-font'
+import React from 'react'
+import { configure, addDecorator, addParameters } from '@storybook/react'
+// import { withKnobs } from '@storybook/addon-knobs'
 import { withA11y } from '@storybook/addon-a11y'
+import { createGlobalStyle } from 'styled-components'
+import theme from './eds-theme'
 
-function loadStories() {
-  const req = require.context('../stories', true, /\.stories\.jsx$/)
-  req.keys().forEach((filename) => req(filename))
-}
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: Equinor, sans-serif;
+  }
+`
 
-configure(loadStories, module)
+// TODO: Create theme based on tokens
+addParameters({
+  options: {
+    showPanel: true,
+    panelPosition: 'bottom',
+    showSearchBox: false,
+    theme,
+  },
+})
 
 addDecorator(withA11y)
+// addDecorator(withKnobs)
+
+// TODO: Find out why we get duplicate styled components modules in dev
+addDecorator((story) => (
+  <>
+    <GlobalStyle />
+    {story()}
+  </>
+))
+
+configure(require.context('../stories', true, /\.stories\.jsx$/), module)
