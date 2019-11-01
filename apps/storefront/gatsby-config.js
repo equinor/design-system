@@ -31,12 +31,14 @@ module.exports = {
           import Embed from '${__dirname}/src/components/embed';
           import Video from '${__dirname}/src/components/video';
           import FigmaImage from '${__dirname}/src/components/figmaImage';
+          import IconsDownload from '${__dirname}/src/components/Icons';
 
           export default {
               ComponentStatus,
               Embed,
               Video,
-              FigmaImage
+              FigmaImage,
+              IconsDownload
           }
           `,
       },
@@ -117,8 +119,8 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-styled-components'
-    }
+      resolve: 'gatsby-plugin-styled-components',
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
