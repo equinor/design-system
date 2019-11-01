@@ -34,6 +34,11 @@ export const propName = (str) =>
     .replace(/[/]/g, '__')
     .replace('___', '__')
 
+export const pathName = (str) =>
+  propName(str)
+    .replace('__', '-')
+    .replace('_', '-')
+
 export const withName = R.curry((regExp, node) =>
   R.test(new RegExp(regExp, 'i'), node.name),
 )
@@ -80,3 +85,15 @@ export const sleep = (ms) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
+
+const capitalize = (word) => {
+  return `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`
+}
+export const camelize = (seperator, text) => {
+  const words = text.split(seperator)
+  const result = [words[0]]
+  words.slice(1).forEach((word) => result.push(capitalize(word)))
+  const camel = result.join('')
+  console.log(camel)
+  return camel
+}

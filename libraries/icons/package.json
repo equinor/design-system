@@ -1,0 +1,20 @@
+{
+  "name": "@equinor/eds-icons",
+  "version": "0.0.1-alpha.1",
+  "main": "index.js",
+  "engines": {
+    "pnpm": ">=4"
+  },
+  "description": "Icons for the Equinor Design System",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system"
+  },
+  "license": "Apache-2.0",
+  "scripts": {},
+  "keywords": ["eds", "design system", "equinor", "icon"]
+}

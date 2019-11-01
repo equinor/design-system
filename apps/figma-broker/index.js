@@ -51,6 +51,7 @@ const PATHS = {
   CSS: `${COMMON_DIR}/public/css`,
   IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
   ICONS: `${STOREFRONT_DIR}/src/assets/icons`,
+  ICON_FILES: `${ICONS_DIR}`,
 }
 
 const app = new Koa()
@@ -129,7 +130,7 @@ async function createAssets(ctx) {
       }),
     )
     // Wait for Figma to start endpoints
-    await sleep(10000)
+    await sleep(20000)
 
     // Fetch svg image as string for each asset
     const assetsWithSvg = await Promise.all(
@@ -151,9 +152,10 @@ async function createAssets(ctx) {
       })),
     )
 
+
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-    //writeResultsIndividually(assetsWithSvg, PATHS.ICONS, 'svg')
+    writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
     // Write token
     writeResults(assetsWithSvg, PATHS.ICONS)
 
