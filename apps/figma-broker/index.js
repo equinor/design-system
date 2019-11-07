@@ -39,13 +39,13 @@ const TEAM_ID = process.env.FIGMA_TEAM_ID || ''
 
 const COMMON_DIR = '../../common'
 const TOKENS_DIR = '../../libraries/tokens'
-const ASSETS_DIR = '../../libraries/eds-static'
+const STATIC_DIR = '../../libraries/eds-static'
 const ICONS_DIR = '../../libraries/icons'
 const STOREFRONT_DIR = '../storefront'
 
 const PATHS = {
   TOKENS: `${TOKENS_DIR}/base`,
-  ASSETS: `${ASSETS_DIR}/assets`,
+  ASSETS_ICONS: `${STATIC_DIR}/icons`,
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
@@ -91,7 +91,7 @@ async function createTokens(ctx) {
 
 const createSvgSprite = (assets) => `
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  ${R.head(assets).value.reduce((acc, val) => {
+  ${assets.value.reduce((acc, val) => {
     const svgContent = R.head(val.value.match(/(?<=svg">)(.*?)(?=<\/svg>)/g))
     const symbol = `
     <symbol id="${val.name}" viewBox="${val.viewbox}">
@@ -214,16 +214,18 @@ async function createAssets(ctx) {
     // Write token
     writeResults(assetsWithSvg, PATHS.ICONS)
 
-    const sprite = createSvgSprite(assetsWithSvg)
+    const systemIconsSprite = createSvgSprite(
+      assetsWithSvg.find((x) => x.name === 'system-icons'),
+    )
 
     writeResults(
       [
         {
-          name: 'eds-icons',
-          value: sprite,
+          name: 'system',
+          value: systemIconsSprite,
         },
       ],
-      `${PATHS.ASSETS}`,
+      `${PATHS.ASSETS_ICONS}`,
       'svg',
     )
 
