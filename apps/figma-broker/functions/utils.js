@@ -64,7 +64,7 @@ export const toDictDeep = R.curry(R.reduce)(
     R.set(
       R.pipe(
         R.split(new RegExp(/(^[^_]+)/)),
-        R.filter(R.complement(R.isEmpty)),
+        R.filter(isNotEmpty),
         R.map(R.curry(R.replace)(/\_*/, '')),
         R.lensPath,
       )(name),

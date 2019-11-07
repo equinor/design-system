@@ -89,6 +89,21 @@ async function createTokens(ctx) {
 
 // Assets
 
+const createSvgSprite = (assets) => `
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  ${R.head(assets).value.reduce((acc, val) => {
+    const svgContent = R.head(val.value.match(/(?<=svg">)(.*?)(?=<\/svg>)/g))
+    const symbol = `
+    <symbol id="${val.name}" viewBox="${val.viewbox}">
+      <title>${val.name}</title>
+      <desc>${val.path}-${val.name}</desc>
+      ${svgContent}
+    </symbol>`
+    return `${acc}${symbol}`
+  }, '')}
+</svg>
+`
+
 const createJSindex = (assets) =>
   R.pipe(
     R.map((iconGroups) =>
@@ -181,7 +196,6 @@ async function createAssets(ctx) {
       })),
     )
 
-
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
     writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
@@ -199,6 +213,19 @@ async function createAssets(ctx) {
     )
     // Write token
     writeResults(assetsWithSvg, PATHS.ICONS)
+
+    const sprite = createSvgSprite(assetsWithSvg)
+
+    writeResults(
+      [
+        {
+          name: 'eds-icons',
+          value: sprite,
+        },
+      ],
+      `${PATHS.ASSETS}`,
+      'svg',
+    )
 
     ctx.response.body = JSON.stringify(assetsWithSvg)
   } catch (err) {
