@@ -89,6 +89,33 @@ async function createTokens(ctx) {
 
 // Assets
 
+const createJSindex = (assets) =>
+  R.pipe(
+    R.map((iconGroups) =>
+      R.pipe(
+        R.reduce(
+          (acc, icon) => {
+            const name = `${icon.name}`
+            const path = `./${iconGroups.name}/${icon.path}/${icon.name}.svg`
+
+            const import_ = `import { default as ${name} } from '${path}'\n`
+            const export_ = `export { default as ${name} } from '${path}'\n`
+            const name_ = `${name},\n`
+
+            return {
+              imports: `${acc.imports}${import_}`,
+              exports: `${acc.exports}${export_}`,
+              names: `${acc.names}${name_}`,
+            }
+          },
+          { imports: '', exports: '', names: '' },
+        ),
+        (x) => `${x.imports}${x.exports}export default {\n${x.names}}`,
+      )(iconGroups.value),
+    ),
+    R.join('\n'),
+  )(assets)
+
 async function createAssets(ctx) {
   try {
     const plugins = [
@@ -141,10 +168,12 @@ async function createAssets(ctx) {
             const svgDirty = await fetchFile(asset.url)
             const svgClean = await svgo.optimize(svgDirty)
             const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
+            const { height, width } = svgClean.info
 
             return {
               ...asset,
               value: svgClean.data,
+              viewbox: `0 0 ${height} ${width}`,
               datauri: svgCleanDataUri.data,
             }
           }),
@@ -156,6 +185,18 @@ async function createAssets(ctx) {
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
     writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
+    // Write index.js for individual icons
+    const npmIndex = createJSindex(assetsWithSvg)
+    writeResults(
+      [
+        {
+          name: 'index',
+          value: npmIndex,
+        },
+      ],
+      PATHS.ICON_FILES,
+      'js',
+    )
     // Write token
     writeResults(assetsWithSvg, PATHS.ICONS)
 
