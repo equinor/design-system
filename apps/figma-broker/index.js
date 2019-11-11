@@ -39,18 +39,19 @@ const TEAM_ID = process.env.FIGMA_TEAM_ID || ''
 
 const COMMON_DIR = '../../common'
 const TOKENS_DIR = '../../libraries/tokens'
-const ASSETS_DIR = '../../libraries/eds-static'
+const STATIC_DIR = '../../libraries/eds-static'
 const ICONS_DIR = '../../libraries/icons'
 const STOREFRONT_DIR = '../storefront'
 
 const PATHS = {
   TOKENS: `${TOKENS_DIR}/base`,
-  ASSETS: `${ASSETS_DIR}/assets`,
+  ASSETS_ICONS: `${STATIC_DIR}/icons`,
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
   IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
   ICONS: `${STOREFRONT_DIR}/src/assets/icons`,
+  ICON_FILES: `${ICONS_DIR}`,
 }
 
 const app = new Koa()
@@ -87,6 +88,48 @@ async function createTokens(ctx) {
 }
 
 // Assets
+
+const createSvgSprite = (assets) => `
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  ${assets.value.reduce((acc, val) => {
+    const svgContent = R.head(val.value.match(/(?<=svg">)(.*?)(?=<\/svg>)/g))
+    const symbol = `
+    <symbol id="${val.name}" viewBox="${val.viewbox}">
+      <title>${val.name}</title>
+      <desc>${val.path}-${val.name}</desc>
+      ${svgContent}
+    </symbol>`
+    return `${acc}${symbol}`
+  }, '')}
+</svg>
+`
+
+const createJSindex = (assets) =>
+  R.pipe(
+    R.map((iconGroups) =>
+      R.pipe(
+        R.reduce(
+          (acc, icon) => {
+            const name = `${icon.name}`
+            const path = `./${iconGroups.name}/${icon.path}/${icon.name}.svg`
+
+            const import_ = `import { default as ${name} } from '${path}'\n`
+            const export_ = `export { default as ${name} } from '${path}'\n`
+            const name_ = `${name},\n`
+
+            return {
+              imports: `${acc.imports}${import_}`,
+              exports: `${acc.exports}${export_}`,
+              names: `${acc.names}${name_}`,
+            }
+          },
+          { imports: '', exports: '', names: '' },
+        ),
+        (x) => `${x.imports}${x.exports}export default {\n${x.names}}`,
+      )(iconGroups.value),
+    ),
+    R.join('\n'),
+  )(assets)
 
 async function createAssets(ctx) {
   try {
@@ -129,7 +172,7 @@ async function createAssets(ctx) {
       }),
     )
     // Wait for Figma to start endpoints
-    await sleep(10000)
+    await sleep(20000)
 
     // Fetch svg image as string for each asset
     const assetsWithSvg = await Promise.all(
@@ -140,10 +183,12 @@ async function createAssets(ctx) {
             const svgDirty = await fetchFile(asset.url)
             const svgClean = await svgo.optimize(svgDirty)
             const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
+            const { height, width } = svgClean.info
 
             return {
               ...asset,
               value: svgClean.data,
+              viewbox: `0 0 ${height} ${width}`,
               datauri: svgCleanDataUri.data,
             }
           }),
@@ -153,9 +198,36 @@ async function createAssets(ctx) {
 
     // Write svg to files
     // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-    //writeResultsIndividually(assetsWithSvg, PATHS.ICONS, 'svg')
+    writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
+    // Write index.js for individual icons
+    const npmIndex = createJSindex(assetsWithSvg)
+    writeResults(
+      [
+        {
+          name: 'index',
+          value: npmIndex,
+        },
+      ],
+      PATHS.ICON_FILES,
+      'js',
+    )
     // Write token
     writeResults(assetsWithSvg, PATHS.ICONS)
+
+    const systemIconsSprite = createSvgSprite(
+      assetsWithSvg.find((x) => x.name === 'system-icons'),
+    )
+
+    writeResults(
+      [
+        {
+          name: 'system',
+          value: systemIconsSprite,
+        },
+      ],
+      `${PATHS.ASSETS_ICONS}`,
+      'svg',
+    )
 
     ctx.response.body = JSON.stringify(assetsWithSvg)
   } catch (err) {
