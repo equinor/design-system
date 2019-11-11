@@ -7,28 +7,22 @@ const Container = styled.div`
   width: 100%;
 `
 
-const Icon = styled.div`
-  display: flex;
-
-  margin-right: 1.5em;
-  margin-top: 1.5em;
-  padding: 16px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 15%;
-
-  &:hover {
-    background: #efefef;
-    cursor: pointer;
-  }
-`
-
 const Title = styled.h2``
 
 const Label = styled.p`
   text-align: center;
   margin: 4px;
+`
+
+const DownloadLabel = styled(Label)`
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  &:hover {
+    background: #efefef;
+    cursor: pointer;
+  }
 `
 
 const Group = styled.div`
@@ -41,6 +35,28 @@ const Image = styled.img`
   background: transparent !important;
   width: 48px;
 `
+const DownloadImage = styled(Image)`
+  width: 24px;
+`
+
+const Icon = styled.div`
+  display: flex;
+
+  margin-right: 1.5em;
+  margin-top: 1.5em;
+  padding: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 15%;
+
+  &:hover {
+    ${DownloadLabel} {
+      visibility: visible !important;
+    }
+  }
+`
+const downloadIcon = systemIcons.find((x) => x.name === 'download')
 
 const downloadAsSvg = (data, name) => fileDownload(data, `${name}.svg`)
 
@@ -56,15 +72,24 @@ const Icons = () => {
     <Container>
       {Object.keys(iconsByGroup).map((key) => {
         return (
-          <Group>
+          <Group key={key}>
             <Title>{key}</Title>
             <Group>
               {iconsByGroup[key].map((icon) => {
-                const fixedName = icon.name.replace('_', ' ')
+                const { name, datauri } = icon
                 return (
-                  <Icon onClick={() => downloadAsSvg(icon.value, fixedName)}>
-                    <Image src={icon.datauri} alt={fixedName} />
-                    <Label>{fixedName}</Label>
+                  <Icon key={name}>
+                    <Image src={datauri} alt={name} />
+                    <Label>{name}</Label>
+                    <DownloadLabel
+                      onClick={() => downloadAsSvg(icon.value, name)}
+                    >
+                      <DownloadImage
+                        src={downloadIcon.datauri}
+                        alt={`Download ${name} as SVG file`}
+                      />
+                      SVG
+                    </DownloadLabel>
                   </Icon>
                 )
               })}
