@@ -38,10 +38,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -50,10 +48,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -62,10 +58,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -74,10 +68,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -86,10 +78,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -98,10 +88,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -110,10 +98,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -122,10 +108,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -134,10 +118,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -146,10 +128,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -158,10 +138,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -170,10 +148,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -182,10 +158,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -194,10 +168,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -206,10 +178,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -218,10 +188,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -230,10 +198,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -242,10 +208,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -254,10 +218,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -266,10 +228,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -278,10 +238,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -290,10 +248,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -302,10 +258,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -314,10 +268,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -326,10 +278,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -338,10 +288,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -350,10 +298,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -362,10 +308,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
@@ -374,10 +318,8 @@ components:
     status:
       documentation:
         - *4
-        - *2
       figma:
         - *4
-        - *2
       vanilla:
         - *1
       react:
