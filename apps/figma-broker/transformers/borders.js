@@ -2,6 +2,7 @@ import * as R from 'ramda'
 import { withType, propName } from '@utils'
 import { px } from '@units'
 import { fillToRgba } from './colors'
+import { isNotEmpty } from '../functions/utils'
 
 const fallback = {}
 
@@ -10,28 +11,31 @@ export const toBorder = (figmaNode) => {
   const { cornerRadius, strokeWeight, strokes } = figmaNode
   const stroke = strokes.find(withType('solid')) || fallback
   return {
-    outline: {
-      color: fillToRgba(stroke),
-      width: px(strokeWeight),
-      radius: px(cornerRadius),
-    },
+    color: fillToRgba(stroke),
+    width: px(strokeWeight),
+    radius: px(cornerRadius),
   }
 }
 
 export const toBorders = (figmaNodes) => {
   // Figma does not support using border on select sides of a box,
   // so shape is used to show top, bottm, left or right borders
+
+  // Also sometimes a box is used WITH full borders
   return R.reduce(
     (acc, val) => {
-      const { absoluteBoundingBox, cornerRadius, fills } = R.head(val.children)
+      const node = R.head(val.children)
+      const { absoluteBoundingBox, cornerRadius, fills, strokes } = node
+      const isUSingStrokes = isNotEmpty(strokes)
+      const strokesBorder = toBorder(node)
 
       const match = R.replace(/border/gi, '', val.name).trim()
       const side = propName(match)
 
       const fill = fills.find(withType('solid')) || fallback
       let border = {
-        color: fillToRgba(fill),
-        radius: px(cornerRadius) || 0,
+        color: isUSingStrokes ? strokesBorder.color : fillToRgba(fill),
+        radius: isUSingStrokes ? strokesBorder.radius : px(cornerRadius) || 0,
         width: 0,
       }
 
@@ -40,7 +44,9 @@ export const toBorders = (figmaNodes) => {
         case 'top':
           border = {
             ...border,
-            width: px(absoluteBoundingBox.height),
+            width: isUSingStrokes
+              ? strokesBorder.width
+              : px(absoluteBoundingBox.height),
           }
           break
 
@@ -48,7 +54,9 @@ export const toBorders = (figmaNodes) => {
         case 'right':
           border = {
             ...border,
-            width: px(absoluteBoundingBox.width),
+            width: isUSingStrokes
+              ? strokesBorder.width
+              : px(absoluteBoundingBox.width),
           }
           break
 

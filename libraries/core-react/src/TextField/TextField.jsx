@@ -1,33 +1,47 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import typography from '@equinor/eds-tokens/components/text-fields/text-fields.json'
-import { typographyTemplate } from './../_common/templates'
+import {
+  input,
+  area,
+} from '@equinor/eds-tokens/components/text-fields/text-fields.json'
+import { typographyTemplate, borderTemplate } from './../_common/templates'
 
-const variants = ['']
+const variants = ['input', 'area']
+const variantTokens = {
+  input,
+  area,
+}
 
-const Base = ({ typography, link }) => {
-  let base = `
+const Base = ({ base }) => {
+  const { spacings, field, clickbound } = base
+  const { background, borders } = field
+  return `
   margin: 0;
+  border: none;
+  background: ${background};
 
+  ${borderTemplate(borders)}
+  ${typographyTemplate(field.text.typography)}
   `
-
-  return base
 }
 
 const TextFieldBase = styled.input`
   ${Base}
 `
 
-const TextField = ({ children, ...other }) => {
-  return <TextFieldBase {...other}>{children}</TextFieldBase>
+const TextField = ({ children, variant, ...other }) => {
+  const base = variantTokens[variant]
+  return (
+    <TextFieldBase base={base} {...other}>
+      {children}
+    </TextFieldBase>
+  )
 }
 
 TextField.propTypes = {
   /** @ignore */
   className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node.isRequired,
   /** Specifies which variant to use */
   variant: PropTypes.oneOf(variants),
   /** Specifies if text should be bold */
@@ -41,7 +55,7 @@ TextField.propTypes = {
 }
 
 TextField.defaultProps = {
-  variant: 'h1',
+  variant: 'input',
   className: '',
 }
 
