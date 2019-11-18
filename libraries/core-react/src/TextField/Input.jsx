@@ -5,7 +5,7 @@ import {
   input,
   area,
 } from '@equinor/eds-tokens/components/text-fields/text-fields.json'
-import { typographyTemplate, borderTemplate } from './../_common/templates'
+import { typographyTemplate, borderTemplate } from '../_common/templates'
 
 const variants = ['input', 'area']
 const variantTokens = {
@@ -14,28 +14,36 @@ const variantTokens = {
 }
 
 const Base = ({ base }) => {
-  const { spacings, field, clickbound } = base
-  const { background, borders } = field
+  const { field, clickbound } = base
+  const { background, borders, spacings } = field
   return `
   margin: 0;
   border: none;
   background: ${background};
+
+
+  padding-left: ${spacings.left};
+  padding-right: ${spacings.right};
+  padding-top: 6px;
+  padding-bottom: 6px;
 
   ${borderTemplate(borders)}
   ${typographyTemplate(field.text.typography)}
   `
 }
 
-const TextFieldBase = styled.input`
+const Input = styled.input`
+   width:100%;
+   box-sizing: border-box;
   ${Base}
 `
 
 const TextField = ({ children, variant, ...other }) => {
   const base = variantTokens[variant]
   return (
-    <TextFieldBase base={base} {...other}>
+    <Input base={base} type="text" {...other}>
       {children}
-    </TextFieldBase>
+    </Input>
   )
 }
 
