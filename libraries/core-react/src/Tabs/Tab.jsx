@@ -1,13 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
+import { TabsContext } from './Tabs'
 
-const TabBase = styled.div`
-  background: orange;
-  flex: 0 0 100px;
+const TabBase = styled.button`
+  background: ${({ active }) => (active ? 'orange' : 'yellow')};
   text-align: center;
 `
 
-const Tab = ({ children }) => <TabBase>{children}</TabBase>
+const Tab = ({ children, label, clickHandler }) => {
+  const { activeTab, setActiveTab } = React.useContext(TabsContext)
+  return (
+    <TabBase
+      active={label === activeTab}
+      label={label}
+      onClick={() => {
+        setActiveTab(label)
+      }}
+    >
+      {children}
+    </TabBase>
+  )
+}
 
 Tab.displayName = 'eds-tab'
 
