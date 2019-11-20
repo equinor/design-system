@@ -9,8 +9,8 @@ const Text = styled.div`
   font-family: inherit;
   font-size: 12px;
   line-height: 16px;
-  color: #6F6F6F;
-  `
+  color: #6f6f6f;
+`
 
 const Icon = styled.div`
   height: 16px;
@@ -33,7 +33,7 @@ HelperText.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /** Helper text */
   text: PropTypes.string,
   /** Icon */

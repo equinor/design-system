@@ -116,8 +116,11 @@ export const toField = (getStyle, filledNode, enabledNode) => {
 
   const components = enabledNode.children || []
   const filledComponents = filledNode.children || []
-  const shape = toShape(R.find(instanceOfComponent('shape'), components))
+  const shape = R.find(instanceOfComponent('shape'), components)
+  const shape_ = toShape(shape)
+  const borders = R.filter(withName('border'), components)
 
+  const hasNoBorders = R.isEmpty(borders)
   let text = toText(getStyle, R.find(withType('text'), components))
   const filledText = toText(
     getStyle,
@@ -131,9 +134,14 @@ export const toField = (getStyle, filledNode, enabledNode) => {
       colorPlaceholder: text.color,
     }
   }
+  const borderData = hasNoBorders ? [shape] : borders
+
+  if (R.isEmpty(borderData)) {
+    console.log('no borders')
+  }
   const data = {
-    ...shape,
-    borders: R.filter(withName('border'), components),
+    ...shape_,
+    borders: borderData,
     text,
     spacings: R.filter(instanceOfComponent('spacing'), components),
     clickbound: R.find(instanceOfComponent('clickbound'), components),
@@ -142,7 +150,7 @@ export const toField = (getStyle, filledNode, enabledNode) => {
   const transformations = {
     borders: toBorders,
     spacings: toSpacings,
-    clickbound: (x) => toClickBound(shape.height, x),
+    clickbound: (x) => toClickBound(shape_.height, x),
   }
 
   // We remove remove keys with undefined data before running transformations

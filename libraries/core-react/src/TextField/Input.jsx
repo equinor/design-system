@@ -14,7 +14,7 @@ const variantTokens = {
 }
 
 const Base = ({ base }) => {
-  const { field, clickbound } = base
+  const { field, clickbound, active, focus } = base
   const { background, borders, spacings } = field
   return `
   margin: 0;
@@ -29,12 +29,28 @@ const Base = ({ base }) => {
 
   ${borderTemplate(borders)}
   ${typographyTemplate(field.text.typography)}
+
+  &:focus {
+    ${borderTemplate(focus.field.borders)}
+  }
+  &:active {
+    ${borderTemplate(active.field.borders)}
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    &:active {
+      outline: none;
+    }
+  }
+
   `
 }
 
 const Input = styled.input`
-   width:100%;
-   box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
   ${Base}
 `
 
@@ -59,7 +75,7 @@ TextField.propTypes = {
   /** Placeholder */
   placeholder: PropTypes.string,
   /** Specifiec which type input is */
-  type: PropTypes.oneOf('text', 'search', 'password', 'email', 'numbers'),
+  type: PropTypes.oneOf(['text', 'search', 'password', 'email', 'numbers']),
 }
 
 TextField.defaultProps = {

@@ -18,6 +18,23 @@ storiesOf('Components', module).add('TextField', () => {
           meta="This is meta"
           helperText="Some helper text"
         />
+        <TextField
+          type="text"
+          id="storybook-textfield2"
+          placeholder="this is placeholder text"
+          label="Some label text"
+          meta="This is meta"
+          helperText="Some helper text"
+        />
+        <TextField
+          type="text"
+          id="storybook-textfield3"
+          placeholder="123-abc"
+          label="Disabled"
+          meta="Meta"
+          helperText="Helper Text"
+          disabled
+        />
       </div>
     </div>
   )

@@ -49,6 +49,13 @@
       "field": {
         "height": "36px",
         "background": "rgba(247, 247, 247, 1)",
+        "borders": {
+          "outline": {
+            "color": "rgba(0, 112, 121, 1)",
+            "radius": "",
+            "width": "2px"
+          }
+        },
         "text": {
           "color": "rgba(61, 61, 61, 1)",
           "typography": {
@@ -80,6 +87,13 @@
       "field": {
         "height": "36px",
         "background": "rgba(247, 247, 247, 1)",
+        "borders": {
+          "outline": {
+            "color": "rgba(247, 247, 247, 1)",
+            "radius": 0,
+            "width": 0
+          }
+        },
         "text": {
           "color": "rgba(61, 61, 61, 1)",
           "typography": {
@@ -103,6 +117,13 @@
       "field": {
         "height": "36px",
         "background": "rgba(247, 247, 247, 1)",
+        "borders": {
+          "outline": {
+            "color": "rgba(0, 112, 121, 1)",
+            "radius": "",
+            "width": "2px"
+          }
+        },
         "text": {
           "color": "rgba(61, 61, 61, 1)",
           "typography": {
@@ -203,6 +224,13 @@
       "field": {
         "height": "76px",
         "background": "rgba(247, 247, 247, 1)",
+        "borders": {
+          "outline": {
+            "color": "rgba(0, 112, 121, 1)",
+            "radius": "",
+            "width": "2px"
+          }
+        },
         "text": {
           "color": "rgba(61, 61, 61, 1)",
           "typography": {
@@ -234,6 +262,13 @@
       "field": {
         "height": "76px",
         "background": "rgba(247, 247, 247, 1)",
+        "borders": {
+          "outline": {
+            "color": "rgba(247, 247, 247, 1)",
+            "radius": 0,
+            "width": 0
+          }
+        },
         "text": {
           "color": "rgba(61, 61, 61, 1)",
           "typography": {
@@ -257,6 +292,13 @@
       "field": {
         "height": "76px",
         "background": "rgba(247, 247, 247, 1)",
+        "borders": {
+          "outline": {
+            "color": "rgba(0, 112, 121, 1)",
+            "radius": "",
+            "width": "2px"
+          }
+        },
         "text": {
           "color": "rgba(61, 61, 61, 1)",
           "typography": {

@@ -24,19 +24,25 @@ export const toBorders = (figmaNodes) => {
   // Also sometimes a box is used WITH full borders
   return R.reduce(
     (acc, val) => {
-      const node = R.head(val.children)
+      const node = R.isNil(val.children) ? val : R.head(val.children)
       const { absoluteBoundingBox, cornerRadius, fills, strokes } = node
       const isUSingStrokes = isNotEmpty(strokes)
       const strokesBorder = toBorder(node)
 
-      const match = R.replace(/border/gi, '', val.name).trim()
-      const side = propName(match)
+      const match = R.pipe(
+        R.match(/(?<=border).*/gi),
+        R.head,
+        R.defaultTo(''),
+        R.trim,
+      )(val.name)
+
+      const side = R.isEmpty(match) ? 'outline' : propName(match)
 
       const fill = fills.find(withType('solid')) || fallback
       let border = {
         color: isUSingStrokes ? strokesBorder.color : fillToRgba(fill),
         radius: isUSingStrokes ? strokesBorder.radius : px(cornerRadius) || 0,
-        width: 0,
+        width: isUSingStrokes ? strokesBorder.width : 0,
       }
 
       switch (side) {

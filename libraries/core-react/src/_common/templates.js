@@ -30,8 +30,14 @@ export const typographyTemplate = (typography, link) => {
   return base
 }
 
-export const borderTemplate = (borders) =>
-  Object.keys(borders).reduce((acc, val) => {
+export const borderTemplate = (borders) => {
+  const { outline } = borders
+  if (outline) {
+    return `outline: ${outline.width} solid ${outline.color};`
+  }
+
+  return Object.keys(borders).reduce((acc, val) => {
     const { color, width } = borders[val]
     return `${acc} border-${val}: ${width} solid ${color}; \n`
   }, '')
+}

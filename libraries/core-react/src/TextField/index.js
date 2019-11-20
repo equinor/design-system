@@ -12,11 +12,16 @@ const Container = styled.div`
 `
 
 const TextField = (props) => {
-  const { id, name, placeholder, label, meta, helperText } = props
+  const { id, name, placeholder, label, meta, helperText, disabled } = props
   return (
     <Container {...props}>
       <Label inputId={id} label={label} meta={meta}></Label>
-      <Input id={id} name={name} placeholder={placeholder}></Input>
+      <Input
+        id={id}
+        name={name}
+        placeholder={placeholder}
+        disabled={disabled}
+      ></Input>
       <HelperText text={helperText}></HelperText>
     </Container>
   )
@@ -35,6 +40,8 @@ TextField.propTypes = {
   helperText: PropTypes.string,
   /** Placeholder text */
   placeholder: PropTypes.string,
+  /** Disabled */
+  disabled: PropTypes.bool,
 }
 
 TextField.defaultProps = {
@@ -43,6 +50,7 @@ TextField.defaultProps = {
   helperText: '',
   label: '',
   meta: '',
+  disabled: false,
 }
 TextField.displayName = 'text-field'
 
