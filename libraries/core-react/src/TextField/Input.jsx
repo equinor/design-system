@@ -7,14 +7,21 @@ import {
 } from '@equinor/eds-tokens/components/text-fields/text-fields.json'
 import { typographyTemplate, borderTemplate } from '../_common/templates'
 
-const variants = ['input', 'area']
 const variantTokens = {
   input,
-  area,
+  textarea: area,
+}
+
+const { danger, warning, success } = input
+const states = {
+  danger,
+  warning,
+  success,
 }
 
 const Base = ({ base }) => {
-  const { field, clickbound, active, focus } = base
+  const { enabled, active, focus } = base
+  const { field } = enabled
   const { background, borders, spacings } = field
   return `
   margin: 0;
@@ -35,6 +42,7 @@ const Base = ({ base }) => {
   }
   &:active {
     ${borderTemplate(active.field.borders)}
+
   }
 
   &:disabled {
@@ -49,25 +57,25 @@ const Base = ({ base }) => {
 }
 
 const Input = styled.input`
+  max-width: 100%;
   width: 100%;
   box-sizing: border-box;
   ${Base}
 `
 
-const TextField = ({ children, variant, ...other }) => {
-  const base = variantTokens[variant]
+const TextField = ({ children, variant, multiline, validation, ...other }) => {
+  const as = multiline ? 'textarea' : 'input'
+  const base = variantTokens[as]
+  const state = states[validation]
+
   return (
-    <Input base={base} type="text" {...other}>
+    <Input as={as} base={base} type="text" {...other}>
       {children}
     </Input>
   )
 }
 
 TextField.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** Specifies which variant to use */
-  variant: PropTypes.oneOf(variants),
   /** Specifies if text should be bold */
   multiline: PropTypes.bool,
   /** Input label */
@@ -76,10 +84,14 @@ TextField.propTypes = {
   placeholder: PropTypes.string,
   /** Specifiec which type input is */
   type: PropTypes.oneOf(['text', 'search', 'password', 'email', 'numbers']),
+  /** Multiline input */
+  multiline: PropTypes.bool,
+  /** Validation state */
+  validation: PropTypes.oneOf(['error', 'warning', 'success']),
 }
 
 TextField.defaultProps = {
-  variant: 'input',
+  variant: 'default',
   className: '',
 }
 

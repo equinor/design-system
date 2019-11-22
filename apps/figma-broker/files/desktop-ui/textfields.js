@@ -20,6 +20,28 @@ import {
 
 const fallback = {}
 
+const segment = (node) => {
+  const { children } = node
+  // Label
+  const labels = R.find(withName('label'), children)
+  const label = {
+    label: R.find(withName('field'), labels.children),
+    meta: R.find(withName('meta'), labels.children),
+    spacings: R.filter(instanceOfComponent('spacing'), labels.children),
+  }
+
+  // Helper Text
+  const helperTexts = R.filter(withName('helper'), children)
+  const helperText = {}
+
+  return removeNilAndEmpty({
+    label,
+    field: R.find(withName('field'), children),
+    clickbound: R.find(instanceOfComponent('clickbound'), children),
+    spacings: R.filter(instanceOfComponent('spacing'), children),
+  })
+}
+
 const buildProps = (states, getStyle) => {
   // states
   const enabled = R.find(withName('enabled'), states)
@@ -39,56 +61,42 @@ const buildProps = (states, getStyle) => {
     R.find(withName('field'), filled.children),
   )
 
-  // pre transformed data
-  const activeLabel = toText(R.find(withName('label'), active.children))
-  const disabledLabel = toText(R.find(withName('label'), disabled.children))
-
   // data
   const data = removeNilAndEmpty({
-    borders: R.filter(withName('border'), enabled.children),
-    text: toText(R.find(withType('text'), enabled.children)),
-    spacings: R.filter(instanceOfComponent('spacing'), enabled.children),
-    field: R.find(withName('field'), enabled.children),
-    clickbound: R.find(instanceOfComponent('clickbound'), enabled.children),
-
-    active: removeNilAndEmpty({
-      ...activeLabel,
-      field: R.find(withName('field'), active.children),
-    }),
-    disabled: removeNilAndEmpty({
-      ...disabledLabel,
-      field: R.find(withName('field'), disabled.children),
-    }),
-    focus: removeNilAndEmpty({
-      field: R.find(withName('field'), focused.children),
-    }),
-    hover: removeNilAndEmpty({
-      field: R.find(withName('field'), hovered.children),
-    }),
-    readOnly: removeNilAndEmpty({}),
+    enabled: segment(enabled),
+    active: segment(active),
+    disabled: segment(disabled),
+    focus: segment(focused),
+    hover: segment(hovered),
+    readOnly: segment(readOnly),
+    danger: segment(danger),
+    warning: segment(warning),
+    success: segment(success),
   })
+
+  const transformers = {
+    label: {
+      label: toText,
+      meta: toText,
+      spacings: toSpacings,
+    },
+    field: toField,
+    clickbound: (x) => toClickBound(null, x),
+    spacings: toSpacings,
+    helperText: toText,
+  }
 
   // transformations
   const transformations = {
-    borders: toBorders,
-    spacings: toSpacings,
-    field: toField,
-    clickbound: (x) => toClickBound(null, x),
-
-    active: {
-      borders: toBorders,
-      field: toField,
-    },
-    disabled: {
-      borders: toBorders,
-      field: toField,
-    },
-    focus: {
-      field: toField,
-    },
-    hover: {
-      field: toField,
-    },
+    enabled: transformers,
+    active: transformers,
+    disabled: transformers,
+    focus: transformers,
+    hover: transformers,
+    readOnly: transformers,
+    danger: transformers,
+    warning: transformers,
+    success: transformers,
   }
 
   return R.evolve(transformations, data)
