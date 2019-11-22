@@ -1,4 +1,6 @@
 import { withKnobs, text, radios } from '@storybook/addon-knobs'
+import { render, html } from 'lit-html'
+import { repeat } from 'lit-html/directives/repeat'
 import './tabs.style.css'
 
 export default { title: 'Components|Tabs' }
@@ -14,54 +16,54 @@ const options = {
 
 const defaultSelected = options['Tab 1']
 
-const html = `<h2>foo</h2>`
+const story = (template) => {
+  const fragment = document.createDocumentFragment()
+  render(template, fragment)
+  return fragment
+}
+
+const Tab = (index) => html`
+  <style>
+    .Tabs-item {
+      background: orange;
+    }
+    .Tabs-link {
+      background: yellow;
+    }
+  </style>
+  <li class="Tabs-item" role="presentation">
+    <a
+      class="Tabs-link"
+      role="tab"
+      aria-selected="${radios(
+        'Selected',
+        options,
+        defaultSelected,
+        selectedTabGroup,
+      ) === options[`Tab ${index}`]}"
+    >
+      ${text(`Tab ${index} label`, `Tab ${index}`, textGroup)}
+    </a>
+  </li>
+`
+
+const Panel = (index) => html`
+  <div class="Tabs-panel" role="tabpanel">
+    ${text(`Panel ${index} text`, `Panel ${index}`, textGroup)}
+  </div>
+`
 
 export const allTabs = () =>
-  `<div class="Tabs">
-  <ul class="Tabs-nav" role="tablist">
-    <li class="Tabs-item" role="presentation">
-      <a class="Tabs-link" role="tab" aria-selected="${radios(
-        'Selected',
-        options,
-        defaultSelected,
-        selectedTabGroup,
-      ) === options['Tab 1']}">
-        ${text('Tab 1 label', 'Tab 1', textGroup)}
-      </a>
-    </li>
-    <li class="Tabs-item" role="presentation">
-      <a class="Tabs-link" role="tab" aria-selected="${radios(
-        'Selected',
-        options,
-        defaultSelected,
-        selectedTabGroup,
-      ) === options['Tab 2']}">${text('Tab 2 label', 'Tab 2', textGroup)}</a>
-    </li>
-    <li class="Tabs-item" role="presentation">
-      <a class="Tabs-link" role="tab" aria-selected="${radios(
-        'Selected',
-        options,
-        defaultSelected,
-        selectedTabGroup,
-      ) === options['Tab 3']}">${text('Tab 3 label', 'Tab 3', textGroup)}</a>
-    </li>
-  </ul>
-  <div class="Tabs-panel" role="tabpanel">${text(
-    'Panel 1 text',
-    'Panel 1',
-    textGroup,
-  )}</div>
-  <div class="Tabs-panel" role="tabpanel">${text(
-    'Panel 2 text',
-    'Panel 2',
-    textGroup,
-  )}</div>
-  <div class="Tabs-panel" role="tabpanel">${text(
-    'Panel 3 text',
-    'Panel 3',
-    textGroup,
-  )}</div>
-</div>`
+  story(
+    html`
+      <div class="Tabs">
+        <ul class="Tabs-nav" role="tablist">
+          ${[...new Array(3)].map((item, i) => Tab(i + 1))}
+        </ul>
+        ${[...new Array(3)].map((item, i) => Panel(i + 1))}
+      </div>
+    `,
+  )
 
 allTabs.story = {
   decorators: [withKnobs],
