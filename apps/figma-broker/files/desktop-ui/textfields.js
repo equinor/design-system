@@ -8,14 +8,11 @@ import {
   toDictDeep,
 } from '@utils'
 import {
-  toBorders,
   toClickBound,
-  toFocus,
-  toHover,
   toSpacings,
   toText as toText_,
   toField as toField_,
-  toShape,
+  toIcon,
 } from '@transformers'
 
 const fallback = {}
@@ -32,10 +29,28 @@ const segment = (node) => {
 
   // Helper Text
   const helperTexts = R.filter(withName('helper'), children)
-  const helperText = {}
+  const textWithIcon = R.find(withName('helper with icon'), helperTexts)
+  const textWithoutIcon = R.find(withName('helper without icon'), helperTexts)
+
+  const helperText = {
+    textWithIcon: {
+      text: R.find(withName('text'), textWithIcon.children),
+      spacings: R.filter(instanceOfComponent('spacing'), textWithIcon.children),
+      icon: R.find(instanceOfComponent('icon'), textWithIcon.children),
+    },
+    textWithoutIcon: {
+      text: R.find(withName('text'), textWithoutIcon.children),
+      spacings: R.filter(
+        instanceOfComponent('spacing'),
+        textWithoutIcon.children,
+      ),
+      icon: null,
+    },
+  }
 
   return removeNilAndEmpty({
     label,
+    helperText,
     field: R.find(withName('field'), children),
     clickbound: R.find(instanceOfComponent('clickbound'), children),
     spacings: R.filter(instanceOfComponent('spacing'), children),
@@ -51,9 +66,22 @@ const buildProps = (states, getStyle) => {
   const hovered = R.find(withName('hover'), states)
   const filled = R.find(withName('filled'), states) || { children: [] }
   const readOnly = R.find(withName('read only'), states) || { children: [] }
-  const danger = R.find(withName('danger'), states) || { children: [] }
-  const warning = R.find(withName('warning'), states) || { children: [] }
-  const success = R.find(withName('success'), states) || { children: [] }
+  const danger = R.find(withName('danger/enabled'), states) || { children: [] }
+  const warning = R.find(withName('warning/enabled'), states) || {
+    children: [],
+  }
+  const success = R.find(withName('success/enabled'), states) || {
+    children: [],
+  }
+  const dangerFocus = R.find(withName('danger/focus'), states) || {
+    children: [],
+  }
+  const warningFocus = R.find(withName('warning/focus'), states) || {
+    children: [],
+  }
+  const successFocus = R.find(withName('success/focus'), states) || {
+    children: [],
+  }
 
   // functions
   const toText = R.curry(toText_)(getStyle)
@@ -72,9 +100,12 @@ const buildProps = (states, getStyle) => {
     danger: segment(danger),
     warning: segment(warning),
     success: segment(success),
+    dangerFocus: segment(dangerFocus),
+    warningFocus: segment(warningFocus),
+    successFocus: segment(successFocus),
   })
 
-  const transformers = {
+  const segmentTransformers = {
     label: {
       label: toText,
       meta: toText,
@@ -83,20 +114,34 @@ const buildProps = (states, getStyle) => {
     field: toField,
     clickbound: (x) => toClickBound(null, x),
     spacings: toSpacings,
-    helperText: toText,
+    helperText: {
+      textWithIcon: {
+        text: toText,
+        spacings: toSpacings,
+        icon: toIcon,
+      },
+      textWithoutIcon: {
+        text: toText,
+        spacings: toSpacings,
+        icon: toIcon,
+      },
+    },
   }
 
   // transformations
   const transformations = {
-    enabled: transformers,
-    active: transformers,
-    disabled: transformers,
-    focus: transformers,
-    hover: transformers,
-    readOnly: transformers,
-    danger: transformers,
-    warning: transformers,
-    success: transformers,
+    enabled: segmentTransformers,
+    active: segmentTransformers,
+    disabled: segmentTransformers,
+    focus: segmentTransformers,
+    hover: segmentTransformers,
+    readOnly: segmentTransformers,
+    danger: segmentTransformers,
+    warning: segmentTransformers,
+    success: segmentTransformers,
+    dangerFocus: segmentTransformers,
+    warningFocus: segmentTransformers,
+    successFocus: segmentTransformers,
   }
 
   return R.evolve(transformations, data)

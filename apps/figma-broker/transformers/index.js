@@ -156,3 +156,17 @@ export const toField = (getStyle, filledNode, enabledNode) => {
   // We remove remove keys with undefined data before running transformations
   return R.evolve(transformations, removeNilAndEmpty(data))
 }
+
+export const toIcon = (figmaNode) => {
+  if (R.isNil(figmaNode)) return {}
+
+  const icon = R.head(R.tail(figmaNode.children))
+  // const icon = R.find(instanceOfComponent('icon'), group.children)
+  const fill = icon.fills.find(withType('solid')) || fallback
+
+  return {
+    height: px(icon.absoluteBoundingBox.height),
+    width: px(icon.absoluteBoundingBox.width),
+    color: fillToRgba(fill),
+  }
+}
