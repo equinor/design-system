@@ -1,9 +1,6 @@
 import * as R from 'ramda'
 
-const head = R.pipe(
-  R.defaultTo([]),
-  R.head,
-)
+const head = R.pipe(R.defaultTo([]), R.head)
 
 const removeForbiddenCharacters = (str) => {
   if (str) {
