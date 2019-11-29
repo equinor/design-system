@@ -2,6 +2,8 @@ import * as R from 'ramda'
 import { propName, withType, pickChildren, toDict } from '@utils'
 import { px } from '@units'
 
+const toComfortable = (x) => ({ comfortable: x })
+
 const toSpacingTokens = R.pipe(
   R.filter(withType('frame')),
   pickChildren,
@@ -21,5 +23,6 @@ const toSpacingTokens = R.pipe(
     }
   }),
   toDict,
+  toComfortable,
 )
 export const makeSpacingTokens = (spacings) => toSpacingTokens(spacings)
