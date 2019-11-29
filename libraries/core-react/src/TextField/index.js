@@ -6,9 +6,8 @@ import { default as Label } from './Label'
 import { default as HelperText } from './HelperText'
 
 const Container = styled.div`
-  max-width: 280px;
   min-width: 100px;
-  font-family: Equinor;
+  width: 100%;
 `
 
 const TextField = (props) => {
@@ -23,6 +22,7 @@ const TextField = (props) => {
     style,
     multiline,
     className,
+    validation,
     ...other
   } = props
 
@@ -32,8 +32,15 @@ const TextField = (props) => {
     placeholder,
     name,
     id,
+    validation,
     ...other,
   }
+
+  const helperProps = {
+    validation,
+    helperText,
+  }
+
   const containerProps = {
     className,
   }
@@ -42,7 +49,7 @@ const TextField = (props) => {
     <Container {...containerProps}>
       <Label inputId={id} label={label} meta={meta}></Label>
       <Input {...inputProps}></Input>
-      <HelperText text={helperText}></HelperText>
+      <HelperText {...helperProps}></HelperText>
     </Container>
   )
 }

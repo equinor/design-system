@@ -1,6 +1,5 @@
 export const typographyTemplate = (typography, link) => {
   let base = `
-  margin: 0;
   color: ${typography.color};
   font-family: ${typography.fontFamily};
   font-size: ${typography.fontSize};

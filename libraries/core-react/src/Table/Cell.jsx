@@ -41,6 +41,7 @@ const Base = ({ tokens }) => {
   background: ${background};
   min-height: ${height};
   height: ${height};
+  margin: 0;
 
   padding-left: ${spacings.left};
   padding-right: ${spacings.right};

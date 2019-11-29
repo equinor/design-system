@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
-  grid-template-columns: repeat(4, fit-content(100%));
+  grid-template-columns: repeat(2, fit-content(100%));
 `
 
 storiesOf('Components', module).add('TextField', () => {
@@ -72,6 +72,30 @@ storiesOf('Components', module).add('TextField', () => {
           meta="Meta"
           helperText="Helper Text"
           multiline
+        />
+        <TextField
+          id="storybook-textfield5"
+          placeholder="Placeholder text Placeholder text Placeholder text"
+          label="Error"
+          meta="Meta"
+          helperText="Helper Text"
+          validation="error"
+        />
+        <TextField
+          id="storybook-textfield6"
+          placeholder="Placeholder text Placeholder text Placeholder text"
+          label="Warning"
+          meta="Meta"
+          helperText="Helper Text"
+          validation="warning"
+        />
+        <TextField
+          id="storybook-textfield7"
+          placeholder="Placeholder text Placeholder text Placeholder text"
+          label="Success"
+          meta="Meta"
+          helperText="Helper Text"
+          validation="success"
         />
       </Wrapper>
     </div>
