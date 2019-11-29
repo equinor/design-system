@@ -1,11 +1,12 @@
 {
-  "48__xxx_large": "48px",
-  "40__xx_large": "40px",
-  "32__x_large": "32px",
-  "24__large": "24px",
-  "16__medium": "16px",
-  "8__small": "8px",
-  "4__x_small": "4px",
-  "2__xx_small": "2px",
-  "24_large": "24px"
+  "comfortable": {
+    "xxx_large": "48px",
+    "xx_large": "40px",
+    "x_large": "32px",
+    "large": "24px",
+    "medium": "16px",
+    "small": "8px",
+    "x_small": "4px",
+    "xx_small": "2px"
+  }
 }
