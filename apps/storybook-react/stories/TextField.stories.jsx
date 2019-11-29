@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
-  grid-template-columns: repeat(4, fit-content(100%));
+  grid-template-columns: repeat(2, fit-content(100%));
 `
 
 const ErrorFilled = (
