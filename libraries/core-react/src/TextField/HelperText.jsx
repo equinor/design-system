@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import baseTokens from '@equinor/eds-tokens/base'
 import { typographyTemplate } from '../_common/templates'
+import { TextFieldContext } from './context'
 
 const {
   colors: colors_,
@@ -46,22 +46,22 @@ const tokens = {
   },
 }
 
-const Variation = ({ variant }) => {
+const Variation = ({ variant, isFocused }) => {
   if (!variant) {
     return ``
   }
 
   const { focus, color } = variant
+  if (isFocused) {
+    return `
+    color: ${focus.color};
+    fill: ${focus.color};
+    `
+  }
 
   return `
   color: ${color};
   fill: ${color};
-
-   &:active,
-  &:focus {
-    color: ${focus.color};
-    fill: ${color};
-  }
 `
 }
 
@@ -85,10 +85,16 @@ const HelperText = (props) => {
   const variant = tokens[validation || 'default']
 
   return (
-    <HelperTextBase {...props}>
-      {icon && <Icon variant={variant}>{icon}</Icon>}
-      <Text variant={variant}>{helperText}</Text>
-    </HelperTextBase>
+    <TextFieldContext.Consumer>
+      {(textField) => (
+        <HelperTextBase {...props}>
+          {icon && <Icon variant={variant}>{icon}</Icon>}
+          <Text variant={variant} isFocused={textField.isFocused}>
+            {helperText}
+          </Text>
+        </HelperTextBase>
+      )}
+    </TextFieldContext.Consumer>
   )
 }
 
