@@ -10,16 +10,26 @@ const {
   typography: typography_,
 } = baseTokens
 
-const tokens = {
-  background: colors_.ui.background__light.hex,
-  typography: typography_.input.text,
-  color: colors_.text.static_icons__default.hex,
-  spacings: {
+const spacings = {
+  comfortable: {
     left: spacings_.comfortable.small,
     right: spacings_.comfortable.small,
     top: '6px',
     bottom: '6px',
   },
+  compact: {
+    left: spacings_.comfortable.x_small,
+    right: spacings_.comfortable.x_small,
+    top: spacings_.comfortable.x_small,
+    bottom: spacings_.comfortable.x_small,
+  },
+}
+
+const tokens = {
+  background: colors_.ui.background__light.hex,
+  typography: typography_.input.text,
+  color: colors_.text.static_icons__default.hex,
+  spacings,
   default: {
     borderBottom: colors_.text.static_icons__tertiary.hex,
     border: {
@@ -113,10 +123,10 @@ const Input = styled.input`
   border: none;
 
   background: ${tokens.background};
-  padding-left: ${tokens.spacings.left};
-  padding-right: ${tokens.spacings.right};
-  padding-top: ${tokens.spacings.top};
-  padding-bottom: ${tokens.spacings.bottom};
+  padding-left: ${({ spacings }) => spacings.left};
+  padding-right: ${({ spacings }) => spacings.right};
+  padding-top: ${({ spacings }) => spacings.top};
+  padding-bottom: ${({ spacings }) => spacings.bottom};
 
   ${typographyTemplate(tokens.typography)}
   color: ${tokens.color};
@@ -130,10 +140,14 @@ const TextField = ({
   multiline,
   validation,
   updateIsFocused,
+  compact,
   ...other
 }) => {
   const as = multiline ? 'textarea' : 'input'
   const variant = tokens[validation || 'default']
+  const spacings = compact
+    ? tokens.spacings.compact
+    : tokens.spacings.comfortable
 
   return (
     <Input
@@ -142,6 +156,7 @@ const TextField = ({
       type="text"
       onFocus={() => updateIsFocused(true)}
       onBlur={() => updateIsFocused(false)}
+      spacings={spacings}
       {...other}
     >
       {children}

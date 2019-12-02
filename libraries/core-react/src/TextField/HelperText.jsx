@@ -11,15 +11,24 @@ const {
   typography: typography_,
 } = baseTokens
 
-const tokens = {
-  background: colors_.ui.background__light.hex,
-  typography: typography_.input.helper,
-  spacings: {
+const spacings = {
+  comfortable: {
     left: spacings_.comfortable.small,
     right: spacings_.comfortable.small,
     top: spacings_.comfortable.small,
     bottom: '6px',
   },
+  compact: {
+    left: spacings_.comfortable.small,
+    right: spacings_.comfortable.small,
+    top: spacings_.comfortable.xx_small,
+    bottom: '6px',
+  },
+}
+const tokens = {
+  background: colors_.ui.background__light.hex,
+  typography: typography_.input.helper,
+  spacings,
   default: {
     color: colors_.text.static_icons__tertiary.hex,
     focus: {
@@ -66,8 +75,8 @@ const Variation = ({ variant, isFocused }) => {
 }
 
 const HelperTextBase = styled.div`
-  margin-top: ${tokens.spacings.top};
-  margin-left: ${tokens.spacings.left};
+  margin-left: ${({ spacings }) => spacings.left};
+  margin-top: ${({ spacings }) => spacings.top};
 `
 const Text = styled.div`
   ${typographyTemplate(tokens.typography)}
@@ -83,11 +92,14 @@ const Icon = styled.div`
 const HelperText = (props) => {
   const { helperText, icon, validation } = props
   const variant = tokens[validation || 'default']
+  const spacings = props.compact
+    ? tokens.spacings.compact
+    : tokens.spacings.comfortable
 
   return (
     <TextFieldContext.Consumer>
       {(textField) => (
-        <HelperTextBase {...props}>
+        <HelperTextBase {...props} spacings={spacings}>
           {icon && <Icon variant={variant}>{icon}</Icon>}
           <Text variant={variant} isFocused={textField.isFocused}>
             {helperText}

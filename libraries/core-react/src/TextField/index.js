@@ -32,6 +32,7 @@ class TextField extends React.Component {
       multiline,
       className,
       validation,
+      compact,
       ...other
     } = this.props
 
@@ -42,6 +43,7 @@ class TextField extends React.Component {
       name,
       id,
       validation,
+      compact,
       updateIsFocused: this.updateIsFocused,
       ...other,
     }
@@ -49,16 +51,19 @@ class TextField extends React.Component {
     const helperProps = {
       validation,
       helperText,
+      compact,
     }
 
     const containerProps = {
       className,
+      compact,
     }
 
     const labelProps = {
       inputId: id,
       label,
       meta,
+      compact,
     }
 
     return (

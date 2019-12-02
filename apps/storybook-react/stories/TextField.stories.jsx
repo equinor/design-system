@@ -97,6 +97,14 @@ storiesOf('Components', module).add('TextField', () => {
           helperText="Helper Text"
           validation="success"
         />
+        <TextField
+          id="storybook-textfield8"
+          placeholder="Placeholder text "
+          label="Compact"
+          meta="Meta"
+          helperText="Helper Text"
+          compact
+        />
       </Wrapper>
     </div>
   )
