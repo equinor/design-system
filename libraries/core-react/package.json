@@ -19,7 +19,12 @@
     "dev": "rollup -c -w",
     "test": "jest"
   },
-  "keywords": ["eds", "design system", "react", "equinor"],
+  "keywords": [
+    "eds",
+    "design system",
+    "react",
+    "equinor"
+  ],
   "license": "AGPL",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -27,6 +32,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-plugin-styled-components": "^1.10.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.0",
     "jest": "^24.8.0",
@@ -51,7 +57,9 @@
   },
   "jest": {
     "verbose": true,
-    "setupFilesAfterEnv": ["jest-enzyme"],
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
     "testEnvironment": "enzyme",
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"

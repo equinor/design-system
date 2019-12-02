@@ -4,54 +4,73 @@ import styled from 'styled-components'
 import { default as Input } from './Input'
 import { default as Label } from './Label'
 import { default as HelperText } from './HelperText'
+import { TextFieldContext } from './context'
 
 const Container = styled.div`
   min-width: 100px;
   width: 100%;
 `
 
-const TextField = (props) => {
-  const {
-    id,
-    label,
-    meta,
-    helperText,
-    name,
-    placeholder,
-    disabled,
-    style,
-    multiline,
-    className,
-    validation,
-    ...other
-  } = props
-
-  const inputProps = {
-    multiline,
-    disabled,
-    placeholder,
-    name,
-    id,
-    validation,
-    ...other,
+class TextField extends React.Component {
+  static contextType = TextFieldContext
+  state = {
+    isFocused: false,
   }
-
-  const helperProps = {
-    validation,
-    helperText,
+  updateIsFocused = (isFocused) => {
+    this.setState({ ...this.state, isFocused })
   }
+  render = () => {
+    const {
+      id,
+      label,
+      meta,
+      helperText,
+      name,
+      placeholder,
+      disabled,
+      style,
+      multiline,
+      className,
+      validation,
+      ...other
+    } = this.props
 
-  const containerProps = {
-    className,
+    const inputProps = {
+      multiline,
+      disabled,
+      placeholder,
+      name,
+      id,
+      validation,
+      updateIsFocused: this.updateIsFocused,
+      ...other,
+    }
+
+    const helperProps = {
+      validation,
+      helperText,
+    }
+
+    const containerProps = {
+      className,
+    }
+
+    const labelProps = {
+      inputId: id,
+      label,
+      meta,
+    }
+
+    return (
+      <Container {...containerProps}>
+        <TextFieldContext.Provider value={this.state}>
+          <Label {...labelProps}></Label>
+          <Input {...inputProps}></Input>
+          <HelperText {...helperProps}></HelperText>
+        </TextFieldContext.Provider>
+      </Container>
+    )
   }
-
-  return (
-    <Container {...containerProps}>
-      <Label inputId={id} label={label} meta={meta}></Label>
-      <Input {...inputProps}></Input>
-      <HelperText {...helperProps}></HelperText>
-    </Container>
-  )
 }
 
 TextField.propTypes = {

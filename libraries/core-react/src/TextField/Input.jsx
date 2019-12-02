@@ -125,12 +125,25 @@ const Input = styled.input`
 
 `
 
-const TextField = ({ children, multiline, validation, ...other }) => {
+const TextField = ({
+  children,
+  multiline,
+  validation,
+  updateIsFocused,
+  ...other
+}) => {
   const as = multiline ? 'textarea' : 'input'
   const variant = tokens[validation || 'default']
 
   return (
-    <Input as={as} variant={variant} type="text" {...other}>
+    <Input
+      as={as}
+      variant={variant}
+      type="text"
+      onFocus={() => updateIsFocused(true)}
+      onBlur={() => updateIsFocused(false)}
+      {...other}
+    >
       {children}
     </Input>
   )
