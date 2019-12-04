@@ -21,7 +21,7 @@ _Edit the following links to point to relevant information_
 
 **General guidelines**
 
-We support the latests version of evergreen browsers, so use CSS grids where appropriate
+See [COMPONENT_GUIDELINES.md](https://github.com/equinor/design-system/blob/develop/COMPONENT_GUIDELINES.md) for general guidelines like browser support and common implementation details
 
 **Sub tasks**
 
