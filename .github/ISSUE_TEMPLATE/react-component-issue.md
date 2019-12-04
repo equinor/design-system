@@ -21,9 +21,8 @@ _Edit the following links to point to relevant information_
 
 **Sub tasks**
 
-_Edit or delete this section_
+– [ ] Write tests
+- [ ] Create set of tokens (from base tokens)
+- [ ] Create react component
 
-- [ ] Sub task 1
-- [ ] Sub task 2
-
-_Optional footer which might have a pointer to another issue  (see #106)_
+_Optional footer which might have a pointer to another issue  (see #000)_
