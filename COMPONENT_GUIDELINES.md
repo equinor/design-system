@@ -1,3 +1,3 @@
 # General guidelines for React components
 
-- Use CSS grids where appropriate, we only support modern browsers
+- We support the latest version of evergreen browsers, which means you can use CSS grids where appropriate
