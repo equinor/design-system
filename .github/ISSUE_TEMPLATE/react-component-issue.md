@@ -15,9 +15,9 @@ What are the implementation details the developer needs to know about?
 
 _Edit the following links to point to relevant information_
 
-- [The storefront](https://eds.equinor.com/components/navigation-tabs/)
+- [The storefront](https://eds.equinor.com/components/button/)
 - [Figma](https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=256%3A4)
-- [WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel)
+- [WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/#button)
 
 **General guidelines**
 
