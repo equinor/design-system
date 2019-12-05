@@ -1,3 +1,8 @@
 # General guidelines for React components
 
-- We support the latest version of evergreen browsers, which means you can use CSS grids where appropriate
+- Test your component in the latest version of evergreen browsers
+- Use CSS grids for layout where appropriate
+- Write tests in Jest
+- Take time to learn from other design systems
+  - We're heavily inspired by Material Design, so check out Material UI 
+  - When it comes to a11y, check out Reach UI
