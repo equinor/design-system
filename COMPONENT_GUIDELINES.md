@@ -9,4 +9,4 @@
   - [Reach UI](https://reacttraining.com/reach-ui/) (Excellent on a11y)
 - Keep the component as simple as possible
 - Always get in touch with one of the lead developers before you start work on a component
-- Components issues labelled ["storefront"](//github.com/equinor/design-system/issues?q=milestone%3A%22EDS+Core+React%22+label%3Astorefront) have the highest priority
+- Components issues labelled ["storefront"](/equinor/design-system/issues?q=milestone%3A%22EDS+Core+React%22+label%3Astorefront) have the highest priority
