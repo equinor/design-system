@@ -19,29 +19,35 @@
     "dev": "rollup -c -w",
     "test": "jest"
   },
-  "keywords": ["eds", "design system", "react", "equinor"],
+  "keywords": [
+    "eds",
+    "design system",
+    "react",
+    "equinor"
+  ],
   "license": "AGPL",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/preset-react": "^7.0.0",
-    "babel-plugin-styled-components": "^1.10.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.13.0",
-    "jest": "^24.8.0",
-    "jest-environment-enzyme": "^7.0.2",
-    "jest-enzyme": "^7.0.2",
-    "prettier": "^1.17.1",
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "babel-plugin-styled-components": "^1.10.6",
+    "jest": "^24.9.0",
+    "jest-environment-enzyme": "^7.1.2",
+    "jest-enzyme": "^7.1.2",
+    "jest-styled-components": "^6.3.4",
+    "prettier": "^1.19.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "rollup": "^1.11.3",
-    "rollup-plugin-babel": "^4.3.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "rollup": "^1.27.8",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^4.2.3",
-    "styled-components": "^4.2.0"
+    "rollup-plugin-node-resolve": "^4.2.4",
+    "styled-components": "^4.4.1"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
@@ -51,7 +57,9 @@
   },
   "jest": {
     "verbose": true,
-    "setupFilesAfterEnv": ["jest-enzyme"],
+    "setupFilesAfterEnv": [
+      "./rtl.setup.js"
+    ],
     "testEnvironment": "enzyme",
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"
