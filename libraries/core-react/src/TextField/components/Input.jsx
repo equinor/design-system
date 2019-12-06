@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import baseTokens from '@equinor/eds-tokens/base'
-import { typographyTemplate } from '../_common/templates'
+import { typographyTemplate } from '../../_common/templates'
 
 const {
   colors: colors_,
@@ -135,7 +135,7 @@ const Input = styled.input`
 
 `
 
-const TextField = React.forwardRef((props, ref) => {
+const TextFieldInput = React.forwardRef((props, ref) => {
   const {
     children,
     multiline,
@@ -166,7 +166,7 @@ const TextField = React.forwardRef((props, ref) => {
   )
 })
 
-TextField.propTypes = {
+TextFieldInput.propTypes = {
   /** Specifies if text should be bold */
   multiline: PropTypes.bool,
   /** Input label */
@@ -181,11 +181,11 @@ TextField.propTypes = {
   validation: PropTypes.oneOf(['error', 'warning', 'success', '']),
 }
 
-TextField.defaultProps = {
+TextFieldInput.defaultProps = {
   className: '',
   validation: '',
 }
 
-TextField.displayName = 'eds-textfield'
+TextFieldInput.displayName = 'text-field-input'
 
-export default TextField
+export default TextFieldInput

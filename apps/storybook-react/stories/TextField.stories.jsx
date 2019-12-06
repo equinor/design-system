@@ -119,6 +119,7 @@ storiesOf('Components', module).add('TextField', () => {
           placeholder="Only helper text"
           helperText="Only helper text"
         />
+        <TextField id="textfield-norma12" />
       </Wrapper>
     </div>
   )

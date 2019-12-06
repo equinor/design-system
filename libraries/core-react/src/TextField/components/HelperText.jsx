@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import baseTokens from '@equinor/eds-tokens/base'
-import { typographyTemplate } from '../_common/templates'
+import { typographyTemplate } from '../../_common/templates'
 import { TextFieldContext } from './context'
 
 const {
