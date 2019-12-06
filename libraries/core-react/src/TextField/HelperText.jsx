@@ -89,7 +89,7 @@ const Icon = styled.div`
   ${Variation}
 `
 
-const HelperText = (props) => {
+const HelperText = React.forwardRef((props, ref) => {
   const { helperText, icon, validation } = props
   const variant = tokens[validation || 'default']
   const spacings = props.compact
@@ -99,7 +99,7 @@ const HelperText = (props) => {
   return (
     <TextFieldContext.Consumer>
       {(textField) => (
-        <HelperTextBase {...props} spacings={spacings}>
+        <HelperTextBase ref={ref} {...props} spacings={spacings}>
           {icon && <Icon variant={variant}>{icon}</Icon>}
           <Text variant={variant} isFocused={textField.isFocused}>
             {helperText}
@@ -108,7 +108,7 @@ const HelperText = (props) => {
       )}
     </TextFieldContext.Consumer>
   )
-}
+})
 
 HelperText.propTypes = {
   /** @ignore */

@@ -135,14 +135,15 @@ const Input = styled.input`
 
 `
 
-const TextField = ({
-  children,
-  multiline,
-  validation,
-  updateIsFocused,
-  compact,
-  ...other
-}) => {
+const TextField = React.forwardRef((props, ref) => {
+  const {
+    children,
+    multiline,
+    validation,
+    updateIsFocused,
+    compact,
+    ...other
+  } = props
   const as = multiline ? 'textarea' : 'input'
   const variant = tokens[validation || 'default']
   const spacings = compact
@@ -151,6 +152,7 @@ const TextField = ({
 
   return (
     <Input
+      ref={ref}
       as={as}
       variant={variant}
       type="text"
@@ -162,7 +164,7 @@ const TextField = ({
       {children}
     </Input>
   )
-}
+})
 
 TextField.propTypes = {
   /** Specifies if text should be bold */

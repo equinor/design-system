@@ -1,82 +1,78 @@
-import React from 'react'
+import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { default as Input } from './Input'
 import { default as Label } from './Label'
 import { default as HelperText } from './HelperText'
-import { TextFieldContext } from './context'
+import { TextFieldContext, initalState } from './context'
 
 const Container = styled.div`
   min-width: 100px;
   width: 100%;
 `
 
-class TextField extends React.Component {
-  static contextType = TextFieldContext
-  state = {
-    isFocused: false,
+const TextField = React.forwardRef((props, ref) => {
+  const {
+    id,
+    label,
+    meta,
+    helperText,
+    name,
+    placeholder,
+    disabled,
+    style,
+    multiline,
+    className,
+    validation,
+    compact,
+    inputRef,
+    ...other
+  } = props
+
+  const [state, setState] = useState(initalState)
+
+  const inputProps = {
+    multiline,
+    disabled,
+    placeholder,
+    name,
+    id,
+    validation,
+    compact,
+    ref: inputRef,
+    updateIsFocused: (isFocused) => setState({ ...state, isFocused }),
+    ...other,
   }
-  updateIsFocused = (isFocused) => {
-    this.setState({ ...this.state, isFocused })
+
+  const helperProps = {
+    validation,
+    helperText,
+    compact,
   }
-  render = () => {
-    const {
-      id,
-      label,
-      meta,
-      helperText,
-      name,
-      placeholder,
-      disabled,
-      style,
-      multiline,
-      className,
-      validation,
-      compact,
-      ...other
-    } = this.props
 
-    const inputProps = {
-      multiline,
-      disabled,
-      placeholder,
-      name,
-      id,
-      validation,
-      compact,
-      updateIsFocused: this.updateIsFocused,
-      ...other,
-    }
-
-    const helperProps = {
-      validation,
-      helperText,
-      compact,
-    }
-
-    const containerProps = {
-      className,
-      compact,
-    }
-
-    const labelProps = {
-      inputId: id,
-      label,
-      meta,
-      compact,
-    }
-
-    return (
-      <Container {...containerProps}>
-        <TextFieldContext.Provider value={this.state}>
-          <Label {...labelProps}></Label>
-          <Input {...inputProps}></Input>
-          <HelperText {...helperProps}></HelperText>
-        </TextFieldContext.Provider>
-      </Container>
-    )
+  const containerProps = {
+    ref,
+    className,
+    compact,
   }
-}
+
+  const labelProps = {
+    inputId: id,
+    label,
+    meta,
+    compact,
+  }
+
+  return (
+    <Container {...containerProps}>
+      <TextFieldContext.Provider value={state}>
+        {(label || meta) && <Label {...labelProps}></Label>}
+        <Input {...inputProps}></Input>
+        {helperText && <HelperText {...helperProps}></HelperText>}
+      </TextFieldContext.Provider>
+    </Container>
+  )
+})
 
 TextField.propTypes = {
   /** @ignore */
@@ -95,6 +91,8 @@ TextField.propTypes = {
   disabled: PropTypes.bool,
   /** Multiline input */
   multiline: PropTypes.bool,
+  /** Input ref */
+  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 }
 
 TextField.defaultProps = {

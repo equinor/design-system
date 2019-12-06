@@ -105,6 +105,20 @@ storiesOf('Components', module).add('TextField', () => {
           helperText="Helper Text"
           compact
         />
+        <TextField
+          id="storybook-textfield10"
+          placeholder="only meta"
+          meta="Meta"
+        />
+        <TextField
+          id="storybook-textfield11"
+          placeholder="no helper/label/meta text"
+        />
+        <TextField
+          id="storybook-textfield12"
+          placeholder="Only helper text"
+          helperText="Only helper text"
+        />
       </Wrapper>
     </div>
   )

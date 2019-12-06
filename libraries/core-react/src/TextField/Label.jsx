@@ -37,16 +37,16 @@ const LabelBase = styled.label`
 
 const Text = styled.div``
 
-const Label = (props) => {
+const Label = React.forwardRef((props, ref) => {
   const { label, meta, inputId } = props
 
   return (
-    <LabelBase htmlFor={inputId}>
+    <LabelBase ref={ref} htmlFor={inputId}>
       <Text>{label}</Text>
       <Text>{meta}</Text>
     </LabelBase>
   )
-}
+})
 
 Label.propTypes = {
   /** @ignore */
