@@ -17,7 +17,8 @@
     "lint": "eslint ./src/**/*.{jsx,js}",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "eds",
@@ -57,11 +58,7 @@
     "verbose": true,
     "setupFilesAfterEnv": [
       "./rtl.setup.js"
-    ],
-    "testEnvironment": "enzyme",
-    "testEnvironmentOptions": {
-      "enzymeAdapter": "react16"
-    }
+    ]
   },
   "dependencies": {
     "@equinor/eds-tokens": "^0.0.1-alpha.4"
