@@ -37,7 +37,7 @@ const LabelBase = styled.label`
 
 const Text = styled.div``
 
-const Label = React.forwardRef((props, ref) => {
+const Label = React.forwardRef(function TextFieldLabel(props, ref) {
   const { label, meta, inputId } = props
 
   return (
@@ -67,4 +67,4 @@ Label.defaultProps = {
 
 Label.displayName = 'text-field-label'
 
-export default Label
+export { Label }

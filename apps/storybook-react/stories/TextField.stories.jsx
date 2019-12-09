@@ -11,6 +11,16 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(2, fit-content(100%));
 `
 
+const Icon = (
+  <svg viewBox="0 0 24 24" width="16px" height="16px">
+    <path
+      clipRule="evenodd"
+      fillRule="evenodd"
+      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z"
+    ></path>
+  </svg>
+)
+
 storiesOf('Components', module).add('TextField', () => {
   return (
     <div className="container">
@@ -24,6 +34,14 @@ storiesOf('Components', module).add('TextField', () => {
           label="Default"
           meta="Meta"
           helperText="Helper Text"
+        />
+        <TextField
+          id="textfield-normal"
+          placeholder="Placeholder text"
+          label="With Icon"
+          meta="Meta"
+          helperText="Helper Text"
+          inputIcon={Icon}
         />
         <TextField
           type="search"
@@ -79,7 +97,7 @@ storiesOf('Components', module).add('TextField', () => {
           label="Error"
           meta="Meta"
           helperText="Helper Text"
-          validation="error"
+          variant="error"
         />
         <TextField
           id="storybook-textfield6"
@@ -87,7 +105,7 @@ storiesOf('Components', module).add('TextField', () => {
           label="Warning"
           meta="Meta"
           helperText="Helper Text"
-          validation="warning"
+          variant="warning"
         />
         <TextField
           id="storybook-textfield7"
@@ -95,7 +113,7 @@ storiesOf('Components', module).add('TextField', () => {
           label="Success"
           meta="Meta"
           helperText="Helper Text"
-          validation="success"
+          variant="success"
         />
         <TextField
           id="storybook-textfield8"

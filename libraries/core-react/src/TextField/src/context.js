@@ -5,3 +5,7 @@ export const initalState = {
 }
 
 export const TextFieldContext = React.createContext(initalState)
+
+export const propsFor = {
+  variants: ['error', 'warning', 'success', 'default'],
+}

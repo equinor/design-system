@@ -1,17 +1,17 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { default as Input } from './components/Input'
-import { default as Label } from './components/Label'
-import { default as HelperText } from './components/HelperText'
-import { TextFieldContext, initalState } from './components/context'
+import { TextFieldInput } from './src/Input'
+import { Label } from './src/Label'
+import { HelperText } from './src/HelperText'
+import { TextFieldContext, initalState, propsFor } from './src/context'
 
 const Container = styled.div`
   min-width: 100px;
   width: 100%;
 `
 
-const TextField = React.forwardRef((props, ref) => {
+const TextField = React.forwardRef(function TextField(props, ref) {
   const {
     id,
     label,
@@ -23,9 +23,11 @@ const TextField = React.forwardRef((props, ref) => {
     style,
     multiline,
     className,
-    validation,
+    variant,
     compact,
     inputRef,
+    inputIcon,
+    helperIcon,
     ...other
   } = props
 
@@ -37,17 +39,19 @@ const TextField = React.forwardRef((props, ref) => {
     placeholder,
     name,
     id,
-    validation,
+    variant,
     compact,
     ref: inputRef,
     updateIsFocused: (isFocused) => setState({ ...state, isFocused }),
+    inputIcon,
     ...other,
   }
 
   const helperProps = {
-    validation,
+    variant,
     helperText,
     compact,
+    helperIcon,
   }
 
   const containerProps = {
@@ -63,12 +67,15 @@ const TextField = React.forwardRef((props, ref) => {
     compact,
   }
 
+  const showLabel = label || meta
+  const showHelperText = helperText
+
   return (
     <Container {...containerProps}>
       <TextFieldContext.Provider value={state}>
-        {(label || meta) && <Label {...labelProps}></Label>}
-        <Input {...inputProps}></Input>
-        {helperText && <HelperText {...helperProps}></HelperText>}
+        {showLabel && <Label {...labelProps}></Label>}
+        <TextFieldInput {...inputProps}></TextFieldInput>
+        {showHelperText && <HelperText {...helperProps}></HelperText>}
       </TextFieldContext.Provider>
     </Container>
   )
@@ -77,6 +84,8 @@ const TextField = React.forwardRef((props, ref) => {
 TextField.propTypes = {
   /** @ignore */
   className: PropTypes.string,
+  /** Variant */
+  variant: PropTypes.oneOf(propsFor.variants),
   /** Input unique id */
   id: PropTypes.string.isRequired,
   /** Label text */
@@ -93,6 +102,10 @@ TextField.propTypes = {
   multiline: PropTypes.bool,
   /** Input ref */
   inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /** InputIcon */
+  inputIcon: PropTypes.element,
+  /** HelperIcon */
+  helperIcon: PropTypes.element,
 }
 
 TextField.defaultProps = {
@@ -102,7 +115,8 @@ TextField.defaultProps = {
   label: '',
   meta: '',
   disabled: false,
+  variant: 'default',
 }
 TextField.displayName = 'text-field'
 
-export default TextField
+export { TextField }

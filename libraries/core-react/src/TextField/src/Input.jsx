@@ -12,16 +12,32 @@ const {
 
 const spacings = {
   comfortable: {
-    left: spacings_.comfortable.small,
-    right: spacings_.comfortable.small,
-    top: '6px',
-    bottom: '6px',
+    input: {
+      left: spacings_.comfortable.small,
+      right: spacings_.comfortable.small,
+      top: '6px',
+      bottom: '6px',
+    },
+    icon: {
+      left: spacings_.comfortable.small,
+      right: spacings_.comfortable.small,
+      top: '10px',
+      bottom: '10px',
+    },
   },
   compact: {
-    left: spacings_.comfortable.x_small,
-    right: spacings_.comfortable.x_small,
-    top: spacings_.comfortable.x_small,
-    bottom: spacings_.comfortable.x_small,
+    input: {
+      left: spacings_.comfortable.x_small,
+      right: spacings_.comfortable.x_small,
+      top: spacings_.comfortable.x_small,
+      bottom: spacings_.comfortable.x_small,
+    },
+    icon: {
+      left: spacings_.comfortable.small,
+      right: spacings_.comfortable.small,
+      top: '10px',
+      bottom: '10px',
+    },
   },
 }
 
@@ -112,7 +128,6 @@ const Variation = ({ variant }) => {
       outline: none;
     }
   }
-
 `
 }
 
@@ -121,6 +136,9 @@ const Input = styled.input`
   box-sizing: border-box;
   margin: 0;
   border: none;
+
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
 
   background: ${tokens.background};
   padding-left: ${({ spacings }) => spacings.left};
@@ -132,37 +150,51 @@ const Input = styled.input`
   color: ${tokens.color};
 
   ${Variation}
-
 `
 
-const TextFieldInput = React.forwardRef((props, ref) => {
+const Container = styled.div`
+  position: relative;
+`
+
+const Icon = styled.div`
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: ${({ spacings }) => spacings.right};
+  top: ${({ spacings }) => spacings.top};
+  bottom: ${({ spacings }) => spacings.bottom};
+`
+
+const TextFieldInput = React.forwardRef(function TextFieldInput(props, ref) {
   const {
     children,
     multiline,
-    validation,
+    variant,
     updateIsFocused,
     compact,
+    inputIcon,
     ...other
   } = props
   const as = multiline ? 'textarea' : 'input'
-  const variant = tokens[validation || 'default']
+  const variant_ = tokens[variant]
   const spacings = compact
     ? tokens.spacings.compact
     : tokens.spacings.comfortable
 
   return (
-    <Input
-      ref={ref}
-      as={as}
-      variant={variant}
-      type="text"
-      onFocus={() => updateIsFocused(true)}
-      onBlur={() => updateIsFocused(false)}
-      spacings={spacings}
-      {...other}
-    >
-      {children}
-    </Input>
+    <Container>
+      <Input
+        as={as}
+        onBlur={() => updateIsFocused(false)}
+        onFocus={() => updateIsFocused(true)}
+        ref={ref}
+        spacings={spacings.input}
+        type="text"
+        variant={variant_}
+        {...other}
+      ></Input>
+      <Icon spacings={spacings.icon}>{inputIcon}</Icon>
+    </Container>
   )
 })
 
@@ -177,15 +209,12 @@ TextFieldInput.propTypes = {
   type: PropTypes.oneOf(['text', 'search', 'password', 'email', 'numbers']),
   /** Multiline input */
   multiline: PropTypes.bool,
-  /** Validation state */
-  validation: PropTypes.oneOf(['error', 'warning', 'success', '']),
 }
 
 TextFieldInput.defaultProps = {
   className: '',
-  validation: '',
 }
 
 TextFieldInput.displayName = 'text-field-input'
 
-export default TextFieldInput
+export { TextFieldInput }
