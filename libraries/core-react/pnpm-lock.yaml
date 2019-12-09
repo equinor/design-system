@@ -857,10 +857,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-kBa+cDHOR9jpRJ+kcGMsysrls0leukrm68DmFQoMIWQcXdr2cZvyvypWuGYT7U+9kAExUE7+T7r6G3C3A6L8MQ==
-  /@equinor/eds-tokens/0.0.1-alpha.4:
-    dev: false
-    resolution:
-      integrity: sha512-1NNxwArxauit+yUy7mmf+ivFSCpA/D9b5t/G7s9tw5vIn6KzGzxnFcKDBZmP1IVtQDCiojBMvIyjO+divlEldA==
   /@jest/console/24.9.0:
     dependencies:
       '@jest/source-map': 24.9.0
@@ -4760,7 +4756,7 @@ packages:
 specifiers:
   '@babel/cli': ^7.7.5
   '@babel/core': ^7.7.5
-  '@babel/preset-env': ^7.7.5
+  '@babel/preset-env': ^7.7.6
   '@babel/preset-react': ^7.7.4
   '@equinor/eds-tokens': ^0.0.1-alpha.4
   '@testing-library/jest-dom': ^4.2.4
@@ -4772,7 +4768,7 @@ specifiers:
   prop-types: ^15.7.2
   react: ^16.12.0
   react-dom: ^16.12.0
-  rollup: ^1.27.8
+  rollup: ^1.27.9
   rollup-plugin-babel: ^4.3.3
   rollup-plugin-commonjs: ^9.3.4
   rollup-plugin-json: ^4.0.0
