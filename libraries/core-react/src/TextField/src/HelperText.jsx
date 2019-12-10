@@ -31,36 +31,48 @@ const tokens = {
   spacings,
   default: {
     color: colors_.text.static_icons__tertiary.hex,
+    disabledColor: colors_.interactive.disabled__text.hex,
     focus: {
       color: colors_.text.static_icons__tertiary.hex,
     },
   },
   error: {
     color: colors_.interactive.danger__resting.hex,
+    disabledColor: colors_.interactive.disabled__text.hex,
     focus: {
       color: colors_.interactive.danger__hover.hex,
     },
   },
   warning: {
     color: colors_.interactive.warning__resting.hex,
+    disabledColor: colors_.interactive.disabled__text.hex,
     focus: {
       color: colors_.interactive.warning__hover.hex,
     },
   },
   success: {
     color: colors_.interactive.success__resting.hex,
+    disabledColor: colors_.interactive.disabled__text.hex,
     focus: {
       color: colors_.interactive.success__hover.hex,
     },
   },
 }
 
-const Variation = ({ variant, isFocused }) => {
+const Variation = ({ variant, isFocused, isDisabled }) => {
   if (!variant) {
     return ``
   }
 
-  const { focus, color } = variant
+  const { focus, color, disabledColor } = variant
+
+  if (isDisabled) {
+    return `
+    color: ${disabledColor};
+    fill: ${disabledColor};
+    `
+  }
+
   if (isFocused) {
     return `
     color: ${focus.color};
@@ -74,23 +86,29 @@ const Variation = ({ variant, isFocused }) => {
 `
 }
 
-const HelperTextBase = styled.div`
+const Container = styled.div`
+  display: flex;
+  align-items: flex-end;
+
   margin-left: ${({ spacings }) => spacings.left};
   margin-top: ${({ spacings }) => spacings.top};
 `
-const Text = styled.div`
+const Text = styled.p`
+  margin: 0;
   ${typographyTemplate(tokens.typography)}
   ${Variation}
 `
 
 const Icon = styled.div`
+  margin-right: ${({ spacings }) => spacings.left};
+
   height: 16px;
   width: 16px;
   ${Variation}
 `
 
 const HelperText = React.forwardRef(function TextFieldHelperText(props, ref) {
-  const { helperText, icon, variant } = props
+  const { helperText, icon, variant, disabled: isDisabled } = props
   const variant_ = tokens[variant]
   const spacings = props.compact
     ? tokens.spacings.compact
@@ -99,12 +117,25 @@ const HelperText = React.forwardRef(function TextFieldHelperText(props, ref) {
   return (
     <TextFieldContext.Consumer>
       {(textField) => (
-        <HelperTextBase ref={ref} {...props} spacings={spacings}>
-          {icon && <Icon variant={variant_}>{icon}</Icon>}
-          <Text variant={variant_} isFocused={textField.isFocused}>
+        <Container ref={ref} {...props} spacings={spacings}>
+          {icon && (
+            <Icon
+              variant={variant_}
+              isFocused={textField.isFocused}
+              isDisabled={isDisabled}
+              spacings={spacings}
+            >
+              {icon}
+            </Icon>
+          )}
+          <Text
+            variant={variant_}
+            isFocused={textField.isFocused}
+            isDisabled={isDisabled}
+          >
             {helperText}
           </Text>
-        </HelperTextBase>
+        </Container>
       )}
     </TextFieldContext.Consumer>
   )

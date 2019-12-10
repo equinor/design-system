@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import baseTokens from '@equinor/eds-tokens/base'
 import { typographyTemplate } from '../../_common/templates'
+import { TextFieldContext } from './context'
 
 const {
   colors: colors_,
@@ -48,11 +49,18 @@ const tokens = {
   spacings,
   default: {
     borderBottom: colors_.text.static_icons__tertiary.hex,
+    icon: {
+      color: colors_.text.static_icons__tertiary.hex,
+      disabledColor: colors_.interactive.disabled__fill.hex,
+    },
     border: {
       color: 'transparent',
       width: '1px',
     },
     focus: {
+      icon: {
+        color: colors_.interactive.primary__resting.hex,
+      },
       border: {
         width: '2px',
         color: colors_.interactive.primary__resting.hex,
@@ -61,11 +69,18 @@ const tokens = {
   },
   error: {
     borderBottom: 'transparent',
+    icon: {
+      color: colors_.interactive.danger__resting.hex,
+      disabledColor: colors_.interactive.disabled__fill.hex,
+    },
     border: {
       color: colors_.interactive.danger__resting.hex,
       width: '1px',
     },
     focus: {
+      icon: {
+        color: colors_.interactive.danger__hover.hex,
+      },
       border: {
         width: '2px',
         color: colors_.interactive.danger__hover.hex,
@@ -74,11 +89,18 @@ const tokens = {
   },
   warning: {
     borderBottom: 'transparent',
+    icon: {
+      color: colors_.interactive.warning__resting.hex,
+      disabledColor: colors_.interactive.disabled__fill.hex,
+    },
     border: {
       color: colors_.interactive.warning__resting.hex,
       width: '1px',
     },
     focus: {
+      icon: {
+        color: colors_.interactive.warning__hover.hex,
+      },
       border: {
         width: '2px',
         color: colors_.interactive.warning__hover.hex,
@@ -87,11 +109,18 @@ const tokens = {
   },
   success: {
     borderBottom: 'transparent',
+    icon: {
+      color: colors_.interactive.success__resting.hex,
+      disabledColor: colors_.interactive.disabled__fill.hex,
+    },
     border: {
       color: colors_.interactive.success__resting.hex,
       width: '1px',
     },
     focus: {
+      icon: {
+        color: colors_.interactive.success__hover.hex,
+      },
       border: {
         width: '2px',
         color: colors_.interactive.success__hover.hex,
@@ -122,12 +151,36 @@ const Variation = ({ variant }) => {
   &:disabled {
     cursor: not-allowed;
     border-bottom: 1px solid transparent;
+    outline: none;
 
     &:focus,
     &:active {
       outline: none;
     }
   }
+`
+}
+
+const IconVariation = ({ variant, isDisabled, isFocused }) => {
+  if (!variant) {
+    return ``
+  }
+
+  const { icon, focus } = variant
+
+  if (isDisabled) {
+    return `
+    fill: ${icon.disabledColor};
+    `
+  }
+
+  if (isFocused) {
+    return `
+    fill: ${focus.icon.color};
+    `
+  }
+  return `
+  fill: ${icon.color};
 `
 }
 
@@ -163,6 +216,8 @@ const Icon = styled.div`
   right: ${({ spacings }) => spacings.right};
   top: ${({ spacings }) => spacings.top};
   bottom: ${({ spacings }) => spacings.bottom};
+
+  ${IconVariation}
 `
 
 const TextFieldInput = React.forwardRef(function TextFieldInput(props, ref) {
@@ -173,28 +228,52 @@ const TextFieldInput = React.forwardRef(function TextFieldInput(props, ref) {
     updateIsFocused,
     compact,
     inputIcon,
+    disabled,
     ...other
   } = props
+
   const as = multiline ? 'textarea' : 'input'
   const variant_ = tokens[variant]
-  const spacings = compact
-    ? tokens.spacings.compact
-    : tokens.spacings.comfortable
+  let spacings = compact ? tokens.spacings.compact : tokens.spacings.comfortable
+
+  if (inputIcon) {
+    spacings = {
+      ...spacings,
+      input: {
+        ...spacings.input,
+        right: spacings_.comfortable.x_large,
+      },
+    }
+  }
 
   return (
-    <Container>
-      <Input
-        as={as}
-        onBlur={() => updateIsFocused(false)}
-        onFocus={() => updateIsFocused(true)}
-        ref={ref}
-        spacings={spacings.input}
-        type="text"
-        variant={variant_}
-        {...other}
-      ></Input>
-      <Icon spacings={spacings.icon}>{inputIcon}</Icon>
-    </Container>
+    <TextFieldContext.Consumer>
+      {(textField) => (
+        <Container>
+          <Input
+            as={as}
+            onBlur={() => updateIsFocused(false)}
+            onFocus={() => updateIsFocused(true)}
+            ref={ref}
+            spacings={spacings.input}
+            type="text"
+            variant={variant_}
+            disabled={disabled}
+            {...other}
+          ></Input>
+          {inputIcon && (
+            <Icon
+              spacings={spacings.icon}
+              variant={variant_}
+              isDisabled={disabled}
+              isFocused={textField.isFocused}
+            >
+              {inputIcon}
+            </Icon>
+          )}
+        </Container>
+      )}
+    </TextFieldContext.Consumer>
   )
 })
 
@@ -206,7 +285,7 @@ TextFieldInput.propTypes = {
   /** Placeholder */
   placeholder: PropTypes.string,
   /** Specifiec which type input is */
-  type: PropTypes.oneOf(['text', 'search', 'password', 'email', 'numbers']),
+  type: PropTypes.oneOf(['text', 'search', 'password', 'email', 'number']),
   /** Multiline input */
   multiline: PropTypes.bool,
 }

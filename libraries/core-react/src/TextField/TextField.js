@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { TextFieldInput } from './src/Input'
@@ -51,7 +51,8 @@ const TextField = React.forwardRef(function TextField(props, ref) {
     variant,
     helperText,
     compact,
-    helperIcon,
+    icon: helperIcon,
+    disabled,
   }
 
   const containerProps = {
