@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { TextFieldInput } from './src/Input'
-import { Label } from './src/Label'
-import { HelperText } from './src/HelperText'
-import { TextFieldContext, initalState, propsFor } from './src/context'
+import { Input } from './Input'
+import { Label } from './Label'
+import { HelperText } from './HelperText'
+import { TextFieldContext, initalState, propsFor } from './context'
 
 const Container = styled.div`
   min-width: 100px;
@@ -74,9 +74,17 @@ const TextField = React.forwardRef(function TextField(props, ref) {
   return (
     <Container {...containerProps}>
       <TextFieldContext.Provider value={state}>
-        {showLabel && <Label {...labelProps}></Label>}
-        <TextFieldInput {...inputProps}></TextFieldInput>
-        {showHelperText && <HelperText {...helperProps}></HelperText>}
+        <TextFieldContext.Consumer>
+          {(textField) => (
+            <Fragment>
+              {showLabel && <Label {...labelProps} />}
+              <Input {...inputProps} textField={textField} />
+              {showHelperText && (
+                <HelperText {...helperProps} textField={textField} />
+              )}
+            </Fragment>
+          )}
+        </TextFieldContext.Consumer>
       </TextFieldContext.Provider>
     </Container>
   )
