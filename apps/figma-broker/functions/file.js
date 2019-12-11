@@ -1,5 +1,6 @@
 import fs from 'fs'
 import del from 'del'
+import util from 'util'
 import fetch from 'node-fetch'
 import { createFolder } from './folder'
 
@@ -62,14 +63,29 @@ export const readTokens = (path) =>
   }))
 
 export const writeResults = (results, savePath, extension = 'json') =>
-  results.forEach(({ value, name, path = '' }) =>
-    writeFile(
-      extension === 'json' ? `${JSON.stringify(value, null, 2)}\n` : value,
-      `${savePath}/${path}`,
-      name,
-      extension,
-    ),
-  )
+  results.forEach(({ value, name, path = '' }) => {
+    if (extension === 'js') {
+      writeFile(
+        `export const ${name} = ${util.inspect(value)}\n`,
+        `${savePath}/${path}`,
+        name,
+        extension,
+      )
+      return
+    }
+
+    if (extension === 'json') {
+      writeFile(
+        `${JSON.stringify(value, null, 2)}\n`,
+        `${savePath}/${path}`,
+        name,
+        extension,
+      )
+      return
+    }
+
+    writeFile(value, `${savePath}/${path}`, name, extension)
+  })
 
 export const writeResultsIndividually = (
   results,
