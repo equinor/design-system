@@ -9,7 +9,7 @@ const removeForbiddenCharacters = (str) => {
   throw new Error('No string for formatName()!')
 }
 
-export const formatName = (str) =>
+export const formatName = (str = '') =>
   removeForbiddenCharacters(str)
     .toLowerCase()
     .trim()
@@ -17,13 +17,13 @@ export const formatName = (str) =>
     .replace(/[/]/g, '--')
     .replace('___', '--')
 
-export const fixPageName = (name) =>
+export const fixPageName = (name = '') =>
   name
     .replace(/(🚧*)(✅*)/, '')
     .toLowerCase()
     .trim()
 
-export const propName = (str) =>
+export const propName = (str = '') =>
   removeForbiddenCharacters(str)
     .toLowerCase()
     .trim()
@@ -31,7 +31,7 @@ export const propName = (str) =>
     .replace(/[/]/g, '__')
     .replace('___', '__')
 
-export const pathName = (str) =>
+export const pathName = (str = '') =>
   propName(str)
     .replace('__', '-')
     .replace('_', '-')

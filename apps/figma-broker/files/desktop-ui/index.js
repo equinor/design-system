@@ -1,6 +1,7 @@
 import { fixPageName } from '@utils'
 import { makeButtonsComponent } from './buttons'
 import { makeTablesComponent } from './tables'
+import { makeTextfieldsComponent } from './textfields'
 
 export const makeDesktopComponents = (figmaFile) => {
   const components = []
@@ -44,6 +45,13 @@ export const makeDesktopComponents = (figmaFile) => {
           name: 'table',
           value: makeTablesComponent(data, getStyle),
           path: 'table',
+        })
+        break
+      case 'text fields':
+        components.push({
+          name: 'text-fields',
+          value: makeTextfieldsComponent(data, getStyle),
+          path: 'text-fields',
         })
         break
       default:

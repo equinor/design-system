@@ -127,6 +127,8 @@ const badgeBgColors = {
   underConstruction: '#ffe7d6',
   new: '#007079',
   available: '#e6faec',
+  alpha: '#D5EAF4',
+  beta: '#A8CED1',
 }
 
 const Badges = styled.div`
