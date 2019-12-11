@@ -92,7 +92,7 @@ storiesOf('Components', module).add('TextField', () => {
           helperText="Helper Text"
         />
         <TextField
-          type="numbers"
+          type="number"
           id="textfield-numbers"
           placeholder="Placeholder text"
           label="Numbers"
