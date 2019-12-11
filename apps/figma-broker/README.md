@@ -63,3 +63,9 @@ Figma provides typography in pixel and percent values. Figma broker converts typ
 export const rootFontSize = 16
 ```
 
+## Usage
+
+Add an .env file in the root of the app with environment variables. Ask a developer in EDS Core for more information about this. 
+
+Start the application with `pnpm start`
+
