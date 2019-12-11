@@ -1,3 +1,5 @@
+// Use with plugin: https://marketplace.visualstudio.com/items?itemName=wk-j.vscode-httpie
+
 // Generates design tokens from Figma
 http POST http://localhost:9001/tokens
 
