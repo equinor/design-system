@@ -2,6 +2,7 @@ import fs from 'fs'
 import del from 'del'
 import util from 'util'
 import fetch from 'node-fetch'
+import * as R from 'ramda'
 import { createFolder } from './folder'
 
 const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`
@@ -32,7 +33,7 @@ export const writeFileStream = (url, path, name, ext) => {
     )
   }
 }
-export const writeFile = (file, path, name, ext) => {
+export const writeFile = (path, name, ext, file) => {
   if (file && path && name) {
     createFolder(path)
     write(file, path, name, ext)
@@ -40,6 +41,8 @@ export const writeFile = (file, path, name, ext) => {
     throw new Error('Missing required parameters to correctly run writeFile()!')
   }
 }
+
+export const curriedWriteFile = R.curry(writeFile)
 
 export const readFile = (path, name, ext, callback) => {
   fs.readFile(getFilePath(path, name, ext), (err, data) => {
@@ -64,27 +67,26 @@ export const readTokens = (path) =>
 
 export const writeResults = (results, savePath, extension = 'json') =>
   results.forEach(({ value, name, path = '' }) => {
-    if (extension === 'js') {
-      writeFile(
-        `export const ${name} = ${util.inspect(value)}\n`,
-        `${savePath}/${path}`,
-        name,
-        extension,
-      )
-      return
-    }
+    const writeFileToDisk = curriedWriteFile(
+      `${savePath}/${path}`,
+      name,
+      extension,
+    )
 
-    if (extension === 'json') {
-      writeFile(
-        `${JSON.stringify(value, null, 2)}\n`,
-        `${savePath}/${path}`,
-        name,
-        extension,
-      )
-      return
-    }
+    switch (extension) {
+      case 'js':
+        writeFileToDisk(
+          `export const ${name} = ${util.inspect(value, false, null)}\n`,
+        )
+        break
 
-    writeFile(value, `${savePath}/${path}`, name, extension)
+      case 'json':
+        writeFileToDisk(`${JSON.stringify(value, null, 2)}\n`)
+        break
+
+      default:
+        writeFileToDisk(value)
+    }
   })
 
 export const writeResultsIndividually = (

@@ -78,7 +78,7 @@ async function createTokens(ctx) {
     const figmaFile = processFigmaFile(data)
     const tokens = makeTokens(figmaFile)
 
-    writeResults(tokens, PATHS.TOKENS)
+    writeResults(tokens, PATHS.TOKENS, 'js')
 
     ctx.response.body = JSON.stringify(tokens)
   } catch (err) {
@@ -328,10 +328,7 @@ async function fetchFigmaImages(ctx) {
     }),
   )
 
-  const images = R.pipe(
-    R.values,
-    R.flatten,
-  )(imagesWithUrls)
+  const images = R.pipe(R.values, R.flatten)(imagesWithUrls)
 
   // Wait for Figma to start endpoints
   await sleep(2000)
