@@ -9,6 +9,7 @@ import SVGO from 'svgo'
 import childProcess from 'child_process'
 import * as R from 'ramda'
 import util from 'util'
+import prettier from 'prettier'
 
 import {
   fetchFigmaFile,
@@ -79,6 +80,33 @@ async function createTokens(ctx) {
     const tokens = makeTokens(figmaFile)
 
     writeResults(tokens, PATHS.TOKENS, 'js')
+
+    const baseIndexContent = `${tokens
+      .map((token) => `import { ${token.name} } from './${token.name}'`)
+      .join('\n')}
+
+    export const baseTokens = {
+      ${tokens.map((token) => token.name).join(',\n')}
+    }
+    `
+    writeFile(
+      `${TOKENS_DIR}/base`,
+      'index',
+      'js',
+      prettier.format(baseIndexContent, {
+        semi: false,
+        trailingComma: true,
+        singleQuote: true,
+      }),
+    )
+
+    // Disabled – shouldn’t really be done here…
+    // writeFile(
+    //   `${TOKENS_DIR}`,
+    //   'index',
+    //   'js',
+    //   `export { baseTokens } from './base'`,
+    // )
 
     ctx.response.body = JSON.stringify(tokens)
   } catch (err) {
