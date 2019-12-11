@@ -65,7 +65,7 @@ export const rootFontSize = 16
 
 ## Usage
 
-Add an .env file in the root of the app with environment variables. Ask a developer in EDS Core for more information about this. 
-
-Start the application with `pnpm start`
+1. Add an .env file in the root of the app with environment variables. Ask a developer in EDS Core for more information about this. 
+1. Start the application with `pnpm start`
+1. Run commands from Commands.httpie by clicking the lines prefixed with ⚡ (requires the httpie vs code extension and a locally installed version of httpie)
 
