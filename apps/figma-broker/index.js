@@ -9,6 +9,7 @@ import SVGO from 'svgo'
 import childProcess from 'child_process'
 import * as R from 'ramda'
 import util from 'util'
+import prettier from 'prettier'
 
 import {
   fetchFigmaFile,
@@ -44,7 +45,7 @@ const ICONS_DIR = '../../libraries/icons'
 const STOREFRONT_DIR = '../storefront'
 
 const PATHS = {
-  TOKENS: `${TOKENS_DIR}/base`,
+  BASE_TOKENS: `${TOKENS_DIR}/base`,
   ASSETS_ICONS: `${STATIC_DIR}/icons`,
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
@@ -78,7 +79,29 @@ async function createTokens(ctx) {
     const figmaFile = processFigmaFile(data)
     const tokens = makeTokens(figmaFile)
 
-    writeResults(tokens, PATHS.TOKENS)
+    writeResults(tokens, PATHS.BASE_TOKENS, 'js')
+
+    const baseIndexContent = `${tokens
+      .map((token) => `import { ${token.name} } from './${token.name}'`)
+      .join('\n')}
+
+    export const tokens = {
+      ${tokens.map((token) => token.name).join(',\n')}
+    }
+    `
+    writeFile(
+      PATHS.BASE_TOKENS,
+      'index',
+      'js',
+      prettier.format(baseIndexContent, {
+        semi: false,
+        trailingComma: true,
+        singleQuote: true,
+      }),
+    )
+
+    // Disabled – shouldn’t really be done here…
+    // writeFile(`${TOKENS_DIR}`, 'index', 'js', `export { tokens } from './base'`)
 
     ctx.response.body = JSON.stringify(tokens)
   } catch (err) {
@@ -239,7 +262,7 @@ async function createAssets(ctx) {
 // Transform tokens
 
 async function transformTokens(ctx) {
-  const tokens = readTokens(PATHS.TOKENS)
+  const tokens = readTokens(PATHS.BASE_TOKENS)
   const transformed = convert(tokens)
   transformed.forEach((token) => {
     writeFile(token.sassString, PATHS.SASS, `_${token.name}`, 'scss')
@@ -328,10 +351,7 @@ async function fetchFigmaImages(ctx) {
     }),
   )
 
-  const images = R.pipe(
-    R.values,
-    R.flatten,
-  )(imagesWithUrls)
+  const images = R.pipe(R.values, R.flatten)(imagesWithUrls)
 
   // Wait for Figma to start endpoints
   await sleep(2000)

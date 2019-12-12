@@ -1,13 +1,15 @@
-import { default as colors } from './colors'
-import { default as spacings } from './spacings'
-import { default as shape } from './shape'
-import { default as clickbounds } from './clickbounds'
-import { default as typography } from './typography'
+import { clickbounds } from './clickbounds'
+import { colors } from './colors'
+import { elevation } from './elevation'
+import { shape } from './shape'
+import { spacings } from './spacings'
+import { typography } from './typography'
 
-export default {
-  colors,
-  spacings,
-  shape,
+export const tokens = {
   clickbounds,
+  colors,
+  elevation,
+  shape,
+  spacings,
   typography,
 }
