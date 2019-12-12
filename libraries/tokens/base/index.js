@@ -5,7 +5,7 @@ import { shape } from './shape'
 import { spacings } from './spacings'
 import { typography } from './typography'
 
-export const baseTokens = {
+export const tokens = {
   clickbounds,
   colors,
   elevation,

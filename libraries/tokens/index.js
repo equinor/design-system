@@ -1,1 +1,1 @@
-export { baseTokens } from './base'
+export { tokens } from './base'

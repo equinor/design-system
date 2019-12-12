@@ -85,7 +85,7 @@ async function createTokens(ctx) {
       .map((token) => `import { ${token.name} } from './${token.name}'`)
       .join('\n')}
 
-    export const baseTokens = {
+    export const tokens = {
       ${tokens.map((token) => token.name).join(',\n')}
     }
     `
@@ -101,12 +101,7 @@ async function createTokens(ctx) {
     )
 
     // Disabled – shouldn’t really be done here…
-    // writeFile(
-    //   `${TOKENS_DIR}`,
-    //   'index',
-    //   'js',
-    //   `export { baseTokens } from './base'`,
-    // )
+    // writeFile(`${TOKENS_DIR}`, 'index', 'js', `export { tokens } from './base'`)
 
     ctx.response.body = JSON.stringify(tokens)
   } catch (err) {
