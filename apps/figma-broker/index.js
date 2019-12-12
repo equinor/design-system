@@ -45,7 +45,7 @@ const ICONS_DIR = '../../libraries/icons'
 const STOREFRONT_DIR = '../storefront'
 
 const PATHS = {
-  TOKENS: `${TOKENS_DIR}/base`,
+  BASE_TOKENS: `${TOKENS_DIR}/base`,
   ASSETS_ICONS: `${STATIC_DIR}/icons`,
   COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
@@ -79,7 +79,7 @@ async function createTokens(ctx) {
     const figmaFile = processFigmaFile(data)
     const tokens = makeTokens(figmaFile)
 
-    writeResults(tokens, PATHS.TOKENS, 'js')
+    writeResults(tokens, PATHS.BASE_TOKENS, 'js')
 
     const baseIndexContent = `${tokens
       .map((token) => `import { ${token.name} } from './${token.name}'`)
@@ -90,7 +90,7 @@ async function createTokens(ctx) {
     }
     `
     writeFile(
-      `${TOKENS_DIR}/base`,
+      PATHS.BASE_TOKENS,
       'index',
       'js',
       prettier.format(baseIndexContent, {
@@ -262,7 +262,7 @@ async function createAssets(ctx) {
 // Transform tokens
 
 async function transformTokens(ctx) {
-  const tokens = readTokens(PATHS.TOKENS)
+  const tokens = readTokens(PATHS.BASE_TOKENS)
   const transformed = convert(tokens)
   transformed.forEach((token) => {
     writeFile(token.sassString, PATHS.SASS, `_${token.name}`, 'scss')
