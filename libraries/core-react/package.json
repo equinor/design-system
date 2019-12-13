@@ -14,7 +14,6 @@
     "url": "https://github.com/equinor/design-system"
   },
   "scripts": {
-    "lint": "eslint ./src/**/*.{jsx,js}",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "jest",
@@ -30,10 +29,10 @@
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^9.3.3",
     "babel-plugin-styled-components": "^1.10.6",
     "jest": "^24.9.0",
     "jest-styled-components": "^6.3.4",
@@ -41,7 +40,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "rollup": "^1.27.8",
+    "rollup": "^1.27.11",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-json": "^4.0.0",

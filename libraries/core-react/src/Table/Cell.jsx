@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import tableTokens from '@equinor/eds-tokens/components/table/table.json'
-import { typographyTemplate } from './../_common/templates'
+import { typographyTemplate } from '../_common/templates'
 
 const { header, cell } = tableTokens
 
@@ -35,9 +35,9 @@ const borderTemplate = (borders) =>
   }, '')
 
 const Base = ({ tokens }) => {
-  const { background, height, text, spacings, borders, hover } = tokens
+  const { background, height, text, spacings, borders } = tokens
   const { typography } = text
-  let base = `
+  const base = `
   background: ${background};
   min-height: ${height};
   height: ${height};
@@ -55,7 +55,7 @@ const TableBase = styled.td`
   ${Base}
 `
 
-const TableCell = (props) => {
+export const Cell = (props) => {
   const { children, as, variant } = props
   const tokens = getTokens(as, variant)
   return (
@@ -65,7 +65,7 @@ const TableCell = (props) => {
   )
 }
 
-TableCell.propTypes = {
+Cell.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
@@ -78,13 +78,11 @@ TableCell.propTypes = {
   variant: PropTypes.oneOf(['text', 'icon', 'numeric', 'input']),
 }
 
-TableCell.defaultProps = {
+Cell.defaultProps = {
   className: '',
   // scope: '',
   as: 'td',
   variant: 'text',
 }
 
-TableCell.displayName = 'eds-table-cell'
-
-export default TableCell
+Cell.displayName = 'eds-table-cell'

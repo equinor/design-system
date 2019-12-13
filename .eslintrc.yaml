@@ -15,6 +15,9 @@ rules:
   no-unused-vars:
     - error
     - varsIgnorePattern: ^React$
+  # Named exports are better
+  import/no-default-export:
+    - error
   # Not everything needs a default export, for example utils files
   import/prefer-default-export:
     - off

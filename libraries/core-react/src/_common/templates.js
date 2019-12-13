@@ -9,22 +9,22 @@ export const typographyTemplate = (typography, link) => {
   `
 
   if (typography.fontStyle) {
-    base = base + `font-style: ${typography.fontStyle};`
+    base += `\nfont-style: ${typography.fontStyle};`
   }
   if (typography.letterSpacing) {
-    base = base + `letter-spacing: ${typography.letterSpacing};`
+    base += `\nletter-spacing: ${typography.letterSpacing};`
   }
   if (typography.textTransform) {
-    base = base + `text-transform: ${typography.textTransform};`
+    base += `\ntext-transform: ${typography.textTransform};`
   }
   if (typography.textDecoration) {
-    base = base + `text-decoration: ${typography.textDecoration};`
+    base += `\ntext-decoration: ${typography.textDecoration};`
   }
   if (typography.fontFeature) {
-    base = base + ` font-feature-settings: ${typography.fontFeature};`
+    base += `\nfont-feature-settings: ${typography.fontFeature};`
   }
   if (link) {
-    base = base + 'cursor: pointer;'
+    base += `\ncursor: pointer;`
   }
 
   return base

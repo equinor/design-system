@@ -4,23 +4,21 @@ import styled from 'styled-components'
 
 const TableBase = styled.tr``
 
-const TableRow = (props) => {
+export const Row = (props) => {
   const { children } = props
 
   return <TableBase {...props}>{children}</TableBase>
 }
 
-TableRow.propTypes = {
+Row.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node.isRequired,
 }
 
-TableRow.defaultProps = {
+Row.defaultProps = {
   className: '',
 }
 
-TableRow.displayName = 'eds-table-row'
-
-export default TableRow
+Row.displayName = 'eds-table-row'

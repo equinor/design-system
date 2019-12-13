@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import typography from '@equinor/eds-tokens/base/typography.json'
-import { typographyTemplate } from './../_common/templates'
+import { tokens } from '@equinor/eds-tokens'
+import { typographyTemplate } from '../_common/templates'
 
-const { heading, paragraph } = typography
+const { heading, paragraph } = tokens.typography
 
 const variants = [
   'h1',
@@ -60,7 +60,7 @@ const toComplexVariantName = (
   }`
 
 const Base = ({ typography, link }) => {
-  let base = `
+  const base = `
   margin: 0;
 
   ${typographyTemplate(typography, link)}
@@ -73,7 +73,14 @@ const TypographyBase = styled.p`
   ${Base}
 `
 
-const Typography = ({ variant, children, bold, italic, link, ...other }) => {
+export const Typography = ({
+  variant,
+  children,
+  bold,
+  italic,
+  link,
+  ...other
+}) => {
   const as = getElementType(variant, link)
   const variantName = toComplexVariantName(variant, bold, italic, link)
   let typography = variantToken[variantName]
@@ -114,9 +121,11 @@ Typography.propTypes = {
 
 Typography.defaultProps = {
   variant: 'h1',
+  bold: false,
+  italic: false,
+  link: false,
   className: '',
 }
 
 Typography.displayName = 'eds-text'
 
-export default Typography

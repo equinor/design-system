@@ -7,7 +7,7 @@ const TableBase = styled.table`
   border-collapse: collapse;
 `
 
-const Table = (props) => {
+export const Table = (props) => {
   const { children } = props
   return <TableBase {...props}>{children}</TableBase>
 }
@@ -24,5 +24,3 @@ Table.defaultProps = {
 }
 
 Table.displayName = 'eds-table'
-
-export default Table
