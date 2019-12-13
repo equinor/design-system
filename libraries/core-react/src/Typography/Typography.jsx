@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import typography from '@equinor/eds-tokens/base/typography.json'
+import { tokens } from '@equinor/eds-tokens'
 import { typographyTemplate } from './../_common/templates'
 
-const { heading, paragraph } = typography
+const { heading, paragraph } = tokens.typography
 
 const variants = [
   'h1',
