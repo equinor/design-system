@@ -5,7 +5,7 @@ import primaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-p
 import secondaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-secondary.json'
 import dangerButtonTokens from '@equinor/eds-tokens/components/button/buttons-danger.json'
 import disabledButtonTokens from '@equinor/eds-tokens/components/button/buttons-disabled.json'
-import { typographyTemplate } from './../_common/templates'
+import { typographyTemplate } from '../_common/templates'
 
 const colors = {
   primary: primaryButtonTokens,
@@ -96,7 +96,7 @@ const ButtonBase = styled.button.attrs(() => ({
 // - Use ThemeProvider
 // - Set attr on button
 
-const Button = ({
+export const Button = ({
   variant,
   children,
   disabled,
@@ -146,5 +146,3 @@ Button.defaultProps = {
 }
 
 Button.displayName = 'eds-button'
-
-export default Button

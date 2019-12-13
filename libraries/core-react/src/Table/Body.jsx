@@ -4,23 +4,21 @@ import styled from 'styled-components'
 
 const TableBase = styled.tbody``
 
-const TableBody = (props) => {
+export const Body = (props) => {
   const { children } = props
 
   return <TableBase {...props}>{children}</TableBase>
 }
 
-TableBody.propTypes = {
+Body.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node.isRequired,
 }
 
-TableBody.defaultProps = {
+Body.defaultProps = {
   className: '',
 }
 
-TableBody.displayName = 'eds-table-body'
-
-export default TableBody
+Body.displayName = 'eds-table-body'

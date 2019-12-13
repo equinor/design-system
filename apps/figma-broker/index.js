@@ -88,6 +88,7 @@ async function createTokens(ctx) {
     export const tokens = {
       ${tokens.map((token) => token.name).join(',\n')}
     }
+
     `
     writeFile(
       PATHS.BASE_TOKENS,
