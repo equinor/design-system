@@ -2,8 +2,7 @@
 
 **Alpha release, so breaking changes may occur**
 
-Design tokens used in Equinor Design System (EDS).  
-
+Design tokens used in Equinor Design System (EDS).
 
 ## Documentation
 
@@ -11,7 +10,7 @@ Design tokens used in Equinor Design System (EDS).
 
 Generic tokens used across EDS, such as colours, typography, spacings etc…
 
-#### Tokens 
+#### Tokens
 
 - Clickbounds
 - Colors
@@ -23,11 +22,41 @@ Generic tokens used across EDS, such as colours, typography, spacings etc…
 
 ### Components
 
-Component specific tokens, such as button, input, table etc… These tokens can be used to implement a component in your own technology if needed whilst upholding consistency with design. 
+Component specific tokens, such as button, input, table etc. These tokens can be used to implement a component in your own technology if needed whilst upholding consistency with design.
 
-#### Tokens 
+#### Update december 2019
+
+The component tokens already made are still part of this package, but we encourage users to use base tokens for now – it proved to be too time consuming at this stage to create every token first in json and then in React. We might revisit the initial strategy at a later point.
+
+#### Tokens
 
 - Button
 - Table
 
-[Design tokens]: https://css-tricks.com/what-are-design-tokens/
+### Usage
+
+React storybook example: 
+
+```js
+import React from 'react'
+import { tokens } from '@equinor/eds-tokens'
+import styled from 'styled-components'
+
+const { h1: h1Tokens } = tokens.typography.heading
+
+const H1 = styled.h1(h1Tokens)
+
+export default {
+  title: 'Tokens|Example',
+  component: H1,
+}
+
+export const TokensExample = () => (
+  <div>
+    <H1>Some header</H1>
+  </div>
+)
+
+```
+
+[design tokens]: https://css-tricks.com/what-are-design-tokens/
