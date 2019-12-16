@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Base tokens are now exported as esm modules instead of json
+- Base tokens are now exported as esm instead of json
 
 ## [0.0.1-alpha.4] - 2019-08-04
 
