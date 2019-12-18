@@ -1,8 +1,10 @@
 extends:
   - airbnb
   - prettier
+  - plugin:testing-library/react
 plugins:
   - prettier
+  - testing-library
 env:
   browser: true
   node: true

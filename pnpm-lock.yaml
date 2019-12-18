@@ -4,8 +4,9 @@ devDependencies:
   eslint-config-prettier: 6.7.0_eslint@6.7.2
   eslint-plugin-import: 2.19.1_eslint@6.7.2
   eslint-plugin-jsx-a11y: 6.2.3_eslint@6.7.2
-  eslint-plugin-prettier: 3.1.1_eslint@6.7.2+prettier@1.19.1
+  eslint-plugin-prettier: 3.1.2_eslint@6.7.2+prettier@1.19.1
   eslint-plugin-react: 7.17.0_eslint@6.7.2
+  eslint-plugin-testing-library: 1.3.4_eslint@6.7.2
   prettier: 1.19.1
 lockfileVersion: 5.1
 packages:
@@ -54,7 +55,7 @@ packages:
   /ajv/6.10.2:
     dependencies:
       fast-deep-equal: 2.0.1
-      fast-json-stable-stringify: 2.0.0
+      fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
       uri-js: 4.2.2
     dev: true
@@ -110,16 +111,15 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-ONOEQoKrvXPKk7Su92Co0YMqYO32FfqJTzkKU9u2UpIXyYZIzLSvpdg4AwvSw4mSUW0czu6inK+zby6Oj6gDjQ==
-  /array.prototype.flat/1.2.2:
+  /array.prototype.flat/1.2.3:
     dependencies:
       define-properties: 1.1.3
-      es-abstract: 1.16.3
-      function-bind: 1.1.1
+      es-abstract: 1.17.0-next.1
     dev: true
     engines:
       node: '>= 0.4'
     resolution:
-      integrity: sha512-VXjh7lAL4KXKF2hY4FnEW9eRW6IhdvFW1sN/JwLbmECbCgACCnBHNyP3lFiYuttr0jxRN9Bsc5+G27dMseSWqQ==
+      integrity: sha512-gBlRZV0VSmfPIeWfuuy56XZMvbVfbEUnOXUvt3F/eUUUSyzlgLxhEX4YAEpxNAogRGehPSnfXyPtYyKAhkzQhQ==
   /ast-types-flow/0.0.7:
     dev: true
     resolution:
@@ -295,23 +295,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==
-  /es-abstract/1.16.3:
-    dependencies:
-      es-to-primitive: 1.2.1
-      function-bind: 1.1.1
-      has: 1.0.3
-      has-symbols: 1.0.1
-      is-callable: 1.1.4
-      is-regex: 1.0.4
-      object-inspect: 1.7.0
-      object-keys: 1.1.1
-      string.prototype.trimleft: 2.1.0
-      string.prototype.trimright: 2.1.0
-    dev: true
-    engines:
-      node: '>= 0.4'
-    resolution:
-      integrity: sha512-WtY7Fx5LiOnSYgF5eg/1T+GONaGmpvpPdCpSnYij+U2gDTL0UPfWrhDw7b2IYb+9NQJsYpCA0wOQvZfsd6YwRw==
   /es-abstract/1.17.0-next.1:
     dependencies:
       es-to-primitive: 1.2.1
@@ -319,7 +302,7 @@ packages:
       has: 1.0.3
       has-symbols: 1.0.1
       is-callable: 1.1.4
-      is-regex: 1.0.4
+      is-regex: 1.0.5
       object-inspect: 1.7.0
       object-keys: 1.1.1
       object.assign: 4.1.0
@@ -352,7 +335,7 @@ packages:
       eslint: 6.7.2
       eslint-plugin-import: 2.19.1_eslint@6.7.2
       object.assign: 4.1.0
-      object.entries: 1.1.0
+      object.entries: 1.1.1
     dev: true
     engines:
       node: '>= 4'
@@ -369,7 +352,7 @@ packages:
       eslint-plugin-jsx-a11y: 6.2.3_eslint@6.7.2
       eslint-plugin-react: 7.17.0_eslint@6.7.2
       object.assign: 4.1.0
-      object.entries: 1.1.0
+      object.entries: 1.1.1
     dev: true
     engines:
       node: '>= 4'
@@ -393,7 +376,7 @@ packages:
   /eslint-import-resolver-node/0.3.2:
     dependencies:
       debug: 2.6.9
-      resolve: 1.13.1
+      resolve: 1.14.0
     dev: true
     resolution:
       integrity: sha512-sfmTqJfPSizWu4aymbPr4Iidp5yKm8yDkHp+Ir3YiTHiiDfxh69mOUsmiqW6RZ9zRXFaF64GtYmN7e+8GHBv6Q==
@@ -419,7 +402,7 @@ packages:
   /eslint-plugin-import/2.19.1_eslint@6.7.2:
     dependencies:
       array-includes: 3.1.0
-      array.prototype.flat: 1.2.2
+      array.prototype.flat: 1.2.3
       contains-path: 0.1.0
       debug: 2.6.9
       doctrine: 1.5.0
@@ -428,9 +411,9 @@ packages:
       eslint-module-utils: 2.5.0
       has: 1.0.3
       minimatch: 3.0.4
-      object.values: 1.1.0
+      object.values: 1.1.1
       read-pkg-up: 2.0.0
-      resolve: 1.13.1
+      resolve: 1.14.0
     dev: true
     engines:
       node: '>=4'
@@ -457,7 +440,7 @@ packages:
       eslint: ^3 || ^4 || ^5 || ^6
     resolution:
       integrity: sha512-CawzfGt9w83tyuVekn0GDPU9ytYtxyxyFZ3aSWROmnRRFQFT2BiPJd7jvRdzNDi6oLWaS2asMeYSNMjWTV4eNg==
-  /eslint-plugin-prettier/3.1.1_eslint@6.7.2+prettier@1.19.1:
+  /eslint-plugin-prettier/3.1.2_eslint@6.7.2+prettier@1.19.1:
     dependencies:
       eslint: 6.7.2
       prettier: 1.19.1
@@ -469,7 +452,7 @@ packages:
       eslint: '>= 5.0.0'
       prettier: '>= 1.13.0'
     resolution:
-      integrity: sha512-A+TZuHZ0KU0cnn56/9mfR7/KjUJ9QNVXUhwvRFSR7PGPe0zQR6PTkmyqg1AtUUEOzTqeRsUwyKFh0oVZKVCrtA==
+      integrity: sha512-GlolCC9y3XZfv3RQfwGew7NnuFDKsfI4lbvRK+PIIo23SFH+LemGs4cKwzAaRa+Mdb+lQO/STaIayno8T5sJJA==
   /eslint-plugin-react/7.17.0_eslint@6.7.2:
     dependencies:
       array-includes: 3.1.0
@@ -478,11 +461,11 @@ packages:
       eslint-plugin-eslint-plugin: 2.1.0_eslint@6.7.2
       has: 1.0.3
       jsx-ast-utils: 2.2.3
-      object.entries: 1.1.0
-      object.fromentries: 2.0.1
-      object.values: 1.1.0
+      object.entries: 1.1.1
+      object.fromentries: 2.0.2
+      object.values: 1.1.1
       prop-types: 15.7.2
-      resolve: 1.13.1
+      resolve: 1.14.0
     dev: true
     engines:
       node: '>=4'
@@ -490,6 +473,17 @@ packages:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-ODB7yg6lxhBVMeiH1c7E95FLD4E/TwmFjltiU+ethv7KPdCwgiFuOZg9zNRHyufStTDLl/dEFqI2Q1VPmCd78A==
+  /eslint-plugin-testing-library/1.3.4_eslint@6.7.2:
+    dependencies:
+      eslint: 6.7.2
+    dev: true
+    engines:
+      node: '>=8'
+      npm: '>=5'
+    peerDependencies:
+      eslint: '>=5'
+    resolution:
+      integrity: sha512-p7PgHZkaAbf2CQu7+WGF+PF1ah2S0oLsL+yQKT8YanmxwReKGLXAruPconGLRfBIbd9opOly1HDWuKt6l3zFVw==
   /eslint-scope/5.0.0:
     dependencies:
       esrecurse: 4.2.1
@@ -534,7 +528,7 @@ packages:
       ignore: 4.0.6
       import-fresh: 3.2.1
       imurmurhash: 0.1.4
-      inquirer: 7.0.0
+      inquirer: 7.0.1
       is-glob: 4.0.1
       js-yaml: 3.13.1
       json-stable-stringify-without-jsonify: 1.0.1
@@ -621,10 +615,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
-  /fast-json-stable-stringify/2.0.0:
+  /fast-json-stable-stringify/2.1.0:
     dev: true
     resolution:
-      integrity: sha1-1RQsDK7msRifh9OnYREGT4bIu/I=
+      integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==
   /fast-levenshtein/2.0.6:
     dev: true
     resolution:
@@ -780,7 +774,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
-  /inquirer/7.0.0:
+  /inquirer/7.0.1:
     dependencies:
       ansi-escapes: 4.3.0
       chalk: 2.4.2
@@ -799,7 +793,7 @@ packages:
     engines:
       node: '>=6.0.0'
     resolution:
-      integrity: sha512-rSdC7zelHdRQFkWnhsMu2+2SO41mpv2oF2zy4tMhmiLWkcKbOAs87fWAJhVXttKVwhdZvymvnuM95EyEXg2/tQ==
+      integrity: sha512-V1FFQ3TIO15det8PijPLFR9M9baSlnRs9nL7zWu1MNVA2T9YVl9ZbrHJhYs7e9X8jeMZ3lr2JH/rdHFgNCBdYw==
   /is-arrayish/0.2.1:
     dev: true
     resolution:
@@ -846,14 +840,14 @@ packages:
     dev: true
     resolution:
       integrity: sha1-eaKp7OfwlugPNtKy87wWwf9L8/o=
-  /is-regex/1.0.4:
+  /is-regex/1.0.5:
     dependencies:
       has: 1.0.3
     dev: true
     engines:
       node: '>= 0.4'
     resolution:
-      integrity: sha1-VRdIm1RwkbCTDglWVM7SXul+lJE=
+      integrity: sha512-vlKW17SNq44owv5AQR3Cq0bQPEb8+kF3UKZ2fiZNOWtztYE5i0CzCZxFDwO58qAOWtxdBRVO/V5Qin1wjCqFYQ==
   /is-symbol/1.0.3:
     dependencies:
       has-symbols: 1.0.1
@@ -985,7 +979,7 @@ packages:
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.8.5
-      resolve: 1.13.1
+      resolve: 1.14.0
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -1018,39 +1012,39 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-exHJeq6kBKj58mqGyTQ9DFvrZC/eR6OwxzoM9YRoGBqrXYonaFyGiFMuc9VZrXf7DarreEwMpurG3dd+CNyW5w==
-  /object.entries/1.1.0:
+  /object.entries/1.1.1:
     dependencies:
       define-properties: 1.1.3
-      es-abstract: 1.16.3
+      es-abstract: 1.17.0-next.1
       function-bind: 1.1.1
       has: 1.0.3
     dev: true
     engines:
       node: '>= 0.4'
     resolution:
-      integrity: sha512-l+H6EQ8qzGRxbkHOd5I/aHRhHDKoQXQ8g0BYt4uSweQU1/J6dZUOyWh9a2Vky35YCKjzmgxOzta2hH6kf9HuXA==
-  /object.fromentries/2.0.1:
+      integrity: sha512-ilqR7BgdyZetJutmDPfXCDffGa0/Yzl2ivVNpbx/g4UeWrCdRnFDUBrKJGLhGieRHDATnyZXWBeCb29k9CJysQ==
+  /object.fromentries/2.0.2:
     dependencies:
       define-properties: 1.1.3
-      es-abstract: 1.16.3
+      es-abstract: 1.17.0-next.1
       function-bind: 1.1.1
       has: 1.0.3
     dev: true
     engines:
       node: '>= 0.4'
     resolution:
-      integrity: sha512-PUQv8Hbg3j2QX0IQYv3iAGCbGcu4yY4KQ92/dhA4sFSixBmSmp13UpDLs6jGK8rBtbmhNNIK99LD2k293jpiGA==
-  /object.values/1.1.0:
+      integrity: sha512-r3ZiBH7MQppDJVLx6fhD618GKNG40CZYH9wgwdhKxBDDbQgjeWGGd4AtkZad84d291YxvWe7bJGuE65Anh0dxQ==
+  /object.values/1.1.1:
     dependencies:
       define-properties: 1.1.3
-      es-abstract: 1.16.3
+      es-abstract: 1.17.0-next.1
       function-bind: 1.1.1
       has: 1.0.3
     dev: true
     engines:
       node: '>= 0.4'
     resolution:
-      integrity: sha512-8mf0nKLAoFX6VlNVdhGj31SVYpaNFtUnuoOXWyFEstsWRgU837AK+JYM0iAxwkSzGRbwn8cbFmgbyxj1j4VbXg==
+      integrity: sha512-WTa54g2K8iu0kmS/us18jEmdv1a4Wi//BZ/DTVYEcH0XhLM5NYdpDHja3gt57VrZLcNAO2WGA+KpWsDBaHt6eA==
   /once/1.4.0:
     dependencies:
       wrappy: 1.0.2
@@ -1246,12 +1240,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==
-  /resolve/1.13.1:
+  /resolve/1.14.0:
     dependencies:
       path-parse: 1.0.6
     dev: true
     resolution:
-      integrity: sha512-CxqObCX8K8YtAhOBRg+lrcdn+LK+WYOS8tSjqSFbjtrI5PnS63QPhZl4+yKfrU9tdsbMu9Anr/amegT87M9Z6w==
+      integrity: sha512-uviWSi5N67j3t3UKFxej1loCH0VZn5XuqdNxoLShPcYPw6cUZn74K1VRj+9myynRX03bxIBEkwlkob/ujLsJVw==
   /restore-cursor/3.1.0:
     dependencies:
       onetime: 5.1.0
@@ -1519,6 +1513,7 @@ specifiers:
   eslint-config-prettier: ^6.7.0
   eslint-plugin-import: ^2.19.1
   eslint-plugin-jsx-a11y: ^6.2.3
-  eslint-plugin-prettier: ^3.1.1
+  eslint-plugin-prettier: ^3.1.2
   eslint-plugin-react: ^7.17.0
+  eslint-plugin-testing-library: ^1.3.4
   prettier: ^1.19.1
