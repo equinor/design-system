@@ -3,42 +3,68 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 
-const { colors: colors_, spacings: spacings_ } = tokens
+const {
+  colors: {
+    ui: {
+      background__default: { hex: lighter },
+      background__light: { hex: light },
+      background__medium: { hex: medium },
+    },
+  },
+  spacings: {
+    comfortable: { small: spacingSmall, medium: spacingMedium },
+  },
+} = tokens
+
+const dividerHeight = 1
+
+const reduceByValue = (subtractValue) => (valueWithUnit) => {
+  const valueAndUnit = valueWithUnit
+    .split(/(\d+)/)
+    .filter((val) => val.length > 0)
+
+  return valueAndUnit[0] - subtractValue + valueAndUnit[1]
+}
+
+const reduceValueByDividerHeight = reduceByValue(dividerHeight)
 
 const dividerTokens = {
-  height: '1px',
+  height: `${dividerHeight}px`,
   color: {
-    lighter: colors_.ui.background__default.hex,
-    light: colors_.ui.background__light.hex,
-    medium: colors_.ui.background__medium.hex,
+    lighter,
+    light,
+    medium,
   },
   small: {
     spacings: {
-      top: spacings_.small,
-      bottom: spacings_.small,
+      top: spacingSmall,
+      bottom: reduceValueByDividerHeight(spacingSmall),
     },
   },
   medium: {
     spacings: {
-      top: spacings_.medium,
-      bottom: spacings_.medium,
+      top: spacingMedium,
+      bottom: reduceValueByDividerHeight(spacingMedium),
     },
   },
 }
 
-const StyledDivider = styled.hr`
-  margin-top: ${(props) => props.spacingTop};
-  margin-bottom: ${(props) => props.spacingBottom};
-  border: none;
-  background-color: ${(props) => props.backgroundColor};
-  height: 1px;
-`
+const StyledDivider = styled.hr(
+  ({ backgroundColor, marginTop, marginBottom, dividerHeight: height }) => ({
+    backgroundColor,
+    marginTop,
+    marginBottom,
+    height,
+    border: 'none',
+  }),
+)
 
 export const Divider = forwardRef(function Divider({ color, variant }, ref) {
   const props = {
     backgroundColor: dividerTokens.color[color],
-    spacingTop: dividerTokens[variant].spacings.top,
-    spacingBottom: dividerTokens[variant].spacings.bottom,
+    marginTop: dividerTokens[variant].spacings.top,
+    marginBottom: dividerTokens[variant].spacings.bottom,
+    dividerHeight: dividerTokens.height,
   }
 
   return <StyledDivider {...props} ref={ref} role="presentation" />

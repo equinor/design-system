@@ -2,6 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Divider, Typography } from '@equinor/eds-core-react'
+import { tokens } from '@equinor/eds-tokens'
+
+const {
+  colors: {
+    ui: {
+      background__medium: { hex: darkBg },
+    },
+  },
+} = tokens
 
 export default {
   title: 'Components|Divider',
@@ -14,15 +23,18 @@ const VARIANT = {
 }
 
 const COLOR = {
-  BRIGHT: 'bright',
+  LIGHTER: 'lighter',
   LIGHT: 'light',
   MEDIUM: 'medium',
 }
 
 const Wrapper = styled.div`
   margin: 32px;
-  display: grid;
-  grid-gap: 32px;
+`
+
+const DarkBox = styled.div`
+  background-color: ${darkBg};
+  padding: 1em 0;
 `
 
 export const allDividers = () => (
@@ -31,27 +43,27 @@ export const allDividers = () => (
       All Divider variants
     </Typography>
 
-    <Typography variant="h2" bold>
-      Small
-    </Typography>
+    <Typography variant="h2">Small</Typography>
     <Typography variant="h3">Default</Typography>
     <Divider variant="small" />
-    <Typography variant="h3">Bright</Typography>
-    <Divider color="bright" variant="small" />
-    <Typography variant="h3">Light</Typography>
-    <Divider color="light" variant="small" />
+    <DarkBox>
+      <Typography variant="h3">Lighter</Typography>
+      <Divider color="lighter" variant="small" />
+      <Typography variant="h3">Light</Typography>
+      <Divider color="light" variant="small" />
+    </DarkBox>
     <Typography variant="h3">Medium</Typography>
     <Divider color="medium" variant="small" />
 
-    <Typography variant="h2" bold>
-      Medium
-    </Typography>
+    <Typography variant="h2">Medium</Typography>
     <Typography variant="h3">Default</Typography>
     <Divider variant="medium" />
-    <Typography variant="h3">Bright</Typography>
-    <Divider color="bright" variant="medium" />
-    <Typography variant="h3">Light</Typography>
-    <Divider color="light" variant="medium" />
+    <DarkBox>
+      <Typography variant="h3">Lighter</Typography>
+      <Divider color="lighter" variant="medium" />
+      <Typography variant="h3">Light</Typography>
+      <Divider color="light" variant="medium" />
+    </DarkBox>
     <Typography variant="h3">Medium</Typography>
     <Divider color="medium" variant="medium" />
   </Wrapper>
@@ -64,10 +76,12 @@ export const Small = () => (
     </Typography>
     <Typography variant="h2">Default</Typography>
     <Divider variant="small" />
-    <Typography variant="h2">Bright</Typography>
-    <Divider color="bright" variant="small" />
-    <Typography variant="h2">Light</Typography>
-    <Divider color="light" variant="small" />
+    <DarkBox>
+      <Typography variant="h2">Lighter</Typography>
+      <Divider color="lighter" variant="small" />
+      <Typography variant="h2">Light</Typography>
+      <Divider color="light" variant="small" />
+    </DarkBox>
     <Typography variant="h2">Medium</Typography>
     <Divider color="medium" variant="small" />
   </Wrapper>
@@ -80,10 +94,12 @@ export const Medium = () => (
     </Typography>
     <Typography variant="h2">Default</Typography>
     <Divider variant="medium" />
-    <Typography variant="h2">Bright</Typography>
-    <Divider color="bright" variant="medium" />
-    <Typography variant="h2">Light</Typography>
-    <Divider color="light" variant="medium" />
+    <DarkBox>
+      <Typography variant="h2">Lighter</Typography>
+      <Divider color="lighter" variant="medium" />
+      <Typography variant="h2">Light</Typography>
+      <Divider color="light" variant="medium" />
+    </DarkBox>
     <Typography variant="h2">Medium</Typography>
     <Divider color="medium" variant="medium" />
   </Wrapper>
