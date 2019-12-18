@@ -59,7 +59,10 @@ const StyledDivider = styled.hr(
   }),
 )
 
-export const Divider = forwardRef(function Divider({ color, variant }, ref) {
+export const Divider = forwardRef(function Divider(
+  { color, variant, className },
+  ref,
+) {
   const props = {
     backgroundColor: dividerTokens.color[color],
     marginTop: dividerTokens[variant].spacings.top,
@@ -67,7 +70,14 @@ export const Divider = forwardRef(function Divider({ color, variant }, ref) {
     dividerHeight: dividerTokens.height,
   }
 
-  return <StyledDivider {...props} ref={ref} role="presentation" />
+  return (
+    <StyledDivider
+      {...props}
+      className={className}
+      ref={ref}
+      role="presentation"
+    />
+  )
 })
 
 Divider.displayName = 'eds-divider'
@@ -77,9 +87,12 @@ Divider.propTypes = {
   color: PropTypes.oneOf(['lighter', 'light', 'medium']),
   // Vertical spacing
   variant: PropTypes.oneOf(['small', 'medium']),
+  /** @ignore */
+  className: PropTypes.string,
 }
 
 Divider.defaultProps = {
   color: 'medium',
   variant: 'medium',
+  className: '',
 }

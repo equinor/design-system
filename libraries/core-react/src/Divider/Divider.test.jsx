@@ -4,7 +4,12 @@ import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { tokens } from '@equinor/eds-tokens'
+import styled from 'styled-components'
 import { Divider } from '.'
+
+const StyledDivider = styled(Divider)`
+  position: relative;
+`
 
 const {
   colors: {
@@ -37,6 +42,11 @@ describe('Divider', () => {
   })
   it('Sets topMargin to small according to variant prop', () => {
     const { container } = render(<Divider variant="small" />)
+    expect(container.firstChild).toHaveStyleRule('margin-top', spacingSmall)
+  })
+  it('Can extend the css for the component', () => {
+    const { container } = render(<StyledDivider variant="small" />)
+    expect(container.firstChild).toHaveStyleRule('position', 'relative')
     expect(container.firstChild).toHaveStyleRule('margin-top', spacingSmall)
   })
 })
