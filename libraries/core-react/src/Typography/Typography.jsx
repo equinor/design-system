@@ -128,4 +128,3 @@ Typography.defaultProps = {
 }
 
 Typography.displayName = 'eds-text'
-
