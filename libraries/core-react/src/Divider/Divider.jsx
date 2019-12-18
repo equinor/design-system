@@ -70,14 +70,7 @@ export const Divider = forwardRef(function Divider(
     dividerHeight: dividerTokens.height,
   }
 
-  return (
-    <StyledDivider
-      {...props}
-      className={className}
-      ref={ref}
-      role="presentation"
-    />
-  )
+  return <StyledDivider {...props} className={className} ref={ref} />
 })
 
 Divider.displayName = 'eds-divider'
