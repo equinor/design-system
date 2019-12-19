@@ -3,24 +3,20 @@ import React from 'react'
 import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
-import { tokens } from '@equinor/eds-tokens'
+import { divider as tokens } from './Divider.tokens'
 import styled from 'styled-components'
 import { Divider } from '.'
 
 const StyledDivider = styled(Divider)`
   position: relative;
 `
-
 const {
-  colors: {
-    ui: {
-      background__default: { hex: lighter },
-      background__light: { hex: light },
-      background__medium: { hex: medium },
-    },
+  color: { lighter, light, medium },
+  small: {
+    spacings: { top: spacingSmall },
   },
-  spacings: {
-    comfortable: { small: spacingSmall, medium: spacingMedium },
+  medium: {
+    spacings: { top: spacingMedium },
   },
 } = tokens
 
