@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { typographyTemplate } from '../../_common/templates'
 import { tokens } from './HelperText.token'
+import { propsFor, useTextField } from '../context'
+import { Icon } from '../Icon'
 
 const Variation = ({ variant, isFocused, isDisabled }) => {
   if (!variant) {
@@ -12,23 +14,14 @@ const Variation = ({ variant, isFocused, isDisabled }) => {
   const { focus, color, disabledColor } = variant
 
   if (isDisabled) {
-    return `
-    color: ${disabledColor};
-    fill: ${disabledColor};
-    `
+    return `color: ${disabledColor};`
   }
 
   if (isFocused) {
-    return `
-    color: ${focus.color};
-    fill: ${focus.color};
-    `
+    return ` color: ${focus.color};`
   }
 
-  return `
-  color: ${color};
-  fill: ${color};
-`
+  return `color: ${color};`
 }
 
 const Container = styled.div`
@@ -44,36 +37,31 @@ const Text = styled.p`
   ${Variation}
 `
 
-const Icon = styled.div`
+const StyledIcon = styled(Icon)`
   margin-right: ${({ spacings }) => spacings.left};
-
-  height: 16px;
-  width: 16px;
-  ${Variation}
 `
 
 const HelperText = React.forwardRef(function TextFieldHelperText(props, ref) {
-  const { helperText, icon, variant, disabled: isDisabled, textField } = props
-  const variant_ = tokens[variant]
-  const spacings = props.compact
-    ? tokens.spacings.compact
-    : tokens.spacings.comfortable
+  const { helperText, icon, variant, disabled: isDisabled } = props
+  const helperVariant = tokens[variant]
+  const spacings = tokens.spacings.comfortable
+
+  const { isFocused } = useTextField()
+
+  const iconProps = {
+    spacings,
+    isDisabled,
+    color: helperVariant.color,
+    disabledColor: helperVariant.disabledColor,
+    focusColor: helperVariant.focus.color,
+  }
 
   return (
     <Container ref={ref} {...props} spacings={spacings}>
-      {icon && (
-        <Icon
-          variant={variant_}
-          isFocused={textField.isFocused}
-          isDisabled={isDisabled}
-          spacings={spacings}
-        >
-          {icon}
-        </Icon>
-      )}
+      {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
       <Text
-        variant={variant_}
-        isFocused={textField.isFocused}
+        variant={helperVariant}
+        isFocused={isFocused}
         isDisabled={isDisabled}
       >
         {helperText}
@@ -85,18 +73,22 @@ const HelperText = React.forwardRef(function TextFieldHelperText(props, ref) {
 HelperText.propTypes = {
   /** @ignore */
   className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node,
   /** Helper text */
   helperText: PropTypes.string,
   /** Icon */
   icon: PropTypes.node,
-  /** Textfield state */
-  textField: PropTypes.object,
+  /** Disabled */
+  disabled: PropTypes.bool,
+  /** Variant */
+  variant: PropTypes.oneOf(propsFor.variants),
 }
 
 HelperText.defaultProps = {
   className: '',
+  helperText: '',
+  icon: null,
+  disabled: false,
+  variant: 'default',
 }
 
 HelperText.displayName = 'text-field-helperText'

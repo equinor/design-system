@@ -33,20 +33,17 @@ const Label = React.forwardRef(function TextFieldLabel(props, ref) {
 })
 
 Label.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node,
   /** Label text */
   label: PropTypes.string,
   /** Meta text */
   meta: PropTypes.string,
   /** Id of input for `for` */
-  inputId: PropTypes.string,
+  inputId: PropTypes.string.isRequired,
 }
 
 Label.defaultProps = {
-  className: '',
+  label: '',
+  meta: '',
 }
 
 Label.displayName = 'text-field-label'

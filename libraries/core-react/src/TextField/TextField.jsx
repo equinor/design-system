@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Input } from './Input'
 import { Label } from './Label'
 import { HelperText } from './HelperText'
-import { TextFieldContext, initalState, propsFor } from './context'
+import { propsFor, TextFieldProvider, useTextField } from './context'
 
 const Container = styled.div`
   min-width: 100px;
@@ -17,32 +17,24 @@ const TextField = React.forwardRef(function TextField(props, ref) {
     label,
     meta,
     helperText,
-    name,
     placeholder,
     disabled,
-    style,
     multiline,
     className,
     variant,
-    compact,
     inputRef,
     inputIcon,
     helperIcon,
     ...other
   } = props
 
-  const [state, setState] = useState(initalState)
-
   const inputProps = {
     multiline,
     disabled,
     placeholder,
-    name,
     id,
     variant,
-    compact,
     ref: inputRef,
-    updateIsFocused: (isFocused) => setState({ ...state, isFocused }),
     inputIcon,
     ...other,
   }
@@ -50,7 +42,6 @@ const TextField = React.forwardRef(function TextField(props, ref) {
   const helperProps = {
     variant,
     helperText,
-    compact,
     icon: helperIcon,
     disabled,
   }
@@ -58,14 +49,12 @@ const TextField = React.forwardRef(function TextField(props, ref) {
   const containerProps = {
     ref,
     className,
-    compact,
   }
 
   const labelProps = {
     inputId: id,
     label,
     meta,
-    compact,
   }
 
   const showLabel = label || meta
@@ -73,19 +62,11 @@ const TextField = React.forwardRef(function TextField(props, ref) {
 
   return (
     <Container {...containerProps}>
-      <TextFieldContext.Provider value={state}>
-        <TextFieldContext.Consumer>
-          {(textField) => (
-            <Fragment>
-              {showLabel && <Label {...labelProps} />}
-              <Input {...inputProps} textField={textField} />
-              {showHelperText && (
-                <HelperText {...helperProps} textField={textField} />
-              )}
-            </Fragment>
-          )}
-        </TextFieldContext.Consumer>
-      </TextFieldContext.Provider>
+      <TextFieldProvider>
+        {showLabel && <Label {...labelProps} />}
+        <Input {...inputProps} />
+        {showHelperText && <HelperText {...helperProps} />}
+      </TextFieldProvider>
     </Container>
   )
 })
@@ -125,6 +106,10 @@ TextField.defaultProps = {
   meta: '',
   disabled: false,
   variant: 'default',
+  multiline: false,
+  inputRef: null,
+  inputIcon: null,
+  helperIcon: null,
 }
 TextField.displayName = 'text-field'
 

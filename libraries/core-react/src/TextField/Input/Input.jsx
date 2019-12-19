@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tokens } from './Input.tokens'
 import { typographyTemplate } from '../../_common/templates'
-import { TextFieldContext } from '../context'
+import { propsFor, useTextField } from '../context'
+import { Icon } from '../Icon'
 
 const Variation = ({ variant }) => {
   if (!variant) {
@@ -37,30 +38,7 @@ const Variation = ({ variant }) => {
 `
 }
 
-const IconVariation = ({ variant, isDisabled, isFocused }) => {
-  if (!variant) {
-    return ``
-  }
-
-  const { icon, focus } = variant
-
-  if (isDisabled) {
-    return `
-    fill: ${icon.disabledColor};
-    `
-  }
-
-  if (isFocused) {
-    return `
-    fill: ${focus.icon.color};
-    `
-  }
-  return `
-  fill: ${icon.color};
-`
-}
-
-const InputBase = styled.input`
+const StyledInput = styled.input`
   width: 100%;
   box-sizing: border-box;
   margin: 0;
@@ -85,33 +63,21 @@ const Container = styled.div`
   position: relative;
 `
 
-const Icon = styled.div`
+const StyledIcon = styled(Icon)`
   position: absolute;
-  width: 16px;
-  height: 16px;
   right: ${({ spacings }) => spacings.right};
   top: ${({ spacings }) => spacings.top};
   bottom: ${({ spacings }) => spacings.bottom};
-
-  ${IconVariation}
 `
 
 const Input = React.forwardRef(function TextFieldInput(props, ref) {
-  const {
-    children,
-    multiline,
-    variant,
-    updateIsFocused,
-    compact,
-    inputIcon,
-    disabled,
-    textField,
-    ...other
-  } = props
+  const { multiline, variant, inputIcon, disabled, ...other } = props
+
+  const { handleFocus, handleBlur } = useTextField()
 
   const as = multiline ? 'textarea' : 'input'
-  const variant_ = tokens[variant]
-  let spacings = compact ? tokens.spacings.compact : tokens.spacings.comfortable
+  const inputVariant = tokens[variant]
+  let spacings = tokens.spacings.comfortable
 
   if (inputIcon) {
     spacings = {
@@ -123,34 +89,35 @@ const Input = React.forwardRef(function TextFieldInput(props, ref) {
     }
   }
 
+  const iconProps = {
+    spacings: spacings.icon,
+    isDisabled: disabled,
+    color: inputVariant.icon.color,
+    disabledColor: inputVariant.icon.disabledColor,
+    focusColor: inputVariant.focus.icon.color,
+  }
+
   return (
     <Container>
-      <InputBase
+      <StyledInput
         as={as}
-        onBlur={() => updateIsFocused(false)}
-        onFocus={() => updateIsFocused(true)}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
         ref={ref}
         spacings={spacings.input}
         type="text"
-        variant={variant_}
+        variant={inputVariant}
         disabled={disabled}
         {...other}
-      ></InputBase>
-      {inputIcon && (
-        <Icon
-          spacings={spacings.icon}
-          variant={variant_}
-          isDisabled={disabled}
-          isFocused={textField.isFocused}
-        >
-          {inputIcon}
-        </Icon>
-      )}
+      />
+      {inputIcon && <StyledIcon {...iconProps}>{inputIcon}</StyledIcon>}
     </Container>
   )
 })
 
 Input.propTypes = {
+  /** @ignore */
+  className: PropTypes.string,
   /** Specifies if text should be bold */
   multiline: PropTypes.bool,
   /** Input label */
@@ -159,10 +126,12 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   /** Specifiec which type input is */
   type: PropTypes.oneOf(['text', 'search', 'password', 'email', 'number']),
-  /** Multiline input */
-  multiline: PropTypes.bool,
-  /** Textfield state */
-  textField: PropTypes.object,
+  /** Variant */
+  variant: PropTypes.oneOf(propsFor.variants),
+  /** Icon to be embeded in input field */
+  inputIcon: PropTypes.element,
+  /** Disabled state */
+  disabled: PropTypes.bool,
 }
 
 Input.defaultProps = {
@@ -170,6 +139,10 @@ Input.defaultProps = {
   multiline: false,
   label: '',
   placeholder: '',
+  type: 'text',
+  variant: 'default',
+  inputIcon: null,
+  disabled: false,
 }
 
 Input.displayName = 'text-field-input'
