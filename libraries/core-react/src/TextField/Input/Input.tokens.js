@@ -1,10 +1,6 @@
-import { tokens as tokens_ } from '@equinor/eds-tokens'
+import { tokens } from '@equinor/eds-tokens'
 
-const {
-  colors: colors_,
-  spacings: spacings_,
-  typography: typography_,
-} = tokens_
+const { colors, spacings: spacings_, typography } = tokens
 
 const spacings = {
   comfortable: {
@@ -37,16 +33,16 @@ const spacings = {
   },
 }
 
-export const tokens = {
-  background: colors_.ui.background__light.hex,
-  typography: typography_.input.text,
-  color: colors_.text.static_icons__default.hex,
+export const input = {
+  background: colors.ui.background__light.hex,
+  typography: typography.input.text,
+  color: colors.text.static_icons__default.hex,
   spacings,
   default: {
-    borderBottom: colors_.text.static_icons__tertiary.hex,
+    borderBottom: colors.text.static_icons__tertiary.hex,
     icon: {
-      color: colors_.text.static_icons__tertiary.hex,
-      disabledColor: colors_.interactive.disabled__fill.hex,
+      color: colors.text.static_icons__tertiary.hex,
+      disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
       color: 'transparent',
@@ -54,71 +50,71 @@ export const tokens = {
     },
     focus: {
       icon: {
-        color: colors_.interactive.primary__resting.hex,
+        color: colors.interactive.primary__resting.hex,
       },
       border: {
         width: '2px',
-        color: colors_.interactive.primary__resting.hex,
+        color: colors.interactive.primary__resting.hex,
       },
     },
   },
   error: {
     borderBottom: 'transparent',
     icon: {
-      color: colors_.interactive.danger__resting.hex,
-      disabledColor: colors_.interactive.disabled__fill.hex,
+      color: colors.interactive.danger__resting.hex,
+      disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
-      color: colors_.interactive.danger__resting.hex,
+      color: colors.interactive.danger__resting.hex,
       width: '1px',
     },
     focus: {
       icon: {
-        color: colors_.interactive.danger__hover.hex,
+        color: colors.interactive.danger__hover.hex,
       },
       border: {
         width: '2px',
-        color: colors_.interactive.danger__hover.hex,
+        color: colors.interactive.danger__hover.hex,
       },
     },
   },
   warning: {
     borderBottom: 'transparent',
     icon: {
-      color: colors_.interactive.warning__resting.hex,
-      disabledColor: colors_.interactive.disabled__fill.hex,
+      color: colors.interactive.warning__resting.hex,
+      disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
-      color: colors_.interactive.warning__resting.hex,
+      color: colors.interactive.warning__resting.hex,
       width: '1px',
     },
     focus: {
       icon: {
-        color: colors_.interactive.warning__hover.hex,
+        color: colors.interactive.warning__hover.hex,
       },
       border: {
         width: '2px',
-        color: colors_.interactive.warning__hover.hex,
+        color: colors.interactive.warning__hover.hex,
       },
     },
   },
   success: {
     borderBottom: 'transparent',
     icon: {
-      color: colors_.interactive.success__resting.hex,
-      disabledColor: colors_.interactive.disabled__fill.hex,
+      color: colors.interactive.success__resting.hex,
+      disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
-      color: colors_.interactive.success__resting.hex,
+      color: colors.interactive.success__resting.hex,
       width: '1px',
     },
     focus: {
       icon: {
-        color: colors_.interactive.success__hover.hex,
+        color: colors.interactive.success__hover.hex,
       },
       border: {
         width: '2px',
-        color: colors_.interactive.success__hover.hex,
+        color: colors.interactive.success__hover.hex,
       },
     },
   },

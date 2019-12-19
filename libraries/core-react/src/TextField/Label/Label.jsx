@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { typographyTemplate } from '../../_common/templates'
-import { tokens } from './Label.tokens'
+import { label as tokens } from './Label.tokens'
 
 const LabelBase = styled.label`
   display: flex;
@@ -46,6 +46,6 @@ Label.defaultProps = {
   meta: '',
 }
 
-Label.displayName = 'text-field-label'
+Label.displayName = 'eds-text-field-label'
 
 export { Label }

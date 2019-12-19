@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { typographyTemplate } from '../../_common/templates'
-import { tokens } from './HelperText.token'
+import { helperText as tokens } from './HelperText.token'
 import { propsFor, useTextField } from '../context'
 import { Icon } from '../Icon'
 
@@ -91,6 +91,6 @@ HelperText.defaultProps = {
   variant: 'default',
 }
 
-HelperText.displayName = 'text-field-helperText'
+HelperText.displayName = 'eds-text-field-helperText'
 
 export { HelperText }

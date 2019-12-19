@@ -1,10 +1,6 @@
-import { tokens as tokens_ } from '@equinor/eds-tokens'
+import { tokens } from '@equinor/eds-tokens'
 
-const {
-  colors: colors_,
-  spacings: spacings_,
-  typography: typography_,
-} = tokens_
+const { colors, spacings: spacings_, typography } = tokens
 
 const spacings = {
   comfortable: {
@@ -20,36 +16,36 @@ const spacings = {
     bottom: '6px',
   },
 }
-export const tokens = {
-  background: colors_.ui.background__light.hex,
-  typography: typography_.input.helper,
+export const helperText = {
+  background: colors.ui.background__light.hex,
+  typography: typography.input.helper,
   spacings,
   default: {
-    color: colors_.text.static_icons__tertiary.hex,
-    disabledColor: colors_.interactive.disabled__text.hex,
+    color: colors.text.static_icons__tertiary.hex,
+    disabledColor: colors.interactive.disabled__text.hex,
     focus: {
-      color: colors_.text.static_icons__tertiary.hex,
+      color: colors.text.static_icons__tertiary.hex,
     },
   },
   error: {
-    color: colors_.interactive.danger__resting.hex,
-    disabledColor: colors_.interactive.disabled__text.hex,
+    color: colors.interactive.danger__resting.hex,
+    disabledColor: colors.interactive.disabled__text.hex,
     focus: {
-      color: colors_.interactive.danger__hover.hex,
+      color: colors.interactive.danger__hover.hex,
     },
   },
   warning: {
-    color: colors_.interactive.warning__resting.hex,
-    disabledColor: colors_.interactive.disabled__text.hex,
+    color: colors.interactive.warning__resting.hex,
+    disabledColor: colors.interactive.disabled__text.hex,
     focus: {
-      color: colors_.interactive.warning__hover.hex,
+      color: colors.interactive.warning__hover.hex,
     },
   },
   success: {
-    color: colors_.interactive.success__resting.hex,
-    disabledColor: colors_.interactive.disabled__text.hex,
+    color: colors.interactive.success__resting.hex,
+    disabledColor: colors.interactive.disabled__text.hex,
     focus: {
-      color: colors_.interactive.success__hover.hex,
+      color: colors.interactive.success__hover.hex,
     },
   },
 }

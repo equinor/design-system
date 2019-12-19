@@ -61,6 +61,6 @@ Icon.defaultProps = {
   color: '',
 }
 
-Icon.displayName = 'text-field-icon'
+Icon.displayName = 'eds-text-field-icon'
 
 export { Icon }

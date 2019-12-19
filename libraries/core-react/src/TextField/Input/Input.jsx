@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { tokens } from './Input.tokens'
+import { input as tokens } from './Input.tokens'
 import { typographyTemplate } from '../../_common/templates'
 import { propsFor, useTextField } from '../context'
 import { Icon } from '../Icon'
@@ -43,9 +43,6 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   margin: 0;
   border: none;
-
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
 
   background: ${tokens.background};
   padding-left: ${({ spacings }) => spacings.left};
@@ -101,13 +98,12 @@ const Input = React.forwardRef(function TextFieldInput(props, ref) {
     <Container>
       <StyledInput
         as={as}
+        ref={ref}
+        disabled={disabled}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        ref={ref}
-        spacings={spacings.input}
-        type="text"
         variant={inputVariant}
-        disabled={disabled}
+        spacings={spacings.input}
         {...other}
       />
       {inputIcon && <StyledIcon {...iconProps}>{inputIcon}</StyledIcon>}
@@ -145,6 +141,6 @@ Input.defaultProps = {
   disabled: false,
 }
 
-Input.displayName = 'text-field-input'
+Input.displayName = 'eds-text-field-input'
 
 export { Input }

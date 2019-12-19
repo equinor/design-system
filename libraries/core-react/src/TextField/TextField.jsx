@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Input } from './Input'
 import { Label } from './Label'
 import { HelperText } from './HelperText'
-import { propsFor, TextFieldProvider, useTextField } from './context'
+import { propsFor, TextFieldProvider } from './context'
 
 const Container = styled.div`
   min-width: 100px;
@@ -111,6 +111,6 @@ TextField.defaultProps = {
   inputIcon: null,
   helperIcon: null,
 }
-TextField.displayName = 'text-field'
+TextField.displayName = 'eds-text-field'
 
 export { TextField }
