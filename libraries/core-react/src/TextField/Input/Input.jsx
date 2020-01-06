@@ -6,6 +6,8 @@ import { typographyTemplate } from '../../_common/templates'
 import { propsFor, useTextField } from '../context'
 import { Icon } from '../Icon'
 
+const typeProps = ['text', 'search', 'password', 'email', 'number']
+
 const Variation = ({ variant }) => {
   if (!variant) {
     return ``
@@ -121,7 +123,7 @@ Input.propTypes = {
   /** Placeholder */
   placeholder: PropTypes.string,
   /** Specifiec which type input is */
-  type: PropTypes.oneOf(['text', 'search', 'password', 'email', 'number']),
+  type: PropTypes.oneOf(typeProps),
   /** Variant */
   variant: PropTypes.oneOf(propsFor.variants),
   /** Icon to be embeded in input field */
@@ -142,5 +144,9 @@ Input.defaultProps = {
 }
 
 Input.displayName = 'eds-text-field-input'
+
+Input.constants = {
+  types: typeProps,
+}
 
 export { Input }

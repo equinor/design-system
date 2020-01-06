@@ -113,4 +113,9 @@ TextField.defaultProps = {
 }
 TextField.displayName = 'eds-text-field'
 
+TextField.constants = {
+  variants: propsFor.variants,
+  types: Input.constants.types,
+}
+
 export { TextField }
