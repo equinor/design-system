@@ -47,12 +47,12 @@ storiesOf('Components', module).add('TextField', () => {
       <Typography variant="h1" bold>
         TextField
       </Typography>
-      <Typography variant="h3" bold>
+      <Typography variant="h2" bold>
         Default states
       </Typography>
       <Wrapper>
         <TextField
-          id="textfield-normal"
+          id="textfield-number"
           placeholder="Placeholder text"
           label="Vekt"
           meta="tonn"
@@ -130,16 +130,6 @@ storiesOf('Components', module).add('TextField', () => {
           placeholder="only meta"
           meta="Meta"
         />
-        <TextField
-          id="storybook-textfield11"
-          placeholder="no helper/label/meta text"
-        />
-        <TextField
-          id="storybook-textfield12"
-          placeholder="Only helper text"
-          helperText="Only helper text"
-        />
-        <TextField id="textfield-norma12" />
       </Wrapper>
       <Typography variant="h3" bold>
         Validation variants
