@@ -9,7 +9,6 @@ import SVGO from 'svgo'
 import childProcess from 'child_process'
 import * as R from 'ramda'
 import util from 'util'
-import prettier from 'prettier'
 
 import {
   fetchFigmaFile,
@@ -28,10 +27,10 @@ import {
 import { convert } from './functions/public'
 import FILE_ID from './files.json'
 // Files
-import { makeTokens } from './files/design-tokens'
 import { makeDesktopComponents } from './files/desktop-ui'
 import { getAssets } from './files/assets'
 import { isNotEmpty, sleep } from '@utils'
+import { createTokens } from './actions/createTokens'
 
 dotenv.config()
 
@@ -70,46 +69,6 @@ app
   .use(logger)
   .use(router.routes())
   .use(router.allowedMethods())
-
-// Tokens
-async function createTokens(ctx) {
-  try {
-    const data = await fetchFigmaFile(FILE_ID.tokens)
-
-    const figmaFile = processFigmaFile(data)
-    const tokens = makeTokens(figmaFile)
-
-    writeResults(tokens, PATHS.BASE_TOKENS, 'js')
-
-    const baseIndexContent = `${tokens
-      .map((token) => `import { ${token.name} } from './${token.name}'`)
-      .join('\n')}
-
-    export const tokens = {
-      ${tokens.map((token) => token.name).join(',\n')}
-    }
-
-    `
-    writeFile(
-      PATHS.BASE_TOKENS,
-      'index',
-      'js',
-      prettier.format(baseIndexContent, {
-        semi: false,
-        trailingComma: true,
-        singleQuote: true,
-      }),
-    )
-
-    // Disabled – shouldn’t really be done here…
-    // writeFile(`${TOKENS_DIR}`, 'index', 'js', `export { tokens } from './base'`)
-
-    ctx.response.body = JSON.stringify(tokens)
-  } catch (err) {
-    ctx.response.status = err.status || 500
-    ctx.response.body = err.message
-  }
-}
 
 // Assets
 
