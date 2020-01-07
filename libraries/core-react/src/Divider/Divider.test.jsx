@@ -3,8 +3,8 @@ import React from 'react'
 import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
-import { divider as tokens } from './Divider.tokens'
 import styled from 'styled-components'
+import { divider as tokens } from './Divider.tokens'
 import { Divider } from '.'
 
 const StyledDivider = styled(Divider)`
