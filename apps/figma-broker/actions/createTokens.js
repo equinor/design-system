@@ -1,15 +1,19 @@
 import prettier from 'prettier'
+import * as R from 'ramda'
 import { fetchFigmaFile, processFigmaFile } from '../functions/figma'
 import { writeFile, writeResults } from '../functions/file'
 import { makeTokens } from '../files/design-tokens'
+import { makeColorCss } from '../files/design-tokens/color'
+import { makeSpacingCss } from '../files/design-tokens/spacing'
+import { makeElevationCss } from '../files/design-tokens/elevation'
+import { makeClickboundsCss } from '../files/design-tokens/clickbounds'
 import { PATHS, FILE_IDS } from '../constants'
-import { jsonToCssString } from '../transformers/jsonToCss'
-import { jsonToCssClassString } from '../transformers/jsonToCssClass'
+import { toCSSVars } from '@transformers'
 
 const TOKENS_LIB_DIR = PATHS.BASE_TOKENS
 
 const PATHS_ = {
-  BASE_TOKENS_JS: `${TOKENS_LIB_DIR}/js`,
+  BASE_TOKENS_JS: `${TOKENS_LIB_DIR}`,
   BASE_TOKENS_JSON: `${TOKENS_LIB_DIR}/json`,
   BASE_TOKENS_CSS: `${TOKENS_LIB_DIR}/css`,
 }
@@ -46,23 +50,33 @@ const writeJsonTokens = (tokens) => {
 }
 
 const writeCSSTokens = (tokens) => {
-  const cssConverter = (name) => {
-    if (name === 'text') {
-      return jsonToCssClassString
-    }
-    return jsonToCssString
-  }
+  const css = R.pipe(
+    R.map(({ name, value }) => {
+      switch (name) {
+        case 'colors':
+          return makeColorCss(value)
+        case 'spacings':
+          return makeSpacingCss(value)
+        case 'elevation':
+          return makeElevationCss(value)
+        case 'clickbounds':
+          return makeClickboundsCss(value)
+        case 'typography':
+          return ''
+        case 'shape':
+          return ''
+        default:
+          return ''
+      }
+    }),
+    R.reduce((acc, val) => `${acc}${val}`, ''),
+    (x) => `--root {${x}}`,
+  )(tokens)
 
-  const cssFiles = tokens.map((token) => {
-    const cssValue = cssConverter(token.name)(token.value)
+  console.log(css)
+  writeFile(PATHS.TOKENS, 'tokens', 'css', css)
 
-    return {
-      ...token,
-      value: cssValue,
-    }
-  })
-
-  writeResults(cssFiles, PATHS_.BASE_TOKENS_CSS, 'css')
+  // writeResults(cssFiles, PATHS_.BASE_TOKENS_CSS, 'css')
 }
 
 export async function createTokens(ctx) {
@@ -73,7 +87,7 @@ export async function createTokens(ctx) {
     const tokens = makeTokens(figmaFile)
 
     writeJSTokens(tokens)
-    writeJsonTokens(tokens)
+    // writeJsonTokens(tokens)
     writeCSSTokens(tokens)
 
     ctx.response.body = JSON.stringify(tokens)

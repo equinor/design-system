@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import { propName, withType, pickChildren, toDictDeep } from '@utils'
 import { px } from '@units'
+import { toCSSVars } from '@transformers'
 
 const toHeightTokens = R.pipe(
   R.filter(withType('frame')),
@@ -27,3 +28,9 @@ const toHeightTokens = R.pipe(
 
 export const makeClickboundsTokens = (clickbounds) =>
   toHeightTokens(clickbounds)
+
+export const makeClickboundsCss = R.pipe(
+  R.mapObjIndexed((value, name) => ({ name: `clickbound_${name}`, value })),
+  R.values,
+  toCSSVars,
+)

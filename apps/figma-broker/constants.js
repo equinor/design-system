@@ -11,9 +11,10 @@ export const FILE_IDS = {
 }
 
 export const PATHS = {
+  TOKENS: TOKENS_DIR,
   BASE_TOKENS: `${TOKENS_DIR}/base`,
+  COMPONENTS_TOKENS: `${TOKENS_DIR}/components`,
   ASSETS_ICONS: `${STATIC_DIR}/icons`,
-  COMPONENTS_DESKTOP: `${TOKENS_DIR}/components`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
   IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,

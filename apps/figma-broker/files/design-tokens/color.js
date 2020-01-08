@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import { propName, withType, pickChildren, toDictDeep } from '@utils'
-import { fillToRgba, fillToHex, fillToHsla } from '@transformers'
+import { fillToRgba, fillToHex, fillToHsla, toCSSVars } from '@transformers'
 
 export const makeColorToken = (colors, getStyle) =>
   R.pipe(
@@ -31,3 +31,19 @@ export const makeColorToken = (colors, getStyle) =>
     }),
     toDictDeep,
   )(colors)
+
+export const makeColorCss = R.pipe(
+  R.mapObjIndexed((group, groupName) =>
+    R.mapObjIndexed(
+      (colors, colorName) => ({
+        name: `${groupName}_${colorName}`,
+        value: colors.rgba,
+      }),
+      group,
+    ),
+  ),
+  R.values,
+  R.map(R.values),
+  R.flatten,
+  toCSSVars,
+)

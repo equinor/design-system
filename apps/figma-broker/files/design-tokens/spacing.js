@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import { propName, withType, pickChildren, toDict } from '@utils'
 import { px } from '@units'
+import { toCSSVars } from '@transformers'
 
 const toComfortable = (x) => ({ comfortable: x })
 
@@ -26,3 +27,11 @@ const toSpacingTokens = R.pipe(
   toComfortable,
 )
 export const makeSpacingTokens = (spacings) => toSpacingTokens(spacings)
+
+export const makeSpacingCss = R.pipe(
+  R.prop('comfortable'),
+  R.tap((x) => console.log(x)),
+  R.mapObjIndexed((value, name) => ({ name: `spacing_${name}`, value })),
+  R.values,
+  toCSSVars,
+)

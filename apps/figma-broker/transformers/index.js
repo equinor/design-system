@@ -170,3 +170,9 @@ export const toIcon = (figmaNode) => {
     color: fillToRgba(fill),
   }
 }
+
+export const toCSSVars = (items) =>
+  `\n${items.reduce(
+    (acc, { name, value }) => `${acc}  --${name}: ${value};\n`,
+    '',
+  )}\n`
