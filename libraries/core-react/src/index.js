@@ -6,4 +6,5 @@ export { Divider } from './Divider'
 export { TextField } from './TextField'
 export { Icon } from './Icon'
 export { List } from './List'
+export { Tabs } from './Tabs'
 /* eslint-enable */
