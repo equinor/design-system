@@ -148,6 +148,7 @@ export const variants = () => (
 export const knobs = () => (
   <Wrapper>
     <TextField
+      id="storybook-knobs"
       variant={select(
         'Variant',
         [...Object.values(TextField.constants.variants)],
