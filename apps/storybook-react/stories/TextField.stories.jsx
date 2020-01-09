@@ -163,6 +163,7 @@ export const knobs = () => (
       placeholder={text('Placeholder', 'placeholder')}
       helperText={text('Helper text', 'Helper text')}
       multiline={boolean('Multine', false)}
+      disabled={boolean('Disabled', false)}
     ></TextField>
   </Wrapper>
 )
