@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { propName, withType, pickChildren, toDict } from '@utils'
+import { propName, withType, pickChildren, toDict, mergeStrings } from '@utils'
 import { px } from '@units'
 
 const toShapeTokens = R.pipe(
@@ -32,3 +32,19 @@ const toShapeTokens = R.pipe(
   toDict,
 )
 export const makeShapeTokens = (shapes) => toShapeTokens(shapes)
+
+export const makeShapeCss = R.pipe(
+  R.mapObjIndexed(
+    (shape, name) =>
+      `\n.shape_${name} {
+  min-height: ${shape.minHeight};
+  min-width: ${shape.minWidth};${
+        R.isEmpty(shape.borderRadius)
+          ? ''
+          : `\n\tborder-radius: ${shape.borderRadius};`
+      }
+}\n`,
+  ),
+  R.values,
+  mergeStrings,
+)

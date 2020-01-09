@@ -172,7 +172,7 @@ export const toIcon = (figmaNode) => {
 }
 
 export const toCSSVars = (items) =>
-  `\n${items.reduce(
+  `${items.reduce(
     (acc, { name, value }) => `${acc}  --${name}: ${value};\n`,
     '',
   )}\n`

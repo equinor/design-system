@@ -7,8 +7,10 @@ import { makeColorCss } from '../files/design-tokens/color'
 import { makeSpacingCss } from '../files/design-tokens/spacing'
 import { makeElevationCss } from '../files/design-tokens/elevation'
 import { makeClickboundsCss } from '../files/design-tokens/clickbounds'
+import { makeTypographyCss } from '../files/design-tokens/typography'
+import { makeShapeCss } from '../files/design-tokens/shape'
 import { PATHS, FILE_IDS } from '../constants'
-import { toCSSVars } from '@transformers'
+import { mergeStrings } from '@utils'
 
 const TOKENS_LIB_DIR = PATHS.BASE_TOKENS
 
@@ -51,32 +53,36 @@ const writeJsonTokens = (tokens) => {
 
 const writeCSSTokens = (tokens) => {
   const css = R.pipe(
-    R.map(({ name, value }) => {
-      switch (name) {
-        case 'colors':
-          return makeColorCss(value)
-        case 'spacings':
-          return makeSpacingCss(value)
-        case 'elevation':
-          return makeElevationCss(value)
-        case 'clickbounds':
-          return makeClickboundsCss(value)
-        case 'typography':
-          return ''
-        case 'shape':
-          return ''
-        default:
-          return ''
-      }
-    }),
-    R.reduce((acc, val) => `${acc}${val}`, ''),
-    (x) => `--root {${x}}`,
+    R.reduce(
+      (acc, { name, value }) => {
+        switch (name) {
+          case 'colors':
+            return { ...acc, root: [...acc.root, makeColorCss(value)] }
+          case 'spacings':
+            return { ...acc, root: [...acc.root, makeSpacingCss(value)] }
+          case 'elevation':
+            return { ...acc, root: [...acc.root, makeElevationCss(value)] }
+          case 'clickbounds':
+            return { ...acc, root: [...acc.root, makeClickboundsCss(value)] }
+          case 'typography':
+            const typographyCss = makeTypographyCss(value)
+            return {
+              ...acc,
+              root: [...acc.root, typographyCss.root],
+              classes: [...acc.classes, typographyCss.classes],
+            }
+          case 'shape':
+            return { ...acc, classes: [...acc.classes, makeShapeCss(value)] }
+          default:
+            return acc
+        }
+      },
+      { root: [], classes: [] },
+    ),
+    (x) => `:root {\n${mergeStrings(x.root)}}\n${mergeStrings(x.classes)}`,
   )(tokens)
 
-  console.log(css)
   writeFile(PATHS.TOKENS, 'tokens', 'css', css)
-
-  // writeResults(cssFiles, PATHS_.BASE_TOKENS_CSS, 'css')
 }
 
 export async function createTokens(ctx) {

@@ -94,3 +94,5 @@ export const camelize = (seperator, text) => {
   console.log(camel)
   return camel
 }
+
+export const mergeStrings = R.reduce((acc, val) => `${acc}${val}`, '')

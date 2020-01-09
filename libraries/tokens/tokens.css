@@ -1,8 +1,7 @@
---root {
+:root {
   --clickbound_jumbo__base: 88px;
   --clickbound_default__base: 48px;
   --clickbound_default__input: 56px;
-
 
   --text_static_icons__default: rgba(61, 61, 61, 1);
   --text_static_icons__secondary: rgba(86, 86, 86, 1);
@@ -81,14 +80,12 @@
   --interactive_field__fill_activated: rgba(220, 220, 220, 1);
   --tabs_inactive_text: rgba(86, 86, 86, 1);
 
-
   --elevation_raised: 0px 1px 5px rgba(0, 0, 0, 0.2),0px 3px 4px rgba(0, 0, 0, 0.12),0px 2px 4px rgba(0, 0, 0, 0.14);
   --elevation_none: 0px 0px 1px rgba(0, 0, 0, 0.14);
   --elevation_overlay: 0px 1px 10px rgba(0, 0, 0, 0.2),0px 4px 5px rgba(0, 0, 0, 0.12),0px 2px 4px rgba(0, 0, 0, 0.14);
   --elevation_sticky: 0px 4px 5px rgba(0, 0, 0, 0.2),0px 3px 14px rgba(0, 0, 0, 0.12),0px 8px 10px rgba(0, 0, 0, 0.14);
   --elevation_temporary_nav: 0px 7px 8px rgba(0, 0, 0, 0.2),0px 5px 22px rgba(0, 0, 0, 0.12),0px 12px 17px rgba(0, 0, 0, 0.14);
   --elevation_above_scrim: 0px 11px 15px rgba(0, 0, 0, 0.2),0px 9px 46px rgba(0, 0, 0, 0.12),0px 24px 38px rgba(0, 0, 0, 0.14);
-
 
   --spacing_xxx_large: 48px;
   --spacing_xx_large: 40px;
@@ -99,4 +96,373 @@
   --spacing_x_small: 4px;
   --spacing_xx_small: 2px;
 
+  font-size:16px;
+}
+
+.shape_circle {
+  min-height: 40px;
+  min-width: 40px;
+	border-radius: 100px;
+}
+
+.shape_rounded {
+  min-height: 40px;
+  min-width: 80px;
+	border-radius: 100px;
+}
+
+.shape_button {
+  min-height: 36px;
+  min-width: 112px;
+	border-radius: 4px;
+}
+
+.shape_corners {
+  min-height: 36px;
+  min-width: 112px;
+	border-radius: 4px;
+}
+
+.shape_icon_button {
+  min-height: 48px;
+  min-width: 48px;
+	border-radius: 100px;
+}
+
+.shape_field {
+  min-height: 56px;
+  min-width: 294px;
+}
+
+.shape_straight {
+  min-height: 36px;
+  min-width: 112px;
+}
+
+.shape_caret {
+  min-height: 8px;
+  min-width: 6px;
+}
+
+.heading_h1_bold{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 2.000rem;
+  font-weight: 700;
+  line-height: 1.500em;
+}
+.heading_h1{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 2.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+}
+.heading_h2{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.750rem;
+  font-weight: 400;
+  line-height: 1.429em;
+}
+.heading_h3{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.500rem;
+  font-weight: 400;
+  line-height: 1.667em;
+}
+.heading_h4{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.250rem;
+  font-weight: 400;
+  line-height: 1.600em;
+}
+.heading_h5{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  letter-spacing: 0.013em;
+}
+.heading_h6{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.500em;
+  letter-spacing: 0.013em;
+}
+.navigation_menu_title{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.000em;
+  letter-spacing: 0.013em;
+}
+.navigation_menu_tabs{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.000em;
+  letter-spacing: 0.013em;
+}
+.navigation_label{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.688rem;
+  font-weight: 400;
+  line-height: 1.455em;
+}
+.navigation_drawer_active{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 700;
+  line-height: 1.333em;
+  letter-spacing: 0.006em;
+}
+.navigation_drawer_inactive{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  letter-spacing: 0.013em;
+}
+.navigation_button{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+}
+.navigation_breadcrumb{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+}
+.navigation_breadcrumb_hover{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-decoration: UNDERLINE;
+}
+.input_label{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 400;
+  line-height: 1.333em;
+}
+.input_text{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  letter-spacing: 0.025em;
+}
+.input_text_monospaced{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  letter-spacing: 0.063em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+.input_helper{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.688rem;
+  font-weight: 400;
+  line-height: 1.455em;
+  letter-spacing: 0.013em;
+}
+.paragraph_body_short_italic{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+  font-style: italic;
+}
+.paragraph_caption{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.143em;
+}
+.paragraph_meta{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1.600em;
+}
+.paragraph_body_short{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+}
+.paragraph_body_short_bold_italic{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 700;
+  line-height: 1.250em;
+  font-style: italic;
+}
+.paragraph_body_short_bold{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 700;
+  line-height: 1.250em;
+}
+.paragraph_body_short_link{
+  color: rgba(0, 112, 121, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+  text-decoration: UNDERLINE;
+}
+.paragraph_overline{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.600em;
+  letter-spacing: 0.069em;
+  text-transform: UPPERCASE;
+}
+.paragraph_ingress{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.333em;
+}
+.paragraph_body_long{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+}
+.paragraph_body_long_link{
+  color: rgba(0, 112, 121, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  text-decoration: UNDERLINE;
+}
+.paragraph_body_long_italic{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  font-style: italic;
+}
+.paragraph_body_long_bold{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 700;
+  line-height: 1.500em;
+}
+.paragraph_body_long_bold_italic{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 700;
+  line-height: 1.500em;
+  font-style: italic;
+}
+.table_cell_header{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.714em;
+}
+.table_cell_text{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.714em;
+}
+.table_cell_text_bold{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.714em;
+}
+.table_cell_text_link{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.714em;
+  text-decoration: UNDERLINE;
+}
+.table_cell_numeric_monospaced{
+  color: rgba(0, 0, 0, 1);
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.429em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+.ui_tooltip{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+}
+.ui_snackbar{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 400;
+  line-height: 1.333em;
+}
+.ui_accordion_header{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.500em;
+}
+.ui_chip__badge{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 400;
+  line-height: 1.333em;
+}
+.ui_chart{
+  color: rgba(61, 61, 61, 1);
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 400;
+  line-height: 1.333em;
 }
