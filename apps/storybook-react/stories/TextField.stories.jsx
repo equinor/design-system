@@ -1,10 +1,8 @@
 import React from 'react'
-import { storiesOf } from '@storybook/react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
-import { TextField, Typogaphy } from '@equinor/eds-core-react'
+import { TextField } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
-import './../style.css'
 
 const Wrapper = styled.div`
   margin: 32px;
