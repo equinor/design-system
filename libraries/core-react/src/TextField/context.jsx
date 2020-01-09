@@ -22,7 +22,10 @@ export const TextFieldProvider = ({ children }) => {
 
 TextFieldProvider.propTypes = {
   /** @ignore */
-  children: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 }
 
 TextFieldProvider.defaultProps = {
