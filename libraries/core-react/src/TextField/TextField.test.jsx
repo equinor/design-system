@@ -65,7 +65,7 @@ describe('TextField', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${successToken.border.width} solid ${successToken.border.color}`,
+      `${successToken.border.outline.width} solid ${successToken.border.outline.color}`,
     )
   })
 
@@ -78,7 +78,7 @@ describe('TextField', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${warningToken.border.width} solid ${warningToken.border.color}`,
+      `${warningToken.border.outline.width} solid ${warningToken.border.outline.color}`,
     )
   })
 
@@ -91,7 +91,7 @@ describe('TextField', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${errorToken.border.width} solid ${errorToken.border.color}`,
+      `${errorToken.border.outline.width} solid ${errorToken.border.outline.color}`,
     )
   })
 
