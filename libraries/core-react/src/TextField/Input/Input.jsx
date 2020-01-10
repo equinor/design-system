@@ -13,17 +13,20 @@ const Variation = ({ variant }) => {
     return ``
   }
 
-  const { focus, border, borderBottom } = variant
+  const {
+    focus: { border: focusBorderOutline },
+    border: { outline: borderOutline, bottom: borderBottom },
+  } = variant
 
   return `
-  border-bottom: 1px solid ${borderBottom};
-  outline: ${border.width} solid ${border.color};
+  border-bottom: ${borderBottom.width} solid ${borderBottom.color};
+  outline: ${borderOutline.width} solid ${borderOutline.color};
 
   &:active,
   &:focus {
     outline-offset:0;
     border-bottom: 1px solid transparent;
-    outline: ${focus.border.width} solid ${focus.border.color};
+    outline: ${focusBorderOutline.width} solid ${focusBorderOutline.color};
 
   }
 

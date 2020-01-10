@@ -1,32 +1,36 @@
 import { tokens } from '@equinor/eds-tokens'
 
-const { colors, spacings: spacings_, typography } = tokens
+const {
+  colors,
+  spacings: { comfortable },
+  typography,
+} = tokens
 
 const spacings = {
   comfortable: {
     input: {
-      left: spacings_.comfortable.small,
-      right: spacings_.comfortable.small,
+      left: comfortable.small,
+      right: comfortable.small,
       top: '6px',
       bottom: '6px',
     },
     icon: {
-      left: spacings_.comfortable.small,
-      right: spacings_.comfortable.small,
+      left: comfortable.small,
+      right: comfortable.small,
       top: '10px',
       bottom: '10px',
     },
   },
   compact: {
     input: {
-      left: spacings_.comfortable.x_small,
-      right: spacings_.comfortable.x_small,
-      top: spacings_.comfortable.x_small,
-      bottom: spacings_.comfortable.x_small,
+      left: comfortable.x_small,
+      right: comfortable.x_small,
+      top: comfortable.x_small,
+      bottom: comfortable.x_small,
     },
     icon: {
-      left: spacings_.comfortable.small,
-      right: spacings_.comfortable.small,
+      left: comfortable.small,
+      right: comfortable.small,
       top: '10px',
       bottom: '10px',
     },
@@ -39,14 +43,13 @@ export const input = {
   color: colors.text.static_icons__default.hex,
   spacings,
   default: {
-    borderBottom: colors.text.static_icons__tertiary.hex,
     icon: {
       color: colors.text.static_icons__tertiary.hex,
       disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
-      color: 'transparent',
-      width: '1px',
+      outline: { color: 'transparent', width: '1px' },
+      bottom: { color: colors.text.static_icons__tertiary.hex, width: '1px' },
     },
     focus: {
       icon: {
@@ -59,14 +62,13 @@ export const input = {
     },
   },
   error: {
-    borderBottom: 'transparent',
     icon: {
       color: colors.interactive.danger__resting.hex,
       disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
-      color: colors.interactive.danger__resting.hex,
-      width: '1px',
+      outline: { color: colors.interactive.danger__resting.hex, width: '1px' },
+      bottom: { color: 'transparent', width: '1px' },
     },
     focus: {
       icon: {
@@ -79,14 +81,13 @@ export const input = {
     },
   },
   warning: {
-    borderBottom: 'transparent',
     icon: {
       color: colors.interactive.warning__resting.hex,
       disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
-      color: colors.interactive.warning__resting.hex,
-      width: '1px',
+      bottom: { color: 'transparent', width: '1px' },
+      outline: { color: colors.interactive.warning__resting.hex, width: '1px' },
     },
     focus: {
       icon: {
@@ -99,14 +100,13 @@ export const input = {
     },
   },
   success: {
-    borderBottom: 'transparent',
     icon: {
       color: colors.interactive.success__resting.hex,
       disabledColor: colors.interactive.disabled__fill.hex,
     },
     border: {
-      color: colors.interactive.success__resting.hex,
-      width: '1px',
+      outline: { color: colors.interactive.success__resting.hex, width: '1px' },
+      bottom: { color: 'transparent', width: '1px' },
     },
     focus: {
       icon: {

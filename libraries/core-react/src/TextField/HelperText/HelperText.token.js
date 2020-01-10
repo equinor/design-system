@@ -1,18 +1,22 @@
 import { tokens } from '@equinor/eds-tokens'
 
-const { colors, spacings: spacings_, typography } = tokens
+const {
+  colors,
+  spacings: { comfortable },
+  typography,
+} = tokens
 
 const spacings = {
   comfortable: {
-    left: spacings_.comfortable.small,
-    right: spacings_.comfortable.small,
-    top: spacings_.comfortable.small,
+    left: comfortable.small,
+    right: comfortable.small,
+    top: comfortable.small,
     bottom: '6px',
   },
   compact: {
-    left: spacings_.comfortable.small,
-    right: spacings_.comfortable.small,
-    top: spacings_.comfortable.xx_small,
+    left: comfortable.small,
+    right: comfortable.small,
+    top: comfortable.xx_small,
     bottom: '6px',
   },
 }
