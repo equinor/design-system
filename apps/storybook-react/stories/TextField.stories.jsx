@@ -88,19 +88,10 @@ export const types = () => (
       meta="Meta"
       helperText="Helper Text"
     />
-
-    <TextField
-      id="storybook-disabled"
-      placeholder="Placeholder text"
-      label="Disabled"
-      meta="Meta"
-      helperText="Helper Text"
-      disabled
-    />
   </Wrapper>
 )
 
-export const multiline = () => (
+export const Other = () => (
   <Wrapper>
     <TextField
       id="storybook-multiline"
@@ -109,6 +100,14 @@ export const multiline = () => (
       meta="Meta"
       helperText="Helper Text"
       multiline
+    />
+    <TextField
+      id="storybook-disabled"
+      placeholder="Placeholder text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
     />
   </Wrapper>
 )
