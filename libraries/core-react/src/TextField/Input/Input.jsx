@@ -48,6 +48,7 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   margin: 0;
   border: none;
+  appearance: none;
 
   background: ${tokens.background};
   padding-left: ${({ spacings }) => spacings.left};
