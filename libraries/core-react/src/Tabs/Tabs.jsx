@@ -10,7 +10,7 @@ const StyledTabList = styled.div`
   background-color: violet;
 `
 const StyledTabPanels = styled.div`
-  background-color: silver;
+  background-color: white;
 `
 
 const Tabs = forwardRef(function Tabs(props, ref) {
@@ -50,9 +50,14 @@ const TabList = forwardRef(function TabsList(props, ref) {
 
 const TabPanels = forwardRef(function TabsPanel(props, ref) {
   const { activeIndex } = useContext(TabsContext)
+  const children = React.Children.map(props.children, (child, index) =>
+    React.cloneElement(child, {
+      hidden: index !== activeIndex,
+    }),
+  )
   return (
     <StyledTabPanels ref={ref} {...props}>
-      {props.children[activeIndex]}
+      {children}
     </StyledTabPanels>
   )
 })
