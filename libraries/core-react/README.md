@@ -7,6 +7,7 @@ The React implementation of the Equinor Design System, still in early alpha so b
   - Divider
   - Table
   - Typography
+  - TextField
 
 ## Installation
 
