@@ -144,42 +144,42 @@
   min-width: 6px;
 }
 
-.heading_h1_bold{
+.heading_h1_bold {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 2.000rem;
   font-weight: 700;
   line-height: 1.500em;
 }
-.heading_h1{
+h1 {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 2.000rem;
   font-weight: 400;
   line-height: 1.500em;
 }
-.heading_h2{
+h2 {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.750rem;
   font-weight: 400;
   line-height: 1.429em;
 }
-.heading_h3{
+h3 {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.500rem;
   font-weight: 400;
   line-height: 1.667em;
 }
-.heading_h4{
+h4 {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.250rem;
   font-weight: 400;
   line-height: 1.600em;
 }
-.heading_h5{
+h5 {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.125rem;
@@ -187,7 +187,7 @@
   line-height: 1.333em;
   letter-spacing: 0.013em;
 }
-.heading_h6{
+h6 {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -195,7 +195,7 @@
   line-height: 1.500em;
   letter-spacing: 0.013em;
 }
-.navigation_menu_title{
+.navigation_menu_title {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -203,7 +203,7 @@
   line-height: 1.000em;
   letter-spacing: 0.013em;
 }
-.navigation_menu_tabs{
+.navigation_menu_tabs {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -211,14 +211,14 @@
   line-height: 1.000em;
   letter-spacing: 0.013em;
 }
-.navigation_label{
+.navigation_label {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.688rem;
   font-weight: 400;
   line-height: 1.455em;
 }
-.navigation_drawer_active{
+.navigation_drawer_active {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.750rem;
@@ -226,7 +226,7 @@
   line-height: 1.333em;
   letter-spacing: 0.006em;
 }
-.navigation_drawer_inactive{
+.navigation_drawer_inactive {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.750rem;
@@ -234,21 +234,21 @@
   line-height: 1.333em;
   letter-spacing: 0.013em;
 }
-.navigation_button{
+.navigation_button {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.143em;
 }
-.navigation_breadcrumb{
+.navigation_breadcrumb {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.143em;
 }
-.navigation_breadcrumb_hover{
+.navigation_breadcrumb_hover {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
@@ -256,14 +256,14 @@
   line-height: 1.143em;
   text-decoration: UNDERLINE;
 }
-.input_label{
+.input_label {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 400;
   line-height: 1.333em;
 }
-.input_text{
+.input_text {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -271,7 +271,7 @@
   line-height: 1.500em;
   letter-spacing: 0.025em;
 }
-.input_text_monospaced{
+.input_text_monospaced {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -280,7 +280,7 @@
   letter-spacing: 0.063em;
   font-feature-settings: 'tnum' on, 'lnum' on;
 }
-.input_helper{
+.input_helper {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.688rem;
@@ -288,7 +288,7 @@
   line-height: 1.455em;
   letter-spacing: 0.013em;
 }
-.paragraph_body_short_italic{
+.paragraph_body_short_italic {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -296,28 +296,28 @@
   line-height: 1.250em;
   font-style: italic;
 }
-.paragraph_caption{
+.paragraph_caption {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.143em;
 }
-.paragraph_meta{
+.paragraph_meta {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 0.625rem;
   font-weight: 400;
   line-height: 1.600em;
 }
-.paragraph_body_short{
+p {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.250em;
 }
-.paragraph_body_short_bold_italic{
+.paragraph_body_short_bold_italic {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -325,14 +325,14 @@
   line-height: 1.250em;
   font-style: italic;
 }
-.paragraph_body_short_bold{
+.paragraph_body_short_bold {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 700;
   line-height: 1.250em;
 }
-.paragraph_body_short_link{
+.paragraph_body_short_link {
   color: rgba(0, 112, 121, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -340,7 +340,7 @@
   line-height: 1.250em;
   text-decoration: UNDERLINE;
 }
-.paragraph_overline{
+.paragraph_overline {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 0.625rem;
@@ -349,21 +349,21 @@
   letter-spacing: 0.069em;
   text-transform: UPPERCASE;
 }
-.paragraph_ingress{
+.paragraph_ingress {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.333em;
 }
-.paragraph_body_long{
+.paragraph_body_long {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.500em;
 }
-.paragraph_body_long_link{
+a {
   color: rgba(0, 112, 121, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -371,7 +371,7 @@
   line-height: 1.500em;
   text-decoration: UNDERLINE;
 }
-.paragraph_body_long_italic{
+.paragraph_body_long_italic {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -379,14 +379,14 @@
   line-height: 1.500em;
   font-style: italic;
 }
-.paragraph_body_long_bold{
+.paragraph_body_long_bold {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 700;
   line-height: 1.500em;
 }
-.paragraph_body_long_bold_italic{
+.paragraph_body_long_bold_italic {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -394,28 +394,28 @@
   line-height: 1.500em;
   font-style: italic;
 }
-.table_cell_header{
+th {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.714em;
 }
-.table_cell_text{
+table {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.714em;
 }
-.table_cell_text_bold{
+.table_cell_text_bold {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.714em;
 }
-.table_cell_text_link{
+.table_cell_text_link {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
@@ -423,7 +423,7 @@
   line-height: 1.714em;
   text-decoration: UNDERLINE;
 }
-.table_cell_numeric_monospaced{
+td {
   color: rgba(0, 0, 0, 1);
   font-family: Equinor;
   font-size: 0.875rem;
@@ -431,35 +431,35 @@
   line-height: 1.429em;
   font-feature-settings: 'tnum' on, 'lnum' on;
 }
-.ui_tooltip{
+.ui_tooltip {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 500;
   line-height: 1.333em;
 }
-.ui_snackbar{
+.ui_snackbar {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 400;
   line-height: 1.333em;
 }
-.ui_accordion_header{
+.ui_accordion_header {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 500;
   line-height: 1.500em;
 }
-.ui_chip__badge{
+.ui_chip__badge {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 400;
   line-height: 1.333em;
 }
-.ui_chart{
+.ui_chart {
   color: rgba(61, 61, 61, 1);
   font-family: Equinor;
   font-size: 0.750rem;

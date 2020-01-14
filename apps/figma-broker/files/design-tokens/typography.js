@@ -37,7 +37,7 @@ export const makeTypographyCss = (typography) => ({
     R.mapObjIndexed((group, groupName) =>
       R.mapObjIndexed(
         (typography, typographyName) =>
-          `\n.${groupName}_${typographyName}{\n${typographyTemplate(
+          `\n${cssName(groupName, typographyName)} {\n${cssBody(
             typography,
           )}\n}`,
         group,
@@ -52,7 +52,7 @@ export const makeTypographyCss = (typography) => ({
 
 // This is a duplicate from eds-core-react/common for now...
 // TODO Do we need a common/util lib for all of eds?
-export const typographyTemplate = (typography, link) => {
+const cssBody = (typography, link) => {
   let base = `  color: ${typography.color};
   font-family: ${typography.fontFamily};
   font-size: ${typography.fontSize};
@@ -80,4 +80,33 @@ export const typographyTemplate = (typography, link) => {
   }
 
   return base
+}
+
+const cssName = (group, name) => {
+  switch (name) {
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    case 'h5':
+    case 'h6':
+    case 'button':
+    case 'label':
+      return name
+    case 'body_short':
+      return 'p'
+    case 'cell_header':
+      return 'th'
+    case 'cell_text':
+      return 'table'
+    case 'table_cell_text_link':
+      return 'td a'
+    // We choose numeric as text & numbers looks good with this
+    case 'cell_numeric_monospaced':
+      return 'td'
+    case 'body_long_link':
+      return 'a'
+    default:
+      return `.${group}_${name}`
+  }
 }
