@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Tabs, Typography } from '@equinor/eds-core-react'
@@ -24,7 +24,10 @@ const Panel = styled.div`
 export const allTabs = () => {
   const [tabIndex, setTabIndex] = useState(0)
 
-  const tabChange = (index) => setTabIndex(index)
+  const handleChange = (event, index) => {
+    console.log('event:', event)
+    setTabIndex(index)
+  }
 
   return (
     <Wrapper>
@@ -42,7 +45,7 @@ export const allTabs = () => {
 
       <Typography>Active tab: {tabIndex}</Typography>
 
-      <Tabs value={tabIndex} onChange={tabChange}>
+      <Tabs value={tabIndex} onChange={handleChange}>
         <TabList>
           <Tab>Tab one</Tab>
           <Tab>Tab two</Tab>
@@ -56,10 +59,59 @@ export const allTabs = () => {
       </Tabs>
 
       <Panel>
-        <button onClick={() => setTabIndex(1)} type="button">
+        <button onClick={(event) => handleChange(event, 2)} type="button">
           Select tab 2
         </button>
       </Panel>
     </Wrapper>
+  )
+}
+
+export const customPanels = () => {
+  const [tabIndex, setTabIndex] = useState(0)
+
+  const handleChange = (event, index) => {
+    console.log('event:', event.currentTarget)
+    setTabIndex(index)
+  }
+
+  const MyPanel = (props) =>
+    props.value === props.index && <div>{props.children}</div>
+
+  return (
+    <Wrapper>
+      <Tabs value={tabIndex} onChange={handleChange}>
+        <TabList>
+          <Tab>Tab one</Tab>
+          <Tab>Tab two</Tab>
+          <Tab>Tab three</Tab>
+        </TabList>
+      </Tabs>
+      <MyPanel value={tabIndex} index={0}>
+        Tab one
+      </MyPanel>
+      <MyPanel value={tabIndex} index={1}>
+        Tab two
+      </MyPanel>
+      <MyPanel value={tabIndex} index={2}>
+        Tab three
+      </MyPanel>
+    </Wrapper>
+  )
+}
+
+export const focusedTab = () => {
+  const focusedTab = createRef()
+
+  useEffect(() => focusedTab.current.focus())
+
+  return (
+    <Tabs value={0}>
+      <TabList>
+        <Tab>Active tab</Tab>
+        <Tab ref={focusedTab}>Focused tab</Tab>
+        <Tab>Inactive tab</Tab>
+      </TabList>
+    </Tabs>
   )
 }

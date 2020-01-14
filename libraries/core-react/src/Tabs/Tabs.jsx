@@ -2,13 +2,10 @@ import React, { forwardRef, useContext } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { TabsProvider, TabsContext } from './Tabs.context'
+import { Tab } from './Tab'
 
 const StyledTabs = styled.div``
 
-const StyledTab = styled.button`
-  background-color: ${(props) => (props.active ? 'orange' : 'yellow')};
-  outline: none;
-`
 const StyledTabList = styled.div`
   background-color: violet;
 `
@@ -26,24 +23,12 @@ const Tabs = forwardRef(function Tabs(props, ref) {
   )
 })
 
-const Tab = forwardRef(function Tab(props, ref) {
-  const { changeHandler } = useContext(TabsContext)
-
-  return (
-    <StyledTab
-      onClick={() => changeHandler(props.index)}
-      ref={ref}
-      {...props}
-    />
-  )
-})
-
-Tab.propTypes = {
-  active: PropTypes.bool,
+Tabs.propTypes = {
+  variants: PropTypes.oneOf(['fullWidth', 'minWidth']),
 }
 
-Tab.defaultProps = {
-  active: false,
+Tabs.defaultProps = {
+  variants: 'fullWidth',
 }
 
 const TabList = forwardRef(function TabsList(props, ref) {
