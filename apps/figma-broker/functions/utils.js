@@ -86,13 +86,5 @@ export const sleep = (ms) =>
 const capitalize = (word) => {
   return `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`
 }
-export const camelize = (seperator, text) => {
-  const words = text.split(seperator)
-  const result = [words[0]]
-  words.slice(1).forEach((word) => result.push(capitalize(word)))
-  const camel = result.join('')
-  console.log(camel)
-  return camel
-}
 
 export const mergeStrings = R.reduce((acc, val) => `${acc}${val}`, '')
