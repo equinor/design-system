@@ -1,36 +1,66 @@
 import React, { forwardRef, useContext } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { TabsContext } from './Tabs.context'
 import { tab as tokens } from './Tabs.tokens'
 
 const {
-  clickbound,
+  clickbound: height,
   spacing: { left: paddingLeft, right: paddingRight },
   states: {
     enabled,
-    disabled: { disabledHover, ...disabled },
-    hover: { backgroundColor: hoverBackgroundColor },
-    focused,
-    activated: {
-      hover: { color: activatedHoverColor },
-      activatedPressed,
-      ...activated
+    disabled: { hover: disabledHover, ...disabled },
+    hover,
+    focused: {
+      outline: {
+        width: outlineWidth,
+        style: outlineStyle,
+        color: outlineColor,
+      },
     },
+    activated: { hover: activatedHover, ...activated },
   },
 } = tokens
 
-const StyledTab = styled.button(({ active }) => ({
+const enabledStyles = {
   ...enabled,
-  color: active ? activated.color : enabled.color,
-  appearance: 'none',
   paddingLeft,
   paddingRight,
+  height,
   '&:hover': {
-    backgroundColor: hoverBackgroundColor,
-    color: active ? activatedHoverColor : enabled.color,
+    ...hover,
   },
-}))
+}
+
+const activeStyles = {
+  ...activated,
+  '&:hover': {
+    ...activatedHover,
+  },
+}
+
+const disabledStyles = {
+  ...disabled,
+  '&:hover': {
+    ...disabledHover,
+  },
+}
+
+const focusStyles = {
+  outlineWidth,
+  outlineStyle,
+  outlineColor,
+}
+
+const StyledTab = styled.button`
+  appearance: none;
+  ${() => enabledStyles}
+  ${(props) => props.active && activeStyles}
+  ${(props) => props.disabled && disabledStyles}
+  &:focus {
+    ${() => focusStyles}
+  }
+`
 
 export const Tab = forwardRef(function Tab(props, ref) {
   const { changeHandler } = useContext(TabsContext)

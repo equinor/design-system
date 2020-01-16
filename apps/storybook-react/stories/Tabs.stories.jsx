@@ -49,7 +49,7 @@ export const allTabs = () => {
         <TabList>
           <Tab>Tab one</Tab>
           <Tab>Tab two</Tab>
-          <Tab>Tab three</Tab>
+          <Tab disabled>Tab three</Tab>
         </TabList>
         <TabPanels>
           <div>Panel one</div>
@@ -115,3 +115,5 @@ export const focusedTab = () => {
     </Tabs>
   )
 }
+
+export const tabStates = () => {}

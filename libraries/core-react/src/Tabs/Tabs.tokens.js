@@ -53,13 +53,13 @@ export const tab = {
       borderColor: defaultBorderColor,
       borderWidth: '0 0 2px',
       borderStyle: 'solid',
-      height: '48px',
       textAlign: 'center',
     },
     disabled: {
       borderWidth: '0',
       hover: {
         cursor: 'not-allowed',
+        backgroundColor: defaultBackgroundColor,
       },
     },
     hover: {
@@ -78,9 +78,6 @@ export const tab = {
       borderColor: activeColor,
       hover: {
         color: activeHoverColor,
-      },
-      pressed: {
-        borderColor: activeColor,
       },
     },
   },
