@@ -35,7 +35,7 @@ export const makeElevationTokens = (elevations, getStyle) =>
   )(elevations)
 
 export const makeElevationCss = R.pipe(
-  R.mapObjIndexed((value, name) => ({ name: `elevation_${name}`, value })),
+  R.mapObjIndexed((value, name) => ({ name: `eds_elevation_${name}`, value })),
   R.values,
   toCSSVars,
 )

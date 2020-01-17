@@ -30,7 +30,7 @@ export const makeClickboundsTokens = (clickbounds) =>
   toHeightTokens(clickbounds)
 
 export const makeClickboundsCss = R.pipe(
-  R.mapObjIndexed((value, name) => ({ name: `clickbound_${name}`, value })),
+  R.mapObjIndexed((value, name) => ({ name: `eds_clickbound_${name}`, value })),
   R.values,
   toCSSVars,
 )

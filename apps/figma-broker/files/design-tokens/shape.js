@@ -33,18 +33,16 @@ const toShapeTokens = R.pipe(
 )
 export const makeShapeTokens = (shapes) => toShapeTokens(shapes)
 
+const classTemplate = (shape, name) =>
+  `\n  --eds_shape_${name}_min_height: ${shape.minHeight};
+  --eds_shape_${name}_min_width: ${shape.minHeight};${
+    R.isEmpty(shape.borderRadius)
+      ? ''
+      : `\n  --eds_shape_${name}_border_radius: ${shape.borderRadius};`
+  }\n`
+
 export const makeShapeCss = R.pipe(
-  R.mapObjIndexed(
-    (shape, name) =>
-      `\n.shape_${name} {
-  min-height: ${shape.minHeight};
-  min-width: ${shape.minWidth};${
-        R.isEmpty(shape.borderRadius)
-          ? ''
-          : `\n\tborder-radius: ${shape.borderRadius};`
-      }
-}\n`,
-  ),
+  R.mapObjIndexed(classTemplate),
   R.values,
   mergeStrings,
 )

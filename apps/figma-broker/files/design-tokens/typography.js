@@ -31,30 +31,10 @@ export const makeTextTokens = (typographies, getStyle) =>
     toDictDeep,
   )(typographies)
 
-export const makeTypographyCss = (typography) => ({
-  root: '  font-size:16px;\n',
-  classes: R.pipe(
-    R.mapObjIndexed((group, groupName) =>
-      R.mapObjIndexed(
-        (typography, typographyName) =>
-          `\n${cssName(groupName, typographyName)} {\n${cssBody(
-            typography,
-          )}\n}`,
-        group,
-      ),
-    ),
-    R.values,
-    R.map(R.values),
-    R.flatten,
-    mergeStrings,
-  )(typography),
-})
-
 // This is a duplicate from eds-core-react/common for now...
 // TODO Do we need a common/util lib for all of eds?
 const cssBody = (typography, link) => {
   let base = `  color: ${typography.color};
-  font-family: ${typography.fontFamily};
   font-size: ${typography.fontSize};
   font-weight: ${typography.fontWeight};
   line-height: ${typography.lineHeight};`
@@ -107,6 +87,23 @@ const cssName = (group, name) => {
     case 'body_long_link':
       return 'a'
     default:
-      return `.${group}_${name}`
+      return ``
   }
 }
+
+export const makeTypographyCss = (typography) => ({
+  root: '  font-size:16px;\n  font-family: Equinor;\n',
+  classes: R.pipe(
+    R.mapObjIndexed((group, groupName) =>
+      R.mapObjIndexed((typography, typographyName) => {
+        const name = cssName(groupName, typographyName)
+
+        return R.isEmpty(name) ? '' : `\n${name} {\n${cssBody(typography)}\n}`
+      }, group),
+    ),
+    R.values,
+    R.map(R.values),
+    R.flatten,
+    mergeStrings,
+  )(typography),
+})

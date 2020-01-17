@@ -59,7 +59,10 @@ const writeCSSTokens = (tokens) => {
           case 'colors':
             return { ...acc, root: [...acc.root, makeColorCss(value)] }
           case 'spacings':
-            return { ...acc, root: [...acc.root, makeSpacingCss(value)] }
+            return {
+              ...acc,
+              root: [...acc.root, `\n${makeSpacingCss(value)}`],
+            }
           case 'elevation':
             return { ...acc, root: [...acc.root, makeElevationCss(value)] }
           case 'clickbounds':
@@ -72,7 +75,7 @@ const writeCSSTokens = (tokens) => {
               classes: [...acc.classes, typographyCss.classes],
             }
           case 'shape':
-            return { ...acc, classes: [...acc.classes, makeShapeCss(value)] }
+            return { ...acc, root: [...acc.root, makeShapeCss(value)] }
           default:
             return acc
         }

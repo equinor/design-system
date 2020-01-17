@@ -36,7 +36,7 @@ export const makeColorCss = R.pipe(
   R.mapObjIndexed((group, groupName) =>
     R.mapObjIndexed(
       (colors, colorName) => ({
-        name: `${groupName}_${colorName}`,
+        name: `eds_${groupName}_${colorName}`,
         value: colors.rgba,
       }),
       group,
