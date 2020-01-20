@@ -3,9 +3,13 @@
   "version": "0.0.1-alpha.6",
   "main": "dist/tokens.cjs.js",
   "module": "dist/tokens.esm.js",
+  "browser": "dist/tokens.umd.js",
   "engines": {
     "pnpm": ">=4"
   },
+  "files": [
+    "dist/*"
+  ],
   "description": "Design tokens for the Equinor Design System",
   "author": {
     "name": "EDS Core Team",
@@ -17,7 +21,7 @@
   },
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },

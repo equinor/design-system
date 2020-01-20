@@ -22,6 +22,12 @@ export default [
         format: 'cjs',
         exports: 'named',
       },
+      {
+        file: pkg.browser,
+        name: pkg.name,
+        format: 'umd',
+        exports: 'named',
+      },
     ],
   },
 ]
