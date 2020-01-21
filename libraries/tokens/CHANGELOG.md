@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Compiled bundle for esm and cjs modules
+- Compiled bundle for esm, cjs and umd modules
 
 ## [0.0.1-alpha.5] - 2019-12-13
 
