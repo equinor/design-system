@@ -1,5 +1,6 @@
-import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
 import pkg from './package.json'
+import commonjsPkg from './commonjs/package.json'
 
 // eslint-disable-next-line import/no-default-export
 export default [
@@ -8,7 +9,7 @@ export default [
     watch: {
       clearScreen: true,
     },
-    plugins: [commonjs()],
+    plugins: [resolve()],
     output: [
       {
         file: pkg.module,
@@ -17,7 +18,7 @@ export default [
         exports: 'named',
       },
       {
-        file: pkg.main,
+        file: commonjsPkg.main,
         name: pkg.name,
         format: 'cjs',
         exports: 'named',

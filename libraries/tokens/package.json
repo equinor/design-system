@@ -1,7 +1,8 @@
 {
   "name": "@equinor/eds-tokens",
   "version": "0.0.1-alpha.6",
-  "main": "dist/tokens.cjs.js",
+  "type": "module",
+  "main": "dist/tokens.esm.js",
   "module": "dist/tokens.esm.js",
   "browser": "dist/tokens.umd.js",
   "engines": {
@@ -31,8 +32,8 @@
     "equinor",
     "design tokens"
   ],
-  "dependencies": {
-    "@rollup/plugin-commonjs": "^11.0.1",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^7.0.0",
     "rollup": "^1.29.0"
   }
 }
