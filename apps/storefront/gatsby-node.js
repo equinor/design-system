@@ -3,6 +3,9 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 const { copy } = require('fs-extra')
 const { graphql } = require('gatsby')
 
+let gatsbyNodeModules = require('fs').realpathSync('node_modules/gatsby')
+gatsbyNodeModules = require('path').resolve(gatsbyNodeModules, '..')
+
 // Method that creates nodes based on the file system that we can use in our templates
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -147,6 +150,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: { $components: path.resolve(__dirname, 'src/components') },
+      modules: [gatsbyNodeModules, 'node_modules'],
     },
   })
 }
