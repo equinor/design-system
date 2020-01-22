@@ -12,5 +12,4 @@ http POST http://localhost:9001/assets
 // Generates images of components linked to in Storefront mdx files
 http POST http://localhost:9001/figma-images
 
-// POC: Transformers design tokens into other formats defined in function
-http POST http://localhost:9001/transform-tokens
+

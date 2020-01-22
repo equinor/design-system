@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import { propName, withType, pickChildren, toDictDeep } from '@utils'
 import { px } from '@units'
-import { fillToRgba } from '@transformers'
+import { fillToRgba, toCSSVars } from '@transformers'
 
 const toBoxShadow = (effect) =>
   `${px(effect.offset.x)} ${px(effect.offset.y)} ${px(
@@ -33,3 +33,9 @@ export const makeElevationTokens = (elevations, getStyle) =>
     toDictDeep,
     R.view(R.lensProp('elevation')),
   )(elevations)
+
+export const makeElevationCss = R.pipe(
+  R.mapObjIndexed((value, name) => ({ name: `eds_elevation_${name}`, value })),
+  R.values,
+  toCSSVars,
+)
