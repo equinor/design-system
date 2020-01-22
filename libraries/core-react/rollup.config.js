@@ -24,10 +24,7 @@ export default [
     },
     plugins: [
       json(),
-      resolve({
-        browser: true,
-        extensions: ['.jsx'],
-      }),
+      resolve({ extensions: ['.jsx'] }),
       babel({
         exclude: 'node_modules/**',
         presets: ['@babel/env', '@babel/preset-react'],
