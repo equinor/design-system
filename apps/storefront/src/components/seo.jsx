@@ -29,6 +29,12 @@ function SEO({ description, lang, meta, keywords, title }) {
             }}
             title={title}
             titleTemplate={`%s | ${data.site.siteMetadata.title}`}
+            link={[
+              {
+                rel: 'stylesheet',
+                href: 'https://eds-static.equinor.com/font/equinor-font.css',
+              },
+            ]}
             meta={[
               {
                 name: 'description',

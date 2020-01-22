@@ -25,9 +25,9 @@ html {
 
 body {
   margin: 0;
-  font-family: system-ui, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  font-family: Equinor, system-ui, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
   font-kerning: normal;
   font-feature-settings: 'kern', 'liga';
   color: var(--black);
@@ -40,7 +40,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Roboto;
+  font-family: Equinor;
   font-weight: 500 !important;
   text-rendering: optimizeLegibility;
 }
@@ -225,7 +225,6 @@ td {
   }
 
   &-trigger {
-    font-family: Roboto;
     padding: 0.85rem 1rem 0.85rem 2rem;
     text-decoration: none;
     color: inherit;
@@ -393,6 +392,9 @@ td {
 /* Github style  */
 
 .markdown-body {
+  font-family: Equinor, system-ui, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
   box-sizing: border-box;
   min-width: 200px;
   max-width: 980px;

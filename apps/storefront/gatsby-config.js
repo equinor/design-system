@@ -6,9 +6,8 @@ const emoji = require(`remark-emoji`)
 module.exports = {
   siteMetadata: {
     title: 'Equinor Design System',
-    description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@chrisbiscardi',
+    description: 'The Equinor Design System',
+    author: 'The EDS Core Team <fg_eds@equinor.com>',
   },
   plugins: [
     {
@@ -94,17 +93,6 @@ module.exports = {
           require('postcss-custom-media'),
           require('postcss-nested'),
           /* eslint-enable global-require */
-        ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: 'Roboto',
-            variants: [`400`, `500`, `700`, `900`],
-          },
         ],
       },
     },

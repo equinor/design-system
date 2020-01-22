@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-mdx'
 import { graphql, Link } from 'gatsby'
 import classNames from 'classnames'
+import SEO from '../components/SEO'
 import Layout from '../components/layout'
 
 const Page = ({ data }) => {
@@ -15,6 +16,9 @@ const Page = ({ data }) => {
 
   return (
     <Layout>
+      <SEO
+        title={currentCategory === 'homepage' ? 'EDS' : page.frontmatter.title}
+      />
       <h1>
         {page.frontmatter.title}
         {page.frontmatter.mode !== 'publish' && (
