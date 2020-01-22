@@ -20,6 +20,9 @@ scripts:
   dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
   storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
   storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
+  dockerize-storefront: docker build --build-arg GATSBY_STAGE=prod -t eds/storefront -f apps/storefront/Dockerfile .
+  storefront-docker-run: 'docker run -p 8080:80 eds/storefront'
+  storefront-docker-inspect: docker run -it eds/storefront /bin/sh
 devDependencies:
   eslint: ^6.7.2
   eslint-config-airbnb: ^17.1.1

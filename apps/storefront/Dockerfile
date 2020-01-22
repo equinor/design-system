@@ -1,21 +1,39 @@
-FROM node:11-alpine as builder
+FROM node:12 as builder
 WORKDIR /app
 
-# install pacakges
-RUN npm config set registry https://npm.equinor.com/
-COPY package*.json ./
-ARG NPM_TOKEN
-RUN echo "//npm.equinor.com/:_authToken=$NPM_TOKEN" > .npmrc
-RUN npm i --quiet
+# install pnpm
+RUN npm install -g pnpm
 
-# build
-COPY . .
+COPY ./package.yaml ./
+COPY ./pnpm-workspaces.yaml ./
+COPY ./.npmrc ./
+
+# copy libraries
+WORKDIR /app/libraries
+COPY ./libraries/tokens ./tokens
+COPY ./libraries/core-react ./core-react
+
+# copy storefront
+WORKDIR /app/apps
+COPY ./apps/storefront ./storefront
+
+# build storefront and dependencies
+WORKDIR /app
+RUN pnpm --filter ./libraries/tokens install && \
+    pnpm --filter ./libraries/tokens run build
+
+RUN pnpm --filter ./libraries/core-react install && \
+    pnpm --filter ./libraries/core-react run build
+
+RUN pnpm --filter ./apps/storefront install
+
+# build storefront
 ARG GATSBY_STAGE
-ENV NODE_ENV=production
-RUN npm run build
+RUN pnpm --filter ./apps/storefront run build
+RUN mv ./apps/storefront/public ./storefront
 
 # host
 FROM nginx:1.15.8-alpine
 WORKDIR /app
-COPY --from=builder /app/public /app
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder ./app/storefront /app
+COPY ./apps/storefront/nginx.conf /etc/nginx/conf.d/default.conf
