@@ -5,28 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.1-alpha.10] - 2020-01-22
+
+### Fixed
+
+- Faulty build configuration forcing use of umd modules for
+- Malformed changelog
+
 ## [0.0.1-alpha.9] - 2020-01-13
 
-- Added Textfield component
+### Added
+
+- Textfield alpha component
 
 ## [0.0.1-alpha.8] - 2020-01-10
+
+### Changed
 
 - Updated build (wups)
 
 ## [0.0.1-alpha.7] - 2020-01-10
 
-- Added following alpha components:
-  - Divider
-  - Table
-  - Typography
+### Added
+
+New alpha components:
+
+- Divider
+- Table
+- Typography
 
 ## [0.0.1-alpha.6] - 2019-08-12
 
-- Fixed typo in changelogs
+### Fixed
+
+- Typo in changelogs
 
 ## [0.0.1-alpha.5] - 2019-08-12
 
-- Added `@equinor/eds-tokens` as a dependency for tokens
+### Added
+
+- `@equinor/eds-tokens` as a dependency for tokens
 
 ## [0.0.1-alpha.4] - 2019-07-09
 
