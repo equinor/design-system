@@ -26,7 +26,7 @@ module.exports = {
           default: path.resolve('./src/components/layout.jsx'),
         },
         globalScope: `
-          import ComponentStatus from '${__dirname}/src/components/ComponentStatus';
+          import {ComponentStatus} from '${__dirname}/src/components/ComponentStatus';
           import Embed from '${__dirname}/src/components/embed';
           import Video from '${__dirname}/src/components/video';
           import FigmaImage from '${__dirname}/src/components/figmaImage';

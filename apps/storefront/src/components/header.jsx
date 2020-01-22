@@ -1,7 +1,7 @@
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import React from 'react'
 
-const Header = () => {
+export const Header = () => {
   const data = useStaticQuery(graphql`
     query HeaderQuery {
       site {
@@ -24,5 +24,3 @@ const Header = () => {
     </div>
   )
 }
-
-export default Header

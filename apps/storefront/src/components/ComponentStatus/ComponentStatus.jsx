@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { readableColor } from 'polished'
 import { camelify, kebabify } from '../../utils'
 
-const ComponentStatus = () => {
+export const ComponentStatus = () => {
   const data = useStaticQuery(graphql`
     query ComponentStatusQuery {
       allComponentStatusYaml {

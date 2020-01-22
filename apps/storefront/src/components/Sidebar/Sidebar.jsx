@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { kebabify } from '../../utils'
 import './Sidebar.css'
 
-const Sidebar = ({ location }) => {
+export const Sidebar = ({ location }) => {
   const data = useStaticQuery(graphql`
     query SidebarQuery {
       allNavigationYaml {
@@ -97,5 +97,3 @@ const Sidebar = ({ location }) => {
     </nav>
   )
 }
-
-export default Sidebar

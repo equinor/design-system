@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
 import 'github-markdown-css'
-import Header from './header'
-import Sidebar from './Sidebar'
-import Banner from './Banner'
+import { Header } from './header'
+import { Sidebar } from './Sidebar'
+import { Banner } from './Banner'
 import './layout.css'
 
 const Layout = ({ children }) => (

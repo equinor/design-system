@@ -57,7 +57,7 @@ const Wrapper = styled.div`
 
 const link = '//components/component-status'
 
-const Banner = () => (
+export const Banner = () => (
   <Wrapper>
     <div>
       <p>
@@ -69,4 +69,3 @@ const Banner = () => (
   </Wrapper>
 )
 
-export default Banner
