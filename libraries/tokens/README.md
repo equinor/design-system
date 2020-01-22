@@ -35,7 +35,19 @@ The component tokens already made are still part of this package, but we encoura
 
 ### Usage
 
-React storybook example: 
+#### Use as ESM Module
+Add `"type":"module" ` to your apps `package.json` 
+```javascript
+import { tokens } from "@equinor/eds-tokens"
+```
+
+#### Use as CommonJS Module
+CommonJS will have a separate package path 
+```javascript
+import { tokens } from "@equinor/eds-tokens/commonjs"
+```
+
+#### React storybook example
 
 ```js
 import React from 'react'

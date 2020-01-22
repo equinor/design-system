@@ -1,9 +1,17 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.7",
+  "type": "module",
+  "main": "dist/tokens.esm.js",
+  "module": "dist/tokens.esm.js",
+  "browser": "dist/tokens.umd.js",
   "engines": {
     "pnpm": ">=4"
   },
+  "files": [
+    "dist/*",
+    "commonjs/*"
+  ],
   "description": "Design tokens for the Equinor Design System",
   "author": {
     "name": "EDS Core Team",
@@ -14,10 +22,20 @@
     "url": "https://github.com/equinor/design-system"
   },
   "license": "AGPL-3.0-or-later",
-  "scripts": {},
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
   "keywords": [
     "eds",
     "design system",
-    "equinor"
-  ]
+    "equinor",
+    "design tokens"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "rollup": "^1.29.0"
+  },
+  "dependencies": {}
 }
