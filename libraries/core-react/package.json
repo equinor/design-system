@@ -13,10 +13,13 @@
     "type": "git",
     "url": "https://github.com/equinor/design-system"
   },
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "develop": "rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch"
   },

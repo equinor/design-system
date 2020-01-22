@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Faulty build configuration forcing use of umd modules for
+- Missing package settings and deprecated npm-script commands
 - Malformed changelog
 
 ## [0.0.1-alpha.9] - 2020-01-13
