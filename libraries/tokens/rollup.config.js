@@ -18,7 +18,7 @@ export default [
         exports: 'named',
       },
       {
-        file: commonjsPkg.main,
+        file: commonjsPkg.main.replace('../', ''),
         name: pkg.name,
         format: 'cjs',
         exports: 'named',

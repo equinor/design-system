@@ -9,7 +9,8 @@
     "pnpm": ">=4"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "commonjs/*"
   ],
   "description": "Design tokens for the Equinor Design System",
   "author": {
@@ -35,5 +36,6 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^7.0.0",
     "rollup": "^1.29.0"
-  }
+  },
+  "dependencies": {}
 }
