@@ -1,0 +1,89 @@
+
+h1 {
+  color: rgba(61, 61, 61, 1);
+  font-size: 2.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+}
+h2 {
+  color: rgba(61, 61, 61, 1);
+  font-size: 1.750rem;
+  font-weight: 400;
+  line-height: 1.429em;
+}
+h3 {
+  color: rgba(61, 61, 61, 1);
+  font-size: 1.500rem;
+  font-weight: 400;
+  line-height: 1.667em;
+}
+h4 {
+  color: rgba(61, 61, 61, 1);
+  font-size: 1.250rem;
+  font-weight: 400;
+  line-height: 1.600em;
+}
+h5 {
+  color: rgba(61, 61, 61, 1);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  letter-spacing: 0.013em;
+}
+h6 {
+  color: rgba(61, 61, 61, 1);
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.500em;
+  letter-spacing: 0.013em;
+}
+label {
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.688rem;
+  font-weight: 400;
+  line-height: 1.455em;
+}
+button {
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+}
+label {
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.750rem;
+  font-weight: 400;
+  line-height: 1.333em;
+}
+p {
+  color: rgba(61, 61, 61, 1);
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+}
+a {
+  color: rgba(0, 112, 121, 1);
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  text-decoration: UNDERLINE;
+}
+th {
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.714em;
+}
+table {
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.714em;
+}
+td {
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.429em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}

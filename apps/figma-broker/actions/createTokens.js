@@ -52,7 +52,7 @@ const writeJsonTokens = (tokens) => {
 }
 
 const writeCSSTokens = (tokens) => {
-  const css = R.pipe(
+  const { root, elements } = R.pipe(
     R.reduce(
       (acc, { name, value }) => {
         switch (name) {
@@ -72,7 +72,7 @@ const writeCSSTokens = (tokens) => {
             return {
               ...acc,
               root: [...acc.root, typographyCss.root],
-              classes: [...acc.classes, typographyCss.classes],
+              elements: [...acc.elements, typographyCss.elements],
             }
           case 'shape':
             return { ...acc, root: [...acc.root, makeShapeCss(value)] }
@@ -80,12 +80,17 @@ const writeCSSTokens = (tokens) => {
             return acc
         }
       },
-      { root: [], classes: [] },
+      { root: [], elements: [] },
     ),
-    (x) => `:root {\n${mergeStrings(x.root)}}\n${mergeStrings(x.classes)}`,
+
+    (x) => ({
+      root: `:root {\n${mergeStrings(x.root)}}`,
+      elements: mergeStrings(x.elements),
+    }),
   )(tokens)
 
-  writeFile(PATHS.TOKENS, 'tokens', 'css', css)
+  writeFile(PATHS.TOKENS, 'tokens', 'css', root)
+  writeFile(PATHS.TOKENS, 'elements', 'css', elements)
 }
 
 export async function createTokens(ctx) {
@@ -95,7 +100,7 @@ export async function createTokens(ctx) {
     const figmaFile = processFigmaFile(data)
     const tokens = makeTokens(figmaFile)
 
-    writeJSTokens(tokens)
+    // writeJSTokens(tokens)
     // writeJsonTokens(tokens)
     writeCSSTokens(tokens)
 

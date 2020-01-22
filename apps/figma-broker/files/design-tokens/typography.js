@@ -93,7 +93,7 @@ const cssName = (group, name) => {
 
 export const makeTypographyCss = (typography) => ({
   root: '  font-size:16px;\n  font-family: Equinor;\n',
-  classes: R.pipe(
+  elements: R.pipe(
     R.mapObjIndexed((group, groupName) =>
       R.mapObjIndexed((typography, typographyName) => {
         const name = cssName(groupName, typographyName)
