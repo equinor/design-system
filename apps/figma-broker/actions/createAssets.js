@@ -21,7 +21,7 @@ const svgPathData = (svg) => R.head(R.tail(R.match(/d="(.[^"]+)"/, svg)))
 
 const writeSVGSprite = (assets) => {
   const value = R.pipe(
-    R.find((x) => x.name === 'system-icons'),
+    R.find((x) => x.name === 'system'),
     R.prop('value'),
     R.reduce(
       (acc, val) =>
@@ -43,53 +43,21 @@ const writeSVGSprite = (assets) => {
   writeResults([{ name: 'system', value }], `${PATHS.ASSETS_ICONS}`, 'svg')
 }
 
-const createJSindex = (assets) =>
-  R.pipe(
-    R.map((iconGroups) =>
-      R.pipe(
-        R.reduce(
-          (acc, icon) => {
-            const name = `${icon.name}`
-            const path = `./${iconGroups.name}/${icon.path}/${icon.name}.svg`
-
-            const import_ = `import { default as ${name} } from '${path}'\n`
-            const export_ = `export { default as ${name} } from '${path}'\n`
-            const name_ = `${name},\n`
-
-            return {
-              imports: `${acc.imports}${import_}`,
-              exports: `${acc.exports}${export_}`,
-              names: `${acc.names}${name_}`,
-            }
-          },
-          { imports: '', exports: '', names: '' },
-        ),
-        (x) => `${x.imports}${x.exports}export default {\n${x.names}}`,
-      )(iconGroups.value),
-    ),
-    R.join('\n'),
-  )(assets)
-
 const writeJsFile = (assets) => {
   const prefix = 'eds'
   const jsFile = R.pipe(
     R.map((iconGroups) =>
       R.pipe(
         R.reduce((acc, icon) => {
-          const {
-            name,
-            height,
-            width,
-            d: { clean: svgPathData },
-          } = icon
+          const { name, height, width, pathData } = icon
 
           const svgObj = `
 export const ${name} = {
-  name: "${name}",
-  prefix: "${prefix}",
-  height: "${height}",
-  width: "${width}",
-  svgPathData: "${svgPathData}",
+  name: '${name}',
+  prefix: '${prefix}',
+  height: '${height}',
+  width: '${width}',
+  svgPathData: '${pathData}',
 }
 `
           return `${acc}${svgObj}`
@@ -99,7 +67,15 @@ export const ${name} = {
     R.head,
   )(assets)
 
-  writeFile(PATHS.ICON_FILES, 'icons', 'js', jsFile)
+  writeFile(PATHS.ICON_FILES, 'index', 'js', jsFile)
+}
+
+const writeJsonAssets = (assets) => {
+  writeResults(assets, PATHS.ICONS, 'json')
+}
+
+const writeSVGs = (assets) => {
+  writeResultsIndividually(assets, PATHS.ASSETS_ICONS, 'svg')
 }
 
 export async function createAssets(ctx) {
@@ -152,10 +128,8 @@ export async function createAssets(ctx) {
         assetPage.value.map(async (asset) => {
           const svgDirty = await fetchFile(asset.url)
           const svgClean = await svgo.optimize(svgDirty)
+          // TODO: Remove datauri when storefront uses eds-icons
           const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
-          const dClean = svgPathData(svgClean.data)
-          const dDirty = svgPathData(svgDirty)
-
           const { height, width } = svgClean.info
 
           return {
@@ -165,10 +139,7 @@ export async function createAssets(ctx) {
             height,
             width,
             datauri: svgCleanDataUri.data,
-            d: {
-              clean: dClean,
-              dirty: dDirty,
-            },
+            pathData: svgPathData(svgClean.data),
           }
         }),
       ),
@@ -176,26 +147,12 @@ export async function createAssets(ctx) {
   )
 
   // Write svg to files
+
   // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-  // writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
-  // Write index.js for individual icons
-
-  // const npmIndex = createJSindex(assetsWithSvg)
-  // writeResults(
-  //   [
-  //     {
-  //       name: 'index',
-  //       value: npmIndex,
-  //     },
-  //   ],
-  //   PATHS.ICON_FILES,
-  //   'js',
-  // )
-
-  // Write token
-  // writeResults(assetsWithSvg, PATHS.ICONS)
-
+  // writeSVGs(assetsWithSvg)
   // writeSVGSprite(assetsWithSvg)
+
+  // writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
 
   return assetsWithSvg

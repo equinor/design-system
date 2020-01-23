@@ -1,11 +1,17 @@
 {
   "name": "@equinor/eds-icons",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
+  "type": "module",
   "main": "dist/icons.cjs.js",
   "module": "dist/icons.esm.js",
+  "browser": "dist/icons.umd.js",
   "engines": {
     "pnpm": ">=4"
   },
+  "files": [
+    "dist/*",
+    "commonjs/*"
+  ],
   "description": "Icons from the Equinor Design System",
   "author": {
     "name": "EDS Core Team",
@@ -17,6 +23,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "prepare": "npm run build",
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
@@ -24,12 +31,10 @@
     "eds",
     "design system",
     "equinor",
-    "icon"
+    "icons"
   ],
   "dependencies": {
-    "rollup": "^1.26.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-svg": "^2.0.0"
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "rollup": "^1.29.0"
   }
 }
