@@ -15,11 +15,9 @@ import {
   fetchFigmaImageUrls,
 } from './functions/figma'
 import { writeResults, writeUrlToFile, deletePaths } from './functions/file'
-import FILE_ID from './files.json'
 // Files
-import { makeDesktopComponents } from './files/desktop-ui'
 import { isNotEmpty, sleep } from '@utils'
-import { createTokens, createAssets } from './actions'
+import { createTokens, createAssets, createComponentTokens } from './actions'
 
 dotenv.config()
 
@@ -46,33 +44,13 @@ const logger = new KoaLogger()
 router
   .post('/tokens', KoaBody(), createTokens)
   .post('/assets', KoaBody(), createAssets)
-  .post('/desktop-ui', KoaBody(), createDesktopComponents)
+  .post('/desktop-ui', KoaBody(), createComponentTokens)
   .post('/figma-images', KoaBody(), fetchFigmaImages)
 
 app
   .use(logger)
   .use(router.routes())
   .use(router.allowedMethods())
-
-// Assets
-
-// Desktop UI
-
-async function createDesktopComponents(ctx) {
-  // try {
-  const data = await fetchFigmaFile(FILE_ID.desktop)
-
-  const figmaFile = processFigmaFile(data)
-  const components = makeDesktopComponents(figmaFile)
-
-  writeResults(components, PATHS.COMPONENTS_DESKTOP)
-
-  ctx.response.body = JSON.stringify(components)
-  // } catch (err) {
-  //   ctx.response.status = err.status || 500
-  //   ctx.response.body = err.message
-  // }
-}
 
 async function fetchFigmaImages(ctx) {
   const exec = util.promisify(childProcess.exec)
