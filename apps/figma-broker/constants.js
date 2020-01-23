@@ -1,6 +1,6 @@
 const COMMON_DIR = '../../common'
 const TOKENS_DIR = '../../libraries/tokens'
-const STATIC_DIR = '../../libraries/eds-static'
+const STATIC_DIR = '../../libraries/static'
 const ICONS_DIR = '../../libraries/icons'
 const STOREFRONT_DIR = '../storefront'
 
