@@ -55,7 +55,6 @@ components:
       vanilla:
         - *1
       react:
-        - *3
         - *6
 
   - component: Cards
@@ -87,7 +86,7 @@ components:
       vanilla:
         - *1
       react:
-        - *3
+        - *6
   - component: Links
     status:
       documentation:
@@ -307,7 +306,7 @@ components:
       vanilla:
         - *1
       react:
-        - *3
+        - *6
   - component: Text fields
     status:
       documentation:
@@ -317,7 +316,7 @@ components:
       vanilla:
         - *1
       react:
-        - *3
+        - *6
   - component: Tooltip
     status:
       documentation:
@@ -328,3 +327,23 @@ components:
         - *1
       react:
         - *1
+  - component: Typography
+    status:
+      documentation:
+        - *4
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *6
+  - component: Icon
+    status:
+      documentation:
+        - *4
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *3
