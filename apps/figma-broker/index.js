@@ -22,10 +22,10 @@ const router = new KoaRouter()
 const logger = new KoaLogger()
 
 router
-  .post('/tokens', KoaBody(), createTokens)
-  .post('/assets', KoaBody(), createAssets)
-  .post('/desktop-ui', KoaBody(), createComponentTokens)
-  .post('/figma-images', KoaBody(), createFigmaImages)
+  .post('/create-tokens', KoaBody(), createTokens)
+  .post('/create-component-tokens', KoaBody(), createComponentTokens)
+  .post('/create-assets', KoaBody(), createAssets)
+  .post('/create-figma-images', KoaBody(), createFigmaImages)
 
 app
   .use(logger)
