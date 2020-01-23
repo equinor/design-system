@@ -81,5 +81,5 @@ export async function createFigmaImages(ctx) {
   // Save content of url as file
   writeUrlToFile(images, PATHS.IMAGES, 'png')
 
-  ctx.response.body = images
+  return images
 }

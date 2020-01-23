@@ -57,106 +57,101 @@ const createJSindex = (assets) =>
   )(assets)
 
 export async function createAssets(ctx) {
-  try {
-    const plugins = [
-      { removeDoctype: true },
-      { cleanupAttrs: true },
-      { removeUnknownsAndDefaults: true },
-      { removeUselessStrokeAndFill: true },
-      { removeAttrs: { attrs: '(fill)' } },
-      { removeViewBox: false },
-    ]
-    const svgo = new SVGO({
-      plugins,
-    })
-    const svgoDataUri = new SVGO({
-      datauri: 'base64',
-      plugins,
-    })
+  const plugins = [
+    { removeDoctype: true },
+    { cleanupAttrs: true },
+    { removeUnknownsAndDefaults: true },
+    { removeUselessStrokeAndFill: true },
+    { removeAttrs: { attrs: '(fill)' } },
+    { removeViewBox: false },
+  ]
+  const svgo = new SVGO({
+    plugins,
+  })
+  const svgoDataUri = new SVGO({
+    datauri: 'base64',
+    plugins,
+  })
 
-    const data = await fetchFigmaFile(FILE_IDS.ASSETS)
+  const data = await fetchFigmaFile(FILE_IDS.ASSETS)
 
-    const figmaFile = processFigmaFile(data)
-    const assetPages = getAssets(figmaFile)
+  const figmaFile = processFigmaFile(data)
+  const assetPages = getAssets(figmaFile)
 
-    // Update with svg image urls from Figma
-    const assetsWithUrl = await Promise.all(
-      assetPages.map(async (assetPage) => {
-        const ids = assetPage.value.map((x) => x.id)
-        const result = await fetchFigmaImageUrls(FILE_IDS.ASSETS, ids)
-        if (!result.err) {
-          return {
-            ...assetPage,
-            value: assetPage.value.map((asset) => ({
-              ...asset,
-              url: result.images[asset.id],
-            })),
-          }
+  // Update with svg image urls from Figma
+  const assetsWithUrl = await Promise.all(
+    assetPages.map(async (assetPage) => {
+      const ids = assetPage.value.map((x) => x.id)
+      const result = await fetchFigmaImageUrls(FILE_IDS.ASSETS, ids)
+      if (!result.err) {
+        return {
+          ...assetPage,
+          value: assetPage.value.map((asset) => ({
+            ...asset,
+            url: result.images[asset.id],
+          })),
         }
-        return assetPage
-      }),
-    )
-    // Wait for Figma to start endpoints
-    await sleep(20000)
+      }
+      return assetPage
+    }),
+  )
+  // Wait for Figma to start endpoints
+  await sleep(20000)
 
-    // Fetch svg image as string for each asset
-    const assetsWithSvg = await Promise.all(
-      [R.head(assetsWithUrl)].map(async (assetPage) => ({
-        ...assetPage,
-        value: await Promise.all(
-          assetPage.value.map(async (asset) => {
-            const svgDirty = await fetchFile(asset.url)
-            const svgClean = await svgo.optimize(svgDirty)
-            const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
-            const { height, width } = svgClean.info
+  // Fetch svg image as string for each asset
+  const assetsWithSvg = await Promise.all(
+    [R.head(assetsWithUrl)].map(async (assetPage) => ({
+      ...assetPage,
+      value: await Promise.all(
+        assetPage.value.map(async (asset) => {
+          const svgDirty = await fetchFile(asset.url)
+          const svgClean = await svgo.optimize(svgDirty)
+          const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
+          const { height, width } = svgClean.info
 
-            return {
-              ...asset,
-              value: svgClean.data,
-              viewbox: `0 0 ${height} ${width}`,
-              datauri: svgCleanDataUri.data,
-            }
-          }),
-        ),
-      })),
-    )
+          return {
+            ...asset,
+            value: svgClean.data,
+            viewbox: `0 0 ${height} ${width}`,
+            datauri: svgCleanDataUri.data,
+          }
+        }),
+      ),
+    })),
+  )
 
-    // Write svg to files
-    // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-    // writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
-    // Write index.js for individual icons
-    const npmIndex = createJSindex(assetsWithSvg)
-    writeResults(
-      [
-        {
-          name: 'index',
-          value: npmIndex,
-        },
-      ],
-      PATHS.ICON_FILES,
-      'js',
-    )
-    // Write token
-    writeResults(assetsWithSvg, PATHS.ICONS)
+  // Write svg to files
+  // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
+  // writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
+  // Write index.js for individual icons
+  const npmIndex = createJSindex(assetsWithSvg)
+  writeResults(
+    [
+      {
+        name: 'index',
+        value: npmIndex,
+      },
+    ],
+    PATHS.ICON_FILES,
+    'js',
+  )
+  // Write token
+  writeResults(assetsWithSvg, PATHS.ICONS)
 
-    const systemIconsSprite = createSvgSprite(
-      assetsWithSvg.find((x) => x.name === 'system-icons'),
-    )
+  const systemIconsSprite = createSvgSprite(
+    assetsWithSvg.find((x) => x.name === 'system-icons'),
+  )
 
-    writeResults(
-      [
-        {
-          name: 'system',
-          value: systemIconsSprite,
-        },
-      ],
-      `${PATHS.ASSETS_ICONS}`,
-      'svg',
-    )
+  writeResults(
+    [
+      {
+        name: 'system',
+        value: systemIconsSprite,
+      },
+    ],
+    `${PATHS.ASSETS_ICONS}`,
+    'svg',
+  )
 
-    ctx.response.body = JSON.stringify(assetsWithSvg)
-  } catch (err) {
-    ctx.response.status = err.status || 500
-    ctx.response.body = err.message
-  }
+  return assetsWithSvg
 }
