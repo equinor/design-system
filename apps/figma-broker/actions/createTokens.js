@@ -99,7 +99,7 @@ export async function createTokens(ctx) {
   const figmaFile = processFigmaFile(data)
   const tokens = makeTokens(figmaFile)
 
-  // writeJSTokens(tokens)
+  writeJSTokens(tokens)
   // writeJsonTokens(tokens)
   writeCSSTokens(tokens)
 
