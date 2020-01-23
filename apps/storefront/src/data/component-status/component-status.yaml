@@ -327,3 +327,23 @@ components:
         - *1
       react:
         - *1
+  - component: Typography
+    status:
+      documentation:
+        - *4
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *6
+  - component: Icon
+    status:
+      documentation:
+        - *4
+      figma:
+        - *4
+      vanilla:
+        - *1
+      react:
+        - *3
