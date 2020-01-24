@@ -30,13 +30,13 @@ let {
 } = tokens
 
 // debugging
-defaultColor = 'maroon'
-defaultBackgroundColor = 'yellow'
-defaultBorderColor = 'violet'
-focusOutlineColor = 'lime'
-hoverBackgroundColor = 'orange'
-activeColor = 'black'
-activeHoverColor = 'white'
+// defaultColor = 'maroon'
+// defaultBackgroundColor = 'yellow'
+// defaultBorderColor = 'lime'
+// focusOutlineColor = 'lime'
+// hoverBackgroundColor = 'orange'
+// activeColor = 'black'
+// activeHoverColor = 'white'
 
 export const tabs = {}
 
@@ -50,9 +50,13 @@ export const tab = {
     enabled: {
       backgroundColor: defaultBackgroundColor,
       color: defaultColor,
-      borderColor: defaultBorderColor,
-      borderWidth: '0 0 2px',
-      borderStyle: 'solid',
+      border: {
+        color: defaultBorderColor,
+        style: 'solid',
+        width: {
+          bottom: '2px'
+        }
+      },
       textAlign: 'center',
     },
     disabled: {
@@ -75,7 +79,9 @@ export const tab = {
     pressed: {},
     activated: {
       color: activeColor,
-      borderColor: activeColor,
+      border: {
+        color: activeColor
+      },
       hover: {
         color: activeHoverColor,
       },

@@ -2,15 +2,11 @@ import React, { forwardRef, useContext } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { TabsProvider, TabsContext } from './Tabs.context'
-import { Tab } from './Tab'
+import { Tab } from '../Tabs1/Tab'
 
-const StyledTabs = styled.div``
-
-const StyledTabList = styled.div`
-  background-color: violet;
-`
-const StyledTabPanels = styled.div`
-  background-color: white;
+const StyledTabs = styled.div.attrs((props) => ({ role: 'presentation' }))`
+  display: grid;
+  grid-gap: 24px;
 `
 
 const Tabs = forwardRef(function Tabs(props, ref) {
@@ -31,13 +27,19 @@ Tabs.defaultProps = {
   variants: 'fullWidth',
 }
 
+const StyledTabList = styled.div.attrs((props) => ({ role: 'tablist' }))`
+  display: grid;
+  grid-auto-flow: column;
+`
+
 const TabList = forwardRef(function TabsList(props, ref) {
-  const { activeIndex } = useContext(TabsContext)
+  const { activeIndex, changeHandler } = useContext(TabsContext)
 
   const children = React.Children.map(props.children, (child, index) =>
     React.cloneElement(child, {
       active: index === activeIndex,
       index,
+      onClick: (event) => changeHandler(event, index),
     }),
   )
 
@@ -48,7 +50,11 @@ const TabList = forwardRef(function TabsList(props, ref) {
   )
 })
 
-const TabPanels = forwardRef(function TabsPanel(props, ref) {
+const StyledTabPanels = styled.div`
+  background-color: white;
+`
+
+const TabPanels = forwardRef(function TabPanels(props, ref) {
   const { activeIndex } = useContext(TabsContext)
   const children = React.Children.map(props.children, (child, index) =>
     React.cloneElement(child, {
@@ -62,8 +68,17 @@ const TabPanels = forwardRef(function TabsPanel(props, ref) {
   )
 })
 
+const TabPanel = forwardRef(function TabPanel(props, ref) {
+  return (
+    <div ref={ref} {...props}>
+      {props.children}
+    </div>
+  )
+})
+
 Tabs.Tab = Tab
 Tabs.TabList = TabList
 Tabs.TabPanels = TabPanels
+Tabs.TabPanel = TabPanel
 
 export { Tabs }
