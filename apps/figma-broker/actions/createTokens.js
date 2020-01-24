@@ -94,19 +94,14 @@ const writeCSSTokens = (tokens) => {
 }
 
 export async function createTokens(ctx) {
-  try {
-    const data = await fetchFigmaFile(FILE_IDS.TOKENS)
+  const data = await fetchFigmaFile(FILE_IDS.TOKENS)
 
-    const figmaFile = processFigmaFile(data)
-    const tokens = makeTokens(figmaFile)
+  const figmaFile = processFigmaFile(data)
+  const tokens = makeTokens(figmaFile)
 
-    // writeJSTokens(tokens)
-    // writeJsonTokens(tokens)
-    writeCSSTokens(tokens)
+  writeJSTokens(tokens)
+  // writeJsonTokens(tokens)
+  writeCSSTokens(tokens)
 
-    ctx.response.body = JSON.stringify(tokens)
-  } catch (err) {
-    ctx.response.status = err.status || 500
-    ctx.response.body = err.message
-  }
+  return tokens
 }

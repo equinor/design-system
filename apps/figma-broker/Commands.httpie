@@ -1,15 +1,15 @@
 // Use with plugin: https://marketplace.visualstudio.com/items?itemName=wk-j.vscode-httpie
 
 // Generates design tokens from Figma
-http POST http://localhost:9001/tokens
+http POST http://localhost:9001/create-tokens
 
 // Generates component tokens from Figma
-http POST http://localhost:9001/desktop-ui
+http POST http://localhost:9001/create-component-tokens
 
 // Generates assets from Figma
-http POST http://localhost:9001/assets
+http POST http://localhost:9001/create-assets
 
 // Generates images of components linked to in Storefront mdx files
-http POST http://localhost:9001/figma-images
+http POST http://localhost:9001/create-figma-images
 
 
