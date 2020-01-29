@@ -1,21 +1,15 @@
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import svg from 'rollup-plugin-svg'
+import resolve from '@rollup/plugin-node-resolve'
 import pkg from './package.json'
+import commonjsPkg from './commonjs/package.json'
 
+// eslint-disable-next-line import/no-default-export
 export default [
   {
     input: 'index.js',
     watch: {
       clearScreen: true,
     },
-    plugins: [
-      resolve({
-        extensions: ['.svg'],
-      }),
-      commonjs(),
-      svg(),
-    ],
+    plugins: [resolve()],
     output: [
       {
         file: pkg.module,
@@ -24,9 +18,15 @@ export default [
         exports: 'named',
       },
       {
-        file: pkg.main,
+        file: commonjsPkg.main.replace('../', ''),
         name: pkg.name,
         format: 'cjs',
+        exports: 'named',
+      },
+      {
+        file: pkg.browser,
+        name: pkg.name,
+        format: 'umd',
         exports: 'named',
       },
     ],

@@ -12,22 +12,44 @@ npm install @equinor/eds-icons
 
 ## Usage
 
-Import using one of the following options to get the svg file:
+Import using one of the following options to get the svg data:
 
-```jsx 
-import icons from '@equinor/icons' 
-// or 
-import { save } from '@equinor/icons'
-// or 
-import save from '@equinor/eds-icons/system-icons/ui-action/save.svg'
+### Usage
 
+#### Use as ESM Module
+Add `"type":"module" ` to your apps `package.json` 
+```javascript
+import { star_filled } from "@equinor/eds-icons"
 ```
+
+#### Use as CommonJS Module
+CommonJS will have a separate package path 
+```javascript
+const icons = require("@equinor/eds-icons/commonjs")
+```
+
+#### SVG data
+
+⚠️ Due to how Figma parses and exports svg icons the following attributes must be added to your path element for now:  `fill-rule="evenodd" clip-rule="evenodd"`
+
+```javascript
+{
+  name: 'star_filled',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'M12 16.067l4.947 3.6-1.894-5.814L20 10.334h-6.067l-1.933-6-1.933 6H4l4.947 3.52-1.894 5.814 4.947-3.6z',
+}
+```
+
+
 Use [EDS Aseets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3)(Equinor Figma account needed🔒) for icon names. Spaces in icon names are replaced with underscores. 
 
-For example: `google-translate -> google_translate`.
+For example: `star-filled -> star_filled`.
+
 ### React
 
-If you are using React you can, for example use [SVGR](https://www.smooth-code.com/open-source/svgr/docs/) to convert it to a React component for you.
+We suggest using the [svg](https://developer.mozilla.org/en-US/docs/Web/SVG) element with the svg data provided
 
 
 ## Credits

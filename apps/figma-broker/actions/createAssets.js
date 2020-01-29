@@ -7,6 +7,7 @@ import {
 } from '../functions/figma'
 import {
   writeResults,
+  writeFile,
   fetchFile,
   writeResultsIndividually,
 } from '../functions/file'
@@ -14,47 +15,68 @@ import { getAssets } from '../files/assets'
 import { PATHS, FILE_IDS } from '../constants'
 import { sleep } from '@utils'
 
-const createSvgSprite = (assets) => `
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  ${assets.value.reduce((acc, val) => {
-    const svgContent = R.head(val.value.match(/(?<=svg">)(.*?)(?=<\/svg>)/g))
-    const symbol = `
+const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
+
+const svgPathData = (svg) => R.head(R.tail(R.match(/d="(.[^"]+)"/, svg)))
+
+const writeSVGSprite = (assets) => {
+  const value = R.pipe(
+    R.find((x) => x.name === 'system'),
+    R.prop('value'),
+    R.reduce(
+      (acc, val) =>
+        `${acc}${`
     <symbol id="${val.name}" viewBox="${val.viewbox}">
       <title>${val.name}</title>
       <desc>${val.path}-${val.name}</desc>
-      ${svgContent}
-    </symbol>`
-    return `${acc}${symbol}`
-  }, '')}
-</svg>
-`
+      ${svgContent(val.value)}
+    </symbol>`}`,
+      '',
+    ),
+    (x) => `
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      ${x}
+    </svg>
+    `,
+  )(assets)
 
-const createJSindex = (assets) =>
-  R.pipe(
+  writeResults([{ name: 'system', value }], `${PATHS.ASSETS_ICONS}`, 'svg')
+}
+
+const writeJsFile = (assets) => {
+  const prefix = 'eds'
+  const jsFile = R.pipe(
     R.map((iconGroups) =>
       R.pipe(
-        R.reduce(
-          (acc, icon) => {
-            const name = `${icon.name}`
-            const path = `./${iconGroups.name}/${icon.path}/${icon.name}.svg`
+        R.reduce((acc, icon) => {
+          const { name, height, width, pathData } = icon
 
-            const import_ = `import { default as ${name} } from '${path}'\n`
-            const export_ = `export { default as ${name} } from '${path}'\n`
-            const name_ = `${name},\n`
-
-            return {
-              imports: `${acc.imports}${import_}`,
-              exports: `${acc.exports}${export_}`,
-              names: `${acc.names}${name_}`,
-            }
-          },
-          { imports: '', exports: '', names: '' },
-        ),
-        (x) => `${x.imports}${x.exports}export default {\n${x.names}}`,
+          const svgObj = `
+export const ${name} = {
+  name: '${name}',
+  prefix: '${prefix}',
+  height: '${height}',
+  width: '${width}',
+  svgPathData: '${pathData}',
+}
+`
+          return `${acc}${svgObj}`
+        }, ''),
       )(iconGroups.value),
     ),
-    R.join('\n'),
+    R.head,
   )(assets)
+
+  writeFile(PATHS.ICON_FILES, 'index', 'js', jsFile)
+}
+
+const writeJsonAssets = (assets) => {
+  writeResults(assets, PATHS.ICONS, 'json')
+}
+
+const writeSVGs = (assets) => {
+  writeResultsIndividually(assets, PATHS.ASSETS_ICONS, 'svg')
+}
 
 export async function createAssets(ctx) {
   const plugins = [
@@ -95,7 +117,7 @@ export async function createAssets(ctx) {
       return assetPage
     }),
   )
-  // Wait for Figma to start endpoints
+  // Wait for Figma to generate all endpoints
   await sleep(20000)
 
   // Fetch svg image as string for each asset
@@ -106,6 +128,7 @@ export async function createAssets(ctx) {
         assetPage.value.map(async (asset) => {
           const svgDirty = await fetchFile(asset.url)
           const svgClean = await svgo.optimize(svgDirty)
+          // TODO: Remove datauri when storefront uses eds-icons
           const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
           const { height, width } = svgClean.info
 
@@ -113,7 +136,10 @@ export async function createAssets(ctx) {
             ...asset,
             value: svgClean.data,
             viewbox: `0 0 ${height} ${width}`,
+            height,
+            width,
             datauri: svgCleanDataUri.data,
+            pathData: svgPathData(svgClean.data),
           }
         }),
       ),
@@ -121,37 +147,13 @@ export async function createAssets(ctx) {
   )
 
   // Write svg to files
+
   // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-  // writeResultsIndividually(assetsWithSvg, PATHS.ICON_FILES, 'svg')
-  // Write index.js for individual icons
-  const npmIndex = createJSindex(assetsWithSvg)
-  writeResults(
-    [
-      {
-        name: 'index',
-        value: npmIndex,
-      },
-    ],
-    PATHS.ICON_FILES,
-    'js',
-  )
-  // Write token
-  writeResults(assetsWithSvg, PATHS.ICONS)
+  // writeSVGs(assetsWithSvg)
+  // writeSVGSprite(assetsWithSvg)
 
-  const systemIconsSprite = createSvgSprite(
-    assetsWithSvg.find((x) => x.name === 'system-icons'),
-  )
-
-  writeResults(
-    [
-      {
-        name: 'system',
-        value: systemIconsSprite,
-      },
-    ],
-    `${PATHS.ASSETS_ICONS}`,
-    'svg',
-  )
+  // writeJsonAssets(assetsWithSvg)
+  writeJsFile(assetsWithSvg)
 
   return assetsWithSvg
 }
