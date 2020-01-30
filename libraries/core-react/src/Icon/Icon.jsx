@@ -61,7 +61,7 @@ export const Icon = forwardRef(function EdsIcon(
   return (
     <StyledSvg {...svgProps} {...rest} ref={ref}>
       {title && <title id={titleId}>{title}</title>}
-      <StyledPath {...iconProps} />
+      <StyledPath data-testid="eds-icon-path" {...iconProps} />
     </StyledSvg>
   )
 })
