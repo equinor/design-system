@@ -3,47 +3,65 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { get } from './library'
 
-const px = (x) => `${x}px`
+const StyledSvg = styled.svg(({ height, width, rotation, fill }) => ({
+  xmlns: 'http://www.w3.org/2000/svg',
+  transform: rotation ? `rotate(${rotation}deg)` : null,
+  height,
+  width,
+  fill,
+}))
 
-const StyledSvg = styled.svg.attrs(({ height, width }) => ({
-  height: px(height),
-  width: px(width),
-  viewBox: `0 0 ${width} ${height}`,
-  // ariahidden: true,
-  // focusable: false,
-}))`
-  ${({ rotation }) => (rotation ? `transform: rotate(${rotation}deg);` : '')}
-  ${({ fill }) => (fill ? `fill: ${fill};` : '')}
-`
+const StyledPath = styled.path.attrs(({ icon, size }) => ({
+  fillRule: 'evenodd',
+  clipRule: 'evenodd',
+  d: icon.svgPathData,
+  transform: size / icon.height !== 1 ? `scale(${size / icon.height})` : null,
+}))``
 
 export const Icon = forwardRef(function EdsIcon(
-  { size, color, name, className, rotation },
+  { size, color, name, className, rotation, title },
   ref,
 ) {
-  const props = {
-    height: size,
-    width: size,
-    fill: color,
-    className,
-    rotation,
-    name,
-  }
   const icon = get()[name]
 
   if (typeof icon === 'undefined') {
     throw Error(`Icon "${name}" not found. Have you added it using Icon.add()?`)
   }
-  const scale = size / icon.height
-  const transformPath = `scale(${scale})`
+
+  let svgProps = {
+    height: size,
+    width: size,
+    fill: color,
+    viewBox: `0 0 ${size} ${size}`,
+    className,
+    rotation,
+    name,
+    'aria-hidden': true,
+  }
+
+  const iconProps = {
+    icon,
+    size,
+  }
+
+  // Accessibility
+  let titleId = ''
+
+  if (title !== null) {
+    titleId = `${icon.prefix}-${icon.name}`
+    svgProps = {
+      ...svgProps,
+      title,
+      role: 'img',
+      'aria-hidden': null,
+      'aria-labelledby': titleId,
+    }
+  }
 
   return (
-    <StyledSvg {...props} ref={ref}>
-      <path
-        transform={transformPath}
-        d={icon.svgPathData}
-        fillRule="evenodd"
-        clipRule="evenodd"
-      />
+    <StyledSvg {...svgProps} ref={ref}>
+      {title && <title id={titleId}>{title}</title>}
+      <StyledPath {...iconProps} />
     </StyledSvg>
   )
 })

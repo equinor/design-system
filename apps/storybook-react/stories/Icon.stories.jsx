@@ -9,6 +9,7 @@ import {
   work,
   pregnant_woman,
   accessible_forward,
+  save,
 } from '@equinor/eds-icons'
 
 Icon.add({
@@ -19,6 +20,7 @@ Icon.add({
   work,
   pregnant_woman,
   accessible_forward,
+  save,
 })
 
 const Wrapper = styled.div`
@@ -41,6 +43,7 @@ export const IconExample = () => (
     <Icon name="accessible_forward" size={8} />
     <Icon name="grid_off" color="red" size={48} />
     <Icon name="compare" color="red" size={48} rotation={90} />
+    <Icon name="save" title="Save data" />
   </Wrapper>
 )
 
