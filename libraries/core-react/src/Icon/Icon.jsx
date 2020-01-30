@@ -19,7 +19,7 @@ const StyledPath = styled.path.attrs(({ icon, size }) => ({
 }))``
 
 export const Icon = forwardRef(function EdsIcon(
-  { size, color, name, className, rotation, title },
+  { size, color, name, className, rotation, title, ...rest },
   ref,
 ) {
   const icon = get()[name]
@@ -59,7 +59,7 @@ export const Icon = forwardRef(function EdsIcon(
   }
 
   return (
-    <StyledSvg {...svgProps} ref={ref}>
+    <StyledSvg {...svgProps} {...rest} ref={ref}>
       {title && <title id={titleId}>{title}</title>}
       <StyledPath {...iconProps} />
     </StyledSvg>
