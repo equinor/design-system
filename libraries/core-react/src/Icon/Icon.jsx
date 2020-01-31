@@ -3,13 +3,16 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { get } from './library'
 
-const StyledSvg = styled.svg(({ height, width, rotation, fill }) => ({
+const transform = ({ rotation }) =>
+  rotation ? `transform: rotate(${rotation}deg)` : null
+const StyledSvg = styled.svg.attrs(({ height, width, fill }) => ({
   xmlns: 'http://www.w3.org/2000/svg',
-  transform: rotation ? `rotate(${rotation}deg)` : null,
   height,
   width,
   fill,
-}))
+}))`
+  ${transform}
+`
 
 const StyledPath = styled.path.attrs(({ icon, size }) => ({
   fillRule: 'evenodd',
