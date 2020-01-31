@@ -25,7 +25,7 @@ export const Icon = forwardRef(function EdsIcon(
   { size, color, name, className, rotation, title, ...rest },
   ref,
 ) {
-  const icon = get()[name]
+  const { icon, count } = get(name)
 
   if (typeof icon === 'undefined') {
     throw Error(`Icon "${name}" not found. Have you added it using Icon.add()?`)
@@ -50,8 +50,8 @@ export const Icon = forwardRef(function EdsIcon(
   // Accessibility
   let titleId = ''
 
-  if (title !== null) {
-    titleId = `${icon.prefix}-${icon.name}`
+  if (title) {
+    titleId = `${icon.prefix}-${icon.name}-${count}`
     svgProps = {
       ...svgProps,
       title,
@@ -79,9 +79,9 @@ Icon.propTypes = {
   // Valid colors
   color: PropTypes.string,
   // Vertical spacing
-  size: PropTypes.oneOf([8, 16, 24, 32, 40, 48]),
+  size: PropTypes.oneOf([16, 24, 32, 40, 48]),
   // Rotation
-  rotation: PropTypes.oneOf([90, 180, 270]),
+  rotation: PropTypes.oneOf([0, 90, 180, 270]),
   // Name
   name: PropTypes.string.isRequired,
 }
