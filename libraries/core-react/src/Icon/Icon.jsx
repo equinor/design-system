@@ -5,7 +5,9 @@ import { get } from './library'
 
 const transform = ({ rotation }) =>
   rotation ? `transform: rotate(${rotation}deg)` : null
+
 const StyledSvg = styled.svg.attrs(({ height, width, fill }) => ({
+  name: null,
   xmlns: 'http://www.w3.org/2000/svg',
   height,
   width,
@@ -15,6 +17,7 @@ const StyledSvg = styled.svg.attrs(({ height, width, fill }) => ({
 `
 
 const StyledPath = styled.path.attrs(({ icon, size }) => ({
+  size: null,
   fillRule: 'evenodd',
   clipRule: 'evenodd',
   d: icon.svgPathData,
