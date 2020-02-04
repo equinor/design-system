@@ -23,8 +23,11 @@ WORKDIR /app
 RUN pnpm --filter @equinor/eds-core-react install && \
   pnpm --filter @equinor/eds-core-react run build
 
-RUN pnpm --filter @equinor/eds-tokens run build
-RUN pnpm --filter @equinor/eds-icons run build
+RUN pnpm --filter @equinor/eds-tokens install && \
+  pnpm --filter @equinor/eds-tokens run build
+
+RUN pnpm --filter @equinor/eds-icons install && \
+  pnpm --filter @equinor/eds-icons run build
 
 RUN pnpm --filter @equinor/eds-storybook-react install
 
