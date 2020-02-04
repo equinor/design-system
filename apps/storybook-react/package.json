@@ -10,8 +10,9 @@
     "lint": "eslint stories/**/*.jsx"
   },
   "dependencies": {
-    "@equinor/eds-core-react": "workspace:^0.0.1-alpha.6",
-    "@equinor/eds-tokens": "workspace:^0.0.1-alpha.5",
+    "@equinor/eds-core-react": "workspace:*",
+    "@equinor/eds-tokens": "workspace:*",
+    "@equinor/eds-icons": "workspace:*",
     "@storybook/addon-knobs": "^5.2.8",
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addon-storysource": "^5.2.8",

@@ -4,4 +4,5 @@ export { Typography } from './Typography'
 export { Table } from './Table'
 export { Divider } from './Divider'
 export { TextField } from './TextField'
+export { Icon } from './Icon'
 /* eslint-enable */

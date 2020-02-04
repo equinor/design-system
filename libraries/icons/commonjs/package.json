@@ -1,4 +1,4 @@
 {
   "type": "commonjs",
-  "main": "../dist/icons.cjs"
+  "main": "../dist/icons.cjs.js"
 }

@@ -1,5 +1,6 @@
 dependencies:
   '@equinor/eds-core-react': 'link:../../libraries/core-react'
+  '@equinor/eds-icons': 'link:../../libraries/icons'
   '@equinor/eds-tokens': 'link:../../libraries/tokens'
   '@storybook/addon-knobs': 5.2.8_react-dom@16.12.0+react@16.12.0
   '@storybook/addon-links': 5.2.8_react-dom@16.12.0+react@16.12.0
@@ -8731,6 +8732,7 @@ packages:
 specifiers:
   '@babel/core': ^7.7.5
   '@equinor/eds-core-react': 'workspace:^0.0.1-alpha.6'
+  '@equinor/eds-icons': 'workspace:*'
   '@equinor/eds-tokens': 'workspace:^0.0.1-alpha.5'
   '@storybook/addon-a11y': ^5.2.8
   '@storybook/addon-actions': ^5.2.8

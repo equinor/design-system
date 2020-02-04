@@ -12,6 +12,7 @@ COPY ./.npmrc ./
 WORKDIR /app/libraries
 COPY ./libraries/tokens ./tokens
 COPY ./libraries/core-react ./core-react
+COPY ./libraries/icons ./icons
 
 # copy storybook
 WORKDIR /app/apps
@@ -20,7 +21,13 @@ COPY ./apps/storybook-react ./storybook-react
 # build storybook and dependencies
 WORKDIR /app
 RUN pnpm --filter @equinor/eds-core-react install && \
-    pnpm --filter @equinor/eds-core-react run build
+  pnpm --filter @equinor/eds-core-react run build
+
+RUN pnpm --filter @equinor/eds-tokens install && \
+  pnpm --filter @equinor/eds-tokens run build
+
+RUN pnpm --filter @equinor/eds-icons install && \
+  pnpm --filter @equinor/eds-icons run build
 
 RUN pnpm --filter @equinor/eds-storybook-react install
 
