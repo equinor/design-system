@@ -1,13 +1,7 @@
 import React from 'react'
-import {
-  withKnobs,
-  select,
-  text,
-  boolean,
-  object,
-} from '@storybook/addon-knobs'
+import { withKnobs, select, text } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { TopBar, Icon, TextField, Button } from '@equinor/eds-core-react'
+import { TopBar, Icon, TextField } from '@equinor/eds-core-react'
 
 import {
   account_circle,
@@ -15,7 +9,7 @@ import {
   notifications,
   fullscreen,
   grid_on,
-  // todo
+  // todo,support multiple add() calls for icon component
   layers,
   layers_off,
   grid_off,
