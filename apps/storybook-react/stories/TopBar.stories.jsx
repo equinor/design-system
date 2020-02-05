@@ -51,22 +51,12 @@ const Wrapper = styled.div`
 `
 
 const Gradient = styled.div`
-  height: 2000px;
-  background-image: linear-gradient(
-    to bottom,
-    #d16ba5,
-    #c777b9,
-    #ba83ca,
-    #aa8fd8,
-    #9a9ae1,
-    #8aa7ec,
-    #79b3f4,
-    #69bff8,
-    #52cffe,
-    #41dfff,
-    #46eefa,
-    #5ffbf1
-  );
+  height: 1500px;
+  background: #ebebeb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 `
 const Icons = styled.div`
   display: flex;
@@ -146,7 +136,11 @@ export const Page = () => {
         right={RIGHT_CHOICES[rightChoice]}
         position={select('Position', ['fixed', 'sticky', 'static'], 'fixed')}
       />
-      <Gradient>Top of page</Gradient>
+      <Gradient>
+        <p>Top of page</p>
+        <p>Middle of page</p>
+        <p>Bottom of page</p>
+      </Gradient>
     </Wrapper>
   )
 }
