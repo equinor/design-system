@@ -46,21 +46,8 @@ const icons = {
 Icon.add(icons)
 
 const Wrapper = styled.div`
-  width: 100%;
-  border: 1px solid #000;
-  height: 500px;
-  display: grid;
-  grid-template-rows: min-content auto;
-  grid-template-areas:
-    'header'
-    'body';
-`
-
-const Header = styled(TopBar)`
-  grid-area: header;
-`
-const Body = styled.div`
-  grid-area: body;
+  height: 100vh;
+  position: relative;
   overflow: auto;
 `
 
@@ -91,12 +78,12 @@ const Icons = styled.div`
   }
 `
 
-const SearchWrapper = styled.div`
+const TempSearchWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
 `
 
-const Search = styled(TextField)`
+const TempSearch = styled(TextField)`
   width: 30%;
   min-width: 200px;
   input {
@@ -105,11 +92,6 @@ const Search = styled(TextField)`
   label {
     color: #fff;
   }
-`
-
-const TestBlock = styled.div`
-  background: red;
-  margin: auto;
 `
 
 const RIGHT_CHOICES = {
@@ -133,17 +115,16 @@ const LEFT_CHOICES = {
 const CENTER_CHOICES = {
   none: null,
   search: (
-    <SearchWrapper>
-      <Search
+    <TempSearchWrapper>
+      <TempSearch
         id="topbar-test"
         type="search"
         title="search"
         placeholder="Replace with Search compoent"
       />
-    </SearchWrapper>
+    </TempSearchWrapper>
   ),
   tabs: 'TODO: Use Tabs compoent',
-  test: <TestBlock></TestBlock>,
 }
 
 export default {
@@ -152,21 +133,20 @@ export default {
   decorators: [withKnobs],
 }
 
-export const Knobs = () => {
+export const Page = () => {
   const rightChoice = select('Right', Object.keys(RIGHT_CHOICES), 'icons')
   const leftChoice = select('Left', Object.keys(LEFT_CHOICES), 'none')
   const centerChoice = select('Center', Object.keys(CENTER_CHOICES), 'none')
   return (
     <Wrapper>
-      <Header
+      <TopBar
         title={text('Title', 'Application name - subtitle')}
         left={LEFT_CHOICES[leftChoice]}
         center={CENTER_CHOICES[centerChoice]}
         right={RIGHT_CHOICES[rightChoice]}
+        position={select('Position', ['fixed', 'sticky', 'static'], 'fixed')}
       />
-      <Body>
-        <Gradient />
-      </Body>
+      <Gradient>Top of page</Gradient>
     </Wrapper>
   )
 }

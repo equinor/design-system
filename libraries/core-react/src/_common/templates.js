@@ -36,3 +36,25 @@ padding-right: ${spacings.right};
 padding-top: ${spacings.top};
 padding-bottom: ${spacings.bottom};
 `
+
+export const positionTemplate = ({ position }) => {
+  const base = `position: ${position}`
+
+  if (!position) {
+    return ''
+  }
+  if (position === 'fixed') {
+    return `
+    ${base}
+    top:0;
+    left: 0;
+    right:0;`
+  }
+  if (position === 'sticky') {
+    return `
+    ${base}
+    top:0;`
+  }
+
+  return base
+}

@@ -3,13 +3,12 @@ import { tokens } from '@equinor/eds-tokens'
 const {
   colors,
   spacings: { comfortable },
-  typography: {
-    navigation: { menu_title },
-  },
+  typography: { navigation },
 } = tokens
 
 export const topbar = {
   height: '64px',
+  background: colors.ui.background__default.rgba,
   spacings: {
     left: comfortable.xx_large,
     right: comfortable.xx_large,
@@ -19,5 +18,5 @@ export const topbar = {
   border: {
     bottom: { color: colors.ui.background__light.rgba, width: '2px' },
   },
-  title: { text: menu_title },
+  title: { text: navigation.menu_title },
 }
