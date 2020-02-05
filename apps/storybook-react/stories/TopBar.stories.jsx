@@ -47,7 +47,6 @@ Icon.add(icons)
 
 const Wrapper = styled.div`
   height: 100vh;
-  position: relative;
   overflow: auto;
 `
 
@@ -94,19 +93,6 @@ const TempSearch = styled(TextField)`
   }
 `
 
-const RIGHT_CHOICES = {
-  none: null,
-  text: 'Some Right Text',
-  icons: (
-    <Icons>
-      <Icon name="account_circle" size={16} title="user" />
-      <Icon name="accessible" size={16} />
-      <Icon name="notifications" size={16} />
-      <Icon name="fullscreen" size={16} />
-    </Icons>
-  ),
-}
-
 const LEFT_CHOICES = {
   none: null,
   icon: <Icon name="grid_on" size={16} />,
@@ -125,6 +111,20 @@ const CENTER_CHOICES = {
     </TempSearchWrapper>
   ),
   tabs: 'TODO: Use Tabs compoent',
+  text: 'Some Center Text',
+}
+
+const RIGHT_CHOICES = {
+  none: null,
+  text: 'Some Right Text',
+  icons: (
+    <Icons>
+      <Icon name="account_circle" size={16} title="user" />
+      <Icon name="accessible" size={16} />
+      <Icon name="notifications" size={16} />
+      <Icon name="fullscreen" size={16} />
+    </Icons>
+  ),
 }
 
 export default {
@@ -138,7 +138,7 @@ export const Page = () => {
   const leftChoice = select('Left', Object.keys(LEFT_CHOICES), 'none')
   const centerChoice = select('Center', Object.keys(CENTER_CHOICES), 'none')
   return (
-    <Wrapper>
+    <Wrapper tabIndex="0">
       <TopBar
         title={text('Title', 'Application name - subtitle')}
         left={LEFT_CHOICES[leftChoice]}

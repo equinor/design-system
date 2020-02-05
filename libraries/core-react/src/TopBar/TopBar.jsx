@@ -43,22 +43,19 @@ const Left = styled.div`
   grid-area: left;
   display: flex;
   align-items: center;
-  position: relative;
 
-  > div {
+  *:first-child {
     margin-right: 24px;
   }
 `
 const Center = styled.div`
   grid-area: center;
-  height: auto;
-  position: relative;
+  text-align: center;
 `
 
 const Right = styled.div`
   grid-area: right;
   text-align: right;
-  position: relative;
 `
 
 export const TopBar = forwardRef(function EdsTopBar(
@@ -72,7 +69,7 @@ export const TopBar = forwardRef(function EdsTopBar(
       {position === 'fixed' && <Gutter />}
       <StyledTopBar {...props} {...rest} className={className} ref={ref}>
         <Left>
-          {left && <div>{left}</div>}
+          {left && <Fragment>{left}</Fragment>}
           <Title>{title}</Title>
         </Left>
         <Center>{center}</Center>
