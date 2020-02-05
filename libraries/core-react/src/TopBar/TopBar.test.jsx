@@ -24,7 +24,7 @@ describe('TopBar', () => {
     const topbar = container.firstChild
     expect(topbar).toHaveStyleRule(
       'border-bottom',
-      `${bottom.width} solid ${bottom.color}`,
+      `${bottom.width} solid ${bottom.color.split(' ').join('')}`,
     )
     expect(topbar).toHaveStyleRule('height', height)
   })
