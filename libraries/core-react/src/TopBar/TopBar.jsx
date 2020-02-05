@@ -62,12 +62,11 @@ export const TopBar = forwardRef(function EdsTopBar(
   { title, center, right, left, className, position, ...rest },
   ref,
 ) {
-  const props = { position }
+  const props = { position, className, ref }
 
   return (
     <Fragment>
-      {position === 'fixed' && <Gutter />}
-      <StyledTopBar {...props} {...rest} className={className} ref={ref}>
+      <StyledTopBar {...props} {...rest}>
         <Left>
           {left && <Fragment>{left}</Fragment>}
           <Title>{title}</Title>
@@ -75,6 +74,7 @@ export const TopBar = forwardRef(function EdsTopBar(
         <Center>{center}</Center>
         <Right>{right}</Right>
       </StyledTopBar>
+      {position === 'fixed' && <Gutter />}
     </Fragment>
   )
 })
