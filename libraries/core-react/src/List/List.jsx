@@ -70,27 +70,4 @@ List.defaultProps = {
   start: undefined,
 }
 
-const ListItem = forwardRef(function ListItem({ children, ...props }, ref) {
-  return (
-    <li {...props} ref={ref}>
-      {children}
-    </li>
-  )
-})
-
-ListItem.displayName = 'eds-listitem'
-
-ListItem.propTypes = {
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-ListItem.defaultProps = {
-  className: undefined,
-}
-
-List.ListItem = ListItem
-
 export { List }
