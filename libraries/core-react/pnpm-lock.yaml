@@ -1,13 +1,13 @@
 dependencies:
-  '@equinor/eds-icons': 'link:../icons'
   '@equinor/eds-tokens': 'link:../tokens'
 devDependencies:
   '@babel/cli': 7.7.5_@babel+core@7.7.5
   '@babel/core': 7.7.5
   '@babel/preset-env': 7.7.6_@babel+core@7.7.5
   '@babel/preset-react': 7.7.4_@babel+core@7.7.5
+  '@equinor/eds-icons': 0.0.1-alpha.2
   '@testing-library/jest-dom': 4.2.4
-  '@testing-library/react': 9.3.3_react-dom@16.12.0+react@16.12.0
+  '@testing-library/react': 9.4.0_react-dom@16.12.0+react@16.12.0
   babel-plugin-styled-components: 1.10.6_styled-components@4.4.1
   jest: 24.9.0
   jest-styled-components: 6.3.4_styled-components@4.4.1
@@ -858,6 +858,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-kBa+cDHOR9jpRJ+kcGMsysrls0leukrm68DmFQoMIWQcXdr2cZvyvypWuGYT7U+9kAExUE7+T7r6G3C3A6L8MQ==
+  /@equinor/eds-icons/0.0.1-alpha.2:
+    dependencies:
+      rollup: 1.27.12
+      rollup-plugin-commonjs: 10.1.0_rollup@1.27.12
+      rollup-plugin-node-resolve: 5.2.0_rollup@1.27.12
+      rollup-plugin-svg: 2.0.0
+    dev: true
+    engines:
+      pnpm: '>=4'
+    resolution:
+      integrity: sha512-8oxr9Yr3jxOdfdDdgAR+vUiYPJVkC9B54zfnvAnD7UHlaAHNZER/vLlZ0N+0HcTPm64zAS6h6L5OOMtl6S3VAg==
   /@jest/console/24.9.0:
     dependencies:
       '@jest/source-map': 24.9.0
@@ -1020,7 +1031,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
-  /@testing-library/dom/6.10.1:
+  /@testing-library/dom/6.12.2:
     dependencies:
       '@babel/runtime': 7.7.6
       '@sheerun/mutationobserver-shim': 0.3.2
@@ -1032,7 +1043,7 @@ packages:
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-5BPKxaO+zSJDUbVZBRNf9KrmDkm/EcjjaHSg3F9+031VZyPACKXlwLBjVzZxheunT9m72DoIq7WvyE457/Xweg==
+      integrity: sha512-KCnvHra5fV+wDxg3wJObGvZFxq7v1DJt829GNFLuRDjKxVNc/B5AdsylNF5PMHFbWMXDsHwM26d2NZcZO9KjbQ==
   /@testing-library/jest-dom/4.2.4:
     dependencies:
       '@babel/runtime': 7.7.6
@@ -1050,10 +1061,10 @@ packages:
       npm: '>=6'
     resolution:
       integrity: sha512-j31Bn0rQo12fhCWOUWy9fl7wtqkp7In/YP2p5ZFyRuiiB9Qs3g+hS4gAmDWONbAHcRmVooNJ5eOHQDCOmUFXHg==
-  /@testing-library/react/9.3.3_react-dom@16.12.0+react@16.12.0:
+  /@testing-library/react/9.4.0_react-dom@16.12.0+react@16.12.0:
     dependencies:
       '@babel/runtime': 7.7.6
-      '@testing-library/dom': 6.10.1
+      '@testing-library/dom': 6.12.2
       '@types/testing-library__react': 9.1.2
       react: 16.12.0
       react-dom: 16.12.0_react@16.12.0
@@ -1064,7 +1075,7 @@ packages:
       react: '*'
       react-dom: '*'
     resolution:
-      integrity: sha512-IuoiJR/NAzu9EuT3Fqs92sRHe/9egCipar92wTnXe3fMloWy0Q7JdAXaszzbv2ogH30ztb6Axp5XW63vOTd4jA==
+      integrity: sha512-XdhDWkI4GktUPsz0AYyeQ8M9qS/JFie06kcSnUVcpgOwFjAu9vhwR83qBl+lw9yZWkbECjL8Hd+n5hH6C0oWqg==
   /@types/babel__core/7.1.3:
     dependencies:
       '@babel/parser': 7.7.5
@@ -1094,6 +1105,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-yGeB2dHEdvxjP0y4UbRtQaSkXJ9649fYCmIdRoul5kfAoGCwxuCbMhag0k3RPfnuh9kPGm8x89btcfDEXdVWGw==
+  /@types/estree/0.0.39:
+    dev: true
+    resolution:
+      integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
   /@types/estree/0.0.40:
     dev: true
     resolution:
@@ -1917,6 +1932,10 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha512-39nnKffWz8xN1BU/2c79n9nB9HDzo0niYUqx6xyqUnyoAnQyyWpOTdZEeiCch8BBu515t4wp9ZmgVfVhn9EBpw==
+  /estree-walker/0.2.1:
+    dev: true
+    resolution:
+      integrity: sha1-va/oCVOD2EFNXcLs9MkXO225QS4=
   /estree-walker/0.6.1:
     dev: true
     resolution:
@@ -2479,6 +2498,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
+  /is-reference/1.1.4:
+    dependencies:
+      '@types/estree': 0.0.39
+    dev: true
+    resolution:
+      integrity: sha512-uJA/CDPO3Tao3GTrxYn6AwkM4nUPJiGGYu5+cB8qbC7WGFlrKZbiRo7SFKxUAEpFUfiHofWCXBUNhvYJMh+6zw==
   /is-regex/1.0.4:
     dependencies:
       has: 1.0.3
@@ -3994,6 +4019,20 @@ packages:
       rollup: '>=0.60.0 <2'
     resolution:
       integrity: sha512-tKzWOCmIJD/6aKNz0H1GMM+lW1q9KyFubbWzGiOG540zxPPifnEAHTZwjo0g991Y+DyOZcLqBgqOdqazYE5fkw==
+  /rollup-plugin-commonjs/10.1.0_rollup@1.27.12:
+    dependencies:
+      estree-walker: 0.6.1
+      is-reference: 1.1.4
+      magic-string: 0.25.4
+      resolve: 1.13.1
+      rollup: 1.27.12
+      rollup-pluginutils: 2.8.2
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-commonjs.
+    dev: true
+    peerDependencies:
+      rollup: '>=1.12.0'
+    resolution:
+      integrity: sha512-jlXbjZSQg8EIeAAvepNwhJj++qJWNJw1Cl0YnOqKtP5Djx+fFGkp3WRh+W0ASCaFG5w1jhmzDxgu3SJuVxPF4Q==
   /rollup-plugin-commonjs/9.3.4_rollup@1.27.12:
     dependencies:
       estree-walker: 0.6.1
@@ -4022,6 +4061,33 @@ packages:
     dev: true
     resolution:
       integrity: sha512-t/64I6l7fZ9BxqD3XlX4ZeO6+5RLKyfpwE2CiPNUKa+GocPlQhf/C208ou8y3AwtNsc6bjSk/8/6y/YAyxCIvw==
+  /rollup-plugin-node-resolve/5.2.0_rollup@1.27.12:
+    dependencies:
+      '@types/resolve': 0.0.8
+      builtin-modules: 3.1.0
+      is-module: 1.0.0
+      resolve: 1.13.1
+      rollup: 1.27.12
+      rollup-pluginutils: 2.8.2
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-node-resolve.
+    dev: true
+    peerDependencies:
+      rollup: '>=1.11.0'
+    resolution:
+      integrity: sha512-jUlyaDXts7TW2CqQ4GaO5VJ4PwwaV8VUGA7+km3n6k6xtOEacf61u0VXwN80phY/evMcaS+9eIeJ9MOyDxt5Zw==
+  /rollup-plugin-svg/2.0.0:
+    dependencies:
+      rollup-pluginutils: 1.5.2
+    dev: true
+    resolution:
+      integrity: sha512-DmE7dSQHo1SC5L2uH2qul3Mjyd5oV6U1aVVkyvTLX/mUsRink7f1b1zaIm+32GEBA6EHu8H/JJi3DdWqM53ySQ==
+  /rollup-pluginutils/1.5.2:
+    dependencies:
+      estree-walker: 0.2.1
+      minimatch: 3.0.4
+    dev: true
+    resolution:
+      integrity: sha1-HhVud4+UtyVb+hs9AXi+j1xVJAg=
   /rollup-pluginutils/2.8.2:
     dependencies:
       estree-walker: 0.6.1
@@ -4766,7 +4832,7 @@ specifiers:
   '@equinor/eds-icons': ^0.0.1-alpha.2
   '@equinor/eds-tokens': ^0.0.1-alpha.4
   '@testing-library/jest-dom': ^4.2.4
-  '@testing-library/react': ^9.3.3
+  '@testing-library/react': ^9.4.0
   babel-plugin-styled-components: ^1.10.6
   jest: ^24.9.0
   jest-styled-components: ^6.3.4

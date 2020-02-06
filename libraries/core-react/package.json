@@ -37,7 +37,7 @@
     "@babel/preset-react": "^7.7.4",
     "@equinor/eds-icons": "^0.0.1-alpha.2",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.3",
+    "@testing-library/react": "^9.4.0",
     "babel-plugin-styled-components": "^1.10.6",
     "jest": "^24.9.0",
     "jest-styled-components": "^6.3.4",
