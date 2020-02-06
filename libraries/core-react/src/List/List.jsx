@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import PropTypes, { resetWarningCache } from 'prop-types'
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 const StyledList = styled.div(
