@@ -88,7 +88,7 @@ ListItem.propTypes = {
 }
 
 ListItem.defaultProps = {
-  className: null,
+  className: undefined,
 }
 
 List.ListItem = ListItem
