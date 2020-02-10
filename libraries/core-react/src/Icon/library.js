@@ -1,7 +1,10 @@
 let _icons = {}
 let count = 0
 export const add = (icons) => {
-  _icons = icons
+  _icons = {
+    ..._icons,
+    ...icons,
+  }
 }
 
 export const get = (name) => {
