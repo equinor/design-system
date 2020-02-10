@@ -1,19 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import primaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-primary.json'
-import secondaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-secondary.json'
-import dangerButtonTokens from '@equinor/eds-tokens/components/button/buttons-danger.json'
-import disabledButtonTokens from '@equinor/eds-tokens/components/button/buttons-disabled.json'
+import { button } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
 
-const colors = {
-  primary: primaryButtonTokens,
-  secondary: secondaryButtonTokens,
-  danger: dangerButtonTokens,
-  disabled: disabledButtonTokens,
-}
-
+const { colors } = button
 // TODO: Is there a better way to handle css properties without
 // bloating with ${props => props.base.focus.color} etc...
 // Using simple template string for now, but missing css syntax highlight :(
@@ -23,19 +14,24 @@ const Base = ({ base, baseDisabled: disabled }) => {
     return ``
   }
 
-  const { border, spacing, typography, focus } = base
+  const { border, spacing, typography, focus, hover } = base
 
   return `
-    height: ${base.height};
     background: ${base.background};
+    height: ${base.height};
+    width: ${base.width};
     color: ${base.color};
 
     border-radius: ${border.radius};
     border-color: ${border.color};
     border-width: ${border.width};
 
-    padding-left: ${spacing.left};
-    padding-right: ${spacing.right};
+    ${spacing &&
+      `
+        padding-left: ${spacing.left};
+        padding-right: ${spacing.right};
+      `}
+
 
     ${typographyTemplate(typography)}
 
@@ -49,7 +45,8 @@ const Base = ({ base, baseDisabled: disabled }) => {
     }
 
     &:hover {
-      background: ${base.hoverBackground};
+      background: ${hover.background};
+      ${hover.radius && `border-radius: ${hover.radius};`}
     }
 
     &:focus {
@@ -127,7 +124,7 @@ Button.propTypes = {
   /**  Specifies color */
   color: PropTypes.oneOf(['primary', 'secondary', 'danger']),
   /** Specifies which variant to use */
-  variant: PropTypes.oneOf(['contained', 'outlined', 'ghost']),
+  variant: PropTypes.oneOf(['contained', 'outlined', 'ghost', 'ghost_icon']),
   /**
    * If `true`, the button will be disabled.
    */

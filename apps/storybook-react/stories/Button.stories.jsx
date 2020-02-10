@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@equinor/eds-core-react'
+import { Button, Icon } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import './../style.css'
@@ -98,6 +98,9 @@ export const ghost = () => (
     </Button>
     <Button variant="ghost" disabled>
       Disabled
+    </Button>
+    <Button variant="ghost_icon">
+      <Icon name="save"></Icon>
     </Button>
   </Wrapper>
 )

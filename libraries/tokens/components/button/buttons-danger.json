@@ -28,7 +28,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(255, 193, 193, 1)",
+    "hover": {
+      "background": "rgba(255, 193, 193, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "ghost": {
@@ -60,7 +63,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(255, 193, 193, 1)",
+    "hover": {
+      "background": "rgba(255, 193, 193, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "contained_right_icon": {
@@ -93,7 +99,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(179, 13, 47, 1)",
+    "hover": {
+      "background": "rgba(179, 13, 47, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "outlined_right_icon": {
@@ -126,7 +135,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(255, 193, 193, 1)",
+    "hover": {
+      "background": "rgba(255, 193, 193, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "ghost_right_icon": {
@@ -159,7 +171,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(255, 193, 193, 1)",
+    "hover": {
+      "background": "rgba(255, 193, 193, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "contained_left_icon": {
@@ -192,7 +207,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(179, 13, 47, 1)",
+    "hover": {
+      "background": "rgba(179, 13, 47, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "outlined_left_icon": {
@@ -225,7 +243,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(255, 193, 193, 1)",
+    "hover": {
+      "background": "rgba(255, 193, 193, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "ghost_left_icon": {
@@ -258,7 +279,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(255, 193, 193, 1)",
+    "hover": {
+      "background": "rgba(255, 193, 193, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "contained": {
@@ -290,7 +314,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(179, 13, 47, 1)",
+    "hover": {
+      "background": "rgba(179, 13, 47, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   }
 }

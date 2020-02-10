@@ -34,17 +34,18 @@ export const toFocus = (figmaNode) => {
   if (R.isNil(figmaNode)) return {}
 
   const focus = R.head(figmaNode.children)
-  const { strokeDashes, strokes } = focus
+  const { strokeDashes, strokes, cornerRadius } = focus
   const stroke = strokes.find(withType('solid')) || fallback
   const [dashWidth, dashGap] = strokeDashes
   const focusStyle = typeof strokeDashes === 'undefined' ? '' : 'dashed'
 
-  return {
+  return removeNilAndEmpty({
     type: focusStyle,
     color: fillToRgba(stroke),
     width: px(dashWidth),
     gap: px(dashGap),
-  }
+    radius: px(cornerRadius),
+  })
 }
 
 export const toOverlay = (figmaNode) => {
@@ -60,21 +61,24 @@ export const toClickBound = (componentHeight, figmaNode) => {
   if (R.isNil(figmaNode)) return {}
 
   const clickbound = R.head(figmaNode.children)
-  const { height } = clickbound.absoluteBoundingBox
+  const { height, width } = clickbound.absoluteBoundingBox
   const offset = (height - parseInt(componentHeight, 10)) / 2
 
-  return { height: px(height), offset: px(offset) }
+  return { height: px(height), width: px(width), offset: px(offset) }
 }
 
 export const toHover = (figmaNode) => {
   if (R.isNil(figmaNode)) return {}
 
   const hover = R.head(figmaNode.children)
-  const fill = hover.fills.find(withType('solid')) || fallback
-
-  return {
+  const { fills, cornerRadius } = hover
+  const fill = fills.find(withType('solid')) || fallback
+  // Figma can only use pixel as radius for shapes. 100 pixel is used for circle shapes
+  const radius = cornerRadius === 100 ? '50%' : px(cornerRadius)
+  return removeNilAndEmpty({
     background: fillToRgba(fill),
-  }
+    radius,
+  })
 }
 
 export const toActive = (figmaNode) => {}
