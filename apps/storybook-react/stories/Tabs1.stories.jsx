@@ -1,12 +1,21 @@
-import React, { useState, useEffect, createRef } from 'react'
+import React, { useState, useEffect, createRef, useRef } from 'react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Tabs1 as Tabs, Typography } from '@equinor/eds-core-react'
-import { tokens } from '@equinor/eds-tokens'
-import { typography } from '@equinor/eds-tokens/base/typography'
-import { typographyTemplate } from '@equinor/eds-core-react/src/_common/templates'
 
-const { Tab } = Tabs
+const { Tab, tokens } = Tabs
+
+const {
+  states: {
+    focused: {
+      outline: {
+        width: outlineWidth,
+        style: outlineStyle,
+        color: outlineColor,
+      },
+    },
+  },
+} = tokens
 
 export default {
   title: 'Components|Tabs 1 (MUI Style)',
@@ -20,16 +29,39 @@ const Wrapper = styled.div`
 `
 
 const StyledPanel = styled.div`
+  padding: 24px;
   &:focus {
-    outline: 2px solid orange;
+    outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
   }
 `
 
-export const allTabs = () => {
-  const [value, setValue] = useState(0)
+export const tabStates = () => {
+  const focusedRef = useRef(null)
+  const noop = () => {}
 
-  const handleChange = (event, index) => {
-    console.log('event:', event.currentTarget)
+  useEffect(() => {
+    focusedRef.current.focus()
+  }, [])
+
+  return (
+    <Wrapper>
+      <Tabs value={2} onChange={noop}>
+        <Tab>Enabled</Tab>
+        <Tab disabled>Disabled</Tab>
+        <Tab active>Active</Tab>
+        <Tab data-hover>Hover</Tab>
+        <Tab data-focus ref={focusedRef}>
+          Focus
+        </Tab>
+      </Tabs>
+    </Wrapper>
+  )
+}
+
+export const allTabs = () => {
+  const [value, setValue] = useState(1)
+
+  const handleChange = (index) => {
     setValue(index)
   }
 
@@ -47,8 +79,11 @@ export const allTabs = () => {
         <Tab aria-controls="panel-two" id="tab-two">
           Tab two
         </Tab>
-        <Tab aria-controls="panel-three" id="tab-three">
+        <Tab aria-controls="panel-three" id="tab-three" disabled>
           Tab three
+        </Tab>
+        <Tab aria-controls="panel-four" id="tab-four">
+          Tab four
         </Tab>
       </Tabs>
       <Panel
@@ -80,6 +115,16 @@ export const allTabs = () => {
         index={2}
       >
         Panel three
+      </Panel>
+      <Panel
+        id="panel-four"
+        aria-labelledby="tab-four"
+        role="tab-panel"
+        tabIndex="0"
+        value={value}
+        index={3}
+      >
+        Panel four
       </Panel>
     </Wrapper>
   )

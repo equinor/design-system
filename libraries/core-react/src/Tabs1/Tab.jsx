@@ -7,10 +7,7 @@ const {
   clickbound: height,
   spacing: { left: paddingLeft, right: paddingRight },
   states: {
-    enabled: {
-      border,
-      ...enabled
-    },
+    enabled: { border, ...enabled },
     hover,
     disabled: _disabled,
     activated,
@@ -24,12 +21,12 @@ const {
   },
 } = tokens
 
-
-const StyledTab = styled.button.attrs(({active}) => ({
+const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   type: 'button',
   role: 'tab',
   'aria-selected': active,
-  tabIndex: active ? '0' : '-1'
+  'aria-disabled': disabled,
+  tabIndex: active ? '0' : '-1',
 }))`
   appearance: none;
   box-sizing: border-box;
@@ -38,22 +35,30 @@ const StyledTab = styled.button.attrs(({active}) => ({
   height: ${height};
   padding-left: ${paddingLeft};
   padding-right: ${paddingRight};
-  color: ${({active}) => active ? activated.color : enabled.color };
+  color: ${({ active }) => (active ? activated.color : enabled.color)};
   background-color: ${enabled.backgroundColor};
   position: relative;
+
+  &[data-focus],
   &:focus {
     outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
     z-index: 1;
   }
+
+  &[data-hover],
   &:hover {
-    background-color: ${({disabled}) => disabled ? _disabled.hover.backgroundColor : hover.backgroundColor};
-    color: ${({active}) => active ? activated.hover.color : enabled.color };
-    cursor: ${({disabled}) => disabled ? _disabled.hover.cursor : 'pointer'};
+    background-color: ${({ disabled }) =>
+      disabled ? _disabled.hover.backgroundColor : hover.backgroundColor};
+    color: ${({ active }) => (active ? activated.hover.color : enabled.color)};
+    cursor: ${({ disabled }) =>
+      disabled ? _disabled.hover.cursor : 'pointer'};
   }
+
   &::after {
     content: '';
-    height: ${({disabled}) => disabled ? '0' : border.width.bottom};
-    background-color: ${ ({active}) => active ? activated.border.color : border.color};
+    height: ${({ disabled }) => (disabled ? '0' : border.width.bottom)};
+    background-color: ${({ active }) =>
+      active ? activated.border.color : border.color};
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -62,13 +67,7 @@ const StyledTab = styled.button.attrs(({active}) => ({
 `
 
 export const Tab = forwardRef(function Tab(props, ref) {
-
-  return (
-    <StyledTab
-      ref={ref}
-      {...props}
-    />
-  )
+  return <StyledTab ref={ref} {...props} />
 })
 
 Tab.propTypes = {
