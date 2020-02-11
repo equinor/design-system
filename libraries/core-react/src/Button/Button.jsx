@@ -21,11 +21,14 @@ const Base = ({ base, baseDisabled: disabled }) => {
     width: ${base.width};
     color: ${base.color};
     fill: ${base.color};
+    svg {
+      height: 16px;
+      width: 16px;
+    }
 
     border-radius: ${border.radius};
     border-color: ${border.color};
     border-width: ${border.width};
-    border-style: solid;
 
     ${spacing &&
       css`

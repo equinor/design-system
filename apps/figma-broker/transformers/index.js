@@ -38,13 +38,14 @@ export const toFocus = (figmaNode) => {
   const stroke = strokes.find(withType('solid')) || fallback
   const [dashWidth, dashGap] = strokeDashes
   const focusStyle = typeof strokeDashes === 'undefined' ? '' : 'dashed'
+  const radius = cornerRadius === 100 ? '50%' : px(cornerRadius)
 
   return removeNilAndEmpty({
     type: focusStyle,
     color: fillToRgba(stroke),
     width: px(dashWidth),
     gap: px(dashGap),
-    radius: px(cornerRadius),
+    radius,
   })
 }
 
