@@ -55,16 +55,14 @@ export const TopBar = forwardRef(function EdsTopBar(
   const props = { className, ref }
 
   return (
-    <Fragment>
-      <StyledTopBar {...props} {...rest}>
-        <Left>
-          {left && <Fragment>{left}</Fragment>}
-          <Title>{title}</Title>
-        </Left>
-        <Center>{center}</Center>
-        <Right>{right}</Right>
-      </StyledTopBar>
-    </Fragment>
+    <StyledTopBar {...props} {...rest}>
+      <Left>
+        {left && <Fragment>{left}</Fragment>}
+        <Title>{title}</Title>
+      </Left>
+      <Center>{center}</Center>
+      <Right>{right}</Right>
+    </StyledTopBar>
   )
 })
 
