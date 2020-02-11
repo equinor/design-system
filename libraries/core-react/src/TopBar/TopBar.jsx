@@ -41,12 +41,10 @@ const Title = styled.h1`
 
 const Left = styled.div`
   grid-area: left;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 24px;
   align-items: center;
-
-  *:first-child {
-    margin-right: 24px;
-  }
 `
 const Center = styled.div`
   grid-area: center;
