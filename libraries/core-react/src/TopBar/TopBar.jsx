@@ -23,7 +23,7 @@ const StyledTopBar = styled.header`
   z-index: 1000;
   display: grid;
   grid-column-gap: ${spacings.left};
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: auto 1fr auto;
   grid-template-areas: 'left center right';
   align-items: center;
   border-bottom: ${border.bottom.width} solid ${border.bottom.color};
