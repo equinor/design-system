@@ -9,15 +9,6 @@ import {
   notifications,
   fullscreen,
   grid_on,
-  // todo,support multiple add() calls for icon component
-  layers,
-  layers_off,
-  grid_off,
-  compare,
-  work,
-  pregnant_woman,
-  accessible_forward,
-  save,
 } from '@equinor/eds-icons'
 
 const icons = {
@@ -26,15 +17,6 @@ const icons = {
   notifications,
   fullscreen,
   grid_on,
-  // todo
-  layers,
-  layers_off,
-  grid_off,
-  compare,
-  work,
-  pregnant_woman,
-  accessible_forward,
-  save,
 }
 
 Icon.add(icons)
@@ -44,7 +26,7 @@ const Wrapper = styled.div`
   overflow: auto;
 `
 
-const Gradient = styled.div`
+const Body = styled.div`
   height: 1500px;
   background: #ebebeb;
   display: flex;
@@ -129,11 +111,11 @@ export const Page = () => {
         center={CENTER_CHOICES[centerChoice]}
         right={RIGHT_CHOICES[rightChoice]}
       />
-      <Gradient>
+      <Body>
         <p>Top of page</p>
         <p>Middle of page</p>
         <p>Bottom of page</p>
-      </Gradient>
+      </Body>
     </Wrapper>
   )
 }
