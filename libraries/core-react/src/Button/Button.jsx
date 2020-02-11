@@ -69,6 +69,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
       cursor: not-allowed;
       background: ${disabled.background};
       color: ${disabled.color};
+      fill: ${disabled.color};
 
       border-color: ${disabled.border.color};
 
