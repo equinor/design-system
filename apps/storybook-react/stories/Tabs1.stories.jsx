@@ -65,10 +65,11 @@ export const allTabs = () => {
     setValue(index)
   }
 
-  const Panel = (props) =>
-    props.value === props.index && (
-      <StyledPanel {...props}>{props.children}</StyledPanel>
-    )
+  const Panel = (props) => (
+    <StyledPanel hidden={props.value !== props.index} {...props}>
+      {props.children}
+    </StyledPanel>
+  )
 
   return (
     <Wrapper>
@@ -89,7 +90,7 @@ export const allTabs = () => {
       <Panel
         id="panel-one"
         aria-labelledby="tab-one"
-        role="tab-panel"
+        role="tabpanel"
         tabIndex="0"
         value={value}
         index={0}
@@ -99,7 +100,7 @@ export const allTabs = () => {
       <Panel
         id="panel-two"
         aria-labelledby="tab-two"
-        role="tab-panel"
+        role="tabpanel"
         tabIndex="0"
         value={value}
         index={1}
@@ -109,7 +110,7 @@ export const allTabs = () => {
       <Panel
         id="panel-three"
         aria-labelledby="tab-three"
-        role="tab-panel"
+        role="tabpanel"
         tabIndex="0"
         value={value}
         index={2}

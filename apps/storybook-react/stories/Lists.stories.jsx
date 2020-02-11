@@ -4,7 +4,7 @@ import { List, Typography } from '@equinor/eds-core-react'
 
 const { ListItem } = List
 
-const start = 15
+const start = '15'
 
 export default {
   title: 'Components|Lists',
