@@ -86,7 +86,7 @@
       "color": "rgba(0, 112, 121, 1)",
       "width": "2px",
       "gap": "8px",
-      "radius": "100px"
+      "radius": "50%"
     },
     "hover": {
       "background": "rgba(222, 237, 238, 1)",
