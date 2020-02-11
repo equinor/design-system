@@ -65,6 +65,7 @@
     ]
   },
   "dependencies": {
-    "@equinor/eds-tokens": "workspace:*"
+    "@equinor/eds-tokens": "workspace:*",
+    "@testing-library/react-hooks": "^3.2.1"
   }
 }

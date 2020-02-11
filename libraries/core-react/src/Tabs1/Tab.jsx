@@ -41,8 +41,8 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
 
   &[data-focus],
   &:focus {
-    outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
     z-index: 1;
+    outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
   }
 
   &[data-hover],

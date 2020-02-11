@@ -1,16 +1,9 @@
 import React, { forwardRef, useRef, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useKeyPress } from '../_common/useKeyPress'
+import { useCombinedRefs } from '../_common/useCombinedRefs'
 import { Tab } from './Tab'
 import { tab as tokens } from './Tabs.tokens'
-
-/*
-  TODO:
-  Merge refs
-  Home
-  End
-*/
 
 const StyledTabs = styled.div.attrs(() => ({
   role: 'tablist',
@@ -19,8 +12,8 @@ const StyledTabs = styled.div.attrs(() => ({
   grid-auto-flow: column;
 `
 
-const Tabs = forwardRef(function Tabs({ value, ...props }, ref) {
-  const nextTab = useRef(value)
+const Tabs = forwardRef(function Tabs({ value, onChange, ...props }, ref) {
+  const currentTab = useRef(value)
 
   const selectedTabRef = useCallback((node) => {
     if (node !== null) {
@@ -28,51 +21,60 @@ const Tabs = forwardRef(function Tabs({ value, ...props }, ref) {
     }
   }, [])
 
-  const children = React.Children.map(props.children, (child, index) =>
-    React.cloneElement(child, {
+  useEffect(() => {
+    currentTab.current = value
+  }, [value])
+
+  const children = React.Children.map(props.children, (child, index) => {
+    const tabRef =
+      index === value ? useCombinedRefs(child.ref, selectedTabRef) : child.ref
+
+    return React.cloneElement(child, {
       index,
       active: index === value,
-      onClick: () => props.onChange(index),
-      ref: index === value ? selectedTabRef : undefined,
-    }),
-  )
+      onClick: () => onChange(index),
+      ref: tabRef,
+    })
+  })
 
   const focusableChildren = children
     .filter((child) => !child.props.disabled)
     .map((child) => child.props.index)
 
-  useKeyPress('ArrowLeft', () => {
-    const next =
-      focusableChildren[focusableChildren.indexOf(nextTab.current) - 1]
-    props.onChange(
-      next === undefined
-        ? focusableChildren[focusableChildren.length - 1]
-        : next,
-    )
-  })
+  const firstFocusableChild = focusableChildren[0]
+  const lastFocusableChild = focusableChildren[focusableChildren.length - 1]
 
-  useKeyPress('ArrowRight', () => {
-    const next =
-      focusableChildren[focusableChildren.indexOf(nextTab.current) + 1]
-    props.onChange(next === undefined ? focusableChildren[0] : next)
-  })
+  const changeTabs = (direction, fallbackTab) => {
+    const i = direction === 'left' ? 1 : -1
+    const nextTab =
+      focusableChildren[focusableChildren.indexOf(currentTab.current) - i]
+    onChange(nextTab === undefined ? fallbackTab : nextTab)
+  }
 
-  useEffect(() => {
-    nextTab.current = value
-  }, [value])
+  const handleKeyPress = (event) => {
+    const { key } = event
+    if (key === 'ArrowLeft') {
+      changeTabs('left', lastFocusableChild)
+    }
+    if (key === 'ArrowRight') {
+      changeTabs('right', firstFocusableChild)
+    }
+  }
 
   return (
-    <StyledTabs ref={ref} {...props}>
+    <StyledTabs onKeyDown={handleKeyPress} ref={ref} {...props}>
       {children}
     </StyledTabs>
   )
 })
 
 Tabs.propTypes = {
+  onChange: PropTypes.func,
   variants: PropTypes.oneOf(['fullWidth', 'minWidth']),
 }
 
 Tabs.defaultProps = {
+  onChange: () => {},
   variants: 'fullWidth',
 }
 
