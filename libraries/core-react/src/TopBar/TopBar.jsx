@@ -41,7 +41,6 @@ const Left = styled.div`
 `
 const Center = styled.div`
   grid-area: center;
-  text-align: center;
 `
 
 const Right = styled.div`
