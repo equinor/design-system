@@ -1,16 +1,10 @@
-import React, { forwardRef, Fragment } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { spacingsTemplate, typographyTemplate } from '../_common/templates'
+import { spacingsTemplate } from '../_common/templates'
 import { topbar as tokens } from './TopBar.tokens'
 
-const {
-  background,
-  height,
-  spacings,
-  border,
-  title: { text },
-} = tokens
+const { background, height, spacings, border } = tokens
 
 const StyledTopBar = styled.header`
   height: ${height};
@@ -28,40 +22,13 @@ const StyledTopBar = styled.header`
   ${spacingsTemplate(spacings)};
 `
 
-const Title = styled.h1`
-  ${typographyTemplate(text)}
-`
-
-const Left = styled.div`
-  grid-area: left;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 24px;
-  align-items: center;
-`
-const Center = styled.div`
-  grid-area: center;
-`
-
-const Right = styled.div`
-  grid-area: right;
-  text-align: right;
-`
-
 export const TopBar = forwardRef(function EdsTopBar(
-  { title, center, right, left, className, ...rest },
+  { children, ...props },
   ref,
 ) {
-  const props = { className, ref }
-
   return (
-    <StyledTopBar {...props} {...rest}>
-      <Left>
-        {left && <Fragment>{left}</Fragment>}
-        <Title>{title}</Title>
-      </Left>
-      <Center>{center}</Center>
-      <Right>{right}</Right>
+    <StyledTopBar {...props} ref={ref}>
+      {children}
     </StyledTopBar>
   )
 })
@@ -71,26 +38,14 @@ TopBar.displayName = 'eds-topbar'
 TopBar.propTypes = {
   /** @ignore */
   className: PropTypes.string,
-  /** Title content */
-  title: PropTypes.node,
-  /** Right content */
-  right: PropTypes.oneOfType([
+  /** @ignore */
+  children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  /** Center content */
-  center: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  /** Left content */
-  left: PropTypes.node,
 }
 
 TopBar.defaultProps = {
   className: '',
-  title: '',
-  right: null,
-  left: null,
-  center: null,
+  children: undefined,
 }

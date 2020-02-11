@@ -1,5 +1,5 @@
-import React from 'react'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
+import React, { Fragment } from 'react'
+import { withKnobs, select } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { TopBar, Icon, TextField } from '@equinor/eds-core-react'
 
@@ -10,6 +10,8 @@ import {
   fullscreen,
   grid_on,
 } from '@equinor/eds-icons'
+
+const { Actions, Header, CustomContent } = TopBar
 
 const icons = {
   account_circle,
@@ -62,6 +64,13 @@ const TempSearch = styled(TextField)`
 const LEFT_CHOICES = {
   none: null,
   icon: <Icon name="grid_on" size={16} />,
+  text: 'Application name - subtitle',
+  'text+icon': (
+    <Fragment>
+      <Icon name="grid_on" size={16} />
+      Application name - subtitle
+    </Fragment>
+  ),
 }
 
 const CENTER_CHOICES = {
@@ -100,17 +109,16 @@ export default {
 }
 
 export const Page = () => {
-  const rightChoice = select('Right', Object.keys(RIGHT_CHOICES), 'icons')
-  const leftChoice = select('Left', Object.keys(LEFT_CHOICES), 'none')
+  const leftChoice = select('Left', Object.keys(LEFT_CHOICES), 'text')
   const centerChoice = select('Center', Object.keys(CENTER_CHOICES), 'none')
+  const rightChoice = select('Right', Object.keys(RIGHT_CHOICES), 'icons')
   return (
     <Wrapper tabIndex="0">
-      <TopBar
-        title={text('Title', 'Application name - subtitle')}
-        left={LEFT_CHOICES[leftChoice]}
-        center={CENTER_CHOICES[centerChoice]}
-        right={RIGHT_CHOICES[rightChoice]}
-      />
+      <TopBar>
+        <Header>{LEFT_CHOICES[leftChoice]}</Header>
+        <CustomContent>{CENTER_CHOICES[centerChoice]}</CustomContent>
+        <Actions>{RIGHT_CHOICES[rightChoice]}</Actions>
+      </TopBar>
       <Body>
         <p>Top of page</p>
         <p>Middle of page</p>
