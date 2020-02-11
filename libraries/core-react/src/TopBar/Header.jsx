@@ -40,5 +40,5 @@ Header.propTypes = {
 
 Header.defaultProps = {
   className: undefined,
-  children: null,
+  children: undefined,
 }

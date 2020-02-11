@@ -28,6 +28,6 @@ Actions.propTypes = {
 }
 
 Actions.defaultProps = {
-  className: null,
-  children: null,
+  className: undefined,
+  children: undefined,
 }

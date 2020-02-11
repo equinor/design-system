@@ -17,15 +17,16 @@ export const CustomContent = forwardRef(function EdsTopBarCustomContent(
   )
 })
 
-CustomContent.displayName = 'eds-topbar-actions'
+CustomContent.displayName = 'eds-topbar-customcontent'
 
 CustomContent.propTypes = {
   /** @ignore */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /** @ignore */
   className: PropTypes.string,
 }
 
 CustomContent.defaultProps = {
   className: undefined,
+  children: undefined,
 }
