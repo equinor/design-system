@@ -14,6 +14,7 @@ const VARIANT = {
   CONTAINED: 'contained',
   OUTLINED: 'outlined',
   GHOST: 'ghost',
+  GHOST_ICON: 'ghost_icon',
 }
 
 const COLOR = {

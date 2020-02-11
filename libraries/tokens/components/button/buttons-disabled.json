@@ -51,6 +51,7 @@
     "height": "16px",
     "width": "16px",
     "color": "rgba(111, 111, 111, 1)",
+    "background": "transparent",
     "border": {
       "color": "transparent",
       "width": "1px",

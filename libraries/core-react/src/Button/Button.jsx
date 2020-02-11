@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { button } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
 
 const { colors } = button
 // TODO: Is there a better way to handle css properties without
 // bloating with ${props => props.base.focus.color} etc...
-// Using simple template string for now, but missing css syntax highlight :(
 const Base = ({ base, baseDisabled: disabled }) => {
   if (!base) {
     // TODO: What to do when base does not exist
@@ -16,29 +15,30 @@ const Base = ({ base, baseDisabled: disabled }) => {
 
   const { border, spacing, typography, focus, hover } = base
 
-  return `
+  return css`
     background: ${base.background};
     height: ${base.height};
     width: ${base.width};
     color: ${base.color};
+    fill: ${base.color};
 
     border-radius: ${border.radius};
     border-color: ${border.color};
     border-width: ${border.width};
+    border-style: solid;
 
     ${spacing &&
-      `
+      css`
         padding-left: ${spacing.left};
         padding-right: ${spacing.right};
       `}
-
 
     ${typographyTemplate(typography)}
 
     &::after {
       position: absolute;
-      top:-${base.clickboundOffset};
-      left:0;
+      top: -${base.clickboundOffset};
+      left: 0;
       width: 100%;
       height: ${base.clickbound};
       content: '';
@@ -46,12 +46,23 @@ const Base = ({ base, baseDisabled: disabled }) => {
 
     &:hover {
       background: ${hover.background};
-      ${hover.radius && `border-radius: ${hover.radius};`}
+      ${hover.radius &&
+        css`
+          border-radius: ${hover.radius};
+        `}
     }
 
     &:focus {
-      outline-offset: ${focus.width};
-      outline: ${focus.width} ${focus.type} ${focus.color};
+      ${focus.radius
+        ? css`
+            outline: none;
+            border-radius: ${focus.radius};
+            border: ${focus.width} ${focus.type} ${focus.color};
+          `
+        : css`
+            outline-offset: ${focus.width};
+            outline: ${focus.width} ${focus.type} ${focus.color};
+          `}
     }
 
     &:disabled {
@@ -65,7 +76,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
         background: ${disabled.background};
       }
     }
-`
+  `
 }
 
 const ButtonBase = styled.button.attrs(() => ({

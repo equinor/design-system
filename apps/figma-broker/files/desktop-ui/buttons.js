@@ -65,12 +65,19 @@ const buildProps = (states) => {
     }
 
     if (ghostIcon) {
-      const icon_ = R.last(ghostIcon.children)
-      const { cornerRadius, strokeWeight, absoluteBoundingBox } = icon_
+      const iconButton = R.head(ghostIcon.children)
+      const {
+        cornerRadius,
+        strokeWeight,
+        absoluteBoundingBox,
+        strokes,
+      } = iconButton
       const { height, width } = absoluteBoundingBox
-      const fill = icon_.fills.find(withType('solid')) || fallback
-      const stroke = icon_.strokes.find(withType('solid')) || fallback
+      const stroke = strokes.find(withType('solid')) || fallback
       const radius = cornerRadius === 100 ? '50%' : px(cornerRadius)
+
+      const icon = R.last(R.find(withName('icon'), components).children)
+      const fill = icon.fills.find(withType('solid')) || fallback
 
       buttonProps = {
         ...buttonProps,

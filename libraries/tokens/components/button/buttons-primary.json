@@ -72,11 +72,12 @@
   "ghost_icon": {
     "height": "48px",
     "width": "48px",
-    "color": "rgba(222, 237, 238, 1)",
+    "color": "rgba(0, 112, 121, 1)",
+    "background": "transparent",
     "border": {
       "color": "transparent",
       "width": "1px",
-      "radius": "100px"
+      "radius": "50%"
     },
     "clickbound": "48px",
     "clickboundOffset": "0px",
