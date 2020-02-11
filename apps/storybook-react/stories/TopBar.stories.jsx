@@ -128,7 +128,6 @@ export const Page = () => {
         left={LEFT_CHOICES[leftChoice]}
         center={CENTER_CHOICES[centerChoice]}
         right={RIGHT_CHOICES[rightChoice]}
-        position={select('Position', ['fixed', 'sticky', 'static'], 'fixed')}
       />
       <Gradient>
         <p>Top of page</p>

@@ -1,11 +1,7 @@
 import React, { forwardRef, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import {
-  spacingsTemplate,
-  typographyTemplate,
-  positionTemplate,
-} from '../_common/templates'
+import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { topbar as tokens } from './TopBar.tokens'
 
 const {
@@ -17,8 +13,9 @@ const {
 } = tokens
 
 const StyledTopBar = styled.header`
-  background: ${background};
   height: ${height};
+  position: sticky;
+  background: ${background};
   box-sizing: border-box;
   z-index: 1000;
   display: grid;
@@ -29,10 +26,6 @@ const StyledTopBar = styled.header`
   border-bottom: ${border.bottom.width} solid ${border.bottom.color};
 
   ${spacingsTemplate(spacings)};
-  ${positionTemplate}
-`
-const Gutter = styled.div`
-  height: ${height};
 `
 
 const Title = styled.h1`
@@ -57,10 +50,10 @@ const Right = styled.div`
 `
 
 export const TopBar = forwardRef(function EdsTopBar(
-  { title, center, right, left, className, position, ...rest },
+  { title, center, right, left, className, ...rest },
   ref,
 ) {
-  const props = { position, className, ref }
+  const props = { className, ref }
 
   return (
     <Fragment>
@@ -72,7 +65,6 @@ export const TopBar = forwardRef(function EdsTopBar(
         <Center>{center}</Center>
         <Right>{right}</Right>
       </StyledTopBar>
-      {position === 'fixed' && <Gutter />}
     </Fragment>
   )
 })
@@ -96,8 +88,6 @@ TopBar.propTypes = {
   ]),
   /** Left content */
   left: PropTypes.node,
-  /** Position */
-  position: PropTypes.oneOf(['static', 'fixed', 'sticky']),
 }
 
 TopBar.defaultProps = {
@@ -106,5 +96,4 @@ TopBar.defaultProps = {
   right: null,
   left: null,
   center: null,
-  position: 'fixed',
 }
