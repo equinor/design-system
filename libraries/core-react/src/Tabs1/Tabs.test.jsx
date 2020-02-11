@@ -124,4 +124,5 @@ describe('Tabs', () => {
     })
     expect(targetTab).toHaveAttribute('aria-selected', 'true')
   })
+  it.skip('Skips disabled tabs when navigating using arrowkeys', () => {})
 })
