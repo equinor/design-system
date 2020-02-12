@@ -121,22 +121,6 @@ export const Button = ({
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
 
-  if (variant === 'ghost_icon') {
-    const iconChildIsMissingTitle = React.Children.toArray(children)
-      .map(
-        ({ type, props: childProps }) =>
-          (type || { displayName: '' }).displayName === Icon.displayName &&
-          !childProps.title,
-      )
-      .includes(true)
-
-    if (iconChildIsMissingTitle) {
-      throw Error(
-        `When using an Icon in the Button, the title property on Icon is mandataory because of accessibility `,
-      )
-    }
-  }
-
   return (
     <ButtonBase
       base={base}
@@ -152,11 +136,29 @@ export const Button = ({
 
 Button.propTypes = {
   /** @ignore */
-  children: PropTypes.node.isRequired,
+  children: ({ children }) => {
+    let error
+
+    const iconChildIsMissingTitle = React.Children.toArray(children)
+      .map(
+        ({ type, props: childProps }) =>
+          (type || { displayName: '' }).displayName === Icon.displayName &&
+          !childProps.title,
+      )
+      .includes(true)
+
+    if (iconChildIsMissingTitle) {
+      error = new Error(
+        `When using an Icon in the Button, the title property on Icon is mandatory because of accessibility`,
+      )
+    }
+    return error
+  },
   /**  Specifies color */
   color: PropTypes.oneOf(['primary', 'secondary', 'danger']),
   /** Specifies which variant to use */
   variant: PropTypes.oneOf(['contained', 'outlined', 'ghost', 'ghost_icon']),
+
   /**
    * If `true`, the button will be disabled.
    */
@@ -172,6 +174,7 @@ Button.defaultProps = {
   color: 'primary',
   disabled: false,
   className: '',
+  children: null,
 }
 
 Button.displayName = 'eds-button'
