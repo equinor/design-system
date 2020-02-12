@@ -101,16 +101,16 @@ export const ghost = () => (
       Disabled
     </Button>
     <Button variant="ghost_icon">
-      <Icon name="save" size={48}></Icon>
+      <Icon name="save" title="save" size={48}></Icon>
     </Button>
     <Button variant="ghost_icon" color="secondary">
-      <Icon name="save"></Icon>
+      <Icon name="save" title="save"></Icon>
     </Button>
     <Button variant="ghost_icon" color="danger">
-      <Icon name="save"></Icon>
+      <Icon name="save" title="save"></Icon>
     </Button>
     <Button variant="ghost_icon" disabled>
-      <Icon name="save"></Icon>
+      <Icon name="save" title="save"></Icon>
     </Button>
   </Wrapper>
 )
