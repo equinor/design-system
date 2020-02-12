@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { Icon } from '..'
 import { button } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
 
@@ -119,6 +120,22 @@ export const Button = ({
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
+
+  if (variant === 'ghost_icon') {
+    const iconChildIsMissingTitle = React.Children.toArray(children)
+      .map(
+        ({ type, props: childProps }) =>
+          (type || { displayName: '' }).displayName === Icon.displayName &&
+          !childProps.title,
+      )
+      .includes(true)
+
+    if (iconChildIsMissingTitle) {
+      throw Error(
+        `When using an Icon in the Button, the title property on Icon is mandataory because of accessibility `,
+      )
+    }
+  }
 
   return (
     <ButtonBase
