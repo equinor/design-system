@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
 import 'github-markdown-css'
 import { MDXProvider } from '@mdx-js/react'
