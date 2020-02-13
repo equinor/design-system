@@ -61,9 +61,6 @@ exports.createPages = async ({ actions, graphql }) => {
       allMdx {
         edges {
           node {
-            code {
-              scope
-            }
             fields {
               slug
               currentPage
