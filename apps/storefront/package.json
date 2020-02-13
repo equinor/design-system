@@ -20,7 +20,7 @@
     "gatsby-plugin-manifest": "^2.2.41",
     "gatsby-plugin-matomo": "^0.7.2",
     "gatsby-plugin-mdx": "^1.0.72",
-    "gatsby-plugin-offline": "^2.2.10",
+    "gatsby-plugin-offline": "^3.0.34",
     "gatsby-plugin-postcss": "^2.1.20",
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.1.22",
@@ -41,7 +41,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "remark-emoji": "^2.0.2",
-    "styled-components": "^4.4.1"
+    "styled-components": "^5.0.1"
   },
   "keywords": [
     "gatsby"
@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "prettier": "^1.19.1",
-    "stylelint-config-recommended": "^2.2.0"
+    "stylelint-config-recommended": "^3.0.0"
   },
   "repository": {
     "type": "git",
