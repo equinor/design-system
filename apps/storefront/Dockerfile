@@ -12,6 +12,7 @@ COPY ./.npmrc ./
 WORKDIR /app/libraries
 COPY ./libraries/tokens ./tokens
 COPY ./libraries/core-react ./core-react
+COPY ./libraries/icons ./icons
 
 # copy storefront
 WORKDIR /app/apps
@@ -20,10 +21,10 @@ COPY ./apps/storefront ./storefront
 # build storefront and dependencies
 WORKDIR /app
 RUN pnpm --filter ./libraries/tokens install && \
-    pnpm --filter ./libraries/tokens run build
+  pnpm --filter ./libraries/tokens run build
 
 RUN pnpm --filter ./libraries/core-react install && \
-    pnpm --filter ./libraries/core-react run build
+  pnpm --filter ./libraries/core-react run build
 
 RUN pnpm --filter ./apps/storefront install
 

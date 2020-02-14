@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { MDXRenderer } from 'gatsby-mdx'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
 import classNames from 'classnames'
 import Layout from '../components/layout'
@@ -62,7 +62,7 @@ const Page = ({ data }) => {
       </dl>
       {(process.env.GATSBY_STAGE === 'dev' ||
         page.frontmatter.mode === 'publish') && (
-        <MDXRenderer>{page.code.body}</MDXRenderer>
+        <MDXRenderer>{page.body}</MDXRenderer>
       )}
       <p style={{ marginTop: '3rem' }}>
         <a
@@ -89,9 +89,7 @@ export default Page
 export const query = graphql`
   query($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
-      code {
-        body
-      }
+      body
       fields {
         slug
         currentPage

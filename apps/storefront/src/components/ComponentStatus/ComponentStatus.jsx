@@ -1,8 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import classNames from 'classnames'
+import React from 'react'
 import styled from 'styled-components'
 import { readableColor } from 'polished'
 import { camelify, kebabify } from '../../utils'

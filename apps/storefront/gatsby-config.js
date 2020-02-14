@@ -12,9 +12,9 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-mdx`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        mdPlugins: [emoji],
+        remarkPlugins: [emoji],
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-smartypants`,
@@ -26,21 +26,6 @@ module.exports = {
         defaultLayouts: {
           default: path.resolve('./src/components/layout.jsx'),
         },
-        globalScope: `
-          import ComponentStatus from '${__dirname}/src/components/ComponentStatus';
-          import Embed from '${__dirname}/src/components/embed';
-          import Video from '${__dirname}/src/components/video';
-          import FigmaImage from '${__dirname}/src/components/figmaImage';
-          import IconsDownload from '${__dirname}/src/components/Icons';
-
-          export default {
-              ComponentStatus,
-              Embed,
-              Video,
-              FigmaImage,
-              IconsDownload
-          }
-          `,
       },
     },
     'gatsby-plugin-react-helmet',
@@ -119,6 +104,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-styled-components',
     },
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

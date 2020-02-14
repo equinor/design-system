@@ -27,9 +27,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         .filter((item) => item.length > 0)
         .shift() || 'homepage'
 
-    console.log('currentPage', currentPage)
-    console.log('currentCategory', currentCategory)
-
     // example
     createNodeField({
       node,
@@ -61,9 +58,6 @@ exports.createPages = async ({ actions, graphql }) => {
       allMdx {
         edges {
           node {
-            code {
-              scope
-            }
             fields {
               slug
               currentPage

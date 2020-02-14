@@ -1,5 +1,4 @@
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { kebabify } from '../../utils'
