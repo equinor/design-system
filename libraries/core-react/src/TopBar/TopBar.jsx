@@ -1,10 +1,16 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { spacingsTemplate } from '../_common/templates'
+import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { topbar as tokens } from './TopBar.tokens'
 
-const { background, height, spacings, border } = tokens
+const {
+  background,
+  height,
+  spacings,
+  border,
+  title: { text },
+} = tokens
 
 const StyledTopBar = styled.header`
   height: ${height};
@@ -21,6 +27,7 @@ const StyledTopBar = styled.header`
   border-bottom: ${border.bottom.width} solid ${border.bottom.color};
 
   ${spacingsTemplate(spacings)};
+  ${typographyTemplate(text)}
 `
 
 export const TopBar = forwardRef(function EdsTopBar(
