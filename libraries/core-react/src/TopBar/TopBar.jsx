@@ -8,6 +8,7 @@ const { background, height, spacings, border } = tokens
 
 const StyledTopBar = styled.header`
   height: ${height};
+  top: 0;
   position: sticky;
   background: ${background};
   box-sizing: border-box;
@@ -39,10 +40,7 @@ TopBar.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: PropTypes.node,
 }
 
 TopBar.defaultProps = {
