@@ -7,8 +7,15 @@ import styled from 'styled-components'
 import { topbar as tokens } from './TopBar.tokens'
 import { TopBar } from '.'
 
+const { Actions, Header, CustomContent } = TopBar
+
 const StyledTopBar = styled(TopBar)`
   background: red;
+`
+
+const ScrollContainer = styled.div`
+  height: 2000px;
+  width: 500px;
 `
 const {
   height,
@@ -30,20 +37,26 @@ describe('TopBar', () => {
   })
 
   it('Has all provided content', () => {
-    const testIdLeft = 'topbar-test-left'
+    const testIdHeader = 'topbar-test-header'
     const testIdCenter = 'topbar-test-center'
-    const testIdRight = 'topbar-test-right'
-
-    const left = <button type="button" data-testid={testIdLeft} />
-    const center = <input type="text" data-testid={testIdCenter} />
-    const right = <p data-testid={testIdRight}>icon</p>
+    const testIdActions = 'topbar-test-actions'
 
     const { queryByTestId } = render(
-      <TopBar left={left} center={center} right={right} />,
+      <TopBar>
+        <Header>
+          <button type="button" data-testid={testIdHeader} />
+        </Header>
+        <CustomContent>
+          <input type="text" data-testid={testIdCenter} />
+        </CustomContent>
+        <Actions>
+          <p data-testid={testIdActions}>icon</p>
+        </Actions>
+      </TopBar>,
     )
-    expect(queryByTestId(testIdLeft)).toBeDefined()
+    expect(queryByTestId(testIdHeader)).toBeDefined()
     expect(queryByTestId(testIdCenter)).toBeDefined()
-    expect(queryByTestId(testIdRight)).toBeDefined()
+    expect(queryByTestId(testIdActions)).toBeDefined()
   })
 
   it('Has provided title', () => {
@@ -52,12 +65,19 @@ describe('TopBar', () => {
     expect(queryByText(title)).toBeDefined()
   })
 
-  it('Has gutter when position is fixed', () => {
-    const { container } = render(<TopBar />)
-    const topbar = container.firstChild
-    const gutter = container.children[1]
-    expect(topbar).toHaveStyleRule('position', 'fixed')
-    expect(gutter).toHaveStyleRule('height', height)
+  it('Has sticky position in container', () => {
+    const testId = 'topbar-test'
+    const { queryByTestId } = render(
+      <ScrollContainer>
+        <TopBar className="test-bar" data-testid={testId}>
+          Content
+        </TopBar>
+      </ScrollContainer>,
+    )
+
+    // TODO Figure out how to check if TopBar fills container width
+    expect(queryByTestId(testId)).toHaveStyleRule('position', 'sticky')
+    expect(queryByTestId(testId)).toHaveStyleRule('top', '0')
   })
 
   it('Can extend the css for the component', () => {
