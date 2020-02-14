@@ -331,7 +331,7 @@
       "radius": "50%"
     },
     "clickbound": "48px",
-    "clickboundOffset": "0px",
+    "clickboundOffset": 0,
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
