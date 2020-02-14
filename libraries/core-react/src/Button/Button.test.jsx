@@ -29,7 +29,7 @@ describe('Button', () => {
   it('Has provided icon when variant is icon', () => {
     const { queryByTestId, container } = render(
       <Button variant="ghost_icon">
-        <Icon name="save" />
+        <Icon name="save" title="save me test" />
       </Button>,
     )
     expect(container.querySelector('svg')).toBeInTheDocument()
@@ -41,7 +41,7 @@ describe('Button', () => {
   it('Has circular border when variant is icon & focused', () => {
     const { container } = render(
       <Button variant="ghost_icon">
-        <Icon name="save" />
+        <Icon name="save" title="save me test" />
       </Button>,
     )
     container.focus()
