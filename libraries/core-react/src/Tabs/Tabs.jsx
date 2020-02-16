@@ -8,7 +8,6 @@ import React, {
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
-import { Tab } from './Tab'
 import { tab as tokens } from './Tabs.tokens'
 
 const variants = {
@@ -104,8 +103,5 @@ Tabs.defaultProps = {
   onChange: () => {},
   variant: 'minWidth',
 }
-
-Tabs.Tab = Tab
-Tabs.tokens = tokens
 
 export { Tabs }

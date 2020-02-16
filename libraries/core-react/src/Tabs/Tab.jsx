@@ -35,6 +35,7 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
 }))`
   appearance: none;
   box-sizing: border-box;
+  font-family: inherit;
   border: none;
   outline: none;
   font-size: 1rem;

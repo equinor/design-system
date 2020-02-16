@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createRef, useRef } from 'react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
-import { Tabs1 as Tabs, Typography } from '@equinor/eds-core-react'
+import { Tabs, Typography } from '@equinor/eds-core-react'
 
 const { Tab } = Tabs
 
@@ -90,6 +90,13 @@ export const tabPanels = () => {
 
   return (
     <Wrapper>
+      <Typography variant="h1">Tab with panels</Typography>
+      <Typography variant="body_long">
+        To navigate using they keyboard, use tab key to move from tab to tab
+        panel, shift + tab to go backwards, use left and right arrow keys to
+        move from between tabs (active tab must be focused). Focus outline is
+        only visible when navigating using the keyboard.
+      </Typography>
       <Tabs value={value} onChange={handleChange}>
         <Tab {...a11yProps(0)}>Tab one</Tab>
         <Tab {...a11yProps(1)}>Tab two</Tab>
