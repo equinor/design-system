@@ -21,6 +21,11 @@ const {
   },
 } = tokens
 
+const focusedStyles = css`
+  z-index: 1;
+  outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
+`
+
 const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   type: 'button',
   role: 'tab',
@@ -32,17 +37,23 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   box-sizing: border-box;
   border: none;
   outline: none;
+  font-size: 1rem;
   height: ${height};
   padding-left: ${paddingLeft};
   padding-right: ${paddingRight};
   color: ${({ active }) => (active ? activated.color : enabled.color)};
   background-color: ${enabled.backgroundColor};
   position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
 
-  &[data-focus],
+  &[data-focus] {
+    ${focusedStyles}
+  }
+
   &:focus {
-    z-index: 1;
-    outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
+    ${({ focusVisible }) => focusVisible && focusedStyles}
   }
 
   &[data-hover],

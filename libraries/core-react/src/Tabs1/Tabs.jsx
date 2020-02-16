@@ -1,19 +1,32 @@
-import React, { forwardRef, useRef, useEffect, useCallback } from 'react'
+import React, {
+  forwardRef,
+  useRef,
+  useEffect,
+  useCallback,
+  useState,
+} from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
 import { Tab } from './Tab'
 import { tab as tokens } from './Tabs.tokens'
 
+const variants = {
+  fullWidth: 'minmax(1%, 360px)',
+  minWidth: 'max-content',
+}
+
 const StyledTabs = styled.div.attrs(() => ({
   role: 'tablist',
 }))`
   display: grid;
   grid-auto-flow: column;
+  grid-auto-columns: ${({ variant }) => variants[variant]};
 `
 
 const Tabs = forwardRef(function Tabs({ value, onChange, ...props }, ref) {
   const currentTab = useRef(value)
+  const [focusVisible, setFocusVisible] = useState(false)
 
   const selectedTabRef = useCallback((node) => {
     if (node !== null) {
@@ -34,6 +47,7 @@ const Tabs = forwardRef(function Tabs({ value, onChange, ...props }, ref) {
       active: index === value,
       onClick: () => onChange(index),
       ref: tabRef,
+      focusVisible,
     })
   })
 
@@ -53,6 +67,7 @@ const Tabs = forwardRef(function Tabs({ value, onChange, ...props }, ref) {
 
   const handleKeyPress = (event) => {
     const { key } = event
+    setFocusVisible(true)
     if (key === 'ArrowLeft') {
       changeTabs('left', lastFocusableChild)
     }
@@ -61,21 +76,33 @@ const Tabs = forwardRef(function Tabs({ value, onChange, ...props }, ref) {
     }
   }
 
+  const handleMouseDown = () => {
+    setFocusVisible(false)
+  }
+
   return (
-    <StyledTabs onKeyDown={handleKeyPress} ref={ref} {...props}>
+    <StyledTabs
+      onKeyDown={handleKeyPress}
+      onMouseDown={handleMouseDown}
+      ref={ref}
+      {...props}
+    >
       {children}
     </StyledTabs>
   )
 })
 
 Tabs.propTypes = {
+  value: PropTypes.number,
   onChange: PropTypes.func,
-  variants: PropTypes.oneOf(['fullWidth', 'minWidth']),
+  variant: PropTypes.oneOf(['fullWidth', 'minWidth']),
+  children: PropTypes.node.isRequired,
 }
 
 Tabs.defaultProps = {
+  value: 0,
   onChange: () => {},
-  variants: 'fullWidth',
+  variant: 'minWidth',
 }
 
 Tabs.Tab = Tab

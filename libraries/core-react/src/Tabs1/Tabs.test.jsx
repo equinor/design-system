@@ -6,7 +6,7 @@ import 'jest-styled-components'
 // import { tabs as tokens } from './Tabs.tokens'
 import { Tabs } from '.'
 
-const { TabList, TabPanels, Tab } = Tabs
+const { Tab } = Tabs
 
 const noop = () => {}
 
@@ -38,53 +38,41 @@ const TabsWithPanels = ({ selectedTabIndex }) => {
   const handleChange = (index) => {
     setValue(index)
   }
+
   const Panel = ({ value, index, children, ...props }) => (
-    <div hidden={value !== index} {...props}>
+    <div
+      id={`panel-${index + 1}`}
+      aria-labelledby={`tab-${index + 1}`}
+      hidden={value !== index}
+      role="tabpanel"
+      tabIndex="0"
+      {...props}
+    >
       {children}
     </div>
   )
 
+  const a11yProps = (index) => ({
+    id: `tab-${index + 1}`,
+    'aria-controls': `panel-${index + 1}`,
+  })
+
   return (
     <Fragment>
       <Tabs value={value} onChange={handleChange}>
-        <Tab aria-controls="panel-one" id="tab-one">
-          Tab one
-        </Tab>
-        <Tab aria-controls="panel-two" id="tab-two">
-          Tab two
-        </Tab>
-        <Tab aria-controls="panel-three" id="tab-three">
+        <Tab {...a11yProps(0)}>Tab one</Tab>
+        <Tab {...a11yProps(1)}>Tab two</Tab>
+        <Tab {...a11yProps(2)} disabled>
           Tab three
         </Tab>
       </Tabs>
-      <Panel
-        id="panel-one"
-        aria-labelledby="tab-one"
-        role="tabpanel"
-        tabIndex="0"
-        value={value}
-        index={0}
-      >
+      <Panel value={value} index={0}>
         Panel one
       </Panel>
-      <Panel
-        id="panel-two"
-        aria-labelledby="tab-two"
-        role="tabpanel"
-        tabIndex="0"
-        value={value}
-        index={1}
-      >
+      <Panel value={value} index={1}>
         Panel two
       </Panel>
-      <Panel
-        id="panel-three"
-        aria-labelledby="tab-three"
-        role="tabpanel"
-        tabIndex="0"
-        value={value}
-        index={2}
-      >
+      <Panel value={value} index={2}>
         Panel three
       </Panel>
     </Fragment>
@@ -124,5 +112,13 @@ describe('Tabs', () => {
     })
     expect(targetTab).toHaveAttribute('aria-selected', 'true')
   })
-  it.skip('Skips disabled tabs when navigating using arrowkeys', () => {})
+  it('Skips disabled tabs when navigating using arrowkeys', () => {
+    render(<TabsWithPanels selectedTabIndex={1} />)
+    const targetTab = screen.queryByText('Tab one')
+    const tablist = screen.queryByRole('tablist')
+    fireEvent.keyDown(tablist, {
+      key: 'ArrowRight',
+    })
+    expect(targetTab).toHaveAttribute('aria-selected', 'true')
+  })
 })
