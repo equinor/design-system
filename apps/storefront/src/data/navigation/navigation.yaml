@@ -20,7 +20,6 @@
     - Brand illustrations
     - Charts
     - Image placeholder
-    - Infographics
     - Logo
     - Photography
     - Product icons
@@ -62,6 +61,7 @@
   subNav:
     - Common actions
     - Data formats
+    - Data visualisation
     - Empty states
     - Launch screens
     - Loading
