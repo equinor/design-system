@@ -29,3 +29,10 @@ export const typographyTemplate = (typography, link) => {
 
   return base
 }
+
+export const spacingsTemplate = (spacings) => `
+padding-left: ${spacings.left};
+padding-right: ${spacings.right};
+padding-top: ${spacings.top};
+padding-bottom: ${spacings.bottom};
+`
