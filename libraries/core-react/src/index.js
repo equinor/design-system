@@ -7,4 +7,5 @@ export { TextField } from './TextField'
 export { Icon } from './Icon'
 export { List } from './List'
 export { Tabs } from './Tabs'
+export { TopBar } from './TopBar'
 /* eslint-enable */

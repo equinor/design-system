@@ -18,3 +18,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+body {
+  margin: 0;
+}
