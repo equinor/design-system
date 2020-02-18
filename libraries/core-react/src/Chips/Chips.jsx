@@ -4,10 +4,11 @@ import styled, { css } from 'styled-components'
 import { chips as tokens } from './Chips.tokens'
 
 const StyledChips = styled.div`
-  background: 'lime';
+  background: lime;
+  height: 50px;
 `
 
-export const Chips = forwardRef(function Chips(props, ref) {
+const Chips = forwardRef(function Chips(props, ref) {
   return <StyledChips />
 })
 
@@ -16,3 +17,5 @@ Chips.displayName = 'eds-chips'
 Chips.propTypes = {}
 
 Chips.defaultPrpos = {}
+
+export { Chips }

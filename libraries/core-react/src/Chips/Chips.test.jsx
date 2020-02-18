@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -11,7 +11,7 @@ afterEach(cleanup)
 
 describe('Chips', () => {
   it('Does stuff', () => {
-    const { debug } = render(<Chips />)
-    debug()
+    render(<Chips />)
+    screen.debug()
   })
 })
