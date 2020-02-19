@@ -1,4 +1,7 @@
 export const typographyTemplate = (typography, link) => {
+  if (!typography) {
+    return ''
+  }
   let base = `
   margin: 0;
   color: ${typography.color};

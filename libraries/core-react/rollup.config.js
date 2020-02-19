@@ -20,7 +20,7 @@ export default [
     external: peerDeps,
     watch: {
       clearScreen: true,
-      include: ['./src/**', './../../common/**'],
+      include: ['./src/**', './../tokens/**'],
     },
     plugins: [
       json(),

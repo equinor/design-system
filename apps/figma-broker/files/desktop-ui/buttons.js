@@ -1,11 +1,18 @@
 import * as R from 'ramda'
-import { propName, withName, withType, instanceOfComponent } from '@utils'
+import {
+  propName,
+  withName,
+  withType,
+  instanceOfComponent,
+  isNotEmpty,
+} from '@utils'
 import { px } from '@units'
 import {
   toTypography,
   toSpacings,
   toFocus,
   toOverlay,
+  toHover,
   fillToRgba,
 } from '@transformers'
 
@@ -23,6 +30,17 @@ const buildProps = (states) => {
   if (enabled || disabled) {
     const components = (enabled || disabled).children
     const button = R.find(instanceOfComponent('shape'), components)
+    let ghostIcon = null
+    if (!button) {
+      if (R.isNil(hovered)) {
+        // disabled
+        ghostIcon = R.find(withName('icon'), components)
+      } else {
+        // other variants
+        ghostIcon = R.find(instanceOfComponent('shape'), hovered.children)
+      }
+    }
+
     const label = R.find(withName('label'), components)
     const spacing = R.filter(instanceOfComponent('spacing'), components)
     const clickbounds = R.find(instanceOfComponent('clickbound'), components)
@@ -42,6 +60,35 @@ const buildProps = (states) => {
           color: fillToRgba(stroke),
           width: px(strokeWeight),
           radius: px(cornerRadius),
+        },
+      }
+    }
+
+    if (ghostIcon) {
+      const iconButton = R.head(ghostIcon.children)
+      const {
+        cornerRadius,
+        strokeWeight,
+        absoluteBoundingBox,
+        strokes,
+      } = iconButton
+      const { height, width } = absoluteBoundingBox
+      const stroke = strokes.find(withType('solid')) || fallback
+      const radius = cornerRadius === 100 ? '50%' : px(cornerRadius)
+
+      const icon = R.last(R.find(withName('icon'), components).children)
+      const fill = icon.fills.find(withType('solid')) || fallback
+
+      buttonProps = {
+        ...buttonProps,
+        height: px(height),
+        width: px(width),
+        color: fillToRgba(fill),
+        background: 'transparent',
+        border: {
+          color: fillToRgba(stroke),
+          width: px(strokeWeight),
+          radius,
         },
       }
     }
@@ -92,12 +139,9 @@ const buildProps = (states) => {
     const hover = R.find(instanceOfComponent('shape'), hovered.children)
 
     if (hover) {
-      const hover_ = R.head(hover.children)
-      const fill = hover_.fills.find(withType('solid')) || fallback
-
       buttonProps = {
         ...buttonProps,
-        hoverBackground: fillToRgba(fill),
+        hover: toHover(hover),
       }
     }
   }

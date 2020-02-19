@@ -1,66 +1,79 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import primaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-primary.json'
-import secondaryButtonTokens from '@equinor/eds-tokens/components/button/buttons-secondary.json'
-import dangerButtonTokens from '@equinor/eds-tokens/components/button/buttons-danger.json'
-import disabledButtonTokens from '@equinor/eds-tokens/components/button/buttons-disabled.json'
+import styled, { css } from 'styled-components'
+import { Icon } from '..'
+import { button } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
 
-const colors = {
-  primary: primaryButtonTokens,
-  secondary: secondaryButtonTokens,
-  danger: dangerButtonTokens,
-  disabled: disabledButtonTokens,
-}
-
+const { colors } = button
 // TODO: Is there a better way to handle css properties without
 // bloating with ${props => props.base.focus.color} etc...
-// Using simple template string for now, but missing css syntax highlight :(
 const Base = ({ base, baseDisabled: disabled }) => {
   if (!base) {
     // TODO: What to do when base does not exist
     return ``
   }
 
-  const { border, spacing, typography, focus } = base
+  const { border, spacing, typography, focus, hover } = base
 
-  return `
-    height: ${base.height};
+  return css`
     background: ${base.background};
+    height: ${base.height};
+    width: ${base.width};
     color: ${base.color};
+    fill: ${base.color};
+    svg {
+      height: 16px;
+      width: 16px;
+    }
 
     border-radius: ${border.radius};
     border-color: ${border.color};
     border-width: ${border.width};
 
-    padding-left: ${spacing.left};
-    padding-right: ${spacing.right};
+    ${spacing &&
+      css`
+        padding-left: ${spacing.left};
+        padding-right: ${spacing.right};
+      `}
 
     ${typographyTemplate(typography)}
 
     &::after {
       position: absolute;
-      top:-${base.clickboundOffset};
-      left:0;
+      top: -${base.clickboundOffset};
+      left: 0;
       width: 100%;
       height: ${base.clickbound};
       content: '';
     }
 
     &:hover {
-      background: ${base.hoverBackground};
+      background: ${hover.background};
+      ${hover.radius &&
+        css`
+          border-radius: ${hover.radius};
+        `}
     }
 
     &:focus {
-      outline-offset: ${focus.width};
-      outline: ${focus.width} ${focus.type} ${focus.color};
+      ${focus.radius
+        ? css`
+            outline: none;
+            border-radius: ${focus.radius};
+            border: ${focus.width} ${focus.type} ${focus.color};
+          `
+        : css`
+            outline-offset: ${focus.width};
+            outline: ${focus.width} ${focus.type} ${focus.color};
+          `}
     }
 
     &:disabled {
       cursor: not-allowed;
       background: ${disabled.background};
       color: ${disabled.color};
+      fill: ${disabled.color};
 
       border-color: ${disabled.border.color};
 
@@ -68,7 +81,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
         background: ${disabled.background};
       }
     }
-`
+  `
 }
 
 const ButtonBase = styled.button.attrs(() => ({
@@ -123,11 +136,29 @@ export const Button = ({
 
 Button.propTypes = {
   /** @ignore */
-  children: PropTypes.node.isRequired,
+  children: ({ children }) => {
+    let error
+
+    const iconChildIsMissingTitle = React.Children.toArray(children)
+      .map(
+        ({ type, props: childProps }) =>
+          (type || { displayName: '' }).displayName === Icon.displayName &&
+          !childProps.title,
+      )
+      .includes(true)
+
+    if (iconChildIsMissingTitle) {
+      error = new Error(
+        `When using an Icon in the Button, the property "title" is mandatory on Icon to meet accessibility requirements`,
+      )
+    }
+    return error
+  },
   /**  Specifies color */
   color: PropTypes.oneOf(['primary', 'secondary', 'danger']),
   /** Specifies which variant to use */
-  variant: PropTypes.oneOf(['contained', 'outlined', 'ghost']),
+  variant: PropTypes.oneOf(['contained', 'outlined', 'ghost', 'ghost_icon']),
+
   /**
    * If `true`, the button will be disabled.
    */
@@ -143,6 +174,7 @@ Button.defaultProps = {
   color: 'primary',
   disabled: false,
   className: '',
+  children: null,
 }
 
 Button.displayName = 'eds-button'
