@@ -82,17 +82,17 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: 'Roboto',
-            variants: [`400`, `500`, `700`, `900`],
-          },
-        ],
-      },
-    },
+    // {
+    // resolve: `gatsby-plugin-prefetch-google-fonts`,
+    // options: {
+    // fonts: [
+    // {
+    // family: 'Roboto',
+    // variants: [`400`, `500`, `700`, `900`],
+    // },
+    // ],
+    // },
+    // },
     {
       resolve: 'gatsby-plugin-matomo',
       options: {
