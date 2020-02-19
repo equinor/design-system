@@ -50,7 +50,14 @@ components:
         - *4
       react:
         - *4
-
+  - component: Buttons Toggle
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      react:
+        - *1
   - component: Cards
     status:
       documentation:
@@ -67,6 +74,14 @@ components:
         - *4
       react:
         - *3
+  - component: Date Picker
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
+      react:
+        - *1
   - component: Divider
     status:
       documentation:
