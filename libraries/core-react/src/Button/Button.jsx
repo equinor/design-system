@@ -149,7 +149,7 @@ Button.propTypes = {
 
     if (iconChildIsMissingTitle) {
       error = new Error(
-        `When using an Icon in the Button, the property "title" is mandatory on Icon, because of accessibility`,
+        `When using an Icon in the Button, the property "title" is mandatory on Icon to meet accessibility requirements`,
       )
     }
     return error
