@@ -123,6 +123,7 @@ const badgeBgColors = {
   notAvailable: '#dcdcdc',
   underConstruction: '#ffe7d6',
   startedDevelopment: '#ffe7d6',
+  inProgress: '#ffe7d6',
   new: '#007079',
   available: '#e6faec',
   alpha: '#D5EAF4',

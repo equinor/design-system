@@ -15,7 +15,7 @@ headers:
 states:
   1: &1 Not available
   2: &2 New
-  3: &3 Started development
+  3: &3 In progress
   4: &4 Available
   5: &5 "-"
   6: &6 Alpha
