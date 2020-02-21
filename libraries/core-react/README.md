@@ -4,7 +4,15 @@ Available componenets to help style your React application as an Equinor applica
 
 Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
 
+## Installation
+
+```sh
+npm install @equinor/eds-core-react
+```
+
 ## Components
+
+### Available ✅
   - Button
     - Contained
     - Outlined
@@ -16,12 +24,36 @@ Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites
   - TextField
   - List
   - TopBar
+  - Icon
 
-## Installation
+### TODO 🛠️
+  - Button
+    - Contained w/icon left/right 
+    - Outlined w/icon left/right
+    - Ghost w/icon left/right
+  - Accordian
+  - Cards
+  - Progress indicators
+  - Popover
+  - Chips
+  - Menu
+  - App launcher
+  - Breadcrumbs
+  - Table of contents
+  - Navigation drawer
+  - Pagination
+  - Dialog
+  - Banner
+  - Snackbar
+  - Scrim
+  - Search
+  - Selection Controls
+  - Side Sheet
+  - Slider
+  - Stepper
+  - Tooltip
 
-```sh
-npm install @equinor/eds-core-react
-```
+
 
 ## Usage
 
