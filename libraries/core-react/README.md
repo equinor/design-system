@@ -1,19 +1,26 @@
 # @equinor/eds-core-react
 
-The React implementation of the Equinor Design System, still in early alpha so by no means ready for production.
+Available componenets to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
+
+Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
 
 ## Components
   - Button
+    - Contained
+    - Outlined
+    - Ghost
+    - Ghost Icon
   - Divider
   - Table
   - Typography
   - TextField
+  - List
+  - TopBar
 
 ## Installation
 
 ```sh
-npm install @equinor/eds-core-react@alpha
-npm install styled-components
+npm install @equinor/eds-core-react
 ```
 
 ## Usage

@@ -1,7 +1,5 @@
 # @equinor/eds-tokens
 
-**Alpha release, so breaking changes may occur**
-
 Design tokens used in Equinor Design System (EDS).
 
 ## Documentation
