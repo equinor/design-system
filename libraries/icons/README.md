@@ -17,7 +17,7 @@ This package is a collection of the `system icons` from the Equinor Design Syste
 ## Installation
 
 ```sh
-npm install @equinor/eds-icons
+npm install @equinor/eds-icons styled-components
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ You can render it using plain [svg](https://developer.mozilla.org/en-US/docs/Web
 ⚠️ Due to how Figma parses and exports svg icons the following attributes must be added to your `<path></path>` element; `fill-rule="evenodd" clip-rule="evenodd"`
 
 
-Use [EDS Aseets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3)(Equinor Figma account needed🔒) or [storefront](https://eds.equinor.com/assets/system-icons/library/) for icon names. Spaces in icon names are replaced with underscores. 
+Use [EDS Assets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3)(Equinor Figma account needed🔒) or [storefront](https://eds.equinor.com/assets/system-icons/library/) for icon names. Spaces in icon names are replaced with underscores. 
 
 `star-filled -> star_filled`.
 

@@ -14,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/equinor/design-system",
-    "directory": "libraries/tokens"
+    "directory": "libraries/core-react"
   },
   "bugs": {
     "url": "https://github.com/equinor/design-system/issues"
