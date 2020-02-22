@@ -1,13 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
 
-// Using states from https://material.io/design/interaction/states.html#usage
-/* oversatt fra storefronten blir det da:
-
-enabled -> inactive
-
-*/
-
-let {
+const {
   colors: {
     text: {
       static_icons__tertiary: { hex: defaultColor },
@@ -29,17 +22,6 @@ let {
   },
 } = tokens
 
-// debugging
-// defaultColor = 'maroon'
-// defaultBackgroundColor = 'yellow'
-// defaultBorderColor = 'lime'
-// focusOutlineColor = 'lime'
-// hoverBackgroundColor = 'orange'
-// activeColor = 'black'
-// activeHoverColor = 'white'
-
-export const tabs = {}
-
 export const tab = {
   clickbound,
   spacing: {
@@ -54,8 +36,8 @@ export const tab = {
         color: defaultBorderColor,
         style: 'solid',
         width: {
-          bottom: '2px'
-        }
+          bottom: '2px',
+        },
       },
       textAlign: 'center',
     },
@@ -80,7 +62,7 @@ export const tab = {
     activated: {
       color: activeColor,
       border: {
-        color: activeColor
+        color: activeColor,
       },
       hover: {
         color: activeHoverColor,

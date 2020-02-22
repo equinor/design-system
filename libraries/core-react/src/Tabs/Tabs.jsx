@@ -8,7 +8,6 @@ import React, {
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
-import { tab as tokens } from './Tabs.tokens'
 
 const variants = {
   fullWidth: 'minmax(1%, 360px)',

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Tabs, Typography } from '@equinor/eds-core-react'
 
-const { Tab } = Tabs
+const { Tab, Panel } = Tabs
 
 const noop = () => {}
 
@@ -67,26 +67,16 @@ export const tabPanels = () => {
     setValue(index)
   }
 
-  const a11yProps = (index) => ({
+  const tabA11yProps = (index) => ({
     id: `tab-${index + 1}`,
     'aria-controls': `panel-${index + 1}`,
   })
 
-  const StyledPanel = styled.div`
-    padding: 24px;
-  `
-  const Panel = ({ index, value, ...props }) => (
-    <StyledPanel
-      id={`panel-${index + 1}`}
-      aria-labelledby={`tab-${index + 1}`}
-      hidden={value !== index}
-      role="tabpanel"
-      tabIndex="0"
-      {...props}
-    >
-      {props.children}
-    </StyledPanel>
-  )
+  const panelA11yProps = (index) => ({
+    index,
+    id: `panel-${index + 1}`,
+    'aria-labelledby': `tab-${index + 1}`,
+  })
 
   return (
     <Wrapper>
@@ -98,23 +88,23 @@ export const tabPanels = () => {
         only visible when navigating using the keyboard.
       </Typography>
       <Tabs value={value} onChange={handleChange}>
-        <Tab {...a11yProps(0)}>Tab one</Tab>
-        <Tab {...a11yProps(1)}>Tab two</Tab>
-        <Tab {...a11yProps(2)} disabled>
+        <Tab {...tabA11yProps(0)}>Tab one</Tab>
+        <Tab {...tabA11yProps(1)}>Tab two</Tab>
+        <Tab {...tabA11yProps(2)} disabled>
           Tab three
         </Tab>
-        <Tab {...a11yProps(3)}>Tab four</Tab>
+        <Tab {...tabA11yProps(3)}>Tab four</Tab>
       </Tabs>
-      <Panel value={value} index={0}>
+      <Panel {...panelA11yProps(0)} value={value}>
         Panel one
       </Panel>
-      <Panel value={value} index={1}>
+      <Panel {...panelA11yProps(1)} value={value}>
         Panel two
       </Panel>
-      <Panel value={value} index={2}>
+      <Panel {...panelA11yProps(2)} value={value}>
         Panel three
       </Panel>
-      <Panel value={value} index={3}>
+      <Panel {...panelA11yProps(3)} value={value}>
         Panel four
       </Panel>
     </Wrapper>

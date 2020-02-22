@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { tab as tokens } from './Tabs.tokens'
@@ -85,9 +85,14 @@ export const Tab = forwardRef(function Tab(props, ref) {
 Tab.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
+  /** @ignore */
+  className: PropTypes.string,
+  /** @ignore */
+  children: PropTypes.node.isRequired,
 }
 
 Tab.defaultProps = {
   active: false,
   disabled: false,
+  className: null,
 }
