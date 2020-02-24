@@ -83,7 +83,9 @@ export const Tab = forwardRef(function Tab(props, ref) {
 })
 
 Tab.propTypes = {
+  /** If `true`, the tab will be active. */
   active: PropTypes.bool,
+  /** If `true`, the tab will be disabled. */
   disabled: PropTypes.bool,
   /** @ignore */
   className: PropTypes.string,

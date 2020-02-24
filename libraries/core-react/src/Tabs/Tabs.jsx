@@ -91,9 +91,13 @@ const Tabs = forwardRef(function Tabs({ value, onChange, ...props }, ref) {
 })
 
 Tabs.propTypes = {
+  /** The index of the active tab */
   value: PropTypes.number,
+  /** The callback function for selecting a tab */
   onChange: PropTypes.func,
+  /** Sets the width of the tabs */
   variant: PropTypes.oneOf(['fullWidth', 'minWidth']),
+  /** @ignore */
   children: PropTypes.node.isRequired,
 }
 

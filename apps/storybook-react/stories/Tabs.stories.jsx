@@ -67,13 +67,14 @@ export const tabPanels = () => {
     setValue(index)
   }
 
-  const tabA11yProps = (index) => ({
+  const tabProps = (index) => ({
     id: `tab-${index + 1}`,
     'aria-controls': `panel-${index + 1}`,
   })
 
-  const panelA11yProps = (index) => ({
+  const panelProps = (index) => ({
     index,
+    value,
     id: `panel-${index + 1}`,
     'aria-labelledby': `tab-${index + 1}`,
   })
@@ -88,25 +89,17 @@ export const tabPanels = () => {
         only visible when navigating using the keyboard.
       </Typography>
       <Tabs value={value} onChange={handleChange}>
-        <Tab {...tabA11yProps(0)}>Tab one</Tab>
-        <Tab {...tabA11yProps(1)}>Tab two</Tab>
-        <Tab {...tabA11yProps(2)} disabled>
+        <Tab {...tabProps(0)}>Tab one</Tab>
+        <Tab {...tabProps(1)}>Tab two</Tab>
+        <Tab {...tabProps(2)} disabled>
           Tab three
         </Tab>
-        <Tab {...tabA11yProps(3)}>Tab four</Tab>
+        <Tab {...tabProps(3)}>Tab four</Tab>
       </Tabs>
-      <Panel {...panelA11yProps(0)} value={value}>
-        Panel one
-      </Panel>
-      <Panel {...panelA11yProps(1)} value={value}>
-        Panel two
-      </Panel>
-      <Panel {...panelA11yProps(2)} value={value}>
-        Panel three
-      </Panel>
-      <Panel {...panelA11yProps(3)} value={value}>
-        Panel four
-      </Panel>
+      <Panel {...panelProps(0)}>Panel one</Panel>
+      <Panel {...panelProps(1)}>Panel two</Panel>
+      <Panel {...panelProps(2)}>Panel three</Panel>
+      <Panel {...panelProps(3)}>Panel four</Panel>
     </Wrapper>
   )
 }

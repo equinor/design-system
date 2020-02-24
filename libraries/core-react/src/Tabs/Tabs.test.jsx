@@ -1,16 +1,14 @@
 /* eslint-disable no-undef */
 import React, { useRef, useEffect, useState, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
-// import { tabs as tokens } from './Tabs.tokens'
 import { Tabs } from '.'
 
-const { Tab } = Tabs
+const { Tab, Panel } = Tabs
 
 const noop = () => {}
-
-// const Tabs = () => <div />
 
 afterEach(cleanup)
 
@@ -39,44 +37,37 @@ const TabsWithPanels = ({ selectedTabIndex }) => {
     setValue(index)
   }
 
-  const Panel = ({ value, index, children, ...props }) => (
-    <div
-      id={`panel-${index + 1}`}
-      aria-labelledby={`tab-${index + 1}`}
-      hidden={value !== index}
-      role="tabpanel"
-      tabIndex="0"
-      {...props}
-    >
-      {children}
-    </div>
-  )
-
-  const a11yProps = (index) => ({
+  const tabProps = (index) => ({
     id: `tab-${index + 1}`,
     'aria-controls': `panel-${index + 1}`,
+  })
+
+  const panelProps = (index) => ({
+    index,
+    value,
+    id: `panel-${index + 1}`,
+    'aria-labelledby': `tab-${index + 1}`,
   })
 
   return (
     <Fragment>
       <Tabs value={value} onChange={handleChange}>
-        <Tab {...a11yProps(0)}>Tab one</Tab>
-        <Tab {...a11yProps(1)}>Tab two</Tab>
-        <Tab {...a11yProps(2)} disabled>
+        <Tab {...tabProps(0)}>Tab one</Tab>
+        <Tab {...tabProps(1)}>Tab two</Tab>
+        <Tab {...tabProps(2)} disabled>
           Tab three
         </Tab>
       </Tabs>
-      <Panel value={value} index={0}>
-        Panel one
-      </Panel>
-      <Panel value={value} index={1}>
-        Panel two
-      </Panel>
-      <Panel value={value} index={2}>
-        Panel three
-      </Panel>
+      <Panel {...panelProps(0)}>Panel one</Panel>
+      <Panel {...panelProps(1)}>Panel two</Panel>
+      <Panel {...panelProps(2)}>Panel three</Panel>
+      <Panel {...panelProps(3)}>Panel four</Panel>
     </Fragment>
   )
+}
+
+TabsWithPanels.propTypes = {
+  selectedTabIndex: PropTypes.number.isRequired,
 }
 
 describe('Tabs', () => {

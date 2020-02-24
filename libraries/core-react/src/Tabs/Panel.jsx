@@ -19,9 +19,12 @@ export const Panel = forwardRef(function Panel(
 })
 
 Panel.propTypes = {
+  /** The index of the active tab */
   value: PropTypes.number,
+  /** The index of the panel */
   index: PropTypes.number,
-  hidden: PropTypes.oneOf([PropTypes.bool, undefined]).isRequired,
+  /** If `true`, the panel will be hidden. */
+  hidden: PropTypes.oneOf([PropTypes.bool, undefined]),
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
@@ -32,4 +35,5 @@ Panel.defaultProps = {
   value: 0,
   index: 0,
   className: null,
+  hidden: undefined,
 }
