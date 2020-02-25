@@ -13,51 +13,51 @@ npm install @equinor/eds-core-react styled-components
 ## Components
 
 ### Available ✅
-  - Button
-    - Contained
-    - Outlined
-    - Ghost
-    - Ghost Icon
-  - Divider
-  - Table
-  - Typography
-  - TextField
-  - List
-  - TopBar
-  - Icon
-  - Tabs
+
+- Button
+  - Contained
+  - Outlined
+  - Ghost
+  - Ghost Icon
+- Divider
+- Table
+- Typography
+- TextField
+- List
+- TopBar
+- Icon
+  
 ### In progress 👷‍♀️
 
 - Tabs
 - Accordion
 
 ### TODO 🛠️
-  - Button
-    - Contained w/icon left/right 
-    - Outlined w/icon left/right
-    - Ghost w/icon left/right
-  - Cards
-  - Progress indicators
-  - Popover
-  - Chips
-  - Menu
-  - App launcher
-  - Breadcrumbs
-  - Table of contents
-  - Navigation drawer
-  - Pagination
-  - Dialog
-  - Banner
-  - Snackbar
-  - Scrim
-  - Search
-  - Selection Controls
-  - Side Sheet
-  - Slider
-  - Stepper
-  - Tooltip
 
-
+- Button
+  - Contained w/icon left/right 
+  - Outlined w/icon left/right
+  - Ghost w/icon left/right
+- Cards
+- Progress indicators
+- Popover
+- Chips
+- Menu
+- App launcher
+- Breadcrumbs
+- Table of contents
+- Navigation drawer
+- Pagination
+- Dialog
+- Banner
+- Snackbar
+- Scrim
+- Search
+- Selection Controls
+- Side Sheet
+- Slider
+- Stepper
+- Tooltip
 
 ## Usage
 
