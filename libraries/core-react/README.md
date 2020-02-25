@@ -7,7 +7,7 @@ Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites
 ## Installation
 
 ```sh
-npm install @equinor/eds-core-react
+npm install @equinor/eds-core-react styled-components
 ```
 
 ## Components
