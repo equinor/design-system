@@ -1,27 +1,29 @@
 {
   "name": "@equinor/eds-icons",
-  "version": "0.0.1-alpha.3",
+  "version": "0.1.0",
+  "description": "Icons from the Equinor Design System",
   "type": "module",
   "main": "dist/icons.esm.js",
   "module": "dist/icons.esm.js",
   "browser": "dist/icons.umd.js",
-  "engines": {
-    "pnpm": ">=4"
+  "license": "Apache-2.0",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "homepage": "https://eds.equinor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system",
+    "directory": "libraries/icons"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
   },
   "files": [
     "dist/*",
     "commonjs/*"
   ],
-  "description": "Icons from the Equinor Design System",
-  "author": {
-    "name": "EDS Core Team",
-    "email": "fg_eds@equinor.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/equinor/design-system"
-  },
-  "license": "Apache-2.0",
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
@@ -33,8 +35,11 @@
     "equinor",
     "icons"
   ],
-  "dependencies": {
+  "devDependencies": {
     "@rollup/plugin-node-resolve": "^7.0.0",
     "rollup": "^1.29.0"
+  },
+  "engines": {
+    "pnpm": ">=4"
   }
 }
