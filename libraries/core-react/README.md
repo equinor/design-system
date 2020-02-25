@@ -26,6 +26,10 @@ npm install @equinor/eds-core-react
   - TopBar
   - Icon
   - Tabs
+### In progress 👷‍♀️
+
+- Tabs
+- Accordion
 
 ### TODO 🛠️
   - Button
