@@ -1,4 +1,4 @@
-dependencies:
+devDependencies:
   '@rollup/plugin-node-resolve': 7.0.0_rollup@1.29.1
   rollup: 1.29.1
 lockfileVersion: 5.1
@@ -11,7 +11,7 @@ packages:
       is-module: 1.0.0
       resolve: 1.12.0
       rollup: 1.29.1
-    dev: false
+    dev: true
     engines:
       node: '>= 8.0.0'
     peerDependencies:
@@ -22,7 +22,7 @@ packages:
     dependencies:
       estree-walker: 0.6.1
       rollup: 1.29.1
-    dev: false
+    dev: true
     engines:
       node: '>= 8.0.0'
     peerDependencies:
@@ -30,48 +30,48 @@ packages:
     resolution:
       integrity: sha512-buc0oeq2zqQu2mpMyvZgAaQvitikYjT/4JYhA4EXwxX8/g0ZGHoGiX+0AwmfhrNqH4oJv67gn80sTZFQ/jL1bw==
   /@types/estree/0.0.39:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
   /@types/node/12.12.6:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-FjsYUPzEJdGXjwKqSpE0/9QEh6kzhTAeObA54rn6j3rR4C/mzpI9L0KNfoeASSPMMdxIsoJuCLDWcM/rVjIsSA==
   /@types/resolve/0.0.8:
     dependencies:
       '@types/node': 12.12.6
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ==
   /acorn/7.1.0:
-    dev: false
+    dev: true
     engines:
       node: '>=0.4.0'
     hasBin: true
     resolution:
       integrity: sha512-kL5CuoXA/dgxlBbVrflsflzQ3PAas7RYZB52NOm/6839iVYJgKMJ3cQJD+t2i5+qFa8h3MDpEOJiS64E8JLnSQ==
   /builtin-modules/3.1.0:
-    dev: false
+    dev: true
     engines:
       node: '>=6'
     resolution:
       integrity: sha512-k0KL0aWZuBt2lrxrcASWDfwOLMnodeQjodT/1SxEQAXsHANgo6ZC/VEaSEHCXt7aSTZ4/4H5LKa+tBXmW7Vtvw==
   /estree-walker/0.6.1:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-SqmZANLWS0mnatqbSfRP5g8OXZC12Fgg1IwNtLsyHDzJizORW4khDfjPqJZsemPWBB2uqykUah5YpQ6epsqC/w==
   /is-module/1.0.0:
-    dev: false
+    dev: true
     resolution:
       integrity: sha1-Mlj7afeMFNW4FdZkM2tM/7ZEFZE=
   /path-parse/1.0.6:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
   /resolve/1.12.0:
     dependencies:
       path-parse: 1.0.6
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-B/dOmuoAik5bKcD6s6nXDCjzUKnaDvdkRyAk6rsmsKLipWj4797iothd7jmmUhWTfinVMU+wc56rYKsit2Qy4w==
   /rollup/1.29.1:
@@ -79,7 +79,7 @@ packages:
       '@types/estree': 0.0.39
       '@types/node': 12.12.6
       acorn: 7.1.0
-    dev: false
+    dev: true
     hasBin: true
     resolution:
       integrity: sha512-dGQ+b9d1FOX/gluiggTAVnTvzQZUEkCi/TwZcax7ujugVRHs0nkYJlV9U4hsifGEMojnO+jvEML2CJQ6qXgbHA==
