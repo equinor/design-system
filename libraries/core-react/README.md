@@ -32,7 +32,6 @@ npm install @equinor/eds-core-react
     - Contained w/icon left/right 
     - Outlined w/icon left/right
     - Ghost w/icon left/right
-  - Accordian
   - Cards
   - Progress indicators
   - Popover
