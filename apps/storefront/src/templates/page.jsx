@@ -82,7 +82,7 @@ const Page = ({ data }) => {
 }
 
 Page.propTypes = {
-  data: PropTypes.node.isRequired,
+  data: PropTypes.object.isRequired,
 }
 
 export default Page
