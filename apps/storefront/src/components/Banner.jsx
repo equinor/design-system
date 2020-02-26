@@ -54,7 +54,7 @@ const Wrapper = styled.div`
   }
 `
 
-const link = '//components/component-status'
+const link = '/components/component-status'
 
 const Banner = () => (
   <Wrapper>
