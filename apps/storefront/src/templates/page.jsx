@@ -7,23 +7,25 @@ import Layout from '../components/layout'
 
 const Page = ({ data }) => {
   const page = data.mdx
-  const { tabs } = page.frontmatter
+  const { tabs, title, mode = 'draft' } = page.frontmatter
   const { slug } = page.fields
   const { currentPage } = page.fields
   const { currentCategory } = page.fields
   const linkSlug = slug.substr(0, slug.lastIndexOf(currentPage))
 
+  const isPublished = mode.toLowerCase() === 'publish'
+
   return (
     <Layout>
       <h1>
-        {page.frontmatter.title}
-        {page.frontmatter.mode !== 'publish' && (
-          <span className={`ModeBadge ModeBadge--${page.frontmatter.mode}`}>
-            {page.frontmatter.mode && `(${page.frontmatter.mode})`}
+        {title}
+        {!isPublished && (
+          <span className={`ModeBadge ModeBadge--${mode}`}>
+            {mode && `(${mode})`}
           </span>
         )}
       </h1>
-      {!(page.frontmatter.tabs === null) && (
+      {!(tabs === null) && (
         <ul className="Tabs">
           {tabs.map((tab, index) => (
             <li className="Tab" key={tab}>
@@ -60,8 +62,7 @@ const Page = ({ data }) => {
         <dt>linkSlug</dt>
         <dd>{linkSlug}</dd>
       </dl>
-      {(process.env.GATSBY_STAGE === 'dev' ||
-        page.frontmatter.mode === 'publish') && (
+      {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
         <MDXRenderer>{page.body}</MDXRenderer>
       )}
       <p style={{ marginTop: '3rem' }}>
