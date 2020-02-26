@@ -13,7 +13,7 @@ const Page = ({ data }) => {
   const { currentCategory } = page.fields
   const linkSlug = slug.substr(0, slug.lastIndexOf(currentPage))
 
-  const isPublished = mode.toLowerCase() === 'publish'
+  const isPublished = (mode || '').toLowerCase() === 'publish'
 
   return (
     <Layout>
@@ -73,7 +73,7 @@ const Page = ({ data }) => {
         >
           <span role="img" aria-label="Pencil">
             ✏️
-          </span>{' '}
+          </span>
           Edit this page on GitHub
         </a>
       </p>

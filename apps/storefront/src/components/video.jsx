@@ -34,7 +34,6 @@ const Video = ({ url, ...other }) => {
     }
   `)
 
-  console.log(data)
   let videoUrl = url
 
   if (url.startsWith('video') && data.allFile.edges.length > 0) {
@@ -48,7 +47,8 @@ const Video = ({ url, ...other }) => {
     <VideoBase {...other} src={videoUrl} />
   ) : (
     <Container>
-      Ops! Can&apos;t find the video, please check your link is correct 🎥 {url}
+      Ops! Can&apos;t find the video, please check your link is correct 🎥
+      {url}
     </Container>
   )
 }
