@@ -70,3 +70,10 @@ export const tab = {
     },
   },
 }
+
+export const tabPanel = {
+  spacing: {
+    top: spacingMedium,
+    bottom: spacingMedium,
+  },
+}

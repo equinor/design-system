@@ -1,8 +1,12 @@
-import { Tab } from './Tab'
-import { Panel } from './Panel'
 import { Tabs } from './Tabs'
+import { TabList } from './TabList'
+import { Tab } from './Tab'
+import { TabPanels } from './TabPanels'
+import { TabPanel } from './TabPanel'
 
 Tabs.Tab = Tab
-Tabs.Panel = Panel
+Tabs.TabList = TabList
+Tabs.TabPanels = TabPanels
+Tabs.TabPanel = TabPanel
 
-export { Tabs }
+export { Tabs } from './Tabs'

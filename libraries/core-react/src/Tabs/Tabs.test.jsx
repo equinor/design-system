@@ -6,7 +6,7 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Tabs } from '.'
 
-const { Tab, Panel } = Tabs
+const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
 const noop = () => {}
 
@@ -22,61 +22,58 @@ const TabsWithRefs = () => {
   }, [])
 
   return (
-    <Tabs value={0} onChange={noop}>
-      <Tab ref={activeRef}>Tab one</Tab>
-      <Tab ref={inactiveRef}>Tab two</Tab>
-      <Tab>Tab three</Tab>
+    <Tabs activeTab={0} onChange={noop}>
+      <TabList>
+        <Tab ref={activeRef}>Tab one</Tab>
+        <Tab ref={inactiveRef}>Tab two</Tab>
+        <Tab>Tab three</Tab>
+      </TabList>
     </Tabs>
   )
 }
 
 const TabsWithPanels = ({ selectedTabIndex }) => {
-  const [value, setValue] = useState(selectedTabIndex)
+  const [activeTab, setActiveTab] = useState(selectedTabIndex)
 
   const handleChange = (index) => {
-    setValue(index)
+    setActiveTab(index)
   }
-
-  const tabProps = (index) => ({
-    id: `tab-${index + 1}`,
-    'aria-controls': `panel-${index + 1}`,
-  })
-
-  const panelProps = (index) => ({
-    index,
-    value,
-    id: `panel-${index + 1}`,
-    'aria-labelledby': `tab-${index + 1}`,
-  })
 
   return (
     <Fragment>
-      <Tabs value={value} onChange={handleChange}>
-        <Tab {...tabProps(0)}>Tab one</Tab>
-        <Tab {...tabProps(1)}>Tab two</Tab>
-        <Tab {...tabProps(2)} disabled>
-          Tab three
-        </Tab>
+      <Tabs activeTab={activeTab} onChange={handleChange}>
+        <TabList>
+          <Tab>Tab one</Tab>
+          <Tab>Tab two</Tab>
+          <Tab disabled>Tab three</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Panel one</TabPanel>
+          <TabPanel>Panel two</TabPanel>
+          <TabPanel>Panel three</TabPanel>
+        </TabPanels>
       </Tabs>
-      <Panel {...panelProps(0)}>Panel one</Panel>
-      <Panel {...panelProps(1)}>Panel two</Panel>
-      <Panel {...panelProps(2)}>Panel three</Panel>
-      <Panel {...panelProps(3)}>Panel four</Panel>
     </Fragment>
   )
 }
 
 TabsWithPanels.propTypes = {
-  selectedTabIndex: PropTypes.number.isRequired,
+  selectedTabIndex: PropTypes.number,
+}
+
+TabsWithPanels.defaultProps = {
+  selectedTabIndex: 0,
 }
 
 describe('Tabs', () => {
   it('Renders a tablist with three tabs', () => {
     const { container } = render(
       <Tabs onChange={noop}>
-        <Tab>Tab one</Tab>
-        <Tab>Tab two</Tab>
-        <Tab>Tab three</Tab>
+        <TabList>
+          <Tab>Tab one</Tab>
+          <Tab>Tab two</Tab>
+          <Tab>Tab three</Tab>
+        </TabList>
       </Tabs>,
     )
     expect(screen.queryByRole('tablist')).toBeInTheDocument()
@@ -88,14 +85,14 @@ describe('Tabs', () => {
     expect(screen.queryByText('Inactive tab')).toBeInTheDocument()
   })
   it('Switches tabpanel when tab is clicked', () => {
-    render(<TabsWithPanels selectedTabIndex={0} />)
+    render(<TabsWithPanels />)
     const targetTab = screen.queryByText('Tab two')
     fireEvent.click(targetTab)
     expect(targetTab).toHaveAttribute('aria-selected', 'true')
     expect(screen.queryByText('Panel two')).toBeVisible()
   })
   it('Switches tabpanel when arrow key is clicked', () => {
-    render(<TabsWithPanels selectedTabIndex={0} />)
+    render(<TabsWithPanels />)
     const targetTab = screen.queryByText('Tab two')
     const tablist = screen.queryByRole('tablist')
     fireEvent.keyDown(tablist, {
