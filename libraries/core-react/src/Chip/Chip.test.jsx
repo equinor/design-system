@@ -4,10 +4,9 @@ import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { chips as tokens } from './Chips.tokens'
-import { Chips } from '.'
+import { Chip } from '.'
 
-const StyledChips = styled(Chips)`
+const StyledChips = styled(Chip)`
   position: relative;
 `
 

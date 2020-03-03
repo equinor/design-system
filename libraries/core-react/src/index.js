@@ -9,5 +9,5 @@ export { List } from './List'
 // export { Tabs as Tabs1 } from './Tabs1'
 export { Tabs } from './Tabs'
 export { TopBar } from './TopBar'
-export { Chips } from './Chips'
+export { Chip } from './Chip'
 /* eslint-enable */
