@@ -143,7 +143,9 @@ Button.propTypes = {
 
     const iconChildIsMissingTitle = React.Children.toArray(children)
       .map(
+        // @ts-ignore
         ({ type, props: childProps }) =>
+          // @ts-ignore
           (type || { displayName: '' }).displayName === Icon.displayName &&
           !childProps.title,
       )

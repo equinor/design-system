@@ -24,6 +24,19 @@ const StyledPath = styled.path.attrs(({ icon, size }) => ({
   transform: size / icon.height !== 1 ? `scale(${size / icon.height})` : null,
 }))``
 
+/**
+ * @typedef {object} Props
+ * @prop {string} name
+ * @prop {string} [className]
+ * @prop {string} [title] Title for svg if used semantically
+ * @prop {string} [color] Valid colors
+ * @prop {16 | 24 | 32 | 40 | 48} [size] Vertical spacing
+ * @prop {0 | 90 | 180 | 270} [rotation]
+ */
+
+/**
+ * @type {React.ForwardRefExoticComponent<React.PropsWithoutRef<Props> & React.RefAttributes<HTMLOrSVGElement>>}
+ */
 export const Icon = forwardRef(function EdsIcon(
   { size, color, name, className, rotation, title, ...rest },
   ref,

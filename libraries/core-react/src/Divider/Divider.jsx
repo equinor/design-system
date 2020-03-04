@@ -13,33 +13,48 @@ const StyledDivider = styled.hr(
   }),
 )
 
-export const Divider = forwardRef(function Divider(
-  { color, variant, className },
-  ref,
-) {
-  const props = {
-    backgroundColor: tokens.color[color],
-    marginTop: tokens[variant].spacings.top,
-    marginBottom: tokens[variant].spacings.bottom,
-    dividerHeight: tokens.height,
-  }
+/**
+ * @typedef Props
+ * @prop {'lighter' | 'light' | 'medium'} [color] Valid colors
+ * @prop {'small' | 'medium'} [variant] Vertical spacing
+ * @prop {string} [className]
+ */
 
-  return <StyledDivider {...props} className={className} ref={ref} />
-})
+export const Divider = forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function Divider({ color, variant, className }, ref) {
+    const props = {
+      backgroundColor: tokens.color[color],
+      marginTop: tokens[variant].spacings.top,
+      marginBottom: tokens[variant].spacings.bottom,
+      dividerHeight: tokens.height,
+    }
+
+    return <StyledDivider {...props} className={className} ref={ref} />
+  },
+)
 
 Divider.displayName = 'eds-divider'
 
 Divider.propTypes = {
   // Valid colors
+  // @ts-ignore
   color: PropTypes.oneOf(['lighter', 'light', 'medium']),
   // Vertical spacing
+  // @ts-ignore
   variant: PropTypes.oneOf(['small', 'medium']),
   /** @ignore */
   className: PropTypes.string,
 }
 
 Divider.defaultProps = {
+  // @ts-ignore
   color: 'medium',
+  // @ts-ignore
   variant: 'medium',
   className: '',
 }

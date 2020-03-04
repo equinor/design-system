@@ -1,13 +1,26 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 
-const ListItem = forwardRef(function ListItem({ children, ...props }, ref) {
-  return (
-    <li {...props} ref={ref}>
-      {children}
-    </li>
-  )
-})
+/**
+ * @typedef {object} Props
+ * @prop {React.ReactNode} children
+ * @prop {string} [className]
+ */
+
+const ListItem = forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function ListItem({ children, ...rest }, ref) {
+    return (
+      <li {...rest} ref={ref}>
+        {children}
+      </li>
+    )
+  },
+)
 
 ListItem.displayName = 'eds-listitem'
 

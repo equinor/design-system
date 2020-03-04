@@ -6,16 +6,26 @@ const StyledCustomContent = styled.div`
   grid-area: center;
 `
 
-export const CustomContent = forwardRef(function EdsTopBarCustomContent(
-  { children, ...props },
-  ref,
-) {
-  return (
-    <StyledCustomContent ref={ref} {...props}>
-      {children}
-    </StyledCustomContent>
-  )
-})
+/**
+ * @typedef {object} Props
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [className]
+ */
+
+export const CustomContent = forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function EdsTopBarCustomContent({ children, ...rest }, ref) {
+    return (
+      <StyledCustomContent ref={ref} {...rest}>
+        {children}
+      </StyledCustomContent>
+    )
+  },
+)
 
 CustomContent.displayName = 'eds-topbar-customcontent'
 

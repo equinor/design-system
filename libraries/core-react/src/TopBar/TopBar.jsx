@@ -30,16 +30,26 @@ const StyledTopBar = styled.header`
   ${typographyTemplate(text)}
 `
 
-export const TopBar = forwardRef(function EdsTopBar(
-  { children, ...props },
-  ref,
-) {
-  return (
-    <StyledTopBar {...props} ref={ref}>
-      {children}
-    </StyledTopBar>
-  )
-})
+/**
+ * @typedef {object} Props
+ * @prop {string} [className]
+ * @prop {React.ReactNode} [children]
+ */
+
+export const TopBar = forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function EdsTopBar({ children, ...rest }, ref) {
+    return (
+      <StyledTopBar {...rest} ref={ref}>
+        {children}
+      </StyledTopBar>
+    )
+  },
+)
 
 TopBar.displayName = 'eds-topbar'
 
