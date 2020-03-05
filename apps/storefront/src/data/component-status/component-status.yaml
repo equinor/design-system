@@ -9,18 +9,18 @@ headers:
   - Component
   - Documentation
   - Figma
-  - Vanilla
   - React
 
 # Some constants. Makes it easer to rephrase the status text at a later stage.
 states:
   1: &1 Not available
   2: &2 New
-  3: &3 Under construction
+  3: &3 In progress
   4: &4 Available
-  5: &5 '-'
+  5: &5 "-"
   6: &6 Alpha
   7: &7 Beta
+  8: &8 In code review
 
 # Some predefined statuses
 statuses:
@@ -28,8 +28,6 @@ statuses:
     documentation:
       - *1
     figma:
-      - *1
-    vanilla:
       - *1
     react:
       - *1
@@ -42,29 +40,30 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *1
+        - *3
   - component: Buttons
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *6
-
+        - *4
+  - component: Buttons Toggle
+    status:
+      documentation:
+        - *4
+      figma:
+        - *4
+      react:
+        - *1
   - component: Cards
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Chips
@@ -73,8 +72,14 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
+      react:
+        - *3
+  - component: Date Picker
+    status:
+      documentation:
+        - *3
+      figma:
+        - *3
       react:
         - *1
   - component: Divider
@@ -83,18 +88,14 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *6
+        - *4
   - component: Links
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Lists
@@ -103,118 +104,94 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *1
-  - component: 'Menu'
+        - *4
+  - component: "Menu"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Navigation App launcher'
+  - component: "Navigation App launcher"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Navigation Breadcrumbs'
+  - component: "Navigation Breadcrumbs"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Navigation Navigation drawer'
+  - component: "Navigation Navigation drawer"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Navigation Pagination'
+  - component: "Navigation Pagination"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Navigation Table of contents'
+  - component: "Navigation Table of contents"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Navigation Tabs'
+  - component: "Navigation Tabs"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *3
-  - component: 'Navigation Top bar'
+        - *8
+  - component: "Navigation Top bar"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *1
-  - component: 'Notification Banner'
+        - *4
+  - component: "Notification Banner"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Notification Dialog'
+  - component: "Notification Dialog"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
-  - component: 'Notification Snackbar'
+  - component: "Notification Snackbar"
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Popovers
@@ -223,8 +200,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Progress indicators
@@ -233,8 +208,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Search
@@ -243,8 +216,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Selection controls
@@ -253,8 +224,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Scrim
@@ -263,8 +232,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Side sheet
@@ -273,8 +240,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Slider
@@ -283,8 +248,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Stepper
@@ -293,8 +256,6 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Table
@@ -303,28 +264,22 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *6
+        - *4
   - component: Text fields
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *6
+        - *4
   - component: Tooltip
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
         - *1
   - component: Typography
@@ -333,17 +288,13 @@ components:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *6
+        - *4
   - component: Icon
     status:
       documentation:
         - *4
       figma:
         - *4
-      vanilla:
-        - *1
       react:
-        - *3
+        - *4

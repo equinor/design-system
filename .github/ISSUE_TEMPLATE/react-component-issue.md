@@ -28,5 +28,6 @@ See [COMPONENT_GUIDELINES.md](https://github.com/equinor/design-system/blob/deve
 - [ ] Write tests
 - [ ] Create set of tokens (from base tokens)
 - [ ] Create react component
+- [ ] Accessibility 
 
 _Optional footer which might have a pointer to another issue  (see #000)_

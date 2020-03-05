@@ -1,7 +1,5 @@
 # @equinor/eds-tokens
 
-**Alpha release, so breaking changes may occur**
-
 Design tokens used in Equinor Design System (EDS).
 
 ## Documentation
@@ -36,13 +34,17 @@ The component tokens already made are still part of this package, but we encoura
 ### Usage
 
 #### Use as ESM Module
-Add `"type":"module" ` to your apps `package.json` 
+
+Add `"type":"module"` to your apps `package.json`
+
 ```javascript
 import { tokens } from "@equinor/eds-tokens"
 ```
 
 #### Use as CommonJS Module
-CommonJS will have a separate package path 
+
+CommonJS will have a separate package path
+
 ```javascript
 import { tokens } from "@equinor/eds-tokens/commonjs"
 ```

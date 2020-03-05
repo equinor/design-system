@@ -28,7 +28,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(222, 237, 238, 1)",
+    "hover": {
+      "background": "rgba(222, 237, 238, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "ghost": {
@@ -60,19 +63,35 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(222, 237, 238, 1)",
+    "hover": {
+      "background": "rgba(222, 237, 238, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "ghost_icon": {
+    "height": "48px",
+    "width": "48px",
+    "color": "rgba(0, 112, 121, 1)",
+    "background": "transparent",
+    "border": {
+      "color": "transparent",
+      "width": "1px",
+      "radius": "50%"
+    },
     "clickbound": "48px",
-    "clickboundOffset": "",
+    "clickboundOffset": 0,
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
       "width": "2px",
-      "gap": "8px"
+      "gap": "8px",
+      "radius": "50%"
     },
-    "hoverBackground": "rgba(222, 237, 238, 1)",
+    "hover": {
+      "background": "rgba(222, 237, 238, 1)",
+      "radius": "50%"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "contained_right_icon": {
@@ -105,7 +124,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(0, 79, 85, 1)",
+    "hover": {
+      "background": "rgba(0, 79, 85, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "outlined_right_icon": {
@@ -137,7 +159,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(222, 237, 238, 1)",
+    "hover": {
+      "background": "rgba(222, 237, 238, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "ghost_right_icon": {
@@ -170,7 +195,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(222, 237, 238, 1)",
+    "hover": {
+      "background": "rgba(222, 237, 238, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "contained_left_icon": {
@@ -203,7 +231,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(0, 79, 85, 1)",
+    "hover": {
+      "background": "rgba(0, 79, 85, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "outlined_left_icon": {
@@ -236,7 +267,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(222, 237, 238, 1)",
+    "hover": {
+      "background": "rgba(222, 237, 238, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "ghost_left_icon": {
@@ -269,7 +303,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(222, 237, 238, 1)",
+    "hover": {
+      "background": "rgba(222, 237, 238, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   },
   "contained": {
@@ -301,7 +338,10 @@
       "width": "2px",
       "gap": "8px"
     },
-    "hoverBackground": "rgba(0, 79, 85, 1)",
+    "hover": {
+      "background": "rgba(0, 79, 85, 1)",
+      "radius": "4px"
+    },
     "pressedColor": "rgba(0, 0, 0, 0.2)"
   }
 }

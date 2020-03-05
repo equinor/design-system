@@ -3,7 +3,12 @@ import * as R from 'ramda'
 const defaultToEmpty = R.defaultTo('')
 const unitProcessor = (val, unit) => {
   const number = defaultToEmpty(val)
-  return R.isEmpty(number) ? number : `${number}${unit}`
+
+  if (R.isEmpty(number) || number === 0) {
+    return number
+  }
+
+  return `${number}${unit}`
 }
 
 export const rootFontSize = 16

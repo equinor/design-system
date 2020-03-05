@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@equinor/eds-core-react'
+import { Button, Icon } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import './../style.css'
@@ -14,6 +14,7 @@ const VARIANT = {
   CONTAINED: 'contained',
   OUTLINED: 'outlined',
   GHOST: 'ghost',
+  GHOST_ICON: 'ghost_icon',
 }
 
 const COLOR = {
@@ -98,6 +99,18 @@ export const ghost = () => (
     </Button>
     <Button variant="ghost" disabled>
       Disabled
+    </Button>
+    <Button variant="ghost_icon">
+      <Icon name="save" title="save action" size={48}></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="secondary">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="danger">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" disabled>
+      <Icon name="save" title="save"></Icon>
     </Button>
   </Wrapper>
 )

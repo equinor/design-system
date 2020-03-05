@@ -1,27 +1,29 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.0.1-alpha.7",
-  "type": "module",
+  "version": "0.1.0",
+  "description": "Design tokens for the Equinor Design System",
   "main": "dist/tokens.esm.js",
   "module": "dist/tokens.esm.js",
   "browser": "dist/tokens.umd.js",
-  "engines": {
-    "pnpm": ">=4"
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "homepage": "https://eds.equinor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system",
+    "directory": "libraries/tokens"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
   },
   "files": [
     "dist/*",
     "commonjs/*"
   ],
-  "description": "Design tokens for the Equinor Design System",
-  "author": {
-    "name": "EDS Core Team",
-    "email": "fg_eds@equinor.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/equinor/design-system"
-  },
-  "license": "AGPL-3.0-or-later",
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
@@ -37,5 +39,8 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "rollup": "^1.29.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "pnpm": ">=4"
+  }
 }

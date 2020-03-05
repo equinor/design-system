@@ -1,17 +1,23 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.0.1-alpha.10",
-  "engines": {
-    "pnpm": ">=4"
-  },
+  "version": "0.1.0",
   "description": "The React implementation of the Equinor Design System",
   "main": "dist/core-react.cjs.js",
   "module": "dist/core-react.es.js",
   "browser": "dist/core-react.umd.js",
-  "homepage": "https://github.com/equinor/design-system/tree/prerelease/libraries/core-react",
+  "license": "AGPL-3.0-or-later",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "homepage": "https://eds.equinor.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/equinor/design-system"
+    "url": "https://github.com/equinor/design-system",
+    "directory": "libraries/core-react"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
   },
   "files": [
     "dist/*"
@@ -19,7 +25,6 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
-    "develop": "rollup -c -w",
     "dev": "rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -27,10 +32,9 @@
   "keywords": [
     "eds",
     "design system",
-    "react",
-    "equinor"
+    "equinor",
+    "react"
   ],
-  "license": "AGPL",
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",

@@ -20,7 +20,6 @@
     - Brand illustrations
     - Charts
     - Image placeholder
-    - Infographics
     - Logo
     - Photography
     - Product icons
@@ -31,8 +30,10 @@
     - Component status
     - Accordion
     - Buttons
+    - Buttons toggle
     - Cards
     - Chips
+    - Date picker
     - Divider
     - Links
     - Lists
@@ -62,7 +63,9 @@
   subNav:
     - Common actions
     - Data formats
+    - Data visualisation
     - Empty states
+    - Inputs
     - Launch screens
     - Loading
     - Onboarding
