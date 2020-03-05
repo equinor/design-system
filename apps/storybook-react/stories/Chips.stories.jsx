@@ -27,8 +27,11 @@ export const Chips = () => (
   <div>
     <Wrapper>
       <Chip
+        id="some-chips-id"
         active={boolean('Active', false)}
         disabled={boolean('Disabled', false)}
+        clickable={boolean('Clickable', false)}
+        onDelete={console.log}
       >
         <Icon name="save" />
         {text('Label', 'Label')}

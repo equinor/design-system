@@ -1,64 +1,78 @@
-/* eslint-disable camelcase */
 import { tokens } from '@equinor/eds-tokens'
 
 const {
   spacings: {
-    comfortable: { small },
+    comfortable: { small, medium },
   },
   typography: {
-    ui: { chip__badge },
+    ui: { chip__badge: chipTypography },
   },
   colors: {
-    ui: { background__light },
+    ui: {
+      background__light: { rgba: backgroundColor },
+    },
     interactive: {
-      primary__resting,
-      disabled__text,
-      focus,
-      primary__selected_highlight,
-      danger__resting,
+      primary__resting: { rgba: primaryColor },
+      primary__hover_alt: { rgba: primaryHover },
+      disabled__text: { rgba: disabledColor },
+      focus: { rgba: focusColor },
+      primary__selected_highlight: { rgba: activeColor },
+      danger__resting: { rgba: errorColor },
     },
   },
-  shape: { rounded },
+  shape: {
+    rounded: { borderRadius },
+  },
 } = tokens
 
-export const chips = {
+export const chip = {
   enabled: {
-    background: background__light.rgba,
+    background: backgroundColor,
     height: '24px',
     border: {
-      radius: rounded.borderRadius,
+      radius: borderRadius,
     },
     spacings: {
       left: small,
       right: small,
     },
     typography: {
-      ...chip__badge,
-      color: primary__resting.rgba,
+      ...chipTypography,
+      color: primaryColor,
+    },
+    icon: {
+      height: medium,
+      width: medium,
+      border: {
+        radius: borderRadius,
+      },
+      hover: {
+        background: primaryHover,
+      },
     },
   },
   disabled: {
     typography: {
-      color: disabled__text.rgba,
+      color: disabledColor,
     },
   },
   focus: {
     border: {
       type: 'dashed',
-      color: focus.rgba,
+      color: focusColor,
       width: '2px',
-      radius: rounded.borderRadius,
+      radius: borderRadius,
     },
   },
   active: {
-    background: primary__selected_highlight.rgba,
+    background: activeColor,
   },
   error: {
     border: {
-      color: danger__resting.rgba,
+      color: errorColor,
     },
     typography: {
-      color: danger__resting.rgba,
+      color: errorColor,
     },
   },
 }
