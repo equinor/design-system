@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { TabsContext } from './Tabs.context'
 import { TabPanel } from './TabPanel'
 
-const TabPanels = forwardRef(function TabPanels(props, ref) {
+const TabPanels = forwardRef(function TabPanels({ children, ...props }, ref) {
   const { activeTab, tabsId } = useContext(TabsContext)
 
-  const children = React.Children.map(props.children, (child, index) =>
+  const Panels = React.Children.map(children, (child, index) =>
     React.cloneElement(child, {
       id: `${tabsId}-panel-${index + 1}`,
       'aria-labelledby': `${tabsId}-tab-${index + 1}`,
@@ -15,7 +15,7 @@ const TabPanels = forwardRef(function TabPanels(props, ref) {
   )
   return (
     <div ref={ref} {...props}>
-      {children}
+      {Panels}
     </div>
   )
 })
