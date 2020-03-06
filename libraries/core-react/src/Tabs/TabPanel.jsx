@@ -7,14 +7,17 @@ const {
   spacing: { top: paddingTop, bottom: paddingBottom },
 } = tokens
 
-const StyledTabPanel = styled.div({
+const StyledTabPanel = styled.div.attrs(() => ({
+  tabIndex: 0,
+  role: 'tabpanel',
+}))({
   paddingTop,
   paddingBottom,
 })
 
 const TabPanel = forwardRef(function TabPanel({ ...props }, ref) {
   return (
-    <StyledTabPanel ref={ref} {...props} tabIndex={0} role="tabpanel">
+    <StyledTabPanel ref={ref} {...props}>
       {props.children}
     </StyledTabPanel>
   )
