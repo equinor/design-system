@@ -13,7 +13,8 @@ const {
     },
     interactive: {
       primary__resting: { rgba: primaryColor },
-      primary__hover_alt: { rgba: primaryHover },
+      primary__hover_alt: { rgba: primaryHoverAlt },
+      primary__hover: { rgba: primaryHover },
       disabled__text: { rgba: disabledColor },
       focus: { rgba: focusColor },
       primary__selected_highlight: { rgba: activeColor },
@@ -47,8 +48,16 @@ export const chip = {
         radius: borderRadius,
       },
       hover: {
-        background: primaryHover,
+        background: primaryHoverAlt,
       },
+    },
+  },
+  hover: {
+    icon: {
+      background: primaryHoverAlt,
+    },
+    typography: {
+      color: primaryHover,
     },
   },
   disabled: {

@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
-  grid-template-columns: repeat(5, fit-content(100%));
+  grid-template-columns: repeat(3, fit-content(100%));
 `
 
 export default {
@@ -34,6 +34,27 @@ export const Chips = () => (
         onDelete={console.log}
       >
         <Icon name="save" />
+        {text('Label', 'Label')}
+      </Chip>
+      <Chip onDelete={console.log}>{text('Label', 'Label')}</Chip>
+      <Chip disabled onDelete={console.log}>
+        {text('Label', 'Label')}
+      </Chip>
+
+      <Chip clickable>{text('Label', 'Label')}</Chip>
+      <Chip clickable>
+        <Icon name="save" />
+        {text('Label', 'Label')}
+      </Chip>
+      <Chip clickable disabled>
+        <Icon name="save" />
+        {text('Label', 'Label')}
+      </Chip>
+      <Chip active>{text('Label', 'Label')}</Chip>
+      <Chip active clickable onDelete={console.log}>
+        {text('Label', 'Label')}
+      </Chip>
+      <Chip active clickable onDelete={console.log} disabled>
         {text('Label', 'Label')}
       </Chip>
     </Wrapper>

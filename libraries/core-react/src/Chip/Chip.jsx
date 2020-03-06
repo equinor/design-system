@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
@@ -12,15 +12,25 @@ import {
 
 Icon.add({ close })
 
-const { enabled, disabled: disabledToken, focus, active: activeToken } = tokens
+const {
+  enabled,
+  disabled: disabledToken,
+  focus,
+  active: activeToken,
+  hover,
+} = tokens
 
 const disabledOverrides = ({ disabled }) =>
   disabled &&
   css`
     cursor: not-allowed;
+    background: ${enabled.background};
     color: ${disabledToken.typography.color};
     svg {
       fill: ${disabledToken.typography.color};
+    }
+    &:hover {
+      cursor: not-allowed;
     }
   `
 
@@ -30,10 +40,11 @@ const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
   background: ${({ active }) =>
     active ? activeToken.background : enabled.background};
   height: ${enabled.height};
-  display:grid;
+  width: fit-content;
+  display: grid;
   grid-gap: 8px;
-  grid-template-columns: repeat(3, auto);
-  align-items:center;
+  grid-template-columns: repeat(${({ columns }) => columns}, auto);
+  align-items: center;
   border: ${focus.border.width} solid transparent;
 
   svg {
@@ -53,6 +64,7 @@ const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
   }
 
   &:hover {
+    color: ${hover.typography.color};
     ${({ clickable }) =>
       clickable &&
       css`
@@ -64,17 +76,29 @@ const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
   ${spacingsTemplate(enabled.spacings)}
   ${typographyTemplate(enabled.typography)}
   ${disabledOverrides}
+
+  ${({ onDelete }) =>
+    onDelete &&
+    css`
+      padding-right: 4px;
+    `}
 `
 
 export const Chip = forwardRef(function Chips(
   { className, children, onDelete, disabled, ...rest },
   ref,
 ) {
+  const onClick = disabled ? () => undefined : onDelete
+  const columns =
+    (Array.isArray(children) ? children.length : 1) + (onDelete ? 1 : 0)
+
   const props = {
     ...rest,
     disabled,
+    columns,
+    onDelete,
   }
-  const onClick = disabled ? () => undefined : onDelete
+
   return (
     <StyledChips {...props} className={className} ref={ref}>
       {children}
