@@ -12,18 +12,17 @@ const Container = styled.div`
   background-color: #ebebeb !important;
 `
 
-const VideoBase = styled.video`
+const ImageBase = styled.img`
   height: 450px;
-  width: 800px;
   border: none;
   background-color: #2c2c2c;
 `
 
-const Video = ({ url, ...other }) => {
+const Image = ({ url, ...other }) => {
   // StaticQuery does not support grapql queries so we have to for all videos and then find it....
   const data = useStaticQuery(graphql`
     {
-      allFile(filter: { relativeDirectory: { eq: "video" } }) {
+      allFile(filter: { relativeDirectory: { eq: "images" } }) {
         edges {
           node {
             publicURL
@@ -34,28 +33,28 @@ const Video = ({ url, ...other }) => {
     }
   `)
 
-  let videoUrl = url
+  let imageUrl = url
 
-  if (url.startsWith('video') && data.allFile.edges.length > 0) {
-    const video = data.allFile.edges.find(
-      ({ node }) => node.relativePath === url,
+  if (url.startsWith('images') && data.allFile.edges.length > 0) {
+    const image = data.allFile.edges.find(
+      ({ node }) => node.relativePath.toLowerCase() === url.toLowerCase(),
     )
-    videoUrl = video ? video.node.publicURL : undefined
+    imageUrl = image ? image.node.publicURL : undefined
   }
 
-  return videoUrl ? (
-    <VideoBase {...other} src={videoUrl} />
+  return imageUrl ? (
+    <ImageBase {...other} src={imageUrl} />
   ) : (
     <Container>
-      Ops! Can&apos;t find the video, please check if your link is correct 🎥
+      Ops! Can&apos;t find the image, please check if your link is correct 🏞️
       {url}
     </Container>
   )
 }
 
-Video.propTypes = {
+Image.propTypes = {
   /** Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed */
   url: PropTypes.string.isRequired,
 }
 
-export default Video
+export default Image
