@@ -70,9 +70,8 @@
     ]
   },
   "dependencies": {
-    "@equinor/eds-tokens": "workspace:*"
-  },
-  "engines": {
-    "pnpm": ">=4"
+    "@equinor/eds-tokens": "workspace:*",
+    "@testing-library/react-hooks": "^3.2.1",
+    "lodash.uniqueid": "^4.0.1"
   }
 }
