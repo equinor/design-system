@@ -13,7 +13,6 @@
     - Motion
     - Shape
     - Spacing
-    - Tokens
     - Typography
 - title: Assets
   subNav:
@@ -22,9 +21,8 @@
     - Image placeholder
     - Logo
     - Photography
-    - Product icons
     - System icons
-    - Technical illustrations 
+    - Technical illustrations
 - title: Components
   subNav:
     - Component status

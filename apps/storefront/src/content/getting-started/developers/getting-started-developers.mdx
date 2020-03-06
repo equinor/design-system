@@ -1,0 +1,57 @@
+---
+title: Developers
+mode: publish
+---
+
+Developers should use the Equinor Design System (EDS) to easily sew together new prototypes, while focusing on application logic rather than front-end components. We have a small team of developers working on the EDS React component library at the moment – so we’re very open for [contributions][contributing] to speed up the process.
+
+## Storybook
+
+We use [storybook][] as an isolated development environment, which also serves as documentation for the time being. We have two instances of storybook running, the official one where you can see the components that have been released is located at https://eds-storybook-react.azurewebsites.net and we also have a development branch with work in progress at https://eds-storybook-react-development.azurewebsites.net.
+
+[storybook]: https://storybook.js.org/
+
+## NPM
+
+There are currently [3 EDS packages available from NPM](npm):
+
+- @equinor/eds-tokens
+- @equinor/eds-core-react
+- @equinor/eds-icons
+
+[npm]: https://www.npmjs.com/search?q=%40equinor%2Feds-
+
+The eds-tokens module is the foundation for all the components, and contains design decisions that have been imported from the design components in Figma. If you want to contribute with component developement, or you want to implement the EDS in a framework other than React, then this module will help you in being consistent with EDS in Figma. See the [README](tokens) for usage.
+
+[tokens]: https://www.npmjs.com/package/@equinor/eds-tokens
+
+The eds-core-react module contains all the components that are currently available. See the [README][react] for a list of included components and examples of usage.
+
+[react]: https://www.npmjs.com/package/@equinor/eds-core-react
+
+The eds-icons module contains a subset of Material icons that are approved for use in EDS – in addition to some icons that have been designed inhouse. There’s an icon-component in eds-core-react which simplifies usage in React applications. See the [README][icons] for further details.
+
+[icons]: https://www.npmjs.com/package/@equinor/eds-icons
+
+## CDN
+
+The Equinor fonts and logo are available from a CDN. If you want to use the Equinor fonts in your project, just add a link-element to the head of your document like this: 
+`<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-font.css" />` for all the fonts, or if you want to save some bandwidth and only use one of the fonts you can do that as well: 
+`<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-regular.css" />`
+We currently don’t support the font-display property, if that’s something you need then please reach out to us so we can prioritize that in the backlog.
+
+When it comes to the logo, we have two versions of the logo – primary and horizontal – and you pick the colour with a fragment identifier in the url:
+`<img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#red" alt="Equinor" />` for the red one for example. The other options are white, and black – with black being the default.
+
+The fonts and logo are also available as private packages in [Github’s package repository][github-npm].
+
+[github-npm]: https://github.com/orgs/equinor/packages?tab=packages&q=npm
+
+## Github
+
+All the source code for the EDS is in a [monorepo at Github][repo]. We’re open for contributions, and have [issues][] ready for all the components. See the section about [contributing][] for more information. 
+
+[repo]: //github.com/equinor/design-system 
+[contributing]: /contributing/developers/
+[issues]: //github.com/equinor/design-system/issues
+
