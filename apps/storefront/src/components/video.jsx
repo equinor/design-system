@@ -47,7 +47,7 @@ const Video = ({ url, ...other }) => {
     <VideoBase {...other} src={videoUrl} />
   ) : (
     <Container>
-      Ops! Can&apos;t find the video, please check your link is correct 🎥
+      Ops! Can&apos;t find the video, please check if your link is correct 🎥
       {url}
     </Container>
   )
