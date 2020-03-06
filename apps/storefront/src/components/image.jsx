@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 const ImageBase = styled.img`
-  height: 450px;
+  width: 100%;
   border: none;
   background-color: #2c2c2c;
 `
