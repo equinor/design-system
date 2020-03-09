@@ -73,6 +73,19 @@ const TypographyBase = styled.p`
   ${Base}
 `
 
+/**
+ * @typedef {object} Props
+ * @prop {string} [className]
+ * @prop {React.ReactNode} children
+ * @prop {'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'overline' | 'ingress' | 'caption' | 'meta' | 'body_short' | 'body_long'} [variant] Specifies which variant to use
+ * @prop {boolean} [bold] Specifies if text should be bold
+ * @prop {boolean} [italic] Specifies if text should be italic
+ * @prop {boolean} [link] Specifies if text should be a link
+ */
+
+/**
+ * @param {Props} props
+ */
 export const Typography = ({
   variant,
   children,
@@ -110,6 +123,7 @@ Typography.propTypes = {
   /** @ignore */
   children: PropTypes.node.isRequired,
   /** Specifies which variant to use */
+  // @ts-ignore
   variant: PropTypes.oneOf(variants),
   /** Specifies if text should be bold */
   bold: PropTypes.bool,
