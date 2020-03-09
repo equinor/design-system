@@ -107,15 +107,31 @@ export const Chip = forwardRef(function Chips(
   const props = {
     ...rest,
     disabled,
-    onClick: handleClick,
     ref,
     className,
     deletable,
     clickable,
   }
 
+  const handleKeyPress = (event) => {
+    const { key } = event
+    if (key === 'Enter') {
+      if (deletable) {
+        handleDelete(props)
+      }
+      // Delete takes presidens, else click action is activated
+      if (clickable && !deletable) {
+        handleClick(props)
+      }
+    }
+  }
+
   return (
-    <StyledChips {...props}>
+    <StyledChips
+      {...props}
+      onClick={() => handleClick(props)}
+      onKeyPress={handleKeyPress}
+    >
       {children}
       {onDelete && (
         <Icon
