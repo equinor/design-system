@@ -7,15 +7,6 @@ Icon_.add({ close })
 
 const { enabled, hover } = tokens
 
-const disabledOverrides = ({ disabled }) =>
-  disabled &&
-  css`
-    cursor: not-allowed;
-    &:hover {
-      background: transparent;
-    }
-  `
-
 export const Icon = styled(Icon_)`
   cursor: pointer;
   padding: 2px;
@@ -28,5 +19,12 @@ export const Icon = styled(Icon_)`
     }
   }
 
-  ${disabledOverrides}
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+      &:hover {
+        background: transparent;
+      }
+    `}
 `

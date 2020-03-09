@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
@@ -20,30 +20,16 @@ const {
   hover,
 } = tokens
 
-const disabledOverrides = ({ disabled }) =>
-  disabled &&
-  css`
-    cursor: not-allowed;
-    background: ${enabled.background};
-    color: ${disabledToken.typography.color};
-    svg {
-      fill: ${disabledToken.typography.color};
-    }
-    &:hover {
-      cursor: not-allowed;
-    }
-  `
-
 const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
   tabIndex: disabled || !clickable ? null : 0,
 }))`
-  background: ${({ active }) =>
-    active ? activeToken.background : enabled.background};
+  background: ${enabled.background};
   height: ${enabled.height};
   width: fit-content;
   display: grid;
   grid-gap: 8px;
-  grid-template-columns: repeat(${({ columns }) => columns}, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
   align-items: center;
   border: ${focus.border.width} solid transparent;
 
@@ -53,57 +39,90 @@ const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
     width: ${enabled.icon.width};
   }
 
-  &:focus {
-    ${({ clickable }) =>
-      clickable &&
-      css`
-        outline: none;
-        border-radius: ${focus.border.radius};
-        border: ${focus.border.width} ${focus.border.type} ${focus.border.color};
-      `}
-  }
-
   &:hover {
     color: ${hover.typography.color};
-    ${({ clickable }) =>
-      clickable &&
-      css`
-        cursor: pointer;
-      `}
+    svg {
+      fill: ${hover.typography.color};
+    }
   }
 
   ${bordersTemplate(enabled.border)}
   ${spacingsTemplate(enabled.spacings)}
   ${typographyTemplate(enabled.typography)}
-  ${disabledOverrides}
 
-  ${({ onDelete }) =>
-    onDelete &&
+  ${({ active }) =>
+    active &&
+    css`
+      background: ${activeToken.background};
+    `}
+
+  ${({ clickable }) =>
+    clickable &&
+    css`
+      &:focus {
+        outline: none;
+        border-radius: ${focus.border.radius};
+        border: ${focus.border.width} ${focus.border.type} ${focus.border.color};
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    `}
+
+  ${({ deletable }) =>
+    deletable &&
     css`
       padding-right: 4px;
+    `}
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+      background: ${enabled.background};
+      color: ${disabledToken.typography.color};
+      svg {
+        fill: ${disabledToken.typography.color};
+      }
+      &:hover {
+        color: ${disabledToken.typography.color};
+        cursor: not-allowed;
+        svg {
+          fill: ${disabledToken.typography.color};
+        }
+      }
     `}
 `
 
 export const Chip = forwardRef(function Chips(
-  { className, children, onDelete, disabled, ...rest },
+  { className, children, onDelete, disabled, onClick, ...rest },
   ref,
 ) {
-  const onClick = disabled ? () => undefined : onDelete
-  const columns =
-    (Array.isArray(children) ? children.length : 1) + (onDelete ? 1 : 0)
+  const handleDelete = disabled ? () => null : onDelete
+  const handleClick = disabled ? () => null : onClick
+
+  const deletable = handleDelete !== null
+  const clickable = handleClick !== null
 
   const props = {
     ...rest,
     disabled,
-    columns,
-    onDelete,
+    onClick: handleClick,
+    ref,
+    className,
+    deletable,
+    clickable,
   }
 
   return (
-    <StyledChips {...props} className={className} ref={ref}>
+    <StyledChips {...props}>
       {children}
       {onDelete && (
-        <Icon name="close" disabled={disabled} onClick={() => onClick(props)} />
+        <Icon
+          name="close"
+          disabled={disabled}
+          onClick={() => handleDelete(props)}
+        />
       )}
     </StyledChips>
   )
@@ -122,8 +141,8 @@ Chip.propTypes = {
   active: PropTypes.bool,
   /** Delete callback */
   onDelete: PropTypes.func,
-  /** Clickable */
-  clickable: PropTypes.bool,
+  /** Click callback */
+  onClick: PropTypes.func,
 }
 
 Chip.defaultProps = {
@@ -132,5 +151,5 @@ Chip.defaultProps = {
   disabled: false,
   active: false,
   onDelete: null,
-  clickable: false,
+  onClick: null,
 }

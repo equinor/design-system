@@ -23,6 +23,9 @@ export default {
   decorators: [withKnobs],
 }
 
+const onDelete = (x) => console.log('Triggered onDelete!', x)
+const onClick = (x) => console.log('Triggered onClick!', x)
+
 export const Chips = () => (
   <div>
     <Wrapper>
@@ -30,31 +33,31 @@ export const Chips = () => (
         id="some-chips-id"
         active={boolean('Active', false)}
         disabled={boolean('Disabled', false)}
-        clickable={boolean('Clickable', false)}
-        onDelete={console.log}
+        onClick={onClick}
+        onDelete={onDelete}
       >
         <Icon name="save" />
         {text('Label', 'Label')}
       </Chip>
-      <Chip onDelete={console.log}>{text('Label', 'Label')}</Chip>
-      <Chip disabled onDelete={console.log}>
+      <Chip onDelete={onDelete}>{text('Label', 'Label')}</Chip>
+      <Chip disabled onDelete={onDelete}>
         {text('Label', 'Label')}
       </Chip>
 
-      <Chip clickable>{text('Label', 'Label')}</Chip>
-      <Chip clickable>
+      <Chip onClick={onClick}>{text('Label', 'Label')}</Chip>
+      <Chip onClick={onClick}>
         <Icon name="save" />
         {text('Label', 'Label')}
       </Chip>
-      <Chip clickable disabled>
+      <Chip onClick={onClick} disabled>
         <Icon name="save" />
         {text('Label', 'Label')}
       </Chip>
       <Chip active>{text('Label', 'Label')}</Chip>
-      <Chip active clickable onDelete={console.log}>
+      <Chip active onClick={onClick} onDelete={onDelete}>
         {text('Label', 'Label')}
       </Chip>
-      <Chip active clickable onDelete={console.log} disabled>
+      <Chip active onClick={onClick} onDelete={onDelete} disabled>
         {text('Label', 'Label')}
       </Chip>
     </Wrapper>
