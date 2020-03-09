@@ -22,7 +22,7 @@ const Image = ({ url, ...other }) => {
   // StaticQuery does not support grapql queries so we have to for all videos and then find it....
   const data = useStaticQuery(graphql`
     {
-      allFile(filter: { relativeDirectory: { eq: "images" } }) {
+      allFile(filter: { relativeDirectory: { regex: "/images/" } }) {
         edges {
           node {
             publicURL
