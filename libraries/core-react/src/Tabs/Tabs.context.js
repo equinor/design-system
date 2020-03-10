@@ -2,7 +2,8 @@ import React, { createContext } from 'react'
 
 const TabsContext = createContext({
   variant: '',
-  handleChange: () => {},
+  /** @param {number} index */
+  handleChange: (index) => {},
   activeTab: 0,
   tabsId: '',
 })
