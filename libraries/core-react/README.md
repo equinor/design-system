@@ -1,6 +1,6 @@
 # @equinor/eds-core-react
 
-Available componenets to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
+Available components to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
 
 Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
 
