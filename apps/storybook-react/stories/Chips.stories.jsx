@@ -1,7 +1,7 @@
 import React from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Icon, Chip } from '@equinor/eds-core-react'
+import { Icon, Chip, Avatar } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
 
 const icons = {
@@ -59,6 +59,11 @@ export const Chips = () => (
       </Chip>
       <Chip active onClick={onClick} onDelete={onDelete} disabled>
         {text('Label', 'Label')}
+      </Chip>
+
+      <Chip onDelete={onDelete}>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg"></Avatar>
+        Luna
       </Chip>
     </Wrapper>
   </div>

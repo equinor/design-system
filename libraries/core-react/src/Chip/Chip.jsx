@@ -98,11 +98,11 @@ export const Chip = forwardRef(function Chips(
   { className, children, onDelete, disabled, onClick, ...rest },
   ref,
 ) {
-  const handleDelete = disabled ? () => null : onDelete
-  const handleClick = disabled ? () => null : onClick
+  const handleDelete = disabled ? undefined : onDelete
+  const handleClick = disabled ? undefined : onClick
 
-  const deletable = handleDelete !== null
-  const clickable = handleClick !== null
+  const deletable = handleDelete !== undefined
+  const clickable = handleClick !== undefined
 
   const props = {
     ...rest,
@@ -166,6 +166,6 @@ Chip.defaultProps = {
   children: [],
   disabled: false,
   active: false,
-  onDelete: null,
-  onClick: null,
+  onDelete: undefined,
+  onClick: undefined,
 }
