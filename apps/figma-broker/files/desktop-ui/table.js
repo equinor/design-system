@@ -20,6 +20,24 @@ import {
 
 const fallback = {}
 
+const getLabelNode = (children) => {
+  let textNode = R.find(withType('text'), children)
+
+  // Find label in Auto-Layout node
+  if (R.isNil(textNode)) {
+    textNode = R.pipe(
+      R.find(withName('contents')),
+      R.prop('children'),
+      R.defaultTo([]),
+      R.find(withName('label')),
+      R.prop('children'),
+      R.defaultTo([]),
+      R.find(withType('text')),
+    )(children)
+  }
+  return textNode
+}
+
 const buildProps = (states, getStyle) => {
   // states
   const enabled = R.find(withName('enabled'), states)
@@ -43,8 +61,9 @@ const buildProps = (states, getStyle) => {
   const disabledShape = toShape(
     R.find(instanceOfComponent('shape'), disabled.children),
   )
-  const activeLabel = toText(R.find(withName('label'), active.children))
-  const disabledLabel = toText(R.find(withName('label'), disabled.children))
+  const enabledLabel = toText(getLabelNode(enabled.children))
+  const activeLabel = toText(getLabelNode(active.children))
+  const disabledLabel = toText(getLabelNode(disabled.children))
 
   const focus = toFocus(
     R.find(instanceOfComponent('focused'), focused.children),
@@ -55,7 +74,7 @@ const buildProps = (states, getStyle) => {
   const data = removeNilAndEmpty({
     ...shape,
     borders: R.filter(withName('border'), enabled.children),
-    text: toText(R.find(withType('text'), enabled.children)),
+    text: enabledLabel,
     spacings: R.filter(instanceOfComponent('spacing'), enabled.children),
     clickbound: R.find(instanceOfComponent('clickbound'), enabled.children),
     field: R.find(withName('field'), enabled.children),
