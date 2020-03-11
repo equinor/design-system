@@ -3,6 +3,7 @@
 Available components to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
 
 Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
+Read the [changelog](https://github.com/equinor/design-system/blob/develop/libraries/core-react/CHANGELOG.md) for details concerning releases.
 
 ## Installation
 
@@ -20,43 +21,43 @@ npm install @equinor/eds-core-react styled-components
   - Ghost
   - Ghost Icon
 - Divider
-- Table
-- Typography
-- TextField
-- List
-- TopBar
 - Icon
-  
+- List
+- Table
+- Tabs
+- TextField
+- TopBar
+- Typography
+
 ### In progress 👷‍♀️
 
-- Tabs
 - Accordion
+- Chips
 
 ### TODO 🛠️
 
+- App launcher
+- Banner
+- Breadcrumbs
 - Button
-  - Contained w/icon left/right 
+  - Contained w/icon left/right
   - Outlined w/icon left/right
   - Ghost w/icon left/right
 - Cards
-- Progress indicators
-- Popover
-- Chips
+- Dialog
 - Menu
-- App launcher
-- Breadcrumbs
-- Table of contents
 - Navigation drawer
 - Pagination
-- Dialog
-- Banner
-- Snackbar
+- Popover
+- Progress indicators
 - Scrim
-- Search
 - Selection Controls
+- Search
 - Side Sheet
 - Slider
+- Snackbar
 - Stepper
+- Table of contents
 - Tooltip
 
 ## Usage
