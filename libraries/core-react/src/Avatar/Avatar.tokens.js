@@ -1,1 +1,7 @@
-export const avatar = {}
+export const avatar = {
+  enabled: {
+    border: {
+      radius: '50%',
+    },
+  },
+}

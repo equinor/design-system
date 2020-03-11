@@ -3,31 +3,40 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { avatar as tokens } from './Avatar.tokens'
 
-const {} = tokens
+const {
+  enabled: { border },
+} = tokens
 
 const StyledAvatar = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: ${border.radius};
+  ${({ size }) =>
+    css`
+      height: ${size}px;
+      width: ${size}px;
+    `}
 `
 
 const StyledImage = styled.img`
-  width: 100%;
   height: 100%;
   text-align: center;
   text-indent: 10000;
   color: transparent;
 `
 
-export const Avatar = forwardRef(function Avatar({ src, alt, ...rest }, ref) {
+export const Avatar = forwardRef(function Avatar(
+  { src, alt, size, ...rest },
+  ref,
+) {
   const props = {
     ...rest,
     ref,
+    size,
   }
 
   const imageProps = {
@@ -42,7 +51,7 @@ export const Avatar = forwardRef(function Avatar({ src, alt, ...rest }, ref) {
   )
 })
 
-Avatar.displayName = 'eds-chip'
+Avatar.displayName = 'eds-avatar'
 
 Avatar.propTypes = {
   /** @ignore */
@@ -53,6 +62,8 @@ Avatar.propTypes = {
   src: PropTypes.string,
   /** Alt image description */
   alt: PropTypes.string,
+  /** Size */
+  size: PropTypes.oneOf([16, 24, 32, 40, 48]),
 }
 
 Avatar.defaultProps = {
@@ -60,4 +71,5 @@ Avatar.defaultProps = {
   children: [],
   src: null,
   alt: null,
+  size: 24,
 }
