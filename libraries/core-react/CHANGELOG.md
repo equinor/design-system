@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README
   - Sorted components alphabetically
   - Moved Tabs to «available»
-  - Moved Chips to «in progress»
+  - Moved Chips, Dialog and Side Sheet to «in progress»
 
 ## [0.1.0] - 2020-02-24
 
