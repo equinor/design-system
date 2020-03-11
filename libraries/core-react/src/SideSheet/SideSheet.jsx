@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
 import { Typography } from '../Typography'
+import { Button } from '../Button'
 import { Icon } from '../Icon'
 
 const icons = {
@@ -12,10 +13,20 @@ const icons = {
 Icon.add(icons)
 
 const StyledSideSheet = styled.div`
+  box-sizing: border-box;
   border-left: 2px solid #f7f7f7;
   background-color: #ffffff;
-  margin: 16px 16px 0 16px;
+  padding: 16px 16px 0 16px;
   width: ${(props) => props.width};
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  padding-right: 10px;
 `
 
 export const SideSheet = forwardRef(function SideSheet(
@@ -24,13 +35,13 @@ export const SideSheet = forwardRef(function SideSheet(
 ) {
   let width
   if (size === 'small') {
-    width = 240
+    width = '240px'
   } else if (size === 'medium') {
-    width = 320
+    width = '320px'
   } else if (size === 'large') {
-    width = 480
+    width = '480px'
   } else if (size === 'xlarge') {
-    width = 640
+    width = '640px'
   }
 
   const props = {
@@ -38,9 +49,13 @@ export const SideSheet = forwardRef(function SideSheet(
   }
   return (
     <StyledSideSheet {...props} className={className} ref={ref}>
-      <Typography variant="h2">{title}</Typography>
+      <Wrapper>
+        <Typography variant="h2">{title}</Typography>
+        <Button variant="ghost_icon">
+          <Icon name="clear" title="close" />
+        </Button>
+      </Wrapper>
       {children}
-      <Icon name="clear" color="#007079" />
     </StyledSideSheet>
   )
 })
