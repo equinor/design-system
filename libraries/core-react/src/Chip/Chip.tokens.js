@@ -2,7 +2,7 @@ import { tokens } from '@equinor/eds-tokens'
 
 const {
   spacings: {
-    comfortable: { small, medium },
+    comfortable: { x_small, small, medium },
   },
   typography: {
     ui: { chip__badge: chipTypography },
@@ -34,7 +34,7 @@ export const chip = {
       radius: borderRadius,
     },
     spacings: {
-      left: small,
+      left: x_small,
       right: small,
     },
     typography: {

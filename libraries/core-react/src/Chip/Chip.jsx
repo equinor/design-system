@@ -65,18 +65,12 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
       }
     `}
 
-    ${({ clickable }) =>
-      clickable &&
-      css`
-        &:hover {
-          cursor: pointer;
-        }
-      `}
-
-  ${({ deletable }) =>
-    deletable &&
+  ${({ clickable }) =>
+    clickable &&
     css`
-      padding-right: 4px;
+      &:hover {
+        cursor: pointer;
+      }
     `}
 
   ${({ disabled }) =>
@@ -96,10 +90,23 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
         }
       }
     `}
+
+  ${({ deletable }) =>
+    deletable &&
+    css`
+      padding-right: 4px;
+    `}
+
+  ${({ onlyChild }) =>
+    onlyChild &&
+    css`
+      padding-left: 8px;
+    `}
+
 `
 
 export const Chip = forwardRef(function Chips(
-  { className, children, onDelete, disabled, onClick, ...rest },
+  { children, onDelete, disabled, onClick, ...rest },
   ref,
 ) {
   const handleDelete = disabled ? undefined : onDelete
@@ -107,14 +114,15 @@ export const Chip = forwardRef(function Chips(
 
   const deletable = handleDelete !== undefined
   const clickable = handleClick !== undefined
+  const onlyChild = typeof children === 'string'
 
   const props = {
     ...rest,
-    disabled,
     ref,
-    className,
+    disabled,
     deletable,
     clickable,
+    onlyChild,
   }
 
   const handleKeyPress = (event) => {
@@ -133,16 +141,18 @@ export const Chip = forwardRef(function Chips(
   const resizedChildren = React.Children.map(children, (child) => {
     // We force size on Icon & Avatar component
     if (child.props && child.props.size) {
-      return React.cloneElement(child, { size: 16 })
+      return React.cloneElement(child, {
+        size: 16,
+        disabled,
+      })
     }
-
     return child
   })
 
   return (
     <StyledChips
       {...props}
-      onClick={() => clickable && handleClick(props)}
+      onClick={(e) => clickable && handleClick(props, e)}
       onKeyPress={handleKeyPress}
     >
       {resizedChildren}
@@ -153,7 +163,7 @@ export const Chip = forwardRef(function Chips(
           onClick={(e) => {
             e.stopPropagation()
             if (deletable) {
-              handleDelete(props)
+              handleDelete(props, e)
             }
           }}
           size={16}
