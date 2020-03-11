@@ -3,7 +3,7 @@
 Available components to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
 
 Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
-Read the [changelog](https://github.com/equinor/design-system/blob/develop/libraries/core-react/CHANGELOG.md) for details concerning releases.
+Read the [changelog](https://github.com/equinor/design-system/blob/develop/libraries/core-react/CHANGELOG.md) for details on specific releases.
 
 ## Installation
 
