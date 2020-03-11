@@ -1,7 +1,7 @@
 import React from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Icon, Chip, Avatar } from '@equinor/eds-core-react'
+import { Icon, Chip, Avatar, Typography } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
 
 const icons = {
@@ -10,15 +10,20 @@ const icons = {
 
 Icon.add(icons)
 
-const Wrapper = styled.div`
+const Container = styled.div`
   margin: 32px;
   display: grid;
+  grid-gap: 16px;
+`
+
+const Wrapper = styled.div`
+  display: grid;
   grid-gap: 32px;
-  grid-template-columns: repeat(3, fit-content(100%));
+  grid-template-columns: repeat(6, fit-content(100%));
 `
 
 export default {
-  title: 'Components|Chips',
+  title: 'Components/Chips',
   component: Chip,
   decorators: [withKnobs],
 }
@@ -26,45 +31,76 @@ export default {
 const onDelete = (x) => console.log('Triggered onDelete!', x)
 const onClick = (x) => console.log('Triggered onClick!', x)
 
-export const Chips = () => (
-  <div>
+export const Examples = () => (
+  <Container>
+    <Typography variant="h2">Text</Typography>
     <Wrapper>
-      <Chip
-        id="some-chips-id"
-        active={boolean('Active', false)}
-        disabled={boolean('Disabled', false)}
-        onClick={onClick}
-        onDelete={onDelete}
-      >
-        <Icon name="save" />
-        {text('Label', 'Label')}
+      <Chip>normal</Chip>
+      <Chip active>active</Chip>
+      <Chip onClick={onClick}>clickable</Chip>
+      <Chip onDelete={onDelete}>deletable</Chip>
+      <Chip onDelete={onDelete} onClick={onClick}>
+        deletable + clickable
       </Chip>
-      <Chip onDelete={onDelete}>{text('Label', 'Label')}</Chip>
-      <Chip disabled onDelete={onDelete}>
-        {text('Label', 'Label')}
-      </Chip>
-
-      <Chip onClick={onClick}>{text('Label', 'Label')}</Chip>
-      <Chip onClick={onClick}>
-        <Icon name="save" />
-        {text('Label', 'Label')}
-      </Chip>
-      <Chip onClick={onClick} disabled>
-        <Icon name="save" />
-        {text('Label', 'Label')}
-      </Chip>
-      <Chip active>{text('Label', 'Label')}</Chip>
-      <Chip active onClick={onClick} onDelete={onDelete}>
-        {text('Label', 'Label')}
-      </Chip>
-      <Chip active onClick={onClick} onDelete={onDelete} disabled>
-        {text('Label', 'Label')}
-      </Chip>
-
-      <Chip onDelete={onDelete}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg"></Avatar>
-        Luna
+      <Chip onDelete={onDelete} disabled>
+        disabled
       </Chip>
     </Wrapper>
-  </div>
+
+    <Typography variant="h2">Text + Icon</Typography>
+    <Wrapper>
+      <Chip>
+        <Icon name="save" />
+        normal
+      </Chip>
+      <Chip active>
+        <Icon name="save" />
+        active
+      </Chip>
+      <Chip onClick={onClick}>
+        <Icon name="save" />
+        clickable
+      </Chip>
+      <Chip onDelete={onDelete}>
+        <Icon name="save" />
+        deletable
+      </Chip>
+      <Chip onDelete={onDelete} onClick={onClick}>
+        <Icon name="save" />
+        deletable + clickable
+      </Chip>
+      <Chip onDelete={onDelete} disabled>
+        <Icon name="save" />
+        disabled
+      </Chip>
+    </Wrapper>
+
+    <Typography variant="h2">Text + Avatar</Typography>
+    <Wrapper>
+      <Chip>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        normal
+      </Chip>
+      <Chip active>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        active
+      </Chip>
+      <Chip onClick={onClick}>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        clickable
+      </Chip>
+      <Chip onDelete={onDelete}>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        deletable
+      </Chip>
+      <Chip onDelete={onDelete} onClick={onClick}>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        deletable + clickable
+      </Chip>
+      <Chip onDelete={onDelete} disabled>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        disabled
+      </Chip>
+    </Wrapper>
+  </Container>
 )

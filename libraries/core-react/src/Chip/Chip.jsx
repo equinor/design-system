@@ -20,8 +20,8 @@ const {
   hover,
 } = tokens
 
-const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
-  tabIndex: disabled || !clickable ? null : 0,
+const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
+  tabIndex: clickable || deletable ? 0 : null,
 }))`
   background: ${enabled.background};
   height: ${enabled.height};
@@ -32,11 +32,10 @@ const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
   grid-auto-columns: max-content;
   align-items: center;
   border: ${focus.border.width} solid transparent;
+  z-index: 999;
 
   svg {
     fill: ${enabled.typography.color};
-    height: ${enabled.icon.height};
-    width: ${enabled.icon.width};
   }
 
   &:hover {
@@ -56,18 +55,23 @@ const StyledChips = styled.div.attrs(({ disabled, clickable }) => ({
       background: ${activeToken.background};
     `}
 
-  ${({ clickable }) =>
-    clickable &&
+  ${({ clickable, deletable }) =>
+    (clickable || deletable) &&
     css`
       &:focus {
         outline: none;
         border-radius: ${focus.border.radius};
         border: ${focus.border.width} ${focus.border.type} ${focus.border.color};
       }
-      &:hover {
-        cursor: pointer;
-      }
     `}
+
+    ${({ clickable }) =>
+      clickable &&
+      css`
+        &:hover {
+          cursor: pointer;
+        }
+      `}
 
   ${({ deletable }) =>
     deletable &&
@@ -126,18 +130,33 @@ export const Chip = forwardRef(function Chips(
     }
   }
 
+  const resizedChildren = React.Children.map(children, (child) => {
+    // We force size on Icon & Avatar component
+    if (child.props && child.props.size) {
+      return React.cloneElement(child, { size: 16 })
+    }
+
+    return child
+  })
+
   return (
     <StyledChips
       {...props}
-      onClick={() => handleClick(props)}
+      onClick={() => clickable && handleClick(props)}
       onKeyPress={handleKeyPress}
     >
-      {children}
+      {resizedChildren}
       {onDelete && (
         <Icon
           name="close"
           disabled={disabled}
-          onClick={() => handleDelete(props)}
+          onClick={(e) => {
+            e.stopPropagation()
+            if (deletable) {
+              handleDelete(props)
+            }
+          }}
+          size={16}
         />
       )}
     </StyledChips>

@@ -11,6 +11,7 @@ export const Icon = styled(Icon_)`
   cursor: pointer;
   padding: 2px;
   border-radius: ${enabled.icon.border.radius};
+  z-index: 1000;
 
   &:hover {
     background: ${hover.icon.background};
