@@ -10,10 +10,9 @@ const Wrapper = styled.div`
 export default {
   title: 'Components|SideSheet',
   component: SideSheet,
-  decorators: [withKnobs],
 }
 
-export const AllSideSheets = () => (
+export const AllSidesheets = () => (
   <Wrapper>
     <h2>X Large</h2>
     <Wrapper>

@@ -1,1 +1,1 @@
-export { SideSheet } from '.'
+export { SideSheet } from './SideSheet'
