@@ -33,6 +33,8 @@ npm install @equinor/eds-core-react styled-components
 
 - Accordion
 - Chips
+- Dialog
+- Side Sheet
 
 ### TODO 🛠️
 
@@ -44,7 +46,6 @@ npm install @equinor/eds-core-react styled-components
   - Outlined w/icon left/right
   - Ghost w/icon left/right
 - Cards
-- Dialog
 - Menu
 - Navigation drawer
 - Pagination
@@ -53,7 +54,6 @@ npm install @equinor/eds-core-react styled-components
 - Scrim
 - Selection Controls
 - Search
-- Side Sheet
 - Slider
 - Snackbar
 - Stepper
