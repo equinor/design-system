@@ -25,23 +25,25 @@ const StyledAvatar = styled.div`
 const StyledImage = styled.img`
   height: 100%;
   text-align: center;
-  text-indent: 10000;
   color: transparent;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `
 
 export const Avatar = forwardRef(function Avatar(
-  { src, alt, size, ...rest },
+  { src, alt, size, disabled, ...rest },
   ref,
 ) {
   const props = {
     ...rest,
     ref,
     size,
+    disabled,
   }
 
   const imageProps = {
     src,
     alt,
+    disabled,
   }
 
   return (
@@ -64,6 +66,8 @@ Avatar.propTypes = {
   alt: PropTypes.string,
   /** Size */
   size: PropTypes.oneOf([16, 24, 32, 40, 48]),
+  /** Disabled */
+  disabled: PropTypes.bool,
 }
 
 Avatar.defaultProps = {
@@ -72,4 +76,5 @@ Avatar.defaultProps = {
   src: null,
   alt: null,
   size: 24,
+  disabled: false,
 }
