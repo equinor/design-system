@@ -13,6 +13,9 @@ const icons = {
 Icon.add(icons)
 
 const StyledSideSheet = styled.div`
+  /* height: 100%;
+  position: absolute;
+  z-index: inherit top; */
   box-sizing: border-box;
   border-left: 2px solid #f7f7f7;
   background-color: #ffffff;
