@@ -20,12 +20,16 @@ const Body = styled.div`
 `
 const TempContentWrapper = styled.div`
   display: block;
+  height: 40px;
+  margin-bottom: 16px;
+  overflow-y: scroll;
 `
 const TempButtonWrapper = styled.div`
-  margin: 16px;
+  /* margin: 16px; */
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(2, fit-content(100%));
+  justify-content: end;
 `
 
 const TITLE_CHOICES = {
@@ -35,7 +39,7 @@ const TITLE_CHOICES = {
 
 const CUSTOM_CONTENT_CHOICES = {
   none: null,
-  description: <p>Small and to the point description.</p>,
+  description: <p>Small description here.</p>,
   scrollable: (
     <TempContentWrapper>
       <p>

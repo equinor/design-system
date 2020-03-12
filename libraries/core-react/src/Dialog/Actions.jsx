@@ -4,14 +4,14 @@ import styled from 'styled-components'
 import { spacingsTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
-const { spacings } = tokens
+const { spacingsActions } = tokens
 
 const StyledActions = styled.div`
   align-items: end;
   align-content: flex-end;
   justify-content: end;
   justify-self: end;
-  ${spacingsTemplate(spacings)};
+  ${spacingsTemplate(spacingsActions)};
 `
 
 export const Actions = forwardRef(function EdsDialogActions(

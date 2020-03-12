@@ -1,22 +1,20 @@
 import React, { forwardRef, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Divider } from '@equinor/eds-core-react'
+import { Divider } from '../Divider'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
 const {
   title: { text },
-  spacings,
+  spacingsTitle,
 } = tokens
 
 const StyledTitle = styled.div`
-  display: grid;
+  display: inline-block;
   width: 100%;
-  grid-template-columns: auto auto;
-  grid-gap: 24px;
 
-  ${spacingsTemplate(spacings)};
+  ${spacingsTemplate(spacingsTitle)};
   ${typographyTemplate(text)}
 `
 
