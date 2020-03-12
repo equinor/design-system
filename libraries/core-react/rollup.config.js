@@ -24,7 +24,7 @@ export default [
     },
     plugins: [
       json(),
-      resolve({ extensions: ['.jsx'] }),
+      resolve({ extensions: ['.jsx', '.js'] }),
       babel({
         exclude: 'node_modules/**',
         presets: ['@babel/env', '@babel/preset-react'],
