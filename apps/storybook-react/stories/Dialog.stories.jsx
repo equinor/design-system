@@ -16,8 +16,11 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 `
-
+const TempContentWrapper = styled.div`
+  display: block;
+`
 const TempButtonWrapper = styled.div`
   margin: 16px;
   display: grid;
@@ -28,6 +31,23 @@ const TempButtonWrapper = styled.div`
 const TITLE_CHOICES = {
   none: null,
   text: 'Title',
+}
+
+const CUSTOM_CONTENT_CHOICES = {
+  none: null,
+  description: <p>Small and to the point description.</p>,
+  scrollable: (
+    <TempContentWrapper>
+      <p>
+        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.{' '}
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.{' '}
+      </p>
+    </TempContentWrapper>
+  ),
 }
 
 const ACTION_CHOICES = {
@@ -48,6 +68,11 @@ export default {
 
 export const Page = () => {
   const titleChoice = select('Title', Object.keys(TITLE_CHOICES), 'text')
+  const contentChoice = select(
+    'CustomContent',
+    Object.keys(CUSTOM_CONTENT_CHOICES),
+    'description',
+  )
   const actionChoice = select('Actions', Object.keys(ACTION_CHOICES), 'none')
   return (
     <Wrapper tabIndex="0">
@@ -55,7 +80,7 @@ export const Page = () => {
         <p>Top of page</p>
         <Dialog>
           <Title>{TITLE_CHOICES[titleChoice]}</Title>
-          <CustomContent></CustomContent>
+          <CustomContent>{CUSTOM_CONTENT_CHOICES[contentChoice]}</CustomContent>
           <Actions>{ACTION_CHOICES[actionChoice]}</Actions>
         </Dialog>
         <p>Bottom of page</p>

@@ -29,7 +29,7 @@ export const Title = forwardRef(function EdsDialogTitle(
       <StyledTitle id="eds-dialog-title" ref={ref} {...props}>
         {children}
       </StyledTitle>
-      <Divider color="medium" variant="small" />
+      {children && <Divider color="medium" variant="small" />}
     </Fragment>
   )
 })

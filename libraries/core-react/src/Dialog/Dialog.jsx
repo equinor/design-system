@@ -30,9 +30,9 @@ export const Dialog = forwardRef(function EdsDialog(
   return (
     <StyledDialog
       role="dialog"
-      aria-labelled-by="eds-dialog-title"
-      aria-described-by="eds-dialog-customcontent"
-      aria-modal="true"
+      ariaLabelledBy="eds-dialog-title"
+      ariaDescribedBy="eds-dialog-customcontent"
+      ariaModal="true"
       {...props}
       ref={ref}
     >
