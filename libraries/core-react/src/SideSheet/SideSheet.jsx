@@ -13,9 +13,11 @@ const icons = {
 Icon.add(icons)
 
 const StyledSideSheet = styled.div`
-  /* height: 100%;
+  height: 100%;
   position: absolute;
-  z-index: inherit top; */
+  top: 0px;
+  left: 0px;
+  z-index: inherit top;
   box-sizing: border-box;
   border-left: 2px solid #f7f7f7;
   background-color: #ffffff;
@@ -33,7 +35,7 @@ const Wrapper = styled.div`
 `
 
 export const SideSheet = forwardRef(function SideSheet(
-  { size, title, children, className },
+  { size, title, children, className, onClick },
   ref,
 ) {
   let width
@@ -54,7 +56,7 @@ export const SideSheet = forwardRef(function SideSheet(
     <StyledSideSheet {...props} className={className} ref={ref}>
       <Wrapper>
         <Typography variant="h2">{title}</Typography>
-        <Button variant="ghost_icon">
+        <Button variant="ghost_icon" onClick={onClick}>
           <Icon name="clear" title="close" />
         </Button>
       </Wrapper>
@@ -70,7 +72,9 @@ SideSheet.propTypes = {
   title: PropTypes.string,
   // Width of Side Sheet
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']),
-  // Content, any type of content
+  // OnClick function (close)
+  onClick: PropTypes.func,
+  // Any type of content
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -81,5 +85,6 @@ SideSheet.defaultProps = {
   size: 'medium',
   title: '',
   className: '',
+  onClick: undefined,
   children: undefined,
 }
