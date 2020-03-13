@@ -15,6 +15,7 @@ Icon.add(icons)
 const StyledSideSheet = styled.div`
   height: 100%;
   position: absolute;
+  z-index: 1;
   top: 0px;
   left: 0px;
   z-index: inherit top;
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
 `
 
 export const SideSheet = forwardRef(function SideSheet(
-  { size, title, children, className, onClick },
+  { size, title, children, className, open, onClose },
   ref,
 ) {
   let width
@@ -52,17 +53,19 @@ export const SideSheet = forwardRef(function SideSheet(
   const props = {
     width,
   }
-  return (
+
+  // Controller must set open={false} when pressing the close button
+  return open ? (
     <StyledSideSheet {...props} className={className} ref={ref}>
       <Wrapper>
         <Typography variant="h2">{title}</Typography>
-        <Button variant="ghost_icon" onClick={onClick}>
+        <Button variant="ghost_icon" onClick={onClose}>
           <Icon name="clear" title="close" />
         </Button>
       </Wrapper>
       {children}
     </StyledSideSheet>
-  )
+  ) : null
 })
 
 // SideSheet.displayName = 'eds-sidesheet'
@@ -73,7 +76,9 @@ SideSheet.propTypes = {
   // Width of Side Sheet
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']),
   // OnClick function (close)
-  onClick: PropTypes.func,
+  onClose: PropTypes.func,
+  // Open / close
+  open: PropTypes.bool,
   // Any type of content
   /** @ignore */
   children: PropTypes.node,
@@ -85,6 +90,7 @@ SideSheet.defaultProps = {
   size: 'medium',
   title: '',
   className: '',
-  onClick: undefined,
+  open: true,
+  onClose: undefined,
   children: undefined,
 }

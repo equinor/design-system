@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withKnobs } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { SideSheet, Typography } from '@equinor/eds-core-react'
+import { SideSheet, Typography, Button } from '@equinor/eds-core-react'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -30,54 +30,110 @@ export default {
   component: SideSheet,
 }
 
-export const Small = () => (
-  <Wrapper>
-    <SideSheet size="small" title="Small">
-      <Child variant="outlined">Children</Child>
-    </SideSheet>
-    <Body>
-      <p>Top of page</p>
-      <p>Middle of page</p>
-      <p>Bottom of page</p>
-    </Body>
-  </Wrapper>
-)
+export function Small() {
+  const [toggle, setToggle] = useState(true)
 
-export const Medium = () => (
-  <Wrapper>
-    <SideSheet size="medium" title="Medium">
-      <Child variant="outlined">Children</Child>
-    </SideSheet>
-    <Body>
-      <p>Top of page</p>
-      <p>Middle of page</p>
-      <p>Bottom of page</p>
-    </Body>
-  </Wrapper>
-)
+  return (
+    <Wrapper>
+      <SideSheet
+        size="small"
+        title="Small"
+        open={toggle}
+        onClose={() => setToggle(!toggle)}
+      >
+        <Child variant="outlined">Children</Child>
+      </SideSheet>
+      <Body>
+        <div>
+          <p>Top of page</p>
+          <Button variant="outlined" onClick={() => setToggle(!toggle)}>
+            Toggle Sidesheet
+          </Button>
+        </div>
+        <p>Middle of page</p>
+        <p>Bottom of page</p>
+      </Body>
+    </Wrapper>
+  )
+}
 
-export const Large = () => (
-  <Wrapper>
-    <SideSheet size="large" title="Large">
-      <Child variant="outlined">Children</Child>
-    </SideSheet>
-    <Body>
-      <p>Top of page</p>
-      <p>Middle of page</p>
-      <p>Bottom of page</p>
-    </Body>
-  </Wrapper>
-)
+export function Medium() {
+  const [toggle, setToggle] = useState(true)
 
-export const XLarge = () => (
-  <Wrapper>
-    <SideSheet size="xlarge" title="X Large">
-      <Child variant="outlined">Children</Child>
-    </SideSheet>
-    <Body>
-      <p>Top of page</p>
-      <p>Middle of page</p>
-      <p>Bottom of page</p>
-    </Body>
-  </Wrapper>
-)
+  return (
+    <Wrapper>
+      <SideSheet
+        size="medium"
+        title="Medium"
+        open={toggle}
+        onClose={() => setToggle(!toggle)}
+      >
+        <Child variant="outlined">Children</Child>
+      </SideSheet>
+      <Body>
+        <div>
+          <p>Top of page</p>
+          <Button variant="outlined" onClick={() => setToggle(!toggle)}>
+            Toggle Sidesheet
+          </Button>
+        </div>
+        <p>Middle of page</p>
+        <p>Bottom of page</p>
+      </Body>
+    </Wrapper>
+  )
+}
+
+export function Large() {
+  const [toggle, setToggle] = useState(true)
+
+  return (
+    <Wrapper>
+      <SideSheet
+        size="large"
+        title="Large"
+        open={toggle}
+        onClose={() => setToggle(!toggle)}
+      >
+        <Child variant="outlined">Children</Child>
+      </SideSheet>
+      <Body>
+        <div>
+          <p>Top of page</p>
+          <Button variant="outlined" onClick={() => setToggle(!toggle)}>
+            Toggle Sidesheet
+          </Button>
+        </div>
+        <p>Middle of page</p>
+        <p>Bottom of page</p>
+      </Body>
+    </Wrapper>
+  )
+}
+
+export function XLarge() {
+  const [toggle, setToggle] = useState(true)
+
+  return (
+    <Wrapper>
+      <SideSheet
+        size="xlarge"
+        title="X Large"
+        open={toggle}
+        onClose={() => setToggle(!toggle)}
+      >
+        <Child variant="outlined">Children</Child>
+      </SideSheet>
+      <Body>
+        <div>
+          <p>Top of page</p>
+          <Button variant="outlined" onClick={() => setToggle(!toggle)}>
+            Toggle Sidesheet
+          </Button>
+        </div>
+        <p>Middle of page</p>
+        <p>Bottom of page</p>
+      </Body>
+    </Wrapper>
+  )
+}
