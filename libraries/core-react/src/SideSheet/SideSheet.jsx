@@ -2,15 +2,19 @@ import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
+import { spacingsTemplate } from '../_common/templates'
 import { Typography } from '../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
+import { sidesheet as tokens } from './SideSheet.tokens'
 
 const icons = {
   clear,
 }
 
 Icon.add(icons)
+
+const { background, spacings, border } = tokens
 
 const StyledSideSheet = styled.div`
   height: 100%;
@@ -20,10 +24,11 @@ const StyledSideSheet = styled.div`
   left: 0px;
   z-index: inherit top;
   box-sizing: border-box;
-  border-left: 2px solid #f7f7f7;
-  background-color: #ffffff;
-  padding: 16px 16px 0 16px;
+  border-bottom: ${border.left.width} solid ${border.left.color};
+  background: ${background};
   width: ${(props) => props.width};
+
+  ${spacingsTemplate(spacings)};
 `
 
 const Wrapper = styled.div`
@@ -59,8 +64,8 @@ export const SideSheet = forwardRef(function SideSheet(
     <StyledSideSheet {...props} className={className} ref={ref}>
       <Wrapper>
         <Typography variant="h2">{title}</Typography>
-        <Button variant="ghost_icon" onClick={onClose}>
-          <Icon name="clear" title="close" />
+        <Button variant="ghost_icon" onClick={onClose} title="Close">
+          <Icon name="clear" title="Close" />
         </Button>
       </Wrapper>
       {children}
