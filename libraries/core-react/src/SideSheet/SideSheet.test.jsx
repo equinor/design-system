@@ -16,19 +16,20 @@ afterEach(cleanup)
 
 describe('SideSheet', () => {
   it('Has correct size', () => {
-    const { container } = render(<SideSheet size="large" title="Title" />)
+    const { sidesheet } = render(<SideSheet size="large" title="Title" />)
 
-    expect(container.firstChild).toHaveAttribute('width', '640')
+    expect(sidesheet.firstChild).toHaveAttribute('width', '640')
   })
-  it('Has correct title', () => {
-    const { container } = render(<SideSheet size="large" title="Title" />)
+  it('Has provided necessary props', () => {
+    const { sidesheet } = render(<SideSheet size="large" title="Title" />)
 
-    expect(container.firstChild).toHaveAttribute('width', '640')
+    expect(sidesheet(title)).toBeDefined()
+    expect(sidesheet(size)).toBeDefined()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledSidesheet size="large" title="Title" />)
-    expect(container.firstChild).toHaveStyleRule('position', 'relative')
-    expect(container.firstChild).toHaveStyleRule('height', '100px')
-    expect(container.firstChild).toHaveStyleRule('width', '100px')
+    const { sidesheet } = render(<StyledSidesheet size="large" title="Title" />)
+    expect(sidesheet.firstChild).toHaveStyleRule('position', 'relative')
+    expect(sidesheet.firstChild).toHaveStyleRule('height', '100px')
+    expect(sidesheet.firstChild).toHaveStyleRule('width', '100px')
   })
 })
