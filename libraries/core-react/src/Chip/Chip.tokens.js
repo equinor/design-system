@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { tokens } from '@equinor/eds-tokens'
 
 const {
@@ -19,6 +20,8 @@ const {
       focus: { rgba: focusColor },
       primary__selected_highlight: { rgba: activeColor },
       danger__resting: { rgba: errorColor },
+      danger__hover: { rgba: errorColorHover },
+      danger__highlight: { rgba: errorBackgroundHover },
     },
   },
   shape: {
@@ -69,7 +72,7 @@ export const chip = {
     border: {
       type: 'dashed',
       color: focusColor,
-      width: '2px',
+      width: '1px',
       radius: borderRadius,
     },
   },
@@ -79,9 +82,17 @@ export const chip = {
   error: {
     border: {
       color: errorColor,
+      width: '1px',
     },
     typography: {
       color: errorColor,
+    },
+    icon: {
+      color: errorColor,
+      background: errorBackgroundHover,
+    },
+    hover: {
+      color: errorColorHover,
     },
   },
 }

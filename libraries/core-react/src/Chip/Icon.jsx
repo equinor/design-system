@@ -5,7 +5,7 @@ import { chip as tokens } from './Chip.tokens'
 
 Icon_.add({ close })
 
-const { enabled, hover } = tokens
+const { enabled, hover, error } = tokens
 
 export const Icon = styled(Icon_)`
   cursor: pointer;
@@ -14,10 +14,24 @@ export const Icon = styled(Icon_)`
   z-index: 1000;
 
   &:hover {
-    background: ${hover.icon.background};
-    svg {
-      fill: ${hover.typography.color};
-    }
+    ${({ variant }) => {
+      switch (variant) {
+        case 'error':
+          return css`
+            background: ${error.icon.background};
+            svg {
+              fill: ${error.icon.color};
+            }
+          `
+        default:
+          return css`
+            background: ${hover.icon.background};
+            svg {
+              fill: ${hover.typography.color};
+            }
+          `
+      }
+    }};
   }
 
   ${({ disabled }) =>

@@ -18,6 +18,7 @@ const {
   focus,
   active: activeToken,
   hover,
+  error,
 } = tokens
 
 const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
@@ -49,12 +50,6 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
   ${spacingsTemplate(enabled.spacings)}
   ${typographyTemplate(enabled.typography)}
 
-  ${({ active }) =>
-    active &&
-    css`
-      background: ${activeToken.background};
-    `}
-
   ${({ clickable, deletable }) =>
     (clickable || deletable) &&
     css`
@@ -72,6 +67,41 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
         cursor: pointer;
       }
     `}
+
+    ${({ variant, clickable, deletable }) => {
+      switch (variant) {
+        case 'active':
+          return css`
+            background: ${activeToken.background};
+          `
+        case 'error':
+          return css`
+            border-color: ${error.border.color};
+            border-width: ${error.border.width};
+            color: ${error.typography.color};
+            svg {
+              fill: ${error.icon.color};
+            }
+
+            &:hover {
+              border-color: ${error.hover.color};
+              color: ${error.hover.color};
+              svg {
+                fill: ${error.hover.color};
+              }
+            }
+            ${(clickable || deletable) &&
+              css`
+                &:focus {
+                  border: ${focus.border.width} ${focus.border.type}
+                    ${error.border.color};
+                }
+              `}
+          `
+        default:
+          return ''
+      }
+    }}
 
   ${({ disabled }) =>
     disabled &&
@@ -106,7 +136,7 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
 `
 
 export const Chip = forwardRef(function Chips(
-  { children, onDelete, disabled, onClick, ...rest },
+  { children, onDelete, disabled, onClick, variant, ...rest },
   ref,
 ) {
   const handleDelete = disabled ? undefined : onDelete
@@ -123,6 +153,7 @@ export const Chip = forwardRef(function Chips(
     deletable,
     clickable,
     onlyChild,
+    variant,
   }
 
   const handleKeyPress = (event) => {
@@ -160,6 +191,7 @@ export const Chip = forwardRef(function Chips(
         <Icon
           name="close"
           disabled={disabled}
+          variant={variant}
           onClick={(e) => {
             e.stopPropagation()
             if (deletable) {
@@ -182,19 +214,19 @@ Chip.propTypes = {
   children: PropTypes.node,
   /** Disabled */
   disabled: PropTypes.bool,
-  /** Active */
-  active: PropTypes.bool,
   /** Delete callback */
   onDelete: PropTypes.func,
   /** Click callback */
   onClick: PropTypes.func,
+  /** Variant */
+  variant: PropTypes.oneOf(['active', 'error', 'default']),
 }
 
 Chip.defaultProps = {
   className: '',
   children: [],
   disabled: false,
-  active: false,
   onDelete: undefined,
   onClick: undefined,
+  variant: 'default',
 }

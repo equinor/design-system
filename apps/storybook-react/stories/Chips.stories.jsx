@@ -19,7 +19,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: grid;
   grid-gap: 32px;
-  grid-template-columns: repeat(6, fit-content(100%));
+  grid-template-columns: repeat(3, fit-content(100%));
 `
 
 export default {
@@ -36,7 +36,17 @@ export const Examples = () => (
     <Typography variant="h2">Text</Typography>
     <Wrapper>
       <Chip>normal</Chip>
-      <Chip active>active</Chip>
+      <Chip variant="active">active</Chip>
+      <Chip variant="active" onDelete={onDelete}>
+        active + deletable
+      </Chip>
+      <Chip variant="error">error</Chip>
+      <Chip variant="error" onDelete={onDelete}>
+        error + deletable
+      </Chip>
+      <Chip variant="error" onDelete={onDelete} onClick={onClick}>
+        error + deletable
+      </Chip>
       <Chip onClick={onClick}>clickable</Chip>
       <Chip onDelete={onDelete}>deletable</Chip>
       <Chip onDelete={onDelete} onClick={onClick}>
@@ -53,9 +63,25 @@ export const Examples = () => (
         <Icon name="save" />
         normal
       </Chip>
-      <Chip active>
+      <Chip variant="active">
         <Icon name="save" />
         active
+      </Chip>
+      <Chip variant="active" onDelete={onDelete}>
+        <Icon name="save" />
+        active + deletable
+      </Chip>
+      <Chip variant="error">
+        <Icon name="save" />
+        error
+      </Chip>
+      <Chip variant="error" onDelete={onDelete}>
+        <Icon name="save" />
+        error + deletable
+      </Chip>
+      <Chip variant="error" onDelete={onDelete} onClick={onClick}>
+        <Icon name="save" />
+        error + deletable
       </Chip>
       <Chip onClick={onClick}>
         <Icon name="save" />
@@ -78,27 +104,43 @@ export const Examples = () => (
     <Typography variant="h2">Text + Avatar</Typography>
     <Wrapper>
       <Chip>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         normal
       </Chip>
-      <Chip active>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+      <Chip variant="active">
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         active
       </Chip>
+      <Chip variant="active" onDelete={onDelete}>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        active + deletable
+      </Chip>
+      <Chip variant="error">
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        error
+      </Chip>
+      <Chip variant="error" onDelete={onDelete}>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        error + deletable
+      </Chip>
+      <Chip variant="error" onDelete={onDelete} onClick={onClick}>
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        error + deletable + clickable
+      </Chip>
       <Chip onClick={onClick}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         clickable
       </Chip>
       <Chip onDelete={onDelete}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         deletable
       </Chip>
       <Chip onDelete={onDelete} onClick={onClick}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         deletable + clickable
       </Chip>
       <Chip onDelete={onDelete} disabled>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" />
+        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         disabled
       </Chip>
     </Wrapper>
