@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { dialog as tokens } from './Dialog.tokens'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
+
+import styled from 'styled-components'
 
 const {
   description: { text },
@@ -11,7 +12,9 @@ const {
 
 const StyledCustomContent = styled.div`
   /* grid-area: center; */
-  min-height: 16px;
+  height: 56px;
+  margin-bottom: 16px;
+  overflow-y: auto;
 
   ${spacingsTemplate(spacingsContent)};
   ${typographyTemplate(text)}
@@ -35,9 +38,12 @@ CustomContent.propTypes = {
   children: PropTypes.node,
   /** @ignore */
   className: PropTypes.string,
+  /** @ignore */
+  scrollable: PropTypes.boolean,
 }
 
 CustomContent.defaultProps = {
   className: undefined,
   children: undefined,
+  scrollable: false,
 }
