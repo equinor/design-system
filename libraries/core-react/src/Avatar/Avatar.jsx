@@ -5,6 +5,7 @@ import { avatar as tokens } from './Avatar.tokens'
 
 const {
   enabled: { border },
+  disabled: { image: disabledImage },
 } = tokens
 
 const StyledAvatar = styled.div`
@@ -26,7 +27,12 @@ const StyledImage = styled.img`
   height: 100%;
   text-align: center;
   color: transparent;
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: ${disabledImage.opacity};
+    `};
 `
 
 export const Avatar = forwardRef(function Avatar(

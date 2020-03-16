@@ -4,4 +4,9 @@ export const avatar = {
       radius: '50%',
     },
   },
+  disabled: {
+    image: {
+      opacity: '0.5',
+    },
+  },
 }
