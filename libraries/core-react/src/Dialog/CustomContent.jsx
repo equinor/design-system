@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import { dialog as tokens } from './Dialog.tokens'
+import styled from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 
-import styled from 'styled-components'
+import { dialog as tokens } from './Dialog.tokens'
 
 const {
   description: { text },
@@ -39,7 +39,7 @@ CustomContent.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
-  scrollable: PropTypes.boolean,
+  scrollable: PropTypes.bool,
 }
 
 CustomContent.defaultProps = {

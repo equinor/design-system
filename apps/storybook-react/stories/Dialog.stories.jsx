@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
-import { withKnobs, select } from '@storybook/addon-knobs'
+import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Dialog, Button } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
-import { knobs } from './Divider.stories'
 
 const { Actions, Title, CustomContent } = Dialog
 
@@ -13,12 +12,12 @@ const Wrapper = styled.div`
 `
 
 const Body = styled.div`
-  height: 100%;
+  height: calc(100% - 64px);
   background: #ebebeb;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  padding: 32px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 32px;
 `
 const TempButtonWrapper = styled.div`
   /* margin: 16px; */
@@ -33,6 +32,7 @@ const Placeholder = styled.div`
   border: 1px dashed #ff9200;
   box-sizing: border-box;
   border-radius: 4px;
+  padding: 8px;
 `
 
 const TITLE_CHOICES = {
@@ -42,9 +42,9 @@ const TITLE_CHOICES = {
 
 const CUSTOM_CONTENT_CHOICES = {
   none: null,
+  empty: <Placeholder>Custom content</Placeholder>,
   description: <p>Small description here.</p>,
-  placeholder: <Placeholder>Placeholder</Placeholder>,
-  scrollable: (
+  scroll: (
     <Fragment>
       <p>
         Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
@@ -73,14 +73,18 @@ export default {
   component: Dialog,
 }
 
-export const Page = () => {
-  const titleChoice = select('Title', Object.keys(TITLE_CHOICES), 'text')
+export const knobs = () => {
+  const titleChoice = select('Title', [...Object.keys(TITLE_CHOICES)], 'text')
   const contentChoice = select(
     'CustomContent',
-    Object.keys(CUSTOM_CONTENT_CHOICES),
+    [...Object.keys(CUSTOM_CONTENT_CHOICES)],
     'description',
   )
-  const actionsChoice = select('Actions', Object.keys(ACTION_CHOICES), 'none')
+  const actionsChoice = select(
+    'Actions',
+    [...Object.keys(ACTION_CHOICES)],
+    'buttons',
+  )
 
   return (
     <Wrapper>
@@ -98,27 +102,6 @@ export const Page = () => {
 }
 
 export const types = () => {
-  const textActionContent = select(
-    'CustomContent',
-    Object.keys(CUSTOM_CONTENT_CHOICES),
-    'description',
-  )
-  const textActionActions = select(
-    'Actions',
-    Object.keys(ACTION_CHOICES),
-    'buttons',
-  )
-  const placeholderActionContent = select(
-    'CustomContent',
-    Object.keys(CUSTOM_CONTENT_CHOICES),
-    'placeholder',
-  )
-  const placeholderActionActions = select(
-    'Actions',
-    Object.keys(ACTION_CHOICES),
-    'buttons',
-  )
-
   return (
     <Wrapper>
       <Body>
@@ -129,21 +112,20 @@ export const types = () => {
           No title + text + actions */}
         <Dialog>
           <Title>Text + actions</Title>
-          <CustomContent>
-            {CUSTOM_CONTENT_CHOICES[textActionContent]}
-          </CustomContent>
-          <Actions tabIndex="0">{ACTION_CHOICES[textActionActions]}</Actions>
+          <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
+          <Actions tabIndex="0">{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
         <Dialog>
           <Title>Placeholder + actions</Title>
-          <CustomContent>
-            {CUSTOM_CONTENT_CHOICES[placeholderActionContent]}
-          </CustomContent>
-          <Actions tabIndex="0">
-            {ACTION_CHOICES[placeholderActionActions]}
-          </Actions>
+          <CustomContent>{CUSTOM_CONTENT_CHOICES['empty']}</CustomContent>
+          <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
       </Body>
     </Wrapper>
   )
+}
+
+knobs.story = {
+  name: 'With knobs',
+  decorators: [withKnobs],
 }
