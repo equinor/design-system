@@ -10,4 +10,5 @@ export { List } from './List'
 export { Tabs } from './Tabs'
 export { TopBar } from './TopBar'
 export { Dialog } from './Dialog'
+export { Scrim } from './Scrim'
 /* eslint-enable */

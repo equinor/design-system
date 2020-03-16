@@ -1,24 +1,27 @@
 import React, { Fragment } from 'react'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
-import { Dialog, Button } from '@equinor/eds-core-react'
+import { Dialog, Button, Scrim } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
 
 const { Actions, Title, CustomContent } = Dialog
 
-const Wrapper = styled.div`
-  height: 100vh;
-  overflow: auto;
-`
-
 const Body = styled.div`
-  height: calc(100% - 64px);
+  height: calc(100vh - 64px);
   background: #ebebeb;
   display: grid;
+  grid-template-rows: 1fr auto 1fr;
   padding: 32px;
-  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 32px;
 `
+
+const BodyTypes = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 32px;
+  grid-gap: 32px;
+`
+
 const TempButtonWrapper = styled.div`
   /* margin: 16px; */
   display: grid;
@@ -33,6 +36,8 @@ const Placeholder = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
   padding: 8px;
+  height: calc(100% - 16px);
+  margin-bottom: 8px;
 `
 
 const TITLE_CHOICES = {
@@ -43,6 +48,7 @@ const TITLE_CHOICES = {
 const CUSTOM_CONTENT_CHOICES = {
   none: null,
   empty: <Placeholder>Custom content</Placeholder>,
+  emptyLarge: <Placeholder>Custom content</Placeholder>,
   description: <p>Small description here.</p>,
   scroll: (
     <Fragment>
@@ -87,24 +93,25 @@ export const knobs = () => {
   )
 
   return (
-    <Wrapper>
-      <Body>
-        <p>Top of page</p>
+    <Body>
+      <p>Top of page</p>
+      <p>Center page</p>
+      <p>Bottom of page</p>
+      <Scrim>
         <Dialog>
           <Title>{TITLE_CHOICES[titleChoice]}</Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES[contentChoice]}</CustomContent>
           <Actions tabIndex="0">{ACTION_CHOICES[actionsChoice]}</Actions>
         </Dialog>
-        <p>Bottom of page</p>
-      </Body>
-    </Wrapper>
+      </Scrim>
+    </Body>
   )
 }
 
 export const types = () => {
   return (
-    <Wrapper>
-      <Body>
+    <Scrim>
+      <BodyTypes>
         {/* Text+actions
           Placeholder+actions
           Placeholder
@@ -120,8 +127,23 @@ export const types = () => {
           <CustomContent>{CUSTOM_CONTENT_CHOICES['empty']}</CustomContent>
           <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
-      </Body>
-    </Wrapper>
+        <Dialog>
+          <Title>Placeholder</Title>
+          <CustomContent size="large">
+            {CUSTOM_CONTENT_CHOICES['emptyLarge']}
+          </CustomContent>
+        </Dialog>
+        <Dialog>
+          <Title>Scrollable + actions</Title>
+          <CustomContent>{CUSTOM_CONTENT_CHOICES['scroll']}</CustomContent>
+          <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
+        </Dialog>
+        <Dialog>
+          <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
+          <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
+        </Dialog>
+      </BodyTypes>
+    </Scrim>
   )
 }
 

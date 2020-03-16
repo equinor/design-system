@@ -40,10 +40,13 @@ CustomContent.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   scrollable: PropTypes.bool,
+  /** @ignore */
+  size: PropTypes.oneOf(['normal', 'large']),
 }
 
 CustomContent.defaultProps = {
   className: undefined,
   children: undefined,
   scrollable: false,
+  size: 'normal',
 }
