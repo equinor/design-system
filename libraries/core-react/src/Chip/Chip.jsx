@@ -191,6 +191,7 @@ export const Chip = forwardRef(function Chips(
       {onDelete && (
         <Icon
           name="close"
+          title="close"
           disabled={disabled}
           variant={variant}
           onClick={(e) => {
