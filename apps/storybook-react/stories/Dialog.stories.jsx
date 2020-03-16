@@ -112,11 +112,6 @@ export const types = () => {
   return (
     <Scrim>
       <BodyTypes>
-        {/* Text+actions
-          Placeholder+actions
-          Placeholder
-          Scrollable placeholder + actions
-          No title + text + actions */}
         <Dialog>
           <Title>Text + actions</Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
