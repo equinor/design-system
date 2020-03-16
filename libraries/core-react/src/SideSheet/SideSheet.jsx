@@ -40,7 +40,7 @@ const Wrapper = styled.div`
   padding-right: 10px;
 `
 
-export const SideSheet = forwardRef(function SideSheet(
+export const SideSheet = forwardRef(function EdsSideSheet(
   { size, title, children, className, open, onClose },
   ref,
 ) {
@@ -73,7 +73,7 @@ export const SideSheet = forwardRef(function SideSheet(
   ) : null
 })
 
-// SideSheet.displayName = 'eds-sidesheet'
+SideSheet.displayName = 'eds-sidesheet'
 
 SideSheet.propTypes = {
   // Title for Side Sheet
