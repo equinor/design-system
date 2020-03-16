@@ -32,11 +32,16 @@ export const Examples = () => (
       <Avatar src={image} size={40}></Avatar>
       <Avatar src={image} size={48}></Avatar>
     </Wrapper>
+    <Typography variant="h2">Disabled</Typography>
+    <Wrapper>
+      <Avatar src={image} disabled></Avatar>
+    </Wrapper>
     <Typography variant="h2">Knobs</Typography>
     <Wrapper>
       <Avatar
         src={text('Source', image)}
         size={select('Sizes', [16, 24, 32, 40, 48], 24)}
+        disabled={boolean('Disabled', false)}
       ></Avatar>
     </Wrapper>
   </Container>
