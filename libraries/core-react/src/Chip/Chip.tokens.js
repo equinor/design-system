@@ -10,6 +10,7 @@ const {
   },
   colors: {
     ui: {
+      background__default: { rgba: backgroundColorDefault },
       background__light: { rgba: backgroundColor },
     },
     interactive: {
@@ -80,6 +81,7 @@ export const chip = {
     background: activeColor,
   },
   error: {
+    background: backgroundColorDefault,
     border: {
       color: errorColor,
       width: '1px',

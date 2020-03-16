@@ -76,6 +76,7 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
           `
         case 'error':
           return css`
+            background: ${error.background};
             border-color: ${error.border.color};
             border-width: ${error.border.width};
             color: ${error.typography.color};
