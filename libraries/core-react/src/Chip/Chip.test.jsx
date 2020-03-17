@@ -15,14 +15,7 @@ const StyledChips = styled(Chip)`
   position: relative;
 `
 
-const {
-  enabled,
-  disabled: disabledToken,
-  focus,
-  active: activeToken,
-  hover,
-  error,
-} = tokens
+const { active: activeToken, error } = tokens
 
 const rgbaTrim = (x) => x.split(' ').join('')
 
