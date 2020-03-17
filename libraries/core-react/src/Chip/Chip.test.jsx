@@ -60,16 +60,16 @@ describe('Chips', () => {
       imageUrl,
     )
   })
-  it('Has called onDelete once with props when close icon is clicked', () => {
+  it('Has called handleDelete once with props when close icon is clicked', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
     let callbackId = ''
-    const onDelete = jest.fn((x) => {
+    const handleDelete = jest.fn((x) => {
       callbackId = x.id
     })
 
     const { queryAllByTitle } = render(
-      <Chip id={chipId} onDelete={onDelete}>
+      <Chip id={chipId} onDelete={handleDelete}>
         {chipText}
       </Chip>,
     )
@@ -78,38 +78,38 @@ describe('Chips', () => {
 
     fireEvent.click(closeIcon)
 
-    expect(onDelete).toHaveBeenCalled()
+    expect(handleDelete).toHaveBeenCalled()
     expect(callbackId).toEqual(chipId)
   })
-  it('Has called onClick once with props when clicked', () => {
+  it('Has called handleClick once with props when clicked', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
     let callbackId = ''
-    const onClick = jest.fn((x) => {
+    const handleClick = jest.fn((x) => {
       callbackId = x.id
     })
 
     const { container } = render(
-      <Chip id={chipId} onClick={onClick}>
+      <Chip id={chipId} onClick={handleClick}>
         {chipText}
       </Chip>,
     )
 
     fireEvent.click(container.firstChild)
 
-    expect(onClick).toHaveBeenCalled()
+    expect(handleClick).toHaveBeenCalled()
     expect(callbackId).toEqual(chipId)
   })
-  it('Has called onClick once with props when pressed Enter', () => {
+  it('Has called handleClick once with props when pressed Enter', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
     let callbackId = ''
-    const onClick = jest.fn((x) => {
+    const handleClick = jest.fn((x) => {
       callbackId = x.id
     })
 
     const { container } = render(
-      <Chip id={chipId} onClick={onClick}>
+      <Chip id={chipId} onClick={handleClick}>
         {chipText}
       </Chip>,
     )
@@ -118,7 +118,7 @@ describe('Chips', () => {
       key: 'Enter',
     })
 
-    expect(onClick).toHaveBeenCalled()
+    expect(handleClick).toHaveBeenCalled()
     expect(callbackId).toEqual(chipId)
   })
   it('Has correct active styling', () => {

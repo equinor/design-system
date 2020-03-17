@@ -28,8 +28,8 @@ export default {
   decorators: [withKnobs],
 }
 
-const onDelete = (x) => console.log('Triggered onDelete!', x)
-const onClick = (x) => console.log('Triggered onClick!', x)
+const handleDelete = (x) => console.log('Triggered handleDelete!', x)
+const handleClick = (x) => console.log('Triggered handleClick!', x)
 
 export const Examples = () => (
   <Container>
@@ -37,22 +37,22 @@ export const Examples = () => (
     <Wrapper>
       <Chip>normal</Chip>
       <Chip variant="active">active</Chip>
-      <Chip variant="active" onDelete={onDelete}>
+      <Chip variant="active" onDelete={handleDelete}>
         active + deletable
       </Chip>
       <Chip variant="error">error</Chip>
-      <Chip variant="error" onDelete={onDelete}>
+      <Chip variant="error" onDelete={handleDelete}>
         error + deletable
       </Chip>
-      <Chip variant="error" onDelete={onDelete} onClick={onClick}>
+      <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
         error + deletable
       </Chip>
-      <Chip onClick={onClick}>clickable</Chip>
-      <Chip onDelete={onDelete}>deletable</Chip>
-      <Chip onDelete={onDelete} onClick={onClick}>
+      <Chip onClick={handleClick}>clickable</Chip>
+      <Chip onDelete={handleDelete}>deletable</Chip>
+      <Chip onDelete={handleDelete} onClick={handleClick}>
         deletable + clickable
       </Chip>
-      <Chip onDelete={onDelete} disabled>
+      <Chip onDelete={handleDelete} disabled>
         disabled
       </Chip>
     </Wrapper>
@@ -67,7 +67,7 @@ export const Examples = () => (
         <Icon name="save" />
         active
       </Chip>
-      <Chip variant="active" onDelete={onDelete}>
+      <Chip variant="active" onDelete={handleDelete}>
         <Icon name="save" />
         active + deletable
       </Chip>
@@ -75,27 +75,27 @@ export const Examples = () => (
         <Icon name="save" />
         error
       </Chip>
-      <Chip variant="error" onDelete={onDelete}>
+      <Chip variant="error" onDelete={handleDelete}>
         <Icon name="save" />
         error + deletable
       </Chip>
-      <Chip variant="error" onDelete={onDelete} onClick={onClick}>
+      <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
         <Icon name="save" />
         error + deletable
       </Chip>
-      <Chip onClick={onClick}>
+      <Chip onClick={handleClick}>
         <Icon name="save" />
         clickable
       </Chip>
-      <Chip onDelete={onDelete}>
+      <Chip onDelete={handleDelete}>
         <Icon name="save" />
         deletable
       </Chip>
-      <Chip onDelete={onDelete} onClick={onClick}>
+      <Chip onDelete={handleDelete} onClick={handleClick}>
         <Icon name="save" />
         deletable + clickable
       </Chip>
-      <Chip onDelete={onDelete} disabled>
+      <Chip onDelete={handleDelete} disabled>
         <Icon name="save" />
         disabled
       </Chip>
@@ -111,7 +111,7 @@ export const Examples = () => (
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         active
       </Chip>
-      <Chip variant="active" onDelete={onDelete}>
+      <Chip variant="active" onDelete={handleDelete}>
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         active + deletable
       </Chip>
@@ -119,27 +119,27 @@ export const Examples = () => (
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         error
       </Chip>
-      <Chip variant="error" onDelete={onDelete}>
+      <Chip variant="error" onDelete={handleDelete}>
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         error + deletable
       </Chip>
-      <Chip variant="error" onDelete={onDelete} onClick={onClick}>
+      <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         error + deletable + clickable
       </Chip>
-      <Chip onClick={onClick}>
+      <Chip onClick={handleClick}>
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         clickable
       </Chip>
-      <Chip onDelete={onDelete}>
+      <Chip onDelete={handleDelete}>
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         deletable
       </Chip>
-      <Chip onDelete={onDelete} onClick={onClick}>
+      <Chip onDelete={handleDelete} onClick={handleClick}>
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         deletable + clickable
       </Chip>
-      <Chip onDelete={onDelete} disabled>
+      <Chip onDelete={handleDelete} disabled>
         <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         disabled
       </Chip>
