@@ -18,6 +18,7 @@ const Body = styled.div`
 const BodyTypes = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
   padding: 32px;
   grid-gap: 32px;
 `
@@ -80,8 +81,7 @@ const ACTION_CHOICES = {
 }
 
 let scrimVisible = false
-
-const onTriggerModal = () => {
+const onTriggerModal = (event) => {
   if (scrimVisible === false) {
     scrimVisible = true
   } else {
@@ -117,7 +117,7 @@ export const knobs = () => {
         <Button onClick={onTriggerModal}>Trigger Dialog</Button>
       </p>
       <p>Bottom of page</p>
-      <Scrim isVisible={true} onTriggerModal={onTriggerModal}>
+      <Scrim isVisible={scrimVisible}>
         <Dialog>
           <Title>{TITLE_CHOICES[titleChoice]}</Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES[contentChoice]}</CustomContent>
@@ -130,7 +130,7 @@ export const knobs = () => {
 
 export const types = () => {
   return (
-    <Scrim isVisible={true} onTriggerModal={onTriggerModal}>
+    <Scrim isVisible={true}>
       <BodyTypes>
         <Dialog>
           <Title>Text + actions</Title>

@@ -44,11 +44,17 @@ export const Scrim = forwardRef(function EdsScrim(
     }
   }
 
-  return (
-    <StyledScrim {...props} ref={ref} onKeyPress={handleKeyPress}>
-      {isVisible && children}
+  return isVisible ? (
+    <StyledScrim
+      isVisible={isVisible}
+      onTriggerModal={onTriggerModal}
+      onKeyPress={handleKeyPress}
+      {...props}
+      ref={ref}
+    >
+      {children}
     </StyledScrim>
-  )
+  ) : null
 })
 
 Scrim.displayName = 'eds-scrim'

@@ -15,7 +15,7 @@ const {
 
 const StyledDialog = styled.div`
   width: ${width};
-  height: ${height};
+  min-height: ${height};
   box-shadow: ${boxShadow};
   background: ${background};
   border-radius: ${borderRadius};
