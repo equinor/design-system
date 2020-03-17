@@ -9,7 +9,7 @@ const { enabled, hover, error } = tokens
 
 export const Icon = styled(Icon_)`
   cursor: pointer;
-  padding: 2px;
+  padding: 1px;
   border-radius: ${enabled.icon.border.radius};
   z-index: 1000;
 
