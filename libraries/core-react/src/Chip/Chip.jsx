@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
@@ -47,15 +47,19 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
     }
   }
 
+  &:focus {
+    outline: none;
+  }
+
   ${bordersTemplate(enabled.border)}
   ${spacingsTemplate(enabled.spacings)}
   ${typographyTemplate(enabled.typography)}
 
-  ${({ clickable, deletable }) =>
+  ${({ clickable, deletable, focusVisible }) =>
     (clickable || deletable) &&
+    focusVisible &&
     css`
       &:focus {
-        outline: none;
         border-radius: ${focus.border.radius};
         border: ${focus.border.width} ${focus.border.type} ${focus.border.color};
       }
@@ -141,6 +145,8 @@ export const Chip = forwardRef(function Chips(
   { children, onDelete, disabled, onClick, variant, ...rest },
   ref,
 ) {
+  const [focusVisible, setFocusVisible] = useState(true)
+
   const handleDelete = disabled ? undefined : onDelete
   const handleClick = disabled ? undefined : onClick
 
@@ -156,10 +162,12 @@ export const Chip = forwardRef(function Chips(
     clickable,
     onlyChild,
     variant,
+    focusVisible,
   }
 
   const handleKeyPress = (event) => {
     const { key } = event
+    setFocusVisible(true)
     if (key === 'Enter') {
       if (deletable) {
         handleDelete(props)
@@ -169,6 +177,14 @@ export const Chip = forwardRef(function Chips(
         handleClick(props)
       }
     }
+  }
+
+  const handleMouseDown = () => {
+    setFocusVisible(false)
+  }
+
+  const handleBlur = () => {
+    setFocusVisible(true)
   }
 
   const resizedChildren = React.Children.map(children, (child) => {
@@ -185,8 +201,10 @@ export const Chip = forwardRef(function Chips(
   return (
     <StyledChips
       {...props}
+      onBlur={handleBlur}
       onClick={(e) => clickable && handleClick(props, e)}
       onKeyPress={handleKeyPress}
+      onMouseDown={handleMouseDown}
     >
       {resizedChildren}
       {onDelete && (
