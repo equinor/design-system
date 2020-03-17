@@ -2,8 +2,9 @@ import React from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Avatar, Typography } from '@equinor/eds-core-react'
+import catImg from '../images/cat.jpg'
 
-const image = 'https://i.imgur.com/UM3mrju.jpg'
+const image = catImg
 
 const Container = styled.div`
   margin: 32px;
@@ -40,7 +41,7 @@ export const Examples = () => (
     <Wrapper>
       <Avatar
         alt="avatar"
-        src={text('Source', image)}
+        src={text('Source', 'https://i.imgur.com/UM3mrju.jpg')}
         size={select('Sizes', [16, 24, 32, 40, 48], 24)}
         disabled={boolean('Disabled', false)}
       ></Avatar>

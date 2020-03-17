@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Icon, Chip, Avatar, Typography } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
+import catImg from '../images/cat.jpg'
 
 const icons = {
   save,
@@ -105,43 +106,43 @@ export const Examples = () => (
     <Typography variant="h2">Text + Avatar</Typography>
     <Wrapper>
       <Chip>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         normal
       </Chip>
       <Chip variant="active">
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         active
       </Chip>
       <Chip variant="active" onDelete={handleDelete}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         active + deletable
       </Chip>
       <Chip variant="error">
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         error
       </Chip>
       <Chip variant="error" onDelete={handleDelete}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         error + deletable
       </Chip>
       <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         error + deletable + clickable
       </Chip>
       <Chip onClick={handleClick}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         clickable
       </Chip>
       <Chip onDelete={handleDelete}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         deletable
       </Chip>
       <Chip onDelete={handleDelete} onClick={handleClick}>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         deletable + clickable
       </Chip>
       <Chip onDelete={handleDelete} disabled>
-        <Avatar src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        <Avatar src={catImg} alt="cat" />
         disabled
       </Chip>
     </Wrapper>
