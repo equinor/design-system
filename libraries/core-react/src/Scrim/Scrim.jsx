@@ -15,10 +15,10 @@ const StyledScrim = styled.div.attrs(({ isVisible }) => ({
   z-index: ${zIndex};
   top: 0;
   left: 0;
-  /* display: none;
-  visibility: hidden; */
-  display: flex;
-  visibility: visible;
+  display: none;
+  visibility: hidden;
+  /* display: flex;
+  visibility: visible; */
   align-items: center;
   justify-content: center;
 
