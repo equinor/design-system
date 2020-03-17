@@ -23,7 +23,7 @@ afterEach(cleanup)
 
 describe('Chips', () => {
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledChips />)
+    const { container } = render(<StyledChips>styled chip</StyledChips>)
     expect(container.firstChild).toHaveStyleRule('position', 'relative')
   })
   it('Has provided text', () => {
@@ -49,7 +49,7 @@ describe('Chips', () => {
     const imageUrl = 'https://i.imgur.com/UM3mrju.jpg'
     const { queryByText, queryByTestId } = render(
       <Chip>
-        <Avatar src={imageUrl} data-testid={avatarTestId} />
+        <Avatar src={imageUrl} data-testid={avatarTestId} alt="avatar" />
         {chipText}
       </Chip>,
     )

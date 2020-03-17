@@ -69,7 +69,7 @@ Avatar.propTypes = {
   /** Image source */
   src: PropTypes.string,
   /** Alt image description */
-  alt: PropTypes.string,
+  alt: PropTypes.string.isRequired,
   /** Size */
   size: PropTypes.oneOf([16, 24, 32, 40, 48]),
   /** Disabled */
@@ -80,7 +80,6 @@ Avatar.defaultProps = {
   className: '',
   children: [],
   src: null,
-  alt: null,
   size: 24,
   disabled: false,
 }
