@@ -1,5 +1,6 @@
 import React from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Icon, Chip, Avatar, Typography } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
@@ -28,8 +29,8 @@ export default {
   decorators: [withKnobs],
 }
 
-const handleDelete = (x) => console.log('Triggered handleDelete!', x)
-const handleClick = (x) => console.log('Triggered handleClick!', x)
+const handleDelete = action('onDelete')
+const handleClick = action('onClick')
 
 export const Examples = () => (
   <Container>

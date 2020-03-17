@@ -170,11 +170,11 @@ export const Chip = forwardRef(function Chips(
     setFocusVisible(true)
     if (key === 'Enter') {
       if (deletable) {
-        handleDelete(props)
+        handleDelete(props, event)
       }
       // Delete takes presidens, else click action is activated
       if (clickable && !deletable) {
-        handleClick(props)
+        handleClick(props, event)
       }
     }
   }
