@@ -23,6 +23,7 @@ const {
 
 const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
   tabIndex: clickable || deletable ? 0 : null,
+  role: clickable && 'button',
 }))`
   background: ${enabled.background};
   height: ${enabled.height};
