@@ -12,8 +12,9 @@ const {
 
 const StyledCustomContent = styled.div`
   /* grid-area: center; */
+  display: inline-block;
   height: 56px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   overflow-y: auto;
 
   ${spacingsTemplate(spacingsContent)};

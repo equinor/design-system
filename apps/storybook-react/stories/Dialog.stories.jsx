@@ -48,7 +48,12 @@ const TITLE_CHOICES = {
 const CUSTOM_CONTENT_CHOICES = {
   none: null,
   empty: <Placeholder>Custom content</Placeholder>,
-  emptyLarge: <Placeholder>Custom content</Placeholder>,
+  emptyLarge: (
+    <Placeholder>
+      Custom content in a larger placeholder. No actions, only ESC or timedelay?
+      Test testestsetsest
+    </Placeholder>
+  ),
   description: <p>Small description here.</p>,
   scroll: (
     <Fragment>
@@ -74,6 +79,17 @@ const ACTION_CHOICES = {
   ),
 }
 
+let scrimVisible = false
+
+const onTriggerModal = () => {
+  if (scrimVisible === false) {
+    scrimVisible = true
+  } else {
+    scrimVisible = false
+  }
+  console.log('Modal', scrimVisible)
+}
+
 export default {
   title: 'Components|Dialog',
   component: Dialog,
@@ -95,9 +111,13 @@ export const knobs = () => {
   return (
     <Body>
       <p>Top of page</p>
-      <p>Center page</p>
+      <p>
+        Center page. <br />
+        <br />
+        <Button onClick={onTriggerModal}>Trigger Dialog</Button>
+      </p>
       <p>Bottom of page</p>
-      <Scrim>
+      <Scrim isVisible={true} onTriggerModal={onTriggerModal}>
         <Dialog>
           <Title>{TITLE_CHOICES[titleChoice]}</Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES[contentChoice]}</CustomContent>
@@ -110,7 +130,7 @@ export const knobs = () => {
 
 export const types = () => {
   return (
-    <Scrim>
+    <Scrim isVisible={true} onTriggerModal={onTriggerModal}>
       <BodyTypes>
         <Dialog>
           <Title>Text + actions</Title>
