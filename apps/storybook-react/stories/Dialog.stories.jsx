@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Dialog, Button, Scrim } from '@equinor/eds-core-react'
 
@@ -38,7 +38,9 @@ const Placeholder = styled.div`
   border-radius: 4px;
   padding: 8px;
   height: calc(100% - 16px);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  width: 100%;
+  display: inline-block;
 `
 
 const TITLE_CHOICES = {
@@ -80,22 +82,13 @@ const ACTION_CHOICES = {
   ),
 }
 
-let scrimVisible = false
-const onTriggerModal = (event) => {
-  if (scrimVisible === false) {
-    scrimVisible = true
-  } else {
-    scrimVisible = false
-  }
-  console.log('Modal', scrimVisible)
-}
-
 export default {
   title: 'Components|Dialog',
   component: Dialog,
 }
 
 export const knobs = () => {
+  const [visibleScrim, setVisibleScrim] = useState(false)
   const titleChoice = select('Title', [...Object.keys(TITLE_CHOICES)], 'text')
   const contentChoice = select(
     'CustomContent',
@@ -114,10 +107,10 @@ export const knobs = () => {
       <p>
         Center page. <br />
         <br />
-        <Button onClick={onTriggerModal}>Trigger Dialog</Button>
+        <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
       </p>
       <p>Bottom of page</p>
-      <Scrim isVisible={scrimVisible}>
+      <Scrim isVisible={visibleScrim}>
         <Dialog>
           <Title>{TITLE_CHOICES[titleChoice]}</Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES[contentChoice]}</CustomContent>
@@ -150,7 +143,9 @@ export const types = () => {
         </Dialog>
         <Dialog>
           <Title>Scrollable + actions</Title>
-          <CustomContent>{CUSTOM_CONTENT_CHOICES['scroll']}</CustomContent>
+          <CustomContent scrollable={true}>
+            {CUSTOM_CONTENT_CHOICES['scroll']}
+          </CustomContent>
           <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
         <Dialog>

@@ -29,6 +29,7 @@ export const Dialog = forwardRef(function EdsDialog(
 ) {
   return (
     <StyledDialog
+      tabindex="0"
       role="dialog"
       ariaLabelledBy="eds-dialog-title"
       ariaDescribedBy="eds-dialog-customcontent"

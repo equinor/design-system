@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 
 import { dialog as tokens } from './Dialog.tokens'
@@ -15,10 +15,20 @@ const StyledCustomContent = styled.div`
   display: inline-block;
   min-height: 56px;
   margin-bottom: 12px;
+  width: calc(100% - 32px);
   /* overflow-y: auto; */
 
   ${spacingsTemplate(spacingsContent)};
   ${typographyTemplate(text)}
+
+  ${({ scrollable }) =>
+    scrollable &&
+    css`
+      min-height: initial;
+      height: 52px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+    `}
 `
 
 export const CustomContent = forwardRef(function EdsDialogCustomContent(
@@ -41,13 +51,10 @@ CustomContent.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   scrollable: PropTypes.bool,
-  /** @ignore */
-  size: PropTypes.oneOf(['normal', 'large']),
 }
 
 CustomContent.defaultProps = {
   className: undefined,
   children: undefined,
   scrollable: false,
-  size: 'normal',
 }

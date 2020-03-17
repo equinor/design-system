@@ -5,9 +5,7 @@ import { scrim as tokens } from './Scrim.tokens'
 
 const { height, width, background, position, zIndex } = tokens
 
-const StyledScrim = styled.div.attrs(({ isVisible }) => ({
-  tabIndex: isVisible ? 0 : null,
-}))`
+const StyledScrim = styled.div`
   width: ${width};
   height: ${height};
   background: ${background};
@@ -31,30 +29,15 @@ const StyledScrim = styled.div.attrs(({ isVisible }) => ({
 `
 
 export const Scrim = forwardRef(function EdsScrim(
-  { children, isVisible, onTriggerModal, ...props },
+  { children, isVisible, ...props },
   ref,
 ) {
-  const handleVisibility = onTriggerModal
-
-  const handleKeyPress = (event) => {
-    console.log(event)
-    const { key } = event
-    if (key === 'Esc') {
-      handleVisibility(event)
-    }
-  }
-
-  return isVisible ? (
-    <StyledScrim
-      isVisible={isVisible}
-      onTriggerModal={onTriggerModal}
-      onKeyPress={handleKeyPress}
-      {...props}
-      ref={ref}
-    >
+  console.log(isVisible)
+  return (
+    <StyledScrim isVisible={isVisible} {...props} ref={ref}>
       {children}
     </StyledScrim>
-  ) : null
+  )
 })
 
 Scrim.displayName = 'eds-scrim'
@@ -65,12 +48,10 @@ Scrim.propTypes = {
   /** @ignore */
   children: PropTypes.node,
   isVisible: PropTypes.bool,
-  onTriggerModal: PropTypes.func,
 }
 
 Scrim.defaultProps = {
   className: '',
   children: undefined,
   isVisible: false,
-  onTriggerModal: undefined,
 }
