@@ -141,7 +141,7 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
 
 `
 
-export const Chip = forwardRef(function Chips(
+export const Chip = forwardRef(function EdsChips(
   { children, onDelete, disabled, onClick, variant, ...rest },
   ref,
 ) {

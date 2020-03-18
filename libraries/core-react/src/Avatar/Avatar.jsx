@@ -35,7 +35,7 @@ const StyledImage = styled.img`
     `};
 `
 
-export const Avatar = forwardRef(function Avatar(
+export const Avatar = forwardRef(function EdsAvatar(
   { src, alt, size, disabled, ...rest },
   ref,
 ) {
