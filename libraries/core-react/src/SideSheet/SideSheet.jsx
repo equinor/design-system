@@ -20,12 +20,11 @@ const StyledSideSheet = styled.div`
   height: 100%;
   position: absolute;
   z-index: 1;
-  top: 0;
   right: 0;
   box-sizing: border-box;
   border-left: ${border.left.width} solid ${border.left.color};
   background: ${background};
-  margin-top: ${({ marginTop }) => marginTop};
+  top: ${({ top }) => top};
   width: ${({ width }) => width};
 
   ${spacingsTemplate(spacings)};
@@ -58,7 +57,7 @@ export const SideSheet = forwardRef(function EdsSideSheet(
     className,
     ref,
     width: tokens[variant].width,
-    marginTop: topBarVisible ? tokens.marginTop : 0,
+    top: topBarVisible ? tokens.top : 0,
   }
 
   // Controller must set open={false} when pressing the close button

@@ -37,7 +37,7 @@ export const sidesheet = {
     right: spacingMedium,
     top: spacingMedium,
   },
-  marginTop: `${topBarHeight}px`,
+  top: `${topBarHeight}px`,
   border: {
     left: { color: borderColor, width: spacingXXS },
   },
