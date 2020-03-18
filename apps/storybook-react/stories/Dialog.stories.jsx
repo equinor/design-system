@@ -116,10 +116,14 @@ export const knobs = () => {
             {CUSTOM_CONTENT_CHOICES[contentChoice]}
           </CustomContent>
           <Actions>
-            <TempButtonWrapper>
-              <Button onClick={() => setVisibleScrim(false)}>Cancel</Button>
-              <Button onClick={() => setVisibleScrim(false)}>OK</Button>
-            </TempButtonWrapper>
+            {actionsChoice === 'buttons' ? (
+              <TempButtonWrapper>
+                <Button onClick={() => setVisibleScrim(false)}>Cancel</Button>
+                <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+              </TempButtonWrapper>
+            ) : (
+              ACTION_CHOICES[actionsChoice]
+            )}
           </Actions>
         </Dialog>
       </Scrim>
