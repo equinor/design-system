@@ -28,6 +28,7 @@ const reduceByValue = (subtractValueWithUnit) => (valueWithUnit) => {
 }
 
 const reduceValueByBorderWidth = reduceByValue(spacingXXS)
+const topBarHeight = 64 // margin necessary for side sheet to appear under TopBar
 
 export const sidesheet = {
   background,
@@ -36,6 +37,7 @@ export const sidesheet = {
     right: spacingMedium,
     top: spacingMedium,
   },
+  marginTop: `${topBarHeight}px`,
   border: {
     left: { color: borderColor, width: spacingXXS },
   },

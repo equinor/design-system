@@ -1,7 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { withKnobs } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { SideSheet, Typography, Button } from '@equinor/eds-core-react'
+import {
+  SideSheet,
+  Typography,
+  Button,
+  TopBar,
+  Icon,
+} from '@equinor/eds-core-react'
+
+import {
+  account_circle,
+  accessible,
+  notifications,
+  fullscreen,
+  grid_on,
+} from '@equinor/eds-icons'
+
+const { Actions, Header, CustomContent } = TopBar
+
+const icons = {
+  account_circle,
+  accessible,
+  notifications,
+  fullscreen,
+  grid_on,
+}
+
+Icon.add(icons)
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -15,6 +41,14 @@ const Body = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+`
+const Icons = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  > * {
+    margin-left: 40px;
+  }
 `
 
 const Child = styled.div`
@@ -35,15 +69,34 @@ export function Small() {
 
   return (
     <Wrapper>
-      <SideSheet
-        size="small"
-        title="Small"
-        open={toggle}
-        onClose={() => setToggle(!toggle)}
-      >
-        <Child variant="outlined">Children</Child>
-      </SideSheet>
+      <TopBar>
+        <Header>
+          <Fragment>
+            <Icon name="grid_on" size={16} />
+            Application name - subtitle
+          </Fragment>
+        </Header>
+        <CustomContent></CustomContent>
+        <Actions>
+          <Icons>
+            <Icon name="account_circle" size={16} title="user" />
+            <Icon name="accessible" size={16} />
+            <Icon name="notifications" size={16} />
+            <Icon name="fullscreen" size={16} />
+          </Icons>
+        </Actions>
+      </TopBar>
+
       <Body>
+        <SideSheet
+          variant="small"
+          title="Small"
+          open={toggle}
+          topBarVisible={true}
+          onClose={() => setToggle(!toggle)}
+        >
+          <Child variant="outlined">Children</Child>
+        </SideSheet>
         <div>
           <p>Top of page</p>
           <Button variant="outlined" onClick={() => setToggle(!toggle)}>
@@ -63,7 +116,7 @@ export function Medium() {
   return (
     <Wrapper>
       <SideSheet
-        size="medium"
+        variant="medium"
         title="Medium"
         open={toggle}
         onClose={() => setToggle(!toggle)}
@@ -90,7 +143,7 @@ export function Large() {
   return (
     <Wrapper>
       <SideSheet
-        size="large"
+        variant="large"
         title="Large"
         open={toggle}
         onClose={() => setToggle(!toggle)}
@@ -117,7 +170,7 @@ export function XLarge() {
   return (
     <Wrapper>
       <SideSheet
-        size="xlarge"
+        variant="xlarge"
         title="X Large"
         open={toggle}
         onClose={() => setToggle(!toggle)}

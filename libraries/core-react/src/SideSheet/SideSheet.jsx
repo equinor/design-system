@@ -25,6 +25,7 @@ const StyledSideSheet = styled.div`
   box-sizing: border-box;
   border-left: ${border.left.width} solid ${border.left.color};
   background: ${background};
+  margin-top: ${({ marginTop }) => marginTop};
   width: ${({ width }) => width};
 
   ${spacingsTemplate(spacings)};
@@ -40,7 +41,16 @@ const Header = styled.div`
 `
 
 export const SideSheet = forwardRef(function EdsSideSheet(
-  { variant, title, children, className, open, onClose, ...rest },
+  {
+    variant,
+    title,
+    children,
+    className,
+    open,
+    onClose,
+    topBarVisible,
+    ...rest
+  },
   ref,
 ) {
   const props = {
@@ -48,12 +58,13 @@ export const SideSheet = forwardRef(function EdsSideSheet(
     className,
     ref,
     width: tokens[variant].width,
+    marginTop: topBarVisible ? tokens.marginTop : 0,
   }
 
   // Controller must set open={false} when pressing the close button
   return (
     open && (
-      <StyledSideSheet {...props}>
+      <StyledSideSheet {...props} id="side-sheet">
         <Header>
           <Typography variant="h2">{title}</Typography>
           <Button variant="ghost_icon" onClick={onClose} title="Close">
@@ -71,12 +82,14 @@ SideSheet.displayName = 'eds-sidesheet'
 SideSheet.propTypes = {
   // Title for Side Sheet
   title: PropTypes.string,
-  // Width of Side Sheet
+  // Variant controls width of Side Sheet
   variant: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']),
   // OnClick function (close)
   onClose: PropTypes.func,
-  // Open / close
+  // Open / close Side Sheet:
   open: PropTypes.bool,
+  // Is Top Bar visible:
+  topBarVisible: PropTypes.bool,
   // Any type of content
   /** @ignore */
   children: PropTypes.node,
@@ -89,6 +102,7 @@ SideSheet.defaultProps = {
   title: '',
   className: '',
   open: true,
+  topBarVisible: false,
   onClose: undefined,
   children: undefined,
 }
