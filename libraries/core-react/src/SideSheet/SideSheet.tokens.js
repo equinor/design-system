@@ -8,7 +8,7 @@ const {
     },
   },
   spacings: {
-    comfortable: { xx_small: spacingXS, medium: spacingMedium },
+    comfortable: { xx_small: spacingXXS, medium: spacingMedium },
   },
 } = tokens
 
@@ -27,7 +27,7 @@ const reduceByValue = (subtractValueWithUnit) => (valueWithUnit) => {
   return valueAndUnit[0] - subtractValueAndUnit[0] + valueAndUnit[1]
 }
 
-const reduceValueByBorderWidth = reduceByValue(spacingXS)
+const reduceValueByBorderWidth = reduceByValue(spacingXXS)
 
 export const sidesheet = {
   background,
@@ -37,7 +37,7 @@ export const sidesheet = {
     top: spacingMedium,
   },
   border: {
-    left: { color: borderColor, width: spacingXS },
+    left: { color: borderColor, width: spacingXXS },
   },
   small: {
     width: '240px',

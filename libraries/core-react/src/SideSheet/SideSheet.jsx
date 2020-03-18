@@ -43,22 +43,11 @@ export const SideSheet = forwardRef(function EdsSideSheet(
   { variant, title, children, className, open, onClose, ...rest },
   ref,
 ) {
-  let width
-  if (variant === 'small') {
-    width = '240px'
-  } else if (variant === 'medium') {
-    width = '320px'
-  } else if (variant === 'large') {
-    width = '480px'
-  } else if (variant === 'xlarge') {
-    width = '640px'
-  }
-
   const props = {
     ...rest,
     className,
     ref,
-    width,
+    width: tokens[variant].width,
   }
 
   // Controller must set open={false} when pressing the close button
