@@ -16,21 +16,23 @@ afterEach(cleanup)
 
 describe('SideSheet', () => {
   it('Works', () => {
-    const { sidesheet } = render(<SideSheet size="large" title="Title" />)
+    const { sidesheet } = render(<SideSheet variant="large" title="Title" />)
 
     expect(sidesheet).toMatchSnapshot()
   })
   it('Has correct width', () => {
-    const { container } = render(<SideSheet size="large" title="Title" />)
+    const { container } = render(<SideSheet variant="large" title="Title" />)
     const sidesheet = container.firstChild
     expect(sidesheet).toHaveStyleRule('width', '480px')
   })
   it('Has provided necessary props', () => {
     const title = 'Title'
-    const size = 'large'
-    const { queryByText } = render(<SideSheet size={size} title={title} />)
+    const variant = 'large'
+    const { queryByText } = render(
+      <SideSheet variant={variant} title={title} />,
+    )
     expect(queryByText(title)).toBeDefined()
-    expect(queryByText(size)).toBeDefined()
+    expect(queryByText(variant)).toBeDefined()
   })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSidesheet />)

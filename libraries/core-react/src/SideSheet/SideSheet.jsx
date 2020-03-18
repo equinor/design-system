@@ -20,18 +20,17 @@ const StyledSideSheet = styled.div`
   height: 100%;
   position: absolute;
   z-index: 1;
-  top: 0px;
-  left: 0px;
-  z-index: inherit top;
+  top: 0;
+  right: 0;
   box-sizing: border-box;
-  border-bottom: ${border.left.width} solid ${border.left.color};
+  border-left: ${border.left.width} solid ${border.left.color};
   background: ${background};
-  width: ${(props) => props.width};
+  width: ${({ width }) => width};
 
   ${spacingsTemplate(spacings)};
 `
 
-const Wrapper = styled.div`
+const Header = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -41,36 +40,41 @@ const Wrapper = styled.div`
 `
 
 export const SideSheet = forwardRef(function EdsSideSheet(
-  { size, title, children, className, open, onClose },
+  { variant, title, children, className, open, onClose, ...rest },
   ref,
 ) {
   let width
-  if (size === 'small') {
+  if (variant === 'small') {
     width = '240px'
-  } else if (size === 'medium') {
+  } else if (variant === 'medium') {
     width = '320px'
-  } else if (size === 'large') {
+  } else if (variant === 'large') {
     width = '480px'
-  } else if (size === 'xlarge') {
+  } else if (variant === 'xlarge') {
     width = '640px'
   }
 
   const props = {
+    ...rest,
+    className,
+    ref,
     width,
   }
 
   // Controller must set open={false} when pressing the close button
-  return open ? (
-    <StyledSideSheet {...props} className={className} ref={ref}>
-      <Wrapper>
-        <Typography variant="h2">{title}</Typography>
-        <Button variant="ghost_icon" onClick={onClose} title="Close">
-          <Icon name="clear" title="Close" />
-        </Button>
-      </Wrapper>
-      {children}
-    </StyledSideSheet>
-  ) : null
+  return (
+    open && (
+      <StyledSideSheet {...props}>
+        <Header>
+          <Typography variant="h2">{title}</Typography>
+          <Button variant="ghost_icon" onClick={onClose} title="Close">
+            <Icon name="clear" title="Close" />
+          </Button>
+        </Header>
+        {children}
+      </StyledSideSheet>
+    )
+  )
 })
 
 SideSheet.displayName = 'eds-sidesheet'
@@ -79,7 +83,7 @@ SideSheet.propTypes = {
   // Title for Side Sheet
   title: PropTypes.string,
   // Width of Side Sheet
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']),
+  variant: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']),
   // OnClick function (close)
   onClose: PropTypes.func,
   // Open / close
@@ -92,7 +96,7 @@ SideSheet.propTypes = {
 }
 
 SideSheet.defaultProps = {
-  size: 'medium',
+  variant: 'medium',
   title: '',
   className: '',
   open: true,
