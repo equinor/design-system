@@ -3,7 +3,17 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 
-const { height, width, background, position, zIndex } = tokens
+const {
+  height,
+  width,
+  background,
+  position,
+  zIndex,
+  top,
+  left,
+  alignItems,
+  justifyContent,
+} = tokens
 
 const StyledScrim = styled.div`
   width: ${width};
@@ -11,12 +21,12 @@ const StyledScrim = styled.div`
   background: ${background};
   position: ${position};
   z-index: ${zIndex};
-  top: 0;
-  left: 0;
+  top: ${top};
+  left: ${left};
+  align-items: ${alignItems};
+  justify-content: ${justifyContent};
   display: none;
   visibility: hidden;
-  align-items: center;
-  justify-content: center;
 
   ${({ isVisible }) =>
     isVisible &&

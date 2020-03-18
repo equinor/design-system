@@ -1,11 +1,21 @@
 import { tokens } from '@equinor/eds-tokens'
 
-const { colors } = tokens
+const {
+  colors: {
+    ui: {
+      background__scrim: { rgba: background },
+    },
+  },
+} = tokens
 
 export const scrim = {
   position: 'fixed',
-  zIndex: '1',
+  zIndex: '11',
   width: '100vw',
   height: '100vh',
-  background: colors.ui.background__scrim.rgba,
+  background,
+  top: 0,
+  left: 0,
+  alignItems: 'center',
+  justifyContent: 'center',
 }
