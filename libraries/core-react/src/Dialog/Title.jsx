@@ -1,6 +1,6 @@
 import React, { forwardRef, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
@@ -11,11 +11,19 @@ const {
 } = tokens
 
 const StyledTitle = styled.div`
-  display: inline-block;
-  width: 100%;
+  display: grid;
+  justify-self: start;
+  min-height: 24px;
 
   ${spacingsTemplate(spacingsTitle)};
   ${typographyTemplate(text)}
+
+  ${({ children }) =>
+    !children &&
+    css`
+      min-height: initial;
+      height: 8px;
+    `}
 `
 
 export const Title = forwardRef(function EdsDialogTitle(

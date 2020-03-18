@@ -1,17 +1,24 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { spacingsTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
 const { spacingsActions } = tokens
 
 const StyledActions = styled.div`
-  align-items: end;
-  align-content: flex-end;
   justify-content: end;
   justify-self: end;
-  ${spacingsTemplate(spacingsActions)};
+  min-height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  ${({ children }) =>
+    !children &&
+    css`
+      min-height: initial;
+      height: 8px;
+    `}
 `
 
 export const Actions = forwardRef(function EdsDialogActions(

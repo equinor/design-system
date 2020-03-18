@@ -10,7 +10,7 @@ const {
 
 export const dialog = {
   width: '252px',
-  height: '165px',
+  minHeight: '165px',
   background: colors.ui.background__default.hex,
   borderRadius: shape.corners,
   spacings: {

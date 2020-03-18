@@ -24,7 +24,6 @@ const BodyTypes = styled.div`
 `
 
 const TempButtonWrapper = styled.div`
-  /* margin: 16px; */
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(2, fit-content(100%));
@@ -113,8 +112,15 @@ export const knobs = () => {
       <Scrim isVisible={visibleScrim}>
         <Dialog>
           <Title>{TITLE_CHOICES[titleChoice]}</Title>
-          <CustomContent>{CUSTOM_CONTENT_CHOICES[contentChoice]}</CustomContent>
-          <Actions tabIndex="0">{ACTION_CHOICES[actionsChoice]}</Actions>
+          <CustomContent scrollable={contentChoice === 'scroll' ? true : false}>
+            {CUSTOM_CONTENT_CHOICES[contentChoice]}
+          </CustomContent>
+          <Actions>
+            <TempButtonWrapper>
+              <Button onClick={() => setVisibleScrim(false)}>Cancel</Button>
+              <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+            </TempButtonWrapper>
+          </Actions>
         </Dialog>
       </Scrim>
     </Body>
@@ -128,29 +134,29 @@ export const types = () => {
         <Dialog>
           <Title>Text + actions</Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
-          <Actions tabIndex="0">{ACTION_CHOICES['buttons']}</Actions>
+          <Actions>{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
         <Dialog>
           <Title>Placeholder + actions</Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES['empty']}</CustomContent>
-          <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
+          <Actions>{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
         <Dialog>
           <Title>Placeholder</Title>
-          <CustomContent size="large">
-            {CUSTOM_CONTENT_CHOICES['emptyLarge']}
-          </CustomContent>
+          <CustomContent>{CUSTOM_CONTENT_CHOICES['emptyLarge']}</CustomContent>
+          <Actions>{ACTION_CHOICES['none']}</Actions>
         </Dialog>
         <Dialog>
           <Title>Scrollable + actions</Title>
-          <CustomContent scrollable={true}>
+          <CustomContent scrollable>
             {CUSTOM_CONTENT_CHOICES['scroll']}
           </CustomContent>
-          <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
+          <Actions>{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
         <Dialog>
+          <Title></Title>
           <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
-          <Actions tabIndex="1">{ACTION_CHOICES['buttons']}</Actions>
+          <Actions>{ACTION_CHOICES['buttons']}</Actions>
         </Dialog>
       </BodyTypes>
     </Scrim>

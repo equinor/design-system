@@ -5,7 +5,7 @@ import { typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
 const {
-  height,
+  minHeight,
   width,
   title: { text },
   boxShadow,
@@ -15,10 +15,11 @@ const {
 
 const StyledDialog = styled.div`
   width: ${width};
-  min-height: ${height};
+  min-height: ${minHeight};
   box-shadow: ${boxShadow};
   background: ${background};
   border-radius: ${borderRadius};
+  grid-template-rows: 24px auto 60px;
 
   ${typographyTemplate(text)}
 `

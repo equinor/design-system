@@ -12,7 +12,7 @@ const { Actions, Title, CustomContent } = Dialog
 const StyledDialog = styled(Dialog)`
   background: red;
 `
-const { width, height } = tokens
+const { width, minHeight } = tokens
 
 afterEach(cleanup)
 
@@ -41,12 +41,30 @@ describe('Dialog', () => {
     expect(queryByTestId(testIdCenter)).toBeDefined()
     expect(queryByTestId(testIdActions)).toBeDefined()
   })
+  it('Has scrollable content when scrollable props is present', () => {
+    const testIdCenter = 'dialog-test-center'
+
+    const { queryByTestId } = render(
+      <Dialog>
+        <Title>
+          <div>Title</div>
+        </Title>
+        <CustomContent data-testid={testIdCenter} scrollable>
+          <div>Description</div>
+        </CustomContent>
+        <Actions>
+          <button type="button">OK</button>
+        </Actions>
+      </Dialog>,
+    )
+    expect(queryByTestId(testIdCenter)).toHaveStyleRule('overflow-y', 'auto')
+  })
 
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledDialog />)
     const dialog = container.firstChild
     expect(dialog).toHaveStyleRule('background', 'red')
     expect(dialog).toHaveStyleRule('width', width)
-    expect(dialog).toHaveStyleRule('height', height)
+    expect(dialog).toHaveStyleRule('min-height', minHeight)
   })
 })

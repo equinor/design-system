@@ -11,9 +11,9 @@ const {
 } = tokens
 
 const StyledCustomContent = styled.div`
-  /* grid-area: center; */
-  display: inline-block;
-  min-height: 56px;
+  justify-content: start;
+  justify-self: start;
+  min-height: 80px;
   margin-bottom: 12px;
   width: calc(100% - 32px);
   /* overflow-y: auto; */

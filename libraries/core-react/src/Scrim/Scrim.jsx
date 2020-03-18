@@ -15,8 +15,6 @@ const StyledScrim = styled.div`
   left: 0;
   display: none;
   visibility: hidden;
-  /* display: flex;
-  visibility: visible; */
   align-items: center;
   justify-content: center;
 
@@ -32,7 +30,6 @@ export const Scrim = forwardRef(function EdsScrim(
   { children, isVisible, ...props },
   ref,
 ) {
-  console.log(isVisible)
   return (
     <StyledScrim isVisible={isVisible} {...props} ref={ref}>
       {children}
