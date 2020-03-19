@@ -47,7 +47,7 @@ export const SideSheet = forwardRef(function EdsSideSheet(
     ...rest,
     className,
     ref,
-    width: tokens[variant].width,
+    width: tokens.width[variant],
   }
 
   // Controller must set open={false} when pressing the close button
