@@ -170,11 +170,11 @@ export const Chip = forwardRef(function EdsChips(
     setFocusVisible(true)
     if (key === 'Enter') {
       if (deletable) {
-        handleDelete(props, event)
+        handleDelete(event)
       }
       // Delete takes presidens, else click action is activated
       if (clickable && !deletable) {
-        handleClick(props, event)
+        handleClick(event)
       }
     }
   }
@@ -202,7 +202,7 @@ export const Chip = forwardRef(function EdsChips(
     <StyledChips
       {...props}
       onBlur={handleBlur}
-      onClick={(e) => clickable && handleClick(props, e)}
+      onClick={(event) => clickable && handleClick(event)}
       onKeyPress={handleKeyPress}
       onMouseDown={handleMouseDown}
     >
@@ -213,10 +213,10 @@ export const Chip = forwardRef(function EdsChips(
           title="close"
           disabled={disabled}
           variant={variant}
-          onClick={(e) => {
-            e.stopPropagation()
+          onClick={(event) => {
+            event.stopPropagation()
             if (deletable) {
-              handleDelete(props, e)
+              handleDelete(event)
             }
           }}
           size={16}
