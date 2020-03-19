@@ -35,6 +35,7 @@ const Wrapper = styled.div`
 `
 
 const Body = styled.div`
+  position: relative;
   height: 1500px;
   background: #ebebeb;
   display: flex;

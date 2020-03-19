@@ -20,11 +20,11 @@ const StyledSideSheet = styled.div`
   height: 100%;
   position: absolute;
   z-index: 1;
+  top: 0;
   right: 0;
   box-sizing: border-box;
   border-left: ${border.left.width} solid ${border.left.color};
   background: ${background};
-  top: ${({ top }) => top};
   width: ${({ width }) => width};
 
   ${spacingsTemplate(spacings)};

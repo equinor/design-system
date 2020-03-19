@@ -34,13 +34,6 @@ describe('SideSheet', () => {
     expect(queryByText(title)).toBeDefined()
     expect(queryByText(variant)).toBeDefined()
   })
-  it('Has top: 64px if topbar is visible', () => {
-    const { container } = render(
-      <SideSheet variant="large" title="Title" topBarVisible={1} />,
-    )
-    const sidesheet = container.firstChild
-    expect(sidesheet).toHaveStyleRule('top', '64px')
-  })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSidesheet />)
     const sidesheet = container.firstChild
