@@ -93,7 +93,6 @@ export function Small() {
           variant="small"
           title="Small"
           open={toggle}
-          topBarVisible={true}
           onClose={() => setToggle(!toggle)}
         >
           <Child variant="outlined">Children</Child>
