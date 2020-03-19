@@ -1,5 +1,6 @@
 import React from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Search } from '@equinor/eds-core-react'
 
@@ -16,10 +17,12 @@ export default {
   decorators: [withKnobs],
 }
 
-export const IconExamples = () => (
+const handleOnChange = action('onChange')
+
+export const Examples = () => (
   <div>
     <Wrapper>
-      <Search placeholder="Search"></Search>
+      <Search placeholder="Search" onChange={handleOnChange}></Search>
     </Wrapper>
   </div>
 )
