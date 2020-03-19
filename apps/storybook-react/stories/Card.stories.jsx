@@ -1,11 +1,19 @@
 import React, { Fragment } from 'react'
 import { withKnobs, select } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Card } from '@equinor/eds-core-react'
+import {
+  Card,
+  // CardActions,
+  // CardHeader,
+  // CardMedia,
+  // CardContent,
+} from '@equinor/eds-core-react'
 
 const Wrapper = styled.div`
   height: 100vh;
-  overflow: auto;
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 200px 200px 200px 200px;
 `
 
 const Body = styled.div`
@@ -20,16 +28,13 @@ const Body = styled.div`
 export default {
   title: 'Components|Card',
   component: Card,
+  decorators: [withKnobs],
 }
 
-export const Page = () => {
+export const Cards = () => {
   return (
-    <Wrapper tabIndex="0">
-      <Body>
-        <p>Top of page</p>
-        <p>Middle of page</p>
-        <p>Bottom of page</p>
-      </Body>
+    <Wrapper>
+      <Card></Card>
     </Wrapper>
   )
 }

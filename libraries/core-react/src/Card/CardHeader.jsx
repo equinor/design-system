@@ -51,6 +51,6 @@ CardHeader.defaultProps = {
   subtitle: '',
   avatar: undefined,
   meta: undefined,
-  className: undefined,
+  className: '',
   children: undefined,
 }

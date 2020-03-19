@@ -27,6 +27,6 @@ CardContent.propTypes = {
 }
 
 CardContent.defaultProps = {
-  className: undefined,
+  className: '',
   children: undefined,
 }

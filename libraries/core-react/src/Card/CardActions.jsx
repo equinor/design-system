@@ -28,6 +28,6 @@ CardActions.propTypes = {
 }
 
 CardActions.defaultProps = {
-  className: undefined,
+  className: '',
   children: undefined,
 }

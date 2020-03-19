@@ -30,6 +30,6 @@ CardMedia.propTypes = {
 
 CardMedia.defaultProps = {
   src: '',
-  className: undefined,
+  className: '',
   children: undefined,
 }
