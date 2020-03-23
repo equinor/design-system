@@ -65,7 +65,7 @@ describe('Chips', () => {
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleDelete = jest.fn((x) => {
-      callbackId = x.id
+      callbackId = x.target.parentElement.id
     })
 
     const { queryAllByTitle } = render(
@@ -86,7 +86,7 @@ describe('Chips', () => {
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleClick = jest.fn((x) => {
-      callbackId = x.id
+      callbackId = x.target.id
     })
 
     const { container } = render(
@@ -105,7 +105,7 @@ describe('Chips', () => {
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleClick = jest.fn((x) => {
-      callbackId = x.id
+      callbackId = x.target.id
     })
 
     const { container } = render(
