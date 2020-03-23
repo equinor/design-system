@@ -65,7 +65,7 @@ describe('Chips', () => {
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleDelete = jest.fn((x) => {
-      callbackId = x.id
+      callbackId = x.target.parentElement.id
     })
 
     const { queryAllByTitle } = render(
@@ -78,15 +78,15 @@ describe('Chips', () => {
 
     fireEvent.click(closeIcon)
 
-    expect(handleDelete).toHaveBeenCalled()
     expect(callbackId).toEqual(chipId)
+    expect(handleDelete).toHaveBeenCalled()
   })
   it('Has called handleClick once with props when clicked', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleClick = jest.fn((x) => {
-      callbackId = x.id
+      callbackId = x.target.id
     })
 
     const { container } = render(
@@ -105,7 +105,7 @@ describe('Chips', () => {
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleClick = jest.fn((x) => {
-      callbackId = x.id
+      callbackId = x.target.id
     })
 
     const { container } = render(
