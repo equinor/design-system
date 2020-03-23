@@ -9,4 +9,6 @@ export { List } from './List'
 // export { Tabs as Tabs1 } from './Tabs1'
 export { Tabs } from './Tabs'
 export { TopBar } from './TopBar'
+export { Chip } from './Chip'
+export { Avatar } from './Avatar'
 /* eslint-enable */
