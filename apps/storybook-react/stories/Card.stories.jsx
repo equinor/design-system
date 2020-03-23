@@ -1,20 +1,25 @@
 import React, { Fragment } from 'react'
 import { withKnobs, select } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import {
-  Card,
-  // CardActions,
-  // CardHeader,
-  // CardMedia,
-  // CardContent,
-} from '@equinor/eds-core-react'
+import { Card, Typography } from '@equinor/eds-core-react'
+// import {
+//   Card,
+//   // CardActions,
+//   // CardHeader,
+//   // CardMedia,
+//   // CardContent,
+// } from '@equinor/eds-core-react'
 
-const Wrapper = styled.div`
-  height: 100vh;
+const Grid = styled.div`
+  height: 100%;
+  margin: 32px;
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-columns: 180px 180px 180px 180px;
   grid-template-rows: 200px 200px 200px 200px;
+  grid-gap: 32px 32px;
 `
+
+const Wrapper = styled.div``
 
 const Body = styled.div`
   height: 1500px;
@@ -33,8 +38,11 @@ export default {
 
 export const Cards = () => {
   return (
-    <Wrapper>
+    <Grid>
       <Card></Card>
-    </Wrapper>
+      <Card variant="info"></Card>
+      <Card variant="danger"></Card>
+      <Card variant="warning"></Card>
+    </Grid>
   )
 }

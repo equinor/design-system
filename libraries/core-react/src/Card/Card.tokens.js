@@ -1,22 +1,32 @@
 import { tokens } from '@equinor/eds-tokens'
 
 const {
-  colors,
-  spacings: { comfortable },
-  typography: { navigation },
+  shape: rounded,
+  colors: {
+    ui: {
+      background__default: { rgba: background },
+      background__info: { rgba: backgroundInfo },
+      background__warning: { rgba: backgroundWarning },
+      background__danger: { rgba: backgroundDanger },
+    },
+  },
+  spacings: {
+    comfortable: { medium: spacingMedium },
+  },
 } = tokens
 
-export const topbar = {
-  height: '64px',
-  background: colors.ui.background__default.rgba,
+export const sidesheet = {
+  shape: rounded,
   spacings: {
-    left: comfortable.xx_large,
-    right: comfortable.xx_large,
-    top: comfortable.small,
-    bottom: comfortable.small,
+    left: spacingMedium,
+    bottom: spacingMedium,
+    right: spacingMedium,
+    top: spacingMedium,
   },
-  border: {
-    bottom: { color: colors.ui.background__light.rgba, width: '2px' },
+  background: {
+    default: background,
+    info: backgroundInfo,
+    danger: backgroundDanger,
+    warning: backgroundWarning,
   },
-  title: { text: navigation.menu_title },
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 
-import { topbar as tokens } from './TopBar.tokens'
+import { card as tokens } from './Card.tokens'
 
 const {
   title: { text },
@@ -18,7 +18,7 @@ const StyledCardHeader = styled.div`
   ${typographyTemplate(text)}
 `
 
-export const CardHeader = forwardRef(function EdsTopBarCardHeader(
+export const CardHeader = forwardRef(function EdsCardHeader(
   { children, ...props },
   ref,
 ) {
@@ -29,7 +29,7 @@ export const CardHeader = forwardRef(function EdsTopBarCardHeader(
   )
 })
 
-CardHeader.displayName = 'eds-topbar-header'
+CardHeader.displayName = 'eds-card-header'
 
 CardHeader.propTypes = {
   // Title:

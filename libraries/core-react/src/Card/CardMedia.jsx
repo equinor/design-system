@@ -6,7 +6,7 @@ const StyledCardMedia = styled.div`
   grid-area: center;
 `
 
-export const CardMedia = forwardRef(function EdsTopBarCardMedia(
+export const CardMedia = forwardRef(function EdsCardMedia(
   { children, ...props },
   ref,
 ) {
