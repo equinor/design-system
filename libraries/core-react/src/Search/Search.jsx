@@ -19,18 +19,19 @@ const {
 
 const typeProps = ['text', 'search', 'password', 'email', 'number']
 
-const Container = styled.div`
+const Container = styled.span`
   position: relative;
   background: ${background};
+  width: 100%;
   height: 36px;
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
-  grid-auto-columns: max-content;
+  grid-auto-columns: max-content auto max-content;
   align-items: center;
   box-sizing: border-box;
   border: ${border.width} solid ${border.color};
-  z-index: 1;
+  z-index: 0;
 
   ${spacingsTemplate(spacings)}
 
@@ -44,8 +45,9 @@ const Container = styled.div`
     border: ${border.width} solid ${border.focus.color};
     cursor: text;
   }
-/*
+
   &::after {
+    z-index: -1;
     position: absolute;
     top: -${clickbounds.offset};
     left: 0;
@@ -61,13 +63,12 @@ const Container = styled.div`
     width: auto;
     min-height: auto;
     content: '';
-  } */
+  }
 `
 
-const Input = styled.input.attrs({
-  ariaLabel: 'search',
-})`
+const Input = styled.input`
   min-height: 0;
+  min-width: 0;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -129,10 +130,11 @@ export const Search = React.forwardRef(function EdsSearch(
   const size = 16
 
   const props = {
-    ...rest,
     ref,
     value,
     type: 'search',
+    role: 'searchbox',
+    'aria-label': 'search input',
     onBlur: handleBlur,
     onFocus: handleFocus,
     onChange: (e) => {
@@ -144,14 +146,16 @@ export const Search = React.forwardRef(function EdsSearch(
   }
 
   const closeIconProps = {
+    role: 'button',
+    title: 'close button',
     size,
     isActive,
     onClick: () => isActive && handleOnDelete(),
   }
 
   return (
-    <Container isFocused={isFocused}>
-      <Icon name="search" size={size} />
+    <Container isFocused={isFocused} role="search" {...rest}>
+      <Icon name="search" title="search icon" size={size} />
       <Input {...props} />
       <ActiveIcon name="close" {...closeIconProps} />
     </Container>
@@ -161,8 +165,6 @@ export const Search = React.forwardRef(function EdsSearch(
 Search.propTypes = {
   /** @ignore */
   className: PropTypes.string,
-  /** Input label */
-  label: PropTypes.string,
   /** Placeholder */
   placeholder: PropTypes.string,
   /** Disabled state */
@@ -173,9 +175,7 @@ Search.propTypes = {
 
 Search.defaultProps = {
   className: '',
-  label: '',
   placeholder: '',
-  type: 'text',
   disabled: false,
   onChange: undefined,
 }
