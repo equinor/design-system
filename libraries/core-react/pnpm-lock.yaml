@@ -1,4 +1,5 @@
 dependencies:
+  '@equinor/eds-icons': 'link:../icons'
   '@equinor/eds-tokens': 'link:../tokens'
   '@testing-library/react-hooks': 3.2.1_react@16.13.0
   lodash.uniqueid: 4.0.1
@@ -7,7 +8,6 @@ devDependencies:
   '@babel/core': 7.8.6
   '@babel/preset-env': 7.8.6_@babel+core@7.8.6
   '@babel/preset-react': 7.8.3_@babel+core@7.8.6
-  '@equinor/eds-icons': 'link:../icons'
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.4.1_react-dom@16.13.0+react@16.13.0
   babel-plugin-styled-components: 1.10.7_styled-components@4.4.1
