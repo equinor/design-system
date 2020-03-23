@@ -1,10 +1,10 @@
-export { Card } from './Card'
-// import { CardActions } from './CardActions'
-// import { CardHeader } from './CardHeader'
-// import { CardContent } from './CardContent'
+import { Card } from './Card'
+import { CardActions } from './CardActions'
+import { CardHeader } from './CardHeader'
+import { CardContent } from './CardContent'
 
-// Card.CardActions = CardActions
-// Card.Header = CardHeader
-// Card.CardContent = CardContent
+Card.CardActions = CardActions
+Card.CardHeader = CardHeader
+Card.CardContent = CardContent
 
-// export { Card }
+export { Card }

@@ -5,9 +5,9 @@ import { typographyTemplate } from '../_common/templates'
 
 import { card as tokens } from './Card.tokens'
 
-const {
-  title: { text },
-} = tokens
+// const {
+//   title: { text },
+// } = tokens
 
 const StyledCardHeader = styled.div`
   grid-area: top;
@@ -15,7 +15,6 @@ const StyledCardHeader = styled.div`
   grid-template-columns: auto auto;
   grid-gap: 24px;
   align-items: center;
-  ${typographyTemplate(text)}
 `
 
 export const CardHeader = forwardRef(function EdsCardHeader(

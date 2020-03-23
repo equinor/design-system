@@ -1,7 +1,7 @@
 import { tokens } from '@equinor/eds-tokens'
 
 const {
-  shape: rounded,
+  // shape: { rounded },
   colors: {
     ui: {
       background__default: { rgba: background },
@@ -15,8 +15,8 @@ const {
   },
 } = tokens
 
-export const sidesheet = {
-  shape: rounded,
+export const card = {
+  // shape: rounded,
   spacings: {
     left: spacingMedium,
     bottom: spacingMedium,
