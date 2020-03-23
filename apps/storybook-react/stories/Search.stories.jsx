@@ -30,7 +30,6 @@ export default {
 }
 
 const handleOnChange = action('onChange')
-const handleFormSubmit = action('onSubmit')
 
 export const Examples = () => (
   <div>
@@ -41,23 +40,33 @@ export const Examples = () => (
         id="search-normal"
         placeholder="Search"
         onChange={handleOnChange}
-      ></Search>
+      />
+    </Wrapper>
+    <Wrapper>
+      <Typography variant="h4">Predefined</Typography>
+      <Search
+        aria-label="predefined"
+        id="search-predefined"
+        placeholder="Search"
+        onChange={handleOnChange}
+        value="Predefined value"
+      />
     </Wrapper>
     <Wrapper>
       <Typography variant="h4">Centered & styled inside a container</Typography>
       <OuterContainer>
         <StyledSearch
-          aria-label="container wide"
+          aria-label="contained"
           id="search-contained"
           placeholder="Search"
           onChange={handleOnChange}
-        ></StyledSearch>
+        />
       </OuterContainer>
     </Wrapper>
     <Wrapper>
       <Typography variant="h4">Inside form</Typography>
       <form action="/">
-        <Search placeholder="Search"></Search>
+        <Search placeholder="Search" />
       </form>
     </Wrapper>
   </div>
