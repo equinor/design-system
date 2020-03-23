@@ -14,7 +14,15 @@ const icons = {
 Icon.add(icons)
 
 const {
-  enabled: { spacings, background, typography, icon, border, clickbounds },
+  enabled: {
+    height,
+    spacings,
+    background,
+    typography,
+    icon,
+    border,
+    clickbounds,
+  },
 } = tokens
 
 const typeProps = ['text', 'search', 'password', 'email', 'number']
@@ -23,7 +31,7 @@ const Container = styled.span`
   position: relative;
   background: ${background};
   width: 100%;
-  height: 36px;
+  height: ${height};
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
@@ -110,12 +118,12 @@ const ActiveIcon = styled(Icon)`
 `
 
 export const Search = React.forwardRef(function EdsSearch(
-  { onChange, ...rest },
+  { onChange, value: initValue, ...rest },
   ref,
 ) {
   const [state, setState] = useState({
-    value: '',
-    isActive: false,
+    value: initValue,
+    isActive: initValue !== '',
     isFocused: false,
   })
 
@@ -130,6 +138,7 @@ export const Search = React.forwardRef(function EdsSearch(
   const size = 16
 
   const props = {
+    ...rest,
     ref,
     value,
     type: 'search',
@@ -154,7 +163,11 @@ export const Search = React.forwardRef(function EdsSearch(
   }
 
   return (
-    <Container isFocused={isFocused} role="search" {...rest}>
+    <Container
+      isFocused={isFocused}
+      role="search"
+      aria-label={rest['aria-label']}
+    >
       <Icon name="search" title="search icon" size={size} />
       <Input {...props} />
       <ActiveIcon name="close" {...closeIconProps} />
@@ -171,6 +184,8 @@ Search.propTypes = {
   disabled: PropTypes.bool,
   /** onChange handler */
   onChange: PropTypes.func,
+  /** Value for search field */
+  value: PropTypes.string,
 }
 
 Search.defaultProps = {
@@ -178,6 +193,7 @@ Search.defaultProps = {
   placeholder: '',
   disabled: false,
   onChange: undefined,
+  value: '',
 }
 
 Search.displayName = 'eds-search'

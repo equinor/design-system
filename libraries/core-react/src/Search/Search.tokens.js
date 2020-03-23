@@ -22,6 +22,7 @@ export const search = {
   enabled: {
     background,
     typography,
+    height: '36px',
     clickbounds: {
       offset: '6px',
       height: '48px',
