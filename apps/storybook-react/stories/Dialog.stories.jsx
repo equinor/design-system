@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
-import { Dialog, Button, Scrim } from '@equinor/eds-core-react'
+import { Dialog, Button, Scrim, Typography } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
 
@@ -56,17 +56,19 @@ const CUSTOM_CONTENT_CHOICES = {
       Test testestsetsest
     </Placeholder>
   ),
-  description: <p>Small description here.</p>,
+  description: (
+    <Typography variant="body_short">Small description here.</Typography>
+  ),
   scroll: (
     <Fragment>
-      <p>
+      <Typography variant="body_short">
         Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
         amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.{' '}
-      </p>
-      <p>
+      </Typography>
+      <Typography variant="body_short">
         Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
         amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.{' '}
-      </p>
+      </Typography>
     </Fragment>
   ),
 }
@@ -102,13 +104,12 @@ export const knobs = () => {
 
   return (
     <Body>
-      <p>Top of page</p>
-      <p>
-        Center page. <br />
-        <br />
+      <Typography variant="body_short">Top of page</Typography>
+      <Typography variant="body_short">Center page.</Typography>
+      <div>
         <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
-      </p>
-      <p>Bottom of page</p>
+      </div>
+      <Typography variant="body_short">Bottom of page</Typography>
       <Scrim isVisible={visibleScrim}>
         <Dialog>
           <Title>{TITLE_CHOICES[titleChoice]}</Title>

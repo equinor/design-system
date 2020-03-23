@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useCallback, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
-import { Scrim, Button } from '@equinor/eds-core-react'
+import { Scrim, Button, Typography } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
 
@@ -32,32 +32,17 @@ export default {
 export const Page = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
 
-  const escFunction = useCallback((event) => {
-    if (event.keyCode === 27) {
-      setVisibleScrim(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    document.addEventListener('keydown', escFunction, false)
-
-    return () => {
-      document.removeEventListener('keydown', escFunction, false)
-    }
-  }, [])
-
   return (
     <Body>
-      <p>Top of page</p>
-      <p>
-        Center page. <br />
-        <br />
+      <Typography variant="body_short">Top of page</Typography>
+      <Typography variant="body_short">Center page.</Typography>
+      <div>
         <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
-      </p>
-      <p>Bottom of page</p>
+      </div>
+      <Typography variant="body_short">Bottom of page</Typography>
       <Scrim isVisible={visibleScrim}>
         <TestContent>
-          <p>Test content in a scrim.</p>
+          <Typography variant="body_short">Test content in a scrim.</Typography>
           <Button onClick={() => setVisibleScrim(false)}>OK</Button>
         </TestContent>
       </Scrim>

@@ -6,7 +6,7 @@ import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
 const {
-  title: { text },
+  title: { typography },
   spacingsTitle,
 } = tokens
 
@@ -16,7 +16,7 @@ const StyledTitle = styled.div`
   min-height: 24px;
 
   ${spacingsTemplate(spacingsTitle)};
-  ${typographyTemplate(text)}
+  ${typographyTemplate(typography)}
 
   ${({ children }) =>
     !children &&

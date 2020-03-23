@@ -1,3 +1,1 @@
-import { Scrim } from './Scrim'
-
-export { Scrim }
+export { Scrim } from './Scrim'

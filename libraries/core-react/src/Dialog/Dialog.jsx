@@ -13,7 +13,13 @@ const {
   borderRadius,
 } = tokens
 
-const StyledDialog = styled.div`
+const StyledDialog = styled.div.attrs(() => ({
+  tabIndex: 0,
+  role: 'dialog',
+  'aria-labelledby': 'eds-dialog-title',
+  'aria-describedby': 'eds-dialog-customcontent',
+  'aria-modal': true,
+}))`
   width: ${width};
   min-height: ${minHeight};
   box-shadow: ${boxShadow};
@@ -29,15 +35,7 @@ export const Dialog = forwardRef(function EdsDialog(
   ref,
 ) {
   return (
-    <StyledDialog
-      tabindex="0"
-      role="dialog"
-      ariaLabelledBy="eds-dialog-title"
-      ariaDescribedBy="eds-dialog-customcontent"
-      ariaModal="true"
-      {...props}
-      ref={ref}
-    >
+    <StyledDialog {...props} ref={ref}>
       {children}
     </StyledDialog>
   )

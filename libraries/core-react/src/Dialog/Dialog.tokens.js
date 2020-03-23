@@ -8,7 +8,7 @@ const {
   elevation: { overlay: boxShadow },
   colors: {
     ui: {
-      background__default: { hex: background },
+      background__default: { rgba: background },
     },
   },
   shape: {
@@ -45,7 +45,7 @@ export const dialog = {
     top: 0,
     bottom: spacingMedium,
   },
-  title: { text: ui.accordion_header },
-  description: { text: paragraph.body_long },
+  title: { typography: ui.accordion_header },
+  description: { typography: paragraph.body_long },
   boxShadow,
 }

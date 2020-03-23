@@ -6,7 +6,7 @@ import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
 const {
-  description: { text },
+  description: { typography },
   spacingsContent,
 } = tokens
 
@@ -16,10 +16,9 @@ const StyledCustomContent = styled.div`
   min-height: 80px;
   margin-bottom: 12px;
   width: calc(100% - 32px);
-  /* overflow-y: auto; */
 
   ${spacingsTemplate(spacingsContent)};
-  ${typographyTemplate(text)}
+  ${typographyTemplate(typography)}
 
   ${({ scrollable }) =>
     scrollable &&
