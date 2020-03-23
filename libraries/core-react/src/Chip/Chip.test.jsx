@@ -78,8 +78,8 @@ describe('Chips', () => {
 
     fireEvent.click(closeIcon)
 
-    expect(callbackId).toEqual(chipId)
     expect(handleDelete).toHaveBeenCalled()
+    expect(callbackId).toEqual(chipId)
   })
   it('Has called handleClick once with props when clicked', () => {
     const chipText = 'hello, I am a chip'
