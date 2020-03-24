@@ -9,6 +9,9 @@ const {
       primary__hover_alt: { rgba: primaryHoverAlt },
       primary__resting: { rgba: primaryColor },
     },
+    text: {
+      static_icons__tertiary: { rgba: placeholderColor },
+    },
   },
   spacings: {
     comfortable: { small },
@@ -22,6 +25,9 @@ export const search = {
   enabled: {
     background,
     typography,
+    placeholder: {
+      color: placeholderColor,
+    },
     height: '36px',
     clickbounds: {
       offset: '6px',
@@ -41,6 +47,7 @@ export const search = {
       },
     },
     icon: {
+      color: placeholderColor,
       border: {
         radius: '50%',
       },

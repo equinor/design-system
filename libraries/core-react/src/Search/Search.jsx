@@ -17,6 +17,7 @@ Icon.add(icons)
 
 const {
   enabled: {
+    placeholder,
     height,
     spacings,
     background,
@@ -29,9 +30,7 @@ const {
 
 const typeProps = ['text', 'search', 'password', 'email', 'number']
 
-const Container = styled.span.attrs({
-  role: 'search',
-})`
+const Container = styled.span`
   position: relative;
   background: ${background};
   width: 100%;
@@ -45,6 +44,10 @@ const Container = styled.span.attrs({
   border: ${border.width} solid ${border.color};
   z-index: 0;
 
+  svg {
+    fill: ${icon.color};
+  }
+
   ${spacingsTemplate(spacings)}
 
   ${({ isFocused }) =>
@@ -53,10 +56,20 @@ const Container = styled.span.attrs({
       border: ${border.width} solid ${border.focus.color};
     `}
 
-  &:hover {
-    border: ${border.width} solid ${border.focus.color};
-    cursor: text;
+  &::placeholder {
+    color: ${placeholder.color};
   }
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          cursor: not-allowed;
+        `
+      : css`
+          &:hover {
+            border: ${border.width} solid ${border.focus.color};
+            cursor: text;
+          }
+        `}
 
   &::after {
     z-index: -1;
@@ -78,11 +91,7 @@ const Container = styled.span.attrs({
   }
 `
 
-const Input = styled.input.attrs({
-  type: 'search',
-  role: 'searchbox',
-  'aria-label': 'search input',
-})`
+const Input = styled.input`
   min-height: 0;
   min-width: 0;
   width: 100%;
@@ -106,11 +115,14 @@ const Input = styled.input.attrs({
   &:focus {
     outline: none;
   }
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+    `}
 `
 
-const ActiveIcon = styled(Icon).attrs({
-  role: 'button',
-})`
+const ActionIcon = styled(Icon)`
   visibility: hidden;
   padding: 1px;
   border-radius: ${icon.border.radius};
@@ -128,7 +140,7 @@ const ActiveIcon = styled(Icon).attrs({
 `
 
 export const Search = React.forwardRef(function EdsSearch(
-  { onChange, value: initValue, ...rest },
+  { onChange, value: initValue, className, disabled, ...rest },
   ref,
 ) {
   const inputRef = useCombinedRefs(useRef(null), ref)
@@ -153,9 +165,21 @@ export const Search = React.forwardRef(function EdsSearch(
   const { value, isActive, isFocused } = state
   const size = 16
 
-  const props = {
+  const containerProps = {
+    isFocused,
+    className,
+    disabled,
+    role: 'search',
+    'aria-label': rest['aria-label'],
+  }
+
+  const inputProps = {
     ...rest,
     value,
+    disabled,
+    type: 'search',
+    role: 'searchbox',
+    'aria-label': 'search input',
     onBlur: handleBlur,
     onFocus: handleFocus,
     onChange: (e) => {
@@ -166,17 +190,23 @@ export const Search = React.forwardRef(function EdsSearch(
     },
   }
 
-  const closeIconProps = {
-    size,
+  const clearIconProps = {
     isActive,
+    variant: 'ghost_icon',
+    role: 'button',
     onClick: () => isActive && handleOnDelete(),
   }
 
   return (
-    <Container isFocused={isFocused} aria-label={rest['aria-label']}>
+    <Container {...containerProps}>
       <Icon name="search" title="search icon" size={size} />
-      <Input {...props} ref={inputRef} />
-      <ActiveIcon name="close" title="clear button" {...closeIconProps} />
+      <Input {...inputProps} ref={inputRef} />
+      <ActionIcon
+        name="close"
+        title="clear button"
+        size={size}
+        {...clearIconProps}
+      />
     </Container>
   )
 })

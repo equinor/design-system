@@ -6,13 +6,12 @@ import { Search, Typography } from '@equinor/eds-core-react'
 
 const Wrapper = styled.div`
   margin: 32px;
-  width: 90%;
 `
 
 const OuterContainer = styled.div`
   background: lightblue;
   padding: 8px;
-  width: 400px;
+  width: 80%;
   height: 100px;
   display: flex;
   align-items: center;
@@ -20,7 +19,7 @@ const OuterContainer = styled.div`
 `
 
 const StyledSearch = styled(Search)`
-  width: 80%;
+  width: 50%;
 `
 
 export default {
@@ -66,8 +65,18 @@ export const Examples = () => (
     <Wrapper>
       <Typography variant="h4">Inside form</Typography>
       <form action="/">
-        <Search placeholder="Search" />
+        <Search placeholder="Search" onChange={handleOnChange} />
       </form>
+    </Wrapper>
+    <Wrapper>
+      <Typography variant="h4">Disabled</Typography>
+      <Search
+        aria-label="disabled"
+        id="search-disabled"
+        placeholder="Search"
+        onChange={handleOnChange}
+        disabled
+      />
     </Wrapper>
   </div>
 )

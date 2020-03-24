@@ -9,6 +9,7 @@ import { search as tokens } from './Search.tokens'
 
 const StyledSearch = styled(Search)`
   position: relative;
+  width: 50%;
 `
 
 const {} = tokens
@@ -21,6 +22,7 @@ describe('Search', () => {
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSearch />)
     expect(container.firstChild).toHaveStyleRule('position', 'relative')
+    expect(container.firstChild).toHaveStyleRule('width', '50%')
   })
   it('Has rendered provided value in input field', () => {
     const value = 'provided value'
