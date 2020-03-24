@@ -5,16 +5,11 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Search } from '.'
-import { search as tokens } from './Search.tokens'
 
 const StyledSearch = styled(Search)`
   position: relative;
   width: 50%;
 `
-
-const {} = tokens
-
-const rgbaTrim = (x) => x.split(' ').join('')
 
 afterEach(cleanup)
 
