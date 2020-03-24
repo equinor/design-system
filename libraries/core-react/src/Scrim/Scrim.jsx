@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useCallback,
-  useState,
-  useRef,
-} from 'react'
+import React, { forwardRef, useEffect, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
@@ -21,67 +15,48 @@ const StyledScrim = styled.div`
   left: 0;
   align-items: center;
   justify-content: center;
-  display: none;
-  visibility: hidden;
+  display: flex;
+  visibility: visible;
 
-  ${({ isVisible }) =>
-    isVisible &&
+  ${({ isDismissed }) =>
+    isDismissed &&
     css`
-      display: flex;
-      visibility: visible;
+      display: none;
+      visibility: hidden;
     `}
 `
 
 export const Scrim = forwardRef(function EdsScrim(
-  { children, isVisible, isDismissable, ...rest },
+  { children, isDismissable, ...rest },
   ref,
 ) {
-  const [visibleScrim, setVisibleScrim] = useState(false)
   const [isDismissed, setIsDismissed] = useState(false)
-  const [hasToggledBefore, setHasToggledBefore] = useState(false)
-  const isScrimVisibleRef = useRef(visibleScrim)
-  isScrimVisibleRef.current = visibleScrim
-  let timeoutTrick
-
-  function toggle() {
-    timeoutTrick = setTimeout(() => {
-      setVisibleScrim(!isScrimVisibleRef.current)
-
-      clearTimeout(timeoutTrick)
-    }, 10)
-    setHasToggledBefore(true)
-  }
 
   const dismissFunction = useCallback((event) => {
     if (event) {
-      console.log('Esc dismiss', event.key, isDismissable)
+      // console.log('Esc dismiss', event.key, isDismissable)
       if (event.key === 'Escape' && isDismissable) {
         setIsDismissed(true)
-        toggle()
       }
     }
   }, [])
 
+  // console.log('Is dismissed?', isDismissed)
+
   useEffect(() => {
-    if (isVisible && !visibleScrim) {
-      toggle()
-    }
-    if (!isVisible && visibleScrim) {
-      toggle()
-    }
-    if (isVisible && visibleScrim) {
+    if (!isDismissed) {
       document.addEventListener('keydown', dismissFunction, false)
     }
+
     return () => {
       document.removeEventListener('keydown', dismissFunction, false)
     }
-    // if visibleScrim and dismissed false
-  }, [isVisible, visibleScrim, isDismissed, hasToggledBefore])
+  }, [isDismissed])
 
   return (
     <StyledScrim
-      isVisible={visibleScrim}
       isDismissable={isDismissable}
+      isDismissed={isDismissed}
       {...rest}
       ref={ref}
     >
@@ -97,13 +72,11 @@ Scrim.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
-  isVisible: PropTypes.bool,
   isDismissable: PropTypes.bool,
 }
 
 Scrim.defaultProps = {
   className: '',
   children: undefined,
-  isVisible: false,
   isDismissable: true,
 }

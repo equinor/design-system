@@ -40,12 +40,16 @@ export const Page = () => {
         <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
       </div>
       <Typography variant="body_short">Bottom of page</Typography>
-      <Scrim isVisible={visibleScrim}>
-        <TestContent>
-          <Typography variant="body_short">Test content in a scrim.</Typography>
-          <Button onClick={() => setVisibleScrim(false)}>OK</Button>
-        </TestContent>
-      </Scrim>
+      {visibleScrim && (
+        <Scrim>
+          <TestContent>
+            <Typography variant="body_short">
+              Test content in a scrim.
+            </Typography>
+            <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+          </TestContent>
+        </Scrim>
+      )}
     </Body>
   )
 }
