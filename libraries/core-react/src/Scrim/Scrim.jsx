@@ -37,46 +37,46 @@ export const Scrim = forwardRef(function EdsScrim(
   ref,
 ) {
   const [visibleScrim, setVisibleScrim] = useState(false)
+  const [isDismissed, setIsDismissed] = useState(false)
   const [hasToggledBefore, setHasToggledBefore] = useState(false)
   const isScrimVisibleRef = useRef(visibleScrim)
   isScrimVisibleRef.current = visibleScrim
   let timeoutTrick
 
-  // console.log(isVisible, visibleScrim, hasToggledBefore)
-
   function toggle() {
-    console.log('Toggle', isScrimVisibleRef.current)
-
     timeoutTrick = setTimeout(() => {
       setVisibleScrim(!isScrimVisibleRef.current)
+
       clearTimeout(timeoutTrick)
-    }, 50)
+    }, 10)
     setHasToggledBefore(true)
   }
 
-  const escFunction = useCallback((event) => {
-    console.log('Esc hello', event.key, isDismissable)
-    if (event.key === 'Escape' && isDismissable) {
-      toggle()
+  const dismissFunction = useCallback((event) => {
+    if (event) {
+      console.log('Esc dismiss', event.key, isDismissable)
+      if (event.key === 'Escape' && isDismissable) {
+        setIsDismissed(true)
+        toggle()
+      }
     }
   }, [])
 
   useEffect(() => {
-    if (isVisible) {
-      console.log('isVisible set')
-
-      toggle()
-
-      document.addEventListener('keydown', escFunction, false)
-    } else if (!isVisible && visibleScrim) {
+    if (isVisible && !visibleScrim) {
       toggle()
     }
-
+    if (!isVisible && visibleScrim) {
+      toggle()
+    }
+    if (isVisible && visibleScrim) {
+      document.addEventListener('keydown', dismissFunction, false)
+    }
     return () => {
-      document.removeEventListener('keydown', escFunction, false)
+      document.removeEventListener('keydown', dismissFunction, false)
     }
     // if visibleScrim and dismissed false
-  }, [isVisible])
+  }, [isVisible, visibleScrim, isDismissed, hasToggledBefore])
 
   return (
     <StyledScrim
