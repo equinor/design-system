@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 const OuterContainer = styled.div`
   background: lightblue;
   padding: 8px;
-  width: 80%;
+  width: 50%;
   height: 100px;
   display: flex;
   align-items: center;
@@ -20,6 +20,7 @@ const OuterContainer = styled.div`
 
 const StyledSearch = styled(Search)`
   width: 50%;
+  margin-left: 32px;
 `
 
 export default {
@@ -42,7 +43,7 @@ export const Examples = () => (
       />
     </Wrapper>
     <Wrapper>
-      <Typography variant="h4">Predefined</Typography>
+      <Typography variant="h4">Predefined value</Typography>
       <Search
         aria-label="predefined"
         id="search-predefined"
@@ -54,6 +55,7 @@ export const Examples = () => (
     <Wrapper>
       <Typography variant="h4">Centered & styled inside a container</Typography>
       <OuterContainer>
+        50% width
         <StyledSearch
           aria-label="contained"
           id="search-contained"
