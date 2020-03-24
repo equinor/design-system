@@ -1,8 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import { List, TableOfContents, Typography } from '@equinor/eds-core-react'
+import {
+  Icon,
+  List,
+  TableOfContents,
+  Typography,
+} from '@equinor/eds-core-react'
 
-const { ListItem } = List
+import { subdirectory_arrow_right } from '@equinor/eds-icons'
+
+const icons = {
+  subdirectory_arrow_right,
+}
+
+Icon.add(icons)
+
 const { LinkItem } = TableOfContents
 
 export default {
@@ -11,10 +23,10 @@ export default {
 }
 
 const Wrapper = styled.div`
-  margin: 16px;
+  margin: 32px;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: auto 8rem;
+  grid-template-columns: auto 12rem;
 `
 
 export const Page = () => (
@@ -33,7 +45,31 @@ export const Page = () => (
           amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
           lot.{' '}
         </Typography>
+        <Typography variant="h3">Heading 3</Typography>
+        <Typography variant="body_long">
+          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+          lot.{' '}
+        </Typography>
         <Typography variant="h2">Heading 2</Typography>
+        <Typography variant="body_long">
+          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+          lot.{' '}
+        </Typography>
+        <Typography variant="h3">Heading 3</Typography>
+        <Typography variant="body_long">
+          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+          lot.{' '}
+        </Typography>
+        <Typography variant="h2">Heading 2</Typography>
+        <Typography variant="body_long">
+          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+          lot.{' '}
+        </Typography>
+        <Typography variant="h3">Heading 3</Typography>
         <Typography variant="body_long">
           Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
           amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
@@ -43,16 +79,20 @@ export const Page = () => (
     </main>
     <aside>
       <TableOfContents>
-        <LinkItem>
-          <Typography variant="body_short" link>
-            Anchor 1
-          </Typography>
-        </LinkItem>
-        <LinkItem>
-          <Typography variant="body_short" link>
-            Anchor 2
-          </Typography>
-        </LinkItem>
+        <List>
+          <LinkItem>
+            <Typography variant="body_short" link>
+              <Icon name="subdirectory_arrow_right" size={16} />
+              Anchor 1
+            </Typography>
+          </LinkItem>
+          <LinkItem>
+            <Typography variant="body_short" link>
+              <Icon name="subdirectory_arrow_right" size={16} />
+              Anchor 2
+            </Typography>
+          </LinkItem>
+        </List>
       </TableOfContents>
     </aside>
   </Wrapper>

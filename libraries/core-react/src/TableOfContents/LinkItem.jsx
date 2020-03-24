@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { table_of_contents as tokens } from './TableOfContents.tokens'
 
 const StyledLinkItem = styled.li`
   padding: 10px 16px;
+  list-style: none;
 `
 const LinkItem = forwardRef(function EdsLinkItem({ children, ...props }, ref) {
   return (
