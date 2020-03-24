@@ -122,7 +122,7 @@ const Input = styled.input`
 
 const ActionIcon = styled(Icon)`
   visibility: hidden;
-  padding: 1px;
+  padding: 4px;
   border-radius: ${icon.border.radius};
   z-index: 1;
 
