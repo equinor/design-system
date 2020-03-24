@@ -28,8 +28,6 @@ const {
   },
 } = tokens
 
-const typeProps = ['text', 'search', 'password', 'email', 'number']
-
 const Container = styled.span`
   position: relative;
   background: ${background};
@@ -177,6 +175,7 @@ export const Search = React.forwardRef(function EdsSearch(
     ...rest,
     value,
     disabled,
+    ref: inputRef,
     type: 'search',
     role: 'searchbox',
     'aria-label': 'search input',
@@ -192,21 +191,18 @@ export const Search = React.forwardRef(function EdsSearch(
 
   const clearIconProps = {
     isActive,
-    variant: 'ghost_icon',
+    size,
     role: 'button',
+    title: 'clear button',
+    variant: 'ghost_icon',
     onClick: () => isActive && handleOnDelete(),
   }
 
   return (
     <Container {...containerProps}>
       <Icon name="search" title="search icon" size={size} />
-      <Input {...inputProps} ref={inputRef} />
-      <ActionIcon
-        name="close"
-        title="clear button"
-        size={size}
-        {...clearIconProps}
-      />
+      <Input {...inputProps} />
+      <ActionIcon name="close" {...clearIconProps} />
     </Container>
   )
 })
@@ -233,7 +229,3 @@ Search.defaultProps = {
 }
 
 Search.displayName = 'eds-search'
-
-Search.constants = {
-  types: typeProps,
-}
