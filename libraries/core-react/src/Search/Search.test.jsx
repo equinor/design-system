@@ -55,10 +55,11 @@ describe('Search', () => {
 
   it('Has cleared value when clear button is clicked', () => {
     const searchId = 'search-id-when-testing'
+    let callbackId = ''
     let callbackValue = ''
     const handleOnChange = jest.fn(({ target: { id, value } }) => {
-      callbackId = id
       callbackValue = value
+      callbackId = id
     })
 
     render(
@@ -71,6 +72,7 @@ describe('Search', () => {
 
     expect(handleOnChange).toHaveBeenCalled()
     expect(searchBox).toHaveValue('')
-    expect(callbackValue).toHaveValue('')
+    expect(callbackValue).toEqual('')
+    expect(callbackId).toEqual(searchId)
   })
 })

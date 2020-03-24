@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
 import { search as tokens } from './Search.tokens'
 import { Icon } from '../Icon'
-import { spacingsTemplate, typographyTemplate } from '../_common/templates'
+import { setReactInputValue, useCombinedRefs, templates } from '../_common'
 
 const icons = {
   search,
   close,
 }
+
+const { spacingsTemplate, typographyTemplate } = templates
 
 Icon.add(icons)
 
@@ -27,7 +29,9 @@ const {
 
 const typeProps = ['text', 'search', 'password', 'email', 'number']
 
-const Container = styled.span`
+const Container = styled.span.attrs({
+  role: 'search',
+})`
   position: relative;
   background: ${background};
   width: 100%;
@@ -74,7 +78,11 @@ const Container = styled.span`
   }
 `
 
-const Input = styled.input`
+const Input = styled.input.attrs({
+  type: 'search',
+  role: 'searchbox',
+  'aria-label': 'search input',
+})`
   min-height: 0;
   min-width: 0;
   width: 100%;
@@ -100,7 +108,9 @@ const Input = styled.input`
   }
 `
 
-const ActiveIcon = styled(Icon)`
+const ActiveIcon = styled(Icon).attrs({
+  role: 'button',
+})`
   visibility: hidden;
   padding: 1px;
   border-radius: ${icon.border.radius};
@@ -121,6 +131,7 @@ export const Search = React.forwardRef(function EdsSearch(
   { onChange, value: initValue, ...rest },
   ref,
 ) {
+  const inputRef = useCombinedRefs(useRef(null), ref)
   const [state, setState] = useState({
     value: initValue,
     isActive: initValue !== '',
@@ -129,8 +140,13 @@ export const Search = React.forwardRef(function EdsSearch(
 
   const handleFocus = () => setState({ ...state, isFocused: true })
   const handleBlur = () => setState({ ...state, isFocused: false })
-  const handleOnDelete = () =>
-    setState({ ...state, isActive: false, value: '' })
+  const handleOnDelete = () => {
+    const input = inputRef.current
+    const value = ''
+    setReactInputValue(input, value)
+    setState({ ...state, isActive: false, value })
+  }
+
   const handleOnChange = ({ target: { value } }) =>
     setState({ ...state, isActive: value !== '', value })
 
@@ -139,11 +155,7 @@ export const Search = React.forwardRef(function EdsSearch(
 
   const props = {
     ...rest,
-    ref,
     value,
-    type: 'search',
-    role: 'searchbox',
-    'aria-label': 'search input',
     onBlur: handleBlur,
     onFocus: handleFocus,
     onChange: (e) => {
@@ -155,22 +167,16 @@ export const Search = React.forwardRef(function EdsSearch(
   }
 
   const closeIconProps = {
-    role: 'button',
-    title: 'close button',
     size,
     isActive,
     onClick: () => isActive && handleOnDelete(),
   }
 
   return (
-    <Container
-      isFocused={isFocused}
-      role="search"
-      aria-label={rest['aria-label']}
-    >
+    <Container isFocused={isFocused} aria-label={rest['aria-label']}>
       <Icon name="search" title="search icon" size={size} />
-      <Input {...props} />
-      <ActiveIcon name="close" {...closeIconProps} />
+      <Input {...props} ref={inputRef} />
+      <ActiveIcon name="close" title="clear button" {...closeIconProps} />
     </Container>
   )
 })
