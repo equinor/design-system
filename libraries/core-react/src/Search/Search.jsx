@@ -120,11 +120,35 @@ const Input = styled.input`
     `}
 `
 
-const ActionIcon = styled(Icon)`
+const InsideButton = styled.div`
+  display: flex;
+  align-items: center;
   visibility: hidden;
-  padding: 4px;
   border-radius: ${icon.border.radius};
   z-index: 1;
+  padding: 4px;
+  height: 16px;
+  width: 16px;
+  position: relative;
+
+  &::after {
+    z-index: -1;
+    position: absolute;
+    top: -${icon.clickbounds.offset};
+    left: 0;
+    width: 100%;
+    height: ${icon.clickbounds.height};
+    content: '';
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    min-height: auto;
+    content: '';
+  }
 
   ${({ isActive }) =>
     isActive &&
@@ -190,12 +214,10 @@ export const Search = React.forwardRef(function EdsSearch(
     },
   }
 
-  const clearIconProps = {
+  const clearButtonProps = {
     isActive,
     size,
     role: 'button',
-    title: 'clear button',
-    variant: 'ghost_icon',
     onClick: (e) => {
       e.stopPropagation()
       if (isActive) {
@@ -208,7 +230,9 @@ export const Search = React.forwardRef(function EdsSearch(
     <Container {...containerProps}>
       <Icon name="search" title="search icon" size={size} />
       <Input {...inputProps} />
-      <ActionIcon name="close" {...clearIconProps} />
+      <InsideButton {...clearButtonProps}>
+        <Icon name="close" title="clear" size={size} />
+      </InsideButton>
     </Container>
   )
 })

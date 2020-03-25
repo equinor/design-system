@@ -54,6 +54,10 @@ export const search = {
       hover: {
         background: primaryHoverAlt,
       },
+      clickbounds: {
+        offset: '6px',
+        height: '36px',
+      },
     },
   },
 }
