@@ -148,17 +148,17 @@ export const Search = React.forwardRef(function EdsSearch(
     isFocused: false,
   })
 
+  const handleOnClick = () => inputRef.current.focus()
   const handleFocus = () => setState({ ...state, isFocused: true })
   const handleBlur = () => setState({ ...state, isFocused: false })
+  const handleOnChange = ({ target: { value } }) =>
+    setState({ ...state, isActive: value !== '', value })
   const handleOnDelete = () => {
     const input = inputRef.current
     const value = ''
     setReactInputValue(input, value)
     setState({ ...state, isActive: false, value })
   }
-
-  const handleOnChange = ({ target: { value } }) =>
-    setState({ ...state, isActive: value !== '', value })
 
   const { value, isActive, isFocused } = state
   const size = 16
@@ -169,6 +169,7 @@ export const Search = React.forwardRef(function EdsSearch(
     disabled,
     role: 'search',
     'aria-label': rest['aria-label'],
+    onClick: handleOnClick,
   }
 
   const inputProps = {
