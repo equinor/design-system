@@ -196,7 +196,12 @@ export const Search = React.forwardRef(function EdsSearch(
     role: 'button',
     title: 'clear button',
     variant: 'ghost_icon',
-    onClick: () => isActive && handleOnDelete(),
+    onClick: (e) => {
+      e.stopPropagation()
+      if (isActive) {
+        handleOnDelete()
+      }
+    },
   }
 
   return (
