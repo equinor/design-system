@@ -22,6 +22,7 @@ const StyledLinkItem = styled.li`
     }
 
     &:hover {
+      background: ${hover.typography.color};
       color: ${hover.typography.color};
       svg {
         fill: ${hover.typography.color};
