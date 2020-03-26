@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
-const { icon, focus, hover } = tokens
+const { icon, focus, hover, colors } = tokens
 
 const StyledLinkItem = styled.li`
   list-style: none;
-  border-radius: ${focus.border.radius};
 
   a {
     text-decoration: none;
@@ -19,11 +18,14 @@ const StyledLinkItem = styled.li`
 
     &:focus {
       outline: ${focus.border.width} ${focus.border.type} ${focus.border.color};
+      border-radius: ${focus.border.borderRadius};
     }
 
     &:hover {
-      background: ${hover.typography.color};
+      background: ${hover.background};
       color: ${hover.typography.color};
+      border-radius: ${hover.borderRadius};
+
       svg {
         fill: ${hover.typography.color};
       }
@@ -32,6 +34,15 @@ const StyledLinkItem = styled.li`
       fill: ${icon.fill};
       margin-right: 8px;
       vertical-align: text-bottom;
+    }
+
+    span {
+      max-width: 115px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      vertical-align: text-bottom;
+      display: inline-block;
     }
   }
 `

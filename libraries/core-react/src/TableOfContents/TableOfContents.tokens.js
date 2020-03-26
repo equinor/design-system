@@ -25,7 +25,8 @@ const {
     },
   },
   shape: {
-    rounded: { borderRadius },
+    // rounded: { borderRadius },
+    corners: { borderRadius },
   },
 } = tokens
 
@@ -37,11 +38,13 @@ export const tableOfContents = {
     border: {
       type: 'dashed',
       color: focusColor,
-      width: '1px',
-      radius: borderRadius,
+      width: '2px',
+      borderRadius,
     },
   },
   hover: {
+    background: primaryHoverAlt,
+    borderRadius,
     icon: {
       background: primaryHoverAlt,
     },

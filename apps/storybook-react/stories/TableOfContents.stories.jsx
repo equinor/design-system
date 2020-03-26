@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
   Icon,
-  List,
   TableOfContents,
   Typography,
+  Button,
 } from '@equinor/eds-core-react'
 
 import { subdirectory_arrow_right } from '@equinor/eds-icons'
@@ -29,77 +29,169 @@ const Wrapper = styled.div`
   grid-template-columns: auto 14rem;
 `
 
-export const Example = () => (
-  <Wrapper>
-    <main>
-      <article>
-        <Typography variant="h1">Heading 1</Typography>
-        <Typography variant="body_long">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.{' '}
-        </Typography>
-        <Typography variant="h2" id="sub-section-one">
-          Heading 2-1
-        </Typography>
-        <Typography variant="body_long">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.{' '}
-        </Typography>
-        <Typography variant="h3">Heading 3</Typography>
-        <Typography variant="body_long">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.{' '}
-        </Typography>
-        <Typography variant="h2" id="sub-section-two">
-          Heading 2-2
-        </Typography>
-        <Typography variant="body_long">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.{' '}
-        </Typography>
-        <Typography variant="h3">Heading 3</Typography>
-        <Typography variant="body_long">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.{' '}
-        </Typography>
-        <Typography variant="h2" id="sub-section-three">
-          Heading 2-3
-        </Typography>
-        <Typography variant="body_long">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.{' '}
-        </Typography>
-        <Typography variant="h3">Heading 3</Typography>
-        <Typography variant="body_long">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.{' '}
-        </Typography>
-      </article>
-    </main>
-    <aside>
-      <TableOfContents>
-        <List>
+const Sidebar = styled.aside`
+  position: relative;
+`
+
+const TempButtonWrapper = styled.div`
+  display: grid;
+  margin: 16px 0;
+  grid-gap: 32px;
+  grid-template-columns: repeat(2, fit-content(100%));
+  justify-content: start;
+`
+
+export const Example = () => {
+  const [stickyState, setStickyState] = useState(false)
+
+  return (
+    <Wrapper>
+      <main>
+        <article>
+          <Typography variant="h1">Heading 1</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <TempButtonWrapper>
+            <Button onClick={() => setStickyState(!stickyState)}>
+              {stickyState ? 'Unstick ToC' : 'Make ToC sticky'}
+            </Button>
+          </TempButtonWrapper>
+          <Typography variant="h2" id="sub-section-one">
+            Topic 1
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="h3">Heading 3</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="h2" id="sub-section-two">
+            A very long topic to test implementation details
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="h3">Heading 3</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="h2" id="sub-section-three">
+            Topic 3
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+          <Typography variant="h3">Heading 3</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.{' '}
+          </Typography>
+        </article>
+      </main>
+      <aside>
+        <TableOfContents sticky={stickyState} label="Important sections">
           <LinkItem>
             <Typography variant="body_short" link href="#sub-section-one">
               <Icon name="subdirectory_arrow_right" size={16} />
-              Anchor 1
+              <span>Topic 1</span>
             </Typography>
           </LinkItem>
           <LinkItem>
             <Typography variant="body_short" link href="#sub-section-two">
               <Icon name="subdirectory_arrow_right" size={16} />
-              Anchor 2
+              <span title="A very long topic to test proper implementation">
+                A very long topic to test proper implementation
+              </span>
             </Typography>
           </LinkItem>
-        </List>
-      </TableOfContents>
-    </aside>
-  </Wrapper>
-)
+          <LinkItem>
+            <Typography variant="body_short" link href="#sub-section-three">
+              <Icon name="subdirectory_arrow_right" size={16} />
+              <span>Topic 3</span>
+            </Typography>
+          </LinkItem>
+        </TableOfContents>
+      </aside>
+    </Wrapper>
+  )
+}
