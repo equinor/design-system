@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react'
-import { withKnobs, select } from '@storybook/addon-knobs'
+import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Typography } from '@equinor/eds-core-react'
 import { Card } from '@equinor/eds-core-react'
+import { text_field } from '@equinor/eds-icons'
 
-const { CardHeader } = Card
+const { CardTitle } = Card
 
 const Grid = styled.div`
   height: 100%;
@@ -36,8 +37,13 @@ export default {
 export const Cards = () => {
   return (
     <Grid>
-      <Card>
-        <CardHeader title="Default" />
+      <Card
+        variant={select('Variant', ['default', 'info', 'warning', 'danger'])}
+      >
+        <CardTitle
+          title={text('Title', 'Title')}
+          subtitle={text('Subtitle', 'Subtitle')}
+        />
       </Card>
       <Card variant="info"></Card>
       <Card variant="danger"></Card>

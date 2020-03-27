@@ -9,7 +9,7 @@ import { card as tokens } from './Card.tokens'
 //   title: { text },
 // } = tokens
 
-const StyledCardHeader = styled.div`
+const StyledCardTitle = styled.div`
   grid-area: top;
   display: grid;
   grid-template-columns: auto auto;
@@ -17,20 +17,20 @@ const StyledCardHeader = styled.div`
   align-items: center;
 `
 
-export const CardHeader = forwardRef(function EdsCardHeader(
+export const CardTitle = forwardRef(function EdsCardTitle(
   { children, ...props },
   ref,
 ) {
   return (
-    <StyledCardHeader ref={ref} {...props}>
+    <StyledCardTitle ref={ref} {...props}>
       {children}
-    </StyledCardHeader>
+    </StyledCardTitle>
   )
 })
 
-CardHeader.displayName = 'eds-card-header'
+CardTitle.displayName = 'eds-card-header'
 
-CardHeader.propTypes = {
+CardTitle.propTypes = {
   // Title:
   title: PropTypes.string,
   // Subtitle:
@@ -45,7 +45,7 @@ CardHeader.propTypes = {
   className: PropTypes.string,
 }
 
-CardHeader.defaultProps = {
+CardTitle.defaultProps = {
   title: '',
   subtitle: '',
   avatar: undefined,

@@ -1,10 +1,10 @@
 import { Card } from './Card'
 import { CardActions } from './CardActions'
-import { CardHeader } from './CardHeader'
+import { CardTitle } from './CardTitle'
 import { CardContent } from './CardContent'
 
 Card.CardActions = CardActions
-Card.CardHeader = CardHeader
+Card.CardTitle = CardTitle
 Card.CardContent = CardContent
 
 export { Card }
