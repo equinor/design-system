@@ -36,7 +36,7 @@ CardTitle.propTypes = {
   // Subtitle:
   subtitle: PropTypes.string,
   // Avatar:
-  avatar: PropTypes.node,
+  avatar: PropTypes.string,
   // Metadata (tags, badges, free text):
   meta: PropTypes.node,
   /** @ignore */

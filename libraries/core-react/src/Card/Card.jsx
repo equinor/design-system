@@ -37,7 +37,7 @@ Card.displayName = 'eds-card'
 
 Card.propTypes = {
   // Variant (default, info, danger, warning - background colors):
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(['default', 'info', 'warning', 'danger']),
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Typography } from '@equinor/eds-core-react'
-import { Card } from '@equinor/eds-core-react'
+import { Card, Chips, Avatar } from '@equinor/eds-core-react'
 import { text_field } from '@equinor/eds-icons'
 
 const { CardTitle } = Card
@@ -28,6 +28,11 @@ const Body = styled.div`
   justify-content: space-between;
 `
 
+const META_CHOICES = {
+  none: null,
+  chips: <Chips>Meta</Chips>,
+}
+
 export default {
   title: 'Components|Card',
   component: Card,
@@ -43,6 +48,8 @@ export const Cards = () => {
         <CardTitle
           title={text('Title', 'Title')}
           subtitle={text('Subtitle', 'Subtitle')}
+          avatar={text('Avatar', 'https://i.imgur.com/UM3mrju.jpg')}
+          metadata={select('Metadata', Object.keys(META_CHOICES), 'none')}
         />
       </Card>
       <Card variant="info"></Card>
