@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
-const { icon, focus, hover, colors } = tokens
+const { icon, focus, hover } = tokens
 
 const StyledLinkItem = styled.li`
   list-style: none;
