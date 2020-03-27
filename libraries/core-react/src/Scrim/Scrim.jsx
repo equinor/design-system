@@ -17,46 +17,36 @@ const StyledScrim = styled.div`
   justify-content: center;
   display: flex;
   visibility: visible;
-
-  ${({ isDismissed }) =>
-    isDismissed &&
-    css`
-      display: none;
-      visibility: hidden;
-    `}
 `
 
 export const Scrim = forwardRef(function EdsScrim(
-  { children, isDismissable, ...rest },
+  { children, onKeyDown, isDismissable, ...rest },
   ref,
 ) {
-  const [isDismissed, setIsDismissed] = useState(false)
-
-  const dismissFunction = useCallback((event) => {
+  const handleKeyPress = (event) => {
     if (event) {
       // console.log('Esc dismiss', event.key, isDismissable)
       if (event.key === 'Escape' && isDismissable) {
-        setIsDismissed(true)
+        onKeyDown(event, false)
       }
     }
-  }, [])
-
-  // console.log('Is dismissed?', isDismissed)
+  }
 
   useEffect(() => {
-    if (!isDismissed) {
-      document.addEventListener('keydown', dismissFunction, false)
+    console.log('isdismissable:', isDismissable)
+    if (isDismissable) {
+      document.addEventListener('keydown', handleKeyPress, false)
     }
 
     return () => {
-      document.removeEventListener('keydown', dismissFunction, false)
+      document.removeEventListener('keydown', handleKeyPress, false)
     }
-  }, [isDismissed])
+  }, [])
 
   return (
     <StyledScrim
+      onKeyDown={handleKeyPress}
       isDismissable={isDismissable}
-      isDismissed={isDismissed}
       {...rest}
       ref={ref}
     >

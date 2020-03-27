@@ -31,6 +31,9 @@ export default {
 
 export const Page = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
+  const handleClose = (event, closed) => {
+    setVisibleScrim(!visibleScrim)
+  }
 
   return (
     <Body>
@@ -41,7 +44,7 @@ export const Page = () => {
       </div>
       <Typography variant="body_short">Bottom of page</Typography>
       {visibleScrim && (
-        <Scrim>
+        <Scrim onKeyDown={handleClose}>
           <TestContent>
             <Typography variant="body_short">
               Test content in a scrim.

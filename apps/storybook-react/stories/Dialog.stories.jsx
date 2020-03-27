@@ -90,6 +90,10 @@ export default {
 
 export const knobs = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
+  const handleClose = (event, closed) => {
+    setVisibleScrim(!visibleScrim)
+  }
+
   const titleChoice = select('Title', [...Object.keys(TITLE_CHOICES)], 'text')
   const contentChoice = select(
     'CustomContent',
@@ -110,61 +114,78 @@ export const knobs = () => {
         <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
       </div>
       <Typography variant="body_short">Bottom of page</Typography>
-      <Scrim isVisible={visibleScrim}>
-        <Dialog>
-          <Title>{TITLE_CHOICES[titleChoice]}</Title>
-          <CustomContent scrollable={contentChoice === 'scroll' ? true : false}>
-            {CUSTOM_CONTENT_CHOICES[contentChoice]}
-          </CustomContent>
-          <Actions>
-            {actionsChoice === 'buttons' ? (
-              <TempButtonWrapper>
-                <Button onClick={() => setVisibleScrim(false)}>Cancel</Button>
-                <Button onClick={() => setVisibleScrim(false)}>OK</Button>
-              </TempButtonWrapper>
-            ) : (
-              ACTION_CHOICES[actionsChoice]
-            )}
-          </Actions>
-        </Dialog>
-      </Scrim>
+      {visibleScrim && (
+        <Scrim onKeyDown={handleClose}>
+          <Dialog>
+            <Title>{TITLE_CHOICES[titleChoice]}</Title>
+            <CustomContent
+              scrollable={contentChoice === 'scroll' ? true : false}
+            >
+              {CUSTOM_CONTENT_CHOICES[contentChoice]}
+            </CustomContent>
+            <Actions>
+              {actionsChoice === 'buttons' ? (
+                <TempButtonWrapper>
+                  <Button onClick={() => setVisibleScrim(false)}>Cancel</Button>
+                  <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+                </TempButtonWrapper>
+              ) : (
+                ACTION_CHOICES[actionsChoice]
+              )}
+            </Actions>
+          </Dialog>
+        </Scrim>
+      )}
     </Body>
   )
 }
 
 export const types = () => {
+  const [visibleScrim, setVisibleScrim] = useState(true)
+  const handleClose = (event, closed) => {
+    setVisibleScrim(!visibleScrim)
+  }
+
   return (
-    <Scrim isVisible={true}>
-      <BodyTypes>
-        <Dialog>
-          <Title>Text + actions</Title>
-          <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
-          <Actions>{ACTION_CHOICES['buttons']}</Actions>
-        </Dialog>
-        <Dialog>
-          <Title>Placeholder + actions</Title>
-          <CustomContent>{CUSTOM_CONTENT_CHOICES['empty']}</CustomContent>
-          <Actions>{ACTION_CHOICES['buttons']}</Actions>
-        </Dialog>
-        <Dialog>
-          <Title>Placeholder</Title>
-          <CustomContent>{CUSTOM_CONTENT_CHOICES['emptyLarge']}</CustomContent>
-          <Actions>{ACTION_CHOICES['none']}</Actions>
-        </Dialog>
-        <Dialog>
-          <Title>Scrollable + actions</Title>
-          <CustomContent scrollable>
-            {CUSTOM_CONTENT_CHOICES['scroll']}
-          </CustomContent>
-          <Actions>{ACTION_CHOICES['buttons']}</Actions>
-        </Dialog>
-        <Dialog>
-          <Title></Title>
-          <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
-          <Actions>{ACTION_CHOICES['buttons']}</Actions>
-        </Dialog>
-      </BodyTypes>
-    </Scrim>
+    visibleScrim && (
+      <Scrim onKeyDown={handleClose} isDismissable={false}>
+        <BodyTypes>
+          <Dialog>
+            <Title>Text + actions</Title>
+            <CustomContent>
+              {CUSTOM_CONTENT_CHOICES['description']}
+            </CustomContent>
+            <Actions>{ACTION_CHOICES['buttons']}</Actions>
+          </Dialog>
+          <Dialog>
+            <Title>Placeholder + actions</Title>
+            <CustomContent>{CUSTOM_CONTENT_CHOICES['empty']}</CustomContent>
+            <Actions>{ACTION_CHOICES['buttons']}</Actions>
+          </Dialog>
+          <Dialog>
+            <Title>Placeholder</Title>
+            <CustomContent>
+              {CUSTOM_CONTENT_CHOICES['emptyLarge']}
+            </CustomContent>
+            <Actions>{ACTION_CHOICES['none']}</Actions>
+          </Dialog>
+          <Dialog>
+            <Title>Scrollable + actions</Title>
+            <CustomContent scrollable>
+              {CUSTOM_CONTENT_CHOICES['scroll']}
+            </CustomContent>
+            <Actions>{ACTION_CHOICES['buttons']}</Actions>
+          </Dialog>
+          <Dialog>
+            <Title></Title>
+            <CustomContent>
+              {CUSTOM_CONTENT_CHOICES['description']}
+            </CustomContent>
+            <Actions>{ACTION_CHOICES['buttons']}</Actions>
+          </Dialog>
+        </BodyTypes>
+      </Scrim>
+    )
   )
 }
 
