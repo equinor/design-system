@@ -25,7 +25,6 @@ export const Scrim = forwardRef(function EdsScrim(
 ) {
   const handleKeyPress = (event) => {
     if (event) {
-      // console.log('Esc dismiss', event.key, isDismissable)
       if (event.key === 'Escape' && isDismissable) {
         onKeyDown(event, false)
       }
@@ -33,7 +32,6 @@ export const Scrim = forwardRef(function EdsScrim(
   }
 
   useEffect(() => {
-    console.log('isdismissable:', isDismissable)
     if (isDismissable) {
       document.addEventListener('keydown', handleKeyPress, false)
     }
