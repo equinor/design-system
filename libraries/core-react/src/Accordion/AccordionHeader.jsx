@@ -9,11 +9,15 @@ Icon.add({ chevron_down, chevron_up })
 
 const StyledAccordionHeader = styled.div`
   background: lime;
+  font-size: 16px;
+  margin: 0;
+  display: flex;
 `
 
 const HeaderButton = styled.button.attrs(({ panelId, isExpanded }) => ({
   'aria-expanded': isExpanded,
   'aria-controls': panelId,
+  type: 'button',
 }))`
   margin: 0;
   padding: 0;
@@ -23,33 +27,20 @@ const HeaderButton = styled.button.attrs(({ panelId, isExpanded }) => ({
   width: 100%;
   background: orange;
   font-size: inherit;
+  flex: 1;
   display: flex;
   cursor: pointer;
-  outline: none;
-  align-items: center;
   padding-left: 16px;
   padding-right: 16px;
 `
 
-const Header = styled.h2`
-  font-size: 16px;
-  margin: 0;
-`
+HeaderButton.displayName = 'eds-accordion-headerbutton'
 
-const StyledIcon = styled(Icon)`
-  ${({ chevronPosition }) =>
-    chevronPosition === 'left'
-      ? css`
-          /* margin-left: 16px; */
-          margin-right: 32px;
-        `
-      : css`
-          margin-left: 16px;
-          /* margin-right: 16px; */
-        `}
-`
+const StyledIcon = styled(Icon)(({ chevronPosition }) =>
+  chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
+)
 
-const AccordionSummary = styled.span`
+const AccordionHeaderTitle = styled.span`
   flex: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -62,24 +53,45 @@ const AccordionHeader = forwardRef(function AccordionHeader(
   { panelId, id, chevronPosition, isExpanded, children, variant, ...props },
   ref,
 ) {
+  const headerChildren = React.Children.map(children, (child) => {
+    const chevron = (
+      <StyledIcon
+        name={isExpanded ? 'chevron_up' : 'chevron_down'}
+        size={16}
+        chevronPosition={chevronPosition}
+      />
+    )
+
+    const grandChildren = React.Children.map(
+      child.props.children,
+      (grandChild) =>
+        typeof grandChild === 'string' ? (
+          <AccordionHeaderTitle>{grandChild}</AccordionHeaderTitle>
+        ) : (
+          grandChild
+        ),
+    )
+
+    const headerButtonChildren = [chevron, grandChildren]
+
+    return child.type.displayName === 'eds-accordion-headerbutton'
+      ? React.cloneElement(
+          child,
+          {
+            id,
+            isExpanded,
+            panelId,
+          },
+          chevronPosition === 'left'
+            ? headerButtonChildren
+            : headerButtonChildren.reverse(),
+        )
+      : child
+  })
+
   return (
-    <StyledAccordionHeader {...props} ref={ref}>
-      <Header as={variant}>
-        <HeaderButton
-          id={id}
-          type="button"
-          isExpanded={isExpanded}
-          panelId={panelId}
-        >
-          {chevronPosition === 'right' && children}
-          <StyledIcon
-            name={isExpanded ? 'chevron_up' : 'chevron_down'}
-            size={16}
-            chevronPosition={chevronPosition}
-          />
-          {chevronPosition === 'left' && children}
-        </HeaderButton>
-      </Header>
+    <StyledAccordionHeader as={variant} {...props} ref={ref}>
+      {headerChildren}
     </StyledAccordionHeader>
   )
 })
@@ -109,4 +121,4 @@ AccordionHeader.defaultProps = {
   variant: 'h2',
 }
 
-export { AccordionHeader, AccordionSummary }
+export { AccordionHeader, HeaderButton as AccordionButton }

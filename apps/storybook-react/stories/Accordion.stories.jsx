@@ -8,16 +8,11 @@ import { tokens } from '@equinor/eds-tokens'
 const {
   AccordionItem,
   AccordionHeader,
-  AccordionSummary,
+  AccordionButton,
   AccordionPanel,
 } = Accordion
 
 Icon.add({ attach_file, notifications })
-
-export default {
-  title: 'Components|Accordion',
-  component: Accordion,
-}
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -27,6 +22,16 @@ const Wrapper = styled.div`
   }
 `
 
+const addMarginRightProp = () => ({ marginRight }) =>
+  marginRight && { marginRight: `${marginRight}px` }
+
+const IconWithMarginProp = styled(Icon)(addMarginRightProp)
+
+export default {
+  title: 'Components|Accordion',
+  component: Accordion,
+}
+
 export const allAccordions = () => {
   return (
     <Wrapper>
@@ -34,19 +39,19 @@ export const allAccordions = () => {
       <Accordion>
         <AccordionItem isExpanded={true}>
           <AccordionHeader>
-            <AccordionSummary>Header 1</AccordionSummary>
+            <AccordionButton>Header 1</AccordionButton>
           </AccordionHeader>
           <AccordionPanel>Content 1</AccordionPanel>
         </AccordionItem>
         <AccordionItem>
           <AccordionHeader>
-            <AccordionSummary>Header 1</AccordionSummary>
+            <AccordionButton>Header 1</AccordionButton>
           </AccordionHeader>
           <AccordionPanel>Content 2</AccordionPanel>
         </AccordionItem>
         <AccordionItem>
           <AccordionHeader>
-            <AccordionSummary>Header 1</AccordionSummary>
+            <AccordionButton>Header 1</AccordionButton>
           </AccordionHeader>
           <AccordionPanel>Content 3</AccordionPanel>
         </AccordionItem>
@@ -54,18 +59,6 @@ export const allAccordions = () => {
     </Wrapper>
   )
 }
-
-const CustomContent = styled.div`
-  display: grid;
-  grid-auto-flow: row;
-`
-
-const addMarginRightProp = () => ({ marginRight }) =>
-  marginRight && { marginRight: `${marginRight}px` }
-
-const ButtonWithMarginProp = styled(Button)(addMarginRightProp)
-
-const IconWithMarginProp = styled(Icon)(addMarginRightProp)
 
 export const header = () => {
   return (
@@ -76,7 +69,7 @@ export const header = () => {
 
       <Accordion>
         <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionSummary>Header 1</AccordionSummary>
+          <AccordionButton>Header 1</AccordionButton>
         </AccordionHeader>
       </Accordion>
 
@@ -84,7 +77,7 @@ export const header = () => {
 
       <Accordion>
         <AccordionHeader variant="h3" chevronPosition="left" isExpanded>
-          <AccordionSummary>Header 1</AccordionSummary>
+          <AccordionButton>Header 1</AccordionButton>
         </AccordionHeader>
       </Accordion>
 
@@ -92,7 +85,7 @@ export const header = () => {
 
       <Accordion>
         <AccordionHeader variant="h3" chevronPosition="right">
-          <AccordionSummary>Header 1</AccordionSummary>
+          <AccordionButton>Header 1</AccordionButton>
         </AccordionHeader>
       </Accordion>
 
@@ -100,14 +93,16 @@ export const header = () => {
 
       <Accordion>
         <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionSummary>Header 1</AccordionSummary>
-          <IconWithMarginProp
-            name="attach_file"
-            title="Attach file"
-            size={16}
-            marginRight={32}
-          />
-          <Icon name="notifications" title="Notifications" size={16} />
+          <AccordionButton>
+            Header 1
+            <IconWithMarginProp
+              name="attach_file"
+              title="Attach file"
+              size={16}
+              marginRight={32}
+            />
+            <Icon name="notifications" title="Notifications" size={16} />
+          </AccordionButton>
         </AccordionHeader>
       </Accordion>
 
@@ -117,13 +112,13 @@ export const header = () => {
 
       <Accordion>
         <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionSummary>Header 1</AccordionSummary>
+          <AccordionButton>Header 1</AccordionButton>
           <Button variant="ghost_icon">
             <Icon name="attach_file" title="Attach file" />
           </Button>
-          <ButtonWithMarginProp variant="ghost_icon" marginRight={-16}>
+          <Button variant="ghost_icon">
             <Icon name="notifications" title="Notifications" />
-          </ButtonWithMarginProp>
+          </Button>
         </AccordionHeader>
       </Accordion>
 
@@ -131,10 +126,10 @@ export const header = () => {
 
       <Accordion>
         <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionSummary>
+          <AccordionButton>
             Very long summary that will get truncated if the width of the header
             is narrower than the length of the text
-          </AccordionSummary>
+          </AccordionButton>
         </AccordionHeader>
       </Accordion>
     </Wrapper>
