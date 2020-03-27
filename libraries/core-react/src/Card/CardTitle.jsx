@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 
-import { card as tokens } from './Card.tokens'
+//import { card as tokens } from './Card.tokens'
 
 // const {
 //   title: { text },
