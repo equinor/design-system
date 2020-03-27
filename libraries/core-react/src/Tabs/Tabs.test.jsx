@@ -35,7 +35,7 @@ const TabsWithRefs = () => {
 const TabsWithPanels = ({ selectedTabIndex }) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
 
-  const handleChange = (index) => {
+  const handleChange = (event, index) => {
     setActiveTab(index)
   }
 

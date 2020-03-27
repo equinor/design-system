@@ -69,7 +69,7 @@ export const tabWidths = () => {
 export const tabPanels = () => {
   const [activeTab, setActiveTab] = useState(1)
 
-  const handleChange = (index) => {
+  const handleChange = (event, index) => {
     setActiveTab(index)
   }
 

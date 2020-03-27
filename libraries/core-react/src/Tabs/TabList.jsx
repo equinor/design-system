@@ -53,7 +53,7 @@ const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
       'aria-controls': `${tabsId}-panel-${index + 1}`,
       active: index === activeTab,
       index,
-      onClick: () => handleChange(index),
+      onClick: (event) => handleChange(event, index),
       ref: tabRef,
       focusVisible,
     })
@@ -66,21 +66,21 @@ const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
   const firstFocusableChild = focusableChildren[0]
   const lastFocusableChild = focusableChildren[focusableChildren.length - 1]
 
-  const handleTabsChange = (direction, fallbackTab) => {
+  const handleTabsChange = (event, direction, fallbackTab) => {
     const i = direction === 'left' ? 1 : -1
     const nextTab =
       focusableChildren[focusableChildren.indexOf(currentTab.current) - i]
-    handleChange(nextTab === undefined ? fallbackTab : nextTab)
+    handleChange(event, nextTab === undefined ? fallbackTab : nextTab)
   }
 
   const handleKeyPress = (event) => {
     const { key } = event
     setFocusVisible(true)
     if (key === 'ArrowLeft') {
-      handleTabsChange('left', lastFocusableChild)
+      handleTabsChange(event, 'left', lastFocusableChild)
     }
     if (key === 'ArrowRight') {
-      handleTabsChange('right', firstFocusableChild)
+      handleTabsChange(event, 'right', firstFocusableChild)
     }
   }
 
