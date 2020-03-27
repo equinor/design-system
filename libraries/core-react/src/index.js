@@ -10,4 +10,8 @@ export { List } from './List'
 export { Tabs } from './Tabs'
 export { TopBar } from './TopBar'
 export { Card } from './Card'
+export { SideSheet } from './SideSheet'
+export { Chip } from './Chip'
+export { Avatar } from './Avatar'
+export { Search } from './Search'
 /* eslint-enable */

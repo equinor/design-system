@@ -93,6 +93,9 @@ const ButtonBase = styled.button.attrs(() => ({
   ${Base}
   position: relative;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &::before {
     position: absolute;
     top: 0;
