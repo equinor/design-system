@@ -7,14 +7,18 @@ const { icon, focus, hover, colors } = tokens
 
 const StyledLinkItem = styled.li`
   list-style: none;
+  margin: 0;
+  padding: 0;
 
   a {
     text-decoration: none;
     font-size: 14px;
     line-height: 16px;
-    padding: 12px 18px;
+    padding: 10px 18px;
+    height: 16px;
     width: calc(189px - 36px);
     display: block;
+    position: relative;
 
     &:focus {
       outline: ${focus.border.width} ${focus.border.type} ${focus.border.color};
@@ -30,6 +34,26 @@ const StyledLinkItem = styled.li`
         fill: ${hover.typography.color};
       }
     }
+
+    &:active {
+      outline: none;
+      background: ${hover.background};
+      color: ${hover.typography.color};
+      border-radius: ${hover.borderRadius};
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        background-color: rgba(0, 0, 0, 0.2);
+        width: 48px;
+        height: 48px;
+        position: absolute;
+        top: -6px;
+        left: 0px;
+        border-radius: 50%;
+      }
+    }
+
     svg {
       fill: ${icon.fill};
       margin-right: 8px;

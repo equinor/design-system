@@ -169,19 +169,17 @@ export const Example = () => {
         </article>
       </main>
       <aside>
-        <TableOfContents sticky={stickyState} label="Important sections">
+        <TableOfContents sticky={stickyState} label="Important topics">
           <LinkItem>
             <Typography variant="body_short" link href="#sub-section-one">
               <Icon name="subdirectory_arrow_right" size={16} />
               <span>Topic 1</span>
             </Typography>
           </LinkItem>
-          <LinkItem>
+          <LinkItem title="A very long topic to test proper implementation">
             <Typography variant="body_short" link href="#sub-section-two">
               <Icon name="subdirectory_arrow_right" size={16} />
-              <span title="A very long topic to test proper implementation">
-                A very long topic to test proper implementation
-              </span>
+              <span>A very long topic to test proper implementation</span>
             </Typography>
           </LinkItem>
           <LinkItem>

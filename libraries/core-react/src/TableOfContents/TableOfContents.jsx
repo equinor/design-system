@@ -1,8 +1,10 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { List, Typography } from '@equinor/eds-core-react'
-// import { tableOfContents as tokens } from './TableOfContents.tokens'
+import { List, Typography } from '..'
+import { tableOfContents as tokens } from './TableOfContents.tokens'
+
+const { labelText } = tokens
 
 const StyledTableOfContents = styled.nav`
   margin: 48px 0 32px 0;
@@ -21,6 +23,10 @@ const TocList = styled((props) => <List {...props} />)`
   padding: 0;
 `
 
+const TocLabel = styled((props) => <Typography {...props} />)`
+  color: ${labelText.color};
+`
+
 const TableOfContents = forwardRef(function TableOfContents(
   { children, sticky, label, className, ...rest },
   ref,
@@ -33,7 +39,7 @@ const TableOfContents = forwardRef(function TableOfContents(
       sticky={sticky}
       {...rest}
     >
-      <Typography variant="overline">{label}</Typography>
+      <TocLabel variant="overline">{label}</TocLabel>
       <TocList>{children}</TocList>
     </StyledTableOfContents>
   )
@@ -46,7 +52,7 @@ TableOfContents.propTypes = {
   children: PropTypes.node.isRequired,
   /** @ignore */
   className: PropTypes.string,
-  /** Sticky functions */
+  /** Sticky function */
   sticky: PropTypes.bool,
   label: PropTypes.string,
 }
