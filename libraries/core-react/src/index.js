@@ -12,4 +12,5 @@ export { TopBar } from './TopBar'
 export { SideSheet } from './SideSheet'
 export { Chip } from './Chip'
 export { Avatar } from './Avatar'
+export { Search } from './Search'
 /* eslint-enable */
