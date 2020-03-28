@@ -37,7 +37,7 @@ export const allAccordions = () => {
     <Wrapper>
       <Typography>All the Accordion</Typography>
       <Accordion>
-        <AccordionItem isExpanded={true}>
+        <AccordionItem isExpanded>
           <AccordionHeader>
             <AccordionButton>Header 1</AccordionButton>
           </AccordionHeader>
@@ -67,70 +67,82 @@ export const header = () => {
 
       <Typography variant="h2">Chevron left</Typography>
 
-      <Accordion>
-        <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionButton>Header 1</AccordionButton>
-        </AccordionHeader>
+      <Accordion headerLevel="h3" chevronPosition="left">
+        <AccordionItem>
+          <AccordionHeader>
+            <AccordionButton>Header 1</AccordionButton>
+          </AccordionHeader>
+        </AccordionItem>
       </Accordion>
 
       <Typography variant="h2">Chevron left expanded</Typography>
 
-      <Accordion>
-        <AccordionHeader variant="h3" chevronPosition="left" isExpanded>
-          <AccordionButton>Header 1</AccordionButton>
-        </AccordionHeader>
+      <Accordion headerLevel="h3" chevronPosition="left">
+        <AccordionItem>
+          <AccordionHeader isExpanded>
+            <AccordionButton>Header 1</AccordionButton>
+          </AccordionHeader>
+        </AccordionItem>
       </Accordion>
 
       <Typography variant="h2">Chevron right</Typography>
 
-      <Accordion>
-        <AccordionHeader variant="h3" chevronPosition="right">
-          <AccordionButton>Header 1</AccordionButton>
-        </AccordionHeader>
+      <Accordion headerLevel="h3" chevronPosition="right">
+        <AccordionItem>
+          <AccordionHeader>
+            <AccordionButton>Header 1</AccordionButton>
+          </AccordionHeader>
+        </AccordionItem>
       </Accordion>
 
       <Typography variant="h2">Chevron left – custom icons right</Typography>
 
-      <Accordion>
-        <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionButton>
-            Header 1
-            <IconWithMarginProp
-              name="attach_file"
-              title="Attach file"
-              size={16}
-              marginRight={32}
-            />
-            <Icon name="notifications" title="Notifications" size={16} />
-          </AccordionButton>
-        </AccordionHeader>
+      <Accordion headerLevel="h3" chevronPosition="left">
+        <AccordionItem>
+          <AccordionHeader>
+            <AccordionButton>
+              Header 1
+              <IconWithMarginProp
+                name="attach_file"
+                title="Attach file"
+                size={16}
+                marginRight={32}
+              />
+              <Icon name="notifications" title="Notifications" size={16} />
+            </AccordionButton>
+          </AccordionHeader>
+        </AccordionItem>
       </Accordion>
 
       <Typography variant="h2">
         Chevron left – interactive options right
       </Typography>
 
-      <Accordion>
-        <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionButton>Header 1</AccordionButton>
-          <Button variant="ghost_icon">
-            <Icon name="attach_file" title="Attach file" />
-          </Button>
-          <Button variant="ghost_icon">
-            <Icon name="notifications" title="Notifications" />
-          </Button>
-        </AccordionHeader>
+      <Accordion headerLevel="h3" chevronPosition="left">
+        <AccordionItem>
+          <AccordionHeader>
+            <AccordionButton>Header 1</AccordionButton>
+            <Button variant="ghost_icon">
+              <Icon name="attach_file" title="Attach file" />
+            </Button>
+            <Button variant="ghost_icon">
+              <Icon name="notifications" title="Notifications" />
+            </Button>
+          </AccordionHeader>
+        </AccordionItem>
       </Accordion>
 
       <Typography variant="h2">Truncated text</Typography>
 
-      <Accordion>
-        <AccordionHeader variant="h3" chevronPosition="left">
-          <AccordionButton>
-            Very long summary that will get truncated if the width of the header
-            is narrower than the length of the text
-          </AccordionButton>
-        </AccordionHeader>
+      <Accordion headerLevel="h3" chevronPosition="left">
+        <AccordionItem>
+          <AccordionHeader>
+            <AccordionButton>
+              Very long summary that will get truncated if the width of the
+              header is narrower than the length of the text
+            </AccordionButton>
+          </AccordionHeader>
+        </AccordionItem>
       </Accordion>
     </Wrapper>
   )

@@ -4,13 +4,18 @@ import styled, { css } from 'styled-components'
 import { AccordionHeader as Header } from './AccordionHeader'
 import { AccordionPanel as Panel } from './AccordionPanel'
 import { accordion as tokens } from './Accordion.tokens'
-
-const StyledAccordionItem = styled.div`
-  background: silver;
-`
+import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
 const AccordionItem = forwardRef(function AccordionItem(
-  { index, accordionId, isExpanded, children, ...props },
+  {
+    headerLevel,
+    chevronPosition,
+    index,
+    accordionId,
+    isExpanded,
+    children,
+    ...props
+  },
   ref,
 ) {
   const [expanded, setExpanded] = useState(isExpanded)
@@ -29,6 +34,8 @@ const AccordionItem = forwardRef(function AccordionItem(
           onClick: toggleExpanded,
           id: headerId,
           panelId,
+          headerLevel,
+          chevronPosition,
         })
       : React.cloneElement(child, {
           hidden: !expanded,
@@ -38,15 +45,16 @@ const AccordionItem = forwardRef(function AccordionItem(
   })
 
   return (
-    <StyledAccordionItem {...props} ref={ref}>
+    <div {...props} ref={ref}>
       {Children}
-    </StyledAccordionItem>
+    </div>
   )
 })
 
 AccordionItem.displayName = 'eds-accordion-item'
 
 AccordionItem.propTypes = {
+  ...commonPropTypes,
   /** The ID of the Accordion */
   accordionId: PropTypes.string,
   /** Is AccordionItem expanded */
@@ -55,15 +63,13 @@ AccordionItem.propTypes = {
   index: PropTypes.number,
   /** @ignore */
   children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
 }
 
 AccordionItem.defaultProps = {
+  ...commonDefaultProps,
   index: 0,
   accordionId: '',
   isExpanded: false,
-  className: null,
 }
 
 export { AccordionItem }

@@ -2,35 +2,47 @@ import React, { forwardRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import createId from 'lodash.uniqueid'
+import { AccordionProvider } from './Accordion.context'
 import { accordion as tokens } from './Accordion.tokens'
+import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
-const StyledAccordion = styled.div`
-  background: pink;
-`
-
-const Accordion = forwardRef(function Accordion({ children, ...props }, ref) {
+const Accordion = forwardRef(function Accordion(
+  { headerLevel, chevronPosition, children, ...props },
+  ref,
+) {
   const accordionId = useMemo(() => createId('accordion-'), [])
 
   const AccordionItems = React.Children.map(children, (child, index) => {
     return React.cloneElement(child, {
       accordionId,
       index,
+      headerLevel,
+      chevronPosition,
     })
   })
 
   return (
-    <StyledAccordion {...props} ref={ref}>
-      {AccordionItems}
-    </StyledAccordion>
+    <AccordionProvider
+      value={{
+        headerLevel,
+        chevronPosition,
+      }}
+    >
+      <div {...props} ref={ref}>
+        {AccordionItems}
+      </div>
+    </AccordionProvider>
   )
 })
 
 Accordion.displayName = 'eds-accordion'
 
 Accordion.propTypes = {
-  children: PropTypes.node.isRequired,
+  ...commonPropTypes,
 }
 
-Accordion.defaultProps = {}
+Accordion.defaultProps = {
+  ...commonDefaultProps,
+}
 
 export { Accordion }

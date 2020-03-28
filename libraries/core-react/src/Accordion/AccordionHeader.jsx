@@ -1,14 +1,14 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { layers, chevron_down, chevron_up } from '@equinor/eds-icons'
+import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon, Typography } from '..'
 import { accordion as tokens } from './Accordion.tokens'
+import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
 Icon.add({ chevron_down, chevron_up })
 
 const StyledAccordionHeader = styled.div`
-  background: lime;
   font-size: 16px;
   margin: 0;
   display: flex;
@@ -50,12 +50,13 @@ const AccordionHeaderTitle = styled.span`
 `
 
 const AccordionHeader = forwardRef(function AccordionHeader(
-  { panelId, id, chevronPosition, isExpanded, children, variant, ...props },
+  { headerLevel, chevronPosition, panelId, id, isExpanded, children, ...props },
   ref,
 ) {
   const headerChildren = React.Children.map(children, (child) => {
     const chevron = (
       <StyledIcon
+        key={`${id}-icon`}
         name={isExpanded ? 'chevron_up' : 'chevron_down'}
         size={16}
         chevronPosition={chevronPosition}
@@ -90,7 +91,7 @@ const AccordionHeader = forwardRef(function AccordionHeader(
   })
 
   return (
-    <StyledAccordionHeader as={variant} {...props} ref={ref}>
+    <StyledAccordionHeader as={headerLevel} {...props} ref={ref}>
       {headerChildren}
     </StyledAccordionHeader>
   )
@@ -99,14 +100,11 @@ const AccordionHeader = forwardRef(function AccordionHeader(
 AccordionHeader.displayName = 'eds-accordion-header'
 
 AccordionHeader.propTypes = {
+  ...commonPropTypes,
   /** The id of the button that toggles expansion */
   id: PropTypes.string,
   /** Is AccordionItem expanded */
   isExpanded: PropTypes.bool,
-  /** Which side the chevron should be on  */
-  chevronPosition: PropTypes.oneOf(['left', 'right']),
-  /** The header level, i.e. h1, h2, h3 etc. */
-  variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
   /** The panel that is controlled by the HeaderButton */
   panelId: PropTypes.string,
   /** @ignore */
@@ -114,11 +112,10 @@ AccordionHeader.propTypes = {
 }
 
 AccordionHeader.defaultProps = {
+  ...commonDefaultProps,
   id: '',
   panelId: null,
   isExpanded: false,
-  chevronPosition: 'left',
-  variant: 'h2',
 }
 
 export { AccordionHeader, HeaderButton as AccordionButton }
