@@ -19,24 +19,22 @@ const {
   outlineOffset,
 } = tokens
 
-const StyledAccordionHeader = styled.div(
-  ({ isExpanded, parentIndex, clickHandler }) => ({
-    ...header,
-    margin: 0,
-    display: 'flex',
-    borderTop: parentIndex === 0 ? border : 'none',
-    borderRight: border,
-    borderBottom: border,
-    borderLeft: border,
-    boxSizing: 'border-box',
-    color: isExpanded ? headerColor.activated : headerColor.default,
-    '&:focus-within': {
-      outline,
-      outlineOffset,
-    },
-    '&:hover': { background: headerBackground.hover },
-  }),
-)
+const StyledAccordionHeader = styled.div(({ isExpanded, parentIndex }) => ({
+  ...header,
+  margin: 0,
+  display: 'flex',
+  borderTop: parentIndex === 0 ? border : 'none',
+  borderRight: border,
+  borderBottom: border,
+  borderLeft: border,
+  boxSizing: 'border-box',
+  color: isExpanded ? headerColor.activated : headerColor.default,
+  '&:focus-within': {
+    outline,
+    outlineOffset,
+  },
+  '&:hover': { background: headerBackground.hover },
+}))
 
 const HeaderButton = styled.button.attrs(({ panelId, isExpanded }) => ({
   'aria-expanded': isExpanded,
@@ -90,8 +88,6 @@ const AccordionHeader = forwardRef(function AccordionHeader(
   },
   ref,
 ) {
-  // console.log(tokens)
-
   const headerChildren = React.Children.map(children, (child) => {
     const chevron = (
       <StyledIcon

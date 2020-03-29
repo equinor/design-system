@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { accordion as tokens } from './Accordion.tokens'
 
 const {
@@ -15,7 +15,6 @@ const StyledAccordionPanel = styled.div.attrs(({ headerId }) => ({
   'aria-labelledby': headerId,
 }))`
   background: ${background};
-  /* border: ${border}; */
   border-right: ${border};
   border-bottom: ${border};
   border-left: ${border};
