@@ -21,29 +21,6 @@ Icon.add({ attach_file, notifications })
 
 afterEach(cleanup)
 
-// const SomeAccordion = () => (
-//   <Accordion>
-//     <AccordionItem isExpanded>
-//       <AccordionHeader>
-//         <AccordionButton>Header 1</AccordionButton>
-//       </AccordionHeader>
-//       <AccordionPanel>Content 1</AccordionPanel>
-//     </AccordionItem>
-//     <AccordionItem>
-//       <AccordionHeader chevronPosition="right">
-//         <AccordionButton>Header 1</AccordionButton>
-//       </AccordionHeader>
-//       <AccordionPanel>Content 2</AccordionPanel>
-//     </AccordionItem>
-//     <AccordionItem>
-//       <AccordionHeader>
-//         <AccordionButton>Header 1</AccordionButton>
-//       </AccordionHeader>
-//       <AccordionPanel>Content 3</AccordionPanel>
-//     </AccordionItem>
-//   </Accordion>
-// )
-
 const SimpleAccordion = ({ headerLevel, chevronPosition }) => (
   <Accordion headerLevel={headerLevel} chevronPosition={chevronPosition}>
     <AccordionItem isExpanded>
