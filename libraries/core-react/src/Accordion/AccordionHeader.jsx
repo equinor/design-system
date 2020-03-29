@@ -29,10 +29,7 @@ const StyledAccordionHeader = styled.div(
     borderBottom: border,
     borderLeft: border,
     boxSizing: 'border-box',
-    color:
-      (disabled && headerColor.disabled) ||
-      (isExpanded && headerColor.activated) ||
-      headerColor.default,
+    color: (disabled && headerColor.disabled) || headerColor.default,
     '&:focus-within': {
       outline,
       outlineOffset,
@@ -84,7 +81,8 @@ const AccordionHeaderTitle = styled.span`
   overflow: hidden;
   text-align: left;
   font-family: Equinor;
-  color: inherit;
+  color: ${({ isExpanded, disabled }) =>
+    isExpanded && !disabled ? headerColor.activated : 'inherit'};
 `
 
 const AccordionHeader = forwardRef(function AccordionHeader(
@@ -117,7 +115,9 @@ const AccordionHeader = forwardRef(function AccordionHeader(
       child.props.children,
       (grandChild) =>
         typeof grandChild === 'string' ? (
-          <AccordionHeaderTitle>{grandChild}</AccordionHeaderTitle>
+          <AccordionHeaderTitle isExpanded={isExpanded} disabled={disabled}>
+            {grandChild}
+          </AccordionHeaderTitle>
         ) : (
           grandChild
         ),
