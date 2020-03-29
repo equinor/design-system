@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
+import { action } from '@storybook/addon-actions'
 // import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Accordion, Typography, Button, Icon } from '@equinor/eds-core-react'
-import { attach_file, notifications } from '@equinor/eds-icons'
+import {
+  attach_file,
+  notifications,
+  edit,
+  delete_to_trash,
+} from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
 
 const {
@@ -12,7 +18,7 @@ const {
   AccordionPanel,
 } = Accordion
 
-Icon.add({ attach_file, notifications })
+Icon.add({ attach_file, notifications, edit, delete_to_trash })
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -78,8 +84,8 @@ export const header = () => {
       <Typography variant="h2">Chevron left expanded</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="left">
-        <AccordionItem>
-          <AccordionHeader isExpanded>
+        <AccordionItem isExpanded>
+          <AccordionHeader>
             <AccordionButton>Header 1</AccordionButton>
           </AccordionHeader>
         </AccordionItem>
@@ -122,11 +128,17 @@ export const header = () => {
         <AccordionItem>
           <AccordionHeader>
             <AccordionButton>Header 1</AccordionButton>
-            <Button variant="ghost_icon">
-              <Icon name="attach_file" title="Attach file" />
+            <Button
+              variant="ghost_icon"
+              onClick={action('clicked edit button')}
+            >
+              <Icon name="edit" title="Edit" />
             </Button>
-            <Button variant="ghost_icon">
-              <Icon name="notifications" title="Notifications" />
+            <Button
+              variant="ghost_icon"
+              onClick={action('clicked delete button')}
+            >
+              <Icon name="delete_to_trash" title="Delete" />
             </Button>
           </AccordionHeader>
         </AccordionItem>

@@ -3,13 +3,25 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { accordion as tokens } from './Accordion.tokens'
 
+const {
+  header: {
+    background: { backgroundDefault: background },
+  },
+  border,
+} = tokens
+
 const StyledAccordionPanel = styled.div.attrs(({ headerId }) => ({
   role: 'region',
   'aria-labelledby': headerId,
 }))`
-  background: yellow;
+  background: ${background};
+  /* border: ${border}; */
+  border-right: ${border};
+  border-bottom: ${border};
+  border-left: ${border};
   min-height: 96px;
   padding: 16px;
+  box-sizing: border-box;
 `
 
 const AccordionPanel = forwardRef(function AccordionPanel(

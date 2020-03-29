@@ -111,13 +111,13 @@ describe('Accordion', () => {
     expect(button1).toHaveAttribute('aria-expanded', 'true')
     expect(button2).toHaveAttribute('aria-expanded', 'false')
   })
-  it('Expands items based on click', () => {
+  it('Expands items on click', () => {
     render(<SimpleAccordion />)
     const button2 = screen.queryByText('Summary 2').parentNode
     fireEvent.click(button2)
     expect(button2).toHaveAttribute('aria-expanded', 'true')
   })
-  it('Can set header level', () => {
+  it('Set header level', () => {
     const { container } = render(<SimpleAccordion headerLevel="h3" />)
     expect(container.querySelectorAll('h3')).toHaveLength(2)
   })
@@ -127,20 +127,20 @@ describe('Accordion', () => {
     const chevron = button.querySelector('svg')
     expect(button.firstChild).toBe(chevron)
   })
-  it('Can set chevron position to the right', () => {
+  it('Set chevron position to the right', () => {
     const { container } = render(<SimpleAccordion chevronPosition="right" />)
     const button = container.querySelector('button')
     const chevron = button.querySelector('svg')
     expect(button.lastChild).toBe(chevron)
   })
-  it('Can add custom icons', () => {
+  it('Add custom icons', () => {
     const { container } = render(<AccordionWithIcons />)
     const button = container.querySelector('button')
     expect(button.querySelectorAll('svg')).toHaveLength(3)
   })
-  it('Can add custom buttons', () => {
+  it('Add custom buttons', () => {
     const { container } = render(<AccordionWithButtons />)
-    const header = container.querySelectorAll('h1, h2, h3, h4, h5, h6')[0]
+    const header = container.querySelector('h1, h2, h3, h4, h5, h6')
     expect(header.querySelectorAll('button')).toHaveLength(3)
   })
 })

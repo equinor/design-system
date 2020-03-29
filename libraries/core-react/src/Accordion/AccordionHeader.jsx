@@ -8,11 +8,35 @@ import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
 Icon.add({ chevron_down, chevron_up })
 
-const StyledAccordionHeader = styled.div`
-  font-size: 16px;
-  margin: 0;
-  display: flex;
-`
+const {
+  header: { color: headerColor, background: headerBackground, ...header },
+  border,
+  chevronColor: {
+    default: chevronDefaultColor,
+    disabled: chevronDisabledColor,
+  },
+  outline,
+  outlineOffset,
+} = tokens
+
+const StyledAccordionHeader = styled.div(
+  ({ isExpanded, parentIndex, clickHandler }) => ({
+    ...header,
+    margin: 0,
+    display: 'flex',
+    borderTop: parentIndex === 0 ? border : 'none',
+    borderRight: border,
+    borderBottom: border,
+    borderLeft: border,
+    boxSizing: 'border-box',
+    color: isExpanded ? headerColor.activated : headerColor.default,
+    '&:focus-within': {
+      outline,
+      outlineOffset,
+    },
+    '&:hover': { background: headerBackground.hover },
+  }),
+)
 
 const HeaderButton = styled.button.attrs(({ panelId, isExpanded }) => ({
   'aria-expanded': isExpanded,
@@ -25,13 +49,16 @@ const HeaderButton = styled.button.attrs(({ panelId, isExpanded }) => ({
   border: none;
   height: 48px;
   width: 100%;
-  background: orange;
+  background: transparent;
+  color: inherit;
   font-size: inherit;
   flex: 1;
   display: flex;
+  align-items: center;
   cursor: pointer;
   padding-left: 16px;
   padding-right: 16px;
+  outline: none;
 `
 
 HeaderButton.displayName = 'eds-accordion-headerbutton'
@@ -50,9 +77,21 @@ const AccordionHeaderTitle = styled.span`
 `
 
 const AccordionHeader = forwardRef(function AccordionHeader(
-  { headerLevel, chevronPosition, panelId, id, isExpanded, children, ...props },
+  {
+    parentIndex,
+    headerLevel,
+    chevronPosition,
+    panelId,
+    id,
+    isExpanded,
+    children,
+    toggleExpanded,
+    ...props
+  },
   ref,
 ) {
+  // console.log(tokens)
+
   const headerChildren = React.Children.map(children, (child) => {
     const chevron = (
       <StyledIcon
@@ -60,6 +99,7 @@ const AccordionHeader = forwardRef(function AccordionHeader(
         name={isExpanded ? 'chevron_up' : 'chevron_down'}
         size={16}
         chevronPosition={chevronPosition}
+        color={chevronDefaultColor}
       />
     )
 
@@ -82,6 +122,7 @@ const AccordionHeader = forwardRef(function AccordionHeader(
             id,
             isExpanded,
             panelId,
+            onClick: toggleExpanded,
           },
           chevronPosition === 'left'
             ? headerButtonChildren
@@ -91,7 +132,13 @@ const AccordionHeader = forwardRef(function AccordionHeader(
   })
 
   return (
-    <StyledAccordionHeader as={headerLevel} {...props} ref={ref}>
+    <StyledAccordionHeader
+      isExpanded={isExpanded}
+      parentIndex={parentIndex}
+      as={headerLevel}
+      {...props}
+      ref={ref}
+    >
       {headerChildren}
     </StyledAccordionHeader>
   )
@@ -109,6 +156,8 @@ AccordionHeader.propTypes = {
   panelId: PropTypes.string,
   /** @ignore */
   children: PropTypes.node.isRequired,
+  /** The index of the parent AccordionItem  */
+  parentIndex: PropTypes.number,
 }
 
 AccordionHeader.defaultProps = {
@@ -116,6 +165,7 @@ AccordionHeader.defaultProps = {
   id: '',
   panelId: null,
   isExpanded: false,
+  parentIndex: null,
 }
 
 export { AccordionHeader, HeaderButton as AccordionButton }

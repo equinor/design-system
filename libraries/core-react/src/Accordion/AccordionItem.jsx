@@ -31,11 +31,12 @@ const AccordionItem = forwardRef(function AccordionItem(
     return childIndex === 0
       ? React.cloneElement(child, {
           isExpanded: expanded,
-          onClick: toggleExpanded,
+          toggleExpanded,
           id: headerId,
           panelId,
           headerLevel,
           chevronPosition,
+          parentIndex: index,
         })
       : React.cloneElement(child, {
           hidden: !expanded,
@@ -63,6 +64,8 @@ AccordionItem.propTypes = {
   index: PropTypes.number,
   /** @ignore */
   children: PropTypes.node.isRequired,
+  /** The clickHandler that toggles the AccordionPanel */
+  toggleExpanded: PropTypes.func,
 }
 
 AccordionItem.defaultProps = {
@@ -70,6 +73,7 @@ AccordionItem.defaultProps = {
   index: 0,
   accordionId: '',
   isExpanded: false,
+  toggleExpanded: () => {},
 }
 
 export { AccordionItem }
