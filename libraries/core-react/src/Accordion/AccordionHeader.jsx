@@ -19,28 +19,36 @@ const {
   outlineOffset,
 } = tokens
 
-const StyledAccordionHeader = styled.div(({ isExpanded, parentIndex }) => ({
-  ...header,
-  margin: 0,
-  display: 'flex',
-  borderTop: parentIndex === 0 ? border : 'none',
-  borderRight: border,
-  borderBottom: border,
-  borderLeft: border,
-  boxSizing: 'border-box',
-  color: isExpanded ? headerColor.activated : headerColor.default,
-  '&:focus-within': {
-    outline,
-    outlineOffset,
-  },
-  '&:hover': { background: headerBackground.hover },
-}))
+const StyledAccordionHeader = styled.div(
+  ({ isExpanded, parentIndex, disabled }) => ({
+    ...header,
+    margin: 0,
+    display: 'flex',
+    borderTop: parentIndex === 0 ? border : 'none',
+    borderRight: border,
+    borderBottom: border,
+    borderLeft: border,
+    boxSizing: 'border-box',
+    color:
+      (disabled && headerColor.disabled) ||
+      (isExpanded && headerColor.activated) ||
+      headerColor.default,
+    '&:focus-within': {
+      outline,
+      outlineOffset,
+    },
+    '&:hover': !disabled && { background: headerBackground.hover },
+  }),
+)
 
-const HeaderButton = styled.button.attrs(({ panelId, isExpanded }) => ({
-  'aria-expanded': isExpanded,
-  'aria-controls': panelId,
-  type: 'button',
-}))`
+const HeaderButton = styled.button.attrs(
+  ({ panelId, isExpanded, disabled }) => ({
+    'aria-expanded': isExpanded,
+    'aria-controls': panelId,
+    type: 'button',
+    disabled,
+  }),
+)`
   margin: 0;
   padding: 0;
   appearance: none;
@@ -53,7 +61,11 @@ const HeaderButton = styled.button.attrs(({ panelId, isExpanded }) => ({
   flex: 1;
   display: flex;
   align-items: center;
-  cursor: pointer;
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      cursor: pointer;
+    `}
   padding-left: 16px;
   padding-right: 16px;
   outline: none;
@@ -72,6 +84,7 @@ const AccordionHeaderTitle = styled.span`
   overflow: hidden;
   text-align: left;
   font-family: Equinor;
+  color: inherit;
 `
 
 const AccordionHeader = forwardRef(function AccordionHeader(
@@ -84,6 +97,7 @@ const AccordionHeader = forwardRef(function AccordionHeader(
     isExpanded,
     children,
     toggleExpanded,
+    disabled,
     ...props
   },
   ref,
@@ -95,7 +109,7 @@ const AccordionHeader = forwardRef(function AccordionHeader(
         name={isExpanded ? 'chevron_up' : 'chevron_down'}
         size={16}
         chevronPosition={chevronPosition}
-        color={chevronDefaultColor}
+        color={disabled ? chevronDisabledColor : chevronDefaultColor}
       />
     )
 
@@ -118,7 +132,8 @@ const AccordionHeader = forwardRef(function AccordionHeader(
             id,
             isExpanded,
             panelId,
-            onClick: toggleExpanded,
+            onClick: disabled ? null : toggleExpanded,
+            disabled,
           },
           chevronPosition === 'left'
             ? headerButtonChildren
@@ -132,6 +147,7 @@ const AccordionHeader = forwardRef(function AccordionHeader(
       isExpanded={isExpanded}
       parentIndex={parentIndex}
       as={headerLevel}
+      disabled={disabled}
       {...props}
       ref={ref}
     >
@@ -154,6 +170,8 @@ AccordionHeader.propTypes = {
   children: PropTypes.node.isRequired,
   /** The index of the parent AccordionItem  */
   parentIndex: PropTypes.number,
+  /** accordion item is disabled */
+  disabled: PropTypes.bool,
 }
 
 AccordionHeader.defaultProps = {
@@ -162,6 +180,7 @@ AccordionHeader.defaultProps = {
   panelId: null,
   isExpanded: false,
   parentIndex: null,
+  disabled: false,
 }
 
 export { AccordionHeader, HeaderButton as AccordionButton }

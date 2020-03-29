@@ -14,6 +14,7 @@ const AccordionItem = forwardRef(function AccordionItem(
     accordionId,
     isExpanded,
     children,
+    disabled,
     ...props
   },
   ref,
@@ -37,6 +38,7 @@ const AccordionItem = forwardRef(function AccordionItem(
           headerLevel,
           chevronPosition,
           parentIndex: index,
+          disabled,
         })
       : React.cloneElement(child, {
           hidden: !expanded,
@@ -66,10 +68,13 @@ AccordionItem.propTypes = {
   children: PropTypes.node.isRequired,
   /** The clickHandler that toggles the AccordionPanel */
   toggleExpanded: PropTypes.func,
+  /** accordion item is disabled */
+  disabled: PropTypes.bool,
 }
 
 AccordionItem.defaultProps = {
   ...commonDefaultProps,
+  disabled: false,
   index: 0,
   accordionId: '',
   isExpanded: false,

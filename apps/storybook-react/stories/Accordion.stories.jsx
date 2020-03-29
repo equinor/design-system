@@ -38,10 +38,10 @@ export default {
   component: Accordion,
 }
 
-export const allAccordions = () => {
+export const accordionsExample = () => {
   return (
     <Wrapper>
-      <Typography>All the Accordion</Typography>
+      <Typography>Accordion example</Typography>
       <Accordion>
         <AccordionItem isExpanded>
           <AccordionHeader>
@@ -101,6 +101,26 @@ export const header = () => {
         </AccordionItem>
       </Accordion>
 
+      <Typography variant="h2">Disabled</Typography>
+
+      <Accordion headerLevel="h3" chevronPosition="right">
+        <AccordionItem disabled>
+          <AccordionHeader>
+            <AccordionButton>Header 1</AccordionButton>
+          </AccordionHeader>
+        </AccordionItem>
+      </Accordion>
+
+      <Typography variant="h2">Disabled expanded</Typography>
+
+      <Accordion headerLevel="h3" chevronPosition="right">
+        <AccordionItem disabled isExpanded>
+          <AccordionHeader>
+            <AccordionButton>Header 1</AccordionButton>
+          </AccordionHeader>
+        </AccordionItem>
+      </Accordion>
+
       <Typography variant="h2">Chevron left – custom icons right</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="left">
@@ -113,8 +133,14 @@ export const header = () => {
                 title="Attach file"
                 size={16}
                 marginRight={32}
+                color="currentColor"
               />
-              <Icon name="notifications" title="Notifications" size={16} />
+              <Icon
+                name="notifications"
+                title="Notifications"
+                size={16}
+                color="currentColor"
+              />
             </AccordionButton>
           </AccordionHeader>
         </AccordionItem>
