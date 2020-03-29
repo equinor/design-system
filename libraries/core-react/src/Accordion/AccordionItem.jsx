@@ -66,8 +66,6 @@ AccordionItem.propTypes = {
   index: PropTypes.number,
   /** @ignore */
   children: PropTypes.node.isRequired,
-  /** The clickHandler that toggles the AccordionPanel */
-  toggleExpanded: PropTypes.func,
   /** accordion item is disabled */
   disabled: PropTypes.bool,
 }
@@ -78,7 +76,6 @@ AccordionItem.defaultProps = {
   index: 0,
   accordionId: '',
   isExpanded: false,
-  toggleExpanded: () => {},
 }
 
 export { AccordionItem }

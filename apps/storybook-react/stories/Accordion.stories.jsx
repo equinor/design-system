@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { action } from '@storybook/addon-actions'
-// import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Accordion, Typography, Button, Icon } from '@equinor/eds-core-react'
 import {
   attach_file,

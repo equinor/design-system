@@ -19,24 +19,22 @@ const {
   outlineOffset,
 } = tokens
 
-const StyledAccordionHeader = styled.div(
-  ({ isExpanded, parentIndex, disabled }) => ({
-    ...header,
-    margin: 0,
-    display: 'flex',
-    borderTop: parentIndex === 0 ? border : 'none',
-    borderRight: border,
-    borderBottom: border,
-    borderLeft: border,
-    boxSizing: 'border-box',
-    color: (disabled && headerColor.disabled) || headerColor.default,
-    '&:focus-within': {
-      outline,
-      outlineOffset,
-    },
-    '&:hover': !disabled && { background: headerBackground.hover },
-  }),
-)
+const StyledAccordionHeader = styled.div(({ parentIndex, disabled }) => ({
+  ...header,
+  margin: 0,
+  display: 'flex',
+  borderTop: parentIndex === 0 ? border : 'none',
+  borderRight: border,
+  borderBottom: border,
+  borderLeft: border,
+  boxSizing: 'border-box',
+  color: (disabled && headerColor.disabled) || headerColor.default,
+  '&:focus-within': {
+    outline,
+    outlineOffset,
+  },
+  '&:hover': !disabled && { background: headerBackground.hover },
+}))
 
 const HeaderButton = styled.button.attrs(
   ({ panelId, isExpanded, disabled }) => ({
@@ -44,6 +42,7 @@ const HeaderButton = styled.button.attrs(
     'aria-controls': panelId,
     type: 'button',
     disabled,
+    'aria-disabled': isExpanded && disabled,
   }),
 )`
   margin: 0;
