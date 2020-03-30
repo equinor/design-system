@@ -32,7 +32,11 @@ export default {
 export const Page = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
   const handleClose = (event, closed) => {
-    setVisibleScrim(!visibleScrim)
+    if (closed) {
+      setVisibleScrim(closed)
+    } else {
+      setVisibleScrim(!visibleScrim)
+    }
   }
 
   return (

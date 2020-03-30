@@ -60,11 +60,13 @@ Scrim.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
+  onKeyDown: PropTypes.func,
   isDismissable: PropTypes.bool,
 }
 
 Scrim.defaultProps = {
   className: '',
   children: undefined,
+  onKeyDown: () => {},
   isDismissable: true,
 }
