@@ -1,3 +1,5 @@
+import { css } from 'styled-components'
+
 export const typographyTemplate = (typography, link) => {
   if (!typography) {
     return ''
@@ -33,9 +35,15 @@ export const typographyTemplate = (typography, link) => {
   return base
 }
 
-export const spacingsTemplate = (spacings) => `
-padding-left: ${spacings.left};
-padding-right: ${spacings.right};
-padding-top: ${spacings.top};
-padding-bottom: ${spacings.bottom};
+export const spacingsTemplate = (spacings) => css`
+  padding-left: ${spacings.left};
+  padding-right: ${spacings.right};
+  padding-top: ${spacings.top};
+  padding-bottom: ${spacings.bottom};
+`
+
+export const bordersTemplate = (border) => css`
+  border-radius: ${border.radius};
+  border-color: ${border.color};
+  border-width: ${border.width};
 `
