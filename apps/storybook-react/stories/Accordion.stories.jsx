@@ -50,13 +50,13 @@ export const accordionsExample = () => {
         </AccordionItem>
         <AccordionItem>
           <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
+            <AccordionButton>Header 2</AccordionButton>
           </AccordionHeader>
           <AccordionPanel>Content 2</AccordionPanel>
         </AccordionItem>
         <AccordionItem>
           <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
+            <AccordionButton>Header 3</AccordionButton>
           </AccordionHeader>
           <AccordionPanel>Content 3</AccordionPanel>
         </AccordionItem>
