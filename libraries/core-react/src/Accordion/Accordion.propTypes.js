@@ -12,5 +12,5 @@ export const commonPropTypes = {
 export const commonDefaultProps = {
   chevronPosition: 'left',
   headerLevel: 'h2',
-  className: null,
+  className: '',
 }

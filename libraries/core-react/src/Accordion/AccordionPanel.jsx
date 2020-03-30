@@ -58,7 +58,7 @@ AccordionPanel.propTypes = {
 AccordionPanel.defaultProps = {
   headerId: '',
   id: '',
-  className: null,
+  className: '',
   hidden: null,
 }
 

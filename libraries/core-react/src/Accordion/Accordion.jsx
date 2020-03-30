@@ -1,8 +1,5 @@
 import React, { forwardRef, useMemo } from 'react'
-import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
 import createId from 'lodash.uniqueid'
-import { accordion as tokens } from './Accordion.tokens'
 import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
 const Accordion = forwardRef(function Accordion(
