@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "The React implementation of the Equinor Design System",
   "main": "dist/core-react.cjs.js",
   "module": "dist/core-react.es.js",
@@ -40,7 +40,6 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
-    "@equinor/eds-icons": "workspace:*",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "babel-plugin-styled-components": "^1.10.6",
@@ -72,6 +71,10 @@
   "dependencies": {
     "@equinor/eds-tokens": "workspace:*",
     "@testing-library/react-hooks": "^3.2.1",
-    "lodash.uniqueid": "^4.0.1"
+    "lodash.uniqueid": "^4.0.1",
+    "@equinor/eds-icons": "workspace:*"
+  },
+  "engines": {
+    "pnpm": ">=4"
   }
 }

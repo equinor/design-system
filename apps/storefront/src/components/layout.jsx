@@ -13,6 +13,7 @@ import Embed from './embed'
 import Video from './video'
 import FigmaImage from './figmaImage'
 import IconsDownload from './Icons'
+import Image from './image'
 
 const mdxComponents = {
   ComponentStatus,
@@ -20,6 +21,7 @@ const mdxComponents = {
   Video,
   FigmaImage,
   IconsDownload,
+  Image,
 }
 
 const Layout = ({ children }) => (

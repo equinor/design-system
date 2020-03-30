@@ -11,4 +11,8 @@ export { Tabs } from './Tabs'
 export { TopBar } from './TopBar'
 export { Dialog } from './Dialog'
 export { Scrim } from './Scrim'
+export { SideSheet } from './SideSheet'
+export { Chip } from './Chip'
+export { Avatar } from './Avatar'
+export { Search } from './Search'
 /* eslint-enable */
