@@ -13,8 +13,15 @@ const {
     },
   },
   shape: {
-    // rounded: { borderRadius },
     corners: { borderRadius },
+  },
+  spacings: {
+    comfortable: { small: smallSpacings },
+  },
+  typography: {
+    paragraph: {
+      caption: { fontSize, lineHeight: fontLineHeight },
+    },
   },
 } = tokens
 
@@ -26,7 +33,7 @@ export const tableOfContents = {
     border: {
       type: 'dashed',
       color: focusColor,
-      width: '2px',
+      width: '1px',
       borderRadius,
     },
   },
@@ -42,5 +49,12 @@ export const tableOfContents = {
   },
   labelText: {
     color: labelColor,
+  },
+  links: {
+    fontSize,
+    fontLineHeight,
+  },
+  spacings: {
+    comfortable: { smallSpacings },
   },
 }

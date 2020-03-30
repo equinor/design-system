@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
-const { icon, focus, hover } = tokens
+const { icon, focus, hover, links, spacings } = tokens
 
 const StyledLinkItem = styled.li`
   list-style: none;
@@ -12,10 +12,10 @@ const StyledLinkItem = styled.li`
 
   a {
     text-decoration: none;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: ${links.fontSize};
+    line-height: ${links.lineHeight};
     padding: 10px 18px;
-    height: 16px;
+    height: ${links.lineHeight};
     width: calc(189px - 36px);
     display: block;
     position: relative;
@@ -56,7 +56,7 @@ const StyledLinkItem = styled.li`
 
     svg {
       fill: ${icon.fill};
-      margin-right: 8px;
+      margin-right: ${spacings.comfortable.smallSpacings};
       vertical-align: text-bottom;
     }
 
