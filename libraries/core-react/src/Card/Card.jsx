@@ -1,22 +1,22 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { spacingsTemplate } from '../_common/templates'
 import { card as tokens } from './Card.tokens'
 
 const { spacings } = tokens
 
-const StyledCard = styled.header`
+const StyledCard = styled.div`
   position: relative;
   background-color: ${({ background }) => background};
   box-sizing: border-box;
   display: grid;
   grid-column-gap: 0;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas: 'top center bottom';
+  grid-template-columns: auto;
+  grid-template-areas: 'top' 'center' 'bottom';
   align-items: center;
-
-  ${spacingsTemplate(spacings)};
+  border-radius: 4px;
+  padding-left: ${spacings.left};
+  padding-right: ${spacings.right};
 `
 
 export const Card = forwardRef(function EdsCard(
