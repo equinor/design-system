@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { List, Typography } from '..'
+import { List, Typography } from '@equinor/eds-core-react'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
 const { labelText } = tokens
