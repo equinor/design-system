@@ -22,3 +22,5 @@ export { Tooltip } from './Tooltip'
 export { Popover } from './Popover'
 export { Banner } from './Banner'
 export { Radio, Checkbox, Switch } from './SelectionControls'
+export { Menu } from './Menu'
+/* eslint-enable */
