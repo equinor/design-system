@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Typography } from '../Typography'
 import { Avatar } from '../Avatar'
 
@@ -18,8 +18,18 @@ const StyledCardTitle = styled.div`
   align-items: center;
 `
 
+const StyledAvatar = styled(Avatar)`
+  margin-right: 16px;
+`
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`
+
 const FlexWrapper = styled.div`
-  order: ${({ order }) => order};
+  /* order: ${({ order }) => order}; */
 `
 
 export const CardTitle = forwardRef(function EdsCardTitle(
@@ -37,16 +47,11 @@ export const CardTitle = forwardRef(function EdsCardTitle(
   ref,
 ) {
   let subtitleVariant = 'body_short' // Default for h4 & h5 titles
-  let templateColumns = 'auto 40px' // Default avatar left side
-  let templateRows = 'repeat(2, auto)'
+  const isVariantH6 = variant === 'h6'
 
-  switch (variant) {
-    case 'h6':
-      if (overline) {
-        subtitleVariant = 'overline'
-      } else {
-        subtitleVariant = 'caption'
-      }
+  switch (isVariantH6) {
+    case true:
+      subtitleVariant = overline ? 'overline' : 'caption'
       break
     default:
       subtitleVariant = 'body_short'
@@ -56,23 +61,43 @@ export const CardTitle = forwardRef(function EdsCardTitle(
   const props = {
     ...rest,
     ref,
-    templateColumns,
-    templateRows,
   }
 
-  return (
+  const h6AvatarLayout = (
+    <StyledCardTitle {...props}>
+      <FlexContainer>
+        <StyledAvatar alt={`Avatar for ${title}`} src={avatar} size={40} />
+
+        <FlexWrapper>
+          {overline && subtitle && (
+            <Typography variant="overline">{subtitle}</Typography>
+          )}
+          <Typography variant={variant}>{title}</Typography>
+          {subtitle && !overline && (
+            <Typography variant={subtitleVariant}>{subtitle}</Typography>
+          )}
+        </FlexWrapper>
+      </FlexContainer>
+      {action && action}
+      {children}
+    </StyledCardTitle>
+  )
+
+  return isVariantH6 && avatar ? (
+    h6AvatarLayout
+  ) : (
     <StyledCardTitle {...props}>
       <FlexWrapper>
-        {overline && subtitle && (
-          <Typography variant="overline">{subtitle}</Typography>
+        {overline && subtitle && isVariantH6 && (
+          <Typography variant={subtitleVariant}>{subtitle}</Typography>
         )}
         <Typography variant={variant}>{title}</Typography>
-        {subtitle && !overline && (
+        {((subtitle && !isVariantH6) || (isVariantH6 && !overline)) && (
           <Typography variant={subtitleVariant}>{subtitle}</Typography>
         )}
       </FlexWrapper>
       {avatar && <Avatar alt={`Avatar for ${title}`} src={avatar} size={40} />}
-      {action && { action }}
+      {action && action}
       {children}
     </StyledCardTitle>
   )
@@ -89,11 +114,11 @@ CardTitle.propTypes = {
   overline: PropTypes.bool,
   // Caption / Overline / Subtitle text:
   subtitle: PropTypes.string,
-  // Avatar src, default size=40:
+  // The Avatar for the Card Header
   avatar: PropTypes.string,
   // Metadata (tags, badges, free text): TODO: Confusion of design here
   // meta: PropTypes.node,
-  // Action
+  // The action to display in the card header.
   action: PropTypes.node,
   /** @ignore */
   children: PropTypes.node,

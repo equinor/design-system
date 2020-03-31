@@ -13,10 +13,17 @@ const {
   spacings: {
     comfortable: { medium: spacingMedium },
   },
+  shape: {
+    corners: { minHeight, minWidth, borderRadius },
+  },
 } = tokens
 
 export const card = {
-  // shape: rounded,
+  shape: {
+    minHeight,
+    minWidth,
+    borderRadius,
+  },
   spacings: {
     left: spacingMedium,
     bottom: spacingMedium,

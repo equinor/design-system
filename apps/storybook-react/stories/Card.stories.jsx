@@ -2,8 +2,14 @@ import React, { Fragment } from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Typography } from '@equinor/eds-core-react'
-import { Card, Chips } from '@equinor/eds-core-react'
-import { text_field } from '@equinor/eds-icons'
+import { Card, Chips, Button, Icon } from '@equinor/eds-core-react'
+import { more_verticle } from '@equinor/eds-icons'
+
+const icons = {
+  more_verticle,
+}
+
+Icon.add(icons)
 
 const { CardTitle, CardMedia, CardContent, CardActions } = Card
 
@@ -15,10 +21,7 @@ const Wrapper = styled.div`
 const Body = styled.div`
   height: 1500px;
   background: #ebebeb;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  padding: 32px;
 `
 
 const Grid = styled.div`
@@ -27,7 +30,7 @@ const Grid = styled.div`
   padding: 32px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(2, 250px);
   grid-gap: 32px 32px;
 `
 
@@ -37,16 +40,45 @@ export default {
   decorators: [withKnobs],
 }
 
-export const h4Variations = () => {
+export const ColorVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
+        <Grid>
+          <Card>Default</Card>
+          <Card variant="info">Info</Card>
+          <Card variant="warning">Warning</Card>
+          <Card variant="danger">Danger</Card>
+        </Grid>
+      </Body>
+    </Wrapper>
+  )
+}
+
+export const TitleVariants = () => {
+  return (
+    <Wrapper tabIndex="0">
+      <Body>
+        <Typography variant="h4">Variant h4:</Typography>
         <Grid>
           <Card variant="info">
             <CardTitle variant="h4" title="Title" subtitle="Body short" />
           </Card>
           <Card>
-            <CardTitle variant="h4" title="Title" subtitle="Body short" />
+            <CardTitle
+              variant="h4"
+              title="Title"
+              subtitle="Body short"
+              action={
+                <Button variant="ghost_icon">
+                  <Icon
+                    name="more_verticle"
+                    title="more action"
+                    size={48}
+                  ></Icon>
+                </Button>
+              }
+            />
           </Card>
           <Card variant="danger">
             <CardTitle
@@ -57,21 +89,26 @@ export const h4Variations = () => {
             />
           </Card>
         </Grid>
-      </Body>
-    </Wrapper>
-  )
-}
-
-export const H5Variations = () => {
-  return (
-    <Wrapper tabIndex="0">
-      <Body>
+        <Typography variant="h4">Variant h5:</Typography>
         <Grid>
           <Card variant="warning">
             <CardTitle variant="h5" title="Title" subtitle="Body short" />
           </Card>
           <Card variant="info">
-            <CardTitle variant="h5" title="Title" subtitle="Body short" />
+            <CardTitle
+              variant="h5"
+              title="Title"
+              subtitle="Body short"
+              action={
+                <Button variant="ghost_icon">
+                  <Icon
+                    name="more_verticle"
+                    title="more action"
+                    size={48}
+                  ></Icon>
+                </Button>
+              }
+            />
           </Card>
           <Card>
             <CardTitle
@@ -83,15 +120,7 @@ export const H5Variations = () => {
             <CardContent />
           </Card>
         </Grid>
-      </Body>
-    </Wrapper>
-  )
-}
-
-export const H6Variations = () => {
-  return (
-    <Wrapper tabIndex="0">
-      <Body>
+        <Typography variant="h4">Variant h6:</Typography>
         <Grid>
           <Card>
             <CardTitle
@@ -107,6 +136,15 @@ export const H6Variations = () => {
               title="Title"
               subtitle="Caption"
               avatar="https://i.imgur.com/UM3mrju.jpg"
+              action={
+                <Button variant="ghost_icon">
+                  <Icon
+                    name="more_verticle"
+                    title="more action"
+                    size={48}
+                  ></Icon>
+                </Button>
+              }
             />
           </Card>
 
@@ -124,6 +162,15 @@ export const H6Variations = () => {
               title="Title"
               overline
               subtitle="Overline"
+              action={
+                <Button variant="ghost_icon">
+                  <Icon
+                    name="more_verticle"
+                    title="more action"
+                    size={48}
+                  ></Icon>
+                </Button>
+              }
             />
           </Card>
           <Card>
