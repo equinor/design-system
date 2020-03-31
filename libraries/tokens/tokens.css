@@ -42,6 +42,7 @@
   --eds_logo_fill_positive: rgba(235, 0, 55, 1);
   --eds_logo_fill_negative: rgba(255, 255, 255, 1);
   --eds_interactive_primary__selected_highlight: rgba(230, 250, 236, 1);
+  --eds_interactive_primary__selected_hover: rgba(195, 243, 210, 1);
   --eds_interactive_primary__resting: rgba(0, 112, 121, 1);
   --eds_interactive_primary__hover: rgba(0, 79, 85, 1);
   --eds_interactive_primary__hover_alt: rgba(222, 237, 238, 1);
@@ -61,12 +62,12 @@
   --eds_interactive_success__hover: rgba(53, 129, 50, 1);
   --eds_interactive_success__text: rgba(53, 129, 50, 1);
   --eds_interactive_table__cell__fill_resting: rgba(255, 255, 255, 1);
-  --eds_interactive_table__cell__fill_hover: rgba(230, 250, 236, 1);
-  --eds_interactive_table__cell__fill_activated: rgba(220, 220, 220, 1);
+  --eds_interactive_table__cell__fill_hover: rgba(234, 234, 234, 1);
+  --eds_interactive_table__cell__fill_activated: rgba(230, 250, 236, 1);
   --eds_interactive_table__header__fill_activated: rgba(234, 234, 234, 1);
   --eds_interactive_table__header__fill_hover: rgba(220, 220, 220, 1);
   --eds_interactive_table__header__fill_resting: rgba(247, 247, 247, 1);
-  --eds_interactive_disabled__text: rgba(111, 111, 111, 1);
+  --eds_interactive_disabled__text: rgba(190, 190, 190, 1);
   --eds_interactive_text_highlight: rgba(213, 234, 244, 1);
   --eds_interactive_focus: rgba(0, 112, 121, 1);
   --eds_interactive_disabled__border: rgba(220, 220, 220, 1);
@@ -80,13 +81,19 @@
   --eds_interactive_field__fill_activated: rgba(220, 220, 220, 1);
   --eds_tabs_inactive_text: rgba(86, 86, 86, 1);
 
-  --eds_elevation_raised: 0px 1px 5px rgba(0, 0, 0, 0.2),0px 3px 4px rgba(0, 0, 0, 0.12),0px 2px 4px rgba(0, 0, 0, 0.14);
-  --eds_elevation_none: 0px 0px 1px rgba(0, 0, 0, 0.14);
-  --eds_elevation_overlay: 0px 1px 10px rgba(0, 0, 0, 0.2),0px 4px 5px rgba(0, 0, 0, 0.12),0px 2px 4px rgba(0, 0, 0, 0.14);
-  --eds_elevation_sticky: 0px 4px 5px rgba(0, 0, 0, 0.2),0px 3px 14px rgba(0, 0, 0, 0.12),0px 8px 10px rgba(0, 0, 0, 0.14);
-  --eds_elevation_temporary_nav: 0px 7px 8px rgba(0, 0, 0, 0.2),0px 5px 22px rgba(0, 0, 0, 0.12),0px 12px 17px rgba(0, 0, 0, 0.14);
-  --eds_elevation_above_scrim: 0px 11px 15px rgba(0, 0, 0, 0.2),0px 9px 46px rgba(0, 0, 0, 0.12),0px 24px 38px rgba(0, 0, 0, 0.14);
+  --eds_elevation_raised: 0 1px 5px rgba(0, 0, 0, 0.2),0 3px 4px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14);
+  --eds_elevation_none: 0 0 1px rgba(0, 0, 0, 0.14);
+  --eds_elevation_overlay: 0 1px 10px rgba(0, 0, 0, 0.2),0 4px 5px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14);
+  --eds_elevation_sticky: 0 4px 5px rgba(0, 0, 0, 0.2),0 3px 14px rgba(0, 0, 0, 0.12),0 8px 10px rgba(0, 0, 0, 0.14);
+  --eds_elevation_temporary_nav: 0 7px 8px rgba(0, 0, 0, 0.2),0 5px 22px rgba(0, 0, 0, 0.12),0 12px 17px rgba(0, 0, 0, 0.14);
+  --eds_elevation_above_scrim: 0 11px 15px rgba(0, 0, 0, 0.2),0 9px 46px rgba(0, 0, 0, 0.12),0 24px 38px rgba(0, 0, 0, 0.14);
 
+
+  --eds_shape_toggle_straight_border_min_height: 36px;
+  --eds_shape_toggle_straight_border_min_width: 36px;
+
+  --eds_shape_toggle_rounded_border_min_height: 36px;
+  --eds_shape_toggle_rounded_border_min_width: 36px;
 
   --eds_shape_circle_min_height: 40px;
   --eds_shape_circle_min_width: 40px;
@@ -99,6 +106,10 @@
   --eds_shape_button_min_height: 36px;
   --eds_shape_button_min_width: 36px;
   --eds_shape_button_border_radius: 4px;
+
+  --eds_shape_toggle_min_height: 36px;
+  --eds_shape_toggle_min_width: 36px;
+  --eds_shape_toggle_border_radius: 4px;
 
   --eds_shape_corners_min_height: 36px;
   --eds_shape_corners_min_width: 36px;
