@@ -31,9 +31,7 @@ export const tableOfContents = {
   },
   focus: {
     border: {
-      type: 'dashed',
       color: focusColor,
-      width: '1px',
       borderRadius,
     },
   },

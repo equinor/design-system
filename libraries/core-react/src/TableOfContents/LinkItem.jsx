@@ -21,7 +21,8 @@ const StyledLinkItem = styled.li`
     position: relative;
 
     &:focus {
-      outline: ${focus.border.width} ${focus.border.type} ${focus.border.color};
+      outline: 1px dashed ${focus.border.color};
+      outline-offset: 2px;
       border-radius: ${focus.border.borderRadius};
     }
 
