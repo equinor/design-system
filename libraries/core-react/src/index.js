@@ -30,4 +30,5 @@ export {
   CircularProgress,
 } from './Progress'
 export { Breadcrumbs } from './Breadcrumbs'
+export { Menu } from './Menu'
 /* eslint-enable */
