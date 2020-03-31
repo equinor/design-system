@@ -47,12 +47,12 @@ export const makeDesktopComponents = (figmaFile) => {
           path: 'table',
         })
         break
-      case 'text fields':
-        components.push({
-          name: 'text-fields',
-          value: makeTextfieldsComponent(data, getStyle),
-          path: 'text-fields',
-        })
+        // case 'text fields':
+        //   components.push({
+        //     name: 'text-fields',
+        //     value: makeTextfieldsComponent(data, getStyle),
+        //     path: 'text-fields',
+        //   })
         break
       default:
         break
