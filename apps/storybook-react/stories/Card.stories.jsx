@@ -5,7 +5,7 @@ import { Typography } from '@equinor/eds-core-react'
 import { Card, Chips } from '@equinor/eds-core-react'
 import { text_field } from '@equinor/eds-icons'
 
-const { CardTitle } = Card
+const { CardTitle, CardMedia, CardContent, CardActions } = Card
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -22,7 +22,7 @@ const Body = styled.div`
 `
 
 const Grid = styled.div`
-  height: 150px;
+  height: auto;
   width: 100%;
   padding: 32px;
   box-sizing: border-box;
@@ -46,10 +46,15 @@ export const h4Variations = () => {
             <CardTitle variant="h4" title="Title" subtitle="Body short" />
           </Card>
           <Card>
-            <CardTitle variant="h4" title="Title" subtitle="Body short" a />
+            <CardTitle variant="h4" title="Title" subtitle="Body short" />
           </Card>
           <Card variant="danger">
-            <CardTitle variant="h4" title="Title" subtitle="Body short" />
+            <CardTitle
+              variant="h4"
+              title="Title"
+              subtitle="Body short"
+              avatar="https://i.imgur.com/UM3mrju.jpg"
+            />
           </Card>
         </Grid>
       </Body>
@@ -69,7 +74,13 @@ export const H5Variations = () => {
             <CardTitle variant="h5" title="Title" subtitle="Body short" />
           </Card>
           <Card>
-            <CardTitle variant="h5" title="Title" subtitle="Body short" />
+            <CardTitle
+              variant="h5"
+              title="Title"
+              subtitle="Body short"
+              avatar="https://i.imgur.com/UM3mrju.jpg"
+            />
+            <CardContent />
           </Card>
         </Grid>
       </Body>
@@ -83,20 +94,46 @@ export const H6Variations = () => {
       <Body>
         <Grid>
           <Card>
-            <CardTitle variant="h6" title="Title" caption="Caption" />
+            <CardTitle
+              variant="h6"
+              title="Title"
+              subtitle="Caption"
+              avatar="https://i.imgur.com/UM3mrju.jpg"
+            />
           </Card>
           <Card variant="warning">
-            <CardTitle variant="h6" title="Title" caption="Caption" />
+            <CardTitle
+              variant="h6"
+              title="Title"
+              subtitle="Caption"
+              avatar="https://i.imgur.com/UM3mrju.jpg"
+            />
           </Card>
 
           <Card variant="danger">
-            <CardTitle variant="h6" title="Title" overline="Overline" />
+            <CardTitle
+              variant="h6"
+              title="Title"
+              overline
+              subtitle="Overline"
+            />
           </Card>
           <Card variant="info">
-            <CardTitle variant="h6" title="Title" overline="Overline" />
+            <CardTitle
+              variant="h6"
+              title="Title"
+              overline
+              subtitle="Overline"
+            />
           </Card>
           <Card>
-            <CardTitle variant="h6" title="Title" overline="Overline" />
+            <CardTitle
+              variant="h6"
+              title="Title"
+              overline
+              subtitle="Overline"
+              avatar="https://i.imgur.com/UM3mrju.jpg"
+            />
           </Card>
         </Grid>
       </Body>

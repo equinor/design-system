@@ -12,7 +12,8 @@ const StyledCard = styled.div`
   display: grid;
   grid-column-gap: 0;
   grid-template-columns: auto;
-  grid-template-areas: 'top' 'center' 'bottom';
+  grid-template-rows: ${({ rows }) => rows};
+  /* grid-template-areas: ${({ areas }) => areas}; */
   align-items: center;
   border-radius: 4px;
   padding-left: ${spacings.left};
@@ -23,11 +24,19 @@ export const Card = forwardRef(function EdsCard(
   { children, className, variant, ...rest },
   ref,
 ) {
+  let rows = 'auto'
+  if (children instanceof Array) {
+    for (let i = 0; i < children.length - 1; i += 1) {
+      rows += ' auto'
+    }
+  }
+
   const props = {
     ...rest,
     className,
     ref,
     background: tokens.background[variant],
+    rows,
   }
 
   return <StyledCard {...props}>{children}</StyledCard>

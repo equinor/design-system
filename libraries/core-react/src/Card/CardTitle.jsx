@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
 import { Avatar } from '../Avatar'
 
@@ -9,9 +9,17 @@ import { card as tokens } from './Card.tokens'
 const { spacings } = tokens
 
 const StyledCardTitle = styled.div`
-  grid-area: top;
+  /* grid-area: top; */
   padding-top: ${spacings.top};
   padding-bottom: ${spacings.bottom};
+  display: flex;
+  flex-direction: ${({ direction }) => direction};
+  justify-content: space-between;
+  align-items: center;
+`
+
+const FlexWrapper = styled.div`
+  order: ${({ order }) => order};
 `
 
 export const CardTitle = forwardRef(function EdsCardTitle(
@@ -28,27 +36,42 @@ export const CardTitle = forwardRef(function EdsCardTitle(
   },
   ref,
 ) {
+  let subtitleVariant = 'body_short' // Default for h4 & h5 titles
+  let templateColumns = 'auto 40px' // Default avatar left side
+  let templateRows = 'repeat(2, auto)'
+
+  switch (variant) {
+    case 'h6':
+      if (overline) {
+        subtitleVariant = 'overline'
+      } else {
+        subtitleVariant = 'caption'
+      }
+      break
+    default:
+      subtitleVariant = 'body_short'
+      break
+  }
+
   const props = {
     ...rest,
     ref,
+    templateColumns,
+    templateRows,
   }
-
-  const subtitleVariant =
-    // eslint-disable-next-line no-nested-ternary
-    variant === 'h6' && overline
-      ? 'overline'
-      : variant === 'h6' && !overline
-      ? 'caption'
-      : 'body_short'
 
   return (
     <StyledCardTitle {...props}>
-      {overline && <Typography variant="overline">{overline}</Typography>}
-      <Typography variant={variant}>{title}</Typography>
+      <FlexWrapper>
+        {overline && subtitle && (
+          <Typography variant="overline">{subtitle}</Typography>
+        )}
+        <Typography variant={variant}>{title}</Typography>
+        {subtitle && !overline && (
+          <Typography variant={subtitleVariant}>{subtitle}</Typography>
+        )}
+      </FlexWrapper>
       {avatar && <Avatar alt={`Avatar for ${title}`} src={avatar} size={40} />}
-      {subtitle && (
-        <Typography variant={subtitleVariant}>{subtitle}</Typography>
-      )}
       {action && { action }}
       {children}
     </StyledCardTitle>

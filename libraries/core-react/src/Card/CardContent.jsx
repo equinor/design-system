@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledCardContent = styled.div`
-  grid-area: center;
+  /* grid-area: bottom; */
 `
 
 export const CardContent = forwardRef(function EdsCardContent(
