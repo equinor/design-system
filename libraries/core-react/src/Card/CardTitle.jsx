@@ -13,23 +13,27 @@ const StyledCardTitle = styled.div`
   padding-top: ${spacings.top};
   padding-bottom: ${spacings.bottom};
   display: flex;
-  flex-direction: ${({ direction }) => direction};
+  flex-direction: ${({ flexDirection }) => flexDirection};
   justify-content: space-between;
   align-items: center;
 `
 
-const StyledAvatar = styled(Avatar)`
+const StyledAvatarLeft = styled(Avatar)`
   margin-right: 16px;
+  order: ${({ avatarOrder }) => avatarOrder};
 `
 
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+const StyledAvatarRight = styled(Avatar)`
+  order: ${({ avatarOrder }) => avatarOrder};
 `
 
-const FlexWrapper = styled.div`
-  /* order: ${({ order }) => order}; */
+const ActionWrapper = styled.div`
+  order: ${({ actionOrder }) => actionOrder};
+`
+
+const TextWrapper = styled.div`
+  order: ${({ textOrder }) => textOrder};
+  flex-grow: 2;
 `
 
 export const CardTitle = forwardRef(function EdsCardTitle(
@@ -46,15 +50,22 @@ export const CardTitle = forwardRef(function EdsCardTitle(
   },
   ref,
 ) {
-  let subtitleVariant = 'body_short' // Default for h4 & h5 titles
+  // Default for h4 & h5 titles:
+  let subtitleVariant = 'body_short'
+  let avatarOrder = 3
+  let actionOrder = 1
+  let textOrder = 1
   const isVariantH6 = variant === 'h6'
 
   switch (isVariantH6) {
+    // Change CSS FlexBox variables to fit h6 design:
     case true:
       subtitleVariant = overline ? 'overline' : 'caption'
+      avatarOrder = 1
+      textOrder = 2
+      actionOrder = 3
       break
     default:
-      subtitleVariant = 'body_short'
       break
   }
 
@@ -63,31 +74,21 @@ export const CardTitle = forwardRef(function EdsCardTitle(
     ref,
   }
 
-  const h6AvatarLayout = (
-    <StyledCardTitle {...props}>
-      <FlexContainer>
-        <StyledAvatar alt={`Avatar for ${title}`} src={avatar} size={40} />
+  const textProps = {
+    textOrder,
+  }
 
-        <FlexWrapper>
-          {overline && subtitle && (
-            <Typography variant="overline">{subtitle}</Typography>
-          )}
-          <Typography variant={variant}>{title}</Typography>
-          {subtitle && !overline && (
-            <Typography variant={subtitleVariant}>{subtitle}</Typography>
-          )}
-        </FlexWrapper>
-      </FlexContainer>
-      {action && action}
-      {children}
-    </StyledCardTitle>
-  )
+  const avatarProps = {
+    avatarOrder,
+  }
 
-  return isVariantH6 && avatar ? (
-    h6AvatarLayout
-  ) : (
+  const actionProps = {
+    actionOrder,
+  }
+
+  return (
     <StyledCardTitle {...props}>
-      <FlexWrapper>
+      <TextWrapper {...textProps}>
         {overline && subtitle && isVariantH6 && (
           <Typography variant={subtitleVariant}>{subtitle}</Typography>
         )}
@@ -95,9 +96,29 @@ export const CardTitle = forwardRef(function EdsCardTitle(
         {((subtitle && !isVariantH6) || (isVariantH6 && !overline)) && (
           <Typography variant={subtitleVariant}>{subtitle}</Typography>
         )}
-      </FlexWrapper>
-      {avatar && <Avatar alt={`Avatar for ${title}`} src={avatar} size={40} />}
-      {action && action}
+      </TextWrapper>
+      {((action && !avatar && !isVariantH6) || (action && isVariantH6)) && (
+        <ActionWrapper {...actionProps}>{action}</ActionWrapper>
+      )}
+      {!isVariantH6 && avatar ? (
+        <StyledAvatarRight
+          {...avatarProps}
+          alt={`Avatar for ${title}`}
+          src={avatar}
+          size={40}
+        />
+      ) : (
+        isVariantH6 &&
+        avatar && (
+          <StyledAvatarLeft
+            {...avatarProps}
+            alt={`Avatar for ${title}`}
+            src={avatar}
+            size={40}
+          />
+        )
+      )}
+
       {children}
     </StyledCardTitle>
   )
