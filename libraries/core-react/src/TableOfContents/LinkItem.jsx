@@ -38,21 +38,6 @@ const StyledLinkItem = styled.li`
 
     &:active {
       outline: none;
-      background: ${hover.background};
-      color: ${hover.typography.color};
-      border-radius: ${hover.borderRadius};
-      overflow: hidden;
-
-      &::before {
-        content: '';
-        background-color: rgba(0, 0, 0, 0.2);
-        width: 48px;
-        height: 48px;
-        position: absolute;
-        top: -6px;
-        left: 0px;
-        border-radius: 50%;
-      }
     }
 
     svg {

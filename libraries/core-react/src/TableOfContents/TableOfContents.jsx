@@ -54,6 +54,7 @@ TableOfContents.propTypes = {
   className: PropTypes.string,
   /** Sticky function */
   sticky: PropTypes.bool,
+  /** Label or title for the ToC */
   label: PropTypes.string,
 }
 
