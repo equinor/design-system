@@ -203,6 +203,11 @@ export const colors = {
       hsla: 'hsla(138, 66.7%, 94.1%, 1)',
       rgba: 'rgba(230, 250, 236, 1)'
     },
+    primary__selected_hover: {
+      hex: '#c3f3d2',
+      hsla: 'hsla(139, 66.7%, 85.9%, 1)',
+      rgba: 'rgba(195, 243, 210, 1)'
+    },
     primary__resting: {
       hex: '#007079',
       hsla: 'hsla(184, 100%, 23.7%, 1)',
@@ -299,14 +304,14 @@ export const colors = {
       rgba: 'rgba(255, 255, 255, 1)'
     },
     table__cell__fill_hover: {
+      hex: '#eaeaea',
+      hsla: 'hsla(0, 0%, 91.8%, 1)',
+      rgba: 'rgba(234, 234, 234, 1)'
+    },
+    table__cell__fill_activated: {
       hex: '#e6faec',
       hsla: 'hsla(138, 66.7%, 94.1%, 1)',
       rgba: 'rgba(230, 250, 236, 1)'
-    },
-    table__cell__fill_activated: {
-      hex: '#dcdcdc',
-      hsla: 'hsla(0, 0%, 86.3%, 1)',
-      rgba: 'rgba(220, 220, 220, 1)'
     },
     table__header__fill_activated: {
       hex: '#eaeaea',
@@ -324,9 +329,9 @@ export const colors = {
       rgba: 'rgba(247, 247, 247, 1)'
     },
     disabled__text: {
-      hex: '#6f6f6f',
-      hsla: 'hsla(0, 0%, 43.5%, 1)',
-      rgba: 'rgba(111, 111, 111, 1)'
+      hex: '#bebebe',
+      hsla: 'hsla(0, 0%, 74.5%, 1)',
+      rgba: 'rgba(190, 190, 190, 1)'
     },
     text_highlight: {
       hex: '#d5eaf4',

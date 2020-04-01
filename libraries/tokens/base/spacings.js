@@ -7,6 +7,6 @@ export const spacings = {
     medium: '16px',
     small: '8px',
     x_small: '4px',
-    xx_small: '2px',
-  },
+    xx_small: '2px'
+  }
 }

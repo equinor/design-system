@@ -25,8 +25,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(255, 193, 193, 1)",
@@ -60,8 +60,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(255, 193, 193, 1)",
@@ -96,8 +96,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(179, 13, 47, 1)",
@@ -132,8 +132,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(255, 193, 193, 1)",
@@ -168,8 +168,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(255, 193, 193, 1)",
@@ -204,8 +204,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(179, 13, 47, 1)",
@@ -240,8 +240,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(255, 193, 193, 1)",
@@ -276,8 +276,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(255, 193, 193, 1)",
@@ -311,8 +311,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(179, 13, 47, 1)",
@@ -335,9 +335,8 @@
     "focus": {
       "type": "dashed",
       "color": "rgba(0, 112, 121, 1)",
-      "width": "2px",
-      "gap": "8px",
-      "radius": "50%"
+      "width": "1px",
+      "gap": "4px"
     },
     "hover": {
       "background": "rgba(255, 193, 193, 1)",
