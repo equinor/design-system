@@ -20,13 +20,13 @@ const StyledScrim = styled.div`
 `
 
 export const Scrim = forwardRef(function EdsScrim(
-  { children, onKeyDown, isDismissable, ...rest },
+  { children, onClose, isDismissable, ...rest },
   ref,
 ) {
   const handleKeyPress = (event) => {
     if (event) {
       if (event.key === 'Escape' && isDismissable) {
-        onKeyDown(event, false)
+        onClose(event, false)
       }
     }
   }
@@ -43,7 +43,7 @@ export const Scrim = forwardRef(function EdsScrim(
 
   return (
     <StyledScrim
-      onKeyDown={handleKeyPress}
+      onClose={handleKeyPress}
       isDismissable={isDismissable}
       {...rest}
       ref={ref}
@@ -60,13 +60,15 @@ Scrim.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
-  onKeyDown: PropTypes.func,
+  /** Function to handle closing scrim */
+  onClose: PropTypes.func,
+  /** Whether scrim can be dismissed with esc key */
   isDismissable: PropTypes.bool,
 }
 
 Scrim.defaultProps = {
   className: '',
   children: undefined,
-  onKeyDown: () => {},
-  isDismissable: true,
+  onClose: () => {},
+  isDismissable: false,
 }

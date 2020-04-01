@@ -48,7 +48,7 @@ export const Page = () => {
       </div>
       <Typography variant="body_short">Bottom of page</Typography>
       {visibleScrim && (
-        <Scrim onKeyDown={handleClose}>
+        <Scrim onClose={handleClose} isDismissable>
           <TestContent>
             <Typography variant="body_short">
               Test content in a scrim.
