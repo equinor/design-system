@@ -1,24 +1,24 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { spacingsTemplate, typographyTemplate } from '../_common/templates'
+import { Divider } from '../Divider'
+import { typographyTemplate } from '../_common/templates'
 
 import { dialog as tokens } from './Dialog.tokens'
 
 const {
   description: { typography },
-  spacingsContent,
+  spacingsMedium,
 } = tokens
 
 const StyledCustomContent = styled.div`
-  justify-content: start;
-  justify-self: start;
-  min-height: 80px;
-  margin-bottom: 12px;
-  width: calc(100% - 32px);
-
-  ${spacingsTemplate(spacingsContent)};
   ${typographyTemplate(typography)}
+
+  min-height: 80px;
+  margin-bottom: ${spacingsMedium};
+  align-self: stretch;
+  justify-self: stretch;
+  padding: 0 ${spacingsMedium};
 
   ${({ scrollable }) =>
     scrollable &&
@@ -26,18 +26,29 @@ const StyledCustomContent = styled.div`
       min-height: initial;
       height: 52px;
       overflow-y: auto;
-      margin-bottom: 12px;
     `}
 `
 
+const StyledDivider = styled(Divider)`
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: ${spacingsMedium};
+`
+
 export const CustomContent = forwardRef(function EdsDialogCustomContent(
-  { children, ...props },
+  { children, ...rest },
   ref,
 ) {
   return (
-    <StyledCustomContent id="eds-dialog-customcontent" ref={ref} {...props}>
-      {children}
-    </StyledCustomContent>
+    <Fragment>
+      <StyledCustomContent id="eds-dialog-customcontent" ref={ref} {...rest}>
+        {children}
+      </StyledCustomContent>
+
+      {children && rest.scrollable && (
+        <StyledDivider color="medium" variant="small" />
+      )}
+    </Fragment>
   )
 })
 

@@ -2,21 +2,21 @@ import React, { forwardRef, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
-import { spacingsTemplate, typographyTemplate } from '../_common/templates'
+import { typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
 const {
   title: { typography },
-  spacingsTitle,
+  spacingsMedium,
 } = tokens
 
 const StyledTitle = styled.div`
-  display: grid;
-  justify-self: start;
-  min-height: 24px;
-
-  ${spacingsTemplate(spacingsTitle)};
   ${typographyTemplate(typography)}
+
+  min-height: 24px;
+  align-self: end;
+  justify-self: start;
+  padding: 0 ${spacingsMedium};
 
   ${({ children }) =>
     !children &&
@@ -24,6 +24,11 @@ const StyledTitle = styled.div`
       min-height: initial;
       height: 8px;
     `}
+`
+
+const StyledDivider = styled(Divider)`
+  width: 100%;
+  margin-bottom: ${spacingsMedium};
 `
 
 export const Title = forwardRef(function EdsDialogTitle(
@@ -35,7 +40,7 @@ export const Title = forwardRef(function EdsDialogTitle(
       <StyledTitle id="eds-dialog-title" ref={ref} {...props}>
         {children}
       </StyledTitle>
-      {children && <Divider color="medium" variant="small" />}
+      {children && <StyledDivider color="medium" variant="small" />}
     </Fragment>
   )
 })

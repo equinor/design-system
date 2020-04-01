@@ -25,9 +25,10 @@ const BodyTypes = styled.div`
 
 const TempButtonWrapper = styled.div`
   display: grid;
-  grid-gap: 32px;
+  column-gap: 16px;
   grid-template-columns: repeat(2, fit-content(100%));
   justify-content: end;
+  justify-self: end;
 `
 
 const Placeholder = styled.div`
@@ -36,8 +37,6 @@ const Placeholder = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
   padding: 8px;
-  height: calc(100% - 16px);
-  margin-bottom: 12px;
   width: 100%;
   display: inline-block;
 `
@@ -77,7 +76,7 @@ const ACTION_CHOICES = {
   none: null,
   buttons: (
     <TempButtonWrapper>
-      <Button>Cancel</Button>
+      <Button variant="ghost">Cancel</Button>
       <Button>OK</Button>
     </TempButtonWrapper>
   ),
@@ -126,7 +125,12 @@ export const knobs = () => {
             <Actions>
               {actionsChoice === 'buttons' ? (
                 <TempButtonWrapper>
-                  <Button onClick={() => setVisibleScrim(false)}>Cancel</Button>
+                  <Button
+                    variant="ghost"
+                    onClick={() => setVisibleScrim(false)}
+                  >
+                    Cancel
+                  </Button>
                   <Button onClick={() => setVisibleScrim(false)}>OK</Button>
                 </TempButtonWrapper>
               ) : (
@@ -177,7 +181,6 @@ export const types = () => {
             <Actions>{ACTION_CHOICES['buttons']}</Actions>
           </Dialog>
           <Dialog>
-            <Title></Title>
             <CustomContent>
               {CUSTOM_CONTENT_CHOICES['description']}
             </CustomContent>

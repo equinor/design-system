@@ -2,7 +2,7 @@ import { tokens } from '@equinor/eds-tokens'
 
 const {
   spacings: {
-    comfortable: { x_small: spacingXSmall, medium: spacingMedium },
+    comfortable: { medium: spacingMedium },
   },
   typography: { ui, paragraph },
   elevation: { overlay: boxShadow },
@@ -21,30 +21,7 @@ export const dialog = {
   minHeight: '165px',
   background,
   borderRadius,
-  spacings: {
-    left: spacingMedium,
-    right: spacingMedium,
-    top: spacingXSmall,
-    bottom: spacingXSmall,
-  },
-  spacingsContent: {
-    left: spacingMedium,
-    right: spacingMedium,
-    top: 0,
-    bottom: 0,
-  },
-  spacingsTitle: {
-    left: spacingMedium,
-    right: spacingMedium,
-    top: spacingMedium,
-    bottom: spacingXSmall,
-  },
-  spacingsActions: {
-    left: spacingMedium,
-    right: spacingMedium,
-    top: 0,
-    bottom: spacingMedium,
-  },
+  spacingsMedium: spacingMedium,
   title: { typography: ui.accordion_header },
   description: { typography: paragraph.body_long },
   boxShadow,

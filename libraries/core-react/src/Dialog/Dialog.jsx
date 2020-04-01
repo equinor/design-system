@@ -11,6 +11,7 @@ const {
   boxShadow,
   background,
   borderRadius,
+  spacingsMedium,
 } = tokens
 
 const StyledDialog = styled.div.attrs(() => ({
@@ -21,11 +22,12 @@ const StyledDialog = styled.div.attrs(() => ({
   'aria-modal': true,
 }))`
   width: ${width};
-  min-height: ${minHeight};
+  /* min-height: ${minHeight}; */
   box-shadow: ${boxShadow};
   background: ${background};
   border-radius: ${borderRadius};
-  grid-template-rows: 24px auto 60px;
+  display: grid;
+  padding: ${spacingsMedium} 0 0 0;
 
   ${typographyTemplate(text)}
 `

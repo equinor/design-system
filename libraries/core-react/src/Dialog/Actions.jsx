@@ -1,17 +1,15 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { spacingsTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
-const { spacingsActions } = tokens
+const { spacingsMedium } = tokens
 
 const StyledActions = styled.div`
-  justify-content: end;
-  justify-self: end;
   min-height: 48px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 ${spacingsMedium};
+  align-self: end;
+  justify-self: end;
 
   ${({ children }) =>
     !children &&
