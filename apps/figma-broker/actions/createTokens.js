@@ -32,16 +32,7 @@ const writeJSTokens = (tokens) => {
   }
   `
 
-  writeFile(
-    PATHS_.BASE_TOKENS_JS,
-    'index',
-    'js',
-    prettier.format(baseIndexContent, {
-      semi: false,
-      trailingComma: 'all',
-      singleQuote: true,
-    }),
-  )
+  writeFile(PATHS_.BASE_TOKENS_JS, 'index', 'js', baseIndexContent)
 
   // Disabled – shouldn’t really be done here…
   // writeFile(`${TOKENS_DIR}`, 'index', 'js', `export { tokens } from './base'`)
