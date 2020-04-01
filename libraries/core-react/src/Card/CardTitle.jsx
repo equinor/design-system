@@ -57,16 +57,12 @@ export const CardTitle = forwardRef(function EdsCardTitle(
   let textOrder = 1
   const isVariantH6 = variant === 'h6'
 
-  switch (isVariantH6) {
+  if (isVariantH6) {
     // Change CSS FlexBox variables to fit h6 design:
-    case true:
-      subtitleVariant = overline ? 'overline' : 'caption'
-      avatarOrder = 1
-      textOrder = 2
-      actionOrder = 3
-      break
-    default:
-      break
+    subtitleVariant = overline ? 'overline' : 'caption'
+    avatarOrder = 1
+    textOrder = 2
+    actionOrder = 3
   }
 
   const props = {

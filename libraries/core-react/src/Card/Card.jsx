@@ -33,7 +33,7 @@ export const Card = forwardRef(function EdsCard(
       rows += ' auto'
     }
   }
-  console.log(rows)
+
   const props = {
     ...rest,
     className,
