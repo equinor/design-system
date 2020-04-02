@@ -3,19 +3,36 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 
-const StyledMenu = styled.div``
+const ListItem = styled.li.attrs({ role: 'none' })`
+  list-style: none;
+`
 
-export const MenuItem = React.forwardRef(function EdsMenuItem(props, ref) {
-  return <StyledMenu {...props} ref={ref} />
+const Anchor = styled.a.attrs({ role: 'menuitem' })`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const MenuItem = React.forwardRef(function EdsMenuItem(
+  { children, ...rest },
+  ref,
+) {
+  return (
+    <ListItem {...rest} ref={ref}>
+      <Anchor>{children}</Anchor>
+    </ListItem>
+  )
 })
 
-StyledMenu.propTypes = {
+ListItem.propTypes = {
   /** @ignore */
   className: PropTypes.string,
+  /** @ignore */
+  children: PropTypes.element.isRequired,
 }
 
-StyledMenu.defaultProps = {
+ListItem.defaultProps = {
   className: '',
+  children: undefined,
 }
 
-StyledMenu.displayName = 'eds-menu-item'
+ListItem.displayName = 'eds-menu-item'
