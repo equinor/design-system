@@ -11,9 +11,11 @@ const StyledCardMedia = styled.div`
   padding-top: ${({ paddingTop }) => paddingTop};
   padding-bottom: ${({ paddingBottom }) => paddingBottom};
   margin-left: ${({ marginLeft }) => marginLeft};
-  img {
+
+  img:first-child {
     position: relative;
-    width: calc(100% + 32px);
+    width: ${(props) =>
+      props.order === 'leading' ? 'calc(100% + 32px)' : '100%'};
   }
 `
 
@@ -29,7 +31,9 @@ export const CardMedia = forwardRef(function EdsCardMedia(
     paddingBottom: tokens.spacings[order].bottom,
     paddingTop: tokens.spacings[order].top,
     marginLeft: tokens.spacings[order].marginLeft,
+    order,
   }
+
   return <StyledCardMedia {...props}>{children}</StyledCardMedia>
 })
 
@@ -37,7 +41,7 @@ CardMedia.displayName = 'eds-card-supporting-text'
 
 CardMedia.propTypes = {
   //  To be used as the last block
-  order: PropTypes.oneOf(['middle', 'last', 'leadingImage']),
+  order: PropTypes.oneOf(['middle', 'last', 'leading']),
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */

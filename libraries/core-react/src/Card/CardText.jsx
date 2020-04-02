@@ -18,13 +18,14 @@ export const CardText = forwardRef(function EdsCardText(
   { children, className, isLastBlock, ...rest },
   ref,
 ) {
-  const lastBlockVariant = isLastBlock ? 'last' : 'bottom'
+  const blockVariant = isLastBlock ? 'last' : 'bottom'
 
   const props = {
     ...rest,
     className,
     ref,
-    paddingBottom: tokens.spacings[lastBlockVariant],
+    paddingBottom: tokens.spacings[blockVariant].bottom,
+    padingTop: tokens.spacings[blockVariant].top,
   }
   return (
     <StyledCardText ref={ref} {...props} variant="body_short">

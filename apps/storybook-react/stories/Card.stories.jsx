@@ -242,13 +242,29 @@ export const CardMediaVariants = () => {
       <Body>
         <Grid>
           <Card>
+            <CardMedia order="leading">
+              <StyledImage src="https://i.imgur.com/UM3mrju.jpg" />
+            </CardMedia>
+            <CardTitle
+              variant="h5"
+              title="Leading image"
+              subtitle="To be used as leading block (image)"
+            />
+            <CardText isLastBlock>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </CardText>
+          </Card>
+          <Card>
             <CardTitle
               variant="h5"
               title="Middle"
               subtitle="To be used between blocks"
             />
             <CardMedia order="middle">
-              <Divider variant="small" />
+              <StyledImage src="https://i.imgur.com/UM3mrju.jpg" />
             </CardMedia>
             <CardText isLastBlock>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -271,24 +287,9 @@ export const CardMediaVariants = () => {
               nisi ut aliquip ex ea commodo consequat.
             </CardText>
             <CardMedia order="last">
-              <Divider variant="small" />
+              <Divider />
+              {/* <StyledImage src="https://i.imgur.com/UM3mrju.jpg" /> */}
             </CardMedia>
-          </Card>
-          <Card>
-            <CardMedia order="leading">
-              <StyledImage src="https://i.imgur.com/UM3mrju.jpg" />
-            </CardMedia>
-            <CardTitle
-              variant="h5"
-              title="Leading image"
-              subtitle="To be used as leading block (image)"
-            />
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardText>
           </Card>
         </Grid>
       </Body>
