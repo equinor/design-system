@@ -6,10 +6,15 @@ import { card as tokens } from './Card.tokens'
 
 const StyledCardMedia = styled.div`
   /* grid-area: bottom; */
-  width: 100%;
+
+  width: inherit;
   padding-top: ${({ paddingTop }) => paddingTop};
   padding-bottom: ${({ paddingBottom }) => paddingBottom};
   margin-left: ${({ marginLeft }) => marginLeft};
+  img {
+    position: relative;
+    width: calc(100% + 32px);
+  }
 `
 
 // EDS - Supporting Text
