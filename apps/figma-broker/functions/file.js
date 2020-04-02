@@ -1,10 +1,11 @@
 import fs from 'fs'
 import del from 'del'
-import util from 'util'
 import fetch from 'node-fetch'
 import * as R from 'ramda'
 import { createFolder } from './folder'
+import prettier from 'prettier'
 
+const prettierConfig = fs.readFileSync('./../../.prettierrc.yaml', 'utf8')
 const getFilePath = (path, name, ext) => `${path}/${name}.${ext}`
 
 const write = (file, path, name, ext) => {
@@ -34,9 +35,16 @@ export const writeFileStream = (url, path, name, ext) => {
   }
 }
 export const writeFile = (path, name, ext, file) => {
-  if (file && path && name) {
+  if (file && path && name && ext) {
     createFolder(path)
-    write(file, path, name, ext)
+    let value = file
+
+    if (ext === 'js') {
+      const options = prettier.resolveConfig.sync(prettierConfig)
+      value = prettier.format(file, options)
+    }
+
+    write(value, path, name, ext)
   } else {
     throw new Error('Missing required parameters to correctly run writeFile()!')
   }
@@ -76,7 +84,7 @@ export const writeResults = (results, savePath, extension = 'json') =>
     switch (extension) {
       case 'js':
         writeFileToDisk(
-          `export const ${name} = ${util.inspect(value, false, null)}\n`,
+          `export const ${name} = ${JSON.stringify(value, null, 2)}\n`,
         )
         break
 
