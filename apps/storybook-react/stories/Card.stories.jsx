@@ -56,10 +56,18 @@ export const CardVariants = () => {
     <Wrapper tabIndex="0">
       <Body>
         <Grid>
-          <Card>Default</Card>
-          <Card variant="info">Info</Card>
-          <Card variant="warning">Warning</Card>
-          <Card variant="danger">Danger</Card>
+          <Card>
+            <CardTitle title="Default" />
+          </Card>
+          <Card variant="info">
+            <CardTitle title="Info" />
+          </Card>
+          <Card variant="warning">
+            <CardTitle title="Warning" />
+          </Card>
+          <Card variant="danger">
+            <CardTitle title="Danger" />
+          </Card>
         </Grid>
       </Body>
     </Wrapper>
@@ -128,7 +136,6 @@ export const CardTitleVariants = () => {
               subtitle="Body short"
               avatar="https://i.imgur.com/UM3mrju.jpg"
             />
-            <CardText />
           </Card>
         </Grid>
         <Typography variant="h4">Variant h6:</Typography>
@@ -199,6 +206,24 @@ export const CardTitleVariants = () => {
   )
 }
 
+const CardTextMiddleBlock = () => (
+  <CardText>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
+  </CardText>
+)
+
+const CardTextLastBlock = () => (
+  <CardText isLastBlock>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
+  </CardText>
+)
+
 export const CardTextVariants = () => {
   return (
     <Wrapper tabIndex="0">
@@ -211,12 +236,7 @@ export const CardTextVariants = () => {
               subtitle="To be used between other blocks (default)"
             />
 
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardText>
+            <CardTextMiddleBlock />
             <StyledDivider variant="small" />
           </Card>
           <Card>
@@ -226,12 +246,7 @@ export const CardTextVariants = () => {
               subtitle="To be used as the last block"
             />
             <StyledDivider variant="small" />
-            <CardText isLastBlock>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardText>
+            <CardTextLastBlock />
           </Card>
         </Grid>
       </Body>
@@ -239,26 +254,37 @@ export const CardTextVariants = () => {
   )
 }
 
+const CardMediaLeadingImage = () => (
+  <CardMedia order="leading">
+    <StyledImage src="https://i.imgur.com/UM3mrju.jpg" />
+  </CardMedia>
+)
+
+const CardMediaMiddle = () => (
+  <CardMedia order="middle">
+    <StyledImage src="https://i.imgur.com/UM3mrju.jpg" />
+  </CardMedia>
+)
+
+const CardMediaLast = () => (
+  <CardMedia order="last">
+    <Divider />
+  </CardMedia>
+)
+
 export const CardMediaVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
         <Grid>
           <Card>
-            <CardMedia order="leading">
-              <StyledImage src="https://i.imgur.com/UM3mrju.jpg" />
-            </CardMedia>
+            <CardMediaLeadingImage />
             <CardTitle
               variant="h5"
               title="Leading image"
               subtitle="To be used as leading block (image)"
             />
-            <CardText isLastBlock>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardText>
+            <CardTextLastBlock />
           </Card>
           <Card>
             <CardTitle
@@ -266,15 +292,8 @@ export const CardMediaVariants = () => {
               title="Middle"
               subtitle="To be used between blocks"
             />
-            <CardMedia order="middle">
-              <StyledImage src="https://i.imgur.com/UM3mrju.jpg" />
-            </CardMedia>
-            <CardText isLastBlock>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardText>
+            <CardMediaMiddle />
+            <CardTextLastBlock />
           </Card>
           <Card>
             <CardTitle
@@ -283,22 +302,43 @@ export const CardMediaVariants = () => {
               subtitle="To be used as last block"
             />
 
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardText>
-            <CardMedia order="last">
-              <Divider />
-              {/* <StyledImage src="https://i.imgur.com/UM3mrju.jpg" /> */}
-            </CardMedia>
+            <CardTextMiddleBlock />
+            <CardMediaLast />
           </Card>
         </Grid>
       </Body>
     </Wrapper>
   )
 }
+
+const CardActionsDefault = () => (
+  <CardActions>
+    <Button>Cancel</Button>
+    <Button>OK</Button>
+  </CardActions>
+)
+
+const CardActionsAlignedRight = () => (
+  <CardActions alignRight>
+    <Button variant="ghost_icon">
+      <Icon name="person_add" title="add person action" size={48}></Icon>
+    </Button>
+    <Button variant="ghost_icon">
+      <Icon name="settings" title="settings action" size={48}></Icon>
+    </Button>
+    <Button variant="ghost_icon">
+      <Icon name="save" title="save action" size={48}></Icon>
+    </Button>
+  </CardActions>
+)
+
+const CardActionsMeta = () => (
+  <CardActions meta="Share">
+    <Button variant="ghost_icon">
+      <Icon name="share" title="share action" size={48}></Icon>
+    </Button>
+  </CardActions>
+)
 
 export const CardActionsVariants = () => {
   return (
@@ -310,10 +350,7 @@ export const CardActionsVariants = () => {
             <CardText>
               Action elements are aligned left in this example
             </CardText>
-            <CardActions>
-              <Button>Cancel</Button>
-              <Button>OK</Button>
-            </CardActions>
+            <CardActionsDefault />
           </Card>
           <Card>
             <CardTitle
@@ -324,21 +361,7 @@ export const CardActionsVariants = () => {
             <CardText>
               Action elements are aligned right in this example
             </CardText>
-            <CardActions alignRight>
-              <Button variant="ghost_icon">
-                <Icon
-                  name="person_add"
-                  title="add person action"
-                  size={48}
-                ></Icon>
-              </Button>
-              <Button variant="ghost_icon">
-                <Icon name="settings" title="settings action" size={48}></Icon>
-              </Button>
-              <Button variant="ghost_icon">
-                <Icon name="save" title="save action" size={48}></Icon>
-              </Button>
-            </CardActions>
+            <CardActionsAlignedRight />
           </Card>
           <Card>
             <CardTitle
@@ -347,11 +370,7 @@ export const CardActionsVariants = () => {
               subtitle="To be used as supporting text for actions"
             />
             <CardText>Action element with metadata</CardText>
-            <CardActions meta="Share">
-              <Button variant="ghost_icon">
-                <Icon name="share" title="share action" size={48}></Icon>
-              </Button>
-            </CardActions>
+            <CardActionsMeta />
           </Card>
         </Grid>
       </Body>
@@ -359,34 +378,24 @@ export const CardActionsVariants = () => {
   )
 }
 
-const AVATAR_CHOICES = {
-  none: '',
-  avatar: text('Avatar', 'https://i.imgur.com/UM3mrju.jpg'),
-}
-
-const TITLE_CHOICES = {
-  off: null,
-  on: (
-    <CardTitle
-      variant={select('Title Variant', ['h4', 'h5', 'h6'])}
-      title="Title"
-      avatar={text('Avatar', 'https://i.imgur.com/UM3mrju.jpg')}
-      subtitle="Subtitle"
-      overline={select('Overline H6 Subtitle', [false, true])}
-    />
-  ),
-}
-
 const TEXT_CHOICES = {
-  off: null,
-  on: (
-    <CardText isLastBlock={boolean('is Last Block', false)}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </CardText>
-  ),
+  none: null,
+  middle: <CardTextMiddleBlock />,
+  last: <CardTextLastBlock />,
+}
+
+const MEDIA_CHOICES = {
+  none: null,
+  leadingImage: <CardMediaLeadingImage />,
+  middle: <CardMediaMiddle />,
+  last: <CardMediaLast />,
+}
+
+const ACTIONS_CHOICES = {
+  none: null,
+  default: <CardActionsDefault />,
+  alignedRight: <CardActionsAlignedRight />,
+  meta: <CardActionsMeta />,
 }
 
 export const WithKnobs = () => {
@@ -405,10 +414,26 @@ export const WithKnobs = () => {
               'danger',
             ])}
           >
-            {TITLE_CHOICES[select('Title', Object.keys(TITLE_CHOICES), 'on')]}
+            <CardTitle
+              variant={select('Title Variant', ['h4', 'h5', 'h6'])}
+              title="Title"
+              avatar={text('Avatar', 'https://i.imgur.com/UM3mrju.jpg')}
+              subtitle="Subtitle"
+              overline={select('Overline (only for H6)', [false, true])}
+            />
             {
               TEXT_CHOICES[
-                select('Supporting text', Object.keys(TEXT_CHOICES), 'on')
+                select('Supporting text', Object.keys(TEXT_CHOICES), 'middle')
+              ]
+            }
+            {
+              MEDIA_CHOICES[
+                select('Rich Media', Object.keys(MEDIA_CHOICES), 'middle')
+              ]
+            }
+            {
+              ACTIONS_CHOICES[
+                select('Actions', Object.keys(ACTIONS_CHOICES), 'default')
               ]
             }
           </Card>

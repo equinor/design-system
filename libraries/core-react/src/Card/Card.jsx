@@ -17,6 +17,7 @@ const StyledCard = styled.div`
   grid-template-rows: ${({ rows }) => rows};
   /* grid-template-areas: ${({ areas }) => areas}; */
   align-items: center;
+  align-content: start;
   border-radius: ${shape.borderRadius};
   padding-left: ${spacings.left};
   padding-right: ${spacings.right};
