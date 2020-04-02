@@ -114,7 +114,7 @@ export const knobs = () => {
       </div>
       <Typography variant="body_short">Bottom of page</Typography>
       {visibleScrim && (
-        <Scrim onKeyDown={handleClose}>
+        <Scrim onClose={handleClose}>
           <Dialog>
             <Title>{TITLE_CHOICES[titleChoice]}</Title>
             <CustomContent
@@ -152,7 +152,7 @@ export const types = () => {
 
   return (
     visibleScrim && (
-      <Scrim onKeyDown={handleClose} isDismissable={false}>
+      <Scrim onClose={handleClose} isDismissable={false}>
         <BodyTypes>
           <Dialog>
             <Title>Text + actions</Title>

@@ -27,7 +27,7 @@ const StyledDialog = styled.div.attrs(() => ({
   background: ${background};
   border-radius: ${borderRadius};
   display: grid;
-  padding: ${spacingsMedium} 0 0 0;
+  padding-top: ${spacingsMedium};
 
   ${typographyTemplate(text)}
 `
