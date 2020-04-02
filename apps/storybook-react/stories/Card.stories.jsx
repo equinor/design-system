@@ -3,10 +3,13 @@ import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Typography } from '@equinor/eds-core-react'
 import { Card, Chips, Button, Icon, Divider } from '@equinor/eds-core-react'
-import { more_verticle } from '@equinor/eds-icons'
+import { more_verticle, share, person_add, settings } from '@equinor/eds-icons'
 
 const icons = {
   more_verticle,
+  share,
+  person_add,
+  settings,
 }
 
 Icon.add(icons)
@@ -290,6 +293,65 @@ export const CardMediaVariants = () => {
               <Divider />
               {/* <StyledImage src="https://i.imgur.com/UM3mrju.jpg" /> */}
             </CardMedia>
+          </Card>
+        </Grid>
+      </Body>
+    </Wrapper>
+  )
+}
+
+export const CardActionsVariants = () => {
+  return (
+    <Wrapper tabIndex="0">
+      <Body>
+        <Grid>
+          <Card>
+            <CardTitle variant="h5" title="Aligned left" subtitle="Default" />
+            <CardText>
+              Action elements are aligned left in this example
+            </CardText>
+            <CardActions>
+              <Button>Cancel</Button>
+              <Button>OK</Button>
+            </CardActions>
+          </Card>
+          <Card>
+            <CardTitle
+              variant="h5"
+              title="Aligned right"
+              subtitle="To be used for icons"
+            />
+            <CardText>
+              Action elements are aligned right in this example
+            </CardText>
+            <CardActions alignRight>
+              <Button variant="ghost_icon">
+                <Icon
+                  name="person_add"
+                  title="add person action"
+                  size={48}
+                ></Icon>
+              </Button>
+              <Button variant="ghost_icon">
+                <Icon name="settings" title="settings action" size={48}></Icon>
+              </Button>
+              <Button variant="ghost_icon">
+                <Icon name="save" title="save action" size={48}></Icon>
+              </Button>
+            </CardActions>
+          </Card>
+          <Card>
+            <CardTitle
+              variant="h5"
+              title="Meta"
+              subtitle="To be used as supporting text for actions"
+            />
+            <CardText>Action element with metadata</CardText>
+            <CardActions meta="Share">
+              <Button variant="ghost_icon">
+                <Icon name="share" title="share action" size={48}></Icon>
+              </Button>
+            </CardActions>
           </Card>
         </Grid>
       </Body>
