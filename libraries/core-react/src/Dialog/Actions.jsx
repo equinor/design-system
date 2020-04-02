@@ -9,7 +9,7 @@ const StyledActions = styled.div`
   min-height: 48px;
   padding: 0 ${spacingsMedium};
   align-self: end;
-  justify-self: end;
+  justify-self: start;
 
   ${({ children }) =>
     !children &&

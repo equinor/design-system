@@ -51,7 +51,7 @@ export const Page = () => {
         <Scrim onClose={handleClose} isDismissable>
           <TestContent>
             <Typography variant="body_short">
-              Test content in a scrim.
+              Press close or hit 'ESC' to close scrim.
             </Typography>
             <Button onClick={() => setVisibleScrim(false)}>OK</Button>
           </TestContent>

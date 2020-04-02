@@ -24,7 +24,7 @@ const StyledCustomContent = styled.div`
     scrollable &&
     css`
       min-height: initial;
-      height: 52px;
+      height: 104px;
       overflow-y: auto;
     `}
 `

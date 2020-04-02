@@ -76,8 +76,8 @@ const ACTION_CHOICES = {
   none: null,
   buttons: (
     <TempButtonWrapper>
-      <Button variant="ghost">Cancel</Button>
       <Button>OK</Button>
+      <Button variant="ghost">Cancel</Button>
     </TempButtonWrapper>
   ),
 }

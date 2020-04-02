@@ -16,39 +16,51 @@ const StyledScrim = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
-  visibility: visible;
+`
+
+const ScrimContent = styled.div`
+  width: auto;
+  height: auto;
 `
 
 export const Scrim = forwardRef(function EdsScrim(
   { children, onClose, isDismissable, ...rest },
   ref,
 ) {
-  const handleKeyPress = (event) => {
+  const handleClose = (event) => {
     if (event) {
       if (event.key === 'Escape' && isDismissable) {
+        onClose(event, false)
+      } else if (event.type === 'click' && isDismissable) {
         onClose(event, false)
       }
     }
   }
 
+  const handleContentClick = (event) => {
+    // Avoid event bubbling inside dialog/content inside scrim
+    event.stopPropagation()
+  }
+
   useEffect(() => {
     if (isDismissable) {
-      document.addEventListener('keydown', handleKeyPress, false)
+      document.addEventListener('keydown', handleClose, false)
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyPress, false)
+      document.removeEventListener('keydown', handleClose, false)
     }
   }, [])
 
   return (
     <StyledScrim
-      onClose={handleKeyPress}
+      onClose={handleClose}
+      onClick={handleClose}
       isDismissable={isDismissable}
       {...rest}
       ref={ref}
     >
-      {children}
+      <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
     </StyledScrim>
   )
 })
