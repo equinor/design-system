@@ -423,7 +423,10 @@ export const WithKnobs = () => {
   const titleVariant = title
     ? select('Title variant', ['h4', 'h5', 'h6'])
     : null
-  const avatar = title ? boolean('Avatar', true) : null
+  const avatar =
+    (title && titleVariant === 'h6') || (title && !titleAction)
+      ? boolean('Avatar', true)
+      : null
   const titleAction =
     (title && titleVariant === 'h6') || (title && !avatar)
       ? boolean('Title Action', false)
@@ -449,7 +452,9 @@ export const WithKnobs = () => {
                 title="Title"
                 avatar={avatar && 'https://i.imgur.com/UM3mrju.jpg'}
                 subtitle="Subtitle"
-                overline={titleVariant === 'h6' && boolean('Overline', false)}
+                overline={
+                  titleVariant === 'h6' && boolean('Overline subtitle', false)
+                }
                 action={
                   titleAction && (
                     <Button variant="ghost_icon">
