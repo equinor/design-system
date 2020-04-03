@@ -1,13 +1,14 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { drawer as tokens } from './Drawer.tokens'
+
+const { background, border } = tokens
 
 const StyledContainer = styled.div`
-  /* position: fixed;
-  z-index: 1; */
-  background: #ffffff;
+  background: ${background.backgroundColor};
   width: 254px;
-  border-right: 2px solid #f7f7f7;
+  border-right: ${border.right.width} solid ${border.right.color};
 `
 
 export const Container = forwardRef(function EdsDrawerContainer(
