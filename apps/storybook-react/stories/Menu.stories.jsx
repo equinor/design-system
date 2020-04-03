@@ -2,7 +2,10 @@ import React, { useEffect } from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Menu, Typography, Button } from '@equinor/eds-core-react'
+import { Menu, Typography, Button, Icon } from '@equinor/eds-core-react'
+import { folder } from '@equinor/eds-icons'
+
+Icon.add({ folder })
 
 const { MenuItem } = Menu
 const Wrapper = styled.div`
@@ -35,9 +38,10 @@ export const Examples = () => {
 
   // Forcing open menu on render
   useEffect(() => {
-    if (!divEl && divRef.current) {
+    if (divEl === null && divRef.current) {
       setState({ ...state, divEl: divRef.current })
     }
+    return () => {}
   })
 
   return (
@@ -47,15 +51,16 @@ export const Examples = () => {
         <Forced ref={divRef}>Anchor</Forced>
         <Menu id="menu0" aria-labelledby="menu-button0" anchorEl={divEl}>
           <MenuItem>
+            <Icon name="folder" />
             <span>Item 1</span>
-            <span>Cmd + O</span>
+            <span>CTRL+O</span>
           </MenuItem>
-          <MenuItem>Item 2</MenuItem>
+          <MenuItem active>Item 2</MenuItem>
           <MenuItem>Item 3</MenuItem>
         </Menu>
       </Wrapper>
       <Wrapper>
-        <Typography style={{ marginTop: '100px' }} variant="h4">
+        <Typography style={{ marginTop: '170px' }} variant="h4">
           Opened with Button
         </Typography>
         <Button

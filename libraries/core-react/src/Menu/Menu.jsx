@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { templates } from '../_common'
 
-const { spacingsTemplate, typographyTemplate } = templates
+const { typographyTemplate } = templates
 
 const {
   enabled: { elevation, spacings, typography, background },
@@ -12,14 +12,13 @@ const {
 
 const StyledMenu = styled.ul.attrs({ role: 'menu' })`
   display: block;
+  width: fit-content;
   position: absolute;
+  padding: 0;
   z-index: 1;
+  min-width: 168px;
   background: ${background};
-  left: ${({ left }) => left};
-  top: ${({ top }) => top};
   box-shadow: ${elevation};
-  ${typographyTemplate(typography)}
-  ${spacingsTemplate(spacings)}
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
@@ -33,22 +32,22 @@ export const Menu = React.forwardRef(function EdsMenu(
   console.log(rect)
   const props = {
     ...rest,
-    top: rect && rect.height,
+    top: rect && rect.y,
     left: rect.y,
   }
   return <StyledMenu {...props} ref={ref} />
 })
 
-StyledMenu.propTypes = {
+Menu.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** Element the menu is anchored to */
   anchorEl: PropTypes.node,
 }
 
-StyledMenu.defaultProps = {
+Menu.defaultProps = {
   className: '',
   anchorEl: undefined,
 }
 
-StyledMenu.displayName = 'eds-menu'
+Menu.displayName = 'eds-menu'
