@@ -5,10 +5,14 @@ const {
     ui: {
       background__light: { hex: background },
     },
+    interactive: {
+      primary__selected_highlight: { hex: activeBackground },
+      primary__resting: { hex: activeColor },
+    },
   },
   elevation: { raised },
   spacings: {
-    comfortable: { medium },
+    comfortable: { medium, large },
   },
   typography: {
     navigation: { menu_title: typography },
@@ -19,11 +23,17 @@ export const menu = {
   enabled: {
     background,
     typography,
-    spacings: {
-      left: medium,
-      right: medium,
-      top: medium,
-      bottom: medium,
+    item: {
+      active: {
+        background: activeBackground,
+        typography: { ...typography, color: activeColor },
+      },
+      spacings: {
+        left: large,
+        right: large,
+        top: medium,
+        bottom: medium,
+      },
     },
     elevation: raised,
   },
