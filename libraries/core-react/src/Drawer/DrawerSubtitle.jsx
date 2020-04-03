@@ -5,33 +5,33 @@ import { drawer as tokens } from './Drawer.tokens'
 
 const { background, border } = tokens
 
-const StyledContainer = styled.div`
+const StyledDrawerSubtitle = styled.div`
   background: ${background.backgroundColor};
   width: 254px;
   border-right: ${border.right.width} solid ${border.right.color};
 `
 
-export const Container = forwardRef(function EdsDrawerContainer(
+export const DrawerSubtitle = forwardRef(function EdsDrawerSubtitle(
   { children, ...props },
   ref,
 ) {
   return (
-    <StyledContainer {...props} ref={ref}>
+    <StyledDrawerSubtitle {...props} ref={ref}>
       {children}
-    </StyledContainer>
+    </StyledDrawerSubtitle>
   )
 })
 
-Container.displayName = 'eds-drawer-container'
+DrawerSubtitle.displayName = 'eds-drawer-subtitle'
 
-Container.propTypes = {
+DrawerSubtitle.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
 }
 
-Container.defaultProps = {
+DrawerSubtitle.defaultProps = {
   className: '',
   children: undefined,
 }

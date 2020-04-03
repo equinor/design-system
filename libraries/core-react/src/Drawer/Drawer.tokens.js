@@ -23,4 +23,7 @@ export const drawer = {
   border: {
     right: { color: borderColor, width: '2px' },
   },
+  itemBorder: {
+    left: { color: borderColor, width: '2px' },
+  },
 }
