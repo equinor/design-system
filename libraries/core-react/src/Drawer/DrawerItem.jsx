@@ -1,23 +1,31 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Typography, Icon } from '..'
 import { drawer as tokens } from './Drawer.tokens'
 
 const { background, itemBorder } = tokens
 
-const StyledDrawerItem = styled.div`
+const StyledDrawerItem = styled.li`
   margin-left: 56px;
   padding-left: 14px;
+  font-size: 12px;
+  line-height: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  list-style: none;
   border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
 `
 
 export const DrawerItem = forwardRef(function EdsDrawerItem(
-  { children, ...props },
+  { children, href, ...rest },
   ref,
 ) {
   return (
-    <StyledDrawerItem {...props} ref={ref}>
-      {children}
+    <StyledDrawerItem {...rest} href={href} ref={ref}>
+      <Typography variant="body_short" link href={href}>
+        {children}
+      </Typography>
     </StyledDrawerItem>
   )
 })
@@ -29,9 +37,14 @@ DrawerItem.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
+  href: PropTypes.string,
+  /** Icon */
+  icon: PropTypes.string,
 }
 
 DrawerItem.defaultProps = {
   className: '',
   children: undefined,
+  href: '',
+  icon: undefined,
 }

@@ -5,7 +5,7 @@ import { drawer as tokens } from './Drawer.tokens'
 
 const { background, border } = tokens
 
-const StyledDrawerList = styled.div`
+const StyledDrawerList = styled.ul`
   background: ${background.backgroundColor};
   width: 254px;
   border-right: ${border.right.width} solid ${border.right.color};
