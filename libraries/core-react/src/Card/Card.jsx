@@ -6,6 +6,7 @@ import { card as tokens } from './Card.tokens'
 const { spacings, shape } = tokens
 
 const StyledCard = styled.div`
+  height: fit-content;
   width: 100%;
   min-width: ${shape.minWidth};
   position: relative;
@@ -22,6 +23,7 @@ const StyledCard = styled.div`
   padding-left: ${spacings.left};
   padding-right: ${spacings.right};
   min-height: ${shape.minHeight};
+  cursor: ${({ cursor }) => cursor};
 `
 
 export const Card = forwardRef(function EdsCard(
@@ -35,12 +37,15 @@ export const Card = forwardRef(function EdsCard(
     }
   }
 
+  const cursor = onClick ? 'pointer' : 'default'
+
   const props = {
     ...rest,
     className,
     ref,
     background: tokens.background[variant],
     rows,
+    cursor,
   }
 
   return (

@@ -147,7 +147,7 @@ CardTitle.defaultProps = {
   variant: 'h4',
   overline: false,
   subtitle: '',
-  avatar: '',
+  avatar: null,
   // meta: undefined,
   action: undefined,
   className: '',
