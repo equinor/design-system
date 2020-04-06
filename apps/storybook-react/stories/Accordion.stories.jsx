@@ -13,6 +13,7 @@ import { tokens } from '@equinor/eds-tokens'
 const {
   AccordionItem,
   AccordionHeader,
+  AccordionHeaderTitle,
   AccordionButton,
   AccordionPanel,
 } = Accordion
@@ -37,15 +38,14 @@ export default {
   component: Accordion,
 }
 
-export const accordionsExample = () => {
+// export
+const accordionsExample = () => {
   return (
     <Wrapper>
       <Typography>Accordion example</Typography>
       <Accordion>
         <AccordionItem isExpanded>
-          <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
-          </AccordionHeader>
+          <AccordionHeader>Header 1</AccordionHeader>
           <AccordionPanel>Content 1</AccordionPanel>
         </AccordionItem>
         <AccordionItem>
@@ -74,19 +74,15 @@ export const header = () => {
 
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
-          <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
-          </AccordionHeader>
+          <AccordionHeader>Header 1</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Typography variant="h2">Chevron left expanded</Typography>
+      <Typography variant="h2">Chevron right</Typography>
 
-      <Accordion headerLevel="h3" chevronPosition="left">
-        <AccordionItem isExpanded>
-          <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
-          </AccordionHeader>
+      <Accordion headerLevel="h3" chevronPosition="right">
+        <AccordionItem>
+          <AccordionHeader>Header 1</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
@@ -95,8 +91,16 @@ export const header = () => {
       <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem>
           <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
+            <AccordionHeaderTitle>Header 1</AccordionHeaderTitle>
           </AccordionHeader>
+        </AccordionItem>
+      </Accordion>
+
+      <Typography variant="h2">Chevron left expanded</Typography>
+
+      <Accordion headerLevel="h3" chevronPosition="left">
+        <AccordionItem isExpanded>
+          <AccordionHeader>Header 1</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
@@ -104,9 +108,7 @@ export const header = () => {
 
       <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled>
-          <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
-          </AccordionHeader>
+          <AccordionHeader>Header 1</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
@@ -114,9 +116,7 @@ export const header = () => {
 
       <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled isExpanded>
-          <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
-          </AccordionHeader>
+          <AccordionHeader>Header 1</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
@@ -125,22 +125,20 @@ export const header = () => {
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
-            <AccordionButton>
-              Header 1
-              <IconWithMarginProp
-                name="attach_file"
-                title="Attach file"
-                size={16}
-                marginRight={32}
-                color="currentColor"
-              />
-              <Icon
-                name="notifications"
-                title="Notifications"
-                size={16}
-                color="currentColor"
-              />
-            </AccordionButton>
+            <AccordionHeaderTitle>Header 1</AccordionHeaderTitle>
+            <IconWithMarginProp
+              name="attach_file"
+              title="Attach file"
+              size={16}
+              marginRight={32}
+              color="currentColor"
+            />
+            <Icon
+              name="notifications"
+              title="Notifications"
+              size={16}
+              color="currentColor"
+            />
           </AccordionHeader>
         </AccordionItem>
       </Accordion>
@@ -152,7 +150,7 @@ export const header = () => {
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
-            <AccordionButton>Header 1</AccordionButton>
+            <AccordionHeaderTitle>Header 1</AccordionHeaderTitle>
             <Button
               variant="ghost_icon"
               onClick={action('clicked edit button')}
@@ -174,10 +172,10 @@ export const header = () => {
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
-            <AccordionButton>
+            <AccordionHeaderTitle>
               Very long summary that will get truncated if the width of the
               header is narrower than the length of the text
-            </AccordionButton>
+            </AccordionHeaderTitle>
           </AccordionHeader>
         </AccordionItem>
       </Accordion>
