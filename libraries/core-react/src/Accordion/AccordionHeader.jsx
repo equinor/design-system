@@ -1,6 +1,6 @@
-import React, { forwardRef, useState, useEffect } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 // eslint-disable-next-line camelcase
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '..'

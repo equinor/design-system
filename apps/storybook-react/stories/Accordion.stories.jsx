@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import styled, { css } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { Accordion, Typography, Button, Icon } from '@equinor/eds-core-react'
 import {
@@ -8,7 +8,6 @@ import {
   edit,
   delete_to_trash,
 } from '@equinor/eds-icons'
-import { tokens } from '@equinor/eds-tokens'
 
 const {
   AccordionItem,

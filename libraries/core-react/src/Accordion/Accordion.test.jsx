@@ -4,9 +4,8 @@ import PropTypes from 'prop-types'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
-import styled from 'styled-components'
+// eslint-disable-next-line camelcase
 import { attach_file, notifications } from '@equinor/eds-icons'
-import { accordion as tokens } from './Accordion.tokens'
 import { Accordion } from '.'
 import { Icon, Button } from '..'
 
