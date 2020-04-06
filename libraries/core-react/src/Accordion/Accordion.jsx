@@ -25,9 +25,6 @@ const Accordion = forwardRef(function Accordion(
     })
   })
 
-  // create state in accordion
-  // pass callback to children
-
   return (
     <div {...props} ref={ref}>
       {AccordionItems}

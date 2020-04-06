@@ -42,10 +42,11 @@ const StyledAccordionHeader = styled.div.attrs(
   boxSizing: 'border-box',
   color: (disabled && headerColor.disabled) || headerColor.default,
   outline: 'none',
-  '&:focus': focusVisible && {
-    outline,
-    outlineOffset,
-  },
+  '&:focus': !disabled &&
+    focusVisible && {
+      outline,
+      outlineOffset,
+    },
   '&:hover': !disabled && { background: headerBackground.hover },
   cursor: disabled ? 'not-allowed' : 'pointer',
   paddingLeft: '16px',

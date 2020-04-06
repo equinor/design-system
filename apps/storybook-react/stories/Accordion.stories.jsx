@@ -149,7 +149,7 @@ export const header = () => {
             <Button
               variant="ghost_icon"
               onClick={(event) => {
-                action('clicked edit button')
+                action('clicked edit button')(event)
                 event.stopPropagation()
               }}
             >
@@ -158,7 +158,7 @@ export const header = () => {
             <Button
               variant="ghost_icon"
               onClick={(event) => {
-                action('clicked delete button')
+                action('clicked delete button')(event)
                 event.stopPropagation()
               }}
             >
