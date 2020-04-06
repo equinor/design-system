@@ -8,6 +8,7 @@ const {
     interactive: {
       primary__selected_highlight: { hex: activeBackground },
       primary__resting: { hex: activeColor },
+      focus: { hex: focusColor },
     },
   },
   elevation: { raised },
@@ -33,6 +34,10 @@ export const menu = {
         right: large,
         top: medium,
         bottom: medium,
+      },
+      focus: {
+        outline: `2px dashed ${focusColor}`,
+        outlineOffset: '2px',
       },
     },
     elevation: raised,
