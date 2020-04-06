@@ -37,6 +37,14 @@ const ListItem = styled.li.attrs({ role: 'none', tabIndex: 0 })`
     cursor: pointer;
     background: ${hover.background};
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      &:hover {
+        cursor: not-allowed;
+      }
+    `}
 `
 
 const Anchor = styled.a.attrs({ role: 'menuitem' })`
@@ -67,6 +75,8 @@ MenuItem.propTypes = {
   /** @ignore */
   children: PropTypes.element,
   /** Active Menu Item */
+  active: PropTypes.bool,
+  /** Disabled Menu Item */
   active: PropTypes.bool,
 }
 

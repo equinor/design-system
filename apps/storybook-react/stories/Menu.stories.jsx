@@ -67,7 +67,7 @@ export const Preview = () => {
             <span>Copy</span>
             <span>CTRL+C</span>
           </MenuItem>
-          <MenuItem>
+          <MenuItem disabled>
             <Icon name="paste" />
             <span>Paste</span>
             <span>CTRL+V</span>
