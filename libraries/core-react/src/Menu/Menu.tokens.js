@@ -3,7 +3,8 @@ import { tokens } from '@equinor/eds-tokens'
 const {
   colors: {
     ui: {
-      background__light: { hex: background },
+      background__light: { hex: hoverBackground },
+      background__default: { hex: background },
     },
     interactive: {
       primary__selected_highlight: { hex: activeBackground },
@@ -38,6 +39,9 @@ export const menu = {
       focus: {
         outline: `2px dashed ${focusColor}`,
         outlineOffset: '2px',
+      },
+      hover: {
+        background: hoverBackground,
       },
     },
     elevation: raised,
