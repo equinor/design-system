@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from 'react'
+import React, { forwardRef, useMemo, useState } from 'react'
 import createId from 'lodash.uniqueid'
 import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
@@ -8,14 +8,25 @@ const Accordion = forwardRef(function Accordion(
 ) {
   const accordionId = useMemo(() => createId('accordion-'), [])
 
+  const [focusVisible, setFocusVisible] = useState(false)
+
+  const handleFocusVisible = (isFocusVisible) => {
+    setFocusVisible(isFocusVisible)
+  }
+
   const AccordionItems = React.Children.map(children, (child, index) => {
     return React.cloneElement(child, {
       accordionId,
       index,
       headerLevel,
       chevronPosition,
+      focusVisible,
+      handleFocusVisible,
     })
   })
+
+  // create state in accordion
+  // pass callback to children
 
   return (
     <div {...props} ref={ref}>

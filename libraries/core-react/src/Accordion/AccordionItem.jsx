@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useMemo } from 'react'
+import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
@@ -11,6 +11,8 @@ const AccordionItem = forwardRef(function AccordionItem(
     isExpanded,
     children,
     disabled,
+    focusVisible,
+    handleFocusVisible,
     ...props
   },
   ref,
@@ -35,6 +37,8 @@ const AccordionItem = forwardRef(function AccordionItem(
           chevronPosition,
           parentIndex: index,
           disabled,
+          focusVisible,
+          handleFocusVisible,
         })
       : React.cloneElement(child, {
           hidden: !expanded,
@@ -64,6 +68,10 @@ AccordionItem.propTypes = {
   children: PropTypes.node.isRequired,
   /** accordion item is disabled */
   disabled: PropTypes.bool,
+  /** @ignore */
+  focusVisible: PropTypes.bool,
+  /** @ignore */
+  handleFocusVisible: PropTypes.func,
 }
 
 AccordionItem.defaultProps = {
@@ -72,6 +80,8 @@ AccordionItem.defaultProps = {
   index: 0,
   accordionId: '',
   isExpanded: false,
+  focusVisible: false,
+  handleFocusVisible: () => {},
 }
 
 export { AccordionItem }

@@ -37,7 +37,7 @@ export const accordion = {
   },
   border: `1px solid ${borderColor}`,
   outline: `1px dashed ${focusOutlineColor}`,
-  outlineOffset: '-4px',
+  outlineOffset: '2px',
   chevronColor: {
     default: activatedColor,
     disabled: disabledIconColor,

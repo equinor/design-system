@@ -38,8 +38,7 @@ export default {
   component: Accordion,
 }
 
-// export
-const accordionsExample = () => {
+export const accordionsExample = () => {
   return (
     <Wrapper>
       <Typography>Accordion example</Typography>
@@ -49,15 +48,11 @@ const accordionsExample = () => {
           <AccordionPanel>Content 1</AccordionPanel>
         </AccordionItem>
         <AccordionItem>
-          <AccordionHeader>
-            <AccordionButton>Header 2</AccordionButton>
-          </AccordionHeader>
+          <AccordionHeader>Header 2</AccordionHeader>
           <AccordionPanel>Content 2</AccordionPanel>
         </AccordionItem>
         <AccordionItem>
-          <AccordionHeader>
-            <AccordionButton>Header 3</AccordionButton>
-          </AccordionHeader>
+          <AccordionHeader>Header 3</AccordionHeader>
           <AccordionPanel>Content 3</AccordionPanel>
         </AccordionItem>
       </Accordion>
@@ -153,13 +148,19 @@ export const header = () => {
             <AccordionHeaderTitle>Header 1</AccordionHeaderTitle>
             <Button
               variant="ghost_icon"
-              onClick={action('clicked edit button')}
+              onClick={(event) => {
+                action('clicked edit button')
+                event.stopPropagation()
+              }}
             >
               <Icon name="edit" title="Edit" />
             </Button>
             <Button
               variant="ghost_icon"
-              onClick={action('clicked delete button')}
+              onClick={(event) => {
+                action('clicked delete button')
+                event.stopPropagation()
+              }}
             >
               <Icon name="delete_to_trash" title="Delete" />
             </Button>

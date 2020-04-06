@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+// eslint-disable-next-line camelcase
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
-import { Icon, Typography } from '..'
+import { Icon } from '..'
 import { accordion as tokens } from './Accordion.tokens'
 import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
 
@@ -20,7 +21,7 @@ const {
 } = tokens
 
 const StyledAccordionHeader = styled.div.attrs(
-  ({ panelId, isExpanded, disabled }) => ({
+  ({ panelId, isExpanded, disabled, parentIndex }) => ({
     'aria-expanded': isExpanded,
     'aria-controls': panelId,
     role: 'button',
@@ -28,7 +29,7 @@ const StyledAccordionHeader = styled.div.attrs(
     'aria-disabled': isExpanded && disabled,
     tabIndex: '0',
   }),
-)(({ parentIndex, disabled }) => ({
+)(({ parentIndex, disabled, focusVisible }) => ({
   ...header,
   margin: 0,
   height: '48px',
@@ -40,7 +41,8 @@ const StyledAccordionHeader = styled.div.attrs(
   borderLeft: border,
   boxSizing: 'border-box',
   color: (disabled && headerColor.disabled) || headerColor.default,
-  '&:focus-within': {
+  outline: 'none',
+  '&:focus': focusVisible && {
     outline,
     outlineOffset,
   },
@@ -49,39 +51,6 @@ const StyledAccordionHeader = styled.div.attrs(
   paddingLeft: '16px',
   paddingRight: '16px',
 }))
-
-const HeaderButton = styled.button.attrs(
-  ({ panelId, isExpanded, disabled }) => ({
-    'aria-expanded': isExpanded,
-    'aria-controls': panelId,
-    type: 'button',
-    disabled,
-    'aria-disabled': isExpanded && disabled,
-  }),
-)`
-  margin: 0;
-  padding: 0;
-  appearance: none;
-  border: none;
-  height: 48px;
-  width: 100%;
-  background: transparent;
-  color: inherit;
-  font-size: inherit;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  ${({ disabled }) =>
-    !disabled &&
-    css`
-      cursor: pointer;
-    `}
-  padding-left: 16px;
-  padding-right: 16px;
-  outline: none;
-`
-
-HeaderButton.displayName = 'eds-accordion-headerbutton'
 
 const StyledIcon = styled(Icon)(({ chevronPosition }) =>
   chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
@@ -111,10 +80,36 @@ const AccordionHeader = forwardRef(function AccordionHeader(
     children,
     toggleExpanded,
     disabled,
+    focusVisible,
+    handleFocusVisible,
     ...props
   },
   ref,
 ) {
+  const handleClick = () => {
+    handleFocusVisible(false)
+    if (!disabled) {
+      toggleExpanded()
+    }
+  }
+
+  const handleMouseDown = () => {
+    handleFocusVisible(false)
+  }
+
+  const handleKeyDown = (event) => {
+    const { key } = event
+    handleFocusVisible(true)
+    switch (key) {
+      case 'Enter':
+      case ' ':
+        toggleExpanded()
+        event.preventDefault()
+        break
+      default:
+    }
+  }
+
   const chevron = (
     <StyledIcon
       key={`${id}-icon`}
@@ -150,6 +145,11 @@ const AccordionHeader = forwardRef(function AccordionHeader(
       as={headerLevel}
       disabled={disabled}
       {...props}
+      panelId={panelId}
+      onClick={handleClick}
+      onMouseDown={handleMouseDown}
+      onKeyDown={handleKeyDown}
+      focusVisible={focusVisible}
       ref={ref}
     >
       {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
@@ -173,6 +173,10 @@ AccordionHeader.propTypes = {
   parentIndex: PropTypes.number,
   /** accordion item is disabled */
   disabled: PropTypes.bool,
+  /** @ignore */
+  focusVisible: PropTypes.bool,
+  /** @ignore */
+  handleFocusVisible: PropTypes.func,
 }
 
 AccordionHeader.defaultProps = {
@@ -182,10 +186,8 @@ AccordionHeader.defaultProps = {
   isExpanded: false,
   parentIndex: null,
   disabled: false,
+  focusVisible: false,
+  handleFocusVisible: () => {},
 }
 
-export {
-  AccordionHeader,
-  AccordionHeaderTitle,
-  HeaderButton as AccordionButton,
-}
+export { AccordionHeader, AccordionHeaderTitle }
