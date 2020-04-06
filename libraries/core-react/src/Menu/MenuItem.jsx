@@ -9,7 +9,7 @@ const { spacingsTemplate, typographyTemplate } = templates
 const {
   enabled: {
     typography,
-    item: { spacings, active: activeToken, focus },
+    item: { spacings, active: activeToken, focus, hover },
   },
 } = tokens
 
@@ -34,6 +34,8 @@ const ListItem = styled.li.attrs({ role: 'none', tabIndex: 0 })`
     outline-offset: ${focus.outlineOffset};
   }
   &:hover {
+    cursor: pointer;
+    background: ${hover.background};
   }
 `
 
