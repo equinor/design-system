@@ -2,23 +2,35 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { templates } from '../_common'
-
-const { typographyTemplate } = templates
 
 const {
-  enabled: { elevation, spacings, typography, background },
+  enabled: { elevation, background },
 } = tokens
 
-const StyledMenu = styled.ul.attrs({ role: 'menu' })`
-  display: block;
-  width: fit-content;
+const pos = ({ left, top }) => css`
+  left: ${left}px;
+  top: ${top}px;
+`
+
+const Paper = styled.div`
+  min-width: 96px;
+  max-width: calc(100% -32px);
   position: absolute;
-  padding: 0;
-  z-index: 1;
-  min-width: 168px;
   background: ${background};
   box-shadow: ${elevation};
+  z-index: 1;
+  ${pos}
+`
+
+const StyledMenu = styled.ul.attrs({ role: 'menu' })`
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li:first-child {
+    z-index: 2;
+  }
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
@@ -29,13 +41,16 @@ export const Menu = React.forwardRef(function EdsMenu(
     return undefined
   }
   const rect = anchorEl ? anchorEl.getBoundingClientRect() : null
-  console.log(rect)
   const props = {
     ...rest,
     top: rect && rect.y,
     left: rect.y,
   }
-  return <StyledMenu {...props} ref={ref} />
+  return (
+    <Paper>
+      <StyledMenu {...props} ref={ref} />
+    </Paper>
+  )
 })
 
 Menu.propTypes = {

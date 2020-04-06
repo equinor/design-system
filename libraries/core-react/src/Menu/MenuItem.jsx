@@ -9,30 +9,43 @@ const { spacingsTemplate, typographyTemplate } = templates
 const {
   enabled: {
     typography,
-    item: { spacings, active: activeToken },
+    item: { spacings, active: activeToken, focus },
   },
 } = tokens
 
-const ListItem = styled.li.attrs({ role: 'none' })`
-  width: 100%;
+const ListItem = styled.li.attrs({ role: 'none', tabIndex: 0 })`
+  width: auto;
   position: relative;
-  display: block;
-  list-style: none;
+
+  ${typographyTemplate(typography)}
 
   ${({ active }) =>
-    typographyTemplate(active ? activeToken.typography : typography)}
-  ${({ active }) => active && css({ background: activeToken.background })}
+    active &&
+    css`
+      background: ${activeToken.background};
+      ${typographyTemplate(activeToken.typography)}
+      svg {
+        fill: ${activeToken.typography.color};
+      }
+    `}
+
+  &:focus {
+    outline: ${focus.outline};
+    outline-offset: ${focus.outlineOffset};
+  }
+  &:hover {
+  }
 `
 
 const Anchor = styled.a.attrs({ role: 'menuitem' })`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  position: relative;
+  width: auto;
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-flow: column;
+  grid-auto-columns: min-content auto min-content;
+  align-items: center;
   ${spacingsTemplate(spacings)}
-
-  &:hover {
-    background: red;
-  }
 `
 
 export const MenuItem = React.forwardRef(function EdsMenuItem(
