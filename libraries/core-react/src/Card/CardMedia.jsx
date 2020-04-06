@@ -5,8 +5,6 @@ import styled from 'styled-components'
 import { card as tokens } from './Card.tokens'
 
 const StyledCardMedia = styled.div`
-  /* grid-area: bottom; */
-
   width: inherit;
   padding-top: ${({ paddingTop }) => paddingTop};
   padding-bottom: ${({ paddingBottom }) => paddingBottom};
@@ -14,8 +12,7 @@ const StyledCardMedia = styled.div`
 
   img:first-child {
     position: relative;
-    width: ${(props) =>
-      props.order === 'leading' ? 'calc(100% + 32px)' : '100%'};
+    width: ${({ imgWidth }) => imgWidth};
   }
 `
 
@@ -31,6 +28,7 @@ export const CardMedia = forwardRef(function EdsCardMedia(
     paddingBottom: tokens.spacings[order].bottom,
     paddingTop: tokens.spacings[order].top,
     marginLeft: tokens.spacings[order].marginLeft,
+    imgWidth: tokens.spacings[order].width,
     order,
   }
 

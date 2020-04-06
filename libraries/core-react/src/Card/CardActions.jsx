@@ -21,7 +21,7 @@ export const CardActions = forwardRef(function EdsCardActions(
   { children, className, alignRight, meta, ...rest },
   ref,
 ) {
-  const justifyContent = alignRight ? 'flex-end' : 'flex-start' // Default for buttons and meta
+  const justifyContent = alignRight ? 'flex-end' : 'flex-start'
   const props = {
     ...rest,
     className,

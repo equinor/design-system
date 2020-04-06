@@ -1,7 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
 
 const {
-  // shape: { rounded },
   colors: {
     ui: {
       background__default: { rgba: background },
@@ -36,15 +35,18 @@ export const card = {
     last: {
       top: spacingMedium,
       bottom: spacingLarge,
+      width: '100%',
     },
     middle: {
       top: spacingMedium,
       bottom: spacingMedium,
+      width: '100%',
     },
     leading: {
       top: 0,
       marginLeft: '-16px',
       bottom: spacingLarge,
+      width: 'calc(100% + 32px)',
     },
     actions: {
       top: spacingSmall,

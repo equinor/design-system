@@ -4,19 +4,9 @@ import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { Button, Icon } from '@equinor/eds-core-react'
-import { more_verticle, share, person_add, settings } from '@equinor/eds-icons'
 
 import { Card } from '.'
 
-const icons = {
-  more_verticle,
-  share,
-  person_add,
-  settings,
-}
-
-Icon.add(icons)
 const { CardTitle, CardMedia, CardText, CardActions } = Card
 
 const StyledCard = styled(Card)`
@@ -36,35 +26,67 @@ describe('Card', () => {
   it('Has correct color', () => {
     const { container } = render(<Card variant="info" />)
     const card = container.firstChild
-    expect(card).toHaveStyleRule('background-color', '#d5eaf4')
+    expect(card).toHaveStyleRule('background-color', 'rgba(213,234,244,1)')
   })
-  it('Has all provided content', () => {
-    // const testIdTitle = 'card-title-test'
-    // const testIdMedia = 'card-media-test'
-    // const testIdText = 'card-text-test'
-    const testIdActions = 'card-actions-test'
-
-    const { queryByTestId } = render(
+  it('Has provided title and subtitle in CardTitle', () => {
+    const title = 'Title'
+    const subtitle = 'subtitle'
+    const { queryByText } = render(
       <Card>
-        <CardTitle
-          variant="h6"
-          title="Title"
-          subtitle="Caption"
-          avatar="https://i.imgur.com/UM3mrju.jpg"
-        />
-        <CardText>Action elements are aligned left in this example</CardText>
-        <CardMedia order="middle">
-          <img src="https://i.imgur.com/UM3mrju.jpg" alt="For representation" />
+        <CardTitle variant="h4" title={title} subtitle={subtitle} />
+      </Card>,
+    )
+
+    expect(queryByText(title)).toBeDefined()
+    expect(queryByText(subtitle)).toBeDefined()
+  })
+  it('Has provided text and variation in CardText', () => {
+    const text = 'This is a text'
+    const variant = 'isLastBlock'
+    const { queryByText } = render(
+      <Card>
+        <CardText isLastBlock>{text}</CardText>
+      </Card>,
+    )
+
+    expect(queryByText(text)).toBeDefined()
+    expect(queryByText(variant)).toBeDefined()
+  })
+  it('Has provided image source and placement in CardMedia', () => {
+    const order = 'leading'
+    const src = 'https://i.imgur.com/UM3mrju.jpg'
+    const { queryByText } = render(
+      <Card>
+        <CardMedia order={order}>
+          <img src={src} alt="alt" />
         </CardMedia>
-        <CardActions>
-          <Button>Cancel</Button>
-          <Button>OK</Button>
+      </Card>,
+    )
+
+    expect(queryByText(order)).toBeDefined()
+    expect(queryByText(src)).toBeDefined()
+  })
+  it('CardActions items are placed correctly', () => {
+    const { container } = render(
+      <Card>
+        <CardActions alignRight>
+          <button type="button" />
         </CardActions>
       </Card>,
     )
-    expect(queryByTestId(testIdHeader)).toBeDefined()
-    expect(queryByTestId(testIdCenter)).toBeDefined()
-    expect(queryByTestId(testIdActions)).toBeDefined()
+    const child = container.firstChild
+    expect(child.firstChild).toHaveStyleRule('justify-content', 'flex-end')
+  })
+  it('CardMedia items are placed correctly', () => {
+    const { container } = render(
+      <Card>
+        <CardMedia order="leading">
+          <img src="https://i.imgur.com/UM3mrju.jpg" alt="alt" />
+        </CardMedia>
+      </Card>,
+    )
+    const child = container.firstChild
+    expect(child.firstChild).toHaveStyleRule('margin-left', '-16px')
   })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledCard />)

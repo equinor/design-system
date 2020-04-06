@@ -16,7 +16,6 @@ const StyledCard = styled.div`
   grid-column-gap: 0;
   grid-template-columns: auto;
   grid-template-rows: ${({ rows }) => rows};
-  /* grid-template-areas: ${({ areas }) => areas}; */
   align-items: center;
   align-content: start;
   border-radius: ${shape.borderRadius};
@@ -31,6 +30,7 @@ export const Card = forwardRef(function EdsCard(
   ref,
 ) {
   let rows = 'auto'
+
   if (children instanceof Array) {
     for (let i = 0; i < children.length - 1; i += 1) {
       rows += ' auto'
@@ -58,7 +58,7 @@ export const Card = forwardRef(function EdsCard(
 Card.displayName = 'eds-card'
 
 Card.propTypes = {
-  // Variant (default, info, danger, warning - background colors):
+  // Variant / background color (default, info, danger, warning):
   variant: PropTypes.oneOf(['default', 'info', 'warning', 'danger']),
   // Onclick function (for clickable cards)
   onClick: PropTypes.func,
