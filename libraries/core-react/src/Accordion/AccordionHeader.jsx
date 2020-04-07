@@ -21,7 +21,7 @@ const {
 } = tokens
 
 const StyledAccordionHeader = styled.div.attrs(
-  ({ panelId, isExpanded, disabled, parentIndex }) => ({
+  ({ panelId, isExpanded, disabled }) => ({
     'aria-expanded': isExpanded,
     'aria-controls': panelId,
     role: 'button',
