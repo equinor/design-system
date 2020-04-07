@@ -15,9 +15,9 @@ const pos = ({ left, top }) => css`
 const Paper = styled.div`
   min-width: 96px;
   max-width: calc(100% -32px);
-  position: absolute;
   background: ${background};
   box-shadow: ${elevation};
+  position: absolute;
   z-index: 1;
   ${pos}
 `
@@ -29,7 +29,7 @@ const StyledMenu = styled.ul.attrs({ role: 'menu' })`
   margin: 0;
 
   li:first-child {
-    z-index: 2;
+    z-index: 3;
   }
 `
 
