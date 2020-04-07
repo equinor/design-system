@@ -27,7 +27,7 @@ const StyledAccordionHeader = styled.div.attrs(
     role: 'button',
     disabled,
     'aria-disabled': isExpanded && disabled,
-    tabIndex: '0',
+    tabIndex: disabled ? '-1' : '0',
   }),
 )(({ parentIndex, disabled, focusVisible }) => ({
   ...header,
@@ -101,13 +101,9 @@ const AccordionHeader = forwardRef(function AccordionHeader(
   const handleKeyDown = (event) => {
     const { key } = event
     handleFocusVisible(true)
-    switch (key) {
-      case 'Enter':
-      case ' ':
-        toggleExpanded()
-        event.preventDefault()
-        break
-      default:
+    if (key === 'Enter' || key === ' ') {
+      toggleExpanded()
+      event.preventDefault()
     }
   }
 
@@ -187,7 +183,7 @@ AccordionHeader.defaultProps = {
   isExpanded: false,
   parentIndex: null,
   disabled: false,
-  focusVisible: false,
+  focusVisible: true,
   handleFocusVisible: () => {},
 }
 

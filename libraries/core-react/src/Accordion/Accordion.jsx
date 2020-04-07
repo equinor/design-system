@@ -8,7 +8,7 @@ const Accordion = forwardRef(function Accordion(
 ) {
   const accordionId = useMemo(() => createId('accordion-'), [])
 
-  const [focusVisible, setFocusVisible] = useState(false)
+  const [focusVisible, setFocusVisible] = useState(true)
 
   const handleFocusVisible = (isFocusVisible) => {
     setFocusVisible(isFocusVisible)

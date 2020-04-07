@@ -80,7 +80,7 @@ AccordionItem.defaultProps = {
   index: 0,
   accordionId: '',
   isExpanded: false,
-  focusVisible: false,
+  focusVisible: true,
   handleFocusVisible: () => {},
 }
 
