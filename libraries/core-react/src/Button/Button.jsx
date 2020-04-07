@@ -111,6 +111,19 @@ const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
 // - Use ThemeProvider
 // - Set attr on button
 
+/**
+ * @typedef Props
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [className]
+ * @prop {'contained' | 'outlined' | 'ghost' | 'ghost_icon'} [variant] Specifies which variant to use
+ * @prop {boolean} [disabled] If `true`, the button will be disabled
+ * @prop {'primary' | 'secondary' | 'danger'} [color] Specifies color
+ * @prop {(event: React.MouseEvent) => void} [onClick]
+ */
+
+/**
+ * @param {Props} props
+ */
 export const Button = ({
   variant,
   children,

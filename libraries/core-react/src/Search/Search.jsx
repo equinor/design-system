@@ -161,81 +161,96 @@ const InsideButton = styled.div`
     `}
 `
 
-export const Search = React.forwardRef(function EdsSearch(
-  { onChange, value: initValue, className, disabled, ...rest },
-  ref,
-) {
-  const inputRef = useCombinedRefs(useRef(null), ref)
-  const [state, setState] = useState({
-    value: initValue,
-    isActive: initValue !== '',
-    isFocused: false,
-  })
+/**
+ * @typedef Props
+ * @prop {string} [className]
+ * @prop {string} [placeholder] Placeholder
+ * @prop {boolean} [disabled] Disabled state
+ * @prop {React.ChangeEventHandler} [onChange] onChange handler
+ * @prop {string} [value] Value for search field
+ */
 
-  const handleOnClick = () => inputRef.current.focus()
-  const handleFocus = () => setState({ ...state, isFocused: true })
-  const handleBlur = () => setState({ ...state, isFocused: false })
-  const handleOnChange = ({ target: { value } }) =>
-    setState({ ...state, isActive: value !== '', value })
-  const handleOnDelete = () => {
-    const input = inputRef.current
-    const value = ''
-    setReactInputValue(input, value)
-    setState({ ...state, isActive: false, value })
-  }
+export const Search = React.forwardRef(
+  /**
+   * @param {Props} props
+   * @param ref
+   */
+  function EdsSearch(
+    { onChange, value: initValue, className, disabled, ...rest },
+    ref,
+  ) {
+    const inputRef = useCombinedRefs(useRef(null), ref)
+    const [state, setState] = useState({
+      value: initValue,
+      isActive: initValue !== '',
+      isFocused: false,
+    })
 
-  const { value, isActive, isFocused } = state
-  const size = 16
+    const handleOnClick = () => inputRef.current.focus()
+    const handleFocus = () => setState({ ...state, isFocused: true })
+    const handleBlur = () => setState({ ...state, isFocused: false })
+    const handleOnChange = ({ target: { value } }) =>
+      setState({ ...state, isActive: value !== '', value })
+    const handleOnDelete = () => {
+      const input = inputRef.current
+      const value = ''
+      setReactInputValue(input, value)
+      setState({ ...state, isActive: false, value })
+    }
 
-  const containerProps = {
-    isFocused,
-    className,
-    disabled,
-    role: 'search',
-    'aria-label': rest['aria-label'],
-    onClick: handleOnClick,
-  }
+    const { value, isActive, isFocused } = state
+    const size = 16
 
-  const inputProps = {
-    ...rest,
-    value,
-    disabled,
-    ref: inputRef,
-    type: 'search',
-    role: 'searchbox',
-    'aria-label': 'search input',
-    onBlur: handleBlur,
-    onFocus: handleFocus,
-    onChange: (e) => {
-      handleOnChange(e)
-      if (onChange) {
-        onChange(e)
-      }
-    },
-  }
+    const containerProps = {
+      isFocused,
+      className,
+      disabled,
+      role: 'search',
+      'aria-label': rest['aria-label'],
+      onClick: handleOnClick,
+    }
 
-  const clearButtonProps = {
-    isActive,
-    size,
-    role: 'button',
-    onClick: (e) => {
-      e.stopPropagation()
-      if (isActive) {
-        handleOnDelete()
-      }
-    },
-  }
+    const inputProps = {
+      ...rest,
+      value,
+      disabled,
+      ref: inputRef,
+      type: 'search',
+      role: 'searchbox',
+      'aria-label': 'search input',
+      onBlur: handleBlur,
+      onFocus: handleFocus,
+      onChange: (e) => {
+        handleOnChange(e)
+        if (onChange) {
+          onChange(e)
+        }
+      },
+    }
 
-  return (
-    <Container {...containerProps}>
-      <Icon name="search" title="search icon" size={size} />
-      <Input {...inputProps} />
-      <InsideButton {...clearButtonProps}>
-        <Icon name="close" title="clear" size={size} />
-      </InsideButton>
-    </Container>
-  )
-})
+    const clearButtonProps = {
+      isActive,
+      size,
+      role: 'button',
+      onClick: (e) => {
+        e.stopPropagation()
+        if (isActive) {
+          handleOnDelete()
+        }
+      },
+    }
+
+    return (
+      <Container {...containerProps}>
+        <Icon name="search" title="search icon" size={size} />
+        <Input {...inputProps} />
+        <InsideButton {...clearButtonProps}>
+          <Icon name="close" title="clear" size={size} />
+        </InsideButton>
+      </Container>
+    )
+  },
+)
 
 Search.propTypes = {
   /** @ignore */

@@ -27,23 +27,37 @@ const TocLabel = styled((props) => <Typography {...props} />)`
   color: ${labelText.color};
 `
 
-const TableOfContents = forwardRef(function TableOfContents(
-  { children, sticky, label, className, ...rest },
-  ref,
-) {
-  return (
-    <StyledTableOfContents
-      className={className}
-      ref={ref}
-      label={label}
-      sticky={sticky}
-      {...rest}
-    >
-      <TocLabel variant="overline">{label}</TocLabel>
-      <TocList>{children}</TocList>
-    </StyledTableOfContents>
-  )
-})
+/**
+ * @typedef Props
+ * @prop {React.ReactNode} children
+ * @prop {string} [className]
+ * @prop {boolean} [sticky] Sticky function
+ * @prop {string} [label] Label or title for the ToC
+ */
+
+const TableOfContents = forwardRef(
+  /**
+   * @param {Props} props
+   * @param ref
+   */
+  function TableOfContents(
+    { children, sticky, label, className, ...rest },
+    ref,
+  ) {
+    return (
+      <StyledTableOfContents
+        className={className}
+        ref={ref}
+        label={label}
+        sticky={sticky}
+        {...rest}
+      >
+        <TocLabel variant="overline">{label}</TocLabel>
+        <TocList>{children}</TocList>
+      </StyledTableOfContents>
+    )
+  },
+)
 
 TableOfContents.displayName = 'eds-toc'
 

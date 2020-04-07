@@ -56,13 +56,26 @@ const StyledLinkItem = styled.li`
     }
   }
 `
-const LinkItem = forwardRef(function EdsLinkItem({ children, ...props }, ref) {
-  return (
-    <StyledLinkItem {...props} ref={ref}>
-      {children}
-    </StyledLinkItem>
-  )
-})
+
+/**
+ * @typedef Props
+ * @prop {React.ReactNode} children
+ * @prop {string} [className]
+ */
+
+const LinkItem = forwardRef(
+  /**
+   * @param {Props} props
+   * @param ref
+   */
+  function EdsLinkItem({ children, ...rest }, ref) {
+    return (
+      <StyledLinkItem {...rest} ref={ref}>
+        {children}
+      </StyledLinkItem>
+    )
+  },
+)
 
 LinkItem.displayName = 'eds-linkitem'
 

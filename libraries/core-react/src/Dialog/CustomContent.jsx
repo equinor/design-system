@@ -35,22 +35,32 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-export const CustomContent = forwardRef(function EdsDialogCustomContent(
-  { children, ...rest },
-  ref,
-) {
-  return (
-    <Fragment>
-      <StyledCustomContent id="eds-dialog-customcontent" ref={ref} {...rest}>
-        {children}
-      </StyledCustomContent>
+/**
+ * @typedef Props
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [className]
+ * @prop {boolean} [scrollable]
+ */
 
-      {children && rest.scrollable && (
-        <StyledDivider color="medium" variant="small" />
-      )}
-    </Fragment>
-  )
-})
+export const CustomContent = forwardRef(
+  /**
+   * @param {Props} props
+   * @param ref
+   */
+  function EdsDialogCustomContent({ children, ...rest }, ref) {
+    return (
+      <Fragment>
+        <StyledCustomContent id="eds-dialog-customcontent" ref={ref} {...rest}>
+          {children}
+        </StyledCustomContent>
+
+        {children && rest.scrollable && (
+          <StyledDivider color="medium" variant="small" />
+        )}
+      </Fragment>
+    )
+  },
+)
 
 CustomContent.displayName = 'eds-dialog-customcontent'
 

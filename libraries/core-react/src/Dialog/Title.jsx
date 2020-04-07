@@ -31,19 +31,28 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-export const Title = forwardRef(function EdsDialogTitle(
-  { children, ...props },
-  ref,
-) {
-  return (
-    <Fragment>
-      <StyledTitle id="eds-dialog-title" ref={ref} {...props}>
-        {children}
-      </StyledTitle>
-      {children && <StyledDivider color="medium" variant="small" />}
-    </Fragment>
-  )
-})
+/**
+ * @typedef Props
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [className]
+ */
+
+export const Title = forwardRef(
+  /**
+   * @param {Props} props
+   * @param ref
+   */
+  function EdsDialogTitle({ children, ...rest }, ref) {
+    return (
+      <Fragment>
+        <StyledTitle id="eds-dialog-title" ref={ref} {...rest}>
+          {children}
+        </StyledTitle>
+        {children && <StyledDivider color="medium" variant="small" />}
+      </Fragment>
+    )
+  },
+)
 
 Title.displayName = 'eds-dialog-title'
 

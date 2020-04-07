@@ -35,29 +35,42 @@ const StyledImage = styled.img`
     `};
 `
 
-export const Avatar = forwardRef(function EdsAvatar(
-  { src, alt, size, disabled, ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    ref,
-    size,
-    disabled,
-  }
+/**
+ * @typedef Props
+ * @prop {string} [className]
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [src] Image source
+ * @prop {string} alt Alt image description
+ * @prop {16 | 24 | 32 | 40 | 48} [size] Size
+ * @prop {boolean} [disabled] Disabled
+ */
 
-  const imageProps = {
-    src,
-    alt,
-    disabled,
-  }
+export const Avatar = forwardRef(
+  /**
+   * @param {Props} props
+   * @param ref
+   */
+  function EdsAvatar({ src, alt, size, disabled, ...rest }, ref) {
+    const props = {
+      ...rest,
+      ref,
+      size,
+      disabled,
+    }
 
-  return (
-    <StyledAvatar {...props}>
-      <StyledImage {...imageProps} />
-    </StyledAvatar>
-  )
-})
+    const imageProps = {
+      src,
+      alt,
+      disabled,
+    }
+
+    return (
+      <StyledAvatar {...props}>
+        <StyledImage {...imageProps} />
+      </StyledAvatar>
+    )
+  },
+)
 
 Avatar.displayName = 'eds-avatar'
 
@@ -71,6 +84,7 @@ Avatar.propTypes = {
   /** Alt image description */
   alt: PropTypes.string.isRequired,
   /** Size */
+  // @ts-ignore
   size: PropTypes.oneOf([16, 24, 32, 40, 48]),
   /** Disabled */
   disabled: PropTypes.bool,
@@ -80,6 +94,7 @@ Avatar.defaultProps = {
   className: '',
   children: [],
   src: null,
+  // @ts-ignore
   size: 24,
   disabled: false,
 }

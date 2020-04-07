@@ -32,16 +32,25 @@ const StyledDialog = styled.div.attrs(() => ({
   ${typographyTemplate(text)}
 `
 
-export const Dialog = forwardRef(function EdsDialog(
-  { children, ...props },
-  ref,
-) {
-  return (
-    <StyledDialog {...props} ref={ref}>
-      {children}
-    </StyledDialog>
-  )
-})
+/**
+ * @typedef Props
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [className]
+ */
+
+export const Dialog = forwardRef(
+  /**
+   * @param {Props} props
+   * @param ref
+   */
+  function EdsDialog({ children, ...rest }, ref) {
+    return (
+      <StyledDialog {...rest} ref={ref}>
+        {children}
+      </StyledDialog>
+    )
+  },
+)
 
 Dialog.displayName = 'eds-dialog'
 
