@@ -26,7 +26,7 @@ const StyledPath = styled.path.attrs(({ icon, size }) => ({
 
 /**
  * @typedef {object} Props
- * @prop {string} name
+ * @prop {keyof import("@equinor/eds-icons")} name
  * @prop {string} [className]
  * @prop {string} [title] Title for svg if used semantically
  * @prop {string} [color] Valid colors
@@ -107,6 +107,7 @@ Icon.propTypes = {
   // @ts-ignore
   rotation: PropTypes.oneOf([0, 90, 180, 270]),
   // Name
+  // @ts-ignore
   name: PropTypes.string.isRequired,
 }
 
