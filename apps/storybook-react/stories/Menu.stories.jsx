@@ -20,7 +20,7 @@ import {
 
 Icon.add({ folder, copy, paste, edit, delete_to_trash, settings })
 
-const { MenuItem } = Menu
+const { MenuItem, MenuLabel, MenuTitle } = Menu
 const Wrapper = styled.div`
   margin: 32px;
 `
@@ -58,34 +58,48 @@ export const Preview = () => {
         <Forced ref={anchorRef}>Attached to some anchor</Forced>
         <Menu id="menu0" aria-labelledby="menu-button0" anchorEl={anchorEl}>
           <MenuItem>
-            <Icon name="folder" />
-            <span>Open</span>
-            <span>CTRL+O</span>
+            <MenuLabel>
+              <MenuLabel>
+                <Icon name="folder" />
+              </MenuLabel>
+            </MenuLabel>
+            <MenuTitle variant="menu_title">Open</MenuTitle>
+            <MenuLabel>CTRL+O</MenuLabel>
           </MenuItem>
           <MenuItem active>
-            <Icon name="copy" />
-            <span>Copy</span>
-            <span>CTRL+C</span>
+            <MenuLabel>
+              <Icon name="copy" />
+            </MenuLabel>
+            <MenuTitle>Copy</MenuTitle>
+            <MenuLabel>CTRL+C</MenuLabel>
           </MenuItem>
           <MenuItem disabled>
-            <Icon name="paste" />
-            <span>Paste</span>
-            <span>CTRL+V</span>
+            <MenuLabel>
+              <Icon name="paste" />
+            </MenuLabel>
+            <MenuTitle variant="menu_title">Paste</MenuTitle>
+            <MenuLabel>CTRL+V</MenuLabel>
           </MenuItem>
           <MenuItem>
-            <Icon name="edit" />
-            <span>Rename</span>
-            <span>CTRL+R</span>
+            <MenuLabel>
+              <Icon name="edit" />
+            </MenuLabel>
+            <MenuTitle variant="menu_title">Rename</MenuTitle>
+            <MenuLabel>CTRL+R</MenuLabel>
           </MenuItem>
           <MenuItem>
-            <Icon name="delete_to_trash" />
-            <span>Delete</span>
-            <span>Del</span>
+            <MenuLabel>
+              <Icon name="delete_to_trash" />
+            </MenuLabel>
+            <MenuTitle variant="menu_title">Delete</MenuTitle>
+            <MenuLabel>Del</MenuLabel>
           </MenuItem>
           <Divider variant="small" />
           <MenuItem>
-            <Icon name="settings" />
-            <span>Properties</span>
+            <MenuLabel>
+              <Icon name="settings" />
+            </MenuLabel>
+            <MenuTitle variant="menu_title">Properties</MenuTitle>
           </MenuItem>
         </Menu>
       </Wrapper>

@@ -3,13 +3,19 @@ import { tokens } from '@equinor/eds-tokens'
 const {
   colors: {
     ui: {
-      background__light: { hex: hoverBackground },
-      background__default: { hex: background },
+      background__light: { rgba: hoverBackground },
+      background__default: { rgba: background },
     },
     interactive: {
-      primary__selected_highlight: { hex: activeBackground },
-      primary__resting: { hex: activeColor },
-      focus: { hex: focusColor },
+      primary__selected_highlight: { rgba: activeBackground },
+      primary__resting: { rgba: activeColor },
+      focus: { rgba: focusColor },
+      disabled__fill: { rgba: disabledIconColor },
+      disabled__text: { rgba: disabledTextColor },
+    },
+    text: {
+      static_icons__tertiary: { rgba: textIconColor },
+      static_icons__default: { rgba: textColor },
     },
   },
   elevation: { raised },
@@ -17,14 +23,23 @@ const {
     comfortable: { medium, large },
   },
   typography: {
-    navigation: { menu_title: typography },
+    navigation: { menu_title: typography, label: typographyLabel },
   },
 } = tokens
 
 export const menu = {
   enabled: {
     background,
-    typography,
+    typography: {
+      ...typography,
+      color: textColor,
+    },
+    label: {
+      typography: { ...typographyLabel, color: textIconColor },
+      disabled: {
+        typography: { ...typographyLabel, color: disabledTextColor },
+      },
+    },
     item: {
       active: {
         background: activeBackground,
@@ -42,6 +57,10 @@ export const menu = {
       },
       hover: {
         background: hoverBackground,
+      },
+      disabled: {
+        textColor: disabledTextColor,
+        iconColor: disabledIconColor,
       },
     },
     elevation: raised,

@@ -9,15 +9,28 @@ const { spacingsTemplate, typographyTemplate } = templates
 const {
   enabled: {
     typography,
-    item: { spacings, active: activeToken, focus, hover },
+    item: {
+      spacings,
+      active: activeToken,
+      focus,
+      hover,
+      disabled: disabledToken,
+    },
   },
 } = tokens
 
-const ListItem = styled.li.attrs({ role: 'none', tabIndex: 0 })`
+const ListItem = styled.li.attrs(({ disabled }) => ({
+  role: 'none',
+  tabIndex: disabled ? -1 : 0,
+}))`
   width: auto;
   position: relative;
+  z-index: 2;
 
   ${typographyTemplate(typography)}
+  svg {
+    fill: ${typography.color};
+  }
 
   ${({ active }) =>
     active &&
@@ -29,22 +42,32 @@ const ListItem = styled.li.attrs({ role: 'none', tabIndex: 0 })`
       }
     `}
 
-  &:focus {
-    outline: ${focus.outline};
-    outline-offset: ${focus.outlineOffset};
-  }
   &:hover {
+    z-index: 1;
     cursor: pointer;
     background: ${hover.background};
   }
 
   ${({ disabled }) =>
-    disabled &&
-    css`
-      &:hover {
-        cursor: not-allowed;
-      }
-    `}
+    disabled
+      ? css`
+          color: ${disabledToken.textColor};
+          svg {
+            fill: ${disabledToken.iconColor};
+          }
+          &:focus {
+            outline: none;
+          }
+          &:hover {
+            cursor: not-allowed;
+          }
+        `
+      : css`
+          &:focus {
+            outline: ${focus.outline};
+            outline-offset: ${focus.outlineOffset};
+          }
+        `}
 `
 
 const Anchor = styled.a.attrs({ role: 'menuitem' })`
@@ -77,13 +100,14 @@ MenuItem.propTypes = {
   /** Active Menu Item */
   active: PropTypes.bool,
   /** Disabled Menu Item */
-  active: PropTypes.bool,
+  disabled: PropTypes.bool,
 }
 
 MenuItem.defaultProps = {
   className: '',
   children: undefined,
   active: false,
+  disabled: false,
 }
 
 MenuItem.displayName = 'eds-menu-item'
