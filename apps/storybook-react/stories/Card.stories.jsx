@@ -65,22 +65,22 @@ export const CardVariants = () => {
         <Grid>
           <Card>
             <CardHeader>
-              <Typography variant="h6">Default</Typography>
+              <Typography variant="h5">Default</Typography>
             </CardHeader>
           </Card>
           <Card variant="info">
             <CardHeader>
-              <Typography variant="h6">Info</Typography>
+              <Typography variant="h5">Info</Typography>
             </CardHeader>
           </Card>
           <Card variant="warning">
             <CardHeader>
-              <Typography variant="h6">Warning</Typography>
+              <Typography variant="h5">Warning</Typography>
             </CardHeader>
           </Card>
           <Card variant="danger">
             <CardHeader>
-              <Typography variant="h6">Danger</Typography>
+              <Typography variant="h5">Danger</Typography>
             </CardHeader>
           </Card>
         </Grid>
@@ -94,7 +94,7 @@ export const CardHeaderVariants = () => {
     <Wrapper tabIndex="0">
       <Body>
         <Typography variant="h4">CardHeader variants</Typography>
-        <Typography variant="h6">Variant h4</Typography>
+        <Typography variant="h5">Variant h4</Typography>
         <Grid>
           <Card variant="info">
             <CardHeader>
@@ -129,7 +129,7 @@ export const CardHeaderVariants = () => {
             </CardHeader>
           </Card>
         </Grid>
-        <Typography variant="h6">Variant h5</Typography>
+        <Typography variant="h5">Variant h5</Typography>
         <Grid>
           <Card variant="info">
             <CardHeader>
@@ -164,7 +164,7 @@ export const CardHeaderVariants = () => {
             </CardHeader>
           </Card>
         </Grid>
-        <Typography variant="h6">Variant h6</Typography>
+        <Typography variant="h5">Variant h6</Typography>
         <Grid>
           <Card>
             <CardHeader>
@@ -174,8 +174,8 @@ export const CardHeaderVariants = () => {
                 size={40}
               />
               <CardHeaderTitle marginLeft>
-                <Typography variant="h6">Title goes here</Typography>
-                <Typography variant="caption">Caption</Typography>
+                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="body_short">Caption</Typography>
               </CardHeaderTitle>
             </CardHeader>
           </Card>
@@ -187,8 +187,8 @@ export const CardHeaderVariants = () => {
                 size={40}
               />
               <CardHeaderTitle marginLeft>
-                <Typography variant="h6">Title goes here</Typography>
-                <Typography variant="caption">Caption</Typography>
+                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="body_short">Caption</Typography>
               </CardHeaderTitle>
               <Button variant="ghost_icon">
                 <Icon name="more_verticle" title="more action" size={48}></Icon>
@@ -200,7 +200,7 @@ export const CardHeaderVariants = () => {
             <CardHeader>
               <CardHeaderTitle>
                 <Typography variant="overline">Overline</Typography>
-                <Typography variant="h6">Title goes here</Typography>
+                <Typography variant="h5">Title goes here</Typography>
               </CardHeaderTitle>
               <Avatar
                 alt="Kitten"
@@ -213,7 +213,7 @@ export const CardHeaderVariants = () => {
             <CardHeader>
               <CardHeaderTitle>
                 <Typography variant="overline">Overline</Typography>
-                <Typography variant="h6">Title goes here</Typography>
+                <Typography variant="h5">Title goes here</Typography>
               </CardHeaderTitle>
               <Button variant="ghost_icon">
                 <Icon name="more_verticle" title="more action" size={48}></Icon>
@@ -224,7 +224,7 @@ export const CardHeaderVariants = () => {
             <CardHeader>
               <CardHeaderTitle>
                 <Typography variant="overline">Overline</Typography>
-                <Typography variant="h6">Title goes here</Typography>
+                <Typography variant="h5">Title goes here</Typography>
               </CardHeaderTitle>
             </CardHeader>
           </Card>
@@ -242,17 +242,24 @@ export const CardTextVariants = () => {
         <Typography variant="body_short">Supporting text</Typography>
         <Grid>
           <Card>
-            <CardHeader
-              variant="h5"
-              title="Middle"
-              subtitle="Between other blocks"
-            />
-
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Middle</Typography>
+                <Typography variant="body_short">
+                  Between other blocks
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
             <CardText>Margin bottom for middle placed text is 16px</CardText>
             <StyledDivider variant="medium" />
           </Card>
           <Card>
-            <CardHeader variant="h5" title="Last" subtitle="Last block" />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Last</Typography>
+                <Typography variant="body_short">Last block</Typography>
+              </CardHeaderTitle>
+            </CardHeader>
 
             <StyledDivider variant="medium" />
 
@@ -296,22 +303,29 @@ export const CardMediaVariants = () => {
         <Grid>
           <Card>
             <CardMediaLeadingImage />
-            <CardHeader
-              variant="h5"
-              title="Leading image"
-              subtitle="To be used as leading block (image)"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Leading image</Typography>
+                <Typography variant="body_short">
+                  To be used as leading block (image)
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
+
             <CardText>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </CardText>
           </Card>
           <Card>
-            <CardHeader
-              variant="h5"
-              title="Middle"
-              subtitle="To be used between blocks"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Middle</Typography>
+                <Typography variant="body_short">
+                  To be used between blocks
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
             <CardMediaDefault />
             <CardText>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -319,14 +333,17 @@ export const CardMediaVariants = () => {
             </CardText>
           </Card>
           <Card>
-            <CardHeader
-              variant="h5"
-              title="Last"
-              subtitle="To be used as last block"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Last</Typography>
+                <Typography variant="body_short">
+                  To be used as last block
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
 
             <CardText>
-              Padding is set to 24px for the last child in Card
+              Margin bottom is set to 24px for the last child in Card
             </CardText>
             <CardMediaDefault />
           </Card>
@@ -371,29 +388,42 @@ export const CardActionsVariants = () => {
       <Body>
         <Grid>
           <Card>
-            <CardHeader variant="h5" title="Aligned left" subtitle="Default" />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Default</Typography>
+                <Typography variant="body_short">
+                  Left aligned buttons
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
             <CardText>
               Action elements are aligned left in this example
             </CardText>
             <CardActionsDefault />
           </Card>
           <Card>
-            <CardHeader
-              variant="h5"
-              title="Aligned right"
-              subtitle="To be used for icons"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Right</Typography>
+                <Typography variant="body_short">
+                  Right aligned buttons
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
             <CardText>
               Action elements are aligned right in this example
             </CardText>
             <CardActionsAlignedRight />
           </Card>
           <Card>
-            <CardHeader
-              variant="h5"
-              title="Meta"
-              subtitle="To be used as supporting text for actions"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Meta</Typography>
+                <Typography variant="body_short">
+                  Use as supporting text for icons
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
             <CardText>Action element with metadata</CardText>
             <CardActionsMeta />
           </Card>
