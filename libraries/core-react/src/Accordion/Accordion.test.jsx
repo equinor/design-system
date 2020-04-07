@@ -61,10 +61,10 @@ const AccordionWithButtons = () => (
     <AccordionItem>
       <AccordionHeader>
         <AccordionHeaderTitle>Summary</AccordionHeaderTitle>
-        <Button variant="ghost_icon">
+        <Button variant="ghost_icon" onClick={(e) => e.stopPropagation()}>
           <Icon name="attach_file" title="Attach file" />
         </Button>
-        <Button variant="ghost_icon">
+        <Button variant="ghost_icon" onClick={(e) => e.stopPropagation()}>
           <Icon name="notifications" title="Notifications" />
         </Button>
       </AccordionHeader>
@@ -112,5 +112,12 @@ describe('Accordion', () => {
     render(<AccordionWithButtons />)
     const header = screen.queryByText('Summary').parentNode
     expect(header.querySelectorAll('button')).toHaveLength(2)
+  })
+  it('Does not expand when clicking custom buttons', () => {
+    render(<AccordionWithButtons />)
+    const header = screen.queryByText('Summary').parentNode
+    const button = screen.getAllByTitle('Notifications')[0].parentNode
+    fireEvent.click(button)
+    expect(header).toHaveAttribute('aria-expanded', 'false')
   })
 })
