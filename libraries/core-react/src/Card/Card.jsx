@@ -14,8 +14,7 @@ const StyledCard = styled.div`
   box-sizing: border-box;
   display: grid;
   grid-column-gap: 0;
-  grid-template-columns: auto;
-  grid-template-rows: ${({ rows }) => rows};
+  grid-auto-columns: auto;
   align-items: center;
   align-content: start;
   border-radius: ${shape.borderRadius};
@@ -23,6 +22,10 @@ const StyledCard = styled.div`
   padding-right: ${spacings.right};
   min-height: ${shape.minHeight};
   cursor: ${({ cursor }) => cursor};
+
+  > :last-child {
+    margin-bottom: ${spacings.last.bottom};
+  }
 `
 
 export const Card = forwardRef(function EdsCard(

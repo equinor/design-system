@@ -1,8 +1,14 @@
 import React, { Fragment, useState } from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Typography } from '@equinor/eds-core-react'
-import { Card, Chips, Button, Icon, Divider } from '@equinor/eds-core-react'
+import {
+  Card,
+  Avatar,
+  Typography,
+  Button,
+  Icon,
+  Divider,
+} from '@equinor/eds-core-react'
 import { more_verticle, share, person_add, settings } from '@equinor/eds-icons'
 
 const icons = {
@@ -14,7 +20,7 @@ const icons = {
 
 Icon.add(icons)
 
-const { CardTitle, CardMedia, CardText, CardActions } = Card
+const { CardHeader, CardHeaderTitle, CardMedia, CardText, CardActions } = Card
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -41,6 +47,10 @@ const StyledImage = styled.img`
   width: 400px;
 `
 
+const StyledDivider = styled(Divider)`
+  width: 100%;
+`
+
 export default {
   title: 'Components|Card',
   component: Card,
@@ -54,16 +64,24 @@ export const CardVariants = () => {
         <Typography variant="h4">Card variants</Typography>
         <Grid>
           <Card>
-            <CardTitle title="Default" />
+            <CardHeader>
+              <Typography variant="h6">Default</Typography>
+            </CardHeader>
           </Card>
           <Card variant="info">
-            <CardTitle title="Info" />
+            <CardHeader>
+              <Typography variant="h6">Info</Typography>
+            </CardHeader>
           </Card>
           <Card variant="warning">
-            <CardTitle title="Warning" />
+            <CardHeader>
+              <Typography variant="h6">Warning</Typography>
+            </CardHeader>
           </Card>
           <Card variant="danger">
-            <CardTitle title="Danger" />
+            <CardHeader>
+              <Typography variant="h6">Danger</Typography>
+            </CardHeader>
           </Card>
         </Grid>
       </Body>
@@ -71,152 +89,150 @@ export const CardVariants = () => {
   )
 }
 
-export const CardTitleVariants = () => {
+export const CardHeaderVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
-        <Typography variant="h4">CardTitle variants</Typography>
+        <Typography variant="h4">CardHeader variants</Typography>
         <Typography variant="h6">Variant h4</Typography>
         <Grid>
           <Card variant="info">
-            <CardTitle variant="h4" title="Title" subtitle="Body short" />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h4">Title goes here</Typography>
+                <Typography variant="body_short">Body short</Typography>
+              </CardHeaderTitle>
+            </CardHeader>
           </Card>
           <Card>
-            <CardTitle
-              variant="h4"
-              title="Title"
-              subtitle="Body short"
-              action={
-                <Button variant="ghost_icon">
-                  <Icon
-                    name="more_verticle"
-                    title="more action"
-                    size={48}
-                  ></Icon>
-                </Button>
-              }
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h4">Title goes here</Typography>
+                <Typography variant="body_short">Body short</Typography>
+              </CardHeaderTitle>
+              <Button variant="ghost_icon">
+                <Icon name="more_verticle" title="more action" size={48}></Icon>
+              </Button>
+            </CardHeader>
           </Card>
           <Card variant="danger">
-            <CardTitle
-              variant="h4"
-              title="Title"
-              subtitle="Body short"
-              avatar="https://i.imgur.com/UM3mrju.jpg"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h4">Title goes here</Typography>
+                <Typography variant="body_short">Body short</Typography>
+              </CardHeaderTitle>
+              <Avatar
+                alt="Kitten"
+                src="https://i.imgur.com/UM3mrju.jpg"
+                size={40}
+              />
+            </CardHeader>
           </Card>
         </Grid>
         <Typography variant="h6">Variant h5</Typography>
         <Grid>
-          <Card variant="warning">
-            <CardTitle variant="h5" title="Title" subtitle="Body short" />
-          </Card>
           <Card variant="info">
-            <CardTitle
-              variant="h5"
-              title="Title"
-              subtitle="Body short"
-              action={
-                <Button variant="ghost_icon">
-                  <Icon
-                    name="more_verticle"
-                    title="more action"
-                    size={48}
-                  ></Icon>
-                </Button>
-              }
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="body_short">Body short</Typography>
+              </CardHeaderTitle>
+            </CardHeader>
           </Card>
           <Card>
-            <CardTitle
-              variant="h5"
-              title="Title"
-              subtitle="Body short"
-              avatar="https://i.imgur.com/UM3mrju.jpg"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="body_short">Body short</Typography>
+              </CardHeaderTitle>
+              <Button variant="ghost_icon">
+                <Icon name="more_verticle" title="more action" size={48}></Icon>
+              </Button>
+            </CardHeader>
+          </Card>
+          <Card variant="danger">
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="body_short">Body short</Typography>
+              </CardHeaderTitle>
+              <Avatar
+                alt="Kitten"
+                src="https://i.imgur.com/UM3mrju.jpg"
+                size={40}
+              />
+            </CardHeader>
           </Card>
         </Grid>
         <Typography variant="h6">Variant h6</Typography>
         <Grid>
           <Card>
-            <CardTitle
-              variant="h6"
-              title="Title"
-              subtitle="Caption"
-              avatar="https://i.imgur.com/UM3mrju.jpg"
-            />
+            <CardHeader>
+              <Avatar
+                alt="Kitten"
+                src="https://i.imgur.com/UM3mrju.jpg"
+                size={40}
+              />
+              <CardHeaderTitle marginLeft>
+                <Typography variant="h6">Title goes here</Typography>
+                <Typography variant="caption">Caption</Typography>
+              </CardHeaderTitle>
+            </CardHeader>
           </Card>
-          <Card variant="warning">
-            <CardTitle
-              variant="h6"
-              title="Title"
-              subtitle="Caption"
-              avatar="https://i.imgur.com/UM3mrju.jpg"
-              action={
-                <Button variant="ghost_icon">
-                  <Icon
-                    name="more_verticle"
-                    title="more action"
-                    size={48}
-                  ></Icon>
-                </Button>
-              }
-            />
+          <Card variant="danger">
+            <CardHeader>
+              <Avatar
+                alt="Kitten"
+                src="https://i.imgur.com/UM3mrju.jpg"
+                size={40}
+              />
+              <CardHeaderTitle marginLeft>
+                <Typography variant="h6">Title goes here</Typography>
+                <Typography variant="caption">Caption</Typography>
+              </CardHeaderTitle>
+              <Button variant="ghost_icon">
+                <Icon name="more_verticle" title="more action" size={48}></Icon>
+              </Button>
+            </CardHeader>
           </Card>
 
-          <Card variant="danger">
-            <CardTitle
-              variant="h6"
-              title="Title"
-              overline
-              subtitle="Overline"
-            />
-          </Card>
-          <Card variant="info">
-            <CardTitle
-              variant="h6"
-              title="Title"
-              overline
-              subtitle="Overline"
-              action={
-                <Button variant="ghost_icon">
-                  <Icon
-                    name="more_verticle"
-                    title="more action"
-                    size={48}
-                  ></Icon>
-                </Button>
-              }
-            />
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="overline">Overline</Typography>
+                <Typography variant="h6">Title goes here</Typography>
+              </CardHeaderTitle>
+              <Avatar
+                alt="Kitten"
+                src="https://i.imgur.com/UM3mrju.jpg"
+                size={40}
+              />
+            </CardHeader>
           </Card>
           <Card>
-            <CardTitle
-              variant="h6"
-              title="Title"
-              overline
-              subtitle="Overline"
-              avatar="https://i.imgur.com/UM3mrju.jpg"
-            />
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="overline">Overline</Typography>
+                <Typography variant="h6">Title goes here</Typography>
+              </CardHeaderTitle>
+              <Button variant="ghost_icon">
+                <Icon name="more_verticle" title="more action" size={48}></Icon>
+              </Button>
+            </CardHeader>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="overline">Overline</Typography>
+                <Typography variant="h6">Title goes here</Typography>
+              </CardHeaderTitle>
+            </CardHeader>
           </Card>
         </Grid>
       </Body>
     </Wrapper>
   )
 }
-
-const CardTextMiddleBlock = () => (
-  <CardText>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua.
-  </CardText>
-)
-
-const CardTextLastBlock = () => (
-  <CardText isLastBlock>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua.
-  </CardText>
-)
 
 export const CardTextVariants = () => {
   return (
@@ -226,27 +242,24 @@ export const CardTextVariants = () => {
         <Typography variant="body_short">Supporting text</Typography>
         <Grid>
           <Card>
-            <CardTitle
+            <CardHeader
               variant="h5"
               title="Middle"
-              subtitle="To be used between other blocks (default)"
+              subtitle="Between other blocks"
             />
 
-            <CardTextMiddleBlock />
-            <CardMedia order="last">
-              <Divider variant="small" />
-            </CardMedia>
+            <CardText>Margin bottom for middle placed text is 16px</CardText>
+            <StyledDivider variant="medium" />
           </Card>
           <Card>
-            <CardTitle
-              variant="h5"
-              title="Last"
-              subtitle="To be used as the last block"
-            />
-            <CardMedia order="middle">
-              <Divider variant="small" />
-            </CardMedia>
-            <CardTextLastBlock />
+            <CardHeader variant="h5" title="Last" subtitle="Last block" />
+
+            <StyledDivider variant="medium" />
+
+            <CardText>
+              Margin bottom is automatically set to 24px for the last child in
+              Card
+            </CardText>
           </Card>
         </Grid>
       </Body>
@@ -255,7 +268,7 @@ export const CardTextVariants = () => {
 }
 
 const CardMediaLeadingImage = () => (
-  <CardMedia order="leading">
+  <CardMedia isLeading>
     <StyledImage
       src="https://i.imgur.com/UM3mrju.jpg"
       alt="Image for representation"
@@ -263,17 +276,8 @@ const CardMediaLeadingImage = () => (
   </CardMedia>
 )
 
-const CardMediaMiddle = () => (
-  <CardMedia order="middle">
-    <StyledImage
-      src="https://i.imgur.com/UM3mrju.jpg"
-      alt="Image for representation"
-    />
-  </CardMedia>
-)
-
-const CardMediaLast = () => (
-  <CardMedia order="last">
+const CardMediaDefault = () => (
+  <CardMedia>
     <StyledImage
       src="https://i.imgur.com/UM3mrju.jpg"
       alt="Image for representation"
@@ -292,31 +296,39 @@ export const CardMediaVariants = () => {
         <Grid>
           <Card>
             <CardMediaLeadingImage />
-            <CardTitle
+            <CardHeader
               variant="h5"
               title="Leading image"
               subtitle="To be used as leading block (image)"
             />
-            <CardTextLastBlock />
+            <CardText>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </CardText>
           </Card>
           <Card>
-            <CardTitle
+            <CardHeader
               variant="h5"
               title="Middle"
               subtitle="To be used between blocks"
             />
-            <CardMediaMiddle />
-            <CardTextLastBlock />
+            <CardMediaDefault />
+            <CardText>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </CardText>
           </Card>
           <Card>
-            <CardTitle
+            <CardHeader
               variant="h5"
               title="Last"
               subtitle="To be used as last block"
             />
 
-            <CardTextMiddleBlock />
-            <CardMediaLast />
+            <CardText>
+              Padding is set to 24px for the last child in Card
+            </CardText>
+            <CardMediaDefault />
           </Card>
         </Grid>
       </Body>
@@ -359,14 +371,14 @@ export const CardActionsVariants = () => {
       <Body>
         <Grid>
           <Card>
-            <CardTitle variant="h5" title="Aligned left" subtitle="Default" />
+            <CardHeader variant="h5" title="Aligned left" subtitle="Default" />
             <CardText>
               Action elements are aligned left in this example
             </CardText>
             <CardActionsDefault />
           </Card>
           <Card>
-            <CardTitle
+            <CardHeader
               variant="h5"
               title="Aligned right"
               subtitle="To be used for icons"
@@ -377,7 +389,7 @@ export const CardActionsVariants = () => {
             <CardActionsAlignedRight />
           </Card>
           <Card>
-            <CardTitle
+            <CardHeader
               variant="h5"
               title="Meta"
               subtitle="To be used as supporting text for actions"
@@ -393,15 +405,13 @@ export const CardActionsVariants = () => {
 
 const TEXT_CHOICES = {
   none: null,
-  middle: <CardTextMiddleBlock />,
-  last: <CardTextLastBlock />,
+  default: <CardText />,
 }
 
 const MEDIA_CHOICES = {
   none: null,
-  leadingImage: <CardMediaLeadingImage />,
-  middle: <CardMediaMiddle />,
-  last: <CardMediaLast />,
+  isLeading: <CardMediaLeadingImage />,
+  default: <CardMediaDefault />,
 }
 
 const ACTIONS_CHOICES = {
@@ -447,7 +457,7 @@ export const WithKnobs = () => {
             ])}
           >
             {title && (
-              <CardTitle
+              <CardHeader
                 variant={title && titleVariant}
                 title="Title"
                 avatar={avatar && 'https://i.imgur.com/UM3mrju.jpg'}

@@ -1,19 +1,21 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Typography } from '../Typography'
 
 import { card as tokens } from './Card.tokens'
 
 const { spacings } = tokens
 
-const StyledCardText = styled(Typography)`
+const StyledCardHeader = styled.div`
   margin-top: ${spacings.top};
-  margin-bottom: ${spacings.bottom};
+  margin-bottom: ${spacings.bottom} !important;
+  display: flex;
+  flex-direction: ${({ flexDirection }) => flexDirection};
+  justify-content: space-between;
+  align-items: center;
 `
 
-// EDS - Supporting Text
-export const CardText = forwardRef(function EdsCardText(
+export const CardHeader = forwardRef(function EdsCardHeader(
   { children, className, ...rest },
   ref,
 ) {
@@ -22,23 +24,20 @@ export const CardText = forwardRef(function EdsCardText(
     className,
     ref,
   }
-  return (
-    <StyledCardText ref={ref} {...props} variant="body_short">
-      {children}
-    </StyledCardText>
-  )
+
+  return <StyledCardHeader {...props}>{children}</StyledCardHeader>
 })
 
-CardText.displayName = 'eds-card-supporting-text'
+CardHeader.displayName = 'eds-card-header'
 
-CardText.propTypes = {
+CardHeader.propTypes = {
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
   className: PropTypes.string,
 }
 
-CardText.defaultProps = {
+CardHeader.defaultProps = {
   className: '',
   children: undefined,
 }

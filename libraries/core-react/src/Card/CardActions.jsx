@@ -9,8 +9,8 @@ const { spacings } = tokens
 const StyledCardActions = styled.div`
   display: flex;
   align-items: center;
-  padding-top: ${spacings.actions.top};
-  padding-bottom: ${spacings.actions.bottom};
+  margin-top: ${spacings.actions.top};
+  margin-bottom: ${spacings.actions.bottom} !important;
   justify-content: ${({ justifyContent }) => justifyContent};
   > :not(:first-child) {
     margin-left: ${spacings.actions.left};

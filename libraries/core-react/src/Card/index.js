@@ -1,12 +1,14 @@
 import { Card } from './Card'
 import { CardActions } from './CardActions'
-import { CardTitle } from './CardTitle'
 import { CardText } from './CardText'
 import { CardMedia } from './CardMedia'
+import { CardHeader } from './CardHeader'
+import { CardHeaderTitle } from './CardHeaderTitle'
 
 Card.CardActions = CardActions
-Card.CardTitle = CardTitle
+Card.CardHeader = CardHeader
 Card.CardText = CardText
 Card.CardMedia = CardMedia
+Card.CardHeaderTitle = CardHeaderTitle
 
 export { Card }

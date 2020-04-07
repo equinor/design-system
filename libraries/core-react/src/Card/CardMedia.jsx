@@ -6,40 +6,41 @@ import { card as tokens } from './Card.tokens'
 
 const StyledCardMedia = styled.div`
   width: inherit;
-  padding-top: ${({ paddingTop }) => paddingTop};
-  padding-bottom: ${({ paddingBottom }) => paddingBottom};
+  margin-top: ${({ marginTop }) => marginTop};
+  margin-bottom: ${({ marginBottom }) => marginBottom};
   margin-left: ${({ marginLeft }) => marginLeft};
 
-  img:first-child {
+  > * {
     position: relative;
-    width: ${({ imgWidth }) => imgWidth};
+    width: ${({ imgWidth }) => imgWidth} !important;
   }
 `
 
 // EDS - Supporting Text
 export const CardMedia = forwardRef(function EdsCardMedia(
-  { children, className, order, ...rest },
+  { children, className, isLeading, ...rest },
   ref,
 ) {
+  const styleToken = isLeading ? 'leading' : 'middle'
   const props = {
     ...rest,
     className,
     ref,
-    paddingBottom: tokens.spacings[order].bottom,
-    paddingTop: tokens.spacings[order].top,
-    marginLeft: tokens.spacings[order].marginLeft,
-    imgWidth: tokens.spacings[order].width,
-    order,
+    marginBottom: tokens.spacings[styleToken].bottom,
+    marginTop: tokens.spacings[styleToken].top,
+    marginLeft: tokens.spacings[styleToken].marginLeft,
+    imgWidth: tokens.spacings[styleToken].width,
+    isLeading,
   }
 
   return <StyledCardMedia {...props}>{children}</StyledCardMedia>
 })
 
-CardMedia.displayName = 'eds-card-supporting-text'
+CardMedia.displayName = 'eds-card-media'
 
 CardMedia.propTypes = {
-  //  To be used as the last block
-  order: PropTypes.oneOf(['middle', 'last', 'leading']),
+  //  To be used as the leading block,
+  isLeading: PropTypes.bool,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -47,7 +48,7 @@ CardMedia.propTypes = {
 }
 
 CardMedia.defaultProps = {
-  order: 'middle',
+  isLeading: false,
   className: '',
   children: undefined,
 }
