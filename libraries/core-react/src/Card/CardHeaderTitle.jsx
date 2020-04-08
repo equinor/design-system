@@ -4,8 +4,6 @@ import styled from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
-const { spacings } = tokens
-
 const StyledCardHeaderTitle = styled.div`
   display: grid;
   grid-auto-columns: auto;

@@ -260,9 +260,7 @@ export const CardTextVariants = () => {
                 <Typography variant="body_short">Last block</Typography>
               </CardHeaderTitle>
             </CardHeader>
-
             <StyledDivider variant="medium" />
-
             <CardText>
               Margin bottom is automatically set to 24px for the last child in
               Card
@@ -343,7 +341,8 @@ export const CardMediaVariants = () => {
             </CardHeader>
 
             <CardText>
-              Margin bottom is set to 24px for the last child in Card
+              Margin bottom is automatically set to 24px for the last child in
+              Card
             </CardText>
             <CardMediaDefault />
           </Card>
