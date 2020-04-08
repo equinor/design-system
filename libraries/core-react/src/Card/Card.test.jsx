@@ -4,10 +4,11 @@ import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
+import { Typography } from '..'
 
 import { Card } from '.'
 
-const { CardTitle, CardMedia, CardText, CardActions } = Card
+const { CardHeader, CardHeaderTitle, CardMedia, CardText, CardActions } = Card
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -33,7 +34,12 @@ describe('Card', () => {
     const subtitle = 'subtitle'
     const { queryByText } = render(
       <Card>
-        <CardTitle variant="h4" title={title} subtitle={subtitle} />
+        <CardHeader>
+          <CardHeaderTitle>
+            <Typography variant="h4">{title}</Typography>
+            <Typography variant="body_short">{subtitle}</Typography>
+          </CardHeaderTitle>
+        </CardHeader>
       </Card>,
     )
 
@@ -80,7 +86,7 @@ describe('Card', () => {
   it('CardMedia items are placed correctly', () => {
     const { container } = render(
       <Card>
-        <CardMedia order="leading">
+        <CardMedia isLeading>
           <img src="https://i.imgur.com/UM3mrju.jpg" alt="alt" />
         </CardMedia>
       </Card>,
