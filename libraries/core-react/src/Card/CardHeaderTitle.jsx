@@ -2,6 +2,10 @@ import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { card as tokens } from './Card.tokens'
+
+const { spacings } = tokens
+
 const StyledCardHeaderTitle = styled.div`
   display: grid;
   grid-auto-columns: auto;
@@ -17,7 +21,7 @@ export const CardHeaderTitle = forwardRef(function EdsCardHeaderTitle(
     ...rest,
     className,
     ref,
-    marginLeft: marginLeft ? '16px' : 0,
+    marginLeft: marginLeft ? tokens.spacings.left : 0,
   }
 
   return <StyledCardHeaderTitle {...props}>{children}</StyledCardHeaderTitle>

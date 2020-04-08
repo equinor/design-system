@@ -435,7 +435,12 @@ export const CardActionsVariants = () => {
 
 const TEXT_CHOICES = {
   none: null,
-  default: <CardText />,
+  default: (
+    <CardText>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
+    </CardText>
+  ),
 }
 
 const MEDIA_CHOICES = {
@@ -451,27 +456,31 @@ const ACTIONS_CHOICES = {
   meta: <CardActionsMeta />,
 }
 
-const AVATAR_CHOICES = {
-  none: null,
-  avatar: 'https://i.imgur.com/UM3mrju.jpg',
-}
-
 export const WithKnobs = () => {
-  //const avatarChoices = select('Title', Object.keys(AVATAR_CHOICES), 'avatar')
-
   const title = boolean('Title', true)
-  const titleVariant = title
-    ? select('Title variant', ['h4', 'h5', 'h6'])
+  const first_title = title
+    ? select('First title variant', ['h6', 'h5', 'h4', 'overline'])
+    : null
+  const second_title = title
+    ? select('Second title variant', ['body_short', 'caption', 'h6'])
     : null
   const avatar =
-    (title && titleVariant === 'h6') || (title && !titleAction)
+    (title && first_title === 'h6') || (title && !titleAction)
       ? boolean('Avatar', true)
       : null
   const titleAction =
-    (title && titleVariant === 'h6') || (title && !avatar)
+    (title && first_title === 'h6') || (title && !avatar)
       ? boolean('Title Action', false)
       : null
   const clickable = boolean('Clickable card', false)
+  const marginLeftTitle = boolean('Margin left on Title Text', false)
+  const actionChoices = select(
+    'Actions',
+    Object.keys(ACTIONS_CHOICES),
+    'default',
+  )
+  const mediaChoices = select('Media', Object.keys(MEDIA_CHOICES), 'default')
+  const textChoices = select('Text', Object.keys(TEXT_CHOICES), 'default')
 
   return (
     <Wrapper tabIndex="0">
@@ -486,43 +495,51 @@ export const WithKnobs = () => {
               'danger',
             ])}
           >
+            {mediaChoices === 'isLeading' && MEDIA_CHOICES[mediaChoices]}
             {title && (
-              <CardHeader
-                variant={title && titleVariant}
-                title="Title"
-                avatar={avatar && 'https://i.imgur.com/UM3mrju.jpg'}
-                subtitle="Subtitle"
-                overline={
-                  titleVariant === 'h6' && boolean('Overline subtitle', false)
-                }
-                action={
-                  titleAction && (
-                    <Button variant="ghost_icon">
-                      <Icon
-                        name="more_verticle"
-                        title="more action"
-                        size={48}
-                      ></Icon>
-                    </Button>
-                  )
-                }
-              />
+              <CardHeader>
+                {first_title === 'h6' &&
+                  second_title === 'caption' &&
+                  avatar && (
+                    <Avatar
+                      alt="Kitten"
+                      src="https://i.imgur.com/UM3mrju.jpg"
+                      size={40}
+                    />
+                  )}
+                <CardHeaderTitle marginLeft={marginLeftTitle}>
+                  <Typography variant={first_title ? first_title : 'h6'}>
+                    First title
+                  </Typography>
+                  <Typography variant={second_title ? second_title : 'caption'}>
+                    Second title
+                  </Typography>
+                </CardHeaderTitle>
+
+                {titleAction && (
+                  <Button variant="ghost_icon">
+                    <Icon
+                      name="more_verticle"
+                      title="more action"
+                      size={48}
+                    ></Icon>
+                  </Button>
+                )}
+                {second_title !== 'caption' && avatar && (
+                  <Avatar
+                    alt="Kitten"
+                    src="https://i.imgur.com/UM3mrju.jpg"
+                    size={40}
+                  />
+                )}
+              </CardHeader>
             )}
-            {
-              TEXT_CHOICES[
-                select('Supporting text', Object.keys(TEXT_CHOICES), 'middle')
-              ]
-            }
-            {
-              MEDIA_CHOICES[
-                select('Rich Media', Object.keys(MEDIA_CHOICES), 'middle')
-              ]
-            }
-            {
-              ACTIONS_CHOICES[
-                select('Actions', Object.keys(ACTIONS_CHOICES), 'default')
-              ]
-            }
+
+            {textChoices !== 'none' && TEXT_CHOICES[textChoices]}
+            {mediaChoices !== 'none' &&
+              mediaChoices !== 'isLeading' &&
+              MEDIA_CHOICES[mediaChoices]}
+            {actionChoices !== 'none' && ACTIONS_CHOICES[actionChoices]}
           </Card>
         </Grid>
       </Body>
