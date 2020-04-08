@@ -32,14 +32,6 @@ export const Card = forwardRef(function EdsCard(
   { children, className, variant, onClick, ...rest },
   ref,
 ) {
-  let rows = 'auto'
-
-  if (children instanceof Array) {
-    for (let i = 0; i < children.length - 1; i += 1) {
-      rows += ' auto'
-    }
-  }
-
   const cursor = onClick ? 'pointer' : 'default'
 
   const props = {
@@ -47,7 +39,6 @@ export const Card = forwardRef(function EdsCard(
     className,
     ref,
     background: tokens.background[variant],
-    rows,
     cursor,
   }
 

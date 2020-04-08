@@ -59,17 +59,17 @@ describe('Card', () => {
     expect(queryByText(variant)).toBeDefined()
   })
   it('Has provided image source and placement in CardMedia', () => {
-    const order = 'leading'
+    const isLeading = 'isLeading'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { queryByText } = render(
       <Card>
-        <CardMedia order={order}>
+        <CardMedia isLeading>
           <img src={src} alt="alt" />
         </CardMedia>
       </Card>,
     )
 
-    expect(queryByText(order)).toBeDefined()
+    expect(queryByText(isLeading)).toBeDefined()
     expect(queryByText(src)).toBeDefined()
   })
   it('CardActions items are placed correctly', () => {

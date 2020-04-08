@@ -39,7 +39,7 @@ export const CardMedia = forwardRef(function EdsCardMedia(
 CardMedia.displayName = 'eds-card-media'
 
 CardMedia.propTypes = {
-  //  To be used as the leading block,
+  // To be used if CardMedia is the leading block in Card
   isLeading: PropTypes.bool,
   /** @ignore */
   children: PropTypes.node,

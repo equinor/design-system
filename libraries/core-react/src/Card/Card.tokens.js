@@ -45,7 +45,7 @@ export const card = {
     leading: {
       top: 0,
       marginLeft: '-16px',
-      bottom: spacingLarge,
+      bottom: spacingMedium,
       width: 'calc(100% + 32px)',
     },
     actions: {

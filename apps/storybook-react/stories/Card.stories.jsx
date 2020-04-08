@@ -174,7 +174,7 @@ export const CardHeaderVariants = () => {
                 size={40}
               />
               <CardHeaderTitle marginLeft>
-                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="h6">Title goes here</Typography>
                 <Typography variant="body_short">Caption</Typography>
               </CardHeaderTitle>
             </CardHeader>
@@ -187,7 +187,7 @@ export const CardHeaderVariants = () => {
                 size={40}
               />
               <CardHeaderTitle marginLeft>
-                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="h6">Title goes here</Typography>
                 <Typography variant="body_short">Caption</Typography>
               </CardHeaderTitle>
               <Button variant="ghost_icon">
@@ -200,7 +200,7 @@ export const CardHeaderVariants = () => {
             <CardHeader>
               <CardHeaderTitle>
                 <Typography variant="overline">Overline</Typography>
-                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="h6">Title goes here</Typography>
               </CardHeaderTitle>
               <Avatar
                 alt="Kitten"
@@ -213,7 +213,7 @@ export const CardHeaderVariants = () => {
             <CardHeader>
               <CardHeaderTitle>
                 <Typography variant="overline">Overline</Typography>
-                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="h6">Title goes here</Typography>
               </CardHeaderTitle>
               <Button variant="ghost_icon">
                 <Icon name="more_verticle" title="more action" size={48}></Icon>
@@ -224,7 +224,7 @@ export const CardHeaderVariants = () => {
             <CardHeader>
               <CardHeaderTitle>
                 <Typography variant="overline">Overline</Typography>
-                <Typography variant="h5">Title goes here</Typography>
+                <Typography variant="h6">Title goes here</Typography>
               </CardHeaderTitle>
             </CardHeader>
           </Card>
