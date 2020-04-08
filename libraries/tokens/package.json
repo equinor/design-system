@@ -5,6 +5,7 @@
   "main": "dist/tokens.esm.js",
   "module": "dist/tokens.esm.js",
   "browser": "dist/tokens.umd.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "license": "AGPL-3.0-or-later",
   "author": {
@@ -37,9 +38,12 @@
   ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "rollup": "^1.29.0"
+    "csstype": "^2.6.10",
+    "rollup": "^1.29.0",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
   },
-  "dependencies": {},
   "engines": {
     "pnpm": ">=4"
   }
