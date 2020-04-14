@@ -36,9 +36,6 @@ export const menu = {
     },
     label: {
       typography: { ...typographyLabel, color: textIconColor },
-      disabled: {
-        typography: { ...typographyLabel, color: disabledTextColor },
-      },
     },
     item: {
       active: {
