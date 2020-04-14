@@ -70,14 +70,14 @@ export const Preview = () => {
             <MenuLabel>
               <Icon name="copy" />
             </MenuLabel>
-            <MenuTitle>Copy</MenuTitle>
+            <MenuTitle>Copy (Active)</MenuTitle>
             <MenuLabel>CTRL+C</MenuLabel>
           </MenuItem>
           <MenuItem disabled>
             <MenuLabel>
               <Icon name="paste" />
             </MenuLabel>
-            <MenuTitle variant="menu_title">Paste</MenuTitle>
+            <MenuTitle variant="menu_title">Paste (disabled)</MenuTitle>
             <MenuLabel>CTRL+V</MenuLabel>
           </MenuItem>
           <MenuItem>

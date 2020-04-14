@@ -42,12 +42,6 @@ const ListItem = styled.li.attrs(({ disabled }) => ({
       }
     `}
 
-  &:hover {
-    z-index: 1;
-    cursor: pointer;
-    background: ${hover.background};
-  }
-
   ${({ disabled }) =>
     disabled
       ? css`
@@ -63,6 +57,11 @@ const ListItem = styled.li.attrs(({ disabled }) => ({
           }
         `
       : css`
+          &:hover {
+            z-index: 1;
+            cursor: pointer;
+            background: ${hover.background};
+          }
           &:focus {
             outline: ${focus.outline};
             outline-offset: ${focus.outlineOffset};
@@ -82,12 +81,27 @@ const Anchor = styled.a.attrs({ role: 'menuitem' })`
 `
 
 export const MenuItem = React.forwardRef(function EdsMenuItem(
-  { children, ...rest },
+  { children, disabled, ...rest },
   ref,
 ) {
+  const updatedChildren = React.Children.map(children, (child) => {
+    // We force size on Icon & Avatar component
+    if (child.props) {
+      return React.cloneElement(child, {
+        disabled,
+      })
+    }
+    return child
+  })
+
+  const props = {
+    ...rest,
+    disabled,
+  }
+
   return (
-    <ListItem {...rest} ref={ref}>
-      <Anchor>{children}</Anchor>
+    <ListItem {...props} ref={ref}>
+      <Anchor>{updatedChildren}</Anchor>
     </ListItem>
   )
 })

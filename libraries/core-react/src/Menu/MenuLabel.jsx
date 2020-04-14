@@ -5,16 +5,21 @@ import { templates } from '../_common'
 const { typographyTemplate } = templates
 
 const {
-  enabled: { label },
+  enabled: {
+    label,
+    item: {
+      disabled: { textColor: disabledColor },
+    },
+  },
 } = tokens
 
 export const MenuLabel = styled.span`
   ${({ disabled }) =>
     disabled
       ? css`
-          ${typographyTemplate(label.disabled.typography)}
+          color: ${disabledColor};
           svg {
-            fill: ${label.disabled.typography.color};
+            fill: ${disabledColor};
           }
         `
       : css`
