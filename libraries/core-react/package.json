@@ -29,7 +29,8 @@
     "build:for-storybook": "rollup -c --environment STORYBOOK",
     "dev": "rollup -c -w --environment STORYBOOK",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint:types": "tsc"
   },
   "keywords": [
     "eds",
@@ -42,12 +43,14 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.2",
+    "@types/jest": "^25.2.1",
     "@types/node": "^13.11.0",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
+    "@types/testing-library__jest-dom": "^5.0.3",
     "babel-plugin-react-docgen": "^4.1.0",
     "babel-plugin-styled-components": "^1.10.6",
     "jest": "^24.9.0",
@@ -76,7 +79,7 @@
   "jest": {
     "verbose": true,
     "setupFilesAfterEnv": [
-      "./rtl.setup.js"
+      "./rtl.setup.ts"
     ]
   },
   "dependencies": {

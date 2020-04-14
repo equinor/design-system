@@ -4,5 +4,11 @@
     "declaration": true,
     "noEmit": false,
     "sourceMap": true
-  }
+  },
+  "exclude": [
+    "./src/**/__tests__/**/*.ts",
+    "./src/**/__tests__/**/*.tsx",
+    "./src/**/*.test.tsx",
+    "./src/**/*.test.ts"
+  ]
 }
