@@ -6,6 +6,8 @@ import { drawer as tokens } from './Drawer.tokens'
 const { background, border } = tokens
 
 const StyledDrawerList = styled.ul`
+  margin: 0;
+  padding: 0;
   background: ${background.backgroundColor};
   width: 254px;
   border-right: ${border.right.width} solid ${border.right.color};

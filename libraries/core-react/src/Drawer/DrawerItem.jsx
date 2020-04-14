@@ -7,6 +7,8 @@ import { drawer as tokens } from './Drawer.tokens'
 const { background, itemBorder } = tokens
 
 const StyledDrawerItem = styled.li`
+  margin: 0;
+  padding: 0;
   margin-left: 56px;
   padding-left: 14px;
   font-size: 12px;
