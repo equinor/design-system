@@ -69,6 +69,7 @@
     ]
   },
   "dependencies": {
+    "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "@testing-library/react-hooks": "^3.2.1",
     "lodash.uniqueid": "^4.0.1",
