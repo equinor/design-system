@@ -55,6 +55,16 @@ const TableBase = styled.td`
   ${Base}
 `
 
+/**
+ * @typedef Props
+ * @prop {React.ReactNode} children
+ * @prop {'td' | 'th'} [as] Specifies which td or th to use
+ * @prop {'text' | 'icon' | 'numeric' | 'input'} [variant] Specifies which variant to use
+ */
+
+/**
+ * @param {Props} props
+ */
 export const Cell = (props) => {
   const { children, as, variant } = props
   const tokens = getTokens(as, variant)
