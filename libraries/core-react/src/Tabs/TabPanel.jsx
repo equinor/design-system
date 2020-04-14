@@ -33,9 +33,8 @@ const StyledTabPanel = styled.div.attrs(() => ({
 
 const TabPanel = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param {React.Ref<HTMLDivElement>} ref
    */
   function TabPanel({ ...props }, ref) {
     return (

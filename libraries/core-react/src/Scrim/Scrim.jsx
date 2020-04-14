@@ -25,15 +25,13 @@ const ScrimContent = styled.div`
 
 /**
  * @typedef Props
- * @prop {string} [className]
- * @prop {React.ReactNode} [children]
- * @prop {(event: React.KeyboardEvent, closed: boolean) => void} [onClose] Function to handle closing scrim
+ * @prop {(event: React.KeyboardEvent, open: boolean) => void} [onClose] Function to handle closing scrim
  * @prop {boolean} [isDismissable] Whether scrim can be dismissed with esc key
  */
 
 export const Scrim = forwardRef(
   /**
-   * @param {Props} props
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
    * @param ref
    */
   function EdsScrim({ children, onClose, isDismissable, ...rest }, ref) {

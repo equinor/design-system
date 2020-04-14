@@ -29,9 +29,8 @@ const Container = styled.div`
 
 const TextField = React.forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.InputHTMLAttributes<HTMLInputElement>} props
+   * @param ref
    */
   function TextField(props, ref) {
     const {

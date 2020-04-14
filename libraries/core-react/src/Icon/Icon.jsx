@@ -27,7 +27,6 @@ const StyledPath = styled.path.attrs(({ icon, size }) => ({
 /**
  * @typedef {object} Props
  * @prop {keyof import("@equinor/eds-icons")} name
- * @prop {string} [className]
  * @prop {string} [title] Title for svg if used semantically
  * @prop {string} [color] Valid colors
  * @prop {16 | 24 | 32 | 40 | 48} [size] Vertical spacing
@@ -36,9 +35,8 @@ const StyledPath = styled.path.attrs(({ icon, size }) => ({
 
 export const Icon = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.SVGAttributes<SVGElement>} props
+   * @param ref
    */
   function EdsIcon(
     { size, color, name, className, rotation, title, ...rest },

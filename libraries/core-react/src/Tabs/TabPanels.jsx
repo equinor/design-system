@@ -6,14 +6,13 @@ import { TabPanel } from './TabPanel'
 /**
  * @typedef {object} Props
  * @prop {string} [className]
- * @prop {TabPanel | TabPanel[]} children
+ * @prop {React.ReactElement<TabPanel> | React.ReactElement<TabPanel>[]} children
  */
 
 const TabPanels = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
    */
   function TabPanels({ children, ...rest }, ref) {
     const { activeTab, tabsId } = useContext(TabsContext)

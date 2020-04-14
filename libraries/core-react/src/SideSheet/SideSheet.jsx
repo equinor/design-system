@@ -43,15 +43,13 @@ const Header = styled.div`
  * @typedef Props
  * @prop {string} [title] Title for Side Sheet
  * @prop {'small' | 'medium' | 'large' | 'xlarge'} [variant] Variant controls width of Side Sheet
- * @prop {(event: React.MouseEvent) => void} [onClose] OnClick function (close)
+ * @prop {React.MouseEventHandler<HTMLButtonElement>} [onClose] OnClick function (close)
  * @prop {boolean} [open] Open / close Side Sheet
- * @prop {React.ReactNode} [children] Any type of content
- * @prop {string} [className]
  */
 
 export const SideSheet = forwardRef(
   /**
-   * @param {Props} props
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
    * @param ref
    */
   function EdsSideSheet(

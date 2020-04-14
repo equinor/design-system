@@ -17,14 +17,12 @@ const StyledDivider = styled.hr(
  * @typedef Props
  * @prop {'lighter' | 'light' | 'medium'} [color] Valid colors
  * @prop {'small' | 'medium'} [variant] Vertical spacing
- * @prop {string} [className]
  */
 
 export const Divider = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.HTMLAttributes<HTMLHRElement>} props
+   * @param ref
    */
   function Divider({ color, variant, className }, ref) {
     const props = {

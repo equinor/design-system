@@ -28,14 +28,13 @@ const StyledTabList = styled.div.attrs(() => ({
  * @typedef {object} Props
  * @prop {string} [className]
  * @prop {import('./Tabs').TabsVariant} [variant] Sets the width of the tabs
- * @prop {Tab | Tab[]} children
+ * @prop {React.ReactElement<Tab> | React.ReactElement<Tab>[]} children
  */
 
 const TabList = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
    */
   function TabsList({ children, ...rest }, ref) {
     const { activeTab, handleChange, tabsId, variant } = useContext(TabsContext)

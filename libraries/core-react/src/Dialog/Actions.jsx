@@ -19,15 +19,9 @@ const StyledActions = styled.div`
     `}
 `
 
-/**
- * @typedef Props
- * @prop {React.ReactNode} [children]
- * @prop {string} [className]
- */
-
 export const Actions = forwardRef(
   /**
-   * @param {Props} props
+   * @param {React.HTMLAttributes<HTMLDivElement>} props
    * @param ref
    */
   function EdsDialogActions({ children, ...rest }, ref) {

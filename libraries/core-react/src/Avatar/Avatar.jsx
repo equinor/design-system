@@ -37,8 +37,6 @@ const StyledImage = styled.img`
 
 /**
  * @typedef Props
- * @prop {string} [className]
- * @prop {React.ReactNode} [children]
  * @prop {string} [src] Image source
  * @prop {string} alt Alt image description
  * @prop {16 | 24 | 32 | 40 | 48} [size] Size
@@ -47,7 +45,7 @@ const StyledImage = styled.img`
 
 export const Avatar = forwardRef(
   /**
-   * @param {Props} props
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
    * @param ref
    */
   function EdsAvatar({ src, alt, size, disabled, ...rest }, ref) {

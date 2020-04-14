@@ -38,9 +38,8 @@ const StyledTopBar = styled.header`
 
 export const TopBar = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.HTMLAttributes<HTMLElement>} props
+   * @param ref
    */
   function EdsTopBar({ children, ...rest }, ref) {
     return (

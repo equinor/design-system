@@ -91,9 +91,8 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
 
 export const Tab = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.HTMLAttributes<HTMLButtonElement>} props
+   * @param ref
    */
   function Tab(props, ref) {
     return <StyledTab ref={ref} {...props} />

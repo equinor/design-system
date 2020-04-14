@@ -113,16 +113,13 @@ const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
 
 /**
  * @typedef Props
- * @prop {React.ReactNode} [children]
- * @prop {string} [className]
  * @prop {'contained' | 'outlined' | 'ghost' | 'ghost_icon'} [variant] Specifies which variant to use
  * @prop {boolean} [disabled] If `true`, the button will be disabled
  * @prop {'primary' | 'secondary' | 'danger'} [color] Specifies color
- * @prop {(event: React.MouseEvent) => void} [onClick]
  */
 
 /**
- * @param {Props} props
+ * @param {Props & React.ButtonHTMLAttributes<HTMLButtonElement>} props
  */
 export const Button = ({
   variant,

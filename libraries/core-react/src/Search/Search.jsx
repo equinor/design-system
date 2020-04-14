@@ -163,16 +163,14 @@ const InsideButton = styled.div`
 
 /**
  * @typedef Props
- * @prop {string} [className]
  * @prop {string} [placeholder] Placeholder
  * @prop {boolean} [disabled] Disabled state
- * @prop {React.ChangeEventHandler} [onChange] onChange handler
  * @prop {string} [value] Value for search field
  */
 
 export const Search = React.forwardRef(
   /**
-   * @param {Props} props
+   * @param {Props & React.InputHTMLAttributes<HTMLInputElement>} props
    * @param ref
    */
   function EdsSearch(

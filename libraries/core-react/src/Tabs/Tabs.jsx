@@ -10,7 +10,7 @@ import { TabsProvider } from './Tabs.context'
 /**
  * @typedef {object} Props
  * @prop {number} [activeTab] The index of the active tab
- * @prop {() => void} [onChange] The callback function for selecting a tab
+ * @prop {(index: number) => void} [onChange] The callback function for selecting a tab
  * @prop {TabsVariant} [variant] Sets the width of the tabs
  * @prop {React.ReactNode} children
  */

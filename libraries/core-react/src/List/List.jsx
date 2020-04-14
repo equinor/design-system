@@ -20,16 +20,14 @@ const variants = {
 /**
  * @typedef {object} Props
  * @prop {React.ReactNode} children
- * @prop {string} [className]
  * @prop {'bullet' | 'numbered'} [variant] Variant
  * @prop {string} [start] An integer to start counting from for the list items
  */
 
 const List = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
    */
   function List({ children, variant, className, ...rest }, ref) {
     return (

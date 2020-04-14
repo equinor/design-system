@@ -4,14 +4,12 @@ import PropTypes from 'prop-types'
 /**
  * @typedef {object} Props
  * @prop {React.ReactNode} children
- * @prop {string} [className]
  */
 
 const ListItem = forwardRef(
   /**
-   * @param {Props} props
-   * @param {React.Ref<any>} ref
-   * @returns {React.ReactElement}
+   * @param {Props & React.LiHTMLAttributes<HTMLLIElement>} props
+   * @param ref
    */
   function ListItem({ children, ...rest }, ref) {
     return (

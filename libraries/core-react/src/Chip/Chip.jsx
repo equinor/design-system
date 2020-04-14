@@ -133,17 +133,14 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
 
 /**
  * @typedef Props
- * @prop {string} [className]
- * @prop {React.ReactNode} [children]
  * @prop {boolean} [disabled] Disabled
- * @prop {(event: React.KeyboardEvent | React.MouseEvent) => void} [onDelete] Delete callback
- * @prop {(event: React.KeyboardEvent | React.MouseEvent) => void} [onClick] Click callback
+ * @prop {React.MouseEventHandler<HTMLDivElement> | React.KeyboardEventHandler<HTMLDivElement>} [onDelete] Delete callback
  * @prop {'active' | 'error' | 'default'} [variant] Variant
  */
 
 export const Chip = forwardRef(
   /**
-   * @param {Props} props
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
    * @param ref
    */
   function EdsChips(

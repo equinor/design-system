@@ -37,14 +37,12 @@ const StyledDivider = styled(Divider)`
 
 /**
  * @typedef Props
- * @prop {React.ReactNode} [children]
- * @prop {string} [className]
  * @prop {boolean} [scrollable]
  */
 
 export const CustomContent = forwardRef(
   /**
-   * @param {Props} props
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
    * @param ref
    */
   function EdsDialogCustomContent({ children, ...rest }, ref) {

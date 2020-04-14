@@ -31,15 +31,9 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-/**
- * @typedef Props
- * @prop {React.ReactNode} [children]
- * @prop {string} [className]
- */
-
 export const Title = forwardRef(
   /**
-   * @param {Props} props
+   * @param {React.HTMLAttributes<HTMLDivElement>} props
    * @param ref
    */
   function EdsDialogTitle({ children, ...rest }, ref) {
