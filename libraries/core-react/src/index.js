@@ -16,4 +16,5 @@ export { SideSheet } from './SideSheet'
 export { Chip } from './Chip'
 export { Avatar } from './Avatar'
 export { Search } from './Search'
+export { Box } from './Box'
 /* eslint-enable */
