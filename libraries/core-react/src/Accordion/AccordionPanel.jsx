@@ -23,22 +23,33 @@ const StyledAccordionPanel = styled.div.attrs(({ headerId }) => ({
   box-sizing: border-box;
 `
 
-const AccordionPanel = forwardRef(function AccordionPanel(
-  { id, headerId, hidden, children, ...props },
-  ref,
-) {
-  return (
-    <StyledAccordionPanel
-      headerId={headerId}
-      id={id}
-      hidden={hidden}
-      {...props}
-      ref={ref}
-    >
-      {children}
-    </StyledAccordionPanel>
-  )
-})
+/**
+ * @typedef Props
+ * @prop {string} [headerId] The ID of the element that controls the panel
+ * @prop {string} [id] The ID of the panel
+ * @prop {boolean} [hidden] If `true`, the panel will be hidden
+ * @prop {React.ReactNode} children
+ */
+
+const AccordionPanel = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
+   */
+  function AccordionPanel({ id, headerId, hidden, children, ...rest }, ref) {
+    return (
+      <StyledAccordionPanel
+        headerId={headerId}
+        id={id}
+        hidden={hidden}
+        {...rest}
+        ref={ref}
+      >
+        {children}
+      </StyledAccordionPanel>
+    )
+  },
+)
 
 AccordionPanel.displayName = 'eds-accordion-panel'
 
