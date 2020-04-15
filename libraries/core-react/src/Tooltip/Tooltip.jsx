@@ -5,9 +5,13 @@ import { Typography } from '../Typography'
 import { spacingsTemplate } from '../_common/templates'
 import { tooltip as tokens } from './Tooltip.tokens'
 
+const StyledAnchor = styled.div`
+  position: relative;
+  display: 'inline-block';
+`
+
 const StyledTooltip = styled.div`
   visibility: hidden;
-  width: auto;
   background: ${({ background }) => background};
   text-align: center;
 
@@ -22,7 +26,7 @@ const StyledTypography = styled(Typography)`
 `
 
 export const Tooltip = forwardRef(function Tooltip(
-  { className, children, ...rest },
+  { className, title, ...rest },
   ref,
 ) {
   const props = {
@@ -33,7 +37,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
   return (
     <StyledTooltip {...props}>
-      <StyledTypography>{children}</StyledTypography>
+      <StyledTypography>{title}</StyledTypography>
     </StyledTooltip>
   )
 })
@@ -41,10 +45,8 @@ export const Tooltip = forwardRef(function Tooltip(
 Tooltip.displayName = 'eds-tooltip'
 
 Tooltip.propTypes = {
-  // Valid colors
-  color: PropTypes.oneOf(['lighter', 'light', 'medium']),
-  // Vertical spacing
-  variant: PropTypes.oneOf(['small', 'medium']),
+  // Tooltip title
+  title: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -52,8 +54,7 @@ Tooltip.propTypes = {
 }
 
 Tooltip.defaultProps = {
-  color: 'medium',
-  variant: 'medium',
+  title: '',
   className: '',
   children: null,
 }
