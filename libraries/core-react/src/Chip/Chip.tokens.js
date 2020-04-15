@@ -18,7 +18,7 @@ const {
       primary__hover_alt: { rgba: primaryHoverAlt },
       primary__hover: { rgba: primaryHover },
       disabled__text: { rgba: disabledColor },
-      focus: { rgba: focusColor },
+      focus: { rgba: focusOutlineColor },
       primary__selected_highlight: { rgba: activeColor },
       danger__resting: { rgba: errorColor },
       danger__hover: { rgba: errorColorHover },
@@ -72,10 +72,12 @@ export const chip = {
   focus: {
     border: {
       type: 'dashed',
-      color: focusColor,
+      color: focusOutlineColor,
       width: '1px',
       radius: borderRadius,
     },
+    outline: `1px dashed ${focusOutlineColor}`,
+    outlineOffset: '2px',
   },
   active: {
     background: activeColor,

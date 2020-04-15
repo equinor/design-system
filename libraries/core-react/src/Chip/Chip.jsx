@@ -60,8 +60,8 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
     focusVisible &&
     css`
       &:focus {
-        border-radius: ${focus.border.radius};
-        border: ${focus.border.width} ${focus.border.type} ${focus.border.color};
+        outline: ${focus.outline};
+        outline-offset: ${focus.outlineOffset};
       }
     `}
 
@@ -96,13 +96,6 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
                 fill: ${error.hover.color};
               }
             }
-            ${(clickable || deletable) &&
-              css`
-                &:focus {
-                  border: ${focus.border.width} ${focus.border.type}
-                    ${error.border.color};
-                }
-              `}
           `
         default:
           return ''
