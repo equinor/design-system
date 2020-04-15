@@ -69,16 +69,8 @@ export const chip = {
       color: disabledColor,
     },
   },
-  focus: {
-    border: {
-      type: 'dashed',
-      color: focusOutlineColor,
-      width: '1px',
-      radius: borderRadius,
-    },
-    outline: `1px dashed ${focusOutlineColor}`,
-    outlineOffset: '2px',
-  },
+  outline: `1px dashed ${focusOutlineColor}`,
+  outlineOffset: '2px',
   active: {
     background: activeColor,
   },
@@ -87,6 +79,7 @@ export const chip = {
     border: {
       color: errorColor,
       width: '1px',
+      type: 'solid',
     },
     typography: {
       color: errorColor,

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
@@ -15,10 +15,11 @@ Icon.add({ close })
 const {
   enabled,
   disabled: disabledToken,
-  focus,
   active: activeToken,
   hover,
   error,
+  outline,
+  outlineOffset,
 } = tokens
 
 const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
@@ -33,7 +34,6 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   align-items: center;
-  border: ${focus.border.width} solid transparent;
   z-index: 999;
 
   svg {
@@ -51,19 +51,15 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
     outline: none;
   }
 
+  &[data-focus-visible-added]:focus {
+    outline: ${outline};
+    outline-offset: ${outlineOffset};
+  }
+
   ${bordersTemplate(enabled.border)}
   ${spacingsTemplate(enabled.spacings)}
   ${typographyTemplate(enabled.typography)}
 
-  ${({ clickable, deletable, focusVisible }) =>
-    (clickable || deletable) &&
-    focusVisible &&
-    css`
-      &:focus {
-        outline: ${focus.outline};
-        outline-offset: ${focus.outlineOffset};
-      }
-    `}
 
   ${({ clickable }) =>
     clickable &&
@@ -73,7 +69,7 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
       }
     `}
 
-    ${({ variant, clickable, deletable }) => {
+    ${({ variant }) => {
       switch (variant) {
         case 'active':
           return css`
@@ -84,6 +80,7 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
             background: ${error.background};
             border-color: ${error.border.color};
             border-width: ${error.border.width};
+            border-style: ${error.border.type};
             color: ${error.typography.color};
             svg {
               fill: ${error.icon.color};
@@ -138,8 +135,6 @@ export const Chip = forwardRef(function EdsChips(
   { children, onDelete, disabled, onClick, variant, ...rest },
   ref,
 ) {
-  const [focusVisible, setFocusVisible] = useState(true)
-
   const handleDelete = disabled ? undefined : onDelete
   const handleClick = disabled ? undefined : onClick
 
@@ -155,12 +150,10 @@ export const Chip = forwardRef(function EdsChips(
     clickable,
     onlyChild,
     variant,
-    focusVisible,
   }
 
   const handleKeyPress = (event) => {
     const { key } = event
-    setFocusVisible(true)
     if (key === 'Enter') {
       if (deletable) {
         handleDelete(event)
@@ -170,14 +163,6 @@ export const Chip = forwardRef(function EdsChips(
         handleClick(event)
       }
     }
-  }
-
-  const handleMouseDown = () => {
-    setFocusVisible(false)
-  }
-
-  const handleBlur = () => {
-    setFocusVisible(true)
   }
 
   const resizedChildren = React.Children.map(children, (child) => {
@@ -194,10 +179,8 @@ export const Chip = forwardRef(function EdsChips(
   return (
     <StyledChips
       {...props}
-      onBlur={handleBlur}
       onClick={(event) => clickable && handleClick(event)}
       onKeyPress={handleKeyPress}
-      onMouseDown={handleMouseDown}
     >
       {resizedChildren}
       {onDelete && (
