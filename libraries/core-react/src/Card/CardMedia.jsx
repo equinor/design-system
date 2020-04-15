@@ -1,36 +1,39 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
 const StyledCardMedia = styled.div`
-  width: inherit;
-  margin-top: ${({ marginTop }) => marginTop};
-  margin-bottom: ${({ marginBottom }) => marginBottom};
-  margin-left: ${({ marginLeft }) => marginLeft};
-
-  > * {
-    position: relative;
-    width: ${({ imgWidth }) => imgWidth} !important;
-  }
+  display: flex;
+  width: 100%;
+  ${({ fullWidth, spacing }) =>
+    fullWidth
+      ? css`
+          margin-bottom: ${spacing};
+          > * {
+            width: calc(100% + ${spacing} + ${spacing}) !important;
+            margin: -${spacing};
+          }
+        `
+      : css`
+          > * {
+            width: 100% !important;
+          }
+        `}
 `
 
 // EDS - Supporting Text
 export const CardMedia = forwardRef(function EdsCardMedia(
-  { children, className, isLeading, ...rest },
+  { children, className, fullWidth, ...rest },
   ref,
 ) {
-  const styleToken = isLeading ? 'leading' : 'middle'
   const props = {
     ...rest,
     className,
     ref,
-    marginBottom: tokens.spacings[styleToken].bottom,
-    marginTop: tokens.spacings[styleToken].top,
-    marginLeft: tokens.spacings[styleToken].marginLeft,
-    imgWidth: tokens.spacings[styleToken].width,
-    isLeading,
+    fullWidth,
+    spacing: tokens.spacings.left,
   }
 
   return <StyledCardMedia {...props}>{children}</StyledCardMedia>
@@ -40,7 +43,7 @@ CardMedia.displayName = 'eds-card-media'
 
 CardMedia.propTypes = {
   // To be used if CardMedia is the leading block in Card
-  isLeading: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -48,7 +51,7 @@ CardMedia.propTypes = {
 }
 
 CardMedia.defaultProps = {
-  isLeading: false,
+  fullWidth: false,
   className: '',
   children: undefined,
 }

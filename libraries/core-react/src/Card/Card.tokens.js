@@ -10,11 +10,7 @@ const {
     },
   },
   spacings: {
-    comfortable: {
-      small: spacingSmall,
-      medium: spacingMedium,
-      large: spacingLarge,
-    },
+    comfortable: { medium: spacingMedium, small: spacingSmall },
   },
   shape: {
     corners: { minHeight, minWidth, borderRadius },
@@ -32,28 +28,7 @@ export const card = {
     bottom: spacingMedium,
     right: spacingMedium,
     top: spacingMedium,
-    last: {
-      top: spacingMedium,
-      bottom: spacingLarge,
-      width: '100%',
-    },
-    middle: {
-      top: spacingMedium,
-      bottom: spacingMedium,
-      width: '100%',
-    },
-    leading: {
-      top: 0,
-      marginLeft: '-16px',
-      bottom: spacingMedium,
-      width: 'calc(100% + 32px)',
-    },
-    actions: {
-      top: spacingSmall,
-      bottom: spacingSmall,
-      left: spacingSmall,
-      right: spacingSmall,
-    },
+    small: spacingSmall,
   },
   background: {
     default: background,

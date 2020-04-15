@@ -20,7 +20,7 @@ const icons = {
 
 Icon.add(icons)
 
-const { CardHeader, CardHeaderTitle, CardMedia, CardText, CardActions } = Card
+const { CardHeader, CardHeaderTitle, CardMedia, CardActions } = Card
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -39,7 +39,7 @@ const Grid = styled.div`
   padding: 32px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(2, 250px);
+  grid-template-columns: repeat(2, 260px);
   grid-gap: 32px 32px;
 `
 
@@ -250,7 +250,7 @@ export const CardTextVariants = () => {
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
-            <CardText>Margin bottom for middle placed text is 16px</CardText>
+            <Typography variant="body_short">Card text middle</Typography>
             <StyledDivider variant="medium" />
           </Card>
           <Card>
@@ -261,10 +261,7 @@ export const CardTextVariants = () => {
               </CardHeaderTitle>
             </CardHeader>
             <StyledDivider variant="medium" />
-            <CardText>
-              Margin bottom is automatically set to 24px for the last child in
-              Card
-            </CardText>
+            <Typography variant="body_short">Card text last</Typography>
           </Card>
         </Grid>
       </Body>
@@ -273,7 +270,7 @@ export const CardTextVariants = () => {
 }
 
 const CardMediaLeadingImage = () => (
-  <CardMedia isLeading>
+  <CardMedia fullWidth>
     <StyledImage
       src="https://i.imgur.com/UM3mrju.jpg"
       alt="Image for representation"
@@ -309,11 +306,10 @@ export const CardMediaVariants = () => {
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
-
-            <CardText>
+            <Typography variant="body_short">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </CardText>
+            </Typography>
           </Card>
           <Card>
             <CardHeader>
@@ -325,10 +321,10 @@ export const CardMediaVariants = () => {
               </CardHeaderTitle>
             </CardHeader>
             <CardMediaDefault />
-            <CardText>
+            <Typography variant="body_short">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </CardText>
+            </Typography>
           </Card>
           <Card>
             <CardHeader>
@@ -340,10 +336,10 @@ export const CardMediaVariants = () => {
               </CardHeaderTitle>
             </CardHeader>
 
-            <CardText>
-              Margin bottom is automatically set to 24px for the last child in
-              Card
-            </CardText>
+            <Typography variant="body_short">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </Typography>
             <CardMediaDefault />
           </Card>
         </Grid>
@@ -395,9 +391,10 @@ export const CardActionsVariants = () => {
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
-            <CardText>
+            <Typography variant="body_short">
               Action elements are aligned left in this example
-            </CardText>
+            </Typography>
+
             <CardActionsDefault />
           </Card>
           <Card>
@@ -409,9 +406,9 @@ export const CardActionsVariants = () => {
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
-            <CardText>
+            <Typography variant="body_short">
               Action elements are aligned right in this example
-            </CardText>
+            </Typography>
             <CardActionsAlignedRight />
           </Card>
           <Card>
@@ -423,7 +420,9 @@ export const CardActionsVariants = () => {
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
-            <CardText>Action element with metadata</CardText>
+            <Typography variant="body_short">
+              Action elements with metadata
+            </Typography>
             <CardActionsMeta />
           </Card>
         </Grid>
@@ -435,10 +434,10 @@ export const CardActionsVariants = () => {
 const TEXT_CHOICES = {
   none: null,
   default: (
-    <CardText>
+    <Typography variant="body_short">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
-    </CardText>
+    </Typography>
   ),
 }
 

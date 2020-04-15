@@ -1,20 +1,16 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { card as tokens } from './Card.tokens'
 import { Typography } from '../Typography'
 
-const { spacings } = tokens
-
 const StyledCardActions = styled.div`
-  display: flex;
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
   align-items: center;
-  margin-top: ${spacings.actions.top};
-  margin-bottom: ${spacings.actions.bottom} !important;
   justify-content: ${({ justifyContent }) => justifyContent};
-  > :not(:first-child) {
-    margin-left: ${spacings.actions.left};
-  }
+  margin-bottom: 0 !important;
 `
 
 export const CardActions = forwardRef(function EdsCardActions(

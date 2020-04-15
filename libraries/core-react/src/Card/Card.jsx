@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { card as tokens } from './Card.tokens'
+import { spacingsTemplate } from '../_common/templates'
 
 const { spacings, shape } = tokens
 
@@ -13,18 +14,19 @@ const StyledCard = styled.div`
   background-color: ${({ background }) => background};
   box-sizing: border-box;
   display: grid;
-  grid-column-gap: 0;
+  grid-gap: 16px;
   grid-auto-columns: auto;
   align-items: center;
   align-content: start;
   border-radius: ${shape.borderRadius};
-  padding-left: ${spacings.left};
-  padding-right: ${spacings.right};
   min-height: ${shape.minHeight};
   cursor: ${({ cursor }) => cursor};
 
+  ${spacingsTemplate(spacings)}
+
+  /* Add an extra margin on bottom elements (only text and rich media content) */
   > :last-child {
-    margin-bottom: ${spacings.last.bottom};
+    margin-bottom: ${spacings.small};
   }
 `
 
@@ -52,7 +54,7 @@ export const Card = forwardRef(function EdsCard(
 Card.displayName = 'eds-card'
 
 Card.propTypes = {
-  // Variant / background color (default, info, danger, warning):
+  // Background color:
   variant: PropTypes.oneOf(['default', 'info', 'warning', 'danger']),
   // Onclick function (for clickable cards)
   onClick: PropTypes.func,

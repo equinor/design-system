@@ -4,15 +4,15 @@ import styled from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
-const { spacings } = tokens
-
 const StyledCardHeader = styled.div`
-  margin-top: ${spacings.top};
-  margin-bottom: ${spacings.bottom} !important;
   display: flex;
-  flex-direction: ${({ flexDirection }) => flexDirection};
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0 !important;
+
+  > :not(:first-child) {
+    margin-left: ${tokens.spacings.left};
+  }
 `
 
 export const CardHeader = forwardRef(function EdsCardHeader(

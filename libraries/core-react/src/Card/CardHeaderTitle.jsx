@@ -6,8 +6,9 @@ import { card as tokens } from './Card.tokens'
 
 const StyledCardHeaderTitle = styled.div`
   display: grid;
-  grid-auto-columns: auto;
   flex-grow: 2;
+  grid-auto-columns: auto;
+  grid-gap: 8px;
   margin-left: ${({ marginLeft }) => marginLeft};
 `
 
