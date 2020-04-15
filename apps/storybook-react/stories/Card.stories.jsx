@@ -173,7 +173,7 @@ export const CardHeaderVariants = () => {
                 src="https://i.imgur.com/UM3mrju.jpg"
                 size={40}
               />
-              <CardHeaderTitle marginLeft>
+              <CardHeaderTitle>
                 <Typography variant="h6">Title goes here</Typography>
                 <Typography variant="body_short">Caption</Typography>
               </CardHeaderTitle>
@@ -186,7 +186,7 @@ export const CardHeaderVariants = () => {
                 src="https://i.imgur.com/UM3mrju.jpg"
                 size={40}
               />
-              <CardHeaderTitle marginLeft>
+              <CardHeaderTitle>
                 <Typography variant="h6">Title goes here</Typography>
                 <Typography variant="body_short">Caption</Typography>
               </CardHeaderTitle>
