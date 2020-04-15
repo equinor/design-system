@@ -246,7 +246,7 @@ export const CardTextVariants = () => {
               <CardHeaderTitle>
                 <Typography variant="h5">Middle</Typography>
                 <Typography variant="body_short">
-                  Between other blocks
+                  Default spacing is 16px for middle blocks
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
@@ -261,7 +261,10 @@ export const CardTextVariants = () => {
               </CardHeaderTitle>
             </CardHeader>
             <StyledDivider variant="medium" />
-            <Typography variant="body_short">Card text last</Typography>
+            <Typography variant="body_short">
+              Default bottom spacing is 24px for last blocks (text or rich
+              media)
+            </Typography>
           </Card>
         </Grid>
       </Body>
@@ -300,15 +303,15 @@ export const CardMediaVariants = () => {
             <CardMediaLeadingImage />
             <CardHeader>
               <CardHeaderTitle>
-                <Typography variant="h5">Leading image</Typography>
+                <Typography variant="h5">Full width</Typography>
                 <Typography variant="body_short">
                   To be used as leading block (image)
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
             <Typography variant="body_short">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Leading images are full width, and go straight to the top -
+              ignoring any spacings
             </Typography>
           </Card>
           <Card>
@@ -322,8 +325,7 @@ export const CardMediaVariants = () => {
             </CardHeader>
             <CardMediaDefault />
             <Typography variant="body_short">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Default spacing is 16px between middle blocks
             </Typography>
           </Card>
           <Card>
@@ -337,8 +339,7 @@ export const CardMediaVariants = () => {
             </CardHeader>
 
             <Typography variant="body_short">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Default spacing is 24px for last blocks (text or rich media)
             </Typography>
             <CardMediaDefault />
           </Card>
@@ -381,6 +382,9 @@ export const CardActionsVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
+        <Typography variant="body_short">
+          All card actions have default 16px bottom spacing
+        </Typography>
         <Grid>
           <Card>
             <CardHeader>

@@ -14,6 +14,8 @@ const StyledCardMedia = styled.div`
           > * {
             width: calc(100% + ${spacing} + ${spacing}) !important;
             margin: -${spacing};
+            border-top-right-radius: ${tokens.shape.borderRadius};
+            border-top-left-radius: ${tokens.shape.borderRadius};
           }
         `
       : css`
@@ -23,7 +25,6 @@ const StyledCardMedia = styled.div`
         `}
 `
 
-// EDS - Supporting Text
 export const CardMedia = forwardRef(function EdsCardMedia(
   { children, className, fullWidth, ...rest },
   ref,
