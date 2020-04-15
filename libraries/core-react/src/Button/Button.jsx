@@ -57,16 +57,12 @@ const Base = ({ base, baseDisabled: disabled }) => {
     }
 
     &:focus {
-      ${focus.radius
-        ? css`
-            outline: none;
-            border-radius: ${focus.radius};
-            border: ${focus.width} ${focus.type} ${focus.color};
-          `
-        : css`
-            outline-offset: ${focus.width};
-            outline: ${focus.width} ${focus.type} ${focus.color};
-          `}
+      outline: none;
+    }
+
+    &[data-focus-visible-added]:focus {
+      outline: 1px dashed ${focus.color};
+      outlineoffset: 2px;
     }
 
     &:disabled {
