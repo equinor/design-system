@@ -64,6 +64,10 @@ const Base = ({ base, baseDisabled: disabled }) => {
       outline: 1px dashed ${focus.color};
       outlineoffset: 2px;
     }
+    /* Get rid of ff focus border for buttons */
+    &::-moz-focus-inner {
+      border: 0;
+    }
 
     &:disabled {
       cursor: not-allowed;

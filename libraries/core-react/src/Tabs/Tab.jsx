@@ -57,7 +57,9 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   &[data-focus-visible-added]:focus {
     ${focusedStyles}
   }
-
+  &::-moz-focus-inner {
+    border: 0;
+  }
   &[data-hover],
   &:hover {
     background-color: ${({ disabled }) =>
