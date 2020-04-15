@@ -8,8 +8,11 @@ const StyledBox = styled.div.attrs(() => ({
   width: 15rem;
   height: 15rem;
   background-color: slategrey;
-  .js-focus-visible:not([data-js-focus-visible]) &:focus {
+  &:focus {
     outline: none;
+  }
+  &[data-focus-visible-added]:focus {
+    outline: 10px dotted orange;
   }
 `
 
