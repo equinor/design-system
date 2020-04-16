@@ -34,7 +34,10 @@ const IconWithMarginProp = styled(Icon)(addMarginRightProp)
 
 export default {
   title: 'Components|Accordion',
-  component: Accordion,
+  parameters: {
+    component: Accordion,
+    componentSubtitle: 'An accordion',
+  },
 }
 
 export const accordionsExample = () => {
