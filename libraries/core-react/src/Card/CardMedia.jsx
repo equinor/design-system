@@ -11,7 +11,7 @@ const StyledCardMedia = styled.div`
     fullWidth
       ? css`
           > * {
-            width: calc(100% + ${spacing} + ${spacing}) !important;
+            width: calc(100% + ${spacing} + ${spacing});
             margin-left: -${spacing};
           }
 
@@ -32,7 +32,7 @@ const StyledCardMedia = styled.div`
         `
       : css`
           > * {
-            width: 100% !important;
+            width: 100%;
           }
         `}
 `

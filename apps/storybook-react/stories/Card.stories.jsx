@@ -43,10 +43,6 @@ const Grid = styled.div`
   grid-gap: 32px 32px;
 `
 
-const StyledImage = styled.img`
-  width: 400px;
-`
-
 const StyledDivider = styled(Divider)`
   width: 100%;
 `
@@ -274,19 +270,13 @@ export const CardTextVariants = () => {
 
 const CardMediafullWidth = () => (
   <CardMedia fullWidth>
-    <StyledImage
-      src="https://i.imgur.com/UM3mrju.jpg"
-      alt="Image for representation"
-    />
+    <img src="https://i.imgur.com/UM3mrju.jpg" alt="Image for representation" />
   </CardMedia>
 )
 
 const CardMediaDefault = () => (
   <CardMedia>
-    <StyledImage
-      src="https://i.imgur.com/UM3mrju.jpg"
-      alt="Image for representation"
-    />
+    <img src="https://i.imgur.com/UM3mrju.jpg" alt="Image for representation" />
   </CardMedia>
 )
 
