@@ -2,6 +2,7 @@ dependencies:
   '@equinor/eds-icons': 'link:../icons'
   '@equinor/eds-tokens': 'link:../tokens'
   '@testing-library/react-hooks': 3.2.1_react@16.13.0
+  focus-visible: 5.1.0
   lodash.uniqueid: 4.0.1
 devDependencies:
   '@babel/cli': 7.8.4_@babel+core@7.8.6
@@ -22,6 +23,7 @@ devDependencies:
   rollup-plugin-commonjs: 9.3.4_rollup@1.32.0
   rollup-plugin-json: 4.0.0
   rollup-plugin-node-resolve: 4.2.4
+  rollup-plugin-polyfill: 3.0.0
   styled-components: 4.4.1_af2d86ef18a596b27a2894d6d11e79ad
 lockfileVersion: 5.1
 packages:
@@ -2160,6 +2162,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-1yD6RmLI1XBfxugvORwlck6f75tYL+iR0jqwsOrOxMZyGYqUuDhJ0l4AXdO1iX/FTs9cBAMEk1gWSEx1kSbylg==
+  /focus-visible/5.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-nPer0rjtzdZ7csVIu233P2cUm/ks/4aVSI+5KUkYrYpgA7ujgC3p6J7FtFU+AIMWwnwYQOB/yeiOITxFeYIXiw==
   /for-in/1.0.2:
     dev: true
     engines:
@@ -3294,6 +3300,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-3a5LOMSGoCTH5rbqobC2HuDNRtE2glHZ8J7pK+QZYppyWA36yuNpsX994rIY2nCuyP7CZYy7lQq/X2jygiZ89g==
+  /magic-string/0.25.7:
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: true
+    resolution:
+      integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==
   /make-dir/2.1.0:
     dependencies:
       pify: 4.0.1
@@ -4107,6 +4119,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-t/64I6l7fZ9BxqD3XlX4ZeO6+5RLKyfpwE2CiPNUKa+GocPlQhf/C208ou8y3AwtNsc6bjSk/8/6y/YAyxCIvw==
+  /rollup-plugin-polyfill/3.0.0:
+    dependencies:
+      magic-string: 0.25.7
+    dev: true
+    resolution:
+      integrity: sha512-LfJ1OR/wJrJdNDVNrdhVm7CgENfaNoQlFYMaQ0vlQH3zO+BMVrBMWDX9k6HVcr9gHsKbthrkiBzWRfFU9fr0hQ==
   /rollup-pluginutils/2.8.2:
     dependencies:
       estree-walker: 0.6.1
@@ -4835,6 +4853,7 @@ specifiers:
   '@testing-library/react': ^9.4.0
   '@testing-library/react-hooks': ^3.2.1
   babel-plugin-styled-components: ^1.10.6
+  focus-visible: ^5.1.0
   jest: ^24.9.0
   jest-styled-components: ^6.3.4
   lodash.uniqueid: ^4.0.1
@@ -4847,4 +4866,5 @@ specifiers:
   rollup-plugin-commonjs: ^9.3.4
   rollup-plugin-json: ^4.0.0
   rollup-plugin-node-resolve: ^4.2.4
+  rollup-plugin-polyfill: ^3.0.0
   styled-components: ^4.4.1

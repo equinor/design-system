@@ -2,7 +2,6 @@ import React, {
   forwardRef,
   useContext,
   useRef,
-  useState,
   useCallback,
   useEffect,
 } from 'react'
@@ -30,8 +29,6 @@ const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
 
   const currentTab = useRef(activeTab)
 
-  const [focusVisible, setFocusVisible] = useState(false)
-
   const selectedTabRef = useCallback((node) => {
     if (node !== null) {
       node.focus()
@@ -55,7 +52,6 @@ const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
       index,
       onClick: () => handleChange(index),
       ref: tabRef,
-      focusVisible,
     })
   })
 
@@ -75,7 +71,6 @@ const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
 
   const handleKeyPress = (event) => {
     const { key } = event
-    setFocusVisible(true)
     if (key === 'ArrowLeft') {
       handleTabsChange('left', lastFocusableChild)
     }
@@ -84,14 +79,9 @@ const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
     }
   }
 
-  const handleMouseDown = () => {
-    setFocusVisible(false)
-  }
-
   return (
     <StyledTabList
       onKeyDown={handleKeyPress}
-      onMouseDown={handleMouseDown}
       ref={ref}
       {...props}
       variant={variant}

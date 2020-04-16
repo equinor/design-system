@@ -11,8 +11,6 @@ const AccordionItem = forwardRef(function AccordionItem(
     isExpanded,
     children,
     disabled,
-    focusVisible,
-    handleFocusVisible,
     ...props
   },
   ref,
@@ -37,8 +35,6 @@ const AccordionItem = forwardRef(function AccordionItem(
           chevronPosition,
           parentIndex: index,
           disabled,
-          focusVisible,
-          handleFocusVisible,
         })
       : React.cloneElement(child, {
           hidden: !expanded,
@@ -68,10 +64,6 @@ AccordionItem.propTypes = {
   children: PropTypes.node.isRequired,
   /** accordion item is disabled */
   disabled: PropTypes.bool,
-  /** @ignore */
-  focusVisible: PropTypes.bool,
-  /** @ignore */
-  handleFocusVisible: PropTypes.func,
 }
 
 AccordionItem.defaultProps = {
@@ -80,8 +72,6 @@ AccordionItem.defaultProps = {
   index: 0,
   accordionId: '',
   isExpanded: false,
-  focusVisible: true,
-  handleFocusVisible: () => {},
 }
 
 export { AccordionItem }
