@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Divider, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
+import mdx from './Divider.docs.mdx'
 
 const {
   colors: {
@@ -14,6 +15,11 @@ const {
 
 export default {
   title: 'Components|Divider',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   component: Divider,
 }
 
@@ -37,7 +43,7 @@ const DarkBox = styled.div`
   padding: 1em 0;
 `
 
-export const allDividers = () => (
+export const all = () => (
   <Wrapper>
     <Typography variant="h1" bold>
       All Divider variants

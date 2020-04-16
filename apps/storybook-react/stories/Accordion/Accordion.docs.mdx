@@ -1,0 +1,28 @@
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
+import { Accordion, Typography } from '@equinor/eds-core-react'
+
+# Accordion
+
+<Typography variant="ingress">An accordion allows users to collapse and expand sections of content.</Typography>
+
+See the [storefront](https://eds.equinor.com/components/accordion/) for details about this component
+
+## Props
+
+### Accordion
+
+<Props of={Accordion} />
+
+### AccordionItem
+
+<Props of={Accordion.AccordionItem} />
+
+<Preview withToolbar withSource="open">
+  <Story name="Accordion header" id="components-accordion--simple" />
+</Preview>
+
+<Preview withToolbar withSource="open">
+  <Story name="Accordion header" id="components-accordion--header" />
+</Preview>
+
+

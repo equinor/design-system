@@ -8,6 +8,7 @@ import {
   edit,
   delete_to_trash,
 } from '@equinor/eds-icons'
+import mdx from './Accordion.docs.mdx'
 
 const {
   AccordionItem,
@@ -35,12 +36,12 @@ const IconWithMarginProp = styled(Icon)(addMarginRightProp)
 export default {
   title: 'Components|Accordion',
   parameters: {
-    component: Accordion,
-    componentSubtitle: 'An accordion',
+    docs: { page: mdx },
   },
+  component: Accordion,
 }
 
-export const accordionsExample = () => {
+export const simple = () => {
   return (
     <Wrapper>
       <Typography>Accordion example</Typography>

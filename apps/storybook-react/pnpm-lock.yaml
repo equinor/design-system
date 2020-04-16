@@ -9,6 +9,8 @@ dependencies:
   styled-components: 4.4.1_52c3e70b5da9c08211cc061c116571c5
 devDependencies:
   '@babel/core': 7.8.4
+  '@babel/plugin-transform-react-jsx': 7.9.4_@babel+core@7.8.4
+  '@mdx-js/loader': 1.5.8_react@16.13.1
   '@storybook/addon-a11y': 5.3.12_react-dom@16.12.0
   '@storybook/addon-actions': 5.3.13_react-dom@16.12.0
   '@storybook/addon-docs': 5.3.18_99d37757fbba04a10170b5155ebf70f6
@@ -12660,9 +12662,11 @@ packages:
       integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
 specifiers:
   '@babel/core': ^7.8.4
+  '@babel/plugin-transform-react-jsx': ^7.9.4
   '@equinor/eds-core-react': 'workspace:*'
   '@equinor/eds-icons': 'workspace:*'
   '@equinor/eds-tokens': 'workspace:*'
+  '@mdx-js/loader': ^1.5.8
   '@storybook/addon-a11y': ^5.3.12
   '@storybook/addon-actions': ^5.3.2
   '@storybook/addon-docs': ^5.3.18
