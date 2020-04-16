@@ -62,7 +62,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
 
     &[data-focus-visible-added]:focus {
       outline: 1px dashed ${focus.color};
-      outlineoffset: 2px;
+      outline-offset: 2px;
     }
     /* Get rid of ff focus border for buttons */
     &::-moz-focus-inner {
