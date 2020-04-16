@@ -272,7 +272,7 @@ export const CardTextVariants = () => {
   )
 }
 
-const CardMediaLeadingImage = () => (
+const CardMediafullWidth = () => (
   <CardMedia fullWidth>
     <StyledImage
       src="https://i.imgur.com/UM3mrju.jpg"
@@ -300,19 +300,34 @@ export const CardMediaVariants = () => {
         </Typography>
         <Grid>
           <Card>
-            <CardMediaLeadingImage />
+            <CardMediafullWidth />
             <CardHeader>
               <CardHeaderTitle>
                 <Typography variant="h5">Full width</Typography>
                 <Typography variant="body_short">
-                  To be used as leading block (image)
+                  Full width as leading block
                 </Typography>
               </CardHeaderTitle>
             </CardHeader>
             <Typography variant="body_short">
               Leading images are full width, and go straight to the top -
-              ignoring any spacings
+              ignoring spacings
             </Typography>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>
+                <Typography variant="h5">Full width</Typography>
+                <Typography variant="body_short">
+                  Full width as last block
+                </Typography>
+              </CardHeaderTitle>
+            </CardHeader>
+            <Typography variant="body_short">
+              Last blocks with fullWidth and go straight to the bottom, ignoring
+              spacings
+            </Typography>
+            <CardMediafullWidth />
           </Card>
           <Card>
             <CardHeader>
@@ -447,7 +462,7 @@ const TEXT_CHOICES = {
 
 const MEDIA_CHOICES = {
   none: null,
-  isLeading: <CardMediaLeadingImage />,
+  fullWidth: <CardMediafullWidth />,
   default: <CardMediaDefault />,
 }
 
@@ -482,6 +497,11 @@ export const WithKnobs = () => {
     'default',
   )
   const mediaChoices = select('Media', Object.keys(MEDIA_CHOICES), 'default')
+  const mediaPlaceMentChoices = select(
+    'Placement of rich media',
+    ['leading', 'middle', 'bottom'],
+    'middle',
+  )
   const textChoices = select('Text', Object.keys(TEXT_CHOICES), 'default')
 
   return (
@@ -497,7 +517,9 @@ export const WithKnobs = () => {
               'danger',
             ])}
           >
-            {mediaChoices === 'isLeading' && MEDIA_CHOICES[mediaChoices]}
+            {mediaChoices !== 'none' &&
+              mediaPlaceMentChoices === 'leading' &&
+              MEDIA_CHOICES[mediaChoices]}
             {title && (
               <CardHeader>
                 {first_title === 'h6' &&
@@ -536,12 +558,16 @@ export const WithKnobs = () => {
                 )}
               </CardHeader>
             )}
-
-            {textChoices !== 'none' && TEXT_CHOICES[textChoices]}
             {mediaChoices !== 'none' &&
-              mediaChoices !== 'isLeading' &&
+              mediaPlaceMentChoices === 'middle' &&
               MEDIA_CHOICES[mediaChoices]}
+            {textChoices !== 'none' && TEXT_CHOICES[textChoices]}
+
             {actionChoices !== 'none' && ACTIONS_CHOICES[actionChoices]}
+
+            {mediaChoices !== 'none' &&
+              mediaPlaceMentChoices === 'bottom' &&
+              MEDIA_CHOICES[mediaChoices]}
           </Card>
         </Grid>
       </Body>

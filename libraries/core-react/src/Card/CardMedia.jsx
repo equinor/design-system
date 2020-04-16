@@ -10,12 +10,24 @@ const StyledCardMedia = styled.div`
   ${({ fullWidth, spacing }) =>
     fullWidth
       ? css`
-          margin-bottom: ${spacing};
           > * {
             width: calc(100% + ${spacing} + ${spacing}) !important;
-            margin: -${spacing};
-            border-top-right-radius: ${tokens.shape.borderRadius};
-            border-top-left-radius: ${tokens.shape.borderRadius};
+            margin-left: -${spacing};
+          }
+
+          &:first-child {
+            margin-top: -${spacing};
+            img {
+              border-top-right-radius: ${tokens.shape.borderRadius};
+              border-top-left-radius: ${tokens.shape.borderRadius};
+            }
+          }
+          &:last-child {
+            margin-bottom: -${spacing};
+            img {
+              border-bottom-right-radius: ${tokens.shape.borderRadius};
+              border-bottom-left-radius: ${tokens.shape.borderRadius};
+            }
           }
         `
       : css`
