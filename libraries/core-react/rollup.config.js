@@ -15,6 +15,8 @@ const globals = {
   'styled-components': 'styled',
 }
 
+const buildForStorybook = process.env.STORYBOOK
+
 export default [
   {
     input: 'src/index.js',
@@ -29,7 +31,10 @@ export default [
       babel({
         exclude: 'node_modules/**',
         presets: ['@babel/env', '@babel/preset-react'],
-        plugins: ['babel-plugin-styled-components'],
+        plugins: [
+          'babel-plugin-styled-components',
+          ...(buildForStorybook ? ['babel-plugin-react-docgen'] : []),
+        ],
       }),
       commonjs(),
       polyfill(['focus-visible']),
