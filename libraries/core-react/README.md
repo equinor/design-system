@@ -15,17 +15,22 @@ npm install @equinor/eds-core-react styled-components
 
 ### Available ✅
 
+- Accordion
 - Button
   - Contained
   - Outlined
   - Ghost
   - Ghost Icon
 - Chips
+- Dialog
 - Divider
 - Icon
 - List
+- Scrim
+- Search
 - Side Sheet
 - Table
+- Table of contents
 - Tabs
 - TextField
 - TopBar
@@ -33,12 +38,10 @@ npm install @equinor/eds-core-react styled-components
 
 ### In progress 👷‍♀️
 
-- Accordion
 - Cards
-- Dialog
-- Scrim
-- Search
-- Table of contents
+- Menu
+- Navigation drawer
+- Tooltip
 
 ### TODO 🛠️
 
@@ -49,8 +52,6 @@ npm install @equinor/eds-core-react styled-components
   - Contained w/icon left/right
   - Outlined w/icon left/right
   - Ghost w/icon left/right
-- Menu
-- Navigation drawer
 - Pagination
 - Popover
 - Progress indicators
@@ -58,7 +59,6 @@ npm install @equinor/eds-core-react styled-components
 - Slider
 - Snackbar
 - Stepper
-- Tooltip
 
 ## Usage
 
