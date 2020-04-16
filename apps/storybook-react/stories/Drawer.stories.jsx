@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
 // import { withKnobs, select } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Drawer, TopBar, Icon } from '@equinor/eds-core-react'
+import { Drawer, TopBar, Icon, Typography } from '@equinor/eds-core-react'
 
 import {
   account_circle,
   accessible,
   notifications,
   fullscreen,
-  grid_on,
+  menu,
 } from '@equinor/eds-icons'
 
 const { DrawerContainer, DrawerList, DrawerItem, DrawerSubtitle } = Drawer
@@ -19,7 +19,7 @@ const icons = {
   accessible,
   notifications,
   fullscreen,
-  grid_on,
+  menu,
 }
 
 Icon.add(icons)
@@ -61,7 +61,7 @@ export const Page = () => {
       <TopBar>
         <Header>
           {' '}
-          <Icon name="grid_on" size={16} />
+          <Icon name="menu" size={16} />
         </Header>
         <CustomContent>Drawer example</CustomContent>
         <Actions>
@@ -77,22 +77,93 @@ export const Page = () => {
         <Drawer>
           <DrawerContainer>
             <DrawerList level="grandparent">
-              <DrawerItem href="#">Label</DrawerItem>
-              <DrawerItem href="#">Label</DrawerItem>
-              <DrawerList level="parent">
-                <DrawerItem href="#">Label</DrawerItem>
-                <DrawerItem href="#">Label</DrawerItem>
-                <DrawerItem href="#">Label</DrawerItem>
-                <DrawerItem href="#">Label</DrawerItem>
-              </DrawerList>
-              <DrawerItem href="#">Label</DrawerItem>
-              <DrawerItem href="#">Label</DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent 1
+                </Typography>
+              </DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent 2
+                </Typography>
+                <DrawerList level="parent">
+                  <DrawerItem active>
+                    <Typography variant="body_short" link href={'#href'}>
+                      Parent 1 active
+                    </Typography>
+                  </DrawerItem>
+                  <DrawerItem>
+                    <Typography variant="body_short" link href={'#href'}>
+                      Parent 2
+                    </Typography>
+                  </DrawerItem>
+                  <DrawerItem>
+                    <Typography variant="body_short" link href={'#href'}>
+                      Parent 3
+                    </Typography>
+                  </DrawerItem>
+                  <DrawerItem>
+                    <Typography variant="body_short" link href={'#href'}>
+                      Parent 4
+                    </Typography>
+                    <DrawerList>
+                      <DrawerItem>
+                        <Typography variant="body_short" link href={'#href'}>
+                          Child 1
+                        </Typography>
+                      </DrawerItem>
+                      <DrawerItem>
+                        <Typography variant="body_short" link href={'#href'}>
+                          Child 2
+                        </Typography>
+                      </DrawerItem>
+                      <DrawerItem>
+                        <Typography variant="body_short" link href={'#href'}>
+                          Child 3
+                        </Typography>
+                      </DrawerItem>
+                      <DrawerItem>
+                        <Typography variant="body_short" link href={'#href'}>
+                          Child 4
+                        </Typography>
+                      </DrawerItem>
+                    </DrawerList>
+                  </DrawerItem>
+                </DrawerList>
+              </DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent 3
+                </Typography>
+              </DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent 4
+                </Typography>
+              </DrawerItem>
             </DrawerList>
+            <DrawerSubtitle name="Grandparent orphans" />
             <DrawerList level="grandparent">
-              <DrawerItem href="#">Label</DrawerItem>
-              <DrawerItem href="#">Label</DrawerItem>
-              <DrawerItem href="#">Label</DrawerItem>
-              <DrawerItem href="#">Label</DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent orphan 1
+                </Typography>
+              </DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent orphan 2
+                </Typography>
+              </DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent orphan 3
+                </Typography>
+              </DrawerItem>
+              <DrawerItem>
+                <Typography variant="body_short" link href={'#href'}>
+                  Grandparent orphan 4
+                </Typography>
+              </DrawerItem>
             </DrawerList>
           </DrawerContainer>
         </Drawer>

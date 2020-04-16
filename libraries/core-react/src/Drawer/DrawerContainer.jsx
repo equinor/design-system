@@ -5,7 +5,7 @@ import { drawer as tokens } from './Drawer.tokens'
 
 const { background, border } = tokens
 
-const StyledDrawerContainer = styled.div`
+const StyledDrawerContainer = styled.nav`
   background: ${background.backgroundColor};
   width: 254px;
   height: 100%;

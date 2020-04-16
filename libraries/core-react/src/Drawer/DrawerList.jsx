@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 
 const { background, border } = tokens
@@ -8,17 +8,33 @@ const { background, border } = tokens
 const StyledDrawerList = styled.ul`
   margin: 0;
   padding: 0;
-  background: ${background.backgroundColor};
+  background: ${background};
   width: 254px;
   border-right: ${border.right.width} solid ${border.right.color};
+
+  ${({ level }) =>
+    level === 'grandparent' &&
+    css`
+      > li > a {
+        border-left: none;
+      }
+    `}
+
+  ${({ level }) =>
+    level === 'parent' &&
+    css`
+      > li > a {
+        border-left: none;
+      }
+    `}
 `
 
 export const DrawerList = forwardRef(function EdsDrawerList(
-  { children, ...props },
+  { children, level, ...props },
   ref,
 ) {
   return (
-    <StyledDrawerList {...props} ref={ref}>
+    <StyledDrawerList {...props} level={level} ref={ref}>
       {children}
     </StyledDrawerList>
   )
@@ -31,9 +47,12 @@ DrawerList.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
+  /** Ancestor level */
+  level: PropTypes.oneOf(['child', 'parent', 'grandparent']),
 }
 
 DrawerList.defaultProps = {
   className: '',
   children: undefined,
+  level: 'child',
 }

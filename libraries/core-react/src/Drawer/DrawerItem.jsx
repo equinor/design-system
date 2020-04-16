@@ -1,33 +1,49 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { Typography, Icon } from '..'
+import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 
-const { background, itemBorder } = tokens
+const { itemHoverBackground, itemTypography, itemBorder, itemSpacings } = tokens
 
-const StyledDrawerItem = styled.li`
+const StyledDrawerItem = styled.li.attrs(({ level }) => ({
+  level,
+}))`
   margin: 0;
   padding: 0;
   margin-left: 56px;
-  padding-left: 14px;
-  font-size: 12px;
-  line-height: 16px;
-  padding-top: 16px;
-  padding-bottom: 16px;
   list-style: none;
-  border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
+
+  a {
+    font-size: ${itemTypography.fontSize};
+    line-height: ${itemTypography.lineHeight};
+    color: ${itemTypography.color};
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    padding-left: calc(${itemSpacings.top} - ${itemBorder.left.width});
+    padding-top: ${itemSpacings.top};
+    padding-bottom: ${itemSpacings.bottom};
+    border-left: ${itemBorder.left.width} solid ${itemBorder.left.color};
+
+    &:hover {
+      background: ${itemHoverBackground};
+    }
+
+    ${({ active }) =>
+      active &&
+      css`
+        font-weight: bold;
+      `}
+  }
 `
 
 export const DrawerItem = forwardRef(function EdsDrawerItem(
-  { children, href, ...rest },
+  { children, active, ...rest },
   ref,
 ) {
   return (
-    <StyledDrawerItem {...rest} href={href} ref={ref}>
-      <Typography variant="body_short" link href={href}>
-        {children}
-      </Typography>
+    <StyledDrawerItem {...rest} active={active} ref={ref}>
+      {children}
     </StyledDrawerItem>
   )
 })
@@ -39,14 +55,12 @@ DrawerItem.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
-  href: PropTypes.string,
-  /** Icon */
-  icon: PropTypes.string,
+  /** Active */
+  active: PropTypes.bool,
 }
 
 DrawerItem.defaultProps = {
   className: '',
   children: undefined,
-  href: '',
-  icon: undefined,
+  active: false,
 }
