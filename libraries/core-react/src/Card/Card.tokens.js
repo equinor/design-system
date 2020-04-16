@@ -10,7 +10,7 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium: spacingMedium, small: spacingSmall },
+    comfortable: { medium: spacingMedium },
   },
   shape: {
     corners: { minHeight, minWidth, borderRadius },
@@ -28,7 +28,6 @@ export const card = {
     bottom: spacingMedium,
     right: spacingMedium,
     top: spacingMedium,
-    small: spacingSmall,
   },
   background: {
     default: background,
