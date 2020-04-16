@@ -6,6 +6,9 @@ const {
       background__default: { rgba: whiteColor },
       background__light: { rgba: lightGrayColor },
     },
+    interactive: {
+      primary__resting: { rgba: activeColor },
+    },
   },
   spacings: { comfortable },
   typography: { navigation },
@@ -32,6 +35,9 @@ export const drawer = {
     fontWeight: navigation.label.fontWeight,
     lineHeight: navigation.label.lineHeight,
     color: navigation.label.color,
+  },
+  itemActive: {
+    color: activeColor,
   },
   border: {
     right: { color: lightGrayColor, width: '2px' },

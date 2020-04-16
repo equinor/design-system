@@ -9,12 +9,15 @@ const StyledDrawerList = styled.ul`
   margin: 0;
   padding: 0;
   background: ${background};
-  width: 254px;
-  border-right: ${border.right.width} solid ${border.right.color};
+  width: 256px;
+  border-right: none;
 
   ${({ level }) =>
     level === 'grandparent' &&
     css`
+      > li {
+        border-left: none;
+      }
       > li > a {
         border-left: none;
       }
@@ -23,6 +26,9 @@ const StyledDrawerList = styled.ul`
   ${({ level }) =>
     level === 'parent' &&
     css`
+      > li {
+        border-left: none;
+      }
       > li > a {
         border-left: none;
       }
