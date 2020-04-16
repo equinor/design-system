@@ -40,15 +40,19 @@ export default [
       polyfill(['focus-visible']),
     ],
     output: [
-      {
-        file: pkg.module,
-        name: pkg.name,
-        format: 'esm',
-        sourcemap: 'inline',
-        globals,
-      },
       { file: pkg.browser, name: pkg.name, format: 'umd', globals },
-      { file: pkg.main, format: 'cjs' },
+      ...(buildForStorybook
+        ? []
+        : [
+            {
+              file: pkg.module,
+              name: pkg.name,
+              format: 'esm',
+              sourcemap: 'inline',
+              globals,
+            },
+            { file: pkg.main, format: 'cjs' },
+          ]),
     ],
   },
 ]
