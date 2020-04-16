@@ -19,7 +19,7 @@ export function Example() {
 
   return (
     <Wrapper>
-      <Tooltip>
+      <Tooltip title="Tooltip">
         <Button>Anchor</Button>
       </Tooltip>
     </Wrapper>

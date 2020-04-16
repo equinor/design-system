@@ -11,15 +11,16 @@ const {
   },
   shape: {
     corners: { borderRadius },
-    caret: { minHeight, minWidth },
-  },
-  typography: {
-    ui: { tooltip: tooltipUi },
   },
 } = tokens
 
 export const tooltip = {
-  ...tooltipUi,
+  typography: {
+    color: '#fff',
+    fontFamily: 'Equinor',
+    fontSize: '12px',
+    lineHeight: '16px',
+  },
   background,
   spacings: {
     left: spacingSmall,
