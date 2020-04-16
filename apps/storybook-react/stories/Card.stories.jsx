@@ -230,44 +230,6 @@ export const CardHeaderVariants = () => {
   )
 }
 
-export const CardTextVariants = () => {
-  return (
-    <Wrapper tabIndex="0">
-      <Body>
-        <Typography variant="h4">CardText variants</Typography>
-        <Typography variant="body_short">Supporting text</Typography>
-        <Grid>
-          <Card>
-            <CardHeader>
-              <CardHeaderTitle>
-                <Typography variant="h5">Middle</Typography>
-                <Typography variant="body_short">
-                  Default spacing is 16px for middle blocks
-                </Typography>
-              </CardHeaderTitle>
-            </CardHeader>
-            <Typography variant="body_short">Card text middle</Typography>
-            <StyledDivider variant="medium" />
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardHeaderTitle>
-                <Typography variant="h5">Last</Typography>
-                <Typography variant="body_short">Last block</Typography>
-              </CardHeaderTitle>
-            </CardHeader>
-            <StyledDivider variant="medium" />
-            <Typography variant="body_short">
-              Default bottom spacing is 24px for last blocks (text or rich
-              media)
-            </Typography>
-          </Card>
-        </Grid>
-      </Body>
-    </Wrapper>
-  )
-}
-
 const CardMediafullWidth = () => (
   <CardMedia fullWidth>
     <img src="https://i.imgur.com/UM3mrju.jpg" alt="Image for representation" />
@@ -333,21 +295,6 @@ export const CardMediaVariants = () => {
               Default spacing is 16px between middle blocks
             </Typography>
           </Card>
-          <Card>
-            <CardHeader>
-              <CardHeaderTitle>
-                <Typography variant="h5">Last</Typography>
-                <Typography variant="body_short">
-                  To be used as last block
-                </Typography>
-              </CardHeaderTitle>
-            </CardHeader>
-
-            <Typography variant="body_short">
-              Default spacing is 24px for last blocks (text or rich media)
-            </Typography>
-            <CardMediaDefault />
-          </Card>
         </Grid>
       </Body>
     </Wrapper>
@@ -387,9 +334,6 @@ export const CardActionsVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
-        <Typography variant="body_short">
-          All card actions have default 16px bottom spacing
-        </Typography>
         <Grid>
           <Card>
             <CardHeader>

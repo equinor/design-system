@@ -10,7 +10,6 @@ const StyledCardActions = styled.div`
   grid-auto-columns: max-content;
   align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
-  margin-bottom: 0 !important;
 `
 
 export const CardActions = forwardRef(function EdsCardActions(

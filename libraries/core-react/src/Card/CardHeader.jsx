@@ -8,7 +8,6 @@ const StyledCardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0 !important;
 
   > :not(:first-child) {
     margin-left: ${tokens.spacings.left};

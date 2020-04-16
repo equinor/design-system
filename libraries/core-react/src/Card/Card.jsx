@@ -23,11 +23,6 @@ const StyledCard = styled.div`
   cursor: ${({ cursor }) => cursor};
 
   ${spacingsTemplate(spacings)}
-
-  /* Add an extra margin on bottom elements (only text and rich media content) */
-  > :last-child {
-    margin-bottom: ${spacings.small};
-  }
 `
 
 export const Card = forwardRef(function EdsCard(
