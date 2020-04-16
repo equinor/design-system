@@ -29,7 +29,7 @@ const StyledAccordionHeader = styled.div.attrs(
     'aria-disabled': isExpanded && disabled,
     tabIndex: disabled ? '-1' : '0',
   }),
-)(({ parentIndex, disabled, focusVisible }) => ({
+)(({ parentIndex, disabled }) => ({
   ...header,
   margin: 0,
   height: '48px',
@@ -42,11 +42,10 @@ const StyledAccordionHeader = styled.div.attrs(
   boxSizing: 'border-box',
   color: (disabled && headerColor.disabled) || headerColor.default,
   outline: 'none',
-  '&:focus': !disabled &&
-    focusVisible && {
-      outline,
-      outlineOffset,
-    },
+  '&[data-focus-visible-added]:focus': {
+    outline,
+    outlineOffset,
+  },
   '&:hover': !disabled && { background: headerBackground.hover },
   cursor: disabled ? 'not-allowed' : 'pointer',
   paddingLeft: '16px',
@@ -81,26 +80,18 @@ const AccordionHeader = forwardRef(function AccordionHeader(
     children,
     toggleExpanded,
     disabled,
-    focusVisible,
-    handleFocusVisible,
     ...props
   },
   ref,
 ) {
   const handleClick = () => {
-    handleFocusVisible(false)
     if (!disabled) {
       toggleExpanded()
     }
   }
 
-  const handleMouseDown = () => {
-    handleFocusVisible(false)
-  }
-
   const handleKeyDown = (event) => {
     const { key } = event
-    handleFocusVisible(true)
     if (key === 'Enter' || key === ' ') {
       toggleExpanded()
       event.preventDefault()
@@ -144,9 +135,7 @@ const AccordionHeader = forwardRef(function AccordionHeader(
       {...props}
       panelId={panelId}
       onClick={handleClick}
-      onMouseDown={handleMouseDown}
       onKeyDown={handleKeyDown}
-      focusVisible={focusVisible}
       ref={ref}
     >
       {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
@@ -170,10 +159,6 @@ AccordionHeader.propTypes = {
   parentIndex: PropTypes.number,
   /** accordion item is disabled */
   disabled: PropTypes.bool,
-  /** @ignore */
-  focusVisible: PropTypes.bool,
-  /** @ignore */
-  handleFocusVisible: PropTypes.func,
 }
 
 AccordionHeader.defaultProps = {
@@ -183,8 +168,6 @@ AccordionHeader.defaultProps = {
   isExpanded: false,
   parentIndex: null,
   disabled: false,
-  focusVisible: true,
-  handleFocusVisible: () => {},
 }
 
 export { AccordionHeader, AccordionHeaderTitle }

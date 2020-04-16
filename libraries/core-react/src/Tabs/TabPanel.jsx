@@ -5,6 +5,10 @@ import { tabPanel as tokens } from './Tabs.tokens'
 
 const {
   spacing: { top: paddingTop, bottom: paddingBottom },
+  focused: {
+    outline: { width: outlineWidth, style: outlineStyle, color: outlineColor },
+    outlineOffset,
+  },
 } = tokens
 
 const StyledTabPanel = styled.div.attrs(() => ({
@@ -13,6 +17,11 @@ const StyledTabPanel = styled.div.attrs(() => ({
 }))({
   paddingTop,
   paddingBottom,
+  outline: 'none',
+  '&[data-focus-visible-added]:focus': {
+    outline: `${outlineWidth} ${outlineStyle} ${outlineColor}`,
+    outlineOffset: `${outlineOffset}`,
+  },
 })
 
 const TabPanel = forwardRef(function TabPanel({ ...props }, ref) {

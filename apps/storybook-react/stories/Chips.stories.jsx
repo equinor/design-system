@@ -47,7 +47,7 @@ export const Examples = () => (
         error + deletable
       </Chip>
       <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
-        error + deletable
+        error + deletable + clickable
       </Chip>
       <Chip onClick={handleClick}>clickable</Chip>
       <Chip onDelete={handleDelete}>deletable</Chip>
@@ -83,7 +83,7 @@ export const Examples = () => (
       </Chip>
       <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
         <Icon name="save" />
-        error + deletable
+        error + deletable + clickable
       </Chip>
       <Chip onClick={handleClick}>
         <Icon name="save" />

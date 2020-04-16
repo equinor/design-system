@@ -17,6 +17,7 @@ const {
         style: outlineStyle,
         color: outlineColor,
       },
+      outlineOffset,
     },
   },
 } = tokens
@@ -24,6 +25,7 @@ const {
 const focusedStyles = css`
   z-index: 1;
   outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
+  outline-offset: ${outlineOffset};
 `
 
 const StyledTab = styled.button.attrs(({ active, disabled }) => ({
@@ -52,11 +54,12 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   &[data-focus] {
     ${focusedStyles}
   }
-
-  &:focus {
-    ${({ focusVisible }) => focusVisible && focusedStyles}
+  &[data-focus-visible-added]:focus {
+    ${focusedStyles}
   }
-
+  &::-moz-focus-inner {
+    border: 0;
+  }
   &[data-hover],
   &:hover {
     background-color: ${({ disabled }) =>

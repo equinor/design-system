@@ -22,6 +22,14 @@ const {
   },
 } = tokens
 
+const focused = {
+  outline: {
+    width: '1px',
+    style: 'dashed',
+    color: focusOutlineColor,
+  },
+  outlineOffset: '2px',
+}
 export const tab = {
   clickbound,
   spacing: {
@@ -51,13 +59,7 @@ export const tab = {
     hover: {
       backgroundColor: hoverBackgroundColor,
     },
-    focused: {
-      outline: {
-        width: '2px',
-        style: 'dashed',
-        color: focusOutlineColor,
-      },
-    },
+    focused,
     pressed: {},
     activated: {
       color: activeColor,
@@ -76,4 +78,5 @@ export const tabPanel = {
     top: spacingMedium,
     bottom: spacingMedium,
   },
+  focused,
 }
