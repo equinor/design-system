@@ -14,17 +14,14 @@ const {
   AccordionItem,
   AccordionHeader,
   AccordionHeaderTitle,
-  AccordionButton,
   AccordionPanel,
 } = Accordion
 
 Icon.add({ attach_file, notifications, edit, delete_to_trash })
 
 const Wrapper = styled.div`
-  margin: 32px;
-
-  & > h2 {
-    margin-top: 0.5em;
+  & > *:not(:first-child) {
+    margin-top: 16px;
   }
 `
 
@@ -32,6 +29,7 @@ const addMarginRightProp = () => ({ marginRight }) =>
   marginRight && { marginRight: `${marginRight}px` }
 
 const IconWithMarginProp = styled(Icon)(addMarginRightProp)
+const ButtonWithMarginProp = styled(Button)(addMarginRightProp)
 
 export default {
   title: 'Components|Accordion',
@@ -43,87 +41,62 @@ export default {
 
 export const simple = () => {
   return (
-    <Wrapper>
-      <Typography>Accordion example</Typography>
-      <Accordion>
-        <AccordionItem isExpanded>
-          <AccordionHeader>Header 1</AccordionHeader>
-          <AccordionPanel>Content 1</AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionHeader>Header 2</AccordionHeader>
-          <AccordionPanel>Content 2</AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionHeader>Header 3</AccordionHeader>
-          <AccordionPanel>Content 3</AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </Wrapper>
+    <Accordion>
+      <AccordionItem isExpanded>
+        <AccordionHeader>Header 1</AccordionHeader>
+        <AccordionPanel>Content 1</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem>
+        <AccordionHeader>Header 2</AccordionHeader>
+        <AccordionPanel>Content 2</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem>
+        <AccordionHeader>Header 3</AccordionHeader>
+        <AccordionPanel>Content 3</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   )
 }
 
 export const header = () => {
   return (
     <Wrapper>
-      <Typography>Header variations</Typography>
-
-      <Typography variant="h2">Chevron left</Typography>
-
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
-          <AccordionHeader>Header 1</AccordionHeader>
+          <AccordionHeader>Chevron left</AccordionHeader>
         </AccordionItem>
       </Accordion>
-
-      <Typography variant="h2">Chevron right</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem>
-          <AccordionHeader>Header 1</AccordionHeader>
+          <AccordionHeader>Chevron right</AccordionHeader>
         </AccordionItem>
       </Accordion>
-
-      <Typography variant="h2">Chevron right</Typography>
-
-      <Accordion headerLevel="h3" chevronPosition="right">
-        <AccordionItem>
-          <AccordionHeader>
-            <AccordionHeaderTitle>Header 1</AccordionHeaderTitle>
-          </AccordionHeader>
-        </AccordionItem>
-      </Accordion>
-
-      <Typography variant="h2">Chevron left expanded</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem isExpanded>
-          <AccordionHeader>Header 1</AccordionHeader>
+          <AccordionHeader>Chevron left expanded</AccordionHeader>
         </AccordionItem>
       </Accordion>
-
-      <Typography variant="h2">Disabled</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled>
-          <AccordionHeader>Header 1</AccordionHeader>
+          <AccordionHeader>Disabled</AccordionHeader>
         </AccordionItem>
       </Accordion>
-
-      <Typography variant="h2">Disabled expanded</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled isExpanded>
-          <AccordionHeader>Header 1</AccordionHeader>
+          <AccordionHeader>Disabled expanded</AccordionHeader>
         </AccordionItem>
       </Accordion>
-
-      <Typography variant="h2">Chevron left – custom icons right</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
-            <AccordionHeaderTitle>Header 1</AccordionHeaderTitle>
+            <AccordionHeaderTitle>
+              Chevron left – custom icons right
+            </AccordionHeaderTitle>
             <IconWithMarginProp
               name="attach_file"
               title="Attach file"
@@ -141,14 +114,12 @@ export const header = () => {
         </AccordionItem>
       </Accordion>
 
-      <Typography variant="h2">
-        Chevron left – interactive options right
-      </Typography>
-
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
-            <AccordionHeaderTitle>Header 1</AccordionHeaderTitle>
+            <AccordionHeaderTitle>
+              Chevron left – interactive options right
+            </AccordionHeaderTitle>
             <Button
               variant="ghost_icon"
               onClick={(event) => {
@@ -158,7 +129,8 @@ export const header = () => {
             >
               <Icon name="edit" title="Edit" />
             </Button>
-            <Button
+            <ButtonWithMarginProp
+              marginRight={-16}
               variant="ghost_icon"
               onClick={(event) => {
                 action('clicked delete button')(event)
@@ -166,12 +138,10 @@ export const header = () => {
               }}
             >
               <Icon name="delete_to_trash" title="Delete" />
-            </Button>
+            </ButtonWithMarginProp>
           </AccordionHeader>
         </AccordionItem>
       </Accordion>
-
-      <Typography variant="h2">Truncated text</Typography>
 
       <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>

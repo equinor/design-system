@@ -1,4 +1,4 @@
-import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
+import { Meta, Story, Props, Preview, Source } from '@storybook/addon-docs/blocks'
 import { Accordion, Typography } from '@equinor/eds-core-react'
 
 # Accordion
@@ -7,7 +7,75 @@ import { Accordion, Typography } from '@equinor/eds-core-react'
 
 See the [storefront](https://eds.equinor.com/components/accordion/) for details about this component
 
+<Preview withToolbar withSource="open">
+  <Story name="Accordion header" id="components-accordion--simple" />
+</Preview>
+
+## Child components
+
+The `<Accordion />` is a compound component, so in order to get to the child components you must either use destructuring or dot notation. 
+
+### Destructuring
+
+```jsx
+import { Accordion } from '@equinor/eds-core-react'
+
+const {
+  AccordionItem,
+  AccordionHeader,
+  AccordionHeaderTitle,
+  AccordionPanel,
+} = Accordion
+
+<Accordion>
+  <AccordionItem>
+    <AccordionHeader>Header 1</AccordionHeader>
+    <AccordionPanel>Content 1</AccordionPanel>
+  </AccordionItem>
+</Accordion>
+```
+
+### Dot notation
+
+```jsx
+import { Accordion } from '@equinor/eds-core-react'
+
+<Accordion>
+  <Accordion.AccordionItem>
+    <Accordion.AccordionHeader>Header 1</Accordion.AccordionHeader>
+    <Accordion.AccordionPanel>Content 1</Accordion.AccordionPanel>
+  </Accordion.AccordionItem>
+</Accordion>
+```
+
+In a simple Accordion where you only have a text-string in the header, you can ommit the `<AccordionHeaderTitle />` from `<AccordionHeader />` and it will be inserted for you. In more complex use cases however, where you have both text and components in the header, or where the title itself contains a component, you must wrap the title in `<AccordionHeaderTitle />`.
+
+```jsx
+<Accordion>
+  <AccordionItem>
+    <AccordionHeader>
+      <AccordionHeaderTitle>Header <em>1</em></AccordionHeaderTitle>
+      <IconWithMarginProp
+        name="attach_file"
+        title="Attach file"
+        size={16}
+        marginRight={32}
+        color="currentColor"
+      />
+      <Icon
+        name="notifications"
+        title="Notifications"
+        size={16}
+        color="currentColor"
+      />
+    </AccordionHeader>
+  </AccordionItem>
+</Accordion>
+```
+
 ## Props
+
+Both the `<Accordion />` and `<Accordion.AccordionItem />` components take props.
 
 ### Accordion
 
@@ -17,12 +85,10 @@ See the [storefront](https://eds.equinor.com/components/accordion/) for details 
 
 <Props of={Accordion.AccordionItem} />
 
-<Preview withToolbar withSource="open">
-  <Story name="Accordion header" id="components-accordion--simple" />
-</Preview>
+## Examples of props and custom header content
 
-<Preview withToolbar withSource="open">
-  <Story name="Accordion header" id="components-accordion--header" />
+<Preview>
+  <Story name="Accordion variants" id="components-accordion--header" />
 </Preview>
 
 
