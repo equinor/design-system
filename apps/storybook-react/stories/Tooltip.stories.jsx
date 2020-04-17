@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 24px;
+  grid-template-columns: repeat(3, fit-content(100%));
 `
 
 export default {
@@ -14,14 +15,33 @@ export default {
   component: Tooltip,
 }
 
-export function Example() {
+export function TooltipVariants() {
   const [toggle, setToggle] = useState(true)
 
   return (
-    <Wrapper>
-      <Tooltip title="Tooltip">
-        <Button>Anchor</Button>
-      </Tooltip>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Tooltip title="Tooltip" placement="topLeft">
+          <Button>Top left</Button>
+        </Tooltip>
+        <Tooltip title="Tooltip" placement="top">
+          <Button>Top</Button>
+        </Tooltip>
+        <Tooltip title="Tooltip" placement="topRight">
+          <Button>Top right</Button>
+        </Tooltip>
+      </Wrapper>
+      <Wrapper>
+        <Tooltip title="Tooltip" placement="bottomLeft">
+          <Button>Bottom left</Button>
+        </Tooltip>
+        <Tooltip title="Tooltip">
+          <Button>Bottom (default)</Button>
+        </Tooltip>
+        <Tooltip title="Tooltip" placement="bottomRight">
+          <Button>Bottom right</Button>
+        </Tooltip>
+      </Wrapper>
+    </>
   )
 }

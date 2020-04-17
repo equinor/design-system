@@ -7,7 +7,7 @@ import { tooltip as tokens } from './Tooltip.tokens'
 const Anchor = styled.div`
   position: relative;
   display: inline-block;
-  width: min-content;
+  width: auto;
   &:hover {
     > :last-child {
       display: block;
@@ -43,20 +43,28 @@ const Anchor = styled.div`
   } */
 `
 
-const StyledTooltip = styled.div`
+const StyledTooltipWrapper = styled.div`
   display: none;
-  background: #333333;
-  border-radius: 4px;
   position: absolute;
+  width: ${({ width }) => width};
   z-index: 1;
   bottom: -40px;
-
+  max-width: 300px;
+  right: ${({ right }) => right};
   ::after {
     content: '';
   }
+`
 
-  ${spacingsTemplate(tokens.spacings)}
+const StyledTooltip = styled.div`
   ${typographyTemplate(tokens.typography)}
+  ${spacingsTemplate(tokens.spacings)}
+  background: #333333;
+  border-radius: 4px;
+  width: min-content;
+  display: table;
+  margin: ${({ margin }) => margin};
+  position: relative;
 `
 
 const TooltipArrow = styled.div`
@@ -66,11 +74,14 @@ const TooltipArrow = styled.div`
   height: 8px;
   background: #333333;
   border-top-left-radius: 2px;
-  top: -4px;
+  left: ${({ left }) => left};
+  right: ${({ right }) => right};
+  top: ${({ top }) => top};
+  bottom: ${({ bottom }) => bottom};
 `
 
 export const Tooltip = forwardRef(function Tooltip(
-  { className, title, children, ...rest },
+  { className, title, children, placement, ...rest },
   ref,
 ) {
   const props = {
@@ -79,13 +90,31 @@ export const Tooltip = forwardRef(function Tooltip(
     ref,
   }
 
+  const wrapperProps = {
+    right: tokens.placement[placement].right,
+    width: tokens.placement[placement].width,
+  }
+
+  const tooltipProps = {
+    margin: tokens.placement[placement].margin,
+  }
+
+  const arrowProps = {
+    left: tokens.placement[placement].arrowLeft,
+    right: tokens.placement[placement].arrowRight,
+    top: tokens.placement[placement].arrowTop,
+    bottom: tokens.placement[placement].arrowBottom,
+  }
+
   return (
-    <Anchor>
+    <Anchor {...props}>
       {children}
-      <StyledTooltip>
-        <TooltipArrow />
-        {title}
-      </StyledTooltip>
+      <StyledTooltipWrapper {...wrapperProps}>
+        <StyledTooltip {...tooltipProps}>
+          <TooltipArrow {...arrowProps} />
+          {title}
+        </StyledTooltip>
+      </StyledTooltipWrapper>
     </Anchor>
   )
 })
