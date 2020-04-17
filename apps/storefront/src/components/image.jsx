@@ -18,7 +18,7 @@ const ImageBase = styled.img`
   background-color: #2c2c2c;
 `
 
-const Image = ({ url, ...other }) => {
+const Image = ({ url = '', ...other }) => {
   // StaticQuery does not support grapql queries so we have to for all videos and then find it....
   const data = useStaticQuery(graphql`
     {
@@ -36,8 +36,9 @@ const Image = ({ url, ...other }) => {
   let imageUrl = url
 
   if (url.startsWith('images') && data.allFile.edges.length > 0) {
+    const src = decodeURI(url).toLowerCase()
     const image = data.allFile.edges.find(
-      ({ node }) => node.relativePath.toLowerCase() === url.toLowerCase(),
+      ({ node }) => node.relativePath.toLowerCase() === src,
     )
     imageUrl = image ? image.node.publicURL : undefined
   }
