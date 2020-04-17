@@ -41,7 +41,8 @@ const Wrapper = styled.div`
 `
 
 const Body = styled.div`
-  height: 750px;
+  height: 100%;
+  min-height: 750px;
   background: #ebebeb;
   display: flex;
   flex-direction: column;
@@ -62,6 +63,8 @@ export default {
   title: 'Components|Drawer',
   component: Drawer,
 }
+
+const menu_items = []
 
 export const Page = () => {
   return (
@@ -155,16 +158,6 @@ export const Page = () => {
                           Child 2
                         </Typography>
                       </DrawerItem>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 3
-                        </Typography>
-                      </DrawerItem>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 4
-                        </Typography>
-                      </DrawerItem>
                     </DrawerList>
                   </DrawerItem>
                 </DrawerList>
@@ -172,6 +165,18 @@ export const Page = () => {
               <DrawerItem>
                 <Icon name="notifications" size={16} />
                 <Typography variant="body_short">Grandparent 3</Typography>
+                <DrawerList level="parent">
+                  <DrawerItem>
+                    <Typography variant="body_short">Parent 1</Typography>
+                    <DrawerList>
+                      <DrawerItem>
+                        <Typography variant="body_short" link href={'#href'}>
+                          Child 1
+                        </Typography>
+                      </DrawerItem>
+                    </DrawerList>
+                  </DrawerItem>
+                </DrawerList>
               </DrawerItem>
             </DrawerList>
             <DrawerSubtitle name="Grandparent orphans" />

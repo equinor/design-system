@@ -12,6 +12,14 @@ const StyledDrawerList = styled.ul`
   width: 256px;
   border-right: none;
 
+  ${({ open }) =>
+    !open &&
+    css`
+      > li ul {
+        display: none;
+      }
+    `}
+
   ${({ level }) =>
     level === 'grandparent' &&
     css`
@@ -36,11 +44,11 @@ const StyledDrawerList = styled.ul`
 `
 
 export const DrawerList = forwardRef(function EdsDrawerList(
-  { children, level, ...props },
+  { children, level, open, ...props },
   ref,
 ) {
   return (
-    <StyledDrawerList {...props} level={level} ref={ref}>
+    <StyledDrawerList {...props} level={level} open={open} ref={ref}>
       {children}
     </StyledDrawerList>
   )
@@ -55,10 +63,12 @@ DrawerList.propTypes = {
   children: PropTypes.node,
   /** Ancestor level */
   level: PropTypes.oneOf(['child', 'parent', 'grandparent']),
+  open: PropTypes.bool,
 }
 
 DrawerList.defaultProps = {
   className: '',
   children: undefined,
   level: 'child',
+  open: false,
 }
