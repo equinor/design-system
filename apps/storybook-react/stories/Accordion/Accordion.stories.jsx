@@ -97,12 +97,12 @@ export const header = () => {
             <AccordionHeaderTitle>
               Chevron left – custom icons right
             </AccordionHeaderTitle>
-            <IconWithMarginProp
+            <Icon
               name="attach_file"
               title="Attach file"
               size={16}
-              marginRight={32}
               color="currentColor"
+              style={{ marginRight: '32px' }}
             />
             <Icon
               name="notifications"
@@ -129,16 +129,16 @@ export const header = () => {
             >
               <Icon name="edit" title="Edit" />
             </Button>
-            <ButtonWithMarginProp
-              marginRight={-16}
+            <Button
               variant="ghost_icon"
               onClick={(event) => {
                 action('clicked delete button')(event)
                 event.stopPropagation()
               }}
+              style={{ marginRight: '-16px' }}
             >
               <Icon name="delete_to_trash" title="Delete" />
-            </ButtonWithMarginProp>
+            </Button>
           </AccordionHeader>
         </AccordionItem>
       </Accordion>
