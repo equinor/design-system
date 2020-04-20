@@ -48,9 +48,12 @@ const StyledTooltipWrapper = styled.div`
   position: absolute;
   width: ${({ width }) => width};
   z-index: 1;
-  bottom: -40px;
+  top: ${({ top }) => top};
+  bottom: ${({ bottom }) => bottom};
   max-width: 300px;
   right: ${({ right }) => right};
+  left: ${({ left }) => left};
+  transform: ${({ transform }) => transform};
   ::after {
     content: '';
   }
@@ -91,8 +94,12 @@ export const Tooltip = forwardRef(function Tooltip(
   }
 
   const wrapperProps = {
-    right: tokens.placement[placement].right,
+    right: tokens.placement[placement].tooltipRight,
     width: tokens.placement[placement].width,
+    top: tokens.placement[placement].tooltipTop,
+    bottom: tokens.placement[placement].tooltipBottom,
+    left: tokens.placement[placement].tooltipLeft,
+    transform: tokens.placement[placement].transform,
   }
 
   const tooltipProps = {
