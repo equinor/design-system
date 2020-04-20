@@ -25,7 +25,8 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build:for-storybook": "rollup -c --environment STORYBOOK",
+    "dev": "rollup -c -w --environment STORYBOOK",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -42,6 +43,7 @@
     "@babel/preset-react": "^7.7.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
+    "babel-plugin-react-docgen": "^4.1.0",
     "babel-plugin-styled-components": "^1.10.6",
     "jest": "^24.9.0",
     "jest-styled-components": "^6.3.4",

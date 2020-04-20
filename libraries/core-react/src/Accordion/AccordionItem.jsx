@@ -54,11 +54,11 @@ AccordionItem.displayName = 'eds-accordion-item'
 
 AccordionItem.propTypes = {
   ...commonPropTypes,
-  /** The ID of the Accordion */
+  /** @ignore */
   accordionId: PropTypes.string,
   /** Is AccordionItem expanded */
   isExpanded: PropTypes.bool,
-  /** The AccordionItem’s index in the Accordion */
+  /** @ignore */
   index: PropTypes.number,
   /** @ignore */
   children: PropTypes.node.isRequired,
