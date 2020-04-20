@@ -4,8 +4,8 @@ import { Slider, Button, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
 const Body = styled.div`
-  height: calc(100vh - 64px);
-  background: #ebebeb;
+  /* height: calc(100vh - 64px); */
+  /* background: #ebebeb; */
   display: grid;
   grid-template-rows: 1fr auto 1fr;
   padding: 32px;
@@ -17,7 +17,7 @@ export default {
   component: Slider,
 }
 
-export const Page = () => {
+export const Examples = () => {
   return (
     <Body>
       <Slider />
