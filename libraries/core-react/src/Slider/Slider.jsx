@@ -8,16 +8,24 @@ const Wrapper = styled.div`
   grid-template-rows: repeat(2, max-content) 12px;
   grid-template-columns: 1fr 1fr;
   margin: 1em auto;
-  width: auto;
-  overflow: hidden;
+  width: 100%;
+  /* overflow: hidden; */
   position: relative;
-  --a: ${(props) => props.valA}%;
-  --b: ${(props) => props.valB}%;
+  --a: ${(props) => props.valA};
+  --b: ${(props) => props.valB};
   --min: ${(props) => props.min};
   --max: ${(props) => props.max};
   --range-color: #a8739d;
-  background: linear-gradient(0deg, #f7f7f7 4px, transparent 0);
-  --track-background: linear-gradient(
+  --dif: calc(var(--max) - var(--min));
+  background: linear-gradient(
+    0deg,
+    #fff,
+    #fff 4px,
+    #f7f7f7 4px,
+    #f7f7f7 8px,
+    transparent 0
+  );
+  /* --track-background: linear-gradient(
       to right,
       #f7f7f7 var(--a),
       var(--range-color) 0,
@@ -25,8 +33,35 @@ const Wrapper = styled.div`
       #f7f7f7 0
     )
     no-repeat 0 100% / 100% 100%;
-  background: var(--track-background);
+  background: var(--track-background); */
   border-radius: 4px;
+  &::before,
+  &::after {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    height: 4px;
+    margin-bottom: 4px;
+    background: #007079;
+    align-self: end;
+    content: '';
+  }
+  &::before {
+    /*  margin-left: calc((var(--a) - var(--min)) / var(--dif) * 100%);
+    width: calc((var(--b) - var(--a)) / var(--dif) * 100%); */
+    margin-left: calc(
+      6px + (var(--a) - var(--min)) / var(--dif) * calc(100% - 12px)
+    );
+    width: calc((var(--b) - var(--a)) / var(--dif) * calc(100% - 12px));
+  }
+
+  &::after {
+    /*  margin-left: calc((var(--b) - var(--min)) / var(--dif) * 100%);
+    width: calc((var(--a) - var(--b)) / var(--dif) * 100%); */
+    margin-left: calc(
+      6px + (var(--b) - var(--min)) / var(--dif) * calc(100% - 12px)
+    );
+    width: calc((var(--a) - var(--b)) / var(--dif) * calc(100% - 12px));
+  }
 `
 const Output = styled.output`
  /*  position: absolute;
@@ -59,6 +94,7 @@ const StyledSlider = styled.input`
     outline: none;
     &::-webkit-slider-thumb {
       outline: dotted 1px currentcolor;
+      outline-offset: 2px;
       /*  background: darkorange; */
     }
     & + output {
@@ -78,9 +114,6 @@ const StyledSlider = styled.input`
     margin-top: 0;
 
     pointer-events: auto;
-    &:focus {
-      border-color: darkorange;
-    }
   }
 
   ::-webkit-slider-runnable-track {
