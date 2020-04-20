@@ -73,10 +73,10 @@ const StyledTooltip = styled.div`
 const TooltipArrow = styled.div`
   position: absolute;
   transform: rotate(45deg);
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background: #333333;
-  border-top-left-radius: 2px;
+  border-radius: 2px;
   left: ${({ left }) => left};
   right: ${({ right }) => right};
   top: ${({ top }) => top};
