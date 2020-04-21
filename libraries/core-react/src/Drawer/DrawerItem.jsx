@@ -1,7 +1,15 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { chevron_right } from '@equinor/eds-icons'
+import { Icon } from '..'
 import { drawer as tokens } from './Drawer.tokens'
+
+const icons = {
+  chevron_right,
+}
+
+Icon.add(icons)
 
 const {
   itemHoverBackground,
@@ -11,24 +19,34 @@ const {
   itemSpacings,
 } = tokens
 
-const StyledDrawerItem = styled.li.attrs(({ level }) => ({
-  level,
-}))`
+const StyledDrawerItem = styled.li`
   margin: 0;
   padding: 0;
-  margin-left: 16px;
   list-style: none;
+  width: auto;
+  position: relative;
   border-left: ${itemBorder.left.width} solid ${itemBorder.left.color};
 
-/*
   &:hover {
     background: ${itemHoverBackground};
-  } */
+  }
 
   svg {
     display: inline-block;
     width: 16px;
     vertical-align: middle;
+  }
+
+  svg.child_icon {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  ul {
+    width: auto;
   }
 
   p {
@@ -38,7 +56,7 @@ const StyledDrawerItem = styled.li.attrs(({ level }) => ({
     text-decoration: none;
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 32px);
+    width: calc(100% - 48px);
     padding-left: calc(${itemSpacings.top} - ${itemBorder.left.width});
     padding-top: ${itemSpacings.top};
     padding-bottom: ${itemSpacings.bottom};
@@ -87,9 +105,17 @@ export const DrawerItem = forwardRef(function EdsDrawerItem(
   { children, active, ...rest },
   ref,
 ) {
-  console.log(children)
+  // const [state, setState] = useState({
+  //   hasLink: false,
+  //   hasChildren: false,
+  // })
+  // console.log(children, rest)
+
   return (
     <StyledDrawerItem {...rest} active={active} ref={ref}>
+      {children.length > 1 && (
+        <Icon className="child_icon" name="chevron_right" size={16} />
+      )}
       {children}
     </StyledDrawerItem>
   )

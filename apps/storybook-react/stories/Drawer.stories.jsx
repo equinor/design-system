@@ -15,7 +15,13 @@ import {
   world,
 } from '@equinor/eds-icons'
 
-const { DrawerContainer, DrawerList, DrawerItem, DrawerSubtitle } = Drawer
+const {
+  DrawerContainer,
+  DrawerList,
+  DrawerTreeItem,
+  DrawerItem,
+  DrawerSubtitle,
+} = Drawer
 const { Header, CustomContent } = TopBar
 
 const icons = {
@@ -109,10 +115,10 @@ export const Page = () => {
               <DrawerItem>
                 <Icon name="accessible" size={16} />
                 <Typography variant="body_short">Grandparent 2</Typography>
-                <DrawerList level="parent">
+                <DrawerList level="parent" open>
                   <DrawerItem>
                     <Typography variant="body_short">Parent 1</Typography>
-                    <DrawerList>
+                    <DrawerList open>
                       <DrawerItem active>
                         <Typography variant="body_short" link href={'#href'}>
                           Child 1 active
@@ -185,24 +191,6 @@ export const Page = () => {
                 <Icon name="business" size={16} />
                 <Typography variant="body_short">
                   Grandparent orphans 1
-                </Typography>
-                <DrawerList>
-                  <DrawerItem>
-                    <Typography variant="body_short" link href={'#href'}>
-                      Child 1
-                    </Typography>
-                  </DrawerItem>
-                  <DrawerItem>
-                    <Typography variant="body_short" link href={'#href'}>
-                      Child 2
-                    </Typography>
-                  </DrawerItem>
-                </DrawerList>
-              </DrawerItem>
-              <DrawerItem>
-                <Icon name="meeting_room" size={16} />
-                <Typography variant="body_short">
-                  Grandparent orphans 2
                 </Typography>
                 <DrawerList>
                   <DrawerItem>

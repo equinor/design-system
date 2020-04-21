@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
@@ -12,13 +12,9 @@ const StyledDrawerList = styled.ul`
   width: 256px;
   border-right: none;
 
-  ${({ open }) =>
-    !open &&
-    css`
-      > li ul {
-        display: none;
-      }
-    `}
+  li {
+    padding-left: 16px;
+  }
 
   ${({ level }) =>
     level === 'grandparent' &&
@@ -41,15 +37,40 @@ const StyledDrawerList = styled.ul`
         border-left: none;
       }
     `}
+
+  ${({ level }) =>
+    level === 'child' &&
+    css`
+      > li {
+        margin-left: 16px;
+        padding-left: 0;
+      }
+    `}
 `
 
 export const DrawerList = forwardRef(function EdsDrawerList(
   { children, level, open, ...props },
   ref,
 ) {
+  const [drawerOpen, setDrawerOpen] = useState(open)
+
+  const handleOnClick = (event, index) => {
+    console.log('click', event.target, index)
+    setDrawerOpen(!drawerOpen)
+  }
+
+  const ListItems = React.Children.map(children, (child, index) => {
+    return React.cloneElement(child, {
+      index,
+      onClick: (event) => handleOnClick(event, index),
+    })
+  })
+
+  console.log(drawerOpen, ListItems)
+
   return (
     <StyledDrawerList {...props} level={level} open={open} ref={ref}>
-      {children}
+      {(drawerOpen || level === 'grandparent') && ListItems}
     </StyledDrawerList>
   )
 })
@@ -63,6 +84,7 @@ DrawerList.propTypes = {
   children: PropTypes.node,
   /** Ancestor level */
   level: PropTypes.oneOf(['child', 'parent', 'grandparent']),
+  /** Open or collapsed */
   open: PropTypes.bool,
 }
 
