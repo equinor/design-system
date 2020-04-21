@@ -5,7 +5,7 @@ import { slider as tokens } from './Slider.tokens'
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: repeat(2, max-content) 12px;
+  grid-template-rows: repeat(2, max-content) 12px 16px;
   grid-template-columns: 1fr 1fr;
   margin: 1em auto;
   width: 100%;
@@ -20,20 +20,11 @@ const Wrapper = styled.div`
   background: linear-gradient(
     0deg,
     #fff,
-    #fff 4px,
-    #f7f7f7 4px,
-    #f7f7f7 8px,
+    #fff 20px,
+    #f7f7f7 20px,
+    #f7f7f7 24px,
     transparent 0
   );
-  /* --track-background: linear-gradient(
-      to right,
-      #f7f7f7 var(--a),
-      var(--range-color) 0,
-      var(--range-color) var(--b),
-      #f7f7f7 0
-    )
-    no-repeat 0 100% / 100% 100%;
-  background: var(--track-background); */
   border-radius: 4px;
   &::before,
   &::after {
@@ -66,10 +57,38 @@ const Wrapper = styled.div`
 const Output = styled.output`
  /*  position: absolute;
   top: 20px; */
-  &:last-child { text-align: right; }
-  grid-row: 2;
+  width: fit-content;
+  background: white;
+  position: relative;
+  z-index: 1;
+  
+  --val: ${(props) => props.value};
+  color: #6F6F6F;
+  font-size: 10px;
+  margin-top: 6px;
+
+ /*  &:last-child { text-align: right; } */
+  grid-row: 4;
+  grid-column: 1 / 3;
+  margin-left: calc(
+       (var(--val) - var(--min)) / var(--dif) * calc(100% - 12px)
+    ); 
  /*  left: ${(props) => props.left}px; */
 `
+const MinMaxValue = styled.span`
+  grid-row: 4;
+  font-size: 10px;
+  color: #6f6f6f;
+  position: absolute;
+  left: 0;
+  text-align: left;
+  margin-top: 6px;
+  &:last-child {
+    left: auto;
+    right: 0;
+  }
+`
+
 const WrapperLabel = styled.div`
   grid-row: 1;
   padding: 1rem 0;
@@ -81,6 +100,7 @@ const StyledSlider = styled.input`
   background: transparent;
   grid-column: 1 / 3;
   grid-row: 3;
+
   background: none; /* get rid of white Chrome background */
   color: #000;
   font: inherit; /* fix too small font-size in both Chrome & Firefox */
@@ -98,7 +118,7 @@ const StyledSlider = styled.input`
       /*  background: darkorange; */
     }
     & + output {
-      color: darkorange;
+      /* color: darkorange; */
     }
   }
   &:hover,
@@ -107,6 +127,22 @@ const StyledSlider = styled.input`
       box-shadow: 0px 0px 0px 6px #deedee;
       /*  background: darkorange; */
     }
+  }
+  &:before,
+  &:after {
+    content: ' ';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 100%;
+    margin-top: 2px;
+    position: absolute;
+    z-index: 0;
+  }
+  &:after {
+    right: 0;
   }
 
   /* Otherwise white in Chrome */
@@ -118,7 +154,9 @@ const StyledSlider = styled.input`
     border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
+    position: relative;
     margin-top: 0;
+    z-index: 1;
 
     pointer-events: auto;
   }
@@ -180,9 +218,10 @@ export const Slider = forwardRef(function EdsSlider(
           setValueA(event.target.value)
         }}
       />
-      <Output for="a" left="5">
+      <Output for="a" value={valueA} min={min}>
         {outputFunction ? outputFunction(valueA) : valueA}
       </Output>
+      <MinMaxValue>{min}</MinMaxValue>
       <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
       <StyledSlider
         type="range"
@@ -195,9 +234,10 @@ export const Slider = forwardRef(function EdsSlider(
           setValueB(event.target.value)
         }}
       />
-      <Output for="b" left="45">
+      <Output for="b" value={valueB} min={min}>
         {outputFunction ? outputFunction(valueB) : valueB}
       </Output>
+      <MinMaxValue>{max}</MinMaxValue>
     </Wrapper>
   )
 })
