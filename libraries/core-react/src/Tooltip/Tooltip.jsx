@@ -8,46 +8,20 @@ const Anchor = styled.div`
   position: relative;
   display: inline-block;
   width: auto;
-  &:hover {
+  &:hover,
+  &:focus,
+  &:focus-within {
     > :last-child {
       display: block;
     }
   }
-
-  /* > * div {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -60px;
-    &:hover {
-      visibility: visible;
-    }
-    &::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: black transparent transparent transparent;
-    }
-  } */
 `
 
 const StyledTooltipWrapper = styled.div`
   display: none;
   position: absolute;
   width: ${({ width }) => width};
-  z-index: 1;
+  z-index: 500;
   top: ${({ top }) => top};
   bottom: ${({ bottom }) => bottom};
   max-width: 300px;
@@ -62,21 +36,21 @@ const StyledTooltipWrapper = styled.div`
 const StyledTooltip = styled.div`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
-  background: #333333;
-  border-radius: 4px;
+  background: ${tokens.background};
+  fill: ${tokens.background};
+  border-radius: ${tokens.borderRadius};
   width: min-content;
   display: table;
   margin: ${({ margin }) => margin};
   position: relative;
 `
 
-const TooltipArrow = styled.div`
+const TooltipArrow = styled.svg`
   position: absolute;
-  transform: rotate(45deg);
-  width: 10px;
-  height: 10px;
-  background: #333333;
-  border-radius: 2px;
+  width: 8px;
+  height: 8px;
+  fill: inherit;
+  transform: ${({ transform }) => transform};
   left: ${({ left }) => left};
   right: ${({ right }) => right};
   top: ${({ top }) => top};
@@ -111,6 +85,7 @@ export const Tooltip = forwardRef(function Tooltip(
     right: tokens.placement[placement].arrowRight,
     top: tokens.placement[placement].arrowTop,
     bottom: tokens.placement[placement].arrowBottom,
+    transform: tokens.placement[placement].arrowTransform,
   }
 
   return (
@@ -118,7 +93,9 @@ export const Tooltip = forwardRef(function Tooltip(
       {children}
       <StyledTooltipWrapper {...wrapperProps}>
         <StyledTooltip {...tooltipProps}>
-          <TooltipArrow {...arrowProps} />
+          <TooltipArrow {...arrowProps}>
+            <path d="M4.83205 4.75192C4.43623 5.34566 3.56377 5.34566 3.16795 4.75192L1.44988e-07 -1.88344e-07L8 0L4.83205 4.75192Z" />
+          </TooltipArrow>
           {title}
         </StyledTooltip>
       </StyledTooltipWrapper>
