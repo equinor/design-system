@@ -101,6 +101,13 @@ const StyledSlider = styled.input`
       color: darkorange;
     }
   }
+  &:hover,
+  &:active {
+    &::-webkit-slider-thumb {
+      box-shadow: 0px 0px 0px 6px #deedee;
+      /*  background: darkorange; */
+    }
+  }
 
   /* Otherwise white in Chrome */
   ::-webkit-slider-thumb {
@@ -128,15 +135,26 @@ const SrOnlyLabel = styled.label`
   clip-path: inset(50%);
 `
 
-export const Slider = forwardRef(function EdsSlider({ ...rest }, ref) {
+export const Slider = forwardRef(function EdsSlider(
+  {
+    label = '',
+    min = 0,
+    max = 100,
+    value = [40, 60],
+    outputFunction,
+    step = 1,
+    ...rest
+  },
+  ref,
+) {
   // @TODO: Some counter prefix id to avoid duplicate id's
 
   // At least some internal state for now to avoid both handles on top of each other at init
-  // @TODO refactor to value hook
-  const [valueA, setValueA] = useState('40')
-  const [valueB, setValueB] = useState('60')
-  const min = '0'
-  const max = '100'
+
+  // Let's just assume a two numbers array for now
+  /*  console.log('Test output', valueB, outputFunction(valueB)) */
+  const [valueA, setValueA] = useState(value[0])
+  const [valueB, setValueB] = useState(value[1])
 
   return (
     <Wrapper
@@ -149,7 +167,7 @@ export const Slider = forwardRef(function EdsSlider({ ...rest }, ref) {
       max={max}
       min={min}
     >
-      <WrapperLabel id="wrapperLabel">Range slider label</WrapperLabel>
+      <WrapperLabel id="wrapperLabel">{label}</WrapperLabel>
       <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
       <StyledSlider
         type="range"
@@ -157,12 +175,13 @@ export const Slider = forwardRef(function EdsSlider({ ...rest }, ref) {
         max={max}
         min={min}
         id="a"
+        step={step}
         onChange={(event) => {
           setValueA(event.target.value)
         }}
       />
       <Output for="a" left="5">
-        {valueA}
+        {outputFunction ? outputFunction(valueA) : valueA}
       </Output>
       <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
       <StyledSlider
@@ -171,12 +190,13 @@ export const Slider = forwardRef(function EdsSlider({ ...rest }, ref) {
         min={min}
         max={max}
         id="b"
+        step={step}
         onChange={(event) => {
           setValueB(event.target.value)
         }}
       />
-      <Output for="a" left="45">
-        {valueB}
+      <Output for="b" left="45">
+        {outputFunction ? outputFunction(valueB) : valueB}
       </Output>
     </Wrapper>
   )
@@ -187,12 +207,10 @@ Slider.displayName = 'eds-Slider'
 Slider.propTypes = {
   /** @ignore */
   className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node,
-  /** Function to handle closing scrim */
-  onClose: PropTypes.func,
-  /** Whether scrim can be dismissed with esc key */
-  isDismissable: PropTypes.bool,
+  /** Label for the slider group */
+  label: PropTypes.string.isRequired,
+  /** Stepping interval */
+  step: PropTypes.number,
 }
 
 Slider.defaultProps = {
