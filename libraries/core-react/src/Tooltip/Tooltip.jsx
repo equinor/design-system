@@ -18,16 +18,15 @@ const Anchor = styled.div`
 `
 
 const StyledTooltipWrapper = styled.div`
-  display: none;
-  position: absolute;
   width: ${({ width }) => width};
-  z-index: 500;
   top: ${({ top }) => top};
   bottom: ${({ bottom }) => bottom};
-  max-width: 300px;
   right: ${({ right }) => right};
   left: ${({ left }) => left};
   transform: ${({ transform }) => transform};
+  display: none;
+  position: absolute;
+  z-index: 500;
   ::after {
     content: '';
   }
@@ -39,22 +38,23 @@ const StyledTooltip = styled.div`
   background: ${tokens.background};
   fill: ${tokens.background};
   border-radius: ${tokens.borderRadius};
-  width: min-content;
-  display: table;
-  margin: ${({ margin }) => margin};
+  min-height: 32px;
+  box-sizing: border-box;
+  width: max-content;
   position: relative;
+  margin: ${({ margin }) => margin};
 `
 
 const TooltipArrow = styled.svg`
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  fill: inherit;
   transform: ${({ transform }) => transform};
   left: ${({ left }) => left};
   right: ${({ right }) => right};
   top: ${({ top }) => top};
   bottom: ${({ bottom }) => bottom};
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  fill: inherit;
 `
 
 export const Tooltip = forwardRef(function Tooltip(
@@ -108,18 +108,18 @@ Tooltip.displayName = 'eds-tooltip'
 Tooltip.propTypes = {
   // Tooltip placement
   placement: PropTypes.oneOf([
-    'topStart',
+    'topLeft',
     'top',
-    'topEnd',
-    'rightStart',
+    'topRight',
+    'rightTop',
     'right',
-    'rightEnd',
-    'bottomStart',
+    'rightBottom',
+    'bottomLeft',
     'bottom',
-    'bottomEnd',
-    'leftStart',
+    'bottomRight',
+    'leftTop',
     'left',
-    'leftEnd',
+    'leftBottom',
   ]),
   // Tooltip title
   title: PropTypes.string,
