@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
+import { useCombinedRefs } from '../_common'
 
 const {
   enabled: { elevation, background },
@@ -34,21 +35,79 @@ const StyledMenu = styled.ul.attrs({ role: 'menu' })`
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { anchorEl, ...rest },
+  { anchorEl, children, ...rest },
   ref,
 ) {
+  const [focusedMenuItem, setfocusedMenuItem] = React.useState(0)
+
   if (!anchorEl) {
     return undefined
   }
-  const rect = anchorEl ? anchorEl.getBoundingClientRect() : null
+
+  const rect = anchorEl.getBoundingClientRect()
+
+  // anchorEl.onclick(() => console.log('clicked'))
+
+  // const focusRef = (node) => {
+  //   debugger
+  //   if (node !== null) {
+  //     node.focus()
+  //   }
+  // }
+
+  // useEffect(() => {}, [focusedMenuItem])
+
+  const children_ = React.Children.map(children, (child, index) => {
+    // const menuItemRef =
+    //   index === focusedMenuItem
+    //     ? useCombinedRefs(child.ref, focusRef)
+    //     : child.ref
+
+    return React.cloneElement(child, {
+      _index: index,
+      // ref: menuItemRef,
+    })
+  })
+
+  const focusableChildren = children_
+    .filter((x) => !x.props.disabled)
+    .map((x) => x.props._index)
+
+  const firstFocusableChild = focusableChildren[0]
+  const lastFocusableChild = focusableChildren[focusableChildren.length - 1]
+
+  const handleMenuItemChange = (direction, fallbackItem) => {
+    const i = direction === 'down' ? 1 : -1
+    const currentMenuItemIndex = focusableChildren.indexOf(focusedMenuItem)
+    const nextMenuItem = focusableChildren[currentMenuItemIndex + i]
+    const nextFocus = nextMenuItem === undefined ? fallbackItem : nextMenuItem
+    console.log('menuItem', nextFocus)
+    setfocusedMenuItem(nextFocus)
+  }
+
+  const handleKeyPress = (event) => {
+    const { key } = event
+    console.log('keyEvent', key)
+
+    if (key === 'ArrowDown') {
+      handleMenuItemChange('down', firstFocusableChild)
+    }
+    if (key === 'ArrowUp') {
+      handleMenuItemChange('up', lastFocusableChild)
+    }
+  }
+
   const props = {
     ...rest,
     top: rect && rect.y,
     left: rect.y,
   }
+
   return (
     <Paper>
-      <StyledMenu {...props} ref={ref} />
+      <StyledMenu onKeyDown={handleKeyPress} {...props} ref={ref}>
+        {children}
+      </StyledMenu>
     </Paper>
   )
 })

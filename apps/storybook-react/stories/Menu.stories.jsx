@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   margin: 32px;
 `
 
-const Forced = styled.div`
+const Forced = styled.div.attrs({ tabIndex: 0 })`
   background: lightgrey;
   padding: 8px;
   width: min-content;
@@ -37,139 +37,124 @@ export default {
   decorators: [withKnobs],
 }
 
-const handleOnChange = action('onChange')
-
 export const Preview = () => {
-  const anchorRef = React.useRef(null)
   const [anchorEl, setAnchorEl] = React.useState(null)
+  const anchorRef = React.useRef()
 
-  // Forcing open menu on render
-  useEffect(() => {
-    if (anchorEl === null && anchorRef.current) {
-      setAnchorEl(anchorRef.current)
-    }
-    return () => {}
-  })
+  useEffect(() => setAnchorEl(anchorRef.current), [anchorRef.current])
 
   return (
-    <div>
-      <Wrapper>
-        <Typography variant="h4">Menu</Typography>
-        <Forced ref={anchorRef}>Attached to some anchor</Forced>
-        <Menu id="menu0" aria-labelledby="menu-button0" anchorEl={anchorEl}>
-          <MenuItem>
+    <Wrapper>
+      <Typography variant="h4">Menu</Typography>
+      <Forced id="anchor-test" ref={anchorRef}>
+        Attached to some anchor
+      </Forced>
+      <Menu id="menu0" anchorEl={anchorEl}>
+        <MenuItem>
+          <MenuLabel>
             <MenuLabel>
-              <MenuLabel>
-                <Icon name="folder" />
-              </MenuLabel>
+              <Icon name="folder" />
             </MenuLabel>
-            <MenuTitle variant="menu_title">Open</MenuTitle>
-            <MenuLabel>CTRL+O</MenuLabel>
-          </MenuItem>
-          <MenuItem active>
-            <MenuLabel>
-              <Icon name="copy" />
-            </MenuLabel>
-            <MenuTitle>Copy (Active)</MenuTitle>
-            <MenuLabel>CTRL+C</MenuLabel>
-          </MenuItem>
-          <MenuItem disabled>
-            <MenuLabel>
-              <Icon name="paste" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Paste (disabled)</MenuTitle>
-            <MenuLabel>CTRL+V</MenuLabel>
-          </MenuItem>
-          <MenuItem>
-            <MenuLabel>
-              <Icon name="edit" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Rename</MenuTitle>
-            <MenuLabel>CTRL+R</MenuLabel>
-          </MenuItem>
-          <MenuItem>
-            <MenuLabel>
-              <Icon name="delete_to_trash" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Delete</MenuTitle>
-            <MenuLabel>Del</MenuLabel>
-          </MenuItem>
-          <Divider variant="small" />
-          <MenuItem>
-            <MenuLabel>
-              <Icon name="settings" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Properties</MenuTitle>
-          </MenuItem>
-        </Menu>
-      </Wrapper>
-    </div>
+          </MenuLabel>
+          <MenuTitle variant="menu_title">Open</MenuTitle>
+          <MenuLabel>CTRL+O</MenuLabel>
+        </MenuItem>
+        <MenuItem active>
+          <MenuLabel>
+            <Icon name="copy" />
+          </MenuLabel>
+          <MenuTitle>Copy (Active)</MenuTitle>
+          <MenuLabel>CTRL+C</MenuLabel>
+        </MenuItem>
+        <MenuItem disabled>
+          <MenuLabel>
+            <Icon name="paste" />
+          </MenuLabel>
+          <MenuTitle variant="menu_title">Paste (disabled)</MenuTitle>
+          <MenuLabel>CTRL+V</MenuLabel>
+        </MenuItem>
+        <MenuItem>
+          <MenuLabel>
+            <Icon name="edit" />
+          </MenuLabel>
+          <MenuTitle variant="menu_title">Rename</MenuTitle>
+          <MenuLabel>CTRL+R</MenuLabel>
+        </MenuItem>
+        <MenuItem>
+          <MenuLabel>
+            <Icon name="delete_to_trash" />
+          </MenuLabel>
+          <MenuTitle variant="menu_title">Delete</MenuTitle>
+          <MenuLabel>Del</MenuLabel>
+        </MenuItem>
+        <Divider variant="small" />
+        <MenuItem>
+          <MenuLabel>
+            <Icon name="settings" />
+          </MenuLabel>
+          <MenuTitle variant="menu_title">Properties</MenuTitle>
+        </MenuItem>
+      </Menu>
+    </Wrapper>
   )
 }
 
 export const ButtonToggle = () => {
-  const divRef = React.useRef(null)
-  const [state, setState] = React.useState({ button1El: null, divEl: null })
-  const { button1El, divEl } = state
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
-  const handleOnButtonClick = (e) =>
-    button1El
-      ? setState({ ...state, button1El: null })
-      : setState({ ...state, button1El: e.target })
+  const toggleMenu = (e) =>
+    anchorEl ? setAnchorEl(null) : setAnchorEl(e.target)
 
-  // Forcing open menu on render
-  useEffect(() => {
-    if (divEl === null && divRef.current) {
-      setState({ ...state, divEl: divRef.current })
+  const onKeyPress = ({ key }) => {
+    if (key === 'Enter') {
+      toggleMenu(e)
     }
-    return () => {}
-  })
+  }
 
   return (
-    <div>
-      <Wrapper>
-        <Typography variant="h4">Opened with Button</Typography>
-        <Button
-          id="menu-button1"
-          aria-haspopup="true"
-          aria-controls="menu1"
-          onClick={handleOnButtonClick}
-        >
-          Open Menu
-        </Button>
-        <Menu id="menu0" aria-labelledby="menu-button0" anchorEl={button1El}>
-          <MenuItem>
-            <Icon name="folder" />
-            <span>Open</span>
-            <span>CTRL+O</span>
-          </MenuItem>
-          <MenuItem active>
-            <Icon name="copy" />
-            <span>Copy</span>
-            <span>CTRL+C</span>
-          </MenuItem>
-          <MenuItem>
-            <Icon name="paste" />
-            <span>Paste</span>
-            <span>CTRL+V</span>
-          </MenuItem>
-          <MenuItem>
-            <Icon name="edit" />
-            <span>Rename</span>
-            <span>CTRL+R</span>
-          </MenuItem>
-          <MenuItem>
-            <Icon name="delete_to_trash" />
-            <span>Delete</span>
-            <span>Del</span>
-          </MenuItem>
-          <Divider variant="small" />
-          <MenuItem>
-            <Icon name="settings" />
-            <span>Properties</span>
-          </MenuItem>
-        </Menu>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <Typography variant="h4">Opened with Button</Typography>
+      <Button
+        id="menuButton"
+        aria-haspopup="true"
+        aria-controls="menu1"
+        onClick={toggleMenu}
+        onKeyDown={onKeyPress}
+      >
+        Open Menu
+      </Button>
+      <Menu id="menu1" aria-labelledby="menuButton" anchorEl={anchorEl}>
+        <MenuItem>
+          <Icon name="folder" />
+          <span>Open</span>
+          <span>CTRL+O</span>
+        </MenuItem>
+        <MenuItem active>
+          <Icon name="copy" />
+          <span>Copy</span>
+          <span>CTRL+C</span>
+        </MenuItem>
+        <MenuItem>
+          <Icon name="paste" />
+          <span>Paste</span>
+          <span>CTRL+V</span>
+        </MenuItem>
+        <MenuItem>
+          <Icon name="edit" />
+          <span>Rename</span>
+          <span>CTRL+R</span>
+        </MenuItem>
+        <MenuItem>
+          <Icon name="delete_to_trash" />
+          <span>Delete</span>
+          <span>Del</span>
+        </MenuItem>
+        <Divider variant="small" />
+        <MenuItem>
+          <Icon name="settings" />
+          <span>Properties</span>
+        </MenuItem>
+      </Menu>
+    </Wrapper>
   )
 }
