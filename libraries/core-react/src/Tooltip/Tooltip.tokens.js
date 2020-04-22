@@ -80,7 +80,7 @@ export const tooltip = {
     left: {
       arrowTop: 'calc(50% - 8px/2)',
       arrowRight: '-8px',
-      tooltipLeft: '-10px',
+      tooltipLeft: '-8px',
       tooltipTop: 'calc(50% - 32px/2)',
       transform: 'translateX(-100%)',
       arrowTransform: 'rotate(-90deg)',
@@ -88,7 +88,7 @@ export const tooltip = {
     leftTop: {
       arrowTop: '4px',
       arrowRight: '-8px',
-      tooltipLeft: '-10px',
+      tooltipLeft: '-8px',
       tooltipTop: 0,
       transform: 'translateX(-100%)',
       arrowTransform: 'rotate(-90deg)',
@@ -96,7 +96,7 @@ export const tooltip = {
     leftBottom: {
       arrowBottom: '4px',
       arrowRight: '-8px',
-      tooltipLeft: '-10px',
+      tooltipLeft: '-8px',
       tooltipBottom: 0,
       transform: 'translateX(-100%)',
       arrowTransform: 'rotate(-90deg)',
@@ -104,7 +104,7 @@ export const tooltip = {
     right: {
       arrowTop: 'calc(50% - 8px/2)',
       arrowLeft: '-8px',
-      tooltipRight: '-10px',
+      tooltipRight: '-8px',
       tooltipTop: 'calc(50% - 32px/2)',
       transform: 'translateX(100%)',
       arrowTransform: 'rotate(90deg)',
@@ -112,7 +112,7 @@ export const tooltip = {
     rightTop: {
       arrowTop: '4px',
       arrowLeft: '-8px',
-      tooltipRight: '-10px',
+      tooltipRight: '-8px',
       tooltipTop: 0,
       transform: 'translateX(100%)',
       arrowTransform: 'rotate(90deg)',
@@ -120,7 +120,7 @@ export const tooltip = {
     rightBottom: {
       arrowBottom: '4px',
       arrowLeft: '-8px',
-      tooltipRight: '-10px',
+      tooltipRight: '-8px',
       tooltipBottom: 0,
       transform: 'translateX(100%)',
       arrowTransform: 'rotate(90deg)',
