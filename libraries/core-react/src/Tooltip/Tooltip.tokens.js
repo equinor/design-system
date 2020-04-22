@@ -73,7 +73,6 @@ export const tooltip = {
     topLeft: {
       arrowLeft: '4px',
       arrowBottom: '-8px',
-      margin: 0,
       tooltipLeft: 0,
       tooltipTop: '-40px',
     },

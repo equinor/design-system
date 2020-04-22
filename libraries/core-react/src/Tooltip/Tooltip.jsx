@@ -69,15 +69,10 @@ export const Tooltip = forwardRef(function Tooltip(
 
   const wrapperProps = {
     right: tokens.placement[placement].tooltipRight,
-    width: tokens.placement[placement].width,
     top: tokens.placement[placement].tooltipTop,
     bottom: tokens.placement[placement].tooltipBottom,
     left: tokens.placement[placement].tooltipLeft,
     transform: tokens.placement[placement].transform,
-  }
-
-  const tooltipProps = {
-    margin: tokens.placement[placement].margin,
   }
 
   const arrowProps = {
@@ -92,7 +87,7 @@ export const Tooltip = forwardRef(function Tooltip(
     <Anchor {...props}>
       {children}
       <StyledTooltipWrapper {...wrapperProps}>
-        <StyledTooltip {...tooltipProps}>
+        <StyledTooltip>
           <TooltipArrow {...arrowProps}>
             <path d="M4.83205 4.75192C4.43623 5.34566 3.56377 5.34566 3.16795 4.75192L1.44988e-07 -1.88344e-07L8 0L4.83205 4.75192Z" />
           </TooltipArrow>
