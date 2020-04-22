@@ -31,10 +31,8 @@ export const tooltip = {
   borderRadius,
   placement: {
     bottom: {
-      width: '100%',
       arrowLeft: 'calc(50% - 8px/2)',
       arrowTop: '-8px',
-      margin: '0 auto',
       tooltipBottom: '-40px',
       arrowTransform: 'rotate(180deg)',
     },
@@ -42,14 +40,13 @@ export const tooltip = {
       arrowRight: '4px',
       arrowTop: '-8px',
       tooltipRight: 0,
-      width: 'auto',
       tooltipBottom: '-40px',
       arrowTransform: 'rotate(180deg)',
     },
     bottomLeft: {
       arrowLeft: '4px',
       arrowTop: '-8px',
-      margin: 0,
+      tooltipLeft: 0,
       tooltipBottom: '-40px',
       arrowTransform: 'rotate(180deg)',
     },
@@ -57,7 +54,6 @@ export const tooltip = {
       width: '100%',
       arrowLeft: 'calc(50% - 8px/2)',
       arrowBottom: '-8px',
-      margin: '0 auto',
       tooltipTop: '-40px',
     },
     topRight: {
@@ -71,6 +67,7 @@ export const tooltip = {
       arrowLeft: '4px',
       arrowBottom: '-8px',
       margin: 0,
+      tooltipLeft: 0,
       tooltipTop: '-40px',
     },
     left: {

@@ -6,8 +6,9 @@ import { tooltip as tokens } from './Tooltip.tokens'
 
 const Anchor = styled.div`
   position: relative;
-  display: inline-block;
+  display: flex;
   width: auto;
+  justify-content: center;
   &:hover,
   &:focus,
   &:focus-within {
@@ -18,15 +19,17 @@ const Anchor = styled.div`
 `
 
 const StyledTooltipWrapper = styled.div`
-  width: ${({ width }) => width};
+  /* width: ${({ width }) => width}; */
   top: ${({ top }) => top};
   bottom: ${({ bottom }) => bottom};
   right: ${({ right }) => right};
   left: ${({ left }) => left};
   transform: ${({ transform }) => transform};
+  width: auto;
   display: none;
   position: absolute;
   z-index: 500;
+  flex-shrink: 0;
   ::after {
     content: '';
   }
@@ -40,9 +43,7 @@ const StyledTooltip = styled.div`
   border-radius: ${tokens.borderRadius};
   min-height: 32px;
   box-sizing: border-box;
-  width: max-content;
   position: relative;
-  margin: ${({ margin }) => margin};
 `
 
 const TooltipArrow = styled.svg`
