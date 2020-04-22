@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Slider, Button, Typography } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
@@ -31,9 +31,16 @@ export default {
 }
 
 export const Examples = () => {
+  const [value, updateValue] = useState([30, 70])
+  const onChange = (event, value) => {
+    updateValue(value)
+  }
   return (
     <Body>
-      <Slider label="Range slider" />
+      <Slider label="Range slider" value={value} onChange={onChange} />
+      <p>
+        <small>Output from slider is {value.join(', ')}</small>
+      </p>
       <Slider label="Range slider with steps of 5" step={5} />
       <Slider
         min={getUnixTime('2020-01-01')}

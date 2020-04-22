@@ -37,8 +37,6 @@ const Wrapper = styled.div`
     content: '';
   }
   &::before {
-    /*  margin-left: calc((var(--a) - var(--min)) / var(--dif) * 100%);
-    width: calc((var(--b) - var(--a)) / var(--dif) * 100%); */
     margin-left: calc(
       6px + (var(--a) - var(--min)) / var(--dif) * calc(100% - 12px)
     );
@@ -46,8 +44,6 @@ const Wrapper = styled.div`
   }
 
   &::after {
-    /*  margin-left: calc((var(--b) - var(--min)) / var(--dif) * 100%);
-    width: calc((var(--a) - var(--b)) / var(--dif) * 100%); */
     margin-left: calc(
       6px + (var(--b) - var(--min)) / var(--dif) * calc(100% - 12px)
     );
@@ -95,12 +91,16 @@ const WrapperLabel = styled.div`
 `
 
 const StyledSlider = styled.input`
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  &::-webkit-slider-runnable-track,
+  &::-webkit-slider-thumb,
+  & {
+    -webkit-appearance: none;
+  }
+  /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent;
   grid-column: 1 / 3;
   grid-row: 3;
-
   background: none; /* get rid of white Chrome background */
   color: #000;
   font: inherit; /* fix too small font-size in both Chrome & Firefox */
@@ -115,7 +115,6 @@ const StyledSlider = styled.input`
     &::-webkit-slider-thumb {
       outline: dotted 1px currentcolor;
       outline-offset: 2px;
-      /*  background: darkorange; */
     }
     & + output {
       /* color: darkorange; */
@@ -145,7 +144,7 @@ const StyledSlider = styled.input`
     right: 0;
   }
 
-  /* Otherwise white in Chrome */
+  /* Must be seperated code blocks for webkit and moz otherwise nothing will be applied */
   ::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: 2px solid #007079;
@@ -157,11 +156,29 @@ const StyledSlider = styled.input`
     position: relative;
     margin-top: 0;
     z-index: 1;
-
+    pointer-events: auto;
+  }
+  &::-moz-range-thumb {
+    -webkit-appearance: none;
+    border: 2px solid #007079;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    position: relative;
+    margin-top: 0;
+    z-index: 1;
     pointer-events: auto;
   }
 
-  ::-webkit-slider-runnable-track {
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: none;
+  }
+  &::-moz-range-track {
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -180,6 +197,7 @@ export const Slider = forwardRef(function EdsSlider(
     max = 100,
     value = [40, 60],
     outputFunction,
+    onChange,
     step = 1,
     ...rest
   },
@@ -191,8 +209,27 @@ export const Slider = forwardRef(function EdsSlider(
 
   // Let's just assume a two numbers array for now
   /*  console.log('Test output', valueB, outputFunction(valueB)) */
+
+  // @TODO single state and onChange function
   const [valueA, setValueA] = useState(value[0])
   const [valueB, setValueB] = useState(value[1])
+
+  const onChangeA = (event) => {
+    const newVal = event.target.value
+    setValueA(newVal)
+    if (onChange) {
+      // Callback for provided onChange func
+      onChange(event, [newVal, valueB])
+    }
+  }
+  const onChangeB = (event) => {
+    const newVal = event.target.value
+    setValueB(newVal)
+    if (onChange) {
+      // Callback for provided onChange func
+      onChange(event, [valueA, newVal])
+    }
+  }
 
   return (
     <Wrapper
@@ -215,13 +252,13 @@ export const Slider = forwardRef(function EdsSlider(
         id="a"
         step={step}
         onChange={(event) => {
-          setValueA(event.target.value)
+          onChangeA(event)
         }}
       />
-      <Output for="a" value={valueA} min={min}>
+      <Output htmlFor="a" value={valueA} min={min}>
         {outputFunction ? outputFunction(valueA) : valueA}
       </Output>
-      <MinMaxValue>{min}</MinMaxValue>
+      <MinMaxValue>{outputFunction ? outputFunction(min) : min}</MinMaxValue>
       <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
       <StyledSlider
         type="range"
@@ -231,13 +268,13 @@ export const Slider = forwardRef(function EdsSlider(
         id="b"
         step={step}
         onChange={(event) => {
-          setValueB(event.target.value)
+          onChangeB(event)
         }}
       />
-      <Output for="b" value={valueB} min={min}>
+      <Output htmlFor="b" value={valueB} min={min}>
         {outputFunction ? outputFunction(valueB) : valueB}
       </Output>
-      <MinMaxValue>{max}</MinMaxValue>
+      <MinMaxValue>{outputFunction ? outputFunction(max) : max}</MinMaxValue>
     </Wrapper>
   )
 })
@@ -251,6 +288,9 @@ Slider.propTypes = {
   label: PropTypes.string.isRequired,
   /** Stepping interval */
   step: PropTypes.number,
+  /** Components value, string for slider, array for range */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  onChange: PropTypes.func,
 }
 
 Slider.defaultProps = {
