@@ -22,6 +22,13 @@ export const tooltip = {
     lineHeight: '16px',
   },
   background,
+  tooltip: {
+    minHeight: '32px',
+  },
+  arrow: {
+    width: '8px',
+    height: '8px',
+  },
   spacings: {
     left: spacingSmall,
     right: spacingSmall,
