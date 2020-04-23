@@ -51,25 +51,22 @@ const Wrapper = styled.div`
   }
 `
 const Output = styled.output`
- /*  position: absolute;
+  /*  position: absolute;
   top: 20px; */
   width: fit-content;
   background: white;
   position: relative;
   z-index: 1;
-  
+
   --val: ${(props) => props.value};
-  color: #6F6F6F;
+  color: #6f6f6f;
   font-size: 10px;
   margin-top: 6px;
-
- /*  &:last-child { text-align: right; } */
+  /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
+  transform: translate(calc(-1 * calc((100% - 12px) / 2)));
   grid-row: 4;
   grid-column: 1 / 3;
-  margin-left: calc(
-       (var(--val) - var(--min)) / var(--dif) * calc(100% - 12px)
-    ); 
- /*  left: ${(props) => props.left}px; */
+  margin-left: calc((var(--val) - var(--min)) / var(--dif) * calc(100% - 12px));
 `
 const MinMaxValue = styled.span`
   grid-row: 4;
