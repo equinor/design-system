@@ -9,23 +9,24 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   margin: 1em auto;
   width: 100%;
-  /* overflow: hidden; */
   position: relative;
   --a: ${(props) => props.valA};
   --b: ${(props) => props.valB};
   --min: ${(props) => props.min};
   --max: ${(props) => props.max};
-  --range-color: #a8739d;
   --dif: calc(var(--max) - var(--min));
-  background: linear-gradient(
-    0deg,
-    #fff,
-    #fff 20px,
-    #f7f7f7 20px,
-    #f7f7f7 24px,
-    transparent 0
-  );
-  border-radius: 4px;
+  /** The two first gradients are hacks to avoid 2px too long slider bar on both edges. Better solution? */
+  background: linear-gradient(90deg, #fff, #fff 3px, transparent 0),
+    linear-gradient(-90deg, #fff, #fff 3px, transparent 0),
+    linear-gradient(
+      0deg,
+      transparent,
+      transparent 20px,
+      #f7f7f7 20px,
+      #f7f7f7 24px,
+      transparent 0
+    );
+
   &::before,
   &::after {
     grid-column: 1 / span 2;
@@ -36,6 +37,7 @@ const Wrapper = styled.div`
     align-self: end;
     content: '';
   }
+  /** Faking the active region of the slider */
   &::before {
     margin-left: calc(
       6px + (var(--a) - var(--min)) / var(--dif) * calc(100% - 12px)
@@ -51,17 +53,15 @@ const Wrapper = styled.div`
   }
 `
 const Output = styled.output`
-  /*  position: absolute;
-  top: 20px; */
+  --val: ${(props) => props.value};
   width: fit-content;
   background: white;
   position: relative;
   z-index: 1;
-
-  --val: ${(props) => props.value};
   color: #6f6f6f;
   font-size: 10px;
   margin-top: 6px;
+  padding: 0 5px;
   /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
   transform: translate(calc(-1 * calc((100% - 12px) / 2)));
   grid-row: 4;
@@ -73,18 +73,39 @@ const MinMaxValue = styled.span`
   font-size: 10px;
   color: #6f6f6f;
   position: absolute;
-  left: 0;
+  left: 2px;
   text-align: left;
   margin-top: 6px;
+  /** Center lign the text with the dot */
+  transform: translate(calc(-1 * calc((100% - 8px) / 2)));
   &:last-child {
     left: auto;
-    right: 0;
+    right: 2px;
+    transform: translate(calc((100% - 8px) / 2));
   }
 `
-
 const WrapperLabel = styled.div`
   grid-row: 1;
+  grid-column: 1 / 3;
   padding: 1rem 0;
+  &:before,
+  &:after {
+    content: ' ';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 100%;
+    bottom: 18px;
+    left: 2px;
+    position: absolute;
+    z-index: 0;
+  }
+  &:after {
+    right: 2px;
+    left: auto;
+  }
 `
 
 const StyledSlider = styled.input`
@@ -96,12 +117,13 @@ const StyledSlider = styled.input`
   /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent;
-  grid-column: 1 / 3;
+  grid-column: 1 / -1;
   grid-row: 3;
   background: none; /* get rid of white Chrome background */
   color: #000;
   font: inherit; /* fix too small font-size in both Chrome & Firefox */
   margin: 0;
+  z-index: 2;
   pointer-events: none;
   :focus {
     /* outline: none; */
@@ -126,16 +148,6 @@ const StyledSlider = styled.input`
   }
   &:before,
   &:after {
-    content: ' ';
-    display: block;
-    width: 6px;
-    height: 6px;
-    background: #ffffff;
-    border: 1px solid #dcdcdc;
-    border-radius: 100%;
-    margin-top: 2px;
-    position: absolute;
-    z-index: 0;
   }
   &:after {
     right: 0;
@@ -241,6 +253,7 @@ export const Slider = forwardRef(function EdsSlider(
     >
       <WrapperLabel id="wrapperLabel">{label}</WrapperLabel>
       <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
+
       <StyledSlider
         type="range"
         value={valueA}
