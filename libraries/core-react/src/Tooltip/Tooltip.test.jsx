@@ -5,12 +5,17 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Tooltip } from '.'
+import { tooltip as tokens } from './Tooltip.tokens'
 
 const StyledTooltip = styled(Tooltip)`
   position: relative;
   height: 100px;
   width: 100px;
 `
+
+const {
+  placement: { topRight },
+} = tokens
 
 afterEach(cleanup)
 
@@ -20,14 +25,14 @@ describe('Tooltip', () => {
     const tooltipWrapper = container.lastElementChild
     const tooltip = tooltipWrapper.lastChild
     expect(tooltipWrapper).toHaveStyleRule('display', 'flex')
-    expect(tooltip).toHaveStyleRule('top', '-40px')
-    expect(tooltip).toHaveStyleRule('right', '0')
+    expect(tooltip).toHaveStyleRule('top', `${topRight.tooltipTop}`)
+    expect(tooltip).toHaveStyleRule('right', `${topRight.tooltipRight}`)
   })
   it('Arrow has correct placement', () => {
     const { container } = render(<Tooltip placement="topRight">Anchor</Tooltip>)
     const arrow = container.lastElementChild.lastChild.firstChild.firstChild
-    expect(arrow).toHaveStyleRule('right', '4px')
-    expect(arrow).toHaveStyleRule('bottom', '-8px')
+    expect(arrow).toHaveStyleRule('right', `${topRight.arrowRight}`)
+    expect(arrow).toHaveStyleRule('bottom', `${topRight.arrowBottom}`)
   })
   it('Has provided necessary props', () => {
     const title = 'Title'
