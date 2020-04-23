@@ -8,12 +8,10 @@ import {
   Icon,
   Avatar,
   Chip,
-  TextField,
+  TextField, //
   Search,
 } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
-
-const image = catImg
 
 const Body = styled.div`
   margin: 42px;
@@ -101,7 +99,7 @@ export function Placement() {
 
 const ANCHOR_CHOICES = {
   button: <Button variant="ghost">Button</Button>,
-  avatar: <Avatar src={image} size={48} alt="avatar" />,
+  avatar: <Avatar src={catImg} size={48} alt="avatar" />,
   chip: <Chip>Chip</Chip>,
   search: (
     <Search aria-label="sitewide" id="search-normal" placeholder="Search" />

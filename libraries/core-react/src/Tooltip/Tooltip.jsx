@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { tooltip as tokens } from './Tooltip.tokens'
 
@@ -19,11 +19,14 @@ const Anchor = styled.div`
 `
 
 const StyledTooltipWrapper = styled.div`
-  top: ${({ top }) => top};
-  bottom: ${({ bottom }) => bottom};
-  right: ${({ right }) => right};
-  left: ${({ left }) => left};
-  transform: ${({ transform }) => transform};
+  ${({ top, bottom, right, left, transform }) =>
+    css`
+      bottom: ${bottom};
+      top: ${top};
+      right: ${right};
+      left: ${left};
+      transform: ${transform};
+    `}
   width: auto;
   display: none;
   position: absolute;
@@ -46,11 +49,14 @@ const StyledTooltip = styled.div`
 `
 
 const TooltipArrow = styled.svg`
-  transform: ${({ transform }) => transform};
-  left: ${({ left }) => left};
-  right: ${({ right }) => right};
-  top: ${({ top }) => top};
-  bottom: ${({ bottom }) => bottom};
+  ${({ top, bottom, right, left, transform }) =>
+    css`
+      bottom: ${bottom};
+      top: ${top};
+      right: ${right};
+      left: ${left};
+      transform: ${transform};
+    `}
   width: ${tokens.arrow.width};
   height: ${tokens.arrow.height};
   position: absolute;
