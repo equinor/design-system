@@ -17,5 +17,9 @@ export { SideSheet } from './SideSheet'
 export { Chip } from './Chip'
 export { Avatar } from './Avatar'
 export { Search } from './Search'
+<<<<<<< HEAD
 export { Tooltip } from './Tooltip'
+=======
+export { Popover } from './Popover'
+>>>>>>> Popover elevation on arrows ongoing
 /* eslint-enable */

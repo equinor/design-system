@@ -9,8 +9,9 @@ import {
   TextField,
   Search,
   Icon,
-  //   Popover,
+  Popover,
 } from '@equinor/eds-core-react'
+import catImg from '../images/cat.jpg'
 
 const Body = styled.div`
   margin: 42px;
@@ -118,7 +119,6 @@ const ANCHOR_CHOICES = {
 export const WithKnobs = () => {
   const anchor = select('Anchor', Object.keys(ANCHOR_CHOICES), 'avatar')
   const title = text('Title', 'Title')
-  const child
   const placement = select(
     'Placement',
     [
