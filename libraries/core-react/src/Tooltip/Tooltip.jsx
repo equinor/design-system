@@ -41,7 +41,8 @@ const StyledTooltip = styled.div`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   background: ${tokens.background};
-  fill: ${tokens.background};
+  /* fill: ${tokens.background}; */
+  fill: #333;
   border-radius: ${tokens.borderRadius};
   min-height:  ${tokens.tooltip.minHeight};
   box-sizing: border-box;
@@ -95,7 +96,7 @@ export const Tooltip = forwardRef(function Tooltip(
       <StyledTooltipWrapper {...wrapperProps}>
         <StyledTooltip>
           <TooltipArrow {...arrowProps}>
-            <path d="M4.83205 4.75192C4.43623 5.34566 3.56377 5.34566 3.16795 4.75192L1.44988e-07 -1.88344e-07L8 0L4.83205 4.75192Z" />
+            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
           </TooltipArrow>
           {title}
         </StyledTooltip>
