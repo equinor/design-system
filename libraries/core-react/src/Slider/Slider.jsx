@@ -6,6 +6,7 @@ import { slider as tokens } from './Slider.tokens'
 const Wrapper = styled.div`
   display: grid;
   grid-template-rows: repeat(2, max-content) 12px 16px;
+  /* grid-gap: 0.5rem; */
   grid-template-columns: 1fr 1fr;
   margin: 1em auto;
   width: 100%;
@@ -52,6 +53,50 @@ const Wrapper = styled.div`
     width: calc((var(--a) - var(--b)) / var(--dif) * calc(100% - 12px));
   }
 `
+const WrapperLabel = styled.label`
+  display: grid;
+  grid-template-rows: repeat(2, max-content) 12px 16px;
+  grid-template-columns: 1fr 1fr;
+  margin: 1em auto;
+  width: 100%;
+  position: relative;
+  --min: ${(props) => props.min};
+  --max: ${(props) => props.max};
+  --dif: calc(var(--max) - var(--min));
+  --value: ${(props) => props.value};
+  background: linear-gradient(90deg, #fff, #fff 3px, transparent 0),
+    linear-gradient(-90deg, #fff, #fff 3px, transparent 0),
+    linear-gradient(
+      0deg,
+      transparent,
+      transparent 20px,
+      #f7f7f7 20px,
+      #f7f7f7 24px,
+      transparent 0
+    );
+  /*  &::before, */
+  &::after {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    height: 4px;
+    margin-bottom: 4px;
+    background: #007079;
+    align-self: end;
+    content: '';
+  }
+
+  &::after {
+    margin-right: calc(
+      (var(--max) - var(--value)) / var(--dif) * calc(100% - 12px)
+    );
+    /* Adjusting for start dot circle */
+    margin-left: 3px;
+  }
+`
+const Label = styled.div`
+  grid-row: 1;
+  grid-column: 1/-1;
+`
 const Output = styled.output`
   --val: ${(props) => props.value};
   width: fit-content;
@@ -84,10 +129,10 @@ const MinMaxValue = styled.span`
     transform: translate(calc((100% - 8px) / 2));
   }
 `
-const WrapperLabel = styled.div`
+const WrapperGroupLabel = styled.div`
   grid-row: 1;
   grid-column: 1 / 3;
-  padding: 1rem 0;
+
   &:before,
   &:after {
     content: ' ';
@@ -117,6 +162,7 @@ const StyledSlider = styled.input`
   ::-moz-focus-outer {
     border: 0;
   }
+
   /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent;
@@ -134,7 +180,10 @@ const StyledSlider = styled.input`
   &:focus {
     z-index: 2;
     outline: none;
-    &::-webkit-slider-thumb,
+    &::-webkit-slider-thumb {
+      outline: dotted 1px currentcolor;
+      outline-offset: 2px;
+    }
     &::-moz-range-thumb {
       outline: dotted 1px currentcolor;
       outline-offset: 2px;
@@ -145,10 +194,11 @@ const StyledSlider = styled.input`
   }
   &:hover,
   &:active {
-    &::-webkit-slider-thumb,
+    &::-webkit-slider-thumb {
+      box-shadow: 0px 0px 0px 6px #deedee;
+    }
     &::-moz-range-thumb {
       box-shadow: 0px 0px 0px 6px #deedee;
-      /*  background: darkorange; */
     }
   }
   &:before,
@@ -198,6 +248,9 @@ const StyledSlider = styled.input`
     cursor: pointer;
     background: none;
   }
+  ::-webkit-slider-progress {
+    background: green;
+  }
 `
 const SrOnlyLabel = styled.label`
   position: absolute;
@@ -217,17 +270,17 @@ export const Slider = forwardRef(function EdsSlider(
   },
   ref,
 ) {
+  const isRangeSlider = Array.isArray(value)
   // @TODO: Some counter prefix id to avoid duplicate id's
 
   // At least some internal state for now to avoid both handles on top of each other at init
-
-  // Let's just assume a two numbers array for now
-  /*  console.log('Test output', valueB, outputFunction(valueB)) */
-
   // @TODO single state and onChange function
+  // @TODO: ZOMG, Different files
   const [valueA, setValueA] = useState(value[0])
   const [valueB, setValueB] = useState(value[1])
+  const [valueZ, setValueZ] = useState(value)
 
+  // @TODO DRY
   const onChangeA = (event) => {
     const newVal = event.target.value
     setValueA(newVal)
@@ -244,53 +297,93 @@ export const Slider = forwardRef(function EdsSlider(
       onChange(event, [valueA, newVal])
     }
   }
+  const onChangeZ = (event) => {
+    const newVal = event.target.value
+    setValueZ(newVal)
+    if (onChange) {
+      onChange(event, newVal)
+    }
+  }
 
   return (
-    <Wrapper
-      {...rest}
-      ref={ref}
-      role="group"
-      aria-labelledby="wrapperLabel"
-      valA={valueA}
-      valB={valueB}
-      max={max}
-      min={min}
-    >
-      <WrapperLabel id="wrapperLabel">{label}</WrapperLabel>
-      <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
+    <>
+      {isRangeSlider ? (
+        <Wrapper
+          {...rest}
+          ref={ref}
+          role="group"
+          aria-labelledby="wrapperLabel"
+          valA={valueA}
+          valB={valueB}
+          max={max}
+          min={min}
+        >
+          <WrapperGroupLabel id="wrapperLabel">{label}</WrapperGroupLabel>
+          <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
 
-      <StyledSlider
-        type="range"
-        value={valueA}
-        max={max}
-        min={min}
-        id="a"
-        step={step}
-        onChange={(event) => {
-          onChangeA(event)
-        }}
-      />
-      <Output htmlFor="a" value={valueA} min={min}>
-        {outputFunction ? outputFunction(valueA) : valueA}
-      </Output>
-      <MinMaxValue>{outputFunction ? outputFunction(min) : min}</MinMaxValue>
-      <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
-      <StyledSlider
-        type="range"
-        value={valueB}
-        min={min}
-        max={max}
-        id="b"
-        step={step}
-        onChange={(event) => {
-          onChangeB(event)
-        }}
-      />
-      <Output htmlFor="b" value={valueB} min={min}>
-        {outputFunction ? outputFunction(valueB) : valueB}
-      </Output>
-      <MinMaxValue>{outputFunction ? outputFunction(max) : max}</MinMaxValue>
-    </Wrapper>
+          <StyledSlider
+            type="range"
+            value={valueA}
+            max={max}
+            min={min}
+            id="a"
+            step={step}
+            onChange={(event) => {
+              onChangeA(event)
+            }}
+          />
+          <Output htmlFor="a" value={valueA} min={min}>
+            {outputFunction ? outputFunction(valueA) : valueA}
+          </Output>
+          <MinMaxValue>
+            {outputFunction ? outputFunction(min) : min}
+          </MinMaxValue>
+          <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
+          <StyledSlider
+            type="range"
+            value={valueB}
+            min={min}
+            max={max}
+            id="b"
+            step={step}
+            onChange={(event) => {
+              onChangeB(event)
+            }}
+          />
+          <Output htmlFor="b" value={valueB} min={min}>
+            {outputFunction ? outputFunction(valueB) : valueB}
+          </Output>
+          <MinMaxValue>
+            {outputFunction ? outputFunction(max) : max}
+          </MinMaxValue>
+        </Wrapper>
+      ) : (
+        <WrapperLabel max={max} min={min} value={valueZ}>
+          <WrapperGroupLabel />
+          <Label>{label}</Label>
+          <StyledSlider
+            type="range"
+            value={valueZ}
+            min={min}
+            max={max}
+            step={step}
+            id="simple"
+            onChange={(event) => {
+              onChangeZ(event)
+            }}
+          />
+          <Output htmlFor="simple" value={valueZ} min={min}>
+            {outputFunction ? outputFunction(valueZ) : valueZ}
+          </Output>
+          <MinMaxValue>
+            {outputFunction ? outputFunction(min) : min}
+          </MinMaxValue>
+          <MinMaxValue>
+            {outputFunction ? outputFunction(max) : max}
+          </MinMaxValue>
+        </WrapperLabel>
+      )}
+    </>
   )
 })
 

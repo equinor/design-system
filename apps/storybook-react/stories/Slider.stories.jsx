@@ -50,6 +50,7 @@ export const Examples = () => {
         value={[getUnixTime('2020-01-01'), getUnixTime('2020-01-31')]}
         outputFunction={outputFunction}
       />
+      <Slider label="Simple slider" value={4} min={0} max={10} />
     </Body>
   )
 }
