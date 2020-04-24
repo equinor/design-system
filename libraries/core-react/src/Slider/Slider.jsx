@@ -114,6 +114,9 @@ const StyledSlider = styled.input`
   & {
     -webkit-appearance: none;
   }
+  ::-moz-focus-outer {
+    border: 0;
+  }
   /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent;
@@ -131,7 +134,8 @@ const StyledSlider = styled.input`
   &:focus {
     z-index: 2;
     outline: none;
-    &::-webkit-slider-thumb {
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
       outline: dotted 1px currentcolor;
       outline-offset: 2px;
     }
@@ -141,7 +145,8 @@ const StyledSlider = styled.input`
   }
   &:hover,
   &:active {
-    &::-webkit-slider-thumb {
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
       box-shadow: 0px 0px 0px 6px #deedee;
       /*  background: darkorange; */
     }
