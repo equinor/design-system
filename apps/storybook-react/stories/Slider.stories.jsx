@@ -41,7 +41,11 @@ export const Examples = () => {
       <p>
         <small>Output from slider is {value.join(', ')}</small>
       </p>
-      <Slider label="Range slider with steps of 5" step={5} />
+      <Slider
+        label="Range slider with steps of 5"
+        step={5}
+        minMaxDots={false}
+      />
       <Slider
         min={getUnixTime('2020-01-01')}
         max={getUnixTime('2020-01-31')}
@@ -51,6 +55,14 @@ export const Examples = () => {
         outputFunction={outputFunction}
       />
       <Slider label="Simple slider" value={4} min={0} max={10} />
+      <Slider
+        label="Simple slider, no dots, steps of 10"
+        value={50}
+        min={0}
+        max={100}
+        step={10}
+        minMaxDots={false}
+      />
     </Body>
   )
 }

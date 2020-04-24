@@ -135,7 +135,7 @@ const WrapperGroupLabel = styled.div`
 
   &:before,
   &:after {
-    content: ' ';
+    content: ${({ minMaxDots }) => (minMaxDots ? ' ' : 'normal')};
     display: block;
     width: 6px;
     height: 6px;
@@ -265,6 +265,7 @@ export const Slider = forwardRef(function EdsSlider(
     value = [40, 60],
     outputFunction,
     onChange,
+    minMaxDots = true,
     step = 1,
     ...rest
   },
@@ -318,7 +319,9 @@ export const Slider = forwardRef(function EdsSlider(
           max={max}
           min={min}
         >
-          <WrapperGroupLabel id="wrapperLabel">{label}</WrapperGroupLabel>
+          <WrapperGroupLabel id="wrapperLabel" minMaxDots={minMaxDots}>
+            {label}
+          </WrapperGroupLabel>
           <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
 
           <StyledSlider
@@ -359,7 +362,8 @@ export const Slider = forwardRef(function EdsSlider(
         </Wrapper>
       ) : (
         <WrapperLabel max={max} min={min} value={valueZ}>
-          <WrapperGroupLabel />
+          {/*  Need an element for pseudo elems :/ */}
+          {minMaxDots && <WrapperGroupLabel />}
           <Label>{label}</Label>
           <StyledSlider
             type="range"
@@ -372,7 +376,12 @@ export const Slider = forwardRef(function EdsSlider(
               onChangeZ(event)
             }}
           />
-          <Output htmlFor="simple" value={valueZ} min={min}>
+          <Output
+            htmlFor="simple"
+            value={valueZ}
+            min={min}
+            minMaxDots={minMaxDots}
+          >
             {outputFunction ? outputFunction(valueZ) : valueZ}
           </Output>
           <MinMaxValue>
