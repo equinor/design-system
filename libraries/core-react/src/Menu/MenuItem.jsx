@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { templates } from '../_common'
+import { templates, useCombinedRefs } from '../_common'
+import { useMenu } from './Menu.context'
 
 const { spacingsTemplate, typographyTemplate } = templates
 
@@ -81,9 +82,12 @@ const Anchor = styled.a.attrs({ role: 'menuitem' })`
 `
 
 export const MenuItem = React.forwardRef(function EdsMenuItem(
-  { children, disabled, ...rest },
+  { children, disabled, index, ...rest },
   ref,
 ) {
+  const { focusedIndex, setFocusedIndex } = useMenu()
+  const isFocused = index === focusedIndex
+
   const updatedChildren = React.Children.map(children, (child) => {
     // We force size on Icon & Avatar component
     if (child.props) {
@@ -100,7 +104,11 @@ export const MenuItem = React.forwardRef(function EdsMenuItem(
   }
 
   return (
-    <ListItem {...props} ref={ref}>
+    <ListItem
+      {...props}
+      ref={useCombinedRefs(ref, (node) => isFocused && node.focus())}
+      onFocus={() => setFocusedIndex(index)}
+    >
       <Anchor>{updatedChildren}</Anchor>
     </ListItem>
   )
@@ -111,6 +119,8 @@ MenuItem.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.element,
+  /** @ignore */
+  index: PropTypes.number,
   /** Active Menu Item */
   active: PropTypes.bool,
   /** Disabled Menu Item */
@@ -122,6 +132,7 @@ MenuItem.defaultProps = {
   children: undefined,
   active: false,
   disabled: false,
+  index: 0,
 }
 
 MenuItem.displayName = 'eds-menu-item'
