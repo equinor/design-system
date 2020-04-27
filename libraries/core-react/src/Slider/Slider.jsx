@@ -1,37 +1,12 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
 import { Output } from './Output'
+import { SliderInput } from './SliderInput'
 
 const { enabled } = tokens
-
-const track = css`
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  background: none;'
-`
-
-const thumb = css`
-  border: ${enabled.handle.border.width} ${enabled.handle.border.type}
-    ${enabled.handle.border.color};
-  height: ${enabled.handle.size};
-  width: ${enabled.handle.size};
-  border-radius: ${enabled.handle.border.radius};
-  background: ${enabled.handle.background};
-  cursor: pointer;
-  position: relative;
-  margin-top: 0;
-  z-index: 1;
-  pointer-events: auto;
-`
-const thumbHover = css`
-  box-shadow: 0px 0px 0px 6px ${enabled.handle.hover.background};
-  border-color: ${enabled.handle.hover.border.color};
-`
 
 /** The two first gradients are hacks to avoid 2px too long slider track on both edges. Better solution? */
 /* 20 px = Height from output + (height of handle (12px) - (track height (4px)) / 2) */
@@ -162,73 +137,6 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
   }
 `
 
-const StyledSlider = styled.input`
-  &::-webkit-slider-runnable-track,
-  &::-webkit-slider-thumb,
-  & {
-    -webkit-appearance: none;
-  }
-  ::-moz-focus-outer {
-    border: 0;
-  }
-
-  /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
-  background: transparent;
-  /* get rid of white Chrome background */
-  background: none;
-  grid-column: 1 / -1;
-  grid-row: 2;
-  font: inherit; /* fix too small font-size in both Chrome & Firefox */
-  margin: 0;
-  z-index: 2;
-  pointer-events: none;
-  outline: none;
-  &[data-focus-visible-added]:focus {
-    z-index: 2;
-    &::-webkit-slider-thumb {
-      outline: ${enabled.handle.outline};
-      outline-offset: ${enabled.handle.outlineOffset};
-    }
-    &::-moz-range-thumb {
-      outline: ${enabled.handle.outline};
-      outline-offset: ${enabled.handle.outlineOffset};
-    }
-  }
-  &:hover,
-  &:active {
-    &::-webkit-slider-thumb {
-      ${thumbHover}
-    }
-    &::-moz-range-thumb {
-      ${thumbHover}
-    }
-  }
-  &:before,
-  &:after {
-  }
-  &:after {
-    right: 0;
-  }
-
-  /* Must be seperated code blocks for webkit and moz otherwise nothing will be applied */
-  ::-webkit-slider-thumb {
-    ${thumb}
-  }
-  &::-moz-range-thumb {
-    ${thumb};
-    /* Avoid too small circles, dunno why this is happening :/  */
-    height: 8px;
-    width: 8px;
-  }
-
-  &::-webkit-slider-runnable-track {
-    ${track}
-  }
-  &::-moz-range-track {
-    ${track}
-  }
-`
 const SrOnlyLabel = styled.label`
   position: absolute;
   clip-path: inset(50%);
@@ -251,35 +159,24 @@ export const Slider = forwardRef(function EdsSlider(
   const isRangeSlider = Array.isArray(value)
   // @TODO: Some counter prefix id to avoid duplicate id's
 
-  // At least some internal state for now to avoid both handles on top of each other at init
-  // @TODO single state and onChange function
-  // @TODO: ZOMG, Different files
-  const [valueA, setValueA] = useState(value[0])
-  const [valueB, setValueB] = useState(value[1])
-  const [valueZ, setValueZ] = useState(value)
+  const [sliderValue, setSliderValue] = useState(value)
 
-  // @TODO DRY
-  const onChangeA = (event) => {
-    const newVal = event.target.value
-    setValueA(newVal)
+  const onValueChange = (event, valueArrIdx) => {
+    const changedValue = parseInt(event.target.value, 10)
+    if (isRangeSlider) {
+      const newValue = sliderValue.slice()
+      newValue[valueArrIdx] = changedValue
+      setSliderValue(newValue)
+      if (onChange) {
+        // Callback for provided onChange func
+        onChange(event, newValue)
+      }
+      return
+    }
+    setSliderValue(changedValue)
     if (onChange) {
       // Callback for provided onChange func
-      onChange(event, [newVal, valueB])
-    }
-  }
-  const onChangeB = (event) => {
-    const newVal = event.target.value
-    setValueB(newVal)
-    if (onChange) {
-      // Callback for provided onChange func
-      onChange(event, [valueA, newVal])
-    }
-  }
-  const onChangeZ = (event) => {
-    const newVal = event.target.value
-    setValueZ(newVal)
-    if (onChange) {
-      onChange(event, newVal)
+      onChange(event, changedValue)
     }
   }
 
@@ -291,8 +188,8 @@ export const Slider = forwardRef(function EdsSlider(
           ref={ref}
           role="group"
           aria-labelledby="wrapperLabel"
-          valA={valueA}
-          valB={valueB}
+          valA={sliderValue[0]}
+          valB={sliderValue[1]}
           max={max}
           min={min}
         >
@@ -304,56 +201,56 @@ export const Slider = forwardRef(function EdsSlider(
             <WrapperGroupLabel id="wrapperLabel">{label}</WrapperGroupLabel>
           )}
           <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
-          <StyledSlider
+          <SliderInput
             type="range"
-            value={valueA}
+            value={sliderValue[0]}
             max={max}
             min={min}
             id="a"
             step={step}
             onChange={(event) => {
-              onChangeA(event)
+              onValueChange(event, 0)
             }}
           />
-          <Output htmlFor="a" value={valueA}>
-            {outputFunction ? outputFunction(valueA) : valueA}
+          <Output htmlFor="a" value={sliderValue[0]}>
+            {outputFunction ? outputFunction(sliderValue[0]) : sliderValue[0]}
           </Output>
           <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
           <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
-          <StyledSlider
+          <SliderInput
             type="range"
-            value={valueB}
+            value={sliderValue[1]}
             min={min}
             max={max}
             id="b"
             step={step}
             onChange={(event) => {
-              onChangeB(event)
+              onValueChange(event, 1)
             }}
           />
-          <Output htmlFor="b" value={valueB}>
-            {outputFunction ? outputFunction(valueB) : valueB}
+          <Output htmlFor="b" value={sliderValue[1]}>
+            {outputFunction ? outputFunction(sliderValue[1]) : sliderValue[1]}
           </Output>
           <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
         </Wrapper>
       ) : (
-        <WrapperLabel max={max} min={min} value={valueZ}>
+        <WrapperLabel max={max} min={min} value={sliderValue}>
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
           <Label>{label}</Label>
-          <StyledSlider
+          <SliderInput
             type="range"
-            value={valueZ}
+            value={sliderValue}
             min={min}
             max={max}
             step={step}
             id="simple"
             onChange={(event) => {
-              onChangeZ(event)
+              onValueChange(event)
             }}
           />
-          <Output htmlFor="simple" value={valueZ}>
-            {outputFunction ? outputFunction(valueZ) : valueZ}
+          <Output htmlFor="simple" value={sliderValue}>
+            {outputFunction ? outputFunction(sliderValue) : sliderValue}
           </Output>
           <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
           <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
