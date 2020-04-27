@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
+import { MinMax } from './MinMax'
 
 const { enabled } = tokens
 
@@ -152,23 +153,7 @@ const Output = styled.output`
   grid-row: 3;
   grid-column: 1 / 3;
 `
-const MinMaxValue = styled.span`
-  grid-row: 3;
-  font-size: ${enabled.output.fontSize}
-  color: ${enabled.output.text};
-  ${typographyTemplate(enabled.output.typography)}
-  position: absolute;
-  left: 2px;
-  text-align: left;
-  margin-top: 6px;
-  /** Center align the text with the dot */
-  transform: translate(calc(-1 * calc((100% - 8px) / 2)));
-  &:last-child {
-    left: auto;
-    right: 2px;
-    transform: translate(calc((100% - 8px) / 2));
-  }
-`
+
 const WrapperGroupLabel = styled.div`
   grid-row: 1;
   grid-column: 1 / 3;
@@ -349,9 +334,7 @@ export const Slider = forwardRef(function EdsSlider(
           <Output htmlFor="a" value={valueA} min={min}>
             {outputFunction ? outputFunction(valueA) : valueA}
           </Output>
-          <MinMaxValue>
-            {outputFunction ? outputFunction(min) : min}
-          </MinMaxValue>
+          <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
           <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
           <StyledSlider
             type="range"
@@ -367,9 +350,7 @@ export const Slider = forwardRef(function EdsSlider(
           <Output htmlFor="b" value={valueB} min={min}>
             {outputFunction ? outputFunction(valueB) : valueB}
           </Output>
-          <MinMaxValue>
-            {outputFunction ? outputFunction(max) : max}
-          </MinMaxValue>
+          <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
         </Wrapper>
       ) : (
         <WrapperLabel max={max} min={min} value={valueZ}>
@@ -395,12 +376,8 @@ export const Slider = forwardRef(function EdsSlider(
           >
             {outputFunction ? outputFunction(valueZ) : valueZ}
           </Output>
-          <MinMaxValue>
-            {outputFunction ? outputFunction(min) : min}
-          </MinMaxValue>
-          <MinMaxValue>
-            {outputFunction ? outputFunction(max) : max}
-          </MinMaxValue>
+          <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
+          <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
         </WrapperLabel>
       )}
     </>
