@@ -170,7 +170,12 @@ export const Page = () => {
               </DrawerItem>
               <DrawerItem>
                 <Icon name="notifications" size={16} />
-                <Typography variant="body_short">Grandparent 3</Typography>
+                <Typography
+                  variant="body_short"
+                  title="Grandparent with a really long name 3"
+                >
+                  Grandparent with a really long name 3
+                </Typography>
                 <DrawerList level="parent">
                   <DrawerItem>
                     <Typography variant="body_short">Parent 1</Typography>

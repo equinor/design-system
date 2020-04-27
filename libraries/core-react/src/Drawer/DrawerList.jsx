@@ -5,7 +5,9 @@ import { drawer as tokens } from './Drawer.tokens'
 
 const { background, border } = tokens
 
-const StyledDrawerList = styled.ul`
+const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
+  drawerOpen,
+}))`
   margin: 0;
   padding: 0;
   background: ${background};
@@ -57,6 +59,8 @@ export const DrawerList = forwardRef(function EdsDrawerList(
   const handleOnClick = (event, index) => {
     console.log('click', event.target, index)
     setDrawerOpen(!drawerOpen)
+
+    event.stopPropagation()
   }
 
   const ListItems = React.Children.map(children, (child, index) => {
@@ -66,11 +70,11 @@ export const DrawerList = forwardRef(function EdsDrawerList(
     })
   })
 
-  console.log(drawerOpen, ListItems)
+  console.log(drawerOpen, level, ListItems)
 
   return (
     <StyledDrawerList {...props} level={level} open={open} ref={ref}>
-      {(drawerOpen || level === 'grandparent') && ListItems}
+      {ListItems}
     </StyledDrawerList>
   )
 })

@@ -60,6 +60,11 @@ const StyledDrawerItem = styled.li`
     padding-left: calc(${itemSpacings.top} - ${itemBorder.left.width});
     padding-top: ${itemSpacings.top};
     padding-bottom: ${itemSpacings.bottom};
+    max-width: 160px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
 
     ${({ active }) =>
       active &&
