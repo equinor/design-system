@@ -40,7 +40,7 @@ export const popover = {
     bottom: {
       arrowLeft: 'calc(50% - 8px/2)',
       arrowTop: '-5px',
-      popoverBottom: '-8x',
+      popoverBottom: '-8px',
       arrowTransform: 'rotate(90deg)',
       transform: 'translateY(100%)',
     },
