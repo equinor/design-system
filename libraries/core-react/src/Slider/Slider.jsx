@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
+import { Output } from './Output'
 
 const { enabled } = tokens
 
@@ -134,25 +135,6 @@ const Label = styled.div`
   grid-row: 1;
   grid-column: 1/-1;
 `
-const Output = styled.output`
-  --val: ${({ value }) => value};
-  --realWidth: calc(100% - 12px);
-  width: fit-content;
-  
-  position: relative;
-  z-index: 1;
-  color: ${enabled.output.text};
-  ${typographyTemplate(enabled.output.typography)}
-  background: ${enabled.background};
-  padding: 0 5px;
-  margin-top: 6px;
-  /* Calculate the distance on the track*/
-  margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
-  /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
-  transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
-  grid-row: 3;
-  grid-column: 1 / 3;
-`
 
 const WrapperGroupLabel = styled.div`
   grid-row: 1;
@@ -234,7 +216,10 @@ const StyledSlider = styled.input`
     ${thumb}
   }
   &::-moz-range-thumb {
-    ${thumb}
+    ${thumb};
+    /* Avoid too small circles, dunno why this is happening :/  */
+    height: 8px;
+    width: 8px;
   }
 
   &::-webkit-slider-runnable-track {
@@ -319,7 +304,6 @@ export const Slider = forwardRef(function EdsSlider(
             <WrapperGroupLabel id="wrapperLabel">{label}</WrapperGroupLabel>
           )}
           <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
-
           <StyledSlider
             type="range"
             value={valueA}
@@ -331,7 +315,7 @@ export const Slider = forwardRef(function EdsSlider(
               onChangeA(event)
             }}
           />
-          <Output htmlFor="a" value={valueA} min={min}>
+          <Output htmlFor="a" value={valueA}>
             {outputFunction ? outputFunction(valueA) : valueA}
           </Output>
           <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
@@ -347,7 +331,7 @@ export const Slider = forwardRef(function EdsSlider(
               onChangeB(event)
             }}
           />
-          <Output htmlFor="b" value={valueB} min={min}>
+          <Output htmlFor="b" value={valueB}>
             {outputFunction ? outputFunction(valueB) : valueB}
           </Output>
           <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
@@ -368,12 +352,7 @@ export const Slider = forwardRef(function EdsSlider(
               onChangeZ(event)
             }}
           />
-          <Output
-            htmlFor="simple"
-            value={valueZ}
-            min={min}
-            minMaxDots={minMaxDots}
-          >
+          <Output htmlFor="simple" value={valueZ}>
             {outputFunction ? outputFunction(valueZ) : valueZ}
           </Output>
           <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
