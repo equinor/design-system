@@ -1,54 +1,84 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
 
-const track = `
+const { enabled } = tokens
+
+const track = css`
   width: 100%;
   height: 100%;
   cursor: pointer;
   background: none;'
 `
-const thumb = `
-  border: 2px solid #007079;
-  height: 12px;
-  width: 12px;
-  border-radius: 50%;
-  background: #ffffff;
+
+const thumb = css`
+  border: ${enabled.handle.border.width} ${enabled.handle.border.type}
+    ${enabled.handle.border.color};
+  height: ${enabled.handle.size};
+  width: ${enabled.handle.size};
+  border-radius: ${enabled.handle.border.radius};
+  background: ${enabled.handle.background};
   cursor: pointer;
   position: relative;
   margin-top: 0;
   z-index: 1;
   pointer-events: auto;
-  `
-const thumbHover = `
-  box-shadow: 0px 0px 0px 6px #deedee;
- `
-
-/** The two first gradients are hacks to avoid 2px too long slider bar on both edges. Better solution? */
-const fakeTrackBg = `
-  background: linear-gradient(90deg, #fff, #fff 3px, transparent 0),
-  linear-gradient(-90deg, #fff, #fff 3px, transparent 0),
-  linear-gradient(
-    0deg,
-    transparent,
-    transparent 20px,
-    #f7f7f7 20px,
-    #f7f7f7 24px,
-    transparent 0
-  );
+`
+const thumbHover = css`
+  box-shadow: 0px 0px 0px 6px ${enabled.handle.hover.background};
+  border-color: ${enabled.handle.hover.border.color};
 `
 
-const trackFill = `
+/** The two first gradients are hacks to avoid 2px too long slider track on both edges. Better solution? */
+/* 20 px = Height from output + (height of handle (12px) - (track height (4px)) / 2) */
+const fakeTrackBg = css`
+  background: linear-gradient(
+      90deg,
+      ${enabled.background},
+      ${enabled.background} 3px,
+      transparent 0
+    ),
+    linear-gradient(
+      -90deg,
+      ${enabled.background},
+      ${enabled.background} 3px,
+      transparent 0
+    ),
+    linear-gradient(
+      0deg,
+      transparent,
+      transparent calc(${enabled.output.height} + ${enabled.track.bottomOffset}),
+      ${enabled.track.background}
+        calc(${enabled.output.height} + ${enabled.track.bottomOffset}),
+      ${enabled.track.background}
+        calc(
+          calc(${enabled.output.height} + ${enabled.track.bottomOffset}) +
+            ${enabled.track.height}
+        ),
+      transparent 0
+    );
+`
+
+const trackFill = css`
   grid-column: 1 / span 2;
   grid-row: 2;
-  height: 4px;
-  margin-bottom: 4px;
-  background: #007079;
+  height: ${enabled.track.height};
+  margin-bottom: ${enabled.track.bottomOffset}
+  background: ${enabled.track.indicator.color};
   align-self: end;
   content: '';
 `
 
+const wrapperGrid = css`
+  display: grid;
+  grid-template-rows: max-content ${enabled.handle.size} ${enabled.output
+      .height};
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  position: relative;
+`
 const Wrapper = styled.div`
   --a: ${({ valA }) => valA};
   --b: ${({ valB }) => valB};
@@ -56,14 +86,7 @@ const Wrapper = styled.div`
   --max: ${({ max }) => max};
   --dif: calc(var(--max) - var(--min));
   --realWidth: calc(100% - 12px);
-  display: grid;
-  grid-template-rows: max-content 12px 16px;
-  /* grid-gap: 0.5rem; */
-  grid-template-columns: 1fr 1fr;
-  margin: 1em auto;
-  width: 100%;
-  position: relative;
-
+  ${wrapperGrid}
   ${fakeTrackBg}
   &::before,
   &::after {
@@ -72,14 +95,16 @@ const Wrapper = styled.div`
   /** Faking the active region of the slider */
   &::before {
     margin-left: calc(
-      6px + (var(--a) - var(--min)) / var(--dif) * var(--realWidth)
+      calc(${enabled.handle.size} / 2) + (var(--a) - var(--min)) / var(--dif) *
+        var(--realWidth)
     );
     width: calc((var(--b) - var(--a)) / var(--dif) * var(--realWidth));
   }
 
   &::after {
     margin-left: calc(
-      6px + (var(--b) - var(--min)) / var(--dif) * var(--realWidth)
+      calc(${enabled.handle.size} / 2) + (var(--b) - var(--min)) / var(--dif) *
+        var(--realWidth)
     );
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
@@ -90,12 +115,7 @@ const WrapperLabel = styled.label`
   --dif: calc(var(--max) - var(--min));
   --value: ${({ value }) => value};
   --realWidth: calc(100% - 12px);
-  display: grid;
-  grid-template-rows: max-content 12px 16px;
-  grid-template-columns: 1fr 1fr;
-  margin: 1em auto;
-  width: 100%;
-  position: relative;
+  ${wrapperGrid}
   ${fakeTrackBg}
   &::after {
     ${trackFill}
@@ -115,24 +135,28 @@ const Label = styled.div`
 `
 const Output = styled.output`
   --val: ${({ value }) => value};
+  --realWidth: calc(100% - 12px);
   width: fit-content;
-  background: white;
+  
   position: relative;
   z-index: 1;
-  color: #6f6f6f;
-  font-size: 10px;
-  margin-top: 6px;
+  color: ${enabled.output.text};
+  ${typographyTemplate(enabled.output.typography)}
+  background: ${enabled.background};
   padding: 0 5px;
+  margin-top: 6px;
+  /* Calculate the distance on the track*/
+  margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
   /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
-  transform: translate(calc(-1 * calc((100% - 12px) / 2)));
+  transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
   grid-row: 3;
   grid-column: 1 / 3;
-  margin-left: calc((var(--val) - var(--min)) / var(--dif) * calc(100% - 12px));
 `
 const MinMaxValue = styled.span`
   grid-row: 3;
-  font-size: 10px;
-  color: #6f6f6f;
+  font-size: ${enabled.output.fontSize}
+  color: ${enabled.output.text};
+  ${typographyTemplate(enabled.output.typography)}
   position: absolute;
   left: 2px;
   text-align: left;
@@ -154,15 +178,16 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
   &:after {
     content: ' ';
     display: block;
-    width: 6px;
-    height: 6px;
-    background: #ffffff;
-    border: 1px solid #dcdcdc;
-    border-radius: 100%;
-    bottom: 18px;
-    left: 2px;
     position: absolute;
     z-index: 0;
+    width: ${enabled.dot.size};
+    height: ${enabled.dot.size};
+    background: ${enabled.background};
+    border: ${enabled.dot.border.width} ${enabled.dot.border.type}
+      ${enabled.dot.border.color};
+    border-radius: ${enabled.dot.border.radius};
+    bottom: 18px;
+    left: 2px;
   }
   &:after {
     right: 2px;
@@ -183,29 +208,24 @@ const StyledSlider = styled.input`
   /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent;
+  /* get rid of white Chrome background */
+  background: none;
   grid-column: 1 / -1;
   grid-row: 2;
-  background: none; /* get rid of white Chrome background */
-  color: #000;
   font: inherit; /* fix too small font-size in both Chrome & Firefox */
   margin: 0;
   z-index: 2;
   pointer-events: none;
-  :focus {
-    /* outline: none; */
-  }
-  &:focus {
+  outline: none;
+  &[data-focus-visible-added]:focus {
     z-index: 2;
-    outline: none;
     &::-webkit-slider-thumb {
-      outline: dotted 1px currentcolor;
-      outline-offset: 2px;
+      outline: ${enabled.handle.outline};
+      outline-offset: ${enabled.handle.outlineOffset};
     }
     &::-moz-range-thumb {
-      outline: dotted 1px currentcolor;
-      outline-offset: 2px;
-    }
-    & + output {
+      outline: ${enabled.handle.outline};
+      outline-offset: ${enabled.handle.outlineOffset};
     }
   }
   &:hover,
