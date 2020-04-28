@@ -1,9 +1,16 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Typography, Button, Divider } from '@equinor/eds-core-react'
+import { Typography, Button, Divider, Icon } from '@equinor/eds-core-react'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { popover as tokens } from './Popover.tokens'
+import { close } from '@equinor/eds-icons'
+
+const icons = {
+  close,
+}
+
+Icon.add(icons)
 
 const Anchor = styled.div`
   position: relative;
@@ -69,7 +76,7 @@ const PopoverArrow = styled.svg`
 `
 
 export const Popover = forwardRef(function Popover(
-  { className, title, children, placement, ...rest },
+  { className, open, onClose, children, placement, anchorEl, ...rest },
   ref,
 ) {
   const props = {
@@ -96,15 +103,20 @@ export const Popover = forwardRef(function Popover(
 
   return (
     <Anchor {...props}>
-      {children}
-      <StyledPopoverWrapper {...wrapperProps}>
-        <StyledPopover>
-          <PopoverArrow {...arrowProps}>
-            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-          </PopoverArrow>
-          {title}
-        </StyledPopover>
-      </StyledPopoverWrapper>
+      {anchorEl}
+      {open && (
+        <StyledPopoverWrapper {...wrapperProps}>
+          <StyledPopover>
+            <PopoverArrow {...arrowProps}>
+              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+            </PopoverArrow>
+            <Button onClick={onClose} variant="ghost_icon">
+              <Icon name="close" title="close" size={48} />
+            </Button>
+            {children}
+          </StyledPopover>
+        </StyledPopoverWrapper>
+      )}
     </Anchor>
   )
 })
@@ -129,14 +141,23 @@ Popover.propTypes = {
   ]),
   // Popover title
   title: PropTypes.string,
+  // On Close function:
+  onClose: PropTypes.func,
+  // Open=true activates popup
+  open: PropTypes.bool,
   /** Popover reference/anchor element */
-  children: PropTypes.node.isRequired,
+  anchorEl: PropTypes.node.isRequired,
+  /** @ignore */
+  children: PropTypes.node,
   /** @ignore */
   className: PropTypes.string,
 }
 
 Popover.defaultProps = {
   placement: 'bottom',
+  open: true,
+  onClose: undefined,
   title: '',
+  children: undefined,
   className: '',
 }

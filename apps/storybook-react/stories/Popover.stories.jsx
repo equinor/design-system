@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import {
@@ -36,6 +36,17 @@ export default {
 }
 
 export function Placement() {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
   return (
     <Body>
       <TextWrapper>
@@ -47,9 +58,8 @@ export function Placement() {
       </TextWrapper>
       <Typography variant="h5">Top</Typography>
       <Wrapper>
-        <Popover title="Popover" placement="topLeft">
-          <Button>Top left</Button>
-        </Popover>
+        <Button onClick={handleClick}>Top left</Button>
+        <Popover onClose={handleClose} placement="topLeft"></Popover>
         <Popover title="Popover" placement="top">
           <Button>Top</Button>
         </Popover>
@@ -91,6 +101,25 @@ export function Placement() {
         </Popover>
         <Popover title="Popover" placement="rightBottom">
           <Button>Right bottom</Button>
+        </Popover>
+      </Wrapper>
+    </Body>
+  )
+}
+
+export function openOnHover() {
+  return (
+    <Body>
+      <TextWrapper>
+        <Typography variant="h3">Open on Hover</Typography>
+        <Typography variant="body_long">
+          Popovers can be activated by hover or click. Click is default.
+        </Typography>
+      </TextWrapper>
+      <Wrapper>
+        <Popover placement={placement}>
+          <PopoverTitle>{title}</PopoverTitle>
+          {ANCHOR_CHOICES[anchor]}
         </Popover>
       </Wrapper>
     </Body>
@@ -144,7 +173,8 @@ export const WithKnobs = () => {
         <Typography variant="h3">With knobs</Typography>
       </TextWrapper>
       <Wrapper>
-        <Popover title={title} placement={placement}>
+        <Popover placement={placement}>
+          <PopoverTitle>{title}</PopoverTitle>
           {ANCHOR_CHOICES[anchor]}
         </Popover>
       </Wrapper>
