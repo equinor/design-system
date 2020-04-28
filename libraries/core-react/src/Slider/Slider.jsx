@@ -1,5 +1,6 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import createId from 'lodash.uniqueid'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
@@ -193,6 +194,10 @@ export const Slider = forwardRef(function EdsSlider(
     return outputFunction ? outputFunction(text) : text
   }
 
+  const wrapperId = useMemo(() => createId('wrapper-label-'), [])
+  const inputIdA = useMemo(() => createId('slider-a-'), [])
+  const inputIdB = useMemo(() => createId('slider-b-'), [])
+  const inputId = useMemo(() => createId('slider-'), [])
   return (
     <>
       {isRangeSlider ? (
@@ -200,7 +205,7 @@ export const Slider = forwardRef(function EdsSlider(
           {...rest}
           ref={ref}
           role="group"
-          aria-labelledby="wrapperLabel"
+          aria-labelledby={wrapperId}
           valA={sliderValue[0]}
           valB={sliderValue[1]}
           max={max}
@@ -208,43 +213,43 @@ export const Slider = forwardRef(function EdsSlider(
           disabled={disabled}
         >
           {minMaxDots ? (
-            <WrapperGroupLabelDots id="wrapperLabel">
+            <WrapperGroupLabelDots id={wrapperId}>
               {label}
             </WrapperGroupLabelDots>
           ) : (
-            <WrapperGroupLabel id="wrapperLabel">{label}</WrapperGroupLabel>
+            <WrapperGroupLabel id={wrapperId}>{label}</WrapperGroupLabel>
           )}
-          <SrOnlyLabel htmlFor="a">Value A</SrOnlyLabel>
+          <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
             type="range"
             value={sliderValue[0]}
             max={max}
             min={min}
-            id="a"
+            id={inputIdA}
             step={step}
             onChange={(event) => {
               onValueChange(event, 0)
             }}
             disabled={disabled}
           />
-          <Output htmlFor="a" value={sliderValue[0]}>
+          <Output htmlFor={inputIdA} value={sliderValue[0]}>
             {getFormattedText(sliderValue[0])}
           </Output>
           {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
-          <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
+          <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
           <SliderInput
             type="range"
             value={sliderValue[1]}
             min={min}
             max={max}
-            id="b"
+            id={inputIdB}
             step={step}
             onChange={(event) => {
               onValueChange(event, 1)
             }}
             disabled={disabled}
           />
-          <Output htmlFor="b" value={sliderValue[1]}>
+          <Output htmlFor={inputIdB} value={sliderValue[1]}>
             {getFormattedText(sliderValue[1])}
           </Output>
           {minMaxValues && <MinMax>{getFormattedText(max)}</MinMax>}
@@ -260,20 +265,20 @@ export const Slider = forwardRef(function EdsSlider(
         >
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
-          <Label>{label}</Label>
+          <Label htmlFor={inputId}>{label}</Label>
           <SliderInput
             type="range"
             value={sliderValue}
             min={min}
             max={max}
             step={step}
-            id="simple"
+            id={inputId}
             onChange={(event) => {
               onValueChange(event)
             }}
             disabled={disabled}
           />
-          <Output htmlFor="simple" value={sliderValue}>
+          <Output htmlFor={inputId} value={sliderValue}>
             {getFormattedText(sliderValue)}
           </Output>
           {minMaxValues && (

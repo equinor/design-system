@@ -37,12 +37,7 @@ export const Examples = () => {
   }
   return (
     <Body>
-      <Slider
-        label="Range slider"
-        value={value}
-        onChange={onChange}
-        disabled={true}
-      />
+      <Slider label="Range slider" value={value} onChange={onChange} />
       <p>
         <small>Output from slider is {value.join(', ')}</small>
       </p>
