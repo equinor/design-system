@@ -86,7 +86,7 @@ const Wrapper = styled.div`
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
 `
-const WrapperLabel = styled.label`
+const WrapperLabel = styled.div`
   --min: ${({ min }) => min};
   --max: ${({ max }) => max};
   --dif: calc(var(--max) - var(--min));
@@ -97,7 +97,6 @@ const WrapperLabel = styled.label`
   &::after {
     ${trackFill}
   }
-
   &::after {
     margin-right: calc(
       (var(--max) - var(--value)) / var(--dif) * var(--realWidth)
@@ -106,7 +105,7 @@ const WrapperLabel = styled.label`
     margin-left: 3px;
   }
 `
-const Label = styled.div`
+const Label = styled.label`
   grid-row: 1;
   grid-column: 1/-1;
 `
