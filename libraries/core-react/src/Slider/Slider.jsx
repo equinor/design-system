@@ -233,7 +233,7 @@ export const Slider = forwardRef(function EdsSlider(
           <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
         </RangeWrapper>
       ) : (
-        <Wrapper max={max} min={min} value={sliderValue}>
+        <Wrapper {...rest} ref={ref} max={max} min={min} value={sliderValue}>
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
           <Label>{label}</Label>
@@ -262,17 +262,31 @@ export const Slider = forwardRef(function EdsSlider(
 Slider.displayName = 'eds-Slider'
 
 Slider.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
   /** Label for the slider group */
   label: PropTypes.string.isRequired,
+  /** Components value, string for slider, array for range */
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
+  /** Function to be called when value change */
+  onChange: PropTypes.func,
+  /** Function for formatting the output, e.g. with dates */
+  outputFunction: PropTypes.func,
+  /** Max value */
+
+  max: PropTypes.number,
+  /**  Min value */
+  min: PropTypes.number,
   /** Stepping interval */
   step: PropTypes.number,
-  /** Components value, string for slider, array for range */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  onChange: PropTypes.func,
+  /** Show the min and max dots or not */
+  minMaxDots: PropTypes.bool,
 }
 
 Slider.defaultProps = {
-  className: '',
+  /* Same as spec defaults */
+  step: 1,
+  min: 0,
+  max: 100,
+  onChange: undefined,
+  outputFunction: undefined,
+  minMaxDots: true,
 }

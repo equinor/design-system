@@ -120,18 +120,11 @@ SliderInput.propTypes = {
   /* Change function , this is a controlled component */
   onChange: PropTypes.func.isRequired,
   /* Min value */
-  min: PropTypes.number,
+  min: PropTypes.number.isRequired,
   /* Max value */
-  max: PropTypes.number,
+  max: PropTypes.number.isRequired,
   /* Id for the input element */
   id: PropTypes.string.isRequired,
   /* Step value */
-  step: PropTypes.number,
-}
-
-SliderInput.defaultProps = {
-  /* Same as spec defaults */
-  step: 1,
-  min: 0,
-  max: 100,
+  step: PropTypes.number.isRequired,
 }
