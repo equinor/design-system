@@ -157,7 +157,6 @@ export const Slider = forwardRef(function EdsSlider(
 ) {
   const isRangeSlider = Array.isArray(value)
   // @TODO: Some counter prefix id to avoid duplicate id's
-
   const [sliderValue, setSliderValue] = useState(value)
 
   const onValueChange = (event, valueArrIdx) => {
@@ -177,6 +176,10 @@ export const Slider = forwardRef(function EdsSlider(
       // Callback for provided onChange func
       onChange(event, changedValue)
     }
+  }
+
+  const getFormattedText = (text) => {
+    return outputFunction ? outputFunction(text) : text
   }
 
   return (
@@ -212,9 +215,9 @@ export const Slider = forwardRef(function EdsSlider(
             }}
           />
           <Output htmlFor="a" value={sliderValue[0]}>
-            {outputFunction ? outputFunction(sliderValue[0]) : sliderValue[0]}
+            {getFormattedText(sliderValue[0])}
           </Output>
-          <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
+          <MinMax>{getFormattedText(min)}</MinMax>
           <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
           <SliderInput
             type="range"
@@ -228,9 +231,9 @@ export const Slider = forwardRef(function EdsSlider(
             }}
           />
           <Output htmlFor="b" value={sliderValue[1]}>
-            {outputFunction ? outputFunction(sliderValue[1]) : sliderValue[1]}
+            {getFormattedText(sliderValue[1])}
           </Output>
-          <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
+          <MinMax>{getFormattedText(max)}</MinMax>
         </RangeWrapper>
       ) : (
         <Wrapper {...rest} ref={ref} max={max} min={min} value={sliderValue}>
@@ -249,10 +252,10 @@ export const Slider = forwardRef(function EdsSlider(
             }}
           />
           <Output htmlFor="simple" value={sliderValue}>
-            {outputFunction ? outputFunction(sliderValue) : sliderValue}
+            {getFormattedText(sliderValue)}
           </Output>
-          <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
-          <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
+          <MinMax>{getFormattedText(min)}</MinMax>
+          <MinMax>{getFormattedText(max)}</MinMax>
         </Wrapper>
       )}
     </>
