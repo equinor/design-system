@@ -272,6 +272,7 @@ export const Slider = forwardRef(function EdsSlider(
               onValueChange(event)
             }}
             disabled={disabled}
+            aria-labelledby={ariaLabelledby}
           />
           <Output htmlFor={inputId} value={sliderValue}>
             {getFormattedText(sliderValue)}

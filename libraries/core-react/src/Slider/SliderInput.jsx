@@ -134,9 +134,11 @@ export const SliderInput = ({
   step,
   onChange,
   disabled,
+  ...restProps
 }) => {
   return (
     <StyledSliderInput
+      {...restProps}
       value={value}
       min={min}
       max={max}
