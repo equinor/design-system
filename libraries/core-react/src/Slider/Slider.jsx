@@ -56,7 +56,7 @@ const wrapperGrid = css`
   width: 100%;
   position: relative;
 `
-const Wrapper = styled.div`
+const RangeWrapper = styled.div`
   --a: ${({ valA }) => valA};
   --b: ${({ valB }) => valB};
   --min: ${({ min }) => min};
@@ -86,7 +86,7 @@ const Wrapper = styled.div`
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
 `
-const WrapperLabel = styled.div`
+const Wrapper = styled.div`
   --min: ${({ min }) => min};
   --max: ${({ max }) => max};
   --dif: calc(var(--max) - var(--min));
@@ -182,7 +182,7 @@ export const Slider = forwardRef(function EdsSlider(
   return (
     <>
       {isRangeSlider ? (
-        <Wrapper
+        <RangeWrapper
           {...rest}
           ref={ref}
           role="group"
@@ -231,9 +231,9 @@ export const Slider = forwardRef(function EdsSlider(
             {outputFunction ? outputFunction(sliderValue[1]) : sliderValue[1]}
           </Output>
           <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
-        </Wrapper>
+        </RangeWrapper>
       ) : (
-        <WrapperLabel max={max} min={min} value={sliderValue}>
+        <Wrapper max={max} min={min} value={sliderValue}>
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
           <Label>{label}</Label>
@@ -253,7 +253,7 @@ export const Slider = forwardRef(function EdsSlider(
           </Output>
           <MinMax>{outputFunction ? outputFunction(min) : min}</MinMax>
           <MinMax>{outputFunction ? outputFunction(max) : max}</MinMax>
-        </WrapperLabel>
+        </Wrapper>
       )}
     </>
   )
