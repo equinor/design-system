@@ -2,6 +2,8 @@ import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { chevron_right } from '@equinor/eds-icons'
+import { useCombinedRefs } from '../_common'
+import { useDrawer } from './Drawer.context'
 import { Icon } from '..'
 import { drawer as tokens } from './Drawer.tokens'
 
@@ -107,21 +109,41 @@ const StyledDrawerItem = styled.li`
 `
 
 export const DrawerItem = forwardRef(function EdsDrawerItem(
-  { children, active, ...rest },
+  { children, disabled, index, ...rest },
   ref,
 ) {
-  // const [state, setState] = useState({
-  //   hasLink: false,
-  //   hasChildren: false,
-  // })
-  // console.log(children, rest)
+  // const { focusedIndex, setFocusedIndex } = useDrawer()
+  console.log('rest', rest.drawerListId)
+  // Add a level check and two context levels perhaps
+  const focusedIndex = 2
+  const isFocused = index === focusedIndex
+  // console.log('item children', children)
+  const updatedChildren = React.Children.map(children, (child) => {
+    // console.log('item child', child)
+    if (child.props) {
+      return React.cloneElement(child, {
+        disabled,
+      })
+    }
+    return child
+  })
+
+  const props = {
+    ...rest,
+    disabled,
+  }
 
   return (
-    <StyledDrawerItem {...rest} active={active} ref={ref}>
-      {children.length > 1 && (
+    <StyledDrawerItem
+      {...props}
+      index={index}
+      ref={useCombinedRefs(ref, (node) => isFocused && node.focus())}
+      // onFocus={() => setFocusedIndex(index)}
+    >
+      {updatedChildren.length > 1 && (
         <Icon className="child_icon" name="chevron_right" size={16} />
       )}
-      {children}
+      {updatedChildren}
     </StyledDrawerItem>
   )
 })
@@ -133,12 +155,18 @@ DrawerItem.propTypes = {
   className: PropTypes.string,
   /** @ignore */
   children: PropTypes.node,
-  /** Active */
+  /** Active drawer item */
   active: PropTypes.bool,
+  /** @ignore */
+  index: PropTypes.number,
+  /** Disabled drawer item */
+  disabled: PropTypes.bool,
 }
 
 DrawerItem.defaultProps = {
   className: '',
   children: undefined,
   active: false,
+  disabled: false,
+  index: 0,
 }

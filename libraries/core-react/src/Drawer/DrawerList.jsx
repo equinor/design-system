@@ -1,5 +1,6 @@
-import React, { forwardRef, useState, useEffect } from 'react'
+import React, { forwardRef, useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import createId from 'lodash.uniqueid'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 
@@ -63,14 +64,18 @@ export const DrawerList = forwardRef(function EdsDrawerList(
     event.stopPropagation()
   }
 
+  const drawerListId = useMemo(() => createId('drawerlist-'), [])
+
   const ListItems = React.Children.map(children, (child, index) => {
     return React.cloneElement(child, {
+      drawerListId,
       index,
+      level,
       onClick: (event) => handleOnClick(event, index),
     })
   })
 
-  console.log(drawerOpen, level, ListItems)
+  console.log('list: ', drawerOpen, drawerListId, level, ListItems)
 
   return (
     <StyledDrawerList {...props} level={level} open={open} ref={ref}>
