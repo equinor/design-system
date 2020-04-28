@@ -1,6 +1,6 @@
-import React, { forwardRef, useState, useMemo } from 'react'
+import React, { forwardRef, useState /* , useMemo */ } from 'react'
 import PropTypes from 'prop-types'
-import createId from 'lodash.uniqueid'
+/* import createId from 'lodash.uniqueid' */
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
@@ -114,10 +114,6 @@ const Wrapper = styled.div`
     margin-left: 3px;
   }
 `
-const Label = styled.label`
-  grid-row: 1;
-  grid-column: 1/-1;
-`
 
 const WrapperGroupLabel = styled.div`
   grid-row: 1;
@@ -152,7 +148,6 @@ const SrOnlyLabel = styled.label`
 
 export const Slider = forwardRef(function EdsSlider(
   {
-    label = '',
     min = 0,
     max = 100,
     value = [40, 60],
@@ -162,6 +157,7 @@ export const Slider = forwardRef(function EdsSlider(
     minMaxValues,
     step = 1,
     disabled,
+    ariaLabelledby,
     ...rest
   },
   ref,
@@ -194,10 +190,15 @@ export const Slider = forwardRef(function EdsSlider(
     return outputFunction ? outputFunction(text) : text
   }
 
-  const wrapperId = useMemo(() => createId('wrapper-label-'), [])
-  const inputIdA = useMemo(() => createId('slider-a-'), [])
-  const inputIdB = useMemo(() => createId('slider-b-'), [])
-  const inputId = useMemo(() => createId('slider-'), [])
+  // Let's trust people?
+  /*  const inputIdA = useMemo(() => createId(`${ariaLabelledby}-thumb-a-`), [])
+  const inputIdB = useMemo(() => createId(`${ariaLabelledby}-thumb-b-`), [])
+  const inputId = useMemo(() => createId(`${ariaLabelledby}-thumb`), []) */
+
+  const inputIdA = `${ariaLabelledby}-thumb-a`
+  const inputIdB = `${ariaLabelledby}-thumb-b`
+  const inputId = `${ariaLabelledby}-thumb`
+
   return (
     <>
       {isRangeSlider ? (
@@ -205,20 +206,15 @@ export const Slider = forwardRef(function EdsSlider(
           {...rest}
           ref={ref}
           role="group"
-          aria-labelledby={wrapperId}
+          aria-labelledby={ariaLabelledby}
           valA={sliderValue[0]}
           valB={sliderValue[1]}
           max={max}
           min={min}
           disabled={disabled}
         >
-          {minMaxDots ? (
-            <WrapperGroupLabelDots id={wrapperId}>
-              {label}
-            </WrapperGroupLabelDots>
-          ) : (
-            <WrapperGroupLabel id={wrapperId}>{label}</WrapperGroupLabel>
-          )}
+          {/*  Need an element for pseudo elems :/ */}
+          {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
             type="range"
@@ -265,7 +261,6 @@ export const Slider = forwardRef(function EdsSlider(
         >
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
-          <Label htmlFor={inputId}>{label}</Label>
           <SliderInput
             type="range"
             value={sliderValue}
@@ -296,8 +291,8 @@ export const Slider = forwardRef(function EdsSlider(
 Slider.displayName = 'eds-Slider'
 
 Slider.propTypes = {
-  /** Label for the slider group */
-  label: PropTypes.string.isRequired,
+  /** Id for the elements that labels this slider */
+  ariaLabelledby: PropTypes.string.isRequired,
   /** Components value, string for slider, array for range */
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
   /** Function to be called when value change */

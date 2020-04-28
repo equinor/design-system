@@ -37,26 +37,38 @@ export const Examples = () => {
   }
   return (
     <Body>
-      <Slider label="Range slider" value={value} onChange={onChange} />
+      <span id="range-slider-label">Range slider</span>
+      <Slider
+        value={value}
+        onChange={onChange}
+        ariaLabelledby="range-slider-label"
+      />
       <p>
         <small>Output from slider is {value.join(', ')}</small>
       </p>
+      <span id="large-step-range-slider">Range slider with steps of 5</span>
       <Slider
-        label="Range slider with steps of 5"
+        ariaLabelledby="large-step-range-slider"
         step={5}
         minMaxDots={false}
+        value={[40, 60]}
       />
+      <span id="date-range-slider">Date range slider with days</span>
       <Slider
         min={getUnixTime('2020-01-01')}
         max={getUnixTime('2020-01-31')}
-        label="Date range day"
+        ariaLabelledby="date-range-slider"
         step={60 * 60 * 24 * 1000}
         value={[getUnixTime('2020-01-01'), getUnixTime('2020-01-31')]}
         outputFunction={outputFunction}
       />
-      <Slider label="Simple slider" value={4} min={0} max={10} />
+      <span id="simple-slider">Simple slider</span>
+      <Slider value={4} min={0} max={10} ariaLabelledby="simple-slider" />
+      <span id="even-simpler-slider">
+        Simple slider, no dots, no min or max values, steps of 10
+      </span>
       <Slider
-        label="Simple slider, no dots, no min or max values, steps of 10"
+        ariaLabelledby="even-simpler-slider"
         value={50}
         min={0}
         max={100}
@@ -64,7 +76,8 @@ export const Examples = () => {
         minMaxDots={false}
         minMaxValues={false}
       />
-      <Slider label="Disabled slider" value={50} disabled={true} />
+      <span id="disabled-slider"></span>
+      <Slider value={50} disabled={true} ariaLabelledby="disabled-slider" />
     </Body>
   )
 }
