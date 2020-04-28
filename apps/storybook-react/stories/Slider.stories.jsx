@@ -56,12 +56,13 @@ export const Examples = () => {
       />
       <Slider label="Simple slider" value={4} min={0} max={10} />
       <Slider
-        label="Simple slider, no dots, steps of 10"
+        label="Simple slider, no dots, no min or max values, steps of 10"
         value={50}
         min={0}
         max={100}
         step={10}
         minMaxDots={false}
+        minMaxValues={false}
       />
     </Body>
   )

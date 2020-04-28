@@ -150,6 +150,7 @@ export const Slider = forwardRef(function EdsSlider(
     outputFunction,
     onChange,
     minMaxDots = true,
+    minMaxValues,
     step = 1,
     ...rest
   },
@@ -160,6 +161,7 @@ export const Slider = forwardRef(function EdsSlider(
   const [sliderValue, setSliderValue] = useState(value)
 
   const onValueChange = (event, valueArrIdx) => {
+    // Get the new value as int
     const changedValue = parseInt(event.target.value, 10)
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
@@ -217,7 +219,7 @@ export const Slider = forwardRef(function EdsSlider(
           <Output htmlFor="a" value={sliderValue[0]}>
             {getFormattedText(sliderValue[0])}
           </Output>
-          <MinMax>{getFormattedText(min)}</MinMax>
+          {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
           <SrOnlyLabel htmlFor="b">Value B</SrOnlyLabel>
           <SliderInput
             type="range"
@@ -233,7 +235,7 @@ export const Slider = forwardRef(function EdsSlider(
           <Output htmlFor="b" value={sliderValue[1]}>
             {getFormattedText(sliderValue[1])}
           </Output>
-          <MinMax>{getFormattedText(max)}</MinMax>
+          {minMaxValues && <MinMax>{getFormattedText(max)}</MinMax>}
         </RangeWrapper>
       ) : (
         <Wrapper {...rest} ref={ref} max={max} min={min} value={sliderValue}>
@@ -254,8 +256,12 @@ export const Slider = forwardRef(function EdsSlider(
           <Output htmlFor="simple" value={sliderValue}>
             {getFormattedText(sliderValue)}
           </Output>
-          <MinMax>{getFormattedText(min)}</MinMax>
-          <MinMax>{getFormattedText(max)}</MinMax>
+          {minMaxValues && (
+            <>
+              <MinMax>{getFormattedText(min)}</MinMax>
+              <MinMax>{getFormattedText(max)}</MinMax>
+            </>
+          )}
         </Wrapper>
       )}
     </>
@@ -282,6 +288,8 @@ Slider.propTypes = {
   step: PropTypes.number,
   /** Show the min and max dots or not */
   minMaxDots: PropTypes.bool,
+  /** Show the min and max values or not */
+  minMaxValues: PropTypes.bool,
 }
 
 Slider.defaultProps = {
@@ -292,4 +300,5 @@ Slider.defaultProps = {
   onChange: undefined,
   outputFunction: undefined,
   minMaxDots: true,
+  minMaxValues: true,
 }
