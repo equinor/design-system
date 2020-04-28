@@ -6,7 +6,7 @@ import { MinMax } from './MinMax'
 import { Output } from './Output'
 import { SliderInput } from './SliderInput'
 
-const { enabled } = tokens
+const { enabled, disabled: _disabled } = tokens
 
 /** The two first gradients are hacks to avoid 2px too long slider track on both edges. Better solution? */
 /* 20 px = Height from output + (height of handle (12px) - (track height (4px)) / 2) */
@@ -43,7 +43,7 @@ const trackFill = css`
   grid-row: 2;
   height: ${enabled.track.height};
   margin-bottom: ${enabled.track.bottomOffset}
-  background: ${enabled.track.indicator.color};
+  
   align-self: end;
   content: '';
 `
@@ -68,6 +68,10 @@ const RangeWrapper = styled.div`
   &::before,
   &::after {
     ${trackFill}
+    background: ${({ disabled }) =>
+      disabled
+        ? _disabled.track.indicator.color
+        : enabled.track.indicator.color};
   }
   /** Faking the active region of the slider */
   &::before {
@@ -96,6 +100,10 @@ const Wrapper = styled.div`
   ${fakeTrackBg}
   &::after {
     ${trackFill}
+    background: ${({ disabled }) =>
+      disabled
+        ? _disabled.track.indicator.color
+        : enabled.track.indicator.color};
   }
   &::after {
     margin-right: calc(
@@ -152,6 +160,7 @@ export const Slider = forwardRef(function EdsSlider(
     minMaxDots = true,
     minMaxValues,
     step = 1,
+    disabled,
     ...rest
   },
   ref,
@@ -196,6 +205,7 @@ export const Slider = forwardRef(function EdsSlider(
           valB={sliderValue[1]}
           max={max}
           min={min}
+          disabled={disabled}
         >
           {minMaxDots ? (
             <WrapperGroupLabelDots id="wrapperLabel">
@@ -215,6 +225,7 @@ export const Slider = forwardRef(function EdsSlider(
             onChange={(event) => {
               onValueChange(event, 0)
             }}
+            disabled={disabled}
           />
           <Output htmlFor="a" value={sliderValue[0]}>
             {getFormattedText(sliderValue[0])}
@@ -231,6 +242,7 @@ export const Slider = forwardRef(function EdsSlider(
             onChange={(event) => {
               onValueChange(event, 1)
             }}
+            disabled={disabled}
           />
           <Output htmlFor="b" value={sliderValue[1]}>
             {getFormattedText(sliderValue[1])}
@@ -238,7 +250,14 @@ export const Slider = forwardRef(function EdsSlider(
           {minMaxValues && <MinMax>{getFormattedText(max)}</MinMax>}
         </RangeWrapper>
       ) : (
-        <Wrapper {...rest} ref={ref} max={max} min={min} value={sliderValue}>
+        <Wrapper
+          {...rest}
+          ref={ref}
+          max={max}
+          min={min}
+          value={sliderValue}
+          disabled={disabled}
+        >
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
           <Label>{label}</Label>
@@ -252,6 +271,7 @@ export const Slider = forwardRef(function EdsSlider(
             onChange={(event) => {
               onValueChange(event)
             }}
+            disabled={disabled}
           />
           <Output htmlFor="simple" value={sliderValue}>
             {getFormattedText(sliderValue)}
@@ -290,6 +310,8 @@ Slider.propTypes = {
   minMaxDots: PropTypes.bool,
   /** Show the min and max values or not */
   minMaxValues: PropTypes.bool,
+  /** Disabled */
+  disabled: PropTypes.bool,
 }
 
 Slider.defaultProps = {
@@ -301,4 +323,5 @@ Slider.defaultProps = {
   outputFunction: undefined,
   minMaxDots: true,
   minMaxValues: true,
+  disabled: false,
 }

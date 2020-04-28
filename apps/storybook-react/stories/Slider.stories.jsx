@@ -37,7 +37,12 @@ export const Examples = () => {
   }
   return (
     <Body>
-      <Slider label="Range slider" value={value} onChange={onChange} />
+      <Slider
+        label="Range slider"
+        value={value}
+        onChange={onChange}
+        disabled={true}
+      />
       <p>
         <small>Output from slider is {value.join(', ')}</small>
       </p>
@@ -64,6 +69,7 @@ export const Examples = () => {
         minMaxDots={false}
         minMaxValues={false}
       />
+      <Slider label="Disabled slider" value={50} disabled={true} />
     </Body>
   )
 }

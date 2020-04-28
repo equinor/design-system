@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 
-const { enabled } = tokens
+const { enabled, disabled: _disabled } = tokens
 
 const track = css`
   width: 100%;
@@ -30,6 +30,15 @@ const thumbHover = css`
   border-color: ${enabled.handle.hover.border.color};
 `
 
+const thumbHoverAndDisabled = css`
+  cursor: not-allowed;
+  box-shadow: none;
+`
+
+const thumbDisabled = css`
+  background-color: ${_disabled.background};
+  border-color: ${_disabled.border.color};
+`
 const StyledSliderInput = styled.input.attrs(() => ({
   type: 'range',
 }))`
@@ -74,6 +83,24 @@ const StyledSliderInput = styled.input.attrs(() => ({
       ${thumbHover}
     }
   }
+  &:disabled {
+    &::-webkit-slider-thumb {
+      ${thumbDisabled}
+    }
+    &::-moz-range-thumb {
+      ${thumbDisabled}
+    }
+  }
+  &:disabled:hover,
+  &:disabled:active {
+    &::-webkit-slider-thumb {
+      ${thumbHoverAndDisabled}
+    }
+    &::-moz-range-thumb {
+      ${thumbHoverAndDisabled}
+    }
+  }
+
   &:before,
   &:after {
   }
@@ -99,7 +126,15 @@ const StyledSliderInput = styled.input.attrs(() => ({
     ${track}
   }
 `
-export const SliderInput = ({ value, min, max, id, step, onChange }) => {
+export const SliderInput = ({
+  value,
+  min,
+  max,
+  id,
+  step,
+  onChange,
+  disabled,
+}) => {
   return (
     <StyledSliderInput
       value={value}
@@ -110,6 +145,7 @@ export const SliderInput = ({ value, min, max, id, step, onChange }) => {
       onChange={(event) => {
         onChange(event)
       }}
+      disabled={disabled}
     />
   )
 }
@@ -127,4 +163,6 @@ SliderInput.propTypes = {
   id: PropTypes.string.isRequired,
   /* Step value */
   step: PropTypes.number.isRequired,
+  /** Disabled */
+  disabled: PropTypes.bool.isRequired,
 }

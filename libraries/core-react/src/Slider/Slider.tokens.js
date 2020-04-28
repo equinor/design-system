@@ -12,6 +12,8 @@ const {
       primary__hover_alt: { rgba: primaryHoverAlt },
       primary__hover: { rgba: primaryHover },
       focus: { rgba: focusOutlineColor },
+      disabled__fill: { rgba: backgroundColorDisabled },
+      disabled__border: { rgba: backgroundBorderDisabled },
     },
     text: {
       static_icons__tertiary: { rgba: textColor },
@@ -62,6 +64,20 @@ export const slider = {
         type: 'solid',
         radius: '50%',
       },
+    },
+  },
+  disabled: {
+    background: backgroundColorDisabled,
+    border: {
+      color: backgroundColorMedium,
+    },
+    track: {
+      indicator: {
+        color: backgroundBorderDisabled,
+      },
+    },
+    typography: {
+      /* color: disabledColor, */
     },
   },
 }
