@@ -14,7 +14,7 @@ const StyledPaper = styled(Paper)`
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { anchorEl, children, ...rest },
+  { anchorEl, children, focus, ...rest },
   ref,
 ) {
   if (!anchorEl) {
@@ -29,10 +29,14 @@ export const Menu = React.forwardRef(function EdsMenu(
     // left: rect.x,
   }
 
+  const menuListProps = {
+    focus,
+  }
+
   return (
     <StyledPaper elevation="raised" {...props} ref={ref}>
       <MenuProvider>
-        <MenuList>{children}</MenuList>
+        <MenuList {...menuListProps}>{children}</MenuList>
       </MenuProvider>
     </StyledPaper>
   )
@@ -48,11 +52,14 @@ Menu.propTypes = {
   ]).isRequired,
   /** Element the menu is anchored to */
   anchorEl: PropTypes.node,
+  /** Focus menuItem */
+  focus: PropTypes.oneOf(['first', 'last']),
 }
 
 Menu.defaultProps = {
   className: '',
   anchorEl: undefined,
+  focus: undefined,
 }
 
 Menu.displayName = 'eds-menu'

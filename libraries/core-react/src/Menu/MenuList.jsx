@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useMe } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
@@ -15,7 +15,7 @@ const List = styled.ul.attrs({ role: 'menu' })`
 `
 
 export const MenuList = React.forwardRef(function EdsMenuList(
-  { children, ...rest },
+  { children, focus, ...rest },
   ref,
 ) {
   const { focusedIndex, setFocusedIndex } = useMenu()
@@ -34,6 +34,15 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   const firstFocusIndex = focusableIndexs[0]
   const lastFocusIndex = focusableIndexs[focusableIndexs.length - 1]
 
+  useEffect(() => {
+    if (focus === 'first') {
+      setFocusedIndex(firstFocusIndex)
+    }
+    if (focus === 'last') {
+      setFocusedIndex(lastFocusIndex)
+    }
+  }, [focus, setFocusedIndex, lastFocusIndex, firstFocusIndex])
+
   const handleMenuItemChange = (direction, fallbackIndex) => {
     const i = direction === 'down' ? 1 : -1
     const currentFocus = focusableIndexs.indexOf(focusedIndex)
@@ -50,6 +59,9 @@ export const MenuList = React.forwardRef(function EdsMenuList(
     }
     if (key === 'ArrowUp') {
       handleMenuItemChange('up', lastFocusIndex)
+    }
+    if (key === 'ArrowRight') {
+      // handle nested menu
     }
   }
 
@@ -68,10 +80,13 @@ MenuList.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  /** Focus menuItem */
+  focus: PropTypes.oneOf(['first', 'last']),
 }
 
 MenuList.defaultProps = {
   className: '',
+  focus: undefined,
 }
 
 MenuList.displayName = 'eds-menu-list'
