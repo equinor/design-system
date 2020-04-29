@@ -100,14 +100,22 @@ export const Preview = () => {
 }
 
 export const ButtonToggle = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [state, setState] = React.useState({ anchorEl: null, focus: null })
 
-  const toggleMenu = (e) =>
-    anchorEl ? setAnchorEl(null) : setAnchorEl(e.target)
+  const { anchorEl, focus } = state
 
-  const onKeyPress = ({ key }) => {
-    if (key === 'Enter') {
-      toggleMenu(e)
+  const toggleMenu = (e, focus = null) => {
+    const updatedAnchorEl = anchorEl ? null : e.target
+    setState({ ...state, anchorEl: updatedAnchorEl, focus })
+  }
+
+  const onKeyPress = (e) => {
+    const { key } = e
+    if (key === ('Enter' || ' ' || 'ArrowDown')) {
+      toggleMenu(e, 'first')
+    }
+    if (key === 'ArrowUp') {
+      toggleMenu(e, 'last')
     }
   }
 
@@ -116,14 +124,20 @@ export const ButtonToggle = () => {
       <Typography variant="h4">Opened with Button</Typography>
       <Button
         id="menuButton"
-        aria-haspopup="true"
+        aria-haspopup="menu"
         aria-controls="menu1"
+        aria-expanded={anchorEl ? 'true' : 'false'}
         onClick={toggleMenu}
         onKeyDown={onKeyPress}
       >
         Open Menu
       </Button>
-      <Menu id="menu1" aria-labelledby="menuButton" anchorEl={anchorEl}>
+      <Menu
+        id="menu1"
+        aria-labelledby="menuButton"
+        anchorEl={anchorEl}
+        focus={focus}
+      >
         <MenuItem>
           <Icon name="folder" />
           <span>Open</span>
