@@ -259,8 +259,6 @@ export const Slider = forwardRef(function EdsSlider(
           value={sliderValue}
           disabled={disabled}
         >
-          {/*  Need an element for pseudo elems :/ */}
-          {minMaxDots && <WrapperGroupLabelDots />}
           <SliderInput
             type="range"
             value={sliderValue}
@@ -277,6 +275,8 @@ export const Slider = forwardRef(function EdsSlider(
           <Output htmlFor={inputId} value={sliderValue}>
             {getFormattedText(sliderValue)}
           </Output>
+          {/*  Need an element for pseudo elems :/ */}
+          {minMaxDots && <WrapperGroupLabelDots />}
           {minMaxValues && (
             <>
               <MinMax>{getFormattedText(min)}</MinMax>
