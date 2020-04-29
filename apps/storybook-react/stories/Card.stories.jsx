@@ -276,8 +276,8 @@ export const CardMediaVariants = () => {
               </CardHeaderTitle>
             </CardHeader>
             <Typography variant="body_short">
-              Last blocks with fullWidth and go straight to the bottom, ignoring
-              spacings
+              Last blocks with fullWidth ignores left and right spacings but
+              keep 24px bottom spacing
             </Typography>
             <CardMediafullWidth />
           </Card>
