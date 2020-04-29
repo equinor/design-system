@@ -6,7 +6,6 @@ const StyledCardHeaderTitle = styled.div`
   display: grid;
   flex-grow: 2;
   grid-auto-columns: auto;
-  grid-gap: 8px;
 `
 
 export const CardHeaderTitle = forwardRef(function EdsCardHeaderTitle(
