@@ -30,7 +30,18 @@ describe('Slider', () => {
     expect(input).toHaveAttribute('max', '10')
     expect(input).toHaveAttribute('step', '2')
   })
-  it('Updates output according to value change', () => {})
+  it('Updates output according to value change', () => {
+    const handleChange = jest.fn()
+    const { container } = render(
+      <Slider value={5} ariaLabelledby="test" onChange={handleChange} />,
+    )
+    const input = container.querySelector('input')
+    const outputValue = container.querySelector('output')
+    expect(outputValue).toHaveTextContent('5')
+    fireEvent.change(input, { target: { value: '6' } })
+    expect(outputValue).toHaveTextContent('6')
+    expect(handleChange).toHaveBeenCalledTimes(1)
+  })
   it('Can format the output if a formatting function is provided', () => {})
   it('Sets the aria label', () => {})
 })
