@@ -61,7 +61,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
     }
 
     &[data-focus-visible-added]:focus {
-      outline: 1px dashed ${focus.color};
+      outline: ${focus.width} ${focus.type} ${focus.color};
       outline-offset: 2px;
     }
     /* Get rid of ff focus border for buttons */
@@ -84,9 +84,8 @@ const Base = ({ base, baseDisabled: disabled }) => {
   `
 }
 
-const ButtonBase = styled.button.attrs(() => ({
-  type: 'button',
-  aria: 'button',
+const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
+  type,
 }))`
   margin: 0;
   padding: 0;

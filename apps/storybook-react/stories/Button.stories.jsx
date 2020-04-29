@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Icon } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 import './../style.css'
 import './button.css'
 
@@ -129,6 +130,21 @@ export const knobs = () => (
     </Button>
   </Wrapper>
 )
+
+export const form = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault() // to prevent navigation from storybook
+    action('onSubmit')(e)
+  }
+
+  return (
+    <Wrapper>
+      <form onSubmit={handleSubmit} href="/">
+        <Button type="submit">Submit form</Button>
+      </form>
+    </Wrapper>
+  )
+}
 
 knobs.story = {
   name: 'With knobs',
