@@ -7,6 +7,10 @@ import { card as tokens } from './Card.tokens'
 const StyledCardMedia = styled.div`
   display: flex;
   width: 100%;
+  &:last-child {
+    margin-bottom: 8px;
+    /* Last child to have 24px total spacing to bottom */
+  }
   ${({ fullWidth, spacing }) =>
     fullWidth
       ? css`
@@ -20,13 +24,6 @@ const StyledCardMedia = styled.div`
             img {
               border-top-right-radius: ${tokens.shape.borderRadius};
               border-top-left-radius: ${tokens.shape.borderRadius};
-            }
-          }
-          &:last-child {
-            margin-bottom: -${spacing};
-            img {
-              border-bottom-right-radius: ${tokens.shape.borderRadius};
-              border-bottom-left-radius: ${tokens.shape.borderRadius};
             }
           }
         `
@@ -55,7 +52,7 @@ export const CardMedia = forwardRef(function EdsCardMedia(
 CardMedia.displayName = 'eds-card-media'
 
 CardMedia.propTypes = {
-  // To be used if CardMedia is the leading block in Card
+  // Full width ignores Card padding
   fullWidth: PropTypes.bool,
   /** @ignore */
   children: PropTypes.node,
