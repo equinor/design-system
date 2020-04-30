@@ -4,7 +4,7 @@ import createId from 'lodash.uniqueid'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 
-const { background, border } = tokens
+const { background } = tokens
 
 const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
   drawerOpen,
@@ -55,27 +55,29 @@ export const DrawerList = forwardRef(function EdsDrawerList(
   { children, level, open, ...props },
   ref,
 ) {
-  const [drawerOpen, setDrawerOpen] = useState(open)
-
-  const handleOnClick = (event, index) => {
-    console.log('click', event.target, index)
-    setDrawerOpen(!drawerOpen)
-
-    event.stopPropagation()
-  }
-
   const drawerListId = useMemo(() => createId('drawerlist-'), [])
 
-  const ListItems = React.Children.map(children, (child, index) => {
-    return React.cloneElement(child, {
-      drawerListId,
-      index,
-      level,
-      onClick: (event) => handleOnClick(event, index),
-    })
-  })
+  let ListItems
 
-  console.log('list: ', drawerOpen, drawerListId, level, ListItems)
+  if (Array.isArray(children)) {
+    ListItems = React.Children.map(children, (child, index) => {
+      return React.cloneElement(child, {
+        drawerListId,
+        index,
+        level,
+        open,
+      })
+    })
+  } else {
+    ListItems = []
+    ListItems.push(
+      React.cloneElement(children, {
+        drawerListId,
+        level,
+        open,
+      }),
+    )
+  }
 
   return (
     <StyledDrawerList {...props} level={level} open={open} ref={ref}>

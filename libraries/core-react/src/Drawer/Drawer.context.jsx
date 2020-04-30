@@ -8,7 +8,6 @@ const initalState = {
 const DrawerContext = React.createContext(initalState)
 
 export const DrawerProvider = ({ children }) => {
-  console.log('Provider: ', children)
   const [state, setState] = useState(initalState)
   return (
     <DrawerContext.Provider value={[state, setState]}>

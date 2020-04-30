@@ -51,7 +51,7 @@ const StyledDrawerItem = styled.li`
     width: auto;
   }
 
-  p {
+  label {
     font-size: ${itemTypography.fontSize};
     line-height: ${itemTypography.lineHeight};
     color: ${itemTypography.color};
@@ -109,24 +109,61 @@ const StyledDrawerItem = styled.li`
 `
 
 export const DrawerItem = forwardRef(function EdsDrawerItem(
-  { children, disabled, index, ...rest },
+  { children, disabled, open, index, ...rest },
   ref,
 ) {
   // const { focusedIndex, setFocusedIndex } = useDrawer()
-  console.log('rest', rest.drawerListId)
-  // Add a level check and two context levels perhaps
-  const focusedIndex = 2
-  const isFocused = index === focusedIndex
-  // console.log('item children', children)
-  const updatedChildren = React.Children.map(children, (child) => {
-    // console.log('item child', child)
-    if (child.props) {
-      return React.cloneElement(child, {
-        disabled,
-      })
+  // console.log('draweritem: ', rest.drawerListId)
+  // Add a level check and deeper context levels
+
+  const [drawerOpen, setDrawerOpen] = useState(open)
+
+  const handleClick = (event) => {
+    if (!disabled) {
+      console.log('click', index, rest)
+      setDrawerOpen(!drawerOpen)
+      event.stopPropagation()
     }
-    return child
-  })
+  }
+
+  const handleKeyDown = (event) => {
+    const { key } = event
+    if (key === 'Enter' || (key === ' ' && !disabled)) {
+      console.log('click enter or space', index, rest)
+      setDrawerOpen(!drawerOpen)
+      event.preventDefault()
+    }
+  }
+
+  const focusedIndex = -1
+  const isFocused = index === focusedIndex
+
+  let itemElements
+  let updatedChildren
+
+  if (Array.isArray(children)) {
+    updatedChildren = React.Children.map(children, (child) => {
+      console.log('item child', child.type.displayName)
+      if (child.type.displayName === 'eds-drawer-list') {
+        return React.cloneElement(child, {
+          disabled,
+        })
+      }
+    })
+    itemElements = React.Children.map(children, (child) => {
+      if (child.type.displayName !== 'eds-drawer-list') {
+        return React.cloneElement(child, {
+          disabled,
+        })
+      }
+    })
+  } else {
+    updatedChildren = React.cloneElement(children, {
+      disabled,
+    })
+  }
+
+  // console.log('item children', updatedChildren, drawerOpen)
 
   const props = {
     ...rest,
@@ -136,14 +173,18 @@ export const DrawerItem = forwardRef(function EdsDrawerItem(
   return (
     <StyledDrawerItem
       {...props}
+      open={drawerOpen}
       index={index}
       ref={useCombinedRefs(ref, (node) => isFocused && node.focus())}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
       // onFocus={() => setFocusedIndex(index)}
     >
       {updatedChildren.length > 1 && (
         <Icon className="child_icon" name="chevron_right" size={16} />
       )}
-      {updatedChildren}
+      {itemElements}
+      {drawerOpen && updatedChildren}
     </StyledDrawerItem>
   )
 })
@@ -161,6 +202,8 @@ DrawerItem.propTypes = {
   index: PropTypes.number,
   /** Disabled drawer item */
   disabled: PropTypes.bool,
+  /** List is open */
+  open: PropTypes.bool,
 }
 
 DrawerItem.defaultProps = {
@@ -169,4 +212,5 @@ DrawerItem.defaultProps = {
   active: false,
   disabled: false,
   index: 0,
+  open: false,
 }
