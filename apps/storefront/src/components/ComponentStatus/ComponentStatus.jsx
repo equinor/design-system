@@ -3,6 +3,7 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import { readableColor } from 'polished'
+import { Table, Typography } from '@equinor/eds-core-react'
 import { camelify, kebabify } from '../../utils'
 
 const ComponentStatus = () => {
@@ -33,27 +34,48 @@ const ComponentStatus = () => {
     components,
   } = data.allComponentStatusYaml.edges[0].node
 
+  const { Head, Body, Row, Cell } = Table
+
   return (
     <Table summary={summary}>
-      <thead>
-        <Tr>
+      <Head>
+        <Row>
           {headers.map((text, index) => (
-            <ThH key={camelify(text)} scope="col">
+            <Cell
+              as="th"
+              style={{ textAlign: 'left' }}
+              key={camelify(text)}
+              scope="col"
+            >
               {text}
-            </ThH>
+            </Cell>
           ))}
-        </Tr>
-      </thead>
-      <tbody>
+        </Row>
+      </Head>
+      <Body>
         {components.map((component, index) => (
-          <Tr key={component.component + index}>
-            <ThV key={component.component + index} scope="row">
-              <Link to={`/components/${kebabify(component.component)}`}>
+          <Row key={component.component + index}>
+            <Cell
+              as="th"
+              key={component.component + index}
+              scope="row"
+              style={{
+                textAlign: 'left',
+                backgroundColor: 'white',
+                borderBottomWidth: '1px',
+              }}
+            >
+              <Typography
+                href={`/components/${kebabify(component.component)}`}
+                variant="body_short"
+                link
+                style={{ fontSize: '0.875em' }}
+              >
                 {component.component}
-              </Link>
-            </ThV>
+              </Typography>
+            </Cell>
             {Object.values(component.status).map((statuses, index) => (
-              <Td key={camelify(statuses.join('-')) + index}>
+              <Cell key={camelify(statuses.join('-')) + index}>
                 <Badges>
                   {statuses.map((status, index) => (
                     <Badge
@@ -64,60 +86,16 @@ const ComponentStatus = () => {
                     </Badge>
                   ))}
                 </Badges>
-              </Td>
+              </Cell>
             ))}
-          </Tr>
+          </Row>
         ))}
-      </tbody>
+      </Body>
     </Table>
   )
 }
 
 const textColor = '#3d3d3d'
-
-const Table = styled.table`
-  border-collapse: collapse;
-  color: ${textColor};
-`
-
-Table.displayName = 'Table'
-
-const Tr = styled.tr`
-  tbody &:nth-child(odd) {
-    th,
-    td {
-      background: white;
-    }
-  }
-`
-
-Tr.displayName = 'TableRow'
-
-const cellPadding = `
-  padding: 0.75em 1.5em;
-`
-
-const ThH = styled.th`
-  text-align: left;
-  ${cellPadding}
-  font-weight: 500 !important;
-`
-
-ThH.displayName = 'TableHeaderHorizontal'
-
-const ThV = styled.th`
-  text-align: left;
-  ${cellPadding}
-  font-weight: 400 !important;
-`
-
-ThV.displayName = 'TableHeaderVertical'
-
-const Td = styled.td`
-  ${cellPadding}
-`
-
-Td.displayName = 'TableCell'
 
 const badgeBgColors = {
   notAvailable: '#dcdcdc',
@@ -144,7 +122,7 @@ const Badge = styled.span`
   color: ${({ variant }) =>
     readableColor(badgeBgColors[variant], textColor, '#fff')};
   margin-top: 0 !important; /* TODO: Remove lobotomized owl selector */
-  font-size: 0.625em;
+  font-size: 0.75em;
   border-radius: 1em;
   display: inline-block;
   height: 2em;
