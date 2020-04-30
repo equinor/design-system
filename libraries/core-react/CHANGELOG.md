@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Card (#153)
-- Tooltip (#176)
+- Card
+- Tooltip
 
 ### Fixed
 
-- `<Button>` component property `type` can now correctly be overridden (#314)
+- `<Button>` component property `type` can now correctly be overridden
 
 ### Changed
 
