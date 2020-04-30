@@ -1,19 +1,11 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { save } from '@equinor/eds-icons'
 import { Button, Icon } from '..'
-import { button } from './Button.tokens'
-
-const {
-  colors: {
-    // eslint-disable-next-line camelcase
-    primary: { ghost_icon },
-  },
-} = button
 
 Icon.add({ save })
 
@@ -38,25 +30,40 @@ describe('Button', () => {
       save.svgPathData,
     )
   })
-  it('Has circular border when variant is icon & focused', () => {
-    const { container } = render(
-      <Button variant="ghost_icon">
-        <Icon name="save" title="save me test" />
-      </Button>,
-    )
-    container.focus()
-
-    expect(container.firstChild).toHaveStyleRule(
-      'border-radius',
-      ghost_icon.focus.radius,
-    )
-  })
   it('Can extend the css for the component', () => {
-    const { container } = render(
-      <StyledButton name="save">Test me!</StyledButton>,
-    )
+    const { container } = render(<StyledButton>Test me!</StyledButton>)
     expect(container.firstChild).toHaveStyleRule('position', 'relative')
     expect(container.firstChild).toHaveStyleRule('height', '100px')
     expect(container.firstChild).toHaveStyleRule('width', '100px')
+  })
+  it('onSubmit is called one time when used in form', () => {
+    const handleSubmit = jest.fn()
+
+    render(
+      <form onSubmit={handleSubmit}>
+        <Button type="submit">Submit button</Button>
+      </form>,
+    )
+
+    const submitButton = screen.queryByText('Submit button')
+
+    fireEvent.submit(submitButton)
+
+    expect(handleSubmit).toHaveBeenCalledTimes(1)
+  })
+  it('onSubmit is ignored in form by default', () => {
+    const handleSubmit = jest.fn()
+
+    render(
+      <form onSubmit={handleSubmit}>
+        <Button>Submit button</Button>
+      </form>,
+    )
+
+    const submitButton = screen.queryByText('Submit button')
+
+    fireEvent.click(submitButton)
+
+    expect(handleSubmit).toHaveBeenCalledTimes(0)
   })
 })
