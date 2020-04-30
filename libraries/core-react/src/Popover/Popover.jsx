@@ -2,28 +2,15 @@ import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Typography, Button, Divider, Icon } from '@equinor/eds-core-react'
+import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { popover as tokens } from './Popover.tokens'
-import { close } from '@equinor/eds-icons'
-
-const icons = {
-  close,
-}
-
-Icon.add(icons)
 
 const Anchor = styled.div`
   position: relative;
   display: flex;
   width: auto;
   justify-content: center;
-  &:hover,
-  &:focus,
-  &:focus-within {
-    > :last-child {
-      display: block;
-    }
-  }
 `
 
 const StyledPopoverWrapper = styled.div`
@@ -36,7 +23,6 @@ const StyledPopoverWrapper = styled.div`
       transform: ${transform};
     `}
   width: auto;
-  display: none;
   position: absolute;
   z-index: 500;
   align-self: center;
@@ -139,8 +125,6 @@ Popover.propTypes = {
     'left',
     'leftBottom',
   ]),
-  // Popover title
-  title: PropTypes.string,
   // On Close function:
   onClose: PropTypes.func,
   // Open=true activates popup
@@ -155,9 +139,8 @@ Popover.propTypes = {
 
 Popover.defaultProps = {
   placement: 'bottom',
-  open: true,
+  open: false,
   onClose: undefined,
-  title: '',
   children: undefined,
   className: '',
 }

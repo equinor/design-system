@@ -13,6 +13,8 @@ import {
 } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
 
+const { PopoverTitle } = Popover
+
 const Body = styled.div`
   margin: 42px;
   display: grid;
@@ -59,67 +61,47 @@ export function Placement() {
       <Typography variant="h5">Top</Typography>
       <Wrapper>
         <Button onClick={handleClick}>Top left</Button>
-        <Popover onClose={handleClose} placement="topLeft"></Popover>
-        <Popover title="Popover" placement="top">
-          <Button>Top</Button>
-        </Popover>
-        <Popover title="Popover" placement="topRight">
-          <Button>Top right</Button>
-        </Popover>
-      </Wrapper>
-      <Typography variant="h5">Bottom</Typography>
-      <Wrapper>
-        <Popover title="Popover" placement="bottomLeft">
-          <Button>Bottom left</Button>
-        </Popover>
-        <Popover title="Popover">
-          <Button>Bottom (default)</Button>
-        </Popover>
-        <Popover title="Popover" placement="bottomRight">
-          <Button>Bottom right</Button>
-        </Popover>
-      </Wrapper>
-      <Typography variant="h5">Left</Typography>
-      <Wrapper>
-        <Popover title="Popover" placement="leftTop">
-          <Button>Left top</Button>
-        </Popover>
-        <Popover title="Popover" placement="left">
-          <Button>Left</Button>
-        </Popover>
-        <Popover title="Popover" placement="leftBottom">
-          <Button>Left bottom</Button>
-        </Popover>
-      </Wrapper>
-      <Typography variant="h5">Right</Typography>
-      <Wrapper>
-        <Popover title="Popover" placement="rightTop">
-          <Button>Right top</Button>
-        </Popover>
-        <Popover title="Popover" placement="right">
-          <Button>Right</Button>
-        </Popover>
-        <Popover title="Popover" placement="rightBottom">
-          <Button>Right bottom</Button>
-        </Popover>
+        <Popover
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          open={open}
+          placement="topLeft"
+        ></Popover>
       </Wrapper>
     </Body>
   )
 }
 
-export function openOnHover() {
+export function ActivationTypes() {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
+
   return (
     <Body>
       <TextWrapper>
         <Typography variant="h3">Open on Hover</Typography>
         <Typography variant="body_long">
-          Popovers can be activated by hover or click. Click is default.
+          Popovers can be activated by hover or click
         </Typography>
       </TextWrapper>
       <Wrapper>
-        <Popover placement={placement}>
-          <PopoverTitle>{title}</PopoverTitle>
-          {ANCHOR_CHOICES[anchor]}
+        <Button onClick={handleClick} variant="ghost">
+          Activate on click
+        </Button>
+        <Button onMouseEnter={handleClick} variant="ghost">
+          Activate on hover
+        </Button>
+        <Popover anchorEl={anchorEl} open={open}>
+          <PopoverTitle></PopoverTitle>
         </Popover>
       </Wrapper>
     </Body>
@@ -174,7 +156,7 @@ export const WithKnobs = () => {
       </TextWrapper>
       <Wrapper>
         <Popover placement={placement}>
-          <PopoverTitle>{title}</PopoverTitle>
+          <PopoverTitle></PopoverTitle>
           {ANCHOR_CHOICES[anchor]}
         </Popover>
       </Wrapper>
