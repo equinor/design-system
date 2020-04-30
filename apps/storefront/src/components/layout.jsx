@@ -32,7 +32,7 @@ const Layout = ({ children }) => (
       <Header />
       <Location>{({ location }) => <Sidebar location={location} />}</Location>
       {/* <nav className="TOC">TOC</nav> */}
-      <main className="Main markdown-body">{children}</main>
+      <main className="Main">{children}</main>
     </div>
   </MDXProvider>
 )
