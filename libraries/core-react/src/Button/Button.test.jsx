@@ -41,13 +41,11 @@ describe('Button', () => {
 
     render(
       <form onSubmit={handleSubmit}>
-        <Button type="submit" data-testid="submit-button">
-          Submit button
-        </Button>
+        <Button type="submit">Submit button</Button>
       </form>,
     )
 
-    const submitButton = screen.queryByTestId('submit-button')
+    const submitButton = screen.queryByText('Submit button')
 
     fireEvent.submit(submitButton)
 
@@ -58,11 +56,11 @@ describe('Button', () => {
 
     render(
       <form onSubmit={handleSubmit}>
-        <Button data-testid="submit-button">Submit button</Button>
+        <Button>Submit button</Button>
       </form>,
     )
 
-    const submitButton = screen.queryByTestId('submit-button')
+    const submitButton = screen.queryByText('Submit button')
 
     fireEvent.click(submitButton)
 
