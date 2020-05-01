@@ -35,6 +35,7 @@ dependencies:
   react-helmet: 5.2.1_react@16.12.0
   remark-emoji: 2.0.2
   styled-components: 5.0.1_364bfd245d2fd32e75bbcba4856a80df
+  styled-system: 5.1.5
 devDependencies:
   prettier: 1.19.1
   stylelint-config-recommended: 3.0.0
@@ -1174,6 +1175,83 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==
+  /@styled-system/background/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-jtwH2C/U6ssuGSvwTN3ri/IyjdHb8W9X/g8Y0JLcrH02G+BW3OS8kZdHphF1/YyRklnrKrBT2ngwGUK6aqqV3A==
+  /@styled-system/border/5.1.5:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-JvddhNrnhGigtzWRCVuAHepniyVi6hBlimxWDVAdcTuk7aRn9BYJUwfHslURtwYFsF5FoEs8Zmr1oZq2M1AP0A==
+  /@styled-system/color/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-1kCkeKDZkt4GYkuFNKc7vJQMcOmTl3bJY3YBUs7fCNM6mMYJeT1pViQ2LwBSBJytj3AB0o4IdLBoepgSgGl5MA==
+  /@styled-system/core/5.1.2:
+    dependencies:
+      object-assign: 4.1.1
+    dev: false
+    resolution:
+      integrity: sha512-XclBDdNIy7OPOsN4HBsawG2eiWfCcuFt6gxKn1x4QfMIgeO6TOlA2pZZ5GWZtIhCUqEPTgIBta6JXsGyCkLBYw==
+  /@styled-system/css/5.1.5:
+    dev: false
+    resolution:
+      integrity: sha512-XkORZdS5kypzcBotAMPBoeckDs9aSZVkvrAlq5K3xP8IMAUek+x2O4NtwoSgkYkWWzVBu6DGdFZLR790QWGG+A==
+  /@styled-system/flexbox/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-6hHV52+eUk654Y1J2v77B8iLeBNtc+SA3R4necsu2VVinSD7+XY5PCCEzBFaWs42dtOEDIa2lMrgL0YBC01mDQ==
+  /@styled-system/grid/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-K3YiV1KyHHzgdNuNlaw8oW2ktMuGga99o1e/NAfTEi5Zsa7JXxzwEnVSDSBdJC+z6R8WYTCYRQC6bkVFcvdTeg==
+  /@styled-system/layout/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-wUhkMBqSeacPFhoE9S6UF3fsMEKFv91gF4AdDWp0Aym1yeMPpqz9l9qS/6vjSsDPF7zOb5cOKC3tcKKOMuDCPw==
+  /@styled-system/position/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-60IZfMXEOOZe3l1mCu6sj/2NAyUmES2kR9Kzp7s2D3P4qKsZWxD1Se1+wJvevb+1TP+ZMkGPEYYXRyU8M1aF5A==
+  /@styled-system/shadow/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-wqniqYb7XuZM7K7C0d1Euxc4eGtqEe/lvM0WjuAFsQVImiq6KGT7s7is+0bNI8O4Dwg27jyu4Lfqo/oIQXNzAg==
+  /@styled-system/space/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-+zzYpR8uvfhcAbaPXhH8QgDAV//flxqxSjHiS9cDFQQUSznXMQmxJegbhcdEF7/eNnJgHeIXv1jmny78kipgBA==
+  /@styled-system/typography/5.1.2:
+    dependencies:
+      '@styled-system/core': 5.1.2
+    dev: false
+    resolution:
+      integrity: sha512-BxbVUnN8N7hJ4aaPOd7wEsudeT7CxarR+2hns8XCX1zp0DFfbWw4xYa/olA0oQaqx7F1hzDg+eRaGzAJbF+jOg==
+  /@styled-system/variant/5.1.5:
+    dependencies:
+      '@styled-system/core': 5.1.2
+      '@styled-system/css': 5.1.5
+    dev: false
+    resolution:
+      integrity: sha512-Yn8hXAFoWIro8+Q5J8YJd/mP85Teiut3fsGVR9CAxwgNfIAiqlYxsk5iHU7VHJks/0KjL4ATSjmbtCDC/4l1qw==
   /@szmarczak/http-timer/1.1.2:
     dependencies:
       defer-to-connect: 1.1.3
@@ -11572,6 +11650,24 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-E0xKTRIjTs4DyvC1MHu/EcCXIj6+ENCP8hP01koyoADF++WdBUOrSGwU1scJRw7/YaYOhDvvoad6VlMG+0j53A==
+  /styled-system/5.1.5:
+    dependencies:
+      '@styled-system/background': 5.1.2
+      '@styled-system/border': 5.1.5
+      '@styled-system/color': 5.1.2
+      '@styled-system/core': 5.1.2
+      '@styled-system/flexbox': 5.1.2
+      '@styled-system/grid': 5.1.2
+      '@styled-system/layout': 5.1.2
+      '@styled-system/position': 5.1.2
+      '@styled-system/shadow': 5.1.2
+      '@styled-system/space': 5.1.2
+      '@styled-system/typography': 5.1.2
+      '@styled-system/variant': 5.1.5
+      object-assign: 4.1.1
+    dev: false
+    resolution:
+      integrity: sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A==
   /stylehacks/4.0.3:
     dependencies:
       browserslist: 4.8.6
@@ -13098,7 +13194,7 @@ packages:
     resolution:
       integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
 specifiers:
-  '@equinor/eds-core-react': 'workspace:^0.2.0'
+  '@equinor/eds-core-react': 'workspace:*'
   '@mdx-js/mdx': ^1.5.5
   '@mdx-js/react': ^1.5.5
   '@mdx-js/tag': ^0.20.3
@@ -13135,4 +13231,5 @@ specifiers:
   react-helmet: ^5.2.1
   remark-emoji: ^2.0.2
   styled-components: ^5.0.1
+  styled-system: ^5.1.5
   stylelint-config-recommended: ^3.0.0

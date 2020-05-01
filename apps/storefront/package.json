@@ -42,7 +42,8 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "remark-emoji": "^2.0.2",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "styled-system": "^5.1.5"
   },
   "keywords": [
     "gatsby"

@@ -62,6 +62,11 @@ function SEO({ description, lang, meta, keywords, title }) {
                 name: 'twitter:description',
                 content: metaDescription,
               },
+              {
+                name: 'link',
+                rel: 'stylesheet',
+                href: 'https://eds-static.equinor.com/fonts/equinor-font.css',
+              },
             ]
               .concat(
                 keywords.length > 0

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
 import classNames from 'classnames'
+import { Tabs } from '@equinor/eds-core-react'
 import Layout from '../components/layout'
+
+const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
 const Page = ({ data }) => {
   const page = data.mdx
