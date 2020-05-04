@@ -87,9 +87,32 @@ export const Popover = forwardRef(function Popover(
     transform: tokens.placement[placement].arrowTransform,
   }
 
+  /* 
+  Find anchor element in children to wrap the element together with Popover.
+
+  Children is required, but user has to wrap the actual anchor with <PopoverAnchor />
+  for this to work. 
+  */
+  let anchorElement
+  let childArray = []
+  if (Array.isArray(children)) {
+    for (let i = 0; i < children.length; i++) {
+      if (children[i].type.displayName === 'eds-popover-anchor') {
+        anchorElement = children[i]
+      } else {
+        // Push the remaining children to a new array to display as normal
+        childArray.push(children[i])
+      }
+    }
+  } else {
+    if (children.type.displayName === 'eds-popover-anchor') {
+      anchorElement = children
+    }
+  }
+
   return (
     <Anchor {...props}>
-      {anchorEl}
+      {anchorElement}
       {open && (
         <StyledPopoverWrapper {...wrapperProps}>
           <StyledPopover>
@@ -99,7 +122,7 @@ export const Popover = forwardRef(function Popover(
             <Button onClick={onClose} variant="ghost_icon">
               <Icon name="close" title="close" size={48} />
             </Button>
-            {children}
+            {childArray}
           </StyledPopover>
         </StyledPopoverWrapper>
       )}
@@ -129,10 +152,8 @@ Popover.propTypes = {
   onClose: PropTypes.func,
   // Open=true activates popup
   open: PropTypes.bool,
-  /** Popover reference/anchor element */
-  anchorEl: PropTypes.node.isRequired,
-  /** @ignore */
-  children: PropTypes.node,
+  /** Popover reference/anchor element is required as a child */
+  children: PropTypes.node.isRequired,
   /** @ignore */
   className: PropTypes.string,
 }

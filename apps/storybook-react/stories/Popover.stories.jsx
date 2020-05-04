@@ -13,7 +13,8 @@ import {
 } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
 
-const { PopoverTitle } = Popover
+// const { PopoverTitle } = Popover
+const { PopoverAnchor } = Popover
 
 const Body = styled.div`
   margin: 42px;
@@ -38,17 +39,16 @@ export default {
 }
 
 export function Placement() {
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [open, setOpen] = React.useState(null)
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
+    setOpen(true)
   }
 
   const handleClose = () => {
-    setAnchorEl(null)
+    setOpen(false)
   }
 
-  const open = Boolean(anchorEl)
   return (
     <Body>
       <TextWrapper>
@@ -60,13 +60,11 @@ export function Placement() {
       </TextWrapper>
       <Typography variant="h5">Top</Typography>
       <Wrapper>
-        <Button onClick={handleClick}>Top left</Button>
-        <Popover
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          open={open}
-          placement="topLeft"
-        ></Popover>
+        <Popover onClose={handleClose} open={open} placement="topLeft">
+          <PopoverAnchor>
+            <Button onClick={handleClick}>Top left</Button>
+          </PopoverAnchor>
+        </Popover>
       </Wrapper>
     </Body>
   )
@@ -101,7 +99,7 @@ export function ActivationTypes() {
           Activate on hover
         </Button>
         <Popover anchorEl={anchorEl} open={open}>
-          <PopoverTitle></PopoverTitle>
+          {/* <PopoverTitle></PopoverTitle> */}
         </Popover>
       </Wrapper>
     </Body>
@@ -156,7 +154,7 @@ export const WithKnobs = () => {
       </TextWrapper>
       <Wrapper>
         <Popover placement={placement}>
-          <PopoverTitle></PopoverTitle>
+          {/* <PopoverTitle>Hi</PopoverTitle> */}
           {ANCHOR_CHOICES[anchor]}
         </Popover>
       </Wrapper>
