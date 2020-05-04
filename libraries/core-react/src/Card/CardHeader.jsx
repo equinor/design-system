@@ -14,18 +14,22 @@ const StyledCardHeader = styled.div`
   }
 `
 
-export const CardHeader = forwardRef(function EdsCardHeader(
-  { children, className, ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    className,
-    ref,
-  }
+export const CardHeader = forwardRef(
+  /**
+   * @param {React.HTMLAttributes<HTMLDivElement>} props
+   * @param rest
+   * @param ref
+   */
+  function EdsCardHeader({ children, className, ...rest }, ref) {
+    const props = {
+      ...rest,
+      className,
+      ref,
+    }
 
-  return <StyledCardHeader {...props}>{children}</StyledCardHeader>
-})
+    return <StyledCardHeader {...props}>{children}</StyledCardHeader>
+  },
+)
 
 CardHeader.displayName = 'eds-card-header'
 

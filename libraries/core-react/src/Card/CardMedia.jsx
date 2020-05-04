@@ -34,20 +34,29 @@ const StyledCardMedia = styled.div`
         `}
 `
 
-export const CardMedia = forwardRef(function EdsCardMedia(
-  { children, className, fullWidth, ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    className,
-    ref,
-    fullWidth,
-    spacing: tokens.spacings.left,
-  }
+/**
+ * @typedef Props
+ * @prop {boolean} [fullWidth] Full width ignores Card padding
+ */
 
-  return <StyledCardMedia {...props}>{children}</StyledCardMedia>
-})
+export const CardMedia = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param rest
+   * @param ref
+   */
+  function EdsCardMedia({ children, className, fullWidth, ...rest }, ref) {
+    const props = {
+      ...rest,
+      className,
+      ref,
+      fullWidth,
+      spacing: tokens.spacings.left,
+    }
+
+    return <StyledCardMedia {...props}>{children}</StyledCardMedia>
+  },
+)
 
 CardMedia.displayName = 'eds-card-media'
 
