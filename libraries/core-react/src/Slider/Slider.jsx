@@ -1,4 +1,4 @@
-import React, { forwardRef, useState /* , useMemo */ } from 'react'
+import React, { forwardRef, useState, useRef /* , useMemo */ } from 'react'
 import PropTypes from 'prop-types'
 /* import createId from 'lodash.uniqueid' */
 import styled, { css } from 'styled-components'
@@ -43,8 +43,7 @@ const trackFill = css`
   grid-column: 1 / span 2;
   grid-row: 2;
   height: ${enabled.track.height};
-  margin-bottom: ${enabled.track.bottomOffset}
-  
+  margin-bottom: ${enabled.track.bottomOffset};
   align-self: end;
   content: '';
 `
@@ -142,8 +141,18 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
 `
 
 const SrOnlyLabel = styled.label`
+  /* Non-edge version 
   position: absolute;
-  clip-path: inset(50%);
+  clip-path: inset(50%); */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 `
 
 export const Slider = forwardRef(function EdsSlider(
@@ -165,7 +174,8 @@ export const Slider = forwardRef(function EdsSlider(
   const isRangeSlider = Array.isArray(value)
   // @TODO: Some counter prefix id to avoid duplicate id's
   const [sliderValue, setSliderValue] = useState(value)
-
+  const minRange = React.createRef()
+  const maxRange = useRef()
   const onValueChange = (event, valueArrIdx) => {
     // Get the new value as int
     const changedValue = parseInt(event.target.value, 10)
@@ -190,6 +200,29 @@ export const Slider = forwardRef(function EdsSlider(
     return outputFunction ? outputFunction(text) : text
   }
 
+  const findClosestRange = (event) => {
+    const bounds = event.target.getBoundingClientRect()
+    const x = event.clientX - bounds.left
+    const minWidth = minRange.current.offsetWidth
+    const minValue = minRange.current.value
+    const maxWidth = maxRange.current.offsetWidth
+    const maxValue = maxRange.current.value
+
+    const minX = minWidth * (minValue / max)
+    const maxX = maxWidth * (maxValue / max)
+
+    const minXDiff = Math.abs(x - minX)
+    const maxXDiff = Math.abs(x - maxX)
+
+    if (minXDiff > maxXDiff) {
+      minRange.current.style.zIndex = 10
+      maxRange.current.style.zIndex = 20
+    } else {
+      minRange.current.style.zIndex = 20
+      maxRange.current.style.zIndex = 10
+    }
+  }
+
   // Let's trust people?
   /*  const inputIdA = useMemo(() => createId(`${ariaLabelledby}-thumb-a-`), [])
   const inputIdB = useMemo(() => createId(`${ariaLabelledby}-thumb-b-`), [])
@@ -212,12 +245,14 @@ export const Slider = forwardRef(function EdsSlider(
           max={max}
           min={min}
           disabled={disabled}
+          onMouseMove={findClosestRange}
         >
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
             type="range"
+            ref={minRange}
             value={sliderValue[0]}
             max={max}
             min={min}
@@ -240,6 +275,7 @@ export const Slider = forwardRef(function EdsSlider(
             max={max}
             id={inputIdB}
             step={step}
+            ref={maxRange}
             onChange={(event) => {
               onValueChange(event, 1)
             }}

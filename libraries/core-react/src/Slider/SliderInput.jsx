@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -61,7 +61,7 @@ const StyledSliderInput = styled.input.attrs(() => ({
   font: inherit; /* fix too small font-size in both Chrome & Firefox */
   margin: 0;
   z-index: 2;
-  pointer-events: none;
+  /* pointer-events: none; */
   outline: none;
   &[data-focus-visible-added]:focus {
     z-index: 2;
@@ -109,37 +109,51 @@ const StyledSliderInput = styled.input.attrs(() => ({
   }
 
   /* Must be seperated code blocks for webkit and moz otherwise nothing will be applied */
-  ::-webkit-slider-thumb {
+  &::-webkit-slider-thumb {
     ${thumb}
   }
   &::-moz-range-thumb {
-    ${thumb};
+    ${thumb}
     /* Avoid too small circles, dunno why this is happening :/  */
     height: 8px;
     width: 8px;
   }
-
+  &::-ms-thumb {
+    ${thumb}
+    height: 8px;
+    width: 8px;
+  }
   &::-webkit-slider-runnable-track {
     ${track}
   }
   &::-moz-range-track {
     ${track}
   }
+
+  &::-ms-track {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: none;
+    /* ${track} */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+  }
+  &::-ms-fill-upper {
+    background: transparent;
+  }
+  &::-ms-fill-lower {
+    background: transparent;
+  }
 `
-export const SliderInput = ({
-  value,
-  min,
-  max,
-  id,
-  step,
-  onChange,
-  disabled,
-  ...restProps
-}) => {
+export const SliderInput = forwardRef((props, ref) => {
+  const { value, min, max, id, step, onChange, disabled, ...restProps } = props
   return (
     <StyledSliderInput
       {...restProps}
       value={value}
+      ref={ref}
       min={min}
       max={max}
       id={id}
@@ -148,9 +162,10 @@ export const SliderInput = ({
         onChange(event)
       }}
       disabled={disabled}
+      aria-labelledby="test"
     />
   )
-}
+})
 
 SliderInput.propTypes = {
   /* Slider value */

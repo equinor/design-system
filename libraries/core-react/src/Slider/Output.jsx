@@ -6,9 +6,11 @@ import { slider as tokens } from './Slider.tokens'
 
 const { enabled } = tokens
 
-const StyledOutput = styled.output`
+const StyledOutput = styled.div`
   --val: ${({ value }) => value};
   --realWidth: calc(100% - 12px);
+  /* fit-content is not supported in Edge, table as fallback */
+  display: table;
   width: fit-content;
   position: relative;
   z-index: 1;
@@ -20,9 +22,10 @@ const StyledOutput = styled.output`
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
   /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
-  transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
+ 
+ transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
   grid-row: 3;
-  grid-column: 1 / 3;
+  grid-column: 1 / -1;
 `
 
 export const Output = ({ children, value, htmlFor }) => {

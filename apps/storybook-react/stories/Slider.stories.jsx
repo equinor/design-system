@@ -10,6 +10,7 @@ const Body = styled.div`
   grid-template-rows: 1fr auto 1fr;
   padding: 32px;
   grid-gap: 32px;
+  position: relative;
 `
 
 function outputFunction(value) {
