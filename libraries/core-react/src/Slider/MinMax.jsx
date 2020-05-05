@@ -12,7 +12,6 @@ const StyledMinMax = styled.span`
   position: absolute;
   left: 2px;
   text-align: left;
-  margin-top: 6px;
   /** Center align the text with the dot */
   transform: translate(calc(-1 * calc((100% - 8px) / 2)));
   &:last-child {

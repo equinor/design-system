@@ -18,7 +18,6 @@ const StyledOutput = styled.div`
   ${typographyTemplate(enabled.output.typography)}
   background: ${enabled.background};
   padding: 0 5px;
-  margin-top: 6px;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
   /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */

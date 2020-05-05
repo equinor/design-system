@@ -34,7 +34,7 @@ export const slider = {
       },
     },
     output: {
-      height: '16px',
+      height: '14px',
       typography: paragraph.overline,
       text: textColor,
     },

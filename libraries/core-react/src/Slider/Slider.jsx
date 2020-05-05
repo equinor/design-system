@@ -123,20 +123,28 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     content: ' ';
     display: block;
     position: absolute;
-    z-index: 0;
+    /* z-index: -1; */
     width: ${enabled.dot.size};
     height: ${enabled.dot.size};
     background: ${enabled.background};
     border: ${enabled.dot.border.width} ${enabled.dot.border.type}
       ${enabled.dot.border.color};
     border-radius: ${enabled.dot.border.radius};
-    bottom: 18px;
+    bottom: 22px;
     left: 2px;
   }
   &:after {
     right: 2px;
     left: auto;
   }
+  /* Otherwise, the dot won't be positioned underneath the handle in glorius Edge */
+  @supports (-ms-ime-align:auto) {
+    &:before,
+    &:after { 
+      z-index: -1;
+    } 
+  }
+}
 `
 
 const SrOnlyLabel = styled.label`

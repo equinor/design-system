@@ -23,7 +23,7 @@ const thumb = css`
   position: relative;
 
   z-index: 1;
-  pointer-events: auto;
+  /* pointer-events: auto; */
 `
 const thumbHover = css`
   box-shadow: 0px 0px 0px 6px ${enabled.handle.hover.background};
@@ -73,6 +73,10 @@ const StyledSliderInput = styled.input.attrs(() => ({
       outline: ${enabled.handle.outline};
       outline-offset: ${enabled.handle.outlineOffset};
     }
+    &::-ms-thumb {
+      outline: ${enabled.handle.outline};
+      outline-offset: ${enabled.handle.outlineOffset};
+    }
   }
   &:hover,
   &:active {
@@ -80,6 +84,9 @@ const StyledSliderInput = styled.input.attrs(() => ({
       ${thumbHover}
     }
     &::-moz-range-thumb {
+      ${thumbHover}
+    }
+    &::-ms-thumb {
       ${thumbHover}
     }
   }
@@ -90,6 +97,9 @@ const StyledSliderInput = styled.input.attrs(() => ({
     &::-moz-range-thumb {
       ${thumbDisabled}
     }
+    &::-ms-thumb {
+      ${thumbDisabled}
+    }
   }
   &:disabled:hover,
   &:disabled:active {
@@ -97,6 +107,9 @@ const StyledSliderInput = styled.input.attrs(() => ({
       ${thumbHoverAndDisabled}
     }
     &::-moz-range-thumb {
+      ${thumbHoverAndDisabled}
+    }
+    &::-ms-thumb {
       ${thumbHoverAndDisabled}
     }
   }
@@ -123,6 +136,8 @@ const StyledSliderInput = styled.input.attrs(() => ({
     ${thumb}
     height: 8px;
     width: 8px;
+    margin-bottom: 5px;
+    background-color: #fff;
   }
   &::-webkit-slider-runnable-track {
     ${track}
