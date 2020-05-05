@@ -1,7 +1,13 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Typography, Button, Divider, Icon } from '@equinor/eds-core-react'
+import {
+  Typography,
+  Divider,
+  Icon,
+  Card,
+  Button,
+} from '@equinor/eds-core-react'
 import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { popover as tokens } from './Popover.tokens'
@@ -32,15 +38,11 @@ const StyledPopoverWrapper = styled.div`
   }
 `
 
-const StyledPopover = styled.div`
+const StyledPopover = styled((props) => <Card {...props} />)`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   background: ${tokens.background};
   fill: ${tokens.background};
-  border-radius: ${tokens.borderRadius};
-  min-height:  ${tokens.popover.minHeight};
-  box-sizing: border-box;
-  position: relative;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
 `
 
@@ -59,6 +61,12 @@ const PopoverArrow = styled.svg`
   fill: ${tokens.background};
   filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
   /* box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14); */
+`
+
+const StyledCloseButton = styled((props) => <Button {...props} />)`
+  position: absolute;
+  top: 0;
+  right: 16px;
 `
 
 export const Popover = forwardRef(function Popover(
@@ -119,9 +127,9 @@ export const Popover = forwardRef(function Popover(
             <PopoverArrow {...arrowProps}>
               <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
             </PopoverArrow>
-            <Button onClick={onClose} variant="ghost_icon">
+            <StyledCloseButton onClick={onClose} variant="ghost_icon">
               <Icon name="close" title="close" size={48} />
-            </Button>
+            </StyledCloseButton>
             {childArray}
           </StyledPopover>
         </StyledPopoverWrapper>

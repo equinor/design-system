@@ -10,11 +10,13 @@ import {
   Search,
   Icon,
   Popover,
+  Card,
 } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
 
-// const { PopoverTitle } = Popover
-const { PopoverAnchor } = Popover
+const { PopoverAnchor, PopoverTitle } = Popover
+
+const { CardActions } = Card
 
 const Body = styled.div`
   margin: 42px;
@@ -39,14 +41,14 @@ export default {
 }
 
 export function Placement() {
-  const [open, setOpen] = React.useState(null)
+  const [active, setActive] = React.useState(null)
 
   const handleClick = (event) => {
-    setOpen(true)
+    setActive(event.currentTarget.id)
   }
 
   const handleClose = () => {
-    setOpen(false)
+    setActive(null)
   }
 
   return (
@@ -55,14 +57,44 @@ export function Placement() {
         <Typography variant="h3">Placement</Typography>
         <Typography variant="body_long">
           Popover has 12 placement choices. The placement is relative to the
-          anchor element
+          anchor element. Remember, you should always put the anchor element
+          inside the PopoverAnchor tag
         </Typography>
       </TextWrapper>
       <Typography variant="h5">Top</Typography>
       <Wrapper>
-        <Popover onClose={handleClose} open={open} placement="topLeft">
+        <Popover
+          onClose={handleClose}
+          open={active === '1'}
+          placement="topLeft"
+        >
           <PopoverAnchor>
-            <Button onClick={handleClick}>Top left</Button>
+            <Button id="1" onClick={handleClick}>
+              Top left
+            </Button>
+          </PopoverAnchor>
+          <PopoverTitle>Title</PopoverTitle>
+          <CardActions>
+            <Button>Cancel</Button>
+            <Button>OK</Button>
+          </CardActions>
+        </Popover>
+        <Popover onClose={handleClose} open={active === '2'} placement="top">
+          <PopoverAnchor>
+            <Button id="2" onClick={handleClick}>
+              Top
+            </Button>
+          </PopoverAnchor>
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '3'}
+          placement="topRight"
+        >
+          <PopoverAnchor>
+            <Button id="3" onClick={handleClick}>
+              Top right
+            </Button>
           </PopoverAnchor>
         </Popover>
       </Wrapper>

@@ -1,6 +1,9 @@
 import { tokens } from '@equinor/eds-tokens'
 
 const {
+  typography: {
+    ui: { accordion_header: header },
+  },
   colors: {
     ui: {
       background__default: { rgba: background },
@@ -15,12 +18,7 @@ const {
 } = tokens
 
 export const popover = {
-  typography: {
-    color: '#fff',
-    fontFamily: 'Equinor',
-    fontSize: '12px',
-    lineHeight: '16px',
-  },
+  header,
   background,
   popover: {
     minHeight: '32px',
