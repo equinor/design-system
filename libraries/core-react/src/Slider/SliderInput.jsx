@@ -65,7 +65,6 @@ const StyledSliderInput = styled.input.attrs(() => ({
   outline: none
   &[data-focus-visible-added]:focus {
     z-index: 2;
-    outline: 3px solid red;
     &::-webkit-slider-thumb {
       outline: ${enabled.handle.outline};
       outline-offset: ${enabled.handle.outlineOffset};
