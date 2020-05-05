@@ -21,7 +21,7 @@ const thumb = css`
   background: ${enabled.handle.background};
   cursor: pointer;
   position: relative;
-  margin-top: 0;
+
   z-index: 1;
   pointer-events: auto;
 `
@@ -111,6 +111,7 @@ const StyledSliderInput = styled.input.attrs(() => ({
   /* Must be seperated code blocks for webkit and moz otherwise nothing will be applied */
   &::-webkit-slider-thumb {
     ${thumb}
+    margin-top: 6px;
   }
   &::-moz-range-thumb {
     ${thumb}

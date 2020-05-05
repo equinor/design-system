@@ -28,7 +28,7 @@ export const slider = {
     track: {
       background: backgroundColor,
       height: '4px',
-      bottomOffset: '4px',
+      bottomOffset: '9px',
       indicator: {
         color: indicatorColor,
       },

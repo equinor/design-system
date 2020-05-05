@@ -50,8 +50,7 @@ const trackFill = css`
 
 const wrapperGrid = css`
   display: grid;
-  grid-template-rows: max-content ${enabled.handle.size} ${enabled.output
-      .height};
+  grid-template-rows: max-content 24px /* ${enabled.handle.size} */ ${enabled.output.height};
   grid-template-columns: 1fr 1fr;
   width: 100%;
   position: relative;
@@ -174,7 +173,7 @@ export const Slider = forwardRef(function EdsSlider(
   const isRangeSlider = Array.isArray(value)
   // @TODO: Some counter prefix id to avoid duplicate id's
   const [sliderValue, setSliderValue] = useState(value)
-  const minRange = React.createRef()
+  const minRange = useRef()
   const maxRange = useRef()
   const onValueChange = (event, valueArrIdx) => {
     // Get the new value as int
@@ -202,19 +201,18 @@ export const Slider = forwardRef(function EdsSlider(
 
   const findClosestRange = (event) => {
     const bounds = event.target.getBoundingClientRect()
-    const x = event.clientX - bounds.left
-    const minWidth = minRange.current.offsetWidth
-    const minValue = minRange.current.value
-    const maxWidth = maxRange.current.offsetWidth
-    const maxValue = maxRange.current.value
+    const x = event.clientX - bounds.left // Get the mouse pointer's x value on the slider
+    const inputWidth = minRange.current.offsetWidth // The two sliders are of equal width
+    const minValue = minRange.current.value // unix timestamp for minste handle
+    const maxValue = maxRange.current.value // unix timestamp for største handle
+    const diff = max - min // Diff of the slider range
 
-    const minX = minWidth * (minValue / max)
-    const maxX = maxWidth * (maxValue / max)
+    const normX = (x / inputWidth) * diff + min // x-akse-verdi i unix timestamp-verden
 
-    const minXDiff = Math.abs(x - minX)
-    const maxXDiff = Math.abs(x - maxX)
+    const maxX = Math.abs(normX - maxValue)
+    const minX = Math.abs(normX - minValue)
 
-    if (minXDiff > maxXDiff) {
+    if (minX > maxX) {
       minRange.current.style.zIndex = 10
       maxRange.current.style.zIndex = 20
     } else {

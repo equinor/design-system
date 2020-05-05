@@ -51,6 +51,7 @@ export const Examples = () => {
       <Slider
         ariaLabelledby="large-step-range-slider"
         step={5}
+        min={30}
         minMaxDots={false}
         value={[40, 60]}
       />
