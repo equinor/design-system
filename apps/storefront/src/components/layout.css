@@ -12,7 +12,7 @@
   --Toc-width: 167px;
   --Sidebar-width: 240px;
   --black: #333;
-  --moss: #007079;
+  --moss-green: #007079;
   --tab-backgroundColor: #fff;
   --tab-isSelected-backgroundColor: var(--Sidebar-activeLink-backgroundColor);
   --tab-borderColor: var(--borderColor);
@@ -84,8 +84,8 @@ td {
   height: 12px;
   display: block;
   background: repeating-linear-gradient(
-    var(--moss),
-    var(--moss) 2px,
+    var(--moss-green),
+    var(--moss-green) 2px,
     transparent 2px,
     transparent 4px
   );

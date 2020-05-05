@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Location } from '@reach/router'
+import { Location, Link } from '@reach/router'
 import { MDXProvider } from '@mdx-js/react'
-import { TopBar, Typography } from '@equinor/eds-core-react'
+import { TopBar, Typography, Table } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import Sidebar from './Sidebar'
 import './layout.css'
@@ -21,6 +21,7 @@ const mdxComponents = {
   FigmaImage,
   IconsDownload,
   Image,
+  Table,
 }
 
 const { Header: TopBarHeader, Actions } = TopBar
@@ -64,13 +65,12 @@ const Layout = ({ children }) => {
             EDS – Equinor Design System
           </TopBarHeader>
           <Actions>
-            <Typography
-              href="/components/component-status"
-              variant="body_short"
-              link
+            <Link
+              to="/components/component-status"
+              style={{ color: 'var(--moss-green)' }}
             >
               Component Status
-            </Typography>
+            </Link>
           </Actions>
         </TopBar>
         {/* <Banner /> */}

@@ -65,14 +65,12 @@ const ComponentStatus = () => {
                 borderBottomWidth: '1px',
               }}
             >
-              <Typography
-                href={`/components/${kebabify(component.component)}`}
-                variant="body_short"
-                link
-                style={{ fontSize: '0.875em' }}
+              <Link
+                to={`/components/${kebabify(component.component)}`}
+                style={{ color: 'var(--moss-green)', fontSize: '0.875em' }}
               >
                 {component.component}
-              </Typography>
+              </Link>
             </Cell>
             {Object.values(component.status).map((statuses, index) => (
               <Cell key={camelify(statuses.join('-')) + index}>
