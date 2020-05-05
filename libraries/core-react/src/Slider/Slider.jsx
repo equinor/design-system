@@ -208,6 +208,11 @@ export const Slider = forwardRef(function EdsSlider(
   }
 
   const findClosestRange = (event) => {
+    // fix annoying flick of hover on the wrong handle due to wrong calculated bounding dimensions from
+    // output elem if you move the mouse 1px above the output label
+    if (event.target.type === 'output') {
+      return
+    }
     const bounds = event.target.getBoundingClientRect()
     const x = event.clientX - bounds.left // Get the mouse pointer's x value on the slider
     const inputWidth = minRange.current.offsetWidth // The two sliders are of equal width
@@ -219,7 +224,6 @@ export const Slider = forwardRef(function EdsSlider(
 
     const maxX = Math.abs(normX - maxValue)
     const minX = Math.abs(normX - minValue)
-
     if (minX > maxX) {
       minRange.current.style.zIndex = 10
       maxRange.current.style.zIndex = 20

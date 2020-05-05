@@ -6,7 +6,7 @@ import { slider as tokens } from './Slider.tokens'
 
 const { enabled } = tokens
 
-const StyledOutput = styled.div`
+const StyledOutput = styled.output`
   --val: ${({ value }) => value};
   --realWidth: calc(100% - 12px);
   /* fit-content is not supported in Edge, table as fallback */

@@ -62,9 +62,10 @@ const StyledSliderInput = styled.input.attrs(() => ({
   margin: 0;
   z-index: 2;
   /* pointer-events: none; */
-  outline: none;
+  outline: none
   &[data-focus-visible-added]:focus {
     z-index: 2;
+    outline: 3px solid red;
     &::-webkit-slider-thumb {
       outline: ${enabled.handle.outline};
       outline-offset: ${enabled.handle.outlineOffset};
@@ -161,6 +162,13 @@ const StyledSliderInput = styled.input.attrs(() => ({
   }
   &::-ms-fill-lower {
     background: transparent;
+  }
+  @supports (-ms-ime-align:auto) {
+    /* Correct cursors for Edge */
+    cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 `
 export const SliderInput = forwardRef((props, ref) => {
