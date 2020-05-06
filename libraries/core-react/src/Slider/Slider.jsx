@@ -12,50 +12,12 @@ const { enabled, disabled: _disabled } = tokens
 /** The two first gradients are hacks to avoid 2px too long slider track on both edges. Better solution? */
 /* 20 px = Height from output + (height of handle (12px) - (track height (4px)) / 2) */
 const fakeTrackBg = css`
-  background: linear-gradient(
-      90deg,
-      ${enabled.background},
-      ${enabled.background} 3px,
-      transparent 0
-    ),
-    linear-gradient(
-      -90deg,
-      ${enabled.background},
-      ${enabled.background} 3px,
-      transparent 0
-    ),
-    linear-gradient(
-      0deg,
-      transparent,
-      transparent ${enabled.track.bottomOffset},
-      ${enabled.track.background} ${enabled.track.bottomOffset},
-      ${enabled.track.background}
-        calc(${enabled.track.bottomOffset} + ${enabled.track.height}),
-      transparent 0
-    );
+    background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.background}' width='100%' height='4' rx='2' /></svg>");
+    background-size: cover;
+    background-repeat: no-repeat;   
 `
 const fakeTrackBgHover = css`
-  background: linear-gradient(
-      90deg,
-      ${enabled.background},
-      ${enabled.background} 3px,
-      transparent 0
-    ),
-    linear-gradient(
-      -90deg,
-      ${enabled.background},
-      ${enabled.background} 3px,
-      transparent 0
-    ),
-    linear-gradient(
-      0deg,
-      transparent,
-      transparent ${enabled.track.bottomOffset},
-      ${enabled.track.hover.background} ${enabled.track.bottomOffset},
-      ${enabled.track.hover.background}
-        calc(${enabled.track.bottomOffset} + ${enabled.track.height}),
-      transparent 0
-    );
+    background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.hover.background}' width='100%' height='4' rx='2' /></svg>");
 `
 
 const trackFill = css`
@@ -164,11 +126,10 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
       ${enabled.dot.border.color};
     border-radius: ${enabled.dot.border.radius};
     bottom: 8px;
-    left: 2px;
-  
+    left: 0;  
   }
   &:after {
-    right: 2px;
+    right: 0;
     left: auto;
   }
   /* Otherwise, the dot won't be positioned underneath the handle in glorius Edge */
@@ -208,6 +169,7 @@ export const Slider = forwardRef(function EdsSlider(
     step = 1,
     disabled,
     ariaLabelledby,
+    backgroundColor,
     ...rest
   },
   ref,
