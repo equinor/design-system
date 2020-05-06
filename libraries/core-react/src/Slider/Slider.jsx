@@ -132,13 +132,7 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     right: 0;
     left: auto;
   }
-  /* Otherwise, the dot won't be positioned underneath the handle in glorius Edge */
-  @supports (-ms-ime-align:auto) {
-    &:before,
-    &:after { 
-      z-index: -1;
-    } 
-  }
+ 
 }
 `
 

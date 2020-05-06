@@ -73,10 +73,6 @@ const StyledSliderInput = styled.input.attrs(() => ({
       outline: ${enabled.handle.outline};
       outline-offset: ${enabled.handle.outlineOffset};
     }
-    &::-ms-thumb {
-      outline: ${enabled.handle.outline};
-      outline-offset: ${enabled.handle.outlineOffset};
-    }
   }
   &:hover,
   &:active {
@@ -84,9 +80,6 @@ const StyledSliderInput = styled.input.attrs(() => ({
       ${thumbHover}
     }
     &::-moz-range-thumb {
-      ${thumbHover}
-    }
-    &::-ms-thumb {
       ${thumbHover}
     }
   }
@@ -97,9 +90,6 @@ const StyledSliderInput = styled.input.attrs(() => ({
     &::-moz-range-thumb {
       ${thumbDisabled}
     }
-    &::-ms-thumb {
-      ${thumbDisabled}
-    }
   }
   &:disabled:hover,
   &:disabled:active {
@@ -107,9 +97,6 @@ const StyledSliderInput = styled.input.attrs(() => ({
       ${thumbHoverAndDisabled}
     }
     &::-moz-range-thumb {
-      ${thumbHoverAndDisabled}
-    }
-    &::-ms-thumb {
       ${thumbHoverAndDisabled}
     }
     &::-webkit-slider-runnable-track {
@@ -138,41 +125,11 @@ const StyledSliderInput = styled.input.attrs(() => ({
     height: 8px;
     width: 8px;
   }
-  &::-ms-thumb {
-    ${thumb}
-    height: 8px;
-    width: 8px;
-    margin-bottom: 5px;
-    background-color: #fff;
-  }
   &::-webkit-slider-runnable-track {
     ${track}
   }
   &::-moz-range-track {
     ${track}
-  }
-
-  &::-ms-track {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    background: none;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-  }
-  &::-ms-fill-upper {
-    background: transparent;
-  }
-  &::-ms-fill-lower {
-    background: transparent;
-  }
-  @supports (-ms-ime-align: auto) {
-    /* Correct cursors for Edge */
-    cursor: pointer;
-    &:disabled {
-      cursor: not-allowed;
-    }
   }
 `
 export const SliderInput = forwardRef((props, ref) => {
