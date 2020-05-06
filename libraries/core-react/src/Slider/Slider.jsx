@@ -330,7 +330,10 @@ Slider.propTypes = {
   /** Id for the elements that labels this slider */
   ariaLabelledby: PropTypes.string.isRequired,
   /** Components value, string for slider, array for range */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]).isRequired,
   /** Function to be called when value change */
   onChange: PropTypes.func,
   /** Function for formatting the output, e.g. with dates */
