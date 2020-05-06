@@ -28,9 +28,16 @@ export const slider = {
     track: {
       background: backgroundColor,
       height: '4px',
+      realHeight: '24px',
       bottomOffset: '9px',
       indicator: {
         color: indicatorColor,
+        hover: {
+          color: primaryHover,
+        },
+      },
+      hover: {
+        background: backgroundColorMedium,
       },
     },
     output: {

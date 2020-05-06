@@ -9,7 +9,7 @@ const track = css`
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background: none;'
+  background: none;
 `
 
 const thumb = css`

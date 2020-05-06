@@ -27,14 +27,33 @@ const fakeTrackBg = css`
     linear-gradient(
       0deg,
       transparent,
-      transparent calc(${enabled.output.height} + ${enabled.track.bottomOffset}),
+      transparent ${enabled.track.bottomOffset},
+      ${enabled.track.background} ${enabled.track.bottomOffset},
       ${enabled.track.background}
-        calc(${enabled.output.height} + ${enabled.track.bottomOffset}),
-      ${enabled.track.background}
-        calc(
-          calc(${enabled.output.height} + ${enabled.track.bottomOffset}) +
-            ${enabled.track.height}
-        ),
+        calc(${enabled.track.bottomOffset} + ${enabled.track.height}),
+      transparent 0
+    );
+`
+const fakeTrackBgHover = css`
+  background: linear-gradient(
+      90deg,
+      ${enabled.background},
+      ${enabled.background} 3px,
+      transparent 0
+    ),
+    linear-gradient(
+      -90deg,
+      ${enabled.background},
+      ${enabled.background} 3px,
+      transparent 0
+    ),
+    linear-gradient(
+      0deg,
+      transparent,
+      transparent ${enabled.track.bottomOffset},
+      ${enabled.track.hover.background} ${enabled.track.bottomOffset},
+      ${enabled.track.hover.background}
+        calc(${enabled.track.bottomOffset} + ${enabled.track.height}),
       transparent 0
     );
 `
@@ -50,7 +69,7 @@ const trackFill = css`
 
 const wrapperGrid = css`
   display: grid;
-  grid-template-rows: max-content 24px /* ${enabled.handle.size} */ ${enabled.output.height};
+  grid-template-rows: max-content 24px;
   grid-template-columns: 1fr 1fr;
   width: 100%;
   position: relative;
@@ -70,7 +89,7 @@ const RangeWrapper = styled.div`
     background: ${({ disabled }) =>
       disabled
         ? _disabled.track.indicator.color
-        : enabled.track.indicator.color};
+        : enabled.track.indicator.color} ;
   }
   /** Faking the active region of the slider */
   &::before {
@@ -88,6 +107,14 @@ const RangeWrapper = styled.div`
     );
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
+  &:hover {
+    ${fakeTrackBgHover}
+    &::before,
+    &::after {
+      background: ${enabled.track.indicator.hover.color}
+    }
+  }
+ 
 `
 const Wrapper = styled.div`
   --min: ${({ min }) => min};
@@ -130,8 +157,9 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     border: ${enabled.dot.border.width} ${enabled.dot.border.type}
       ${enabled.dot.border.color};
     border-radius: ${enabled.dot.border.radius};
-    bottom: 22px;
+    bottom: 8px;
     left: 2px;
+  
   }
   &:after {
     right: 2px;

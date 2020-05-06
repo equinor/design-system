@@ -18,12 +18,14 @@ const StyledOutput = styled.output`
   ${typographyTemplate(enabled.output.typography)}
   background: ${enabled.background};
   padding: 0 5px;
+  top: ${enabled.track.realHeight};
+  /* Avoid track hover on output mouse over */
+  pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
   /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
- 
  transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
-  grid-row: 3;
+  grid-row: 2;
   grid-column: 1 / -1;
 `
 

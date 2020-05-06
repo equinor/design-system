@@ -7,10 +7,13 @@ import { slider as tokens } from './Slider.tokens'
 const { enabled } = tokens
 
 const StyledMinMax = styled.span`
-  grid-row: 3;
+  grid-row: 2;
   ${typographyTemplate(enabled.output.typography)}
   position: absolute;
   left: 2px;
+  top: ${enabled.track.realHeight};
+  /* Avoid track hover on minmax mouse over */
+  pointer-events: none;
   text-align: left;
   /** Center align the text with the dot */
   transform: translate(calc(-1 * calc((100% - 8px) / 2)));
