@@ -163,7 +163,6 @@ export const Slider = forwardRef(function EdsSlider(
     step = 1,
     disabled,
     ariaLabelledby,
-    backgroundColor,
     ...rest
   },
   ref,

@@ -11,8 +11,6 @@ const Body = styled.div`
   padding: 32px;
   grid-gap: 32px;
   position: relative;
-  /*   background-color: black;
- */
 `
 
 function outputFunction(value) {
