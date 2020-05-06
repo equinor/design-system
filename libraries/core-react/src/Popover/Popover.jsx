@@ -64,6 +64,23 @@ const StyledCloseButton = styled((props) => <Button {...props} />)`
   right: 16px;
 `
 
+function outsideClickListener(ref, onClose) {
+  useEffect(() => {
+    function handleClickOutside(event) {
+      console.log(event, ref, ref.current, event.target)
+      if (ref.current && !ref.current.contains(event.target)) {
+        // User clicked outside popover
+        onClose()
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [ref])
+}
+
 export const Popover = forwardRef(function Popover(
   { className, open, onClose, children, placement, ...rest },
   ref,
@@ -96,23 +113,6 @@ export const Popover = forwardRef(function Popover(
       document.removeEventListener('keydown', handleClose, false)
     }
   }, [])
-
-  function outsideClickListener(ref) {
-    useEffect(() => {
-      function handleClickOutside(event) {
-        console.log(event, ref.current, event.target)
-        if (ref.current && !ref.current.contains(event.target)) {
-          // User clicked outside popover
-          onClose()
-        }
-      }
-
-      document.addEventListener('click', handleClickOutside)
-      return () => {
-        document.removeEventListener('click', handleClickOutside)
-      }
-    }, [ref])
-  }
 
   const wrapperProps = {
     right: tokens.placement[placement].popoverRight,
@@ -152,25 +152,27 @@ export const Popover = forwardRef(function Popover(
   }
 
   const contRef = useRef(null)
-  outsideClickListener(contRef)
+  outsideClickListener(contRef, onClose)
 
   return (
-    <Container ref={contRef} {...props}>
-      {anchorElement}
-      {open && (
-        <StyledPopoverWrapper {...wrapperProps}>
-          <StyledPopover>
-            <PopoverArrow {...arrowProps}>
-              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-            </PopoverArrow>
-            {childArray}
-            <StyledCloseButton onClick={onClose} variant="ghost_icon">
-              <Icon name="close" title="close" size={48} />
-            </StyledCloseButton>
-          </StyledPopover>
-        </StyledPopoverWrapper>
-      )}
-    </Container>
+    <div ref={contRef}>
+      <Container {...props}>
+        {anchorElement}
+        {open && (
+          <StyledPopoverWrapper {...wrapperProps}>
+            <StyledPopover>
+              <PopoverArrow {...arrowProps}>
+                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+              </PopoverArrow>
+              {childArray}
+              <StyledCloseButton onClick={onClose} variant="ghost_icon">
+                <Icon name="close" title="close" size={48} />
+              </StyledCloseButton>
+            </StyledPopover>
+          </StyledPopoverWrapper>
+        )}
+      </Container>
+    </div>
   )
 })
 
