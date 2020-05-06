@@ -1,18 +1,11 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import {
-  Typography,
-  Divider,
-  Icon,
-  Card,
-  Button,
-} from '@equinor/eds-core-react'
-import { close } from '@equinor/eds-icons'
+import { Icon, Card, Button } from '@equinor/eds-core-react'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { popover as tokens } from './Popover.tokens'
 
-const Anchor = styled.div`
+const Container = styled.div`
   position: relative;
   display: flex;
   width: auto;
@@ -28,7 +21,7 @@ const StyledPopoverWrapper = styled.div`
       left: ${left};
       transform: ${transform};
     `}
-  width: auto;
+  width: max-content;
   position: absolute;
   z-index: 500;
   align-self: center;
@@ -43,6 +36,9 @@ const StyledPopover = styled((props) => <Card {...props} />)`
   ${spacingsTemplate(tokens.spacings)}
   background: ${tokens.background};
   fill: ${tokens.background};
+  max-height: ${tokens.popover.maxHeight};
+  max-width: ${tokens.popover.maxWidth};
+  min-height: ${tokens.popover.minHeight};
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
 `
 
@@ -60,7 +56,6 @@ const PopoverArrow = styled.svg`
   position: absolute;
   fill: ${tokens.background};
   filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
-  /* box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14); */
 `
 
 const StyledCloseButton = styled((props) => <Button {...props} />)`
@@ -70,13 +65,53 @@ const StyledCloseButton = styled((props) => <Button {...props} />)`
 `
 
 export const Popover = forwardRef(function Popover(
-  { className, open, onClose, children, placement, anchorEl, ...rest },
+  { className, open, onClose, children, placement, ...rest },
   ref,
 ) {
   const props = {
     ...rest,
     className,
     ref,
+  }
+
+  const handleClose = (event) => {
+    if (event) {
+      if (event.key === 'Escape') {
+        onClose()
+      } else if (event.type === 'click') {
+        onClose()
+      }
+    }
+  }
+
+  const handleContentClick = (event) => {
+    // Avoid event bubbling inside dialog/content inside scrim
+    event.stopPropagation()
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleClose, false)
+
+    return () => {
+      document.removeEventListener('keydown', handleClose, false)
+    }
+  }, [])
+
+  function outsideClickListener(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        console.log(event, ref.current, event.target)
+        if (ref.current && !ref.current.contains(event.target)) {
+          // User clicked outside popover
+          onClose()
+        }
+      }
+
+      document.addEventListener('click', handleClickOutside)
+      return () => {
+        document.removeEventListener('click', handleClickOutside)
+      }
+    }, [ref])
   }
 
   const wrapperProps = {
@@ -95,16 +130,14 @@ export const Popover = forwardRef(function Popover(
     transform: tokens.placement[placement].arrowTransform,
   }
 
-  /* 
-  Find anchor element in children to wrap the element together with Popover.
-
-  Children is required, but user has to wrap the actual anchor with <PopoverAnchor />
-  for this to work. 
-  */
   let anchorElement
   let childArray = []
   if (Array.isArray(children)) {
     for (let i = 0; i < children.length; i++) {
+      /* 
+      Find anchor element in children to wrap the element together with Popover.
+      Children is required, but user has to wrap the actual anchor with <PopoverAnchor />
+      */
       if (children[i].type.displayName === 'eds-popover-anchor') {
         anchorElement = children[i]
       } else {
@@ -118,8 +151,11 @@ export const Popover = forwardRef(function Popover(
     }
   }
 
+  const contRef = useRef(null)
+  outsideClickListener(contRef)
+
   return (
-    <Anchor {...props}>
+    <Container ref={contRef} {...props}>
       {anchorElement}
       {open && (
         <StyledPopoverWrapper {...wrapperProps}>
@@ -127,14 +163,14 @@ export const Popover = forwardRef(function Popover(
             <PopoverArrow {...arrowProps}>
               <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
             </PopoverArrow>
+            {childArray}
             <StyledCloseButton onClick={onClose} variant="ghost_icon">
               <Icon name="close" title="close" size={48} />
             </StyledCloseButton>
-            {childArray}
           </StyledPopover>
         </StyledPopoverWrapper>
       )}
-    </Anchor>
+    </Container>
   )
 })
 

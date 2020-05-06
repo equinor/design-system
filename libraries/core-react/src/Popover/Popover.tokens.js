@@ -21,7 +21,9 @@ export const popover = {
   header,
   background,
   popover: {
-    minHeight: '32px',
+    minHeight: '48px',
+    maxWidth: '560px',
+    maxHeight: '80vh',
   },
   arrow: {
     width: '8px',

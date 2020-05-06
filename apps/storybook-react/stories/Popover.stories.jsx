@@ -14,8 +14,7 @@ import {
 } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
 
-const { PopoverAnchor, PopoverTitle } = Popover
-
+const { PopoverAnchor, PopoverTitle, PopoverContent } = Popover
 const { CardActions } = Card
 
 const Body = styled.div`
@@ -39,6 +38,19 @@ export default {
   component: Popover,
   decorators: [withKnobs],
 }
+
+const Content = () => (
+  <>
+    <PopoverTitle>Title </PopoverTitle>
+    <PopoverContent>
+      <Typography variant="body_short">Content</Typography>
+    </PopoverContent>
+    <CardActions>
+      <Button>Cancel</Button>
+      <Button>OK</Button>
+    </CardActions>
+  </>
+)
 
 export function Placement() {
   const [active, setActive] = React.useState(null)
@@ -73,11 +85,7 @@ export function Placement() {
               Top left
             </Button>
           </PopoverAnchor>
-          <PopoverTitle>Title</PopoverTitle>
-          <CardActions>
-            <Button>Cancel</Button>
-            <Button>OK</Button>
-          </CardActions>
+          <Content />
         </Popover>
         <Popover onClose={handleClose} open={active === '2'} placement="top">
           <PopoverAnchor>
@@ -85,6 +93,7 @@ export function Placement() {
               Top
             </Button>
           </PopoverAnchor>
+          <Content />
         </Popover>
         <Popover
           onClose={handleClose}
@@ -96,6 +105,114 @@ export function Placement() {
               Top right
             </Button>
           </PopoverAnchor>
+          <Content />
+        </Popover>
+      </Wrapper>
+
+      <Typography variant="h5">Bottom</Typography>
+      <Wrapper>
+        <Popover
+          onClose={handleClose}
+          open={active === '4'}
+          placement="bottomLeft"
+        >
+          <PopoverAnchor>
+            <Button id="4" onClick={handleClick}>
+              Bottom left
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover onClose={handleClose} open={active === '5'} placement="bottom">
+          <PopoverAnchor>
+            <Button id="5" onClick={handleClick}>
+              Bottom
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '6'}
+          placement="bottomRight"
+        >
+          <PopoverAnchor>
+            <Button id="6" onClick={handleClick}>
+              Bottom right
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+      </Wrapper>
+
+      <Typography variant="h5">Left</Typography>
+      <Wrapper>
+        <Popover
+          onClose={handleClose}
+          open={active === '7'}
+          placement="leftTop"
+        >
+          <PopoverAnchor>
+            <Button id="7" onClick={handleClick}>
+              Left top
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover onClose={handleClose} open={active === '8'} placement="left">
+          <PopoverAnchor>
+            <Button id="8" onClick={handleClick}>
+              Left
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '9'}
+          placement="leftBottom"
+        >
+          <PopoverAnchor>
+            <Button id="9" onClick={handleClick}>
+              Left bottom
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+      </Wrapper>
+      <Typography variant="h5">Right</Typography>
+      <Wrapper>
+        <Popover
+          onClose={handleClose}
+          open={active === '10'}
+          placement="rightTop"
+        >
+          <PopoverAnchor>
+            <Button id="10" onClick={handleClick}>
+              Right top
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover onClose={handleClose} open={active === '11'} placement="right">
+          <PopoverAnchor>
+            <Button id="11" onClick={handleClick}>
+              Right
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '12'}
+          placement="rightBottom"
+        >
+          <PopoverAnchor>
+            <Button id="12" onClick={handleClick}>
+              Right bottom
+            </Button>
+          </PopoverAnchor>
+          <Content />
         </Popover>
       </Wrapper>
     </Body>
@@ -103,17 +220,15 @@ export function Placement() {
 }
 
 export function ActivationTypes() {
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [active, setActive] = React.useState(null)
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
+    setActive(event.currentTarget.id)
   }
 
   const handleClose = () => {
-    setAnchorEl(null)
+    setActive(null)
   }
-
-  const open = Boolean(anchorEl)
 
   return (
     <Body>
@@ -124,14 +239,26 @@ export function ActivationTypes() {
         </Typography>
       </TextWrapper>
       <Wrapper>
-        <Button onClick={handleClick} variant="ghost">
-          Activate on click
-        </Button>
-        <Button onMouseEnter={handleClick} variant="ghost">
-          Activate on hover
-        </Button>
-        <Popover anchorEl={anchorEl} open={open}>
-          {/* <PopoverTitle></PopoverTitle> */}
+        <Popover onClose={handleClose} open={active === '1'}>
+          <PopoverAnchor>
+            <Button id="1" onClick={handleClick}>
+              On Click
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+
+        <Popover
+          onClose={handleClose}
+          onBlur={handleClose}
+          open={active === '2'}
+        >
+          <PopoverAnchor>
+            <Button id="2" onMouseEnter={handleClick}>
+              On Hover
+            </Button>
+          </PopoverAnchor>
+          <Content />
         </Popover>
       </Wrapper>
     </Body>
