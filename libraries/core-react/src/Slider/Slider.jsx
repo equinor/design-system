@@ -107,7 +107,7 @@ const RangeWrapper = styled.div`
     );
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
-  &:hover {
+  &:hover:not([disabled]) {
     ${fakeTrackBgHover}
     &::before,
     &::after {
@@ -137,6 +137,12 @@ const Wrapper = styled.div`
     );
     /* Adjusting for start dot circle */
     margin-left: 3px;
+  }
+  &:hover:not([disabled]) {
+    ${fakeTrackBgHover} 
+    &::after {
+      background: ${enabled.track.indicator.hover.color}
+    }
   }
 `
 

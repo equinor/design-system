@@ -112,6 +112,12 @@ const StyledSliderInput = styled.input.attrs(() => ({
     &::-ms-thumb {
       ${thumbHoverAndDisabled}
     }
+    &::-webkit-slider-runnable-track {
+      cursor: not-allowed;
+    }
+    &::-moz-range-track {
+      cursor: not-allowed;
+    }
   }
 
   &:before,
@@ -151,8 +157,7 @@ const StyledSliderInput = styled.input.attrs(() => ({
     height: 100%;
     cursor: pointer;
     background: none;
-    /* ${track} */
-    background: transparent; 
+    background: transparent;
     border-color: transparent;
     color: transparent;
   }
@@ -162,7 +167,7 @@ const StyledSliderInput = styled.input.attrs(() => ({
   &::-ms-fill-lower {
     background: transparent;
   }
-  @supports (-ms-ime-align:auto) {
+  @supports (-ms-ime-align: auto) {
     /* Correct cursors for Edge */
     cursor: pointer;
     &:disabled {
