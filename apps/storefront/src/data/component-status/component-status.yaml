@@ -65,7 +65,7 @@ components:
       figma:
         - *4
       react:
-        - *3
+        - *4
   - component: Chips
     status:
       documentation:
@@ -201,7 +201,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *3
   - component: Progress indicators
     status:
       documentation:
@@ -249,7 +249,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *3
   - component: Stepper
     status:
       documentation:
@@ -281,7 +281,7 @@ components:
       figma:
         - *4
       react:
-        - *3
+        - *4
   - component: Typography
     status:
       documentation:
