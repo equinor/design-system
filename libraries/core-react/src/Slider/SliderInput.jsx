@@ -185,7 +185,6 @@ export const SliderInput = forwardRef((props, ref) => {
         onChange(event)
       }}
       disabled={disabled}
-      aria-labelledby="test"
     />
   )
 })
