@@ -3,7 +3,7 @@ import { Radio, Checkbox, Switch } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
 
-const Body = styled.div`
+const Wrapper = styled.div`
   /* height: calc(100vh - 64px); */
   /* background: #ebebeb; */
   display: grid;
@@ -14,18 +14,38 @@ const Body = styled.div`
 `
 
 export default {
-  title: 'Components|SelectionControls',
+  title: 'Components|Selection controls',
   component: Radio,
 }
 
-export const Examples = () => {
+export const RadioControl = () => {
   return (
-    <Body>
-      <div>
-        <Radio />
-        <Checkbox />
-        <Switch />
-      </div>
-    </Body>
+    <Wrapper>
+      <Radio />
+    </Wrapper>
   )
+}
+export const CheckboxControl = () => {
+  return (
+    <Wrapper>
+      <Checkbox />
+    </Wrapper>
+  )
+}
+export const SwitchControl = () => {
+  return (
+    <Wrapper>
+      <Switch />
+    </Wrapper>
+  )
+}
+
+RadioControl.story = {
+  name: 'Radio',
+}
+CheckboxControl.story = {
+  name: 'Checkbox',
+}
+SwitchControl.story = {
+  name: 'Switch',
 }
