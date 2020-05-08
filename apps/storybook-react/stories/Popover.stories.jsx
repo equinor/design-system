@@ -223,7 +223,6 @@ export function ActivationTypes() {
   const [active, setActive] = React.useState(null)
 
   const handleClick = (event) => {
-    console.log(event.currentTarget)
     setActive(event.currentTarget.id)
   }
 

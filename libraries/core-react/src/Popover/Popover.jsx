@@ -60,21 +60,38 @@ const PopoverArrow = styled.svg`
 
 const StyledCloseButton = styled((props) => <Button {...props} />)`
   position: absolute;
-  top: 0;
+  top: 8px;
   right: 16px;
+  height: 32px;
+  width: 32px;
+  &:after {
+    height: 32px;
+  }
 `
 
-function outsideClickListener(ref, onClose) {
+function outsideClickListener(ref, onClose, open) {
   useEffect(() => {
     function handleClickOutside(event) {
-      console.log(event, ref, ref.current, event.target)
+      console.log(
+        'click outside function',
+        ref,
+        event,
+        ref.current,
+        event.target,
+      )
+
       if (ref.current && !ref.current.contains(event.target)) {
         // User clicked outside popover
+        console.log('user clicked outside')
         onClose()
       }
     }
+    console.log('useEffect click outside fn', open)
 
-    document.addEventListener('click', handleClickOutside)
+    if (open) {
+      console.log('open event listener')
+      document.addEventListener('click', handleClickOutside)
+    }
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
@@ -107,6 +124,7 @@ export const Popover = forwardRef(function Popover(
   }
 
   useEffect(() => {
+    console.log('useEffect')
     document.addEventListener('keydown', handleClose, false)
 
     return () => {
@@ -152,12 +170,19 @@ export const Popover = forwardRef(function Popover(
   }
 
   const contRef = useRef(null)
-  outsideClickListener(contRef, onClose)
+  const anchorRef = useRef(null)
+
+  outsideClickListener(contRef, onClose, open)
+
+  if (open) {
+    console.log(anchorRef.current)
+    anchorRef.current.focus()
+  }
 
   return (
     <div ref={contRef}>
       <Container {...props}>
-        {anchorElement}
+        <div ref={anchorRef}>{anchorElement}</div>
         {open && (
           <StyledPopoverWrapper {...wrapperProps}>
             <StyledPopover>
