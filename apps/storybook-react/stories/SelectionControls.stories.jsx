@@ -9,8 +9,12 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-rows: min-width;
   padding: 32px;
-  grid-gap: 4rem;
+  grid-gap: 2rem;
   position: relative;
+`
+
+const BlockRadio = styled(Radio)`
+  display: flex;
 `
 
 export default {
@@ -19,12 +23,56 @@ export default {
 }
 
 export const RadioControl = () => {
+  const [checked, updateChecked] = useState('one')
+  const onChange = (event, value) => {
+    console.log(event)
+    updateChecked(value)
+  }
   return (
     <Wrapper>
-      <Radio />
+      <div>
+        <Radio label="Check me" />
+      </div>
+      <div>
+        <Radio label="You can't check me!" disabled />
+      </div>
+      <div>
+        <Radio label="I'm preselected" defaultChecked />
+      </div>
+      <div>
+        <Radio label="You can't check me!" disabled defaultChecked />
+      </div>
+      <div>
+        <fieldset>
+          <legend>We are in this together! 🙌</legend>
+          <BlockRadio
+            label="I'm number one and preselected"
+            name="group"
+            value="one"
+            checked={checked === 'one'}
+            onChange={onChange}
+          />
+
+          <BlockRadio
+            label="I'm number two"
+            name="group"
+            value="two"
+            checked={checked === 'two'}
+            onChange={onChange}
+          />
+          <BlockRadio
+            label="I'm number three"
+            name="group"
+            value="three"
+            checked={checked === 'three'}
+            onChange={onChange}
+          />
+        </fieldset>
+      </div>
     </Wrapper>
   )
 }
+
 export const CheckboxControl = () => {
   return (
     <Wrapper>
