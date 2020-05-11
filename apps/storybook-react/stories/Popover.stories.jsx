@@ -223,7 +223,11 @@ export function ActivationTypes() {
   const [active, setActive] = React.useState(null)
 
   const handleClick = (event) => {
-    setActive(event.currentTarget.id)
+    if (active === event.currentTarget.id) {
+      // setActive(null)
+    } else {
+      setActive(event.currentTarget.id)
+    }
   }
 
   const handleClose = () => {
@@ -248,14 +252,14 @@ export function ActivationTypes() {
           <Content />
         </Popover>
 
-        <Popover onClose={handleClose} open={active === '2'}>
+        {/* <Popover onClose={handleClose} open={active === '2'}>
           <PopoverAnchor>
             <Button id="2" onMouseEnter={handleClick}>
               On Hover
             </Button>
           </PopoverAnchor>
           <Content />
-        </Popover>
+        </Popover> */}
       </Wrapper>
     </Body>
   )

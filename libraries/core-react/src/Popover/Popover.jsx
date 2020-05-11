@@ -1,9 +1,7 @@
-import React, { forwardRef, useEffect, useRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Icon, Card, Button } from '@equinor/eds-core-react'
-import { spacingsTemplate, typographyTemplate } from '../_common/templates'
-import { popover as tokens } from './Popover.tokens'
+import { PopoverItem } from './PopoverItem'
 
 const Container = styled.div`
   position: relative;
@@ -12,64 +10,8 @@ const Container = styled.div`
   justify-content: center;
 `
 
-const StyledPopoverWrapper = styled.div`
-  ${({ top, bottom, right, left, transform }) =>
-    css`
-      bottom: ${bottom};
-      top: ${top};
-      right: ${right};
-      left: ${left};
-      transform: ${transform};
-    `}
-  width: max-content;
-  position: absolute;
-  z-index: 500;
-  align-self: center;
-  flex-shrink: 0;
-  ::after {
-    content: '';
-  }
-`
-
-const StyledPopover = styled((props) => <Card {...props} />)`
-  ${typographyTemplate(tokens.typography)}
-  ${spacingsTemplate(tokens.spacings)}
-  background: ${tokens.background};
-  fill: ${tokens.background};
-  max-height: ${tokens.popover.maxHeight};
-  max-width: ${tokens.popover.maxWidth};
-  min-height: ${tokens.popover.minHeight};
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
-`
-
-const PopoverArrow = styled.svg`
-  ${({ top, bottom, right, left, transform }) =>
-    css`
-      bottom: ${bottom};
-      top: ${top};
-      right: ${right};
-      left: ${left};
-      transform: ${transform};
-    `}
-  width: ${tokens.arrow.width};
-  height: ${tokens.arrow.height};
-  position: absolute;
-  fill: ${tokens.background};
-  filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
-`
-
-const StyledCloseButton = styled((props) => <Button {...props} />)`
-  position: absolute;
-  top: 8px;
-  right: 16px;
-  height: 32px;
-  width: 32px;
-  &:after {
-    height: 32px;
-  }
-`
 export const Popover = forwardRef(function Popover(
-  { className, open, onClose, children, placement, ...rest },
+  { className, open, children, ...rest },
   ref,
 ) {
   const props = {
@@ -78,59 +20,7 @@ export const Popover = forwardRef(function Popover(
     ref,
   }
 
-  const wrapperProps = {
-    right: tokens.placement[placement].popoverRight,
-    top: tokens.placement[placement].popoverTop,
-    bottom: tokens.placement[placement].popoverBottom,
-    left: tokens.placement[placement].popoverLeft,
-    transform: tokens.placement[placement].transform,
-  }
-
-  const arrowProps = {
-    left: tokens.placement[placement].arrowLeft,
-    right: tokens.placement[placement].arrowRight,
-    top: tokens.placement[placement].arrowTop,
-    bottom: tokens.placement[placement].arrowBottom,
-    transform: tokens.placement[placement].arrowTransform,
-  }
-
-  const contRef = useRef(null)
   const anchorRef = useRef(null)
-
-  const handleClose = (event) => {
-    const popoverRef = contRef.current
-    const anchRef = anchorRef.current
-    const targetRef = event.target
-    if (event) {
-      if (event.key === 'Escape') {
-        onClose()
-      } else if (event.type === 'click') {
-        if (popoverRef && popoverRef.contains(targetRef)) {
-        } else if (
-          popoverRef &&
-          !popoverRef.contains(targetRef) &&
-          !anchRef.contains(targetRef)
-        ) {
-          onClose()
-        }
-      }
-    }
-  }
-
-  const handleContentClick = (event) => {
-    // Avoid event bubbling inside dialog/content inside scrim
-    event.stopPropagation()
-  }
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleClose, false)
-    document.addEventListener('click', handleClose, false)
-
-    return () => {
-      document.removeEventListener('keydown', handleClose, false)
-      document.removeEventListener('click', handleClose, false)
-    }
-  }, [])
 
   let anchorElement
   let childArray = []
@@ -153,25 +43,13 @@ export const Popover = forwardRef(function Popover(
     }
   }
 
-  if (open) {
-    anchorRef.current.focus()
-  }
-
   return (
     <Container {...props}>
       <div ref={anchorRef}>{anchorElement}</div>
       {open && (
-        <StyledPopoverWrapper ref={contRef} {...wrapperProps}>
-          <StyledPopover>
-            <PopoverArrow {...arrowProps}>
-              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-            </PopoverArrow>
-            {childArray}
-            <StyledCloseButton onClick={onClose} variant="ghost_icon">
-              <Icon name="close" title="close" size={48} />
-            </StyledCloseButton>
-          </StyledPopover>
-        </StyledPopoverWrapper>
+        <PopoverItem {...props} anchorRef={anchorRef}>
+          {childArray}
+        </PopoverItem>
       )}
     </Container>
   )
@@ -198,7 +76,7 @@ Popover.propTypes = {
   // On Close function:
   onClose: PropTypes.func,
   // Open=true activates popup
-  open: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
   /** Popover reference/anchor element is required as a child */
   children: PropTypes.node.isRequired,
   /** @ignore */
@@ -207,8 +85,6 @@ Popover.propTypes = {
 
 Popover.defaultProps = {
   placement: 'bottom',
-  open: false,
   onClose: undefined,
-  children: undefined,
   className: '',
 }
