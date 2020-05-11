@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Radio, Checkbox, Switch } from '@equinor/eds-core-react'
+import { Radio, Checkbox, Switch, Icon } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
-
+import { checkbox } from '@equinor/eds-icons'
+Icon.add({ checkbox })
 const Wrapper = styled.div`
   /* height: calc(100vh - 64px); */
   /* background: #ebebeb; */
@@ -76,7 +77,19 @@ export const RadioControl = () => {
 export const CheckboxControl = () => {
   return (
     <Wrapper>
-      <Checkbox />
+      {/*  <Icon name="checkbox" size={16} /> */}
+      <div>
+        <Checkbox label="Check me" value="" />
+      </div>
+      <div>
+        <Checkbox label="You can't check me!" disabled />
+      </div>
+      <div>
+        <Checkbox label="I'm preselected" checked={true} />
+      </div>
+      <div>
+        <Checkbox label="You can't check me!" disabled checked={true} />
+      </div>
     </Wrapper>
   )
 }

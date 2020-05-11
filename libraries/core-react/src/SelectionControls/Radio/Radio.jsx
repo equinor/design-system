@@ -60,9 +60,7 @@ const StyledRadio = styled.label`
   display: inline-flex;
   align-items: center;
   padding: 16px
- /*  height: ${enabled.height}; */
    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  }
 `
 
 export const Radio = ({
@@ -90,8 +88,11 @@ Radio.displayName = 'eds-Slider'
 Radio.propTypes = {
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  onChange: PropTypes.bool,
+  className: PropTypes.string,
 }
 
 Radio.defaultProps = {
   disabled: false,
+  onChange: undefined,
 }
