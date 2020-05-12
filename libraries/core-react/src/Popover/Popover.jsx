@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { PopoverItem } from './PopoverItem'
 
 const Container = styled.div`
@@ -9,7 +9,7 @@ const Container = styled.div`
   width: auto;
   justify-content: center;
 `
-
+// Controller Component for PopoverItem
 export const Popover = forwardRef(function Popover(
   { className, open, children, ...rest },
   ref,
@@ -23,24 +23,36 @@ export const Popover = forwardRef(function Popover(
   const anchorRef = useRef(null)
 
   let anchorElement
-  let childArray = []
+  const childArray = []
   if (Array.isArray(children)) {
-    for (let i = 0; i < children.length; i++) {
+    for (let i = 0; i < children.length; i += 1) {
       /* 
-      Find anchor element in children to wrap the element together with Popover.
+      Find anchor element in children to wrap the element together with <PopoverItem/>.
       Children is required, but user has to wrap the actual anchor with <PopoverAnchor />
       */
-      if (children[i].type.displayName === 'eds-popover-anchor') {
+      if (
+        children[i].type &&
+        children[i].type.displayName === 'eds-popover-anchor'
+      ) {
         anchorElement = children[i]
       } else {
-        // Push the remaining children to a new array to display as normal
+        // Add the remaining children to a new array to display inside <PopoverItem/>
         childArray.push(children[i])
       }
     }
-  } else {
-    if (children.type.displayName === 'eds-popover-anchor') {
-      anchorElement = children
-    }
+  } else if (
+    !Array.isArray(children) &&
+    children.type &&
+    children.type.displayName === 'eds-popover-anchor'
+  ) {
+    anchorElement = children
+  }
+
+  console.log(anchorElement)
+
+  if (open && anchorRef.current) {
+    console.log('focus!', anchorRef.current)
+    anchorRef.current.focus()
   }
 
   return (
@@ -75,7 +87,7 @@ Popover.propTypes = {
   ]),
   // On Close function:
   onClose: PropTypes.func,
-  // Open=true activates popup
+  // Open activates <PopoverItem/>
   open: PropTypes.bool.isRequired,
   /** Popover reference/anchor element is required as a child */
   children: PropTypes.node.isRequired,

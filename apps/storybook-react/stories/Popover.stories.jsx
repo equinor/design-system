@@ -283,9 +283,32 @@ const ANCHOR_CHOICES = {
   icon: <Icon name="work" color={'red'} />,
 }
 
+const ACTIONS_CHOICES = {
+  none: '',
+  default: (
+    <CardActions>
+      <Button>Cancel</Button>
+      <Button>OK</Button>
+    </CardActions>
+  ),
+  alignRight: (
+    <CardActions alignRight>
+      <Button>Cancel</Button>
+      <Button>OK</Button>
+    </CardActions>
+  ),
+  meta: (
+    <CardActions meta="Share">
+      <Button>OK</Button>
+    </CardActions>
+  ),
+}
+
 export const WithKnobs = () => {
   const anchor = select('Anchor', Object.keys(ANCHOR_CHOICES), 'avatar')
   const title = text('Title', 'Title')
+  const content = text('Content', 'Content')
+  const action = select('Actions', Object.keys(ACTIONS_CHOICES), 'default')
   const placement = select(
     'Placement',
     [
@@ -311,9 +334,13 @@ export const WithKnobs = () => {
         <Typography variant="h3">With knobs</Typography>
       </TextWrapper>
       <Wrapper>
-        <Popover placement={placement}>
-          {/* <PopoverTitle>Hi</PopoverTitle> */}
-          {ANCHOR_CHOICES[anchor]}
+        <Popover placement={placement} open>
+          <PopoverTitle>{title}</PopoverTitle>
+          <PopoverAnchor>{ANCHOR_CHOICES[anchor]}</PopoverAnchor>
+          <PopoverContent>
+            <Typography variant="body_short">{content}</Typography>
+          </PopoverContent>
+          {ACTIONS_CHOICES[action]}
         </Popover>
       </Wrapper>
     </Body>

@@ -17,13 +17,12 @@ export const PopoverContent = forwardRef(function EdsPopoverContent(
 PopoverContent.displayName = 'eds-popover-content'
 
 PopoverContent.propTypes = {
-  /** @ignore */
-  children: PropTypes.node,
+  /** Children in popover content is required */
+  children: PropTypes.node.isRequired,
   /** @ignore */
   className: PropTypes.string,
 }
 
 PopoverContent.defaultProps = {
   className: '',
-  children: undefined,
 }

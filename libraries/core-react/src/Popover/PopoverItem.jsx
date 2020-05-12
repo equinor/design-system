@@ -132,7 +132,7 @@ export const PopoverItem = forwardRef(function EdsPopoverItem(
   )
 })
 
-PopoverItem.displayName = 'eds-popover-content'
+PopoverItem.displayName = 'eds-popover-item'
 
 PopoverItem.propTypes = {
   // PopoverItem placement relative to anchor
@@ -152,8 +152,6 @@ PopoverItem.propTypes = {
   ]),
   // On Close function:
   onClose: PropTypes.func,
-  // Open=true activates popup
-  open: PropTypes.bool.isRequired,
   // Reference to anchor / trigger element
   anchorRef: PropTypes.node.isRequired,
   /**  @ignore */
