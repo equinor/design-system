@@ -223,11 +223,7 @@ export function ActivationTypes() {
   const [active, setActive] = React.useState(null)
 
   const handleClick = (event) => {
-    if (active === event.currentTarget.id) {
-      // setActive(null)
-    } else {
-      setActive(event.currentTarget.id)
-    }
+    setActive(event.currentTarget.id)
   }
 
   const handleClose = () => {
@@ -237,9 +233,12 @@ export function ActivationTypes() {
   return (
     <Body>
       <TextWrapper>
-        <Typography variant="h3">Open on Hover</Typography>
+        <Typography variant="h3">Activation types</Typography>
         <Typography variant="body_long">
-          Popovers can be activated by hover or click
+          Popovers can be activated by hover or click. To dismiss a popover, use
+          the close icon, press the ESC key, open another popover or click
+          outside the popover. If there are no actions in the popover, then the
+          close icon should be the first focusable element.
         </Typography>
       </TextWrapper>
       <Wrapper>
@@ -252,14 +251,14 @@ export function ActivationTypes() {
           <Content />
         </Popover>
 
-        {/* <Popover onClose={handleClose} open={active === '2'}>
+        <Popover onClose={handleClose} open={active === '2'}>
           <PopoverAnchor>
             <Button id="2" onMouseEnter={handleClick}>
               On Hover
             </Button>
           </PopoverAnchor>
           <Content />
-        </Popover> */}
+        </Popover>
       </Wrapper>
     </Body>
   )
