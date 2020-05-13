@@ -42,20 +42,33 @@ export const RadioControl = () => {
   return (
     <Wrapper>
       <div>
-        <Radio label="Check me" />
+        <Typography variant="h2" style={{ margin: '1rem 0' }}>
+          Single radiobox examples
+        </Typography>
+        <div>
+          <Radio label="Check me" name="first" />
+        </div>
+        <div>
+          <Radio label="You can't check me!" disabled name="second" />
+        </div>
+        <div>
+          <Radio label="I'm preselected" defaultChecked name="third" />
+        </div>
+        <div>
+          <Radio
+            label="You can't uncheck me!"
+            disabled
+            defaultChecked
+            name="fourth"
+          />
+        </div>
       </div>
       <div>
-        <Radio label="You can't check me!" disabled />
-      </div>
-      <div>
-        <Radio label="I'm preselected" defaultChecked />
-      </div>
-      <div>
-        <Radio label="You can't check me!" disabled defaultChecked />
-      </div>
-      <div>
+        <Typography variant="h2" style={{ margin: '1rem 0' }}>
+          Group example
+        </Typography>
         <fieldset>
-          <legend>We are in this together! 🙌</legend>
+          <legend>We are in this together as controlled components! 🙌</legend>
           <BlockRadio
             label="I'm number one and preselected"
             name="group"
