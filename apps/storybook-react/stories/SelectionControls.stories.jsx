@@ -103,6 +103,7 @@ export const CheckboxControl = () => {
           ref={indeterminateRef}
         />
       </div>
+
       <form onSubmit={(e) => submitHandler(e)}>
         <fieldset>
           <legend>We are multiple checkboxes</legend>

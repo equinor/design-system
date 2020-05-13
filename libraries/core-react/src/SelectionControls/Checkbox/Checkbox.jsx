@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -79,25 +79,8 @@ const InputWrapper = styled.span`
 `
 
 export const Checkbox = forwardRef((props, ref) => {
-  console.log('checkbox', checkbox)
-  const { label, disabled, checked, onChange, indeterminate, ...rest } = props
-  const [isChecked, updateIsChecked] = useState(checked)
-  const getIconName = () => {
-    if (indeterminate) {
-      return 'checkbox_indeterminate'
-    }
-    if (isChecked) {
-      return 'checkbox'
-    }
-    return 'checkbox_outline'
-  }
-  const handleInputChange = (event) => {
-    const { target } = event
-    updateIsChecked(target.checked)
-    if (onChange) {
-      onChange(event, target.value)
-    }
-  }
+  const { label, disabled, indeterminate, ...rest } = props
+
   const iconSize = 24
   return (
     <StyledCheckbox disabled={disabled}>
@@ -106,8 +89,6 @@ export const Checkbox = forwardRef((props, ref) => {
           {...rest}
           ref={ref}
           disabled={disabled}
-          /* checked={isChecked} */
-          /* onChange={handleInputChange} */
           data-indeterminate={indeterminate}
         />
         {indeterminate ? (
@@ -140,15 +121,10 @@ Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
   // If true, the checkbox will be disabled
   disabled: PropTypes.bool,
-  // If true, the checkbox is preselected
-  checked: PropTypes.bool,
-  onChange: PropTypes.func,
   indeterminate: PropTypes.bool,
 }
 
 Checkbox.defaultProps = {
   disabled: false,
-  checked: false,
-  onChange: undefined,
   indeterminate: false,
 }
