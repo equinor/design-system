@@ -83,12 +83,12 @@ export const Radio = ({
   )
 }
 
-Radio.displayName = 'eds-Slider'
+Radio.displayName = 'eds-Radio'
 
 Radio.propTypes = {
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  onChange: PropTypes.bool,
+  onChange: PropTypes.func,
   className: PropTypes.string,
 }
 

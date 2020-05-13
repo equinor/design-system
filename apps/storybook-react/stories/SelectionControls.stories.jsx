@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Radio, Checkbox, Switch, Icon } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
@@ -75,21 +75,43 @@ export const RadioControl = () => {
 }
 
 export const CheckboxControl = () => {
+  // Use this to set the input to indeterminate = true as this must be done via JavaScript
+  // (cannot use an HTML attribute for this)
+  const indeterminateRef = useRef()
+  const submitHandler = (e) => {
+    console.log('target', e.target.name)
+    e.preventDefault()
+  }
   return (
     <Wrapper>
-      {/*  <Icon name="checkbox" size={16} /> */}
       <div>
-        <Checkbox label="Check me" value="" />
+        <Checkbox label="Check me" />
       </div>
       <div>
         <Checkbox label="You can't check me!" disabled />
       </div>
       <div>
-        <Checkbox label="I'm preselected" checked={true} />
+        <Checkbox label="I'm preselected" defaultChecked />
       </div>
       <div>
-        <Checkbox label="You can't check me!" disabled checked={true} />
+        <Checkbox label="You can't check me!" disabled defaultChecked />
       </div>
+      <div>
+        <Checkbox
+          label="I'm in indeterminate state"
+          indeterminate
+          ref={indeterminateRef}
+        />
+      </div>
+      <form onSubmit={(e) => submitHandler(e)}>
+        <fieldset>
+          <legend>We are multiple checkboxes</legend>
+          <Checkbox label="Check me first" name="multiple" value="first" />
+          <Checkbox label="Check me second" name="multiple" value="second" />
+          <Checkbox label="Check me third" name="multiple" value="third" />
+        </fieldset>
+        <input type="submit" value="Yes, done!" />
+      </form>
     </Wrapper>
   )
 }
@@ -104,6 +126,7 @@ export const SwitchControl = () => {
 RadioControl.story = {
   name: 'Radio',
 }
+
 CheckboxControl.story = {
   name: 'Checkbox',
 }
