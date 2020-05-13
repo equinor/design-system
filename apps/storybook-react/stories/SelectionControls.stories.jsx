@@ -9,8 +9,8 @@ const Wrapper = styled.div`
   /* background: #ebebeb; */
   display: grid;
   grid-template-rows: min-width;
-  padding: 32px;
-  grid-gap: 2rem;
+  padding: 0 32px;
+  grid-gap: 1rem;
   position: relative;
 `
 
@@ -78,6 +78,7 @@ export const CheckboxControl = () => {
   // Use this to set the input to indeterminate = true as this must be done via JavaScript
   // (cannot use an HTML attribute for this)
   const indeterminateRef = useRef()
+  const [checked, updateChecked] = useState(false)
   const submitHandler = (e) => {
     console.log('target', e.target.name)
     e.preventDefault()
@@ -103,7 +104,15 @@ export const CheckboxControl = () => {
           ref={indeterminateRef}
         />
       </div>
-
+      <div>
+        <Checkbox
+          label="I'm a controlled component"
+          onChange={(e) => {
+            updateChecked(e.target.checked)
+          }}
+          checked={checked}
+        />
+      </div>
       <form onSubmit={(e) => submitHandler(e)}>
         <fieldset>
           <legend>We are multiple checkboxes</legend>

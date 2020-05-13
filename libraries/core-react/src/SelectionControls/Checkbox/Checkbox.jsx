@@ -17,7 +17,7 @@ const { color, enabled } = tokens
 const StyledCheckbox = styled.label`
   display: inline-flex;
   align-items: center;
-  padding: 16px
+  /* padding: 16px */
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `
 
@@ -74,7 +74,8 @@ const InputWrapper = styled.span`
   border-radius: 50%;
   padding: 12px;
   &:hover {
-    background-color: ${color.hover};
+    background-color: ${({ disabled }) =>
+      disabled ? 'transparent' : color.hover};
   }
 `
 
