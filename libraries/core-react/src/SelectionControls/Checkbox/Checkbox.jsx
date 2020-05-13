@@ -80,11 +80,11 @@ const InputWrapper = styled.span`
 `
 
 export const Checkbox = forwardRef((props, ref) => {
-  const { label, disabled, indeterminate, ...rest } = props
+  const { label, disabled, indeterminate, className, ...rest } = props
 
   const iconSize = 24
   return (
-    <StyledCheckbox disabled={disabled}>
+    <StyledCheckbox disabled={disabled} className={className}>
       <InputWrapper disabled={disabled}>
         <Input
           {...rest}
@@ -123,6 +123,7 @@ Checkbox.propTypes = {
   // If true, the checkbox will be disabled
   disabled: PropTypes.bool,
   indeterminate: PropTypes.bool,
+  className: PropTypes.string,
 }
 
 Checkbox.defaultProps = {
