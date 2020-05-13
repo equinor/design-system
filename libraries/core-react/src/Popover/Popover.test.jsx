@@ -1,11 +1,24 @@
 /* eslint-disable no-undef */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { Popover } from '.'
 import { popover as tokens } from './Popover.tokens'
+import { Popover } from '.'
+import { Icon, Button, Card, Typography } from '..'
+
+const {
+  PopoverTitle,
+  PopoverContent,
+  PopoverAnchor,
+  PopoverItem,
+} = Popover
+
+const {
+  CardActions
+} = Card
 
 const StyledPopover = styled(Popover)`
   position: relative;
@@ -19,7 +32,53 @@ const {
 
 afterEach(cleanup)
 
+const SimplePopover = ({ open, placement }) => (
+        <Popover open={open} placement={placement}>
+          <PopoverAnchor>
+            <Button onClick={(e) => e.stopPropagation()}>
+              On Click
+            </Button>
+          </PopoverAnchor>
+          <PopoverTitle>Title</PopoverTitle>
+          <PopoverContent>
+            <Typography>Content</Typography>
+          </PopoverContent>
+        </Popover>
+)
+
+const PopoverWithActions = () => (
+  <Popover open>
+    <PopoverAnchor>
+      <Button onClick={(e) => e.stopPropagation()}>
+        On Click
+      </Button>
+    </PopoverAnchor>
+    <PopoverTitle>Title</PopoverTitle>
+    <PopoverContent>
+      <Typography>Content</Typography>
+    </PopoverContent>
+    <CardActions>
+      <Button onClick={(e) => e.stopPropagation()}>Cancel</Button>
+      <Button onClick={(e) => e.stopPropagation()}>OK</Button>
+    </CardActions>
+  </Popover>
+)
+
+SimplePopover.propTypes = {
+  open: PropTypes.bool,
+  placement: PropTypes.string,
+}
+
+SimplePopover.defaultProps = {
+  open: false,
+  chevronPosition: 'bottom',
+}
+ 
 describe('Popover', () => {
+  it('Opens based on prop', () => {
+    render(<SimplePopover />)
+    const 
+  })
   it('Popover has correct placement', () => {
     const { container } = render(<Popover placement="topRight">Anchor</Popover>)
     const popoverWrapper = container.lastElementChild

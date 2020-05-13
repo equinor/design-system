@@ -57,7 +57,9 @@ export const Popover = forwardRef(function Popover(
 
   return (
     <Container {...props}>
-      <div ref={anchorRef}>{anchorElement}</div>
+      <div open={open} aria-haspopup="true" ref={anchorRef}>
+        {anchorElement}
+      </div>
       {open && (
         <PopoverItem {...props} anchorRef={anchorRef}>
           {childArray}
