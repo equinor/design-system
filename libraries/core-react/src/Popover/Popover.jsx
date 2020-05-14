@@ -9,6 +9,12 @@ const Container = styled.div`
   width: auto;
   justify-content: center;
 `
+
+const Anchor = styled.div`
+  :focus: {
+    outline: none;
+  }
+`
 // Controller Component for PopoverItem
 export const Popover = forwardRef(function Popover(
   { className, open, children, ...rest },
@@ -57,9 +63,10 @@ export const Popover = forwardRef(function Popover(
 
   return (
     <Container {...props}>
-      <div open={open} aria-haspopup="true" ref={anchorRef}>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex*/}
+      <Anchor tabIndex={0} open={open} aria-haspopup="true" ref={anchorRef}>
         {anchorElement}
-      </div>
+      </Anchor>
       {open && (
         <PopoverItem {...props} anchorRef={anchorRef}>
           {childArray}
