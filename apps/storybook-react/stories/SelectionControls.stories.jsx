@@ -245,7 +245,26 @@ export const CheckboxControl = () => {
 export const SwitchControl = () => {
   return (
     <Wrapper>
-      <Switch />
+      <Typography variant="h1" style={{ margin: '1rem 0' }}>
+        Switch
+      </Typography>
+      <div>
+        <div>Standard</div>
+        <ul>
+          <li>
+            <span id="label-off">I'm default off</span>
+            <Switch ariaLabelledby="label-off" />
+          </li>
+          <li>
+            <span id="label-on">I'm default on</span>
+            <Switch ariaLabelledby="label-on" checked />
+          </li>
+        </ul>
+
+        <div>Disabled</div>
+        <Switch disabled />
+        <Switch disabled checked />
+      </div>
     </Wrapper>
   )
 }
