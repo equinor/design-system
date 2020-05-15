@@ -1,33 +1,9 @@
-import React, { useState } from 'react'
-import PropTypes, { bool } from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { SwitchSmall } from './SwitchSmall'
-import { SwitchDefault } from './SwitchDefault'
 import { switchControl as tokens } from './Switch.tokens'
 
-const { enabled, color, disabled: _disabled } = tokens
-
-const StyledSwitch = styled.label`
-  padding: 16px 0;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  border: none;
-  background-color: transparent;
-  vertical-align: middle;
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-`
-
-const InputWrapper = styled.span`
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  position: relative;
-  &:hover {
-    background-color: ${({ disabled }) =>
-      disabled ? 'transparent' : enabled.hover.background};
-  }
-`
+const { enabled, disabled: _disabled } = tokens
 
 const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
@@ -56,8 +32,7 @@ const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
   &:checked ~ span:last-child {
     background-color: ${({ disabled }) =>
       disabled ? _disabled.background : enabled.handle.activeBackground};
-    transform: ${({ size }) =>
-      size === 'small' ? 'translate(180%, -50%)' : 'translate(135%, -50%)'};
+    transform: translate(135%, -50%);
   }
 `
 
@@ -77,13 +52,6 @@ const Track = styled.span`
       backgroundColor: _disabled.background,
     }}
 `
-const SmallTrack = styled(Track)`
-  width: ${enabled.track.small.width};
-  height: ${enabled.track.small.height};
-  border-radius: 10px;
-  background-color: ${enabled.track.small.background};
-`
-
 const Handle = styled.span`
   background-color: ${enabled.handle.background};
   ${({ disabled }) =>
@@ -101,37 +69,21 @@ const Handle = styled.span`
   left: 6px;
   transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
-const SmallHandle = styled(Handle)`
-  width: ${enabled.handle.small.size};
-  height: ${enabled.handle.small.size};
-  box-shadow: none;
-  background-color: white;
-  left: 15px;
-`
 
-export const Switch = ({ size, disabled, label, ...rest }) => {
+export const SwitchDefault = ({ disabled, ...rest }) => {
   return (
-    <StyledSwitch disabled={disabled}>
-      <InputWrapper disabled={disabled}>
-        {size === 'small' ? (
-          <SwitchSmall disabled={disabled} {...rest} />
-        ) : (
-          <SwitchDefault disabled={disabled} {...rest} />
-        )}
-      </InputWrapper>
-      <span>{label}</span>
-    </StyledSwitch>
+    <>
+      <Input {...rest} disabled={disabled} />
+      <Track disabled={disabled} />
+      <Handle disabled={disabled} />
+    </>
   )
 }
 
-Switch.propTypes = {
-  size: PropTypes.oneOf(['default', 'small']),
+SwitchDefault.propTypes = {
   disabled: PropTypes.bool,
-  label: PropTypes.string.isRequired,
 }
 
-Switch.defaultProps = {
-  size: 'default',
-
+SwitchDefault.defaultProps = {
   disabled: false,
 }

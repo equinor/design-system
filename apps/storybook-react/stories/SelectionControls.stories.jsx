@@ -30,6 +30,12 @@ const BlockCheckbox = styled(Checkbox)`
   display: flex;
 `
 
+const UnstyledList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+`
+
 const DarkModeTypography = styled(Typography)`
   margin: '1rem 0';
   ${({ darkMode }) =>
@@ -264,7 +270,7 @@ export const SwitchControl = () => {
         <DarkModeTypography variant="h2" darkMode={darkMode}>
           Basic variants
         </DarkModeTypography>
-        <ul>
+        <UnstyledList>
           <li>
             <Switch label="I'm default off" />
           </li>
@@ -277,7 +283,26 @@ export const SwitchControl = () => {
           <li>
             <Switch disabled defaultChecked label="You can't turn me off!" />
           </li>
-        </ul>
+        </UnstyledList>
+        <UnstyledList>
+          <li>
+            <Switch label="I'm default off" size="small" />
+          </li>
+          <li>
+            <Switch label="I'm default on" defaultChecked size="small" />
+          </li>
+          <li>
+            <Switch disabled label="You can't turn me on!" size="small" />
+          </li>
+          <li>
+            <Switch
+              disabled
+              defaultChecked
+              label="You can't turn me off!"
+              size="small"
+            />
+          </li>
+        </UnstyledList>
       </div>
       <DarkModeTypography variant="h2" darkMode={darkMode}>
         Use case with controlled component

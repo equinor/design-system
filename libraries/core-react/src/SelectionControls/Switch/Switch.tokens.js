@@ -14,6 +14,7 @@ const {
     },
     text: {
       static_icons__tertiary: { rgba: handleColor },
+      static_icons__default: { rgba: smallBackground },
     },
   },
   elevation: { raised: boxShadow },
@@ -29,11 +30,20 @@ export const switchControl = {
       borderRadius: '4px',
       background: backgroundColorMedium,
       activeBackground: activeColor,
+      small: {
+        width: '20px',
+        height: '10px',
+        background: smallBackground,
+      },
     },
     handle: {
       boxShadow,
       background: handleColor,
       activeBackground: activeHandleColor,
+      size: '16px',
+      small: {
+        size: '6px',
+      },
     },
     hover: {
       background: primaryHover,
