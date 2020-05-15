@@ -6,29 +6,56 @@ import { switchControl as tokens } from './Switch.tokens'
 
 const { enabled, color, disabled: _disabled } = tokens
 
-const StyledSwitch = styled.button.attrs(({ type = 'button' }) => ({
-  type,
-  role: 'switch',
-}))`
+const StyledSwitch = styled.label`
   padding: 16px 0;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  position: relative;
-  width: 48px;
-  height: 48px;
   border: none;
   background-color: transparent;
   vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+`
+
+const InputWrapper = styled.span`
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
+  position: relative;
   &:hover {
     background-color: ${({ disabled }) =>
       disabled ? 'transparent' : enabled.hover.background};
   }
+`
+
+const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
+  type,
+  role: 'switch',
+}))`
+  /* Visually hide the original radio input*/
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
   &:focus {
     outline: none;
   }
-  &[data-focus-visible-added]:focus {
+  &[data-focus-visible-added]:focus + span {
     outline: ${enabled.outline};
     outline-offset: ${enabled.outlineOffset};
+  }
+  &:checked + span :first-child {
+    background-color: ${({ disabled }) =>
+      disabled ? _disabled.background : enabled.track.activeBackground};
+  }
+  &:checked + span :last-child {
+    background-color: ${({ disabled }) =>
+      disabled ? _disabled.background : enabled.handle.activeBackground};
+    transform: translate(135%, -50%);
   }
 `
 
@@ -37,12 +64,7 @@ const Track = styled.span`
   height: 8px;
   border-radius: ${enabled.track.borderRadius};
   border: none;
-  background-color: ${({ checked }) =>
-    checked ? enabled.track.activeBackground : enabled.track.background};
-  ${({ disabled }) =>
-    disabled && {
-      backgroundColor: _disabled.background,
-    }}
+  background-color: ${enabled.track.background};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -51,8 +73,7 @@ const Track = styled.span`
 `
 
 const Handle = styled.span`
-  background-color: ${({ checked }) =>
-    checked ? enabled.handle.activeBackground : enabled.handle.background};
+  background-color: ${enabled.handle.background};
   ${({ disabled }) =>
     disabled && {
       backgroundColor: _disabled.background,
@@ -64,54 +85,32 @@ const Handle = styled.span`
   display: inline-block;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  transform: ${({ checked }) =>
-    checked ? 'translate(-100%, -50%)' : 'translateX(0, -50%)'};
-  left: ${({ checked }) => (checked ? '90%' : '10%')};
+  transform: translate(0, -50%);
+  left: 6px;
   transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
-export const Switch = ({
-  size,
-  disabled,
-  checked,
-  onChange,
-  ariaLabelledby,
-  ...rest
-}) => {
-  const [active, setActive] = useState(checked)
-  const handleSwitchClick = (event) => {
-    setActive(!active)
-    if (onChange) {
-      onChange(active, event)
-    }
-  }
+export const Switch = ({ size, disabled, label, ...rest }) => {
   return (
-    <StyledSwitch
-      {...rest}
-      checked={active}
-      onClick={handleSwitchClick}
-      aria-checked={active}
-      disabled={disabled}
-      aria-labelledby={ariaLabelledby}
-    >
-      <Track checked={active} disabled={disabled}></Track>
-      <Handle checked={active} disabled={disabled}></Handle>
+    <StyledSwitch disabled={disabled}>
+      <Input {...rest} disabled={disabled} />
+      <InputWrapper disabled={disabled}>
+        <Track disabled={disabled} />
+        <Handle disabled={disabled} />
+      </InputWrapper>
+      <span>{label}</span>
     </StyledSwitch>
   )
 }
 
 Switch.propTypes = {
   size: PropTypes.oneOf(['large', 'small']),
-  checked: bool,
-  onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  ariaLabelledby: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 }
 
 Switch.defaultProps = {
   size: 'large',
-  checked: false,
-  onChange: undefined,
+
   disabled: false,
 }

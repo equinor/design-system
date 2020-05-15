@@ -266,36 +266,29 @@ export const SwitchControl = () => {
         </DarkModeTypography>
         <ul>
           <li>
-            <span id="label-off">I'm default off</span>
-            <Switch ariaLabelledby="label-off" />
+            <Switch label="I'm default off" />
           </li>
           <li>
-            <span id="label-on">I'm default on</span>
-            <Switch ariaLabelledby="label-on" checked />
-          </li>
-
-          <li>
-            <span id="label-disabled-on">You can't turn me on!</span>
-            <Switch disabled ariaLabelledby="label-disabled-on" />
+            <Switch label="I'm default on" defaultChecked />
           </li>
           <li>
-            <span id="label-disabled-off">You can't turn me off!</span>
-            <Switch disabled checked ariaLabelledby="label-disabled-off" />
+            <Switch disabled label="You can't turn me on!" />
+          </li>
+          <li>
+            <Switch disabled defaultChecked label="You can't turn me off!" />
           </li>
         </ul>
       </div>
       <DarkModeTypography variant="h2" darkMode={darkMode}>
-        Use case with onChange
+        Use case with controlled component
       </DarkModeTypography>
       <div>
         <Switch
           checked={darkMode}
           ariaLabelledby="label-darkMode"
           onChange={() => setDarkMode(!darkMode)}
+          label="Dark mode"
         />
-        <span id="label-darkMode" style={{ marginLeft: '10px' }}>
-          Dark mode
-        </span>
       </div>
     </Wrapper>
   )
