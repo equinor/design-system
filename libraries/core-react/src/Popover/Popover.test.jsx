@@ -1,7 +1,10 @@
 /* eslint-disable no-undef */
-import React from 'react'
+import React  from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { render, cleanup } from '@testing-library/react'
+//import Adapter from 'enzyme-adapter-react-16';
+//import { mount, configure } from 'enzyme';
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -13,7 +16,7 @@ const {
   PopoverTitle,
   PopoverContent,
   PopoverAnchor,
-  PopoverItem,
+  PopoverItem
 } = Popover
 
 const {
@@ -21,8 +24,7 @@ const {
 } = Card
 
 const StyledPopover = styled(Popover)`
-  position: relative;
-  height: 100px;
+  position: absolute;
   width: 100px;
 `
 
@@ -45,6 +47,7 @@ const SimplePopover = ({ open, placement }) => (
           </PopoverContent>
         </Popover>
 )
+
 
 const PopoverWithActions = () => (
   <Popover open>
@@ -73,14 +76,23 @@ SimplePopover.defaultProps = {
   open: false,
   chevronPosition: 'bottom',
 }
+
+//configure({adapter: new Adapter()});
  
 describe('Popover', () => {
-  it('Opens based on prop', () => {
-    render(<SimplePopover />)
-    const 
+  it('Shows PopoverItem on `open`', () => {
+    //const wrapper = mount(<SimplePopover open placement="bottomLeft" />)
+    // const popoverWrapper = container.lastElementChild
+    // const popover = popoverWrapper.lastChild
+    //expect(wrapper.find(PopoverItem)) // 
+    
+    const wrapper = ReactDOM.render(<SimplePopover open placement="bottomLeft" />, document.body)
+    const root = wrapper.find(<PopoverItem/>)
+    expect(root.type()).to.equal(PopoverItem)
+
   })
   it('Popover has correct placement', () => {
-    const { container } = render(<Popover placement="topRight">Anchor</Popover>)
+    const { container } = render(<SimplePopover open placement="topRight"/>)
     const popoverWrapper = container.lastElementChild
     const popover = popoverWrapper.lastChild
     expect(popoverWrapper).toHaveStyleRule('display', 'flex')
@@ -88,29 +100,34 @@ describe('Popover', () => {
     expect(popover).toHaveStyleRule('right', `${topRight.popoverRight}`)
   })
   it('Arrow has correct placement', () => {
-    const { container } = render(<Popover placement="topRight">Anchor</Popover>)
+    const { container } = render(<SimplePopover open placement="topRight"/>)
     const arrow = container.lastElementChild.lastChild.firstChild.firstChild
     expect(arrow).toHaveStyleRule('right', `${topRight.arrowRight}`)
     expect(arrow).toHaveStyleRule('bottom', `${topRight.arrowBottom}`)
   })
   it('Has provided necessary props', () => {
-    const title = 'Title'
-    const variant = 'large'
-    const anchor = 'Anchor'
+    const placement = "topRight"
     const { queryByText } = render(
-      <Popover variant={variant} title={title}>
-        {anchor}
-      </Popover>,
+      <SimplePopover open placement={placement}/>,
     )
-    expect(queryByText(title)).toBeDefined()
-    expect(queryByText(variant)).toBeDefined()
-    expect(queryByText(anchor)).toBeDefined()
+    expect(queryByText(placement)).toBeDefined()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledPopover>Anchor</StyledPopover>)
+    const { container } = render(
+    <StyledPopover open placement="topRight">
+      <PopoverAnchor>
+        <Button onClick={(e) => e.stopPropagation()}>
+          On Click
+        </Button>
+      </PopoverAnchor>
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverContent>
+        <Typography>Content</Typography>
+      </PopoverContent>
+    </StyledPopover>)
     const popover = container.firstChild
-    expect(popover).toHaveStyleRule('position', 'relative')
-    expect(popover).toHaveStyleRule('height', '100px')
+    expect(popover).toHaveStyleRule('position', 'absolute')
+    // expect(popover).toHaveStyleRule('height', '100px')
     expect(popover).toHaveStyleRule('width', '100px')
   })
 })

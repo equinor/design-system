@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Icon, Card, Button } from '@equinor/eds-core-react'
+import { Icon, Card, Button } from '..'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 
 import { popover as tokens } from './Popover.tokens'

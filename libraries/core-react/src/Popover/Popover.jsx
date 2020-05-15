@@ -11,7 +11,7 @@ const Container = styled.div`
 `
 
 const Anchor = styled.div`
-  :focus: {
+  &:focus {
     outline: none;
   }
 `
@@ -54,19 +54,17 @@ export const Popover = forwardRef(function Popover(
     anchorElement = children
   }
 
-  console.log(anchorElement)
-
   if (open && anchorRef.current) {
-    console.log('focus!', anchorRef.current)
     anchorRef.current.focus()
   }
 
   return (
     <Container {...props}>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex*/}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
       <Anchor tabIndex={0} open={open} aria-haspopup="true" ref={anchorRef}>
         {anchorElement}
       </Anchor>
+
       {open && (
         <PopoverItem {...props} anchorRef={anchorRef}>
           {childArray}

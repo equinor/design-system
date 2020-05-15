@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Divider } from '@equinor/eds-core-react'
+import { Divider } from '..'
 import { typographyTemplate } from '../_common/templates'
 
 import { popover as tokens } from './Popover.tokens'
