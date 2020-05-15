@@ -26,6 +26,10 @@ const StyledSwitch = styled.button.attrs(({ type = 'button' }) => ({
   &:focus {
     outline: none;
   }
+  &[data-focus-visible-added]:focus {
+    outline: ${enabled.outline};
+    outline-offset: ${enabled.outlineOffset};
+  }
 `
 
 const Track = styled.span`

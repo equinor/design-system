@@ -12,13 +12,15 @@ import { checkbox } from '@equinor/eds-icons'
 import { useForm } from 'react-hook-form'
 Icon.add({ checkbox })
 const Wrapper = styled.div`
-  /* height: calc(100vh - 64px); */
-  /* background: #ebebeb; */
   display: grid;
   grid-template-rows: min-width;
-  padding: 0 32px;
-  grid-gap: 3rem;
+  padding: 32px;
+  padding-bottom: 8rem;
+  grid-gap: 1rem;
   position: relative;
+  background-color: ${({ darkMode }) => (darkMode ? '#0A0310' : 'white')};
+  color: ${({ darkMode }) => (darkMode ? 'white' : 'black')};
+  transition: all 0.36s;
 `
 
 const BlockRadio = styled(Radio)`
@@ -26,6 +28,15 @@ const BlockRadio = styled(Radio)`
 `
 const BlockCheckbox = styled(Checkbox)`
   display: flex;
+`
+
+const DarkModeTypography = styled(Typography)`
+  margin: '1rem 0';
+  ${({ darkMode }) =>
+    darkMode && {
+      color: 'white',
+    }};
+  transition: all 0.36s;
 `
 
 export default {
@@ -243,13 +254,16 @@ export const CheckboxControl = () => {
   )
 }
 export const SwitchControl = () => {
+  const [darkMode, setDarkMode] = useState(false)
   return (
-    <Wrapper>
-      <Typography variant="h1" style={{ margin: '1rem 0' }}>
+    <Wrapper darkMode={darkMode}>
+      <DarkModeTypography variant="h1" darkMode={darkMode}>
         Switch
-      </Typography>
+      </DarkModeTypography>
       <div>
-        <div>Standard</div>
+        <DarkModeTypography variant="h2" darkMode={darkMode}>
+          Basic variants
+        </DarkModeTypography>
         <ul>
           <li>
             <span id="label-off">I'm default off</span>
@@ -259,11 +273,29 @@ export const SwitchControl = () => {
             <span id="label-on">I'm default on</span>
             <Switch ariaLabelledby="label-on" checked />
           </li>
-        </ul>
 
-        <div>Disabled</div>
-        <Switch disabled />
-        <Switch disabled checked />
+          <li>
+            <span id="label-disabled-on">You can't turn me on!</span>
+            <Switch disabled ariaLabelledby="label-disabled-on" />
+          </li>
+          <li>
+            <span id="label-disabled-off">You can't turn me off!</span>
+            <Switch disabled checked ariaLabelledby="label-disabled-off" />
+          </li>
+        </ul>
+      </div>
+      <DarkModeTypography variant="h2" darkMode={darkMode}>
+        Use case with onChange
+      </DarkModeTypography>
+      <div>
+        <Switch
+          checked={darkMode}
+          ariaLabelledby="label-darkMode"
+          onChange={() => setDarkMode(!darkMode)}
+        />
+        <span id="label-darkMode" style={{ marginLeft: '10px' }}>
+          Dark mode
+        </span>
       </div>
     </Wrapper>
   )

@@ -10,6 +10,7 @@ const {
       primary__selected_highlight: { rgba: activeColor },
       primary__resting: { rgba: activeHandleColor },
       disabled__fill: { rgba: backgroundColorDisabled },
+      focus: { rgba: focusOutlineColor },
     },
     text: {
       static_icons__tertiary: { rgba: handleColor },
@@ -37,6 +38,8 @@ export const switchControl = {
     hover: {
       background: primaryHover,
     },
+    outline: `1px dashed ${focusOutlineColor}`,
+    outlineOffset: '4px',
   },
   disabled: {
     background: backgroundColorDisabled,
