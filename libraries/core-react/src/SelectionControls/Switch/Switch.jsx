@@ -5,7 +5,6 @@ import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 
 const StyledSwitch = styled.label`
-  padding: 16px 0;
   cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};
   border: none;
   background-color: transparent;

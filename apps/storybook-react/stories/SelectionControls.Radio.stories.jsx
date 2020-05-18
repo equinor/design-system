@@ -42,16 +42,10 @@ export const RadioControl = () => {
         Single radiobox examples
       </Typography>
       <div>
-        <Radio label="Check me" name="first" />
-      </div>
-      <div>
-        <Radio label="You can't check me!" disabled name="second" />
-      </div>
-      <div>
-        <Radio label="I'm preselected" defaultChecked name="third" />
-      </div>
-      <div>
-        <Radio
+        <BlockRadio label="Check me" name="first" />
+        <BlockRadio label="You can't check me!" disabled name="second" />
+        <BlockRadio label="I'm preselected" defaultChecked name="third" />
+        <BlockRadio
           label="You can't uncheck me!"
           disabled
           defaultChecked
@@ -73,28 +67,35 @@ export const RadioGroupControl = () => {
       </Typography>
       <fieldset>
         <legend>We are in this together! 🙌</legend>
-        <BlockRadio
-          label="I'm number one and preselected"
-          name="group"
-          value="one"
-          checked={checked === 'one'}
-          onChange={onChange}
-        />
-
-        <BlockRadio
-          label="I'm number two"
-          name="group"
-          value="two"
-          checked={checked === 'two'}
-          onChange={onChange}
-        />
-        <BlockRadio
-          label="I'm number three"
-          name="group"
-          value="three"
-          checked={checked === 'three'}
-          onChange={onChange}
-        />
+        <UnstyledList>
+          <li>
+            <Radio
+              label="I'm number one and preselected"
+              name="group"
+              value="one"
+              checked={checked === 'one'}
+              onChange={onChange}
+            />
+          </li>
+          <li>
+            <Radio
+              label="I'm number two"
+              name="group"
+              value="two"
+              checked={checked === 'two'}
+              onChange={onChange}
+            />
+          </li>
+          <li>
+            <Radio
+              label="I'm number three"
+              name="group"
+              value="three"
+              checked={checked === 'three'}
+              onChange={onChange}
+            />
+          </li>
+        </UnstyledList>
       </fieldset>
     </Wrapper>
   )

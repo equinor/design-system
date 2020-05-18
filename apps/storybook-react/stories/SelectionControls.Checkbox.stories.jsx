@@ -42,34 +42,36 @@ export const CheckboxControl = () => {
         <Typography variant="h2" style={{ margin: '1rem 0' }}>
           Single checkbox examples
         </Typography>
-        <div>
-          <Checkbox label="Check me" />
-        </div>
-        <div>
-          <Checkbox label="You can't check me!" disabled />
-        </div>
-        <div>
-          <Checkbox label="I'm preselected" defaultChecked />
-        </div>
-        <div>
-          <Checkbox label="You can't uncheck me!" disabled defaultChecked />
-        </div>
-        <div>
-          <Checkbox
-            label="I'm in indeterminate state"
-            indeterminate
-            ref={indeterminateRef}
-          />
-        </div>
-        <div>
-          <Checkbox
-            label="I'm a controlled component"
-            onChange={(e) => {
-              updateChecked(e.target.checked)
-            }}
-            checked={checked}
-          />
-        </div>
+        <UnstyledList>
+          <li>
+            <Checkbox label="Check me" />
+          </li>
+          <li>
+            <Checkbox label="You can't check me!" disabled />
+          </li>
+          <li>
+            <Checkbox label="I'm preselected" defaultChecked />
+          </li>
+          <li>
+            <Checkbox label="You can't uncheck me!" disabled defaultChecked />
+          </li>
+          <li>
+            <Checkbox
+              label="I'm in indeterminate state"
+              indeterminate
+              ref={indeterminateRef}
+            />
+          </li>
+          <li>
+            <Checkbox
+              label="I'm a controlled component"
+              onChange={(e) => {
+                updateChecked(e.target.checked)
+              }}
+              checked={checked}
+            />
+          </li>
+        </UnstyledList>
       </div>
     </Wrapper>
   )
@@ -83,9 +85,17 @@ export const CheckboxGroupControl = () => {
       </Typography>
       <fieldset>
         <legend>We are in this together! 🙌</legend>
-        <Checkbox label="Check me first" name="multiple" value="first" />
-        <Checkbox label="Check me second" name="multiple" value="second" />
-        <Checkbox label="Check me third" name="multiple" value="third" />
+        <UnstyledList>
+          <li>
+            <Checkbox label="Check me first" name="multiple" value="first" />
+          </li>
+          <li>
+            <Checkbox label="Check me second" name="multiple" value="second" />
+          </li>
+          <li>
+            <Checkbox label="Check me third" name="multiple" value="third" />
+          </li>
+        </UnstyledList>
       </fieldset>
     </Wrapper>
   )
@@ -127,6 +137,7 @@ export const WithFormsControl = () => {
             <div>
               <fieldset>
                 <legend>What's your favourites?</legend>
+                {/* Just to demonstrate style addons, a list would have been better for semantic */}
                 <BlockCheckbox
                   name="favourites"
                   value="pineapple"
