@@ -3,33 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
+import { Input } from './Input'
 
 const { enabled, disabled: _disabled } = tokens
-
-const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
-  type,
-  role: 'switch',
-}))`
-  /* Visually hide the original checkbox*/
-  position: absolute;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap; /* added line */
-
-  &:focus {
-    outline: none;
-  }
-  &[data-focus-visible-added]:focus + span {
-    outline: ${enabled.outline};
-    outline-offset: ${enabled.outlineOffset};
-  }
-  /* Move the handle to right position when the switch is 'on' */
-  &:checked + span > span:last-child {
-    transform: translate(180%, -50%);
-  }
-`
 
 const Track = styled.span`
   width: ${enabled.track.small.width};
@@ -60,7 +36,7 @@ const Handle = styled.span`
 export const SwitchSmall = ({ disabled, ...rest }) => {
   return (
     <>
-      <Input {...rest} disabled={disabled} />
+      <Input {...rest} disabled={disabled} size="small" />
       <InputWrapper disabled={disabled} size="small">
         <Track disabled={disabled} />
         <Handle disabled={disabled} />

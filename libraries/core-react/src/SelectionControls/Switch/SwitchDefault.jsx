@@ -3,39 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
+import { Input } from './Input'
 
 const { enabled, disabled: _disabled } = tokens
-
-const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
-  type,
-  role: 'switch',
-}))`
-  /* Visually hide the original checkbox*/
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  &:focus {
-    outline: none;
-  }
-  &[data-focus-visible-added]:focus + span {
-    outline: ${enabled.outline};
-    outline-offset: ${enabled.outlineOffset};
-  }
-  &:checked + span > span {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.track.activeBackground};
-  }
-  &:checked + span > span:last-child {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.handle.activeBackground};
-    transform: translate(135%, -50%);
-  }
-`
 
 const Track = styled.span`
   width: ${enabled.track.width};
