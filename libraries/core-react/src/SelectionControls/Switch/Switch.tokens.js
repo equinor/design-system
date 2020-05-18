@@ -11,6 +11,7 @@ const {
       primary__resting: { rgba: activeHandleColor },
       disabled__fill: { rgba: backgroundColorDisabled },
       focus: { rgba: focusOutlineColor },
+      icon_on_interactive_colors: { rgba: handleColorSmall },
     },
     text: {
       static_icons__tertiary: { rgba: handleColor },
@@ -33,7 +34,7 @@ export const switchControl = {
       small: {
         width: '20px',
         height: '10px',
-        background: smallBackground,
+        background: activeHandleColor,
       },
     },
     handle: {
@@ -43,6 +44,7 @@ export const switchControl = {
       size: '16px',
       small: {
         size: '6px',
+        background: handleColorSmall,
       },
     },
     hover: {

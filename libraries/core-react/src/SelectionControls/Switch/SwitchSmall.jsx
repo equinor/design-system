@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
+import { SwitchInputWrapper } from './SwitchInputWrapper'
 
 const { enabled, disabled: _disabled } = tokens
 
@@ -24,13 +25,8 @@ const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
     outline: ${enabled.outline};
     outline-offset: ${enabled.outlineOffset};
   }
-  &:checked + span {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.track.activeBackground};
-  }
-  &:checked ~ span:last-child {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.handle.activeBackground};
+  /* Move the handle to right position when the switch is 'on' */
+  &:checked + span > span:last-child {
     transform: translate(180%, -50%);
   }
 `
@@ -40,24 +36,16 @@ const Track = styled.span`
   height: ${enabled.track.small.height};
   border-radius: 10px;
   border: none;
-  background-color: ${enabled.track.small.background};
+  background-color: ${({ disabled }) =>
+    disabled ? _disabled.background : enabled.track.small.background};
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: all 0.36s;
-  ${({ disabled }) =>
-    disabled && {
-      backgroundColor: _disabled.background,
-    }}
 `
 
 const Handle = styled.span`
-  background-color: white;
-  ${({ disabled }) =>
-    disabled && {
-      backgroundColor: _disabled.background,
-    }}
+  background-color: ${enabled.handle.small.background};
   width: ${enabled.handle.small.size};
   height: ${enabled.handle.small.size};
   border-radius: 50%;
@@ -66,15 +54,17 @@ const Handle = styled.span`
   top: 50%;
   transform: translate(0, -50%);
   left: 15px;
-  transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
 export const SwitchSmall = ({ disabled, ...rest }) => {
   return (
     <>
       <Input {...rest} disabled={disabled} />
-      <Track disabled={disabled} />
-      <Handle disabled={disabled} />
+      <SwitchInputWrapper disabled={disabled}>
+        <Track disabled={disabled} />
+        <Handle disabled={disabled} />
+      </SwitchInputWrapper>
     </>
   )
 }

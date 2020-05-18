@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
+import { SwitchInputWrapper } from './SwitchInputWrapper'
 
 const { enabled, disabled: _disabled } = tokens
 
@@ -25,11 +26,11 @@ const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
     outline: ${enabled.outline};
     outline-offset: ${enabled.outlineOffset};
   }
-  &:checked + span {
+  &:checked + span > span {
     background-color: ${({ disabled }) =>
       disabled ? _disabled.background : enabled.track.activeBackground};
   }
-  &:checked ~ span:last-child {
+  &:checked + span > span:last-child {
     background-color: ${({ disabled }) =>
       disabled ? _disabled.background : enabled.handle.activeBackground};
     transform: translate(135%, -50%);
@@ -46,7 +47,7 @@ const Track = styled.span`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: all 0.36s;
+  transition: background 0.36s;
   ${({ disabled }) =>
     disabled && {
       backgroundColor: _disabled.background,
@@ -67,15 +68,17 @@ const Handle = styled.span`
   top: 50%;
   transform: translate(0, -50%);
   left: 6px;
-  transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
 export const SwitchDefault = ({ disabled, ...rest }) => {
   return (
     <>
       <Input {...rest} disabled={disabled} />
-      <Track disabled={disabled} />
-      <Handle disabled={disabled} />
+      <SwitchInputWrapper disabled={disabled}>
+        <Track disabled={disabled} />
+        <Handle disabled={disabled} />
+      </SwitchInputWrapper>
     </>
   )
 }
