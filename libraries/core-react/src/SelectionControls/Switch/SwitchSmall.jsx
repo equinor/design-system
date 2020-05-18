@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
-import { SwitchInputWrapper } from './SwitchInputWrapper'
+import { InputWrapper } from './InputWrapper'
 
 const { enabled, disabled: _disabled } = tokens
 
@@ -61,10 +61,10 @@ export const SwitchSmall = ({ disabled, ...rest }) => {
   return (
     <>
       <Input {...rest} disabled={disabled} />
-      <SwitchInputWrapper disabled={disabled}>
+      <InputWrapper disabled={disabled} size="small">
         <Track disabled={disabled} />
         <Handle disabled={disabled} />
-      </SwitchInputWrapper>
+      </InputWrapper>
     </>
   )
 }

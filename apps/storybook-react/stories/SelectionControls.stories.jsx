@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   grid-template-rows: min-width;
   padding: 32px;
   padding-bottom: 8rem;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
   position: relative;
   background-color: ${({ darkMode }) => (darkMode ? '#0A0310' : 'white')};
   color: ${({ darkMode }) => (darkMode ? 'white' : 'black')};
@@ -43,6 +43,13 @@ const DarkModeTypography = styled(Typography)`
       color: 'white',
     }};
   transition: all 0.36s;
+`
+
+const Examples = styled.div`
+  display: grid;
+  grid-gap: 3rem;
+  align-items: top;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 `
 
 export default {
@@ -259,6 +266,7 @@ export const CheckboxControl = () => {
     </Wrapper>
   )
 }
+
 export const SwitchControl = () => {
   const [darkMode, setDarkMode] = useState(false)
   return (
@@ -266,48 +274,62 @@ export const SwitchControl = () => {
       <DarkModeTypography variant="h1" darkMode={darkMode}>
         Switch
       </DarkModeTypography>
+
       <div>
         <DarkModeTypography variant="h2" darkMode={darkMode}>
           Basic variants
         </DarkModeTypography>
-        <UnstyledList>
-          <li>
-            <Switch label="I'm default off" />
-          </li>
-          <li>
-            <Switch label="I'm default on" defaultChecked />
-          </li>
-          <li>
-            <Switch disabled label="You can't turn me on!" />
-          </li>
-          <li>
-            <Switch disabled defaultChecked label="You can't turn me off!" />
-          </li>
-        </UnstyledList>
-        <UnstyledList>
-          <li>
-            <Switch label="I'm default off" size="small" />
-          </li>
-          <li>
-            <Switch label="I'm default on" defaultChecked size="small" />
-          </li>
-          <li>
-            <Switch disabled label="You can't turn me on!" size="small" />
-          </li>
-          <li>
-            <Switch
-              disabled
-              defaultChecked
-              label="You can't turn me off!"
-              size="small"
-            />
-          </li>
-        </UnstyledList>
+        <Examples>
+          <div>
+            <span>Default</span>
+            <UnstyledList>
+              <li>
+                <Switch label="I'm default off" />
+              </li>
+              <li>
+                <Switch label="I'm default on" defaultChecked />
+              </li>
+              <li>
+                <Switch disabled label="You can't turn me on!" />
+              </li>
+              <li>
+                <Switch
+                  disabled
+                  defaultChecked
+                  label="You can't turn me off!"
+                />
+              </li>
+            </UnstyledList>
+          </div>
+          <div>
+            <span>Small</span>
+            <UnstyledList>
+              <li>
+                <Switch label="I'm default off" size="small" />
+              </li>
+              <li>
+                <Switch label="I'm default on" defaultChecked size="small" />
+              </li>
+              <li>
+                <Switch disabled label="You can't turn me on!" size="small" />
+              </li>
+              <li>
+                <Switch
+                  disabled
+                  defaultChecked
+                  label="You can't turn me off!"
+                  size="small"
+                />
+              </li>
+            </UnstyledList>
+          </div>
+        </Examples>
       </div>
-      <DarkModeTypography variant="h2" darkMode={darkMode}>
-        Use case with controlled component
-      </DarkModeTypography>
+
       <div>
+        <DarkModeTypography variant="h2" darkMode={darkMode}>
+          Use case with controlled component
+        </DarkModeTypography>
         <Switch
           checked={darkMode}
           ariaLabelledby="label-darkMode"

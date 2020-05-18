@@ -6,9 +6,10 @@ const {
       background__medium: { rgba: backgroundColorMedium },
     },
     interactive: {
-      primary__hover_alt: { rgba: primaryHover },
+      primary__hover_alt: { rgba: primaryHoverAlt },
+      primary__hover: { rgba: primaryHover },
       primary__selected_highlight: { rgba: activeColor },
-      primary__resting: { rgba: activeHandleColor },
+      primary__resting: { rgba: primaryResting },
       disabled__fill: { rgba: backgroundColorDisabled },
       focus: { rgba: focusOutlineColor },
       icon_on_interactive_colors: { rgba: handleColorSmall },
@@ -34,13 +35,13 @@ export const switchControl = {
       small: {
         width: '20px',
         height: '10px',
-        background: activeHandleColor,
+        background: primaryResting,
       },
     },
     handle: {
       boxShadow,
       background: handleColor,
-      activeBackground: activeHandleColor,
+      activeBackground: primaryResting,
       size: '16px',
       small: {
         size: '6px',
@@ -48,7 +49,18 @@ export const switchControl = {
       },
     },
     hover: {
-      background: primaryHover,
+      background: primaryHoverAlt,
+      handle: {
+        background: primaryHover,
+        small: {
+          background: primaryHoverAlt,
+        },
+      },
+      track: {
+        small: {
+          background: primaryHover,
+        },
+      },
     },
     outline: `1px dashed ${focusOutlineColor}`,
     outlineOffset: '4px',
