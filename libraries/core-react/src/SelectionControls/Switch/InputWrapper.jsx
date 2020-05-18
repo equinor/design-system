@@ -14,41 +14,43 @@ const BaseInputWrapper = styled.span`
 
 const InputWrapperDefault = styled(BaseInputWrapper)`
   &:hover {
-    background-color: ${({ disabled }) =>
-      disabled ? 'transparent' : enabled.hover.background};
+    background-color: ${({ isDisabled }) =>
+      isDisabled ? 'transparent' : enabled.hover.background};
   }
   /* Handle */
   &:hover > span:last-child {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.hover.handle.background};
+    background-color: ${({ isDisabled }) =>
+      isDisabled ? _disabled.background : enabled.hover.handle.background};
   }
 `
 const InputWrapperSmall = styled(BaseInputWrapper)`
   &:hover {
-    background-color: ${({ disabled }) =>
-      disabled ? 'transparent' : enabled.hover.background};
+    background-color: ${({ isDisabled }) =>
+      isDisabled ? 'transparent' : enabled.hover.background};
   }
   /* Track */
   &:hover > :first-child {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.hover.track.small.background};
+    background-color: ${({ isDisabled }) =>
+      isDisabled ? _disabled.background : enabled.hover.track.small.background};
   }
   /* Handle */
   &:hover > span:last-child {
-    background-color: ${({ disabled }) =>
-      disabled
+    background-color: ${({ isDisabled }) =>
+      isDisabled
         ? enabled.handle.small.background
         : enabled.hover.handle.small.background};
   }
 `
 
-export const InputWrapper = ({ children, disabled, size }) => {
+export const InputWrapper = ({ children, isDisabled, size }) => {
   return (
     <>
       {size === 'small' ? (
-        <InputWrapperSmall disabled={disabled}>{children}</InputWrapperSmall>
+        <InputWrapperSmall isDisabled={isDisabled}>
+          {children}
+        </InputWrapperSmall>
       ) : (
-        <InputWrapperDefault disabled={disabled}>
+        <InputWrapperDefault isDisabled={isDisabled}>
           {children}
         </InputWrapperDefault>
       )}
@@ -58,11 +60,11 @@ export const InputWrapper = ({ children, disabled, size }) => {
 
 InputWrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  disabled: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   size: PropTypes.oneOf(['default', 'small']),
 }
 
 InputWrapper.defaultProps = {
-  disabled: false,
+  isDisabled: false,
   size: 'default',
 }

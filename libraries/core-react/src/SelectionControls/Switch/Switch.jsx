@@ -6,7 +6,7 @@ import { SwitchDefault } from './SwitchDefault'
 
 const StyledSwitch = styled.label`
   padding: 16px 0;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};
   border: none;
   background-color: transparent;
   vertical-align: middle;
@@ -17,7 +17,7 @@ const StyledSwitch = styled.label`
 
 export const Switch = ({ size, disabled, label, ...rest }) => {
   return (
-    <StyledSwitch disabled={disabled}>
+    <StyledSwitch isDisabled={disabled}>
       {size === 'small' ? (
         <SwitchSmall disabled={disabled} {...rest} />
       ) : (

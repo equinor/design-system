@@ -12,8 +12,8 @@ const Track = styled.span`
   height: ${enabled.track.small.height};
   border-radius: 10px;
   border: none;
-  background-color: ${({ disabled }) =>
-    disabled ? _disabled.background : enabled.track.small.background};
+  background-color: ${({ isDisabled }) =>
+    isDisabled ? _disabled.background : enabled.track.small.background};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -37,9 +37,9 @@ export const SwitchSmall = ({ disabled, ...rest }) => {
   return (
     <>
       <Input {...rest} disabled={disabled} size="small" />
-      <InputWrapper disabled={disabled} size="small">
-        <Track disabled={disabled} />
-        <Handle disabled={disabled} />
+      <InputWrapper isDisabled={disabled} size="small">
+        <Track isDisabled={disabled} />
+        <Handle />
       </InputWrapper>
     </>
   )

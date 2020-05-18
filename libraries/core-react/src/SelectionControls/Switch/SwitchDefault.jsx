@@ -18,15 +18,15 @@ const Track = styled.span`
   top: 50%;
   transform: translate(-50%, -50%);
   transition: background 0.36s;
-  ${({ disabled }) =>
-    disabled && {
+  ${({ isDisabled }) =>
+    isDisabled && {
       backgroundColor: _disabled.background,
     }}
 `
 const Handle = styled.span`
   background-color: ${enabled.handle.background};
-  ${({ disabled }) =>
-    disabled && {
+  ${({ isDisabled }) =>
+    isDisabled && {
       backgroundColor: _disabled.background,
     }}
   box-shadow: ${enabled.handle.boxShadow};
@@ -45,9 +45,9 @@ export const SwitchDefault = ({ disabled, ...rest }) => {
   return (
     <>
       <Input {...rest} disabled={disabled} />
-      <InputWrapper disabled={disabled}>
-        <Track disabled={disabled} />
-        <Handle disabled={disabled} />
+      <InputWrapper isDisabled={disabled}>
+        <Track isDisabled={disabled} />
+        <Handle isDisabled={disabled} />
       </InputWrapper>
     </>
   )
