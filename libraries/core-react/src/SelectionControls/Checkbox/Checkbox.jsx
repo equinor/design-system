@@ -1,3 +1,4 @@
+/* eslint camelcase: "off" */
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -119,14 +120,20 @@ export const Checkbox = forwardRef((props, ref) => {
 Checkbox.displayName = 'eds-Checkbox'
 
 Checkbox.propTypes = {
+  /** Label for the checkbox */
   label: PropTypes.string.isRequired,
-  // If true, the checkbox will be disabled
+  /** If true, the checkbox will be disabled */
   disabled: PropTypes.bool,
+  /** If true, the checkbox appears indeterminate. Important! You'll have to
+   * set the native element to indeterminate yourself.
+   */
   indeterminate: PropTypes.bool,
+  /** Additional class names */
   className: PropTypes.string,
 }
 
 Checkbox.defaultProps = {
   disabled: false,
   indeterminate: false,
+  className: undefined,
 }

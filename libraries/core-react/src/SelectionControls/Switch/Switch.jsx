@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import PropTypes, { bool } from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
@@ -30,13 +30,15 @@ export const Switch = ({ size, disabled, label, ...rest }) => {
 }
 
 Switch.propTypes = {
+  /** Switch size, use the small version with caution */
   size: PropTypes.oneOf(['default', 'small']),
+  /** If true, the switch will be disabled */
   disabled: PropTypes.bool,
+  /** Label for the switch. Required to make it a11y compliant */
   label: PropTypes.string.isRequired,
 }
 
 Switch.defaultProps = {
   size: 'default',
-
   disabled: false,
 }

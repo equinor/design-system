@@ -54,6 +54,7 @@ export const SwitchDefault = ({ disabled, ...rest }) => {
 }
 
 SwitchDefault.propTypes = {
+  // If true, the styles will be reflecting disabled
   disabled: PropTypes.bool,
 }
 

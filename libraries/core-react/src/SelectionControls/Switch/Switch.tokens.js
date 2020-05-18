@@ -16,7 +16,6 @@ const {
     },
     text: {
       static_icons__tertiary: { rgba: handleColor },
-      static_icons__default: { rgba: smallBackground },
     },
   },
   elevation: { raised: boxShadow },

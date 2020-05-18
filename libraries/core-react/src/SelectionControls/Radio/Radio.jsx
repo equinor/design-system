@@ -1,3 +1,4 @@
+/* eslint camelcase: "off" */
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -101,23 +102,12 @@ const InputWrapper = styled.span`
   }
 `
 
-export const Radio = ({
-  label,
-  disabled = false,
-  onChange,
-  className,
-  ...rest
-}) => {
-  const handleChange = (event) => {
-    if (onChange) {
-      onChange(event, event.target.value)
-    }
-  }
+export const Radio = ({ label, disabled = false, className, ...rest }) => {
   const iconSize = 24
   return (
     <StyledRadio disabled={disabled} className={className}>
       <InputWrapper disabled={disabled}>
-        <Input {...rest} disabled={disabled} onChange={handleChange} />
+        <Input {...rest} disabled={disabled} />
         <Svg
           width={iconSize}
           height={iconSize}
@@ -136,13 +126,15 @@ export const Radio = ({
 Radio.displayName = 'eds-Radio'
 
 Radio.propTypes = {
+  /** Label for the radio */
   label: PropTypes.string.isRequired,
+  /** If true, the radio button will be disabled */
   disabled: PropTypes.bool,
-  onChange: PropTypes.func,
+  /** Additional class names */
   className: PropTypes.string,
 }
 
 Radio.defaultProps = {
   disabled: false,
-  onChange: undefined,
+  className: undefined,
 }

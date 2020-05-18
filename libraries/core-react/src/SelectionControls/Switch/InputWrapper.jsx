@@ -29,7 +29,7 @@ const InputWrapperSmall = styled(BaseInputWrapper)`
       isDisabled ? 'transparent' : enabled.hover.background};
   }
   /* Track */
-  &:hover > :first-child {
+  &:hover > :first-of-type {
     background-color: ${({ isDisabled }) =>
       isDisabled ? _disabled.background : enabled.hover.track.small.background};
   }
@@ -59,8 +59,11 @@ export const InputWrapper = ({ children, isDisabled, size }) => {
 }
 
 InputWrapper.propTypes = {
+  // Track and handle
   children: PropTypes.node.isRequired,
+  // Whether styles should be reflecting disabled state or not
   isDisabled: PropTypes.bool,
+  // Default or small version
   size: PropTypes.oneOf(['default', 'small']),
 }
 

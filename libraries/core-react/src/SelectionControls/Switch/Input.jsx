@@ -33,10 +33,12 @@ const SmallInput = styled(BaseInput)`
   }
 `
 const DefaultInput = styled(BaseInput)`
+  /*  Track */
   &:checked + span > span {
     background-color: ${({ disabled }) =>
       disabled ? _disabled.background : enabled.track.activeBackground};
   }
+  /* Handle */
   &:checked + span > span:last-child {
     background-color: ${({ disabled }) =>
       disabled ? _disabled.background : enabled.handle.activeBackground};
@@ -57,7 +59,9 @@ export const Input = ({ disabled, size, ...rest }) => {
 }
 
 Input.propTypes = {
+  // If true, the component will be disabled
   disabled: PropTypes.bool,
+  // Switch size, use the small version with caution
   size: PropTypes.oneOf(['default', 'small']),
 }
 
