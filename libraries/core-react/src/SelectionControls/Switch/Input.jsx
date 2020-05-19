@@ -7,7 +7,8 @@ const { enabled, disabled: _disabled } = tokens
 
 const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
-  role: 'switch',
+  /* This role need aria-checked as well, so that means stateful component */
+  /* role: 'switch', */
 }))`
   /* Visually hide the original checkbox*/
   border: 0;
