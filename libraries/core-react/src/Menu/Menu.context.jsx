@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 const initalState = {
   focusedIndex: -1,
+  subMenu: undefined,
 }
 
 const MenuContext = React.createContext(initalState)
@@ -28,14 +29,20 @@ MenuProvider.defaultProps = {}
 
 export const useMenu = () => {
   const [state, setState] = useContext(MenuContext)
-  const { focusedIndex } = state
+  const { focusedIndex, subMenu } = state
 
   const setFocusedIndex = (i) => {
     setState({ ...state, focusedIndex: i })
   }
 
+  const setSubMenu = (e = { target: null }) => {
+    setState({ ...state, subMenu: e.target })
+  }
+
   return {
     setFocusedIndex,
     focusedIndex,
+    setSubMenu,
+    subMenu,
   }
 }

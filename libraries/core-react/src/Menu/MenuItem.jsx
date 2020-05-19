@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
@@ -70,7 +70,7 @@ const ListItem = styled.li.attrs(({ disabled }) => ({
         `}
 `
 
-const Anchor = styled.a.attrs({ role: 'menuitem' })`
+const Anchor = styled.span.attrs({ role: 'menuitem' })`
   position: relative;
   width: auto;
   display: grid;
@@ -78,49 +78,101 @@ const Anchor = styled.a.attrs({ role: 'menuitem' })`
   grid-auto-flow: column;
   grid-auto-columns: min-content auto min-content;
   align-items: center;
-  ${spacingsTemplate(spacings)}
+  ${spacingsTemplate(spacings)};
 `
 
-export const MenuItem = React.forwardRef(function EdsMenuItem(
-  { children, disabled, index, ...rest },
-  ref,
-) {
-  const { focusedIndex, setFocusedIndex } = useMenu()
-  const isFocused = index === focusedIndex
+const defaultState = {
+  isOpenSubmenu: false,
+  rect: undefined,
+}
 
-  const updatedChildren = React.Children.map(children, (child) => {
-    // We force size on Icon & Avatar component
-    if (child.props) {
-      return React.cloneElement(child, {
-        disabled,
+export const MenuItem = React.memo(
+  React.forwardRef(function EdsMenuItem(
+    { children, disabled, index, ...rest },
+    ref,
+  ) {
+    const { focusedIndex, setFocusedIndex } = useMenu()
+    const [state, setState] = useState(defaultState)
+    const { isOpenSubmenu, left, top } = state
+
+    const toggleFocus = (index_) => {
+      if (focusedIndex !== index_) {
+        setFocusedIndex(index_)
+      }
+    }
+
+    const toggleSubmenu = (e, hasSubMenu) => {
+      const rect = e.currentTarget.getBoundingClientRect()
+
+      const offsett = rect ? rect.width + 8 : 0
+      const updatedIsOpenSubmenu = hasSubMenu
+        ? !state.isOpenSubmenu
+        : state.isOpenSubmenu
+
+      setState({
+        ...state,
+        isOpenSubmenu: updatedIsOpenSubmenu,
+        left: updatedIsOpenSubmenu ? offsett : undefined,
+        top: 0,
       })
     }
-    return child
-  })
 
-  const props = {
-    ...rest,
-    disabled,
-  }
+    const setSubMenu = (isOpenSubmenu) => setState({ ...state, isOpenSubmenu })
 
-  return (
-    <ListItem
-      {...props}
-      ref={useCombinedRefs(ref, (node) => isFocused && node.focus())}
-      onFocus={() => setFocusedIndex(index)}
-    >
-      <Anchor>{updatedChildren}</Anchor>
-    </ListItem>
-  )
-})
+    const isFocused = index === focusedIndex
+
+    const updatedChildren = React.Children.map(children, (child) => {
+      // We force size on Icon & Avatar component
+
+      if (child.props) {
+        return React.cloneElement(child, {
+          disabled,
+          isopen: isOpenSubmenu,
+          left,
+          top,
+        })
+      }
+      return child
+    })
+
+    const hasSubMenu =
+      updatedChildren.filter((child) => child.type.displayName === 'eds-menu')
+        .length > 0
+
+    const props = {
+      ...rest,
+      disabled,
+    }
+
+    const openSubMenu = (e) => {
+      e.stopPropagation()
+      if (hasSubMenu) {
+        toggleSubmenu(e, hasSubMenu)
+      }
+    }
+    return (
+      <ListItem
+        {...props}
+        ref={useCombinedRefs(ref, (el) => isFocused && el.focus())}
+        onFocus={() => toggleFocus(index)}
+        onClick={hasSubMenu ? openSubMenu : undefined}
+      >
+        <Anchor>{updatedChildren}</Anchor>
+      </ListItem>
+    )
+  }),
+)
 
 MenuItem.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
-  children: PropTypes.element,
-  /** @ignore */
   index: PropTypes.number,
+  /** @ignore */
+  children: PropTypes.oneOf([
+    PropTypes.element,
+    PropTypes.arrayOf([PropTypes.element]),
+  ]),
   /** Active Menu Item */
   active: PropTypes.bool,
   /** Disabled Menu Item */
@@ -129,10 +181,10 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   className: '',
-  children: undefined,
   active: false,
   disabled: false,
   index: 0,
+  children: undefined,
 }
 
 MenuItem.displayName = 'eds-menu-item'
