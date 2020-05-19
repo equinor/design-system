@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
@@ -102,26 +102,28 @@ const InputWrapper = styled.span`
   }
 `
 
-export const Radio = ({ label, disabled = false, className, ...rest }) => {
-  const iconSize = 24
-  return (
-    <StyledRadio disabled={disabled} className={className}>
-      <InputWrapper disabled={disabled}>
-        <Input {...rest} disabled={disabled} />
-        <Svg
-          width={iconSize}
-          height={iconSize}
-          viewBox={`0 0 ${iconSize} ${iconSize}`}
-          fill={disabled ? color.disabled : color.primary}
-        >
-          <StyledPath icon={radio_button_selected} name="selected" />
-          <StyledPath icon={radio_button_unselected} name="unselected" />
-        </Svg>
-      </InputWrapper>
-      <span>{label}</span>
-    </StyledRadio>
-  )
-}
+export const Radio = forwardRef(
+  ({ label, disabled = false, className, ...rest }, ref) => {
+    const iconSize = 24
+    return (
+      <StyledRadio disabled={disabled} className={className}>
+        <InputWrapper disabled={disabled}>
+          <Input {...rest} ref={ref} disabled={disabled} />
+          <Svg
+            width={iconSize}
+            height={iconSize}
+            viewBox={`0 0 ${iconSize} ${iconSize}`}
+            fill={disabled ? color.disabled : color.primary}
+          >
+            <StyledPath icon={radio_button_selected} name="selected" />
+            <StyledPath icon={radio_button_unselected} name="unselected" />
+          </Svg>
+        </InputWrapper>
+        <span>{label}</span>
+      </StyledRadio>
+    )
+  },
+)
 
 Radio.displayName = 'eds-Radio'
 

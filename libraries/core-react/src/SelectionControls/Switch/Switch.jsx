@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
@@ -14,19 +14,19 @@ const StyledSwitch = styled.label`
   position: relative;
 `
 
-export const Switch = ({ size, disabled, label, ...rest }) => {
+export const Switch = forwardRef(({ size, disabled, label, ...rest }, ref) => {
   return (
     <StyledSwitch isDisabled={disabled}>
       {size === 'small' ? (
-        <SwitchSmall disabled={disabled} {...rest} />
+        <SwitchSmall disabled={disabled} {...rest} ref={ref} />
       ) : (
-        <SwitchDefault disabled={disabled} {...rest} />
+        <SwitchDefault disabled={disabled} {...rest} ref={ref} />
       )}
 
       <span>{label}</span>
     </StyledSwitch>
   )
-}
+})
 
 Switch.propTypes = {
   /** Switch size, use the small version with caution */

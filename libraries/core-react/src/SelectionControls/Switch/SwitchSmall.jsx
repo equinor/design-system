@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
@@ -33,17 +33,17 @@ const Handle = styled.span`
   transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
-export const SwitchSmall = ({ disabled, ...rest }) => {
+export const SwitchSmall = forwardRef(({ disabled, ...rest }, ref) => {
   return (
     <>
-      <Input {...rest} disabled={disabled} size="small" />
+      <Input {...rest} ref={ref} disabled={disabled} size="small" />
       <InputWrapper isDisabled={disabled} size="small">
         <Track isDisabled={disabled} />
         <Handle />
       </InputWrapper>
     </>
   )
-}
+})
 
 SwitchSmall.propTypes = {
   disabled: PropTypes.bool,

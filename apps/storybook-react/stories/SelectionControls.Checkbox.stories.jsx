@@ -1,5 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { Checkbox, Icon, Typography, Button } from '@equinor/eds-core-react'
+import {
+  Checkbox,
+  Icon,
+  Typography,
+  Button,
+  Switch,
+} from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { checkbox } from '@equinor/eds-icons'
 import { useForm } from 'react-hook-form'

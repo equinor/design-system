@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
@@ -46,17 +46,17 @@ const DefaultInput = styled(BaseInput)`
   }
 `
 
-export const Input = ({ disabled, size, ...rest }) => {
+export const Input = forwardRef(({ disabled, size, ...rest }, ref) => {
   return (
     <>
       {size === 'small' ? (
-        <SmallInput {...rest} disabled={disabled} />
+        <SmallInput {...rest} ref={ref} disabled={disabled} />
       ) : (
-        <DefaultInput {...rest} disabled={disabled} />
+        <DefaultInput {...rest} ref={ref} disabled={disabled} />
       )}
     </>
   )
-}
+})
 
 Input.propTypes = {
   // If true, the component will be disabled
