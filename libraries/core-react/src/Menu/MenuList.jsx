@@ -41,7 +41,8 @@ export const MenuList = React.forwardRef(function EdsMenuList(
     if (focus === 'last') {
       setFocusedIndex(lastFocusIndex)
     }
-  }, [focus, setFocusedIndex, lastFocusIndex, firstFocusIndex])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus])
 
   const handleMenuItemChange = (direction, fallbackIndex) => {
     const i = direction === 'down' ? 1 : -1
