@@ -80,17 +80,6 @@ SimplePopover.defaultProps = {
 //configure({adapter: new Adapter()});
  
 describe('Popover', () => {
-  it('Shows PopoverItem on `open`', () => {
-    //const wrapper = mount(<SimplePopover open placement="bottomLeft" />)
-    // const popoverWrapper = container.lastElementChild
-    // const popover = popoverWrapper.lastChild
-    //expect(wrapper.find(PopoverItem)) // 
-    
-    const wrapper = ReactDOM.render(<SimplePopover open placement="bottomLeft" />, document.body)
-    const root = wrapper.find(<PopoverItem/>)
-    expect(root.type()).to.equal(PopoverItem)
-
-  })
   it('Popover has correct placement', () => {
     const { container } = render(<SimplePopover open placement="topRight"/>)
     const popoverWrapper = container.lastElementChild
