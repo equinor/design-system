@@ -1,4 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve'
+import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 import commonjsPkg from './commonjs/package.json'
 
@@ -9,7 +10,15 @@ export default [
     watch: {
       clearScreen: true,
     },
-    plugins: [resolve()],
+    plugins: [
+      resolve(),
+      typescript({
+        tsconfig: 'tsconfig.build.types.json',
+        typescript: require('typescript'),
+        include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
+        exclude: ['node_modules/**'],
+      }),
+    ],
     output: [
       {
         file: pkg.module,

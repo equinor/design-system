@@ -131,76 +131,91 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
 
 `
 
-export const Chip = forwardRef(function EdsChips(
-  { children, onDelete, disabled, onClick, variant, ...rest },
-  ref,
-) {
-  const handleDelete = disabled ? undefined : onDelete
-  const handleClick = disabled ? undefined : onClick
+/**
+ * @typedef Props
+ * @prop {boolean} [disabled] Disabled
+ * @prop {React.MouseEventHandler<HTMLDivElement> | React.KeyboardEventHandler<HTMLDivElement>} [onDelete] Delete callback
+ * @prop {'active' | 'error' | 'default'} [variant] Variant
+ */
 
-  const deletable = handleDelete !== undefined
-  const clickable = handleClick !== undefined
-  const onlyChild = typeof children === 'string'
-
-  const props = {
-    ...rest,
+export const Chip = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
+   */
+  function EdsChips(
+    { children, onDelete, disabled, onClick, variant, ...rest },
     ref,
-    disabled,
-    deletable,
-    clickable,
-    onlyChild,
-    variant,
-  }
+  ) {
+    const handleDelete = disabled ? undefined : onDelete
+    const handleClick = disabled ? undefined : onClick
 
-  const handleKeyPress = (event) => {
-    const { key } = event
-    if (key === 'Enter') {
-      if (deletable) {
-        handleDelete(event)
-      }
-      // Delete takes presidens, else click action is activated
-      if (clickable && !deletable) {
-        handleClick(event)
+    const deletable = handleDelete !== undefined
+    const clickable = handleClick !== undefined
+    const onlyChild = typeof children === 'string'
+
+    const props = {
+      ...rest,
+      ref,
+      disabled,
+      deletable,
+      clickable,
+      onlyChild,
+      variant,
+    }
+
+    const handleKeyPress = (event) => {
+      const { key } = event
+      if (key === 'Enter') {
+        if (deletable) {
+          handleDelete(event)
+        }
+        // Delete takes presidens, else click action is activated
+        if (clickable && !deletable) {
+          handleClick(event)
+        }
       }
     }
-  }
 
-  const resizedChildren = React.Children.map(children, (child) => {
-    // We force size on Icon & Avatar component
-    if (child.props && child.props.size) {
-      return React.cloneElement(child, {
-        size: 16,
-        disabled,
-      })
-    }
-    return child
-  })
+    const resizedChildren = React.Children.map(children, (child) => {
+      // We force size on Icon & Avatar component
+      // @ts-ignore
+      if (child.props && child.props.size) {
+        // @ts-ignore
+        return React.cloneElement(child, {
+          size: 16,
+          disabled,
+        })
+      }
+      return child
+    })
 
-  return (
-    <StyledChips
-      {...props}
-      onClick={(event) => clickable && handleClick(event)}
-      onKeyPress={handleKeyPress}
-    >
-      {resizedChildren}
-      {onDelete && (
-        <Icon
-          name="close"
-          title="close"
-          disabled={disabled}
-          variant={variant}
-          onClick={(event) => {
-            event.stopPropagation()
-            if (deletable) {
-              handleDelete(event)
-            }
-          }}
-          size={16}
-        />
-      )}
-    </StyledChips>
-  )
-})
+    return (
+      <StyledChips
+        {...props}
+        onClick={(event) => clickable && handleClick(event)}
+        onKeyPress={handleKeyPress}
+      >
+        {resizedChildren}
+        {onDelete && (
+          <Icon
+            name="close"
+            title="close"
+            disabled={disabled}
+            variant={variant}
+            onClick={(event) => {
+              event.stopPropagation()
+              if (deletable) {
+                handleDelete(event)
+              }
+            }}
+            size={16}
+          />
+        )}
+      </StyledChips>
+    )
+  },
+)
 
 Chip.displayName = 'eds-chip'
 
@@ -216,6 +231,7 @@ Chip.propTypes = {
   /** Click callback */
   onClick: PropTypes.func,
   /** Variant */
+  // @ts-ignore
   variant: PropTypes.oneOf(['active', 'error', 'default']),
 }
 
@@ -225,5 +241,6 @@ Chip.defaultProps = {
   disabled: false,
   onDelete: undefined,
   onClick: undefined,
+  // @ts-ignore
   variant: 'default',
 }

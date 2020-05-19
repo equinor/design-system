@@ -36,15 +36,13 @@ describe('Tooltip', () => {
   })
   it('Has provided necessary props', () => {
     const title = 'Title'
-    const variant = 'large'
     const anchor = 'Anchor'
     const { queryByText } = render(
-      <Tooltip variant={variant} title={title}>
+      <Tooltip title={title}>
         {anchor}
       </Tooltip>,
     )
     expect(queryByText(title)).toBeDefined()
-    expect(queryByText(variant)).toBeDefined()
     expect(queryByText(anchor)).toBeDefined()
   })
   it('Can extend the css for the component', () => {

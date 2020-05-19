@@ -21,16 +21,30 @@ const Text = styled.p`
   margin: 0;
 `
 
-const Label = React.forwardRef(function TextFieldLabel(props, ref) {
-  const { label, meta, inputId } = props
+/**
+ * @typedef {object} Props
+ * @prop {string} [label] Label text
+ * @prop {string} [meta] Meta text
+ * @prop {string} inputId Id of input for `for`
+ */
 
-  return (
-    <LabelBase ref={ref} htmlFor={inputId}>
-      <Text>{label}</Text>
-      <Text>{meta}</Text>
-    </LabelBase>
-  )
-})
+const Label = React.forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function TextFieldLabel(props, ref) {
+    const { label, meta, inputId } = props
+
+    return (
+      <LabelBase ref={ref} htmlFor={inputId}>
+        <Text>{label}</Text>
+        <Text>{meta}</Text>
+      </LabelBase>
+    )
+  },
+)
 
 Label.propTypes = {
   /** Label text */

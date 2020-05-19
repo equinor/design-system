@@ -26,16 +26,33 @@ const StyledIcon = styled.div`
   ${IconVariation}
 `
 
-const Icon = React.forwardRef(function TextFieldIcon(props, ref) {
-  const { children, ...other } = props
-  const { isFocused } = useTextField()
+/**
+ * @typedef {object} Props
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [className]
+ * @prop {typeof propsFor.variants[number]} [variant]
+ * @prop {string} [disabledColor]
+ * @prop {string} [focusColor]
+ * @prop {string} [color]
+ */
 
-  return (
-    <StyledIcon ref={ref} isFocused={isFocused} {...other}>
-      {children}
-    </StyledIcon>
-  )
-})
+const Icon = React.forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function TextFieldIcon(props, ref) {
+    const { children, ...other } = props
+    const { isFocused } = useTextField()
+
+    return (
+      <StyledIcon ref={ref} isFocused={isFocused} {...other}>
+        {children}
+      </StyledIcon>
+    )
+  },
+)
 
 Icon.propTypes = {
   /** @ignore */

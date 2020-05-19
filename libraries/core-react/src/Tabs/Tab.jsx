@@ -81,9 +81,23 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   }
 `
 
-export const Tab = forwardRef(function Tab(props, ref) {
-  return <StyledTab ref={ref} {...props} />
-})
+/**
+ * @typedef {object} Props
+ * @prop {boolean} [active] If `true`, the tab will be active.
+ * @prop {boolean} [disabled] If `true`, the tab will be disabled.
+ * @prop {string} [className]
+ * @prop {React.ReactNode} children
+ */
+
+export const Tab = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLButtonElement>} props
+   * @param ref
+   */
+  function Tab(props, ref) {
+    return <StyledTab ref={ref} {...props} />
+  },
+)
 
 Tab.propTypes = {
   /** If `true`, the tab will be active. */

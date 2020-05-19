@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect, useCallback, useState } from 'react'
+import React, { forwardRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 
 const { height, width, background } = tokens
@@ -23,47 +23,56 @@ const ScrimContent = styled.div`
   height: auto;
 `
 
-export const Scrim = forwardRef(function EdsScrim(
-  { children, onClose, isDismissable, ...rest },
-  ref,
-) {
-  const handleClose = (event) => {
-    if (event) {
-      if (event.key === 'Escape' && isDismissable) {
-        onClose(event, false)
-      } else if (event.type === 'click' && isDismissable) {
-        onClose(event, false)
+/**
+ * @typedef Props
+ * @prop {(event: React.KeyboardEvent, open: boolean) => void} [onClose] Function to handle closing scrim
+ * @prop {boolean} [isDismissable] Whether scrim can be dismissed with esc key
+ */
+
+export const Scrim = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
+   */
+  function EdsScrim({ children, onClose, isDismissable, ...rest }, ref) {
+    const handleClose = (event) => {
+      if (event) {
+        if (event.key === 'Escape' && isDismissable) {
+          onClose(event, false)
+        } else if (event.type === 'click' && isDismissable) {
+          onClose(event, false)
+        }
       }
     }
-  }
 
-  const handleContentClick = (event) => {
-    // Avoid event bubbling inside dialog/content inside scrim
-    event.stopPropagation()
-  }
-
-  useEffect(() => {
-    if (isDismissable) {
-      document.addEventListener('keydown', handleClose, false)
+    const handleContentClick = (event) => {
+      // Avoid event bubbling inside dialog/content inside scrim
+      event.stopPropagation()
     }
 
-    return () => {
-      document.removeEventListener('keydown', handleClose, false)
-    }
-  }, [])
+    useEffect(() => {
+      if (isDismissable) {
+        document.addEventListener('keydown', handleClose, false)
+      }
 
-  return (
-    <StyledScrim
-      onClose={handleClose}
-      onClick={handleClose}
-      isDismissable={isDismissable}
-      {...rest}
-      ref={ref}
-    >
-      <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
-    </StyledScrim>
-  )
-})
+      return () => {
+        document.removeEventListener('keydown', handleClose, false)
+      }
+    }, [])
+
+    return (
+      <StyledScrim
+        onClose={handleClose}
+        onClick={handleClose}
+        isDismissable={isDismissable}
+        {...rest}
+        ref={ref}
+      >
+        <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
+      </StyledScrim>
+    )
+  },
+)
 
 Scrim.displayName = 'eds-scrim'
 

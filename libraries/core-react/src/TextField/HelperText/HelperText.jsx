@@ -41,34 +41,50 @@ const StyledIcon = styled(Icon)`
   margin-right: ${({ spacings }) => spacings.left};
 `
 
-const HelperText = React.forwardRef(function TextFieldHelperText(props, ref) {
-  const { helperText, icon, variant, disabled: isDisabled } = props
-  const helperVariant = tokens[variant]
-  const spacings = tokens.spacings.comfortable
+/**
+ * @typedef {object} Props
+ * @prop {string} [className]
+ * @prop {string} [helperText] Helper text
+ * @prop {React.ReactNode} [icon] Icon
+ * @prop {boolean} [disabled] Disabled
+ * @prop {typeof propsFor.variants[number]} [variant] Variant
+ */
 
-  const { isFocused } = useTextField()
+const HelperText = React.forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function TextFieldHelperText(props, ref) {
+    const { helperText, icon, variant, disabled: isDisabled } = props
+    const helperVariant = tokens[variant]
+    const spacings = tokens.spacings.comfortable
 
-  const iconProps = {
-    spacings,
-    isDisabled,
-    color: helperVariant.color,
-    disabledColor: helperVariant.disabledColor,
-    focusColor: helperVariant.focus.color,
-  }
+    const { isFocused } = useTextField()
 
-  return (
-    <Container ref={ref} {...props} spacings={spacings}>
-      {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
-      <Text
-        variant={helperVariant}
-        isFocused={isFocused}
-        isDisabled={isDisabled}
-      >
-        {helperText}
-      </Text>
-    </Container>
-  )
-})
+    const iconProps = {
+      spacings,
+      isDisabled,
+      color: helperVariant.color,
+      disabledColor: helperVariant.disabledColor,
+      focusColor: helperVariant.focus.color,
+    }
+
+    return (
+      <Container ref={ref} {...props} spacings={spacings}>
+        {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
+        <Text
+          variant={helperVariant}
+          isFocused={isFocused}
+          isDisabled={isDisabled}
+        >
+          {helperText}
+        </Text>
+      </Container>
+    )
+  },
+)
 
 HelperText.propTypes = {
   /** @ignore */

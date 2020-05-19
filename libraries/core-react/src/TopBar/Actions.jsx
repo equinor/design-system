@@ -7,16 +7,26 @@ const StyledActions = styled.div`
   text-align: right;
 `
 
-export const Actions = forwardRef(function EdsTopBarActions(
-  { children, ...props },
-  ref,
-) {
-  return (
-    <StyledActions ref={ref} {...props}>
-      {children}
-    </StyledActions>
-  )
-})
+/**
+ * @typedef {object} Props
+ * @prop {React.ReactNode} [children]
+ * @prop {string} [className]
+ */
+
+export const Actions = forwardRef(
+  /**
+   * @param {Props} props
+   * @param {React.Ref<any>} ref
+   * @returns {React.ReactElement}
+   */
+  function EdsTopBarActions({ children, ...rest }, ref) {
+    return (
+      <StyledActions ref={ref} {...rest}>
+        {children}
+      </StyledActions>
+    )
+  },
+)
 
 Actions.displayName = 'eds-topbar-actions'
 

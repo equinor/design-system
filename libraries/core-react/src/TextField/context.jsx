@@ -14,6 +14,7 @@ const TextFieldContext = React.createContext(initalState)
 export const TextFieldProvider = ({ children }) => {
   const [state, setState] = useState(initalState)
   return (
+    // @ts-ignore
     <TextFieldContext.Provider value={[state, setState]}>
       {children}
     </TextFieldContext.Provider>
@@ -33,6 +34,7 @@ TextFieldProvider.defaultProps = {
 }
 
 export const useTextField = () => {
+  // @ts-ignore
   const [state, setState] = useContext(TextFieldContext)
 
   const handleFocus = () => {

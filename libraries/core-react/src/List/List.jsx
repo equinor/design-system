@@ -17,21 +17,31 @@ const variants = {
   numbered: 'ol',
 }
 
-const List = forwardRef(function List(
-  { children, variant, className, ...props },
-  ref,
-) {
-  return (
-    <StyledList
-      as={variants[variant]}
-      className={className}
-      ref={ref}
-      {...props}
-    >
-      {children}
-    </StyledList>
-  )
-})
+/**
+ * @typedef {object} Props
+ * @prop {React.ReactNode} children
+ * @prop {'bullet' | 'numbered'} [variant] Variant
+ * @prop {string} [start] An integer to start counting from for the list items
+ */
+
+const List = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
+   */
+  function List({ children, variant, className, ...rest }, ref) {
+    return (
+      <StyledList
+        as={variants[variant]}
+        className={className}
+        ref={ref}
+        {...rest}
+      >
+        {children}
+      </StyledList>
+    )
+  },
+)
 
 List.displayName = 'eds-list'
 
@@ -41,6 +51,7 @@ List.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** Variant */
+  // @ts-ignore
   variant: PropTypes.oneOf(['bullet', 'numbered']),
   /** An integer to start counting from for the list items */
   start: (props, propName, componentName) => {
@@ -66,6 +77,7 @@ List.propTypes = {
 
 List.defaultProps = {
   className: '',
+  // @ts-ignore
   variant: 'bullet',
   start: undefined,
 }

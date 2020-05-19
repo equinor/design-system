@@ -12,25 +12,38 @@ const StyledCardActions = styled.div`
   justify-content: ${({ justifyContent }) => justifyContent};
 `
 
-export const CardActions = forwardRef(function EdsCardActions(
-  { children, className, alignRight, meta, ...rest },
-  ref,
-) {
-  const justifyContent = alignRight ? 'flex-end' : 'flex-start'
-  const props = {
-    ...rest,
-    className,
-    ref,
-    justifyContent,
-  }
+/**
+ * @typedef Props
+ * @prop {string} [meta] Metadata / supporting text for icons ie
+ * @prop {boolean} [alignRight] For user to align buttons on right side if they want
+ */
 
-  return (
-    <StyledCardActions {...props}>
-      {children}
-      {meta !== '' && <Typography variant="caption">{meta}</Typography>}
-    </StyledCardActions>
-  )
-})
+export const CardActions = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param rest
+   * @param ref
+   */
+  function EdsCardActions(
+    { children, className, alignRight, meta, ...rest },
+    ref,
+  ) {
+    const justifyContent = alignRight ? 'flex-end' : 'flex-start'
+    const props = {
+      ...rest,
+      className,
+      ref,
+      justifyContent,
+    }
+
+    return (
+      <StyledCardActions {...props}>
+        {children}
+        {meta !== '' && <Typography variant="caption">{meta}</Typography>}
+      </StyledCardActions>
+    )
+  },
+)
 
 CardActions.displayName = 'eds-card-actions'
 

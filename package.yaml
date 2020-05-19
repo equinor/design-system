@@ -3,6 +3,7 @@ engines:
   pnpm: '>=4'
 scripts:
   lint: 'eslint ./libraries/**/*.{jsx,js}'
+  'lint:types': pnpm --filter @equinor/eds-core-react run lint:types
   init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
   'bump:core-react': >-

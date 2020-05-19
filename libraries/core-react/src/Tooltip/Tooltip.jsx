@@ -63,51 +63,75 @@ const TooltipArrow = styled.svg`
   fill: inherit;
 `
 
-export const Tooltip = forwardRef(function Tooltip(
-  { className, title, children, placement, ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    className,
-    ref,
-  }
+/**
+ * @typedef Props
+ * @prop {'topLeft' |
+ * 'top' |
+ * 'topRight' |
+ * 'rightTop' |
+ * 'right' |
+ * 'rightBottom' |
+ * 'bottomLeft' |
+ * 'bottom' |
+ * 'bottomRight' |
+ * 'leftTop' |
+ * 'left' |
+ * 'leftBottom'
+ * } [placement] Tooltip placement relative to anchor
+ * @prop {string} [title] Tooltip title
+ * @prop {React.ReactNode} children
+ */
 
-  const wrapperProps = {
-    right: tokens.placement[placement].tooltipRight,
-    top: tokens.placement[placement].tooltipTop,
-    bottom: tokens.placement[placement].tooltipBottom,
-    left: tokens.placement[placement].tooltipLeft,
-    transform: tokens.placement[placement].transform,
-  }
+export const Tooltip = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param rest
+   * @param ref
+   */
+  function Tooltip({ className, title, children, placement, ...rest }, ref) {
+    const props = {
+      ...rest,
+      className,
+      ref,
+    }
 
-  const arrowProps = {
-    left: tokens.placement[placement].arrowLeft,
-    right: tokens.placement[placement].arrowRight,
-    top: tokens.placement[placement].arrowTop,
-    bottom: tokens.placement[placement].arrowBottom,
-    transform: tokens.placement[placement].arrowTransform,
-  }
+    const wrapperProps = {
+      right: tokens.placement[placement].tooltipRight,
+      top: tokens.placement[placement].tooltipTop,
+      bottom: tokens.placement[placement].tooltipBottom,
+      left: tokens.placement[placement].tooltipLeft,
+      transform: tokens.placement[placement].transform,
+    }
 
-  return (
-    <Anchor {...props}>
-      {children}
-      <StyledTooltipWrapper {...wrapperProps}>
-        <StyledTooltip>
-          <TooltipArrow {...arrowProps}>
-            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-          </TooltipArrow>
-          {title}
-        </StyledTooltip>
-      </StyledTooltipWrapper>
-    </Anchor>
-  )
-})
+    const arrowProps = {
+      left: tokens.placement[placement].arrowLeft,
+      right: tokens.placement[placement].arrowRight,
+      top: tokens.placement[placement].arrowTop,
+      bottom: tokens.placement[placement].arrowBottom,
+      transform: tokens.placement[placement].arrowTransform,
+    }
+
+    return (
+      <Anchor {...props}>
+        {children}
+        <StyledTooltipWrapper {...wrapperProps}>
+          <StyledTooltip>
+            <TooltipArrow {...arrowProps}>
+              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+            </TooltipArrow>
+            {title}
+          </StyledTooltip>
+        </StyledTooltipWrapper>
+      </Anchor>
+    )
+  },
+)
 
 Tooltip.displayName = 'eds-tooltip'
 
 Tooltip.propTypes = {
   // Tooltip placement relative to anchor
+  // @ts-ignore
   placement: PropTypes.oneOf([
     'topLeft',
     'top',
@@ -131,6 +155,7 @@ Tooltip.propTypes = {
 }
 
 Tooltip.defaultProps = {
+  // @ts-ignore
   placement: 'bottom',
   title: '',
   className: '',

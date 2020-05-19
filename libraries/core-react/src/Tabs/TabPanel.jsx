@@ -24,13 +24,26 @@ const StyledTabPanel = styled.div.attrs(() => ({
   },
 })
 
-const TabPanel = forwardRef(function TabPanel({ ...props }, ref) {
-  return (
-    <StyledTabPanel ref={ref} {...props}>
-      {props.children}
-    </StyledTabPanel>
-  )
-})
+/**
+ * @typedef {object} Props
+ * @prop {React.ReactNode} children
+ * @prop {string} [className]
+ * @prop {boolean} [hidden] If `true`, the panel will be hidden.
+ */
+
+const TabPanel = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param {React.Ref<HTMLDivElement>} ref
+   */
+  function TabPanel({ ...props }, ref) {
+    return (
+      <StyledTabPanel ref={ref} {...props}>
+        {props.children}
+      </StyledTabPanel>
+    )
+  },
+)
 
 TabPanel.propTypes = {
   /** @ignore */

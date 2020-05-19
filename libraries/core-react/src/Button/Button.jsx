@@ -111,6 +111,16 @@ const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
 // - Use ThemeProvider
 // - Set attr on button
 
+/**
+ * @typedef Props
+ * @prop {'contained' | 'outlined' | 'ghost' | 'ghost_icon'} [variant] Specifies which variant to use
+ * @prop {boolean} [disabled] If `true`, the button will be disabled
+ * @prop {'primary' | 'secondary' | 'danger'} [color] Specifies color
+ */
+
+/**
+ * @param {Props & React.ButtonHTMLAttributes<HTMLButtonElement>} props
+ */
 export const Button = ({
   variant,
   children,
@@ -143,7 +153,9 @@ Button.propTypes = {
 
     const iconChildIsMissingTitle = React.Children.toArray(children)
       .map(
+        // @ts-ignore
         ({ type, props: childProps }) =>
+          // @ts-ignore
           (type || { displayName: '' }).displayName === Icon.displayName &&
           !childProps.title,
       )

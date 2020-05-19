@@ -69,82 +69,101 @@ const AccordionHeaderTitle = styled.span`
 
 AccordionHeaderTitle.displayName = 'eds-accordion-headertitle'
 
-const AccordionHeader = forwardRef(function AccordionHeader(
-  {
-    parentIndex,
-    headerLevel,
-    chevronPosition,
-    panelId,
-    id,
-    isExpanded,
-    children,
-    toggleExpanded,
-    disabled,
-    ...props
-  },
-  ref,
-) {
-  const handleClick = () => {
-    if (!disabled) {
-      toggleExpanded()
+/**
+ * @typedef Props
+ * @prop {string} [id] The id of the button that toggles expansion
+ * @prop {boolean} [isExpanded] Is AccordionItem expanded
+ * @prop {string} [panelId] The panel that is controlled by the HeaderButton
+ * @prop {React.ReactNode} children
+ * @prop {number} [parentIndex] The index of the parent AccordionItem
+ * @prop {boolean} [disabled] accordion item is disabled
+ * @prop {() => void} [toggleExpanded]
+ */
+
+const AccordionHeader = forwardRef(
+  /**
+   * @param {Props & import('./Accordion.propTypes').CommonProps & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
+   */
+  function AccordionHeader(
+    {
+      parentIndex,
+      headerLevel,
+      chevronPosition,
+      panelId,
+      id,
+      isExpanded,
+      children,
+      toggleExpanded,
+      disabled,
+      ...rest
+    },
+    ref,
+  ) {
+    const handleClick = () => {
+      if (!disabled) {
+        toggleExpanded()
+      }
     }
-  }
 
-  const handleKeyDown = (event) => {
-    const { key } = event
-    if (key === 'Enter' || key === ' ') {
-      toggleExpanded()
-      event.preventDefault()
+    const handleKeyDown = (event) => {
+      const { key } = event
+      if (key === 'Enter' || key === ' ') {
+        toggleExpanded()
+        event.preventDefault()
+      }
     }
-  }
 
-  const chevron = (
-    <StyledIcon
-      key={`${id}-icon`}
-      name={isExpanded ? 'chevron_up' : 'chevron_down'}
-      size={16}
-      chevronPosition={chevronPosition}
-      color={disabled ? chevronDisabledColor : chevronDefaultColor}
-    />
-  )
-
-  const headerChildren = React.Children.map(children, (child) => {
-    return (
-      (typeof child === 'string' && (
-        <AccordionHeaderTitle isExpanded={isExpanded} disabled={disabled}>
-          {child}
-        </AccordionHeaderTitle>
-      )) ||
-      (child.type.displayName === 'eds-accordion-headertitle' &&
-        React.cloneElement(child, {
-          isExpanded,
-          disabled,
-        })) ||
-      child
+    const chevron = (
+      <StyledIcon
+        key={`${id}-icon`}
+        name={isExpanded ? 'chevron_up' : 'chevron_down'}
+        size={16}
+        chevronPosition={chevronPosition}
+        color={disabled ? chevronDisabledColor : chevronDefaultColor}
+      />
     )
-  })
 
-  const newChildren = [chevron, headerChildren]
+    const headerChildren = React.Children.map(children, (child) => {
+      return (
+        (typeof child === 'string' && (
+          <AccordionHeaderTitle isExpanded={isExpanded} disabled={disabled}>
+            {child}
+          </AccordionHeaderTitle>
+        )) ||
+        // @ts-ignore
+        (child.type.displayName === 'eds-accordion-headertitle' &&
+          React.cloneElement(/** @type {React.ReactElement<any>} */ (child), {
+            isExpanded,
+            disabled,
+          })) ||
+        child
+      )
+    })
 
-  return (
-    <StyledAccordionHeader
-      isExpanded={isExpanded}
-      parentIndex={parentIndex}
-      as={headerLevel}
-      disabled={disabled}
-      {...props}
-      panelId={panelId}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      ref={ref}
-    >
-      {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
-    </StyledAccordionHeader>
-  )
-})
+    const newChildren = [chevron, headerChildren]
+
+    return (
+      <StyledAccordionHeader
+        isExpanded={isExpanded}
+        parentIndex={parentIndex}
+        as={headerLevel}
+        disabled={disabled}
+        {...rest}
+        panelId={panelId}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        ref={ref}
+      >
+        {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
+      </StyledAccordionHeader>
+    )
+  },
+)
 
 AccordionHeader.displayName = 'eds-accordion-header'
 
+// @ts-ignore
 AccordionHeader.propTypes = {
   ...commonPropTypes,
   /** The id of the button that toggles expansion */
@@ -159,8 +178,10 @@ AccordionHeader.propTypes = {
   parentIndex: PropTypes.number,
   /** accordion item is disabled */
   disabled: PropTypes.bool,
+  toggleExpanded: PropTypes.func,
 }
 
+// @ts-ignore
 AccordionHeader.defaultProps = {
   ...commonDefaultProps,
   id: '',
@@ -168,6 +189,7 @@ AccordionHeader.defaultProps = {
   isExpanded: false,
   parentIndex: null,
   disabled: false,
+  toggleExpanded: () => {},
 }
 
 export { AccordionHeader, AccordionHeaderTitle }

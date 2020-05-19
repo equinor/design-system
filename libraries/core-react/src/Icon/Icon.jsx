@@ -24,53 +24,70 @@ const StyledPath = styled.path.attrs(({ icon, size }) => ({
   transform: size / icon.height !== 1 ? `scale(${size / icon.height})` : null,
 }))``
 
-export const Icon = forwardRef(function EdsIcon(
-  { size, color, name, className, rotation, title, ...rest },
-  ref,
-) {
-  const { icon, count } = get(name)
+/**
+ * @typedef {object} Props
+ * @prop {keyof import("@equinor/eds-icons")} name
+ * @prop {string} [title] Title for svg if used semantically
+ * @prop {string} [color] Valid colors
+ * @prop {16 | 24 | 32 | 40 | 48} [size] Vertical spacing
+ * @prop {0 | 90 | 180 | 270} [rotation]
+ */
 
-  if (typeof icon === 'undefined') {
-    throw Error(`Icon "${name}" not found. Have you added it using Icon.add()?`)
-  }
+export const Icon = forwardRef(
+  /**
+   * @param {Props & React.SVGAttributes<SVGElement>} props
+   * @param ref
+   */
+  function EdsIcon(
+    { size, color, name, className, rotation, title, ...rest },
+    ref,
+  ) {
+    const { icon, count } = get(name)
 
-  let svgProps = {
-    height: size,
-    width: size,
-    fill: color,
-    viewBox: `0 0 ${size} ${size}`,
-    className,
-    rotation,
-    name,
-    'aria-hidden': true,
-  }
-
-  const iconProps = {
-    icon,
-    size,
-  }
-
-  // Accessibility
-  let titleId = ''
-
-  if (title) {
-    titleId = `${icon.prefix}-${icon.name}-${count}`
-    svgProps = {
-      ...svgProps,
-      title,
-      role: 'img',
-      'aria-hidden': null,
-      'aria-labelledby': titleId,
+    if (typeof icon === 'undefined') {
+      throw Error(
+        `Icon "${name}" not found. Have you added it using Icon.add()?`,
+      )
     }
-  }
 
-  return (
-    <StyledSvg {...svgProps} {...rest} ref={ref}>
-      {title && <title id={titleId}>{title}</title>}
-      <StyledPath data-testid="eds-icon-path" {...iconProps} />
-    </StyledSvg>
-  )
-})
+    let svgProps = {
+      height: size,
+      width: size,
+      fill: color,
+      viewBox: `0 0 ${size} ${size}`,
+      className,
+      rotation,
+      name,
+      'aria-hidden': true,
+    }
+
+    const iconProps = {
+      icon,
+      size,
+    }
+
+    // Accessibility
+    let titleId = ''
+
+    if (title) {
+      titleId = `${icon.prefix}-${icon.name}-${count}`
+      svgProps = {
+        ...svgProps,
+        title,
+        role: 'img',
+        'aria-hidden': null,
+        'aria-labelledby': titleId,
+      }
+    }
+
+    return (
+      <StyledSvg {...svgProps} {...rest} ref={ref}>
+        {title && <title id={titleId}>{title}</title>}
+        <StyledPath data-testid="eds-icon-path" {...iconProps} />
+      </StyledSvg>
+    )
+  },
+)
 
 Icon.displayName = 'eds-icon'
 
@@ -82,10 +99,13 @@ Icon.propTypes = {
   // Valid colors
   color: PropTypes.string,
   // Vertical spacing
+  // @ts-ignore
   size: PropTypes.oneOf([16, 24, 32, 40, 48]),
   // Rotation
+  // @ts-ignore
   rotation: PropTypes.oneOf([0, 90, 180, 270]),
   // Name
+  // @ts-ignore
   name: PropTypes.string.isRequired,
 }
 
@@ -93,6 +113,7 @@ Icon.defaultProps = {
   className: '',
   title: null,
   color: null,
+  // @ts-ignore
   size: 24,
   rotation: null,
 }

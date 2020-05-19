@@ -19,16 +19,19 @@ const StyledActions = styled.div`
     `}
 `
 
-export const Actions = forwardRef(function EdsDialogActions(
-  { children, ...props },
-  ref,
-) {
-  return (
-    <StyledActions ref={ref} {...props}>
-      {children}
-    </StyledActions>
-  )
-})
+export const Actions = forwardRef(
+  /**
+   * @param {React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
+   */
+  function EdsDialogActions({ children, ...rest }, ref) {
+    return (
+      <StyledActions ref={ref} {...rest}>
+        {children}
+      </StyledActions>
+    )
+  },
+)
 
 Actions.displayName = 'eds-dialog-actions'
 

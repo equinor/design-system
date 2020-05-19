@@ -25,31 +25,42 @@ const StyledCard = styled.div`
   ${spacingsTemplate(spacings)}
 `
 
-export const Card = forwardRef(function EdsCard(
-  { children, className, variant, onClick, ...rest },
-  ref,
-) {
-  const cursor = onClick ? 'pointer' : 'default'
+/**
+ * @typedef Props
+ * @prop {'default' | 'info' | 'warning' | 'danger'} [variant] Background color
+ * @prop {() => void} [onClick] Onclick function (for clickable cards)
+ */
 
-  const props = {
-    ...rest,
-    className,
-    ref,
-    background: tokens.background[variant],
-    cursor,
-  }
+export const Card = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param rest
+   * @param ref
+   */
+  function EdsCard({ children, className, variant, onClick, ...rest }, ref) {
+    const cursor = onClick ? 'pointer' : 'default'
 
-  return (
-    <StyledCard {...props} onClick={onClick}>
-      {children}
-    </StyledCard>
-  )
-})
+    const props = {
+      ...rest,
+      className,
+      ref,
+      background: tokens.background[variant],
+      cursor,
+    }
+
+    return (
+      <StyledCard {...props} onClick={onClick}>
+        {children}
+      </StyledCard>
+    )
+  },
+)
 
 Card.displayName = 'eds-card'
 
 Card.propTypes = {
   // Background color:
+  // @ts-ignore
   variant: PropTypes.oneOf(['default', 'info', 'warning', 'danger']),
   // Onclick function (for clickable cards)
   onClick: PropTypes.func,
@@ -60,6 +71,7 @@ Card.propTypes = {
 }
 
 Card.defaultProps = {
+  // @ts-ignore
   variant: 'default',
   onClick: undefined,
   className: '',

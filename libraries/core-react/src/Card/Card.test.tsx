@@ -8,7 +8,7 @@ import { Typography } from '..'
 
 import { Card } from '.'
 
-const { CardHeader, CardHeaderTitle, CardMedia, CardText, CardActions } = Card
+const { CardHeader, CardHeaderTitle, CardMedia, CardActions } = Card
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -34,12 +34,6 @@ const StyledCardMedia = styled(CardMedia)`
 `
 
 const StyledCardActions = styled(CardActions)`
-  position: relative;
-  height: 100px;
-  width: 100px;
-`
-
-const StyledCardText = styled(CardText)`
   position: relative;
   height: 100px;
   width: 100px;
@@ -75,7 +69,7 @@ describe('Card', () => {
     const variant = 'isLastBlock'
     const { queryByText } = render(
       <Card>
-        <CardText isLastBlock>{text}</CardText>
+        <Typography variant="body_short">{text}</Typography>
       </Card>,
     )
 
@@ -87,7 +81,7 @@ describe('Card', () => {
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { queryByText } = render(
       <Card>
-        <CardMedia isLeading>
+        <CardMedia fullWidth>
           <img src={src} alt="alt" />
         </CardMedia>
       </Card>,
@@ -110,13 +104,15 @@ describe('Card', () => {
   it('CardMedia items are placed correctly', () => {
     const { container } = render(
       <Card>
-        <CardMedia isLeading>
+        <CardMedia fullWidth>
           <img src="https://i.imgur.com/UM3mrju.jpg" alt="alt" />
         </CardMedia>
       </Card>,
     )
     const child = container.firstChild
-    expect(child.firstChild).toHaveStyleRule('margin-left', '-16px')
+    expect(child.firstChild).toHaveStyleRule('margin-left', '-16px', {
+      modifier: '> *',
+    })
   })
   it('Can extend the css for the Card Component', () => {
     const { container } = render(<StyledCard />)
@@ -152,12 +148,5 @@ describe('Card', () => {
     expect(cardActions).toHaveStyleRule('position', 'relative')
     expect(cardActions).toHaveStyleRule('height', '100px')
     expect(cardActions).toHaveStyleRule('width', '100px')
-  })
-  it('Can extend the css for the CardText Component', () => {
-    const { container } = render(<StyledCardText>Text</StyledCardText>)
-    const cardText = container.firstChild
-    expect(cardText).toHaveStyleRule('position', 'relative')
-    expect(cardText).toHaveStyleRule('height', '100px')
-    expect(cardText).toHaveStyleRule('width', '100px')
   })
 })

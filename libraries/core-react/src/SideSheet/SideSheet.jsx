@@ -39,32 +39,46 @@ const Header = styled.div`
   padding-right: 10px;
 `
 
-export const SideSheet = forwardRef(function EdsSideSheet(
-  { variant, title, children, className, open, onClose, ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    className,
-    ref,
-    width: tokens.width[variant],
-  }
+/**
+ * @typedef Props
+ * @prop {string} [title] Title for Side Sheet
+ * @prop {'small' | 'medium' | 'large' | 'xlarge'} [variant] Variant controls width of Side Sheet
+ * @prop {React.MouseEventHandler<HTMLButtonElement>} [onClose] OnClick function (close)
+ * @prop {boolean} [open] Open / close Side Sheet
+ */
 
-  // Controller must set open={false} when pressing the close button
-  return (
-    open && (
-      <StyledSideSheet {...props} id="side-sheet">
-        <Header>
-          <Typography variant="h2">{title}</Typography>
-          <Button variant="ghost_icon" onClick={onClose} title="Close">
-            <Icon name="clear" title="Close" />
-          </Button>
-        </Header>
-        {children}
-      </StyledSideSheet>
+export const SideSheet = forwardRef(
+  /**
+   * @param {Props & React.HTMLAttributes<HTMLDivElement>} props
+   * @param ref
+   */
+  function EdsSideSheet(
+    { variant, title, children, className, open, onClose, ...rest },
+    ref,
+  ) {
+    const props = {
+      ...rest,
+      className,
+      ref,
+      width: tokens.width[variant],
+    }
+
+    // Controller must set open={false} when pressing the close button
+    return (
+      open && (
+        <StyledSideSheet {...props} id="side-sheet">
+          <Header>
+            <Typography variant="h2">{title}</Typography>
+            <Button variant="ghost_icon" onClick={onClose}>
+              <Icon name="clear" title="Close" />
+            </Button>
+          </Header>
+          {children}
+        </StyledSideSheet>
+      )
     )
-  )
-})
+  },
+)
 
 SideSheet.displayName = 'eds-sidesheet'
 
@@ -72,6 +86,7 @@ SideSheet.propTypes = {
   // Title for Side Sheet
   title: PropTypes.string,
   // Variant controls width of Side Sheet
+  // @ts-ignore
   variant: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']),
   // OnClick function (close)
   onClose: PropTypes.func,
@@ -85,6 +100,7 @@ SideSheet.propTypes = {
 }
 
 SideSheet.defaultProps = {
+  // @ts-ignore
   variant: 'medium',
   title: '',
   className: '',

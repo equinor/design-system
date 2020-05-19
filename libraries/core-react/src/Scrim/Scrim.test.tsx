@@ -27,8 +27,8 @@ const DismissableScrim = () => {
   }
 
   return visibleScrim ? (
-    <Scrim onKeyDown={handleClose}>
-      <button type="button" onClick={() => setVisibleScrim()}>
+    <Scrim onClose={handleClose}>
+      <button type="button" onClick={() => setVisibleScrim(false)}>
         OK
       </button>
     </Scrim>
