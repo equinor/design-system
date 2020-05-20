@@ -81,44 +81,22 @@ const Anchor = styled.span.attrs({ role: 'menuitem' })`
   ${spacingsTemplate(spacings)};
 `
 
-const defaultState = {
-  isOpenSubmenu: false,
-  rect: undefined,
-}
-
 export const MenuItem = React.memo(
   React.forwardRef(function EdsMenuItem(
     { children, disabled, index, ...rest },
     ref,
   ) {
-    const { focusedIndex, setFocusedIndex } = useMenu()
-    const [state, setState] = useState(defaultState)
-    const { isOpenSubmenu, left, top } = state
-
+    const { focusedIndex, setFocusedIndex, subMenu, setSubMenu } = useMenu()
     const toggleFocus = (index_) => {
       if (focusedIndex !== index_) {
         setFocusedIndex(index_)
       }
     }
 
-    const toggleSubmenu = (e, hasSubMenu) => {
-      const rect = e.currentTarget.getBoundingClientRect()
-
-      const offsett = rect ? rect.width + 8 : 0
-      const updatedIsOpenSubmenu = hasSubMenu
-        ? !state.isOpenSubmenu
-        : state.isOpenSubmenu
-
-      setState({
-        ...state,
-        isOpenSubmenu: updatedIsOpenSubmenu,
-        left: updatedIsOpenSubmenu ? offsett : undefined,
-        top: 0,
-      })
+    const openSubMenu = (e) => {
+      e.stopPropagation()
+      setSubMenu(e.currentTarget, index)
     }
-
-    const setSubMenu = (isOpenSubmenu) => setState({ ...state, isOpenSubmenu })
-
     const isFocused = index === focusedIndex
 
     const updatedChildren = React.Children.map(children, (child) => {
@@ -127,9 +105,9 @@ export const MenuItem = React.memo(
       if (child.props) {
         return React.cloneElement(child, {
           disabled,
-          isopen: isOpenSubmenu,
-          left,
-          top,
+          isopen: index === subMenu.index,
+          left: subMenu.left,
+          top: subMenu.top,
         })
       }
       return child
@@ -144,18 +122,13 @@ export const MenuItem = React.memo(
       disabled,
     }
 
-    const openSubMenu = (e) => {
-      e.stopPropagation()
-      if (hasSubMenu) {
-        toggleSubmenu(e, hasSubMenu)
-      }
-    }
     return (
       <ListItem
         {...props}
         ref={useCombinedRefs(ref, (el) => isFocused && el.focus())}
         onFocus={() => toggleFocus(index)}
         onClick={hasSubMenu ? openSubMenu : undefined}
+        data-index={index}
       >
         <Anchor>{updatedChildren}</Anchor>
       </ListItem>
