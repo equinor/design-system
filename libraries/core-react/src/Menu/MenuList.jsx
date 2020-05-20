@@ -18,7 +18,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   { children, focus, ...rest },
   ref,
 ) {
-  const { focusedIndex, setFocusedIndex } = useMenu()
+  const { focusedIndex, setFocusedIndex, setSubMenu } = useMenu()
 
   const updatedChildren = React.Children.map(children, (child, index) =>
     React.cloneElement(child, {
@@ -53,7 +53,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   }
 
   const handleKeyPress = (event) => {
-    const { key } = event
+    const { key, target } = event
 
     if (key === 'ArrowDown') {
       handleMenuItemChange('down', firstFocusIndex)
@@ -62,7 +62,13 @@ export const MenuList = React.forwardRef(function EdsMenuList(
       handleMenuItemChange('up', lastFocusIndex)
     }
     if (key === 'ArrowRight') {
-      // handle nested menu
+      const {
+        dataset: { index },
+      } = target
+      setSubMenu(target, parseInt(index, 0))
+    }
+    if (key === 'ArrowLeft') {
+      setSubMenu(target, -1)
     }
   }
 
