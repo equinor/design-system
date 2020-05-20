@@ -14,19 +14,21 @@ const StyledSwitch = styled.label`
   position: relative;
 `
 
-export const Switch = forwardRef(({ size, disabled, label, ...rest }, ref) => {
-  return (
-    <StyledSwitch isDisabled={disabled}>
-      {size === 'small' ? (
-        <SwitchSmall disabled={disabled} {...rest} ref={ref} />
-      ) : (
-        <SwitchDefault disabled={disabled} {...rest} ref={ref} />
-      )}
+export const Switch = forwardRef(
+  ({ size, disabled, label, className, ...rest }, ref) => {
+    return (
+      <StyledSwitch isDisabled={disabled} className={className}>
+        {size === 'small' ? (
+          <SwitchSmall disabled={disabled} {...rest} ref={ref} />
+        ) : (
+          <SwitchDefault disabled={disabled} {...rest} ref={ref} />
+        )}
 
-      <span>{label}</span>
-    </StyledSwitch>
-  )
-})
+        <span>{label}</span>
+      </StyledSwitch>
+    )
+  },
+)
 
 Switch.propTypes = {
   /** Switch size, use the small version with caution */
@@ -35,9 +37,12 @@ Switch.propTypes = {
   disabled: PropTypes.bool,
   /** Label for the switch. Required to make it a11y compliant */
   label: PropTypes.string.isRequired,
+  /** Additional class names */
+  className: PropTypes.string,
 }
 
 Switch.defaultProps = {
   size: 'default',
   disabled: false,
+  className: undefined,
 }
