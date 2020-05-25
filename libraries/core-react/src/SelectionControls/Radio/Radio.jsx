@@ -22,36 +22,11 @@ const Input = styled.input.attrs(({ type = 'radio' }) => ({
   padding: 0;
   position: absolute;
   width: 1px;
-  /* & + span::before {
-    content: '';
-    display: inline-block;
-    width: ${enabled.size}
-    height: ${enabled.size}
-    vertical-align: calc(-1 * ${enabled.size} / 4);
-    border-radius: ${enabled.size};
-    border: 3px solid #fff;
-    box-shadow: 0 0 0 2px ${color.primary}; 
-    margin-right: 0.75em;
-    transition: 0.5s ease all; 
-  
-  }*/
-  /* box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]; */
-/*   &:checked + span::before {
-    background: ${({ disabled }) =>
-      disabled ? color.disabled : color.primary};
-  } */
+
   &:focus {
     outline: none;
   }
-/*   &:hover:not(:disabled) + span::before {
-    background: ${color.hover};
-    box-shadow: 0 0 0 2px ${color.primary}, 0 0 0 16px ${color.hover};  
-    border-color: ${color.hover}
-  }
-  &:hover:checked:not(:disabled) + span::before {
-    background: ${color.primary};
 
-  } */
   &[data-focus-visible-added]:focus + svg {
     outline: ${enabled.outline};
     outline-offset: ${enabled.outlineOffset};
