@@ -22,15 +22,23 @@ const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   &:focus {
     outline: none;
   }
-  &[data-focus-visible-added]:focus + span {
+  &[data-focus-visible-added]:focus + span :first-child {
     outline: ${enabled.outline};
-    outline-offset: ${enabled.outlineOffset};
   }
 `
 
 const SmallInput = styled(BaseInput)`
+  /* Track */
+ /*  &:checked + span > span:first-child {
+    background-color: ${({ disabled }) =>
+      disabled ? _disabled.background : enabled.track.small.activeBackground};
+  } */
+  /* Handle */
   &:checked + span > span:last-child {
     transform: translate(180%, -50%);
+  }
+  &[data-focus-visible-added]:focus + span :first-child {
+    outline-offset: ${enabled.outlineOffsetSmall};
   }
 `
 const DefaultInput = styled(BaseInput)`
@@ -44,6 +52,9 @@ const DefaultInput = styled(BaseInput)`
     background-color: ${({ disabled }) =>
       disabled ? _disabled.background : enabled.handle.activeBackground};
     transform: translate(135%, -50%);
+  }
+  &[data-focus-visible-added]:focus + span :first-child {
+    outline-offset: ${enabled.outlineOffset};
   }
 `
 

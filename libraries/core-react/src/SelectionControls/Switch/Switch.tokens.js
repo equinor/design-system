@@ -23,8 +23,7 @@ const {
 export const switchControl = {
   color: {},
   enabled: {
-    height: '48px',
-    size: '16px',
+    clickSize: '48px',
     track: {
       width: '34px',
       height: '8px',
@@ -62,7 +61,8 @@ export const switchControl = {
       },
     },
     outline: `1px dashed ${focusOutlineColor}`,
-    outlineOffset: '4px',
+    outlineOffset: '6px',
+    outlineOffsetSmall: '4px',
   },
   disabled: {
     background: backgroundColorDisabled,
