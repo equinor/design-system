@@ -9,6 +9,9 @@ const {
       disabled__text: { rgba: disabledText },
     },
   },
+  typography: {
+    navigation: { menu_title: labelTypography },
+  },
 } = tokens
 
 export const radio = {
@@ -18,6 +21,9 @@ export const radio = {
     disabled: disabledText,
   },
   enabled: {
+    typography: {
+      ...labelTypography,
+    },
     height: '48px',
     size: '10px',
     outline: `1px dashed ${focusOutlineColor}`,

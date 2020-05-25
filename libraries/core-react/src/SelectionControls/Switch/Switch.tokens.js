@@ -18,11 +18,17 @@ const {
       static_icons__tertiary: { rgba: handleColor },
     },
   },
+  typography: {
+    navigation: { menu_title: labelTypography },
+  },
   elevation: { raised: boxShadow },
 } = tokens
 export const switchControl = {
   color: {},
   enabled: {
+    typography: {
+      ...labelTypography,
+    },
     clickSize: '48px',
     track: {
       width: '34px',

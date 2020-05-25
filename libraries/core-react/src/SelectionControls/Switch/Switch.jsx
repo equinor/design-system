@@ -4,6 +4,11 @@ import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 
+import { switchControl as tokens } from './Switch.tokens'
+import { typographyTemplate } from '../../_common/templates'
+
+const { enabled } = tokens
+
 const StyledSwitch = styled.label`
   cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};
   border: none;
@@ -12,6 +17,10 @@ const StyledSwitch = styled.label`
   display: inline-flex;
   align-items: center;
   position: relative;
+`
+
+const Label = styled.span`
+  ${typographyTemplate(enabled.typography)}
 `
 
 export const Switch = forwardRef(
@@ -24,7 +33,7 @@ export const Switch = forwardRef(
           <SwitchDefault disabled={disabled} {...rest} ref={ref} />
         )}
 
-        <span>{label}</span>
+        <Label>{label}</Label>
       </StyledSwitch>
     )
   },

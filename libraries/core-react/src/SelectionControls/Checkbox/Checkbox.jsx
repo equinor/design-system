@@ -9,7 +9,7 @@ import {
   checkbox_indeterminate, // eslint-disable-line camelcase
 } from '@equinor/eds-icons'
 import { checkbox as tokens } from './Checkbox.tokens'
-
+import { typographyTemplate } from '../../_common/templates'
 import { Icon } from '../..'
 
 Icon.add({ checkbox, checkbox_outline, checkbox_indeterminate })
@@ -80,6 +80,10 @@ const InputWrapper = styled.span`
   }
 `
 
+const LabelText = styled.span`
+  ${typographyTemplate(enabled.typography)}
+`
+
 export const Checkbox = forwardRef((props, ref) => {
   const { label, disabled, indeterminate, className, ...rest } = props
 
@@ -112,7 +116,7 @@ export const Checkbox = forwardRef((props, ref) => {
           </Svg>
         )}
       </InputWrapper>
-      <span>{label}</span>
+      <LabelText>{label}</LabelText>
     </StyledCheckbox>
   )
 })

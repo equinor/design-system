@@ -10,6 +10,9 @@ const {
       disabled__text: { rgba: disabledText },
     },
   },
+  typography: {
+    navigation: { menu_title: labelTypography },
+  },
 } = tokens
 
 export const checkbox = {
@@ -20,6 +23,9 @@ export const checkbox = {
     disabled: disabledText,
   },
   enabled: {
+    typography: {
+      ...labelTypography,
+    },
     height: '48px',
     size: '16px',
     outline: `1px dashed ${focusOutlineColor}`,

@@ -7,7 +7,7 @@ import {
   radio_button_unselected, // eslint-disable-line camelcase
 } from '@equinor/eds-icons'
 import { radio as tokens } from './Radio.tokens'
-
+import { typographyTemplate } from '../../_common/templates'
 const { color, enabled } = tokens
 
 const Input = styled.input.attrs(({ type = 'radio' }) => ({
@@ -91,6 +91,10 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   fill,
 }))``
 
+const LabelText = styled.span`
+  ${typographyTemplate(enabled.typography)}
+`
+
 // @TODO: klikk bounds fra token
 const InputWrapper = styled.span`
   display: inline-flex;
@@ -119,7 +123,7 @@ export const Radio = forwardRef(
             <StyledPath icon={radio_button_unselected} name="unselected" />
           </Svg>
         </InputWrapper>
-        <span>{label}</span>
+        <LabelText>{label}</LabelText>
       </StyledRadio>
     )
   },
