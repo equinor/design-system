@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
 import { Switch } from './Switch'
@@ -35,5 +35,30 @@ describe('Switch', () => {
     expect(switchElement).toBeChecked()
     fireEvent.click(switchElement)
     expect(switchElement).not.toBeChecked()
+  })
+  it('Has a small version', () => {
+    const labelText = 'Small switch'
+    const { getByLabelText } = render(<Switch label={labelText} size="small" />)
+    const smallSwitch = getByLabelText(labelText)
+    expect(smallSwitch).toBeDefined()
+  })
+  it('Can be disabled', () => {
+    const { getByLabelText } = render(
+      <div>
+        <Switch label="Checkbox one" disabled />
+      </div>,
+    )
+    const one = getByLabelText('Checkbox one')
+    expect(one).not.toBeChecked()
+    userEvent.click(one)
+    expect(one).not.toBeChecked()
+  })
+  it('Can be set as default on without being a controlled component', () => {
+    const labelText = 'Default checked switch'
+    const { getByLabelText } = render(
+      <Switch label={labelText} defaultChecked />,
+    )
+    const switchElement = getByLabelText(labelText)
+    expect(switchElement).toBeChecked()
   })
 })
