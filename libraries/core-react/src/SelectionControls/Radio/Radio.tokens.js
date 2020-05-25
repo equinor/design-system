@@ -24,10 +24,8 @@ export const radio = {
     typography: {
       ...labelTypography,
     },
-    height: '48px',
-    size: '10px',
+    padding: '12px', // 12*2 + 24 = 48
     outline: `1px dashed ${focusOutlineColor}`,
     outlineOffset: '4px',
-    hover: {} /* Outline offset 2px + 2px box shadow width */,
   },
 }

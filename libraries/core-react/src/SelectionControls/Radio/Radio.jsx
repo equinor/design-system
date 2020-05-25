@@ -8,6 +8,7 @@ import {
 } from '@equinor/eds-icons'
 import { radio as tokens } from './Radio.tokens'
 import { typographyTemplate } from '../../_common/templates'
+
 const { color, enabled } = tokens
 
 const Input = styled.input.attrs(({ type = 'radio' }) => ({
@@ -74,7 +75,7 @@ const LabelText = styled.span`
 const InputWrapper = styled.span`
   display: inline-flex;
   border-radius: 50%;
-  padding: 12px;
+  padding: ${enabled.padding};
   &:hover {
     background-color: ${({ disabled }) =>
       disabled ? 'transparent' : color.hover};

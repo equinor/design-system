@@ -18,7 +18,6 @@ const { color, enabled } = tokens
 const StyledCheckbox = styled.label`
   display: inline-flex;
   align-items: center;
-  /* padding: 16px */
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `
 
@@ -73,7 +72,7 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
 const InputWrapper = styled.span`
   display: inline-flex;
   border-radius: 50%;
-  padding: 12px;
+  padding: ${enabled.padding};
   &:hover {
     background-color: ${({ disabled }) =>
       disabled ? 'transparent' : color.hover};

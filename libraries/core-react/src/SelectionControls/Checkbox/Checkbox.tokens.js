@@ -26,10 +26,8 @@ export const checkbox = {
     typography: {
       ...labelTypography,
     },
-    height: '48px',
-    size: '16px',
+    padding: '12px',
     outline: `1px dashed ${focusOutlineColor}`,
     outlineOffset: '4px',
-    hover: {} /* Outline offset 2px + 2px box shadow width */,
   },
 }
