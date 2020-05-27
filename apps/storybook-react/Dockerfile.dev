@@ -21,7 +21,7 @@ COPY ./apps/storybook-react ./storybook-react
 # build storybook and dependencies
 WORKDIR /app
 RUN pnpm --filter @equinor/eds-core-react install && \
-  pnpm --filter @equinor/eds-core-react run build
+  pnpm --filter @equinor/eds-core-react run build:for-storybook
 
 RUN pnpm --filter @equinor/eds-tokens install && \
   pnpm --filter @equinor/eds-tokens run build

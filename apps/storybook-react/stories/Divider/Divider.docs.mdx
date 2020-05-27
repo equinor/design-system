@@ -1,0 +1,49 @@
+import { Meta, Story, Props, Preview, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks'
+import { Divider } from '@equinor/eds-core-react'
+import { tokens } from '@equinor/eds-tokens'
+
+# Divider
+
+<Typography variant="ingress">A divider is a thin line that separates content into clear groups.</Typography>
+
+See the [storefront](https://eds.equinor.com/components/divider/) for details about this component
+
+<Preview>
+  <Story id="components-divider--default" />
+</Preview>
+
+## Props
+
+<Props of={Divider} /> 
+
+## Variants
+
+There are two variants, small and medium, where small has a top and bottom spacing of 8px, and medium 16px. There are three colour options, lighter, light and medium.
+
+The examples are shown on a dark background to be able to see the light and lighter colours.
+
+### Colours
+
+<ColorPalette>
+  <ColorItem title="lighter" colors={[tokens.colors.ui.background__default.hex]} />
+  <ColorItem title="light" colors={[tokens.colors.ui.background__light.hex]} />
+  <ColorItem title="medium" colors={[tokens.colors.ui.background__medium.hex]} />
+</ColorPalette>
+
+
+### Small
+
+<Preview withSource="open">
+  <Story id="components-divider--small" />
+</Preview>
+
+
+### Medium
+
+<Preview withSource="open">
+  <Story id="components-divider--medium" />
+</Preview>
+
+## Knobs
+
+In order to try out the props interactively you’ll have to switch to the Canvas tab in the top left corner, then choose the «With knobs» story, and then click the «Knobs» tab in the addons-panel.

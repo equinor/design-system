@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design tokens for the Equinor Design System",
   "main": "dist/tokens.esm.js",
   "module": "dist/tokens.esm.js",

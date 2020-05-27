@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react'
 import createId from 'lodash.uniqueid'
-import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
+import PropTypes from 'prop-types'
 
 const Accordion = forwardRef(function Accordion(
   { headerLevel, chevronPosition, children, ...props },
@@ -27,11 +27,20 @@ const Accordion = forwardRef(function Accordion(
 Accordion.displayName = 'eds-accordion'
 
 Accordion.propTypes = {
-  ...commonPropTypes,
+  /** @ignore */
+  children: PropTypes.node.isRequired,
+  /** Which side the chevron should be on  */
+  chevronPosition: PropTypes.oneOf(['left', 'right']),
+  /** The header level, i.e. h1, h2, h3 etc. */
+  headerLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+  /** @ignore */
+  className: PropTypes.string,
 }
 
 Accordion.defaultProps = {
-  ...commonDefaultProps,
+  chevronPosition: 'left',
+  headerLevel: 'h2',
+  className: '',
 }
 
 export { Accordion }
