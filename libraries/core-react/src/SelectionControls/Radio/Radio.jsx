@@ -92,6 +92,7 @@ export const Radio = forwardRef(
             height={iconSize}
             viewBox={`0 0 ${iconSize} ${iconSize}`}
             fill={disabled ? color.disabled : color.primary}
+            aria-hidden
           >
             <StyledPath icon={radio_button_selected} name="selected" />
             <StyledPath icon={radio_button_unselected} name="unselected" />

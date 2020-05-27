@@ -2,7 +2,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import {
   checkbox,
   checkbox_outline, // eslint-disable-line camelcase
@@ -10,9 +9,7 @@ import {
 } from '@equinor/eds-icons'
 import { checkbox as tokens } from './Checkbox.tokens'
 import { typographyTemplate } from '../../_common/templates'
-import { Icon } from '../..'
 
-Icon.add({ checkbox, checkbox_outline, checkbox_indeterminate })
 const { color, enabled } = tokens
 
 const StyledCheckbox = styled.label`
@@ -95,18 +92,22 @@ export const Checkbox = forwardRef((props, ref) => {
           data-indeterminate={indeterminate}
         />
         {indeterminate ? (
-          <Icon
-            name="checkbox_indeterminate"
-            size={24}
-            color={disabled ? color.disabled : color.primary}
+          <Svg
+            width={iconSize}
+            height={iconSize}
+            viewBox={`0 0 ${iconSize} ${iconSize}`}
+            fill={disabled ? color.disabled : color.primary}
             aria-hidden
-          />
+          >
+            <StyledPath icon={checkbox_indeterminate} />
+          </Svg>
         ) : (
           <Svg
             width={iconSize}
             height={iconSize}
             viewBox={`0 0 ${iconSize} ${iconSize}`}
             fill={disabled ? color.disabled : color.primary}
+            aria-hidden
           >
             <StyledPath icon={checkbox} name="checked" />
             <StyledPath icon={checkbox_outline} name="not-checked" />
