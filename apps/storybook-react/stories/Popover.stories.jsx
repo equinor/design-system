@@ -39,19 +39,6 @@ export default {
   decorators: [withKnobs],
 }
 
-const Content = () => (
-  <>
-    <PopoverTitle>Title </PopoverTitle>
-    <PopoverContent>
-      <Typography variant="body_short">Content</Typography>
-    </PopoverContent>
-    <CardActions>
-      <Button>Cancel</Button>
-      <Button>OK</Button>
-    </CardActions>
-  </>
-)
-
 export function Placement() {
   const [active, setActive] = React.useState(null)
 
@@ -62,6 +49,19 @@ export function Placement() {
   const handleClose = () => {
     setActive(null)
   }
+
+  const Content = () => (
+    <>
+      <PopoverTitle>Title </PopoverTitle>
+      <PopoverContent>
+        <Typography variant="body_short">Content</Typography>
+      </PopoverContent>
+      <CardActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>OK</Button>
+      </CardActions>
+    </>
+  )
 
   return (
     <Body>
@@ -237,6 +237,19 @@ export function ActivationTypes() {
   const handleClose = () => {
     setActive(null)
   }
+
+  const Content = () => (
+    <>
+      <PopoverTitle>Title </PopoverTitle>
+      <PopoverContent>
+        <Typography variant="body_short">Content</Typography>
+      </PopoverContent>
+      <CardActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>OK</Button>
+      </CardActions>
+    </>
+  )
 
   return (
     <Body>
