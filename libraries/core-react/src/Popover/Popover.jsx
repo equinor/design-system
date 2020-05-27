@@ -61,7 +61,7 @@ export const Popover = forwardRef(function Popover(
   return (
     <Container {...props}>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-      <Anchor tabIndex={0} open={open} aria-haspopup="true" ref={anchorRef}>
+      <Anchor /*tabIndex={0}*/ open={open} aria-haspopup="true" ref={anchorRef}>
         {anchorElement}
       </Anchor>
 

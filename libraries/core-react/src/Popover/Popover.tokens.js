@@ -10,7 +10,7 @@ const {
     },
   },
   spacings: {
-    comfortable: { small: spacingSmall, medium: spacingMedium },
+    comfortable: { medium: spacingMedium },
   },
   shape: {
     corners: { borderRadius },
@@ -41,7 +41,7 @@ export const popover = {
       arrowLeft: 'calc(50% - 8px/2)',
       arrowTop: '-5px',
       popoverBottom: '-8px',
-      arrowTransform: 'rotate(90deg)',
+      arrowTransform: 'rotate(90)',
       transform: 'translateY(100%)',
     },
     bottomRight: {
@@ -49,7 +49,7 @@ export const popover = {
       arrowTop: '-5px',
       popoverRight: 0,
       popoverBottom: '-8px',
-      arrowTransform: 'rotate(90deg)',
+      arrowTransform: 'rotate(90)',
       transform: 'translateY(100%)',
     },
     bottomLeft: {
@@ -57,7 +57,7 @@ export const popover = {
       arrowTop: '-5px',
       popoverLeft: 0,
       popoverBottom: '-8px',
-      arrowTransform: 'rotate(90deg)',
+      arrowTransform: 'rotate(90)',
       transform: 'translateY(100%)',
     },
     top: {
@@ -65,7 +65,7 @@ export const popover = {
       arrowLeft: 'calc(50% - 8px/2)',
       arrowBottom: '-5px',
       popoverTop: '-8px',
-      arrowTransform: 'rotate(-90deg)',
+      arrowTransform: 'rotate(-90)',
       transform: 'translateY(-100%)',
     },
     topRight: {
@@ -74,7 +74,7 @@ export const popover = {
       popoverRight: 0,
       width: 'auto',
       popoverTop: '-8px',
-      arrowTransform: 'rotate(-90deg)',
+      arrowTransform: 'rotate(-90)',
       transform: 'translateY(-100%)',
     },
     topLeft: {
@@ -82,7 +82,7 @@ export const popover = {
       arrowBottom: '-5px',
       popoverLeft: 0,
       popoverTop: '-8px',
-      arrowTransform: 'rotate(-90deg)',
+      arrowTransform: 'rotate(-90)',
       transform: 'translateY(-100%)',
     },
     left: {
@@ -90,7 +90,7 @@ export const popover = {
       arrowRight: '-5px',
       popoverLeft: '-8px',
       transform: 'translateX(-100%)',
-      arrowTransform: 'rotate(180deg)',
+      arrowTransform: 'rotate(180)',
     },
     leftTop: {
       arrowTop: '4px',
@@ -98,7 +98,7 @@ export const popover = {
       popoverLeft: '-8px',
       popoverTop: 0,
       transform: 'translateX(-100%)',
-      arrowTransform: 'rotate(180deg)',
+      arrowTransform: 'rotate(180)',
     },
     leftBottom: {
       arrowBottom: '4px',
@@ -106,7 +106,7 @@ export const popover = {
       popoverLeft: '-8px',
       popoverBottom: 0,
       transform: 'translateX(-100%)',
-      arrowTransform: 'rotate(180deg)',
+      arrowTransform: 'rotate(180)',
     },
     right: {
       arrowTop: 'calc(50% - 8px/2)',

@@ -37,13 +37,12 @@ const StyledPopover = styled((props) => <Card {...props} />)`
 `
 
 const PopoverArrow = styled.svg`
-  ${({ top, bottom, right, left, transform }) =>
+  ${({ top, bottom, right, left }) =>
     css`
       bottom: ${bottom};
       top: ${top};
       right: ${right};
       left: ${left};
-      transform: ${transform};
     `}
   width: ${tokens.arrow.width};
   height: ${tokens.arrow.height};
@@ -82,10 +81,10 @@ export const PopoverItem = forwardRef(function EdsPopoverItem(
     right: tokens.placement[placement].arrowRight,
     top: tokens.placement[placement].arrowTop,
     bottom: tokens.placement[placement].arrowBottom,
-    transform: tokens.placement[placement].arrowTransform,
   }
 
   const contRef = useRef(ref)
+  const svgTransform = tokens.placement[placement].arrowTransform
 
   const handleClose = (event) => {
     const popoverRef = contRef.current
@@ -118,7 +117,10 @@ export const PopoverItem = forwardRef(function EdsPopoverItem(
     <StyledPopoverWrapper ref={contRef} {...wrapperProps}>
       <StyledPopover>
         <PopoverArrow {...arrowProps}>
-          <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+          <path
+            transform={svgTransform}
+            d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z"
+          />
         </PopoverArrow>
         {children}
         <StyledCloseButton onClick={onClose} variant="ghost_icon">
@@ -150,7 +152,7 @@ PopoverItem.propTypes = {
   // On Close function:
   onClose: PropTypes.func,
   // Reference to anchor / trigger element
-  anchorRef: PropTypes.object.isRequired,
+  anchorRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   /**  @ignore */
   children: PropTypes.node,
   /** @ignore */
