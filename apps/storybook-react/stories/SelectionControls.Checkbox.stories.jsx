@@ -7,6 +7,7 @@ import {
   Switch,
 } from '@equinor/eds-core-react'
 import styled from 'styled-components'
+import { action } from '@storybook/addon-actions'
 import { checkbox } from '@equinor/eds-icons'
 import { useForm } from 'react-hook-form'
 Icon.add({ checkbox })
@@ -116,6 +117,7 @@ export const WithFormsControl = () => {
   const onSubmit = (data) => {
     updateFormData(JSON.stringify(data))
     updateIsSubmitted(true)
+    action('onSubmit')(data)
   }
   console.log(watch('example'))
   return (
