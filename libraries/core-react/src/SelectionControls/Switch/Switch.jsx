@@ -39,7 +39,7 @@ export const Switch = forwardRef(
   },
 )
 
-Switch.displayName = 'eds-Switch'
+Switch.displayName = 'eds-switch'
 
 Switch.propTypes = {
   /** Switch size, use the small version with caution */

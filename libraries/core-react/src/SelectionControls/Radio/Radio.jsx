@@ -103,7 +103,7 @@ export const Radio = forwardRef(
   },
 )
 
-Radio.displayName = 'eds-Radio'
+Radio.displayName = 'eds-radio'
 
 Radio.propTypes = {
   /** Label for the radio */

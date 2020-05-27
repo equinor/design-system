@@ -118,7 +118,7 @@ export const Checkbox = forwardRef((props, ref) => {
   )
 })
 
-Checkbox.displayName = 'eds-Checkbox'
+Checkbox.displayName = 'eds-checkbox'
 
 Checkbox.propTypes = {
   /** Label for the checkbox */
