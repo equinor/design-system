@@ -21,6 +21,7 @@ const {
   typography: {
     navigation: { menu_title: labelTypography },
   },
+  clickbounds: { default__base: clickbounds },
   elevation: { raised: boxShadow },
 } = tokens
 export const switchControl = {
@@ -29,7 +30,7 @@ export const switchControl = {
     typography: {
       ...labelTypography,
     },
-    clickSize: '48px',
+    clickSize: clickbounds,
     track: {
       width: '34px',
       height: '8px',
