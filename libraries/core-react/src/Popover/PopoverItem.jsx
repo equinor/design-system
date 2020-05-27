@@ -116,11 +116,8 @@ export const PopoverItem = forwardRef(function EdsPopoverItem(
   return (
     <StyledPopoverWrapper ref={contRef} {...wrapperProps}>
       <StyledPopover>
-        <PopoverArrow {...arrowProps}>
-          <path
-            transform={svgTransform}
-            d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z"
-          />
+        <PopoverArrow {...arrowProps} transform={svgTransform}>
+          <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
         </PopoverArrow>
         {children}
         <StyledCloseButton onClick={onClose} variant="ghost_icon">

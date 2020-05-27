@@ -256,10 +256,12 @@ export function ActivationTypes() {
       <TextWrapper>
         <Typography variant="h3">Activation types</Typography>
         <Typography variant="body_long">
-          Popovers can be activated by hover or click. To dismiss a popover, use
-          the close icon, press the ESC key, open another popover or click
-          outside the popover. If there are no actions in the popover, then the
-          close icon should be the first focusable element.
+          Popovers can be activated by hover or click. Remember to use both
+          onMouseEnter and onFocus attributes to your trigger element to open
+          the popover by tab iterations. To dismiss a popover, use the close
+          icon, press the ESC key, open another popover or click outside the
+          popover. If there are no actions in the popover, then the close icon
+          should be the first focusable element.
         </Typography>
       </TextWrapper>
       <Wrapper>
@@ -274,7 +276,7 @@ export function ActivationTypes() {
 
         <Popover onClose={handleClose} open={active === '2'}>
           <PopoverAnchor>
-            <Button id="2" onMouseEnter={handleClick}>
+            <Button id="2" onMouseEnter={handleClick} onFocus={handleClick}>
               On Hover
             </Button>
           </PopoverAnchor>
