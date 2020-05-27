@@ -97,10 +97,7 @@ export const PopoverItem = forwardRef(function EdsPopoverItem(
       if (event.key === 'Escape') {
         onClose()
       } else if (event.type === 'click') {
-        if (
-          (!popoverRef.contains(targetRef) && !anchRef.contains(targetRef)) ||
-          anchRef.contains(targetRef)
-        ) {
+        if (!popoverRef.contains(targetRef) && !anchRef.contains(targetRef)) {
           onClose()
         }
       }
@@ -153,7 +150,7 @@ PopoverItem.propTypes = {
   // On Close function:
   onClose: PropTypes.func,
   // Reference to anchor / trigger element
-  anchorRef: PropTypes.node.isRequired,
+  anchorRef: PropTypes.object.isRequired,
   /**  @ignore */
   children: PropTypes.node,
   /** @ignore */
