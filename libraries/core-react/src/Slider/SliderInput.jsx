@@ -21,9 +21,7 @@ const thumb = css`
   background: ${enabled.handle.background};
   cursor: pointer;
   position: relative;
-
   z-index: 1;
-  /* pointer-events: auto; */
 `
 const thumbHover = css`
   box-shadow: 0px 0px 0px 6px ${enabled.handle.hover.background};
@@ -51,17 +49,14 @@ const StyledSliderInput = styled.input.attrs(() => ({
     border: 0;
   }
 
-  /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
+  width: 100%;
   background: transparent;
-  /* get rid of white Chrome background */
   background: none;
   grid-column: 1 / -1;
   grid-row: 2;
-  font: inherit; /* fix too small font-size in both Chrome & Firefox */
+  font: inherit;
   margin: 0;
   z-index: 2;
-  /* pointer-events: none; */
   outline: none
   &[data-focus-visible-added]:focus {
     z-index: 2;

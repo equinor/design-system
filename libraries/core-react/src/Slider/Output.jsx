@@ -9,8 +9,6 @@ const { enabled } = tokens
 const StyledOutput = styled.output`
   --val: ${({ value }) => value};
   --realWidth: calc(100% - 12px);
-  /* fit-content is not supported in Edge, table as fallback */
-  display: table;
   width: fit-content;
   position: relative;
   z-index: 1;
@@ -19,7 +17,6 @@ const StyledOutput = styled.output`
   background: ${enabled.background};
   padding: 0 5px;
   top: ${enabled.track.realHeight};
-  /* Avoid track hover on output mouse over */
   pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));

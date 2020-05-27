@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, useRef /* , useMemo */ } from 'react'
 import PropTypes from 'prop-types'
-/* import createId from 'lodash.uniqueid' */
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
@@ -9,8 +8,6 @@ import { SliderInput } from './SliderInput'
 
 const { enabled, disabled: _disabled } = tokens
 
-/** The two first gradients are hacks to avoid 2px too long slider track on both edges. Better solution? */
-/* 20 px = Height from output + (height of handle (12px) - (track height (4px)) / 2) */
 const fakeTrackBg = css`
     background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.background}' width='100%' height='4' rx='2' /></svg>");
     background-size: cover;
@@ -118,7 +115,6 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     content: ' ';
     display: block;
     position: absolute;
-    /* z-index: -1; */
     width: ${enabled.dot.size};
     height: ${enabled.dot.size};
     background: ${enabled.background};
@@ -137,9 +133,6 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
 `
 
 const SrOnlyLabel = styled.label`
-  /* Non-edge version 
-  position: absolute;
-  clip-path: inset(50%); */
   position: absolute;
   width: 1px;
   height: 1px;
@@ -168,12 +161,10 @@ export const Slider = forwardRef(function EdsSlider(
   ref,
 ) {
   const isRangeSlider = Array.isArray(value)
-  // @TODO: Some counter prefix id to avoid duplicate id's
   const [sliderValue, setSliderValue] = useState(value)
   const minRange = useRef()
   const maxRange = useRef()
   const onValueChange = (event, valueArrIdx) => {
-    // Get the new value as int
     const changedValue = parseInt(event.target.value, 10)
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
@@ -197,19 +188,17 @@ export const Slider = forwardRef(function EdsSlider(
   }
 
   const findClosestRange = (event) => {
-    // fix annoying flick of hover on the wrong handle due to wrong calculated bounding dimensions from
-    // output elem if you move the mouse 1px above the output label
     if (event.target.type === 'output') {
       return
     }
     const bounds = event.target.getBoundingClientRect()
-    const x = event.clientX - bounds.left // Get the mouse pointer's x value on the slider
-    const inputWidth = minRange.current.offsetWidth // The two sliders are of equal width
-    const minValue = minRange.current.value // unix timestamp for minste handle
-    const maxValue = maxRange.current.value // unix timestamp for største handle
-    const diff = max - min // Diff of the slider range
+    const x = event.clientX - bounds.left
+    const inputWidth = minRange.current.offsetWidth
+    const minValue = minRange.current.value
+    const maxValue = maxRange.current.value
+    const diff = max - min
 
-    const normX = (x / inputWidth) * diff + min // x-akse-verdi i unix timestamp-verden
+    const normX = (x / inputWidth) * diff + min
 
     const maxX = Math.abs(normX - maxValue)
     const minX = Math.abs(normX - minValue)
@@ -221,11 +210,6 @@ export const Slider = forwardRef(function EdsSlider(
       maxRange.current.style.zIndex = 10
     }
   }
-
-  // Let's trust people?
-  /*  const inputIdA = useMemo(() => createId(`${ariaLabelledby}-thumb-a-`), [])
-  const inputIdB = useMemo(() => createId(`${ariaLabelledby}-thumb-b-`), [])
-  const inputId = useMemo(() => createId(`${ariaLabelledby}-thumb`), []) */
 
   const inputIdA = `${ariaLabelledby}-thumb-a`
   const inputIdB = `${ariaLabelledby}-thumb-b`
@@ -246,7 +230,6 @@ export const Slider = forwardRef(function EdsSlider(
           disabled={disabled}
           onMouseMove={findClosestRange}
         >
-          {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
@@ -324,7 +307,7 @@ export const Slider = forwardRef(function EdsSlider(
   )
 })
 
-Slider.displayName = 'eds-Slider'
+Slider.displayName = 'eds-slider'
 
 Slider.propTypes = {
   /** Id for the elements that labels this slider */
@@ -339,7 +322,6 @@ Slider.propTypes = {
   /** Function for formatting the output, e.g. with dates */
   outputFunction: PropTypes.func,
   /** Max value */
-
   max: PropTypes.number,
   /**  Min value */
   min: PropTypes.number,

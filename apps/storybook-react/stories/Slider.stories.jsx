@@ -4,10 +4,8 @@ import { Slider, Button, Typography, Label } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
 const Body = styled.div`
-  /* height: calc(100vh - 64px); */
-  /* background: #ebebeb; */
   display: grid;
-  grid-template-rows: min-width;
+  grid-template-rows: min-content;
   padding: 32px;
   grid-gap: 4rem;
   position: relative;

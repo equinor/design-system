@@ -15,7 +15,7 @@ const getUnixTime = (iso) => {
 const DateSlider = ({ value, ariaLabelledby = 'date-range-slider' }) => {
   function outputFunction(val) {
     const date = new Date(parseInt(val, 10))
-    // The test node server doesn't have full i11y capabilities, using english is the easiest
+    // The test node server doesn't have full i18n capabilities, using english is the easiest
     return date.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
@@ -43,7 +43,6 @@ DateSlider.propTypes = {
 describe('Simple slider', () => {
   it('Creates a simple slider when providing a number as value', () => {
     render(<Slider value={0} ariaLabelledby="test-one" />)
-    // Illogical use of textbox as role, but role slider is  reserved for the thumb anyway
     const input = screen.getAllByRole('textbox', { name: 'test-one' })
     expect(input).toHaveLength(1)
   })
@@ -85,7 +84,7 @@ describe('Simple slider', () => {
     const { container } = render(
       <DateSlider
         value={getUnixTime('2020-01-01')}
-        aria-ariaLabelledby="date-test"
+        ariaLabelledby="date-test"
       />,
     )
     const outputValue = container.querySelector('output')
@@ -145,7 +144,7 @@ describe('Range slider', () => {
     const { container } = render(
       <Slider value={[3, 6]} ariaLabelledby={ariaId} onChange={handleChange} />,
     )
-    // Relies to much on implementation details
+
     const inputA = container.querySelector(`#${ariaId}-thumb-a`)
     const inputB = container.querySelector(`#${ariaId}-thumb-b`)
     const outputA = container.querySelector(`output[for="${ariaId}-thumb-a"]`)
