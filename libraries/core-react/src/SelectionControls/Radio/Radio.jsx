@@ -14,7 +14,6 @@ const { color, enabled } = tokens
 const Input = styled.input.attrs(({ type = 'radio' }) => ({
   type,
 }))`
-  /* Visually hide the original radio input*/
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -71,7 +70,6 @@ const LabelText = styled.span`
   ${typographyTemplate(enabled.typography)}
 `
 
-// @TODO: klikk bounds fra token
 const InputWrapper = styled.span`
   display: inline-flex;
   border-radius: 50%;

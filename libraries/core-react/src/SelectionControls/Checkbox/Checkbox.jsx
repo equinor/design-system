@@ -30,7 +30,6 @@ const StyledPath = styled.path.attrs(({ icon }) => ({
 const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
 }))`
-  /* Visually hide the original radio input*/
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -68,7 +67,6 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   fill,
 }))``
 
-// @TODO: klikk bounds fra token
 const InputWrapper = styled.span`
   display: inline-flex;
   border-radius: 50%;

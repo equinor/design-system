@@ -7,10 +7,7 @@ const { enabled, disabled: _disabled } = tokens
 
 const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
-  /* This role need aria-checked as well, so that means stateful component */
-  /* role: 'switch', */
 }))`
-  /* Visually hide the original checkbox*/
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -28,12 +25,6 @@ const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
 `
 
 const SmallInput = styled(BaseInput)`
-  /* Track */
- /*  &:checked + span > span:first-child {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.track.small.activeBackground};
-  } */
-  /* Handle */
   &:checked + span > span:last-child {
     transform: translate(180%, -50%);
   }

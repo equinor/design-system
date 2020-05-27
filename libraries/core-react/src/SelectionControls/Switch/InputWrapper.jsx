@@ -17,7 +17,6 @@ const InputWrapperDefault = styled(BaseInputWrapper)`
     background-color: ${({ isDisabled }) =>
       isDisabled ? 'transparent' : enabled.hover.background};
   }
-  /* Handle */
   &:hover > span:last-child {
     background-color: ${({ isDisabled }) =>
       isDisabled ? _disabled.background : enabled.hover.handle.background};
