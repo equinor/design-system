@@ -73,7 +73,9 @@ export function Placement() {
           inside the PopoverAnchor tag
         </Typography>
       </TextWrapper>
-      <Typography variant="h5">Top</Typography>
+      <Typography variant="h5" as="h4">
+        Top
+      </Typography>
       <Wrapper>
         <Popover
           onClose={handleClose}
@@ -109,7 +111,9 @@ export function Placement() {
         </Popover>
       </Wrapper>
 
-      <Typography variant="h5">Bottom</Typography>
+      <Typography variant="h5" as="h4">
+        Bottom
+      </Typography>
       <Wrapper>
         <Popover
           onClose={handleClose}
@@ -145,7 +149,9 @@ export function Placement() {
         </Popover>
       </Wrapper>
 
-      <Typography variant="h5">Left</Typography>
+      <Typography variant="h5" as="h4">
+        Left
+      </Typography>
       <Wrapper>
         <Popover
           onClose={handleClose}
@@ -180,7 +186,9 @@ export function Placement() {
           <Content />
         </Popover>
       </Wrapper>
-      <Typography variant="h5">Right</Typography>
+      <Typography variant="h5" as="h4">
+        Right
+      </Typography>
       <Wrapper>
         <Popover
           onClose={handleClose}
