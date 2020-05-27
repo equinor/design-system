@@ -57,8 +57,8 @@ export const RadioControl = () => {
 }
 export const RadioGroupControl = () => {
   const [checked, updateChecked] = useState('one')
-  const onChange = (event, value) => {
-    updateChecked(value)
+  const onChange = (event) => {
+    updateChecked(event.target.value)
   }
   return (
     <Wrapper>
