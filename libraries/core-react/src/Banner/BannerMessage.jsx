@@ -5,9 +5,9 @@ import { Typography } from '../Typography'
 
 const StyledBannerMessage = styled(Typography)``
 
-export const BannerMessage = ({ children, className, ...props }) => {
+export const BannerMessage = ({ children, ...props }) => {
   return (
-    <StyledBannerMessage variant="body_long" className={className} {...props}>
+    <StyledBannerMessage variant="body_long" {...props}>
       {children}
     </StyledBannerMessage>
   )
@@ -16,12 +16,6 @@ export const BannerMessage = ({ children, className, ...props }) => {
 BannerMessage.displayName = 'eds-banner-message'
 
 BannerMessage.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
   /** Text content */
   children: PropTypes.string.isRequired,
-}
-
-BannerMessage.defaultProps = {
-  className: undefined,
 }

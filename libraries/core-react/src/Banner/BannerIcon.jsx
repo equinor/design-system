@@ -19,7 +19,7 @@ const StyledBannerIcon = styled.span`
   margin-right: ${enabled.spacings};
 `
 
-export const BannerIcon = ({ children, variant, className, ...props }) => {
+export const BannerIcon = ({ children, variant, ...props }) => {
   const childrenWithColor = React.Children.map(children, (child) => {
     const color =
       variant === 'warning'
@@ -34,7 +34,7 @@ export const BannerIcon = ({ children, variant, className, ...props }) => {
     )
   })
   return (
-    <StyledBannerIcon variant={variant} className={className} {...props}>
+    <StyledBannerIcon variant={variant} {...props}>
       {childrenWithColor}
     </StyledBannerIcon>
   )
@@ -43,14 +43,11 @@ export const BannerIcon = ({ children, variant, className, ...props }) => {
 BannerIcon.displayName = 'eds-banner-icon'
 
 BannerIcon.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
   /** Variant of icon  */
   variant: PropTypes.oneOf(['info', 'warning']),
   children: PropTypes.node.isRequired,
 }
 
 BannerIcon.defaultProps = {
-  className: undefined,
   variant: 'info',
 }
