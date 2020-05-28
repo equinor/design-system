@@ -24,7 +24,7 @@ export const BannerIcon = ({ children, variant, ...props }) => {
     const color =
       variant === 'warning'
         ? enabled.icon.warning.color
-        : enabled.icon.warning.info
+        : enabled.icon.info.color
     return (
       (child.type.displayName === 'eds-icon' &&
         React.cloneElement(child, {
