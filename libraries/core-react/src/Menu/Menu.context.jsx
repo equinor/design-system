@@ -7,6 +7,7 @@ const initalState = {
     index: undefined,
     left: undefined,
     top: undefined,
+    previous: 0,
   },
 }
 
@@ -39,15 +40,19 @@ export const useMenu = () => {
     setState({ ...state, focusedIndex: i })
   }
 
-  const setSubMenu = (target, index) => {
+  const setSubMenu = (target, index, focus) => {
     const rect = target.getBoundingClientRect()
     const offset = rect ? rect.width + 8 : 0
+
+    const nextIndex = index === state.subMenu.index ? -1 : index
     setState({
       ...state,
+      focusedIndex: -1,
       subMenu: {
-        index,
-        left: index > -1 ? offset : undefined,
+        index: nextIndex,
+        left: nextIndex > -1 ? offset : undefined,
         top: 0,
+        focus,
       },
     })
   }

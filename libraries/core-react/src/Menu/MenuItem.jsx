@@ -108,6 +108,7 @@ export const MenuItem = React.memo(
           isopen: index === subMenu.index,
           left: subMenu.left,
           top: subMenu.top,
+          focus: subMenu.focus,
         })
       }
       return child
@@ -129,6 +130,8 @@ export const MenuItem = React.memo(
         onFocus={() => toggleFocus(index)}
         onClick={hasSubMenu ? openSubMenu : undefined}
         data-index={index}
+        aria-expanded={openSubMenu}
+        aria-haspopup={hasSubMenu}
       >
         <Anchor>{updatedChildren}</Anchor>
       </ListItem>
