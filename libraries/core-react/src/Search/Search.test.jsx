@@ -72,4 +72,35 @@ describe('Search', () => {
     expect(callbackValue).toEqual('')
     expect(callbackId).toEqual(searchId)
   })
+
+  it('Has called onFocus when search if focused', () => {
+    const searchId = 'search-id-when-testing'
+    let callbackId = ''
+    const handleOnFocus = jest.fn(({ target: { id } }) => {
+      callbackId = id
+    })
+
+    render(<Search id={searchId} onFocus={handleOnFocus} />)
+    const searchBox = screen.queryByRole('searchbox')
+
+    fireEvent.focus(searchBox)
+
+    expect(handleOnFocus).toHaveBeenCalled()
+    expect(callbackId).toEqual(searchId)
+  })
+  it('Has called onBlur when search if blured', () => {
+    const searchId = 'search-id-when-testing'
+    let callbackId = ''
+    const handleOnBlur = jest.fn(({ target: { id } }) => {
+      callbackId = id
+    })
+
+    render(<Search id={searchId} onBlur={handleOnBlur} />)
+    const searchBox = screen.queryByRole('searchbox')
+
+    fireEvent.blur(searchBox)
+
+    expect(handleOnBlur).toHaveBeenCalled()
+    expect(callbackId).toEqual(searchId)
+  })
 })
