@@ -6,7 +6,6 @@ import { PopoverItem } from './PopoverItem'
 const Container = styled.div`
   position: relative;
   display: flex;
-  width: auto;
   justify-content: center;
 `
 
@@ -104,6 +103,6 @@ Popover.propTypes = {
 
 Popover.defaultProps = {
   placement: 'bottom',
-  onClose: undefined,
+  onClose: () => {},
   className: '',
 }

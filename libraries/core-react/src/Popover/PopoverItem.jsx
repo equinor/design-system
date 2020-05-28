@@ -158,7 +158,7 @@ PopoverItem.propTypes = {
 
 PopoverItem.defaultProps = {
   placement: 'bottom',
-  onClose: undefined,
+  onClose: () => {},
   children: undefined,
   className: '',
 }
