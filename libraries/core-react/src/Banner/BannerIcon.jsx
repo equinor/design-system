@@ -10,16 +10,32 @@ const StyledBannerIcon = styled.span`
   justify-content: center;
   flex-shrink: 0;
   border-radius: ${enabled.icon.shape.borderRadius};
-  background-color: ${({ color }) => color}
+  background-color: ${({ variant }) =>
+    variant === 'warning'
+      ? enabled.icon.warning.background
+      : enabled.icon.info.background};
   width: ${enabled.icon.shape.minWidth};
   height: ${enabled.icon.shape.minHeight};
   margin-right: ${enabled.spacings};
 `
 
-export const BannerIcon = ({ children, color, className, ...props }) => {
+export const BannerIcon = ({ children, variant, className, ...props }) => {
+  const childrenWithColor = React.Children.map(children, (child) => {
+    const color =
+      variant === 'warning'
+        ? enabled.icon.warning.color
+        : enabled.icon.warning.info
+    return (
+      (child.type.displayName === 'eds-icon' &&
+        React.cloneElement(child, {
+          color,
+        })) ||
+      child
+    )
+  })
   return (
-    <StyledBannerIcon color={color} className={className} {...props}>
-      {children}
+    <StyledBannerIcon variant={variant} className={className} {...props}>
+      {childrenWithColor}
     </StyledBannerIcon>
   )
 }
@@ -29,12 +45,12 @@ BannerIcon.displayName = 'eds-banner-icon'
 BannerIcon.propTypes = {
   /** @ignore */
   className: PropTypes.string,
-  /** Color of icon background */
-  color: PropTypes.string,
+  /** Variant of icon  */
+  variant: PropTypes.oneOf(['info', 'warning']),
   children: PropTypes.node.isRequired,
 }
 
 BannerIcon.defaultProps = {
   className: undefined,
-  color: '#FFE0E7',
+  variant: 'info',
 }

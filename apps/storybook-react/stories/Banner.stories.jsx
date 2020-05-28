@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 import { Banner, Icon, Typography, Button } from '@equinor/eds-core-react'
-import { save, thumbs_up, mood_sad } from '@equinor/eds-icons'
+import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 const icons = {
   save,
   thumbs_up,
+  thumbs_down,
   mood_sad,
 }
 const { BannerIcon, BannerMessage, BannerActions } = Banner
@@ -45,20 +46,26 @@ export const Examples = () => {
       <div>
         <PaddedTypography variant="h2">Icon + Text</PaddedTypography>
         <Banner>
-          <BannerIcon color="#DEEDEE">
-            <Icon name="thumbs_up" color="#007079  " />
+          <BannerIcon>
+            <Icon name="thumbs_up" />
           </BannerIcon>
           <BannerMessage>
             We are in the making of a new design for this page.
           </BannerMessage>
         </Banner>
       </div>
+      <Banner>
+        <BannerIcon variant="warning">
+          <Icon name="thumbs_down" />
+        </BannerIcon>
+        <BannerMessage>Some warning information.</BannerMessage>
+      </Banner>
       <div>
         <PaddedTypography variant="h2">Text + Action</PaddedTypography>
         <Banner>
           <BannerMessage>
             You are signed on with another account than Equinor account:
-            name.lastname@mail.com
+            name.lastname@mail.com.
           </BannerMessage>
           <InlineBannerActions>
             <Button variant="ghost" style={{ marginRight: '1rem' }}>
@@ -85,8 +92,8 @@ export const Examples = () => {
       <div>
         <PaddedTypography variant="h2">Icon + Text + Actions</PaddedTypography>
         <Banner>
-          <BannerIcon color="#FFE0E7">
-            <Icon name="mood_sad" color="#EB0037" />
+          <BannerIcon variant="warning">
+            <Icon name="mood_sad" />
           </BannerIcon>
           <BannerMessage>
             This tag is not being preserved yet. Click start preservation to
@@ -98,14 +105,14 @@ export const Examples = () => {
         </Banner>
       </div>
       <Banner>
-        <BannerIcon color="#FFE0E7">
-          <Icon name="save" color="#EB0037" />
+        <BannerIcon>
+          <Icon name="save" />
         </BannerIcon>
         <BannerMessage>
           I'm such a really really long message about some sad saving news that
           there is not enough space for the actions on my left. That's why the
           actions have been located at the bottom using the placement prop
-          instead
+          instead.
         </BannerMessage>
         <InlineBannerActions placement="bottom">
           <Button style={{ marginRight: '1rem' }}>First action</Button>

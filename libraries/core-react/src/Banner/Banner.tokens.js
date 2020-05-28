@@ -9,14 +9,11 @@ const {
     comfortable: { medium: spacingMedium },
   },
   colors: {
-    ui: {
-      background__default: { rgba: backgroundColorDefault },
-      background__light: { rgba: backgroundColor },
-    },
-    interactive: {
-      primary__resting: { rgba: primaryColor },
-
-      danger__highlight: { rgba: errorBackgroundHover },
+    infographic: {
+      primary__moss_green_13: { rgba: infoBackground },
+      primary__energy_red_13: { rgba: warningBackground },
+      primary__moss_green_100: { rgba: infoColor },
+      primary__energy_red_100: { rgba: warningColor },
     },
   },
   shape: {
@@ -31,6 +28,15 @@ export const banner = {
     },
     spacings: spacingMedium,
     icon: {
+      info: {
+        background: infoBackground,
+        color: infoColor,
+      },
+      warning: {
+        background: warningBackground,
+        color: warningColor,
+      },
+
       shape: {
         minHeight,
         minWidth,
