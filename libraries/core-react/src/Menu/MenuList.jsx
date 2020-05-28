@@ -55,6 +55,28 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   const handleKeyPress = (event) => {
     const { key, target } = event
 
+    if (key === 'Enter' || key === ' ') {
+      // https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/js/PopupMenuItemLinks.js
+      // simulate click event
+      // Create simulated mouse event to mimic the behavior of ATs
+      // and let the event handler handleClick do the housekeeping.
+      // try {
+      //   clickEvent = new MouseEvent('click', {
+      //     'view': window,
+      //     'bubbles': true,
+      //     'cancelable': true
+      //   });
+      // }
+      // catch (err) {
+      //   if (document.createEvent) {
+      //     // DOM Level 3 for IE 9+
+      //     clickEvent = document.createEvent('MouseEvents');
+      //     clickEvent.initEvent('click', true, true);
+      //   }
+      // }
+      // tgt.dispatchEvent(clickEvent);
+    }
+
     if (key === 'ArrowDown') {
       handleMenuItemChange('down', firstFocusIndex)
     }
@@ -65,10 +87,10 @@ export const MenuList = React.forwardRef(function EdsMenuList(
       const {
         dataset: { index },
       } = target
-      setSubMenu(target, parseInt(index, 0))
+      setSubMenu(target, parseInt(index, 0), 'first')
     }
     if (key === 'ArrowLeft') {
-      setSubMenu(target, -1)
+      setSubMenu(target, -1, 'previous')
     }
   }
 
@@ -88,7 +110,7 @@ MenuList.propTypes = {
     PropTypes.node,
   ]).isRequired,
   /** Focus menuItem */
-  focus: PropTypes.oneOf(['first', 'last']),
+  focus: PropTypes.oneOf(['first', 'last', 'next', 'previouss']),
 }
 
 MenuList.defaultProps = {
