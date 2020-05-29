@@ -18,5 +18,5 @@ export { Chip } from './Chip'
 export { Avatar } from './Avatar'
 export { Search } from './Search'
 export { Tooltip } from './Tooltip'
-export { Progress } from './Progress'
+export { LinearProgress } from './Progress'
 /* eslint-enable */

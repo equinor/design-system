@@ -15,4 +15,9 @@ const {
   },
 } = tokens
 
-export const progress = {}
+export const progress = {
+  linear: {
+    background: greenBase,
+    overlay: greenOverlay,
+  },
+}
