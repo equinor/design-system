@@ -18,4 +18,5 @@ export { Chip } from './Chip'
 export { Avatar } from './Avatar'
 export { Search } from './Search'
 export { Tooltip } from './Tooltip'
+export { Snackbar } from './Snackbar'
 /* eslint-enable */
