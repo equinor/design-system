@@ -24,7 +24,7 @@ export const Determinate = () => {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress === 100) {
-          return 0
+          return 100
         }
         const diff = Math.random() * 10
         return Math.min(oldProgress + diff, 100)
@@ -37,7 +37,7 @@ export const Determinate = () => {
   }, [])
   return (
     <Wrapper>
-      <LinearProgress determinate value={progress} />
+      <LinearProgress variant="determinate" value={progress} />
     </Wrapper>
   )
 }

@@ -44,14 +44,6 @@ const ProgressRoot = styled.div`
 `
 
 const ProgressBar = styled.div`
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  transition: transform 0.2s linear;
-  transform-origin: left;
-  transform: ${(transform) => transform};
   ${({ variant }) =>
     variant === 'indeterminate'
       ? css`
@@ -61,7 +53,16 @@ const ProgressBar = styled.div`
         `
       : css`
           transition: transform 0.4s linear;
+          background: ${tokens.linear.overlay};
         `}
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  transition: transform 0.2s linear;
+  transform-origin: left;
+  ${(transform) => transform};
 `
 const IndeterminateProgress = styled.div`
   width: 100%;
