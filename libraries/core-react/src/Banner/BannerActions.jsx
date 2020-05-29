@@ -6,10 +6,12 @@ import { banner as tokens } from './Banner.tokens'
 const { enabled } = tokens
 
 const StyledBannerActions = styled.div`
+  margin-left: ${enabled.spacings};
   grid-column: ${({ placement }) => (placement === 'bottom' ? '1/-1' : 'auto')};
   ${({ placement }) =>
     placement === 'bottom' && {
       marginTop: enabled.spacings,
+      marginLeft: '0',
     }}
 `
 
