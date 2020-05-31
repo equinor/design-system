@@ -100,7 +100,7 @@ export const tabPanels = () => {
   )
 }
 
-export const tabsBug = () => {
+export const tabsAndSearch = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
