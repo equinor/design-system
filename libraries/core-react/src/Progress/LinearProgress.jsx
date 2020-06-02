@@ -53,7 +53,7 @@ const ProgressBar = styled.div`
         `
       : css`
           transition: transform 0.4s linear;
-          background: ${tokens.linear.overlay};
+          background-color: ${tokens.linear.overlay};
         `}
   width: 100%;
   position: absolute;
@@ -95,13 +95,16 @@ const LinearProgress = forwardRef(function LinearProgress(
   }
 
   const progressProps = {
+    variant,
     transform: barStyle,
   }
 
   return (
     <ProgressRoot {...rootProps} role="progressbar">
-      <ProgressBar {...progressProps} />
-      {variant === 'indeterminate' && <IndeterminateProgress />}
+      <ProgressBar className="progressBar" {...progressProps} />
+      {variant === 'indeterminate' && (
+        <IndeterminateProgress className="indeterminate" />
+      )}
     </ProgressRoot>
   )
 })
