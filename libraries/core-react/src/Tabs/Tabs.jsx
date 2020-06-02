@@ -4,7 +4,7 @@ import createId from 'lodash.uniqueid'
 import { TabsProvider } from './Tabs.context'
 
 const Tabs = forwardRef(function Tabs(
-  { activeTab, onChange, variant, ...props },
+  { activeTab, onChange, onBlur, onFocus, variant, ...props },
   ref,
 ) {
   const tabsId = useMemo(() => createId('tabs-'), [])
@@ -38,7 +38,22 @@ const Tabs = forwardRef(function Tabs(
         tabsFocused,
       }}
     >
-      <div ref={ref} {...props} onBlur={handleBlur} onFocus={handleFocus} />
+      <div
+        ref={ref}
+        {...props}
+        onBlur={(e) => {
+          if (onBlur) {
+            onBlur(e)
+          }
+          handleBlur()
+        }}
+        onFocus={(e) => {
+          if (onFocus) {
+            onFocus(e)
+          }
+          handleFocus()
+        }}
+      />
     </TabsProvider>
   )
 })
@@ -48,6 +63,10 @@ Tabs.propTypes = {
   activeTab: PropTypes.number,
   /** The callback function for selecting a tab */
   onChange: PropTypes.func,
+  /** The callback function for removing focus from a tab */
+  onBlur: PropTypes.func,
+  /** The callback function for focusing on a tab */
+  onFocus: PropTypes.func,
   /** Sets the width of the tabs */
   variant: PropTypes.oneOf(['fullWidth', 'minWidth']),
   /** @ignore */
@@ -57,6 +76,8 @@ Tabs.propTypes = {
 Tabs.defaultProps = {
   activeTab: 0,
   onChange: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
   variant: 'minWidth',
 }
 

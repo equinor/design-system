@@ -2,6 +2,7 @@ import React, { useState, useEffect, createRef, useRef } from 'react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Tabs, Typography, Search } from '@equinor/eds-core-react'
+import { action } from '@storybook/addon-actions'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
@@ -111,6 +112,15 @@ export const tabsAndSearch = () => {
   const handleChange = (index) => {
     setActiveTab(index)
   }
+
+  const handleFocus = (e) => {
+    action('handleFocus')(e.target.textContent)
+  }
+
+  const handleBlur = (e) => {
+    action('handleBlur')(e.target.textContent)
+  }
+
   return (
     <div style={{ margin: '4rem' }}>
       <Search
@@ -123,6 +133,8 @@ export const tabsAndSearch = () => {
         activeTab={activeTab}
         onChange={handleChange}
         variant="fullWidth"
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       >
         <TabList>
           <Tab>Tags (5+)</Tab>
