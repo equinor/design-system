@@ -13,19 +13,21 @@ const Tabs = forwardRef(function Tabs(
 
   let blurTimer
 
-  const handleBlur = () => {
+  const handleBlur = (e) => {
     blurTimer = setTimeout(() => {
       if (tabsFocused) {
         setTabsFocused(false)
       }
     }, 0)
+    onBlur(e)
   }
 
-  const handleFocus = () => {
+  const handleFocus = (e) => {
     clearTimeout(blurTimer)
     if (!tabsFocused) {
       setTabsFocused(true)
     }
+    onFocus(e)
   }
 
   return (
@@ -38,22 +40,7 @@ const Tabs = forwardRef(function Tabs(
         tabsFocused,
       }}
     >
-      <div
-        ref={ref}
-        {...props}
-        onBlur={(e) => {
-          if (onBlur) {
-            onBlur(e)
-          }
-          handleBlur()
-        }}
-        onFocus={(e) => {
-          if (onFocus) {
-            onFocus(e)
-          }
-          handleFocus()
-        }}
-      />
+      <div ref={ref} {...props} onBlur={handleBlur} onFocus={handleFocus} />
     </TabsProvider>
   )
 })
