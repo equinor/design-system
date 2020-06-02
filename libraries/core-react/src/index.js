@@ -19,4 +19,5 @@ export { Avatar } from './Avatar'
 export { Search } from './Search'
 export { Tooltip } from './Tooltip'
 export { LinearProgress } from './Progress'
+export { CircularProgress } from './Progress'
 /* eslint-enable */

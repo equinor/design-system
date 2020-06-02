@@ -9,9 +9,7 @@ const Anchor = styled.div`
   display: flex;
   width: auto;
   justify-content: center;
-  &:hover,
-  &:focus,
-  &:focus-within {
+  &:hover {
     > :last-child {
       display: block;
     }

@@ -18,11 +18,36 @@ export default {
 }
 
 export const Determinate = () => {
-  return <Wrapper></Wrapper>
+  const [progress, setProgress] = React.useState(0)
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          return 100
+        }
+        const diff = Math.random() * 10
+        return Math.min(oldProgress + diff, 100)
+      })
+    }, 500)
+
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
+  return (
+    <Wrapper>
+      <CircularProgress variant="determinate" value={progress} />
+    </Wrapper>
+  )
 }
 
 export const Indeterminate = () => {
-  return <Wrapper></Wrapper>
+  return (
+    <Wrapper>
+      <CircularProgress />
+    </Wrapper>
+  )
 }
 
 export const WithKnobs = () => {
