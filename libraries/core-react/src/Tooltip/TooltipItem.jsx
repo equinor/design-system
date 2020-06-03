@@ -47,10 +47,10 @@ const TooltipArrow = styled.svg`
   fill: inherit;
 `
 
-export const TooltipItem = forwardRef(function TooltipItem(
-  { className, title, placement, ...rest },
-  ref,
-) {
+export const TooltipItem = forwardRef(function TooltipItem({
+  title,
+  placement,
+}) {
   const wrapperProps = {
     right: tokens.placement[placement].tooltipRight,
     top: tokens.placement[placement].tooltipTop,

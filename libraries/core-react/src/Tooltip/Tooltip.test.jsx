@@ -22,8 +22,9 @@ afterEach(cleanup)
 describe('Tooltip', () => {
   it('Tooltip has correct placement', () => {
     const { container } = render(<Tooltip placement="topRight">Anchor</Tooltip>)
-    const tooltipWrapper = container.lastElementChild
-    const tooltip = tooltipWrapper.lastChild
+    const tooltipWrapper = container.lastChild
+    const tooltip = tooltipWrapper.firstChild
+
     expect(tooltipWrapper).toHaveStyleRule('display', 'flex')
     expect(tooltip).toHaveStyleRule('top', `${topRight.tooltipTop}`)
     expect(tooltip).toHaveStyleRule('right', `${topRight.tooltipRight}`)
