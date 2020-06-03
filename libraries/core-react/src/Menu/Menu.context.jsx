@@ -47,8 +47,8 @@ export const useMenu = () => {
     const nextIndex = index === state.subMenu.index ? -1 : index
     setState({
       ...state,
-      focusedIndex: -1,
       subMenu: {
+        previous: state.subMenu.index,
         index: nextIndex,
         left: nextIndex > -1 ? offset : undefined,
         top: 0,

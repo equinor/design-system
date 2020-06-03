@@ -18,7 +18,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   { children, focus, ...rest },
   ref,
 ) {
-  const { focusedIndex, setFocusedIndex, setSubMenu } = useMenu()
+  const { focusedIndex, setFocusedIndex, setSubMenu, subMenu } = useMenu()
 
   const updatedChildren = React.Children.map(children, (child, index) =>
     React.cloneElement(child, {
@@ -90,7 +90,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
       setSubMenu(target, parseInt(index, 0), 'first')
     }
     if (key === 'ArrowLeft') {
-      setSubMenu(target, -1, 'previous')
+      // setSubMenu(target, subMenu.previous)
     }
   }
 
