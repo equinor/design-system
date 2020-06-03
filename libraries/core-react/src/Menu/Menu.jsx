@@ -55,6 +55,8 @@ Menu.propTypes = {
   left: PropTypes.number,
   /** Position from top */
   top: PropTypes.number,
+  /** @ignore */
+  anchorIndex: PropTypes.number,
 }
 
 Menu.defaultProps = {
@@ -64,6 +66,7 @@ Menu.defaultProps = {
   isopen: false,
   top: undefined,
   left: undefined,
+  anchorIndex: -1,
 }
 
 Menu.displayName = 'eds-menu'

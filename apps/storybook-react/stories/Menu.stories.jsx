@@ -223,10 +223,18 @@ export const NestedMenu = () => {
               </MenuLabel>
               <Menu>
                 <MenuItem>
-                  <MenuTitle variant="menu_title">Copy</MenuTitle>
+                  <MenuLabel>
+                    <Icon name="folder" />
+                  </MenuLabel>
+                  <MenuTitle variant="menu_title">Open</MenuTitle>
+                  <MenuLabel>CTRL+O</MenuLabel>
+                </MenuItem>
+                <MenuItem active>
                   <MenuLabel>
                     <Icon name="copy" />
                   </MenuLabel>
+                  <MenuTitle>Copy (Active)</MenuTitle>
+                  <MenuLabel>CTRL+C</MenuLabel>
                 </MenuItem>
               </Menu>
             </MenuItem>
@@ -237,10 +245,24 @@ export const NestedMenu = () => {
               </MenuLabel>
               <Menu>
                 <MenuItem>
-                  <MenuTitle variant="menu_title">Copy</MenuTitle>
-                  <MenuLabel>
-                    <Icon name="copy" />
-                  </MenuLabel>
+                  <Icon name="folder" />
+                  <span>Open</span>
+                  <span>CTRL+O</span>
+                </MenuItem>
+                <MenuItem active>
+                  <Icon name="copy" />
+                  <span>Copy</span>
+                  <span>CTRL+C</span>
+                </MenuItem>
+                <MenuItem>
+                  <Icon name="paste" />
+                  <span>Paste</span>
+                  <span>CTRL+V</span>
+                </MenuItem>
+                <MenuItem>
+                  <Icon name="edit" />
+                  <span>Rename</span>
+                  <span>CTRL+R</span>
                 </MenuItem>
               </Menu>
             </MenuItem>
