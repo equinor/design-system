@@ -10,8 +10,8 @@ const Anchor = styled.div`
   width: auto;
   justify-content: center;
   &:hover,
-  &:focus,
-  &:focus-within {
+  &[data-focus-visible-added]:focus {
+    outline: none;
     > :last-child {
       display: block;
     }
@@ -49,13 +49,12 @@ const StyledTooltip = styled.div`
 `
 
 const TooltipArrow = styled.svg`
-  ${({ top, bottom, right, left, transform }) =>
+  ${({ top, bottom, right, left }) =>
     css`
       bottom: ${bottom};
       top: ${top};
       right: ${right};
       left: ${left};
-      transform: ${transform};
     `}
   width: ${tokens.arrow.width};
   height: ${tokens.arrow.height};
@@ -86,15 +85,19 @@ export const Tooltip = forwardRef(function Tooltip(
     right: tokens.placement[placement].arrowRight,
     top: tokens.placement[placement].arrowTop,
     bottom: tokens.placement[placement].arrowBottom,
-    transform: tokens.placement[placement].arrowTransform,
   }
 
   return (
-    <Anchor {...props}>
+    <Anchor {...props} tabIndex={0}>
       {children}
       <StyledTooltipWrapper {...wrapperProps}>
         <StyledTooltip>
-          <TooltipArrow {...arrowProps}>
+          <TooltipArrow
+            {...arrowProps}
+            style={{
+              transform: `${tokens.placement[placement].arrowTransform}`,
+            }}
+          >
             <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
           </TooltipArrow>
           {title}
