@@ -21,4 +21,5 @@ export { Tooltip } from './Tooltip'
 export { LinearProgress } from './Progress'
 export { CircularProgress } from './Progress'
 export { DotProgress } from './Progress'
+export { StarProgress } from './Progress'
 /* eslint-enable */

@@ -36,10 +36,6 @@ export const WithKnobs = () => {
   return <Wrapper></Wrapper>
 }
 
-Determinate.story = {
-  name: 'Determinate',
-}
-
 Variants.story = {
   name: 'Variants',
 }

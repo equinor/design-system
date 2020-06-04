@@ -22,7 +22,11 @@ export const Determinate = () => {
 }
 
 export const Indeterminate = () => {
-  return <Wrapper></Wrapper>
+  return (
+    <Wrapper>
+      <StarProgress />
+    </Wrapper>
+  )
 }
 
 export const WithKnobs = () => {
