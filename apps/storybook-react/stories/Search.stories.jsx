@@ -72,7 +72,7 @@ export const Examples = () => {
           onChange={handleOnChange}
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
-          value="Predefined value"
+          defaultValue="Predefined value"
         />
       </Rows>
       <Rows>

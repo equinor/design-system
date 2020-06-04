@@ -60,7 +60,11 @@ describe('Search', () => {
     })
 
     render(
-      <Search id={searchId} value="initial value" onChange={handleOnChange} />,
+      <Search
+        id={searchId}
+        defaultValue="initial value"
+        onChange={handleOnChange}
+      />,
     )
     const clearButton = screen.queryByRole('button')
     const searchBox = screen.queryByRole('searchbox')

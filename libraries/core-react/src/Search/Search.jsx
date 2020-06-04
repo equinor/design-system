@@ -162,21 +162,31 @@ const InsideButton = styled.div`
 `
 
 export const Search = React.forwardRef(function EdsSearch(
-  { onChange, value: initValue, className, disabled, onBlur, onFocus, ...rest },
+  {
+    onChange,
+    defaultValue,
+    value,
+    className,
+    disabled,
+    onBlur,
+    onFocus,
+    ...rest
+  },
   ref,
 ) {
+  const isControlled = typeof value !== 'undefined'
   const inputRef = useCombinedRefs(useRef(null), ref)
   const [state, setState] = useState({
-    value: initValue,
-    isActive: initValue !== '',
+    value: defaultValue,
+    isActive: value !== '' || defaultValue !== '',
     isFocused: false,
   })
 
-  useEffect(() => {
-    if (typeof initValue !== 'undefined') {
-      setValue(initValue)
-    }
-  }, [initValue])
+  // useEffect(() => {
+  //   if (typeof defaultValue !== 'undefined') {
+  //     setValue(defaultValue)
+  //   }
+  // }, [defaultValue])
 
   const handleOnClick = () => inputRef.current.focus()
   const handleFocus = () => setState({ ...state, isFocused: true })
@@ -184,14 +194,14 @@ export const Search = React.forwardRef(function EdsSearch(
   const handleOnChange = (target) => setValue(target.value)
   const handleOnDelete = () => {
     const input = inputRef.current
-    const value = ''
-    setReactInputValue(input, value)
-    setState({ ...state, isActive: false, value })
+    const clearedValue = ''
+    setReactInputValue(input, clearedValue)
+    setState({ ...state, isActive: false, value: clearedValue })
   }
   const setValue = (value) =>
     setState({ ...state, isActive: value !== '', value })
 
-  const { value, isActive, isFocused } = state
+  const { isActive, isFocused } = state
   const size = 16
 
   const containerProps = {
@@ -205,8 +215,8 @@ export const Search = React.forwardRef(function EdsSearch(
 
   const inputProps = {
     ...rest,
-    value,
     disabled,
+    value: isControlled ? value : state.value,
     ref: inputRef,
     type: 'search',
     role: 'searchbox',
@@ -224,7 +234,9 @@ export const Search = React.forwardRef(function EdsSearch(
       }
     },
     onChange: (e) => {
-      handleOnChange(e)
+      if (!isControlled) {
+        handleOnChange(e)
+      }
       if (onChange) {
         onChange(e)
       }
@@ -263,6 +275,8 @@ Search.propTypes = {
   disabled: PropTypes.bool,
   /** onChange handler */
   onChange: PropTypes.func,
+  /** Default value for search field */
+  defaultValue: PropTypes.string,
   /** Value for search field */
   value: PropTypes.string,
   /** onBlur handler */
@@ -276,7 +290,8 @@ Search.defaultProps = {
   placeholder: '',
   disabled: false,
   onChange: undefined,
-  value: '',
+  defaultValue: '',
+  value: undefined,
   onBlur: undefined,
   onFocus: undefined,
 }
