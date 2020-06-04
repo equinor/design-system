@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
@@ -172,17 +172,24 @@ export const Search = React.forwardRef(function EdsSearch(
     isFocused: false,
   })
 
+  useEffect(() => {
+    if (typeof initValue !== 'undefined') {
+      setValue(initValue)
+    }
+  }, [initValue])
+
   const handleOnClick = () => inputRef.current.focus()
   const handleFocus = () => setState({ ...state, isFocused: true })
   const handleBlur = () => setState({ ...state, isFocused: false })
-  const handleOnChange = ({ target: { value } }) =>
-    setState({ ...state, isActive: value !== '', value })
+  const handleOnChange = (target) => setValue(target.value)
   const handleOnDelete = () => {
     const input = inputRef.current
     const value = ''
     setReactInputValue(input, value)
     setState({ ...state, isActive: false, value })
   }
+  const setValue = (value) =>
+    setState({ ...state, isActive: value !== '', value })
 
   const { value, isActive, isFocused } = state
   const size = 16

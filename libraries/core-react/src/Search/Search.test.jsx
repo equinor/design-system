@@ -103,4 +103,14 @@ describe('Search', () => {
     expect(handleOnBlur).toHaveBeenCalled()
     expect(callbackId).toEqual(searchId)
   })
+
+  it('Has new value, when value property is changed after first render', () => {
+    const { rerender } = render(<Search value="old" />)
+
+    rerender(<Search value="new" />)
+
+    const searchBox = screen.queryByRole('searchbox')
+
+    expect(searchBox.value).toEqual('new')
+  })
 })
