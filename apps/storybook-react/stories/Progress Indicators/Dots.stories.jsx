@@ -12,18 +12,21 @@ const Wrapper = styled.div`
   transition: all 0.36s;
 `
 
+const Background = styled.div`
+  background-color: grey;
+`
+
 export default {
   title: 'Components|Progress Indicators/Dots',
   component: DotProgress,
 }
 
-export const Determinate = () => {
-  return <Wrapper></Wrapper>
-}
-
-export const Indeterminate = () => {
+export const Variants = () => {
   return (
     <Wrapper>
+      <Background>
+        <DotProgress variant="white" />
+      </Background>
       <DotProgress variant="green" />
     </Wrapper>
   )
@@ -37,8 +40,8 @@ Determinate.story = {
   name: 'Determinate',
 }
 
-Indeterminate.story = {
-  name: 'Indeterminate',
+Variants.story = {
+  name: 'Variants',
 }
 
 WithKnobs.story = {

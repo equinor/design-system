@@ -78,10 +78,14 @@ const IndeterminateProgress = styled.div`
 `
 
 const LinearProgress = forwardRef(function LinearProgress(
-  { children, variant, className, value, ...props },
+  { variant, className, value, ...props },
   ref,
 ) {
-  const rootProps = {}
+  const rootProps = {
+    ...props,
+    ref,
+    className,
+  }
   let barStyle
   if (variant === 'determinate') {
     if (value !== undefined) {
