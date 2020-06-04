@@ -113,8 +113,6 @@ LinearProgress.displayName = 'eds-linear-progress'
 
 LinearProgress.propTypes = {
   /** @ignore */
-  children: PropTypes.node.isRequired,
-  /** @ignore */
   className: PropTypes.string,
   /* Variant
    * Use indeterminate when there is no progress value */

@@ -20,4 +20,5 @@ export { Search } from './Search'
 export { Tooltip } from './Tooltip'
 export { LinearProgress } from './Progress'
 export { CircularProgress } from './Progress'
+export { DotProgress } from './Progress'
 /* eslint-enable */

@@ -2,22 +2,6 @@ import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from './Progress.tokens'
-import { cake } from '@equinor/eds-icons'
-
-function getRelativeValue(value, min, max) {
-  return (Math.min(Math.max(min, value), max) - min) / (max - min)
-}
-
-function easeOut(t) {
-  t = getRelativeValue(t, 0, 1)
-  // https://gist.github.com/gre/1650294
-  t = (t -= 1) * t * t + 1
-  return t
-}
-
-function easeIn(t) {
-  return t * t
-}
 
 const indeterminate = keyframes`
   0% {
@@ -50,16 +34,19 @@ const ProgressRoot = styled.div`
   width: 48px;
   color: ${tokens.linear.background};
   ${({ variant }) =>
-    variant === 'indeterminate' &&
-    css`
-      animation: ${indeterminate} 1.4s linear infinite;
-    `};
+    variant === 'indeterminate'
+      ? css`
+          animation: ${indeterminate} 1.4s linear infinite;
+        `
+      : css`
+          transform: rotate(-90deg);
+        `};
 `
 const StyledSvg = styled.svg`
   display: block;
 `
 
-const StyledCircle = styled.circle`
+const BaseCircle = styled.circle`
   stroke: ${tokens.linear.background};
 `
 
@@ -89,35 +76,25 @@ const CircularProgress = forwardRef(function CircularProgress(
     variant,
   }
   const circleStyle = {}
-  let barStyle
   const circumference = 2 * Math.PI * ((48 - thickness) / 2)
   if (variant === 'determinate') {
     circleStyle.stroke = circumference.toFixed(3)
-    rootProps['aria-valuenow'] = Math.round(value)
     circleStyle.strokeDashoffset = `${(
-      easeIn((100 - value) / 100) * circumference
+      ((100 - value) / 100) *
+      circumference
     ).toFixed(3)}px`
-    rootProps.transform = `rotate(${(easeOut(value / 70) * 270).toFixed(3)}deg)`
-
+    rootProps['aria-valuenow'] = Math.round(value)
     if (value !== undefined) {
       rootProps['aria-valuenow'] = Math.round(value)
       rootProps['aria-valuemin'] = 0
       rootProps['aria-valuemax'] = 100
-      const transform = value - 100
-
-      barStyle = `translateX(${transform}%)`
     }
-  }
-
-  const progressProps = {
-    variant,
-    transform: barStyle,
   }
 
   return (
     <ProgressRoot {...rootProps} role="progressbar">
       <StyledSvg viewBox="24 24 48 48">
-        <StyledCircle
+        <BaseCircle
           style={circleStyle}
           cx={48}
           cy={48}
@@ -133,7 +110,7 @@ const CircularProgress = forwardRef(function CircularProgress(
           fill="none"
           strokeLinecap="round"
           strokeWidth={thickness}
-          strokeDasharray={48}
+          strokeDasharray={variant === 'determinate' ? circumference : 48}
         />
       </StyledSvg>
     </ProgressRoot>
@@ -143,8 +120,6 @@ const CircularProgress = forwardRef(function CircularProgress(
 CircularProgress.displayName = 'eds-circular-progress'
 
 CircularProgress.propTypes = {
-  /** @ignore */
-  children: PropTypes.node.isRequired,
   /** @ignore */
   className: PropTypes.string,
   /* Variant

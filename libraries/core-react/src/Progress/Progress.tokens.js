@@ -9,9 +9,6 @@ const {
     logo: {
       fill_positive: { rgba: starColor },
     },
-    interactive: {
-      primary__resting: { rgba: dotsColor },
-    },
   },
 } = tokens
 
@@ -19,5 +16,16 @@ export const progress = {
   linear: {
     background: greenBase,
     overlay: greenOverlay,
+  },
+  dots: {
+    white: {
+      color: '#fff',
+    },
+    green: {
+      color: greenOverlay,
+    },
+  },
+  star: {
+    background: starColor,
   },
 }

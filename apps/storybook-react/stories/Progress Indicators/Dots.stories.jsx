@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Checkbox, DotsProgress } from '@equinor/eds-core-react'
+import { Checkbox, DotProgress } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
 export default {
   title: 'Components|Progress Indicators/Dots',
-  component: DotsProgress,
+  component: DotProgress,
 }
 
 export const Determinate = () => {
@@ -22,7 +22,11 @@ export const Determinate = () => {
 }
 
 export const Indeterminate = () => {
-  return <Wrapper></Wrapper>
+  return (
+    <Wrapper>
+      <DotProgress variant="green" />
+    </Wrapper>
+  )
 }
 
 export const WithKnobs = () => {
