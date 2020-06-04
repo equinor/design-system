@@ -60,30 +60,13 @@ const StyledSvg = styled.svg`
 `
 
 const StyledCircle = styled.circle`
+  stroke: ${tokens.linear.background};
+`
+
+const ProgressCircle = styled.circle`
   stroke: ${tokens.linear.overlay};
 `
 
-const ProgressCircle = styled.div`
-  ${({ variant }) =>
-    variant === 'indeterminate'
-      ? css`
-          width: auto;
-          animation: ${indeterminate1} 2.1s
-            cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-        `
-      : css`
-          transition: transform 0.4s linear;
-          background-color: ${tokens.linear.overlay};
-        `}
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  transition: transform 0.2s linear;
-  transform-origin: left;
-  ${(transform) => transform};
-`
 const IndeterminateProgress = styled.div`
   width: 100%;
   position: absolute;
@@ -102,17 +85,19 @@ const CircularProgress = forwardRef(function CircularProgress(
   ref,
 ) {
   const thickness = 4
-  const rootProps = {}
+  const rootProps = {
+    variant,
+  }
   const circleStyle = {}
   let barStyle
+  const circumference = 2 * Math.PI * ((48 - thickness) / 2)
   if (variant === 'determinate') {
-    const circumference = 2 * Math.PI * ((48 - thickness) / 2)
     circleStyle.stroke = circumference.toFixed(3)
     rootProps['aria-valuenow'] = Math.round(value)
     circleStyle.strokeDashoffset = `${(
       easeIn((100 - value) / 100) * circumference
     ).toFixed(3)}px`
-    rootStyle.transform = `rotate(${(easeOut(value / 70) * 270).toFixed(3)}deg)`
+    rootProps.transform = `rotate(${(easeOut(value / 70) * 270).toFixed(3)}deg)`
 
     if (value !== undefined) {
       rootProps['aria-valuenow'] = Math.round(value)
@@ -139,6 +124,16 @@ const CircularProgress = forwardRef(function CircularProgress(
           r={(48 - thickness) / 2}
           fill="none"
           strokeWidth={thickness}
+        />
+        <ProgressCircle
+          style={circleStyle}
+          cx={48}
+          cy={48}
+          r={(48 - thickness) / 2}
+          fill="none"
+          strokeLinecap="round"
+          strokeWidth={thickness}
+          strokeDasharray={48}
         />
       </StyledSvg>
     </ProgressRoot>
