@@ -31,6 +31,7 @@ export const Snackbar = ({
   onClose,
   centerAlignFrom,
   children,
+  className,
 }) => {
   const [visible, setVisible] = useState(open)
   useEffect(() => {
@@ -46,7 +47,7 @@ export const Snackbar = ({
   return (
     <>
       {visible && (
-        <StyledSnackbar centerAlignFrom={centerAlignFrom}>
+        <StyledSnackbar centerAlignFrom={centerAlignFrom} className={className}>
           {children}
         </StyledSnackbar>
       )}
@@ -63,6 +64,8 @@ Snackbar.propTypes = {
   autoHideDuration: PropTypes.number,
   /** @ignore */
   children: PropTypes.node.isRequired,
+  /** @ignore */
+  className: PropTypes.string,
   /** Callback fired when the snackbar is closed by auto hide duration timeout */
   onClose: PropTypes.func,
   /** Media query from which the snackbar will be horizontal centered */
@@ -74,4 +77,5 @@ Snackbar.defaultProps = {
   onClose: undefined,
   open: false,
   centerAlignFrom: '750px',
+  className: undefined,
 }

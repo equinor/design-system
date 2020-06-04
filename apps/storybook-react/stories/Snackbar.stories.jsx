@@ -25,6 +25,19 @@ export const Page = () => {
   return (
     <Wrapper>
       <div>
+        <Button type="button" onClick={() => setOpen(true)}>
+          Show simple snackbar
+        </Button>
+        <Snackbar
+          open={open}
+          onClose={() => setOpen(false)}
+          autoHideDuration={5000}
+          centerAlignFrom="1000px"
+        >
+          Message goes here
+        </Snackbar>
+      </div>
+      <div>
         <Button type="button" onClick={() => setWithActionOpen(true)}>
           Show snackbar with action
         </Button>
@@ -36,19 +49,6 @@ export const Page = () => {
           <SnackbarAction>
             <Button variant="ghost">Undo</Button>
           </SnackbarAction>
-        </Snackbar>
-      </div>
-      <div>
-        <Button type="button" onClick={() => setOpen(true)}>
-          Show simple snackbar
-        </Button>
-        <Snackbar
-          open={open}
-          onClose={() => setOpen(false)}
-          autoHideDuration={5000}
-          centerAlignFrom="1000px"
-        >
-          Message goes here
         </Snackbar>
       </div>
     </Wrapper>
