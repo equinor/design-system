@@ -43,8 +43,9 @@ export const BannerIcon = ({ children, variant, ...props }) => {
 BannerIcon.displayName = 'eds-banner-icon'
 
 BannerIcon.propTypes = {
-  /** Variant of icon  */
+  /** Which icon to use  */
   variant: PropTypes.oneOf(['info', 'warning']),
+  /** @ignore */
   children: PropTypes.node.isRequired,
 }
 
