@@ -18,7 +18,7 @@ export default {
   component: Snackbar,
 }
 
-export const Page = () => {
+export const Example = () => {
   const [open, setOpen] = useState(false)
   const [withActionOpen, setWithActionOpen] = useState(false)
 
@@ -26,7 +26,7 @@ export const Page = () => {
     <Wrapper>
       <div>
         <Button type="button" onClick={() => setOpen(true)}>
-          Show simple snackbar
+          Show a simple snackbar for 5 seconds
         </Button>
         <Snackbar
           open={open}
@@ -39,7 +39,7 @@ export const Page = () => {
       </div>
       <div>
         <Button type="button" onClick={() => setWithActionOpen(true)}>
-          Show snackbar with action
+          Show a snackbar with action for the default 7 seconds
         </Button>
         <Snackbar
           open={withActionOpen}
@@ -53,4 +53,53 @@ export const Page = () => {
       </div>
     </Wrapper>
   )
+}
+
+const autoHideDurationOptions = {
+  Five: 5000,
+  Six: 6000,
+  Seven: 7000,
+  Eight: 8000,
+  Nine: 9000,
+  Ten: 10000,
+}
+
+const actionOptions = {
+  none: null,
+  undoButton: 'button',
+}
+
+export const knobs = () => {
+  const [open, setOpen] = useState(false)
+  const message = text('Message', 'Message goes here')
+  const duration = select('Duration in seconds', autoHideDurationOptions)
+  const action = select('Action', actionOptions)
+
+  return (
+    <Wrapper>
+      <div>
+        <Button onClick={() => setOpen(true)}>Trigger snackbar</Button>
+      </div>
+      {open && (
+        <Snackbar
+          open={open}
+          onClose={() => setOpen(false)}
+          autoHideDuration={duration}
+        >
+          {message}
+          {action}
+          {action && (
+            <SnackbarAction>
+              <Button variant="ghost">Undo</Button>
+            </SnackbarAction>
+          )}
+        </Snackbar>
+      )}
+    </Wrapper>
+  )
+}
+
+knobs.story = {
+  name: 'With knobs',
+  decorators: [withKnobs],
 }

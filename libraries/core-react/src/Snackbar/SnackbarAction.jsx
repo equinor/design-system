@@ -15,5 +15,6 @@ export const SnackbarAction = ({ children }) => {
 }
 
 SnackbarAction.propTypes = {
-  children: PropTypes.node,
+  /** @ignore */
+  children: PropTypes.node.isRequired,
 }
