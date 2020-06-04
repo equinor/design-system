@@ -23,7 +23,6 @@ const NonMarginDivider = styled(Divider)`
 
 export const Banner = ({ children, className, ...props }) => {
   const displayNames = React.Children.map(children, (child) => {
-    /* return child.type?.displayName */
     return child.type && child.type.displayName
   })
   const hasIcon = displayNames.includes('eds-banner-icon')
