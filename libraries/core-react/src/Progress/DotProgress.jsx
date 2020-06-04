@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { progress as tokens } from './Progress.tokens'
 
 const opacity = keyframes`
@@ -27,49 +27,22 @@ const Svg = styled.svg`
   }
 `
 
-const DotWrapper = styled.div`
-  display: flex;
-  justify-items: space-between;
-`
-
-const Dot = styled.circle`
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
-  /* animation: ${opacity} 1s infinite; */
-`
-
 const DotProgress = forwardRef(function DotProgress(
-  { children, variant, className, value, ...props },
+  { variant, className, ...rest },
   ref,
 ) {
-  const rootProps = {}
-  let barStyle
-  if (variant === 'determinate') {
-    if (value !== undefined) {
-      rootProps['aria-valuenow'] = Math.round(value)
-      rootProps['aria-valuemin'] = 0
-      rootProps['aria-valuemax'] = 100
-      const transform = value - 100
-
-      barStyle = `translateX(${transform}%)`
-    }
-  }
-
-  const progressProps = {
-    variant,
-    transform: barStyle,
-  }
-
-  const svgProps = {
+  const props = {
     color: tokens.dots[variant].color,
+    ref,
+    ...rest,
+    className,
   }
 
   return (
-    <Svg {...svgProps} viewBox="0 0 16 4" height="8px" width="32px">
-      <Dot cx={2} cy={2} r={2} />
-      <Dot cx={8} cy={2} r={2} />
-      <Dot cx={14} cy={2} r={2} />
+    <Svg {...props} viewBox="0 0 16 4" height="8px" width="32px">
+      <circle cx={2} cy={2} r={2} />
+      <circle cx={8} cy={2} r={2} />
+      <circle cx={14} cy={2} r={2} />
     </Svg>
   )
 })
