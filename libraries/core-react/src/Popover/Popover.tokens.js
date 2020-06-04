@@ -15,11 +15,13 @@ const {
   shape: {
     corners: { borderRadius },
   },
+  elevation: { overlay: elevation },
 } = tokens
 
 export const popover = {
   header,
   background,
+  elevation,
   popover: {
     minHeight: '48px',
     maxWidth: '560px',
