@@ -4,7 +4,6 @@ dependencies:
   '@equinor/eds-tokens': 'link:../../libraries/tokens'
   '@storybook/react': 5.3.19_a2ca6e9a5fc29e5f4ab9c875ee95f549
   babel-runtime: 6.26.0
-  core-js: 2.6.11
   react-dom: 16.13.1_react@16.13.1
   styled-components: 4.4.1_4f54128445bc6f13bd713dcb3d91e98e
 devDependencies:
@@ -10185,7 +10184,6 @@ specifiers:
   '@storybook/theming': ^5.3.19
   babel-loader: ^8.1.0
   babel-runtime: ^6.26.0
-  core-js: ^2.6.11
   react: ^16.13.1
   react-dom: ^16.13.1
   react-is: ^16.13.1

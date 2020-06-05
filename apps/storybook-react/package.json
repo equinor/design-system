@@ -16,7 +16,6 @@
     "@equinor/eds-tokens": "workspace:*",
     "@storybook/react": "^5.3.19",
     "babel-runtime": "^6.26.0",
-    "core-js": "^2.6.11",
     "react-dom": "^16.13.1",
     "styled-components": "^4.4.1"
   },
