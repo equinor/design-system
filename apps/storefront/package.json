@@ -18,7 +18,7 @@
     "dotenv": "^8.2.0",
     "gatsby": "^2.23.1",
     "gatsby-plugin-manifest": "^2.4.10",
-    "gatsby-plugin-matomo": "^0.7.2",
+    "gatsby-plugin-matomo": "^0.8.3",
     "gatsby-plugin-mdx": "^1.2.14",
     "gatsby-plugin-offline": "^3.2.8",
     "gatsby-plugin-postcss": "^2.3.3",

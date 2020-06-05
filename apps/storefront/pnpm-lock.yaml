@@ -10,7 +10,7 @@ dependencies:
   dotenv: 8.2.0
   gatsby: 2.23.1_ac537c5b0c3de2905f8e1f4fd07938fa
   gatsby-plugin-manifest: 2.4.10_gatsby@2.23.1
-  gatsby-plugin-matomo: 0.7.2_gatsby@2.23.1
+  gatsby-plugin-matomo: 0.8.3_ac537c5b0c3de2905f8e1f4fd07938fa
   gatsby-plugin-mdx: 1.2.14_0110d14208bf670f088eda2bed9b2320
   gatsby-plugin-offline: 3.2.8_gatsby@2.23.1
   gatsby-plugin-postcss: 2.3.3_gatsby@2.23.1
@@ -6959,14 +6959,18 @@ packages:
       gatsby: ^2.4.0
     resolution:
       integrity: sha512-jDh626lHU8MtSk5jW6HrbYaOiisHMMRROjpXXaAQMuSKNKzlkDPluh9CcXVGIfypCXjZMCRgbKtQvbu4TsZKFw==
-  /gatsby-plugin-matomo/0.7.2_gatsby@2.23.1:
+  /gatsby-plugin-matomo/0.8.3_ac537c5b0c3de2905f8e1f4fd07938fa:
     dependencies:
       gatsby: 2.23.1_ac537c5b0c3de2905f8e1f4fd07938fa
+      react: 16.13.1
+      react-dom: 16.13.1_react@16.13.1
     dev: false
     peerDependencies:
-      gatsby: '>=1.9.0'
+      gatsby: '>=2.0.0'
+      react: '>=16.4.2'
+      react-dom: '>=16.4.2'
     resolution:
-      integrity: sha512-49KAdNhvkRWyJ/jHE4dOoXuYB9PDA01rPjWLmrmklsB3cl401Tm7tEvBd7sYrDy99fzeFUQt0qyDKLxW1hH0Hg==
+      integrity: sha512-fv6TgD+WsxziZrtmz6sNF4m9FgSyV+8y3R1sobA5hB5OxJyhs/Y4HVo9jCPRHu5VLKQsg4i7LJhWL0ocJiqEWQ==
   /gatsby-plugin-mdx/1.2.14_0110d14208bf670f088eda2bed9b2320:
     dependencies:
       '@babel/core': 7.10.2
@@ -15984,7 +15988,7 @@ specifiers:
   dotenv: ^8.2.0
   gatsby: ^2.23.1
   gatsby-plugin-manifest: ^2.4.10
-  gatsby-plugin-matomo: ^0.7.2
+  gatsby-plugin-matomo: ^0.8.3
   gatsby-plugin-mdx: ^1.2.14
   gatsby-plugin-offline: ^3.2.8
   gatsby-plugin-postcss: ^2.3.3
