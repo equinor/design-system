@@ -175,18 +175,17 @@ export const Search = React.forwardRef(function EdsSearch(
   ref,
 ) {
   const isControlled = typeof value !== 'undefined'
+  const isActive = (isControlled && value !== '') || defaultValue !== ''
   const inputRef = useCombinedRefs(useRef(null), ref)
   const [state, setState] = useState({
     value: defaultValue,
-    isActive: value !== '' || defaultValue !== '',
+    isActive,
     isFocused: false,
   })
 
-  // useEffect(() => {
-  //   if (typeof defaultValue !== 'undefined') {
-  //     setValue(defaultValue)
-  //   }
-  // }, [defaultValue])
+  useEffect(() => {
+    setState({ ...state, isActive })
+  }, [value, defaultValue])
 
   const handleOnClick = () => inputRef.current.focus()
   const handleFocus = () => setState({ ...state, isFocused: true })
@@ -198,10 +197,26 @@ export const Search = React.forwardRef(function EdsSearch(
     setReactInputValue(input, clearedValue)
     setState({ ...state, isActive: false, value: clearedValue })
   }
-  const setValue = (value) =>
-    setState({ ...state, isActive: value !== '', value })
+  const setValue = (newValue) =>
+    setState({ ...state, isActive: newValue !== '', value: newValue })
 
-  const { isActive, isFocused } = state
+  /** Applying props for controlled vs. uncontrolled scnarios */
+  // eslint-disable-next-line no-shadow
+  const applyControllingProps = (props, value, defaultValue) => {
+    if (isControlled) {
+      return {
+        ...props,
+        value,
+      }
+    }
+
+    return {
+      ...props,
+      defaultValue,
+    }
+  }
+
+  const { isFocused } = state
   const size = 16
 
   const containerProps = {
@@ -213,43 +228,46 @@ export const Search = React.forwardRef(function EdsSearch(
     onClick: handleOnClick,
   }
 
-  const inputProps = {
-    ...rest,
-    disabled,
-    value: isControlled ? value : state.value,
-    ref: inputRef,
-    type: 'search',
-    role: 'searchbox',
-    'aria-label': 'search input',
-    onBlur: (e) => {
-      handleBlur(e)
-      if (onBlur) {
-        onBlur(e)
-      }
+  const inputProps = applyControllingProps(
+    {
+      ...rest,
+      disabled,
+      ref: inputRef,
+      type: 'search',
+      role: 'searchbox',
+      'aria-label': 'search input',
+      onBlur: (e) => {
+        handleBlur(e)
+        if (onBlur) {
+          onBlur(e)
+        }
+      },
+      onFocus: (e) => {
+        handleFocus(e)
+        if (onFocus) {
+          onFocus(e)
+        }
+      },
+      onChange: (e) => {
+        if (!isControlled) {
+          handleOnChange(e)
+        }
+        if (onChange) {
+          onChange(e)
+        }
+      },
     },
-    onFocus: (e) => {
-      handleFocus(e)
-      if (onFocus) {
-        onFocus(e)
-      }
-    },
-    onChange: (e) => {
-      if (!isControlled) {
-        handleOnChange(e)
-      }
-      if (onChange) {
-        onChange(e)
-      }
-    },
-  }
+    value,
+    defaultValue,
+  )
 
   const clearButtonProps = {
-    isActive,
+    isActive: state.isActive,
     size,
     role: 'button',
     onClick: (e) => {
       e.stopPropagation()
-      if (isActive) {
+      if (state.isActive) {
         handleOnDelete()
       }
     },

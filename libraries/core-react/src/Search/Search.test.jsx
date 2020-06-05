@@ -38,7 +38,9 @@ describe('Search', () => {
       callbackValue = value
     })
 
-    render(<Search id={searchId} onChange={handleOnChange} />)
+    render(
+      <Search id={searchId} value="some old value" onChange={handleOnChange} />,
+    )
     const searchBox = screen.queryByRole('searchbox')
 
     fireEvent.change(searchBox, {
