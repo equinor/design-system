@@ -41,21 +41,18 @@ const ProgressRoot = styled.div`
   height: 4px;
   background-color: ${tokens.linear.background};
   width: 100%;
+  border-radius: 50px;
 `
 
 const ProgressBar = styled.div`
   ${({ variant }) =>
-    variant === 'indeterminate'
-      ? css`
-          width: auto;
-          animation: ${indeterminate1} 2.1s
-            cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-        `
-      : css`
-          transition: transform 0.4s linear;
-          background-color: ${tokens.linear.overlay};
-        `}
+    variant === 'determinate' &&
+    css`
+      transition: transform 0.4s linear;
+      background-color: ${tokens.linear.overlay};
+    `}
   width: 100%;
+  border-radius: 50px;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -65,7 +62,8 @@ const ProgressBar = styled.div`
   ${(transform) => transform};
 `
 const IndeterminateProgress = styled.div`
-  width: 100%;
+  width: 75%;
+  border-radius: 50px;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -73,7 +71,7 @@ const IndeterminateProgress = styled.div`
   transition: transform 0.2s linear;
   transform-origin: left;
   background-color: ${tokens.linear.overlay};
-  animation: ${indeterminate2} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s
+  animation: ${indeterminate2} 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 1s
     infinite;
 `
 

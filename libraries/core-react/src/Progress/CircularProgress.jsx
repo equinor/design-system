@@ -68,11 +68,14 @@ const IndeterminateProgress = styled.div`
 `
 
 const CircularProgress = forwardRef(function CircularProgress(
-  { children, variant, className, value, ...props },
+  { variant, className, value, ...props },
   ref,
 ) {
   const thickness = 4
   const rootProps = {
+    ...props,
+    ref,
+    className,
     variant,
   }
   const circleStyle = {}
