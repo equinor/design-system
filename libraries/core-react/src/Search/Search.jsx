@@ -178,7 +178,6 @@ export const Search = React.forwardRef(function EdsSearch(
   const isActive = (isControlled && value !== '') || defaultValue !== ''
   const inputRef = useCombinedRefs(useRef(null), ref)
   const [state, setState] = useState({
-    value: defaultValue,
     isActive,
     isFocused: false,
   })
@@ -190,15 +189,15 @@ export const Search = React.forwardRef(function EdsSearch(
   const handleOnClick = () => inputRef.current.focus()
   const handleFocus = () => setState({ ...state, isFocused: true })
   const handleBlur = () => setState({ ...state, isFocused: false })
-  const handleOnChange = (target) => setValue(target.value)
+  const handleOnChange = (target) => setIsActive(target.value)
   const handleOnDelete = () => {
     const input = inputRef.current
     const clearedValue = ''
     setReactInputValue(input, clearedValue)
-    setState({ ...state, isActive: false, value: clearedValue })
+    setState({ ...state, isActive: false })
   }
-  const setValue = (newValue) =>
-    setState({ ...state, isActive: newValue !== '', value: newValue })
+  const setIsActive = (newValue) =>
+    setState({ ...state, isActive: newValue !== '' })
 
   /** Applying props for controlled vs. uncontrolled scnarios */
   // eslint-disable-next-line no-shadow
@@ -249,9 +248,7 @@ export const Search = React.forwardRef(function EdsSearch(
         }
       },
       onChange: (e) => {
-        if (!isControlled) {
-          handleOnChange(e)
-        }
+        handleOnChange(e)
         if (onChange) {
           onChange(e)
         }
