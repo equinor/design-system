@@ -81,24 +81,16 @@ const Svg = styled.svg`
               animation-play-state: ${progress > 90 ? 'running' : 'paused'};
             }
             &:nth-child(2) {
-              animation-play-state: ${progress > 80 && progress <= 90
-                ? 'running'
-                : 'paused'};
+              animation-play-state: ${progress > 80 ? 'running' : 'paused'};
             }
             &:nth-child(3) {
-              animation-play-state: ${progress > 60 && progress <= 80
-                ? 'running'
-                : 'paused'};
+              animation-play-state: ${progress > 60 ? 'running' : 'paused'};
             }
             &:nth-child(4) {
-              animation-play-state: ${progress > 40 && progress <= 60
-                ? 'running'
-                : 'paused'};
+              animation-play-state: ${progress > 40 ? 'running' : 'paused'};
             }
             &:nth-child(5) {
-              animation-play-state: ${progress > 20 && progress <= 40
-                ? 'running'
-                : 'paused'};
+              animation-play-state: ${progress > 20 ? 'running' : 'paused'};
             }
             &:nth-child(6) {
               animation-play-state: ${progress <= 20 ? 'running' : 'paused'};
@@ -128,8 +120,6 @@ const StarProgress = forwardRef(function StarProgress(
       rootProps['aria-valuemax'] = 100
     }
   }
-
-  console.log(progress)
 
   return (
     <Svg
