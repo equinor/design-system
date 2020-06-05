@@ -42,7 +42,7 @@ const handleOnBlur = action('onBlur')
 const handleOnFocus = action('onFocus')
 
 export const Examples = () => {
-  const [searchValue, setSearchValue] = useState('')
+  const [searchValue, setSearchValue] = useState('Initial value')
   const [isFocused, setIsFocused] = useState(false)
 
   const handleOnSearchValueChange = (event) => {
@@ -67,7 +67,12 @@ export const Examples = () => {
         <Typography variant="h4" as="h2">
           Normal
         </Typography>
-        <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
+        <Search
+          aria-label="sitewide"
+          id="search-normal"
+          placeholder="Search"
+          onChange={handleOnChange}
+        />
       </Rows>
       <Rows
         style={{
