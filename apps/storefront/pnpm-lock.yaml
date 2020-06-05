@@ -15,7 +15,7 @@ dependencies:
   gatsby-plugin-offline: 3.2.8_gatsby@2.23.1
   gatsby-plugin-postcss: 2.3.3_gatsby@2.23.1
   gatsby-plugin-prefetch-google-fonts: 1.4.3
-  gatsby-plugin-react-helmet: 3.3.3_gatsby@2.23.1+react-helmet@5.2.1
+  gatsby-plugin-react-helmet: 3.3.3_gatsby@2.23.1+react-helmet@6.0.0
   gatsby-plugin-styled-components: 3.3.3_3392ea823ad7376bbb631b3da9b00474
   gatsby-remark-autolink-headers: 2.3.4_gatsby@2.23.1
   gatsby-remark-smartypants: 2.3.3_gatsby@2.23.1
@@ -31,7 +31,7 @@ dependencies:
   prop-types: 15.7.2
   react: 16.13.1
   react-dom: 16.13.1_react@16.13.1
-  react-helmet: 5.2.1_react@16.13.1
+  react-helmet: 6.0.0_react@16.13.1
   remark-emoji: 2.1.0
   styled-components: 5.1.1_479e60ee9c1aa71dc1eb81036e3619dc
 devDependencies:
@@ -7071,11 +7071,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-rrNGpdLkSEQWksM1A1cJnL/wuu9GLfAl8oPQgpn3cmpKd4jnXk+nbLyQOwKQlRYSrzpju59dY8oyf4UfSFbqPg==
-  /gatsby-plugin-react-helmet/3.3.3_gatsby@2.23.1+react-helmet@5.2.1:
+  /gatsby-plugin-react-helmet/3.3.3_gatsby@2.23.1+react-helmet@6.0.0:
     dependencies:
       '@babel/runtime': 7.10.2
       gatsby: 2.23.1_ac537c5b0c3de2905f8e1f4fd07938fa
-      react-helmet: 5.2.1_react@16.13.1
+      react-helmet: 6.0.0_react@16.13.1
     dev: false
     engines:
       node: '>=10.13.0'
@@ -12257,18 +12257,6 @@ packages:
       react: ^16.8.0
     resolution:
       integrity: sha512-j15cWLPzH0gOmRrUg01C09Peu8qbcdVqr6Bjyfxj80cNZmH+idk/bNBYEDSmkAtwkXI+xEYWSmHYqtaQhZ8iUQ==
-  /react-helmet/5.2.1_react@16.13.1:
-    dependencies:
-      object-assign: 4.1.1
-      prop-types: 15.7.2
-      react: 16.13.1
-      react-fast-compare: 2.0.4
-      react-side-effect: 1.2.0_react@16.13.1
-    dev: false
-    peerDependencies:
-      react: '>=15.0.0'
-    resolution:
-      integrity: sha512-CnwD822LU8NDBnjCpZ4ySh8L6HYyngViTZLfBBb3NjtrpN8m49clH8hidHouq20I51Y6TpCTISCBbqiY5GamwA==
   /react-helmet/6.0.0_react@16.13.1:
     dependencies:
       object-assign: 4.1.1
@@ -12391,15 +12379,6 @@ packages:
         optional: true
     resolution:
       integrity: sha512-UqVimLeAe+5EHXKfsca081hAkzg3WuDmoT9cayjBegd6UZVhlTEchleNp9J4TMGkb/ftLve7ARB5Wph+HJ7A5g==
-  /react-side-effect/1.2.0_react@16.13.1:
-    dependencies:
-      react: 16.13.1
-      shallowequal: 1.1.0
-    dev: false
-    peerDependencies:
-      react: ^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0
-    resolution:
-      integrity: sha512-v1ht1aHg5k/thv56DRcjw+WtojuuDHFUgGfc+bFHOWsF4ZK6C2V57DO0Or0GPsg6+LSTE0M6Ry/gfzhzSwbc5w==
   /react-side-effect/2.1.0_react@16.13.1:
     dependencies:
       react: 16.13.1
@@ -16027,7 +16006,7 @@ specifiers:
   prop-types: ^15.7.2
   react: ^16.13.1
   react-dom: ^16.13.1
-  react-helmet: ^5.2.1
+  react-helmet: ^6.0.0
   remark-emoji: ^2.1.0
   styled-components: ^5.1.1
   stylelint-config-recommended: ^3.0.0
