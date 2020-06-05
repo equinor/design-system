@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
-import { progress as tokens } from './Progress.tokens'
+import { progress as tokens } from '../Progress.tokens'
 
 const indeterminate = keyframes`
   0% {
@@ -10,22 +10,6 @@ const indeterminate = keyframes`
     100% {
       transform: rotate(360deg);
     }
-`
-const indeterminate2 = keyframes`
-   0%{
-        left: -200%;
-        right: 100%;
-      }
-      60% {
-        left: 107%;
-        right: -8%;
-      }
-
-      100% {
-        left: 107%;
-        right: -8%;
-      }
-    
 `
 
 const ProgressRoot = styled.div`
@@ -52,19 +36,6 @@ const BaseCircle = styled.circle`
 
 const ProgressCircle = styled.circle`
   stroke: ${tokens.linear.overlay};
-`
-
-const IndeterminateProgress = styled.div`
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  transition: transform 0.2s linear;
-  transform-origin: left;
-  background-color: ${tokens.linear.overlay};
-  animation: ${indeterminate2} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s
-    infinite;
 `
 
 const CircularProgress = forwardRef(function CircularProgress(

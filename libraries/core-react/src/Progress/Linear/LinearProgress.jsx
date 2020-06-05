@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
-import { progress as tokens } from './Progress.tokens'
+import { progress as tokens } from '../Progress.tokens'
 
 const indeterminate1 = keyframes`
   0% {
