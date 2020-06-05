@@ -35,7 +35,7 @@ dependencies:
   remark-emoji: 2.1.0
   styled-components: 5.1.1_479e60ee9c1aa71dc1eb81036e3619dc
 devDependencies:
-  prettier: 1.19.1
+  prettier: 2.0.5
   stylelint-config-recommended: 3.0.0
 lockfileVersion: 5.1
 packages:
@@ -11907,15 +11907,7 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
-  /prettier/1.19.1:
-    dev: true
-    engines:
-      node: '>=4'
-    hasBin: true
-    resolution:
-      integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
   /prettier/2.0.5:
-    dev: false
     engines:
       node: '>=10.13.0'
     hasBin: true
@@ -16031,7 +16023,7 @@ specifiers:
   postcss-custom-media: ^7.0.8
   postcss-import: ^12.0.1
   postcss-nested: ^4.2.1
-  prettier: ^1.19.1
+  prettier: ^2.0.5
   prop-types: ^15.7.2
   react: ^16.13.1
   react-dom: ^16.13.1

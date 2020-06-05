@@ -56,7 +56,7 @@
     "lint": "eslint ./src/**/*.jsx"
   },
   "devDependencies": {
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "stylelint-config-recommended": "^3.0.0"
   },
   "repository": {
