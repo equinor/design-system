@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import { progress as tokens } from './Progress.tokens'
 
-const opacity = keyframes`
+const indeterminate = keyframes`
     0% { 
         opacity: 1;
     }
@@ -24,44 +24,117 @@ const opacity = keyframes`
     }
 `
 
-const Svg = styled.svg`
-  fill: ${tokens.star.background};
-  path {
-    &:nth-child(1) {
-      animation: ${opacity} 1.3s linear infinite;
-    }
-    &:nth-child(2) {
-      animation: ${opacity} 1.3s linear 0.3s infinite;
-    }
-    &:nth-child(3) {
-      animation: ${opacity} 1.3s linear 0.4s infinite;
-    }
-    &:nth-child(4) {
-      animation: ${opacity} 1.3s linear 0.6s infinite;
-    }
-    &:nth-child(5) {
-      animation: ${opacity} 1.3s linear 0.8s infinite;
-    }
-    &:nth-child(6) {
-      animation: ${opacity} 1.3s linear 1s infinite;
-    }
+const determinate = keyframes`
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.05;
+  }
+  20% {
+    opacity: 0.2:
+  }
+  40% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
   }
 `
 
+const Svg = styled.svg`
+  fill: ${tokens.star.background};
+  ${({ variant, progress }) =>
+    variant === 'indeterminate'
+      ? css`
+          path {
+            &:nth-child(1) {
+              animation: ${indeterminate} 1.3s linear infinite;
+            }
+            &:nth-child(2) {
+              animation: ${indeterminate} 1.3s linear 0.3s infinite;
+            }
+            &:nth-child(3) {
+              animation: ${indeterminate} 1.3s linear 0.4s infinite;
+            }
+            &:nth-child(4) {
+              animation: ${indeterminate} 1.3s linear 0.6s infinite;
+            }
+            &:nth-child(5) {
+              animation: ${indeterminate} 1.3s linear 0.8s infinite;
+            }
+            &:nth-child(6) {
+              animation: ${indeterminate} 1.3s linear 1s infinite;
+            }
+          }
+        `
+      : css`
+          path {
+            animation: ${determinate} 1.3s linear;
+            &:nth-child(1) {
+              animation-play-state: ${progress > 90 ? 'running' : 'paused'};
+            }
+            &:nth-child(2) {
+              animation-play-state: ${progress > 80 && progress <= 90
+                ? 'running'
+                : 'paused'};
+            }
+            &:nth-child(3) {
+              animation-play-state: ${progress > 60 && progress <= 80
+                ? 'running'
+                : 'paused'};
+            }
+            &:nth-child(4) {
+              animation-play-state: ${progress > 40 && progress <= 60
+                ? 'running'
+                : 'paused'};
+            }
+            &:nth-child(5) {
+              animation-play-state: ${progress > 20 && progress <= 40
+                ? 'running'
+                : 'paused'};
+            }
+            &:nth-child(6) {
+              animation-play-state: ${progress <= 20 ? 'running' : 'paused'};
+            }
+          }
+        `}
+`
+
 const StarProgress = forwardRef(function StarProgress(
-  { variant, className, ...rest },
+  { variant, className, value, ...rest },
   ref,
 ) {
-  const props = {
+  const progress = Math.round(value)
+
+  const rootProps = {
     ref,
     ...rest,
     className,
     variant,
+    progress,
   }
+
+  if (variant === 'determinate') {
+    if (value !== undefined) {
+      rootProps['aria-valuenow'] = progress
+      rootProps['aria-valuemin'] = 0
+      rootProps['aria-valuemax'] = 100
+    }
+  }
+
+  console.log(progress)
 
   return (
     <Svg
-      {...props}
+      {...rootProps}
+      role="progressbar"
       width="40"
       height="48"
       viewBox="0 0 40 48"

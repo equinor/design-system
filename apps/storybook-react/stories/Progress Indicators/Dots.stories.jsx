@@ -1,19 +1,24 @@
 import React, { useState, useRef } from 'react'
-import { Checkbox, DotProgress } from '@equinor/eds-core-react'
+import { Checkbox, DotProgress, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+const Body = styled.div`
+  margin: 42px;
   display: grid;
-  grid-template-rows: min-width;
-  padding: 32px;
-  padding-bottom: 8rem;
-  grid-gap: 2rem;
-  position: relative;
-  transition: all 0.36s;
+  grid-auto-columns: auto;
+`
+
+const Wrapper = styled.div`
+  margin: 32px;
+  display: grid;
+  grid-gap: 64px;
+  grid-template-columns: repeat(3, fit-content(100%));
 `
 
 const Background = styled.div`
   background-color: grey;
+  width: 36px;
+  padding: 8px;
 `
 
 export default {
@@ -23,23 +28,21 @@ export default {
 
 export const Variants = () => {
   return (
-    <Wrapper>
-      <Background>
-        <DotProgress variant="white" />
-      </Background>
-      <DotProgress variant="green" />
-    </Wrapper>
+    <Body>
+      <Typography variant="h4">White</Typography>
+      <Wrapper>
+        <Background>
+          <DotProgress variant="white" />
+        </Background>
+      </Wrapper>
+      <Typography variant="h4">Green</Typography>
+      <Wrapper>
+        <DotProgress variant="green" />
+      </Wrapper>
+    </Body>
   )
-}
-
-export const WithKnobs = () => {
-  return <Wrapper></Wrapper>
 }
 
 Variants.story = {
   name: 'Variants',
-}
-
-WithKnobs.story = {
-  name: 'With Knobs',
 }

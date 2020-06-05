@@ -50,17 +50,10 @@ export const Indeterminate = () => {
   )
 }
 
-export const WithKnobs = () => {
-  return <Wrapper></Wrapper>
-}
 Determinate.story = {
   name: 'Determinate',
 }
 
 Indeterminate.story = {
   name: 'Indeterminate',
-}
-
-WithKnobs.story = {
-  name: 'With Knobs',
 }

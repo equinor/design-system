@@ -18,7 +18,28 @@ export default {
 }
 
 export const Determinate = () => {
-  return <Wrapper></Wrapper>
+  const [progress, setProgress] = React.useState(0)
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          return 100
+        }
+        const diff = Math.random() * 10
+        return Math.min(oldProgress + diff, 100)
+      })
+    }, 500)
+
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
+  return (
+    <Wrapper>
+      <StarProgress value={progress} variant="determinate" />
+    </Wrapper>
+  )
 }
 
 export const Indeterminate = () => {
@@ -29,18 +50,10 @@ export const Indeterminate = () => {
   )
 }
 
-export const WithKnobs = () => {
-  return <Wrapper></Wrapper>
-}
-
 Determinate.story = {
   name: 'Determinate',
 }
 
 Indeterminate.story = {
   name: 'Indeterminate',
-}
-
-WithKnobs.story = {
-  name: 'With Knobs',
 }
