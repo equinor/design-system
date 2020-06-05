@@ -43,6 +43,7 @@ const handleOnFocus = action('onFocus')
 
 export const Examples = () => {
   const [searchValue, setSearchValue] = useState('')
+  const [isFocused, setIsFocused] = useState(false)
 
   const handleOnSearchValueChange = (event) => {
     const value = event.target.value
@@ -50,33 +51,55 @@ export const Examples = () => {
     setSearchValue(value)
   }
 
+  const handleFocus = () => {
+    setIsFocused(true)
+    handleOnFocus()
+  }
+
+  const handleBlur = () => {
+    setIsFocused(false)
+    handleOnBlur()
+  }
+
   return (
-    <div>
+    <>
       <Rows>
-        <Typography variant="h4">Normal</Typography>
+        <Typography variant="h4" as="h2">
+          Normal
+        </Typography>
+        <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
+      </Rows>
+      <Rows
+        style={{
+          background: isFocused ? 'cyan' : 'transparent',
+        }}
+      >
+        <Typography variant="h4" as="h2">
+          Normal with onFocus & onBlur
+        </Typography>
         <Search
-          aria-label="sitewide"
-          id="search-normal"
+          aria-label="focusedAndNot"
+          id="search-focusedAndNot"
           placeholder="Search"
           onChange={handleOnChange}
-          onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </Rows>
       <Rows>
-        <Typography variant="h4">Predefined value</Typography>
+        <Typography variant="h4" as="h2">
+          Predefined value
+        </Typography>
         <Search
           aria-label="predefined"
           id="search-predefined"
           placeholder="Search"
           onChange={handleOnChange}
-          onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
           defaultValue="Predefined value"
         />
       </Rows>
       <Rows>
-        <Typography variant="h4">
+        <Typography variant="h4" as="h2">
           Centered & styled inside a container
         </Typography>
         <OuterContainer>
@@ -86,13 +109,13 @@ export const Examples = () => {
             id="search-contained"
             placeholder="Search"
             onChange={handleOnChange}
-            onFocus={handleOnFocus}
-            onBlur={handleOnBlur}
           />
         </OuterContainer>
       </Rows>
       <Rows>
-        <Typography variant="h4">Inside form</Typography>
+        <Typography variant="h4" as="h2">
+          Inside form
+        </Typography>
         <form action="/">
           <Search placeholder="Search" onChange={handleOnChange} />
         </form>
@@ -110,15 +133,16 @@ export const Examples = () => {
         />
       </Rows>
       <Rows>
-        <Typography variant="h4">Set value using hooks</Typography>
+        <Typography variant="h4" as="h2">
+          Controlled input
+        </Typography>
+        <Typography variant="body_short">Value: {searchValue}</Typography>
         <Columns>
           <Search
             aria-label="external set value"
             id="search-external"
             placeholder="Say hello! 🙋"
             onChange={handleOnSearchValueChange}
-            onFocus={handleOnFocus}
-            onBlur={handleOnBlur}
             value={searchValue}
           />
           <Button
@@ -131,6 +155,6 @@ export const Examples = () => {
           </Button>
         </Columns>
       </Rows>
-    </div>
+    </>
   )
 }
