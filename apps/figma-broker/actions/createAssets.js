@@ -152,7 +152,7 @@ export async function createAssets(ctx) {
   // writeSVGs(assetsWithSvg)
   // writeSVGSprite(assetsWithSvg)
 
-  // writeJsonAssets(assetsWithSvg)
+  writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
 
   return assetsWithSvg

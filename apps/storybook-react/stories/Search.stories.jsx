@@ -30,6 +30,8 @@ export default {
 }
 
 const handleOnChange = action('onChange')
+const handleOnBlur = action('onBlur')
+const handleOnFocus = action('onFocus')
 
 export const Examples = () => (
   <div>
@@ -40,6 +42,8 @@ export const Examples = () => (
         id="search-normal"
         placeholder="Search"
         onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
       />
     </Wrapper>
     <Wrapper>
@@ -49,6 +53,8 @@ export const Examples = () => (
         id="search-predefined"
         placeholder="Search"
         onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
         value="Predefined value"
       />
     </Wrapper>
@@ -61,6 +67,8 @@ export const Examples = () => (
           id="search-contained"
           placeholder="Search"
           onChange={handleOnChange}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
         />
       </OuterContainer>
     </Wrapper>
@@ -77,6 +85,8 @@ export const Examples = () => (
         id="search-disabled"
         placeholder="Search"
         onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
         disabled
       />
     </Wrapper>

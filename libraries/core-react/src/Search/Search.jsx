@@ -162,7 +162,7 @@ const InsideButton = styled.div`
 `
 
 export const Search = React.forwardRef(function EdsSearch(
-  { onChange, value: initValue, className, disabled, ...rest },
+  { onChange, value: initValue, className, disabled, onBlur, onFocus, ...rest },
   ref,
 ) {
   const inputRef = useCombinedRefs(useRef(null), ref)
@@ -204,8 +204,18 @@ export const Search = React.forwardRef(function EdsSearch(
     type: 'search',
     role: 'searchbox',
     'aria-label': 'search input',
-    onBlur: handleBlur,
-    onFocus: handleFocus,
+    onBlur: (e) => {
+      handleBlur(e)
+      if (onBlur) {
+        onBlur(e)
+      }
+    },
+    onFocus: (e) => {
+      handleFocus(e)
+      if (onFocus) {
+        onFocus(e)
+      }
+    },
     onChange: (e) => {
       handleOnChange(e)
       if (onChange) {
@@ -248,6 +258,10 @@ Search.propTypes = {
   onChange: PropTypes.func,
   /** Value for search field */
   value: PropTypes.string,
+  /** onBlur handler */
+  onBlur: PropTypes.func,
+  /** onFocus handler */
+  onFocus: PropTypes.func,
 }
 
 Search.defaultProps = {
@@ -256,6 +270,8 @@ Search.defaultProps = {
   disabled: false,
   onChange: undefined,
   value: '',
+  onBlur: undefined,
+  onFocus: undefined,
 }
 
 Search.displayName = 'eds-search'
