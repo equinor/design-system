@@ -9,8 +9,8 @@ devDependencies:
   '@babel/core': 7.10.2
   '@babel/preset-env': 7.10.2_@babel+core@7.10.2
   '@babel/preset-react': 7.10.1_@babel+core@7.10.2
-  '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@1.32.1
-  '@rollup/plugin-json': 4.1.0_rollup@1.32.1
+  '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@2.15.0
+  '@rollup/plugin-json': 4.1.0_rollup@2.15.0
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.5.0_react-dom@16.13.1+react@16.13.1
   babel-plugin-react-docgen: 4.1.0
@@ -21,8 +21,8 @@ devDependencies:
   prop-types: 15.7.2
   react: 16.13.1
   react-dom: 16.13.1_react@16.13.1
-  rollup: 1.32.1
-  rollup-plugin-commonjs: 9.3.4_rollup@1.32.1
+  rollup: 2.15.0
+  rollup-plugin-commonjs: 9.3.4_rollup@2.15.0
   rollup-plugin-node-resolve: 4.2.4
   rollup-plugin-polyfill: 3.0.0
   styled-components: 4.4.1_4f54128445bc6f13bd713dcb3d91e98e
@@ -1227,12 +1227,12 @@ packages:
       node: '>= 8.3'
     resolution:
       integrity: sha512-OXD0RgQ86Tu3MazKo8bnrkDRaDXXMGUqd+kTtLtK1Zb7CRzQcaSRPPPV37SvYTdevXEBVxe0HXylEjs8ibkmCw==
-  /@rollup/plugin-babel/5.0.3_@babel+core@7.10.2+rollup@1.32.1:
+  /@rollup/plugin-babel/5.0.3_@babel+core@7.10.2+rollup@2.15.0:
     dependencies:
       '@babel/core': 7.10.2
       '@babel/helper-module-imports': 7.10.1
-      '@rollup/pluginutils': 3.1.0_rollup@1.32.1
-      rollup: 1.32.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.15.0
+      rollup: 2.15.0
     dev: true
     engines:
       node: '>= 10.0.0'
@@ -1241,21 +1241,21 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-NlaPf4E6YFxeOCbqc+A2PTkB1BSy3rfKu6EJuQ1MGhMHpTVvMqKi6Rf0DlwtnEsTNK9LueUgsGEgp5Occ4KDVA==
-  /@rollup/plugin-json/4.1.0_rollup@1.32.1:
+  /@rollup/plugin-json/4.1.0_rollup@2.15.0:
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@1.32.1
-      rollup: 1.32.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.15.0
+      rollup: 2.15.0
     dev: true
     peerDependencies:
       rollup: ^1.20.0 || ^2.0.0
     resolution:
       integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
-  /@rollup/pluginutils/3.1.0_rollup@1.32.1:
+  /@rollup/pluginutils/3.1.0_rollup@2.15.0:
     dependencies:
       '@types/estree': 0.0.39
       estree-walker: 1.0.1
       picomatch: 2.2.2
-      rollup: 1.32.1
+      rollup: 2.15.0
     dev: true
     engines:
       node: '>= 8.0.0'
@@ -1361,10 +1361,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
-  /@types/estree/0.0.44:
-    dev: true
-    resolution:
-      integrity: sha512-iaIVzr+w2ZJ5HkidlZ3EJM8VTZb2MJLCjw3V+505yVts0gRC4UMvjw0d1HPtGqI/HQC/KdsYtayfzl+AXY2R8g==
   /@types/istanbul-lib-coverage/2.0.2:
     dev: true
     resolution:
@@ -1491,13 +1487,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
-  /acorn/7.2.0:
-    dev: true
-    engines:
-      node: '>=0.4.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-apwXVmYVpQ34m/i71vrApRrRKCWQnZZF1+npOD0WV5xZFfwWOmKGQ2RWlfdy9vWITsenisM8M0Qeq8agcFHNiQ==
   /ajv/6.12.2:
     dependencies:
       fast-deep-equal: 3.1.1
@@ -2498,6 +2487,15 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==
+  /fsevents/2.1.3:
+    dev: true
+    engines:
+      node: ^8.16.0 || ^10.6.0 || >=11.0.0
+    optional: true
+    os:
+      - darwin
+    resolution:
+      integrity: sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==
   /function-bind/1.1.1:
     dev: true
     resolution:
@@ -4449,12 +4447,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
-  /rollup-plugin-commonjs/9.3.4_rollup@1.32.1:
+  /rollup-plugin-commonjs/9.3.4_rollup@2.15.0:
     dependencies:
       estree-walker: 0.6.1
       magic-string: 0.25.7
       resolve: 1.17.0
-      rollup: 1.32.1
+      rollup: 2.15.0
       rollup-pluginutils: 2.8.2
     deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-commonjs.
     dev: true
@@ -4484,15 +4482,15 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==
-  /rollup/1.32.1:
-    dependencies:
-      '@types/estree': 0.0.44
-      '@types/node': 14.0.11
-      acorn: 7.2.0
+  /rollup/2.15.0:
     dev: true
+    engines:
+      node: '>=10.0.0'
     hasBin: true
+    optionalDependencies:
+      fsevents: 2.1.3
     resolution:
-      integrity: sha512-/2HA0Ec70TvQnXdzynFffkjA6XN+1e2pEv/uKS5Ulca40g2L7KuOE3riasHoNVHOsFD5KKZgDsMk1CP3Tw9s+A==
+      integrity: sha512-HAk4kyXiV5sdNDnbKWk5zBPnkX/DAgx09Kbp8rRIRDVsTUVN3vnSowR7ZHkV6/lAiE6c2TQ8HtYb72aCPGW4Jw==
   /rsvp/4.8.5:
     dev: true
     engines:
@@ -5242,7 +5240,7 @@ specifiers:
   prop-types: ^15.7.2
   react: ^16.13.1
   react-dom: ^16.13.1
-  rollup: ^1.32.1
+  rollup: ^2.15.0
   rollup-plugin-commonjs: ^9.3.4
   rollup-plugin-node-resolve: ^4.2.4
   rollup-plugin-polyfill: ^3.0.0
