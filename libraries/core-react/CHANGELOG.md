@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2020-06-08
+
+### Added
+
+- Banner
+- Popover
+- Slider
+- Selection controls
+- Option to control the `<Search>` component. ([#342](https://github.com/equinor/design-system/issues/342))
+
+### Fixed 🐛
+
+- Fixed a bug where `<Tooltip>` did not close as expected. ([#339](https://github.com/equinor/design-system/issues/339))
+
+### Changed
+
+- README
+  - Moved Banner, Popover, Selection controls and Slider to «Available»
+  - Moved Progress indicator and Snackbar to «In progress»
+
 ## [0.2.2] - 2020-06-02
 
 ### Fixed 🐛
