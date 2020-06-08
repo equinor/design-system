@@ -46,10 +46,10 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "@testing-library/jest-dom": "^5.9.0",
-    "@testing-library/react": "^9.5.0",
+    "@testing-library/react": "^10.2.1",
     "babel-plugin-react-docgen": "^4.1.0",
     "babel-plugin-styled-components": "^1.10.7",
-    "jest": "^24.9.0",
+    "jest": "^26.0.1",
     "jest-styled-components": "^6.3.4",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
@@ -57,7 +57,7 @@
     "react-dom": "^16.13.1",
     "rollup": "^2.15.0",
     "rollup-plugin-polyfill": "^3.0.0",
-    "styled-components": "^4.4.1"
+    "styled-components": "4.4.1"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
