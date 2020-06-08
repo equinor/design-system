@@ -9,6 +9,7 @@ devDependencies:
   '@babel/core': 7.10.2
   '@babel/preset-env': 7.10.2_@babel+core@7.10.2
   '@babel/preset-react': 7.10.1_@babel+core@7.10.2
+  '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@1.32.1
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.5.0_react-dom@16.13.1+react@16.13.1
   babel-plugin-react-docgen: 4.1.0
@@ -20,7 +21,6 @@ devDependencies:
   react: 16.13.1
   react-dom: 16.13.1_react@16.13.1
   rollup: 1.32.1
-  rollup-plugin-babel: 4.4.0_@babel+core@7.10.2+rollup@1.32.1
   rollup-plugin-commonjs: 9.3.4_rollup@1.32.1
   rollup-plugin-json: 4.0.0
   rollup-plugin-node-resolve: 4.2.4
@@ -1227,6 +1227,33 @@ packages:
       node: '>= 8.3'
     resolution:
       integrity: sha512-OXD0RgQ86Tu3MazKo8bnrkDRaDXXMGUqd+kTtLtK1Zb7CRzQcaSRPPPV37SvYTdevXEBVxe0HXylEjs8ibkmCw==
+  /@rollup/plugin-babel/5.0.3_@babel+core@7.10.2+rollup@1.32.1:
+    dependencies:
+      '@babel/core': 7.10.2
+      '@babel/helper-module-imports': 7.10.1
+      '@rollup/pluginutils': 3.1.0_rollup@1.32.1
+      rollup: 1.32.1
+    dev: true
+    engines:
+      node: '>= 10.0.0'
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      rollup: ^1.20.0||^2.0.0
+    resolution:
+      integrity: sha512-NlaPf4E6YFxeOCbqc+A2PTkB1BSy3rfKu6EJuQ1MGhMHpTVvMqKi6Rf0DlwtnEsTNK9LueUgsGEgp5Occ4KDVA==
+  /@rollup/pluginutils/3.1.0_rollup@1.32.1:
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.2.2
+      rollup: 1.32.1
+    dev: true
+    engines:
+      node: '>= 8.0.0'
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    resolution:
+      integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==
   /@sheerun/mutationobserver-shim/0.3.3:
     dev: true
     resolution:
@@ -1321,6 +1348,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+  /@types/estree/0.0.39:
+    dev: true
+    resolution:
+      integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
   /@types/estree/0.0.44:
     dev: true
     resolution:
@@ -2251,6 +2282,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-SqmZANLWS0mnatqbSfRP5g8OXZC12Fgg1IwNtLsyHDzJizORW4khDfjPqJZsemPWBB2uqykUah5YpQ6epsqC/w==
+  /estree-walker/1.0.1:
+    dev: true
+    resolution:
+      integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==
   /esutils/2.0.3:
     dev: true
     engines:
@@ -3978,6 +4013,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+  /picomatch/2.2.2:
+    dev: true
+    engines:
+      node: '>=8.6'
+    resolution:
+      integrity: sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==
   /pify/3.0.0:
     dev: true
     engines:
@@ -4399,19 +4440,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
-  /rollup-plugin-babel/4.4.0_@babel+core@7.10.2+rollup@1.32.1:
-    dependencies:
-      '@babel/core': 7.10.2
-      '@babel/helper-module-imports': 7.10.1
-      rollup: 1.32.1
-      rollup-pluginutils: 2.8.2
-    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-babel.
-    dev: true
-    peerDependencies:
-      '@babel/core': 7 || ^7.0.0-rc.2
-      rollup: '>=0.60.0 <3'
-    resolution:
-      integrity: sha512-Lek/TYp1+7g7I+uMfJnnSJ7YWoD58ajo6Oarhlex7lvUce+RCKRuGRSgztDO3/MF/PuGKmUL5iTHKf208UNszw==
   /rollup-plugin-commonjs/9.3.4_rollup@1.32.1:
     dependencies:
       estree-walker: 0.6.1
@@ -5197,6 +5225,7 @@ specifiers:
   '@babel/preset-react': ^7.10.1
   '@equinor/eds-icons': 'workspace:*'
   '@equinor/eds-tokens': 'workspace:*'
+  '@rollup/plugin-babel': ^5.0.3
   '@testing-library/jest-dom': ^4.2.4
   '@testing-library/react': ^9.5.0
   '@testing-library/react-hooks': ^3.3.0
@@ -5211,7 +5240,6 @@ specifiers:
   react: ^16.13.1
   react-dom: ^16.13.1
   rollup: ^1.32.1
-  rollup-plugin-babel: ^4.4.0
   rollup-plugin-commonjs: ^9.3.4
   rollup-plugin-json: ^4.0.0
   rollup-plugin-node-resolve: ^4.2.4
