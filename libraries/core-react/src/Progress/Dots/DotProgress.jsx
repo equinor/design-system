@@ -39,7 +39,14 @@ const DotProgress = forwardRef(function DotProgress(
   }
 
   return (
-    <Svg {...props} viewBox="0 0 16 4" height="8px" width="32px">
+    <Svg
+      {...props}
+      role="progressbar"
+      className={`${className} ${variant}-progress`}
+      viewBox="0 0 16 4"
+      height="8px"
+      width="32px"
+    >
       <circle cx={2} cy={2} r={2} />
       <circle cx={8} cy={2} r={2} />
       <circle cx={14} cy={2} r={2} />

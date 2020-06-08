@@ -1,24 +1,14 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup, screen, mount } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
-import {
-  CircularProgress,
-  LinearProgress,
-  StarProgress,
-  DotProgress,
-  Icon,
-  Button,
-  Card,
-  Typography,
-} from '..'
+import { StarProgress } from '..'
 
 const StyledProgress = styled(StarProgress)`
   position: absolute;
-  height: 20px;
 `
 
 afterEach(cleanup)

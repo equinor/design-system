@@ -66,7 +66,11 @@ const CircularProgress = forwardRef(function CircularProgress(
   }
 
   return (
-    <ProgressRoot {...rootProps} role="progressbar">
+    <ProgressRoot
+      {...rootProps}
+      role="progressbar"
+      className={`${variant}-progress`}
+    >
       <StyledSvg viewBox="24 24 48 48">
         <BaseCircle
           style={circleStyle}

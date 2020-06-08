@@ -102,7 +102,11 @@ const LinearProgress = forwardRef(function LinearProgress(
   }
 
   return (
-    <ProgressRoot {...rootProps} role="progressbar">
+    <ProgressRoot
+      {...rootProps}
+      role="progressbar"
+      className={`${variant}-progress`}
+    >
       <ProgressBar className="progressBar" {...progressProps} />
       {variant === 'indeterminate' && (
         <IndeterminateProgress className="indeterminate" />
