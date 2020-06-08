@@ -4,6 +4,7 @@ import { Location, Link } from '@reach/router'
 import { MDXProvider } from '@mdx-js/react'
 import { TopBar, Typography, Table } from '@equinor/eds-core-react'
 import styled from 'styled-components'
+import Helmet from 'react-helmet'
 import Sidebar from './Sidebar'
 import './layout.css'
 // MDX components
@@ -58,6 +59,12 @@ const Layout = ({ children }) => {
 
   return (
     <MDXProvider components={mdxComponents}>
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href="https://eds-static.equinor.com/font/equinor-font.css"
+        />
+      </Helmet>
       <div className="Page">
         <TopBar style={{ gridArea: 'header' }}>
           <TopBarHeader>
