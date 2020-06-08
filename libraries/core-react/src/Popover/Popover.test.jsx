@@ -1,20 +1,15 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { render, cleanup } from '@testing-library/react'
-//import Adapter from 'enzyme-adapter-react-16';
-//import { mount, configure } from 'enzyme';
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { popover as tokens } from './Popover.tokens'
 import { Popover } from '.'
-import { Icon, Button, Card, Typography } from '..'
+import { Button, Typography } from '..'
 
-const { PopoverTitle, PopoverContent, PopoverAnchor, PopoverItem } = Popover
-
-const { CardActions } = Card
+const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover
 
 const StyledPopover = styled(Popover)`
   position: absolute;
@@ -39,22 +34,6 @@ const SimplePopover = ({ open, placement }) => (
   </Popover>
 )
 
-const PopoverWithActions = () => (
-  <Popover open>
-    <PopoverAnchor>
-      <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
-    </PopoverAnchor>
-    <PopoverTitle>Title</PopoverTitle>
-    <PopoverContent>
-      <Typography>Content</Typography>
-    </PopoverContent>
-    <CardActions>
-      <Button onClick={(e) => e.stopPropagation()}>Cancel</Button>
-      <Button onClick={(e) => e.stopPropagation()}>OK</Button>
-    </CardActions>
-  </Popover>
-)
-
 SimplePopover.propTypes = {
   open: PropTypes.bool,
   placement: PropTypes.string,
@@ -62,10 +41,8 @@ SimplePopover.propTypes = {
 
 SimplePopover.defaultProps = {
   open: false,
-  chevronPosition: 'bottom',
+  placement: 'bottom',
 }
-
-//configure({adapter: new Adapter()});
 
 describe('Popover', () => {
   it('Popover has correct placement', () => {
@@ -101,7 +78,6 @@ describe('Popover', () => {
     )
     const popover = container.firstChild
     expect(popover).toHaveStyleRule('position', 'absolute')
-    // expect(popover).toHaveStyleRule('height', '100px')
     expect(popover).toHaveStyleRule('width', '100px')
   })
 })

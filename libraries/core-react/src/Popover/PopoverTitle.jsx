@@ -8,7 +8,7 @@ import { popover as tokens } from './Popover.tokens'
 
 const StyledPopoverTitle = styled.div`
   ${typographyTemplate(tokens.header)}
-  margin-right: calc(32px + 16px);
+  margin-right: 48px;
 `
 
 const StyledDivider = styled((props) => <Divider {...props} />)`
