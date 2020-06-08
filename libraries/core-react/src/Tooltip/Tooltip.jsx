@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
@@ -9,13 +9,6 @@ const Anchor = styled.div`
   display: flex;
   width: auto;
   justify-content: center;
-  &:hover,
-  &:focus,
-  &:focus-within {
-    > :last-child {
-      display: block;
-    }
-  }
 `
 
 const StyledTooltipWrapper = styled.div`
@@ -28,7 +21,6 @@ const StyledTooltipWrapper = styled.div`
       transform: ${transform};
     `}
   width: auto;
-  display: none;
   position: absolute;
   z-index: 500;
   flex-shrink: 0;
@@ -49,24 +41,34 @@ const StyledTooltip = styled.div`
 `
 
 const TooltipArrow = styled.svg`
-  ${({ top, bottom, right, left, transform }) =>
+  ${({ top, bottom, right, left }) =>
     css`
       bottom: ${bottom};
       top: ${top};
       right: ${right};
       left: ${left};
-      transform: ${transform};
     `}
   width: ${tokens.arrow.width};
   height: ${tokens.arrow.height};
   position: absolute;
   fill: inherit;
-`
+  `
 
+// Controller for TooltipItem
 export const Tooltip = forwardRef(function Tooltip(
-  { className, title, children, placement, ...rest },
+  { className, title, children, placement, open, ...rest },
   ref,
 ) {
+  const [openState, setOpenState] = useState(open)
+
+  const handleOpen = () => {
+    setOpenState(true)
+  }
+
+  const handleClose = () => {
+    setOpenState(false)
+  }
+
   const props = {
     ...rest,
     className,
@@ -86,20 +88,33 @@ export const Tooltip = forwardRef(function Tooltip(
     right: tokens.placement[placement].arrowRight,
     top: tokens.placement[placement].arrowTop,
     bottom: tokens.placement[placement].arrowBottom,
-    transform: tokens.placement[placement].arrowTransform,
   }
 
   return (
     <Anchor {...props}>
-      {children}
-      <StyledTooltipWrapper {...wrapperProps}>
-        <StyledTooltip>
-          <TooltipArrow {...arrowProps}>
-            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-          </TooltipArrow>
-          {title}
-        </StyledTooltip>
-      </StyledTooltipWrapper>
+      <div
+        onMouseOver={handleOpen}
+        onMouseLeave={handleClose}
+        onBlur={handleClose}
+        onFocus={handleOpen}
+      >
+        {children}
+      </div>
+      {openState && (
+        <StyledTooltipWrapper role="tooltip" {...wrapperProps}>
+          <StyledTooltip>
+            <TooltipArrow
+              {...arrowProps}
+              style={{
+                transform: `${tokens.placement[placement].arrowTransform}`,
+              }}
+            >
+              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+            </TooltipArrow>
+            {title}
+          </StyledTooltip>
+        </StyledTooltipWrapper>
+      )}
     </Anchor>
   )
 })
@@ -124,6 +139,8 @@ Tooltip.propTypes = {
   ]),
   // Tooltip title
   title: PropTypes.string,
+  // For controlled Tooltip
+  open: PropTypes.bool,
   /** Tooltip reference/anchor element */
   children: PropTypes.node.isRequired,
   /** @ignore */
@@ -131,6 +148,7 @@ Tooltip.propTypes = {
 }
 
 Tooltip.defaultProps = {
+  open: false,
   placement: 'bottom',
   title: '',
   className: '',
