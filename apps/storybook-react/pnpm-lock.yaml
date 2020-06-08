@@ -6,6 +6,7 @@ dependencies:
   babel-runtime: 6.26.0
   core-js: 2.6.11
   react-dom: 16.12.0_react@16.13.1
+  react-hook-form: 5.7.2_react@16.13.1
   styled-components: 4.4.1_52c3e70b5da9c08211cc061c116571c5
 devDependencies:
   '@babel/core': 7.8.4
@@ -2552,6 +2553,7 @@ packages:
       memoizerific: 1.11.3
       prop-types: 15.7.2
       react: 16.12.0
+      react-dom: 16.12.0_react@16.13.1
       regenerator-runtime: 0.13.3
       semver: 6.3.0
       shallow-equal: 1.2.1
@@ -10008,6 +10010,14 @@ packages:
       react-dom: ^16.6.0
     resolution:
       integrity: sha512-nqGA5a1HRZsw1lzDn+bYuUN2FyHRiY+DgjRVhEOKVBDTrrqJCpCIOuY/IRHdobr+KD1gGTP0WabZsTrIHnFKJA==
+  /react-hook-form/5.7.2_react@16.13.1:
+    dependencies:
+      react: 16.13.1
+    dev: false
+    peerDependencies:
+      react: ^16.8.0
+    resolution:
+      integrity: sha512-bJvY348vayIvEUmSK7Fvea/NgqbT2racA2IbnJz/aPlQ3GBtaTeDITH6rtCa6y++obZzG6E3Q8VuoXPir7QYUg==
   /react-hotkeys/2.0.0_react@16.12.0:
     dependencies:
       prop-types: 15.7.2
@@ -12682,5 +12692,6 @@ specifiers:
   core-js: ^2.6.11
   react: ^16.13.1
   react-dom: ^16.12.0
+  react-hook-form: ^5.7.2
   react-is: ^16.13.1
   styled-components: ^4.4.1

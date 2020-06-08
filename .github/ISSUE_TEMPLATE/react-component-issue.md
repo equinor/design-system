@@ -4,7 +4,6 @@ about: Use this template to create issues for the React component library
 title: Create [name] component
 labels: react
 assignees: ''
-
 ---
 
 **Description**
@@ -28,6 +27,6 @@ See [COMPONENT_GUIDELINES.md](https://github.com/equinor/design-system/blob/deve
 - [ ] Write tests
 - [ ] Create set of tokens (from base tokens)
 - [ ] Create react component
-- [ ] Accessibility 
+- [ ] Accessibility
 
 _Optional footer which might have a pointer to another issue  (see #000)_

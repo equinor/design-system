@@ -11,6 +11,7 @@ devDependencies:
   '@babel/preset-react': 7.8.3_@babel+core@7.8.6
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.4.1_react-dom@16.13.0+react@16.13.0
+  '@testing-library/user-event': 10.3.2
   babel-plugin-react-docgen: 4.1.0
   babel-plugin-styled-components: 1.10.7_styled-components@4.4.1
   jest: 24.9.0
@@ -1248,6 +1249,12 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-sta3ui24HPgW92quHyQj6gpOkNgLNx8BX/QOU4k1bddo43ZdqlGwmzCYwL93bExfhergwiau+IzBGl7TCsSFeA==
+  /@testing-library/user-event/10.3.2:
+    dev: true
+    peerDependencies:
+      '@testing-library/dom': '>=5'
+    resolution:
+      integrity: sha512-/oyuBE61/l2HOJavOEXv/Z0oatPu2n/A/EptQSH4MoJimyBGozSvmwiP/Wol9IbSo3u2Tl93BDd7b0M4aGLYug==
   /@types/babel__core/7.1.6:
     dependencies:
       '@babel/parser': 7.8.6
@@ -5042,6 +5049,7 @@ specifiers:
   '@testing-library/jest-dom': ^4.2.4
   '@testing-library/react': ^9.4.0
   '@testing-library/react-hooks': ^3.2.1
+  '@testing-library/user-event': ^10.3.2
   babel-plugin-react-docgen: ^4.1.0
   babel-plugin-styled-components: ^1.10.6
   focus-visible: ^5.1.0
