@@ -10,6 +10,7 @@ devDependencies:
   '@babel/preset-env': 7.10.2_@babel+core@7.10.2
   '@babel/preset-react': 7.10.1_@babel+core@7.10.2
   '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@1.32.1
+  '@rollup/plugin-json': 4.1.0_rollup@1.32.1
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.5.0_react-dom@16.13.1+react@16.13.1
   babel-plugin-react-docgen: 4.1.0
@@ -22,7 +23,6 @@ devDependencies:
   react-dom: 16.13.1_react@16.13.1
   rollup: 1.32.1
   rollup-plugin-commonjs: 9.3.4_rollup@1.32.1
-  rollup-plugin-json: 4.0.0
   rollup-plugin-node-resolve: 4.2.4
   rollup-plugin-polyfill: 3.0.0
   styled-components: 4.4.1_4f54128445bc6f13bd713dcb3d91e98e
@@ -1241,6 +1241,15 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-NlaPf4E6YFxeOCbqc+A2PTkB1BSy3rfKu6EJuQ1MGhMHpTVvMqKi6Rf0DlwtnEsTNK9LueUgsGEgp5Occ4KDVA==
+  /@rollup/plugin-json/4.1.0_rollup@1.32.1:
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@1.32.1
+      rollup: 1.32.1
+    dev: true
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0
+    resolution:
+      integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
   /@rollup/pluginutils/3.1.0_rollup@1.32.1:
     dependencies:
       '@types/estree': 0.0.39
@@ -4453,13 +4462,6 @@ packages:
       rollup: '>=0.56.0'
     resolution:
       integrity: sha512-DTZOvRoiVIHHLFBCL4pFxOaJt8pagxsVldEXBOn6wl3/V21wVaj17HFfyzTsQUuou3sZL3lEJZVWKPFblJfI6w==
-  /rollup-plugin-json/4.0.0:
-    dependencies:
-      rollup-pluginutils: 2.8.2
-    deprecated: This module has been deprecated and is no longer maintained. Please use @rollup/plugin-json.
-    dev: true
-    resolution:
-      integrity: sha512-hgb8N7Cgfw5SZAkb3jf0QXii6QX/FOkiIq2M7BAQIEydjHvTyxXHQiIzZaTFgx1GK0cRCHOCBHIyEkkLdWKxow==
   /rollup-plugin-node-resolve/4.2.4:
     dependencies:
       '@types/resolve': 0.0.8
@@ -5226,6 +5228,7 @@ specifiers:
   '@equinor/eds-icons': 'workspace:*'
   '@equinor/eds-tokens': 'workspace:*'
   '@rollup/plugin-babel': ^5.0.3
+  '@rollup/plugin-json': ^4.1.0
   '@testing-library/jest-dom': ^4.2.4
   '@testing-library/react': ^9.5.0
   '@testing-library/react-hooks': ^3.3.0
@@ -5241,7 +5244,6 @@ specifiers:
   react-dom: ^16.13.1
   rollup: ^1.32.1
   rollup-plugin-commonjs: ^9.3.4
-  rollup-plugin-json: ^4.0.0
   rollup-plugin-node-resolve: ^4.2.4
   rollup-plugin-polyfill: ^3.0.0
   styled-components: ^4.4.1
