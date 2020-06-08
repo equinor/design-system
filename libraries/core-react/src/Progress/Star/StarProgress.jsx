@@ -125,6 +125,7 @@ const StarProgress = forwardRef(function StarProgress(
     <Svg
       {...rootProps}
       role="progressbar"
+      className={`${variant}-progress`}
       width="40"
       height="48"
       viewBox="0 0 40 48"
