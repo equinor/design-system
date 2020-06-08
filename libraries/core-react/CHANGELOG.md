@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed a bug where `<Tooltip>` did not close as expected. ([#339](https://github.com/equinor/design-system/issues/339))
 
+### Changed
+
+- README
+  - Moved Banner, Popover, Selection controls and Slider to «Available»
+  - Moved Progress indicator and Snackbar to «In progress»
+
 ## [0.2.2] - 2020-06-02
 
 ### Fixed 🐛
