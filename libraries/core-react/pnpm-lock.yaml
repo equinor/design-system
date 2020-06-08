@@ -10,7 +10,9 @@ devDependencies:
   '@babel/preset-env': 7.10.2_@babel+core@7.10.2
   '@babel/preset-react': 7.10.1_@babel+core@7.10.2
   '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@2.15.0
+  '@rollup/plugin-commonjs': 13.0.0_rollup@2.15.0
   '@rollup/plugin-json': 4.1.0_rollup@2.15.0
+  '@rollup/plugin-node-resolve': 8.0.1_rollup@2.15.0
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.5.0_react-dom@16.13.1+react@16.13.1
   babel-plugin-react-docgen: 4.1.0
@@ -22,8 +24,6 @@ devDependencies:
   react: 16.13.1
   react-dom: 16.13.1_react@16.13.1
   rollup: 2.15.0
-  rollup-plugin-commonjs: 9.3.4_rollup@2.15.0
-  rollup-plugin-node-resolve: 4.2.4
   rollup-plugin-polyfill: 3.0.0
   styled-components: 4.4.1_4f54128445bc6f13bd713dcb3d91e98e
 lockfileVersion: 5.1
@@ -1241,6 +1241,23 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-NlaPf4E6YFxeOCbqc+A2PTkB1BSy3rfKu6EJuQ1MGhMHpTVvMqKi6Rf0DlwtnEsTNK9LueUgsGEgp5Occ4KDVA==
+  /@rollup/plugin-commonjs/13.0.0_rollup@2.15.0:
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.15.0
+      commondir: 1.0.1
+      estree-walker: 1.0.1
+      glob: 7.1.6
+      is-reference: 1.2.0
+      magic-string: 0.25.7
+      resolve: 1.17.0
+      rollup: 2.15.0
+    dev: true
+    engines:
+      node: '>= 8.0.0'
+    peerDependencies:
+      rollup: ^2.3.4
+    resolution:
+      integrity: sha512-Anxc3qgkAi7peAyesTqGYidG5GRim9jtg8xhmykNaZkImtvjA7Wsqep08D2mYsqw1IF7rA3lYfciLgzUSgRoqw==
   /@rollup/plugin-json/4.1.0_rollup@2.15.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.15.0
@@ -1250,6 +1267,23 @@ packages:
       rollup: ^1.20.0 || ^2.0.0
     resolution:
       integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
+  /@rollup/plugin-node-resolve/8.0.1_rollup@2.15.0:
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.15.0
+      '@types/resolve': 0.0.8
+      builtin-modules: 3.1.0
+      deep-freeze: 0.0.1
+      deepmerge: 4.2.2
+      is-module: 1.0.0
+      resolve: 1.17.0
+      rollup: 2.15.0
+    dev: true
+    engines:
+      node: '>= 8.0.0'
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    resolution:
+      integrity: sha512-KIeAmueDDaYMqMBnUngLVVZhURwxA12nq/YB6nGm5/JpVyOMwI1fCVU3oL/dAnnLBG7oiPXntO5LHOiMrfNXCA==
   /@rollup/pluginutils/3.1.0_rollup@2.15.0:
     dependencies:
       '@types/estree': 0.0.39
@@ -1361,6 +1395,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
+  /@types/estree/0.0.44:
+    dev: true
+    resolution:
+      integrity: sha512-iaIVzr+w2ZJ5HkidlZ3EJM8VTZb2MJLCjw3V+505yVts0gRC4UMvjw0d1HPtGqI/HQC/KdsYtayfzl+AXY2R8g==
   /@types/istanbul-lib-coverage/2.0.2:
     dev: true
     resolution:
@@ -1987,6 +2025,10 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
+  /commondir/1.0.1:
+    dev: true
+    resolution:
+      integrity: sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
   /component-emitter/1.3.0:
     dev: true
     resolution:
@@ -2115,10 +2157,20 @@ packages:
       node: '>=0.10'
     resolution:
       integrity: sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
+  /deep-freeze/0.0.1:
+    dev: true
+    resolution:
+      integrity: sha1-OgsABd4YZygZ39OM0x+RF5yJPoQ=
   /deep-is/0.1.3:
     dev: true
     resolution:
       integrity: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+  /deepmerge/4.2.2:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
   /define-properties/1.1.3:
     dependencies:
       object-keys: 1.1.1
@@ -2276,10 +2328,6 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha512-39nnKffWz8xN1BU/2c79n9nB9HDzo0niYUqx6xyqUnyoAnQyyWpOTdZEeiCch8BBu515t4wp9ZmgVfVhn9EBpw==
-  /estree-walker/0.6.1:
-    dev: true
-    resolution:
-      integrity: sha512-SqmZANLWS0mnatqbSfRP5g8OXZC12Fgg1IwNtLsyHDzJizORW4khDfjPqJZsemPWBB2uqykUah5YpQ6epsqC/w==
   /estree-walker/1.0.1:
     dev: true
     resolution:
@@ -2872,6 +2920,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
+  /is-reference/1.2.0:
+    dependencies:
+      '@types/estree': 0.0.44
+    dev: true
+    resolution:
+      integrity: sha512-ZVxq+5TkOx6GQdnoMm2aRdCKADdcrOWXLGzGT+vIA8DMpqEJaRk5AL1bS80zJ2bjHunVmjdzfCt0e4BymIEqKQ==
   /is-regex/1.1.0:
     dependencies:
       has-symbols: 1.0.1
@@ -4447,41 +4501,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
-  /rollup-plugin-commonjs/9.3.4_rollup@2.15.0:
-    dependencies:
-      estree-walker: 0.6.1
-      magic-string: 0.25.7
-      resolve: 1.17.0
-      rollup: 2.15.0
-      rollup-pluginutils: 2.8.2
-    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-commonjs.
-    dev: true
-    peerDependencies:
-      rollup: '>=0.56.0'
-    resolution:
-      integrity: sha512-DTZOvRoiVIHHLFBCL4pFxOaJt8pagxsVldEXBOn6wl3/V21wVaj17HFfyzTsQUuou3sZL3lEJZVWKPFblJfI6w==
-  /rollup-plugin-node-resolve/4.2.4:
-    dependencies:
-      '@types/resolve': 0.0.8
-      builtin-modules: 3.1.0
-      is-module: 1.0.0
-      resolve: 1.17.0
-    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-node-resolve.
-    dev: true
-    resolution:
-      integrity: sha512-t/64I6l7fZ9BxqD3XlX4ZeO6+5RLKyfpwE2CiPNUKa+GocPlQhf/C208ou8y3AwtNsc6bjSk/8/6y/YAyxCIvw==
   /rollup-plugin-polyfill/3.0.0:
     dependencies:
       magic-string: 0.25.7
     dev: true
     resolution:
       integrity: sha512-LfJ1OR/wJrJdNDVNrdhVm7CgENfaNoQlFYMaQ0vlQH3zO+BMVrBMWDX9k6HVcr9gHsKbthrkiBzWRfFU9fr0hQ==
-  /rollup-pluginutils/2.8.2:
-    dependencies:
-      estree-walker: 0.6.1
-    dev: true
-    resolution:
-      integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==
   /rollup/2.15.0:
     dev: true
     engines:
@@ -5226,7 +5251,9 @@ specifiers:
   '@equinor/eds-icons': 'workspace:*'
   '@equinor/eds-tokens': 'workspace:*'
   '@rollup/plugin-babel': ^5.0.3
+  '@rollup/plugin-commonjs': ^13.0.0
   '@rollup/plugin-json': ^4.1.0
+  '@rollup/plugin-node-resolve': ^8.0.1
   '@testing-library/jest-dom': ^4.2.4
   '@testing-library/react': ^9.5.0
   '@testing-library/react-hooks': ^3.3.0
@@ -5241,7 +5268,5 @@ specifiers:
   react: ^16.13.1
   react-dom: ^16.13.1
   rollup: ^2.15.0
-  rollup-plugin-commonjs: ^9.3.4
-  rollup-plugin-node-resolve: ^4.2.4
   rollup-plugin-polyfill: ^3.0.0
   styled-components: ^4.4.1
