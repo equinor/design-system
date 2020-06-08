@@ -127,7 +127,7 @@ export const WithFormsControl = () => {
           Example with React Hook Form
         </Typography>
         <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-          Real life example with an external{' '}
+          Real life example with an external
           <a
             href="https://react-hook-form.com/"
             rel="noreferrer noopener"
