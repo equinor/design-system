@@ -13,7 +13,7 @@ devDependencies:
   '@rollup/plugin-commonjs': 13.0.0_rollup@2.15.0
   '@rollup/plugin-json': 4.1.0_rollup@2.15.0
   '@rollup/plugin-node-resolve': 8.0.1_rollup@2.15.0
-  '@testing-library/jest-dom': 4.2.4
+  '@testing-library/jest-dom': 5.9.0
   '@testing-library/react': 9.5.0_react-dom@16.13.1+react@16.13.1
   babel-plugin-react-docgen: 4.1.0
   babel-plugin-styled-components: 1.10.7_styled-components@4.4.1
@@ -1315,23 +1315,24 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-lBD88ssxqEfz0wFL6MeUyyWZfV/2cjEZZV3YRpb2IoJRej/4f1jB0TzqIOznTpfR1r34CNesrubxwIlAQ8zgPA==
-  /@testing-library/jest-dom/4.2.4:
+  /@testing-library/jest-dom/5.9.0:
     dependencies:
       '@babel/runtime': 7.10.2
-      chalk: 2.4.2
+      '@types/testing-library__jest-dom': 5.9.1
+      chalk: 3.0.0
       css: 2.2.4
       css.escape: 1.5.1
-      jest-diff: 24.9.0
-      jest-matcher-utils: 24.9.0
+      jest-diff: 25.5.0
+      jest-matcher-utils: 25.5.0
       lodash: 4.17.15
-      pretty-format: 24.9.0
       redent: 3.0.0
     dev: true
     engines:
       node: '>=8'
       npm: '>=6'
+      yarn: '>=1'
     resolution:
-      integrity: sha512-j31Bn0rQo12fhCWOUWy9fl7wtqkp7In/YP2p5ZFyRuiiB9Qs3g+hS4gAmDWONbAHcRmVooNJ5eOHQDCOmUFXHg==
+      integrity: sha512-uZ68dyILuM2VL13lGz4ehFEAgxzvLKRu8wQxyAZfejWnyMhmipJ60w4eG81NQikJHBfaYXx+Or8EaPQTDwGfPA==
   /@testing-library/react-hooks/3.3.0_react@16.13.1:
     dependencies:
       '@babel/runtime': 7.10.2
@@ -1416,6 +1417,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-P/W9yOX/3oPZSpaYOCQzGqgCQRXn0FFO/V8bWrCQs+wLmvVVxk6CRBXALEvNs9OHIatlnlFokfhuDo2ug01ciw==
+  /@types/jest/25.2.3:
+    dependencies:
+      jest-diff: 25.5.0
+      pretty-format: 25.5.0
+    dev: true
+    resolution:
+      integrity: sha512-JXc1nK/tXHiDhV55dvfzqtmP4S3sy3T3ouV2tkViZgxY/zeUkcpQcQPGRlgF4KmWzWW5oiWYSZwtCB+2RsE4Fw==
   /@types/node/14.0.11:
     dev: true
     resolution:
@@ -1463,6 +1471,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-8yu1gSwUEAwzg2OlPNbGq+ixhmSviGurBu1+ivxRKq1eRcwdjkmlwtPvr9VhuxTq2fNHBWN2po6Iem3Xt5A6rg==
+  /@types/testing-library__jest-dom/5.9.1:
+    dependencies:
+      '@types/jest': 25.2.3
+    dev: true
+    resolution:
+      integrity: sha512-yYn5EKHO3MPEMSOrcAb1dLWY+68CG29LiXKsWmmpVHqoP5+ZRiAVLyUHvPNrO2dABDdUGZvavMsaGpWNjM6N2g==
   /@types/testing-library__react-hooks/3.2.0:
     dependencies:
       '@types/react': 16.9.35
@@ -2222,6 +2236,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-Dj6Wk3tWyTE+Fo1rW8v0Xhwk80um6yFYKbuAxc9c3EZxIHFDYwbi34Uk42u1CdnIiVorvt4RmlSDjIPyzGC2ew==
+  /diff-sequences/25.2.6:
+    dev: true
+    engines:
+      node: '>= 8.3'
+    resolution:
+      integrity: sha512-Hq8o7+6GaZeoFjtpgvRBUknSXNeJiCx7V9Fr94ZMljNiCr9n9L8H8aJqgWOQiDDGdyn29fRNcDdRVJ5fdyihfg==
   /doctrine/3.0.0:
     dependencies:
       esutils: 2.0.3
@@ -3110,6 +3130,17 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-qMfrTs8AdJE2iqrTp0hzh7kTd2PQWrsFyj9tORoKmu32xjPjeE4NyjVRDz8ybYwqS2ik8N4hsIpiVTyFeo2lBQ==
+  /jest-diff/25.5.0:
+    dependencies:
+      chalk: 3.0.0
+      diff-sequences: 25.2.6
+      jest-get-type: 25.2.6
+      pretty-format: 25.5.0
+    dev: true
+    engines:
+      node: '>= 8.3'
+    resolution:
+      integrity: sha512-z1kygetuPiREYdNIumRpAHY6RXiGmp70YHptjdaxTWGmA085W3iCnXNx0DhflK3vwrKmrRWyY1wUpkPMVxMK7A==
   /jest-docblock/24.9.0:
     dependencies:
       detect-newline: 2.1.0
@@ -3161,6 +3192,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-lUseMzAley4LhIcpSP9Jf+fTrQ4a1yHQwLNeeVa2cEmbCGeoZAtYPOIv8JaxLD/sUpKxetKGP+gsHl8f8TSj8Q==
+  /jest-get-type/25.2.6:
+    dev: true
+    engines:
+      node: '>= 8.3'
+    resolution:
+      integrity: sha512-DxjtyzOHjObRM+sM1knti6or+eOgcGU4xVSb2HNP1TqO4ahsT+rqZg+nyqHWJSvWgKC5cG3QjGFBqxLghiF/Ig==
   /jest-haste-map/24.9.0:
     dependencies:
       '@jest/types': 24.9.0
@@ -3224,6 +3261,17 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-OZz2IXsu6eaiMAwe67c1T+5tUAtQyQx27/EMEkbFAGiw52tB9em+uGbzpcgYVpA8wl0hlxKPZxrly4CXU/GjHA==
+  /jest-matcher-utils/25.5.0:
+    dependencies:
+      chalk: 3.0.0
+      jest-diff: 25.5.0
+      jest-get-type: 25.2.6
+      pretty-format: 25.5.0
+    dev: true
+    engines:
+      node: '>= 8.3'
+    resolution:
+      integrity: sha512-VWI269+9JS5cpndnpCwm7dy7JtGQT30UHfrnM3mXl22gHGt/b7NkjBqXfbhZ8V4B7ANUsjK18PlSBmG0YH7gjw==
   /jest-message-util/24.9.0:
     dependencies:
       '@babel/code-frame': 7.10.1
@@ -5254,7 +5302,7 @@ specifiers:
   '@rollup/plugin-commonjs': ^13.0.0
   '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^8.0.1
-  '@testing-library/jest-dom': ^4.2.4
+  '@testing-library/jest-dom': ^5.9.0
   '@testing-library/react': ^9.5.0
   '@testing-library/react-hooks': ^3.3.0
   babel-plugin-react-docgen: ^4.1.0
