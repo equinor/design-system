@@ -5,6 +5,7 @@ dependencies:
   '@storybook/react': 5.3.19_a2ca6e9a5fc29e5f4ab9c875ee95f549
   babel-runtime: 6.26.0
   react-dom: 16.13.1_react@16.13.1
+  react-hook-form: 5.7.2_react@16.13.1
   styled-components: 5.1.1_9a4a3b3ed34a772b68db523825332f5f
 devDependencies:
   '@babel/core': 7.10.2
@@ -7946,6 +7947,14 @@ packages:
       react-dom: ^16.6.0
     resolution:
       integrity: sha512-t+bhAI4NgxfEv8ez4r77cLfR4O4Z55E/FH2DT+uiE4U7yfWgAk7OAOi7IxHxuYEVLI26bqjZvlVCkpC5/5AoNA==
+  /react-hook-form/5.7.2_react@16.13.1:
+    dependencies:
+      react: 16.13.1
+    dev: false
+    peerDependencies:
+      react: ^16.8.0
+    resolution:
+      integrity: sha512-bJvY348vayIvEUmSK7Fvea/NgqbT2racA2IbnJz/aPlQ3GBtaTeDITH6rtCa6y++obZzG6E3Q8VuoXPir7QYUg==
   /react-hotkeys/2.0.0_react@16.13.1:
     dependencies:
       prop-types: 15.7.2
@@ -10160,5 +10169,6 @@ specifiers:
   babel-runtime: ^6.26.0
   react: ^16.13.1
   react-dom: ^16.13.1
+  react-hook-form: ^5.7.2
   react-is: ^16.13.1
   styled-components: ^5.1.1
