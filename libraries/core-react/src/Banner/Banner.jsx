@@ -12,7 +12,7 @@ const Content = styled.div`
   padding: ${enabled.spacings};
   display: grid;
   grid-template-columns: ${({ hasIcon }) =>
-    hasIcon ? 'min-content 1fr auto' : '1fr auto'}
+    hasIcon ? 'min-content 1fr auto' : '1fr auto'};
   align-items: center;
 `
 
