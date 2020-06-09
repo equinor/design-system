@@ -13,11 +13,15 @@ import {
 } from '../functions/file'
 import { getAssets } from '../files/assets'
 import { PATHS, FILE_IDS } from '../constants'
-import { sleep } from '@utils'
+import { sleep, mergeStrings } from '@utils'
 
 const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
 
-const svgPathData = (svg) => R.head(R.tail(R.match(/d="(.[^"]+)"/, svg)))
+const svgPathData = R.pipe(
+  R.match(/d="(.+?)"/g),
+  R.map(R.match(/[^d="](.+)[^"]/g)),
+  mergeStrings,
+)
 
 const writeSVGSprite = (assets) => {
   const value = R.pipe(
