@@ -3,21 +3,6 @@ import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 
-// const indeterminate1 = keyframes`
-//   0% {
-//         left: -35%;
-//         right: 100%;
-//       }
-
-//       60% {
-//         left: 100%;
-//         right: -90%;
-//       }
-//       100% {
-//         left: 100%;
-//         right: -90%;
-//       }
-// `
 const indeterminate2 = keyframes`
    0%{
         left: -200%;
@@ -59,7 +44,6 @@ const ProgressBar = styled.div`
   top: 0;
   transition: transform 0.2s linear;
   transform-origin: left;
-  ${(transform) => transform};
 `
 const IndeterminateProgress = styled.div`
   width: 75%;
@@ -82,7 +66,6 @@ const LinearProgress = forwardRef(function LinearProgress(
   const rootProps = {
     ...props,
     ref,
-    className,
   }
   let barStyle
   if (variant === 'determinate') {
@@ -98,7 +81,6 @@ const LinearProgress = forwardRef(function LinearProgress(
 
   const progressProps = {
     variant,
-    transform: barStyle,
   }
 
   return (
@@ -107,7 +89,7 @@ const LinearProgress = forwardRef(function LinearProgress(
       role="progressbar"
       className={`${className} ${variant}-progress`}
     >
-      <ProgressBar {...progressProps} />
+      <ProgressBar {...progressProps} style={{ transform: barStyle }} />
       {variant === 'indeterminate' && <IndeterminateProgress />}
     </ProgressRoot>
   )

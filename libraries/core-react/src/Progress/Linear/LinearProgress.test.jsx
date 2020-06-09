@@ -12,7 +12,7 @@ const StyledProgress = styled(LinearProgress)`
 
 afterEach(cleanup)
 
-describe('LinearProgress', () => {
+describe('LinearProgress ', () => {
   it('should render indeterminate as default', () => {
     render(<LinearProgress />)
     const progress = screen.getByRole('progressbar')
