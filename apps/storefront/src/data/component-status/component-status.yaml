@@ -177,7 +177,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *4
   - component: 'Notification Dialog'
     status:
       documentation:
@@ -193,7 +193,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *3
   - component: Popovers
     status:
       documentation:
@@ -201,7 +201,7 @@ components:
       figma:
         - *4
       react:
-        - *3
+        - *4
   - component: Progress indicators
     status:
       documentation:
@@ -209,7 +209,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *3
   - component: Search
     status:
       documentation:
@@ -225,7 +225,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *4
   - component: Scrim
     status:
       documentation:
@@ -249,7 +249,7 @@ components:
       figma:
         - *4
       react:
-        - *3
+        - *4
   - component: Stepper
     status:
       documentation:

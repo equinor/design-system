@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "The React implementation of the Equinor Design System",
   "main": "dist/core-react.cjs.js",
   "module": "dist/core-react.es.js",
@@ -47,6 +47,7 @@
     "@rollup/plugin-node-resolve": "^8.0.1",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.2.1",
+    "@testing-library/user-event": "^10.3.2",
     "babel-plugin-react-docgen": "^4.1.0",
     "babel-plugin-styled-components": "^1.10.7",
     "jest": "^26.0.1",
