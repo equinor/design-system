@@ -1111,6 +1111,15 @@ export const hourglass_full = {
     'M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z',
 }
 
+export const cable = {
+  name: 'cable',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M7 4.5a1 1 0 00-2 0v4a1 1 0 102 0v-4zm10.25-.75A4.75 4.75 0 0012.5 8.5v6.75a2.75 2.75 0 11-5.5 0V11.5a1 1 0 10-2 0v3.75a4.75 4.75 0 109.5 0V8.5a2.75 2.75 0 015.5 0V19a1 1 0 002 0V8.5a4.75 4.75 0 00-4.75-4.75zM1.293 7.793a1 1 0 011.414 0l1.414 1.414a1 1 0 11-1.414 1.414L1.293 9.207a1 1 0 010-1.414zm8 0a1 1 0 011.414 1.414l-1.414 1.414a1 1 0 01-1.415-1.414l1.415-1.414z',
+}
+
 export const beat = {
   name: 'beat',
   prefix: 'eds',
@@ -4629,7 +4638,8 @@ export const info_circle = {
   prefix: 'eds',
   height: '24',
   width: '24',
-  svgPathData: 'M11 7h2v2h-2V7zM11 11h2v6h-2v-6z',
+  svgPathData:
+    'M11 7h2v2h-2V7zM11 11h2v6h-2v-6zM2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8z',
 }
 
 export const donut_large = {

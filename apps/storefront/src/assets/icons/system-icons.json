@@ -1625,6 +1625,19 @@
     "pathData": "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z"
   },
   {
+    "name": "cable",
+    "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M7 4.5a1 1 0 00-2 0v4a1 1 0 102 0v-4zm10.25-.75A4.75 4.75 0 0012.5 8.5v6.75a2.75 2.75 0 11-5.5 0V11.5a1 1 0 10-2 0v3.75a4.75 4.75 0 109.5 0V8.5a2.75 2.75 0 015.5 0V19a1 1 0 002 0V8.5a4.75 4.75 0 00-4.75-4.75zM1.293 7.793a1 1 0 011.414 0l1.414 1.414a1 1 0 11-1.414 1.414L1.293 9.207a1 1 0 010-1.414zm8 0a1 1 0 011.414 1.414l-1.414 1.414a1 1 0 01-1.415-1.414l1.415-1.414z\"/></svg>",
+    "id": "3219:6990",
+    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/e621/2d84/09e53968f078c02f007c2db78fbfa76b",
+    "path": "technical",
+    "group": "Technical",
+    "viewbox": "0 0 24 24",
+    "height": "24",
+    "width": "24",
+    "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTcgNC41YTEgMSAwIDAwLTIgMHY0YTEgMSAwIDEwMiAwdi00em0xMC4yNS0uNzVBNC43NSA0Ljc1IDAgMDAxMi41IDguNXY2Ljc1YTIuNzUgMi43NSAwIDExLTUuNSAwVjExLjVhMSAxIDAgMTAtMiAwdjMuNzVhNC43NSA0Ljc1IDAgMTA5LjUgMFY4LjVhMi43NSAyLjc1IDAgMDE1LjUgMFYxOWExIDEgMCAwMDIgMFY4LjVhNC43NSA0Ljc1IDAgMDAtNC43NS00Ljc1ek0xLjI5MyA3Ljc5M2ExIDEgMCAwMTEuNDE0IDBsMS40MTQgMS40MTRhMSAxIDAgMTEtMS40MTQgMS40MTRMMS4yOTMgOS4yMDdhMSAxIDAgMDEwLTEuNDE0em04IDBhMSAxIDAgMDExLjQxNCAxLjQxNGwtMS40MTQgMS40MTRhMSAxIDAgMDEtMS40MTUtMS40MTRsMS40MTUtMS40MTR6Ii8+PC9zdmc+",
+    "pathData": "M7 4.5a1 1 0 00-2 0v4a1 1 0 102 0v-4zm10.25-.75A4.75 4.75 0 0012.5 8.5v6.75a2.75 2.75 0 11-5.5 0V11.5a1 1 0 10-2 0v3.75a4.75 4.75 0 109.5 0V8.5a2.75 2.75 0 015.5 0V19a1 1 0 002 0V8.5a4.75 4.75 0 00-4.75-4.75zM1.293 7.793a1 1 0 011.414 0l1.414 1.414a1 1 0 11-1.414 1.414L1.293 9.207a1 1 0 010-1.414zm8 0a1 1 0 011.414 1.414l-1.414 1.414a1 1 0 01-1.415-1.414l1.415-1.414z"
+  },
+  {
     "name": "beat",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.5 4a1 1 0 00-.97.757l-1.845 7.378-.79-1.582a1 1 0 00-1.79 0L4.383 14H2a1 1 0 100 2h3a1 1 0 00.894-.553L7 13.237l1.106 2.21a1 1 0 001.864-.204l1.53-6.12 2.53 10.12a1 1 0 001.94 0l1.03-4.12.03.12A1 1 0 0018 16h4a1 1 0 100-2h-3.22l-.81-3.242a1 1 0 00-1.94 0L15 14.877l-2.53-10.12A1 1 0 0011.5 4z\"/></svg>",
     "id": "3189:0",
@@ -6731,7 +6744,7 @@
     "height": "24",
     "width": "24",
     "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTEgN2gydjJoLTJWN3pNMTEgMTFoMnY2aC0ydi02eiIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMiAxMkMyIDYuNDggNi40OCAyIDEyIDJzMTAgNC40OCAxMCAxMC00LjQ4IDEwLTEwIDEwUzIgMTcuNTIgMiAxMnptMiAwYzAgNC40MSAzLjU5IDggOCA4czgtMy41OSA4LTgtMy41OS04LTgtOC04IDMuNTktOCA4eiIvPjwvc3ZnPg==",
-    "pathData": "M11 7h2v2h-2V7zM11 11h2v6h-2v-6z"
+    "pathData": "M11 7h2v2h-2V7zM11 11h2v6h-2v-6zM2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8z"
   },
   {
     "name": "donut_large",
