@@ -1,7 +1,6 @@
 devDependencies:
   babel-eslint: 10.1.0_eslint@6.8.0
   eslint: 6.8.0
-  eslint-config-airbnb: 17.1.1_9ee1c93cdf0c5467537d5d0adbc77fb7
   eslint-config-prettier: 6.11.0_eslint@6.8.0
   eslint-plugin-import: 2.21.1_eslint@6.8.0
   eslint-plugin-jsx-a11y: 6.2.3_eslint@6.8.0
@@ -321,10 +320,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
-  /confusing-browser-globals/1.0.9:
-    dev: true
-    resolution:
-      integrity: sha512-KbS1Y0jMtyPgIxjO7ZzMAuUpAKMt1SzCL9fsrKsX6b0zJPTaT0SiSPmewwVZg9UAO83HVIlEhZF84LIjZ0lmAw==
   /contains-path/0.1.0:
     dev: true
     engines:
@@ -449,40 +444,6 @@ packages:
       node: '>=0.8.0'
     resolution:
       integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
-  /eslint-config-airbnb-base/13.2.0_05ec40e6727fb0452fa09b34aa3b627b:
-    dependencies:
-      confusing-browser-globals: 1.0.9
-      eslint: 6.8.0
-      eslint-plugin-import: 2.21.1_eslint@6.8.0
-      object.assign: 4.1.0
-      object.entries: 1.1.2
-    dev: true
-    engines:
-      node: '>= 4'
-    peerDependencies:
-      eslint: ^4.19.1 || ^5.3.0
-      eslint-plugin-import: ^2.17.2
-    resolution:
-      integrity: sha512-1mg/7eoB4AUeB0X1c/ho4vb2gYkNH8Trr/EgCT/aGmKhhG+F6vF5s8+iRBlWAzFIAphxIdp3YfEKgEl0f9Xg+w==
-  /eslint-config-airbnb/17.1.1_9ee1c93cdf0c5467537d5d0adbc77fb7:
-    dependencies:
-      eslint: 6.8.0
-      eslint-config-airbnb-base: 13.2.0_05ec40e6727fb0452fa09b34aa3b627b
-      eslint-plugin-import: 2.21.1_eslint@6.8.0
-      eslint-plugin-jsx-a11y: 6.2.3_eslint@6.8.0
-      eslint-plugin-react: 7.20.0_eslint@6.8.0
-      object.assign: 4.1.0
-      object.entries: 1.1.2
-    dev: true
-    engines:
-      node: '>= 4'
-    peerDependencies:
-      eslint: ^4.19.1 || ^5.3.0
-      eslint-plugin-import: ^2.18.0
-      eslint-plugin-jsx-a11y: ^6.2.3
-      eslint-plugin-react: ^7.14.2
-    resolution:
-      integrity: sha512-xCu//8a/aWqagKljt+1/qAM62BYZeNq04HmdevG5yUGWpja0I/xhqd6GdLRch5oetEGFiJAnvtGuTEAese53Qg==
   /eslint-config-prettier/6.11.0_eslint@6.8.0:
     dependencies:
       eslint: 6.8.0
@@ -1747,7 +1708,6 @@ packages:
 specifiers:
   babel-eslint: ^10.1.0
   eslint: ^6.8.0
-  eslint-config-airbnb: ^17.1.1
   eslint-config-prettier: ^6.11.0
   eslint-plugin-import: ^2.21.1
   eslint-plugin-jsx-a11y: ^6.2.3

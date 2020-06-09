@@ -1,7 +1,10 @@
 extends:
-  - airbnb
+  - eslint:recommended
   - prettier
+  - plugin:react/recommended
   - plugin:testing-library/react
+  - plugin:import/errors
+  - plugin:import/warnings
 plugins:
   - prettier
   - testing-library
@@ -14,6 +17,9 @@ parserOptions:
 env:
   browser: true
   node: true
+settings:
+  react:
+    version: detect
 globals:
   test: true
   expect: true
