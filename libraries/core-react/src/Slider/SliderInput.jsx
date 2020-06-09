@@ -57,7 +57,7 @@ const StyledSliderInput = styled.input.attrs(() => ({
   font: inherit;
   margin: 0;
   z-index: 2;
-  outline: none
+  outline: none;
   &[data-focus-visible-added]:focus {
     z-index: 2;
     &::-webkit-slider-thumb {

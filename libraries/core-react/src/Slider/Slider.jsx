@@ -70,7 +70,7 @@ const RangeWrapper = styled.div`
     ${fakeTrackBgHover}
     &::before,
     &::after {
-      background: ${enabled.track.indicator.hover.color}
+      background: ${enabled.track.indicator.hover.color};
     }
   }
  
