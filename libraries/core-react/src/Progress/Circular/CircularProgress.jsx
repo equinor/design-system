@@ -46,7 +46,6 @@ const CircularProgress = forwardRef(function CircularProgress(
   const rootProps = {
     ...props,
     ref,
-    className,
     variant,
   }
   const circleStyle = {}

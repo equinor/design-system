@@ -3,7 +3,7 @@ import React from 'react'
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 import { DotProgress } from '..'
 

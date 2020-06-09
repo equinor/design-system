@@ -35,7 +35,6 @@ const DotProgress = forwardRef(function DotProgress(
     color: tokens.dots[variant].color,
     ref,
     ...rest,
-    className,
   }
 
   return (
