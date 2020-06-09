@@ -1,6 +1,7 @@
 extends:
   - eslint:recommended
   - prettier
+  - prettier/react
   - plugin:react/recommended
   - plugin:testing-library/react
   - plugin:import/errors
