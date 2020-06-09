@@ -4,7 +4,6 @@ import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { progress as tokens } from '../Progress.tokens'
 import { CircularProgress } from '..'
 
 const StyledProgress = styled(CircularProgress)`
@@ -16,20 +15,17 @@ afterEach(cleanup)
 describe('CircularProgress', () => {
   it('should render indeterminate as default', () => {
     render(<CircularProgress />)
-    const progressbar = screen.getByRole('progressbar')
-
-    expect(progressbar).toHaveClass('indeterminate-progress')
+    const progress = screen.getByRole('progressbar')
+    expect(progress).toHaveClass('indeterminate-progress')
   })
   it('should render determinate if stated in props', () => {
-    render(<CircularProgress variant="indeterminate" value={50} />)
-    const progressbar = screen.getByRole('progressbar')
-
-    expect(progressbar).toHaveClass('indeterminate-progress')
+    render(<CircularProgress variant="determinate" value={50} />)
+    const progress = screen.getByRole('progressbar')
+    expect(progress).toHaveClass('determinate-progress')
   })
   it('has aria values on variant=determinate', () => {
     render(<CircularProgress variant="determinate" value={50} />)
     const progress = screen.getByRole('progressbar')
-
     expect(progress).toHaveAttribute('aria-valuenow', '50')
     expect(progress).toHaveAttribute('aria-valuemin', '0')
     expect(progress).toHaveAttribute('aria-valuemax', '100')
@@ -37,7 +33,6 @@ describe('CircularProgress', () => {
   it('can extend the css for the component', () => {
     const { container } = render(<StyledProgress />)
     const progress = container.firstChild
-    // expect(container.firstChild).toHaveStyleRule('position', 'absolute')
     expect(progress).toHaveStyleRule('position', 'absolute')
   })
 })
