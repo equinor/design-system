@@ -1,21 +1,69 @@
 devDependencies:
+  babel-eslint: 10.1.0_eslint@6.7.2
   eslint: 6.7.2
   eslint-config-airbnb: 17.1.1_8e7ed5692c3a582a54ce22333d27b452
   eslint-config-prettier: 6.7.0_eslint@6.7.2
   eslint-plugin-import: 2.19.1_eslint@6.7.2
   eslint-plugin-jsx-a11y: 6.2.3_eslint@6.7.2
-  eslint-plugin-prettier: 3.1.2_eslint@6.7.2+prettier@1.19.1
+  eslint-plugin-prettier: 3.1.2_eslint@6.7.2+prettier@2.0.5
   eslint-plugin-react: 7.17.0_eslint@6.7.2
   eslint-plugin-testing-library: 1.3.4_eslint@6.7.2
-  prettier: 1.19.1
+  prettier: 2.0.5
 lockfileVersion: 5.1
 packages:
+  /@babel/code-frame/7.10.1:
+    dependencies:
+      '@babel/highlight': 7.10.1
+    dev: true
+    resolution:
+      integrity: sha512-IGhtTmpjGbYzcEDOw7DcQtbQSXcG9ftmAXtWTu9V936vDye4xjjekktFAtgZsWpzTj/X01jocB46mTywm/4SZw==
   /@babel/code-frame/7.5.5:
     dependencies:
       '@babel/highlight': 7.5.0
     dev: true
     resolution:
       integrity: sha512-27d4lZoomVyo51VegxI20xZPuSHusqbQag/ztrBC7wegWoQ1nLREPVSKSW8byhTlzTKyNE4ifaTA6lCp7JjpFw==
+  /@babel/generator/7.10.2:
+    dependencies:
+      '@babel/types': 7.10.2
+      jsesc: 2.5.2
+      lodash: 4.17.15
+      source-map: 0.5.7
+    dev: true
+    resolution:
+      integrity: sha512-AxfBNHNu99DTMvlUPlt1h2+Hn7knPpH5ayJ8OqDWSeLld+Fi2AYBTC/IejWDM9Edcii4UzZRCsbUt0WlSDsDsA==
+  /@babel/helper-function-name/7.10.1:
+    dependencies:
+      '@babel/helper-get-function-arity': 7.10.1
+      '@babel/template': 7.10.1
+      '@babel/types': 7.10.2
+    dev: true
+    resolution:
+      integrity: sha512-fcpumwhs3YyZ/ttd5Rz0xn0TpIwVkN7X0V38B9TWNfVF42KEkhkAAuPCQ3oXmtTRtiPJrmZ0TrfS0GKF0eMaRQ==
+  /@babel/helper-get-function-arity/7.10.1:
+    dependencies:
+      '@babel/types': 7.10.2
+    dev: true
+    resolution:
+      integrity: sha512-F5qdXkYGOQUb0hpRaPoetF9AnsXknKjWMZ+wmsIRsp5ge5sFh4c3h1eH2pRTTuy9KKAA2+TTYomGXAtEL2fQEw==
+  /@babel/helper-split-export-declaration/7.10.1:
+    dependencies:
+      '@babel/types': 7.10.2
+    dev: true
+    resolution:
+      integrity: sha512-UQ1LVBPrYdbchNhLwj6fetj46BcFwfS4NllJo/1aJsT+1dLTEnXJL0qHqtY7gPzF8S2fXBJamf1biAXV3X077g==
+  /@babel/helper-validator-identifier/7.10.1:
+    dev: true
+    resolution:
+      integrity: sha512-5vW/JXLALhczRCWP0PnFDMCJAchlBvM7f4uk/jXritBnIa6E1KmqmtrS3yn1LAnxFBypQ3eneLuXjsnfQsgILw==
+  /@babel/highlight/7.10.1:
+    dependencies:
+      '@babel/helper-validator-identifier': 7.10.1
+      chalk: 2.4.2
+      js-tokens: 4.0.0
+    dev: true
+    resolution:
+      integrity: sha512-8rMof+gVP8mxYZApLF/JgNDAkdKa+aJt3ZYxF8z6+j/hpeXL7iMsKCPHa2jNMHu/qqBwzQF4OHNoYi8dMA/rYg==
   /@babel/highlight/7.5.0:
     dependencies:
       chalk: 2.4.2
@@ -24,6 +72,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-7dV4eu9gBxoM0dAnj/BCFDW9LFU0zvTrkq0ugM7pnHEgguOEeOz1so2ZghEdzviYzQEED0r4EAgpsBChKy1TRQ==
+  /@babel/parser/7.10.2:
+    dev: true
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-PApSXlNMJyB4JiGVhCOlzKIif+TKFTvu0aQAhnTvfP/z3vVSN6ZypH5bfUNwFXXjRQtUEBNFd2PtmCmG2Py3qQ==
   /@babel/runtime-corejs3/7.7.6:
     dependencies:
       core-js-pure: 3.5.0
@@ -37,6 +92,36 @@ packages:
     dev: true
     resolution:
       integrity: sha512-BWAJxpNVa0QlE5gZdWjSxXtemZyZ9RmrmVozxt3NUXeZhVIJ5ANyqmMc0JDrivBZyxUuQvFxlvH4OWWOogGfUw==
+  /@babel/template/7.10.1:
+    dependencies:
+      '@babel/code-frame': 7.10.1
+      '@babel/parser': 7.10.2
+      '@babel/types': 7.10.2
+    dev: true
+    resolution:
+      integrity: sha512-OQDg6SqvFSsc9A0ej6SKINWrpJiNonRIniYondK2ViKhB06i3c0s+76XUft71iqBEe9S1OKsHwPAjfHnuvnCig==
+  /@babel/traverse/7.10.1:
+    dependencies:
+      '@babel/code-frame': 7.10.1
+      '@babel/generator': 7.10.2
+      '@babel/helper-function-name': 7.10.1
+      '@babel/helper-split-export-declaration': 7.10.1
+      '@babel/parser': 7.10.2
+      '@babel/types': 7.10.2
+      debug: 4.1.1
+      globals: 11.12.0
+      lodash: 4.17.15
+    dev: true
+    resolution:
+      integrity: sha512-C/cTuXeKt85K+p08jN6vMDz8vSV0vZcI0wmQ36o6mjbuo++kPMdpOYw23W2XH04dbRt9/nMEfA4W3eR21CD+TQ==
+  /@babel/types/7.10.2:
+    dependencies:
+      '@babel/helper-validator-identifier': 7.10.1
+      lodash: 4.17.15
+      to-fast-properties: 2.0.0
+    dev: true
+    resolution:
+      integrity: sha512-AD3AwWBSz0AWF0AkCN9VPiWrvldXq+/e3cHa4J89vo4ymjz1XwrBFFVZmkJTsQIPNk+ZVomPSXUJqq8yyjZsng==
   /acorn-jsx/5.1.0_acorn@7.1.0:
     dependencies:
       acorn: 7.1.0
@@ -140,6 +225,22 @@ packages:
       eslint: ^5 || ^6
     resolution:
       integrity: sha512-lF98xa/yvy6j3fBHAgQXIYl+J4eZadOSqsPojemUqClzNbBV38wWGpUbQbVEyf4eUF5yF7eHmGgGA2JiHyjeqw==
+  /babel-eslint/10.1.0_eslint@6.7.2:
+    dependencies:
+      '@babel/code-frame': 7.5.5
+      '@babel/parser': 7.10.2
+      '@babel/traverse': 7.10.1
+      '@babel/types': 7.10.2
+      eslint: 6.7.2
+      eslint-visitor-keys: 1.1.0
+      resolve: 1.14.0
+    dev: true
+    engines:
+      node: '>=6'
+    peerDependencies:
+      eslint: '>= 4.12.1'
+    resolution:
+      integrity: sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==
   /balanced-match/1.0.0:
     dev: true
     resolution:
@@ -440,10 +541,10 @@ packages:
       eslint: ^3 || ^4 || ^5 || ^6
     resolution:
       integrity: sha512-CawzfGt9w83tyuVekn0GDPU9ytYtxyxyFZ3aSWROmnRRFQFT2BiPJd7jvRdzNDi6oLWaS2asMeYSNMjWTV4eNg==
-  /eslint-plugin-prettier/3.1.2_eslint@6.7.2+prettier@1.19.1:
+  /eslint-plugin-prettier/3.1.2_eslint@6.7.2+prettier@2.0.5:
     dependencies:
       eslint: 6.7.2
-      prettier: 1.19.1
+      prettier: 2.0.5
       prettier-linter-helpers: 1.0.0
     dev: true
     engines:
@@ -698,6 +799,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
+  /globals/11.12.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
   /globals/12.3.0:
     dependencies:
       type-fest: 0.8.1
@@ -876,6 +983,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  /jsesc/2.5.2:
+    dev: true
+    engines:
+      node: '>=4'
+    hasBin: true
+    resolution:
+      integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
   /json-schema-traverse/0.4.1:
     dev: true
     resolution:
@@ -1174,13 +1288,13 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
-  /prettier/1.19.1:
+  /prettier/2.0.5:
     dev: true
     engines:
-      node: '>=4'
+      node: '>=10.13.0'
     hasBin: true
     resolution:
-      integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
+      integrity: sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
   /progress/2.0.3:
     dev: true
     engines:
@@ -1320,6 +1434,12 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-Qu+VC3EwYLldKa1fCxuuvULvSJOKEgk9pi8dZeCVK7TqBfUNTH4sFkk4joj8afVSfAYgJoSOetjx9QWOJ5mYoQ==
+  /source-map/0.5.7:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
   /spdx-correct/3.1.0:
     dependencies:
       spdx-expression-parse: 3.0.0
@@ -1447,6 +1567,12 @@ packages:
       node: '>=0.6.0'
     resolution:
       integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==
+  /to-fast-properties/2.0.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
   /tslib/1.10.0:
     dev: true
     resolution:
@@ -1508,6 +1634,7 @@ packages:
     resolution:
       integrity: sha512-/lg70HAjtkUgWPVZhZcm+T4hkL8Zbtp1nFNOn3lRrxnlv50SRBv7cR7RqR+GMsd3hUXy9hWBo4CHTbFTcOYwig==
 specifiers:
+  babel-eslint: ^10.1.0
   eslint: ^6.7.2
   eslint-config-airbnb: ^17.1.1
   eslint-config-prettier: ^6.7.0
@@ -1516,4 +1643,4 @@ specifiers:
   eslint-plugin-prettier: ^3.1.2
   eslint-plugin-react: ^7.17.0
   eslint-plugin-testing-library: ^1.3.4
-  prettier: ^1.19.1
+  prettier: ^2.0.5

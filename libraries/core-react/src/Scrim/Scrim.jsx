@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect, useCallback, useState } from 'react'
+import React, { forwardRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 
 const { height, width, background } = tokens
