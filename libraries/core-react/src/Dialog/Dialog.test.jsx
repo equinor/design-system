@@ -9,10 +9,13 @@ import { Dialog } from '.'
 
 const { Actions, Title, CustomContent } = Dialog
 
+const { width, minHeight } = tokens
+
 const StyledDialog = styled(Dialog)`
   background: red;
+  min-height: ${minHeight};
+  width: ${width};
 `
-const { width, minHeight } = tokens
 
 afterEach(cleanup)
 
