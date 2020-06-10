@@ -3,8 +3,11 @@ import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
 import classNames from 'classnames'
-import { Tabs } from '@equinor/eds-core-react'
+import { Tabs, Icon } from '@equinor/eds-core-react'
 import Layout from '../components/layout'
+
+import { save, thumbs_down } from '@equinor/eds-icons'
+Icon.add({ save, thumbs_down })
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
@@ -35,18 +38,12 @@ const Page = ({ data }) => {
               <Link
                 to={
                   index > 0
-                    ? `${linkSlug}${tab
-                        .toLowerCase()
-                        .split(' ')
-                        .join('-')}/`
+                    ? `${linkSlug}${tab.toLowerCase().split(' ').join('-')}/`
                     : linkSlug
                 }
                 className={classNames('Tab-link', {
                   'is-selected':
-                    tab
-                      .toLowerCase()
-                      .split(' ')
-                      .join('-') === currentPage,
+                    tab.toLowerCase().split(' ').join('-') === currentPage,
                 })}
               >
                 {tab}
@@ -68,6 +65,7 @@ const Page = ({ data }) => {
       {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
         <MDXRenderer>{page.body}</MDXRenderer>
       )}
+
       <p style={{ marginTop: '3rem' }}>
         <a
           href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
