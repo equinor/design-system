@@ -3,7 +3,8 @@
   "description": "The storefront for the Equinor Design System",
   "version": "0.0.1",
   "engines": {
-    "pnpm": ">=4"
+    "pnpm": ">=4",
+    "node": ">=10.0.0"
   },
   "author": "",
   "dependencies": {
