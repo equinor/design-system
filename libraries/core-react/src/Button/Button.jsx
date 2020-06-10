@@ -32,10 +32,10 @@ const Base = ({ base, baseDisabled: disabled }) => {
     border-width: ${border.width};
 
     ${spacing &&
-      css`
-        padding-left: ${spacing.left};
-        padding-right: ${spacing.right};
-      `}
+    css`
+      padding-left: ${spacing.left};
+      padding-right: ${spacing.right};
+    `}
 
     ${typographyTemplate(typography)}
 
@@ -51,9 +51,9 @@ const Base = ({ base, baseDisabled: disabled }) => {
     &:hover {
       background: ${hover.background};
       ${hover.radius &&
-        css`
-          border-radius: ${hover.radius};
-        `}
+      css`
+        border-radius: ${hover.radius};
+      `}
     }
 
     &:focus {
