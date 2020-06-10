@@ -146,6 +146,8 @@ export const SliderInput = forwardRef((props, ref) => {
   )
 })
 
+SliderInput.displayName = 'eds-slider-input'
+
 SliderInput.propTypes = {
   /* Slider value */
   value: PropTypes.number.isRequired,
