@@ -82,17 +82,6 @@ When it comes to the logo, we have two versions – primary and horizontal – a
 <img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#red" alt="Equinor" />
 ```
 
-## Useful links
-
-- Component status page in the storefront
-- EDS Core React storybook
-- 
-
-
-Check out the component status page to see what we’re working on right now :eyes:
-Check out the storybook for usage examples :orange_book:
-Create Github issues for feature requests or bug reports :beetle:
-Be sure to checkout the Figma changelog for design changes :lipstick:
 
 
 ## Contributions
