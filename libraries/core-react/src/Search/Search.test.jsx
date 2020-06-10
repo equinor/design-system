@@ -38,7 +38,9 @@ describe('Search', () => {
       callbackValue = value
     })
 
-    render(<Search id={searchId} onChange={handleOnChange} />)
+    render(
+      <Search id={searchId} value="some old value" onChange={handleOnChange} />,
+    )
     const searchBox = screen.queryByRole('searchbox')
 
     fireEvent.change(searchBox, {
@@ -60,7 +62,11 @@ describe('Search', () => {
     })
 
     render(
-      <Search id={searchId} value="initial value" onChange={handleOnChange} />,
+      <Search
+        id={searchId}
+        defaultValue="initial value"
+        onChange={handleOnChange}
+      />,
     )
     const clearButton = screen.queryByRole('button')
     const searchBox = screen.queryByRole('searchbox')
@@ -71,5 +77,46 @@ describe('Search', () => {
     expect(searchBox).toHaveValue('')
     expect(callbackValue).toEqual('')
     expect(callbackId).toEqual(searchId)
+  })
+
+  it('Has called onFocus when search if focused', () => {
+    const searchId = 'search-id-when-testing'
+    let callbackId = ''
+    const handleOnFocus = jest.fn(({ target: { id } }) => {
+      callbackId = id
+    })
+
+    render(<Search id={searchId} onFocus={handleOnFocus} />)
+    const searchBox = screen.queryByRole('searchbox')
+
+    fireEvent.focus(searchBox)
+
+    expect(handleOnFocus).toHaveBeenCalled()
+    expect(callbackId).toEqual(searchId)
+  })
+  it('Has called onBlur when search if blured', () => {
+    const searchId = 'search-id-when-testing'
+    let callbackId = ''
+    const handleOnBlur = jest.fn(({ target: { id } }) => {
+      callbackId = id
+    })
+
+    render(<Search id={searchId} onBlur={handleOnBlur} />)
+    const searchBox = screen.queryByRole('searchbox')
+
+    fireEvent.blur(searchBox)
+
+    expect(handleOnBlur).toHaveBeenCalled()
+    expect(callbackId).toEqual(searchId)
+  })
+
+  it('Has new value, when value property is changed after first render', () => {
+    const { rerender } = render(<Search value="old" />)
+
+    rerender(<Search value="new" />)
+
+    const searchBox = screen.queryByRole('searchbox')
+
+    expect(searchBox.value).toEqual('new')
   })
 })
