@@ -24,6 +24,7 @@ function SEO({ description, lang, meta, keywords, title }) {
           description || data.site.siteMetadata.description
         return (
           <Helmet
+            dataFoo="bar"
             htmlAttributes={{
               lang,
             }}

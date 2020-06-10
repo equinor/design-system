@@ -143,7 +143,13 @@ exports.createPages = async ({ actions, graphql }) => {
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      alias: { $components: path.resolve(__dirname, 'src/components') },
+      alias: {
+        $components: path.resolve(__dirname, 'src/components'),
+        'styled-components': path.resolve(
+          './node_modules',
+          'styled-components',
+        ),
+      },
       modules: [gatsbyNodeModules, 'node_modules'],
     },
   })
