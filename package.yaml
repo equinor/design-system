@@ -16,7 +16,8 @@ scripts:
     @equinor/eds-core-react run build && pnpm --filter
     @equinor/eds-storybook-react install && pnpm --filter
     @equinor/eds-storybook-react run build
-  storybook-run: pnpm --filter @equinor/eds-storybook-react run start
+  storybook-run: pnpm --filter @equinor/eds-storybook-react run dev
+  storefront-run: pnpm --filter @equinor/eds-storefront run dev
   dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
   storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
   storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
