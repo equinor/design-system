@@ -2,24 +2,28 @@ import { tokens } from '@equinor/eds-tokens'
 
 const {
   colors: {
-    ui: {
-      background__overlay: { rgba: background },
+    text: {
+      static_icons__tertiary: { rgba: enabledColor },
+    },
+    interactive: {
+      primary__resting: { rgba: hoverColor },
+      focus: { rgba: focusOutlineColor },
     },
   },
   spacings: {
-    comfortable: { small: spacingSmall },
-  },
-  shape: {
-    corners: { borderRadius },
+    comfortable: { medium: spacingMedium },
   },
 } = tokens
 
 export const breadcrumbs = {
-  typography: {
-    color: '#fff',
-    fontFamily: 'Equinor',
-    fontSize: '12px',
-    lineHeight: '16px',
+  colors: {
+    enabled: enabledColor,
+    hover: hoverColor,
   },
-  background,
+  marginRight: spacingMedium,
+  borderTokens: {
+    border: `1px dashed ${focusOutlineColor}`,
+    paddingX: '2px',
+    paddingY: '6px',
+  },
 }
