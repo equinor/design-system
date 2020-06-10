@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
+const OrderedList = styled.ol`
+  list-style: none;
+  display: flex;
+  /* flex-wrap: ${(expanded) => (expanded ? 'wrap' : 'nowrap')}; */
+`
+
 export const Breadcrumbs = forwardRef(function Breadcrumbs(
   { className, children, collapse, expanded, maxLabelWidth, ...rest },
   ref,
@@ -13,17 +19,16 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     ref,
   }
 
-  // return (
-  //   <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
-  //     <ol>
-  //       {React.Children.map((child, index) => {
-  //         ;<li key={`child-${index}`}>{child}</li>
-  //       })}
-  //     </ol>
-  //   </nav>
-  // )
+  const allItems = React.Children.toArray(children).map((child, index) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <li key={`child-${index}`}>{child}</li>
+  ))
 
-  return <div>{children}</div>
+  return (
+    <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
+      <OrderedList>{allItems}</OrderedList>
+    </nav>
+  )
 })
 
 Breadcrumbs.displayName = 'eds-breadcrumbs'

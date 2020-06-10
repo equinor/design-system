@@ -23,10 +23,7 @@ function handleClick(event) {
 export const Variations = () => {
   return (
     <Body>
-      <Breadcrumbs>
-        <Breadcrumb>Hei</Breadcrumb>
-      </Breadcrumbs>
-      {/* <Breadcrumbs>
+      <Breadcrumbs expanded>
         <Breadcrumb href="/" onClick={handleClick}>
           Home
         </Breadcrumb>
@@ -36,7 +33,7 @@ export const Variations = () => {
         <Breadcrumb href="/parent/child" onClick={handleClick}>
           Child
         </Breadcrumb>
-      </Breadcrumbs> */}
+      </Breadcrumbs>
     </Body>
   )
 }
