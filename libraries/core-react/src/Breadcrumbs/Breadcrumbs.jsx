@@ -13,15 +13,17 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     ref,
   }
 
-  return (
-    <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
-      <ol>
-        {React.Children.map((child, index) => {
-          ;<li key={`child-${index}`}>{child}</li>
-        })}
-      </ol>
-    </nav>
-  )
+  // return (
+  //   <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
+  //     <ol>
+  //       {React.Children.map((child, index) => {
+  //         ;<li key={`child-${index}`}>{child}</li>
+  //       })}
+  //     </ol>
+  //   </nav>
+  // )
+
+  return <div>{children}</div>
 })
 
 Breadcrumbs.displayName = 'eds-breadcrumbs'

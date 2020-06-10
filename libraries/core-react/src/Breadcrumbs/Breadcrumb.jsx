@@ -1,10 +1,10 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Typography } from '@equinor/eds-core-react'
+import { Typography } from '../Typography'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
-const StyledTypography = styled(Typography)`
+const StyleTypography = styled(Typography)`
   text-decoration: none;
   color: ${tokens.colors.enabled};
   &:hover {
@@ -27,7 +27,11 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
     ref,
   }
 
-  return <Typography link>{children}</Typography>
+  return (
+    <StyleTypography link variant="body_short" {...props}>
+      {children}
+    </StyleTypography>
+  )
 })
 
 Breadcrumb.displayName = 'eds-breadcrumb'

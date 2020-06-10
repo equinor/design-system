@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 import { Breadcrumbs } from '@equinor/eds-core-react'
 
-const { Breadcrumb } = Breadcrumbs.Breadcrumb
+const { Breadcrumb } = Breadcrumbs
 
 const Body = styled.div`
   margin: 42px;
@@ -23,6 +23,9 @@ function handleClick(event) {
 export const Variations = () => {
   return (
     <Body>
+      <Breadcrumbs>
+        <Breadcrumb>Hei</Breadcrumb>
+      </Breadcrumbs>
       {/* <Breadcrumbs>
         <Breadcrumb href="/" onClick={handleClick}>
           Home
