@@ -1,4 +1,6 @@
 dependencies:
+  '@equinor/eds-core-react': 'link:../../libraries/core-react'
+  '@equinor/eds-icons': 'link:../../libraries/icons'
   '@mdx-js/mdx': 1.6.5
   '@mdx-js/react': 1.6.5_react@16.13.1
   '@mdx-js/tag': 0.20.3_react@16.13.1
@@ -16029,6 +16031,8 @@ packages:
     resolution:
       integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
 specifiers:
+  '@equinor/eds-core-react': 'workspace:*'
+  '@equinor/eds-icons': 'workspace:*'
   '@mdx-js/mdx': ^1.6.5
   '@mdx-js/react': ^1.6.5
   '@mdx-js/tag': ^0.20.3

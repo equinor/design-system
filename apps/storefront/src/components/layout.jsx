@@ -52,6 +52,10 @@ const Content = styled.div`
   & > ol {
     max-width: 38rem;
   }
+  & > p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 `
 
 const Layout = ({ children }) => {

@@ -3,20 +3,47 @@ title: Equinor Design System (EDS)
 mode: publish
 ---
 
+import { Banner, Icon, Typography, Card } from '@equinor/eds-core-react'
 
-**The EDS is currently under development. Figma design components have been released and a first version (MVP) in React will be released later this year.**
+<Banner>
+  <Banner.BannerIcon><Icon name="save" /></Banner.BannerIcon>
+  <Banner.BannerMessage>The EDS is currently under development. Figma design components have been released and a first version (MVP) in React will be released later this year.</Banner.BannerMessage>
+</Banner>
 
 
-The EDS is the official design system of Equinor and is to be used when designing, prototyping and developing internal digital interfaces. The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions. 
+<Typography variant="body_long">The EDS is the official design system of Equinor and is to be used when designing, prototyping and developing internal digital interfaces.
+  The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions.
+</Typography>
 
-Components
-- Design for users comes first. A full library of branded Figma and React components built upon tokens.
-
-Documentation
-- Guidelines and principles on how to use the design system built on a common language.
-
-Living
-- Always evolving, invites collaboration and depends on contribution.
-
-Supported
-- Backed and supported by the EDS core team to make your everyday easier. 
+<Card>
+  <Card.CardHeader>
+    <Card.CardHeaderTitle>
+      <Typography variant="h4" as="h2">Components</Typography>
+      <Typography variant="body_short">Design for users comes first. A full library of branded Figma and React components built upon tokens.</Typography>
+    </Card.CardHeaderTitle>
+  </Card.CardHeader>
+</Card>
+<Card>
+  <Card.CardHeader>
+    <Card.CardHeaderTitle>
+      <Typography variant="h4" as="h2">Documentation</Typography>
+      <Typography variant="body_short">Guidelines and principles on how to use the design system built on a common language.</Typography>
+    </Card.CardHeaderTitle>
+  </Card.CardHeader>
+</Card>
+<Card>
+  <Card.CardHeader>
+    <Card.CardHeaderTitle>
+      <Typography variant="h4" as="h2">Living</Typography>
+      <Typography variant="body_short">Always evolving, invites collaboration and depends on contribution.</Typography>
+    </Card.CardHeaderTitle>
+  </Card.CardHeader>
+</Card>
+<Card>
+  <Card.CardHeader>
+    <Card.CardHeaderTitle>
+      <Typography variant="h4" as="h2">Supported</Typography>
+      <Typography variant="body_short">Backed and supported by the EDS core team to make your everyday easier.</Typography>
+    </Card.CardHeaderTitle>
+  </Card.CardHeader>
+</Card>
