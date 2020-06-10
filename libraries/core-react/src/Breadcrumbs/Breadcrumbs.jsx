@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
 export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  { className, children, ...rest },
+  { className, children, collapse, expanded, maxLabelWidth, ...rest },
   ref,
 ) {
   const props = {
@@ -13,7 +13,15 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     ref,
   }
 
-  return <div {...props}>{children}</div>
+  return (
+    <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
+      <ol>
+        {React.Children.map((child, index) => {
+          ;<li key={`child-${index}`}>{child}</li>
+        })}
+      </ol>
+    </nav>
+  )
 })
 
 Breadcrumbs.displayName = 'eds-breadcrumbs'
@@ -43,5 +51,5 @@ Breadcrumbs.defaultProps = {
   className: '',
   maxLabelWidth: undefined,
   collapse: false,
-  expanded: 
+  expanded: false,
 }

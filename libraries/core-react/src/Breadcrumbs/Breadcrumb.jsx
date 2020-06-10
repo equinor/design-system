@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Typography } from '@equinor/eds-core-react'
 import styled, { css } from 'styled-components'
+import { Typography } from '@equinor/eds-core-react'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
 const StyledTypography = styled(Typography)`
@@ -27,7 +27,7 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
     ref,
   }
 
-  return <StyledTypography link>{children}</StyledTypography>
+  return <Typography link>{children}</Typography>
 })
 
 Breadcrumb.displayName = 'eds-breadcrumb'
@@ -35,7 +35,7 @@ Breadcrumb.displayName = 'eds-breadcrumb'
 Breadcrumb.propTypes = {
   // click handler function
   onClick: PropTypes.func,
-  // Breadcrumb children (string)
+  // Breadcrumb children
   children: PropTypes.node.isRequired,
   /** @ignore */
   className: PropTypes.string,
