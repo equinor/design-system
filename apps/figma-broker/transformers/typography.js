@@ -1,4 +1,4 @@
-import * as R from 'ramda'
+import R from 'ramda'
 import { withType, withName, removeNilAndEmpty } from '@utils'
 import { rootFontSize, rem, em, px } from '@units'
 import { fillToRgba } from './colors'

@@ -5,7 +5,7 @@ import Koa from 'koa'
 import KoaRouter from 'koa-router'
 import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
-import * as R from 'ramda'
+import R from 'ramda'
 
 import {
   createTokens,
