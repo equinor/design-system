@@ -12,6 +12,11 @@ const OrderedList = styled.ol`
   /* flex-wrap: ${(expanded) => (expanded ? 'wrap' : 'nowrap')}; */
 `
 
+const ListItem = styled.li`
+  display: inline-block;
+  max-width: 20px;
+`
+
 const Separator = styled.li`
   color: ${tokens.colors.enabled};
   margin: 0 ${tokens.margin};
@@ -31,7 +36,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     (child, index) => (
       <>
         {/* eslint-disable-next-line react/no-array-index-key*/}
-        <li key={`child-${index}`}>{child}</li>
+        <ListItem key={`child-${index}`}>{child}</ListItem>
         {index !== React.Children.toArray(children).length - 1 && (
           <Separator key={`separator-${index}`} aria-hidden>
             <Typography variant="body_short">/</Typography>

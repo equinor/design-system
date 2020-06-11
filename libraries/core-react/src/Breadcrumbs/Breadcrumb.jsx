@@ -5,8 +5,13 @@ import { Typography } from '../Typography'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
 const StyleTypography = styled(Typography)`
+  display: inline-block;
   text-decoration: none;
   color: ${tokens.colors.enabled};
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   &:hover {
     text-decoration: underline;
     color: ${tokens.colors.hover};
