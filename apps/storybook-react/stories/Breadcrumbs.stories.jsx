@@ -27,7 +27,7 @@ export const Variations = () => {
         <Breadcrumb href="/" onClick={handleClick}>
           Home
         </Breadcrumb>
-        <Breadcrumb href="/parent" onClick={handleClick}>
+        <Breadcrumb maxWidth={30} href="/parent" onClick={handleClick}>
           Parent
         </Breadcrumb>
         <Breadcrumb href="/parent/child" onClick={handleClick}>

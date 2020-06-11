@@ -2,16 +2,10 @@ import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
+import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
 const StyleTypography = styled(Typography)`
-  display: inline-block;
-  text-decoration: none;
-  color: ${tokens.colors.enabled};
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   &:hover {
     text-decoration: underline;
     color: ${tokens.colors.hover};
@@ -23,17 +17,34 @@ const StyleTypography = styled(Typography)`
     outline: ${tokens.outline};
     outline-offset: 6px;
   }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  text-decoration: none;
+  color: ${tokens.colors.enabled};
+  width: 100%;
+  max-width: ${(maxWidth) => maxWidth};
 `
 
 export const Breadcrumb = forwardRef(function Breadcrumb(
-  { className, children, onClick, ...rest },
+  { className, children, maxWidth, onClick, ...rest },
   ref,
 ) {
   const props = {
     ...rest,
     className,
     ref,
+    maxWidth: maxWidth,
   }
+
+  // const withTooltip = (
+  //   <Tooltip title={children}>
+  //     <StyleTypography link variant="body_short" {...props}>
+  //       {children}
+  //     </StyleTypography>
+  //   </Tooltip>
+  // )
 
   return (
     <StyleTypography link variant="body_short" {...props}>
@@ -45,6 +56,11 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
 Breadcrumb.displayName = 'eds-breadcrumb'
 
 Breadcrumb.propTypes = {
+  /*
+   * Max label width in pixels,
+   * truncate long labels based on this width
+   */
+  maxWidth: PropTypes.number,
   // click handler function
   onClick: PropTypes.func,
   // Breadcrumb children
@@ -54,6 +70,7 @@ Breadcrumb.propTypes = {
 }
 
 Breadcrumb.defaultProps = {
+  maxWidth: undefined,
   className: '',
   onClick: () => {},
 }

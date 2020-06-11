@@ -14,7 +14,6 @@ const OrderedList = styled.ol`
 
 const ListItem = styled.li`
   display: inline-block;
-  max-width: 20px;
 `
 
 const Separator = styled.li`
@@ -31,6 +30,8 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     className,
     ref,
   }
+
+  const [collapsed, setCollapsed] = React.useState(collapse)
 
   const allBreadcrumbs = React.Children.toArray(children).map(
     (child, index) => (
