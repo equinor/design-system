@@ -11,9 +11,12 @@ const StyleTypography = styled(Typography)`
     text-decoration: underline;
     color: ${tokens.colors.hover};
   }
+  &:focus {
+    outline: none;
+  }
   &[data-focus-visible-added]:focus {
-    padding: ${tokens.borderTokens.paddingX} ${tokens.borderTokens.paddingY};
-    border: ${tokens.border};
+    outline: ${tokens.outline};
+    outline-offset: 6px;
   }
 `
 

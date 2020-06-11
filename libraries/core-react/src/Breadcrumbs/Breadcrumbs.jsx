@@ -2,11 +2,19 @@ import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
+import { Typography } from '../Typography'
 
 const OrderedList = styled.ol`
   list-style: none;
   display: flex;
+  padding: 0;
+  margin: 0;
   /* flex-wrap: ${(expanded) => (expanded ? 'wrap' : 'nowrap')}; */
+`
+
+const Separator = styled.li`
+  color: ${tokens.colors.enabled};
+  margin: 0 ${tokens.margin};
 `
 
 export const Breadcrumbs = forwardRef(function Breadcrumbs(
@@ -19,14 +27,23 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     ref,
   }
 
-  const allItems = React.Children.toArray(children).map((child, index) => (
-    // eslint-disable-next-line react/no-array-index-key
-    <li key={`child-${index}`}>{child}</li>
-  ))
+  const allBreadcrumbs = React.Children.toArray(children).map(
+    (child, index) => (
+      <>
+        {/* eslint-disable-next-line react/no-array-index-key*/}
+        <li key={`child-${index}`}>{child}</li>
+        {index !== React.Children.toArray(children).length - 1 && (
+          <Separator key={`separator-${index}`} aria-hidden>
+            <Typography variant="body_short">/</Typography>
+          </Separator>
+        )}
+      </>
+    ),
+  )
 
   return (
     <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
-      <OrderedList>{allItems}</OrderedList>
+      <OrderedList>{allBreadcrumbs}</OrderedList>
     </nav>
   )
 })

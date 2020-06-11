@@ -20,10 +20,6 @@ export const breadcrumbs = {
     enabled: enabledColor,
     hover: hoverColor,
   },
-  marginRight: spacingMedium,
-  borderTokens: {
-    border: `1px dashed ${focusOutlineColor}`,
-    paddingX: '2px',
-    paddingY: '6px',
-  },
+  margin: spacingMedium,
+  outline: `1px dashed ${focusOutlineColor}`,
 }
