@@ -33,10 +33,7 @@ router
   .post('/create-assets', KoaBody(), runAction(createAssets))
   .post('/create-figma-images', KoaBody(), runAction(createFigmaImages))
 
-app
-  .use(logger)
-  .use(router.routes())
-  .use(router.allowedMethods())
+app.use(logger).use(router.routes()).use(router.allowedMethods())
 
 app.use(async (ctx, next) => {
   try {
