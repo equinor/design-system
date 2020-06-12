@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
@@ -13,11 +13,11 @@ const StyledH2 = styled(Typography)`
 `
 const StyledH3 = styled(Typography)`
   margin-top: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 0.2em;
 `
 const StyledH4 = styled(Typography)`
   margin-top: 1.33em;
-  margin-bottom: 1.33em;
+  margin-bottom: 0.5em;
 `
 const StyledH5 = styled(Typography)`
   margin-top: 1.67em;
