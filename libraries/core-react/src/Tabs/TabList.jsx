@@ -25,15 +25,20 @@ const StyledTabList = styled.div.attrs(() => ({
 `
 
 const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
-  const { activeTab, handleChange, tabsId, variant } = useContext(TabsContext)
+  const { activeTab, handleChange, tabsId, variant, tabsFocused } = useContext(
+    TabsContext,
+  )
 
   const currentTab = useRef(activeTab)
 
-  const selectedTabRef = useCallback((node) => {
-    if (node !== null) {
-      node.focus()
-    }
-  }, [])
+  const selectedTabRef = useCallback(
+    (node) => {
+      if (node !== null && tabsFocused) {
+        node.focus()
+      }
+    },
+    [tabsFocused],
+  )
 
   useEffect(() => {
     currentTab.current = activeTab

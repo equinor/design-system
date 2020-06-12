@@ -4,6 +4,9 @@ import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 
 const indeterminate = keyframes`
+  0% {
+      transformOrigin: 50% 50%;
+    }
     100% {
       transform: rotate(360deg);
     }
@@ -23,6 +26,9 @@ const ProgressRoot = styled.div`
           transform: rotate(-90deg);
         `};
 `
+const StyledSvg = styled.svg`
+  display: block;
+`
 
 const BaseCircle = styled.circle`
   stroke: ${tokens.linear.background};
@@ -37,28 +43,22 @@ const CircularProgress = forwardRef(function CircularProgress(
   ref,
 ) {
   const thickness = 4
-  const progress = Math.round(value)
-  const circleStyle = {}
-
   const rootProps = {
     ...props,
     ref,
     variant,
   }
-
+  const circleStyle = {}
   const circumference = 2 * Math.PI * ((48 - thickness) / 2)
-
   if (variant === 'determinate') {
     circleStyle.stroke = circumference.toFixed(3)
     circleStyle.strokeDashoffset = `${(
-      ((100 - progress) / 100) *
+      ((100 - value) / 100) *
       circumference
     ).toFixed(3)}px`
-
-    rootProps['aria-valuenow'] = progress
-
+    rootProps['aria-valuenow'] = Math.round(value)
     if (value !== undefined) {
-      rootProps['aria-valuenow'] = progress
+      rootProps['aria-valuenow'] = Math.round(value)
       rootProps['aria-valuemin'] = 0
       rootProps['aria-valuemax'] = 100
     }
@@ -70,7 +70,7 @@ const CircularProgress = forwardRef(function CircularProgress(
       role="progressbar"
       className={`${className} ${variant}-progress`}
     >
-      <svg viewBox="24 24 48 48">
+      <StyledSvg viewBox="24 24 48 48">
         <BaseCircle
           style={circleStyle}
           cx={48}
@@ -89,7 +89,7 @@ const CircularProgress = forwardRef(function CircularProgress(
           strokeWidth={thickness}
           strokeDasharray={variant === 'determinate' ? circumference : 48}
         />
-      </svg>
+      </StyledSvg>
     </ProgressRoot>
   )
 })

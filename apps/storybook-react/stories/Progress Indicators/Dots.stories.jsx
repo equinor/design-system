@@ -3,15 +3,16 @@ import { Checkbox, DotProgress, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
 const Body = styled.div`
+  margin: 42px;
   display: grid;
-  grid-template-rows: min-width;
-  padding: 32px;
-  padding-bottom: 8rem;
-  grid-gap: 2rem;
+  grid-auto-columns: auto;
 `
 
 const Wrapper = styled.div`
-  margin-left: 16px;
+  margin: 32px;
+  display: grid;
+  grid-gap: 64px;
+  grid-template-columns: repeat(3, fit-content(100%));
 `
 
 const Background = styled.div`

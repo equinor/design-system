@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-icons",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Icons from the Equinor Design System",
   "type": "module",
   "main": "dist/icons.esm.js",
@@ -36,10 +36,11 @@
     "icons"
   ],
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^7.0.0",
-    "rollup": "^1.29.0"
+    "@rollup/plugin-node-resolve": "^8.0.1",
+    "rollup": "^2.15.0"
   },
   "engines": {
-    "pnpm": ">=4"
+    "pnpm": ">=4",
+    "node": ">=10.0.0"
   }
 }

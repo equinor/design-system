@@ -108,6 +108,7 @@ const StarProgress = forwardRef(function StarProgress(
   const rootProps = {
     ref,
     ...rest,
+    className,
     variant,
     progress,
   }

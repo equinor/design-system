@@ -3,20 +3,20 @@ import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 
-const indeterminate = keyframes`
-  0%{
-    left: -200%;
-    right: 100%;
-  }
-  60% {
-    left: 107%;
-    right: -8%;
-  }
+const indeterminate2 = keyframes`
+   0%{
+        left: -200%;
+        right: 100%;
+      }
+      60% {
+        left: 107%;
+        right: -8%;
+      }
 
-  100% {
-    left: 107%;
-    right: -8%;
-  }
+      100% {
+        left: 107%;
+        right: -8%;
+      }
     
 `
 
@@ -55,7 +55,7 @@ const IndeterminateProgress = styled.div`
   transition: transform 0.2s linear;
   transform-origin: left;
   background-color: ${tokens.linear.overlay};
-  animation: ${indeterminate} 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 1s
+  animation: ${indeterminate2} 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 1s
     infinite;
 `
 

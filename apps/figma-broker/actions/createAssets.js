@@ -1,5 +1,5 @@
 import SVGO from 'svgo'
-import * as R from 'ramda'
+import R from 'ramda'
 import {
   fetchFigmaFile,
   processFigmaFile,
@@ -13,20 +13,23 @@ import {
 } from '../functions/file'
 import { getAssets } from '../files/assets'
 import { PATHS, FILE_IDS } from '../constants'
-import { sleep } from '@utils'
+import { sleep, mergeStrings } from '@utils'
 
 const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
 
-const svgPathData = (svg) => R.head(R.tail(R.match(/d="(.[^"]+)"/, svg)))
+const svgPathData = R.pipe(
+  R.match(/d="(.+?)"/g),
+  R.map(R.match(/[^d="](.+)[^"]/g)),
+  mergeStrings,
+)
 
 const writeSVGSprite = (assets) => {
   const value = R.pipe(
-    R.find((x) => x.name === 'system'),
+    R.find((x) => x.name === 'system-icons'),
     R.prop('value'),
     R.reduce(
       (acc, val) =>
-        `${acc}${`
-    <symbol id="${val.name}" viewBox="${val.viewbox}">
+        `${acc}${`<symbol id="${val.name}" viewBox="${val.viewbox}">
       <title>${val.name}</title>
       <desc>${val.path}-${val.name}</desc>
       ${svgContent(val.value)}
@@ -34,13 +37,19 @@ const writeSVGSprite = (assets) => {
       '',
     ),
     (x) => `
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-      ${x}
+    <svg style="display: none;"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+     ${x}
     </svg>
     `,
   )(assets)
 
-  writeResults([{ name: 'system', value }], `${PATHS.ASSETS_ICONS}`, 'svg')
+  writeResults(
+    [{ name: 'system-icons', value }],
+    `${PATHS.ASSETS_ICONS}`,
+    'svg',
+  )
 }
 
 const writeJsFile = (assets) => {
@@ -149,10 +158,10 @@ export async function createAssets(ctx) {
   // Write svg to files
 
   // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-  // writeSVGs(assetsWithSvg)
-  // writeSVGSprite(assetsWithSvg)
+  writeSVGs(assetsWithSvg)
+  writeSVGSprite(assetsWithSvg)
 
-  // writeJsonAssets(assetsWithSvg)
+  writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
 
   return assetsWithSvg

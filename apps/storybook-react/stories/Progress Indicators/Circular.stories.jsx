@@ -8,6 +8,8 @@ const Wrapper = styled.div`
   padding: 32px;
   padding-bottom: 8rem;
   grid-gap: 2rem;
+  position: relative;
+  transition: all 0.36s;
 `
 
 export default {
@@ -48,10 +50,18 @@ export const Indeterminate = () => {
   )
 }
 
+export const WithKnobs = () => {
+  return <Wrapper></Wrapper>
+}
+
 Determinate.story = {
   name: 'Determinate',
 }
 
 Indeterminate.story = {
   name: 'Indeterminate',
+}
+
+WithKnobs.story = {
+  name: 'With Knobs',
 }
