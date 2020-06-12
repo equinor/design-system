@@ -19,6 +19,12 @@ import Text from './Text'
 import { H1, H2, H3, H4 } from './Titles'
 import { OrderedList, UnorderedList, ListItem } from './List'
 
+const { Body, Row, Cell, Head } = Table
+
+// eslint-disable-next-line
+const HeadCell = ({ children }) => {
+  return <Cell as="th">{children}</Cell>
+}
 const mdxComponents = {
   ComponentStatus,
   Embed,
@@ -26,7 +32,6 @@ const mdxComponents = {
   FigmaImage,
   IconsDownload,
   Image,
-  Table,
   p: Text,
   h1: H1,
   h2: H2,
@@ -35,6 +40,12 @@ const mdxComponents = {
   ul: UnorderedList,
   ol: OrderedList,
   li: ListItem,
+  table: Table,
+  thead: Head,
+  tr: Row,
+  td: Cell,
+  th: HeadCell,
+  tbody: Body,
 }
 
 const { Header: TopBarHeader, Actions } = TopBar
