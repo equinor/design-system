@@ -1,26 +1,13 @@
 extends:
-  - eslint:recommended
+  - airbnb
   - prettier
-  - prettier/react
-  - plugin:react/recommended
   - plugin:testing-library/react
-  - plugin:import/errors
-  - plugin:import/warnings
 plugins:
   - prettier
   - testing-library
-parser: babel-eslint
-parserOptions:
-  ecmaVersion: 11
-  sourceType: module
-  ecmaFeatures:
-    jsx: true
 env:
   browser: true
   node: true
-settings:
-  react:
-    version: detect
 globals:
   test: true
   expect: true
@@ -32,9 +19,6 @@ rules:
     - varsIgnorePattern: ^React$
   # Named exports are better
   import/no-default-export:
-    - error
-  # Enforce a newline after import statements
-  import/newline-after-import:
     - error
   # Not everything needs a default export, for example utils files
   import/prefer-default-export:
@@ -48,39 +32,3 @@ rules:
   # Problems using node aliases, mjs files and local npm packages so disabling import-rules for now
   import/no-unresolved:
     - off
-  # Enforce a defaultProps definition for every prop that is not a required prop
-  react/require-default-props:
-    - error
-    - forbidDefaultForRequired: true
-  # Enforce boolean attributes notation in JSX
-  react/jsx-boolean-value:
-    - error
-    - never
-    - always: []
-  # Enforce PascalCase for user-defined JSX components
-  react/jsx-pascal-case:
-    - error
-  # Prevent usage of dangerous JSX properties
-  react/no-danger:
-    - warn
-  # Require stateless functions when not using lifecycle methods, setState or ref
-  react/prefer-stateless-function:
-    - error
-    - ignorePureComponents: true
-  # only .jsx files may have JSX
-  react/jsx-filename-extension:
-    - error
-    - extensions: ['.jsx']
-  # Prevent unused propType definitions
-  react/no-unused-prop-types:
-    - error
-  # Prevent usage of Array index in keys
-  react/no-array-index-key:
-    - error
-  # Prevents common casing typos
-  react/no-typos:
-    - error
-  # Enforce consistent usage of destructuring assignment of props, state, and context
-  react/destructuring-assignment:
-    - error
-    - always

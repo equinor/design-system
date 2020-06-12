@@ -15,7 +15,7 @@ module.exports = async ({ config, mode }) => ({
       ...config.module.rules,
       {
         test: /\.stories\.jsx?$/,
-        loaders: [require.resolve('@storybook/source-loader')],
+        loaders: [require.resolve('@storybook/addon-storysource/loader')],
         enforce: 'pre',
       },
     ],

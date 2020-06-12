@@ -11,8 +11,6 @@ import {
   pregnant_woman,
   accessible_forward,
   save,
-  info_circle,
-  list,
 } from '@equinor/eds-icons'
 
 const icons = {
@@ -24,8 +22,6 @@ const icons = {
   pregnant_woman,
   accessible_forward,
   save,
-  info_circle,
-  list,
 }
 
 Icon.add(icons)

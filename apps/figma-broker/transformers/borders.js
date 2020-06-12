@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import { withType, propName } from '@utils'
 import { px } from '@units'
 import { fillToRgba } from './colors'

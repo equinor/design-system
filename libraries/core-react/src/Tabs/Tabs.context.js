@@ -5,7 +5,6 @@ const TabsContext = createContext({
   handleChange: () => {},
   activeTab: 0,
   tabsId: '',
-  tabsFocused: false,
 })
 
 const TabsProvider = TabsContext.Provider

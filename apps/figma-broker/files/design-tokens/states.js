@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import { propName, withType, pickChildren, toDict } from '@utils'
 import { toFocus, toOverlay } from '@transformers'
 

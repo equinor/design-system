@@ -17,14 +17,9 @@ export { SideSheet } from './SideSheet'
 export { Chip } from './Chip'
 export { Avatar } from './Avatar'
 export { Search } from './Search'
-export { Slider } from './Slider'
 export { Tooltip } from './Tooltip'
-export {
-  LinearProgress,
-  CircularProgress,
-  DotProgress,
-  StarProgress,
-} from './Progress'
-export { Popover } from './Popover'
-export { Banner } from './Banner'
-export { Radio, Checkbox, Switch } from './SelectionControls'
+export { LinearProgress } from './Progress'
+export { CircularProgress } from './Progress'
+export { DotProgress } from './Progress'
+export { StarProgress } from './Progress'
+/* eslint-enable */

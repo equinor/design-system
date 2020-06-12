@@ -1,5 +1,5 @@
 import childProcess from 'child_process'
-import R from 'ramda'
+import * as R from 'ramda'
 import util from 'util'
 
 import { fetchFigmaImageUrls } from '../functions/figma'

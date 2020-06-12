@@ -2,15 +2,14 @@
   "name": "@equinor/eds-figma-broker",
   "version": "1.0.0",
   "engines": {
-    "pnpm": ">=4",
-    "node": ">=10.0.0"
+    "pnpm": ">=4"
   },
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "embed": "npx embedme README.md",
-    "dev": "nodemon --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js",
+    "develop": "nodemon --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js",
     "start": "node --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js"
   },
   "author": "",
@@ -18,14 +17,14 @@
   "dependencies": {
     "del": "^5.1.0",
     "dotenv": "^8.2.0",
-    "koa": "^2.12.0",
-    "koa-body": "^4.1.3",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
     "koa-logger": "^3.2.1",
-    "koa-router": "^8.0.8",
+    "koa-router": "^8.0.6",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.4",
-    "prettier": "^2.0.5",
-    "ramda": "^0.27.0",
+    "nodemon": "^2.0.1",
+    "prettier": "^1.19.1",
+    "ramda": "^0.26.1",
     "svgo": "^1.3.2"
   },
   "aliases": {

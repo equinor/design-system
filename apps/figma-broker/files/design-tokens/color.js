@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import { propName, withType, pickChildren, toDictDeep } from '@utils'
 import { fillToRgba, fillToHex, fillToHsla, toCSSVars } from '@transformers'
 

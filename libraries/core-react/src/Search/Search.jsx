@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
@@ -162,60 +162,29 @@ const InsideButton = styled.div`
 `
 
 export const Search = React.forwardRef(function EdsSearch(
-  {
-    onChange,
-    defaultValue,
-    value,
-    className,
-    disabled,
-    onBlur,
-    onFocus,
-    ...rest
-  },
+  { onChange, value: initValue, className, disabled, ...rest },
   ref,
 ) {
-  const isControlled = typeof value !== 'undefined'
-  const isActive = (isControlled && value !== '') || defaultValue !== ''
   const inputRef = useCombinedRefs(useRef(null), ref)
   const [state, setState] = useState({
-    isActive,
+    value: initValue,
+    isActive: initValue !== '',
     isFocused: false,
   })
-
-  useEffect(() => {
-    setState({ ...state, isActive })
-  }, [value, defaultValue])
 
   const handleOnClick = () => inputRef.current.focus()
   const handleFocus = () => setState({ ...state, isFocused: true })
   const handleBlur = () => setState({ ...state, isFocused: false })
-  const handleOnChange = (target) => setIsActive(target.value)
+  const handleOnChange = ({ target: { value } }) =>
+    setState({ ...state, isActive: value !== '', value })
   const handleOnDelete = () => {
     const input = inputRef.current
-    const clearedValue = ''
-    setReactInputValue(input, clearedValue)
-    setState({ ...state, isActive: false })
-  }
-  const setIsActive = (newValue) =>
-    setState({ ...state, isActive: newValue !== '' })
-
-  /** Applying props for controlled vs. uncontrolled scnarios */
-  // eslint-disable-next-line no-shadow
-  const applyControllingProps = (props, value, defaultValue) => {
-    if (isControlled) {
-      return {
-        ...props,
-        value,
-      }
-    }
-
-    return {
-      ...props,
-      defaultValue,
-    }
+    const value = ''
+    setReactInputValue(input, value)
+    setState({ ...state, isActive: false, value })
   }
 
-  const { isFocused } = state
+  const { value, isActive, isFocused } = state
   const size = 16
 
   const containerProps = {
@@ -227,44 +196,31 @@ export const Search = React.forwardRef(function EdsSearch(
     onClick: handleOnClick,
   }
 
-  const inputProps = applyControllingProps(
-    {
-      ...rest,
-      disabled,
-      ref: inputRef,
-      type: 'search',
-      role: 'searchbox',
-      'aria-label': 'search input',
-      onBlur: (e) => {
-        handleBlur(e)
-        if (onBlur) {
-          onBlur(e)
-        }
-      },
-      onFocus: (e) => {
-        handleFocus(e)
-        if (onFocus) {
-          onFocus(e)
-        }
-      },
-      onChange: (e) => {
-        handleOnChange(e)
-        if (onChange) {
-          onChange(e)
-        }
-      },
-    },
+  const inputProps = {
+    ...rest,
     value,
-    defaultValue,
-  )
+    disabled,
+    ref: inputRef,
+    type: 'search',
+    role: 'searchbox',
+    'aria-label': 'search input',
+    onBlur: handleBlur,
+    onFocus: handleFocus,
+    onChange: (e) => {
+      handleOnChange(e)
+      if (onChange) {
+        onChange(e)
+      }
+    },
+  }
 
   const clearButtonProps = {
-    isActive: state.isActive,
+    isActive,
     size,
     role: 'button',
     onClick: (e) => {
       e.stopPropagation()
-      if (state.isActive) {
+      if (isActive) {
         handleOnDelete()
       }
     },
@@ -290,14 +246,8 @@ Search.propTypes = {
   disabled: PropTypes.bool,
   /** onChange handler */
   onChange: PropTypes.func,
-  /** Default value for search field */
-  defaultValue: PropTypes.string,
   /** Value for search field */
   value: PropTypes.string,
-  /** onBlur handler */
-  onBlur: PropTypes.func,
-  /** onFocus handler */
-  onFocus: PropTypes.func,
 }
 
 Search.defaultProps = {
@@ -305,10 +255,7 @@ Search.defaultProps = {
   placeholder: '',
   disabled: false,
   onChange: undefined,
-  defaultValue: '',
-  value: undefined,
-  onBlur: undefined,
-  onFocus: undefined,
+  value: '',
 }
 
 Search.displayName = 'eds-search'

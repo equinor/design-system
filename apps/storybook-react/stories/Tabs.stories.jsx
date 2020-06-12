@@ -1,8 +1,7 @@
 import React, { useState, useEffect, createRef, useRef } from 'react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
-import { Tabs, Typography, Search } from '@equinor/eds-core-react'
-import { action } from '@storybook/addon-actions'
+import { Tabs, Typography } from '@equinor/eds-core-react'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
@@ -98,53 +97,5 @@ export const tabPanels = () => {
         </TabPanels>
       </Tabs>
     </Wrapper>
-  )
-}
-
-export const tabsAndSearch = () => {
-  const [searchText, setSearchText] = useState('')
-  const [activeTab, setActiveTab] = useState(0)
-
-  const handleOnTextChange = (event) => {
-    const value = event.target.value
-    setSearchText(value)
-  }
-  const handleChange = (index) => {
-    setActiveTab(index)
-  }
-
-  const handleFocus = (e) => {
-    action('handleFocus')(e.target.textContent)
-  }
-
-  const handleBlur = (e) => {
-    action('handleBlur')(e.target.textContent)
-  }
-
-  return (
-    <div style={{ margin: '4rem' }}>
-      <Search
-        value={searchText}
-        placeholder={'Search '}
-        onChange={handleOnTextChange}
-      />
-      <Tabs
-        style={{ marginTop: '2rem' }}
-        activeTab={activeTab}
-        onChange={handleChange}
-        variant="fullWidth"
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      >
-        <TabList>
-          <Tab>Tags (5+)</Tab>
-          <Tab> Docs (5+)</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Panel one</TabPanel>
-          <TabPanel>Panel two</TabPanel>
-        </TabPanels>
-      </Tabs>
-    </div>
   )
 }

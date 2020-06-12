@@ -16,7 +16,6 @@ npm install @equinor/eds-core-react styled-components
 ### Available ✅
 
 - Accordion
-- Banner
 - Button
   - Contained
   - Outlined
@@ -28,36 +27,37 @@ npm install @equinor/eds-core-react styled-components
 - Divider
 - Icon
 - List
-- Popover
 - Scrim
 - Search
-- Selection Controls
 - Side Sheet
-- Slider
 - Table
 - Table of contents
 - Tabs
 - TextField
-- Tooltip
 - TopBar
 - Typography
+- Tooltip
 
 ### In progress 👷‍♀️
 
 - Menu
 - Navigation drawer
-- Progress indicators
-- Snackbar
+- Slider
+- Popover
 
 ### TODO 🛠️
 
 - App launcher
+- Banner
 - Breadcrumbs
 - Button
   - Contained w/icon left/right
   - Outlined w/icon left/right
   - Ghost w/icon left/right
 - Pagination
+- Progress indicators
+- Selection Controls
+- Snackbar
 - Stepper
 
 ## Usage

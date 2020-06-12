@@ -2,8 +2,7 @@
   "name": "@equinor/eds-storybook-react",
   "version": "0.0.1",
   "engines": {
-    "pnpm": ">=4",
-    "node": ">=10.0.0"
+    "pnpm": ">=4"
   },
   "scripts": {
     "start": "start-storybook -p 9000 --ci",
@@ -15,25 +14,25 @@
     "@equinor/eds-core-react": "workspace:*",
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
-    "@storybook/react": "^5.3.19",
+    "@storybook/react": "^5.3.2",
     "babel-runtime": "^6.26.0",
-    "react-dom": "^16.13.1",
-    "styled-components": "^5.1.1",
-    "react-hook-form": "^5.7.2"
+    "core-js": "^2.6.11",
+    "react-dom": "^16.12.0",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-transform-react-jsx": "^7.10.1",
-    "@mdx-js/loader": "^1.6.5",
-    "@storybook/addon-a11y": "^5.3.19",
-    "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-docs": "^5.3.19",
-    "@storybook/addon-knobs": "^5.3.19",
-    "@storybook/addon-links": "^5.3.19",
-    "@storybook/addon-storysource": "^5.3.19",
-    "@storybook/addons": "^5.3.19",
-    "@storybook/source-loader": "^5.3.19",
-    "@storybook/theming": "^5.3.19",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "@mdx-js/loader": "^1.5.8",
+    "@storybook/addon-a11y": "^5.3.12",
+    "@storybook/addon-actions": "^5.3.2",
+    "@storybook/addon-docs": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.2",
+    "@storybook/addon-links": "^5.3.2",
+    "@storybook/addon-storysource": "^5.3.2",
+    "@storybook/addons": "^5.3.2",
+    "@storybook/source-loader": "^5.3.2",
+    "@storybook/theming": "^5.3.2",
     "babel-loader": "^8.1.0",
     "react": "^16.13.1",
     "react-is": "^16.13.1"
