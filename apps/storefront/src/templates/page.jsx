@@ -5,9 +5,9 @@ import { graphql, Link } from 'gatsby'
 import classNames from 'classnames'
 import { Tabs, Icon } from '@equinor/eds-core-react'
 import Layout from '../components/layout'
+import { save, thumbs_down, info_circle } from '@equinor/eds-icons'
 
-import { save, thumbs_down } from '@equinor/eds-icons'
-Icon.add({ save, thumbs_down })
+Icon.add({ save, thumbs_down, info_circle })
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
