@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Location, Link } from '@reach/router'
 import { MDXProvider } from '@mdx-js/react'
-import { TopBar, Typography, Table, Banner } from '@equinor/eds-core-react'
+import { TopBar, Table } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import Helmet from 'react-helmet'
 import Sidebar from './Sidebar'
@@ -17,6 +17,7 @@ import IconsDownload from './Icons'
 import Image from './image'
 import Text from './Text'
 import { H1, H2, H3, H4 } from './Titles'
+import { OrderedList, UnorderedList, ListItem } from './List'
 
 const mdxComponents = {
   ComponentStatus,
@@ -31,6 +32,9 @@ const mdxComponents = {
   h2: H2,
   h3: H3,
   h4: H4,
+  ul: UnorderedList,
+  ol: OrderedList,
+  li: ListItem,
 }
 
 const { Header: TopBarHeader, Actions } = TopBar
@@ -59,6 +63,13 @@ const Content = styled.div`
   & > ul,
   & > ol {
     max-width: 38rem;
+  }
+  h2 + p,
+  h3 + p,
+  h4 + p,
+  h5 + p,
+  h6 + p {
+    margin-top: 0;
   }
 `
 
