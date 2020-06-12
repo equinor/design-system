@@ -40,17 +40,7 @@ const writeSVGSprite = (assets) => {
     <svg style="display: none;"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs>
-    <style>
-    use, use:target ~ use:last-child {
-        display: none;
-    }
-    use:target, use:last-child {
-        display: inline;
-    }
-    </style>
      ${x}
-      </defs>
     </svg>
     `,
   )(assets)
