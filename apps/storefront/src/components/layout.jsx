@@ -18,13 +18,10 @@ import Image from './image'
 import Text from './Text'
 import { H1, H2, H3, H4 } from './Titles'
 import { OrderedList, UnorderedList, ListItem } from './List'
+import HeadCell from './HeadCell'
 
 const { Body, Row, Cell, Head } = Table
 
-// eslint-disable-next-line
-const HeadCell = ({ children }) => {
-  return <Cell as="th">{children}</Cell>
-}
 const mdxComponents = {
   ComponentStatus,
   Embed,
