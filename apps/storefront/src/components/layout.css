@@ -33,6 +33,11 @@ body {
   overflow-y: scroll;
 }
 
+a {
+  color: var(--moss-green);
+  line-height: 20px;
+}
+
 h1,
 h2,
 h3,

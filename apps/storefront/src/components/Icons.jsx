@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
-let hei
 
 const Container = styled.div`
   width: 100%;
