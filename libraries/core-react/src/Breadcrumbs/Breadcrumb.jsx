@@ -1,4 +1,11 @@
-import React, { forwardRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  createRef,
+  useEffect,
+  useCallback,
+} from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
@@ -28,7 +35,7 @@ const StyleTypography = styled(Typography)`
 `
 
 export const Breadcrumb = forwardRef(function Breadcrumb(
-  { className, children, maxWidth, onClick, ...rest },
+  { className, children, maxWidth, ...rest },
   ref,
 ) {
   const props = {
@@ -38,15 +45,30 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
     maxWidth: maxWidth,
   }
 
-  // const withTooltip = (
-  //   <Tooltip title={children}>
-  //     <StyleTypography link variant="body_short" {...props}>
-  //       {children}
-  //     </StyleTypography>
-  //   </Tooltip>
-  // )
+  const [tooltip, setTooltip] = useState(Boolean(maxWidth))
 
-  return (
+  const textRef = useRef()
+
+  const sizeCompare = () => {
+    const compared = textRef.current.scrollWidth > textRef.current.clientWidth
+    setTooltip(compared)
+  }
+
+  if (textRef.current) {
+    sizeCompare()
+  }
+
+  const WithTooltip = (
+    <Tooltip title={children}>
+      <StyleTypography link variant="body_short" {...props}>
+        {children}
+      </StyleTypography>
+    </Tooltip>
+  )
+
+  return tooltip ? (
+    WithTooltip
+  ) : (
     <StyleTypography link variant="body_short" {...props}>
       {children}
     </StyleTypography>

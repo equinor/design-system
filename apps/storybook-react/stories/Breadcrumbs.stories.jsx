@@ -23,15 +23,26 @@ function handleClick(event) {
 export const Variations = () => {
   return (
     <Body>
-      <Breadcrumbs expanded>
-        <Breadcrumb href="/" onClick={handleClick}>
-          Home
+      <Breadcrumbs maxItems={2}>
+        <Breadcrumb href="#" onClick={handleClick}>
+          Store
         </Breadcrumb>
-        <Breadcrumb maxWidth={30} href="/parent" onClick={handleClick}>
-          Parent
+        <Breadcrumb maxWidth={30} href="#" onClick={handleClick}>
+          Fruits
         </Breadcrumb>
-        <Breadcrumb href="/parent/child" onClick={handleClick}>
-          Child
+        <Breadcrumb href="#" onClick={handleClick}>
+          Apple
+        </Breadcrumb>
+      </Breadcrumbs>
+      <Breadcrumbs>
+        <Breadcrumb href="#" onClick={handleClick}>
+          Store
+        </Breadcrumb>
+        <Breadcrumb maxWidth={30} href="#" onClick={handleClick}>
+          Fruits
+        </Breadcrumb>
+        <Breadcrumb href="#" onClick={handleClick}>
+          Apple
         </Breadcrumb>
       </Breadcrumbs>
     </Body>

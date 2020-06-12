@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
@@ -21,8 +21,24 @@ const Separator = styled.li`
   margin: 0 ${tokens.margin};
 `
 
+const Collapsed = styled(Typography)`
+  &:hover {
+    text-decoration: underline;
+    color: ${tokens.colors.hover};
+  }
+  &:focus {
+    outline: none;
+  }
+  &[data-focus-visible-added]:focus {
+    outline: ${tokens.outline};
+    outline-offset: 6px;
+  }
+  color: ${tokens.colors.enabled};
+  text-decoration: none;
+`
+
 export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  { className, children, collapse, expanded, maxLabelWidth, ...rest },
+  { className, children, maxItems, wrap, ...rest },
   ref,
 ) {
   const props = {
@@ -31,25 +47,59 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     ref,
   }
 
-  const [collapsed, setCollapsed] = React.useState(collapse)
+  const [expanded, setExpanded] = useState(false)
 
-  const allBreadcrumbs = React.Children.toArray(children).map(
-    (child, index) => (
-      <>
-        {/* eslint-disable-next-line react/no-array-index-key*/}
-        <ListItem key={`child-${index}`}>{child}</ListItem>
-        {index !== React.Children.toArray(children).length - 1 && (
-          <Separator key={`separator-${index}`} aria-hidden>
-            <Typography variant="body_short">/</Typography>
-          </Separator>
-        )}
-      </>
-    ),
-  )
+  const collapsedCrumbs = (allCrumbs) => {
+    const handleExpandClick = (e) => {
+      setExpanded(true)
+
+      // Move focus from ... to component after expanding
+      // const focusable = e.currentTarget.parentNode.querySelector('')
+      // if(focusable) {
+      //   focusable.focus()
+      // }
+    }
+
+    if (maxItems >= allCrumbs.length) {
+      return allCrumbs
+    }
+
+    return [
+      allCrumbs[0],
+      <Fragment key="collapsed">
+        <Collapsed
+          link
+          variant="body_short"
+          onClick={handleExpandClick}
+          tabIndex={0}
+        >
+          ...
+        </Collapsed>
+        <Separator aria-hidden>
+          <Typography variant="body_short">/</Typography>
+        </Separator>
+      </Fragment>,
+      allCrumbs[allCrumbs.length - 1],
+    ]
+  }
+
+  const allCrumbs = React.Children.toArray(children).map((child, index) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <Fragment key={`child-${index}`}>
+      <ListItem>{child}</ListItem>
+      {index !== React.Children.toArray(children).length - 1 && (
+        <Separator aria-hidden>
+          <Typography variant="body_short">/</Typography>
+        </Separator>
+      )}
+    </Fragment>
+  ))
 
   return (
     <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
-      <OrderedList>{allBreadcrumbs}</OrderedList>
+      <OrderedList>
+        {maxItems ? collapsedCrumbs(allCrumbs) : allCrumbs}
+      </OrderedList>
     </nav>
   )
 })
@@ -58,19 +108,14 @@ Breadcrumbs.displayName = 'eds-breadcrumbs'
 
 Breadcrumbs.propTypes = {
   /*
-   * Only the first and last breadcrumb
-   * will be shown, with an ellipsis in between.
+   * Maximum breadcrumb items to display between first and last item before collapse
+   * Only the first and last breadcrumb will be shown, with an ellipsis in between.
    */
-  collapse: PropTypes.bool,
-  /*
-   * Max label width in pixels,
-   * truncate long labels based on this width
-   */
-  maxLabelWidth: PropTypes.number,
+  maxItems: PropTypes.number,
   /**
-   * Expanded breadcrumbs can wrap to two or more lines
+   * Longer breadcrumbs can wrap from one line to two or more lines
    */
-  expanded: PropTypes.bool,
+  wrap: PropTypes.bool,
   // Breadcrumbs children
   children: PropTypes.node.isRequired,
   /** @ignore */
@@ -79,7 +124,6 @@ Breadcrumbs.propTypes = {
 
 Breadcrumbs.defaultProps = {
   className: '',
-  maxLabelWidth: undefined,
-  collapse: false,
-  expanded: false,
+  maxItems: undefined,
+  wrap: false,
 }
