@@ -1,8 +1,16 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { Typography } from '@equinor/eds-core-react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { slugify } from '../utils/'
+
+const tocAdjustment = css`
+  display: block;
+  content: ' ';
+  margin-top: -80px;
+  height: 80px;
+  visibility: hidden;
+`
 
 const StyledH1 = styled(Typography)`
   margin-top: 0.67em;
@@ -11,10 +19,16 @@ const StyledH1 = styled(Typography)`
 const StyledH2 = styled(Typography)`
   margin-top: 1em;
   margin-bottom: 0.67em;
+  &:before {
+    ${tocAdjustment}
+  }
 `
 const StyledH3 = styled(Typography)`
   margin-top: 1em;
   margin-bottom: 0.2em;
+  &:before {
+    ${tocAdjustment}
+  }
 `
 const StyledH4 = styled(Typography)`
   margin-top: 1.33em;
