@@ -1,4 +1,11 @@
 import React, { Fragment, useState } from 'react'
+import {
+  withKnobs,
+  select,
+  text,
+  boolean,
+  number,
+} from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Breadcrumbs, Typography } from '@equinor/eds-core-react'
 
@@ -22,6 +29,7 @@ const WrapContainer = styled.div`
 export default {
   title: 'Components|Breadcrumbs',
   component: Breadcrumbs,
+  decorators: [withKnobs],
 }
 
 function handleClick(event) {
@@ -104,6 +112,22 @@ export const Variations = () => {
           </Breadcrumb>
         </Breadcrumbs>
       </WrapContainer>
+    </Body>
+  )
+}
+
+export const WithKnobs = () => {
+  const collapse = boolean('Collapse', false)
+  const maxWidth = number('Max Width', null)
+  return (
+    <Body>
+      <Breadcrumbs collapse={collapse}>
+        <Breadcrumb maxWidth={maxWidth}>Label One</Breadcrumb>
+        <Breadcrumb maxWidth={maxWidth}>Label Two</Breadcrumb>
+        <Breadcrumb maxWidth={maxWidth}>Label Three</Breadcrumb>
+        <Breadcrumb maxWidth={maxWidth}>Label Four</Breadcrumb>
+        <Breadcrumb maxWidth={maxWidth}>Label Five</Breadcrumb>
+      </Breadcrumbs>
     </Body>
   )
 }
