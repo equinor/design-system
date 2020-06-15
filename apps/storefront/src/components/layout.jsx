@@ -111,7 +111,7 @@ const Layout = ({ children }) => {
         <input id="MenuToggler" className="MenuToggler" type="checkbox" />
         {/* <Header /> */}
         <Location>{({ location }) => <Sidebar location={location} />}</Location>
-        {/* <nav className="TOC">TOC</nav> */}
+
         <main style={{ gridArea: 'main' }}>
           <ContentHeader>{childrenArr.shift()}</ContentHeader>
           <Content>{childrenArr}</Content>

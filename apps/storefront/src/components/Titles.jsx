@@ -2,6 +2,7 @@
 import React from 'react'
 import { Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
+import { slugify } from '../utils/'
 
 const StyledH1 = styled(Typography)`
   margin-top: 0.67em;
@@ -31,10 +32,18 @@ export const H1 = ({ children }) => {
   return <StyledH1 variant="h1">{children}</StyledH1>
 }
 export const H2 = ({ children }) => {
-  return <StyledH2 variant="h2">{children}</StyledH2>
+  return (
+    <StyledH2 variant="h2" id={slugify(children)}>
+      {children}
+    </StyledH2>
+  )
 }
 export const H3 = ({ children }) => {
-  return <StyledH3 variant="h3">{children}</StyledH3>
+  return (
+    <StyledH3 variant="h3" id={slugify(children)}>
+      {children}
+    </StyledH3>
+  )
 }
 export const H4 = ({ children }) => {
   return <StyledH4 variant="h4">{children}</StyledH4>
