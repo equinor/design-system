@@ -1,6 +1,6 @@
 import React, { forwardRef, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
 
@@ -9,7 +9,7 @@ const OrderedList = styled.ol`
   display: flex;
   padding: 0;
   margin: 0;
-  /* flex-wrap: ${(expanded) => (expanded ? 'wrap' : 'nowrap')}; */
+  flex-wrap: wrap;
 `
 
 const ListItem = styled.li`
@@ -38,7 +38,7 @@ const Collapsed = styled(Typography)`
 `
 
 export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  { className, children, maxItems, wrap, ...rest },
+  { className, children, collapse, ...rest },
   ref,
 ) {
   const props = {
@@ -60,7 +60,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
       // }
     }
 
-    if (maxItems >= allCrumbs.length) {
+    if (allCrumbs.length <= 2) {
       return allCrumbs
     }
 
@@ -85,7 +85,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
 
   const allCrumbs = React.Children.toArray(children).map((child, index) => (
     // eslint-disable-next-line react/no-array-index-key
-    <Fragment key={`child-${index}`}>
+    <Fragment key={`breadcrumb-${index}`}>
       <ListItem>{child}</ListItem>
       {index !== React.Children.toArray(children).length - 1 && (
         <Separator aria-hidden>
@@ -98,7 +98,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   return (
     <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
       <OrderedList>
-        {maxItems ? collapsedCrumbs(allCrumbs) : allCrumbs}
+        {collapse && !expanded ? collapsedCrumbs(allCrumbs) : allCrumbs}
       </OrderedList>
     </nav>
   )
@@ -111,11 +111,7 @@ Breadcrumbs.propTypes = {
    * Maximum breadcrumb items to display between first and last item before collapse
    * Only the first and last breadcrumb will be shown, with an ellipsis in between.
    */
-  maxItems: PropTypes.number,
-  /**
-   * Longer breadcrumbs can wrap from one line to two or more lines
-   */
-  wrap: PropTypes.bool,
+  collapse: PropTypes.bool,
   // Breadcrumbs children
   children: PropTypes.node.isRequired,
   /** @ignore */
@@ -124,6 +120,5 @@ Breadcrumbs.propTypes = {
 
 Breadcrumbs.defaultProps = {
   className: '',
-  maxItems: undefined,
-  wrap: false,
+  collapse: false,
 }
