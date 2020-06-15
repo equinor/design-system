@@ -371,6 +371,59 @@ export function ActivationTypes() {
   )
 }
 
+export function CustomPopover() {
+  const [active, setActive] = React.useState(null)
+
+  const handleClick = (event) => {
+    setActive(event.currentTarget.id)
+  }
+
+  const handleClose = () => {
+    setActive(null)
+  }
+
+  return (
+    <Body>
+      <TextWrapper>
+        <Typography variant="h3">Custom popover</Typography>
+        <Typography variant="body_long">
+          Popover could be used without the close button even though it's not a
+          part of the EDS design. Use the prop disableCloseButton if this is the
+          case for you. You will still be able to dismiss the popover by
+          pressing the ESC key, click outside the popover, or open another
+          popover.
+        </Typography>
+      </TextWrapper>
+      <Wrapper>
+        <Popover onClose={handleClose} open={active === '1'} disableCloseButton>
+          <PopoverAnchor>
+            <Button id="1" onClick={handleClick}>
+              Click me
+            </Button>
+          </PopoverAnchor>
+          <PopoverContent>
+            <Typography variant="body_short">
+              Popover without close button
+            </Typography>
+          </PopoverContent>
+        </Popover>
+        <Popover onClose={handleClose} open={active === '2'} disableCloseButton>
+          <PopoverAnchor>
+            <Button id="2" onClick={handleClick}>
+              Click me too
+            </Button>
+          </PopoverAnchor>
+          <PopoverContent>
+            <Typography variant="body_short">
+              Popover without close button
+            </Typography>
+          </PopoverContent>
+        </Popover>
+      </Wrapper>
+    </Body>
+  )
+}
+
 const ANCHOR_CHOICES = {
   button: <Button variant="ghost">Button</Button>,
   avatar: <Avatar src={catImg} size={48} alt="avatar" />,

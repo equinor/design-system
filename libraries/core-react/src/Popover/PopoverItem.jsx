@@ -63,7 +63,15 @@ const StyledCloseButton = styled((props) => <Button {...props} />)`
 `
 
 export const PopoverItem = forwardRef(function EdsPopoverItem(
-  { children, onClose, anchorRef, placement, className, closeButton, ...rest },
+  {
+    children,
+    onClose,
+    anchorRef,
+    placement,
+    className,
+    disableCloseButton,
+    ...rest
+  },
   ref,
 ) {
   const wrapperProps = {
@@ -120,7 +128,7 @@ export const PopoverItem = forwardRef(function EdsPopoverItem(
           <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
         </PopoverArrow>
         {children}
-        {closeButton && (
+        {!disableCloseButton && (
           // Close button is placed last in the DOM order due to tab index rules.
           // This button should always be the last iterable action element in the popover
           <StyledCloseButton onClick={onClose} variant="ghost_icon">
@@ -150,7 +158,8 @@ PopoverItem.propTypes = {
     'left',
     'leftBottom',
   ]),
-  closeButton: PropTypes.bool,
+  // For the user to control the close button themselves
+  disableCloseButton: PropTypes.bool,
   // On Close function:
   onClose: PropTypes.func,
   // Reference to anchor / trigger element
@@ -166,5 +175,5 @@ PopoverItem.defaultProps = {
   onClose: () => {},
   children: undefined,
   className: '',
-  closeButton: false,
+  disableCloseButton: false,
 }

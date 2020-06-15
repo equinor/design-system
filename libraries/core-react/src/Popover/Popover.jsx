@@ -28,7 +28,6 @@ export const Popover = forwardRef(function Popover(
   const anchorRef = useRef(null)
 
   let anchorElement
-  let activateCloseButton = false
   const childArray = []
   if (Array.isArray(children)) {
     for (let i = 0; i < children.length; i += 1) {
@@ -41,13 +40,6 @@ export const Popover = forwardRef(function Popover(
         children[i].type.displayName === 'eds-popover-anchor'
       ) {
         anchorElement = children[i]
-      } else if (
-        children[i].type &&
-        children[i].type.displayName === 'eds-popover-title'
-      ) {
-        // Find title to control close button (needed hack to get correct tab index for buttons)
-        childArray.push(children[i])
-        activateCloseButton = true
       } else {
         // Add the remaining children to a new array to display inside <PopoverItem/>
         childArray.push(children[i])
@@ -71,11 +63,7 @@ export const Popover = forwardRef(function Popover(
       </Anchor>
 
       {open && (
-        <PopoverItem
-          {...props}
-          anchorRef={anchorRef}
-          closeButton={activateCloseButton}
-        >
+        <PopoverItem {...props} anchorRef={anchorRef}>
           {childArray}
         </PopoverItem>
       )}
@@ -101,6 +89,8 @@ Popover.propTypes = {
     'left',
     'leftBottom',
   ]),
+  // For the user to control the close button themselves
+  disableCloseButton: PropTypes.bool,
   // On Close function:
   onClose: PropTypes.func,
   // Open activates <PopoverItem/>
@@ -115,4 +105,5 @@ Popover.defaultProps = {
   placement: 'bottom',
   onClose: () => {},
   className: '',
+  disableCloseButton: false,
 }
