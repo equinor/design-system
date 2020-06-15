@@ -50,17 +50,11 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   const [expanded, setExpanded] = useState(false)
 
   const collapsedCrumbs = (allCrumbs) => {
-    const handleExpandClick = (e) => {
+    const handleExpandClick = () => {
       setExpanded(true)
-
-      // Move focus from ... to component after expanding
-      // const focusable = e.currentTarget.parentNode.querySelector('')
-      // if(focusable) {
-      //   focusable.focus()
-      // }
     }
 
-    if (allCrumbs.length <= 2) {
+    if (allCrumbs.length < 3) {
       return allCrumbs
     }
 
@@ -108,8 +102,8 @@ Breadcrumbs.displayName = 'eds-breadcrumbs'
 
 Breadcrumbs.propTypes = {
   /*
-   * Maximum breadcrumb items to display between first and last item before collapse
-   * Only the first and last breadcrumb will be shown, with an ellipsis in between.
+   * Collapses the list of breadcrumbs so that only the first
+   * and last breadcrumb will be shown, with an ellipsis in between.
    */
   collapse: PropTypes.bool,
   // Breadcrumbs children
