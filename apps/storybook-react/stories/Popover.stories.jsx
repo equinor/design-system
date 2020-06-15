@@ -50,19 +50,6 @@ export function Placement() {
     setActive(null)
   }
 
-  const Content = () => (
-    <>
-      <PopoverTitle>Title </PopoverTitle>
-      <PopoverContent>
-        <Typography variant="body_short">Content</Typography>
-      </PopoverContent>
-      <CardActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>OK</Button>
-      </CardActions>
-    </>
-  )
-
   return (
     <Body>
       <TextWrapper>
@@ -87,7 +74,14 @@ export function Placement() {
               Top left
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover onClose={handleClose} open={active === '2'} placement="top">
           <PopoverAnchor>
@@ -95,7 +89,14 @@ export function Placement() {
               Top
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover
           onClose={handleClose}
@@ -107,7 +108,14 @@ export function Placement() {
               Top right
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
       </Wrapper>
 
@@ -125,7 +133,14 @@ export function Placement() {
               Bottom left
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover onClose={handleClose} open={active === '5'} placement="bottom">
           <PopoverAnchor>
@@ -133,7 +148,14 @@ export function Placement() {
               Bottom
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover
           onClose={handleClose}
@@ -145,7 +167,14 @@ export function Placement() {
               Bottom right
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
       </Wrapper>
 
@@ -163,7 +192,14 @@ export function Placement() {
               Left top
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover onClose={handleClose} open={active === '8'} placement="left">
           <PopoverAnchor>
@@ -171,7 +207,14 @@ export function Placement() {
               Left
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover
           onClose={handleClose}
@@ -183,7 +226,14 @@ export function Placement() {
               Left bottom
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
       </Wrapper>
       <Typography variant="h5" as="h4">
@@ -200,7 +250,14 @@ export function Placement() {
               Right top
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover onClose={handleClose} open={active === '11'} placement="right">
           <PopoverAnchor>
@@ -208,7 +265,14 @@ export function Placement() {
               Right
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
         <Popover
           onClose={handleClose}
@@ -220,7 +284,14 @@ export function Placement() {
               Right bottom
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
       </Wrapper>
     </Body>
@@ -245,19 +316,6 @@ export function ActivationTypes() {
     setActive(null)
   }
 
-  const Content = () => (
-    <>
-      <PopoverTitle>Title </PopoverTitle>
-      <PopoverContent>
-        <Typography variant="body_short">Content</Typography>
-      </PopoverContent>
-      <CardActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>OK</Button>
-      </CardActions>
-    </>
-  )
-
   return (
     <Body>
       <TextWrapper>
@@ -276,7 +334,14 @@ export function ActivationTypes() {
               On Click
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
       </Wrapper>
       <Typography variant="body_long">
@@ -292,7 +357,14 @@ export function ActivationTypes() {
               On Hover
             </Button>
           </PopoverAnchor>
-          <Content />
+          <PopoverTitle>Title </PopoverTitle>
+          <PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </PopoverContent>
+          <CardActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </CardActions>
         </Popover>
       </Wrapper>
     </Body>
