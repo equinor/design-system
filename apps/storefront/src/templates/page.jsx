@@ -17,11 +17,24 @@ import {
   subdirectory_arrow_right,
 } from '@equinor/eds-icons'
 import { slugify } from '../utils/'
+import styled from 'styled-components'
 
 Icon.add({ save, thumbs_down, info_circle, subdirectory_arrow_right })
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 const { LinkItem } = TableOfContents
+
+const StyledTableOfContents = styled(TableOfContents)`
+  position: static;
+  margin: 32px 0;
+  @media (min-width: 1200px) {
+    float: right;
+    position: sticky;
+    top: 80px;
+    display: inline-block;
+    margin-top: -48px;
+  }
+`
 
 const Page = ({ data }) => {
   const page = data.mdx
@@ -42,26 +55,7 @@ const Page = ({ data }) => {
           </span>
         )}
       </h1>
-      {toc && (
-        <nav>
-          <TableOfContents sticky label="Content">
-            {toc.map((item) => {
-              return (
-                <LinkItem key={item}>
-                  <Typography
-                    variant="body_short"
-                    link
-                    href={`#${slugify(item)}`}
-                  >
-                    <Icon name="subdirectory_arrow_right" size={16} />
-                    <span>{item}</span>
-                  </Typography>
-                </LinkItem>
-              )
-            })}
-          </TableOfContents>
-        </nav>
-      )}
+
       {!(tabs === null) && (
         <ul className="Tabs">
           {tabs.map((tab, index) => (
@@ -83,6 +77,24 @@ const Page = ({ data }) => {
           ))}
         </ul>
       )}
+      {toc && (
+        <StyledTableOfContents sticky label="Content">
+          {toc.map((item) => {
+            return (
+              <LinkItem key={item}>
+                <Typography
+                  variant="body_short"
+                  link
+                  href={`#${slugify(item)}`}
+                >
+                  <Icon name="subdirectory_arrow_right" size={16} />
+                  <span>{item}</span>
+                </Typography>
+              </LinkItem>
+            )
+          })}
+        </StyledTableOfContents>
+      )}
       <dl className="DebugDefList">
         <dt>Current category</dt>
         <dd>{currentCategory}</dd>
@@ -93,6 +105,7 @@ const Page = ({ data }) => {
         <dt>linkSlug</dt>
         <dd>{linkSlug}</dd>
       </dl>
+
       {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
         <MDXRenderer>{page.body}</MDXRenderer>
       )}
