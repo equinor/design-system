@@ -32,7 +32,7 @@ const StyledTableOfContents = styled(TableOfContents)`
     position: sticky;
     top: 80px;
     display: inline-block;
-    margin-top: -48px;
+    margin-top: -64px;
   }
 `
 

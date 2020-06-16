@@ -64,6 +64,7 @@ const ContentHeader = styled.div`
 const Content = styled.div`
   background: white;
   padding: 2rem;
+  max-width: 65rem;
   & > h2,
   & > h3,
   & > h4,
