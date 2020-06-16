@@ -14,7 +14,7 @@ UnorderedList.propTypes = {
 }
 
 export const OrderedList = ({ children }) => {
-  return <List variant="number">{children}</List>
+  return <List variant="numbered">{children}</List>
 }
 
 OrderedList.propTypes = {
