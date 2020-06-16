@@ -10,5 +10,6 @@ export const camelify = (str) =>
     .join('')
 
 export const slugify = (str) => {
+  if (!str) return
   return str.toLowerCase().split(' ').join('-')
 }
