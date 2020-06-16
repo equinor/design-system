@@ -19,6 +19,7 @@ import Text from './Text'
 import { H1, H2, H3, H4 } from './Titles'
 import { OrderedList, UnorderedList, ListItem } from './List'
 import HeadCell from './HeadCell'
+import Grid from './Grid'
 
 const { Body, Row, Cell, Head } = Table
 
@@ -29,6 +30,7 @@ const mdxComponents = {
   FigmaImage,
   IconsDownload,
   Image,
+  Grid,
   p: Text,
   h1: H1,
   h2: H2,
@@ -70,7 +72,7 @@ const Content = styled.div`
   & > p,
   & > ul,
   & > ol {
-    max-width: 38rem;
+    max-width: 39rem;
   }
   h2 + p,
   h3 + p,
