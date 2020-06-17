@@ -8,7 +8,6 @@ const StyledCode = styled.code`
 `
 
 const Code = ({ children }) => {
-  console.log('§fdlkfjdslfjldsfjlksdjflksdjf')
   return <StyledCode>{children}</StyledCode>
 }
 
