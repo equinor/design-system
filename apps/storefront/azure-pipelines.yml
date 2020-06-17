@@ -16,6 +16,7 @@ trigger:
     - release/*
     - develop
     - master
+    - storefront
   paths:
     include:
       - apps/storefront
@@ -27,6 +28,7 @@ pr:
     - release/*
     - develop
     - master
+    - storefront
 
   paths:
     include:
