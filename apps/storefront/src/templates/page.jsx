@@ -159,7 +159,7 @@ const Page = ({ data }) => {
           >
             <span role="img" aria-label="Pencil">
               ✏️
-            </span>
+            </span>{' '}
             Edit this page on GitHub
           </a>
         </p>

@@ -7,8 +7,7 @@ module.exports = {
   siteMetadata: {
     title: 'Equinor Design System',
     description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@chrisbiscardi',
+      'The EDS is the official design system of Equinor The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions.',
   },
   plugins: [
     {
@@ -67,6 +66,7 @@ module.exports = {
         background_color: '#fff',
         theme_color: '#000',
         display: 'minimal-ui',
+        icon: 'src/images/icon.png',
       },
     },
     {
