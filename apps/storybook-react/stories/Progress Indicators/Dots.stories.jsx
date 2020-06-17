@@ -28,13 +28,13 @@ export default {
 export const Variants = () => {
   return (
     <Body>
-      <Typography variant="h4">White</Typography>
+      <Typography variant="h2">White</Typography>
       <Wrapper>
         <Background>
           <DotProgress variant="white" />
         </Background>
       </Wrapper>
-      <Typography variant="h4">Green</Typography>
+      <Typography variant="h2">Green</Typography>
       <Wrapper>
         <DotProgress variant="green" />
       </Wrapper>
