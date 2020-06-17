@@ -30,6 +30,7 @@ const { LinkItem } = TableOfContents
 const StyledTableOfContents = styled(TableOfContents)`
   position: static;
   margin: 32px 0;
+  box-sizing: content-box;
   @media (min-width: 1200px) {
     float: right;
     position: sticky;
