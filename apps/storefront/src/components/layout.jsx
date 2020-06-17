@@ -4,7 +4,7 @@ import { Location, Link } from '@reach/router'
 import { MDXProvider } from '@mdx-js/react'
 import { TopBar, Table } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 import Sidebar from './Sidebar'
 import './layout.css'
 
@@ -51,41 +51,6 @@ const mdxComponents = {
 
 const { Header: TopBarHeader, Actions } = TopBar
 
-const ContentHeader = styled.div`
-  background: #f7f7f7;
-  padding: 2rem;
-  height: 10rem;
-  display: grid;
-  align-content: end;
-
-  & > h1 {
-    margin: 0;
-  }
-`
-
-const Content = styled.div`
-  background: white;
-  padding: 2rem;
-  max-width: 65rem;
-  & > h2,
-  & > h3,
-  & > h4,
-  & > h5,
-  & > h6,
-  & > p,
-  & > ul,
-  & > ol {
-    max-width: 39rem;
-  }
-  h2 + p,
-  h3 + p,
-  h4 + p,
-  h5 + p,
-  h6 + p {
-    margin-top: 0;
-  }
-`
-
 const Layout = ({ children }) => {
   const childrenArr = React.Children.toArray(children)
 
@@ -117,10 +82,7 @@ const Layout = ({ children }) => {
         {/* <Header /> */}
         <Location>{({ location }) => <Sidebar location={location} />}</Location>
 
-        <main style={{ gridArea: 'main' }}>
-          <ContentHeader>{childrenArr.shift()}</ContentHeader>
-          <Content>{childrenArr}</Content>
-        </main>
+        <main style={{ gridArea: 'main' }}>{children}</main>
       </div>
     </MDXProvider>
   )

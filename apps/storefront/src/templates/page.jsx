@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -10,6 +11,8 @@ import {
   Typography,
 } from '@equinor/eds-core-react'
 import Layout from '../components/layout'
+import SEO from '../components/seo'
+
 import {
   save,
   thumbs_down,
@@ -36,6 +39,41 @@ const StyledTableOfContents = styled(TableOfContents)`
   }
 `
 
+const ContentHeader = styled.div`
+  background: #f7f7f7;
+  padding: 2rem;
+  height: 10rem;
+  display: grid;
+  align-content: end;
+
+  & > h1 {
+    margin: 0;
+  }
+`
+
+const Content = styled.div`
+  background: white;
+  padding: 2rem;
+  max-width: 65rem;
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6,
+  & > p,
+  & > ul,
+  & > ol {
+    max-width: 39rem;
+  }
+  h2 + p,
+  h3 + p,
+  h4 + p,
+  h5 + p,
+  h6 + p {
+    margin-top: 0;
+  }
+`
+
 const Page = ({ data }) => {
   const page = data.mdx
   const { tabs, title, toc, mode = 'draft' } = page.frontmatter
@@ -47,81 +85,85 @@ const Page = ({ data }) => {
   const isPublished = (mode || '').toLowerCase() === 'publish'
   return (
     <Layout>
-      <h1>
-        {title}
-        {!isPublished && (
-          <span className={`ModeBadge ModeBadge--${mode}`}>
-            {mode && `(${mode})`}
-          </span>
-        )}
-      </h1>
-
-      {!(tabs === null) && (
-        <ul className="Tabs">
-          {tabs.map((tab, index) => (
-            <li className="Tab" key={tab}>
-              <Link
-                to={
-                  index > 0
-                    ? `${linkSlug}${tab.toLowerCase().split(' ').join('-')}/`
-                    : linkSlug
-                }
-                className={classNames('Tab-link', {
-                  'is-selected':
-                    tab.toLowerCase().split(' ').join('-') === currentPage,
-                })}
-              >
-                {tab}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-      {toc && (
-        <StyledTableOfContents sticky label="Content">
-          {toc.map((item) => {
-            return (
-              <LinkItem key={item}>
-                <Typography
-                  variant="body_short"
-                  link
-                  href={`#${slugify(item)}`}
+      <SEO title={title} />
+      <ContentHeader>
+        <h1>
+          {title}
+          {!isPublished && (
+            <span className={`ModeBadge ModeBadge--${mode}`}>
+              {mode && `(${mode})`}
+            </span>
+          )}
+        </h1>
+      </ContentHeader>
+      <Content>
+        {!(tabs === null) && (
+          <ul className="Tabs">
+            {tabs.map((tab, index) => (
+              <li className="Tab" key={tab}>
+                <Link
+                  to={
+                    index > 0
+                      ? `${linkSlug}${tab.toLowerCase().split(' ').join('-')}/`
+                      : linkSlug
+                  }
+                  className={classNames('Tab-link', {
+                    'is-selected':
+                      tab.toLowerCase().split(' ').join('-') === currentPage,
+                  })}
                 >
-                  <Icon name="subdirectory_arrow_right" size={16} />
-                  <span>{item}</span>
-                </Typography>
-              </LinkItem>
-            )
-          })}
-        </StyledTableOfContents>
-      )}
-      <dl className="DebugDefList">
-        <dt>Current category</dt>
-        <dd>{currentCategory}</dd>
-        <dt>Current page</dt>
-        <dd>{currentPage}</dd>
-        <dt>Slug</dt>
-        <dd>{slug}</dd>
-        <dt>linkSlug</dt>
-        <dd>{linkSlug}</dd>
-      </dl>
+                  {tab}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        {toc && (
+          <StyledTableOfContents sticky label="Content">
+            {toc.map((item) => {
+              return (
+                <LinkItem key={item}>
+                  <Typography
+                    variant="body_short"
+                    link
+                    href={`#${slugify(item)}`}
+                  >
+                    <Icon name="subdirectory_arrow_right" size={16} />
+                    <span>{item}</span>
+                  </Typography>
+                </LinkItem>
+              )
+            })}
+          </StyledTableOfContents>
+        )}
+        <dl className="DebugDefList">
+          <dt>Current category</dt>
+          <dd>{currentCategory}</dd>
+          <dt>Current page</dt>
+          <dd>{currentPage}</dd>
+          <dt>Slug</dt>
+          <dd>{slug}</dd>
+          <dt>linkSlug</dt>
+          <dd>{linkSlug}</dd>
+        </dl>
 
-      {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
-        <MDXRenderer>{page.body}</MDXRenderer>
-      )}
+        {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
+          <MDXRenderer>{page.body}</MDXRenderer>
+        )}
 
-      <p style={{ marginTop: '3rem' }}>
-        <a
-          href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
-            slug === '/' ? `index` : slug
-          }.mdx`}
-        >
-          <span role="img" aria-label="Pencil">
-            ✏️
-          </span>
-          Edit this page on GitHub
-        </a>
-      </p>
+        <p style={{ marginTop: '3rem' }}>
+          <a
+            href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
+              slug === '/' ? `index` : slug
+            }.mdx`}
+          >
+            <span role="img" aria-label="Pencil">
+              ✏️
+            </span>
+            Edit this page on GitHub
+          </a>
+        </p>
+      </Content>
     </Layout>
   )
 }
