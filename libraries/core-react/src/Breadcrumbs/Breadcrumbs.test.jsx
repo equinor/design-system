@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import PropTypes from 'prop-types'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -11,18 +10,22 @@ const { Breadcrumb } = Breadcrumbs
 
 const StyledBreadcrumbs = styled(Breadcrumbs)`
   position: absolute;
-  width: 100px;
+`
+
+const StyledBreadcrumb = styled(Breadcrumb)`
+  position: absolute;
 `
 
 afterEach(cleanup)
 
 describe('Breadcrumbs', () => {
   it('can extend the css for the component', () => {
-    const { container } = render(
+    render(
       <StyledBreadcrumbs>
-        <Breadcrumb>Breadcrumb</Breadcrumb>
+        <StyledBreadcrumb>Hei</StyledBreadcrumb>
       </StyledBreadcrumbs>,
     )
-    expect(container).toHaveStyleRule('position', 'absolute')
+    const breadcrumbs = screen.getByRole('breadcrumbs')
+    expect(breadcrumbs).toHaveStyleRule('position', 'absolute')
   })
 })
