@@ -6,6 +6,7 @@ extends:
   - plugin:testing-library/react
   - plugin:import/errors
   - plugin:import/warnings
+  - plugin:jsx-a11y/recommended
 plugins:
   - prettier
   - testing-library
@@ -84,3 +85,6 @@ rules:
   react/destructuring-assignment:
     - error
     - always
+  # Emojis should be accessible
+  jsx-a11y/accessible-emoji:
+    - warn
