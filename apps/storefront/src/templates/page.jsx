@@ -35,7 +35,7 @@ const StyledTableOfContents = styled(TableOfContents)`
     position: sticky;
     top: 80px;
     display: inline-block;
-    margin-top: -64px;
+    margin-top: ${({ withTabs }) => (withTabs ? '-64px' : '1rem')};
   }
 `
 
@@ -119,7 +119,11 @@ const Page = ({ data }) => {
           </ul>
         )}
         {toc && (
-          <StyledTableOfContents sticky label="Content">
+          <StyledTableOfContents
+            sticky
+            label="Content"
+            withTabs={tabs !== null}
+          >
             {toc.map((item) => {
               return (
                 <LinkItem key={item}>
