@@ -20,6 +20,7 @@ import { H1, H2, H3, H4 } from './Titles'
 import { OrderedList, UnorderedList, ListItem } from './List'
 import HeadCell from './HeadCell'
 import Grid from './Grid'
+import Code from './Code'
 
 const { Body, Row, Cell, Head } = Table
 
@@ -45,6 +46,7 @@ const mdxComponents = {
   td: Cell,
   th: HeadCell,
   tbody: Body,
+  inlineCode: Code,
 }
 
 const { Header: TopBarHeader, Actions } = TopBar
