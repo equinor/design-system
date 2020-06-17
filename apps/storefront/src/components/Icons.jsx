@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import { H2 } from './Titles'
 import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
 
 const Container = styled.div`
   width: 100%;
+  max-width: 49rem;
 `
-
-const Title = styled.h2``
 
 const Label = styled.p`
   text-align: center;
@@ -73,7 +73,7 @@ const Icons = () => {
       {Object.keys(iconsByGroup).map((key) => {
         return (
           <Group key={key}>
-            <Title>{key}</Title>
+            <H2>{key}</H2>
             <Group>
               {iconsByGroup[key].map((icon) => {
                 const { name, datauri } = icon
