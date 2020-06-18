@@ -8,6 +8,8 @@
   },
   "author": "",
   "dependencies": {
+    "@equinor/eds-core-react": "workspace:*",
+    "@equinor/eds-icons": "workspace:*",
     "@mdx-js/mdx": "^1.6.5",
     "@mdx-js/react": "^1.6.5",
     "@mdx-js/tag": "^0.20.3",
