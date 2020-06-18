@@ -47,9 +47,6 @@ const Image = styled.img`
   background: transparent !important;
   width: 48px;
 `
-const DownloadImage = styled(Image)`
-  width: 24px;
-`
 
 const IconItem = styled.li`
   display: flex;
@@ -68,7 +65,6 @@ const IconItem = styled.li`
     }
   }
 `
-const downloadIcon = systemIcons.find((x) => x.name === 'download')
 
 const downloadAsSvg = (data, name) => fileDownload(data, `${name}.svg`)
 
@@ -97,10 +93,6 @@ const Icons = () => {
                       variant="outlined"
                       onClick={() => downloadAsSvg(icon.value, name)}
                     >
-                      {/*   <DownloadImage
-                        src={downloadIcon.datauri}
-                        alt={`Download ${name} as SVG file`}
-                      /> */}
                       <Icon name="download" aria-hidden />
                       Download SVG
                     </DownloadLabel>
@@ -119,4 +111,4 @@ Icons.propTypes = {
   /** Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed */
 }
 
-export default Icons
+export default Icons // eslint-disable-line
