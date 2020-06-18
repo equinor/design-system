@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button } from '@equinor/eds-core-react'
+import { Button, Icon } from '@equinor/eds-core-react'
 import { H2 } from './Titles'
 import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
@@ -51,7 +51,7 @@ const DownloadImage = styled(Image)`
   width: 24px;
 `
 
-const Icon = styled.li`
+const IconItem = styled.li`
   display: flex;
   padding: 16px 0;
   align-items: center;
@@ -90,20 +90,21 @@ const Icons = () => {
               {iconsByGroup[key].map((icon) => {
                 const { name, datauri } = icon
                 return (
-                  <Icon key={name}>
+                  <IconItem key={name}>
                     <Image src={datauri} alt={name} />
                     <Label>{name}</Label>
                     <DownloadLabel
                       variant="outlined"
                       onClick={() => downloadAsSvg(icon.value, name)}
                     >
-                      <DownloadImage
+                      {/*   <DownloadImage
                         src={downloadIcon.datauri}
                         alt={`Download ${name} as SVG file`}
-                      />
-                      SVG
+                      /> */}
+                      <Icon name="download" aria-hidden />
+                      Download SVG
                     </DownloadLabel>
-                  </Icon>
+                  </IconItem>
                 )
               })}
             </Group>
