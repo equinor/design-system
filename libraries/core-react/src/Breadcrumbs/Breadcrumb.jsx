@@ -1,13 +1,6 @@
-import React, {
-  forwardRef,
-  useState,
-  useRef,
-  createRef,
-  useEffect,
-  useCallback,
-} from 'react'
+import React, { forwardRef, useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
@@ -69,7 +62,7 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
   return tooltip ? (
     WithTooltip
   ) : (
-    <StyleTypography link variant="body_short" {...props}>
+    <StyleTypography role="breadcrumb" link variant="body_short" {...props}>
       {children}
     </StyleTypography>
   )
