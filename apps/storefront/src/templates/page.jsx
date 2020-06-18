@@ -18,11 +18,12 @@ import {
   thumbs_down,
   info_circle,
   subdirectory_arrow_right,
+  download,
 } from '@equinor/eds-icons'
 import { slugify } from '../utils/'
 import styled from 'styled-components'
 
-Icon.add({ save, thumbs_down, info_circle, subdirectory_arrow_right })
+Icon.add({ save, thumbs_down, info_circle, subdirectory_arrow_right, download })
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 const { LinkItem } = TableOfContents
