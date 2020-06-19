@@ -34,6 +34,7 @@ const StyledPopover = styled((props) => <Card {...props} />)`
   max-width: ${tokens.popover.maxWidth};
   min-height: ${tokens.popover.minHeight};
   box-shadow: ${tokens.elevation};
+
 `
 
 const PopoverArrow = styled.svg`

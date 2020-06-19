@@ -1,5 +1,10 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const ContentWrapper = styled.div`
+  overflow: hidden;
+`
 
 export const PopoverContent = forwardRef(function EdsPopoverContent(
   { children, className, ...rest },
@@ -11,7 +16,7 @@ export const PopoverContent = forwardRef(function EdsPopoverContent(
     ref,
   }
 
-  return <div {...props}>{children}</div>
+  return <ContentWrapper {...props}>{children}</ContentWrapper>
 })
 
 PopoverContent.displayName = 'eds-popover-content'

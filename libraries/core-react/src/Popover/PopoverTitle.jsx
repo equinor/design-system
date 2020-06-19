@@ -6,6 +6,10 @@ import { typographyTemplate } from '../_common/templates'
 
 import { popover as tokens } from './Popover.tokens'
 
+const TitleWrapper = styled.div`
+  overflow: hidden;
+`
+
 const StyledPopoverTitle = styled.div`
   ${typographyTemplate(tokens.header)}
   margin-right: 48px;
@@ -27,10 +31,10 @@ export const PopoverTitle = forwardRef(function EdsPopoverTitle(
   }
 
   return (
-    <div {...props}>
+    <TitleWrapper {...props}>
       <StyledPopoverTitle>{children}</StyledPopoverTitle>
       <StyledDivider variant="small" />
-    </div>
+    </TitleWrapper>
   )
 })
 
