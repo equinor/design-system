@@ -3,12 +3,7 @@ import PropTypes from 'prop-types'
 
 const initalState = {
   focusedIndex: -1,
-  subMenu: {
-    index: undefined,
-    left: undefined,
-    top: undefined,
-    previous: 0,
-  },
+  open: false,
 }
 
 const MenuContext = React.createContext(initalState)
@@ -34,34 +29,15 @@ MenuProvider.defaultProps = {}
 
 export const useMenu = () => {
   const [state, setState] = useContext(MenuContext)
-  const { focusedIndex, subMenu } = state
+  const { focusedIndex } = state
 
   const setFocusedIndex = (i) => {
     setState({ ...state, focusedIndex: i })
   }
 
-  const setSubMenu = (target, index, focus) => {
-    const rect = target.getBoundingClientRect()
-    const offset = rect ? rect.width + 8 : 0
-
-    const nextIndex = index === state.subMenu.index ? -1 : index
-    setState({
-      ...state,
-      subMenu: {
-        previous: state.subMenu.index,
-        index: nextIndex,
-        left: nextIndex > -1 ? offset : undefined,
-        top: 0,
-        focus,
-      },
-    })
-  }
-
   return {
     setFocusedIndex,
     focusedIndex,
-    setSubMenu,
-    subMenu,
   }
 }
 

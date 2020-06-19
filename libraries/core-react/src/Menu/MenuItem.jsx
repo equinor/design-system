@@ -86,7 +86,7 @@ export const MenuItem = React.memo(
     { children, disabled, index, ...rest },
     ref,
   ) {
-    const { focusedIndex, setFocusedIndex, subMenu, setSubMenu } = useMenu()
+    const { focusedIndex, setFocusedIndex, subMenu } = useMenu()
 
     const toggleFocus = (index_) => {
       if (focusedIndex !== index_) {
@@ -94,30 +94,7 @@ export const MenuItem = React.memo(
       }
     }
 
-    const openSubMenu = (e) => {
-      e.stopPropagation()
-      setSubMenu(e.currentTarget, index, 'first')
-    }
     const isFocused = index === focusedIndex
-
-    const updatedChildren = React.Children.map(children, (child) => {
-      // We force size on Icon & Avatar component
-
-      if (child.props) {
-        return React.cloneElement(child, {
-          disabled,
-          isopen: index === subMenu.index,
-          left: subMenu.left,
-          top: subMenu.top,
-          focus: subMenu.focus,
-        })
-      }
-      return child
-    })
-
-    const hasSubMenu =
-      updatedChildren.filter((child) => child.type.displayName === 'eds-menu')
-        .length > 0
 
     const props = {
       ...rest,
@@ -129,12 +106,8 @@ export const MenuItem = React.memo(
         {...props}
         ref={useCombinedRefs(ref, (el) => isFocused && el.focus())}
         onFocus={() => toggleFocus(index)}
-        onClick={hasSubMenu ? openSubMenu : undefined}
-        data-index={index}
-        aria-expanded={openSubMenu}
-        aria-haspopup={hasSubMenu}
       >
-        <Anchor>{updatedChildren}</Anchor>
+        <Anchor>{children}</Anchor>
       </ListItem>
     )
   }),
