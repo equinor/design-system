@@ -9,23 +9,22 @@ const StyledPaper = styled(Paper)`
   position: absolute;
   z-index: 1;
   ${({ left, top }) => css({ left, top })}
-  display:${({ isopen }) => (isopen ? 'block' : 'none')};
+  display:${({ open }) => (open ? 'block' : 'none')};
   width: fit-content;
   min-width: fit-content;
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { anchorEl, children, focus, ...rest },
+  { children, focus, ...rest },
   ref,
 ) {
-  // const rect = anchorEl.getBoundingClientRect()
-
   const props = {
     ...rest,
   }
 
   const menuListProps = {
     focus,
+    ...rest,
   }
 
   return (
@@ -45,28 +44,23 @@ Menu.propTypes = {
     PropTypes.arrayOf([PropTypes.node]),
     PropTypes.node,
   ]).isRequired,
-  /** Element the menu is anchored to */
-  anchorEl: PropTypes.node,
   /** Focus menuItem */
   focus: PropTypes.oneOf(['first', 'last']),
   /** Toggle for displaying menu */
-  isopen: PropTypes.bool,
+  open: PropTypes.bool,
   /** Position from left */
   left: PropTypes.number,
   /** Position from top */
   top: PropTypes.number,
   /** @ignore */
-  anchorIndex: PropTypes.number,
 }
 
 Menu.defaultProps = {
   className: '',
-  anchorEl: undefined,
   focus: undefined,
-  isopen: false,
+  open: false,
   top: undefined,
   left: undefined,
-  anchorIndex: -1,
 }
 
 Menu.displayName = 'eds-menu'

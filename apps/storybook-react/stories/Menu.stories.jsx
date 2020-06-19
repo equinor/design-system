@@ -58,7 +58,7 @@ export const Preview = () => {
       <Forced id="anchor-test" ref={anchorRef}>
         Attached to some anchor
       </Forced>
-      <Menu id="menu0" anchorEl={anchorEl} isopen>
+      <Menu id="menu0" anchorEl={anchorEl} open>
         <MenuItem>
           <MenuLabel>
             <Icon name="folder" />
@@ -161,7 +161,7 @@ export const ButtonToggle = () => {
         aria-labelledby="menuButton"
         anchorEl={anchorEl}
         focus={focus}
-        isopen={anchorEl && true}
+        open={anchorEl && true}
       >
         <MenuItem>
           <Icon name="folder" />
@@ -191,82 +191,6 @@ export const ButtonToggle = () => {
         <MenuItem>
           <Icon name="settings" />
           <span>Properties</span>
-        </MenuItem>
-      </Menu>
-    </Wrapper>
-  )
-}
-
-export const NestedMenu = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const anchorRef = React.useRef()
-
-  useEffect(() => setAnchorEl(anchorRef.current), [anchorRef.current])
-
-  return (
-    <Wrapper>
-      <Typography variant="h4">Menu</Typography>
-      <Forced id="anchor-test" ref={anchorRef}>
-        Attached to some anchor
-      </Forced>
-      <Menu isopen={true}>
-        <MenuItem>
-          <MenuTitle variant="menu_title">Open</MenuTitle>
-          <MenuLabel>
-            <Icon name="arrow_drop_right" />
-          </MenuLabel>
-          <Menu>
-            <MenuItem>
-              <MenuTitle variant="menu_title">Paste</MenuTitle>
-              <MenuLabel>
-                <Icon name="arrow_drop_right" />
-              </MenuLabel>
-              <Menu>
-                <MenuItem>
-                  <MenuLabel>
-                    <Icon name="folder" />
-                  </MenuLabel>
-                  <MenuTitle variant="menu_title">Open</MenuTitle>
-                  <MenuLabel>CTRL+O</MenuLabel>
-                </MenuItem>
-                <MenuItem active>
-                  <MenuLabel>
-                    <Icon name="copy" />
-                  </MenuLabel>
-                  <MenuTitle>Copy (Active)</MenuTitle>
-                  <MenuLabel>CTRL+C</MenuLabel>
-                </MenuItem>
-              </Menu>
-            </MenuItem>
-            <MenuItem>
-              <MenuTitle variant="menu_title">Edit</MenuTitle>
-              <MenuLabel>
-                <Icon name="arrow_drop_right" />
-              </MenuLabel>
-              <Menu>
-                <MenuItem>
-                  <Icon name="folder" />
-                  <span>Open</span>
-                  <span>CTRL+O</span>
-                </MenuItem>
-                <MenuItem active>
-                  <Icon name="copy" />
-                  <span>Copy</span>
-                  <span>CTRL+C</span>
-                </MenuItem>
-                <MenuItem>
-                  <Icon name="paste" />
-                  <span>Paste</span>
-                  <span>CTRL+V</span>
-                </MenuItem>
-                <MenuItem>
-                  <Icon name="edit" />
-                  <span>Rename</span>
-                  <span>CTRL+R</span>
-                </MenuItem>
-              </Menu>
-            </MenuItem>
-          </Menu>
         </MenuItem>
       </Menu>
     </Wrapper>

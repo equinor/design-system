@@ -18,7 +18,8 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   { children, focus, ...rest },
   ref,
 ) {
-  const { focusedIndex, setFocusedIndex, setSubMenu, subMenu } = useMenu()
+  const state = useMenu()
+  const { focusedIndex, setFocusedIndex } = state
 
   const updatedChildren = React.Children.map(children, (child, index) =>
     React.cloneElement(child, {
@@ -56,25 +57,6 @@ export const MenuList = React.forwardRef(function EdsMenuList(
     const { key, target } = event
 
     if (key === 'Enter' || key === ' ') {
-      // https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/js/PopupMenuItemLinks.js
-      // simulate click event
-      // Create simulated mouse event to mimic the behavior of ATs
-      // and let the event handler handleClick do the housekeeping.
-      // try {
-      //   clickEvent = new MouseEvent('click', {
-      //     'view': window,
-      //     'bubbles': true,
-      //     'cancelable': true
-      //   });
-      // }
-      // catch (err) {
-      //   if (document.createEvent) {
-      //     // DOM Level 3 for IE 9+
-      //     clickEvent = document.createEvent('MouseEvents');
-      //     clickEvent.initEvent('click', true, true);
-      //   }
-      // }
-      // tgt.dispatchEvent(clickEvent);
     }
 
     if (key === 'ArrowDown') {
@@ -82,15 +64,6 @@ export const MenuList = React.forwardRef(function EdsMenuList(
     }
     if (key === 'ArrowUp') {
       handleMenuItemChange('up', lastFocusIndex)
-    }
-    if (key === 'ArrowRight') {
-      const {
-        dataset: { index },
-      } = target
-      setSubMenu(target, parseInt(index, 0), 'first')
-    }
-    if (key === 'ArrowLeft') {
-      // setSubMenu(target, subMenu.previous)
     }
   }
 
@@ -110,7 +83,7 @@ MenuList.propTypes = {
     PropTypes.node,
   ]).isRequired,
   /** Focus menuItem */
-  focus: PropTypes.oneOf(['first', 'last', 'next', 'previouss']),
+  focus: PropTypes.oneOf(['first', 'last']),
 }
 
 MenuList.defaultProps = {
