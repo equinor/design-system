@@ -4,7 +4,6 @@ import { render, cleanup, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Breadcrumbs } from '.'
 
 const { Breadcrumb } = Breadcrumbs
@@ -12,28 +11,6 @@ const { Breadcrumb } = Breadcrumbs
 const StyledBreadcrumbs = styled(Breadcrumbs)`
   position: absolute;
 `
-
-const StyledBreadcrumb = styled(Breadcrumb)`
-  position: absolute;
-`
-
-const _ = require('lodash')
-
-// Ignore "Could not parse" errors that takes up all the space..
-const originalConsoleError = console.error
-console.error = function (msg) {
-  if (_.startsWith(msg, 'Error: Could not parse CSS stylesheet')) return
-  originalConsoleError(msg)
-}
-
-const BreadcrumbsCollapsed = () => (
-  <Breadcrumbs collapse>
-    <Breadcrumb>Label 1</Breadcrumb>
-    <Breadcrumb>Label 2</Breadcrumb>
-    <Breadcrumb>Label 3</Breadcrumb>
-    <Breadcrumb>Label 4</Breadcrumb>
-  </Breadcrumbs>
-)
 
 afterEach(cleanup)
 
@@ -106,12 +83,15 @@ describe('Breadcrumbs', () => {
     const crumb = getAllByRole('breadcrumb')
     expect(crumb[0]).toHaveStyleRule('max-width', '30px')
     fireEvent.mouseEnter(crumb[0])
-    expect(crumb[0]).toHaveAttribute('role', 'tooltip')
+    expect(crumb[0].parentNode.parentNode.lastChild).toHaveAttribute(
+      'role',
+      'tooltip',
+    )
   })
   it('can extend the css for the component', () => {
     const { container } = render(
       <StyledBreadcrumbs>
-        <Breadcrumb>Hei</Breadcrumb>
+        <Breadcrumb>Label</Breadcrumb>
       </StyledBreadcrumbs>,
     )
 
