@@ -1,6 +1,6 @@
 import React, { forwardRef, useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
@@ -24,7 +24,7 @@ const StyleTypography = styled(Typography)`
   text-decoration: none;
   color: ${tokens.colors.enabled};
   width: 100%;
-  max-width: ${(props) => props.maxWidth + 'px'};
+  ${({ maxWidth }) => css({ maxWidth })}
 `
 
 export const Breadcrumb = forwardRef(function Breadcrumb(
