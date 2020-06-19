@@ -50,7 +50,7 @@ export const Variations = () => {
         <Breadcrumb href="#" onClick={handleClick}>
           Fruits
         </Breadcrumb>
-        <Breadcrumb href="#" onClick={handleClick}>
+        <Breadcrumb href="#" onClick={handleClick} aria-current="page">
           Apple
         </Breadcrumb>
       </Breadcrumbs>
@@ -71,7 +71,7 @@ export const Variations = () => {
         <Breadcrumb href="#" onClick={handleClick}>
           Apple
         </Breadcrumb>
-        <Breadcrumb href="#" onClick={handleClick}>
+        <Breadcrumb href="#" onClick={handleClick} aria-current="page">
           Apple Juice
         </Breadcrumb>
       </Breadcrumbs>
@@ -89,7 +89,12 @@ export const Variations = () => {
         <Breadcrumb maxWidth={30} href="#" onClick={handleClick}>
           Fruits
         </Breadcrumb>
-        <Breadcrumb maxWidth={30} href="#" onClick={handleClick}>
+        <Breadcrumb
+          maxWidth={30}
+          href="#"
+          onClick={handleClick}
+          aria-current="page"
+        >
           Apple
         </Breadcrumb>
       </Breadcrumbs>
@@ -107,7 +112,7 @@ export const Variations = () => {
           <Breadcrumb href="#" onClick={handleClick}>
             Fruits
           </Breadcrumb>
-          <Breadcrumb href="#" onClick={handleClick}>
+          <Breadcrumb href="#" onClick={handleClick} aria-current="page">
             Apple
           </Breadcrumb>
         </Breadcrumbs>
@@ -126,7 +131,9 @@ export const WithKnobs = () => {
         <Breadcrumb maxWidth={maxWidth}>Label Two</Breadcrumb>
         <Breadcrumb maxWidth={maxWidth}>Label Three</Breadcrumb>
         <Breadcrumb maxWidth={maxWidth}>Label Four</Breadcrumb>
-        <Breadcrumb maxWidth={maxWidth}>Label Five</Breadcrumb>
+        <Breadcrumb maxWidth={maxWidth} aria-current="page">
+          Label Five
+        </Breadcrumb>
       </Breadcrumbs>
     </Body>
   )

@@ -63,6 +63,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
       <Fragment key="collapsed">
         <Collapsed
           link
+          role="button"
           variant="body_short"
           onClick={handleExpandClick}
           tabIndex={0}

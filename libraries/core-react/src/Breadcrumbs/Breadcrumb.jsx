@@ -53,7 +53,13 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
 
   const WithTooltip = (
     <Tooltip title={children}>
-      <StyleTypography link variant="body_short" {...props}>
+      <StyleTypography
+        ref={textRef}
+        role="breadcrumb"
+        link
+        variant="body_short"
+        {...props}
+      >
         {children}
       </StyleTypography>
     </Tooltip>
@@ -62,7 +68,13 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
   return tooltip ? (
     WithTooltip
   ) : (
-    <StyleTypography role="breadcrumb" link variant="body_short" {...props}>
+    <StyleTypography
+      ref={textRef}
+      role="breadcrumb"
+      link
+      variant="body_short"
+      {...props}
+    >
       {children}
     </StyleTypography>
   )
