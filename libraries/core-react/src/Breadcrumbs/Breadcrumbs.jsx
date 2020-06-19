@@ -16,7 +16,7 @@ const ListItem = styled.li`
   display: inline-block;
 `
 
-const Separator = styled.li`
+const Separator = styled(Typography)`
   color: ${tokens.colors.enabled};
   margin: 0 ${tokens.margin};
 `
@@ -70,9 +70,9 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
         >
           ...
         </Collapsed>
-        <Separator aria-hidden>
-          <Typography variant="body_short">/</Typography>
-        </Separator>
+        <li aria-hidden>
+          <Separator variant="body_short">/</Separator>
+        </li>
       </Fragment>,
       allCrumbs[allCrumbs.length - 1],
     ]
@@ -83,9 +83,9 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     <Fragment key={`breadcrumb-${index}`}>
       <ListItem>{child}</ListItem>
       {index !== React.Children.toArray(children).length - 1 && (
-        <Separator aria-hidden>
-          <Typography variant="body_short">/</Typography>
-        </Separator>
+        <li aria-hidden>
+          <Separator variant="body_short">/</Separator>
+        </li>
       )}
     </Fragment>
   ))
