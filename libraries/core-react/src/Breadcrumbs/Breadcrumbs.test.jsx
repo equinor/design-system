@@ -104,9 +104,9 @@ describe('Breadcrumbs', () => {
       </Breadcrumbs>,
     )
     const crumb = getAllByRole('breadcrumb')
-    expect(crumb[0]).toHaveStyleRule('width', '30px')
-    fireEvent.hover(crumb)
-    expect(crumb.parentNode).toHaveAttribute('role', 'tooltip')
+    expect(crumb[0]).toHaveStyleRule('max-width', '30px')
+    fireEvent.mouseEnter(crumb[0])
+    expect(crumb[0]).toHaveAttribute('role', 'tooltip')
   })
   it('can extend the css for the component', () => {
     const { container } = render(

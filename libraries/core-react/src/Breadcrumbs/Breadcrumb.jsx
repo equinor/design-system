@@ -24,7 +24,7 @@ const StyleTypography = styled(Typography)`
   text-decoration: none;
   color: ${tokens.colors.enabled};
   width: 100%;
-  max-width: ${(maxWidth) => maxWidth};
+  max-width: ${(props) => props.maxWidth + 'px'};
 `
 
 export const Breadcrumb = forwardRef(function Breadcrumb(
