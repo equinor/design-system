@@ -1,8 +1,6 @@
 # Equinor Design System
 
-<big>
 The EDS is the official design system of Equinor and is to be used when designing, prototyping and developing internal digital interfaces. The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions.
-</big>
 
 While the design system itself lives in [Figma][], this repository contains implementations of the EDS in code.
 
@@ -37,7 +35,7 @@ The [storefront][] is the official documentation for the EDS. As we’re getting
 
 ## EDS Core React
 
-The main implementation of the EDS. 
+This is the main implementation of the EDS, and will eventually contain accessible React components of each and every EDS component in Figma.
 
 ### Installation
 
