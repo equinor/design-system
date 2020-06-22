@@ -6,6 +6,7 @@ import { TopBar, Table } from '@equinor/eds-core-react'
 import { Helmet } from 'react-helmet'
 import Sidebar from './Sidebar'
 import './layout.css'
+import styled from 'styled-components'
 
 // MDX components
 import ComponentStatus from './ComponentStatus'
@@ -50,6 +51,20 @@ const mdxComponents = {
 
 const { Header: TopBarHeader, Actions } = TopBar
 
+const SkipLink = styled.a`
+  background: #007079;
+  color: #fff;
+  font-weight: 700;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-100%);
+  z-index: 1010;
+  &:focus {
+    transform: translateY(0%);
+  }
+`
+
 const Layout = ({ children }) => {
   return (
     <MDXProvider components={mdxComponents}>
@@ -60,6 +75,9 @@ const Layout = ({ children }) => {
         />
       </Helmet>
       <div className="Page">
+        <SkipLink className="skip-link" href="#main">
+          Skip to content
+        </SkipLink>
         <TopBar style={{ gridArea: 'header' }}>
           <TopBarHeader>
             {/* eslint-disable-next-line */}
@@ -81,7 +99,9 @@ const Layout = ({ children }) => {
         {/* <Header /> */}
         <Location>{({ location }) => <Sidebar location={location} />}</Location>
 
-        <main style={{ gridArea: 'main' }}>{children}</main>
+        <main id="main" style={{ gridArea: 'main' }}>
+          {children}
+        </main>
       </div>
     </MDXProvider>
   )
