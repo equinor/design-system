@@ -39,6 +39,16 @@ export const allButtons = () => (
     <Button color="danger">Danger</Button>
     <Button disabled>Disabled</Button>
 
+    <Button leftIcon={<Icon name="save" title="save"></Icon>}>Primary</Button>
+    <Button color="secondary" leftIcon={<Icon name="save" title="save"></Icon>}>
+      Secondary
+    </Button>
+    <Button color="danger" leftIcon={<Icon name="save" title="save"></Icon>}>
+      Danger
+    </Button>
+    <Button disabled leftIcon={<Icon name="save" title="save"></Icon>}>
+      Disabled
+    </Button>
     <Button variant="outlined">Primary</Button>
     <Button variant="outlined" color="secondary">
       Secondary
@@ -47,6 +57,33 @@ export const allButtons = () => (
       Danger
     </Button>
     <Button variant="outlined" disabled>
+      Disabled
+    </Button>
+    <Button
+      variant="outlined"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Primary
+    </Button>
+    <Button
+      variant="outlined"
+      color="secondary"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Secondary
+    </Button>
+    <Button
+      variant="outlined"
+      color="danger"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Danger
+    </Button>
+    <Button
+      variant="outlined"
+      disabled
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
       Disabled
     </Button>
     <Button variant="ghost">Primary</Button>
@@ -59,6 +96,42 @@ export const allButtons = () => (
     <Button variant="ghost" disabled>
       Disabled
     </Button>
+    <Button variant="ghost" leftIcon={<Icon name="save" title="save"></Icon>}>
+      Primary
+    </Button>
+    <Button
+      variant="ghost"
+      color="secondary"
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Secondary
+    </Button>
+    <Button
+      variant="ghost"
+      color="danger"
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Danger
+    </Button>
+    <Button
+      variant="ghost"
+      disabled
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Disabled
+    </Button>
+    <Button variant="ghost_icon">
+      <Icon name="save" title="save action" size={48}></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="secondary">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="danger">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" disabled>
+      <Icon name="save" title="save"></Icon>
+    </Button>
   </Wrapper>
 )
 export const contained = () => (
@@ -67,6 +140,29 @@ export const contained = () => (
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
     <Button disabled>Disabled</Button>
+    <Button leftIcon={<Icon name="save" title="save"></Icon>}>Primary</Button>
+    <Button color="secondary" leftIcon={<Icon name="save" title="save"></Icon>}>
+      Secondary
+    </Button>
+    <Button color="danger" leftIcon={<Icon name="save" title="save"></Icon>}>
+      Danger
+    </Button>
+    <Button disabled leftIcon={<Icon name="save" title="save"></Icon>}>
+      Disabled
+    </Button>
+    <Button rightIcon={<Icon name="save" title="save"></Icon>}>Primary</Button>
+    <Button
+      color="secondary"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Secondary
+    </Button>
+    <Button color="danger" rightIcon={<Icon name="save" title="save"></Icon>}>
+      Danger
+    </Button>
+    <Button disabled rightIcon={<Icon name="save" title="save"></Icon>}>
+      Disabled
+    </Button>
   </Wrapper>
 )
 
@@ -86,6 +182,60 @@ export const outlined = () => (
     <Button variant="outlined" disabled>
       Disabled
     </Button>
+    <Button
+      variant="outlined"
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Primary
+    </Button>
+    <Button
+      variant="outlined"
+      color="secondary"
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Secondary
+    </Button>
+    <Button
+      variant="outlined"
+      color="danger"
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Danger
+    </Button>
+    <Button
+      variant="outlined"
+      disabled
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Disabled
+    </Button>
+    <Button
+      variant="outlined"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Primary
+    </Button>
+    <Button
+      variant="outlined"
+      color="secondary"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Secondary
+    </Button>
+    <Button
+      variant="outlined"
+      color="danger"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Danger
+    </Button>
+    <Button
+      variant="outlined"
+      disabled
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Disabled
+    </Button>
   </Wrapper>
 )
 
@@ -99,6 +249,54 @@ export const ghost = () => (
       Danger
     </Button>
     <Button variant="ghost" disabled>
+      Disabled
+    </Button>
+    <Button variant="ghost" leftIcon={<Icon name="save" title="save"></Icon>}>
+      Primary
+    </Button>
+    <Button
+      variant="ghost"
+      color="secondary"
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Secondary
+    </Button>
+    <Button
+      variant="ghost"
+      color="danger"
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Danger
+    </Button>
+    <Button
+      variant="ghost"
+      disabled
+      leftIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Disabled
+    </Button>
+    <Button variant="ghost" rightIcon={<Icon name="save" title="save"></Icon>}>
+      Primary
+    </Button>
+    <Button
+      variant="ghost"
+      color="secondary"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Secondary
+    </Button>
+    <Button
+      variant="ghost"
+      color="danger"
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
+      Danger
+    </Button>
+    <Button
+      variant="ghost"
+      disabled
+      rightIcon={<Icon name="save" title="save"></Icon>}
+    >
       Disabled
     </Button>
     <Button variant="ghost_icon">

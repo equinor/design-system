@@ -105,6 +105,15 @@ const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
   }
 `
 
+const RightIcon = styled.span`
+  margin-left: 12px;
+  line-height: normal;
+`
+
+const LeftIcon = styled.span`
+  margin-right: 12px;
+  line-height: normal;
+`
 // TODO:
 // - Missing top spacing
 // - Fallback color?
@@ -117,11 +126,17 @@ export const Button = ({
   disabled,
   className,
   color,
+  rightIcon,
+  leftIcon,
   ...other
 }) => {
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
+
+  const iconRight = rightIcon && <RightIcon>{rightIcon}</RightIcon>
+
+  const iconLeft = leftIcon && <LeftIcon>{leftIcon}</LeftIcon>
 
   return (
     <ButtonBase
@@ -131,7 +146,9 @@ export const Button = ({
       disabled={disabled}
       {...other}
     >
+      {iconLeft}
       {children}
+      {iconRight}
     </ButtonBase>
   )
 }
@@ -160,7 +177,10 @@ Button.propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary', 'danger']),
   /** Specifies which variant to use */
   variant: PropTypes.oneOf(['contained', 'outlined', 'ghost', 'ghost_icon']),
-
+  /** Icon to be displayed on the left side */
+  leftIcon: PropTypes.node,
+  /** Icon to be displayed on the right side */
+  rightIcon: PropTypes.node,
   /**
    * If `true`, the button will be disabled.
    */
@@ -177,6 +197,8 @@ Button.defaultProps = {
   disabled: false,
   className: '',
   children: null,
+  leftIcon: null,
+  rightIcon: null,
 }
 
 Button.displayName = 'eds-button'
