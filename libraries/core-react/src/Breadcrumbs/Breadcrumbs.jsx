@@ -10,6 +10,22 @@ const OrderedList = styled.ol`
   padding: 0;
   margin: 0;
   flex-wrap: wrap;
+  li:not(:last-child)::after {
+    content: '/';
+    position: absolute;
+    top: 2px;
+    right: 0;
+    color: ${tokens.colors.enabled};
+  }
+
+  li:not(:last-child) {
+    padding-right: 21px;
+    position: relative;
+  }
+
+  li:not(:first-child) {
+    padding-left: ${tokens.margin};
+  }
 `
 
 const ListItem = styled.li`
@@ -72,9 +88,6 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
             …
           </Collapsed>
         </ListItem>
-        <li aria-hidden>
-          <Separator variant="body_short">/</Separator>
-        </li>
       </Fragment>,
       allCrumbs[allCrumbs.length - 1],
     ]
@@ -84,11 +97,6 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     // eslint-disable-next-line react/no-array-index-key
     <Fragment key={`breadcrumb-${index}`}>
       <ListItem>{child}</ListItem>
-      {index !== React.Children.toArray(children).length - 1 && (
-        <li aria-hidden>
-          <Separator variant="body_short">/</Separator>
-        </li>
-      )}
     </Fragment>
   ))
 

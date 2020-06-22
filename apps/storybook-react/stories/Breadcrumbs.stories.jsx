@@ -51,8 +51,8 @@ export const Variations = () => {
       <TextWrapper>
         <Typography variant="h2">Collapsed</Typography>
         <Typography variant="body_long">
-          Choose collapse prop to use ellipses to indicate the middle pages.
-          Click ellipses (...) to expand.
+          Choose collapse prop to use ellipsis to indicate the middle pages.
+          Click ellipsis (…) to expand.
         </Typography>
       </TextWrapper>
       <Breadcrumbs collapse>
@@ -72,8 +72,8 @@ export const Variations = () => {
       <TextWrapper>
         <Typography variant="h2">Truncated labels</Typography>
         <Typography variant="body_long">
-          Choose maxWidth in pixels to truncate labels. Hover on label to see
-          full text.
+          Choose maxWidth in pixels to truncate labels. Hover on label for a
+          Tooltip with full text.
         </Typography>
       </TextWrapper>
       <Breadcrumbs>
