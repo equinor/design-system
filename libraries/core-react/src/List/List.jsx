@@ -11,7 +11,7 @@ const StyledList = styled.div(
       }
     `,
   `
-    line-height: 24px;
+    line-height: 1.5;
   `,
 )
 
