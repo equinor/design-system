@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Location, Link } from '@reach/router'
 import { MDXProvider } from '@mdx-js/react'
 import { TopBar, Table } from '@equinor/eds-core-react'
-import styled from 'styled-components'
 import { Helmet } from 'react-helmet'
 import Sidebar from './Sidebar'
 import './layout.css'
@@ -52,8 +51,6 @@ const mdxComponents = {
 const { Header: TopBarHeader, Actions } = TopBar
 
 const Layout = ({ children }) => {
-  const childrenArr = React.Children.toArray(children)
-
   return (
     <MDXProvider components={mdxComponents}>
       <Helmet>
@@ -65,6 +62,7 @@ const Layout = ({ children }) => {
       <div className="Page">
         <TopBar style={{ gridArea: 'header' }}>
           <TopBarHeader>
+            {/* eslint-disable-next-line */}
             <label className="Burger" htmlFor="MenuToggler" />
             EDS – Equinor Design System
           </TopBarHeader>
@@ -78,6 +76,7 @@ const Layout = ({ children }) => {
           </Actions>
         </TopBar>
         {/* <Banner /> */}
+        {/* eslint-disable-next-line */}
         <input id="MenuToggler" className="MenuToggler" type="checkbox" />
         {/* <Header /> */}
         <Location>{({ location }) => <Sidebar location={location} />}</Location>
@@ -92,4 +91,4 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default Layout // eslint-disable-line

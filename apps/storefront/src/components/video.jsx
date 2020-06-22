@@ -47,7 +47,10 @@ const Video = ({ url, ...other }) => {
     <VideoBase {...other} src={videoUrl} />
   ) : (
     <Container>
-      Ops! Can&apos;t find the video, please check if your link is correct 🎥
+      Ops! Can&apos;t find the video, please check if your link is correct{' '}
+      <span role="img" aria-label="video camera">
+        🎥
+      </span>
       {url}
     </Container>
   )

@@ -13,26 +13,26 @@ const tocAdjustment = css`
 `
 
 const StyledH1 = styled(Typography)`
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
+  margin-top: 0.67em !important;
+  margin-bottom: 0.67em !important;
 `
 const StyledH2 = styled(Typography)`
-  margin-top: 1em;
-  margin-bottom: 0.67em;
+  margin-top: 1em !important;
+  margin-bottom: 0.67em !important;
   &:before {
     ${tocAdjustment}
   }
 `
 const StyledH3 = styled(Typography)`
-  margin-top: 1em;
-  margin-bottom: 0.2em;
+  margin-top: 1em !important;
+  margin-bottom: 0.2em !important;
   &:before {
     ${tocAdjustment}
   }
 `
 const StyledH4 = styled(Typography)`
-  margin-top: 1.33em;
-  margin-bottom: 0.5em;
+  margin-top: 1.33em !important;
+  margin-bottom: 0.5em !important;
 `
 const StyledH5 = styled(Typography)`
   margin-top: 1.67em;

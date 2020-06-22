@@ -88,3 +88,5 @@ rules:
   # Emojis should be accessible
   jsx-a11y/accessible-emoji:
     - warn
+  jsx-a11y/control-has-associated-label:
+    - warn

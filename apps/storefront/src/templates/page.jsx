@@ -4,12 +4,7 @@ import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
 import classNames from 'classnames'
-import {
-  Tabs,
-  Icon,
-  TableOfContents,
-  Typography,
-} from '@equinor/eds-core-react'
+import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
@@ -25,7 +20,6 @@ import styled from 'styled-components'
 
 Icon.add({ save, thumbs_down, info_circle, subdirectory_arrow_right, download })
 
-const { TabList, Tab, TabPanels, TabPanel } = Tabs
 const { LinkItem } = TableOfContents
 
 const StyledTableOfContents = styled(TableOfContents)`
@@ -178,7 +172,7 @@ Page.propTypes = {
   data: PropTypes.object.isRequired,
 }
 
-export default Page
+export default Page // eslint-disable-line
 
 export const query = graphql`
   query($slug: String!) {
