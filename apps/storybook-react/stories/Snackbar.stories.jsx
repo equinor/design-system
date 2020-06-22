@@ -1,18 +1,9 @@
 import React, { Fragment, useState } from 'react'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Snackbar, Button, Typography } from '@equinor/eds-core-react'
-import { tokens } from '@equinor/eds-tokens'
 
 const { SnackbarAction } = Snackbar
 import styled from 'styled-components'
-
-const {
-  colors: {
-    infographic: {
-      primary__moss_green_34: { rgba: buttonColor },
-    },
-  },
-} = tokens
 
 const Wrapper = styled.div`
   display: grid;
@@ -20,10 +11,6 @@ const Wrapper = styled.div`
   padding: 32px 0;
   padding-bottom: 8rem;
   grid-gap: 2rem;
-`
-
-const StyledButton = styled(Button)`
-  color: ${buttonColor};
 `
 
 export default {
@@ -60,7 +47,7 @@ export const Example = () => {
         >
           Your changes was saved
           <SnackbarAction>
-            <StyledButton variant="ghost">Undo</StyledButton>
+            <Button variant="ghost">Undo</Button>
           </SnackbarAction>
         </Snackbar>
       </div>
