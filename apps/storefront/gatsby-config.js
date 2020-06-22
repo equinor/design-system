@@ -93,7 +93,12 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-styled-components',
     },
-
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        src: '/focus-visible.js', // Change to the script filename
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

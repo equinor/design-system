@@ -59,6 +59,14 @@ td {
   box-sizing: inherit;
 }
 
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+.focus-visible {
+  outline: 1px dashed rgba(0, 112, 121, 1);
+  outline-offset: 2px;
+}
+
 .Page {
   display: grid;
   grid-template-areas:

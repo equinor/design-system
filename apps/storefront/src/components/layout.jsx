@@ -61,6 +61,10 @@ const SkipLink = styled.a`
   transform: translateY(-100%);
   z-index: 1010;
   &:focus {
+    outline: none;
+    outline: 1px dashed rgba(0, 112, 121, 1);
+    outline-offset: 2px;
+    border-radius: 4px;
     transform: translateY(0%);
   }
 `
