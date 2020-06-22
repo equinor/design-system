@@ -28,9 +28,7 @@ TextFieldProvider.propTypes = {
   ]).isRequired,
 }
 
-TextFieldProvider.defaultProps = {
-  children: [],
-}
+TextFieldProvider.defaultProps = {}
 
 export const useTextField = () => {
   const [state, setState] = useContext(TextFieldContext)
