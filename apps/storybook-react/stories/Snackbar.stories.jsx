@@ -32,7 +32,7 @@ export const Example = () => {
           open={open}
           onClose={() => setOpen(false)}
           autoHideDuration={5000}
-          centerAlignFrom="1000px"
+          leftAlignFrom="1500px"
         >
           Message goes here
         </Snackbar>

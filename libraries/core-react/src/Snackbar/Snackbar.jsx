@@ -19,9 +19,11 @@ const StyledSnackbar = styled.div.attrs(() => ({
   box-shadow: ${tokens.boxShadow};
   min-height: ${tokens.minHeight}; 
   box-sizing: border-box;
-  @media (min-width: ${({ centerAlignFrom }) => centerAlignFrom}) {
-    left: 50%;
-    transform: translateX(-50%)
+  left: 50%;
+  transform: translateX(-50%);
+  @media (min-width: ${({ leftAlignFrom }) => leftAlignFrom}) {
+    left: auto;
+    transform: none;
   }
 `
 
@@ -29,7 +31,7 @@ export const Snackbar = ({
   open,
   autoHideDuration,
   onClose,
-  centerAlignFrom,
+  leftAlignFrom,
   children,
   className,
 }) => {
@@ -47,7 +49,7 @@ export const Snackbar = ({
   return (
     <>
       {visible && (
-        <StyledSnackbar centerAlignFrom={centerAlignFrom} className={className}>
+        <StyledSnackbar leftAlignFrom={leftAlignFrom} className={className}>
           {children}
         </StyledSnackbar>
       )}
@@ -76,6 +78,6 @@ Snackbar.defaultProps = {
   autoHideDuration: 7000,
   onClose: undefined,
   open: false,
-  centerAlignFrom: '750px',
+  leftAlignFrom: '1200px',
   className: undefined,
 }
