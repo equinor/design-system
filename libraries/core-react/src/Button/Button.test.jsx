@@ -66,4 +66,14 @@ describe('Button', () => {
 
     expect(handleSubmit).toHaveBeenCalledTimes(0)
   })
+  it('Has provided icon when leftIcon or rightIcon props are defined', () => {
+    const { queryByTestId, container } = render(
+      <Button rightIcon={<Icon name="save" title="save"></Icon>} />,
+    )
+    expect(container.querySelector('svg')).toBeInTheDocument()
+    expect(queryByTestId('eds-icon-path')).toHaveAttribute(
+      'd',
+      save.svgPathData,
+    )
+  })
 })
