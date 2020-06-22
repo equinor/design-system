@@ -21,7 +21,6 @@ const StyleTypography = styled(Typography)`
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
-  vertical-align: bottom;
   text-decoration: none;
   color: ${tokens.colors.enabled};
   ${({ maxWidth }) => css({ maxWidth })}
