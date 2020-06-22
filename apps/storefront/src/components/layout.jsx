@@ -84,8 +84,9 @@ const Layout = ({ children }) => {
         </SkipLink>
         <TopBar style={{ gridArea: 'header' }}>
           <TopBarHeader>
+            {/* Can't manage to use either assert for this rule, even if I copy paste from example */}
             {/* eslint-disable-next-line */}
-            <label className="Burger" htmlFor="MenuToggler" />
+            <label className="Burger" htmlFor="MenuToggler"></label>
             EDS – Equinor Design System
           </TopBarHeader>
           <Actions>
@@ -98,7 +99,6 @@ const Layout = ({ children }) => {
           </Actions>
         </TopBar>
         {/* <Banner /> */}
-        {/* eslint-disable-next-line */}
         <input id="MenuToggler" className="MenuToggler" type="checkbox" />
         {/* <Header /> */}
         <Location>{({ location }) => <Sidebar location={location} />}</Location>

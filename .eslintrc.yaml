@@ -91,3 +91,10 @@ rules:
     - warn
   jsx-a11y/control-has-associated-label:
     - warn
+  jsx-a11y/label-has-associated-control:
+    - warn
+    - labelComponents: []
+      labelAttributes: []
+      controlComponents: []
+      assert: either
+      depth: 25
