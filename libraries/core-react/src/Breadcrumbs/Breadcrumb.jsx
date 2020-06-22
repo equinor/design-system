@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useRef, useCallback } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
@@ -21,9 +21,9 @@ const StyleTypography = styled(Typography)`
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
+  vertical-align: bottom;
   text-decoration: none;
   color: ${tokens.colors.enabled};
-  width: 100%;
   ${({ maxWidth }) => css({ maxWidth })}
 `
 
@@ -38,28 +38,11 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
     maxWidth: maxWidth,
   }
 
-  const [tooltip, setTooltip] = useState(Boolean(maxWidth))
-
-  const textRef = useRef()
-
-  const sizeCompare = () => {
-    const compared = textRef.current.scrollWidth > textRef.current.clientWidth
-    setTooltip(compared)
-  }
-
-  if (textRef.current) {
-    sizeCompare()
-  }
+  const tooltip = Boolean(maxWidth)
 
   const WithTooltip = (
     <Tooltip title={children}>
-      <StyleTypography
-        ref={textRef}
-        role="breadcrumb"
-        link
-        variant="body_short"
-        {...props}
-      >
+      <StyleTypography role="breadcrumb" link variant="body_short" {...props}>
         {children}
       </StyleTypography>
     </Tooltip>
@@ -68,13 +51,7 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
   return tooltip ? (
     WithTooltip
   ) : (
-    <StyleTypography
-      ref={textRef}
-      role="breadcrumb"
-      link
-      variant="body_short"
-      {...props}
-    >
+    <StyleTypography role="breadcrumb" link variant="body_short" {...props}>
       {children}
     </StyleTypography>
   )

@@ -61,15 +61,17 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     return [
       allCrumbs[0],
       <Fragment key="collapsed">
-        <Collapsed
-          link
-          role="button"
-          variant="body_short"
-          onClick={handleExpandClick}
-          tabIndex={0}
-        >
-          ...
-        </Collapsed>
+        <ListItem>
+          <Collapsed
+            link
+            role="button"
+            variant="body_short"
+            onClick={handleExpandClick}
+            tabIndex={0}
+          >
+            …
+          </Collapsed>
+        </ListItem>
         <li aria-hidden>
           <Separator variant="body_short">/</Separator>
         </li>

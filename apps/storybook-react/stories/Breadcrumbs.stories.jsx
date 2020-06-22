@@ -1,13 +1,8 @@
-import React, { Fragment, useState } from 'react'
-import {
-  withKnobs,
-  select,
-  text,
-  boolean,
-  number,
-} from '@storybook/addon-knobs'
+import React from 'react'
+import { withKnobs, boolean, number } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Breadcrumbs, Typography } from '@equinor/eds-core-react'
+import { action } from '@storybook/addon-actions'
 
 const { Breadcrumb } = Breadcrumbs
 
@@ -32,16 +27,15 @@ export default {
   decorators: [withKnobs],
 }
 
-function handleClick(event) {
-  event.preventDefault()
-  console.info('Breadcrumb got clicked')
+const handleClick = (e) => {
+  action('handleClick')(e.target.textContent)
 }
 
 export const Variations = () => {
   return (
     <Body>
       <TextWrapper>
-        <Typography variant="h4">Normal</Typography>
+        <Typography variant="h2">Normal</Typography>
       </TextWrapper>
       <Breadcrumbs>
         <Breadcrumb href="#" onClick={handleClick}>
@@ -55,7 +49,7 @@ export const Variations = () => {
         </Breadcrumb>
       </Breadcrumbs>
       <TextWrapper>
-        <Typography variant="h4">Collapsed</Typography>
+        <Typography variant="h2">Collapsed</Typography>
         <Typography variant="body_long">
           Choose collapse prop to use ellipses to indicate the middle pages.
           Click ellipses (...) to expand.
@@ -76,7 +70,7 @@ export const Variations = () => {
         </Breadcrumb>
       </Breadcrumbs>
       <TextWrapper>
-        <Typography variant="h4">Truncated labels</Typography>
+        <Typography variant="h2">Truncated labels</Typography>
         <Typography variant="body_long">
           Choose maxWidth in pixels to truncate labels. Hover on label to see
           full text.
@@ -99,7 +93,7 @@ export const Variations = () => {
         </Breadcrumb>
       </Breadcrumbs>
       <TextWrapper>
-        <Typography variant="h4">Wrapped</Typography>
+        <Typography variant="h2">Wrapped</Typography>
         <Typography variant="body_long">
           Wraps over two or more lines. Controlled by parent width.
         </Typography>
