@@ -55,12 +55,13 @@ const IconItem = styled.li`
   justify-content: center;
   flex-direction: column;
   &:hover {
+    background-color: rgba(222, 237, 238, 0.3);
+    border-radius: 4px;
     ${DownloadLabel} {
       clip: auto;
       clip-path: none;
 
       overflow: hidden;
-      /*  position: absolute; */
       white-space: nowrap;
     }
   }
@@ -93,8 +94,8 @@ const Icons = () => {
                       variant="outlined"
                       onClick={() => downloadAsSvg(icon.value, name)}
                     >
-                      <Icon name="download" aria-hidden />
-                      Download SVG
+                      <Icon name="download" aria-hidden title="download" />
+                      SVG
                     </DownloadLabel>
                   </IconItem>
                 )
