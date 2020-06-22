@@ -10,7 +10,9 @@ dependencies:
   classnames: 2.2.6
   core-js: 3.6.5
   dotenv: 8.2.0
+  focus-visible: 5.1.0
   gatsby: 2.23.3_a3b2732d74701e9c737a1cb3fe6b9c19
+  gatsby-plugin-load-script: 1.1.0_gatsby@2.23.3
   gatsby-plugin-manifest: 2.4.11_gatsby@2.23.3
   gatsby-plugin-matomo: 0.8.3_a3b2732d74701e9c737a1cb3fe6b9c19
   gatsby-plugin-mdx: 1.2.15_0110d14208bf670f088eda2bed9b2320
@@ -1133,6 +1135,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
+  /@babel/runtime/7.10.3:
+    dependencies:
+      regenerator-runtime: 0.13.5
+    dev: false
+    resolution:
+      integrity: sha512-RzGO0RLSdokm9Ipe/YD+7ww8X2Ro79qiXZF3HU9ljrM+qnJmH1Vqth+hbiQZy761LnMJTMitHDuKVYTk3k4dLw==
   /@babel/standalone/7.10.2:
     dev: false
     resolution:
@@ -6615,6 +6623,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-vkHTluRCoq9FcsrldC0ulQHiyBYgVJB2CX53I8r0nTC6KnEij7Of0jpBspjt3/CuNb6fyoj3aOh9J2HgQUM0og==
+  /focus-visible/5.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-nPer0rjtzdZ7csVIu233P2cUm/ks/4aVSI+5KUkYrYpgA7ujgC3p6J7FtFU+AIMWwnwYQOB/yeiOITxFeYIXiw==
   /follow-redirects/1.11.0:
     dependencies:
       debug: 3.2.6
@@ -6968,6 +6980,15 @@ packages:
       node: '>=10.13.0'
     resolution:
       integrity: sha512-Mh3QbDdKKrvbJRHtMsBvo+sDTaGfcTiXCFGTkFu2VbL3P6mZySFJ8fDLb9SbQvwvMVw/vD5IZT1KJerfmgfvGQ==
+  /gatsby-plugin-load-script/1.1.0_gatsby@2.23.3:
+    dependencies:
+      '@babel/runtime': 7.10.3
+      gatsby: 2.23.3_a3b2732d74701e9c737a1cb3fe6b9c19
+    dev: false
+    peerDependencies:
+      gatsby: ^2.20.12
+    resolution:
+      integrity: sha512-EoXUtWX4aBO4zD61xMHIIlQti4FNYmH0KgBkhac+kNMLI64cjzLc0iD7zPrFnzjYR454XAN/GJBa7M7N/VYSpw==
   /gatsby-plugin-manifest/2.4.11_gatsby@2.23.3:
     dependencies:
       '@babel/runtime': 7.10.2
@@ -16042,7 +16063,9 @@ specifiers:
   classnames: ^2.2.6
   core-js: ^3.6.5
   dotenv: ^8.2.0
+  focus-visible: ^5.1.0
   gatsby: ^2.23.3
+  gatsby-plugin-load-script: ^1.1.0
   gatsby-plugin-manifest: ^2.4.11
   gatsby-plugin-matomo: ^0.8.3
   gatsby-plugin-mdx: ^1.2.15
