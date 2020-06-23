@@ -8,9 +8,9 @@ While the design system itself lives in [Figma][], this repository contains impl
 
 - [Figma](#figma)
 - [Storefront](#storefront)
-- [EDS Core React](#eds-core-react)
-- [EDS Icons](#eds-icons)
-- [EDS Tokens](#eds-tokens)
+- [Core React](#core-react)
+- [Icons](#icons)
+- [Tokens](#tokens)
 - [CDN](#cdn)
 - [Contribute](#contribute)
 - [Getting started](#getting-started)
@@ -33,7 +33,7 @@ The [storefront][] is the official documentation for the EDS. As we’re getting
 [storefront]: https://eds.equinor.com
 [Figma]: https://www.figma.com/
 
-## EDS Core React
+## Core React
 
 This is the main implementation of the EDS, and will eventually contain accessible React components of each and every EDS component in Figma.
 
@@ -55,7 +55,7 @@ const { Button } = '@equinor/eds-core-react'
 
 See our [storybook](https://eds-storybook-react.azurewebsites.net) for more examples.
 
-## EDS Icons
+## Icons
 
 Built on a copy of the Outlined Material Design icons, the icons have been customised and renamed for Equinor’s use and supplemented with our own icons for Equinor specific domains.
 
@@ -80,7 +80,7 @@ Icon.add({ info_circle })
 <Icon name="info_circle" size={24} />
 ```
 
-## EDS Tokens
+## Tokens
 
 Design tokens are design decisions from Figma extracted into code, and form the basis for the EDS Core React library. For projects that don’t use React, the tokens are available as an independent NPM package that can be used to build your own implementation of the EDS in your technology of choice. The following example uses vanilla javascript.
 
