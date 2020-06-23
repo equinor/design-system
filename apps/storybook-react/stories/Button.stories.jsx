@@ -298,6 +298,12 @@ export const fileUpload = () => {
   )
 }
 
+export const link = () => (
+  <Wrapper>
+    <Button href="#">Link</Button>
+  </Wrapper>
+)
+
 knobs.story = {
   name: 'With knobs',
   decorators: [withKnobs],

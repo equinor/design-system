@@ -8,6 +8,7 @@ import { typographyTemplate } from '../_common/templates'
 const { colors } = button
 // TODO: Is there a better way to handle css properties without
 // bloating with ${props => props.base.focus.color} etc...
+
 const Base = ({ base, baseDisabled: disabled }) => {
   if (!base) {
     // TODO: What to do when base does not exist
@@ -90,6 +91,7 @@ const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
   margin: 0;
   padding: 0;
   ${Base}
+  text-decoration: none;
   position: relative;
   cursor: pointer;
   display: flex;
@@ -129,6 +131,7 @@ export const Button = forwardRef(function Button(
     color,
     rightIcon,
     leftIcon,
+    href,
     ...other
   },
   ref,
@@ -136,22 +139,23 @@ export const Button = forwardRef(function Button(
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
-
   const iconRight = rightIcon && <RightIcon>{rightIcon}</RightIcon>
-
   const iconLeft = leftIcon && <LeftIcon>{leftIcon}</LeftIcon>
-
   const iconType = variant === 'ghost_icon' ? variant : 'button_icon'
+
+  const component = href ? 'a' : 'button'
 
   const baseProps = {
     ...other,
     ref,
+    href,
     width: button.icon_size[iconType].width,
     height: button.icon_size[iconType].height,
   }
 
   return (
     <ButtonBase
+      as={component}
       base={base}
       baseDisabled={baseDisabled}
       className={className}
