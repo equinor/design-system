@@ -19,6 +19,8 @@ export { Avatar } from './Avatar'
 export { Search } from './Search'
 export { Slider } from './Slider'
 export { Tooltip } from './Tooltip'
+export { Snackbar } from './Snackbar'
 export { Popover } from './Popover'
 export { Banner } from './Banner'
 export { Radio, Checkbox, Switch } from './SelectionControls'
+/* eslint-enable */
