@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Icon } from '..'
@@ -120,16 +120,19 @@ const LeftIcon = styled.span`
 // - Use ThemeProvider
 // - Set attr on button
 
-export const Button = ({
-  variant,
-  children,
-  disabled,
-  className,
-  color,
-  rightIcon,
-  leftIcon,
-  ...other
-}) => {
+export const Button = forwardRef(function Button(
+  {
+    variant,
+    children,
+    disabled,
+    className,
+    color,
+    rightIcon,
+    leftIcon,
+    ...other
+  },
+  ref,
+) {
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
@@ -142,6 +145,7 @@ export const Button = ({
 
   const baseProps = {
     ...other,
+    ref,
     width: button.icon_size[iconType].width,
     height: button.icon_size[iconType].height,
   }
@@ -159,7 +163,7 @@ export const Button = ({
       {iconRight}
     </ButtonBase>
   )
-}
+})
 
 Button.propTypes = {
   /** @ignore */
@@ -195,7 +199,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   /**
    * URL link destination
-   * If defined, an a element is used as root
+   * If defined, an 'a' element is used as root
    */
   href: PropTypes.string,
   /**
