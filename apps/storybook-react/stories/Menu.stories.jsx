@@ -148,8 +148,8 @@ export const ButtonToggle = () => {
       <Button
         variant="ghost_icon"
         id="menuButton"
+        aria-controls="menu-on-button"
         aria-haspopup="menu"
-        aria-controls="menu1"
         aria-expanded={anchorEl ? 'true' : 'false'}
         onClick={toggleMenu}
         onKeyDown={onKeyPress}
@@ -157,7 +157,7 @@ export const ButtonToggle = () => {
         Menu
       </Button>
       <Menu
-        id="menu1"
+        id="menu-on-button"
         aria-labelledby="menuButton"
         anchorEl={anchorEl}
         focus={focus}
