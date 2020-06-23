@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import { H1 } from '../components/Titles'
 
 import {
   save,
@@ -24,32 +25,30 @@ const { LinkItem } = TableOfContents
 
 const StyledTableOfContents = styled(TableOfContents)`
   position: static;
-  margin: 32px 0;
+  margin: 3rem 2rem 0 2rem;
   box-sizing: content-box;
   @media (min-width: 1200px) {
     float: right;
     position: sticky;
     top: 80px;
     display: inline-block;
-    margin-top: ${({ withTabs }) => (withTabs ? '-64px' : '1rem')};
   }
 `
 
 const ContentHeader = styled.div`
   background: #f7f7f7;
-  padding: 2rem;
-  height: 10rem;
+  padding: ${({ withTabs }) => (withTabs ? '2rem 2rem 0 2rem' : '2rem')};
   display: grid;
-  align-content: end;
-
-  & > h1 {
-    margin: 0;
+  align-content: ${({ withTabs }) => (withTabs ? 'space-between' : 'end')};
+  min-height: 10rem;
+  @media (min-width: 600px) {
+    height: 10rem;
   }
 `
 
 const Content = styled.div`
   background: white;
-  padding: 2rem;
+  padding: 3rem 2rem;
   max-width: 65rem;
   & > h2,
   & > h3,
@@ -65,7 +64,8 @@ const Content = styled.div`
   h3 + p,
   h4 + p,
   h5 + p,
-  h6 + p {
+  h6 + p,
+  p:first-child {
     margin-top: 0;
   }
 `
@@ -77,66 +77,68 @@ const Page = ({ data }) => {
   const { currentPage } = page.fields
   const { currentCategory } = page.fields
   const linkSlug = slug.substr(0, slug.lastIndexOf(currentPage))
-
+  const withTabs = tabs !== null
   const isPublished = (mode || '').toLowerCase() === 'publish'
+
   return (
     <Layout>
       <SEO title={title} />
-      <ContentHeader>
-        <h1>
+      <ContentHeader withTabs={withTabs}>
+        <H1>
           {title}
           {!isPublished && (
             <span className={`ModeBadge ModeBadge--${mode}`}>
               {mode && `(${mode})`}
             </span>
           )}
-        </h1>
-      </ContentHeader>
-      <Content>
-        {!(tabs === null) && (
-          <ul className="Tabs">
-            {tabs.map((tab, index) => (
-              <li className="Tab" key={tab}>
-                <Link
-                  to={
-                    index > 0
-                      ? `${linkSlug}${tab.toLowerCase().split(' ').join('-')}/`
-                      : linkSlug
-                  }
-                  className={classNames('Tab-link', {
-                    'is-selected':
-                      tab.toLowerCase().split(' ').join('-') === currentPage,
-                  })}
-                >
-                  {tab}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-        {toc && (
-          <StyledTableOfContents
-            sticky
-            label="Content"
-            withTabs={tabs !== null}
-          >
-            {toc.map((item) => {
-              return (
-                <LinkItem key={item}>
-                  <Typography
-                    variant="body_short"
-                    link
-                    href={`#${slugify(item)}`}
+        </H1>
+        {withTabs && (
+          <nav aria-label="tabbed content naviagtion">
+            <ul className="Tabs">
+              {tabs.map((tab, index) => (
+                <li className="Tab" key={tab}>
+                  <Link
+                    to={
+                      index > 0
+                        ? `${linkSlug}${tab
+                            .toLowerCase()
+                            .split(' ')
+                            .join('-')}/`
+                        : linkSlug
+                    }
+                    className={classNames('Tab-link', {
+                      'is-selected':
+                        tab.toLowerCase().split(' ').join('-') === currentPage,
+                    })}
                   >
-                    <Icon name="subdirectory_arrow_right" size={16} />
-                    <span>{item}</span>
-                  </Typography>
-                </LinkItem>
-              )
-            })}
-          </StyledTableOfContents>
+                    {tab}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         )}
-        <dl className="DebugDefList">
+      </ContentHeader>
+      {toc && (
+        <StyledTableOfContents sticky label="Content">
+          {toc.map((item) => {
+            return (
+              <LinkItem key={item}>
+                <Typography
+                  variant="body_short"
+                  link
+                  href={`#${slugify(item)}`}
+                >
+                  <Icon name="subdirectory_arrow_right" size={16} />
+                  <span>{item}</span>
+                </Typography>
+              </LinkItem>
+            )
+          })}
+        </StyledTableOfContents>
+      )}
+      <Content>
+        {/*  <dl className="DebugDefList">
           <dt>Current category</dt>
           <dd>{currentCategory}</dd>
           <dt>Current page</dt>
@@ -145,7 +147,7 @@ const Page = ({ data }) => {
           <dd>{slug}</dd>
           <dt>linkSlug</dt>
           <dd>{linkSlug}</dd>
-        </dl>
+        </dl> */}
 
         {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
           <MDXRenderer>{page.body}</MDXRenderer>

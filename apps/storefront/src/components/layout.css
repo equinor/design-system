@@ -12,7 +12,9 @@
   --Toc-width: 167px;
   --Sidebar-width: 240px;
   --black: #333;
+  --grey-medium: #dcdcdc;
   --moss-green: #007079;
+  --pale-green: #deedee;
   --tab-backgroundColor: #fff;
   --tab-isSelected-backgroundColor: var(--Sidebar-activeLink-backgroundColor);
   --tab-borderColor: var(--borderColor);
@@ -44,7 +46,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 500 !important;
+  /*  font-weight: 500 !important; */
   text-rendering: optimizeLegibility;
 }
 
@@ -65,6 +67,7 @@ td {
 .focus-visible {
   outline: 1px dashed rgba(0, 112, 121, 1);
   outline-offset: 2px;
+  z-index: 10;
 }
 
 .Page {
@@ -272,24 +275,6 @@ td {
   }
 }
 
-/* .TOC {
-  display: none;
-  background: var(--backgroundColor);
-  position: fixed;
-  top: var(--Header-height);
-  right: 0;
-  left: auto;
-  width: var(--Toc-width);
-  height: calc(100vh - var(--Header-height));
-  grid-area: toc;
-  padding-top: 2rem;
-  padding-right: 3rem;
-
-  @media (--small) {
-    display: block;
-  }
-} */
-
 .Main {
   grid-area: main;
   background-color: whitesmoke;
@@ -326,33 +311,49 @@ td {
   padding-left: 0 !important;
   display: flex;
   flex-direction: column;
-
-  @media (--large) {
+  margin: 2rem 0 0 0;
+  @media (--small) {
     flex-direction: row;
   }
 }
 
 .Tab {
-  margin: 0 !important;
-  margin-bottom: -1px !important;
+  position: relative;
 
   @media (--large) {
-    margin-right: -1px !important;
     margin-bottom: 0;
   }
 }
 
 .Tab-link {
-  padding: 0.85em 2em;
+  padding: 1px 16px;
   display: block;
   text-decoration: none;
   color: inherit;
-  background-color: var(--tab-backgroundColor);
-  border: 1px solid var(--tab-borderColor);
+  /* background-color: var(--tab-backgroundColor); */
+  letter-spacing: 0.2px;
+  font-size: 16px;
+  line-height: 46px;
+  position: relative;
+  &::after {
+    content: '';
+    height: 2px;
+    background-color: var(--grey-medium);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  &:hover {
+    background-color: var(--pale-green);
+  }
 }
 
 .Tab-link.is-selected {
-  background-color: var(--tab-isSelected-backgroundColor);
+  color: var(--moss-green);
+  &::after {
+    background-color: var(--moss-green);
+  }
 }
 
 /* debug */

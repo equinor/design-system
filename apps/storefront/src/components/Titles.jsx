@@ -13,22 +13,23 @@ const tocAdjustment = css`
 `
 
 const StyledH1 = styled(Typography)`
-  margin-top: 0.67em !important;
-  margin-bottom: 0.67em !important;
+  line-height: 48px;
 `
 const StyledH2 = styled(Typography)`
-  margin-top: 1em !important;
   margin-bottom: 0.67em !important;
   &:before {
     ${tocAdjustment}
+  }
+  &:not(:first-child) {
+    margin-top: 1em !important;
   }
 `
 const StyledH3 = styled(Typography)`
   margin-top: 1em !important;
   margin-bottom: 0.2em !important;
-  &:before {
+/*   &:before {
     ${tocAdjustment}
-  }
+  } */
 `
 const StyledH4 = styled(Typography)`
   margin-top: 1.33em !important;
