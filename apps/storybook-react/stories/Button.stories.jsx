@@ -38,17 +38,6 @@ export const allButtons = () => (
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
     <Button disabled>Disabled</Button>
-
-    <Button leftIcon={<Icon name="save" title="save"></Icon>}>Primary</Button>
-    <Button color="secondary" leftIcon={<Icon name="save" title="save"></Icon>}>
-      Secondary
-    </Button>
-    <Button color="danger" leftIcon={<Icon name="save" title="save"></Icon>}>
-      Danger
-    </Button>
-    <Button disabled leftIcon={<Icon name="save" title="save"></Icon>}>
-      Disabled
-    </Button>
     <Button variant="outlined">Primary</Button>
     <Button variant="outlined" color="secondary">
       Secondary
@@ -59,33 +48,6 @@ export const allButtons = () => (
     <Button variant="outlined" disabled>
       Disabled
     </Button>
-    <Button
-      variant="outlined"
-      rightIcon={<Icon name="save" title="save"></Icon>}
-    >
-      Primary
-    </Button>
-    <Button
-      variant="outlined"
-      color="secondary"
-      rightIcon={<Icon name="save" title="save"></Icon>}
-    >
-      Secondary
-    </Button>
-    <Button
-      variant="outlined"
-      color="danger"
-      rightIcon={<Icon name="save" title="save"></Icon>}
-    >
-      Danger
-    </Button>
-    <Button
-      variant="outlined"
-      disabled
-      rightIcon={<Icon name="save" title="save"></Icon>}
-    >
-      Disabled
-    </Button>
     <Button variant="ghost">Primary</Button>
     <Button variant="ghost" color="secondary">
       Secondary
@@ -94,30 +56,6 @@ export const allButtons = () => (
       Danger
     </Button>
     <Button variant="ghost" disabled>
-      Disabled
-    </Button>
-    <Button variant="ghost" leftIcon={<Icon name="save" title="save"></Icon>}>
-      Primary
-    </Button>
-    <Button
-      variant="ghost"
-      color="secondary"
-      leftIcon={<Icon name="save" title="save"></Icon>}
-    >
-      Secondary
-    </Button>
-    <Button
-      variant="ghost"
-      color="danger"
-      leftIcon={<Icon name="save" title="save"></Icon>}
-    >
-      Danger
-    </Button>
-    <Button
-      variant="ghost"
-      disabled
-      leftIcon={<Icon name="save" title="save"></Icon>}
-    >
       Disabled
     </Button>
     <Button variant="ghost_icon">
