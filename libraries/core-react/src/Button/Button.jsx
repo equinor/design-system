@@ -85,9 +85,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
   `
 }
 
-const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
-  type,
-}))`
+const ButtonBase = styled.button`
   margin: 0;
   padding: 0;
   ${Base}
@@ -148,7 +146,6 @@ export const Button = forwardRef(function Button(
   const baseProps = {
     ...other,
     ref,
-    href,
     width: button.icon_size[iconType].width,
     height: button.icon_size[iconType].height,
   }
@@ -157,6 +154,8 @@ export const Button = forwardRef(function Button(
     <ButtonBase
       as={component}
       base={base}
+      type={href ? null : 'button'}
+      href={href ? href : null}
       baseDisabled={baseDisabled}
       className={className}
       disabled={disabled}
