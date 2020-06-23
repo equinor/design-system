@@ -282,6 +282,22 @@ export const form = () => {
   )
 }
 
+export const fileUpload = () => {
+  return (
+    <Wrapper>
+      <input
+        type="file"
+        id="file-upload"
+        style={{ display: 'none' }}
+        multiple
+      />
+      <label htmlFor="file-upload">
+        <Button as="span">Upload</Button>
+      </label>
+    </Wrapper>
+  )
+}
+
 knobs.story = {
   name: 'With knobs',
   decorators: [withKnobs],
