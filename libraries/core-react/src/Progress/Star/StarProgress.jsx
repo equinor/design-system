@@ -77,22 +77,22 @@ const Svg = styled.svg`
       : css`
           path {
             animation: ${determinate} 1.3s linear;
-            &:nth-child(1) {
+            &:nth-child(6) {
               animation-play-state: ${progress > 90 ? 'running' : 'paused'};
             }
-            &:nth-child(2) {
+            &:nth-child(5) {
               animation-play-state: ${progress > 80 ? 'running' : 'paused'};
             }
-            &:nth-child(3) {
+            &:nth-child(4) {
               animation-play-state: ${progress > 60 ? 'running' : 'paused'};
             }
-            &:nth-child(4) {
+            &:nth-child(3) {
               animation-play-state: ${progress > 40 ? 'running' : 'paused'};
             }
-            &:nth-child(5) {
+            &:nth-child(2) {
               animation-play-state: ${progress > 20 ? 'running' : 'paused'};
             }
-            &:nth-child(6) {
+            &:nth-child(1) {
               animation-play-state: ${progress <= 20 ? 'running' : 'paused'};
             }
           }
