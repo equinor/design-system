@@ -15,22 +15,13 @@ const StyledPaper = styled(Paper)`
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { children, focus, ...rest },
+  { children, className, ...rest },
   ref,
 ) {
-  const props = {
-    ...rest,
-  }
-
-  const menuListProps = {
-    focus,
-    ...rest,
-  }
-
   return (
-    <StyledPaper elevation="raised" {...props} ref={ref}>
+    <StyledPaper elevation="raised" className={className} ref={ref}>
       <MenuProvider>
-        <MenuList {...menuListProps}>{children}</MenuList>
+        <MenuList {...rest}>{children}</MenuList>
       </MenuProvider>
     </StyledPaper>
   )
