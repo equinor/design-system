@@ -35,6 +35,10 @@ const StyledTableOfContents = styled(TableOfContents)`
   }
 `
 
+const Wrapper = styled.div`
+  max-width: 65rem;
+`
+
 const ContentHeader = styled.div`
   background: #f7f7f7;
   padding: ${({ withTabs }) => (withTabs ? '2rem 2rem 0 2rem' : '2rem')};
@@ -49,7 +53,7 @@ const ContentHeader = styled.div`
 const Content = styled.div`
   background: white;
   padding: 3rem 2rem;
-  max-width: 65rem;
+
   & > h2,
   & > h3,
   & > h4,
@@ -83,7 +87,6 @@ const Page = ({ data }) => {
   } = page.frontmatter
   const { slug } = page.fields
   const { currentPage } = page.fields
-  const { currentCategory } = page.fields
   const linkSlug = slug.substr(0, slug.lastIndexOf(currentPage))
   const withTabs = tabs !== null
   const isPublished = (mode || '').toLowerCase() === 'publish'
@@ -103,6 +106,7 @@ const Page = ({ data }) => {
                 </span>
               )}
             </H1>
+
             {withTabs && (
               <nav aria-label="tabbed content naviagtion">
                 <ul className="Tabs">
@@ -131,26 +135,27 @@ const Page = ({ data }) => {
               </nav>
             )}
           </ContentHeader>
-          {toc && (
-            <StyledTableOfContents sticky label="Content">
-              {toc.map((item) => {
-                return (
-                  <LinkItem key={item}>
-                    <Typography
-                      variant="body_short"
-                      link
-                      href={`#${slugify(item)}`}
-                    >
-                      <Icon name="subdirectory_arrow_right" size={16} />
-                      <span>{item}</span>
-                    </Typography>
-                  </LinkItem>
-                )
-              })}
-            </StyledTableOfContents>
-          )}
-          <Content>
-            {/*  <dl className="DebugDefList">
+          <Wrapper>
+            {toc && (
+              <StyledTableOfContents sticky label="Content">
+                {toc.map((item) => {
+                  return (
+                    <LinkItem key={item}>
+                      <Typography
+                        variant="body_short"
+                        link
+                        href={`#${slugify(item)}`}
+                      >
+                        <Icon name="subdirectory_arrow_right" size={16} />
+                        <span>{item}</span>
+                      </Typography>
+                    </LinkItem>
+                  )
+                })}
+              </StyledTableOfContents>
+            )}
+            <Content>
+              {/*  <dl className="DebugDefList">
           <dt>Current category</dt>
           <dd>{currentCategory}</dd>
           <dt>Current page</dt>
@@ -161,23 +166,24 @@ const Page = ({ data }) => {
           <dd>{linkSlug}</dd>
         </dl> */}
 
-            {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
-              <MDXRenderer>{page.body}</MDXRenderer>
-            )}
+              {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
+                <MDXRenderer>{page.body}</MDXRenderer>
+              )}
 
-            <p style={{ marginTop: '3rem' }}>
-              <a
-                href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
-                  slug === '/' ? `index` : slug
-                }.mdx`}
-              >
-                <span role="img" aria-label="Pencil">
-                  ✏️
-                </span>{' '}
-                Edit this page on GitHub
-              </a>
-            </p>
-          </Content>
+              <p style={{ marginTop: '3rem' }}>
+                <a
+                  href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
+                    slug === '/' ? `index` : slug
+                  }.mdx`}
+                >
+                  <span role="img" aria-label="Pencil">
+                    ✏️
+                  </span>{' '}
+                  Edit this page on GitHub
+                </a>
+              </p>
+            </Content>
+          </Wrapper>
         </>
       ) : (
         <LandingPage>

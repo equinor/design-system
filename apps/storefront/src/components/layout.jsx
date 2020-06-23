@@ -101,6 +101,8 @@ const Layout = ({ children }) => {
           </Actions>
         </TopBar>
         {/* <Banner /> */}
+        {/* Can't manage to use either assert for this rule, even if I copy paste from example */}
+        {/* eslint-disable-next-line */}
         <input id="MenuToggler" className="MenuToggler" type="checkbox" />
         {/* <Header /> */}
         <Location>{({ location }) => <Sidebar location={location} />}</Location>

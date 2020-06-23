@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Link, graphql, useStaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { kebabify } from '../../utils'
@@ -97,4 +100,8 @@ const Sidebar = ({ location }) => {
   )
 }
 
-export default Sidebar
+Sidebar.propTypes = {
+  location: PropTypes.string.isRequired,
+}
+
+export default Sidebar // eslint-disable-line
