@@ -23,8 +23,8 @@ const Base = ({ base, baseDisabled: disabled }) => {
     color: ${base.color};
     fill: ${base.color};
     svg {
-      height: 16px;
-      width: 16px;
+      ${({ height }) => css({ height })}
+      ${({ width }) => css({ width })}
     }
 
     border-radius: ${border.radius};
@@ -38,7 +38,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
     `}
 
     ${typographyTemplate(typography)}
-
+  
     &::after {
       position: absolute;
       top: -${base.clickboundOffset};
@@ -138,13 +138,21 @@ export const Button = ({
 
   const iconLeft = leftIcon && <LeftIcon>{leftIcon}</LeftIcon>
 
+  const iconType = variant === 'ghost_icon' ? variant : 'button_icon'
+
+  const baseProps = {
+    ...other,
+    width: button.icon_size[iconType].width,
+    height: button.icon_size[iconType].height,
+  }
+
   return (
     <ButtonBase
       base={base}
       baseDisabled={baseDisabled}
       className={className}
       disabled={disabled}
-      {...other}
+      {...baseProps}
     >
       {iconLeft}
       {children}
@@ -186,6 +194,11 @@ Button.propTypes = {
    */
   disabled: PropTypes.bool,
   /**
+   * URL link destination
+   * If defined, an a element is used as root
+   */
+  href: PropTypes.string,
+  /**
    * @ignore
    */
   className: PropTypes.string,
@@ -199,6 +212,7 @@ Button.defaultProps = {
   children: null,
   leftIcon: null,
   rightIcon: null,
+  href: '',
 }
 
 Button.displayName = 'eds-button'
