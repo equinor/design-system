@@ -8,10 +8,11 @@ While the design system itself lives in [Figma][], this repository contains impl
 
 - [Figma](#figma)
 - [Storefront](#storefront)
-- [Core React](#core-react)
+- [React](#react)
 - [Icons](#icons)
 - [Tokens](#tokens)
-- [CDN](#cdn)
+- [Fonts](#fonts)
+- [Logo](#logo)
 - [Contribute](#contribute)
 - [Getting started](#getting-started)
 - [Get in touch](#get-in-touch)
@@ -33,7 +34,7 @@ The [storefront][] is the official documentation for the EDS. As we’re getting
 [storefront]: https://eds.equinor.com
 [Figma]: https://www.figma.com/
 
-## Core React
+## React
 
 This is the main implementation of the EDS, and will eventually contain accessible React components of each and every EDS component in Figma.
 
@@ -82,7 +83,7 @@ Icon.add({ info_circle })
 
 ## Tokens
 
-Design tokens are design decisions from Figma extracted into code, and form the basis for the EDS Core React library. For projects that don’t use React, the tokens are available as an independent NPM package that can be used to build your own implementation of the EDS in your technology of choice. The following example uses vanilla javascript.
+Design tokens are design decisions from Figma extracted into code, and form the basis for the [EDS Core React library](#react). For projects that don’t use React, the tokens are available as an independent NPM package that can be used to build your own implementation of the EDS in your technology of choice. The following example uses vanilla javascript.
 
 ### Installation
 
@@ -112,9 +113,12 @@ header.textContent = 'Some header'
 document.body.appendChild(header)
 ```
 
-## CDN
 
-The Equinor logo and typeface is available from the EDS CDN. 
+## Fonts
+
+The Equinor typeface is available from the EDS CDN. 
+
+### Usage
 
 ### All the fonts
 
@@ -130,9 +134,12 @@ The Equinor logo and typeface is available from the EDS CDN.
 
 We currently don’t support the font-display property, so if that’s something you need then please let us know.
 
-### The logo
 
-When it comes to the logo, we have two versions – primary and horizontal – and you pick the colour with a fragment identifier in the url. The following example uses the primary logo in red, other colour options are white and black – with black being the default if you omit the fragment identifier.
+## Logo
+
+When it comes to the Equinor logo, we have two versions – primary and horizontal – and you pick the colour with a fragment identifier in the url. The following example uses the primary logo in red, other colour options are white and black – with black being the default if you omit the fragment identifier.
+
+### Usage
 
 ```html
 <img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#red" alt="Equinor" />
