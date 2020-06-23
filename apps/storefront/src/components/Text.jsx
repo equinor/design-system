@@ -8,12 +8,16 @@ const StyledTypography = styled(Typography)`
   margin-bottom: 1em;
 `
 
-const Text = ({ children }) => {
-  return <StyledTypography variant="body_long">{children}</StyledTypography>
+const Text = ({ children, ...props }) => {
+  return (
+    <StyledTypography {...props} variant="body_long">
+      {children}
+    </StyledTypography>
+  )
 }
 
 Text.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 }
 
-export default Text
+export default Text // eslint-disable-line

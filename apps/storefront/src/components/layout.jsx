@@ -14,6 +14,7 @@ import Embed from './embed'
 import Video from './video'
 import FigmaImage from './figmaImage'
 import IconsDownload from './Icons'
+import HeroBanner from './HeroBanner'
 import Image from './image'
 import Text from './Text'
 import { H1, H2, H3, H4 } from './Titles'
@@ -32,6 +33,7 @@ const mdxComponents = {
   IconsDownload,
   Image,
   Grid,
+  HeroBanner,
   p: Text,
   h1: H1,
   h2: H2,

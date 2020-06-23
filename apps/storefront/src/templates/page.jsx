@@ -70,75 +70,87 @@ const Content = styled.div`
   }
 `
 
+const LandingPage = styled.div``
+
 const Page = ({ data }) => {
   const page = data.mdx
-  const { tabs, title, toc, mode = 'draft' } = page.frontmatter
+  const {
+    tabs,
+    title,
+    toc,
+    mode = 'draft',
+    type = 'contentPage',
+  } = page.frontmatter
   const { slug } = page.fields
   const { currentPage } = page.fields
   const { currentCategory } = page.fields
   const linkSlug = slug.substr(0, slug.lastIndexOf(currentPage))
   const withTabs = tabs !== null
   const isPublished = (mode || '').toLowerCase() === 'publish'
+  const isContentPage = type !== 'landingPage'
 
   return (
     <Layout>
       <SEO title={title} />
-      <ContentHeader withTabs={withTabs}>
-        <H1>
-          {title}
-          {!isPublished && (
-            <span className={`ModeBadge ModeBadge--${mode}`}>
-              {mode && `(${mode})`}
-            </span>
+      {isContentPage ? (
+        <>
+          <ContentHeader withTabs={withTabs}>
+            <H1>
+              {title}
+              {!isPublished && (
+                <span className={`ModeBadge ModeBadge--${mode}`}>
+                  {mode && `(${mode})`}
+                </span>
+              )}
+            </H1>
+            {withTabs && (
+              <nav aria-label="tabbed content naviagtion">
+                <ul className="Tabs">
+                  {tabs.map((tab, index) => (
+                    <li className="Tab" key={tab}>
+                      <Link
+                        to={
+                          index > 0
+                            ? `${linkSlug}${tab
+                                .toLowerCase()
+                                .split(' ')
+                                .join('-')}/`
+                            : linkSlug
+                        }
+                        className={classNames('Tab-link', {
+                          'is-selected':
+                            tab.toLowerCase().split(' ').join('-') ===
+                            currentPage,
+                        })}
+                      >
+                        {tab}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+          </ContentHeader>
+          {toc && (
+            <StyledTableOfContents sticky label="Content">
+              {toc.map((item) => {
+                return (
+                  <LinkItem key={item}>
+                    <Typography
+                      variant="body_short"
+                      link
+                      href={`#${slugify(item)}`}
+                    >
+                      <Icon name="subdirectory_arrow_right" size={16} />
+                      <span>{item}</span>
+                    </Typography>
+                  </LinkItem>
+                )
+              })}
+            </StyledTableOfContents>
           )}
-        </H1>
-        {withTabs && (
-          <nav aria-label="tabbed content naviagtion">
-            <ul className="Tabs">
-              {tabs.map((tab, index) => (
-                <li className="Tab" key={tab}>
-                  <Link
-                    to={
-                      index > 0
-                        ? `${linkSlug}${tab
-                            .toLowerCase()
-                            .split(' ')
-                            .join('-')}/`
-                        : linkSlug
-                    }
-                    className={classNames('Tab-link', {
-                      'is-selected':
-                        tab.toLowerCase().split(' ').join('-') === currentPage,
-                    })}
-                  >
-                    {tab}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
-      </ContentHeader>
-      {toc && (
-        <StyledTableOfContents sticky label="Content">
-          {toc.map((item) => {
-            return (
-              <LinkItem key={item}>
-                <Typography
-                  variant="body_short"
-                  link
-                  href={`#${slugify(item)}`}
-                >
-                  <Icon name="subdirectory_arrow_right" size={16} />
-                  <span>{item}</span>
-                </Typography>
-              </LinkItem>
-            )
-          })}
-        </StyledTableOfContents>
-      )}
-      <Content>
-        {/*  <dl className="DebugDefList">
+          <Content>
+            {/*  <dl className="DebugDefList">
           <dt>Current category</dt>
           <dd>{currentCategory}</dd>
           <dt>Current page</dt>
@@ -149,23 +161,31 @@ const Page = ({ data }) => {
           <dd>{linkSlug}</dd>
         </dl> */}
 
-        {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
-          <MDXRenderer>{page.body}</MDXRenderer>
-        )}
+            {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
+              <MDXRenderer>{page.body}</MDXRenderer>
+            )}
 
-        <p style={{ marginTop: '3rem' }}>
-          <a
-            href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
-              slug === '/' ? `index` : slug
-            }.mdx`}
-          >
-            <span role="img" aria-label="Pencil">
-              ✏️
-            </span>{' '}
-            Edit this page on GitHub
-          </a>
-        </p>
-      </Content>
+            <p style={{ marginTop: '3rem' }}>
+              <a
+                href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
+                  slug === '/' ? `index` : slug
+                }.mdx`}
+              >
+                <span role="img" aria-label="Pencil">
+                  ✏️
+                </span>{' '}
+                Edit this page on GitHub
+              </a>
+            </p>
+          </Content>
+        </>
+      ) : (
+        <LandingPage>
+          {(process.env.GATSBY_STAGE === 'dev' || isPublished) && (
+            <MDXRenderer>{page.body}</MDXRenderer>
+          )}
+        </LandingPage>
+      )}
     </Layout>
   )
 }
@@ -190,6 +210,7 @@ export const query = graphql`
         tabs
         mode
         toc
+        type
       }
     }
   }
