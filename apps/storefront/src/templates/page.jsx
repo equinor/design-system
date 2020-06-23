@@ -29,8 +29,8 @@ const StyledTableOfContents = styled(TableOfContents)`
   box-sizing: content-box;
   @media (min-width: 1200px) {
     float: right;
-    position: sticky;
-    top: 80px;
+    position: sticky !important;
+    top: 80px !important;
     display: inline-block;
   }
 `
