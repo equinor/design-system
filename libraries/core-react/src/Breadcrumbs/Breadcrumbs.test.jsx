@@ -51,8 +51,8 @@ describe('Breadcrumbs', () => {
       </Breadcrumbs>,
     )
 
-    expect(getAllByRole('listitem', { hidden: false })).toHaveLength(2)
-    expect(getByRole('list')).toHaveTextContent('Label 1/.../Label 6')
+    expect(getAllByRole('listitem', { hidden: false })).toHaveLength(3)
+    expect(getByRole('list')).toHaveTextContent('Label 1/…/Label 6')
   })
   it('should expand from collapsed state when clicking the ellipsis', () => {
     const { getByRole } = render(
@@ -66,7 +66,7 @@ describe('Breadcrumbs', () => {
       </Breadcrumbs>,
     )
     const ellipsisButton = getByRole('button')
-    expect(getByRole('list')).toHaveTextContent('Label 1/.../Label 6')
+    expect(getByRole('list')).toHaveTextContent('Label 1/…/Label 6')
     fireEvent.click(ellipsisButton)
     expect(getByRole('list')).toHaveTextContent(
       'Label 1/Label 2/Label 3/Label 4/Label 5/Label 6',
