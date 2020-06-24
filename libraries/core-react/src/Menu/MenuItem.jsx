@@ -86,7 +86,7 @@ export const MenuItem = React.memo(
     { children, disabled, index, ...rest },
     ref,
   ) {
-    const { focusedIndex, setFocusedIndex, subMenu } = useMenu()
+    const { focusedIndex, setFocusedIndex } = useMenu()
 
     const toggleFocus = (index_) => {
       if (focusedIndex !== index_) {
@@ -134,7 +134,6 @@ MenuItem.defaultProps = {
   active: false,
   disabled: false,
   index: 0,
-  children: undefined,
 }
 
 MenuItem.displayName = 'eds-menu-item'
