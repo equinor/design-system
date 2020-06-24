@@ -43,7 +43,7 @@ const ContentHeader = styled.div`
   background: #f7f7f7;
   padding: ${({ withTabs }) => (withTabs ? '2rem 2rem 0 2rem' : '2rem')};
   display: grid;
-  align-content: ${({ withTabs }) => (withTabs ? 'space-between' : 'end')};
+  align-content: space-between
   min-height: 10rem;
   @media (min-width: 600px) {
     height: 10rem;
@@ -98,7 +98,7 @@ const Page = ({ data }) => {
       <SEO title={title} />
       {isContentPage ? (
         <>
-          <ContentHeader withTabs={withTabs}>
+          <ContentHeader>
             <H1>
               {title}
               {!isPublished && (
