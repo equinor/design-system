@@ -119,10 +119,10 @@ MenuItem.propTypes = {
   /** @ignore */
   index: PropTypes.number,
   /** @ignore */
-  children: PropTypes.oneOf([
-    PropTypes.element,
-    PropTypes.arrayOf([PropTypes.element]),
-  ]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf([PropTypes.node]),
+    PropTypes.node,
+  ]).isRequired,
   /** Active Menu Item */
   active: PropTypes.bool,
   /** Disabled Menu Item */
