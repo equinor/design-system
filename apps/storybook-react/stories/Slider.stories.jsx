@@ -31,9 +31,12 @@ export default {
 
 export const Examples = () => {
   const [value, updateValue] = useState([30, 70])
+  const [valueTwo, updateValueTwo] = useState([0, 500])
+  const [valueTwoCommited, updateValueTwoCommited] = useState([0, 500])
   const onChange = (event, value) => {
     updateValue(value)
   }
+
   return (
     <Body>
       <div>
@@ -43,8 +46,30 @@ export const Examples = () => {
           onChange={onChange}
           ariaLabelledby="range-slider-label"
         />
-        <p>
+        <p style={{ marginTop: '1.5rem' }}>
           <small>Output from slider is {value.join(', ')}</small>
+        </p>
+      </div>
+      <div>
+        <span id="range-slider-label-with-mouseevent">
+          Range slider with a lot of steps
+        </span>
+        <Slider
+          value={valueTwo}
+          onChange={(event, value) => {
+            updateValueTwo(value)
+          }}
+          min={0}
+          max={500}
+          ariaLabelledby="range-slider-label-with-mouseevent"
+          onChangeCommitted={(event, value) => {
+            updateValueTwoCommited(value)
+          }}
+        />
+        <p style={{ marginTop: '1.5rem' }}>
+          <small>
+            Committed output from slider is {valueTwoCommited.join(', ')}
+          </small>
         </p>
       </div>
       <div>

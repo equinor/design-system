@@ -128,7 +128,18 @@ const StyledSliderInput = styled.input.attrs(() => ({
   }
 `
 export const SliderInput = forwardRef((props, ref) => {
-  const { value, min, max, id, step, onChange, disabled, ...restProps } = props
+  const {
+    value,
+    min,
+    max,
+    id,
+    step,
+    onChange,
+    onMouseUp,
+    onKeyUp,
+    disabled,
+    ...restProps
+  } = props
   return (
     <StyledSliderInput
       {...restProps}
@@ -140,6 +151,12 @@ export const SliderInput = forwardRef((props, ref) => {
       step={step}
       onChange={(event) => {
         onChange(event)
+      }}
+      onMouseUp={(event) => {
+        onMouseUp(event)
+      }}
+      onKeyUp={(event) => {
+        onKeyUp(event)
       }}
       disabled={disabled}
     />
@@ -153,6 +170,10 @@ SliderInput.propTypes = {
   value: PropTypes.number.isRequired,
   /* Change function , this is a controlled component */
   onChange: PropTypes.func.isRequired,
+  /* Mouse up handler */
+  onMouseUp: PropTypes.func.isRequired,
+  /* Key up handler */
+  onKeyUp: PropTypes.func.isRequired,
   /* Min value */
   min: PropTypes.number.isRequired,
   /* Max value */
