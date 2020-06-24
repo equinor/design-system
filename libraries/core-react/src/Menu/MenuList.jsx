@@ -1,4 +1,4 @@
-import React, { useEffect, useMe } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
@@ -42,7 +42,6 @@ export const MenuList = React.forwardRef(function EdsMenuList(
     if (focus === 'last') {
       setFocusedIndex(lastFocusIndex)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus])
 
   const handleMenuItemChange = (direction, fallbackIndex) => {
@@ -54,10 +53,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   }
 
   const handleKeyPress = (event) => {
-    const { key, target } = event
-
-    if (key === 'Enter' || key === ' ') {
-    }
+    const { key } = event
 
     if (key === 'ArrowDown') {
       handleMenuItemChange('down', firstFocusIndex)

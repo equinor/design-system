@@ -47,18 +47,11 @@ export default {
 }
 
 export const Preview = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const anchorRef = React.useRef()
-
-  useEffect(() => setAnchorEl(anchorRef.current), [anchorRef.current])
-
   return (
     <Wrapper>
       <Typography variant="h4">Menu</Typography>
-      <Forced id="anchor-test" ref={anchorRef}>
-        Attached to some anchor
-      </Forced>
-      <Menu id="menu0" anchorEl={anchorEl} open>
+      <Forced id="anchor-test">Attached to some anchor</Forced>
+      <Menu id="menu0" open>
         <MenuItem>
           <MenuLabel>
             <Icon name="folder" />
@@ -107,12 +100,11 @@ export const Preview = () => {
 }
 
 export const ButtonToggle = () => {
-  const [state, setState] = React.useState({ anchorEl: null, focus: null })
-  const { anchorEl, focus } = state
+  const [state, setState] = React.useState({ openMenu: false, focus: null })
+  const { openMenu, focus } = state
 
   const toggleMenu = (e, focus = null) => {
-    const updatedAnchorEl = anchorEl ? null : e.target
-    setState({ ...state, anchorEl: updatedAnchorEl, focus })
+    setState({ ...state, openMenu: !openMenu, focus })
   }
 
   const onKeyPress = (e) => {
@@ -150,7 +142,7 @@ export const ButtonToggle = () => {
         id="menuButton"
         aria-controls="menu-on-button"
         aria-haspopup="menu"
-        aria-expanded={anchorEl ? 'true' : 'false'}
+        aria-expanded={openMenu}
         onClick={toggleMenu}
         onKeyDown={onKeyPress}
       >
@@ -159,9 +151,8 @@ export const ButtonToggle = () => {
       <Menu
         id="menu-on-button"
         aria-labelledby="menuButton"
-        anchorEl={anchorEl}
         focus={focus}
-        open={anchorEl && true}
+        open={openMenu}
       >
         <MenuItem>
           <Icon name="folder" />
