@@ -11,5 +11,9 @@ export const camelify = (str) =>
 
 export const slugify = (str) => {
   if (!str) return
-  return str.toLowerCase().split(' ').join('-')
+  return str
+    .toLowerCase()
+    .replace(/[^a-zA-Z ]/g, '')
+    .split(' ')
+    .join('-')
 }
