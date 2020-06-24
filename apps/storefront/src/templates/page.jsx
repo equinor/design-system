@@ -61,7 +61,8 @@ const Content = styled.div`
   & > h6,
   & > p,
   & > ul,
-  & > ol {
+  & > ol,
+  & > blockquote {
     max-width: 39rem;
   }
   h2 + p,
