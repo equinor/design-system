@@ -8,11 +8,9 @@ extends:
   - plugin:import/errors
   - plugin:import/warnings
   - plugin:jsx-a11y/recommended
-  - plugin:react-hooks/recommended
 plugins:
   - prettier
   - testing-library
-  - react-hooks
 parser: babel-eslint
 parserOptions:
   ecmaVersion: 11
