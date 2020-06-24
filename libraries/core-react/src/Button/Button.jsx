@@ -6,15 +6,8 @@ import { button } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
 
 const { colors } = button
-// TODO: Is there a better way to handle css properties without
-// bloating with ${props => props.base.focus.color} etc...
 
 const Base = ({ base, baseDisabled: disabled }) => {
-  if (!base) {
-    // TODO: What to do when base does not exist
-    return ``
-  }
-
   const { border, spacing, typography, focus, hover } = base
 
   return css`
@@ -114,11 +107,6 @@ const LeftIcon = styled.span`
   margin-right: 12px;
   line-height: normal;
 `
-// TODO:
-// - Missing top spacing
-// - Fallback color?
-// - Use ThemeProvider
-// - Set attr on button
 
 export const Button = forwardRef(function Button(
   {
@@ -137,10 +125,10 @@ export const Button = forwardRef(function Button(
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
+
   const iconRight = rightIcon && <RightIcon>{rightIcon}</RightIcon>
   const iconLeft = leftIcon && <LeftIcon>{leftIcon}</LeftIcon>
   const iconType = variant === 'ghost_icon' ? variant : 'button_icon'
-
   const component = href ? 'a' : 'button'
 
   const baseProps = {
@@ -202,7 +190,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   /**
    * URL link destination
-   * If defined, an 'a' element is used as root
+   * If defined, an 'a' element is used as root instead of 'button'
    */
   href: PropTypes.string,
   /**
