@@ -23,6 +23,9 @@ const Tabs = forwardRef(function Tabs(
   }
 
   const handleFocus = (e) => {
+    if (e.target.getAttribute('role') !== 'tab') {
+      return
+    }
     clearTimeout(blurTimer)
     if (!tabsFocused) {
       setTabsFocused(true)

@@ -1,10 +1,10 @@
 dependencies:
+  '@koa/router': 9.0.1
   del: 5.1.0
   dotenv: 8.2.0
   koa: 2.12.0
-  koa-body: 4.1.3
+  koa-body: 4.2.0
   koa-logger: 3.2.1
-  koa-router: 8.0.8
   node-fetch: 2.6.0
   nodemon: 2.0.4
   prettier: 2.0.5
@@ -12,6 +12,18 @@ dependencies:
   svgo: 1.3.2
 lockfileVersion: 5.1
 packages:
+  /@koa/router/9.0.1:
+    dependencies:
+      debug: 4.1.1
+      http-errors: 1.7.3
+      koa-compose: 4.1.0
+      methods: 1.1.2
+      path-to-regexp: 6.1.0
+    dev: false
+    engines:
+      node: '>= 8.0.0'
+    resolution:
+      integrity: sha512-OI+OU49CJV4px0WkIMmayBeqVXB/JS1ZMq7UoGlTZt6Y7ijK7kdeQ18+SEHHJPytmtI1y6Hf8XLrpxva3mhv5Q==
   /@nodelib/fs.scandir/2.1.3:
     dependencies:
       '@nodelib/fs.stat': 2.0.3
@@ -61,7 +73,7 @@ packages:
   /@types/formidable/1.0.31:
     dependencies:
       '@types/events': 3.0.0
-      '@types/node': 14.0.11
+      '@types/node': 14.0.13
     dev: false
     resolution:
       integrity: sha512-dIhM5t8lRP0oWe2HF8MuPvdd1TpPTjhDMAqemcq6oIZQCBQTovhBAdTQ5L5veJB4pdQChadmHuxtB0YzqvfU3Q==
@@ -80,6 +92,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-lCvvI24L21ZVeIiyIUHZ5Oflv1hhHQ5E1S25IRlKIXaRkVgmXpJMI3wUJkmym2bTbCe+WoIibQnMVAU3FguaOg==
+  /@types/node/14.0.13:
+    dev: false
+    resolution:
+      integrity: sha512-rouEWBImiRaSJsVA+ITTFM6ZxibuAlTuNOCyxVbwreu6k6+ujs7DfnU9o+PShFhET78pMBl3eH+AGSI5eOTkPA==
   /@types/q/1.5.4:
     dev: false
     resolution:
@@ -1031,10 +1047,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-VjSeb/lHmkoyd8ryPVIKvOCn4D1koMqY+vqyjjUfc3xyKtP4dYOxM44sZrnqQSzSds3xyOrUTLTC9LVCVgLngw==
-  /isarray/0.0.1:
-    dev: false
-    resolution:
-      integrity: sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
   /js-yaml/3.14.0:
     dependencies:
       argparse: 1.0.10
@@ -1061,14 +1073,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-9ykJ/46SN/9KPM/sichzQ7OvXyGDYKGTaDlKMGCAlg2UK8KRy4jb0d8sFc+0Tt0YYnThq8X2RZgCg74RPxgcVA==
-  /koa-body/4.1.3:
+  /koa-body/4.2.0:
     dependencies:
       '@types/formidable': 1.0.31
       co-body: 5.2.0
       formidable: 1.2.2
     dev: false
     resolution:
-      integrity: sha512-lSu0zmGqtF8vxzgPqNb7CpsIE05llY4pflkOVct9jN1yGTM7ajLz3wBSh8TrSzMGzguBjgEWizoxHLdMbmzz8A==
+      integrity: sha512-wdGu7b9amk4Fnk/ytH8GuWwfs4fsB5iNkY8kZPpgQVb04QZSv85T0M8reb+cJmvLE8cjPYvBzRikD3s6qz8OoA==
   /koa-compose/3.2.1:
     dependencies:
       any-promise: 1.3.0
@@ -1099,19 +1111,6 @@ packages:
       node: '>= 7.6.0'
     resolution:
       integrity: sha512-MjlznhLLKy9+kG8nAXKJLM0/ClsQp/Or2vI3a5rbSQmgl8IJBQO0KI5FA70BvW+hqjtxjp49SpH2E7okS6NmHg==
-  /koa-router/8.0.8:
-    dependencies:
-      debug: 4.1.1
-      http-errors: 1.7.3
-      koa-compose: 4.1.0
-      methods: 1.1.2
-      path-to-regexp: 1.8.0
-      urijs: 1.19.2
-    dev: false
-    engines:
-      node: '>= 8.0.0'
-    resolution:
-      integrity: sha512-2rNF2cgu/EWi/NV8GlBE5+H/QBoaof83X6Z0dULmalkbt7W610/lyP2EOLVqVrUUFfjsVWL/Ju5TVBcGJDY9XQ==
   /koa/2.12.0:
     dependencies:
       accepts: 1.3.7
@@ -1406,12 +1405,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
-  /path-to-regexp/1.8.0:
-    dependencies:
-      isarray: 0.0.1
+  /path-to-regexp/6.1.0:
     dev: false
     resolution:
-      integrity: sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==
+      integrity: sha512-h9DqehX3zZZDCEm+xbfU0ZmwCGFCAAraPJWMXJ4+v32NjZJilVg3k1TcKsRgIb8IQ/izZSaydDc1OhJCZvs2Dw==
   /path-type/4.0.0:
     dev: false
     engines:
@@ -1823,10 +1820,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-w3doE1qtI0/ZmgeoDoARmI5fjDoT93IfKgEGqm26dGUOh8oNpaSTsGNdYRN/SjOuo10jcJGwkEL3mroKzktkew==
-  /urijs/1.19.2:
-    dev: false
-    resolution:
-      integrity: sha512-s/UIq9ap4JPZ7H1EB5ULo/aOUbWqfDi7FKzMC2Nz+0Si8GiT1rIEaprt8hy3Vy2Ex2aJPpOQv4P4DuOZ+K1c6w==
   /url-parse-lax/3.0.0:
     dependencies:
       prepend-http: 2.0.0
@@ -1884,12 +1877,12 @@ packages:
     resolution:
       integrity: sha512-faQrqNMzcPCHGVC2aaOINk13K+aaBDUPjGWl0teOXywElLjyVAB6Oe2jj62jHYtwsU49jXhScYbvPENK+6zAvQ==
 specifiers:
+  '@koa/router': ^9.0.1
   del: ^5.1.0
   dotenv: ^8.2.0
   koa: ^2.12.0
-  koa-body: ^4.1.3
+  koa-body: ^4.2.0
   koa-logger: ^3.2.1
-  koa-router: ^8.0.8
   node-fetch: ^2.6.0
   nodemon: ^2.0.4
   prettier: ^2.0.5

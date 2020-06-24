@@ -151,6 +151,7 @@ export const Slider = forwardRef(function EdsSlider(
     value = [40, 60],
     outputFunction,
     onChange,
+    onChangeCommitted,
     minMaxDots = true,
     minMaxValues,
     step = 1,
@@ -180,6 +181,17 @@ export const Slider = forwardRef(function EdsSlider(
     if (onChange) {
       // Callback for provided onChange func
       onChange(event, changedValue)
+    }
+  }
+  const handleKeyUp = (event) => {
+    if (event.keyCode === 37 || event.keyCode === 39) {
+      handleCommitedValue(event)
+    }
+  }
+
+  const handleCommitedValue = (event) => {
+    if (onChangeCommitted) {
+      onChangeCommitted(event, sliderValue)
     }
   }
 
@@ -243,6 +255,8 @@ export const Slider = forwardRef(function EdsSlider(
             onChange={(event) => {
               onValueChange(event, 0)
             }}
+            onMouseUp={(event) => handleCommitedValue(event)}
+            onKeyUp={(event) => handleKeyUp(event)}
             disabled={disabled}
           />
           <Output htmlFor={inputIdA} value={sliderValue[0]}>
@@ -261,6 +275,8 @@ export const Slider = forwardRef(function EdsSlider(
             onChange={(event) => {
               onValueChange(event, 1)
             }}
+            onMouseUp={(event) => handleCommitedValue(event)}
+            onKeyUp={(event) => handleKeyUp(event)}
             disabled={disabled}
           />
           <Output htmlFor={inputIdB} value={sliderValue[1]}>
@@ -289,6 +305,8 @@ export const Slider = forwardRef(function EdsSlider(
             }}
             disabled={disabled}
             aria-labelledby={ariaLabelledby}
+            onMouseUp={(event) => handleCommitedValue(event)}
+            onKeyUp={(event) => handleKeyUp(event)}
           />
           <Output htmlFor={inputId} value={sliderValue}>
             {getFormattedText(sliderValue)}
@@ -319,6 +337,8 @@ Slider.propTypes = {
   ]).isRequired,
   /** Function to be called when value change */
   onChange: PropTypes.func,
+  /* Function to be called when value is committed by mouseup event */
+  onChangeCommitted: PropTypes.func,
   /** Function for formatting the output, e.g. with dates */
   outputFunction: PropTypes.func,
   /** Max value */
@@ -341,6 +361,7 @@ Slider.defaultProps = {
   min: 0,
   max: 100,
   onChange: undefined,
+  onChangeCommitted: undefined,
   outputFunction: undefined,
   minMaxDots: true,
   minMaxValues: true,
