@@ -34,7 +34,7 @@ export const Variants = () => {
           <DotProgress variant="white" />
         </Background>
       </Wrapper>
-      <Typography variant="h2">Green</Typography>
+      <Typography variant="h4" as="h2">Green</Typography>
       <Wrapper>
         <DotProgress variant="green" />
       </Wrapper>
