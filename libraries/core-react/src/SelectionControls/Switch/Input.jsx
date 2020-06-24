@@ -61,6 +61,8 @@ export const Input = forwardRef(({ disabled, size, ...rest }, ref) => {
   )
 })
 
+Input.displayName = 'eds-switch-input'
+
 Input.propTypes = {
   // If true, the component will be disabled
   disabled: PropTypes.bool,

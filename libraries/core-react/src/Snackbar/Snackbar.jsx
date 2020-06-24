@@ -71,7 +71,7 @@ Snackbar.propTypes = {
   /** Callback fired when the snackbar is closed by auto hide duration timeout */
   onClose: PropTypes.func,
   /** Media query from which the snackbar will be horizontal centered */
-  centerAlignFrom: PropTypes.string,
+  leftAlignFrom: PropTypes.string,
 }
 
 Snackbar.defaultProps = {
