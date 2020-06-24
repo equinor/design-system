@@ -45,6 +45,8 @@ export const SwitchSmall = forwardRef(({ disabled, ...rest }, ref) => {
   )
 })
 
+SwitchSmall.displayName = 'eds-switch-small'
+
 SwitchSmall.propTypes = {
   disabled: PropTypes.bool,
 }
