@@ -8,7 +8,7 @@ import { Typography } from '..'
 
 import { Card } from '.'
 
-const { CardHeader, CardHeaderTitle, CardMedia, CardText, CardActions } = Card
+const { CardHeader, CardHeaderTitle, CardMedia, CardActions } = Card
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -39,12 +39,6 @@ const StyledCardActions = styled(CardActions)`
   width: 100px;
 `
 
-const StyledCardText = styled(CardText)`
-  position: relative;
-  height: 100px;
-  width: 100px;
-`
-
 afterEach(cleanup)
 
 describe('Card', () => {
@@ -70,30 +64,18 @@ describe('Card', () => {
     expect(queryByText(title)).toBeDefined()
     expect(queryByText(subtitle)).toBeDefined()
   })
-  it('Has provided text and variation in CardText', () => {
-    const text = 'This is a text'
-    const variant = 'isLastBlock'
-    const { queryByText } = render(
-      <Card>
-        <CardText isLastBlock>{text}</CardText>
-      </Card>,
-    )
-
-    expect(queryByText(text)).toBeDefined()
-    expect(queryByText(variant)).toBeDefined()
-  })
   it('Has provided image source and placement in CardMedia', () => {
-    const isLeading = 'isLeading'
+    const fullWidth = 'fullWidth'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { queryByText } = render(
       <Card>
-        <CardMedia isLeading>
+        <CardMedia fullWidth>
           <img src={src} alt="alt" />
         </CardMedia>
       </Card>,
     )
 
-    expect(queryByText(isLeading)).toBeDefined()
+    expect(queryByText(fullWidth)).toBeDefined()
     expect(queryByText(src)).toBeDefined()
   })
   it('CardActions items are placed correctly', () => {
@@ -106,17 +88,6 @@ describe('Card', () => {
     )
     const child = container.firstChild
     expect(child.firstChild).toHaveStyleRule('justify-content', 'flex-end')
-  })
-  it('CardMedia items are placed correctly', () => {
-    const { container } = render(
-      <Card>
-        <CardMedia isLeading>
-          <img src="https://i.imgur.com/UM3mrju.jpg" alt="alt" />
-        </CardMedia>
-      </Card>,
-    )
-    const child = container.firstChild
-    expect(child.firstChild).toHaveStyleRule('margin-left', '-16px')
   })
   it('Can extend the css for the Card Component', () => {
     const { container } = render(<StyledCard />)
@@ -152,12 +123,5 @@ describe('Card', () => {
     expect(cardActions).toHaveStyleRule('position', 'relative')
     expect(cardActions).toHaveStyleRule('height', '100px')
     expect(cardActions).toHaveStyleRule('width', '100px')
-  })
-  it('Can extend the css for the CardText Component', () => {
-    const { container } = render(<StyledCardText>Text</StyledCardText>)
-    const cardText = container.firstChild
-    expect(cardText).toHaveStyleRule('position', 'relative')
-    expect(cardText).toHaveStyleRule('height', '100px')
-    expect(cardText).toHaveStyleRule('width', '100px')
   })
 })
