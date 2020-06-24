@@ -96,6 +96,9 @@ const ButtonBase = styled.button`
     min-height: auto;
     content: '';
   }
+  &:not(:hover) {
+    color: ${(props) => props.invertPrimaryColor || null};
+  }
 `
 
 const RightIcon = styled.span`
@@ -118,6 +121,7 @@ export const Button = forwardRef(function Button(
     rightIcon,
     leftIcon,
     href,
+    invertedTextColor,
     ...other
   },
   ref,
@@ -131,11 +135,17 @@ export const Button = forwardRef(function Button(
   const iconType = variant === 'ghost_icon' ? variant : 'button_icon'
   const component = href ? 'a' : 'button'
 
+  const invertPrimaryColor =
+    color === 'primary' && variant === 'ghost' && invertedTextColor
+      ? button.invertedTextColor
+      : null
+
   const baseProps = {
     ...other,
     ref,
     width: button.icon_size[iconType].width,
     height: button.icon_size[iconType].height,
+    invertPrimaryColor,
   }
 
   return (
@@ -194,6 +204,10 @@ Button.propTypes = {
    */
   href: PropTypes.string,
   /**
+   * For overriding primary color for GHOST button to fit dark backgrounds
+   */
+  invertedTextColor: PropTypes.bool,
+  /**
    * @ignore
    */
   className: PropTypes.string,
@@ -208,6 +222,7 @@ Button.defaultProps = {
   leftIcon: null,
   rightIcon: null,
   href: '',
+  invertedTextColor: false,
 }
 
 Button.displayName = 'eds-button'

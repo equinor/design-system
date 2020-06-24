@@ -2,6 +2,15 @@ import primary from '@equinor/eds-tokens/components/button/buttons-primary.json'
 import secondary from '@equinor/eds-tokens/components/button/buttons-secondary.json'
 import danger from '@equinor/eds-tokens/components/button/buttons-danger.json'
 import disabled from '@equinor/eds-tokens/components/button/buttons-disabled.json'
+import { tokens } from '@equinor/eds-tokens'
+
+const {
+  colors: {
+    infographic: {
+      primary__moss_green_34: { rgba: invertedGreen },
+    },
+  },
+} = tokens
 
 const colors = {
   primary: {
@@ -36,6 +45,7 @@ const colors = {
 
 export const button = {
   colors,
+  invertedTextColor: invertedGreen,
   icon_size: {
     ghost_icon: {
       width: '24px',
