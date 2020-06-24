@@ -23,5 +23,11 @@ export { Snackbar } from './Snackbar'
 export { Popover } from './Popover'
 export { Banner } from './Banner'
 export { Radio, Checkbox, Switch } from './SelectionControls'
+export {
+  DotProgress,
+  StarProgress,
+  LinearProgress,
+  CircularProgress,
+} from './Progress'
 export { Breadcrumbs } from './Breadcrumbs'
 /* eslint-enable */
