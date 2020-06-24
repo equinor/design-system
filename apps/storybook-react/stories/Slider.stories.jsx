@@ -59,11 +59,10 @@ export const Examples = () => {
           onChange={(event, value) => {
             updateValueTwo(value)
           }}
-          min="0"
-          max="500"
+          min={0}
+          max={500}
           ariaLabelledby="range-slider-label-with-mouseevent"
           onChangeCommitted={(event, value) => {
-            console.log('Mouseup event')
             updateValueTwoCommited(value)
           }}
         />
