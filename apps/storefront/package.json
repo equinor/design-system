@@ -21,6 +21,7 @@
     "dotenv": "^8.2.0",
     "focus-visible": "^5.1.0",
     "gatsby": "^2.23.3",
+    "gatsby-plugin-algolia-docsearch": "^1.0.5",
     "gatsby-plugin-load-script": "^1.1.0",
     "gatsby-plugin-manifest": "^2.4.11",
     "gatsby-plugin-matomo": "^0.8.3",

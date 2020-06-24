@@ -101,7 +101,7 @@ const Sidebar = ({ location }) => {
 }
 
 Sidebar.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default Sidebar // eslint-disable-line

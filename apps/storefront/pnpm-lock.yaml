@@ -12,6 +12,7 @@ dependencies:
   dotenv: 8.2.0
   focus-visible: 5.1.0
   gatsby: 2.23.3_a3b2732d74701e9c737a1cb3fe6b9c19
+  gatsby-plugin-algolia-docsearch: 1.0.5_gatsby@2.23.3
   gatsby-plugin-load-script: 1.1.0_gatsby@2.23.3
   gatsby-plugin-manifest: 2.4.11_gatsby@2.23.3
   gatsby-plugin-matomo: 0.8.3_a3b2732d74701e9c737a1cb3fe6b9c19
@@ -6980,6 +6981,15 @@ packages:
       node: '>=10.13.0'
     resolution:
       integrity: sha512-Mh3QbDdKKrvbJRHtMsBvo+sDTaGfcTiXCFGTkFu2VbL3P6mZySFJ8fDLb9SbQvwvMVw/vD5IZT1KJerfmgfvGQ==
+  /gatsby-plugin-algolia-docsearch/1.0.5_gatsby@2.23.3:
+    dependencies:
+      '@babel/runtime': 7.10.3
+      gatsby: 2.23.3_a3b2732d74701e9c737a1cb3fe6b9c19
+    dev: false
+    peerDependencies:
+      gatsby: ^2.0.0
+    resolution:
+      integrity: sha512-2oylL3ioy22Cu24zP8SpanK09SlP8i3p1j9CQ2rTXJgdNmsK2QhqymaLOGBvzGDMpPRn1qJszlNz/EUNAHafjg==
   /gatsby-plugin-load-script/1.1.0_gatsby@2.23.3:
     dependencies:
       '@babel/runtime': 7.10.3
@@ -16065,6 +16075,7 @@ specifiers:
   dotenv: ^8.2.0
   focus-visible: ^5.1.0
   gatsby: ^2.23.3
+  gatsby-plugin-algolia-docsearch: ^1.0.5
   gatsby-plugin-load-script: ^1.1.0
   gatsby-plugin-manifest: ^2.4.11
   gatsby-plugin-matomo: ^0.8.3

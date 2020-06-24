@@ -99,6 +99,15 @@ module.exports = {
         src: '/focus-visible.js', // Change to the script filename
       },
     },
+    {
+      resolve: `gatsby-plugin-algolia-docsearch`,
+      options: {
+        apiKey: '25626fae796133dc1e734c6bcaaeac3c',
+        indexName: 'docsearch',
+        inputSelector: '#search', // required
+        debug: false, // (bool) Optional. Default `false`
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
