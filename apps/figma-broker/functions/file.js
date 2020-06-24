@@ -1,7 +1,7 @@
 import fs from 'fs'
 import del from 'del'
 import fetch from 'node-fetch'
-import * as R from 'ramda'
+import R from 'ramda'
 import { createFolder } from './folder'
 import prettier from 'prettier'
 

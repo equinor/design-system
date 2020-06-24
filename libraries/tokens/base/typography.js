@@ -79,18 +79,18 @@ export const typography = {
     drawer_active: {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
-      fontSize: '0.750rem',
+      fontSize: '1.000rem',
       fontWeight: 700,
       letterSpacing: '0.006em',
-      lineHeight: '1.333em',
+      lineHeight: '1.000em',
     },
     drawer_inactive: {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
-      fontSize: '0.750rem',
+      fontSize: '1.000rem',
       fontWeight: 500,
       letterSpacing: '0.013em',
-      lineHeight: '1.333em',
+      lineHeight: '1.000em',
     },
     button: {
       color: 'rgba(0, 0, 0, 1)',

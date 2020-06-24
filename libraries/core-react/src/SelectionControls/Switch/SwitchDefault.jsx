@@ -53,6 +53,8 @@ export const SwitchDefault = forwardRef(({ disabled, ...rest }, ref) => {
   )
 })
 
+SwitchDefault.displayName = 'eds-switch-default'
+
 SwitchDefault.propTypes = {
   // If true, the styles will be reflecting disabled
   disabled: PropTypes.bool,
