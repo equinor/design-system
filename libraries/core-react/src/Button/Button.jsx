@@ -135,6 +135,7 @@ export const Button = forwardRef(function Button(
   const iconType = variant === 'ghost_icon' ? variant : 'button_icon'
   const component = href ? 'a' : 'button'
 
+  /* Only invert ghost button with primary color */
   const invertPrimaryColor =
     color === 'primary' && variant === 'ghost' && invertedTextColor
       ? button.invertedTextColor
@@ -204,7 +205,7 @@ Button.propTypes = {
    */
   href: PropTypes.string,
   /**
-   * For overriding primary color for GHOST button to fit dark backgrounds
+   * For overriding primary color for ghost button to fit dark backgrounds
    */
   invertedTextColor: PropTypes.bool,
   /**

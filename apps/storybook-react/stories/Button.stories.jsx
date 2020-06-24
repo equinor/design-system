@@ -305,7 +305,7 @@ export const link = () => (
 )
 
 export const invertedGhostButton = () => (
-  <Wrapper style={{ background: 'black' }}>
+  <Wrapper style={{ background: '#1F1F1F' }}>
     <Button variant="ghost" invertedTextColor>
       Inverted to fit dark backgrounds
     </Button>

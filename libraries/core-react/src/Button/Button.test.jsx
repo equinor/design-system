@@ -76,4 +76,8 @@ describe('Button', () => {
       save.svgPathData,
     )
   })
+  it('renders an a as root node when href prop is defined', () => {
+    const { container } = render(<Button href="/" />)
+    expect(container.querySelector('a')).toBeInTheDocument()
+  })
 })

@@ -7,7 +7,7 @@ import { tokens } from '@equinor/eds-tokens'
 const {
   colors: {
     infographic: {
-      primary__moss_green_34: { rgba: invertedGreen },
+      primary__moss_green_34: { rgba: inverted },
     },
   },
 } = tokens
@@ -45,7 +45,7 @@ const colors = {
 
 export const button = {
   colors,
-  invertedTextColor: invertedGreen,
+  invertedTextColor: inverted,
   icon_size: {
     ghost_icon: {
       width: '24px',
