@@ -42,9 +42,10 @@ DateSlider.propTypes = {
 
 describe('Simple slider', () => {
   it('Creates a simple slider when providing a number as value', () => {
-    render(<Slider value={0} ariaLabelledby="test-one" />)
-    const input = screen.getAllByRole('textbox', { name: 'test-one' })
-    expect(input).toHaveLength(1)
+    const { container } = render(<Slider value={0} ariaLabelledby="test-one" />)
+    const input = container.querySelector('input')
+
+    expect(input).toBeDefined()
   })
   it('Sets the aria label', () => {
     const { container } = render(
@@ -54,7 +55,7 @@ describe('Simple slider', () => {
     expect(input).toHaveAttribute('aria-labelledby', 'test-label')
   })
   it('Can set min, max and step values', () => {
-    render(
+    const { container } = render(
       <Slider
         value={5}
         min={4}
@@ -63,7 +64,7 @@ describe('Simple slider', () => {
         ariaLabelledby="test-minmax"
       />,
     )
-    const input = screen.getByRole('textbox', { name: 'test-minmax' })
+    const input = container.querySelector('input')
     expect(input).toHaveAttribute('min', '4')
     expect(input).toHaveAttribute('max', '10')
     expect(input).toHaveAttribute('step', '2')
@@ -73,7 +74,7 @@ describe('Simple slider', () => {
     const { container } = render(
       <Slider value={5} ariaLabelledby="test-value" onChange={handleChange} />,
     )
-    const input = screen.getByRole('textbox', { name: 'test-value' })
+    const input = container.querySelector('input')
     const outputValue = container.querySelector('output')
     expect(outputValue).toHaveTextContent('5')
     fireEvent.change(input, { target: { value: '6' } })
@@ -88,7 +89,7 @@ describe('Simple slider', () => {
       />,
     )
     const outputValue = container.querySelector('output')
-    const input = screen.getByRole('textbox', { name: 'date-test' })
+    const input = container.querySelector('input')
     expect(outputValue).toHaveTextContent('Wednesday, January 1, 2020')
     expect(outputValue).not.toHaveTextContent(getUnixTime('2020-01-01'))
     expect(input).toHaveValue(getUnixTime('2020-01-01').toString())
