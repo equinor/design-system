@@ -28,7 +28,7 @@ export default {
 export const Variants = () => {
   return (
     <Body>
-      <Typography variant="h2">White</Typography>
+      <Typography variant="h4" as="h2">White</Typography>
       <Wrapper>
         <Background>
           <DotProgress variant="white" />
