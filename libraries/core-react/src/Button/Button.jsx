@@ -17,6 +17,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
     color: ${base.color};
     fill: ${base.color};
     svg {
+      justify-self: center;
       ${({ height, width }) => css({ height, width })}
     }
 
@@ -84,9 +85,14 @@ const ButtonBase = styled.button`
   text-decoration: none;
   position: relative;
   cursor: pointer;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
+
+  display: grid;
+  grid-gap: 12px;
+  grid-auto-flow: column;
+  align-items: center;
   &::before {
     position: absolute;
     top: 0;
@@ -97,38 +103,17 @@ const ButtonBase = styled.button`
   }
 `
 
-const RightIcon = styled.span`
-  margin-left: 12px;
-  line-height: normal;
-`
-
-const LeftIcon = styled.span`
-  margin-right: 12px;
-  line-height: normal;
-`
-
 export const Button = forwardRef(function Button(
-  {
-    variant,
-    children,
-    disabled,
-    className,
-    color,
-    rightIcon,
-    leftIcon,
-    href,
-    ...other
-  },
+  { variant, children, disabled, className, color, href, ...other },
   ref,
 ) {
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
 
-  const iconRight = rightIcon && <RightIcon>{rightIcon}</RightIcon>
-  const iconLeft = leftIcon && <LeftIcon>{leftIcon}</LeftIcon>
-  const iconType = variant === 'ghost_icon' ? variant : 'button_icon'
   const as = href ? 'a' : other.as ? other.as : 'button'
+  const childArray = React.Children.toArray(children)
+  const iconType = childArray.length > 1 ? 'button_icon' : 'ghost_icon'
 
   const baseProps = {
     ...other,
@@ -148,9 +133,7 @@ export const Button = forwardRef(function Button(
       disabled={disabled}
       {...baseProps}
     >
-      {iconLeft}
       {children}
-      {iconRight}
     </ButtonBase>
   )
 })
@@ -179,10 +162,6 @@ Button.propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary', 'danger']),
   /** Specifies which variant to use */
   variant: PropTypes.oneOf(['contained', 'outlined', 'ghost', 'ghost_icon']),
-  /** Icon to be displayed on the left side */
-  leftIcon: PropTypes.node,
-  /** Icon to be displayed on the right side */
-  rightIcon: PropTypes.node,
   /**
    * If `true`, the button will be disabled.
    */
@@ -204,8 +183,6 @@ Button.defaultProps = {
   disabled: false,
   className: '',
   children: null,
-  leftIcon: null,
-  rightIcon: null,
   href: '',
 }
 
