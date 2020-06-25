@@ -113,14 +113,20 @@ export const Button = forwardRef(function Button(
 
   const as = href ? 'a' : other.as ? other.as : 'button'
   const childArray = React.Children.toArray(children)
-  const iconType = childArray.length > 1 ? 'button_icon' : 'ghost_icon'
+
+  const iconType =
+    childArray.length > 1
+      ? 'button_icon'
+      : childArray.length < 2 && variant === 'ghost_icon'
+      ? 'ghost_icon'
+      : undefined
 
   const baseProps = {
     ...other,
     ref,
     as,
-    width: button.icon_size[iconType].width,
-    height: button.icon_size[iconType].height,
+    width: iconType ? button.icon_size[iconType].width : undefined,
+    height: iconType ? button.icon_size[iconType].height : undefined,
   }
 
   return (
