@@ -92,7 +92,7 @@ const Page = ({ data }) => {
   const withTabs = tabs !== null
   const isPublished = (mode || '').toLowerCase() === 'publish'
   const isContentPage = type !== 'landingPage'
-
+  console.log('stage', process.env.GATSBY_STAGE)
   return (
     <Layout>
       <SEO title={title} />
