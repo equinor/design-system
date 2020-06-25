@@ -114,13 +114,13 @@ export const Button = forwardRef(function Button(
     ...other,
     ref,
     as,
+    href,
   }
 
   return (
     <ButtonBase
       base={base}
       type={href || other.as ? undefined : 'button'}
-      href={href ? href : undefined}
       baseDisabled={baseDisabled}
       className={className}
       disabled={disabled}
@@ -179,7 +179,7 @@ Button.defaultProps = {
   disabled: false,
   className: '',
   children: null,
-  href: '',
+  href: undefined,
   tabIndex: 0,
 }
 
