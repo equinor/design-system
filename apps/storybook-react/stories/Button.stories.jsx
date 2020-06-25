@@ -304,14 +304,6 @@ export const link = () => (
   </Wrapper>
 )
 
-export const invertedGhostButton = () => (
-  <Wrapper style={{ background: '#1F1F1F' }}>
-    <Button variant="ghost" invertedTextColor>
-      Inverted to fit dark backgrounds
-    </Button>
-  </Wrapper>
-)
-
 knobs.story = {
   name: 'With knobs',
   decorators: [withKnobs],
