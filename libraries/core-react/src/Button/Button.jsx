@@ -104,7 +104,7 @@ const ButtonBase = styled.button`
 `
 
 export const Button = forwardRef(function Button(
-  { variant, children, disabled, className, color, href, ...other },
+  { variant, children, disabled, className, color, tabIndex, href, ...other },
   ref,
 ) {
   const colorBase = colors[color] || {}
@@ -131,6 +131,7 @@ export const Button = forwardRef(function Button(
       baseDisabled={baseDisabled}
       className={className}
       disabled={disabled}
+      tabIndex={disabled ? -1 : tabIndex}
       {...baseProps}
     >
       {children}
@@ -171,6 +172,8 @@ Button.propTypes = {
    * If defined, an 'a' element is used as root instead of 'button'
    */
   href: PropTypes.string,
+  /* User to control tabindex, default tabindex needed for button as span */
+  tabIndex: PropTypes.number,
   /**
    * @ignore
    */
@@ -184,6 +187,7 @@ Button.defaultProps = {
   className: '',
   children: null,
   href: '',
+  tabIndex: 0,
 }
 
 Button.displayName = 'eds-button'
