@@ -85,10 +85,6 @@ const ButtonBase = styled.button`
   text-decoration: none;
   position: relative;
   cursor: pointer;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-
   display: grid;
   grid-gap: 12px;
   grid-auto-flow: column;
