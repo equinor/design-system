@@ -37,13 +37,7 @@ const colors = {
 export const button = {
   colors,
   icon_size: {
-    ghost_icon: {
-      width: '24px',
-      height: '24px',
-    },
-    button_icon: {
-      width: '16px',
-      height: '16px',
-    },
+    width: '24px',
+    height: '24px',
   },
 }
