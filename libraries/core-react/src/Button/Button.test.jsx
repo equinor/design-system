@@ -15,6 +15,10 @@ const StyledButton = styled(Button)`
   width: 100px;
 `
 
+const MarginButton = styled(Button)`
+  margin: 12px;
+`
+
 afterEach(cleanup)
 
 describe('Button', () => {
@@ -65,5 +69,25 @@ describe('Button', () => {
     fireEvent.click(submitButton)
 
     expect(handleSubmit).toHaveBeenCalledTimes(0)
+  })
+  it('Has provided icon when icon and text is defined', () => {
+    const { queryByTestId, container } = render(
+      <Button>
+        <Icon name="save" title="save"></Icon>Button
+      </Button>,
+    )
+    expect(container.querySelector('svg')).toBeInTheDocument()
+    expect(queryByTestId('eds-icon-path')).toHaveAttribute(
+      'd',
+      save.svgPathData,
+    )
+  })
+  it('renders an a as root node when href prop is defined', () => {
+    const { container } = render(<Button href="/" />)
+    expect(container.querySelector('a')).toBeInTheDocument()
+  })
+  it('Can change margins', () => {
+    const { container } = render(<MarginButton>Test me!</MarginButton>)
+    expect(container.firstChild).toHaveStyleRule('margin', '12px')
   })
 })

@@ -38,7 +38,6 @@ export const allButtons = () => (
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
     <Button disabled>Disabled</Button>
-
     <Button variant="outlined">Primary</Button>
     <Button variant="outlined" color="secondary">
       Secondary
@@ -59,6 +58,18 @@ export const allButtons = () => (
     <Button variant="ghost" disabled>
       Disabled
     </Button>
+    <Button variant="ghost_icon">
+      <Icon name="save" title="save action" size={48}></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="secondary">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="danger">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" disabled>
+      <Icon name="save" title="save"></Icon>
+    </Button>
   </Wrapper>
 )
 export const contained = () => (
@@ -67,6 +78,33 @@ export const contained = () => (
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
     <Button disabled>Disabled</Button>
+    <Button>
+      <Icon name="save" title="save" size={16}></Icon>Primary
+    </Button>
+    <Button color="secondary">
+      <Icon name="save" title="save"></Icon>Secondary
+    </Button>
+    <Button color="danger">
+      <Icon name="save" title="save"></Icon>Danger
+    </Button>
+    <Button disabled>
+      <Icon name="save" title="save"></Icon>Disabled
+    </Button>
+    <Button>
+      Primary <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button color="secondary">
+      Secondary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button color="danger">
+      Danger
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button disabled>
+      Disabled
+      <Icon name="save" title="save"></Icon>
+    </Button>
   </Wrapper>
 )
 
@@ -86,6 +124,38 @@ export const outlined = () => (
     <Button variant="outlined" disabled>
       Disabled
     </Button>
+    <Button variant="outlined">
+      <Icon name="save" title="save"></Icon>
+      Primary
+    </Button>
+    <Button variant="outlined" color="secondary">
+      <Icon name="save" title="save"></Icon>
+      Secondary
+    </Button>
+    <Button variant="outlined" color="danger">
+      <Icon name="save" title="save"></Icon>
+      Danger
+    </Button>
+    <Button variant="outlined" disabled>
+      <Icon name="save" title="save"></Icon>
+      Disabled
+    </Button>
+    <Button variant="outlined">
+      Primary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="outlined" color="secondary">
+      Secondary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="outlined" color="danger">
+      Danger
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="outlined" disabled>
+      Disabled
+      <Icon name="save" title="save"></Icon>
+    </Button>
   </Wrapper>
 )
 
@@ -100,6 +170,38 @@ export const ghost = () => (
     </Button>
     <Button variant="ghost" disabled>
       Disabled
+    </Button>
+    <Button variant="ghost">
+      <Icon name="save" title="save"></Icon>
+      Primary
+    </Button>
+    <Button variant="ghost" color="secondary">
+      <Icon name="save" title="save"></Icon>
+      Secondary
+    </Button>
+    <Button variant="ghost" color="danger">
+      <Icon name="save" title="save"></Icon>
+      Danger
+    </Button>
+    <Button variant="ghost" disabled>
+      <Icon name="save" title="save"></Icon>
+      Disabled
+    </Button>
+    <Button variant="ghost">
+      Primary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost" color="secondary">
+      Secondary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost" color="danger">
+      Danger
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost" disabled>
+      Disabled
+      <Icon name="save" title="save"></Icon>
     </Button>
     <Button variant="ghost_icon">
       <Icon name="save" title="save action" size={48}></Icon>
@@ -145,6 +247,28 @@ export const form = () => {
     </Wrapper>
   )
 }
+
+export const fileUpload = () => {
+  return (
+    <Wrapper>
+      <input
+        type="file"
+        id="file-upload"
+        style={{ display: 'none' }}
+        multiple
+      />
+      <label htmlFor="file-upload">
+        <Button as="span">Upload</Button>
+      </label>
+    </Wrapper>
+  )
+}
+
+export const link = () => (
+  <Wrapper>
+    <Button href="#">Link</Button>
+  </Wrapper>
+)
 
 knobs.story = {
   name: 'With knobs',
