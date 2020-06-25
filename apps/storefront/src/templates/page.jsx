@@ -173,7 +173,7 @@ const Page = ({ data }) => {
 
               <p style={{ marginTop: '3rem' }}>
                 <a
-                  href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
+                  href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content${
                     slug === '/' ? `index` : slug
                   }.mdx`}
                 >
