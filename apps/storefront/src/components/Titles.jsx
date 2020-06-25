@@ -54,11 +54,7 @@ export const H2 = ({ children }) => {
   )
 }
 export const H3 = ({ children }) => {
-  return (
-    <StyledH3 variant="h3" id={slugify(children)}>
-      {children}
-    </StyledH3>
-  )
+  return <StyledH3 variant="h3">{children}</StyledH3>
 }
 export const H4 = ({ children }) => {
   return <StyledH4 variant="h4">{children}</StyledH4>
