@@ -96,7 +96,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
-        src: '/focus-visible.js', // Change to the script filename
+        src: '/focus-visible.min.js', // Change to the script filename
       },
     },
     {
