@@ -17,8 +17,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
     color: ${base.color};
     fill: ${base.color};
     svg {
-      ${({ height }) => css({ height })}
-      ${({ width }) => css({ width })}
+      ${({ height, width }) => css({ height, width })}
     }
 
     border-radius: ${border.radius};
