@@ -128,21 +128,21 @@ export const Button = forwardRef(function Button(
   const iconRight = rightIcon && <RightIcon>{rightIcon}</RightIcon>
   const iconLeft = leftIcon && <LeftIcon>{leftIcon}</LeftIcon>
   const iconType = variant === 'ghost_icon' ? variant : 'button_icon'
-  const component = href ? 'a' : 'button'
+  const as = href ? 'a' : other.as ? other.as : 'button'
 
   const baseProps = {
     ...other,
     ref,
+    as,
     width: button.icon_size[iconType].width,
     height: button.icon_size[iconType].height,
   }
 
   return (
     <ButtonBase
-      as={component}
       base={base}
-      type={href ? null : 'button'}
-      href={href ? href : null}
+      type={href || other.as ? undefined : 'button'}
+      href={href ? href : undefined}
       baseDisabled={baseDisabled}
       className={className}
       disabled={disabled}
