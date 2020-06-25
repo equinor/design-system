@@ -15,6 +15,10 @@ const StyledButton = styled(Button)`
   width: 100px;
 `
 
+const MarginButton = styled(Button)`
+  margin: 12px;
+`
+
 afterEach(cleanup)
 
 describe('Button', () => {
@@ -81,5 +85,9 @@ describe('Button', () => {
   it('renders an a as root node when href prop is defined', () => {
     const { container } = render(<Button href="/" />)
     expect(container.querySelector('a')).toBeInTheDocument()
+  })
+  it('Can change margins', () => {
+    const { container } = render(<MarginButton>Test me!</MarginButton>)
+    expect(container.firstChild).toHaveStyleRule('margin', '12px')
   })
 })
