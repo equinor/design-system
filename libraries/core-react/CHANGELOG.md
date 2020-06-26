@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress
 - Snackbar
 - `<Button>` can now be rendered as an `<a>` by providing an `href` attribute
+- Support for left/right icons inside `<Button`
 
 ### Fixed
 
@@ -20,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Increased `<Button>` icon size to 24px (up from 16px) for greater legibility
 - README
   - Moved Progress indicator, Breadcrumbs, Snackbar and Button variations with icons to «Available»
   - Moved Pagination to «In progress»
