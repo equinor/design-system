@@ -17,11 +17,15 @@ npm install @equinor/eds-core-react styled-components
 
 - Accordion
 - Banner
+- Breadcrumbs
 - Button
   - Contained
+  - Contained w/icon left/right
   - Outlined
+  - Outlined w/icon left/right
   - Ghost
   - Ghost Icon
+  - Ghost w/icon left/right
 - Cards
 - Chips
 - Dialog
@@ -29,11 +33,13 @@ npm install @equinor/eds-core-react styled-components
 - Icon
 - List
 - Popover
+- Progress indicators
 - Scrim
 - Search
 - Selection Controls
 - Side Sheet
 - Slider
+- Snackbar
 - Table
 - Table of contents
 - Tabs
@@ -46,18 +52,11 @@ npm install @equinor/eds-core-react styled-components
 
 - Menu
 - Navigation drawer
-- Progress indicators
-- Snackbar
+- Pagination
 
 ### TODO 🛠️
 
 - App launcher
-- Breadcrumbs
-- Button
-  - Contained w/icon left/right
-  - Outlined w/icon left/right
-  - Ghost w/icon left/right
-- Pagination
 - Stepper
 
 ## Usage

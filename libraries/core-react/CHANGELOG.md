@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2020-06-25
+
+### Added
+
+- Breadcrumbs
+- Progress
+- Snackbar
+- `<Button>` can now be rendered as an `<a>` by providing an `href` attribute
+
+### Fixed
+
+- Fixed an overflow bug in `<Popover>`([#375](https://github.com/equinor/design-system/issues/375))
+
+### Changed
+
+- README
+  - Moved Progress indicator, Breadcrumbs, Snackbar and Button variations with icons to «Available»
+  - Moved Pagination to «In progress»
+
 ## [0.3.1] - 2020-06-16
 
 ### Fixed
