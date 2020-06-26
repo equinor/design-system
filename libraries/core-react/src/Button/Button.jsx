@@ -87,7 +87,7 @@ const ButtonBase = styled.button`
   position: relative;
   cursor: pointer;
   display: grid;
-  grid-gap: 12px;
+  grid-gap: 8px;
   grid-auto-flow: column;
   align-items: center;
   &::before {
