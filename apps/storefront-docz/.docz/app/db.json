@@ -1,0 +1,72 @@
+{
+  "config": {
+    "title": "Eds Storefront Docz",
+    "description": "A simple starter to get up and developing quickly with Gatsby",
+    "menu": [],
+    "version": "0.1.0",
+    "repository": "https://github.com/gatsbyjs/gatsby-starter-default",
+    "native": false,
+    "themeConfig": {},
+    "separator": "-"
+  },
+  "entries": [
+    {
+      "key": "README.md",
+      "value": {
+        "id": "04c6e90faac2675aa89e2176d2eec7d8",
+        "filepath": "README.md",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/eds-fork-fix/apps/storefront-docz/README.md",
+        "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/README.md",
+        "hidden": false,
+        "slug": "readme",
+        "route": "/readme",
+        "name": "Readme",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "-quick-start",
+            "depth": 2,
+            "value": "🚀 Quick start"
+          },
+          {
+            "slug": "🧐-whats-inside",
+            "depth": 2,
+            "value": "🧐 What's inside?"
+          },
+          {
+            "slug": "-learning-gatsby",
+            "depth": 2,
+            "value": "🎓 Learning Gatsby"
+          },
+          {
+            "slug": "-deploy",
+            "depth": 2,
+            "value": "💫 Deploy"
+          }
+        ]
+      }
+    },
+    {
+      "key": "docs/index.mdx",
+      "value": {
+        "name": "Getting Started",
+        "route": "/",
+        "id": "73498ad0e1e62a714b08085d318f9de1",
+        "filepath": "docs/index.mdx",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/eds-fork-fix/apps/storefront-docz/docs/index.mdx",
+        "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/docs/index.mdx",
+        "hidden": false,
+        "slug": "docs-index",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "gaaaaaaaaaaaaaah",
+            "depth": 1,
+            "value": "Gaaaaaaaaaaaaaah"
+          }
+        ]
+      }
+    }
+  ],
+  "props": []
+}
