@@ -1,9 +1,20 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Button } from '../Button'
 import { Typography } from '../Typography'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import { PaginationItem } from './PaginationItem'
 import { pagination as tokens } from './Pagination.tokens'
+import { chevron_left, chevron_right } from '@equinor/eds-icons'
+//import { paginationControl } from './paginationControl'
+
+const icons = {
+  chevron_left,
+  chevron_right,
+}
+
+Icon.add(icons)
 
 const Navigation = styled.nav`
   display: flex;
@@ -11,15 +22,30 @@ const Navigation = styled.nav`
   align-items: center;
 `
 
-const StyledButton = styled(Button)`
-  background: ${(active) => (active ? tokens.activeColor : null)};
-`
-
 const UnorderedList = styled.ul`
   list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
+const StyledButton = styled(Button)`
+  display: inline-grid;
 `
 
 const ListItem = styled.li``
+
+function getAriaLabel(type, page, selected) {
+  if (type === 'page') {
+    return `${selected ? 'Current page, ' : 'Go to '}page ${page}`
+  }
+  return `Go to ${type} page`
+}
+
+function paginationControl(props) {
+  const pages = props.pages
+
+  return (itemList = [['first'], ['previous']])
+}
 
 export const Pagination = forwardRef(function Pagination(
   { pages, total, switcher, ...other },
@@ -27,15 +53,16 @@ export const Pagination = forwardRef(function Pagination(
 ) {
   const props = {
     ref,
+    pages,
+    total,
+    switcher,
     ...other,
   }
 
-  const [pageState, setPageState] = useState(0)
-
-  //const items = [...['first'], ...['previous'], ...startPages]
+  const items = paginationControl(...props)
 
   return (
-    <Navigation role="navigation" aria-label="pagination navigation" {...props}>
+    <Navigation aria-label="pagination" {...props}>
       {switcher && (
         <select>
           <option>option 1</option>
@@ -43,9 +70,24 @@ export const Pagination = forwardRef(function Pagination(
         </select>
       )}
       <UnorderedList>
-        <ListItem>
-          <StyledButton variant="ghost_icon">1</StyledButton>
-        </ListItem>
+        <StyledButton variant="ghost_icon">
+          <Icon name="chevron_left" title="previous" />
+        </StyledButton>
+        {items.map((item, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <ListItem aria-label="hello" key={index}>
+            <PaginationItem
+              {...item}
+              aria-label={getAriaLabel(item.type, item.page, item.selected)}
+              aria-current={item.selected}
+              page={item.page}
+              selected={item.selected}
+            />
+          </ListItem>
+        ))}
+        <StyledButton variant="ghost_icon">
+          <Icon name="chevron_right" title="next" />
+        </StyledButton>
       </UnorderedList>
     </Navigation>
   )

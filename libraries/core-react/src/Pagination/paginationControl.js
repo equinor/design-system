@@ -11,6 +11,9 @@ export default function paginationControl(page, onChange, pages, ...other) {
       onChange(e, value)
     }
 
-    return {}
+    return {
+      items,
+      ...other,
+    }
   }
 }
