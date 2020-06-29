@@ -7,21 +7,40 @@ import { MenuList } from './MenuList'
 
 const StyledPaper = styled(Paper)`
   position: absolute;
-  z-index: 1;
-  ${({ left, top }) => css({ left, top })}
-  display:${({ open }) => (open ? 'block' : 'none')};
+  z-index: 500;
+  ${({ left, top, open }) =>
+    css({ left, top, display: open ? 'block' : 'none' })}
   width: fit-content;
   min-width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { children, focus, ...rest },
+  { children, focus, anchorEl, ...rest },
   ref,
 ) {
+  if (!anchorEl) {
+    return undefined
+  }
+
+  const rect = anchorEl ? anchorEl.getBoundingClientRect() : null
+  // console.log(window)
+  console.log(rect)
+  const props = {
+    ...rest,
+    top: rect.top + rect.height + 2,
+    left: rect.left,
+  }
+  console.log(children[0])
+
   return (
-    <StyledPaper {...rest} elevation="raised" ref={ref}>
+    <StyledPaper {...props} elevation="raised" ref={ref}>
       <MenuProvider>
-        <MenuList focus={focus}>{children}</MenuList>
+        <MenuList {...props} focus={focus}>
+          {children}
+        </MenuList>
       </MenuProvider>
     </StyledPaper>
   )
@@ -35,6 +54,7 @@ Menu.propTypes = {
     PropTypes.arrayOf([PropTypes.node]),
     PropTypes.node,
   ]).isRequired,
+  anchorEl: PropTypes.object,
   /** Focus menuItem */
   focus: PropTypes.oneOf(['first', 'last']),
   /** Toggle for displaying menu */
@@ -48,10 +68,11 @@ Menu.propTypes = {
 
 Menu.defaultProps = {
   className: '',
+  anchorEl: undefined,
   focus: undefined,
   open: false,
-  top: undefined,
-  left: undefined,
+  top: 0,
+  left: 0,
 }
 
 Menu.displayName = 'eds-menu'
