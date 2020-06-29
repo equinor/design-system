@@ -5,11 +5,12 @@ route: /
 
 import { Playground, Props } from "docz"
 import { Typography } from "@equinor/eds-core-react"
+import PropsTable from "react-docgen-props-table"
 
 # Gaaaaaaaaaaaaaah
 
 <Typography variant="h4">Props</Typography>
-<Props of={Typography} />
+<PropsTable props={Typography.__docgenInfo.props} />
 
 <Playground>
   <Typography>Play with me</Typography>
