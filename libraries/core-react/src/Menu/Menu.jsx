@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { MenuProvider } from './Menu.context'
+import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
 
 const StyledPaper = styled(Paper)`
   position: absolute;
   z-index: 500;
-  ${({ left, top, open }) =>
-    css({ left, top, display: open ? 'block' : 'none' })}
+  ${({ left, top, open, transform }) =>
+    css({ left, top, transform, display: open ? 'block' : 'none' })}
   width: fit-content;
   min-width: fit-content;
   overflow: hidden;
@@ -18,30 +18,35 @@ const StyledPaper = styled(Paper)`
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { children, focus, anchorEl, ...rest },
+  { children, className, anchorEl, open, ...rest },
   ref,
 ) {
   if (!anchorEl) {
     return undefined
   }
 
-  const rect = anchorEl ? anchorEl.getBoundingClientRect() : null
+  const { setPosition, position } = useMenu()
+
+  useEffect(() => {
+    if (anchorEl) {
+      const rect = anchorEl ? anchorEl.getBoundingClientRect() : null
+      setPosition(rect)
+    }
+  }, [anchorEl])
+
   // console.log(window)
-  console.log(rect)
-  const props = {
-    ...rest,
-    top: rect.top + rect.height + 2,
-    left: rect.left,
+  // console.log(rect)
+  const paperProps = {
+    open,
+    className,
+    ...position,
   }
-  console.log(children[0])
 
   return (
-    <StyledPaper {...props} elevation="raised" ref={ref}>
-      <MenuProvider>
-        <MenuList {...props} focus={focus}>
-          {children}
-        </MenuList>
-      </MenuProvider>
+    <StyledPaper {...paperProps} elevation="raised">
+      <MenuList {...rest} focus={focus} ref={ref}>
+        {children}
+      </MenuList>
     </StyledPaper>
   )
 })
