@@ -50,3 +50,11 @@ export const bordersTemplate = (border) => css`
   border-color: ${border.color};
   border-width: ${border.width};
 `
+
+export const gridColumnsTemplate = (columns, size) => {
+  const variables = `${columns}, ${size}`
+  const gridcolumns = `
+  grid-template-columns: repeat(${variables});
+  `
+  return gridcolumns
+}

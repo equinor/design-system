@@ -7,7 +7,7 @@ import { pagination as tokens } from './Pagination.tokens'
 //import { paginationControl } from './paginationControl'
 
 const StyledButton = styled(Button)`
-  display: inline-grid;
+  /* display: inline-grid; */
   background: ${(active) => (active ? tokens.activeColor : null)};
 `
 
