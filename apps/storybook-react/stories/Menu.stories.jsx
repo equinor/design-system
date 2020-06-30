@@ -8,7 +8,9 @@ import {
   Button,
   Icon,
   Divider,
+  TopBar,
 } from '@equinor/eds-core-react'
+
 import {
   folder,
   copy,
@@ -17,6 +19,7 @@ import {
   delete_to_trash,
   settings,
   arrow_drop_right,
+  more_verticle,
 } from '@equinor/eds-icons'
 
 Icon.add({
@@ -27,20 +30,22 @@ Icon.add({
   delete_to_trash,
   settings,
   arrow_drop_right,
+  more_verticle,
 })
 
 const { MenuItem, MenuLabel, MenuTitle } = Menu
+const { Actions, Header, CustomContent } = TopBar
+
 const Wrapper = styled.div`
+  margin: 32px;
   width: auto;
-  height: 100vh;
-  position: relative;
+  height: auto;
 `
 
-const Forced = styled.div.attrs({ tabIndex: 0 })`
-  height: min-content;
+const Anchor = styled.div.attrs({ tabIndex: 0 })`
   background: lightgrey;
-  padding: 8px;
-  width: min-content;
+  padding: 14px;
+  height: min-content;
   position: absolute;
 `
 
@@ -77,7 +82,7 @@ export const Examples = () => {
   return (
     <Wrapper>
       <>
-        <Forced
+        <Anchor
           id="anchor-topleft"
           aria-controls="menu-topleft"
           aria-haspopup="menu"
@@ -85,7 +90,7 @@ export const Examples = () => {
           style={{ left: 0, top: 0 }}
         >
           Top left
-        </Forced>
+        </Anchor>
         <Menu id="menu-topleft" open anchorEl={topLeft}>
           <MenuItem>
             <MenuLabel>
@@ -104,7 +109,7 @@ export const Examples = () => {
         </Menu>
       </>
       <>
-        <Forced
+        <Anchor
           id="anchor-topright"
           aria-controls="menu-topright"
           aria-haspopup="menu"
@@ -112,7 +117,7 @@ export const Examples = () => {
           style={{ top: 0, right: 0 }}
         >
           Top Right
-        </Forced>
+        </Anchor>
         <Menu id="menu-topright" open anchorEl={topRight}>
           <MenuItem>
             <MenuLabel>
@@ -131,7 +136,7 @@ export const Examples = () => {
         </Menu>
       </>
       <>
-        <Forced
+        <Anchor
           id="anchor-bottomleft"
           aria-controls="menu-bottomleft"
           aria-haspopup="menu"
@@ -139,7 +144,7 @@ export const Examples = () => {
           style={{ bottom: 0, left: 0 }}
         >
           Bottom Left
-        </Forced>
+        </Anchor>
         <Menu id="menu-bottomleft" open anchorEl={bottomLeft}>
           <MenuItem>
             <MenuLabel>
@@ -158,7 +163,7 @@ export const Examples = () => {
         </Menu>
       </>
       <>
-        <Forced
+        <Anchor
           id="anchor-bottomright"
           aria-controls="menu-bottomright"
           aria-haspopup="menu"
@@ -166,7 +171,7 @@ export const Examples = () => {
           style={{ bottom: 0, right: 0 }}
         >
           Bottom right
-        </Forced>
+        </Anchor>
         <Menu id="menu-bottomright" open anchorEl={bottomRight}>
           <MenuItem>
             <MenuLabel>
@@ -190,18 +195,19 @@ export const Examples = () => {
 
 export const ButtonToggle = () => {
   const [state, setState] = React.useState({
-    openMenu: false,
     focus: null,
     buttonEl: null,
   })
-  const { openMenu, focus, buttonEl } = state
+  const { focus, buttonEl } = state
 
   const toggleMenu = (e, focus = null) => {
-    setState({ ...state, openMenu: !openMenu, focus, buttonEl: e.target })
+    setState({ ...state, focus, buttonEl: !buttonEl ? e.target : null })
   }
 
   const onKeyPress = (e) => {
     const { key } = e
+    console.log('toggleMenu', key)
+
     switch (key) {
       case 'ArrowDown':
       case 'Enter':
@@ -219,11 +225,23 @@ export const ButtonToggle = () => {
     }
   }
 
+  const onGlobalKeyPress = (e) => {
+    const { key } = e
+
+    switch (key) {
+      case 'Escape':
+        toggleMenu({ target: null })
+        break
+      default:
+        break
+    }
+  }
+
   useEffect(() => {
-    document.addEventListener('keydown', onKeyPress, false)
+    document.addEventListener('keydown', onGlobalKeyPress, false)
 
     return () => {
-      document.removeEventListener('keydown', onKeyPress, false)
+      document.removeEventListener('keydown', onGlobalKeyPress, false)
     }
   }, [])
 
@@ -235,7 +253,7 @@ export const ButtonToggle = () => {
         id="menuButton"
         aria-controls="menu-on-button"
         aria-haspopup="menu"
-        aria-expanded={openMenu}
+        aria-expanded={Boolean(buttonEl)}
         onClick={toggleMenu}
         onKeyDown={onKeyPress}
       >
@@ -245,7 +263,7 @@ export const ButtonToggle = () => {
         id="menu-on-button"
         aria-labelledby="menuButton"
         focus={focus}
-        open={openMenu}
+        open={Boolean(buttonEl)}
         anchorEl={buttonEl}
       >
         <MenuItem>
@@ -278,6 +296,117 @@ export const ButtonToggle = () => {
           <span>Properties</span>
         </MenuItem>
       </Menu>
+    </Wrapper>
+  )
+}
+
+export const InTopbar = () => {
+  const [state, setState] = React.useState({
+    focus: null,
+    buttonEl: null,
+  })
+  const { focus, buttonEl } = state
+
+  const toggleMenu = (e, focus = null) => {
+    setState({ ...state, focus, buttonEl: !buttonEl ? e.target : null })
+  }
+
+  const onKeyPress = (e) => {
+    const { key } = e
+    console.log('toggleMenu', key)
+
+    switch (key) {
+      case 'ArrowDown':
+      case 'Enter':
+      case ' ':
+        toggleMenu(e, 'first')
+        break
+      case 'ArrowUp':
+        toggleMenu(e, 'last')
+        break
+      case 'Escape':
+        toggleMenu({ target: null })
+        break
+      default:
+        break
+    }
+  }
+
+  const onGlobalKeyPress = (e) => {
+    const { key } = e
+
+    switch (key) {
+      case 'Escape':
+        toggleMenu({ target: null })
+        break
+      default:
+        break
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', onGlobalKeyPress, false)
+
+    return () => {
+      document.removeEventListener('keydown', onGlobalKeyPress, false)
+    }
+  }, [])
+
+  return (
+    <Wrapper style={{ margin: 0 }}>
+      <TopBar>
+        <Header>Menu</Header>
+        <Actions>
+          <Button
+            variant="ghost_icon"
+            id="menuButton"
+            aria-controls="menu-on-button"
+            aria-haspopup="menu"
+            aria-expanded={Boolean(buttonEl)}
+            onClick={toggleMenu}
+            onKeyDown={onKeyPress}
+          >
+            <Icon name="more_verticle" title="more"></Icon>
+          </Button>
+          <Menu
+            id="menu-on-button"
+            aria-labelledby="menuButton"
+            focus={focus}
+            open={Boolean(buttonEl)}
+            anchorEl={buttonEl}
+          >
+            <MenuItem>
+              <Icon name="folder" />
+              <span>Open</span>
+              <span>CTRL+O</span>
+            </MenuItem>
+            <MenuItem active>
+              <Icon name="copy" />
+              <span>Copy</span>
+              <span>CTRL+C</span>
+            </MenuItem>
+            <MenuItem>
+              <Icon name="paste" />
+              <span>Paste</span>
+              <span>CTRL+V</span>
+            </MenuItem>
+            <MenuItem>
+              <Icon name="edit" />
+              <span>Rename</span>
+              <span>CTRL+R</span>
+            </MenuItem>
+            <MenuItem>
+              <span>Delete</span>
+              <Icon name="delete_to_trash" />
+            </MenuItem>
+            <Divider variant="small" />
+            <MenuItem>
+              <Icon name="settings" />
+              <span>Properties</span>
+            </MenuItem>
+          </Menu>
+        </Actions>
+      </TopBar>
     </Wrapper>
   )
 }
