@@ -8,13 +8,13 @@ import { MenuList } from './MenuList'
 const StyledPaper = styled(Paper)`
   position: absolute;
   z-index: 500;
-  ${({ left, top, open, transform }) =>
-    css({ left, top, transform, display: open ? 'block' : 'none' })}
   width: fit-content;
   min-width: fit-content;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  ${({ left, top, open, transform, visibility }) =>
+    css({ left, top, transform, visibility, display: open ? 'block' : 'none' })}
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
@@ -25,7 +25,7 @@ export const Menu = React.forwardRef(function EdsMenu(
     return undefined
   }
 
-  const { setPosition, position } = useMenu()
+  const { setPosition, position, visibility } = useMenu()
 
   useEffect(() => {
     if (anchorEl) {
@@ -37,6 +37,7 @@ export const Menu = React.forwardRef(function EdsMenu(
   // console.log(window)
   // console.log(rect)
   const paperProps = {
+    visibility,
     open,
     className,
     ...position,

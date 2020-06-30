@@ -31,13 +31,9 @@ Icon.add({
 
 const { MenuItem, MenuLabel, MenuTitle } = Menu
 const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
   width: auto;
-  height: 500px;
-  grid-gap: 32px;
-  grid-template-columns: auto min-content;
-  grid-template-rows: auto auto;
+  height: 100vh;
+  position: relative;
 `
 
 const Forced = styled.div.attrs({ tabIndex: 0 })`
@@ -45,6 +41,7 @@ const Forced = styled.div.attrs({ tabIndex: 0 })`
   background: lightgrey;
   padding: 8px;
   width: min-content;
+  position: absolute;
 `
 
 export default {
@@ -85,6 +82,7 @@ export const Examples = () => {
           aria-controls="menu-topleft"
           aria-haspopup="menu"
           ref={topLeftRef}
+          style={{ left: 0, top: 0 }}
         >
           Top left
         </Forced>
@@ -111,6 +109,7 @@ export const Examples = () => {
           aria-controls="menu-topright"
           aria-haspopup="menu"
           ref={topRightRef}
+          style={{ top: 0, right: 0 }}
         >
           Top Right
         </Forced>
@@ -137,6 +136,7 @@ export const Examples = () => {
           aria-controls="menu-bottomleft"
           aria-haspopup="menu"
           ref={bottomLeftRef}
+          style={{ bottom: 0, left: 0 }}
         >
           Bottom Left
         </Forced>
@@ -163,6 +163,7 @@ export const Examples = () => {
           aria-controls="menu-bottomright"
           aria-haspopup="menu"
           ref={bottomRightRef}
+          style={{ bottom: 0, right: 0 }}
         >
           Bottom right
         </Forced>

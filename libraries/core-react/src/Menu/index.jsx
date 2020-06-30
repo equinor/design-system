@@ -15,4 +15,8 @@ Menu.MenuItem = MenuItem
 Menu.MenuLabel = MenuLabel
 Menu.MenuTitle = MenuTitle
 
+Menu.propTypes = BaseMenu.propTypes
+Menu.defaultProps = BaseMenu.defaultProps
+Menu.displayName = BaseMenu.displayName
+
 export { Menu }

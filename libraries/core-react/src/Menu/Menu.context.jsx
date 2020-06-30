@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 
 const initalState = {
   focusedIndex: -1,
+  visibility: 'hidden',
   position: {
     top: 0,
     left: 0,
     transform: null,
+  },
+  anchor: {
+    height: 0,
+    width: 0,
   },
 }
 
@@ -33,39 +38,45 @@ MenuProvider.defaultProps = {}
 
 export const useMenu = () => {
   const [state, setState] = useContext(MenuContext)
-  const { focusedIndex, position } = state
-
+  const { focusedIndex, position, visibility } = state
+  const offset = 2
   const setFocusedIndex = (i) => {
     setState({ ...state, focusedIndex: i })
   }
 
-  const setPosition = (positionEl) => {
-    const { left, top, height } = positionEl
+  const setPosition = (bounding) => {
+    const { left, top, height, width } = bounding
 
     setState({
       ...state,
       position: {
         ...state.position,
-        top: top + height + 2,
+        top: top + height + offset,
         left: left,
+      },
+      anchor: {
+        height,
+        width,
       },
     })
   }
 
-  const setTransform = (positionEl, window) => {
+  const setTransform = (bounding, window) => {
     const { innerHeight, innerWidth } = window
-    const { right, bottom, width, height } = positionEl
-    let transform = null
+    const { right, bottom, width, height } = bounding
+
+    let transform = ''
     if (right > innerWidth) {
-      transform = `translateX(-${width}px)`
+      transform += `translateX(-${width - state.anchor.width}px)`
     }
 
     if (bottom > innerHeight) {
-      transform = `translateY(-${height}px)`
+      transform += `translateY(-${height + state.anchor.height + offset}px)`
     }
 
     setState({
       ...state,
+      visibility: 'visible',
       position: {
         ...state.position,
         transform,
@@ -79,6 +90,7 @@ export const useMenu = () => {
     setPosition,
     position,
     setTransform,
+    visibility,
   }
 }
 
