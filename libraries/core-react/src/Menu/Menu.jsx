@@ -7,7 +7,7 @@ import { MenuList } from './MenuList'
 
 const StyledPaper = styled(Paper)`
   position: absolute;
-  z-index: 500;
+  z-index: 1;
   width: fit-content;
   min-width: fit-content;
   overflow: hidden;
