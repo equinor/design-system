@@ -102,8 +102,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-algolia-docsearch`,
       options: {
-        apiKey: '25626fae796133dc1e734c6bcaaeac3c',
-        indexName: 'docsearch',
+        apiKey: '73fc0edd06a8031c699edfc560eaa013',
+        indexName: 'equinor_design-system',
         inputSelector: '#search', // required
         debug: false, // (bool) Optional. Default `false`
       },
