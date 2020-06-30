@@ -6,7 +6,15 @@
     "version": "0.1.0",
     "repository": "https://github.com/gatsbyjs/gatsby-starter-default",
     "native": false,
-    "themeConfig": {},
+    "themeConfig": {
+      "initialColorMode": "dark",
+      "showLiveError": false,
+      "showLivePreview": true,
+      "showPlaygroundEditor": false,
+      "showDarkModeSwitch": false,
+      "showMarkdownEditButton": true,
+      "useScopingInPlayground": false
+    },
     "separator": "-"
   },
   "entries": [
