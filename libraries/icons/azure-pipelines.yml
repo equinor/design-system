@@ -1,4 +1,4 @@
-name: eds-figma-broker-$(Build.BuildId)
+name: eds-icons-$(Build.BuildId)
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -10,7 +10,7 @@ trigger:
       - develop
   paths:
     include:
-      - apps/figma-broker
+      - libraries/icons
 
 pr:
   branches:
@@ -18,7 +18,7 @@ pr:
       - develop
   paths:
     include:
-      - apps/figma-broker
+      - libraries/icons
 
 steps:
   - task: NodeTool@0
@@ -29,8 +29,8 @@ steps:
   - script: npm install -g pnpm@next
     displayName: 'Install pnpm'
 
-  - script: pnpm --filter ./apps/figma-broker install
+  - script: pnpm --filter ./libraries/icons install
     displayName: 'Install dependencies'
 
-  - script: pnpm --filter ./apps/figma-broker run build
+  - script: pnpm --filter ./libraries/icons run build
     displayName: 'Run build'
