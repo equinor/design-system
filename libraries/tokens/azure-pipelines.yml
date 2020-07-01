@@ -1,9 +1,4 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-name: eds-react-$(Build.BuildId)
+name: eds-tokens-$(Build.BuildId)
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -15,7 +10,7 @@ trigger:
       - develop
   paths:
     include:
-      - libraries/core-react
+      - libraries/tokens
 
 pr:
   branches:
@@ -23,7 +18,7 @@ pr:
       - develop
   paths:
     include:
-      - libraries/core-react
+      - libraries/tokens
 
 steps:
   - task: NodeTool@0
@@ -38,17 +33,14 @@ steps:
       pnpm
       --filter eds
       --filter ./libraries/tokens
-      --filter ./libraries/icons
-      --filter ./libraries/core-react
       install
     displayName: 'Install dependencies'
 
-  - script: pnpm --filter ./libraries/core-react test
-    displayName: 'Run tests'
+  - script: pnpm --filter ./libraries/tokens run build
+    displayName: 'Run build'
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
-      ./libraries/core-react
-      --ext jsx
+      ./libraries/tokens
       --ext js
     displayName: 'Run eslint'
