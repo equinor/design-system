@@ -231,6 +231,8 @@ export const ButtonToggle = () => {
 
   const onGlobalKeyPress = (e) => {
     const { key } = e
+    console.log('onGlobalPress')
+
     switch (key) {
       case 'Escape':
         closeMenu()
@@ -240,13 +242,13 @@ export const ButtonToggle = () => {
     }
   }
 
-  useEffect(() => {
-    document.addEventListener('keydown', onGlobalKeyPress, false)
+  // useEffect(() => {
+  //   document.addEventListener('keydown', onGlobalKeyPress)
 
-    return () => {
-      document.removeEventListener('keydown', onGlobalKeyPress, false)
-    }
-  }, [])
+  //   return () => {
+  //     document.removeEventListener('keydown', onGlobalKeyPress)
+  //   }
+  // }, [])
 
   return (
     <Wrapper>
@@ -413,6 +415,45 @@ export const InTopbar = () => {
           </Menu>
         </Actions>
       </TopBar>
+    </Wrapper>
+  )
+}
+
+export const Custom = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const aRef = React.useRef()
+
+  useEffect(() => {
+    setAnchorEl(aRef.current)
+  }, [anchorEl])
+
+  return (
+    <Wrapper>
+      <>
+        <Anchor
+          id="anchor-topleft"
+          aria-controls="menu-topleft"
+          aria-haspopup="menu"
+          ref={aRef}
+        >
+          Anchor
+        </Anchor>
+        <Menu id="menu-topleft" open anchorEl={anchorEl}>
+          <Button variant="ghost_icon">
+            <Icon name="save" title="save"></Icon>
+          </Button>
+          <Button variant="ghost_icon">
+            <Icon name="folder" title="folder"></Icon>
+          </Button>
+          <Button variant="ghost_icon">
+            <Icon name="edit" title="edit"></Icon>
+          </Button>
+          <Button variant="ghost_icon">
+            <Icon name="settings" title="settings"></Icon>
+          </Button>
+        </Menu>
+      </>
     </Wrapper>
   )
 }
