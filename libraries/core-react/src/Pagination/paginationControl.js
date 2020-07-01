@@ -1,7 +1,19 @@
 import React, { useState } from 'react'
 
-export default function paginationControl(page, onChange, pages, ...other) {
-  const [pageState, setPageState] = useState(page)
+/* 
+
+SiblingCount / Siblings
+default 1 - visible pages before and after current page
+
+* Number of always visible pages at the beginning and end.
+   * @default 1
+  boundaryCount: PropTypes.number,
+
+*/
+
+export default function PaginationControl(props = {}) {
+  const { onChange: handleChange, page: pageProp, pages, ...other } = props
+  const [pageState, setPageState] = useState(null)
 
   const handleClick = (e, value) => {
     if (!page) {

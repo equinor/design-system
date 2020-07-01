@@ -26,13 +26,6 @@ const Navigation = styled.nav`
 `
 
 const UnorderedList = styled.ul`
-    /* ${gridColumnsTemplate(((columns) => columns, 48px))} */
-  /* ${({ columns }) =>
-    css`
-      grid-template-columns: repeat(${columns}, 48px);
-      margin: ${columns};
-    `} */
-grid-template-columns: repeat(7, 48px);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -70,15 +63,12 @@ export const Pagination = forwardRef(function Pagination(
   ref,
 ) {
   const columns = pages < 5 ? pages + 2 : 7
-  const gridTemplate = `repeat(${columns}, 48px)`
 
-  console.log(columns)
   const props = {
     ref,
     pages,
     total,
     switcher,
-    gridTemplate,
     columns,
     className,
     ...other,
@@ -94,7 +84,11 @@ export const Pagination = forwardRef(function Pagination(
           <option>option 2</option>
         </select>
       )}
-      <UnorderedList>
+      <UnorderedList
+        style={{
+          gridTemplateColumns: 'repeat(' + columns + ', 48px)',
+        }}
+      >
         <StyledButton variant="ghost_icon">
           <Icon name="chevron_left" title="previous" />
         </StyledButton>
@@ -127,6 +121,7 @@ Pagination.propTypes = {
   total: PropTypes.bool,
   // Dropdown menu to select amount of items per page
   switcher: PropTypes.bool,
+  // Callback fired when page is changed
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -138,4 +133,5 @@ Pagination.defaultProps = {
   children: undefined,
   total: false,
   switcher: false,
+  onChange: () => {},
 }
