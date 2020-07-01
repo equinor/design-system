@@ -65,7 +65,8 @@ Menu.propTypes = {
   left: PropTypes.number,
   /** Position from top */
   top: PropTypes.number,
-  /** @ignore */
+  /** onClose handler */
+  onClose: PropTypes.func,
 }
 
 Menu.defaultProps = {
@@ -75,6 +76,7 @@ Menu.defaultProps = {
   open: false,
   top: 0,
   left: 0,
+  onClose: () => {},
 }
 
 Menu.displayName = 'eds-menu'

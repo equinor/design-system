@@ -34,7 +34,7 @@ Icon.add({
 })
 
 const { MenuItem, MenuLabel, MenuTitle } = Menu
-const { Actions, Header, CustomContent } = TopBar
+const { Actions, Header } = TopBar
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -195,7 +195,7 @@ export const Examples = () => {
 
 export const ButtonToggle = () => {
   const [state, setState] = React.useState({
-    focus: undefined,
+    focus: 'first',
     buttonEl: null,
   })
   const onClick = action('onClick')
@@ -203,29 +203,26 @@ export const ButtonToggle = () => {
   const { focus, buttonEl } = state
   const isOpen = Boolean(buttonEl)
 
-  const toggleMenu = (e, focus) => {
-    setState({ ...state, focus, buttonEl: isOpen ? null : e.target })
-  }
+  const openMenu = (e) => setState({ ...state, buttonEl: e.target })
+
+  const closeMenu = () => setState({ ...state, buttonEl: null })
+
+  console.log(focus)
 
   const onKeyPress = (e) => {
     const { key } = e
-
+    console.log('onKeyPress')
     switch (key) {
       case 'ArrowDown':
       case 'Enter':
       case ' ':
-        console.log('toggleMenu first case')
-
-        toggleMenu(e, 'first')
+        isOpen ? closeMenu() : openMenu(e, 'first')
         break
       case 'ArrowUp':
-        console.log('toggleMenu second case')
-
-        toggleMenu(e, 'last')
+        isOpen ? closeMenu() : openMenu(e, 'last')
         break
       case 'Escape':
-        console.log('local')
-        toggleMenu({ target: null })
+        closeMenu()
         break
       default:
         break
@@ -236,8 +233,7 @@ export const ButtonToggle = () => {
     const { key } = e
     switch (key) {
       case 'Escape':
-        console.log('global')
-        toggleMenu({ target: null })
+        closeMenu()
         break
       default:
         break
@@ -261,7 +257,7 @@ export const ButtonToggle = () => {
         aria-controls="menu-on-button"
         aria-haspopup="menu"
         aria-expanded={isOpen}
-        onClick={toggleMenu}
+        onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
         onKeyDown={onKeyPress}
       >
         Menu
@@ -272,6 +268,7 @@ export const ButtonToggle = () => {
         focus={focus}
         open={isOpen}
         anchorEl={buttonEl}
+        onClose={closeMenu}
       >
         <MenuItem onClick={onClick}>
           <Icon name="folder" />

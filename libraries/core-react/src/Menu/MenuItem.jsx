@@ -83,10 +83,10 @@ const Anchor = styled.div`
 
 export const MenuItem = React.memo(
   React.forwardRef(function EdsMenuItem(
-    { children, disabled, index, onClick, ...rest },
+    { children, disabled, index, onClick, onClose, ...rest },
     ref,
   ) {
-    const { focusedIndex, setFocusedIndex, setOpen } = useMenu()
+    const { focusedIndex, setFocusedIndex } = useMenu()
 
     const toggleFocus = (index_) => {
       if (focusedIndex !== index_) {
@@ -109,6 +109,7 @@ export const MenuItem = React.memo(
         onClick={(e) => {
           if (!disabled) {
             onClick(e)
+            onClose(e)
           }
         }}
       >
@@ -134,6 +135,8 @@ MenuItem.propTypes = {
   disabled: PropTypes.bool,
   /** onClick handler */
   onClick: PropTypes.func,
+  /** onClose handler */
+  onClose: PropTypes.func,
 }
 
 MenuItem.defaultProps = {
@@ -142,6 +145,7 @@ MenuItem.defaultProps = {
   disabled: false,
   index: 0,
   onClick: () => {},
+  onClose: () => {},
 }
 
 MenuItem.displayName = 'eds-menu-item'
