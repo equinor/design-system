@@ -84,6 +84,12 @@ export const useMenu = () => {
     })
   }
 
+  const setOpen = (open) =>
+    setState({
+      ...state,
+      open,
+    })
+
   return {
     setFocusedIndex,
     focusedIndex,
@@ -91,6 +97,7 @@ export const useMenu = () => {
     position,
     setTransform,
     visibility,
+    setOpen,
   }
 }
 

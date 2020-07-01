@@ -21,7 +21,7 @@ const {
 } = tokens
 
 const ListItem = styled.li.attrs(({ disabled }) => ({
-  role: 'none',
+  role: 'menuitem',
   tabIndex: disabled ? -1 : 0,
 }))`
   width: auto;
@@ -70,7 +70,7 @@ const ListItem = styled.li.attrs(({ disabled }) => ({
         `}
 `
 
-const Anchor = styled.span.attrs({ role: 'menuitem' })`
+const Anchor = styled.div`
   position: relative;
   width: auto;
   display: grid;
@@ -83,10 +83,10 @@ const Anchor = styled.span.attrs({ role: 'menuitem' })`
 
 export const MenuItem = React.memo(
   React.forwardRef(function EdsMenuItem(
-    { children, disabled, index, ...rest },
+    { children, disabled, index, onClick, ...rest },
     ref,
   ) {
-    const { focusedIndex, setFocusedIndex } = useMenu()
+    const { focusedIndex, setFocusedIndex, setOpen } = useMenu()
 
     const toggleFocus = (index_) => {
       if (focusedIndex !== index_) {
@@ -106,6 +106,11 @@ export const MenuItem = React.memo(
         {...props}
         ref={useCombinedRefs(ref, (el) => isFocused && el.focus())}
         onFocus={() => toggleFocus(index)}
+        onClick={(e) => {
+          if (!disabled) {
+            onClick(e)
+          }
+        }}
       >
         <Anchor>{children}</Anchor>
       </ListItem>
@@ -127,6 +132,8 @@ MenuItem.propTypes = {
   active: PropTypes.bool,
   /** Disabled Menu Item */
   disabled: PropTypes.bool,
+  /** onClick handler */
+  onClick: PropTypes.func,
 }
 
 MenuItem.defaultProps = {
@@ -134,6 +141,7 @@ MenuItem.defaultProps = {
   active: false,
   disabled: false,
   index: 0,
+  onClick: () => {},
 }
 
 MenuItem.displayName = 'eds-menu-item'

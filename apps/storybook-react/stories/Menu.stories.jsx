@@ -195,29 +195,36 @@ export const Examples = () => {
 
 export const ButtonToggle = () => {
   const [state, setState] = React.useState({
-    focus: null,
+    focus: undefined,
     buttonEl: null,
   })
-  const { focus, buttonEl } = state
+  const onClick = action('onClick')
 
-  const toggleMenu = (e, focus = null) => {
-    setState({ ...state, focus, buttonEl: !buttonEl ? e.target : null })
+  const { focus, buttonEl } = state
+  const isOpen = Boolean(buttonEl)
+
+  const toggleMenu = (e, focus) => {
+    setState({ ...state, focus, buttonEl: isOpen ? null : e.target })
   }
 
   const onKeyPress = (e) => {
     const { key } = e
-    console.log('toggleMenu', key)
 
     switch (key) {
       case 'ArrowDown':
       case 'Enter':
       case ' ':
+        console.log('toggleMenu first case')
+
         toggleMenu(e, 'first')
         break
       case 'ArrowUp':
+        console.log('toggleMenu second case')
+
         toggleMenu(e, 'last')
         break
       case 'Escape':
+        console.log('local')
         toggleMenu({ target: null })
         break
       default:
@@ -227,9 +234,9 @@ export const ButtonToggle = () => {
 
   const onGlobalKeyPress = (e) => {
     const { key } = e
-
     switch (key) {
       case 'Escape':
+        console.log('global')
         toggleMenu({ target: null })
         break
       default:
@@ -253,7 +260,7 @@ export const ButtonToggle = () => {
         id="menuButton"
         aria-controls="menu-on-button"
         aria-haspopup="menu"
-        aria-expanded={Boolean(buttonEl)}
+        aria-expanded={isOpen}
         onClick={toggleMenu}
         onKeyDown={onKeyPress}
       >
@@ -263,35 +270,35 @@ export const ButtonToggle = () => {
         id="menu-on-button"
         aria-labelledby="menuButton"
         focus={focus}
-        open={Boolean(buttonEl)}
+        open={isOpen}
         anchorEl={buttonEl}
       >
-        <MenuItem>
+        <MenuItem onClick={onClick}>
           <Icon name="folder" />
           <span>Open</span>
           <span>CTRL+O</span>
         </MenuItem>
-        <MenuItem active>
+        <MenuItem active onClick={onClick}>
           <Icon name="copy" />
           <span>Copy</span>
           <span>CTRL+C</span>
         </MenuItem>
-        <MenuItem>
+        <MenuItem disabled onClick={onClick}>
           <Icon name="paste" />
           <span>Paste</span>
           <span>CTRL+V</span>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={onClick}>
           <Icon name="edit" />
           <span>Rename</span>
           <span>CTRL+R</span>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={onClick}>
           <span>Delete</span>
           <Icon name="delete_to_trash" />
         </MenuItem>
         <Divider variant="small" />
-        <MenuItem>
+        <MenuItem onClick={onClick}>
           <Icon name="settings" />
           <span>Properties</span>
         </MenuItem>
@@ -302,18 +309,20 @@ export const ButtonToggle = () => {
 
 export const InTopbar = () => {
   const [state, setState] = React.useState({
-    focus: null,
+    focus: undefined,
     buttonEl: null,
   })
   const { focus, buttonEl } = state
 
-  const toggleMenu = (e, focus = null) => {
+  const toggleMenu = (e, focus) => {
+    const isOpen = buttonEl
+    console.log('toggleMenu', isOpen)
+
     setState({ ...state, focus, buttonEl: !buttonEl ? e.target : null })
   }
 
   const onKeyPress = (e) => {
     const { key } = e
-    console.log('toggleMenu', key)
 
     switch (key) {
       case 'ArrowDown':
@@ -355,7 +364,7 @@ export const InTopbar = () => {
   return (
     <Wrapper style={{ margin: 0 }}>
       <TopBar>
-        <Header>Menu</Header>
+        <Header>Menu in Topbar</Header>
         <Actions>
           <Button
             variant="ghost_icon"

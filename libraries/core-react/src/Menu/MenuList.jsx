@@ -61,6 +61,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
 
   const handleKeyPress = (event) => {
     const { key } = event
+    event.stopPropagation()
 
     if (key === 'ArrowDown') {
       handleMenuItemChange('down', firstFocusIndex)
