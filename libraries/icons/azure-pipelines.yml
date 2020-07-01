@@ -29,8 +29,18 @@ steps:
   - script: npm install -g pnpm@next
     displayName: 'Install pnpm'
 
-  - script: pnpm --filter ./libraries/icons install
+  - script: >-
+      pnpm
+      --filter eds
+      --filter ./libraries/icons
+      install
     displayName: 'Install dependencies'
 
   - script: pnpm --filter ./libraries/icons run build
     displayName: 'Run build'
+
+  - script: >-
+      ./node_modules/eslint/bin/eslint.js
+      ./libraries/icons
+      --ext js
+    displayName: 'Run eslint'

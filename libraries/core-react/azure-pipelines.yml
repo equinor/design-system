@@ -48,7 +48,7 @@ steps:
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
-      ./libraries/core-react/**/*.{jsx,js}
-      --ignore-pattern 'node_modules'
-      --ignore-pattern 'dist'
+      ./libraries/core-react
+      --ext jsx
+      --ext js
     displayName: 'Run eslint'

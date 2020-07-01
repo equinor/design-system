@@ -29,8 +29,18 @@ steps:
   - script: npm install -g pnpm@next
     displayName: 'Install pnpm'
 
-  - script: pnpm --filter ./libraries/tokens install
+  - script: >-
+      pnpm
+      --filter eds
+      --filter ./libraries/tokens
+      install
     displayName: 'Install dependencies'
 
   - script: pnpm --filter ./libraries/tokens run build
     displayName: 'Run build'
+
+  - script: >-
+      ./node_modules/eslint/bin/eslint.js
+      ./libraries/tokens
+      --ext js
+    displayName: 'Run eslint'

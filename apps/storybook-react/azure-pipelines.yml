@@ -9,7 +9,7 @@ trigger:
   batch: 'true'
   tags:
     include:
-    - storybook-react
+      - storybook-react
   branches:
     include:
       - develop
@@ -36,6 +36,24 @@ variables:
     value: /apps/storybook-react
 
 steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - script: npm install -g pnpm@next
+    displayName: 'Install pnpm'
+
+  - script: pnpm --filter eds install
+    displayName: 'Install root dependencies'
+
+  - script: >-
+      ./node_modules/eslint/bin/eslint.js
+      ./apps/storybook-react
+      --ext jsx
+      --ext js
+    displayName: 'Run eslint'
+
   - script: docker build -f .$(ROOT_FOLDER)/Dockerfile.dev -t $(IMAGE_NAME) .
     displayName: 'Docker build'
 
