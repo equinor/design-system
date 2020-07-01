@@ -13,7 +13,7 @@ const {
   },
 } = tokens
 
-export const MenuTitle = styled.span`
+export const MenuTitle = styled.div`
   ${({ disabled }) =>
     disabled
       ? css`
