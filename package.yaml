@@ -2,7 +2,7 @@ name: eds
 engines:
   pnpm: '>=4'
 scripts:
-  lint: 'eslint ./libraries/**/*.{jsx,js}'
+  lint: 'eslint . --ext jsx --ext js'
   init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
   'bump:core-react': >-
