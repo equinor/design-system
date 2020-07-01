@@ -6,6 +6,7 @@ While the design system itself lives in [Figma][], this repository contains impl
 
 ## Table of contents
 
+- [Status](#status)
 - [Figma](#figma)
 - [Storefront](#storefront)
 - [React](#react)
@@ -16,6 +17,21 @@ While the design system itself lives in [Figma][], this repository contains impl
 - [Contribute](#contribute)
 - [Getting started](#getting-started)
 - [Get in touch](#get-in-touch)
+
+## Status
+
+| Package | Status | Version |
+|--|--|--|
+| [Core React](https://github.com/equinor/design-system/tree/develop/libraries/core-react) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/react-tests?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=15&branchName=develop) | [![Version](https://img.shields.io/npm/v/@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react) |
+| [Tokens](https://github.com/equinor/design-system/tree/develop/libraries/tokens) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/tokens?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=17&branchName=develop) | [![Version](https://img.shields.io/npm/v/@equinor/eds-tokens)](https://www.npmjs.com/package/@equinor/eds-tokens)|
+| [Icons](https://github.com/equinor/design-system/tree/develop/libraries/icons) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/icons?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=16&branchName=develop) | [![Version](https://img.shields.io/npm/v/@equinor/eds-icons)](https://www.npmjs.com/package/@equinor/eds-icons)|
+| [Figma broker](https://github.com/equinor/design-system/tree/develop/apps/figma-broker) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/figma-broker?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=18&branchName=develop) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/develop/apps/figma-broker/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/figma-broker) |
+| [Storybook React](https://github.com/equinor/design-system/tree/develop/apps/storybook-react) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/storybook-react?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=12&branchName=develop) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/develop/apps/storybook-react/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/storybook-react) |
+| [Storefront](https://github.com/equinor/design-system/tree/develop/apps/storefront) (dev) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/storefront-dev?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=9&branchName=develop) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/develop/apps/storefront/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/storefront) |
+| [Storefront](https://github.com/equinor/design-system/tree/develop/apps/storefront) (prod) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/storefront-production?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=8&branchName=develop) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/develop/apps/storefront/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/storefront) |
+| [Storefront (redesign)](https://github.com/equinor/design-system/tree/storefront/apps/storefront) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/storefront-redesign?branchName=storefront)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=14&branchName=storefront) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/storefront/apps/storefront/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/storefront) |
+
+
 
 ## Figma
 
