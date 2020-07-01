@@ -7,7 +7,6 @@ import { Icon } from '../Icon'
 import { PaginationItem } from './PaginationItem'
 import { pagination as tokens } from './Pagination.tokens'
 import { chevron_left, chevron_right } from '@equinor/eds-icons'
-import { gridColumnsTemplate } from '../_common/templates'
 
 //import { paginationControl } from './paginationControl'
 
@@ -46,9 +45,9 @@ function getAriaLabel(page, selected) {
   return `${selected ? 'Current page, ' : 'Go to '}page ${page}`
 }
 
-function paginationControl(pages) {
+function paginationControl(totalItems) {
   let itemList = []
-  for (let i = 1; i <= pages; i++) {
+  for (let i = 1; i <= totalItems; i++) {
     itemList.push({
       page: i,
       selected: false,
@@ -59,23 +58,31 @@ function paginationControl(pages) {
 }
 
 export const Pagination = forwardRef(function Pagination(
-  { pages, total, switcher, className, ...other },
+  { totalItems, showTotalItems, switcher, className, onChange, ...other },
   ref,
 ) {
-  const columns = pages < 5 ? pages + 2 : 7
+  const columns = totalItems < 5 ? totalItems + 2 : 7
 
   const props = {
     ref,
-    pages,
-    total,
+    totalItems,
+    showTotalItems,
     switcher,
     columns,
+    onChange,
     className,
     ...other,
   }
-  const items = paginationControl(pages)
+  const items = paginationControl(totalItems)
   //const items = paginationControl(...props)
+  const range = (start, end) => {
+    const length = end - start + 1
+    return Array.from({ length }, (_, i) => start + i)
+  }
 
+  const startPages = range(1, Math.min(1, totalItems))
+  const endPages = range(Math.max(totalItems - 1 + 1, 1 + 1), totalItems)
+  console.log(startPages, endPages)
   return (
     <Navigation aria-label="pagination" {...props}>
       {switcher && (
@@ -115,13 +122,16 @@ export const Pagination = forwardRef(function Pagination(
 Pagination.displayName = 'eds-pagination'
 
 Pagination.propTypes = {
-  // Number of pages
-  pages: PropTypes.number.isRequired,
-  // Shows total item count
-  total: PropTypes.bool,
-  // Dropdown menu to select amount of items per page
+  // Number of total items to be paginated
+  totalItems: PropTypes.number.isRequired,
+  // Display total item count
+  showTotalItems: PropTypes.bool,
+  // Choose number of items per page
+  itemsPerPage: PropTypes.number,
+  // Display dropdown menu for user to choose items per page
   switcher: PropTypes.bool,
   // Callback fired when page is changed
+  onChange: PropTypes.func,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -131,7 +141,8 @@ Pagination.propTypes = {
 Pagination.defaultProps = {
   className: '',
   children: undefined,
-  total: false,
+  showTotalItems: false,
   switcher: false,
   onChange: () => {},
+  itemsPerPage: 20,
 }

@@ -9,23 +9,28 @@ default 1 - visible pages before and after current page
    * @default 1
   boundaryCount: PropTypes.number,
 
+  Count = PAGES
+
+  page = current page
+
 */
 
 export default function PaginationControl(props = {}) {
   const { onChange: handleChange, page: pageProp, pages, ...other } = props
+
   const [pageState, setPageState] = useState(null)
 
   const handleClick = (e, value) => {
-    if (!page) {
+    if (!pageProp) {
       setPageState(value)
     }
     if (onChange) {
       onChange(e, value)
     }
+  }
 
-    return {
-      items,
-      ...other,
-    }
+  return {
+    items,
+    ...other,
   }
 }

@@ -3,7 +3,7 @@ import { tokens } from '@equinor/eds-tokens'
 const {
   colors: {
     interactive: {
-      primary__selected_highlight: { rgba: activeColor },
+      primary__selected_highlight: { rgba: selectedColor },
     },
   },
   spacings: {
@@ -12,6 +12,6 @@ const {
 } = tokens
 
 export const pagination = {
-  activeColor,
+  selectedColor,
   spacingSmall,
 }

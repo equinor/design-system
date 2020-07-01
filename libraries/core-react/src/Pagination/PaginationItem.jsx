@@ -8,7 +8,7 @@ import { pagination as tokens } from './Pagination.tokens'
 
 const StyledButton = styled(Button)`
   /* display: inline-grid; */
-  background: ${(active) => (active ? tokens.activeColor : null)};
+  background: ${(selected) => (selected ? tokens.selectedColor : null)};
 `
 
 export const PaginationItem = forwardRef(function PaginationItem(
