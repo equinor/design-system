@@ -10,9 +10,7 @@ const StyledPaper = styled(Paper)`
   z-index: 1;
   width: fit-content;
   min-width: fit-content;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+
   ${({ left, top, open, transform, visibility }) =>
     css({ left, top, transform, visibility, display: open ? 'block' : 'none' })}
 `
@@ -34,8 +32,6 @@ export const Menu = React.forwardRef(function EdsMenu(
     }
   }, [anchorEl])
 
-  // console.log(window)
-  // console.log(rect)
   const paperProps = {
     visibility,
     open,
