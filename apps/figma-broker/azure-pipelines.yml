@@ -34,3 +34,10 @@ steps:
 
   - script: pnpm --filter ./apps/figma-broker run build
     displayName: 'Run build'
+
+  - script: >-
+      ./node_modules/eslint/bin/eslint.js
+      ./apps/figma-broker/**/*.js
+      --no-ignore
+      --ignore-pattern 'node_modules'
+    displayName: 'Run eslint'
