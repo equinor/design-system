@@ -58,10 +58,21 @@ function paginationControl(totalItems) {
 }
 
 export const Pagination = forwardRef(function Pagination(
-  { totalItems, showTotalItems, switcher, className, onChange, ...other },
+  {
+    totalItems,
+    showTotalItems,
+    itemsPerPage,
+    switcher,
+    className,
+    onChange,
+    ...other
+  },
   ref,
 ) {
-  const columns = totalItems < 5 ? totalItems + 2 : 7
+  const [activePage, setActivePage] = useState(1)
+  const pages = Math.ceil(totalItems / itemsPerPage)
+
+  const columns = pages < 5 ? pages + 2 : 7
 
   const props = {
     ref,
@@ -73,7 +84,7 @@ export const Pagination = forwardRef(function Pagination(
     className,
     ...other,
   }
-  const items = paginationControl(totalItems)
+  const items = paginationControl(pages)
   //const items = paginationControl(...props)
   const range = (start, end) => {
     const length = end - start + 1
