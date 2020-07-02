@@ -14,6 +14,7 @@ While the design system itself lives in [Figma][], this repository contains impl
 - [Tokens](#tokens)
 - [Fonts](#fonts)
 - [Logo](#logo)
+- [Browser support](#browser-support)
 - [Contribute](#contribute)
 - [Getting started](#getting-started)
 - [Get in touch](#get-in-touch)
@@ -161,6 +162,10 @@ When it comes to the Equinor logo, we have two versions – primary and horizont
 <img src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#red" alt="Equinor" />
 ```
 
+
+## Browser support
+
+We support the most up to date version of evergreen browsers (browsers that auto-update), which means Chrome, Safari, Firefox and (Chromium) Edge.
 
 
 ## Contributions
