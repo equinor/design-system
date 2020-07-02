@@ -21,3 +21,12 @@ body {
   margin: 0;
   overflow-y: scroll;
 }
+
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+.focus-visible {
+  outline: 1px dashed rgba(0, 112, 121, 1);
+  outline-offset: 2px;
+  z-index: 10;
+}
