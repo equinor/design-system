@@ -18,6 +18,7 @@ dependencies:
   gatsby-plugin-offline: 3.2.13_gatsby@2.23.11
   gatsby-plugin-react-helmet: 3.3.6_993adaf5fdbf2e053c0592c4c80d507b
   gatsby-plugin-sharp: 2.6.14_gatsby@2.23.11
+  gatsby-plugin-styled-components: 3.3.9_285d18b74f1d57c581fe31cfe6904cbd
   gatsby-react-router-scroll: 3.0.7_3914268316c542370cbb046de235e031
   gatsby-source-filesystem: 2.3.14_gatsby@2.23.11
   gatsby-theme-docz: 2.3.1_c95255344fcbf6b4c2c4015e2d9e0f3f
@@ -7838,6 +7839,20 @@ packages:
       gatsby: '>2.0.15'
     resolution:
       integrity: sha512-wymSLcssMgaVYl7c5gQVPv+iSU8LQdO5RLp8XaCxi+cmtA/XR1HEM0IZsEzywGDosOrIKWSXdVXI0tkROFbqRg==
+  /gatsby-plugin-styled-components/3.3.9_285d18b74f1d57c581fe31cfe6904cbd:
+    dependencies:
+      '@babel/runtime': 7.10.4
+      gatsby: 2.23.11_2dcfde0f243a368a75ab81c0fec33b58
+      styled-components: 5.1.1_479e60ee9c1aa71dc1eb81036e3619dc
+    dev: false
+    engines:
+      node: '>=10.13.0'
+    peerDependencies:
+      babel-plugin-styled-components: '>1.5.0'
+      gatsby: ^2.0.32
+      styled-components: '>=2.0.0'
+    resolution:
+      integrity: sha512-edu7L5Xxf5yliXQEVOOfUqvlPN/ROuVMFDMt7ZCm9bgwzqlf6ku6PKMqSKWP6BBG5IFDu8ceWiRlbuspn5BnTQ==
   /gatsby-plugin-typescript/2.4.8_gatsby@2.23.11:
     dependencies:
       '@babel/core': 7.10.3
@@ -17795,6 +17810,7 @@ specifiers:
   gatsby-plugin-offline: ^3.2.12
   gatsby-plugin-react-helmet: ^3.3.5
   gatsby-plugin-sharp: ^2.6.13
+  gatsby-plugin-styled-components: ^3.3.9
   gatsby-react-router-scroll: ^3.0.7
   gatsby-source-filesystem: ^2.3.13
   gatsby-theme-docz: ^2.3.1
