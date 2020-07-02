@@ -57,6 +57,9 @@ function paginationControl(totalItems) {
   return itemList
 }
 
+const LEFT_PAGE = 'LEFT'
+const RIGHT_PAGE = 'RIGHT'
+
 export const Pagination = forwardRef(function Pagination(
   {
     totalItems,
@@ -70,9 +73,31 @@ export const Pagination = forwardRef(function Pagination(
   ref,
 ) {
   const [activePage, setActivePage] = useState(1)
-  const pages = Math.ceil(totalItems / itemsPerPage)
 
-  const columns = pages < 5 ? pages + 2 : 7
+  const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
+
+  const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
+  console.log(pages)
+
+  const items = paginationControl(pages)
+  const siblings = 2 // neighboring items on both sides of current page
+
+  const range = (start, end) => {
+    const length = end - start + 1
+    return Array.from({ length }, (_, i) => start + i)
+  }
+
+  if (pages > 5) {
+    const startPages = range(1, Math.min(1, pages))
+    const endPages = range(Math.max(pages - 2, 2), pages)
+
+    const startPage = Math.max(2, activePage - siblings)
+    const endPage = Math.min(pages - 1, activePage + siblings)
+
+    let pageRange = range(startPage, endPage)
+    console.log('range', pageRange, startPage, endPage, startPages, endPages)
+    console.log(pages, columns)
+  }
 
   const props = {
     ref,
@@ -84,16 +109,7 @@ export const Pagination = forwardRef(function Pagination(
     className,
     ...other,
   }
-  const items = paginationControl(pages)
-  //const items = paginationControl(...props)
-  const range = (start, end) => {
-    const length = end - start + 1
-    return Array.from({ length }, (_, i) => start + i)
-  }
 
-  const startPages = range(1, Math.min(1, totalItems))
-  const endPages = range(Math.max(totalItems - 1 + 1, 1 + 1), totalItems)
-  console.log(startPages, endPages)
   return (
     <Navigation aria-label="pagination" {...props}>
       {switcher && (

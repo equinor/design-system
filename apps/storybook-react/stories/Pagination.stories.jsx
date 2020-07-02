@@ -27,9 +27,9 @@ export default {
 
 export const variants = () => (
   <Body>
-    <Pagination pages={5} />
-    <Pagination pages={5} total />
-    <Pagination pages={5} total switcher />
+    <Pagination totalItems={20} />
+    <Pagination totalItems={80} total />
+    <Pagination totalItems={140} total switcher />
   </Body>
 )
 
