@@ -1,0 +1,23 @@
+:root {
+  --borderColor: lightgrey;
+  --backgroundColor: white;
+  --Sidebar-backgroundColor: white;
+  --Sidebar-activeLink-backgroundColor: gainsboro;
+  --Sidebar-shadowColor: #666;
+  --Banner-height: 64px;
+  --Header-height: 160px;
+  --Toc-width: 167px;
+  --Sidebar-width: 240px;
+  --black: #333;
+  --grey-medium: #dcdcdc;
+  --moss-green: #007079;
+  --pale-green: #deedee;
+  --tab-backgroundColor: #fff;
+  --tab-isSelected-backgroundColor: var(--Sidebar-activeLink-backgroundColor);
+  --tab-borderColor: var(--borderColor);
+}
+
+body {
+  margin: 0;
+  overflow-y: scroll;
+}

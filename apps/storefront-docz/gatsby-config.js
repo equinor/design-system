@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Equinor Design System`,
+    author: 'EDS Core team',
+    description:
+      'The EDS is the official design system of Equinor The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions.',
   },
   plugins: [
     `gatsby-theme-docz`,
@@ -25,7 +26,24 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    'gatsby-transformer-yaml',
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-algolia-docsearch`,
+      options: {
+        apiKey: '73fc0edd06a8031c699edfc560eaa013',
+        indexName: 'equinor_design-system',
+        inputSelector: '#search', // required
+        debug: false, // (bool) Optional. Default `false`
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
