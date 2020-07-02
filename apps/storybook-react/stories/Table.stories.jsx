@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Typography } from '@equinor/eds-core-react'
+import { Table, Typography, Tooltip } from '@equinor/eds-core-react'
 import './../style.css'
 
 const { Body, Row, Cell, Head } = Table
@@ -39,7 +39,9 @@ export const simpleTable = () => (
             <Row>
               <Cell>Darth Vader</Cell>
               <Cell>Sith</Cell>
-              <Cell variant="numeric">59</Cell>
+              <Cell variant="numeric">
+                <Tooltip title="Darth Vader sucks">59</Tooltip>
+              </Cell>
             </Row>
           </Body>
         </Table>

@@ -7,7 +7,6 @@ import { tooltip as tokens } from './Tooltip.tokens'
 const Anchor = styled.div`
   position: relative;
   display: flex;
-  width: auto;
   justify-content: center;
 `
 
@@ -20,10 +19,10 @@ const StyledTooltipWrapper = styled.div`
       left: ${left};
       transform: ${transform};
     `}
-  width: auto;
   position: absolute;
   z-index: 500;
   flex-shrink: 0;
+  white-space: nowrap;
   ::after {
     content: '';
   }

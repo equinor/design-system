@@ -144,7 +144,7 @@ export const WithKnobs = () => {
         <Typography variant="h3">With knobs</Typography>
       </TextWrapper>
       <Wrapper>
-        <Tooltip title={title} placement={placement}>
+        <Tooltip open title={title} placement={placement}>
           {ANCHOR_CHOICES[anchor]}
         </Tooltip>
       </Wrapper>
