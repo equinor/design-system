@@ -6,7 +6,15 @@
     "version": "0.1.0",
     "repository": "https://github.com/gatsbyjs/gatsby-starter-default",
     "native": false,
-    "themeConfig": {},
+    "themeConfig": {
+      "initialColorMode": "light",
+      "showLiveError": false,
+      "showLivePreview": true,
+      "showPlaygroundEditor": true,
+      "showDarkModeSwitch": true,
+      "showMarkdownEditButton": true,
+      "useScopingInPlayground": false
+    },
     "separator": "-"
   },
   "entries": [
@@ -15,7 +23,7 @@
       "value": {
         "id": "04c6e90faac2675aa89e2176d2eec7d8",
         "filepath": "README.md",
-        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/eds-fork-fix/apps/storefront-docz/README.md",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/storefront-docz/apps/storefront-docz/README.md",
         "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/README.md",
         "hidden": false,
         "slug": "readme",
@@ -49,24 +57,790 @@
     {
       "key": "docs/index.mdx",
       "value": {
-        "name": "Getting Started",
+        "name": "Home",
+        "mode": "publish",
         "route": "/",
         "id": "73498ad0e1e62a714b08085d318f9de1",
         "filepath": "docs/index.mdx",
-        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/eds-fork-fix/apps/storefront-docz/docs/index.mdx",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/storefront-docz/apps/storefront-docz/docs/index.mdx",
         "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/docs/index.mdx",
         "hidden": false,
         "slug": "docs-index",
         "menu": "",
+        "headings": []
+      }
+    },
+    {
+      "key": "docs/getting-started/about/about.mdx",
+      "value": {
+        "title": "About",
+        "mode": "publish",
+        "toc": [
+          "Goals",
+          "Principles"
+        ],
+        "route": "/getting-started/about",
+        "menu": "Getting started",
+        "id": "a686e9d90008201fa737afd0433eefd2",
+        "filepath": "docs/getting-started/about/about.mdx",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/storefront-docz/apps/storefront-docz/docs/getting-started/about/about.mdx",
+        "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/docs/getting-started/about/about.mdx",
+        "hidden": false,
+        "slug": "docs-getting-started-about-about",
+        "name": "About",
         "headings": [
           {
-            "slug": "gaaaaaaaaaaaaaah",
-            "depth": 1,
-            "value": "Gaaaaaaaaaaaaaah"
+            "slug": "goals",
+            "depth": 2,
+            "value": "Goals"
+          },
+          {
+            "slug": "principles",
+            "depth": 2,
+            "value": "Principles"
+          }
+        ]
+      }
+    },
+    {
+      "key": "docs/getting-started/designers/introduction.mdx",
+      "value": {
+        "name": "Designers",
+        "title": "Designers",
+        "tabs": [
+          "Introduction",
+          "Starting with Figma",
+          "Working with Figma"
+        ],
+        "toc": [
+          "Figma",
+          "Device agnostic",
+          "Please don't make your own"
+        ],
+        "mode": "publish",
+        "menu": "Getting started",
+        "route": "/getting-started/designers",
+        "id": "e6794069ec77157458ce677f64d85b5c",
+        "filepath": "docs/getting-started/designers/introduction.mdx",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/storefront-docz/apps/storefront-docz/docs/getting-started/designers/introduction.mdx",
+        "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/docs/getting-started/designers/introduction.mdx",
+        "hidden": false,
+        "slug": "docs-getting-started-designers-introduction",
+        "headings": [
+          {
+            "slug": "figma",
+            "depth": 2,
+            "value": "Figma"
+          },
+          {
+            "slug": "device-agnostic",
+            "depth": 2,
+            "value": "Device agnostic"
+          },
+          {
+            "slug": "please-dont-make-your-own",
+            "depth": 2,
+            "value": "Please don't make your own"
+          }
+        ]
+      }
+    },
+    {
+      "key": "docs/getting-started/designers/starting-with-figma.mdx",
+      "value": {
+        "title": "Designers",
+        "tabs": [
+          "Introduction",
+          "Starting with Figma",
+          "Working with Figma"
+        ],
+        "toc": [
+          "Figma access in Equinor",
+          "Joining a team in Figma",
+          "Creating a team in Figma"
+        ],
+        "mode": "publish",
+        "menu": "Getting started",
+        "route": "/getting-started/starting-with-figma/",
+        "id": "48f3dd71b5f12e536e825947423147e0",
+        "filepath": "docs/getting-started/designers/starting-with-figma.mdx",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/storefront-docz/apps/storefront-docz/docs/getting-started/designers/starting-with-figma.mdx",
+        "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/docs/getting-started/designers/starting-with-figma.mdx",
+        "hidden": false,
+        "slug": "docs-getting-started-designers-starting-with-figma",
+        "name": "Starting with figma",
+        "headings": [
+          {
+            "slug": "figma-access-in-equinor",
+            "depth": 2,
+            "value": "Figma access in Equinor"
+          },
+          {
+            "slug": "joining-a-team-in-figma",
+            "depth": 2,
+            "value": "Joining a team in Figma"
+          },
+          {
+            "slug": "creating-a-team-in-figma",
+            "depth": 2,
+            "value": "Creating a team in Figma"
+          },
+          {
+            "slug": "team-owner-responsibilities",
+            "depth": 3,
+            "value": "Team owner responsibilities"
+          },
+          {
+            "slug": "access-types",
+            "depth": 3,
+            "value": "Access types"
+          },
+          {
+            "slug": "open-teams",
+            "depth": 4,
+            "value": "Open teams"
+          },
+          {
+            "slug": "closed-teams",
+            "depth": 4,
+            "value": "Closed teams"
+          },
+          {
+            "slug": "secret-teams",
+            "depth": 4,
+            "value": "Secret teams"
+          },
+          {
+            "slug": "members",
+            "depth": 4,
+            "value": "Members"
+          },
+          {
+            "slug": "member-management",
+            "depth": 4,
+            "value": "Member management"
+          }
+        ]
+      }
+    },
+    {
+      "key": "docs/getting-started/designers/working-with-figma.mdx",
+      "value": {
+        "title": "Designers",
+        "tabs": [
+          "Introduction",
+          "Starting with Figma",
+          "Working with Figma"
+        ],
+        "toc": [
+          "Setting up",
+          "Working clean",
+          "Grids",
+          "Finding components",
+          "Component updates",
+          "Clickbounds are hidden by default",
+          "Placeholders"
+        ],
+        "mode": "publish",
+        "id": "6dd5a73ebf3ec8b2d9a75421d47e0c35",
+        "filepath": "docs/getting-started/designers/working-with-figma.mdx",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/storefront-docz/apps/storefront-docz/docs/getting-started/designers/working-with-figma.mdx",
+        "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/docs/getting-started/designers/working-with-figma.mdx",
+        "hidden": false,
+        "slug": "docs-getting-started-designers-working-with-figma",
+        "route": "/docs-getting-started-designers-working-with-figma",
+        "name": "Working with figma",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "setting-up",
+            "depth": 2,
+            "value": "Setting up"
+          },
+          {
+            "slug": "working-clean",
+            "depth": 2,
+            "value": "Working clean"
+          },
+          {
+            "slug": "framesartboards",
+            "depth": 3,
+            "value": "Frames/artboards"
+          },
+          {
+            "slug": "grids",
+            "depth": 2,
+            "value": "Grids"
+          },
+          {
+            "slug": "finding-components",
+            "depth": 2,
+            "value": "Finding components"
+          },
+          {
+            "slug": "component-updates",
+            "depth": 2,
+            "value": "Component updates"
+          },
+          {
+            "slug": "clickbounds-are-hidden-by-default",
+            "depth": 2,
+            "value": "Clickbounds are hidden by default"
+          },
+          {
+            "slug": "placeholders",
+            "depth": 2,
+            "value": "Placeholders"
           }
         ]
       }
     }
   ],
-  "props": []
+  "props": [
+    {
+      "key": "src/gatsby-theme-docz/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Theme",
+          "methods": [],
+          "actualName": "Theme"
+        }
+      ]
+    },
+    {
+      "key": "src/components/Code.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Code",
+          "methods": [],
+          "actualName": "Code",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/Grid.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Grid",
+          "methods": [],
+          "actualName": "Grid",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            },
+            "centerContent": {
+              "type": {
+                "name": "bool"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "PropTypes.false",
+                "computed": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/HeadCell.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "HeadCell",
+          "methods": [],
+          "actualName": "HeadCell",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/HeroBanner.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "HeroBanner",
+          "methods": [],
+          "actualName": "HeroBanner",
+          "props": {
+            "title": {
+              "type": {
+                "name": "string"
+              },
+              "required": true,
+              "description": ""
+            },
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "null",
+                "computed": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/Icons.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Icons",
+          "methods": [],
+          "actualName": "Icons"
+        }
+      ]
+    },
+    {
+      "key": "src/components/List.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "UnorderedList",
+          "methods": [],
+          "actualName": "UnorderedList",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        },
+        {
+          "description": "",
+          "displayName": "OrderedList",
+          "methods": [],
+          "actualName": "OrderedList",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        },
+        {
+          "description": "",
+          "displayName": "ListItem",
+          "methods": [],
+          "actualName": "ListItem",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/Menu.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Menu",
+          "methods": [],
+          "actualName": "Menu"
+        }
+      ]
+    },
+    {
+      "key": "src/components/Text.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Text",
+          "methods": [],
+          "actualName": "Text",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/Titles.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "H1",
+          "methods": [],
+          "actualName": "H1"
+        },
+        {
+          "description": "",
+          "displayName": "H2",
+          "methods": [],
+          "actualName": "H2"
+        },
+        {
+          "description": "",
+          "displayName": "H3",
+          "methods": [],
+          "actualName": "H3"
+        },
+        {
+          "description": "",
+          "displayName": "H4",
+          "methods": [],
+          "actualName": "H4"
+        },
+        {
+          "description": "",
+          "displayName": "H5",
+          "methods": [],
+          "actualName": "H5"
+        },
+        {
+          "description": "",
+          "displayName": "H6",
+          "methods": [],
+          "actualName": "H6"
+        }
+      ]
+    },
+    {
+      "key": "src/components/embed.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Embed",
+          "methods": [],
+          "actualName": "Embed",
+          "props": {
+            "url": {
+              "type": {
+                "name": "string"
+              },
+              "required": true,
+              "description": "Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/figmaImage.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "FigmaImage",
+          "methods": [],
+          "actualName": "FigmaImage",
+          "props": {
+            "url": {
+              "type": {
+                "name": "string"
+              },
+              "required": true,
+              "description": "Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed"
+            },
+            "alt": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "Alt text for the Figma image",
+              "defaultValue": {
+                "value": "'Design in Figma'",
+                "computed": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/image.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Image",
+          "methods": [],
+          "actualName": "Image",
+          "props": {
+            "url": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed",
+              "defaultValue": {
+                "value": "''",
+                "computed": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/seo.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "SEO",
+          "methods": [],
+          "actualName": "SEO",
+          "props": {
+            "description": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "``",
+                "computed": false
+              }
+            },
+            "lang": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "`en`",
+                "computed": false
+              }
+            },
+            "meta": {
+              "type": {
+                "name": "arrayOf",
+                "value": {
+                  "name": "object"
+                }
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "[]",
+                "computed": false
+              }
+            },
+            "title": {
+              "type": {
+                "name": "string"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/video.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Video",
+          "methods": [],
+          "actualName": "Video",
+          "props": {
+            "url": {
+              "type": {
+                "name": "string"
+              },
+              "required": true,
+              "description": "Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/ComponentStatus/ComponentStatus.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "ComponentStatus",
+          "methods": [],
+          "actualName": "ComponentStatus"
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/Layout/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Layout",
+          "methods": [],
+          "actualName": "Layout",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/MainContainer/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "MainContainer",
+          "methods": [],
+          "actualName": "MainContainer",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/NavGroup/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "NavGroup",
+          "methods": [],
+          "actualName": "NavGroup"
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/NavLink/index.js",
+      "value": [
+        {
+          "description": "",
+          "methods": [],
+          "actualName": ""
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/Sidebar/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Sidebar",
+          "methods": [],
+          "actualName": "Sidebar",
+          "props": {
+            "location": {
+              "type": {
+                "name": "object"
+              },
+              "required": true,
+              "description": ""
+            },
+            "className": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "undefined",
+                "computed": true
+              }
+            },
+            "open": {
+              "type": {
+                "name": "bool"
+              },
+              "required": true,
+              "description": ""
+            },
+            "onClick": {
+              "type": {
+                "name": "func"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/Header/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Header",
+          "methods": [],
+          "actualName": "Header",
+          "props": {
+            "className": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "null",
+                "computed": false
+              }
+            },
+            "onOpen": {
+              "type": {
+                "name": "func"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    }
+  ]
 }
