@@ -757,17 +757,6 @@
       ]
     },
     {
-      "key": "src/gatsby-theme-docz/components/NavGroup/index.js",
-      "value": [
-        {
-          "description": "",
-          "displayName": "NavGroup",
-          "methods": [],
-          "actualName": "NavGroup"
-        }
-      ]
-    },
-    {
       "key": "src/gatsby-theme-docz/components/MainContainer/index.js",
       "value": [
         {
@@ -784,6 +773,17 @@
               "description": ""
             }
           }
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/NavGroup/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "NavGroup",
+          "methods": [],
+          "actualName": "NavGroup"
         }
       ]
     },

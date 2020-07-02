@@ -47,6 +47,9 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-styled-components',
+    },
+    {
       resolve: 'gatsby-plugin-load-script',
       options: {
         src: '/focus-visible.min.js', // Change to the script filename
