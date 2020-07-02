@@ -229,27 +229,6 @@ export const ButtonToggle = () => {
     }
   }
 
-  const onGlobalKeyPress = (e) => {
-    const { key } = e
-    console.log('onGlobalPress')
-
-    switch (key) {
-      case 'Escape':
-        closeMenu()
-        break
-      default:
-        break
-    }
-  }
-
-  // useEffect(() => {
-  //   document.addEventListener('keydown', onGlobalKeyPress)
-
-  //   return () => {
-  //     document.removeEventListener('keydown', onGlobalKeyPress)
-  //   }
-  // }, [])
-
   return (
     <Wrapper>
       <Typography variant="h4">Opened with Button</Typography>
@@ -308,57 +287,36 @@ export const ButtonToggle = () => {
 
 export const InTopbar = () => {
   const [state, setState] = React.useState({
-    focus: undefined,
+    focus: 'first',
     buttonEl: null,
   })
+
   const { focus, buttonEl } = state
+  const isOpen = Boolean(buttonEl)
 
-  const toggleMenu = (e, focus) => {
-    const isOpen = buttonEl
-    console.log('toggleMenu', isOpen)
+  const openMenu = (e) => setState({ ...state, buttonEl: e.target })
 
-    setState({ ...state, focus, buttonEl: !buttonEl ? e.target : null })
-  }
+  const closeMenu = () => setState({ ...state, buttonEl: null })
 
   const onKeyPress = (e) => {
     const { key } = e
-
+    console.log('onKeyPress')
     switch (key) {
       case 'ArrowDown':
       case 'Enter':
       case ' ':
-        toggleMenu(e, 'first')
+        isOpen ? closeMenu() : openMenu(e, 'first')
         break
       case 'ArrowUp':
-        toggleMenu(e, 'last')
+        isOpen ? closeMenu() : openMenu(e, 'last')
         break
       case 'Escape':
-        toggleMenu({ target: null })
+        closeMenu()
         break
       default:
         break
     }
   }
-
-  const onGlobalKeyPress = (e) => {
-    const { key } = e
-
-    switch (key) {
-      case 'Escape':
-        toggleMenu({ target: null })
-        break
-      default:
-        break
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('keydown', onGlobalKeyPress, false)
-
-    return () => {
-      document.removeEventListener('keydown', onGlobalKeyPress, false)
-    }
-  }, [])
 
   return (
     <Wrapper style={{ margin: 0 }}>
@@ -371,7 +329,7 @@ export const InTopbar = () => {
             aria-controls="menu-on-button"
             aria-haspopup="menu"
             aria-expanded={Boolean(buttonEl)}
-            onClick={toggleMenu}
+            onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
             onKeyDown={onKeyPress}
           >
             <Icon name="more_verticle" title="more"></Icon>

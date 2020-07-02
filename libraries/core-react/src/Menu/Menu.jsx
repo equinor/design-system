@@ -12,11 +12,11 @@ const StyledPaper = styled(Paper)`
   min-width: fit-content;
 
   ${({ left, top, open, transform, visibility }) =>
-    css({ left, top, transform, visibility, display: open ? 'block' : 'none' })}
+    css({ left, top, transform, visibility, display: 'block' })}
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { children, className, anchorEl, open, ...rest },
+  { children, anchorEl, open, onClose, ...rest },
   ref,
 ) {
   if (!anchorEl) {
@@ -30,12 +30,29 @@ export const Menu = React.forwardRef(function EdsMenu(
       const rect = anchorEl ? anchorEl.getBoundingClientRect() : null
       setPosition(rect)
     }
+
+    document.addEventListener('keydown', handleGlobalKeyPress, true)
+
+    return () => {
+      document.removeEventListener('keydown', handleGlobalKeyPress, true)
+    }
   }, [anchorEl])
+
+  const handleGlobalKeyPress = (e) => {
+    const { key } = e
+
+    switch (key) {
+      case 'Escape':
+        onClose()
+        break
+      default:
+        break
+    }
+  }
 
   const paperProps = {
     visibility,
     open,
-    className,
     ...position,
   }
 
