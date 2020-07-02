@@ -298,17 +298,6 @@
   ],
   "props": [
     {
-      "key": "src/gatsby-theme-docz/index.js",
-      "value": [
-        {
-          "description": "",
-          "displayName": "Theme",
-          "methods": [],
-          "actualName": "Theme"
-        }
-      ]
-    },
-    {
       "key": "src/components/Code.jsx",
       "value": [
         {
@@ -695,6 +684,17 @@
       ]
     },
     {
+      "key": "src/gatsby-theme-docz/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Theme",
+          "methods": [],
+          "actualName": "Theme"
+        }
+      ]
+    },
+    {
       "key": "src/components/ComponentStatus/ComponentStatus.jsx",
       "value": [
         {
@@ -702,6 +702,37 @@
           "displayName": "ComponentStatus",
           "methods": [],
           "actualName": "ComponentStatus"
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/Header/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Header",
+          "methods": [],
+          "actualName": "Header",
+          "props": {
+            "className": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "null",
+                "computed": false
+              }
+            },
+            "onOpen": {
+              "type": {
+                "name": "func"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
         }
       ]
     },
@@ -801,37 +832,6 @@
               "description": ""
             },
             "onClick": {
-              "type": {
-                "name": "func"
-              },
-              "required": true,
-              "description": ""
-            }
-          }
-        }
-      ]
-    },
-    {
-      "key": "src/gatsby-theme-docz/components/Header/index.js",
-      "value": [
-        {
-          "description": "",
-          "displayName": "Header",
-          "methods": [],
-          "actualName": "Header",
-          "props": {
-            "className": {
-              "type": {
-                "name": "string"
-              },
-              "required": false,
-              "description": "",
-              "defaultValue": {
-                "value": "null",
-                "computed": false
-              }
-            },
-            "onOpen": {
               "type": {
                 "name": "func"
               },
