@@ -39,9 +39,7 @@ export const simpleTable = () => (
             <Row>
               <Cell>Darth Vader</Cell>
               <Cell>Sith</Cell>
-              <Cell variant="numeric">
-                <Tooltip title="Darth Vader sucks">59</Tooltip>
-              </Cell>
+              <Cell variant="numeric">59</Cell>
             </Row>
           </Body>
         </Table>
