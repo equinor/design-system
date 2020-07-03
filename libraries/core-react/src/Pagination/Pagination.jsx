@@ -88,6 +88,7 @@ export const Pagination = forwardRef(function Pagination(
   }
 
   if (pages > 5) {
+    let extraPages
     const startPages = range(1, Math.min(1, pages))
     const endPages = range(Math.max(pages - 2, 2), pages)
 
@@ -95,8 +96,22 @@ export const Pagination = forwardRef(function Pagination(
     const endPage = Math.min(pages - 1, activePage + siblings)
 
     let pageRange = range(startPage, endPage)
-    console.log('range', pageRange, startPage, endPage, startPages, endPages)
-    console.log(pages, columns)
+
+    const hiddenLeft = startPage > 2 // Has hidden pages on left side
+    const hiddenRight = pages - endPage > 1 // Has hidden pages on right side
+    const hiddenOffset = 5 - pageRange.length + 1 // Number of total hidden pages
+
+    if (hiddenLeft && !hiddenRight) {
+      extraPages = range(startPage - hiddenOffset, startPage - 1)
+      pageRange = [LEFT_PAGE, ...extraPages, ...pageRange]
+    } else if (!hiddenLeft && hiddenRight) {
+      extraPages = range(endPage + 1, endPage + hiddenOffset)
+      pageRange = [...pageRange, ...extraPages, RIGHT_PAGE]
+    } else if (hiddenLeft && hiddenRight) {
+      pageRange = [LEFT_PAGE, ...pageRange, RIGHT_PAGE]
+    }
+
+    console.log([1, ...pageRange, pages])
   }
 
   const props = {
