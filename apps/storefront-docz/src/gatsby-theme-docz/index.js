@@ -20,11 +20,13 @@ import { OrderedList, UnorderedList, ListItem } from '../components/List'
 import HeadCell from '../components/HeadCell'
 import Grid from '../components/Grid'
 import Code from '../components/Code'
+import { Page } from '../components/Page'
 
 const { Body, Row, Cell, Head } = Table
 
 const componentsMap = {
   ...baseComponents,
+  page: Page,
   Embed,
   Video,
   FigmaImage,
