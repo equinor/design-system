@@ -108,11 +108,11 @@ const Layout = ({ children }) => {
             EDS – Equinor Design System
           </TopBarHeader>
           <StyledActions>
-            <Search
+            {/* <Search
               aria-label="sitewide search"
               id="search"
               placeholder="Search"
-            />
+            /> */}
             {/*  <label htmlFor="search">
               <SrLabel>Sitewid search</SrLabel>
               <input type="search" id="search" placeholder="search" />
