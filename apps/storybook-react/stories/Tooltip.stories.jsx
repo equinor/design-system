@@ -45,7 +45,7 @@ export function Placement() {
           anchor element
         </Typography>
       </TextWrapper>
-      <Typography variant="h5">Top</Typography>
+      <Typography variant="h4">Top</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="topLeft">
           <Button>Top left</Button>
@@ -57,7 +57,7 @@ export function Placement() {
           <Button>Top right</Button>
         </Tooltip>
       </Wrapper>
-      <Typography variant="h5">Bottom</Typography>
+      <Typography variant="h4">Bottom</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="bottomLeft">
           <Button>Bottom left</Button>
@@ -69,7 +69,7 @@ export function Placement() {
           <Button>Bottom right</Button>
         </Tooltip>
       </Wrapper>
-      <Typography variant="h5">Left</Typography>
+      <Typography variant="h4">Left</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="leftTop">
           <Button>Left top</Button>
@@ -81,7 +81,7 @@ export function Placement() {
           <Button>Left bottom</Button>
         </Tooltip>
       </Wrapper>
-      <Typography variant="h5">Right</Typography>
+      <Typography variant="h4">Right</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="rightTop">
           <Button>Right top</Button>
@@ -144,7 +144,7 @@ export const WithKnobs = () => {
         <Typography variant="h3">With knobs</Typography>
       </TextWrapper>
       <Wrapper>
-        <Tooltip title={title} placement={placement}>
+        <Tooltip open title={title} placement={placement}>
           {ANCHOR_CHOICES[anchor]}
         </Tooltip>
       </Wrapper>

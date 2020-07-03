@@ -4,11 +4,14 @@ import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { tooltip as tokens } from './Tooltip.tokens'
 
-const Anchor = styled.div`
+const Wrapper = styled.div`
   position: relative;
   display: flex;
-  width: auto;
   justify-content: center;
+`
+
+const Anchor = styled.div`
+  margin-right: auto;
 `
 
 const StyledTooltipWrapper = styled.div`
@@ -20,10 +23,9 @@ const StyledTooltipWrapper = styled.div`
       left: ${left};
       transform: ${transform};
     `}
-  width: auto;
   position: absolute;
   z-index: 500;
-  flex-shrink: 0;
+  white-space: nowrap;
   ::after {
     content: '';
   }
@@ -91,15 +93,15 @@ export const Tooltip = forwardRef(function Tooltip(
   }
 
   return (
-    <Anchor {...props}>
-      <div
+    <Wrapper {...props}>
+      <Anchor
         onMouseOver={handleOpen}
         onMouseLeave={handleClose}
         onBlur={handleClose}
         onFocus={handleOpen}
       >
         {children}
-      </div>
+      </Anchor>
       {openState && (
         <StyledTooltipWrapper role="tooltip" {...wrapperProps}>
           <StyledTooltip>
@@ -115,7 +117,7 @@ export const Tooltip = forwardRef(function Tooltip(
           </StyledTooltip>
         </StyledTooltipWrapper>
       )}
-    </Anchor>
+    </Wrapper>
   )
 })
 
