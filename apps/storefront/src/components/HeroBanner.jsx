@@ -4,7 +4,6 @@ import Text from './Text'
 import { H1 } from './Titles'
 import styled from 'styled-components'
 import { Button } from '@equinor/eds-core-react'
-import { text_rotation_none } from '../../../../libraries/icons/dist/icons.esm'
 
 const StyledHeroBanner = styled.div`
   background: #f7f7f7;
