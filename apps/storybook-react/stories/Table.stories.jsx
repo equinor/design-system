@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Typography, Tooltip } from '@equinor/eds-core-react'
+import { Table, Typography } from '@equinor/eds-core-react'
 import './../style.css'
 
 const { Body, Row, Cell, Head } = Table
