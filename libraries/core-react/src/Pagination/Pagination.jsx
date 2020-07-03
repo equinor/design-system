@@ -72,47 +72,13 @@ export const Pagination = forwardRef(function Pagination(
   },
   ref,
 ) {
-  const [activePage, setActivePage] = useState(1)
-
   const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
 
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
-  console.log(pages)
 
   const items = paginationControl(pages)
-  const siblings = 2 // neighboring items on both sides of current page
 
-  const range = (start, end) => {
-    const length = end - start + 1
-    return Array.from({ length }, (_, i) => start + i)
-  }
-
-  if (pages > 5) {
-    let extraPages
-    const startPages = range(1, Math.min(1, pages))
-    const endPages = range(Math.max(pages - 2, 2), pages)
-
-    const startPage = Math.max(2, activePage - siblings)
-    const endPage = Math.min(pages - 1, activePage + siblings)
-
-    let pageRange = range(startPage, endPage)
-
-    const hiddenLeft = startPage > 2 // Has hidden pages on left side
-    const hiddenRight = pages - endPage > 1 // Has hidden pages on right side
-    const hiddenOffset = 5 - pageRange.length + 1 // Number of total hidden pages
-
-    if (hiddenLeft && !hiddenRight) {
-      extraPages = range(startPage - hiddenOffset, startPage - 1)
-      pageRange = [LEFT_PAGE, ...extraPages, ...pageRange]
-    } else if (!hiddenLeft && hiddenRight) {
-      extraPages = range(endPage + 1, endPage + hiddenOffset)
-      pageRange = [...pageRange, ...extraPages, RIGHT_PAGE]
-    } else if (hiddenLeft && hiddenRight) {
-      pageRange = [LEFT_PAGE, ...pageRange, RIGHT_PAGE]
-    }
-
-    console.log([1, ...pageRange, pages])
-  }
+  console.log(items)
 
   const props = {
     ref,
