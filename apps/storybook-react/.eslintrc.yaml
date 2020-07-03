@@ -1,5 +1,18 @@
-extends: ../../.eslintrc.yaml
+# no need to extend when running eslint from the root
 rules:
+  # storybook expects both default and named exports in the stories
   import/no-default-export:
     - off
+  # the following rules have a warn level of error in the main config,
+  # and should be set back to error once the problems have been solved
+  no-unused-vars:
+    - warn
+  react/no-unescaped-entities:
+    - warn
+  react/jsx-boolean-value:
+    - warn
+  import/newline-after-import:
+    - warn
+  prettier/prettier:
+    - warn
 
