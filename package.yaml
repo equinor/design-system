@@ -4,7 +4,7 @@ engines:
 scripts:
   lint: 'eslint --ext jsx --ext js'
   lint:all: 'pnpm run lint .'
-  lint:stories: 'pnpm run lint ./apps/storybook-react/stories'
+  lint:storybook: 'pnpm run lint ./apps/storybook-react/stories'
   init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
   'bump:core-react': >-
