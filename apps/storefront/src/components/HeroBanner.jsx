@@ -30,6 +30,7 @@ const Intro = styled.div`
   max-width: 420px;
   @media (min-width: 600px) {
     align-self: center;
+    text-align: left;
   }
 `
 
