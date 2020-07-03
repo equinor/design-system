@@ -1,11 +1,13 @@
 /* eslint react/jsx-filename-extension: off  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as styles from './styles'
+import { useDocs } from 'docz'
 
 export const MainContainer = ({ children, ...rest }) => {
+  const components = useDocs()
+  console.log('docs', components)
   return (
-    <main sx={styles.container} {...rest} id="main">
+    <main {...rest} id="main">
       {children}
     </main>
   )

@@ -55,6 +55,32 @@
       }
     },
     {
+      "key": "docs/hello-world.mdx",
+      "value": {
+        "id": "c9fac7c8902d543cee59c39c3f9e99b5",
+        "filepath": "docs/hello-world.mdx",
+        "fullpath": "/Users/wenche/Documents/prosjekter/equinor/storefront-docz/apps/storefront-docz/docs/hello-world.mdx",
+        "link": "https://github.com/gatsbyjs/gatsby-starter-default/edit/master/apps/storefront-docz/docs/hello-world.mdx",
+        "hidden": false,
+        "slug": "docs-hello-world",
+        "route": "/docs-hello-world",
+        "name": "Hello world",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "name-hello-world",
+            "depth": 2,
+            "value": "name: Hello world"
+          },
+          {
+            "slug": "hello-world",
+            "depth": 1,
+            "value": "Hello world"
+          }
+        ]
+      }
+    },
+    {
       "key": "docs/index.mdx",
       "value": {
         "name": "Home",
@@ -706,6 +732,26 @@
       ]
     },
     {
+      "key": "src/gatsby-theme-docz/components/Layout/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Layout",
+          "methods": [],
+          "actualName": "Layout",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
       "key": "src/gatsby-theme-docz/components/Header/index.js",
       "value": [
         {
@@ -728,46 +774,6 @@
             "onOpen": {
               "type": {
                 "name": "func"
-              },
-              "required": true,
-              "description": ""
-            }
-          }
-        }
-      ]
-    },
-    {
-      "key": "src/gatsby-theme-docz/components/Layout/index.js",
-      "value": [
-        {
-          "description": "",
-          "displayName": "Layout",
-          "methods": [],
-          "actualName": "Layout",
-          "props": {
-            "children": {
-              "type": {
-                "name": "node"
-              },
-              "required": true,
-              "description": ""
-            }
-          }
-        }
-      ]
-    },
-    {
-      "key": "src/gatsby-theme-docz/components/MainContainer/index.js",
-      "value": [
-        {
-          "description": "",
-          "displayName": "MainContainer",
-          "methods": [],
-          "actualName": "MainContainer",
-          "props": {
-            "children": {
-              "type": {
-                "name": "node"
               },
               "required": true,
               "description": ""
@@ -834,6 +840,37 @@
             "onClick": {
               "type": {
                 "name": "func"
+              },
+              "required": true,
+              "description": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/components/Page.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Page",
+          "methods": [],
+          "actualName": "Page"
+        }
+      ]
+    },
+    {
+      "key": "src/gatsby-theme-docz/components/MainContainer/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "MainContainer",
+          "methods": [],
+          "actualName": "MainContainer",
+          "props": {
+            "children": {
+              "type": {
+                "name": "node"
               },
               "required": true,
               "description": ""
