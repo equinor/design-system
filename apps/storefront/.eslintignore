@@ -3,4 +3,5 @@
 /../../apps/storybook-react/**
 /../../libraries/icons/**
 /../../libraries/core-react/**
+/../../libraries/tokens/**
 node_modules
