@@ -1,6 +1,7 @@
 dependencies:
   '@equinor/eds-core-react': 'link:../../libraries/core-react'
   '@equinor/eds-icons': 'link:../../libraries/icons'
+  '@equinor/eds-tokens': 'link:../../libraries/tokens'
   '@mdx-js/mdx': 1.6.5
   '@mdx-js/react': 1.6.5_react@16.13.1
   '@mdx-js/tag': 0.20.3_react@16.13.1
@@ -16064,6 +16065,7 @@ packages:
 specifiers:
   '@equinor/eds-core-react': 'workspace:*'
   '@equinor/eds-icons': 'workspace:*'
+  '@equinor/eds-tokens': 'workspace:^0.2.0'
   '@mdx-js/mdx': ^1.6.5
   '@mdx-js/react': ^1.6.5
   '@mdx-js/tag': ^0.20.3
