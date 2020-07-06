@@ -31,6 +31,15 @@ const SmallInput = styled(BaseInput)`
   &[data-focus-visible-added]:focus + span :first-child {
     outline-offset: ${enabled.outlineOffsetSmall};
   }
+  /*  Track */
+  &:checked + span > span {
+    background-color: ${({ disabled }) =>
+      disabled ? _disabled.background : enabled.track.small.background};
+  }
+  /* Handle */
+  &:checked + span > span:last-child {
+    background-color: ${enabled.handle.small.background};
+  }
 `
 const DefaultInput = styled(BaseInput)`
   /*  Track */

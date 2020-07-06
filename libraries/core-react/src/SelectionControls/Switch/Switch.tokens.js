@@ -41,6 +41,7 @@ export const switchControl = {
         width: '20px',
         height: '10px',
         background: primaryResting,
+        offBackground: handleColor,
       },
     },
     handle: {
