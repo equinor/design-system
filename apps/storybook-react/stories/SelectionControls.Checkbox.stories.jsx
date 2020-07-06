@@ -1,15 +1,10 @@
 import React, { useState, useRef } from 'react'
-import {
-  Checkbox,
-  Icon,
-  Typography,
-  Button,
-  Switch,
-} from '@equinor/eds-core-react'
+import { Checkbox, Icon, Typography, Button } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { checkbox } from '@equinor/eds-icons'
 import { useForm } from 'react-hook-form'
+
 Icon.add({ checkbox })
 const Wrapper = styled.div`
   display: grid;
@@ -154,7 +149,7 @@ export const WithFormsControl = () => {
           ) : (
             <div>
               <fieldset>
-                <legend>What's your favourites?</legend>
+                <legend>What‘s your favourites?</legend>
                 {/* Just to demonstrate style addons, a list would have been better for semantic */}
                 <BlockCheckbox
                   name="favourites"
@@ -188,7 +183,7 @@ export const WithFormsControl = () => {
                 id="agree"
                 aria-invalid={errors.agree ? 'true' : 'false'}
                 aria-describedby="error-name-required"
-                aria-required={true}
+                aria-required
               />
               <span
                 role="alert"
@@ -206,7 +201,7 @@ export const WithFormsControl = () => {
                 Hey you! This field is required
               </span>
               <div style={{ padding: '1rem' }}>
-                <Button type="submit">I'm done</Button>
+                <Button type="submit">I‘m done</Button>
               </div>
             </div>
           )}
