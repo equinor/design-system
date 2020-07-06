@@ -1,15 +1,8 @@
-import React, { useState, useRef } from 'react'
-import {
-  Radio,
-  Checkbox,
-  Switch,
-  Icon,
-  Typography,
-  Button,
-} from '@equinor/eds-core-react'
+import React, { useState } from 'react'
+import { Radio, Icon, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { checkbox } from '@equinor/eds-icons'
-import { useForm } from 'react-hook-form'
+
 Icon.add({ checkbox })
 const Wrapper = styled.div`
   padding: 32px;
@@ -32,10 +25,6 @@ export default {
 }
 
 export const RadioControl = () => {
-  const [checked, updateChecked] = useState('one')
-  const onChange = (event, value) => {
-    updateChecked(value)
-  }
   return (
     <Wrapper>
       <Typography variant="h2" style={{ margin: '1rem 0' }}>
