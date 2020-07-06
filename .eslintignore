@@ -1,7 +1,4 @@
-/apps/figma-broker/**
-/apps/storybook-html/**
-/apps/storybook-react/**
-/libraries/icons/**/*
-/libraries/core-react/dist/core-react.umd.js
+/apps/storefront
+/apps/storybook-html
 node_modules
 dist
