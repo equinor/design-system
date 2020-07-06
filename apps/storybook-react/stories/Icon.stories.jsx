@@ -1,5 +1,5 @@
 import React from 'react'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import { withKnobs, select, text } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Icon } from '@equinor/eds-core-react'
 import {

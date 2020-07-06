@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Checkbox, StarProgress } from '@equinor/eds-core-react'
+import { StarProgress } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
