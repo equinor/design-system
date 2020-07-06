@@ -1,6 +1,5 @@
-import React, { useState, useEffect, createRef, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Tabs, Typography, Search } from '@equinor/eds-core-react'
 import { action } from '@storybook/addon-actions'
 

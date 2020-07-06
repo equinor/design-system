@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Slider, Button, Typography, Label } from '@equinor/eds-core-react'
+import { Slider } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
 
@@ -113,7 +113,7 @@ export const Examples = () => {
       </div>
       <div>
         <label id="disabled-slider">Disabled slider</label>
-        <Slider value={50} disabled={true} ariaLabelledby="disabled-slider" />
+        <Slider value={50} disabled ariaLabelledby="disabled-slider" />
       </div>
     </Body>
   )

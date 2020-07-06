@@ -1,13 +1,6 @@
 import React, { useState, Fragment } from 'react'
-import { withKnobs } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import {
-  SideSheet,
-  Typography,
-  Button,
-  TopBar,
-  Icon,
-} from '@equinor/eds-core-react'
+import { SideSheet, Button, TopBar, Icon } from '@equinor/eds-core-react'
 
 import {
   account_circle,

@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
-import { Snackbar, Button, Typography } from '@equinor/eds-core-react'
+import { Snackbar, Button } from '@equinor/eds-core-react'
 
 const { SnackbarAction } = Snackbar
 import styled from 'styled-components'
