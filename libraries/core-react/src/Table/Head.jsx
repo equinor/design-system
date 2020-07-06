@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const TableBase = styled.thead``
+const TableBase = styled.thead`
+  text-align: left;
+`
 
 export const Head = (props) => {
   const { children } = props
