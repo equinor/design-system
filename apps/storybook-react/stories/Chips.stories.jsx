@@ -1,5 +1,5 @@
 import React from 'react'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import { withKnobs } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Icon, Chip, Avatar, Typography } from '@equinor/eds-core-react'

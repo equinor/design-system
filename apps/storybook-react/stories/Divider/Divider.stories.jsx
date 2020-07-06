@@ -1,17 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
-import { Divider, Typography } from '@equinor/eds-core-react'
-import { tokens } from '@equinor/eds-tokens'
+import { withKnobs, select } from '@storybook/addon-knobs'
+import { Divider } from '@equinor/eds-core-react'
 import mdx from './Divider.docs.mdx'
-
-const {
-  colors: {
-    ui: {
-      background__info: { hex: darkBg },
-    },
-  },
-} = tokens
 
 export default {
   title: 'Components|Divider',
