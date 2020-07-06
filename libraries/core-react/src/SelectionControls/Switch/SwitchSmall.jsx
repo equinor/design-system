@@ -13,7 +13,7 @@ const Track = styled.span`
   border-radius: 10px;
   border: none;
   background-color: ${({ isDisabled }) =>
-    isDisabled ? _disabled.background : enabled.track.small.background};
+    isDisabled ? _disabled.background : enabled.track.small.offBackground};
   position: absolute;
   left: 50%;
   top: 50%;
