@@ -3,7 +3,7 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import { readableColor } from 'polished'
-import { Table, Typography } from '@equinor/eds-core-react'
+import { Table } from '@equinor/eds-core-react'
 import { camelify, kebabify } from '../../utils'
 
 const ComponentStatus = () => {
@@ -40,7 +40,7 @@ const ComponentStatus = () => {
     <Table summary={summary}>
       <Head>
         <Row>
-          {headers.map((text, index) => (
+          {headers.map((text) => (
             <Cell
               as="th"
               style={{ textAlign: 'left' }}
@@ -132,4 +132,4 @@ const Badge = styled.span`
 
 Badge.displayName = 'Badge'
 
-export default ComponentStatus
+export default ComponentStatus // eslint-disable-line

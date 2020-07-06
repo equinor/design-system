@@ -1,6 +1,10 @@
 ---
 title: Data formats
 mode: draft
+toc:
+  - Date and time
+  - Input formats
+  - Numbers
 ---
 
 How to format numeric and linguistic data.
@@ -9,14 +13,14 @@ How to format numeric and linguistic data.
 
 Here is an overview of the different accepted formats:
 
-|Type|How to use|Example|
-|---|---|---|
-|Date, Full|dddd,MMM D, YYYY, hh:mm:ss Z|Monday, August 3, 2020, 09:31:57 UTC+1|
-|Date, Normal|ddd,MMM D, YYYY hh:mm|Mon, Aug 3, 2020, 09:31|
-|Date, Compacy|MMM D, YYYY hh:mm|Aug 3, 2020|
-|Date range example 1||Aug 3-7, 2020|
-|Date range example 2||Mon-Fri, Aug 3-7, 2020|
-|Date range example 3||Aug 3-Aug 7, 2020|
+| Type                 | How to use                   | Example                                |
+| -------------------- | ---------------------------- | -------------------------------------- |
+| Date, Full           | dddd,MMM D, YYYY, hh:mm:ss Z | Monday, August 3, 2020, 09:31:57 UTC+1 |
+| Date, Normal         | ddd,MMM D, YYYY hh:mm        | Mon, Aug 3, 2020, 09:31                |
+| Date, Compacy        | MMM D, YYYY hh:mm            | Aug 3, 2020                            |
+| Date range example 1 |                              | Aug 3-7, 2020                          |
+| Date range example 2 |                              | Mon-Fri, Aug 3-7, 2020                 |
+| Date range example 3 |                              | Aug 3-Aug 7, 2020                      |
 
 ## Input formats
 
@@ -28,22 +32,23 @@ We accept three delimiters: Period, dash and slash.
 
 In addition to all standard display formats and standard copy format, the following formats should be accepted for date fields:
 
-|Format|Entered value|Interpretation|
-|---|---|---|
-|yyyy/mm/dd|2020/08/03|Aug 3, 2020|
-|yyyy.mm.dd|2020.08.03|Aug 3, 2020|
-|dd.mm.yyyy|03.08.2020|Aug 3, 2020|
-|dd-mm-yyyy|03-08-2020|Aug 3, 2020|
-|hh:mm:ss|09|09:00:00|
+| Format     | Entered value | Interpretation |
+| ---------- | ------------- | -------------- |
+| yyyy/mm/dd | 2020/08/03    | Aug 3, 2020    |
+| yyyy.mm.dd | 2020.08.03    | Aug 3, 2020    |
+| dd.mm.yyyy | 03.08.2020    | Aug 3, 2020    |
+| dd-mm-yyyy | 03-08-2020    | Aug 3, 2020    |
+| hh:mm:ss   | 09            | 09:00:00       |
 
 ### Relative dates
 
 Considersupporting input relative formats like:
-* Today
-* Last month
-* Month -3
-* Today -3d
-* etc.
+
+- Today
+- Last month
+- Month -3
+- Today -3d
+- etc.
 
 These are especially handy if you generate reports or standard views that should display data relative to today's date.
 
@@ -62,23 +67,22 @@ Correct display format:
 x xxx,xxx
 
 ### Input formats
+
 To ensure compatibility with numeric pads on English keyboards and pasted values from other sources, period should be accepted as decimal separator for inputs. Same applies in reverse if the user has selected period as decimal separator.
 Any use of space in the number input should be accepted but removed to support thousand separators, leading or trailing spaces without generating validation error.
 
 If multiple instances of periods and/or commas are present, only regard the last one.
 
 Accepted input formats
-* x
-* x.x
-* x,xx
-* xxxx,xxx
-* x xxx.xxx
-* x.xxx.xxx
-* x,xxx.xxx
-* ,x
-* .x
 
-
-
+- x
+- x.x
+- x,xx
+- xxxx,xxx
+- x xxx.xxx
+- x.xxx.xxx
+- x,xxx.xxx
+- ,x
+- .x
 
 Martin, ref: https://material.io/design/communication/data-formats.html#data-redaction

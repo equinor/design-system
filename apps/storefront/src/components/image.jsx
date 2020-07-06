@@ -47,7 +47,10 @@ const Image = ({ url = '', ...other }) => {
     <ImageBase {...other} src={imageUrl} />
   ) : (
     <Container>
-      Ops! Can&apos;t find the image, please check if your link is correct 🏞️
+      Ops! Can&apos;t find the image, please check if your link is correct
+      <span role="img" aria-label="photo">
+        🏞️
+      </span>
       {url}
     </Container>
   )
