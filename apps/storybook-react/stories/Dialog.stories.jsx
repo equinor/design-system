@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
+import { withKnobs, select } from '@storybook/addon-knobs'
 import { Dialog, Button, Scrim, Typography } from '@equinor/eds-core-react'
-
 import styled from 'styled-components'
 
 const { Actions, Title, CustomContent } = Dialog
@@ -89,7 +88,7 @@ export default {
 
 export const knobs = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
-  const handleClose = (event, closed) => {
+  const handleClose = () => {
     setVisibleScrim(!visibleScrim)
   }
 
@@ -146,7 +145,7 @@ export const knobs = () => {
 
 export const types = () => {
   const [visibleScrim, setVisibleScrim] = useState(true)
-  const handleClose = (event, closed) => {
+  const handleClose = () => {
     setVisibleScrim(!visibleScrim)
   }
 

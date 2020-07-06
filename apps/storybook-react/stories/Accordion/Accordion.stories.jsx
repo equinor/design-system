@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { Accordion, Typography, Button, Icon } from '@equinor/eds-core-react'
+import { Accordion, Button, Icon } from '@equinor/eds-core-react'
 import {
   attach_file,
   notifications,
@@ -24,12 +24,6 @@ const Wrapper = styled.div`
     margin-top: 16px;
   }
 `
-
-const addMarginRightProp = () => ({ marginRight }) =>
-  marginRight && { marginRight: `${marginRight}px` }
-
-const IconWithMarginProp = styled(Icon)(addMarginRightProp)
-const ButtonWithMarginProp = styled(Button)(addMarginRightProp)
 
 export default {
   title: 'Components|Accordion',

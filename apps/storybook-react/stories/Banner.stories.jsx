@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Banner, Icon, Typography, Button } from '@equinor/eds-core-react'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
+
 const icons = {
   save,
   thumbs_up,
@@ -109,10 +110,10 @@ export const Examples = () => {
           <Icon name="save" />
         </BannerIcon>
         <BannerMessage>
-          I'm such a really really long message about some sad saving news that
-          there is not enough space for the actions on my left. That's why the
-          actions have been located at the bottom using the placement prop
-          instead.
+          I&apos;m such a really really long message about some sad saving news
+          that there is not enough space for the actions on my left. That&apos;s
+          why the actions have been located at the bottom using the placement
+          prop instead.
         </BannerMessage>
         <InlineBannerActions placement="bottom">
           <Button style={{ marginRight: '1rem' }}>First action</Button>
