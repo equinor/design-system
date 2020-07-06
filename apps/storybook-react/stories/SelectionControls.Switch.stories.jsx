@@ -1,15 +1,8 @@
-import React, { useState, useRef } from 'react'
-import {
-  Radio,
-  Checkbox,
-  Switch,
-  Icon,
-  Typography,
-  Button,
-} from '@equinor/eds-core-react'
+import React, { useState } from 'react'
+import { Switch, Icon, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { checkbox } from '@equinor/eds-icons'
-import { useForm } from 'react-hook-form'
+
 Icon.add({ checkbox })
 const Wrapper = styled.div`
   display: grid;
