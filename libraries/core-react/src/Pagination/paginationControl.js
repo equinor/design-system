@@ -36,9 +36,7 @@ export function PaginationControl(pages, activePage) {
   const totalNumbers = siblings + 3
   const totalColumns = totalNumbers + 2
 
-  console.log('totals', totalNumbers, totalColumns, columns)
-  console.log('pager', pages)
-  if (pages > 5) {
+  if (pages > 4) {
     let extraPages
 
     const startPage = Math.max(1, activePage - siblings)
@@ -65,7 +63,7 @@ export function PaginationControl(pages, activePage) {
 
     console.log('pagessss', extraPages, pageRange)
 
-    return [1, ...pageRange, pages]
+    return [...pageRange]
   }
 
   return {

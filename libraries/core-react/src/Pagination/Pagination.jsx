@@ -74,6 +74,7 @@ export const Pagination = forwardRef(function Pagination(
 
   let items = []
   items = PaginationControl(pages, activePage)
+  console.log(items)
 
   //console.log('items', items)
 
