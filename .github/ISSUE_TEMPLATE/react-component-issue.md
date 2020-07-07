@@ -1,9 +1,8 @@
 ---
-name: React component issue
+name: React component issue ⚛️
 about: Use this template to create issues for the React component library
 title: Create [name] component
 labels: react
-assignees: ''
 ---
 
 **Description**
