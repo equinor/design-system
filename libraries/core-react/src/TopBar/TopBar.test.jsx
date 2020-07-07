@@ -44,7 +44,9 @@ describe('TopBar', () => {
     const { queryByTestId } = render(
       <TopBar>
         <Header>
-          <button type="button" data-testid={testIdHeader} />
+          <button type="button" data-testid={testIdHeader}>
+            Click me!
+          </button>
         </Header>
         <CustomContent>
           <input type="text" data-testid={testIdCenter} />
