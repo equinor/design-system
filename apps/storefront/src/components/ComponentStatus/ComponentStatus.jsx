@@ -41,12 +41,7 @@ const ComponentStatus = () => {
       <Head>
         <Row>
           {headers.map((text) => (
-            <Cell
-              as="th"
-              style={{ textAlign: 'left' }}
-              key={camelify(text)}
-              scope="col"
-            >
+            <Cell as="th" key={camelify(text)} scope="col">
               {text}
             </Cell>
           ))}
@@ -55,16 +50,7 @@ const ComponentStatus = () => {
       <Body>
         {components.map((component, index) => (
           <Row key={component.component + index}>
-            <Cell
-              as="th"
-              key={component.component + index}
-              scope="row"
-              style={{
-                textAlign: 'left',
-                backgroundColor: 'white',
-                borderBottomWidth: '1px',
-              }}
-            >
+            <Cell as="th" key={component.component + index} scope="row">
               <Link
                 to={`/components/${kebabify(component.component)}`}
                 style={{ color: 'var(--moss-green)', fontSize: '0.875em' }}
