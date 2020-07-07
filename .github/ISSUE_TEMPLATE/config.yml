@@ -1,0 +1,7 @@
+contact_links:
+  - name: EDS on Slack
+    about: Discuss all things EDS on the '#eds-design-system' slack channel (for Equinor employees)
+    url: https://equinor.slack.com/archives/CJT20H1B9
+  - name: EDS on Teams
+    about: Discuss all things EDS on the EDS teams channel (for Equinor employees)
+    url: https://teams.microsoft.com/l/channel/19%3a08081ac3d7134608b312d8480aa87efc%40thread.tacv2/General?groupId=204b36ea-ba52-4cee-aeac-895f675e91b0&tenantId=3aa4a235-b6e2-48d5-9195-7fcf05b459b0
