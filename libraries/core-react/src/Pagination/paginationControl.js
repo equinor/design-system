@@ -15,58 +15,60 @@ default 1 - visible pages before and after current page
 
 */
 
-export default function PaginationControl(props = {}) {
-  const { onChange: handleChange, page: pageProp, pages, ...other } = props
+const LEFT_PAGE = 'LEFT'
+const RIGHT_PAGE = 'RIGHT'
+const ELLIPSIS = 'ELLIPSIS'
 
-  const handleClick = (e, value) => {
-    if (!pageProp) {
-      setPageState(value)
-    }
-    if (onChange) {
-      onChange(e, value)
-    }
-  }
-
-  const [activePage, setActivePage] = useState(1)
-
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+// eslint-disable-next-line import/no-default-export
+export function PaginationControl(pages, activePage) {
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
-  const items = paginationControl(pages)
-  const siblings = 2 // neighboring items on both sides of current page
+  // const items = paginationControl(pages)
+  const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
 
   const range = (start, end) => {
     const length = end - start + 1
     return Array.from({ length }, (_, i) => start + i)
   }
 
+  let pageRange
+  const totalNumbers = siblings + 3
+  const totalColumns = totalNumbers + 2
+
+  console.log('totals', totalNumbers, totalColumns, columns)
+  console.log('pager', pages)
   if (pages > 5) {
     let extraPages
 
-    const startPage = Math.max(2, activePage - siblings)
-    const endPage = Math.min(pages - 1, activePage + siblings)
+    const startPage = Math.max(1, activePage - siblings)
+    const endPage = Math.min(pages, activePage + siblings)
 
-    let pageRange = range(startPage, endPage)
+    pageRange = range(startPage, endPage)
+    console.log('pagerange', pageRange)
 
     const hiddenLeft = startPage > 2 // Has hidden pages on left side
     const hiddenRight = pages - endPage > 1 // Has hidden pages on right side
-    const hiddenOffset = 5 - pageRange.length + 1 // Number of total hidden pages
+    const hiddenOffset = totalNumbers - pageRange.length + 1 // Number of total hidden pages
+
+    console.log('hiddens', hiddenLeft, hiddenRight, hiddenOffset)
 
     if (hiddenLeft && !hiddenRight) {
-      extraPages = range(startPage - hiddenOffset, startPage - 1)
-      pageRange = [LEFT_PAGE, ...extraPages, ...pageRange]
+      extraPages = range(startPage - hiddenOffset, startPage + 1)
+      pageRange = [1, ELLIPSIS, ...extraPages, ...pageRange]
     } else if (!hiddenLeft && hiddenRight) {
-      extraPages = range(endPage + 1, endPage + hiddenOffset)
-      pageRange = [...pageRange, ...extraPages, RIGHT_PAGE]
+      extraPages = range(endPage + 1, endPage + hiddenOffset - 1)
+      pageRange = [...pageRange, ELLIPSIS, ...extraPages]
     } else if (hiddenLeft && hiddenRight) {
       pageRange = [LEFT_PAGE, ...pageRange, RIGHT_PAGE]
     }
 
-    console.log([1, ...pageRange, pages])
+    console.log('pagessss', extraPages, pageRange)
+
+    return [1, ...pageRange, pages]
   }
 
-  console.log(pages, columns)
-
   return {
-    items,
-    ...other,
+    pageRange,
   }
 }

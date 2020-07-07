@@ -1,14 +1,12 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Typography } from '../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { PaginationItem } from './PaginationItem'
 import { pagination as tokens } from './Pagination.tokens'
 import { chevron_left, chevron_right } from '@equinor/eds-icons'
-
-//import { paginationControl } from './paginationControl'
+import { PaginationControl } from './paginationControl'
 
 const icons = {
   chevron_left,
@@ -21,7 +19,7 @@ const Navigation = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 `
 
 const UnorderedList = styled.ul`
@@ -30,7 +28,7 @@ const UnorderedList = styled.ul`
   padding: 0;
   display: grid;
   grid-gap: ${tokens.spacingSmall};
-  grid-auto-flow: row;
+  grid-auto-flow: column;
 `
 
 const StyledButton = styled(Button)`
@@ -45,20 +43,17 @@ function getAriaLabel(page, selected) {
   return `${selected ? 'Current page, ' : 'Go to '}page ${page}`
 }
 
-function paginationControl(totalItems) {
-  let itemList = []
-  for (let i = 1; i <= totalItems; i++) {
-    itemList.push({
-      page: i,
-      selected: false,
-    })
-  }
+// function paginationControl(totalItems) {
+//   let itemList = []
+//   for (let i = 1; i <= totalItems; i++) {
+//     itemList.push({
+//       page: i,
+//       selected: false,
+//     })
+//   }
 
-  return itemList
-}
-
-const LEFT_PAGE = 'LEFT'
-const RIGHT_PAGE = 'RIGHT'
+//   return itemList
+// }
 
 export const Pagination = forwardRef(function Pagination(
   {
@@ -73,12 +68,14 @@ export const Pagination = forwardRef(function Pagination(
   ref,
 ) {
   const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
+  const [activePage, setActivePage] = useState(1)
 
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
-  const items = paginationControl(pages)
+  let items = []
+  items = PaginationControl(pages, activePage)
 
-  console.log(items)
+  //console.log('items', items)
 
   const props = {
     ref,
@@ -107,18 +104,19 @@ export const Pagination = forwardRef(function Pagination(
         <StyledButton variant="ghost_icon">
           <Icon name="chevron_left" title="previous" />
         </StyledButton>
-        {items.map((item, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <ListItem key={index}>
-            <PaginationItem
-              {...item}
-              aria-label={getAriaLabel(item.page, item.selected)}
-              aria-current={item.selected}
-              page={item.page}
-              selected={item.selected}
-            />
-          </ListItem>
-        ))}
+        {items.length > 0 &&
+          items.map((item, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <ListItem key={index}>
+              <PaginationItem
+                {...item}
+                aria-label={getAriaLabel(item.page, item.selected)}
+                aria-current={item.selected}
+                page={item.page}
+                selected={item.selected}
+              />
+            </ListItem>
+          ))}
         <StyledButton variant="ghost_icon">
           <Icon name="chevron_right" title="next" />
         </StyledButton>
