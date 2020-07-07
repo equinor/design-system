@@ -1,16 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
-const TableBase = styled.thead`
-  text-align: left;
-`
-
-export const Head = (props) => {
-  const { children } = props
-
-  return <TableBase {...props}>{children}</TableBase>
-}
+export const Head = ({ children, ...props }) => (
+  <thead {...props}>{children}</thead>
+)
 
 Head.propTypes = {
   /** @ignore */

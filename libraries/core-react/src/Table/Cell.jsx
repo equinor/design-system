@@ -4,11 +4,28 @@ import styled from 'styled-components'
 import tableTokens from '@equinor/eds-tokens/components/table/table.json'
 import { typographyTemplate } from '../_common/templates'
 
-const { header, cell } = tableTokens
+const {
+  header: {
+    text: {
+      text: { typography: headerTypography, ...headerTextLevel2 },
+      ...headerTextLevel1
+    },
+  },
+  cell,
+} = tableTokens
 
 const variants = {
   header: {
-    text: header.text,
+    text: {
+      ...headerTextLevel1,
+      text: {
+        ...headerTextLevel2,
+        typography: {
+          ...headerTypography,
+          textAlign: 'left',
+        },
+      },
+    },
   },
   cell: {
     text: cell.text,
@@ -28,6 +45,11 @@ const getTokens = (as, variant) => {
   }
 }
 
+const getTokensByProps = (variant, prop) => ({
+  tableHead: variants.header[variant][prop],
+  tableBody: variants.cell[variant][prop],
+})
+
 const borderTemplate = (borders) =>
   Object.keys(borders).reduce((acc, val) => {
     const { color, width } = borders[val]
@@ -38,14 +60,22 @@ const Base = ({ tokens }) => {
   const { background, height, text, spacings, borders } = tokens
   const { typography } = text
   const base = `
-  background: ${background};
   min-height: ${height};
   height: ${height};
 
   padding-left: ${spacings.left};
   padding-right: ${spacings.right};
 
-  ${borderTemplate(borders)}
+  thead & {
+    ${borderTemplate(borders.tableHead)}
+    background: ${background.tableHead};
+  }
+
+  tbody & {
+    ${borderTemplate(borders.tableBody)}
+    background: ${background.tableBody};
+  }
+
   ${typographyTemplate(typography)}
   `
   return base
@@ -57,7 +87,11 @@ const TableBase = styled.td`
 
 export const Cell = (props) => {
   const { children, as, variant } = props
-  const tokens = getTokens(as, variant)
+  const tokens = {
+    ...getTokens(as, variant),
+    borders: getTokensByProps(variant, 'borders'),
+    background: getTokensByProps(variant, 'background'),
+  }
   return (
     <TableBase as={as} tokens={tokens} {...props}>
       {children}
