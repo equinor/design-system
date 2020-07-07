@@ -2,7 +2,7 @@
 name: Documentation 📙
 title: Create/update documentation for [topic]
 labels: documentation
-about: Use this template for documentations issues
+about: Use this template for documentation issues
 ---
 
 **Documentation Is:**
