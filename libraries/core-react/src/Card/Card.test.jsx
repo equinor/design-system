@@ -82,7 +82,7 @@ describe('Card', () => {
     const { container } = render(
       <Card>
         <CardActions alignRight>
-          <button type="button" />
+          <button type="button">Click me!</button>
         </CardActions>
       </Card>,
     )
