@@ -200,22 +200,22 @@ export const ButtonToggle = () => {
   })
   const onClick = action('onClick')
 
-  const { focus, buttonEl } = state
+  const { buttonEl, focus } = state
   const isOpen = Boolean(buttonEl)
 
-  const openMenu = (e) => setState({ ...state, buttonEl: e.target })
+  const openMenu = (e, focus) => {
+    setState({ ...state, buttonEl: e.target, focus })
+  }
 
-  const closeMenu = () => setState({ ...state, buttonEl: null })
-
-  console.log(focus)
+  const closeMenu = () => {
+    setState({ ...state, buttonEl: null, focus })
+  }
 
   const onKeyPress = (e) => {
     const { key } = e
-    console.log('onKeyPress')
+    e.preventDefault()
     switch (key) {
       case 'ArrowDown':
-      case 'Enter':
-      case ' ':
         isOpen ? closeMenu() : openMenu(e, 'first')
         break
       case 'ArrowUp':
@@ -246,10 +246,10 @@ export const ButtonToggle = () => {
       <Menu
         id="menu-on-button"
         aria-labelledby="menuButton"
-        focus={focus}
         open={isOpen}
         anchorEl={buttonEl}
         onClose={closeMenu}
+        focus={focus}
       >
         <MenuItem onClick={onClick}>
           <Icon name="folder" />
@@ -300,11 +300,8 @@ export const InTopbar = () => {
 
   const onKeyPress = (e) => {
     const { key } = e
-    console.log('onKeyPress')
     switch (key) {
       case 'ArrowDown':
-      case 'Enter':
-      case ' ':
         isOpen ? closeMenu() : openMenu(e, 'first')
         break
       case 'ArrowUp':

@@ -11,18 +11,17 @@ const StyledPaper = styled(Paper)`
   width: fit-content;
   min-width: fit-content;
 
-  ${({ left, top, open, transform, visibility }) =>
+  ${({ left, top, transform, visibility }) =>
     css({ left, top, transform, visibility, display: 'block' })}
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { children, anchorEl, open, onClose, ...rest },
+  { children, anchorEl, onClose, ...rest },
   ref,
 ) {
   if (!anchorEl) {
     return undefined
   }
-
   const { setPosition, position, visibility } = useMenu()
 
   useEffect(() => {
@@ -52,13 +51,12 @@ export const Menu = React.forwardRef(function EdsMenu(
 
   const paperProps = {
     visibility,
-    open,
     ...position,
   }
 
   return (
     <StyledPaper {...paperProps} elevation="raised">
-      <MenuList {...rest} focus={focus} ref={ref}>
+      <MenuList {...rest} ref={ref}>
         {children}
       </MenuList>
     </StyledPaper>
@@ -76,8 +74,7 @@ Menu.propTypes = {
   anchorEl: PropTypes.object,
   /** Focus menuItem */
   focus: PropTypes.oneOf(['first', 'last']),
-  /** Toggle for displaying menu */
-  open: PropTypes.bool,
+
   /** Position from left */
   left: PropTypes.number,
   /** Position from top */
@@ -90,7 +87,6 @@ Menu.defaultProps = {
   className: '',
   anchorEl: undefined,
   focus: undefined,
-  open: false,
   top: 0,
   left: 0,
   onClose: () => {},
