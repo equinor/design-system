@@ -1,27 +1,22 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import { typographyTemplate } from '../_common/templates'
 
 const { heading, paragraph } = tokens.typography
 
-const variants = [
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'overline',
-  'ingress',
-  'caption',
-  'meta',
-  'body_short',
-  'body_long',
-]
+const groupNames = Object.keys(tokens.typography)
 
-const variantToken = {
+// Only used for propTypes as groups have duplicate variants
+const variantNames = Object.keys(
+  Object.entries({ ...tokens.typography }).reduce(
+    (acc, [, val]) => ({ ...acc, ...val }),
+    {},
+  ),
+)
+
+const quickVariants = {
   ...heading,
   ...paragraph,
 }
@@ -49,60 +44,53 @@ const getElementType = (variant, link) => {
   }
 }
 
-const toComplexVariantName = (
-  variant,
-  bold = false,
-  italic = false,
-  link = false,
-) =>
+const findTypography = (variantName, group) => {
+  // For quick use when using paragraphs and headings we can skip group
+  if (typeof group === 'undefined') {
+    return quickVariants[variantName]
+  }
+
+  return tokens.typography[group][variantName]
+}
+
+const toVariantName = (variant, bold = false, italic = false, link = false) =>
   `${variant}${bold ? '_bold' : ''}${italic ? '_italic' : ''}${
     link ? '_link' : ''
   }`
 
-const Base = ({ typography, link }) => {
-  const base = `
-  margin: 0;
-
-  ${typographyTemplate(typography, link)}
-  `
-
-  return base
-}
-
-const TypographyBase = styled.p`
-  ${Base}
+const StyledTypography = styled.p`
+  ${({ typography, link }) => css`
+    ${typographyTemplate(typography, link)}
+  `}
 `
 
-export const Typography = ({
-  variant,
-  children,
-  bold,
-  italic,
-  link,
-  ...other
-}) => {
+export const Typography = forwardRef(function EdsTypography(
+  { variant, children, bold, italic, link, group, ...other },
+  ref,
+) {
   const as = getElementType(variant, link)
-  const variantName = toComplexVariantName(variant, bold, italic, link)
-  let typography = variantToken[variantName]
-
-  if (typeof typography === 'undefined') {
-    console.warn(
-      `Typography variant not found for "${variantName}". Trying to use ${variant}`,
-    )
-    typography = variantToken[variant]
-  }
+  const variantName = toVariantName(variant, bold, italic, link)
+  let typography = findTypography(variantName, group)
 
   if (typeof typography === 'undefined') {
     throw new Error(
-      `Typography variant not found for ${variant}. Please use of the following variants: ${variants.toString()}`,
+      `Typography variant not found for variant "${variantName}" ("${variant}") & group "${group}". \n\nPlease use of the following
+      \n variants: \n ${variantNames.toString()}
+      \n groups: \n ${groupNames.toString()}`,
     )
   }
   return (
-    <TypographyBase as={as} typography={typography} link={link} {...other}>
+    <StyledTypography
+      as={as}
+      typography={typography}
+      link={link}
+      ref={ref}
+      {...other}
+    >
       {children}
-    </TypographyBase>
+    </StyledTypography>
   )
-}
+})
 
 Typography.propTypes = {
   /** @ignore */
@@ -110,7 +98,9 @@ Typography.propTypes = {
   /** @ignore */
   children: PropTypes.node.isRequired,
   /** Specifies which variant to use */
-  variant: PropTypes.oneOf(variants),
+  variant: PropTypes.oneOf(variantNames),
+  /** Specifices which typography group to use  */
+  group: PropTypes.oneOf(groupNames),
   /** Specifies if text should be bold */
   bold: PropTypes.bool,
   /** Specifies if text should be italic */
@@ -120,11 +110,12 @@ Typography.propTypes = {
 }
 
 Typography.defaultProps = {
-  variant: 'h1',
+  variant: 'body_short',
+  group: undefined,
   bold: false,
   italic: false,
   link: false,
   className: '',
 }
 
-Typography.displayName = 'eds-text'
+Typography.displayName = 'eds-typography'
