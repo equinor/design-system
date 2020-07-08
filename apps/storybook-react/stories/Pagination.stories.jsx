@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Pagination } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
@@ -25,12 +25,35 @@ export default {
   decorators: [withKnobs],
 }
 
-export const variants = () => (
-  <Body>
-    <Pagination totalItems={20} />
-    <Pagination totalItems={80} total />
-    <Pagination totalItems={140} total switcher />
-  </Body>
-)
+const listOfItems = [
+  {
+    name: 'Frida',
+    role: 'Developer',
+  },
+  {
+    name: 'Victor',
+    role: 'Developer',
+  },
+  {
+    name: 'Wenche',
+    role: 'Developer',
+  },
+  {
+    name: 'Michael',
+    role: 'Developer',
+  },
+]
+
+export const Variants = () => {
+  const [items, setItems] = useState(listOfItems)
+
+  return (
+    <Body>
+      <Pagination totalItems={items.length} itemsPerPage={1} />
+      {/* <Pagination totalItems={80} total />
+      <Pagination totalItems={140} total switcher /> */}
+    </Body>
+  )
+}
 
 export const knobs = () => <Body></Body>

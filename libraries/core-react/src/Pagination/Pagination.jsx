@@ -62,21 +62,19 @@ export const Pagination = forwardRef(function Pagination(
     itemsPerPage,
     switcher,
     className,
-    onChange,
+    onPageChange,
     ...other
   },
   ref,
 ) {
   const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
-  const [activePage, setActivePage] = useState(1)
 
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
   let items = []
-  items = PaginationControl(pages, activePage)
-  console.log(items)
+  items = PaginationControl(pages)
 
-  //console.log('items', items)
+  console.log('items', items)
 
   const props = {
     ref,
@@ -84,7 +82,7 @@ export const Pagination = forwardRef(function Pagination(
     showTotalItems,
     switcher,
     columns,
-    onChange,
+    onPageChange,
     className,
     ...other,
   }
@@ -138,7 +136,7 @@ Pagination.propTypes = {
   // Display dropdown menu for user to choose items per page
   switcher: PropTypes.bool,
   // Callback fired when page is changed
-  onChange: PropTypes.func,
+  onPageChange: PropTypes.func,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -150,6 +148,6 @@ Pagination.defaultProps = {
   children: undefined,
   showTotalItems: false,
   switcher: false,
-  onChange: () => {},
+  onPageChange: () => {},
   itemsPerPage: 20,
 }

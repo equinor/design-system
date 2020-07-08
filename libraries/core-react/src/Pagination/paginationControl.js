@@ -22,10 +22,40 @@ const ELLIPSIS = 'ELLIPSIS'
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 // eslint-disable-next-line import/no-default-export
-export function PaginationControl(pages, activePage) {
+export function PaginationControl(pages, onPageChange) {
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
   // const items = paginationControl(pages)
+  const [activePage, setActivePage] = useState(1)
   const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
+
+  const goToPage = (page) => {
+    const { onPageChange = (f) => f } = this.props
+    const activePage = Math.max(0, Math.min(page, pages))
+
+    const pageData = {
+      activePage,
+      totalPages: pages,
+      itemsPerPage: itemsPerPage,
+      totalItems: totalItems,
+    }
+
+    setActivePage({ activePage }, () => onPageChange(pageData))
+  }
+
+  const handleClick = (page) => (e) => {
+    e.preventDefault()
+    goToPage(page)
+  }
+
+  const moveLeft = (e) => {
+    e.preventDefault()
+    goToPage(activePage - siblings * 2 - 1)
+  }
+
+  const moveRight = (e) => {
+    e.preventDefault()
+    goToPage(activePage + siblings * 2 + 1)
+  }
 
   const range = (start, end) => {
     const length = end - start + 1
@@ -43,13 +73,12 @@ export function PaginationControl(pages, activePage) {
     const endPage = Math.min(pages, activePage + siblings)
 
     pageRange = range(startPage, endPage)
-    console.log('pagerange', pageRange)
 
     const hiddenLeft = startPage > 2 // Has hidden pages on left side
     const hiddenRight = pages - endPage > 1 // Has hidden pages on right side
     const hiddenOffset = totalNumbers - pageRange.length + 1 // Number of total hidden pages
 
-    console.log('hiddens', hiddenLeft, hiddenRight, hiddenOffset)
+    // console.log('hiddens', hiddenLeft, hiddenRight, hiddenOffset)
 
     if (hiddenLeft && !hiddenRight) {
       extraPages = range(startPage - hiddenOffset, startPage + 1)
@@ -61,12 +90,8 @@ export function PaginationControl(pages, activePage) {
       pageRange = [LEFT_PAGE, ...pageRange, RIGHT_PAGE]
     }
 
-    console.log('pagessss', extraPages, pageRange)
-
     return [...pageRange]
   }
 
-  return {
-    pageRange,
-  }
+  return range(1, pages)
 }
