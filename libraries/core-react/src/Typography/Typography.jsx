@@ -85,7 +85,7 @@ Typography.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /** Specifies which variant to use */
   variant: PropTypes.oneOf(variantNames),
   /** Specifices which typography group to use  */
@@ -106,6 +106,7 @@ Typography.propTypes = {
 
 Typography.defaultProps = {
   variant: 'body_short',
+  children: undefined,
   group: undefined,
   bold: false,
   italic: false,
