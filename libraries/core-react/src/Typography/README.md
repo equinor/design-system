@@ -4,53 +4,35 @@ Typography component used to help render typography in EDS
 
 ## Usage
 
-### Quick
+### Quick & easy
 
-Simple access to heading and paragraph styles
+Simple access to `headings` and `paragraph` styles with colors
 ```jsx
-
-<Typography variant="h1">Text</Typography>
-<Typography variant="body_short">Text</Typography>
-<Typography variant="ingress">Text</Typography>
-<Typography variant="caption">Text</Typography>
+<Typography variant="h1" color="primary" bold>Text</Typography>
+<Typography variant="body_short" link>Text</Typography>
 ```
 ### Advanced
 
 #### Group
-Props `group` along with `variant` can be used to render any typography style.
+Use `group` along with `variant` to render any typography style in EDS.
 ```jsx
 <Typography group="ui" variant="chart">Text</Typography>
 <Typography group="table" variant="cell_text">Text</Typography>
-<Typography variant="ingress">Text</Typography>
-<Typography variant="caption">Text</Typography>
 ```
 
 #### Semantic html
 
-Use the `as` prop to change the underlying html element used to render the text
+Use the `as` prop to change the underlying html element.
 ```jsx
 <Typography variant="h2" as="a">H2 link</Typography>
 <ul>
-<Typography group="navigation" variant="breadcrumb" as="li">Breadcrumb</Typography>
+  <Typography group="navigation" variant="breadcrumb" as="li">Breadcrumb</Typography>
 </ul>
-```
-
-#### Colors
-
-Colors can be set by using the `color` prop
-
-```jsx
-<Typography color="primary"> Primary</Typography>
-<Typography color="secondary">Secondary</Typography>
-<Typography color="danger">Danger</Typography>
-<Typography color="warning">Warning</Typography>
-<Typography color="success">Success</Typography>
-<Typography color="disabled">Disabled</Typography>
 ```
 
 #### Custom
 
-If for any reason none of the typography styles work, you can set the underlying token used for rendering typography by using the `token` prop
+Use the `token` prop to extend/override the typography token used for rendering text.
 
 ```jsx
     <Typography
