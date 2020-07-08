@@ -47,11 +47,15 @@ const listOfItems = [
 export const Variants = () => {
   const [items, setItems] = useState(listOfItems)
 
+  const onPageChange = (e) => {
+    e.preventDefault()
+    // Do stuff
+  }
   return (
     <Body>
       <Pagination totalItems={items.length} itemsPerPage={1} />
-      {/* <Pagination totalItems={80} total />
-      <Pagination totalItems={140} total switcher /> */}
+      <Pagination totalItems={80} total />
+      <Pagination totalItems={140} total switcher />
     </Body>
   )
 }
