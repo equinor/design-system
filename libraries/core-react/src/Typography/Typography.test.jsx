@@ -33,6 +33,15 @@ const expectToMatchTypography = (element, token) => {
 afterEach(cleanup)
 
 describe('Typography', () => {
+  it('throws error when variant is wrong', () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {})
+
+    expect(() => {
+      render(<Typography variant="label">Test</Typography>)
+    }).toThrowError()
+
+    jest.clearAllMocks()
+  })
   it('has correct styling when variant is provided', () => {
     render(<Typography variant="body_short">Test</Typography>)
 

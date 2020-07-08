@@ -74,9 +74,9 @@ export const Typography = forwardRef(function EdsTypography(
 
   if (typeof typography === 'undefined') {
     throw new Error(
-      `Typography variant not found for variant "${variantName}" ("${variant}") & group "${group}". \n\nPlease use of the following
-      \n variants: \n ${variantNames.toString()}
-      \n groups: \n ${groupNames.toString()}`,
+      `Typography variant not found for variant "${variantName}" ("${variant}") & group "${
+        group || ''
+      }"`,
     )
   }
   return (
