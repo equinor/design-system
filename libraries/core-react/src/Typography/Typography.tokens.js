@@ -5,12 +5,12 @@ const { heading, paragraph } = typography
 
 const {
   interactive: {
-    primary__resting: { hex: primary },
-    secondary__resting: { hex: secondary },
-    danger__resting: { hex: danger },
-    warning__resting: { hex: warning },
-    success__resting: { hex: success },
-    disabled__text: { hex: disabled },
+    primary__resting: { rgba: primary },
+    secondary__resting: { rgba: secondary },
+    danger__resting: { rgba: danger },
+    warning__resting: { rgba: warning },
+    success__resting: { rgba: success },
+    disabled__text: { rgba: disabled },
   },
 } = colorsToken
 
