@@ -148,6 +148,7 @@
     },
     "spacing": {
       "left": "16px",
+      "right": "16px",
       "right_icon": "8px"
     },
     "clickbound": "48px",
