@@ -59,9 +59,8 @@ const toVariantName = (variant, bold = false, italic = false, link = false) =>
   }`
 
 const StyledTypography = styled.p`
-  ${({ typography, link }) => css`
-    ${typographyTemplate(typography, link)}
-  `}
+  ${({ typography, link }) => typographyTemplate(typography, link)}
+  ${({ fontWeight }) => css({ fontWeight })}
 `
 
 export const Typography = forwardRef(function EdsTypography(
@@ -107,6 +106,8 @@ Typography.propTypes = {
   italic: PropTypes.bool,
   /** Specifies if text should be a link */
   link: PropTypes.bool,
+  /** Sets font weight */
+  fontWeight: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
 }
 
 Typography.defaultProps = {
@@ -116,6 +117,7 @@ Typography.defaultProps = {
   italic: false,
   link: false,
   className: '',
+  fontWeight: undefined,
 }
 
 Typography.displayName = 'eds-typography'

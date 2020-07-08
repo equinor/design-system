@@ -42,6 +42,19 @@ describe('Typography', () => {
 
     jest.clearAllMocks()
   })
+  it('has correct styling when variant is provided with weight', () => {
+    render(
+      <Typography variant="body_short" fontWeight="medium">
+        Test
+      </Typography>,
+    )
+
+    const typography = screen.getByText('Test')
+    const token = tokens.typography.paragraph.body_short
+
+    expect(typography.nodeName).toBe('P')
+    expectToMatchTypography(typography, { ...token, fontWeight: 'medium' })
+  })
   it('has correct styling when variant is provided', () => {
     render(<Typography variant="body_short">Test</Typography>)
 
