@@ -50,7 +50,7 @@ const toVariantName = (variant, bold = false, italic = false, link = false) =>
 
 const StyledTypography = styled.p`
   ${({ typography, link }) => typographyTemplate(typography, link)}
-  ${({ fontWeight, color }) => css({ fontWeight, color: colors[color] })}
+  ${({ color }) => css({ color: colors[color] })}
 `
 
 export const Typography = forwardRef(function EdsTypography(
@@ -59,7 +59,7 @@ export const Typography = forwardRef(function EdsTypography(
 ) {
   const as = getElementType(variant, link)
   const variantName = toVariantName(variant, bold, italic, link)
-  let typography = token ? token : findTypography(variantName, group)
+  const typography = findTypography(variantName, group)
 
   if (typeof typography === 'undefined') {
     throw new Error(
@@ -71,7 +71,7 @@ export const Typography = forwardRef(function EdsTypography(
   return (
     <StyledTypography
       as={as}
-      typography={typography}
+      typography={{ ...typography, ...token }}
       link={link}
       ref={ref}
       {...other}
@@ -96,8 +96,6 @@ Typography.propTypes = {
   italic: PropTypes.bool,
   /** Specifies if text should be a link */
   link: PropTypes.bool,
-  /** Sets font weight */
-  fontWeight: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
   /** Specifies which color to use */
   color: PropTypes.oneOf(colorNames),
   /** Specifies which typography token to use */
@@ -112,7 +110,6 @@ Typography.defaultProps = {
   italic: false,
   link: false,
   className: '',
-  fontWeight: undefined,
   color: undefined,
   token: undefined,
 }

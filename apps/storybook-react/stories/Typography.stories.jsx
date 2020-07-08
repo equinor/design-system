@@ -86,7 +86,11 @@ export const custom = () => (
     <Typography group="table" variant="cell_text">
       Table / Cell / Text
     </Typography>
-    <Typography group="table" variant="cell_text" fontWeight="medium">
+    <Typography
+      group="table"
+      variant="cell_text"
+      token={{ fontWeight: 'medium' }}
+    >
       Table / Cell / Text / Medium
     </Typography>
     <Typography group="table" variant="cell_text" bold>
@@ -96,10 +100,10 @@ export const custom = () => (
       Table / Cell / Text / Bold / Link
     </Typography>
 
-    <Typography variant="h3" fontWeight="bold">
+    <Typography variant="h3" token={{ fontWeight: 700 }}>
       Heading 3 Bold
     </Typography>
-    <Typography variant="ingress" fontWeight="bold">
+    <Typography variant="ingress" token={{ fontWeight: 'bold' }}>
       Ingress Bold
     </Typography>
     <Typography

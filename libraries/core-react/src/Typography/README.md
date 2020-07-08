@@ -16,16 +16,6 @@ Simple access to heading and paragraph styles
 ```
 ### Advanced
 
-
-
-#### Font weight
-
-You can easily change the font weight by using the `fontWeight` prop
-```jsx
-<Typography variant="body_short" fontWeight="medium">Paragraph Medium </Typography>
-<Typography variant="ingress" fontWeight="bold">Ingress Bold</Typography>
-```
-
 #### Group
 Props `group` along with `variant` can be used to render any typography style.
 ```jsx
@@ -68,7 +58,7 @@ If for any reason none of the typography styles work, you can set the underlying
         color: 'purple',
         fontFamily: 'Arial',
         fontSize: '1.875rem',
-        fontWeight: 300,
+        fontWeight: 900,
         lineHeight: '1.714em',
         textTransform: 'uppercase',
       }}

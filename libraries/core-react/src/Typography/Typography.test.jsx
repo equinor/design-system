@@ -66,9 +66,9 @@ describe('Typography', () => {
     expect(typography.nodeName).toBe('P')
     expectToMatchTypography(typography, { ...token, color: colors.primary })
   })
-  it('has correct styling when variant is set with weight', () => {
+  it('has correct styling when variant is set & tweaked with token', () => {
     render(
-      <Typography variant="body_short" fontWeight="medium">
+      <Typography variant="body_short" token={{ fontWeight: 'medium' }}>
         Test
       </Typography>,
     )
