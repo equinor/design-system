@@ -63,3 +63,23 @@ export const paragraphs = () => (
     <Typography variant="meta">Meta</Typography>
   </Wrapper>
 )
+
+export const custom = () => (
+  <Wrapper>
+    <Typography group="navigation" variant="label">
+      Navigation / Label
+    </Typography>
+    <Typography group="navigation" variant="menu_title">
+      Navigation / Menu / Title
+    </Typography>
+    <Typography group="table" variant="cell_text">
+      Table / Cell / Text
+    </Typography>
+    <Typography group="table" variant="cell_text" bold>
+      Table / Cell / Text / Bold
+    </Typography>
+    <Typography group="table" variant="cell_text" link>
+      Table / Cell / Text / Bold
+    </Typography>
+  </Wrapper>
+)
