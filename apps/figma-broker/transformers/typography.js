@@ -14,7 +14,7 @@ export const toTypography = (figmaNode, name) => {
     fontSize,
     fontWeight,
     letterSpacing,
-    textAlignHorizontal = 'center',
+    textAlignHorizontal: textAlign,
     lineHeightPercentFontSize,
     textDecoration,
     textCase,
@@ -38,8 +38,6 @@ export const toTypography = (figmaNode, name) => {
   const fontSizeRem = (fontSize / rootFontSize).toFixed(3)
   const lineHeightEm = (lineHeightPercentFontSize / 100).toFixed(3)
   const letterSpacingEm = (letterSpacing / rootFontSize).toFixed(3)
-  const textAlignLens = R.lensProp('textAlign')
-  const textAlign = R.toLower(textAlignHorizontal)
 
   typography = {
     ...typography,
@@ -52,10 +50,7 @@ export const toTypography = (figmaNode, name) => {
     textDecoration,
     textTransform: textCase ? `${textCase}CASE` : null,
     fontStyle: italic ? 'italic' : null,
-  }
-
-  if (textAlign !== 'left') {
-    typography = R.set(textAlignLens, textAlign, typography)
+    textAlign,
   }
 
   return removeNilAndEmpty(typography)

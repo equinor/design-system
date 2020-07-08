@@ -6,6 +6,7 @@ export const typography = {
       fontSize: '2.000rem',
       fontWeight: 700,
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
     h1: {
       color: 'rgba(61, 61, 61, 1)',
@@ -13,6 +14,7 @@ export const typography = {
       fontSize: '2.000rem',
       fontWeight: 400,
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
     h2: {
       color: 'rgba(61, 61, 61, 1)',
@@ -20,6 +22,7 @@ export const typography = {
       fontSize: '1.750rem',
       fontWeight: 400,
       lineHeight: '1.429em',
+      textAlign: 'LEFT',
     },
     h3: {
       color: 'rgba(61, 61, 61, 1)',
@@ -27,6 +30,7 @@ export const typography = {
       fontSize: '1.500rem',
       fontWeight: 400,
       lineHeight: '1.667em',
+      textAlign: 'LEFT',
     },
     h4: {
       color: 'rgba(61, 61, 61, 1)',
@@ -34,6 +38,7 @@ export const typography = {
       fontSize: '1.250rem',
       fontWeight: 400,
       lineHeight: '1.600em',
+      textAlign: 'LEFT',
     },
     h5: {
       color: 'rgba(61, 61, 61, 1)',
@@ -42,6 +47,7 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.013em',
       lineHeight: '1.333em',
+      textAlign: 'LEFT',
     },
     h6: {
       color: 'rgba(61, 61, 61, 1)',
@@ -50,6 +56,7 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.013em',
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
   },
   navigation: {
@@ -60,6 +67,7 @@ export const typography = {
       fontWeight: 400,
       letterSpacing: '0.013em',
       lineHeight: '1.000em',
+      textAlign: 'LEFT',
     },
     menu_tabs: {
       color: 'rgba(61, 61, 61, 1)',
@@ -68,6 +76,7 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.013em',
       lineHeight: '1.000em',
+      textAlign: 'LEFT',
     },
     label: {
       color: 'rgba(0, 0, 0, 1)',
@@ -75,6 +84,7 @@ export const typography = {
       fontSize: '0.688rem',
       fontWeight: 400,
       lineHeight: '1.455em',
+      textAlign: 'LEFT',
     },
     drawer_active: {
       color: 'rgba(0, 0, 0, 1)',
@@ -83,6 +93,7 @@ export const typography = {
       fontWeight: 700,
       letterSpacing: '0.006em',
       lineHeight: '1.000em',
+      textAlign: 'LEFT',
     },
     drawer_inactive: {
       color: 'rgba(0, 0, 0, 1)',
@@ -91,6 +102,7 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.013em',
       lineHeight: '1.000em',
+      textAlign: 'LEFT',
     },
     button: {
       color: 'rgba(0, 0, 0, 1)',
@@ -98,6 +110,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 500,
       lineHeight: '1.143em',
+      textAlign: 'LEFT',
     },
     breadcrumb: {
       color: 'rgba(0, 0, 0, 1)',
@@ -105,6 +118,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 500,
       lineHeight: '1.143em',
+      textAlign: 'LEFT',
     },
     breadcrumb_hover: {
       color: 'rgba(0, 0, 0, 1)',
@@ -113,6 +127,7 @@ export const typography = {
       fontWeight: 500,
       lineHeight: '1.143em',
       textDecoration: 'UNDERLINE',
+      textAlign: 'LEFT',
     },
   },
   input: {
@@ -122,6 +137,7 @@ export const typography = {
       fontSize: '0.750rem',
       fontWeight: 400,
       lineHeight: '1.333em',
+      textAlign: 'LEFT',
     },
     text: {
       color: 'rgba(0, 0, 0, 1)',
@@ -130,6 +146,7 @@ export const typography = {
       fontWeight: 400,
       letterSpacing: '0.025em',
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
     text_monospaced: {
       fontFeature: "'tnum' on, 'lnum' on",
@@ -139,6 +156,7 @@ export const typography = {
       fontWeight: 400,
       letterSpacing: '0.063em',
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
     helper: {
       color: 'rgba(0, 0, 0, 1)',
@@ -147,6 +165,7 @@ export const typography = {
       fontWeight: 400,
       letterSpacing: '0.013em',
       lineHeight: '1.455em',
+      textAlign: 'LEFT',
     },
   },
   paragraph: {
@@ -157,6 +176,7 @@ export const typography = {
       fontWeight: 400,
       lineHeight: '1.250em',
       fontStyle: 'italic',
+      textAlign: 'LEFT',
     },
     caption: {
       color: 'rgba(61, 61, 61, 1)',
@@ -164,6 +184,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 400,
       lineHeight: '1.143em',
+      textAlign: 'LEFT',
     },
     meta: {
       color: 'rgba(61, 61, 61, 1)',
@@ -171,6 +192,7 @@ export const typography = {
       fontSize: '0.625rem',
       fontWeight: 400,
       lineHeight: '1.600em',
+      textAlign: 'LEFT',
     },
     body_short: {
       color: 'rgba(61, 61, 61, 1)',
@@ -178,6 +200,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 400,
       lineHeight: '1.250em',
+      textAlign: 'LEFT',
     },
     body_short_bold_italic: {
       color: 'rgba(61, 61, 61, 1)',
@@ -186,6 +209,7 @@ export const typography = {
       fontWeight: 700,
       lineHeight: '1.250em',
       fontStyle: 'italic',
+      textAlign: 'LEFT',
     },
     body_short_bold: {
       color: 'rgba(61, 61, 61, 1)',
@@ -193,6 +217,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 700,
       lineHeight: '1.250em',
+      textAlign: 'LEFT',
     },
     body_short_link: {
       color: 'rgba(0, 112, 121, 1)',
@@ -201,6 +226,7 @@ export const typography = {
       fontWeight: 400,
       lineHeight: '1.250em',
       textDecoration: 'UNDERLINE',
+      textAlign: 'LEFT',
     },
     overline: {
       color: 'rgba(61, 61, 61, 1)',
@@ -210,6 +236,7 @@ export const typography = {
       letterSpacing: '0.069em',
       lineHeight: '1.600em',
       textTransform: 'UPPERCASE',
+      textAlign: 'LEFT',
     },
     ingress: {
       color: 'rgba(61, 61, 61, 1)',
@@ -217,6 +244,7 @@ export const typography = {
       fontSize: '1.125rem',
       fontWeight: 400,
       lineHeight: '1.333em',
+      textAlign: 'LEFT',
     },
     body_long: {
       color: 'rgba(61, 61, 61, 1)',
@@ -224,6 +252,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 400,
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
     body_long_link: {
       color: 'rgba(0, 112, 121, 1)',
@@ -232,6 +261,7 @@ export const typography = {
       fontWeight: 400,
       lineHeight: '1.500em',
       textDecoration: 'UNDERLINE',
+      textAlign: 'LEFT',
     },
     body_long_italic: {
       color: 'rgba(61, 61, 61, 1)',
@@ -240,6 +270,7 @@ export const typography = {
       fontWeight: 400,
       lineHeight: '1.500em',
       fontStyle: 'italic',
+      textAlign: 'LEFT',
     },
     body_long_bold: {
       color: 'rgba(61, 61, 61, 1)',
@@ -247,6 +278,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 700,
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
     body_long_bold_italic: {
       color: 'rgba(61, 61, 61, 1)',
@@ -255,6 +287,7 @@ export const typography = {
       fontWeight: 700,
       lineHeight: '1.500em',
       fontStyle: 'italic',
+      textAlign: 'LEFT',
     },
   },
   table: {
@@ -264,6 +297,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 500,
       lineHeight: '1.714em',
+      textAlign: 'LEFT',
     },
     cell_text: {
       color: 'rgba(0, 0, 0, 1)',
@@ -271,6 +305,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 400,
       lineHeight: '1.714em',
+      textAlign: 'LEFT',
     },
     cell_text_bold: {
       color: 'rgba(0, 0, 0, 1)',
@@ -278,6 +313,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 700,
       lineHeight: '1.714em',
+      textAlign: 'LEFT',
     },
     cell_text_link: {
       color: 'rgba(0, 0, 0, 1)',
@@ -286,6 +322,7 @@ export const typography = {
       fontWeight: 400,
       lineHeight: '1.714em',
       textDecoration: 'UNDERLINE',
+      textAlign: 'LEFT',
     },
     cell_numeric_monospaced: {
       fontFeature: "'tnum' on, 'lnum' on",
@@ -294,6 +331,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 400,
       lineHeight: '1.429em',
+      textAlign: 'LEFT',
     },
   },
   ui: {
@@ -303,6 +341,7 @@ export const typography = {
       fontSize: '0.750rem',
       fontWeight: 500,
       lineHeight: '1.333em',
+      textAlign: 'LEFT',
     },
     snackbar: {
       color: 'rgba(61, 61, 61, 1)',
@@ -310,6 +349,7 @@ export const typography = {
       fontSize: '0.750rem',
       fontWeight: 400,
       lineHeight: '1.333em',
+      textAlign: 'LEFT',
     },
     accordion_header: {
       color: 'rgba(61, 61, 61, 1)',
@@ -317,6 +357,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 500,
       lineHeight: '1.500em',
+      textAlign: 'LEFT',
     },
     chip__badge: {
       color: 'rgba(61, 61, 61, 1)',
@@ -324,6 +365,7 @@ export const typography = {
       fontSize: '0.750rem',
       fontWeight: 400,
       lineHeight: '1.333em',
+      textAlign: 'LEFT',
     },
     chart: {
       color: 'rgba(61, 61, 61, 1)',
@@ -331,6 +373,7 @@ export const typography = {
       fontSize: '0.750rem',
       fontWeight: 400,
       lineHeight: '1.333em',
+      textAlign: 'LEFT',
     },
   },
 }
