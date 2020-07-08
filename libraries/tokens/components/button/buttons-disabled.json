@@ -14,7 +14,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -38,7 +38,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -48,17 +48,17 @@
     "clickboundOffset": "6px"
   },
   "ghost_icon": {
-    "height": "16px",
-    "width": "16px",
+    "height": "24px",
+    "width": "24px",
     "color": "rgba(190, 190, 190, 1)",
     "background": "transparent",
     "border": {
       "color": "transparent",
-      "width": "1px",
+      "width": 0,
       "radius": ""
     },
     "clickbound": "48px",
-    "clickboundOffset": "16px"
+    "clickboundOffset": "12px"
   },
   "contained_right_icon": {
     "height": "36px",
@@ -75,7 +75,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -100,7 +100,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -125,7 +125,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -150,7 +150,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -175,7 +175,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -200,7 +200,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",
@@ -225,7 +225,7 @@
       "fontSize": "0.875rem",
       "fontWeight": 500,
       "lineHeight": "1.143em",
-      "textAlign": "center"
+      "textAlign": "CENTER"
     },
     "spacing": {
       "left": "16px",

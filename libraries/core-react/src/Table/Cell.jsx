@@ -4,29 +4,10 @@ import styled from 'styled-components'
 import tableTokens from '@equinor/eds-tokens/components/table/table.json'
 import { typographyTemplate } from '../_common/templates'
 
-const {
-  header: {
-    text: {
-      text: { typography: headerTypography, ...headerTextLevel2 },
-      ...headerTextLevel1
-    },
-  },
-  cell,
-} = tableTokens
+const { header, cell } = tableTokens
 
 const variants = {
-  header: {
-    text: {
-      ...headerTextLevel1,
-      text: {
-        ...headerTextLevel2,
-        typography: {
-          ...headerTypography,
-          textAlign: 'left',
-        },
-      },
-    },
-  },
+  header: { text: header.text },
   cell: {
     text: cell.text,
     numeric: cell.monospaced_numeric,
