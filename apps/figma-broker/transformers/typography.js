@@ -1,6 +1,6 @@
 import R from 'ramda'
 import { withType, withName, removeNilAndEmpty } from '@utils'
-import { rootFontSize, rem, em, px } from '@units'
+import { rootFontSize, rem, em } from '@units'
 import { fillToRgba } from './colors'
 
 export { fillToHex, fillToHsla, fillToRgba } from './colors'
@@ -47,10 +47,10 @@ export const toTypography = (figmaNode, name) => {
     fontWeight,
     letterSpacing: letterSpacing ? em(letterSpacingEm) : null,
     lineHeight: em(lineHeightEm),
-    textDecoration,
-    textTransform: textCase ? `${textCase}CASE` : null,
+    textDecoration: textDecoration ? R.toLower(textDecoration) : null,
+    textTransform: textCase ? R.toLower(`${textCase}CASE`) : null,
     fontStyle: italic ? 'italic' : null,
-    textAlign,
+    textAlign: R.toLower(textAlign),
   }
 
   return removeNilAndEmpty(typography)

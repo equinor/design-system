@@ -18,7 +18,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 500,
           "lineHeight": "1.714em",
-          "textAlign": "LEFT"
+          "textAlign": "left"
         }
       },
       "spacings": {
@@ -39,7 +39,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 500,
           "lineHeight": "1.714em",
-          "textAlign": "LEFT"
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {
@@ -58,7 +58,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 500,
           "lineHeight": "1.714em",
-          "textAlign": "LEFT"
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {
@@ -96,7 +96,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 500,
           "lineHeight": "1.714em",
-          "textAlign": "RIGHT"
+          "textAlign": "right"
         }
       },
       "spacings": {
@@ -117,7 +117,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 500,
           "lineHeight": "1.714em",
-          "textAlign": "RIGHT"
+          "textAlign": "right"
         },
         "borders": {
           "bottom": {
@@ -136,7 +136,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 500,
           "lineHeight": "1.714em",
-          "textAlign": "RIGHT"
+          "textAlign": "right"
         },
         "borders": {
           "bottom": {
@@ -226,7 +226,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 400,
           "lineHeight": "1.429em",
-          "textAlign": "RIGHT"
+          "textAlign": "right"
         }
       },
       "spacings": {
@@ -248,7 +248,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 400,
           "lineHeight": "1.429em",
-          "textAlign": "RIGHT"
+          "textAlign": "right"
         },
         "borders": {
           "bottom": {
@@ -268,7 +268,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 400,
           "lineHeight": "1.429em",
-          "textAlign": "RIGHT"
+          "textAlign": "right"
         },
         "borders": {
           "bottom": {
@@ -424,7 +424,7 @@
             "fontWeight": 400,
             "letterSpacing": "0.025em",
             "lineHeight": "1.500em",
-            "textAlign": "LEFT"
+            "textAlign": "left"
           },
           "colorPlaceholder": "rgba(111, 111, 111, 1)"
         },
@@ -461,7 +461,7 @@
               "fontWeight": 400,
               "letterSpacing": "0.025em",
               "lineHeight": "1.500em",
-              "textAlign": "LEFT"
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(111, 111, 111, 1)"
           },
@@ -499,7 +499,7 @@
               "fontWeight": 400,
               "letterSpacing": "0.025em",
               "lineHeight": "1.500em",
-              "textAlign": "LEFT"
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(190, 190, 190, 1)"
           },
@@ -529,7 +529,7 @@
               "fontWeight": 400,
               "letterSpacing": "0.025em",
               "lineHeight": "1.500em",
-              "textAlign": "LEFT"
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(111, 111, 111, 1)"
           },
@@ -560,7 +560,7 @@
               "fontWeight": 400,
               "letterSpacing": "0.025em",
               "lineHeight": "1.500em",
-              "textAlign": "LEFT"
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(111, 111, 111, 1)"
           },
@@ -589,7 +589,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 400,
           "lineHeight": "1.714em",
-          "textAlign": "LEFT"
+          "textAlign": "left"
         }
       },
       "spacings": {
@@ -610,7 +610,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 400,
           "lineHeight": "1.714em",
-          "textAlign": "LEFT"
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {
@@ -629,7 +629,7 @@
           "fontSize": "0.875rem",
           "fontWeight": 400,
           "lineHeight": "1.714em",
-          "textAlign": "LEFT"
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {
