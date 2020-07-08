@@ -16065,7 +16065,7 @@ packages:
 specifiers:
   '@equinor/eds-core-react': 'workspace:*'
   '@equinor/eds-icons': 'workspace:*'
-  '@equinor/eds-tokens': 'workspace:^0.2.0'
+  '@equinor/eds-tokens': 'workspace:*'
   '@mdx-js/mdx': ^1.6.5
   '@mdx-js/react': ^1.6.5
   '@mdx-js/tag': ^0.20.3
