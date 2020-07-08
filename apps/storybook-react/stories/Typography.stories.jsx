@@ -102,5 +102,17 @@ export const custom = () => (
     <Typography variant="ingress" fontWeight="bold">
       Ingress Bold
     </Typography>
+    <Typography
+      token={{
+        color: 'purple',
+        fontFamily: 'Arial',
+        fontSize: '1.875rem',
+        fontWeight: 300,
+        lineHeight: '1.714em',
+        textTransform: 'uppercase',
+      }}
+    >
+      Custom token
+    </Typography>
   </Wrapper>
 )

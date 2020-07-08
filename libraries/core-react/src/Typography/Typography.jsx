@@ -54,12 +54,12 @@ const StyledTypography = styled.p`
 `
 
 export const Typography = forwardRef(function EdsTypography(
-  { variant, children, bold, italic, link, group, ...other },
+  { variant, children, bold, italic, link, group, token, ...other },
   ref,
 ) {
   const as = getElementType(variant, link)
   const variantName = toVariantName(variant, bold, italic, link)
-  let typography = findTypography(variantName, group)
+  let typography = token ? token : findTypography(variantName, group)
 
   if (typeof typography === 'undefined') {
     throw new Error(
@@ -100,6 +100,8 @@ Typography.propTypes = {
   fontWeight: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
   /** Specifies which color to use */
   color: PropTypes.oneOf(colorNames),
+  /** Specifies which typography token to use */
+  token: PropTypes.object,
 }
 
 Typography.defaultProps = {
@@ -111,6 +113,7 @@ Typography.defaultProps = {
   className: '',
   fontWeight: undefined,
   color: undefined,
+  token: undefined,
 }
 
 Typography.displayName = 'eds-typography'

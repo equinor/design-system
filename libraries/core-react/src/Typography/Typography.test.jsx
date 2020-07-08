@@ -43,6 +43,16 @@ describe('Typography', () => {
 
     jest.clearAllMocks()
   })
+  it('uses provided typography token', () => {
+    const token = tokens.typography.table.cell_header
+
+    render(<Typography token={token}>Test</Typography>)
+
+    const typography = screen.getByText('Test')
+
+    expect(typography.nodeName).toBe('P')
+    expectToMatchTypography(typography, token)
+  })
   it('has correct styling when variant is set with primary color', () => {
     render(
       <Typography variant="body_short" color="primary">
