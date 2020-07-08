@@ -24,7 +24,7 @@ RUN pnpm --filter ./libraries/tokens install && \
   pnpm --filter ./libraries/tokens run build
 
 RUN pnpm --filter ./libraries/core-react install && \
-  pnpm --filter ./libraries/core-react run build
+  pnpm --filter ./libraries/core-react run build:for-storybook
 
 RUN pnpm --filter ./apps/storefront install
 

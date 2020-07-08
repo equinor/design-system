@@ -93,7 +93,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   ))
 
   return (
-    <nav {...props} aria-label="breadcrumbs" role="breadcrumbs">
+    <nav {...props} aria-label="breadcrumbs">
       <OrderedList>
         {collapse && !expanded ? collapsedCrumbs(allCrumbs) : allCrumbs}
       </OrderedList>

@@ -1,62 +1,70 @@
 ---
 title: Accordion
-tabs: 
-- Overview
-- Usage
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+  - Interaction
 mode: publish
 ---
 
+An _accordion_ allows users to collapse and expand sections of content.
 
-**An *accordion* allows users to collapse and expand sections of content.**
 <!--One to two sentences as an introduction to the component-->
 
-***
-
-
 ## Guidelines
+
 <!--List how to use it, sizes, widths, grid interactions, colour allowances -->
 
-Accordions are composed of a header area and a content area. They deliver large amounts of information in user-controlled sections. They can be used to group or hide information which helps to keep order and scannability on a page. 
+Accordions are composed of a header area and a content area. They deliver large amounts of information in user-controlled sections. They can be used to group or hide information which helps to keep order and scannability on a page.
 
+**Don't**
 
-**Don't** 
 <!--Bullet point list if needed -->
 
-* Do not use if there is not enough content. Accordions increase cognitive load, do not use if grouping small amounts of content. 
-* Do not change the width of the accordion when it is expanded or collapsed. 
-* Do not hide errors or critical information inside an accordion that requires immediate action. 
+- Do not use if there is not enough content. Accordions increase cognitive load, do not use if grouping small amounts of content.
+- Do not change the width of the accordion when it is expanded or collapsed.
+- Do not hide errors or critical information inside an accordion that requires immediate action.
 
+## Variations
 
-## Variations 
 <!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
 
 ### Action right
 
-<FigmaImage url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1420%3A9038" />
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1420%3A9038"
+  alt="Accordion action right"
+/>
 
 ### Action left
 
-<FigmaImage url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1431%3A326" />
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1431%3A326"
+  alt="Accordion action left"
+/>
 
 ### Action dual
 
-<FigmaImage url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1431%3A482" />
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1431%3A482"
+  alt="Accordion action dual"
+/>
 
 ### Header area
 
-Whether expanded or collapsed, the header height must be 48px. The header area must contain one action indicating that the section expands or collapses and can contain additional actions. The expand/collapse functionality is tied to the entire header. Additional actions are triggered only by interacting directly with that action. 
-
+Whether expanded or collapsed, the header height must be 48px. The header area must contain one action indicating that the section expands or collapses and can contain additional actions. The expand/collapse functionality is tied to the entire header. Additional actions are triggered only by interacting directly with that action.
 
 #### Labels
 
-Labels should provide clear and concise direction. Avoid labels that are too long. Labels should be to the point, short and no more than three words. Note that if the label is longer than the maximum width, it will be truncated and should have a tooltip provided. 
-
+Labels should provide clear and concise direction. Avoid labels that are too long. Labels should be to the point, short and no more than three words. Note that if the label is longer than the maximum width, it will be truncated and should have a tooltip provided.
 
 ### Content area
 
 When the accordion is expanded, the minimum height for the content area is 96px. There is no maximum height for the content area.
 
-
 ## Interaction
 
-Multiple sections can be expanded simultaneously. 
+Multiple sections can be expanded simultaneously.

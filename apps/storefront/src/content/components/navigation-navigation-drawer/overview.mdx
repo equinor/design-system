@@ -1,69 +1,72 @@
 ---
 title: Navigation navigation drawer
-tabs: 
-- Overview
-- Usage
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+  - Interaction
 mode: publish
 ---
 
+A _navigation drawer_ displays categories of navigational links in a vertical column that can be scrolled.
 
-**A *navigation drawer* displays categories of navigational links in a vertical column that can be scrolled.**
 <!--One to two sentences as an introduction to the component-->
 
-***
-
 ## Guidelines
+
 <!--List how to use it, sizes, widths, grid interactions, colour allowances -->
 
 A navigation drawer is used to hold navigation with multiple groupings or many levels. Use a navigation drawer when the content has:
- 
-* more sections than would fit in the `Top bar` as *tabs*
-* two or more levels of navigation hierarchy
+
+- more sections than would fit in the `Top bar` as _tabs_
+- two or more levels of navigation hierarchy
 
 Navigation drawer labels should provide clear and concise direction. Note that if the label is longer than the maximum width it will be truncated and should have a tooltip provided.
 
-**Don't** 
+**Don't**
+
 <!--Bullet point list if needed -->
-* Do not change the height of the individual items. 
-* Do not change the width of the `Container`. 
-* Do not open or place on the right side of the viewport. 
-* Do not shrink text size to fit a label on a single line.
-* Do not wrap a label over two lines.
 
+- Do not change the height of the individual items.
+- Do not change the width of the `Container`.
+- Do not open or place on the right side of the viewport.
+- Do not shrink text size to fit a label on a single line.
+- Do not wrap a label over two lines.
 
-## Variations 
+## Variations
+
 <!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
 
-
-<FigmaImage url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1%3A14" />
-
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1%3A14"
+  alt="Figma design sketches of navigation drawer"
+/>
 
 ### Subtitle
 
-Use a `Subtitle` as a divider to separate groups of navigation designations. 
-
+Use a `Subtitle` as a divider to separate groups of navigation designations.
 
 ### Grandparent
 
-When using the `Grandparent` grouping items, always use `System icon/Arrows/chevron ...` to indicate nested items. 
+When using the `Grandparent` grouping items, always use `System icon/Arrows/chevron ...` to indicate nested items.
 
-`Grandparent` items are allowed an optional leading icon to supplement the label. Use logical icons.  
+`Grandparent` items are allowed an optional leading icon to supplement the label. Use logical icons.
 
 **Don't**
-* Do not repeat the same icon across primary item destinations. 
-* Do not apply icons to some items and not others. 
 
+- Do not repeat the same icon across primary item destinations.
+- Do not apply icons to some items and not others.
 
 ### Parent
 
-When using the `Parent` grouping items, always use `System icon/Arrows/chevron ...` to indicate nested items. 
-
+When using the `Parent` grouping items, always use `System icon/Arrows/chevron ...` to indicate nested items.
 
 ### Child
 
-A `Child` can be used with and without a `Parent`. It can be orphaned under a `Grandparent`.  
+A `Child` can be used with and without a `Parent`. It can be orphaned under a `Grandparent`.
 
+## Interaction
 
-## Interaction 
-
-A desktop navigation drawer can be persistent or toggled via the navigation icon in the top bar. Below `839px` the navigation drawer transforms into a collapsed drawer or becomes a hidden drawer. Hidden navigation drawers are accessible via the navigation icon in the `Top bar`.  
+A desktop navigation drawer can be persistent or toggled via the navigation icon in the top bar. Below `839px` the navigation drawer transforms into a collapsed drawer or becomes a hidden drawer. Hidden navigation drawers are accessible via the navigation icon in the `Top bar`.

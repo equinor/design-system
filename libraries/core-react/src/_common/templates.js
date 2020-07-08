@@ -25,6 +25,9 @@ export const typographyTemplate = (typography, link) => {
   if (typography.textDecoration) {
     base += `\ntext-decoration: ${typography.textDecoration};`
   }
+  if (typography.textAlign) {
+    base += `\ntext-align: ${typography.textAlign};`
+  }
   if (typography.fontFeature) {
     base += `\nfont-feature-settings: ${typography.fontFeature};`
   }

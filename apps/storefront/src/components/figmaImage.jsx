@@ -9,6 +9,7 @@ import externalLinkSvg from '../assets/external_link.svg'
 const Container = styled.div`
   display: block;
   width: 100%;
+  max-width: 45rem;
   padding: 16px;
   margin-bottom: 24px;
   font-size: 18px;
@@ -21,6 +22,8 @@ const Link = styled.a`
 
 const Image = styled.img`
   margin-left: 4px;
+  max-width: 100%;
+  overflow: hidden;
   background: transparent !important;
 `
 
@@ -51,7 +54,7 @@ const parseUrl = (url) => {
   return `${fileId}.${nodeId}`
 }
 
-const FigmaImage = ({ url }) => {
+const FigmaImage = ({ url, alt = 'Design in Figma' }) => {
   const data = useStaticQuery(graphql`
     {
       allFile(
@@ -80,7 +83,7 @@ const FigmaImage = ({ url }) => {
         <Image src={externalLinkSvg} alt="External link" />
       </Title>
       {imageUrl ? (
-        <Image src={imageUrl} alt="" />
+        <Image src={imageUrl} alt={alt} />
       ) : (
         <div>
           <Image as="span" role="img" aria-label="See no evil">
@@ -96,6 +99,8 @@ const FigmaImage = ({ url }) => {
 FigmaImage.propTypes = {
   /** Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed */
   url: PropTypes.string.isRequired,
+  /** Alt text for the Figma image */
+  alt: PropTypes.string, //eslint-disable-line
 }
 
-export default FigmaImage
+export default FigmaImage //eslint-disable-line

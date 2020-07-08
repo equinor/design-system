@@ -48,17 +48,17 @@
     "clickboundOffset": "6px"
   },
   "ghost_icon": {
-    "height": "16px",
-    "width": "16px",
+    "height": "24px",
+    "width": "24px",
     "color": "rgba(190, 190, 190, 1)",
     "background": "transparent",
     "border": {
       "color": "transparent",
-      "width": "1px",
+      "width": 0,
       "radius": ""
     },
     "clickbound": "48px",
-    "clickboundOffset": "16px"
+    "clickboundOffset": "12px"
   },
   "contained_right_icon": {
     "height": "36px",
