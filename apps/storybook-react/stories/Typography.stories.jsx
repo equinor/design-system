@@ -64,6 +64,17 @@ export const paragraphs = () => (
   </Wrapper>
 )
 
+export const colors = () => (
+  <Wrapper>
+    <Typography color="primary"> Primary</Typography>
+    <Typography color="secondary">Secondary</Typography>
+    <Typography color="danger">Danger</Typography>
+    <Typography color="warning">Warning</Typography>
+    <Typography color="success">Success</Typography>
+    <Typography color="disabled">Disabled</Typography>
+  </Wrapper>
+)
+
 export const custom = () => (
   <Wrapper>
     <Typography group="navigation" variant="label">

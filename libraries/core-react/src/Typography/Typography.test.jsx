@@ -6,6 +6,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Typography } from '.'
 import { tokens } from '@equinor/eds-tokens'
+import { colors } from './Typography.tokens.js'
 
 const StyledTypography = styled(Typography)`
   margin-top: 16px;
@@ -42,7 +43,20 @@ describe('Typography', () => {
 
     jest.clearAllMocks()
   })
-  it('has correct styling when variant is provided with weight', () => {
+  it('has correct styling when variant is set with primary color', () => {
+    render(
+      <Typography variant="body_short" color="primary">
+        Test
+      </Typography>,
+    )
+
+    const typography = screen.getByText('Test')
+    const token = tokens.typography.paragraph.body_short
+
+    expect(typography.nodeName).toBe('P')
+    expectToMatchTypography(typography, { ...token, color: colors.primary })
+  })
+  it('has correct styling when variant is set with weight', () => {
     render(
       <Typography variant="body_short" fontWeight="medium">
         Test
@@ -55,7 +69,7 @@ describe('Typography', () => {
     expect(typography.nodeName).toBe('P')
     expectToMatchTypography(typography, { ...token, fontWeight: 'medium' })
   })
-  it('has correct styling when variant is provided', () => {
+  it('has correct styling when variant is set', () => {
     render(<Typography variant="body_short">Test</Typography>)
 
     const typography = screen.getByText('Test')
@@ -64,7 +78,7 @@ describe('Typography', () => {
     expect(typography.nodeName).toBe('P')
     expectToMatchTypography(typography, token)
   })
-  it('has correct styling when variant & group is provided', () => {
+  it('has correct styling when variant & group is set', () => {
     render(
       <Typography group="navigation" variant="menu_title" as="span">
         Test
@@ -77,7 +91,7 @@ describe('Typography', () => {
     expect(typography.nodeName).toBe('SPAN')
     expectToMatchTypography(typography, token)
   })
-  it('has correct styling when variant is provided with bold & italic', () => {
+  it('has correct styling when variant is set with bold & italic', () => {
     render(
       <Typography variant="body_short" bold italic>
         Test
@@ -103,7 +117,7 @@ describe('Typography', () => {
     expect(typography.nodeName).toBe('A')
     expectToMatchTypography(typography, token)
   })
-  it('has correct element type when using "as" prop', () => {
+  it('has correct element type when "as" is set', () => {
     render(
       <Typography variant="h2" as="h4">
         Test

@@ -1,25 +1,15 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { tokens } from '@equinor/eds-tokens'
 import { typographyTemplate } from '../_common/templates'
-
-const { heading, paragraph } = tokens.typography
-
-const groupNames = Object.keys(tokens.typography)
-
-// Only used for propTypes as groups have duplicate variants
-const variantNames = Object.keys(
-  Object.entries({ ...tokens.typography }).reduce(
-    (acc, [, val]) => ({ ...acc, ...val }),
-    {},
-  ),
-)
-
-const quickVariants = {
-  ...heading,
-  ...paragraph,
-}
+import {
+  groupNames,
+  variantNames,
+  colorNames,
+  quickVariants,
+  colors,
+  typography,
+} from './Typography.tokens'
 
 const getElementType = (variant, link) => {
   if (link) {
@@ -50,7 +40,7 @@ const findTypography = (variantName, group) => {
     return quickVariants[variantName]
   }
 
-  return tokens.typography[group][variantName]
+  return typography[group][variantName]
 }
 
 const toVariantName = (variant, bold = false, italic = false, link = false) =>
@@ -60,7 +50,7 @@ const toVariantName = (variant, bold = false, italic = false, link = false) =>
 
 const StyledTypography = styled.p`
   ${({ typography, link }) => typographyTemplate(typography, link)}
-  ${({ fontWeight }) => css({ fontWeight })}
+  ${({ fontWeight, color }) => css({ fontWeight, color: colors[color] })}
 `
 
 export const Typography = forwardRef(function EdsTypography(
@@ -108,6 +98,8 @@ Typography.propTypes = {
   link: PropTypes.bool,
   /** Sets font weight */
   fontWeight: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  /** Specifies which color to use */
+  color: PropTypes.oneOf(colorNames),
 }
 
 Typography.defaultProps = {
@@ -118,6 +110,7 @@ Typography.defaultProps = {
   link: false,
   className: '',
   fontWeight: undefined,
+  color: undefined,
 }
 
 Typography.displayName = 'eds-typography'
