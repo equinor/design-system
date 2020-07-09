@@ -51,6 +51,18 @@ const toVariantName = (variant, bold = false, italic = false, link = false) =>
 const StyledTypography = styled.p`
   ${({ typography, link }) => typographyTemplate(typography, link)}
   ${({ color }) => css({ color: colors[color] })}
+  ${({ lines }) =>
+    //https://caniuse.com/#feat=css-line-clamp
+    lines > 0 &&
+    css`
+      & {
+        display: -webkit-box;
+        -webkit-line-clamp: ${lines};
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    `}
 `
 
 export const Typography = forwardRef(function EdsTypography(
@@ -100,6 +112,8 @@ Typography.propTypes = {
   color: PropTypes.oneOf(colorNames),
   /** Specifies which typography token to use */
   token: PropTypes.object,
+  /** Specifies how many  */
+  lines: PropTypes.number,
 }
 
 Typography.defaultProps = {
@@ -112,6 +126,7 @@ Typography.defaultProps = {
   className: '',
   color: undefined,
   token: undefined,
+  lines: undefined,
 }
 
 Typography.displayName = 'eds-typography'
