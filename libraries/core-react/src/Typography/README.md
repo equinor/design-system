@@ -24,7 +24,7 @@ Use `group` along with `variant` to render any typography style in EDS.
 
 Use the `as` prop to change the underlying html element.
 ```jsx
-<Typography variant="h2" as="a">H2 link</Typography>
+<Typography variant="h4" as="h3">h3 styled as h4</Typography>
 <ul>
   <Typography group="navigation" variant="breadcrumb" as="li">Breadcrumb</Typography>
 </ul>
