@@ -112,7 +112,7 @@ Typography.propTypes = {
   color: PropTypes.oneOf(colorNames),
   /** Specifies which typography token to use */
   token: PropTypes.object,
-  /** Specifies how many  */
+  /** Specifies how many lines of text are shown */
   lines: PropTypes.number,
 }
 
