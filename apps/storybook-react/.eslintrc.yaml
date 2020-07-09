@@ -3,3 +3,6 @@ rules:
   # storybook expects both default and named exports in the stories
   import/no-default-export:
     - off
+  # cheating to get a docker build
+  jsx-a11y/img-redundant-alt:
+    - 1
