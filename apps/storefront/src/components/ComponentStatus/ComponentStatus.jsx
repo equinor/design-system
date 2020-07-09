@@ -53,7 +53,7 @@ const ComponentStatus = () => {
             <Cell as="th" key={component.component + index} scope="row">
               <Link
                 to={`/components/${kebabify(component.component)}`}
-                style={{ color: 'var(--moss-green)', fontSize: '0.875em' }}
+                style={{ color: 'var(--moss-green)', fontSize: '0.875rem' }}
               >
                 {component.component}
               </Link>
