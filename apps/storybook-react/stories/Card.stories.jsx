@@ -221,13 +221,13 @@ export const CardHeaderVariants = () => {
 
 const CardMediafullWidth = () => (
   <CardMedia fullWidth>
-    <img src="https://i.imgur.com/UM3mrju.jpg" alt="Image for representation" />
+    <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
   </CardMedia>
 )
 
 const CardMediaDefault = () => (
   <CardMedia>
-    <img src="https://i.imgur.com/UM3mrju.jpg" alt="Image for representation" />
+    <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
   </CardMedia>
 )
 
