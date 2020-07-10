@@ -8,7 +8,7 @@ import { typographyTemplate } from '../_common/templates'
 const { colors } = button
 
 // display:grid; does not work on Webkit browser engine, so we have to wrap content in element where css-grid works
-const WebkitFix = styled.span`
+const ButtonInner = styled.span`
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
@@ -132,7 +132,7 @@ export const Button = forwardRef(function Button(
       tabIndex={disabled ? -1 : tabIndex}
       {...baseProps}
     >
-      <WebkitFix>{children}</WebkitFix>
+      <ButtonInner>{children}</ButtonInner>
     </ButtonBase>
   )
 })
