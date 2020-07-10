@@ -7,6 +7,14 @@ import { typographyTemplate } from '../_common/templates'
 
 const { colors } = button
 
+// display:grid; does not work on Webkit browser engine, so we have to wrap content in element where css-grid works
+const WebkitFix = styled.span`
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  align-items: center;
+`
+
 const Base = ({ base, baseDisabled: disabled }) => {
   const { border, spacing, typography, focus, hover } = base
 
@@ -25,6 +33,7 @@ const Base = ({ base, baseDisabled: disabled }) => {
     border-radius: ${border.radius};
     border-color: ${border.color};
     border-width: ${border.width};
+    border-style: solid;
 
     ${spacing &&
     css`
@@ -33,7 +42,6 @@ const Base = ({ base, baseDisabled: disabled }) => {
     `}
 
     ${typographyTemplate(typography)}
-  
     &::after {
       position: absolute;
       top: -${base.clickboundOffset};
@@ -86,10 +94,7 @@ const ButtonBase = styled.button`
   text-decoration: none;
   position: relative;
   cursor: pointer;
-  display: grid;
-  grid-gap: 8px;
-  grid-auto-flow: column;
-  align-items: center;
+
   &::before {
     position: absolute;
     top: 0;
@@ -127,7 +132,7 @@ export const Button = forwardRef(function Button(
       tabIndex={disabled ? -1 : tabIndex}
       {...baseProps}
     >
-      {children}
+      <WebkitFix>{children}</WebkitFix>
     </ButtonBase>
   )
 })
