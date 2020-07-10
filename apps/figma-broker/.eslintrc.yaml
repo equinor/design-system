@@ -1,0 +1,16 @@
+# temporarily set eslint error level to warn
+rules:
+  no-unused-vars:
+    - 1
+  no-undef:
+    - 1
+  no-case-declarations:
+    - 1
+  no-unreachable:
+    - 1
+  no-useless-escape:
+    - 1
+  import/export:
+    - 1
+  prettier/prettier:
+    - 1
