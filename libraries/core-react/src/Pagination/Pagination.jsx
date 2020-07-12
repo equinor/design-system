@@ -56,25 +56,47 @@ function getAriaLabel(page, selected) {
 // }
 
 export const Pagination = forwardRef(function Pagination(
-  {
-    totalItems,
-    showTotalItems,
-    itemsPerPage,
-    switcher,
-    className,
-    onPageChange,
-    ...other
-  },
+  { totalItems, showTotalItems, itemsPerPage, switcher, className, ...other },
   ref,
 ) {
   const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
 
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
-  let items = []
-  items = PaginationControl(pages)
+  const [activePage, setActivePage] = useState(1)
+  const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
 
-  console.log('items', items)
+  const goToPage = (page) => {
+    const { onPageChange = (f) => f } = this.props
+    const activePage = Math.max(0, Math.min(page, pages))
+
+    const pageData = {
+      activePage,
+      totalPages: pages,
+      itemsPerPage: itemsPerPage,
+      totalItems: totalItems,
+    }
+
+    setActivePage({ activePage }, () => onPageChange(pageData))
+  }
+
+  const handleClick = (page) => (e) => {
+    e.preventDefault()
+    goToPage(page)
+  }
+
+  const moveLeft = (e) => {
+    e.preventDefault()
+    goToPage(activePage - siblings * 2 - 1)
+  }
+
+  const moveRight = (e) => {
+    e.preventDefault()
+    goToPage(activePage + siblings * 2 + 1)
+  }
+
+  //let items = []
+  const { items } = PaginationControl({ ...props })
 
   const props = {
     ref,
@@ -82,7 +104,6 @@ export const Pagination = forwardRef(function Pagination(
     showTotalItems,
     switcher,
     columns,
-    onPageChange,
     className,
     ...other,
   }
@@ -100,23 +121,24 @@ export const Pagination = forwardRef(function Pagination(
           gridTemplateColumns: 'repeat(' + columns + ', 48px)',
         }}
       >
-        <StyledButton variant="ghost_icon">
+        <StyledButton variant="ghost_icon" onClick={moveLeft}>
           <Icon name="chevron_left" title="previous" />
         </StyledButton>
         {items.length > 0 &&
-          items.map((item, index) => (
+          items.map((page, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <ListItem key={index}>
               <PaginationItem
-                {...item}
-                aria-label={getAriaLabel(item.page, item.selected)}
-                aria-current={item.selected}
-                page={item.page}
-                selected={item.selected}
+                {...page}
+                aria-label={getAriaLabel(page.page, page.selected)}
+                aria-current={page.selected}
+                page={page.page}
+                selected={page.selected}
+                onClick={handleClick}
               />
             </ListItem>
           ))}
-        <StyledButton variant="ghost_icon">
+        <StyledButton variant="ghost_icon" onClick={moveRight}>
           <Icon name="chevron_right" title="next" />
         </StyledButton>
       </UnorderedList>
@@ -135,8 +157,6 @@ Pagination.propTypes = {
   itemsPerPage: PropTypes.number,
   // Display dropdown menu for user to choose items per page
   switcher: PropTypes.bool,
-  // Callback fired when page is changed
-  onPageChange: PropTypes.func,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -148,6 +168,5 @@ Pagination.defaultProps = {
   children: undefined,
   showTotalItems: false,
   switcher: false,
-  onPageChange: () => {},
   itemsPerPage: 20,
 }

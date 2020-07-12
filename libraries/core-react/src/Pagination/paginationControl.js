@@ -22,7 +22,8 @@ const ELLIPSIS = 'ELLIPSIS'
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 // eslint-disable-next-line import/no-default-export
-export function PaginationControl(pages, onPageChange) {
+export function PaginationControl(props = {}) {
+  const { onChange: handleChange, pages, ...other } = props
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
   // const items = paginationControl(pages)
   const [activePage, setActivePage] = useState(1)
@@ -89,9 +90,49 @@ export function PaginationControl(pages, onPageChange) {
     } else if (hiddenLeft && hiddenRight) {
       pageRange = [LEFT_PAGE, ...pageRange, RIGHT_PAGE]
     }
-
+    console.log(pageRange)
     return [...pageRange]
   }
+  // Handle page types
+  const pageType = (type) => {
+    switch (type) {
+      case 'first':
+        return 1
+      case 'previous':
+        return page - 1
+      case 'next':
+        return page + 1
+      case 'last':
+        return count
+      default:
+        return null
+    }
+  }
 
+  console.log([...pageRange])
+
+  const items = [...pageRange].map((item, index) => {
+    return typeof item === 'number'
+      ? {
+          onClick: (e) => {
+            handleClick(e, item)
+          },
+          page: item,
+          selected: item === page,
+          disabled,
+          'aria-current': item === page ? 'true' : undefined,
+        }
+      : {
+          onClick: (e) => {
+            handleClick(e, pageType(item))
+          },
+          selected: false,
+          disabled:
+            item.indexOf('ELLIPSIS') === -1 &&
+            (item === 'next' || item === 'last' ? page >= pages : page <= 1),
+        }
+  })
+
+  console.log(items)
   return range(1, pages)
 }

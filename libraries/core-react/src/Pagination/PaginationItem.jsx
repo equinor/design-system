@@ -12,7 +12,7 @@ const StyledButton = styled(Button)`
 `
 
 export const PaginationItem = forwardRef(function PaginationItem(
-  { page, selected, ...other },
+  { page, selected, onClick, ...other },
   ref,
 ) {
   const props = {
@@ -23,7 +23,7 @@ export const PaginationItem = forwardRef(function PaginationItem(
   }
 
   return (
-    <StyledButton variant="ghost_icon" {...props}>
+    <StyledButton variant="ghost_icon" onClick={onClick} {...props}>
       {page}
     </StyledButton>
   )
@@ -36,6 +36,8 @@ PaginationItem.propTypes = {
   page: PropTypes.number.isRequired,
   // If current page is selected
   selected: PropTypes.bool.isRequired,
+  // Click function
+  onClick: PropTypes.func,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -44,5 +46,6 @@ PaginationItem.propTypes = {
 
 PaginationItem.defaultProps = {
   className: '',
+  onClick: () => {},
   children: undefined,
 }
