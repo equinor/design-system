@@ -22,41 +22,43 @@ const ELLIPSIS = 'ELLIPSIS'
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 // eslint-disable-next-line import/no-default-export
-export function PaginationControl(props = {}) {
-  const { onChange: handleChange, pages, ...other } = props
-  const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
-  // const items = paginationControl(pages)
-  const [activePage, setActivePage] = useState(1)
+export function PaginationControl(pages, activePage) {
+  //const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
+
+  //const [activePage, setActivePage] = useState(1)
   const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
 
-  const goToPage = (page) => {
-    const { onPageChange = (f) => f } = this.props
-    const activePage = Math.max(0, Math.min(page, pages))
+  // const goToPage = (page) => {
+  //   const activePage = Math.max(0, Math.min(page, pages))
 
-    const pageData = {
-      activePage,
-      totalPages: pages,
-      itemsPerPage: itemsPerPage,
-      totalItems: totalItems,
-    }
+  //   const pageData = {
+  //     activePage,
+  //     totalPages: pages,
+  //     itemsPerPage: itemsPerPage,
+  //     totalItems: totalItems,
+  //   }
 
-    setActivePage({ activePage }, () => onPageChange(pageData))
-  }
+  //   setActivePage({ activePage }, () => onPageChange(pageData))
+  // }
 
-  const handleClick = (page) => (e) => {
-    e.preventDefault()
-    goToPage(page)
-  }
+  // const handleClick = (e, value) => {
+  //   if (!pageProp) {
+  //     setActivePage(value)
+  //   }
+  //   if (handleChange) {
+  //     handleChange(e, value)
+  //   }
+  // }
 
-  const moveLeft = (e) => {
-    e.preventDefault()
-    goToPage(activePage - siblings * 2 - 1)
-  }
+  // const moveLeft = (e) => {
+  //   e.preventDefault()
+  //   goToPage(activePage - siblings * 2 - 1)
+  // }
 
-  const moveRight = (e) => {
-    e.preventDefault()
-    goToPage(activePage + siblings * 2 + 1)
-  }
+  // const moveRight = (e) => {
+  //   e.preventDefault()
+  //   goToPage(activePage + siblings * 2 + 1)
+  // }
 
   const range = (start, end) => {
     const length = end - start + 1
@@ -71,7 +73,7 @@ export function PaginationControl(props = {}) {
     let extraPages
 
     const startPage = Math.max(1, activePage - siblings)
-    const endPage = Math.min(pages, activePage + siblings)
+    const endPage = Math.min(pages, activePage + siblings - 1) // -1 for ellipsis
 
     pageRange = range(startPage, endPage)
 
@@ -86,53 +88,50 @@ export function PaginationControl(props = {}) {
       pageRange = [1, ELLIPSIS, ...extraPages, ...pageRange]
     } else if (!hiddenLeft && hiddenRight) {
       extraPages = range(endPage + 1, endPage + hiddenOffset - 1)
-      pageRange = [...pageRange, ELLIPSIS, ...extraPages]
+      pageRange = [...pageRange, ELLIPSIS, pages]
     } else if (hiddenLeft && hiddenRight) {
-      pageRange = [LEFT_PAGE, ...pageRange, RIGHT_PAGE]
+      pageRange = [1, ELLIPSIS, ...pageRange, ELLIPSIS, pages]
     }
-    console.log(pageRange)
+
     return [...pageRange]
   }
   // Handle page types
-  const pageType = (type) => {
-    switch (type) {
-      case 'first':
-        return 1
-      case 'previous':
-        return page - 1
-      case 'next':
-        return page + 1
-      case 'last':
-        return count
-      default:
-        return null
-    }
-  }
+  // const pageType = (type) => {
+  //   switch (type) {
+  //     case 'first':
+  //       return 1
+  //     case 'previous':
+  //       return page - 1
+  //     case 'next':
+  //       return page + 1
+  //     case 'last':
+  //       return count
+  //     default:
+  //       return null
+  //   }
+  // }
 
-  console.log([...pageRange])
+  // const items = pageRange.map((item, index) => {
+  //   return typeof item === 'number'
+  //     ? {
+  //         onClick: (e) => {
+  //           handleClick(e, item)
+  //         },
+  //         page: item,
+  //         selected: item === page,
+  //         disabled,
+  //         'aria-current': item === page ? 'true' : undefined,
+  //       }
+  //     : {
+  //         onClick: (e) => {
+  //           handleClick(e, pageType(item))
+  //         },
+  //         selected: false,
+  //         disabled:
+  //           item.indexOf('ELLIPSIS') === -1 &&
+  //           (item === 'next' || item === 'last' ? page >= pages : page <= 1),
+  //       }
+  // })
 
-  const items = [...pageRange].map((item, index) => {
-    return typeof item === 'number'
-      ? {
-          onClick: (e) => {
-            handleClick(e, item)
-          },
-          page: item,
-          selected: item === page,
-          disabled,
-          'aria-current': item === page ? 'true' : undefined,
-        }
-      : {
-          onClick: (e) => {
-            handleClick(e, pageType(item))
-          },
-          selected: false,
-          disabled:
-            item.indexOf('ELLIPSIS') === -1 &&
-            (item === 'next' || item === 'last' ? page >= pages : page <= 1),
-        }
-  })
-
-  console.log(items)
   return range(1, pages)
 }

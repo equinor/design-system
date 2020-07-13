@@ -4,6 +4,7 @@ const {
   colors: {
     interactive: {
       primary__selected_highlight: { rgba: selectedColor },
+      disabled__text: { rgba: disabledColor },
     },
   },
   spacings: {
@@ -13,5 +14,6 @@ const {
 
 export const pagination = {
   selectedColor,
+  disabledColor,
   spacingSmall,
 }

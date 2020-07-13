@@ -5,12 +5,17 @@ import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { PaginationItem } from './PaginationItem'
 import { pagination as tokens } from './Pagination.tokens'
-import { chevron_left, chevron_right } from '@equinor/eds-icons'
+import {
+  chevron_left,
+  chevron_right,
+  more_horizontal,
+} from '@equinor/eds-icons'
 import { PaginationControl } from './paginationControl'
 
 const icons = {
   chevron_left,
   chevron_right,
+  more_horizontal,
 }
 
 Icon.add(icons)
@@ -39,6 +44,12 @@ const ListItem = styled.li`
   display: inline-grid;
 `
 
+const StyledIcon = styled(Icon)`
+  align-self: center;
+  justify-self: center;
+  fill: ${tokens.disabledColor};
+`
+
 function getAriaLabel(page, selected) {
   return `${selected ? 'Current page, ' : 'Go to '}page ${page}`
 }
@@ -60,11 +71,14 @@ export const Pagination = forwardRef(function Pagination(
   ref,
 ) {
   const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
-
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
   const [activePage, setActivePage] = useState(1)
   const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
+
+  const onPageChange = (pageData) => {
+    setActivePage(pageData.activePage)
+  }
 
   const goToPage = (page) => {
     const { onPageChange = (f) => f } = this.props
@@ -77,7 +91,7 @@ export const Pagination = forwardRef(function Pagination(
       totalItems: totalItems,
     }
 
-    setActivePage({ activePage }, () => onPageChange(pageData))
+    setActivePage({ activePage })
   }
 
   const handleClick = (page) => (e) => {
@@ -96,7 +110,8 @@ export const Pagination = forwardRef(function Pagination(
   }
 
   //let items = []
-  const { items } = PaginationControl({ ...props })
+  const items = PaginationControl(pages, activePage)
+  console.log(items)
 
   const props = {
     ref,
@@ -121,24 +136,36 @@ export const Pagination = forwardRef(function Pagination(
           gridTemplateColumns: 'repeat(' + columns + ', 48px)',
         }}
       >
-        <StyledButton variant="ghost_icon" onClick={moveLeft}>
+        <StyledButton
+          variant="ghost_icon"
+          onClick={moveLeft}
+          disabled={activePage === 1}
+        >
           <Icon name="chevron_left" title="previous" />
         </StyledButton>
         {items.length > 0 &&
-          items.map((page, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ListItem key={index}>
-              <PaginationItem
-                {...page}
-                aria-label={getAriaLabel(page.page, page.selected)}
-                aria-current={page.selected}
-                page={page.page}
-                selected={page.selected}
-                onClick={handleClick}
-              />
-            </ListItem>
-          ))}
-        <StyledButton variant="ghost_icon" onClick={moveRight}>
+          items.map((page, index) =>
+            page !== 'ELLIPSIS' ? (
+              // eslint-disable-next-line react/no-array-index-key
+              <ListItem key={index}>
+                <PaginationItem
+                  {...page}
+                  aria-label={getAriaLabel(page, activePage)}
+                  aria-current={activePage}
+                  page={page}
+                  selected={page === activePage}
+                  onClick={handleClick}
+                />
+              </ListItem>
+            ) : (
+              <StyledIcon name="more_horizontal" title="ellipsis" />
+            ),
+          )}
+        <StyledButton
+          variant="ghost_icon"
+          onClick={moveRight}
+          disabled={activePage === items.length}
+        >
           <Icon name="chevron_right" title="next" />
         </StyledButton>
       </UnorderedList>

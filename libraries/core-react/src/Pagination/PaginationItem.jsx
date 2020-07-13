@@ -1,15 +1,9 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
 import { Button } from '../Button'
 import { Typography } from '../Typography'
 import { pagination as tokens } from './Pagination.tokens'
 //import { paginationControl } from './paginationControl'
-
-const StyledButton = styled(Button)`
-  /* display: inline-grid; */
-  background: ${(selected) => (selected ? tokens.selectedColor : null)};
-`
 
 export const PaginationItem = forwardRef(function PaginationItem(
   { page, selected, onClick, ...other },
@@ -21,12 +15,22 @@ export const PaginationItem = forwardRef(function PaginationItem(
     selected,
     ...other,
   }
+  const currentColor = selected ? tokens.selectedColor : null
 
-  return (
-    <StyledButton variant="ghost_icon" onClick={onClick} {...props}>
-      {page}
-    </StyledButton>
-  )
+  if (page === 'ELLIPSIS') {
+    return <Typography>...</Typography>
+  } else {
+    return (
+      <Button
+        style={{ background: currentColor }}
+        variant="ghost_icon"
+        onClick={onClick}
+        {...props}
+      >
+        {page}
+      </Button>
+    )
+  }
 })
 
 PaginationItem.displayName = 'eds-pagination-item'
