@@ -43,6 +43,9 @@ const findTypography = (variantName, group) => {
   return typography[group][variantName]
 }
 
+const findColor = (inputColor) =>
+  typeof colors[inputColor] === 'undefined' ? inputColor : colors[inputColor]
+
 const toVariantName = (variant, bold = false, italic = false, link = false) =>
   `${variant}${bold ? '_bold' : ''}${italic ? '_italic' : ''}${
     link ? '_link' : ''
@@ -50,7 +53,7 @@ const toVariantName = (variant, bold = false, italic = false, link = false) =>
 
 const StyledTypography = styled.p`
   ${({ typography, link }) => typographyTemplate(typography, link)}
-  ${({ color }) => css({ color: colors[color] })}
+  ${({ color }) => css({ color: findColor(color) })}
   ${({ lines }) =>
     //https://caniuse.com/#feat=css-line-clamp
     lines > 0 &&
@@ -109,7 +112,7 @@ Typography.propTypes = {
   /** Specifies if text should be a link */
   link: PropTypes.bool,
   /** Specifies which color to use */
-  color: PropTypes.oneOf(colorNames),
+  color: PropTypes.oneOfType([PropTypes.oneOf(colorNames), PropTypes.string]),
   /** Specifies which typography token to use */
   token: PropTypes.object,
   /** Specifies how many lines of text are shown */

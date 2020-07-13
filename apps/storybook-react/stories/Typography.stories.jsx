@@ -75,6 +75,8 @@ export const colors = () => (
     <Typography color="warning">Warning</Typography>
     <Typography color="success">Success</Typography>
     <Typography color="disabled">Disabled</Typography>
+    <Typography color="currentColor">CSS currentColor</Typography>
+    <Typography color="pink">CSS pink</Typography>
   </Grid>
 )
 
