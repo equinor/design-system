@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed 🐛
 
-- Fixed horizontal alignment of icons in `<Button>` in Safari ([#465](https://github.com/equinor/design-system/issues/465))
+- Fixed horizontal alignment of icons and unintended border-color in `<Button>` in Safari ([#465](https://github.com/equinor/design-system/issues/465))
 - Fixed the “off”-colour in `<Switch>`([#466](https://github.com/equinor/design-system/issues/466))
 - Fixed an alignment bug in `<Tooltip>`([#408](https://github.com/equinor/design-system/issues/408))
 - Fixed alignment of headers in `<Table>`([#407](https://github.com/equinor/design-system/issues/407))
