@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback } from 'react'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import React, { useEffect } from 'react'
+import { withKnobs } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import {
@@ -93,18 +93,37 @@ export const Examples = () => {
         </Anchor>
         <Menu id="menu-topleft" open anchorEl={topLeft}>
           <MenuItem>
-            <MenuLabel>
+            <Typography group="navigation" variant="label">
               <Icon name="folder" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Open</MenuTitle>
-            <MenuLabel>CTRL+O</MenuLabel>
+            </Typography>
+            <Typography group="navigation" variant="menu_title">
+              Open
+            </Typography>
+            <Typography group="navigation" variant="label">
+              CTRL+O
+            </Typography>
           </MenuItem>
           <MenuItem active>
-            <MenuLabel>
-              <Icon name="copy" />
-            </MenuLabel>
-            <MenuTitle>Copy (Active)</MenuTitle>
-            <MenuLabel>CTRL+C</MenuLabel>
+            <Typography group="navigation" variant="label">
+              <Icon name="folder" />
+            </Typography>
+            <Typography group="navigation" variant="menu_title">
+              active
+            </Typography>
+            <Typography group="navigation" variant="label">
+              CTRL+O
+            </Typography>
+          </MenuItem>
+          <MenuItem disabled>
+            <Typography group="navigation" variant="label">
+              <Icon name="folder" />
+            </Typography>
+            <Typography group="navigation" variant="menu_title">
+              disabled
+            </Typography>
+            <Typography group="navigation" variant="label">
+              CTRL+O
+            </Typography>
           </MenuItem>
         </Menu>
       </>

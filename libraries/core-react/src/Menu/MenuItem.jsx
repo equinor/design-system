@@ -101,6 +101,12 @@ export const MenuItem = React.memo(
       disabled,
     }
 
+    const updatedChildren = React.Children.map(children, (child) =>
+      React.cloneElement(child, {
+        color: child.color ? child.color : 'currentColor',
+      }),
+    )
+
     return (
       <ListItem
         {...props}
@@ -113,7 +119,7 @@ export const MenuItem = React.memo(
           }
         }}
       >
-        <Anchor>{children}</Anchor>
+        <Anchor>{updatedChildren}</Anchor>
       </ListItem>
     )
   }),
