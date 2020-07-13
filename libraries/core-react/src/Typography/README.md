@@ -15,7 +15,7 @@ Simple access to `headings` and `paragraph` styles with colors
 
 ### Lines
 
-Use `lines` to limit how many lines of text are show. Ends text with ellipsis.
+Use `lines` to limit how many lines of text are shown. Ends text with ellipsis.
 
 ```jsx
 <Typography variant="body_long" lines={2}>
