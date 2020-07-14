@@ -76,14 +76,16 @@ export const Pagination = forwardRef(function Pagination(
   const [activePage, setActivePage] = useState(1)
   const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
 
-  const onPageChange = (pageData) => {
-    setActivePage(pageData.activePage)
+  const onPageChange = (activePage) => {
+    setActivePage(activePage)
   }
 
   const goToPage = (page) => {
-    const { onPageChange = (f) => f } = this.props
-    const activePage = Math.max(0, Math.min(page, pages))
+    console.log('goToPage', page)
 
+    //const { onPageChange = (f) => f } = this.props
+    const active = Math.max(0, Math.min(page, pages))
+    console.log('activePage', active)
     const pageData = {
       activePage,
       totalPages: pages,
@@ -91,27 +93,28 @@ export const Pagination = forwardRef(function Pagination(
       totalItems: totalItems,
     }
 
-    setActivePage({ activePage })
+    setActivePage(active)
   }
 
   const handleClick = (page) => (e) => {
-    e.preventDefault()
+    console.log('click', page, e)
     goToPage(page)
   }
 
   const moveLeft = (e) => {
-    e.preventDefault()
-    goToPage(activePage - siblings * 2 - 1)
+    console.log('left', activePage, e)
+
+    goToPage(activePage - 1)
   }
 
   const moveRight = (e) => {
-    e.preventDefault()
-    goToPage(activePage + siblings * 2 + 1)
+    console.log('right', activePage, e)
+    goToPage(activePage + 1)
   }
 
   //let items = []
   const items = PaginationControl(pages, activePage)
-  console.log(items)
+  //console.log(items)
 
   const props = {
     ref,
@@ -122,6 +125,8 @@ export const Pagination = forwardRef(function Pagination(
     className,
     ...other,
   }
+
+  console.log('items length', items.length)
 
   return (
     <Navigation aria-label="pagination" {...props}>
@@ -164,7 +169,7 @@ export const Pagination = forwardRef(function Pagination(
         <StyledButton
           variant="ghost_icon"
           onClick={moveRight}
-          disabled={activePage === items.length}
+          disabled={activePage === items.length + 1}
         >
           <Icon name="chevron_right" title="next" />
         </StyledButton>
