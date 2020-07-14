@@ -9,3 +9,5 @@ yarn.lock
 # gatsby and docz
 .docz
 public
+# local docz testing
+docz-fresh
