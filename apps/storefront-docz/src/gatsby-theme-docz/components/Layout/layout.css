@@ -15,6 +15,11 @@
   --tab-backgroundColor: #fff;
   --tab-isSelected-backgroundColor: var(--Sidebar-activeLink-backgroundColor);
   --tab-borderColor: var(--borderColor);
+  /* overriding the theme temporarily */
+  --theme-ui-colors-text: black;
+  --theme-ui-colors-background: white;
+  --theme-ui-colors-blockquote-bg: silver;
+  --theme-ui-colors-playground-bg: silver;
 }
 
 body {
