@@ -1,8 +1,6 @@
 import React from 'react'
 import { Menu as BaseMenu } from './Menu'
 import { MenuItem } from './MenuItem'
-import { MenuLabel } from './MenuLabel'
-import { MenuTitle } from './MenuTitle'
 import { MenuProvider } from './Menu.context'
 
 const Menu = ({ children, ...rest }) => (
@@ -12,8 +10,6 @@ const Menu = ({ children, ...rest }) => (
 )
 
 Menu.MenuItem = MenuItem
-Menu.MenuLabel = MenuLabel
-Menu.MenuTitle = MenuTitle
 
 Menu.propTypes = BaseMenu.propTypes
 Menu.defaultProps = BaseMenu.defaultProps
