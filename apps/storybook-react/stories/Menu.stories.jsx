@@ -11,6 +11,8 @@ import {
   TopBar,
 } from '@equinor/eds-core-react'
 
+import { tokens } from '@equinor/eds-tokens'
+
 import {
   folder,
   copy,
@@ -33,8 +35,9 @@ Icon.add({
   more_verticle,
 })
 
-const { MenuItem, MenuLabel, MenuTitle } = Menu
+const { MenuItem } = Menu
 const { Actions, Header } = TopBar
+const { colors } = tokens
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -48,6 +51,8 @@ const Anchor = styled.div.attrs({ tabIndex: 0 })`
   height: min-content;
   position: absolute;
 `
+
+const onClick = action('onClick')
 
 export default {
   title: 'Components|Menu',
@@ -79,145 +84,228 @@ export const Examples = () => {
 
   const { topLeft, topRight, bottomLeft, bottomRight } = state
 
+  const menuDesktopExample = (
+    <>
+      <MenuItem>
+        <Typography
+          color={colors.text.static_icons__tertiary.hex}
+          group="navigation"
+          variant="label"
+        >
+          <Icon name="folder" />
+        </Typography>
+        <Typography group="navigation" variant="menu_title">
+          Open
+        </Typography>
+        <Typography
+          color={colors.text.static_icons__tertiary.hex}
+          group="navigation"
+          variant="label"
+        >
+          CTRL+O
+        </Typography>
+      </MenuItem>
+      <MenuItem active>
+        <Typography group="navigation" variant="label">
+          <Icon name="folder" />
+        </Typography>
+        <Typography group="navigation" variant="menu_title">
+          active
+        </Typography>
+        <Typography group="navigation" variant="label">
+          CTRL+O
+        </Typography>
+      </MenuItem>
+      <MenuItem disabled>
+        <Typography group="navigation" variant="label">
+          <Icon name="folder" />
+        </Typography>
+        <Typography group="navigation" variant="menu_title">
+          disabled
+        </Typography>
+        <Typography group="navigation" variant="label">
+          CTRL+O
+        </Typography>
+      </MenuItem>
+    </>
+  )
+
   return (
     <Wrapper>
-      <>
-        <Anchor
-          id="anchor-topleft"
-          aria-controls="menu-topleft"
-          aria-haspopup="menu"
-          ref={topLeftRef}
-          style={{ left: 0, top: 0 }}
-        >
-          Top left
-        </Anchor>
-        <Menu id="menu-topleft" open anchorEl={topLeft}>
-          <MenuItem>
-            <Typography group="navigation" variant="label">
-              <Icon name="folder" />
-            </Typography>
-            <Typography group="navigation" variant="menu_title">
-              Open
-            </Typography>
-            <Typography group="navigation" variant="label">
-              CTRL+O
-            </Typography>
-          </MenuItem>
-          <MenuItem active>
-            <Typography group="navigation" variant="label">
-              <Icon name="folder" />
-            </Typography>
-            <Typography group="navigation" variant="menu_title">
-              active
-            </Typography>
-            <Typography group="navigation" variant="label">
-              CTRL+O
-            </Typography>
-          </MenuItem>
-          <MenuItem disabled>
-            <Typography group="navigation" variant="label">
-              <Icon name="folder" />
-            </Typography>
-            <Typography group="navigation" variant="menu_title">
-              disabled
-            </Typography>
-            <Typography group="navigation" variant="label">
-              CTRL+O
-            </Typography>
-          </MenuItem>
-        </Menu>
-      </>
-      <>
-        <Anchor
-          id="anchor-topright"
-          aria-controls="menu-topright"
-          aria-haspopup="menu"
-          ref={topRightRef}
-          style={{ top: 0, right: 0 }}
-        >
-          Top Right
-        </Anchor>
-        <Menu id="menu-topright" open anchorEl={topRight}>
-          <MenuItem>
-            <MenuLabel>
-              <Icon name="folder" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Open</MenuTitle>
-            <MenuLabel>CTRL+O</MenuLabel>
-          </MenuItem>
-          <MenuItem active>
-            <MenuLabel>
-              <Icon name="copy" />
-            </MenuLabel>
-            <MenuTitle>Copy (Active)</MenuTitle>
-            <MenuLabel>CTRL+C</MenuLabel>
-          </MenuItem>
-        </Menu>
-      </>
-      <>
-        <Anchor
-          id="anchor-bottomleft"
-          aria-controls="menu-bottomleft"
-          aria-haspopup="menu"
-          ref={bottomLeftRef}
-          style={{ bottom: 0, left: 0 }}
-        >
-          Bottom Left
-        </Anchor>
-        <Menu id="menu-bottomleft" open anchorEl={bottomLeft}>
-          <MenuItem>
-            <MenuLabel>
-              <Icon name="folder" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Open</MenuTitle>
-            <MenuLabel>CTRL+O</MenuLabel>
-          </MenuItem>
-          <MenuItem active>
-            <MenuLabel>
-              <Icon name="copy" />
-            </MenuLabel>
-            <MenuTitle>Copy (Active)</MenuTitle>
-            <MenuLabel>CTRL+C</MenuLabel>
-          </MenuItem>
-        </Menu>
-      </>
-      <>
-        <Anchor
-          id="anchor-bottomright"
-          aria-controls="menu-bottomright"
-          aria-haspopup="menu"
-          ref={bottomRightRef}
-          style={{ bottom: 0, right: 0 }}
-        >
-          Bottom right
-        </Anchor>
-        <Menu id="menu-bottomright" open anchorEl={bottomRight}>
-          <MenuItem>
-            <MenuLabel>
-              <Icon name="folder" />
-            </MenuLabel>
-            <MenuTitle variant="menu_title">Open</MenuTitle>
-            <MenuLabel>CTRL+O</MenuLabel>
-          </MenuItem>
-          <MenuItem active>
-            <MenuLabel>
-              <Icon name="copy" />
-            </MenuLabel>
-            <MenuTitle>Copy (Active)</MenuTitle>
-            <MenuLabel>CTRL+C</MenuLabel>
-          </MenuItem>
-        </Menu>
-      </>
+      <Anchor
+        id="anchor-topleft"
+        aria-controls="menu-topleft"
+        aria-haspopup="menu"
+        ref={topLeftRef}
+        style={{ left: 0, top: 0 }}
+      >
+        Top left
+      </Anchor>
+      <Menu id="menu-topleft" open={Boolean(topLeft)} anchorEl={topLeft}>
+        {menuDesktopExample}
+      </Menu>
+
+      <Anchor
+        id="anchor-topright"
+        aria-controls="menu-topright"
+        aria-haspopup="menu"
+        ref={topRightRef}
+        style={{ top: 0, right: 0 }}
+      >
+        Top Right
+      </Anchor>
+      <Menu id="menu-topright" open={Boolean(topRight)} anchorEl={topRight}>
+        {menuDesktopExample}
+      </Menu>
+
+      <Anchor
+        id="anchor-bottomleft"
+        aria-controls="menu-bottomleft"
+        aria-haspopup="menu"
+        ref={bottomLeftRef}
+        style={{ bottom: 0, left: 0 }}
+      >
+        Bottom Left
+      </Anchor>
+      <Menu
+        id="menu-bottomleft"
+        open={Boolean(bottomLeft)}
+        anchorEl={bottomLeft}
+      >
+        {menuDesktopExample}
+      </Menu>
+
+      <Anchor
+        id="anchor-bottomright"
+        aria-controls="menu-bottomright"
+        aria-haspopup="menu"
+        ref={bottomRightRef}
+        style={{ bottom: 0, right: 0 }}
+      >
+        Bottom right
+      </Anchor>
+      <Menu
+        id="menu-bottomright"
+        open={Boolean(bottomRight)}
+        anchorEl={bottomRight}
+      >
+        {menuDesktopExample}
+      </Menu>
     </Wrapper>
   )
 }
+
+const menuBig = (
+  <>
+    <MenuItem onClick={onClick}>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        <Icon name="folder" />
+      </Typography>
+      <Typography group="navigation" variant="menu_title">
+        Open
+      </Typography>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        CTRL+O
+      </Typography>
+    </MenuItem>
+    <MenuItem active onClick={onClick}>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        <Icon name="copy" />
+      </Typography>
+      <Typography group="navigation" variant="menu_title">
+        Copy
+      </Typography>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        CTRL+C
+      </Typography>
+    </MenuItem>
+    <MenuItem disabled onClick={onClick}>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        <Icon name="paste" />
+      </Typography>
+      <Typography group="navigation" variant="menu_title">
+        Paste
+      </Typography>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        CTRL+V
+      </Typography>
+    </MenuItem>
+    <MenuItem onClick={onClick}>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        <Icon name="edit" />
+      </Typography>
+      <Typography group="navigation" variant="menu_title">
+        Rename
+      </Typography>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        CTRL+R
+      </Typography>
+    </MenuItem>
+    <MenuItem onClick={onClick}>
+      <Typography group="navigation" variant="menu_title">
+        Delete
+      </Typography>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        <Icon name="delete_to_trash" />
+      </Typography>
+    </MenuItem>
+    <Divider variant="small" />
+    <MenuItem onClick={onClick}>
+      <Typography
+        color={colors.text.static_icons__tertiary.hex}
+        group="navigation"
+        variant="label"
+      >
+        <Icon name="settings" />
+      </Typography>
+      <Typography group="navigation" variant="menu_title">
+        Properties
+      </Typography>
+    </MenuItem>
+  </>
+)
 
 export const ButtonToggle = () => {
   const [state, setState] = React.useState({
     focus: 'first',
     buttonEl: null,
   })
-  const onClick = action('onClick')
 
   const { buttonEl, focus } = state
   const isOpen = Boolean(buttonEl)
@@ -247,6 +335,7 @@ export const ButtonToggle = () => {
         break
     }
   }
+  console.log('isOpen', open)
 
   return (
     <Wrapper>
@@ -270,35 +359,7 @@ export const ButtonToggle = () => {
         onClose={closeMenu}
         focus={focus}
       >
-        <MenuItem onClick={onClick}>
-          <Icon name="folder" />
-          <span>Open</span>
-          <span>CTRL+O</span>
-        </MenuItem>
-        <MenuItem active onClick={onClick}>
-          <Icon name="copy" />
-          <span>Copy</span>
-          <span>CTRL+C</span>
-        </MenuItem>
-        <MenuItem disabled onClick={onClick}>
-          <Icon name="paste" />
-          <span>Paste</span>
-          <span>CTRL+V</span>
-        </MenuItem>
-        <MenuItem onClick={onClick}>
-          <Icon name="edit" />
-          <span>Rename</span>
-          <span>CTRL+R</span>
-        </MenuItem>
-        <MenuItem onClick={onClick}>
-          <span>Delete</span>
-          <Icon name="delete_to_trash" />
-        </MenuItem>
-        <Divider variant="small" />
-        <MenuItem onClick={onClick}>
-          <Icon name="settings" />
-          <span>Properties</span>
-        </MenuItem>
+        {menuBig}
       </Menu>
     </Wrapper>
   )
@@ -357,35 +418,7 @@ export const InTopbar = () => {
             open={Boolean(buttonEl)}
             anchorEl={buttonEl}
           >
-            <MenuItem>
-              <Icon name="folder" />
-              <span>Open</span>
-              <span>CTRL+O</span>
-            </MenuItem>
-            <MenuItem active>
-              <Icon name="copy" />
-              <span>Copy</span>
-              <span>CTRL+C</span>
-            </MenuItem>
-            <MenuItem>
-              <Icon name="paste" />
-              <span>Paste</span>
-              <span>CTRL+V</span>
-            </MenuItem>
-            <MenuItem>
-              <Icon name="edit" />
-              <span>Rename</span>
-              <span>CTRL+R</span>
-            </MenuItem>
-            <MenuItem>
-              <span>Delete</span>
-              <Icon name="delete_to_trash" />
-            </MenuItem>
-            <Divider variant="small" />
-            <MenuItem>
-              <Icon name="settings" />
-              <span>Properties</span>
-            </MenuItem>
+            {menuBig}
           </Menu>
         </Actions>
       </TopBar>
