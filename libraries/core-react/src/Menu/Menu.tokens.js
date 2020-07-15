@@ -8,7 +8,7 @@ const {
     },
     interactive: {
       primary__selected_highlight: { rgba: activeBackground },
-      primary__resting: { rgba: activeColor },
+      primary__resting: { rgba: activeTextColor },
       focus: { rgba: focusColor },
       disabled__fill: { rgba: disabledIconColor },
       disabled__text: { rgba: disabledTextColor },
@@ -40,7 +40,7 @@ export const menu = {
     item: {
       active: {
         background: activeBackground,
-        typography: { ...typography, color: activeColor },
+        textColor: activeTextColor,
       },
       spacings: {
         left: large,

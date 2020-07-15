@@ -29,24 +29,23 @@ const ListItem = styled.li.attrs(({ disabled }) => ({
   z-index: 2;
 
   ${typographyTemplate(typography)}
-  svg {
-    fill: ${typography.color};
-  }
+
 
   ${({ active }) =>
     active &&
     css`
       background: ${activeToken.background};
-      ${typographyTemplate(activeToken.typography)}
-      svg {
-        fill: ${activeToken.typography.color};
+      * {
+        color: ${activeToken.textColor};
       }
     `}
 
   ${({ disabled }) =>
     disabled
       ? css`
-          color: ${disabledToken.textColor};
+          * {
+            color: ${disabledToken.textColor};
+          }
           svg {
             fill: ${disabledToken.iconColor};
           }
@@ -101,12 +100,6 @@ export const MenuItem = React.memo(
       disabled,
     }
 
-    const updatedChildren = React.Children.map(children, (child) =>
-      React.cloneElement(child, {
-        color: child.color ? child.color : 'currentColor',
-      }),
-    )
-
     return (
       <ListItem
         {...props}
@@ -119,7 +112,7 @@ export const MenuItem = React.memo(
           }
         }}
       >
-        <Anchor>{updatedChildren}</Anchor>
+        <Anchor>{children}</Anchor>
       </ListItem>
     )
   }),
