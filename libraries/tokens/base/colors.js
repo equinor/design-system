@@ -389,11 +389,4 @@ export const colors = {
       rgba: 'rgba(220, 220, 220, 1)',
     },
   },
-  tabs: {
-    inactive_text: {
-      hex: '#565656',
-      hsla: 'hsla(0, 0%, 33.7%, 1)',
-      rgba: 'rgba(86, 86, 86, 1)',
-    },
-  },
 }

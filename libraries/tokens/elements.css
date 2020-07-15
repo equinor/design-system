@@ -39,9 +39,9 @@ h6 {
 }
 label {
   color: rgba(0, 0, 0, 1);
-  font-size: 0.688rem;
-  font-weight: 400;
-  line-height: 1.455em;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
 }
 button {
   color: rgba(0, 0, 0, 1);
@@ -52,7 +52,7 @@ button {
 label {
   color: rgba(0, 0, 0, 1);
   font-size: 0.750rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.333em;
 }
 p {
@@ -66,24 +66,24 @@ a {
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.500em;
-  text-decoration: UNDERLINE;
+  text-decoration: underline;
 }
 th {
   color: rgba(0, 0, 0, 1);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.714em;
 }
 table {
   color: rgba(0, 0, 0, 1);
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.714em;
 }
 td {
   color: rgba(0, 0, 0, 1);
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.429em;
   font-feature-settings: 'tnum' on, 'lnum' on;
 }
