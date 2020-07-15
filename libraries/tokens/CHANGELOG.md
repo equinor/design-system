@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Font-weight is increased from 400 (regular) to 500 (medium) in all cases where the font-size is below 16px
-- Font-size is increased for label and helper
+- Font-size is increased and line-height decreased for label and helper
 - Values such as underline, uppercase etc. are now lowercase
 
 ### Removed
