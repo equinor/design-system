@@ -74,47 +74,24 @@ export const Pagination = forwardRef(function Pagination(
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
   const [activePage, setActivePage] = useState(1)
-  const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
 
-  const onPageChange = (activePage) => {
-    setActivePage(activePage)
+  const handleClick = (page) => () => {
+    setActivePage(page)
   }
 
-  const goToPage = (page) => {
-    console.log('goToPage', page)
-
-    //const { onPageChange = (f) => f } = this.props
-    const active = Math.max(0, Math.min(page, pages))
-    console.log('activePage', active)
-    const pageData = {
-      activePage,
-      totalPages: pages,
-      itemsPerPage: itemsPerPage,
-      totalItems: totalItems,
+  const moveLeft = () => {
+    if (activePage > 1) {
+      setActivePage(activePage - 1)
     }
-
-    setActivePage(active)
   }
 
-  const handleClick = (page) => (e) => {
-    console.log('click', page, e)
-    goToPage(page)
+  const moveRight = () => {
+    if (activePage < pages) {
+      setActivePage(activePage + 1)
+    }
   }
 
-  const moveLeft = (e) => {
-    console.log('left', activePage, e)
-
-    goToPage(activePage - 1)
-  }
-
-  const moveRight = (e) => {
-    console.log('right', activePage, e)
-    goToPage(activePage + 1)
-  }
-
-  //let items = []
   const items = PaginationControl(pages, activePage)
-  //console.log(items)
 
   const props = {
     ref,
@@ -126,7 +103,7 @@ export const Pagination = forwardRef(function Pagination(
     ...other,
   }
 
-  console.log('items length', items.length)
+  //console.log('items', items, items.length)
 
   return (
     <Navigation aria-label="pagination" {...props}>
@@ -159,7 +136,7 @@ export const Pagination = forwardRef(function Pagination(
                   aria-current={activePage}
                   page={page}
                   selected={page === activePage}
-                  onClick={handleClick}
+                  onClick={handleClick(page)}
                 />
               </ListItem>
             ) : (

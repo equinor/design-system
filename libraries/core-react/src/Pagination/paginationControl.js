@@ -72,8 +72,9 @@ export function PaginationControl(pages, activePage) {
   if (pages > 4) {
     let extraPages
 
+    const endOffset = activePage < 4 ? activePage + siblings - 1 : activePage
     const startPage = Math.max(1, activePage - siblings)
-    const endPage = Math.min(pages, activePage + siblings - 1) // -1 for ellipsis
+    const endPage = Math.min(pages, endOffset) // -1 for ellipsis
 
     pageRange = range(startPage, endPage)
 
@@ -86,13 +87,23 @@ export function PaginationControl(pages, activePage) {
     if (hiddenLeft && !hiddenRight) {
       extraPages = range(startPage - hiddenOffset, startPage + 1)
       pageRange = [1, ELLIPSIS, ...extraPages, ...pageRange]
+      console.log('hiddenleft', extraPages, pageRange)
     } else if (!hiddenLeft && hiddenRight) {
       extraPages = range(endPage + 1, endPage + hiddenOffset - 1)
       pageRange = [...pageRange, ELLIPSIS, pages]
+      console.log('hiddenrigth', extraPages, pageRange)
     } else if (hiddenLeft && hiddenRight) {
       pageRange = [1, ELLIPSIS, ...pageRange, ELLIPSIS, pages]
+      console.log('both', extraPages, pageRange)
     }
-
+    // console.log(
+    //   pageRange,
+    //   startPage,
+    //   endPage,
+    //   extraPages,
+    //   hiddenLeft,
+    //   hiddenRight,
+    // )
     return [...pageRange]
   }
   // Handle page types
