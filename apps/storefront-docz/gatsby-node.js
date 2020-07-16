@@ -4,4 +4,17 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
+const path = require('path')
+
+exports.onCreateWebpackConfig = (args) => {
+  args.actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        'styled-components': path.resolve(
+          './node_modules',
+          'styled-components',
+        ),
+      },
+    },
+  })
+}
