@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
+import { useCombinedRefs } from '../_common'
 
 const StyledPaper = styled(Paper)`
   position: absolute;
@@ -11,23 +12,30 @@ const StyledPaper = styled(Paper)`
   width: fit-content;
   min-width: fit-content;
 
-  ${({ left, top, transform, visibility }) =>
-    css({ left, top, transform, visibility, display: 'block' })}
+  ${({ left, top, transform, open, isPositioned }) =>
+    css({
+      left,
+      top,
+      transform,
+      visibility: open && isPositioned ? 'visible' : 'hidden',
+    })}
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { children, anchorEl, onClose, ...rest },
+  { children, anchorEl, onClose, open, ...rest },
   ref,
 ) {
-  if (!anchorEl) {
-    return undefined
-  }
-  const { setPosition, position, visibility } = useMenu()
+  const listRef = useRef(null)
+
+  const { setPosition, position, isPositioned } = useMenu()
 
   useEffect(() => {
-    if (anchorEl) {
-      const rect = anchorEl ? anchorEl.getBoundingClientRect() : null
-      setPosition(rect)
+    if (anchorEl && listRef.current) {
+      console.log('listRef', listRef.current)
+
+      const menuRect = listRef.current.getBoundingClientRect()
+      const anchorRect = anchorEl.getBoundingClientRect()
+      setPosition(anchorRect, menuRect, window)
     }
 
     document.addEventListener('keydown', handleGlobalKeyPress, true)
@@ -35,7 +43,7 @@ export const Menu = React.forwardRef(function EdsMenu(
     return () => {
       document.removeEventListener('keydown', handleGlobalKeyPress, true)
     }
-  }, [anchorEl])
+  }, [anchorEl, listRef.current])
 
   const handleGlobalKeyPress = (e) => {
     const { key } = e
@@ -50,13 +58,14 @@ export const Menu = React.forwardRef(function EdsMenu(
   }
 
   const paperProps = {
-    visibility,
     ...position,
+    open,
+    isPositioned,
   }
 
   return (
     <StyledPaper {...paperProps} elevation="raised">
-      <MenuList {...rest} ref={ref}>
+      <MenuList {...rest} ref={useCombinedRefs(ref, listRef)}>
         {children}
       </MenuList>
     </StyledPaper>
@@ -74,13 +83,14 @@ Menu.propTypes = {
   anchorEl: PropTypes.object,
   /** Focus menuItem */
   focus: PropTypes.oneOf(['first', 'last']),
-
   /** Position from left */
   left: PropTypes.number,
   /** Position from top */
   top: PropTypes.number,
   /** onClose handler */
   onClose: PropTypes.func,
+  /** Open meny */
+  open: PropTypes.bool,
 }
 
 Menu.defaultProps = {
@@ -90,6 +100,7 @@ Menu.defaultProps = {
   top: 0,
   left: 0,
   onClose: () => {},
+  open: false,
 }
 
 Menu.displayName = 'eds-menu'

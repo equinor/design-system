@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
-import { useCombinedRefs } from '../_common'
 
 const List = styled.ul.attrs({ role: 'menu' })`
   position: relative;
@@ -19,9 +18,8 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   { children, focus, ...rest },
   ref,
 ) {
-  const listRef = useRef(null)
   const state = useMenu()
-  const { focusedIndex, setFocusedIndex, setTransform } = state
+  const { focusedIndex, setFocusedIndex } = state
 
   const updatedChildren = React.Children.map(children, (child, index) =>
     React.cloneElement(child, {
@@ -38,17 +36,13 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   const lastFocusIndex = focusableIndexs[focusableIndexs.length - 1]
 
   useEffect(() => {
-    if (listRef.current) {
-      const rect = listRef.current.getBoundingClientRect()
-      setTransform(rect, window)
-    }
     if (focus === 'first') {
       setFocusedIndex(firstFocusIndex)
     }
     if (focus === 'last') {
       setFocusedIndex(lastFocusIndex)
     }
-  }, [focus, listRef.current])
+  }, [focus])
 
   const handleMenuItemChange = (direction, fallbackIndex) => {
     const i = direction === 'down' ? 1 : -1
@@ -72,11 +66,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   }
 
   return (
-    <List
-      onKeyDown={handleKeyPress}
-      {...rest}
-      ref={useCombinedRefs(ref, listRef)}
-    >
+    <List onKeyDown={handleKeyPress} {...rest} ref={ref}>
       {updatedChildren}
     </List>
   )
