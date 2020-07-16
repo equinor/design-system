@@ -29,7 +29,7 @@ const ListItem = styled.li.attrs(({ disabled }) => ({
   z-index: 2;
 
   ${typographyTemplate(typography)}
-
+  ${spacingsTemplate(spacings)};
 
   ${({ active }) =>
     active &&
@@ -69,15 +69,13 @@ const ListItem = styled.li.attrs(({ disabled }) => ({
         `}
 `
 
-const Anchor = styled.div`
-  position: relative;
+const Content = styled.div`
   width: auto;
   display: grid;
   grid-gap: 16px;
   grid-auto-flow: column;
-  grid-auto-columns: min-content auto min-content;
+  grid-auto-columns: max-content auto max-content;
   align-items: center;
-  ${spacingsTemplate(spacings)};
 `
 
 export const MenuItem = React.memo(
@@ -112,7 +110,7 @@ export const MenuItem = React.memo(
           }
         }}
       >
-        <Anchor>{children}</Anchor>
+        <Content>{children}</Content>
       </ListItem>
     )
   }),

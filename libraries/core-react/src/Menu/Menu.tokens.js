@@ -14,28 +14,26 @@ const {
       disabled__text: { rgba: disabledTextColor },
     },
     text: {
-      static_icons__tertiary: { rgba: textIconColor },
       static_icons__default: { rgba: textColor },
     },
   },
-  elevation: { raised },
   spacings: {
-    comfortable: { medium, large },
+    comfortable: { medium, large, small },
   },
   typography: {
-    navigation: { menu_title: typography, label: typographyLabel },
+    navigation: { menu_title: typography },
   },
 } = tokens
 
 export const menu = {
   enabled: {
     background,
+    border: {
+      radius: '4px',
+    },
     typography: {
       ...typography,
       color: textColor,
-    },
-    label: {
-      typography: { ...typographyLabel, color: textIconColor },
     },
     item: {
       active: {
@@ -60,6 +58,13 @@ export const menu = {
         iconColor: disabledIconColor,
       },
     },
-    elevation: raised,
+    title: {
+      spacings: {
+        left: large,
+        right: large,
+        top: small,
+        bottom: small,
+      },
+    },
   },
 }

@@ -27,9 +27,9 @@ export const MenuList = React.forwardRef(function EdsMenuList(
     }),
   )
 
-  const focusableIndexs = updatedChildren
+  const focusableIndexs = (updatedChildren || [])
     .filter((x) => !x.props.disabled)
-    .filter((x) => x.type.displayName === 'eds-menu-item')
+    .filter((x) => (x.type ? x.type.displayName === 'eds-menu-item' : false))
     .map((x) => x.props.index)
 
   const firstFocusIndex = focusableIndexs[0]

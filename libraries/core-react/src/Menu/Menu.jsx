@@ -5,12 +5,18 @@ import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
 import { useCombinedRefs } from '../_common'
+import { menu as tokens } from './Menu.tokens'
+
+const {
+  enabled: { border },
+} = tokens
 
 const StyledPaper = styled(Paper)`
   position: absolute;
   z-index: 1;
   width: fit-content;
   min-width: fit-content;
+  border-radius: ${border.radius};
 
   ${({ left, top, transform, open, isPositioned }) =>
     css({
@@ -18,7 +24,7 @@ const StyledPaper = styled(Paper)`
       top,
       transform,
       visibility: open && isPositioned ? 'visible' : 'hidden',
-    })}
+    })};
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
@@ -31,8 +37,6 @@ export const Menu = React.forwardRef(function EdsMenu(
 
   useEffect(() => {
     if (anchorEl && listRef.current) {
-      console.log('listRef', listRef.current)
-
       const menuRect = listRef.current.getBoundingClientRect()
       const anchorRect = anchorEl.getBoundingClientRect()
       setPosition(anchorRect, menuRect, window)

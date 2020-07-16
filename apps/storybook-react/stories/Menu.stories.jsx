@@ -41,7 +41,7 @@ Icon.add({
   cable,
 })
 
-const { MenuItem } = Menu
+const { MenuItem, MenuSection } = Menu
 const { Actions, Header } = TopBar
 const { colors } = tokens
 
@@ -75,9 +75,11 @@ export default {
 
 const simpleMenuTemplate = (
   <>
-    <MenuItem>Item 1</MenuItem>
-    <MenuItem>Item 2</MenuItem>
-    <MenuItem>Item 3</MenuItem>
+    <MenuSection title="Section title">
+      <MenuItem>Item 1</MenuItem>
+      <MenuItem>Item 2</MenuItem>
+      <MenuItem>Item 3</MenuItem>
+    </MenuSection>
   </>
 )
 
@@ -178,19 +180,20 @@ const bigMenuTemplate = (
         DEL
       </Typography>
     </MenuItem>
-    <Divider variant="small" />
-    <MenuItem onClick={onClick}>
-      <Typography
-        color={colors.text.static_icons__tertiary.hex}
-        group="navigation"
-        variant="label"
-      >
-        <Icon name="settings" />
-      </Typography>
-      <Typography group="navigation" variant="menu_title">
-        Properties
-      </Typography>
-    </MenuItem>
+    <MenuSection title="Section">
+      <MenuItem onClick={onClick}>
+        <Typography
+          color={colors.text.static_icons__tertiary.hex}
+          group="navigation"
+          variant="label"
+        >
+          <Icon name="settings" />
+        </Typography>
+        <Typography group="navigation" variant="menu_title">
+          Settings
+        </Typography>
+      </MenuItem>
+    </MenuSection>
   </>
 )
 
@@ -464,7 +467,7 @@ export const Examples = () => {
         Text
       </Anchor>
       <Menu id="menu-plaintext" open anchorEl={two}>
-        <MenuItem>Pressure</MenuItem>
+        <MenuItem>Pressure </MenuItem>
         <MenuItem>Bearing</MenuItem>
         <MenuItem>Cable</MenuItem>
       </Menu>
@@ -496,87 +499,17 @@ export const Examples = () => {
           Cable
         </MenuItem>
       </Menu>
+
       <Anchor
-        id="anchor-moa"
-        aria-controls="menu-moa"
+        id="anchor-bigMenu"
+        aria-controls="menu-bigMenu"
         aria-haspopup="true"
         ref={fourRef}
       >
-        Text with icons + label + divider + subtitle
+        Complex
       </Anchor>
-      <Menu id="menu-moa" open anchorEl={four}>
-        <MenuItem>
-          <Typography
-            color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="pressure" />
-          </Typography>
-          Pressure
-          <Typography
-            color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            psi
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography
-            color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="bearing" />
-          </Typography>
-          degress
-          <Typography
-            color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            Label
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography
-            color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="cable" />
-          </Typography>
-          Cable
-          <Typography
-            color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            meters
-          </Typography>
-        </MenuItem>
-        <Divider variant="small"></Divider>
-        <Typography
-          color={colors.text.static_icons__tertiary.hex}
-          group="navigation"
-          variant="label"
-          style={{ margin: '16px 24px 8px 24px' }}
-        >
-          Section subtitle
-        </Typography>
-        <MenuItem>
-          <Typography
-            color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="settings" />
-          </Typography>
-          <Typography group="navigation" variant="menu_title">
-            Properties
-          </Typography>
-        </MenuItem>
+      <Menu id="menu-bigMenu" open anchorEl={four}>
+        {bigMenuTemplate}
       </Menu>
     </Grid>
   )
