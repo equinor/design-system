@@ -79,7 +79,6 @@
   --eds_interactive_field__fill_resting: rgba(247, 247, 247, 1);
   --eds_interactive_field__fill_hover: rgba(243, 243, 243, 1);
   --eds_interactive_field__fill_activated: rgba(220, 220, 220, 1);
-  --eds_tabs_inactive_text: rgba(86, 86, 86, 1);
 
   --eds_elevation_raised: 0 1px 5px rgba(0, 0, 0, 0.2),0 3px 4px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14);
   --eds_elevation_none: 0 0 1px rgba(0, 0, 0, 0.14);
