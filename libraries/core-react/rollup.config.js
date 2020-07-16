@@ -45,7 +45,7 @@ export default [
         file: pkg.module,
         name: pkg.name,
         format: 'esm',
-        sourcemap: 'inline',
+        sourcemap: true,
         globals,
       },
       ...(buildForStorybook ? [] : [{ file: pkg.main, format: 'cjs' }]),

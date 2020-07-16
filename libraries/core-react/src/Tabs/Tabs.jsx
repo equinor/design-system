@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import createId from 'lodash.uniqueid'
+import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'
 
 const Tabs = forwardRef(function Tabs(
