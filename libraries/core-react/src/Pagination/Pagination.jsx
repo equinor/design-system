@@ -103,7 +103,7 @@ export const Pagination = forwardRef(function Pagination(
     ...other,
   }
 
-  //console.log('items', items, items.length)
+  console.log('items', items, items.length)
 
   return (
     <Navigation aria-label="pagination" {...props}>
@@ -146,7 +146,7 @@ export const Pagination = forwardRef(function Pagination(
         <StyledButton
           variant="ghost_icon"
           onClick={moveRight}
-          disabled={activePage === items.length + 1}
+          disabled={activePage === pages}
         >
           <Icon name="chevron_right" title="next" />
         </StyledButton>
