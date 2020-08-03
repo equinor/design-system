@@ -1,12 +1,12 @@
 /* eslint react/jsx-filename-extension: off */
 /* eslint react/jsx-pascal-case: off */
 /* eslint import/no-default-export: off */
+import React from 'react'
 import { ComponentsProvider, theme, useConfig } from 'docz'
 import baseComponents from 'gatsby-theme-docz/src/components'
 import defaultConfig from 'gatsby-theme-docz/src/theme'
 import { Table } from '@equinor/eds-core-react'
 import { merge } from 'lodash/fp'
-import React from 'react'
 import { Styled, ThemeProvider } from 'theme-ui'
 import Embed from '../components/embed'
 import Video from '../components/video'
@@ -20,13 +20,11 @@ import { OrderedList, UnorderedList, ListItem } from '../components/List'
 import HeadCell from '../components/HeadCell'
 import Grid from '../components/Grid'
 import Code from '../components/Code'
-import { Page } from '../components/Page'
 
 const { Body, Row, Cell, Head } = Table
 
 const componentsMap = {
   ...baseComponents,
-  page: Page,
   Embed,
   Video,
   FigmaImage,

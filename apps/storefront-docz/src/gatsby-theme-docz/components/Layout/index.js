@@ -64,7 +64,8 @@ const StyledSidebar = styled(Sidebar)`
   grid-area: sidebar;
 `
 
-export const Layout = ({ children }) => {
+export const Layout = ({ doc, children }) => {
+  console.log('doc', doc)
   const [open, setOpen] = useState(false)
   return (
     <BaseLayout data-testid="layout">
