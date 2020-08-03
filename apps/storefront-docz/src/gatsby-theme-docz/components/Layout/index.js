@@ -41,7 +41,7 @@ export const Layout = ({ doc, children }) => {
           />
         )}
       </Location>
-      <StyledMainContainer data-testid="main-container">
+      <StyledMainContainer data-testid="main-container" doc={doc}>
         {children}
       </StyledMainContainer>
 
