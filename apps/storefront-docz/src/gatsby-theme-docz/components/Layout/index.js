@@ -5,37 +5,11 @@ import PropTypes from 'prop-types'
 import { Location } from '@reach/router'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
-import { media } from '~theme/breakpoints'
 import { MainContainer } from '../MainContainer'
 import { SkipLink } from '../../../components/SkipLink'
+import { BaseLayout } from '../../../components/BaseLayout'
 import styled from 'styled-components'
 import './layout.css'
-
-const BaseLayout = styled.div`
-  display: grid;
-  grid-template-areas:
-    'header'
-    'main'
-    'main';
-  grid-template-columns: 1fr;
-  grid-template-rows: var(--Banner-height) var(--Header-height) 1fr;
-  min-height: 100vh;
-  ${media.small} {
-    grid-template-areas:
-      'header header'
-      'main main';
-    grid-template-columns: 1fr min-content;
-    grid-template-rows: var(--Banner-height) var(--Header-height) 1fr;
-  }
-  ${media.large} {
-    grid-template-areas:
-      'header header header'
-      'sidebar main main'
-      'sidebar main main';
-    grid-template-columns: var(--Sidebar-width) 1fr var(--Toc-width);
-    grid-template-rows: var(--Banner-height) var(--Header-height) 1fr;
-  }
-`
 
 const StyledMainContainer = styled(MainContainer)`
   grid-area: main;
@@ -51,7 +25,7 @@ export const Layout = ({ doc, children }) => {
   console.log('doc', doc)
   const [open, setOpen] = useState(false)
   return (
-    <BaseLayout data-testid="layout">
+    <BaseLayout>
       {/* <Global styles={global} /> */}
       {/*  <Main sx={styles.main}> */}
       <SkipLink />
@@ -67,7 +41,6 @@ export const Layout = ({ doc, children }) => {
           />
         )}
       </Location>
-
       <StyledMainContainer data-testid="main-container">
         {children}
       </StyledMainContainer>
@@ -79,4 +52,5 @@ export const Layout = ({ doc, children }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  doc: PropTypes.object.isRequired,
 }
