@@ -7,6 +7,7 @@ import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
 import { media } from '~theme/breakpoints'
 import { MainContainer } from '../MainContainer'
+import { SkipLink } from '../../../components/SkipLink'
 import styled from 'styled-components'
 import './layout.css'
 
@@ -36,24 +37,6 @@ const BaseLayout = styled.div`
   }
 `
 
-const SkipLink = styled.a`
-  background: #007079;
-  color: #fff;
-  font-weight: 700;
-  left: 50%;
-  padding: 8px;
-  position: absolute;
-  transform: translateY(-100%);
-  z-index: 1010 !important;
-  &:focus {
-    outline: none;
-    outline: 1px dashed rgba(0, 112, 121, 1);
-    outline-offset: 2px;
-    border-radius: 4px;
-    transform: translateY(0%);
-  }
-`
-
 const StyledMainContainer = styled(MainContainer)`
   grid-area: main;
 `
@@ -71,9 +54,7 @@ export const Layout = ({ doc, children }) => {
     <BaseLayout data-testid="layout">
       {/* <Global styles={global} /> */}
       {/*  <Main sx={styles.main}> */}
-      <SkipLink className="skip-link" href="#main">
-        Skip to content
-      </SkipLink>
+      <SkipLink />
       <StyledHeader onOpen={() => setOpen((s) => !s)} />
       <Location>
         {({ location }) => (
