@@ -9,6 +9,7 @@ import { Table } from '@equinor/eds-core-react'
 import { merge } from 'lodash/fp'
 import { Styled, ThemeProvider } from 'theme-ui'
 import Embed from '../components/embed'
+import ComponentStatus from '../components/ComponentStatus'
 import Video from '../components/video'
 import FigmaImage from '../components/figmaImage'
 import IconsDownload from '../components/Icons'
@@ -25,6 +26,7 @@ const { Body, Row, Cell, Head } = Table
 
 const componentsMap = {
   ...baseComponents,
+  ComponentStatus,
   Embed,
   Video,
   FigmaImage,
