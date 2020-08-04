@@ -25,9 +25,15 @@ const NavDrawer = () => {
   subMenus.forEach((subMenuItem) => {
     const category = menu.find(
       (menuItem) =>
-        menuItem.route === subMenuItem.route.match(firstRouteSegment)[0],
+        menuItem.route === subMenuItem.route.match(firstRouteSegment)?.[0],
     )
-    category.children.push(subMenuItem)
+    if (category) {
+      category.children.push(subMenuItem)
+      return
+    }
+    console.error(
+      `Document ${subMenuItem.title} is missing a proper route declaration, and will not be added in the menu`,
+    )
   })
 
   return (
