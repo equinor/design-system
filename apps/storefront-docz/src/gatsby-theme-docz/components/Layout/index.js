@@ -6,12 +6,11 @@ import { Location } from '@reach/router'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
 import { MainContainer } from '../MainContainer'
-<<<<<<< HEAD
+
 import { SkipLink } from '../../../components/SkipLink'
 import { BaseLayout } from '../../../components/BaseLayout'
-=======
+
 import { NavDrawer } from '../NavDrawer'
->>>>>>> add navdrawer
 import styled from 'styled-components'
 import './layout.css'
 
