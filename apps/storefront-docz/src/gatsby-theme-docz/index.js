@@ -115,15 +115,11 @@ const themeConfig = merge(defaultConfig, {
       height: '100%',
       margin: '0',
     },
-    body: {
-      margin: '0',
-      overflowY: 'scroll',
-    },
     h1: {
       fontFamily: 'inherit',
     },
     h2: {
-      fontFamily: 'inherit',
+      fontFamily: 'Comic sans',
     },
     h3: {
       fontFamily: 'inherit',
