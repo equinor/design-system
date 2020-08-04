@@ -1,0 +1,86 @@
+---
+title: Chips
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+  - Examples
+mode: publish
+route: /components/chips/
+---
+
+_Chips_, also known as tags or badges, are advanced badges that represent discrete information.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, colour allowances -->
+
+Chips allow users to make selections, perform an action, input information and attributes, filter content and complete tasks. Chips can transform from free text or predefined text.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not use chips as call-to-action buttons.
+
+## Variations
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+### Badge chips
+
+Badge chips contain numeric values and show a running tally. Only use the `Selected` (which has a role of "Selected or active") `Text` chip for badge chips. The colours are allowed to be changed from the default colour provided, however, it is up to the designer to ensure that the colours chosen are accessible.
+
+### Tag chips
+
+Tags are used for items that need to be labeled, categorised, or organised using keywords that describe them. Use the `Selected` (which has a role of "Selected or active") `Text` chip for tag chips. The colours are allowed to be changed from the default colour provided, however, it is up to the designer to ensure that the colours chosen are accessible.
+
+### Choice chips
+
+When there are at least two predefined options to choose between, choice chips can be used to signify the user's choice. A single selection can be made. Unselected predefined choices should use the `Enabled` `Text` chip and selected chips switch to the `Selected` `Text` chip. Selecting a choice chip automatically deselects all other chips in the set.
+
+### Filter chips
+
+Multiple predefined keywords can be listed for the user to choose from. Multiple chips can be selected or unselected. Unselected predefined chips should used the `Enabled` `Text` or the `Enabled` `Icon + text + close` chip, and selected chips switch to the `Selected` `Icon + text`, The icon helps indicate that the chip is selected, consider using `System icons > UI action > Done`.
+
+### Input chips
+
+Input chips are used as tags to represent complex information---such as a person, place or thing. Input chips are not predefined but defined by the user allowing the user to create and edit multiple chips. When pressed, input chips transform into editable text. When the editable text is no longer in focus, it transforms back into a chip. Input chips are removable, meaning the user can delete the input. Both the `Avatar + text + close` chip and the `Icon + text + close` chip can be used as input chips. If a text input is not recognised or validated, it can switch to the `Error` state.
+
+### Action chips
+
+When there are at least two predefined options to choose between, action chips trigger actions related to the primary content. Action chips are not removable but can appear dynamically. Use the `Icon + text` chip. Action chips can show progress. While the action is being processed, replace the icon with the `Progress indicator > Circular`.
+
+## Examples
+
+### Text
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=5155%3A17386"
+  alt="Chip with text"
+/>
+
+### Icon + text
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=5155%3A17552"
+  alt="Chip with icon and text"
+/>
+
+### Avatar + text + remove
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=5155%3A17713"
+  alt="Chip with avatar, text and remove"
+/>
+
+### Icon + text + remove
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=5155%3A17914"
+  alt="Chip with icon, text and remove"
+/>
