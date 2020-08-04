@@ -2,7 +2,7 @@ import React from 'react'
 import { useDocs, useConfig, useCurrentDoc } from 'docz'
 import { Link } from 'gatsby'
 
-const NavDrawer = () => {
+export const NavDrawer = () => {
   const docs = useDocs()
 
   const current = useCurrentDoc()
@@ -67,5 +67,3 @@ const NavDrawer = () => {
     </ul>
   )
 }
-
-export { NavDrawer }
