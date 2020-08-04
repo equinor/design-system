@@ -1,5 +1,6 @@
 /* eslint import/no-default-export: off*/
 export default {
+  files: '**/*.mdx',
   themeConfig: {
     // “The initialColorMode flag no longer works, use initialColorModeName instead” it says on https://theme-ui.com/migrating/
     // Didn’t help, but keeping it here for now
@@ -17,4 +18,46 @@ export default {
     // Wrap the playground editor and preview in iframes to avoid style/script collisions
     useScopingInPlayground: false,
   },
+  menu: [
+    {
+      title: 'Getting Started',
+      route: '/getting-started/',
+      children: [],
+    },
+    {
+      title: 'Guidelines',
+      route: '/guidelines/',
+      children: [],
+    },
+    {
+      title: 'Assets',
+      route: '/assets/',
+      children: [],
+    },
+    {
+      title: 'Components',
+      route: '/components/',
+      children: [],
+    },
+    {
+      title: 'Patterns',
+      route: '/patterns/',
+      children: [],
+    },
+    {
+      title: 'Updates',
+      route: '/updates/',
+      children: [],
+    },
+    {
+      title: 'Help',
+      route: '/help/',
+      children: [],
+    },
+    {
+      title: 'Contributing',
+      route: '/contributing/',
+      children: [],
+    },
+  ],
 }
