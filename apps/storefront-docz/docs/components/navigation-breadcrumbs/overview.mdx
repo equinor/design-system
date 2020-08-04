@@ -1,0 +1,52 @@
+---
+title: Navigation breadcrumbs
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+mode: publish
+route: /components/navigation-breadcrumbs/
+---
+
+_Breadcrumbs_ show the navigational path to users allowing them to navigate up the hierarchy.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+Breadcrumbs allow users to quickly trace or move up the navigation hierarchy. All links in breadcrumbs are clickable, meaning they all must have a page attached. Breadcrumbs are always placed in the uppermost left corner of the page, but below the _Topbar_.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not use breadcrumbs as main navigation.
+- Do not use breadcrumbs for single-level applications.
+- Do not change the height of the tabs.
+
+## Variations
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=2670%3A144"
+  alt="Figma design of breadcrumb"
+/>
+
+Breadcrumbs that are many levels deep might not always fit in the space available on a single line, in this case there are three options:
+
+### Auto-collapse
+
+Breadcrumbs can auto-collapse and use ellipses (...) to indicate the middle pages. The first and current/last page are shown in auto-collapsed breadcrumbs, clicking the ellipses expands the breadcrumbs.
+
+### Expanded breadcrumbs
+
+Expanded breadcrumbs can wrap to two or more lines.
+
+### Truncation
+
+Long labels can be truncated based on pixel width. Truncated labels should always end with an ellipses to indicate there is more text not shown. On hover or long press, a tooltip should appear to show the full label.

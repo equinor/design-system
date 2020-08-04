@@ -1,0 +1,48 @@
+---
+title: Side sheet
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+mode: publish
+route: /components/side-sheet/
+---
+
+A _side sheet_ is a a toggleable area that is anchored to the edge of the viewport with supplementary content.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+Side sheets display content that is supplementary to the primary content. Side sheets can display a list of actions, filters, supplemental content and functionality. Content in side sheets can be broken into tabs.
+
+Side sheets are not permanent so they should always have a way to be opened and closed. They are always to be anchored to the left of the viewport's right edge. They are to be full height, but can start under the _top bar_ if it is visible. Side sheets can be elevated over content using `Elevation/Overlay`, or push primary content to share the same elevation.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not use a left-anchored side sheet if using a _Navigational Drawer_.
+- Do not change the width of the side sheet.
+- Do not remove the close icon.
+
+## Variations
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=2822%3A169"
+  alt="Figma design for side sheet"
+/>
+
+### Standard side sheet
+
+Primarily used for desktop and tablet. The side sheet comes in multiple sizes: `Small`, `Medium`, `Large`, `X Large`.
+
+### Modal side sheet
+
+Modular side sheets are used for mobile with the addition of a _scrim_.
