@@ -10,7 +10,7 @@ import { SkipLink } from '../../../components/SkipLink'
 import { BaseLayout } from '../../../components/BaseLayout'
 import { NavDrawer } from '../../../components/NavDrawer'
 import styled from 'styled-components'
-import './layout.css'
+import './global.css'
 
 const StyledMainContainer = styled(MainContainer)`
   grid-area: main;
