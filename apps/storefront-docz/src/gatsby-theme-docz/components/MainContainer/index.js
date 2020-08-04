@@ -2,6 +2,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useCurrentDoc } from 'docz'
+import { Link } from 'gatsby'
 import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
 import { H1 } from '../../../components/Titles'
 import { Tabs, Tab, TabLink } from '../../../components/Tabs'
@@ -87,6 +89,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
   const isContentPage = type !== 'landingPage'
   const isPublished = (mode || '').toLowerCase() === 'publish'
   const linkSlug = slug.substr(0, slug.lastIndexOf(route))
+  const current = useCurrentDoc()
 
   return (
     <main {...rest} id="main">
@@ -103,7 +106,39 @@ export const MainContainer = ({ children, doc, ...rest }) => {
             </H1>
             {tabs && (
               <nav aria-label="tabbed content naviagtion">
-                <Tabs>
+                <ul>
+                  {tabs.map((tab, index) => {
+                    const routeSegment = tab.toLowerCase().replace(/\s/g, '-')
+
+                    const categoryRoute = route
+                      .replace(/^\/|\/$/g, '')
+                      .split('/')
+                      .slice(0, 2)
+                      .join('/')
+
+                    const tabRoute = `/${categoryRoute}/${
+                      index > 0 ? `${routeSegment}/` : ''
+                    }`
+
+                    const isCurrent = current.route === tabRoute
+
+                    return (
+                      <li key={tab}>
+                        <Link
+                          to={tabRoute}
+                          style={
+                            isCurrent
+                              ? { fontWeight: 'bold' }
+                              : { fontWeight: 'normal' }
+                          }
+                        >
+                          {tab}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+                {/* <Tabs>
                   {tabs.map((tab, index) => (
                     <Tab key={tab}>
                       <TabLink
@@ -123,7 +158,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
                       </TabLink>
                     </Tab>
                   ))}
-                </Tabs>
+                </Tabs> */}
               </nav>
             )}
           </ContentHeader>

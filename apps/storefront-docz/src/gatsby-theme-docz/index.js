@@ -57,6 +57,7 @@ const Theme = ({ children }) => {
   return (
     <ThemeProvider theme={config.themeConfig}>
       <ComponentsProvider components={componentsMap}>
+        {console.log('componentsMap:', componentsMap)}
         <Styled.root>{children}</Styled.root>
       </ComponentsProvider>
     </ThemeProvider>
