@@ -1,9 +1,13 @@
 import React from 'react'
-import { useDocs, useConfig } from 'docz'
+import { useDocs, useConfig, useCurrentDoc } from 'docz'
 import { Link } from 'gatsby'
 
 const NavDrawer = () => {
   const docs = useDocs()
+
+  const current = useCurrentDoc()
+
+  console.log('current', current)
 
   const { menu } = useConfig()
 
@@ -20,6 +24,7 @@ const NavDrawer = () => {
     .map((doc) => ({
       title: doc.title,
       route: doc.route,
+      current: current.route.includes(doc.route),
     }))
 
   subMenus.forEach((subMenuItem) => {
@@ -44,7 +49,16 @@ const NavDrawer = () => {
           <ul>
             {menuItem.children.map((subMenuItem) => (
               <li key={subMenuItem.route}>
-                <Link to={subMenuItem.route}>{subMenuItem.title}</Link>
+                <Link
+                  to={subMenuItem.route}
+                  style={
+                    subMenuItem.current
+                      ? { fontWeight: 'bold' }
+                      : { fontWeight: 'normal' }
+                  }
+                >
+                  {subMenuItem.title}
+                </Link>
               </li>
             ))}
           </ul>
