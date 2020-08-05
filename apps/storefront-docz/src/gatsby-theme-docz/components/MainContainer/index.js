@@ -7,6 +7,7 @@ import { Link } from 'gatsby'
 import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
 import { H1 } from '../../../components/Titles'
 import { Tabs, Tab, TabLink } from '../../../components/Tabs'
+import { EditPageOnGithub } from '../../../components/EditPageOnGithub'
 import { slugify } from '../../../utils/'
 import {
   save,
@@ -152,17 +153,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
             )}
             <Content>
               {children}
-              <a
-                href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
-                  slug === '/' ? `index` : slug
-                }.mdx`}
-                style={{ display: 'block', marginTop: '3rem' }}
-              >
-                <span role="img" aria-label="Pencil">
-                  ✏️
-                </span>{' '}
-                Edit this page on GitHub
-              </a>
+              <EditPageOnGithub slug={slug} />
             </Content>
           </Wrapper>
         </>
