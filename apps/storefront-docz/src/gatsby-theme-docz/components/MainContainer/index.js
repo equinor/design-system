@@ -85,10 +85,8 @@ export const MainContainer = ({ children, doc, ...rest }) => {
     slug,
   } = doc.value
   const withTabs = tabs !== undefined
-
   const isContentPage = type !== 'landingPage'
   const isPublished = (mode || '').toLowerCase() === 'publish'
-  const linkSlug = slug.substr(0, slug.lastIndexOf(route))
   const current = useCurrentDoc()
 
   return (
@@ -109,9 +107,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
                 <Tabs>
                   {tabs.map((tab, index) => {
                     const routeSegment = tab.toLowerCase().replace(/\s/g, '-')
-
                     const firstTwoRouteSegments = /^\/([a-z-]+\/?){2}/
-
                     const categoryRoute = route.match(firstTwoRouteSegments)[0]
 
                     const addTrailingSlash = (str) =>
