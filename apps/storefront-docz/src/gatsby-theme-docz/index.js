@@ -89,7 +89,6 @@ const themeConfig = merge(defaultConfig, {
       fontFeatureSettings: `kern, liga`,
       height: '100%',
       margin: 0,
-      overflowY: 'scroll',
     },
     a: {
       textDecoration: 'underline',
