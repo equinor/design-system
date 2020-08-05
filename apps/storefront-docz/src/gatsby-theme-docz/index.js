@@ -66,6 +66,7 @@ const Theme = ({ children }) => {
 
 const themeConfig = merge(defaultConfig, {
   colors: {
+    paleGreen: '#deedee',
     modes: {
       light: {
         grayLighter: '#d0d0d0',

@@ -3,17 +3,6 @@
   --Header-height: 160px;
   --Toc-width: 167px;
   --Sidebar-width: 240px;
-  --black: #333;
-  --grey-medium: #dcdcdc;
-  --pale-green: #deedee;
-  --tab-backgroundColor: #fff;
-  --tab-isSelected-backgroundColor: var(--Sidebar-activeLink-backgroundColor);
-  --tab-borderColor: var(--borderColor);
-  /* overriding the theme temporarily with css vars */
-  /* --theme-ui-colors-text: black;
-  --theme-ui-colors-background: white;
-  --theme-ui-colors-blockquote-bg: silver;
-  --theme-ui-colors-playground-bg: silver; */
 }
 
 html {

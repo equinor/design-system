@@ -49,7 +49,6 @@ const StyledTableOfContents = styled(TableOfContents)`
 `
 
 const Content = styled.div`
-  background: white;
   padding: 3rem 2rem;
 
   & > h2,
