@@ -27,7 +27,6 @@ const StyledTabLink = styled(Link)`
   display: block;
   text-decoration: none;
   color: ${(props) => (props.active === 'true' ? '#007079' : 'inherit')};
-  /* background-color: var(--tab-backgroundColor); */
   letter-spacing: 0.2px;
   font-size: 16px;
   line-height: 46px;
@@ -43,7 +42,7 @@ const StyledTabLink = styled(Link)`
     left: 0;
   }
   &:hover {
-    background-color: var(--pale-green);
+    background-color: #deedee;
   }
 `
 
