@@ -10,7 +10,7 @@ const StyledBaseLayout = styled.div`
     'main'
     'main';
   grid-template-columns: 1fr;
-  grid-template-rows: var(--Banner-height) var(--Header-height) 1fr;
+  grid-template-rows: var(---heightBanner) var(--Header-height) 1fr;
   min-height: 100vh;
   ${media.small} {
     grid-template-areas:
