@@ -2,13 +2,11 @@
 
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Location } from '@reach/router'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
 import { MainContainer } from '../MainContainer'
 import { SkipLink } from '../../../components/SkipLink'
 import { BaseLayout } from '../../../components/BaseLayout'
-import { NavDrawer } from '../../../components/NavDrawer'
 import styled from 'styled-components'
 import './global.css'
 
@@ -31,18 +29,12 @@ export const Layout = ({ doc, children }) => {
       {/*  <Main sx={styles.main}> */}
       <SkipLink />
       <StyledHeader onOpen={() => setOpen((s) => !s)} />
-      <Location>
-        {({ location }) => (
-          <NavDrawer />
-          // <StyledSidebar
-          //   open={open}
-          //   onFocus={() => setOpen(true)}
-          //   onBlur={() => setOpen(false)}
-          //   onClick={() => setOpen(false)}
-          //   location={location}
-          // />
-        )}
-      </Location>
+      <StyledSidebar
+        open={open}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
+        onClick={() => setOpen(false)}
+      />
       <StyledMainContainer data-testid="main-container" doc={doc}>
         {children}
       </StyledMainContainer>

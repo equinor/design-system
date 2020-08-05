@@ -1,9 +1,9 @@
 /* eslint react/jsx-filename-extension: off  */
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import { kebabify } from '../../../utils'
+import React, { useState, useMemo } from 'react'
 import styled, { css } from 'styled-components'
+import { useDocs, useConfig, useCurrentDoc } from 'docz'
 import { media } from '~theme/breakpoints'
 
 const StyledSidebar = styled.nav`
@@ -15,7 +15,6 @@ const StyledSidebar = styled.nav`
   width: 100vw;
 
   display: ${(props) => (props.open ? 'block' : 'none')};
-    }
   ${media.large} {
     display: block;
     position: relative;
@@ -60,7 +59,7 @@ const Menu = styled.ul`
   list-style-type: none;
   padding-left: 0;
   &.sidebar-sub-menu {
-    display: none;
+    /* display: none; */
   }
 `
 
@@ -94,23 +93,7 @@ const MenuItemLink = styled(Link)`
   }
 `
 
-const SubMenuToggler = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 0;
-  visibility: hidden;
-  &:checked ~ {
-    .sidebar-sub-menu {
-      display: block;
-    }
-    .sidebar-menu-arrow {
-      transform: rotate(90deg);
-    }
-  }
-`
-
-const SubMenuLabel = styled.label`
+const SubMenuLabel = styled.div`
   ${trigger}
 `
 
@@ -119,39 +102,36 @@ const MenuArrow = styled.svg`
   height: 13px;
 `
 
-export const Sidebar = ({ location, className, open, onClick }) => {
-  const data = useStaticQuery(graphql`
-    query SidebarQuery {
-      allNavigationYaml {
-        edges {
-          node {
-            title
-            subNav
-          }
-        }
-      }
-    }
-  `)
+export const Sidebar = ({ className, open, onClick }) => {
+  const docs = useDocs()
 
-  const categories = data.allNavigationYaml.edges.map((item) =>
-    kebabify(item.node.title),
+  const current = useCurrentDoc()
+
+  const { menu } = useConfig()
+
+  const firstRouteSegment = /^\/[a-z-]+\//
+
+  const [subMenuOpen, setSubMenuOpen] = useState(
+    menu.map(
+      (menuItem) =>
+        menuItem.route === current.route.match(firstRouteSegment)[0],
+    ),
   )
 
-  const isCurrentCategory = (category) =>
-    location.pathname.split('/').filter((item) => item.length > 0)[0] ===
-    category
+  const notRootRoute = (doc) => doc.route.length > 1
 
-  const [state, setState] = useState({
-    checked: categories.map((item) => isCurrentCategory(item)),
-  })
+  const routesWithTwoSegments = (doc) =>
+    doc.route.replace(/^\/|\/$/g, '').split('/').length < 3
 
-  const toggleCheckbox = (event, index) => {
-    setState({
-      checked: categories.map((item, i) =>
-        index === i ? event.target.checked : false,
-      ),
-    })
-  }
+  const subMenus = useMemo(() =>
+    docs
+      .filter(notRootRoute)
+      .filter(routesWithTwoSegments)
+      .map((doc) => ({
+        title: doc.title,
+        route: doc.route,
+      })),
+  )
 
   return (
     <StyledSidebar className={className} open={open}>
@@ -163,38 +143,52 @@ export const Sidebar = ({ location, className, open, onClick }) => {
               Home
             </MenuItemLink>
           </MenuItem>
-          {data.allNavigationYaml.edges.map((item, index) => (
-            <MenuItem key={kebabify(item.node.title)} withTopBorder>
-              <SubMenuToggler
-                className="SubMenuToggler"
-                type="checkbox"
-                id={`SubMenuToggler-${index}`}
-                checked={state.checked[index]}
-                onChange={(e) => toggleCheckbox(e, index)}
-              />
-              <SubMenuLabel htmlFor={`SubMenuToggler-${index}`}>
-                {item.node.title}
-                <MenuArrow className="sidebar-menu-arrow" viewBox="0 0 13 13">
+          {menu.map((item, index) => (
+            <MenuItem key={item.route} withTopBorder>
+              <SubMenuLabel
+                onClick={() => {
+                  setSubMenuOpen((previousState) =>
+                    previousState.map((isOpen, stateIndex) =>
+                      stateIndex === index ? !isOpen : false,
+                    ),
+                  )
+                }}
+              >
+                {item.title}
+                <MenuArrow
+                  className="sidebar-menu-arrow"
+                  viewBox="0 0 13 13"
+                  style={
+                    subMenuOpen[index] ? { transform: 'rotate(90deg)' } : {}
+                  }
+                >
                   <path d="M6,1 12,6.5 6,12" />
                 </MenuArrow>
               </SubMenuLabel>
-              <Menu className="sidebar-sub-menu">
-                {item.node.subNav &&
-                  item.node.subNav.map((subItem) => (
-                    <MenuItem
-                      key={kebabify(subItem)}
-                      className="Sidebar-menuItem"
-                    >
+              <Menu
+                className="sidebar-sub-menu"
+                style={
+                  subMenuOpen[index]
+                    ? { display: 'block' }
+                    : { display: 'none' }
+                }
+              >
+                {subMenus
+                  .filter(
+                    (subMenuItem) =>
+                      item.route ===
+                      subMenuItem.route.match(firstRouteSegment)?.[0],
+                  )
+                  .map((subItem) => (
+                    <MenuItem key={subItem.route} className="Sidebar-menuItem">
                       <MenuItemLink
                         type="sub"
                         className="Sidebar-trigger"
-                        to={`/${kebabify(item.node.title)}/${kebabify(
-                          subItem,
-                        )}/`}
+                        to={subItem.route}
                         activeClassName="is-active"
                         partiallyActive
                       >
-                        {subItem}
+                        {subItem.title}
                       </MenuItemLink>
                     </MenuItem>
                   ))}
@@ -208,7 +202,6 @@ export const Sidebar = ({ location, className, open, onClick }) => {
 }
 
 Sidebar.propTypes = {
-  location: PropTypes.object.isRequired,
   className: PropTypes.string,
   open: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
