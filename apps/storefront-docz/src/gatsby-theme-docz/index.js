@@ -35,7 +35,7 @@ const componentsMap = {
   Grid,
   HeroBanner,
   p: Text,
-
+  h1: H1,
   h2: H2,
   h3: H3,
   h4: H4,
@@ -72,6 +72,7 @@ const themeConfig = merge(defaultConfig, {
         primary: '#007079',
         text: '#333',
         background: 'white',
+        borderColor: 'lightgrey',
       },
     },
   },

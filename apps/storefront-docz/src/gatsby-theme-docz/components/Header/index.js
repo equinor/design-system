@@ -8,6 +8,7 @@ import { menu } from '@equinor/eds-icons'
 import { TopBar, Search, Icon } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { media } from '~theme/breakpoints'
+import { useThemeUI } from 'theme-ui'
 
 Icon.add({ menu })
 const { Header: TopBarHeader, Actions } = TopBar
@@ -40,6 +41,8 @@ const SrLabel = styled.span`
 `
 
 export const Header = ({ className, onOpen }) => {
+  const context = useThemeUI()
+  const { theme } = context
   return (
     <TopBar className={className}>
       <TopBarHeader>
@@ -62,7 +65,7 @@ export const Header = ({ className, onOpen }) => {
         <Link
           to="/components/component-status"
           style={{
-            color: 'var(--moss-green)',
+            color: theme.colors.primary,
             flexShrink: '0',
             marginLeft: '1rem',
           }}
