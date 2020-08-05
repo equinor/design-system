@@ -22,9 +22,15 @@
   --theme-ui-colors-playground-bg: silver; */
 }
 
+html {
+  box-sizing: border-box;
+  background-color: var(--backgroundColor);
+  text-size-adjust: 100%;
+}
+
 body {
+  /* Even if the theme-ui docs state that styles applied to styles.root will be applied to the <body> element, they are added to a <div> inside body. */
   margin: 0;
-  overflow-y: scroll;
 }
 
 .js-focus-visible :focus:not(.focus-visible) {
