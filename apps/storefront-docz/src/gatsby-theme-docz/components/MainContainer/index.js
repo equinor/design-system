@@ -106,59 +106,33 @@ export const MainContainer = ({ children, doc, ...rest }) => {
             </H1>
             {tabs && (
               <nav aria-label="tabbed content naviagtion">
-                <ul>
+                <Tabs>
                   {tabs.map((tab, index) => {
                     const routeSegment = tab.toLowerCase().replace(/\s/g, '-')
 
-                    const categoryRoute = route
-                      .replace(/^\/|\/$/g, '')
-                      .split('/')
-                      .slice(0, 2)
-                      .join('/')
+                    const firstTwoRouteSegments = /^\/([a-z-]+\/?){2}/
 
-                    const tabRoute = `/${categoryRoute}/${
-                      index > 0 ? `${routeSegment}/` : ''
-                    }`
+                    const categoryRoute = route.match(firstTwoRouteSegments)[0]
 
-                    const isCurrent = current.route === tabRoute
+                    const addTrailingSlash = (str) =>
+                      str.substring(str.length - 1) === '/' ? '' : '/'
+
+                    const tabRoute = `${categoryRoute}${addTrailingSlash(
+                      categoryRoute,
+                    )}${index > 0 ? `${routeSegment}/` : ''}`
 
                     return (
-                      <li key={tab}>
-                        <Link
-                          to={tabRoute}
-                          style={
-                            isCurrent
-                              ? { fontWeight: 'bold' }
-                              : { fontWeight: 'normal' }
-                          }
+                      <Tab key={tab}>
+                        <TabLink
+                          isSelected={current.route === tabRoute}
+                          href={tabRoute}
                         >
                           {tab}
-                        </Link>
-                      </li>
+                        </TabLink>
+                      </Tab>
                     )
                   })}
-                </ul>
-                {/* <Tabs>
-                  {tabs.map((tab, index) => (
-                    <Tab key={tab}>
-                      <TabLink
-                        isSelected={
-                          tab.toLowerCase().split(' ').join('-') === route
-                        }
-                        href={
-                          index > 0
-                            ? `${linkSlug}${tab
-                                .toLowerCase()
-                                .split(' ')
-                                .join('-')}/`
-                            : linkSlug
-                        }
-                      >
-                        {tab}
-                      </TabLink>
-                    </Tab>
-                  ))}
-                </Tabs> */}
+                </Tabs>
               </nav>
             )}
           </ContentHeader>
