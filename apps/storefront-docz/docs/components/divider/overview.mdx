@@ -11,6 +11,10 @@ mode: publish
 route: /components/divider/
 ---
 
+import { Playground, Props } from 'docz'
+import { Divider } from '@equinor/eds-core-react'
+import PropsTable from 'react-docgen-props-table'
+
 A divider is a thin line that separates content into clear groups.
 
 <!--One to two sentences as an introduction to the component-->
@@ -41,3 +45,37 @@ There are two divider variations available for use---`Divider/Small` and `Divide
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=982%3A5365"
   alt="Figma design of divider"
 />
+
+### Default
+
+<Divider>Props</Divider>
+
+### Small
+
+<Divider variant="small" color="lighter">
+  Props
+</Divider>
+<Divider variant="small" color="light">
+  Props
+</Divider>
+<Divider variant="small">Props</Divider>
+
+### Medium
+
+<Divider variant="medium" color="lighter">
+  Props
+</Divider>
+<Divider variant="medium" color="light">
+  Props
+</Divider>
+<Divider variant="medium">Props</Divider>
+
+### Props
+
+<PropsTable props={Divider.__docgenInfo.props} />
+
+### Playground
+
+<Playground>
+  <Divider>Play with me</Divider>
+</Playground>

@@ -5,10 +5,6 @@ route: /
 type: landingPage
 ---
 
-import { Playground, Props } from 'docz'
-import { Typography } from '@equinor/eds-core-react'
-import PropsTable from 'react-docgen-props-table'
-
 <HeroBanner title="Equinor Design System (EDS)">
   The EDS is the official design system of Equinor and is to be used when
   designing, prototyping and developing internal digital interfaces.
@@ -130,12 +126,3 @@ import PropsTable from 'react-docgen-props-table'
     </Typography>
   </div>
 </Grid>
-
-<Typography variant="h4">Props</Typography>
-<PropsTable props={Typography.__docgenInfo.props} />
-
-This is a paragraph
-
-<Playground>
-  <Typography>Play with me</Typography>
-</Playground>
