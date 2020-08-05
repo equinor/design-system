@@ -49,7 +49,15 @@ export const Header = ({ className, onOpen }) => {
         <Burger onClick={onOpen} aria-label="Open menu">
           <Icon name="menu" />
         </Burger>
-        EDS – Equinor Design System
+        <Link
+          to="/"
+          style={{
+            color: theme.colors.text,
+            textDecoration: 'none',
+          }}
+        >
+          EDS – Equinor Design System
+        </Link>
       </TopBarHeader>
       <StyledActions>
         {/*  <Search
