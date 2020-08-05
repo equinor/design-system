@@ -1,3 +1,5 @@
+const remarkEmoji = require('remark-emoji')
+
 module.exports = {
   siteMetadata: {
     title: `Equinor Design System`,
@@ -6,7 +8,14 @@ module.exports = {
       'The EDS is the official design system of Equinor The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions.',
   },
   plugins: [
-    `gatsby-theme-docz`,
+    {
+      resolve: 'gatsby-theme-docz',
+      options: {
+        // Note: these options are here instead of in doczrc.js
+        // because of this bug: https://github.com/doczjs/docz/issues/1191
+        mdPlugins: [remarkEmoji],
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
