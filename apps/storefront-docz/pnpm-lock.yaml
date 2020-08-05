@@ -34,6 +34,7 @@ dependencies:
   react-dom: 16.13.1_react@16.13.1
   react-error-overlay: 6.0.7
   react-helmet: 6.1.0_react@16.13.1
+  remark-emoji: 2.1.0
   shallow-compare: 1.2.2
   styled-components: 5.1.1_479e60ee9c1aa71dc1eb81036e3619dc
 devDependencies:
@@ -5723,6 +5724,10 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==
+  /emoticon/3.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-SNujglcLTTg+lDAcApPNgEdudaqQFiAbJCqzjNxJkvN9vAwCGi0uu8IUVvx+f16h+V44KCY6Y2yboroc9pilHg==
   /emotion-theming/10.0.27_c989b1aa057905c7a8b69bf973f55a19:
     dependencies:
       '@babel/runtime': 7.10.4
@@ -13663,6 +13668,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-5Crfi0xyBEoEJP06eaVZ6FodMWf3SunzL8icubxxqgAaIklgqp9H2hQ6getSe+0VM8yj0P1r2LPrl7GA1PLEPw==
+  /remark-emoji/2.1.0:
+    dependencies:
+      emoticon: 3.2.0
+      node-emoji: 1.10.0
+      unist-util-visit: 2.0.3
+    dev: false
+    resolution:
+      integrity: sha512-lDddGsxXURV01WS9WAiS9rO/cedO1pvr9tahtLhr6qCGFhHG4yZSJW3Ha4Nw9Uk1hLNmUBtPC0+m45Ms+xEitg==
   /remark-footnotes/1.0.0:
     dev: false
     resolution:
@@ -17135,5 +17148,6 @@ specifiers:
   react-dom: ^16.12.0
   react-error-overlay: ^6.0.7
   react-helmet: ^6.1.0
+  remark-emoji: ^2.1.0
   shallow-compare: ^1.2.2
   styled-components: ^5.1.1
