@@ -54,6 +54,7 @@ const IconItem = styled.li`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  z-index: 10;
   &:hover {
     background-color: rgba(222, 237, 238, 0.3);
     border-radius: 4px;
