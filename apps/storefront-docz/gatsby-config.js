@@ -38,6 +38,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `assets`,
+        path: `${__dirname}/src/assets`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-algolia-docsearch`,
       options: {
         apiKey: '73fc0edd06a8031c699edfc560eaa013',
