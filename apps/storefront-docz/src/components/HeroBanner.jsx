@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Text from './Text'
 import { H1 } from './Titles'
 import styled from 'styled-components'
+import { Button } from '@equinor/eds-core-react'
 
 const StyledHeroBanner = styled.div`
   background: #f7f7f7;
@@ -42,6 +43,14 @@ const Illustration = styled.div`
   }
 `
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  @media (min-width: 600px) {
+    justify-content: left;
+  }
+`
+
 const HeroBanner = ({ title, children }) => {
   return (
     <StyledHeroBanner>
@@ -50,6 +59,29 @@ const HeroBanner = ({ title, children }) => {
         <Text variant="body_short" style={{ fontSize: '18px' }}>
           {children}
         </Text>
+        <ButtonContainer>
+          <Button
+            as="a"
+            href="/components/component-status"
+            style={{ marginRight: '1rem', textDecoration: 'none' }}
+          >
+            Components
+          </Button>
+          <Button
+            as="a"
+            href="/getting-started/developers/"
+            style={{ marginRight: '1rem', textDecoration: 'none' }}
+          >
+            Developers
+          </Button>
+          <Button
+            as="a"
+            href="/getting-started/designers/"
+            style={{ textDecoration: 'none' }}
+          >
+            Designers
+          </Button>
+        </ButtonContainer>
       </Intro>
       <Illustration>
         <svg
