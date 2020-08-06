@@ -71,25 +71,20 @@ const Theme = ({ children }) => {
 const themeConfig = merge(defaultConfig, {
   colors: {
     paleGreen: '#deedee',
-
-    modes: {
-      light: {
-        grayLighter: '#d0d0d0',
-        primary: '#007079',
-        text: '#333',
-        background: 'white',
-        border: 'rgb(220, 220, 220)',
-        playground: {
-          bg: 'white',
-          border: 'rgb(220, 220, 220)',
-        },
-        sidebar: {
-          background: '#fff',
-          shadow: '#666',
-          backgroundActive: '#dcdcdc',
-          border: 'rgb(220, 220, 220)',
-        },
-      },
+    grayLighter: '#d0d0d0',
+    primary: '#007079',
+    text: '#333',
+    background: 'white',
+    border: 'rgb(220, 220, 220)',
+    playground: {
+      bg: 'white',
+      border: 'rgb(220, 220, 220)',
+    },
+    sidebar: {
+      background: '#fff',
+      shadow: '#666',
+      backgroundActive: '#dcdcdc',
+      border: 'rgb(220, 220, 220)',
     },
   },
   fonts: {
