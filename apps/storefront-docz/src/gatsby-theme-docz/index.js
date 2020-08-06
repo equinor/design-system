@@ -83,6 +83,12 @@ const themeConfig = merge(defaultConfig, {
           bg: 'white',
           border: 'rgb(220, 220, 220)',
         },
+        sidebar: {
+          background: '#fff',
+          shadow: '#666',
+          backgroundActive: '#dcdcdc',
+          border: 'rgb(220, 220, 220)',
+        },
       },
     },
   },
