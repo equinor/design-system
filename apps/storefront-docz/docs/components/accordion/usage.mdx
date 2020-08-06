@@ -7,6 +7,8 @@ mode: publish
 route: /components/accordion/usage/
 ---
 
+import { Accordion } from '@equinor/eds-core-react'
+
 ## Figma
 
 ### How to add
@@ -39,3 +41,13 @@ route: /components/accordion/usage/
 10. Make sure to name the new group.
 11. Locate the **Design** tab in the **Inspector Panel**.
 12. Under the **Constraints** section, set up constraints.
+
+## API
+
+### Accordion
+
+<PropsTable props={Accordion.__docgenInfo.props} />
+
+### AccordionItem
+
+<PropsTable props={Accordion.AccordionItem.__docgenInfo.props} />

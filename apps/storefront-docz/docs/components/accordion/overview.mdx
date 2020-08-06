@@ -11,6 +11,9 @@ mode: publish
 route: /components/accordion/
 ---
 
+import { Playground } from 'docz'
+import { Accordion } from '@equinor/eds-core-react'
+
 An _accordion_ allows users to collapse and expand sections of content.
 
 <!--One to two sentences as an introduction to the component-->
@@ -69,3 +72,26 @@ When the accordion is expanded, the minimum height for the content area is 96px.
 ## Interaction
 
 Multiple sections can be expanded simultaneously.
+
+<!---
+## Demo
+
+### Simple
+Doesn't work until the hooks error is fixed in the component
+<Playground>
+  <Accordion>
+    <Accordion.AccordionItem isExpanded>
+      <Accordion.AccordionHeader>Header 1</Accordion.AccordionHeader>
+      <Accordion.AccordionPanel>Content 1</Accordion.AccordionPanel>
+    </Accordion.AccordionItem>
+    <Accordion.AccordionItem>
+      <Accordion.AccordionHeader>Header 2</Accordion.AccordionHeader>
+      <Accordion.AccordionPanel>Content 2</Accordion.AccordionPanel>
+    </Accordion.AccordionItem>
+    <Accordion.AccordionItem>
+      <Accordion.AccordionHeader>Header 3</Accordion.AccordionHeader>
+      <Accordion.AccordionPanel>Content 3</Accordion.AccordionPanel>
+    </Accordion.AccordionItem>
+  </Accordion>
+</Playground>
+--->
