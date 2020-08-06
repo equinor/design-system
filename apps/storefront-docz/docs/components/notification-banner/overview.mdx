@@ -6,9 +6,13 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/notification-banner/
 ---
+
+import { Playground } from 'docz'
+import { Banner, Icon, Button } from '@equinor/eds-core-react'
 
 _Banners_ display important notifications and related optional actions.
 
@@ -54,3 +58,96 @@ To help weight the banner more on the screen a supporting icon can be added. Cho
 Actions are optional. Actions should always be related to the message. Banners can have up to two actions. Action labels should be short and text only.
 
 If the screen is not wide enough, place the actions below the message on their own line. (In Figma, remember to turn off the `Text` layers bottom border.)
+
+## Demo
+
+MDX doesn't support object destructuring, so this examples uses dot notation
+
+### Text
+
+<Playground>
+  <Banner>
+    This tag is not being preserved yet. Click start preservation to enable
+    writing preservation records.
+  </Banner>
+</Playground>
+
+### Icon + Text
+
+<Playground>
+  <Banner>
+    <Banner.BannerIcon>
+      <Icon name="thumbs_up" />
+    </Banner.BannerIcon>
+    <Banner.BannerMessage>
+      We are in the making of a new design for this page.
+    </Banner.BannerMessage>
+  </Banner>
+  <Banner>
+    <Banner.BannerIcon variant="warning">
+      <Icon name="thumbs_down" />
+    </Banner.BannerIcon>
+    <Banner.BannerMessage>Some warning information.</Banner.BannerMessage>
+  </Banner>
+</Playground>
+
+### Text + Action
+
+<Playground>
+  <Banner>
+    <Banner.BannerMessage>
+      You are signed on with another account than Equinor account:
+      name.lastname@mail.com.
+    </Banner.BannerMessage>
+    <Banner.BannerActions style={{ display: 'flex' }}>
+      <Button variant="ghost" style={{ marginRight: '1rem' }}>
+        Sign out
+      </Button>
+      <Button variant="ghost">OK</Button>
+    </Banner.BannerActions>
+  </Banner>
+  <Banner>
+    <Banner.BannerMessage>
+      You are signed on with another account than Equinor account:
+      name.lastname@mail.com. This means you have to do something to be able to
+      use this service.
+    </Banner.BannerMessage>
+    <Banner.BannerActions placement="bottom" style={{ display: 'flex' }}>
+      <Button variant="ghost" style={{ marginRight: '1rem' }}>
+        Sign out
+      </Button>
+      <Button variant="ghost">OK</Button>
+    </Banner.BannerActions>
+  </Banner>
+</Playground>
+
+### Icon + Text + Action
+
+<Playground>
+  <Banner>
+    <Banner.BannerIcon variant="warning">
+      <Icon name="mood_sad" />
+    </Banner.BannerIcon>
+    <Banner.BannerMessage>
+      This tag is not being preserved yet. Click start preservation to enable
+      writing preservation records.
+    </Banner.BannerMessage>
+    <Banner.BannerActions>
+      <Button>Action</Button>
+    </Banner.BannerActions>
+  </Banner>
+  <Banner>
+    <Banner.BannerIcon>
+      <Icon name="save" />
+    </Banner.BannerIcon>
+    <Banner.BannerMessage>
+      I'm such a really really long message about some sad saving news that
+      there is not enough space for the actions on my left. That's why the
+      actions have been located at the bottom using the placement prop instead.
+    </Banner.BannerMessage>
+    <Banner.BannerActions placement="bottom" style={{ display: 'flex' }}>
+      <Button style={{ marginRight: '1rem' }}>First action</Button>
+      <Button color="secondary">Second action</Button>
+    </Banner.BannerActions>
+  </Banner>
+</Playground>
