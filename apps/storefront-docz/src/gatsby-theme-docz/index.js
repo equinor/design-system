@@ -21,6 +21,7 @@ import { OrderedList, UnorderedList, ListItem } from '../components/List'
 import HeadCell from '../components/HeadCell'
 import Grid from '../components/Grid'
 import Code from '../components/Code'
+import Playground from '../components/Playground'
 
 const { Body, Row, Cell, Head } = Table
 
@@ -34,6 +35,7 @@ const componentsMap = {
   Image,
   Grid,
   HeroBanner,
+  Playground,
   p: Text,
   h1: H1,
   h2: H2,
@@ -67,13 +69,18 @@ const Theme = ({ children }) => {
 const themeConfig = merge(defaultConfig, {
   colors: {
     paleGreen: '#deedee',
+
     modes: {
       light: {
         grayLighter: '#d0d0d0',
         primary: '#007079',
         text: '#333',
         background: 'white',
-        borderColor: 'lightgrey',
+        border: 'rgb(220, 220, 220)',
+        playground: {
+          bg: 'white',
+          border: 'rgb(220, 220, 220)',
+        },
       },
     },
   },
