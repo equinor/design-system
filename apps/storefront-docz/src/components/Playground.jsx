@@ -6,9 +6,9 @@ const Playground = ({ children }) => {
   // Styles applied to the Playground element doesn't work
   // https://github.com/doczjs/docz/issues/412#issuecomment-656203258
   return (
-    <DoczPlayground style={{ background: 'rebeccapurple' }}>
-      {children}
-    </DoczPlayground>
+    <div>
+      Why doesn't this work<DoczPlayground>{children}</DoczPlayground>
+    </div>
   )
 }
 
