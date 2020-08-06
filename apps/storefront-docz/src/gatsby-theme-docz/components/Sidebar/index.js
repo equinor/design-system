@@ -114,7 +114,9 @@ export const Sidebar = ({ className, open, onClick }) => {
   const [subMenuOpen, setSubMenuOpen] = useState(
     menu.map(
       (menuItem) =>
-        menuItem.route === current.route.match(firstRouteSegment)[0],
+        (menuItem.route === current.route.match(firstRouteSegment) &&
+          current.route.match(firstRouteSegment)[0]) ||
+        '',
     ),
   )
 
