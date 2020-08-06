@@ -12,12 +12,22 @@ import { slugify } from '../../../utils/'
 import {
   save,
   thumbs_down,
+  thumbs_up,
   info_circle,
   subdirectory_arrow_right,
   download,
+  mood_sad,
 } from '@equinor/eds-icons'
 
-Icon.add({ save, thumbs_down, info_circle, subdirectory_arrow_right, download })
+Icon.add({
+  save,
+  thumbs_down,
+  thumbs_up,
+  info_circle,
+  subdirectory_arrow_right,
+  download,
+  mood_sad,
+})
 
 const { LinkItem } = TableOfContents
 

@@ -10,7 +10,7 @@ export default {
     // Show preview of the code inside playground
     showLivePreview: true,
     // Show editor when a playground is rendered
-    showPlaygroundEditor: true,
+    showPlaygroundEditor: false,
     // Show dark/light mode switch toggle in header
     showDarkModeSwitch: true,
     // Display edit this page button on every page
