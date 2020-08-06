@@ -1,8 +1,9 @@
 /* eslint react/jsx-filename-extension: off  */
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState, useMemo } from 'react'
 import styled, { css } from 'styled-components'
+import { useThemeUI } from 'theme-ui'
 import { useDocs, useConfig, useCurrentDoc } from 'docz'
 import { media } from '~theme/breakpoints'
 
@@ -35,9 +36,9 @@ const Overlay = styled.div`
 `
 
 const Content = styled.div`
-  background-color: var(--Sidebar-backgroundColor);
-  border-right: 1px solid var(--borderColor);
-  box-shadow: 0 0 30px 0 var(--Sidebar-shadowColor);
+  background-color: ${({ theme }) => theme.sidebar.background};
+  border-right: 1px solid ${({ theme }) => theme.sidebar.border};
+  box-shadow: 0 0 30px 0 ${({ theme }) => theme.sidebar.backgroundActive};
   z-index: 1;
 
   position: fixed;
@@ -64,8 +65,8 @@ const Menu = styled.ul`
 `
 
 const MenuItem = styled.li`
-  border-top: ${(props) =>
-    props.withTopBorder ? `1px solid var(--borderColor)` : 'none'};
+  border-top: ${({ withTopBorder, theme }) =>
+    withTopBorder ? `1px solid ${theme.sidebar.border}` : 'none'};
 `
 
 const trigger = css`
@@ -89,7 +90,7 @@ const MenuItemLink = styled(Link)`
       padding-bottom: 0.65rem;
   `}
   &.is-active {
-    background-color: var(--Sidebar-activeLink-backgroundColor);
+    background-color: ${({ theme }) => theme.sidebarActiveBackgroundColor};
   }
 `
 
@@ -104,7 +105,7 @@ const MenuArrow = styled.svg`
 
 export const Sidebar = ({ className, open, onClick }) => {
   const docs = useDocs()
-
+  const theme = useThemeUI()
   const current = useCurrentDoc()
 
   const { menu } = useConfig()
@@ -132,13 +133,14 @@ export const Sidebar = ({ className, open, onClick }) => {
       .map((doc) => ({
         title: doc.title,
         route: doc.route,
+        current: current.route.includes(doc.route),
       })),
   )
 
   return (
     <StyledSidebar className={className} open={open}>
       <Overlay onClick={onClick} />
-      <Content>
+      <Content theme={theme.theme.colors}>
         <Menu>
           <MenuItem>
             <MenuItemLink to="/" className="Sidebar-trigger">
@@ -146,7 +148,7 @@ export const Sidebar = ({ className, open, onClick }) => {
             </MenuItemLink>
           </MenuItem>
           {menu.map((item, index) => (
-            <MenuItem key={item.route} withTopBorder>
+            <MenuItem key={item.route} withTopBorder theme={theme.theme.colors}>
               <SubMenuLabel
                 onClick={() => {
                   setSubMenuOpen((previousState) =>
@@ -158,7 +160,6 @@ export const Sidebar = ({ className, open, onClick }) => {
               >
                 {item.title}
                 <MenuArrow
-                  className="sidebar-menu-arrow"
                   viewBox="0 0 13 13"
                   style={
                     subMenuOpen[index] ? { transform: 'rotate(90deg)' } : {}
@@ -182,12 +183,12 @@ export const Sidebar = ({ className, open, onClick }) => {
                       subMenuItem.route.match(firstRouteSegment)?.[0],
                   )
                   .map((subItem) => (
-                    <MenuItem key={subItem.route} className="Sidebar-menuItem">
+                    <MenuItem key={subItem.route}>
                       <MenuItemLink
                         type="sub"
-                        className="Sidebar-trigger"
                         to={subItem.route}
                         activeClassName="is-active"
+                        theme={theme.theme.colors}
                         partiallyActive
                       >
                         {subItem.title}
