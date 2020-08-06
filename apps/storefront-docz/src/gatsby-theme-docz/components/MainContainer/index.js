@@ -51,8 +51,8 @@ const StyledTableOfContents = styled(TableOfContents)`
 
 const Content = styled.div`
   padding: 3rem 2rem;
-
-  & > h2,
+  max-width: 42rem;
+  /*  & > h2,
   & > h3,
   & > h4,
   & > h5,
@@ -62,7 +62,7 @@ const Content = styled.div`
   & > ol,
   & > blockquote {
     max-width: 39rem;
-  }
+  } */
   h2 + p,
   h3 + p,
   h4 + p,
