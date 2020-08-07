@@ -16,7 +16,6 @@ trigger:
   paths:
     include:
     - apps/storefront
-    - apps/storefront-docz
 
 pr:
   branches:
@@ -26,9 +25,6 @@ pr:
   paths:
     include:
     - apps/storefront
-    - apps/storefront-docz
-
-
 
 variables:
 - group: eds-build-tokens
