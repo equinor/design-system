@@ -3,9 +3,14 @@ title: Notification banner
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/notification-banner/usage/
 ---
+
+import { Banner } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -30,3 +35,21 @@ route: /components/notification-banner/usage/
 6. Make sure to rename the new group.
 7. Locate the **Design** tab in the **Inspector Panel**.
 8. Under the **Constraints** section, set up constraints.
+
+## API
+
+### Banner
+
+<PropsTable props={Banner.__docgenInfo.props} />
+
+### BannerMessage
+
+<PropsTable props={Banner.BannerMessage.__docgenInfo.props} />
+
+### BannerIcon
+
+<PropsTable props={Banner.BannerIcon.__docgenInfo.props} />
+
+### BannerActions
+
+<PropsTable props={Banner.BannerActions.__docgenInfo.props} />
