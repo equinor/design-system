@@ -11,6 +11,9 @@ mode: publish
 route: /components/chips/
 ---
 
+import { Chip, Icon, Typography, Button, Avatar } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
+
 _Chips_, also known as tags or badges, are advanced badges that represent discrete information.
 
 <!--One to two sentences as an introduction to the component-->
@@ -84,3 +87,176 @@ When there are at least two predefined options to choose between, action chips t
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=5155%3A17914"
   alt="Chip with icon, text and remove"
 />
+
+## Demo
+
+### Text
+
+<Playground>
+  {() => {
+  const handleDelete = (e) => {
+    alert('Deleted')
+  }
+  const handleClick = (e) => {
+    alert('Clicked')
+  }
+  return (
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, fit-content(100%))',
+    gap: '32px',
+  }}
+>
+  <Chip>normal</Chip>
+  <Chip variant="active">active</Chip>
+  <Chip variant="active" onDelete={handleDelete}>
+    active + deletable
+  </Chip>
+  <Chip variant="error">error</Chip>
+  <Chip variant="error" onDelete={handleDelete}>
+    error + deletable
+  </Chip>
+  <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
+    error + deletable + clickable
+  </Chip>
+  <Chip onClick={handleClick}>clickable</Chip>
+  <Chip onDelete={handleDelete}>deletable</Chip>
+  <Chip onDelete={handleDelete} onClick={handleClick}>
+    deletable + clickable
+  </Chip>
+  <Chip onDelete={handleDelete} disabled>
+    disabled
+  </Chip>
+</div>
+) }}
+</Playground>
+
+### Text + Icon
+
+<Playground>
+  {() => {
+  const handleDelete = (e) => {
+    alert('Deleted')
+  }
+  const handleClick = (e) => {
+    alert('Clicked')
+  }
+  return (
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, fit-content(100%))',
+    gap: '32px',
+  }}
+>
+<Chip>
+        <Icon name="save" />
+        normal
+      </Chip>
+      <Chip variant="active">
+        <Icon name="save" />
+        active
+      </Chip>
+      <Chip variant="active" onDelete={handleDelete}>
+        <Icon name="save" />
+        active + deletable
+      </Chip>
+      <Chip variant="error">
+        <Icon name="save" />
+        error
+      </Chip>
+      <Chip variant="error" onDelete={handleDelete}>
+        <Icon name="save" />
+        error + deletable
+      </Chip>
+      <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
+        <Icon name="save" />
+        error + deletable + clickable
+      </Chip>
+      <Chip onClick={handleClick}>
+        <Icon name="save" />
+        clickable
+      </Chip>
+      <Chip onDelete={handleDelete}>
+        <Icon name="save" />
+        deletable
+      </Chip>
+      <Chip onDelete={handleDelete} onClick={handleClick}>
+        <Icon name="save" />
+        deletable + clickable
+      </Chip>
+      <Chip onDelete={handleDelete} disabled>
+        <Icon name="save" />
+        disabled
+      </Chip>
+</div>
+) }}
+</Playground>
+
+### Text + Avatar
+
+<Playground>
+  {() => {
+  const handleDelete = (e) => {
+    alert('Deleted')
+  }
+  const handleClick = (e) => {
+    alert('Clicked')
+  }
+  const catImg =  "https://i.imgur.com/UM3mrju.jpg"
+    
+  return (
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, fit-content(100%))',
+    gap: '32px',
+  }}
+>
+<Chip>
+        <Avatar src={catImg} alt="cat" />
+        normal
+      </Chip>
+      <Chip variant="active">
+        <Avatar src={catImg} alt="cat" />
+        active
+      </Chip>
+      <Chip variant="active" onDelete={handleDelete}>
+        <Avatar src={catImg} alt="cat" />
+        active + deletable
+      </Chip>
+      <Chip variant="error">
+        <Avatar src={catImg} alt="cat" />
+        error
+      </Chip>
+      <Chip variant="error" onDelete={handleDelete}>
+        <Avatar src={catImg} alt="cat" />
+        error + deletable
+      </Chip>
+      <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
+        <Avatar src={catImg} alt="cat" />
+        error + deletable + clickable
+      </Chip>
+      <Chip onClick={handleClick}>
+        <Avatar src={catImg} alt="cat" />
+        clickable
+      </Chip>
+      <Chip onDelete={handleDelete}>
+        <Avatar src={catImg} alt="cat" />
+        deletable
+      </Chip>
+      <Chip onDelete={handleDelete} onClick={handleClick}>
+        <Avatar src={catImg} alt="cat" />
+        deletable + clickable
+      </Chip>
+      <Chip onDelete={handleDelete} disabled>
+        <Avatar src={catImg} alt="cat" />
+        disabled
+      </Chip>
+</div>
+) }}
+</Playground>
