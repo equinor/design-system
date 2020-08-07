@@ -36,9 +36,9 @@ const Overlay = styled.div`
 `
 
 const Content = styled.div`
-  background-color: ${({ theme }) => theme.sidebar.background};
-  border-right: 1px solid ${({ theme }) => theme.sidebar.border};
-  box-shadow: 0 0 30px 0 ${({ theme }) => theme.sidebar.backgroundActive};
+  background-color: ${({ theme }) => theme.sidebar?.background};
+  border-right: 1px solid ${({ theme }) => theme.sidebar?.border};
+  box-shadow: 0 0 30px 0 ${({ theme }) => theme.sidebar?.backgroundActive};
   z-index: 1;
 
   position: fixed;
@@ -66,7 +66,7 @@ const Menu = styled.ul`
 
 const MenuItem = styled.li`
   border-top: ${({ withTopBorder, theme }) =>
-    withTopBorder ? `1px solid ${theme.sidebar.border}` : 'none'};
+    withTopBorder ? `1px solid ${theme.sidebar?.border}` : 'none'};
 `
 
 const trigger = css`
@@ -90,7 +90,7 @@ const MenuItemLink = styled(Link)`
       padding-bottom: 0.65rem;
   `}
   &.is-active {
-    background-color: ${({ theme }) => theme.sidebarActiveBackgroundColor};
+    background-color: ${({ theme }) => theme.sidebar?.backgroundActive};
   }
 `
 
@@ -107,7 +107,6 @@ export const Sidebar = ({ className, open, onClick }) => {
   const docs = useDocs()
   const theme = useThemeUI()
   const current = useCurrentDoc()
-
   const { menu } = useConfig()
 
   const firstRouteSegment = /^\/[a-z-]+\//
@@ -115,9 +114,7 @@ export const Sidebar = ({ className, open, onClick }) => {
   const [subMenuOpen, setSubMenuOpen] = useState(
     menu.map(
       (menuItem) =>
-        (menuItem.route === current.route.match(firstRouteSegment) &&
-          current.route.match(firstRouteSegment)[0]) ||
-        '',
+        menuItem.route === current.route.match(firstRouteSegment)?.[0],
     ),
   )
 
