@@ -7,9 +7,13 @@ toc:
   - Guidelines
   - Variations
   - Examples
+  - Demo
 mode: publish
 route: /components/buttons/
 ---
+
+import { Button, Icon } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 Buttons allow users to take action with a single click or tap.
 
@@ -143,3 +147,195 @@ Ghost buttons are found in the following variations:
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=146%3A10"
   alt="Figma design of disabled buttons"
 />
+
+## Demo
+
+### Contained
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      gap: '32px',
+    }}
+  >
+    <Button>Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="danger">Danger</Button>
+    <Button disabled>Disabled</Button>
+    <Button>
+      <Icon name="save" title="save" size={16}></Icon>Primary
+    </Button>
+    <Button color="secondary">
+      <Icon name="save" title="save"></Icon>Secondary
+    </Button>
+    <Button color="danger">
+      <Icon name="save" title="save"></Icon>Danger
+    </Button>
+    <Button disabled>
+      <Icon name="save" title="save"></Icon>Disabled
+    </Button>
+    <Button>
+      Primary <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button color="secondary">
+      Secondary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button color="danger">
+      Danger
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button disabled>
+      Disabled
+      <Icon name="save" title="save"></Icon>
+    </Button>
+  </div>
+</Playground>
+
+### Outlined
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      gap: '32px',
+    }}
+  >
+    <Button variant="outlined">Primary</Button>
+    <Button variant="outlined" color="secondary">
+      Secondary
+    </Button>
+    <Button variant="outlined" color="danger">
+      Danger
+    </Button>
+    <Button variant="outlined" disabled>
+      Disabled
+    </Button>
+    <Button variant="outlined">
+      <Icon name="save" title="save"></Icon>
+      Primary
+    </Button>
+    <Button variant="outlined" color="secondary">
+      <Icon name="save" title="save"></Icon>
+      Secondary
+    </Button>
+    <Button variant="outlined" color="danger">
+      <Icon name="save" title="save"></Icon>
+      Danger
+    </Button>
+    <Button variant="outlined" disabled>
+      <Icon name="save" title="save"></Icon>
+      Disabled
+    </Button>
+    <Button variant="outlined">
+      Primary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="outlined" color="secondary">
+      Secondary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="outlined" color="danger">
+      Danger
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="outlined" disabled>
+      Disabled
+      <Icon name="save" title="save"></Icon>
+    </Button>
+  </div>
+</Playground>
+
+### Ghost
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      gap: '32px',
+    }}
+  >
+    <Button variant="ghost">Primary</Button>
+    <Button variant="ghost" color="secondary">
+      Secondary
+    </Button>
+    <Button variant="ghost" color="danger">
+      Danger
+    </Button>
+    <Button variant="ghost" disabled>
+      Disabled
+    </Button>
+    <Button variant="ghost">
+      <Icon name="save" title="save"></Icon>
+      Primary
+    </Button>
+    <Button variant="ghost" color="secondary">
+      <Icon name="save" title="save"></Icon>
+      Secondary
+    </Button>
+    <Button variant="ghost" color="danger">
+      <Icon name="save" title="save"></Icon>
+      Danger
+    </Button>
+    <Button variant="ghost" disabled>
+      <Icon name="save" title="save"></Icon>
+      Disabled
+    </Button>
+    <Button variant="ghost">
+      Primary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost" color="secondary">
+      Secondary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost" color="danger">
+      Danger
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost" disabled>
+      Disabled
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon">
+      <Icon name="save" title="save action" size={48}></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="secondary">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" color="danger">
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button variant="ghost_icon" disabled>
+      <Icon name="save" title="save"></Icon>
+    </Button>
+  </div>
+</Playground>
+
+### Form
+
+<Playground>
+  {() => {
+    const handleSubmit = (e) => {
+      e.preventDefault() // to prevent navigation away
+      alert('Submittet')
+    }
+    return (
+      <form onSubmit={handleSubmit} href="/">
+        <Button type="submit">Submit form</Button>
+      </form>
+    )
+  }}
+</Playground>
+
+### Link styled as button
+
+<Playground>
+  <Button href="#" style={{ width: '10rem' }}>
+    Link
+  </Button>
+</Playground>

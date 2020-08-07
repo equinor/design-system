@@ -6,9 +6,13 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/cards/
 ---
+
+import { Card, Icon, Typography, Button, Avatar } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 A _card_ displays content related to a single subject and acts as an entry point to more detailed information. Card blocks can be combined in a variety of ways.
 
@@ -113,3 +117,128 @@ Supplemental action blocks can have:
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=214%3A321"
   alt="Figma design of supplemental action"
 />
+
+## Demo
+
+### Card variants
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 260px)',
+      gridGap: '32px',
+    }}
+  >
+    <Card>
+      <Card.CardHeader>
+        <Typography variant="h5">Default</Typography>
+      </Card.CardHeader>
+    </Card>
+    <Card variant="info">
+      <Card.CardHeader>
+        <Typography variant="h5">Info</Typography>
+      </Card.CardHeader>
+    </Card>
+    <Card variant="warning">
+      <Card.CardHeader>
+        <Typography variant="h5">Warning</Typography>
+      </Card.CardHeader>
+    </Card>
+    <Card variant="danger">
+      <Card.CardHeader>
+        <Typography variant="h5">Danger</Typography>
+      </Card.CardHeader>
+    </Card>
+  </div>
+</Playground>
+
+### Card header variants
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 260px)',
+      gridGap: '32px',
+    }}
+  >
+    <Card variant="info">
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h4">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h4">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.CardHeaderTitle>
+        <Button variant="ghost_icon">
+          <Icon name="more_verticle" title="more action" size={48}></Icon>
+        </Button>
+      </Card.CardHeader>
+    </Card>
+    <Card variant="danger">
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h4">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.CardHeaderTitle>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+      </Card.CardHeader>
+    </Card>
+    <Card variant="warning">
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.CardHeaderTitle>
+        <Button variant="ghost_icon">
+          <Icon name="more_verticle" title="more action" size={48}></Icon>
+        </Button>
+      </Card.CardHeader>
+    </Card>
+    <Card variant="danger">
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.CardHeaderTitle>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+      </Card.CardHeader>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+        <Card.CardHeaderTitle>
+          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="body_short">Caption</Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+    </Card>
+    <Card variant="danger">
+      <Card.CardHeader>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+        <Card.CardHeaderTitle>
+          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="body_short">Caption</Typography>
+        </Card.CardHeaderTitle>
+        <Button variant="ghost_icon">
+          <Icon name="more_verticle" title="more action" size={48}></Icon>
+        </Button>
+      </Card.CardHeader>
+    </Card>
+  </div>
+</Playground>

@@ -17,6 +17,7 @@ import {
   subdirectory_arrow_right,
   download,
   mood_sad,
+  more_verticle,
 } from '@equinor/eds-icons'
 
 Icon.add({
@@ -27,6 +28,7 @@ Icon.add({
   subdirectory_arrow_right,
   download,
   mood_sad,
+  more_verticle,
 })
 
 const { LinkItem } = TableOfContents
