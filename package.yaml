@@ -28,6 +28,11 @@ scripts:
     apps/storefront/Dockerfile .
   storefront-docker-run: 'docker run -p 8080:80 eds/storefront'
   storefront-docker-inspect: docker run -it eds/storefront /bin/sh
+  dockerize-storefront-docz: >-
+    docker build --build-arg GATSBY_STAGE=prod -t eds/storefront-docz -f
+    apps/storefront-docz/Dockerfile .
+  storefront-docz-docker-run: 'docker run -p 8080:80 eds/storefront-docz'
+  storefront-docz-docker-inspect: docker run -it eds/storefront-docz /bin/sh
 devDependencies:
   babel-eslint: ^10.1.0
   eslint: ^7.2.0
