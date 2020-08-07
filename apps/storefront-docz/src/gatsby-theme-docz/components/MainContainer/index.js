@@ -18,6 +18,9 @@ import {
   download,
   mood_sad,
   more_verticle,
+  settings,
+  person_add,
+  share,
 } from '@equinor/eds-icons'
 
 Icon.add({
@@ -29,6 +32,9 @@ Icon.add({
   download,
   mood_sad,
   more_verticle,
+  settings,
+  person_add,
+  share,
 })
 
 const { LinkItem } = TableOfContents

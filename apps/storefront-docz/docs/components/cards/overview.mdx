@@ -228,7 +228,7 @@ Supplemental action blocks can have:
         </Card.CardHeaderTitle>
       </Card.CardHeader>
     </Card>
-    <Card variant="danger">
+    <Card variant="info">
       <Card.CardHeader>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
         <Card.CardHeaderTitle>
@@ -239,6 +239,163 @@ Supplemental action blocks can have:
           <Icon name="more_verticle" title="more action" size={48}></Icon>
         </Button>
       </Card.CardHeader>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="overline">Overline</Typography>
+          <Typography variant="h6">Title goes here</Typography>
+        </Card.CardHeaderTitle>
+        <Button variant="ghost_icon">
+          <Icon name="more_verticle" title="more action" size={48}></Icon>
+        </Button>
+      </Card.CardHeader>
+    </Card>
+    <Card variant="warning">
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="overline">Overline</Typography>
+          <Typography variant="h6">Title goes here</Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+    </Card>
+  </div>
+</Playground>
+
+### Card media variants
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 260px)',
+      gridGap: '32px',
+    }}
+  >
+    <Card>
+      <Card.CardMedia fullWidth>
+        <img
+          src="https://i.imgur.com/UM3mrju.jpg"
+          alt="Image for representation"
+        />
+      </Card.CardMedia>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Full width</Typography>
+          <Typography variant="body_short">
+            Full width as leading block
+          </Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+      <Typography variant="body_short">
+        Leading images are full width, and go straight to the top - ignoring
+        spacings
+      </Typography>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Full width</Typography>
+          <Typography variant="body_short">Full width as last block</Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+      <Typography variant="body_short">
+        Last blocks with fullWidth ignores left and right spacings but keep 24px
+        bottom spacing
+      </Typography>
+      <Card.CardMedia fullWidth>
+        <img
+          src="https://i.imgur.com/UM3mrju.jpg"
+          alt="Image for representation"
+        />
+      </Card.CardMedia>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Middle</Typography>
+          <Typography variant="body_short">
+            To be used between blocks
+          </Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+      <Card.CardMedia fullWidth>
+        <img
+          src="https://i.imgur.com/UM3mrju.jpg"
+          alt="Image for representation"
+        />
+      </Card.CardMedia>
+      <Typography variant="body_short">
+        Default spacing is 16px between middle blocks
+      </Typography>
+    </Card>
+  </div>
+</Playground>
+
+### Cards with actions
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 260px)',
+      gridGap: '32px',
+    }}
+  >
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Default</Typography>
+          <Typography variant="body_short">Left aligned buttons</Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+      <Typography variant="body_short">
+        Action elements are aligned left in this example
+      </Typography>
+      <Card.CardActions>
+        <Button>Cancel</Button>
+        <Button>OK</Button>
+      </Card.CardActions>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Right</Typography>
+          <Typography variant="body_short">Right aligned buttons</Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+      <Typography variant="body_short">
+        Action elements are aligned right in this example
+      </Typography>
+      <Card.CardActions alignRight>
+        <Button variant="ghost_icon">
+          <Icon name="person_add" title="add person action" size={48}></Icon>
+        </Button>
+        <Button variant="ghost_icon">
+          <Icon name="settings" title="settings action" size={48}></Icon>
+        </Button>
+        <Button variant="ghost_icon">
+          <Icon name="save" title="save action" size={48}></Icon>
+        </Button>
+      </Card.CardActions>
+    </Card>
+    <Card>
+      <Card.CardHeader>
+        <Card.CardHeaderTitle>
+          <Typography variant="h5">Meta</Typography>
+          <Typography variant="body_short">
+            Use as supporting text for icons
+          </Typography>
+        </Card.CardHeaderTitle>
+      </Card.CardHeader>
+      <Typography variant="body_short">
+        Action elements with metadata
+      </Typography>
+      <Card.CardActions meta="Share">
+        <Button variant="ghost_icon">
+          <Icon name="share" title="share action" size={48}></Icon>
+        </Button>
+      </Card.CardActions>
     </Card>
   </div>
 </Playground>
