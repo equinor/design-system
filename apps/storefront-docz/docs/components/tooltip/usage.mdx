@@ -3,9 +3,14 @@ title: Tooltip
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/tooltip/usage/
 ---
+
+import { Tooltip } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -23,3 +28,7 @@ route: /components/tooltip/usage/
 2. Locate and expand the highlighted _layer_ in the **Layers Panel**.
 3. Toggle off the visibility of the `Caret` _layers_ that are not needed.
 4. Edit the text. If the text wraps over one line, add 16px in height per line of text added to the whole component.
+
+## API
+
+<PropsTable props={Tooltip.__docgenInfo.props} />

@@ -7,6 +7,9 @@ mode: publish
 route: /components/tooltip/
 ---
 
+import { Tooltip, Button } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
+
 A tooltip shows when hovered, focused or long-pressed (touch), and displays information such as a text label or a short description.
 
 ## Guidelines
@@ -36,3 +39,13 @@ Tooltips should aim to have a single line of text, that does not wrap, and it ke
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=251%3A4"
   alt="Figma design sketch for tooltip"
 />
+
+<!--
+## Demo
+
+<Playground>
+  <Tooltip title="Tooltip" placement="topLeft">
+    <Button>Top left</Button>
+  </Tooltip>
+</Playground>
+-->
