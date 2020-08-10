@@ -8,9 +8,13 @@ toc:
   - Switch
   - Checkbox
   - Radio
+  - Demo
 mode: publish
 route: /components/selection-controls/
 ---
+
+import { Checkbox } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 _Selection controls_ allow users to select options, make decisions and set preferences.
 
@@ -127,3 +131,49 @@ Radio buttons allow users to choose one single option from a list of mutually ex
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A982"
   alt="Figma design sketches of unselected radio"
 />
+
+## Demo
+
+### Checkbox
+
+<Playground>
+  {() => {
+    // Use this to set the input to indeterminate = true as
+    // this must be done via JavaScript
+    // (cannot use an HTML attribute for this)
+    const indeterminateRef = React.useRef()
+    const [checked, updateChecked] = React.useState(false)
+    return (
+      <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+        <li>
+          <Checkbox label="Check me" />
+        </li>
+        <li>
+          <Checkbox label="You can't check me!" disabled />
+        </li>
+        <li>
+          <Checkbox label="I'm preselected" defaultChecked />
+        </li>
+        <li>
+          <Checkbox label="You can't uncheck me!" disabled defaultChecked />
+        </li>
+        <li>
+          <Checkbox
+            label="I'm in indeterminate state"
+            indeterminate
+            ref={indeterminateRef}
+          />
+        </li>
+        <li>
+          <Checkbox
+            label="I'm a controlled component"
+            onChange={(e) => {
+              updateChecked(e.target.checked)
+            }}
+            checked={checked}
+          />
+        </li>
+      </ul>
+    )
+  }}
+</Playground>

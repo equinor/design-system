@@ -3,9 +3,14 @@ title: Navigation top bar
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/navigation-top-bar/usage/
 ---
+
+import { TopBar } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -28,3 +33,21 @@ route: /components/navigation-top-bar/usage/
    - Title and navigation: Triple-click on the title to edit. Edit the icon button to have the needed icon.
    - Custom content: Build your own components to swap with the nested `Placeholder` instance if needed.
    - Actions: Edit the icon buttons that are allowed to edit if other actions are needed.
+
+## API
+
+### TopBar
+
+<PropsTable props={TopBar.__docgenInfo.props} />
+
+### Header
+
+<PropsTable props={TopBar.Header.__docgenInfo.props} />
+
+### CustomContent
+
+<PropsTable props={TopBar.CustomContent.__docgenInfo.props} />
+
+### Actions
+
+<PropsTable props={TopBar.Actions.__docgenInfo.props} />

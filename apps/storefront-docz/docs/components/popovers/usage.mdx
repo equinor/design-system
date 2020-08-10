@@ -3,9 +3,14 @@ title: Popover
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/popovers/usage/
 ---
+
+import { Popover } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -26,3 +31,21 @@ route: /components/popovers/usage/
 3. Toggle off the visibility of the `Caret` _layers_ that are not needed.
 4. If using text, toggle off the placeholder and edit the text. If the text wraps over one line, add 16px in height per line of text added to the whole component.
 5. If using the placeholder, toggle off the text and replace the placeholder with your custom content.
+
+## API
+
+### Popover
+
+<PropsTable props={Popover.__docgenInfo.props} />
+
+### PopoverAnchor
+
+<PropsTable props={Popover.PopoverAnchor.__docgenInfo.props} />
+
+### PopoverTitle
+
+<PropsTable props={Popover.PopoverTitle.__docgenInfo.props} />
+
+### PopoverContent
+
+<PropsTable props={Popover.PopoverContent.__docgenInfo.props} />

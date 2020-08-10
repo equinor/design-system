@@ -3,9 +3,14 @@ title: Notification snackbar
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/notification-snackbar/usage/
 ---
+
+import { Snackbar } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -24,3 +29,13 @@ route: /components/notification-snackbar/usage/
 3. Edit the text. If the text wraps over one line, resize the width of the button to avoid line breaks.
 4. Never add height to snackbars, only resize them horizontally in width.
 5. Edit the action text.
+
+## API
+
+### Snackbar
+
+<PropsTable props={Snackbar.__docgenInfo.props} />
+
+### SnackbarAction
+
+<PropsTable props={Snackbar.SnackbarAction.__docgenInfo.props} />

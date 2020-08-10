@@ -6,9 +6,13 @@ tabs:
 toc:
   - Guidelines
   - Sections
+  - Demo
 mode: publish
 route: /components/navigation-top-bar/
 ---
+
+import { TopBar, Icon, Search } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 The top bar, also known as a header, displays navigation and actions relating to the interface.
 
@@ -62,3 +66,44 @@ The actions on the far-right are standard. This area is for the following common
 - Notifications: This opens a `Menu` for the user to see their notifications.
 - Accessibility: This opens a `Menu` with choices for the users to choose light/dark mode and their font size. _This button is mandatory to keep._
 - User profile: This opens a `Menu` where the user can see more account details and log out. _This button is mandatory to keep._
+
+## Demo
+
+### Title and actions
+
+<Playground>
+  <TopBar>
+    <TopBar.Header>Application name</TopBar.Header>
+    <TopBar.Actions>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, fit-content(100%))',
+          gap: '16px',
+        }}
+      >
+        <Icon name="account_circle" size={24} title="user" />
+        <Icon name="accessible" size={24} />
+        <Icon name="notifications" size={24} />
+        <Icon name="fullscreen" size={24} />
+      </div>
+    </TopBar.Actions>
+  </TopBar>
+</Playground>
+
+### Title with icon, search and text
+
+<Playground>
+  <TopBar>
+    <TopBar.Header>
+      <>
+        <Icon name="accessible" />
+        Application name
+      </>
+    </TopBar.Header>
+    <TopBar.CustomContent>
+      <input type="search" />
+    </TopBar.CustomContent>
+    <TopBar.Actions>Some right text</TopBar.Actions>
+  </TopBar>
+</Playground>

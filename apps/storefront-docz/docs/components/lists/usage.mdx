@@ -3,9 +3,14 @@ title: Lists
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/lists/usage/
 ---
+
+import { List } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -16,3 +21,13 @@ route: /components/lists/usage/
    - Figma does not support indenting, so each indented level needs four `spaces` added before it.
 3. For numbered lists, manually add the numbers `1.`, `2.` and so on before each line.
    - Figma does not support indenting, so each indented level needs four `spaces` added before it.
+
+## API
+
+### List
+
+<PropsTable props={List.__docgenInfo.props} />
+
+### ListItem
+
+<PropsTable props={List.ListItem.__docgenInfo.props} />

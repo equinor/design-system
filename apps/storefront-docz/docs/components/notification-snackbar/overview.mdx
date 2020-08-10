@@ -7,6 +7,9 @@ mode: publish
 route: /components/notification-snackbar/
 ---
 
+import { Snackbar, Button } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
+
 _Snackbars_ provide brief temporary non-interrupting notifications at the bottom of the screen.
 
 <!--One to two sentences as an introduction to the component-->
@@ -34,3 +37,29 @@ Snackbars can have one action. This action should not be "Close " or "Dismiss" s
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=2642%3A13297"
   alt="Figma design of snackbar"
 />
+
+## Demo
+
+<!--
+<Playground>
+  {() => {
+    const [open, setOpen] = React.useState(false)
+    const [withActionOpen, setWithActionOpen] = React.useState(false)
+    return (
+      <div>
+        <Button type="button" onClick={() => setOpen(true)}>
+          Show a simple snackbar for 5 seconds
+        </Button>
+        <Snackbar
+          open={open}
+          onClose={() => setOpen(false)}
+          autoHideDuration={5000}
+          leftAlignFrom="1500px"
+        >
+          Message goes here
+        </Snackbar>
+      </div>
+    )
+  }}
+</Playground>
+-->

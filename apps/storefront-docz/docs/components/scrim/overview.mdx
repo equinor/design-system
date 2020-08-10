@@ -3,9 +3,16 @@ title: Scrim
 tabs:
   - Overview
   - Usage
+toc:
+  - Guidelines
+  - Interactions
+  - Demo
 mode: publish
 route: /components/scrim/
 ---
+
+import { Scrim, Button, Typography } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 A scrim is a temporary visual effect that fades the general interface while allowing the user to focus on an overlay.
 
@@ -21,3 +28,37 @@ Always use a scrim with an overlay component such as a dialog, elevated sideshee
 ## Interactions
 
 When the scrim is clicked on or the `Esc` key is pressed---the overlay component will close, closing the scrim with it.
+
+## Demo
+
+<!--
+<Playground>
+  {() => {
+    const [visibleScrim, setVisibleScrim] = React.useState(false)
+    const handleClose = (event, closed) => {
+      if (closed) {
+        setVisibleScrim(closed)
+      } else {
+        setVisibleScrim(!visibleScrim)
+      }
+    }
+    return (
+      <>
+        <div>
+          <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
+        </div>
+        {visibleScrim && (
+          <Scrim onClose={handleClose} isDismissable>
+            <div>
+              <Typography variant="body_short">
+                Press close or hit 'ESC' to close scrim.
+              </Typography>
+              <Button onClick={() => setVisibleScrim(false)}>Close</Button>
+            </div>
+          </Scrim>
+        )}
+      </>
+    )
+  }}
+</Playground>
+-->

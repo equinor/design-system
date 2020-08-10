@@ -7,9 +7,14 @@ toc:
   - Guidelines
   - Variations
   - Exceptions
+  - Demo
 mode: publish
 route: /components/navigation-tabs/
 ---
+
+import { useEffect, useRef } from 'react'
+import { Tabs } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 Tabs organise related content across different views to be quickly navigated.
 
@@ -83,3 +88,30 @@ Note that if the label is longer than the maximum width it will be truncated and
 ## Exceptions
 
 If the `Navigation: Navigation Drawer` is not used, tabs may be used in the `Navigation: Top Bar` as the main navigation linking to unrelated pages.
+
+## Demo
+
+<!--
+@TODO Fix hooks eslint error
+<Playground>
+  {() => {
+    const focusedRef = useRef(null)
+    useEffect(() => {
+      focusedRef.current.focus()
+    }, [])
+    return (
+      <Tabs activeTab={2} onChange={() => {}}>
+        <Tabs.TabList>
+          <Tabs.Tab>Enabled</Tabs.Tab>
+          <Tabs.Tab disabled>Disabled</Tabs.Tab>
+          <Tabs.Tab active>Active</Tabs.Tab>
+          <Tabs.Tab data-hover>Hover</Tabs.Tab>
+          <Tabs.Tab data-focus ref={focusedRef}>
+            Focus
+          </Tabs.Tab>
+        </Tabs.TabList>
+      </Tabs>
+    )
+  }}
+</Playground>
+-->
