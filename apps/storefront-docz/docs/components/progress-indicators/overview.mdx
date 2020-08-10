@@ -6,9 +6,18 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/progress-indicators/
 ---
+
+import {
+  CircularProgress,
+  DotProgress,
+  LinearProgress,
+  StarProgress,
+} from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 _Progress indicators_ are animated helpers that indicate waiting time as content loads.
 
@@ -67,3 +76,105 @@ Star progress indicators are to be used on splash screens and empty pages only.
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=2529%3A67"
   alt="Figma design of equinor star progress indicators"
 />
+
+## Demo
+
+### Circular progress (determinate, indeterminate)
+
+<Playground>
+  {() => {
+    const [progress, setProgress] = React.useState(0)
+    React.useEffect(() => {
+      const timer = setInterval(() => {
+        setProgress((oldProgress) => {
+          if (oldProgress === 100) {
+            return 100
+          }
+          const diff = Math.random() * 10
+          return Math.min(oldProgress + diff, 100)
+        })
+      }, 500)
+      return () => {
+        clearInterval(timer)
+      }
+    }, [])
+    return (
+      <>
+        <CircularProgress variant="determinate" value={progress} />
+        <br />
+        <CircularProgress />
+      </>
+    )
+  }}
+</Playground>
+
+### Dot progress
+
+<Playground>
+  <>
+    <div style={{ backgroundColor: '#DCDCDC', padding: '1rem' }}>
+      <DotProgress />
+    </div>
+    <div style={{ padding: '1rem' }}>
+      <DotProgress variant="green" />
+    </div>
+  </>
+</Playground>
+
+### Linear progress (determinate, indeterminate)
+
+<Playground>
+  {() => {
+    const [progress, setProgress] = React.useState(0)
+    React.useEffect(() => {
+      const timer = setInterval(() => {
+        setProgress((oldProgress) => {
+          if (oldProgress === 100) {
+            return 100
+          }
+          const diff = Math.random() * 10
+          return Math.min(oldProgress + diff, 100)
+        })
+      }, 500)
+      return () => {
+        clearInterval(timer)
+      }
+    }, [])
+    return (
+      <>
+        <LinearProgress variant="determinate" value={progress} />
+        <br />
+        <LinearProgress />
+      </>
+    )
+  }}
+</Playground>
+
+### Star progress (determinate, indeterminate)
+
+<Playground>
+  {() => {
+    const [progress, setProgress] = React.useState(0)
+    React.useEffect(() => {
+      const timer = setInterval(() => {
+        setProgress((oldProgress) => {
+          if (oldProgress === 100) {
+            return 100
+          }
+          const diff = Math.random() * 10
+          return Math.min(oldProgress + diff, 100)
+        })
+      }, 500)
+      return () => {
+        clearInterval(timer)
+      }
+    }, [])
+    return (
+      <>
+        <StarProgress variant="determinate" value={progress} />
+        <br />
+        <StarProgress />
+      </>
+    )
+  }}
+</Playground>

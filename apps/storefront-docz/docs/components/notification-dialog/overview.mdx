@@ -6,9 +6,14 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/notification-dialog/
 ---
+
+import { useState } from 'react'
+import { Dialog, Button, Scrim, Typography } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 _Dialogs_ display critical notifications and required actions.
 
@@ -41,3 +46,24 @@ Dialogs can contain a Title, Content and Actions. A dialog can have one or two a
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=2725%3A198"
   alt="Figma design for dialog"
 />
+
+## Demo
+
+<!--
+<Playground>
+  {() => {
+    const [visibleScrim, setVisibleScrim] = useState(false)
+    const handleClose = (event, closed) => {
+    setVisibleScrim(!visibleScrim)
+  }
+    return (
+      <>
+        <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
+        <Scrim onClose={handleClose}>
+          <Dialog><Dialog.Title>Title</Dialog.Title></Dialog>
+        </Scrim>
+      </>
+    )
+}}
+</Playground>
+-->

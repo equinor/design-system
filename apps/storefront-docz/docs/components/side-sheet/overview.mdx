@@ -6,9 +6,13 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/side-sheet/
 ---
+
+import { SideSheet, Button } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 A _side sheet_ is a a toggleable area that is anchored to the edge of the viewport with supplementary content.
 
@@ -46,3 +50,49 @@ Primarily used for desktop and tablet. The side sheet comes in multiple sizes: `
 ### Modal side sheet
 
 Modular side sheets are used for mobile with the addition of a _scrim_.
+
+## Demo
+
+<Playground>
+  {() => {
+    const [toggle, setToggle] = React.useState(true)
+    return (
+      <div
+        style={{
+          position: 'relative',
+          background: '#ebebeb',
+          display: 'flex',
+          padding: '1rem',
+          height: '200px',
+          flexDirection: 'column',
+          alignItems: 'start',
+          justifyContent: 'center',
+        }}
+      >
+        <SideSheet
+          variant="small"
+          title="Small"
+          open={toggle}
+          onClose={() => setToggle(!toggle)}
+        >
+          <div
+            style={{
+              padding: '6px',
+              backgroundColor: 'rgba(255, 146, 0, 0.15)',
+              boxSizing: 'border-box',
+              border: '1px dashed #ff9200',
+              borderRadius: '4px',
+            }}
+          >
+            Children
+          </div>
+        </SideSheet>
+        <div>
+          <Button variant="outlined" onClick={() => setToggle(!toggle)}>
+            Toggle Sidesheet
+          </Button>
+        </div>
+      </div>
+    )
+  }}
+</Playground>

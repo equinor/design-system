@@ -3,9 +3,14 @@ title: Navigation tabs
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/navigation-tabs/usage/
 ---
+
+import { Tabs } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -27,3 +32,25 @@ route: /components/navigation-tabs/usage/
 6. Repeat steps 2-5 until each tab has the correct label.
 7. Align all the `Tabs`to be side-by-side and bottom aligned making sure each tab touches the next.
 8. Select all the `Tab` _layers_ and _group_ them together, always naming the grouped layer.
+
+## API
+
+### Tabs
+
+<PropsTable props={Tabs.__docgenInfo.props} />
+
+### TabList
+
+<PropsTable props={Tabs.TabList.__docgenInfo.props} />
+
+### Tab
+
+<PropsTable props={Tabs.Tab.__docgenInfo.props} />
+
+### TabPanels
+
+<PropsTable props={Tabs.TabPanels.__docgenInfo.props} />
+
+### TabPanel
+
+<PropsTable props={Tabs.TabPanel.__docgenInfo.props} />

@@ -6,9 +6,13 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/search/
 ---
+
+import { Search } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 _Search_ allows users to locate or refine content based on simple words or phrases.
 
@@ -47,3 +51,16 @@ Scoping allows users to narrow their search before they start. The _Scope_ can b
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=2805%3A15917"
   alt="Figma design of search scope design"
 />
+
+## Demo
+
+<!--
+<Playground>
+  {() => {
+    const [searchValue, setSearchValue] = React.useState('Initial value')
+    return (
+      <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
+    )
+  }}
+</Playground>
+-->

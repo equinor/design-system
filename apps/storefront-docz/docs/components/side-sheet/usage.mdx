@@ -3,9 +3,14 @@ title: Side sheet
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/side-sheet/usage/
 ---
+
+import { SideSheet } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -35,3 +40,7 @@ route: /components/side-sheet/usage/
 7. Locate the **Design** tab in the **Inspector Panel**.
 8. Under the **Constraints** section, set up constraints.
    9 If the sidesheet is elevated, apply `Elevation/Overlay` to the whole grouped layer.
+
+## API
+
+<PropsTable props={SideSheet.__docgenInfo.props} />

@@ -21,6 +21,11 @@ import {
   settings,
   person_add,
   share,
+  account_circle,
+  accessible,
+  notifications,
+  fullscreen,
+  grid_on,
 } from '@equinor/eds-icons'
 
 Icon.add({
@@ -35,6 +40,11 @@ Icon.add({
   settings,
   person_add,
   share,
+  account_circle,
+  accessible,
+  notifications,
+  fullscreen,
+  grid_on,
 })
 
 const { LinkItem } = TableOfContents

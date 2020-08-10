@@ -7,6 +7,15 @@ mode: publish
 route: /components/navigation-table-of-contents/
 ---
 
+import { useState } from 'react'
+import {
+  TableOfContents,
+  Typography,
+  Icon,
+  Button,
+} from '@equinor/eds-core-react'
+import { Playground } from 'docz'
+
 A _table of contents_ is a list of hyperlinks that scroll to anchored text on the same page.
 
 <!--One to two sentences as an introduction to the component-->
@@ -35,3 +44,166 @@ Table of contents, also known as _anchors_ or _article navigation_, link to anch
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1687%3A448"
   alt="Figma design of table of content"
 />
+
+## Demo
+
+<Playground>
+  {() => {
+    const [stickyState, setStickyState] = useState(false)
+    return (
+      <div
+        style={{
+          margin: '32px',
+          display: 'grid',
+          gridGap: '2rem',
+          gridTemplateColumns: 'auto 14rem',
+        }}
+      >
+        <main>
+          <article>
+            <Typography variant="h1">Heading 1</Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.
+            </Typography>
+            <div style={{ width: '15rem', margin: '1rem 0' }}>
+              <Button onClick={() => setStickyState(!stickyState)}>
+                {stickyState ? 'Unstick ToC' : 'Make ToC sticky'}
+              </Button>
+            </div>
+            <Typography variant="h2" id="sub-section-one">
+              Topic 1
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="h3">Heading 3</Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="h2" id="sub-section-two">
+              A very long topic to show overflow ellipsis
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="h3">Heading 3</Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="h2" id="sub-section-three">
+              Topic 3
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+            <Typography variant="h3">Heading 3</Typography>
+            <Typography variant="body_long">
+              Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+              sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
+              dit lot.{' '}
+            </Typography>
+          </article>
+        </main>
+        <aside>
+          <TableOfContents sticky={stickyState} label="Important topics">
+            <TableOfContents.LinkItem>
+              <Typography variant="body_short" link href="#sub-section-one">
+                <Icon name="subdirectory_arrow_right" size={16} />
+                <span>Topic 1</span>
+              </Typography>
+            </TableOfContents.LinkItem>
+            <TableOfContents.LinkItem title="A very long topic to test proper implementation">
+              <Typography variant="body_short" link href="#sub-section-two">
+                <Icon name="subdirectory_arrow_right" size={16} />
+                <span>A very long topic to test proper implementation</span>
+              </Typography>
+            </TableOfContents.LinkItem>
+            <TableOfContents.LinkItem>
+              <Typography variant="body_short" link href="#sub-section-three">
+                <Icon name="subdirectory_arrow_right" size={16} />
+                <span>Topic 3</span>
+              </Typography>
+            </TableOfContents.LinkItem>
+          </TableOfContents>
+        </aside>
+      </div>
+    )
+  }}
+</Playground>

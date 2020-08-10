@@ -3,9 +3,14 @@ title: Navigation table of contents
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/navigation-table-of-contents/usage/
 ---
+
+import { TableOfContents } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -25,3 +30,13 @@ route: /components/navigation-table-of-contents/usage/
    - **Top** and **Fix position when scrolling**.
 4. Drag the component to the height needed. As you drag, more _items_ will appear.
 5. Rename the labels to your needs.
+
+## API
+
+### TableOfContents
+
+<PropsTable props={TableOfContents.__docgenInfo.props} />
+
+### LinkItem
+
+<PropsTable props={TableOfContents.LinkItem.__docgenInfo.props} />

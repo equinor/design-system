@@ -7,6 +7,9 @@ mode: publish
 route: /components/popovers/
 ---
 
+import { Popover, Icon, Typography, Button } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
+
 A _popover_ is a floating card that provides more information or actions on hover or click.
 
 <!--One to two sentences as an introduction to the component-->
@@ -30,3 +33,38 @@ To dismiss a popover, use the close icon, press the `ESC` key, open another popo
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=2717%3A0"
   alt="Figma design of popover"
 />
+
+## Demo
+
+<!--
+<Playground>
+  {() => {
+    const [active, setActive] = React.useState(null)
+    const handleClick = (event) => {
+      setActive(event.currentTarget.id)
+    }
+    const handleClose = () => {
+      setActive(null)
+    }
+    return (
+      <Popover onClose={handleClose} open={active === '1'} placement="topLeft">
+        <Popover.PopoverAnchor>
+          <Button id="1" onClick={handleClick}>
+            Top left
+          </Button>
+        </Popover.PopoverAnchor>
+        <>
+          <Popover.PopoverTitle>Title </Popover.PopoverTitle>
+          <Popover.PopoverContent>
+            <Typography variant="body_short">Content</Typography>
+          </Popover.PopoverContent>
+          <div>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+          </div>
+        </>
+      </Popover>
+    )
+  }}
+</Playground>
+-->
