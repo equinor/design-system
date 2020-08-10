@@ -37,7 +37,7 @@ const UnorderedList = styled.ul`
 `
 
 const StyledButton = styled(Button)`
-  display: inline-grid;
+  /* display: inline-grid; */
 `
 
 const ListItem = styled.li`
