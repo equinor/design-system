@@ -6,11 +6,15 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/slider/
 ---
 
-A _slider_ is a flexible input that allowss users to adjust predefined values.
+import { Slider } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
+
+A _slider_ is a flexible input that allows users to adjust predefined values.
 
 <!--One to two sentences as an introduction to the component-->
 
@@ -69,3 +73,96 @@ The indicator signifies the selected range.
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=2544%3A416"
   alt="Figma design of slider track"
 />
+
+<!--
+## Demo
+
+### Slider simple
+
+<Playground>
+  <>
+    <div>
+      <span id="simple-slider">Simple slider</span>
+      <Slider value={4} min={0} max={10} ariaLabelledby="simple-slider" />
+    </div>
+    <div>
+      <span id="even-simpler-slider">
+        Simple slider, no dots, no min or max values, steps of 10
+      </span>
+      <Slider
+        ariaLabelledby="even-simpler-slider"
+        value={50}
+        min={0}
+        max={100}
+        step={10}
+        minMaxDots={false}
+        minMaxValues={false}
+      />
+    </div>
+    <div>
+      <label id="disabled-slider">Disabled slider</label>
+      <Slider value={50} disabled={true} ariaLabelledby="disabled-slider" />
+    </div>
+  </>
+</Playground>
+
+## Slider with range
+
+<Playground>
+  {() => {
+    const [value, updateValue] = useState([30, 70])
+    const [valueTwo, updateValueTwo] = useState([0, 500])
+    const [valueTwoCommited, updateValueTwoCommited] = useState([0, 500])
+    const onChange = (event, value) => {
+      updateValue(value)
+    }
+    return (
+      <>
+        <div>
+          <span id="range-slider-label">Range slider</span>
+          <Slider
+            value={value}
+            onChange={onChange}
+            ariaLabelledby="range-slider-label"
+          />
+          <p style={{ marginTop: '1.5rem' }}>
+            <small>Output from slider is {value.join(', ')}</small>
+          </p>
+        </div>
+        <div>
+          <span id="range-slider-label-with-mouseevent">
+            Range slider with a lot of steps
+          </span>
+          <Slider
+            value={valueTwo}
+            onChange={(event, value) => {
+              updateValueTwo(value)
+            }}
+            min={0}
+            max={500}
+            ariaLabelledby="range-slider-label-with-mouseevent"
+            onChangeCommitted={(event, value) => {
+              updateValueTwoCommited(value)
+            }}
+          />
+          <p style={{ marginTop: '1.5rem' }}>
+            <small>
+              Committed output from slider is {valueTwoCommited.join(', ')}
+            </small>
+          </p>
+        </div>
+        <div>
+          <span id="large-step-range-slider">Range slider with steps of 5</span>
+          <Slider
+            ariaLabelledby="large-step-range-slider"
+            step={5}
+            min={30}
+            minMaxDots={false}
+            value={[40, 60]}
+          />
+        </div>
+      </>
+    )
+  }}
+</Playground>
+-->
