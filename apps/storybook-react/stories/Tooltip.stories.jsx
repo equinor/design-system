@@ -151,3 +151,19 @@ export const WithKnobs = () => {
     </Body>
   )
 }
+
+export function disabledTest() {
+  return (
+    <Body>
+      <Wrapper>
+        <Tooltip title="Tooltip" placement="topLeft">
+          <Button disabled>Disabled</Button>
+        </Tooltip>
+
+        <Tooltip title="Tooltip" placement="topLeft">
+          <Button disabled>Disabled</Button>
+        </Tooltip>
+      </Wrapper>
+    </Body>
+  )
+}

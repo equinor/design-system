@@ -69,7 +69,6 @@ const Base = ({ base, baseDisabled: disabled }) => {
       background: ${disabled.background};
       color: ${disabled.color};
       fill: ${disabled.color};
-
       border-color: ${disabled.border.color};
 
       &:hover {
