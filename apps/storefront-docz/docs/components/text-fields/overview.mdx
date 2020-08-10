@@ -7,9 +7,13 @@ toc:
   - Guidelines
   - Variations
   - Examples
+  - Demo
 mode: publish
 route: /components/text-fields/
 ---
+
+import { TextField } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 *A *text field\* lets users enter, interact and edit content, typically in forms and dialogs.
 
@@ -91,3 +95,26 @@ Help text is always visible to assist the users and should not be hidden behind 
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=2000%3A4942"
   alt="Figma design sketches for input area"
 />
+
+<!--
+## Demo
+
+<Playground>
+  <div>
+    <TextField
+      id="textfield-normal"
+      placeholder="Placeholder text"
+      label="Text"
+      helperText="Helper text"
+    />
+    <TextField
+      type="number"
+      id="textfield-number"
+      placeholder="Placeholder text"
+      label="Number"
+      meta="pt. tonn"
+      helperText="Helper text"
+    />
+  </div>
+</Playground>
+-->
