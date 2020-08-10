@@ -1,0 +1,54 @@
+# Docker image
+# Build a Docker image to deploy, run, or push to a container registry.
+# Add steps that use Docker Compose, tag images, push to a registry, run an image, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+name: eds-storefront-docz-$(Build.BuildId)
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+trigger:
+  batch: "true"
+  branches:
+    include:
+    - storefront
+  paths:
+    include:
+      - apps/storefront-docz
+
+pr:
+  branches:
+    include:
+    - storefront
+
+  paths:
+    include:
+    - apps/storefront-docz
+
+
+
+variables:
+- group: eds-build-tokens
+- name: DOCKER_REGISTRY
+  value: $(DOCKER_REGISTRY_NAME).azurecr.io
+- name: IMAGE_NAME
+  value: $(DOCKER_REGISTRY)/eds-storefront-docz:$(Build.BuildId)-$(Build.SourceBranchName)
+- name: ROOT_FOLDER
+  value: /apps/storefront-docz
+
+steps:
+#- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) . --build-arg NPM_TOKEN=$(EQUINOR_INTERNAL_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
+#  displayName: 'Docker build image'
+
+#- script: echo $(DOCKER_REGISTRY_PASSWORD) | docker login -u $(DOCKER_REGISTRY_NAME) --password-stdin $(DOCKER_REGISTRY)
+#  displayName: 'Docker login registry'
+
+#- script: docker push $(IMAGE_NAME)
+#  displayName: 'Docker push to registry'
+
+- script: echo ${{ variables.DOCKER_REGISTRY }}
+  displayName: 'Output Registry name'
+
+- script: echo ${{ variables.IMAGE_NAME }}
+  displayName: 'Output Image name'
