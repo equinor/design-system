@@ -65,7 +65,7 @@ export const Header = ({ className, onOpen }) => {
             id="search"
             placeholder="Search"
           /> */}
-        {process.env.NODE_ENV === 'development' && (
+        {process.env.GATSBY_STAGE === 'dev' && (
           <label htmlFor="search">
             <SrLabel>Sitewide search</SrLabel>
             <input type="search" id="search" placeholder="search" />
