@@ -28,7 +28,7 @@ const focusedStyles = css`
   outline-offset: ${outlineOffset};
 `
 
-const StyledTab = styled.button.attrs(({ active }) => ({
+const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   type: 'button',
   role: 'tab',
   'aria-selected': active,
