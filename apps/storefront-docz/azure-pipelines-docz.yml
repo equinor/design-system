@@ -38,14 +38,14 @@ variables:
   value: /apps/storefront-docz
 
 steps:
-- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) . --build-arg NPM_TOKEN=$(EQUINOR_INTERNAL_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
-  displayName: 'Docker build image'
+#- script: docker build -f .$(ROOT_FOLDER)/Dockerfile -t $(IMAGE_NAME) . --build-arg NPM_TOKEN=$(EQUINOR_INTERNAL_NPM_TOKEN) --build-arg GATSBY_STAGE=$(GATSBY_STAGE)
+#  displayName: 'Docker build image'
 
-- script: echo $(DOCKER_REGISTRY_PASSWORD) | docker login -u $(DOCKER_REGISTRY_NAME) --password-stdin $(DOCKER_REGISTRY)
-  displayName: 'Docker login registry'
+#- script: echo $(DOCKER_REGISTRY_PASSWORD) | docker login -u $(DOCKER_REGISTRY_NAME) --password-stdin $(DOCKER_REGISTRY)
+#  displayName: 'Docker login registry'
 
-- script: docker push $(IMAGE_NAME)
-  displayName: 'Docker push to registry'
+#- script: docker push $(IMAGE_NAME)
+#  displayName: 'Docker push to registry'
 
 - script: echo ${{ variables.DOCKER_REGISTRY }}
   displayName: 'Output Registry name'
