@@ -65,10 +65,12 @@ export const Header = ({ className, onOpen }) => {
             id="search"
             placeholder="Search"
           /> */}
-        <label htmlFor="search">
-          <SrLabel>Sitewide search</SrLabel>
-          <input type="search" id="search" placeholder="search" />
-        </label>
+        {process.env.NODE_ENV === 'development' && (
+          <label htmlFor="search">
+            <SrLabel>Sitewide search</SrLabel>
+            <input type="search" id="search" placeholder="search" />
+          </label>
+        )}
 
         <Link
           to="/components/component-status"
