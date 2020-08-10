@@ -13,7 +13,7 @@ mode: publish
 route: /components/selection-controls/
 ---
 
-import { Checkbox } from '@equinor/eds-core-react'
+import { Checkbox, Radio, Switch } from '@equinor/eds-core-react'
 import { Playground } from 'docz'
 
 _Selection controls_ allow users to select options, make decisions and set preferences.
@@ -134,7 +134,7 @@ Radio buttons allow users to choose one single option from a list of mutually ex
 
 ## Demo
 
-### Checkbox
+### Checkbox single
 
 <Playground>
   {() => {
@@ -176,4 +176,137 @@ Radio buttons allow users to choose one single option from a list of mutually ex
       </ul>
     )
   }}
+</Playground>
+
+### Checkbox multiple
+
+<Playground>
+  <fieldset>
+    <legend>We are in this together! 🙌</legend>
+    <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+      <li>
+        <Checkbox label="Check me first" name="multiple" value="first" />
+      </li>
+      <li>
+        <Checkbox label="Check me second" name="multiple" value="second" />
+      </li>
+      <li>
+        <Checkbox label="Check me third" name="multiple" value="third" />
+      </li>
+    </ul>
+  </fieldset>
+</Playground>
+
+### Radio single
+
+<Playground>
+  <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+    <li>
+      <Radio label="Check me" name="first" />
+    </li>
+    <li>
+      {' '}
+      <Radio label="You can't check me!" disabled name="second" />
+    </li>
+    <li>
+      <Radio label="I'm preselected" defaultChecked name="third" />
+    </li>
+    <li>
+      {' '}
+      <Radio
+        label="You can't uncheck me!"
+        disabled
+        defaultChecked
+        name="fourth"
+      />
+    </li>
+  </ul>
+</Playground>
+
+### Radio group
+
+<Playground>
+  {() => {
+    const [checked, updateChecked] = React.useState('one')
+    const onChange = (event) => {
+      updateChecked(event.target.value)
+    }
+    return (
+      <fieldset>
+        <legend>We are in this together! 🙌</legend>
+        <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+          <li>
+            <Radio
+              label="I'm number one and preselected"
+              name="group"
+              value="one"
+              checked={checked === 'one'}
+              onChange={onChange}
+            />
+          </li>
+          <li>
+            <Radio
+              label="I'm number two"
+              name="group"
+              value="two"
+              checked={checked === 'two'}
+              onChange={onChange}
+            />
+          </li>
+          <li>
+            <Radio
+              label="I'm number three"
+              name="group"
+              value="three"
+              checked={checked === 'three'}
+              onChange={onChange}
+            />
+          </li>
+        </ul>
+      </fieldset>
+    )
+  }}
+</Playground>
+
+### Switch default
+
+<Playground>
+  <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+    <li>
+      <Switch label="I'm default off" />
+    </li>
+    <li>
+      <Switch label="I'm default on" defaultChecked />
+    </li>
+    <li>
+      <Switch disabled label="You can't turn me on!" />
+    </li>
+    <li>
+      <Switch disabled defaultChecked label="You can't turn me off!" />
+    </li>
+  </ul>
+</Playground>
+
+### Switch small
+
+<Playground>
+  <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+    <li>
+      <Switch label="I'm default off" size="small" />
+    </li>
+    <li>
+      <Switch label="I'm default on" defaultChecked size="small" />
+    </li>
+    <li>
+      <Switch disabled label="You can't turn me on!" size="small" />
+    </li>
+    <li>
+      <Switch
+        disabled
+        defaultChecked
+        label="You can't turn me off!"
+        size="small"
+      />
+    </li>
+  </ul>
 </Playground>

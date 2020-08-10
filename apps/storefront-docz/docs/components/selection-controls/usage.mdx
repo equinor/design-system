@@ -3,9 +3,14 @@ title: Selection controls
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/selection-controls/usage/
 ---
+
+import { Checkbox, Switch, Radio } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -16,3 +21,17 @@ route: /components/selection-controls/usage/
    - Use the search bar to search for a component grouping name or variation name.
    - Scroll through the folders list and open the relevant grouping.
 3. Once the component needed is located, click and drag it into the frame/artboard.
+
+## API
+
+### Switch
+
+<PropsTable props={Switch.__docgenInfo.props} />
+
+### Checkbox
+
+<PropsTable props={Checkbox.__docgenInfo.props} />
+
+### Radio
+
+<PropsTable props={Radio.__docgenInfo.props} />
