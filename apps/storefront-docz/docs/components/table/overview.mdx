@@ -6,9 +6,13 @@ tabs:
 toc:
   - Guidelines
   - Variations
+  - Demo
 mode: publish
 route: /components/table/
 ---
+
+import { Table } from '@equinor/eds-core-react'
+import { Playground } from 'docz'
 
 _Tables_ display data in a structured format.
 
@@ -99,3 +103,35 @@ For disabled state, use the color ´Interactive Disabled/Text´ for icons that a
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=2450%3A2487"
   alt="Figma design of table cell with text input"
 />
+
+## Demo
+
+<Playground>
+  <Table>
+    <Table.Head>
+      <Table.Row>
+        <Table.Cell as="th" scope="col">
+          Name
+        </Table.Cell>
+        <Table.Cell as="th" scope="col">
+          Allegiance
+        </Table.Cell>
+        <Table.Cell as="th" scope="col">
+          Kill count
+        </Table.Cell>
+      </Table.Row>
+    </Table.Head>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Luke Skywalker</Table.Cell>
+        <Table.Cell>Republic</Table.Cell>
+        <Table.Cell variant="numeric">369470</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Darth Vader</Table.Cell>
+        <Table.Cell>Sith</Table.Cell>
+        <Table.Cell variant="numeric">59</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+</Playground>

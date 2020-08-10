@@ -3,9 +3,14 @@ title: Table
 tabs:
   - Overview
   - Usage
+toc:
+  - Figma
+  - API
 mode: publish
 route: /components/table/usage/
 ---
+
+import { Table } from '@equinor/eds-core-react'
 
 ## Figma
 
@@ -63,3 +68,25 @@ Select all the `Table` header layers and convert them to a frame/artboard by usi
 6. Make sure to name the new group.
 7. Locate the **Design** tab in the **Inspector Panel**.
 8. Under the **Constraints** section, set up constraints.
+
+## API
+
+### Table
+
+<PropsTable props={Table.__docgenInfo.props} />
+
+### Head
+
+<PropsTable props={Table.Head.__docgenInfo.props} />
+
+### Body
+
+<PropsTable props={Table.Body.__docgenInfo.props} />
+
+### Row
+
+<PropsTable props={Table.Row.__docgenInfo.props} />
+
+### Cell
+
+<PropsTable props={Table.Cell.__docgenInfo.props} />
