@@ -22,8 +22,8 @@ import HeadCell from '../components/HeadCell'
 import Grid from '../components/Grid'
 import Code from '../components/Code'
 import PropsTable from '../components/PropsTable'
-/* import Playground from '../components/Playground'
- */
+import Playground from '../components/Playground'
+
 const { Body, Row, Cell, Head } = Table
 
 const componentsMap = {
@@ -36,7 +36,7 @@ const componentsMap = {
   Image,
   Grid,
   HeroBanner,
-  // Playground,
+  Playground,
   PropsTable,
   p: Text,
   h1: H1,
