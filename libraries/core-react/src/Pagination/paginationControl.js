@@ -1,12 +1,7 @@
 import React from 'react'
 
-const LEFT_PAGE = 'LEFT'
-const RIGHT_PAGE = 'RIGHT'
 const ELLIPSIS = 'ELLIPSIS'
 
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-// eslint-disable-next-line import/no-default-export
 export function PaginationControl(pages, activePage) {
   const siblings = 1 // neighboring items on both sides of current page ( 2*2 = 4)
 
@@ -17,11 +12,8 @@ export function PaginationControl(pages, activePage) {
   }
 
   let pageRange
-  const totalNumbers = siblings + 2
 
   if (pages > 4) {
-    let extraPages
-
     const startPage = Math.max(
       1,
       activePage < 5 || pages <= 7
@@ -49,13 +41,10 @@ export function PaginationControl(pages, activePage) {
 
     const hiddenLeft = startPage > 2 && pages > 7 // Has hidden pages on left side
     const hiddenRight = pages - endPage > 1 && pages > 7 // Has hidden pages on right side
-    const hiddenOffset = totalNumbers - pageRange.length // Diff between total numbers between ellipsis and range
 
     if (hiddenLeft && !hiddenRight) {
-      extraPages = range(startPage - hiddenOffset, startPage + 1)
       pageRange = [1, ELLIPSIS, ...pageRange]
     } else if (!hiddenLeft && hiddenRight) {
-      extraPages = range(endPage + 1, endPage + hiddenOffset - 1)
       pageRange = [...pageRange, ELLIPSIS, pages]
     } else if (hiddenLeft && hiddenRight) {
       pageRange = [1, ELLIPSIS, ...pageRange, ELLIPSIS, pages]
