@@ -14,6 +14,7 @@ exports.onCreateWebpackConfig = (args) => {
           './node_modules',
           'styled-components',
         ),
+        react: path.resolve('./node_modules', 'react'),
       },
     },
   })

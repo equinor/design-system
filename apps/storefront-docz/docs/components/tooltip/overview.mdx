@@ -39,12 +39,51 @@ Tooltips should aim to have a single line of text, that does not wrap, and it ke
   alt="Figma design sketch for tooltip"
 />
 
-<!--
 ## Demo
 
 <Playground>
-  <Tooltip title="Tooltip" placement="topLeft">
-    <Button>Top left</Button>
-  </Tooltip>
+  <div
+    style={{
+      display: 'grid',
+      gridGap: '32px',
+      gridTemplateColumns: 'repeat(3, fit-content(100%))',
+    }}
+  >
+    <Tooltip title="Tooltip" placement="topLeft">
+      <Button>Top left</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="top">
+      <Button>Top</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="topRight">
+      <Button>Top right</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="bottomLeft">
+      <Button>Bottom left</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="bottom">
+      <Button>Bottom</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="bottomRight">
+      <Button>Bottom right</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="leftTop">
+      <Button>Left top</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="left">
+      <Button>Left</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="leftBottom">
+      <Button>Left bottom</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="rightTop">
+      <Button>Right top</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="right">
+      <Button>Right</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="rightBottom">
+      <Button>Right bottom</Button>
+    </Tooltip>
+  </div>
 </Playground>
--->

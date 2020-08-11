@@ -12,7 +12,7 @@ mode: publish
 route: /components/navigation-tabs/
 ---
 
-import { Tabs } from '@equinor/eds-core-react'
+import { Tabs, Search } from '@equinor/eds-core-react'
 
 Tabs organise related content across different views to be quickly navigated.
 
@@ -89,8 +89,8 @@ If the `Navigation: Navigation Drawer` is not used, tabs may be used in the `Nav
 
 ## Demo
 
-<!--
-@TODO Fix hooks eslint error
+### Tab states
+
 <Playground>
   {() => {
     const focusedRef = React.useRef(null)
@@ -112,4 +112,99 @@ If the `Navigation: Navigation Drawer` is not used, tabs may be used in the `Nav
     )
   }}
 </Playground>
--->
+
+### Tab widths (min and full)
+
+<Playground>
+  <Tabs activeTab={1} onChange={() => {}} variant="minWidth">
+    <Tabs.TabList>
+      <Tabs.Tab>Text</Tabs.Tab>
+      <Tabs.Tab>More text</Tabs.Tab>
+      <Tabs.Tab>A really long line of text</Tabs.Tab>
+    </Tabs.TabList>
+  </Tabs>
+  <Tabs activeTab={1} onChange={() => {}} variant="fullWidth">
+    <Tabs.TabList>
+      <Tabs.Tab>Text</Tabs.Tab>
+      <Tabs.Tab>More text</Tabs.Tab>
+      <Tabs.Tab>A really long line of text</Tabs.Tab>
+    </Tabs.TabList>
+  </Tabs>
+</Playground>
+
+### Tabs with panels
+
+To navigate using they keyboard, use tab key to move from tab to tab panel, shift + tab to go backwards, use left and right arrow keys to move from between tabs (active tab must be focused). Focus outline is only visible when navigating using the keyboard.
+
+<Playground>
+  {() => {
+    const [activeTab, setActiveTab] = React.useState(1)
+    const handleChange = (index) => {
+      setActiveTab(index)
+    }
+    return (
+      <Tabs activeTab={activeTab} onChange={handleChange}>
+        <Tabs.TabList>
+          <Tabs.Tab>Tab one</Tabs.Tab>
+          <Tabs.Tab>Tab two</Tabs.Tab>
+          <Tabs.Tab disabled>Tab three</Tabs.Tab>
+          <Tabs.Tab>Tab four</Tabs.Tab>
+        </Tabs.TabList>
+        <Tabs.TabPanels>
+          <Tabs.TabPanel>Panel one</Tabs.TabPanel>
+          <Tabs.TabPanel>Panel two</Tabs.TabPanel>
+          <Tabs.TabPanel>Panel three</Tabs.TabPanel>
+          <Tabs.TabPanel>Panel four</Tabs.TabPanel>
+        </Tabs.TabPanels>
+      </Tabs>
+    )
+  }}
+</Playground>
+
+### Tabs and search
+
+<Playground>
+  {() => {
+    const [searchText, setSearchText] = React.useState('')
+    const [activeTab, setActiveTab] = React.useState(0)
+    const handleOnTextChange = (event) => {
+      const value = event.target.value
+      setSearchText(value)
+    }
+    const handleChange = (index) => {
+      setActiveTab(index)
+    }
+    const handleFocus = (e) => {
+      console.log('handleFocus', e.target.textContent)
+    }
+    const handleBlur = (e) => {
+      console.log('handleFocus', e.target.textContent)
+    }
+    return (
+      <>
+        <Search
+          value={searchText}
+          placeholder={'Search '}
+          onChange={handleOnTextChange}
+        />
+        <Tabs
+          style={{ marginTop: '2rem' }}
+          activeTab={activeTab}
+          onChange={handleChange}
+          variant="fullWidth"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        >
+          <Tabs.TabList>
+            <Tabs.Tab>Tags (5+)</Tabs.Tab>
+            <Tabs.Tab> Docs (5+)</Tabs.Tab>
+          </Tabs.TabList>
+          <Tabs.TabPanels>
+            <Tabs.TabPanel>Panel one</Tabs.TabPanel>
+            <Tabs.TabPanel>Panel two</Tabs.TabPanel>
+          </Tabs.TabPanels>
+        </Tabs>
+      </>
+    )
+  }}
+</Playground>

@@ -73,7 +73,6 @@ The indicator signifies the selected range.
   alt="Figma design of slider track"
 />
 
-<!--
 ## Demo
 
 ### Slider simple
@@ -84,7 +83,7 @@ The indicator signifies the selected range.
       <span id="simple-slider">Simple slider</span>
       <Slider value={4} min={0} max={10} ariaLabelledby="simple-slider" />
     </div>
-    <div>
+    <div style={{ marginTop: '2rem' }}>
       <span id="even-simpler-slider">
         Simple slider, no dots, no min or max values, steps of 10
       </span>
@@ -98,7 +97,7 @@ The indicator signifies the selected range.
         minMaxValues={false}
       />
     </div>
-    <div>
+    <div style={{ marginTop: '2rem' }}>
       <label id="disabled-slider">Disabled slider</label>
       <Slider value={50} disabled={true} ariaLabelledby="disabled-slider" />
     </div>
@@ -109,9 +108,9 @@ The indicator signifies the selected range.
 
 <Playground>
   {() => {
-    const [value, updateValue] = useState([30, 70])
-    const [valueTwo, updateValueTwo] = useState([0, 500])
-    const [valueTwoCommited, updateValueTwoCommited] = useState([0, 500])
+    const [value, updateValue] = React.useState([30, 70])
+    const [valueTwo, updateValueTwo] = React.useState([0, 500])
+    const [valueTwoCommited, updateValueTwoCommited] = React.useState([0, 500])
     const onChange = (event, value) => {
       updateValue(value)
     }
@@ -128,7 +127,7 @@ The indicator signifies the selected range.
             <small>Output from slider is {value.join(', ')}</small>
           </p>
         </div>
-        <div>
+        <div style={{ marginTop: '2rem' }}>
           <span id="range-slider-label-with-mouseevent">
             Range slider with a lot of steps
           </span>
@@ -150,7 +149,7 @@ The indicator signifies the selected range.
             </small>
           </p>
         </div>
-        <div>
+        <div style={{ marginTop: '2rem' }}>
           <span id="large-step-range-slider">Range slider with steps of 5</span>
           <Slider
             ariaLabelledby="large-step-range-slider"
@@ -164,4 +163,3 @@ The indicator signifies the selected range.
     )
   }}
 </Playground>
--->

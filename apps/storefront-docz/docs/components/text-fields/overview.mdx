@@ -12,7 +12,7 @@ mode: publish
 route: /components/text-fields/
 ---
 
-import { TextField } from '@equinor/eds-core-react'
+import { TextField, Icon } from '@equinor/eds-core-react'
 
 *A *text field\* lets users enter, interact and edit content, typically in forms and dialogs.
 
@@ -95,11 +95,12 @@ Help text is always visible to assist the users and should not be hidden behind 
   alt="Figma design sketches for input area"
 />
 
-<!--
 ## Demo
 
+### Types
+
 <Playground>
-  <div>
+  <div style={{ display: 'grid', gridGap: '1rem' }}>
     <TextField
       id="textfield-normal"
       placeholder="Placeholder text"
@@ -114,6 +115,76 @@ Help text is always visible to assist the users and should not be hidden behind 
       meta="pt. tonn"
       helperText="Helper text"
     />
+    <TextField
+      type="search"
+      id="textfield-search"
+      placeholder="Placeholder text"
+      label="Search"
+      meta="Meta"
+      helperText="Helper Text"
+    />
+    <TextField
+      type="password"
+      id="textfield-password"
+      placeholder="Placeholder text"
+      label="Password"
+      meta="Meta"
+      helperText="Helper Text"
+    />
+    <TextField
+      type="email"
+      id="textfield-email"
+      placeholder="Placeholder text"
+      label="Email"
+      meta="Meta"
+      helperText="Helper Text"
+    />
+    <TextField
+      id="storybook-multiline"
+      placeholder="Placeholder text"
+      label="Multline"
+      meta="Meta"
+      helperText="Helper Text"
+      multiline
+    />
+    <TextField
+      id="storybook-disabled"
+      placeholder="Placeholder text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+    />
   </div>
 </Playground>
--->
+
+### Variants
+
+<Playground>
+  <div style={{ display: 'grid', gridGap: '1rem' }}>
+    <TextField
+      id="storybook-error"
+      placeholder="Placeholder text"
+      label="Error"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="error"
+    />
+    <TextField
+      id="storybook-warning"
+      placeholder="Placeholder text"
+      label="Warning"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="warning"
+    />
+    <TextField
+      id="storybook-success"
+      placeholder="Placeholder text"
+      label="Success"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="success"
+    />
+  </div>
+</Playground>

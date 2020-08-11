@@ -53,13 +53,25 @@ Scoping allows users to narrow their search before they start. The _Scope_ can b
 
 ## Demo
 
-<!--
 <Playground>
   {() => {
     const [searchValue, setSearchValue] = React.useState('Initial value')
     return (
-      <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
+      <div style={{ display: 'grid', gridGap: '1rem' }}>
+        <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
+        <Search
+          aria-label="predefined"
+          id="search-predefined"
+          placeholder="Search"
+          defaultValue="Predefined value"
+        />
+        <Search
+          aria-label="disabled"
+          id="search-disabled"
+          placeholder="Disabled search"
+          disabled
+        />
+      </div>
     )
   }}
 </Playground>
--->

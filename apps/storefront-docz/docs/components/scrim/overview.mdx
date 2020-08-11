@@ -30,7 +30,6 @@ When the scrim is clicked on or the `Esc` key is pressed---the overlay component
 
 ## Demo
 
-<!--
 <Playground>
   {() => {
     const [visibleScrim, setVisibleScrim] = React.useState(false)
@@ -48,7 +47,7 @@ When the scrim is clicked on or the `Esc` key is pressed---the overlay component
         </div>
         {visibleScrim && (
           <Scrim onClose={handleClose} isDismissable>
-            <div>
+            <div style={{ backgroundColor: '#fff', padding: '1rem' }}>
               <Typography variant="body_short">
                 Press close or hit 'ESC' to close scrim.
               </Typography>
@@ -60,4 +59,3 @@ When the scrim is clicked on or the `Esc` key is pressed---the overlay component
     )
   }}
 </Playground>
--->

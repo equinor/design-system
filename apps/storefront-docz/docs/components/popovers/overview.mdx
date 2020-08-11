@@ -35,7 +35,177 @@ To dismiss a popover, use the close icon, press the `ESC` key, open another popo
 
 ## Demo
 
-<!--
+<Playground>
+  {() => {
+    const [active, setActive] = React.useState(null)
+    const handleClick = (event) => {
+      setActive(event.currentTarget.id)
+    }
+    const handleClose = () => {
+      setActive(null)
+    }
+    const dialogMarkup = (
+      <>
+        <Popover.PopoverTitle>Title </Popover.PopoverTitle>
+        <Popover.PopoverContent>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.PopoverContent>
+        <div style={{ display: 'flex' }}>
+          <Button onClick={handleClose} style={{ marginRight: '1rem' }}>
+            Cancel
+          </Button>
+          <Button onClick={handleClose}>OK</Button>
+        </div>
+      </>
+    )
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Popover
+          onClose={handleClose}
+          open={active === '1'}
+          placement="topLeft"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="1" onClick={handleClick}>
+              Top left
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover onClose={handleClose} open={active === '2'} placement="top">
+          <Popover.PopoverAnchor>
+            <Button id="2" onClick={handleClick}>
+              Top
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '3'}
+          placement="topRight"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="3" onClick={handleClick}>
+              Top right
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '4'}
+          placement="bottomLeft"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="4" onClick={handleClick}>
+              Bottom left
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover onClose={handleClose} open={active === '5'} placement="bottom">
+          <Popover.PopoverAnchor>
+            <Button id="5" onClick={handleClick}>
+              Bottom
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '6'}
+          placement="bottomRight"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="6" onClick={handleClick}>
+              Bottom right
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '7'}
+          placement="leftTop"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="7" onClick={handleClick}>
+              Left top
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover onClose={handleClose} open={active === '8'} placement="left">
+          <Popover.PopoverAnchor>
+            <Button id="8" onClick={handleClick}>
+              Left
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '9'}
+          placement="leftBottom"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="9" onClick={handleClick}>
+              Left bottom
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '10'}
+          placement="rightTop"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="10" onClick={handleClick}>
+              Right top
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover onClose={handleClose} open={active === '11'} placement="right">
+          <Popover.PopoverAnchor>
+            <Button id="11" onClick={handleClick}>
+              Right
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '12'}
+          placement="rightBottom"
+        >
+          <Popover.PopoverAnchor>
+            <Button id="12" onClick={handleClick}>
+              Right bottom
+            </Button>
+          </Popover.PopoverAnchor>
+          {dialogMarkup}
+        </Popover>
+      </div>
+    )
+  }}
+</Playground>
+
+### Activiation types
+
+Popovers can be activated by hover or click. To dismiss a popover, use
+the close icon, press the ESC key, open another popover or click
+outside the popover. If there are no actions in the popover, then the
+close icon should be the first focusable element.
+
 <Playground>
   {() => {
     const [active, setActive] = React.useState(null)
@@ -46,24 +216,63 @@ To dismiss a popover, use the close icon, press the `ESC` key, open another popo
       setActive(null)
     }
     return (
-      <Popover onClose={handleClose} open={active === '1'} placement="topLeft">
+      <Popover onClose={handleClose} open={active === '1'} placement="top">
         <Popover.PopoverAnchor>
           <Button id="1" onClick={handleClick}>
-            Top left
+            On Click
           </Button>
         </Popover.PopoverAnchor>
-        <>
-          <Popover.PopoverTitle>Title </Popover.PopoverTitle>
-          <Popover.PopoverContent>
-            <Typography variant="body_short">Content</Typography>
-          </Popover.PopoverContent>
-          <div>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>OK</Button>
-          </div>
-        </>
+        <Popover.PopoverTitle>Title </Popover.PopoverTitle>
+        <Popover.PopoverContent>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.PopoverContent>
+        <div style={{ display: 'flex' }}>
+          <Button onClick={handleClose} style={{ marginRight: '1rem' }}>
+            Cancel
+          </Button>
+          <Button onClick={handleClose}>OK</Button>
+        </div>
       </Popover>
     )
   }}
 </Playground>
--->
+
+Remember to use both onMouseEnter and onFocus attributes to your trigger
+element to be able to open the popover by tab iterations. A timeout
+delay on onMouseEnter is recommended to avoid unwanted trigger of the
+popup while browsing.
+
+<Playground>
+  {() => {
+    const [active, setActive] = React.useState(null)
+    const handleClick = (event) => {
+      setActive(event.currentTarget.id)
+    }
+    const handleHover = (event) => {
+      const current = event.currentTarget.id
+      setActive(current)
+    }
+    const handleClose = () => {
+      setActive(null)
+    }
+    return (
+      <Popover onClose={handleClose} open={active === '1'} placement="top">
+        <Popover.PopoverAnchor>
+          <Button id="1" onMouseEnter={handleHover} onFocus={handleClick}>
+            On hover
+          </Button>
+        </Popover.PopoverAnchor>
+        <Popover.PopoverTitle>Title </Popover.PopoverTitle>
+        <Popover.PopoverContent>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.PopoverContent>
+        <div style={{ display: 'flex' }}>
+          <Button onClick={handleClose} style={{ marginRight: '1rem' }}>
+            Cancel
+          </Button>
+          <Button onClick={handleClose}>OK</Button>
+        </div>
+      </Popover>
+    )
+  }}
+</Playground>

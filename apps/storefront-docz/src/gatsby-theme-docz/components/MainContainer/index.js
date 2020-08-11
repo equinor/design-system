@@ -25,6 +25,9 @@ import {
   notifications,
   fullscreen,
   grid_on,
+  attach_file,
+  edit,
+  delete_to_trash,
 } from '@equinor/eds-icons'
 
 Icon.add({
@@ -44,6 +47,9 @@ Icon.add({
   notifications,
   fullscreen,
   grid_on,
+  attach_file,
+  edit,
+  delete_to_trash,
 })
 
 const { LinkItem } = TableOfContents

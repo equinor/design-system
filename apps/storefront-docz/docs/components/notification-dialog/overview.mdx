@@ -48,21 +48,103 @@ Dialogs can contain a Title, Content and Actions. A dialog can have one or two a
 
 ## Demo
 
-<!--
 <Playground>
   {() => {
-    const [visibleScrim, setVisibleScrim] = useState(false)
+    const [visibleScrim, setVisibleScrim] = React.useState(false)
     const handleClose = (event, closed) => {
-    setVisibleScrim(!visibleScrim)
-  }
+      setVisibleScrim(!visibleScrim)
+    }
     return (
       <>
         <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
-        <Scrim onClose={handleClose}>
-          <Dialog><Dialog.Title>Title</Dialog.Title></Dialog>
-        </Scrim>
+        {visibleScrim && (
+          <Scrim onClose={handleClose}>
+            <Dialog>
+              <Dialog.Title>Title</Dialog.Title>
+              <Dialog.CustomContent>
+                <Typography variant="body_short">
+                  Small description here.
+                </Typography>
+              </Dialog.CustomContent>
+              <Dialog.Actions>
+                <div
+                  style={{
+                    display: 'grid',
+                    columnGap: '16px',
+                    gridTemplateColumns: 'repeat(2, fit-content(100%))',
+                    justifyContent: 'end',
+                    justifySelf: 'end',
+                  }}
+                >
+                  <Button
+                    variant="ghost"
+                    onClick={() => setVisibleScrim(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+                </div>
+              </Dialog.Actions>
+            </Dialog>
+          </Scrim>
+        )}
       </>
     )
-}}
+  }}
 </Playground>
--->
+
+### Dialog with scrollable content
+
+<Playground>
+  {() => {
+    const [visibleScrim, setVisibleScrim] = React.useState(false)
+    const handleClose = (event, closed) => {
+      setVisibleScrim(!visibleScrim)
+    }
+    return (
+      <>
+        <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
+        {visibleScrim && (
+          <Scrim onClose={handleClose}>
+            <Dialog>
+              <Dialog.Title>Title</Dialog.Title>
+              <Dialog.CustomContent scrollable={true}>
+                <>
+                  <Typography variant="body_short">
+                    Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum
+                    dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+                    amet consecteur dit lot.{' '}
+                  </Typography>
+                  <Typography variant="body_short">
+                    Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum
+                    dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+                    amet consecteur dit lot.{' '}
+                  </Typography>
+                </>
+              </Dialog.CustomContent>
+              <Dialog.Actions>
+                <div
+                  style={{
+                    display: 'grid',
+                    columnGap: '16px',
+                    gridTemplateColumns: 'repeat(2, fit-content(100%))',
+                    justifyContent: 'end',
+                    justifySelf: 'end',
+                  }}
+                >
+                  <Button
+                    variant="ghost"
+                    onClick={() => setVisibleScrim(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+                </div>
+              </Dialog.Actions>
+            </Dialog>
+          </Scrim>
+        )}
+      </>
+    )
+  }}
+</Playground>

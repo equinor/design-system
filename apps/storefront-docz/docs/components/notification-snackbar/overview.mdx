@@ -39,26 +39,42 @@ Snackbars can have one action. This action should not be "Close " or "Dismiss" s
 
 ## Demo
 
-<!--
 <Playground>
   {() => {
     const [open, setOpen] = React.useState(false)
     const [withActionOpen, setWithActionOpen] = React.useState(false)
     return (
-      <div>
-        <Button type="button" onClick={() => setOpen(true)}>
-          Show a simple snackbar for 5 seconds
-        </Button>
-        <Snackbar
-          open={open}
-          onClose={() => setOpen(false)}
-          autoHideDuration={5000}
-          leftAlignFrom="1500px"
-        >
-          Message goes here
-        </Snackbar>
-      </div>
+      <>
+        <div>
+          <Button type="button" onClick={() => setOpen(true)}>
+            Show a simple snackbar for 5 seconds
+          </Button>
+          <Snackbar
+            open={open}
+            onClose={() => setOpen(false)}
+            autoHideDuration={5000}
+            leftAlignFrom="1500px"
+          >
+            Message goes here
+          </Snackbar>
+        </div>
+        <div style={{ marginTop: '1rem' }}>
+          <Button type="button" onClick={() => setWithActionOpen(true)}>
+            Show a snackbar with action for the default 7 seconds
+          </Button>
+          <Snackbar
+            open={withActionOpen}
+            onClose={() => setWithActionOpen(false)}
+          >
+            Your changes was saved
+            <Snackbar.SnackbarAction>
+              <Button variant="ghost" type="button" onClick={() => {}}>
+                Undo
+              </Button>
+            </Snackbar.SnackbarAction>
+          </Snackbar>
+        </div>
+      </>
     )
   }}
 </Playground>
--->
