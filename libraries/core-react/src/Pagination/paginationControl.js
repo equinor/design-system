@@ -8,7 +8,7 @@ const ELLIPSIS = 'ELLIPSIS'
 /* eslint-disable no-undef */
 // eslint-disable-next-line import/no-default-export
 export function PaginationControl(pages, activePage) {
-  const siblings = 4 // neighboring items on both sides of current page ( 2*2 = 4)
+  const siblings = 1 // neighboring items on both sides of current page ( 2*2 = 4)
 
   // https://dev.to/namirsab/comment/2050
   const range = (start, end) => {
@@ -20,11 +20,14 @@ export function PaginationControl(pages, activePage) {
   const totalNumbers = siblings + 3
   const totalColumns = totalNumbers + 2
 
+  console.log('active', activePage)
+
   if (pages > 4) {
     let extraPages
 
-    const endOffset = activePage < 4 ? activePage + siblings - 1 : activePage
-    const startPage = Math.max(1, activePage - siblings)
+    const endOffset = activePage < 5 ? 5 : activePage + siblings
+    console.log('end ofsset', endOffset)
+    const startPage = Math.max(1, activePage < 5 ? 1 : activePage - siblings)
     const endPage = Math.min(pages, endOffset) // -1 for ellipsis
     console.log('start end', startPage, endPage)
     pageRange = range(startPage, endPage)
@@ -32,7 +35,14 @@ export function PaginationControl(pages, activePage) {
     const hiddenLeft = startPage > 2 // Has hidden pages on left side
     const hiddenRight = pages - endPage > 1 // Has hidden pages on right side
     const hiddenOffset = totalNumbers - pageRange.length + 1 // Number of total hidden pages
-    console.log('offset', hiddenOffset)
+    console.log(
+      'hiddenLeft',
+      hiddenLeft,
+      'hiddenRight',
+      hiddenRight,
+      'hiddenOffset',
+      hiddenOffset,
+    )
     // console.log('hiddens', hiddenLeft, hiddenRight, hiddenOffset)
 
     if (hiddenLeft && !hiddenRight) {
