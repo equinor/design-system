@@ -103,8 +103,6 @@ export const Pagination = forwardRef(function Pagination(
     ...other,
   }
 
-  console.log('items', items, items.length)
-
   return (
     <Navigation aria-label="pagination" {...props}>
       {switcher && (
