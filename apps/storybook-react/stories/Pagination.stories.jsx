@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Pagination } from '@equinor/eds-core-react'
+import { Pagination, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
@@ -18,6 +18,10 @@ const TextWrapper = styled.div`
 
 const WrapContainer = styled.div`
   width: 100px;
+`
+
+const PaddedTypography = styled(Typography)`
+  margin: 16px 0;
 `
 
 export default {
@@ -46,18 +50,20 @@ const listOfItems = [
 ]
 
 export const Variants = () => {
-  const [items, setItems] = useState(listOfItems)
-
-  const onPageChange = (e) => {
-    e.preventDefault()
-    // Do stuff
-  }
   return (
     <Body>
-      <Pagination totalItems={140} itemsPerPage={3} showTotalItems />
-      <Pagination totalItems={8} itemsPerPage={1} />
+      <PaddedTypography variant="h2">Short</PaddedTypography>
       <Pagination totalItems={3} itemsPerPage={1} />
+      <PaddedTypography variant="h2">
+        Normal length before truncation
+      </PaddedTypography>
       <Pagination totalItems={7} itemsPerPage={1} />
+      <PaddedTypography variant="h2">Long and truncated</PaddedTypography>
+      <Pagination totalItems={8} itemsPerPage={1} />
+      <PaddedTypography variant="h2">
+        With current and total items indicator
+      </PaddedTypography>
+      <Pagination totalItems={140} itemsPerPage={3} showTotalItems />
 
       {/* <Pagination totalItems={80} total />
       <Pagination totalItems={140} total switcher /> */}
