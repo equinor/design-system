@@ -6,6 +6,7 @@ module.exports = {
     author: 'EDS Core team',
     description:
       'The EDS is the official design system of Equinor The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions.',
+    image: '/eds-logo.png',
   },
   plugins: [
     {

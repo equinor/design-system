@@ -2,6 +2,7 @@ dist
 .cache
 node_modules
 pnpm-debug.log
+.DS_Store
 # use pnpm
 package-lock.json
 yarn.lock
