@@ -9,6 +9,7 @@ import { TopBar, Search, Icon } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { media } from '~theme/breakpoints'
 import { useThemeUI } from 'theme-ui'
+import { DocSearch } from '../../../components/DocSearch'
 
 Icon.add({ menu })
 const { Header: TopBarHeader, Actions } = TopBar
@@ -29,18 +30,8 @@ const Burger = styled.button`
   }
 `
 
-const SrLabel = styled.span`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`
-
 export const Header = ({ className, onOpen }) => {
+  console.log(DocSearch)
   const context = useThemeUI()
   const { theme } = context
   return (
@@ -60,18 +51,7 @@ export const Header = ({ className, onOpen }) => {
         </Link>
       </TopBarHeader>
       <StyledActions>
-        {/*  <Search
-            aria-label="sitewide search"
-            id="search"
-            placeholder="Search"
-          /> */}
-        {process.env.GATSBY_STAGE === 'dev' && (
-          <label htmlFor="search">
-            <SrLabel>Sitewide search</SrLabel>
-            <input type="search" id="search" placeholder="search" />
-          </label>
-        )}
-
+        <DocSearch />
         <Link
           to="/components/component-status"
           style={{
