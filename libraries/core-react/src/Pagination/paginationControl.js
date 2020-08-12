@@ -3,7 +3,9 @@ import React from 'react'
 const ELLIPSIS = 'ELLIPSIS'
 
 export function PaginationControl(pages, activePage) {
-  const siblings = 1 // neighboring items on both sides of current page ( 2*2 = 4)
+  const siblings = 1 // amount of siblings on left and right side of active page after trunking
+  const totalPagesShown = 7 // amount of total pages before we start trunking pages in ellipsis
+  const pagesBeforeEllipsis = 5 // total pages shown before ellipsis and trunking begins
 
   // https://dev.to/namirsab/comment/2050
   const range = (start, end) => {
@@ -16,19 +18,19 @@ export function PaginationControl(pages, activePage) {
   if (pages > 4) {
     const startPage = Math.max(
       1,
-      activePage < 5 || pages <= 7
+      activePage < pagesBeforeEllipsis || pages <= totalPagesShown
         ? 1
         : activePage + siblings + 1 >= pages
-        ? pages - 4 // - 4 to fit total columns
-        : activePage > 4 && pages > 7
+        ? pages - 4 // - 4 to fit total columns /
+        : activePage > 4 && pages > totalPagesShown
         ? activePage - siblings
         : 1,
     ) // the first page after left ellipsis
 
     const endOffset =
-      activePage < 5 && pages > 7
-        ? 5
-        : activePage < 5 && pages <= 7
+      activePage < pagesBeforeEllipsis && pages > totalPagesShown
+        ? pagesBeforeEllipsis
+        : activePage < pagesBeforeEllipsis && pages <= totalPagesShown
         ? pages
         : activePage + siblings + 1 < pages
         ? activePage + siblings
@@ -39,8 +41,8 @@ export function PaginationControl(pages, activePage) {
     const endPage = Math.min(pages, endOffset) // the last page before right ellipsis
     pageRange = range(startPage, endPage) // range in between ellipsis(es). Ex: range(4, 6) =  1 ... 4 5 6 ... 10
 
-    const hiddenLeft = startPage > 2 && pages > 7 // Has hidden pages on left side
-    const hiddenRight = pages - endPage > 1 && pages > 7 // Has hidden pages on right side
+    const hiddenLeft = startPage > 2 && pages > totalPagesShown // Has hidden pages on left side
+    const hiddenRight = pages - endPage > 1 && pages > totalPagesShown // Has hidden pages on right side
 
     if (hiddenLeft && !hiddenRight) {
       pageRange = [1, ELLIPSIS, ...pageRange]
