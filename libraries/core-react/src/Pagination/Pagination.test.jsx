@@ -7,8 +7,6 @@ import styled from 'styled-components'
 import { pagination as tokens } from './.tokens'
 import { Pagination } from '.'
 
-const { Actions, Title, CustomContent } = 
-
 const { activeColor } = tokens
 
 const StyledPagination = styled(Pagination)`
@@ -21,13 +19,9 @@ afterEach(cleanup)
 
 describe('Pagination', () => {
   it('Has all provided content', () => {
-    render(<Pagination/>)
+    render(<Pagination />)
   })
-  it('Has scrollable content when scrollable props is present', () => {
+  it('Has scrollable content when scrollable props is present', () => {})
 
-  })
-
-  it('Can extend the css for the component', () => {
-
-  })
+  it('Can extend the css for the component', () => {})
 })

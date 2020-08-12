@@ -1,8 +1,9 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
+import { Typography } from '../Typography'
 import { PaginationItem } from './PaginationItem'
 import { pagination as tokens } from './Pagination.tokens'
 import {
@@ -36,10 +37,6 @@ const UnorderedList = styled.ul`
   grid-auto-flow: column;
 `
 
-const StyledButton = styled(Button)`
-  /* display: inline-grid; */
-`
-
 const ListItem = styled.li`
   display: inline-grid;
 `
@@ -50,21 +47,18 @@ const StyledIcon = styled(Icon)`
   fill: ${tokens.disabledColor};
 `
 
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+`
+
+const Text = styled(Typography)`` // TODO: Design says #000000 but looks better with default color (almost black)
+
 function getAriaLabel(page, selected) {
   return `${selected ? 'Current page, ' : 'Go to '}page ${page}`
 }
-
-// function paginationControl(totalItems) {
-//   let itemList = []
-//   for (let i = 1; i <= totalItems; i++) {
-//     itemList.push({
-//       page: i,
-//       selected: false,
-//     })
-//   }
-
-//   return itemList
-// }
 
 export const Pagination = forwardRef(function Pagination(
   { totalItems, showTotalItems, itemsPerPage, switcher, className, ...other },
@@ -74,6 +68,11 @@ export const Pagination = forwardRef(function Pagination(
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
   const [activePage, setActivePage] = useState(1)
+
+  const currentItemNumsFirst =
+    activePage === 1 ? 1 : activePage * itemsPerPage - itemsPerPage + 1
+  const currentItemNumsLast =
+    activePage === pages ? totalItems : activePage * itemsPerPage
 
   const handleClick = (page) => () => {
     setActivePage(page)
@@ -103,26 +102,20 @@ export const Pagination = forwardRef(function Pagination(
     ...other,
   }
 
-  return (
+  const pagination = (
     <Navigation aria-label="pagination" {...props}>
-      {switcher && (
-        <select>
-          <option>option 1</option>
-          <option>option 2</option>
-        </select>
-      )}
       <UnorderedList
         style={{
           gridTemplateColumns: 'repeat(' + columns + ', 48px)',
         }}
       >
-        <StyledButton
+        <Button
           variant="ghost_icon"
           onClick={moveLeft}
           disabled={activePage === 1}
         >
           <Icon name="chevron_left" title="previous" />
-        </StyledButton>
+        </Button>
         {items.length > 0 &&
           items.map((page, index) =>
             page !== 'ELLIPSIS' ? (
@@ -141,15 +134,32 @@ export const Pagination = forwardRef(function Pagination(
               <StyledIcon name="more_horizontal" title="ellipsis" />
             ),
           )}
-        <StyledButton
+        <Button
           variant="ghost_icon"
           onClick={moveRight}
           disabled={activePage === pages}
         >
           <Icon name="chevron_right" title="next" />
-        </StyledButton>
+        </Button>
       </UnorderedList>
     </Navigation>
+  )
+
+  // TODO: Dropdown component will be added when the component is ready
+  return showTotalItems ? (
+    <FlexContainer>
+      <Text>
+        {currentItemNumsFirst +
+          ' - ' +
+          currentItemNumsLast +
+          ' of ' +
+          totalItems +
+          ' items'}
+      </Text>
+      {pagination}
+    </FlexContainer>
+  ) : (
+    pagination
   )
 })
 

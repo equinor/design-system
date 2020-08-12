@@ -7,7 +7,7 @@ export function PaginationControl(pages, activePage) {
   const totalPagesShown = 7 // amount of total pages before we start trunking pages in ellipsis
   const pagesBeforeEllipsis = 5 // total pages shown before ellipsis and trunking begins
 
-  // https://dev.to/namirsab/comment/2050
+  // Range function from https://dev.to/namirsab/comment/2050
   const range = (start, end) => {
     const length = end - start + 1
     return Array.from({ length }, (_, i) => start + i)
