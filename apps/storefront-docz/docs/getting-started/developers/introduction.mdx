@@ -1,38 +1,134 @@
 ---
 title: Developer
 metaTitle: Developer getting started
-tabs:
-  - Introduction
-  - CSS framework
+toc:
+  - Links
   - React
-  - Figma
+  - Icons
+  - Tokens
+  - Fonts
+  - Logo
+  - Browser support
 mode: publish
 route: /getting-started/developers/
 ---
 
-# TODO:
+## Links
 
-- Remove tabs
-- Add links to storybook, npm, cdn
+- ⚛️[EDS React library](https://www.npmjs.com/package/@equinor/eds-core-react)
+- [EDS tokens](https://www.npmjs.com/package/@equinor/eds-tokens)
+- [EDS icons](https://www.npmjs.com/package/@equinor/eds-icons)
 
-Developers should use the Equinor Design System (EDS) to easily sew together new prototypes, while focusing on application logic rather than front-end components.
-There will be two different implementations built that will be started and maintained by the EDS core team---hopefully with further development from the Equinor developer community.
+## React
 
-- CSS library
-- React library
+This is the main implementation of the EDS, and will eventually contain accessible React components of each and every EDS component in Figma.
+Available components are showcased in Playground components where the different variations are showed as both real life and with code.
 
-The CSS and React libraries will be available via a package manager and CDN.
+The API is also documented by a props table for each component.
 
-## While you wait
+Current [component status](https://eds.equinor.com/components/component-status)
 
-Continue using the same tools as you have within Equinor recommendations. Once the first design package is ready, a subset of the designed components will be built by the core team. When that subset is ready, all developers will be both invited and encouraged to help with the implementation.
+### Installation
 
-## Please don't make your own
+```sh
+npm install @equinor/eds-core-react styled-components
+```
 
-Please refrain from spending resources making your own design system.
-The EDS is suggested for all new projects.
-If there are components missing that keep you from using the EDS, consider contributing (:warning: link needed).
+### Usage
 
-## Migration
+```jsx
+const { Button } = '@equinor/eds-core-react'
 
-:warning: More information will come soon to help prepare you to migrate your team and projects to the EDS.
+<Button variant="outlined" color="secondary">
+  Click me!
+</Button>
+```
+
+## Icons
+
+Built on a copy of the Outlined Material Design icons, the icons have been customised and renamed for Equinor’s use and supplemented with our own icons for Equinor specific domains.
+
+All the icons are available in the [storefront](https://eds.equinor.com/assets/system-icons/library/), and can also be installed from NPM.
+
+The following example uses the `<Icon>` component from `@equinor/eds-core-react` – but the icons package can also be used without React.
+
+### Installation
+
+```sh
+npm install @equinor/eds-icons @equinor/eds-core-react
+```
+
+### Usage
+
+```jsx
+import { Icon } from '@equinor/eds-core-react'
+import { info_circle } from '@equinor/eds-icons'
+
+Icon.add({ info_circle })
+
+<Icon name="info_circle" size={24} />
+```
+
+## Tokens
+
+Design tokens are design decisions from Figma extracted into code, and form the basis for the [EDS Core React library](#react). For projects that don’t use React, the tokens are available as an independent NPM package that can be used to build your own implementation of the EDS in your technology of choice. The following example uses vanilla javascript.
+
+### Installation
+
+```sh
+npm install @equinor/eds-tokens
+```
+
+### Usage
+
+```js
+import { tokens } from '@equinor/eds-tokens'
+
+const {
+  typography: {
+    heading: { h1 },
+  },
+} = tokens
+
+const header = document.createElement('h1')
+
+Object.keys(h1).forEach((token) => {
+  header.style[token] = h1[token]
+})
+
+header.textContent = 'Some header'
+
+document.body.appendChild(header)
+```
+
+## Fonts
+
+The Equinor typeface is available from the EDS CDN.
+
+### Usage
+
+### All the fonts
+
+```html
+<link
+  rel="stylesheet"
+  href="https://eds-static.equinor.com/font/equinor-font.css"
+/>
+```
+
+## Logo
+
+When it comes to the Equinor logo, we have two versions – primary and horizontal – and you pick the colour with a fragment identifier in the url. The following example uses the primary logo in red, other colour options are white and black – with black being the default if you omit the fragment identifier.
+
+### Usage
+
+```html
+<img
+  src="https://eds-static.equinor.com/logo/equinor-logo-primary.svg#red"
+  alt="Equinor"
+/>
+```
+
+## Browser support
+
+We support the most up to date version of evergreen browsers (browsers that auto-update), which means Chrome, Safari, Firefox and (Chromium) Edge.
