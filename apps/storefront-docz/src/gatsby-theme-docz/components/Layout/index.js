@@ -1,4 +1,5 @@
 /* eslint react/jsx-filename-extension: off  */
+/* eslint react/jsx-pascal-case: off  */
 
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
@@ -7,6 +8,7 @@ import { Sidebar } from '../Sidebar'
 import { MainContainer } from '../MainContainer'
 import { SkipLink } from '../../../components/SkipLink'
 import { BaseLayout } from '../../../components/BaseLayout'
+import SEO from '../../../components/seo'
 import styled from 'styled-components'
 import './global.css'
 
@@ -25,6 +27,7 @@ export const Layout = ({ doc, children }) => {
   const [open, setOpen] = useState(false)
   return (
     <BaseLayout>
+      <SEO title={doc.value.title} />
       {/* <Global styles={global} /> */}
       {/*  <Main sx={styles.main}> */}
       <SkipLink />

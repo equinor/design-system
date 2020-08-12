@@ -8,7 +8,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { useStaticQuery, graphql } from 'gatsby'
 
 function SEO({ description, lang, meta, title }) {
@@ -51,22 +51,6 @@ function SEO({ description, lang, meta, title }) {
         {
           property: `og:type`,
           content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
         },
       ].concat(meta)}
     />
