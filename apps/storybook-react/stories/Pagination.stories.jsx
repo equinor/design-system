@@ -54,7 +54,7 @@ export const Variants = () => {
   }
   return (
     <Body>
-      <Pagination totalItems={14} itemsPerPage={6} showTotalItems />
+      <Pagination totalItems={140} itemsPerPage={3} showTotalItems />
       <Pagination totalItems={8} itemsPerPage={1} />
       <Pagination totalItems={3} itemsPerPage={1} />
       <Pagination totalItems={7} itemsPerPage={1} />

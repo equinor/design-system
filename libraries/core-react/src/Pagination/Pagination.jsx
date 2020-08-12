@@ -26,6 +26,8 @@ const Navigation = styled.nav`
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
+  margin-left: ${({ showTotalItems }) =>
+    showTotalItems ? tokens.spacingSmall : 0};
 `
 
 const UnorderedList = styled.ul`
@@ -54,7 +56,9 @@ const FlexContainer = styled.div`
   align-items: center;
 `
 
-const Text = styled(Typography)`` // TODO: Design says #000000 but looks better with default color (almost black)
+const Text = styled(Typography)`
+  white-space: nowrap;
+` // TODO: Design says #000000 but looks better with default color (almost black)
 
 function getAriaLabel(page, selected) {
   return `${selected ? 'Current page, ' : 'Go to '}page ${page}`
