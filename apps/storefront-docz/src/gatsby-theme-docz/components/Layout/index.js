@@ -27,7 +27,7 @@ export const Layout = ({ doc, children }) => {
   const [open, setOpen] = useState(false)
   return (
     <BaseLayout>
-      <SEO title={doc.value.title} />
+      <SEO title={doc.value.metaTitle} />
       {/* <Global styles={global} /> */}
       {/*  <Main sx={styles.main}> */}
       <SkipLink />
