@@ -26,8 +26,8 @@ const Navigation = styled.nav`
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  margin-left: ${({ showTotalItems }) =>
-    showTotalItems ? tokens.spacingSmall : 0};
+  margin-left: ${({ withItemIndicator }) =>
+    withItemIndicator ? tokens.spacingSmall : 0};
 `
 
 const UnorderedList = styled.ul`
@@ -65,7 +65,7 @@ function getAriaLabel(page, selected) {
 }
 
 export const Pagination = forwardRef(function Pagination(
-  { totalItems, showTotalItems, itemsPerPage, switcher, className, ...other },
+  { totalItems, withItemIndicator, itemsPerPage, className, ...other },
   ref,
 ) {
   const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
@@ -73,10 +73,10 @@ export const Pagination = forwardRef(function Pagination(
 
   const [activePage, setActivePage] = useState(1)
 
-  const currentItemNumsFirst =
-    activePage === 1 ? 1 : activePage * itemsPerPage - itemsPerPage + 1
-  const currentItemNumsLast =
-    activePage === pages ? totalItems : activePage * itemsPerPage
+  const currentItemFirst =
+    activePage === 1 ? 1 : activePage * itemsPerPage - itemsPerPage + 1 // First number of range of items at current page
+  const currentItemLast =
+    activePage === pages ? totalItems : activePage * itemsPerPage // Last number of range of items at current page
 
   const handleClick = (page) => () => {
     setActivePage(page)
@@ -98,10 +98,7 @@ export const Pagination = forwardRef(function Pagination(
 
   const props = {
     ref,
-    totalItems,
-    showTotalItems,
-    switcher,
-    columns,
+    withItemIndicator,
     className,
     ...other,
   }
@@ -117,7 +114,7 @@ export const Pagination = forwardRef(function Pagination(
           variant="ghost_icon"
           onClick={moveLeft}
           disabled={activePage === 1}
-          aria-label={activePage !== 1 && 'Go to previous page'}
+          aria-label="Go to previous page"
         >
           <Icon name="chevron_left" title="previous" />
         </Button>
@@ -142,7 +139,7 @@ export const Pagination = forwardRef(function Pagination(
         <Button
           variant="ghost_icon"
           onClick={moveRight}
-          aria-label={activePage !== pages && 'Go to next page'}
+          aria-label="Go to next page"
           disabled={activePage === pages}
         >
           <Icon name="chevron_right" title="next" />
@@ -152,12 +149,12 @@ export const Pagination = forwardRef(function Pagination(
   )
 
   // TODO: Dropdown component will be added when that component is ready
-  return showTotalItems ? (
+  return withItemIndicator ? (
     <FlexContainer>
       <Text>
-        {currentItemNumsFirst +
+        {currentItemFirst +
           ' - ' +
-          currentItemNumsLast +
+          currentItemLast +
           ' of ' +
           totalItems +
           ' items'}
@@ -174,12 +171,12 @@ Pagination.displayName = 'eds-pagination'
 Pagination.propTypes = {
   // Number of total items to be paginated
   totalItems: PropTypes.number.isRequired,
-  // Display total item count
-  showTotalItems: PropTypes.bool,
+  // To display total item count
+  withItemIndicator: PropTypes.bool,
   // Choose number of items per page
   itemsPerPage: PropTypes.number,
-  // Display dropdown menu for user to choose items per page
-  switcher: PropTypes.bool,
+  // TODO: To display dropdown menu for user to choose items per page
+  // withDropdown: PropTypes.bool,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -189,7 +186,7 @@ Pagination.propTypes = {
 Pagination.defaultProps = {
   className: '',
   children: undefined,
-  showTotalItems: false,
-  switcher: false,
+  withItemIndicator: false,
+  // TODO: withDropdown: false,
   itemsPerPage: 20,
 }

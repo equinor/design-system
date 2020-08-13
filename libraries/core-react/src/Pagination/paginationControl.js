@@ -1,11 +1,10 @@
 import React from 'react'
 
-const ELLIPSIS = 'ELLIPSIS'
-
 export function PaginationControl(pages, activePage) {
   const siblings = 1 // amount of siblings on left and right side of active page after trunking
   const totalPagesShown = 7 // amount of total pages before we start trunking pages in ellipsis
   const pagesBeforeEllipsis = 5 // total pages shown before ellipsis and trunking begins
+  const ELLIPSIS = 'ELLIPSIS'
 
   // Range function from https://dev.to/namirsab/comment/2050
   const range = (start, end) => {
