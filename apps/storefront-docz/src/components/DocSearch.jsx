@@ -17,10 +17,6 @@ export const DocSearch = () => {
     })
   }, [name])
   return (
-    <>
-      {process.env.GATSBY_STAGE === 'dev' && (
-        <Search aria-label="sitewide search" id="search" placeholder="Search" />
-      )}
-    </>
+    <Search aria-label="sitewide search" id="search" placeholder="Search" />
   )
 }
