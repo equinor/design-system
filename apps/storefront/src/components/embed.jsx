@@ -21,4 +21,4 @@ Embed.propTypes = {
   url: PropTypes.string.isRequired,
 }
 
-export default Embed
+export default Embed // eslint-disable-line

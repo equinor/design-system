@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { readableColor } from 'polished'
 import { Table } from '@equinor/eds-core-react'
 import { camelify, kebabify } from '../../utils'
+import { useThemeUI } from 'theme-ui'
 
 const ComponentStatus = () => {
   const data = useStaticQuery(graphql`
@@ -35,13 +36,21 @@ const ComponentStatus = () => {
   } = data.allComponentStatusYaml.edges[0].node
 
   const { Head, Body, Row, Cell } = Table
+  const context = useThemeUI()
+  const { theme } = context
 
   return (
     <Table summary={summary}>
       <Head>
         <Row>
+          {/*  */}
           {headers.map((text) => (
-            <Cell as="th" key={camelify(text)} scope="col">
+            <Cell
+              as="th"
+              style={{ textAlign: 'left' }}
+              key={camelify(text)}
+              scope="col"
+            >
               {text}
             </Cell>
           ))}
@@ -50,10 +59,22 @@ const ComponentStatus = () => {
       <Body>
         {components.map((component, index) => (
           <Row key={component.component + index}>
-            <Cell as="th" key={component.component + index} scope="row">
+            <Cell
+              as="th"
+              key={component.component + index}
+              scope="row"
+              style={{
+                textAlign: 'left',
+                backgroundColor: 'white',
+                borderBottomWidth: '1px',
+              }}
+            >
               <Link
                 to={`/components/${kebabify(component.component)}`}
-                style={{ color: 'var(--moss-green)', fontSize: '0.875rem' }}
+                style={{
+                  color: theme.colors.primary,
+                  fontSize: '0.875em',
+                }}
               >
                 {component.component}
               </Link>

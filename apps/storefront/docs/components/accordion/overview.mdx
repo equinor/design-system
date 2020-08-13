@@ -1,0 +1,217 @@
+---
+title: Accordion
+metaTitle: Accordion overview
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+  - Interaction
+mode: publish
+route: /components/accordion/
+---
+
+import { Accordion, Icon, Button } from '@equinor/eds-core-react'
+
+An _accordion_ allows users to collapse and expand sections of content.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, colour allowances -->
+
+Accordions are composed of a header area and a content area. They deliver large amounts of information in user-controlled sections. They can be used to group or hide information which helps to keep order and scannability on a page.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not use if there is not enough content. Accordions increase cognitive load, do not use if grouping small amounts of content.
+- Do not change the width of the accordion when it is expanded or collapsed.
+- Do not hide errors or critical information inside an accordion that requires immediate action.
+
+## Variations
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+### Action right
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1420%3A9038"
+  alt="Accordion action right"
+/>
+
+### Action left
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1431%3A326"
+  alt="Accordion action left"
+/>
+
+### Action dual
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1431%3A482"
+  alt="Accordion action dual"
+/>
+
+### Header area
+
+Whether expanded or collapsed, the header height must be 48px. The header area must contain one action indicating that the section expands or collapses and can contain additional actions. The expand/collapse functionality is tied to the entire header. Additional actions are triggered only by interacting directly with that action.
+
+#### Labels
+
+Labels should provide clear and concise direction. Avoid labels that are too long. Labels should be to the point, short and no more than three words. Note that if the label is longer than the maximum width, it will be truncated and should have a tooltip provided.
+
+### Content area
+
+When the accordion is expanded, the minimum height for the content area is 96px. There is no maximum height for the content area.
+
+## Interaction
+
+Multiple sections can be expanded simultaneously.
+
+## Demo
+
+### Default
+
+<Playground>
+  <Accordion>
+    <Accordion.AccordionItem isExpanded>
+      <Accordion.AccordionHeader>Header 1</Accordion.AccordionHeader>
+      <Accordion.AccordionPanel>Content 1</Accordion.AccordionPanel>
+    </Accordion.AccordionItem>
+    <Accordion.AccordionItem>
+      <Accordion.AccordionHeader>Header 2</Accordion.AccordionHeader>
+      <Accordion.AccordionPanel>Content 2</Accordion.AccordionPanel>
+    </Accordion.AccordionItem>
+    <Accordion.AccordionItem>
+      <Accordion.AccordionHeader>Header 3</Accordion.AccordionHeader>
+      <Accordion.AccordionPanel>Content 3</Accordion.AccordionPanel>
+    </Accordion.AccordionItem>
+  </Accordion>
+</Playground>
+
+### With different types of headers
+
+<Playground>
+  <>
+    <Accordion headerLevel="h3" chevronPosition="left">
+      <Accordion.AccordionItem>
+        <Accordion.AccordionHeader>Chevron left</Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+    <Accordion
+      headerLevel="h3"
+      chevronPosition="right"
+      style={{ marginTop: '20px' }}
+    >
+      <Accordion.AccordionItem>
+        <Accordion.AccordionHeader>Chevron right</Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+    <Accordion
+      headerLevel="h3"
+      chevronPosition="left"
+      style={{ marginTop: '20px' }}
+    >
+      <Accordion.AccordionItem isExpanded>
+        <Accordion.AccordionHeader>
+          Chevron left expanded
+        </Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+    <Accordion
+      headerLevel="h3"
+      chevronPosition="right"
+      style={{ marginTop: '20px' }}
+    >
+      <Accordion.AccordionItem disabled>
+        <Accordion.AccordionHeader>Disabled</Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+    <Accordion
+      headerLevel="h3"
+      chevronPosition="right"
+      style={{ marginTop: '20px' }}
+    >
+      <Accordion.AccordionItem disabled isExpanded>
+        <Accordion.AccordionHeader>Disabled expanded</Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+    <Accordion
+      headerLevel="h3"
+      chevronPosition="left"
+      style={{ marginTop: '20px' }}
+    >
+      <Accordion.AccordionItem>
+        <Accordion.AccordionHeader>
+          <Accordion.AccordionHeaderTitle>
+            Chevron left – custom icons right
+          </Accordion.AccordionHeaderTitle>
+          <Icon
+            name="attach_file"
+            title="Attach file"
+            size={16}
+            color="currentColor"
+            style={{ marginRight: '32px' }}
+          />
+          <Icon
+            name="notifications"
+            title="Notifications"
+            size={16}
+            color="currentColor"
+          />
+        </Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+    <Accordion
+      headerLevel="h3"
+      chevronPosition="left"
+      style={{ marginTop: '20px' }}
+    >
+      <Accordion.AccordionItem>
+        <Accordion.AccordionHeader>
+          <Accordion.AccordionHeaderTitle>
+            Chevron left – interactive options right
+          </Accordion.AccordionHeaderTitle>
+          <Button
+            variant="ghost_icon"
+            onClick={(event) => {
+              action('clicked edit button')(event)
+              event.stopPropagation()
+            }}
+          >
+            <Icon name="edit" title="Edit" />
+          </Button>
+          <Button
+            variant="ghost_icon"
+            onClick={(event) => {
+              action('clicked delete button')(event)
+              event.stopPropagation()
+            }}
+            style={{ marginRight: '-16px' }}
+          >
+            <Icon name="delete_to_trash" title="Delete" />
+          </Button>
+        </Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+    <Accordion
+      headerLevel="h3"
+      chevronPosition="left"
+      style={{ marginTop: '20px' }}
+    >
+      <Accordion.AccordionItem>
+        <Accordion.AccordionHeader>
+          <Accordion.AccordionHeaderTitle>
+            Very long summary that will get truncated if the width of the header
+            is narrower than the length of the text
+          </Accordion.AccordionHeaderTitle>
+        </Accordion.AccordionHeader>
+      </Accordion.AccordionItem>
+    </Accordion>
+  </>
+</Playground>

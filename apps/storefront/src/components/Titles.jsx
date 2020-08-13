@@ -2,7 +2,7 @@
 import React from 'react'
 import { Typography } from '@equinor/eds-core-react'
 import styled, { css } from 'styled-components'
-import { slugify } from '../utils/'
+import { slugify } from '../utils'
 
 const tocAdjustment = css`
   display: block;
