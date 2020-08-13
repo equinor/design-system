@@ -31,7 +31,6 @@ const Burger = styled.button`
 `
 
 export const Header = ({ className, onOpen }) => {
-  console.log(DocSearch)
   const context = useThemeUI()
   const { theme } = context
   return (

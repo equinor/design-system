@@ -59,7 +59,7 @@ module.exports = {
       options: {
         apiKey: '73fc0edd06a8031c699edfc560eaa013',
         indexName: 'equinor_design-system',
-        inputSelector: '.docsearch-input-search', // required
+        inputSelector: '#search', // required
         debug: true, // (bool) Optional. Default `false`
       },
     },
