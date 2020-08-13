@@ -13,6 +13,7 @@ const ButtonInner = styled.span`
   grid-gap: 8px;
   grid-auto-flow: column;
   align-items: center;
+  height: 100%;
 `
 
 const Base = ({ base, baseDisabled: disabled }) => {
@@ -94,6 +95,7 @@ const ButtonBase = styled.button`
   text-decoration: none;
   position: relative;
   cursor: pointer;
+  display: inline-block;
 
   &::before {
     position: absolute;
