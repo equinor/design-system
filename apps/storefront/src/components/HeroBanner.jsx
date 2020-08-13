@@ -1,79 +1,9 @@
-// @ts-check
 import React from 'react'
 import PropTypes from 'prop-types'
 import Text from './Text'
 import { H1 } from './Titles'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
-import { tokens } from '@equinor/eds-tokens'
-
-const {
-  colors: {
-    interactive: {
-      primary__resting: { rgba: buttonBgColor },
-      primary__hover: { rgba: buttonBgHoverColor },
-      focus: { rgba: buttonBorderFocusColor },
-    },
-    text: {
-      static_icons__primary_white: { rgba: buttonColor },
-    },
-  },
-  clickbounds: { default__base: buttonClickBound },
-  shape: {
-    button: { minHeight: buttonHeight, borderRadius: buttonBorderRadius },
-  },
-  typography: {
-    navigation: {
-      button: {
-        fontSize: buttonFontSize,
-        fontWeight: buttonFontWeight,
-        lineHeight: buttonLineHeight,
-      },
-    },
-  },
-  spacings: {
-    comfortable: { medium: buttonPaddingX },
-  },
-} = tokens
-
-const StyledLink = styled(Link)`
-  color: ${buttonColor};
-  background-color: ${buttonBgColor};
-  height: ${buttonHeight};
-  border-radius: ${buttonBorderRadius};
-  font-size: ${buttonFontSize};
-  font-weight: ${buttonFontWeight};
-  line-height: ${buttonLineHeight};
-  padding-left: ${buttonPaddingX};
-  padding-right: ${buttonPaddingX};
-  text-decoration: none;
-  display: grid;
-  place-items: center;
-  position: relative;
-  z-index: 0;
-  &::before {
-    content: '';
-    width: 100%;
-    height: ${buttonClickBound};
-    position: absolute;
-    z-index: -1;
-  }
-  &:hover {
-    background-color: ${buttonBgHoverColor};
-  }
-  &:focus {
-    outline: none;
-  }
-
-  &[data-focus-visible-added]:focus {
-    outline: 1px dashed ${buttonBorderFocusColor};
-    outline-offset: 2px;
-  }
-  /* Get rid of ff focus border for buttons */
-  &::-moz-focus-inner {
-    border: 0;
-  }
-`
+import { Button } from '@equinor/eds-core-react'
 
 const StyledHeroBanner = styled.div`
   background: #f7f7f7;
@@ -98,19 +28,9 @@ const StyledHeroBanner = styled.div`
 const Intro = styled.div`
   grid-area: intro;
   text-align: center;
-  margin-bottom: 32px;
+  max-width: 420px;
   @media (min-width: 600px) {
     align-self: center;
-    text-align: left;
-    max-width: 420px;
-  }
-`
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  @media (min-width: 600px) {
-    justify-content: left;
   }
 `
 
@@ -123,6 +43,14 @@ const Illustration = styled.div`
   }
 `
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  @media (min-width: 600px) {
+    justify-content: left;
+  }
+`
+
 const HeroBanner = ({ title, children }) => {
   return (
     <StyledHeroBanner>
@@ -132,19 +60,27 @@ const HeroBanner = ({ title, children }) => {
           {children}
         </Text>
         <ButtonContainer>
-          <StyledLink
-            to="/components/component-status"
-            style={{ marginRight: '1rem' }}
+          <Button
+            as="a"
+            href="/components/component-status"
+            style={{ marginRight: '1rem', textDecoration: 'none' }}
           >
             Components
-          </StyledLink>
-          <StyledLink
-            to="/getting-started/developers/"
-            style={{ marginRight: '1rem' }}
+          </Button>
+          <Button
+            as="a"
+            href="/getting-started/developers/"
+            style={{ marginRight: '1rem', textDecoration: 'none' }}
           >
             Developers
-          </StyledLink>
-          <StyledLink to="/getting-started/designers">Designers</StyledLink>
+          </Button>
+          <Button
+            as="a"
+            href="/getting-started/designers/"
+            style={{ textDecoration: 'none' }}
+          >
+            Designers
+          </Button>
         </ButtonContainer>
       </Intro>
       <Illustration>

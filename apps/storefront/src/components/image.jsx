@@ -36,6 +36,7 @@ const Image = ({ url = '', ...other }) => {
   let imageUrl = url
 
   if (url.startsWith('images') && data.allFile.edges.length > 0) {
+    // @TODO: This doesn't work locally because the src will be src/assets/{src}. Should probably use the file name and not the path as is FigmaImage.jsx
     const src = decodeURI(url).toLowerCase()
     const image = data.allFile.edges.find(
       ({ node }) => node.relativePath.toLowerCase() === src,

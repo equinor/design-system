@@ -1,0 +1,90 @@
+---
+title: Tooltip
+metaTitle: Tooltip overview
+tabs:
+  - Overview
+  - Usage
+mode: publish
+route: /components/tooltip/
+---
+
+import { Tooltip, Button } from '@equinor/eds-core-react'
+
+A tooltip shows when hovered, focused or long-pressed (touch), and displays information such as a text label or a short description.
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+Tooltips disappear after the mouse is no longer hovering the target area, the focus has moved on or the long-press is released. The information provided should be very short and descriptive and explain icon meanings or differences between components.
+
+Tooltips should aim to have a single line of text, that does not wrap, and it kept to under 80 characters in length. The position of the tooltip is flexible. They are always pointed to the component to which they give information about.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not use tooltips that repeat visible UI text.
+- Do not add tooltips to buttons with text.
+- Do not format the text, such as bold or italics.
+- Do not allow tooltips to be cropped outside the frame.
+- Do not add images, such as avatars or icons.
+- Do not move tooltips to follow the cursor.
+- Do not have links within tooltips.
+- Do not use punctuation other than a `.` in a tooltip.
+- Tooltips are not the place for questions, excitement, etc.
+- Do not spell out numbers, use "12" instead of "twelve"
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=251%3A4"
+  alt="Figma design sketch for tooltip"
+/>
+
+## Demo
+
+<Playground>
+  <div
+    style={{
+      display: 'grid',
+      gridGap: '32px',
+      gridTemplateColumns: 'repeat(3, fit-content(100%))',
+    }}
+  >
+    <Tooltip title="Tooltip" placement="topLeft">
+      <Button>Top left</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="top">
+      <Button>Top</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="topRight">
+      <Button>Top right</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="bottomLeft">
+      <Button>Bottom left</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="bottom">
+      <Button>Bottom</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="bottomRight">
+      <Button>Bottom right</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="leftTop">
+      <Button>Left top</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="left">
+      <Button>Left</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="leftBottom">
+      <Button>Left bottom</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="rightTop">
+      <Button>Right top</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="right">
+      <Button>Right</Button>
+    </Tooltip>
+    <Tooltip title="Tooltip" placement="rightBottom">
+      <Button>Right bottom</Button>
+    </Tooltip>
+  </div>
+</Playground>

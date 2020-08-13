@@ -1,0 +1,43 @@
+---
+title: Slider
+metaTitle: Slider usage
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Figma
+  - API
+mode: publish
+route: /components/slider/usage/
+---
+
+import { Slider } from '@equinor/eds-core-react'
+
+## Figma
+
+### How to add
+
+1. Locate the **Assets** tab in the **Layers Panel**.
+2. There are two ways to locate the `Slider` component needed:
+   - Use the search bar to search for a component grouping name or variation name.
+   - Scroll through the folders list and open the relevant grouping.
+3. Once the component is located, click and drag it into the frame/artboard.
+
+### How to use
+
+1. Place the `Slider/Track` as the bottom _layer_.
+2. Place the `Slider/Indicator` next.
+3. Place the `Slider/Handle` at the end (or each end) of the `Indicator`.
+4. Place `Slider/Dots` if needed.
+5. Select all the `Slider` layers and convert them to a frame/artboard by using the following shortcut:
+
+- Mac: `Command` + `Option` + `G`
+- PC: `Ctrl` + `ALT` + `G`
+
+6. Make sure to name the new group.
+7. Locate the **Design** tab in the **Inspector Panel**.
+8. Under the **Constraints** section, set up constraints.
+
+## API
+
+<PropsTable props={Slider.__docgenInfo.props} />
