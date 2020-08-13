@@ -29,6 +29,12 @@ const Intro = styled.div`
   grid-area: intro;
   text-align: center;
   max-width: 420px;
+
+  & > *:not(:first-child) {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
   @media (min-width: 600px) {
     align-self: center;
   }
