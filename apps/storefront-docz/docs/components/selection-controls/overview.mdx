@@ -1,0 +1,312 @@
+---
+title: Selection controls
+metaTitle: Selection controls overview
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Switch
+  - Checkbox
+  - Radio
+  - Demo
+mode: publish
+route: /components/selection-controls/
+---
+
+import { Checkbox, Radio, Switch } from '@equinor/eds-core-react'
+
+_Selection controls_ allow users to select options, make decisions and set preferences.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+Selection controls are to be visible and understandable at a quick glance. Selected options are more visible than unselected. Selection controls are always accompanied with a clear label. Make sure that the labels are surrounded with a `Clickbound` that activates the selection control as well as the control itself.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not mix different selection controls within a grouped list.
+- Do not use a selection control without a label.
+- Do not resize any of the selection controls.
+
+## Variations
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+### Switch
+
+Switches allow users to toggle a single item between two possible states, taking immediate action. The most common states for a switch is "on/off". There are two variations of the switch provided: `Small switch` and `Switch`. The small switch is best for tight spaces and should be used with caution.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not nest switches, use checkboxes instead.
+
+#### Small switch on
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A976"
+  alt="Figma design sketches of small switch in state on"
+/>
+
+#### Small switch off
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A977"
+  alt="Figma design sketches of small switch in state off"
+/>
+
+#### Switch on
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1471%3A2"
+  alt="Figma design sketches of  switch in state on"
+/>
+
+#### Switch off
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1471%3A14"
+  alt="Figma design sketches of  switch in state off"
+/>
+
+### Checkbox
+
+Checkboxes allow users to select one or more items from a list. Checkboxes can be used to turn an option on or off. Generally, checkboxes are used with a confirmation action, however, they can also take immediate effect. The default state of a checkbox is having no option selected.
+
+Checkboxes can be nested children.
+
+- When a parent checkbox is selected, all following children are selected.
+- When a parent checkbox is unselected, all following children are unselected.
+- When a child is unselected while other children are selected, the parent checkbox becomes indeterminate.
+
+#### Checkbox selected
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A978"
+  alt="Figma design sketches of selected checkboxes"
+/>
+
+#### Checkbox unselected
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A979"
+  alt="Figma design sketches of unselected checkboxes"
+/>
+
+#### Checkbox indeterminate
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A980"
+  alt="Figma design sketches of indeterminated checkboxes"
+/>
+
+### Radio
+
+Radio buttons allow users to choose one single option from a list of mutually exclusive options. The default state of a radio button is to have one option selected.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not use radio buttons when the user can select more than one item.
+- Do not use a radio button without one item being selected by default.
+
+#### Radio button selected
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A981"
+  alt="Figma design sketches of selected radio"
+/>
+
+#### Radio button unselected
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=1432%3A982"
+  alt="Figma design sketches of unselected radio"
+/>
+
+## Demo
+
+### Checkbox single
+
+<Playground>
+  {() => {
+    // Use this to set the input to indeterminate = true as
+    // this must be done via JavaScript
+    // (cannot use an HTML attribute for this)
+    const indeterminateRef = React.useRef()
+    const [checked, updateChecked] = React.useState(false)
+    return (
+      <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+        <li>
+          <Checkbox label="Check me" />
+        </li>
+        <li>
+          <Checkbox label="You can't check me!" disabled />
+        </li>
+        <li>
+          <Checkbox label="I'm preselected" defaultChecked />
+        </li>
+        <li>
+          <Checkbox label="You can't uncheck me!" disabled defaultChecked />
+        </li>
+        <li>
+          <Checkbox
+            label="I'm in indeterminate state"
+            indeterminate
+            ref={indeterminateRef}
+          />
+        </li>
+        <li>
+          <Checkbox
+            label="I'm a controlled component"
+            onChange={(e) => {
+              updateChecked(e.target.checked)
+            }}
+            checked={checked}
+          />
+        </li>
+      </ul>
+    )
+  }}
+</Playground>
+
+### Checkbox multiple
+
+<Playground>
+  <fieldset>
+    <legend>We are in this together! 🙌</legend>
+    <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+      <li>
+        <Checkbox label="Check me first" name="multiple" value="first" />
+      </li>
+      <li>
+        <Checkbox label="Check me second" name="multiple" value="second" />
+      </li>
+      <li>
+        <Checkbox label="Check me third" name="multiple" value="third" />
+      </li>
+    </ul>
+  </fieldset>
+</Playground>
+
+### Radio single
+
+<Playground>
+  <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+    <li>
+      <Radio label="Check me" name="first" />
+    </li>
+    <li>
+      {' '}
+      <Radio label="You can't check me!" disabled name="second" />
+    </li>
+    <li>
+      <Radio label="I'm preselected" defaultChecked name="third" />
+    </li>
+    <li>
+      {' '}
+      <Radio
+        label="You can't uncheck me!"
+        disabled
+        defaultChecked
+        name="fourth"
+      />
+    </li>
+  </ul>
+</Playground>
+
+### Radio group
+
+<Playground>
+  {() => {
+    const [checked, updateChecked] = React.useState('one')
+    const onChange = (event) => {
+      updateChecked(event.target.value)
+    }
+    return (
+      <fieldset>
+        <legend>We are in this together! 🙌</legend>
+        <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+          <li>
+            <Radio
+              label="I'm number one and preselected"
+              name="group"
+              value="one"
+              checked={checked === 'one'}
+              onChange={onChange}
+            />
+          </li>
+          <li>
+            <Radio
+              label="I'm number two"
+              name="group"
+              value="two"
+              checked={checked === 'two'}
+              onChange={onChange}
+            />
+          </li>
+          <li>
+            <Radio
+              label="I'm number three"
+              name="group"
+              value="three"
+              checked={checked === 'three'}
+              onChange={onChange}
+            />
+          </li>
+        </ul>
+      </fieldset>
+    )
+  }}
+</Playground>
+
+### Switch default
+
+<Playground>
+  <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+    <li>
+      <Switch label="I'm default off" />
+    </li>
+    <li>
+      <Switch label="I'm default on" defaultChecked />
+    </li>
+    <li>
+      <Switch disabled label="You can't turn me on!" />
+    </li>
+    <li>
+      <Switch disabled defaultChecked label="You can't turn me off!" />
+    </li>
+  </ul>
+</Playground>
+
+### Switch small
+
+<Playground>
+  <ul style={{ margin: '0', padding: '0', listStyleType: 'none' }}>
+    <li>
+      <Switch label="I'm default off" size="small" />
+    </li>
+    <li>
+      <Switch label="I'm default on" defaultChecked size="small" />
+    </li>
+    <li>
+      <Switch disabled label="You can't turn me on!" size="small" />
+    </li>
+    <li>
+      <Switch
+        disabled
+        defaultChecked
+        label="You can't turn me off!"
+        size="small"
+      />
+    </li>
+  </ul>
+</Playground>

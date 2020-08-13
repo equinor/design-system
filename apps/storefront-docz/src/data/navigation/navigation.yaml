@@ -1,0 +1,86 @@
+- title: Getting Started
+  subNav:
+    - About
+    - Designers
+    - Developers
+    - Project managers and owners
+- title: Guidelines
+  subNav:
+    - Accessibility
+    - Colour
+    - Elevation
+    - Grid
+    - Motion
+    - Shape
+    - Spacing
+    - Tokens
+    - Typography
+- title: Assets
+  subNav:
+    - Brand illustrations
+    - Charts
+    - Image placeholder
+    - Logo
+    - Photography
+    - Product icons
+    - System icons
+    - Technical illustrations 
+- title: Components
+  subNav:
+    - Component status
+    - Accordion
+    - Buttons
+    - Buttons toggle
+    - Cards
+    - Chips
+    - Date picker
+    - Divider
+    - Links
+    - Lists
+    - Menu
+    - Navigation app launcher
+    - Navigation breadcrumbs
+    - Navigation navigation drawer
+    - Navigation pagination
+    - Navigation table of contents
+    - Navigation tabs
+    - Navigation top bar
+    - Notification banner
+    - Notification dialog
+    - Notification snackbar
+    - Popovers
+    - Progress indicators
+    - Search
+    - Selection controls
+    - Scrim
+    - Side sheet
+    - Slider
+    - Stepper
+    - Table
+    - Text fields
+    - Tooltip
+- title: Patterns
+  subNav:
+    - Common actions
+    - Data formats
+    - Data visualisation
+    - Empty states
+    - Inputs
+    - Launch screens
+    - Loading
+    - Onboarding
+- title: Updates
+  subNav:
+    - Release information
+    - Roadmap
+- title: Help
+  subNav:
+    - Support
+    - Resources
+    - FAQ
+- title: Contributing
+  subNav:
+    - About
+    - Designers
+    - Developers
+    - Documentation
