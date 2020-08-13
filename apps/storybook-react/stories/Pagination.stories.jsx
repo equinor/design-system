@@ -43,8 +43,6 @@ export const Variants = () => {
         withItemIndicator
         defaultPage={6}
       />
-
-      {/* TODO: Example with dropdown component */}
     </Body>
   )
 }
@@ -53,14 +51,13 @@ export const WithKnobs = () => {
   const totalItems = number('Total Items', 20)
   const itemsPerPage = number('Items per page', 1)
   const withItemIndicator = boolean('With item indicator', true)
-  const defaultPage = number('Default page', 5)
+
   return (
     <Body>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         withItemIndicator={withItemIndicator}
-        defaultPage={defaultPage}
       />
     </Body>
   )

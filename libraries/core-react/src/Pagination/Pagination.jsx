@@ -185,7 +185,7 @@ Pagination.propTypes = {
   itemsPerPage: PropTypes.number,
   // Callback fired on page change
   onChange: PropTypes.func,
-  // Default page
+  // Default start page
   defaultPage: PropTypes.number,
   /** @ignore */
   children: PropTypes.node,
