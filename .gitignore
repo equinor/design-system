@@ -2,4 +2,13 @@ dist
 .cache
 node_modules
 pnpm-debug.log
+.DS_Store
+# use pnpm
+package-lock.json
+yarn.lock
 .env
+# gatsby and docz
+.docz
+public
+# local docz testing
+docz-fresh
