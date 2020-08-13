@@ -5,8 +5,7 @@ import { Playground as DoczPlayground } from 'docz'
 const Playground = ({ ...props }) => {
   // Styles applied to the Playground element doesn't work
   // https://github.com/doczjs/docz/issues/412#issuecomment-656203258
-
-  ;<DoczPlayground {...props} />
+  return <DoczPlayground {...props} />
 }
 
 Playground.propTypes = {
