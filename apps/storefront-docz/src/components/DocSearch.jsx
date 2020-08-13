@@ -37,22 +37,7 @@ export const DocSearch = () => {
   return (
     <DocSearchContainer>
       {process.env.GATSBY_STAGE === 'dev' && (
-        <>
-          <Search
-            aria-label="sitewide search"
-            id="search"
-            placeholder="Search"
-          />
-          {/*  <label htmlFor="search">
-            <SrLabel>Sitewide search</SrLabel>
-            <input
-              type="search"
-              className={`docsearch-input-${name}`}
-              id="search2"
-              placeholder="search"
-            />
-          </label> */}
-        </>
+        <Search aria-label="sitewide search" id="search" placeholder="Search" />
       )}
     </DocSearchContainer>
   )
