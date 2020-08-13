@@ -129,7 +129,7 @@ components:
       figma:
         - *4
       react:
-        - *4
+        - *1
   - component: 'Navigation Navigation drawer'
     status:
       documentation:
@@ -145,7 +145,7 @@ components:
       figma:
         - *4
       react:
-        - *3
+        - *1
   - component: 'Navigation Table of contents'
     status:
       documentation:
@@ -193,7 +193,7 @@ components:
       figma:
         - *4
       react:
-        - *4
+        - *3
   - component: Popovers
     status:
       documentation:
@@ -209,7 +209,7 @@ components:
       figma:
         - *4
       react:
-        - *4
+        - *3
   - component: Search
     status:
       documentation:

@@ -1,0 +1,52 @@
+---
+title: Popover
+metaTitle: Popover usage
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Figma
+  - API
+mode: publish
+route: /components/popovers/usage/
+---
+
+import { Popover } from '@equinor/eds-core-react'
+
+## Figma
+
+### How to add
+
+1. Locate the **Assets** tab in the **Layers Panel**.
+2. There are two ways to locate the `Popover` component needed:
+   - Use the search bar to search for a component grouping name or variation name.
+
+- Scroll through the folders list and open the relevant grouping.
+
+3. Once the component needed is located, click and drag it into the frame/artboard.
+
+### How to use
+
+1. Select the `Popover` in the frame/artboard.
+2. Locate and expand the highlighted _layer_ in the **Layers Panel**.
+3. Toggle off the visibility of the `Caret` _layers_ that are not needed.
+4. If using text, toggle off the placeholder and edit the text. If the text wraps over one line, add 16px in height per line of text added to the whole component.
+5. If using the placeholder, toggle off the text and replace the placeholder with your custom content.
+
+## API
+
+### Popover
+
+<PropsTable props={Popover.__docgenInfo.props} />
+
+### PopoverAnchor
+
+<PropsTable props={Popover.PopoverAnchor.__docgenInfo.props} />
+
+### PopoverTitle
+
+<PropsTable props={Popover.PopoverTitle.__docgenInfo.props} />
+
+### PopoverContent
+
+<PropsTable props={Popover.PopoverContent.__docgenInfo.props} />

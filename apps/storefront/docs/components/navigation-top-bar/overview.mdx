@@ -1,0 +1,109 @@
+---
+title: Navigation top bar
+metaTitle: Navigation top bar overview
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Sections
+  - Demo
+mode: publish
+route: /components/navigation-top-bar/
+---
+
+import { TopBar, Icon, Search } from '@equinor/eds-core-react'
+
+The top bar, also known as a header, displays navigation and actions relating to the interface.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+Top bars span the full width of the viewport and are always the topmost component on a page. The top bar does not scroll away, being a consistent guidepost to users.
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=660%3A5150"
+  alt="Figma design of navigation top bar"
+/>
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not hide the top bar when scrolling.
+- Do not change the colour of the top bar.
+- Do not add the `Logo` in the top bar.
+- Do not add imagery in the top bar.
+
+## Sections
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+### Title and navigation
+
+The top bar always has a title which is the same throughout the whole application group. A subtitle is allowed, this can be the same throughout the whole application group, or can be specific to sub-apps within the application.
+
+The top bar has one _optional_ main navigational icon button which is always to the far left. This icon can either open the `App launcher` or toggle the `Navigation Drawer`.
+
+### Center custom content
+
+The center block of the top bar can either be left empty, or custom content can be inserted into the placeholder.
+
+#### Custom content allowed:
+
+- Tabs
+  - Tabs are allowed with nested menus
+- Search bars
+
+### Actions
+
+The actions on the far-right are standard. This area is for the following common actions within the application:
+
+- Fullscreen: Users can choose to launch the interface to be fullscreen.
+- Notifications: This opens a `Menu` for the user to see their notifications.
+- Accessibility: This opens a `Menu` with choices for the users to choose light/dark mode and their font size. _This button is mandatory to keep._
+- User profile: This opens a `Menu` where the user can see more account details and log out. _This button is mandatory to keep._
+
+## Demo
+
+### Title and actions
+
+<Playground>
+  <TopBar>
+    <TopBar.Header>Application name</TopBar.Header>
+    <TopBar.Actions>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, fit-content(100%))',
+          gap: '16px',
+        }}
+      >
+        <Icon name="account_circle" size={24} title="user" />
+        <Icon name="accessible" size={24} />
+        <Icon name="notifications" size={24} />
+        <Icon name="fullscreen" size={24} />
+      </div>
+    </TopBar.Actions>
+  </TopBar>
+</Playground>
+
+### Title with icon, search and text
+
+<Playground>
+  <TopBar>
+    <TopBar.Header>
+      <>
+        <Icon name="accessible" />
+        Application name
+      </>
+    </TopBar.Header>
+    <TopBar.CustomContent>
+      <input type="search" />
+    </TopBar.CustomContent>
+    <TopBar.Actions>Some right text</TopBar.Actions>
+  </TopBar>
+</Playground>

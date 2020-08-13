@@ -60,7 +60,7 @@ const FigmaImage = ({ url, alt = 'Design in Figma' }) => {
       allFile(
         filter: {
           extension: { regex: "/(jpg)|(jpeg)|(png)/" }
-          relativeDirectory: { eq: "figma" }
+          relativeDirectory: { regex: "/figma/" }
         }
       ) {
         edges {
