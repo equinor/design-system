@@ -152,12 +152,14 @@ export const Pagination = forwardRef(function Pagination(
   return withItemIndicator ? (
     <FlexContainer>
       <Text>
-        {currentItemFirst +
-          ' - ' +
-          currentItemLast +
-          ' of ' +
-          totalItems +
-          ' items'}
+        {currentItemFirst !== currentItemLast
+          ? currentItemFirst +
+            ' - ' +
+            currentItemLast +
+            ' of ' +
+            totalItems +
+            ' items'
+          : currentItemFirst + ' of ' + totalItems + ' items'}
       </Text>
       {pagination}
     </FlexContainer>
