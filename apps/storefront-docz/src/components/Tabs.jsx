@@ -68,3 +68,13 @@ export const TabLink = ({ href, isSelected, children }) => {
     </StyledTabLink>
   )
 }
+
+TabLink.propTypes = {
+  href: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+}
+
+TabLink.defaultProps = {
+  isSelected: false,
+}

@@ -1,24 +1,6 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { Search } from '@equinor/eds-core-react'
 
-const DocSearchContainer = styled.div`
-  input {
-    width: 100%;
-  }
-`
-
-const SrLabel = styled.span`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`
 const isSSR = typeof window === 'undefined'
 
 export const DocSearch = () => {
@@ -35,10 +17,10 @@ export const DocSearch = () => {
     })
   }, [name])
   return (
-    <DocSearchContainer>
+    <>
       {process.env.GATSBY_STAGE === 'dev' && (
         <Search aria-label="sitewide search" id="search" placeholder="Search" />
       )}
-    </DocSearchContainer>
+    </>
   )
 }

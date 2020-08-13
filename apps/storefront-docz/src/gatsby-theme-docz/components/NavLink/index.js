@@ -1,4 +1,5 @@
 /** @jsx jsx */
+/* eslint react/jsx-filename-extension: off */
 import React from 'react'
 import { jsx } from 'theme-ui'
 import { Link } from 'gatsby'
@@ -22,7 +23,6 @@ const getCurrentHash = () => {
 
 export const NavLink = React.forwardRef(({ item, ...props }, ref) => {
   const docs = useDocs()
-  console.log('docs from navlink', docs)
   const current = useCurrentDoc()
 
   if (item.hidden) {

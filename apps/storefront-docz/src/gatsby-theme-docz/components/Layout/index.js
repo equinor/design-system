@@ -23,7 +23,6 @@ const StyledSidebar = styled(Sidebar)`
 `
 
 export const Layout = ({ doc, children }) => {
-  console.log('doc', doc)
   const [open, setOpen] = useState(false)
   return (
     <BaseLayout>
