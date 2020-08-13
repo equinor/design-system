@@ -1,11 +1,11 @@
 {
-  "name": "@equinor/eds-storefront-docz",
+  "name": "@equinor/eds-storefront",
   "private": true,
-  "description": "Documentation for the Equinor Design System (EDS)",
+  "description": "Documentation for Equinor Design System (EDS)",
   "version": "1.0.0",
   "engines": {
     "pnpm": ">=4",
-    "node": ">=10.0.0"
+    "node": ">=14.0.0"
   },
   "author": {
     "name": "EDS Core Team",
@@ -55,6 +55,16 @@
     "prettier": "2.0.5",
     "stylelint-config-recommended": "^3.0.0"
   },
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "dev": "GATSBY_STAGE=dev gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "pnpm run dev",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/equinor/design-system",
@@ -62,15 +72,5 @@
   },
   "bugs": {
     "url": "https://github.com/equinor/design-system/issues"
-  },
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "dev": "GATSBY_STAGE=dev gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "npm run dev",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }

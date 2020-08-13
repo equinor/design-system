@@ -3,5 +3,5 @@
 /../../apps/storybook-react/**
 /../../libraries/icons/**
 /../../libraries/core-react/**
-/../../libraries/tokens/**
+../../libraries/core-react/dist/core-react.umd.js
 node_modules

@@ -71,14 +71,10 @@ const ComponentStatus = () => {
             >
               <Link
                 to={`/components/${kebabify(component.component)}`}
-<<<<<<< HEAD
-                style={{ color: 'var(--moss-green)', fontSize: '0.875rem' }}
-=======
                 style={{
                   color: theme.colors.primary,
                   fontSize: '0.875em',
                 }}
->>>>>>> replace storefront with storefront-docz
               >
                 {component.component}
               </Link>
