@@ -1,13 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Pagination, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import {
-  withKnobs,
-  select,
-  text,
-  number,
-  boolean,
-} from '@storybook/addon-knobs'
+import { withKnobs, number, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 
 const Body = styled.div`
@@ -43,6 +37,15 @@ export const Variants = () => {
         With current and total items indicator
       </PaddedTypography>
       <Pagination totalItems={140} itemsPerPage={3} withItemIndicator />
+      <PaddedTypography variant="h2">Default page</PaddedTypography>
+      <Pagination
+        totalItems={140}
+        itemsPerPage={3}
+        withItemIndicator
+        defaultPage={6}
+      />
+
+      {/* TODO: Example with dropdown component */}
     </Body>
   )
 }
@@ -51,12 +54,14 @@ export const WithKnobs = () => {
   const totalItems = number('Total Items', 20)
   const itemsPerPage = number('Items per page', 1)
   const withItemIndicator = boolean('With item indicator', true)
+  const defaultPage = number('Default page', 5)
   return (
     <Body>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         withItemIndicator={withItemIndicator}
+        defaultPage={defaultPage}
       />
     </Body>
   )

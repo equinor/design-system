@@ -65,13 +65,22 @@ function getAriaLabel(page, selected) {
 }
 
 export const Pagination = forwardRef(function Pagination(
-  { totalItems, withItemIndicator, itemsPerPage, className, ...other },
+  {
+    totalItems,
+    defaultPage,
+    withItemIndicator,
+    itemsPerPage,
+    className,
+    ...other
+  },
   ref,
 ) {
   const pages = Math.ceil(totalItems / itemsPerPage) // Total page numbers
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
-  const [activePage, setActivePage] = useState(1)
+  const [activePage, setActivePage] = useState(defaultPage)
+
+  console.log(defaultPage)
 
   const currentItemFirst =
     activePage === 1 ? 1 : activePage * itemsPerPage - itemsPerPage + 1 // First number of range of items at current page
@@ -148,7 +157,6 @@ export const Pagination = forwardRef(function Pagination(
     </Navigation>
   )
 
-  // TODO: Dropdown component will be added when that component is ready
   return withItemIndicator ? (
     <FlexContainer>
       <Text>
@@ -177,8 +185,10 @@ Pagination.propTypes = {
   withItemIndicator: PropTypes.bool,
   // Choose number of items per page
   itemsPerPage: PropTypes.number,
-  // TODO: To display dropdown menu for user to choose items per page
-  // withDropdown: PropTypes.bool,
+  // Callback fired on page change
+  onChange: PropTypes.func,
+  // Default page
+  defaultPage: PropTypes.number,
   /** @ignore */
   children: PropTypes.node,
   /** @ignore */
@@ -187,8 +197,9 @@ Pagination.propTypes = {
 
 Pagination.defaultProps = {
   className: '',
+  defaultPage: 1,
   children: undefined,
   withItemIndicator: false,
-  // TODO: withDropdown: false,
-  itemsPerPage: 20,
+  itemsPerPage: 10,
+  onChange: () => {},
 }

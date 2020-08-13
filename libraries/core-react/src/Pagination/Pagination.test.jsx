@@ -4,24 +4,23 @@ import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { pagination as tokens } from './.tokens'
 import { Pagination } from '.'
 
-const { activeColor } = tokens
-
 const StyledPagination = styled(Pagination)`
-  background: red;
-  min-height: ${minHeight};
-  width: ${width};
+  position: absolute;
 `
 
 afterEach(cleanup)
 
 describe('Pagination', () => {
-  it('Has all provided content', () => {
-    render(<Pagination />)
-  })
-  it('Has scrollable content when scrollable props is present', () => {})
+  // it('Has all provided content', () => {
+  //   render(<Pagination />)
+  // })
+  // it('Has scrollable content when scrollable props is present', () => {})
 
-  it('Can extend the css for the component', () => {})
+  it('Can extend the css for the component', () => {
+    const { container } = render(<StyledPagination totalItems={10} />)
+    const pagination = container.firstChild
+    expect(pagination).toHaveStyleRule('position', 'absolute')
+  })
 })
