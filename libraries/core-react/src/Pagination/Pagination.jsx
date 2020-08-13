@@ -61,7 +61,7 @@ const Text = styled(Typography)`
 ` // TODO: Design says #000000 but looks better with default color (almost black)
 
 function getAriaLabel(page, selected) {
-  return `${selected ? 'Current page, ' : 'Go to '}page ${page}`
+  return `${selected === page ? 'Current page, ' : 'Go to '}page ${page}`
 }
 
 export const Pagination = forwardRef(function Pagination(
@@ -79,8 +79,6 @@ export const Pagination = forwardRef(function Pagination(
   const columns = pages < 5 ? pages + 2 : 7 // Total pages to display on the control + 2:  < and >
 
   const [activePage, setActivePage] = useState(defaultPage)
-
-  console.log(defaultPage)
 
   const currentItemFirst =
     activePage === 1 ? 1 : activePage * itemsPerPage - itemsPerPage + 1 // First number of range of items at current page

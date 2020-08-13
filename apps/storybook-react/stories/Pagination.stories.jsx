@@ -2,7 +2,6 @@ import React from 'react'
 import { Pagination, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, number, boolean } from '@storybook/addon-knobs'
-import { action } from '@storybook/addon-actions'
 
 const Body = styled.div`
   margin: 42px;
