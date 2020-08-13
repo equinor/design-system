@@ -43,7 +43,7 @@ export function PaginationControl(pages, activePage) {
 
     const hiddenLeft = startPage > 2 && pages > totalPagesShown // Has hidden pages on left side
     const hiddenRight = pages - endPage > 1 && pages > totalPagesShown // Has hidden pages on right side
-    console.log(endPage, pages)
+
     if (hiddenLeft && !hiddenRight) {
       pageRange = [1, ELLIPSIS, ...pageRange]
     } else if (!hiddenLeft && hiddenRight) {

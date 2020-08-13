@@ -117,6 +117,7 @@ export const Pagination = forwardRef(function Pagination(
           variant="ghost_icon"
           onClick={moveLeft}
           disabled={activePage === 1}
+          aria-label={activePage !== 1 && 'Go to previous page'}
         >
           <Icon name="chevron_left" title="previous" />
         </Button>
@@ -141,6 +142,7 @@ export const Pagination = forwardRef(function Pagination(
         <Button
           variant="ghost_icon"
           onClick={moveRight}
+          aria-label={activePage !== pages && 'Go to next page'}
           disabled={activePage === pages}
         >
           <Icon name="chevron_right" title="next" />
@@ -149,7 +151,7 @@ export const Pagination = forwardRef(function Pagination(
     </Navigation>
   )
 
-  // TODO: Dropdown component will be added when the component is ready
+  // TODO: Dropdown component will be added when that component is ready
   return showTotalItems ? (
     <FlexContainer>
       <Text>
