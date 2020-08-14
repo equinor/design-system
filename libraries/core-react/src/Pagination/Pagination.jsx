@@ -58,7 +58,7 @@ const FlexContainer = styled.div`
 
 const Text = styled(Typography)`
   white-space: nowrap;
-` // TODO: Design says #000000 but looks better with default color (almost black)
+`
 
 function getAriaLabel(page, selected) {
   return `${selected === page ? 'Current page, ' : 'Go to '}page ${page}`
