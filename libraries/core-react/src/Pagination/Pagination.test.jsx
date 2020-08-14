@@ -55,4 +55,17 @@ describe('Pagination', () => {
     expect(getAllByRole('img')[1]).toHaveAttribute('title', 'ellipsis')
     expect(getAllByRole('img')[2]).toHaveAttribute('title', 'ellipsis')
   })
+  it('should render next and previous buttons', () => {
+    const { getAllByRole } = render(
+      <Pagination totalItems={3} itemsPerPage={1} />,
+    )
+    expect(getAllByRole('button')[0]).toHaveAttribute(
+      'aria-label',
+      'Go to previous page',
+    )
+    expect(getAllByRole('button')[4]).toHaveAttribute(
+      'aria-label',
+      'Go to next page',
+    )
+  })
 })

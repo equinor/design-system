@@ -140,8 +140,8 @@ export const Pagination = forwardRef(function Pagination(
                 />
               </ListItem>
             ) : (
-              // eslint-disable-next-line react/no-array-index-key
               <StyledIcon
+                // eslint-disable-next-line react/no-array-index-key
                 key={'ellipsis-' + index}
                 name="more_horizontal"
                 title="ellipsis"
