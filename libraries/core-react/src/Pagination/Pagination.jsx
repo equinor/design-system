@@ -129,7 +129,7 @@ export const Pagination = forwardRef(function Pagination(
           items.map((page, index) =>
             page !== 'ELLIPSIS' ? (
               // eslint-disable-next-line react/no-array-index-key
-              <ListItem key={index}>
+              <ListItem key={'list-item' + index}>
                 <PaginationItem
                   {...page}
                   aria-label={getAriaLabel(page, activePage)}
@@ -140,7 +140,12 @@ export const Pagination = forwardRef(function Pagination(
                 />
               </ListItem>
             ) : (
-              <StyledIcon name="more_horizontal" title="ellipsis" />
+              // eslint-disable-next-line react/no-array-index-key
+              <StyledIcon
+                key={'ellipsis-' + index}
+                name="more_horizontal"
+                title="ellipsis"
+              />
             ),
           )}
         <Button

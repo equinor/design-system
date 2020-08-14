@@ -36,10 +36,23 @@ describe('Pagination', () => {
       'Current page, page 3',
     )
   })
-  it('should render correct amount of pages', () => {
+  it('should render correct number of pages', () => {
     const { getAllByRole } = render(
       <Pagination totalItems={4} itemsPerPage={1} />,
     )
     expect(getAllByRole('listitem')).toHaveLength(4)
+  })
+  it('should render one ellipsis if number of pages is larger than 7', () => {
+    const { getAllByRole } = render(
+      <Pagination totalItems={8} itemsPerPage={1} />,
+    )
+    expect(getAllByRole('img')[1]).toHaveAttribute('title', 'ellipsis')
+  })
+  it('should render two ellipsises if number of pages is larger than 9 and default page is 5', () => {
+    const { getAllByRole } = render(
+      <Pagination totalItems={9} itemsPerPage={1} defaultPage={5} />,
+    )
+    expect(getAllByRole('img')[1]).toHaveAttribute('title', 'ellipsis')
+    expect(getAllByRole('img')[2]).toHaveAttribute('title', 'ellipsis')
   })
 })
