@@ -24,11 +24,7 @@ export default {
 export const Variants = () => {
   return (
     <Body>
-      <PaddedTypography variant="h2">Short</PaddedTypography>
-      <Pagination totalItems={3} itemsPerPage={1} />
-      <PaddedTypography variant="h2">
-        Normal length before truncation
-      </PaddedTypography>
+      <PaddedTypography variant="h2">Length before truncation</PaddedTypography>
       <Pagination totalItems={7} itemsPerPage={1} />
       <PaddedTypography variant="h2">Truncated</PaddedTypography>
       <Pagination totalItems={8} itemsPerPage={1} />

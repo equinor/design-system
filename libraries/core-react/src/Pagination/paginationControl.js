@@ -38,7 +38,7 @@ export function PaginationControl(pages, activePage) {
         : pages
 
     const endPage = Math.min(pages, endOffset) // the last page before right ellipsis
-    pageRange = range(startPage, endPage) // range in between ellipsis(es). Ex: range(4, 6) =  1 ... 4 5 6 ... 10
+    pageRange = range(startPage, endPage) // range in between ellipsis(es). Ex: range(4, 6) =  1 ... ( 4 5 6 )  ... 10
 
     const hiddenLeft = startPage > 2 && pages > totalPagesShown // Has hidden pages on left side
     const hiddenRight = pages - endPage > 1 && pages > totalPagesShown // Has hidden pages on right side
