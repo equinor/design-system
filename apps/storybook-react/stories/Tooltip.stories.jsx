@@ -28,7 +28,9 @@ const Wrapper = styled.div`
 
 const TextWrapper = styled.div`
   margin-bottom: 32px;
+  width: 800px;
 `
+
 export default {
   title: 'Components|Tooltip',
   component: Tooltip,
@@ -152,16 +154,30 @@ export const WithKnobs = () => {
   )
 }
 
-export function disabledTest() {
+export function WithDisabledElements() {
   return (
     <Body>
+      <TextWrapper>
+        <Typography variant="h3">Tooltip with disabled elements</Typography>
+        <Typography variant="body_long">
+          Firefox, Edge and Chrome supports tooltip on disabled elements.
+        </Typography>
+        <Typography variant="body_long">
+          If you have Safari users, you will need to add inline style to your
+          disabled element, shown in the example below. This will help trigger
+          the mouse events correctly. Unfortunately, this workaround overwrites
+          the &apos;not-allowed&apos; cursor.
+        </Typography>
+      </TextWrapper>
       <Wrapper>
         <Tooltip title="Tooltip" placement="topLeft">
           <Button disabled>Disabled</Button>
         </Tooltip>
 
         <Tooltip title="Tooltip" placement="topLeft">
-          <Button disabled>Disabled</Button>
+          <Button style={{ pointerEvents: 'none' }} disabled>
+            Disabled for Safari Browser
+          </Button>
         </Tooltip>
       </Wrapper>
     </Body>

@@ -1,7 +1,6 @@
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-//import { Button } from '..'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { tooltip as tokens } from './Tooltip.tokens'
 
@@ -62,16 +61,13 @@ export const Tooltip = forwardRef(function Tooltip(
   { className, title, children, placement, open, ...rest },
   ref,
 ) {
-  console.log('tooltip', children)
   const [openState, setOpenState] = useState(open)
 
   const handleOpen = () => {
-    console.log('open')
     setOpenState(true)
   }
 
   const handleClose = () => {
-    console.log('close')
     setOpenState(false)
   }
 
