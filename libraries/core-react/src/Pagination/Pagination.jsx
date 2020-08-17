@@ -30,7 +30,7 @@ const Navigation = styled.nav`
     withItemIndicator ? tokens.spacingSmall : 0};
 `
 
-const UnorderedList = styled.ol`
+const OrderedList = styled.ol`
   list-style: none;
   margin: 0;
   padding: 0;
@@ -112,19 +112,22 @@ export const Pagination = forwardRef(function Pagination(
 
   const pagination = (
     <Navigation aria-label="pagination" {...props}>
-      <UnorderedList
+      <OrderedList
         style={{
           gridTemplateColumns: 'repeat(' + columns + ', 48px)',
         }}
       >
-        <Button
-          variant="ghost_icon"
-          onClick={moveLeft}
-          disabled={activePage === 1}
-          aria-label="Go to previous page"
-        >
-          <Icon name="chevron_left" title="previous" />
-        </Button>
+        <ListItem>
+          <Button
+            variant="ghost_icon"
+            onClick={moveLeft}
+            disabled={activePage === 1}
+            aria-label="Go to previous page"
+          >
+            <Icon name="chevron_left" title="previous" />
+          </Button>
+        </ListItem>
+
         {items.length > 0 &&
           items.map((page, index) =>
             page !== 'ELLIPSIS' ? (
@@ -140,23 +143,27 @@ export const Pagination = forwardRef(function Pagination(
                 />
               </ListItem>
             ) : (
-              <StyledIcon
-                // eslint-disable-next-line react/no-array-index-key
-                key={'ellipsis-' + index}
-                name="more_horizontal"
-                title="ellipsis"
-              />
+              <ListItem>
+                <StyledIcon
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={'ellipsis-' + index}
+                  name="more_horizontal"
+                  title="ellipsis"
+                />
+              </ListItem>
             ),
           )}
-        <Button
-          variant="ghost_icon"
-          onClick={moveRight}
-          aria-label="Go to next page"
-          disabled={activePage === pages}
-        >
-          <Icon name="chevron_right" title="next" />
-        </Button>
-      </UnorderedList>
+        <ListItem>
+          <Button
+            variant="ghost_icon"
+            onClick={moveRight}
+            aria-label="Go to next page"
+            disabled={activePage === pages}
+          >
+            <Icon name="chevron_right" title="next" />
+          </Button>
+        </ListItem>
+      </OrderedList>
     </Navigation>
   )
 
