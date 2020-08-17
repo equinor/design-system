@@ -48,7 +48,9 @@ const parseUrl = (url) => {
   //  '_',
   //)
   const splitOnFile = url.split(/(file\/.*?\/)/)
-  const fileId = splitOnFile[1].split(/(\/)/)[2] || ''
+  const fileId =
+    splitOnFile && splitOnFile.length > 1 ? splitOnFile[1].split(/(\/)/)[2] : ''
+
   const nodeId = url.split(/(node-id=)/)[2].replace('%3A', '_') || ''
 
   if (!fileId || !nodeId) {
@@ -94,7 +96,6 @@ const FigmaImage = ({ url, alt = 'Design in Figma' }) => {
             🙈
           </Image>
           Ops! Can&apos;t find the image, but you could still try Figma.
-          <span>Debug info: {url}</span>
         </div>
       )}
     </Container>
