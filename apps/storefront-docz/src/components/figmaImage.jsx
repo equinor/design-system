@@ -50,8 +50,11 @@ const parseUrl = (url) => {
   const splitOnFile = url.split(/(file\/.*?\/)/)
   const fileId =
     splitOnFile && splitOnFile.length > 1 ? splitOnFile[1].split(/(\/)/)[2] : ''
-
-  const nodeId = url.split(/(node-id=)/)[2].replace('%3A', '_') || ''
+  const splitOnNodeId = url.split(/(node-id=)/)
+  const nodeId =
+    splitOnNodeId && splitOnNodeId.length > 2
+      ? splitOnNodeId[2].replace('%3A', '_')
+      : ''
 
   if (!fileId || !nodeId) {
     return ''
