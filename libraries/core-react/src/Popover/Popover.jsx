@@ -10,6 +10,7 @@ const Container = styled.div`
 `
 
 const Anchor = styled.div`
+  margin-right: auto;
   &:focus {
     outline: none;
   }
