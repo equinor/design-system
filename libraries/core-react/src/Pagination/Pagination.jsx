@@ -117,7 +117,7 @@ export const Pagination = forwardRef(function Pagination(
           gridTemplateColumns: 'repeat(' + columns + ', 48px)',
         }}
       >
-        <ListItem>
+        <ListItem key="previous">
           <Button
             variant="ghost_icon"
             onClick={moveLeft}
@@ -143,17 +143,15 @@ export const Pagination = forwardRef(function Pagination(
                 />
               </ListItem>
             ) : (
-              <ListItem>
-                <StyledIcon
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={'ellipsis-' + index}
-                  name="more_horizontal"
-                  title="ellipsis"
-                />
+              <ListItem
+                // eslint-disable-next-line react/no-array-index-key
+                key={'ellipsis-' + index}
+              >
+                <StyledIcon name="more_horizontal" title="ellipsis" />
               </ListItem>
             ),
           )}
-        <ListItem>
+        <ListItem key="next">
           <Button
             variant="ghost_icon"
             onClick={moveRight}

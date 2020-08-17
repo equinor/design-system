@@ -29,9 +29,13 @@ describe('Pagination', () => {
     )
     expect(getAllByRole('listitem')[0].firstChild).toHaveAttribute(
       'aria-label',
+      'Go to previous page',
+    )
+    expect(getAllByRole('listitem')[1].firstChild).toHaveAttribute(
+      'aria-label',
       'Go to page 1',
     )
-    expect(getAllByRole('listitem')[2].firstChild).toHaveAttribute(
+    expect(getAllByRole('listitem')[3].firstChild).toHaveAttribute(
       'aria-label',
       'Current page, page 3',
     )
@@ -40,9 +44,9 @@ describe('Pagination', () => {
     const { getAllByRole } = render(
       <Pagination totalItems={4} itemsPerPage={1} />,
     )
-    expect(getAllByRole('listitem')).toHaveLength(4)
+    expect(getAllByRole('listitem')).toHaveLength(6) // totalItems + 2: the < + > buttons)
   })
-  it('should render one ellipsis if number of pages is larger than 7', () => {
+  it('should render ellipsis if number of pages is larger than 7', () => {
     const { getAllByRole } = render(
       <Pagination totalItems={8} itemsPerPage={1} />,
     )
