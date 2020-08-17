@@ -30,7 +30,7 @@ const Navigation = styled.nav`
     withItemIndicator ? tokens.spacingSmall : 0};
 `
 
-const UnorderedList = styled.ul`
+const UnorderedList = styled.ol`
   list-style: none;
   margin: 0;
   padding: 0;
