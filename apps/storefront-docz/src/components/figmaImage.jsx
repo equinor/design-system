@@ -41,11 +41,15 @@ const Title = styled(Link)`
 `
 
 const parseUrl = (url) => {
-  const fileId = (/(?<=file\/).*(?=\/)/.exec(url) || [])[0] || ''
-  const nodeId = ((/(?<=node-id=).*/.exec(url) || [])[0] || '').replace(
-    '%3A',
-    '_',
-  )
+  // Can't use lookbehind because of Safari's lack of support
+  //const fileId = (/(?<=file\/).*(?=\/)/.exec(url) || [])[0] || ''
+  //const nodeId = ((/(?<=node-id=).*/.exec(url) || [])[0] || '').replace(
+  //  '%3A',
+  //  '_',
+  //)
+  const splitOnFile = url.split(/(file\/.*?\/)/)
+  const fileId = splitOnFile[1].split(/(\/)/)[2] || ''
+  const nodeId = url.split(/(node-id=)/)[2].replace('%3A', '_') || ''
 
   if (!fileId || !nodeId) {
     return ''
@@ -90,6 +94,7 @@ const FigmaImage = ({ url, alt = 'Design in Figma' }) => {
             🙈
           </Image>
           Ops! Can&apos;t find the image, but you could still try Figma.
+          <span>Debug info: {url}</span>
         </div>
       )}
     </Container>
