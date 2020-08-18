@@ -41,11 +41,20 @@ const Title = styled(Link)`
 `
 
 const parseUrl = (url) => {
-  const fileId = (/(?<=file\/).*(?=\/)/.exec(url) || [])[0] || ''
-  const nodeId = ((/(?<=node-id=).*/.exec(url) || [])[0] || '').replace(
-    '%3A',
-    '_',
-  )
+  // Can't use lookbehind because of Safari's lack of support
+  //const fileId = (/(?<=file\/).*(?=\/)/.exec(url) || [])[0] || ''
+  //const nodeId = ((/(?<=node-id=).*/.exec(url) || [])[0] || '').replace(
+  //  '%3A',
+  //  '_',
+  //)
+  const splitOnFile = url.split(/(file\/.*?\/)/)
+  const fileId =
+    splitOnFile && splitOnFile.length > 1 ? splitOnFile[1].split(/(\/)/)[2] : ''
+  const splitOnNodeId = url.split(/(node-id=)/)
+  const nodeId =
+    splitOnNodeId && splitOnNodeId.length > 2
+      ? splitOnNodeId[2].replace('%3A', '_')
+      : ''
 
   if (!fileId || !nodeId) {
     return ''
