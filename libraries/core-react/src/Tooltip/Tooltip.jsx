@@ -95,7 +95,12 @@ export const Tooltip = forwardRef(function Tooltip(
   return (
     <Wrapper {...props}>
       <Anchor
+        tabIndex={0}
         onMouseOver={handleOpen}
+        onMouseEnter={handleOpen}
+        onPointerEnter={handleOpen}
+        onPointerLeave={handleClose}
+        onMouseOut={handleClose}
         onMouseLeave={handleClose}
         onBlur={handleClose}
         onFocus={handleOpen}
