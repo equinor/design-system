@@ -2,14 +2,7 @@ import React, { useEffect } from 'react'
 import { withKnobs } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import {
-  Menu,
-  Typography,
-  Button,
-  Icon,
-  Divider,
-  TopBar,
-} from '@equinor/eds-core-react'
+import { Menu, Typography, Button, Icon, TopBar } from '@equinor/eds-core-react'
 
 import { tokens } from '@equinor/eds-tokens'
 
