@@ -23,11 +23,8 @@ const ListItem = styled.li.attrs(() => ({
   }
 `
 
-export const MenuSection = React.memo(function EdsMenuSection({
-  children,
-  title,
-  index,
-}) {
+export const MenuSection = React.memo(function EdsMenuSection(props) {
+  const { children, title, index } = props
   return (
     <>
       {index !== 0 && (
