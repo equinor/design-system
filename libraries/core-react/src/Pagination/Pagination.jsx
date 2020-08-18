@@ -71,6 +71,7 @@ export const Pagination = forwardRef(function Pagination(
     withItemIndicator,
     itemsPerPage,
     className,
+    onChange,
     ...other
   },
   ref,
@@ -85,19 +86,11 @@ export const Pagination = forwardRef(function Pagination(
   const currentItemLast =
     activePage === pages ? totalItems : activePage * itemsPerPage // Last number of range of items at current page
 
-  const handleClick = (page) => () => {
+  const onPageChange = (event, page) => {
     setActivePage(page)
-  }
-
-  const moveLeft = () => {
-    if (activePage > 1) {
-      setActivePage(activePage - 1)
-    }
-  }
-
-  const moveRight = () => {
-    if (activePage < pages) {
-      setActivePage(activePage + 1)
+    if (onChange) {
+      // Callback for provided onChange func
+      onChange(event, page)
     }
   }
 
@@ -120,7 +113,12 @@ export const Pagination = forwardRef(function Pagination(
         <ListItem key="previous">
           <Button
             variant="ghost_icon"
-            onClick={moveLeft}
+            onClick={
+              activePage > 1 &&
+              ((event) => {
+                onPageChange(event, activePage - 1)
+              })
+            }
             disabled={activePage === 1}
             aria-label="Go to previous page"
           >
@@ -139,7 +137,9 @@ export const Pagination = forwardRef(function Pagination(
                   aria-current={activePage}
                   page={page}
                   selected={page === activePage}
-                  onClick={handleClick(page)}
+                  onClick={(event) => {
+                    onPageChange(event, page)
+                  }}
                 />
               </ListItem>
             ) : (
@@ -154,7 +154,12 @@ export const Pagination = forwardRef(function Pagination(
         <ListItem key="next">
           <Button
             variant="ghost_icon"
-            onClick={moveRight}
+            onClick={
+              activePage < pages &&
+              ((event) => {
+                onPageChange(event, activePage + 1)
+              })
+            }
             aria-label="Go to next page"
             disabled={activePage === pages}
           >
