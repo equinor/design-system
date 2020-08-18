@@ -92,7 +92,7 @@ export async function createTokens(ctx) {
 
   writeJSTokens(tokens)
   // writeJsonTokens(tokens)
-  writeCSSTokens(tokens)
+  // writeCSSTokens(tokens)
 
   return tokens
 }
