@@ -14,7 +14,7 @@ const {
 } = tokens
 
 export default {
-  title: 'Components|Divider',
+  title: 'Components/Divider',
   parameters: {
     docs: {
       page: mdx,

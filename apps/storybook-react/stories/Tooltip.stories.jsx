@@ -30,7 +30,7 @@ const TextWrapper = styled.div`
   margin-bottom: 32px;
 `
 export default {
-  title: 'Components|Tooltip',
+  title: 'Components/Tooltip',
   component: Tooltip,
   decorators: [withKnobs],
 }

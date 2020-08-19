@@ -5,7 +5,7 @@ import './../style.css'
 const { Body, Row, Cell, Head } = Table
 
 export default {
-  title: 'Components|Table',
+  title: 'Components/Table',
   component: Table,
 }
 

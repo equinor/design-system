@@ -34,7 +34,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Icon',
+  title: 'Components/Icon',
   component: Icon,
   decorators: [withKnobs],
 }

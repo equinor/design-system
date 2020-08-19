@@ -25,7 +25,7 @@ const TestContent = styled.div`
 `
 
 export default {
-  title: 'Components|Scrim',
+  title: 'Components/Scrim',
   component: Scrim,
 }
 

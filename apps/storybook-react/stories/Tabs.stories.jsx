@@ -8,7 +8,7 @@ const { TabList, Tab, TabPanels, TabPanel } = Tabs
 const noop = () => {}
 
 export default {
-  title: 'Components|Tabs',
+  title: 'Components/Tabs',
   component: Tabs,
 }
 

@@ -32,7 +32,7 @@ const IconWithMarginProp = styled(Icon)(addMarginRightProp)
 const ButtonWithMarginProp = styled(Button)(addMarginRightProp)
 
 export default {
-  title: 'Components|Accordion',
+  title: 'Components/Accordion',
   parameters: {
     docs: { page: mdx },
   },

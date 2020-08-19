@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Typography',
+  title: 'Components/Typography',
   component: Typography,
 }
 

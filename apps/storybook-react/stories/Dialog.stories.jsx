@@ -83,7 +83,7 @@ const ACTION_CHOICES = {
 }
 
 export default {
-  title: 'Components|Dialog',
+  title: 'Components/Dialog',
   component: Dialog,
 }
 
