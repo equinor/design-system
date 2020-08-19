@@ -135,7 +135,7 @@ export const Sidebar = ({ className, open, onClick }) => {
         R.filter(handleDrafts),
         R.reduce((acc, { title, route }) => [...acc, { title, route }], []),
       )(docs),
-    [],
+    [docs],
   )
 
   return (
