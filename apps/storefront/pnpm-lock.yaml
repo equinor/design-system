@@ -29,6 +29,7 @@ dependencies:
   polished: 3.6.5
   prop-types: 15.7.2
   query-string: 6.13.1
+  ramda: 0.27.1
   react: 16.13.1
   react-docgen-props-table: 1.0.3_react-dom@16.13.1+react@16.13.1
   react-dom: 16.13.1_react@16.13.1
@@ -12971,6 +12972,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-VhlMZmGy6A6hrkJWHLNTGl5gtgMUm+xfGza6wbwnE914yeQ5Ybm18vgM734RZhMgfw4tacUrWseGZlpUrrakEQ==
+  /ramda/0.27.1:
+    dev: false
+    resolution:
+      integrity: sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -17150,6 +17155,7 @@ specifiers:
   prettier: 2.0.5
   prop-types: ^15.7.2
   query-string: ^6.13.1
+  ramda: ^0.27.1
   react: ^16.12.0
   react-docgen-props-table: ^1.0.3
   react-dom: ^16.12.0

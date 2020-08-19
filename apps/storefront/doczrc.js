@@ -23,42 +23,34 @@ export default {
     {
       title: 'Getting Started',
       route: '/getting-started/',
-      children: [],
     },
     {
       title: 'Guidelines',
       route: '/guidelines/',
-      children: [],
     },
     {
       title: 'Assets',
       route: '/assets/',
-      children: [],
     },
     {
       title: 'Components',
       route: '/components/',
-      children: [],
     },
     {
       title: 'Patterns',
       route: '/patterns/',
-      children: [],
     },
     {
       title: 'Updates',
       route: '/updates/',
-      children: [],
     },
     {
       title: 'Help',
       route: '/help/',
-      children: [],
     },
     {
       title: 'Contributing',
       route: '/contributing/',
-      children: [],
     },
   ],
 }
