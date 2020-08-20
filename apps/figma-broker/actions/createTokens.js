@@ -84,7 +84,7 @@ const writeCSSTokens = (tokens) => {
   writeFile(PATHS.TOKENS, 'elements', 'css', elements)
 }
 
-export async function createTokens() {
+export async function createTokens(ctx) {
   const data = await fetchFigmaFile(FILE_IDS.TOKENS)
 
   const figmaFile = processFigmaFile(data)
@@ -92,7 +92,7 @@ export async function createTokens() {
 
   writeJSTokens(tokens)
   // writeJsonTokens(tokens)
-  // writeCSSTokens(tokens)
+  writeCSSTokens(tokens)
 
   return tokens
 }
