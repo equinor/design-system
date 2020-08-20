@@ -7,7 +7,6 @@ import {
   isNotEmpty,
 } from '@utils'
 import { fillToRgba, fillToHex, fillToHsla, toCSSVars } from '@transformers'
-import { colors } from '../../../../libraries/tokens/base/colors'
 
 const findMode = (name) => {
   if (/⚫/.test(name)) {
@@ -64,7 +63,7 @@ export const makeColorToken = (colors, getStyle) =>
         mode,
       }
     }),
-    toDictMode,
+    toDictDeep,
   )(colors)
 
 export const makeColorCss = R.pipe(
@@ -82,5 +81,3 @@ export const makeColorCss = R.pipe(
   R.flatten,
   toCSSVars,
 )
-
-const darkTheme = { ...colors, ...colors.modes.dark }
