@@ -6,7 +6,7 @@ import { tooltip as tokens } from './Tooltip.tokens'
 
 const Wrapper = styled.div`
   position: relative;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
 `
 
@@ -24,6 +24,7 @@ const StyledTooltipWrapper = styled.div`
       transform: ${transform};
     `}
   position: absolute;
+  align-self: center;
   z-index: 500;
   white-space: nowrap;
   ::after {
