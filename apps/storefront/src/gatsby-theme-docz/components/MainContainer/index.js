@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCurrentDoc } from 'docz'
+import { Helmet } from 'react-helmet-async'
 import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
 import { H1 } from '../../../components/Titles'
 import { Tabs, Tab, TabLink } from '../../../components/Tabs'
@@ -107,6 +108,13 @@ const Content = styled.div`
 `
 const LandingPage = styled.div``
 
+const Placeholder = styled.div`
+  background: orange;
+  height: 100vh;
+  display: grid;
+  place-items: center center;
+`
+
 export const MainContainer = ({ children, doc, ...rest }) => {
   const {
     tabs,
@@ -121,75 +129,91 @@ export const MainContainer = ({ children, doc, ...rest }) => {
   const isContentPage = type !== 'landingPage'
   const isPublished = (mode || '').toLowerCase() === 'publish'
   const current = useCurrentDoc()
+  const isPrivate =
+    mode.toLowerCase() === 'draft' && process.env.GATSBY_STAGE === 'prod'
 
   return (
     <main {...rest} id="main">
       {isContentPage ? (
-        <>
-          <ContentHeader withTabs={withTabs}>
-            <H1>
-              {title}
-              {!isPublished && (
-                <span className={`ModeBadge ModeBadge--${mode}`}>
-                  {mode && `(${mode})`}
-                </span>
+        isPrivate ? (
+          <>
+            <Helmet>
+              <meta name="robots" content="noindex" />
+            </Helmet>
+            <ContentHeader>
+              <H1>Placeholder</H1>
+            </ContentHeader>
+          </>
+        ) : (
+          <>
+            <ContentHeader withTabs={withTabs}>
+              <H1>
+                {title}{' '}
+                {!isPublished && (
+                  <span className={`ModeBadge ModeBadge--${mode}`}>
+                    {mode && `(${mode})`}
+                  </span>
+                )}
+              </H1>
+              {tabs && (
+                <nav aria-label="tabbed content navigation">
+                  <Tabs>
+                    {tabs.map((tab, index) => {
+                      const routeSegment = tab.toLowerCase().replace(/\s/g, '-')
+                      const firstTwoRouteSegments = /^\/([a-z-]+\/?){2}/
+                      const categoryRoute = route.match(
+                        firstTwoRouteSegments,
+                      )[0]
+
+                      const addTrailingSlash = (str) =>
+                        str.substring(str.length - 1) === '/' ? '' : '/'
+
+                      const tabRoute = `${categoryRoute}${addTrailingSlash(
+                        categoryRoute,
+                      )}${index > 0 ? `${routeSegment}/` : ''}`
+
+                      return (
+                        <Tab key={tab}>
+                          <TabLink
+                            isSelected={current.route === tabRoute}
+                            href={tabRoute}
+                          >
+                            {tab}
+                          </TabLink>
+                        </Tab>
+                      )
+                    })}
+                  </Tabs>
+                </nav>
               )}
-            </H1>
-            {tabs && (
-              <nav aria-label="tabbed content naviagtion">
-                <Tabs>
-                  {tabs.map((tab, index) => {
-                    const routeSegment = tab.toLowerCase().replace(/\s/g, '-')
-                    const firstTwoRouteSegments = /^\/([a-z-]+\/?){2}/
-                    const categoryRoute = route.match(firstTwoRouteSegments)[0]
-
-                    const addTrailingSlash = (str) =>
-                      str.substring(str.length - 1) === '/' ? '' : '/'
-
-                    const tabRoute = `${categoryRoute}${addTrailingSlash(
-                      categoryRoute,
-                    )}${index > 0 ? `${routeSegment}/` : ''}`
-
+            </ContentHeader>
+            <Wrapper>
+              {toc && (
+                <StyledTableOfContents sticky label="Content">
+                  {toc.map((item) => {
                     return (
-                      <Tab key={tab}>
-                        <TabLink
-                          isSelected={current.route === tabRoute}
-                          href={tabRoute}
+                      <LinkItem key={item}>
+                        <Typography
+                          variant="body_short"
+                          link
+                          href={`#${slugify(item)}`}
                         >
-                          {tab}
-                        </TabLink>
-                      </Tab>
+                          <Icon name="subdirectory_arrow_right" size={16} />
+                          <span>{item}</span>
+                        </Typography>
+                      </LinkItem>
                     )
                   })}
-                </Tabs>
-              </nav>
-            )}
-          </ContentHeader>
-          <Wrapper>
-            {toc && (
-              <StyledTableOfContents sticky label="Content">
-                {toc.map((item) => {
-                  return (
-                    <LinkItem key={item}>
-                      <Typography
-                        variant="body_short"
-                        link
-                        href={`#${slugify(item)}`}
-                      >
-                        <Icon name="subdirectory_arrow_right" size={16} />
-                        <span>{item}</span>
-                      </Typography>
-                    </LinkItem>
-                  )
-                })}
-              </StyledTableOfContents>
-            )}
-            <Content>
-              {children}
-              <EditPageOnGithub slug={slug} />
-            </Content>
-          </Wrapper>
-        </>
+                </StyledTableOfContents>
+              )}
+              <Content>
+                {children}
+
+                <EditPageOnGithub slug={slug} />
+              </Content>
+            </Wrapper>
+          </>
+        )
       ) : (
         <LandingPage>{children}</LandingPage>
       )}
