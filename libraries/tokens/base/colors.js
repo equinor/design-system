@@ -1,9 +1,9 @@
 export const colors = {
   text: {
-    static_icons__primary: {
-      hex: '#ffffff',
-      hsla: 'hsla(0, 0%, 100%, 1)',
-      rgba: 'rgba(255, 255, 255, 1)',
+    static_icons__default: {
+      hex: '#3d3d3d',
+      hsla: 'hsla(0, 0%, 23.9%, 1)',
+      rgba: 'rgba(61, 61, 61, 1)',
     },
     static_icons__secondary: {
       hex: '#565656',
@@ -15,21 +15,6 @@ export const colors = {
       hsla: 'hsla(0, 0%, 43.5%, 1)',
       rgba: 'rgba(111, 111, 111, 1)',
     },
-    static_icons__primary_black: {
-      hex: '#000000',
-      hsla: 'hsla(0, 0%, 0%, 1)',
-      rgba: 'rgba(0, 0, 0, 1)',
-    },
-    static_icons__secondary_black: {
-      hex: '#000000',
-      hsla: 'hsla(0, 0%, 0%, 0.74)',
-      rgba: 'rgba(0, 0, 0, 0.74)',
-    },
-    static_icons__default: {
-      hex: '#3d3d3d',
-      hsla: 'hsla(0, 0%, 23.9%, 1)',
-      rgba: 'rgba(61, 61, 61, 1)',
-    },
     static_icons__primary_white: {
       hex: '#ffffff',
       hsla: 'hsla(0, 0%, 100%, 1)',
@@ -38,9 +23,9 @@ export const colors = {
   },
   ui: {
     background__default: {
-      hex: '#132634',
-      hsla: 'hsla(205, 46.5%, 13.9%, 1)',
-      rgba: 'rgba(19, 38, 52, 1)',
+      hex: '#ffffff',
+      hsla: 'hsla(0, 0%, 100%, 1)',
+      rgba: 'rgba(255, 255, 255, 1)',
     },
     background__light: {
       hex: '#f7f7f7',
@@ -53,9 +38,9 @@ export const colors = {
       rgba: 'rgba(0, 0, 0, 0.4)',
     },
     background__overlay: {
-      hex: '#2e3f4d',
-      hsla: 'hsla(207, 25.2%, 24.1%, 1)',
-      rgba: 'rgba(46, 63, 77, 1)',
+      hex: '#000000',
+      hsla: 'hsla(0, 0%, 0%, 0.8)',
+      rgba: 'rgba(0, 0, 0, 0.8)',
     },
     background__medium: {
       hex: '#dcdcdc',
@@ -76,36 +61,6 @@ export const colors = {
       hex: '#ffc1c1',
       hsla: 'hsla(0, 100%, 87.8%, 1)',
       rgba: 'rgba(255, 193, 193, 1)',
-    },
-    background__none__above_scrim: {
-      hex: '#132634',
-      hsla: 'hsla(205, 46.5%, 13.9%, 1)',
-      rgba: 'rgba(19, 38, 52, 1)',
-    },
-    background__raised: {
-      hex: '#243746',
-      hsla: 'hsla(206, 32.1%, 20.8%, 1)',
-      rgba: 'rgba(36, 55, 70, 1)',
-    },
-    background__sticky: {
-      hex: '#364855',
-      hsla: 'hsla(205, 22.3%, 27.3%, 1)',
-      rgba: 'rgba(54, 72, 85, 1)',
-    },
-    background__temporary_nav: {
-      hex: '#3e4f5c',
-      hsla: 'hsla(206, 19.5%, 30.2%, 1)',
-      rgba: 'rgba(62, 79, 92, 1)',
-    },
-    background__medium_divider: {
-      hex: '#ffffff',
-      hsla: 'hsla(0, 0%, 100%, 0.16)',
-      rgba: 'rgba(255, 255, 255, 0.16)',
-    },
-    background__negative: {
-      hex: '#ffffff',
-      hsla: 'hsla(0, 0%, 100%, 1)',
-      rgba: 'rgba(255, 255, 255, 1)',
     },
   },
   infographic: {
@@ -248,6 +203,11 @@ export const colors = {
       hsla: 'hsla(138, 66.7%, 94.1%, 1)',
       rgba: 'rgba(230, 250, 236, 1)',
     },
+    primary__selected_hover: {
+      hex: '#c3f3d2',
+      hsla: 'hsla(139, 66.7%, 85.9%, 1)',
+      rgba: 'rgba(195, 243, 210, 1)',
+    },
     primary__resting: {
       hex: '#007079',
       hsla: 'hsla(184, 100%, 23.7%, 1)',
@@ -257,11 +217,6 @@ export const colors = {
       hex: '#004f55',
       hsla: 'hsla(184, 100%, 16.7%, 1)',
       rgba: 'rgba(0, 79, 85, 1)',
-    },
-    primary__selected_hover: {
-      hex: '#c3f3d2',
-      hsla: 'hsla(139, 66.7%, 85.9%, 1)',
-      rgba: 'rgba(195, 243, 210, 1)',
     },
     primary__hover_alt: {
       hex: '#deedee',
@@ -289,19 +244,19 @@ export const colors = {
       rgba: 'rgba(255, 193, 193, 1)',
     },
     danger__resting: {
-      hex: '#f36666',
-      hsla: 'hsla(0, 85.5%, 67.6%, 1)',
-      rgba: 'rgba(243, 102, 102, 1)',
+      hex: '#eb0000',
+      hsla: 'hsla(0, 100%, 46.1%, 1)',
+      rgba: 'rgba(235, 0, 0, 1)',
     },
     danger__hover: {
-      hex: '#f68e8e',
-      hsla: 'hsla(0, 85.2%, 76.1%, 1)',
-      rgba: 'rgba(246, 142, 142, 1)',
+      hex: '#b30d2f',
+      hsla: 'hsla(348, 86.5%, 37.6%, 1)',
+      rgba: 'rgba(179, 13, 47, 1)',
     },
     danger__text: {
-      hex: '#f68e8e',
-      hsla: 'hsla(0, 85.2%, 76.1%, 1)',
-      rgba: 'rgba(246, 142, 142, 1)',
+      hex: '#b30d2f',
+      hsla: 'hsla(348, 86.5%, 37.6%, 1)',
+      rgba: 'rgba(179, 13, 47, 1)',
     },
     warning__highlight: {
       hex: '#ffe7d6',
@@ -309,19 +264,19 @@ export const colors = {
       rgba: 'rgba(255, 231, 214, 1)',
     },
     warning__resting: {
-      hex: '#ffbe66',
-      hsla: 'hsla(35, 100%, 70%, 1)',
-      rgba: 'rgba(255, 190, 102, 1)',
+      hex: '#ff9200',
+      hsla: 'hsla(34, 100%, 50%, 1)',
+      rgba: 'rgba(255, 146, 0, 1)',
     },
     warning__hover: {
-      hex: '#ffcf8f',
-      hsla: 'hsla(34, 100%, 78%, 1)',
-      rgba: 'rgba(255, 207, 143, 1)',
+      hex: '#ad6200',
+      hsla: 'hsla(34, 100%, 33.9%, 1)',
+      rgba: 'rgba(173, 98, 0, 1)',
     },
     warning__text: {
-      hex: '#ffcf8f',
-      hsla: 'hsla(34, 100%, 78%, 1)',
-      rgba: 'rgba(255, 207, 143, 1)',
+      hex: '#ad6200',
+      hsla: 'hsla(34, 100%, 33.9%, 1)',
+      rgba: 'rgba(173, 98, 0, 1)',
     },
     success__highlight: {
       hex: '#e6faec',
@@ -329,31 +284,26 @@ export const colors = {
       rgba: 'rgba(230, 250, 236, 1)',
     },
     success__resting: {
-      hex: '#93d491',
-      hsla: 'hsla(118, 43.8%, 70%, 1)',
-      rgba: 'rgba(147, 212, 145, 1)',
+      hex: '#4bb748',
+      hsla: 'hsla(118, 43.5%, 50%, 1)',
+      rgba: 'rgba(75, 183, 72, 1)',
     },
     success__hover: {
-      hex: '#b0dfae',
-      hsla: 'hsla(118, 43.4%, 77.8%, 1)',
-      rgba: 'rgba(176, 223, 174, 1)',
+      hex: '#358132',
+      hsla: 'hsla(118, 44.1%, 35.1%, 1)',
+      rgba: 'rgba(53, 129, 50, 1)',
     },
     success__text: {
-      hex: '#b0dfae',
-      hsla: 'hsla(118, 43.4%, 77.8%, 1)',
-      rgba: 'rgba(176, 223, 174, 1)',
+      hex: '#358132',
+      hsla: 'hsla(118, 44.1%, 35.1%, 1)',
+      rgba: 'rgba(53, 129, 50, 1)',
     },
     table__cell__fill_resting: {
-      hex: '#132634',
-      hsla: 'hsla(205, 46.5%, 13.9%, 1)',
-      rgba: 'rgba(19, 38, 52, 1)',
+      hex: '#ffffff',
+      hsla: 'hsla(0, 0%, 100%, 1)',
+      rgba: 'rgba(255, 255, 255, 1)',
     },
     table__cell__fill_hover: {
-      hex: '#1e3c52',
-      hsla: 'hsla(205, 46.4%, 22%, 1)',
-      rgba: 'rgba(30, 60, 82, 1)',
-    },
-    table__header__fill_activated: {
       hex: '#eaeaea',
       hsla: 'hsla(0, 0%, 91.8%, 1)',
       rgba: 'rgba(234, 234, 234, 1)',
@@ -363,25 +313,35 @@ export const colors = {
       hsla: 'hsla(138, 66.7%, 94.1%, 1)',
       rgba: 'rgba(230, 250, 236, 1)',
     },
-    table__header__fill_resting: {
-      hex: '#f7f7f7',
-      hsla: 'hsla(0, 0%, 96.9%, 1)',
-      rgba: 'rgba(247, 247, 247, 1)',
+    table__header__fill_activated: {
+      hex: '#eaeaea',
+      hsla: 'hsla(0, 0%, 91.8%, 1)',
+      rgba: 'rgba(234, 234, 234, 1)',
     },
     table__header__fill_hover: {
       hex: '#dcdcdc',
       hsla: 'hsla(0, 0%, 86.3%, 1)',
       rgba: 'rgba(220, 220, 220, 1)',
     },
+    table__header__fill_resting: {
+      hex: '#f7f7f7',
+      hsla: 'hsla(0, 0%, 96.9%, 1)',
+      rgba: 'rgba(247, 247, 247, 1)',
+    },
     disabled__text: {
-      hex: '#637888',
-      hsla: 'hsla(206, 15.7%, 46.1%, 1)',
-      rgba: 'rgba(99, 120, 136, 1)',
+      hex: '#bebebe',
+      hsla: 'hsla(0, 0%, 74.5%, 1)',
+      rgba: 'rgba(190, 190, 190, 1)',
     },
     text_highlight: {
       hex: '#d5eaf4',
       hsla: 'hsla(199, 58.5%, 89.6%, 1)',
       rgba: 'rgba(213, 234, 244, 1)',
+    },
+    focus: {
+      hex: '#007079',
+      hsla: 'hsla(184, 100%, 23.7%, 1)',
+      rgba: 'rgba(0, 112, 121, 1)',
     },
     disabled__border: {
       hex: '#dcdcdc',
@@ -393,21 +353,6 @@ export const colors = {
       hsla: 'hsla(0, 0%, 91.8%, 1)',
       rgba: 'rgba(234, 234, 234, 1)',
     },
-    link_in_snackbars: {
-      hex: '#a8ced1',
-      hsla: 'hsla(184, 30.8%, 73.9%, 1)',
-      rgba: 'rgba(168, 206, 209, 1)',
-    },
-    focus_boder: {
-      hex: '#88e9fa',
-      hsla: 'hsla(189, 91.9%, 75.7%, 1)',
-      rgba: 'rgba(136, 233, 250, 1)',
-    },
-    focus: {
-      hex: '#007079',
-      hsla: 'hsla(184, 100%, 23.7%, 1)',
-      rgba: 'rgba(0, 112, 121, 1)',
-    },
     link_on_interactive_colors: {
       hex: '#ffffff',
       hsla: 'hsla(0, 0%, 100%, 1)',
@@ -417,6 +362,11 @@ export const colors = {
       hex: '#ffffff',
       hsla: 'hsla(0, 0%, 100%, 1)',
       rgba: 'rgba(255, 255, 255, 1)',
+    },
+    link_in_snackbars: {
+      hex: '#a8ced1',
+      hsla: 'hsla(184, 30.8%, 73.9%, 1)',
+      rgba: 'rgba(168, 206, 209, 1)',
     },
     pressed_overlay_dark: {
       hex: '#000000',
