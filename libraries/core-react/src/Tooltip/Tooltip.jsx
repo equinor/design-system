@@ -10,10 +10,6 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const Anchor = styled.div`
-  /* margin-right: auto; */
-`
-
 const StyledTooltipWrapper = styled.div`
   ${({ top, bottom, right, left, transform }) =>
     css`
@@ -95,14 +91,14 @@ export const Tooltip = forwardRef(function Tooltip(
 
   return (
     <Wrapper {...props}>
-      <Anchor
+      <div
         onMouseOver={handleOpen}
         onMouseLeave={handleClose}
         onBlur={handleClose}
         onFocus={handleOpen}
       >
         {children}
-      </Anchor>
+      </div>
       {openState && (
         <StyledTooltipWrapper
           style={{ justifySelf: 'center' }}
