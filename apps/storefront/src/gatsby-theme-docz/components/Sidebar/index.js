@@ -5,6 +5,7 @@ import React, { useState, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { useThemeUI } from 'theme-ui'
 import { useDocs, useConfig, useCurrentDoc } from 'docz'
+import * as R from 'ramda'
 import { media } from '~theme/breakpoints'
 
 const StyledSidebar = styled.nav`
@@ -123,15 +124,18 @@ export const Sidebar = ({ className, open, onClick }) => {
   const routesWithTwoSegments = (doc) =>
     doc.route.replace(/^\/|\/$/g, '').split('/').length < 3
 
-  const subMenus = useMemo(() =>
-    docs
-      .filter(notRootRoute)
-      .filter(routesWithTwoSegments)
-      .map((doc) => ({
-        title: doc.title,
-        route: doc.route,
-        current: current.route.includes(doc.route),
-      })),
+  const handleDrafts = (doc) =>
+    !(process.env.GATSBY_STAGE === 'prod' && doc.mode === 'draft')
+
+  const subMenus = useMemo(
+    () =>
+      R.pipe(
+        R.filter(notRootRoute),
+        R.filter(routesWithTwoSegments),
+        R.filter(handleDrafts),
+        R.map(R.pick(['title', 'route'])),
+      )(docs),
+    [docs],
   )
 
   return (
