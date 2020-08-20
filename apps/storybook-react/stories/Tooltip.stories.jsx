@@ -8,7 +8,7 @@ import {
   Icon,
   Avatar,
   Chip,
-  TextField, //
+  TextField,
   Search,
 } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'

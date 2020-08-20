@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `
 
 const Anchor = styled.div`
-  margin-right: auto;
+  /* margin-right: auto; */
 `
 
 const StyledTooltipWrapper = styled.div`
@@ -103,7 +103,11 @@ export const Tooltip = forwardRef(function Tooltip(
         {children}
       </Anchor>
       {openState && (
-        <StyledTooltipWrapper role="tooltip" {...wrapperProps}>
+        <StyledTooltipWrapper
+          style={{ justifySelf: 'center' }}
+          role="tooltip"
+          {...wrapperProps}
+        >
           <StyledTooltip>
             <TooltipArrow
               {...arrowProps}

@@ -5,12 +5,11 @@ import { PopoverItem } from './PopoverItem'
 
 const Container = styled.div`
   position: relative;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
 `
 
 const Anchor = styled.div`
-  margin-right: auto;
   &:focus {
     outline: none;
   }

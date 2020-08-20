@@ -118,13 +118,13 @@ export function CustomTable() {
                 <Cell>
                   <Popover onClose={handleClose} open={active === '2'}>
                     <PopoverAnchor>
-                      <p
+                      <span
                         id="2"
                         onMouseEnter={handleHover}
                         onFocus={handleClick}
                       >
                         Hover me
-                      </p>
+                      </span>
                     </PopoverAnchor>
                     <PopoverTitle>Popover</PopoverTitle>
                     <PopoverContent>Bla bla bla</PopoverContent>
