@@ -56,7 +56,7 @@ export const makeColorToken = (colors, getStyle) =>
           rgba: fillToRgba(fill),
         }
       } catch (error) {
-        throw Error(`Error parsing color for ${name}. ${error.message}`)
+        throw Error(`Error parsing color for ${node.name}. ${error.message}`)
       }
       return {
         name,
