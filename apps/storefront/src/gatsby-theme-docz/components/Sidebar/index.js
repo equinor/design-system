@@ -133,7 +133,7 @@ export const Sidebar = ({ className, open, onClick }) => {
         R.filter(notRootRoute),
         R.filter(routesWithTwoSegments),
         R.filter(handleDrafts),
-        R.reduce((acc, { title, route }) => [...acc, { title, route }], []),
+        R.map(R.pick(['title', 'route'])),
       )(docs),
     [docs],
   )
