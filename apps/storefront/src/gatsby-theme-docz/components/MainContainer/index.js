@@ -108,13 +108,6 @@ const Content = styled.div`
 `
 const LandingPage = styled.div``
 
-const Placeholder = styled.div`
-  background: orange;
-  height: 100vh;
-  display: grid;
-  place-items: center center;
-`
-
 export const MainContainer = ({ children, doc, ...rest }) => {
   const {
     tabs,
