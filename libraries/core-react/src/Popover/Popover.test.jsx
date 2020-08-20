@@ -49,7 +49,7 @@ describe('Popover', () => {
     const { container } = render(<SimplePopover open placement="topRight" />)
     const popoverWrapper = container.lastElementChild
     const popover = popoverWrapper.lastChild
-    expect(popoverWrapper).toHaveStyleRule('display', 'flex')
+    expect(popoverWrapper).toHaveStyleRule('display', 'inline-flex')
     expect(popover).toHaveStyleRule('top', `${topRight.popoverTop}`)
     expect(popover).toHaveStyleRule('right', `${topRight.popoverRight}`)
   })

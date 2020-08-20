@@ -29,7 +29,7 @@ describe('Tooltip', () => {
     const tooltipWrapper = container.firstChild
     const tooltip = screen.getByRole('tooltip')
 
-    expect(tooltipWrapper).toHaveStyleRule('display', 'flex')
+    expect(tooltipWrapper).toHaveStyleRule('display', 'inline-flex')
     expect(tooltip).toHaveStyleRule('top', `${topRight.tooltipTop}`)
     expect(tooltip).toHaveStyleRule('right', `${topRight.tooltipRight}`)
   })
