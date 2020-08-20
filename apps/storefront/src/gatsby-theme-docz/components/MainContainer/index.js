@@ -131,7 +131,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
         isPrivate ? (
           <>
             <Helmet>
-              <meta name="robots" content="noindex" />
+              <meta name="robots" content="noindex, nofollow" />
             </Helmet>
             <ContentHeader>
               <H1>Placeholder</H1>
