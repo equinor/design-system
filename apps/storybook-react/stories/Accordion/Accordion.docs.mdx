@@ -1,19 +1,21 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks'
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs/blocks'
 import { Accordion, Typography } from '@equinor/eds-core-react'
 
 # Accordion
 
-<Typography variant="ingress">An accordion allows users to collapse and expand sections of content.</Typography>
+<Typography variant="ingress">
+  An accordion allows users to collapse and expand sections of content.
+</Typography>
 
 See the [storefront](https://eds.equinor.com/components/accordion/) for details about this component
 
-<Preview withToolbar withSource="open">
+<Canvas withToolbar withSource="open">
   <Story name="Accordion header" id="components-accordion--simple" />
-</Preview>
+</Canvas>
 
 ## Child components
 
-The `<Accordion />` is a compound component, so in order to get to the child components you must either use destructuring or dot notation. 
+The `<Accordion />` is a compound component, so in order to get to the child components you must either use destructuring or dot notation.
 
 ### Destructuring
 
@@ -39,8 +41,7 @@ const {
 
 ```jsx
 import { Accordion } from '@equinor/eds-core-react'
-
-<Accordion>
+;<Accordion>
   <Accordion.AccordionItem>
     <Accordion.AccordionHeader>Header 1</Accordion.AccordionHeader>
     <Accordion.AccordionPanel>Content 1</Accordion.AccordionPanel>
@@ -54,7 +55,9 @@ In a simple Accordion where you only have a text-string in the header, you can o
 <Accordion>
   <AccordionItem>
     <AccordionHeader>
-      <AccordionHeaderTitle>Header <em>1</em></AccordionHeaderTitle>
+      <AccordionHeaderTitle>
+        Header <em>1</em>
+      </AccordionHeaderTitle>
       <Icon
         name="attach_file"
         title="Attach file"
@@ -79,16 +82,14 @@ Both the `<Accordion />` and `<Accordion.AccordionItem />` components take props
 
 ### Accordion
 
-<Props of={Accordion} />
+<ArgsTable of={Accordion} />
 
 ### AccordionItem
 
-<Props of={Accordion.AccordionItem} />
+<ArgsTable of={Accordion.AccordionItem} />
 
 ## Examples of props and custom header content
 
-<Preview>
+<Canvas>
   <Story name="Accordion variants" id="components-accordion--header" />
-</Preview>
-
-
+</Canvas>
