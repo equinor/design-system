@@ -11,7 +11,7 @@ export async function createFigmaImages(ctx) {
   const exec = util.promisify(childProcess.exec)
   // find all figma urls defined in storefront content files
   const { stdout, stderr } = await exec(
-    `grep -rni "\\"https://www.figma" ./../storefront/src/content/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
+    `grep -rni "\\"https://www.figma" ./../storefront/docs/* | awk -F"[\\"\\"]" '{print $2}' | sed "s/.*file//"`,
   )
 
   if (stderr) {

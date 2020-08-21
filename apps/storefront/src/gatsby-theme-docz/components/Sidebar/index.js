@@ -125,7 +125,7 @@ export const Sidebar = ({ className, open, onClick }) => {
     doc.route.replace(/^\/|\/$/g, '').split('/').length < 3
 
   const handleDrafts = (doc) =>
-    !(process.env.GATSBY_STAGE === 'prod' && doc.mode === 'draft')
+    !(process.env.GATSBY_STAGE === 'prod' && doc.mode.toLowerCase() === 'draft')
 
   const subMenus = useMemo(
     () =>
