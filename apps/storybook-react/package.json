@@ -15,11 +15,11 @@
     "@equinor/eds-core-react": "workspace:*",
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
-    "@storybook/react": "^5.3.19",
+    "@storybook/react": "^6.0.16",
     "babel-runtime": "^6.26.0",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.1.1",
-    "react-hook-form": "^5.7.2"
+    "react-hook-form": "^5.7.2",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
