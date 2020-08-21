@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Progress Indicators/Star',
+  title: 'Components/Progress Indicators/Star',
   component: StarProgress,
 }
 

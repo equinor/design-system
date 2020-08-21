@@ -29,7 +29,7 @@ const StyledButton = styled(Button)`
 `
 
 export default {
-  title: 'Components|Snackbar',
+  title: 'Components/Snackbar',
   component: Snackbar,
 }
 

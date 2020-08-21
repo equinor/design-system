@@ -25,7 +25,7 @@ const getUnixTime = (iso) => {
 }
 
 export default {
-  title: 'Components|Slider',
+  title: 'Components/Slider',
   component: Slider,
 }
 

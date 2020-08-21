@@ -43,7 +43,7 @@ const ICONS = {
 }
 
 export default {
-  title: 'Components|TextField',
+  title: 'Components/TextField',
   component: TextField,
 }
 

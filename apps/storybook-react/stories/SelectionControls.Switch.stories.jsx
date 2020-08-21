@@ -39,7 +39,7 @@ const Examples = styled.div`
 `
 
 export default {
-  title: 'Components|Selection controls/Switch',
+  title: 'Components/Selection controls/Switch',
   component: Switch,
 }
 

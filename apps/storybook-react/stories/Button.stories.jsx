@@ -7,7 +7,7 @@ import './../style.css'
 import './button.css'
 
 export default {
-  title: 'Components|Button',
+  title: 'Components/Button',
   component: Button,
 }
 

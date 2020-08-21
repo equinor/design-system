@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Progress Indicators/Circular',
+  title: 'Components/Progress Indicators/Circular',
   component: CircularProgress,
 }
 

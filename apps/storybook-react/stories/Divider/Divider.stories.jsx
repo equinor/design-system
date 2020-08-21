@@ -5,7 +5,7 @@ import { Divider } from '@equinor/eds-core-react'
 import mdx from './Divider.docs.mdx'
 
 export default {
-  title: 'Components|Divider',
+  title: 'Components/Divider',
   parameters: {
     docs: {
       page: mdx,

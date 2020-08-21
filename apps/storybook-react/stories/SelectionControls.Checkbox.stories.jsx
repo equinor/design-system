@@ -27,7 +27,7 @@ const UnstyledList = styled.ul`
 `
 
 export default {
-  title: 'Components|Selection controls/Checkbox',
+  title: 'Components/Selection controls/Checkbox',
   component: Checkbox,
 }
 

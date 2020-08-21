@@ -21,7 +21,7 @@ const Background = styled.div`
 `
 
 export default {
-  title: 'Components|Progress Indicators/Dots',
+  title: 'Components/Progress Indicators/Dots',
   component: DotProgress,
 }
 

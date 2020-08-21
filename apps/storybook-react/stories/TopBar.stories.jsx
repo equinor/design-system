@@ -103,7 +103,7 @@ const RIGHT_CHOICES = {
 }
 
 export default {
-  title: 'Components|TopBar',
+  title: 'Components/TopBar',
   component: TopBar,
   decorators: [withKnobs],
 }

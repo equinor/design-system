@@ -20,7 +20,7 @@ const UnstyledList = styled.ul`
 `
 
 export default {
-  title: 'Components|Selection controls/Radio',
+  title: 'Components/Selection controls/Radio',
   component: Radio,
 }
 

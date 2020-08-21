@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Progress Indicators/Linear',
+  title: 'Components/Progress Indicators/Linear',
   component: LinearProgress,
 }
 
