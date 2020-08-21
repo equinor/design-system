@@ -1,4 +1,4 @@
-import * as R from 'ramda'
+import R from 'ramda'
 import { propName } from '@utils'
 import { px } from '@units'
 

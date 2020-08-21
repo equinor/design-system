@@ -112,7 +112,7 @@ Icon.propTypes = {
 Icon.defaultProps = {
   className: '',
   title: null,
-  color: null,
+  color: 'currentColor',
   // @ts-ignore
   size: 24,
   rotation: null,

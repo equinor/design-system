@@ -28,7 +28,9 @@ const Wrapper = styled.div`
 
 const TextWrapper = styled.div`
   margin-bottom: 32px;
+  width: 800px;
 `
+
 export default {
   title: 'Components|Tooltip',
   component: Tooltip,
@@ -45,7 +47,7 @@ export function Placement() {
           anchor element
         </Typography>
       </TextWrapper>
-      <Typography variant="h5">Top</Typography>
+      <Typography variant="h4">Top</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="topLeft">
           <Button>Top left</Button>
@@ -57,7 +59,7 @@ export function Placement() {
           <Button>Top right</Button>
         </Tooltip>
       </Wrapper>
-      <Typography variant="h5">Bottom</Typography>
+      <Typography variant="h4">Bottom</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="bottomLeft">
           <Button>Bottom left</Button>
@@ -69,7 +71,7 @@ export function Placement() {
           <Button>Bottom right</Button>
         </Tooltip>
       </Wrapper>
-      <Typography variant="h5">Left</Typography>
+      <Typography variant="h4">Left</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="leftTop">
           <Button>Left top</Button>
@@ -81,7 +83,7 @@ export function Placement() {
           <Button>Left bottom</Button>
         </Tooltip>
       </Wrapper>
-      <Typography variant="h5">Right</Typography>
+      <Typography variant="h4">Right</Typography>
       <Wrapper>
         <Tooltip title="Tooltip" placement="rightTop">
           <Button>Right top</Button>
@@ -144,8 +146,38 @@ export const WithKnobs = () => {
         <Typography variant="h3">With knobs</Typography>
       </TextWrapper>
       <Wrapper>
-        <Tooltip title={title} placement={placement}>
+        <Tooltip open title={title} placement={placement}>
           {ANCHOR_CHOICES[anchor]}
+        </Tooltip>
+      </Wrapper>
+    </Body>
+  )
+}
+
+export function WithDisabledElements() {
+  return (
+    <Body>
+      <TextWrapper>
+        <Typography variant="h3">Tooltip with disabled elements</Typography>
+        <Typography variant="body_long">
+          Firefox, Edge and Chrome supports tooltip on disabled elements.
+        </Typography>
+        <Typography variant="body_long">
+          If you have Safari users, you will need to add inline style to your
+          disabled element, shown in the example below. This will help trigger
+          the mouse events correctly. Unfortunately, this workaround overwrites
+          the &apos;not-allowed&apos; cursor.
+        </Typography>
+      </TextWrapper>
+      <Wrapper>
+        <Tooltip title="Tooltip" placement="topLeft">
+          <Button disabled>Disabled</Button>
+        </Tooltip>
+
+        <Tooltip title="Tooltip" placement="topLeft">
+          <Button style={{ pointerEvents: 'none' }} disabled>
+            Disabled for Safari Browser
+          </Button>
         </Tooltip>
       </Wrapper>
     </Body>

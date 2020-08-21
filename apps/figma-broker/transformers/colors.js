@@ -1,4 +1,4 @@
-import * as R from 'ramda'
+import R from 'ramda'
 
 // https://css-tricks.com/converting-color-spaces-in-javascript/
 

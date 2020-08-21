@@ -1,4 +1,4 @@
-import * as R from 'ramda'
+import R from 'ramda'
 
 const head = R.pipe(R.defaultTo([]), R.head)
 
@@ -32,9 +32,7 @@ export const propName = (str = '') =>
     .replace('___', '__')
 
 export const pathName = (str = '') =>
-  propName(str)
-    .replace('__', '-')
-    .replace('_', '-')
+  propName(str).replace('__', '-').replace('_', '-')
 
 export const withName = R.curry((regExp, node) =>
   R.test(new RegExp(regExp, 'i'), node.name),

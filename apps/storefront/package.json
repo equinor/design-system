@@ -1,66 +1,77 @@
 {
   "name": "@equinor/eds-storefront",
-  "description": "The storefront for the Equinor Design System",
-  "version": "0.0.1",
+  "private": true,
+  "description": "Documentation for Equinor Design System (EDS)",
+  "version": "1.0.0",
   "engines": {
-    "pnpm": ">=4"
+    "pnpm": ">=4",
+    "node": ">=14.0.0"
   },
-  "author": "",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
   "dependencies": {
-    "@mdx-js/mdx": "^1.5.5",
-    "@mdx-js/react": "^1.5.5",
-    "@mdx-js/tag": "^0.20.3",
-    "@reach/router": "^1.3.1",
-    "autoprefixer": "^9.7.4",
-    "babel-plugin-styled-components": "^1.10.7",
-    "classnames": "^2.2.6",
-    "core-js": "^3.6.4",
-    "dotenv": "^8.2.0",
-    "gatsby": "^2.19.17",
-    "gatsby-plugin-manifest": "^2.2.41",
-    "gatsby-plugin-matomo": "^0.7.2",
-    "gatsby-plugin-mdx": "^1.0.72",
-    "gatsby-plugin-offline": "^3.0.34",
-    "gatsby-plugin-postcss": "^2.1.20",
-    "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
-    "gatsby-plugin-react-helmet": "^3.1.22",
-    "gatsby-plugin-styled-components": "^3.1.19",
-    "gatsby-remark-autolink-headers": "^2.1.24",
-    "gatsby-remark-smartypants": "^2.1.21",
-    "gatsby-source-filesystem": "^2.1.48",
-    "gatsby-transformer-yaml": "^2.2.25",
-    "github-markdown-css": "^3.0.1",
-    "js-file-download": "^0.4.9",
-    "mdx-component-autolink-header": "0.0.1",
-    "polished": "^3.4.4",
-    "postcss-custom-media": "^7.0.8",
-    "postcss-import": "^12.0.1",
-    "postcss-nested": "^4.2.1",
+    "@emotion/core": "^10.0.28",
+    "@equinor/eds-core-react": "workspace:*",
+    "@equinor/eds-icons": "workspace:*",
+    "@equinor/eds-tokens": "workspace:*",
+    "@mdx-js/react": "^1.6.6",
+    "@mikaelkristiansson/domready": "^1.0.10",
+    "@reach/router": "^1.3.4",
+    "docz": "^2.3.1",
+    "focus-visible": "^5.1.0",
+    "gatsby": "^2.23.10",
+    "gatsby-image": "^2.4.8",
+    "gatsby-link": "^2.4.8",
+    "gatsby-plugin-algolia-docsearch": "^1.0.5",
+    "gatsby-plugin-load-script": "^1.1.0",
+    "gatsby-plugin-manifest": "^2.4.13",
+    "gatsby-plugin-mdx": "^1.2.18",
+    "gatsby-plugin-offline": "^3.2.12",
+    "gatsby-plugin-react-helmet": "^3.3.5",
+    "gatsby-plugin-sharp": "^2.6.13",
+    "gatsby-plugin-styled-components": "^3.3.9",
+    "gatsby-react-router-scroll": "^3.0.7",
+    "gatsby-source-filesystem": "^2.3.13",
+    "gatsby-theme-docz": "^2.3.1",
+    "gatsby-transformer-sharp": "^2.5.6",
+    "gatsby-transformer-yaml": "^2.4.6",
+    "js-file-download": "^0.4.12",
+    "mitt": "^1.2.0",
+    "polished": "^3.6.5",
     "prop-types": "^15.7.2",
+    "query-string": "^6.13.1",
+    "ramda": "^0.27.1",
     "react": "^16.12.0",
+    "react-docgen-props-table": "^1.0.3",
     "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1",
-    "remark-emoji": "^2.0.2",
-    "styled-components": "^5.0.1"
+    "react-error-overlay": "^6.0.7",
+    "react-helmet": "^6.1.0",
+    "remark-emoji": "^2.1.0",
+    "shallow-compare": "^1.2.2",
+    "styled-components": "^5.1.1"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "devDependencies": {
+    "prettier": "2.0.5",
+    "stylelint-config-recommended": "^3.0.0"
+  },
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "dev": "gatsby develop",
-    "start": "npm run develop",
-    "format": "prettier --write \"src/**/*.js\"",
-    "test": "npm run lint",
-    "lint": "eslint ./src/**/*.jsx"
-  },
-  "devDependencies": {
-    "prettier": "^1.19.1",
-    "stylelint-config-recommended": "^3.0.0"
+    "dev": "GATSBY_STAGE=dev gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "pnpm run dev",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/christopherbiscardi/gatsby-starter-mdx-basic"
+    "url": "https://github.com/equinor/design-system",
+    "directory": "apps/storefront"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
   }
 }

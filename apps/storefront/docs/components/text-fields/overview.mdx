@@ -1,0 +1,191 @@
+---
+title: Text fields
+metaTitle: Text fields overview
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+  - Examples
+  - Demo
+mode: publish
+route: /components/text-fields/
+---
+
+import { TextField, Icon } from '@equinor/eds-core-react'
+
+A *text field* lets users enter, interact and edit content, typically in forms and dialogs.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+Text fields are used for long and short amounts of text. `Text inputs` are for a single line of text while `Text areas` are for more than a single line of text.
+
+The component includes options for writing unit for the field and a placeholder icon. This component uses auto layout to place icon and/or unit with the right spacing next to each other.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not remove the label.
+- Do not use placeholder text instead of the label.
+- Do not use as search.
+- Do not end placeholder text with a period for inputs.
+
+## Variations
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+### Label
+
+A label text is always required, and helps users know what information is expected from this field. The label can either be above (as it is built into the component in Figma), or to the left of the field (done by hiding the built-in label in Figma and adding a new label to the left).
+
+### Meta
+
+Character count and required or optional labels can go in meta grouping. Do not assume that all users know what an "\*" means, use \*Required\* as the meta.
+
+### Placeholder text
+
+Placeholder text should provide hints or examples of what text to enter. For wording, use "e.g. Stavanger" and not "Name your town". For numbers, use "9-digit number" and not "Example: 123-456-789". Placeholder text disappears after the user begins to type, so it should _not_ contain critical information. Also, not all screen readers are capable of reading placeholder text. If the user does not type within the field, the placeholder text reappears in the field.
+
+### Input text
+
+For input text containing numbers only, use the style Input/Text monospaced for better readability. For example for phone numbers, values etc.
+
+### Validation and errors
+
+An error or warning must always have helper text with an icon or an icon in the field. Use real-time validation to help streamline the process and make the user experience smoother. Wait to validate until the user has finished interacting with the field.
+
+Validation helper text should use a passive tone as not to blame the users. For wording, use "Platform name required" and not "You did not enter a platform name".
+
+### Unit
+
+Units in text fields are optional. Units should be used to explain the unit of the relevant text field, and be abbreviated if a standard unit is used.
+
+### Icon
+
+Icons in text fields are optional. Icons can be very helpful in expressing extra functionality, input methods or indicating validation.
+
+- Valid, error or warning
+- Clear
+- Voice input
+- Dropdown
+- Loading
+
+### Helper text
+
+Help text is always visible to assist the users and should not be hidden behind a tooltip.
+
+## Examples
+
+### Input
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=2000%3A1127"
+  alt="Figma design sketches for input"
+/>
+
+### Area
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/Desktop-UI?node-id=2000%3A4942"
+  alt="Figma design sketches for input area"
+/>
+
+## Demo
+
+### Types
+
+<Playground>
+  <div style={{ display: 'grid', gridGap: '1rem' }}>
+    <TextField
+      id="textfield-normal"
+      placeholder="Placeholder text"
+      label="Text"
+      helperText="Helper text"
+    />
+    <TextField
+      type="number"
+      id="textfield-number"
+      placeholder="Placeholder text"
+      label="Number"
+      meta="pt. tonn"
+      helperText="Helper text"
+    />
+    <TextField
+      type="search"
+      id="textfield-search"
+      placeholder="Placeholder text"
+      label="Search"
+      meta="Meta"
+      helperText="Helper Text"
+    />
+    <TextField
+      type="password"
+      id="textfield-password"
+      placeholder="Placeholder text"
+      label="Password"
+      meta="Meta"
+      helperText="Helper Text"
+    />
+    <TextField
+      type="email"
+      id="textfield-email"
+      placeholder="Placeholder text"
+      label="Email"
+      meta="Meta"
+      helperText="Helper Text"
+    />
+    <TextField
+      id="storybook-multiline"
+      placeholder="Placeholder text"
+      label="Multline"
+      meta="Meta"
+      helperText="Helper Text"
+      multiline
+    />
+    <TextField
+      id="storybook-disabled"
+      placeholder="Placeholder text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+    />
+  </div>
+</Playground>
+
+### Variants
+
+<Playground>
+  <div style={{ display: 'grid', gridGap: '1rem' }}>
+    <TextField
+      id="storybook-error"
+      placeholder="Placeholder text"
+      label="Error"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="error"
+    />
+    <TextField
+      id="storybook-warning"
+      placeholder="Placeholder text"
+      label="Warning"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="warning"
+    />
+    <TextField
+      id="storybook-success"
+      placeholder="Placeholder text"
+      label="Success"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="success"
+    />
+  </div>
+</Playground>

@@ -21,6 +21,7 @@ export const typography = {
       fontSize: '2.000rem',
       fontWeight: 700,
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -30,6 +31,7 @@ export const typography = {
       fontSize: '2.000rem',
       fontWeight: 400,
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -39,6 +41,7 @@ export const typography = {
       fontSize: '1.750rem',
       fontWeight: 400,
       lineHeight: '1.429em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -48,6 +51,7 @@ export const typography = {
       fontSize: '1.500rem',
       fontWeight: 400,
       lineHeight: '1.667em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -57,6 +61,7 @@ export const typography = {
       fontSize: '1.250rem',
       fontWeight: 400,
       lineHeight: '1.600em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -67,6 +72,7 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.013em',
       lineHeight: '1.333em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -77,6 +83,7 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.013em',
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
   },
   navigation: {
@@ -88,6 +95,7 @@ export const typography = {
       fontWeight: 400,
       letterSpacing: '0.013em',
       lineHeight: '1.000em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -98,35 +106,39 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.013em',
       lineHeight: '1.000em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
     label: {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
-      fontSize: '0.688rem',
-      fontWeight: 400,
-      lineHeight: '1.455em',
+      fontSize: '0.750rem',
+      fontWeight: 500,
+      lineHeight: '1.333em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
     drawer_active: {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
-      fontSize: '0.750rem',
+      fontSize: '1.000rem',
       fontWeight: 700,
       letterSpacing: '0.006em',
-      lineHeight: '1.333em',
+      lineHeight: '1.000em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
     drawer_inactive: {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
-      fontSize: '0.750rem',
+      fontSize: '1.000rem',
       fontWeight: 500,
       letterSpacing: '0.013em',
-      lineHeight: '1.333em',
+      lineHeight: '1.000em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -136,6 +148,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 500,
       lineHeight: '1.143em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -145,6 +158,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 500,
       lineHeight: '1.143em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -154,7 +168,8 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 500,
       lineHeight: '1.143em',
-      textDecoration: 'UNDERLINE',
+      textDecoration: 'underline',
+      textAlign: 'left',
     },
   },
   input: {
@@ -163,8 +178,9 @@ export const typography = {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.333em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -175,6 +191,7 @@ export const typography = {
       fontWeight: 400,
       letterSpacing: '0.025em',
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -186,16 +203,18 @@ export const typography = {
       fontWeight: 400,
       letterSpacing: '0.063em',
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
     helper: {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
-      fontSize: '0.688rem',
-      fontWeight: 400,
+      fontSize: '0.750rem',
+      fontWeight: 500,
       letterSpacing: '0.013em',
-      lineHeight: '1.455em',
+      lineHeight: '1.333em',
+      textAlign: 'left',
     },
   },
   paragraph: {
@@ -207,6 +226,7 @@ export const typography = {
       fontWeight: 400,
       lineHeight: '1.250em',
       fontStyle: 'italic',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -214,8 +234,9 @@ export const typography = {
       color: 'rgba(61, 61, 61, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.143em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -223,8 +244,9 @@ export const typography = {
       color: 'rgba(61, 61, 61, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.625rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.600em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -234,6 +256,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 400,
       lineHeight: '1.250em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -244,6 +267,7 @@ export const typography = {
       fontWeight: 700,
       lineHeight: '1.250em',
       fontStyle: 'italic',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -253,6 +277,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 700,
       lineHeight: '1.250em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -262,7 +287,8 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 400,
       lineHeight: '1.250em',
-      textDecoration: 'UNDERLINE',
+      textDecoration: 'underline',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -273,8 +299,8 @@ export const typography = {
       fontWeight: 500,
       letterSpacing: '0.069em',
       lineHeight: '1.600em',
-      textTransform:
-        /** @type {import('csstype').TextTransformProperty} */ ('uppercase'),
+      textTransform: /** @type {import('csstype').TextTransformProperty} */ ('uppercase'),
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -284,6 +310,7 @@ export const typography = {
       fontSize: '1.125rem',
       fontWeight: 400,
       lineHeight: '1.333em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -293,6 +320,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 400,
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -302,7 +330,8 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 400,
       lineHeight: '1.500em',
-      textDecoration: 'UNDERLINE',
+      textDecoration: 'underline',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -313,6 +342,7 @@ export const typography = {
       fontWeight: 400,
       lineHeight: '1.500em',
       fontStyle: 'italic',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -322,6 +352,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 700,
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -332,6 +363,7 @@ export const typography = {
       fontWeight: 700,
       lineHeight: '1.500em',
       fontStyle: 'italic',
+      textAlign: 'left',
     },
   },
   table: {
@@ -340,8 +372,9 @@ export const typography = {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
-      fontWeight: 500,
+      fontWeight: 700,
       lineHeight: '1.714em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -349,8 +382,9 @@ export const typography = {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.714em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -360,6 +394,7 @@ export const typography = {
       fontSize: '0.875rem',
       fontWeight: 700,
       lineHeight: '1.714em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -367,9 +402,10 @@ export const typography = {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.714em',
-      textDecoration: 'UNDERLINE',
+      textDecoration: 'underline',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -378,8 +414,9 @@ export const typography = {
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.429em',
+      textAlign: 'left',
     },
   },
   ui: {
@@ -390,6 +427,7 @@ export const typography = {
       fontSize: '0.750rem',
       fontWeight: 500,
       lineHeight: '1.333em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -397,8 +435,9 @@ export const typography = {
       color: 'rgba(61, 61, 61, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.333em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -408,6 +447,7 @@ export const typography = {
       fontSize: '1.000rem',
       fontWeight: 500,
       lineHeight: '1.500em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -415,8 +455,9 @@ export const typography = {
       color: 'rgba(61, 61, 61, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.333em',
+      textAlign: 'left',
     },
 
     /** @type {TypographyData} */
@@ -424,8 +465,9 @@ export const typography = {
       color: 'rgba(61, 61, 61, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.750rem',
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: '1.333em',
+      textAlign: 'left',
     },
   },
 }

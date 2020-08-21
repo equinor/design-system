@@ -1,8 +1,8 @@
 /* eslint-disable import/no-default-export */
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import json from 'rollup-plugin-json'
-import babel from 'rollup-plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import json from '@rollup/plugin-json'
+import babel from '@rollup/plugin-babel'
 import polyfill from 'rollup-plugin-polyfill'
 import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
@@ -48,18 +48,14 @@ export default [
     ],
     output: [
       { file: pkg.browser, name: pkg.name, format: 'umd', globals },
-      ...(buildForStorybook
-        ? []
-        : [
-            {
-              file: pkg.module,
-              name: pkg.name,
-              format: 'esm',
-              sourcemap: 'inline',
-              globals,
-            },
-            { file: pkg.main, format: 'cjs' },
-          ]),
+      {
+        file: pkg.module,
+        name: pkg.name,
+        format: 'esm',
+        sourcemap: true,
+        globals,
+      },
+      ...(buildForStorybook ? [] : [{ file: pkg.main, format: 'cjs' }]),
     ],
   },
 ]

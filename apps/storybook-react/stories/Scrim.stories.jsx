@@ -1,5 +1,4 @@
-import React, { Fragment, useState } from 'react'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
+import React, { useState } from 'react'
 import { Scrim, Button, Typography } from '@equinor/eds-core-react'
 
 import styled from 'styled-components'
@@ -51,7 +50,7 @@ export const Page = () => {
         <Scrim onClose={handleClose} isDismissable>
           <TestContent>
             <Typography variant="body_short">
-              Press close or hit 'ESC' to close scrim.
+              Press close or hit “ESC” to close scrim.
             </Typography>
             <Button onClick={() => setVisibleScrim(false)}>OK</Button>
           </TestContent>

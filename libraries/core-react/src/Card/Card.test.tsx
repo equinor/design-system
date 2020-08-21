@@ -64,20 +64,8 @@ describe('Card', () => {
     expect(queryByText(title)).toBeDefined()
     expect(queryByText(subtitle)).toBeDefined()
   })
-  it('Has provided text and variation in CardText', () => {
-    const text = 'This is a text'
-    const variant = 'isLastBlock'
-    const { queryByText } = render(
-      <Card>
-        <Typography variant="body_short">{text}</Typography>
-      </Card>,
-    )
-
-    expect(queryByText(text)).toBeDefined()
-    expect(queryByText(variant)).toBeDefined()
-  })
   it('Has provided image source and placement in CardMedia', () => {
-    const isLeading = 'isLeading'
+    const fullWidth = 'fullWidth'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { queryByText } = render(
       <Card>
@@ -87,32 +75,19 @@ describe('Card', () => {
       </Card>,
     )
 
-    expect(queryByText(isLeading)).toBeDefined()
+    expect(queryByText(fullWidth)).toBeDefined()
     expect(queryByText(src)).toBeDefined()
   })
   it('CardActions items are placed correctly', () => {
     const { container } = render(
       <Card>
         <CardActions alignRight>
-          <button type="button" />
+          <button type="button">Click me!</button>
         </CardActions>
       </Card>,
     )
     const child = container.firstChild
     expect(child.firstChild).toHaveStyleRule('justify-content', 'flex-end')
-  })
-  it('CardMedia items are placed correctly', () => {
-    const { container } = render(
-      <Card>
-        <CardMedia fullWidth>
-          <img src="https://i.imgur.com/UM3mrju.jpg" alt="alt" />
-        </CardMedia>
-      </Card>,
-    )
-    const child = container.firstChild
-    expect(child.firstChild).toHaveStyleRule('margin-left', '-16px', {
-      modifier: '> *',
-    })
   })
   it('Can extend the css for the Card Component', () => {
     const { container } = render(<StyledCard />)

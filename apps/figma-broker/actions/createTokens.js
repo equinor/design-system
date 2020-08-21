@@ -1,5 +1,5 @@
 import prettier from 'prettier'
-import * as R from 'ramda'
+import R from 'ramda'
 import { fetchFigmaFile, processFigmaFile } from '../functions/figma'
 import { writeFile, writeResults } from '../functions/file'
 import { makeTokens } from '../files/design-tokens'

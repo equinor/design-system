@@ -1,0 +1,46 @@
+name: eds-icons-$(Build.BuildId)
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+trigger:
+  batch: 'true'
+  branches:
+    include:
+      - develop
+  paths:
+    include:
+      - libraries/icons
+
+pr:
+  branches:
+    include:
+      - develop
+  paths:
+    include:
+      - libraries/icons
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - script: npm install -g pnpm@next
+    displayName: 'Install pnpm'
+
+  - script: >-
+      pnpm
+      --filter eds
+      --filter ./libraries/icons
+      install
+    displayName: 'Install dependencies'
+
+  - script: pnpm --filter ./libraries/icons run build
+    displayName: 'Run build'
+
+  - script: >-
+      ./node_modules/eslint/bin/eslint.js
+      ./libraries/icons
+      --ext js
+    displayName: 'Run eslint'

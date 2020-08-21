@@ -2,10 +2,10 @@
 /* eslint-disable no-unused-vars */
 import dotenv from 'dotenv'
 import Koa from 'koa'
-import KoaRouter from 'koa-router'
+import KoaRouter from '@koa/router'
 import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
-import * as R from 'ramda'
+import R from 'ramda'
 
 import {
   createTokens,
@@ -33,10 +33,7 @@ router
   .post('/create-assets', KoaBody(), runAction(createAssets))
   .post('/create-figma-images', KoaBody(), runAction(createFigmaImages))
 
-app
-  .use(logger)
-  .use(router.routes())
-  .use(router.allowedMethods())
+app.use(logger).use(router.routes()).use(router.allowedMethods())
 
 app.use(async (ctx, next) => {
   try {

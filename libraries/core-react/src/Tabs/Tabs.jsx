@@ -1,6 +1,6 @@
-import React, { forwardRef, useMemo } from 'react'
+import React, { forwardRef, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import createId from 'lodash.uniqueid'
+import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'
 
 /**
@@ -21,8 +21,35 @@ const Tabs = forwardRef(
    * @param {React.Ref<any>} ref
    * @returns {React.ReactElement}
    */
-  function Tabs({ activeTab, onChange, variant, ...rest }, ref) {
+  function Tabs(
+    { activeTab, onChange, onBlur, onFocus, variant, ...props },
+    ref,
+  ) {
     const tabsId = useMemo(() => createId('tabs-'), [])
+
+    const [tabsFocused, setTabsFocused] = useState(false)
+
+    let blurTimer
+
+    const handleBlur = (e) => {
+      blurTimer = setTimeout(() => {
+        if (tabsFocused) {
+          setTabsFocused(false)
+        }
+      }, 0)
+      onBlur(e)
+    }
+
+    const handleFocus = (e) => {
+      if (e.target.getAttribute('role') !== 'tab') {
+        return
+      }
+      clearTimeout(blurTimer)
+      if (!tabsFocused) {
+        setTabsFocused(true)
+      }
+      onFocus(e)
+    }
 
     return (
       <TabsProvider
@@ -31,9 +58,10 @@ const Tabs = forwardRef(
           handleChange: onChange,
           tabsId,
           variant,
+          tabsFocused,
         }}
       >
-        <div ref={ref} {...rest} />
+        <div ref={ref} {...props} onBlur={handleBlur} onFocus={handleFocus} />
       </TabsProvider>
     )
   },
@@ -44,6 +72,10 @@ Tabs.propTypes = {
   activeTab: PropTypes.number,
   /** The callback function for selecting a tab */
   onChange: PropTypes.func,
+  /** The callback function for removing focus from a tab */
+  onBlur: PropTypes.func,
+  /** The callback function for focusing on a tab */
+  onFocus: PropTypes.func,
   /** Sets the width of the tabs */
   // @ts-ignore
   variant: PropTypes.oneOf(['fullWidth', 'minWidth']),
@@ -55,6 +87,8 @@ Tabs.defaultProps = {
   activeTab: 0,
   onChange: () => {},
   // @ts-ignore
+  onBlur: () => {},
+  onFocus: () => {},
   variant: 'minWidth',
 }
 

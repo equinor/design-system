@@ -37,15 +37,23 @@ const TabList = forwardRef(
    * @param ref
    */
   function TabsList({ children, ...rest }, ref) {
-    const { activeTab, handleChange, tabsId, variant } = useContext(TabsContext)
-
+    const {
+      activeTab,
+      handleChange,
+      tabsId,
+      variant,
+      tabsFocused,
+    } = useContext(TabsContext)
     const currentTab = useRef(activeTab)
 
-    const selectedTabRef = useCallback((node) => {
-      if (node !== null) {
-        node.focus()
-      }
-    }, [])
+    const selectedTabRef = useCallback(
+      (node) => {
+        if (node !== null && tabsFocused) {
+          node.focus()
+        }
+      },
+      [tabsFocused],
+    )
 
     useEffect(() => {
       currentTab.current = activeTab
@@ -54,10 +62,10 @@ const TabList = forwardRef(
     const Tabs = React.Children.map(children, (child, index) => {
       const tabRef =
         index === activeTab
-          // @ts-ignore
-          ? useCombinedRefs(child.ref, selectedTabRef)
-          // @ts-ignore
-          : child.ref
+          ? // @ts-ignore
+            useCombinedRefs(child.ref, selectedTabRef)
+          : // @ts-ignore
+            child.ref
 
       // @ts-ignore
       return React.cloneElement(child, {

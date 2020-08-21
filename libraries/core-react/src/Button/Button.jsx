@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Icon } from '..'
@@ -6,14 +6,17 @@ import { button } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
 
 const { colors } = button
-// TODO: Is there a better way to handle css properties without
-// bloating with ${props => props.base.focus.color} etc...
-const Base = ({ base, baseDisabled: disabled }) => {
-  if (!base) {
-    // TODO: What to do when base does not exist
-    return ``
-  }
 
+// display:grid; does not work on Webkit browser engine, so we have to wrap content in element where css-grid works
+const ButtonInner = styled.span`
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  align-items: center;
+  height: 100%;
+`
+
+const Base = ({ base, baseDisabled: disabled }) => {
   const { border, spacing, typography, focus, hover } = base
 
   return css`
@@ -23,22 +26,23 @@ const Base = ({ base, baseDisabled: disabled }) => {
     color: ${base.color};
     fill: ${base.color};
     svg {
-      height: 16px;
-      width: 16px;
+      justify-self: center;
+      height: ${button.icon_size.height};
+      width: ${button.icon_size.width};
     }
 
     border-radius: ${border.radius};
     border-color: ${border.color};
     border-width: ${border.width};
+    border-style: solid;
 
     ${spacing &&
-      css`
-        padding-left: ${spacing.left};
-        padding-right: ${spacing.right};
-      `}
+    css`
+      padding-left: ${spacing.left};
+      padding-right: ${spacing.right};
+    `}
 
     ${typographyTemplate(typography)}
-
     &::after {
       position: absolute;
       top: -${base.clickboundOffset};
@@ -51,9 +55,9 @@ const Base = ({ base, baseDisabled: disabled }) => {
     &:hover {
       background: ${hover.background};
       ${hover.radius &&
-        css`
-          border-radius: ${hover.radius};
-        `}
+      css`
+        border-radius: ${hover.radius};
+      `}
     }
 
     &:focus {
@@ -74,7 +78,6 @@ const Base = ({ base, baseDisabled: disabled }) => {
       background: ${disabled.background};
       color: ${disabled.color};
       fill: ${disabled.color};
-
       border-color: ${disabled.border.color};
 
       &:hover {
@@ -84,17 +87,15 @@ const Base = ({ base, baseDisabled: disabled }) => {
   `
 }
 
-const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
-  type,
-}))`
+const ButtonBase = styled.button`
   margin: 0;
   padding: 0;
   ${Base}
+  text-decoration: none;
   position: relative;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+
   &::before {
     position: absolute;
     top: 0;
@@ -121,30 +122,38 @@ const ButtonBase = styled.button.attrs(({ type = 'button' }) => ({
 /**
  * @param {Props & React.ButtonHTMLAttributes<HTMLButtonElement>} props
  */
-export const Button = ({
-  variant,
-  children,
-  disabled,
-  className,
-  color,
-  ...other
-}) => {
+
+export const Button = forwardRef(function Button(
+  { variant, children, disabled, className, color, tabIndex, href, ...other },
+  ref,
+) {
   const colorBase = colors[color] || {}
   const base = colorBase[variant] || {}
   const baseDisabled = colors.disabled[variant] || {}
 
+  const as = href ? 'a' : other.as ? other.as : 'button'
+
+  const baseProps = {
+    ...other,
+    ref,
+    as,
+    href,
+  }
+
   return (
     <ButtonBase
       base={base}
+      type={href || other.as ? undefined : 'button'}
       baseDisabled={baseDisabled}
       className={className}
       disabled={disabled}
-      {...other}
+      tabIndex={disabled ? -1 : tabIndex}
+      {...baseProps}
     >
-      {children}
+      <ButtonInner>{children}</ButtonInner>
     </ButtonBase>
   )
-}
+})
 
 Button.propTypes = {
   /** @ignore */
@@ -172,11 +181,17 @@ Button.propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary', 'danger']),
   /** Specifies which variant to use */
   variant: PropTypes.oneOf(['contained', 'outlined', 'ghost', 'ghost_icon']),
-
   /**
    * If `true`, the button will be disabled.
    */
   disabled: PropTypes.bool,
+  /**
+   * URL link destination
+   * If defined, an 'a' element is used as root instead of 'button'
+   */
+  href: PropTypes.string,
+  /* User to control tabindex, default tabindex needed for button as span */
+  tabIndex: PropTypes.number,
   /**
    * @ignore
    */
@@ -189,6 +204,8 @@ Button.defaultProps = {
   disabled: false,
   className: '',
   children: null,
+  href: undefined,
+  tabIndex: 0,
 }
 
 Button.displayName = 'eds-button'

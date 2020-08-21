@@ -1,14 +1,7 @@
-import React, { Fragment, useState } from 'react'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import React from 'react'
+import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import {
-  Card,
-  Avatar,
-  Typography,
-  Button,
-  Icon,
-  Divider,
-} from '@equinor/eds-core-react'
+import { Card, Avatar, Typography, Button, Icon } from '@equinor/eds-core-react'
 import { more_verticle, share, person_add, settings } from '@equinor/eds-icons'
 
 const icons = {
@@ -41,10 +34,6 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 260px);
   grid-gap: 32px 32px;
-`
-
-const StyledDivider = styled(Divider)`
-  width: 100%;
 `
 
 export default {
@@ -232,13 +221,13 @@ export const CardHeaderVariants = () => {
 
 const CardMediafullWidth = () => (
   <CardMedia fullWidth>
-    <img src="https://i.imgur.com/UM3mrju.jpg" alt="Image for representation" />
+    <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
   </CardMedia>
 )
 
 const CardMediaDefault = () => (
   <CardMedia>
-    <img src="https://i.imgur.com/UM3mrju.jpg" alt="Image for representation" />
+    <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
   </CardMedia>
 )
 

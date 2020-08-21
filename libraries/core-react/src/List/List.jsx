@@ -10,6 +10,9 @@ const StyledList = styled.div(
         list-style-type: lower-alpha;
       }
     `,
+  `
+    line-height: 1.5;
+  `,
 )
 
 const variants = {

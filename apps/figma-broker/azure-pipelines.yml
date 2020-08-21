@@ -1,36 +1,39 @@
-
-name: $(Build.BuildId)
-
-trigger:
-  batch: "true"
-  paths:
-    include:
-    # This cant be a variable
-      - apps/figma-broker/*
-
-
-variables:
-  imageName: 'eds-figma-broker:$(Build.BuildId)-$(Build.SourceBranchName)'
+name: eds-figma-broker-$(Build.BuildId)
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'ubuntu-latest'
+
+trigger:
+  batch: 'true'
+  branches:
+    include:
+      - develop
+  paths:
+    include:
+      - apps/figma-broker
+
+pr:
+  branches:
+    include:
+      - develop
+  paths:
+    include:
+      - apps/figma-broker
 
 steps:
-- task: Docker@1
-  displayName: 'Build an image'
-  inputs:
-    azureSubscriptionEndpoint: 'eds-rg-dev'
-    azureContainerRegistry: edscontainers.azurecr.io
-    imageName: '$(imageName)'
-    includeLatestTag: true
-    command: Build an image
-  env:
-    BUILD_DATE: $(Date:yyyyMMdd)
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
 
-- task: Docker@1
-  displayName: 'Push an image'
-  inputs:
-    azureSubscriptionEndpoint: 'eds-rg-dev'
-    azureContainerRegistry: edscontainers.azurecr.io
-    command: Push an image
-    imageName: '$(imageName)'
+  - script: npm install -g pnpm@next
+    displayName: 'Install pnpm'
+
+  - script: pnpm --filter eds install
+    displayName: 'Install root dependencies'
+
+  - script: >-
+      ./node_modules/eslint/bin/eslint.js
+      ./apps/figma-broker
+      --ext js
+    displayName: 'Run eslint'

@@ -1,0 +1,61 @@
+---
+title: Navigation app launcher
+metaTitle: Navigation app launcher overview
+tabs:
+  - Overview
+  - Usage
+toc:
+  - Guidelines
+  - Variations
+mode: publish
+route: /components/navigation-app-launcher/
+---
+
+An _app launcher_ provides navigation for applications related to the application the user is currently viewing.
+
+<!--One to two sentences as an introduction to the component-->
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+An app launcher is used to organise navigation across different applications related or relevant to the current application. The current application shows as _active_ in the app launcher. Each application displayed has a `Product icon` as well as a label that gives clear and concise direction. Note that if the label is longer than the maximum width, it will be truncated and should have a tooltip provided.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not use `System icons` in the app launchers.
+- Do not scroll within the app launcher.
+- Do not place the app launcher outside of the viewport.
+- Do not list more than three _app buttons_ across the app launcher.
+- Do not change the width of the _listing_.
+- Do not shrink text size to fit a label on a single line.
+- Do not wrap a label over two lines.
+
+## Variations
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+### Listing
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=3216%3A2660"
+  alt="Figma design sketches of listing"
+/>
+
+### App buttons
+
+When the placeholder icon is replaced with your product icon of choice, the colours will be updated. You will have to manually change them back to the correct colour.
+
+- _Enabled_ state should use `Interactive Primary/Resting`
+- _Disabled_ state should use `Interactive/Disabled/Text`
+- _Active_ state should use `Interactive Primary/Resting`
+- _Focus state_ should use `Interactive Primary/Resting`
+- _Hover state_ should use `Interactive Primary/Hover`
+- _Pressed state_ should use `Interactive Primary/Hover`
+
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=3216%3A446"
+  alt="Figma design sketches for app buttons"
+/>

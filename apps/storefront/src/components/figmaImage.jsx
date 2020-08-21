@@ -9,6 +9,7 @@ import externalLinkSvg from '../assets/external_link.svg'
 const Container = styled.div`
   display: block;
   width: 100%;
+  max-width: 45rem;
   padding: 16px;
   margin-bottom: 24px;
   font-size: 18px;
@@ -21,6 +22,8 @@ const Link = styled.a`
 
 const Image = styled.img`
   margin-left: 4px;
+  max-width: 100%;
+  overflow: hidden;
   background: transparent !important;
 `
 
@@ -38,11 +41,20 @@ const Title = styled(Link)`
 `
 
 const parseUrl = (url) => {
-  const fileId = (/(?<=file\/).*(?=\/)/.exec(url) || [])[0] || ''
-  const nodeId = ((/(?<=node-id=).*/.exec(url) || [])[0] || '').replace(
-    '%3A',
-    '_',
-  )
+  // Can't use lookbehind because of Safari's lack of support
+  //const fileId = (/(?<=file\/).*(?=\/)/.exec(url) || [])[0] || ''
+  //const nodeId = ((/(?<=node-id=).*/.exec(url) || [])[0] || '').replace(
+  //  '%3A',
+  //  '_',
+  //)
+  const splitOnFile = url.split(/(file\/.*?\/)/)
+  const fileId =
+    splitOnFile && splitOnFile.length > 1 ? splitOnFile[1].split(/(\/)/)[2] : ''
+  const splitOnNodeId = url.split(/(node-id=)/)
+  const nodeId =
+    splitOnNodeId && splitOnNodeId.length > 2
+      ? splitOnNodeId[2].replace('%3A', '_')
+      : ''
 
   if (!fileId || !nodeId) {
     return ''
@@ -51,13 +63,13 @@ const parseUrl = (url) => {
   return `${fileId}.${nodeId}`
 }
 
-const FigmaImage = ({ url }) => {
+const FigmaImage = ({ url, alt = 'Design in Figma' }) => {
   const data = useStaticQuery(graphql`
     {
       allFile(
         filter: {
           extension: { regex: "/(jpg)|(jpeg)|(png)/" }
-          relativeDirectory: { eq: "figma" }
+          relativeDirectory: { regex: "/figma/" }
         }
       ) {
         edges {
@@ -80,7 +92,7 @@ const FigmaImage = ({ url }) => {
         <Image src={externalLinkSvg} alt="External link" />
       </Title>
       {imageUrl ? (
-        <Image src={imageUrl} alt="" />
+        <Image src={imageUrl} alt={alt} />
       ) : (
         <div>
           <Image as="span" role="img" aria-label="See no evil">
@@ -96,6 +108,8 @@ const FigmaImage = ({ url }) => {
 FigmaImage.propTypes = {
   /** Url to embed in iframe. Will manipulate www.figma.com urls into Figma Embed */
   url: PropTypes.string.isRequired,
+  /** Alt text for the Figma image */
+  alt: PropTypes.string, //eslint-disable-line
 }
 
-export default FigmaImage
+export default FigmaImage //eslint-disable-line

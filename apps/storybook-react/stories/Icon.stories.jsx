@@ -1,5 +1,5 @@
 import React from 'react'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import { withKnobs, select, text } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Icon } from '@equinor/eds-core-react'
 import {
@@ -11,6 +11,8 @@ import {
   pregnant_woman,
   accessible_forward,
   save,
+  info_circle,
+  list,
 } from '@equinor/eds-icons'
 
 const icons = {
@@ -22,6 +24,8 @@ const icons = {
   pregnant_woman,
   accessible_forward,
   save,
+  info_circle,
+  list,
 }
 
 Icon.add(icons)

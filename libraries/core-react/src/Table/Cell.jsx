@@ -7,9 +7,7 @@ import { typographyTemplate } from '../_common/templates'
 const { header, cell } = tableTokens
 
 const variants = {
-  header: {
-    text: header.text,
-  },
+  header: { text: header.text },
   cell: {
     text: cell.text,
     numeric: cell.monospaced_numeric,
@@ -21,7 +19,17 @@ const variants = {
 const getTokens = (as, variant) => {
   switch (as) {
     case 'th':
-      return variants.header[variant]
+      return {
+        ...variants.header[variant],
+        borders: {
+          thead: variants.header[variant].borders,
+          tbody: variants.cell[variant].borders,
+        },
+        background: {
+          thead: variants.header[variant].background,
+          tbody: variants.cell[variant].background,
+        },
+      }
     case 'td':
     default:
       return variants.cell[variant]
@@ -34,18 +42,33 @@ const borderTemplate = (borders) =>
     return `${acc} border-${val}: ${width} solid ${color}; \n`
   }, '')
 
-const Base = ({ tokens }) => {
+const Base = ({ tokens, as }) => {
   const { background, height, text, spacings, borders } = tokens
   const { typography } = text
+  const bordersAndBackground =
+    as === 'th'
+      ? `
+        thead & {
+          ${borderTemplate(borders.thead)}
+          background: ${background.thead};
+        }
+
+        tbody & {
+          ${borderTemplate(borders.tbody)}
+          background: ${background.tbody};
+        }`
+      : `
+        ${borderTemplate(borders)}
+        background: ${background}`
+
   const base = `
-  background: ${background};
   min-height: ${height};
   height: ${height};
 
   padding-left: ${spacings.left};
   padding-right: ${spacings.right};
 
-  ${borderTemplate(borders)}
+  ${bordersAndBackground}
   ${typographyTemplate(typography)}
   `
   return base

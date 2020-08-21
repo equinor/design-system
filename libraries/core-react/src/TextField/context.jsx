@@ -29,9 +29,7 @@ TextFieldProvider.propTypes = {
   ]).isRequired,
 }
 
-TextFieldProvider.defaultProps = {
-  children: [],
-}
+TextFieldProvider.defaultProps = {}
 
 export const useTextField = () => {
   // @ts-ignore

@@ -36,4 +36,8 @@ const colors = {
 
 export const button = {
   colors,
+  icon_size: {
+    width: '24px',
+    height: '24px',
+  },
 }

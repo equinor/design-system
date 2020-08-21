@@ -29,10 +29,6 @@ const Wrapper = styled.div`
   grid-template-columns: auto 14rem;
 `
 
-const Sidebar = styled.aside`
-  position: relative;
-`
-
 const TempButtonWrapper = styled.div`
   display: grid;
   margin: 16px 0;
