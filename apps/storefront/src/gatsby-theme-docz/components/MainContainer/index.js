@@ -1,9 +1,10 @@
 /* eslint react/jsx-filename-extension: off  */
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useCurrentDoc } from 'docz'
+import { useCurrentDoc, useDocs } from 'docz'
 import { Helmet } from 'react-helmet-async'
+import * as R from 'ramda'
 import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
 import { H1 } from '../../../components/Titles'
 import { Tabs, Tab, TabLink } from '../../../components/Tabs'
@@ -110,7 +111,7 @@ const LandingPage = styled.div``
 
 export const MainContainer = ({ children, doc, ...rest }) => {
   const {
-    tabs,
+    tabs: rawTabs,
     title,
     toc,
     route,
@@ -118,7 +119,54 @@ export const MainContainer = ({ children, doc, ...rest }) => {
     type = 'contentPage',
     slug,
   } = doc.value
-  const withTabs = tabs !== undefined
+
+  const docs = useDocs()
+
+  const drafts = useMemo(
+    () =>
+      R.pipe(
+        R.map(R.pick(['route', 'mode'])),
+        R.filter((doc) => doc.mode.toLowerCase() === 'draft'),
+      )(docs),
+    [docs],
+  )
+
+  const findByRoute = (collection) => (route) => {
+    return R.find(R.propEq('route', route), collection)
+  }
+
+  const isDraft = findByRoute(drafts)
+
+  const reduceIndexed = R.addIndex(R.reduce)
+
+  const publishedTabs = (drafts) => (route) => (tabs) =>
+    R.pipe(
+      reduceIndexed(
+        (acc, curr, i) => [
+          ...acc,
+          {
+            label: curr,
+            route:
+              route.match(/^\/([a-z-]+\/?){2}/)[0] +
+              (i === 0
+                ? ''
+                : R.pipe(R.toLower, R.curry(R.replace)(/\s/g, '-'))(curr) +
+                  '/'),
+          },
+        ],
+        [],
+      ),
+      R.filter((tab) => !isDraft(tab.route)),
+      R.tap(console.log),
+    )(tabs)
+
+  const curriedPublishedTabs = publishedTabs(drafts)(route)
+
+  const tabs = rawTabs ? curriedPublishedTabs(rawTabs) : []
+
+  /* filter tabs here */
+
+  const withTabs = tabs.length > 0
   const isContentPage = type !== 'landingPage'
   const isPublished = (mode || '').toLowerCase() === 'publish'
   const current = useCurrentDoc()
@@ -150,33 +198,22 @@ export const MainContainer = ({ children, doc, ...rest }) => {
               </H1>
               {tabs && (
                 <nav aria-label="tabbed content navigation">
-                  <Tabs>
-                    {tabs.map((tab, index) => {
-                      const routeSegment = tab.toLowerCase().replace(/\s/g, '-')
-                      const firstTwoRouteSegments = /^\/([a-z-]+\/?){2}/
-                      const categoryRoute = route.match(
-                        firstTwoRouteSegments,
-                      )[0]
-
-                      const addTrailingSlash = (str) =>
-                        str.substring(str.length - 1) === '/' ? '' : '/'
-
-                      const tabRoute = `${categoryRoute}${addTrailingSlash(
-                        categoryRoute,
-                      )}${index > 0 ? `${routeSegment}/` : ''}`
-
-                      return (
-                        <Tab key={tab}>
-                          <TabLink
-                            isSelected={current.route === tabRoute}
-                            href={tabRoute}
-                          >
-                            {tab}
-                          </TabLink>
-                        </Tab>
-                      )
-                    })}
-                  </Tabs>
+                  {
+                    <Tabs>
+                      {tabs.map((tab) => {
+                        return (
+                          <Tab key={tab.route}>
+                            <TabLink
+                              isSelected={current.route === tab.route}
+                              href={tab.route}
+                            >
+                              {tab.label}
+                            </TabLink>
+                          </Tab>
+                        )
+                      })}
+                    </Tabs>
+                  }
                 </nav>
               )}
             </ContentHeader>
