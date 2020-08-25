@@ -1,7 +1,5 @@
 devDependencies:
   '@rollup/plugin-node-resolve': 8.0.1_rollup@2.15.0
-  '@types/react': 16.9.46
-  '@types/react-dom': 16.9.8
   rollup: 2.15.0
   typescript: 4.0.2
 lockfileVersion: 5.1
@@ -44,23 +42,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-rouEWBImiRaSJsVA+ITTFM6ZxibuAlTuNOCyxVbwreu6k6+ujs7DfnU9o+PShFhET78pMBl3eH+AGSI5eOTkPA==
-  /@types/prop-types/15.7.3:
-    dev: true
-    resolution:
-      integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
-  /@types/react-dom/16.9.8:
-    dependencies:
-      '@types/react': 16.9.46
-    dev: true
-    resolution:
-      integrity: sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==
-  /@types/react/16.9.46:
-    dependencies:
-      '@types/prop-types': 15.7.3
-      csstype: 3.0.2
-    dev: true
-    resolution:
-      integrity: sha512-dbHzO3aAq1lB3jRQuNpuZ/mnu+CdD3H0WVaaBQA8LTT3S33xhVBUj232T8M3tAhSWJs/D/UqORYUlJNl/8VQZg==
   /@types/resolve/0.0.8:
     dependencies:
       '@types/node': 14.0.13
@@ -73,10 +54,6 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-k0KL0aWZuBt2lrxrcASWDfwOLMnodeQjodT/1SxEQAXsHANgo6ZC/VEaSEHCXt7aSTZ4/4H5LKa+tBXmW7Vtvw==
-  /csstype/3.0.2:
-    dev: true
-    resolution:
-      integrity: sha512-ofovWglpqoqbfLNOTBNZLSbMuGrblAf1efvvArGKOZMBrIoJeu5UsAipQolkijtyQx5MtAzT/J9IHj/CEY1mJw==
   /deep-freeze/0.0.1:
     dev: true
     resolution:
@@ -138,7 +115,5 @@ packages:
       integrity: sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
 specifiers:
   '@rollup/plugin-node-resolve': ^8.0.1
-  '@types/react': ^16.9.46
-  '@types/react-dom': ^16.9.8
   rollup: ^2.15.0
   typescript: ^4.0.2
