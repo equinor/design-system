@@ -1,6 +1,7 @@
 devDependencies:
   '@rollup/plugin-node-resolve': 8.0.1_rollup@2.15.0
   rollup: 2.15.0
+  typescript: 4.0.2
 lockfileVersion: 5.1
 packages:
   /@rollup/plugin-node-resolve/8.0.1_rollup@2.15.0:
@@ -105,6 +106,14 @@ packages:
       fsevents: 2.1.3
     resolution:
       integrity: sha512-HAk4kyXiV5sdNDnbKWk5zBPnkX/DAgx09Kbp8rRIRDVsTUVN3vnSowR7ZHkV6/lAiE6c2TQ8HtYb72aCPGW4Jw==
+  /typescript/4.0.2:
+    dev: true
+    engines:
+      node: '>=4.2.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
 specifiers:
   '@rollup/plugin-node-resolve': ^8.0.1
   rollup: ^2.15.0
+  typescript: ^4.0.2
