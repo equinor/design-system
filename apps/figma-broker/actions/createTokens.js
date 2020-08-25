@@ -21,7 +21,7 @@ const PATHS_ = {
 }
 
 const writeJSTokens = (tokens) => {
-  writeResults(tokens, PATHS_.BASE_TOKENS_JS, 'js')
+  writeResults(tokens, PATHS_.BASE_TOKENS_JS, 'ts')
 
   const baseIndexContent = `${tokens
     .map((token) => `import { ${token.name} } from './${token.name}'`)
@@ -32,7 +32,7 @@ const writeJSTokens = (tokens) => {
   }
   `
 
-  writeFile(PATHS_.BASE_TOKENS_JS, 'index', 'js', baseIndexContent)
+  writeFile(PATHS_.BASE_TOKENS_JS, 'index', 'ts', baseIndexContent)
 
   // Disabled – shouldn’t really be done here…
   // writeFile(`${TOKENS_DIR}`, 'index', 'js', `export { tokens } from './base'`)
