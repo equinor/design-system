@@ -93,6 +93,10 @@ export const Tooltip = forwardRef(function Tooltip(
     <Wrapper {...props}>
       <div
         onMouseOver={handleOpen}
+        onMouseEnter={handleOpen}
+        onPointerEnter={handleOpen}
+        onPointerLeave={handleClose}
+        onMouseOut={handleClose}
         onMouseLeave={handleClose}
         onBlur={handleClose}
         onFocus={handleOpen}

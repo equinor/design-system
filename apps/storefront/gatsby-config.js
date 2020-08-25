@@ -1,53 +1,42 @@
-require('dotenv').config()
-const path = require('path')
-
-const emoji = require(`remark-emoji`)
+const remarkEmoji = require('remark-emoji')
 
 module.exports = {
   siteMetadata: {
-    title: 'Equinor Design System',
+    title: `Equinor Design System`,
+    author: 'EDS Core team',
     description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@chrisbiscardi',
+      'The EDS is the official design system of Equinor The EDS provides structure, guidance and tools that enable designers and developers to efficiently build consistent, inclusive and flexible solutions.',
+    image: '/eds-logo.png',
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: 'gatsby-theme-docz',
       options: {
-        remarkPlugins: [emoji],
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-smartypants`,
-            options: {
-              dashes: 'oldschool',
-            },
-          },
-        ],
-        defaultLayouts: {
-          default: path.resolve('./src/components/layout.jsx'),
-        },
+        // Note: these options are here instead of in doczrc.js
+        // because of this bug: https://github.com/doczjs/docz/issues/1191
+        mdPlugins: [remarkEmoji],
       },
     },
-    'gatsby-plugin-react-helmet',
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `assets`,
-        path: `${__dirname}/src/assets`,
+        name: `images`,
+        path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `content`,
-        path: `${__dirname}/src/content`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages`,
+        name: `gatsby-starter-default`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
     },
     'gatsby-transformer-yaml',
@@ -59,54 +48,32 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: 'Equinor Design System',
-        short_name: 'EDS',
-        start_url: '/',
-        background_color: '#fff',
-        theme_color: '#000',
-        display: 'minimal-ui',
+        name: `assets`,
+        path: `${__dirname}/src/assets`,
       },
     },
     {
-      resolve: `gatsby-plugin-postcss`,
+      resolve: `gatsby-plugin-algolia-docsearch`,
       options: {
-        postCssPlugins: [
-          /* eslint-disable global-require */
-          require('postcss-import'),
-          require('autoprefixer'),
-          require('postcss-custom-media'),
-          require('postcss-nested'),
-          /* eslint-enable global-require */
-        ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: 'Roboto',
-            variants: [`400`, `500`, `700`, `900`],
-          },
-        ],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-matomo',
-      options: {
-        siteId: '5',
-        matomoUrl: 'https://matomo.sdpaks.equinor.com',
-        siteUrl: 'https://eds.equinor.com/',
+        apiKey: '73fc0edd06a8031c699edfc560eaa013',
+        indexName: 'equinor_design-system',
+        inputSelector: '#search', // required
+        debug: true, // (bool) Optional. Default `false`
       },
     },
     {
       resolve: 'gatsby-plugin-styled-components',
     },
-
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        src: '/focus-visible.min.js', // Change to the script filename
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    // To learn more, visit: https://gatsby.dev/offline
+    // `gatsby-plugin-offline`,
   ],
 }

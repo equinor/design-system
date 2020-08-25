@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2020-07-15
+
+### Changed
+
+- Font-weight has been increased to medium in all cases where the font-size is below 16px for improved legibility. This change is most notable in table cells and labels.
+- Font-size has been increased and line-height decreased for `<helper>` and `<label>`
+- `<Icon>` now uses `currentColor` for its fill value – which means it inherits its fill colour from its parents `color` value
+- `<Typography>` now accepts any value for its color property
+
+## [0.4.1] - 2020-07-13
+
+### Added
+
+- `<Typography>` can now limit the number of visible lines, render any typography style in EDS, change the underlying html element and override/extend tokens used for a particular variant
+- `<Table>` can now have headers in columns in the table body
+
+### Fixed 🐛
+
+- Fixed horizontal alignment of icons and unintended border-color in `<Button>` in Safari ([#465](https://github.com/equinor/design-system/issues/465))
+- Fixed the “off”-colour in `<Switch>`([#466](https://github.com/equinor/design-system/issues/466))
+- Fixed an alignment bug in `<Tooltip>`([#408](https://github.com/equinor/design-system/issues/408))
+- Fixed alignment of headers in `<Table>`([#407](https://github.com/equinor/design-system/issues/407))
+
 ## [0.4.0] - 2020-06-25
 
 ### Added

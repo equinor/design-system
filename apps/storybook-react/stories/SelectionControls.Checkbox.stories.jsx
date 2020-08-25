@@ -86,7 +86,12 @@ export const CheckboxGroupControl = () => {
         Multiple checkboxes in a group
       </Typography>
       <fieldset>
-        <legend>We are in this together! 🙌</legend>
+        <legend>
+          We are in this together!
+          <span role="img" aria-label="raising hands emoji">
+            🙌
+          </span>
+        </legend>
         <UnstyledList>
           <li>
             <Checkbox label="Check me first" name="multiple" value="first" />

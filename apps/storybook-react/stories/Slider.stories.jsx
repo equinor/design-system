@@ -112,8 +112,13 @@ export const Examples = () => {
         />
       </div>
       <div>
-        <label id="disabled-slider">Disabled slider</label>
-        <Slider value={50} disabled ariaLabelledby="disabled-slider" />
+        <label htmlFor="disabled-slider">Disabled slider</label>
+        <Slider
+          id="disabled-slider"
+          value={50}
+          disabled
+          ariaLabelledby="disabled-slider"
+        />
       </div>
     </Body>
   )

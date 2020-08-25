@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2020-07-15
+
+### Changed
+
+- Font-weight is increased from 400 (regular) to 500 (medium) in all cases where the font-size is below 16px
+- Font-size is increased and line-height decreased for label and helper
+- Values such as underline, uppercase etc. are now lowercase
+
+### Removed
+
+- tabs.inactive-text is not in use in EDS Core React and has been removed
+
+## [0.2.1] - 2020-07-08
+
+### Changed
+
+- Updated tokens to include text-align even if the value is “left”
+
 ## [0.2.0] - 2020-04-30
 
 ### Changed

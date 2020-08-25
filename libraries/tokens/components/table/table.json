@@ -16,8 +16,9 @@
           "color": "rgba(61, 61, 61, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 500,
-          "lineHeight": "1.714em"
+          "fontWeight": 700,
+          "lineHeight": "1.714em",
+          "textAlign": "left"
         }
       },
       "spacings": {
@@ -36,8 +37,9 @@
           "color": "rgba(0, 112, 121, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 500,
-          "lineHeight": "1.714em"
+          "fontWeight": 700,
+          "lineHeight": "1.714em",
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {
@@ -54,8 +56,9 @@
           "color": "rgba(190, 190, 190, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 500,
-          "lineHeight": "1.714em"
+          "fontWeight": 700,
+          "lineHeight": "1.714em",
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {
@@ -91,7 +94,7 @@
           "color": "rgba(61, 61, 61, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 500,
+          "fontWeight": 700,
           "lineHeight": "1.714em",
           "textAlign": "right"
         }
@@ -112,7 +115,7 @@
           "color": "rgba(0, 112, 121, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 500,
+          "fontWeight": 700,
           "lineHeight": "1.714em",
           "textAlign": "right"
         },
@@ -131,7 +134,7 @@
           "color": "rgba(190, 190, 190, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 500,
+          "fontWeight": 700,
           "lineHeight": "1.714em",
           "textAlign": "right"
         },
@@ -164,8 +167,8 @@
         }
       },
       "spacings": {
-        "left": "16px",
-        "right": "16px"
+        "left": "12px",
+        "right": "12px"
       },
       "clickbound": {
         "height": "48px",
@@ -221,7 +224,7 @@
           "color": "rgba(61, 61, 61, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 400,
+          "fontWeight": 500,
           "lineHeight": "1.429em",
           "textAlign": "right"
         }
@@ -243,7 +246,7 @@
           "color": "rgba(61, 61, 61, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 400,
+          "fontWeight": 500,
           "lineHeight": "1.429em",
           "textAlign": "right"
         },
@@ -263,7 +266,7 @@
           "color": "rgba(190, 190, 190, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 400,
+          "fontWeight": 500,
           "lineHeight": "1.429em",
           "textAlign": "right"
         },
@@ -296,8 +299,8 @@
         }
       },
       "spacings": {
-        "left": "16px",
-        "right": "16px"
+        "left": "12px",
+        "right": "12px"
       },
       "clickbound": {
         "height": "48px",
@@ -420,7 +423,8 @@
             "fontSize": "1.000rem",
             "fontWeight": 400,
             "letterSpacing": "0.025em",
-            "lineHeight": "1.500em"
+            "lineHeight": "1.500em",
+            "textAlign": "left"
           },
           "colorPlaceholder": "rgba(111, 111, 111, 1)"
         },
@@ -456,7 +460,8 @@
               "fontSize": "1.000rem",
               "fontWeight": 400,
               "letterSpacing": "0.025em",
-              "lineHeight": "1.500em"
+              "lineHeight": "1.500em",
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(111, 111, 111, 1)"
           },
@@ -493,7 +498,8 @@
               "fontSize": "1.000rem",
               "fontWeight": 400,
               "letterSpacing": "0.025em",
-              "lineHeight": "1.500em"
+              "lineHeight": "1.500em",
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(190, 190, 190, 1)"
           },
@@ -522,7 +528,8 @@
               "fontSize": "1.000rem",
               "fontWeight": 400,
               "letterSpacing": "0.025em",
-              "lineHeight": "1.500em"
+              "lineHeight": "1.500em",
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(111, 111, 111, 1)"
           },
@@ -552,7 +559,8 @@
               "fontSize": "1.000rem",
               "fontWeight": 400,
               "letterSpacing": "0.025em",
-              "lineHeight": "1.500em"
+              "lineHeight": "1.500em",
+              "textAlign": "left"
             },
             "colorPlaceholder": "rgba(111, 111, 111, 1)"
           },
@@ -579,8 +587,9 @@
           "color": "rgba(61, 61, 61, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 400,
-          "lineHeight": "1.714em"
+          "fontWeight": 500,
+          "lineHeight": "1.714em",
+          "textAlign": "left"
         }
       },
       "spacings": {
@@ -599,8 +608,9 @@
           "color": "rgba(61, 61, 61, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 400,
-          "lineHeight": "1.714em"
+          "fontWeight": 500,
+          "lineHeight": "1.714em",
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {
@@ -617,8 +627,9 @@
           "color": "rgba(190, 190, 190, 1)",
           "fontFamily": "Equinor",
           "fontSize": "0.875rem",
-          "fontWeight": 400,
-          "lineHeight": "1.714em"
+          "fontWeight": 500,
+          "lineHeight": "1.714em",
+          "textAlign": "left"
         },
         "borders": {
           "bottom": {

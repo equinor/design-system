@@ -55,7 +55,12 @@ export const RadioGroupControl = () => {
         Group example as controlled components and onChange
       </Typography>
       <fieldset>
-        <legend>We are in this together! 🙌</legend>
+        <legend>
+          We are in this together!
+          <span role="img" aria-label="raising hands emoji">
+            🙌
+          </span>
+        </legend>
         <UnstyledList>
           <li>
             <Radio
