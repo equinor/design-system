@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "es2015"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": ["index.ts"],
+  "exclude": ["node_modules"]
+}
