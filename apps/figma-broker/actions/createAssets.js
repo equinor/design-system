@@ -76,7 +76,7 @@ export const ${name} = {
     R.head,
   )(assets)
 
-  writeFile(PATHS.ICON_FILES, 'index', 'js', jsFile)
+  writeFile(PATHS.ICON_FILES, 'index', 'ts', jsFile)
 }
 
 const writeJsonAssets = (assets) => {
