@@ -6,7 +6,7 @@ import commonjsPkg from './commonjs/package.json'
 // eslint-disable-next-line import/no-default-export
 export default [
   {
-    input: 'index.js',
+    input: 'index.ts',
     watch: {
       clearScreen: true,
     },
