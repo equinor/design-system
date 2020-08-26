@@ -4,8 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import babel from '@rollup/plugin-babel'
 import polyfill from 'rollup-plugin-polyfill'
-import typescript from '@rollup/plugin-typescript'
-
+import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 
 const peerDeps = Object.keys(pkg.peerDependencies || {})
@@ -29,8 +28,13 @@ export default [
     },
     plugins: [
       json(),
-      resolve({ extensions }),
-      typescript(),
+      resolve({ extensions: ['.jsx', '.js'] }),
+      typescript({
+        tsconfig: 'tsconfig.json',
+        typescript: require('typescript'),
+        include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
+        exclude: ['node_modules/**'],
+      }),
       babel({
         exclude: 'node_modules/**',
         babelHelpers: 'bundled',
