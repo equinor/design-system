@@ -1,3 +1,4 @@
+// @ts-nocheck
 import primary from '@equinor/eds-tokens/components/button/buttons-primary.json'
 import secondary from '@equinor/eds-tokens/components/button/buttons-secondary.json'
 import danger from '@equinor/eds-tokens/components/button/buttons-danger.json'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Table } from './Table'
 import { Body } from './Body'
 import { Cell } from './Cell'

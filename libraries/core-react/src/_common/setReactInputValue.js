@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Workaround
 // React ignores 'dispathEvent' on input/textarea, see https://github.com/facebook/react/issues/10135
 export const setReactInputValue = (input, value) => {

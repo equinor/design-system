@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Accordion } from './Accordion'
 import { AccordionItem } from './AccordionItem'
 import { AccordionHeaderTitle, AccordionHeader } from './AccordionHeader'

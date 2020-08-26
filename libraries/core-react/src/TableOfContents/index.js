@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { TableOfContents } from './TableOfContents'
 import { LinkItem } from './LinkItem'
 

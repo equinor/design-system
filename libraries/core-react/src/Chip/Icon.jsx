@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled, { css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
 import { Icon as Icon_ } from '..'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { commonPropTypes, commonDefaultProps } from './Accordion.propTypes'
