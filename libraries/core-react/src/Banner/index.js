@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Banner } from './Banner'
 import { BannerIcon } from './BannerIcon'
 import { BannerMessage } from './BannerMessage'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Dialog } from './Dialog'
 import { Actions } from './Actions'
 import { Title } from './Title'

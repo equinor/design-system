@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { SnackbarAction } from './SnackbarAction'
 import { Snackbar } from './Snackbar'
 
