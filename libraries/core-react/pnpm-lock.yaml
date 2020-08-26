@@ -30,6 +30,7 @@ devDependencies:
   rollup-plugin-polyfill: 3.0.0
   rollup-plugin-typescript2: 0.27.2_rollup@2.15.0+typescript@4.0.2
   styled-components: 4.4.1_4f54128445bc6f13bd713dcb3d91e98e
+  tslib: 2.0.1
   typescript: 4.0.2
 lockfileVersion: 5.1
 packages:
@@ -5654,4 +5655,5 @@ specifiers:
   rollup-plugin-polyfill: ^3.0.0
   rollup-plugin-typescript2: ^0.27.2
   styled-components: 4.4.1
+  tslib: ^2.0.1
   typescript: ^4.0.2
