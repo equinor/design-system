@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Popover } from './Popover'
 import { PopoverTitle } from './PopoverTitle'
 import { PopoverAnchor } from './PopoverAnchor'

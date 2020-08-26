@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { TabsContext } from './Tabs.context'

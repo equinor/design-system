@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { TopBar } from './TopBar'
 import { Actions } from './Actions'
 import { Header } from './Header'

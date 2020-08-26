@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+// @ts-nocheck
 export { Button } from './Button'
 export { Typography } from './Typography'
 export { Table } from './Table'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 let _icons = {}
 let count = 0
 export const add = (icons) => {

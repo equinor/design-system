@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { css } from 'styled-components'
 
 export const typographyTemplate = (typography, link) => {
