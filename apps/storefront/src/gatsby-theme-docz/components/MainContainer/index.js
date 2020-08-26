@@ -1,5 +1,5 @@
 /* eslint react/jsx-filename-extension: off  */
-import React, { useMemo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCurrentDoc, useDocs } from 'docz'
@@ -111,7 +111,7 @@ const LandingPage = styled.div``
 
 export const MainContainer = ({ children, doc, ...rest }) => {
   const {
-    tabs: rawTabs,
+    tabs: allTabs,
     title,
     toc,
     route,
@@ -122,50 +122,40 @@ export const MainContainer = ({ children, doc, ...rest }) => {
 
   const docs = useDocs()
 
-  const drafts = useMemo(
-    () =>
-      R.pipe(
-        R.map(R.pick(['route', 'mode'])),
-        R.filter((doc) => doc.mode.toLowerCase() === 'draft'),
-      )(docs),
-    [docs],
-  )
+  const findByRoute = (collection) => (route) =>
+    R.find(R.propEq('route', route), collection)
 
-  const findByRoute = (collection) => (route) => {
-    return R.find(R.propEq('route', route), collection)
-  }
+  const drafts = R.pipe(
+    R.map(R.pick(['route', 'mode'])),
+    R.filter(R.propEq('mode', 'draft')),
+  )(docs)
 
   const isDraft = findByRoute(drafts)
 
   const reduceIndexed = R.addIndex(R.reduce)
 
-  const publishedTabs = (drafts) => (route) => (tabs) =>
+  const toLowerRemoveSpaces = R.pipe(R.toLower, R.replace(/\s/g, '-'))
+
+  const publishedTabs = (route) => (tabs) =>
     R.pipe(
       reduceIndexed(
-        (acc, curr, i) => [
+        (acc, label, i) => [
           ...acc,
           {
-            label: curr,
+            label,
             route:
-              route.match(/^\/([a-z-]+\/?){2}/)[0] +
-              (i === 0
-                ? ''
-                : R.pipe(R.toLower, R.curry(R.replace)(/\s/g, '-'))(curr) +
-                  '/'),
+              route.match(/^\/([a-z-]+\/?){2}/)?.[0] +
+              (i === 0 ? '' : toLowerRemoveSpaces(label) + '/'),
           },
         ],
         [],
       ),
-      R.filter((tab) => !isDraft(tab.route)),
-      R.tap(console.log),
+      R.filter(
+        (tab) => !(process.env.GATSBY_STAGE === 'prod' && isDraft(tab.route)),
+      ),
     )(tabs)
 
-  const curriedPublishedTabs = publishedTabs(drafts)(route)
-
-  const tabs = rawTabs ? curriedPublishedTabs(rawTabs) : []
-
-  /* filter tabs here */
-
+  const tabs = allTabs ? publishedTabs(route)(allTabs) : []
   const withTabs = tabs.length > 0
   const isContentPage = type !== 'landingPage'
   const isPublished = (mode || '').toLowerCase() === 'publish'
@@ -196,7 +186,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
                   </span>
                 )}
               </H1>
-              {tabs && (
+              {withTabs && (
                 <nav aria-label="tabbed content navigation">
                   {
                     <Tabs>
