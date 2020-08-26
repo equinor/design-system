@@ -46,6 +46,4 @@ export const Variants = () => {
   )
 }
 
-Variants.story = {
-  name: 'Variants',
-}
+Variants.storyName = 'Variants'

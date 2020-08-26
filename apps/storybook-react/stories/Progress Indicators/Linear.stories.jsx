@@ -50,10 +50,5 @@ export const Indeterminate = () => {
   )
 }
 
-Determinate.story = {
-  name: 'Determinate',
-}
-
-Indeterminate.story = {
-  name: 'Indeterminate',
-}
+Determinate.storyName = 'Determinate'
+Indeterminate.storyName = 'Indeterminate'

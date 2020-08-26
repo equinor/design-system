@@ -108,9 +108,5 @@ export const ControlledSwitchControl = () => {
   )
 }
 
-SwitchControl.story = {
-  name: 'Examples',
-}
-ControlledSwitchControl.story = {
-  name: 'Controlled',
-}
+SwitchControl.storyName = 'Examples'
+ControlledSwitchControl.storyName = 'Controlled'

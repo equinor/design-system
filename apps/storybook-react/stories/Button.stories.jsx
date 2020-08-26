@@ -108,9 +108,7 @@ export const contained = () => (
   </Wrapper>
 )
 
-contained.story = {
-  name: 'Contained (default)',
-}
+contained.storyName = 'Contained (default)'
 
 export const outlined = () => (
   <Wrapper>
@@ -270,7 +268,5 @@ export const link = () => (
   </Wrapper>
 )
 
-knobs.story = {
-  name: 'With knobs',
-  decorators: [withKnobs],
-}
+knobs.storyName = 'With knobs'
+knobs.decorators = [withKnobs]

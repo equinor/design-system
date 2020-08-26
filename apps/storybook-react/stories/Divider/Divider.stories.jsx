@@ -57,7 +57,5 @@ export const knobs = () => (
   </Wrapper>
 )
 
-knobs.story = {
-  name: 'With knobs',
-  decorators: [withKnobs],
-}
+knobs.storyName = 'With knobs'
+knobs.decorators = [withKnobs]

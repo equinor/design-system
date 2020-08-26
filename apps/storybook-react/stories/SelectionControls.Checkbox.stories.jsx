@@ -216,12 +216,6 @@ export const WithFormsControl = () => {
   )
 }
 
-CheckboxControl.story = {
-  name: 'Single',
-}
-CheckboxGroupControl.story = {
-  name: 'Multiple',
-}
-WithFormsControl.story = {
-  name: 'With React Hooks Forms',
-}
+CheckboxControl.storyName = 'Single'
+CheckboxGroupControl.storyName = 'Multiple'
+WithFormsControl.storyName = 'With React Hooks Forms'

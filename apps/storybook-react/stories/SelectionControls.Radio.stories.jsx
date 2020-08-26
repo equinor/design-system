@@ -95,9 +95,5 @@ export const RadioGroupControl = () => {
   )
 }
 
-RadioControl.story = {
-  name: 'Single',
-}
-RadioGroupControl.story = {
-  name: 'Group',
-}
+RadioControl.storyName = 'Single'
+RadioGroupControl.storyName = 'Group'
