@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useRef, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { tokens } from '@equinor/eds-tokens'
 
 const { typography, colors: colorsToken } = tokens
