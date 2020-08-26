@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as templates from './templates'
 
 export { setReactInputValue } from './setReactInputValue'

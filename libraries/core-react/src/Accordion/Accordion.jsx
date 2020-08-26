@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, useMemo } from 'react'
 import createId from 'lodash/uniqueId'
 import PropTypes from 'prop-types'

@@ -29,6 +29,12 @@ export default [
     plugins: [
       json(),
       resolve({ extensions: ['.jsx', '.js'] }),
+      typescript({
+        tsconfig: 'tsconfig.json',
+        typescript: require('typescript'),
+        include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
+        exclude: ['node_modules/**'],
+      }),
       babel({
         exclude: 'node_modules/**',
         presets: ['@babel/env', '@babel/preset-react'],
@@ -39,12 +45,6 @@ export default [
       }),
       commonjs(),
       polyfill(['focus-visible']),
-      typescript({
-        tsconfig: 'tsconfig.json',
-        typescript: require('typescript'),
-        include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
-        exclude: ['node_modules/**'],
-      }),
     ],
     output: [
       { file: pkg.browser, name: pkg.name, format: 'umd', globals },
