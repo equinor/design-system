@@ -132,24 +132,18 @@ export const MainContainer = ({ children, doc, ...rest }) => {
 
   const isDraft = findByRoute(drafts)
 
-  const reduceIndexed = R.addIndex(R.reduce)
+  const mapIndexed = R.addIndex(R.map)
 
   const toLowerRemoveSpaces = R.pipe(R.toLower, R.replace(/\s/g, '-'))
 
   const publishedTabs = (route) => (tabs) =>
     R.pipe(
-      reduceIndexed(
-        (acc, label, i) => [
-          ...acc,
-          {
-            label,
-            route:
-              route.match(/^\/([a-z-]+\/?){2}/)?.[0] +
-              (i === 0 ? '' : toLowerRemoveSpaces(label) + '/'),
-          },
-        ],
-        [],
-      ),
+      mapIndexed((label, i) => ({
+        label,
+        route:
+          route.match(/^\/([a-z-]+\/?){2}/)?.[0] +
+          (i === 0 ? '' : toLowerRemoveSpaces(label) + '/'),
+      })),
       R.filter(
         (tab) => !(process.env.GATSBY_STAGE === 'prod' && isDraft(tab.route)),
       ),
