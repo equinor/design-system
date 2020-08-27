@@ -54,6 +54,7 @@
     "@types/styled-components": "^5.1.2",
     "@types/testing-library__jest-dom": "^5.9.2",
     "babel-plugin-react-docgen": "^4.1.0",
+    "babel-plugin-react-docgen-typescript": "^1.4.2",
     "babel-plugin-styled-components": "^1.10.7",
     "jest": "^26.0.1",
     "jest-styled-components": "^6.3.4",

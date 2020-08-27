@@ -1,7 +1,7 @@
 import React from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Avatar, Typography } from '@equinor/eds-core-react'
+import { Avatar, Typography, Divider } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
 
 const image = catImg

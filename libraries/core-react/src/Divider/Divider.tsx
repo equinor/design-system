@@ -11,7 +11,7 @@ type StyleProps = {
 }
 
 const StyledDivider = styled.hr<StyleProps>`
-  border: 'none';
+  border: none;
   background-color: ${(props) => props.backgroundColor};
   margin-top: ${(props) => props.marginTop};
   margin-bottom: ${(props) => props.marginBottom};
@@ -19,8 +19,11 @@ const StyledDivider = styled.hr<StyleProps>`
 `
 
 type Props = {
+  /** Valid colors */
   color?: 'lighter' | 'light' | 'medium'
+  /** Vertical spacing */
   variant?: 'small' | 'medium'
+  /** @ignore */
   className?: string
 }
 
@@ -36,12 +39,3 @@ export const Divider = forwardRef<HTMLHRElement, Props>((props, ref) => {
 })
 
 Divider.displayName = 'eds-divider'
-
-Divider.propTypes = {
-  // Valid colors
-  color: PropTypes.oneOf(['lighter', 'light', 'medium']),
-  // Vertical spacing
-  variant: PropTypes.oneOf(['small', 'medium']),
-  /** @ignore */
-  className: PropTypes.string,
-}

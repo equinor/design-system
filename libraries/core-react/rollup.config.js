@@ -40,7 +40,9 @@ export default [
         presets: ['@babel/env', '@babel/preset-react'],
         plugins: [
           'babel-plugin-styled-components',
-          ...(buildForStorybook ? ['babel-plugin-react-docgen'] : []),
+          ...(buildForStorybook
+            ? ['babel-plugin-react-docgen-typescript']
+            : []),
         ],
       }),
       commonjs(),

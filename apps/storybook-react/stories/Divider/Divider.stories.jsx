@@ -6,11 +6,11 @@ import mdx from './Divider.docs.mdx'
 
 export default {
   title: 'Components/Divider',
-  parameters: {
+  /* parameters: {
     docs: {
       page: mdx,
     },
-  },
+  }, */
   component: Divider,
 }
 
