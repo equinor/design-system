@@ -16,7 +16,7 @@ const PaddedTypography = styled(Typography)`
 `
 
 export default {
-  title: 'Components|Pagination',
+  title: 'Components/Pagination',
   component: Pagination,
   decorators: [withKnobs],
 }

@@ -28,7 +28,7 @@ const PaddedTypography = styled(Typography)`
 `
 
 export default {
-  title: 'Components|Banner',
+  title: 'Components/Banner',
   component: Banner,
 }
 

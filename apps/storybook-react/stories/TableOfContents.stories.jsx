@@ -18,7 +18,7 @@ Icon.add(icons)
 const { LinkItem } = TableOfContents
 
 export default {
-  title: 'Components|TableOfContents',
+  title: 'Components/TableOfContents',
   component: TableOfContents,
 }
 

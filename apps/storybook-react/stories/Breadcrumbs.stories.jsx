@@ -22,7 +22,7 @@ const WrapContainer = styled.div`
 `
 
 export default {
-  title: 'Components|Breadcrumbs',
+  title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
   decorators: [withKnobs],
 }

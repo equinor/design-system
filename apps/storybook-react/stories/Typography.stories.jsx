@@ -13,7 +13,7 @@ const Grid = styled(Wrapper)`
 `
 
 export default {
-  title: 'Components|Typography',
+  title: 'Components/Typography',
   component: Typography,
 }
 

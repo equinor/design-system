@@ -37,7 +37,7 @@ const Grid = styled.div`
 `
 
 export default {
-  title: 'Components|Card',
+  title: 'Components/Card',
   component: Card,
   decorators: [withKnobs],
 }

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Progress Indicators/Circular',
+  title: 'Components/Progress Indicators/Circular',
   component: CircularProgress,
 }
 
@@ -48,10 +48,5 @@ export const Indeterminate = () => {
   )
 }
 
-Determinate.story = {
-  name: 'Determinate',
-}
-
-Indeterminate.story = {
-  name: 'Indeterminate',
-}
+Determinate.storyName = 'Determinate'
+Indeterminate.storyName = 'Indeterminate'

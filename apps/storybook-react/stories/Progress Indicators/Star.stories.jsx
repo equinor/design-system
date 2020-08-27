@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Progress Indicators/Star',
+  title: 'Components/Progress Indicators/Star',
   component: StarProgress,
 }
 
@@ -50,10 +50,5 @@ export const Indeterminate = () => {
   )
 }
 
-Determinate.story = {
-  name: 'Determinate',
-}
-
-Indeterminate.story = {
-  name: 'Indeterminate',
-}
+Determinate.storyName = 'Determinate'
+Indeterminate.storyName = 'Indeterminate'

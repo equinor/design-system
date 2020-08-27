@@ -34,7 +34,7 @@ const TextWrapper = styled.div`
   margin-bottom: 32px;
 `
 export default {
-  title: 'Components|Popover',
+  title: 'Components/Popover',
   component: Popover,
   decorators: [withKnobs],
 }

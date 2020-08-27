@@ -1,20 +1,29 @@
-import { Meta, Story, Props, Preview, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks'
-import { Divider } from '@equinor/eds-core-react'
+import {
+  Meta,
+  Story,
+  ArgsTable,
+  Canvas,
+  ColorPalette,
+  ColorItem,
+} from '@storybook/addon-docs/blocks'
+import { Divider } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 
 # Divider
 
-<Typography variant="ingress">A divider is a thin line that separates content into clear groups.</Typography>
+<Typography variant="ingress">
+  A divider is a thin line that separates content into clear groups.
+</Typography>
 
 See the [storefront](https://eds.equinor.com/components/divider/) for details about this component
 
-<Preview>
+<Canvas>
   <Story id="components-divider--default" />
-</Preview>
+</Canvas>
 
 ## Props
 
-<Props of={Divider} /> 
+<ArgsTable of={Divider} />{' '}
 
 ## Variants
 
@@ -25,18 +34,22 @@ The examples are shown on a dark background to be able to see the light and ligh
 ### Colours
 
 <ColorPalette>
-  <ColorItem title="lighter" colors={[tokens.colors.ui.background__default.hex]} />
+  <ColorItem
+    title="lighter"
+    colors={[tokens.colors.ui.background__default.hex]}
+  />
   <ColorItem title="light" colors={[tokens.colors.ui.background__light.hex]} />
-  <ColorItem title="medium" colors={[tokens.colors.ui.background__medium.hex]} />
+  <ColorItem
+    title="medium"
+    colors={[tokens.colors.ui.background__medium.hex]}
+  />
 </ColorPalette>
-
 
 ### Small
 
 <Preview withSource="open">
   <Story id="components-divider--small" />
 </Preview>
-
 
 ### Medium
 

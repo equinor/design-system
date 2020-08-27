@@ -21,9 +21,13 @@ addParameters({
         ? 0
         : a[1].id.localeCompare(b[1].id, undefined, { numeric: true }),
   },
+  a11y: {
+    element: '#root',
+    config: {},
+    options: {},
+    manual: true,
+  },
 })
-
-addDecorator(withA11y)
 
 addDecorator((story) => (
   <>

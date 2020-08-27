@@ -54,7 +54,7 @@ const Child = styled.div`
 `
 
 export default {
-  title: 'Components|SideSheet',
+  title: 'Components/SideSheet',
   component: SideSheet,
 }
 

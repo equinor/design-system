@@ -82,7 +82,7 @@ const ACTION_CHOICES = {
 }
 
 export default {
-  title: 'Components|Dialog',
+  title: 'Components/Dialog',
   component: Dialog,
 }
 
@@ -191,7 +191,5 @@ export const types = () => {
   )
 }
 
-knobs.story = {
-  name: 'With knobs',
-  decorators: [withKnobs],
-}
+knobs.storyName = 'With knobs'
+knobs.decorators = [withKnobs]
