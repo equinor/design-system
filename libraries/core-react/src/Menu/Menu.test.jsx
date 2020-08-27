@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup, screen } from './test-utils'
+import { render, cleanup, screen, fireEvent } from './test-utils'
 import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Menu } from '.'
@@ -60,5 +61,49 @@ describe('Menu', () => {
 
     expect(menuItem).toBeDefined()
     expect(menuSection).toBeDefined()
+  })
+
+  it('has called onClose when MenuItem is clicked', () => {
+    const handleOnClose = jest.fn()
+    const handleOnClick = jest.fn()
+
+    render(
+      <Menu open onClose={handleOnClose}>
+        <MenuItem onClick={handleOnClick}>Item 1</MenuItem>
+      </Menu>,
+    )
+
+    const menuItem = screen.getByText('Item 1')
+
+    fireEvent.click(menuItem)
+
+    expect(handleOnClick).toHaveBeenCalled()
+    expect(handleOnClose).toHaveBeenCalled()
+  })
+
+  it('has first menuItem focused when focus is set to first', () => {
+    render(
+      <Menu open focus="first">
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+        <MenuItem>Item 3</MenuItem>
+      </Menu>,
+    )
+    const menuItem = screen.getByText('Item 1').parentElement
+
+    expect(document.activeElement == menuItem).toBeTruthy()
+  })
+
+  it('has last menuItem focused when focus is set to last', () => {
+    render(
+      <Menu open focus="last">
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+        <MenuItem>Item 3</MenuItem>
+      </Menu>,
+    )
+    const menuItem = screen.getByText('Item 3').parentElement
+
+    expect(document.activeElement == menuItem).toBeTruthy()
   })
 })

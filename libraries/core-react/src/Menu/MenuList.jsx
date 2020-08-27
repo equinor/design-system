@@ -15,7 +15,7 @@ const List = styled.ul.attrs({ role: 'menu' })`
 `
 
 export const MenuList = React.forwardRef(function EdsMenuList(
-  { children, focus, ...rest },
+  { children, focus, onClose, ...rest },
   ref,
 ) {
   const state = useMenu()
@@ -23,6 +23,7 @@ export const MenuList = React.forwardRef(function EdsMenuList(
 
   const updatedChildren = React.Children.map(children, (child, index) =>
     React.cloneElement(child, {
+      onClose,
       index,
     }),
   )
@@ -82,11 +83,14 @@ MenuList.propTypes = {
   ]).isRequired,
   /** Focus menuItem */
   focus: PropTypes.oneOf(['first', 'last']),
+  /** onClose handler */
+  onClose: PropTypes.func,
 }
 
 MenuList.defaultProps = {
   className: '',
   focus: undefined,
+  onClose: () => {},
 }
 
 MenuList.displayName = 'eds-menu-list'

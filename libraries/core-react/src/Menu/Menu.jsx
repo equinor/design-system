@@ -67,9 +67,14 @@ export const Menu = React.forwardRef(function EdsMenu(
     isPositioned,
   }
 
+  const menuProps = {
+    ...rest,
+    onClose,
+  }
+
   return (
     <StyledPaper {...paperProps} elevation="raised">
-      <MenuList {...rest} ref={useCombinedRefs(ref, listRef)}>
+      <MenuList {...menuProps} ref={useCombinedRefs(ref, listRef)}>
         {children}
       </MenuList>
     </StyledPaper>

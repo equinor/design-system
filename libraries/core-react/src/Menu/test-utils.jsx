@@ -2,6 +2,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
+// eslint-disable-next-line react/prop-types
 const AllTheProviders = ({ children }) => {
   const anchorRef = React.useRef()
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -16,7 +17,9 @@ const AllTheProviders = ({ children }) => {
 
   return (
     <>
-      <button ref={anchorRef}>Anchor</button>
+      <button style={{ top: 0, right: 0, float: 'right' }} ref={anchorRef}>
+        Anchor
+      </button>
       {updatedChildren}
     </>
   )
