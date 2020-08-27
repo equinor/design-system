@@ -4,7 +4,9 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import babel from '@rollup/plugin-babel'
 import polyfill from 'rollup-plugin-polyfill'
-import typescript from 'rollup-plugin-typescript2'
+//import typescript from 'rollup-plugin-typescript2'
+import typescript from '@rollup/plugin-typescript'
+
 import pkg from './package.json'
 
 const peerDeps = Object.keys(pkg.peerDependencies || {})
@@ -20,24 +22,40 @@ const buildForStorybook = process.env.STORYBOOK
 
 export default [
   {
-    input: 'src/index.js',
+    input: './src/index.js',
     external: peerDeps,
     watch: {
       clearScreen: true,
       include: ['./src/**', './../tokens/**'],
     },
-    plugins: [
+    /*    plugins: [
       json(),
-      resolve({ extensions: ['.jsx', '.js'] }),
-      typescript({
-        tsconfig: 'tsconfig.json',
-        typescript: require('typescript'),
-        include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
-        exclude: ['node_modules/**'],
-      }),
+      resolve({ extensions: ['.jsx', '.js', '.tsx'] }),
+      typescript(),
       babel({
         exclude: 'node_modules/**',
         presets: ['@babel/env', '@babel/preset-react'],
+        plugins: [
+          'babel-plugin-styled-components',
+          ['babel-plugin-react-docgen-typescript'],
+        ],
+      }),
+      commonjs(),
+      polyfill(['focus-visible']),
+    ], */
+    plugins: [
+      json(),
+      resolve({ extensions: ['.jsx', '.js', '.tsx', '.ts'] }),
+      typescript(),
+      babel({
+        exclude: 'node_modules/**',
+        babelHelpers: 'bundled',
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-react',
+          // '@babel/preset-typescript',
+        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         plugins: [
           'babel-plugin-styled-components',
           ...(buildForStorybook

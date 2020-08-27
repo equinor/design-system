@@ -12,7 +12,9 @@
     "checkJs": true,
     "noEmit": true,
     "jsx": "react"
+
+    //"declaration": true,
   },
-  "include": ["src"],
+  "include": ["./src"],
   "exclude": ["node_modules"]
 }

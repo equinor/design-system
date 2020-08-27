@@ -24,7 +24,7 @@ afterEach(cleanup)
 
 describe('Divider', () => {
   it('Has medium colour and medium spacing as default', () => {
-    const { container } = render(<Divider />)
+    const { container } = render(<Divider color="light" />)
     expect(container.firstChild).toHaveStyleRule('background-color', medium)
     expect(container.firstChild).toHaveStyleRule('margin-top', spacingMedium)
   })
@@ -37,11 +37,13 @@ describe('Divider', () => {
     expect(container.firstChild).toHaveStyleRule('background-color', lighter)
   })
   it('Sets topMargin to small according to variant prop', () => {
-    const { container } = render(<Divider variant="small" />)
+    const { container } = render(<Divider color="light" variant="small" />)
     expect(container.firstChild).toHaveStyleRule('margin-top', spacingSmall)
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledDivider variant="small" />)
+    const { container } = render(
+      <StyledDivider color="light" variant="small" />,
+    )
     expect(container.firstChild).toHaveStyleRule('position', 'relative')
     expect(container.firstChild).toHaveStyleRule('margin-top', spacingSmall)
   })

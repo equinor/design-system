@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "start-storybook -p 9000 --ci",
-    "dev": "start-storybook -p 9000 --ci",
+    "dev": "DEBUG=docgen:* start-storybook -p 9000 --ci",
     "build": "build-storybook -c .storybook -o dist",
     "lint": "eslint stories/**/*.jsx"
   },

@@ -19,11 +19,13 @@ const StyledDivider = styled.hr<StyleProps>`
 `
 
 type Props = {
-  /** Valid colors */
+  /** All the beautiful colors */
+  /** @default medium */
   color?: 'lighter' | 'light' | 'medium'
-  /** Vertical spacing */
+  /** Vertical spacings */
+  /** @default medium */
   variant?: 'small' | 'medium'
-  /** @ignore */
+  /** OMG, I would like some champagne */
   className?: string
 }
 
@@ -38,4 +40,4 @@ export const Divider = forwardRef<HTMLHRElement, Props>((props, ref) => {
   return <StyledDivider {...styleProps} className={className} ref={ref} />
 })
 
-Divider.displayName = 'eds-divider'
+Divider.displayName = 'Divider'
