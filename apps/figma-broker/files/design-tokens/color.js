@@ -1,11 +1,5 @@
 import R from 'ramda'
-import {
-  propName,
-  withType,
-  pickChildren,
-  toDictDeep,
-  isNotEmpty,
-} from '@utils'
+import { propName, withType, pickChildren, isNotEmpty } from '@utils'
 import { fillToRgba, fillToHex, fillToHsla, toCSSVars } from '@transformers'
 
 const findMode = (name) => {
@@ -15,8 +9,7 @@ const findMode = (name) => {
 
   return 'default'
 }
-// ['interactive', 'table__cell__fill_activated']
-// ['modes', 'dark', 'interactive', 'table__cell__fill_activated]
+
 export const toDictMode = R.curry(R.reduce)(
   (acc, { name, value, mode }) =>
     R.set(
