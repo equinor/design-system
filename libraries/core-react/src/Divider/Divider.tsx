@@ -21,7 +21,7 @@ type Props = {
   /** Color variants
  @default medium */
   color?: 'lighter' | 'light' | 'medium'
-  /** Vertical spacings 
+  /** Vertical spacings
    @default medium */
   variant?: 'small' | 'medium'
   className?: string
