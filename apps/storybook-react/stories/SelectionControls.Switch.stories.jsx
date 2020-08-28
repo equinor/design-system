@@ -39,7 +39,7 @@ const Examples = styled.div`
 `
 
 export default {
-  title: 'Components|Selection controls/Switch',
+  title: 'Components/Selection controls/Switch',
   component: Switch,
 }
 
@@ -108,9 +108,5 @@ export const ControlledSwitchControl = () => {
   )
 }
 
-SwitchControl.story = {
-  name: 'Examples',
-}
-ControlledSwitchControl.story = {
-  name: 'Controlled',
-}
+SwitchControl.storyName = 'Examples'
+ControlledSwitchControl.storyName = 'Controlled'

@@ -16,9 +16,9 @@ const StyledPopoverWrapper = styled.div`
       transform: ${transform};
     `}
   width: max-content;
+  align-self: center;
   position: absolute;
   z-index: 500;
-  align-self: center;
   flex-shrink: 0;
   ::after {
     content: '';

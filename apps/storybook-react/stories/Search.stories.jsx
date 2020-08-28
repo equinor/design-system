@@ -32,7 +32,7 @@ const StyledSearch = styled(Search)`
 `
 
 export default {
-  title: 'Components|Search',
+  title: 'Components/Search',
   component: Search,
   decorators: [withKnobs],
 }

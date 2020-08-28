@@ -7,7 +7,7 @@ const { ListItem } = List
 const start = '15'
 
 export default {
-  title: 'Components|Lists',
+  title: 'Components/Lists',
   component: List,
 }
 

@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components|Accordion',
+  title: 'Components/Accordion',
   parameters: {
     docs: { page: mdx },
   },

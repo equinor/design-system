@@ -6,12 +6,8 @@ import { tooltip as tokens } from './Tooltip.tokens'
 
 const Wrapper = styled.div`
   position: relative;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-`
-
-const Anchor = styled.div`
-  margin-right: auto;
 `
 
 const StyledTooltipWrapper = styled.div`
@@ -24,6 +20,7 @@ const StyledTooltipWrapper = styled.div`
       transform: ${transform};
     `}
   position: absolute;
+  align-self: center;
   z-index: 500;
   white-space: nowrap;
   ::after {
@@ -94,16 +91,24 @@ export const Tooltip = forwardRef(function Tooltip(
 
   return (
     <Wrapper {...props}>
-      <Anchor
+      <div
         onMouseOver={handleOpen}
+        onMouseEnter={handleOpen}
+        onPointerEnter={handleOpen}
+        onPointerLeave={handleClose}
+        onMouseOut={handleClose}
         onMouseLeave={handleClose}
         onBlur={handleClose}
         onFocus={handleOpen}
       >
         {children}
-      </Anchor>
+      </div>
       {openState && (
-        <StyledTooltipWrapper role="tooltip" {...wrapperProps}>
+        <StyledTooltipWrapper
+          style={{ justifySelf: 'center' }}
+          role="tooltip"
+          {...wrapperProps}
+        >
           <StyledTooltip>
             <TooltipArrow
               {...arrowProps}

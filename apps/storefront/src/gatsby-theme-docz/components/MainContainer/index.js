@@ -2,7 +2,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useCurrentDoc } from 'docz'
+import { useCurrentDoc, useDocs } from 'docz'
+import { Helmet } from 'react-helmet-async'
+import * as R from 'ramda'
 import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
 import { H1 } from '../../../components/Titles'
 import { Tabs, Tab, TabLink } from '../../../components/Tabs'
@@ -109,7 +111,7 @@ const LandingPage = styled.div``
 
 export const MainContainer = ({ children, doc, ...rest }) => {
   const {
-    tabs,
+    tabs: allTabs,
     title,
     toc,
     route,
@@ -117,79 +119,115 @@ export const MainContainer = ({ children, doc, ...rest }) => {
     type = 'contentPage',
     slug,
   } = doc.value
-  const withTabs = tabs !== undefined
+
+  const docs = useDocs()
+
+  const findByRoute = (collection) => (route) =>
+    R.find(R.propEq('route', route), collection)
+
+  const drafts = R.pipe(
+    R.map(R.pick(['route', 'mode'])),
+    R.filter(R.propEq('mode', 'draft')),
+  )(docs)
+
+  const isDraft = findByRoute(drafts)
+
+  const mapIndexed = R.addIndex(R.map)
+
+  const toLowerRemoveSpaces = R.pipe(R.toLower, R.replace(/\s/g, '-'))
+
+  const publishedTabs = (route) => (tabs) =>
+    R.pipe(
+      mapIndexed((label, i) => ({
+        label,
+        route:
+          route.match(/^\/([a-z-]+\/?){2}/)?.[0] +
+          (i === 0 ? '' : toLowerRemoveSpaces(label) + '/'),
+      })),
+      R.filter(
+        (tab) => !(process.env.GATSBY_STAGE === 'prod' && isDraft(tab.route)),
+      ),
+    )(tabs)
+
+  const tabs = allTabs ? publishedTabs(route)(allTabs) : []
+  const withTabs = tabs.length > 0
   const isContentPage = type !== 'landingPage'
   const isPublished = (mode || '').toLowerCase() === 'publish'
   const current = useCurrentDoc()
+  const isPrivate =
+    mode.toLowerCase() === 'draft' && process.env.GATSBY_STAGE === 'prod'
 
   return (
     <main {...rest} id="main">
       {isContentPage ? (
-        <>
-          <ContentHeader withTabs={withTabs}>
-            <H1>
-              {title}
-              {!isPublished && (
-                <span className={`ModeBadge ModeBadge--${mode}`}>
-                  {mode && `(${mode})`}
-                </span>
+        isPrivate ? (
+          <>
+            <Helmet>
+              <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
+            <ContentHeader>
+              <H1>Placeholder</H1>
+            </ContentHeader>
+          </>
+        ) : (
+          <>
+            <ContentHeader withTabs={withTabs}>
+              <H1>
+                {title}{' '}
+                {!isPublished && (
+                  <span className={`ModeBadge ModeBadge--${mode}`}>
+                    {mode && `(${mode})`}
+                  </span>
+                )}
+              </H1>
+              {withTabs && (
+                <nav aria-label="tabbed content navigation">
+                  {
+                    <Tabs>
+                      {tabs.map((tab) => {
+                        return (
+                          <Tab key={tab.route}>
+                            <TabLink
+                              isSelected={current.route === tab.route}
+                              href={tab.route}
+                            >
+                              {tab.label}
+                            </TabLink>
+                          </Tab>
+                        )
+                      })}
+                    </Tabs>
+                  }
+                </nav>
               )}
-            </H1>
-            {tabs && (
-              <nav aria-label="tabbed content naviagtion">
-                <Tabs>
-                  {tabs.map((tab, index) => {
-                    const routeSegment = tab.toLowerCase().replace(/\s/g, '-')
-                    const firstTwoRouteSegments = /^\/([a-z-]+\/?){2}/
-                    const categoryRoute = route.match(firstTwoRouteSegments)[0]
-
-                    const addTrailingSlash = (str) =>
-                      str.substring(str.length - 1) === '/' ? '' : '/'
-
-                    const tabRoute = `${categoryRoute}${addTrailingSlash(
-                      categoryRoute,
-                    )}${index > 0 ? `${routeSegment}/` : ''}`
-
+            </ContentHeader>
+            <Wrapper>
+              {toc && (
+                <StyledTableOfContents sticky label="Content">
+                  {toc.map((item) => {
                     return (
-                      <Tab key={tab}>
-                        <TabLink
-                          isSelected={current.route === tabRoute}
-                          href={tabRoute}
+                      <LinkItem key={item}>
+                        <Typography
+                          variant="body_short"
+                          link
+                          href={`#${slugify(item)}`}
                         >
-                          {tab}
-                        </TabLink>
-                      </Tab>
+                          <Icon name="subdirectory_arrow_right" size={16} />
+                          <span>{item}</span>
+                        </Typography>
+                      </LinkItem>
                     )
                   })}
-                </Tabs>
-              </nav>
-            )}
-          </ContentHeader>
-          <Wrapper>
-            {toc && (
-              <StyledTableOfContents sticky label="Content">
-                {toc.map((item) => {
-                  return (
-                    <LinkItem key={item}>
-                      <Typography
-                        variant="body_short"
-                        link
-                        href={`#${slugify(item)}`}
-                      >
-                        <Icon name="subdirectory_arrow_right" size={16} />
-                        <span>{item}</span>
-                      </Typography>
-                    </LinkItem>
-                  )
-                })}
-              </StyledTableOfContents>
-            )}
-            <Content>
-              {children}
-              <EditPageOnGithub slug={slug} />
-            </Content>
-          </Wrapper>
-        </>
+                </StyledTableOfContents>
+              )}
+              <Content>
+                {children}
+
+                <EditPageOnGithub slug={slug} />
+              </Content>
+            </Wrapper>
+          </>
+        )
       ) : (
         <LandingPage>{children}</LandingPage>
       )}

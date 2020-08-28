@@ -7,7 +7,7 @@ import './../style.css'
 import './button.css'
 
 export default {
-  title: 'Components|Button',
+  title: 'Components/Button',
   component: Button,
 }
 
@@ -59,7 +59,7 @@ export const allButtons = () => (
       Disabled
     </Button>
     <Button variant="ghost_icon">
-      <Icon name="save" title="save action" size={48}></Icon>
+      <Icon name="save" title="save action"></Icon>
     </Button>
     <Button variant="ghost_icon" color="secondary">
       <Icon name="save" title="save"></Icon>
@@ -79,7 +79,7 @@ export const contained = () => (
     <Button color="danger">Danger</Button>
     <Button disabled>Disabled</Button>
     <Button>
-      <Icon name="save" title="save" size={16}></Icon>Primary
+      <Icon name="save" title="save"></Icon>Primary
     </Button>
     <Button color="secondary">
       <Icon name="save" title="save"></Icon>Secondary
@@ -108,9 +108,7 @@ export const contained = () => (
   </Wrapper>
 )
 
-contained.story = {
-  name: 'Contained (default)',
-}
+contained.storyName = 'Contained (default)'
 
 export const outlined = () => (
   <Wrapper>
@@ -204,7 +202,7 @@ export const ghost = () => (
       <Icon name="save" title="save"></Icon>
     </Button>
     <Button variant="ghost_icon">
-      <Icon name="save" title="save action" size={48}></Icon>
+      <Icon name="save" title="save action"></Icon>
     </Button>
     <Button variant="ghost_icon" color="secondary">
       <Icon name="save" title="save"></Icon>
@@ -270,7 +268,5 @@ export const link = () => (
   </Wrapper>
 )
 
-knobs.story = {
-  name: 'With knobs',
-  decorators: [withKnobs],
-}
+knobs.storyName = 'With knobs'
+knobs.decorators = [withKnobs]

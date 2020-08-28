@@ -5,7 +5,7 @@ import { Divider } from '@equinor/eds-core-react'
 import mdx from './Divider.docs.mdx'
 
 export default {
-  title: 'Components|Divider',
+  title: 'Components/Divider',
   parameters: {
     docs: {
       page: mdx,
@@ -57,7 +57,5 @@ export const knobs = () => (
   </Wrapper>
 )
 
-knobs.story = {
-  name: 'With knobs',
-  decorators: [withKnobs],
-}
+knobs.storyName = 'With knobs'
+knobs.decorators = [withKnobs]

@@ -20,7 +20,7 @@ const UnstyledList = styled.ul`
 `
 
 export default {
-  title: 'Components|Selection controls/Radio',
+  title: 'Components/Selection controls/Radio',
   component: Radio,
 }
 
@@ -95,9 +95,5 @@ export const RadioGroupControl = () => {
   )
 }
 
-RadioControl.story = {
-  name: 'Single',
-}
-RadioGroupControl.story = {
-  name: 'Group',
-}
+RadioControl.storyName = 'Single'
+RadioGroupControl.storyName = 'Group'

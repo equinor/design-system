@@ -31,4 +31,5 @@ export {
 } from './Progress'
 export { Breadcrumbs } from './Breadcrumbs'
 export { Menu } from './Menu'
+export { Pagination } from './Pagination'
 /* eslint-enable */
