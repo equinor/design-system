@@ -29,7 +29,7 @@ describe('Divider', () => {
     expect(container.firstChild).toHaveStyleRule('margin-top', spacingMedium)
   })
   it('Sets backgroundColor to light according to color prop', () => {
-    const { container } = render(<Divider color="light" />)
+    const { container } = render(<Divider />)
     expect(container.firstChild).toHaveStyleRule('background-color', light)
   })
   it('Sets backgroundColor to lighter according to color prop', () => {
@@ -41,7 +41,9 @@ describe('Divider', () => {
     expect(container.firstChild).toHaveStyleRule('margin-top', spacingSmall)
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledDivider variant="small" />)
+    const { container } = render(
+      <StyledDivider color="light" variant="small" />,
+    )
     expect(container.firstChild).toHaveStyleRule('position', 'relative')
     expect(container.firstChild).toHaveStyleRule('margin-top', spacingSmall)
   })
