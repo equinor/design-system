@@ -19,7 +19,7 @@ const globals = {
 }
 
 const buildForStorybook = process.env.STORYBOOK
-
+const extensions = ['.jsx', '.js', '.tsx', '.ts']
 export default [
   {
     input: './src/index.js',
@@ -28,24 +28,9 @@ export default [
       clearScreen: true,
       include: ['./src/**', './../tokens/**'],
     },
-    /*    plugins: [
-      json(),
-      resolve({ extensions: ['.jsx', '.js', '.tsx'] }),
-      typescript(),
-      babel({
-        exclude: 'node_modules/**',
-        presets: ['@babel/env', '@babel/preset-react'],
-        plugins: [
-          'babel-plugin-styled-components',
-          ['babel-plugin-react-docgen-typescript'],
-        ],
-      }),
-      commonjs(),
-      polyfill(['focus-visible']),
-    ], */
     plugins: [
       json(),
-      resolve({ extensions: ['.jsx', '.js', '.tsx', '.ts'] }),
+      resolve({ extensions }),
       typescript(),
       babel({
         exclude: 'node_modules/**',
@@ -55,11 +40,18 @@ export default [
           '@babel/preset-react',
           // '@babel/preset-typescript',
         ],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        extensions,
         plugins: [
           'babel-plugin-styled-components',
           ...(buildForStorybook
-            ? ['babel-plugin-react-docgen-typescript']
+            ? [
+                [
+                  'babel-plugin-react-docgen-typescript',
+                  {
+                    skipPropsWithName: ['ref', 'key', 'className'],
+                  },
+                ],
+              ]
             : []),
         ],
       }),

@@ -2,9 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { withKnobs, select } from '@storybook/addon-knobs'
 import { Divider } from '@equinor/eds-core-react'
-import mdx from './Divider.docs.mdx'
+// import mdx from './Divider.docs.mdx'
 
-console.debug('******** Divider *********', Divider)
 export default {
   title: 'Components/Divider',
   /* parameters: {

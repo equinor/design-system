@@ -19,13 +19,12 @@ const StyledDivider = styled.hr<StyleProps>`
 `
 
 type Props = {
-  /** All the beautiful colors */
-  /** @default medium */
+  /** Color variants
+ @default medium */
   color?: 'lighter' | 'light' | 'medium'
-  /** Vertical spacings */
-  /** @default medium */
+  /** Vertical spacings 
+   @default medium */
   variant?: 'small' | 'medium'
-  /** OMG, I would like some champagne */
   className?: string
 }
 
