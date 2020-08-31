@@ -1,11 +1,14 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 
 const { enabled } = tokens
-const StyledBannerIcon = styled.span`
+
+type StyledBannerIconProps = {
+  variant: 'warning' | 'info'
+}
+
+const StyledBannerIcon = styled.span<StyledBannerIconProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -20,8 +23,18 @@ const StyledBannerIcon = styled.span`
   margin-right: ${enabled.spacings};
 `
 
-export const BannerIcon = ({ children, variant, ...props }) => {
-  const childrenWithColor = React.Children.map(children, (child) => {
+export type BannerIconProps = {
+  children: ReactElement
+  /** Which icon background and fill color to use. Info = green, warning = red */
+  variant?: 'warning' | 'info'
+}
+
+export const BannerIcon = ({
+  children,
+  variant = 'info',
+  ...props
+}: BannerIconProps) => {
+  const childrenWithColor = React.Children.map(children, (child: any) => {
     const color =
       variant === 'warning'
         ? enabled.icon.warning.color
@@ -41,15 +54,4 @@ export const BannerIcon = ({ children, variant, ...props }) => {
   )
 }
 
-BannerIcon.displayName = 'eds-banner-icon'
-
-BannerIcon.propTypes = {
-  /** Which icon background and fill color to use. Info = green, warning = red */
-  variant: PropTypes.oneOf(['info', 'warning']),
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-}
-
-BannerIcon.defaultProps = {
-  variant: 'info',
-}
+BannerIcon.displayName = 'BannerIcon'
