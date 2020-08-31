@@ -27,6 +27,7 @@ const ScrimContent = styled.div`
   width: auto;
   height: auto;
 `
+
 type Props = {
   /** Scrim content */
   children?: React.ReactNode
@@ -37,7 +38,10 @@ type Props = {
     event: React.KeyboardEvent | MouseEvent | KeyboardEvent,
     open: boolean,
   ) => void
+  /** Stupid hack to avoid crash on ...re */
+  [x: string]: any
 }
+
 export const Scrim = forwardRef<HTMLDivElement, Props>(
   ({ children, onClose, isDismissable = false, ...rest }, ref) => {
     const handleKeyboardClose = (

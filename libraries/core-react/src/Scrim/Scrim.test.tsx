@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { Scrim } from '.'
+import { Scrim } from './Scrim'
 
 const StyledScrim = styled(Scrim)`
   background: red;
@@ -28,7 +28,7 @@ const DismissableScrim = () => {
 
   return visibleScrim ? (
     <Scrim onKeyDown={handleClose}>
-      <button type="button" onClick={() => setVisibleScrim()}>
+      <button type="button" onClick={() => setVisibleScrim(false)}>
         OK
       </button>
     </Scrim>
