@@ -2,9 +2,9 @@ name: eds
 engines:
   pnpm: '>=4'
 scripts:
-  lint: 'eslint --ext jsx --ext js'
-  lint:all: 'pnpm run lint .'
-  lint:storybook: 'pnpm run lint ./apps/storybook-react/stories'
+  lint: eslint
+  'lint:all': pnpm run lint .
+  'lint:storybook': pnpm run lint ./apps/storybook-react/stories
   init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
   'bump:core-react': >-
@@ -29,6 +29,8 @@ scripts:
   storefront-docker-run: 'docker run -p 8080:80 eds/storefront'
   storefront-docker-inspect: docker run -it eds/storefront /bin/sh
 devDependencies:
+  '@typescript-eslint/eslint-plugin': ^3.10.1
+  '@typescript-eslint/parser': ^3.10.1
   babel-eslint: ^10.1.0
   eslint: ^7.2.0
   eslint-config-prettier: ^6.11.0
@@ -38,3 +40,4 @@ devDependencies:
   eslint-plugin-react: ^7.20.0
   eslint-plugin-testing-library: ^1.5.0
   prettier: ^2.0.5
+  typescript: ^4.0.2
