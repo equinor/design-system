@@ -49,6 +49,4 @@ steps:
   - script: >-
       ./node_modules/eslint/bin/eslint.js
       ./libraries/core-react
-      --ext jsx
-      --ext js
     displayName: 'Run eslint'
