@@ -28,6 +28,7 @@ const ScrimContent = styled.div`
   height: auto;
 `
 type Props = {
+  /** Scrim content */
   children?: React.ReactNode
   /** Whether scrim can be dismissed with esc key */
   isDismissable?: boolean
