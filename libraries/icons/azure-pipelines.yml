@@ -1,13 +1,15 @@
 name: eds-icons-$(Build.BuildId)
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 trigger:
-  batch: 'true'
+  batch: "true"
   branches:
     include:
       - develop
+      - typescript
+      - theming
   paths:
     include:
       - libraries/icons
@@ -16,6 +18,8 @@ pr:
   branches:
     include:
       - develop
+      - typescript
+      - theming
   paths:
     include:
       - libraries/icons
@@ -23,24 +27,24 @@ pr:
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
-    displayName: 'Install Node.js'
+      versionSpec: "14.x"
+    displayName: "Install Node.js"
 
   - script: npm install -g pnpm@next
-    displayName: 'Install pnpm'
+    displayName: "Install pnpm"
 
   - script: >-
       pnpm
       --filter eds
       --filter ./libraries/icons
       install
-    displayName: 'Install dependencies'
+    displayName: "Install dependencies"
 
   - script: pnpm --filter ./libraries/icons run build
-    displayName: 'Run build'
+    displayName: "Run build"
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
       ./libraries/icons
       --ext js
-    displayName: 'Run eslint'
+    displayName: "Run eslint"

@@ -6,13 +6,15 @@
 name: eds-react-$(Build.BuildId)
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 trigger:
-  batch: 'true'
+  batch: "true"
   branches:
     include:
       - develop
+      - typescript
+      - theming
   paths:
     include:
       - libraries/core-react
@@ -21,6 +23,8 @@ pr:
   branches:
     include:
       - develop
+      - typescript
+      - theming
   paths:
     include:
       - libraries/core-react
@@ -28,11 +32,11 @@ pr:
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
-    displayName: 'Install Node.js'
+      versionSpec: "14.x"
+    displayName: "Install Node.js"
 
   - script: npm install -g pnpm@next
-    displayName: 'Install pnpm'
+    displayName: "Install pnpm"
 
   - script: >-
       pnpm
@@ -41,14 +45,14 @@ steps:
       --filter ./libraries/icons
       --filter ./libraries/core-react
       install
-    displayName: 'Install dependencies'
+    displayName: "Install dependencies"
 
   - script: pnpm --filter ./libraries/core-react test
-    displayName: 'Run tests'
+    displayName: "Run tests"
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
       ./libraries/core-react
       --ext jsx
       --ext js
-    displayName: 'Run eslint'
+    displayName: "Run eslint"
