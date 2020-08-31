@@ -1,16 +1,17 @@
 name: eds
 engines:
-  pnpm: '>=4'
+  pnpm: ">=4"
 scripts:
-  lint: 'eslint --ext jsx --ext js'
-  lint:all: 'pnpm run lint .'
-  lint:storybook: 'pnpm run lint ./apps/storybook-react/stories'
+  lint: eslint --ext jsx --ext js --config ./.eslintrc.yaml
+  "lint:all": pnpm run lint .
+  "lint:ts": eslint --ext tsx --ext ts --config ./.eslintrc.js .
+  "lint:storybook": pnpm run lint ./apps/storybook-react/stories
   init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
-  'bump:core-react': >-
+  "bump:core-react": >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
     prerelease
-  'publish:core-react': >-
+  "publish:core-react": >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
   storybook-build: >-
@@ -21,14 +22,16 @@ scripts:
   storybook-run: pnpm --filter @equinor/eds-storybook-react  run dev
   storefront-run: pnpm --filter @equinor/eds-storefront run dev
   dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
-  storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
+  storybook-docker-run: "docker run -p 8080:80 eds/storybook-react"
   storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
   dockerize-storefront: >-
     docker build --build-arg GATSBY_STAGE=prod -t eds/storefront -f
     apps/storefront/Dockerfile .
-  storefront-docker-run: 'docker run -p 8080:80 eds/storefront'
+  storefront-docker-run: "docker run -p 8080:80 eds/storefront"
   storefront-docker-inspect: docker run -it eds/storefront /bin/sh
 devDependencies:
+  "@typescript-eslint/eslint-plugin": ^3.10.1
+  "@typescript-eslint/parser": ^3.10.1
   babel-eslint: ^10.1.0
   eslint: ^7.2.0
   eslint-config-prettier: ^6.11.0
@@ -38,3 +41,4 @@ devDependencies:
   eslint-plugin-react: ^7.20.0
   eslint-plugin-testing-library: ^1.5.0
   prettier: ^2.0.5
+  typescript: ^4.0.2
