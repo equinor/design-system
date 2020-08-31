@@ -42,5 +42,4 @@ steps:
   - script: >-
       ./node_modules/eslint/bin/eslint.js
       ./libraries/tokens
-      --ext js
     displayName: 'Run eslint'
