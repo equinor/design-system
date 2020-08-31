@@ -24,8 +24,8 @@ describe('Avatar', () => {
   })
   it('Image has provided src', () => {
     const src = 'https://i.imgur.com/UM3mrju.jpg'
-    const { container } = render(<Avatar alt="avatar" src={src} />)
-    const avatarImg = container.firstChild.children[0]
+    const { getByAltText } = render(<Avatar alt="avatar" src={src} />)
+    const avatarImg = getByAltText('avatar')
     expect(avatarImg).toHaveAttribute('src', src)
   })
   it('Has correct size', () => {
@@ -37,9 +37,10 @@ describe('Avatar', () => {
     expect(avatar).toHaveStyleRule('height', `${size}px`)
   })
   it('Has faded image when disabled', () => {
+    const altText = 'avatar'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
-    const { container } = render(<Avatar disabled src={src} alt="avatar" />)
-    const avatarImg = container.firstChild.children[0]
+    const { getByAltText } = render(<Avatar disabled src={src} alt={altText} />)
+    const avatarImg = getByAltText(altText)
     expect(avatarImg).toHaveStyleRule('opacity', disabledImage.opacity)
   })
 })
