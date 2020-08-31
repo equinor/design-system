@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    /* do we really understand the implications of these settings? 🙄 */
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "es2015"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "jsx": "react"
+  }
+}
