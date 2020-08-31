@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    /* some comment */
+    /* do we really understand the implications of these settings? 🙄 */
     "target": "es5",
     "module": "esnext",
     "lib": ["dom", "es2015"],
