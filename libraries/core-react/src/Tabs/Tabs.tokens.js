@@ -6,7 +6,6 @@ const {
       static_icons__tertiary: { hex: defaultColor },
     },
     ui: {
-      background__default: { hex: defaultBackgroundColor },
       background__medium: { hex: defaultBorderColor },
     },
     interactive: {
@@ -38,7 +37,7 @@ export const tab = {
   },
   states: {
     enabled: {
-      backgroundColor: defaultBackgroundColor,
+      backgroundColor: 'transparent',
       color: defaultColor,
       border: {
         color: defaultBorderColor,
@@ -53,7 +52,7 @@ export const tab = {
       borderWidth: '0',
       hover: {
         cursor: 'not-allowed',
-        backgroundColor: defaultBackgroundColor,
+        backgroundColor: 'transparent',
       },
     },
     hover: {
