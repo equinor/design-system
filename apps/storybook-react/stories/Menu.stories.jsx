@@ -61,7 +61,7 @@ const FloatingAnchor = styled(Anchor)`
 const onClick = action('onClick')
 
 export default {
-  title: 'Components|Menu',
+  title: 'Components/Menu',
   component: Menu,
   decorators: [withKnobs],
 }
