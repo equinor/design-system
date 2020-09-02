@@ -11,6 +11,9 @@ const {
     text: {
       static_icons__primary_white: { hex: color },
     },
+    interactive: {
+      link_in_snackbars: { hex: buttonColor },
+    },
   },
   spacings: {
     comfortable: { medium: spacingMedium },
@@ -36,4 +39,5 @@ export const snackbar = {
     },
   },
   borderRadius: '4px',
+  buttonColor,
 }
