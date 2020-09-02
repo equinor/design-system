@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2020-09-02
+
+### Added
+
+- `<Menu>` component
+- `<Pagination>` component
+
+### Fixed 🐛
+
+- Changed background color on `<Tabs>` to transparent ([#533](https://github.com/equinor/design-system/pull/533))
+- Fixed tooltip inconsistencies when used inside a table ([#488](https://github.com/equinor/design-system/pull/488))
+- Fixed tooltip triggering on some disabled elements ([#479](https://github.com/equinor/design-system/pull/479))
+- Fixed misplaced text when using `<Button>` as link or upload ([#482](https://github.com/equinor/design-system/issues/482))
+
 ## [0.5.1] - 2020-07-15
 
 ### Changed
