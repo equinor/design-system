@@ -15,9 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 🐛
 
 - Changed background color on `<Tabs>` to transparent ([#533](https://github.com/equinor/design-system/pull/533))
-- Fixed tooltip inconsistencies when used inside a table ([#488](https://github.com/equinor/design-system/pull/488))
-- Fixed tooltip triggering on some disabled elements ([#479](https://github.com/equinor/design-system/pull/479))
+- Improved tooltip inconsistencies when used inside a table ([#488](https://github.com/equinor/design-system/pull/488))
+- Fixed Tooltip triggering on some disabled elements ([#479](https://github.com/equinor/design-system/pull/479))
 - Fixed misplaced text when using `<Button>` as link or upload ([#482](https://github.com/equinor/design-system/issues/482))
+- Fixed wrong color on action buttons in snackbar ([#535](https://github.com/equinor/design-system/issues/535))
+- Fixed elevation for dialog ([#534](https://github.com/equinor/design-system/issues/517))
 
 ## [0.5.1] - 2020-07-15
 
