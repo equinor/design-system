@@ -364,29 +364,19 @@ export const colors = {
       rgba: 'rgba(255, 255, 255, 1)',
     },
     link_in_snackbars: {
-      hex: '#a8ced1',
-      hsla: 'hsla(184, 30.8%, 73.9%, 1)',
-      rgba: 'rgba(168, 206, 209, 1)',
+      hex: '#88e9fa',
+      hsla: 'hsla(189, 91.9%, 75.7%, 1)',
+      rgba: 'rgba(136, 233, 250, 1)',
     },
     pressed_overlay_dark: {
       hex: '#000000',
       hsla: 'hsla(0, 0%, 0%, 0.2)',
       rgba: 'rgba(0, 0, 0, 0.2)',
     },
-    field__fill_resting: {
-      hex: '#f7f7f7',
-      hsla: 'hsla(0, 0%, 96.9%, 1)',
-      rgba: 'rgba(247, 247, 247, 1)',
-    },
-    field__fill_hover: {
-      hex: '#f3f3f3',
-      hsla: 'hsla(0, 0%, 95.3%, 1)',
-      rgba: 'rgba(243, 243, 243, 1)',
-    },
-    field__fill_activated: {
-      hex: '#dcdcdc',
-      hsla: 'hsla(0, 0%, 86.3%, 1)',
-      rgba: 'rgba(220, 220, 220, 1)',
+    pressed_overlay_light: {
+      hex: '#ffffff',
+      hsla: 'hsla(0, 0%, 100%, 0.2)',
+      rgba: 'rgba(255, 255, 255, 0.2)',
     },
   },
 }
