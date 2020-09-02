@@ -32,6 +32,8 @@ npm install @equinor/eds-core-react styled-components
 - Divider
 - Icon
 - List
+- Menu
+- Pagination
 - Popover
 - Progress indicators
 - Scrim
@@ -50,9 +52,7 @@ npm install @equinor/eds-core-react styled-components
 
 ### In progress 👷‍♀️
 
-- Menu
 - Navigation drawer
-- Pagination
 
 ### TODO 🛠️
 
