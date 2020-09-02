@@ -5,7 +5,7 @@ const {
     comfortable: { medium: spacingMedium },
   },
   typography: { ui, paragraph },
-  elevation: { overlay: boxShadow },
+  elevation: { above_scrim: boxShadow },
   colors: {
     ui: {
       background__default: { rgba: background },
