@@ -4,15 +4,6 @@ import { Snackbar, Button } from '@equinor/eds-core-react'
 
 const { SnackbarAction } = Snackbar
 import styled from 'styled-components'
-import { tokens } from '@equinor/eds-tokens'
-
-const {
-  colors: {
-    infographic: {
-      primary__moss_green_34: { rgba: buttonColor },
-    },
-  },
-} = tokens
 
 const Wrapper = styled.div`
   display: grid;
@@ -20,12 +11,6 @@ const Wrapper = styled.div`
   padding: 32px 0;
   padding-bottom: 8rem;
   grid-gap: 2rem;
-`
-// At the moment you'll have to override the default ghost button with this slightly lighter color for better contrast on dark background
-const StyledButton = styled(Button)`
-  :not(:hover) {
-    color: ${buttonColor};
-  }
 `
 
 export default {
@@ -62,7 +47,7 @@ export const Example = () => {
         >
           Your changes was saved
           <SnackbarAction>
-            <StyledButton variant="ghost">Undo</StyledButton>
+            <Button variant="ghost">Undo</Button>
           </SnackbarAction>
         </Snackbar>
       </div>

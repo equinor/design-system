@@ -7,7 +7,7 @@ import { typographyTemplate } from '../_common/templates'
 const StyledSnackbar = styled.div.attrs(() => ({
   role: 'alert',
 }))`
-  
+
   position: fixed;
   left: ${tokens.spacings.left};
   bottom: ${tokens.spacings.bottom};
@@ -17,13 +17,18 @@ const StyledSnackbar = styled.div.attrs(() => ({
   ${typographyTemplate(tokens.text.typography)}
   color: ${tokens.text.color};
   box-shadow: ${tokens.boxShadow};
-  min-height: ${tokens.minHeight}; 
+  min-height: ${tokens.minHeight};
   box-sizing: border-box;
   left: 50%;
   transform: translateX(-50%);
   @media (min-width: ${({ leftAlignFrom }) => leftAlignFrom}) {
     left: auto;
     transform: none;
+  }
+
+  a,
+  button {
+    color: ${tokens.buttonColor}
   }
 `
 
