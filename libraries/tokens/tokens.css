@@ -74,8 +74,9 @@
   --eds_interactive_disabled__fill: rgba(234, 234, 234, 1);
   --eds_interactive_link_on_interactive_colors: rgba(255, 255, 255, 1);
   --eds_interactive_icon_on_interactive_colors: rgba(255, 255, 255, 1);
-  --eds_interactive_link_in_snackbars: rgba(168, 206, 209, 1);
+  --eds_interactive_link_in_snackbars: rgba(136, 233, 250, 1);
   --eds_interactive_pressed_overlay_dark: rgba(0, 0, 0, 0.2);
+  --eds_interactive_pressed_overlay_light: rgba(255, 255, 255, 0.2);
 
   --eds_elevation_raised: 0 1px 5px rgba(0, 0, 0, 0.2),0 3px 4px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14);
   --eds_elevation_none: 0 0 1px rgba(0, 0, 0, 0.14);

@@ -364,14 +364,19 @@ export const colors = {
       rgba: 'rgba(255, 255, 255, 1)',
     },
     link_in_snackbars: {
-      hex: '#a8ced1',
-      hsla: 'hsla(184, 30.8%, 73.9%, 1)',
-      rgba: 'rgba(168, 206, 209, 1)',
+      hex: '#88e9fa',
+      hsla: 'hsla(189, 91.9%, 75.7%, 1)',
+      rgba: 'rgba(136, 233, 250, 1)',
     },
     pressed_overlay_dark: {
       hex: '#000000',
       hsla: 'hsla(0, 0%, 0%, 0.2)',
       rgba: 'rgba(0, 0, 0, 0.2)',
+    },
+    pressed_overlay_light: {
+      hex: '#ffffff',
+      hsla: 'hsla(0, 0%, 100%, 0.2)',
+      rgba: 'rgba(255, 255, 255, 0.2)',
     },
   },
 }
