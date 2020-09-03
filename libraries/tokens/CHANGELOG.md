@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2020-09-02
+
+### Added
+
+#### Color
+
+- Added missing overlay color `pressed_overlay_light`
+
+### Removed
+
+- Removed unused colors in EDS
+  - `field__fill_resting`
+  - `field__fill_hover`
+  - `field__fill_activated`
+
+### Changed
+
+#### Color
+
+- Changed `link_in_snackbars` for better contrast.
+
 ## [0.3.0] - 2020-07-15
 
 ### Changed

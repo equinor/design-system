@@ -79,7 +79,7 @@ components:
       documentation:
         - *3
       figma:
-        - *3
+        - *4
       react:
         - *1
   - component: Divider
@@ -113,7 +113,7 @@ components:
       figma:
         - *4
       react:
-        - *3
+        - *4
   - component: 'Navigation App launcher'
     status:
       documentation:
@@ -145,7 +145,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *4
   - component: 'Navigation Table of contents'
     status:
       documentation:
