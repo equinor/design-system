@@ -9,7 +9,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
 import { TabsContext } from './Tabs.context'
-import { Tab } from './Tab'
 
 const variants = {
   fullWidth: 'minmax(1%, 360px)',
@@ -96,18 +95,16 @@ const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
   )
 })
 
-const tabType = PropTypes.shape({
-  type: PropTypes.oneOf([Tab]),
-})
-
 TabList.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** Sets the width of the tabs */
   variant: PropTypes.oneOf(['fullWidth', 'minWidth']),
   /** @ignore */
-  children: PropTypes.oneOfType([PropTypes.arrayOf(tabType), tabType])
-    .isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]).isRequired,
 }
 
 TabList.defaultProps = {
