@@ -1,18 +1,18 @@
 import React, { forwardRef, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { TabsContext } from './Tabs.context'
-import { TabPanel } from './TabPanel'
 
 const TabPanels = forwardRef(function TabPanels({ children, ...props }, ref) {
   const { activeTab, tabsId } = useContext(TabsContext)
 
-  const Panels = React.Children.map(children, (child, index) =>
-    React.cloneElement(child, {
+  const Panels = React.Children.map(children, (child, index) => {
+    console.log(child.type)
+    return React.cloneElement(child, {
       id: `${tabsId}-panel-${index + 1}`,
       'aria-labelledby': `${tabsId}-tab-${index + 1}`,
       hidden: activeTab !== index,
-    }),
-  )
+    })
+  })
   return (
     <div ref={ref} {...props}>
       {Panels}
@@ -20,16 +20,14 @@ const TabPanels = forwardRef(function TabPanels({ children, ...props }, ref) {
   )
 })
 
-const panelType = PropTypes.shape({
-  type: PropTypes.oneOf([TabPanel]),
-})
-
 TabPanels.propTypes = {
   /** @ignore */
   className: PropTypes.string,
   /** @ignore */
-  children: PropTypes.oneOfType([PropTypes.arrayOf(panelType), panelType])
-    .isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]).isRequired,
 }
 
 TabPanels.defaultProps = {

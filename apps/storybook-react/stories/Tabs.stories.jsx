@@ -201,3 +201,45 @@ export const tabsAndInputInPanel = () => {
     </div>
   )
 }
+
+const StyledTab = styled(Tab)`
+  background: pink;
+`
+
+const StyledTabPanel = styled(TabPanel)`
+  padding: 32px;
+  background: peachpuff;
+`
+export const tabsWithStyledComponents = () => {
+  const [activeTab, setActiveTab] = useState(1)
+
+  const handleChange = (index) => {
+    setActiveTab(index)
+  }
+
+  const items = [
+    { name: 'Tab 1', value: 'Tab 1 body as plain text' },
+    { name: 'Tab 2', value: <Typography>Tab 2 body as typography</Typography> },
+    { name: 'Tab 3', value: <div>Tab 3 as div</div> },
+  ]
+
+  return (
+    <Wrapper>
+      <Typography variant="h1">
+        Tab with panels rendered from collection
+      </Typography>
+      <Tabs activeTab={activeTab} onChange={handleChange}>
+        <TabList>
+          {items.map(({ name }) => (
+            <StyledTab key={name}>{name}</StyledTab>
+          ))}
+        </TabList>
+        <TabPanels>
+          {items.map(({ name, value }) => (
+            <StyledTabPanel key={name}>{value}</StyledTabPanel>
+          ))}
+        </TabPanels>
+      </Tabs>
+    </Wrapper>
+  )
+}
