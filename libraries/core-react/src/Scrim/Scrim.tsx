@@ -5,7 +5,6 @@ import { scrim as tokens } from './Scrim.tokens'
 const { height, width, background } = tokens
 
 type StyledScrimProps = {
-  onClose: (event: React.KeyboardEvent, open: boolean) => void
   onClick: (event: MouseEvent, open: boolean) => void
   isDismissable?: boolean
 }
@@ -38,8 +37,6 @@ type Props = {
     event: React.KeyboardEvent | MouseEvent | KeyboardEvent,
     open: boolean,
   ) => void
-  /** Stupid hack to avoid crash on ...re */
-  [x: string]: any
 }
 
 export const Scrim = forwardRef<HTMLDivElement, Props>(
@@ -78,7 +75,6 @@ export const Scrim = forwardRef<HTMLDivElement, Props>(
 
     return (
       <StyledScrim
-        onClose={handleKeyboardClose}
         onClick={handleMouseClose}
         isDismissable={isDismissable}
         {...rest}
