@@ -97,7 +97,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *4
   - component: Lists
     status:
       documentation:
@@ -129,7 +129,7 @@ components:
       figma:
         - *4
       react:
-        - *1
+        - *4
   - component: 'Navigation Navigation drawer'
     status:
       documentation:
@@ -242,6 +242,14 @@ components:
         - *4
       react:
         - *4
+  - component: Select
+    status:
+      documentation:
+        - *1
+      figma:
+        - *4
+      react:
+        - *1
   - component: Slider
     status:
       documentation:
