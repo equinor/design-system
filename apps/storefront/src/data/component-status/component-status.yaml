@@ -80,6 +80,7 @@ components:
         - *3
       figma:
         - *4
+        - *2
       react:
         - *1
   - component: Divider
@@ -248,6 +249,7 @@ components:
         - *1
       figma:
         - *4
+        - *2
       react:
         - *1
   - component: Slider
