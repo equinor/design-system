@@ -80,6 +80,7 @@ components:
         - *3
       figma:
         - *4
+        - *2
       react:
         - *1
   - component: Divider
