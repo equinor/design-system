@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { get } from './library'
 
+const customIcon = (icon) => ({ icon, count: Math.floor(Math.random() * 1000) })
+
 const transform = ({ rotation }) =>
   rotation ? `transform: rotate(${rotation}deg)` : null
 
@@ -16,22 +18,23 @@ const StyledSvg = styled.svg.attrs(({ height, width, fill }) => ({
   ${transform}
 `
 
-const StyledPath = styled.path.attrs(({ icon, size }) => ({
+const StyledPath = styled.path.attrs(({ height, size }) => ({
   size: null,
   fillRule: 'evenodd',
   clipRule: 'evenodd',
-  d: icon.svgPathData,
-  transform: size / icon.height !== 1 ? `scale(${size / icon.height})` : null,
+  transform: size / height !== 1 ? `scale(${size / height})` : null,
 }))``
 
 export const Icon = forwardRef(function EdsIcon(
-  { size, color, name, className, rotation, title, ...rest },
+  { size, color, name, className, rotation, title, data, ...rest },
   ref,
 ) {
-  const { icon, count } = get(name)
+  const { icon, count } = data !== null ? customIcon(data) : get(name)
 
   if (typeof icon === 'undefined') {
-    throw Error(`Icon "${name}" not found. Have you added it using Icon.add()?`)
+    throw Error(
+      `Icon "${name}" not found. Have you added it using Icon.add() or using data props?`,
+    )
   }
 
   let svgProps = {
@@ -45,8 +48,9 @@ export const Icon = forwardRef(function EdsIcon(
     'aria-hidden': true,
   }
 
-  const iconProps = {
-    icon,
+  const pathProps = {
+    d: icon.svgPathData ? icon.svgPathData : icon.d,
+    height: icon.height ? icon.height : size,
     size,
   }
 
@@ -67,7 +71,7 @@ export const Icon = forwardRef(function EdsIcon(
   return (
     <StyledSvg {...svgProps} {...rest} ref={ref}>
       {title && <title id={titleId}>{title}</title>}
-      <StyledPath data-testid="eds-icon-path" {...iconProps} />
+      <StyledPath data-testid="eds-icon-path" {...pathProps} />
     </StyledSvg>
   )
 })
@@ -77,16 +81,18 @@ Icon.displayName = 'eds-icon'
 Icon.propTypes = {
   /** @ignore */
   className: PropTypes.string,
-  // Title for svg if used semantically
+  /** Title for svg if used semantically */
   title: PropTypes.string,
-  // Valid colors
+  /** color */
   color: PropTypes.string,
-  // Vertical spacing
+  /** Size */
   size: PropTypes.oneOf([16, 24, 32, 40, 48]),
-  // Rotation
+  /** Rotation */
   rotation: PropTypes.oneOf([0, 90, 180, 270]),
-  // Name
-  name: PropTypes.string.isRequired,
+  /** Name */
+  name: PropTypes.string,
+  /** Manually specify which icon data to use*/
+  data: PropTypes.object,
 }
 
 Icon.defaultProps = {
@@ -95,4 +101,6 @@ Icon.defaultProps = {
   color: 'currentColor',
   size: 24,
   rotation: null,
+  data: null,
+  name: '',
 }
