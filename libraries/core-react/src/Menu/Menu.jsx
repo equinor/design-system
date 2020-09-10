@@ -5,6 +5,7 @@ import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
 import { useCombinedRefs } from '../_common'
+import { useOutsideClick } from '../_common/hooks'
 import { menu as tokens } from './Menu.tokens'
 
 const {
@@ -34,6 +35,12 @@ export const Menu = React.forwardRef(function EdsMenu(
   const listRef = useRef(null)
 
   const { setPosition, position, isPositioned } = useMenu()
+
+  useOutsideClick(listRef, () => {
+    if (open) {
+      onClose()
+    }
+  })
 
   useEffect(() => {
     if (anchorEl && listRef.current) {

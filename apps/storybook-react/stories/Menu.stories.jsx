@@ -392,6 +392,7 @@ export const InTopbar = () => {
             focus={focus}
             open={Boolean(buttonEl)}
             anchorEl={buttonEl}
+            onClose={closeMenu}
           >
             {bigMenuTemplate}
           </Menu>
