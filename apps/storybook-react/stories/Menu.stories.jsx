@@ -413,7 +413,9 @@ export const InTopbarSection = () => {
 
   const openMenu = (e) => setState({ ...state, buttonEl: e.target })
 
-  const closeMenu = () => setState({ ...state, buttonEl: null })
+  const closeMenu = () => {
+    setState({ ...state, buttonEl: null })
+  }
 
   const onKeyPress = (e) => {
     const { key } = e
@@ -454,7 +456,7 @@ export const InTopbarSection = () => {
             focus={focus}
             open={Boolean(buttonEl)}
             anchorEl={buttonEl}
-            onClose={isOpen && closeMenu}
+            onClose={closeMenu}
           >
             <MenuSection title="test">
               <MenuItem onClick={onClick}>Item 1</MenuItem>

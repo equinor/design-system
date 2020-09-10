@@ -29,13 +29,12 @@ const StyledPaper = styled(Paper)`
 `
 
 export const Menu = React.forwardRef(function EdsMenu(
-  { children, anchorEl, onClose, open, ...rest },
+  { children, anchorEl, onClose: onCloseCallback, open, ...rest },
   ref,
 ) {
   const listRef = useRef(null)
 
-  const { setPosition, position, isPositioned } = useMenu()
-
+  const { setPosition, position, isPositioned, setOnClose, onClose } = useMenu()
   useOutsideClick(listRef, () => {
     if (open) {
       onClose()
@@ -47,6 +46,10 @@ export const Menu = React.forwardRef(function EdsMenu(
       const menuRect = listRef.current.getBoundingClientRect()
       const anchorRect = anchorEl.getBoundingClientRect()
       setPosition(anchorRect, menuRect, window)
+    }
+
+    if (onClose === null) {
+      setOnClose(onCloseCallback)
     }
 
     document.addEventListener('keydown', handleGlobalKeyPress, true)
@@ -76,7 +79,6 @@ export const Menu = React.forwardRef(function EdsMenu(
 
   const menuProps = {
     ...rest,
-    onClose,
   }
 
   return (
@@ -115,7 +117,7 @@ Menu.defaultProps = {
   focus: undefined,
   top: 0,
   left: 0,
-  onClose: () => {},
+  onClose: null,
   open: false,
 }
 

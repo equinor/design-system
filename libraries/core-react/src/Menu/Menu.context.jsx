@@ -9,7 +9,7 @@ const initalState = {
     left: 0,
     transform: null,
   },
-  onClose: () => {},
+  onClose: null,
 }
 
 const MenuContext = React.createContext(initalState)

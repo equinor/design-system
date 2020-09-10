@@ -80,10 +80,10 @@ const Content = styled.div`
 
 export const MenuItem = React.memo(
   React.forwardRef(function EdsMenuItem(
-    { children, disabled, index, onClick, onClose, ...rest },
+    { children, disabled, index, onClick, ...rest },
     ref,
   ) {
-    const { focusedIndex, setFocusedIndex } = useMenu()
+    const { focusedIndex, setFocusedIndex, onClose } = useMenu()
 
     const toggleFocus = (index_) => {
       if (focusedIndex !== index_) {
@@ -132,8 +132,6 @@ MenuItem.propTypes = {
   disabled: PropTypes.bool,
   /** onClick handler */
   onClick: PropTypes.func,
-  /** onClose handler */
-  onClose: PropTypes.func,
 }
 
 MenuItem.defaultProps = {
@@ -142,7 +140,6 @@ MenuItem.defaultProps = {
   disabled: false,
   index: 0,
   onClick: () => {},
-  onClose: () => {},
 }
 
 MenuItem.displayName = 'eds-menu-item'
