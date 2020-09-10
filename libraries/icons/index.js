@@ -252,7 +252,7 @@ export const list = {
   height: '24',
   width: '24',
   svgPathData:
-    'M3 13h2v-2H3v2zM3 17h2v-2H3v2zM3 9h2V7H3v2zM7 13h14v-2H7v2zM7 17h14v-2H7v2zM7 7v2h14V7H7z',
+    'M3 7h2v2H3V7zm2 4H3v2h2v-2zm16 0H7v2h14v-2zM3 15h2v2H3v-2zm18 0H7v2h14v-2zm0-8H7v2h14V7z',
 }
 
 export const sort_by_alpha = {
@@ -4639,7 +4639,7 @@ export const info_circle = {
   height: '24',
   width: '24',
   svgPathData:
-    'M11 7h2v2h-2V7zM11 11h2v6h-2v-6zM2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8z',
+    'M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10zM13 9V7h-2v2h2zm0 8v-6h-2v6h2zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8z',
 }
 
 export const donut_large = {
