@@ -223,7 +223,12 @@ export const EdgeDetection = () => {
       >
         Top left
       </FloatingAnchor>
-      <Menu id="menu-topleft" open={Boolean(topLeft)} anchorEl={topLeft}>
+      <Menu
+        id="menu-topleft"
+        open={Boolean(topLeft)}
+        anchorEl={topLeft}
+        onClose={onClick}
+      >
         {simpleMenuTemplate}
       </Menu>
 
@@ -236,7 +241,12 @@ export const EdgeDetection = () => {
       >
         Top Right
       </FloatingAnchor>
-      <Menu id="menu-topright" open={Boolean(topRight)} anchorEl={topRight}>
+      <Menu
+        id="menu-topright"
+        open={Boolean(topRight)}
+        anchorEl={topRight}
+        onClose={onClick}
+      >
         {simpleMenuTemplate}
       </Menu>
 
@@ -253,6 +263,7 @@ export const EdgeDetection = () => {
         id="menu-bottomleft"
         open={Boolean(bottomLeft)}
         anchorEl={bottomLeft}
+        onClose={onClick}
       >
         {simpleMenuTemplate}
       </Menu>
@@ -270,6 +281,7 @@ export const EdgeDetection = () => {
         id="menu-bottomright"
         open={Boolean(bottomRight)}
         anchorEl={bottomRight}
+        onClose={onClick}
       >
         {simpleMenuTemplate}
       </Menu>
