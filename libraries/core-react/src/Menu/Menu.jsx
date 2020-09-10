@@ -48,7 +48,7 @@ export const Menu = React.forwardRef(function EdsMenu(
       setPosition(anchorRect, menuRect, window)
     }
 
-    if (onClose === null) {
+    if (onClose === null && onCloseCallback) {
       setOnClose(onCloseCallback)
     }
 

@@ -26,9 +26,8 @@ describe('Menu', () => {
     expect(menuContainer).toHaveStyleRule('background', 'red')
   })
   it('is visible when open is true & anchorEl is set', () => {
-    const handleOnClose = jest.fn()
     render(
-      <Menu open onClose={handleOnClose}>
+      <Menu open>
         <div>some random content</div>
       </Menu>,
     )
@@ -83,10 +82,8 @@ describe('Menu', () => {
   })
 
   it('has first menuItem focused when focus is set to first', () => {
-    const handleOnClose = jest.fn()
-
     render(
-      <Menu open onClose={handleOnClose} focus="first">
+      <Menu open focus="first">
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
         <MenuItem>Item 3</MenuItem>
@@ -98,9 +95,8 @@ describe('Menu', () => {
   })
 
   it('has last menuItem focused when focus is set to last', () => {
-    const handleOnClose = jest.fn()
     render(
-      <Menu open onClose={handleOnClose} focus="last">
+      <Menu open focus="last">
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
         <MenuItem>Item 3</MenuItem>
