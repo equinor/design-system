@@ -68,9 +68,9 @@ export default {
 
 const simpleMenuTemplate = (
   <>
-    <MenuItem>Item 1</MenuItem>
-    <MenuItem>Item 2</MenuItem>
-    <MenuItem>Item 3</MenuItem>
+    <MenuItem onClick={onClick}>Item 1</MenuItem>
+    <MenuItem onClick={onClick}>Item 2</MenuItem>
+    <MenuItem onClick={onClick}>Item 3</MenuItem>
   </>
 )
 
@@ -395,6 +395,132 @@ export const InTopbar = () => {
             onClose={closeMenu}
           >
             {bigMenuTemplate}
+          </Menu>
+        </Actions>
+      </TopBar>
+    </Grid>
+  )
+}
+
+export const InTopbarSection = () => {
+  const [state, setState] = React.useState({
+    focus: 'first',
+    buttonEl: null,
+  })
+
+  const { focus, buttonEl } = state
+  const isOpen = Boolean(buttonEl)
+
+  const openMenu = (e) => setState({ ...state, buttonEl: e.target })
+
+  const closeMenu = () => setState({ ...state, buttonEl: null })
+
+  const onKeyPress = (e) => {
+    const { key } = e
+    switch (key) {
+      case 'ArrowDown':
+        isOpen ? closeMenu() : openMenu(e, 'first')
+        break
+      case 'ArrowUp':
+        isOpen ? closeMenu() : openMenu(e, 'last')
+        break
+      case 'Escape':
+        closeMenu()
+        break
+      default:
+        break
+    }
+  }
+
+  return (
+    <Grid style={{ margin: 0 }}>
+      <TopBar>
+        <Header>Menu in Topbar</Header>
+        <Actions>
+          <Button
+            variant="ghost_icon"
+            id="menuButton"
+            aria-controls="menu-on-button"
+            aria-haspopup="true"
+            aria-expanded={Boolean(buttonEl)}
+            onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+            onKeyDown={onKeyPress}
+          >
+            <Icon name="more_verticle" title="more"></Icon>
+          </Button>
+          <Menu
+            id="menu-on-button"
+            aria-labelledby="menuButton"
+            focus={focus}
+            open={Boolean(buttonEl)}
+            anchorEl={buttonEl}
+            onClose={isOpen && closeMenu}
+          >
+            <MenuSection title="test">
+              <MenuItem onClick={onClick}>Item 1</MenuItem>
+            </MenuSection>
+          </Menu>
+        </Actions>
+      </TopBar>
+    </Grid>
+  )
+}
+
+export const InTopbarSimple = () => {
+  const [state, setState] = React.useState({
+    focus: 'first',
+    buttonEl: null,
+  })
+
+  const { focus, buttonEl } = state
+  const isOpen = Boolean(buttonEl)
+
+  const openMenu = (e) => setState({ ...state, buttonEl: e.target })
+
+  const closeMenu = () => setState({ ...state, buttonEl: null })
+
+  const onKeyPress = (e) => {
+    const { key } = e
+    switch (key) {
+      case 'ArrowDown':
+        isOpen ? closeMenu() : openMenu(e, 'first')
+        break
+      case 'ArrowUp':
+        isOpen ? closeMenu() : openMenu(e, 'last')
+        break
+      case 'Escape':
+        closeMenu()
+        break
+      default:
+        break
+    }
+  }
+
+  return (
+    <Grid style={{ margin: 0 }}>
+      <TopBar>
+        <Header>Menu in Topbar</Header>
+        <Actions>
+          <Button
+            variant="ghost_icon"
+            id="menuButton"
+            aria-controls="menu-on-button"
+            aria-haspopup="true"
+            aria-expanded={Boolean(buttonEl)}
+            onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+            onKeyDown={onKeyPress}
+          >
+            <Icon name="more_verticle" title="more"></Icon>
+          </Button>
+          <Menu
+            id="menu-on-button"
+            aria-labelledby="menuButton"
+            focus={focus}
+            open={Boolean(buttonEl)}
+            anchorEl={buttonEl}
+            onClose={closeMenu}
+          >
+            {simpleMenuTemplate}
           </Menu>
         </Actions>
       </TopBar>

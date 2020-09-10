@@ -106,4 +106,23 @@ describe('Menu', () => {
 
     expect(document.activeElement == menuItem).toBeTruthy()
   })
+  it('has called onClose when MenuItem is clicked from inside a MenuSection', () => {
+    const handleOnClose = jest.fn()
+    const handleOnClick = jest.fn()
+
+    render(
+      <Menu open onClose={handleOnClose}>
+        <MenuSection title="test">
+          <MenuItem onClick={handleOnClick}>Item 1</MenuItem>
+        </MenuSection>
+      </Menu>,
+    )
+
+    const menuItem = screen.getByText('Item 1')
+
+    fireEvent.click(menuItem)
+
+    expect(handleOnClick).toHaveBeenCalled()
+    expect(handleOnClose).toHaveBeenCalled()
+  })
 })

@@ -9,6 +9,7 @@ const initalState = {
     left: 0,
     transform: null,
   },
+  onClose: () => {},
 }
 
 const MenuContext = React.createContext(initalState)
@@ -54,7 +55,7 @@ const calculatePosition = ({ left, top, height }, offset) => ({
 
 export const useMenu = () => {
   const [state, setState] = useContext(MenuContext)
-  const { focusedIndex, position, isPositioned } = state
+  const { focusedIndex, position, isPositioned, onClose } = state
   const offset = 2
 
   const setFocusedIndex = (i) => {
@@ -73,12 +74,18 @@ export const useMenu = () => {
     })
   }
 
+  const setOnClose = (onClose) => {
+    setState({ ...state, onClose })
+  }
+
   return {
     setFocusedIndex,
     focusedIndex,
     setPosition,
     position,
     isPositioned,
+    setOnClose,
+    onClose,
   }
 }
 
