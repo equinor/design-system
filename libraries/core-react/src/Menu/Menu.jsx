@@ -36,7 +36,7 @@ export const Menu = React.forwardRef(function EdsMenu(
 
   const { setPosition, position, isPositioned, setOnClose, onClose } = useMenu()
   useOutsideClick(listRef, () => {
-    if (open) {
+    if (open && onClose !== null) {
       onClose()
     }
   })

@@ -58,7 +58,10 @@ const FloatingAnchor = styled(Anchor)`
   position: absolute;
 `
 
-const onClick = action('onClick')
+const onClick = (event) => {
+  action('clicked')(event)
+  event.stopPropagation()
+}
 
 export default {
   title: 'Components/Menu',
@@ -68,9 +71,9 @@ export default {
 
 const simpleMenuTemplate = (
   <>
-    <MenuItem>Item 1</MenuItem>
-    <MenuItem>Item 2</MenuItem>
-    <MenuItem>Item 3</MenuItem>
+    <MenuItem onClick={onClick}>Item 1</MenuItem>
+    <MenuItem onClick={onClick}>Item 2</MenuItem>
+    <MenuItem onClick={onClick}>Item 3</MenuItem>
   </>
 )
 

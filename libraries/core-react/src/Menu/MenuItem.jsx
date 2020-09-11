@@ -106,7 +106,9 @@ export const MenuItem = React.memo(
         onClick={(e) => {
           if (!disabled) {
             onClick(e)
-            onClose(e)
+            if (onClose !== null) {
+              onClose(e)
+            }
           }
         }}
       >
