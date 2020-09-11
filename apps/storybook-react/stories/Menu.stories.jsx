@@ -68,9 +68,9 @@ export default {
 
 const simpleMenuTemplate = (
   <>
-    <MenuItem onClick={onClick}>Item 1</MenuItem>
-    <MenuItem onClick={onClick}>Item 2</MenuItem>
-    <MenuItem onClick={onClick}>Item 3</MenuItem>
+    <MenuItem>Item 1</MenuItem>
+    <MenuItem>Item 2</MenuItem>
+    <MenuItem>Item 3</MenuItem>
   </>
 )
 
@@ -223,12 +223,7 @@ export const EdgeDetection = () => {
       >
         Top left
       </FloatingAnchor>
-      <Menu
-        id="menu-topleft"
-        open={Boolean(topLeft)}
-        anchorEl={topLeft}
-        onClose={onClick}
-      >
+      <Menu id="menu-topleft" open={Boolean(topLeft)} anchorEl={topLeft}>
         {simpleMenuTemplate}
       </Menu>
 
@@ -241,12 +236,7 @@ export const EdgeDetection = () => {
       >
         Top Right
       </FloatingAnchor>
-      <Menu
-        id="menu-topright"
-        open={Boolean(topRight)}
-        anchorEl={topRight}
-        onClose={onClick}
-      >
+      <Menu id="menu-topright" open={Boolean(topRight)} anchorEl={topRight}>
         {simpleMenuTemplate}
       </Menu>
 
@@ -263,7 +253,6 @@ export const EdgeDetection = () => {
         id="menu-bottomleft"
         open={Boolean(bottomLeft)}
         anchorEl={bottomLeft}
-        onClose={onClick}
       >
         {simpleMenuTemplate}
       </Menu>
@@ -281,7 +270,6 @@ export const EdgeDetection = () => {
         id="menu-bottomright"
         open={Boolean(bottomRight)}
         anchorEl={bottomRight}
-        onClose={onClick}
       >
         {simpleMenuTemplate}
       </Menu>
