@@ -13,6 +13,7 @@ import {
   save,
   info_circle,
   list,
+  filter_alt,
 } from '@equinor/eds-icons'
 
 const icons = {
@@ -26,6 +27,7 @@ const icons = {
   save,
   info_circle,
   list,
+  filter_alt,
 }
 
 Icon.add(icons)

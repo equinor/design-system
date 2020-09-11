@@ -365,16 +365,16 @@
   },
   {
     "name": "list",
-    "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 13h2v-2H3v2zM3 17h2v-2H3v2zM3 9h2V7H3v2zM7 13h14v-2H7v2zM7 17h14v-2H7v2zM7 7v2h14V7H7z\"/></svg>",
+    "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3 7h2v2H3V7zm2 4H3v2h2v-2zm16 0H7v2h14v-2zM3 15h2v2H3v-2zm18 0H7v2h14v-2zm0-8H7v2h14V7z\"/></svg>",
     "id": "86:1839",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/76c7/6167/a7f9ef016376abb020fa20f6b760eb91",
+    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/57e5/040b/e5f7ccc1f97b3b1d3880e9df55b782d8",
     "path": "ui-views",
     "group": "UI views",
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAxM2gydi0ySDN2MnpNMyAxN2gydi0ySDN2MnpNMyA5aDJWN0gzdjJ6TTcgMTNoMTR2LTJIN3Yyek03IDE3aDE0di0ySDd2MnpNNyA3djJoMTRWN0g3eiIvPjwvc3ZnPg==",
-    "pathData": "M3 13h2v-2H3v2zM3 17h2v-2H3v2zM3 9h2V7H3v2zM7 13h14v-2H7v2zM7 17h14v-2H7v2zM7 7v2h14V7H7z"
+    "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTMgN2gydjJIM1Y3em0yIDRIM3YyaDJ2LTJ6bTE2IDBIN3YyaDE0di0yek0zIDE1aDJ2Mkgzdi0yem0xOCAwSDd2MmgxNHYtMnptMC04SDd2MmgxNFY3eiIvPjwvc3ZnPg==",
+    "pathData": "M3 7h2v2H3V7zm2 4H3v2h2v-2zm16 0H7v2h14v-2zM3 15h2v2H3v-2zm18 0H7v2h14v-2zm0-8H7v2h14V7z"
   },
   {
     "name": "sort_by_alpha",
@@ -544,6 +544,19 @@
     "width": "24",
     "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTMgNnYyaDE4VjZIM3ptNyAxMmg0di0yaC00djJ6bTgtNUg2di0yaDEydjJ6Ii8+PC9zdmc+",
     "pathData": "M3 6v2h18V6H3zm7 12h4v-2h-4v2zm8-5H6v-2h12v2z"
+  },
+  {
+    "name": "filter_alt",
+    "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 6h10l-5.01 6.3L7 6zm-2.75-.39C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A.998.998 0 0018.95 4H5.04c-.83 0-1.3.95-.79 1.61z\"/></svg>",
+    "id": "3783:7022",
+    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/8363/c967/c16c8c30ca910159587f5ff50b9348e1",
+    "path": "ui-views",
+    "group": "UI views",
+    "viewbox": "0 0 24 24",
+    "height": "24",
+    "width": "24",
+    "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNyA2aDEwbC01LjAxIDYuM0w3IDZ6bS0yLjc1LS4zOUM2LjI3IDguMiAxMCAxMyAxMCAxM3Y2YzAgLjU1LjQ1IDEgMSAxaDJjLjU1IDAgMS0uNDUgMS0xdi02czMuNzItNC44IDUuNzQtNy4zOUEuOTk4Ljk5OCAwIDAwMTguOTUgNEg1LjA0Yy0uODMgMC0xLjMuOTUtLjc5IDEuNjF6Ii8+PC9zdmc+",
+    "pathData": "M7 6h10l-5.01 6.3L7 6zm-2.75-.39C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A.998.998 0 0018.95 4H5.04c-.83 0-1.3.95-.79 1.61z"
   },
   {
     "name": "select_all",
@@ -6735,16 +6748,16 @@
   },
   {
     "name": "info_circle",
-    "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M11 7h2v2h-2V7zM11 11h2v6h-2v-6z\"/><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8z\"/></svg>",
+    "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10zM13 9V7h-2v2h2zm0 8v-6h-2v6h2zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8z\"/></svg>",
     "id": "86:3704",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/4202/6619/f217e967c2d2ab7810fc8160a2436d2d",
+    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/09a3/fe5c/6f817bda378761ea9f4139c31d5273aa",
     "path": "communication-feedback",
     "group": "Communication + feedback",
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTEgN2gydjJoLTJWN3pNMTEgMTFoMnY2aC0ydi02eiIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMiAxMkMyIDYuNDggNi40OCAyIDEyIDJzMTAgNC40OCAxMCAxMC00LjQ4IDEwLTEwIDEwUzIgMTcuNTIgMiAxMnptMiAwYzAgNC40MSAzLjU5IDggOCA4czgtMy41OSA4LTgtMy41OS04LTgtOC04IDMuNTktOCA4eiIvPjwvc3ZnPg==",
-    "pathData": "M11 7h2v2h-2V7zM11 11h2v6h-2v-6zM2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8z"
+    "datauri": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTEyLjAxIDIyQzE3LjUzIDIyIDIyIDE3LjUyIDIyIDEyUzE3LjUzIDIgMTIuMDEgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMC4wMSAxMHpNMTMgOVY3aC0ydjJoMnptMCA4di02aC0ydjZoMnptNy01YzAtNC40Mi0zLjU4LTgtOC04cy04IDMuNTgtOCA4IDMuNTggOCA4IDggOC0zLjU4IDgtOHoiLz48L3N2Zz4=",
+    "pathData": "M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10zM13 9V7h-2v2h2zm0 8v-6h-2v6h2zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8z"
   },
   {
     "name": "donut_large",
