@@ -20,6 +20,13 @@ afterEach(cleanup)
 describe('Icon', () => {
   it('Has correct svg data', () => {
     const { queryByTestId } = render(<Icon name="save" />)
+    expect(queryByTestId('eds-icon-path')).toHaveAttribute(
+      'd',
+      save.svgPathData,
+    )
+  })
+  it('Has correct svg data when using data property', () => {
+    const { queryByTestId } = render(<Icon data={save} />)
 
     expect(queryByTestId('eds-icon-path')).toHaveAttribute(
       'd',
