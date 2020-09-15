@@ -20,8 +20,9 @@ const {
   },
 } = tokens
 
-const ListItem = styled.li.attrs(() => ({
+const ListItem = styled.li.attrs(({ isFocused }) => ({
   role: 'menuitem',
+  tabIndex: isFocused ? -1 : 0,
 }))`
   width: auto;
   position: relative;
@@ -95,6 +96,7 @@ export const MenuItem = React.memo(
     const props = {
       ...rest,
       disabled,
+      isFocused,
     }
 
     return (
