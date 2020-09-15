@@ -20,9 +20,8 @@ const {
   },
 } = tokens
 
-const ListItem = styled.li.attrs(({ disabled }) => ({
+const ListItem = styled.li.attrs(() => ({
   role: 'menuitem',
-  tabIndex: disabled ? -1 : 0,
 }))`
   width: auto;
   position: relative;

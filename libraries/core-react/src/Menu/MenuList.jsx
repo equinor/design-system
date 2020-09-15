@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
 
+const isFragment = (object) =>
+  (object.type && object.type.toString()) === React.Fragment.toString()
+
 const List = styled.ul.attrs({ role: 'menu' })`
   position: relative;
   list-style: none;
@@ -18,18 +21,17 @@ export const MenuList = React.forwardRef(function EdsMenuList(
   { children, focus, ...rest },
   ref,
 ) {
-  const state = useMenu()
-  const { focusedIndex, setFocusedIndex } = state
+  const { focusedIndex, setFocusedIndex } = useMenu()
 
-  const updatedChildren = React.Children.map(children, (child, index) =>
-    React.cloneElement(child, {
-      index,
-    }),
+  const children_ = isFragment(children) ? children.props.children : children
+
+  const updatedChildren = React.Children.map(children_, (child, index) =>
+    React.cloneElement(child, { index }),
   )
 
   const focusableIndexs = (updatedChildren || [])
     .filter((x) => !x.props.disabled)
-    .filter((x) => (x.type ? x.type.displayName === 'eds-menu-item' : false))
+    .filter((x) => x.type.displayName.includes('eds-menu'))
     .map((x) => x.props.index)
 
   const firstFocusIndex = focusableIndexs[0]
