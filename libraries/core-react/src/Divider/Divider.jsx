@@ -10,6 +10,7 @@ const StyledDivider = styled.hr(
     marginBottom,
     height,
     border: 'none',
+    width: '100%',
   }),
 )
 
