@@ -16,6 +16,7 @@ const StyledPopoverTitle = styled.div`
 const StyledDivider = styled((props) => <Divider {...props} />)`
   margin-left: -16px;
   margin-right: -16px;
+  width: auto;
   max-width: 560px;
 `
 
