@@ -15,17 +15,7 @@ const variants = {
 export const getTokens = (as, variant) => {
   switch (as) {
     case 'th':
-      return {
-        ...variants.header[variant],
-        // borders: {
-        //   thead: variants.header[variant].borders,
-        //   tbody: variants.cell[variant].borders,
-        // },
-        // background: {
-        //   thead: variants.header[variant].background,
-        //   tbody: variants.cell[variant].background,
-        // },
-      }
+      return variants.header[variant]
     case 'td':
     default:
       return variants.cell[variant]
