@@ -1,40 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import tableTokens from '@equinor/eds-tokens/components/table/table.json'
+import styled, { css } from 'styled-components'
+import { getTokens } from './Table.tokens'
 import { typographyTemplate } from '../_common/templates'
-
-const { header, cell } = tableTokens
-
-const variants = {
-  header: { text: header.text },
-  cell: {
-    text: cell.text,
-    numeric: cell.monospaced_numeric,
-    icon: cell.icon,
-    input: cell.input,
-  },
-}
-
-const getTokens = (as, variant) => {
-  switch (as) {
-    case 'th':
-      return {
-        ...variants.header[variant],
-        borders: {
-          thead: variants.header[variant].borders,
-          tbody: variants.cell[variant].borders,
-        },
-        background: {
-          thead: variants.header[variant].background,
-          tbody: variants.cell[variant].background,
-        },
-      }
-    case 'td':
-    default:
-      return variants.cell[variant]
-  }
-}
 
 const borderTemplate = (borders) =>
   Object.keys(borders).reduce((acc, val) => {
@@ -46,30 +14,22 @@ const Base = ({ tokens, as }) => {
   const { background, height, text, spacings, borders } = tokens
   const { typography } = text
   const bordersAndBackground =
-    as === 'th'
-      ? `
-        thead & {
-          ${borderTemplate(borders.thead)}
-          background: ${background.thead};
-        }
+    as !== 'th'
+      ? css`
+          ${borderTemplate(borders)}
+          background: ${background};
+        `
+      : ''
 
-        tbody & {
-          ${borderTemplate(borders.tbody)}
-          background: ${background.tbody};
-        }`
-      : `
-        ${borderTemplate(borders)}
-        background: ${background}`
+  const base = css`
+    min-height: ${height};
+    height: ${height};
 
-  const base = `
-  min-height: ${height};
-  height: ${height};
+    padding-left: ${spacings.left};
+    padding-right: ${spacings.right};
 
-  padding-left: ${spacings.left};
-  padding-right: ${spacings.right};
-
-  ${bordersAndBackground}
-  ${typographyTemplate(typography)}
+    ${bordersAndBackground}
+    ${typographyTemplate(typography)}
   `
   return base
 }
