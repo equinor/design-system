@@ -12,12 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed `onClose` handler not being called when `MenuItem` was used inside `MenuSection` ([#546](https://github.com/equinor/design-system/issues/546))
 - Fixed focus showing when clicking on `MenuItem` ([#544](https://github.com/equinor/design-system/issues/544))
 - Fixed an issue where `Divider` did not stretch to full width ([#608](https://github.com/equinor/design-system/issues/608))
+- Fixed `Head` styling when `Table` is set to `width: 100%` ([#610](https://github.com/equinor/design-system/issues/610))
 
 ### Changed
 
 - Added outside click support for closing `Menu`. Outside clicks will now call the `onClose` handler function. ([#548](https://github.com/equinor/design-system/issues/548))
 - Added `data` property to `Icon` component to easily compose icon to be rendered. ([#584](https://github.com/equinor/design-system/issues/584))
-  - See `Icon` [README](/libraries/core-react/src/Icon/README.md) for more information
+  - See `Icon` [README](https://github.com/equinor/design-system/tree/develop/libraries/core-react/src/Icon) for more information
 
 ## [0.6.1] - 2020-09-04
 
