@@ -17,21 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added outside click support for closing `Menu`. Outside clicks will now call the `onClose` handler function. ([#548](https://github.com/equinor/design-system/issues/548))
 - Added `data` property to `Icon` component to easily compose icon to be rendered. ([#584](https://github.com/equinor/design-system/issues/584))
-
-```jsx
-import { save } from '@equinor/eds-icons';
-
-// EDS icon
-<Icon data={save} />
-
-// Custom icon
-<Icon data={{
-  prefix: 'custom',
-  height: '24',
-  width: '24',
-  svgPathData: 'M12 16.067l4.947 3.6-1.894-5.814L20 10.334h-6.067l-1.933-6-1.933 6H4l4.947 3.52-1.894 5.814 4.947-3.6z',
-}}>
-```
+  - See `Icon` [README](./src/Icon/README.md) for more information
 
 ## [0.6.1] - 2020-09-04
 
