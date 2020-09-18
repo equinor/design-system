@@ -54,14 +54,14 @@ const writeSVGSprite = (assets) => {
 
 const writeJsFile = (assets) => {
   const prefix = 'eds'
-  const jsFile = R.pipe(
+  const svgObjects = R.pipe(
     R.map((iconGroups) =>
       R.pipe(
         R.reduce((acc, icon) => {
           const { name, height, width, pathData } = icon
 
           const svgObj = `
-export const ${name} = {
+export const ${name}: IconData = {
   name: '${name}',
   prefix: '${prefix}',
   height: '${height}',
@@ -76,7 +76,9 @@ export const ${name} = {
     R.head,
   )(assets)
 
-  writeFile(PATHS.ICON_FILES, 'index', 'ts', jsFile)
+  const jsFile = `import type { IconData } from './types'\n${svgObjects}`
+
+  writeFile(PATHS.ICON_FILES, 'data', 'ts', jsFile)
 }
 
 const writeJsonAssets = (assets) => {
