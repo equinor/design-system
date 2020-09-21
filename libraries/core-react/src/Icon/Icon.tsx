@@ -78,8 +78,7 @@ export const Icon = forwardRef<SVGSVGElement, Props>(function EdsIcon(
   },
   ref,
 ) {
-  const { icon, count }: IconBasket =
-    data !== null ? customIcon(data) : get(name)
+  const { icon, count }: IconBasket = data ? customIcon(data) : get(name)
 
   if (typeof icon === 'undefined') {
     throw Error(
