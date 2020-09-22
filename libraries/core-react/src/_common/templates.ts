@@ -1,7 +1,39 @@
-// @ts-nocheck
 import { css } from 'styled-components'
+import type { FlattenSimpleInterpolation } from 'styled-components'
 
-export const typographyTemplate = (typography, link) => {
+type StyledCSS = FlattenSimpleInterpolation
+
+type Typography = {
+  color: string
+  fontFamily: string
+  fontSize: string
+  fontWeight: number
+  letterSpacing: string
+  lineHeight: string
+  textAlign?: string
+  fontStyle?: string
+  textTransform?: string
+  textDecoration?: string
+  fontFeature?: string
+}
+
+type Border = {
+  radius: string
+  color: string
+  width: string
+}
+
+type Spacing = {
+  left: string
+  right: string
+  top: string
+  bottom: string
+}
+
+export const typographyTemplate = (
+  typography: Typography,
+  link?: boolean,
+): string => {
   if (!typography) {
     return ''
   }
@@ -39,14 +71,14 @@ export const typographyTemplate = (typography, link) => {
   return base
 }
 
-export const spacingsTemplate = (spacings) => css`
+export const spacingsTemplate = (spacings: Spacing): StyledCSS => css`
   padding-left: ${spacings.left};
   padding-right: ${spacings.right};
   padding-top: ${spacings.top};
   padding-bottom: ${spacings.bottom};
 `
 
-export const bordersTemplate = (border) => css`
+export const bordersTemplate = (border: Border): StyledCSS => css`
   border-radius: ${border.radius};
   border-color: ${border.color};
   border-width: ${border.width};
