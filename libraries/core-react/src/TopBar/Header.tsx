@@ -7,7 +7,7 @@ import { topbar as tokens } from './TopBar.tokens'
 type Props = React.HTMLAttributes<HTMLDivElement>
 
 const {
-  title: { text },
+  title: { typography },
 } = tokens
 
 const StyledHeader = styled.div`
@@ -16,7 +16,7 @@ const StyledHeader = styled.div`
   grid-template-columns: auto auto;
   grid-gap: 24px;
   align-items: center;
-  ${typographyTemplate(text)}
+  ${typographyTemplate(typography)}
 `
 
 export const Header = forwardRef<HTMLDivElement, Props>(

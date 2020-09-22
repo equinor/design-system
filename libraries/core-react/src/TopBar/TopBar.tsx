@@ -10,7 +10,7 @@ const {
   height,
   spacings,
   border,
-  title: { text },
+  title: { typography },
 } = tokens
 
 const StyledTopBar = styled.header`
@@ -28,7 +28,7 @@ const StyledTopBar = styled.header`
   border-bottom: ${border.bottom.width} solid ${border.bottom.color};
 
   ${spacingsTemplate(spacings)};
-  ${typographyTemplate(text)}
+  ${typographyTemplate(typography)}
 `
 
 export const TopBar = forwardRef<HTMLElement, Props>(function EdsTopBar(
