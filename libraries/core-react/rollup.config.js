@@ -36,19 +36,7 @@ export default [
         babelHelpers: 'bundled',
         presets: ['@babel/preset-env', '@babel/preset-react'],
         extensions,
-        plugins: [
-          'babel-plugin-styled-components',
-          ...(buildForStorybook
-            ? [
-                [
-                  'babel-plugin-react-docgen-typescript',
-                  {
-                    skipPropsWithName: ['ref', 'key', 'className'],
-                  },
-                ],
-              ]
-            : []),
-        ],
+        plugins: ['babel-plugin-styled-components'],
       }),
       commonjs(),
       polyfill(['focus-visible']),
