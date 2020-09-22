@@ -56,7 +56,6 @@
     "@types/styled-components": "^5.1.2",
     "@types/testing-library__jest-dom": "^5.9.2",
     "babel-plugin-react-docgen": "^4.1.0",
-    "babel-plugin-react-docgen-typescript": "^1.4.2",
     "babel-plugin-styled-components": "^1.10.7",
     "jest": "^26.0.1",
     "jest-styled-components": "^6.3.4",
@@ -66,9 +65,8 @@
     "react-dom": "^16.13.1",
     "rollup": "^2.15.0",
     "rollup-plugin-polyfill": "^3.0.0",
-    "ts-jest": "^26.3.0",
-    "rollup-plugin-typescript2": "^0.27.2",
     "styled-components": "4.4.1",
+    "ts-jest": "^26.3.0",
     "tslib": "^2.0.1",
     "typescript": "^4.0.2"
   },
