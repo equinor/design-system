@@ -4,7 +4,7 @@ import { typographyTemplate } from '../_common/templates'
 
 import { topbar as tokens } from './TopBar.tokens'
 
-type Props = React.HTMLAttributes<HTMLElement>
+type Props = React.HTMLAttributes<HTMLDivElement>
 
 const {
   title: { text },
