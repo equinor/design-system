@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable no-undef */
 import React from 'react'
 import { render, cleanup, screen, fireEvent } from './test-utils'

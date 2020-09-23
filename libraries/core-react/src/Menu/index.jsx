@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { Menu as BaseMenu } from './Menu'
 import { MenuItem } from './MenuItem'
