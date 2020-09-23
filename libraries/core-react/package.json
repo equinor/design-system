@@ -5,6 +5,7 @@
   "main": "dist/core-react.cjs.js",
   "module": "dist/core-react.es.js",
   "browser": "dist/core-react.umd.js",
+  "types": "dist/types/index.d.ts",
   "license": "AGPL-3.0-or-later",
   "author": {
     "name": "EDS Core Team",
@@ -46,7 +47,6 @@
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "@rollup/plugin-typescript": "^5.0.2",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.2.1",
     "@testing-library/user-event": "^10.3.2",
@@ -65,6 +65,7 @@
     "react-dom": "^16.13.1",
     "rollup": "^2.15.0",
     "rollup-plugin-polyfill": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.27.2",
     "styled-components": "4.4.1",
     "ts-jest": "^26.3.0",
     "tslib": "^2.0.1",
