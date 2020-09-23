@@ -19,5 +19,5 @@ export const PATHS = {
   CSS: `${COMMON_DIR}/public/css`,
   IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
   ICONS: `${STOREFRONT_DIR}/src/assets/icons`,
-  ICON_FILES: `${ICONS_DIR}`,
+  ICON_FILES: `${ICONS_DIR}/src`,
 }
