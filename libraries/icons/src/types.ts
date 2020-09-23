@@ -1,6 +1,6 @@
 import * as icons from './data'
 
-export type IconName = keyof typeof icons
+export type IconName = keyof typeof icons | string
 
 export type IconData = {
   name: IconName
