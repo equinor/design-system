@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import babel from '@rollup/plugin-babel'
 import polyfill from 'rollup-plugin-polyfill'
-import typescript from '@rollup/plugin-typescript'
+import typescript from 'rollup-plugin-typescript2'
 
 import pkg from './package.json'
 
@@ -17,11 +17,10 @@ const globals = {
   'styled-components': 'styled',
 }
 
-const buildForStorybook = process.env.STORYBOOK
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
 export default [
   {
-    input: './src/index.js',
+    input: './src/index.ts',
     external: peerDeps,
     watch: {
       clearScreen: true,
@@ -30,7 +29,7 @@ export default [
     plugins: [
       json(),
       resolve({ extensions }),
-      typescript(),
+      typescript({ useTsconfigDeclarationDir: true }),
       babel({
         exclude: 'node_modules/**',
         babelHelpers: 'bundled',
@@ -50,7 +49,10 @@ export default [
         sourcemap: true,
         globals,
       },
-      ...(buildForStorybook ? [] : [{ file: pkg.main, format: 'cjs' }]),
+      {
+        file: pkg.main,
+        format: 'cjs',
+      },
     ],
   },
 ]
