@@ -1,16 +1,16 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { topbar as tokens } from './TopBar.tokens'
+
+type Props = React.HTMLAttributes<HTMLElement>
 
 const {
   background,
   height,
   spacings,
   border,
-  title: { text },
+  title: { typography },
 } = tokens
 
 const StyledTopBar = styled.header`
@@ -28,10 +28,10 @@ const StyledTopBar = styled.header`
   border-bottom: ${border.bottom.width} solid ${border.bottom.color};
 
   ${spacingsTemplate(spacings)};
-  ${typographyTemplate(text)}
+  ${typographyTemplate(typography)}
 `
 
-export const TopBar = forwardRef(function EdsTopBar(
+export const TopBar = forwardRef<HTMLElement, Props>(function EdsTopBar(
   { children, ...props },
   ref,
 ) {
@@ -43,15 +43,3 @@ export const TopBar = forwardRef(function EdsTopBar(
 })
 
 TopBar.displayName = 'eds-topbar'
-
-TopBar.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node,
-}
-
-TopBar.defaultProps = {
-  className: '',
-  children: undefined,
-}

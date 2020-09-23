@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { tokens } from '@equinor/eds-tokens'
 
 const {
@@ -19,5 +18,5 @@ export const topbar = {
   border: {
     bottom: { color: colors.ui.background__light.rgba, width: '2px' },
   },
-  title: { text: navigation.menu_title },
+  title: { typography: navigation.menu_title },
 }
