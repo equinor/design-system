@@ -1,18 +1,47 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { Input } from './Input'
 import { Label } from './Label'
 import { HelperText } from './HelperText'
 import { propsFor, TextFieldProvider } from './context'
+import type { Variants } from './TextField.types'
 
 const Container = styled.div`
   min-width: 100px;
   width: 100%;
 `
 
-const TextField = React.forwardRef(function TextField(props, ref) {
+type Props = {
+  /** @ignore */
+  className: string
+  /** Variants */
+  variant: Variants
+  /** Input unique id */
+  id: string
+  /** Label text */
+  label: string
+  /** Meta text */
+  meta: string
+  /** Helper text */
+  helperText: string
+  /** Placeholder text */
+  placeholder: string
+  /** Disabled */
+  disabled: boolean
+  /** Multiline input */
+  multiline: boolean
+  /** Input ref */
+  inputRef: HTMLInputElement
+  /** InputIcon */
+  inputIcon: ReactNode
+  /** HelperIcon */
+  helperIcon: ReactNode
+}
+
+const TextField = React.forwardRef<HTMLDivElement, Props>(function TextField(
+  props,
+  ref,
+) {
   const {
     id,
     label,
@@ -22,7 +51,7 @@ const TextField = React.forwardRef(function TextField(props, ref) {
     disabled,
     multiline,
     className,
-    variant,
+    variant = 'default',
     inputRef,
     inputIcon,
     helperIcon,
@@ -72,46 +101,6 @@ const TextField = React.forwardRef(function TextField(props, ref) {
   )
 })
 
-TextField.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** Variant */
-  variant: PropTypes.oneOf(propsFor.variants),
-  /** Input unique id */
-  id: PropTypes.string.isRequired,
-  /** Label text */
-  label: PropTypes.string,
-  /** Meta text */
-  meta: PropTypes.string,
-  /** Helper text */
-  helperText: PropTypes.string,
-  /** Placeholder text */
-  placeholder: PropTypes.string,
-  /** Disabled */
-  disabled: PropTypes.bool,
-  /** Multiline input */
-  multiline: PropTypes.bool,
-  /** Input ref */
-  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /** InputIcon */
-  inputIcon: PropTypes.element,
-  /** HelperIcon */
-  helperIcon: PropTypes.element,
-}
-
-TextField.defaultProps = {
-  className: '',
-  placeholder: '',
-  helperText: '',
-  label: '',
-  meta: '',
-  disabled: false,
-  variant: 'default',
-  multiline: false,
-  inputRef: null,
-  inputIcon: null,
-  helperIcon: null,
-}
 TextField.displayName = 'eds-text-field'
 
 TextField.constants = {
