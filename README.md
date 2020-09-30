@@ -30,7 +30,6 @@ While the design system itself lives in [Figma][], this repository contains impl
     - [Usage](#usage-4)
   - [Browser support](#browser-support)
   - [Contributions](#contributions)
-  - [Getting started](#getting-started)
   - [Get in touch](#get-in-touch)
 
 ## Status
@@ -46,37 +45,39 @@ While the design system itself lives in [Figma][], this repository contains impl
 | [Storefront](https://github.com/equinor/design-system/tree/develop/apps/storefront) (prod) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/storefront-production?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=8&branchName=develop) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/develop/apps/storefront/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/storefront) |
 
 ## How to run
+
 Would you like to contribute? Awesome! 👏
 
-1. Clone the repository
-```sh
-$ git clone git@github.com:equinor/design-system.git design-system
-```
-2. Install pnpm (the package manager we use make it easier to work with a monorepo)
-```sh
-$ npm install -g pnpm
-```
-3. Install dependencies
-```sh
-$ cd design-system
-$ pnpm m i
-```
-### Work with the React components
-We use [storybook](https://storybook.js.org/) for developing `(/apps/storybook-react)`.
+We use a fork and pull-request workflow, so start with forking the repository on Github, then clone your fork.
 
-Start storybook on localhost:9000
-```
-$ pnpm run storybook-run
-```
+    $ git clone git@github.com:your-github-username/design-system
+
+We use [pnpm][] as the package manager, because it’s fast, space efficient, and has some very useful commands when working with a monorepo – so you should start off by installing it globally.
+
+    $ npm install -g pnpm
+
+Install dependencies using the shorthand version of `pnpm multi install`
+
+    $ cd design-system
+    $ pnpm m i
+
+[pnpm]: https://pnpm.js.org
+
+### Work with the React components
+We use [storybook](https://storybook.js.org/) as a development environment `(/apps/storybook-react)`.
+
+Start storybook on localhost:9000 by running the following command from root:
+
+    $ pnpm run storybook
+
 Watch the React components folder `(/libraries/core-react)`
-```
-$ pnpm  --filter  @equinor/eds-core-react run dev
-```
+
+    $ pnpm run core-react
+
 Run tests once or by watching
-```
- $ pnpm  --filter  @equinor/eds-core-react run test 
- $  pnpm  --filter  @equinor/eds-core-react run test:watch
-```
+
+    $ pnpm run test:core-react 
+    $ pnpm run test:watch:core-react 
 
 ## Figma
 
@@ -215,22 +216,6 @@ We support the most up to date version of evergreen browsers (browsers that auto
 ## Contributions
 
 Contributions are welcome and encouraged! File bug reports and feature requests in Github issues, and [get in touch](#get-in-touch) with us if you want to help us out with implementing the components or have ideas for components we should include in the EDS.
-
-## Getting started
-
-We use [pnpm][] as the package manager, because it’s fast, space efficient, and has some very useful commands when working with a monorepo – so you should start off by installing it globally:
-
-```bash
-$ npm i -g pnpm
-```
-
-It is possible to change directory into one of the subdirectories and run pnpm commands from there, but if’s usually better to run most commands from the root, and use `--filter` to single out the package you’re working on. So to install all the dependencies in all the packages simultaneosly, run `pnpm m i`, which is the shorthand version of `pnpm multi install`.
-
-If you would like to start the storefront then, you would run `pnpm --filter @equinor/eds-storefront run start`, and if you want to install some devDependency, `pnpm --filter @equinor/eds-storefront i -D <some-module>`.
-
-There are some useful scripts in the root package.yaml for common tasks.
-
-[pnpm]: https://pnpm.js.org
 
 ## Get in touch
 
