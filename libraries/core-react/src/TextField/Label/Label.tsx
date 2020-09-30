@@ -8,12 +8,10 @@ const LabelBase = styled.label`
   justify-content: space-between;
   position: relative;
 
+  ${typographyTemplate(tokens.typography)}
   margin-left: ${tokens.spacings.left};
   margin-right: ${tokens.spacings.right};
-
-  ${typographyTemplate(tokens.typography)}
   color: ${tokens.color};
-
 `
 
 const Text = styled.p`
