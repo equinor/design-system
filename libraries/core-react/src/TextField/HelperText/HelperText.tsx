@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Spacing, typographyTemplate } from '../../_common/templates'
 import {
   HelperTextVariantProps,
@@ -7,7 +7,7 @@ import {
 } from './HelperText.token'
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
-import type { Variants } from '../TextField.types'
+import type { Variants } from '../types'
 
 type VariantionProps = {
   variant: HelperTextVariantProps
@@ -23,14 +23,20 @@ const Variation = ({ variant, isFocused, isDisabled }: VariantionProps) => {
   const { focusColor, color, disabledColor } = variant
 
   if (isDisabled) {
-    return `color: ${disabledColor};`
+    return css`
+      color: ${disabledColor};
+    `
   }
 
   if (isFocused) {
-    return ` color: ${focusColor};`
+    return css`
+      color: ${focusColor};
+    `
   }
 
-  return `color: ${color};`
+  return css`
+    color: ${color};
+  `
 }
 
 type StyledProps = {

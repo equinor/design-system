@@ -4,7 +4,7 @@ import { Input } from './Input'
 import { Label } from './Label'
 import { HelperText } from './HelperText'
 import { TextFieldProvider } from './context'
-import type { Variants } from './TextField.types'
+import type { Variants } from './types'
 
 const Container = styled.div`
   min-width: 100px;

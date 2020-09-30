@@ -8,7 +8,7 @@ import {
 } from '../../_common/templates'
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
-import type { Variants } from '../TextField.types'
+import type { Variants } from '../types'
 
 const Variation = ({ variant }: { variant: InputVariantProps }) => {
   if (!variant) {

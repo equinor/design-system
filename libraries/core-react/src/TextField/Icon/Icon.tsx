@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { useTextField } from '../context'
 
-type IconVariationProps = {
+type VariationProps = {
   color: string
   focusColor: string
   disabledColor: string
@@ -10,13 +10,13 @@ type IconVariationProps = {
   isFocused?: boolean
 }
 
-const IconVariation = ({
+const Variation = ({
   color,
   focusColor,
   disabledColor,
   isDisabled,
   isFocused,
-}: IconVariationProps) => {
+}: VariationProps) => {
   if (isDisabled) {
     return css`
       fill: ${disabledColor};
@@ -35,7 +35,7 @@ const IconVariation = ({
 const StyledIcon = styled.div`
   width: 16px;
   height: 16px;
-  ${IconVariation}
+  ${Variation}
 `
 
 type Props = {
