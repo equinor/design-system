@@ -6,18 +6,32 @@ While the design system itself lives in [Figma][], this repository contains impl
 
 ## Table of contents
 
-- [Status](#status)
-- [Figma](#figma)
-- [Storefront](#storefront)
-- [React](#react)
-- [Icons](#icons)
-- [Tokens](#tokens)
-- [Fonts](#fonts)
-- [Logo](#logo)
-- [Browser support](#browser-support)
-- [Contribute](#contribute)
-- [Getting started](#getting-started)
-- [Get in touch](#get-in-touch)
+- [Equinor Design System](#equinor-design-system)
+  - [Table of contents](#table-of-contents)
+  - [Status](#status)
+  - [How to run](#how-to-run)
+    - [Work with the React components](#work-with-the-react-components)
+  - [Figma](#figma)
+  - [Storefront](#storefront)
+  - [React](#react)
+    - [Installation](#installation)
+    - [Usage](#usage)
+  - [Icons](#icons)
+    - [Installation](#installation-1)
+    - [Usage](#usage-1)
+  - [Tokens](#tokens)
+    - [Installation](#installation-2)
+    - [Usage](#usage-2)
+  - [Fonts](#fonts)
+    - [Usage](#usage-3)
+    - [All the fonts](#all-the-fonts)
+    - [Individual fonts](#individual-fonts)
+  - [Logo](#logo)
+    - [Usage](#usage-4)
+  - [Browser support](#browser-support)
+  - [Contributions](#contributions)
+  - [Getting started](#getting-started)
+  - [Get in touch](#get-in-touch)
 
 ## Status
 
@@ -31,7 +45,38 @@ While the design system itself lives in [Figma][], this repository contains impl
 | [Storefront](https://github.com/equinor/design-system/tree/develop/apps/storefront) (dev) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/storefront-dev?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=9&branchName=develop) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/develop/apps/storefront/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/storefront) |
 | [Storefront](https://github.com/equinor/design-system/tree/develop/apps/storefront) (prod) | [![Build Status](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_apis/build/status/storefront-production?branchName=develop)](https://dev.azure.com/equinor-design-system/Equinor%20Design%20System/_build/latest?definitionId=8&branchName=develop) | [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/equinor/design-system/develop/apps/storefront/package.json&label=version&query=version&color=orange&prefix=v)](https://github.com/equinor/design-system/apps/storefront) |
 
+## How to run
+Would you like to contribute? Awesome! 👏
 
+1. Clone the repository
+```sh
+$ git clone git@github.com:equinor/design-system.git design-system
+```
+2. Install pnpm (the package manager we use make it easier to work with a monorepo)
+```sh
+$ npm install -g pnpm
+```
+3. Install dependencies
+```sh
+$ cd design-system
+$ pnpm m i
+```
+### Work with the React components
+We use [storybook](https://storybook.js.org/) for developing `(/apps/storybook-react)`.
+
+Start storybook on localhost:9000
+```
+$ pnpm run storybook-run
+```
+Watch the React components folder `(/libraries/core-react)`
+```
+$ pnpm  --filter  @equinor/eds-core-react run dev
+```
+Run tests once or by watching
+```
+ $ pnpm  --filter  @equinor/eds-core-react run test 
+ $  pnpm  --filter  @equinor/eds-core-react run test:watch
+```
 
 ## Figma
 
