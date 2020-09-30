@@ -56,11 +56,11 @@ const StyledIcon = styled(Icon)<StyledProps>`
 
 type Props = {
   /** Helper text */
-  helperText: string
+  helperText?: string
   /** Icon */
-  icon: ReactNode
+  icon?: ReactNode
   /** Disabled */
-  disabled: boolean
+  disabled?: boolean
   /** Variant */
   variant: Variants
 }

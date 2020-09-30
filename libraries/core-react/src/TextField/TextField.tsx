@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Input } from './Input'
 import { Label } from './Label'
 import { HelperText } from './HelperText'
-import { propsFor, TextFieldProvider } from './context'
+import { TextFieldProvider } from './context'
 import type { Variants } from './TextField.types'
 
 const Container = styled.div`
@@ -13,32 +13,36 @@ const Container = styled.div`
 
 type Props = {
   /** @ignore */
-  className: string
+  className?: string
   /** Variants */
-  variant: Variants
+  variant?: Variants
   /** Input unique id */
   id: string
   /** Label text */
-  label: string
+  label?: string
   /** Meta text */
-  meta: string
+  meta?: string
   /** Helper text */
-  helperText: string
+  helperText?: string
   /** Placeholder text */
-  placeholder: string
+  placeholder?: string
   /** Disabled */
-  disabled: boolean
+  disabled?: boolean
   /** Multiline input */
-  multiline: boolean
+  multiline?: boolean
   /** Input ref */
-  inputRef: HTMLInputElement
+  inputRef?: React.Ref<HTMLInputElement>
   /** InputIcon */
-  inputIcon: ReactNode
+  inputIcon?: ReactNode
   /** HelperIcon */
-  helperIcon: ReactNode
-}
+  helperIcon?: ReactNode
+  /** Value */
+  value?: string
+  /** Read Only */
+  readOnly?: boolean
+} & React.HTMLAttributes<HTMLInputElement>
 
-const TextField = React.forwardRef<HTMLDivElement, Props>(function TextField(
+const TextField = React.forwardRef<HTMLInputElement, Props>(function TextField(
   props,
   ref,
 ) {
@@ -102,10 +106,5 @@ const TextField = React.forwardRef<HTMLDivElement, Props>(function TextField(
 })
 
 TextField.displayName = 'eds-text-field'
-
-TextField.constants = {
-  variants: propsFor.variants,
-  types: Input.constants.types,
-}
 
 export { TextField }

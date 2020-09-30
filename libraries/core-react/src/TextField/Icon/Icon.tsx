@@ -6,8 +6,8 @@ type IconVariationProps = {
   color: string
   focusColor: string
   disabledColor: string
-  isDisabled: boolean
-  isFocused: boolean
+  isDisabled?: boolean
+  isFocused?: boolean
 }
 
 const IconVariation = ({
@@ -46,7 +46,7 @@ type Props = {
   /** Color */
   color: string
   /** isDisabled */
-  isDisabled: boolean
+  isDisabled?: boolean
 }
 
 const Icon = React.forwardRef<HTMLDivElement, Props>(function TextFieldIcon(

@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { typographyTemplate } from '../../_common/templates'
 import { label as tokens } from './Label.tokens'
@@ -22,8 +20,17 @@ const Text = styled.p`
   margin: 0;
 `
 
-const Label = React.forwardRef(function TextFieldLabel(props, ref) {
-  const { label, meta, inputId } = props
+type Props = {
+  label: string
+  meta: string
+  inputId: string
+}
+
+const Label = React.forwardRef<HTMLLabelElement, Props>(function TextFieldLabel(
+  props,
+  ref,
+) {
+  const { label = '', meta = '', inputId } = props
 
   return (
     <LabelBase ref={ref} htmlFor={inputId}>
@@ -32,20 +39,6 @@ const Label = React.forwardRef(function TextFieldLabel(props, ref) {
     </LabelBase>
   )
 })
-
-Label.propTypes = {
-  /** Label text */
-  label: PropTypes.string,
-  /** Meta text */
-  meta: PropTypes.string,
-  /** Id of input for `for` */
-  inputId: PropTypes.string.isRequired,
-}
-
-Label.defaultProps = {
-  label: '',
-  meta: '',
-}
 
 Label.displayName = 'eds-text-field-label'
 

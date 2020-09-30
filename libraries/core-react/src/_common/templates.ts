@@ -8,7 +8,7 @@ export type Typography = {
   fontFamily: string
   fontSize: string
   fontWeight: number
-  letterSpacing: string
+  letterSpacing?: string
   lineHeight: string
   textAlign?: string
   fontStyle?: string

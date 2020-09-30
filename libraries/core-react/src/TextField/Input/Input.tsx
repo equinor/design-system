@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
-import styled, { AnyStyledComponent, css } from 'styled-components'
+import React, { ReactNode, ElementType } from 'react'
+import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
 import {
   Spacing,
@@ -9,8 +9,6 @@ import {
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
 import type { Variants } from '../TextField.types'
-
-type typeProps = 'text' | 'search' | 'password' | 'email' | 'number'
 
 const Variation = ({ variant }: { variant: InputVariantProps }) => {
   if (!variant) {
@@ -71,7 +69,11 @@ const Container = styled.div`
   position: relative;
 `
 
-const StyledIcon = styled(Icon)<StyledProps>`
+type StyledIconProps = {
+  spacings: Spacing
+}
+
+const StyledIcon = styled(Icon)<StyledIconProps>`
   position: absolute;
   right: ${({ spacings }) => spacings.right};
   top: ${({ spacings }) => spacings.top};
@@ -79,22 +81,20 @@ const StyledIcon = styled(Icon)<StyledProps>`
 `
 
 type Props = {
-  /** @ignore */
-  className: string
   /** Specifies if text should be bold */
-  multiline: boolean
-  /** Input label */
-  label: string
+  multiline?: boolean
   /** Placeholder */
-  placeholder: string
-  /** Specifiec which type input is */
-  type: typeProps
+  placeholder?: string
   /** Variant */
-  variant: Variants
+  variant?: Variants
   /** Icon to be embeded in input field */
-  inputIcon: ReactNode
+  inputIcon?: ReactNode
   /** Disabled state */
-  disabled: boolean
+  disabled?: boolean
+  /** Type */
+  type?: string
+  /** Read Only */
+  readonly?: boolean
 }
 
 const Input = React.forwardRef<HTMLInputElement, Props>(function TextFieldInput(
@@ -112,7 +112,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function TextFieldInput(
 
   const { handleFocus, handleBlur } = useTextField()
 
-  const as: string = multiline ? 'textarea' : 'input'
+  const as: ElementType = multiline ? 'textarea' : 'input'
   const inputVariant = tokens[variant]
   let spacings = tokens.spacings.comfortable
 
@@ -151,17 +151,6 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function TextFieldInput(
     </Container>
   )
 })
-
-Input.defaultProps = {
-  className: '',
-  multiline: false,
-  label: '',
-  placeholder: '',
-  type: 'text',
-  variant: 'default',
-  inputIcon: null,
-  disabled: false,
-}
 
 Input.displayName = 'eds-text-field-input'
 

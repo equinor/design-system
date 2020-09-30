@@ -29,15 +29,16 @@ describe('TextField', () => {
     const { queryByDisplayValue } = render(
       <TextField id="test-value" value={value} readOnly />,
     )
+    const inputElement = queryByDisplayValue(value) as HTMLInputElement
 
-    expect(queryByDisplayValue(value).value).toBe(value)
+    expect(inputElement.value).toBe(value)
   })
 
   it('Has correct updated value when changed', () => {
     let value = 'Initial value'
     const newValue = 'Updated value'
     const onChangeHandler = (ele) => {
-      // eslint-disable-next-line prefer-destructuring
+      // eslint-disable-next-line
       value = ele.target.value
     }
 
