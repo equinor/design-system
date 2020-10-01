@@ -150,13 +150,13 @@ export const knobs = () => (
       id="storybook-knobs"
       variant={select(
         'Variant',
-        [...Object.values(TextField.constants.variants)],
-        TextField.constants.variants[0],
+        ['error', 'warning', 'success', 'default'],
+        'default',
       )}
       type={select(
         'Type',
-        [...Object.values(TextField.constants.types)],
-        TextField.constants.types[0],
+        ['text', 'search', 'password', 'email', 'number'],
+        'text',
       )}
       label={text('Label', 'label')}
       meta={text('Meta', 'meta')}

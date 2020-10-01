@@ -3,12 +3,12 @@ import type { FlattenSimpleInterpolation } from 'styled-components'
 
 type StyledCSS = FlattenSimpleInterpolation
 
-type Typography = {
+export type Typography = {
   color: string
   fontFamily: string
   fontSize: string
   fontWeight: number
-  letterSpacing: string
+  letterSpacing?: string
   lineHeight: string
   textAlign?: string
   fontStyle?: string
@@ -17,13 +17,13 @@ type Typography = {
   fontFeature?: string
 }
 
-type Border = {
+export type Border = {
   radius: string
   color: string
   width: string
 }
 
-type Spacing = {
+export type Spacing = {
   left: string
   right: string
   top: string

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { tokens } from '@equinor/eds-tokens'
 
 const {
@@ -21,6 +20,12 @@ const spacings = {
     bottom: '6px',
   },
 }
+export type HelperTextVariantProps = {
+  color: string
+  disabledColor: string
+  focusColor: string
+}
+
 export const helperText = {
   background: colors.ui.background__light.hex,
   typography: typography.input.helper,
@@ -28,29 +33,21 @@ export const helperText = {
   default: {
     color: colors.text.static_icons__tertiary.hex,
     disabledColor: colors.interactive.disabled__text.hex,
-    focus: {
-      color: colors.text.static_icons__tertiary.hex,
-    },
+    focusColor: colors.text.static_icons__tertiary.hex,
   },
   error: {
-    color: colors.interactive.danger__resting.hex,
+    color: colors.interactive.danger__text.hex,
     disabledColor: colors.interactive.disabled__text.hex,
-    focus: {
-      color: colors.interactive.danger__hover.hex,
-    },
+    focusColor: colors.interactive.danger__hover.hex,
   },
   warning: {
-    color: colors.interactive.warning__resting.hex,
+    color: colors.interactive.warning__text.hex,
     disabledColor: colors.interactive.disabled__text.hex,
-    focus: {
-      color: colors.interactive.warning__hover.hex,
-    },
+    focusColor: colors.interactive.warning__hover.hex,
   },
   success: {
-    color: colors.interactive.success__resting.hex,
+    color: colors.interactive.success__text.hex,
     disabledColor: colors.interactive.disabled__text.hex,
-    focus: {
-      color: colors.interactive.success__hover.hex,
-    },
+    focusColor: colors.interactive.success__hover.hex,
   },
 }

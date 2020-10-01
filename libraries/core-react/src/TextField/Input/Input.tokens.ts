@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { tokens } from '@equinor/eds-tokens'
 
 const {
@@ -36,6 +35,26 @@ const spacings = {
       bottom: '10px',
     },
   },
+}
+
+export type InputVariantProps = {
+  icon: {
+    color: string
+    disabledColor: string
+  }
+  border: {
+    outline: { color: string; width: string }
+    bottom: { color: string; width: string }
+  }
+  focus: {
+    icon: {
+      color: string
+    }
+    border: {
+      width: string
+      color: string
+    }
+  }
 }
 
 export const input = {
