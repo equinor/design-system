@@ -7,9 +7,6 @@ import { card as tokens } from './Card.tokens'
 const StyledCardMedia = styled.div`
   display: flex;
   width: 100%;
-  img {
-    margin-left: -16px;
-  }
   &:last-child {
     margin-bottom: 8px;
     /* Last child to have 24px total spacing to bottom */
