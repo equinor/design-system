@@ -17,6 +17,7 @@ const StyledCardMedia = styled.div`
           > * {
             width: calc(100% + ${spacing} + ${spacing});
             margin-left: -${spacing};
+            margin-right: -${spacing};
           }
 
           &:first-child {
