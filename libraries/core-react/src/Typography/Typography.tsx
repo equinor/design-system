@@ -141,27 +141,4 @@ export const Typography = forwardRef<HTMLElement, Props>(function EdsTypography(
   )
 })
 
-// Typography.propTypes = {
-//   /** @ignore */
-//   className: PropTypes.string,
-//   /** @ignore */
-//   children: PropTypes.node,
-//   /** Specifies which variant to use */
-//   variant: PropTypes.oneOf(variantNames),
-//   /** Specifices which typography group to use  */
-//   group: PropTypes.oneOf(groupNames),
-//   /** Specifies if text should be bold */
-//   bold: PropTypes.bool,
-//   /** Specifies if text should be italic */
-//   italic: PropTypes.bool,
-//   /** Specifies if text should be a link */
-//   link: PropTypes.bool,
-//   /** Specifies which color to use */
-//   color: PropTypes.oneOfType([PropTypes.oneOf(colorNames), PropTypes.string]),
-//   /** Specifies which typography token to use */
-//   token: PropTypes.object,
-//   /** Specifies how many lines of text are shown */
-//   lines: PropTypes.number,
-// }
-
 Typography.displayName = 'eds-typography'
