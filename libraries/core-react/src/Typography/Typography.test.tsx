@@ -6,15 +6,16 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Typography } from '.'
 import { tokens } from '@equinor/eds-tokens'
-import { colors } from './Typography.tokens.js'
+import { colors } from './Typography.tokens'
+import type { Typography as TypographyType } from '@equinor/eds-tokens'
 
 const StyledTypography = styled(Typography)`
   margin-top: 16px;
   margin-bottom: 32px;
 `
-const stripSpaces = (t) => t.replace(/\s/g, '')
+const stripSpaces = (t: string): string => t.replace(/\s/g, '')
 
-const expectToMatchTypography = (element, token) => {
+const expectToMatchTypography = (element, token: TypographyType) => {
   const {
     color,
     fontFamily,
@@ -35,7 +36,7 @@ afterEach(cleanup)
 
 describe('Typography', () => {
   it('throws error when variant is wrong', () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
+    jest.spyOn(console, 'error').mockImplementation()
 
     expect(() => {
       render(<Typography variant="label">Test</Typography>)
