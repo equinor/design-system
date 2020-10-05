@@ -1,14 +1,11 @@
 import React, { ReactNode, ElementType } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
-import {
-  Spacing,
-  typographyTemplate,
-  spacingsTemplate,
-} from '../../_common/templates'
+import { typographyTemplate, spacingsTemplate } from '../../_common/templates'
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
 import type { Variants } from '../types'
+import type { Spacing } from '@equinor/eds-tokens'
 
 const Variation = ({ variant }: { variant: InputVariantProps }) => {
   if (!variant) {
