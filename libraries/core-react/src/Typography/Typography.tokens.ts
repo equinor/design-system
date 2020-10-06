@@ -34,12 +34,12 @@ const quickVariants: QuickTypographyVariants = {
 }
 
 type TypographyVariants =
-  | keyof typeof typography.heading
-  | keyof typeof typography.paragraph
-  | keyof typeof typography.navigation
-  | keyof typeof typography.input
-  | keyof typeof typography.ui
-  | keyof typeof typography.table
+  | keyof TypographyTokens['heading']
+  | keyof TypographyTokens['paragraph']
+  | keyof TypographyTokens['navigation']
+  | keyof TypographyTokens['input']
+  | keyof TypographyTokens['ui']
+  | keyof TypographyTokens['table']
 
 type ColorVariants =
   | 'primary'
