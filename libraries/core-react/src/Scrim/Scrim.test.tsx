@@ -27,7 +27,7 @@ const DismissableScrim = () => {
   }
 
   return visibleScrim ? (
-    <Scrim onKeyDown={handleClose}>
+    <Scrim onClose={handleClose} isDismissable={true}>
       <button type="button" onClick={() => setVisibleScrim(false)}>
         OK
       </button>
@@ -46,6 +46,17 @@ describe('Scrim', () => {
     fireEvent.click(targetButton)
     expect(scrim).not.toBeInTheDocument()
   })
+
+  it('Is dismissable with component click', () => {
+    const { container } = render(<DismissableScrim />)
+    const scrim = container.firstChild
+
+    expect(scrim).toBeInTheDocument()
+    expect(screen.queryByText('OK')).toBeVisible()
+    fireEvent.click(scrim)
+    expect(scrim).not.toBeInTheDocument()
+  })
+
   it('Is dismissable with Esc', () => {
     const { container } = render(<DismissableScrim />)
     const scrim = container.firstChild
