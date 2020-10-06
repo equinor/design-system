@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import styled, { css } from 'styled-components'
-import { Spacing, typographyTemplate } from '../../_common/templates'
+import { typographyTemplate } from '../../_common/templates'
 import {
   HelperTextVariantProps,
   helperText as tokens,
@@ -8,6 +8,7 @@ import {
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
 import type { Variants } from '../types'
+import type { Spacing } from '@equinor/eds-tokens'
 
 type VariantionProps = {
   variant: HelperTextVariantProps
