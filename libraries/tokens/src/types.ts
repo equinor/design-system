@@ -22,8 +22,8 @@ export type TypographyTokens = {
 
 export type Border = {
   radius: string
-  color: string
-  width: string
+  color?: string
+  width?: string
 }
 
 export type Spacing = {
