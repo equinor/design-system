@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState } from 'react'
+import React, { KeyboardEvent, useState } from 'react'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -27,8 +27,8 @@ const DismissableScrim = () => {
   }
 
   return visibleScrim ? (
-    <Scrim onKeyDown={handleClose}>
-      <button type="button" onClick={() => setVisibleScrim()}>
+    <Scrim onClose={handleClose} isDismissable>
+      <button type="button" onClick={() => setVisibleScrim(false)}>
         OK
       </button>
     </Scrim>
