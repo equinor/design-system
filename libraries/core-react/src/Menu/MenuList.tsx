@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useMenu } from './Menu.context'
 import type { FocusTarget } from './types'
 import type { MenuItemProps } from './MenuItem'
+import type { MenuSectionProps } from './MenuSection'
 
 const isFragment = (object: ReactNode): boolean => {
   if ((object as ReactElement).type) {
@@ -25,9 +26,10 @@ type Props = {
   focus: FocusTarget
 } & React.HTMLAttributes<HTMLUListElement>
 
-type MenuChild = ReactElement<MenuItemProps> & {
-  type: { displayName?: string }
-}
+type MenuChild = ReactElement<MenuItemProps> &
+  ReactElement<MenuSectionProps> & {
+    type: { displayName?: string }
+  }
 
 type Direction = 'down' | 'up'
 
