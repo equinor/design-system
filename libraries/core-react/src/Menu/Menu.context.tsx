@@ -1,5 +1,4 @@
-import React, { useState, useContext, ReactNode } from 'react'
-import type { ReactMouseEvent } from './types'
+import React, { useState, useContext, ReactNode, MouseEvent } from 'react'
 
 type State = {
   focusedIndex: number
@@ -9,7 +8,7 @@ type State = {
     left: number
     transform: string
   }
-  onClose: (e: ReactMouseEvent<HTMLLIElement>) => void
+  onClose: (e: MouseEvent) => void
 }
 
 type UseMenu<T> = T & {
@@ -19,7 +18,7 @@ type UseMenu<T> = T & {
     menuRect: ClientRect,
     window: Window,
   ) => void
-  setOnClose: (onClose: (e: ReactMouseEvent<HTMLLIElement>) => void) => void
+  setOnClose: (onClose: (e: MouseEvent) => void) => void
 }
 
 const initalState: State = {

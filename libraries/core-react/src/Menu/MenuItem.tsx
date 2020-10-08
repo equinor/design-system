@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { templates, useCombinedRefs } from '../_common'
 import { useMenu } from './Menu.context'
-import type { ReactMouseEvent } from './types'
 
 const { spacingsTemplate, typographyTemplate } = templates
 
@@ -91,8 +90,7 @@ type Props = {
   index: number
   active: boolean
   disabled: boolean
-  onClick: (e: ReactMouseEvent<HTMLLIElement>) => void
-}
+  onClick: (e: MouseEvent) => void
 
 export const MenuItem = React.memo(
   React.forwardRef<HTMLLIElement, Props>(function EdsMenuItem(
