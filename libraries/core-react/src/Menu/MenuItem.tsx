@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react'
+import React, { MouseEvent, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { templates, useCombinedRefs } from '../_common'
@@ -20,8 +20,8 @@ const {
 } = tokens
 
 type StyleProps = {
-  active: boolean
-  disabled: boolean
+  active?: boolean
+  disabled?: boolean
 }
 
 type StyleAttrsProps = {
@@ -87,10 +87,11 @@ const Content = styled.div`
 `
 
 export type MenuItemProps = {
-  index: number
-  active: boolean
-  disabled: boolean
-  onClick: (e: MouseEvent) => void
+  index?: number
+  active?: boolean
+  disabled?: boolean
+  children: ReactNode
+  onClick?: (e: React.MouseEvent) => void
 } & React.HTMLAttributes<HTMLLIElement>
 
 export const MenuItem = React.memo(

@@ -23,7 +23,7 @@ const ListItem = styled.li.attrs(() => ({
 `
 
 export type MenuSectionProps = {
-  index: number
+  index?: number
   title?: string
   children: ReactNode
 }

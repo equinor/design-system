@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* eslint-disable no-undef */
 import React from 'react'
 import { render, cleanup, screen, fireEvent } from './test-utils'
@@ -9,6 +8,7 @@ import styled from 'styled-components'
 import { Menu } from '.'
 
 const { MenuItem, MenuSection } = Menu
+
 const StyledMenu = styled(Menu)`
   background: red;
 `
@@ -18,7 +18,7 @@ afterEach(cleanup)
 describe('Menu', () => {
   it('Can extend the css for the component', () => {
     render(
-      <StyledMenu>
+      <StyledMenu open>
         <div>some random content</div>
       </StyledMenu>,
     )

@@ -1,7 +1,7 @@
 import React, { useEffect, ReactElement, ReactNode } from 'react'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
-import type { FocusTarget } from './types'
+import type { FocusTarget } from './Menu.types'
 import type { MenuItemProps } from './MenuItem'
 import type { MenuSectionProps } from './MenuSection'
 
@@ -23,8 +23,9 @@ const List = styled.ul`
   }
 `
 type Props = {
-  focus: FocusTarget
-} & React.HTMLAttributes<HTMLUListElement>
+  focus?: FocusTarget
+  children: ReactNode
+}
 
 type MenuChild = ReactElement<MenuItemProps> &
   ReactElement<MenuSectionProps> & {

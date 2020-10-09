@@ -1,4 +1,5 @@
 import { typography } from '../base/typography'
+import { elevation } from '../base/elevation'
 
 export type Typography = {
   color: string
@@ -40,12 +41,7 @@ export type Clickbounds = {
 }
 
 export type Elevations = {
-  above_scrim: string
-  none: string
-  overlay: string
-  raised: string
-  sticky: string
-  temporary_nav: string
+  [P in keyof typeof elevation]: string
 }
 
 export type Color = {

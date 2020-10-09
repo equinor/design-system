@@ -1,6 +1,6 @@
 import React, { useState, useContext, ReactNode, MouseEvent } from 'react'
 
-type State = {
+export type State = {
   focusedIndex: number
   isPositioned: boolean
   position: {
@@ -8,7 +8,7 @@ type State = {
     left: number
     transform: string
   }
-  onClose: (e: MouseEvent) => void
+  onClose: (e?: MouseEvent) => void
 }
 
 type UseMenu<T> = T & {
@@ -18,7 +18,7 @@ type UseMenu<T> = T & {
     menuRect: ClientRect,
     window: Window,
   ) => void
-  setOnClose: (onClose: (e: MouseEvent) => void) => void
+  setOnClose: (onClose: (e?: MouseEvent) => void) => void
 }
 
 const initalState: State = {
