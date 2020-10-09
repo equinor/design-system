@@ -114,10 +114,11 @@ export const Pagination = forwardRef(function Pagination(
           <Button
             variant="ghost_icon"
             onClick={
-              activePage > 1 &&
-              ((event) => {
-                onPageChange(event, activePage - 1)
-              })
+              activePage > 1
+                ? (event) => {
+                    onPageChange(event, activePage - 1)
+                  }
+                : undefined
             }
             disabled={activePage === 1}
             aria-label="Go to previous page"
@@ -126,39 +127,41 @@ export const Pagination = forwardRef(function Pagination(
           </Button>
         </ListItem>
 
-        {items.length > 0 &&
-          items.map((page, index) =>
-            page !== 'ELLIPSIS' ? (
-              // eslint-disable-next-line react/no-array-index-key
-              <ListItem key={'list-item' + index}>
-                <PaginationItem
-                  {...page}
-                  aria-label={getAriaLabel(page, activePage)}
-                  aria-current={activePage}
-                  page={page}
-                  selected={page === activePage}
-                  onClick={(event) => {
-                    onPageChange(event, page)
-                  }}
-                />
-              </ListItem>
-            ) : (
-              <ListItem
+        {items.length > 0
+          ? items.map((page, index) =>
+              page !== 'ELLIPSIS' ? (
                 // eslint-disable-next-line react/no-array-index-key
-                key={'ellipsis-' + index}
-              >
-                <StyledIcon name="more_horizontal" title="ellipsis" />
-              </ListItem>
-            ),
-          )}
+                <ListItem key={'list-item' + index}>
+                  <PaginationItem
+                    {...page}
+                    aria-label={getAriaLabel(page, activePage)}
+                    aria-current={activePage}
+                    page={page}
+                    selected={page === activePage}
+                    onClick={(event) => {
+                      onPageChange(event, page)
+                    }}
+                  />
+                </ListItem>
+              ) : (
+                <ListItem
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={'ellipsis-' + index}
+                >
+                  <StyledIcon name="more_horizontal" title="ellipsis" />
+                </ListItem>
+              ),
+            )
+          : undefined}
         <ListItem key="next">
           <Button
             variant="ghost_icon"
             onClick={
-              activePage < pages &&
-              ((event) => {
-                onPageChange(event, activePage + 1)
-              })
+              activePage < pages
+                ? (event) => {
+                    onPageChange(event, activePage + 1)
+                  }
+                : undefined
             }
             aria-label="Go to next page"
             disabled={activePage === pages}
