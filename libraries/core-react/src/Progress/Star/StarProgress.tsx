@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import styled, { keyframes, css } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
@@ -49,7 +48,12 @@ const determinate = keyframes`
   }
 `
 
-const Svg = styled.svg`
+type SvgProps = {
+  variant?: 'determinate' | 'indeterminate'
+  progress: number
+} & HTMLAttributes<SVGSVGElement>
+
+const Svg = styled.svg<SvgProps>`
   fill: ${tokens.star.background};
   ${({ variant, progress }) =>
     variant === 'indeterminate'
@@ -100,8 +104,17 @@ const Svg = styled.svg`
         `}
 `
 
-const StarProgress = forwardRef(function StarProgress(
-  { variant, className, value, ...rest },
+type Props = {
+  /* Use indeterminate when there is no progress value */
+  variant?: 'indeterminate' | 'determinate'
+  className?: string
+  /* The value of the progress indicator for determinate variant
+   * Value between 0 and 100 */
+  value?: number
+} & HTMLAttributes<SVGSVGElement>
+
+const StarProgress = forwardRef<SVGSVGElement, Props>(function StarProgress(
+  { variant = 'indeterminate', className = '', value = null, ...rest },
   ref,
 ) {
   const progress = Math.round(value)
@@ -143,22 +156,5 @@ const StarProgress = forwardRef(function StarProgress(
 })
 
 StarProgress.displayName = 'eds-star-progress'
-
-StarProgress.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /* Variant
-   * Use indeterminate when there is no progress value */
-  variant: PropTypes.oneOf(['determinate', 'indeterminate']),
-  /* The value of the progress indicator for determinate variant
-   * Value between 0 and 100 */
-  value: PropTypes.number,
-}
-
-StarProgress.defaultProps = {
-  className: '',
-  variant: 'indeterminate',
-  value: null,
-}
 
 export { StarProgress }
