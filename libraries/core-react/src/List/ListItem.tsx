@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react'
 
-type Props = React.HTMLAttributes<HTMLElement>
+export type ListItemProps = React.HTMLAttributes<HTMLLIElement>
 
-const ListItem = forwardRef<HTMLLIElement, Props>(function ListItem(
+const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem(
   { children, ...props },
   ref,
 ) {
@@ -13,6 +13,6 @@ const ListItem = forwardRef<HTMLLIElement, Props>(function ListItem(
   )
 })
 
-ListItem.displayName = 'eds-listitem'
+ListItem.displayName = 'ListItem'
 
 export { ListItem }
