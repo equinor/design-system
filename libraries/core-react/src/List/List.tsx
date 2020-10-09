@@ -1,8 +1,9 @@
 import React, { forwardRef, HTMLAttributes, ElementType } from 'react'
 import styled, { css } from 'styled-components'
 import { list as tokens } from './List.tokens'
+import { typographyTemplate } from '../_common/templates'
 
-const { color, typography } = tokens
+const { typography } = tokens
 
 type StyledListProps = {
   as: ElementType
@@ -17,10 +18,8 @@ const StyledList = styled.div<StyledListProps>(
       }
     `,
   `
-    line-height: ${typography.lineHeight};
-    font-size: ${typography.fontSize};
-    color: ${color};
-  `,
+    ${typographyTemplate(typography)}
+    `,
 )
 
 type Props = {

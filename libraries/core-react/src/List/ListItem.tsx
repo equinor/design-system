@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 
 type Props = React.HTMLAttributes<HTMLElement>
 
