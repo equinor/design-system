@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
@@ -29,8 +28,11 @@ const ProgressRoot = styled.div`
   width: 100%;
   border-radius: 50px;
 `
+type ProgressBarProps = {
+  variant: 'indeterminate' | 'determinate'
+}
 
-const ProgressBar = styled.div`
+const ProgressBar = styled.div<ProgressBarProps>`
   ${({ variant }) =>
     variant === 'determinate' &&
     css`
@@ -60,59 +62,54 @@ const IndeterminateProgress = styled.div`
     infinite;
 `
 
-const LinearProgress = forwardRef(function LinearProgress(
-  { variant, className, value, ...props },
-  ref,
-) {
-  const rootProps = {
-    ...props,
-    ref,
-  }
-  let barStyle
-  if (variant === 'determinate') {
-    if (value !== undefined) {
-      rootProps['aria-valuenow'] = Math.round(value)
-      rootProps['aria-valuemin'] = 0
-      rootProps['aria-valuemax'] = 100
-      const transform = value - 100
-
-      barStyle = `translateX(${transform}%)`
-    }
-  }
-
-  const progressProps = {
-    variant,
-  }
-
-  return (
-    <ProgressRoot
-      {...rootProps}
-      role="progressbar"
-      className={`${className} ${variant}-progress`}
-    >
-      <ProgressBar {...progressProps} style={{ transform: barStyle }} />
-      {variant === 'indeterminate' && <IndeterminateProgress />}
-    </ProgressRoot>
-  )
-})
-
-LinearProgress.displayName = 'eds-linear-progress'
-
-LinearProgress.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
+type Props = {
   /* Variant
    * Use indeterminate when there is no progress value */
-  variant: PropTypes.oneOf(['determinate', 'indeterminate']),
+  variant?: 'indeterminate' | 'determinate'
   /* The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
-  value: PropTypes.number,
+  value?: number
+  className?: string
 }
 
-LinearProgress.defaultProps = {
-  className: '',
-  variant: 'indeterminate',
-  value: null,
-}
+const LinearProgress = forwardRef<HTMLDivElement, Props>(
+  function LinearProgress(
+    { variant = 'indeterminate', className = '', value = null, ...props },
+    ref,
+  ) {
+    const rootProps = {
+      ...props,
+      ref,
+    }
+    let barStyle
+    if (variant === 'determinate') {
+      if (value !== undefined) {
+        rootProps['aria-valuenow'] = Math.round(value)
+        rootProps['aria-valuemin'] = 0
+        rootProps['aria-valuemax'] = 100
+        const transform = value - 100
+
+        barStyle = `translateX(${transform}%)`
+      }
+    }
+
+    const progressProps = {
+      variant,
+    }
+
+    return (
+      <ProgressRoot
+        {...rootProps}
+        role="progressbar"
+        className={`${className} ${variant}-progress`}
+      >
+        <ProgressBar {...progressProps} style={{ transform: barStyle }} />
+        {variant === 'indeterminate' && <IndeterminateProgress />}
+      </ProgressRoot>
+    )
+  },
+)
+
+LinearProgress.displayName = 'eds-linear-progress'
 
 export { LinearProgress }
