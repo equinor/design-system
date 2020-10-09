@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 
@@ -28,8 +26,14 @@ const Svg = styled.svg`
   }
 `
 
-const DotProgress = forwardRef(function DotProgress(
-  { variant, className, ...rest },
+type Props = {
+  /* Choose between two colors */
+  variant?: 'white' | 'green'
+  className?: string
+} & HTMLAttributes<SVGSVGElement>
+
+const DotProgress = forwardRef<SVGSVGElement, Props>(function DotProgress(
+  { variant = 'white', className = '', ...rest },
   ref,
 ) {
   const props = {
@@ -55,18 +59,5 @@ const DotProgress = forwardRef(function DotProgress(
 })
 
 DotProgress.displayName = 'eds-dot-progress'
-
-DotProgress.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /* Variant
-   * Choose between two colors */
-  variant: PropTypes.oneOf(['white', 'green']),
-}
-
-DotProgress.defaultProps = {
-  className: '',
-  variant: 'white',
-}
 
 export { DotProgress }

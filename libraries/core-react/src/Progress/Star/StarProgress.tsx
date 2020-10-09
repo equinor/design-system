@@ -1,5 +1,4 @@
 import React, { forwardRef, HTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 import styled, { keyframes, css } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 

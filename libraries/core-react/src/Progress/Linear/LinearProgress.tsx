@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
+import CSS from 'csstype'
 
 const indeterminate = keyframes`
   0%{
@@ -81,7 +81,7 @@ const LinearProgress = forwardRef<HTMLDivElement, Props>(
       ...props,
       ref,
     }
-    let barStyle
+    let barStyle: string
     if (variant === 'determinate') {
       if (value !== undefined) {
         rootProps['aria-valuenow'] = Math.round(value)
@@ -97,13 +97,17 @@ const LinearProgress = forwardRef<HTMLDivElement, Props>(
       variant,
     }
 
+    const transformStyle: CSS.Properties = {
+      transform: barStyle,
+    }
+
     return (
       <ProgressRoot
         {...rootProps}
         role="progressbar"
         className={`${className} ${variant}-progress`}
       >
-        <ProgressBar {...progressProps} style={{ transform: barStyle }} />
+        <ProgressBar {...progressProps} style={transformStyle} />
         {variant === 'indeterminate' && <IndeterminateProgress />}
       </ProgressRoot>
     )
