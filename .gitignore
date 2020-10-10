@@ -12,3 +12,4 @@ yarn.lock
 public
 # local docz testing
 docz-fresh
+.idea
