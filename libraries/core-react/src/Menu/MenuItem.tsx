@@ -87,10 +87,13 @@ const Content = styled.div`
 `
 
 export type MenuItemProps = {
+  /** @ignore */
   index?: number
+  /** Is active */
   active?: boolean
+  /** Is disabled */
   disabled?: boolean
-  children: ReactNode
+  /** onClick handler */
   onClick?: (e: React.MouseEvent) => void
 } & React.HTMLAttributes<HTMLLIElement>
 
