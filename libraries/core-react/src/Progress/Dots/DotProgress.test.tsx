@@ -13,7 +13,7 @@ const StyledProgress = styled(DotProgress)`
 
 const { white, green } = tokens.dots
 
-const rgbaTrim = (x) => x.split(' ').join('')
+const rgbaTrim = (x: string) => x.split(' ').join('')
 
 afterEach(cleanup)
 
