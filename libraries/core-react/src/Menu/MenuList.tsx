@@ -98,4 +98,4 @@ export const MenuList = React.forwardRef<HTMLUListElement, Props>(
   },
 )
 
-MenuList.displayName = 'eds-menu-list'
+MenuList.displayName = 'EdsMenuList'

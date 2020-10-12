@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode } from 'react'
+import React, { MouseEvent } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { templates, useCombinedRefs } from '../_common'
@@ -138,4 +138,4 @@ export const MenuItem = React.memo(
   }),
 )
 
-MenuItem.displayName = 'eds-menu-item'
+MenuItem.displayName = 'EdsMenuItem'
