@@ -2,6 +2,7 @@ dependencies:
   '@equinor/eds-icons': 'link:../icons'
   '@equinor/eds-tokens': 'link:../tokens'
   '@testing-library/react-hooks': 3.3.0_react@16.13.1
+  csstype: 3.0.3
   focus-visible: 5.1.0
   lodash: 4.17.19
 devDependencies:
@@ -2493,7 +2494,6 @@ packages:
     resolution:
       integrity: sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
   /csstype/3.0.3:
-    dev: true
     resolution:
       integrity: sha512-jPl+wbWPOWJ7SXsWyqGRk3lGecbar0Cb0OvZF/r/ZU011R4YqiRehgkQ9p4eQfo9DSDLqLL3wHwfxeJiuIsNag==
   /dashdash/1.14.1:
@@ -5939,6 +5939,7 @@ specifiers:
   '@types/testing-library__jest-dom': ^5.9.2
   babel-plugin-react-docgen: ^4.1.0
   babel-plugin-styled-components: ^1.10.7
+  csstype: ^3.0.3
   focus-visible: ^5.1.0
   jest: ^26.0.1
   jest-styled-components: ^6.3.4
