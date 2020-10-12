@@ -35,11 +35,10 @@ const StyledPaper = styled(Paper)<StyledProps>`
 `
 
 export type MenuProps = {
-  anchorEl?: Element
+  anchorEl: HTMLElement
   open: boolean
   focus?: FocusTarget
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
-  children: ReactNode
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(

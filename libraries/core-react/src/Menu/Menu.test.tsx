@@ -6,10 +6,14 @@ import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Menu } from '.'
+import { MenuProps } from './Menu'
 
 const { MenuItem, MenuSection } = Menu
 
-const StyledMenu = styled(Menu)`
+// We override Menu for testing and set props to partial because AnchorEl is applied to children in custom render function
+const TestMenu = Menu as React.ForwardRefExoticComponent<Partial<MenuProps>>
+
+const StyledMenu = styled(TestMenu)`
   background: red;
 `
 
@@ -28,9 +32,9 @@ describe('Menu', () => {
   })
   it('is visible when open is true & anchorEl is set', () => {
     render(
-      <Menu open>
+      <TestMenu open>
         <div>some random content</div>
-      </Menu>,
+      </TestMenu>,
     )
     const menuContainer = screen.getByRole('menu').parentElement
 
@@ -40,9 +44,9 @@ describe('Menu', () => {
   })
   it('has rendered MenuItem', () => {
     render(
-      <Menu open>
+      <TestMenu open>
         <MenuItem>Item 1</MenuItem>
-      </Menu>,
+      </TestMenu>,
     )
     const menuItem = screen.getByText('Item 1')
 
@@ -51,11 +55,11 @@ describe('Menu', () => {
 
   it('has rendered MenuSection with MenuItem & title', () => {
     render(
-      <Menu open>
+      <TestMenu open>
         <MenuSection title="Section title">
           <MenuItem>Item 1</MenuItem>
         </MenuSection>
-      </Menu>,
+      </TestMenu>,
     )
     const menuItem = screen.getByText('Item 1')
     const menuSection = screen.getByText('Section title')
@@ -69,9 +73,9 @@ describe('Menu', () => {
     const handleOnClick = jest.fn()
 
     render(
-      <Menu open onClose={handleOnClose}>
+      <TestMenu open onClose={handleOnClose}>
         <MenuItem onClick={handleOnClick}>Item 1</MenuItem>
-      </Menu>,
+      </TestMenu>,
     )
 
     const menuItem = screen.getByText('Item 1')
@@ -84,11 +88,11 @@ describe('Menu', () => {
 
   it('has first menuItem focused when focus is set to first', () => {
     render(
-      <Menu open focus="first">
+      <TestMenu open focus="first">
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
         <MenuItem>Item 3</MenuItem>
-      </Menu>,
+      </TestMenu>,
     )
     const menuItem = screen.getByText('Item 1').parentElement
 
@@ -97,11 +101,11 @@ describe('Menu', () => {
 
   it('has last menuItem focused when focus is set to last', () => {
     render(
-      <Menu open focus="last">
+      <TestMenu open focus="last">
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
         <MenuItem>Item 3</MenuItem>
-      </Menu>,
+      </TestMenu>,
     )
     const menuItem = screen.getByText('Item 3').parentElement
 
@@ -112,11 +116,11 @@ describe('Menu', () => {
     const handleOnClick = jest.fn()
 
     render(
-      <Menu open onClose={handleOnClose}>
+      <TestMenu open onClose={handleOnClose}>
         <MenuSection title="test">
           <MenuItem onClick={handleOnClick}>Item 1</MenuItem>
         </MenuSection>
-      </Menu>,
+      </TestMenu>,
     )
 
     const menuItem = screen.getByText('Item 1')
