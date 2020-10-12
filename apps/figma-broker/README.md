@@ -69,3 +69,7 @@ export const rootFontSize = 16
 1. Start the application with `pnpm start` or `pnpm run develop` for development
 1. Run commands from Commands.httpie by clicking the lines prefixed with ⚡ (requires the httpie vs code extension and a locally installed version of httpie)
 
+## TODO
+
+- Add how to check for new images
+
