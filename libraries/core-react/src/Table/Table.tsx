@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -8,7 +7,9 @@ const TableBase = styled.table`
   border-collapse: collapse;
 `
 
-export const Table = (props) => {
+type Props = React.HTMLAttributes<HTMLTableElement>
+
+export const Table: FunctionComponent<Props> = (props: Props) => {
   const { children } = props
   return <TableBase {...props}>{children}</TableBase>
 }
