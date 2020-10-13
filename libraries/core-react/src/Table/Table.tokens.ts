@@ -12,7 +12,7 @@ const variants = {
   },
 }
 
-export const getTokens = (as, variant) => {
+export const getTokens = (as: string, variant: string) => {
   switch (as) {
     case 'th':
       return variants.header[variant]
