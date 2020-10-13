@@ -1,5 +1,4 @@
-import React, { FunctionComponent } from 'react'
-import PropTypes from 'prop-types'
+import React, { FunctionComponent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
 const TableBase = styled.table`
@@ -7,22 +6,10 @@ const TableBase = styled.table`
   border-collapse: collapse;
 `
 
-type Props = React.HTMLAttributes<HTMLTableElement>
+type Props = HTMLAttributes<HTMLTableElement>
 
-export const Table: FunctionComponent<Props> = (props: Props) => {
-  const { children } = props
+export const Table: FunctionComponent<Props> = ({ children, ...props }) => {
   return <TableBase {...props}>{children}</TableBase>
 }
 
-Table.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-}
-
-Table.defaultProps = {
-  className: '',
-}
-
-Table.displayName = 'eds-table'
+Table.displayName = 'EdsTable'
