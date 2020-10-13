@@ -4,7 +4,7 @@ import { MenuItem } from './MenuItem'
 import { MenuSection } from './MenuSection'
 import { MenuProvider } from './Menu.context'
 
-export type MenuType = typeof BaseMenu & {
+type MenuType = typeof BaseMenu & {
   MenuItem: typeof MenuItem
   MenuSection: typeof MenuSection
 }
