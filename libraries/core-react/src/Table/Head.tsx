@@ -1,20 +1,17 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { getTokens } from './Table.tokens'
+import { getTokens, TableCell } from './Table.tokens'
 import type { Border } from '@equinor/eds-tokens'
 
-const borderTemplate = (borders: Border): string =>
+const borderTemplate = (borders: { bottom: Border }): string =>
   Object.keys(borders).reduce((acc, val) => {
-    const { color, width }: Border = borders[val]
+    const { color, width }: Border = borders[val] as Border
     return `${acc} border-${val}: ${width} solid ${color}; \n`
   }, '')
 
 type StyledTableHeadProps = {
-  token: {
-    borders: Border
-    background: string
-  }
+  token: TableCell
 }
 
 const StyledTableHead = styled.thead<StyledTableHeadProps>`
@@ -23,7 +20,7 @@ const StyledTableHead = styled.thead<StyledTableHeadProps>`
       background: ${background};`}
 `
 
-export const Head = ({ children, ...props }) => {
+export const Head: FunctionComponent = ({ children, ...props }) => {
   const token = getTokens('th', 'text')
   return (
     <StyledTableHead token={token} {...props}>
