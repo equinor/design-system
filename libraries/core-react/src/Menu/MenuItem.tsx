@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { MouseEvent } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { templates, useCombinedRefs } from '../_common'
@@ -21,10 +19,19 @@ const {
   },
 } = tokens
 
-const ListItem = styled.li.attrs(({ isFocused }) => ({
+type StyleProps = {
+  active?: boolean
+  disabled?: boolean
+}
+
+type StyleAttrsProps = {
+  isFocused: string
+}
+
+const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
   role: 'menuitem',
   tabIndex: isFocused ? -1 : 0,
-}))`
+}))<StyleProps>`
   width: auto;
   position: relative;
   z-index: 2;
@@ -79,9 +86,20 @@ const Content = styled.div`
   align-items: center;
 `
 
+export type MenuItemProps = {
+  /** @ignore */
+  index?: number
+  /** Is active */
+  active?: boolean
+  /** Is disabled */
+  disabled?: boolean
+  /** onClick handler */
+  onClick?: (e: React.MouseEvent) => void
+} & React.HTMLAttributes<HTMLLIElement>
+
 export const MenuItem = React.memo(
-  React.forwardRef(function EdsMenuItem(
-    { children, disabled, index, onClick, ...rest },
+  React.forwardRef<HTMLLIElement, MenuItemProps>(function EdsMenuItem(
+    { children, disabled, index = 0, onClick, ...rest },
     ref,
   ) {
     const { focusedIndex, setFocusedIndex, onClose } = useMenu()
@@ -103,7 +121,7 @@ export const MenuItem = React.memo(
     return (
       <ListItem
         {...props}
-        ref={useCombinedRefs(ref, (el) => isFocused && el.focus())}
+        ref={useCombinedRefs(ref, (el: HTMLElement) => isFocused && el.focus())}
         onFocus={() => toggleFocus(index)}
         onClick={(e) => {
           if (!disabled) {
@@ -120,30 +138,4 @@ export const MenuItem = React.memo(
   }),
 )
 
-MenuItem.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  index: PropTypes.number,
-  /** @ignore */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf([PropTypes.node]),
-    PropTypes.node,
-  ]).isRequired,
-  /** Active Menu Item */
-  active: PropTypes.bool,
-  /** Disabled Menu Item */
-  disabled: PropTypes.bool,
-  /** onClick handler */
-  onClick: PropTypes.func,
-}
-
-MenuItem.defaultProps = {
-  className: '',
-  active: false,
-  disabled: false,
-  index: 0,
-  onClick: () => {},
-}
-
-MenuItem.displayName = 'eds-menu-item'
+MenuItem.displayName = 'EdsMenuItem'

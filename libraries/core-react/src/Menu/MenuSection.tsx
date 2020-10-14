@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { templates } from '../_common'
@@ -24,7 +22,18 @@ const ListItem = styled.li.attrs(() => ({
   }
 `
 
-export const MenuSection = React.memo(function EdsMenuSection(props) {
+export type MenuSectionProps = {
+  /** @ignore */
+  index?: number
+  /** @ignore */
+  children: ReactNode
+  /** Section title */
+  title?: string
+}
+
+export const MenuSection = React.memo(function EdsMenuSection(
+  props: MenuSectionProps,
+) {
   const { children, title, index } = props
   return (
     <>
@@ -45,22 +54,4 @@ export const MenuSection = React.memo(function EdsMenuSection(props) {
   )
 })
 
-MenuSection.propTypes = {
-  /** @ignore */
-  index: PropTypes.number,
-  /** @ignore */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf([PropTypes.node]),
-    PropTypes.node,
-  ]).isRequired,
-  /** Active Menu Item */
-  title: PropTypes.string,
-}
-
-MenuSection.defaultProps = {
-  className: '',
-  title: undefined,
-  index: undefined,
-}
-
-MenuSection.displayName = 'eds-menu-section'
+MenuSection.displayName = 'EdsMenuSection'

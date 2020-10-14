@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { Border, Spacing, Typography } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -25,7 +26,36 @@ const {
   },
 } = tokens
 
-export const menu = {
+type MenuToken = {
+  enabled: {
+    background: string
+    border: Border
+    typography: Typography
+    item: {
+      active: {
+        background: string
+        textColor: string
+      }
+      spacings: Spacing
+      focus: {
+        outline: string
+        outlineOffset: string
+      }
+      hover: {
+        background: string
+      }
+      disabled: {
+        textColor: string
+        iconColor: string
+      }
+    }
+    title: {
+      spacings: Spacing
+    }
+  }
+}
+
+export const menu: MenuToken = {
   enabled: {
     background,
     border: {
