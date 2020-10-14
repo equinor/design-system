@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacings } from '@equinor/eds-tokens'
+import type { Typography, Spacing } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -7,6 +7,7 @@ const {
       background__overlay: { rgba: background },
     },
   },
+  typography: { ui },
   spacings: {
     comfortable: { small: spacingSmall },
   },
@@ -16,17 +17,17 @@ const {
 } = tokens
 
 export type Placement = {
-  arrowLeft: string
-  arrowTop: string
-  arrowRight: string
-  arrowBottom: string
-  tooltipBottom: string
-  tooltipRight: string
-  tooltipLeft: string
-  tooltipTop: string
-  arrowTransform: string
-  transform: string
-  width: string
+  arrowLeft?: string
+  arrowTop?: string
+  arrowRight?: string
+  arrowBottom?: string
+  tooltipBottom?: string | number
+  tooltipRight?: number | string
+  tooltipLeft?: number | string
+  tooltipTop?: string | number
+  arrowTransform?: string
+  transform?: string
+  width?: string
 }
 
 export type Tooltip = {
@@ -39,7 +40,7 @@ export type Tooltip = {
     width: string
     height: string
   }
-  spacings: Spacings
+  spacings: Spacing
   borderRadius: string
   placement: {
     bottom: Placement
@@ -57,13 +58,8 @@ export type Tooltip = {
   }
 }
 
-export const tooltip = {
-  typography: {
-    color: '#fff',
-    fontFamily: 'Equinor',
-    fontSize: '12px',
-    lineHeight: '16px',
-  },
+export const tooltip: Tooltip = {
+  typography: ui.tooltip,
   background,
   tooltip: {
     minHeight: '32px',

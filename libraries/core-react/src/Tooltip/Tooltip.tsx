@@ -11,10 +11,10 @@ const Wrapper = styled.div`
 `
 
 type WrapperProps = {
-  top: string
-  bottom: string
-  right: string
-  left: string
+  top: string | number
+  bottom: string | number
+  right: string | number
+  left: string | number
   transform: string
 }
 
@@ -119,7 +119,7 @@ export const Tooltip = forwardRef<HTMLDivElement, Props>(function Tooltip(
     ref,
   }
 
-  const placementToken: Placement = tokens.placement[placement] as Placement
+  const placementToken: Placement = tokens.placement[placement]
 
   const wrapperProps = {
     right: placementToken.tooltipRight,
