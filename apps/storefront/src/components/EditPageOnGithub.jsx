@@ -8,9 +8,7 @@ export const EditPageOnGithub = ({ slug }) => {
 
   return (
     <a
-      href={`https://github.com/equinor/design-system/tree/documentation/apps/storefront/src/content/${
-        slug === '/' ? `index` : slug
-      }.mdx`}
+      href={`https://github.com/equinor/design-system/blob/develop/apps/storefront/${slug}`}
       style={{
         display: 'block',
         marginTop: '3rem',
