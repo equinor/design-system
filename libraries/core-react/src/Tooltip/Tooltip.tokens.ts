@@ -59,7 +59,10 @@ export type Tooltip = {
 }
 
 export const tooltip: Tooltip = {
-  typography: ui.tooltip,
+  typography: {
+    ...ui.tooltip,
+    color: '#fff',
+  },
   background,
   tooltip: {
     minHeight: '32px',
