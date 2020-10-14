@@ -1,9 +1,8 @@
-// @ts-nocheck
-import React, { forwardRef, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, useState, HTMLAttributes, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
-import { tooltip as tokens } from './Tooltip.tokens'
+import { tooltip as tokens, Placement } from './Tooltip.tokens'
+import CSS from 'csstype'
 
 const Wrapper = styled.div`
   position: relative;
@@ -11,7 +10,15 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const StyledTooltipWrapper = styled.div`
+type WrapperProps = {
+  top: string
+  bottom: string
+  right: string
+  left: string
+  transform: string
+}
+
+const StyledTooltipWrapper = styled.div<WrapperProps>`
   ${({ top, bottom, right, left, transform }) =>
     css`
       bottom: ${bottom};
@@ -40,7 +47,14 @@ const StyledTooltip = styled.div`
   position: relative;
 `
 
-const TooltipArrow = styled.svg`
+type ArrowProps = {
+  top: string
+  bottom: string
+  right: string
+  left: string
+} & HTMLAttributes<SVGSVGElement>
+
+const TooltipArrow = styled.svg<ArrowProps>`
   ${({ top, bottom, right, left }) =>
     css`
       bottom: ${bottom};
@@ -54,9 +68,39 @@ const TooltipArrow = styled.svg`
   fill: inherit;
   `
 
+type Props = {
+  /* Tooltip placement relative to anchor */
+  placement?:
+    | 'topLeft'
+    | 'top'
+    | 'topRight'
+    | 'rightTop'
+    | 'right'
+    | 'rightBottom'
+    | 'bottomLeft'
+    | 'bottom'
+    | 'bottomRight'
+    | 'leftTop'
+    | 'left'
+    | 'leftBottom'
+  /* For controlled Tooltip */
+  open?: boolean
+  /* Tooltip title */
+  title?: string
+  /** Tooltip reference/anchor element */
+  children: ReactNode
+} & HTMLAttributes<HTMLDivElement>
+
 // Controller for TooltipItem
-export const Tooltip = forwardRef(function Tooltip(
-  { className, title, children, placement, open, ...rest },
+export const Tooltip = forwardRef<HTMLDivElement, Props>(function Tooltip(
+  {
+    className,
+    title = '',
+    children,
+    placement = 'bottom',
+    open = false,
+    ...rest
+  },
   ref,
 ) {
   const [openState, setOpenState] = useState(open)
@@ -75,21 +119,25 @@ export const Tooltip = forwardRef(function Tooltip(
     ref,
   }
 
+  const placementToken: Placement = tokens.placement[placement] as Placement
+
   const wrapperProps = {
-    right: tokens.placement[placement].tooltipRight,
-    top: tokens.placement[placement].tooltipTop,
-    bottom: tokens.placement[placement].tooltipBottom,
-    left: tokens.placement[placement].tooltipLeft,
-    transform: tokens.placement[placement].transform,
+    right: placementToken.tooltipRight,
+    top: placementToken.tooltipTop,
+    bottom: placementToken.tooltipBottom,
+    left: placementToken.tooltipLeft,
+    transform: placementToken.transform,
   }
 
   const arrowProps = {
-    left: tokens.placement[placement].arrowLeft,
-    right: tokens.placement[placement].arrowRight,
-    top: tokens.placement[placement].arrowTop,
-    bottom: tokens.placement[placement].arrowBottom,
+    left: placementToken.arrowLeft,
+    right: placementToken.arrowRight,
+    top: placementToken.arrowTop,
+    bottom: placementToken.arrowBottom,
   }
-
+  const arrowStyle: CSS.Properties = {
+    transform: `${placementToken.arrowTransform}`,
+  }
   return (
     <Wrapper {...props}>
       <div
@@ -111,12 +159,7 @@ export const Tooltip = forwardRef(function Tooltip(
           {...wrapperProps}
         >
           <StyledTooltip>
-            <TooltipArrow
-              {...arrowProps}
-              style={{
-                transform: `${tokens.placement[placement].arrowTransform}`,
-              }}
-            >
+            <TooltipArrow {...arrowProps} style={arrowStyle}>
               <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
             </TooltipArrow>
             {title}
@@ -128,36 +171,3 @@ export const Tooltip = forwardRef(function Tooltip(
 })
 
 Tooltip.displayName = 'eds-tooltip'
-
-Tooltip.propTypes = {
-  // Tooltip placement relative to anchor
-  placement: PropTypes.oneOf([
-    'topLeft',
-    'top',
-    'topRight',
-    'rightTop',
-    'right',
-    'rightBottom',
-    'bottomLeft',
-    'bottom',
-    'bottomRight',
-    'leftTop',
-    'left',
-    'leftBottom',
-  ]),
-  // Tooltip title
-  title: PropTypes.string,
-  // For controlled Tooltip
-  open: PropTypes.bool,
-  /** Tooltip reference/anchor element */
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Tooltip.defaultProps = {
-  open: false,
-  placement: 'bottom',
-  title: '',
-  className: '',
-}
