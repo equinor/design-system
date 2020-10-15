@@ -23,7 +23,7 @@ export type TypographyTokens = {
 
 export type Border = {
   type?: 'outline' | 'border'
-  radius: string | number
+  radius?: string | number
   color?: string
   width?: string | number
 }
