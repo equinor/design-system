@@ -1,6 +1,5 @@
 /* eslint camelcase: "off" */
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   radio_button_selected, // eslint-disable-line camelcase
@@ -120,17 +119,3 @@ export const Radio = forwardRef<HTMLInputElement, Props>(
 )
 
 Radio.displayName = 'eds-radio'
-
-Radio.propTypes = {
-  /** Label for the radio */
-  label: PropTypes.string.isRequired,
-  /** If true, the radio button will be disabled */
-  disabled: PropTypes.bool,
-  /** Additional class names */
-  className: PropTypes.string,
-}
-
-Radio.defaultProps = {
-  disabled: false,
-  className: undefined,
-}
