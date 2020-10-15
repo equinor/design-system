@@ -23,7 +23,7 @@ export type TypographyTokens = {
 
 export type Border = {
   type?: 'outline' | 'border'
-  radius: string
+  radius: string | number
   color?: string
   width?: string | number
 }
@@ -31,8 +31,8 @@ export type Border = {
 export type Spacing = {
   left: string
   right: string
-  top: string
-  bottom: string
+  top?: string
+  bottom?: string
 }
 
 export type Clickbounds = {

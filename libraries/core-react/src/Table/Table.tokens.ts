@@ -1,14 +1,26 @@
 import tableTokens from '@equinor/eds-tokens/components/table/table.json'
 import type {
   Border,
-  Clickbounds,
+  Clickbound,
   Spacing,
   Typography,
 } from '@equinor/eds-tokens'
 
 const { header, cell } = tableTokens
 
-const variants = {
+type Variants = {
+  header: {
+    text: TableCell
+  }
+  cell: {
+    text: TableCell
+    numeric: TableCell
+    icon: TableCell
+    input: TableCell
+  }
+}
+
+const variants: Variants = {
   header: { text: header.text },
   cell: {
     text: cell.text,
@@ -45,8 +57,8 @@ export type TableCell = {
     typography: Typography
   }
   spacings: Spacing
-  clickbound: Clickbounds
-  field: Field
+  clickbound: Clickbound
+  field?: Field
   active: {
     background: string
     color: string
