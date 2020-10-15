@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
@@ -8,7 +6,9 @@ import { Input } from './Input'
 
 const { enabled, disabled: _disabled } = tokens
 
-const Track = styled.span`
+type StyledProps = { isDisabled: boolean }
+
+const Track = styled.span<StyledProps>`
   width: ${enabled.track.width};
   height: ${enabled.track.height};
   border-radius: ${enabled.track.borderRadius};
@@ -24,7 +24,7 @@ const Track = styled.span`
       backgroundColor: _disabled.background,
     }}
 `
-const Handle = styled.span`
+const Handle = styled.span<StyledProps>`
   background-color: ${enabled.handle.background};
   ${({ isDisabled }) =>
     isDisabled && {
@@ -42,25 +42,22 @@ const Handle = styled.span`
   transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
-export const SwitchDefault = forwardRef(({ disabled, ...rest }, ref) => {
-  return (
-    <>
-      <Input {...rest} ref={ref} disabled={disabled} />
-      <InputWrapper isDisabled={disabled}>
-        <Track isDisabled={disabled} />
-        <Handle isDisabled={disabled} />
-      </InputWrapper>
-    </>
-  )
-})
+type Props = {
+  disabled?: boolean
+}
+
+export const SwitchDefault = forwardRef<HTMLInputElement, Props>(
+  ({ disabled, ...rest }, ref) => {
+    return (
+      <>
+        <Input {...rest} ref={ref} disabled={disabled} />
+        <InputWrapper isDisabled={disabled}>
+          <Track isDisabled={disabled} />
+          <Handle isDisabled={disabled} />
+        </InputWrapper>
+      </>
+    )
+  },
+)
 
 SwitchDefault.displayName = 'eds-switch-default'
-
-SwitchDefault.propTypes = {
-  // If true, the styles will be reflecting disabled
-  disabled: PropTypes.bool,
-}
-
-SwitchDefault.defaultProps = {
-  disabled: false,
-}

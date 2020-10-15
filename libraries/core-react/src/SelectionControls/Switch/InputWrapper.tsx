@@ -1,12 +1,14 @@
-// @ts-nocheck
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
+import type { Size } from './Switch.types'
 
 const { enabled, disabled: _disabled } = tokens
 
-const BaseInputWrapper = styled.span`
+type StyledProps = Pick<Props, 'isDisabled'>
+
+const BaseInputWrapper = styled.span<StyledProps>`
   width: ${enabled.clickSize};
   height: ${enabled.clickSize};
   border-radius: 50%;
@@ -29,8 +31,17 @@ const InputWrapperSmall = styled(BaseInputWrapper)`
       isDisabled ? 'transparent' : enabled.hover.background};
   }
 `
+type Props = {
+  children: ReactNode
+  isDisabled?: boolean
+  size?: Size
+}
 
-export const InputWrapper = ({ children, isDisabled, size }) => {
+export const InputWrapper = ({
+  children,
+  isDisabled,
+  size = 'default',
+}: Props): JSX.Element => {
   return (
     <>
       {size === 'small' ? (
