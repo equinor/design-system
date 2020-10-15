@@ -129,7 +129,7 @@ type Props = {
 
 export const Button = forwardRef<HTMLButtonElement, Props>(function Button(
   {
-    color = 'danger',
+    color = 'primary',
     variant = 'contained',
     children,
     disabled,
