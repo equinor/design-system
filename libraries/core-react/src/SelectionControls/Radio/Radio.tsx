@@ -1,5 +1,4 @@
 /* eslint camelcase: "off" */
-// @ts-nocheck
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -7,6 +6,7 @@ import {
   radio_button_selected, // eslint-disable-line camelcase
   radio_button_unselected, // eslint-disable-line camelcase
 } from '@equinor/eds-icons'
+import type { IconData } from '@equinor/eds-icons'
 import { radio as tokens } from './Radio.tokens'
 import { typographyTemplate } from '../../_common/templates'
 
@@ -46,18 +46,24 @@ const Input = styled.input.attrs(({ type = 'radio' }) => ({
     display: inline;
   }
 `
+type StyledRadioProps = Pick<Props, 'disabled'>
 
-const StyledRadio = styled.label`
+const StyledRadio = styled.label<StyledRadioProps>`
   display: inline-flex;
   align-items: center;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `
 
-const StyledPath = styled.path.attrs(({ icon }) => ({
+type StyledIconPathProps = {
+  icon: IconData
+  name: string
+}
+
+const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
   fillRule: 'evenodd',
   clipRule: 'evenodd',
   d: icon.svgPathData,
-}))``
+}))<StyledIconPathProps>``
 
 const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   name: null,
@@ -71,7 +77,9 @@ const LabelText = styled.span`
   ${typographyTemplate(enabled.typography)}
 `
 
-const InputWrapper = styled.span`
+type StyledInputWrapperProps = { disabled: boolean }
+
+const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-flex;
   border-radius: 50%;
   padding: ${enabled.padding};
@@ -80,8 +88,14 @@ const InputWrapper = styled.span`
       disabled ? 'transparent' : color.hover};
   }
 `
+type Props = {
+  /** Label for the radio */
+  label: string
+  /** If true, the radio button will be disabled */
+  disabled?: boolean
+} & JSX.IntrinsicElements['input']
 
-export const Radio = forwardRef(
+export const Radio = forwardRef<HTMLInputElement, Props>(
   ({ label, disabled = false, className, ...rest }, ref) => {
     const iconSize = 24
     return (
