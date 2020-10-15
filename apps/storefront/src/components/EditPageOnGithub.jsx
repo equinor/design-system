@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 Icon.add({ edit_text })
 
-const Link = styled.a`
+const ExternalLink = styled.a`
   display: flex;
   align-items: center;
   margin-top: 3rem;
@@ -23,13 +23,13 @@ export const EditPageOnGithub = ({ slug }) => {
   const { theme } = context
 
   return (
-    <Link
+    <ExternalLink
       color={theme.colors.primary}
       href={`https://github.com/equinor/design-system/blob/develop/apps/storefront/${slug}`}
     >
       <Icon name="edit_text" size={16} />
       Edit this page on GitHub
-    </Link>
+    </ExternalLink>
   )
 }
 
