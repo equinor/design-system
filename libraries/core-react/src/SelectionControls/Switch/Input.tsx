@@ -1,14 +1,15 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
+import type { Size } from './Switch.types'
 
 const { enabled, disabled: _disabled } = tokens
 
+type StyledProps = Pick<Props, 'disabled'>
+
 const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
-}))`
+}))<StyledProps>`
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -59,28 +60,23 @@ const DefaultInput = styled(BaseInput)`
   }
 `
 
-export const Input = forwardRef(({ disabled, size, ...rest }, ref) => {
-  return (
-    <>
-      {size === 'small' ? (
-        <SmallInput {...rest} ref={ref} disabled={disabled} />
-      ) : (
-        <DefaultInput {...rest} ref={ref} disabled={disabled} />
-      )}
-    </>
-  )
-})
+type Props = {
+  size?: Size
+  disabled?: boolean
+} & React.HTMLAttributes<HTMLInputElement>
+
+export const Input = forwardRef<HTMLInputElement, Props>(
+  ({ size = 'default', ...rest }, ref) => {
+    return (
+      <>
+        {size === 'small' ? (
+          <SmallInput {...rest} ref={ref} />
+        ) : (
+          <DefaultInput {...rest} ref={ref} />
+        )}
+      </>
+    )
+  },
+)
 
 Input.displayName = 'eds-switch-input'
-
-Input.propTypes = {
-  // If true, the component will be disabled
-  disabled: PropTypes.bool,
-  // Switch size, use the small version with caution
-  size: PropTypes.oneOf(['default', 'small']),
-}
-
-Input.defaultProps = {
-  disabled: false,
-  size: 'default',
-}
