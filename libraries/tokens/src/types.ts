@@ -22,9 +22,10 @@ export type TypographyTokens = {
 }
 
 export type Border = {
+  type?: 'outline' | 'border'
   radius: string
   color?: string
-  width?: string
+  width?: string | number
 }
 
 export type Spacing = {
@@ -61,5 +62,30 @@ export type Spacings = {
     small: string
     x_small: string
     xx_small: string
+  }
+}
+
+export type Focus = {
+  type?: 'dashed' | string
+  color: string
+  width: string
+  gap?: string
+}
+
+export type Hover = {
+  background: string
+  radius?: string
+}
+
+export type Pressed = {
+  color: string
+}
+
+export type Clickbound = {
+  height: string
+  width: string
+  offset: {
+    x: string
+    y: string
   }
 }

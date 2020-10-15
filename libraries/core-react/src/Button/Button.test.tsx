@@ -5,7 +5,8 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { save } from '@equinor/eds-icons'
-import { Button, Icon } from '..'
+import { Button } from './Button'
+import { Icon } from '../Icon'
 
 Icon.add({ save })
 
