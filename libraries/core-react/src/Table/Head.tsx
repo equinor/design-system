@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { getTokens, TableCell } from './Table.tokens'
 import type { Border } from '@equinor/eds-tokens'
@@ -27,17 +26,6 @@ export const Head: FunctionComponent = ({ children, ...props }) => {
       {children}
     </StyledTableHead>
   )
-}
-
-Head.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-}
-
-Head.defaultProps = {
-  className: '',
 }
 
 Head.displayName = 'eds-table-head'

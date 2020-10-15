@@ -84,8 +84,10 @@ export type Pressed = {
 export type Clickbound = {
   height: string
   width: string
-  offset: {
-    x: string
-    y: string
-  }
+  offset:
+    | {
+        x: string
+        y: string
+      }
+    | number
 }

@@ -8,6 +8,64 @@ import type {
 
 const { header, cell } = tableTokens
 
+type Field = {
+  height: string
+  background: string
+  borders: {
+    outline: Border
+  }
+  text: {
+    color: string
+    typography: Typography
+    colorPlaceholder: string
+  }
+  spacings: Spacing
+}
+
+export type TableCell = {
+  height: string
+  background: string
+  borders: {
+    bottom: Border
+  }
+  text?: {
+    color: string
+    typography: Typography
+  }
+  spacings: Spacing
+  clickbound: Clickbound
+  field?: Field
+  active: {
+    background: string
+    color?: string
+    typography?: Typography
+    borders: {
+      bottom: Border
+    }
+    field?: Field
+  }
+  disabled: {
+    background: string
+    color?: string
+    typography?: Typography
+    borders: {
+      bottom: Border
+    }
+    field?: Field
+  }
+  focus: {
+    type?: string
+    color?: string
+    width?: string
+    gap?: string
+    field?: Field
+  }
+  hover: {
+    background: string
+    field?: Field
+  }
+}
+
 type Variants = {
   header: {
     text: TableCell
@@ -28,66 +86,6 @@ const variants: Variants = {
     icon: cell.icon,
     input: cell.input,
   },
-}
-
-type Field = {
-  field: {
-    height: string
-    background: string
-    borders: {
-      outline: Border
-    }
-    text: {
-      color: string
-      typography: Typography
-      colorPlaceholder: string
-    }
-    spacings: Spacing
-  }
-}
-
-export type TableCell = {
-  height: string
-  background: string
-  borders: {
-    bottom: Border
-  }
-  text: {
-    color: string
-    typography: Typography
-  }
-  spacings: Spacing
-  clickbound: Clickbound
-  field?: Field
-  active: {
-    background: string
-    color: string
-    typography: Typography
-    borders: {
-      bottom: Border
-    }
-    field: Field
-  }
-  disabled: {
-    background: string
-    color: string
-    typography: Typography
-    borders: {
-      bottom: Border
-    }
-    field: Field
-  }
-  focus: {
-    type: string
-    color: string
-    width: string
-    gap: string
-    field: Field
-  }
-  hover: {
-    background: string
-    field: Field
-  }
 }
 
 export const getTokens = (as: string, variant: string): TableCell => {
