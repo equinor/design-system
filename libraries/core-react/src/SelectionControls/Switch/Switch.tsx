@@ -32,7 +32,7 @@ type Props = {
   size?: Size
   /** If true, the switch will be disabled */
   disabled?: boolean
-} & React.HTMLAttributes<HTMLInputElement>
+} & Omit<JSX.IntrinsicElements['input'], 'size'>
 
 export const Switch = forwardRef<HTMLInputElement, Props>(
   ({ size = 'default', disabled, label, className, ...rest }, ref) => {

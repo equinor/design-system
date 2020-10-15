@@ -43,7 +43,7 @@ const Handle = styled.span<StyledProps>`
 `
 
 type Props = {
-  disabled: boolean
+  disabled?: boolean
 }
 
 export const SwitchDefault = forwardRef<HTMLInputElement, Props>(
