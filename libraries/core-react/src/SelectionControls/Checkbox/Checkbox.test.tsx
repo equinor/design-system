@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -16,7 +15,11 @@ const StyledCheckbox = styled(Checkbox)`
   clip-path: unset;
 `
 
-const ControlledCheckbox = ({ onChange }) => {
+type ControlledProps = {
+  onChange: () => void
+}
+
+const ControlledCheckbox = ({ onChange }: ControlledProps) => {
   const [checked, setChecked] = useState(true)
   return (
     <Checkbox
@@ -28,9 +31,6 @@ const ControlledCheckbox = ({ onChange }) => {
       }}
     />
   )
-}
-ControlledCheckbox.propTypes = {
-  onChange: PropTypes.func.isRequired,
 }
 
 describe('Checkbox', () => {
