@@ -1,16 +1,17 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 
 import { switchControl as tokens } from './Switch.tokens'
 import { typographyTemplate } from '../../_common/templates'
+import type { Size } from './Switch.types'
 
 const { enabled } = tokens
 
-const StyledSwitch = styled.label`
+type StyledProps = { isDisabled: boolean }
+
+const StyledSwitch = styled.label<StyledProps>`
   cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};
   border: none;
   background-color: transparent;
@@ -24,8 +25,17 @@ const Label = styled.span`
   ${typographyTemplate(enabled.typography)}
 `
 
-export const Switch = forwardRef(
-  ({ size, disabled, label, className, ...rest }, ref) => {
+type Props = {
+  /** Label for the switch. Required to make it a11y compliant */
+  label: string
+  /** Switch size, use the small version with caution */
+  size?: Size
+  /** If true, the switch will be disabled */
+  disabled?: boolean
+} & Omit<JSX.IntrinsicElements['input'], 'size'>
+
+export const Switch = forwardRef<HTMLInputElement, Props>(
+  ({ size = 'default', disabled, label, className, ...rest }, ref) => {
     return (
       <StyledSwitch isDisabled={disabled} className={className}>
         {size === 'small' ? (
@@ -41,20 +51,3 @@ export const Switch = forwardRef(
 )
 
 Switch.displayName = 'eds-switch'
-
-Switch.propTypes = {
-  /** Switch size, use the small version with caution */
-  size: PropTypes.oneOf(['default', 'small']),
-  /** If true, the switch will be disabled */
-  disabled: PropTypes.bool,
-  /** Label for the switch. Required to make it a11y compliant */
-  label: PropTypes.string.isRequired,
-  /** Additional class names */
-  className: PropTypes.string,
-}
-
-Switch.defaultProps = {
-  size: 'default',
-  disabled: false,
-  className: undefined,
-}

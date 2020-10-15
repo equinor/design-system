@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
@@ -8,7 +6,9 @@ import { Input } from './Input'
 
 const { enabled, disabled: _disabled } = tokens
 
-const Track = styled.span`
+type StyledProps = { isDisabled: boolean }
+
+const Track = styled.span<StyledProps>`
   width: ${enabled.track.small.width};
   height: ${enabled.track.small.height};
   border-radius: 10px;
@@ -34,24 +34,22 @@ const Handle = styled.span`
   transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
-export const SwitchSmall = forwardRef(({ disabled, ...rest }, ref) => {
-  return (
-    <>
-      <Input {...rest} ref={ref} disabled={disabled} size="small" />
-      <InputWrapper isDisabled={disabled} size="small">
-        <Track isDisabled={disabled} />
-        <Handle />
-      </InputWrapper>
-    </>
-  )
-})
+type Props = {
+  disabled?: boolean
+}
+
+export const SwitchSmall = forwardRef<HTMLInputElement, Props>(
+  ({ disabled, ...rest }, ref) => {
+    return (
+      <>
+        <Input {...rest} ref={ref} disabled={disabled} size="small" />
+        <InputWrapper isDisabled={disabled} size="small">
+          <Track isDisabled={disabled} />
+          <Handle />
+        </InputWrapper>
+      </>
+    )
+  },
+)
 
 SwitchSmall.displayName = 'eds-switch-small'
-
-SwitchSmall.propTypes = {
-  disabled: PropTypes.bool,
-}
-
-SwitchSmall.defaultProps = {
-  disabled: false,
-}
