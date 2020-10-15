@@ -1,8 +1,14 @@
-// @ts-nocheck
 import primary from '@equinor/eds-tokens/components/button/buttons-primary.json'
 import secondary from '@equinor/eds-tokens/components/button/buttons-secondary.json'
 import danger from '@equinor/eds-tokens/components/button/buttons-danger.json'
 import disabled from '@equinor/eds-tokens/components/button/buttons-disabled.json'
+import type {
+  Border,
+  Focus,
+  Hover,
+  Spacing,
+  Typography,
+} from '@equinor/eds-tokens'
 
 const colors = {
   primary: {
@@ -35,7 +41,41 @@ const colors = {
   },
 }
 
-export const button = {
+export type Button = {
+  height: string
+  width?: string
+  background: string
+  color: string
+  border: Border
+  typography: Typography
+  spacing?: Partial<Spacing>
+  focus?: Focus
+  hover?: Hover
+  // TODO Remove these once figma-broker is updated with proper types
+  pressedColor?: string
+  clickboundOffset?: number | string
+  clickbound?: string
+}
+
+type Buttons = {
+  [P in keyof typeof colors]: {
+    [P2 in keyof typeof colors[P]]: Button
+  }
+}
+
+export type ButtonGroups =
+  | Buttons['primary']
+  | Buttons['secondary']
+  | Buttons['danger']
+  | Buttons['disabled']
+
+export const button: {
+  colors: Buttons
+  icon_size: {
+    width: string
+    height: string
+  }
+} = {
   colors,
   icon_size: {
     width: '24px',
