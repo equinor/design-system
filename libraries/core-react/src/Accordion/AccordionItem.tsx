@@ -2,13 +2,14 @@ import React, { forwardRef, useState, ReactElement } from 'react'
 import type { AccordianProps } from './Accordion.types'
 
 type Props = {
-  index: number
-  accordionId: string
+  index?: number
+  accordionId?: string
   /** Is AccordionItem expanded */
-  isExpanded: boolean
+  isExpanded?: boolean
   /** accordion item is disabled */
-  disabled: boolean
-} & AccordianProps
+  disabled?: boolean
+} & JSX.IntrinsicElements['div'] &
+  Partial<AccordianProps>
 
 const AccordionItem = forwardRef<HTMLDivElement, Props>(function AccordionItem(
   {

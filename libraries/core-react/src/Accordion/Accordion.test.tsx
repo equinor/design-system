@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
-// @ts-nocheck
 import React from 'react'
-import PropTypes from 'prop-types'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 // eslint-disable-next-line camelcase
 import { attach_file, notifications } from '@equinor/eds-icons'
 import { Accordion } from '.'
-import { Icon, Button } from '..'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import type { AccordianProps } from './Accordion.types'
 
 const {
   AccordionItem,
@@ -21,7 +21,10 @@ Icon.add({ attach_file, notifications })
 
 afterEach(cleanup)
 
-const SimpleAccordion = ({ headerLevel, chevronPosition }) => (
+const SimpleAccordion = ({
+  headerLevel = 'h2',
+  chevronPosition = 'left',
+}: Partial<AccordianProps>) => (
   <Accordion headerLevel={headerLevel} chevronPosition={chevronPosition}>
     <AccordionItem isExpanded>
       <AccordionHeader>Summary 1</AccordionHeader>
@@ -33,16 +36,6 @@ const SimpleAccordion = ({ headerLevel, chevronPosition }) => (
     </AccordionItem>
   </Accordion>
 )
-
-SimpleAccordion.propTypes = {
-  headerLevel: PropTypes.string,
-  chevronPosition: PropTypes.string,
-}
-
-SimpleAccordion.defaultProps = {
-  headerLevel: 'h2',
-  chevronPosition: 'left',
-}
 
 const AccordionWithIcons = () => (
   <Accordion>

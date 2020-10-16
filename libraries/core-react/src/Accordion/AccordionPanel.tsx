@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react'
 import styled from 'styled-components'
-import type { CSSObject } from 'styled-components'
 import { accordion as tokens } from './Accordion.tokens'
 
 const {
@@ -12,17 +11,17 @@ const {
 
 type Props = {
   /** The ID of the element that controls the panel */
-  headerId: string
+  headerId?: string
   /** The ID of the panel */
-  id: string
+  id?: string
   /** If `true`, the panel will be hidden. */
-  hidden: boolean
+  hidden?: boolean
 } & JSX.IntrinsicElements['div']
 
 type StyledAccordionPanelProps = Pick<Props, 'headerId'>
 
 const StyledAccordionPanel = styled.div.attrs(
-  ({ headerId }: StyledAccordionPanelProps): CSSObject => ({
+  ({ headerId }: StyledAccordionPanelProps): JSX.IntrinsicElements['div'] => ({
     role: 'region',
     'aria-labelledby': headerId,
   }),

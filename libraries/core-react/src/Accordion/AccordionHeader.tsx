@@ -29,13 +29,13 @@ type StyledAccordianHeader = {
 }
 
 const StyledAccordionHeader = styled.div.attrs<StyledAccordianHeader>(
-  ({ panelId, isExpanded, disabled }) => ({
+  ({ panelId, isExpanded, disabled }): JSX.IntrinsicElements['button'] => ({
     'aria-expanded': isExpanded,
     'aria-controls': panelId,
     role: 'button',
-    disabled,
     'aria-disabled': isExpanded && disabled,
-    tabIndex: disabled ? '-1' : '0',
+    tabIndex: disabled ? -1 : 0,
+    disabled,
   }),
 )(
   ({ parentIndex, disabled }: StyledAccordianHeader): CSSObject => ({
@@ -108,7 +108,7 @@ type AccordianChild = {
 
 const AccordionHeader = forwardRef<
   HTMLDivElement,
-  Props & AccordianProps & JSX.IntrinsicElements['div']
+  Props & Partial<AccordianProps> & JSX.IntrinsicElements['div']
 >(function AccordionHeader(
   {
     parentIndex,
