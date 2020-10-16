@@ -23,7 +23,7 @@ const {
   },
 } = tokens
 
-type AccordianToken = {
+type AccordionToken = {
   header: {
     typography: Typography
     color: typeof token.header.color
@@ -66,4 +66,4 @@ const token = {
   },
 }
 
-export const accordion: AccordianToken = token
+export const accordion: AccordionToken = token

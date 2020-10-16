@@ -8,7 +8,7 @@ import { attach_file, notifications } from '@equinor/eds-icons'
 import { Accordion } from '.'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
-import type { AccordianProps } from './Accordion.types'
+import type { AccordionProps } from './Accordion.types'
 
 const {
   AccordionItem,
@@ -24,7 +24,7 @@ afterEach(cleanup)
 const SimpleAccordion = ({
   headerLevel = 'h2',
   chevronPosition = 'left',
-}: Partial<AccordianProps>) => (
+}: AccordionProps) => (
   <Accordion headerLevel={headerLevel} chevronPosition={chevronPosition}>
     <AccordionItem isExpanded>
       <AccordionHeader>Summary 1</AccordionHeader>

@@ -1,5 +1,5 @@
 import React, { forwardRef, useState, ReactElement } from 'react'
-import type { AccordianProps } from './Accordion.types'
+import type { AccordionProps } from './Accordion.types'
 
 type Props = {
   index?: number
@@ -9,7 +9,7 @@ type Props = {
   /** accordion item is disabled */
   disabled?: boolean
 } & JSX.IntrinsicElements['div'] &
-  Partial<AccordianProps>
+  AccordionProps
 
 const AccordionItem = forwardRef<HTMLDivElement, Props>(function AccordionItem(
   {

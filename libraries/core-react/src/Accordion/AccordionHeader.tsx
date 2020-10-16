@@ -6,7 +6,7 @@ import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '..'
 import { accordion as tokens } from './Accordion.tokens'
 import { Property } from 'csstype'
-import type { AccordianProps } from './Accordion.types'
+import type { AccordionProps } from './Accordion.types'
 
 Icon.add({ chevron_down, chevron_up })
 
@@ -21,14 +21,14 @@ const {
   outlineOffset,
 } = tokens
 
-type StyledAccordianHeader = {
+type StyledAccordionHeaderProps = {
   panelId?: string
   isExpanded?: boolean
   disabled?: boolean
   parentIndex?: number
 }
 
-const StyledAccordionHeader = styled.div.attrs<StyledAccordianHeader>(
+const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
   ({ panelId, isExpanded, disabled }): JSX.IntrinsicElements['button'] => ({
     'aria-expanded': isExpanded,
     'aria-controls': panelId,
@@ -38,7 +38,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordianHeader>(
     disabled,
   }),
 )(
-  ({ parentIndex, disabled }: StyledAccordianHeader): CSSObject => ({
+  ({ parentIndex, disabled }: StyledAccordionHeaderProps): CSSObject => ({
     fontFamily: typography.fontFamily,
     fontSize: typography.fontSize,
     fontWeight: typography.fontWeight as number,
@@ -68,11 +68,11 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordianHeader>(
 
 const StyledIcon = styled(
   Icon,
-)(({ chevronPosition }: Omit<AccordianProps, 'headerLevel'>) =>
+)(({ chevronPosition }: Omit<AccordionProps, 'headerLevel'>) =>
   chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
 )
 
-type AccordionHeaderTitleProps = Props & Partial<AccordianProps>
+type AccordionHeaderTitleProps = Props & AccordionProps
 
 const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
   flex: 1;
@@ -102,13 +102,13 @@ type Props = {
   toggleExpanded?: () => void
 }
 
-type AccordianChild = {
+type AccordionChild = {
   type: { displayName: string }
 } & ReactElement
 
 const AccordionHeader = forwardRef<
   HTMLDivElement,
-  Props & Partial<AccordianProps> & JSX.IntrinsicElements['div']
+  Props & AccordionProps & JSX.IntrinsicElements['div']
 >(function AccordionHeader(
   {
     parentIndex,
@@ -150,7 +150,7 @@ const AccordionHeader = forwardRef<
 
   const headerChildren = React.Children.map(
     children,
-    (child: AccordianChild) => {
+    (child: AccordionChild) => {
       return (
         (typeof child === 'string' && (
           <AccordionHeaderTitle isExpanded={isExpanded} disabled={disabled}>
