@@ -1,13 +1,20 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { List, Typography } from '..'
+import type { ListType } from '../List'
+
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
 const { labelText } = tokens
 
-const StyledTableOfContents = styled.nav`
+type Props = {
+  /** Sticky functionality */
+  sticky?: boolean
+  /** Label or title for the ToC */
+  label?: string
+} & HTMLAttributes<HTMLElement>
+
+const StyledTableOfContents = styled.nav<Props>`
   margin: 48px 0 32px 0;
 
   ${({ sticky }) =>
@@ -19,7 +26,7 @@ const StyledTableOfContents = styled.nav`
     `}
 `
 
-const TocList = styled((props) => <List {...props} />)`
+const TocList = styled((props: ListType) => <List {...props} />)`
   margin: 0;
   padding: 0;
 `
@@ -28,8 +35,8 @@ const TocLabel = styled((props) => <Typography {...props} />)`
   color: ${labelText.color};
 `
 
-const TableOfContents = forwardRef(function TableOfContents(
-  { children, sticky, label, className, ...rest },
+const TableOfContents = forwardRef<HTMLElement, Props>(function TableOfContents(
+  { children, sticky = false, label = '', className, ...rest },
   ref,
 ) {
   return (
@@ -47,22 +54,5 @@ const TableOfContents = forwardRef(function TableOfContents(
 })
 
 TableOfContents.displayName = 'eds-toc'
-
-TableOfContents.propTypes = {
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-  /** Sticky function */
-  sticky: PropTypes.bool,
-  /** Label or title for the ToC */
-  label: PropTypes.string,
-}
-
-TableOfContents.defaultProps = {
-  className: '',
-  sticky: false,
-  label: '',
-}
 
 export { TableOfContents }

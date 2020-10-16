@@ -43,4 +43,4 @@ const List = forwardRef<HTMLUListElement | HTMLOListElement, Props>(
 
 List.displayName = 'List'
 
-export { List }
+export { List, Props }

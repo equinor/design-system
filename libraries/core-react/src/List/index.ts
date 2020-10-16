@@ -1,4 +1,6 @@
 import { List as BaseComponent } from './List'
+import type { Props as ListType } from './List'
+
 import { ListItem } from './ListItem'
 
 type ListTypes = typeof BaseComponent & {
@@ -9,4 +11,4 @@ const List = BaseComponent as ListTypes
 
 List.ListItem = ListItem
 
-export { List }
+export { List, ListType }
