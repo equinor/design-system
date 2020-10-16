@@ -24,7 +24,7 @@ const AccordionItem = forwardRef<HTMLDivElement, Props>(function AccordionItem(
   },
   ref,
 ) {
-  const [expanded, setExpanded] = useState<boolean>(isExpanded)
+  const [expanded, setExpanded] = useState(isExpanded)
 
   const toggleExpanded = () => {
     setExpanded(!expanded)
