@@ -1,17 +1,20 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { getTokens } from './Table.tokens'
+import type { Border } from '@equinor/eds-tokens'
+import { getTokens, TableCell } from './Table.tokens'
 import { typographyTemplate } from '../_common/templates'
 
-const borderTemplate = (borders) =>
+const borderTemplate = (borders: { bottom: Border }) =>
   Object.keys(borders).reduce((acc, val) => {
-    const { color, width } = borders[val]
+    const { color, width }: Border = borders[val] as Border
     return `${acc} border-${val}: ${width} solid ${color}; \n`
   }, '')
 
-const Base = ({ tokens, as }) => {
+type BaseProps = {
+  tokens: TableCell
+  as: string
+}
+const Base = ({ tokens, as }: BaseProps) => {
   const { background, height, text, spacings, borders } = tokens
   const { typography } = text
   const bordersAndBackground =
@@ -39,34 +42,25 @@ const TableBase = styled.td`
   ${Base}
 `
 
-export const Cell = (props) => {
-  const { children, as, variant } = props
+type Props = {
+  /** Specifies which td or th to use */
+  as: 'td' | 'th'
+  /** Specifies which variant to use */
+  variant: 'text' | 'icon' | 'numeric' | 'input'
+} & HTMLAttributes<HTMLTableCellElement>
+
+export const Cell = ({
+  children,
+  as = 'td',
+  variant = 'text',
+  ...props
+}: Props): JSX.Element => {
   const tokens = getTokens(as, variant)
   return (
     <TableBase as={as} tokens={tokens} {...props}>
       {children}
     </TableBase>
   )
-}
-
-Cell.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-  /** Specifies which td or th to use */
-  as: PropTypes.oneOf(['td', 'th']),
-  /** Specifies the scope of th */
-  // scope: PropTypes.oneOf(['col', 'row']),
-  /** Specifies which variant to use */
-  variant: PropTypes.oneOf(['text', 'icon', 'numeric', 'input']),
-}
-
-Cell.defaultProps = {
-  className: '',
-  // scope: '',
-  as: 'td',
-  variant: 'text',
 }
 
 Cell.displayName = 'eds-table-cell'
