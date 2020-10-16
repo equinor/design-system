@@ -4,7 +4,10 @@ const {
   spacings: {
     comfortable: { medium: spacingMedium },
   },
-  typography: { ui, paragraph },
+  typography: {
+    ui: { accordion_header },
+    paragraph: { body_long },
+  },
   elevation: { above_scrim: boxShadow },
   colors: {
     ui: {
@@ -16,13 +19,33 @@ const {
   },
 } = tokens
 
-export const dialog = {
+type Typography = {
+  color: string
+  fontFamily: string
+  fontSize: string
+  fontWeight: number
+  lineHeight: string
+  textAlign: string
+}
+
+type Dialog = {
+  width: string
+  minHeight: string
+  background: string
+  borderRadius: string
+  spacingsMedium: string
+  title: Typography
+  description: Typography
+  boxShadow: string
+}
+
+export const dialog: Dialog = {
   width: '252px',
   minHeight: '165px',
   background,
   borderRadius,
   spacingsMedium: spacingMedium,
-  title: { typography: ui.accordion_header },
-  description: { typography: paragraph.body_long },
+  title: accordion_header,
+  description: body_long,
   boxShadow,
 }
