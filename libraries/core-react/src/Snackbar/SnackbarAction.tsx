@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React, { Children } from 'react'
-import PropTypes from 'prop-types'
+import React, { Children, ReactNode } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 
@@ -11,11 +9,10 @@ const StyledSnackbarAction = styled.div`
   margin-bottom: -10px;
 `
 
-export const SnackbarAction = ({ children }) => {
-  return <StyledSnackbarAction>{Children.only(children)}</StyledSnackbarAction>
+type Props = {
+  children: ReactNode
 }
 
-SnackbarAction.propTypes = {
-  /** @ignore */
-  children: PropTypes.node.isRequired,
+export const SnackbarAction = ({ children }: Props): JSX.Element => {
+  return <StyledSnackbarAction>{Children.only(children)}</StyledSnackbarAction>
 }

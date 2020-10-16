@@ -1,5 +1,5 @@
-// @ts-nocheck
 import { tokens } from '@equinor/eds-tokens'
+import type { Typography } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -23,7 +23,25 @@ const {
   clickbounds: { default__base: clickbounds },
 } = tokens
 
-export const snackbar = {
+type Snackbar = {
+  background: string
+  boxShadow: string
+  minHeight: string
+  spacings: {
+    left: string
+    bottom: string
+    padding: string
+    actionSpace: string
+  }
+  text: {
+    color: string
+    typography: Typography
+  }
+  borderRadius: string
+  buttonColor: string
+}
+
+export const snackbar: Snackbar = {
   background,
   boxShadow,
   minHeight: clickbounds,
