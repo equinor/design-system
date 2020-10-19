@@ -39,7 +39,7 @@ export const writeFile = (path, name, ext, file) => {
     createFolder(path)
     let value = file
 
-    if (ext === 'js') {
+    if (ext === 'js' || ext === 'ts') {
       const options = prettier.resolveConfig.sync(prettierConfig)
       value = prettier.format(file, options)
     }
@@ -82,6 +82,7 @@ export const writeResults = (results, savePath, extension = 'json') =>
     )
 
     switch (extension) {
+      case 'ts':
       case 'js':
         writeFileToDisk(
           `export const ${name} = ${JSON.stringify(value, null, 2)}\n`,

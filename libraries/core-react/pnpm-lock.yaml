@@ -14,7 +14,6 @@ devDependencies:
   '@babel/preset-typescript': 7.10.4_@babel+core@7.10.2
   '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@2.15.0
   '@rollup/plugin-commonjs': 13.0.0_rollup@2.15.0
-  '@rollup/plugin-json': 4.1.0_rollup@2.15.0
   '@rollup/plugin-node-resolve': 8.0.1_rollup@2.15.0
   '@testing-library/jest-dom': 5.9.0
   '@testing-library/react': 10.2.1_react-dom@16.13.1+react@16.13.1
@@ -1593,15 +1592,6 @@ packages:
       rollup: ^2.3.4
     resolution:
       integrity: sha512-Anxc3qgkAi7peAyesTqGYidG5GRim9jtg8xhmykNaZkImtvjA7Wsqep08D2mYsqw1IF7rA3lYfciLgzUSgRoqw==
-  /@rollup/plugin-json/4.1.0_rollup@2.15.0:
-    dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.15.0
-      rollup: 2.15.0
-    dev: true
-    peerDependencies:
-      rollup: ^1.20.0 || ^2.0.0
-    resolution:
-      integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
   /@rollup/plugin-node-resolve/8.0.1_rollup@2.15.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.15.0
@@ -6044,7 +6034,6 @@ specifiers:
   '@equinor/eds-tokens': 'workspace:*'
   '@rollup/plugin-babel': ^5.0.3
   '@rollup/plugin-commonjs': ^13.0.0
-  '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^8.0.1
   '@testing-library/jest-dom': ^5.9.0
   '@testing-library/react': ^10.2.1
