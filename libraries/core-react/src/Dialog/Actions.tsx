@@ -1,12 +1,10 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { dialog as tokens } from './Dialog.tokens'
 
 const { spacingsMedium } = tokens
 
-const StyledActions = styled.div`
+const StyledActions = styled.div<Props>`
   min-height: 48px;
   padding: 0 ${spacingsMedium};
   align-self: end;
@@ -20,10 +18,12 @@ const StyledActions = styled.div`
     `}
 `
 
-export const Actions = forwardRef(function EdsDialogActions(
-  { children, ...props },
-  ref,
-) {
+type Props = React.HTMLAttributes<HTMLDivElement>
+
+export const Actions: FunctionComponent<Props> = forwardRef<
+  HTMLDivElement,
+  Props
+>(function EdsDialogActions({ children, ...props }, ref) {
   return (
     <StyledActions ref={ref} {...props}>
       {children}
@@ -32,15 +32,3 @@ export const Actions = forwardRef(function EdsDialogActions(
 })
 
 Actions.displayName = 'eds-dialog-actions'
-
-Actions.propTypes = {
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Actions.defaultProps = {
-  className: undefined,
-  children: undefined,
-}

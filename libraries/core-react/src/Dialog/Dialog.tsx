@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
@@ -8,7 +6,7 @@ import { dialog as tokens } from './Dialog.tokens'
 const {
   minHeight,
   width,
-  title: { text },
+  title,
   boxShadow,
   background,
   borderRadius,
@@ -30,13 +28,15 @@ const StyledDialog = styled.div.attrs(() => ({
   display: grid;
   padding-top: ${spacingsMedium};
 
-  ${typographyTemplate(text)}
+  ${typographyTemplate(title)}
 `
 
-export const Dialog = forwardRef(function EdsDialog(
-  { children, ...props },
-  ref,
-) {
+type Props = React.HTMLAttributes<HTMLDivElement>
+
+export const Dialog: FunctionComponent<Props> = forwardRef<
+  HTMLDivElement,
+  Props
+>(function EdsDialog({ children, ...props }, ref) {
   return (
     <StyledDialog {...props} ref={ref}>
       {children}
@@ -45,15 +45,3 @@ export const Dialog = forwardRef(function EdsDialog(
 })
 
 Dialog.displayName = 'eds-dialog'
-
-Dialog.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node,
-}
-
-Dialog.defaultProps = {
-  className: '',
-  children: undefined,
-}

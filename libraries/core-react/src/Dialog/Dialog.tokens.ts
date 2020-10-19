@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { Typography } from '@equinor/eds-tokens'
 
 const {
   spacings: {
@@ -18,15 +19,6 @@ const {
     corners: { borderRadius },
   },
 } = tokens
-
-type Typography = {
-  color: string
-  fontFamily: string
-  fontSize: string
-  fontWeight: number
-  lineHeight: string
-  textAlign: string
-}
 
 type Dialog = {
   width: string

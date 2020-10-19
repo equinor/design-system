@@ -1,19 +1,13 @@
-// @ts-nocheck
-import React, { forwardRef, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, Fragment, FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
-const {
-  title: { typography },
-  spacingsMedium,
-} = tokens
+const { title, spacingsMedium } = tokens
 
 const StyledTitle = styled.div`
-  ${typographyTemplate(typography)}
-
+  ${typographyTemplate(title)}
   min-height: 24px;
   align-self: end;
   justify-self: start;
@@ -32,13 +26,20 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-export const Title = forwardRef(function EdsDialogTitle(
-  { children, ...props },
-  ref,
-) {
+type Props = React.HTMLAttributes<HTMLDivElement>
+
+export const Title: FunctionComponent<Props> = forwardRef<
+  HTMLDivElement,
+  Props
+>(function EdsDialogTitle({ children, className = '', ...props }, ref) {
   return (
     <Fragment>
-      <StyledTitle id="eds-dialog-title" ref={ref} {...props}>
+      <StyledTitle
+        className={className}
+        id="eds-dialog-title"
+        ref={ref}
+        {...props}
+      >
         {children}
       </StyledTitle>
       {children && <StyledDivider color="medium" variant="small" />}
@@ -47,15 +48,3 @@ export const Title = forwardRef(function EdsDialogTitle(
 })
 
 Title.displayName = 'eds-dialog-title'
-
-Title.propTypes = {
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Title.defaultProps = {
-  className: undefined,
-  children: undefined,
-}

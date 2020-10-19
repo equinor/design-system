@@ -1,20 +1,14 @@
-// @ts-nocheck
-import React, { forwardRef, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, Fragment, FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '../_common/templates'
 
 import { dialog as tokens } from './Dialog.tokens'
 
-const {
-  description: { typography },
-  spacingsMedium,
-} = tokens
+const { description, spacingsMedium } = tokens
 
-const StyledCustomContent = styled.div`
-  ${typographyTemplate(typography)}
-
+const StyledCustomContent = styled.div<Props>`
+  ${typographyTemplate(description)}
   min-height: 80px;
   margin-bottom: ${spacingsMedium};
   align-self: stretch;
@@ -36,17 +30,31 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-export const CustomContent = forwardRef(function EdsDialogCustomContent(
-  { children, ...rest },
+type Props = {
+  /** @ignore */
+  scrollable?: boolean
+} & React.HTMLAttributes<HTMLDivElement>
+
+export const CustomContent: FunctionComponent<Props> = forwardRef<
+  HTMLDivElement,
+  Props
+>(function EdsDialogCustomContent(
+  { children, className = '', scrollable = false, ...rest },
   ref,
 ) {
   return (
     <Fragment>
-      <StyledCustomContent id="eds-dialog-customcontent" ref={ref} {...rest}>
+      <StyledCustomContent
+        className={className}
+        scrollable={scrollable}
+        id="eds-dialog-customcontent"
+        ref={ref}
+        {...rest}
+      >
         {children}
       </StyledCustomContent>
 
-      {children && rest.scrollable && (
+      {children && scrollable && (
         <StyledDivider color="medium" variant="small" />
       )}
     </Fragment>
@@ -54,18 +62,3 @@ export const CustomContent = forwardRef(function EdsDialogCustomContent(
 })
 
 CustomContent.displayName = 'eds-dialog-customcontent'
-
-CustomContent.propTypes = {
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  scrollable: PropTypes.bool,
-}
-
-CustomContent.defaultProps = {
-  className: undefined,
-  children: undefined,
-  scrollable: false,
-}
