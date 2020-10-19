@@ -116,6 +116,8 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
     if (event && onChange) {
       // Callback for provided onChange func
       onChange(event, page)
+    } else {
+      return undefined
     }
   }
 
@@ -138,13 +140,9 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
         <ListItem key="previous">
           <Button
             variant="ghost_icon"
-            onClick={
-              activePage > 1
-                ? (event) => {
-                    onPageChange(event, activePage - 1)
-                  }
-                : undefined
-            }
+            onClick={(event) => {
+              onPageChange(event, activePage - 1)
+            }}
             disabled={activePage === 1}
             aria-label="Go to previous page"
           >
@@ -181,13 +179,9 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
         <ListItem key="next">
           <Button
             variant="ghost_icon"
-            onClick={
-              activePage < pages
-                ? (event) => {
-                    onPageChange(event, activePage + 1)
-                  }
-                : undefined
-            }
+            onClick={(event) => {
+              onPageChange(event, activePage + 1)
+            }}
             aria-label="Go to next page"
             disabled={activePage === pages}
           >
