@@ -12,9 +12,9 @@ trigger:
   batch: 'true'
   branches:
     include:
-      - develop
+      # - develop
       - typescript
-      - theming
+      # - theming
   paths:
     include:
       - libraries/core-react
@@ -22,35 +22,37 @@ trigger:
 pr:
   branches:
     include:
-      - develop
+      # - develop
       - typescript
-      - theming
+      # - theming
   paths:
     include:
       - libraries/core-react
 
 steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '14.x'
-    displayName: 'Install Node.js'
+  # - task: NodeTool@0
+  #   inputs:
+  #     versionSpec: '14.x'
+  #   displayName: 'Install Node.js'
 
-  - script: npm install -g pnpm@next
-    displayName: 'Install pnpm'
+  - script: echo 'hi mum'
 
-  - script: >-
-      pnpm
-      --filter eds
-      --filter ./libraries/tokens
-      --filter ./libraries/icons
-      --filter ./libraries/core-react
-      install
-    displayName: 'Install dependencies'
+  # - script: npm install -g pnpm@next
+  #   displayName: 'Install pnpm'
 
-  - script: pnpm --filter ./libraries/core-react test
-    displayName: 'Run tests'
+  # - script: >-
+  #     pnpm
+  #     --filter eds
+  #     --filter ./libraries/tokens
+  #     --filter ./libraries/icons
+  #     --filter ./libraries/core-react
+  #     install
+  #   displayName: 'Install dependencies'
 
-  - script: >-
-      ./node_modules/eslint/bin/eslint.js
-      ./libraries/core-react
-    displayName: 'Run eslint'
+  # - script: pnpm --filter ./libraries/core-react test
+  #   displayName: 'Run tests'
+
+  # - script: >-
+  #     ./node_modules/eslint/bin/eslint.js
+  #     ./libraries/core-react
+  #   displayName: 'Run eslint'
