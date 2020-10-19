@@ -9,6 +9,8 @@ const Accordion = forwardRef(function Accordion(
   const accordionId = useMemo(() => createId('accordion-'), [])
 
   const AccordionItems = React.Children.map(children, (child, index) => {
+    if (!child) return null
+
     return React.cloneElement(child, {
       accordionId,
       index,
