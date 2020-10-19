@@ -45,7 +45,6 @@
     "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.2.1",
