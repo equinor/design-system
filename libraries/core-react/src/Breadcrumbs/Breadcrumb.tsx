@@ -4,9 +4,9 @@ import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
-type StyleProps = Pick<Props, 'maxWidth'>
+type StyledProps = Pick<Props, 'maxWidth'>
 
-const StyleTypography = styled(Typography)<StyleProps>`
+const StyledTypography = styled(Typography)<StyledProps>`
   &:hover {
     text-decoration: underline;
     color: ${tokens.colors.hover};
@@ -54,18 +54,18 @@ export const Breadcrumb = forwardRef<HTMLDivElement, Props>(function Breadcrumb(
 
   const WithTooltip = (
     <Tooltip title={children}>
-      <StyleTypography link variant="body_short" {...props}>
+      <StyledTypography link variant="body_short" {...props}>
         {children}
-      </StyleTypography>
+      </StyledTypography>
     </Tooltip>
   )
 
   return tooltip ? (
     WithTooltip
   ) : (
-    <StyleTypography link variant="body_short" {...props}>
+    <StyledTypography link variant="body_short" {...props}>
       {children}
-    </StyleTypography>
+    </StyledTypography>
   )
 })
 
