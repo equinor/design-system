@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { popover as tokens } from './Popover.tokens'
 import { Popover } from '.'
 import { Button, Typography } from '..'
+import type { Props } from './Popover'
 
 const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover
 
@@ -22,7 +23,7 @@ const {
 
 afterEach(cleanup)
 
-const SimplePopover = ({ open, placement }) => (
+const SimplePopover = ({ open = false, placement = 'bottom' }: Props) => (
   <Popover open={open} placement={placement}>
     <PopoverAnchor>
       <Button onClick={(e) => e.stopPropagation()}>On Click</Button>

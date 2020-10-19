@@ -17,7 +17,7 @@ type PopoverChild = {
   type?: { displayName?: string }
 } & ReactElement
 
-type Props = {
+export type Props = {
   /* Popover placement relative to anchor */
   placement?:
     | 'topLeft'
@@ -36,7 +36,7 @@ type Props = {
   onClose?: () => void
   /**  Open activates <PopoverItem/> */
   open?: boolean
-  children: PopoverChild | PopoverChild[]
+  children?: PopoverChild | PopoverChild[]
 } & HTMLAttributes<HTMLDivElement>
 
 // Controller Component for PopoverItem

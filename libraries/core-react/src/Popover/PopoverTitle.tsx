@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { Divider } from '..'
 import { typographyTemplate } from '../_common/templates'
@@ -21,33 +19,23 @@ const StyledDivider = styled((props) => <Divider {...props} />)`
   max-width: 560px;
 `
 
-export const PopoverTitle = forwardRef(function EdsPopoverTitle(
-  { children, className, ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    className,
-    ref,
-  }
+type Props = HTMLAttributes<HTMLDivElement>
 
-  return (
-    <div {...props}>
-      <StyledPopoverTitle>{children}</StyledPopoverTitle>
-      <StyledDivider variant="small" />
-    </div>
-  )
-})
+export const PopoverTitle = forwardRef<HTMLDivElement, Props>(
+  function EdsPopoverTitle({ children, className, ...rest }, ref) {
+    const props = {
+      ...rest,
+      className,
+      ref,
+    }
+
+    return (
+      <div {...props}>
+        <StyledPopoverTitle>{children}</StyledPopoverTitle>
+        <StyledDivider variant="small" />
+      </div>
+    )
+  },
+)
 
 PopoverTitle.displayName = 'eds-popover-title'
-
-PopoverTitle.propTypes = {
-  /** Children for PopoverTitle is required (string) */
-  children: PropTypes.string.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-PopoverTitle.defaultProps = {
-  className: '',
-}
