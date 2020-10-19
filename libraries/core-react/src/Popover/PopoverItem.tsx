@@ -1,13 +1,21 @@
-// @ts-nocheck
-import React, { useEffect, useRef, forwardRef } from 'react'
-import PropTypes from 'prop-types'
+/* eslint-disable @typescript-eslint/no-empty-function */
+import React, { useEffect, useRef, forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon, Card, Button } from '..'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
+import { useCombinedRefs } from '../_common'
 
 import { popover as tokens } from './Popover.tokens'
 
-const StyledPopoverWrapper = styled.div`
+type WrapperProps = {
+  top: string | number
+  bottom: string | number
+  right: string | number
+  left: string | number
+  transform: string
+}
+
+const StyledPopoverWrapper = styled.div<WrapperProps>`
   ${({ top, bottom, right, left, transform }) =>
     css`
       bottom: ${bottom};
@@ -27,7 +35,7 @@ const StyledPopoverWrapper = styled.div`
 `
 
 const StyledPopover = styled((props) => <Card {...props} />)`
-  ${typographyTemplate(tokens.typography)}
+  ${typographyTemplate(tokens.header)}
   ${spacingsTemplate(tokens.spacings)}
   background: ${tokens.background};
   fill: ${tokens.background};
@@ -37,7 +45,14 @@ const StyledPopover = styled((props) => <Card {...props} />)`
   box-shadow: ${tokens.elevation};
 `
 
-const PopoverArrow = styled.svg`
+type ArrowProps = {
+  top: string
+  bottom: string
+  right: string
+  left: string
+} & HTMLAttributes<SVGSVGElement>
+
+const PopoverArrow = styled.svg<ArrowProps>`
   ${({ top, bottom, right, left }) =>
     css`
       bottom: ${bottom};
@@ -63,103 +78,115 @@ const StyledCloseButton = styled((props) => <Button {...props} />)`
   }
 `
 
-export const PopoverItem = forwardRef(function EdsPopoverItem(
-  { children, onClose, anchorRef, placement, className, ...rest },
-  ref,
-) {
-  const wrapperProps = {
-    ...rest,
-    className,
-    right: tokens.placement[placement].popoverRight,
-    top: tokens.placement[placement].popoverTop,
-    bottom: tokens.placement[placement].popoverBottom,
-    left: tokens.placement[placement].popoverLeft,
-    transform: tokens.placement[placement].transform,
-  }
+type Props = {
+  /* Popover placement relative to anchor */
+  placement?:
+    | 'topLeft'
+    | 'top'
+    | 'topRight'
+    | 'rightTop'
+    | 'right'
+    | 'rightBottom'
+    | 'bottomLeft'
+    | 'bottom'
+    | 'bottomRight'
+    | 'leftTop'
+    | 'left'
+    | 'leftBottom'
+  /**  On Close function */
+  onClose?: () => void
+  /**  Open activates <PopoverItem/> */
+  anchorRef: React.MutableRefObject<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
-  const arrowProps = {
-    left: tokens.placement[placement].arrowLeft,
-    right: tokens.placement[placement].arrowRight,
-    top: tokens.placement[placement].arrowTop,
-    bottom: tokens.placement[placement].arrowBottom,
-  }
+export const PopoverItem = forwardRef<HTMLDivElement, Props>(
+  function EdsPopoverItem(
+    {
+      children,
+      onClose = () => {},
+      anchorRef,
+      placement = 'bottom',
+      className,
+      ...rest
+    },
+    ref,
+  ) {
+    const wrapperProps = {
+      ...rest,
+      className,
+      right: tokens.placement[placement].popoverRight,
+      top: tokens.placement[placement].popoverTop,
+      bottom: tokens.placement[placement].popoverBottom,
+      left: tokens.placement[placement].popoverLeft,
+      transform: tokens.placement[placement].transform,
+    }
 
-  const contRef = useRef(ref)
-  const svgTransform = tokens.placement[placement].arrowTransform
+    const arrowProps = {
+      left: tokens.placement[placement].arrowLeft,
+      right: tokens.placement[placement].arrowRight,
+      top: tokens.placement[placement].arrowTop,
+      bottom: tokens.placement[placement].arrowBottom,
+    }
 
-  const handleClose = (event) => {
-    const popoverRef = contRef.current
-    const anchRef = anchorRef.current
-    const targetRef = event.target
-    const popoverOpen = Boolean(popoverRef)
+    const contRef = useRef<HTMLDivElement>(null)
+    const svgTransform = tokens.placement[placement].arrowTransform
 
-    if (event && popoverOpen) {
-      if (event.key === 'Escape') {
-        onClose()
-      } else if (event.type === 'click') {
-        if (!popoverRef.contains(targetRef) && !anchRef.contains(targetRef)) {
+    const handleKeyboardClose = (event: KeyboardEvent) => {
+      const popoverRef = contRef.current
+      const popoverOpen = Boolean(popoverRef)
+
+      if (event && popoverOpen) {
+        if (event.key === 'Escape') {
           onClose()
         }
       }
     }
-  }
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleClose, false)
-    document.addEventListener('click', handleClose, false)
+    const handleClickClose = (event: MouseEvent) => {
+      const popoverRef = contRef.current
+      const anchRef = anchorRef.current
+      const targetRef = event.target
+      const popoverOpen = Boolean(popoverRef)
 
-    return () => {
-      document.removeEventListener('keydown', handleClose, false)
-      document.removeEventListener('click', handleClose, false)
+      if (event && popoverOpen) {
+        if (event.type === 'click') {
+          if (
+            !popoverRef.contains(targetRef as Node) &&
+            !anchRef.contains(targetRef as Node)
+          ) {
+            onClose()
+          }
+        }
+      }
     }
-  }, [])
 
-  return (
-    <StyledPopoverWrapper ref={contRef} {...wrapperProps}>
-      <StyledPopover>
-        <PopoverArrow {...arrowProps} transform={svgTransform}>
-          <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-        </PopoverArrow>
-        {children}
-        <StyledCloseButton onClick={onClose} variant="ghost_icon">
-          <Icon name="close" title="close" size={48} />
-        </StyledCloseButton>
-      </StyledPopover>
-    </StyledPopoverWrapper>
-  )
-})
+    useEffect(() => {
+      document.addEventListener('keydown', handleKeyboardClose, false)
+      document.addEventListener('click', handleClickClose, false)
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyboardClose, false)
+        document.removeEventListener('click', handleClickClose, false)
+      }
+    }, [])
+
+    return (
+      <StyledPopoverWrapper
+        ref={useCombinedRefs(ref, contRef)}
+        {...wrapperProps}
+      >
+        <StyledPopover>
+          <PopoverArrow {...arrowProps} transform={svgTransform}>
+            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+          </PopoverArrow>
+          {children}
+          <StyledCloseButton onClick={onClose} variant="ghost_icon">
+            <Icon name="close" title="close" size={48} />
+          </StyledCloseButton>
+        </StyledPopover>
+      </StyledPopoverWrapper>
+    )
+  },
+)
 
 PopoverItem.displayName = 'eds-popover-item'
-
-PopoverItem.propTypes = {
-  // PopoverItem placement relative to anchor
-  placement: PropTypes.oneOf([
-    'topLeft',
-    'top',
-    'topRight',
-    'rightTop',
-    'right',
-    'rightBottom',
-    'bottomLeft',
-    'bottom',
-    'bottomRight',
-    'leftTop',
-    'left',
-    'leftBottom',
-  ]),
-  // On Close function:
-  onClose: PropTypes.func,
-  // Reference to anchor / trigger element
-  anchorRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
-  /**  @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-PopoverItem.defaultProps = {
-  placement: 'bottom',
-  onClose: () => {},
-  children: undefined,
-  className: '',
-}

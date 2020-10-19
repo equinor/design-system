@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React, { forwardRef, useRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, useRef, HTMLAttributes, ReactElement } from 'react'
 import styled from 'styled-components'
 import { PopoverItem } from './PopoverItem'
 
@@ -15,20 +13,46 @@ const Anchor = styled.div`
     outline: none;
   }
 `
+type PopoverChild = {
+  type?: { displayName?: string }
+} & ReactElement
+
+type Props = {
+  /* Popover placement relative to anchor */
+  placement?:
+    | 'topLeft'
+    | 'top'
+    | 'topRight'
+    | 'rightTop'
+    | 'right'
+    | 'rightBottom'
+    | 'bottomLeft'
+    | 'bottom'
+    | 'bottomRight'
+    | 'leftTop'
+    | 'left'
+    | 'leftBottom'
+  /**  On Close function */
+  onClose?: () => void
+  /**  Open activates <PopoverItem/> */
+  open?: boolean
+  children: PopoverChild | PopoverChild[]
+} & HTMLAttributes<HTMLDivElement>
+
 // Controller Component for PopoverItem
-export const Popover = forwardRef(function Popover(
-  { className, open, children, ...rest },
+export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
+  { open, children, placement = 'bottom', ...rest },
   ref,
 ) {
   const props = {
     ...rest,
-    className,
+    placement,
     ref,
   }
 
-  const anchorRef = useRef(null)
+  const anchorRef = useRef<HTMLDivElement>(null)
 
-  let anchorElement
+  let anchorElement: PopoverChild
   const childArray = []
   if (Array.isArray(children)) {
     for (let i = 0; i < children.length; i += 1) {
@@ -36,14 +60,12 @@ export const Popover = forwardRef(function Popover(
       Find anchor element in children to wrap the element together with <PopoverItem/>.
       Children is required, but user has to wrap the actual anchor with <PopoverAnchor />
       */
-      if (
-        children[i].type &&
-        children[i].type.displayName === 'eds-popover-anchor'
-      ) {
-        anchorElement = children[i]
+      const child = children[i] as PopoverChild
+      if (child.type && child.type.displayName === 'eds-popover-anchor') {
+        anchorElement = child
       } else {
         // Add the remaining children to a new array to display inside <PopoverItem/>
-        childArray.push(children[i])
+        childArray.push(child)
       }
     }
   } else if (
@@ -74,35 +96,3 @@ export const Popover = forwardRef(function Popover(
 })
 
 Popover.displayName = 'eds-popover'
-
-Popover.propTypes = {
-  // Popover placement relative to anchor
-  placement: PropTypes.oneOf([
-    'topLeft',
-    'top',
-    'topRight',
-    'rightTop',
-    'right',
-    'rightBottom',
-    'bottomLeft',
-    'bottom',
-    'bottomRight',
-    'leftTop',
-    'left',
-    'leftBottom',
-  ]),
-  // On Close function:
-  onClose: PropTypes.func,
-  // Open activates <PopoverItem/>
-  open: PropTypes.bool.isRequired,
-  /** Popover reference/anchor element is required as a child */
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Popover.defaultProps = {
-  placement: 'bottom',
-  onClose: () => {},
-  className: '',
-}
