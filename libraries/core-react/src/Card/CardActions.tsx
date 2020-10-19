@@ -1,11 +1,10 @@
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
 
 type Props = {
-  alignRight: boolean,
-  meta: string,
+  alignRight?: boolean
+  meta?: string
 } & React.HTMLAttributes<HTMLDivElement>
 
 const StyledCardActions = styled.div<React.CSSProperties>`
@@ -17,30 +16,26 @@ const StyledCardActions = styled.div<React.CSSProperties>`
   justify-content: ${({ justifyContent }) => justifyContent};
 `
 
-export const CardActions = forwardRef<HTMLDivElement, Props>(function EdsCardActions(
-  {
-    children,
-    className = '',
-    alignRight = false,
-    meta = '',
-    ...rest
-  },
-  ref,
-) {
-  const justifyContent = alignRight ? 'flex-end' : 'flex-start'
-  const props = {
-    ...rest,
-    className,
+export const CardActions = forwardRef<HTMLDivElement, Props>(
+  function EdsCardActions(
+    { children, className = '', alignRight = false, meta = '', ...rest },
     ref,
-    justifyContent,
-  }
+  ) {
+    const justifyContent = alignRight ? 'flex-end' : 'flex-start'
+    const props = {
+      ...rest,
+      className,
+      ref,
+      justifyContent,
+    }
 
-  return (
-    <StyledCardActions {...props}>
-      {children}
-      {meta !== '' && <Typography variant="caption">{meta}</Typography>}
-    </StyledCardActions>
-  )
-})
+    return (
+      <StyledCardActions {...props}>
+        {children}
+        {meta !== '' && <Typography variant="caption">{meta}</Typography>}
+      </StyledCardActions>
+    )
+  },
+)
 
 CardActions.displayName = 'eds-card-actions'

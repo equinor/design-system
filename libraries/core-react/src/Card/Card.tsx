@@ -6,12 +6,13 @@ import { spacingsTemplate } from '../_common/templates'
 const { spacings, shape } = tokens
 
 type StyledCardProps = {
-  background: string,
-  cursor: string,
+  background: string
+  cursor: string
 } & React.HTMLAttributes<HTMLDivElement>
 
 type Props = {
-  variant: 'default' | 'info' | 'warning' | 'danger',
+  /** Variant */
+  variant?: 'default' | 'info' | 'warning' | 'danger'
 } & React.HTMLAttributes<HTMLDivElement>
 
 const StyledCard = styled.div<StyledCardProps>`
@@ -34,13 +35,7 @@ const StyledCard = styled.div<StyledCardProps>`
 `
 
 export const Card = forwardRef<HTMLDivElement, Props>(function EdsCard(
-  {
-    children,
-    className,
-    variant='default',
-    onClick,
-    ...rest
-  },
+  { children, className, variant = 'default', onClick, ...rest },
   ref,
 ) {
   const cursor = onClick ? 'pointer' : 'default'

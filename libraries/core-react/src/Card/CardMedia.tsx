@@ -1,12 +1,11 @@
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
 type Props = {
-  fullWidth: boolean
-  spacing: typeof tokens.spacings.left
+  fullWidth?: boolean
+  spacing?: typeof tokens.spacings.left
 } & React.HTMLAttributes<HTMLDivElement>
 
 const StyledCardMedia = styled.div<Props>`
@@ -40,24 +39,21 @@ const StyledCardMedia = styled.div<Props>`
         `}
 `
 
-export const CardMedia = forwardRef<HTMLDivElement, Props>(function EdsCardMedia(
-  {
-    children,
-    className = '',
-    fullWidth = false,
-    ...rest
-  },
-  ref,
-) {
-  const props = {
-    ...rest,
-    className,
+export const CardMedia = forwardRef<HTMLDivElement, Props>(
+  function EdsCardMedia(
+    { children, className = '', fullWidth = false, ...rest },
     ref,
-    fullWidth,
-    spacing: tokens.spacings.left,
-  }
+  ) {
+    const props = {
+      ...rest,
+      className,
+      ref,
+      fullWidth,
+      spacing: tokens.spacings.left,
+    }
 
-  return <StyledCardMedia {...props}>{children}</StyledCardMedia>
-})
+    return <StyledCardMedia {...props}>{children}</StyledCardMedia>
+  },
+)
 
 CardMedia.displayName = 'eds-card-media'
