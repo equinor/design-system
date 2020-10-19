@@ -8,7 +8,7 @@ Icon_.add({ close })
 const { enabled, hover, error } = tokens
 
 type IconProps = {
-  variant: 'active' | 'error' | 'default',
+  variant: 'active' | 'error' | 'default'
   disabled: boolean
 }
 

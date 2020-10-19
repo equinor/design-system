@@ -18,14 +18,19 @@ const {
   outlineOffset,
 } = tokens
 
-type StyledChipsProps = {
-  clickable: boolean,
-  deletable: boolean,
-  variant: 'active' | 'error' | 'default',
-  disabled: boolean,
+type StyleProps = {
+  variant: 'active' | 'error' | 'default'
+  clickable: boolean
+  deletable: boolean
+  disabled: boolean
 }
 
-const StyledChips = styled.div<StyledChipsProps>`
+const StyledChips = styled.div.attrs<StyleProps>(
+  ({ clickable, deletable }) => ({
+    tabIndex: clickable || deletable ? 0 : null,
+    role: clickable ? 'button' : null,
+  }),
+)<StyleProps>`
   background: ${enabled.background};
   height: ${enabled.height};
   width: fit-content;
@@ -35,8 +40,6 @@ const StyledChips = styled.div<StyledChipsProps>`
   grid-auto-columns: max-content;
   align-items: center;
   z-index: 999;
-  tabIndex: ${({ clickable, deletable }) => (clickable || deletable ? 0 : null)},
-  role: ${({ clickable }) => (clickable ? 'button' : null)},
 
   svg {
     fill: ${enabled.typography.color};
@@ -125,15 +128,18 @@ const StyledChips = styled.div<StyledChipsProps>`
     `}
 
   ${({ children }) =>
-    (typeof children === 'string') &&
+    typeof children === 'string' &&
     css`
       padding-left: 8px;
     `}
 `
 type Props = {
-  disabled?: boolean,
-  onDelete?: (Event) => void,
-  variant?: 'active' | 'error' | 'default',
+  /** Disabled */
+  disabled?: boolean
+  /** Delete callback */
+  onDelete?: (Event) => void
+  /** Variant */
+  variant?: 'active' | 'error' | 'default'
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const Chip = forwardRef<HTMLDivElement, Props>(function EdsChips(
@@ -142,11 +148,11 @@ export const Chip = forwardRef<HTMLDivElement, Props>(function EdsChips(
     onDelete,
     disabled = false,
     onClick,
-    variant= 'default',
-    ...other },
+    variant = 'default',
+    ...other
+  },
   ref,
 ) {
-
   const handleDelete = disabled ? undefined : onDelete
   const handleClick = disabled ? undefined : onClick
 
@@ -177,16 +183,19 @@ export const Chip = forwardRef<HTMLDivElement, Props>(function EdsChips(
     }
   }
 
-  const resizedChildren = React.Children.map(children, (child: React.DetailedReactHTMLElement<any, any>) => {
-    // We force size on Icon & Avatar component
-    if (child.props && child.props.size) {
-      return React.cloneElement(child, {
-        size: 16,
-        disabled,
-      })
-    }
-    return child
-  })
+  const resizedChildren = React.Children.map(
+    children,
+    (child: React.ReactElement) => {
+      // We force size on Icon & Avatar component
+      if (child.props && child.props.size) {
+        return React.cloneElement(child, {
+          size: 16,
+          disabled,
+        })
+      }
+      return child
+    },
+  )
 
   const onDeleteClick = (event) => {
     event.stopPropagation()
@@ -202,18 +211,16 @@ export const Chip = forwardRef<HTMLDivElement, Props>(function EdsChips(
       onKeyPress={handleKeyPress}
     >
       {resizedChildren}
-      {onDelete &&
-        (
-          <Icon
-            name="close"
-            title="close"
-            disabled={disabled}
-            variant={variant}
-            onClick={onDeleteClick}
-            size={16}
-          />
-        )
-      }
+      {onDelete && (
+        <Icon
+          name="close"
+          title="close"
+          disabled={disabled}
+          variant={variant}
+          onClick={onDeleteClick}
+          size={16}
+        />
+      )}
     </StyledChips>
   )
 })
