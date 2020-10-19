@@ -1,20 +1,10 @@
 devDependencies:
-  '@rollup/plugin-json': 4.1.0_rollup@2.15.0
   '@rollup/plugin-node-resolve': 8.0.1_rollup@2.15.0
   rollup: 2.15.0
   rollup-plugin-typescript2: 0.27.2_rollup@2.15.0+typescript@4.0.2
   typescript: 4.0.2
 lockfileVersion: 5.1
 packages:
-  /@rollup/plugin-json/4.1.0_rollup@2.15.0:
-    dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.15.0
-      rollup: 2.15.0
-    dev: true
-    peerDependencies:
-      rollup: ^1.20.0 || ^2.0.0
-    resolution:
-      integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
   /@rollup/plugin-node-resolve/8.0.1_rollup@2.15.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.15.0
@@ -250,7 +240,6 @@ packages:
     resolution:
       integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
 specifiers:
-  '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^8.0.1
   rollup: ^2.15.0
   rollup-plugin-typescript2: ^0.27.2
