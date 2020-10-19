@@ -1,9 +1,9 @@
 import { tokens as baseTokens } from './base'
-import primary from './components/button/buttons-primary.json'
-import secondary from './components/button/buttons-secondary.json'
-import danger from './components/button/buttons-danger.json'
-import disabled from './components/button/buttons-disabled.json'
-import table from './components/table/table.json'
+import { primary } from './components/button/primary'
+import { secondary } from './components/button/secondary'
+import { danger } from './components/button/danger'
+import { disabled } from './components/button/disabled'
+import { table } from './components/table/table'
 
 const tokens = {
   ...baseTokens,
