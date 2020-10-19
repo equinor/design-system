@@ -1,12 +1,12 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
-const StyleTypography = styled(Typography)`
+type StyleProps = Pick<Props, 'maxWidth'>
+
+const StyleTypography = styled(Typography)<StyleProps>`
   &:hover {
     text-decoration: underline;
     color: ${tokens.colors.hover};
@@ -27,13 +27,25 @@ const StyleTypography = styled(Typography)`
   ${({ maxWidth }) => css({ maxWidth })}
 `
 
-export const Breadcrumb = forwardRef(function Breadcrumb(
-  { className, children, maxWidth, ...rest },
+type Props = {
+  /*
+   * Max label width in pixels,
+   * truncate long labels based on this width */
+  maxWidth?: number
+  /* click handler function */
+  onClick?: () => void
+  /** Children is breadcrumb text */
+  children: string
+  /** Classname  */
+  className?: string
+}
+
+export const Breadcrumb = forwardRef<HTMLDivElement, Props>(function Breadcrumb(
+  { children, maxWidth, ...other },
   ref,
 ) {
   const props = {
-    ...rest,
-    className,
+    ...other,
     ref,
     maxWidth: maxWidth,
   }
@@ -58,23 +70,3 @@ export const Breadcrumb = forwardRef(function Breadcrumb(
 })
 
 Breadcrumb.displayName = 'eds-breadcrumb'
-
-Breadcrumb.propTypes = {
-  /*
-   * Max label width in pixels,
-   * truncate long labels based on this width
-   */
-  maxWidth: PropTypes.number,
-  // click handler function
-  onClick: PropTypes.func,
-  // Breadcrumb children
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Breadcrumb.defaultProps = {
-  maxWidth: undefined,
-  className: '',
-  onClick: () => {},
-}
