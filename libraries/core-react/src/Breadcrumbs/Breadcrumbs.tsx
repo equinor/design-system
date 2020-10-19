@@ -42,8 +42,6 @@ type Props = {
    * and last breadcrumb will be shown, with an ellipsis in between.
    */
   collapse?: boolean
-  /** Children is breadcrumb text */
-  children: string
 } & JSX.IntrinsicElements['nav']
 
 export const Breadcrumbs = forwardRef<HTMLElement, Props>(function Breadcrumbs(
