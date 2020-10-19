@@ -1,4 +1,4 @@
-import React, { forwardRef, FunctionComponent } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'
@@ -13,7 +13,7 @@ const {
   spacingsMedium,
 } = tokens
 
-const StyledDialog = styled.div.attrs(() => ({
+const StyledDialog = styled.div.attrs<Props>(() => ({
   tabIndex: 0,
   role: 'dialog',
   'aria-labelledby': 'eds-dialog-title',
@@ -33,10 +33,10 @@ const StyledDialog = styled.div.attrs(() => ({
 
 type Props = React.HTMLAttributes<HTMLDivElement>
 
-export const Dialog: FunctionComponent<Props> = forwardRef<
-  HTMLDivElement,
-  Props
->(function EdsDialog({ children, ...props }, ref) {
+export const Dialog = forwardRef<HTMLDivElement, Props>(function EdsDialog(
+  { children, ...props },
+  ref,
+) {
   return (
     <StyledDialog {...props} ref={ref}>
       {children}

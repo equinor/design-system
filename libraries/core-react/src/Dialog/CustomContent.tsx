@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment, FunctionComponent } from 'react'
+import React, { forwardRef, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '../_common/templates'
@@ -35,30 +35,29 @@ type Props = {
   scrollable?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const CustomContent: FunctionComponent<Props> = forwardRef<
-  HTMLDivElement,
-  Props
->(function EdsDialogCustomContent(
-  { children, className = '', scrollable = false, ...rest },
-  ref,
-) {
-  return (
-    <Fragment>
-      <StyledCustomContent
-        className={className}
-        scrollable={scrollable}
-        id="eds-dialog-customcontent"
-        ref={ref}
-        {...rest}
-      >
-        {children}
-      </StyledCustomContent>
+export const CustomContent = forwardRef<HTMLDivElement, Props>(
+  function EdsDialogCustomContent(
+    { children, className = '', scrollable = false, ...rest },
+    ref,
+  ) {
+    return (
+      <Fragment>
+        <StyledCustomContent
+          className={className}
+          scrollable={scrollable}
+          id="eds-dialog-customcontent"
+          ref={ref}
+          {...rest}
+        >
+          {children}
+        </StyledCustomContent>
 
-      {children && scrollable && (
-        <StyledDivider color="medium" variant="small" />
-      )}
-    </Fragment>
-  )
-})
+        {children && scrollable && (
+          <StyledDivider color="medium" variant="small" />
+        )}
+      </Fragment>
+    )
+  },
+)
 
 CustomContent.displayName = 'eds-dialog-customcontent'

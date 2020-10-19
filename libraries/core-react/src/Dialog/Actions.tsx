@@ -1,4 +1,4 @@
-import React, { forwardRef, FunctionComponent } from 'react'
+import React, { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { dialog as tokens } from './Dialog.tokens'
 
@@ -20,15 +20,14 @@ const StyledActions = styled.div<Props>`
 
 type Props = React.HTMLAttributes<HTMLDivElement>
 
-export const Actions: FunctionComponent<Props> = forwardRef<
-  HTMLDivElement,
-  Props
->(function EdsDialogActions({ children, ...props }, ref) {
-  return (
-    <StyledActions ref={ref} {...props}>
-      {children}
-    </StyledActions>
-  )
-})
+export const Actions = forwardRef<HTMLDivElement, Props>(
+  function EdsDialogActions({ children, ...props }, ref) {
+    return (
+      <StyledActions ref={ref} {...props}>
+        {children}
+      </StyledActions>
+    )
+  },
+)
 
 Actions.displayName = 'eds-dialog-actions'
