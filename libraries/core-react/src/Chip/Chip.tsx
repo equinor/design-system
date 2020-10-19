@@ -1,8 +1,5 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { close } from '@equinor/eds-icons'
 import { Icon } from './Icon'
 import { chip as tokens } from './Chip.tokens'
 import {
@@ -10,8 +7,6 @@ import {
   spacingsTemplate,
   typographyTemplate,
 } from '../_common/templates'
-
-Icon.add({ close })
 
 const {
   enabled,
@@ -23,10 +18,19 @@ const {
   outlineOffset,
 } = tokens
 
-const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
-  tabIndex: clickable || deletable ? 0 : null,
-  role: clickable ? 'button' : null,
-}))`
+type StyleProps = {
+  variant: 'active' | 'error' | 'default'
+  clickable: boolean
+  deletable: boolean
+  disabled: boolean
+}
+
+const StyledChips = styled.div.attrs<StyleProps>(
+  ({ clickable, deletable }) => ({
+    tabIndex: clickable || deletable ? 0 : null,
+    role: clickable ? 'button' : null,
+  }),
+)<StyleProps>`
   background: ${enabled.background};
   height: ${enabled.height};
   width: fit-content;
@@ -60,7 +64,6 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
   ${bordersTemplate(enabled.border)}
   ${spacingsTemplate(enabled.spacings)}
   ${typographyTemplate(enabled.typography)}
-
 
   ${({ clickable }) =>
     clickable &&
@@ -124,16 +127,30 @@ const StyledChips = styled.div.attrs(({ clickable, deletable }) => ({
       padding-right: 4px;
     `}
 
-  ${({ onlyChild }) =>
-    onlyChild &&
+  ${({ children }) =>
+    typeof children === 'string' &&
     css`
       padding-left: 8px;
     `}
-
 `
+type Props = {
+  /** Disabled */
+  disabled?: boolean
+  /** Delete callback */
+  onDelete?: (Event) => void
+  /** Variant */
+  variant?: 'active' | 'error' | 'default'
+} & React.HTMLAttributes<HTMLDivElement>
 
-export const Chip = forwardRef(function EdsChips(
-  { children, onDelete, disabled, onClick, variant, ...rest },
+export const Chip = forwardRef<HTMLDivElement, Props>(function EdsChips(
+  {
+    children,
+    onDelete,
+    disabled = false,
+    onClick,
+    variant = 'default',
+    ...other
+  },
   ref,
 ) {
   const handleDelete = disabled ? undefined : onDelete
@@ -143,8 +160,8 @@ export const Chip = forwardRef(function EdsChips(
   const clickable = handleClick !== undefined
   const onlyChild = typeof children === 'string'
 
-  const props = {
-    ...rest,
+  const chipProps = {
+    ...other,
     ref,
     disabled,
     deletable,
@@ -159,27 +176,37 @@ export const Chip = forwardRef(function EdsChips(
       if (deletable) {
         handleDelete(event)
       }
-      // Delete takes presidens, else click action is activated
+      // Delete takes precedence, else click action is activated
       if (clickable && !deletable) {
         handleClick(event)
       }
     }
   }
 
-  const resizedChildren = React.Children.map(children, (child) => {
-    // We force size on Icon & Avatar component
-    if (child.props && child.props.size) {
-      return React.cloneElement(child, {
-        size: 16,
-        disabled,
-      })
+  const resizedChildren = React.Children.map(
+    children,
+    (child: React.ReactElement) => {
+      // We force size on Icon & Avatar component
+      if (child.props && child.props.size) {
+        return React.cloneElement(child, {
+          size: 16,
+          disabled,
+        })
+      }
+      return child
+    },
+  )
+
+  const onDeleteClick = (event) => {
+    event.stopPropagation()
+    if (deletable) {
+      handleDelete(event)
     }
-    return child
-  })
+  }
 
   return (
     <StyledChips
-      {...props}
+      {...chipProps}
       onClick={(event) => clickable && handleClick(event)}
       onKeyPress={handleKeyPress}
     >
@@ -190,12 +217,7 @@ export const Chip = forwardRef(function EdsChips(
           title="close"
           disabled={disabled}
           variant={variant}
-          onClick={(event) => {
-            event.stopPropagation()
-            if (deletable) {
-              handleDelete(event)
-            }
-          }}
+          onClick={onDeleteClick}
           size={16}
         />
       )}
@@ -204,27 +226,3 @@ export const Chip = forwardRef(function EdsChips(
 })
 
 Chip.displayName = 'eds-chip'
-
-Chip.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node,
-  /** Disabled */
-  disabled: PropTypes.bool,
-  /** Delete callback */
-  onDelete: PropTypes.func,
-  /** Click callback */
-  onClick: PropTypes.func,
-  /** Variant */
-  variant: PropTypes.oneOf(['active', 'error', 'default']),
-}
-
-Chip.defaultProps = {
-  className: '',
-  children: [],
-  disabled: false,
-  onDelete: undefined,
-  onClick: undefined,
-  variant: 'default',
-}

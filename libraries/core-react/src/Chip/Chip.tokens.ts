@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { tokens } from '@equinor/eds-tokens'
 
 const {
