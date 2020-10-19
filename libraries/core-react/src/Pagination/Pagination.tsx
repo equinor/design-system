@@ -1,4 +1,10 @@
-import React, { forwardRef, useState, ReactNode } from 'react'
+import React, {
+  forwardRef,
+  useState,
+  ReactNode,
+  MouseEvent,
+  KeyboardEvent,
+} from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button } from '../Button'
@@ -74,7 +80,7 @@ type Props = {
   // Choose number of items per page
   itemsPerPage?: number
   // Callback fired on page change
-  onChange?: (event, page) => void
+  onChange?: (event: MouseEvent | KeyboardEvent, page: number) => void
   // Default start page
   defaultPage?: number
   // ClassName
@@ -105,7 +111,7 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
   const currentItemLast =
     activePage === pages ? totalItems : activePage * itemsPerPage // Last number of range of items at current page
 
-  const onPageChange = (event, page: number) => {
+  const onPageChange = (event: MouseEvent | KeyboardEvent, page: number) => {
     setActivePage(page)
     if (onChange) {
       // Callback for provided onChange func
