@@ -1,7 +1,4 @@
-import primary from '@equinor/eds-tokens/components/button/buttons-primary.json'
-import secondary from '@equinor/eds-tokens/components/button/buttons-secondary.json'
-import danger from '@equinor/eds-tokens/components/button/buttons-danger.json'
-import disabled from '@equinor/eds-tokens/components/button/buttons-disabled.json'
+import { tokens } from '@equinor/eds-tokens'
 import type {
   Border,
   Focus,
@@ -9,6 +6,12 @@ import type {
   Spacing,
   Typography,
 } from '@equinor/eds-tokens'
+
+const {
+  components: {
+    button: { primary, secondary, danger, disabled },
+  },
+} = tokens
 
 const colors = {
   primary: {

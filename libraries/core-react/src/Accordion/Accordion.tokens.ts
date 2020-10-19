@@ -1,9 +1,9 @@
-// @ts-nocheck
 import { tokens } from '@equinor/eds-tokens'
+import type { Typography } from '@equinor/eds-tokens'
 
 const {
   typography: {
-    ui: { accordion_header: header },
+    ui: { accordion_header: typography },
   },
   colors: {
     ui: {
@@ -23,11 +23,24 @@ const {
   },
 } = tokens
 
-export const accordion = {
+type AccordionToken = {
   header: {
-    ...header,
+    typography: Typography
+    color: typeof token.header.color
+    background: typeof token.header.background
+  }
+  border: string
+  outline: string
+  outlineOffset: string
+  chevronColor: typeof token.chevronColor
+  iconColor: typeof token.iconColor
+}
+
+const token = {
+  header: {
+    typography,
     color: {
-      default: header.color,
+      default: typography.color,
       disabled: disabledColor,
       activated: activatedColor,
     },
@@ -52,3 +65,5 @@ export const accordion = {
     },
   },
 }
+
+export const accordion: AccordionToken = token
