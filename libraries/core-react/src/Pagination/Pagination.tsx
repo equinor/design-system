@@ -113,7 +113,6 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
 
   const onPageChange = (event, page: number) => {
     page && setActivePage(page)
-    console.log('onPageChange function', event, page)
     if (event && onChange) {
       // Callback for provided onChange func
       onChange(event, page)
