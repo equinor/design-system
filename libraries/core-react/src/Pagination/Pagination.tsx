@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button } from '../Button'
@@ -72,21 +72,25 @@ type Props = {
   // To display total item count
   withItemIndicator?: boolean
   // Choose number of items per page
-  itemsPerPage?: number,
+  itemsPerPage?: number
   // Callback fired on page change
-  onChange?: () => void,
+  onChange?: (event, page) => void
   // Default start page
-  defaultPage?: number,
+  defaultPage?: number
+  // ClassName
+  className?: string
+  // Children
+  children?: ReactNode
 }
 
-export const Pagination = forwardRef(function Pagination(
+export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
   {
     totalItems,
-    defaultPage,
+    defaultPage = 1,
     withItemIndicator,
-    itemsPerPage,
-    className,
+    itemsPerPage = 10,
     onChange,
+    className,
     ...other
   },
   ref,
@@ -208,29 +212,3 @@ export const Pagination = forwardRef(function Pagination(
 })
 
 Pagination.displayName = 'eds-pagination'
-
-Pagination.propTypes = {
-  // Number of total items to be paginated
-  totalItems: PropTypes.number.isRequired,
-  // To display total item count
-  withItemIndicator: PropTypes.bool,
-  // Choose number of items per page
-  itemsPerPage: PropTypes.number,
-  // Callback fired on page change
-  onChange: PropTypes.func,
-  // Default start page
-  defaultPage: PropTypes.number,
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Pagination.defaultProps = {
-  className: '',
-  defaultPage: 1,
-  children: undefined,
-  withItemIndicator: false,
-  itemsPerPage: 10,
-  onChange: () => {},
-}
