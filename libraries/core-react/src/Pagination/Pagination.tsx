@@ -111,9 +111,10 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
   const currentItemLast =
     activePage === pages ? totalItems : activePage * itemsPerPage // Last number of range of items at current page
 
-  const onPageChange = (event: MouseEvent | KeyboardEvent, page: number) => {
-    setActivePage(page)
-    if (onChange) {
+  const onPageChange = (event, page: number) => {
+    page && setActivePage(page)
+    console.log('onPageChange function', event, page)
+    if (event && onChange) {
       // Callback for provided onChange func
       onChange(event, page)
     }

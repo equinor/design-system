@@ -25,7 +25,7 @@ export const PaginationItem = forwardRef<HTMLButtonElement, Props>(
       <Button
         style={{ background: currentColor }}
         variant="ghost_icon"
-        onClick={onClick}
+        onClick={onClick ? onClick : undefined}
         {...props}
       >
         {page}
