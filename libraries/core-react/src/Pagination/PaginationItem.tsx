@@ -9,7 +9,7 @@ type Props = {
   selected: boolean
   // Click function
   onClick?: () => void
-} & Omit<JSX.IntrinsicElements['button'], 'color' | 'ref'>
+}
 
 export const PaginationItem = forwardRef<HTMLButtonElement, Props>(
   function PaginationItem({ page, selected, onClick, ...other }, ref) {

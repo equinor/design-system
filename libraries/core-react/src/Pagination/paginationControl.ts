@@ -1,5 +1,3 @@
-import React from 'react'
-
 export function PaginationControl(pages, activePage) {
   const siblings = 1 // amount of siblings on left and right side of active page after trunking
   const totalPagesShown = 7 // amount of total pages before we start trunking pages in ellipsis
