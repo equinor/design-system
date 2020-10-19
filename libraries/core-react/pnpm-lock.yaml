@@ -2,6 +2,7 @@ dependencies:
   '@equinor/eds-icons': 'link:../icons'
   '@equinor/eds-tokens': 'link:../tokens'
   '@testing-library/react-hooks': 3.3.0_react@16.13.1
+  '@types/lodash': 4.14.162
   csstype: 3.0.3
   focus-visible: 5.1.0
   lodash: 4.17.19
@@ -13,7 +14,6 @@ devDependencies:
   '@babel/preset-typescript': 7.10.4_@babel+core@7.10.2
   '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@2.15.0
   '@rollup/plugin-commonjs': 13.0.0_rollup@2.15.0
-  '@rollup/plugin-json': 4.1.0_rollup@2.15.0
   '@rollup/plugin-node-resolve': 8.0.1_rollup@2.15.0
   '@testing-library/jest-dom': 5.9.0
   '@testing-library/react': 10.2.1_react-dom@16.13.1+react@16.13.1
@@ -1592,15 +1592,6 @@ packages:
       rollup: ^2.3.4
     resolution:
       integrity: sha512-Anxc3qgkAi7peAyesTqGYidG5GRim9jtg8xhmykNaZkImtvjA7Wsqep08D2mYsqw1IF7rA3lYfciLgzUSgRoqw==
-  /@rollup/plugin-json/4.1.0_rollup@2.15.0:
-    dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.15.0
-      rollup: 2.15.0
-    dev: true
-    peerDependencies:
-      rollup: ^1.20.0 || ^2.0.0
-    resolution:
-      integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
   /@rollup/plugin-node-resolve/8.0.1_rollup@2.15.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.15.0
@@ -1803,6 +1794,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-i2m0oyh8w/Lum7wWK/YOZJakYF8Mx08UaKA1CtbmFeDquVhAEdA7znacsVSf2hJ1OQ/OfVMGN90pw/AtzF8s/Q==
+  /@types/lodash/4.14.162:
+    dev: false
+    resolution:
+      integrity: sha512-alvcho1kRUnnD1Gcl4J+hK0eencvzq9rmzvFPRmP5rPHx9VVsJj6bKLTATPVf9ktgv4ujzh7T+XWKp+jhuODig==
   /@types/node/14.0.11:
     dev: true
     resolution:
@@ -6039,13 +6034,13 @@ specifiers:
   '@equinor/eds-tokens': 'workspace:*'
   '@rollup/plugin-babel': ^5.0.3
   '@rollup/plugin-commonjs': ^13.0.0
-  '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^8.0.1
   '@testing-library/jest-dom': ^5.9.0
   '@testing-library/react': ^10.2.1
   '@testing-library/react-hooks': ^3.3.0
   '@testing-library/user-event': ^10.3.2
   '@types/jest': ^26.0.10
+  '@types/lodash': ^4.14.162
   '@types/react': ^16.9.47
   '@types/react-dom': ^16.9.8
   '@types/styled-components': ^5.1.2
