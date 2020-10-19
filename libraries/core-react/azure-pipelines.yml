@@ -41,14 +41,14 @@ steps:
   - script: >-
       pnpm
       --filter eds
+      --filter ./libraries/tokens
+      --filter ./libraries/icons
+      --filter ./libraries/core-react
       install
     displayName: 'Install dependencies'
 
-  # --filter ./libraries/tokens
-  # --filter ./libraries/icons
-  # --filter ./libraries/core-react
-  # - script: pnpm --filter ./libraries/core-react test
-  #   displayName: 'Run tests'
+  - script: pnpm --filter ./libraries/core-react test
+    displayName: 'Run tests'
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
