@@ -81,6 +81,7 @@
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "@testing-library/react-hooks": "^3.3.0",
+    "@types/lodash": "^4.14.162",
     "csstype": "^3.0.3",
     "focus-visible": "^5.1.0",
     "lodash": "^4.17.19"
