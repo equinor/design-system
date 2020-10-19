@@ -1,14 +1,15 @@
-// @ts-nocheck
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useEffect, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 import { typographyTemplate } from '../_common/templates'
 
+type StyledProps = {
+  leftAlignFrom: string
+} & HTMLAttributes<HTMLDivElement>
+
 const StyledSnackbar = styled.div.attrs(() => ({
   role: 'alert',
-}))`
-
+}))<StyledProps>`
   position: fixed;
   left: ${tokens.spacings.left};
   bottom: ${tokens.spacings.bottom};
@@ -33,14 +34,25 @@ const StyledSnackbar = styled.div.attrs(() => ({
   }
 `
 
+type Props = {
+  /* Controls the visibility of the snackbar */
+  open?: boolean
+  /* How long will the message be visible in milliseconds */
+  autoHideDuration?: number
+  /* Callback fired when the snackbar is closed by auto hide duration timeout */
+  onClose?: () => void
+  /* Media query from which the snackbar will be horizontal centered */
+  leftAlignFrom?: string
+} & HTMLAttributes<HTMLDivElement>
+
 export const Snackbar = ({
-  open,
-  autoHideDuration,
+  open = false,
+  autoHideDuration = 7000,
   onClose,
-  leftAlignFrom,
+  leftAlignFrom = '1200px',
   children,
   className,
-}) => {
+}: Props): JSX.Element => {
   const [visible, setVisible] = useState(open)
   useEffect(() => {
     setVisible(open)
@@ -64,26 +76,3 @@ export const Snackbar = ({
 }
 
 Snackbar.displayName = 'eds-snackbar'
-
-Snackbar.propTypes = {
-  /** Controls the visibility of the snackbar */
-  open: PropTypes.bool,
-  /** How long will the message be visible in milliseconds */
-  autoHideDuration: PropTypes.number,
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-  /** Callback fired when the snackbar is closed by auto hide duration timeout */
-  onClose: PropTypes.func,
-  /** Media query from which the snackbar will be horizontal centered */
-  leftAlignFrom: PropTypes.string,
-}
-
-Snackbar.defaultProps = {
-  autoHideDuration: 7000,
-  onClose: undefined,
-  open: false,
-  leftAlignFrom: '1200px',
-  className: undefined,
-}
