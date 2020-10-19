@@ -2,6 +2,7 @@ dependencies:
   '@equinor/eds-icons': 'link:../icons'
   '@equinor/eds-tokens': 'link:../tokens'
   '@testing-library/react-hooks': 3.3.0_react@16.13.1
+  '@types/lodash': 4.14.162
   csstype: 3.0.3
   focus-visible: 5.1.0
   lodash: 4.17.19
@@ -1803,6 +1804,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-i2m0oyh8w/Lum7wWK/YOZJakYF8Mx08UaKA1CtbmFeDquVhAEdA7znacsVSf2hJ1OQ/OfVMGN90pw/AtzF8s/Q==
+  /@types/lodash/4.14.162:
+    dev: false
+    resolution:
+      integrity: sha512-alvcho1kRUnnD1Gcl4J+hK0eencvzq9rmzvFPRmP5rPHx9VVsJj6bKLTATPVf9ktgv4ujzh7T+XWKp+jhuODig==
   /@types/node/14.0.11:
     dev: true
     resolution:
@@ -6046,6 +6051,7 @@ specifiers:
   '@testing-library/react-hooks': ^3.3.0
   '@testing-library/user-event': ^10.3.2
   '@types/jest': ^26.0.10
+  '@types/lodash': ^4.14.162
   '@types/react': ^16.9.47
   '@types/react-dom': ^16.9.8
   '@types/styled-components': ^5.1.2
