@@ -62,7 +62,7 @@ const Text = styled(Typography)`
   white-space: nowrap;
 `
 
-function getAriaLabel(page, selected) {
+function getAriaLabel(page: number, selected: number) {
   return `${selected === page ? 'Current page, ' : 'Go to '}page ${page}`
 }
 
@@ -105,7 +105,7 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
   const currentItemLast =
     activePage === pages ? totalItems : activePage * itemsPerPage // Last number of range of items at current page
 
-  const onPageChange = (event, page) => {
+  const onPageChange = (event, page: number) => {
     setActivePage(page)
     if (onChange) {
       // Callback for provided onChange func
