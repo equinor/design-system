@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import type { CSSObject } from 'styled-components'
 // eslint-disable-next-line camelcase
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
-import { Icon } from '..'
+import { Icon } from '../Icon'
 import { accordion as tokens } from './Accordion.tokens'
 import { Property } from 'csstype'
 import type { AccordionProps } from './Accordion.types'
@@ -116,7 +116,7 @@ const AccordionHeader = forwardRef<
     chevronPosition,
     panelId,
     id,
-    isExpanded,
+    isExpanded = false,
     children,
     toggleExpanded,
     disabled,
