@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card } from './Card'
 import { CardActions } from './CardActions'
 import { CardMedia } from './CardMedia'

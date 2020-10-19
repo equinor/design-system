@@ -1,9 +1,10 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
+
+type Props = React.HTMLAttributes<HTMLDivElement>
 
 const StyledCardHeader = styled.div`
   display: flex;
@@ -15,8 +16,12 @@ const StyledCardHeader = styled.div`
   }
 `
 
-export const CardHeader = forwardRef(function EdsCardHeader(
-  { children, className, ...rest },
+export const CardHeader = forwardRef<HTMLDivElement, Props>(function EdsCardHeader(
+  {
+    children,
+    className = '',
+    ...rest
+  },
   ref,
 ) {
   const props = {
@@ -29,15 +34,3 @@ export const CardHeader = forwardRef(function EdsCardHeader(
 })
 
 CardHeader.displayName = 'eds-card-header'
-
-CardHeader.propTypes = {
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-CardHeader.defaultProps = {
-  className: '',
-  children: undefined,
-}

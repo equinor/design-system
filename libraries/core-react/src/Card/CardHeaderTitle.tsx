@@ -1,7 +1,8 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
+type Props = React.HTMLAttributes<HTMLDivElement>
 
 const StyledCardHeaderTitle = styled.div`
   display: grid;
@@ -9,8 +10,11 @@ const StyledCardHeaderTitle = styled.div`
   grid-auto-columns: auto;
 `
 
-export const CardHeaderTitle = forwardRef(function EdsCardHeaderTitle(
-  { children, className, ...rest },
+export const CardHeaderTitle = forwardRef<HTMLDivElement, Props>(function EdsCardHeaderTitle(
+  {
+    children,
+    className = '',
+    ...rest },
   ref,
 ) {
   const props = {
@@ -23,15 +27,3 @@ export const CardHeaderTitle = forwardRef(function EdsCardHeaderTitle(
 })
 
 CardHeaderTitle.displayName = 'eds-card-header-title'
-
-CardHeaderTitle.propTypes = {
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-CardHeaderTitle.defaultProps = {
-  className: '',
-  children: undefined,
-}
