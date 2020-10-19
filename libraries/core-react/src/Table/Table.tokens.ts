@@ -1,4 +1,5 @@
-import tableTokens from '@equinor/eds-tokens/components/table/table.json'
+import { tokens } from '@equinor/eds-tokens'
+
 import type {
   Border,
   Clickbound,
@@ -6,7 +7,11 @@ import type {
   Typography,
 } from '@equinor/eds-tokens'
 
-const { header, cell } = tableTokens
+const {
+  components: {
+    table: { header, cell },
+  },
+} = tokens
 
 type Field = {
   height: string

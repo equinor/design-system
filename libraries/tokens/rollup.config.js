@@ -2,6 +2,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 import commonjsPkg from './commonjs/package.json'
+import json from '@rollup/plugin-json'
 
 // eslint-disable-next-line import/no-default-export
 export default [
@@ -11,6 +12,7 @@ export default [
       clearScreen: true,
     },
     plugins: [
+      json(),
       resolve(),
       typescript({
         tsconfig: 'tsconfig.json',
