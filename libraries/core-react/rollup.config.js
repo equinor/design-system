@@ -1,7 +1,6 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import json from '@rollup/plugin-json'
 import babel from '@rollup/plugin-babel'
 import polyfill from 'rollup-plugin-polyfill'
 import typescript from 'rollup-plugin-typescript2'
@@ -30,7 +29,6 @@ export default [
       include: ['./src/**', './../tokens/**'],
     },
     plugins: [
-      json(),
       resolve({ extensions }),
       typescript({ useTsconfigDeclarationDir: true }),
       babel({
