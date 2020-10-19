@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react'
 
 export function PaginationControl(pages, activePage) {
