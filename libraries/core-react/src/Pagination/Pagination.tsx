@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -22,7 +21,9 @@ const icons = {
 
 Icon.add(icons)
 
-const Navigation = styled.nav`
+type NavigationStyledProps = Pick<Props, 'withItemIndicator'>
+
+const Navigation = styled.nav<NavigationStyledProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,6 +64,19 @@ const Text = styled(Typography)`
 
 function getAriaLabel(page, selected) {
   return `${selected === page ? 'Current page, ' : 'Go to '}page ${page}`
+}
+
+type Props = {
+  // Number of total items to be paginated
+  totalItems: number
+  // To display total item count
+  withItemIndicator?: boolean
+  // Choose number of items per page
+  itemsPerPage?: number,
+  // Callback fired on page change
+  onChange?: () => void,
+  // Default start page
+  defaultPage?: number,
 }
 
 export const Pagination = forwardRef(function Pagination(
