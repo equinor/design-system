@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useRef /* , useMemo */ } from 'react'
+import React, { forwardRef, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -144,7 +144,38 @@ const SrOnlyLabel = styled.label`
   border-width: 0;
 `
 
-export const Slider = forwardRef(function EdsSlider(
+type Props = {
+  /** Id for the elements that labels this slider */
+  ariaLabelledby: string
+  /** Components value, range of numbers */
+  value: [number, number]
+  /** Function to be called when value change */
+  onChange?: (
+    event: MouseEvent | KeyboardEvent,
+    newValue: [number, number],
+  ) => void
+  /* Function to be called when value is committed by mouseup event */
+  onChangeCommitted?: (
+    event: MouseEvent | KeyboardEvent,
+    sliderValue: [number, number],
+  ) => void
+  /** Function for formatting the output, e.g. with dates */
+  outputFunction?: (text: string) => void
+  /** Max value */
+  max?: number
+  /**  Min value */
+  min?: number
+  /** Stepping interval */
+  step?: number
+  /** Show the min and max dots or not */
+  minMaxDots?: boolean
+  /** Show the min and max values or not */
+  minMaxValues?: boolean
+  /** Disabled */
+  disabled?: boolean
+} & JSX.IntrinsicElements['div']
+
+export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   {
     min = 0,
     max = 100,
@@ -153,7 +184,7 @@ export const Slider = forwardRef(function EdsSlider(
     onChange,
     onChangeCommitted,
     minMaxDots = true,
-    minMaxValues,
+    minMaxValues = true,
     step = 1,
     disabled,
     ariaLabelledby,
@@ -169,6 +200,10 @@ export const Slider = forwardRef(function EdsSlider(
     const changedValue = parseInt(event.target.value, 10)
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
+      if (valueArrIdx === 0) {
+        newValue[0] = changedValue
+      }
+
       newValue[valueArrIdx] = changedValue
       setSliderValue(newValue)
       if (onChange) {
