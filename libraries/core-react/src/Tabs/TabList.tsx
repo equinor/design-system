@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, {
   forwardRef,
   useContext,
@@ -11,28 +10,49 @@ import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
 import { TabsContext } from './Tabs.context'
 
-const variants = {
+type Variants = 'fullWidth' | 'minWidth'
+
+type VariantsRecord = {
+  fullWidth: string
+  minWidth: string
+}
+
+const variants: VariantsRecord = {
   fullWidth: 'minmax(1%, 360px)',
   minWidth: 'max-content',
 }
 
+type StyledProps = Pick<Props, 'variant'>
+
 const StyledTabList = styled.div.attrs(() => ({
   role: 'tablist',
-}))`
+}))<StyledProps>`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: ${({ variant }) => variants[variant]};
 `
 
-const TabList = forwardRef(function TabsList({ children, ...props }, ref) {
-  const { activeTab, handleChange, tabsId, variant, tabsFocused } = useContext(
-    TabsContext,
-  )
+type Props = {
+  /** Sets the width of the tabs */
+  variant: Variants
+} & React.HTMLAttributes<HTMLDivElement>
+
+const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
+  { children, ...props },
+  ref,
+) {
+  const {
+    activeTab,
+    handleChange,
+    tabsId,
+    variant = 'minWidth',
+    tabsFocused,
+  } = useContext(TabsContext)
 
   const currentTab = useRef(activeTab)
 
   const selectedTabRef = useCallback(
-    (node) => {
+    (node: HTMLElement) => {
       if (node !== null && tabsFocused) {
         node.focus()
       }
