@@ -1,15 +1,18 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 import { Divider } from '../Divider'
+import { BannerIcon } from './BannerIcon'
 
 const { enabled } = tokens
 
 const StyledBanner = styled.div``
 
-const Content = styled.div`
+type ContentProps = {
+  hasIcon: boolean
+}
+
+const Content = styled.div<ContentProps>`
   padding: ${enabled.spacings};
   display: grid;
   grid-template-columns: ${({ hasIcon }) =>
@@ -22,11 +25,20 @@ const NonMarginDivider = styled(Divider)`
   height: 2px;
 `
 
-export const Banner = ({ children, className, ...props }) => {
-  const displayNames = React.Children.map(children, (child) => {
-    return child.type && child.type.displayName
+type Props = {
+  children: ReactNode
+} & HTMLAttributes<HTMLDivElement>
+
+export const Banner = ({
+  children,
+  className,
+  ...props
+}: Props
+) => {
+  const childrenWhereBannerIcon: boolean[] = React.Children.map(children, child => {
+    return React.isValidElement(child) && child.type === BannerIcon
   })
-  const hasIcon = displayNames.includes('eds-banner-icon')
+  const hasIcon = childrenWhereBannerIcon.some(bool => bool);
 
   return (
     <StyledBanner {...props} className={className}>
@@ -37,14 +49,3 @@ export const Banner = ({ children, className, ...props }) => {
 }
 
 Banner.displayName = 'eds-banner'
-
-Banner.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-}
-
-Banner.defaultProps = {
-  className: undefined,
-}
