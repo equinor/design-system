@@ -7,7 +7,8 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { popover as tokens } from './Popover.tokens'
 import { Popover } from '.'
-import { Button, Typography } from '..'
+import { Button } from '../Button'
+import { Typography } from '../Typography'
 import type { Props } from './Popover'
 
 const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover

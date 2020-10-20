@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useEffect, useRef, forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { Icon, Card, Button } from '..'
+import { Icon } from '../Icon'
+import { Card } from '../Card'
+import { Button } from '../Button'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { useCombinedRefs } from '../_common'
 
