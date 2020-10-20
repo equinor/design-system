@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
-import { DotProgress } from '..'
+import { DotProgress } from './DotProgress'
 
 const StyledProgress = styled(DotProgress)`
   position: absolute;

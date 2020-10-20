@@ -6,7 +6,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { add } from '@equinor/eds-icons'
 import { Banner } from '.'
-import { Icon } from '..'
+import { Icon } from '../Icon'
 import { banner as tokens } from './Banner.tokens'
 
 const { BannerMessage, BannerIcon, BannerActions } = Banner
