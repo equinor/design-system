@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -14,8 +13,10 @@ const track = css`
 `
 
 const thumb = css`
-  border: ${enabled.handle.border.width} ${enabled.handle.border.type}
-    ${enabled.handle.border.color};
+  border: (
+    ${enabled.handle.border.width} ${enabled.handle.border.type}
+      ${enabled.handle.border.color}
+  );
   height: ${enabled.handle.size};
   width: ${enabled.handle.size};
   border-radius: ${enabled.handle.border.radius};
@@ -128,7 +129,29 @@ const StyledSliderInput = styled.input.attrs(() => ({
     ${track}
   }
 `
-export const SliderInput = forwardRef((props, ref) => {
+
+type Props = {
+  /* Slider value */
+  value: number
+  /* Change function , this is a controlled component */
+  onChange: () => void
+  /* Mouse up handler */
+  onMouseUp: () => void
+  /* Key up handler */
+  onKeyUp: () => void
+  /* Min value */
+  min: number
+  /* Max value */
+  max: number
+  /* Id for the input element */
+  id: string
+  /* Step value */
+  step: number
+  /** Disabled */
+  disabled: boolean
+} & HTMLAttributes<HTMLInputElement>
+
+export const SliderInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const {
     value,
     min,
@@ -165,24 +188,3 @@ export const SliderInput = forwardRef((props, ref) => {
 })
 
 SliderInput.displayName = 'eds-slider-input'
-
-SliderInput.propTypes = {
-  /* Slider value */
-  value: PropTypes.number.isRequired,
-  /* Change function , this is a controlled component */
-  onChange: PropTypes.func.isRequired,
-  /* Mouse up handler */
-  onMouseUp: PropTypes.func.isRequired,
-  /* Key up handler */
-  onKeyUp: PropTypes.func.isRequired,
-  /* Min value */
-  min: PropTypes.number.isRequired,
-  /* Max value */
-  max: PropTypes.number.isRequired,
-  /* Id for the input element */
-  id: PropTypes.string.isRequired,
-  /* Step value */
-  step: PropTypes.number.isRequired,
-  /** Disabled */
-  disabled: PropTypes.bool.isRequired,
-}

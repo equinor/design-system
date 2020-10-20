@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'

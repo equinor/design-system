@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { forwardRef, useState, useRef /* , useMemo */ } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
