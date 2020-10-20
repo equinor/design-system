@@ -251,11 +251,11 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
     const maxX = Math.abs(normX - maxValue)
     const minX = Math.abs(normX - minValue)
     if (minX > maxX) {
-      minRange.current.style.zIndex = 10
-      maxRange.current.style.zIndex = 20
+      minRange.current.style.zIndex = '10'
+      maxRange.current.style.zIndex = '20'
     } else {
-      minRange.current.style.zIndex = 20
-      maxRange.current.style.zIndex = 10
+      minRange.current.style.zIndex = '20'
+      maxRange.current.style.zIndex = '10'
     }
   }
 
@@ -263,7 +263,6 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   const inputIdB = `${ariaLabelledby}-thumb-b`
   const inputId = `${ariaLabelledby}-thumb`
 
-  console.log(sliderValue)
   return (
     <>
       {isRangeSlider ? (
@@ -329,7 +328,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           disabled={disabled}
         >
           <SliderInput
-            value={sliderValue}
+            value={sliderValue[0]}
             min={min}
             max={max}
             step={step}
@@ -342,7 +341,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
             onMouseUp={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
           />
-          <Output htmlFor={inputId} value={sliderValue}>
+          <Output htmlFor={inputId} value={sliderValue[0]}>
             {getFormattedText(sliderValue)}
           </Output>
           {/*  Need an element for pseudo elems :/ */}

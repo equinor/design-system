@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+// import type { Typography } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -23,71 +23,71 @@ const {
   typography: { paragraph },
 } = tokens
 
-type Slider = {
-  enabled: {
-    background: string
-    track: {
-      background: string
-      height: string
-      realHeight: string
-      bottomOffset: string
-      indicator: {
-        color: string
-        hover: {
-          color: string
-        }
-      }
-      hover: {
-        background: string
-      }
-    }
-    output: {
-      height: string
-      typography: Typography
-      text: string
-    }
-    handle: {
-      background: string
-      size: string
-      border: {
-        color: string
-        radius: string
-        width: string
-        type: string
-      }
-      outline: string
-      outlineOffset: string
-      hover: {
-        background: string
-        border: {
-          color: string
-        }
-      }
-    }
-    dot: {
-      size: string
-      border: {
-        color: string
-        width: string
-        type: string
-        radius: string
-      }
-    }
-  }
-  disabled: {
-    background: string
-    border: {
-      color: string
-    }
-    track: {
-      indicator: {
-        color: string
-      }
-    }
-  }
-}
+// type Slider = {
+//   enabled: {
+//     background: string
+//     track: {
+//       background: string
+//       height: string
+//       realHeight: string
+//       bottomOffset: string
+//       indicator: {
+//         color: string
+//         hover: {
+//           color: string
+//         }
+//       }
+//       hover: {
+//         background: string
+//       }
+//     }
+//     output: {
+//       height: string
+//       typography: Typography
+//       text: string
+//     }
+//     handle: {
+//       background: string
+//       size: string
+//       border: {
+//         color: string
+//         radius: string
+//         width: string
+//         type: string
+//       }
+//       outline: string
+//       outlineOffset: string
+//       hover: {
+//         background: string
+//         border: {
+//           color: string
+//         }
+//       }
+//     }
+//     dot: {
+//       size: string
+//       border: {
+//         color: string
+//         width: string
+//         type: string
+//         radius: string
+//       }
+//     }
+//   }
+//   disabled: {
+//     background: string
+//     border: {
+//       color: string
+//     }
+//     track: {
+//       indicator: {
+//         color: string
+//       }
+//     }
+//   }
+// }
 
-export const slider: Slider = {
+export const slider = {
   enabled: {
     background: backgroundColorDefault,
     track: {
