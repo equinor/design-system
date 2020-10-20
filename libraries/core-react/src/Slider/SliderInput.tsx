@@ -1,5 +1,4 @@
 import React, { forwardRef, HTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 
@@ -134,11 +133,11 @@ type Props = {
   /* Slider value */
   value: number
   /* Change function , this is a controlled component */
-  onChange: () => void
+  onChange: (event: MouseEvent | KeyboardEvent) => void
   /* Mouse up handler */
-  onMouseUp: () => void
+  onMouseUp: (event: MouseEvent) => void
   /* Key up handler */
-  onKeyUp: () => void
+  onKeyUp: (event: KeyboardEvent) => void
   /* Min value */
   min: number
   /* Max value */
