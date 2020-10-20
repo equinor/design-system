@@ -155,16 +155,13 @@ type Props = {
   /** Id for the elements that labels this slider */
   ariaLabelledby: string
   /** Components value, range of numbers */
-  value: [number, number]
+  value: number[]
   /** Function to be called when value change */
-  onChange?: (
-    event: MouseEvent | KeyboardEvent,
-    newValue: [number, number],
-  ) => void
+  onChange?: (event: MouseEvent | KeyboardEvent, newValue: number[]) => void
   /* Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
     event: MouseEvent | KeyboardEvent,
-    sliderValue: [number, number],
+    sliderValue: number[],
   ) => void
   /** Function for formatting the output, e.g. with dates */
   outputFunction?: (text: string) => void
@@ -201,16 +198,12 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
 ) {
   const isRangeSlider = Array.isArray(value)
   const [sliderValue, setSliderValue] = useState(value)
-  const minRange = useRef()
-  const maxRange = useRef()
-  const onValueChange = (event, valueArrIdx) => {
+  const minRange = useRef<HTMLInputElement>(null)
+  const maxRange = useRef<HTMLInputElement>(null)
+  const onValueChange = (event, valueArrIdx?: number) => {
     const changedValue = parseInt(event.target.value, 10)
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
-      if (valueArrIdx === 0) {
-        newValue[0] = changedValue
-      }
-
       newValue[valueArrIdx] = changedValue
       setSliderValue(newValue)
       if (onChange) {
@@ -219,10 +212,11 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
       }
       return
     }
-    setSliderValue(changedValue)
+
+    setSliderValue([changedValue])
     if (onChange) {
       // Callback for provided onChange func
-      onChange(event, changedValue)
+      onChange(event, [changedValue])
     }
   }
   const handleKeyUp = (event) => {
@@ -248,8 +242,8 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
     const bounds = event.target.getBoundingClientRect()
     const x = event.clientX - bounds.left
     const inputWidth = minRange.current.offsetWidth
-    const minValue = minRange.current.value
-    const maxValue = maxRange.current.value
+    const minValue = parseInt(minRange.current.value)
+    const maxValue = parseInt(maxRange.current.value)
     const diff = max - min
 
     const normX = (x / inputWidth) * diff + min
@@ -257,11 +251,11 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
     const maxX = Math.abs(normX - maxValue)
     const minX = Math.abs(normX - minValue)
     if (minX > maxX) {
-      minRange.current.style.zIndex = 10
-      maxRange.current.style.zIndex = 20
+      minRange.current.style.zIndex = '10'
+      maxRange.current.style.zIndex = '20'
     } else {
-      minRange.current.style.zIndex = 20
-      maxRange.current.style.zIndex = 10
+      minRange.current.style.zIndex = '20'
+      maxRange.current.style.zIndex = '10'
     }
   }
 
@@ -287,7 +281,6 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
-            type="range"
             ref={minRange}
             value={sliderValue[0]}
             max={max}
@@ -307,7 +300,6 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
           <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
           <SliderInput
-            type="range"
             value={sliderValue[1]}
             min={min}
             max={max}
@@ -336,7 +328,6 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           disabled={disabled}
         >
           <SliderInput
-            type="range"
             value={sliderValue}
             min={min}
             max={max}
@@ -368,44 +359,3 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
 })
 
 Slider.displayName = 'eds-slider'
-
-Slider.propTypes = {
-  /** Id for the elements that labels this slider */
-  ariaLabelledby: PropTypes.string.isRequired,
-  /** Components value, string for slider, array for range */
-  value: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number),
-  ]).isRequired,
-  /** Function to be called when value change */
-  onChange: PropTypes.func,
-  /* Function to be called when value is committed by mouseup event */
-  onChangeCommitted: PropTypes.func,
-  /** Function for formatting the output, e.g. with dates */
-  outputFunction: PropTypes.func,
-  /** Max value */
-  max: PropTypes.number,
-  /**  Min value */
-  min: PropTypes.number,
-  /** Stepping interval */
-  step: PropTypes.number,
-  /** Show the min and max dots or not */
-  minMaxDots: PropTypes.bool,
-  /** Show the min and max values or not */
-  minMaxValues: PropTypes.bool,
-  /** Disabled */
-  disabled: PropTypes.bool,
-}
-
-Slider.defaultProps = {
-  /* Same as spec defaults */
-  step: 1,
-  min: 0,
-  max: 100,
-  onChange: undefined,
-  onChangeCommitted: undefined,
-  outputFunction: undefined,
-  minMaxDots: true,
-  minMaxValues: true,
-  disabled: false,
-}
