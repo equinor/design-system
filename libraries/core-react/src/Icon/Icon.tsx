@@ -19,7 +19,7 @@ type SvgProps = {
   rotation?: number
   title?: string
   role?: string
-  'aria-hidden'?: boolean
+  'aria-hidden'?: boolean | 'true' | 'false'
   'aria-labelledby'?: string
 }
 
@@ -63,7 +63,7 @@ type Props = {
   name?: Name
   /** Manually specify which icon data to use */
   data?: IconData
-}
+} & React.HTMLAttributes<SVGSVGElement>
 
 export const Icon = forwardRef<SVGSVGElement, Props>(function EdsIcon(
   {
@@ -113,7 +113,7 @@ export const Icon = forwardRef<SVGSVGElement, Props>(function EdsIcon(
       ...svgProps,
       title,
       role: 'img',
-      'aria-hidden': null,
+      'aria-hidden': undefined,
       'aria-labelledby': titleId,
     }
   }

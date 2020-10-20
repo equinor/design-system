@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react'
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -17,7 +16,7 @@ const StyledChips = styled(Chip)`
 
 const { active: activeToken, error } = tokens
 
-const rgbaTrim = (x) => x.split(' ').join('')
+const rgbaTrim = (x: string) => x.split(' ').join('')
 
 afterEach(cleanup)
 
@@ -64,8 +63,8 @@ describe('Chips', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
     let callbackId = ''
-    const handleDelete = jest.fn((x) => {
-      callbackId = x.target.parentElement.id
+    const handleDelete = jest.fn((x: React.MouseEvent<HTMLElement>) => {
+      callbackId = (x.target as HTMLElement).parentElement.id
     })
 
     const { queryAllByTitle } = render(
@@ -85,8 +84,8 @@ describe('Chips', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
     let callbackId = ''
-    const handleClick = jest.fn((x) => {
-      callbackId = x.target.id
+    const handleClick = jest.fn((x: React.MouseEvent<HTMLElement>) => {
+      callbackId = (x.target as HTMLElement).id
     })
 
     const { container } = render(
@@ -104,8 +103,8 @@ describe('Chips', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
     let callbackId = ''
-    const handleClick = jest.fn((x) => {
-      callbackId = x.target.id
+    const handleClick = jest.fn((x: React.MouseEvent<HTMLElement>) => {
+      callbackId = (x.target as HTMLElement).id
     })
 
     const { container } = render(
