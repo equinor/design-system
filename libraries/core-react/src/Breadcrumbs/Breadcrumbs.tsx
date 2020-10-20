@@ -38,8 +38,7 @@ const Collapsed = styled(Typography)`
 
 type Props = {
   /* Collapses the list of breadcrumbs so that only the first
-   * and last breadcrumb will be shown, with an ellipsis in between.
-   */
+   * and last breadcrumb will be shown, with an ellipsis in between.  */
   collapse?: boolean
 } & JSX.IntrinsicElements['nav']
 
