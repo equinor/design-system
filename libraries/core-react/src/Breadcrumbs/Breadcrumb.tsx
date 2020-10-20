@@ -28,8 +28,7 @@ const StyledTypography = styled(Typography)<StyledProps>`
 `
 
 type Props = {
-  /*
-   * Max label width in pixels,
+  /* Max label width in pixels,
    * truncate long labels based on this width */
   maxWidth?: number
   /* click handler function */
