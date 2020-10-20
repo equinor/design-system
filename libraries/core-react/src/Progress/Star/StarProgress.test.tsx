@@ -4,7 +4,7 @@ import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { StarProgress } from '..'
+import { StarProgress } from './StarProgress'
 
 const StyledProgress = styled(StarProgress)`
   position: absolute;

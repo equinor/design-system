@@ -4,8 +4,9 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { add } from '@equinor/eds-icons'
-import { Chip } from '.'
-import { Avatar, Icon } from '..'
+import { Chip } from './Chip'
+import { Avatar } from '../Avatar'
+import { Icon } from '../Icon'
 import { chip as tokens } from './Chip.tokens'
 
 Icon.add({ add })
