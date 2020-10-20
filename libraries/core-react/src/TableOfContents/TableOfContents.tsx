@@ -1,7 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { List, Typography } from '..'
-import type { ListType } from '../List'
 
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
@@ -26,12 +25,12 @@ const StyledTableOfContents = styled.nav<Props>`
     `}
 `
 
-const TocList = styled((props: ListType) => <List {...props} />)`
+const TocList = styled(List)`
   margin: 0;
   padding: 0;
 `
 
-const TocLabel = styled((props) => <Typography {...props} />)`
+const TocLabel = styled(Typography)`
   color: ${labelText.color};
 `
 
