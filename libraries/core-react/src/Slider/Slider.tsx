@@ -251,11 +251,11 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
     const maxX = Math.abs(normX - maxValue)
     const minX = Math.abs(normX - minValue)
     if (minX > maxX) {
-      minRange.current.style.zIndex = '10'
-      maxRange.current.style.zIndex = '20'
+      minRange.current.style.zIndex = 10
+      maxRange.current.style.zIndex = 20
     } else {
-      minRange.current.style.zIndex = '20'
-      maxRange.current.style.zIndex = '10'
+      minRange.current.style.zIndex = 20
+      maxRange.current.style.zIndex = 10
     }
   }
 
@@ -263,6 +263,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   const inputIdB = `${ariaLabelledby}-thumb-b`
   const inputId = `${ariaLabelledby}-thumb`
 
+  console.log(sliderValue)
   return (
     <>
       {isRangeSlider ? (

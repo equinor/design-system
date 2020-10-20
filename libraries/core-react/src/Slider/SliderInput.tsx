@@ -131,7 +131,7 @@ const StyledSliderInput = styled.input.attrs(() => ({
 
 type Props = {
   /* Slider value */
-  value: number[] | number
+  value: number
   /* Change function , this is a controlled component */
   onChange: (event: MouseEvent | KeyboardEvent) => void
   /* Mouse up handler */

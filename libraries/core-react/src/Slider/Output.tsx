@@ -29,7 +29,7 @@ const StyledOutput = styled.output<StyledProps>`
 
 type Props = {
   // Value
-  value: number[] | number
+  value: number
   // HtmlFor
   htmlFor: string
 } & JSX.IntrinsicElements['output']
