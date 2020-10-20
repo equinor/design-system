@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
@@ -14,9 +13,9 @@ const StyledLinkItem = styled.li`
   a {
     text-decoration: none;
     font-size: ${links.fontSize};
-    line-height: ${links.lineHeight};
+    line-height: ${links.fontLineHeight};
     padding: 10px 18px;
-    height: ${links.lineHeight};
+    height: ${links.fontLineHeight};
     width: calc(189px - 36px);
     display: block;
     position: relative;
@@ -57,7 +56,12 @@ const StyledLinkItem = styled.li`
     }
   }
 `
-const LinkItem = forwardRef(function EdsLinkItem({ children, ...props }, ref) {
+type Props = HTMLAttributes<HTMLLIElement>
+
+const LinkItem = forwardRef<HTMLLIElement, Props>(function EdsLinkItem(
+  { children, ...props },
+  ref,
+) {
   return (
     <StyledLinkItem {...props} ref={ref}>
       {children}
