@@ -33,7 +33,12 @@ const wrapperGrid = css`
   width: 100%;
   position: relative;
 `
-const RangeWrapper = styled.div`
+type RangeWrapperProps = {
+  valA: number
+  valB: number
+} & Pick<Props, 'min' | 'max' | 'disabled'>
+
+const RangeWrapper = styled.div<RangeWrapperProps>`
   --a: ${({ valA }) => valA};
   --b: ${({ valB }) => valB};
   --min: ${({ min }) => min};
@@ -73,9 +78,11 @@ const RangeWrapper = styled.div`
       background: ${enabled.track.indicator.hover.color};
     }
   }
- 
 `
-const Wrapper = styled.div`
+
+type WrapperProps = Pick<Props, 'min' | 'max' | 'disabled' | 'value'>
+
+const Wrapper = styled.div<WrapperProps>`
   --min: ${({ min }) => min};
   --max: ${({ max }) => max};
   --dif: calc(var(--max) - var(--min));
@@ -118,18 +125,18 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     width: ${enabled.dot.size};
     height: ${enabled.dot.size};
     background: ${enabled.background};
-    border: ${enabled.dot.border.width} ${enabled.dot.border.type}
-      ${enabled.dot.border.color};
+    border: (
+      ${enabled.dot.border.width} ${enabled.dot.border.type}
+        ${enabled.dot.border.color}
+    );
     border-radius: ${enabled.dot.border.radius};
     bottom: 8px;
-    left: 0;  
+    left: 0;
   }
   &:after {
     right: 0;
     left: auto;
   }
- 
-}
 `
 
 const SrOnlyLabel = styled.label`
