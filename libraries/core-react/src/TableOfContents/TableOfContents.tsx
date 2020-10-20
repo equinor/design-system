@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { List, Typography } from '..'
+import { List } from '../List'
+import { Typography } from '../Typography'
 
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
