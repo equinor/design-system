@@ -1,6 +1,10 @@
-// @ts-nocheck
-import React, { forwardRef, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, {
+  forwardRef,
+  useState,
+  ReactNode,
+  MouseEvent,
+  KeyboardEvent,
+} from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
@@ -22,7 +26,9 @@ const icons = {
 
 Icon.add(icons)
 
-const Navigation = styled.nav`
+type NavigationStyledProps = Pick<Props, 'withItemIndicator'>
+
+const Navigation = styled.nav<NavigationStyledProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,18 +67,35 @@ const Text = styled(Typography)`
   white-space: nowrap;
 `
 
-function getAriaLabel(page, selected) {
+function getAriaLabel(page: number, selected: number) {
   return `${selected === page ? 'Current page, ' : 'Go to '}page ${page}`
 }
 
-export const Pagination = forwardRef(function Pagination(
+type Props = {
+  // Number of total items to be paginated
+  totalItems: number
+  // To display total item count
+  withItemIndicator?: boolean
+  // Choose number of items per page
+  itemsPerPage?: number
+  // Callback fired on page change
+  onChange?: (event: MouseEvent | KeyboardEvent, page: number) => void
+  // Default start page
+  defaultPage?: number
+  // ClassName
+  className?: string
+  // Children
+  children?: ReactNode
+}
+
+export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
   {
     totalItems,
-    defaultPage,
+    defaultPage = 1,
     withItemIndicator,
-    itemsPerPage,
-    className,
+    itemsPerPage = 10,
     onChange,
+    className,
     ...other
   },
   ref,
@@ -87,11 +110,13 @@ export const Pagination = forwardRef(function Pagination(
   const currentItemLast =
     activePage === pages ? totalItems : activePage * itemsPerPage // Last number of range of items at current page
 
-  const onPageChange = (event, page) => {
-    setActivePage(page)
-    if (onChange) {
+  const onPageChange = (event: MouseEvent | KeyboardEvent, page: number) => {
+    page && setActivePage(page)
+    if (event && onChange) {
       // Callback for provided onChange func
       onChange(event, page)
+    } else {
+      return undefined
     }
   }
 
@@ -194,29 +219,3 @@ export const Pagination = forwardRef(function Pagination(
 })
 
 Pagination.displayName = 'eds-pagination'
-
-Pagination.propTypes = {
-  // Number of total items to be paginated
-  totalItems: PropTypes.number.isRequired,
-  // To display total item count
-  withItemIndicator: PropTypes.bool,
-  // Choose number of items per page
-  itemsPerPage: PropTypes.number,
-  // Callback fired on page change
-  onChange: PropTypes.func,
-  // Default start page
-  defaultPage: PropTypes.number,
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Pagination.defaultProps = {
-  className: '',
-  defaultPage: 1,
-  children: undefined,
-  withItemIndicator: false,
-  itemsPerPage: 10,
-  onChange: () => {},
-}
