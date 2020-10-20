@@ -7,7 +7,7 @@ import { Button } from '../Button'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { useCombinedRefs } from '../_common'
 
-import { popover as tokens } from './Popover.tokens'
+import { popover as tokens, Placement } from './Popover.tokens'
 
 type WrapperProps = {
   top: string | number
@@ -113,25 +113,27 @@ export const PopoverItem = forwardRef<HTMLDivElement, Props>(
     },
     ref,
   ) {
+    const placementToken: Placement = tokens.placement[placement]
+
     const wrapperProps = {
       ...rest,
       className,
-      right: tokens.placement[placement].popoverRight,
-      top: tokens.placement[placement].popoverTop,
-      bottom: tokens.placement[placement].popoverBottom,
-      left: tokens.placement[placement].popoverLeft,
-      transform: tokens.placement[placement].transform,
+      right: placementToken.popoverRight,
+      top: placementToken.popoverTop,
+      bottom: placementToken.popoverBottom,
+      left: placementToken.popoverLeft,
+      transform: placementToken.transform,
     }
 
     const arrowProps = {
-      left: tokens.placement[placement].arrowLeft,
-      right: tokens.placement[placement].arrowRight,
-      top: tokens.placement[placement].arrowTop,
-      bottom: tokens.placement[placement].arrowBottom,
+      left: placementToken.arrowLeft,
+      right: placementToken.arrowRight,
+      top: placementToken.arrowTop,
+      bottom: placementToken.arrowBottom,
     }
 
     const contRef = useRef<HTMLDivElement>(null)
-    const svgTransform = tokens.placement[placement].arrowTransform
+    const svgTransform = placementToken.arrowTransform
 
     const handleKeyboardClose = (event: KeyboardEvent) => {
       const popoverRef = contRef.current
