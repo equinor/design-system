@@ -36,7 +36,7 @@ const StyledPopoverWrapper = styled.div<WrapperProps>`
   }
 `
 
-const StyledPopover = styled((props) => <Card {...props} />)`
+const StyledPopover = styled(Card)`
   ${typographyTemplate(tokens.header)}
   ${spacingsTemplate(tokens.spacings)}
   background: ${tokens.background};
