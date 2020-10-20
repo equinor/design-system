@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { forwardRef, useState, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
@@ -38,13 +36,18 @@ const Collapsed = styled(Typography)`
   text-decoration: none;
 `
 
-export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  { className, children, collapse, ...rest },
+type Props = {
+  /* Collapses the list of breadcrumbs so that only the first
+   * and last breadcrumb will be shown, with an ellipsis in between.  */
+  collapse?: boolean
+} & JSX.IntrinsicElements['nav']
+
+export const Breadcrumbs = forwardRef<HTMLElement, Props>(function Breadcrumbs(
+  { children, collapse, ...rest },
   ref,
 ) {
   const props = {
     ...rest,
-    className,
     ref,
   }
 
@@ -103,20 +106,3 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
 })
 
 Breadcrumbs.displayName = 'eds-breadcrumbs'
-
-Breadcrumbs.propTypes = {
-  /*
-   * Collapses the list of breadcrumbs so that only the first
-   * and last breadcrumb will be shown, with an ellipsis in between.
-   */
-  collapse: PropTypes.bool,
-  // Breadcrumbs children
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-Breadcrumbs.defaultProps = {
-  className: '',
-  collapse: false,
-}
