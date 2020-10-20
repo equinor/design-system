@@ -1,12 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
 
 const { enabled } = tokens
 
-const StyledOutput = styled.output`
+type StyledProps = Pick<Props, 'value'>
+
+const StyledOutput = styled.output<StyledProps>`
   --val: ${({ value }) => value};
   --realWidth: calc(100% - 12px);
   width: fit-content;
@@ -26,17 +27,21 @@ const StyledOutput = styled.output`
   grid-column: 1 / -1;
 `
 
-export const Output = ({ children, value, htmlFor }) => {
+type Props = {
+  // Value
+  value: number
+  // HtmlFor
+  htmlFor: string
+} & JSX.IntrinsicElements['output']
+
+export const Output = forwardRef<HTMLOutputElement, Props>(function EdsMinMax({
+  children,
+  value,
+  htmlFor,
+}) {
   return (
     <StyledOutput value={value} htmlFor={htmlFor}>
       {children}
     </StyledOutput>
   )
-}
-
-Output.propTypes = {
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-  value: PropTypes.number.isRequired,
-  htmlFor: PropTypes.string.isRequired,
-}
+})
