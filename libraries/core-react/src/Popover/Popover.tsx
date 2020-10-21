@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, HTMLAttributes, ReactElement } from 'react'
+import React, { forwardRef, useRef, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { PopoverItem } from './PopoverItem'
 
@@ -15,7 +15,7 @@ const Anchor = styled.div`
 `
 type PopoverChild = {
   type?: { displayName?: string }
-} & ReactElement
+} & ReactNode
 
 export type Props = {
   /* Popover placement relative to anchor */
@@ -36,7 +36,6 @@ export type Props = {
   onClose?: () => void
   /**  Open activates <PopoverItem/> */
   open?: boolean
-  children?: PopoverChild | PopoverChild[]
 } & HTMLAttributes<HTMLDivElement>
 
 // Controller Component for PopoverItem
@@ -51,16 +50,16 @@ export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
   }
 
   const anchorRef = useRef<HTMLDivElement>(null)
-
+  const popoverChildren: PopoverChild | PopoverChild[] = children
   let anchorElement: PopoverChild
   const childArray = []
-  if (Array.isArray(children)) {
-    for (let i = 0; i < children.length; i += 1) {
+  if (Array.isArray(popoverChildren)) {
+    for (let i = 0; i < popoverChildren.length; i += 1) {
       /* 
       Find anchor element in children to wrap the element together with <PopoverItem/>.
       Children is required, but user has to wrap the actual anchor with <PopoverAnchor />
       */
-      const child = children[i] as PopoverChild
+      const child = popoverChildren[i] as PopoverChild
       if (child.type && child.type.displayName === 'eds-popover-anchor') {
         anchorElement = child
       } else {
@@ -69,11 +68,11 @@ export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
       }
     }
   } else if (
-    !Array.isArray(children) &&
-    children.type &&
-    children.type.displayName === 'eds-popover-anchor'
+    !Array.isArray(popoverChildren) &&
+    popoverChildren.type &&
+    popoverChildren.type.displayName === 'eds-popover-anchor'
   ) {
-    anchorElement = children
+    anchorElement = popoverChildren
   }
 
   if (open && anchorRef.current) {
