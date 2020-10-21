@@ -10,10 +10,8 @@ export const PopoverContent = forwardRef<HTMLDivElement, Props>(
   function EdsPopoverContent({ children, ...rest }, ref) {
     const props = {
       ...rest,
-
       ref,
     }
-
     return <ContentWrapper {...props}>{children}</ContentWrapper>
   },
 )
