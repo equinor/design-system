@@ -24,7 +24,7 @@ const StyledMinMax = styled.span`
 `
 
 type Props = {
-  // Children is required
+  /** Children is required */
   children: ReactNode
 } & JSX.IntrinsicElements['span']
 

@@ -164,7 +164,7 @@ export type Props = {
     event: MouseEvent | KeyboardEvent,
     newValue: SliderValueType,
   ) => void
-  /* Function to be called when value is committed by mouseup event */
+  /** Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
     event: MouseEvent | KeyboardEvent,
     newValue: SliderValueType,

@@ -139,21 +139,21 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
 `
 
 type Props = {
-  /* Slider value */
+  /** Slider value */
   value: number
-  /* Change function , this is a controlled component */
+  /** Change function , this is a controlled component */
   onChange: (event: MouseEvent | KeyboardEvent) => void
-  /* Mouse up handler */
+  /**  Mouse up handler */
   onMouseUp: (event: MouseEvent) => void
-  /* Key up handler */
+  /** Key up handler */
   onKeyUp: (event: KeyboardEvent) => void
-  /* Min value */
+  /** Min value */
   min: number
-  /* Max value */
+  /** Max value */
   max: number
-  /* Id for the input element */
+  /** Id for the input element */
   id: string
-  /* Step value */
+  /** Step value */
   step: number
   /** Disabled */
   disabled: boolean

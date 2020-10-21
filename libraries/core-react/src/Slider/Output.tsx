@@ -28,9 +28,9 @@ const StyledOutput = styled.output<StyledProps>`
 `
 
 type Props = {
-  // Value
+  /** Value */
   value: number
-  // HtmlFor
+  /** HtmlFor */
   htmlFor: string
 } & JSX.IntrinsicElements['output']
 
