@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, ReactElement } from 'react'
+import React, { forwardRef, useState, useEffect, ReactElement } from 'react'
 import type { AccordionProps } from './Accordion.types'
 
 type Props = {
@@ -51,6 +51,10 @@ const AccordionItem = forwardRef<HTMLDivElement, Props>(function AccordionItem(
           headerId,
         })
   })
+
+  useEffect(() => {
+    setExpanded(isExpanded)
+  }, [isExpanded])
 
   return (
     <div {...props} ref={ref}>
