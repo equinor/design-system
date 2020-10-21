@@ -10,8 +10,6 @@ import { useCombinedRefs } from '../_common'
 
 import { popover as tokens, Placement } from './Popover.tokens'
 
-Icon.add({ close })
-
 type WrapperProps = {
   top: string | number
   bottom: string | number
@@ -188,7 +186,7 @@ export const PopoverItem = forwardRef<HTMLDivElement, Props>(
           </PopoverArrow>
           {children}
           <StyledCloseButton onClick={onClose} variant="ghost_icon">
-            <Icon name="close" title="close" size={48} />
+            <Icon name="close" data={close} title="close" size={48} />
           </StyledCloseButton>
         </StyledPopover>
       </StyledPopoverWrapper>
