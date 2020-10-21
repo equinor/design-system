@@ -11,10 +11,7 @@ const getUnixTime = (iso) => {
   return new Date(iso).getTime()
 }
 
-const DateSlider = <HTMLDivElement, Props>({
-  value,
-  ariaLabelledby = 'date-range-slider',
-}) => {
+const DateSlider = ({ value, ariaLabelledby = 'date-range-slider' }: Props) => {
   function outputFunction(val) {
     const date = new Date(parseInt(val, 10))
     // The test node server doesn't have full i18n capabilities, using english is the easiest
