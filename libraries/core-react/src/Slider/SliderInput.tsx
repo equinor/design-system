@@ -12,10 +12,9 @@ const track = css`
 `
 
 const thumb = css`
-  border: (
-    ${enabled.handle.border.width} ${enabled.handle.border.type}
-      ${enabled.handle.border.color}
-  );
+  border: ${enabled.handle.border.width} ${enabled.handle.border.type}
+    ${enabled.handle.border.color};
+
   height: ${enabled.handle.size};
   width: ${enabled.handle.size};
   border-radius: ${enabled.handle.border.radius};

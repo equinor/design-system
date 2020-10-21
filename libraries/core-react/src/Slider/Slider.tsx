@@ -233,7 +233,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
 
   const handleCommitedValue = (event) => {
     if (onChangeCommitted) {
-      onChangeCommitted(event, sliderValue[1])
+      onChangeCommitted(event, sliderValue as number[])
     }
   }
 
