@@ -1,13 +1,21 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { card as tokens } from './Card.tokens'
 import { spacingsTemplate } from '../_common/templates'
 
 const { spacings, shape } = tokens
 
-const StyledCard = styled.div`
+type StyledCardProps = {
+  background: string
+  cursor: string
+} & React.HTMLAttributes<HTMLDivElement>
+
+type Props = {
+  /** Variant */
+  variant?: 'default' | 'info' | 'warning' | 'danger'
+} & React.HTMLAttributes<HTMLDivElement>
+
+const StyledCard = styled.div<StyledCardProps>`
   height: fit-content;
   width: 100%;
   min-width: ${shape.minWidth};
@@ -26,8 +34,8 @@ const StyledCard = styled.div`
   ${spacingsTemplate(spacings)}
 `
 
-export const Card = forwardRef(function EdsCard(
-  { children, className, variant, onClick, ...rest },
+export const Card = forwardRef<HTMLDivElement, Props>(function EdsCard(
+  { children, className, variant = 'default', onClick, ...rest },
   ref,
 ) {
   const cursor = onClick ? 'pointer' : 'default'
@@ -48,21 +56,3 @@ export const Card = forwardRef(function EdsCard(
 })
 
 Card.displayName = 'eds-card'
-
-Card.propTypes = {
-  // Background color:
-  variant: PropTypes.oneOf(['default', 'info', 'warning', 'danger']),
-  // Onclick function (for clickable cards)
-  onClick: PropTypes.func,
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node,
-}
-
-Card.defaultProps = {
-  variant: 'default',
-  onClick: undefined,
-  className: '',
-  children: undefined,
-}

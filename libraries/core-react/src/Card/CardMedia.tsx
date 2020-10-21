@@ -1,11 +1,14 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
-const StyledCardMedia = styled.div`
+type Props = {
+  fullWidth?: boolean
+  spacing?: typeof tokens.spacings.left
+} & React.HTMLAttributes<HTMLDivElement>
+
+const StyledCardMedia = styled.div<Props>`
   display: flex;
   width: 100%;
   &:last-child {
@@ -36,34 +39,21 @@ const StyledCardMedia = styled.div`
         `}
 `
 
-export const CardMedia = forwardRef(function EdsCardMedia(
-  { children, className, fullWidth, ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    className,
+export const CardMedia = forwardRef<HTMLDivElement, Props>(
+  function EdsCardMedia(
+    { children, className = '', fullWidth = false, ...rest },
     ref,
-    fullWidth,
-    spacing: tokens.spacings.left,
-  }
+  ) {
+    const props = {
+      ...rest,
+      className,
+      ref,
+      fullWidth,
+      spacing: tokens.spacings.left,
+    }
 
-  return <StyledCardMedia {...props}>{children}</StyledCardMedia>
-})
+    return <StyledCardMedia {...props}>{children}</StyledCardMedia>
+  },
+)
 
 CardMedia.displayName = 'eds-card-media'
-
-CardMedia.propTypes = {
-  // Full width ignores Card padding
-  fullWidth: PropTypes.bool,
-  /** @ignore */
-  children: PropTypes.node,
-  /** @ignore */
-  className: PropTypes.string,
-}
-
-CardMedia.defaultProps = {
-  fullWidth: false,
-  className: '',
-  children: undefined,
-}

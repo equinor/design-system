@@ -1,9 +1,17 @@
-// @ts-nocheck
-import { Card } from './Card'
+import { Card as CardWrapper } from './Card'
 import { CardActions } from './CardActions'
 import { CardMedia } from './CardMedia'
 import { CardHeader } from './CardHeader'
 import { CardHeaderTitle } from './CardHeaderTitle'
+
+type CardType = typeof CardWrapper & {
+  CardActions: typeof CardActions
+  CardHeader: typeof CardHeader
+  CardMedia: typeof CardMedia
+  CardHeaderTitle: typeof CardHeaderTitle
+}
+
+const Card = CardWrapper as CardType
 
 Card.CardActions = CardActions
 Card.CardHeader = CardHeader

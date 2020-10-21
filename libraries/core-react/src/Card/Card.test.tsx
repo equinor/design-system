@@ -1,10 +1,9 @@
-/* eslint-disable no-undef */
 import React from 'react'
 import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { Typography } from '..'
+import { Typography } from '../Typography'
 
 import { Card } from '.'
 
