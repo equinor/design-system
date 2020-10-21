@@ -268,7 +268,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   const inputIdA = `${ariaLabelledby}-thumb-a`
   const inputIdB = `${ariaLabelledby}-thumb-b`
   const inputId = `${ariaLabelledby}-thumb`
-  console.log('slidervalue', sliderValue)
+
   return (
     <>
       {isRangeSlider ? (
