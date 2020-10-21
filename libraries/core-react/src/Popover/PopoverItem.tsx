@@ -70,7 +70,7 @@ const PopoverArrow = styled.svg<ArrowProps>`
   filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
 `
 
-const StyledCloseButton = styled((props) => <Button {...props} />)`
+const StyledCloseButton = styled(Button)`
   position: absolute;
   top: 8px;
   right: 16px;
