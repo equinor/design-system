@@ -4,10 +4,13 @@ import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { Card } from '../Card'
 import { Button } from '../Button'
+import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { useCombinedRefs } from '../_common'
 
 import { popover as tokens, Placement } from './Popover.tokens'
+
+Icon.add({ close })
 
 type WrapperProps = {
   top: string | number
