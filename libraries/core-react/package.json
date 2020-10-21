@@ -2,10 +2,13 @@
   "name": "@equinor/eds-core-react",
   "version": "0.6.2",
   "description": "The React implementation of the Equinor Design System",
-  "main": "dist/core-react.cjs.js",
-  "module": "dist/core-react.es.js",
-  "browser": "dist/core-react.umd.js",
-  "types": "dist/types/index.d.ts",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/core-react.cjs.js",
+    "module": "dist/core-react.es.js",
+    "browser": "dist/core-react.umd.js",
+    "types": "dist/types/index.d.ts"
+  },
   "license": "AGPL-3.0-or-later",
   "author": {
     "name": "EDS Core Team",
@@ -26,8 +29,8 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
-    "build:for-storybook": "rollup -c --environment STORYBOOK",
-    "dev": "rollup -c -w --environment STORYBOOK",
+    "build:for-storybook": "rollup -c",
+    "dev": "rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -81,6 +84,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "@testing-library/react-hooks": "^3.3.0",
     "@types/lodash": "^4.14.162",
+    "babel-plugin-react-docgen-typescript": "^1.5.1",
     "csstype": "^3.0.3",
     "focus-visible": "^5.1.0",
     "lodash": "^4.17.19"
