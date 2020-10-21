@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tabPanel as tokens } from './Tabs.tokens'
 
@@ -12,10 +10,12 @@ const {
   },
 } = tokens
 
-const StyledTabPanel = styled.div.attrs(() => ({
-  tabIndex: 0,
-  role: 'tabpanel',
-}))({
+const StyledTabPanel = styled.div.attrs(
+  (): React.HTMLAttributes<HTMLDivElement> => ({
+    tabIndex: 0,
+    role: 'tabpanel',
+  }),
+)({
   paddingTop,
   paddingBottom,
   outline: 'none',
@@ -25,26 +25,20 @@ const StyledTabPanel = styled.div.attrs(() => ({
   },
 })
 
-const TabPanel = forwardRef(function TabPanel({ ...props }, ref) {
+type Props = {
+  /** If `true`, the panel will be hidden. */
+  hidden?: boolean
+} & React.HTMLAttributes<HTMLDivElement>
+
+const TabPanel = forwardRef<HTMLDivElement, Props>(function TabPanel(
+  { ...props },
+  ref,
+) {
   return (
     <StyledTabPanel ref={ref} {...props}>
       {props.children}
     </StyledTabPanel>
   )
 })
-
-TabPanel.propTypes = {
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-  /** @ignore */
-  className: PropTypes.string,
-  /** If `true`, the panel will be hidden. */
-  hidden: PropTypes.bool,
-}
-
-TabPanel.defaultProps = {
-  className: null,
-  hidden: null,
-}
 
 export { TabPanel }

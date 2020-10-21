@@ -8,13 +8,13 @@ import { Tabs } from '.'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
-const noop = () => {}
+const noop = () => null
 
 afterEach(cleanup)
 
 const TabsWithRefs = () => {
-  const activeRef = useRef(null)
-  const inactiveRef = useRef(null)
+  const activeRef = useRef<HTMLButtonElement>(null)
+  const inactiveRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     activeRef.current.textContent = 'Active tab'
@@ -32,7 +32,7 @@ const TabsWithRefs = () => {
   )
 }
 
-const TabsWithPanels = ({ selectedTabIndex }) => {
+const TabsWithPanels = ({ selectedTabIndex = 0 }) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
 
   const handleChange = (index) => {

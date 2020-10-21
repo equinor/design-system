@@ -82,7 +82,7 @@ const StyledTab = styled.button.attrs<Props>(
   }
 `
 
-type Props = {
+export type Props = {
   /** If `true`, the tab will be active. */
   active?: boolean
   /** If `true`, the tab will be disabled. */

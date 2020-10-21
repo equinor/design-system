@@ -1,9 +1,17 @@
-// @ts-nocheck
-import React, { createContext } from 'react'
+import { createContext } from 'react'
+import { Variants } from './Tabs.types'
 
-const TabsContext = createContext({
-  variant: '',
-  handleChange: () => {},
+type State = {
+  variant: Variants
+  handleChange: (index: number) => void
+  activeTab: number
+  tabsId: string
+  tabsFocused: boolean
+}
+
+const TabsContext = createContext<State>({
+  variant: 'minWidth',
+  handleChange: () => null,
   activeTab: 0,
   tabsId: '',
   tabsFocused: false,

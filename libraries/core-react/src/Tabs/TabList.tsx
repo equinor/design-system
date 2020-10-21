@@ -4,13 +4,12 @@ import React, {
   useRef,
   useCallback,
   useEffect,
+  ReactElement,
 } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
 import { TabsContext } from './Tabs.context'
-
-type Variants = 'fullWidth' | 'minWidth'
+import { Variants } from './Tabs.types'
 
 type VariantsRecord = {
   fullWidth: string
@@ -22,11 +21,13 @@ const variants: VariantsRecord = {
   minWidth: 'max-content',
 }
 
-type StyledProps = Pick<Props, 'variant'>
+type StyledProps = Props
 
-const StyledTabList = styled.div.attrs(() => ({
-  role: 'tablist',
-}))<StyledProps>`
+const StyledTabList = styled.div.attrs(
+  (): React.HTMLAttributes<HTMLDivElement> => ({
+    role: 'tablist',
+  }),
+)<StyledProps>`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: ${({ variant }) => variants[variant]};
@@ -34,8 +35,10 @@ const StyledTabList = styled.div.attrs(() => ({
 
 type Props = {
   /** Sets the width of the tabs */
-  variant: Variants
+  variant?: Variants
 } & React.HTMLAttributes<HTMLDivElement>
+
+type TabChild = JSX.IntrinsicElements['button'] & ReactElement
 
 const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
   { children, ...props },
@@ -64,7 +67,7 @@ const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
     currentTab.current = activeTab
   }, [activeTab])
 
-  const Tabs = React.Children.map(children, (child, index) => {
+  const Tabs = React.Children.map(children, (child: TabChild, index) => {
     const tabRef =
       index === activeTab
         ? useCombinedRefs(child.ref, selectedTabRef)
@@ -80,9 +83,10 @@ const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
     })
   })
 
-  const focusableChildren = Tabs.filter((child) => !child.props.disabled).map(
-    (child) => child.props.index,
-  )
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const focusableChildren: number[] = Tabs.filter(
+    (child) => !child.props.disabled,
+  ).map((child) => child.props.index)
 
   const firstFocusableChild = focusableChildren[0]
   const lastFocusableChild = focusableChildren[focusableChildren.length - 1]
@@ -94,7 +98,7 @@ const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
     handleChange(nextTab === undefined ? fallbackTab : nextTab)
   }
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const { key } = event
     if (key === 'ArrowLeft') {
       handleTabsChange('left', lastFocusableChild)
@@ -115,22 +119,5 @@ const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
     </StyledTabList>
   )
 })
-
-TabList.propTypes = {
-  /** @ignore */
-  className: PropTypes.string,
-  /** Sets the width of the tabs */
-  variant: PropTypes.oneOf(['fullWidth', 'minWidth']),
-  /** @ignore */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]).isRequired,
-}
-
-TabList.defaultProps = {
-  className: null,
-  variant: 'minWidth',
-}
 
 export { TabList }
