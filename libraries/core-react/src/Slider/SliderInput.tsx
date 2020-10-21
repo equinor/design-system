@@ -2,7 +2,13 @@ import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 
-const { enabled, disabled: _disabled } = tokens
+const {
+  enabled,
+  disabled: _disabled,
+  enabled: {
+    handle: { border: borderProps },
+  },
+} = tokens
 
 const track = css`
   width: 100%;
@@ -12,17 +18,16 @@ const track = css`
 `
 
 const thumb = css`
-  border: ${enabled.handle.border.width} ${enabled.handle.border.type}
-    ${enabled.handle.border.color};
-
+  border: ${borderProps.width} ${borderProps.type} ${borderProps.color};
   height: ${enabled.handle.size};
   width: ${enabled.handle.size};
-  border-radius: ${enabled.handle.border.radius};
+  border-radius: ${borderProps.radius};
   background: ${enabled.handle.background};
   cursor: pointer;
   position: relative;
   z-index: 1;
 `
+
 const thumbHover = css`
   box-shadow: 0px 0px 0px 6px ${enabled.handle.hover.background};
   border-color: ${enabled.handle.hover.border.color};
