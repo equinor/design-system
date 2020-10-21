@@ -150,18 +150,18 @@ const SrOnlyLabel = styled.label`
   white-space: nowrap;
   border-width: 0;
 `
-
+type SliderValue = number[] | number
 type Props = {
   /** Id for the elements that labels this slider */
   ariaLabelledby: string
   /** Components value, range of numbers */
-  value: number[]
+  value: SliderValue
   /** Function to be called when value change */
-  onChange?: (event: MouseEvent | KeyboardEvent, newValue: number[]) => void
+  onChange?: (event: MouseEvent | KeyboardEvent, newValue: SliderValue) => void
   /* Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
     event: MouseEvent | KeyboardEvent,
-    sliderValue: number[],
+    sliderValue: SliderValue,
   ) => void
   /** Function for formatting the output, e.g. with dates */
   outputFunction?: (text: string) => void
@@ -203,7 +203,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   const onValueChange = (event, valueArrIdx?: number) => {
     const changedValue = parseInt(event.target.value, 10)
     if (isRangeSlider) {
-      const newValue = sliderValue.slice()
+      const newValue = (sliderValue as number[]).slice()
       newValue[valueArrIdx] = changedValue
       setSliderValue(newValue)
       if (onChange) {
@@ -281,6 +281,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
+            type="range"
             ref={minRange}
             value={sliderValue[0]}
             max={max}
@@ -300,6 +301,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
           <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
           <SliderInput
+            type="range"
             value={sliderValue[1]}
             min={min}
             max={max}
@@ -328,6 +330,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           disabled={disabled}
         >
           <SliderInput
+            type="range"
             value={sliderValue[0]}
             min={min}
             max={max}

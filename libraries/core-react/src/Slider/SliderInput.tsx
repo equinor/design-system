@@ -38,7 +38,12 @@ const thumbDisabled = css`
   background-color: ${_disabled.background};
   border-color: ${_disabled.border.color};
 `
-const StyledSliderInput = styled.input.attrs(() => ({
+
+type SliderInput = {
+  type: string
+}
+
+const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
   type: 'range',
 }))`
   &::-webkit-slider-runnable-track,
@@ -148,7 +153,7 @@ type Props = {
   step: number
   /** Disabled */
   disabled: boolean
-} & HTMLAttributes<HTMLInputElement>
+} & JSX.IntrinsicElements['input']
 
 export const SliderInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const {
