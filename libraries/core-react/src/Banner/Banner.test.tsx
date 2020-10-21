@@ -18,7 +18,7 @@ const StyledBanner = styled(Banner)`
 
 const { enabled } = tokens
 
-const rgbaTrim = (x) => x.split(' ').join('')
+const rgbaTrim = (x: string) => x.split(' ').join('')
 
 afterEach(cleanup)
 

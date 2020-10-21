@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
-import { Typography  } from '../Typography'
+import { Typography } from '../Typography'
 import { Props as TypographyProps } from '../Typography/Typography'
 
 const StyledBannerMessage = styled(Typography)``
@@ -8,9 +8,9 @@ const StyledBannerMessage = styled(Typography)``
 type Props = {
   /** Text content */
   children: string
-} & Omit<TypographyProps,'children'>
+} & Omit<TypographyProps, 'children'>
 
-export const BannerMessage = ({ children, ...props }: Props) => {
+export const BannerMessage: FC<Props> = ({ children, ...props }) => {
   return (
     <StyledBannerMessage variant="body_long" {...props}>
       {children}
