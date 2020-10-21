@@ -1,5 +1,4 @@
 import React, { forwardRef, useState, useRef } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
