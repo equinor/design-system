@@ -343,7 +343,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
             step={step}
             id={inputId}
             onChange={(event) => {
-              onValueChange(event, 1)
+              onValueChange(event)
             }}
             disabled={disabled}
             aria-labelledby={ariaLabelledby}
