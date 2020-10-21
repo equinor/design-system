@@ -197,7 +197,9 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   ref,
 ) {
   const isRangeSlider = Array.isArray(value)
-  const [sliderValue, setSliderValue] = useState(value)
+  const [sliderValue, setSliderValue] = isRangeSlider
+    ? useState(value)
+    : useState([min, value])
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
   const onValueChange = (event, valueArrIdx?: number) => {
@@ -242,14 +244,14 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
     const bounds = event.target.getBoundingClientRect()
     const x = event.clientX - bounds.left
     const inputWidth = minRange.current.offsetWidth
-    const minValue = parseInt(minRange.current.value)
-    const maxValue = parseInt(maxRange.current.value)
+    const minValue = minRange.current.value
+    const maxValue = maxRange.current.value
     const diff = max - min
 
     const normX = (x / inputWidth) * diff + min
 
-    const maxX = Math.abs(normX - maxValue)
-    const minX = Math.abs(normX - minValue)
+    const maxX = Math.abs(normX - parseInt(maxValue))
+    const minX = Math.abs(normX - parseInt(minValue))
     if (minX > maxX) {
       minRange.current.style.zIndex = '10'
       maxRange.current.style.zIndex = '20'
@@ -262,6 +264,8 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   const inputIdA = `${ariaLabelledby}-thumb-a`
   const inputIdB = `${ariaLabelledby}-thumb-b`
   const inputId = `${ariaLabelledby}-thumb`
+
+  console.log('slidervalue', sliderValue)
 
   return (
     <>
@@ -331,7 +335,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
         >
           <SliderInput
             type="range"
-            value={sliderValue[0]}
+            value={sliderValue[1]}
             min={min}
             max={max}
             step={step}
@@ -344,8 +348,8 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
             onMouseUp={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
           />
-          <Output htmlFor={inputId} value={sliderValue[0]}>
-            {getFormattedText(sliderValue)}
+          <Output htmlFor={inputId} value={sliderValue[1]}>
+            {getFormattedText(sliderValue[1])}
           </Output>
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}

@@ -28,8 +28,9 @@ type Props = {
   children: ReactNode
 } & JSX.IntrinsicElements['span']
 
-export const MinMax = forwardRef<HTMLSpanElement, Props>(function EdsMinMax({
-  children,
-}) {
-  return <StyledMinMax>{children}</StyledMinMax>
+export const MinMax = forwardRef<HTMLSpanElement, Props>(function EdsMinMax(
+  { children },
+  ref,
+) {
+  return <StyledMinMax ref={ref}>{children}</StyledMinMax>
 })

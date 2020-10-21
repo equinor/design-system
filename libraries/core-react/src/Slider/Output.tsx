@@ -34,13 +34,12 @@ type Props = {
   htmlFor: string
 } & JSX.IntrinsicElements['output']
 
-export const Output = forwardRef<HTMLOutputElement, Props>(function EdsMinMax({
-  children,
-  value,
-  htmlFor,
-}) {
+export const Output = forwardRef<HTMLOutputElement, Props>(function EdsMinMax(
+  { children, value, htmlFor },
+  ref,
+) {
   return (
-    <StyledOutput value={value} htmlFor={htmlFor}>
+    <StyledOutput ref={ref} value={value} htmlFor={htmlFor}>
       {children}
     </StyledOutput>
   )
