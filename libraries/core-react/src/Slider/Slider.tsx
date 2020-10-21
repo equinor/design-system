@@ -152,7 +152,7 @@ const SrOnlyLabel = styled.label`
 `
 type SliderValueType = number[] | number
 
-type Props = {
+export type Props = {
   /** Id for the elements that labels this slider */
   ariaLabelledby: string
   /** Components value, range of numbers */
