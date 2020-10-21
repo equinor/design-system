@@ -5,7 +5,13 @@ import { MinMax } from './MinMax'
 import { Output } from './Output'
 import { SliderInput } from './SliderInput'
 
-const { enabled, disabled: _disabled } = tokens
+const {
+  enabled,
+  disabled: _disabled,
+  enabled: {
+    dot: { border: borderToken },
+  },
+} = tokens
 
 const fakeTrackBg = css`
     background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.background}' width='100%' height='4' rx='2' /></svg>");
@@ -124,11 +130,8 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     width: ${enabled.dot.size};
     height: ${enabled.dot.size};
     background: ${enabled.background};
-    border: (
-      ${enabled.dot.border.width} ${enabled.dot.border.type}
-        ${enabled.dot.border.color}
-    );
-    border-radius: ${enabled.dot.border.radius};
+    border: ${borderToken.width} ${borderToken.type} ${borderToken.color};
+    border-radius: ${borderToken.radius};
     bottom: 8px;
     left: 0;
   }
