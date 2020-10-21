@@ -150,18 +150,22 @@ const SrOnlyLabel = styled.label`
   white-space: nowrap;
   border-width: 0;
 `
-type SliderValue = number[] | number
+type SliderValueType = number[] | number
+
 type Props = {
   /** Id for the elements that labels this slider */
   ariaLabelledby: string
   /** Components value, range of numbers */
-  value: SliderValue
+  value: SliderValueType
   /** Function to be called when value change */
-  onChange?: (event: MouseEvent | KeyboardEvent, newValue: SliderValue) => void
+  onChange?: (
+    event: MouseEvent | KeyboardEvent,
+    newValue: SliderValueType,
+  ) => void
   /* Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
     event: MouseEvent | KeyboardEvent,
-    sliderValue: SliderValue,
+    newValue: SliderValueType,
   ) => void
   /** Function for formatting the output, e.g. with dates */
   outputFunction?: (text: string) => void
@@ -199,7 +203,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   const isRangeSlider = Array.isArray(value)
   const [sliderValue, setSliderValue] = isRangeSlider
     ? useState(value)
-    : useState([min, value])
+    : useState([value])
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
   const onValueChange = (event, valueArrIdx?: number) => {
@@ -229,7 +233,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
 
   const handleCommitedValue = (event) => {
     if (onChangeCommitted) {
-      onChangeCommitted(event, sliderValue)
+      onChangeCommitted(event, sliderValue[1])
     }
   }
 
@@ -264,9 +268,7 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   const inputIdA = `${ariaLabelledby}-thumb-a`
   const inputIdB = `${ariaLabelledby}-thumb-b`
   const inputId = `${ariaLabelledby}-thumb`
-
   console.log('slidervalue', sliderValue)
-
   return (
     <>
       {isRangeSlider ? (
@@ -330,26 +332,26 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
           ref={ref}
           max={max}
           min={min}
-          value={sliderValue}
+          value={sliderValue[0]}
           disabled={disabled}
         >
           <SliderInput
             type="range"
-            value={sliderValue[1]}
+            value={sliderValue[0]}
             min={min}
             max={max}
             step={step}
             id={inputId}
             onChange={(event) => {
-              onValueChange(event)
+              onValueChange(event, 1)
             }}
             disabled={disabled}
             aria-labelledby={ariaLabelledby}
             onMouseUp={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
           />
-          <Output htmlFor={inputId} value={sliderValue[1]}>
-            {getFormattedText(sliderValue[1])}
+          <Output htmlFor={inputId} value={sliderValue[0]}>
+            {getFormattedText(sliderValue[0])}
           </Output>
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
