@@ -1,6 +1,13 @@
-import React, { forwardRef, useRef, HTMLAttributes, ReactNode } from 'react'
+import React, {
+  forwardRef,
+  useRef,
+  HTMLAttributes,
+  ReactNode,
+  isValidElement,
+} from 'react'
 import styled from 'styled-components'
 import { PopoverItem } from './PopoverItem'
+import { PopoverAnchor } from './PopoverAnchor'
 
 const Container = styled.div`
   position: relative;
@@ -13,9 +20,10 @@ const Anchor = styled.div`
     outline: none;
   }
 `
-type PopoverChild = {
-  type?: { displayName?: string }
-} & ReactNode
+type PopoverSplit = {
+  anchorElement: ReactNode
+  childArray: ReactNode[]
+}
 
 export type Props = {
   /* Popover placement relative to anchor */
@@ -52,30 +60,22 @@ export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
     return <Container {...props} />
   }
   const anchorRef = useRef<HTMLDivElement>(null)
-  const popoverChildren: PopoverChild | PopoverChild[] = children
-  let anchorElement: PopoverChild
-  const childArray = []
-  if (Array.isArray(popoverChildren)) {
-    for (let i = 0; i < popoverChildren.length; i += 1) {
-      /* 
-      Find anchor element in children to wrap the element together with <PopoverItem/>.
-      Children is required, but user has to wrap the actual anchor with <PopoverAnchor />
-      */
-      const child = popoverChildren[i] as PopoverChild
-      if (child.type && child.type.displayName === 'eds-popover-anchor') {
-        anchorElement = child
-      } else {
-        // Add the remaining children to a new array to display inside <PopoverItem/>
-        childArray.push(child)
+
+  const { anchorElement, childArray } = React.Children.toArray(children).reduce(
+    (acc: PopoverSplit, child): PopoverSplit => {
+      if (isValidElement(child) && child.type === PopoverAnchor) {
+        return {
+          anchorElement: child,
+          childArray: acc.childArray,
+        }
       }
-    }
-  } else if (
-    !Array.isArray(popoverChildren) &&
-    popoverChildren.type &&
-    popoverChildren.type.displayName === 'eds-popover-anchor'
-  ) {
-    anchorElement = popoverChildren
-  }
+      return {
+        childArray: [...acc.childArray, child],
+        anchorElement: acc.anchorElement,
+      }
+    },
+    { anchorElement: null, childArray: [] },
+  )
 
   if (open && anchorRef.current) {
     anchorRef.current.focus()
