@@ -5,6 +5,6 @@
     "declarationDir": "./dist/types",
     "outDir": "./dist"
   },
-  "include": ["index.ts"],
+  "include": ["./src/**/*.ts*"],
   "exclude": ["node_modules"]
 }
