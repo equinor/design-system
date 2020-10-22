@@ -68,7 +68,8 @@ export const Examples = () => {
         />
         <p style={{ marginTop: '1.5rem' }}>
           <small>
-            Committed output from slider is {valueTwoCommited.join(', ')}
+            Committed output from slider is{' '}
+            {valueTwoCommited && valueTwoCommited.join(', ')}
           </small>
         </p>
       </div>
