@@ -48,7 +48,9 @@ export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
     placement,
     ref,
   }
-
+  if (!children) {
+    return <Container {...props} />
+  }
   const anchorRef = useRef<HTMLDivElement>(null)
   const popoverChildren: PopoverChild | PopoverChild[] = children
   let anchorElement: PopoverChild

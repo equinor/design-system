@@ -83,3 +83,45 @@ describe('Popover', () => {
     expect(popover).toHaveStyleRule('width', '100px')
   })
 })
+it("Doesn't crash if no children is provided to Popover component", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(<Popover placement={placement} />)
+  expect(queryByText(placement)).toBeDefined()
+})
+it("Doesn't crash if Popover anchor is missing content", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(
+    <Popover placement={placement}>
+      <PopoverAnchor />
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverContent>Content</PopoverContent>
+    </Popover>,
+  )
+  expect(queryByText(placement)).toBeDefined()
+})
+it("Doesn't crash if no children is provided to Popover content", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(
+    <Popover placement={placement}>
+      <PopoverAnchor>
+        <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
+      </PopoverAnchor>
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverContent />
+    </Popover>,
+  )
+  expect(queryByText(placement)).toBeDefined()
+})
+it("Doesn't crash if title is missing", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(
+    <Popover placement={placement}>
+      <PopoverAnchor>
+        <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
+      </PopoverAnchor>
+      <PopoverTitle />
+      <PopoverContent>Content</PopoverContent>
+    </Popover>,
+  )
+  expect(queryByText(placement)).toBeDefined()
+})
