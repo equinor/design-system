@@ -6,6 +6,7 @@
   "main": "dist/icons.esm.js",
   "module": "dist/icons.esm.js",
   "browser": "dist/icons.umd.js",
+  "types": "dist/types/index.d.ts",
   "license": "Apache-2.0",
   "author": {
     "name": "EDS Core Team",
