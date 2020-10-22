@@ -30,4 +30,4 @@ export const Actions = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-Actions.displayName = 'EdsDialogActions'
+// Actions.displayName = 'EdsDialogActions'

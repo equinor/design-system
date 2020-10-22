@@ -108,6 +108,6 @@ const HelperText = React.forwardRef<HTMLDivElement, Props>(
   },
 )
 
-HelperText.displayName = 'eds-text-field-helperText'
+// HelperText.displayName = 'eds-text-field-helperText'
 
 export { HelperText }

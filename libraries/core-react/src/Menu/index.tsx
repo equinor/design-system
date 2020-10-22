@@ -20,6 +20,6 @@ const Menu = MenuWrapper as MenuType
 Menu.MenuItem = MenuItem
 Menu.MenuSection = MenuSection
 
-Menu.displayName = BaseMenu.displayName
+// Menu.displayName = BaseMenu.displayName
 
 export { Menu }

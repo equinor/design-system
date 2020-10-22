@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef } from 'react'
 
-type Props = {
+export type OtherComponentProps = {
   background?: string
 } & React.HTMLAttributes<HTMLDivElement>
 
@@ -9,7 +9,7 @@ type Props = {
  * This is the Component description
  */
 
-export const OtherComponent = forwardRef<HTMLDivElement, Props>(
+export const OtherComponent = forwardRef<HTMLDivElement, OtherComponentProps>(
   function EdsOtherComponent({ children, background = 'orange' }, ref) {
     return (
       <div style={{ background }} ref={ref}>

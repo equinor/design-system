@@ -5,7 +5,7 @@ import type { AccordionProps } from './Accordion.types'
 const Accordion = forwardRef<
   HTMLDivElement,
   AccordionProps & JSX.IntrinsicElements['div']
->(function Accordion(
+>(function EdsAccordion(
   { headerLevel = 'h2', chevronPosition = 'left', children, ...props },
   ref,
 ) {
@@ -27,6 +27,6 @@ const Accordion = forwardRef<
   )
 })
 
-// Accordion.displayName = 'eds-accordion'
+// Accordion.displayName = 'Accordion'
 
 export { Accordion }

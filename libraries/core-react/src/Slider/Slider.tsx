@@ -16,7 +16,7 @@ const {
 const fakeTrackBg = css`
     background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.background}' width='100%' height='4' rx='2' /></svg>");
     background-size: cover;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
 `
 const fakeTrackBgHover = css`
     background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.hover.background}' width='100%' height='4' rx='2' /></svg>");
@@ -110,7 +110,7 @@ const Wrapper = styled.div<WrapperProps>`
     margin-left: 3px;
   }
   &:hover:not([disabled]) {
-    ${fakeTrackBgHover} 
+    ${fakeTrackBgHover}
     &::after {
       background: ${enabled.track.indicator.hover.color}
     }
@@ -369,4 +369,4 @@ export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   )
 })
 
-Slider.displayName = 'eds-slider'
+// Slider.displayName = 'eds-slider'

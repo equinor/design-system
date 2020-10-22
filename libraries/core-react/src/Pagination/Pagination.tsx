@@ -218,4 +218,4 @@ export const Pagination = forwardRef<HTMLElement, Props>(function Pagination(
   )
 })
 
-Pagination.displayName = 'eds-pagination'
+// Pagination.displayName = 'eds-pagination'

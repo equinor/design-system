@@ -12,4 +12,4 @@ export const PopoverAnchor = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-PopoverAnchor.displayName = 'eds-popover-anchor'
+// PopoverAnchor.displayName = 'eds-popover-anchor'

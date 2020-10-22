@@ -18,4 +18,4 @@ export const Actions = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-Actions.displayName = 'eds-topbar-actions'
+// Actions.displayName = 'eds-topbar-actions'

@@ -50,7 +50,7 @@ type Props = {
   /** Image source
    @default null */
   src?: string
-  /** Avatar size 
+  /** Avatar size
   @default 24 */
   size?: 16 | 24 | 32 | 40 | 48
   /** @default false */

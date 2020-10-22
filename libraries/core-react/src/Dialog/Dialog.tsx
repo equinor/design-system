@@ -44,4 +44,4 @@ export const Dialog = forwardRef<HTMLDivElement, Props>(function EdsDialog(
   )
 })
 
-Dialog.displayName = 'EdsDialog'
+// Dialog.displayName = 'EdsDialog'

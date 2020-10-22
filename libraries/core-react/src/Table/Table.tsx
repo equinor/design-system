@@ -12,4 +12,4 @@ export const Table: FunctionComponent<Props> = ({ children, ...props }) => {
   return <TableBase {...props}>{children}</TableBase>
 }
 
-Table.displayName = 'EdsTable'
+// Table.displayName = 'EdsTable'

@@ -63,4 +63,4 @@ export const Cell = ({
   )
 }
 
-Cell.displayName = 'eds-table-cell'
+// Cell.displayName = 'eds-table-cell'

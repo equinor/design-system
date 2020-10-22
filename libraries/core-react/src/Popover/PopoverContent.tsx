@@ -16,4 +16,4 @@ export const PopoverContent = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-PopoverContent.displayName = 'eds-popover-content'
+// PopoverContent.displayName = 'eds-popover-content'

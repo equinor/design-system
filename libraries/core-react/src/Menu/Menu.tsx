@@ -115,4 +115,4 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(
   },
 )
 
-Menu.displayName = 'EdsMenu'
+// Menu.displayName = 'EdsMenu'

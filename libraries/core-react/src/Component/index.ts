@@ -1,11 +1,11 @@
-import { OtherComponent } from './OtherComponent'
+import { OtherComponent, OtherComponentProps } from './OtherComponent'
 import { Component as BaseComponent } from './Component'
 
-type ComponentTypes = typeof BaseComponent & {
+type ComponentProps = typeof BaseComponent & {
   OtherComponent: typeof OtherComponent
 }
 
-const Component = BaseComponent as ComponentTypes
+const Component = BaseComponent as ComponentProps
 Component.OtherComponent = OtherComponent
 
-export { Component }
+export { Component, ComponentProps }

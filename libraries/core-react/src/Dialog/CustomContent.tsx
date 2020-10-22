@@ -60,4 +60,4 @@ export const CustomContent = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-CustomContent.displayName = 'EdsDialogCustomcontent'
+// CustomContent.displayName = 'EdsDialogCustomcontent'

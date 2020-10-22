@@ -149,6 +149,6 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function TextFieldInput(
   )
 })
 
-Input.displayName = 'eds-text-field-input'
+// Input.displayName = 'eds-text-field-input'
 
 export { Input }

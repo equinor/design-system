@@ -141,4 +141,4 @@ export const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
   )
 })
 
-Checkbox.displayName = 'eds-checkbox'
+Checkbox.displayName = 'Checkbox'
