@@ -1,5 +1,5 @@
 import React from 'react'
-import { Component, ComponentTypes } from '@equinor/eds-core-react'
+import { Component, ComponentProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react'
 
 export default {
@@ -10,7 +10,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<ComponentTypes> = (args) => (
+const Template: Story<ComponentProps> = (args) => (
   <Component {...args}>Tjobing!</Component>
 )
 
