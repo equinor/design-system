@@ -22,7 +22,7 @@ const ListItem = styled.li.attrs(() => ({
   }
 `
 
-export type MenuSectionProps = {
+export type Props = {
   /** @ignore */
   index?: number
   /** @ignore */
@@ -31,9 +31,7 @@ export type MenuSectionProps = {
   title?: string
 }
 
-export const MenuSection = React.memo(function EdsMenuSection(
-  props: MenuSectionProps,
-) {
+export const MenuSection = React.memo(function EdsMenuSection(props: Props) {
   const { children, title, index } = props
   return (
     <>
