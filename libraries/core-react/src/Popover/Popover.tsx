@@ -65,13 +65,13 @@ export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
     (acc: PopoverSplit, child): PopoverSplit => {
       if (isValidElement(child) && child.type === PopoverAnchor) {
         return {
+          ...acc,
           anchorElement: child,
-          childArray: acc.childArray,
         }
       }
       return {
+        ...acc,
         childArray: [...acc.childArray, child],
-        anchorElement: acc.anchorElement,
       }
     },
     { anchorElement: null, childArray: [] },
