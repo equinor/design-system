@@ -41,7 +41,7 @@ type Props = {
 type TabChild = JSX.IntrinsicElements['button'] & ReactElement
 
 const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
-  { children, ...props },
+  { children = [], ...props },
   ref,
 ) {
   const {
