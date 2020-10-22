@@ -85,7 +85,7 @@ const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
     isExpanded && !disabled ? headerColor.activated : 'inherit'};
 `
 
-AccordionHeaderTitle.displayName = 'eds-accordion-headertitle'
+AccordionHeaderTitle.displayName = 'EdsAccordionHeadertitle'
 
 type Props = {
   /** The id of the button that toggles expansion */
@@ -189,6 +189,6 @@ const AccordionHeader = forwardRef<
   )
 })
 
-AccordionHeader.displayName = 'eds-accordion-header'
+AccordionHeader.displayName = 'EdsAccordionHeader'
 
 export { AccordionHeader, AccordionHeaderTitle }

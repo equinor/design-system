@@ -27,6 +27,6 @@ const Accordion = forwardRef<
   )
 })
 
-Accordion.displayName = 'eds-accordion'
+// Accordion.displayName = 'eds-accordion'
 
 export { Accordion }

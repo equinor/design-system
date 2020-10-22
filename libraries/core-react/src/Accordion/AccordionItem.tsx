@@ -63,6 +63,6 @@ const AccordionItem = forwardRef<HTMLDivElement, Props>(function AccordionItem(
   )
 })
 
-AccordionItem.displayName = 'eds-accordion-item'
+// AccordionItem.displayName = 'eds-accordion-item'
 
 export { AccordionItem }

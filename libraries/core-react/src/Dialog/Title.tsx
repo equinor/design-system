@@ -47,4 +47,4 @@ export const Title: FunctionComponent<Props> = forwardRef<
   )
 })
 
-Title.displayName = 'eds-dialog-title'
+Title.displayName = 'EdsDialogTitle'

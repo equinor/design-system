@@ -3,6 +3,7 @@ dependencies:
   '@equinor/eds-tokens': 'link:../tokens'
   '@testing-library/react-hooks': 3.3.0_react@16.13.1
   '@types/lodash': 4.14.162
+  babel-plugin-react-docgen-typescript: 1.5.1_6e5b3a67faae6c4866d9a003ec605c7e
   csstype: 3.0.3
   focus-visible: 5.1.0
   lodash: 4.17.19
@@ -2120,6 +2121,16 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-+AuoehOrjt9irZL7DOt2+4ZaTM6dlu1s5TTS46JBa0/qem4dy7VNW3tMb96qeEqcIh20LD73TVNtmVEeymTG7w==
+  /babel-plugin-react-docgen-typescript/1.5.1_6e5b3a67faae6c4866d9a003ec605c7e:
+    dependencies:
+      '@babel/core': 7.10.2
+      react-docgen-typescript: 1.20.5_typescript@4.0.2
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+      typescript: '*'
+    resolution:
+      integrity: sha512-gcC2Fw19ooW8U1AvyfuHTqvWOb6xi3IMNuuOgIjf0pfJwkuJFHsGW+JxWF1SKz4rFyQyWnQg3YkxMrJh45n7nA==
   /babel-plugin-react-docgen/4.2.1:
     dependencies:
       ast-types: 0.14.2
@@ -4848,6 +4859,14 @@ packages:
       node: '>=0.6'
     resolution:
       integrity: sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  /react-docgen-typescript/1.20.5_typescript@4.0.2:
+    dependencies:
+      typescript: 4.0.2
+    dev: false
+    peerDependencies:
+      typescript: '>= 3.x'
+    resolution:
+      integrity: sha512-AbLGMtn76bn7SYBJSSaKJrZ0lgNRRR3qL60PucM5M4v/AXyC8221cKBXW5Pyt9TfDRfe+LDnPNlg7TibxX0ovA==
   /react-docgen/5.3.0:
     dependencies:
       '@babel/core': 7.11.6
@@ -6046,6 +6065,7 @@ specifiers:
   '@types/styled-components': ^5.1.2
   '@types/testing-library__jest-dom': ^5.9.2
   babel-plugin-react-docgen: ^4.2.1
+  babel-plugin-react-docgen-typescript: ^1.5.1
   babel-plugin-styled-components: ^1.10.7
   csstype: ^3.0.3
   focus-visible: ^5.1.0
