@@ -1,5 +1,5 @@
-// @ts-nocheck
 import { tokens } from '@equinor/eds-tokens'
+import type { Typography, Spacing } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -19,7 +19,52 @@ const {
   elevation: { overlay: elevation },
 } = tokens
 
-export const popover = {
+export type Placement = {
+  arrowLeft?: string
+  arrowTop?: string
+  arrowRight?: string
+  arrowBottom?: string
+  arrowTransform?: string
+  transform?: string
+  width?: string
+  popoverBottom?: string | number
+  popoverLeft?: string | number
+  popoverRight?: string | number
+  popoverTop?: string | number
+}
+
+type Popover = {
+  header: Typography
+  background: string
+  elevation: string
+  popover: {
+    minHeight: string
+    maxWidth: string
+    maxHeight: string
+  }
+  arrow: {
+    width: string
+    height: string
+  }
+  spacings: Spacing
+  borderRadius: string
+  placement: {
+    bottom: Placement
+    bottomRight: Placement
+    bottomLeft: Placement
+    top: Placement
+    topRight: Placement
+    topLeft: Placement
+    left: Placement
+    leftTop: Placement
+    leftBottom: Placement
+    right: Placement
+    rightTop: Placement
+    rightBottom: Placement
+  }
+}
+
+export const popover: Popover = {
   header,
   background,
   elevation,
