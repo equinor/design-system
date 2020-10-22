@@ -32,5 +32,4 @@ export {
 export { Breadcrumbs } from './Breadcrumbs'
 export { Menu } from './Menu'
 export { Pagination } from './Pagination'
-export { Component, ComponentProps } from './Component'
 /* eslint-enable */
