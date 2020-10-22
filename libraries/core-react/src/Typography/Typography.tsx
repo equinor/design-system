@@ -81,7 +81,8 @@ const StyledTypography = styled.p<StyledProps>`
       }
     `}
 `
-type Props = {
+
+export type Props = {
   variant?: TypographyVariants
   group?: TypographyGroups
   bold?: boolean

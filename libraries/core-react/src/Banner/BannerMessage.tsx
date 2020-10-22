@@ -1,12 +1,16 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
+import { Props as TypographyProps } from '../Typography/Typography'
 
 const StyledBannerMessage = styled(Typography)``
 
-export const BannerMessage = ({ children, ...props }) => {
+type Props = {
+  /** Text content */
+  children: string
+} & Omit<TypographyProps, 'children'>
+
+export const BannerMessage: FC<Props> = ({ children, ...props }) => {
   return (
     <StyledBannerMessage variant="body_long" {...props}>
       {children}
@@ -15,8 +19,3 @@ export const BannerMessage = ({ children, ...props }) => {
 }
 
 BannerMessage.displayName = 'eds-banner-message'
-
-BannerMessage.propTypes = {
-  /** Text content */
-  children: PropTypes.string.isRequired,
-}
