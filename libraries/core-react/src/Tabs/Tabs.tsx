@@ -1,11 +1,19 @@
-// @ts-nocheck
 import React, { forwardRef, useMemo, useState } from 'react'
-import PropTypes from 'prop-types'
 import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'
+import { Variants } from './Tabs.types'
 
-const Tabs = forwardRef(function Tabs(
-  { activeTab, onChange, onBlur, onFocus, variant, ...props },
+type Props = {
+  /** The index of the active tab */
+  activeTab?: number
+  /** The callback function for selecting a tab */
+  onChange?: (index: number) => void
+  /** Sets the width of the tabs */
+  variant?: Variants
+} & React.HTMLAttributes<HTMLDivElement>
+
+const Tabs = forwardRef<HTMLDivElement, Props>(function Tabs(
+  { activeTab, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
   ref,
 ) {
   const tabsId = useMemo(() => createId('tabs-'), [])
@@ -14,7 +22,7 @@ const Tabs = forwardRef(function Tabs(
 
   let blurTimer
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     blurTimer = setTimeout(() => {
       if (tabsFocused) {
         setTabsFocused(false)
@@ -23,7 +31,7 @@ const Tabs = forwardRef(function Tabs(
     onBlur(e)
   }
 
-  const handleFocus = (e) => {
+  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     if (e.target.getAttribute('role') !== 'tab') {
       return
     }
@@ -48,28 +56,5 @@ const Tabs = forwardRef(function Tabs(
     </TabsProvider>
   )
 })
-
-Tabs.propTypes = {
-  /** The index of the active tab */
-  activeTab: PropTypes.number,
-  /** The callback function for selecting a tab */
-  onChange: PropTypes.func,
-  /** The callback function for removing focus from a tab */
-  onBlur: PropTypes.func,
-  /** The callback function for focusing on a tab */
-  onFocus: PropTypes.func,
-  /** Sets the width of the tabs */
-  variant: PropTypes.oneOf(['fullWidth', 'minWidth']),
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-}
-
-Tabs.defaultProps = {
-  activeTab: 0,
-  onChange: () => {},
-  onBlur: () => {},
-  onFocus: () => {},
-  variant: 'minWidth',
-}
 
 export { Tabs }

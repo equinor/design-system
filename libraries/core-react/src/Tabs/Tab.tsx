@@ -1,6 +1,4 @@
-// @ts-nocheck
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { tab as tokens } from './Tabs.tokens'
 
@@ -29,13 +27,15 @@ const focusedStyles = css`
   outline-offset: ${outlineOffset};
 `
 
-const StyledTab = styled.button.attrs(({ active, disabled }) => ({
-  type: 'button',
-  role: 'tab',
-  'aria-selected': active,
-  'aria-disabled': disabled,
-  tabIndex: active ? '0' : '-1',
-}))`
+const StyledTab = styled.button.attrs<Props>(
+  ({ active = false, disabled = false }) => ({
+    type: 'button',
+    role: 'tab',
+    'aria-selected': active,
+    'aria-disabled': disabled,
+    tabIndex: active ? '0' : '-1',
+  }),
+)<Props>`
   appearance: none;
   box-sizing: border-box;
   font-family: inherit;
@@ -82,23 +82,16 @@ const StyledTab = styled.button.attrs(({ active, disabled }) => ({
   }
 `
 
-export const Tab = forwardRef(function Tab(props, ref) {
+export type Props = {
+  /** If `true`, the tab will be active. */
+  active?: boolean
+  /** If `true`, the tab will be disabled. */
+  disabled?: boolean
+}
+
+export const Tab = forwardRef<
+  HTMLButtonElement,
+  Props & React.HTMLAttributes<HTMLButtonElement>
+>(function Tab(props, ref) {
   return <StyledTab ref={ref} {...props} />
 })
-
-Tab.propTypes = {
-  /** If `true`, the tab will be active. */
-  active: PropTypes.bool,
-  /** If `true`, the tab will be disabled. */
-  disabled: PropTypes.bool,
-  /** @ignore */
-  className: PropTypes.string,
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-}
-
-Tab.defaultProps = {
-  active: false,
-  disabled: false,
-  className: null,
-}

@@ -8,13 +8,13 @@ import { Tabs } from '.'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
-const noop = () => {}
+const noop = () => null
 
 afterEach(cleanup)
 
 const TabsWithRefs = () => {
-  const activeRef = useRef(null)
-  const inactiveRef = useRef(null)
+  const activeRef = useRef<HTMLButtonElement>(null)
+  const inactiveRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     activeRef.current.textContent = 'Active tab'
@@ -32,7 +32,7 @@ const TabsWithRefs = () => {
   )
 }
 
-const TabsWithPanels = ({ selectedTabIndex }) => {
+const TabsWithPanels = ({ selectedTabIndex = 0 }) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
 
   const handleChange = (index) => {
@@ -108,5 +108,50 @@ describe('Tabs', () => {
       key: 'ArrowRight',
     })
     expect(targetTab).toHaveAttribute('aria-selected', 'true')
+  })
+  it("Doesn't crash if no children is provided", () => {
+    const testId = 'tabs'
+    render(<Tabs data-testid={testId} />)
+    expect(screen.queryByTestId(testId)).toBeDefined()
+  })
+  it("Doesn't crash if no children is provided to TabPanel", () => {
+    const testId = 'tabspanel'
+    render(
+      <Tabs>
+        <TabList>
+          <Tab>Tab one</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel data-testid={testId}></TabPanel>
+        </TabPanels>
+      </Tabs>,
+    )
+    expect(screen.queryByTestId(testId)).toBeDefined()
+  })
+  it("Doesn't crash if no children is provided to Tab", () => {
+    const testId = 'tab'
+    render(
+      <Tabs>
+        <TabList>
+          <Tab data-testid={testId}>Tab one</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Panel one</TabPanel>
+        </TabPanels>
+      </Tabs>,
+    )
+    expect(screen.queryByTestId(testId)).toBeDefined()
+  })
+  it("Doesn't crash if no children is provided to TabList or TabPanels", () => {
+    const tablist = 'tablist'
+    const tabpanels = 'tabpanels'
+    render(
+      <Tabs>
+        <TabList data-testid={tablist}></TabList>
+        <TabPanels data-testid={tabpanels}></TabPanels>
+      </Tabs>,
+    )
+    expect(screen.queryByTestId(tablist)).toBeDefined()
+    expect(screen.queryByTestId(tabpanels)).toBeDefined()
   })
 })
