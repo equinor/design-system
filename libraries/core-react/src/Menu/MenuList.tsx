@@ -1,9 +1,14 @@
-import React, { useEffect, ReactElement, ReactNode } from 'react'
+import React, {
+  useEffect,
+  ReactElement,
+  ReactNode,
+  isValidElement,
+} from 'react'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
 import type { FocusTarget } from './Menu.types'
-import type { MenuItemProps } from './MenuItem'
-import type { MenuSectionProps } from './MenuSection'
+import { Props as MenuItemProps, MenuItem } from './MenuItem'
+import { Props as MenuSectionProps, MenuSection } from './MenuSection'
 
 const isFragment = (object: ReactNode): boolean => {
   if ((object as ReactElement).type) {
@@ -27,10 +32,7 @@ type Props = {
   children: ReactNode
 }
 
-type MenuChild = ReactElement<MenuItemProps> &
-  ReactElement<MenuSectionProps> & {
-    type: { displayName?: string }
-  }
+type MenuChild = ReactElement<MenuItemProps> & ReactElement<MenuSectionProps>
 
 type Direction = 'down' | 'up'
 
@@ -50,7 +52,10 @@ export const MenuList = React.forwardRef<HTMLUListElement, Props>(
 
     const focusableIndexs: number[] = (updatedChildren || [])
       .filter((x) => !x.props.disabled)
-      .filter((x) => x.type ?? x.type.displayName.includes('eds-menu'))
+      .filter(
+        (x) =>
+          isValidElement(x) && (x.type === MenuSection || x.type === MenuItem),
+      )
       .map((x) => x.props.index)
 
     const firstFocusIndex = focusableIndexs[0]
