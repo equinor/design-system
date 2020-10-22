@@ -32,10 +32,7 @@ type Props = {
   children: ReactNode
 }
 
-type MenuChild = ReactElement<MenuItemProps> &
-  ReactElement<MenuSectionProps> & {
-    type: { displayName?: string }
-  }
+type MenuChild = ReactElement<MenuItemProps> & ReactElement<MenuSectionProps>
 
 type Direction = 'down' | 'up'
 
