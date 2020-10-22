@@ -1,6 +1,4 @@
-// @ts-nocheck
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, ReactNode } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
@@ -25,11 +23,14 @@ const StyledMinMax = styled.span`
   }
 `
 
-export const MinMax = ({ children }) => {
-  return <StyledMinMax>{children}</StyledMinMax>
-}
+type Props = {
+  /** Children is required */
+  children: ReactNode
+} & JSX.IntrinsicElements['span']
 
-MinMax.propTypes = {
-  /** @ignore */
-  children: PropTypes.node.isRequired,
-}
+export const MinMax = forwardRef<HTMLSpanElement, Props>(function EdsMinMax(
+  { children },
+  ref,
+) {
+  return <StyledMinMax ref={ref}>{children}</StyledMinMax>
+})

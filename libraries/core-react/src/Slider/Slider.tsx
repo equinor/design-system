@@ -1,13 +1,17 @@
-// @ts-nocheck
-import React, { forwardRef, useState, useRef /* , useMemo */ } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, useState, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
 import { Output } from './Output'
 import { SliderInput } from './SliderInput'
 
-const { enabled, disabled: _disabled } = tokens
+const {
+  enabled,
+  disabled: _disabled,
+  enabled: {
+    dot: { border: borderToken },
+  },
+} = tokens
 
 const fakeTrackBg = css`
     background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.background}' width='100%' height='4' rx='2' /></svg>");
@@ -34,7 +38,12 @@ const wrapperGrid = css`
   width: 100%;
   position: relative;
 `
-const RangeWrapper = styled.div`
+type RangeWrapperProps = {
+  valA: number
+  valB: number
+} & Pick<Props, 'min' | 'max' | 'disabled'>
+
+const RangeWrapper = styled.div<RangeWrapperProps>`
   --a: ${({ valA }) => valA};
   --b: ${({ valB }) => valB};
   --min: ${({ min }) => min};
@@ -74,9 +83,11 @@ const RangeWrapper = styled.div`
       background: ${enabled.track.indicator.hover.color};
     }
   }
- 
 `
-const Wrapper = styled.div`
+
+type WrapperProps = Pick<Props, 'min' | 'max' | 'disabled' | 'value'>
+
+const Wrapper = styled.div<WrapperProps>`
   --min: ${({ min }) => min};
   --max: ${({ max }) => max};
   --dif: calc(var(--max) - var(--min));
@@ -119,18 +130,15 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     width: ${enabled.dot.size};
     height: ${enabled.dot.size};
     background: ${enabled.background};
-    border: ${enabled.dot.border.width} ${enabled.dot.border.type}
-      ${enabled.dot.border.color};
-    border-radius: ${enabled.dot.border.radius};
+    border: ${borderToken.width} ${borderToken.type} ${borderToken.color};
+    border-radius: ${borderToken.radius};
     bottom: 8px;
-    left: 0;  
+    left: 0;
   }
   &:after {
     right: 0;
     left: auto;
   }
- 
-}
 `
 
 const SrOnlyLabel = styled.label`
@@ -144,8 +152,40 @@ const SrOnlyLabel = styled.label`
   white-space: nowrap;
   border-width: 0;
 `
+type SliderValueType = number[] | number
 
-export const Slider = forwardRef(function EdsSlider(
+export type Props = {
+  /** Id for the elements that labels this slider */
+  ariaLabelledby: string
+  /** Components value, range of numbers */
+  value: SliderValueType
+  /** Function to be called when value change */
+  onChange?: (
+    event: MouseEvent | KeyboardEvent,
+    newValue: SliderValueType,
+  ) => void
+  /** Function to be called when value is committed by mouseup event */
+  onChangeCommitted?: (
+    event: MouseEvent | KeyboardEvent,
+    newValue: SliderValueType,
+  ) => void
+  /** Function for formatting the output, e.g. with dates */
+  outputFunction?: (text: string) => void
+  /** Max value */
+  max?: number
+  /**  Min value */
+  min?: number
+  /** Stepping interval */
+  step?: number
+  /** Show the min and max dots or not */
+  minMaxDots?: boolean
+  /** Show the min and max values or not */
+  minMaxValues?: boolean
+  /** Disabled */
+  disabled?: boolean
+} & JSX.IntrinsicElements['div']
+
+export const Slider = forwardRef<HTMLDivElement, Props>(function EdsSlider(
   {
     min = 0,
     max = 100,
@@ -154,7 +194,7 @@ export const Slider = forwardRef(function EdsSlider(
     onChange,
     onChangeCommitted,
     minMaxDots = true,
-    minMaxValues,
+    minMaxValues = true,
     step = 1,
     disabled,
     ariaLabelledby,
@@ -163,13 +203,15 @@ export const Slider = forwardRef(function EdsSlider(
   ref,
 ) {
   const isRangeSlider = Array.isArray(value)
-  const [sliderValue, setSliderValue] = useState(value)
-  const minRange = useRef()
-  const maxRange = useRef()
-  const onValueChange = (event, valueArrIdx) => {
+  const [sliderValue, setSliderValue] = isRangeSlider
+    ? useState(value)
+    : useState([value])
+  const minRange = useRef<HTMLInputElement>(null)
+  const maxRange = useRef<HTMLInputElement>(null)
+  const onValueChange = (event, valueArrIdx?: number) => {
     const changedValue = parseInt(event.target.value, 10)
     if (isRangeSlider) {
-      const newValue = sliderValue.slice()
+      const newValue = (sliderValue as number[]).slice()
       newValue[valueArrIdx] = changedValue
       setSliderValue(newValue)
       if (onChange) {
@@ -178,10 +220,11 @@ export const Slider = forwardRef(function EdsSlider(
       }
       return
     }
-    setSliderValue(changedValue)
+
+    setSliderValue([changedValue])
     if (onChange) {
       // Callback for provided onChange func
-      onChange(event, changedValue)
+      onChange(event, [changedValue])
     }
   }
   const handleKeyUp = (event) => {
@@ -192,7 +235,7 @@ export const Slider = forwardRef(function EdsSlider(
 
   const handleCommitedValue = (event) => {
     if (onChangeCommitted) {
-      onChangeCommitted(event, sliderValue)
+      onChangeCommitted(event, sliderValue as number[])
     }
   }
 
@@ -213,14 +256,14 @@ export const Slider = forwardRef(function EdsSlider(
 
     const normX = (x / inputWidth) * diff + min
 
-    const maxX = Math.abs(normX - maxValue)
-    const minX = Math.abs(normX - minValue)
+    const maxX = Math.abs(normX - parseInt(maxValue))
+    const minX = Math.abs(normX - parseInt(minValue))
     if (minX > maxX) {
-      minRange.current.style.zIndex = 10
-      maxRange.current.style.zIndex = 20
+      minRange.current.style.zIndex = '10'
+      maxRange.current.style.zIndex = '20'
     } else {
-      minRange.current.style.zIndex = 20
-      maxRange.current.style.zIndex = 10
+      minRange.current.style.zIndex = '20'
+      maxRange.current.style.zIndex = '10'
     }
   }
 
@@ -291,12 +334,12 @@ export const Slider = forwardRef(function EdsSlider(
           ref={ref}
           max={max}
           min={min}
-          value={sliderValue}
+          value={sliderValue[0]}
           disabled={disabled}
         >
           <SliderInput
             type="range"
-            value={sliderValue}
+            value={sliderValue[0]}
             min={min}
             max={max}
             step={step}
@@ -309,8 +352,8 @@ export const Slider = forwardRef(function EdsSlider(
             onMouseUp={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
           />
-          <Output htmlFor={inputId} value={sliderValue}>
-            {getFormattedText(sliderValue)}
+          <Output htmlFor={inputId} value={sliderValue[0]}>
+            {getFormattedText(sliderValue[0])}
           </Output>
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
@@ -327,44 +370,3 @@ export const Slider = forwardRef(function EdsSlider(
 })
 
 Slider.displayName = 'eds-slider'
-
-Slider.propTypes = {
-  /** Id for the elements that labels this slider */
-  ariaLabelledby: PropTypes.string.isRequired,
-  /** Components value, string for slider, array for range */
-  value: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number),
-  ]).isRequired,
-  /** Function to be called when value change */
-  onChange: PropTypes.func,
-  /* Function to be called when value is committed by mouseup event */
-  onChangeCommitted: PropTypes.func,
-  /** Function for formatting the output, e.g. with dates */
-  outputFunction: PropTypes.func,
-  /** Max value */
-  max: PropTypes.number,
-  /**  Min value */
-  min: PropTypes.number,
-  /** Stepping interval */
-  step: PropTypes.number,
-  /** Show the min and max dots or not */
-  minMaxDots: PropTypes.bool,
-  /** Show the min and max values or not */
-  minMaxValues: PropTypes.bool,
-  /** Disabled */
-  disabled: PropTypes.bool,
-}
-
-Slider.defaultProps = {
-  /* Same as spec defaults */
-  step: 1,
-  min: 0,
-  max: 100,
-  onChange: undefined,
-  onChangeCommitted: undefined,
-  outputFunction: undefined,
-  minMaxDots: true,
-  minMaxValues: true,
-  disabled: false,
-}
