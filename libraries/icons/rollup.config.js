@@ -10,15 +10,7 @@ export default [
     watch: {
       clearScreen: true,
     },
-    plugins: [
-      resolve(),
-      typescript({
-        tsconfig: 'tsconfig.json',
-        typescript: require('typescript'),
-        include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
-        exclude: ['node_modules/**'],
-      }),
-    ],
+    plugins: [resolve(), typescript({ useTsconfigDeclarationDir: true })],
     output: [
       {
         file: pkg.module,
