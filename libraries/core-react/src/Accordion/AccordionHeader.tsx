@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactElement } from 'react'
+import React, { forwardRef, isValidElement, ReactElement } from 'react'
 import styled from 'styled-components'
 import type { CSSObject } from 'styled-components'
 // eslint-disable-next-line camelcase
@@ -151,19 +151,22 @@ const AccordionHeader = forwardRef<
   const headerChildren = React.Children.map(
     children,
     (child: AccordionChild) => {
-      return (
-        (typeof child === 'string' && (
+      if (typeof child === 'string') {
+        return (
           <AccordionHeaderTitle isExpanded={isExpanded} disabled={disabled}>
             {child}
           </AccordionHeaderTitle>
-        )) ||
-        (child.type.displayName === 'eds-accordion-headertitle' &&
-          React.cloneElement(child, {
-            isExpanded,
-            disabled,
-          })) ||
-        child
-      )
+        )
+      }
+
+      if (isValidElement(child) && child.type === AccordionHeaderTitle) {
+        return React.cloneElement(child, {
+          isExpanded,
+          disabled,
+        })
+      }
+
+      return child
     },
   )
 
