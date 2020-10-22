@@ -7,7 +7,9 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { popover as tokens } from './Popover.tokens'
 import { Popover } from '.'
-import { Button, Typography } from '..'
+import { Button } from '../Button'
+import { Typography } from '../Typography'
+import type { Props } from './Popover'
 
 const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover
 
@@ -22,7 +24,7 @@ const {
 
 afterEach(cleanup)
 
-const SimplePopover = ({ open, placement }) => (
+const SimplePopover = ({ open = false, placement = 'bottom' }: Props) => (
   <Popover open={open} placement={placement}>
     <PopoverAnchor>
       <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
@@ -80,4 +82,46 @@ describe('Popover', () => {
     expect(popover).toHaveStyleRule('position', 'absolute')
     expect(popover).toHaveStyleRule('width', '100px')
   })
+})
+it("Doesn't crash if no children is provided to Popover component", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(<Popover placement={placement} />)
+  expect(queryByText(placement)).toBeDefined()
+})
+it("Doesn't crash if Popover anchor is missing content", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(
+    <Popover placement={placement}>
+      <PopoverAnchor />
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverContent>Content</PopoverContent>
+    </Popover>,
+  )
+  expect(queryByText(placement)).toBeDefined()
+})
+it("Doesn't crash if no children is provided to Popover content", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(
+    <Popover placement={placement}>
+      <PopoverAnchor>
+        <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
+      </PopoverAnchor>
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverContent />
+    </Popover>,
+  )
+  expect(queryByText(placement)).toBeDefined()
+})
+it("Doesn't crash if title is missing", () => {
+  const placement = 'topLeft'
+  const { queryByText } = render(
+    <Popover placement={placement}>
+      <PopoverAnchor>
+        <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
+      </PopoverAnchor>
+      <PopoverTitle />
+      <PopoverContent>Content</PopoverContent>
+    </Popover>,
+  )
+  expect(queryByText(placement)).toBeDefined()
 })
