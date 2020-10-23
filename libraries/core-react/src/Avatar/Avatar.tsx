@@ -45,7 +45,7 @@ const StyledImage = styled.img<StyledImageProps>`
     `};
 `
 
-type Props = {
+type AvatarProps = {
   alt: string
   /** Image source
    @default null */
@@ -57,7 +57,7 @@ type Props = {
   disabled?: boolean
 }
 
-export const Avatar = forwardRef<HTMLHRElement, Props>((props, ref) => {
+export const Avatar = forwardRef<HTMLHRElement, AvatarProps>((props, ref) => {
   const { src = null, alt, size = 24, disabled = false, ...rest } = props
 
   return (
