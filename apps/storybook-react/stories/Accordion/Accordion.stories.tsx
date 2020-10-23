@@ -8,7 +8,7 @@ import {
   edit,
   delete_to_trash,
 } from '@equinor/eds-icons'
-import mdx from './Accordion.docs.mdx'
+//import mdx from './Accordion.docs.mdx'
 
 const {
   AccordionItem,
@@ -27,9 +27,9 @@ const Wrapper = styled.div`
 
 export default {
   title: 'Components/Accordion',
-  parameters: {
-    docs: { page: mdx },
-  },
+  // parameters: {
+  //   docs: { page: mdx },
+  // },
   component: Accordion,
 }
 
