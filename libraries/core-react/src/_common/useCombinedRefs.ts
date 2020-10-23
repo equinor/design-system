@@ -1,21 +1,18 @@
-// @ts-nocheck
-import { useRef, useEffect, Ref } from 'react'
+import { useRef, useEffect } from 'react'
 
-export const useCombinedRefs = <T extends any>(
-  ...refs: Array<Ref<T>>
-): Ref<T> => {
-  const targetRef = useRef(null)
-
+type Ref = React.MutableRefObject<HTMLElement>
+type useCombinedRefsProps<T> = T | ((a: HTMLElement) => T)
+export const useCombinedRefs = (...refs: useCombinedRefsProps<Ref>[]): Ref => {
+  const targetRef = useRef<HTMLElement>(null)
   useEffect(() => {
     refs.forEach((ref) => {
       if (!ref) return
       if (typeof ref === 'function') {
         ref(targetRef.current)
       } else {
-        ;(ref as any).current = (targetRef as any).current
+        ref.current = targetRef.current
       }
     })
   }, [refs])
-
   return targetRef
 }
