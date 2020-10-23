@@ -138,4 +138,4 @@ export const MenuItem = React.memo(
   }),
 )
 
-MenuItem.displayName = 'EdsMenuItem'
+MenuItem.displayName = 'MenuItem'

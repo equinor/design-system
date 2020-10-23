@@ -1,5 +1,11 @@
 module.exports = {
-  stories: ['../docs/**/*.story.mdx', '../stories/**/*.stor(y|ies).(jsx|mdx)'],
+  // typescript: {
+  //   reactDocgen: 'react-docgen',
+  // },
+  stories: [
+    '../docs/**/*.story.mdx',
+    '../stories/**/*.stor(y|ies).(jsx|mdx|tsx)',
+  ],
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-links',

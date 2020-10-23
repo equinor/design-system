@@ -126,4 +126,4 @@ export const Icon = forwardRef<SVGSVGElement, Props>(function EdsIcon(
   )
 })
 
-Icon.displayName = 'eds-icon'
+// Icon.displayName = 'EdsIcon'

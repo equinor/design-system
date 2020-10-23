@@ -108,6 +108,6 @@ const CircularProgress = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-CircularProgress.displayName = 'eds-circular-progress'
+// CircularProgress.displayName = 'eds-circular-progress'
 
 export { CircularProgress }

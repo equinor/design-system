@@ -38,4 +38,4 @@ export const CardActions = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-CardActions.displayName = 'eds-card-actions'
+// CardActions.displayName = 'eds-card-actions'

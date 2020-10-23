@@ -118,4 +118,4 @@ export const Radio = forwardRef<HTMLInputElement, Props>(
   },
 )
 
-Radio.displayName = 'eds-radio'
+Radio.displayName = 'Radio'

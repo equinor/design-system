@@ -17,4 +17,4 @@ export const CustomContent = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-CustomContent.displayName = 'eds-topbar-customcontent'
+// CustomContent.displayName = 'eds-topbar-customcontent'

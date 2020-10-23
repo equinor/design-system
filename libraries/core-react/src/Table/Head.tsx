@@ -28,4 +28,4 @@ export const Head: FunctionComponent = ({ children, ...props }) => {
   )
 }
 
-Head.displayName = 'eds-table-head'
+// Head.displayName = 'eds-table-head'

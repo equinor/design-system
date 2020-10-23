@@ -60,4 +60,4 @@ export const SwitchDefault = forwardRef<HTMLInputElement, Props>(
   },
 )
 
-SwitchDefault.displayName = 'eds-switch-default'
+SwitchDefault.displayName = 'SwitchDefault'

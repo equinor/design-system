@@ -56,4 +56,4 @@ export const CardMedia = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-CardMedia.displayName = 'eds-card-media'
+// CardMedia.displayName = 'eds-card-media'

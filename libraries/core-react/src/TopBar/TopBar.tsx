@@ -42,4 +42,4 @@ export const TopBar = forwardRef<HTMLElement, Props>(function EdsTopBar(
   )
 })
 
-TopBar.displayName = 'eds-topbar'
+// TopBar.displayName = 'eds-topbar'

@@ -50,4 +50,4 @@ export const Switch = forwardRef<HTMLInputElement, Props>(
   },
 )
 
-Switch.displayName = 'eds-switch'
+Switch.displayName = 'Switch'

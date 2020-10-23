@@ -165,4 +165,4 @@ export const Button = forwardRef<HTMLButtonElement, Props>(function Button(
   )
 })
 
-Button.displayName = 'EdsButton'
+// Button.displayName = 'Button'

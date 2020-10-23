@@ -2,7 +2,7 @@
 export { Button } from './Button'
 export { Typography } from './Typography'
 export { Table } from './Table'
-export { Divider } from './Divider'
+export { Divider, DividerProps } from './Divider'
 export { TextField } from './TextField'
 export { Icon } from './Icon'
 export { List } from './List'

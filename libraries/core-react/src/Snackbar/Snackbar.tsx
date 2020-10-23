@@ -75,4 +75,4 @@ export const Snackbar = ({
   )
 }
 
-Snackbar.displayName = 'eds-snackbar'
+// Snackbar.displayName = 'eds-snackbar'

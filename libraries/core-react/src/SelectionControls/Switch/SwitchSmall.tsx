@@ -52,4 +52,4 @@ export const SwitchSmall = forwardRef<HTMLInputElement, Props>(
   },
 )
 
-SwitchSmall.displayName = 'eds-switch-small'
+SwitchSmall.displayName = 'SwitchSmall'

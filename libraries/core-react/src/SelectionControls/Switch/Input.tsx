@@ -79,4 +79,4 @@ export const Input = forwardRef<HTMLInputElement, Props>(
   },
 )
 
-Input.displayName = 'eds-switch-input'
+Input.displayName = 'Input'

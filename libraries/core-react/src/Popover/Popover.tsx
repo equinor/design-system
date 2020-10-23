@@ -96,4 +96,4 @@ export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
   )
 })
 
-Popover.displayName = 'eds-popover'
+// Popover.displayName = 'eds-popover'

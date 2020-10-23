@@ -170,4 +170,4 @@ export const Tooltip = forwardRef<HTMLDivElement, Props>(function Tooltip(
   )
 })
 
-Tooltip.displayName = 'eds-tooltip'
+// Tooltip.displayName = 'eds-tooltip'

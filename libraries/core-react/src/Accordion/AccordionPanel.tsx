@@ -51,6 +51,6 @@ const AccordionPanel = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-AccordionPanel.displayName = 'eds-accordion-panel'
+// AccordionPanel.displayName = 'eds-accordion-panel'
 
 export { AccordionPanel }

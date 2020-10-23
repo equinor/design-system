@@ -3,7 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 
 const indeterminate = keyframes`
-    0% { 
+    0% {
         opacity: 1;
     }
     20% {
@@ -154,6 +154,6 @@ const StarProgress = forwardRef<SVGSVGElement, Props>(function StarProgress(
   )
 })
 
-StarProgress.displayName = 'eds-star-progress'
+// StarProgress.displayName = 'eds-star-progress'
 
 export { StarProgress }

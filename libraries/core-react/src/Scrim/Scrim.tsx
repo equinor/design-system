@@ -76,4 +76,4 @@ export const Scrim = forwardRef<HTMLDivElement, Props>(function EdsScrim(
   )
 })
 
-Scrim.displayName = 'Scrim'
+// Scrim.displayName = 'Scrim'
