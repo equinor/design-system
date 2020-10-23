@@ -26,16 +26,17 @@ export type DividerProps = {
   className?: string
 }
 
-export const Divider = forwardRef<HTMLHRElement, DividerProps>(
-  ({ color = 'medium', variant = 'medium', className = '' }, ref) => {
-    const styleProps = {
-      backgroundColor: tokens.color[color],
-      marginTop: tokens[variant].spacings.top,
-      marginBottom: tokens[variant].spacings.bottom,
-      dividerHeight: tokens.height,
-    }
-    return <StyledDivider {...styleProps} className={className} ref={ref} />
-  },
-)
+export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
+  { color = 'medium', variant = 'medium', className = '' },
+  ref,
+) {
+  const styleProps = {
+    backgroundColor: tokens.color[color],
+    marginTop: tokens[variant].spacings.top,
+    marginBottom: tokens[variant].spacings.bottom,
+    dividerHeight: tokens.height,
+  }
+  return <StyledDivider {...styleProps} className={className} ref={ref} />
+})
 
-Divider.displayName = 'Divider'
+// Divider.displayName = 'Divider'

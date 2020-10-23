@@ -1,5 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import React, { FunctionComponent, HTMLProps } from 'react'
+import styled, { StyledFunction, ThemedStyledFunction } from 'styled-components'
+
 import { Divider, DividerProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
@@ -22,9 +26,7 @@ export default {
   },
 } as Meta
 
-type WrapperProps = React.HTMLAttributes<HTMLDivElement>
-
-const Wrapper = styled.div<WrapperProps>`
+const Wrapper = styled.div`
   padding: 32px;
   background-color: #999;
 `
