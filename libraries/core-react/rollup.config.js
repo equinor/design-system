@@ -18,8 +18,6 @@ const globals = {
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
 
-const buildForStorybook = process.env.STORYBOOK
-
 export default [
   {
     input: './src/index.ts',
@@ -36,24 +34,26 @@ export default [
         babelHelpers: 'bundled',
         presets: ['@babel/preset-env', '@babel/preset-react'],
         extensions,
-        plugins: [
-          'babel-plugin-styled-components',
-          ...(buildForStorybook ? ['babel-plugin-react-docgen'] : []),
-        ],
+        plugins: ['babel-plugin-styled-components'],
       }),
       commonjs(),
       polyfill(['focus-visible']),
     ],
     output: [
-      { file: pkg.browser, name: pkg.name, format: 'umd', globals },
       {
-        file: pkg.module,
+        file: pkg.publishConfig.browser,
+        name: pkg.name,
+        format: 'umd',
+        globals,
+      },
+      {
+        file: pkg.publishConfig.module,
         name: pkg.name,
         format: 'esm',
         sourcemap: true,
         globals,
       },
-      ...(buildForStorybook ? [] : [{ file: pkg.main, format: 'cjs' }]),
+      { file: pkg.publishConfig.main, format: 'cjs' },
     ],
   },
 ]

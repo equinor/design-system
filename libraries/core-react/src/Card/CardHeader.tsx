@@ -27,4 +27,4 @@ export const CardHeader = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-CardHeader.displayName = 'eds-card-header'
+// CardHeader.displayName = 'eds-card-header'

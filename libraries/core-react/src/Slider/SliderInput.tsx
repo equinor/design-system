@@ -195,4 +195,4 @@ export const SliderInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   )
 })
 
-SliderInput.displayName = 'eds-slider-input'
+SliderInput.displayName = 'SliderInput'

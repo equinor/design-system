@@ -29,4 +29,4 @@ export const Header = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-Header.displayName = 'eds-topbar-header'
+// Header.displayName = 'eds-topbar-header'

@@ -17,7 +17,7 @@ const indeterminate = keyframes`
     left: 107%;
     right: -8%;
   }
-    
+
 `
 
 const ProgressRoot = styled.div`
@@ -114,6 +114,6 @@ const LinearProgress = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-LinearProgress.displayName = 'eds-linear-progress'
+// LinearProgress.displayName = 'eds-linear-progress'
 
 export { LinearProgress }

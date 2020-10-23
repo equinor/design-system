@@ -53,6 +53,6 @@ const TableOfContents = forwardRef<HTMLElement, Props>(function TableOfContents(
   )
 })
 
-TableOfContents.displayName = 'eds-toc'
+// TableOfContents.displayName = 'eds-toc'
 
 export { TableOfContents }

@@ -59,4 +59,4 @@ export const BannerIcon: FC<Props> = ({
   )
 }
 
-BannerIcon.displayName = 'eds-banner-icon'
+// BannerIcon.displayName = 'eds-banner-icon'

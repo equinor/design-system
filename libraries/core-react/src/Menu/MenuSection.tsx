@@ -52,4 +52,4 @@ export const MenuSection = React.memo(function EdsMenuSection(props: Props) {
   )
 })
 
-MenuSection.displayName = 'EdsMenuSection'
+// MenuSection.displayName = 'EdsMenuSection'

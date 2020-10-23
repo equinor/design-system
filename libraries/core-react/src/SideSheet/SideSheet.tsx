@@ -91,4 +91,4 @@ export const SideSheet = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-SideSheet.displayName = 'eds-sidesheet'
+// SideSheet.displayName = 'eds-sidesheet'

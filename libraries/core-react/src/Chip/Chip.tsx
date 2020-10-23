@@ -225,4 +225,4 @@ export const Chip = forwardRef<HTMLDivElement, Props>(function EdsChips(
   )
 })
 
-Chip.displayName = 'eds-chip'
+// Chip.displayName = 'eds-chip'

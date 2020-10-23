@@ -142,4 +142,4 @@ export const Typography = forwardRef<HTMLElement, Props>(function EdsTypography(
   )
 })
 
-Typography.displayName = 'eds-typography'
+// Typography.displayName = 'EdsTypography'

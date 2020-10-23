@@ -55,4 +55,4 @@ export const Card = forwardRef<HTMLDivElement, Props>(function EdsCard(
   )
 })
 
-Card.displayName = 'eds-card'
+// Card.displayName = 'eds-card'

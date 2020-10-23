@@ -11,4 +11,4 @@ export const Row: FunctionComponent<Props> = (props) => {
   return <TableBase {...props}>{children}</TableBase>
 }
 
-Row.displayName = 'EdsTableRow'
+// Row.displayName = 'EdsTableRow'

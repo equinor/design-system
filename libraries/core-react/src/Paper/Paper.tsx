@@ -31,4 +31,4 @@ export const Paper = forwardRef<HTMLDivElement, Props>(function EdsPaper(
   return <StyledPaper {...props} ref={ref} />
 })
 
-Paper.displayName = 'eds-scrim'
+// Paper.displayName = 'eds-scrim'

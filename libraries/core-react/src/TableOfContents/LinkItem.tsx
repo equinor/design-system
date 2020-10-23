@@ -69,7 +69,7 @@ const LinkItem = forwardRef<HTMLLIElement, Props>(function EdsLinkItem(
   )
 })
 
-LinkItem.displayName = 'eds-linkitem'
+// LinkItem.displayName = 'eds-linkitem'
 
 LinkItem.propTypes = {
   /** @ignore */

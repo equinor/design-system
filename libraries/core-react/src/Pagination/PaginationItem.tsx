@@ -34,4 +34,4 @@ export const PaginationItem = forwardRef<HTMLButtonElement, Props>(
   },
 )
 
-PaginationItem.displayName = 'eds-pagination-item'
+// PaginationItem.displayName = 'eds-pagination-item'

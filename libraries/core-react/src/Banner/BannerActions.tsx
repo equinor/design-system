@@ -38,4 +38,4 @@ export const BannerActions: FC<Props> = ({
   )
 }
 
-BannerActions.displayName = 'eds-banner-actions'
+// BannerActions.displayName = 'eds-banner-actions'

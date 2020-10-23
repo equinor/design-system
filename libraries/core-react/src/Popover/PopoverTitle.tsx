@@ -38,4 +38,4 @@ export const PopoverTitle = forwardRef<HTMLDivElement, Props>(
   },
 )
 
-PopoverTitle.displayName = 'eds-popover-title'
+// PopoverTitle.displayName = 'eds-popover-title'

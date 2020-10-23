@@ -18,4 +18,4 @@ export const BannerMessage: FC<Props> = ({ children, ...props }) => {
   )
 }
 
-BannerMessage.displayName = 'eds-banner-message'
+// BannerMessage.displayName = 'eds-banner-message'

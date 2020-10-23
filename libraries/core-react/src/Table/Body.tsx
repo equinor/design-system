@@ -9,4 +9,4 @@ export const Body = ({ children, ...props }: Props): JSX.Element => {
   return <TableBase {...props}>{children}</TableBase>
 }
 
-Body.displayName = 'eds-table-body'
+// Body.displayName = 'eds-table-body'

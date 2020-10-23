@@ -46,4 +46,4 @@ export const Banner: FC<Props> = ({ children, className, ...props }) => {
   )
 }
 
-Banner.displayName = 'eds-banner'
+// Banner.displayName = 'eds-banner'

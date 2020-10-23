@@ -63,6 +63,6 @@ const Icon = React.forwardRef<HTMLDivElement, Props>(function TextFieldIcon(
   )
 })
 
-Icon.displayName = 'eds-text-field-icon'
+// Icon.displayName = 'eds-text-field-icon'
 
 export { Icon }

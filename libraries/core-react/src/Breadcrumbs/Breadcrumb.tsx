@@ -68,4 +68,4 @@ export const Breadcrumb = forwardRef<HTMLDivElement, Props>(function Breadcrumb(
   )
 })
 
-Breadcrumb.displayName = 'eds-breadcrumb'
+// Breadcrumb.displayName = 'eds-breadcrumb'

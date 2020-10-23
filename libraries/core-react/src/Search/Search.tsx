@@ -298,4 +298,4 @@ export const Search = React.forwardRef(function EdsSearch(
   )
 })
 
-Search.displayName = 'eds-search'
+// Search.displayName = 'eds-search'

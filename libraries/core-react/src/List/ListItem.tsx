@@ -13,6 +13,6 @@ const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem(
   )
 })
 
-ListItem.displayName = 'ListItem'
+// ListItem.displayName = 'ListItem'
 
 export { ListItem }

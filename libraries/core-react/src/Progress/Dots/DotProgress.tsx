@@ -58,6 +58,6 @@ const DotProgress = forwardRef<SVGSVGElement, Props>(function DotProgress(
   )
 })
 
-DotProgress.displayName = 'eds-dot-progress'
+// DotProgress.displayName = 'eds-dot-progress'
 
 export { DotProgress }

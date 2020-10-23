@@ -38,6 +38,6 @@ const Label = React.forwardRef<HTMLLabelElement, Props>(function TextFieldLabel(
   )
 })
 
-Label.displayName = 'eds-text-field-label'
+// Label.displayName = 'eds-text-field-label'
 
 export { Label }

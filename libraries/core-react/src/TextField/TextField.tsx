@@ -105,6 +105,6 @@ const TextField = React.forwardRef<HTMLInputElement, Props>(function TextField(
   )
 })
 
-TextField.displayName = 'eds-text-field'
+// TextField.displayName = 'eds-text-field'
 
 export { TextField }
