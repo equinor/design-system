@@ -5,7 +5,6 @@ import { card as tokens } from './Card.tokens'
 
 type Props = {
   fullWidth?: boolean
-  spacing?: typeof tokens.spacings.left
 } & React.HTMLAttributes<HTMLDivElement>
 
 const StyledCardMedia = styled.div<Props>`
@@ -15,17 +14,19 @@ const StyledCardMedia = styled.div<Props>`
     margin-bottom: 8px;
     /* Last child to have 24px total spacing to bottom */
   }
-  ${({ fullWidth, spacing }) =>
+  ${({ fullWidth }) =>
     fullWidth
       ? css`
           > * {
-            width: calc(100% + ${spacing} + ${spacing});
-            margin-left: -${spacing};
-            margin-right: -${spacing};
+            width: calc(
+              100% + ${tokens.spacings.left} + ${tokens.spacings.right}
+            );
+            margin-left: -${tokens.spacings.left};
+            margin-right: -${tokens.spacings.right};
           }
 
           &:first-child {
-            margin-top: -${spacing};
+            margin-top: -${tokens.spacings.top};
             img {
               border-top-right-radius: ${tokens.shape.borderRadius};
               border-top-left-radius: ${tokens.shape.borderRadius};
@@ -49,7 +50,6 @@ export const CardMedia = forwardRef<HTMLDivElement, Props>(
       className,
       ref,
       fullWidth,
-      spacing: tokens.spacings.left,
     }
 
     return <StyledCardMedia {...props}>{children}</StyledCardMedia>
