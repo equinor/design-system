@@ -1,7 +1,11 @@
-// @ts-nocheck
 // Workaround
 // React ignores 'dispathEvent' on input/textarea, see https://github.com/facebook/react/issues/10135
-export const setReactInputValue = (input, value) => {
+// @ts-nocheck
+
+export const setReactInputValue = (
+  input: React.InputHTMLAttributes<HTMLInputElement>,
+  value: string,
+): void => {
   const previousValue = input.value
 
   // eslint-disable-next-line no-param-reassign

@@ -1,7 +1,9 @@
 // @ts-nocheck
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, Ref } from 'react'
 
-export const useCombinedRefs = (...refs) => {
+export const useCombinedRefs = <T extends any>(
+  ...refs: Array<Ref<T>>
+): Ref<T> => {
   const targetRef = useRef(null)
 
   useEffect(() => {
@@ -10,7 +12,7 @@ export const useCombinedRefs = (...refs) => {
       if (typeof ref === 'function') {
         ref(targetRef.current)
       } else {
-        ref.current = targetRef.current
+        ;(ref as any).current = (targetRef as any).current
       }
     })
   }, [refs])
