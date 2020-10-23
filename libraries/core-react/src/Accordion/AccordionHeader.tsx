@@ -72,7 +72,7 @@ const StyledIcon = styled(
   chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
 )
 
-type AccordionHeaderTitleProps = Props & AccordionProps
+type AccordionHeaderTitleProps = AccordionHeaderProps & AccordionProps
 
 const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
   flex: 1;
@@ -87,7 +87,7 @@ const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
 
 // AccordionHeaderTitle.displayName = 'EdsAccordionHeadertitle'
 
-type Props = {
+type AccordionHeaderProps = {
   /** The id of the button that toggles expansion */
   id?: string
   /** Is AccordionItem expanded */
@@ -108,7 +108,7 @@ type AccordionChild = {
 
 const AccordionHeader = forwardRef<
   HTMLDivElement,
-  Props & AccordionProps & JSX.IntrinsicElements['div']
+  AccordionHeaderProps & AccordionProps & JSX.IntrinsicElements['div']
 >(function AccordionHeader(
   {
     parentIndex,
