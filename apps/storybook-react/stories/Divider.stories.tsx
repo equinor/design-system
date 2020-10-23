@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react'
 import styled from 'styled-components'
-
 import { Divider, DividerProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
