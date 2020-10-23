@@ -25,11 +25,11 @@ const NonMarginDivider = styled(Divider)`
   height: 2px;
 `
 
-type Props = {
+export type BannerProps = {
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
-export const Banner: FC<Props> = ({ children, className, ...props }) => {
+export const Banner: FC<BannerProps> = ({ children, className, ...props }) => {
   const childrenWhereBannerIcon: boolean[] = React.Children.map(
     children,
     (child) => {
