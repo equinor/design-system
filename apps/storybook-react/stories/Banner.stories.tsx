@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Meta } from '@storybook/react'
 import { Banner, Icon, Typography, Button } from '@equinor/eds-core-react'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 
@@ -9,6 +10,7 @@ const icons = {
   thumbs_down,
   mood_sad,
 }
+
 const { BannerIcon, BannerMessage, BannerActions } = Banner
 Icon.add(icons)
 
@@ -30,7 +32,7 @@ const PaddedTypography = styled(Typography)`
 export default {
   title: 'Components/Banner',
   component: Banner,
-}
+} as Meta
 
 export const Examples = () => {
   return (
