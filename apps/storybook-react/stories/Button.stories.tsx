@@ -34,9 +34,7 @@ export default {
 } as Meta
 
 export const Default: Story<ButtonProps> = (args) => (
-  <Button {...args} color="primary">
-    Primary
-  </Button>
+  <Button {...args}>Primary</Button>
 )
 
 export const All: Story<ButtonProps> = () => (
