@@ -2,7 +2,7 @@ import { Accordion as BaseAccordion } from './Accordion'
 import { AccordionItem } from './AccordionItem'
 import { AccordionHeaderTitle, AccordionHeader } from './AccordionHeader'
 import { AccordionPanel } from './AccordionPanel'
-import type { AccordionProps } from './Accordion.types'
+import type { AccordionProps as Props } from './Accordion.types'
 
 type AllAccordionProps = typeof BaseAccordion & {
   AccordionItem: typeof AccordionItem
@@ -18,4 +18,5 @@ Accordion.AccordionHeader = AccordionHeader
 Accordion.AccordionHeaderTitle = AccordionHeaderTitle
 Accordion.AccordionPanel = AccordionPanel
 
-export { Accordion, AccordionProps }
+export { Accordion }
+export type AccordionProps = Props
