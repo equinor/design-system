@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementType } from 'react'
+import React, { forwardRef, ElementType, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import {
@@ -45,7 +45,9 @@ const findTypography = (
   return (typography[group] as unknown)[variantName] as TypographyType
 }
 
-const findColor = (inputColor: ColorVariants): string =>
+const findColor: (a: ColorVariants | string) => string = (
+  inputColor = null,
+): string =>
   typeof colors[inputColor] === 'undefined' ? inputColor : colors[inputColor]
 
 const toVariantName = (
@@ -82,64 +84,66 @@ const StyledTypography = styled.p<StyledProps>`
     `}
 `
 
-export type Props = {
+export type TypographyProps = {
   variant?: TypographyVariants
   group?: TypographyGroups
   bold?: boolean
   italic?: boolean
   link?: boolean
-  color?: ColorVariants
+  color?: ColorVariants | string
   token?: Partial<TypographyType>
   lines?: number
   as?: ElementType
-} & React.HTMLAttributes<HTMLElement>
+} & HTMLAttributes<HTMLElement>
 
-export const Typography = forwardRef<HTMLElement, Props>(function EdsTypography(
-  {
-    variant = 'body_short',
-    children,
-    bold,
-    italic,
-    link,
-    group,
-    token,
-    as: providedAs,
-    ...other
-  },
-  ref,
-) {
-  const as: ElementType = providedAs
-    ? providedAs
-    : getElementType(variant, link)
+export const Typography = forwardRef<HTMLElement, TypographyProps>(
+  function Typography(
+    {
+      variant = 'body_short',
+      children,
+      bold,
+      italic,
+      link,
+      group,
+      token,
+      as: providedAs,
+      ...other
+    },
+    ref,
+  ) {
+    const as: ElementType = providedAs
+      ? providedAs
+      : getElementType(variant, link)
 
-  const variantName = toVariantName(
-    variant,
-    bold,
-    italic,
-    link,
-  ) as TypographyVariants
+    const variantName = toVariantName(
+      variant,
+      bold,
+      italic,
+      link,
+    ) as TypographyVariants
 
-  const typography = findTypography(variantName, group)
+    const typography = findTypography(variantName, group)
 
-  if (typeof typography === 'undefined') {
-    throw new Error(
-      `Typography variant not found for variant "${variantName}" ("${variant}") & group "${
-        group || ''
-      }"`,
+    if (typeof typography === 'undefined') {
+      throw new Error(
+        `Typography variant not found for variant "${variantName}" ("${variant}") & group "${
+          group || ''
+        }"`,
+      )
+    }
+
+    return (
+      <StyledTypography
+        as={as}
+        typography={{ ...typography, ...token }}
+        link={link}
+        ref={ref}
+        {...other}
+      >
+        {children}
+      </StyledTypography>
     )
-  }
-
-  return (
-    <StyledTypography
-      as={as}
-      typography={{ ...typography, ...token }}
-      link={link}
-      ref={ref}
-      {...other}
-    >
-      {children}
-    </StyledTypography>
-  )
-})
+  },
+)
 
 // Typography.displayName = 'EdsTypography'

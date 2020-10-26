@@ -1,7 +1,7 @@
 import React from 'react'
-import { Typography } from '@equinor/eds-core-react'
+import { Typography, TypographyProps } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import './../style.css'
+import { Story, Meta } from '@storybook/react'
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -15,9 +15,9 @@ const Grid = styled(Wrapper)`
 export default {
   title: 'Components/Typography',
   component: Typography,
-}
+} as Meta
 
-export const headings = () => (
+export const headings: Story<TypographyProps> = () => (
   <Grid>
     <Typography variant="h1" bold>
       Heading 1 bold
@@ -31,7 +31,7 @@ export const headings = () => (
   </Grid>
 )
 
-export const paragraphs = () => (
+export const paragraphs = (): JSX.Element => (
   <Grid>
     <Typography variant="body_short" link>
       Body short link
@@ -67,7 +67,7 @@ export const paragraphs = () => (
   </Grid>
 )
 
-export const colors = () => (
+export const colors = (): JSX.Element => (
   <Grid>
     <Typography color="primary"> Primary</Typography>
     <Typography color="secondary">Secondary</Typography>
@@ -80,7 +80,7 @@ export const colors = () => (
   </Grid>
 )
 
-export const custom = () => (
+export const custom = (): JSX.Element => (
   <Grid>
     <Typography group="navigation" variant="label">
       Navigation / Label
@@ -126,7 +126,7 @@ export const custom = () => (
   </Grid>
 )
 
-export const Lines = () => (
+export const Lines = (): JSX.Element => (
   <Wrapper>
     <Typography variant="body_long" lines={2}>
       Cupcake ipsum dolor sit amet caramels powder. Chocolate powder donut

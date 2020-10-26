@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react'
 import styled from 'styled-components'
 import { Divider, DividerProps } from '@equinor/eds-core-react'
@@ -8,9 +11,7 @@ export default {
   component: Divider,
 } as Meta
 
-type WrapperProps = React.HTMLAttributes<HTMLDivElement>
-
-const Wrapper = styled.div<WrapperProps>`
+const Wrapper = styled.div`
   padding: 32px;
   background-color: #999;
 `
