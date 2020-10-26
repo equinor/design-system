@@ -9,7 +9,7 @@ const {
   border,
 } = tokens
 
-export type AccordionPanelProps = {
+type AccordionPanelProps = {
   /** The ID of the element that controls the panel */
   headerId?: string
   /** The ID of the panel */

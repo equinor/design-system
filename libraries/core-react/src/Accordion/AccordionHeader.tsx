@@ -87,7 +87,7 @@ const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
 
 // AccordionHeaderTitle.displayName = 'EdsAccordionHeadertitle'
 
-export type AccordionHeaderProps = {
+type AccordionHeaderProps = {
   /** The id of the button that toggles expansion */
   id?: string
   /** Is AccordionItem expanded */

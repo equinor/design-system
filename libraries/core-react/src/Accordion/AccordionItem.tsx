@@ -1,7 +1,7 @@
 import React, { forwardRef, useState, useEffect, ReactElement } from 'react'
 import type { AccordionProps } from './Accordion.types'
 
-export type AccordionItemProps = {
+type AccordionItemProps = {
   index?: number
   accordionId?: string
   /** Is AccordionItem expanded */
