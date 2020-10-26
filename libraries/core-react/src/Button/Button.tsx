@@ -109,7 +109,7 @@ const ButtonBase = styled.button`
     content: '';
   }
 `
-type Props = {
+export type ButtonProps = {
   /**  Specifies color */
   color?: 'primary' | 'secondary' | 'danger'
   /** Specifies which variant to use */
@@ -123,46 +123,48 @@ type Props = {
   disabled?: boolean
   /** Change html element */
   as?: ElementType
-  /** ttype */
+  /** Type of button */
   type?: string
 } & React.HTMLAttributes<HTMLButtonElement>
 
-export const Button = forwardRef<HTMLButtonElement, Props>(function Button(
-  {
-    color = 'primary',
-    variant = 'contained',
-    children,
-    disabled,
-    href,
-    ...other
-  },
-  ref,
-) {
-  const colorBase: ButtonGroups | Partial<ButtonGroups> = colors[color] || {}
-  const token = colorBase[variant] || {}
-  const disabledToken = colors.disabled[variant] || {}
-
-  const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
-  const type = href || other.as ? undefined : 'button'
-  const tabIndex = disabled ? -1 : other.tabIndex
-
-  const buttonProps = {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
+    {
+      color = 'primary',
+      variant = 'contained',
+      children,
+      disabled,
+      href,
+      ...other
+    },
     ref,
-    as,
-    href,
-    type,
-    token,
-    disabledToken,
-    disabled,
-    tabIndex,
-    ...other,
-  }
+  ) {
+    const colorBase: ButtonGroups | Partial<ButtonGroups> = colors[color] || {}
+    const token = colorBase[variant] || {}
+    const disabledToken = colors.disabled[variant] || {}
 
-  return (
-    <ButtonBase {...buttonProps}>
-      <ButtonInner>{children}</ButtonInner>
-    </ButtonBase>
-  )
-})
+    const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
+    const type = href || other.as ? undefined : 'button'
+    const tabIndex = disabled ? -1 : other.tabIndex
+
+    const buttonProps = {
+      ref,
+      as,
+      href,
+      type,
+      token,
+      disabledToken,
+      disabled,
+      tabIndex,
+      ...other,
+    }
+
+    return (
+      <ButtonBase {...buttonProps}>
+        <ButtonInner>{children}</ButtonInner>
+      </ButtonBase>
+    )
+  },
+)
 
 // Button.displayName = 'Button'

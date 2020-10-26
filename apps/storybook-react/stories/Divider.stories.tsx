@@ -6,20 +6,6 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 export default {
   title: 'Components/Divider',
   component: Divider,
-  argTypes: {
-    color: {
-      control: {
-        type: 'radio',
-        options: ['lighter', 'light', 'medium'],
-      },
-    },
-    variant: {
-      control: {
-        type: 'radio',
-        options: ['medium', 'small'],
-      },
-    },
-  },
 } as Meta
 
 type WrapperProps = React.HTMLAttributes<HTMLDivElement>

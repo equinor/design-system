@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Icon } from '@equinor/eds-core-react'
+import { Button, Icon, ButtonProps } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
 import { Meta, Story } from '@storybook/react'
@@ -33,8 +33,35 @@ export default {
   component: Button,
 } as Meta
 
-export const All: Story = (args) => <Button>Primary</Button>
+export const Default: Story<ButtonProps> = (args) => (
+  <Button {...args} color="primary">
+    Primary
+  </Button>
+)
 
+export const All: Story<ButtonProps> = () => (
+  <Wrapper>
+    <Button>Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="danger">Danger</Button>
+    <Button disabled>Disabled</Button>
+    <Button variant="outlined">Primary</Button>
+    <Button variant="outlined" color="secondary">
+      Secondary
+    </Button>
+  </Wrapper>
+)
+
+/* const Template: Story<ButtonProps> = (args) => <Button {...args} />
+
+export const Primary = Template.bind({})
+
+Primary.args = {
+  children: 'Primary',
+}
+
+
+ */
 /* export const allButtons = () => (
   <Wrapper>
     <Button>Primary</Button>
