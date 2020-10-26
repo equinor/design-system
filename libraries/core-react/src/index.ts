@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 export { Button } from './Button'
-export { Typography } from './Typography'
+export * from './Typography'
 export { Table } from './Table'
 export { Divider, DividerProps } from './Divider'
 export { TextField } from './TextField'

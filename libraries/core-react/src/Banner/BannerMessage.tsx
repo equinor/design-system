@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
-import { Props as TypographyProps } from '../Typography/Typography'
+import { TypographyProps } from '../Typography/Typography'
 
 const StyledBannerMessage = styled(Typography)``
 
