@@ -2,14 +2,10 @@ import React from 'react'
 import { Button, Icon } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { withKnobs, select, text } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import './../style.css'
 import './button.css'
-
-export default {
-  title: 'Components/Button',
-  component: Button,
-}
 
 const VARIANT = {
   CONTAINED: 'contained',
@@ -32,7 +28,14 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(4, fit-content(100%));
 `
 
-export const allButtons = () => (
+export default {
+  title: 'Components/Button',
+  component: Button,
+} as Meta
+
+export const All: Story = (args) => <Button>Primary</Button>
+
+/* export const allButtons = () => (
   <Wrapper>
     <Button>Primary</Button>
     <Button color="secondary">Secondary</Button>
@@ -71,8 +74,8 @@ export const allButtons = () => (
       <Icon name="save" title="save"></Icon>
     </Button>
   </Wrapper>
-)
-export const contained = () => (
+) */
+/* export const contained = () => (
   <Wrapper>
     <Button>Primary</Button>
     <Button color="secondary">Secondary</Button>
@@ -106,11 +109,11 @@ export const contained = () => (
       <Icon name="save" title="save"></Icon>
     </Button>
   </Wrapper>
-)
+) */
 
-contained.storyName = 'Contained (default)'
+/* contained.storyName = 'Contained (default)' */
 
-export const outlined = () => (
+/* export const outlined = () => (
   <Wrapper>
     <Button variant="outlined">Primary</Button>
     <Button variant="outlined" color="secondary">
@@ -155,9 +158,9 @@ export const outlined = () => (
       <Icon name="save" title="save"></Icon>
     </Button>
   </Wrapper>
-)
+) */
 
-export const ghost = () => (
+/* export const ghost = () => (
   <Wrapper>
     <Button variant="ghost">Primary</Button>
     <Button variant="ghost" color="secondary">
@@ -214,8 +217,8 @@ export const ghost = () => (
       <Icon name="save" title="save"></Icon>
     </Button>
   </Wrapper>
-)
-
+) */
+/* 
 export const knobs = () => (
   <Wrapper>
     <Button
@@ -229,9 +232,9 @@ export const knobs = () => (
       {text('Label', 'Some label')}
     </Button>
   </Wrapper>
-)
+) */
 
-export const form = () => {
+/* export const form = () => {
   const handleSubmit = (e) => {
     e.preventDefault() // to prevent navigation from storybook
     action('onSubmit')(e)
@@ -245,8 +248,8 @@ export const form = () => {
     </Wrapper>
   )
 }
-
-export const fileUpload = () => {
+ */
+/* export const fileUpload = () => {
   return (
     <Wrapper>
       <input
@@ -260,13 +263,13 @@ export const fileUpload = () => {
       </label>
     </Wrapper>
   )
-}
-
+} */
+/* 
 export const link = () => (
   <Wrapper>
     <Button href="#">Link</Button>
   </Wrapper>
-)
+) */
 
-knobs.storyName = 'With knobs'
-knobs.decorators = [withKnobs]
+/* knobs.storyName = 'With knobs'
+knobs.decorators = [withKnobs] */
