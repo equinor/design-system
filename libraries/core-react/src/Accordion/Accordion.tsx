@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo, ReactElement } from 'react'
 import createId from 'lodash/uniqueId'
-import { AccordionProps } from './Accordion.types'
+import type { AccordionProps } from './Accordion.types'
 
 const Accordion = forwardRef<
   HTMLDivElement,

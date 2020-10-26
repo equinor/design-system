@@ -1,12 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import {
-  Accordion,
-  Button,
-  Icon,
-  AccordionProps,
-} from '@equinor/eds-core-react'
+import { Accordion, Button, Icon } from '@equinor/eds-core-react'
+import type { AccordionProps } from '@equinor/eds-core-react'
 import { Meta, Story } from '@storybook/react'
 import {
   attach_file,
@@ -41,24 +37,22 @@ export default {
   },
 } as Meta
 
-export const simple: Story<AccordionProps> = (args) => {
-  return (
-    <Accordion {...args}>
-      <AccordionItem isExpanded>
-        <AccordionHeader>Header 1</AccordionHeader>
-        <AccordionPanel>Content 1</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionHeader>Header 2</AccordionHeader>
-        <AccordionPanel>Content 2</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionHeader>Header 3</AccordionHeader>
-        <AccordionPanel>Content 3</AccordionPanel>
-      </AccordionItem>
-    </Accordion>
-  )
-}
+export const simple: Story<AccordionProps> = () => (
+  <Accordion>
+    <AccordionItem isExpanded>
+      <AccordionHeader>Header 1</AccordionHeader>
+      <AccordionPanel>Content 1</AccordionPanel>
+    </AccordionItem>
+    <AccordionItem>
+      <AccordionHeader>Header 2</AccordionHeader>
+      <AccordionPanel>Content 2</AccordionPanel>
+    </AccordionItem>
+    <AccordionItem>
+      <AccordionHeader>Header 3</AccordionHeader>
+      <AccordionPanel>Content 3</AccordionPanel>
+    </AccordionItem>
+  </Accordion>
+)
 
 export const header: Story<AccordionProps> = () => {
   return (
