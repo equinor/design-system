@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementType } from 'react'
+import React, { forwardRef, ElementType, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import {
@@ -94,7 +94,7 @@ export type TypographyProps = {
   token?: Partial<TypographyType>
   lines?: number
   as?: ElementType
-} & React.HTMLAttributes<HTMLElement>
+} & HTMLAttributes<HTMLElement>
 
 export const Typography = forwardRef<HTMLElement, TypographyProps>(
   function Typography(
