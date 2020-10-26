@@ -7,7 +7,7 @@ const {
   disabled: { image: disabledImage },
 } = tokens
 
-type StyledAvatarProps = {
+export type StyledAvatarProps = {
   size: number
   disabled: boolean
 }
@@ -27,7 +27,7 @@ const StyledAvatar = styled.div<StyledAvatarProps>`
     `}
 `
 
-type StyledImageProps = {
+export type StyledImageProps = {
   alt: string
   src: string
   disabled: boolean
@@ -45,7 +45,7 @@ const StyledImage = styled.img<StyledImageProps>`
     `};
 `
 
-type AvatarProps = {
+export type AvatarProps = {
   alt: string
   /** Image source
    @default null */
