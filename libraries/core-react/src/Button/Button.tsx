@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementType } from 'react'
+import React, { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { button, Button as ButtonType, ButtonGroups } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
@@ -121,11 +121,11 @@ export type ButtonProps = {
   href?: string
   /** Is disabled */
   disabled?: boolean
-  /** Change html element */
+  /** Change html element. Use 'a' for a link */
   as?: ElementType
   /** Type of button */
   type?: string
-} & React.HTMLAttributes<HTMLButtonElement>
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(
