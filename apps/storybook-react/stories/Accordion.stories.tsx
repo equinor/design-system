@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { Accordion, Button, Icon } from '@equinor/eds-core-react'
-import type { AccordionProps } from '@equinor/eds-core-react'
+import {
+  Accordion,
+  Button,
+  Icon,
+  AccordionProps,
+} from '@equinor/eds-core-react'
 import { Meta, Story } from '@storybook/react'
 import {
   attach_file,
