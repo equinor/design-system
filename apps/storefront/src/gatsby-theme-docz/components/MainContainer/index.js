@@ -117,7 +117,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
     route,
     mode = 'draft',
     type = 'contentPage',
-    slug,
+    filepath,
   } = doc.value
 
   const docs = useDocs()
@@ -223,7 +223,7 @@ export const MainContainer = ({ children, doc, ...rest }) => {
               <Content>
                 {children}
 
-                <EditPageOnGithub slug={slug} />
+                <EditPageOnGithub slug={filepath} />
               </Content>
             </Wrapper>
           </>
