@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { Meta, Story } from '@storybook/react'
 import {
   Accordion,
   Button,
   Icon,
   AccordionProps,
 } from '@equinor/eds-core-react'
+import { Meta, Story } from '@storybook/react'
 import {
   attach_file,
   notifications,
@@ -60,40 +60,40 @@ export const simple: Story<AccordionProps> = (args) => {
   )
 }
 
-export const header: Story<AccordionProps> = (args) => {
+export const header: Story<AccordionProps> = () => {
   return (
     <Wrapper>
-      <Accordion {...args} headerLevel="h3" chevronPosition="left">
+      <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>Chevron left</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion {...args} headerLevel="h3" chevronPosition="right">
+      <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem>
           <AccordionHeader>Chevron right</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion {...args} headerLevel="h3" chevronPosition="left">
+      <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem isExpanded>
           <AccordionHeader>Chevron left expanded</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion {...args} headerLevel="h3" chevronPosition="right">
+      <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled>
           <AccordionHeader>Disabled</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion {...args} headerLevel="h3" chevronPosition="right">
+      <Accordion headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled isExpanded>
           <AccordionHeader>Disabled expanded</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion {...args} headerLevel="h3" chevronPosition="left">
+      <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
             <AccordionHeaderTitle>
@@ -116,7 +116,7 @@ export const header: Story<AccordionProps> = (args) => {
         </AccordionItem>
       </Accordion>
 
-      <Accordion {...args} headerLevel="h3" chevronPosition="left">
+      <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
             <AccordionHeaderTitle>
@@ -145,7 +145,7 @@ export const header: Story<AccordionProps> = (args) => {
         </AccordionItem>
       </Accordion>
 
-      <Accordion {...args} headerLevel="h3" chevronPosition="left">
+      <Accordion headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
             <AccordionHeaderTitle>
