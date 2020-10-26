@@ -1,5 +1,4 @@
 import React from 'react'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import { Avatar, AvatarProps, Typography } from '@equinor/eds-core-react'
@@ -21,32 +20,25 @@ const Wrapper = styled.div`
 export default {
   title: 'Components/Avatar',
   component: Avatar,
-  decorators: [withKnobs],
 } as Meta
 
-export const Examples: Story<AvatarProps> = (args) => (
+export const Default: Story<AvatarProps> = (args) => (
+  <Avatar src={image} {...args}></Avatar>
+)
+
+export const Examples: Story<AvatarProps> = () => (
   <Container>
     <Typography variant="h2">Sizes</Typography>
     <Wrapper>
-      <Avatar {...args} src={image} size={16} alt="avatar"></Avatar>
-      <Avatar {...args} src={image} size={24} alt="avatar"></Avatar>
-      <Avatar {...args} src={image} size={32} alt="avatar"></Avatar>
-      <Avatar {...args} src={image} size={40} alt="avatar"></Avatar>
-      <Avatar {...args} src={image} size={48} alt="avatar"></Avatar>
+      <Avatar src={image} size={16} alt="avatar"></Avatar>
+      <Avatar src={image} size={24} alt="avatar"></Avatar>
+      <Avatar src={image} size={32} alt="avatar"></Avatar>
+      <Avatar src={image} size={40} alt="avatar"></Avatar>
+      <Avatar src={image} size={48} alt="avatar"></Avatar>
     </Wrapper>
     <Typography variant="h2">Disabled</Typography>
     <Wrapper>
-      <Avatar {...args} src={image} disabled alt="avatar"></Avatar>
-    </Wrapper>
-    <Typography variant="h2">Knobs</Typography>
-    <Wrapper>
-      <Avatar
-        {...args}
-        alt="avatar"
-        src={text('Source', 'https://i.imgur.com/UM3mrju.jpg')}
-        size={select('Sizes', [16, 24, 32, 40, 48], 24)}
-        disabled={boolean('Disabled', false)}
-      ></Avatar>
+      <Avatar src={image} disabled alt="avatar"></Avatar>
     </Wrapper>
   </Container>
 )
