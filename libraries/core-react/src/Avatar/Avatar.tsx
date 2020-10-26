@@ -57,9 +57,10 @@ export type AvatarProps = {
   disabled?: boolean
 }
 
-export const Avatar = forwardRef<HTMLHRElement, AvatarProps>((props, ref) => {
-  const { src = null, alt, size = 24, disabled = false, ...rest } = props
-
+export const Avatar = forwardRef<HTMLHRElement, AvatarProps>(function Avatar(
+  { src = null, alt, size = 24, disabled = false, ...rest },
+  ref,
+) {
   return (
     <StyledAvatar size={size} disabled={disabled} ref={ref} {...rest}>
       <StyledImage src={src} alt={alt} disabled={disabled} />
