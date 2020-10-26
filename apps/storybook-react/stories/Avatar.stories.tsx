@@ -1,7 +1,7 @@
 import React from 'react'
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Story } from '@storybook/react'
+import { Story, Meta } from '@storybook/react'
 import { Avatar, AvatarProps, Typography } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
 
@@ -22,7 +22,7 @@ export default {
   title: 'Components/Avatar',
   component: Avatar,
   decorators: [withKnobs],
-}
+} as Meta
 
 export const Examples: Story<AvatarProps> = (args) => (
   <Container>
