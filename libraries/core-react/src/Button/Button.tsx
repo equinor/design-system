@@ -123,7 +123,9 @@ export type ButtonProps = {
   disabled?: boolean
   /** Change html element. */
   as?: ElementType
-  /** Type of button */
+  /** Type of button
+   * @default 'button'
+   */
   type?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
