@@ -5,7 +5,7 @@ import { Story, Meta } from '@storybook/react'
 import { Avatar, AvatarProps, Typography } from '@equinor/eds-core-react'
 import catImg from '../images/cat.jpg'
 
-const image = catImg
+const image: string = catImg
 
 const Container = styled.div`
   margin: 32px;
