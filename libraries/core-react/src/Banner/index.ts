@@ -1,4 +1,4 @@
-import { Banner as BaseBanner, BannerProps } from './Banner'
+import { Banner as BaseBanner, BannerProps as Props } from './Banner'
 import { BannerIcon } from './BannerIcon'
 import { BannerMessage } from './BannerMessage'
 import { BannerActions } from './BannerActions'
@@ -15,4 +15,5 @@ Banner.BannerIcon = BannerIcon
 Banner.BannerMessage = BannerMessage
 Banner.BannerActions = BannerActions
 
-export { Banner, BannerProps }
+export { Banner }
+export type BannerProps = Props

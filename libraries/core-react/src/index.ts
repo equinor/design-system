@@ -21,7 +21,7 @@ export { Slider } from './Slider'
 export { Tooltip } from './Tooltip'
 export { Snackbar } from './Snackbar'
 export { Popover } from './Popover'
-export { Banner, BannerProps } from './Banner'
+export * from './Banner'
 export { Radio, Checkbox, Switch } from './SelectionControls'
 export {
   DotProgress,
