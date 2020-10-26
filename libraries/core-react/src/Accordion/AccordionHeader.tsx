@@ -22,9 +22,13 @@ const {
 } = tokens
 
 type StyledAccordionHeaderProps = {
+  /** @internal  The ID of the panel */
   panelId?: string
+  /** Is AccordionItem expanded */
   isExpanded?: boolean
+  /** accordion item is disabled */
   disabled?: boolean
+  /** @internal  The ID of the parent */
   parentIndex?: number
 }
 
@@ -88,13 +92,13 @@ const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
 // AccordionHeaderTitle.displayName = 'EdsAccordionHeadertitle'
 
 type AccordionHeaderProps = {
-  /** The id of the button that toggles expansion */
+  /* @internal  The id of the button that toggles expansion */
   id?: string
   /** Is AccordionItem expanded */
   isExpanded?: boolean
-  /** The panel that is controlled by the HeaderButton */
+  /** @internal  The panel that is controlled by the HeaderButton */
   panelId?: string
-  /** The index of the parent AccordionItem  */
+  /** @internal The index of the parent AccordionItem  */
   parentIndex?: number
   /** accordion item is disabled */
   disabled?: boolean
