@@ -41,9 +41,9 @@ export default {
   },
 } as Meta
 
-export const simple = () => {
+export const simple: Story<AccordionProps> = (args) => {
   return (
-    <Accordion>
+    <Accordion {...args}>
       <AccordionItem isExpanded>
         <AccordionHeader>Header 1</AccordionHeader>
         <AccordionPanel>Content 1</AccordionPanel>
@@ -60,40 +60,40 @@ export const simple = () => {
   )
 }
 
-export const header = () => {
+export const header: Story<AccordionProps> = (args) => {
   return (
     <Wrapper>
-      <Accordion headerLevel="h3" chevronPosition="left">
+      <Accordion {...args} headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>Chevron left</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion headerLevel="h3" chevronPosition="right">
+      <Accordion {...args} headerLevel="h3" chevronPosition="right">
         <AccordionItem>
           <AccordionHeader>Chevron right</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion headerLevel="h3" chevronPosition="left">
+      <Accordion {...args} headerLevel="h3" chevronPosition="left">
         <AccordionItem isExpanded>
           <AccordionHeader>Chevron left expanded</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion headerLevel="h3" chevronPosition="right">
+      <Accordion {...args} headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled>
           <AccordionHeader>Disabled</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion headerLevel="h3" chevronPosition="right">
+      <Accordion {...args} headerLevel="h3" chevronPosition="right">
         <AccordionItem disabled isExpanded>
           <AccordionHeader>Disabled expanded</AccordionHeader>
         </AccordionItem>
       </Accordion>
 
-      <Accordion headerLevel="h3" chevronPosition="left">
+      <Accordion {...args} headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
             <AccordionHeaderTitle>
@@ -116,7 +116,7 @@ export const header = () => {
         </AccordionItem>
       </Accordion>
 
-      <Accordion headerLevel="h3" chevronPosition="left">
+      <Accordion {...args} headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
             <AccordionHeaderTitle>
@@ -145,7 +145,7 @@ export const header = () => {
         </AccordionItem>
       </Accordion>
 
-      <Accordion headerLevel="h3" chevronPosition="left">
+      <Accordion {...args} headerLevel="h3" chevronPosition="left">
         <AccordionItem>
           <AccordionHeader>
             <AccordionHeaderTitle>
