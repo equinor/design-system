@@ -119,9 +119,9 @@ export type ButtonProps = {
    * If defined, an 'a' element is used as root instead of 'button'
    */
   href?: string
-  /** Is disabled */
+  /** Is the button disabled */
   disabled?: boolean
-  /** Change html element. Use 'a' for a link */
+  /** Change html element. */
   as?: ElementType
   /** Type of button */
   type?: string
@@ -133,7 +133,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       color = 'primary',
       variant = 'contained',
       children,
-      disabled,
+      disabled = false,
       href,
       ...other
     },
