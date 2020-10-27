@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { Input } from './Input'
 import { Label } from './Label'
@@ -40,7 +40,7 @@ type Props = {
   value?: string
   /** Read Only */
   readOnly?: boolean
-} & React.HTMLAttributes<HTMLInputElement>
+} & InputHTMLAttributes<HTMLInputElement>
 
 const TextField = React.forwardRef<HTMLInputElement, Props>(function TextField(
   props,

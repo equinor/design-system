@@ -1,14 +1,14 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+type CustomContentProps = HTMLAttributes<HTMLDivElement>
 
 const StyledCustomContent = styled.div`
   grid-area: center;
 `
 
-export const CustomContent = forwardRef<HTMLDivElement, Props>(
-  function EdsTopBarCustomContent({ children, ...props }, ref) {
+export const CustomContent = forwardRef<HTMLDivElement, CustomContentProps>(
+  function CustomContent({ children, ...props }, ref) {
     return (
       <StyledCustomContent ref={ref} {...props}>
         {children}
