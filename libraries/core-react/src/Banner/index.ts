@@ -15,4 +15,4 @@ Banner.BannerIcon = BannerIcon
 Banner.BannerMessage = BannerMessage
 Banner.BannerActions = BannerActions
 
-export { Banner }
+export { Banner, BannerProps }
