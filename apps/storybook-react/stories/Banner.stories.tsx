@@ -17,6 +17,7 @@ Icon.add(icons)
 const InlineBannerActions = styled(BannerActions)`
   display: flex;
 `
+
 export default {
   title: 'Components/Banner',
   component: Banner,
