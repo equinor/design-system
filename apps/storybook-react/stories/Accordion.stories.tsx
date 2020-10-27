@@ -38,8 +38,8 @@ export default {
   },
 } as Meta
 
-export const simple: Story<AccordionProps> = () => (
-  <Accordion>
+export const simple: Story<AccordionProps> = (args) => (
+  <Accordion {...args}>
     <AccordionItem isExpanded>
       <AccordionHeader>Header 1</AccordionHeader>
       <AccordionPanel>Content 1</AccordionPanel>

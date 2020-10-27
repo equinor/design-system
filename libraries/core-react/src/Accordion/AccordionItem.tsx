@@ -2,9 +2,11 @@ import React, { forwardRef, useState, useEffect, ReactElement } from 'react'
 import type { AccordionProps } from './Accordion.types'
 
 type AccordionItemProps = {
-  /** @internal */
+  /**
+   *  @ignore */
   index?: number
-  /** @internal  */
+  /**
+   * @ignore  */
   accordionId?: string
   /** Is AccordionItem expanded */
   isExpanded?: boolean
