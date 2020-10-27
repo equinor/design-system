@@ -22,14 +22,14 @@ const StyledList = styled.div<StyledListProps>(
     `,
 )
 
-type Props = {
+export type ListProps = {
   /** Is the list an ordered or unordered list */
   variant?: 'bullet' | 'numbered'
   /** Start number if other than 1 for ordered lists */
   start?: string
 } & HTMLAttributes<HTMLUListElement | HTMLOListElement>
 
-const List = forwardRef<HTMLUListElement | HTMLOListElement, Props>(
+const List = forwardRef<HTMLUListElement | HTMLOListElement, ListProps>(
   function List({ children, variant = 'bullet', ...props }, ref) {
     const as: ElementType = variant === 'numbered' ? 'ol' : 'ul'
 
@@ -41,6 +41,6 @@ const List = forwardRef<HTMLUListElement | HTMLOListElement, Props>(
   },
 )
 
-// List.displayName = 'List'
+List.displayName = 'List'
 
 export { List }
