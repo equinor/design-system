@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { topbar as tokens } from './TopBar.tokens'
 
-type Props = React.HTMLAttributes<HTMLElement>
+export type TopbarProps = HTMLAttributes<HTMLElement>
 
 const {
   background,
@@ -31,7 +31,7 @@ const StyledTopBar = styled.header`
   ${typographyTemplate(typography)}
 `
 
-export const TopBar = forwardRef<HTMLElement, Props>(function EdsTopBar(
+export const TopBar = forwardRef<HTMLElement, TopbarProps>(function TopBar(
   { children, ...props },
   ref,
 ) {
