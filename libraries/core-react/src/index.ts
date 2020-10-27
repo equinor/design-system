@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-export { Button } from './Button'
+export * from './Button'
 export * from './Typography'
 export { Table } from './Table'
 export { Divider, DividerProps } from './Divider'

@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementType } from 'react'
+import React, { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { button, Button as ButtonType, ButtonGroups } from './Button.tokens'
 import { typographyTemplate } from '../_common/templates'
@@ -109,7 +109,7 @@ const ButtonBase = styled.button`
     content: '';
   }
 `
-type Props = {
+export type ButtonProps = {
   /**  Specifies color */
   color?: 'primary' | 'secondary' | 'danger'
   /** Specifies which variant to use */
@@ -119,50 +119,54 @@ type Props = {
    * If defined, an 'a' element is used as root instead of 'button'
    */
   href?: string
-  /** Is disabled */
+  /** Is the button disabled */
   disabled?: boolean
-  /** Change html element */
+  /** Change html element. */
   as?: ElementType
-  /** ttype */
+  /** Type of button
+   * @default 'button'
+   */
   type?: string
-} & React.HTMLAttributes<HTMLButtonElement>
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = forwardRef<HTMLButtonElement, Props>(function Button(
-  {
-    color = 'primary',
-    variant = 'contained',
-    children,
-    disabled,
-    href,
-    ...other
-  },
-  ref,
-) {
-  const colorBase: ButtonGroups | Partial<ButtonGroups> = colors[color] || {}
-  const token = colorBase[variant] || {}
-  const disabledToken = colors.disabled[variant] || {}
-
-  const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
-  const type = href || other.as ? undefined : 'button'
-  const tabIndex = disabled ? -1 : other.tabIndex
-
-  const buttonProps = {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
+    {
+      color = 'primary',
+      variant = 'contained',
+      children,
+      disabled = false,
+      href,
+      ...other
+    },
     ref,
-    as,
-    href,
-    type,
-    token,
-    disabledToken,
-    disabled,
-    tabIndex,
-    ...other,
-  }
+  ) {
+    const colorBase: ButtonGroups | Partial<ButtonGroups> = colors[color] || {}
+    const token = colorBase[variant] || {}
+    const disabledToken = colors.disabled[variant] || {}
 
-  return (
-    <ButtonBase {...buttonProps}>
-      <ButtonInner>{children}</ButtonInner>
-    </ButtonBase>
-  )
-})
+    const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
+    const type = href || other.as ? undefined : 'button'
+    const tabIndex = disabled ? -1 : other.tabIndex
+
+    const buttonProps = {
+      ref,
+      as,
+      href,
+      type,
+      token,
+      disabledToken,
+      disabled,
+      tabIndex,
+      ...other,
+    }
+
+    return (
+      <ButtonBase {...buttonProps}>
+        <ButtonInner>{children}</ButtonInner>
+      </ButtonBase>
+    )
+  },
+)
 
 // Button.displayName = 'Button'
