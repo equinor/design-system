@@ -5,12 +5,15 @@ import { TypographyProps } from '../Typography/Typography'
 
 const StyledBannerMessage = styled(Typography)``
 
-type Props = {
+export type BannerMessageProps = {
   /** Text content */
   children: string
 } & Omit<TypographyProps, 'children'>
 
-export const BannerMessage: FC<Props> = ({ children, ...props }) => {
+export const BannerMessage: FC<BannerMessageProps> = ({
+  children,
+  ...props
+}) => {
   return (
     <StyledBannerMessage variant="body_long" {...props}>
       {children}

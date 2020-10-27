@@ -7,6 +7,7 @@ const { enabled } = tokens
 type BannerActionsPlacement = 'bottom' | 'left'
 
 type StyledBannerActionsProps = {
+  /** Where to place the actions */
   placement: BannerActionsPlacement
 }
 
