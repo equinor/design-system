@@ -1,8 +1,16 @@
 import React from 'react'
-import { withKnobs, select, boolean } from '@storybook/addon-knobs'
+// import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Card, Avatar, Typography, Button, Icon } from '@equinor/eds-core-react'
+import {
+  Card,
+  Avatar,
+  Typography,
+  Button,
+  Icon,
+  CardProps,
+} from '@equinor/eds-core-react'
 import { more_verticle, share, person_add, settings } from '@equinor/eds-icons'
+import { Meta, Story } from '@storybook/react'
 
 const icons = {
   more_verticle,
@@ -39,10 +47,18 @@ const Grid = styled.div`
 export default {
   title: 'Components/Card',
   component: Card,
-  decorators: [withKnobs],
-}
+  subcomponents: { CardHeader, CardHeaderTitle, CardMedia, CardActions },
+} as Meta
 
-export const CardVariants = () => {
+export const Default: Story<CardProps> = (args) => (
+  <Card {...args}>
+    <CardHeader>
+      <Typography>Default</Typography>
+    </CardHeader>
+  </Card>
+)
+
+/* export const CardVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
@@ -73,8 +89,8 @@ export const CardVariants = () => {
     </Wrapper>
   )
 }
-
-export const CardHeaderVariants = () => {
+ */
+/* export const CardHeaderVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
@@ -218,20 +234,20 @@ export const CardHeaderVariants = () => {
     </Wrapper>
   )
 }
-
-const CardMediafullWidth = () => (
+ */
+/* const CardMediafullWidth = () => (
   <CardMedia fullWidth>
     <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
   </CardMedia>
 )
-
-const CardMediaDefault = () => (
+ */
+/* const CardMediaDefault = () => (
   <CardMedia>
     <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
   </CardMedia>
-)
+) */
 
-export const CardMediaVariants = () => {
+/* export const CardMediaVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
@@ -288,16 +304,16 @@ export const CardMediaVariants = () => {
       </Body>
     </Wrapper>
   )
-}
+} */
 
-const CardActionsDefault = () => (
+/* const CardActionsDefault = () => (
   <CardActions>
     <Button>Cancel</Button>
     <Button>OK</Button>
   </CardActions>
 )
-
-const CardActionsAlignedRight = () => (
+ */
+/* const CardActionsAlignedRight = () => (
   <CardActions alignRight>
     <Button variant="ghost_icon">
       <Icon name="person_add" title="add person action" size={48}></Icon>
@@ -310,16 +326,16 @@ const CardActionsAlignedRight = () => (
     </Button>
   </CardActions>
 )
-
-const CardActionsMeta = () => (
+ */
+/* const CardActionsMeta = () => (
   <CardActions meta="Share">
     <Button variant="ghost_icon">
       <Icon name="share" title="share action" size={48}></Icon>
     </Button>
   </CardActions>
 )
-
-export const CardActionsVariants = () => {
+ */
+/* export const CardActionsVariants = () => {
   return (
     <Wrapper tabIndex="0">
       <Body>
@@ -372,8 +388,8 @@ export const CardActionsVariants = () => {
     </Wrapper>
   )
 }
-
-const TEXT_CHOICES = {
+ */
+/* const TEXT_CHOICES = {
   none: null,
   default: (
     <Typography variant="body_short">
@@ -497,3 +513,4 @@ export const WithKnobs = () => {
     </Wrapper>
   )
 }
+ */

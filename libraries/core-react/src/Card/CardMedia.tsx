@@ -3,11 +3,12 @@ import styled, { css } from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
-type Props = {
+export type CardMediaProps = {
+  /** Should the media be full width or not */
   fullWidth?: boolean
-} & React.HTMLAttributes<HTMLDivElement>
+} & JSX.IntrinsicElements['div']
 
-const StyledCardMedia = styled.div<Props>`
+const StyledCardMedia = styled.div<CardMediaProps>`
   display: flex;
   width: 100%;
   &:last-child {
@@ -40,8 +41,8 @@ const StyledCardMedia = styled.div<Props>`
         `}
 `
 
-export const CardMedia = forwardRef<HTMLDivElement, Props>(
-  function EdsCardMedia(
+export const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>(
+  function CardMedia(
     { children, className = '', fullWidth = false, ...rest },
     ref,
   ) {
