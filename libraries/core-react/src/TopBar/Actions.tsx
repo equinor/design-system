@@ -1,15 +1,15 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+type ActionsProps = HTMLAttributes<HTMLDivElement>
 
 const StyledActions = styled.div`
   grid-area: right;
   text-align: right;
 `
 
-export const Actions = forwardRef<HTMLDivElement, Props>(
-  function EdsTopBarActions({ children, ...props }, ref) {
+export const Actions = forwardRef<HTMLDivElement, ActionsProps>(
+  function Actions({ children, ...props }, ref) {
     return (
       <StyledActions ref={ref} {...props}>
         {children}

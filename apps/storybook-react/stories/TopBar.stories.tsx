@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import { withKnobs, select } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { TopBar, Icon, TextField } from '@equinor/eds-core-react'
+import { TopBar, Icon, TextField, TopbarProps } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 import {
   account_circle,
@@ -23,7 +23,7 @@ const icons = {
 
 Icon.add(icons)
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs({ tabIndex: 0 })`
   height: 100vh;
   overflow: auto;
 `
@@ -105,19 +105,14 @@ const RIGHT_CHOICES = {
 export default {
   title: 'Components/TopBar',
   component: TopBar,
-  decorators: [withKnobs],
-}
+  subcomponents: { Actions, Header, CustomContent },
+} as Meta
 
-export const Page = () => {
-  const leftChoice = select('Left', Object.keys(LEFT_CHOICES), 'text')
-  const centerChoice = select('Center', Object.keys(CENTER_CHOICES), 'none')
-  const rightChoice = select('Right', Object.keys(RIGHT_CHOICES), 'icons')
+export const Basic: Story<TopbarProps> = (props): JSX.Element => {
   return (
-    <Wrapper tabIndex="0">
-      <TopBar>
-        <Header>{LEFT_CHOICES[leftChoice]}</Header>
-        <CustomContent>{CENTER_CHOICES[centerChoice]}</CustomContent>
-        <Actions>{RIGHT_CHOICES[rightChoice]}</Actions>
+    <Wrapper>
+      <TopBar {...props}>
+        <Header>{LEFT_CHOICES['text+icon']}</Header>
       </TopBar>
       <Body>
         <p>Top of page</p>
@@ -127,3 +122,18 @@ export const Page = () => {
     </Wrapper>
   )
 }
+
+export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => (
+  <Wrapper>
+    <TopBar>
+      <Header>{LEFT_CHOICES['text+icon']}</Header>
+      <CustomContent>{CENTER_CHOICES.search}</CustomContent>
+      <Actions>{RIGHT_CHOICES.icons}</Actions>
+    </TopBar>
+    <Body>
+      <p>Top of page</p>
+      <p>Middle of page</p>
+      <p>Bottom of page</p>
+    </Body>
+  </Wrapper>
+)
