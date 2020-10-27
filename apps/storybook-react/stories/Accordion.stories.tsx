@@ -35,9 +35,6 @@ export default {
   component: Accordion,
   subcomponents: {
     AccordionItem,
-    AccordionHeader,
-    AccordionHeaderTitle,
-    AccordionPanel,
   },
 } as Meta
 
