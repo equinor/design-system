@@ -1,10 +1,10 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 
 import { topbar as tokens } from './TopBar.tokens'
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+type HeaderProps = HTMLAttributes<HTMLDivElement>
 
 const {
   title: { typography },
@@ -19,14 +19,15 @@ const StyledHeader = styled.div`
   ${typographyTemplate(typography)}
 `
 
-export const Header = forwardRef<HTMLDivElement, Props>(
-  function EdsTopBarHeader({ children, ...props }, ref) {
-    return (
-      <StyledHeader ref={ref} {...props}>
-        {children}
-      </StyledHeader>
-    )
-  },
-)
+export const Header = forwardRef<HTMLDivElement, HeaderProps>(function Header(
+  { children, ...props },
+  ref,
+) {
+  return (
+    <StyledHeader ref={ref} {...props}>
+      {children}
+    </StyledHeader>
+  )
+})
 
 // Header.displayName = 'eds-topbar-header'
