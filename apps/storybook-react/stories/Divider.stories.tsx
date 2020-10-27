@@ -10,18 +10,8 @@ export default {
   title: 'Components/Divider',
   component: Divider,
   argTypes: {
-    color: {
-      control: {
-        type: 'radio',
-        options: ['lighter', 'light', 'medium'],
-      },
-    },
-    variant: {
-      control: {
-        type: 'radio',
-        options: ['medium', 'small'],
-      },
-    },
+    color: { control: 'radio' },
+    variant: { control: 'radio' },
   },
 } as Meta
 
