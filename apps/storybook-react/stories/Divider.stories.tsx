@@ -9,6 +9,10 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 export default {
   title: 'Components/Divider',
   component: Divider,
+  argTypes: {
+    color: { control: 'radio' },
+    variant: { control: 'radio' },
+  },
 } as Meta
 
 const Wrapper = styled.div`
