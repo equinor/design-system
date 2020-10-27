@@ -23,22 +23,22 @@ export default {
 } as Meta
 
 export const Default: Story<AvatarProps> = (args) => (
-  <Avatar src={image} {...args}></Avatar>
+  <Avatar src={image} {...args} />
 )
 
 export const Examples: Story<AvatarProps> = () => (
   <Container>
     <Typography variant="h2">Sizes</Typography>
     <Wrapper>
-      <Avatar src={image} size={16} alt="avatar"></Avatar>
-      <Avatar src={image} size={24} alt="avatar"></Avatar>
-      <Avatar src={image} size={32} alt="avatar"></Avatar>
-      <Avatar src={image} size={40} alt="avatar"></Avatar>
-      <Avatar src={image} size={48} alt="avatar"></Avatar>
+      <Avatar src={image} size={16} alt="avatar" />
+      <Avatar src={image} size={24} alt="avatar" />
+      <Avatar src={image} size={32} alt="avatar" />
+      <Avatar src={image} size={40} alt="avatar" />
+      <Avatar src={image} size={48} alt="avatar" />
     </Wrapper>
     <Typography variant="h2">Disabled</Typography>
     <Wrapper>
-      <Avatar src={image} disabled alt="avatar"></Avatar>
+      <Avatar src={image} disabled alt="avatar" />
     </Wrapper>
   </Container>
 )
