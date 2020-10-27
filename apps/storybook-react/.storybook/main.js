@@ -1,11 +1,11 @@
 module.exports = {
   typescript: {
     // reactDocgen: 'react-docgen',
-    checkOptions: {
-      compilerOptions: {
-        typeRoots: '../stories/typings/custom.d.ts',
-      },
-    },
+    // checkOptions: {
+    //   compilerOptions: {
+    //     typeRoots: ['../stories/typings', 'node_modules/@types'],
+    //   },
+    // },
   },
   stories: [
     '../docs/**/*.story.mdx',
