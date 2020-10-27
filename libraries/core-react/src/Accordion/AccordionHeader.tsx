@@ -76,7 +76,10 @@ const StyledIcon = styled(
   chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
 )
 
-type AccordionHeaderTitleProps = AccordionHeaderProps & AccordionProps
+type AccordionHeaderTitleProps = Pick<
+  AccordionHeaderProps,
+  'disabled' | 'isExpanded'
+>
 
 const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
   flex: 1;
