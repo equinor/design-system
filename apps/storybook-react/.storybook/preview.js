@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 addParameters({
+  viewMode: 'docs',
   docs: {
     container: DocsContainer,
     page: DocsPage,
