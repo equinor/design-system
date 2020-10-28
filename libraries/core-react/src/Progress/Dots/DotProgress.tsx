@@ -26,37 +26,37 @@ const Svg = styled.svg`
   }
 `
 
-type Props = {
-  /* Choose between two colors */
+export type DotProgressProps = {
+  /** Choose between two colors */
   variant?: 'white' | 'green'
+  /** @ignore */
   className?: string
 } & HTMLAttributes<SVGSVGElement>
 
-const DotProgress = forwardRef<SVGSVGElement, Props>(function DotProgress(
-  { variant = 'white', className = '', ...rest },
-  ref,
-) {
-  const props = {
-    color: tokens.dots[variant].color,
-    ref,
-    ...rest,
-  }
+const DotProgress = forwardRef<SVGSVGElement, DotProgressProps>(
+  function DotProgress({ variant = 'white', className = '', ...rest }, ref) {
+    const props = {
+      color: tokens.dots[variant].color,
+      ref,
+      ...rest,
+    }
 
-  return (
-    <Svg
-      {...props}
-      role="progressbar"
-      className={`${className} ${variant}-progress`}
-      viewBox="0 0 16 4"
-      height="8px"
-      width="32px"
-    >
-      <circle cx={2} cy={2} r={2} />
-      <circle cx={8} cy={2} r={2} />
-      <circle cx={14} cy={2} r={2} />
-    </Svg>
-  )
-})
+    return (
+      <Svg
+        {...props}
+        role="progressbar"
+        className={`${className} ${variant}-progress`}
+        viewBox="0 0 16 4"
+        height="8px"
+        width="32px"
+      >
+        <circle cx={2} cy={2} r={2} />
+        <circle cx={8} cy={2} r={2} />
+        <circle cx={14} cy={2} r={2} />
+      </Svg>
+    )
+  },
+)
 
 // DotProgress.displayName = 'eds-dot-progress'
 
