@@ -1,5 +1,4 @@
 import React, { forwardRef, useState, useEffect, ReactElement } from 'react'
-import type { AccordionProps } from './Accordion.types'
 
 type AccordionItemProps = {
   /**
@@ -8,12 +7,17 @@ type AccordionItemProps = {
   /**
    * @ignore  */
   accordionId?: string
+  /** The header level, i.e. h1, h2, h3 etc.
+   * @ignore  */
+  headerLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  /** Which side the chevron should be on
+   * @ignore  */
+  chevronPosition?: 'left' | 'right'
   /** Is AccordionItem expanded */
   isExpanded?: boolean
   /** accordion item is disabled */
   disabled?: boolean
-} & JSX.IntrinsicElements['div'] &
-  AccordionProps
+} & JSX.IntrinsicElements['div']
 
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   function AccordionItem(

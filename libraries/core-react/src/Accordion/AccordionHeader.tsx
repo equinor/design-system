@@ -4,6 +4,7 @@ import type { CSSObject } from 'styled-components'
 // eslint-disable-next-line camelcase
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
+import { AccordionHeaderTitle } from './AccordionHeaderTitle'
 import { accordion as tokens } from './Accordion.tokens'
 import { Property } from 'csstype'
 import type { AccordionProps } from './Accordion.types'
@@ -22,13 +23,13 @@ const {
 } = tokens
 
 type StyledAccordionHeaderProps = {
-  /** @internal  The ID of the panel */
+  /** The ID of the panel */
   panelId?: string
-  /** Is AccordionItem expanded */
+  /**  Is AccordionItem expanded */
   isExpanded?: boolean
-  /** accordion item is disabled */
+  /** Accordion item is disabled */
   disabled?: boolean
-  /** @internal  The ID of the parent */
+  /**  The ID of the parent */
   parentIndex?: number
 }
 
@@ -76,38 +77,20 @@ const StyledIcon = styled(
   chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
 )
 
-type AccordionHeaderTitleProps = Pick<
-  AccordionHeaderProps,
-  'disabled' | 'isExpanded'
->
-
-const AccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
-  flex: 1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  text-align: left;
-  font-family: Equinor;
-  color: ${({ isExpanded, disabled }) =>
-    isExpanded && !disabled ? headerColor.activated : 'inherit'};
-`
-
-// AccordionHeaderTitle.displayName = 'EdsAccordionHeadertitle'
-
 type AccordionHeaderProps = {
-  /* @internal  The id of the button that toggles expansion */
+  /** The id of the button that toggles expansion */
   id?: string
-  /** Is AccordionItem expanded */
+  /**  Is AccordionItem expanded */
   isExpanded?: boolean
-  /** @internal  The panel that is controlled by the HeaderButton */
+  /**  The panel that is controlled by the HeaderButton */
   panelId?: string
-  /** @internal The index of the parent AccordionItem  */
+  /**  The index of the parent AccordionItem  */
   parentIndex?: number
-  /** accordion item is disabled */
+  /** Accordion item is disabled */
   disabled?: boolean
-  /** @internal */
+  /** @ignore */
   toggleExpanded?: () => void
-}
+} & AccordionProps
 
 type AccordionChild = {
   type: { displayName: string }
@@ -115,7 +98,7 @@ type AccordionChild = {
 
 const AccordionHeader = forwardRef<
   HTMLDivElement,
-  AccordionHeaderProps & AccordionProps & JSX.IntrinsicElements['div']
+  AccordionHeaderProps & JSX.IntrinsicElements['div']
 >(function AccordionHeader(
   {
     parentIndex,
@@ -198,4 +181,4 @@ const AccordionHeader = forwardRef<
 
 // AccordionHeader.displayName = 'EdsAccordionHeader'
 
-export { AccordionHeader, AccordionHeaderTitle }
+export { AccordionHeader }

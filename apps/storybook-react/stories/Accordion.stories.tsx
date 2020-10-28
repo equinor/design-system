@@ -35,6 +35,31 @@ export default {
   component: Accordion,
   subcomponents: {
     AccordionItem,
+    AccordionHeader,
+    AccordionHeaderTitle,
+    AccordionPanel,
+  },
+  argTypes: {
+    ref: {
+      table: {
+        disable: true,
+      },
+    },
+    forwardedAs: {
+      table: {
+        disable: true,
+      },
+    },
+    as: {
+      table: {
+        disable: true,
+      },
+    },
+    theme: {
+      table: {
+        disable: true,
+      },
+    },
   },
 } as Meta
 

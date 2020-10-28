@@ -1,6 +1,7 @@
 import { Accordion as BaseAccordion } from './Accordion'
 import { AccordionItem } from './AccordionItem'
-import { AccordionHeaderTitle, AccordionHeader } from './AccordionHeader'
+import { AccordionHeader } from './AccordionHeader'
+import { AccordionHeaderTitle } from './AccordionHeaderTitle'
 import { AccordionPanel } from './AccordionPanel'
 import type { AccordionProps as Props } from './Accordion.types'
 

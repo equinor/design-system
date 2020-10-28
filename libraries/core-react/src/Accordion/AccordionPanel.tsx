@@ -10,9 +10,9 @@ const {
 } = tokens
 
 type AccordionPanelProps = {
-  /** @internal The ID of the element that controls the panel */
+  /** The ID of the element that controls the panel */
   headerId?: string
-  /** @internal  The ID of the panel */
+  /** The ID of the panel */
   id?: string
   /** If `true`, the panel will be hidden. */
   hidden?: boolean
