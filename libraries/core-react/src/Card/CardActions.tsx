@@ -2,10 +2,12 @@ import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
 
-type Props = {
+export type CardActionProps = {
+  /** Should the actions be right aligned */
   alignRight?: boolean
+  /** Meta information */
   meta?: string
-} & React.HTMLAttributes<HTMLDivElement>
+} & JSX.IntrinsicElements['div']
 
 const StyledCardActions = styled.div<React.CSSProperties>`
   display: grid;
@@ -16,8 +18,8 @@ const StyledCardActions = styled.div<React.CSSProperties>`
   justify-content: ${({ justifyContent }) => justifyContent};
 `
 
-export const CardActions = forwardRef<HTMLDivElement, Props>(
-  function EdsCardActions(
+export const CardActions = forwardRef<HTMLDivElement, CardActionProps>(
+  function CardActions(
     { children, className = '', alignRight = false, meta = '', ...rest },
     ref,
   ) {
