@@ -9,7 +9,7 @@ const {
   border,
 } = tokens
 
-type Props = {
+type AccordionPanelProps = {
   /** The ID of the element that controls the panel */
   headerId?: string
   /** The ID of the panel */
@@ -18,7 +18,7 @@ type Props = {
   hidden?: boolean
 } & JSX.IntrinsicElements['div']
 
-type StyledAccordionPanelProps = Pick<Props, 'headerId'>
+type StyledAccordionPanelProps = Pick<AccordionPanelProps, 'headerId'>
 
 const StyledAccordionPanel = styled.div.attrs(
   ({ headerId }: StyledAccordionPanelProps): JSX.IntrinsicElements['div'] => ({
@@ -35,7 +35,7 @@ const StyledAccordionPanel = styled.div.attrs(
   box-sizing: border-box;
 `
 
-const AccordionPanel = forwardRef<HTMLDivElement, Props>(
+const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>(
   function AccordionPanel({ id, headerId, hidden, children, ...props }, ref) {
     return (
       <StyledAccordionPanel
