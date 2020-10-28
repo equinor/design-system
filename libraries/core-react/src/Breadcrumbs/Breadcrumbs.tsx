@@ -1,4 +1,10 @@
-import React, { forwardRef, useState, Fragment } from 'react'
+import React, {
+  forwardRef,
+  useState,
+  Fragment,
+  ReactNode,
+  HTMLAttributes,
+} from 'react'
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
@@ -36,11 +42,11 @@ const Collapsed = styled(Typography)`
   text-decoration: none;
 `
 
-type BreadcrumbsProps = {
+export type BreadcrumbsProps = {
   /* Collapses the list of breadcrumbs so that only the first
    * and last breadcrumb will be shown, with an ellipsis in between.  */
   collapse?: boolean
-} & JSX.IntrinsicElements['nav']
+} & HTMLAttributes<HTMLElement>
 
 export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
   function Breadcrumbs({ children, collapse, ...rest }, ref) {

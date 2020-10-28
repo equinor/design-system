@@ -1,8 +1,12 @@
 import React from 'react'
-import { withKnobs, boolean, number } from '@storybook/addon-knobs'
 import styled from 'styled-components'
-import { Breadcrumbs, Typography } from '@equinor/eds-core-react'
+import {
+  Breadcrumbs,
+  BreadcrumbsProps,
+  Typography,
+} from '@equinor/eds-core-react'
 import { action } from '@storybook/addon-actions'
+import { Meta, Story } from '@storybook/react'
 
 const { Breadcrumb } = Breadcrumbs
 
@@ -24,11 +28,28 @@ const WrapContainer = styled.div`
 export default {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
-  decorators: [withKnobs],
-}
+  subcomponents: {
+    Breadcrumb,
+  },
+} as Meta
 
 const handleClick = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   action('handleClick')(e.target.textContent)
+}
+
+export const Default: Story<BreadcrumbsProps> = (args) => {
+  return (
+    <Body>
+      <Breadcrumbs {...args}>
+        <Breadcrumb>Label One</Breadcrumb>
+        <Breadcrumb>Label Two</Breadcrumb>
+        <Breadcrumb>Label Three</Breadcrumb>
+        <Breadcrumb>Label Four</Breadcrumb>
+        <Breadcrumb>Label Five</Breadcrumb>
+      </Breadcrumbs>
+    </Body>
+  )
 }
 
 export const Variations = () => {
@@ -38,13 +59,9 @@ export const Variations = () => {
         <Typography variant="h2">Normal</Typography>
       </TextWrapper>
       <Breadcrumbs>
-        <Breadcrumb href="#" onClick={handleClick}>
-          Store
-        </Breadcrumb>
-        <Breadcrumb href="#" onClick={handleClick}>
-          Fruits
-        </Breadcrumb>
-        <Breadcrumb href="#" onClick={handleClick} aria-current="page">
+        <Breadcrumb onClick={handleClick}>Store</Breadcrumb>
+        <Breadcrumb onClick={handleClick}>Fruits</Breadcrumb>
+        <Breadcrumb onClick={handleClick} aria-current="page">
           Apple
         </Breadcrumb>
       </Breadcrumbs>
@@ -56,16 +73,10 @@ export const Variations = () => {
         </Typography>
       </TextWrapper>
       <Breadcrumbs collapse>
-        <Breadcrumb href="#" onClick={handleClick}>
-          Store
-        </Breadcrumb>
-        <Breadcrumb href="#" onClick={handleClick}>
-          Fruits
-        </Breadcrumb>
-        <Breadcrumb href="#" onClick={handleClick}>
-          Apple
-        </Breadcrumb>
-        <Breadcrumb href="#" onClick={handleClick} aria-current="page">
+        <Breadcrumb onClick={handleClick}>Store</Breadcrumb>
+        <Breadcrumb onClick={handleClick}>Fruits</Breadcrumb>
+        <Breadcrumb onClick={handleClick}>Apple</Breadcrumb>
+        <Breadcrumb onClick={handleClick} aria-current="page">
           Apple Juice
         </Breadcrumb>
       </Breadcrumbs>
@@ -77,18 +88,13 @@ export const Variations = () => {
         </Typography>
       </TextWrapper>
       <Breadcrumbs>
-        <Breadcrumb maxWidth={30} href="#" onClick={handleClick}>
+        <Breadcrumb maxWidth={30} onClick={handleClick}>
           Store
         </Breadcrumb>
-        <Breadcrumb maxWidth={30} href="#" onClick={handleClick}>
+        <Breadcrumb maxWidth={30} onClick={handleClick}>
           Fruits
         </Breadcrumb>
-        <Breadcrumb
-          maxWidth={30}
-          href="#"
-          onClick={handleClick}
-          aria-current="page"
-        >
+        <Breadcrumb maxWidth={30} onClick={handleClick} aria-current="page">
           Apple
         </Breadcrumb>
       </Breadcrumbs>
@@ -100,35 +106,13 @@ export const Variations = () => {
       </TextWrapper>
       <WrapContainer>
         <Breadcrumbs>
-          <Breadcrumb href="#" onClick={handleClick}>
-            Store
-          </Breadcrumb>
-          <Breadcrumb href="#" onClick={handleClick}>
-            Fruits
-          </Breadcrumb>
-          <Breadcrumb href="#" onClick={handleClick} aria-current="page">
+          <Breadcrumb onClick={handleClick}>Store</Breadcrumb>
+          <Breadcrumb onClick={handleClick}>Fruits</Breadcrumb>
+          <Breadcrumb onClick={handleClick} aria-current="page">
             Apple
           </Breadcrumb>
         </Breadcrumbs>
       </WrapContainer>
-    </Body>
-  )
-}
-
-export const WithKnobs = () => {
-  const collapse = boolean('Collapse', false)
-  const maxWidth = number('Max Width', null)
-  return (
-    <Body>
-      <Breadcrumbs collapse={collapse}>
-        <Breadcrumb maxWidth={maxWidth}>Label One</Breadcrumb>
-        <Breadcrumb maxWidth={maxWidth}>Label Two</Breadcrumb>
-        <Breadcrumb maxWidth={maxWidth}>Label Three</Breadcrumb>
-        <Breadcrumb maxWidth={maxWidth}>Label Four</Breadcrumb>
-        <Breadcrumb maxWidth={maxWidth} aria-current="page">
-          Label Five
-        </Breadcrumb>
-      </Breadcrumbs>
     </Body>
   )
 }
