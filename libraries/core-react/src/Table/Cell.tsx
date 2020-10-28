@@ -42,19 +42,19 @@ const TableBase = styled.td`
   ${Base}
 `
 
-type Props = {
+type CellProps = {
   /** Specifies which td or th to use */
   as: 'td' | 'th'
   /** Specifies which variant to use */
   variant: 'text' | 'icon' | 'numeric' | 'input'
-} & HTMLAttributes<HTMLTableCellElement>
+} & HTMLAttributes<HTMLTableHeaderCellElement>
 
 export const Cell = ({
   children,
   as = 'td',
   variant = 'text',
   ...props
-}: Props): JSX.Element => {
+}: CellProps): JSX.Element => {
   const tokens = getTokens(as, variant)
   return (
     <TableBase as={as} tokens={tokens} {...props}>

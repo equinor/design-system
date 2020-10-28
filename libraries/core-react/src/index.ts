@@ -2,7 +2,7 @@ import 'focus-visible'
 /* eslint-disable import/prefer-default-export */
 export * from './Button'
 export * from './Typography'
-export { Table } from './Table'
+export * from './Table'
 export * from './Divider'
 export * from './TextField'
 export { Icon } from './Icon'
