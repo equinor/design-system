@@ -24,7 +24,7 @@ export { Popover } from './Popover'
 export * from './Banner'
 export { Radio, Checkbox, Switch } from './SelectionControls'
 export * from './Progress'
-export { Breadcrumbs } from './Breadcrumbs'
+export * from './Breadcrumbs'
 export { Menu } from './Menu'
 export { Pagination } from './Pagination'
 /* eslint-enable */
