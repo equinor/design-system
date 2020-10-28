@@ -31,7 +31,7 @@ export type TextFieldProps = {
   /** Multiline input */
   multiline?: boolean
   /** Input ref */
-  inputRef?: React.LegacyRef<HTMLInputElement>
+  inputRef?: React.Ref<HTMLInputElement>
   /** InputIcon */
   inputIcon?: ReactNode
   /** HelperIcon */
@@ -40,7 +40,7 @@ export type TextFieldProps = {
   value?: string
   /** Read Only */
   readOnly?: boolean
-} & JSX.IntrinsicElements['input']
+} & InputHTMLAttributes<HTMLInputElement>
 
 export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(props, ref) {
