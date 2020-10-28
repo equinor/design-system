@@ -50,8 +50,7 @@ type TextfieldIconProps = {
 }
 
 const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
-  function InputIcon(props, ref) {
-    const { children, ...other } = props
+  function InputIcon({ children, ...other }, ref) {
     const { isFocused } = useTextField()
 
     return (

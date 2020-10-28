@@ -95,16 +95,17 @@ type TextfieldInputProps = {
 } & InputHTMLAttributes<HTMLInputElement>
 
 const TextFieldInput = React.forwardRef<HTMLInputElement, TextfieldInputProps>(
-  function TextFieldInput(props, ref) {
-    const {
+  function TextFieldInput(
+    {
       multiline = false,
       variant = 'default',
       inputIcon,
       disabled = false,
       type = 'text',
       ...other
-    } = props
-
+    },
+    ref,
+  ) {
     const { handleFocus, handleBlur } = useTextField()
 
     const as: ElementType = multiline ? 'textarea' : 'input'

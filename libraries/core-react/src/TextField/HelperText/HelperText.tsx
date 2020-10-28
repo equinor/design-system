@@ -75,8 +75,10 @@ type TextfieldHelperTextProps = {
 const TextfieldHelperText = React.forwardRef<
   HTMLDivElement,
   TextfieldHelperTextProps
->(function TextfieldHelperText(props, ref) {
-  const { helperText, icon, variant = 'default', disabled: isDisabled } = props
+>(function TextfieldHelperText(
+  { helperText, icon, variant = 'default', disabled: isDisabled, ...rest },
+  ref,
+) {
   const helperVariant = tokens[variant]
   const spacings = tokens.spacings.comfortable
 
@@ -91,7 +93,7 @@ const TextfieldHelperText = React.forwardRef<
   }
 
   return (
-    <Container ref={ref} {...props} spacings={spacings}>
+    <Container ref={ref} {...rest} spacings={spacings}>
       {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
       <Text
         variant={helperVariant}

@@ -43,8 +43,8 @@ export type TextFieldProps = {
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
-  function TextField(props, ref) {
-    const {
+  function TextField(
+    {
       id,
       label,
       meta,
@@ -58,8 +58,9 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       inputIcon,
       helperIcon,
       ...other
-    } = props
-
+    },
+    ref,
+  ) {
     const inputProps = {
       multiline,
       disabled,
