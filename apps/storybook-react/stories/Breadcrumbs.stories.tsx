@@ -52,7 +52,7 @@ export const Default: Story<BreadcrumbsProps> = (args) => {
   )
 }
 
-export const Variations = () => {
+export const Variations: Story<BreadcrumbsProps> = () => {
   return (
     <Body>
       <TextWrapper>

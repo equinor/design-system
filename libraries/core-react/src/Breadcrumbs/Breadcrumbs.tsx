@@ -2,8 +2,8 @@ import React, {
   forwardRef,
   useState,
   Fragment,
-  ReactNode,
   HTMLAttributes,
+  ReactNode,
 } from 'react'
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
@@ -46,6 +46,8 @@ export type BreadcrumbsProps = {
   /* Collapses the list of breadcrumbs so that only the first
    * and last breadcrumb will be shown, with an ellipsis in between.  */
   collapse?: boolean
+  /** Children should be of <Breadcrumb> component */
+  children: ReactNode
 } & HTMLAttributes<HTMLElement>
 
 export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
