@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+export type CardHeaderProps = JSX.IntrinsicElements['div']
 
 const StyledCardHeader = styled.div`
   display: flex;
@@ -15,8 +15,8 @@ const StyledCardHeader = styled.div`
   }
 `
 
-export const CardHeader = forwardRef<HTMLDivElement, Props>(
-  function EdsCardHeader({ children, className = '', ...rest }, ref) {
+export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
+  function CardHeader({ children, className = '', ...rest }, ref) {
     const props = {
       ...rest,
       className,
