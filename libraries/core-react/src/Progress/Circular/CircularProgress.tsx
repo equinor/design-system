@@ -35,16 +35,17 @@ const ProgressCircle = styled.circle`
   stroke: ${tokens.linear.overlay};
 `
 
-type Props = {
-  /* Use indeterminate when there is no progress value */
+export type CircularProgressProps = {
+  /**  Use indeterminate when there is no progress value */
   variant?: 'determinate' | 'indeterminate'
+  /** @ignore */
   className?: string
-  /* The value of the progress indicator for determinate variant
+  /**  The value of the progress indicator for determinate variant.
    * Value between 0 and 100 */
   value?: number
 }
 
-const CircularProgress = forwardRef<HTMLDivElement, Props>(
+const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>(
   function CircularProgress(
     { variant = 'indeterminate', className = '', value = null, ...props },
     ref,

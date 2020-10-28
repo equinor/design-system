@@ -28,11 +28,11 @@ const ProgressRoot = styled.div`
   width: 100%;
   border-radius: 50px;
 `
-type ProgressBarProps = {
+type StyledProgressBarProps = {
   variant: 'indeterminate' | 'determinate'
 }
 
-const ProgressBar = styled.div<ProgressBarProps>`
+const ProgressBar = styled.div<StyledProgressBarProps>`
   ${({ variant }) =>
     variant === 'determinate' &&
     css`
@@ -62,17 +62,18 @@ const IndeterminateProgress = styled.div`
     infinite;
 `
 
-type Props = {
-  /* Variant
+export type LinearProgressProps = {
+  /** Variant
    * Use indeterminate when there is no progress value */
   variant?: 'indeterminate' | 'determinate'
-  /* The value of the progress indicator for determinate variant
+  /** The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
   value?: number
+  /** @ignore */
   className?: string
 }
 
-const LinearProgress = forwardRef<HTMLDivElement, Props>(
+const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
   function LinearProgress(
     { variant = 'indeterminate', className = '', value = null, ...props },
     ref,
