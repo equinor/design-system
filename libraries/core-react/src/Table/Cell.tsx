@@ -44,10 +44,14 @@ const TableBase = styled.td`
 
 type CellProps = {
   /** Specifies which td or th to use */
-  as: 'td' | 'th'
+  as?: 'td' | 'th'
   /** Specifies which variant to use */
-  variant: 'text' | 'icon' | 'numeric' | 'input'
-} & HTMLAttributes<HTMLTableHeaderCellElement>
+  variant?: 'text' | 'icon' | 'numeric' | 'input'
+  /** Is the header cell scoped to column or row? */
+  scope?: 'row' | 'col'
+  /** @ignore */
+  children: JSX.Element[] | JSX.Element | string
+}
 
 export const Cell = ({
   children,

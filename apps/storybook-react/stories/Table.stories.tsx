@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'
-import { Table, TableProps, Typography } from '@equinor/eds-core-react'
+import { Table, TableProps } from '@equinor/eds-core-react'
 import './../style.css'
 
 const { Body, Row, Cell, Head } = Table
@@ -17,7 +17,7 @@ export default {
       },
     },
   },
-}
+} as Meta
 
 export const simpleTable: Story<TableProps> = () => (
   <Table>
@@ -49,7 +49,7 @@ export const simpleTable: Story<TableProps> = () => (
   </Table>
 )
 
-export const FixedTableHeader = () => {
+export const FixedTableHeader: Story<TableProps> = () => {
   const FixedContainer = styled.div`
     width: 200px;
     height: 200px;
