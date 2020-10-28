@@ -1,12 +1,7 @@
 module.exports = {
-  typescript: {
-    // reactDocgen: 'react-docgen',
-    // checkOptions: {
-    //   compilerOptions: {
-    //     typeRoots: ['../stories/typings', 'node_modules/@types'],
-    //   },
-    // },
-  },
+  // typescript: {
+  //   reactDocgen: 'react-docgen',
+  // },
   stories: [
     '../docs/**/*.story.mdx',
     '../stories/**/*.stor(y|ies).(jsx|mdx|tsx)',
