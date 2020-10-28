@@ -1,10 +1,15 @@
 import React from 'react'
-import { withKnobs } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Icon, Chip, Avatar, Typography } from '@equinor/eds-core-react'
+import {
+  Icon,
+  Chip,
+  ChipProps,
+  Avatar,
+  Typography,
+} from '@equinor/eds-core-react'
+import { Meta, Story } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
-import catImg from '../images/cat.jpg'
 
 const icons = {
   save,
@@ -27,13 +32,20 @@ const Wrapper = styled.div`
 export default {
   title: 'Components/Chips',
   component: Chip,
-  decorators: [withKnobs],
-}
+} as Meta
 
 const handleDelete = action('onDelete')
 const handleClick = action('onClick')
 
-export const Examples = () => (
+const CatImage = () => (
+  <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} alt="cat" />
+)
+
+export const Default: Story<ChipProps> = (args) => (
+  <Chip {...args}>Play with me</Chip>
+)
+
+export const Examples: Story<ChipProps> = () => (
   <Container>
     <Typography variant="h2">Text</Typography>
     <Wrapper>
@@ -106,43 +118,43 @@ export const Examples = () => (
     <Typography variant="h2">Text + Avatar</Typography>
     <Wrapper>
       <Chip>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         normal
       </Chip>
       <Chip variant="active">
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         active
       </Chip>
       <Chip variant="active" onDelete={handleDelete}>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         active + deletable
       </Chip>
       <Chip variant="error">
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         error
       </Chip>
       <Chip variant="error" onDelete={handleDelete}>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         error + deletable
       </Chip>
       <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         error + deletable + clickable
       </Chip>
       <Chip onClick={handleClick}>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         clickable
       </Chip>
       <Chip onDelete={handleDelete}>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         deletable
       </Chip>
       <Chip onDelete={handleDelete} onClick={handleClick}>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         deletable + clickable
       </Chip>
       <Chip onDelete={handleDelete} disabled>
-        <Avatar src={catImg} alt="cat" />
+        <CatImage />
         disabled
       </Chip>
     </Wrapper>

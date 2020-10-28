@@ -133,7 +133,7 @@ const StyledChips = styled.div.attrs<StyleProps>(
       padding-left: 8px;
     `}
 `
-type Props = {
+export type ChipProps = {
   /** Disabled */
   disabled?: boolean
   /** Delete callback */
@@ -142,7 +142,7 @@ type Props = {
   variant?: 'active' | 'error' | 'default'
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const Chip = forwardRef<HTMLDivElement, Props>(function EdsChips(
+export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chips(
   {
     children,
     onDelete,
