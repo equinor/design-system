@@ -19,7 +19,7 @@ const StyledCardActions = styled.div<React.CSSProperties>`
 `
 
 export const CardActions = forwardRef<HTMLDivElement, CardActionProps>(
-  function EdsCardActions(
+  function CardActions(
     { children, className = '', alignRight = false, meta = '', ...rest },
     ref,
   ) {
