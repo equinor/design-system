@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { LinearProgress, LinearProgressProps } from '@equinor/eds-core-react'
 import { Meta, Story } from '@storybook/react'
+import { useProgress } from './hooks/useProgress'
 
 export default {
   title: 'Components/Progress Indicators/Linear',
@@ -9,27 +10,8 @@ export default {
 
 export const Default: Story<LinearProgressProps> = (args) => {
   const { value = 0, variant } = args
-  let controllableValue: number | null
-  variant === 'indeterminate'
-    ? (controllableValue = null)
-    : (controllableValue = value)
-  const [progress, setProgress] = useState(controllableValue)
+  const progress = variant === 'indeterminate' ? null : useProgress(value)
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 100
-        }
-        const diff = Math.random() * 10
-        return Math.min(oldProgress + diff, 100)
-      })
-    }, 500)
-
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
   return <LinearProgress {...args} value={progress} />
 }
 
@@ -38,23 +20,8 @@ export const Indeterminate: Story<LinearProgressProps> = () => (
 )
 
 export const Determinate: Story<LinearProgressProps> = () => {
-  const [progress, setProgress] = useState(0)
+  const progress = useProgress(0)
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 100
-        }
-        const diff = Math.random() * 10
-        return Math.min(oldProgress + diff, 100)
-      })
-    }, 500)
-
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
   return <LinearProgress variant="determinate" value={progress} />
 }
 
