@@ -23,12 +23,7 @@ export { Snackbar } from './Snackbar'
 export { Popover } from './Popover'
 export * from './Banner'
 export { Radio, Checkbox, Switch } from './SelectionControls'
-export {
-  DotProgress,
-  StarProgress,
-  LinearProgress,
-  CircularProgress,
-} from './Progress'
+export * from './Progress'
 export { Breadcrumbs } from './Breadcrumbs'
 export { Menu } from './Menu'
 export { Pagination } from './Pagination'
