@@ -60,4 +60,4 @@ export const Determinate: Story<CircularProgressProps> = () => {
   return <CircularProgress variant="determinate" value={progress} />
 }
 
-Default.storyName = 'Controllable'
+Default.storyName = 'Controllable example'

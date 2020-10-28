@@ -1,4 +1,4 @@
 export * from './Linear/LinearProgress'
 export * from './Circular/CircularProgress'
-export { StarProgress } from './Star/StarProgress'
+export * from './Star/StarProgress'
 export * from './Dots/DotProgress'

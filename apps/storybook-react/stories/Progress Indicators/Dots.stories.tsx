@@ -1,5 +1,9 @@
 import React from 'react'
-import { DotProgress, DotProps, Typography } from '@equinor/eds-core-react'
+import {
+  DotProgress,
+  DotProgressProps,
+  Typography,
+} from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 
@@ -17,13 +21,13 @@ export default {
   component: DotProgress,
 } as Meta
 
-export const Default: Story<DotProps> = (args) => (
+export const Default: Story<DotProgressProps> = (args) => (
   <Background>
     <DotProgress {...args} />
   </Background>
 )
 
-export const Variants: Story<DotProps> = () => (
+export const Variants: Story<DotProgressProps> = () => (
   <>
     <Typography variant="h4" as="h2">
       White

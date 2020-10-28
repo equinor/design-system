@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { LinearProgress, LinearProgressProps } from '@equinor/eds-core-react'
-import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-rows: min-width;
-  padding: 32px;
-  padding-bottom: 8rem;
-  grid-gap: 2rem;
-  position: relative;
-  transition: all 0.36s;
-`
 
 export default {
   title: 'Components/Progress Indicators/Linear',
@@ -69,5 +58,4 @@ export const Determinate: Story<LinearProgressProps> = () => {
   return <LinearProgress variant="determinate" value={progress} />
 }
 
-Determinate.storyName = 'Determinate'
-Indeterminate.storyName = 'Indeterminate'
+Default.storyName = 'Controllable example'
