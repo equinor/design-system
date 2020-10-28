@@ -1,5 +1,4 @@
 import React from 'react'
-// import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import {
   Card,
