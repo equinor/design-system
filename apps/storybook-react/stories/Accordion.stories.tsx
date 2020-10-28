@@ -1,14 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { Accordion, Button, Icon } from '@equinor/eds-core-react'
+import {
+  Accordion,
+  Button,
+  Icon,
+  AccordionProps,
+} from '@equinor/eds-core-react'
+import { Meta, Story } from '@storybook/react'
 import {
   attach_file,
   notifications,
   edit,
   delete_to_trash,
 } from '@equinor/eds-icons'
-import mdx from './Accordion.docs.mdx'
 
 const {
   AccordionItem,
@@ -27,32 +32,33 @@ const Wrapper = styled.div`
 
 export default {
   title: 'Components/Accordion',
-  parameters: {
-    docs: { page: mdx },
-  },
   component: Accordion,
-}
+  subcomponents: {
+    AccordionItem,
+    AccordionHeader,
+    AccordionHeaderTitle,
+    AccordionPanel,
+  },
+} as Meta
 
-export const simple = () => {
-  return (
-    <Accordion>
-      <AccordionItem isExpanded>
-        <AccordionHeader>Header 1</AccordionHeader>
-        <AccordionPanel>Content 1</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionHeader>Header 2</AccordionHeader>
-        <AccordionPanel>Content 2</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionHeader>Header 3</AccordionHeader>
-        <AccordionPanel>Content 3</AccordionPanel>
-      </AccordionItem>
-    </Accordion>
-  )
-}
+export const simple: Story<AccordionProps> = (args) => (
+  <Accordion {...args}>
+    <AccordionItem isExpanded>
+      <AccordionHeader>Header 1</AccordionHeader>
+      <AccordionPanel>Content 1</AccordionPanel>
+    </AccordionItem>
+    <AccordionItem>
+      <AccordionHeader>Header 2</AccordionHeader>
+      <AccordionPanel>Content 2</AccordionPanel>
+    </AccordionItem>
+    <AccordionItem>
+      <AccordionHeader>Header 3</AccordionHeader>
+      <AccordionPanel>Content 3</AccordionPanel>
+    </AccordionItem>
+  </Accordion>
+)
 
-export const header = () => {
+export const header: Story<AccordionProps> = () => {
   return (
     <Wrapper>
       <Accordion headerLevel="h3" chevronPosition="left">
