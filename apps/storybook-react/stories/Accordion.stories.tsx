@@ -39,28 +39,6 @@ export default {
     AccordionHeaderTitle,
     AccordionPanel,
   },
-  argTypes: {
-    ref: {
-      table: {
-        disable: true,
-      },
-    },
-    forwardedAs: {
-      table: {
-        disable: true,
-      },
-    },
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    theme: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 } as Meta
 
 export const simple: Story<AccordionProps> = (args) => (
