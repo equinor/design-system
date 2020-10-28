@@ -10,10 +10,10 @@ type StyledCardProps = {
   cursor: string
 } & React.HTMLAttributes<HTMLDivElement>
 
-type Props = {
+export type CardProps = {
   /** Variant */
   variant?: 'default' | 'info' | 'warning' | 'danger'
-} & React.HTMLAttributes<HTMLDivElement>
+} & JSX.IntrinsicElements['div']
 
 const StyledCard = styled.div<StyledCardProps>`
   height: fit-content;
@@ -34,7 +34,7 @@ const StyledCard = styled.div<StyledCardProps>`
   ${spacingsTemplate(spacings)}
 `
 
-export const Card = forwardRef<HTMLDivElement, Props>(function EdsCard(
+export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   { children, className, variant = 'default', onClick, ...rest },
   ref,
 ) {
