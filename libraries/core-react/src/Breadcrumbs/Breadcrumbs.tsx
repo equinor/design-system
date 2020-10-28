@@ -46,7 +46,7 @@ export type BreadcrumbsProps = {
   /* Collapses the list of breadcrumbs so that only the first
    * and last breadcrumb will be shown, with an ellipsis in between.  */
   collapse?: boolean
-  /** Children should be of <Breadcrumb> component */
+  /** Children should be of Breadcrumb component */
   children: ReactNode
 } & HTMLAttributes<HTMLElement>
 
