@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import React, { HTMLAttributes, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import type { Border } from '@equinor/eds-tokens'
 import { getTokens, TableCell } from './Table.tokens'
@@ -50,7 +50,7 @@ type CellProps = {
   /** Is the header cell scoped to column or row? */
   scope?: 'row' | 'col'
   /** @ignore */
-  children: JSX.Element[] | JSX.Element | string
+  children: ReactNode
 }
 
 export const Cell = ({
