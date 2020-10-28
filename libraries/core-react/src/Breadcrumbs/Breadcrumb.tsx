@@ -32,12 +32,12 @@ type Props = {
    * truncate long labels based on this width */
   maxWidth?: number
   /* click handler function */
-  onClick?: () => void
+  onClick?: (e: MouseEvent | KeyboardEvent) => void
   /** Children is breadcrumb text */
   children: string
   /** Classname  */
   className?: string
-}
+} & JSX.IntrinsicElements['div']
 
 export const Breadcrumb = forwardRef<HTMLDivElement, Props>(function Breadcrumb(
   { children, maxWidth, ...other },
