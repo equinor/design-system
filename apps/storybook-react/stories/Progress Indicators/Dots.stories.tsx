@@ -1,49 +1,43 @@
 import React from 'react'
-import { DotProgress, Typography } from '@equinor/eds-core-react'
+import { DotProgress, DotProps, Typography } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-
-const Body = styled.div`
-  display: grid;
-  grid-template-rows: min-width;
-  padding: 32px;
-  padding-bottom: 8rem;
-  grid-gap: 2rem;
-`
-
-const Wrapper = styled.div`
-  margin-left: 16px;
-`
+import { Meta, Story } from '@storybook/react'
 
 const Background = styled.div`
-  background-color: grey;
+  background-color: #ebebeb;
   width: 36px;
   padding: 8px;
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 `
 
 export default {
   title: 'Components/Progress Indicators/Dots',
   component: DotProgress,
-}
+} as Meta
 
-export const Variants = () => {
-  return (
-    <Body>
-      <Typography variant="h4" as="h2">
-        White
-      </Typography>
-      <Wrapper>
-        <Background>
-          <DotProgress variant="white" />
-        </Background>
-      </Wrapper>
-      <Typography variant="h4" as="h2">
-        Green
-      </Typography>
-      <Wrapper>
-        <DotProgress variant="green" />
-      </Wrapper>
-    </Body>
-  )
-}
+export const Default: Story<DotProps> = (args) => (
+  <Background>
+    <DotProgress {...args} />
+  </Background>
+)
 
-Variants.storyName = 'Variants'
+export const Variants: Story<DotProps> = () => (
+  <>
+    <Typography variant="h4" as="h2">
+      White
+    </Typography>
+
+    <Background>
+      <DotProgress variant="white" />
+    </Background>
+
+    <Typography variant="h4" as="h2">
+      Green
+    </Typography>
+    <Background>
+      <DotProgress variant="green" />
+    </Background>
+  </>
+)

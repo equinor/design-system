@@ -26,13 +26,14 @@ const Svg = styled.svg`
   }
 `
 
-type Props = {
-  /* Choose between two colors */
+export type DotProps = {
+  /** Choose between two colors */
   variant?: 'white' | 'green'
+  /** @ignore */
   className?: string
 } & HTMLAttributes<SVGSVGElement>
 
-const DotProgress = forwardRef<SVGSVGElement, Props>(function DotProgress(
+const DotProgress = forwardRef<SVGSVGElement, DotProps>(function DotProgress(
   { variant = 'white', className = '', ...rest },
   ref,
 ) {
