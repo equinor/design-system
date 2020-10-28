@@ -71,7 +71,7 @@ function getAriaLabel(page: number, selected: number) {
   return `${selected === page ? 'Current page, ' : 'Go to '}page ${page}`
 }
 
-type PaginationProps = {
+export type PaginationProps = {
   // Number of total items to be paginated
   totalItems: number
   // To display total item count

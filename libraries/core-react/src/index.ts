@@ -26,5 +26,5 @@ export { Radio, Checkbox, Switch } from './SelectionControls'
 export * from './Progress'
 export { Breadcrumbs } from './Breadcrumbs'
 export { Menu } from './Menu'
-export { Pagination } from './Pagination'
+export * from './Pagination'
 /* eslint-enable */

@@ -1,1 +1,1 @@
-export { Pagination } from './Pagination'
+export { Pagination, PaginationProps } from './Pagination'
