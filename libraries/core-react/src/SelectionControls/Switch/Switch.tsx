@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Ref } from 'react'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
@@ -32,7 +32,9 @@ export type SwitchProps = {
   size?: Size
   /** If true, the switch will be disabled */
   disabled?: boolean
-} & Omit<JSX.IntrinsicElements['input'], 'size'>
+} & Omit<JSX.IntrinsicElements['input'], 'size'> & {
+    ref?: Ref<HTMLInputElement>
+  }
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   ({ size = 'default', disabled, label, className, ...rest }, ref) => {

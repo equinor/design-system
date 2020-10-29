@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Switch, Icon, Typography } from '@equinor/eds-core-react'
+import { Switch, SwitchProps } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import { checkbox } from '@equinor/eds-icons'
+import { Meta, Story } from '@storybook/react'
 
-Icon.add({ checkbox })
-const Wrapper = styled.div`
+type WrapperStyleProps = {
+  darkMode?: boolean
+}
+const Wrapper = styled.div<WrapperStyleProps>`
   display: grid;
   grid-template-rows: min-width;
   padding: 32px;
@@ -22,15 +24,6 @@ const UnstyledList = styled.ul`
   list-style-type: none;
 `
 
-const DarkModeTypography = styled(Typography)`
-  margin: '1rem 0';
-  ${({ darkMode }) =>
-    darkMode && {
-      color: 'white',
-    }};
-  transition: all 0.36s;
-`
-
 const Examples = styled.div`
   display: grid;
   grid-gap: 3rem;
@@ -41,9 +34,13 @@ const Examples = styled.div`
 export default {
   title: 'Components/Selection controls/Switch',
   component: Switch,
-}
+} as Meta
 
-export const SwitchControl = () => {
+export const Default: Story<SwitchProps> = (args) => (
+  <Switch label="Play with me" {...args} />
+)
+
+export const Variants: Story<SwitchProps> = () => {
   return (
     <Wrapper>
       <Examples>
@@ -91,16 +88,12 @@ export const SwitchControl = () => {
   )
 }
 
-export const ControlledSwitchControl = () => {
+export const ControlledSwitchControl: Story<SwitchProps> = () => {
   const [darkMode, setDarkMode] = useState(false)
   return (
     <Wrapper darkMode={darkMode}>
-      <DarkModeTypography variant="h2" darkMode={darkMode}>
-        Use case with controlled component
-      </DarkModeTypography>
       <Switch
         checked={darkMode}
-        ariaLabelledby="label-darkMode"
         onChange={() => setDarkMode(!darkMode)}
         label="Dark mode"
       />
@@ -108,5 +101,4 @@ export const ControlledSwitchControl = () => {
   )
 }
 
-SwitchControl.storyName = 'Examples'
-ControlledSwitchControl.storyName = 'Controlled'
+ControlledSwitchControl.storyName = 'Use case with controlled component'
