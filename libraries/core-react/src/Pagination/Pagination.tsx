@@ -4,6 +4,7 @@ import React, {
   ReactNode,
   MouseEvent,
   KeyboardEvent,
+  HTMLAttributes,
 } from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button'
@@ -72,21 +73,17 @@ function getAriaLabel(page: number, selected: number) {
 }
 
 export type PaginationProps = {
-  // Number of total items to be paginated
+  /** Number of total items to be paginated */
   totalItems: number
-  // To display total item count
+  /**  To display total item count */
   withItemIndicator?: boolean
-  // Choose number of items per page
+  /** Choose number of items per page */
   itemsPerPage?: number
-  // Callback fired on page change
+  /** Callback fired on page change */
   onChange?: (event: MouseEvent | KeyboardEvent, page: number) => void
-  // Default start page
+  /** Default start page */
   defaultPage?: number
-  // ClassName
-  className?: string
-  // Children
-  children?: ReactNode
-}
+} & HTMLAttributes<HTMLElement>
 
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   function Pagination(

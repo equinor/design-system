@@ -30,9 +30,9 @@ export default {
       defaultValue: 40,
       control: {
         type: 'number',
-        min: 40,
+        min: 10,
         max: 1000,
-        step: 10,
+        step: 1,
       },
     },
   },
