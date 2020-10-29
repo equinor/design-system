@@ -1,15 +1,11 @@
 import React from 'react'
-import { Pagination, Typography } from '@equinor/eds-core-react'
+import {
+  Pagination,
+  PaginationProps,
+  Typography,
+} from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import { withKnobs, number, boolean } from '@storybook/addon-knobs'
-
-const Body = styled.div`
-  margin: 42px;
-  display: grid;
-  grid-auto-columns: auto;
-  grid-gap: 8px;
-  width: 750px;
-`
+import { Story, Meta } from '@storybook/react'
 
 const PaddedTypography = styled(Typography)`
   margin: 16px 0;
@@ -18,12 +14,26 @@ const PaddedTypography = styled(Typography)`
 export default {
   title: 'Components/Pagination',
   component: Pagination,
-  decorators: [withKnobs],
+  argTypes: {
+    totalItems: {
+      defaultValue: 40,
+      control: {
+        type: 'number',
+        min: 10,
+        max: 1000,
+        step: 1,
+      },
+    },
+  },
+} as Meta
+
+export const Default: Story<PaginationProps> = (args) => {
+  return <Pagination {...args} />
 }
 
-export const Variants = () => {
+export const Variants: Story<PaginationProps> = () => {
   return (
-    <Body>
+    <>
       <PaddedTypography variant="h2">Length before truncation</PaddedTypography>
       <Pagination totalItems={7} itemsPerPage={1} />
       <PaddedTypography variant="h2">Truncated</PaddedTypography>
@@ -39,22 +49,6 @@ export const Variants = () => {
         withItemIndicator
         defaultPage={6}
       />
-    </Body>
-  )
-}
-
-export const WithKnobs = () => {
-  const totalItems = number('Total Items', 20)
-  const itemsPerPage = number('Items per page', 1)
-  const withItemIndicator = boolean('With item indicator', true)
-
-  return (
-    <Body>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        withItemIndicator={withItemIndicator}
-      />
-    </Body>
+    </>
   )
 }
