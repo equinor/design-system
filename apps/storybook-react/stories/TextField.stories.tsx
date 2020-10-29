@@ -1,6 +1,6 @@
 import React from 'react'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
-import { TextField } from '@equinor/eds-core-react'
+import { TextField, TextFieldProps } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
 
@@ -45,9 +45,13 @@ const ICONS = {
 export default {
   title: 'Components/TextField',
   component: TextField,
-}
+} as Meta
 
-export const types = () => (
+export const Default: Story<TextFieldProps> = (args) => (
+  <TextField {...args}></TextField>
+)
+
+export const types: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
       id="textfield-normal"
@@ -91,7 +95,7 @@ export const types = () => (
   </Wrapper>
 )
 
-export const Other = () => (
+export const Other: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
       id="storybook-multiline"
@@ -112,7 +116,7 @@ export const Other = () => (
   </Wrapper>
 )
 
-export const variants = () => (
+export const variants: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
       id="storybook-error"
@@ -143,30 +147,3 @@ export const variants = () => (
     />
   </Wrapper>
 )
-
-export const knobs = () => (
-  <Wrapper>
-    <TextField
-      id="storybook-knobs"
-      variant={select(
-        'Variant',
-        ['error', 'warning', 'success', 'default'],
-        'default',
-      )}
-      type={select(
-        'Type',
-        ['text', 'search', 'password', 'email', 'number'],
-        'text',
-      )}
-      label={text('Label', 'label')}
-      meta={text('Meta', 'meta')}
-      placeholder={text('Placeholder', 'placeholder')}
-      helperText={text('Helper text', 'Helper text')}
-      multiline={boolean('Multine', false)}
-      disabled={boolean('Disabled', false)}
-    ></TextField>
-  </Wrapper>
-)
-
-knobs.storyName = 'With knobs'
-knobs.decorators = [withKnobs]

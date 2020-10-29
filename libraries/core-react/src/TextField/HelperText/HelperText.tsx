@@ -61,7 +61,7 @@ const StyledIcon = styled(Icon)<StyledProps>`
   margin-right: ${({ spacings }) => spacings.left};
 `
 
-type Props = {
+type TextfieldHelperTextProps = {
   /** Helper text */
   helperText?: string
   /** Icon */
@@ -72,42 +72,40 @@ type Props = {
   variant: Variants
 }
 
-const HelperText = React.forwardRef<HTMLDivElement, Props>(
-  function TextFieldHelperText(props, ref) {
-    const {
-      helperText,
-      icon,
-      variant = 'default',
-      disabled: isDisabled,
-    } = props
-    const helperVariant = tokens[variant]
-    const spacings = tokens.spacings.comfortable
+const TextfieldHelperText = React.forwardRef<
+  HTMLDivElement,
+  TextfieldHelperTextProps
+>(function TextfieldHelperText(
+  { helperText, icon, variant = 'default', disabled: isDisabled, ...rest },
+  ref,
+) {
+  const helperVariant = tokens[variant]
+  const spacings = tokens.spacings.comfortable
 
-    const { isFocused } = useTextField()
+  const { isFocused } = useTextField()
 
-    const iconProps = {
-      spacings,
-      isDisabled,
-      color: helperVariant.color,
-      disabledColor: helperVariant.disabledColor,
-      focusColor: helperVariant.focusColor,
-    }
+  const iconProps = {
+    spacings,
+    isDisabled,
+    color: helperVariant.color,
+    disabledColor: helperVariant.disabledColor,
+    focusColor: helperVariant.focusColor,
+  }
 
-    return (
-      <Container ref={ref} {...props} spacings={spacings}>
-        {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
-        <Text
-          variant={helperVariant}
-          isFocused={isFocused}
-          isDisabled={isDisabled}
-        >
-          {helperText}
-        </Text>
-      </Container>
-    )
-  },
-)
+  return (
+    <Container ref={ref} {...rest} spacings={spacings}>
+      {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
+      <Text
+        variant={helperVariant}
+        isFocused={isFocused}
+        isDisabled={isDisabled}
+      >
+        {helperText}
+      </Text>
+    </Container>
+  )
+})
 
 // HelperText.displayName = 'eds-text-field-helperText'
 
-export { HelperText }
+export { TextfieldHelperText as HelperText }
