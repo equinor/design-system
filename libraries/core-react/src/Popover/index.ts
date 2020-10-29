@@ -1,4 +1,4 @@
-import { Popover as BaseComponent } from './Popover'
+import { Popover as BaseComponent, PopoverProps as Props } from './Popover'
 import { PopoverTitle } from './PopoverTitle'
 import { PopoverAnchor } from './PopoverAnchor'
 import { PopoverContent } from './PopoverContent'
@@ -19,3 +19,4 @@ Popover.PopoverContent = PopoverContent
 Popover.PopoverItem = PopoverItem
 
 export { Popover }
+export type PopoverProps = Props
