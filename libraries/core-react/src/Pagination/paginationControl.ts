@@ -1,4 +1,7 @@
-export function PaginationControl(pages: number, activePage: number) {
+export function PaginationControl(
+  pages: number,
+  activePage: number,
+): (string | number)[] {
   const siblings = 1 // amount of siblings on left and right side of active page after trunking
   const totalPagesShown = 7 // amount of total pages before we start trunking pages in ellipsis
   const pagesBeforeEllipsis = 5 // total pages shown before ellipsis and trunking begins
@@ -10,7 +13,7 @@ export function PaginationControl(pages: number, activePage: number) {
     return Array.from({ length }, (_, i) => start + i)
   }
 
-  let pageRange
+  let pageRange: (string | number)[]
 
   if (pages > 4) {
     const startPage = Math.max(
