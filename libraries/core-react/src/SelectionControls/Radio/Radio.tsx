@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Ref } from 'react'
 import styled from 'styled-components'
 import {
   radio_button_selected, // eslint-disable-line camelcase
@@ -92,7 +92,9 @@ export type RadioProps = {
   label: string
   /** If true, the radio button will be disabled */
   disabled?: boolean
-} & JSX.IntrinsicElements['input']
+} & JSX.IntrinsicElements['input'] & {
+    ref?: Ref<HTMLInputElement>
+  }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ label, disabled = false, className, ...rest }, ref) => {
