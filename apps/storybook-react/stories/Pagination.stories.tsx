@@ -22,6 +22,20 @@ const PaddedTypography = styled(Typography)`
 export default {
   title: 'Components/Pagination',
   component: Pagination,
+  table: {
+    defaultValue: {},
+  },
+  argTypes: {
+    totalItems: {
+      defaultValue: 40,
+      control: {
+        type: 'number',
+        min: 40,
+        max: 1000,
+        step: 10,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<PaginationProps> = (args) => {
