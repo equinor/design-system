@@ -7,14 +7,6 @@ import {
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 
-const Body = styled.div`
-  margin: 42px;
-  display: grid;
-  grid-auto-columns: auto;
-  grid-gap: 8px;
-  width: 750px;
-`
-
 const PaddedTypography = styled(Typography)`
   margin: 16px 0;
 `
@@ -22,9 +14,6 @@ const PaddedTypography = styled(Typography)`
 export default {
   title: 'Components/Pagination',
   component: Pagination,
-  table: {
-    defaultValue: {},
-  },
   argTypes: {
     totalItems: {
       defaultValue: 40,
@@ -39,16 +28,12 @@ export default {
 } as Meta
 
 export const Default: Story<PaginationProps> = (args) => {
-  return (
-    <Body>
-      <Pagination {...args} />
-    </Body>
-  )
+  return <Pagination {...args} />
 }
 
-export const Variants = () => {
+export const Variants: Story<PaginationProps> = () => {
   return (
-    <Body>
+    <>
       <PaddedTypography variant="h2">Length before truncation</PaddedTypography>
       <Pagination totalItems={7} itemsPerPage={1} />
       <PaddedTypography variant="h2">Truncated</PaddedTypography>
@@ -64,6 +49,6 @@ export const Variants = () => {
         withItemIndicator
         defaultPage={6}
       />
-    </Body>
+    </>
   )
 }
