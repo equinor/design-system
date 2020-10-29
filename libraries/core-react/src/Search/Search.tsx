@@ -183,7 +183,7 @@ type ControlledSearch = (
 export type SearchProps = InputHTMLAttributes<HTMLInputElement>
 
 export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
-  function EdsSearch(
+  function Search(
     {
       onChange,
       defaultValue = '',
