@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import styled from 'styled-components'
 import {
   Typography,
@@ -7,7 +7,6 @@ import {
   PopoverProps,
   Card,
 } from '@equinor/eds-core-react'
-import { action } from '@storybook/addon-actions'
 import { Meta, Story } from '@storybook/react'
 
 const { PopoverAnchor, PopoverTitle, PopoverContent } = Popover
@@ -55,11 +54,6 @@ export default {
   },
 } as Meta
 
-const handleClick = (e) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  action('handleClick')(e.target.textContent)
-}
-
 export const Default: Story<PopoverProps> = (args) => {
   const [active, setActive] = React.useState(false)
   const handleToggle = () => {
@@ -89,7 +83,7 @@ export const Default: Story<PopoverProps> = (args) => {
 export const Placements: Story<PopoverProps> = () => {
   const [active, setActive] = React.useState(null)
 
-  const handleClick = (event) => {
+  const handleClick = (event: MouseEvent) => {
     setActive(event.currentTarget.id)
   }
 
@@ -111,7 +105,7 @@ export const Placements: Story<PopoverProps> = () => {
   )
 
   return (
-    <>
+    <Body>
       <TextWrapper>
         <Typography variant="h3">Placement</Typography>
         <Typography variant="body_long">
@@ -120,167 +114,157 @@ export const Placements: Story<PopoverProps> = () => {
           inside the PopoverAnchor tag
         </Typography>
       </TextWrapper>
-      <div style={{ margin: '5em' }}>
-        <Typography variant="h5" as="h4">
-          Top
-        </Typography>
-        <Wrapper>
-          <Popover
-            onClose={handleClose}
-            open={active === '1'}
-            placement="topLeft"
-          >
-            <PopoverAnchor>
-              <Button id="1" onClick={handleClick}>
-                Top left
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover onClose={handleClose} open={active === '2'} placement="top">
-            <PopoverAnchor>
-              <Button id="2" onClick={handleClick}>
-                Top
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover
-            onClose={handleClose}
-            open={active === '3'}
-            placement="topRight"
-          >
-            <PopoverAnchor>
-              <Button id="3" onClick={handleClick}>
-                Top right
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-        </Wrapper>
+      <Typography variant="h5" as="h4">
+        Top
+      </Typography>
+      <Wrapper>
+        <Popover
+          onClose={handleClose}
+          open={active === '1'}
+          placement="topLeft"
+        >
+          <PopoverAnchor>
+            <Button id="1" onClick={handleClick}>
+              Top left
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover onClose={handleClose} open={active === '2'} placement="top">
+          <PopoverAnchor>
+            <Button id="2" onClick={handleClick}>
+              Top
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '3'}
+          placement="topRight"
+        >
+          <PopoverAnchor>
+            <Button id="3" onClick={handleClick}>
+              Top right
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+      </Wrapper>
 
-        <Typography variant="h5" as="h4">
-          Bottom
-        </Typography>
-        <Wrapper>
-          <Popover
-            onClose={handleClose}
-            open={active === '4'}
-            placement="bottomLeft"
-          >
-            <PopoverAnchor>
-              <Button id="4" onClick={handleClick}>
-                Bottom left
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover
-            onClose={handleClose}
-            open={active === '5'}
-            placement="bottom"
-          >
-            <PopoverAnchor>
-              <Button id="5" onClick={handleClick}>
-                Bottom
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover
-            onClose={handleClose}
-            open={active === '6'}
-            placement="bottomRight"
-          >
-            <PopoverAnchor>
-              <Button id="6" onClick={handleClick}>
-                Bottom right
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-        </Wrapper>
+      <Typography variant="h5" as="h4">
+        Bottom
+      </Typography>
+      <Wrapper>
+        <Popover
+          onClose={handleClose}
+          open={active === '4'}
+          placement="bottomLeft"
+        >
+          <PopoverAnchor>
+            <Button id="4" onClick={handleClick}>
+              Bottom left
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover onClose={handleClose} open={active === '5'} placement="bottom">
+          <PopoverAnchor>
+            <Button id="5" onClick={handleClick}>
+              Bottom
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '6'}
+          placement="bottomRight"
+        >
+          <PopoverAnchor>
+            <Button id="6" onClick={handleClick}>
+              Bottom right
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+      </Wrapper>
 
-        <Typography variant="h5" as="h4">
-          Left
-        </Typography>
-        <Wrapper>
-          <Popover
-            onClose={handleClose}
-            open={active === '7'}
-            placement="leftTop"
-          >
-            <PopoverAnchor>
-              <Button id="7" onClick={handleClick}>
-                Left top
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover onClose={handleClose} open={active === '8'} placement="left">
-            <PopoverAnchor>
-              <Button id="8" onClick={handleClick}>
-                Left
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover
-            onClose={handleClose}
-            open={active === '9'}
-            placement="leftBottom"
-          >
-            <PopoverAnchor>
-              <Button id="9" onClick={handleClick}>
-                Left bottom
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-        </Wrapper>
-        <Typography variant="h5" as="h4">
-          Right
-        </Typography>
-        <Wrapper>
-          <Popover
-            onClose={handleClose}
-            open={active === '10'}
-            placement="rightTop"
-          >
-            <PopoverAnchor>
-              <Button id="10" onClick={handleClick}>
-                Right top
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover
-            onClose={handleClose}
-            open={active === '11'}
-            placement="right"
-          >
-            <PopoverAnchor>
-              <Button id="11" onClick={handleClick}>
-                Right
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-          <Popover
-            onClose={handleClose}
-            open={active === '12'}
-            placement="rightBottom"
-          >
-            <PopoverAnchor>
-              <Button id="12" onClick={handleClick}>
-                Right bottom
-              </Button>
-            </PopoverAnchor>
-            <Content />
-          </Popover>
-        </Wrapper>
-      </div>
-    </>
+      <Typography variant="h5" as="h4">
+        Left
+      </Typography>
+      <Wrapper>
+        <Popover
+          onClose={handleClose}
+          open={active === '7'}
+          placement="leftTop"
+        >
+          <PopoverAnchor>
+            <Button id="7" onClick={handleClick}>
+              Left top
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover onClose={handleClose} open={active === '8'} placement="left">
+          <PopoverAnchor>
+            <Button id="8" onClick={handleClick}>
+              Left
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '9'}
+          placement="leftBottom"
+        >
+          <PopoverAnchor>
+            <Button id="9" onClick={handleClick}>
+              Left bottom
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+      </Wrapper>
+      <Typography variant="h5" as="h4">
+        Right
+      </Typography>
+      <Wrapper>
+        <Popover
+          onClose={handleClose}
+          open={active === '10'}
+          placement="rightTop"
+        >
+          <PopoverAnchor>
+            <Button id="10" onClick={handleClick}>
+              Right top
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover onClose={handleClose} open={active === '11'} placement="right">
+          <PopoverAnchor>
+            <Button id="11" onClick={handleClick}>
+              Right
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+        <Popover
+          onClose={handleClose}
+          open={active === '12'}
+          placement="rightBottom"
+        >
+          <PopoverAnchor>
+            <Button id="12" onClick={handleClick}>
+              Right bottom
+            </Button>
+          </PopoverAnchor>
+          <Content />
+        </Popover>
+      </Wrapper>
+    </Body>
   )
 }
 
@@ -291,7 +275,7 @@ export const ActivationTypes: Story<PopoverProps> = () => {
     setActive(event.currentTarget.id)
   }
 
-  const handleHover = (event) => {
+  const handleHover = (event: MouseEvent) => {
     const current = event.currentTarget.id
     setTimeout(() => {
       setActive(current)
