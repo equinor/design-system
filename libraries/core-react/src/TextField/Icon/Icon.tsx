@@ -38,7 +38,7 @@ const StyledIcon = styled.div`
   ${Variation}
 `
 
-type Props = {
+type TextfieldIconProps = {
   /** Disabled color */
   disabledColor: string
   /** Focus color */
@@ -49,20 +49,18 @@ type Props = {
   isDisabled?: boolean
 }
 
-const Icon = React.forwardRef<HTMLDivElement, Props>(function TextFieldIcon(
-  props,
-  ref,
-) {
-  const { children, ...other } = props
-  const { isFocused } = useTextField()
+const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
+  function InputIcon({ children, ...other }, ref) {
+    const { isFocused } = useTextField()
 
-  return (
-    <StyledIcon ref={ref} isFocused={isFocused} {...other}>
-      {children}
-    </StyledIcon>
-  )
-})
+    return (
+      <StyledIcon ref={ref} isFocused={isFocused} {...other}>
+        {children}
+      </StyledIcon>
+    )
+  },
+)
 
 // Icon.displayName = 'eds-text-field-icon'
 
-export { Icon }
+export { InputIcon as Icon }

@@ -11,7 +11,7 @@ const Container = styled.div`
   width: 100%;
 `
 
-type Props = {
+export type TextFieldProps = {
   /** @ignore */
   className?: string
   /** Variants */
@@ -42,69 +42,67 @@ type Props = {
   readOnly?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
-const TextField = React.forwardRef<HTMLInputElement, Props>(function TextField(
-  props,
-  ref,
-) {
-  const {
-    id,
-    label,
-    meta,
-    helperText,
-    placeholder,
-    disabled,
-    multiline,
-    className,
-    variant = 'default',
-    inputRef,
-    inputIcon,
-    helperIcon,
-    ...other
-  } = props
-
-  const inputProps = {
-    multiline,
-    disabled,
-    placeholder,
-    id,
-    variant,
-    ref: inputRef,
-    inputIcon,
-    ...other,
-  }
-
-  const helperProps = {
-    variant,
-    helperText,
-    icon: helperIcon,
-    disabled,
-  }
-
-  const containerProps = {
+export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
+  function TextField(
+    {
+      id,
+      label,
+      meta,
+      helperText,
+      placeholder,
+      disabled,
+      multiline,
+      className,
+      variant = 'default',
+      inputRef,
+      inputIcon,
+      helperIcon,
+      ...other
+    },
     ref,
-    className,
-  }
+  ) {
+    const inputProps = {
+      multiline,
+      disabled,
+      placeholder,
+      id,
+      variant,
+      ref: inputRef,
+      inputIcon,
+      ...other,
+    }
 
-  const labelProps = {
-    inputId: id,
-    label,
-    meta,
-  }
+    const helperProps = {
+      variant,
+      helperText,
+      icon: helperIcon,
+      disabled,
+    }
 
-  const showLabel = label || meta
-  const showHelperText = helperText
+    const containerProps = {
+      ref,
+      className,
+    }
 
-  return (
-    <Container {...containerProps}>
-      <TextFieldProvider>
-        {showLabel && <Label {...labelProps} />}
-        <Input {...inputProps} />
-        {showHelperText && <HelperText {...helperProps} />}
-      </TextFieldProvider>
-    </Container>
-  )
-})
+    const labelProps = {
+      inputId: id,
+      label,
+      meta,
+    }
+
+    const showLabel = label || meta
+    const showHelperText = helperText
+
+    return (
+      <Container {...containerProps}>
+        <TextFieldProvider>
+          {showLabel && <Label {...labelProps} />}
+          <Input {...inputProps} />
+          {showHelperText && <HelperText {...helperProps} />}
+        </TextFieldProvider>
+      </Container>
+    )
+  },
+)
 
 // TextField.displayName = 'eds-text-field'
-
-export { TextField }
