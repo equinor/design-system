@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
 import { chip as tokens } from './Chip.tokens'
@@ -140,7 +140,7 @@ export type ChipProps = {
   onDelete?: (Event) => void
   /** Variant */
   variant?: 'active' | 'error' | 'default'
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
 export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chips(
   {
