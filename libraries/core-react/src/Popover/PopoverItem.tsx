@@ -98,7 +98,7 @@ type Props = {
     | 'leftBottom'
   /**  On Close function */
   onClose?: () => void
-  /**  Open activates <PopoverItem/> */
+  /**  Open activates Popover */
   anchorRef: React.MutableRefObject<HTMLDivElement>
 } & HTMLAttributes<HTMLDivElement>
 

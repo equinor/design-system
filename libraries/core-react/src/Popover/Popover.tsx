@@ -42,7 +42,7 @@ export type PopoverProps = {
     | 'leftBottom'
   /**  On Close function */
   onClose?: () => void
-  /**  Open activates <PopoverItem/> */
+  /**  Open activates Popover */
   open?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
