@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
-import { withKnobs } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Search, Typography, Button } from '@equinor/eds-core-react'
+import {
+  Search,
+  Typography,
+  Button,
+  SearchProps,
+} from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 const Rows = styled.div`
   margin: 32px;
@@ -33,19 +38,19 @@ const StyledSearch = styled(Search)`
 
 export default {
   title: 'Components/Search',
-  component: Search,
-  decorators: [withKnobs],
-}
+} as Meta
 
 const handleOnChange = action('onChange')
 const handleOnBlur = action('onBlur')
 const handleOnFocus = action('onFocus')
 
-export const Examples = () => {
+export const Examples: Story<SearchProps> = () => {
   const [searchValue, setSearchValue] = useState('Initial value')
   const [isFocused, setIsFocused] = useState(false)
 
-  const handleOnSearchValueChange = (event) => {
+  const handleOnSearchValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const value = event.target.value
     handleOnChange()
     setSearchValue(value)
