@@ -157,12 +157,12 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                   <ListItem key={`list-item ${index}`}>
                     <PaginationItem
                       {...page}
-                      aria-label={getAriaLabel(page, activePage)}
+                      aria-label={getAriaLabel(page as number, activePage)}
                       aria-current={activePage}
                       page={page as number}
                       selected={page === activePage}
                       onClick={(event) => {
-                        onPageChange(event, page)
+                        onPageChange(event, page as number)
                       }}
                     />
                   </ListItem>
