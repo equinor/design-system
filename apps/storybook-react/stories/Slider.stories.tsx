@@ -7,7 +7,6 @@ import styled from 'styled-components'
 const Body = styled.div`
   display: grid;
   grid-template-rows: min-content;
-  padding: 32px;
   grid-gap: 4rem;
   position: relative;
 `
@@ -28,6 +27,13 @@ const getUnixTime = (iso) => {
 export default {
   title: 'Components/Slider',
   component: Slider,
+  decorators: [
+    (Story) => (
+      <div style={{ margin: '3rem' }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as Meta
 
 export const Default: Story<SliderProps> = (args) => {
