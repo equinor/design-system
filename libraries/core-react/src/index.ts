@@ -25,7 +25,7 @@ export { Popover } from './Popover'
 export * from './Banner'
 export * from './SelectionControls'
 export * from './Progress'
-export { Breadcrumbs } from './Breadcrumbs'
+export * from './Breadcrumbs'
 export { Menu } from './Menu'
 export * from './Pagination'
 /* eslint-enable */
