@@ -1,6 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Tooltip, Typography, Button } from '@equinor/eds-core-react'
+import {
+  Tooltip,
+  TooltipProps,
+  Typography,
+  Button,
+} from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 const Body = styled.div`
   margin: 42px;
@@ -23,9 +29,24 @@ const TextWrapper = styled.div`
 export default {
   title: 'Components/Tooltip',
   component: Tooltip,
+  argTypes: {
+    title: {
+      defaultValue: 'Tooltip title',
+    },
+  },
+} as Meta
+
+export const Default: Story<TooltipProps> = (args) => {
+  return (
+    <div style={{ margin: '3rem' }}>
+      <Tooltip {...args}>
+        <Button>Hover me!</Button>
+      </Tooltip>
+    </div>
+  )
 }
 
-export function Placement() {
+export const Placement: Story<TooltipProps> = () => {
   return (
     <Body>
       <TextWrapper>
@@ -87,7 +108,7 @@ export function Placement() {
   )
 }
 
-export function WithDisabledElements() {
+export const WithDisabledElements: Story<TooltipProps> = () => {
   return (
     <Body>
       <TextWrapper>
