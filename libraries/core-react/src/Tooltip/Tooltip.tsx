@@ -69,7 +69,7 @@ const TooltipArrow = styled.svg<ArrowProps>`
   `
 
 export type TooltipProps = {
-  /* Tooltip placement relative to anchor */
+  /** Tooltip placement relative to anchor */
   placement?:
     | 'topLeft'
     | 'top'
@@ -83,9 +83,9 @@ export type TooltipProps = {
     | 'leftTop'
     | 'left'
     | 'leftBottom'
-  /* For controlled Tooltip */
+  /** For controlled Tooltip */
   open?: boolean
-  /* Tooltip title */
+  /** Tooltip title */
   title?: string
   /** Tooltip reference/anchor element */
   children: ReactNode
