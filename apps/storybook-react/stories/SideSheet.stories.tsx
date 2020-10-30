@@ -14,21 +14,32 @@ const Child = styled.div`
 export default {
   title: 'Components/SideSheet',
   component: SideSheet,
+  argTypes: {
+    variant: {
+      defaultValue: 'medium',
+      control: {
+        type: 'select',
+        options: ['small', 'medium', 'large', 'xlarge'],
+      },
+    },
+    title: {
+      defaultValue: 'Title',
+      control: {
+        type: 'text',
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<SideSheetProps> = (args) => {
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(true)
 
   return (
-    <div style={{ margin: '10rem' }}>
+    <div style={{ height: '400px' }}>
       <Button variant="outlined" onClick={() => setToggle(!toggle)}>
         Click me!
       </Button>
-      <SideSheet
-        {...args}
-        open={toggle || args.open}
-        onClose={() => setToggle(!toggle)}
-      >
+      <SideSheet {...args} open={toggle} onClose={() => setToggle(!toggle)}>
         <Child>Children</Child>
       </SideSheet>
     </div>

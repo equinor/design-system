@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
 import { spacingsTemplate } from '../_common/templates'
@@ -28,7 +28,7 @@ export type SideSheetProps = {
   onClose?: (Event) => void
   /** Open / close Side Sheet */
   open?: boolean
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
 const StyledSideSheet = styled.div<StyleProps>`
   height: 100%;
