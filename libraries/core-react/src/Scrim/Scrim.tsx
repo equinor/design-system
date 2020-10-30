@@ -1,17 +1,10 @@
-import React, { forwardRef, useEffect, MouseEvent } from 'react'
+import React, { forwardRef, useEffect, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 
 const { height, width, background } = tokens
 
-type Props = {
-  /** Whether scrim can be dismissed with esc key */
-  isDismissable?: boolean
-  /** function to handle closing scrim */
-  onClose?: (event: MouseEvent | KeyboardEvent, open: boolean) => void
-} & React.HTMLAttributes<HTMLElement>
-
-const StyledScrim = styled.div<Props>`
+const StyledScrim = styled.div`
   width: ${width};
   height: ${height};
   background: ${background};
@@ -29,10 +22,23 @@ const ScrimContent = styled.div`
   height: auto;
 `
 
-export const Scrim = forwardRef<HTMLDivElement, Props>(function EdsScrim(
+export type ScrimProps = {
+  /** Whether scrim can be dismissed with esc key and outside click
+   */
+  isDismissable?: boolean
+  /** function to handle closing scrim */
+  onClose?: (event: MouseEvent | KeyboardEvent, open: boolean) => void
+} & HTMLAttributes<HTMLDivElement>
+
+export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   { children, onClose, isDismissable = false, ...rest },
   ref,
 ) {
+  const props = {
+    ...rest,
+    isDismissable,
+    ref,
+  }
   const handleKeyboardClose = (event: KeyboardEvent) => {
     if (event) {
       if (event.key === 'Escape' && isDismissable) {
@@ -65,12 +71,7 @@ export const Scrim = forwardRef<HTMLDivElement, Props>(function EdsScrim(
   }, [])
 
   return (
-    <StyledScrim
-      onClick={handleMouseClose}
-      isDismissable={isDismissable}
-      {...rest}
-      ref={ref}
-    >
+    <StyledScrim onClick={handleMouseClose} {...props}>
       <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
     </StyledScrim>
   )
