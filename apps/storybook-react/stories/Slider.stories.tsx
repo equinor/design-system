@@ -40,11 +40,14 @@ export const Default: Story<SliderProps> = (args) => {
   return <Slider {...args} />
 }
 
-export const Examples = () => {
+export const Examples: Story<SliderProps> = () => {
   const [value, updateValue] = useState([30, 70])
   const [valueTwo, updateValueTwo] = useState([0, 500])
   const [valueTwoCommited, updateValueTwoCommited] = useState([0, 500])
-  const onChange = (event, value) => {
+  const onChange = (
+    event: MouseEvent | KeyboardEvent,
+    value: number[] | number,
+  ) => {
     updateValue(value)
   }
 
