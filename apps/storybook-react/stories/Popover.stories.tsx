@@ -31,6 +31,12 @@ const TextWrapper = styled.div`
 export default {
   title: 'Components/Popover',
   component: Popover,
+  subcomponents: {
+    PopoverAnchor,
+    PopoverTitle,
+    PopoverContent,
+    CardActions,
+  },
   argTypes: {
     placement: {
       control: {
