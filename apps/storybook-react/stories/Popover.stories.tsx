@@ -61,7 +61,7 @@ export const Default: Story<PopoverProps> = (args) => {
   }
   return (
     <div style={{ margin: '10em' }}>
-      <Popover {...args} onClose={handleToggle} open={active}>
+      <Popover {...args} onClose={handleToggle} open={active || args.open}>
         <PopoverAnchor>
           <Button id="1" onClick={handleToggle}>
             Click me!
