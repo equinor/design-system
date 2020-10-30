@@ -2,20 +2,17 @@ import { Popover as BaseComponent } from './Popover'
 import { PopoverTitle } from './PopoverTitle'
 import { PopoverAnchor } from './PopoverAnchor'
 import { PopoverContent } from './PopoverContent'
-import { PopoverItem } from './PopoverItem'
 
-type PopoverTypes = typeof BaseComponent & {
+type PopoverProps = typeof BaseComponent & {
   PopoverTitle: typeof PopoverTitle
   PopoverAnchor: typeof PopoverAnchor
   PopoverContent: typeof PopoverContent
-  PopoverItem: typeof PopoverItem
 }
 
-const Popover = BaseComponent as PopoverTypes
+const Popover = BaseComponent as PopoverProps
 
 Popover.PopoverTitle = PopoverTitle
 Popover.PopoverAnchor = PopoverAnchor
 Popover.PopoverContent = PopoverContent
-Popover.PopoverItem = PopoverItem
 
-export { Popover }
+export { Popover, PopoverProps }

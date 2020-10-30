@@ -25,8 +25,8 @@ type PopoverSplit = {
   childArray: ReactNode[]
 }
 
-export type Props = {
-  /* Popover placement relative to anchor */
+export type PopoverProps = {
+  /**  Popover placement relative to anchor */
   placement?:
     | 'topLeft'
     | 'top'
@@ -42,58 +42,59 @@ export type Props = {
     | 'leftBottom'
   /**  On Close function */
   onClose?: () => void
-  /**  Open activates <PopoverItem/> */
+  /**  Open activates Popover */
   open?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 // Controller Component for PopoverItem
-export const Popover = forwardRef<HTMLDivElement, Props>(function Popover(
-  { open, children, placement = 'bottom', ...rest },
-  ref,
-) {
-  const props = {
-    ...rest,
-    placement,
-    ref,
-  }
-  if (!children) {
-    return <Container {...props} />
-  }
-  const anchorRef = useRef<HTMLDivElement>(null)
+export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
+  function Popover({ open, children, placement = 'bottom', ...rest }, ref) {
+    const props = {
+      ...rest,
+      placement,
+      ref,
+    }
+    if (!children) {
+      return <Container {...props} />
+    }
+    const anchorRef = useRef<HTMLDivElement>(null)
 
-  const { anchorElement, childArray } = React.Children.toArray(children).reduce(
-    (acc: PopoverSplit, child): PopoverSplit => {
-      if (isValidElement(child) && child.type === PopoverAnchor) {
+    const { anchorElement, childArray } = React.Children.toArray(
+      children,
+    ).reduce(
+      (acc: PopoverSplit, child): PopoverSplit => {
+        if (isValidElement(child) && child.type === PopoverAnchor) {
+          return {
+            ...acc,
+            anchorElement: child,
+          }
+        }
         return {
           ...acc,
-          anchorElement: child,
+          childArray: [...acc.childArray, child],
         }
-      }
-      return {
-        ...acc,
-        childArray: [...acc.childArray, child],
-      }
-    },
-    { anchorElement: null, childArray: [] },
-  )
+      },
+      { anchorElement: null, childArray: [] },
+    )
 
-  if (open && anchorRef.current) {
-    anchorRef.current.focus()
-  }
+    if (open && anchorRef.current) {
+      anchorRef.current.focus()
+    }
 
-  return (
-    <Container {...props}>
-      <Anchor aria-haspopup="true" ref={anchorRef}>
-        {anchorElement}
-      </Anchor>
+    return (
+      <Container {...props}>
+        <Anchor aria-haspopup="true" ref={anchorRef}>
+          {anchorElement}
+        </Anchor>
 
-      {open && (
-        <PopoverItem {...props} anchorRef={anchorRef}>
-          {childArray}
-        </PopoverItem>
-      )}
-    </Container>
-  )
-})
+        {open && (
+          <PopoverItem {...props} anchorRef={anchorRef}>
+            {childArray}
+          </PopoverItem>
+        )}
+      </Container>
+    )
+  },
+)
 
 // Popover.displayName = 'eds-popover'

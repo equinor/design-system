@@ -1,18 +1,13 @@
 import React from 'react'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import {
   Typography,
   Button,
-  Avatar,
-  Chip,
-  TextField,
-  Search,
-  Icon,
   Popover,
+  PopoverProps,
   Card,
 } from '@equinor/eds-core-react'
-import catImg from '../images/cat.jpg'
+import { Meta, Story } from '@storybook/react'
 
 const { PopoverAnchor, PopoverTitle, PopoverContent } = Popover
 const { CardActions } = Card
@@ -36,18 +31,70 @@ const TextWrapper = styled.div`
 export default {
   title: 'Components/Popover',
   component: Popover,
-  decorators: [withKnobs],
+  subcomponents: {
+    PopoverAnchor,
+    PopoverTitle,
+    PopoverContent,
+    CardActions,
+  },
+  argTypes: {
+    placement: {
+      control: {
+        type: 'select',
+        options: [
+          'topLeft',
+          'top',
+          'topRight',
+          'rightTop',
+          'right',
+          'rightBottom',
+          'bottomLeft',
+          'bottom',
+          'bottomRight',
+          'leftTop',
+          'left',
+          'leftBottom',
+        ],
+      },
+    },
+  },
+} as Meta
+
+export const Default: Story<PopoverProps> = (args) => {
+  const [active, setActive] = React.useState(false)
+  const handleToggle = () => {
+    setActive(!active)
+  }
+  return (
+    <div style={{ margin: '10em' }}>
+      <Popover {...args} onClose={handleToggle} open={active || args.open}>
+        <PopoverAnchor>
+          <Button id="1" onClick={handleToggle}>
+            Click me!
+          </Button>
+        </PopoverAnchor>
+        <PopoverTitle>Title</PopoverTitle>
+        <PopoverContent>
+          <Typography variant="body_short">Content</Typography>
+        </PopoverContent>
+        <CardActions>
+          <Button onClick={handleToggle}>Cancel</Button>
+          <Button onClick={handleToggle}>OK</Button>
+        </CardActions>
+      </Popover>
+    </div>
+  )
 }
 
-export function Placement() {
-  const [active, setActive] = React.useState(null)
+export const Placements: Story<PopoverProps> = () => {
+  const [active, setActive] = React.useState('')
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.SyntheticEvent) => {
     setActive(event.currentTarget.id)
   }
 
   const handleClose = () => {
-    setActive(null)
+    setActive('')
   }
 
   const Content = () => (
@@ -227,14 +274,14 @@ export function Placement() {
   )
 }
 
-export function ActivationTypes() {
-  const [active, setActive] = React.useState(null)
+export const ActivationTypes: Story<PopoverProps> = () => {
+  const [active, setActive] = React.useState('')
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.SyntheticEvent) => {
     setActive(event.currentTarget.id)
   }
 
-  const handleHover = (event) => {
+  const handleHover = (event: React.SyntheticEvent) => {
     const current = event.currentTarget.id
     setTimeout(() => {
       setActive(current)
@@ -242,7 +289,7 @@ export function ActivationTypes() {
   }
 
   const handleClose = () => {
-    setActive(null)
+    setActive('')
   }
 
   const Content = () => (
@@ -293,89 +340,6 @@ export function ActivationTypes() {
             </Button>
           </PopoverAnchor>
           <Content />
-        </Popover>
-      </Wrapper>
-    </Body>
-  )
-}
-
-const ANCHOR_CHOICES = {
-  button: <Button variant="ghost">Button</Button>,
-  avatar: <Avatar src={catImg} size={48} alt="avatar" />,
-  chip: <Chip>Chip</Chip>,
-  search: (
-    <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
-  ),
-  textfield: (
-    <TextField
-      id="textfield-normal"
-      placeholder="Placeholder text"
-      label="Text"
-      helperText="Helper text"
-    />
-  ),
-  typography: <Typography variant="h3">Typography</Typography>,
-  icon: <Icon name="work" color={'red'} />,
-}
-
-const ACTIONS_CHOICES = {
-  none: '',
-  default: (
-    <CardActions>
-      <Button>Cancel</Button>
-      <Button>OK</Button>
-    </CardActions>
-  ),
-  alignRight: (
-    <CardActions alignRight>
-      <Button>Cancel</Button>
-      <Button>OK</Button>
-    </CardActions>
-  ),
-  meta: (
-    <CardActions meta="Share">
-      <Button>OK</Button>
-    </CardActions>
-  ),
-}
-
-export const WithKnobs = () => {
-  const anchor = select('Anchor', Object.keys(ANCHOR_CHOICES), 'avatar')
-  const title = text('Title', 'Title')
-  const content = text('Content', 'Content')
-  const action = select('Actions', Object.keys(ACTIONS_CHOICES), 'default')
-  const placement = select(
-    'Placement',
-    [
-      'topLeft',
-      'top',
-      'topRight',
-      'rightTop',
-      'right',
-      'rightBottom',
-      'bottomLeft',
-      'bottom',
-      'bottomRight',
-      'leftTop',
-      'left',
-      'leftBottom',
-    ],
-    'bottom',
-  )
-
-  return (
-    <Body>
-      <TextWrapper>
-        <Typography variant="h3">With knobs</Typography>
-      </TextWrapper>
-      <Wrapper>
-        <Popover placement={placement} open>
-          <PopoverTitle>{title}</PopoverTitle>
-          <PopoverAnchor>{ANCHOR_CHOICES[anchor]}</PopoverAnchor>
-          <PopoverContent>
-            <Typography variant="body_short">{content}</Typography>
-          </PopoverContent>
-          {ACTIONS_CHOICES[action]}
         </Popover>
       </Wrapper>
     </Body>

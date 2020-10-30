@@ -81,7 +81,7 @@ const StyledCloseButton = styled(Button)`
   }
 `
 
-type Props = {
+type PopoverItemProps = {
   /* Popover placement relative to anchor */
   placement?:
     | 'topLeft'
@@ -98,12 +98,12 @@ type Props = {
     | 'leftBottom'
   /**  On Close function */
   onClose?: () => void
-  /**  Open activates <PopoverItem/> */
+  /** Anchor reference */
   anchorRef: React.MutableRefObject<HTMLDivElement>
 } & HTMLAttributes<HTMLDivElement>
 
-export const PopoverItem = forwardRef<HTMLDivElement, Props>(
-  function EdsPopoverItem(
+export const PopoverItem = forwardRef<HTMLDivElement, PopoverItemProps>(
+  function PopoverItem(
     {
       children,
       onClose = () => {},

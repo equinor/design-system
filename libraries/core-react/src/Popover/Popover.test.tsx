@@ -9,7 +9,7 @@ import { popover as tokens } from './Popover.tokens'
 import { Popover } from '.'
 import { Button } from '../Button'
 import { Typography } from '../Typography'
-import type { Props } from './Popover'
+import type { PopoverProps } from './Popover'
 
 const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover
 
@@ -24,7 +24,10 @@ const {
 
 afterEach(cleanup)
 
-const SimplePopover = ({ open = false, placement = 'bottom' }: Props) => (
+const SimplePopover = ({
+  open = false,
+  placement = 'bottom',
+}: PopoverProps) => (
   <Popover open={open} placement={placement}>
     <PopoverAnchor>
       <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
@@ -61,7 +64,7 @@ describe('Popover', () => {
     expect(arrow).toHaveStyleRule('right', `${topRight.arrowRight}`)
     expect(arrow).toHaveStyleRule('bottom', `${topRight.arrowBottom}`)
   })
-  it('Has provided necessary props', () => {
+  it('Has provided necessary PopoverProps', () => {
     const placement = 'topRight'
     const { queryByText } = render(<SimplePopover open placement={placement} />)
     expect(queryByText(placement)).toBeDefined()
