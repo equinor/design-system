@@ -1,16 +1,8 @@
 import React, { useState } from 'react'
-import { Scrim, Button, Typography } from '@equinor/eds-core-react'
+import { Scrim, Button, Typography, ScrimProps } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
-
-const Body = styled.div`
-  height: calc(100vh - 64px);
-  background: #ebebeb;
-  display: grid;
-  grid-template-rows: 1fr auto 1fr;
-  padding: 32px;
-  grid-gap: 32px;
-`
 
 const TestContent = styled.div`
   background: rgba(255, 146, 0, 0.5);
@@ -26,9 +18,9 @@ const TestContent = styled.div`
 export default {
   title: 'Components/Scrim',
   component: Scrim,
-}
+} as Meta
 
-export const Page = () => {
+export const Default: Story<ScrimProps> = (args) => {
   const [visibleScrim, setVisibleScrim] = useState(false)
   const handleClose = (event, closed) => {
     if (closed) {
@@ -39,23 +31,18 @@ export const Page = () => {
   }
 
   return (
-    <Body>
-      <Typography variant="body_short">Top of page</Typography>
-      <Typography variant="body_short">Center page.</Typography>
-      <div>
-        <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
-      </div>
-      <Typography variant="body_short">Bottom of page</Typography>
+    <>
+      <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
       {visibleScrim && (
-        <Scrim onClose={handleClose} isDismissable>
+        <Scrim {...args} onClose={handleClose}>
           <TestContent>
             <Typography variant="body_short">
               Press close or hit “ESC” to close scrim.
             </Typography>
-            <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+            <Button onClick={() => setVisibleScrim(false)}>Close</Button>
           </TestContent>
         </Scrim>
       )}
-    </Body>
+    </>
   )
 }
