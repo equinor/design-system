@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {
   Typography,
@@ -83,7 +83,7 @@ export const Default: Story<PopoverProps> = (args) => {
 export const Placements: Story<PopoverProps> = () => {
   const [active, setActive] = React.useState(null)
 
-  const handleClick = (event: MouseEvent) => {
+  const handleClick = (event: React.SyntheticEvent) => {
     setActive(event.currentTarget.id)
   }
 
@@ -271,11 +271,11 @@ export const Placements: Story<PopoverProps> = () => {
 export const ActivationTypes: Story<PopoverProps> = () => {
   const [active, setActive] = React.useState(null)
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.SyntheticEvent) => {
     setActive(event.currentTarget.id)
   }
 
-  const handleHover = (event: MouseEvent) => {
+  const handleHover = (event: React.SyntheticEvent) => {
     const current = event.currentTarget.id
     setTimeout(() => {
       setActive(current)
