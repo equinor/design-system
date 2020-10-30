@@ -1,17 +1,12 @@
 import React from 'react'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import {
   Tooltip,
+  TooltipProps,
   Typography,
   Button,
-  Icon,
-  Avatar,
-  Chip,
-  TextField,
-  Search,
 } from '@equinor/eds-core-react'
-import catImg from '../images/cat.jpg'
+import { Story, Meta } from '@storybook/react'
 
 const Body = styled.div`
   margin: 42px;
@@ -34,10 +29,24 @@ const TextWrapper = styled.div`
 export default {
   title: 'Components/Tooltip',
   component: Tooltip,
-  decorators: [withKnobs],
+  argTypes: {
+    title: {
+      defaultValue: 'Tooltip title',
+    },
+  },
+} as Meta
+
+export const Default: Story<TooltipProps> = (args) => {
+  return (
+    <div style={{ margin: '3rem' }}>
+      <Tooltip {...args}>
+        <Button>Hover me!</Button>
+      </Tooltip>
+    </div>
+  )
 }
 
-export function Placement() {
+export const Placement: Story<TooltipProps> = () => {
   return (
     <Body>
       <TextWrapper>
@@ -99,62 +108,7 @@ export function Placement() {
   )
 }
 
-const ANCHOR_CHOICES = {
-  button: <Button variant="ghost">Button</Button>,
-  avatar: <Avatar src={catImg} size={48} alt="avatar" />,
-  chip: <Chip>Chip</Chip>,
-  search: (
-    <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
-  ),
-  textfield: (
-    <TextField
-      id="textfield-normal"
-      placeholder="Placeholder text"
-      label="Text"
-      helperText="Helper text"
-    />
-  ),
-  typography: <Typography variant="h3">Typography</Typography>,
-  icon: <Icon name="work" color={'red'} />,
-}
-
-export const WithKnobs = () => {
-  const anchor = select('Anchor', Object.keys(ANCHOR_CHOICES), 'avatar')
-  const title = text('Title', 'Title')
-  const placement = select(
-    'Placement',
-    [
-      'topLeft',
-      'top',
-      'topRight',
-      'rightTop',
-      'right',
-      'rightBottom',
-      'bottomLeft',
-      'bottom',
-      'bottomRight',
-      'leftTop',
-      'left',
-      'leftBottom',
-    ],
-    'bottom',
-  )
-
-  return (
-    <Body>
-      <TextWrapper>
-        <Typography variant="h3">With knobs</Typography>
-      </TextWrapper>
-      <Wrapper>
-        <Tooltip open title={title} placement={placement}>
-          {ANCHOR_CHOICES[anchor]}
-        </Tooltip>
-      </Wrapper>
-    </Body>
-  )
-}
-
-export function WithDisabledElements() {
+export const WithDisabledElements: Story<TooltipProps> = () => {
   return (
     <Body>
       <TextWrapper>

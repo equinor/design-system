@@ -68,8 +68,8 @@ const TooltipArrow = styled.svg<ArrowProps>`
   fill: inherit;
   `
 
-type Props = {
-  /* Tooltip placement relative to anchor */
+export type TooltipProps = {
+  /** Tooltip placement relative to anchor */
   placement?:
     | 'topLeft'
     | 'top'
@@ -83,91 +83,93 @@ type Props = {
     | 'leftTop'
     | 'left'
     | 'leftBottom'
-  /* For controlled Tooltip */
+  /** For controlled Tooltip */
   open?: boolean
-  /* Tooltip title */
+  /** Tooltip title */
   title?: string
   /** Tooltip reference/anchor element */
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
 // Controller for TooltipItem
-export const Tooltip = forwardRef<HTMLDivElement, Props>(function Tooltip(
-  {
-    className,
-    title = '',
-    children,
-    placement = 'bottom',
-    open = false,
-    ...rest
-  },
-  ref,
-) {
-  const [openState, setOpenState] = useState(open)
-
-  const handleOpen = () => {
-    setOpenState(true)
-  }
-
-  const handleClose = () => {
-    setOpenState(false)
-  }
-
-  const props = {
-    ...rest,
-    className,
+export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
+  function Tooltip(
+    {
+      className,
+      title = '',
+      children,
+      placement = 'bottom',
+      open = false,
+      ...rest
+    },
     ref,
-  }
+  ) {
+    const [openState, setOpenState] = useState(open)
 
-  const placementToken: Placement = tokens.placement[placement]
+    const handleOpen = () => {
+      setOpenState(true)
+    }
 
-  const wrapperProps = {
-    right: placementToken.tooltipRight,
-    top: placementToken.tooltipTop,
-    bottom: placementToken.tooltipBottom,
-    left: placementToken.tooltipLeft,
-    transform: placementToken.transform,
-  }
+    const handleClose = () => {
+      setOpenState(false)
+    }
 
-  const arrowProps = {
-    left: placementToken.arrowLeft,
-    right: placementToken.arrowRight,
-    top: placementToken.arrowTop,
-    bottom: placementToken.arrowBottom,
-  }
-  const arrowStyle: CSS.Properties = {
-    transform: `${placementToken.arrowTransform}`,
-  }
-  return (
-    <Wrapper {...props}>
-      <div
-        onMouseOver={handleOpen}
-        onMouseEnter={handleOpen}
-        onPointerEnter={handleOpen}
-        onPointerLeave={handleClose}
-        onMouseOut={handleClose}
-        onMouseLeave={handleClose}
-        onBlur={handleClose}
-        onFocus={handleOpen}
-      >
-        {children}
-      </div>
-      {openState && (
-        <StyledTooltipWrapper
-          style={{ justifySelf: 'center' }}
-          role="tooltip"
-          {...wrapperProps}
+    const props = {
+      ...rest,
+      className,
+      ref,
+    }
+
+    const placementToken: Placement = tokens.placement[placement]
+
+    const wrapperProps = {
+      right: placementToken.tooltipRight,
+      top: placementToken.tooltipTop,
+      bottom: placementToken.tooltipBottom,
+      left: placementToken.tooltipLeft,
+      transform: placementToken.transform,
+    }
+
+    const arrowProps = {
+      left: placementToken.arrowLeft,
+      right: placementToken.arrowRight,
+      top: placementToken.arrowTop,
+      bottom: placementToken.arrowBottom,
+    }
+    const arrowStyle: CSS.Properties = {
+      transform: `${placementToken.arrowTransform}`,
+    }
+    return (
+      <Wrapper {...props}>
+        <div
+          onMouseOver={handleOpen}
+          onMouseEnter={handleOpen}
+          onPointerEnter={handleOpen}
+          onPointerLeave={handleClose}
+          onMouseOut={handleClose}
+          onMouseLeave={handleClose}
+          onBlur={handleClose}
+          onFocus={handleOpen}
         >
-          <StyledTooltip>
-            <TooltipArrow {...arrowProps} style={arrowStyle}>
-              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-            </TooltipArrow>
-            {title}
-          </StyledTooltip>
-        </StyledTooltipWrapper>
-      )}
-    </Wrapper>
-  )
-})
+          {children}
+        </div>
+        {openState && (
+          <StyledTooltipWrapper
+            style={{ justifySelf: 'center' }}
+            role="tooltip"
+            {...wrapperProps}
+          >
+            <StyledTooltip>
+              <TooltipArrow {...arrowProps} style={arrowStyle}>
+                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+              </TooltipArrow>
+              {title}
+            </StyledTooltip>
+          </StyledTooltipWrapper>
+        )}
+      </Wrapper>
+    )
+  },
+)
 
 // Tooltip.displayName = 'eds-tooltip'
