@@ -58,7 +58,7 @@ const StyledLinkItem = styled.li`
 `
 type Props = HTMLAttributes<HTMLLIElement>
 
-const LinkItem = forwardRef<HTMLLIElement, Props>(function EdsLinkItem(
+const LinkItem = forwardRef<HTMLLIElement, Props>(function LinkItem(
   { children, ...props },
   ref,
 ) {
