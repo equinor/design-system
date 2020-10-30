@@ -81,14 +81,14 @@ export const Default: Story<PopoverProps> = (args) => {
 }
 
 export const Placements: Story<PopoverProps> = () => {
-  const [active, setActive] = React.useState(null)
+  const [active, setActive] = React.useState('')
 
   const handleClick = (event: React.SyntheticEvent) => {
     setActive(event.currentTarget.id)
   }
 
   const handleClose = () => {
-    setActive(null)
+    setActive('')
   }
 
   const Content = () => (
@@ -269,7 +269,7 @@ export const Placements: Story<PopoverProps> = () => {
 }
 
 export const ActivationTypes: Story<PopoverProps> = () => {
-  const [active, setActive] = React.useState(null)
+  const [active, setActive] = React.useState('')
 
   const handleClick = (event: React.SyntheticEvent) => {
     setActive(event.currentTarget.id)
@@ -283,7 +283,7 @@ export const ActivationTypes: Story<PopoverProps> = () => {
   }
 
   const handleClose = () => {
-    setActive(null)
+    setActive('')
   }
 
   const Content = () => (
