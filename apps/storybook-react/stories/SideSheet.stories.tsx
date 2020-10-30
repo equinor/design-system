@@ -15,18 +15,8 @@ export default {
   title: 'Components/SideSheet',
   component: SideSheet,
   argTypes: {
-    variant: {
-      defaultValue: 'medium',
-      control: {
-        type: 'select',
-        options: ['small', 'medium', 'large', 'xlarge'],
-      },
-    },
     title: {
       defaultValue: 'Title',
-      control: {
-        type: 'text',
-      },
     },
   },
 } as Meta
