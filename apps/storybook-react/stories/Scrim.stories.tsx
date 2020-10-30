@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Scrim, Button, Typography } from '@equinor/eds-core-react'
+import { Scrim, Button, Typography, ScrimProps } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
 
@@ -26,9 +27,9 @@ const TestContent = styled.div`
 export default {
   title: 'Components/Scrim',
   component: Scrim,
-}
+} as Meta
 
-export const Page = () => {
+export const Default: Story<ScrimProps> = (args) => {
   const [visibleScrim, setVisibleScrim] = useState(false)
   const handleClose = (event, closed) => {
     if (closed) {
@@ -47,12 +48,12 @@ export const Page = () => {
       </div>
       <Typography variant="body_short">Bottom of page</Typography>
       {visibleScrim && (
-        <Scrim onClose={handleClose} isDismissable>
+        <Scrim {...args} onClose={handleClose}>
           <TestContent>
             <Typography variant="body_short">
               Press close or hit “ESC” to close scrim.
             </Typography>
-            <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+            <Button onClick={() => setVisibleScrim(false)}>Close</Button>
           </TestContent>
         </Scrim>
       )}

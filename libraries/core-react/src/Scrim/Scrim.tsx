@@ -4,14 +4,14 @@ import { scrim as tokens } from './Scrim.tokens'
 
 const { height, width, background } = tokens
 
-type Props = {
+export type ScrimProps = {
   /** Whether scrim can be dismissed with esc key */
   isDismissable?: boolean
   /** function to handle closing scrim */
   onClose?: (event: MouseEvent | KeyboardEvent, open: boolean) => void
 } & React.HTMLAttributes<HTMLElement>
 
-const StyledScrim = styled.div<Props>`
+const StyledScrim = styled.div<ScrimProps>`
   width: ${width};
   height: ${height};
   background: ${background};
@@ -29,7 +29,7 @@ const ScrimContent = styled.div`
   height: auto;
 `
 
-export const Scrim = forwardRef<HTMLDivElement, Props>(function EdsScrim(
+export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   { children, onClose, isDismissable = false, ...rest },
   ref,
 ) {
