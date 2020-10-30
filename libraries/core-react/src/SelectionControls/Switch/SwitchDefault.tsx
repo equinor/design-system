@@ -42,11 +42,11 @@ const Handle = styled.span<StyledProps>`
   transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
-type Props = {
+type SwitchDefaultProps = {
   disabled?: boolean
 }
 
-export const SwitchDefault = forwardRef<HTMLInputElement, Props>(
+export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
   ({ disabled, ...rest }, ref) => {
     return (
       <>

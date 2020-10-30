@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Ref } from 'react'
 import styled from 'styled-components'
 import {
   checkbox,
@@ -89,7 +89,7 @@ const LabelText = styled.span`
   ${typographyTemplate(enabled.typography)}
 `
 
-type Props = {
+export type CheckboxProps = {
   /** Label for the checkbox */
   label: string
   /** If true, the checkbox will be disabled */
@@ -98,47 +98,49 @@ type Props = {
    * set the native element to indeterminate yourself.
    */
   indeterminate?: boolean
-} & Omit<JSX.IntrinsicElements['input'], 'disabled'>
+} & Omit<JSX.IntrinsicElements['input'], 'disabled'> & {
+    ref?: Ref<HTMLInputElement>
+  }
 
-export const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { label, disabled, indeterminate, className, ...rest } = props
-
-  const iconSize = 24
-  return (
-    <StyledCheckbox disabled={disabled} className={className}>
-      <InputWrapper disabled={disabled}>
-        <Input
-          {...rest}
-          ref={ref}
-          disabled={disabled}
-          data-indeterminate={indeterminate}
-        />
-        {indeterminate ? (
-          <Svg
-            width={iconSize}
-            height={iconSize}
-            viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={disabled ? color.disabled : color.primary}
-            aria-hidden
-          >
-            <StyledPath icon={checkbox_indeterminate} name="indeterminate" />
-          </Svg>
-        ) : (
-          <Svg
-            width={iconSize}
-            height={iconSize}
-            viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={disabled ? color.disabled : color.primary}
-            aria-hidden
-          >
-            <StyledPath icon={checkbox} name="checked" />
-            <StyledPath icon={checkbox_outline} name="not-checked" />
-          </Svg>
-        )}
-      </InputWrapper>
-      <LabelText>{label}</LabelText>
-    </StyledCheckbox>
-  )
-})
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ label, disabled = false, indeterminate, className, ...rest }, ref) => {
+    const iconSize = 24
+    return (
+      <StyledCheckbox disabled={disabled} className={className}>
+        <InputWrapper disabled={disabled}>
+          <Input
+            {...rest}
+            ref={ref}
+            disabled={disabled}
+            data-indeterminate={indeterminate}
+          />
+          {indeterminate ? (
+            <Svg
+              width={iconSize}
+              height={iconSize}
+              viewBox={`0 0 ${iconSize} ${iconSize}`}
+              fill={disabled ? color.disabled : color.primary}
+              aria-hidden
+            >
+              <StyledPath icon={checkbox_indeterminate} name="indeterminate" />
+            </Svg>
+          ) : (
+            <Svg
+              width={iconSize}
+              height={iconSize}
+              viewBox={`0 0 ${iconSize} ${iconSize}`}
+              fill={disabled ? color.disabled : color.primary}
+              aria-hidden
+            >
+              <StyledPath icon={checkbox} name="checked" />
+              <StyledPath icon={checkbox_outline} name="not-checked" />
+            </Svg>
+          )}
+        </InputWrapper>
+        <LabelText>{label}</LabelText>
+      </StyledCheckbox>
+    )
+  },
+)
 
 Checkbox.displayName = 'Checkbox'

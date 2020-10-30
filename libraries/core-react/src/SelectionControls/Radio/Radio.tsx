@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Ref } from 'react'
 import styled from 'styled-components'
 import {
   radio_button_selected, // eslint-disable-line camelcase
@@ -45,7 +45,7 @@ const Input = styled.input.attrs(({ type = 'radio' }) => ({
     display: inline;
   }
 `
-type StyledRadioProps = Pick<Props, 'disabled'>
+type StyledRadioProps = Pick<RadioProps, 'disabled'>
 
 const StyledRadio = styled.label<StyledRadioProps>`
   display: inline-flex;
@@ -87,14 +87,16 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
       disabled ? 'transparent' : color.hover};
   }
 `
-type Props = {
+export type RadioProps = {
   /** Label for the radio */
   label: string
   /** If true, the radio button will be disabled */
   disabled?: boolean
-} & JSX.IntrinsicElements['input']
+} & JSX.IntrinsicElements['input'] & {
+    ref?: Ref<HTMLInputElement>
+  }
 
-export const Radio = forwardRef<HTMLInputElement, Props>(
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ label, disabled = false, className, ...rest }, ref) => {
     const iconSize = 24
     return (
