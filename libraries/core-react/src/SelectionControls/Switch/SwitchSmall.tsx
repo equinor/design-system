@@ -34,11 +34,11 @@ const Handle = styled.span`
   transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 
-type Props = {
+type SwitchSmallProps = {
   disabled?: boolean
 }
 
-export const SwitchSmall = forwardRef<HTMLInputElement, Props>(
+export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
   ({ disabled, ...rest }, ref) => {
     return (
       <>

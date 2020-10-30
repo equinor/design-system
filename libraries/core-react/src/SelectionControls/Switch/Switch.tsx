@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Ref } from 'react'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
@@ -25,16 +25,18 @@ const Label = styled.span`
   ${typographyTemplate(enabled.typography)}
 `
 
-type Props = {
+export type SwitchProps = {
   /** Label for the switch. Required to make it a11y compliant */
   label: string
   /** Switch size, use the small version with caution */
   size?: Size
   /** If true, the switch will be disabled */
   disabled?: boolean
-} & Omit<JSX.IntrinsicElements['input'], 'size'>
+} & Omit<JSX.IntrinsicElements['input'], 'size'> & {
+    ref?: Ref<HTMLInputElement>
+  }
 
-export const Switch = forwardRef<HTMLInputElement, Props>(
+export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   ({ size = 'default', disabled, label, className, ...rest }, ref) => {
     return (
       <StyledSwitch isDisabled={disabled} className={className}>

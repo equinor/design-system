@@ -5,7 +5,7 @@ import type { Size } from './Switch.types'
 
 const { enabled, disabled: _disabled } = tokens
 
-type StyledProps = Pick<Props, 'disabled'>
+type StyledProps = Pick<InputProps, 'disabled'>
 
 const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
@@ -60,12 +60,12 @@ const DefaultInput = styled(BaseInput)`
   }
 `
 
-type Props = {
+type InputProps = {
   size?: Size
   disabled?: boolean
 } & React.HTMLAttributes<HTMLInputElement>
 
-export const Input = forwardRef<HTMLInputElement, Props>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ size = 'default', ...rest }, ref) => {
     return (
       <>
