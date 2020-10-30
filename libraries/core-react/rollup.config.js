@@ -2,7 +2,6 @@
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
-import polyfill from 'rollup-plugin-polyfill'
 import typescript from 'rollup-plugin-typescript2'
 
 import pkg from './package.json'
@@ -22,6 +21,7 @@ export default [
   {
     input: './src/index.ts',
     external: peerDeps,
+    // : [...peerDeps, 'focus-visible'],
     watch: {
       clearScreen: true,
       include: ['./src/**', './../tokens/**'],
@@ -37,7 +37,6 @@ export default [
         plugins: ['babel-plugin-styled-components'],
       }),
       commonjs(),
-      polyfill(['focus-visible']),
     ],
     output: [
       {
