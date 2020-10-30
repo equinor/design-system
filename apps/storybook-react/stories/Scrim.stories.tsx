@@ -4,15 +4,6 @@ import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
 
-const Body = styled.div`
-  height: calc(100vh - 64px);
-  background: #ebebeb;
-  display: grid;
-  grid-template-rows: 1fr auto 1fr;
-  padding: 32px;
-  grid-gap: 32px;
-`
-
 const TestContent = styled.div`
   background: rgba(255, 146, 0, 0.5);
   border: 1px dashed #ff9200;
@@ -40,13 +31,8 @@ export const Default: Story<ScrimProps> = (args) => {
   }
 
   return (
-    <Body>
-      <Typography variant="body_short">Top of page</Typography>
-      <Typography variant="body_short">Center page.</Typography>
-      <div>
-        <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
-      </div>
-      <Typography variant="body_short">Bottom of page</Typography>
+    <>
+      <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
       {visibleScrim && (
         <Scrim {...args} onClose={handleClose}>
           <TestContent>
@@ -57,6 +43,6 @@ export const Default: Story<ScrimProps> = (args) => {
           </TestContent>
         </Scrim>
       )}
-    </Body>
+    </>
   )
 }
