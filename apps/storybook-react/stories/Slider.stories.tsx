@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Slider } from '@equinor/eds-core-react'
+import { Slider, SliderProps } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
 
@@ -27,6 +28,10 @@ const getUnixTime = (iso) => {
 export default {
   title: 'Components/Slider',
   component: Slider,
+} as Meta
+
+export const Default: Story<SliderProps> = (args) => {
+  return <Slider {...args} />
 }
 
 export const Examples = () => {
