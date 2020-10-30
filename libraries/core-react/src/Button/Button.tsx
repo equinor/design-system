@@ -137,6 +137,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       disabled = false,
       href,
+      tabIndex = 0,
       ...other
     },
     ref,
@@ -147,7 +148,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
     const type = href || other.as ? undefined : 'button'
-    const tabIndex = disabled ? -1 : other.tabIndex
+    tabIndex = disabled ? -1 : tabIndex
 
     const buttonProps = {
       ref,
