@@ -1,5 +1,4 @@
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
 import { spacingsTemplate } from '../_common/templates'
@@ -20,7 +19,7 @@ type StyleProps = {
   width: string
 }
 
-type Props = {
+export type SideSheetProps = {
   /** Title for Side Sheet */
   title?: string
   /** Variant controls width of Side Sheet */
@@ -29,7 +28,7 @@ type Props = {
   onClose?: (Event) => void
   /** Open / close Side Sheet */
   open?: boolean
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
 const StyledSideSheet = styled.div<StyleProps>`
   height: 100%;
@@ -54,8 +53,8 @@ const Header = styled.div`
   padding-right: 10px;
 `
 
-export const SideSheet = forwardRef<HTMLDivElement, Props>(
-  function EdsSideSheet(
+export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
+  function SideSheet(
     {
       variant = 'medium',
       title = '',
