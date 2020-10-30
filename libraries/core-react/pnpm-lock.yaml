@@ -4,7 +4,7 @@ dependencies:
   '@testing-library/react-hooks': 3.3.0_react@16.13.1
   '@types/lodash': 4.14.162
   csstype: 3.0.3
-  focus-visible: 5.1.0
+  focus-visible: 5.2.0
   lodash: 4.17.19
 devDependencies:
   '@babel/cli': 7.10.1_@babel+core@7.10.2
@@ -31,7 +31,6 @@ devDependencies:
   react: 16.13.1
   react-dom: 16.13.1_react@16.13.1
   rollup: 2.15.0
-  rollup-plugin-polyfill: 3.0.0
   rollup-plugin-typescript2: 0.27.2_rollup@2.15.0+typescript@4.0.2
   styled-components: 4.4.1_4f54128445bc6f13bd713dcb3d91e98e
   ts-jest: 26.3.0_jest@26.0.1+typescript@4.0.2
@@ -2864,10 +2863,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==
-  /focus-visible/5.1.0:
+  /focus-visible/5.2.0:
     dev: false
     resolution:
-      integrity: sha512-nPer0rjtzdZ7csVIu233P2cUm/ks/4aVSI+5KUkYrYpgA7ujgC3p6J7FtFU+AIMWwnwYQOB/yeiOITxFeYIXiw==
+      integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==
   /for-in/1.0.2:
     dev: true
     engines:
@@ -4953,12 +4952,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
-  /rollup-plugin-polyfill/3.0.0:
-    dependencies:
-      magic-string: 0.25.7
-    dev: true
-    resolution:
-      integrity: sha512-LfJ1OR/wJrJdNDVNrdhVm7CgENfaNoQlFYMaQ0vlQH3zO+BMVrBMWDX9k6HVcr9gHsKbthrkiBzWRfFU9fr0hQ==
   /rollup-plugin-typescript2/0.27.2_rollup@2.15.0+typescript@4.0.2:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.15.0
@@ -5881,7 +5874,7 @@ specifiers:
   '@types/testing-library__jest-dom': ^5.9.2
   babel-plugin-styled-components: ^1.10.7
   csstype: ^3.0.3
-  focus-visible: ^5.1.0
+  focus-visible: ^5.2.0
   jest: ^26.0.1
   jest-styled-components: ^6.3.4
   lodash: ^4.17.19
@@ -5890,7 +5883,6 @@ specifiers:
   react: ^16.13.1
   react-dom: ^16.13.1
   rollup: ^2.15.0
-  rollup-plugin-polyfill: ^3.0.0
   rollup-plugin-typescript2: ^0.27.2
   styled-components: 4.4.1
   ts-jest: ^26.3.0
