@@ -1,11 +1,11 @@
-import React, { forwardRef, ReactNode } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
 
 const { enabled } = tokens
 
-type StyledProps = Pick<Props, 'value'>
+type StyledProps = Pick<OutputProps, 'value'>
 
 const StyledOutput = styled.output<StyledProps>`
   --val: ${({ value }) => value};
@@ -32,8 +32,8 @@ type OutputProps = {
   value: number
   /** HtmlFor */
   htmlFor: string
-  /** Children */
-  children?: string
+  /** Children are required */
+  children: string
 } & JSX.IntrinsicElements['output']
 
 export const Output = forwardRef<HTMLOutputElement, OutputProps>(

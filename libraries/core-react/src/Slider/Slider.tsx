@@ -5,6 +5,7 @@ import React, {
   HTMLAttributes,
   MouseEvent,
   KeyboardEvent,
+  ReactNode,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -250,10 +251,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const getFormattedText = (text: string | number) => {
-    let output: string
-    typeof text !== 'string' ? (output = text.toString()) : (output = text)
-    return outputFunction ? outputFunction(output) : output
+  const getFormattedText = (text: string) => {
+    // typeof text !== 'string' ? (output = text.toString()) : (output = text)
+    return outputFunction ? outputFunction(text) : text
   }
 
   const findClosestRange = (event: MouseEvent) => {
@@ -318,7 +318,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             disabled={disabled}
           />
           <Output htmlFor={inputIdA} value={sliderValue[0] as number}>
-            {getFormattedText(sliderValue[0] as number)}
+            {getFormattedText(sliderValue[0])}
           </Output>
           {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
           <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
@@ -373,8 +373,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           {minMaxDots && <WrapperGroupLabelDots />}
           {minMaxValues && (
             <>
-              <MinMax>{getFormattedText(min.toString())}</MinMax>
-              <MinMax>{getFormattedText(max.toString())}</MinMax>
+              <MinMax>{getFormattedText(min)}</MinMax>
+              <MinMax>{getFormattedText(max)}</MinMax>
             </>
           )}
         </Wrapper>
