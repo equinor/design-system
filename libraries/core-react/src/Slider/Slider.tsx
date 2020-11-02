@@ -252,7 +252,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   }
 
   const getFormattedText = (text: string) => {
-    // typeof text !== 'string' ? (output = text.toString()) : (output = text)
     return outputFunction ? outputFunction(text) : text
   }
 
