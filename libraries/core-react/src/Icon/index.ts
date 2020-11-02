@@ -6,4 +6,5 @@ const Icon = IconComponent as IconProps
 
 Icon.add = add
 
-export { Icon, IconProps }
+export { Icon }
+export type { IconProps }

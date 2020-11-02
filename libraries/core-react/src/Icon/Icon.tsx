@@ -48,7 +48,7 @@ const StyledPath = styled.path.attrs<StyledProps>(({ height, size }) => ({
   transform: size / height !== 1 ? `scale(${size / height})` : null,
 }))``
 
-type IconProps = {
+export type IconProps = {
   /** Title for icon when used semantically */
   title?: string
   /** Color */
