@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode } from 'react'
+import React, { TdHTMLAttributes, ThHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import type { Border } from '@equinor/eds-tokens'
 import { getTokens, TableCell } from './Table.tokens'
@@ -47,11 +47,10 @@ type CellProps = {
   as?: 'td' | 'th'
   /** Specifies which variant to use */
   variant?: 'text' | 'icon' | 'numeric' | 'input'
-  /** Is the header cell scoped to column or row? */
-  scope?: 'row' | 'col'
-  /** @ignore */
-  children: ReactNode
-}
+} & (
+  | TdHTMLAttributes<HTMLTableDataCellElement>
+  | ThHTMLAttributes<HTMLTableHeaderCellElement>
+)
 
 export const Cell = ({
   children,
