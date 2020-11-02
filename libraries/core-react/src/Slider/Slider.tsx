@@ -1,4 +1,11 @@
-import React, { forwardRef, useState, useRef, HTMLAttributes } from 'react'
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  HTMLAttributes,
+  MouseEvent,
+  KeyboardEvent,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
@@ -209,8 +216,12 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       : useState([value])
     const minRange = useRef<HTMLInputElement>(null)
     const maxRange = useRef<HTMLInputElement>(null)
-    const onValueChange = (event, valueArrIdx?: number) => {
-      const changedValue = parseInt(event.target.value, 10)
+    const onValueChange = (
+      event: MouseEvent | KeyboardEvent,
+      valueArrIdx?: number,
+    ) => {
+      const target = event.target as HTMLInputElement
+      const changedValue = parseInt(target.value, 10)
       if (isRangeSlider) {
         const newValue = (sliderValue as number[]).slice()
         newValue[valueArrIdx] = changedValue
@@ -228,27 +239,28 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         onChange(event, [changedValue])
       }
     }
-    const handleKeyUp = (event) => {
+    const handleKeyUp = (event: KeyboardEvent) => {
       if (event.keyCode === 37 || event.keyCode === 39) {
         handleCommitedValue(event)
       }
     }
 
-    const handleCommitedValue = (event) => {
+    const handleCommitedValue = (event: MouseEvent | KeyboardEvent) => {
       if (onChangeCommitted) {
         onChangeCommitted(event, sliderValue as number[])
       }
     }
 
-    const getFormattedText = (text) => {
+    const getFormattedText = (text: string) => {
       return outputFunction ? outputFunction(text) : text
     }
 
-    const findClosestRange = (event) => {
-      if (event.target.type === 'output') {
+    const findClosestRange = (event: MouseEvent) => {
+      const target = event.target as HTMLInputElement
+      if (target.type === 'output') {
         return
       }
-      const bounds = event.target.getBoundingClientRect()
+      const bounds = target.getBoundingClientRect()
       const x = event.clientX - bounds.left
       const inputWidth = minRange.current.offsetWidth
       const minValue = minRange.current.value
@@ -280,8 +292,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             ref={ref}
             role="group"
             aria-labelledby={ariaLabelledby}
-            valA={sliderValue[0]}
-            valB={sliderValue[1]}
+            valA={sliderValue[0] as number}
+            valB={sliderValue[1] as number}
             max={max}
             min={min}
             disabled={disabled}
@@ -292,7 +304,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             <SliderInput
               type="range"
               ref={minRange}
-              value={sliderValue[0]}
+              value={sliderValue[0] as number}
               max={max}
               min={min}
               id={inputIdA}
@@ -304,14 +316,14 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               onKeyUp={(event) => handleKeyUp(event)}
               disabled={disabled}
             />
-            <Output htmlFor={inputIdA} value={sliderValue[0]}>
-              {getFormattedText(sliderValue[0])}
+            <Output htmlFor={inputIdA} value={sliderValue[0] as number}>
+              {getFormattedText(sliderValue[0] as number)}
             </Output>
             {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
             <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
             <SliderInput
               type="range"
-              value={sliderValue[1]}
+              value={sliderValue[1] as number}
               min={min}
               max={max}
               id={inputIdB}
@@ -324,7 +336,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               onKeyUp={(event) => handleKeyUp(event)}
               disabled={disabled}
             />
-            <Output htmlFor={inputIdB} value={sliderValue[1]}>
+            <Output htmlFor={inputIdB} value={sliderValue[1] as number}>
               {getFormattedText(sliderValue[1])}
             </Output>
             {minMaxValues && <MinMax>{getFormattedText(max)}</MinMax>}
@@ -335,12 +347,12 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             ref={ref}
             max={max}
             min={min}
-            value={sliderValue[0]}
+            value={sliderValue[0] as number}
             disabled={disabled}
           >
             <SliderInput
               type="range"
-              value={sliderValue[0]}
+              value={sliderValue[0] as number}
               min={min}
               max={max}
               step={step}
@@ -353,7 +365,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               onMouseUp={(event) => handleCommitedValue(event)}
               onKeyUp={(event) => handleKeyUp(event)}
             />
-            <Output htmlFor={inputId} value={sliderValue[0]}>
+            <Output htmlFor={inputId} value={sliderValue[0] as number}>
               {getFormattedText(sliderValue[0])}
             </Output>
             {/*  Need an element for pseudo elems :/ */}
