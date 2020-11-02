@@ -6,6 +6,6 @@ export type IconBasket = { icon?: IconData; count: number }
 
 export type Name = IconName | string
 
-export type IconType = typeof Icon & {
+export type IconProps = typeof Icon & {
   add: typeof add
 }
