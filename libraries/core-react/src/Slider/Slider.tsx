@@ -367,7 +367,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             onKeyUp={(event) => handleKeyUp(event)}
           />
           <Output htmlFor={inputId} value={sliderValue[0] as number}>
-            {getFormattedText((sliderValue[0] as number).toString())}
+            {getFormattedText(sliderValue[0])}
           </Output>
           {/*  Need an element for pseudo elems :/ */}
           {minMaxDots && <WrapperGroupLabelDots />}
