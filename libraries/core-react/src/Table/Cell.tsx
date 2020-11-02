@@ -47,10 +47,7 @@ type CellProps = {
   as?: 'td' | 'th'
   /** Specifies which variant to use */
   variant?: 'text' | 'icon' | 'numeric' | 'input'
-} & (
-  | TdHTMLAttributes<HTMLTableDataCellElement>
-  | ThHTMLAttributes<HTMLTableHeaderCellElement>
-)
+} & TdHTMLAttributes<HTMLTableDataCellElement>
 
 export const Cell = ({
   children,
