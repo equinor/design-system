@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import React, { TdHTMLAttributes, ThHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import type { Border } from '@equinor/eds-tokens'
 import { getTokens, TableCell } from './Table.tokens'
@@ -42,19 +42,19 @@ const TableBase = styled.td`
   ${Base}
 `
 
-type Props = {
+type CellProps = {
   /** Specifies which td or th to use */
-  as: 'td' | 'th'
+  as?: 'td' | 'th'
   /** Specifies which variant to use */
-  variant: 'text' | 'icon' | 'numeric' | 'input'
-} & HTMLAttributes<HTMLTableCellElement>
+  variant?: 'text' | 'icon' | 'numeric' | 'input'
+} & TdHTMLAttributes<HTMLTableDataCellElement>
 
 export const Cell = ({
   children,
   as = 'td',
   variant = 'text',
   ...props
-}: Props): JSX.Element => {
+}: CellProps): JSX.Element => {
   const tokens = getTokens(as, variant)
   return (
     <TableBase as={as} tokens={tokens} {...props}>
