@@ -1,4 +1,4 @@
-import React, { useState, useEffect, HTMLAttributes } from 'react'
+import React, { useState, useEffect, HTMLAttributes, FC } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 import { typographyTemplate } from '../_common/templates'
@@ -46,14 +46,14 @@ export type SnackbarProps = {
   leftAlignFrom?: string
 } & HTMLAttributes<HTMLDivElement>
 
-export const Snackbar = function Snackbar({
+export const Snackbar: FC<SnackbarProps> = ({
   open = false,
   autoHideDuration = 7000,
   onClose,
   leftAlignFrom = '1200px',
   children,
   className,
-}: SnackbarProps): JSX.Element {
+}) => {
   const [visible, setVisible] = useState(open)
   useEffect(() => {
     setVisible(open)
@@ -76,4 +76,4 @@ export const Snackbar = function Snackbar({
   )
 }
 
-// Snackbar.displayName = 'eds-snackbar'
+// Snackbar.displayName = 'Snackbar'

@@ -24,7 +24,6 @@ export const Default: Story<SnackbarProps> = (args) => {
     </>
   )
 }
-
 export const Simple: Story<SnackbarProps> = () => {
   const [open, setOpen] = useState(false)
 
