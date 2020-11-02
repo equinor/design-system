@@ -25,7 +25,7 @@ const StyledMinMax = styled.span`
 
 type MinMaxProps = {
   /** Children is required */
-  children: string
+  children: string | number
 } & JSX.IntrinsicElements['span']
 
 export const MinMax = forwardRef<HTMLSpanElement, MinMaxProps>(function MinMax(

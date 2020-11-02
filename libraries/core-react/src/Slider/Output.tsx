@@ -33,7 +33,7 @@ type OutputProps = {
   /** HtmlFor */
   htmlFor: string
   /** Children are required */
-  children: string
+  children: string | number
 } & JSX.IntrinsicElements['output']
 
 export const Output = forwardRef<HTMLOutputElement, OutputProps>(

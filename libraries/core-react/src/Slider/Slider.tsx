@@ -5,7 +5,6 @@ import React, {
   HTMLAttributes,
   MouseEvent,
   KeyboardEvent,
-  ReactNode,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -178,7 +177,7 @@ export type SliderProps = {
     newValue: SliderValueType,
   ) => void
   /** Function for formatting the output, e.g. with dates */
-  outputFunction?: (text: string) => void
+  outputFunction?: (text: number) => string
   /** Max value */
   max?: number
   /**  Min value */
@@ -251,7 +250,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const getFormattedText = (text: string) => {
+  const getFormattedText = (text: number) => {
     return outputFunction ? outputFunction(text) : text
   }
 
