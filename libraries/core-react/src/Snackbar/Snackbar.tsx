@@ -46,14 +46,14 @@ export type SnackbarProps = {
   leftAlignFrom?: string
 } & HTMLAttributes<HTMLDivElement>
 
-export const Snackbar = ({
+export const Snackbar = function Snackbar({
   open = false,
   autoHideDuration = 7000,
   onClose,
   leftAlignFrom = '1200px',
   children,
   className,
-}: SnackbarProps): JSX.Element => {
+}: SnackbarProps): JSX.Element {
   const [visible, setVisible] = useState(open)
   useEffect(() => {
     setVisible(open)
