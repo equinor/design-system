@@ -192,195 +192,195 @@ export type SliderProps = {
   disabled?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-export const Slider = forwardRef<HTMLDivElement, SliderProps>(
-  function EdsSlider(
-    {
-      min = 0,
-      max = 100,
-      value = [40, 60],
-      outputFunction,
-      onChange,
-      onChangeCommitted,
-      minMaxDots = true,
-      minMaxValues = true,
-      step = 1,
-      disabled,
-      ariaLabelledby,
-      ...rest
-    },
-    ref,
-  ) {
-    const isRangeSlider = Array.isArray(value)
-    const [sliderValue, setSliderValue] = isRangeSlider
-      ? useState(value)
-      : useState([value])
-    const minRange = useRef<HTMLInputElement>(null)
-    const maxRange = useRef<HTMLInputElement>(null)
-    const onValueChange = (
-      event: MouseEvent | KeyboardEvent,
-      valueArrIdx?: number,
-    ) => {
-      const target = event.target as HTMLInputElement
-      const changedValue = parseInt(target.value, 10)
-      if (isRangeSlider) {
-        const newValue = (sliderValue as number[]).slice()
-        newValue[valueArrIdx] = changedValue
-        setSliderValue(newValue)
-        if (onChange) {
-          // Callback for provided onChange func
-          onChange(event, newValue)
-        }
-        return
-      }
-
-      setSliderValue([changedValue])
+export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
+  {
+    min = 0,
+    max = 100,
+    value = [40, 60],
+    outputFunction,
+    onChange,
+    onChangeCommitted,
+    minMaxDots = true,
+    minMaxValues = true,
+    step = 1,
+    disabled,
+    ariaLabelledby,
+    ...rest
+  },
+  ref,
+) {
+  const isRangeSlider = Array.isArray(value)
+  const [sliderValue, setSliderValue] = isRangeSlider
+    ? useState(value)
+    : useState([value])
+  const minRange = useRef<HTMLInputElement>(null)
+  const maxRange = useRef<HTMLInputElement>(null)
+  const onValueChange = (
+    event: MouseEvent | KeyboardEvent,
+    valueArrIdx?: number,
+  ) => {
+    const target = event.target as HTMLInputElement
+    const changedValue = parseInt(target.value, 10)
+    if (isRangeSlider) {
+      const newValue = (sliderValue as number[]).slice()
+      newValue[valueArrIdx] = changedValue
+      setSliderValue(newValue)
       if (onChange) {
         // Callback for provided onChange func
-        onChange(event, [changedValue])
+        onChange(event, newValue)
       }
-    }
-    const handleKeyUp = (event: KeyboardEvent) => {
-      if (event.keyCode === 37 || event.keyCode === 39) {
-        handleCommitedValue(event)
-      }
+      return
     }
 
-    const handleCommitedValue = (event: MouseEvent | KeyboardEvent) => {
-      if (onChangeCommitted) {
-        onChangeCommitted(event, sliderValue as number[])
-      }
+    setSliderValue([changedValue])
+    if (onChange) {
+      // Callback for provided onChange func
+      onChange(event, [changedValue])
     }
-
-    const getFormattedText = (text: string) => {
-      return outputFunction ? outputFunction(text) : text
+  }
+  const handleKeyUp = (event: KeyboardEvent) => {
+    if (event.keyCode === 37 || event.keyCode === 39) {
+      handleCommitedValue(event)
     }
+  }
 
-    const findClosestRange = (event: MouseEvent) => {
-      const target = event.target as HTMLInputElement
-      if (target.type === 'output') {
-        return
-      }
-      const bounds = target.getBoundingClientRect()
-      const x = event.clientX - bounds.left
-      const inputWidth = minRange.current.offsetWidth
-      const minValue = minRange.current.value
-      const maxValue = maxRange.current.value
-      const diff = max - min
-
-      const normX = (x / inputWidth) * diff + min
-
-      const maxX = Math.abs(normX - parseInt(maxValue))
-      const minX = Math.abs(normX - parseInt(minValue))
-      if (minX > maxX) {
-        minRange.current.style.zIndex = '10'
-        maxRange.current.style.zIndex = '20'
-      } else {
-        minRange.current.style.zIndex = '20'
-        maxRange.current.style.zIndex = '10'
-      }
+  const handleCommitedValue = (event: MouseEvent | KeyboardEvent) => {
+    if (onChangeCommitted) {
+      onChangeCommitted(event, sliderValue as number[])
     }
+  }
 
-    const inputIdA = `${ariaLabelledby}-thumb-a`
-    const inputIdB = `${ariaLabelledby}-thumb-b`
-    const inputId = `${ariaLabelledby}-thumb`
+  const getFormattedText = (text: string | number) => {
+    let output: string
+    typeof text !== 'string' ? (output = text.toString()) : (output = text)
+    return outputFunction ? outputFunction(output) : output
+  }
 
-    return (
-      <>
-        {isRangeSlider ? (
-          <RangeWrapper
-            {...rest}
-            ref={ref}
-            role="group"
-            aria-labelledby={ariaLabelledby}
-            valA={sliderValue[0] as number}
-            valB={sliderValue[1] as number}
-            max={max}
-            min={min}
-            disabled={disabled}
-            onMouseMove={findClosestRange}
-          >
-            {minMaxDots && <WrapperGroupLabelDots />}
-            <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
-            <SliderInput
-              type="range"
-              ref={minRange}
-              value={sliderValue[0] as number}
-              max={max}
-              min={min}
-              id={inputIdA}
-              step={step}
-              onChange={(event) => {
-                onValueChange(event, 0)
-              }}
-              onMouseUp={(event) => handleCommitedValue(event)}
-              onKeyUp={(event) => handleKeyUp(event)}
-              disabled={disabled}
-            />
-            <Output htmlFor={inputIdA} value={sliderValue[0] as number}>
-              {getFormattedText(sliderValue[0] as number)}
-            </Output>
-            {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
-            <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
-            <SliderInput
-              type="range"
-              value={sliderValue[1] as number}
-              min={min}
-              max={max}
-              id={inputIdB}
-              step={step}
-              ref={maxRange}
-              onChange={(event) => {
-                onValueChange(event, 1)
-              }}
-              onMouseUp={(event) => handleCommitedValue(event)}
-              onKeyUp={(event) => handleKeyUp(event)}
-              disabled={disabled}
-            />
-            <Output htmlFor={inputIdB} value={sliderValue[1] as number}>
-              {getFormattedText(sliderValue[1])}
-            </Output>
-            {minMaxValues && <MinMax>{getFormattedText(max)}</MinMax>}
-          </RangeWrapper>
-        ) : (
-          <Wrapper
-            {...rest}
-            ref={ref}
-            max={max}
-            min={min}
+  const findClosestRange = (event: MouseEvent) => {
+    const target = event.target as HTMLOutputElement | HTMLInputElement
+    if (target.type === 'output') {
+      return
+    }
+    const bounds = target.getBoundingClientRect()
+    const x = event.clientX - bounds.left
+    const inputWidth = minRange.current.offsetWidth
+    const minValue = minRange.current.value
+    const maxValue = maxRange.current.value
+    const diff = max - min
+
+    const normX = (x / inputWidth) * diff + min
+
+    const maxX = Math.abs(normX - parseInt(maxValue))
+    const minX = Math.abs(normX - parseInt(minValue))
+    if (minX > maxX) {
+      minRange.current.style.zIndex = '10'
+      maxRange.current.style.zIndex = '20'
+    } else {
+      minRange.current.style.zIndex = '20'
+      maxRange.current.style.zIndex = '10'
+    }
+  }
+
+  const inputIdA = `${ariaLabelledby}-thumb-a`
+  const inputIdB = `${ariaLabelledby}-thumb-b`
+  const inputId = `${ariaLabelledby}-thumb`
+
+  return (
+    <>
+      {isRangeSlider ? (
+        <RangeWrapper
+          {...rest}
+          ref={ref}
+          role="group"
+          aria-labelledby={ariaLabelledby}
+          valA={sliderValue[0] as number}
+          valB={sliderValue[1] as number}
+          max={max}
+          min={min}
+          disabled={disabled}
+          onMouseMove={findClosestRange}
+        >
+          {minMaxDots && <WrapperGroupLabelDots />}
+          <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
+          <SliderInput
+            type="range"
+            ref={minRange}
             value={sliderValue[0] as number}
+            max={max}
+            min={min}
+            id={inputIdA}
+            step={step}
+            onChange={(event) => {
+              onValueChange(event, 0)
+            }}
+            onMouseUp={(event) => handleCommitedValue(event)}
+            onKeyUp={(event) => handleKeyUp(event)}
             disabled={disabled}
-          >
-            <SliderInput
-              type="range"
-              value={sliderValue[0] as number}
-              min={min}
-              max={max}
-              step={step}
-              id={inputId}
-              onChange={(event) => {
-                onValueChange(event)
-              }}
-              disabled={disabled}
-              aria-labelledby={ariaLabelledby}
-              onMouseUp={(event) => handleCommitedValue(event)}
-              onKeyUp={(event) => handleKeyUp(event)}
-            />
-            <Output htmlFor={inputId} value={sliderValue[0] as number}>
-              {getFormattedText(sliderValue[0])}
-            </Output>
-            {/*  Need an element for pseudo elems :/ */}
-            {minMaxDots && <WrapperGroupLabelDots />}
-            {minMaxValues && (
-              <>
-                <MinMax>{getFormattedText(min)}</MinMax>
-                <MinMax>{getFormattedText(max)}</MinMax>
-              </>
-            )}
-          </Wrapper>
-        )}
-      </>
-    )
-  },
-)
+          />
+          <Output htmlFor={inputIdA} value={sliderValue[0] as number}>
+            {getFormattedText(sliderValue[0] as number)}
+          </Output>
+          {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
+          <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
+          <SliderInput
+            type="range"
+            value={sliderValue[1] as number}
+            min={min}
+            max={max}
+            id={inputIdB}
+            step={step}
+            ref={maxRange}
+            onChange={(event) => {
+              onValueChange(event, 1)
+            }}
+            onMouseUp={(event) => handleCommitedValue(event)}
+            onKeyUp={(event) => handleKeyUp(event)}
+            disabled={disabled}
+          />
+          <Output htmlFor={inputIdB} value={sliderValue[1] as number}>
+            {getFormattedText(sliderValue[1])}
+          </Output>
+          {minMaxValues && <MinMax>{getFormattedText(max)}</MinMax>}
+        </RangeWrapper>
+      ) : (
+        <Wrapper
+          {...rest}
+          ref={ref}
+          max={max}
+          min={min}
+          value={sliderValue[0] as number}
+          disabled={disabled}
+        >
+          <SliderInput
+            type="range"
+            value={sliderValue[0] as number}
+            min={min}
+            max={max}
+            step={step}
+            id={inputId}
+            onChange={(event) => {
+              onValueChange(event)
+            }}
+            disabled={disabled}
+            aria-labelledby={ariaLabelledby}
+            onMouseUp={(event) => handleCommitedValue(event)}
+            onKeyUp={(event) => handleKeyUp(event)}
+          />
+          <Output htmlFor={inputId} value={sliderValue[0] as number}>
+            {getFormattedText((sliderValue[0] as number).toString())}
+          </Output>
+          {/*  Need an element for pseudo elems :/ */}
+          {minMaxDots && <WrapperGroupLabelDots />}
+          {minMaxValues && (
+            <>
+              <MinMax>{getFormattedText(min.toString())}</MinMax>
+              <MinMax>{getFormattedText(max.toString())}</MinMax>
+            </>
+          )}
+        </Wrapper>
+      )}
+    </>
+  )
+})
 
 // Slider.displayName = 'eds-slider'
