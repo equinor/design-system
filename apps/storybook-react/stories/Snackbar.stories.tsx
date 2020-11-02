@@ -7,6 +7,7 @@ const { SnackbarAction } = Snackbar
 export default {
   title: 'Components/Snackbar',
   component: Snackbar,
+  subcomponents: { SnackbarAction },
 } as Meta
 
 export const Default: Story<SnackbarProps> = (args) => {
