@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, KeyboardEvent } from 'react'
+import React, { useState, FormEvent } from 'react'
 import { Slider, SliderProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react'
 
@@ -45,7 +45,7 @@ export const Examples: Story<SliderProps> = () => {
   const [valueTwo, updateValueTwo] = useState([0, 500])
   const [valueTwoCommited, updateValueTwoCommited] = useState([0, 500])
   const changeHandler = (
-    event: MouseEvent | KeyboardEvent,
+    event: FormEvent<HTMLDivElement>,
     value: number[] | number,
   ) => {
     updateValue(value as number[])
@@ -71,7 +71,7 @@ export const Examples: Story<SliderProps> = () => {
         <Slider
           value={valueTwo}
           onChange={(
-            event: MouseEvent | KeyboardEvent,
+            event: FormEvent<HTMLDivElement>,
             value: number[] | number,
           ) => {
             updateValueTwo(value as number[])

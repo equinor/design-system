@@ -5,6 +5,7 @@ import React, {
   HTMLAttributes,
   MouseEvent,
   KeyboardEvent,
+  FormEvent,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -167,7 +168,7 @@ export type SliderProps = {
   value: number[] | number
   /** Function to be called when value change */
   onChange?: (
-    event: MouseEvent | KeyboardEvent,
+    event: FormEvent<HTMLDivElement>,
     newValue: number[] | number,
   ) => void
   /** Function to be called when value is committed by mouseup event */
@@ -215,7 +216,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
   const onValueChange = (
-    event: MouseEvent | KeyboardEvent,
+    event: FormEvent<HTMLDivElement>,
     valueArrIdx?: number,
   ) => {
     const target = event.target as HTMLInputElement
