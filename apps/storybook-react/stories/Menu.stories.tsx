@@ -1,8 +1,15 @@
-import React, { useEffect } from 'react'
-import { withKnobs } from '@storybook/addon-knobs'
+import React, { EventHandler, useEffect } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Menu, Typography, Button, Icon, TopBar } from '@equinor/eds-core-react'
+import {
+  Menu,
+  MenuProps,
+  Typography,
+  Button,
+  Icon,
+  TopBar,
+} from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 import { tokens } from '@equinor/eds-tokens'
 
@@ -54,28 +61,10 @@ const Anchor = styled.div.attrs({ tabIndex: 0 })`
   width: fit-content;
 `
 
-const FloatingAnchor = styled(Anchor)`
-  position: absolute;
-`
-
-const onClick = (event) => {
+const onClick = (event: React.MouseEvent) => {
   action('clicked')(event)
   event.stopPropagation()
 }
-
-export default {
-  title: 'Components/Menu',
-  component: Menu,
-  decorators: [withKnobs],
-}
-
-const simpleMenuTemplate = (
-  <>
-    <MenuItem onClick={onClick}>Item 1</MenuItem>
-    <MenuItem onClick={onClick}>Item 2</MenuItem>
-    <MenuItem onClick={onClick}>Item 3</MenuItem>
-  </>
-)
 
 const bigMenuTemplate = (
   <>
@@ -191,97 +180,16 @@ const bigMenuTemplate = (
   </>
 )
 
-export const EdgeDetection = () => {
-  const [state, setState] = React.useState({
-    topLeft: null,
-    topRight: null,
-    bottomLeft: null,
-    bottomRight: null,
-  })
+export default {
+  title: 'Components/Menu',
+  component: Menu,
+} as Meta
 
-  const topLeftRef = React.useRef()
-  const topRightRef = React.useRef()
-  const bottomLeftRef = React.useRef()
-  const bottomRightRef = React.useRef()
-
-  useEffect(() => {
-    setState({
-      topLeft: topLeftRef.current,
-      topRight: topRightRef.current,
-      bottomLeft: bottomLeftRef.current,
-      bottomRight: bottomRightRef.current,
-    })
-  }, [state.topLeft])
-
-  const { topLeft, topRight, bottomLeft, bottomRight } = state
-
-  return (
-    <Grid>
-      <FloatingAnchor
-        id="anchor-topleft"
-        aria-controls="menu-topleft"
-        aria-haspopup="true"
-        ref={topLeftRef}
-        style={{ left: 0, top: 0 }}
-      >
-        Top left
-      </FloatingAnchor>
-      <Menu id="menu-topleft" open={Boolean(topLeft)} anchorEl={topLeft}>
-        {simpleMenuTemplate}
-      </Menu>
-
-      <FloatingAnchor
-        id="anchor-topright"
-        aria-controls="menu-topright"
-        aria-haspopup="true"
-        ref={topRightRef}
-        style={{ top: 0, right: 0 }}
-      >
-        Top Right
-      </FloatingAnchor>
-      <Menu id="menu-topright" open={Boolean(topRight)} anchorEl={topRight}>
-        {simpleMenuTemplate}
-      </Menu>
-
-      <FloatingAnchor
-        id="anchor-bottomleft"
-        aria-controls="menu-bottomleft"
-        aria-haspopup="true"
-        ref={bottomLeftRef}
-        style={{ bottom: 0, left: 0 }}
-      >
-        Bottom Left
-      </FloatingAnchor>
-      <Menu
-        id="menu-bottomleft"
-        open={Boolean(bottomLeft)}
-        anchorEl={bottomLeft}
-      >
-        {simpleMenuTemplate}
-      </Menu>
-
-      <FloatingAnchor
-        id="anchor-bottomright"
-        aria-controls="menu-bottomright"
-        aria-haspopup="true"
-        ref={bottomRightRef}
-        style={{ bottom: 0, right: 0 }}
-      >
-        Bottom right
-      </FloatingAnchor>
-      <Menu
-        id="menu-bottomright"
-        open={Boolean(bottomRight)}
-        anchorEl={bottomRight}
-      >
-        {simpleMenuTemplate}
-      </Menu>
-    </Grid>
-  )
-}
-
-export const ButtonToggle = () => {
-  const [state, setState] = React.useState({
+export const ButtonToggle: Story<MenuProps> = () => {
+  const [state, setState] = React.useState<{
+    buttonEl: HTMLButtonElement
+    focus: any
+  }>({
     focus: 'first',
     buttonEl: null,
   })
@@ -297,7 +205,7 @@ export const ButtonToggle = () => {
     setState({ ...state, buttonEl: null, focus })
   }
 
-  const onKeyPress = (e) => {
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
     e.preventDefault()
     switch (key) {
@@ -317,14 +225,14 @@ export const ButtonToggle = () => {
 
   return (
     <Grid style={{ gridAutoFlow: 'row' }}>
-      <Typography variant="h4">Opened with Button</Typography>
+      <Typography variant="h4">Click button to open Menu</Typography>
       <Button
         variant="ghost_icon"
         id="menuButton"
         aria-controls="menu-on-button"
         aria-haspopup="true"
         aria-expanded={isOpen}
-        onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+        onClick={(e) => (isOpen ? closeMenu() : openMenu(e, null))}
         onKeyDown={onKeyPress}
       >
         Menu
@@ -343,8 +251,11 @@ export const ButtonToggle = () => {
   )
 }
 
-export const InTopbar = () => {
-  const [state, setState] = React.useState({
+export const InTopbar: Story<MenuProps> = () => {
+  const [state, setState] = React.useState<{
+    buttonEl: HTMLButtonElement
+    focus: any
+  }>({
     focus: 'first',
     buttonEl: null,
   })
@@ -356,14 +267,14 @@ export const InTopbar = () => {
 
   const closeMenu = () => setState({ ...state, buttonEl: null })
 
-  const onKeyPress = (e) => {
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
     switch (key) {
       case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu(e, 'first')
+        isOpen ? closeMenu() : openMenu(e)
         break
       case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu(e, 'last')
+        isOpen ? closeMenu() : openMenu(e)
         break
       case 'Escape':
         closeMenu()
@@ -405,7 +316,7 @@ export const InTopbar = () => {
   )
 }
 
-export const Examples = () => {
+export const Examples: Story<MenuProps> = () => {
   const [state, setState] = React.useState({
     one: null,
     two: null,
