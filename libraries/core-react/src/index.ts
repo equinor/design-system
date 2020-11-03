@@ -26,6 +26,6 @@ export * from './Banner'
 export * from './SelectionControls'
 export * from './Progress'
 export * from './Breadcrumbs'
-export { Menu } from './Menu'
+export * from './Menu'
 export * from './Pagination'
 /* eslint-enable */
