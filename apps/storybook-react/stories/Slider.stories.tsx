@@ -40,8 +40,6 @@ export const Default: Story<SliderProps> = (args) => {
   return <Slider {...args} />
 }
 
-type SliderValueType = number[] | number
-
 export const Examples: Story<SliderProps> = () => {
   const [value, updateValue] = useState([30, 70])
   const [valueTwo, updateValueTwo] = useState([0, 500])
