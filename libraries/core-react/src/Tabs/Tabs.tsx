@@ -1,18 +1,18 @@
-import React, { forwardRef, useMemo, useState } from 'react'
+import React, { forwardRef, useMemo, useState, HTMLAttributes } from 'react'
 import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 
-type Props = {
+export type TabsProps = {
   /** The index of the active tab */
   activeTab?: number
   /** The callback function for selecting a tab */
   onChange?: (index: number) => void
   /** Sets the width of the tabs */
   variant?: Variants
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
-const Tabs = forwardRef<HTMLDivElement, Props>(function Tabs(
+const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   { activeTab, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
   ref,
 ) {

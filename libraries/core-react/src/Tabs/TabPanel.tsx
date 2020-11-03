@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { tabPanel as tokens } from './Tabs.tokens'
 
@@ -11,7 +11,7 @@ const {
 } = tokens
 
 const StyledTabPanel = styled.div.attrs(
-  (): React.HTMLAttributes<HTMLDivElement> => ({
+  (): HTMLAttributes<HTMLDivElement> => ({
     tabIndex: 0,
     role: 'tabpanel',
   }),
@@ -25,12 +25,12 @@ const StyledTabPanel = styled.div.attrs(
   },
 })
 
-type Props = {
+type TabPanelProps = {
   /** If `true`, the panel will be hidden. */
   hidden?: boolean
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
-const TabPanel = forwardRef<HTMLDivElement, Props>(function TabPanel(
+const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(function TabPanel(
   { ...props },
   ref,
 ) {

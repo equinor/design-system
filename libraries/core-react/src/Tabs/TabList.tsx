@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useEffect,
   ReactElement,
+  HTMLAttributes,
 } from 'react'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
@@ -21,10 +22,10 @@ const variants: VariantsRecord = {
   minWidth: 'max-content',
 }
 
-type StyledProps = Props
+type StyledProps = TabListProps
 
 const StyledTabList = styled.div.attrs(
-  (): React.HTMLAttributes<HTMLDivElement> => ({
+  (): HTMLAttributes<HTMLDivElement> => ({
     role: 'tablist',
   }),
 )<StyledProps>`
@@ -33,14 +34,14 @@ const StyledTabList = styled.div.attrs(
   grid-auto-columns: ${({ variant }) => variants[variant]};
 `
 
-type Props = {
+type TabListProps = {
   /** Sets the width of the tabs */
   variant?: Variants
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
 type TabChild = JSX.IntrinsicElements['button'] & ReactElement
 
-const TabList = forwardRef<HTMLDivElement, Props>(function TabsList(
+const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   { children = [], ...props },
   ref,
 ) {

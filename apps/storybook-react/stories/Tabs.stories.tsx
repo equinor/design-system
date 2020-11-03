@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { Tabs, Typography, Search } from '@equinor/eds-core-react'
+import { Tabs, TabsProps, Typography, Search } from '@equinor/eds-core-react'
 import { action } from '@storybook/addon-actions'
+import { Story, Meta } from '@storybook/react'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
@@ -10,6 +11,7 @@ const noop = () => {}
 export default {
   title: 'Components/Tabs',
   component: Tabs,
+  subcomponents: { TabList, Tab, TabPanels, TabPanel },
 }
 
 const Wrapper = styled.div`
@@ -18,7 +20,20 @@ const Wrapper = styled.div`
   grid-gap: 24px;
 `
 
-export const tabStates = () => {
+export const Default: Story<TabsProps> = (args) => (
+  <Tabs {...args}>
+    <TabList>
+      <Tab>One</Tab>
+      <Tab>Two</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Panel one</TabPanel>
+      <TabPanel>Panel two</TabPanel>
+    </TabPanels>
+  </Tabs>
+)
+
+/* export const tabStates = () => {
   const focusedRef = useRef(null)
 
   useEffect(() => {
@@ -40,9 +55,9 @@ export const tabStates = () => {
       </Tabs>
     </Wrapper>
   )
-}
+} */
 
-export const tabWidths = () => {
+/* export const tabWidths = () => {
   return (
     <Wrapper>
       <Typography variant="h1">Tab widths</Typography>
@@ -64,8 +79,8 @@ export const tabWidths = () => {
       </Tabs>
     </Wrapper>
   )
-}
-
+} */
+/* 
 export const tabPanels = () => {
   const [activeTab, setActiveTab] = useState(1)
 
@@ -98,9 +113,9 @@ export const tabPanels = () => {
       </Tabs>
     </Wrapper>
   )
-}
+} */
 
-export const tabsAndSearch = () => {
+/* export const tabsAndSearch = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
@@ -146,9 +161,9 @@ export const tabsAndSearch = () => {
       </Tabs>
     </div>
   )
-}
+} */
 
-export const tabsAndInputInPanel = () => {
+/* xport const tabsAndInputInPanel = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
@@ -200,13 +215,13 @@ export const tabsAndInputInPanel = () => {
       </Tabs>
     </div>
   )
-}
+} */
 
-const StyledTab = styled(Tab)`
+/* const StyledTab = styled(Tab)`
   background: pink;
-`
+` */
 
-const StyledTabPanel = styled(TabPanel)`
+/* const StyledTabPanel = styled(TabPanel)`
   padding: 32px;
   background: peachpuff;
 `
@@ -242,4 +257,4 @@ export const tabsWithStyledComponents = () => {
       </Tabs>
     </Wrapper>
   )
-}
+} */
