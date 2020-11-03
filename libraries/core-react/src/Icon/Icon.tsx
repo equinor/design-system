@@ -1,4 +1,4 @@
-import React, { forwardRef, SVGProps } from 'react'
+import React, { forwardRef, Ref, SVGProps } from 'react'
 import styled from 'styled-components'
 import { get } from './library'
 import type { IconData } from '@equinor/eds-icons'
@@ -61,6 +61,8 @@ export type IconProps = {
   name?: Name
   /** Manually specify which icon data to use */
   data?: IconData
+  /** @ignore */
+  ref?: Ref<SVGSVGElement>
 } & SVGProps<SVGSVGElement>
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(

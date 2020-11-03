@@ -1,8 +1,8 @@
-import { Icon as IconComponent } from './Icon'
+import { Icon as IconComponent, IconProps } from './Icon'
 import { add } from './library'
-import type { IconProps } from './Icon.types'
+import type { IconType } from './Icon.types'
 
-const Icon = IconComponent as IconProps
+const Icon = IconComponent as IconType
 
 Icon.add = add
 

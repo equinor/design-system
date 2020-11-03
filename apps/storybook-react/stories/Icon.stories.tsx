@@ -60,7 +60,6 @@ export default {
       control: 'color',
     },
     data: {
-      defaultValue: customIconData,
       control: 'object',
     },
   },
