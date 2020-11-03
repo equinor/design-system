@@ -33,8 +33,8 @@ export const Default: Story<TabsProps> = (args) => (
   </Tabs>
 )
 
-/* export const tabStates = () => {
-  const focusedRef = useRef(null)
+export const States: Story<TabsProps> = () => {
+  const focusedRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     focusedRef.current.focus()
@@ -55,7 +55,7 @@ export const Default: Story<TabsProps> = (args) => (
       </Tabs>
     </Wrapper>
   )
-} */
+}
 
 /* export const tabWidths = () => {
   return (

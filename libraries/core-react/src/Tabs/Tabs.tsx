@@ -13,7 +13,7 @@ export type TabsProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
-  { activeTab, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
+  { activeTab = 0, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
   ref,
 ) {
   const tabsId = useMemo(() => createId('tabs-'), [])
