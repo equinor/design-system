@@ -159,7 +159,6 @@ const SrOnlyLabel = styled.label`
   white-space: nowrap;
   border-width: 0;
 `
-type SliderValueType = number[] | number
 
 export type SliderProps = {
   /** Id for the elements that labels this slider */
