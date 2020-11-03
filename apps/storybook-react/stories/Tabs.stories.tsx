@@ -79,16 +79,16 @@ export const Widths: Story<TabsProps> = () => {
     </>
   )
 }
-/* 
-export const tabPanels = () => {
+
+export const Panels: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
   return (
-    <Wrapper>
+    <>
       <Typography variant="h1">Tab with panels</Typography>
       <Typography variant="body_long">
         To navigate using they keyboard, use tab key to move from tab to tab
@@ -110,9 +110,9 @@ export const tabPanels = () => {
           <TabPanel>Panel four</TabPanel>
         </TabPanels>
       </Tabs>
-    </Wrapper>
+    </>
   )
-} */
+}
 
 /* export const tabsAndSearch = () => {
   const [searchText, setSearchText] = useState('')
