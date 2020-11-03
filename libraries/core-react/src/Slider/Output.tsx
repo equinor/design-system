@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, ReactNode } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
@@ -33,7 +33,7 @@ type OutputProps = {
   /** HtmlFor */
   htmlFor: string
   /** Children are required */
-  children: string | number
+  children: ReactNode
 } & JSX.IntrinsicElements['output']
 
 export const Output = forwardRef<HTMLOutputElement, OutputProps>(

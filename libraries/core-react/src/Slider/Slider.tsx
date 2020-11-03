@@ -165,16 +165,16 @@ export type SliderProps = {
   /** Id for the elements that labels this slider */
   ariaLabelledby: string
   /** Components value, range of numbers */
-  value: SliderValueType
+  value: number[] | number
   /** Function to be called when value change */
   onChange?: (
     event: MouseEvent | KeyboardEvent,
-    newValue: SliderValueType,
+    newValue: number[] | number,
   ) => void
   /** Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
     event: MouseEvent | KeyboardEvent,
-    newValue: SliderValueType,
+    newValue: number[] | number,
   ) => void
   /** Function for formatting the output, e.g. with dates */
   outputFunction?: (text: number) => string | number
@@ -190,7 +190,7 @@ export type SliderProps = {
   minMaxValues?: boolean
   /** Disabled */
   disabled?: boolean
-} & HTMLAttributes<HTMLDivElement>
+} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   {

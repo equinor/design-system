@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, MouseEvent, KeyboardEvent } from 'react'
 import { Slider, SliderProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react'
 
@@ -40,15 +40,17 @@ export const Default: Story<SliderProps> = (args) => {
   return <Slider {...args} />
 }
 
+type SliderValueType = number[] | number
+
 export const Examples: Story<SliderProps> = () => {
   const [value, updateValue] = useState([30, 70])
   const [valueTwo, updateValueTwo] = useState([0, 500])
   const [valueTwoCommited, updateValueTwoCommited] = useState([0, 500])
-  const onChange = (
+  const changeHandler = (
     event: MouseEvent | KeyboardEvent,
     value: number[] | number,
   ) => {
-    updateValue(value)
+    updateValue(value as number[])
   }
 
   return (
@@ -57,7 +59,7 @@ export const Examples: Story<SliderProps> = () => {
         <span id="range-slider-label">Range slider</span>
         <Slider
           value={value}
-          onChange={onChange}
+          onChange={changeHandler}
           ariaLabelledby="range-slider-label"
         />
         <p style={{ marginTop: '1.5rem' }}>
@@ -70,14 +72,17 @@ export const Examples: Story<SliderProps> = () => {
         </span>
         <Slider
           value={valueTwo}
-          onChange={(event, value) => {
-            updateValueTwo(value)
+          onChange={(
+            event: MouseEvent | KeyboardEvent,
+            value: number[] | number,
+          ) => {
+            updateValueTwo(value as number[])
           }}
           min={0}
           max={500}
           ariaLabelledby="range-slider-label-with-mouseevent"
           onChangeCommitted={(event, value) => {
-            updateValueTwoCommited(value)
+            updateValueTwoCommited(value as number[])
           }}
         />
         <p style={{ marginTop: '1.5rem' }}>

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, ReactNode } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
@@ -25,7 +25,7 @@ const StyledMinMax = styled.span`
 
 type MinMaxProps = {
   /** Children is required */
-  children: string | number
+  children: ReactNode
 } & JSX.IntrinsicElements['span']
 
 export const MinMax = forwardRef<HTMLSpanElement, MinMaxProps>(function MinMax(
