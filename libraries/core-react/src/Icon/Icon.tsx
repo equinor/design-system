@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, Ref, SVGProps } from 'react'
 import styled from 'styled-components'
 import { get } from './library'
 import type { IconData } from '@equinor/eds-icons'
@@ -48,9 +48,7 @@ const StyledPath = styled.path.attrs<StyledProps>(({ height, size }) => ({
   transform: size / height !== 1 ? `scale(${size / height})` : null,
 }))``
 
-type Props = {
-  /** @ignore */
-  className?: string
+export type IconProps = {
   /** Title for icon when used semantically */
   title?: string
   /** Color */
@@ -63,9 +61,11 @@ type Props = {
   name?: Name
   /** Manually specify which icon data to use */
   data?: IconData
-} & React.HTMLAttributes<SVGSVGElement>
+  /** @ignore */
+  ref?: Ref<SVGSVGElement>
+} & SVGProps<SVGSVGElement>
 
-export const Icon = forwardRef<SVGSVGElement, Props>(function EdsIcon(
+export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   {
     size = 24,
     color = 'currentColor',
