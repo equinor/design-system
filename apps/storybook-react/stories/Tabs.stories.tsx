@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Tabs, TabsProps, Typography, Search } from '@equinor/eds-core-react'
-import { action } from '@storybook/addon-actions'
 import { Story, Meta } from '@storybook/react'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
 
 export default {
   title: 'Components/Tabs',
   component: Tabs,
   subcomponents: { TabList, Tab, TabPanels, TabPanel },
-}
+} as Meta
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -41,27 +41,24 @@ export const States: Story<TabsProps> = () => {
   }, [])
 
   return (
-    <Wrapper>
-      <Tabs activeTab={2} onChange={noop}>
-        <TabList>
-          <Tab>Enabled</Tab>
-          <Tab disabled>Disabled</Tab>
-          <Tab active>Active</Tab>
-          <Tab data-hover>Hover</Tab>
-          <Tab data-focus ref={focusedRef}>
-            Focus
-          </Tab>
-        </TabList>
-      </Tabs>
-    </Wrapper>
+    <Tabs activeTab={2} onChange={noop}>
+      <TabList>
+        <Tab>Enabled</Tab>
+        <Tab disabled>Disabled</Tab>
+        <Tab active>Active</Tab>
+        <Tab data-hover>Hover</Tab>
+        <Tab data-focus ref={focusedRef}>
+          Focus
+        </Tab>
+      </TabList>
+    </Tabs>
   )
 }
 
-/* export const tabWidths = () => {
+export const Widths: Story<TabsProps> = () => {
   return (
-    <Wrapper>
-      <Typography variant="h1">Tab widths</Typography>
-      <Typography variant="h2">minWidth</Typography>
+    <>
+      <Typography variant="h4">minWidth</Typography>
       <Tabs activeTab={1} onChange={noop} variant="minWidth">
         <TabList>
           <Tab>Text</Tab>
@@ -69,7 +66,9 @@ export const States: Story<TabsProps> = () => {
           <Tab>A really long line of text</Tab>
         </TabList>
       </Tabs>
-      <Typography variant="h2">fullWidth</Typography>
+      <Typography variant="h4" style={{ marginTop: '1rem' }}>
+        fullWidth
+      </Typography>
       <Tabs activeTab={1} onChange={noop} variant="fullWidth">
         <TabList>
           <Tab>Text</Tab>
@@ -77,9 +76,9 @@ export const States: Story<TabsProps> = () => {
           <Tab>A really long line of text</Tab>
         </TabList>
       </Tabs>
-    </Wrapper>
+    </>
   )
-} */
+}
 /* 
 export const tabPanels = () => {
   const [activeTab, setActiveTab] = useState(1)

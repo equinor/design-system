@@ -8,7 +8,7 @@ export type TabsProps = {
   activeTab?: number
   /** The callback function for selecting a tab */
   onChange?: (index: number) => void
-  /** Sets the width of the tabs */
+  /** Sets the width of the tabs. Tabs can have a maximum width of 360px */
   variant?: Variants
 } & HTMLAttributes<HTMLDivElement>
 
