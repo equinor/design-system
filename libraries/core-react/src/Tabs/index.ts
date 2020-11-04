@@ -4,14 +4,14 @@ import { Tab } from './Tab'
 import { TabPanels } from './TabPanels'
 import { TabPanel } from './TabPanel'
 
-type TabsType = typeof BaseComponent & {
+type TabsCompoundProps = typeof BaseComponent & {
   Tab: typeof Tab
   TabList: typeof TabList
   TabPanels: typeof TabPanels
   TabPanel: typeof TabPanel
 }
 
-const Tabs = BaseComponent as TabsType
+const Tabs = BaseComponent as TabsCompoundProps
 
 Tabs.Tab = Tab
 Tabs.TabList = TabList

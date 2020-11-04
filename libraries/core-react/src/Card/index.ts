@@ -1,21 +1,22 @@
-import { Card as CardWrapper } from './Card'
+import { Card as CardWrapper, CardProps } from './Card'
 import { CardActions } from './CardActions'
 import { CardMedia } from './CardMedia'
 import { CardHeader } from './CardHeader'
 import { CardHeaderTitle } from './CardHeaderTitle'
 
-type CardProps = typeof CardWrapper & {
+type CardCompoundProps = typeof CardWrapper & {
   CardActions: typeof CardActions
   CardHeader: typeof CardHeader
   CardMedia: typeof CardMedia
   CardHeaderTitle: typeof CardHeaderTitle
 }
 
-const Card = CardWrapper as CardProps
+const Card = CardWrapper as CardCompoundProps
 
 Card.CardActions = CardActions
 Card.CardHeader = CardHeader
 Card.CardMedia = CardMedia
 Card.CardHeaderTitle = CardHeaderTitle
 
-export { Card, CardProps }
+export { Card }
+export type { CardProps }

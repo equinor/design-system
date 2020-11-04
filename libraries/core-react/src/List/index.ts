@@ -1,12 +1,13 @@
-import { List as BaseComponent } from './List'
+import { List as BaseComponent, ListProps } from './List'
 import { ListItem } from './ListItem'
 
-type ListProps = typeof BaseComponent & {
+type ListCompoundProps = typeof BaseComponent & {
   ListItem: typeof ListItem
 }
 
-const List = BaseComponent as ListProps
+const List = BaseComponent as ListCompoundProps
 
 List.ListItem = ListItem
 
-export { List, ListProps }
+export { List }
+export type { ListProps }
