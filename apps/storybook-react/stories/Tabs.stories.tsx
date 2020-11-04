@@ -211,18 +211,18 @@ export const WithInputInPanel: Story<TabsProps> = () => {
   )
 }
 
-/* const StyledTab = styled(Tab)`
+const StyledTab = styled(Tab)`
   background: pink;
-` */
+`
 
-/* const StyledTabPanel = styled(TabPanel)`
+const StyledTabPanel = styled(TabPanel)`
   padding: 32px;
   background: peachpuff;
 `
-export const tabsWithStyledComponents = () => {
+export const WithStyledComponent: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
@@ -233,7 +233,7 @@ export const tabsWithStyledComponents = () => {
   ]
 
   return (
-    <Wrapper>
+    <>
       <Typography variant="h1">
         Tab with panels rendered from collection
       </Typography>
@@ -249,9 +249,10 @@ export const tabsWithStyledComponents = () => {
           ))}
         </TabPanels>
       </Tabs>
-    </Wrapper>
+    </>
   )
-} */
+}
 
 WithSearch.storyName = 'With search'
 WithInputInPanel.storyName = 'With input in panel'
+WithStyledComponent.storyName = 'With styled component'

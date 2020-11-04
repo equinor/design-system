@@ -31,7 +31,7 @@ const StyledTabList = styled.div.attrs(
 )<StyledProps>`
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: ${({ variant }) => variants[variant]};
+  grid-auto-columns: ${({ variant }) => variants[variant] as VariantsRecord};
 `
 
 type TabListProps = {
