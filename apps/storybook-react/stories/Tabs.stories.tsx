@@ -130,7 +130,7 @@ export const WithSearch: Story<TabsProps> = () => {
   }
 
   return (
-    <div style={{ margin: '4rem' }}>
+    <>
       <Search
         value={searchText}
         placeholder={'Search '}
@@ -153,7 +153,7 @@ export const WithSearch: Story<TabsProps> = () => {
           <TabPanel>Panel two</TabPanel>
         </TabPanels>
       </Tabs>
-    </div>
+    </>
   )
 }
 
@@ -178,7 +178,7 @@ export const WithInputInPanel: Story<TabsProps> = () => {
   }
 
   return (
-    <div style={{ margin: '4rem' }}>
+    <>
       <Tabs
         style={{ marginTop: '2rem' }}
         activeTab={activeTab}
@@ -207,7 +207,7 @@ export const WithInputInPanel: Story<TabsProps> = () => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </div>
+    </>
   )
 }
 
