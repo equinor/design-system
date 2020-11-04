@@ -84,7 +84,6 @@ export const Panels: Story<TabsProps> = () => {
 
   return (
     <>
-      <Typography variant="h1">Tab with panels</Typography>
       <Typography variant="body_long">
         To navigate using they keyboard, use tab key to move from tab to tab
         panel, shift + tab to go backwards, use left and right arrow keys to
