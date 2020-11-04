@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Tabs, TabsProps, Typography, Search } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
@@ -114,11 +115,11 @@ export const Panels: Story<TabsProps> = () => {
   )
 }
 
-/* export const tabsAndSearch = () => {
+export const WithSearch: Story<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
-  const handleOnTextChange = (event) => {
+  const handleOnTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     setSearchText(value)
   }
@@ -126,11 +127,11 @@ export const Panels: Story<TabsProps> = () => {
     setActiveTab(index)
   }
 
-  const handleFocus = (e) => {
+  const handleFocus = (e: { target: { textContent: string } }) => {
     action('handleFocus')(e.target.textContent)
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: { target: { textContent: string } }) => {
     action('handleBlur')(e.target.textContent)
   }
 
@@ -160,7 +161,7 @@ export const Panels: Story<TabsProps> = () => {
       </Tabs>
     </div>
   )
-} */
+}
 
 /* xport const tabsAndInputInPanel = () => {
   const [searchText, setSearchText] = useState('')
@@ -257,3 +258,5 @@ export const tabsWithStyledComponents = () => {
     </Wrapper>
   )
 } */
+
+WithSearch.storyName = 'With search'
