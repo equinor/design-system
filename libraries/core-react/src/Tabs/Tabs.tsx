@@ -10,7 +10,7 @@ export type TabsProps = {
   onChange?: (index: number) => void
   /** Sets the width of the tabs. Tabs can have a maximum width of 360px */
   variant?: Variants
-} & HTMLAttributes<HTMLDivElement>
+} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   { activeTab = 0, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
