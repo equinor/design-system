@@ -138,7 +138,7 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
   }
 `
 
-type Props = {
+type SliderInputProps = {
   /** Slider value */
   value: number
   /** Change function , this is a controlled component */
@@ -159,40 +159,44 @@ type Props = {
   disabled: boolean
 } & JSX.IntrinsicElements['input']
 
-export const SliderInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const {
-    value,
-    min,
-    max,
-    id,
-    step,
-    onChange,
-    onMouseUp,
-    onKeyUp,
-    disabled,
-    ...restProps
-  } = props
-  return (
-    <StyledSliderInput
-      {...restProps}
-      value={value}
-      ref={ref}
-      min={min}
-      max={max}
-      id={id}
-      step={step}
-      onChange={(event) => {
-        onChange(event)
-      }}
-      onMouseUp={(event) => {
-        onMouseUp(event)
-      }}
-      onKeyUp={(event) => {
-        onKeyUp(event)
-      }}
-      disabled={disabled}
-    />
-  )
-})
+export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
+  function SliderInput(
+    {
+      value,
+      min,
+      max,
+      id,
+      step,
+      onChange,
+      onMouseUp,
+      onKeyUp,
+      disabled,
+      ...restProps
+    },
+    ref,
+  ) {
+    return (
+      <StyledSliderInput
+        {...restProps}
+        value={value}
+        ref={ref}
+        min={min}
+        max={max}
+        id={id}
+        step={step}
+        onChange={(event) => {
+          onChange(event)
+        }}
+        onMouseUp={(event) => {
+          onMouseUp(event)
+        }}
+        onKeyUp={(event) => {
+          onKeyUp(event)
+        }}
+        disabled={disabled}
+      />
+    )
+  },
+)
 
 SliderInput.displayName = 'SliderInput'
