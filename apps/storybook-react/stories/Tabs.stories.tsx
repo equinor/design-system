@@ -29,7 +29,7 @@ export const Default: Story<TabsProps> = (args) => (
 )
 
 export const States: Story<TabsProps> = () => {
-  const focusedRef = useRef<HTMLInputElement>(null)
+  const focusedRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     focusedRef.current.focus()
@@ -121,11 +121,11 @@ export const WithSearch: Story<TabsProps> = () => {
     setActiveTab(index)
   }
 
-  const handleFocus = (e: React.ChangeEvent<HTMLDivElement>) => {
+  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleFocus')(e.target.textContent)
   }
 
-  const handleBlur = (e: React.ChangeEvent<HTMLDivElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleBlur')(e.target.textContent)
   }
 
@@ -169,11 +169,11 @@ export const WithInputInPanel: Story<TabsProps> = () => {
     setActiveTab(index)
   }
 
-  const handleFocus = (e: React.ChangeEvent<HTMLDivElement>) => {
+  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleFocus')(e.target.textContent)
   }
 
-  const handleBlur = (e: React.ChangeEvent<HTMLDivElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleBlur')(e.target.textContent)
   }
 
