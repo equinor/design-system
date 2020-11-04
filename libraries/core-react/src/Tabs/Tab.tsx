@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { tab as tokens } from './Tabs.tokens'
 
@@ -27,7 +27,7 @@ const focusedStyles = css`
   outline-offset: ${outlineOffset};
 `
 
-const StyledTab = styled.button.attrs<Props>(
+const StyledTab = styled.button.attrs<TabProps>(
   ({ active = false, disabled = false }) => ({
     type: 'button',
     role: 'tab',
@@ -35,7 +35,7 @@ const StyledTab = styled.button.attrs<Props>(
     'aria-disabled': disabled,
     tabIndex: active ? '0' : '-1',
   }),
-)<Props>`
+)<TabProps>`
   appearance: none;
   box-sizing: border-box;
   font-family: inherit;
@@ -82,16 +82,16 @@ const StyledTab = styled.button.attrs<Props>(
   }
 `
 
-export type Props = {
+export type TabProps = {
   /** If `true`, the tab will be active. */
   active?: boolean
   /** If `true`, the tab will be disabled. */
   disabled?: boolean
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Tab = forwardRef<
-  HTMLButtonElement,
-  Props & React.HTMLAttributes<HTMLButtonElement>
->(function Tab(props, ref) {
+export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
+  props,
+  ref,
+) {
   return <StyledTab ref={ref} {...props} />
 })

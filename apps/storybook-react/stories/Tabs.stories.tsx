@@ -1,52 +1,59 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { Tabs, Typography, Search } from '@equinor/eds-core-react'
+import { Tabs, TabsProps, Typography, Search } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 const { TabList, Tab, TabPanels, TabPanel } = Tabs
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
 
 export default {
   title: 'Components/Tabs',
   component: Tabs,
-}
+  subcomponents: { TabList, Tab, TabPanels, TabPanel },
+} as Meta
 
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 24px;
-`
+export const Default: Story<TabsProps> = (args) => (
+  <Tabs {...args}>
+    <TabList>
+      <Tab>One</Tab>
+      <Tab>Two</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Panel one</TabPanel>
+      <TabPanel>Panel two</TabPanel>
+    </TabPanels>
+  </Tabs>
+)
 
-export const tabStates = () => {
-  const focusedRef = useRef(null)
+export const States: Story<TabsProps> = () => {
+  const focusedRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     focusedRef.current.focus()
   }, [])
 
   return (
-    <Wrapper>
-      <Tabs activeTab={2} onChange={noop}>
-        <TabList>
-          <Tab>Enabled</Tab>
-          <Tab disabled>Disabled</Tab>
-          <Tab active>Active</Tab>
-          <Tab data-hover>Hover</Tab>
-          <Tab data-focus ref={focusedRef}>
-            Focus
-          </Tab>
-        </TabList>
-      </Tabs>
-    </Wrapper>
+    <Tabs activeTab={2} onChange={noop}>
+      <TabList>
+        <Tab>Enabled</Tab>
+        <Tab disabled>Disabled</Tab>
+        <Tab active>Active</Tab>
+        <Tab data-hover>Hover</Tab>
+        <Tab data-focus ref={focusedRef}>
+          Focus
+        </Tab>
+      </TabList>
+    </Tabs>
   )
 }
 
-export const tabWidths = () => {
+export const Widths: Story<TabsProps> = () => {
   return (
-    <Wrapper>
-      <Typography variant="h1">Tab widths</Typography>
-      <Typography variant="h2">minWidth</Typography>
+    <>
+      <Typography variant="h4">minWidth</Typography>
       <Tabs activeTab={1} onChange={noop} variant="minWidth">
         <TabList>
           <Tab>Text</Tab>
@@ -54,7 +61,9 @@ export const tabWidths = () => {
           <Tab>A really long line of text</Tab>
         </TabList>
       </Tabs>
-      <Typography variant="h2">fullWidth</Typography>
+      <Typography variant="h4" style={{ marginTop: '1rem' }}>
+        fullWidth
+      </Typography>
       <Tabs activeTab={1} onChange={noop} variant="fullWidth">
         <TabList>
           <Tab>Text</Tab>
@@ -62,20 +71,19 @@ export const tabWidths = () => {
           <Tab>A really long line of text</Tab>
         </TabList>
       </Tabs>
-    </Wrapper>
+    </>
   )
 }
 
-export const tabPanels = () => {
+export const Panels: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
   return (
-    <Wrapper>
-      <Typography variant="h1">Tab with panels</Typography>
+    <>
       <Typography variant="body_long">
         To navigate using they keyboard, use tab key to move from tab to tab
         panel, shift + tab to go backwards, use left and right arrow keys to
@@ -96,32 +104,32 @@ export const tabPanels = () => {
           <TabPanel>Panel four</TabPanel>
         </TabPanels>
       </Tabs>
-    </Wrapper>
+    </>
   )
 }
 
-export const tabsAndSearch = () => {
+export const WithSearch: Story<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
-  const handleOnTextChange = (event) => {
+  const handleOnTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     setSearchText(value)
   }
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
-  const handleFocus = (e) => {
+  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleFocus')(e.target.textContent)
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleBlur')(e.target.textContent)
   }
 
   return (
-    <div style={{ margin: '4rem' }}>
+    <>
       <Search
         value={searchText}
         placeholder={'Search '}
@@ -144,32 +152,32 @@ export const tabsAndSearch = () => {
           <TabPanel>Panel two</TabPanel>
         </TabPanels>
       </Tabs>
-    </div>
+    </>
   )
 }
 
-export const tabsAndInputInPanel = () => {
+export const WithInputInPanel: Story<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
-  const handleOnTextChange = (event) => {
+  const handleOnTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     setSearchText(value)
   }
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
-  const handleFocus = (e) => {
+  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleFocus')(e.target.textContent)
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     action('handleBlur')(e.target.textContent)
   }
 
   return (
-    <div style={{ margin: '4rem' }}>
+    <>
       <Tabs
         style={{ marginTop: '2rem' }}
         activeTab={activeTab}
@@ -198,7 +206,7 @@ export const tabsAndInputInPanel = () => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </div>
+    </>
   )
 }
 
@@ -210,10 +218,10 @@ const StyledTabPanel = styled(TabPanel)`
   padding: 32px;
   background: peachpuff;
 `
-export const tabsWithStyledComponents = () => {
+export const WithStyledComponent: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
@@ -224,7 +232,7 @@ export const tabsWithStyledComponents = () => {
   ]
 
   return (
-    <Wrapper>
+    <>
       <Typography variant="h1">
         Tab with panels rendered from collection
       </Typography>
@@ -240,6 +248,10 @@ export const tabsWithStyledComponents = () => {
           ))}
         </TabPanels>
       </Tabs>
-    </Wrapper>
+    </>
   )
 }
+
+WithSearch.storyName = 'With search'
+WithInputInPanel.storyName = 'With input in panel'
+WithStyledComponent.storyName = 'With styled component'
