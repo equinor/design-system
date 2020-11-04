@@ -15,12 +15,6 @@ export default {
   subcomponents: { TabList, Tab, TabPanels, TabPanel },
 } as Meta
 
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 24px;
-`
-
 export const Default: Story<TabsProps> = (args) => (
   <Tabs {...args}>
     <TabList>
@@ -123,15 +117,15 @@ export const WithSearch: Story<TabsProps> = () => {
     const value = event.target.value
     setSearchText(value)
   }
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
-  const handleFocus = (e: { target: { textContent: string } }) => {
+  const handleFocus = (e: React.ChangeEvent<HTMLDivElement>) => {
     action('handleFocus')(e.target.textContent)
   }
 
-  const handleBlur = (e: { target: { textContent: string } }) => {
+  const handleBlur = (e: React.ChangeEvent<HTMLDivElement>) => {
     action('handleBlur')(e.target.textContent)
   }
 
@@ -163,23 +157,23 @@ export const WithSearch: Story<TabsProps> = () => {
   )
 }
 
-/* xport const tabsAndInputInPanel = () => {
+export const WithInputInPanel: Story<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
-  const handleOnTextChange = (event) => {
+  const handleOnTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     setSearchText(value)
   }
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
-  const handleFocus = (e) => {
+  const handleFocus = (e: React.ChangeEvent<HTMLDivElement>) => {
     action('handleFocus')(e.target.textContent)
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: React.ChangeEvent<HTMLDivElement>) => {
     action('handleBlur')(e.target.textContent)
   }
 
@@ -215,7 +209,7 @@ export const WithSearch: Story<TabsProps> = () => {
       </Tabs>
     </div>
   )
-} */
+}
 
 /* const StyledTab = styled(Tab)`
   background: pink;
@@ -260,3 +254,4 @@ export const tabsWithStyledComponents = () => {
 } */
 
 WithSearch.storyName = 'With search'
+WithInputInPanel.storyName = 'With input in panel'
