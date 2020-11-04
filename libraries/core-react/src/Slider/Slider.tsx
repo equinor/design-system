@@ -190,7 +190,7 @@ export type SliderProps = {
   minMaxValues?: boolean
   /** Disabled */
   disabled?: boolean
-} & HTMLAttributes<HTMLDivElement>
+} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   {

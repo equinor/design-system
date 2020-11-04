@@ -57,7 +57,7 @@ export const Examples: Story<SliderProps> = () => {
         <span id="range-slider-label">Range slider</span>
         <Slider
           value={value}
-          onChange={() => changeHandler}
+          onChange={changeHandler}
           ariaLabelledby="range-slider-label"
         />
         <p style={{ marginTop: '1.5rem' }}>
@@ -70,7 +70,7 @@ export const Examples: Story<SliderProps> = () => {
         </span>
         <Slider
           value={valueTwo}
-          onChange={() => (
+          onChange={(
             event: FormEvent<HTMLDivElement>,
             value: number[] | number,
           ) => {
