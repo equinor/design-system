@@ -9,10 +9,12 @@ const StyledSnackbarAction = styled.div`
   margin-bottom: -10px;
 `
 
-type Props = {
+type SnackbarActionProps = {
   children: ReactNode
 }
 
-export const SnackbarAction = ({ children }: Props): JSX.Element => {
+export const SnackbarAction = ({
+  children,
+}: SnackbarActionProps): JSX.Element => {
   return <StyledSnackbarAction>{Children.only(children)}</StyledSnackbarAction>
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, HTMLAttributes } from 'react'
+import React, { useState, useEffect, HTMLAttributes, FC } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 import { typographyTemplate } from '../_common/templates'
@@ -23,6 +23,7 @@ const StyledSnackbar = styled.div.attrs(() => ({
   box-sizing: border-box;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
   @media (min-width: ${({ leftAlignFrom }) => leftAlignFrom}) {
     left: auto;
     transform: none;
@@ -34,25 +35,25 @@ const StyledSnackbar = styled.div.attrs(() => ({
   }
 `
 
-type Props = {
-  /* Controls the visibility of the snackbar */
+export type SnackbarProps = {
+  /**  Controls the visibility of the snackbar */
   open?: boolean
-  /* How long will the message be visible in milliseconds */
+  /** How long will the message be visible in milliseconds */
   autoHideDuration?: number
-  /* Callback fired when the snackbar is closed by auto hide duration timeout */
+  /** Callback fired when the snackbar is closed by auto hide duration timeout */
   onClose?: () => void
-  /* Media query from which the snackbar will be horizontal centered */
+  /** Media query from which the snackbar will be horizontal centered */
   leftAlignFrom?: string
 } & HTMLAttributes<HTMLDivElement>
 
-export const Snackbar = ({
+export const Snackbar: FC<SnackbarProps> = ({
   open = false,
   autoHideDuration = 7000,
   onClose,
   leftAlignFrom = '1200px',
   children,
   className,
-}: Props): JSX.Element => {
+}) => {
   const [visible, setVisible] = useState(open)
   useEffect(() => {
     setVisible(open)
@@ -75,4 +76,4 @@ export const Snackbar = ({
   )
 }
 
-// Snackbar.displayName = 'eds-snackbar'
+// Snackbar.displayName = 'Snackbar'
