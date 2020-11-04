@@ -1,7 +1,4 @@
-import {
-  Dialog as BaseComponent,
-  DialogProps as BaseComponentProps,
-} from './Dialog'
+import { Dialog as BaseComponent } from './Dialog'
 import { Actions } from './Actions'
 import { Title } from './Title'
 import { CustomContent } from './CustomContent'
@@ -18,4 +15,4 @@ Dialog.Actions = Actions
 Dialog.Title = Title
 Dialog.CustomContent = CustomContent
 
-export { Dialog, BaseComponentProps as DialogProps }
+export { Dialog, DialogProps }

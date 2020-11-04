@@ -31,7 +31,7 @@ const StyledDivider = styled(Divider)`
 `
 
 type CustomContentProps = {
-  /** @ignore */
+  /** Control if the content should be scrollable */
   scrollable?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
