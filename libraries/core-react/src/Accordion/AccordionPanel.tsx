@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { accordion as tokens } from './Accordion.tokens'
 
@@ -16,7 +16,7 @@ type AccordionPanelProps = {
   id?: string
   /** If `true`, the panel will be hidden. */
   hidden?: boolean
-} & JSX.IntrinsicElements['div']
+} & HTMLAttributes<HTMLDivElement>
 
 type StyledAccordionPanelProps = Pick<AccordionPanelProps, 'headerId'>
 

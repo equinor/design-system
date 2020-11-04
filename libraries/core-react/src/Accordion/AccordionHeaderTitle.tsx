@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { accordion as tokens } from './Accordion.tokens'
 
@@ -7,7 +7,7 @@ type AccordionHeaderTitleProps = {
   isExpanded?: boolean
   /** Accordion item is disabled */
   disabled?: boolean
-} & JSX.IntrinsicElements['span']
+} & HTMLAttributes<HTMLSpanElement>
 
 const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
   flex: 1;
