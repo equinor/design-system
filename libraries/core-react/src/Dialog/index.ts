@@ -1,18 +1,21 @@
-import { Dialog as BaseComponent } from './Dialog'
+import {
+  Dialog as BaseComponent,
+  DialogProps as BaseComponentProps,
+} from './Dialog'
 import { Actions } from './Actions'
 import { Title } from './Title'
 import { CustomContent } from './CustomContent'
 
-type DialogTypes = typeof BaseComponent & {
+type DialogProps = typeof BaseComponent & {
   Actions: typeof Actions
   Title: typeof Title
   CustomContent: typeof CustomContent
 }
 
-const Dialog = BaseComponent as DialogTypes
+const Dialog = BaseComponent as DialogProps
 
 Dialog.Actions = Actions
 Dialog.Title = Title
 Dialog.CustomContent = CustomContent
 
-export { Dialog }
+export { Dialog, BaseComponentProps as DialogProps }

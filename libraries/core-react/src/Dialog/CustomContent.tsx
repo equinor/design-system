@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment } from 'react'
+import React, { forwardRef, Fragment, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '../_common/templates'
@@ -7,7 +7,7 @@ import { dialog as tokens } from './Dialog.tokens'
 
 const { description, spacingsMedium } = tokens
 
-const StyledCustomContent = styled.div<Props>`
+const StyledCustomContent = styled.div<CustomContentProps>`
   ${typographyTemplate(description)}
   min-height: 80px;
   margin-bottom: ${spacingsMedium};
@@ -30,13 +30,13 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-type Props = {
+type CustomContentProps = {
   /** @ignore */
   scrollable?: boolean
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
-export const CustomContent = forwardRef<HTMLDivElement, Props>(
-  function EdsDialogCustomContent(
+export const CustomContent = forwardRef<HTMLDivElement, CustomContentProps>(
+  function CustomContent(
     { children, className = '', scrollable = false, ...rest },
     ref,
   ) {
