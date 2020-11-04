@@ -8,9 +8,13 @@ export type TabsProps = {
   activeTab?: number
   /** The callback function for selecting a tab */
   onChange?: (index: number) => void
+  /** The callback function for focusing a tab */
+  onFocus?: (index: React.ChangeEvent<HTMLDivElement>) => void
+  /** The callback function for blurring a tab */
+  onBlur?: (index: React.ChangeEvent<HTMLDivElement>) => void
   /** Sets the width of the tabs. Tabs can have a maximum width of 360px */
   variant?: Variants
-} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
+} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'onBlur' | 'onFocus'>
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   { activeTab = 0, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
@@ -28,7 +32,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
         setTabsFocused(false)
       }
     }, 0)
-    onBlur(e)
+    onBlur && onBlur(e)
   }
 
   const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
@@ -39,7 +43,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
     if (!tabsFocused) {
       setTabsFocused(true)
     }
-    onFocus(e)
+    onFocus && onFocus(e)
   }
 
   return (
