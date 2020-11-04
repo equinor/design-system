@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { Slider } from '@equinor/eds-core-react'
+import React, { useState, FormEvent } from 'react'
+import { Slider, SliderProps } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
 
 const Body = styled.div`
   display: grid;
   grid-template-rows: min-content;
-  padding: 32px;
   grid-gap: 4rem;
   position: relative;
 `
@@ -27,14 +27,28 @@ const getUnixTime = (iso) => {
 export default {
   title: 'Components/Slider',
   component: Slider,
+  decorators: [
+    (Story) => (
+      <div style={{ margin: '3rem' }}>
+        <Story />
+      </div>
+    ),
+  ],
+} as Meta
+
+export const Default: Story<SliderProps> = (args) => {
+  return <Slider {...args} />
 }
 
-export const Examples = () => {
+export const Examples: Story<SliderProps> = () => {
   const [value, updateValue] = useState([30, 70])
   const [valueTwo, updateValueTwo] = useState([0, 500])
   const [valueTwoCommited, updateValueTwoCommited] = useState([0, 500])
-  const onChange = (event, value) => {
-    updateValue(value)
+  const changeHandler = (
+    event: FormEvent<HTMLDivElement>,
+    value: number[] | number,
+  ) => {
+    updateValue(value as number[])
   }
 
   return (
@@ -43,7 +57,7 @@ export const Examples = () => {
         <span id="range-slider-label">Range slider</span>
         <Slider
           value={value}
-          onChange={onChange}
+          onChange={changeHandler}
           ariaLabelledby="range-slider-label"
         />
         <p style={{ marginTop: '1.5rem' }}>
@@ -56,14 +70,17 @@ export const Examples = () => {
         </span>
         <Slider
           value={valueTwo}
-          onChange={(event, value) => {
-            updateValueTwo(value)
+          onChange={(
+            event: FormEvent<HTMLDivElement>,
+            value: number[] | number,
+          ) => {
+            updateValueTwo(value as number[])
           }}
           min={0}
           max={500}
           ariaLabelledby="range-slider-label-with-mouseevent"
           onChangeCommitted={(event, value) => {
-            updateValueTwoCommited(value)
+            updateValueTwoCommited(value as number[])
           }}
         />
         <p style={{ marginTop: '1.5rem' }}>

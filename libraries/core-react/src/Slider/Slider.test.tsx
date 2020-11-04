@@ -3,7 +3,7 @@ import React from 'react'
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Slider } from './Slider'
-import type { Props } from './Slider'
+import type { SliderProps } from './Slider'
 
 afterEach(cleanup)
 
@@ -11,7 +11,10 @@ const getUnixTime = (iso) => {
   return new Date(iso).getTime()
 }
 
-const DateSlider = ({ value, ariaLabelledby = 'date-range-slider' }: Props) => {
+const DateSlider = ({
+  value,
+  ariaLabelledby = 'date-range-slider',
+}: SliderProps) => {
   function outputFunction(val) {
     const date = new Date(parseInt(val, 10))
     // The test node server doesn't have full i18n capabilities, using english is the easiest

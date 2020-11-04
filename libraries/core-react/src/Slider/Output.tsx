@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, ReactNode } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
 
 const { enabled } = tokens
 
-type StyledProps = Pick<Props, 'value'>
+type StyledProps = Pick<OutputProps, 'value'>
 
 const StyledOutput = styled.output<StyledProps>`
   --val: ${({ value }) => value};
@@ -27,20 +27,21 @@ const StyledOutput = styled.output<StyledProps>`
   grid-column: 1 / -1;
 `
 
-type Props = {
+type OutputProps = {
   /** Value */
   value: number
   /** HtmlFor */
   htmlFor: string
+  /** Children are required */
+  children: ReactNode
 } & JSX.IntrinsicElements['output']
 
-export const Output = forwardRef<HTMLOutputElement, Props>(function EdsMinMax(
-  { children, value, htmlFor },
-  ref,
-) {
-  return (
-    <StyledOutput ref={ref} value={value} htmlFor={htmlFor}>
-      {children}
-    </StyledOutput>
-  )
-})
+export const Output = forwardRef<HTMLOutputElement, OutputProps>(
+  function Output({ children, value, htmlFor }, ref) {
+    return (
+      <StyledOutput ref={ref} value={value} htmlFor={htmlFor}>
+        {children}
+      </StyledOutput>
+    )
+  },
+)
