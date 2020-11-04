@@ -1,9 +1,14 @@
-import React, { forwardRef, ReactElement, useContext } from 'react'
+import React, {
+  forwardRef,
+  ReactElement,
+  useContext,
+  HTMLAttributes,
+} from 'react'
 import { TabsContext } from './Tabs.context'
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+type TabPanelsProps = HTMLAttributes<HTMLDivElement>
 
-const TabPanels = forwardRef<HTMLDivElement, Props>(function TabPanels(
+const TabPanels = forwardRef<HTMLDivElement, TabPanelsProps>(function TabPanels(
   { children, ...props },
   ref,
 ) {

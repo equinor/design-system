@@ -1,19 +1,19 @@
-import React, { forwardRef, useMemo, useState } from 'react'
+import React, { forwardRef, useMemo, useState, HTMLAttributes } from 'react'
 import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 
-type Props = {
+export type TabsProps = {
   /** The index of the active tab */
   activeTab?: number
   /** The callback function for selecting a tab */
   onChange?: (index: number) => void
-  /** Sets the width of the tabs */
+  /** Sets the width of the tabs. Tabs can have a maximum width of 360px */
   variant?: Variants
-} & React.HTMLAttributes<HTMLDivElement>
+} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
-const Tabs = forwardRef<HTMLDivElement, Props>(function Tabs(
-  { activeTab, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
+const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
+  { activeTab = 0, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
   ref,
 ) {
   const tabsId = useMemo(() => createId('tabs-'), [])
@@ -28,7 +28,7 @@ const Tabs = forwardRef<HTMLDivElement, Props>(function Tabs(
         setTabsFocused(false)
       }
     }, 0)
-    onBlur(e)
+    onBlur && onBlur(e)
   }
 
   const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
@@ -39,7 +39,7 @@ const Tabs = forwardRef<HTMLDivElement, Props>(function Tabs(
     if (!tabsFocused) {
       setTabsFocused(true)
     }
-    onFocus(e)
+    onFocus && onFocus(e)
   }
 
   return (

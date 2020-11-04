@@ -33,9 +33,9 @@ export const Basic: Story<BannerProps> = (args) => (
   </Banner>
 )
 
-export const IconAndText: Story<BannerProps> = (args) => (
+export const IconAndText: Story<BannerProps> = () => (
   <>
-    <Banner {...args}>
+    <Banner>
       <BannerIcon>
         <Icon name="thumbs_up" />
       </BannerIcon>
@@ -52,9 +52,9 @@ export const IconAndText: Story<BannerProps> = (args) => (
   </>
 )
 
-export const TextAndAction: Story<BannerProps> = (args) => (
+export const TextAndAction: Story<BannerProps> = () => (
   <>
-    <Banner {...args}>
+    <Banner>
       <BannerMessage>
         You are signed on with another account than Equinor account:
         name.lastname@mail.com.
@@ -66,7 +66,7 @@ export const TextAndAction: Story<BannerProps> = (args) => (
         <Button variant="ghost">OK</Button>
       </InlineBannerActions>
     </Banner>
-    <Banner {...args}>
+    <Banner>
       <BannerMessage>
         You are signed on with another account than Equinor account:
         name.lastname@mail.com. This means you have to do something to be able
@@ -82,9 +82,9 @@ export const TextAndAction: Story<BannerProps> = (args) => (
   </>
 )
 
-export const IconAndTextAndActions: Story<BannerProps> = (args) => (
+export const IconAndTextAndActions: Story<BannerProps> = () => (
   <>
-    <Banner {...args}>
+    <Banner>
       <BannerIcon variant="warning">
         <Icon name="mood_sad" />
       </BannerIcon>
@@ -96,7 +96,7 @@ export const IconAndTextAndActions: Story<BannerProps> = (args) => (
         <Button>Action</Button>
       </BannerActions>
     </Banner>
-    <Banner {...args}>
+    <Banner>
       <BannerIcon>
         <Icon name="save" />
       </BannerIcon>

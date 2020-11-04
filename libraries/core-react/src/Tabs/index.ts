@@ -1,4 +1,4 @@
-import { Tabs as BaseComponent } from './Tabs'
+import { Tabs as BaseComponent, TabsProps } from './Tabs'
 import { TabList } from './TabList'
 import { Tab } from './Tab'
 import { TabPanels } from './TabPanels'
@@ -19,3 +19,4 @@ Tabs.TabPanels = TabPanels
 Tabs.TabPanel = TabPanel
 
 export { Tabs }
+export type { TabsProps }
