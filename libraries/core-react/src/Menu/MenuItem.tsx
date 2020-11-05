@@ -86,7 +86,7 @@ const Content = styled.div`
   align-items: center;
 `
 
-export type Props = {
+export type MenuItemProps = {
   /** @ignore */
   index?: number
   /** Is active */
@@ -98,7 +98,7 @@ export type Props = {
 } & React.HTMLAttributes<HTMLLIElement>
 
 export const MenuItem = React.memo(
-  React.forwardRef<HTMLLIElement, Props>(function EdsMenuItem(
+  React.forwardRef<HTMLLIElement, MenuItemProps>(function MenuItem(
     { children, disabled, index = 0, onClick, ...rest },
     ref,
   ) {

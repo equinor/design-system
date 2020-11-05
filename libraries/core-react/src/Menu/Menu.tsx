@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, ReactNode } from 'react'
+import React, { useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
@@ -43,76 +43,68 @@ export type MenuProps = {
   focus?: FocusTarget
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
-export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(
-  function EdsMenu(
-    { children, anchorEl, onClose: onCloseCallback, open = false, ...rest },
-    ref,
-  ) {
-    const listRef = useRef<HTMLLIElement>(null)
+export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(function Menu(
+  { children, anchorEl, onClose: onCloseCallback, open = false, ...rest },
+  ref,
+) {
+  const listRef = useRef<HTMLLIElement>(null)
 
-    const {
-      setPosition,
-      position,
-      isPositioned,
-      setOnClose,
-      onClose,
-    } = useMenu()
-    useOutsideClick(listRef, () => {
-      if (open && onClose !== null) {
+  const { setPosition, position, isPositioned, setOnClose, onClose } = useMenu()
+  useOutsideClick(listRef, () => {
+    if (open && onClose !== null) {
+      onClose()
+    }
+  })
+
+  useEffect(() => {
+    if (anchorEl && listRef.current) {
+      const menuRect = listRef.current.getBoundingClientRect()
+      const anchorRect = anchorEl.getBoundingClientRect()
+      setPosition(anchorRect, menuRect, window)
+    }
+
+    if (onClose === null && onCloseCallback) {
+      setOnClose(onCloseCallback)
+    }
+
+    document.addEventListener('keydown', handleGlobalKeyPress, true)
+
+    return () => {
+      document.removeEventListener('keydown', handleGlobalKeyPress, true)
+    }
+  }, [anchorEl, listRef.current])
+
+  const handleGlobalKeyPress = (e: KeyboardEvent) => {
+    const { key } = e
+
+    switch (key) {
+      case 'Escape':
         onClose()
-      }
-    })
-
-    useEffect(() => {
-      if (anchorEl && listRef.current) {
-        const menuRect = listRef.current.getBoundingClientRect()
-        const anchorRect = anchorEl.getBoundingClientRect()
-        setPosition(anchorRect, menuRect, window)
-      }
-
-      if (onClose === null && onCloseCallback) {
-        setOnClose(onCloseCallback)
-      }
-
-      document.addEventListener('keydown', handleGlobalKeyPress, true)
-
-      return () => {
-        document.removeEventListener('keydown', handleGlobalKeyPress, true)
-      }
-    }, [anchorEl, listRef.current])
-
-    const handleGlobalKeyPress = (e: KeyboardEvent) => {
-      const { key } = e
-
-      switch (key) {
-        case 'Escape':
-          onClose()
-          break
-        default:
-          break
-      }
+        break
+      default:
+        break
     }
+  }
 
-    const paperProps = {
-      ...position,
-      open,
-      isPositioned,
-    }
+  const paperProps = {
+    ...position,
+    open,
+    isPositioned,
+  }
 
-    const menuProps = {
-      ...rest,
-    }
+  const menuProps = {
+    ...rest,
+  }
 
-    return (
-      <StyledPaper {...paperProps} elevation="raised">
-        <MenuList {...menuProps} ref={useCombinedRefs(ref, listRef)}>
-          {children}
-        </MenuList>
-      </StyledPaper>
-    )
-  },
-)
+  return (
+    <StyledPaper {...paperProps} elevation="raised">
+      <MenuList {...menuProps} ref={useCombinedRefs(ref, listRef)}>
+        {children}
+      </MenuList>
+    </StyledPaper>
+  )
+})
 
 // Menu.displayName = 'EdsMenu'

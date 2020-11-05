@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Menu as BaseMenu, MenuProps } from './Menu'
 import { MenuItem } from './MenuItem'
 import { MenuSection } from './MenuSection'
@@ -9,7 +9,7 @@ type MenuType = typeof BaseMenu & {
   MenuSection: typeof MenuSection
 }
 
-const MenuWrapper = ({ children, ...rest }: MenuProps) => (
+const MenuWrapper: FC<MenuProps> = ({ children, ...rest }) => (
   <MenuProvider>
     <BaseMenu {...rest}>{children}</BaseMenu>
   </MenuProvider>
@@ -23,3 +23,4 @@ Menu.MenuSection = MenuSection
 // Menu.displayName = BaseMenu.displayName
 
 export { Menu }
+export type { MenuProps }
