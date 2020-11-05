@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
@@ -6,7 +6,7 @@ import { card as tokens } from './Card.tokens'
 export type CardMediaProps = {
   /** Should the media be full width or not */
   fullWidth?: boolean
-} & JSX.IntrinsicElements['div']
+} & HTMLAttributes<HTMLDivElement>
 
 const StyledCardMedia = styled.div<CardMediaProps>`
   display: flex;

@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-export type CardHeaderTitleProps = JSX.IntrinsicElements['div']
+export type CardHeaderTitleProps = HTMLAttributes<HTMLDivElement>
 
 const StyledCardHeaderTitle = styled.div`
   display: grid;
