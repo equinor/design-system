@@ -7,8 +7,8 @@ import React, {
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
 import type { FocusTarget } from './Menu.types'
-import { Props as MenuItemProps, MenuItem } from './MenuItem'
-import { Props as MenuSectionProps, MenuSection } from './MenuSection'
+import { MenuItemProps, MenuItem } from './MenuItem'
+import { MenuSectionProps, MenuSection } from './MenuSection'
 
 const isFragment = (object: ReactNode): boolean => {
   if ((object as ReactElement).type) {
@@ -27,7 +27,7 @@ const List = styled.ul`
     z-index: 3;
   }
 `
-type Props = {
+type MenuListProps = {
   focus?: FocusTarget
   children: ReactNode
 }
@@ -36,8 +36,8 @@ type MenuChild = ReactElement<MenuItemProps> & ReactElement<MenuSectionProps>
 
 type Direction = 'down' | 'up'
 
-export const MenuList = React.forwardRef<HTMLUListElement, Props>(
-  function EdsMenuList({ children, focus, ...rest }, ref) {
+export const MenuList = React.forwardRef<HTMLUListElement, MenuListProps>(
+  function MenuList({ children, focus, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex } = useMenu()
 
     const pickedChildren = isFragment(children)
