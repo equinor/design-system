@@ -1,21 +1,22 @@
-import { Table as BaseComponent } from './Table'
+import { Table as BaseComponent, TableProps } from './Table'
 import { Body } from './Body'
 import { Cell } from './Cell'
 import { Head } from './Head'
 import { Row } from './Row'
 
-type TableProps = typeof BaseComponent & {
+type TableCompoundProps = typeof BaseComponent & {
   Body: typeof Body
   Cell: typeof Cell
   Head: typeof Head
   Row: typeof Row
 }
 
-const Table = BaseComponent as TableProps
+const Table = BaseComponent as TableCompoundProps
 
 Table.Body = Body
 Table.Cell = Cell
 Table.Head = Head
 Table.Row = Row
 
-export { Table, TableProps }
+export { Table }
+export type { TableProps }

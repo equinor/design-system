@@ -1,12 +1,16 @@
-import { TableOfContents as BaseComponent } from './TableOfContents'
+import {
+  TableOfContents as BaseComponent,
+  TableOfContentsProps,
+} from './TableOfContents'
 import { LinkItem } from './LinkItem'
 
-type TableOfContentsProps = typeof BaseComponent & {
+type TableOfContentsCompoundProps = typeof BaseComponent & {
   LinkItem: typeof LinkItem
 }
 
-const TableOfContents = BaseComponent as TableOfContentsProps
+const TableOfContents = BaseComponent as TableOfContentsCompoundProps
 
 TableOfContents.LinkItem = LinkItem
 
-export { TableOfContents, TableOfContentsProps }
+export { TableOfContents }
+export type { TableOfContentsProps }
