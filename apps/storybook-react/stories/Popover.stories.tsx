@@ -37,27 +37,6 @@ export default {
     PopoverContent,
     CardActions,
   },
-  argTypes: {
-    placement: {
-      control: {
-        type: 'select',
-        options: [
-          'topLeft',
-          'top',
-          'topRight',
-          'rightTop',
-          'right',
-          'rightBottom',
-          'bottomLeft',
-          'bottom',
-          'bottomRight',
-          'leftTop',
-          'left',
-          'leftBottom',
-        ],
-      },
-    },
-  },
 } as Meta
 
 export const Default: Story<PopoverProps> = (args) => {
