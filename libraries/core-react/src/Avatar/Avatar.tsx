@@ -55,9 +55,9 @@ export type AvatarProps = {
   size?: 16 | 24 | 32 | 40 | 48
   /** @default false */
   disabled?: boolean
-} & HTMLAttributes<HTMLHRElement>
+} & HTMLAttributes<HTMLDivElement>
 
-export const Avatar = forwardRef<HTMLHRElement, AvatarProps>(function Avatar(
+export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   { src = null, alt, size = 24, disabled = false, ...rest },
   ref,
 ) {
