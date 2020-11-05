@@ -4,7 +4,7 @@ import { dialog as tokens } from './Dialog.tokens'
 
 const { spacingsMedium } = tokens
 
-const StyledActions = styled.div<Props>`
+const StyledActions = styled.div<ActionProps>`
   min-height: 48px;
   padding: 0 ${spacingsMedium};
   align-self: end;
@@ -18,16 +18,17 @@ const StyledActions = styled.div<Props>`
     `}
 `
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+type ActionProps = React.HTMLAttributes<HTMLDivElement>
 
-export const Actions = forwardRef<HTMLDivElement, Props>(
-  function EdsDialogActions({ children, ...props }, ref) {
-    return (
-      <StyledActions ref={ref} {...props}>
-        {children}
-      </StyledActions>
-    )
-  },
-)
+export const Actions = forwardRef<HTMLDivElement, ActionProps>(function Actions(
+  { children, ...props },
+  ref,
+) {
+  return (
+    <StyledActions ref={ref} {...props}>
+      {children}
+    </StyledActions>
+  )
+})
 
 // Actions.displayName = 'EdsDialogActions'

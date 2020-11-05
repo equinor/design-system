@@ -31,7 +31,7 @@ type Props = React.HTMLAttributes<HTMLDivElement>
 export const Title: FunctionComponent<Props> = forwardRef<
   HTMLDivElement,
   Props
->(function EdsDialogTitle({ children, className = '', ...props }, ref) {
+>(function Title({ children, className = '', ...props }, ref) {
   return (
     <Fragment>
       <StyledTitle
