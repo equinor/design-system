@@ -48,9 +48,9 @@ export type BreadcrumbsProps = {
   collapse?: boolean
   /** Children should be of Breadcrumb component */
   children: ReactNode
-} & HTMLAttributes<HTMLElement>
+} & HTMLAttributes<HTMLLIElement>
 
-export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
+export const Breadcrumbs = forwardRef<HTMLLIElement, BreadcrumbsProps>(
   function Breadcrumbs({ children, collapse, ...rest }, ref) {
     const props = {
       ...rest,
