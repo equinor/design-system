@@ -26,9 +26,9 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+type TitleProps = React.HTMLAttributes<HTMLDivElement>
 
-export const Title = forwardRef<HTMLDivElement, Props>(function Title(
+export const Title = forwardRef<HTMLDivElement, TitleProps>(function Title(
   { children, className = '', ...props },
   ref,
 ) {
