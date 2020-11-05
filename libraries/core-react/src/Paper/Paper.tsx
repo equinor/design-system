@@ -19,7 +19,7 @@ export type PaperProps = {
   elevation: ElevationTypes
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const Paper = forwardRef<HTMLDivElement, PaperProps>(function EdsPaper(
+export const Paper = forwardRef<HTMLDivElement, PaperProps>(function Paper(
   { elevation, ...rest },
   ref,
 ) {

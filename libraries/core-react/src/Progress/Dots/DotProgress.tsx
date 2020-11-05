@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef, Ref, SVGProps } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 
@@ -31,7 +31,9 @@ export type DotProgressProps = {
   variant?: 'white' | 'green'
   /** @ignore */
   className?: string
-} & HTMLAttributes<SVGSVGElement>
+  /** @ignore */
+  ref?: Ref<SVGSVGElement>
+} & SVGProps<SVGSVGElement>
 
 const DotProgress = forwardRef<SVGSVGElement, DotProgressProps>(
   function DotProgress({ variant = 'white', className = '', ...rest }, ref) {
