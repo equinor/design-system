@@ -1,6 +1,7 @@
 /* eslint import/no-default-export: off*/
 export default {
   files: '**/*.mdx',
+  typescript: true,
   // will be prefixed in <title>
   themeConfig: {
     // “The initialColorMode flag no longer works, use initialColorModeName instead” it says on https://theme-ui.com/migrating/

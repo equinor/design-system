@@ -22,6 +22,7 @@ scripts:
     @equinor/eds-storybook-react run build
   storybook: pnpm --filter @equinor/eds-storybook-react run dev
   storefront: pnpm --filter @equinor/eds-storefront run dev
+  storefront-build: pnpm --filter @equinor/eds-core-react install
   core-react: pnpm --filter @equinor/eds-core-react run dev
   demo: pnpm --filter ./apps/demo run dev
   'test:core-react': pnpm --filter @equinor/eds-core-react run test
