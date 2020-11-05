@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react'
 import {
   Dialog,
+  DialogProps,
   Button,
   Scrim,
   Typography,
-  DialogProps,
 } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'
@@ -99,8 +99,8 @@ export const Default: Story<DialogProps> = () => (
     <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
     <Actions>
       <TempButtonWrapper>
-        <Button>Cancel</Button>
         <Button>OK</Button>
+        <Button>Cancel</Button>
       </TempButtonWrapper>
     </Actions>
   </Dialog>
