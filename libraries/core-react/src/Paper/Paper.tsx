@@ -15,11 +15,11 @@ const StyledPaper = styled.div<StyledProps>`
   box-shadow: ${({ elevation }) => elevation};
 `
 
-type Props = {
+export type PaperProps = {
   elevation: ElevationTypes
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const Paper = forwardRef<HTMLDivElement, Props>(function EdsPaper(
+export const Paper = forwardRef<HTMLDivElement, PaperProps>(function EdsPaper(
   { elevation, ...rest },
   ref,
 ) {
