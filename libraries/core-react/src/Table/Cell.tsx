@@ -1,4 +1,4 @@
-import React, { TdHTMLAttributes, ThHTMLAttributes } from 'react'
+import React, { TdHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import type { Border } from '@equinor/eds-tokens'
 import { getTokens, TableCell } from './Table.tokens'
