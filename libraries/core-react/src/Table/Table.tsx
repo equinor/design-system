@@ -6,9 +6,12 @@ const TableBase = styled.table`
   border-collapse: collapse;
 `
 
-type Props = HTMLAttributes<HTMLTableElement>
+export type TableProps = HTMLAttributes<HTMLTableElement>
 
-export const Table: FunctionComponent<Props> = ({ children, ...props }) => {
+export const Table: FunctionComponent<TableProps> = ({
+  children,
+  ...props
+}) => {
   return <TableBase {...props}>{children}</TableBase>
 }
 

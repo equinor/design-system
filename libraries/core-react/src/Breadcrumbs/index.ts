@@ -1,12 +1,13 @@
-import { Breadcrumbs as BaseComponent } from './Breadcrumbs'
+import { Breadcrumbs as BaseComponent, BreadcrumbsProps } from './Breadcrumbs'
 import { Breadcrumb } from './Breadcrumb'
 
-type BreadcrumbsProps = typeof BaseComponent & {
+type BreadcrumbsCompoundProps = typeof BaseComponent & {
   Breadcrumb: typeof Breadcrumb
 }
 
-const Breadcrumbs = BaseComponent as BreadcrumbsProps
+const Breadcrumbs = BaseComponent as BreadcrumbsCompoundProps
 
 Breadcrumbs.Breadcrumb = Breadcrumb
 
-export { Breadcrumbs, BreadcrumbsProps }
+export { Breadcrumbs }
+export type { BreadcrumbsProps }
