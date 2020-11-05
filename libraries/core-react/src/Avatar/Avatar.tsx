@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { avatar as tokens } from './Avatar.tokens'
 
@@ -55,7 +55,7 @@ export type AvatarProps = {
   size?: 16 | 24 | 32 | 40 | 48
   /** @default false */
   disabled?: boolean
-}
+} & HTMLAttributes<HTMLHRElement>
 
 export const Avatar = forwardRef<HTMLHRElement, AvatarProps>(function Avatar(
   { src = null, alt, size = 24, disabled = false, ...rest },
