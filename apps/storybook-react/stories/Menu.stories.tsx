@@ -183,6 +183,9 @@ const bigMenuTemplate = (
 export default {
   title: 'Components/Menu',
   component: Menu,
+  parameters: {
+    viewMode: 'story',
+  },
 } as Meta
 
 export const ButtonToggle: Story<MenuProps> = () => {
