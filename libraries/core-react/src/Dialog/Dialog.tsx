@@ -13,7 +13,7 @@ const {
   spacingsMedium,
 } = tokens
 
-const StyledDialog = styled.div.attrs<Props>(() => ({
+const StyledDialog = styled.div.attrs<DialogProps>(() => ({
   tabIndex: 0,
   role: 'dialog',
   'aria-labelledby': 'eds-dialog-title',
@@ -31,9 +31,9 @@ const StyledDialog = styled.div.attrs<Props>(() => ({
   ${typographyTemplate(title)}
 `
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+export type DialogProps = React.HTMLAttributes<HTMLDivElement>
 
-export const Dialog = forwardRef<HTMLDivElement, Props>(function EdsDialog(
+export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
   { children, ...props },
   ref,
 ) {
