@@ -31,7 +31,7 @@ const StyledDialog = styled.div.attrs<DialogProps>(() => ({
   ${typographyTemplate(title)}
 `
 
-type DialogProps = React.HTMLAttributes<HTMLDivElement>
+export type DialogProps = React.HTMLAttributes<HTMLDivElement>
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
   { children, ...props },
