@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Search } from '@equinor/eds-core-react'
+import { Search } from '@equinor/eds-core-react/dist/core-react.cjs.js'
 
 const isSSR = typeof window === 'undefined'
 

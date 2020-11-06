@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Typography } from '@equinor/eds-core-react'
+import { Typography } from '@equinor/eds-core-react/dist/core-react.cjs.js'
 import styled from 'styled-components'
 
 const StyledTypography = styled(Typography)`

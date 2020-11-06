@@ -3,7 +3,7 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import { readableColor } from 'polished'
-import { Table } from '@equinor/eds-core-react'
+import { Table } from '@equinor/eds-core-react/dist/core-react.cjs.js'
 import { camelify, kebabify } from '../../utils'
 import { useThemeUI } from 'theme-ui'
 

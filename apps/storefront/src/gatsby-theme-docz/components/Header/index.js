@@ -5,7 +5,11 @@ import { Link } from 'gatsby'
 
 import { menu } from '@equinor/eds-icons'
 /* eslint-disable-next-line */
-import { TopBar, Search, Icon } from '@equinor/eds-core-react'
+import {
+  TopBar,
+  Search,
+  Icon,
+} from '@equinor/eds-core-react/dist/core-react.cjs.js'
 import styled from 'styled-components'
 import { media } from '~theme/breakpoints'
 import { useThemeUI } from 'theme-ui'

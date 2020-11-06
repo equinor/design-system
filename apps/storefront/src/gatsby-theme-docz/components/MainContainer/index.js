@@ -5,7 +5,11 @@ import styled from 'styled-components'
 import { useCurrentDoc, useDocs } from 'docz'
 import { Helmet } from 'react-helmet-async'
 import * as R from 'ramda'
-import { Icon, TableOfContents, Typography } from '@equinor/eds-core-react'
+import {
+  Icon,
+  TableOfContents,
+  Typography,
+} from '@equinor/eds-core-react/dist/core-react.cjs.js'
 import { H1 } from '../../../components/Titles'
 import { Tabs, Tab, TabLink } from '../../../components/Tabs'
 import { EditPageOnGithub } from '../../../components/EditPageOnGithub'
