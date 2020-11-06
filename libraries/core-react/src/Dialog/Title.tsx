@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment, FunctionComponent } from 'react'
+import React, { forwardRef, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '../_common/templates'
@@ -26,12 +26,12 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-type Props = React.HTMLAttributes<HTMLDivElement>
+type TitleProps = React.HTMLAttributes<HTMLDivElement>
 
-export const Title: FunctionComponent<Props> = forwardRef<
-  HTMLDivElement,
-  Props
->(function Title({ children, className = '', ...props }, ref) {
+export const Title = forwardRef<HTMLDivElement, TitleProps>(function Title(
+  { children, className = '', ...props },
+  ref,
+) {
   return (
     <Fragment>
       <StyledTitle

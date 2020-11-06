@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import type { Size } from './Switch.types'
@@ -63,20 +63,21 @@ const DefaultInput = styled(BaseInput)`
 type InputProps = {
   size?: Size
   disabled?: boolean
-} & React.HTMLAttributes<HTMLInputElement>
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ size = 'default', ...rest }, ref) => {
-    return (
-      <>
-        {size === 'small' ? (
-          <SmallInput {...rest} ref={ref} />
-        ) : (
-          <DefaultInput {...rest} ref={ref} />
-        )}
-      </>
-    )
-  },
-)
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  { size = 'default', ...rest },
+  ref,
+) {
+  return (
+    <>
+      {size === 'small' ? (
+        <SmallInput {...rest} ref={ref} />
+      ) : (
+        <DefaultInput {...rest} ref={ref} />
+      )}
+    </>
+  )
+})
 
 Input.displayName = 'Input'

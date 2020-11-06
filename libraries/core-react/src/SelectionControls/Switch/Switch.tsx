@@ -1,8 +1,7 @@
-import React, { forwardRef, Ref } from 'react'
+import React, { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
-
 import { switchControl as tokens } from './Switch.tokens'
 import { typographyTemplate } from '../../_common/templates'
 import type { Size } from './Switch.types'
@@ -32,24 +31,25 @@ export type SwitchProps = {
   size?: Size
   /** If true, the switch will be disabled */
   disabled?: boolean
-} & Omit<JSX.IntrinsicElements['input'], 'size'> & {
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {
     ref?: Ref<HTMLInputElement>
   }
 
-export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
-  ({ size = 'default', disabled, label, className, ...rest }, ref) => {
-    return (
-      <StyledSwitch isDisabled={disabled} className={className}>
-        {size === 'small' ? (
-          <SwitchSmall disabled={disabled} {...rest} ref={ref} />
-        ) : (
-          <SwitchDefault disabled={disabled} {...rest} ref={ref} />
-        )}
+export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
+  { size = 'default', disabled, label, className, ...rest },
+  ref,
+) {
+  return (
+    <StyledSwitch isDisabled={disabled} className={className}>
+      {size === 'small' ? (
+        <SwitchSmall disabled={disabled} {...rest} ref={ref} />
+      ) : (
+        <SwitchDefault disabled={disabled} {...rest} ref={ref} />
+      )}
 
-        <Label>{label}</Label>
-      </StyledSwitch>
-    )
-  },
-)
+      <Label>{label}</Label>
+    </StyledSwitch>
+  )
+})
 
 Switch.displayName = 'Switch'

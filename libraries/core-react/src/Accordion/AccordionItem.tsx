@@ -1,4 +1,10 @@
-import React, { forwardRef, useState, useEffect, ReactElement } from 'react'
+import React, {
+  forwardRef,
+  useState,
+  useEffect,
+  ReactElement,
+  HTMLAttributes,
+} from 'react'
 import type { AccordionProps } from './Accordion.types'
 
 type Props = {
@@ -8,7 +14,7 @@ type Props = {
   isExpanded?: boolean
   /** accordion item is disabled */
   disabled?: boolean
-} & JSX.IntrinsicElements['div'] &
+} & HTMLAttributes<HTMLDivElement> &
   AccordionProps
 
 const AccordionItem = forwardRef<HTMLDivElement, Props>(function AccordionItem(

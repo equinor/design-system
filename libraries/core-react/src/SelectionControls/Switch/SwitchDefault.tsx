@@ -47,7 +47,7 @@ type SwitchDefaultProps = {
 }
 
 export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
-  ({ disabled, ...rest }, ref) => {
+  function SwitchDefault({ disabled, ...rest }, ref) {
     return (
       <>
         <Input {...rest} ref={ref} disabled={disabled} />

@@ -21,12 +21,12 @@ const StyledBannerActions = styled.div<StyledBannerActionsProps>`
     }}
 `
 
-type Props = {
+type BannerActionProps = {
   children: ReactNode
   placement?: BannerActionsPlacement
 } & HTMLAttributes<HTMLDivElement>
 
-export const BannerActions: FC<Props> = ({
+export const BannerActions: FC<BannerActionProps> = ({
   children,
   placement = 'left',
   className,

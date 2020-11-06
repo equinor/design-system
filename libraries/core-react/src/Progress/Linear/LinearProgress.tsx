@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 import CSS from 'csstype'
@@ -71,7 +71,7 @@ export type LinearProgressProps = {
   value?: number
   /** @ignore */
   className?: string
-}
+} & HTMLAttributes<HTMLDivElement>
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
   function LinearProgress(

@@ -1,11 +1,11 @@
-import React, { forwardRef, useMemo, ReactElement } from 'react'
+import React, { forwardRef, useMemo, ReactElement, HTMLAttributes } from 'react'
 import createId from 'lodash/uniqueId'
 import type { AccordionProps } from './Accordion.types'
 
 const Accordion = forwardRef<
   HTMLDivElement,
-  AccordionProps & JSX.IntrinsicElements['div']
->(function EdsAccordion(
+  AccordionProps & HTMLAttributes<HTMLDivElement>
+>(function Accordion(
   { headerLevel = 'h2', chevronPosition = 'left', children, ...props },
   ref,
 ) {

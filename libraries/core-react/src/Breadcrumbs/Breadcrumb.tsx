@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
@@ -35,7 +35,7 @@ type BreadcrumbProps = {
   onClick?: (e: MouseEvent | KeyboardEvent) => void
   /** Children is breadcrumb text */
   children: string
-} & JSX.IntrinsicElements['div']
+} & HTMLAttributes<HTMLDivElement>
 
 export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
   function Breadcrumb({ children, maxWidth, ...other }, ref) {

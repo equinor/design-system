@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useEffect, useRef, forwardRef, HTMLAttributes } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  forwardRef,
+  HTMLAttributes,
+  SVGProps,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { Card } from '../Card'
@@ -53,7 +59,7 @@ type ArrowProps = {
   bottom: string
   right: string
   left: string
-} & HTMLAttributes<SVGSVGElement>
+} & SVGProps<SVGSVGElement>
 
 const PopoverArrow = styled.svg<ArrowProps>`
   ${({ top, bottom, right, left }) =>

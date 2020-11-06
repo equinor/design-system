@@ -26,14 +26,14 @@ const StyledBannerIcon = styled.span<StyledBannerIconProps>`
   margin-right: ${enabled.spacings};
 `
 
-type Props = {
+type BannerIconProps = {
   /** Which icon background and fill color to use. Info = green, warning = red */
   variant?: BannerIconVariant
   /** @ignore */
   children: ReactNode
 } & HTMLAttributes<HTMLSpanElement>
 
-export const BannerIcon: FC<Props> = ({
+export const BannerIcon: FC<BannerIconProps> = ({
   children,
   variant = 'info',
   ...props
