@@ -5,8 +5,10 @@ scripts:
   lint: eslint
   'lint:all': pnpm run lint .
   'lint:storybook': pnpm run lint ./apps/storybook-react/stories
+  'lint:core-react': pnpm run lint ./libraries/core-react/src
   init: pnpm multi install --force && pnpm run build
   build: pnpm --filter @equinor/eds-core-react run build
+  'build:core-react': pnpm --filter @equinor/eds-core-react run build
   'bump:core-react': >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
     prerelease
@@ -21,8 +23,9 @@ scripts:
   storybook: pnpm --filter @equinor/eds-storybook-react run dev
   storefront: pnpm --filter @equinor/eds-storefront run dev
   core-react: pnpm --filter @equinor/eds-core-react run dev
-  test:core-react: pnpm --filter @equinor/eds-core-react run test
-  test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
+  demo: pnpm --filter ./apps/demo run dev
+  'test:core-react': pnpm --filter @equinor/eds-core-react run test
+  'test:watch:core-react': 'pnpm --filter @equinor/eds-core-react run test:watch'
   dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
   storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
   storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
@@ -35,7 +38,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': ^3.10.1
   '@typescript-eslint/parser': ^3.10.1
   babel-eslint: ^10.1.0
-  eslint: ^7.2.0
+  eslint: ^7.11.0
   eslint-config-prettier: ^6.11.0
   eslint-plugin-import: ^2.21.1
   eslint-plugin-jsx-a11y: ^6.2.3

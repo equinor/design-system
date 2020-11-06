@@ -10,6 +10,7 @@ yarn.lock
 # gatsby and docz
 .docz
 public
+!apps/demo/public
 # local docz testing
 docz-fresh
 .idea
