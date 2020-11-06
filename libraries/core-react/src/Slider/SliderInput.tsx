@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
 
@@ -157,7 +157,7 @@ type SliderInputProps = {
   step: number
   /** Disabled */
   disabled: boolean
-} & JSX.IntrinsicElements['input']
+} & InputHTMLAttributes<HTMLInputElement>
 
 export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
   function SliderInput(

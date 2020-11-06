@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react'
+import React, { forwardRef, OutputHTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'
@@ -34,7 +34,7 @@ type OutputProps = {
   htmlFor: string
   /** Children are required */
   children: ReactNode
-} & JSX.IntrinsicElements['output']
+} & OutputHTMLAttributes<HTMLOutputElement>
 
 export const Output = forwardRef<HTMLOutputElement, OutputProps>(
   function Output({ children, value, htmlFor }, ref) {

@@ -142,7 +142,7 @@ export type ChipProps = {
   variant?: 'active' | 'error' | 'default'
 } & HTMLAttributes<HTMLDivElement>
 
-export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chips(
+export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   {
     children,
     onDelete,

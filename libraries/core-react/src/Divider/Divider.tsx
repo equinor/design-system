@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { divider as tokens } from './Divider.tokens'
 
@@ -24,7 +24,7 @@ export type DividerProps = {
   variant?: 'small' | 'medium'
   /** @ignore */
   className?: string
-}
+} & HTMLAttributes<HTMLHRElement>
 
 export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
   { color = 'medium', variant = 'medium', className = '' },

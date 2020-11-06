@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import React, { forwardRef, Ref } from 'react'
+import React, { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import {
   radio_button_selected, // eslint-disable-line camelcase
@@ -92,32 +92,33 @@ export type RadioProps = {
   label: string
   /** If true, the radio button will be disabled */
   disabled?: boolean
-} & JSX.IntrinsicElements['input'] & {
+} & InputHTMLAttributes<HTMLInputElement> & {
     ref?: Ref<HTMLInputElement>
   }
 
-export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ label, disabled = false, className, ...rest }, ref) => {
-    const iconSize = 24
-    return (
-      <StyledRadio disabled={disabled} className={className}>
-        <InputWrapper disabled={disabled}>
-          <Input {...rest} ref={ref} disabled={disabled} />
-          <Svg
-            width={iconSize}
-            height={iconSize}
-            viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={disabled ? color.disabled : color.primary}
-            aria-hidden
-          >
-            <StyledPath icon={radio_button_selected} name="selected" />
-            <StyledPath icon={radio_button_unselected} name="unselected" />
-          </Svg>
-        </InputWrapper>
-        <LabelText>{label}</LabelText>
-      </StyledRadio>
-    )
-  },
-)
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
+  { label, disabled = false, className, ...rest },
+  ref,
+) {
+  const iconSize = 24
+  return (
+    <StyledRadio disabled={disabled} className={className}>
+      <InputWrapper disabled={disabled}>
+        <Input {...rest} ref={ref} disabled={disabled} />
+        <Svg
+          width={iconSize}
+          height={iconSize}
+          viewBox={`0 0 ${iconSize} ${iconSize}`}
+          fill={disabled ? color.disabled : color.primary}
+          aria-hidden
+        >
+          <StyledPath icon={radio_button_selected} name="selected" />
+          <StyledPath icon={radio_button_unselected} name="unselected" />
+        </Svg>
+      </InputWrapper>
+      <LabelText>{label}</LabelText>
+    </StyledRadio>
+  )
+})
 
 Radio.displayName = 'Radio'

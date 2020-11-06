@@ -39,7 +39,7 @@ type SwitchSmallProps = {
 }
 
 export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
-  ({ disabled, ...rest }, ref) => {
+  function SwitchSmall({ disabled, ...rest }, ref) {
     return (
       <>
         <Input {...rest} ref={ref} disabled={disabled} size="small" />
