@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { Typography } from '@equinor/eds-core-react/dist/core-react.cjs.js'
+import { Typography } from '@equinor/eds-core-react'
 import styled, { css } from 'styled-components'
 import { slugify } from '../utils'
 

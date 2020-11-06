@@ -1,8 +1,8 @@
 dependencies:
   '@emotion/core': 10.0.28_react@16.13.1
-  '@equinor/eds-core-react': 'link:../../libraries/core-react'
-  '@equinor/eds-icons': 'link:../../libraries/icons'
-  '@equinor/eds-tokens': 'link:../../libraries/tokens'
+  '@equinor/eds-core-react': 0.6.2_beaba6b0dd04a5acd327321cb21768d5
+  '@equinor/eds-icons': 0.4.0
+  '@equinor/eds-tokens': 0.4.0
   '@mdx-js/react': 1.6.6_react@16.13.1
   '@mikaelkristiansson/domready': 1.0.10
   '@reach/router': 1.3.4_react-dom@16.13.1+react@16.13.1
@@ -1335,6 +1335,42 @@ packages:
     dev: false
     resolution:
       integrity: sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
+  /@equinor/eds-core-react/0.6.2_beaba6b0dd04a5acd327321cb21768d5:
+    dependencies:
+      '@equinor/eds-icons': 0.4.0
+      '@equinor/eds-tokens': 0.4.0
+      '@testing-library/react-hooks': 3.4.2_react@16.13.1
+      focus-visible: 5.1.0
+      lodash: 4.17.20
+      prop-types: 15.7.2
+      react: 16.13.1
+      react-dom: 16.13.1_react@16.13.1
+      styled-components: 5.1.1_479e60ee9c1aa71dc1eb81036e3619dc
+    dev: false
+    engines:
+      node: '>=10.0.0'
+      pnpm: '>=4'
+    peerDependencies:
+      prop-types: ^15.7.2
+      react: ^16.8.6
+      react-dom: ^16.8.6
+      styled-components: ^4.2.0
+    resolution:
+      integrity: sha512-ZQnuevIa0czYyMN5nwLC7L3VjVvv2/LPnjqZbqxbM8gxUAEy+fM40BqC2V5n2s3UF0IvgKaJ4hb4iDlyv2Epug==
+  /@equinor/eds-icons/0.4.0:
+    dev: false
+    engines:
+      node: '>=10.0.0'
+      pnpm: '>=4'
+    resolution:
+      integrity: sha512-UNZqIZqxCBPIpkenwzFyP18oKtWSt8Y52TlQLSgVp5pNwKY2hVzRC60j5iCRenCT1vF8fr+LDXkDUOl4mE4HTw==
+  /@equinor/eds-tokens/0.4.0:
+    dev: false
+    engines:
+      node: '>=10.0.0'
+      pnpm: '>=4'
+    resolution:
+      integrity: sha512-LEsIcAVNLkgkbjR9WSsMb8W5sAe/NWsQtqPtU7fd44l0Lda+v3FzWL7OOUnb4Da9FPARu/1ZGgad4WLBFcym6Q==
   /@graphql-tools/schema/6.0.12_graphql@14.7.0:
     dependencies:
       '@graphql-tools/utils': 6.0.12_graphql@14.7.0
@@ -2010,6 +2046,17 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
+  /@testing-library/react-hooks/3.4.2_react@16.13.1:
+    dependencies:
+      '@babel/runtime': 7.10.4
+      '@types/testing-library__react-hooks': 3.4.1
+      react: 16.13.1
+    dev: false
+    peerDependencies:
+      react: '>=16.9.0'
+      react-test-renderer: '>=16.9.0'
+    resolution:
+      integrity: sha512-RfPG0ckOzUIVeIqlOc1YztKgFW+ON8Y5xaSPbiBkfj9nMkkiLhLeBXT5icfPX65oJV/zCZu4z8EVnUc6GY9C5A==
   /@theme-ui/typography/0.2.46:
     dependencies:
       compass-vertical-rhythm: 1.4.5
@@ -2151,6 +2198,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-h0NbqXN/tJuBY/xggZSej1SKQEstbHO7J/omt1tYoFGmj3YXOodZKbbqD4mNDh7zvEGYd7YFrac1LTtAr3xsYQ==
+  /@types/react-test-renderer/16.9.3:
+    dependencies:
+      '@types/react': 16.9.43
+    dev: false
+    resolution:
+      integrity: sha512-wJ7IlN5NI82XMLOyHSa+cNN4Z0I+8/YaLl04uDgcZ+W+ExWCmCiVTLT/7fRNqzy4OhStZcUwIqLNF7q+AdW43Q==
   /@types/react/16.9.43:
     dependencies:
       '@types/prop-types': 15.7.3
@@ -2165,6 +2218,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-8gBudvllD2A/c0CcEX/BivIDorHFt5UI5m46TsNj8DjWCCTTZT74kEe4g+QsY7P/B9WdO98d82zZgXO/RQzu2Q==
+  /@types/testing-library__react-hooks/3.4.1:
+    dependencies:
+      '@types/react-test-renderer': 16.9.3
+    dev: false
+    resolution:
+      integrity: sha512-G4JdzEcq61fUyV6wVW9ebHWEiLK2iQvaBuCHHn9eMSbZzVh4Z4wHnUGIvQOYCCYeu5DnUtFyNYuAAgbSaO/43Q==
   /@types/tmp/0.0.33:
     dev: false
     resolution:
@@ -17184,9 +17243,9 @@ packages:
       integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
 specifiers:
   '@emotion/core': ^10.0.28
-  '@equinor/eds-core-react': 'workspace:*'
-  '@equinor/eds-icons': 'workspace:*'
-  '@equinor/eds-tokens': 'workspace:*'
+  '@equinor/eds-core-react': ^0.6.2
+  '@equinor/eds-icons': ^0.4.0
+  '@equinor/eds-tokens': ^0.4.0
   '@mdx-js/react': ^1.6.6
   '@mikaelkristiansson/domready': ^1.0.10
   '@reach/router': ^1.3.4

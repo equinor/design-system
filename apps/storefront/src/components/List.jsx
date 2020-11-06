@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { List } from '@equinor/eds-core-react/dist/core-react.cjs.js'
+import { List } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
 const { ListItem: ListItemEds } = List

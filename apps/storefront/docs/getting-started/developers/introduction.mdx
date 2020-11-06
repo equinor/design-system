@@ -31,13 +31,13 @@ Current [component status](https://eds.equinor.com/components/component-status)
 ### Installation
 
 ```sh
-npm install @equinor/eds-core-react/dist/core-react.cjs.js styled-components
+npm install @equinor/eds-core-react styled-components
 ```
 
 ### Usage
 
 ```jsx
-const { Button } = '@equinor/eds-core-react/dist/core-react.cjs.js'
+const { Button } = '@equinor/eds-core-react'
 
 <Button variant="outlined" color="secondary">
   Click me!
@@ -50,7 +50,7 @@ Built on a copy of the Outlined Material Design icons, the icons have been custo
 
 All the icons are available in the [storefront](https://eds.equinor.com/assets/system-icons/library/), and can also be installed from NPM.
 
-The following example uses the `<Icon>` component from `@equinor/eds-core-react/dist/core-react.cjs.js` – but the icons package can also be used without React.
+The following example uses the `<Icon>` component from `@equinor/eds-core-react` – but the icons package can also be used without React.
 
 ### Installation
 
@@ -61,7 +61,7 @@ npm install @equinor/eds-icons @equinor/eds-core-react
 ### Usage
 
 ```jsx
-import { Icon } from '@equinor/eds-core-react/dist/core-react.cjs.js'
+import { Icon } from '@equinor/eds-core-react'
 import { info_circle } from '@equinor/eds-icons'
 
 Icon.add({ info_circle })

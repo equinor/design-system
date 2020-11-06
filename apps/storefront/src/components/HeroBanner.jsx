@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Text from './Text'
 import { H1 } from './Titles'
 import styled from 'styled-components'
-import { Button } from '@equinor/eds-core-react/dist/core-react.cjs.js'
+import { Button } from '@equinor/eds-core-react'
 
 const StyledHeroBanner = styled.div`
   background: #f7f7f7;
