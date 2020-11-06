@@ -33,7 +33,7 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
   const styleProps = {
     backgroundColor: tokens.color[color],
     marginTop: tokens[variant].spacings.top,
-    marginBottom: tokens[variant].spacings.bottom as string,
+    marginBottom: tokens[variant].spacings.bottom,
     dividerHeight: tokens.height,
   }
   return <StyledDivider {...styleProps} className={className} ref={ref} />
