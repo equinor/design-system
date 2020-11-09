@@ -6,6 +6,8 @@ import React, {
   useEffect,
   ReactElement,
   HTMLAttributes,
+  ButtonHTMLAttributes,
+  RefAttributes,
 } from 'react'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
@@ -42,7 +44,8 @@ type TabListProps = {
 type TabChild = {
   disabled?: boolean
   index?: number
-} & JSX.IntrinsicElements['button'] &
+} & ButtonHTMLAttributes<HTMLButtonElement> &
+  RefAttributes<HTMLButtonElement> &
   ReactElement
 
 const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
@@ -77,7 +80,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     (child: TabChild, index: number) => {
       const tabRef =
         index === activeTab
-          ? useCombinedRefs(child.ref, selectedTabRef)
+          ? useCombinedRefs<HTMLButtonElement>(child.ref, selectedTabRef)
           : child.ref
 
       return React.cloneElement(child, {
