@@ -43,13 +43,13 @@ export type MenuProps = {
   focus?: FocusTarget
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
-} & HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLUListElement>
 
-export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(function Menu(
+export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   { children, anchorEl, onClose: onCloseCallback, open = false, ...rest },
   ref,
 ) {
-  const listRef = useRef<HTMLLIElement>(null)
+  const listRef = useRef<HTMLUListElement>(null)
 
   const { setPosition, position, isPositioned, setOnClose, onClose } = useMenu()
   useOutsideClick(listRef, () => {
@@ -100,7 +100,10 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(function Menu(
 
   return (
     <StyledPaper {...paperProps} elevation="raised">
-      <MenuList {...menuProps} ref={useCombinedRefs(ref, listRef)}>
+      <MenuList
+        {...menuProps}
+        ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}
+      >
         {children}
       </MenuList>
     </StyledPaper>
