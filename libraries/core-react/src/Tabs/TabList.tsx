@@ -1,4 +1,4 @@
-import React, {
+import {
   forwardRef,
   useContext,
   useRef,
@@ -7,6 +7,8 @@ import React, {
   ReactElement,
   HTMLAttributes,
 } from 'react'
+
+import * as React from 'react'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
 import { TabsContext } from './Tabs.context'

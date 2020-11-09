@@ -1,4 +1,4 @@
-import React from 'react'
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../../_common/templates'
 import { label as tokens } from './Label.tokens'
@@ -24,7 +24,7 @@ type TextfieldProps = {
   inputId: string
 }
 
-const TextFieldLabel = React.forwardRef<HTMLLabelElement, TextfieldProps>(
+const TextFieldLabel = forwardRef<HTMLLabelElement, TextfieldProps>(
   function TextFieldLabel(props, ref) {
     const { label = '', meta = '', inputId } = props
 

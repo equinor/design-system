@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { tabPanel as tokens } from './Tabs.tokens'
 

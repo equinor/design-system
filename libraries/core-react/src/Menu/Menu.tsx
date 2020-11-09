@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
+import { useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
+import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'

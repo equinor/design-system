@@ -1,9 +1,5 @@
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  isValidElement,
-  ReactElement,
-} from 'react'
+import { forwardRef, HTMLAttributes, isValidElement, ReactElement } from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import type { CSSObject } from 'styled-components'
 // eslint-disable-next-line camelcase

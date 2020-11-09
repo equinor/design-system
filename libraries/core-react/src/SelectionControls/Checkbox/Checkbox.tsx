@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import React, { forwardRef, Ref, InputHTMLAttributes } from 'react'
+import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import {
   checkbox,

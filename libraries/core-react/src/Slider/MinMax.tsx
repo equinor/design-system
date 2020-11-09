@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, ReactNode } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { slider as tokens } from './Slider.tokens'

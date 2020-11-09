@@ -1,4 +1,11 @@
-import React, { FC, HTMLAttributes, ReactNode } from 'react'
+import {
+  Children,
+  isValidElement,
+  cloneElement,
+  FC,
+  HTMLAttributes,
+  ReactNode,
+} from 'react'
 import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 import { Icon } from '../Icon'
@@ -38,15 +45,15 @@ export const BannerIcon: FC<BannerIconProps> = ({
   variant = 'info',
   ...props
 }) => {
-  const childrenWithColor = React.Children.map(children, (child) => {
+  const childrenWithColor = Children.map(children, (child) => {
     const color =
       variant === 'warning'
         ? enabled.icon.warning.color
         : enabled.icon.info.color
     return (
-      (React.isValidElement(child) &&
+      (isValidElement(child) &&
         child.type === Icon &&
-        React.cloneElement(child, {
+        cloneElement(child, {
           color,
         })) ||
       child

@@ -1,4 +1,11 @@
-import React, { forwardRef, useMemo, ReactElement, HTMLAttributes } from 'react'
+import {
+  Children,
+  cloneElement,
+  forwardRef,
+  useMemo,
+  ReactElement,
+  HTMLAttributes,
+} from 'react'
 import createId from 'lodash/uniqueId'
 import type { AccordionProps } from './Accordion.types'
 
@@ -11,9 +18,9 @@ const Accordion = forwardRef<
 ) {
   const accordionId = useMemo<string>(() => createId('accordion-'), [])
 
-  const AccordionItems = React.Children.map(children, (child, index) => {
+  const AccordionItems = Children.map(children, (child, index) => {
     if (!child) return null
-    return React.cloneElement(child as ReactElement, {
+    return cloneElement(child as ReactElement, {
       accordionId,
       index,
       headerLevel,

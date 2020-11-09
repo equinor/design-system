@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import CSS from 'csstype'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'

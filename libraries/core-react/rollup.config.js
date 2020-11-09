@@ -32,7 +32,10 @@ export default [
       babel({
         exclude: 'node_modules/**',
         babelHelpers: 'bundled',
-        presets: ['@babel/preset-env', '@babel/preset-react'],
+        presets: [
+          '@babel/preset-env',
+          ['@babel/preset-react', { runtime: 'automatic' }],
+        ],
         extensions,
         plugins: ['babel-plugin-styled-components'],
       }),

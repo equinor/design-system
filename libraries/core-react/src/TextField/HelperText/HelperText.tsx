@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { forwardRef, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate } from '../../_common/templates'
 import {
@@ -72,7 +72,7 @@ type TextfieldHelperTextProps = {
   variant: Variants
 }
 
-const TextfieldHelperText = React.forwardRef<
+const TextfieldHelperText = forwardRef<
   HTMLDivElement,
   TextfieldHelperTextProps
 >(function TextfieldHelperText(

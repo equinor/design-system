@@ -1,10 +1,11 @@
-import React, {
+import {
   forwardRef,
   useState,
   useEffect,
   ReactElement,
   HTMLAttributes,
 } from 'react'
+import * as React from 'react'
 import type { AccordionProps } from './Accordion.types'
 
 type Props = {

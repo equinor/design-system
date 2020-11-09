@@ -1,4 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
+import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
 import { chip as tokens } from './Chip.tokens'

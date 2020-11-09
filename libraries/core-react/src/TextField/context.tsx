@@ -1,4 +1,4 @@
-import React, { useState, useContext, ReactNode } from 'react'
+import { createContext, useState, useContext, ReactNode } from 'react'
 
 export const propsFor = {
   variants: ['error', 'warning', 'success', 'default'],
@@ -17,7 +17,7 @@ const initalState: State = {
   isFocused: false,
 }
 
-const TextFieldContext = React.createContext<State>(initalState)
+const TextFieldContext = createContext<State>(initalState)
 
 type ProviderProps = { children: ReactNode }
 

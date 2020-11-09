@@ -1,4 +1,5 @@
-import React, { ReactNode, InputHTMLAttributes } from 'react'
+import { ReactNode, InputHTMLAttributes } from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import { Input } from './Input'
 import { Label } from './Label'

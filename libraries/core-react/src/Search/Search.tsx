@@ -1,10 +1,11 @@
-import React, {
+import {
   useState,
   useRef,
   useEffect,
   InputHTMLAttributes,
   RefAttributes,
 } from 'react'
+import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
 import { search as tokens } from './Search.tokens'
