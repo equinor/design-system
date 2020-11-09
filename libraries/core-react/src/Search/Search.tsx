@@ -210,7 +210,7 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     }, [value, defaultValue])
 
     const handleOnClick = () => {
-      const inputEl = inputRef.current as HTMLInputElement
+      const inputEl = inputRef.current
       inputEl.focus()
     }
     const handleFocus = () => setState({ ...state, isFocused: true })
@@ -220,7 +220,7 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     }
 
     const handleOnDelete = () => {
-      const input = inputRef.current as HTMLInputElement
+      const input = inputRef.current
       const clearedValue = ''
       setReactInputValue(input, clearedValue)
       setState({ ...state, isActive: false })
