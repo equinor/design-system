@@ -124,7 +124,7 @@ export const MenuItem = React.memo(
         ref={useCombinedRefs(ref, (el: HTMLElement) => isFocused && el.focus())}
         onFocus={() => toggleFocus(index)}
         onClick={(e) => {
-          if (!disabled) {
+          if (!disabled && onClick) {
             onClick(e)
             if (onClose !== null) {
               onClose(e)
