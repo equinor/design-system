@@ -1,9 +1,12 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, MutableRefObject } from 'react'
 
-type Ref = React.MutableRefObject<HTMLElement>
-type useCombinedRefsProps<T> = T | ((a: HTMLElement) => T)
-export const useCombinedRefs = (...refs: useCombinedRefsProps<Ref>[]): Ref => {
-  const targetRef = useRef<HTMLElement>(null)
+type Ref<T> = MutableRefObject<T>
+type Props<T, P> = T | ((a: P) => void)
+
+export const useCombinedRefs = <T extends HTMLElement>(
+  ...refs: Props<Ref<T>, T>[]
+): Ref<T> => {
+  const targetRef = useRef<T>(null)
   useEffect(() => {
     refs.forEach((ref) => {
       if (!ref) return
