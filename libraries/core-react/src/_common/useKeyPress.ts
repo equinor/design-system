@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 export function useKeyPress(
   targetKey: number,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPressDown = () => {},
 ): boolean {
   const [keyPressed, setKeyPressed] = useState(false)

@@ -100,7 +100,10 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(function Menu(
 
   return (
     <StyledPaper {...paperProps} elevation="raised">
-      <MenuList {...menuProps} ref={useCombinedRefs(ref, listRef)}>
+      <MenuList
+        {...menuProps}
+        ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}
+      >
         {children}
       </MenuList>
     </StyledPaper>
