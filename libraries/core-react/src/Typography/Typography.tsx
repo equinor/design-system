@@ -53,7 +53,9 @@ const findTypography = (
 const findColor: (a: ColorVariants | string) => string = (
   inputColor = null,
 ): string =>
-  typeof colors[inputColor] === 'undefined' ? inputColor : colors[inputColor]
+  typeof colors[inputColor] === 'undefined'
+    ? inputColor
+    : (colors[inputColor] as string)
 
 const toVariantName = (
   variant: TypographyVariants,

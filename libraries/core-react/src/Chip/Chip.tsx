@@ -170,24 +170,34 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     variant,
   }
 
-  const handleKeyPress = (event) => {
-    const { key } = event
+  const handleKeyPress = (
+    event:
+      | React.KeyboardEvent<HTMLDivElement>
+      | React.MouseEvent<HTMLDivElement>,
+  ) => {
+    const { key } = event as React.KeyboardEvent<HTMLDivElement>
     if (key === 'Enter') {
       if (deletable) {
         handleDelete(event)
       }
       // Delete takes precedence, else click action is activated
       if (clickable && !deletable) {
-        handleClick(event)
+        handleClick(event as React.MouseEvent<HTMLDivElement>)
       }
     }
+  }
+
+  type childPropsType = {
+    size: number
+    disabled: boolean
   }
 
   const resizedChildren = React.Children.map(
     children,
     (child: React.ReactElement) => {
       // We force size on Icon & Avatar component
-      if (child.props && child.props.size) {
+      const childProps = child.props as childPropsType
+      if (child.props && childProps.size) {
         return React.cloneElement(child, {
           size: 16,
           disabled,
@@ -197,7 +207,9 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     },
   )
 
-  const onDeleteClick = (event) => {
+  const onDeleteClick = (
+    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
+  ) => {
     event.stopPropagation()
     if (deletable) {
       handleDelete(event)

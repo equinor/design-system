@@ -15,12 +15,12 @@ const {
 
 const dividerHeight = 1
 
-const reduceByValue = (subtractValue) => (valueWithUnit) => {
+const reduceByValue = (subtractValue: number) => (valueWithUnit: string) => {
   const valueAndUnit = valueWithUnit
     .split(/(\d+)/)
     .filter((val) => val.length > 0)
 
-  return valueAndUnit[0] - subtractValue + valueAndUnit[1]
+  return `${parseInt(valueAndUnit[0]) - subtractValue}` + valueAndUnit[1]
 }
 
 const reduceValueByDividerHeight = reduceByValue(dividerHeight)
