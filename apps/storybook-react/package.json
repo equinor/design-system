@@ -6,9 +6,9 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "start-storybook -p 9000 --ci",
-    "dev": "start-storybook -p 9000 --ci",
-    "build": "build-storybook -c .storybook -o dist",
+    "start": "start-storybook -p 9000 --ci --no-dll",
+    "dev": "start-storybook -p 9000 --ci --no-dll",
+    "build": "build-storybook --no-dll -c .storybook -o dist",
     "lint": "eslint stories/**/*.jsx"
   },
   "dependencies": {

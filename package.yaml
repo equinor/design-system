@@ -47,4 +47,4 @@ devDependencies:
   eslint-plugin-react: ^7.20.0
   eslint-plugin-testing-library: ^1.5.0
   prettier: ^2.0.5
-  typescript: ^4.0.2
+  typescript: ^4.0.5
