@@ -123,7 +123,7 @@ export const MenuItem = React.memo(
         {...props}
         ref={useCombinedRefs<HTMLLIElement>(
           ref,
-          (el: HTMLElement) => isFocused && el.focus(),
+          (el: HTMLLIElement) => isFocused && el.focus(),
         )}
         onFocus={() => toggleFocus(index)}
         onClick={(e) => {
