@@ -1,4 +1,5 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
 
@@ -55,16 +56,30 @@ const StyledLinkItem = styled.li`
     }
   }
 `
-type LinkItemProps = HTMLAttributes<HTMLLIElement>
+type Props = HTMLAttributes<HTMLLIElement>
 
-export const LinkItem = forwardRef<HTMLLIElement, LinkItemProps>(
-  function LinkItem({ children, ...props }, ref) {
-    return (
-      <StyledLinkItem {...props} ref={ref}>
-        {children}
-      </StyledLinkItem>
-    )
-  },
-)
+const LinkItem = forwardRef<HTMLLIElement, Props>(function LinkItem(
+  { children, ...props },
+  ref,
+) {
+  return (
+    <StyledLinkItem {...props} ref={ref}>
+      {children}
+    </StyledLinkItem>
+  )
+})
 
 // LinkItem.displayName = 'eds-linkitem'
+
+LinkItem.propTypes = {
+  /** @ignore */
+  children: PropTypes.node.isRequired,
+  /** @ignore */
+  className: PropTypes.string,
+}
+
+LinkItem.defaultProps = {
+  className: undefined,
+}
+
+export { LinkItem }

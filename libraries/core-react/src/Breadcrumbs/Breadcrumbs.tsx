@@ -1,5 +1,4 @@
-import {
-  Children,
+import React, {
   forwardRef,
   useState,
   Fragment,
@@ -91,11 +90,11 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
       ]
     }
 
-    const allCrumbs = Children.toArray(children).map((child, index) => (
+    const allCrumbs = React.Children.toArray(children).map((child, index) => (
       // eslint-disable-next-line react/no-array-index-key
       <Fragment key={`breadcrumb-${index}`}>
         <ListItem>{child}</ListItem>
-        {index !== Children.toArray(children).length - 1 && (
+        {index !== React.Children.toArray(children).length - 1 && (
           <li aria-hidden>
             <Separator variant="body_short">/</Separator>
           </li>

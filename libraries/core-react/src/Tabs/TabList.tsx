@@ -1,4 +1,4 @@
-import {
+import React, {
   forwardRef,
   useContext,
   useRef,
@@ -7,8 +7,6 @@ import {
   ReactElement,
   HTMLAttributes,
 } from 'react'
-
-import * as React from 'react'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../_common/useCombinedRefs'
 import { TabsContext } from './Tabs.context'
@@ -41,11 +39,7 @@ type TabListProps = {
   variant?: Variants
 } & HTMLAttributes<HTMLDivElement>
 
-type TabChild = {
-  disabled?: boolean
-  index?: number
-} & JSX.IntrinsicElements['button'] &
-  ReactElement
+type TabChild = JSX.IntrinsicElements['button'] & ReactElement
 
 const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   { children = [], ...props },
@@ -74,32 +68,26 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     currentTab.current = activeTab
   }, [activeTab])
 
-  const Tabs = React.Children.map(
-    children,
-    (child: TabChild, index: number) => {
-      const tabRef =
-        index === activeTab
-          ? useCombinedRefs(child.ref, selectedTabRef)
-          : child.ref
+  const Tabs = React.Children.map(children, (child: TabChild, index) => {
+    const tabRef =
+      index === activeTab
+        ? useCombinedRefs(child.ref, selectedTabRef)
+        : child.ref
 
-      return React.cloneElement(child, {
-        id: `${tabsId}-tab-${index + 1}`,
-        'aria-controls': `${tabsId}-panel-${index + 1}`,
-        active: index === activeTab,
-        index,
-        onClick: () => handleChange(index),
-        ref: tabRef,
-      })
-    },
-  )
-
-  const focusableChildren: number[] = Tabs.filter((child: TabChild) => {
-    const childProps = child.props as TabChild
-    return !childProps.disabled
-  }).map((child: TabChild) => {
-    const childProps = child.props as TabChild
-    return childProps.index
+    return React.cloneElement(child, {
+      id: `${tabsId}-tab-${index + 1}`,
+      'aria-controls': `${tabsId}-panel-${index + 1}`,
+      active: index === activeTab,
+      index,
+      onClick: () => handleChange(index),
+      ref: tabRef,
+    })
   })
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const focusableChildren: number[] = Tabs.filter(
+    (child) => !child.props.disabled,
+  ).map((child) => child.props.index)
 
   const firstFocusableChild = focusableChildren[0]
   const lastFocusableChild = focusableChildren[focusableChildren.length - 1]

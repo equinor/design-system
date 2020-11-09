@@ -1,5 +1,9 @@
-import { useEffect, ReactElement, ReactNode, isValidElement } from 'react'
-import * as React from 'react'
+import React, {
+  useEffect,
+  ReactElement,
+  ReactNode,
+  isValidElement,
+} from 'react'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
 import type { FocusTarget } from './Menu.types'

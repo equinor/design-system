@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { card as tokens } from './Card.tokens'
 import { spacingsTemplate } from '../_common/templates'
@@ -8,12 +8,12 @@ const { spacings, shape } = tokens
 type StyledCardProps = {
   background: string
   cursor: string
-} & HTMLAttributes<HTMLDivElement>
+} & React.HTMLAttributes<HTMLDivElement>
 
 export type CardProps = {
   /** Variant */
   variant?: 'default' | 'info' | 'warning' | 'danger'
-} & HTMLAttributes<HTMLDivElement>
+} & JSX.IntrinsicElements['div']
 
 const StyledCard = styled.div<StyledCardProps>`
   height: fit-content;

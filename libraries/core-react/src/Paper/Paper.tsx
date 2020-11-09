@@ -1,5 +1,4 @@
-import { forwardRef } from 'react'
-import * as React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { paper as tokens, ElevationTypes } from './Paper.tokens'
 
@@ -16,11 +15,11 @@ const StyledPaper = styled.div<StyledProps>`
   box-shadow: ${({ elevation }) => elevation};
 `
 
-export type PaperProps = {
+type Props = {
   elevation: ElevationTypes
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const Paper = forwardRef<HTMLDivElement, PaperProps>(function Paper(
+export const Paper = forwardRef<HTMLDivElement, Props>(function EdsPaper(
   { elevation, ...rest },
   ref,
 ) {

@@ -1,10 +1,4 @@
-import {
-  forwardRef,
-  useState,
-  HTMLAttributes,
-  ReactNode,
-  SVGProps,
-} from 'react'
+import React, { forwardRef, useState, HTMLAttributes, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { tooltip as tokens, Placement } from './Tooltip.tokens'
@@ -58,7 +52,7 @@ type ArrowProps = {
   bottom: string
   right: string
   left: string
-} & SVGProps<SVGSVGElement>
+} & HTMLAttributes<SVGSVGElement>
 
 const TooltipArrow = styled.svg<ArrowProps>`
   ${({ top, bottom, right, left }) =>

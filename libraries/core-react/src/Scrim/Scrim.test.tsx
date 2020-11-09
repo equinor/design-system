@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'

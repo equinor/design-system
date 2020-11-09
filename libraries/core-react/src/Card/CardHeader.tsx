@@ -1,9 +1,9 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
-export type CardHeaderProps = HTMLAttributes<HTMLDivElement>
+export type CardHeaderProps = JSX.IntrinsicElements['div']
 
 const StyledCardHeader = styled.div`
   display: flex;

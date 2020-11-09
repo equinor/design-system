@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
@@ -47,7 +47,7 @@ type SwitchDefaultProps = {
 }
 
 export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
-  function SwitchDefault({ disabled, ...rest }, ref) {
+  ({ disabled, ...rest }, ref) => {
     return (
       <>
         <Input {...rest} ref={ref} disabled={disabled} />

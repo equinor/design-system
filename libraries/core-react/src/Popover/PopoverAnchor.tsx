@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 
 type Props = HTMLAttributes<HTMLDivElement>
 

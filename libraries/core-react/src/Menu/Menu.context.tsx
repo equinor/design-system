@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useState,
-  useContext,
-  ReactNode,
-  MouseEvent,
-} from 'react'
+import React, { useState, useContext, ReactNode, MouseEvent } from 'react'
 
 export type State = {
   focusedIndex: number
@@ -38,7 +32,7 @@ const initalState: State = {
   onClose: null,
 }
 
-const MenuContext = createContext<State>(initalState)
+const MenuContext = React.createContext<State>(initalState)
 
 const calculateTransform = (
   bounding: ClientRect,

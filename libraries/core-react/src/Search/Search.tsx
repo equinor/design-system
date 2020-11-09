@@ -1,11 +1,10 @@
-import {
+import React, {
   useState,
   useRef,
   useEffect,
   InputHTMLAttributes,
   RefAttributes,
 } from 'react'
-import * as React from 'react'
 import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
 import { search as tokens } from './Search.tokens'
@@ -210,18 +209,12 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       setState({ ...state, isActive })
     }, [value, defaultValue])
 
-    const handleOnClick = () => {
-      const inputEl = inputRef.current as HTMLInputElement
-      inputEl.focus()
-    }
+    const handleOnClick = () => inputRef.current.focus()
     const handleFocus = () => setState({ ...state, isFocused: true })
     const handleBlur = () => setState({ ...state, isFocused: false })
-    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsActive((event.target as HTMLInputElement).value)
-    }
-
+    const handleOnChange = (target) => setIsActive(target.value)
     const handleOnDelete = () => {
-      const input = inputRef.current as HTMLInputElement
+      const input = inputRef.current
       const clearedValue = ''
       setReactInputValue(input, clearedValue)
       setState({ ...state, isActive: false })
@@ -230,6 +223,7 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       setState({ ...state, isActive: newValue !== '' })
 
     /** Applying props for controlled vs. uncontrolled scnarios */
+    // eslint-disable-next-line no-shadow
     const applyControllingProps: ControlledSearch = (
       props,
       value,

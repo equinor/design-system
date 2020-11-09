@@ -1,5 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
-import * as React from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
 import { chip as tokens } from './Chip.tokens'
@@ -143,7 +142,7 @@ export type ChipProps = {
   variant?: 'active' | 'error' | 'default'
 } & HTMLAttributes<HTMLDivElement>
 
-export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
+export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chips(
   {
     children,
     onDelete,
@@ -171,34 +170,24 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     variant,
   }
 
-  const handleKeyPress = (
-    event:
-      | React.KeyboardEvent<HTMLDivElement>
-      | React.MouseEvent<HTMLDivElement>,
-  ) => {
-    const { key } = event as React.KeyboardEvent<HTMLDivElement>
+  const handleKeyPress = (event) => {
+    const { key } = event
     if (key === 'Enter') {
       if (deletable) {
         handleDelete(event)
       }
       // Delete takes precedence, else click action is activated
       if (clickable && !deletable) {
-        handleClick(event as React.MouseEvent<HTMLDivElement>)
+        handleClick(event)
       }
     }
-  }
-
-  type childPropsType = {
-    size: number
-    disabled: boolean
   }
 
   const resizedChildren = React.Children.map(
     children,
     (child: React.ReactElement) => {
       // We force size on Icon & Avatar component
-      const childProps = child.props as childPropsType
-      if (child.props && childProps.size) {
+      if (child.props && child.props.size) {
         return React.cloneElement(child, {
           size: 16,
           disabled,
@@ -208,9 +197,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     },
   )
 
-  const onDeleteClick = (
-    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
-  ) => {
+  const onDeleteClick = (event) => {
     event.stopPropagation()
     if (deletable) {
       handleDelete(event)

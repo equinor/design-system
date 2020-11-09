@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef } from 'react'
 import CSS from 'csstype'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
@@ -8,7 +8,9 @@ const indeterminate = keyframes`
       transform: rotate(360deg);
     }
 `
-type ProgressRootProps = Pick<CircularProgressProps, 'variant'>
+type ProgressRootProps = {
+  variant?: 'determinate' | 'indeterminate'
+}
 
 const ProgressRoot = styled.div<ProgressRootProps>`
   display: inline-block;
@@ -41,7 +43,7 @@ export type CircularProgressProps = {
   /**  The value of the progress indicator for determinate variant.
    * Value between 0 and 100 */
   value?: number
-} & HTMLAttributes<HTMLDivElement>
+}
 
 const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>(
   function CircularProgress(

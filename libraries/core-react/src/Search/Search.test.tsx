@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+import React from 'react'
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -32,8 +34,8 @@ describe('Search', () => {
     let callbackId = ''
     let callbackValue = ''
     const handleOnChange = jest.fn(({ target: { id, value } }) => {
-      callbackId = id as string
-      callbackValue = value as string
+      callbackId = id
+      callbackValue = value
     })
 
     render(
@@ -55,8 +57,8 @@ describe('Search', () => {
     let callbackId = ''
     let callbackValue = ''
     const handleOnChange = jest.fn(({ target: { id, value } }) => {
-      callbackValue = value as string
-      callbackId = id as string
+      callbackValue = value
+      callbackId = id
     })
 
     render(
@@ -81,7 +83,7 @@ describe('Search', () => {
     const searchId = 'search-id-when-testing'
     let callbackId = ''
     const handleOnFocus = jest.fn(({ target: { id } }) => {
-      callbackId = id as string
+      callbackId = id
     })
 
     render(<Search id={searchId} onFocus={handleOnFocus} />)
@@ -96,7 +98,7 @@ describe('Search', () => {
     const searchId = 'search-id-when-testing'
     let callbackId = ''
     const handleOnBlur = jest.fn(({ target: { id } }) => {
-      callbackId = id as string
+      callbackId = id
     })
 
     render(<Search id={searchId} onBlur={handleOnBlur} />)

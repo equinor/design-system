@@ -1,4 +1,4 @@
-import { forwardRef, Fragment, HTMLAttributes } from 'react'
+import React, { forwardRef, Fragment, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '../_common/templates'

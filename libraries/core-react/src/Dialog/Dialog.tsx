@@ -1,5 +1,4 @@
-import { forwardRef } from 'react'
-import * as React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../_common/templates'
 import { dialog as tokens } from './Dialog.tokens'

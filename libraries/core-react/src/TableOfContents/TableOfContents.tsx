@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { List } from '../List'
 import { Typography } from '../Typography'

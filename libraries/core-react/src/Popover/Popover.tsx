@@ -1,5 +1,4 @@
-import {
-  Children,
+import React, {
   forwardRef,
   useRef,
   HTMLAttributes,
@@ -60,7 +59,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }
     const anchorRef = useRef<HTMLDivElement>(null)
 
-    const { anchorElement, childArray } = Children.toArray(children).reduce(
+    const { anchorElement, childArray } = React.Children.toArray(
+      children,
+    ).reduce(
       (acc: PopoverSplit, child): PopoverSplit => {
         if (isValidElement(child) && child.type === PopoverAnchor) {
           return {

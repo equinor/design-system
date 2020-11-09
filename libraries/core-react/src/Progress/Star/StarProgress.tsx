@@ -1,4 +1,4 @@
-import { forwardRef, SVGProps, Ref } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 
@@ -48,9 +48,9 @@ const determinate = keyframes`
 `
 
 type SvgProps = {
+  variant?: 'determinate' | 'indeterminate'
   progress: number
-} & Pick<StarProgressProps, 'variant'> &
-  SVGProps<SVGSVGElement>
+} & HTMLAttributes<SVGSVGElement>
 
 const Svg = styled.svg<SvgProps>`
   fill: ${tokens.star.background};
@@ -111,9 +111,7 @@ export type StarProgressProps = {
   /** The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
   value?: number
-  /** @ignore */
-  ref?: Ref<SVGSVGElement>
-} & SVGProps<SVGSVGElement>
+} & HTMLAttributes<SVGSVGElement>
 
 const StarProgress = forwardRef<SVGSVGElement, StarProgressProps>(
   function StarProgress(

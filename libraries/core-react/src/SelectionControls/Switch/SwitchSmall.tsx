@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
@@ -39,7 +39,7 @@ type SwitchSmallProps = {
 }
 
 export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
-  function SwitchSmall({ disabled, ...rest }, ref) {
+  ({ disabled, ...rest }, ref) => {
     return (
       <>
         <Input {...rest} ref={ref} disabled={disabled} size="small" />

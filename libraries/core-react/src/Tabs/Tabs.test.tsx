@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { useRef, useEffect, useState, Fragment } from 'react'
+import React, { useRef, useEffect, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'

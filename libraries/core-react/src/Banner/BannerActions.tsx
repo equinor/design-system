@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, ReactNode } from 'react'
+import React, { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 
@@ -21,12 +21,12 @@ const StyledBannerActions = styled.div<StyledBannerActionsProps>`
     }}
 `
 
-type BannerActionProps = {
+type Props = {
   children: ReactNode
   placement?: BannerActionsPlacement
 } & HTMLAttributes<HTMLDivElement>
 
-export const BannerActions: FC<BannerActionProps> = ({
+export const BannerActions: FC<Props> = ({
   children,
   placement = 'left',
   className,

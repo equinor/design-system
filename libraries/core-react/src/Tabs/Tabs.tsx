@@ -1,5 +1,4 @@
-import { forwardRef, useMemo, useState, HTMLAttributes } from 'react'
-import * as React from 'react'
+import React, { forwardRef, useMemo, useState, HTMLAttributes } from 'react'
 import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'

@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode, ElementType, InputHTMLAttributes } from 'react'
+import React, { ReactNode, ElementType, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
 import { typographyTemplate, spacingsTemplate } from '../../_common/templates'
@@ -94,7 +94,7 @@ type TextfieldInputProps = {
   readonly?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
-const TextFieldInput = forwardRef<HTMLInputElement, TextfieldInputProps>(
+const TextFieldInput = React.forwardRef<HTMLInputElement, TextfieldInputProps>(
   function TextFieldInput(
     {
       multiline = false,

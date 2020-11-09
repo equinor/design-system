@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
 
@@ -7,7 +7,7 @@ export type CardActionProps = {
   alignRight?: boolean
   /** Meta information */
   meta?: string
-} & HTMLAttributes<HTMLDivElement>
+} & JSX.IntrinsicElements['div']
 
 const StyledCardActions = styled.div<React.CSSProperties>`
   display: grid;

@@ -1,4 +1,4 @@
-import {
+import React, {
   forwardRef,
   ElementType,
   HTMLAttributes,
@@ -53,9 +53,7 @@ const findTypography = (
 const findColor: (a: ColorVariants | string) => string = (
   inputColor = null,
 ): string =>
-  typeof colors[inputColor] === 'undefined'
-    ? inputColor
-    : (colors[inputColor] as string)
+  typeof colors[inputColor] === 'undefined' ? inputColor : colors[inputColor]
 
 const toVariantName = (
   variant: TypographyVariants,

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { useTextField } from '../context'
 
@@ -49,7 +49,7 @@ type TextfieldIconProps = {
   isDisabled?: boolean
 }
 
-const InputIcon = forwardRef<HTMLDivElement, TextfieldIconProps>(
+const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
   function InputIcon({ children, ...other }, ref) {
     const { isFocused } = useTextField()
 
