@@ -1,4 +1,4 @@
-import React, { EventHandler, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import {
@@ -191,7 +191,7 @@ export default {
 export const ButtonToggle: Story<MenuProps> = () => {
   const [state, setState] = React.useState<{
     buttonEl: HTMLButtonElement
-    focus: any
+    focus: 'first' | 'last'
   }>({
     focus: 'first',
     buttonEl: null,
@@ -200,8 +200,14 @@ export const ButtonToggle: Story<MenuProps> = () => {
   const { buttonEl, focus } = state
   const isOpen = Boolean(buttonEl)
 
-  const openMenu = (e, focus) => {
-    setState({ ...state, buttonEl: e.target, focus })
+  const openMenu = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>,
+    focus: 'first' | 'last',
+  ) => {
+    const target = e.target as HTMLButtonElement
+    setState({ ...state, buttonEl: target, focus })
   }
 
   const closeMenu = () => {
@@ -257,7 +263,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
 export const InTopbar: Story<MenuProps> = () => {
   const [state, setState] = React.useState<{
     buttonEl: HTMLButtonElement
-    focus: any
+    focus: 'first' | 'last'
   }>({
     focus: 'first',
     buttonEl: null,
@@ -266,9 +272,16 @@ export const InTopbar: Story<MenuProps> = () => {
   const { focus, buttonEl } = state
   const isOpen = Boolean(buttonEl)
 
-  const openMenu = (e) => setState({ ...state, buttonEl: e.target })
+  const openMenu = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    const target = e.target as HTMLButtonElement
+    setState({ ...state, buttonEl: target })
+  }
 
-  const closeMenu = () => setState({ ...state, buttonEl: null })
+  const closeMenu = () => setState({ ...state, buttonEl: null, focus: null })
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
@@ -320,17 +333,22 @@ export const InTopbar: Story<MenuProps> = () => {
 }
 
 export const Examples: Story<MenuProps> = () => {
-  const [state, setState] = React.useState({
+  const [state, setState] = React.useState<{
+    one: HTMLDivElement
+    two: HTMLDivElement
+    three: HTMLDivElement
+    four: HTMLDivElement
+  }>({
     one: null,
     two: null,
     three: null,
     four: null,
   })
 
-  const oneRef = React.useRef()
-  const twoRef = React.useRef()
-  const threeRef = React.useRef()
-  const fourRef = React.useRef()
+  const oneRef = React.useRef<HTMLDivElement>(null)
+  const twoRef = React.useRef<HTMLDivElement>(null)
+  const threeRef = React.useRef<HTMLDivElement>(null)
+  const fourRef = React.useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setState({
