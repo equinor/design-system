@@ -77,6 +77,8 @@ module.exports = {
     'react/no-array-index-key': ['error'],
     'react/no-typos': ['error'],
     'react/destructuring-assignment': ['error', 'always'],
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
     'jsx-a11y/accessible-emoji': ['warn'],
     'jsx-a11y/control-has-associated-label': ['warn'],
     'jsx-a11y/label-has-associated-control': [
