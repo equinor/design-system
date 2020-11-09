@@ -281,7 +281,7 @@ export const InTopbar: Story<MenuProps> = () => {
     setState({ ...state, buttonEl: target })
   }
 
-  const closeMenu = () => setState({ ...state, buttonEl: null, focus: null })
+  const closeMenu = () => setState({ ...state, buttonEl: null })
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
