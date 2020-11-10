@@ -1,4 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from 'react'
+import * as React from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { avatar as tokens } from './Avatar.tokens'
 

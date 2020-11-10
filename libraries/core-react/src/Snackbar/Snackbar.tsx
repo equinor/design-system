@@ -1,4 +1,5 @@
-import React, { useState, useEffect, HTMLAttributes, FC } from 'react'
+import * as React from 'react'
+import { useState, useEffect, HTMLAttributes, FC } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 import { typographyTemplate } from '../_common/templates'

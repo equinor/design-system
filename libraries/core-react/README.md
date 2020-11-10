@@ -62,7 +62,7 @@ npm install @equinor/eds-core-react styled-components
 ## Usage
 
 ```jsx
-import React from 'react'
+import * as React from 'react'
 import { render } from 'react-dom'
 import { Button, Typography } from '@equinor/eds-core-react'
 

@@ -1,4 +1,5 @@
-import React, { forwardRef, Ref, SVGProps } from 'react'
+import * as React from 'react'
+import { forwardRef, Ref, SVGProps } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
 

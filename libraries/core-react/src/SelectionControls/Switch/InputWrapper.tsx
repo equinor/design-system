@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react'
+import * as React from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'
 import type { Size } from './Switch.types'

@@ -1,4 +1,5 @@
-import React, { forwardRef, useMemo, ReactElement, HTMLAttributes } from 'react'
+import * as React from 'react'
+import { forwardRef, useMemo, ReactElement, HTMLAttributes } from 'react'
 import createId from 'lodash/uniqueId'
 import type { AccordionProps } from './Accordion.types'
 

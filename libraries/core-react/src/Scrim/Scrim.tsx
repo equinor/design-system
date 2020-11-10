@@ -1,4 +1,5 @@
-import React, { forwardRef, useEffect, MouseEvent, HTMLAttributes } from 'react'
+import * as React from 'react'
+import { forwardRef, useEffect, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 

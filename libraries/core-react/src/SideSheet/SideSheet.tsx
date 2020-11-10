@@ -1,4 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from 'react'
+import * as React from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
 import { spacingsTemplate } from '../_common/templates'

@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import * as React from 'react'
+import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { getTokens, TableCell } from './Table.tokens'
 import type { Border } from '@equinor/eds-tokens'
