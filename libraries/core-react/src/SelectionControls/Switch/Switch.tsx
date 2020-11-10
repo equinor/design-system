@@ -1,4 +1,5 @@
-import React, { forwardRef, Ref, InputHTMLAttributes } from 'react'
+import * as React from 'react'
+import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'

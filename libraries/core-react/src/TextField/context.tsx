@@ -1,4 +1,5 @@
-import React, { useState, useContext, ReactNode } from 'react'
+import * as React from 'react'
+import { useState, useContext, ReactNode } from 'react'
 
 export const propsFor = {
   variants: ['error', 'warning', 'success', 'default'],

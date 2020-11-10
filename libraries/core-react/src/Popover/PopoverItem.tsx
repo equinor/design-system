@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, {
-  useEffect,
-  useRef,
-  forwardRef,
-  HTMLAttributes,
-  SVGProps,
-} from 'react'
+import * as React from 'react'
+import { useEffect, useRef, forwardRef, HTMLAttributes, SVGProps } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { Card } from '../Card'

@@ -1,4 +1,5 @@
-import React, { useState, useContext, ReactNode, MouseEvent } from 'react'
+import * as React from 'react'
+import { useState, useContext, ReactNode, MouseEvent } from 'react'
 
 export type State = {
   focusedIndex: number

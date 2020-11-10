@@ -1,4 +1,5 @@
-import React, {
+import * as React from 'react'
+import {
   forwardRef,
   useState,
   MouseEvent,
@@ -200,10 +201,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       <FlexContainer>
         <Text>
           {currentItemFirst !== currentItemLast
-            ? `${currentItemFirst} 
-              ${' - '} 
+            ? `${currentItemFirst}
+              ${' - '}
               ${currentItemLast}
-              ${' of '} 
+              ${' of '}
               ${totalItems}
               ${' items'}`
             : `${currentItemFirst} ${' of '} ${totalItems} ${' items'}`}

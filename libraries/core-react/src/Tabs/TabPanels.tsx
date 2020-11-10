@@ -1,9 +1,5 @@
-import React, {
-  forwardRef,
-  ReactElement,
-  useContext,
-  HTMLAttributes,
-} from 'react'
+import * as React from 'react'
+import { forwardRef, ReactElement, useContext, HTMLAttributes } from 'react'
 import { TabsContext } from './Tabs.context'
 
 type TabPanelsProps = HTMLAttributes<HTMLDivElement>
