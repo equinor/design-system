@@ -6,9 +6,9 @@
   "publishConfig": {
     "main": "dist/core-react.cjs.js",
     "module": "dist/core-react.es.js",
-    "browser": "dist/core-react.umd.js",
-    "types": "dist/types/index.d.ts"
+    "browser": "dist/core-react.umd.js"
   },
+  "types": "dist/types/index.d.ts",
   "license": "AGPL-3.0-or-later",
   "author": {
     "name": "EDS Core Team",
@@ -29,8 +29,7 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
-    "build:for-storybook": "rollup -c",
-    "dev": "rollup -c -w",
+    "dev": "rollup -c -w NODE_ENV=development",
     "test": "jest",
     "test:watch": "jest --watch"
   },

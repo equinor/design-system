@@ -7,6 +7,9 @@ import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 
 const peerDeps = Object.keys(pkg.peerDependencies || {})
+const environment = process.env.NODE_ENV
+
+const isDevelopment = environment === 'development'
 
 const globals = {
   react: 'React',
@@ -21,7 +24,6 @@ export default [
   {
     input: './src/index.ts',
     external: peerDeps,
-    // : [...peerDeps, 'focus-visible'],
     watch: {
       clearScreen: true,
       include: ['./src/**', './../tokens/**'],
@@ -48,8 +50,8 @@ export default [
       {
         file: pkg.publishConfig.module,
         name: pkg.name,
-        format: 'esm',
-        sourcemap: true,
+        format: 'es',
+        sourcemap: isDevelopment,
         globals,
       },
       { file: pkg.publishConfig.main, format: 'cjs' },
