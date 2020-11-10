@@ -1,5 +1,7 @@
 # @equinor/eds-core-react
 
+NB! This is an early version of the EDS Core React components in Typescript and meant for testing only.
+
 Available components to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
 
 Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
