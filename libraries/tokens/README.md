@@ -1,5 +1,7 @@
 # @equinor/eds-tokens
 
+NB! This is an early version of the EDS Core React components in Typescript and meant for testing only.
+
 Design tokens used in Equinor Design System (EDS).
 
 ## Documentation
