@@ -3,7 +3,7 @@ devDependencies:
   rollup: 2.15.0
   rollup-plugin-typescript2: 0.27.2_rollup@2.15.0+typescript@4.0.2
   typescript: 4.0.2
-lockfileVersion: 5.1
+lockfileVersion: 5.2
 packages:
   /@rollup/plugin-node-resolve/8.0.1_rollup@2.15.0:
     dependencies:
