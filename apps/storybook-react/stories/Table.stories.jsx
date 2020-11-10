@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Table, Typography } from '@equinor/eds-core-react'
 import './../style.css'
 
-const { Body, Row, Cell, Head } = Table
+const { Caption, Body, Row, Cell, Head } = Table
 
 export default {
   title: 'Components/Table',
@@ -18,6 +18,7 @@ export const simpleTable = () => (
     <div className="">
       <div className="group">
         <Table>
+          <Caption>Star Wars Kill Count</Caption>
           <Head>
             <Row>
               <Cell as="th" scope="col">
