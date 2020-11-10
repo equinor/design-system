@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.6.2",
+  "version": "0.7.0-beta.1",
   "description": "The React implementation of the Equinor Design System",
   "main": "src/index.ts",
   "publishConfig": {
@@ -9,7 +9,7 @@
     "browser": "dist/core-react.umd.js"
   },
   "types": "dist/types/index.d.ts",
-  "license": "AGPL-3.0-or-later",
+  "license": "MIT",
   "author": {
     "name": "EDS Core Team",
     "email": "fg_eds@equinor.com"
@@ -77,8 +77,8 @@
     "styled-components": "^4.2.0"
   },
   "dependencies": {
-    "@equinor/eds-icons": "workspace:*",
-    "@equinor/eds-tokens": "workspace:*",
+    "@equinor/eds-icons": "0.5.0-beta.1",
+    "@equinor/eds-tokens": "0.5.1-beta.1",
     "@testing-library/react-hooks": "^3.3.0",
     "@types/lodash": "^4.14.162",
     "csstype": "^3.0.3",
