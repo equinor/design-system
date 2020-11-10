@@ -1,4 +1,5 @@
-import React, { ReactNode, ElementType, InputHTMLAttributes } from 'react'
+import * as React from 'react'
+import { ReactNode, ElementType, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
 import { typographyTemplate, spacingsTemplate } from '../../_common/templates'

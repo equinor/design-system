@@ -1,4 +1,5 @@
-import React, { FC, HTMLAttributes, ReactNode } from 'react'
+import * as React from 'react'
+import { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 import { Divider } from '../Divider'
