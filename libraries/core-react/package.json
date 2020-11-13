@@ -1,11 +1,11 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.7.0-beta.3",
+  "version": "0.7.0-beta.4",
   "description": "The React implementation of the Equinor Design System",
   "main": "src/index.ts",
   "publishConfig": {
     "main": "dist/core-react.cjs.js",
-    "module": "dist/core-react.es.js",
+    "module": "dist/core-react.esm.js",
     "browser": "dist/core-react.umd.js"
   },
   "types": "dist/types/index.d.ts",
@@ -76,14 +76,14 @@
     "typescript": "^4.0.2"
   },
   "peerDependencies": {
-    "prop-types": "^15.7.2",
-    "react": ">=16.8.6",
-    "react-dom": ">=16.8.6",
-    "styled-components": "^4.2.0"
+    "prop-types": ">=15.7.2",
+    "react": ">=16.8",
+    "react-dom": ">=16.8",
+    "styled-components": ">=4.2"
   },
   "dependencies": {
-    "@equinor/eds-icons": "0.5.0-beta.1",
-    "@equinor/eds-tokens": "0.5.1-beta.1"
+    "@equinor/eds-icons": "0.5.0-beta.2",
+    "@equinor/eds-tokens": "0.5.1-beta.2"
   },
   "engines": {
     "pnpm": ">=4",
