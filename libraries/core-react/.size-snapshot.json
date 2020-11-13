@@ -1,0 +1,26 @@
+{
+  "core-react.umd.js": {
+    "bundled": 341244,
+    "minified": 166177,
+    "gzipped": 36105
+  },
+  "core-react.cjs.js": {
+    "bundled": 331746,
+    "minified": 202980,
+    "gzipped": 39488
+  },
+  "core-react.esm.js": {
+    "bundled": 327231,
+    "minified": 198328,
+    "gzipped": 39211,
+    "treeshaked": {
+      "rollup": {
+        "code": 141150,
+        "import_statements": 294
+      },
+      "webpack": {
+        "code": 152861
+      }
+    }
+  }
+}

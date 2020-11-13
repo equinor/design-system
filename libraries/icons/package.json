@@ -44,5 +44,9 @@
   "engines": {
     "pnpm": ">=4",
     "node": ">=10.0.0"
+  },
+  "dependencies": {
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-size-snapshot": "^0.12.0"
   }
 }
