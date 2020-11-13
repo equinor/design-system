@@ -1,20 +1,21 @@
 import resolve from '@rollup/plugin-node-resolve'
+import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 import commonjsPkg from './commonjs/package.json'
 
 // eslint-disable-next-line import/no-default-export
 export default [
   {
-    input: 'index.js',
+    input: 'index.ts',
     watch: {
       clearScreen: true,
     },
-    plugins: [resolve()],
+    plugins: [resolve(), typescript({ useTsconfigDeclarationDir: true })],
     output: [
       {
         file: pkg.module,
         name: pkg.name,
-        format: 'esm',
+        format: 'es',
         exports: 'named',
       },
       {

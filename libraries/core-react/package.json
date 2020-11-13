@@ -1,11 +1,15 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.6.2",
+  "version": "0.7.0-beta.4",
   "description": "The React implementation of the Equinor Design System",
-  "main": "dist/core-react.cjs.js",
-  "module": "dist/core-react.es.js",
-  "browser": "dist/core-react.umd.js",
-  "license": "AGPL-3.0-or-later",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/core-react.cjs.js",
+    "module": "dist/core-react.esm.js",
+    "browser": "dist/core-react.umd.js"
+  },
+  "types": "dist/types/index.d.ts",
+  "license": "MIT",
   "author": {
     "name": "EDS Core Team",
     "email": "fg_eds@equinor.com"
@@ -25,8 +29,7 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
-    "build:for-storybook": "rollup -c --environment STORYBOOK",
-    "dev": "rollup -c -w --environment STORYBOOK",
+    "dev": "rollup -c -w NODE_ENV=development",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -41,43 +44,46 @@
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
+    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.2.1",
+    "@testing-library/react-hooks": "^3.3.0",
     "@testing-library/user-event": "^10.3.2",
-    "babel-plugin-react-docgen": "^4.1.0",
+    "@types/jest": "^26.0.10",
+    "@types/lodash": "^4.14.162",
+    "@types/react": "^16.9.47",
+    "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.2",
+    "@types/testing-library__jest-dom": "^5.9.2",
     "babel-plugin-styled-components": "^1.10.7",
+    "csstype": "^3.0.3",
+    "focus-visible": "^5.2.0",
     "jest": "^26.0.1",
     "jest-styled-components": "^6.3.4",
+    "lodash": "^4.17.19",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.15.0",
-    "rollup-plugin-polyfill": "^3.0.0",
-    "styled-components": "4.4.1"
+    "rollup-plugin-typescript2": "^0.27.2",
+    "styled-components": "4.4.1",
+    "ts-jest": "^26.3.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2"
   },
   "peerDependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "styled-components": "^4.2.0"
-  },
-  "jest": {
-    "verbose": true,
-    "setupFilesAfterEnv": [
-      "./rtl.setup.js"
-    ]
+    "prop-types": ">=15.7.2",
+    "react": ">=16.8",
+    "react-dom": ">=16.8",
+    "styled-components": ">=4.2"
   },
   "dependencies": {
-    "@equinor/eds-icons": "workspace:*",
-    "@equinor/eds-tokens": "workspace:*",
-    "@testing-library/react-hooks": "^3.3.0",
-    "focus-visible": "^5.1.0",
-    "lodash": "^4.17.19"
+    "@equinor/eds-icons": "0.5.0-beta.2",
+    "@equinor/eds-tokens": "0.5.1-beta.2"
   },
   "engines": {
     "pnpm": ">=4",

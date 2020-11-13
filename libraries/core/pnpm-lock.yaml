@@ -1,6 +1,6 @@
 devDependencies:
   prettier: 1.17.1
-lockfileVersion: 5.1
+lockfileVersion: 5.2
 packages:
   /prettier/1.17.1:
     dev: true

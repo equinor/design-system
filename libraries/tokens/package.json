@@ -1,12 +1,12 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.4.0",
+  "version": "0.5.1-beta.2",
   "description": "Design tokens for the Equinor Design System",
-  "main": "dist/tokens.esm.js",
+  "main": "dist/tokens.cjs.js",
   "module": "dist/tokens.esm.js",
   "browser": "dist/tokens.umd.js",
-  "type": "module",
-  "license": "AGPL-3.0-or-later",
+  "types": "dist/types/index.d.ts",
+  "license": "MIT",
   "author": {
     "name": "EDS Core Team",
     "email": "fg_eds@equinor.com"
@@ -37,7 +37,9 @@
   ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "rollup": "^2.15.0"
+    "rollup": "^2.15.0",
+    "rollup-plugin-typescript2": "^0.27.2",
+    "typescript": "^4.0.2"
   },
   "engines": {
     "pnpm": ">=4",
