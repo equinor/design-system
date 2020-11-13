@@ -37,6 +37,10 @@ export default {
       route: '/components/',
     },
     {
+      title: 'Data visualisation',
+      route: '/data-visualisation/',
+    },
+    {
       title: 'Patterns',
       route: '/patterns/',
     },
