@@ -1,6 +1,6 @@
 dependencies:
-  '@equinor/eds-icons': 0.5.0-beta.1
-  '@equinor/eds-tokens': 0.5.1-beta.1
+  '@equinor/eds-icons': 0.5.0-beta.2
+  '@equinor/eds-tokens': 0.5.1-beta.2
 devDependencies:
   '@babel/cli': 7.10.1_@babel+core@7.10.2
   '@babel/core': 7.10.2
@@ -1258,20 +1258,20 @@ packages:
     dev: true
     resolution:
       integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
-  /@equinor/eds-icons/0.5.0-beta.1:
+  /@equinor/eds-icons/0.5.0-beta.2:
     dev: false
     engines:
       node: '>=10.0.0'
       pnpm: '>=4'
     resolution:
-      integrity: sha512-IjveWnsKXjVvM3Fp0Y1x3FWm1BPtkDf69YhztRJY8jraP6kZ8o+tdkVdXAyUyd2ELwdgvSTTQuvVaUberAz9hw==
-  /@equinor/eds-tokens/0.5.1-beta.1:
+      integrity: sha512-sD574J11TMS/HhiNupDCASFFE++l5uywLc9zGcE5QAI4kXED4aC2KOWN9nnoshK5KKTyax8wkA2JDsNa7UPJeQ==
+  /@equinor/eds-tokens/0.5.1-beta.2:
     dev: false
     engines:
       node: '>=10.0.0'
       pnpm: '>=4'
     resolution:
-      integrity: sha512-62zlIoepdd1NqS8dizH5ESbKjI9Y+Hz/oovo9Q5XgoupIzKGw14DkOCNnlcJ4rs6o7MPO3OKUPNH4RnIGcqPFg==
+      integrity: sha512-54KCtyCKEu7srnbDO6D7mFONoT4bQ0tPjuvOHMSR+Bk+yg0+gGrwyt8C1s0C0NqTFDarTbu6d6VzWRGwKSkUeA==
   /@istanbuljs/load-nyc-config/1.1.0:
     dependencies:
       camelcase: 5.3.1
@@ -5873,8 +5873,8 @@ specifiers:
   '@babel/preset-env': ^7.10.2
   '@babel/preset-react': ^7.10.1
   '@babel/preset-typescript': ^7.10.4
-  '@equinor/eds-icons': 0.5.0-beta.1
-  '@equinor/eds-tokens': 0.5.1-beta.1
+  '@equinor/eds-icons': 0.5.0-beta.2
+  '@equinor/eds-tokens': 0.5.1-beta.2
   '@rollup/plugin-babel': ^5.0.3
   '@rollup/plugin-commonjs': ^13.0.0
   '@rollup/plugin-node-resolve': ^8.0.1
