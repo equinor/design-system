@@ -38,15 +38,13 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^8.0.1",
     "rollup": "^2.15.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-size-snapshot": "^0.12.0",
     "rollup-plugin-typescript2": "^0.27.2",
     "typescript": "^4.0.2"
   },
   "engines": {
     "pnpm": ">=4",
     "node": ">=10.0.0"
-  },
-  "dependencies": {
-    "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-size-snapshot": "^0.12.0"
   }
 }
