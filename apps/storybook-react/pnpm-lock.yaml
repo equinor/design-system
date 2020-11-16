@@ -6,7 +6,7 @@ dependencies:
   babel-runtime: 6.26.0
   react-dom: 16.13.1_react@16.13.1
   react-hook-form: 5.7.2_react@16.13.1
-  styled-components: 5.1.1_988f4f9157fb8e0dba6a9870bbd1cb60
+  styled-components: 5.1.1_9a4a3b3ed34a772b68db523825332f5f
 devDependencies:
   '@babel/core': 7.10.2
   '@babel/plugin-transform-react-jsx': 7.10.1_@babel+core@7.10.2
@@ -26,7 +26,7 @@ devDependencies:
   babel-loader: 8.1.0_@babel+core@7.10.2
   react: 16.13.1
   react-is: 16.13.1
-lockfileVersion: 5.2
+lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.10.1:
     dependencies:
@@ -3701,7 +3701,7 @@ packages:
       unfetch: 4.2.0
       url-loader: 4.1.1_file-loader@6.1.1+webpack@4.44.1
       util-deprecate: 1.0.2
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
       webpack-dev-middleware: 3.7.2_webpack@4.44.1
       webpack-hot-middleware: 2.25.0
       webpack-virtual-modules: 0.2.2
@@ -3756,7 +3756,7 @@ packages:
       react-dom: 16.13.1_react@16.13.1
       regenerator-runtime: 0.13.7
       ts-dedent: 1.1.1
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     dev: false
     engines:
       node: '>=8.0.0'
@@ -4404,7 +4404,7 @@ packages:
       chalk: 2.4.2
       strip-ansi: 4.0.0
       text-table: 0.2.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
       webpack-log: 1.2.0
     dev: false
     engines:
@@ -4818,7 +4818,7 @@ packages:
       mkdirp: 0.5.5
       pify: 4.0.1
       schema-utils: 2.7.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     engines:
       node: '>= 6.9'
     peerDependencies:
@@ -4992,7 +4992,7 @@ packages:
       '@babel/helper-module-imports': 7.10.1
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.15
-      styled-components: 5.1.1_988f4f9157fb8e0dba6a9870bbd1cb60
+      styled-components: 5.1.1_9a4a3b3ed34a772b68db523825332f5f
     dev: false
     peerDependencies:
       styled-components: '>= 2'
@@ -5920,7 +5920,7 @@ packages:
       postcss-value-parser: 4.1.0
       schema-utils: 2.7.1
       semver: 6.3.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     engines:
       node: '>= 8.9.0'
     peerDependencies:
@@ -6238,7 +6238,7 @@ packages:
   /dotenv-webpack/1.8.0_webpack@4.44.1:
     dependencies:
       dotenv-defaults: 1.1.1
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     peerDependencies:
       webpack: ^1 || ^2 || ^3 || ^4
     resolution:
@@ -6745,7 +6745,7 @@ packages:
     dependencies:
       loader-utils: 2.0.0
       schema-utils: 3.0.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     engines:
       node: '>= 10.13.0'
     peerDependencies:
@@ -7375,7 +7375,7 @@ packages:
       pretty-error: 2.1.2
       tapable: 1.1.3
       util.promisify: 1.0.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     engines:
       node: '>=6.9'
     peerDependencies:
@@ -9493,7 +9493,7 @@ packages:
     dependencies:
       loader-utils: 2.0.0
       schema-utils: 3.0.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     engines:
       node: '>= 10.13.0'
     peerDependencies:
@@ -10695,7 +10695,7 @@ packages:
     dependencies:
       loader-utils: 2.0.0
       schema-utils: 2.7.1
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     engines:
       node: '>= 8.9.0'
     peerDependencies:
@@ -10708,7 +10708,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-CzFnRRXhzWIdItT3OmF8SQfWyahHhjq3HwcMNCNLn+N7klOOqPjMeG/4JSu77D7ypZdGvSzvkrbyeTMizz2VrA==
-  /styled-components/5.1.1_988f4f9157fb8e0dba6a9870bbd1cb60:
+  /styled-components/5.1.1_9a4a3b3ed34a772b68db523825332f5f:
     dependencies:
       '@babel/helper-module-imports': 7.10.1
       '@babel/traverse': 7.10.1
@@ -10728,6 +10728,7 @@ packages:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
       react-is: '>= 16.8.0'
+      styled-components: '*'
     requiresBuild: true
     resolution:
       integrity: sha512-1ps8ZAYu2Husx+Vz8D+MvXwEwvMwFv+hqqUwhNlDN5ybg6A+3xyW1ECrAgywhvXapNfXiz79jJyU0x22z0FFTg==
@@ -10841,7 +10842,7 @@ packages:
       serialize-javascript: 4.0.0
       source-map: 0.6.1
       terser: 4.8.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
       webpack-sources: 1.4.3
       worker-farm: 1.7.0
     engines:
@@ -10860,7 +10861,7 @@ packages:
       serialize-javascript: 4.0.0
       source-map: 0.6.1
       terser: 4.8.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
       webpack-sources: 1.4.3
     engines:
       node: '>= 10.13.0'
@@ -11254,7 +11255,7 @@ packages:
       loader-utils: 2.0.0
       mime-types: 2.1.27
       schema-utils: 3.0.0
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
     engines:
       node: '>= 10.13.0'
     peerDependencies:
@@ -11421,7 +11422,7 @@ packages:
       mime: 2.4.6
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 4.44.1
+      webpack: 4.44.1_webpack@4.44.1
       webpack-log: 2.0.0
     engines:
       node: '>= 6'
@@ -11467,7 +11468,7 @@ packages:
       debug: 3.2.6
     resolution:
       integrity: sha512-kDUmfm3BZrei0y+1NTHJInejzxfhtU8eDj2M7OKb2IWrPFAeO1SOH2KuQ68MSZu9IGEHcxbkKKR1v18FrUSOmA==
-  /webpack/4.44.1:
+  /webpack/4.44.1_webpack@4.44.1:
     dependencies:
       '@webassemblyjs/ast': 1.9.0
       '@webassemblyjs/helper-module-context': 1.9.0
@@ -11496,6 +11497,7 @@ packages:
       node: '>=6.11.5'
     hasBin: true
     peerDependencies:
+      webpack: '*'
       webpack-cli: '*'
       webpack-command: '*'
     peerDependenciesMeta:

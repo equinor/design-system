@@ -13,7 +13,7 @@ dependencies:
   web-vitals: 0.2.4
 devDependencies:
   react-refresh: 0.9.0
-lockfileVersion: 5.2
+lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.10.4:
     dependencies:
@@ -1302,7 +1302,7 @@ packages:
       jest-haste-map: 26.6.2
       jest-message-util: 26.6.2
       jest-regex-util: 26.0.0
-      jest-resolve: 26.6.2
+      jest-resolve: 26.6.2_jest-resolve@26.6.2
       jest-resolve-dependencies: 26.6.3
       jest-runner: 26.6.3
       jest-runtime: 26.6.3
@@ -1372,7 +1372,7 @@ packages:
       istanbul-lib-source-maps: 4.0.0
       istanbul-reports: 3.0.2
       jest-haste-map: 26.6.2
-      jest-resolve: 26.6.2
+      jest-resolve: 26.6.2_jest-resolve@26.6.2
       jest-util: 26.6.2
       jest-worker: 26.6.2
       slash: 3.0.0
@@ -1495,7 +1495,7 @@ packages:
       react-refresh: 0.8.3
       schema-utils: 2.7.1
       source-map: 0.7.3
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-dev-server: 3.11.0_webpack@4.44.2
     dev: false
     engines:
@@ -2694,7 +2694,7 @@ packages:
       mkdirp: 0.5.5
       pify: 4.0.1
       schema-utils: 2.7.1
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>= 6.9'
@@ -3826,7 +3826,7 @@ packages:
       postcss-value-parser: 4.1.0
       schema-utils: 2.7.1
       semver: 7.3.2
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>= 10.13.0'
@@ -4844,7 +4844,7 @@ packages:
       eslint: 7.12.1
       micromatch: 4.0.2
       schema-utils: 3.0.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>= 10.13.0'
@@ -5227,7 +5227,7 @@ packages:
     dependencies:
       loader-utils: 2.0.0
       schema-utils: 3.0.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>= 10.13.0'
@@ -5874,7 +5874,7 @@ packages:
       pretty-error: 2.1.2
       tapable: 1.1.3
       util.promisify: 1.0.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>=6.9'
@@ -6684,7 +6684,7 @@ packages:
       jest-get-type: 26.3.0
       jest-jasmine2: 26.6.3
       jest-regex-util: 26.0.0
-      jest-resolve: 26.6.2
+      jest-resolve: 26.6.2_jest-resolve@26.6.2
       jest-util: 26.6.2
       jest-validate: 26.6.2
       micromatch: 4.0.2
@@ -6857,7 +6857,7 @@ packages:
       integrity: sha512-YyFjePHHp1LzpzYcmgqkJ0nm0gg/lJx2aZFzFy1S6eUqNjXsOqTK10zNRff2dNfssgokjkG65OlWNcIlgd3zew==
   /jest-pnp-resolver/1.2.2_jest-resolve@26.6.0:
     dependencies:
-      jest-resolve: 26.6.0
+      jest-resolve: 26.6.0_jest-resolve@26.6.0
     dev: false
     engines:
       node: '>=6'
@@ -6870,7 +6870,7 @@ packages:
       integrity: sha512-olV41bKSMm8BdnuMsewT4jqlZ8+3TCARAXjZGT9jcoSnrfUnRCqnMoF9XEeoWjbzObpqF9dRhHQj0Xb9QdF6/w==
   /jest-pnp-resolver/1.2.2_jest-resolve@26.6.2:
     dependencies:
-      jest-resolve: 26.6.2
+      jest-resolve: 26.6.2_jest-resolve@26.6.2
     dev: false
     engines:
       node: '>=6'
@@ -6897,7 +6897,7 @@ packages:
       node: '>= 10.14.2'
     resolution:
       integrity: sha512-pVwUjJkxbhe4RY8QEWzN3vns2kqyuldKpxlxJlzEYfKSvY6/bMvxoFrYYzUO1Gx28yKWN37qyV7rIoIp2h8fTg==
-  /jest-resolve/26.6.0:
+  /jest-resolve/26.6.0_jest-resolve@26.6.0:
     dependencies:
       '@jest/types': 26.6.2
       chalk: 4.1.0
@@ -6910,9 +6910,11 @@ packages:
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      jest-resolve: '*'
     resolution:
       integrity: sha512-tRAz2bwraHufNp+CCmAD8ciyCpXCs1NQxB5EJAmtCFy6BN81loFEGWKzYu26Y62lAJJe4X4jg36Kf+NsQyiStQ==
-  /jest-resolve/26.6.2:
+  /jest-resolve/26.6.2_jest-resolve@26.6.2:
     dependencies:
       '@jest/types': 26.6.2
       chalk: 4.1.0
@@ -6925,6 +6927,8 @@ packages:
     dev: false
     engines:
       node: '>= 10.14.2'
+    peerDependencies:
+      jest-resolve: '*'
     resolution:
       integrity: sha512-sOxsZOq25mT1wRsfHcbtkInS+Ek7Q8jCHUB0ZUTP0tc/c41QHriU/NunqMfCUWsL4H3MHpvQD4QR9kSYhS7UvQ==
   /jest-runner/26.6.3:
@@ -6943,7 +6947,7 @@ packages:
       jest-haste-map: 26.6.2
       jest-leak-detector: 26.6.2
       jest-message-util: 26.6.2
-      jest-resolve: 26.6.2
+      jest-resolve: 26.6.2_jest-resolve@26.6.2
       jest-runtime: 26.6.3
       jest-util: 26.6.2
       jest-worker: 26.6.2
@@ -6976,7 +6980,7 @@ packages:
       jest-message-util: 26.6.2
       jest-mock: 26.6.2
       jest-regex-util: 26.0.0
-      jest-resolve: 26.6.2
+      jest-resolve: 26.6.2_jest-resolve@26.6.2
       jest-snapshot: 26.6.2
       jest-util: 26.6.2
       jest-validate: 26.6.2
@@ -7012,7 +7016,7 @@ packages:
       jest-haste-map: 26.6.2
       jest-matcher-utils: 26.6.2
       jest-message-util: 26.6.2
-      jest-resolve: 26.6.2
+      jest-resolve: 26.6.2_jest-resolve@26.6.2
       natural-compare: 1.4.0
       pretty-format: 26.6.2
       semver: 7.3.2
@@ -7709,7 +7713,7 @@ packages:
       loader-utils: 1.4.0
       normalize-url: 1.9.1
       schema-utils: 1.0.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-sources: 1.4.3
     dev: false
     engines:
@@ -8226,7 +8230,7 @@ packages:
     dependencies:
       cssnano: 4.1.10
       last-call-webpack-plugin: 3.0.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     peerDependencies:
       webpack: ^4.0.0
@@ -9703,7 +9707,7 @@ packages:
       identity-obj-proxy: 3.0.0
       jest: 26.6.0
       jest-circus: 26.6.0
-      jest-resolve: 26.6.0
+      jest-resolve: 26.6.0_jest-resolve@26.6.0
       jest-watch-typeahead: 0.6.1_jest@26.6.0
       mini-css-extract-plugin: 0.11.3_webpack@4.44.2
       optimize-css-assets-webpack-plugin: 5.0.4_webpack@4.44.2
@@ -9725,7 +9729,7 @@ packages:
       ts-pnp: 1.2.0_typescript@4.0.5
       typescript: 4.0.5
       url-loader: 4.1.1_file-loader@6.1.1+webpack@4.44.2
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-dev-server: 3.11.0_webpack@4.44.2
       webpack-manifest-plugin: 2.2.0_webpack@4.44.2
       workbox-webpack-plugin: 5.1.4_webpack@4.44.2
@@ -10281,7 +10285,7 @@ packages:
       neo-async: 2.6.2
       schema-utils: 2.7.1
       semver: 6.3.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>= 8.9.0'
@@ -10997,7 +11001,7 @@ packages:
     dependencies:
       loader-utils: 2.0.0
       schema-utils: 2.7.1
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>= 8.9.0'
@@ -11141,7 +11145,7 @@ packages:
       serialize-javascript: 4.0.0
       source-map: 0.6.1
       terser: 4.8.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-sources: 1.4.3
       worker-farm: 1.7.0
     dev: false
@@ -11161,7 +11165,7 @@ packages:
       serialize-javascript: 5.0.1
       source-map: 0.6.1
       terser: 5.3.8
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-sources: 1.4.3
     dev: false
     engines:
@@ -11589,7 +11593,7 @@ packages:
       loader-utils: 2.0.0
       mime-types: 2.1.27
       schema-utils: 3.0.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>= 10.13.0'
@@ -11786,7 +11790,7 @@ packages:
       mime: 2.4.6
       mkdirp: 0.5.5
       range-parser: 1.2.1
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-log: 2.0.0
     dev: false
     engines:
@@ -11826,7 +11830,7 @@ packages:
       strip-ansi: 3.0.1
       supports-color: 6.1.0
       url: 0.11.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-dev-middleware: 3.7.2_webpack@4.44.2
       webpack-log: 2.0.0
       ws: 6.2.1
@@ -11858,7 +11862,7 @@ packages:
       lodash: 4.17.20
       object.entries: 1.1.2
       tapable: 1.1.3
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
     dev: false
     engines:
       node: '>=6.11.5'
@@ -11873,7 +11877,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==
-  /webpack/4.44.2:
+  /webpack/4.44.2_webpack@4.44.2:
     dependencies:
       '@webassemblyjs/ast': 1.9.0
       '@webassemblyjs/helper-module-context': 1.9.0
@@ -11903,6 +11907,7 @@ packages:
       node: '>=6.11.5'
     hasBin: true
     peerDependencies:
+      webpack: '*'
       webpack-cli: '*'
       webpack-command: '*'
     peerDependenciesMeta:
@@ -12114,7 +12119,7 @@ packages:
       fast-json-stable-stringify: 2.1.0
       source-map-url: 0.4.0
       upath: 1.2.0
-      webpack: 4.44.2
+      webpack: 4.44.2_webpack@4.44.2
       webpack-sources: 1.4.3
       workbox-build: 5.1.4
     dev: false
