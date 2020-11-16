@@ -21,7 +21,6 @@ devDependencies:
   '@types/styled-components': 5.1.2
   '@types/testing-library__jest-dom': 5.9.2
   babel-plugin-styled-components: 1.10.7_styled-components@4.4.1
-  csstype: 3.0.3
   focus-visible: 5.2.0
   jest: 26.0.1
   jest-styled-components: 6.3.4_styled-components@4.4.1
@@ -7407,7 +7406,6 @@ specifiers:
   '@types/styled-components': ^5.1.2
   '@types/testing-library__jest-dom': ^5.9.2
   babel-plugin-styled-components: ^1.10.7
-  csstype: ^3.0.3
   focus-visible: ^5.2.0
   jest: ^26.0.1
   jest-styled-components: ^6.3.4

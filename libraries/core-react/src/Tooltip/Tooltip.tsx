@@ -7,9 +7,9 @@ import {
   SVGProps,
 } from 'react'
 import styled, { css } from 'styled-components'
+import type { CSSObject } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../_common/templates'
 import { tooltip as tokens, Placement } from './Tooltip.tokens'
-import CSS from 'csstype'
 
 const Wrapper = styled.div`
   position: relative;
@@ -143,7 +143,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       top: placementToken.arrowTop,
       bottom: placementToken.arrowBottom,
     }
-    const arrowStyle: CSS.Properties = {
+    const arrowStyle: CSSObject = {
       transform: `${placementToken.arrowTransform}`,
     }
     return (
