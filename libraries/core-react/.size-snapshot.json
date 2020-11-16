@@ -2,17 +2,17 @@
   "core-react.umd.js": {
     "bundled": 341775,
     "minified": 166401,
-    "gzipped": 36158
+    "gzipped": 36160
   },
   "core-react.cjs.js": {
     "bundled": 332240,
     "minified": 203276,
-    "gzipped": 39553
+    "gzipped": 39556
   },
   "core-react.esm.js": {
     "bundled": 327681,
     "minified": 198587,
-    "gzipped": 39277,
+    "gzipped": 39280,
     "treeshaked": {
       "rollup": {
         "code": 141234,

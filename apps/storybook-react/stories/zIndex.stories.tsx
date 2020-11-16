@@ -14,7 +14,20 @@ import {
   Typography,
   SideSheet,
 } from '@equinor/eds-core-react'
-import { save } from '@equinor/eds-icons'
+import {
+  save,
+  folder,
+  copy,
+  paste,
+  edit,
+  delete_to_trash,
+  settings,
+  arrow_drop_right,
+  more_verticle,
+  pressure,
+  bearing,
+  cable,
+} from '@equinor/eds-icons'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 
@@ -22,7 +35,20 @@ const { Header } = TopBar
 const { Title, CustomContent, Actions } = Dialog
 const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover
 
-Icon.add({ save })
+Icon.add({
+  save,
+  folder,
+  copy,
+  paste,
+  edit,
+  delete_to_trash,
+  settings,
+  arrow_drop_right,
+  more_verticle,
+  pressure,
+  bearing,
+  cable,
+})
 
 export default {
   title: 'Documentation/Z-Index',
@@ -65,6 +91,29 @@ export const zIndex: Story<any> = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
   const [openPopover, setOpenPopover] = useState(false)
   const [openSideSheet, setOpenSideSheet] = useState(false)
+
+  const [menuState, setMenuState] = useState<{
+    buttonEl: HTMLButtonElement
+  }>({
+    buttonEl: null,
+  })
+
+  const { buttonEl } = menuState
+  const isOpen = Boolean(buttonEl)
+
+  const openMenu = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    const target = e.target as HTMLButtonElement
+    setMenuState({ buttonEl: target })
+  }
+
+  const closeMenu = () => {
+    setMenuState({ buttonEl: null })
+  }
+
   return (
     <Wrapper>
       <TopBar>
@@ -157,6 +206,36 @@ export const zIndex: Story<any> = () => {
               <Button variant="ghost" onClick={() => setOpenSideSheet(true)}>
                 Trigger Sidesheet
               </Button>
+            </FlexContainer>
+          </ListItem>
+
+          <ListItem>
+            <FlexContainer>
+              <Typography>Menu z-index: </Typography>
+              <Button
+                variant="ghost"
+                id="menuButton"
+                aria-controls="menu-on-button"
+                aria-haspopup="true"
+                aria-expanded={isOpen}
+                onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+              >
+                Open menu
+              </Button>
+              <Menu id="menu-iconbuttons" open anchorEl={buttonEl}>
+                <Button variant="ghost_icon">
+                  <Icon name="save" title="save"></Icon>
+                </Button>
+                <Button variant="ghost_icon">
+                  <Icon name="folder" title="folder"></Icon>
+                </Button>
+                <Button variant="ghost_icon">
+                  <Icon name="edit" title="edit"></Icon>
+                </Button>
+                <Button variant="ghost_icon">
+                  <Icon name="settings" title="settings"></Icon>
+                </Button>
+              </Menu>
             </FlexContainer>
           </ListItem>
 
