@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -38,16 +37,6 @@ const SimplePopover = ({
     </PopoverContent>
   </Popover>
 )
-
-SimplePopover.propTypes = {
-  open: PropTypes.bool,
-  placement: PropTypes.string,
-}
-
-SimplePopover.defaultProps = {
-  open: false,
-  placement: 'bottom',
-}
 
 describe('Popover', () => {
   it('Popover has correct placement', () => {
