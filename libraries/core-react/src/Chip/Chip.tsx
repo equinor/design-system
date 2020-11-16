@@ -40,7 +40,7 @@ const StyledChips = styled.div.attrs<StyleProps>(
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   align-items: center;
-  z-index: 999;
+  z-index: 10;
 
   svg {
     fill: ${enabled.typography.color};

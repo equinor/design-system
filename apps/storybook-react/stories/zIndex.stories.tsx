@@ -8,17 +8,24 @@ import {
   Search,
   Chip,
   Button,
+  Icon,
   Dialog,
   Snackbar,
+  Typography,
+  SideSheet,
 } from '@equinor/eds-core-react'
+import { save } from '@equinor/eds-icons'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 
 const { Header } = TopBar
 const { Title, CustomContent, Actions } = Dialog
+const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover
+
+Icon.add({ save })
 
 export default {
-  title: 'Customization/Z-Index',
+  title: 'Documentation/Z-Index',
 } as Meta
 
 const Wrapper = styled.div.attrs({ tabIndex: 0 })`
@@ -27,7 +34,7 @@ const Wrapper = styled.div.attrs({ tabIndex: 0 })`
 `
 
 const Body = styled.div`
-  background: #ebebeb;
+  background: #fafafa;
   display: grid;
   grid-row-gap: 16px;
   justify-items: center;
@@ -40,53 +47,135 @@ const TempButtonWrapper = styled.div`
   justify-content: end;
   justify-self: end;
 `
+const ListItem = styled.li`
+  padding-top: 8px;
+  height: 52px;
+  width: 400px;
+`
 
-export const zIndexExample: Story<any> = () => {
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-gap: 16px;
+`
+
+export const zIndex: Story<any> = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false)
   const [visibleScrim, setVisibleScrim] = useState(false)
-  const handleCloseDialog = () => {
-    setVisibleScrim(!visibleScrim)
-  }
-
+  const [openPopover, setOpenPopover] = useState(false)
+  const [openSideSheet, setOpenSideSheet] = useState(false)
   return (
     <Wrapper>
       <TopBar>
-        <Header>TopBar Header</Header>
+        <Header>TopBar z-index: </Header>
       </TopBar>
       <Body>
-        <Button onClick={() => setOpenSnackbar(true)}>Trigger Snackbar</Button>
-        <Snackbar
-          open={openSnackbar}
-          onClose={() => setOpenSnackbar(false)}
-          autoHideDuration={5000}
-          leftAlignFrom="1500px"
-        >
-          This is a snackbar!
-        </Snackbar>
-        <Button onClick={() => setVisibleScrim(true)}>
-          Trigger Dialog with Scrim
-        </Button>
-        {visibleScrim && (
-          <Scrim onClose={handleCloseDialog}>
-            <Dialog>
-              <Title>Title</Title>
-              <CustomContent scrollable>
-                Custom content scrollable
-              </CustomContent>
-              <Actions>
-                <TempButtonWrapper>
-                  <Button
-                    variant="ghost"
-                    onClick={() => setVisibleScrim(false)}
-                  >
-                    Cancel
+        <ol>
+          <ListItem>
+            <FlexContainer>
+              <Typography>Snackbar z-index: </Typography>
+              <Button variant="ghost" onClick={() => setOpenSnackbar(true)}>
+                Trigger Snackbar
+              </Button>
+            </FlexContainer>
+
+            <Snackbar
+              open={openSnackbar}
+              onClose={() => setOpenSnackbar(false)}
+              autoHideDuration={5000}
+              leftAlignFrom="1500px"
+            >
+              This is a snackbar!
+            </Snackbar>
+          </ListItem>
+
+          <ListItem>
+            <FlexContainer>
+              <Typography>Scrim z-index: </Typography>
+              <Button variant="ghost" onClick={() => setVisibleScrim(true)}>
+                Trigger Dialog with Scrim
+              </Button>
+            </FlexContainer>
+
+            {visibleScrim && (
+              <Scrim onClose={() => setVisibleScrim(false)}>
+                <Dialog>
+                  <Title>Title</Title>
+                  <CustomContent scrollable>
+                    Custom content scrollable
+                  </CustomContent>
+                  <Actions>
+                    <TempButtonWrapper>
+                      <Button
+                        variant="ghost"
+                        onClick={() => setVisibleScrim(false)}
+                      >
+                        Cancel
+                      </Button>
+                      <Button onClick={() => setVisibleScrim(false)}>OK</Button>
+                    </TempButtonWrapper>
+                  </Actions>
+                </Dialog>
+              </Scrim>
+            )}
+          </ListItem>
+
+          <ListItem>
+            <FlexContainer>
+              <Typography>Tooltip z-index: </Typography>
+
+              <Tooltip title="Tooltip">
+                <Button variant="ghost">Trigger Tooltip</Button>
+              </Tooltip>
+            </FlexContainer>
+          </ListItem>
+
+          <ListItem>
+            <FlexContainer>
+              <Typography>Popover z-index: </Typography>
+
+              <Popover onClose={() => setOpenPopover(false)} open={openPopover}>
+                <PopoverAnchor>
+                  <Button variant="ghost" onClick={() => setOpenPopover(true)}>
+                    Trigger Popover
                   </Button>
-                  <Button onClick={() => setVisibleScrim(false)}>OK</Button>
-                </TempButtonWrapper>
-              </Actions>
-            </Dialog>
-          </Scrim>
-        )}
+                </PopoverAnchor>
+                <PopoverTitle>Popover</PopoverTitle>
+                <PopoverContent>
+                  <Typography variant="body_short">
+                    Popover should never be over Scrim
+                  </Typography>
+                </PopoverContent>
+              </Popover>
+            </FlexContainer>
+          </ListItem>
+
+          <ListItem>
+            <FlexContainer>
+              <Typography>Sidesheet z-index: </Typography>
+              <Button variant="ghost" onClick={() => setOpenSideSheet(true)}>
+                Trigger Sidesheet
+              </Button>
+            </FlexContainer>
+          </ListItem>
+
+          <ListItem>
+            <FlexContainer>
+              <Typography>Chip z-index: </Typography>
+              <Chip>This is a chip </Chip>
+            </FlexContainer>
+          </ListItem>
+        </ol>
+        <SideSheet
+          style={{ marginTop: '104px' }}
+          variant="large"
+          title="Sidesheet"
+          open={openSideSheet}
+          onClose={() => setOpenSideSheet(false)}
+        >
+          <Typography>This is a sidesheet</Typography>
+        </SideSheet>
       </Body>
     </Wrapper>
   )
