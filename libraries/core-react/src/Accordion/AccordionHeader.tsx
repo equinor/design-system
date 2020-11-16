@@ -7,7 +7,6 @@ import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
 import { AccordionHeaderTitle } from './AccordionHeaderTitle'
 import { accordion as tokens } from './Accordion.tokens'
-import { Property } from 'csstype'
 import type { AccordionProps } from './Accordion.types'
 
 Icon.add({ chevron_down, chevron_up })
@@ -49,7 +48,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     fontSize: typography.fontSize,
     fontWeight: typography.fontWeight as number,
     lineHeight: typography.lineHeight,
-    textAlign: typography.textAlign as Property.TextAlign,
+    textAlign: typography.textAlign as CSSObject['textAlign'],
     margin: 0,
     height: '48px',
     display: 'flex',

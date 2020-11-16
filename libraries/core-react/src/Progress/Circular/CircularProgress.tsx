@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
-import CSS from 'csstype'
 import styled, { css, keyframes } from 'styled-components'
 import { progress as tokens } from '../Progress.tokens'
+import type { CSSObject } from 'styled-components'
 
 const indeterminate = keyframes`
     100% {
@@ -51,7 +51,7 @@ const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>(
   ) {
     const thickness = 4
     const progress = Math.round(value)
-    const circleStyle: CSS.Properties = {}
+    const circleStyle: CSSObject = {}
 
     const rootProps = {
       ...props,

@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
 import { useRef, useEffect, useState, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -33,7 +32,11 @@ const TabsWithRefs = () => {
   )
 }
 
-const TabsWithPanels = ({ selectedTabIndex = 0 }) => {
+const TabsWithPanels = ({
+  selectedTabIndex = 0,
+}: {
+  selectedTabIndex?: number
+}) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
 
   const handleChange = (index) => {
@@ -56,14 +59,6 @@ const TabsWithPanels = ({ selectedTabIndex = 0 }) => {
       </Tabs>
     </Fragment>
   )
-}
-
-TabsWithPanels.propTypes = {
-  selectedTabIndex: PropTypes.number,
-}
-
-TabsWithPanels.defaultProps = {
-  selectedTabIndex: 0,
 }
 
 describe('Tabs', () => {

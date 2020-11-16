@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css, keyframes } from 'styled-components'
+import type { CSSObject } from 'styled-components'
+
 import { progress as tokens } from '../Progress.tokens'
-import CSS from 'csstype'
 
 const indeterminate = keyframes`
   0%{
@@ -99,7 +100,7 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
       variant,
     }
 
-    const transformStyle: CSS.Properties = {
+    const transformStyle: CSSObject = {
       transform: barStyle,
     }
 

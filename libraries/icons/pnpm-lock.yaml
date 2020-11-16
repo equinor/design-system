@@ -4,6 +4,7 @@ devDependencies:
   rollup-plugin-delete: 2.0.0
   rollup-plugin-size-snapshot: 0.12.0_rollup@2.15.0
   rollup-plugin-typescript2: 0.27.2_rollup@2.15.0+typescript@4.0.2
+  tslib: 2.0.3
   typescript: 4.0.2
 lockfileVersion: 5.2
 packages:
@@ -2750,6 +2751,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==
+  /tslib/2.0.3:
+    dev: true
+    resolution:
+      integrity: sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
   /tty-browserify/0.0.0:
     dev: true
     resolution:
@@ -2947,4 +2952,5 @@ specifiers:
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-size-snapshot: ^0.12.0
   rollup-plugin-typescript2: ^0.27.2
+  tslib: ^2.0.3
   typescript: ^4.0.2
