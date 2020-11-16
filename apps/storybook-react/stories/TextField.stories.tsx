@@ -45,6 +45,12 @@ const ICONS = {
 export default {
   title: 'Components/TextField',
   component: TextField,
+  argTypes: {
+    rows: {
+      control: 'number',
+      description: 'Rows when "multiline" is true',
+    },
+  },
 } as Meta
 
 export const Default: Story<TextFieldProps> = (args) => (
