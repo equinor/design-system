@@ -24,7 +24,7 @@ const StyledSnackbar = styled.div.attrs(() => ({
   box-sizing: border-box;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 400;
   @media (min-width: ${({ leftAlignFrom }) => leftAlignFrom}) {
     left: auto;
     transform: none;
