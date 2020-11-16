@@ -16,7 +16,7 @@ export const Icon = styled(Icon_)<IconProps>`
   cursor: pointer;
   padding: 1px;
   border-radius: ${enabled.icon.border.radius};
-  z-index: 1000;
+  z-index: 11;
 
   &:hover {
     ${({ variant }) => {
