@@ -1,6 +1,8 @@
 import resolve from '@rollup/plugin-node-resolve'
 import pkg from './package.json'
 import typescript from 'rollup-plugin-typescript2'
+import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
+import del from 'rollup-plugin-delete'
 import commonjsPkg from './commonjs/package.json'
 
 // eslint-disable-next-line import/no-default-export
@@ -10,7 +12,12 @@ export default [
     watch: {
       clearScreen: true,
     },
-    plugins: [resolve(), typescript({ useTsconfigDeclarationDir: true })],
+    plugins: [
+      del({ targets: 'dist/*', runOnce: true }),
+      resolve(),
+      typescript({ useTsconfigDeclarationDir: true }),
+      sizeSnapshot(),
+    ],
     output: [
       {
         file: pkg.module,

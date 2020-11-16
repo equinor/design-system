@@ -1,0 +1,26 @@
+{
+  "tokens.cjs.js": {
+    "bundled": 81170,
+    "minified": 43176,
+    "gzipped": 3889
+  },
+  "tokens.umd.js": {
+    "bundled": 87061,
+    "minified": 43152,
+    "gzipped": 3933
+  },
+  "tokens.esm.js": {
+    "bundled": 81095,
+    "minified": 43111,
+    "gzipped": 3834,
+    "treeshaked": {
+      "rollup": {
+        "code": 42875,
+        "import_statements": 0
+      },
+      "webpack": {
+        "code": 43826
+      }
+    }
+  }
+}
