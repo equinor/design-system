@@ -12,7 +12,7 @@
   "core-react.esm.js": {
     "bundled": 327685,
     "minified": 198591,
-    "gzipped": 39291,
+    "gzipped": 39290,
     "treeshaked": {
       "rollup": {
         "code": 141238,
