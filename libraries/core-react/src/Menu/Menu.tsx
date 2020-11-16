@@ -21,7 +21,7 @@ type StyledProps = {
 
 const StyledPaper = styled(Paper)<StyledProps>`
   position: absolute;
-  z-index: 100;
+  z-index: 150;
   width: fit-content;
   min-width: fit-content;
   border-radius: ${border.radius};
