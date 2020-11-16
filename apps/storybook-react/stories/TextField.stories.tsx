@@ -49,6 +49,7 @@ export default {
     rows: {
       control: 'number',
       description: 'Rows when "multiline" is true',
+      default: 1,
     },
   },
 } as Meta
