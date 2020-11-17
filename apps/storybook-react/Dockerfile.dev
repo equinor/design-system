@@ -7,6 +7,7 @@ RUN npm install -g pnpm
 COPY ./package.yaml ./
 COPY ./pnpm-workspaces.yaml ./
 COPY ./.npmrc ./
+COPY ./.pnpm-lock.yaml ./
 
 # copy libraries
 WORKDIR /app/libraries
@@ -20,16 +21,16 @@ COPY ./apps/storybook-react ./storybook-react
 
 # build storybook and dependencies
 WORKDIR /app
-RUN pnpm --filter @equinor/eds-core-react install && \
-  pnpm --filter @equinor/eds-core-react run build:for-storybook
+RUN pnpm --filter @equinor/eds-core-react install --frozen-lockfile && \
+  pnpm --filter @equinor/eds-core-react run build
 
-RUN pnpm --filter @equinor/eds-tokens install && \
+RUN pnpm --filter @equinor/eds-tokens install --frozen-lockfile && \
   pnpm --filter @equinor/eds-tokens run build
 
-RUN pnpm --filter @equinor/eds-icons install && \
+RUN pnpm --filter @equinor/eds-icons install --frozen-lockfile && \
   pnpm --filter @equinor/eds-icons run build
 
-RUN pnpm --filter @equinor/eds-storybook-react install
+RUN pnpm --filter @equinor/eds-storybook-react install --frozen-lockfile
 
 # build storybook
 RUN pnpm --filter @equinor/eds-storybook-react run build
