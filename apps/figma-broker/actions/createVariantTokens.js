@@ -4,7 +4,7 @@ import { fetchFigmaFile, processFigmaFile } from '../functions/figma'
 import { makeDesktopComponents } from '../files/desktop-ui'
 import { PATHS, FILE_IDS } from '../constants'
 
-export async function createComponentTokens() {
+export async function createVariantTokens() {
   const data = await fetchFigmaFile(FILE_IDS.DESKTOP_UI)
 
   const figmaFile = processFigmaFile(data)

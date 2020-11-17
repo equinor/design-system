@@ -10,7 +10,7 @@ import R from 'ramda'
 import {
   createTokens,
   createAssets,
-  createComponentTokens,
+  createVariantTokens,
   createFigmaImages,
 } from './actions'
 
@@ -29,7 +29,7 @@ const runAction = R.curry(async (action, ctx) => {
 
 router
   .post('/create-tokens', KoaBody(), runAction(createTokens))
-  .post('/create-component-tokens', KoaBody(), runAction(createComponentTokens))
+  .post('/create-variants', KoaBody(), runAction(createVariantTokens))
   .post('/create-assets', KoaBody(), runAction(createAssets))
   .post('/create-figma-images', KoaBody(), runAction(createFigmaImages))
 

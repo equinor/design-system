@@ -27,7 +27,7 @@ export const propName = (str = '') =>
   removeForbiddenCharacters(str)
     .toLowerCase()
     .trim()
-    .replace(/[\s+]/g, '_')
+    .replace(/[\s+]|[:\s+]/g, '_')
     .replace(/[/]/g, '__')
     .replace('___', '__')
 
