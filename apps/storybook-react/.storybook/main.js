@@ -1,3 +1,6 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
+
 module.exports = {
   // typescript: {
   //   reactDocgen: 'react-docgen',
@@ -19,4 +22,15 @@ module.exports = {
       },
     },
   ],
+  webpackFinal: async (config, { configType }) => {
+    config.plugins.push(new BundleAnalyzerPlugin())
+    config.resolve.alias.push({
+      'styled-components': path.resolve('./node_modules', 'styled-components'),
+    })
+    config.module.rules.push({
+      test: /\.stories\.tsx?$/,
+      loaders: [require.resolve('@storybook/source-loader')],
+      enforce: 'pre',
+    })
+  },
 }
