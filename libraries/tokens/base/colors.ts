@@ -364,9 +364,9 @@ export const colors = {
       rgba: 'rgba(255, 255, 255, 1)',
     },
     link_in_snackbars: {
-      hex: '#88e9fa',
-      hsla: 'hsla(189, 91.9%, 75.7%, 1)',
-      rgba: 'rgba(136, 233, 250, 1)',
+      hex: '#97cace',
+      hsla: 'hsla(184, 35.9%, 70%, 1)',
+      rgba: 'rgba(151, 202, 206, 1)',
     },
     pressed_overlay_dark: {
       hex: '#000000',
