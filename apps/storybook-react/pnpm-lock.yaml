@@ -26,6 +26,7 @@ devDependencies:
   babel-loader: 8.1.0_@babel+core@7.10.2
   react: 16.13.1
   react-is: 16.13.1
+  webpack-bundle-analyzer: 4.1.0
 lockfileVersion: 5.2
 packages:
   /@babel/code-frame/7.10.1:
@@ -4441,6 +4442,12 @@ packages:
       node: '>=0.4.0'
     resolution:
       integrity: sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA==
+  /acorn-walk/8.0.0:
+    dev: true
+    engines:
+      node: '>=0.4.0'
+    resolution:
+      integrity: sha512-oZRad/3SMOI/pxbbmqyurIx7jHw1wZDcR9G44L8pUVFEomX/0dH89SrM1KaDXuv1NpzAXz6Op/Xu/Qd5XXzdEA==
   /acorn/6.4.1:
     engines:
       node: '>=0.4.0'
@@ -4454,6 +4461,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-+G7P8jJmCHr+S+cLfQxygbWhXy+8YTVGzAkpEbcLo2mLoL7tij/VG41QSHACSf5QgYRhMZYHuNc6drJaO0Da+w==
+  /acorn/8.0.4:
+    dev: true
+    engines:
+      node: '>=0.4.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-XNP0PqF1XD19ZlLKvB7cMmnZswW4C/03pRHgirB30uSJTaS3A3V1/P4sS3HPvFmjoriPCJQs+JDSbm4bL1TxGQ==
   /address/1.1.2:
     engines:
       node: '>= 0.12.0'
@@ -5699,6 +5713,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
+  /commander/6.2.0:
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-zP4jEKbe8SHzKJYQmq8Y9gYjtO/POJLgIdKgV7B9qNmABVFVc+ctqSX6iXh4mCpJfRBOabiZ2YKPg8ciDw6C+Q==
   /commondir/1.0.1:
     resolution:
       integrity: sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
@@ -6773,6 +6793,12 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-u4AYWPgbI5GBhs6id1KdImZWn5yfyFrrQ8OWZdN7ZMfA8Bf4HcO0BGo9bmUIEV8yrp8I1xVfJ/dn90GtFNNJcg==
+  /filesize/6.1.0:
+    dev: true
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha512-LpCHtPQ3sFx67z+uh2HnSyWSLLu5Jxo21795uRDuar/EOuYWXib5EmPaGIBuSnRqH2IODiKA2k5re/K9OnN/Yg==
   /fill-range/4.0.0:
     dependencies:
       extend-shallow: 2.0.1
@@ -8936,6 +8962,11 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-mgLwQIx2F/ye9SmbrUkurZCnkoXyXyu9EbHtJZrICjVAJfyMArdHp3KkixGdZx1ZHFPNIwl0DDM1dFFqXbTLZw==
+  /opener/1.5.2:
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==
   /optionator/0.8.3:
     dependencies:
       deep-is: 0.1.3
@@ -11415,6 +11446,26 @@ packages:
     dev: true
     resolution:
       integrity: sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
+  /webpack-bundle-analyzer/4.1.0:
+    dependencies:
+      acorn: 8.0.4
+      acorn-walk: 8.0.0
+      chalk: 4.1.0
+      commander: 6.2.0
+      ejs: 3.1.5
+      express: 4.17.1
+      filesize: 6.1.0
+      gzip-size: 5.1.1
+      lodash: 4.17.20
+      mkdirp: 1.0.4
+      opener: 1.5.2
+      ws: 7.4.0
+    dev: true
+    engines:
+      node: '>= 10.13.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-R3oQaPn7KGJGqnOyuAbdNlH4Nm+w+gvoXQZWqYjgaMnR+vY4Ga8VD5ntfkKa00GarO7LQfOlePvtGvr254Z4Ag==
   /webpack-dev-middleware/3.7.2_webpack@4.44.1:
     dependencies:
       memory-fs: 0.4.1
@@ -11559,6 +11610,20 @@ packages:
     dev: true
     resolution:
       integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==
+  /ws/7.4.0:
+    dev: true
+    engines:
+      node: '>=8.3.0'
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    resolution:
+      integrity: sha512-kyFwXuV/5ymf+IXhS6f0+eAFvydbaBW3zjpT6hUdAh/hbVjTIB5EHBGi0bPoCLSK2wcuz3BrEkB9LrYv1Nm4NQ==
   /xtend/4.0.2:
     engines:
       node: '>=0.4'
@@ -11609,3 +11674,4 @@ specifiers:
   react-hook-form: ^5.7.2
   react-is: ^16.13.1
   styled-components: ^5.1.1
+  webpack-bundle-analyzer: ^4.1.0

@@ -15,11 +15,7 @@ scripts:
   'publish:core-react': >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
-  storybook-build: >-
-    pnpm --filter @equinor/eds-core-react install && pnpm --filter
-    @equinor/eds-core-react run build && pnpm --filter
-    @equinor/eds-storybook-react install && pnpm --filter
-    @equinor/eds-storybook-react run build
+  'build:storybook': pnpm --filter @equinor/eds-storybook-react run build
   storybook: pnpm --filter @equinor/eds-storybook-react run dev
   storefront: pnpm --filter @equinor/eds-storefront run dev
   storefront-build: pnpm --filter @equinor/eds-core-react install

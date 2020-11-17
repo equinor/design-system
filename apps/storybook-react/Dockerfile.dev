@@ -20,21 +20,9 @@ COPY ./libraries/icons ./icons
 WORKDIR /app/apps
 COPY ./apps/storybook-react ./storybook-react
 
-# build storybook and dependencies
-WORKDIR /app
-RUN pnpm --filter @equinor/eds-tokens install --frozen-lockfile \
-  && pnpm --filter @equinor/eds-tokens run build
-
-RUN pnpm --filter @equinor/eds-icons install --frozen-lockfile \
-  && pnpm --filter @equinor/eds-icons run build
-
-RUN pnpm --filter @equinor/eds-core-react install --frozen-lockfile \
-  && pnpm build:core-react
-
 # build storybook
-RUN pnpm --filter @equinor/eds-storybook-react install --frozen-lockfile \
-  && pnpm build:storybook
-
+WORKDIR /app
+RUN pnpm m i --frozen-lockfile && pnpm build:storybook
 RUN mv ./apps/storybook-react/dist ./storybook
 
 # host
