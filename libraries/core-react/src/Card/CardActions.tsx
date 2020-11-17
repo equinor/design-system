@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
+import type { CSSObject } from 'styled-components'
 import { Typography } from '../Typography'
 
 export type CardActionProps = {
@@ -10,7 +11,7 @@ export type CardActionProps = {
   meta?: string
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledCardActions = styled.div<React.CSSProperties>`
+const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
