@@ -28,5 +28,5 @@ export * from './Progress'
 export * from './Breadcrumbs'
 export * from './Menu'
 export * from './Pagination'
-export * from './Select/NativeSelect'
+export * from './Select'
 /* eslint-enable */
