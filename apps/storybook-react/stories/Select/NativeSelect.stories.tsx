@@ -9,7 +9,7 @@ export default {
 
 export const Default: Story<NativeSelectProps> = (args) => (
   <NativeSelect label="Label text" {...args}>
-    <option>First</option>
+    <option>First option with a really really long text</option>
     <option>Second</option>
   </NativeSelect>
 )
