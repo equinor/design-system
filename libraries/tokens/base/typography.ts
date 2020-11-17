@@ -296,7 +296,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 700,
-      lineHeight: '1.714em',
+      lineHeight: '1.429em',
       textAlign: 'left',
     },
     cell_text: {
@@ -304,7 +304,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
-      lineHeight: '1.714em',
+      lineHeight: '1.429em',
       textAlign: 'left',
     },
     cell_text_bold: {
@@ -312,7 +312,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 700,
-      lineHeight: '1.714em',
+      lineHeight: '1.429em',
       textAlign: 'left',
     },
     cell_text_link: {
@@ -320,7 +320,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '0.875rem',
       fontWeight: 500,
-      lineHeight: '1.714em',
+      lineHeight: '1.429em',
       textDecoration: 'underline',
       textAlign: 'left',
     },
