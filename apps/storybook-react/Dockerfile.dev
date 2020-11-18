@@ -1,8 +1,7 @@
-FROM node:14-buster
-# as builder
+FROM node:14-buster as builder
 
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-  && apt-get -y install --no-install-recommends fish neovim
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+  # && apt-get -y install --no-install-recommends fish neovim
 
 WORKDIR /app
 
@@ -27,11 +26,11 @@ COPY ./apps/storybook-react ./storybook-react
 
 # build storybook
 WORKDIR /app
-# RUN pnpm m i && pnpm build:storybook
-# RUN mv ./apps/storybook-react/dist ./storybook
+RUN pnpm m i && pnpm build:storybook
+RUN mv ./apps/storybook-react/dist ./storybook
 
 # host
-# FROM nginx:1.15.8-alpine
-# WORKDIR /app
-# COPY --from=builder ./app/storybook /app
-# COPY ./apps/storybook-react/nginx.conf /etc/nginx/conf.d/default.conf
+FROM nginx:1.15.8-alpine
+WORKDIR /app
+COPY --from=builder ./app/storybook /app
+COPY ./apps/storybook-react/nginx.conf /etc/nginx/conf.d/default.conf
