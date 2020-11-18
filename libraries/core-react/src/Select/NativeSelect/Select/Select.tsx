@@ -10,6 +10,7 @@ import {
 
 const StyledSelect = styled.select`
  border: none;
+ border-radius: 0;
   box-shadow: inset 0 -${tokens.default.border.bottom.width} 0 0 ${
   tokens.default.border.bottom.color
 };
