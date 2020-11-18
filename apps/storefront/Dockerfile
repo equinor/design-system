@@ -8,29 +8,18 @@ COPY ./package.yaml ./
 COPY ./pnpm-workspaces.yaml ./
 COPY ./.npmrc ./
 
-# copy libraries
-WORKDIR /app/libraries
-COPY ./libraries/tokens ./tokens
-COPY ./libraries/core-react ./core-react
-COPY ./libraries/icons ./icons
-
 # copy storefront
 WORKDIR /app/apps
 COPY ./apps/storefront ./storefront
 
 # build storefront and dependencies
 WORKDIR /app
-RUN pnpm --filter ./libraries/tokens install && \
-  pnpm --filter ./libraries/tokens run build
 
-RUN pnpm --filter ./libraries/core-react install && \
-  pnpm --filter ./libraries/core-react run build:for-storybook
-
-RUN pnpm --filter ./apps/storefront install
+RUN pnpm m i
 
 # build storefront
 ARG GATSBY_STAGE
-RUN pnpm --filter ./apps/storefront run build
+RUN pnpm build:storefront
 RUN mv ./apps/storefront/public ./storefront
 
 # host
