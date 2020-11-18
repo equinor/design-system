@@ -35,13 +35,13 @@ export type SelectVariantProps = {
       bottom: { color: string; width: string }
     }
     focus: {
-      icon: {
-        color: string
-      }
       border: {
         width: string
         color: string
       }
+    }
+    disabled: {
+      color: string
     }
   }
 }
@@ -49,7 +49,7 @@ export type SelectVariantProps = {
 export const select: SelectVariantProps = {
   background: colors.ui.background__light.hex,
   typography: typography.input.text,
-  color: colors.text.static_icons__default.hex,
+  color: colors.text.static_icons__tertiary.hex,
   spacings,
   default: {
     /*    icon: {
@@ -61,13 +61,13 @@ export const select: SelectVariantProps = {
       bottom: { color: colors.text.static_icons__tertiary.hex, width: '1px' },
     },
     focus: {
-      icon: {
-        color: colors.interactive.primary__resting.hex,
-      },
       border: {
         width: '2px',
         color: colors.interactive.primary__resting.hex,
       },
+    },
+    disabled: {
+      color: colors.interactive.disabled__text.hex,
     },
   },
 }
