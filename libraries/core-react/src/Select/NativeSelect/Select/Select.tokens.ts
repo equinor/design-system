@@ -14,12 +14,6 @@ const spacings = {
     top: '6px',
     bottom: '6px',
   },
-  /*   icon: {
-      left: comfortable.small,
-      right: comfortable.small,
-      top: '10px',
-      bottom: '10px',
-    }, */
 }
 
 export type SelectVariantProps = {
