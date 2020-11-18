@@ -1,25 +1,25 @@
 {
   "core-react.umd.js": {
-    "bundled": 345513,
-    "minified": 168860,
-    "gzipped": 36860
+    "bundled": 346074,
+    "minified": 169082,
+    "gzipped": 36907
   },
   "core-react.cjs.js": {
-    "bundled": 335927,
-    "minified": 206152,
-    "gzipped": 40289
+    "bundled": 336472,
+    "minified": 206391,
+    "gzipped": 40326
   },
   "core-react.esm.js": {
-    "bundled": 331347,
-    "minified": 201437,
-    "gzipped": 40006,
+    "bundled": 331880,
+    "minified": 201664,
+    "gzipped": 40044,
     "treeshaked": {
       "rollup": {
-        "code": 143316,
+        "code": 143268,
         "import_statements": 294
       },
       "webpack": {
-        "code": 155031
+        "code": 154983
       }
     }
   }
