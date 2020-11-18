@@ -7,7 +7,7 @@ export const makeDesktopComponents = (figmaFile) => {
   const { pages, getStyle } = figmaFile
 
   pages.forEach((page) => {
-    const name = propName(page.name)
+    const name = propName(page.name).replace('__', '_')
     const data = page.children
 
     const componentSets = R.filter(withType('component_set'), data)

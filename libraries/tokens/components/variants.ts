@@ -29,34 +29,34 @@ export const divider = {
   size: ['small', 'medium'],
 }
 
-export const navigation__breadcrumbs = {
+export const navigation_breadcrumbs = {
   dark_theme: ['false', 'true'],
   state: ['enabled', 'focus', 'hover'],
 }
 
-export const navigation__pagination = {
+export const navigation_pagination = {
   dark_theme: ['false', 'true'],
   range_and_total: ['true', 'false'],
   range_select: ['true', 'false'],
 }
 
-export const navigation__tabs = {
+export const navigation_tabs = {
   dark_theme: ['false', 'true'],
   state: ['enabled', 'focus', 'hover', 'pressed', 'disabled'],
   active: ['true', 'false'],
 }
 
-export const navigation__top_bar = {
+export const navigation_top_bar = {
   dark_theme: ['false', 'true'],
   with_navigation: ['false', 'true'],
 }
 
-export const notifications__banner = {
+export const notifications_banner = {
   dark_theme: ['false', 'true'],
   variant: ['text', 'actions', 'text__icon'],
 }
 
-export const notifications__dialog = {
+export const notifications_dialog = {
   dark_theme: ['false', 'true'],
   variant: [
     'placeholder__actions',
@@ -67,7 +67,7 @@ export const notifications__dialog = {
   ],
 }
 
-export const notifications__snackbar = {
+export const notifications_snackbar = {
   dark_theme: ['false', 'true'],
 }
 
