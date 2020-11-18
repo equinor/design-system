@@ -14,7 +14,7 @@ const LabelBase = styled.label`
   color: ${tokens.color};
 `
 
-const Text = styled.p`
+const Text = styled.span`
   margin: 0;
 `
 
