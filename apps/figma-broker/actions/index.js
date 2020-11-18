@@ -1,4 +1,4 @@
 export { createAssets } from './createAssets'
 export { createTokens } from './createTokens'
-export { createComponentTokens } from './createComponentTokens'
+export { createVariantTokens } from './createVariantTokens'
 export { createFigmaImages } from './createFigmaImages'

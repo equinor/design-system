@@ -27,7 +27,7 @@ export const propName = (str = '') =>
   removeForbiddenCharacters(str)
     .toLowerCase()
     .trim()
-    .replace(/[\s+]/g, '_')
+    .replace(/[\s+]|[:\s+]/g, '_')
     .replace(/[/]/g, '__')
     .replace('___', '__')
 
@@ -86,3 +86,6 @@ const capitalize = (word) => {
 }
 
 export const mergeStrings = R.reduce((acc, val) => `${acc}${val}`, '')
+
+export const toConst = (name, value) =>
+  `export const ${name} = ${JSON.stringify(value, null, 2)}\n`
