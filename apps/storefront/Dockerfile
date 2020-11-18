@@ -20,10 +20,9 @@ RUN pnpm m i
 # build storefront
 ARG GATSBY_STAGE
 RUN pnpm build:storefront
-RUN mv ./apps/storefront/public ./storefront
 
 # host
 FROM nginx:1.15.8-alpine
 WORKDIR /app
-COPY --from=builder ./app/storefront /app
+COPY --from=builder ./app/apps/storefront/public/ .
 COPY ./apps/storefront/nginx.conf /etc/nginx/conf.d/default.conf
