@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "start-storybook -p 9000 --ci --no-dll",
-    "build": "node --max_old_space_size=6144 ./node_modules/@storybook/react/bin/build.js --no-dll -c .storybook -o dist",
+    "build": "node --max_old_space_size=10000 --trace-deprecation ./node_modules/@storybook/react/bin/build.js --no-dll -c .storybook -o dist",
     "analyze:build": "webpack --profile --json > dist/stats.json",
     "analyze:serve": "webpack-bundle-analyzer dist/stats.json",
     "lint": "eslint stories/**/*.jsx"
