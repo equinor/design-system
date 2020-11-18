@@ -91,6 +91,7 @@ export const zIndex: Story<any> = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
   const [openPopover, setOpenPopover] = useState(false)
   const [openSideSheet, setOpenSideSheet] = useState(false)
+  const [visibleSideSheetScrim, setVisibleSideSheetScrim] = useState(false)
 
   const [menuState, setMenuState] = useState<{
     buttonEl: HTMLButtonElement
@@ -246,15 +247,30 @@ export const zIndex: Story<any> = () => {
             </FlexContainer>
           </ListItem>
         </ol>
-        <SideSheet
-          style={{ marginTop: '104px' }}
-          variant="large"
-          title="Sidesheet"
-          open={openSideSheet}
-          onClose={() => setOpenSideSheet(false)}
-        >
-          <Typography>This is a sidesheet</Typography>
-        </SideSheet>
+
+        <ListItem>
+          <FlexContainer>
+            <Typography>Sidesheet z-index: </Typography>
+            <Button
+              variant="ghost"
+              onClick={() => setVisibleSideSheetScrim(true)}
+            >
+              Trigger sidesheet with scrim
+            </Button>
+          </FlexContainer>
+        </ListItem>
+        {visibleSideSheetScrim && (
+          <Scrim onClose={() => setVisibleSideSheetScrim(false)}>
+            <SideSheet
+              variant="large"
+              title="Sidesheet"
+              open={visibleSideSheetScrim}
+              onClose={() => setOpenSideSheet(false)}
+            >
+              <Typography>This is a sidesheet</Typography>
+            </SideSheet>
+          </Scrim>
+        )}
       </Body>
     </Wrapper>
   )
