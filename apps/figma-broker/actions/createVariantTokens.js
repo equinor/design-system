@@ -1,4 +1,4 @@
-import { writeResults } from '../functions/file'
+import { writeFile } from '../functions/file'
 
 import { fetchFigmaFile, processFigmaFile } from '../functions/figma'
 import { makeDesktopComponents } from '../files/desktop-ui'
@@ -8,9 +8,9 @@ export async function createVariantTokens() {
   const data = await fetchFigmaFile(FILE_IDS.DESKTOP_UI)
 
   const figmaFile = processFigmaFile(data)
-  const components = makeDesktopComponents(figmaFile)
+  const variantsString = makeDesktopComponents(figmaFile)
 
-  writeResults(components, PATHS.COMPONENTS_TOKENS, 'ts')
+  writeFile(PATHS.COMPONENTS_TOKENS, 'variants', 'ts', variantsString)
 
-  return components
+  return variantsString
 }

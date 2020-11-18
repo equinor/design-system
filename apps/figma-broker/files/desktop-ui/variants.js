@@ -18,5 +18,4 @@ export const makeVariant = R.pipe(
   }),
   R.reduce(R.mergeWith(R.concat), {}),
   R.mapObjIndexed(R.uniq),
-  R.tap(console.log),
 )

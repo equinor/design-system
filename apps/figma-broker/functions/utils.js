@@ -86,3 +86,6 @@ const capitalize = (word) => {
 }
 
 export const mergeStrings = R.reduce((acc, val) => `${acc}${val}`, '')
+
+export const toConst = (name, value) =>
+  `export const ${name} = ${JSON.stringify(value, null, 2)}\n`

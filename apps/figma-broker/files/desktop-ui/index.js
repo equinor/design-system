@@ -1,9 +1,9 @@
 import R from 'ramda'
-import { propName, withType } from '@utils'
+import { propName, withType, toConst } from '@utils'
 import { makeVariant } from './variants'
 
 export const makeDesktopComponents = (figmaFile) => {
-  const components = []
+  let variantsBuffer = ''
   const { pages, getStyle } = figmaFile
 
   pages.forEach((page) => {
@@ -13,13 +13,10 @@ export const makeDesktopComponents = (figmaFile) => {
     const componentSets = R.filter(withType('component_set'), data)
 
     if (componentSets.length > 0) {
-      components.push({
-        name,
-        value: makeVariant(componentSets, getStyle),
-        path: 'variants',
-      })
+      const variantConst = toConst(name, makeVariant(componentSets, getStyle))
+      variantsBuffer = `${R.concat(variantsBuffer, variantConst)}\n`
     }
   })
 
-  return components
+  return variantsBuffer
 }
