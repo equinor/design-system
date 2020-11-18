@@ -30,6 +30,9 @@ export type SelectVariantProps = {
     input: Spacing
   }
   default: {
+    icon: {
+      width: string
+    }
     border: {
       outline: { color: string; width: string }
       bottom: { color: string; width: string }
@@ -52,10 +55,9 @@ export const select: SelectVariantProps = {
   color: colors.text.static_icons__tertiary.hex,
   spacings,
   default: {
-    /*    icon: {
-      color: colors.text.static_icons__tertiary.hex,
-      disabledColor: colors.interactive.disabled__fill.hex,
-    }, */
+    icon: {
+      width: '24px',
+    },
     border: {
       outline: { color: 'transparent', width: '1px' },
       bottom: { color: colors.text.static_icons__tertiary.hex, width: '1px' },

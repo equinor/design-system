@@ -20,7 +20,9 @@ const StyledSelect = styled.select`
   ${spacingsTemplate(tokens.spacings.input)}
   ${typographyTemplate(tokens.typography)}
   color: ${tokens.color};  
-  padding-right: calc(${tokens.spacings.input.right} *2 + 24px);
+  padding-right: calc(${tokens.spacings.input.right} *2 + ${
+  tokens.default.icon.width
+});
   display: block;
   margin: 0;
   appearance: none;
@@ -70,6 +72,8 @@ export type NativeSelectProps = {
   selectRef?: React.Ref<HTMLSelectElement>
   /** Disabled state */
   disabled?: boolean
+  /** The user can choose multiple items */
+  multiple?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
@@ -82,6 +86,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
       id,
       meta,
       disabled = false,
+      multiple = false,
       ...other
     },
     ref,
@@ -95,6 +100,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
       ref: selectRef,
       id,
       disabled,
+      multiple,
       ...other,
     }
 

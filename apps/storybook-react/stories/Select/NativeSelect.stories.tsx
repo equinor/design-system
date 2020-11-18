@@ -13,3 +13,12 @@ export const Default: Story<NativeSelectProps> = (args) => (
     <option>Second</option>
   </NativeSelect>
 )
+export const Multiple: Story<NativeSelectProps> = () => (
+  <NativeSelect label="Label text" id="default-select" multiple>
+    <option>First option with a really really long text</option>
+    <option>Second</option>
+    <option>Third</option>
+    <option>Another</option>
+    <option>Even another</option>
+  </NativeSelect>
+)
