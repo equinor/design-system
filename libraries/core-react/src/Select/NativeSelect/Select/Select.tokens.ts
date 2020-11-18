@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing } from '@equinor/eds-tokens'
+import type { Typography, Spacing, Focus } from '@equinor/eds-tokens'
 
 const {
   colors,
@@ -32,10 +32,7 @@ export type SelectVariantProps = {
       bottom: { color: string; width: string }
     }
     focus: {
-      border: {
-        width: string
-        color: string
-      }
+      border: Focus
     }
     disabled: {
       color: string
