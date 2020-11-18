@@ -7,7 +7,8 @@ scripts:
   'lint:storybook': pnpm run lint ./apps/storybook-react/stories
   'lint:core-react': pnpm run lint ./libraries/core-react/src
   init: pnpm multi install --force && pnpm run build
-  build: pnpm --filter @equinor/eds-core-react run build
+  core-react: pnpm --filter @equinor/eds-core-react run dev
+  'test:core-react': pnpm --filter @equinor/eds-core-react run test
   'build:core-react': pnpm --filter @equinor/eds-core-react run build
   'bump:core-react': >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
@@ -15,17 +16,15 @@ scripts:
   'publish:core-react': >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
-  storybook-build: >-
+  storybook: pnpm --filter @equinor/eds-storybook-react run dev
+  'build:storybook': >-
     pnpm --filter @equinor/eds-core-react install && pnpm --filter
     @equinor/eds-core-react run build && pnpm --filter
     @equinor/eds-storybook-react install && pnpm --filter
     @equinor/eds-storybook-react run build
-  storybook: pnpm --filter @equinor/eds-storybook-react run dev
   storefront: pnpm --filter @equinor/eds-storefront run dev
-  'build:storefront': pnpm --filter @equinor/eds-core-react install
-  core-react: pnpm --filter @equinor/eds-core-react run dev
+  'build:storefront': pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
-  test:core-react: pnpm --filter @equinor/eds-core-react run test
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   demo: pnpm --filter ./apps/demo run dev
   dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
