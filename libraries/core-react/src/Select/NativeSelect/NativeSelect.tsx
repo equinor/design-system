@@ -13,9 +13,9 @@ const Container = styled.div`
 const StyledSelect = styled.select`
   background-color: ${tokens.background};
   border: none;
-  border-bottom-color: ${tokens.default.border.bottom.color};
-  border-bottom-width: ${tokens.default.border.bottom.width};
-  border-bottom-style: solid;
+  box-shadow: inset 0 -${tokens.default.border.bottom.width} 0 0 ${
+  tokens.default.border.bottom.color
+};
   ${spacingsTemplate(tokens.spacings.input)}
   ${typographyTemplate(tokens.typography)}
   padding-right: calc(${tokens.spacings.input.right} *2 + 24px);
