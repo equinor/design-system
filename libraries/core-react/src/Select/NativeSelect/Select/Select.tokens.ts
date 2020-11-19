@@ -19,7 +19,6 @@ const spacings = {
 export type SelectVariantProps = {
   background: string
   typography: Typography
-  color: string
   spacings: {
     input: Spacing
   }
@@ -42,8 +41,10 @@ export type SelectVariantProps = {
 
 export const select: SelectVariantProps = {
   background: colors.ui.background__light.hex,
-  typography: typography.input.text,
-  color: colors.text.static_icons__tertiary.hex,
+  typography: {
+    ...typography.input.text,
+    color: colors.text.static_icons__tertiary.hex,
+  },
   spacings,
   default: {
     icon: {

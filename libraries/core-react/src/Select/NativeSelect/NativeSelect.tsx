@@ -16,12 +16,12 @@ export type NativeSelectProps = {
   label: string
   /** Meta text, for instance unit */
   meta?: string
-  /** Input ref */
-  selectRef?: React.Ref<HTMLSelectElement>
   /** Disabled state */
   disabled?: boolean
   /** The user can choose multiple items */
   multiple?: boolean
+  /** Ref for the select element */
+  selectRef?: React.Ref<HTMLSelectElement>
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(

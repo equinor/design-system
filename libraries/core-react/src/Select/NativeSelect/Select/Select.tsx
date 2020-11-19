@@ -16,7 +16,6 @@ const StyledSelect = styled.select`
 };
   ${spacingsTemplate(tokens.spacings.input)}
   ${typographyTemplate(tokens.typography)}
-  color: ${tokens.color};  
   padding-right: calc(${tokens.spacings.input.right} *2 + ${
   tokens.default.icon.width
 });
