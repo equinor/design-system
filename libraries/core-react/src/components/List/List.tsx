@@ -9,19 +9,17 @@ const { typography } = tokens
 type StyledListProps = {
   as: ElementType
 }
-
-const StyledList = styled.div<StyledListProps>(
-  ({ as }) =>
-    as === 'ol' &&
-    css`
-      & ol {
-        list-style-type: lower-alpha;
-      }
-    `,
-  `
-    ${typographyTemplate(typography)}
-    `,
-)
+const StyledList = styled.div<StyledListProps>`
+  ${({ as }) =>
+    as === 'ol'
+      ? css`
+          & ol {
+            list-style-type: lower-alpha;
+          }
+        `
+      : ''}
+  ${typographyTemplate(typography)}
+`
 
 export type ListProps = {
   /** Is the list an ordered or unordered list */

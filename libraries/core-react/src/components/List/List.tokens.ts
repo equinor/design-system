@@ -1,9 +1,14 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { Typography } from '@equinor/eds-tokens'
 
 const {
   typography: { paragraph },
 } = tokens
 
-export const list = {
+type ListToken = {
+  typography: Typography
+}
+
+export const list: ListToken = {
   typography: paragraph.body_short,
 }
