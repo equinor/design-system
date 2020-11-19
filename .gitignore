@@ -14,4 +14,4 @@ public
 # local docz testing
 docz-fresh
 .idea
-
+.size-snapshot.json
