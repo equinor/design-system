@@ -6,8 +6,8 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@hooks": ["src/hooks"],
-      "@utils": ["src/utils"]
+      "@hooks": ["src/hooks", "src/hooks/*"],
+      "@utils": ["src/utils", "src/utils/*"]
     }
   },
   "include": ["./src/**/*.ts*"],
