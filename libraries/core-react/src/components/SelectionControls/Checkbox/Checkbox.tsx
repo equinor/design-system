@@ -10,7 +10,7 @@ import {
 import type { IconData } from '@equinor/eds-icons'
 
 import { checkbox as tokens } from './Checkbox.tokens'
-import { typographyTemplate } from '../../../_common/templates'
+import { typographyTemplate } from '@utils/templates'
 
 const { color, enabled } = tokens
 

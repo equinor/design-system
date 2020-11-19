@@ -11,7 +11,7 @@ import {
   RefAttributes,
 } from 'react'
 import styled from 'styled-components'
-import { useCombinedRefs } from '../../_common/useCombinedRefs'
+import { useCombinedRefs } from 'src/hooks/useCombinedRefs'
 import { TabsContext } from './Tabs.context'
 import { Variants } from './Tabs.types'
 

@@ -6,8 +6,8 @@ import { Icon } from '../Icon'
 import { Card } from '../Card'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
-import { spacingsTemplate, typographyTemplate } from '../../_common/templates'
-import { useCombinedRefs } from '../../_common'
+import { spacingsTemplate, typographyTemplate } from '@utils/templates'
+import { useCombinedRefs } from '@hooks'
 
 import { popover as tokens, Placement } from './Popover.tokens'
 

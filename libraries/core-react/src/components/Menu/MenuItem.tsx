@@ -2,10 +2,9 @@ import * as React from 'react'
 import { MouseEvent } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { templates, useCombinedRefs } from '../../_common'
+import { useCombinedRefs } from '@hooks'
+import { spacingsTemplate, typographyTemplate } from '@utils/templates'
 import { useMenu } from './Menu.context'
-
-const { spacingsTemplate, typographyTemplate } = templates
 
 const {
   enabled: {

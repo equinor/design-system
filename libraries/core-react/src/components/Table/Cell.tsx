@@ -3,7 +3,7 @@ import { TdHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import type { Border } from '@equinor/eds-tokens'
 import { getTokens, TableCell } from './Table.tokens'
-import { typographyTemplate } from '../../_common/templates'
+import { typographyTemplate } from '@utils/templates'
 
 const borderTemplate = (borders: { bottom: Border }) =>
   Object.keys(borders).reduce((acc, val) => {

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { button, Button as ButtonType, ButtonGroups } from './Button.tokens'
-import { typographyTemplate } from '../../_common/templates'
+import { typographyTemplate } from '@utils/templates'
 
 const { colors } = button
 

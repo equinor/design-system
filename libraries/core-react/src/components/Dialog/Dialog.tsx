@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '../../_common/templates'
+import { typographyTemplate } from '@utils/templates'
 import { dialog as tokens } from './Dialog.tokens'
 
 const {

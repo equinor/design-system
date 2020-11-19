@@ -7,7 +7,7 @@ import {
   bordersTemplate,
   spacingsTemplate,
   typographyTemplate,
-} from '../../_common/templates'
+} from '@utils/templates'
 
 const {
   enabled,

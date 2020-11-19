@@ -2,11 +2,9 @@ import * as React from 'react'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { templates } from '../../_common'
+import { spacingsTemplate } from '@utils/templates'
 import { Divider } from '../Divider'
 import { Typography } from '../Typography'
-
-const { spacingsTemplate } = templates
 
 const {
   enabled: {

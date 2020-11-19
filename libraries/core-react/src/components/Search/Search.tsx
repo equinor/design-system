@@ -10,14 +10,14 @@ import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
 import { search as tokens } from './Search.tokens'
 import { Icon } from '../Icon'
-import { setReactInputValue, useCombinedRefs, templates } from '../../_common'
+import { spacingsTemplate, typographyTemplate } from '@utils/templates'
+import { setReactInputValue } from '@utils/setReactInputValue'
+import { useCombinedRefs } from '@hooks'
 
 const icons = {
   search,
   close,
 }
-
-const { spacingsTemplate, typographyTemplate } = templates
 
 Icon.add(icons)
 
