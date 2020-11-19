@@ -31,7 +31,7 @@ const StyledPopoverWrapper = styled.div<WrapperProps>`
   width: max-content;
   align-self: center;
   position: absolute;
-  z-index: 500;
+  z-index: 100;
   flex-shrink: 0;
   ::after {
     content: '';

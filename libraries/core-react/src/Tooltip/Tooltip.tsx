@@ -36,7 +36,7 @@ const StyledTooltipWrapper = styled.div<WrapperProps>`
     `}
   position: absolute;
   align-self: center;
-  z-index: 500;
+  z-index: 350;
   white-space: nowrap;
   ::after {
     content: '';

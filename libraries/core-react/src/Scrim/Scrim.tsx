@@ -10,7 +10,7 @@ const StyledScrim = styled.div`
   height: ${height};
   background: ${background};
   position: fixed;
-  z-index: 11;
+  z-index: 300;
   top: 0;
   left: 0;
   align-items: center;

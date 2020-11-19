@@ -20,7 +20,7 @@ const StyledTopBar = styled.header`
   position: sticky;
   background: ${background};
   box-sizing: border-box;
-  z-index: 1000;
+  z-index: 250;
   display: grid;
   grid-column-gap: ${spacings.left};
   grid-template-columns: auto 1fr auto;
