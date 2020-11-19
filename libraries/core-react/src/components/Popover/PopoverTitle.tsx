@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { Divider } from '../Divider'
-import { typographyTemplate } from '../_common/templates'
+import { typographyTemplate } from '../../_common/templates'
 
 import { popover as tokens } from './Popover.tokens'
 

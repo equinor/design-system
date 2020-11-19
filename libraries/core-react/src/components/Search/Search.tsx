@@ -10,7 +10,7 @@ import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
 import { search as tokens } from './Search.tokens'
 import { Icon } from '../Icon'
-import { setReactInputValue, useCombinedRefs, templates } from '../_common'
+import { setReactInputValue, useCombinedRefs, templates } from '../../_common'
 
 const icons = {
   search,

@@ -6,7 +6,7 @@ import type { NativeSelectProps } from '../NativeSelect'
 import {
   typographyTemplate,
   spacingsTemplate,
-} from '../../../_common/templates'
+} from '../../../../_common/templates'
 
 const StyledSelect = styled.select`
  border: none;
@@ -37,7 +37,7 @@ const StyledSelect = styled.select`
   tokens.default.focus.border.color
 };
   }
-  
+
   &:disabled {
     color: ${tokens.default.disabled.color};
     background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23bebebe' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"),
