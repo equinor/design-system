@@ -4,7 +4,7 @@
 http POST http://localhost:9001/create-tokens
 
 // Generates component tokens from Figma
-http POST http://localhost:9001/create-component-tokens
+http POST http://localhost:9001/create-variants
 
 // Generates assets from Figma
 http POST http://localhost:9001/create-assets

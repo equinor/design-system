@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'
-import { Table, TableProps } from '@equinor/eds-core-react'
+import { Table, TableProps, Typography } from '@equinor/eds-core-react'
 import './../style.css'
 
 const { Caption, Body, Row, Cell, Head } = Table
@@ -21,6 +21,9 @@ export default {
 
 export const simpleTable: Story<TableProps> = () => (
   <Table>
+    <Caption>
+      <Typography variant="h2">Star Wars Kill Count</Typography>
+    </Caption>
     <Head>
       <Row>
         <Cell as="th" scope="col">
