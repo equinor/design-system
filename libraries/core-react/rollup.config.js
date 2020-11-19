@@ -5,6 +5,7 @@ import babel from '@rollup/plugin-babel'
 import typescript from 'rollup-plugin-typescript2'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 import del from 'rollup-plugin-delete'
+import { typescriptPaths } from 'rollup-plugin-typescript-paths'
 
 import pkg from './package.json'
 
@@ -33,6 +34,7 @@ export default [
       del({ targets: 'dist/*', runOnce: true }),
       resolve({ extensions }),
       typescript({ useTsconfigDeclarationDir: true }),
+      typescriptPaths(),
       babel({
         exclude: 'node_modules/**',
         babelHelpers: 'bundled',
