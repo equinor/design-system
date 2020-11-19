@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '@utils/templates'
+import { typographyTemplate } from '@utils'
 
 import { topbar as tokens } from './TopBar.tokens'
 

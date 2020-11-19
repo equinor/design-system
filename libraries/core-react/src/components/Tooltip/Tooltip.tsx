@@ -8,7 +8,7 @@ import {
 } from 'react'
 import styled, { css } from 'styled-components'
 import type { CSSObject } from 'styled-components'
-import { spacingsTemplate, typographyTemplate } from '@utils/templates'
+import { spacingsTemplate, typographyTemplate } from '@utils'
 import { tooltip as tokens, Placement } from './Tooltip.tokens'
 
 const Wrapper = styled.div`

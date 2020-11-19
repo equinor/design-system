@@ -7,7 +7,7 @@
     "baseUrl": ".",
     "paths": {
       "@hooks": ["src/hooks"],
-      "@utils/*": ["src/utils/*"]
+      "@utils": ["src/utils"]
     }
   },
   "include": ["./src/**/*.ts*"],

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 import { switchControl as tokens } from './Switch.tokens'
-import { typographyTemplate } from '@utils/templates'
+import { typographyTemplate } from '@utils'
 import type { Size } from './Switch.types'
 
 const { enabled } = tokens

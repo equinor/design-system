@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
-import { typographyTemplate } from '@utils/templates'
+import { typographyTemplate } from '@utils'
 import { dialog as tokens } from './Dialog.tokens'
 
 const { title, spacingsMedium } = tokens

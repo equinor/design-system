@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef, OutputHTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '@utils/templates'
+import { typographyTemplate } from '@utils'
 import { slider as tokens } from './Slider.tokens'
 
 const { enabled } = tokens

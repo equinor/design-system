@@ -8,7 +8,7 @@ import {
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { radio as tokens } from './Radio.tokens'
-import { typographyTemplate } from '@utils/templates'
+import { typographyTemplate } from '@utils'
 
 const { color, enabled } = tokens
 

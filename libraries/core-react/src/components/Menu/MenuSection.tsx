@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { spacingsTemplate } from '@utils/templates'
+import { spacingsTemplate } from '@utils'
 import { Divider } from '../Divider'
 import { Typography } from '../Typography'
 

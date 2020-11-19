@@ -3,11 +3,7 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
 import { chip as tokens } from './Chip.tokens'
-import {
-  bordersTemplate,
-  spacingsTemplate,
-  typographyTemplate,
-} from '@utils/templates'
+import { bordersTemplate, spacingsTemplate, typographyTemplate } from '@utils'
 
 const {
   enabled,

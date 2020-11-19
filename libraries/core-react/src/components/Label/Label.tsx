@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '@utils/templates'
+import { typographyTemplate } from '@utils'
 import { label as tokens } from './Label.tokens'
 
 const LabelBase = styled.label`

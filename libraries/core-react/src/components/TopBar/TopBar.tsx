@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { spacingsTemplate, typographyTemplate } from '@utils/templates'
+import { spacingsTemplate, typographyTemplate } from '@utils'
 import { topbar as tokens } from './TopBar.tokens'
 
 export type TopbarProps = HTMLAttributes<HTMLElement>

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ReactNode } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate } from '@utils/templates'
+import { typographyTemplate } from '@utils'
 import {
   HelperTextVariantProps,
   helperText as tokens,
