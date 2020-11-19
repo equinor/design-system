@@ -17,6 +17,11 @@ trigger:
     include:
       - apps/storybook-react
 
+pr:
+  paths:
+    include:
+      - apps/storybook-react
+
 pool:
   vmImage: 'Ubuntu-16.04'
 
