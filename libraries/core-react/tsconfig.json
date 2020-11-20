@@ -3,7 +3,12 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "./dist/types",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@hooks": ["src/hooks", "src/hooks/*"],
+      "@utils": ["src/utils", "src/utils/*"]
+    }
   },
   "include": ["./src/**/*.ts*"],
   "exclude": ["node_modules"]

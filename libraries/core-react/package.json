@@ -69,6 +69,7 @@
     "rollup": "^2.15.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-size-snapshot": "^0.12.0",
+    "rollup-plugin-typescript-paths": "^1.2.2",
     "rollup-plugin-typescript2": "^0.27.2",
     "styled-components": "4.4.1",
     "ts-jest": "^26.3.0",

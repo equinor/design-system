@@ -1,1 +1,0 @@
-export { useOutsideClick } from './useOutsideClick'

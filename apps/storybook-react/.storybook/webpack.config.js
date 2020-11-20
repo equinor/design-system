@@ -7,6 +7,14 @@ module.exports = async ({ config, mode }) => ({
     alias: {
       ...config.resolve.alias,
       'styled-components': path.resolve('./node_modules', 'styled-components'),
+      '@hooks': path.resolve(
+        __dirname,
+        '../../../libraries/core-react/src/hooks',
+      ),
+      '@utils': path.resolve(
+        __dirname,
+        '../../../libraries/core-react/src/utils',
+      ),
     },
   },
   module: {

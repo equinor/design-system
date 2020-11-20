@@ -31,6 +31,7 @@ devDependencies:
   rollup: 2.15.0
   rollup-plugin-delete: 2.0.0
   rollup-plugin-size-snapshot: 0.12.0_rollup@2.15.0
+  rollup-plugin-typescript-paths: 1.2.2_typescript@4.0.2
   rollup-plugin-typescript2: 0.27.2_rollup@2.15.0+typescript@4.0.2
   styled-components: 4.4.1_react-dom@16.13.1+react@16.13.1
   ts-jest: 26.3.0_jest@26.0.1+typescript@4.0.2
@@ -6211,6 +6212,14 @@ packages:
       rollup: ^2.0.0
     resolution:
       integrity: sha512-3DrZdAUqRWgD7ZW7sMLtHqRfUqTnWZhP2CHsz/3RdyAL36uw/WQQBaKCmisntMRO9QPDno2USmUXSxS2U9NJcw==
+  /rollup-plugin-typescript-paths/1.2.2_typescript@4.0.2:
+    dependencies:
+      typescript: 4.0.2
+    dev: true
+    peerDependencies:
+      typescript: '>=3.x'
+    resolution:
+      integrity: sha512-MMdnzx4Qbj3kZnPivNTlfnCYTvFKvl2Ac+tlVyq3EUK90mmaY5wCz6oEofxwUAF0YTwp8jI5AsasqJmDUwhDXQ==
   /rollup-plugin-typescript2/0.27.2_rollup@2.15.0+typescript@4.0.2:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.15.0
@@ -7416,6 +7425,7 @@ specifiers:
   rollup: ^2.15.0
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-size-snapshot: ^0.12.0
+  rollup-plugin-typescript-paths: ^1.2.2
   rollup-plugin-typescript2: ^0.27.2
   styled-components: 4.4.1
   ts-jest: ^26.3.0
