@@ -59,8 +59,10 @@ export type InputVariantProps = {
 
 export const input = {
   background: colors.ui.background__light.hex,
-  typography: typography.input.text,
-  color: colors.text.static_icons__default.hex,
+  typography: {
+    ...typography.input.text,
+    color: colors.text.static_icons__tertiary.hex,
+  },
   spacings,
   default: {
     icon: {

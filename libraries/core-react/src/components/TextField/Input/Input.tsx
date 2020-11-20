@@ -19,19 +19,19 @@ const Variation = ({ variant }: { variant: InputVariantProps }) => {
   } = variant
 
   return css`
-    border-bottom: ${borderBottom.width} solid ${borderBottom.color};
+    border: none;
     outline: ${borderOutline.width} solid ${borderOutline.color};
-
+    box-shadow: inset 0 -${borderBottom.width} 0 0 ${borderBottom.color};
     &:active,
     &:focus {
       outline-offset: 0;
-      border-bottom: 1px solid transparent;
+      box-shadow: none;
       outline: ${focusBorderOutline.width} solid ${focusBorderOutline.color};
     }
 
     &:disabled {
       cursor: not-allowed;
-      border-bottom: 1px solid transparent;
+      box-shadow: none;
       outline: none;
 
       &:focus,
@@ -58,7 +58,6 @@ const StyledInput = styled.input<StyledProps>`
 
   ${({ spacings }) => spacingsTemplate(spacings)}
   ${typographyTemplate(tokens.typography)}
-  color: ${tokens.color};
 
   ${Variation}
 `
