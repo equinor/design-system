@@ -8,7 +8,7 @@ import { Sidebar } from '../Sidebar'
 import { MainContainer } from '../MainContainer'
 import { SkipLink } from '../../../components/SkipLink'
 import { BaseLayout } from '../../../components/BaseLayout'
-import SEO from '../../base/seo'
+import SEO from '../../base/Seo'
 import styled from 'styled-components'
 import './global.css'
 
