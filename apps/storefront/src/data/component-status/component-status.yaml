@@ -131,7 +131,7 @@ components:
         - *4
       react:
         - *4
-  - component: 'Navigation Navigation drawer'
+  - component: 'Navigation drawer'
     status:
       documentation:
         - *4
