@@ -17,7 +17,7 @@ module.exports = {
         mdPlugins: [remarkEmoji],
       },
     },
-    `gatsby-plugin-react-helmet`,
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {

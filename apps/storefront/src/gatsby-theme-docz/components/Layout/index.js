@@ -8,7 +8,7 @@ import { Sidebar } from '../Sidebar'
 import { MainContainer } from '../MainContainer'
 import { SkipLink } from '../../../components/SkipLink'
 import { BaseLayout } from '../../../components/BaseLayout'
-import SEO from '../../../components/seo'
+import SEO from '../../base/seo'
 import styled from 'styled-components'
 import './global.css'
 
@@ -24,6 +24,7 @@ const StyledSidebar = styled(Sidebar)`
 
 export const Layout = ({ doc, children }) => {
   const [open, setOpen] = useState(false)
+
   return (
     <BaseLayout>
       <SEO title={doc.value.metaTitle} />
