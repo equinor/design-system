@@ -52,7 +52,7 @@ export const spacingsTemplate = (spacings: Spacing): StyledCSS => css`
   padding-bottom: ${spacings.bottom};
 `
 
-export const bordersTemplate = (border: Border): StyledCSS => css`
+export const borderTemplate = (border: Border): StyledCSS => css`
   border-radius: ${border.radius};
   border-color: ${border.color};
   border-width: ${border.width};
