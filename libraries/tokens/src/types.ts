@@ -60,7 +60,7 @@ export type Focus = {
 }
 
 export type Hover = {
-  background: string
+  background: Background
   radius?: string
 }
 
@@ -84,6 +84,8 @@ export type Clickbound = {
       }
     | number
 }
+
+export type Background = string
 
 export type Border = {
   type?: 'border'

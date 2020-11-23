@@ -17,11 +17,15 @@ const {
     table: { cell_header: cellTypography },
   },
   colors: {
+    ui: {
+      background__medium: { rgba: borderColor },
+    },
     interactive: {
-      table__header__fill_resting: { rgba: tableHeaderRestingColor },
+      table__header__fill_resting: { rgba: backgroundColor },
+      table__cell__fill_hover: { rgba: hoverBackgroundColor },
       primary__resting: { rgba: primaryRestingColor },
-      disabled__text: { rgba: disabledText },
-      disabled__border: { rgba: disabledBorder },
+      disabled__text: { rgba: disabledTextColor },
+      disabled__border: { rgba: disabledBorderColor },
       focus: { rgba: focusColor },
     },
   },
@@ -102,6 +106,7 @@ type Variants = {
 
 type TableCellToken = {
   height: string
+  background: string
   spacings: Spacing
   border: Borders
   typography: Typography
@@ -141,13 +146,14 @@ const size = {
 const baseVariants: BaseVariantsProps = {
   header: {
     height: '48px',
+    background: backgroundColor,
     typography: cellTypography,
     border: {
       type: 'bordergroup',
       bottom: {
         type: 'border',
         width: '2px',
-        color: tableHeaderRestingColor,
+        color: borderColor,
         style: 'solid',
       },
     },
@@ -170,12 +176,12 @@ const baseVariants: BaseVariantsProps = {
       disabled: {
         typography: {
           ...cellTypography,
-          color: disabledText,
+          color: disabledTextColor,
         },
         border: {
           type: 'bordergroup',
           bottom: {
-            color: disabledBorder,
+            color: disabledBorderColor,
           },
         },
       },
@@ -186,6 +192,9 @@ const baseVariants: BaseVariantsProps = {
           width: '1px',
           style: 'dashed',
         },
+      },
+      hover: {
+        background: hoverBackgroundColor,
       },
     },
   },
