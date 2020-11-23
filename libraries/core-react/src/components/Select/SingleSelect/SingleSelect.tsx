@@ -1,9 +1,17 @@
 import * as React from 'react'
-import { useState } from 'react'
-import { forwardRef, SelectHTMLAttributes } from 'react'
+import { forwardRef, SelectHTMLAttributes, useState } from 'react'
 import { useCombobox } from 'downshift'
 import styled from 'styled-components'
 import { Label } from '../../Label'
+import { Button } from '../../Button'
+import { Icon } from '../../Icon'
+import { Input } from '../../TextField/Input'
+import { arrow_drop_down } from '@equinor/eds-icons'
+import { List } from '../../List'
+import { typographyTemplate, spacingsTemplate } from '@utils'
+import { singleselect as tokens } from './SingleSelect.tokens'
+
+const { ListItem } = List
 
 type OptionType = {
   id: string
@@ -12,24 +20,46 @@ type OptionType = {
 
 export type SingleSelectProps = {
   /** Option */
-  items: string[]
+  items?: string[]
+  /** Label for the select element */
+  label: string
 } & SelectHTMLAttributes<HTMLSelectElement>
 
-const comboboxStyles = { display: 'inline-block', marginLeft: '5px' }
+const StyledInputWrapper = styled.div`
+  position: relative;
+`
 
-const menuStyles = {
-  maxHeight: 80,
-  maxWidth: 300,
-  overflowY: 'scroll',
-  backgroundColor: '#eee',
-  padding: 0,
-  listStyle: 'none',
-  position: 'relative',
-}
+const StyledButton = styled(Button)`
+  position: absolute;
+  right: 0;
+  top: 0;
+`
+
+const StyledList = styled(List)`
+  background-color: ${tokens.background};
+  box-shadow: ${tokens.boxShadow};
+  overflow-y: scroll;
+  max-height: 160px;
+  padding: 0;
+  border-radius: ${tokens.borderRadius};
+  margin-top: 4px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 200;
+`
+
+const StyledListItem = styled(ListItem)`
+  list-style: none;
+  ${typographyTemplate(tokens.typography)};
+  ${spacingsTemplate(tokens.spacings)};
+  margin: 0;
+`
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
-  function SingleSelect({ items = [], ...other }, ref) {
+  function SingleSelect({ items = [], label, ...other }, ref) {
     const [inputItems, setInputItems] = useState(items)
+    /* const isOpen = true */
     const {
       isOpen,
       getToggleButtonProps,
@@ -51,22 +81,23 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     })
 
     return (
-      <div>
-        <label {...getLabelProps()}>Choose an element:</label>
-        <div style={comboboxStyles} {...getComboboxProps()}>
-          <input {...getInputProps()} />
-          <button
-            type="button"
+      <div style={{ position: 'relative' }}>
+        <Label {...getLabelProps()} label={label} />
+        <StyledInputWrapper {...getComboboxProps()}>
+          {/* <input {...getInputProps()} /> */}
+          <Input {...getInputProps({ refKey: 'ref' })} />
+          <StyledButton
+            variant="ghost_icon"
+            /* className={classes.button} */
             {...getToggleButtonProps()}
-            aria-label="toggle menu"
           >
-            &#8595;
-          </button>
-        </div>
-        <ul {...getMenuProps()} style={menuStyles}>
+            <Icon data={arrow_drop_down} title="open"></Icon>
+          </StyledButton>
+        </StyledInputWrapper>
+        <StyledList {...getMenuProps()}>
           {isOpen &&
             inputItems.map((item, index) => (
-              <li
+              <StyledListItem
                 style={
                   highlightedIndex === index
                     ? { backgroundColor: '#bde4ff' }
@@ -76,9 +107,9 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
                 {...getItemProps({ item, index })}
               >
                 {item}
-              </li>
+              </StyledListItem>
             ))}
-        </ul>
+        </StyledList>
       </div>
     )
   },

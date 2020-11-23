@@ -1,11 +1,16 @@
 import React from 'react'
 import { SingleSelect, SingleSelectProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react/types-6-0'
+import styled from 'styled-components'
 
 export default {
   title: 'Components/Select/SingleSelect',
   component: SingleSelect,
 } as Meta
+
+const Container = styled.div`
+  margin-bottom: 150px;
+`
 
 const items = [
   'Oslo',
@@ -22,5 +27,11 @@ const items = [
 ]
 
 export const Default: Story<SingleSelectProps> = (args) => (
-  <SingleSelect {...args} items={items}></SingleSelect>
+  <Container>
+    <SingleSelect
+      {...args}
+      items={items}
+      label="Choose an element"
+    ></SingleSelect>
+  </Container>
 )
