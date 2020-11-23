@@ -57,3 +57,8 @@ export const borderTemplate = (border: Border): StyledCSS => css`
   border-color: ${border.color};
   border-width: ${border.width};
 `
+
+export const boxshadowTemplate = (border: Border): StyledCSS =>
+  css({
+    boxShadow: `inset 0 -${border.width} 0 0 ${border.color};`,
+  })

@@ -21,13 +21,6 @@ export type TypographyTokens = {
   }
 }
 
-export type Border = {
-  type?: 'outline' | 'border'
-  radius?: string | number
-  color?: string
-  width?: string | number
-}
-
 export type Spacing = {
   left: string
   right: string
@@ -35,23 +28,7 @@ export type Spacing = {
   bottom?: string
 }
 
-export type Clickbounds = {
-  jumbo__base: string
-  default__base: string
-  default__input: string
-}
-
-export type Elevations = {
-  [P in keyof typeof elevation]: string
-}
-
-export type Color = {
-  hex: string
-  hsla: string
-  rgba: string
-}
-
-export type Spacings = {
+export type SpacingTokens = {
   comfortable: {
     xxx_large: string
     xx_large: string
@@ -63,6 +40,16 @@ export type Spacings = {
     x_small: string
     xx_small: string
   }
+}
+
+export type Elevations = {
+  [P in keyof typeof elevation]: string
+}
+
+export type Color = {
+  hex: string
+  hsla: string
+  rgba: string
 }
 
 export type Focus = {
@@ -81,6 +68,12 @@ export type Pressed = {
   color: string
 }
 
+export type Clickbounds = {
+  jumbo__base: string
+  default__base: string
+  default__input: string
+}
+
 export type Clickbound = {
   height: string
   width: string
@@ -91,3 +84,30 @@ export type Clickbound = {
       }
     | number
 }
+
+export type Border = {
+  type?: 'border'
+  radius?: string | number
+  color?: string
+  width?: string | number
+  style?: 'solid'
+}
+
+export type Outline = {
+  type: 'outline'
+  color: string
+  width: string
+  style: 'dashed'
+}
+
+export type Bordergroup = {
+  type?: 'bordergroup'
+  top?: Border
+  left?: Border
+  right?: Border
+  bottom?: Border
+}
+
+export type Borders = Border | Outline | Bordergroup
+
+export type Space = { comfortable: string; compact: string }

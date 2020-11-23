@@ -3,13 +3,30 @@ import { tokens } from '@equinor/eds-tokens'
 import type {
   Border,
   Clickbound,
-  Spacing,
   Typography,
+  Spacing,
+  Borders,
+  SpacingTokens,
 } from '@equinor/eds-tokens'
 
 const {
   components: {
     table: { header, cell },
+  },
+  typography: {
+    table: { cell_header: cellTypography },
+  },
+  colors: {
+    interactive: {
+      table__header__fill_resting: { rgba: tableHeaderRestingColor },
+      primary__resting: { rgba: primaryRestingColor },
+      disabled__text: { rgba: disabledText },
+      disabled__border: { rgba: disabledBorder },
+      focus: { rgba: focusColor },
+    },
+  },
+  spacings: {
+    comfortable: { medium },
   },
 } = tokens
 
@@ -83,6 +100,29 @@ type Variants = {
   }
 }
 
+type TableCellToken = {
+  height: string
+  spacings: Spacing
+  border: Borders
+  typography: Typography
+  states?: {
+    active?: Partial<TableCellToken>
+    disabled?: Partial<TableCellToken>
+    focus?: Partial<TableCellToken>
+    hover?: Partial<TableCellToken>
+  }
+}
+
+type BaseVariantsProps = {
+  header: TableCellToken
+  cell?: {
+    text: TableCellToken
+    numeric: TableCellToken
+    icon: TableCellToken
+    input: TableCellToken
+  }
+}
+
 const variants: Variants = {
   header: { text: header.text },
   cell: {
@@ -90,6 +130,64 @@ const variants: Variants = {
     numeric: cell.monospaced_numeric,
     icon: cell.icon,
     input: cell.input,
+  },
+}
+
+const size = {
+  compact: '48px',
+  comfortable: '32px',
+}
+
+const baseVariants: BaseVariantsProps = {
+  header: {
+    height: '48px',
+    typography: cellTypography,
+    border: {
+      type: 'bordergroup',
+      bottom: {
+        type: 'border',
+        width: '2px',
+        color: tableHeaderRestingColor,
+        style: 'solid',
+      },
+    },
+    spacings: {
+      left: medium,
+      right: medium,
+    },
+    states: {
+      active: {
+        typography: {
+          ...cellTypography,
+          color: primaryRestingColor,
+        },
+        border: {
+          bottom: {
+            color: primaryRestingColor,
+          },
+        },
+      },
+      disabled: {
+        typography: {
+          ...cellTypography,
+          color: disabledText,
+        },
+        border: {
+          type: 'bordergroup',
+          bottom: {
+            color: disabledBorder,
+          },
+        },
+      },
+      focus: {
+        border: {
+          type: 'outline',
+          color: focusColor,
+          width: '1px',
+          style: 'dashed',
+        },
+      },
+    },
   },
 }
 
