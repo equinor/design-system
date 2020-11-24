@@ -1,9 +1,10 @@
 import { tokens } from '@equinor/eds-tokens'
+
 import type {
   Border,
   Clickbound,
-  Typography,
   Spacing,
+  Typography,
 } from '@equinor/eds-tokens'
 
 const {
