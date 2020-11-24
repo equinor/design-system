@@ -23,7 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed 📓
 
-- Updated line height for Cell Text (`Table`) tokens and text color for `Snackbar` ([#824](https://github.com/equinor/design-system/issues/824))
 - Updated `z-index` values for correct layering of the components ([#872](https://github.com/equinor/design-system/issues/872))
 - Changed licence from GNU AGPL to MIT ([#852](https://github.com/equinor/design-system/issues/852))
 - Clean up use of spacings in `Card` ([#717](https://github.com/equinor/design-system/issues/717))
