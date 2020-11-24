@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2020-11-26
+
+### Added ✨
+
+- Typescript support in all of the EDS libraries! 🎉 ([Typescript Milestone](https://github.com/equinor/design-system/milestone/7?closed=1))
+- Created `NativeSelect` component ([#509](https://github.com/equinor/design-system/issues/509))
+- Added `Table` caption ([#621](https://github.com/equinor/design-system/issues/621))
+- Added `isExpanded` prop to be able to control `Accordion` externally ([#677](https://github.com/equinor/design-system/issues/677))
+
+### Fixed 🐛
+
+- Added a guard clause to handle null values for `Accordion` children ([#688](https://github.com/equinor/design-system/issues/688))
+- Fixed `CardMedia` spacing bug ([#603](https://github.com/equinor/design-system/issues/603))
+- Added props spread to `BannerAction` ([#478](https://github.com/equinor/design-system/issues/478))
+- Fixed a console warning in `Pagination` ([#647](https://github.com/equinor/design-system/issues/647))
+
+### Changed 📓
+
+- Updated line height for Cell Text (`Table`) tokens and text color for `Snackbar` ([#824](https://github.com/equinor/design-system/issues/824))
+- Updated `z-index` values for correct layering of the components ([#872](https://github.com/equinor/design-system/issues/872))
+- Changed licence from GNU AGPL to MIT ([#852](https://github.com/equinor/design-system/issues/852))
+- Clean up use of spacings in `Card` ([#717](https://github.com/equinor/design-system/issues/717))
+
+### Housekeeping 🏠
+
+- Removed unused dependencies ([#870](https://github.com/equinor/design-system/issues/870))
+- Bundle improvements ([#627](https://github.com/equinor/design-system/issues/627))
+
 ## [0.6.2] - 2020-09-16
 
 ### Fixed 🐛
