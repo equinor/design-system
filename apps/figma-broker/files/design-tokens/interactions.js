@@ -2,7 +2,7 @@ import R from 'ramda'
 import { propName, withType, pickChildren, toDict } from '@utils'
 import { toFocus, toOverlay } from '@transformers'
 
-const toStatesTokens = R.pipe(
+const toInteractionsTokens = R.pipe(
   R.filter(withType('frame')),
   pickChildren,
   R.filter(withType('component')),
@@ -29,4 +29,4 @@ const toStatesTokens = R.pipe(
   }),
   toDict,
 )
-export const makeStatesTokens = (states) => toStatesTokens(states)
+export const makeInteractionsTokens = (states) => toInteractionsTokens(states)
