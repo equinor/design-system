@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing, Borders, Space } from '@equinor/eds-tokens'
+import type { Typography, Spacing, Borders } from '@equinor/eds-tokens'
 import * as R from 'ramda'
 
 const {
@@ -95,20 +95,19 @@ const states: TableHeadStates = {
   },
 }
 
-type TableHeadTokens = {
-  enabled: TableHead
-  active: Partial<TableHead>
-  disabled: Partial<TableHead>
-  focus: Partial<TableHead>
-  hover: Partial<TableHead>
+type TableHeadTokens = TableHead & {
+  states: TableHeadStates
 }
 
 const mergeToken = R.curry(R.mergeDeepRight)(tableHead)
 
-export const tableHeadTokens: TableHeadTokens = {
-  enabled: tableHead,
-  active: mergeToken(states.active),
-  disabled: mergeToken(states.disabled),
-  focus: mergeToken(states.focus),
-  hover: mergeToken(states.hover),
+export const token: TableHeadTokens = {
+  ...tableHead,
+  states,
+  // states: {
+  //   active: mergeToken(states.active),
+  //   disabled: mergeToken(states.disabled),
+  //   focus: mergeToken(states.focus),
+  //   hover: mergeToken(states.hover),
+  // }
 }

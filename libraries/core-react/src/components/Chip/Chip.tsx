@@ -3,7 +3,7 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
 import { chip as tokens } from './Chip.tokens'
-import { borderTemplate, spacingsTemplate, typographyTemplate } from '@utils'
+import { bordersTemplate, spacingsTemplate, typographyTemplate } from '@utils'
 
 const {
   enabled,
@@ -58,7 +58,7 @@ const StyledChips = styled.div.attrs<StyleProps>(
     outline-offset: ${outlineOffset};
   }
 
-  ${borderTemplate(enabled.border)}
+  ${bordersTemplate(enabled.border)}
   ${spacingsTemplate(enabled.spacings)}
   ${typographyTemplate(enabled.typography)}
 

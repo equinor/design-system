@@ -1,6 +1,12 @@
 import { css } from 'styled-components'
 import type { FlattenSimpleInterpolation } from 'styled-components'
-import type { Typography, Border, Spacing } from '@equinor/eds-tokens'
+import type {
+  Typography,
+  Border,
+  Spacing,
+  Borders,
+  Outline,
+} from '@equinor/eds-tokens'
 
 type StyledCSS = FlattenSimpleInterpolation
 
@@ -52,11 +58,38 @@ export const spacingsTemplate = (spacings: Spacing): StyledCSS => css`
   padding-bottom: ${spacings.bottom};
 `
 
-export const borderTemplate = (border: Border): StyledCSS => css`
-  border-radius: ${border.radius};
-  border-color: ${border.color};
-  border-width: ${border.width};
-`
+const shorthand = ({ width, style, color }: Border | Outline): string =>
+  `${width} ${style} ${color}`
+
+export const bordersTemplate = (border: Borders): StyledCSS => {
+  switch (border.type) {
+    case 'border':
+      return css({
+        border: shorthand(border),
+        borderRadius: border.radius,
+      })
+    case 'outline':
+      return css({
+        outline: shorthand(border),
+        outlineOffset: border.offset,
+      })
+    case 'bordergroup':
+      const {
+        left: { radius: leftRadius },
+        right: { radius: rightRadius },
+      } = border
+      return css({
+        borderBottom: shorthand(border.bottom),
+        borderTop: shorthand(border.top),
+        borderLeft: shorthand(border.left),
+        borderRight: shorthand(border.right),
+        borderBottomLeftRadius: leftRadius,
+        borderTopLeftRadius: leftRadius,
+        borderBottomRightRadius: rightRadius,
+        borderTopRightRadius: rightRadius,
+      })
+  }
+}
 
 export const boxshadowTemplate = (border: Border): StyledCSS =>
   css({

@@ -100,16 +100,15 @@ export type Outline = {
   color: string
   width: string
   style: 'dashed'
+  offset?: string
 }
 
 export type Bordergroup = {
   type?: 'bordergroup'
-  top?: Border
+  top?: Omit<Border, 'radius'>
   left?: Border
   right?: Border
-  bottom?: Border
+  bottom?: Omit<Border, 'radius'>
 }
 
 export type Borders = Border | Outline | Bordergroup
-
-export type Space = { comfortable: string; compact: string }

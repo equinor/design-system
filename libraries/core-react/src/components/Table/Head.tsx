@@ -1,32 +1,16 @@
 import * as React from 'react'
 import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
-import { getTokens, TableCell } from './Table.tokens'
-import type { Border } from '@equinor/eds-tokens'
+import { token } from './Table.Head.tokens'
+import { bordersTemplate } from '@utils'
 
-const borderTemplate = (borders: { bottom: Border }): string =>
-  Object.keys(borders).reduce((acc, val) => {
-    const { color, width }: Border = borders[val] as Border
-    return `${acc} border-${val}: ${width} solid ${color}; \n`
-  }, '')
-
-type StyledTableHeadProps = {
-  token: TableCell
-}
-
-const StyledTableHead = styled.thead<StyledTableHeadProps>`
-  ${({ token: { borders, background } }) => css`
-      ${borderTemplate(borders)}
-      background: ${background};`}
+const StyledTableHead = styled.thead`
+  ${bordersTemplate(token.border)}
+  background: ${token.background};
 `
 
 export const Head: FunctionComponent = ({ children, ...props }) => {
-  const token = getTokens('th', 'text')
-  return (
-    <StyledTableHead token={token} {...props}>
-      {children}
-    </StyledTableHead>
-  )
+  return <StyledTableHead {...props}>{children}</StyledTableHead>
 }
 
 // Head.displayName = 'eds-table-head'
