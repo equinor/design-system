@@ -33,27 +33,28 @@ export const toSpacer = (name, box) => {
 export const toFocus = (figmaNode) => {
   if (R.isNil(figmaNode)) return {}
 
-  const focus = R.head(figmaNode.children)
-  const { strokeDashes, strokes, cornerRadius } = focus
+  const focus = Array.isArray(figmaNode.children)
+    ? R.head(figmaNode.children)
+    : figmaNode
+  const { strokeDashes, strokes } = focus
   const stroke = strokes.find(withType('solid')) || fallback
-  const [dashWidth, dashGap] = strokeDashes
-  const focusStyle = typeof strokeDashes === 'undefined' ? '' : 'dashed'
-  const radius = cornerRadius === 100 ? '50%' : px(cornerRadius)
+  const [dashWidth] = strokeDashes
+  const style = typeof strokeDashes === 'undefined' ? '' : 'dashed'
 
   return removeNilAndEmpty({
-    type: focusStyle,
+    style,
     color: fillToRgba(stroke),
     width: px(dashWidth),
-    gap: px(dashGap),
-    radius,
   })
 }
 
 export const toOverlay = (figmaNode) => {
   if (R.isNil(figmaNode)) return {}
 
-  const fill = figmaNode.fills.find(withType('solid')) || fallback
+  const { fills, blendMode } = figmaNode
+  const fill = fills.find(withType('solid')) || fallback
   return {
+    blendMode,
     pressedColor: fillToRgba(fill),
   }
 }
