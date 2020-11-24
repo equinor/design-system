@@ -58,8 +58,14 @@ export const spacingsTemplate = (spacings: Spacing): StyledCSS => css`
   padding-bottom: ${spacings.bottom};
 `
 
-const shorthand = ({ width, style, color }: Border | Outline): string =>
-  `${width} ${style} ${color}`
+const shorthand = (border: Border | Outline): string => {
+  if (!border) {
+    return undefined
+  }
+  const { width = '', style = 'solid', color = '' } = border
+
+  return `${width} ${style} ${color}`
+}
 
 export const bordersTemplate = (border: Borders): StyledCSS => {
   switch (border.type) {
@@ -74,10 +80,8 @@ export const bordersTemplate = (border: Borders): StyledCSS => {
         outlineOffset: border.offset,
       })
     case 'bordergroup':
-      const {
-        left: { radius: leftRadius },
-        right: { radius: rightRadius },
-      } = border
+      const leftRadius = border?.left?.radius
+      const rightRadius = border?.right?.radius
       return css({
         borderBottom: shorthand(border.bottom),
         borderTop: shorthand(border.top),
@@ -88,6 +92,8 @@ export const bordersTemplate = (border: Borders): StyledCSS => {
         borderBottomRightRadius: rightRadius,
         borderTopRightRadius: rightRadius,
       })
+    default:
+      return css({})
   }
 }
 
