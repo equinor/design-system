@@ -1,6 +1,6 @@
 dependencies:
-  '@equinor/eds-icons': 0.5.0-beta.2
-  '@equinor/eds-tokens': 0.5.1-beta.2
+  '@equinor/eds-icons': 'link:../icons'
+  '@equinor/eds-tokens': 'link:../tokens'
 devDependencies:
   '@babel/cli': 7.10.1_@babel+core@7.10.2
   '@babel/core': 7.10.2
