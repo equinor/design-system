@@ -3,6 +3,7 @@ import type { FlattenSimpleInterpolation } from 'styled-components'
 import type { Typography, Border, Spacing } from '@equinor/eds-tokens'
 
 export * from './borders'
+export * from './focus'
 
 type StyledCSS = FlattenSimpleInterpolation
 

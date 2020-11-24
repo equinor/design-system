@@ -1,17 +1,7 @@
 import { css } from 'styled-components'
-import type { FlattenSimpleInterpolation } from 'styled-components'
-import type { Border, Borders, Outline } from '@equinor/eds-tokens'
 
-type StyledCSS = FlattenSimpleInterpolation
-
-const shorthand = (border: Border | Outline): string => {
-  if (!border) {
-    return undefined
-  }
-  const { width = '', style = 'solid', color = '' } = border
-
-  return `${width} ${style} ${color}`
-}
+import type { Borders } from '@equinor/eds-tokens'
+import { shorthand, StyledCSS } from './common'
 
 export const bordersTemplate = (border: Borders): StyledCSS => {
   switch (border.type) {
@@ -19,11 +9,6 @@ export const bordersTemplate = (border: Borders): StyledCSS => {
       return css({
         border: shorthand(border),
         borderRadius: border.radius,
-      })
-    case 'outline':
-      return css({
-        outline: shorthand(border),
-        outlineOffset: border.offset,
       })
     case 'bordergroup':
       const leftRadius = border?.left?.radius

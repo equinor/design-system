@@ -6,14 +6,6 @@ export type Border = {
   style?: 'solid'
 }
 
-export type Outline = {
-  type: 'outline'
-  color: string
-  width: string
-  style: 'dashed'
-  offset?: string
-}
-
 export type Bordergroup = {
   type?: 'bordergroup'
   top?: Omit<Border, 'radius'>
@@ -22,4 +14,4 @@ export type Bordergroup = {
   bottom?: Omit<Border, 'radius'>
 }
 
-export type Borders = Border | Outline | Bordergroup
+export type Borders = Border | Bordergroup

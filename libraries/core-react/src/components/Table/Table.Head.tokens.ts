@@ -1,4 +1,4 @@
-import { tokens } from '@equinor/eds-tokens'
+import { Outline, tokens } from '@equinor/eds-tokens'
 import type { Typography, Spacing, Borders } from '@equinor/eds-tokens'
 import * as R from 'ramda'
 
@@ -24,15 +24,16 @@ const {
   },
 } = tokens
 
-type TableHead = {
+type ComponentToken = {
   height: string
   background: string
   spacings: Spacing
   border: Borders
   typography: Typography
+  outline?: Outline
 }
 
-const tableHead: TableHead = {
+const tableHead: ComponentToken = {
   height: '48px',
   background: backgroundColor,
   typography: cellTypography,
@@ -52,10 +53,10 @@ const tableHead: TableHead = {
 }
 
 type TableHeadStates = {
-  active: Partial<TableHead>
-  disabled: Partial<TableHead>
-  focus: Partial<TableHead>
-  hover: Partial<TableHead>
+  active: Partial<ComponentToken>
+  disabled: Partial<ComponentToken>
+  focus: Partial<ComponentToken>
+  hover: Partial<ComponentToken>
 }
 
 const states: TableHeadStates = {
@@ -83,7 +84,7 @@ const states: TableHeadStates = {
     },
   },
   focus: {
-    border: {
+    outline: {
       type: 'outline',
       color: focusColor,
       width: '1px',
@@ -95,7 +96,7 @@ const states: TableHeadStates = {
   },
 }
 
-type TableHeadTokens = TableHead & {
+type TableHeadTokens = ComponentToken & {
   states: TableHeadStates
 }
 
