@@ -4,6 +4,7 @@ import * as React from 'react'
 import { forwardRef, SelectHTMLAttributes, useState } from 'react'
 import { useCombobox, useMultipleSelection } from 'downshift'
 import { Label } from '../../Label'
+import { Input } from '../../TextField/Input'
 
 import styled from 'styled-components'
 
@@ -194,8 +195,8 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             </span>
           ))} */}
           <div style={comboboxStyles} {...getComboboxProps()}>
-            <input
-              {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
+            <Input
+              {...getInputProps({ refKey: 'ref' })}
               placeholder={placeholderText}
             />
             <button {...getToggleButtonProps()} aria-label={'toggle menu'}>
