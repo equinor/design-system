@@ -7,7 +7,7 @@ import { Label } from '../../Label'
 import { Input } from '../../TextField/Input'
 import { Button } from '../../Button'
 import { Icon } from '../../Icon'
-import { Checkbox } from '../../SelectionControls'
+import { CheckboxInput } from '../../SelectionControls/Checkbox/Input'
 import { arrow_drop_down } from '@equinor/eds-icons'
 import { List } from '../../List'
 import styled from 'styled-components'
@@ -54,11 +54,11 @@ type FullWidthCheckboxProps = {
   highlightedIndex: boolean
 }
 
-const FullWidthCheckbox = styled(Checkbox)<FullWidthCheckboxProps>`
+/* const FullWidthCheckbox = styled(Checkbox)<FullWidthCheckboxProps>`
   width: 100%;
   background-color: ${({ highlightedIndex }) =>
     highlightedIndex ? tokens.hover.background : tokens.background};
-`
+` */
 
 export type MultiSelectProps = {
   /** Option */
@@ -244,15 +244,14 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                 }
                 {...getItemProps({ item, index })}
               >
-                <FullWidthCheckbox
-                  label={item}
+                <CheckboxInput
                   checked={selectedItems.includes(item)}
                   value={item}
                   onChange={(e) => {
                     return null
                   }}
-                  highlightedIndex={highlightedIndex === index}
                 />
+                {item}
               </StyledListItem>
             ))}
         </StyledList>
