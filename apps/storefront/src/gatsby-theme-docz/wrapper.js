@@ -9,7 +9,7 @@ import SEO from '../components/seo'
 const Wrapper = ({ children }) => {
   return (
     <>
-      <SEO />
+      {/*   <SEO /> */}
       <Helmet>
         <meta charSet="utf-8" />
         <link
