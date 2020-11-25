@@ -9803,6 +9803,7 @@ packages:
   /react-textarea-autosize/8.2.0_7a81abeb4682dcd740958f1c62af662f:
     dependencies:
       '@babel/runtime': 7.12.1
+      '@types/react': 16.9.54
       react: 16.14.0
       use-composed-ref: 1.0.0_react@16.14.0
       use-latest: 1.1.0_7a81abeb4682dcd740958f1c62af662f
