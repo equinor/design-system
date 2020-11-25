@@ -56,6 +56,10 @@ const StyledListItem = styled(ListItem)`
   margin: 0;
 `
 
+const Container = styled.div`
+  position: relative;
+`
+
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
   function SingleSelect({ items = [], label, ...other }, ref) {
     const [inputItems, setInputItems] = useState(items)
@@ -81,16 +85,11 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     })
 
     return (
-      <div style={{ position: 'relative' }}>
+      <Container>
         <Label {...getLabelProps()} label={label} />
         <StyledInputWrapper {...getComboboxProps()}>
-          {/* <input {...getInputProps()} /> */}
           <Input {...getInputProps({ refKey: 'ref' })} />
-          <StyledButton
-            variant="ghost_icon"
-            /* className={classes.button} */
-            {...getToggleButtonProps()}
-          >
+          <StyledButton variant="ghost_icon" {...getToggleButtonProps()}>
             <Icon data={arrow_drop_down} title="open"></Icon>
           </StyledButton>
         </StyledInputWrapper>
@@ -100,7 +99,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               <StyledListItem
                 style={
                   highlightedIndex === index
-                    ? { backgroundColor: '#bde4ff' }
+                    ? {
+                        backgroundColor: tokens.hover.background,
+                        cursor: 'pointer',
+                      }
                     : {}
                 }
                 key={`${item}`}
@@ -110,7 +112,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               </StyledListItem>
             ))}
         </StyledList>
-      </div>
+      </Container>
     )
   },
 )

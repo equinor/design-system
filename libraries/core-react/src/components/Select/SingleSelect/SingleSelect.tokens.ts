@@ -23,6 +23,9 @@ type SingleSelect = {
   }
   typography: Typography
   borderRadius: string
+  hover: {
+    background: string
+  }
 }
 
 export const singleselect: SingleSelect = {
@@ -40,4 +43,7 @@ export const singleselect: SingleSelect = {
     color: colors.text.static_icons__tertiary.hex,
   },
   borderRadius: '4px',
+  hover: {
+    background: colors.ui.background__light.rgba,
+  },
 }
