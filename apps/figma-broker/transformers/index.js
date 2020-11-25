@@ -54,7 +54,7 @@ export const toOverlay = (figmaNode) => {
   const { fills, blendMode } = figmaNode
   const fill = fills.find(withType('solid')) || fallback
   return {
-    blendMode,
+    blendMode: R.toLower(blendMode),
     pressedColor: fillToRgba(fill),
   }
 }

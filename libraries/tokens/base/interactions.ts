@@ -1,6 +1,6 @@
 export const interactions = {
   pressed_dark_overlay: {
-    blendMode: 'DARKEN',
+    blendMode: 'darken',
     pressedColor: 'rgba(0, 0, 0, 0.2)',
   },
   focused: {
@@ -9,7 +9,7 @@ export const interactions = {
     width: '1px',
   },
   pressed_light_overlay: {
-    blendMode: 'PASS_THROUGH',
+    blendMode: 'pass_through',
     pressedColor: 'rgba(255, 255, 255, 0.2)',
   },
 }
