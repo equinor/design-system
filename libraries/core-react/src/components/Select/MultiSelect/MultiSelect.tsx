@@ -5,6 +5,9 @@ import { forwardRef, SelectHTMLAttributes, useState } from 'react'
 import { useCombobox, useMultipleSelection } from 'downshift'
 import { Label } from '../../Label'
 import { Input } from '../../TextField/Input'
+import { Button } from '../../Button'
+import { Icon } from '../../Icon'
+import { arrow_drop_down } from '@equinor/eds-icons'
 
 import styled from 'styled-components'
 
@@ -18,7 +21,9 @@ const menuStyles = {
   position: 'relative',
 }
 
-const comboboxStyles = { display: 'inline-block', marginLeft: '5px' }
+const StyledInputWrapper = styled.div`
+  position: relative;
+`
 
 const comboboxWrapperStyles = {
   display: 'inline-flex',
@@ -44,6 +49,12 @@ const menuMultipleStyles = {
   padding: 0,
   left: '340px',
 }
+
+const StyledButton = styled(Button)`
+  position: absolute;
+  right: 0;
+  top: 0;
+`
 
 const selectedItemIconStyles = { cursor: 'pointer' }
 
@@ -174,8 +185,8 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     return (
       <div>
         <Label {...getLabelProps()} label={label} />
-        <div style={comboboxWrapperStyles}>
-          {/* {selectedItems.map((selectedItem, index) => (
+        {/* <div style={comboboxWrapperStyles}> */}
+        {/* {selectedItems.map((selectedItem, index) => (
             <span
               style={selectedItemStyles}
               // eslint-disable-next-line react/no-array-index-key
@@ -194,16 +205,20 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               </span>
             </span>
           ))} */}
-          <div style={comboboxStyles} {...getComboboxProps()}>
-            <Input
-              {...getInputProps({ refKey: 'ref' })}
-              placeholder={placeholderText}
-            />
-            <button {...getToggleButtonProps()} aria-label={'toggle menu'}>
-              &#8595;
-            </button>
-          </div>
-        </div>
+        <StyledInputWrapper {...getComboboxProps()}>
+          <Input
+            {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
+            placeholder={placeholderText}
+          />
+          <StyledButton
+            variant="ghost_icon"
+            {...getToggleButtonProps()}
+            aria-label={'toggle menu'}
+          >
+            <Icon data={arrow_drop_down} title="open"></Icon>
+          </StyledButton>
+        </StyledInputWrapper>
+        {/*      </div> */}
         <ul {...getMenuProps()} style={menuMultipleStyles}>
           {isOpen &&
             getFilteredItems(items).map((item, index) => (
