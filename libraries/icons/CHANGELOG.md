@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Types, as part of the [Typescript Milestone](https://github.com/equinor/design-system/milestone/7?closed=1)
 
+### Changed
+
+- Changed module types for better support with `commonjs` and `esm`. Using the `<some-eds-npm-package>/commonjs` path on packages should no longer be needed and will be deprecated in the future ([#887](https://github.com/equinor/design-system/issues/887))
+
 ## [0.4.0] - 2020-09-11
 
 ### Added
