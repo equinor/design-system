@@ -11,7 +11,7 @@ const {
   clickbounds: { default__base: clickbounds },
 } = tokens
 
-type SingleSelect = {
+type Select = {
   background: string
   boxShadow: string
   minHeight: string
@@ -28,7 +28,7 @@ type SingleSelect = {
   }
 }
 
-export const singleselect: SingleSelect = {
+export const select: Select = {
   background: colors.ui.background__default.hex,
   boxShadow,
   minHeight: clickbounds,

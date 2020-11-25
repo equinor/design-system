@@ -8,18 +8,12 @@ import { Input } from '../../TextField/Input'
 import { Button } from '../../Button'
 import { Icon } from '../../Icon'
 import { arrow_drop_down } from '@equinor/eds-icons'
-
+import { List } from '../../List'
 import styled from 'styled-components'
+import { typographyTemplate, spacingsTemplate } from '@utils'
+import { select as tokens } from '../Select.tokens'
 
-const menuStyles = {
-  maxHeight: 80,
-  maxWidth: 300,
-  overflowY: 'scroll',
-  backgroundColor: '#eee',
-  padding: 0,
-  listStyle: 'none',
-  position: 'relative',
-}
+const { ListItem } = List
 
 const StyledInputWrapper = styled.div`
   position: relative;
@@ -30,33 +24,32 @@ const comboboxWrapperStyles = {
   flexWrap: 'wrap',
 } as React.CSSProperties
 
-const selectedItemStyles = {
-  marginLeft: '5px',
-  backgroundColor: 'aliceblue',
-  borderRadius: '10px',
-}
-
-const menuMultipleStyles = {
-  maxHeight: '180px',
-  overflowY: 'auto',
-  width: '135px',
-  margin: 0,
-  borderTop: 0,
-  background: 'white',
-  position: 'absolute',
-  zIndex: 1000,
-  listStyle: 'none',
-  padding: 0,
-  left: '340px',
-}
-
 const StyledButton = styled(Button)`
   position: absolute;
   right: 0;
   top: 0;
 `
 
-const selectedItemIconStyles = { cursor: 'pointer' }
+const StyledList = styled(List)`
+  background-color: ${tokens.background};
+  box-shadow: ${tokens.boxShadow};
+  overflow-y: scroll;
+  max-height: 160px;
+  padding: 0;
+  border-radius: ${tokens.borderRadius};
+  margin-top: 4px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 200;
+`
+
+const StyledListItem = styled(ListItem)`
+  list-style: none;
+  ${typographyTemplate(tokens.typography)};
+  ${spacingsTemplate(tokens.spacings)};
+  margin: 0;
+`
 
 export type MultiSelectProps = {
   /** Option */
@@ -219,7 +212,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           </StyledButton>
         </StyledInputWrapper>
         {/*      </div> */}
-        <ul {...getMenuProps()} style={menuMultipleStyles}>
+        <StyledList {...getMenuProps()}>
           {isOpen &&
             getFilteredItems(items).map((item, index) => (
               //items.map((item, index) => (
@@ -241,7 +234,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                 {item}
               </li>
             ))}
-        </ul>
+        </StyledList>
       </div>
     )
   },

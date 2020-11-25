@@ -9,7 +9,7 @@ import { Input } from '../../TextField/Input'
 import { arrow_drop_down } from '@equinor/eds-icons'
 import { List } from '../../List'
 import { typographyTemplate, spacingsTemplate } from '@utils'
-import { singleselect as tokens } from './SingleSelect.tokens'
+import { select as tokens } from '../Select.tokens'
 
 const { ListItem } = List
 
