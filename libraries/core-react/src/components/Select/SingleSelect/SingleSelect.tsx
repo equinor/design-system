@@ -70,9 +70,8 @@ const Container = styled.div`
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
   function SingleSelect({ items = [], label, ...other }, ref) {
     const [inputItems, setInputItems] = useState(items)
-    const isOpen = true
     const {
-      /*  isOpen, */
+      isOpen,
       getToggleButtonProps,
       getLabelProps,
       getMenuProps,
