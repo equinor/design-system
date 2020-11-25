@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added ✨
 
-- Typescript support in all of the EDS libraries! 🎉 ([Typescript Milestone](https://github.com/equinor/design-system/milestone/7?closed=1))
+- Types, as part of the [Typescript Milestone](https://github.com/equinor/design-system/milestone/7?closed=1)
 - Created `NativeSelect` component ([#509](https://github.com/equinor/design-system/issues/509))
 - Added `Table` caption ([#621](https://github.com/equinor/design-system/issues/621))
 - Added `isExpanded` prop to be able to control `Accordion` externally ([#677](https://github.com/equinor/design-system/issues/677))
@@ -26,11 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `z-index` values for correct layering of the components ([#872](https://github.com/equinor/design-system/issues/872))
 - Changed licence from GNU AGPL to MIT ([#852](https://github.com/equinor/design-system/issues/852))
 - Clean up use of spacings in `Card` ([#717](https://github.com/equinor/design-system/issues/717))
+- Changed module types for better support with `commonjs` and `esm`. Using the `<some-eds-npm-package>`/commonjs path on packages should no longer be needed and will be deprecated in the future ([#887](https://github.com/equinor/design-system/issues/887))
 
 ### Housekeeping 🏠
 
 - Removed unused dependencies ([#870](https://github.com/equinor/design-system/issues/870))
 - Bundle improvements ([#627](https://github.com/equinor/design-system/issues/627))
+- Cleaning and remodelling core-react for the future 💅 ([#887](https://github.com/equinor/design-system/issues/887))
+- Cleaned up leaking `devDependencies` ([#862](https://github.com/equinor/design-system/issues/862))
 
 ## [0.6.2] - 2020-09-16
 
