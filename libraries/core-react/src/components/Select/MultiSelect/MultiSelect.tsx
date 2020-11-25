@@ -69,7 +69,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     /*     const [inputItems, setInputItems] = useState(items)
      */ /* const [selectedItems, setSelectedItems] = useState([]) */
     /* const [inputItems, setInputItems] = useState(items) */
-    const isOpen = true
+    /* const isOpen = true */
     const [inputValue, setInputValue] = useState('')
     const {
       getSelectedItemProps,
@@ -85,7 +85,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
         item.toLowerCase().includes(inputValue.toLowerCase()),
       )
     const {
-      /*  isOpen, */
+      isOpen,
       getToggleButtonProps,
       getLabelProps,
       getMenuProps,
