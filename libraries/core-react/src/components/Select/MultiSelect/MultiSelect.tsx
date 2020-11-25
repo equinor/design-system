@@ -3,6 +3,8 @@
 import * as React from 'react'
 import { forwardRef, SelectHTMLAttributes, useState } from 'react'
 import { useCombobox, useMultipleSelection } from 'downshift'
+import { Label } from '../../Label'
+
 import styled from 'styled-components'
 
 const menuStyles = {
@@ -170,9 +172,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
     return (
       <div>
-        <label {...getLabelProps()} label={label}>
-          Choose an element:
-        </label>
+        <Label {...getLabelProps()} label={label} />
         <div style={comboboxWrapperStyles}>
           {/* {selectedItems.map((selectedItem, index) => (
             <span
