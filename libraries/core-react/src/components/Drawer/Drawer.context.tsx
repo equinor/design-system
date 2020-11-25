@@ -35,14 +35,3 @@ type UseDrawer<T> = T & {
 
 export const useDrawer = (): UseDrawer<State> =>
   useContext<State>(DrawerContext) as UseDrawer<State>
-//   const [state, setState] = useContext<State>(DrawerContext)
-//   const { focusedIndex } = state
-
-//   const setFocusedIndex = (i) => {
-//     setState({ ...state, focusedIndex: i })
-//   }
-
-//   return {
-//     setFocusedIndex,
-//     focusedIndex,
-//   }
