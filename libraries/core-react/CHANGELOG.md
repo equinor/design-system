@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `z-index` values for correct layering of the components ([#872](https://github.com/equinor/design-system/issues/872))
 - Changed licence from GNU AGPL to MIT ([#852](https://github.com/equinor/design-system/issues/852))
 - Clean up use of spacings in `Card` ([#717](https://github.com/equinor/design-system/issues/717))
-- Changed module types for better support with `commonjs` and `esm`. Using the `<some-eds-npm-package>`/commonjs path on packages should no longer be needed and will be deprecated in the future ([#887](https://github.com/equinor/design-system/issues/887))
+- Changed module types for better support with `commonjs` and `esm`. Using the `<some-eds-npm-package>/commonjs` path on packages should no longer be needed and will be deprecated in the future ([#887](https://github.com/equinor/design-system/issues/887))
 
 ### Housekeeping 🏠
 
