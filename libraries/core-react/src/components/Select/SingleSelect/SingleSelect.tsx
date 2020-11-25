@@ -49,11 +49,18 @@ const StyledList = styled(List)`
   z-index: 200;
 `
 
-const StyledListItem = styled(ListItem)`
+type StyledListItemType = {
+  highlighted: boolean
+}
+
+const StyledListItem = styled(ListItem)<StyledListItemType>`
   list-style: none;
   ${typographyTemplate(tokens.typography)};
   ${spacingsTemplate(tokens.spacings)};
   margin: 0;
+  background-color: ${({ highlighted }) =>
+    highlighted ? tokens.hover.background : tokens.background};
+  cursor: ${({ highlighted }) => (highlighted ? 'pointer' : 'default')};
 `
 
 const Container = styled.div`
@@ -97,14 +104,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
           {isOpen &&
             inputItems.map((item, index) => (
               <StyledListItem
-                style={
-                  highlightedIndex === index
-                    ? {
-                        backgroundColor: tokens.hover.background,
-                        cursor: 'pointer',
-                      }
-                    : {}
-                }
+                highlighted={highlightedIndex === index}
                 key={`${item}`}
                 {...getItemProps({ item, index })}
               >

@@ -44,12 +44,19 @@ const StyledList = styled(List)`
   z-index: 200;
 `
 
-const StyledListItem = styled(ListItem)`
+type StyledListItemType = {
+  highlighted: boolean
+}
+
+const StyledListItem = styled(ListItem)<StyledListItemType>`
   list-style: none;
   ${typographyTemplate(tokens.typography)};
   display: flex;
   align-items: center;
   margin: 0;
+  background-color: ${({ highlighted }) =>
+    highlighted ? tokens.hover.background : tokens.background};
+  cursor: ${({ highlighted }) => (highlighted ? 'pointer' : 'default')};
 `
 
 export type MultiSelectProps = {
@@ -226,14 +233,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
               <StyledListItem
                 key={`${item}`}
-                style={
-                  highlightedIndex === index
-                    ? {
-                        backgroundColor: tokens.hover.background,
-                        cursor: 'pointer',
-                      }
-                    : {}
-                }
+                highlighted={highlightedIndex === index}
                 {...getItemProps({ item, index })}
               >
                 <CheckboxInput
