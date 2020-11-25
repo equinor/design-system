@@ -7,6 +7,7 @@ import { Label } from '../../Label'
 import { Input } from '../../TextField/Input'
 import { Button } from '../../Button'
 import { Icon } from '../../Icon'
+import { Checkbox } from '../../SelectionControls'
 import { arrow_drop_down } from '@equinor/eds-icons'
 import { List } from '../../List'
 import styled from 'styled-components'
@@ -19,10 +20,9 @@ const StyledInputWrapper = styled.div`
   position: relative;
 `
 
-const comboboxWrapperStyles = {
-  display: 'inline-flex',
-  flexWrap: 'wrap',
-} as React.CSSProperties
+const Container = styled.div`
+  position: relative;
+`
 
 const StyledButton = styled(Button)`
   position: absolute;
@@ -47,8 +47,17 @@ const StyledList = styled(List)`
 const StyledListItem = styled(ListItem)`
   list-style: none;
   ${typographyTemplate(tokens.typography)};
-  ${spacingsTemplate(tokens.spacings)};
+  /* ${spacingsTemplate(tokens.spacings)}; */
   margin: 0;
+`
+type FullWidthCheckboxProps = {
+  highlightedIndex: boolean
+}
+
+const FullWidthCheckbox = styled(Checkbox)<FullWidthCheckboxProps>`
+  width: 100%;
+  background-color: ${({ highlightedIndex }) =>
+    highlightedIndex ? tokens.hover.background : tokens.background};
 `
 
 export type MultiSelectProps = {
@@ -134,7 +143,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             return {
               ...changes,
               isOpen: true, // keep menu open after selection.
-              /*   highlightedIndex: state.highlightedIndex,
+              highlightedIndex: state.highlightedIndex,
               inputValue: '', // don't add the item string as input value at selection. */
             }
           case useCombobox.stateChangeTypes.InputBlur:
@@ -148,6 +157,13 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       },
 
       onStateChange: ({ inputValue, type, selectedItem }) => {
+        /*         console.debug(
+          'selected items',
+          selectedItems,
+          selectedItems.length,
+          type,
+          selectedItems.includes(selectedItem),
+        ) */
         switch (type) {
           case useCombobox.stateChangeTypes.InputChange:
             setInputValue(inputValue)
@@ -156,14 +172,13 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           case useCombobox.stateChangeTypes.ItemClick:
           case useCombobox.stateChangeTypes.InputBlur:
             if (selectedItem) {
-              console.log('************ selected item', selectedItem)
               setInputValue('')
 
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
                 : addSelectedItem(selectedItem)
             }
-            console.log('selected items', selectedItems)
+
             break
           default:
             break
@@ -176,7 +191,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       : 'elements'
 
     return (
-      <div>
+      <Container>
         <Label {...getLabelProps()} label={label} />
         {/* <div style={comboboxWrapperStyles}> */}
         {/* {selectedItems.map((selectedItem, index) => (
@@ -216,26 +231,32 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           {isOpen &&
             getFilteredItems(items).map((item, index) => (
               //items.map((item, index) => (
-              <li
+
+              <StyledListItem
+                key={`${item}`}
                 style={
                   highlightedIndex === index
-                    ? { backgroundColor: '#bde4ff' }
+                    ? {
+                        backgroundColor: tokens.hover.background,
+                        cursor: 'pointer',
+                      }
                     : {}
                 }
-                key={`${item}`}
                 {...getItemProps({ item, index })}
               >
-                <input
-                  type="checkbox"
+                <FullWidthCheckbox
+                  label={item}
                   checked={selectedItems.includes(item)}
                   value={item}
-                  onChange={() => null}
+                  onChange={(e) => {
+                    return null
+                  }}
+                  highlightedIndex={highlightedIndex === index}
                 />
-                {item}
-              </li>
+              </StyledListItem>
             ))}
         </StyledList>
-      </div>
+      </Container>
     )
   },
 )
