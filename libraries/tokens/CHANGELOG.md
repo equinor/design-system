@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Typescript support in all of the EDS libraries ([Typescript Milestone](https://github.com/equinor/design-system/milestone/7?closed=1))
+- Types, as part of the ([Typescript Milestone](https://github.com/equinor/design-system/milestone/7?closed=1))
 
 ### Changed
 
