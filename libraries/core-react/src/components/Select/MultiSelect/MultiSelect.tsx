@@ -47,18 +47,10 @@ const StyledList = styled(List)`
 const StyledListItem = styled(ListItem)`
   list-style: none;
   ${typographyTemplate(tokens.typography)};
-  /* ${spacingsTemplate(tokens.spacings)}; */
+  display: flex;
+  align-items: center;
   margin: 0;
 `
-type FullWidthCheckboxProps = {
-  highlightedIndex: boolean
-}
-
-/* const FullWidthCheckbox = styled(Checkbox)<FullWidthCheckboxProps>`
-  width: 100%;
-  background-color: ${({ highlightedIndex }) =>
-    highlightedIndex ? tokens.hover.background : tokens.background};
-` */
 
 export type MultiSelectProps = {
   /** Option */
@@ -188,7 +180,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
     const placeholderText = selectedItems.length
       ? `${selectedItems.length} elements selected`
-      : 'elements'
+      : ''
 
     return (
       <Container>
@@ -251,7 +243,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                     return null
                   }}
                 />
-                {item}
+                <span>{item}</span>
               </StyledListItem>
             ))}
         </StyledList>
