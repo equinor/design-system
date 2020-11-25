@@ -1,0 +1,27 @@
+import React, { forwardRef, HTMLAttributes } from 'react'
+import styled from 'styled-components'
+import { drawer as tokens } from './Drawer.tokens'
+
+const StyledDrawer = styled.div`
+  background: none;
+`
+
+export type DrawerProps = {
+  overlay?: boolean
+} & HTMLAttributes<HTMLDivElement>
+
+export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
+  { children, overlay = false, ...rest },
+  ref,
+) {
+  const props = {
+    ...rest,
+    overlay,
+  }
+
+  return (
+    <StyledDrawer {...props} ref={ref}>
+      {children}
+    </StyledDrawer>
+  )
+})
