@@ -1,6 +1,10 @@
 {
   "name": "@equinor/eds-tokens",
+<<<<<<< HEAD
   "version": "0.5.1",
+=======
+  "version": "0.5.2",
+>>>>>>> b7c940c9 (🔖 Update version tags)
   "description": "Design tokens for the Equinor Design System",
   "main": "dist/tokens.cjs.js",
   "module": "dist/tokens.esm.js",
