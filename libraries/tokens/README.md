@@ -15,39 +15,8 @@ Generic tokens used across EDS, such as colours, typography, spacings etc…
 - Elevation
 - Shape
 - Spacing
-- States
+- Interaction states
 - Typography (`ot`, `woff` or `woff2` font required)
-
-### Components
-
-Component specific tokens, such as button, input, table etc. These tokens can be used to implement a component in your own technology if needed whilst upholding consistency with design.
-
-#### Update december 2019
-
-The component tokens already made are still part of this package, but we encourage users to use base tokens for now – it proved to be too time consuming at this stage to create every token first in json and then in React. We might revisit the initial strategy at a later point.
-
-#### Tokens
-
-- Button
-- Table
-
-### Usage
-
-#### Use as ESM Module
-
-Add `"type":"module"` to your apps `package.json`
-
-```javascript
-import { tokens } from "@equinor/eds-tokens"
-```
-
-#### Use as CommonJS Module
-
-CommonJS will have a separate package path
-
-```javascript
-import { tokens } from "@equinor/eds-tokens/commonjs"
-```
 
 #### React storybook example
 
