@@ -112,7 +112,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
 
     return (
       <Container className={className} ref={ref}>
-        <Label {...getLabelProps()} label={label} />
+        <Label {...getLabelProps()} label={label} meta={meta} />
         <StyledInputWrapper {...getComboboxProps()}>
           <PaddedInput {...getInputProps({ refKey: 'ref' })} />
           <StyledButton variant="ghost_icon" {...getToggleButtonProps()}>

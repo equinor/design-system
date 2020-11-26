@@ -84,11 +84,13 @@ export type MultiSelectProps = {
   label: string
   /** Array of initial selected items */
   initialSelectedItems?: string[]
+  /** Meta text, for instance unit */
+  meta?: string
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
   function MultiSelect(
-    { items = [], initialSelectedItems = [], label, className, ...other },
+    { items = [], initialSelectedItems = [], label, meta, className, ...other },
     ref,
   ) {
     /*     const [inputItems, setInputItems] = useState(items)
@@ -209,7 +211,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
     return (
       <Container className={className} ref={ref}>
-        <Label {...getLabelProps()} label={label} />
+        <Label {...getLabelProps()} label={label} meta={meta} />
         {/* <div style={comboboxWrapperStyles}> */}
         {/* {selectedItems.map((selectedItem, index) => (
             <span
