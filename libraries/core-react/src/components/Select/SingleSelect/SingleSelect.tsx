@@ -1,5 +1,10 @@
 import * as React from 'react'
-import { forwardRef, SelectHTMLAttributes, useState } from 'react'
+import {
+  forwardRef,
+  SelectHTMLAttributes,
+  useState,
+  HTMLAttributes,
+} from 'react'
 import { useCombobox } from 'downshift'
 import styled from 'styled-components'
 import { Label } from '../../Label'
@@ -76,12 +81,14 @@ const StyledListItem = styled(ListItem)<StyledListItemType>`
     highlighted === 'true' ? 'pointer' : 'default'};
 `
 
-const Container = styled.div`
+type ContainerProps = HTMLAttributes<HTMLDivElement>
+
+const Container = styled.div<ContainerProps>`
   position: relative;
 `
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
-  function SingleSelect({ items = [], label, meta, ...other }, ref) {
+  function SingleSelect({ items = [], label, meta, className, ...other }, ref) {
     const [inputItems, setInputItems] = useState(items)
     const {
       isOpen,
@@ -104,7 +111,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     })
 
     return (
-      <Container>
+      <Container className={className} ref={ref}>
         <Label {...getLabelProps()} label={label} />
         <StyledInputWrapper {...getComboboxProps()}>
           <PaddedInput {...getInputProps({ refKey: 'ref' })} />

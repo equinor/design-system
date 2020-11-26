@@ -1,7 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from 'react'
-import { forwardRef, SelectHTMLAttributes, useState } from 'react'
+import {
+  forwardRef,
+  SelectHTMLAttributes,
+  useState,
+  HTMLAttributes,
+} from 'react'
 import { useCombobox, useMultipleSelection } from 'downshift'
 import { Label } from '../../Label'
 import { Input } from '../../TextField/Input'
@@ -20,7 +25,9 @@ const StyledInputWrapper = styled.div`
   position: relative;
 `
 
-const Container = styled.div`
+type ContainerProps = HTMLAttributes<HTMLDivElement>
+
+const Container = styled.div<ContainerProps>`
   position: relative;
 `
 
@@ -81,7 +88,7 @@ export type MultiSelectProps = {
 
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
   function MultiSelect(
-    { items = [], initialSelectedItems = [], label, ...other },
+    { items = [], initialSelectedItems = [], label, className, ...other },
     ref,
   ) {
     /*     const [inputItems, setInputItems] = useState(items)
@@ -201,7 +208,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       : ''
 
     return (
-      <Container>
+      <Container className={className} ref={ref}>
         <Label {...getLabelProps()} label={label} />
         {/* <div style={comboboxWrapperStyles}> */}
         {/* {selectedItems.map((selectedItem, index) => (
