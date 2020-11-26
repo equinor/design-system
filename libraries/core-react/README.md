@@ -38,6 +38,7 @@ npm install @equinor/eds-core-react styled-components
 - Progress indicators
 - Scrim
 - Search
+- Select (Native Select)
 - Selection Controls
 - Side Sheet
 - Slider
@@ -52,7 +53,9 @@ npm install @equinor/eds-core-react styled-components
 
 ### In progress 👷‍♀️
 
-- Navigation drawer
+- Navigation Drawer
+- Single Select
+- Multi Select
 
 ### TODO 🛠️
 
