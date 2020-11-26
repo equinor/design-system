@@ -11,57 +11,6 @@ Read the [changelog](https://github.com/equinor/design-system/blob/develop/libra
 npm install @equinor/eds-core-react styled-components
 ```
 
-## Components
-
-### Available ✅
-
-- Accordion
-- Banner
-- Breadcrumbs
-- Button
-  - Contained
-  - Contained w/icon left/right
-  - Outlined
-  - Outlined w/icon left/right
-  - Ghost
-  - Ghost Icon
-  - Ghost w/icon left/right
-- Cards
-- Chips
-- Dialog
-- Divider
-- Icon
-- List
-- Menu
-- Pagination
-- Popover
-- Progress indicators
-- Scrim
-- Search
-- Select (Native Select)
-- Selection Controls
-- Side Sheet
-- Slider
-- Snackbar
-- Table
-- Table of contents
-- Tabs
-- TextField
-- Tooltip
-- TopBar
-- Typography
-
-### In progress 👷‍♀️
-
-- Navigation Drawer
-- Single Select
-- Multi Select
-
-### TODO 🛠️
-
-- App launcher
-- Stepper
-
 ## Usage
 
 ```jsx
@@ -98,3 +47,49 @@ const App = () => (
 
 render(<App />, document.getElementById('root'))
 ```
+
+
+## Components
+
+### Available ✅
+
+- Accordion
+- Banner
+- Breadcrumbs
+- Button
+- Cards
+- Chips
+- Dialog
+- Divider
+- Icon
+- List
+- Menu
+- Pagination
+- Popover
+- Progress indicators
+- Scrim
+- Search
+- Select (Native Select)
+- Selection Controls
+- Side Sheet
+- Slider
+- Snackbar
+- Table
+- Table of contents
+- Tabs
+- TextField
+- Tooltip
+- TopBar
+- Typography
+
+### In progress 👷‍♀️
+
+- Navigation Drawer
+- Single Select
+- Multi Select
+
+### TODO 🛠️
+
+- App launcher
+- Stepper
+
