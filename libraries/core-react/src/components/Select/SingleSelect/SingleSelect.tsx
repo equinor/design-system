@@ -23,6 +23,8 @@ export type SingleSelectProps = {
   items?: string[]
   /** Label for the select element */
   label: string
+  /** Meta text, for instance unit */
+  meta?: string
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const StyledInputWrapper = styled.div`
@@ -39,7 +41,7 @@ const StyledList = styled(List)`
   background-color: ${tokens.background};
   box-shadow: ${tokens.boxShadow};
   overflow-y: scroll;
-  max-height: 160px;
+  max-height: 300px;
   padding: 0;
   border-radius: ${tokens.borderRadius};
   margin-top: 4px;
@@ -68,7 +70,7 @@ const Container = styled.div`
 `
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
-  function SingleSelect({ items = [], label, ...other }, ref) {
+  function SingleSelect({ items = [], label, meta, ...other }, ref) {
     const [inputItems, setInputItems] = useState(items)
     const {
       isOpen,

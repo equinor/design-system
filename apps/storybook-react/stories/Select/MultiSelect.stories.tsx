@@ -10,7 +10,7 @@ export default {
 } as Meta
 
 const Container = styled.div`
-  margin-bottom: 150px;
+  margin-bottom: 350px;
 `
 
 export const Default: Story = (args) => (

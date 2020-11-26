@@ -34,7 +34,7 @@ const StyledList = styled(List)`
   background-color: ${tokens.background};
   box-shadow: ${tokens.boxShadow};
   overflow-y: scroll;
-  max-height: 160px;
+  max-height: 300px;
   padding: 0;
   border-radius: ${tokens.borderRadius};
   margin-top: 4px;
