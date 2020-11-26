@@ -3,6 +3,7 @@ import { elevation } from '../../base/elevation'
 
 export * from './borders'
 export * from './focus'
+export * from './component'
 
 export type Typography = {
   color: string

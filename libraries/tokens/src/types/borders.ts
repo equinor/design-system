@@ -8,9 +8,9 @@ export type Border = {
 
 export type Bordergroup = {
   type?: 'bordergroup'
-  top?: Omit<Border, 'radius'>
-  left?: Border
-  right?: Border
+  top?: Omit<Border, 'radius | type'>
+  left?: Omit<Border, 'type'>
+  right?: Omit<Border, 'type'>
   bottom?: Omit<Border, 'radius'>
 }
 

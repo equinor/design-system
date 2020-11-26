@@ -1,18 +1,21 @@
-import { Outline, tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing, Borders } from '@equinor/eds-tokens'
-import * as R from 'ramda'
+import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography: {
     table: { cell_header: cellTypography },
   },
   colors: {
+    text: {
+      static_icons__default: { rgba: typographyColor },
+    },
     ui: {
       background__medium: { rgba: borderColor },
     },
     interactive: {
       table__header__fill_resting: { rgba: backgroundColor },
-      table__cell__fill_hover: { rgba: hoverBackgroundColor },
+      table__header__fill_hover: { rgba: hoverBackgroundColor },
+      table__header__fill_activated: { rgba: activeBackgroundColor },
       primary__resting: { rgba: primaryRestingColor },
       disabled__text: { rgba: disabledTextColor },
       disabled__border: { rgba: disabledBorderColor },
@@ -24,19 +27,10 @@ const {
   },
 } = tokens
 
-type ComponentToken = {
-  height: string
-  background: string
-  spacings: Spacing
-  border: Borders
-  typography: Typography
-  outline?: Outline
-}
-
 const tableHead: ComponentToken = {
   height: '48px',
   background: backgroundColor,
-  typography: cellTypography,
+  typography: { ...cellTypography, color: typographyColor },
   border: {
     type: 'bordergroup',
     bottom: {
@@ -52,15 +46,16 @@ const tableHead: ComponentToken = {
   },
 }
 
-type TableHeadStates = {
+type states = {
   active: Partial<ComponentToken>
   disabled: Partial<ComponentToken>
   focus: Partial<ComponentToken>
   hover: Partial<ComponentToken>
 }
 
-const states: TableHeadStates = {
+const states: states = {
   active: {
+    background: activeBackgroundColor,
     typography: {
       ...cellTypography,
       color: primaryRestingColor,
@@ -96,19 +91,11 @@ const states: TableHeadStates = {
   },
 }
 
-type TableHeadTokens = ComponentToken & {
-  states: TableHeadStates
+export type TableHeadToken = ComponentToken & {
+  states: states
 }
 
-const mergeToken = R.curry(R.mergeDeepRight)(tableHead)
-
-export const token: TableHeadTokens = {
+export const token: TableHeadToken = {
   ...tableHead,
   states,
-  // states: {
-  //   active: mergeToken(states.active),
-  //   disabled: mergeToken(states.disabled),
-  //   focus: mergeToken(states.focus),
-  //   hover: mergeToken(states.hover),
-  // }
 }

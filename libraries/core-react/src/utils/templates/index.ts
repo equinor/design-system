@@ -48,12 +48,18 @@ export const typographyTemplate = (
   return base
 }
 
-export const spacingsTemplate = (spacings: Spacing): StyledCSS => css`
-  padding-left: ${spacings.left};
-  padding-right: ${spacings.right};
-  padding-top: ${spacings.top};
-  padding-bottom: ${spacings.bottom};
-`
+export const spacingsTemplate = ({
+  left,
+  right,
+  top,
+  bottom,
+}: Spacing): StyledCSS =>
+  css({
+    paddingLeft: left,
+    paddingTop: top,
+    paddingRight: right,
+    paddingBottom: bottom,
+  })
 
 export const boxshadowTemplate = (border: Border): StyledCSS =>
   css({
