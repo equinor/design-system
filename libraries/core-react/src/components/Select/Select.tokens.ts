@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { Typography, Spacing } from '@equinor/eds-tokens'
 
 const {
   typography,
@@ -18,12 +18,7 @@ type Select = {
   background: string
   boxShadow: string
   minHeight: string
-  spacings: {
-    top: string
-    left: string
-    right: string
-    bottom: string
-  }
+  spacings: Spacing
   typography: Typography
   borderRadius: string
   hover: {
@@ -31,11 +26,7 @@ type Select = {
   }
   button: {
     size: string
-    spacings: {
-      left: string
-      right: string
-      top: string
-    }
+    spacings: Spacing
   }
 }
 
