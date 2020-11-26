@@ -5,7 +5,6 @@ import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { NativeSelect } from '.'
-import { select as selectTokens } from './Select/Select.tokens'
 
 afterEach(cleanup)
 

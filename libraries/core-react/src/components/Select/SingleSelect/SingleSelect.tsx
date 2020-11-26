@@ -33,8 +33,10 @@ const StyledInputWrapper = styled.div`
 
 const StyledButton = styled(Button)`
   position: absolute;
-  right: 0;
-  top: 0;
+  right: ${tokens.button.spacings.right};
+  top: ${tokens.button.spacings.top};
+  height: ${tokens.button.size};
+  width: ${tokens.button.size};
 `
 
 const StyledList = styled(List)`
@@ -52,7 +54,7 @@ const StyledList = styled(List)`
 `
 
 type StyledListItemType = {
-  highlighted: boolean
+  highlighted: string
 }
 
 const StyledListItem = styled(ListItem)<StyledListItemType>`
@@ -61,8 +63,9 @@ const StyledListItem = styled(ListItem)<StyledListItemType>`
   ${spacingsTemplate(tokens.spacings)};
   margin: 0;
   background-color: ${({ highlighted }) =>
-    highlighted ? tokens.hover.background : tokens.background};
-  cursor: ${({ highlighted }) => (highlighted ? 'pointer' : 'default')};
+    highlighted === 'true' ? tokens.hover.background : tokens.background};
+  cursor: ${({ highlighted }) =>
+    highlighted === 'true' ? 'pointer' : 'default'};
 `
 
 const Container = styled.div`
@@ -105,7 +108,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
           {isOpen &&
             inputItems.map((item, index) => (
               <StyledListItem
-                highlighted={highlightedIndex === index}
+                highlighted={highlightedIndex === index ? 'true' : 'false'}
                 key={`${item}`}
                 {...getItemProps({ item, index })}
               >

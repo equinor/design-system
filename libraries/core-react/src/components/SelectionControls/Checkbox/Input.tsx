@@ -8,7 +8,6 @@ import {
   checkbox_indeterminate, // eslint-disable-line camelcase
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
-
 import { checkbox as tokens } from './Checkbox.tokens'
 
 const { color, enabled } = tokens

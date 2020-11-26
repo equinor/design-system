@@ -4,6 +4,9 @@ import type { Typography } from '@equinor/eds-tokens'
 const {
   typography,
   colors,
+  shape: {
+    corners: { borderRadius },
+  },
   spacings: {
     comfortable: { medium: spacingMedium, large: spacingLarge },
   },
@@ -26,6 +29,14 @@ type Select = {
   hover: {
     background: string
   }
+  button: {
+    size: string
+    spacings: {
+      left: string
+      right: string
+      top: string
+    }
+  }
 }
 
 export const select: Select = {
@@ -42,8 +53,16 @@ export const select: Select = {
     ...typography.navigation.menu_title,
     color: colors.text.static_icons__tertiary.hex,
   },
-  borderRadius: '4px',
+  borderRadius,
   hover: {
     background: colors.ui.background__light.rgba,
+  },
+  button: {
+    size: '24px',
+    spacings: {
+      left: '8px',
+      right: '8px',
+      top: '6px',
+    },
   },
 }

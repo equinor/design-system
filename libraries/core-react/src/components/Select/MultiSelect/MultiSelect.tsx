@@ -26,8 +26,10 @@ const Container = styled.div`
 
 const StyledButton = styled(Button)`
   position: absolute;
-  right: 0;
-  top: 0;
+  right: ${tokens.button.spacings.right};
+  top: ${tokens.button.spacings.top};
+  height: ${tokens.button.size};
+  width: ${tokens.button.size};
 `
 
 const StyledList = styled(List)`
@@ -45,7 +47,7 @@ const StyledList = styled(List)`
 `
 
 type StyledListItemType = {
-  highlighted: boolean
+  highlighted: string
 }
 
 const StyledListItem = styled(ListItem)<StyledListItemType>`
@@ -55,8 +57,9 @@ const StyledListItem = styled(ListItem)<StyledListItemType>`
   align-items: center;
   margin: 0;
   background-color: ${({ highlighted }) =>
-    highlighted ? tokens.hover.background : tokens.background};
-  cursor: ${({ highlighted }) => (highlighted ? 'pointer' : 'default')};
+    highlighted === 'true' ? tokens.hover.background : tokens.background};
+  cursor: ${({ highlighted }) =>
+    highlighted === 'true' ? 'pointer' : 'default'};
 `
 
 export type MultiSelectProps = {
@@ -233,7 +236,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
               <StyledListItem
                 key={`${item}`}
-                highlighted={highlightedIndex === index}
+                highlighted={highlightedIndex === index ? 'true' : 'false'}
                 {...getItemProps({ item, index })}
               >
                 <CheckboxInput
