@@ -1,7 +1,5 @@
 # @equinor/eds-core-react
 
-NB! This is an early version of the EDS Core React components in Typescript and meant for testing only.
-
 Available components to help style your React application as an Equinor application. We publish new components regularly so make sure to check back often!
 
 Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites.net/) for more examples!
@@ -12,54 +10,6 @@ Read the [changelog](https://github.com/equinor/design-system/blob/develop/libra
 ```sh
 npm install @equinor/eds-core-react styled-components
 ```
-
-## Components
-
-### Available ✅
-
-- Accordion
-- Banner
-- Breadcrumbs
-- Button
-  - Contained
-  - Contained w/icon left/right
-  - Outlined
-  - Outlined w/icon left/right
-  - Ghost
-  - Ghost Icon
-  - Ghost w/icon left/right
-- Cards
-- Chips
-- Dialog
-- Divider
-- Icon
-- List
-- Menu
-- Pagination
-- Popover
-- Progress indicators
-- Scrim
-- Search
-- Selection Controls
-- Side Sheet
-- Slider
-- Snackbar
-- Table
-- Table of contents
-- Tabs
-- TextField
-- Tooltip
-- TopBar
-- Typography
-
-### In progress 👷‍♀️
-
-- Navigation drawer
-
-### TODO 🛠️
-
-- App launcher
-- Stepper
 
 ## Usage
 
@@ -97,3 +47,49 @@ const App = () => (
 
 render(<App />, document.getElementById('root'))
 ```
+
+
+## Components
+
+### Available ✅
+
+- Accordion
+- Banner
+- Breadcrumbs
+- Button
+- Cards
+- Chips
+- Dialog
+- Divider
+- Icon
+- List
+- Menu
+- Pagination
+- Popover
+- Progress indicators
+- Scrim
+- Search
+- Select (Native Select)
+- Selection Controls
+- Side Sheet
+- Slider
+- Snackbar
+- Table
+- Table of contents
+- Tabs
+- TextField
+- Tooltip
+- TopBar
+- Typography
+
+### In progress 👷‍♀️
+
+- Navigation Drawer
+- Single Select
+- Multi Select
+
+### TODO 🛠️
+
+- App launcher
+- Stepper
+
