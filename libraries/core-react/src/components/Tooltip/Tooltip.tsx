@@ -101,14 +101,7 @@ export type TooltipProps = {
 // Controller for TooltipItem
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    {
-      className,
-      title = '',
-      children,
-      placement = 'bottom',
-      open = false,
-      ...rest
-    },
+    { className, title, children, placement = 'bottom', open = false, ...rest },
     ref,
   ) {
     const [openState, setOpenState] = useState(open)
@@ -160,7 +153,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         >
           {children}
         </div>
-        {openState && (
+        {openState && title !== '' && (
           <StyledTooltipWrapper
             style={{ justifySelf: 'center' }}
             role="tooltip"
