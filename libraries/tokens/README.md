@@ -1,14 +1,19 @@
 # @equinor/eds-tokens
 
-Design tokens used in Equinor Design System (EDS).
+[Design tokens] used in the Equinor Design System (EDS), such as colours, typography, spacings etc…
 
-## Documentation
+## Installation
 
-### Base
+```sh
+npm install @equinor/eds-tokens
+```
+## Usage
 
-Generic tokens used across EDS, such as colours, typography, spacings etc…
+```js 
+import { tokens } from '@equinor/eds-tokens'
+```
 
-#### Tokens
+## Tokens
 
 - Clickbounds
 - Colors
@@ -17,29 +22,5 @@ Generic tokens used across EDS, such as colours, typography, spacings etc…
 - Spacing
 - Interaction states
 - Typography (`ot`, `woff` or `woff2` font required)
-
-#### React storybook example
-
-```js
-import React from 'react'
-import { tokens } from '@equinor/eds-tokens'
-import styled from 'styled-components'
-
-const { h1: h1Tokens } = tokens.typography.heading
-
-const H1 = styled.h1(h1Tokens)
-
-export default {
-  title: 'Tokens|Example',
-  component: H1,
-}
-
-export const TokensExample = () => (
-  <div>
-    <H1>Some header</H1>
-  </div>
-)
-
-```
 
 [design tokens]: https://css-tricks.com/what-are-design-tokens/
