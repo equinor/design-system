@@ -1,7 +1,5 @@
 # @equinor/eds-icons
 
-NB! This is an early version of the EDS Core React components in Typescript and meant for testing only.
-
 This package is a collection of the `system icons` from the Equinor Design System as javascript objects.
 
 ### Example of javascript object data
