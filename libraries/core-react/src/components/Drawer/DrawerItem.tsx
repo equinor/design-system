@@ -125,6 +125,10 @@ type DrawerItemProps = {
   open?: boolean
 }
 
+type ChildType = {
+  disabled?: boolean
+} & React.ReactElement
+
 export const DrawerItem = React.memo(
   forwardRef<HTMLLIElement, DrawerItemProps>(function DrawerItem(
     { children, disabled, open, index, ...rest },
@@ -159,14 +163,10 @@ export const DrawerItem = React.memo(
     const isFocused = index === focusedIndex
 
     let itemElements
-    let updatedChildren
-
-    type childType = {
-      disabled?: boolean
-    } & React.ReactElement
+    let updatedChildren: Array<ChildType>
 
     if (Array.isArray(children)) {
-      updatedChildren = React.Children.map(children, (child: childType) => {
+      updatedChildren = React.Children.map(children, (child: ChildType) => {
         // console.log('item child', child.type.displayName)
         if (isValidElement(child) && child.type === DrawerList) {
           return React.cloneElement(child, {
@@ -174,7 +174,7 @@ export const DrawerItem = React.memo(
           })
         }
       })
-      itemElements = React.Children.map(children, (child: childType) => {
+      itemElements = React.Children.map(children, (child: ChildType) => {
         if (!isValidElement(child) || child.type !== DrawerList) {
           return React.cloneElement(child, {
             disabled,
@@ -182,9 +182,11 @@ export const DrawerItem = React.memo(
         }
       })
     } else {
-      updatedChildren = React.cloneElement(children as ReactElement, {
-        disabled,
-      })
+      updatedChildren = [
+        React.cloneElement(children as ChildType, {
+          disabled,
+        }),
+      ]
     }
 
     // console.log('item children', updatedChildren, drawerOpen)
@@ -203,7 +205,6 @@ export const DrawerItem = React.memo(
           ref,
           (el: HTMLLIElement) => isFocused && el.focus(),
         )}
-        // ref={useCombinedRefs(ref, (node) => isFocused && node.focus())}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         // onFocus={() => setFocusedIndex(index)}
