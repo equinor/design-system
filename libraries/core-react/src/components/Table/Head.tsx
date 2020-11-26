@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FunctionComponent } from 'react'
-import styled, { css } from 'styled-components'
-import { token } from './TableHead.tokens'
+import styled from 'styled-components'
+import { token } from './Cell/HeaderCell.tokens'
 import { bordersTemplate } from '@utils'
 
 const StyledTableHead = styled.thead`

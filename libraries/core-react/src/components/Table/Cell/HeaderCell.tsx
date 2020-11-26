@@ -2,9 +2,8 @@ import * as React from 'react'
 import { ThHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import * as R from 'ramda'
-import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
-import { token as tablehead, TableHeadToken } from '../TableHead.tokens'
-import { Variants } from '../Table.types'
+import { typographyTemplate, spacingsTemplate } from '@utils'
+import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
 
 type BaseProps = {
   token: TableHeadToken
@@ -23,7 +22,7 @@ const Base = ({ token }: BaseProps) => {
   return base
 }
 
-const StyledTableCell = styled.td`
+const StyledTableCell = styled.th`
   ${Base}
 `
 

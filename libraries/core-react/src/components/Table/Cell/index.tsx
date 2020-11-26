@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { TdHTMLAttributes, ThHTMLAttributes } from 'react'
 import { Is, Variants } from '../Table.types'
-import { TableDataCell } from './TableDataCell'
-import { TableHeaderCell } from './TableHeaderCell'
+import { TableDataCell } from './DataCell'
+import { TableHeaderCell } from './HeaderCell'
 
 type CellProps = {
   /** Specifies which td or th to use */

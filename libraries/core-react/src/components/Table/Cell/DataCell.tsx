@@ -3,7 +3,7 @@ import { TdHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import * as R from 'ramda'
 import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
-import { token as tablecell, TableCellToken } from './TableDataCell.tokens'
+import { token as tablecell, TableCellToken } from './DataCell.tokens'
 import { Variants } from '../Table.types'
 
 const applyMutations = (
@@ -55,7 +55,6 @@ export const TableDataCell = ({
   ...rest
 }: CellProps & TdHTMLAttributes<HTMLTableDataCellElement>): JSX.Element => {
   const token = applyMutations(variant, tablecell)
-  console.log(`cell token ${variant}`, token)
   return (
     <StyledTableCell token={token} {...rest}>
       {children}
