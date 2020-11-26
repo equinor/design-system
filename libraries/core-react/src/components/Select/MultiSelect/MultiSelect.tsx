@@ -88,6 +88,8 @@ export type MultiSelectProps = {
   meta?: string
   /** Disabled state */
   disabled?: boolean
+  /** Read Only */
+  readOnly?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
@@ -98,7 +100,8 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       label,
       meta,
       className,
-      disabled,
+      disabled = false,
+      readOnly = false,
       ...other
     },
     ref,
@@ -245,10 +248,11 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
             placeholder={placeholderText}
             disabled={disabled}
+            readOnly={readOnly}
           />
           <StyledButton
             variant="ghost_icon"
-            disabled={disabled}
+            disabled={disabled || readOnly}
             {...getToggleButtonProps()}
             aria-label={'toggle options'}
           >

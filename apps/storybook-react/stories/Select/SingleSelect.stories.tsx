@@ -31,3 +31,7 @@ export const Disabled: Story = () => (
     disabled
   ></SingleSelect>
 )
+
+export const ReadOnly: Story = () => (
+  <SingleSelect label="This is read only" items={items} readOnly></SingleSelect>
+)

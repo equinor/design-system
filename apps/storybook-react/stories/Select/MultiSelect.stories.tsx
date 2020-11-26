@@ -30,3 +30,7 @@ export const Disabled: Story = () => (
     disabled
   ></MultiSelect>
 )
+
+export const ReadOnly: Story = () => (
+  <MultiSelect label="This is read only" items={items} readOnly></MultiSelect>
+)

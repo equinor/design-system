@@ -32,6 +32,8 @@ export type SingleSelectProps = {
   meta?: string
   /** Disabled state */
   disabled?: boolean
+  /** Read Only */
+  readOnly?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const StyledInputWrapper = styled.div`
@@ -91,7 +93,15 @@ const Container = styled.div<ContainerProps>`
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
   function SingleSelect(
-    { items = [], label, meta, className, disabled = false, ...other },
+    {
+      items = [],
+      label,
+      meta,
+      className,
+      disabled = false,
+      readOnly = false,
+      ...other
+    },
     ref,
   ) {
     const [inputItems, setInputItems] = useState(items)
@@ -127,10 +137,11 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
           <PaddedInput
             {...getInputProps({ refKey: 'ref' })}
             disabled={disabled}
+            readOnly={readOnly}
           />
           <StyledButton
             variant="ghost_icon"
-            disabled={disabled}
+            disabled={disabled || readOnly}
             {...getToggleButtonProps()}
           >
             <Icon data={arrow_drop_down} title="open"></Icon>
