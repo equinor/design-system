@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Pagination` bug ([#647](https://github.com/equinor/design-system/issues/647))
 - Bundle improvements ([#627](https://github.com/equinor/design-system/issues/627))
 - Cleaned up leaking `devDependencies` ([#862](https://github.com/equinor/design-system/issues/862))
+- Hide `Tooltip` when title is empty ([#920](https://github.com/equinor/design-system/issues/920))
 
 ### Changed 📓
 
