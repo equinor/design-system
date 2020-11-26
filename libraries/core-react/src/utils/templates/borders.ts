@@ -11,17 +11,15 @@ export const bordersTemplate = (border: Borders): StyledCSS => {
         borderRadius: border.radius,
       })
     case 'bordergroup':
-      const leftRadius = border?.left?.radius
-      const rightRadius = border?.right?.radius
       return css({
         borderBottom: shorthand(border.bottom),
         borderTop: shorthand(border.top),
         borderLeft: shorthand(border.left),
         borderRight: shorthand(border.right),
-        borderBottomLeftRadius: leftRadius,
-        borderTopLeftRadius: leftRadius,
-        borderBottomRightRadius: rightRadius,
-        borderTopRightRadius: rightRadius,
+        borderBottomLeftRadius: border?.left?.radius,
+        borderTopLeftRadius: border?.left?.radius,
+        borderBottomRightRadius: border?.right?.radius,
+        borderTopRightRadius: border?.right?.radius,
       })
     default:
       return css({})

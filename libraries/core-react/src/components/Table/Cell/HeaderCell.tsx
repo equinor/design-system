@@ -9,7 +9,7 @@ type BaseProps = {
 }
 
 const Base = ({ token }: BaseProps) => {
-  const { background, height, typography, spacings, border } = token
+  const { background, height, typography, spacings } = token
 
   const base = css`
     min-height: ${height};
@@ -25,7 +25,7 @@ const StyledTableCell = styled.th`
   ${Base}
 `
 
-type CellProps = {} & ThHTMLAttributes<HTMLTableHeaderCellElement>
+type CellProps = ThHTMLAttributes<HTMLTableHeaderCellElement>
 
 export const TableHeaderCell = ({
   children,
