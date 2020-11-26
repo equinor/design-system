@@ -16,7 +16,6 @@ devDependencies:
   '@testing-library/user-event': 10.4.1
   '@types/jest': 26.0.10
   '@types/lodash': 4.14.162
-  '@types/ramda': 0.27.32
   '@types/react': 16.9.47
   '@types/react-dom': 16.9.8
   '@types/styled-components': 5.1.2
@@ -27,7 +26,6 @@ devDependencies:
   jest-styled-components: 6.3.4_styled-components@4.4.1
   lodash: 4.17.19
   prettier: 2.0.5
-  ramda: 0.27.1
   react: 16.13.1
   react-dom: 16.13.1_react@16.13.1
   rollup: 2.15.0
@@ -1797,12 +1795,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
-  /@types/ramda/0.27.32:
-    dependencies:
-      ts-toolbelt: 6.15.5
-    dev: true
-    resolution:
-      integrity: sha512-vdwZcWC+hlTxB//LZQLS1+VEdArImGI4yVKUpeqB8b9mBXgDFXCuQoOt8spQbi8fTyNLOdqRv6liSm2ckxWLog==
   /@types/react-dom/16.9.8:
     dependencies:
       '@types/react': 16.9.47
@@ -5869,10 +5861,6 @@ packages:
       node: '>=0.4.x'
     resolution:
       integrity: sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
-  /ramda/0.27.1:
-    dev: true
-    resolution:
-      integrity: sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -6927,10 +6915,6 @@ packages:
       typescript: '>=3.8 <5.0'
     resolution:
       integrity: sha512-Jq2uKfx6bPd9+JDpZNMBJMdMQUC3sJ08acISj8NXlVgR2d5OqslEHOR2KHMgwymu8h50+lKIm0m0xj/ioYdW2Q==
-  /ts-toolbelt/6.15.5:
-    dev: true
-    resolution:
-      integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==
   /tslib/1.14.1:
     dev: true
     resolution:
@@ -7412,7 +7396,6 @@ specifiers:
   '@testing-library/user-event': ^10.3.2
   '@types/jest': ^26.0.10
   '@types/lodash': ^4.14.162
-  '@types/ramda': ^0.27.32
   '@types/react': ^16.9.47
   '@types/react-dom': ^16.9.8
   '@types/styled-components': ^5.1.2
@@ -7423,7 +7406,6 @@ specifiers:
   jest-styled-components: ^6.3.4
   lodash: ^4.17.19
   prettier: ^2.0.5
-  ramda: ^0.27.1
   react: ^16.13.1
   react-dom: ^16.13.1
   rollup: ^2.15.0

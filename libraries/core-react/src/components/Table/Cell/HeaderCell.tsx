@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { ThHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import * as R from 'ramda'
 import { typographyTemplate, spacingsTemplate } from '@utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
 
