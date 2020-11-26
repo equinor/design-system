@@ -30,6 +30,8 @@ export type SingleSelectProps = {
   label: string
   /** Meta text, for instance unit */
   meta?: string
+  /** Disabled state */
+  disabled?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const StyledInputWrapper = styled.div`
@@ -88,7 +90,10 @@ const Container = styled.div<ContainerProps>`
 `
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
-  function SingleSelect({ items = [], label, meta, className, ...other }, ref) {
+  function SingleSelect(
+    { items = [], label, meta, className, disabled = false, ...other },
+    ref,
+  ) {
     const [inputItems, setInputItems] = useState(items)
     const {
       isOpen,
@@ -112,10 +117,22 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
 
     return (
       <Container className={className} ref={ref}>
-        <Label {...getLabelProps()} label={label} meta={meta} />
+        <Label
+          {...getLabelProps()}
+          label={label}
+          meta={meta}
+          disabled={disabled}
+        />
         <StyledInputWrapper {...getComboboxProps()}>
-          <PaddedInput {...getInputProps({ refKey: 'ref' })} />
-          <StyledButton variant="ghost_icon" {...getToggleButtonProps()}>
+          <PaddedInput
+            {...getInputProps({ refKey: 'ref' })}
+            disabled={disabled}
+          />
+          <StyledButton
+            variant="ghost_icon"
+            disabled={disabled}
+            {...getToggleButtonProps()}
+          >
             <Icon data={arrow_drop_down} title="open"></Icon>
           </StyledButton>
         </StyledInputWrapper>

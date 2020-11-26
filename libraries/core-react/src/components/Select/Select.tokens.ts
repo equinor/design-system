@@ -8,7 +8,11 @@ const {
     corners: { borderRadius },
   },
   spacings: {
-    comfortable: { medium: spacingMedium, large: spacingLarge },
+    comfortable: {
+      small: spacingSmall,
+      medium: spacingMedium,
+      large: spacingLarge,
+    },
   },
   elevation: { temporary_nav: boxShadow },
   clickbounds: { default__base: clickbounds },
@@ -51,8 +55,8 @@ export const select: Select = {
   button: {
     size: '24px',
     spacings: {
-      left: '8px',
-      right: '8px',
+      left: spacingSmall,
+      right: spacingSmall,
       top: '6px',
     },
   },

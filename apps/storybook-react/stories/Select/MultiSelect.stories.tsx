@@ -22,3 +22,11 @@ export const Default: Story = (args) => (
     ></MultiSelect>
   </Container>
 )
+export const Disabled: Story = () => (
+  <MultiSelect
+    label="Choose an element"
+    meta="km/t"
+    items={items}
+    disabled
+  ></MultiSelect>
+)

@@ -86,11 +86,21 @@ export type MultiSelectProps = {
   initialSelectedItems?: string[]
   /** Meta text, for instance unit */
   meta?: string
+  /** Disabled state */
+  disabled?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
   function MultiSelect(
-    { items = [], initialSelectedItems = [], label, meta, className, ...other },
+    {
+      items = [],
+      initialSelectedItems = [],
+      label,
+      meta,
+      className,
+      disabled,
+      ...other
+    },
     ref,
   ) {
     /*     const [inputItems, setInputItems] = useState(items)
@@ -176,13 +186,6 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       },
 
       onStateChange: ({ inputValue, type, selectedItem }) => {
-        /*         console.debug(
-          'selected items',
-          selectedItems,
-          selectedItems.length,
-          type,
-          selectedItems.includes(selectedItem),
-        ) */
         switch (type) {
           case useCombobox.stateChangeTypes.InputChange:
             setInputValue(inputValue)
@@ -211,7 +214,12 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
     return (
       <Container className={className} ref={ref}>
-        <Label {...getLabelProps()} label={label} meta={meta} />
+        <Label
+          {...getLabelProps()}
+          label={label}
+          meta={meta}
+          disabled={disabled}
+        />
         {/* <div style={comboboxWrapperStyles}> */}
         {/* {selectedItems.map((selectedItem, index) => (
             <span
@@ -236,16 +244,17 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           <PaddedInput
             {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
             placeholder={placeholderText}
+            disabled={disabled}
           />
           <StyledButton
             variant="ghost_icon"
+            disabled={disabled}
             {...getToggleButtonProps()}
-            aria-label={'toggle menu'}
+            aria-label={'toggle options'}
           >
             <Icon data={arrow_drop_down} title="open"></Icon>
           </StyledButton>
         </StyledInputWrapper>
-        {/*      </div> */}
         <StyledList {...getMenuProps()}>
           {isOpen &&
             getFilteredItems(items).map((item, index) => (

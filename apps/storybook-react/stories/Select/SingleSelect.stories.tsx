@@ -22,3 +22,12 @@ export const Default: Story<SingleSelectProps> = (args) => (
     ></SingleSelect>
   </Container>
 )
+
+export const Disabled: Story = () => (
+  <SingleSelect
+    label="Choose an element"
+    meta="km/t"
+    items={items}
+    disabled
+  ></SingleSelect>
+)
