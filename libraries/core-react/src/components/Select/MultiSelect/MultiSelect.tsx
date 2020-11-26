@@ -13,7 +13,7 @@ import { Input } from '../../TextField/Input'
 import { Button } from '../../Button'
 import { Icon } from '../../Icon'
 import { CheckboxInput } from '../../SelectionControls/Checkbox/Input'
-import { arrow_drop_down } from '@equinor/eds-icons'
+import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
 import { List } from '../../List'
 import styled from 'styled-components'
 import { typographyTemplate, spacingsTemplate } from '@utils'
@@ -256,7 +256,10 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             {...getToggleButtonProps()}
             aria-label={'toggle options'}
           >
-            <Icon data={arrow_drop_down} title="open"></Icon>
+            <Icon
+              data={isOpen ? arrow_drop_up : arrow_drop_down}
+              title="open"
+            ></Icon>
           </StyledButton>
         </StyledInputWrapper>
         <StyledList {...getMenuProps()}>

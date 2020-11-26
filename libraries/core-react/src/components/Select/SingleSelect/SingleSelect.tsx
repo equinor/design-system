@@ -11,7 +11,7 @@ import { Label } from '../../Label'
 import { Button } from '../../Button'
 import { Icon } from '../../Icon'
 import { Input } from '../../TextField/Input'
-import { arrow_drop_down } from '@equinor/eds-icons'
+import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
 import { List } from '../../List'
 import { typographyTemplate, spacingsTemplate } from '@utils'
 import { select as tokens } from '../Select.tokens'
@@ -144,7 +144,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
             disabled={disabled || readOnly}
             {...getToggleButtonProps()}
           >
-            <Icon data={arrow_drop_down} title="open"></Icon>
+            <Icon
+              data={isOpen ? arrow_drop_up : arrow_drop_down}
+              title="open"
+            ></Icon>
           </StyledButton>
         </StyledInputWrapper>
         <StyledList {...getMenuProps()}>
