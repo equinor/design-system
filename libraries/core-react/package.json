@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.7.0-beta.4",
+  "version": "0.7.0",
   "description": "The React implementation of the Equinor Design System",
   "main": "src/index.ts",
   "publishConfig": {
