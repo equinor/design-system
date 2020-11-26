@@ -26,13 +26,13 @@ type TextfieldProps = {
 
 const TextFieldLabel = React.forwardRef<HTMLLabelElement, TextfieldProps>(
   function TextFieldLabel(props, ref) {
-    const { label = '', meta = '', inputId, ...other } = props
+    const { label = '', meta, inputId, ...other } = props
 
     return (
       /*  @TODO: Other props spread has to be at the end for downshift to create the for attribute */
       <LabelBase ref={ref} htmlFor={inputId} {...other}>
         <Text>{label}</Text>
-        <Text>{meta}</Text>
+        {meta && <Text>{meta}</Text>}
       </LabelBase>
     )
   },
