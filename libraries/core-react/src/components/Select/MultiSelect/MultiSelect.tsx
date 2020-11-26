@@ -24,6 +24,14 @@ const Container = styled.div`
   position: relative;
 `
 
+const PaddedInput = styled(Input)`
+  /* Hack: Had to add + 0px to satisfythe style lint plugin */
+  padding-right: calc(
+    ${tokens.button.size} + ${tokens.button.spacings.left} +
+      ${tokens.button.spacings.right} + 0px
+  );
+`
+
 const StyledButton = styled(Button)`
   position: absolute;
   right: ${tokens.button.spacings.right};
@@ -216,7 +224,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             </span>
           ))} */}
         <StyledInputWrapper {...getComboboxProps()}>
-          <Input
+          <PaddedInput
             {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
             placeholder={placeholderText}
           />

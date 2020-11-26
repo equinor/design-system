@@ -31,6 +31,14 @@ const StyledInputWrapper = styled.div`
   position: relative;
 `
 
+const PaddedInput = styled(Input)`
+  /* Hack: Had to add + 0px to satisfy the style lint plugin */
+  padding-right: calc(
+    ${tokens.button.size} + ${tokens.button.spacings.left} +
+      ${tokens.button.spacings.right} + 0px
+  );
+`
+
 const StyledButton = styled(Button)`
   position: absolute;
   right: ${tokens.button.spacings.right};
@@ -99,7 +107,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       <Container>
         <Label {...getLabelProps()} label={label} />
         <StyledInputWrapper {...getComboboxProps()}>
-          <Input {...getInputProps({ refKey: 'ref' })} />
+          <PaddedInput {...getInputProps({ refKey: 'ref' })} />
           <StyledButton variant="ghost_icon" {...getToggleButtonProps()}>
             <Icon data={arrow_drop_down} title="open"></Icon>
           </StyledButton>
