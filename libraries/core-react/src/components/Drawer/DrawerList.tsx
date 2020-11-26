@@ -1,5 +1,5 @@
-import React, { forwardRef, useMemo } from 'react'
-import createId from 'lodash.uniqueid'
+import React, { forwardRef, HTMLAttributes, useMemo } from 'react'
+import createId from 'lodash/uniqueid'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 
@@ -7,7 +7,7 @@ const { background } = tokens
 
 const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
   drawerOpen,
-}))`
+}))<DrawerListProps>`
   margin: 0;
   padding: 0;
   background: ${background};
@@ -50,37 +50,50 @@ const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
     `}
 `
 
-export const DrawerList = forwardRef(function EdsDrawerList(
-  { children, level, open, ...props },
-  ref,
-) {
-  const drawerListId = useMemo(() => createId('drawerlist-'), [])
+type DrawerListProps = {
+  /** Ancestor level */
+  level?: 'child' | 'parent' | 'grandparent'
+  /** Open or collapsed */
+  open?: boolean
+} & HTMLAttributes<HTMLUListElement>
 
-  let ListItems
+type DrawerListChildrenType = {
+  drawerListId?: number
+} & React.ReactElement
 
-  if (Array.isArray(children)) {
-    ListItems = React.Children.map(children, (child, index) => {
-      return React.cloneElement(child, {
-        drawerListId,
-        index,
-        level,
-        open,
-      })
-    })
-  } else {
-    ListItems = []
-    ListItems.push(
-      React.cloneElement(children, {
-        drawerListId,
-        level,
-        open,
-      }),
+export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
+  function DrawerList({ children, level = 'child', open, ...props }, ref) {
+    const drawerListId = useMemo(() => createId('drawerlist-'), [])
+
+    let ListItems: Array<DrawerListChildrenType>
+
+    if (Array.isArray(children)) {
+      ListItems = React.Children.map(
+        children,
+        (child: DrawerListChildrenType, index) => {
+          return React.cloneElement(child, {
+            drawerListId,
+            index,
+            level,
+            open,
+          })
+        },
+      )
+    } else {
+      ListItems = []
+      ListItems.push(
+        React.cloneElement(children as DrawerListChildrenType, {
+          drawerListId,
+          level,
+          open,
+        }),
+      )
+    }
+
+    return (
+      <StyledDrawerList {...props} level={level} open={open} ref={ref}>
+        {ListItems}
+      </StyledDrawerList>
     )
-  }
-
-  return (
-    <StyledDrawerList {...props} level={level} open={open} ref={ref}>
-      {ListItems}
-    </StyledDrawerList>
-  )
-})
+  },
+)
