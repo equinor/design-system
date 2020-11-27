@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MultiSelect, MultiSelectProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react/types-6-0'
+import { UseMultipleSelectionStateChange } from 'downshift'
 import styled from 'styled-components'
 import { items } from './data'
 
@@ -35,3 +36,26 @@ export const WithPreselected: Story<MultiSelectProps> = () => (
     />
   </Container>
 )
+
+export const Controlled: Story<MultiSelectProps> = () => {
+  const [selectedItems, setSelectedItems] = useState<string[]>([])
+
+  function handleSelectedItemsChange(
+    changes: UseMultipleSelectionStateChange<string>,
+  ) {
+    setSelectedItems(changes.selectedItems)
+
+    /* setSelectedItem(changes.selectedItems) */
+  }
+  return (
+    <Container>
+      {selectedItems.length > 0 && <p>My value is {selectedItems.join(',')}</p>}
+      <MultiSelect
+        label="I'm controlled"
+        items={items}
+        /*  selectedItem={selectedItem} */
+        handleSelectedItemsChange={handleSelectedItemsChange}
+      />
+    </Container>
+  )
+}

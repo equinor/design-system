@@ -7,7 +7,11 @@ import {
   useState,
   HTMLAttributes,
 } from 'react'
-import { useCombobox, useMultipleSelection } from 'downshift'
+import {
+  useCombobox,
+  useMultipleSelection,
+  UseMultipleSelectionStateChange,
+} from 'downshift'
 import { Label } from '../../Label'
 import { Input } from '../../TextField/Input'
 import { Button } from '../../Button'
@@ -90,6 +94,15 @@ export type MultiSelectProps = {
   disabled?: boolean
   /** Read Only */
   readOnly?: boolean
+  initialSelectedItem?: string
+  /** If this is used, the select will become a controlled select. The item that should be selected. */
+  selectedItem?: string
+  /** Callback for the selected item change
+   * changes.selectedItem gives the selected item
+   */
+  handleSelectedItemsChange?: (
+    changes: UseMultipleSelectionStateChange<string>,
+  ) => void
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
@@ -102,6 +115,8 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       className,
       disabled = false,
       readOnly = false,
+      selectedItem,
+      handleSelectedItemsChange,
       ...other
     },
     ref,
@@ -117,7 +132,10 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       addSelectedItem,
       removeSelectedItem,
       selectedItems,
-    } = useMultipleSelection({ initialSelectedItems: initialSelectedItems })
+    } = useMultipleSelection({
+      initialSelectedItems: initialSelectedItems,
+      onSelectedItemsChange: handleSelectedItemsChange,
+    })
     const getFilteredItems = (items: string[]) =>
       items.filter((item) =>
         /* selectedItems.indexOf(item) < 0 && */
