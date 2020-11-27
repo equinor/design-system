@@ -39,7 +39,7 @@
     "pathData": "M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8 2c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"
   },
   {
-    "name": "more_verticle",
+    "name": "more_vertical",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-2 8c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z\"/></svg>",
     "id": "72:6377",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/b2f4/b1b7/7db2cb8a901a807b341ae27bffef388b",
@@ -78,7 +78,7 @@
     "pathData": "M7 10H5V5h5v2H7v3zm-2 4h2v3h3v2H5v-5zm12 3h-3v2h5v-5h-2v3zM14 7V5h5v5h-2V7h-3z"
   },
   {
-    "name": "verticle_split",
+    "name": "vertical_split",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11 5H3v2h8V5zM3 9h8v2H3V9zm8 4H3v2h8v-2zm0 4H3v2h8v-2zm8-10v10h-4V7h4zm-6-2h8v14h-8V5z\"/></svg>",
     "id": "84:1160",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/0b5b/efc8/630cbdb7e10e8ace6ee10255a10e8cd8",
@@ -5421,7 +5421,7 @@
     "pathData": "M18 4l-3 3h2v13h2V7h2l-3-3zm-4 12.4l-2.2-.9v-5l2.2-.9V7.5L3 12.25v1.5l11 4.75v-2.1zm-4-5.27L4.98 13 10 14.87v-3.74z"
   },
   {
-    "name": "text_rotation_verticle",
+    "name": "text_rotation_vertical",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9.25 17l-3 3-3-3h2V4h2v13h2zM16 5h-1.5L9.75 16h2.1l.9-2.2h5l.9 2.2h2.1L16 5zm-2.62 7l1.87-5.02L17.12 12h-3.74z\"/></svg>",
     "id": "82:4545",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/25d2/6703/831e000e753b516b27bd8660e435d672",
@@ -5590,7 +5590,7 @@
     "pathData": "M19.5 4h-16v2h16V4zm-16 14h6v-2h-6v2zm0-8h13c2.21 0 4 1.79 4 4s-1.79 4-4 4h-2v2l-3-3 3-3v2h2.25c1.1 0 2-.9 2-2s-.9-2-2-2H3.5v-2z"
   },
   {
-    "name": "verticle_align_top",
+    "name": "vertical_align_top",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M4 5V3h16v2H4zm7 6H8l4-4 4 4h-3v10h-2V11z\"/></svg>",
     "id": "72:6001",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/cea2/5302/61fe07b5a913aa3d278eef6025fe4a81",
@@ -5603,7 +5603,7 @@
     "pathData": "M4 5V3h16v2H4zm7 6H8l4-4 4 4h-3v10h-2V11z"
   },
   {
-    "name": "verticle_align_center",
+    "name": "vertical_align_center",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M16 5h-3V1h-2v4H8l4 4 4-4zM8 19h3v4h2v-4h3l-4-4-4 4zm-4-6v-2h16v2H4z\"/></svg>",
     "id": "72:5996",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/9cce/825f/4fb6d860bcbc6de06cc2d58593406ca5",
@@ -5616,7 +5616,7 @@
     "pathData": "M16 5h-3V1h-2v4H8l4 4 4-4zM8 19h3v4h2v-4h3l-4-4-4 4zm-4-6v-2h16v2H4z"
   },
   {
-    "name": "verticle_align_bottom",
+    "name": "vertical_align_bottom",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13 13h3l-4 4-4-4h3V3h2v10zm-9 8v-2h16v2H4z\"/></svg>",
     "id": "72:5992",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/485a/7948/118c4db5776e354a5c3cf63b1026bb85",
@@ -5941,7 +5941,7 @@
     "pathData": "M18 9v4H6V9H4v6h16V9h-2z"
   },
   {
-    "name": "border_verticle",
+    "name": "border_vertical",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3 5h2V3H3v2zm0 4h2V7H3v2zm6 12H7v-2h2v2zm-2-8h2v-2H7v2zm-2 0H3v-2h2v2zm-2 8h2v-2H3v2zm2-4H3v-2h2v2zM7 5h2V3H7v2zm14 12h-2v-2h2v2zm-10 4h2V3h-2v18zm10 0h-2v-2h2v2zm-2-8h2v-2h-2v2zm0-8V3h2v2h-2zm0 4h2V7h-2v2zm-2-4h-2V3h2v2zm-2 16h2v-2h-2v2zm2-8h-2v-2h2v2z\"/></svg>",
     "id": "72:5667",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/d2ae/7848/bf37898554af6cbff729b6a8cadc8686",
@@ -7917,7 +7917,7 @@
     "pathData": "M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm11-5.5V9h-4v2h4v2.5l3.5-3.5L15 6.5zM5.5 14L9 10.5V13h4v2H9v2.5L5.5 14z"
   },
   {
-    "name": "swap_verticle",
+    "name": "swap_vertical",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M5 6.99L9 3l4 3.99h-3V14H8V6.99H5zM16 10v7.01h3L15 21l-4-3.99h3V10h2z\"/></svg>",
     "id": "86:3633",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/733d/039d/9897d5fb01fe8b151d09c962136a1ae1",
@@ -7930,7 +7930,7 @@
     "pathData": "M5 6.99L9 3l4 3.99h-3V14H8V6.99H5zM16 10v7.01h3L15 21l-4-3.99h3V10h2z"
   },
   {
-    "name": "swap_verticle_circle",
+    "name": "swap_vertical_circle",
     "value": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm2.5-3L10 5.5 13.5 9H11v4H9V9H6.5zm7.5 9.5l3.5-3.5H15v-4h-2v4h-2.5l3.5 3.5z\"/></svg>",
     "id": "86:3636",
     "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/6bf2/a032/ef62e987d1c047fed79ebcd317100aab",
