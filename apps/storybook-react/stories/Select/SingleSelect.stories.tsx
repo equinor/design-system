@@ -1,5 +1,7 @@
-import React from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import { SingleSelect, SingleSelectProps } from '@equinor/eds-core-react'
+import { UseComboboxStateChange } from 'downshift'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import styled from 'styled-components'
 import { items } from './data'
@@ -36,3 +38,21 @@ export const WithPreselected: Story<SingleSelectProps> = () => (
     />
   </Container>
 )
+
+export const Controlled: Story<SingleSelectProps> = () => {
+  const [selectedItem, setSelectedItem] = useState<string>(null)
+  function handleSelectedItemChange(changes: UseComboboxStateChange<string>) {
+    setSelectedItem(changes.selectedItem)
+  }
+  return (
+    <Container>
+      <p>{`My value is ${selectedItem}`}</p>
+      <SingleSelect
+        label="I'm controlled"
+        items={items}
+        selectedItem={selectedItem}
+        handleSelectedItemChange={handleSelectedItemChange}
+      />
+    </Container>
+  )
+}

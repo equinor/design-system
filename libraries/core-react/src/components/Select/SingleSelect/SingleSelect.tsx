@@ -5,7 +5,7 @@ import {
   useState,
   HTMLAttributes,
 } from 'react'
-import { useCombobox } from 'downshift'
+import { useCombobox, UseComboboxStateChange } from 'downshift'
 import styled from 'styled-components'
 import { Label } from '../../Label'
 import { Button } from '../../Button'
@@ -36,6 +36,12 @@ export type SingleSelectProps = {
   readOnly?: boolean
   /** Pass an item that should be selected when the Select is initialized. */
   initialSelectedItem?: string
+  /** If this is used, the select will become a controlled select. The item that should be selected. */
+  selectedItem?: string
+  /** Callback for the selected item change
+   * changes.selectedItem gives the selected item
+   */
+  handleSelectedItemChange?: (changes: UseComboboxStateChange<string>) => void
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const StyledInputWrapper = styled.div`
@@ -103,6 +109,8 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       disabled = false,
       readOnly = false,
       initialSelectedItem,
+      selectedItem,
+      handleSelectedItemChange,
       ...other
     },
     ref,
@@ -119,6 +127,8 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       getItemProps,
     } = useCombobox({
       items: inputItems,
+      selectedItem,
+      onSelectedItemChange: handleSelectedItemChange,
       onInputValueChange: ({ inputValue }) => {
         setInputItems(
           items.filter((item) =>
