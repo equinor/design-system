@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "start-storybook -p 9000 --ci --no-dll",
-    "build": "node --max_old_space_size=10000 --trace-deprecation ./node_modules/@storybook/react/bin/build.js --no-dll -c .storybook -o dist",
+    "build": "build-storybook --no-dll -c .storybook -o dist",
+    "build:debug": "node --max_old_space_size=10000 --trace-deprecation ./node_modules/@storybook/react/bin/build.js --no-dll -c .storybook -o dist",
     "analyze:build": "webpack --profile --json > dist/stats.json",
     "analyze:serve": "webpack-bundle-analyzer dist/stats.json",
     "lint": "eslint stories/**/*.jsx"
@@ -26,6 +27,7 @@
     "@babel/core": "^7.10.2",
     "@babel/plugin-transform-react-jsx": "^7.10.1",
     "@mdx-js/loader": "^1.6.19",
+    "@mdx-js/react": "^1.6.21",
     "@storybook/addon-a11y": "^6.0.27",
     "@storybook/addon-actions": "^6.0.27",
     "@storybook/addon-docs": "^6.0.27",
@@ -39,6 +41,7 @@
     "@types/react-dom": "^16.9.9",
     "@types/styled-components": "^5.1.4",
     "babel-loader": "^8.1.0",
+    "core-js": "^3.8.0",
     "react": "^16.13.1",
     "react-is": "^16.13.1",
     "webpack-bundle-analyzer": "^4.1.0"
