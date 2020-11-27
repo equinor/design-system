@@ -79,7 +79,7 @@ const StyledListItem = styled(ListItem)<StyledListItemType>`
 
 export type MultiSelectProps = {
   /** Option */
-  items?: string[]
+  items: string[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */

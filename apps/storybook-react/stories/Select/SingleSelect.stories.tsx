@@ -15,23 +15,24 @@ const Container = styled.div`
 
 export const Default: Story<SingleSelectProps> = (args) => (
   <Container>
-    <SingleSelect
-      label="Choose an element"
-      {...args}
-      items={items}
-    ></SingleSelect>
+    <SingleSelect label="Choose an element" {...args} items={items} />
   </Container>
 )
 
 export const Disabled: Story = () => (
-  <SingleSelect
-    label="Choose an element"
-    meta="km/t"
-    items={items}
-    disabled
-  ></SingleSelect>
+  <SingleSelect label="Choose an element" meta="km/t" items={items} disabled />
 )
 
 export const ReadOnly: Story = () => (
-  <SingleSelect label="This is read only" items={items} readOnly></SingleSelect>
+  <SingleSelect label="This is read only" items={items} readOnly />
+)
+
+export const WithPreselected: Story<SingleSelectProps> = () => (
+  <Container>
+    <SingleSelect
+      label="I have a preselected option"
+      initialSelectedItem="Troms og Finnmark"
+      items={items}
+    />
+  </Container>
 )

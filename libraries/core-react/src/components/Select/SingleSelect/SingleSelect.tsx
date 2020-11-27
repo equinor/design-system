@@ -25,7 +25,7 @@ type OptionType = {
 
 export type SingleSelectProps = {
   /** Option */
-  items?: string[]
+  items: string[]
   /** Label for the select element */
   label: string
   /** Meta text, for instance unit */
@@ -34,6 +34,8 @@ export type SingleSelectProps = {
   disabled?: boolean
   /** Read Only */
   readOnly?: boolean
+  /** Pass an item that should be selected when the Select is initialized. */
+  initialSelectedItem?: string
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const StyledInputWrapper = styled.div`
@@ -100,6 +102,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       className,
       disabled = false,
       readOnly = false,
+      initialSelectedItem,
       ...other
     },
     ref,
@@ -123,6 +126,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
           ),
         )
       },
+      initialSelectedItem: initialSelectedItem,
     })
 
     return (
