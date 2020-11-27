@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Divider, DividerProps } from '@equinor/eds-core-react'
+import { Divider, DividerProps } from '@equinor/eds-core-react/src/Divider'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
