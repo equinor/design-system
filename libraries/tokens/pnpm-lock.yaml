@@ -1,9 +1,9 @@
 devDependencies:
-  '@rollup/plugin-node-resolve': 8.4.0_rollup@2.34.0
+  '@rollup/plugin-node-resolve': 10.0.0_rollup@2.34.0
   rollup: 2.34.0
   rollup-plugin-delete: 2.0.0
   rollup-plugin-size-snapshot: 0.12.0_rollup@2.34.0
-  rollup-plugin-typescript2: 0.27.3_rollup@2.34.0+typescript@4.1.2
+  rollup-plugin-typescript2: 0.29.0_rollup@2.34.0+typescript@4.1.2
   tslib: 2.0.3
   typescript: 4.1.2
 lockfileVersion: 5.2
@@ -44,23 +44,22 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-1V9XOY4rDW0rehzbrcqAmHnz8e7SKvX27gh8Gt2WgB0+pdzdiLV83p72kZPU+jvMbS1qU5mauP2iOvO8rhmurQ==
-  /@rollup/plugin-node-resolve/8.4.0_rollup@2.34.0:
+  /@rollup/plugin-node-resolve/10.0.0_rollup@2.34.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.34.0
       '@types/resolve': 1.17.1
       builtin-modules: 3.1.0
-      deep-freeze: 0.0.1
       deepmerge: 4.2.2
       is-module: 1.0.0
       resolve: 1.19.0
       rollup: 2.34.0
     dev: true
     engines:
-      node: '>= 8.0.0'
+      node: '>= 10.0.0'
     peerDependencies:
       rollup: ^1.20.0||^2.0.0
     resolution:
-      integrity: sha512-LFqKdRLn0ShtQyf6SBYO69bGE1upV6wUhBX0vFOUnLAyzx5cwp8svA0eHUnu8+YU57XOkrMtfG63QOpQx25pHQ==
+      integrity: sha512-sNijGta8fqzwA1VwUEtTvWCx2E7qC70NMsDh4ZG13byAXYigBNZMxALhKUSycBks5gupJdq0lFrKumFrRZ8H3A==
   /@rollup/plugin-replace/2.3.4_rollup@2.34.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.34.0
@@ -855,10 +854,6 @@ packages:
       node: '>=0.10'
     resolution:
       integrity: sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
-  /deep-freeze/0.0.1:
-    dev: true
-    resolution:
-      integrity: sha1-OgsABd4YZygZ39OM0x+RF5yJPoQ=
   /deepmerge/4.2.2:
     dev: true
     engines:
@@ -2421,7 +2416,7 @@ packages:
       rollup: ^2.0.0
     resolution:
       integrity: sha512-3DrZdAUqRWgD7ZW7sMLtHqRfUqTnWZhP2CHsz/3RdyAL36uw/WQQBaKCmisntMRO9QPDno2USmUXSxS2U9NJcw==
-  /rollup-plugin-typescript2/0.27.3_rollup@2.34.0+typescript@4.1.2:
+  /rollup-plugin-typescript2/0.29.0_rollup@2.34.0+typescript@4.1.2:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.34.0
       find-cache-dir: 3.3.1
@@ -2435,7 +2430,7 @@ packages:
       rollup: '>=1.26.3'
       typescript: '>=2.4.0'
     resolution:
-      integrity: sha512-gmYPIFmALj9D3Ga1ZbTZAKTXq1JKlTQBtj299DXhqYz9cL3g/AQfUvbb2UhH+Nf++cCq941W2Mv7UcrcgLzJJg==
+      integrity: sha512-YytahBSZCIjn/elFugEGQR5qTsVhxhUwGZIsA9TmrSsC88qroGo65O5HZP/TTArH2dm0vUmYWhKchhwi2wL9bw==
   /rollup/2.34.0:
     dev: true
     engines:
@@ -2968,10 +2963,10 @@ packages:
     resolution:
       integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==
 specifiers:
-  '@rollup/plugin-node-resolve': ^8.4.0
+  '@rollup/plugin-node-resolve': ^10.0.0
   rollup: ^2.34.0
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-size-snapshot: ^0.12.0
-  rollup-plugin-typescript2: ^0.27.3
+  rollup-plugin-typescript2: ^0.29.0
   tslib: ^2.0.3
   typescript: ^4.1.2
