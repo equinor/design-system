@@ -86,7 +86,11 @@
   "dependencies": {
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
+<<<<<<< HEAD
     "downshift": "^6.0.6"
+=======
+    "@react-aria/menu": "^3.1.2"
+>>>>>>> d6763a7e (🚚 Move menu dependency)
   },
   "engines": {
     "pnpm": ">=4",
