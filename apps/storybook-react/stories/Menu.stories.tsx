@@ -21,7 +21,7 @@ import {
   delete_to_trash,
   settings,
   arrow_drop_right,
-  more_verticle,
+  more_vertical,
   pressure,
   bearing,
   cable,
@@ -35,7 +35,7 @@ Icon.add({
   delete_to_trash,
   settings,
   arrow_drop_right,
-  more_verticle,
+  more_vertical,
   pressure,
   bearing,
   cable,
@@ -314,7 +314,7 @@ export const InTopbar: Story<MenuProps> = () => {
             onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
             onKeyDown={onKeyPress}
           >
-            <Icon name="more_verticle" title="more"></Icon>
+            <Icon name="more_vertical" title="more"></Icon>
           </Button>
           <Menu
             id="menu-on-button"
