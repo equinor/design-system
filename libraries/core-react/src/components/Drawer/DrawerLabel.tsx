@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
+import { Typography, TypographyProps } from '../Typography'
 import { drawer as tokens } from './Drawer.tokens'
 
 const { subtitleTypography } = tokens
@@ -10,7 +11,7 @@ const StyledDrawerLabel = styled.label`
   line-height: ${subtitleTypography.lineHeight};
 `
 
-type DrawerLabelType = HTMLAttributes<HTMLLabelElement>
+type DrawerLabelType = TypographyProps & HTMLAttributes<HTMLLabelElement>
 
 export const DrawerLabel = forwardRef<HTMLLabelElement, DrawerLabelType>(
   function DrawerLabel({ children, ...props }, ref) {

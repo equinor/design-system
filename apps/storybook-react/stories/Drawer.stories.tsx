@@ -1,6 +1,12 @@
 import React, { Fragment, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { Drawer, TopBar, Icon, Typography } from '@equinor/eds-core-react'
+import {
+  Drawer,
+  TopBar,
+  Icon,
+  Typography,
+  DrawerProps,
+} from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react'
 
 import {
@@ -66,8 +72,6 @@ const Icons = styled.div`
   }
 `
 
-type Props = {}
-
 export default {
   title: 'Components/Drawer',
   component: Drawer,
@@ -80,9 +84,7 @@ export default {
   },
 } as Meta
 
-const menu_items = []
-
-export const Default: Story<Props> = () => {
+export const Default: Story<DrawerProps> = () => {
   return (
     <Fragment>
       <TopBar>
@@ -92,7 +94,7 @@ export const Default: Story<Props> = () => {
         </Header>
         <CustomContent>Drawer example</CustomContent>
       </TopBar>
-      <Wrapper tabIndex="0">
+      <Wrapper>
         <Drawer>
           <DrawerContainer>
             <DrawerList level="grandparent">

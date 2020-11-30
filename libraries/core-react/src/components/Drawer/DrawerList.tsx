@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react'
-import createId from 'lodash/uniqueid'
+import createId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 
