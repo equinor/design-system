@@ -155,8 +155,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
             {...getInputProps({ refKey: 'ref' })}
             disabled={disabled}
             readOnly={readOnly}
+            {...other}
           />
           <StyledButton
+            type="button"
             variant="ghost_icon"
             disabled={disabled || readOnly}
             {...getToggleButtonProps()}

@@ -82,7 +82,7 @@ const StyledListItem = styled(ListItem)<StyledListItemType>`
 `
 
 export type MultiSelectProps = {
-  /** An array of options */
+  /** List of options to choose from */
   items?: string[]
   /** Label for the select element */
   label: string
