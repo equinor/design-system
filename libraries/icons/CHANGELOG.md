@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2020-11-30
+
+### Fixed
+
+- Fixed icons with typo `verticle` -> `vertical`
+  - more_verticle
+  - verticle_split
+  - text_rotation_verticle
+  - verticle_align_top
+  - verticle_align_center
+  - verticle_align_bottom
+  - border_verticle
+  - swap_verticle
+  - swap_verticle_circle
+
+### Deprecated
+
+- `@equinor/eds-icons/commonjs` path will be removed as defined as `commonjs` is the `main` type for the package now.
+
 ## [0.5.1] - 2020-11-26
 
 ### Changed 📓
