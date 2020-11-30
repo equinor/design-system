@@ -5,6 +5,7 @@ import { drawer as tokens } from './Drawer.tokens'
 import { useTreeState } from '@react-stately/tree'
 import { useMenu, useMenuItem, useMenuSection } from '@react-aria/menu'
 import { useDrawer } from './Drawer.context'
+
 const { background } = tokens
 
 const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
@@ -17,7 +18,7 @@ const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
   border-right: none;
 
   li {
-    padding-left: 16px;
+    //padding-left: 16px;
   }
 
   ${({ level }) =>
@@ -66,13 +67,17 @@ type DrawerListChildrenType = {
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
   function DrawerList({ children, level = 'child', open, ...props }, ref) {
     const drawerListId = useMemo(() => createId('drawerlist-'), [])
-    // const state = useTreeState({ ...props, children })
+    const { focusedIndex, setFocusedIndex } = useDrawer()
+
+    const propsMenu = {
+      ...props,
+      level,
+      open,
+      children,
+    }
+
     // const useref = React.useRef<HTMLUListElement>(null)
-    // const { menuProps } = useMenu(
-    //   { level, open, ...props },
-    //   useDrawer(children),
-    //   ref,
-    // )
+    //const { menuProps } = useMenu(propsMenu, focusedIndex, useref)
     let ListItems: Array<DrawerListChildrenType>
 
     if (Array.isArray(children)) {

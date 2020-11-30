@@ -99,7 +99,6 @@ export const Default: Story<DrawerProps> = () => {
           <DrawerContainer>
             <DrawerList level="grandparent">
               <DrawerItem>
-                <Icon name="account_circle" size={16} />
                 <DrawerLabel>Grandparent 1</DrawerLabel>
                 <DrawerList level="parent">
                   <DrawerItem>
@@ -125,7 +124,6 @@ export const Default: Story<DrawerProps> = () => {
                 </DrawerList>
               </DrawerItem>
               <DrawerItem>
-                <Icon name="accessible" size={16} />
                 <DrawerLabel>Grandparent 2</DrawerLabel>
                 <DrawerList level="parent" open>
                   <DrawerItem>
@@ -181,7 +179,6 @@ export const Default: Story<DrawerProps> = () => {
                 </DrawerList>
               </DrawerItem>
               <DrawerItem>
-                <Icon name="notifications" size={16} />
                 <DrawerLabel
                   variant="body_short"
                   title="Grandparent with a really long name 3"
@@ -205,7 +202,6 @@ export const Default: Story<DrawerProps> = () => {
             <DrawerSubtitle name="Grandparent orphans" />
             <DrawerList level="grandparent">
               <DrawerItem>
-                <Icon name="business" size={16} />
                 <DrawerLabel>Grandparent orphans 1</DrawerLabel>
                 <DrawerList>
                   <DrawerItem>
