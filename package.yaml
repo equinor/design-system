@@ -10,6 +10,8 @@ scripts:
   eds-core-react: pnpm --filter @equinor/eds-core-react run dev
   'test:eds-core-react': pnpm --filter @equinor/eds-core-react run test
   'build:eds-core-react': pnpm --filter @equinor/eds-core-react run build
+  'build:eds-tokens': pnpm --filter @equinor/eds-tokens run build
+  'build:eds-icons': pnpm --filter @equinor/eds-icons run build
   'bump:eds-core-react': >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
     prerelease
@@ -17,11 +19,6 @@ scripts:
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
   storybook: pnpm --filter @equinor/eds-storybook run dev
-  'build:storybook': >-
-    pnpm --filter @equinor/eds-core-react install && pnpm --filter
-    @equinor/eds-core-react run build && pnpm --filter
-    @equinor/eds-storybook install && pnpm --filter
-    @equinor/eds-storybook run build
   storefront: pnpm --filter @equinor/eds-storefront run dev
   'build:storefront': pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
