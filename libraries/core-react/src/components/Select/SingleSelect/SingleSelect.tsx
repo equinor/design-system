@@ -24,7 +24,7 @@ type OptionType = {
 }
 
 export type SingleSelectProps = {
-  /** Option */
+  /** List of options to choose from */
   items: string[]
   /** Label for the select element */
   label: string
@@ -36,7 +36,10 @@ export type SingleSelectProps = {
   readOnly?: boolean
   /** Pass an item that should be selected when the Select is initialized. */
   initialSelectedItem?: string
-  /** If this is used, the select will become a controlled select. The item that should be selected. */
+  /** If this prop is used, the select will become a controlled component.
+   * Note that this prop replaces the need for ```initialSelectedItem```
+   *
+   * The item that should be selected. */
   selectedItem?: string
   /** Callback for the selected item change
    * changes.selectedItem gives the selected item
