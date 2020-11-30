@@ -1,34 +1,34 @@
 name: eds
 engines:
-  pnpm: '>=4'
+  pnpm: '>=5.13.5'
 scripts:
   lint: eslint
   'lint:all': pnpm run lint .
-  'lint:storybook': pnpm run lint ./apps/storybook-react/stories
-  'lint:core-react': pnpm run lint ./libraries/core-react/src
+  'lint:storybook': pnpm run lint ./apps/storybook/stories
+  'lint:eds-core-react': pnpm run lint ./libraries/eds-core-react/src
   init: pnpm multi install --force && pnpm run build
-  core-react: pnpm --filter @equinor/eds-core-react run dev
-  'test:core-react': pnpm --filter @equinor/eds-core-react run test
-  'build:core-react': pnpm --filter @equinor/eds-core-react run build
-  'bump:core-react': >-
+  eds-core-react: pnpm --filter @equinor/eds-core-react run dev
+  'test:eds-core-react': pnpm --filter @equinor/eds-core-react run test
+  'build:eds-core-react': pnpm --filter @equinor/eds-core-react run build
+  'bump:eds-core-react': >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
     prerelease
-  'publish:core-react': >-
+  'publish:eds-core-react': >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
-  storybook: pnpm --filter @equinor/eds-storybook-react run dev
+  storybook: pnpm --filter @equinor/eds-storybook run dev
   'build:storybook': >-
     pnpm --filter @equinor/eds-core-react install && pnpm --filter
     @equinor/eds-core-react run build && pnpm --filter
-    @equinor/eds-storybook-react install && pnpm --filter
-    @equinor/eds-storybook-react run build
+    @equinor/eds-storybook install && pnpm --filter
+    @equinor/eds-storybook run build
   storefront: pnpm --filter @equinor/eds-storefront run dev
   'build:storefront': pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
-  'test:watch:core-react': 'pnpm --filter @equinor/eds-core-react run test:watch'
-  dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
-  storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
-  storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
+  'test:watch:eds-core-react': 'pnpm --filter @equinor/eds-core-react run test:watch'
+  dockerize-storybook: docker build -t eds/storybook -f apps/storybook/Dockerfile.dev .
+  storybook-docker-run: 'docker run -p 8080:80 eds/storybook'
+  storybook-docker-inspect: docker run -it eds/storybook /bin/sh
   dockerize-storefront: >-
     docker build --build-arg GATSBY_STAGE=prod -t eds/storefront -f
     apps/storefront/Dockerfile .

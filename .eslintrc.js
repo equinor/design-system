@@ -1,4 +1,4 @@
-const pkg = require('./libraries/core-react/package.json')
+const pkg = require('./libraries/eds-core-react/package.json')
 
 const {
   devDependencies: { react: reactVersion },
