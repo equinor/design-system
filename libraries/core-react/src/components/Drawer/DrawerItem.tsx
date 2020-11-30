@@ -7,14 +7,16 @@ import React, {
 } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
-import { chevron_right } from '@equinor/eds-icons'
+import { chevron_down } from '@equinor/eds-icons'
 import { useCombinedRefs } from '@hooks'
 import { useDrawer } from './Drawer.context'
 import { drawer as tokens } from './Drawer.tokens'
 import { DrawerList } from './DrawerList'
+import { useMenu, useMenuItem, useMenuSection } from '@react-aria/menu'
+import { useFocus } from '@react-aria/interactions'
 
 const icons = {
-  chevron_right,
+  chevron_down,
 }
 
 Icon.add(icons)
@@ -140,6 +142,8 @@ export const DrawerItem = React.memo(
     // Add a level check and deeper context levels
 
     const [drawerOpen, setDrawerOpen] = useState(open)
+    const [isFocusedState, setFocused] = useState(false) // New isfocused
+    const { focusProps } = useFocus({ onFocusChange: setFocused })
 
     const handleClick = (
       event: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -161,7 +165,7 @@ export const DrawerItem = React.memo(
     }
 
     const focusedIndex = -1
-    const isFocused = index === focusedIndex
+    const isFocused = index === focusedIndex // old isFocused
 
     let itemElements
     let updatedChildren: Array<ChildType>
