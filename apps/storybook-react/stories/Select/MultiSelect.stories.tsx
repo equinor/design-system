@@ -27,33 +27,61 @@ export const ReadOnly: Story<MultiSelectProps> = () => (
   <MultiSelect label="This is read only" items={items} readOnly></MultiSelect>
 )
 
+const initial = ['Troms og Finnmark', 'Vestland']
+
 export const WithPreselected: Story<MultiSelectProps> = () => (
   <Container>
     <MultiSelect
       label="I have preselected options"
       items={items}
-      initialSelectedItems={['Troms og Finnmark', 'Vestland']}
+      initialSelectedItems={initial}
     />
   </Container>
 )
 
-export const Controlled: Story<MultiSelectProps> = () => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([])
+export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
+  const [selectedItems, setSelectedItems] = useState<string[]>(initial)
 
   function handleSelectedItemsChange(
     changes: UseMultipleSelectionStateChange<string>,
   ) {
     setSelectedItems(changes.selectedItems)
 
-    /* setSelectedItem(changes.selectedItems) */
+    //setSelectedItem(changes.selectedItems)
   }
   return (
     <Container>
-      {selectedItems.length > 0 && <p>My value is {selectedItems.join(',')}</p>}
+      {selectedItems.length > 0 && (
+        <p>My value is {selectedItems.join(', ')}</p>
+      )}
       <MultiSelect
-        label="I'm controlled"
+        label="I can show my values outside the component itself"
         items={items}
-        /*  selectedItem={selectedItem} */
+        initialSelectedItems={initial}
+        handleSelectedItemsChange={handleSelectedItemsChange}
+      />
+    </Container>
+  )
+}
+export const Controlled: Story<MultiSelectProps> = () => {
+  const [selectedItems, setSelectedItems] = useState<string[]>(initial)
+
+  function handleSelectedItemsChange(
+    changes: UseMultipleSelectionStateChange<string>,
+  ) {
+    setSelectedItems(changes.selectedItems)
+
+    //setSelectedItem(changes.selectedItems)
+  }
+  return (
+    <Container>
+      {selectedItems.length > 0 && (
+        <p>My value is {selectedItems.join(', ')}</p>
+      )}
+      <MultiSelect
+        label="I'm a controlled component"
+        items={items}
+        selectedOptions={selectedItems}
         handleSelectedItemsChange={handleSelectedItemsChange}
       />
     </Container>

@@ -20,7 +20,7 @@ import { CheckboxInput } from '../../SelectionControls/Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
 import { List } from '../../List'
 import styled from 'styled-components'
-import { typographyTemplate, spacingsTemplate } from '@utils'
+import { typographyTemplate } from '@utils'
 import { select as tokens } from '../Select.tokens'
 
 const { ListItem } = List
@@ -36,7 +36,7 @@ const Container = styled.div<ContainerProps>`
 `
 
 const PaddedInput = styled(Input)`
-  /* Hack: Had to add + 0px to satisfythe style lint plugin */
+  /* Hack: Had to add + 0px to satisfy the style lint plugin */
   padding-right: calc(
     ${tokens.button.size} + ${tokens.button.spacings.left} +
       ${tokens.button.spacings.right} + 0px
@@ -82,8 +82,8 @@ const StyledListItem = styled(ListItem)<StyledListItemType>`
 `
 
 export type MultiSelectProps = {
-  /** Option */
-  items: string[]
+  /** An array of options */
+  items?: string[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
@@ -94,9 +94,10 @@ export type MultiSelectProps = {
   disabled?: boolean
   /** Read Only */
   readOnly?: boolean
-  initialSelectedItem?: string
-  /** If this is used, the select will become a controlled select. The item that should be selected. */
-  selectedItem?: string
+  /** If this prop is used, the select will become a controlled component.
+   * Note that this prop replaces the need for ```initialSelectedItems```
+   * The items that should be selected. */
+  selectedOptions?: string[]
   /** Callback for the selected item change
    * changes.selectedItem gives the selected item
    */
@@ -115,17 +116,20 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       className,
       disabled = false,
       readOnly = false,
-      selectedItem,
+      selectedOptions = null,
       handleSelectedItemsChange,
       ...other
     },
     ref,
   ) {
-    /*     const [inputItems, setInputItems] = useState(items)
-     */ /* const [selectedItems, setSelectedItems] = useState([]) */
-    /* const [inputItems, setInputItems] = useState(items) */
-    /* const isOpen = true */
+    const isControlled = selectedOptions
+
+    const [options, setOptions] = useState(
+      isControlled ? selectedOptions : initialSelectedItems,
+    )
+
     const [inputValue, setInputValue] = useState('')
+
     const {
       getSelectedItemProps,
       getDropdownProps,
@@ -133,13 +137,23 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       removeSelectedItem,
       selectedItems,
     } = useMultipleSelection({
+      selectedItems: options,
       initialSelectedItems: initialSelectedItems,
-      onSelectedItemsChange: handleSelectedItemsChange,
+      onSelectedItemsChange: (changes) => {
+        setOptions(changes.selectedItems)
+        if (handleSelectedItemsChange) {
+          handleSelectedItemsChange(changes)
+        }
+      },
+      //onSelectedItemsChange: handleSelectedItemsChange,
     })
     const getFilteredItems = (items: string[]) =>
       items.filter((item) =>
+        // Remove selected items from the list
         /* selectedItems.indexOf(item) < 0 && */
+        // Can be used if we need filter the list on first letters aka starts with search
         // item.toLowerCase().startsWith(inputValue.toLowerCase()),
+        // Filter the list using contains search
         item.toLowerCase().includes(inputValue.toLowerCase()),
       )
     const {
