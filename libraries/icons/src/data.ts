@@ -27,8 +27,8 @@ export const more_horizontal: IconData = {
     'M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8 2c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z',
 }
 
-export const more_verticle: IconData = {
-  name: 'more_verticle',
+export const more_vertical: IconData = {
+  name: 'more_vertical',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -54,8 +54,8 @@ export const fullscreen: IconData = {
     'M7 10H5V5h5v2H7v3zm-2 4h2v3h3v2H5v-5zm12 3h-3v2h5v-5h-2v3zM14 7V5h5v5h-2V7h-3z',
 }
 
-export const verticle_split: IconData = {
-  name: 'verticle_split',
+export const vertical_split: IconData = {
+  name: 'vertical_split',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -3736,8 +3736,8 @@ export const text_rotation_up: IconData = {
     'M18 4l-3 3h2v13h2V7h2l-3-3zm-4 12.4l-2.2-.9v-5l2.2-.9V7.5L3 12.25v1.5l11 4.75v-2.1zm-4-5.27L4.98 13 10 14.87v-3.74z',
 }
 
-export const text_rotation_verticle: IconData = {
-  name: 'text_rotation_verticle',
+export const text_rotation_vertical: IconData = {
+  name: 'text_rotation_vertical',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -3852,16 +3852,16 @@ export const wrap_text: IconData = {
     'M19.5 4h-16v2h16V4zm-16 14h6v-2h-6v2zm0-8h13c2.21 0 4 1.79 4 4s-1.79 4-4 4h-2v2l-3-3 3-3v2h2.25c1.1 0 2-.9 2-2s-.9-2-2-2H3.5v-2z',
 }
 
-export const verticle_align_top: IconData = {
-  name: 'verticle_align_top',
+export const vertical_align_top: IconData = {
+  name: 'vertical_align_top',
   prefix: 'eds',
   height: '24',
   width: '24',
   svgPathData: 'M4 5V3h16v2H4zm7 6H8l4-4 4 4h-3v10h-2V11z',
 }
 
-export const verticle_align_center: IconData = {
-  name: 'verticle_align_center',
+export const vertical_align_center: IconData = {
+  name: 'vertical_align_center',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -3869,8 +3869,8 @@ export const verticle_align_center: IconData = {
     'M16 5h-3V1h-2v4H8l4 4 4-4zM8 19h3v4h2v-4h3l-4-4-4 4zm-4-6v-2h16v2H4z',
 }
 
-export const verticle_align_bottom: IconData = {
-  name: 'verticle_align_bottom',
+export const vertical_align_bottom: IconData = {
+  name: 'vertical_align_bottom',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -4087,8 +4087,8 @@ export const keyboard_space_bar: IconData = {
   svgPathData: 'M18 9v4H6V9H4v6h16V9h-2z',
 }
 
-export const border_verticle: IconData = {
-  name: 'border_verticle',
+export const border_vertical: IconData = {
+  name: 'border_vertical',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -5436,8 +5436,8 @@ export const swap_horizontal_circle: IconData = {
     'M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm11-5.5V9h-4v2h4v2.5l3.5-3.5L15 6.5zM5.5 14L9 10.5V13h4v2H9v2.5L5.5 14z',
 }
 
-export const swap_verticle: IconData = {
-  name: 'swap_verticle',
+export const swap_vertical: IconData = {
+  name: 'swap_vertical',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -5445,8 +5445,8 @@ export const swap_verticle: IconData = {
     'M5 6.99L9 3l4 3.99h-3V14H8V6.99H5zM16 10v7.01h3L15 21l-4-3.99h3V10h2z',
 }
 
-export const swap_verticle_circle: IconData = {
-  name: 'swap_verticle_circle',
+export const swap_vertical_circle: IconData = {
+  name: 'swap_vertical_circle',
   prefix: 'eds',
   height: '24',
   width: '24',

@@ -14,9 +14,9 @@
       <title>more_horizontal</title>
       <desc>ui-views-more_horizontal</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-8 2c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/>
-    </symbol><symbol id="more_verticle" viewBox="0 0 24 24">
-      <title>more_verticle</title>
-      <desc>ui-views-more_verticle</desc>
+    </symbol><symbol id="more_vertical" viewBox="0 0 24 24">
+      <title>more_vertical</title>
+      <desc>ui-views-more_vertical</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-2 8c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/>
     </symbol><symbol id="fullscreen_exit" viewBox="0 0 24 24">
       <title>fullscreen_exit</title>
@@ -26,9 +26,9 @@
       <title>fullscreen</title>
       <desc>ui-views-fullscreen</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M7 10H5V5h5v2H7v3zm-2 4h2v3h3v2H5v-5zm12 3h-3v2h5v-5h-2v3zM14 7V5h5v5h-2V7h-3z"/>
-    </symbol><symbol id="verticle_split" viewBox="0 0 24 24">
-      <title>verticle_split</title>
-      <desc>ui-views-verticle_split</desc>
+    </symbol><symbol id="vertical_split" viewBox="0 0 24 24">
+      <title>vertical_split</title>
+      <desc>ui-views-vertical_split</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M11 5H3v2h8V5zM3 9h8v2H3V9zm8 4H3v2h8v-2zm0 4H3v2h8v-2zm8-10v10h-4V7h4zm-6-2h8v14h-8V5z"/>
     </symbol><symbol id="view_agenda" viewBox="0 0 24 24">
       <title>view_agenda</title>
@@ -1670,9 +1670,9 @@
       <title>text_rotation_up</title>
       <desc>wysiwyg-text_rotation_up</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M18 4l-3 3h2v13h2V7h2l-3-3zm-4 12.4l-2.2-.9v-5l2.2-.9V7.5L3 12.25v1.5l11 4.75v-2.1zm-4-5.27L4.98 13 10 14.87v-3.74z"/>
-    </symbol><symbol id="text_rotation_verticle" viewBox="0 0 24 24">
-      <title>text_rotation_verticle</title>
-      <desc>wysiwyg-text_rotation_verticle</desc>
+    </symbol><symbol id="text_rotation_vertical" viewBox="0 0 24 24">
+      <title>text_rotation_vertical</title>
+      <desc>wysiwyg-text_rotation_vertical</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.25 17l-3 3-3-3h2V4h2v13h2zM16 5h-1.5L9.75 16h2.1l.9-2.2h5l.9 2.2h2.1L16 5zm-2.62 7l1.87-5.02L17.12 12h-3.74z"/>
     </symbol><symbol id="text_rotation_angled_down" viewBox="0 0 24 24">
       <title>text_rotation_angled_down</title>
@@ -1722,17 +1722,17 @@
       <title>wrap_text</title>
       <desc>wysiwyg-wrap_text</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 4h-16v2h16V4zm-16 14h6v-2h-6v2zm0-8h13c2.21 0 4 1.79 4 4s-1.79 4-4 4h-2v2l-3-3 3-3v2h2.25c1.1 0 2-.9 2-2s-.9-2-2-2H3.5v-2z"/>
-    </symbol><symbol id="verticle_align_top" viewBox="0 0 24 24">
-      <title>verticle_align_top</title>
-      <desc>wysiwyg-verticle_align_top</desc>
+    </symbol><symbol id="vertical_align_top" viewBox="0 0 24 24">
+      <title>vertical_align_top</title>
+      <desc>wysiwyg-vertical_align_top</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M4 5V3h16v2H4zm7 6H8l4-4 4 4h-3v10h-2V11z"/>
-    </symbol><symbol id="verticle_align_center" viewBox="0 0 24 24">
-      <title>verticle_align_center</title>
-      <desc>wysiwyg-verticle_align_center</desc>
+    </symbol><symbol id="vertical_align_center" viewBox="0 0 24 24">
+      <title>vertical_align_center</title>
+      <desc>wysiwyg-vertical_align_center</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M16 5h-3V1h-2v4H8l4 4 4-4zM8 19h3v4h2v-4h3l-4-4-4 4zm-4-6v-2h16v2H4z"/>
-    </symbol><symbol id="verticle_align_bottom" viewBox="0 0 24 24">
-      <title>verticle_align_bottom</title>
-      <desc>wysiwyg-verticle_align_bottom</desc>
+    </symbol><symbol id="vertical_align_bottom" viewBox="0 0 24 24">
+      <title>vertical_align_bottom</title>
+      <desc>wysiwyg-vertical_align_bottom</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M13 13h3l-4 4-4-4h3V3h2v10zm-9 8v-2h16v2H4z"/>
     </symbol><symbol id="title" viewBox="0 0 24 24">
       <title>title</title>
@@ -1830,9 +1830,9 @@
       <title>keyboard_space_bar</title>
       <desc>wysiwyg-keyboard_space_bar</desc>
       <path d="M18 9v4H6V9H4v6h16V9h-2z"/>
-    </symbol><symbol id="border_verticle" viewBox="0 0 24 24">
-      <title>border_verticle</title>
-      <desc>wysiwyg-border_verticle</desc>
+    </symbol><symbol id="border_vertical" viewBox="0 0 24 24">
+      <title>border_vertical</title>
+      <desc>wysiwyg-border_vertical</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M3 5h2V3H3v2zm0 4h2V7H3v2zm6 12H7v-2h2v2zm-2-8h2v-2H7v2zm-2 0H3v-2h2v2zm-2 8h2v-2H3v2zm2-4H3v-2h2v2zM7 5h2V3H7v2zm14 12h-2v-2h2v2zm-10 4h2V3h-2v18zm10 0h-2v-2h2v2zm-2-8h2v-2h-2v2zm0-8V3h2v2h-2zm0 4h2V7h-2v2zm-2-4h-2V3h2v2zm-2 16h2v-2h-2v2zm2-8h-2v-2h2v2z"/>
     </symbol><symbol id="border_top" viewBox="0 0 24 24">
       <title>border_top</title>
@@ -2438,13 +2438,13 @@
       <title>swap_horizontal_circle</title>
       <desc>arrows-swap_horizontal_circle</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm11-5.5V9h-4v2h4v2.5l3.5-3.5L15 6.5zM5.5 14L9 10.5V13h4v2H9v2.5L5.5 14z"/>
-    </symbol><symbol id="swap_verticle" viewBox="0 0 24 24">
-      <title>swap_verticle</title>
-      <desc>arrows-swap_verticle</desc>
+    </symbol><symbol id="swap_vertical" viewBox="0 0 24 24">
+      <title>swap_vertical</title>
+      <desc>arrows-swap_vertical</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M5 6.99L9 3l4 3.99h-3V14H8V6.99H5zM16 10v7.01h3L15 21l-4-3.99h3V10h2z"/>
-    </symbol><symbol id="swap_verticle_circle" viewBox="0 0 24 24">
-      <title>swap_verticle_circle</title>
-      <desc>arrows-swap_verticle_circle</desc>
+    </symbol><symbol id="swap_vertical_circle" viewBox="0 0 24 24">
+      <title>swap_vertical_circle</title>
+      <desc>arrows-swap_vertical_circle</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm2.5-3L10 5.5 13.5 9H11v4H9V9H6.5zm7.5 9.5l3.5-3.5H15v-4h-2v4h-2.5l3.5 3.5z"/>
     </symbol><symbol id="label" viewBox="0 0 24 24">
       <title>label</title>
