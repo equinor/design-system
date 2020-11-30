@@ -211,7 +211,7 @@ export const DrawerItem = React.memo(
         // onFocus={() => setFocusedIndex(index)}
       >
         {updatedChildren.length > 1 && (
-          <Icon className="child_icon" name="chevron_right" size={16} />
+          <Icon className="child_icon" name="chevron_down" size={16} />
         )}
         {itemElements}
         {drawerOpen && updatedChildren}
