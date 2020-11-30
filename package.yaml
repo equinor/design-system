@@ -26,7 +26,6 @@ scripts:
   'build:storefront': pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
-  demo: pnpm --filter ./apps/demo run dev
   dockerize-storybook: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
   storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
   storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
