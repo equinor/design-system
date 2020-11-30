@@ -82,8 +82,8 @@
     "styled-components": ">=4.2"
   },
   "dependencies": {
-    "@equinor/eds-icons": "0.5.0-beta.2",
-    "@equinor/eds-tokens": "0.5.1-beta.2"
+    "@equinor/eds-icons": "workspace:*",
+    "@equinor/eds-tokens": "workspace:*"
   },
   "engines": {
     "pnpm": ">=4",

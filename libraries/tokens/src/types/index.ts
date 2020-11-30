@@ -1,5 +1,9 @@
-import { typography } from '../base/typography'
-import { elevation } from '../base/elevation'
+import { typography } from '../../base/typography'
+import { elevation } from '../../base/elevation'
+
+export * from './borders'
+export * from './focus'
+export * from './component'
 
 export type Typography = {
   color: string
@@ -21,13 +25,6 @@ export type TypographyTokens = {
   }
 }
 
-export type Border = {
-  type?: 'outline' | 'border'
-  radius?: string | number
-  color?: string
-  width?: string | number
-}
-
 export type Spacing = {
   left: string
   right: string
@@ -35,23 +32,7 @@ export type Spacing = {
   bottom?: string
 }
 
-export type Clickbounds = {
-  jumbo__base: string
-  default__base: string
-  default__input: string
-}
-
-export type Elevations = {
-  [P in keyof typeof elevation]: string
-}
-
-export type Color = {
-  hex: string
-  hsla: string
-  rgba: string
-}
-
-export type Spacings = {
+export type SpacingTokens = {
   comfortable: {
     xxx_large: string
     xx_large: string
@@ -65,6 +46,16 @@ export type Spacings = {
   }
 }
 
+export type Elevations = {
+  [P in keyof typeof elevation]: string
+}
+
+export type Color = {
+  hex: string
+  hsla: string
+  rgba: string
+}
+
 export type Focus = {
   type?: 'dashed' | string
   color: string
@@ -73,12 +64,18 @@ export type Focus = {
 }
 
 export type Hover = {
-  background: string
+  background: Background
   radius?: string
 }
 
 export type Pressed = {
   color: string
+}
+
+export type Clickbounds = {
+  jumbo__base: string
+  default__base: string
+  default__input: string
 }
 
 export type Clickbound = {
@@ -91,3 +88,5 @@ export type Clickbound = {
       }
     | number
 }
+
+export type Background = string
