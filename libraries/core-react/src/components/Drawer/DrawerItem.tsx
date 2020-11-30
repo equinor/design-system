@@ -123,7 +123,8 @@ type DrawerItemProps = {
   disabled?: boolean
   /** List is open */
   open?: boolean
-}
+  // children?: React.ReactElement
+} & HTMLAttributes<HTMLLIElement>
 
 type ChildType = {
   disabled?: boolean

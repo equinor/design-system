@@ -18,19 +18,12 @@ import {
 const {
   DrawerContainer,
   DrawerList,
-  DrawerTreeItem,
+  // DrawerTreeItem,
   DrawerItem,
   DrawerSubtitle,
   DrawerLabel,
 } = Drawer
 const { Header, CustomContent } = TopBar
-const {
-  DrawerContainer,
-  DrawerLabel,
-  DrawerSubtitle,
-  DrawerItem,
-  DrawerList,
-} = Drawer
 
 const icons = {
   account_circle,
