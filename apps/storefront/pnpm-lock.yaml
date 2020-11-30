@@ -26,8 +26,8 @@ dependencies:
   gatsby-transformer-sharp: 2.7.0_5aaeb6a25441fc47b2f864f8394e1b0b
   gatsby-transformer-yaml: 2.6.0_gatsby@2.27.4
   js-file-download: 0.4.12
-  mitt: 1.2.0
-  polished: 3.6.7
+  mitt: 2.1.0
+  polished: 4.0.5
   prop-types: 15.7.2
   query-string: 6.13.7
   ramda: 0.27.1
@@ -11490,6 +11490,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-r6lj77KlwqLhIUku9UWYes7KJtsczvolZkzp8hbaDPPaE24OmWl5s539Mytlj22siEQKosZ26qCBgda2PKwoJw==
+  /mitt/2.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-ILj2TpLiysu2wkBbWjAmww7TkZb65aiQO+DkVdUTBpBXq+MHYiETENkKFMtsJZX1Lf4pe4QOrTSjIfUwN5lRdg==
   /mixin-deep/1.3.2:
     dependencies:
       for-in: 1.0.2
@@ -12846,14 +12850,14 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==
-  /polished/3.6.7:
+  /polished/4.0.5:
     dependencies:
       '@babel/runtime': 7.12.5
     dev: false
     engines:
       node: '>=10'
     resolution:
-      integrity: sha512-b4OViUOihwV0icb9PHmWbR+vPqaSzSAEbgLskvb7ANPATVXGiYv/TQFHQo65S53WU9i5EQ1I03YDOJW7K0bmYg==
+      integrity: sha512-BY2+LVtOHQWBQpGN4GPAKpCdsBePOdSdHTpZegRDRCrvGPkRPTx1DEC+vGjIDPhXS7W2qiBxschnwRWTFdMZag==
   /portfinder/1.0.28:
     dependencies:
       async: 2.6.3
@@ -17762,8 +17766,8 @@ specifiers:
   gatsby-transformer-sharp: ^2.7.0
   gatsby-transformer-yaml: ^2.6.0
   js-file-download: ^0.4.12
-  mitt: ^1.2.0
-  polished: ^3.6.7
+  mitt: ^2.1.0
+  polished: ^4.0.5
   prettier: 2.0.5
   prop-types: ^15.7.2
   query-string: ^6.13.7
