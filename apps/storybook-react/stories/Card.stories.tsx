@@ -8,11 +8,11 @@ import {
   Icon,
   CardProps,
 } from '@equinor/eds-core-react'
-import { more_verticle, share, person_add, settings } from '@equinor/eds-icons'
+import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
 
 const icons = {
-  more_verticle,
+  more_vertical,
   share,
   person_add,
   settings,
@@ -51,7 +51,7 @@ export const Default: Story<CardProps> = (args) => {
             </Typography>
           </CardHeaderTitle>
           <Button variant="ghost_icon">
-            <Icon name="more_verticle" title="more action" size={48}></Icon>
+            <Icon name="more_vertical" title="more action" size={48}></Icon>
           </Button>
         </CardHeader>
       </Card>
@@ -120,7 +120,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="body_short">Body short</Typography>
         </CardHeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_verticle" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
       </CardHeader>
     </Card>
@@ -148,7 +148,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="body_short">Body short</Typography>
         </CardHeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_verticle" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
       </CardHeader>
     </Card>
@@ -178,7 +178,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="body_short">Caption</Typography>
         </CardHeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_verticle" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
       </CardHeader>
     </Card>
@@ -199,7 +199,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="h6">Title goes here</Typography>
         </CardHeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_verticle" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
       </CardHeader>
     </Card>
