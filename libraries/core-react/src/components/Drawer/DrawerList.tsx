@@ -2,8 +2,13 @@ import React, { forwardRef, HTMLAttributes, useMemo } from 'react'
 import createId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
-import { useTreeState } from '@react-stately/tree'
-import { useMenu, useMenuItem, useMenuSection } from '@react-aria/menu'
+import { useTreeState, TreeState } from '@react-stately/tree'
+import {
+  useMenu,
+  useMenuItem,
+  useMenuSection,
+  AriaMenuOptions,
+} from '@react-aria/menu'
 import { useDrawer } from './Drawer.context'
 
 const { background } = tokens
@@ -61,7 +66,8 @@ type DrawerListProps = {
 } & HTMLAttributes<HTMLUListElement>
 
 type DrawerListChildrenType = {
-  drawerListId?: number
+  drawerListId?: number | TreeState<unknown>
+  children?: React.ReactElement | AriaMenuOptions<unknown>
 } & React.ReactElement
 
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
@@ -69,15 +75,12 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     const drawerListId = useMemo(() => createId('drawerlist-'), [])
     const { focusedIndex, setFocusedIndex } = useDrawer()
 
-    const propsMenu = {
-      ...props,
-      level,
-      open,
-      children,
-    }
-
     // const useref = React.useRef<HTMLUListElement>(null)
-    //const { menuProps } = useMenu(propsMenu, focusedIndex, useref)
+    // const { menuProps } = useMenu(
+    //   children as AriaMenuOptions<unknown>,
+    //   (focusedIndex as unknown) as TreeState<unknown>, // Dont ask me about this (it works tho)
+    //   useref,
+    // )
     let ListItems: Array<DrawerListChildrenType>
 
     if (Array.isArray(children)) {
@@ -104,7 +107,13 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     }
 
     return (
-      <StyledDrawerList {...props} level={level} open={open} ref={ref}>
+      <StyledDrawerList
+        // {...menuProps}
+        {...props}
+        level={level}
+        open={open}
+        ref={ref}
+      >
         {ListItems}
       </StyledDrawerList>
     )

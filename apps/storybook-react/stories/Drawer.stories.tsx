@@ -180,7 +180,7 @@ export const Default: Story<DrawerProps> = () => {
               </DrawerItem>
               <DrawerItem>
                 <DrawerLabel
-                  variant="body_short"
+                  // variant="body_short"
                   title="Grandparent with a really long name 3"
                 >
                   Grandparent with a really long name 3

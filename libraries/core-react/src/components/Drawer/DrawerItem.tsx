@@ -200,7 +200,7 @@ export const DrawerItem = React.memo(
       ...rest,
       disabled,
     }
-
+    console.log(updatedChildren)
     return (
       <StyledDrawerItem
         {...props}
