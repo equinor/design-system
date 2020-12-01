@@ -2,6 +2,17 @@ import React, { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 
+const { background, border } = tokens
+
+type DrawerContainerProps = HTMLAttributes<HTMLElement>
+
+const StyledDrawerContainer = styled.nav<DrawerContainerProps>`
+  background: ${background};
+  width: 254px;
+  height: 100%;
+  border-right: ${border.right.width} solid ${border.right.color};
+`
+
 const StyledDrawer = styled.div`
   background: none;
 `
@@ -21,7 +32,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
 
   return (
     <StyledDrawer {...props} ref={ref}>
-      {children}
+      <StyledDrawerContainer>{children}</StyledDrawerContainer>
     </StyledDrawer>
   )
 })

@@ -22,7 +22,6 @@ import {
 } from '@equinor/eds-icons'
 
 const {
-  DrawerContainer,
   DrawerList,
   // DrawerTreeItem,
   DrawerItem,
@@ -76,7 +75,6 @@ export default {
   title: 'Components/Drawer',
   component: Drawer,
   subcomponents: {
-    DrawerContainer,
     DrawerLabel,
     DrawerSubtitle,
     DrawerItem,
@@ -96,128 +94,120 @@ export const Default: Story<DrawerProps> = () => {
       </TopBar>
       <Wrapper>
         <Drawer>
-          <DrawerContainer>
-            <DrawerList level="grandparent">
-              <DrawerItem>
-                <DrawerLabel>Grandparent 1</DrawerLabel>
-                <DrawerList level="parent">
-                  <DrawerItem>
-                    <DrawerLabel>Parent 1</DrawerLabel>
-                    <DrawerList>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 1
-                        </Typography>
-                      </DrawerItem>
-                    </DrawerList>
-                  </DrawerItem>
-                  <DrawerItem>
-                    <DrawerLabel>Parent 2</DrawerLabel>
-                    <DrawerList>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 1
-                        </Typography>
-                      </DrawerItem>
-                    </DrawerList>
-                  </DrawerItem>
-                </DrawerList>
-              </DrawerItem>
-              <DrawerItem>
-                <DrawerLabel>Grandparent 2</DrawerLabel>
-                <DrawerList level="parent" open>
-                  <DrawerItem>
-                    <DrawerLabel>Parent 1</DrawerLabel>
-                    <DrawerList open>
-                      <DrawerItem active>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 1 active
-                        </Typography>
-                      </DrawerItem>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 2
-                        </Typography>
-                      </DrawerItem>
-                    </DrawerList>
-                  </DrawerItem>
-                  <DrawerItem>
-                    <DrawerLabel>Parent 2</DrawerLabel>
-                    <DrawerList>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 1
-                        </Typography>
-                      </DrawerItem>
-                    </DrawerList>
-                  </DrawerItem>
-                  <DrawerItem>
-                    <DrawerLabel>Parent 3</DrawerLabel>
-                    <DrawerList>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 1
-                        </Typography>
-                      </DrawerItem>
-                    </DrawerList>
-                  </DrawerItem>
-                  <DrawerItem>
-                    <DrawerLabel>Parent 4</DrawerLabel>
-                    <DrawerList>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 1
-                        </Typography>
-                      </DrawerItem>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 2
-                        </Typography>
-                      </DrawerItem>
-                    </DrawerList>
-                  </DrawerItem>
-                </DrawerList>
-              </DrawerItem>
-              <DrawerItem>
-                <DrawerLabel
-                  // variant="body_short"
-                  title="Grandparent with a really long name 3"
-                >
-                  Grandparent with a really long name 3
-                </DrawerLabel>
-                <DrawerList level="parent">
-                  <DrawerItem>
-                    <DrawerLabel>Parent 1</DrawerLabel>
-                    <DrawerList>
-                      <DrawerItem>
-                        <Typography variant="body_short" link href={'#href'}>
-                          Child 1
-                        </Typography>
-                      </DrawerItem>
-                    </DrawerList>
-                  </DrawerItem>
-                </DrawerList>
-              </DrawerItem>
-            </DrawerList>
-            <DrawerSubtitle name="Grandparent orphans" />
-            <DrawerList level="grandparent">
-              <DrawerItem>
-                <DrawerLabel>Grandparent orphans 1</DrawerLabel>
-                <DrawerList>
-                  <DrawerItem>
-                    <Typography variant="body_short" link href={'#href'}>
-                      Child 1
-                    </Typography>
-                  </DrawerItem>
-                  <DrawerItem>
-                    <Typography variant="body_short" link href={'#href'}>
-                      Child 2
-                    </Typography>
-                  </DrawerItem>
-                </DrawerList>
-              </DrawerItem>
-            </DrawerList>
-          </DrawerContainer>
+          <DrawerList level="grandparent">
+            <DrawerItem>
+              <DrawerLabel>Grandparent 1</DrawerLabel>
+              <DrawerList level="parent">
+                <DrawerItem>
+                  <DrawerLabel>Parent 1</DrawerLabel>
+                  <DrawerList>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 1
+                      </Typography>
+                    </DrawerItem>
+                  </DrawerList>
+                </DrawerItem>
+                <DrawerItem>
+                  <DrawerLabel>Parent 2</DrawerLabel>
+                  <DrawerList>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 1
+                      </Typography>
+                    </DrawerItem>
+                  </DrawerList>
+                </DrawerItem>
+              </DrawerList>
+            </DrawerItem>
+            <DrawerItem>
+              <DrawerLabel>Grandparent 2</DrawerLabel>
+              <DrawerList level="parent" open>
+                <DrawerItem>
+                  <DrawerLabel>Parent 1</DrawerLabel>
+                  <DrawerList open>
+                    <DrawerItem active>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 1 active
+                      </Typography>
+                    </DrawerItem>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 2
+                      </Typography>
+                    </DrawerItem>
+                  </DrawerList>
+                </DrawerItem>
+                <DrawerItem>
+                  <DrawerLabel>Parent 2</DrawerLabel>
+                  <DrawerList>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 1
+                      </Typography>
+                    </DrawerItem>
+                  </DrawerList>
+                </DrawerItem>
+                <DrawerItem>
+                  <DrawerLabel>Parent 3</DrawerLabel>
+                  <DrawerList>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 1
+                      </Typography>
+                    </DrawerItem>
+                  </DrawerList>
+                </DrawerItem>
+                <DrawerItem>
+                  <DrawerLabel>Parent 4</DrawerLabel>
+                  <DrawerList>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 1
+                      </Typography>
+                    </DrawerItem>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 2
+                      </Typography>
+                    </DrawerItem>
+                  </DrawerList>
+                </DrawerItem>
+              </DrawerList>
+            </DrawerItem>
+            <DrawerItem>
+              <DrawerLabel>Grandparent with a really long name 3</DrawerLabel>
+              <DrawerList level="parent">
+                <DrawerItem>
+                  <DrawerLabel>Parent 1</DrawerLabel>
+                  <DrawerList>
+                    <DrawerItem>
+                      <Typography variant="body_short" link href={'#href'}>
+                        Child 1
+                      </Typography>
+                    </DrawerItem>
+                  </DrawerList>
+                </DrawerItem>
+              </DrawerList>
+            </DrawerItem>
+          </DrawerList>
+          <DrawerList level="grandparent" subtitle="Grandparent orphans">
+            <DrawerItem>
+              <DrawerLabel>Grandparent orphans 1</DrawerLabel>
+              <DrawerList>
+                <DrawerItem>
+                  <Typography variant="body_short" link href={'#href'}>
+                    Child 1
+                  </Typography>
+                </DrawerItem>
+                <DrawerItem>
+                  <Typography variant="body_short" link href={'#href'}>
+                    Child 2
+                  </Typography>
+                </DrawerItem>
+              </DrawerList>
+            </DrawerItem>
+          </DrawerList>
         </Drawer>
         <Body>
           <p>Top of page</p>

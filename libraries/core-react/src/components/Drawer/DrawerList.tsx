@@ -11,7 +11,24 @@ import {
 } from '@react-aria/menu'
 import { useDrawer } from './Drawer.context'
 
-const { background } = tokens
+const { background, subtitleBorder, subtitleTypography } = tokens
+
+type DrawerSubtitleProps = {
+  /** Subtitle name */
+  name?: string
+} & HTMLAttributes<HTMLDivElement>
+
+const StyledDrawerSubtitle = styled.div<DrawerSubtitleProps>`
+  background: ${background};
+  width: 100%;
+  padding-top: 7px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-top: ${subtitleBorder.top.width} solid ${subtitleBorder.top.color};
+  font-size: ${subtitleTypography.fontSize};
+  font-weight: ${subtitleTypography.fontWeight};
+  line-height: ${subtitleTypography.lineHeight};
+`
 
 const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
   drawerOpen,
@@ -63,6 +80,8 @@ type DrawerListProps = {
   level?: 'child' | 'parent' | 'grandparent'
   /** Open or collapsed */
   open?: boolean
+  /** Subtitle (only available for grandparent) */
+  subtitle?: string
 } & HTMLAttributes<HTMLUListElement>
 
 type DrawerListChildrenType = {
@@ -71,7 +90,10 @@ type DrawerListChildrenType = {
 } & React.ReactElement
 
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
-  function DrawerList({ children, level = 'child', open, ...props }, ref) {
+  function DrawerList(
+    { children, level = 'child', subtitle, open, ...props },
+    ref,
+  ) {
     const drawerListId = useMemo(() => createId('drawerlist-'), [])
     const { focusedIndex, setFocusedIndex } = useDrawer()
 
@@ -107,15 +129,22 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     }
 
     return (
-      <StyledDrawerList
-        // {...menuProps}
-        {...props}
-        level={level}
-        open={open}
-        ref={ref}
-      >
-        {ListItems}
-      </StyledDrawerList>
+      <>
+        {level === 'grandparent' && subtitle !== '' && (
+          <StyledDrawerSubtitle name={subtitle}>
+            {subtitle}
+          </StyledDrawerSubtitle>
+        )}
+        <StyledDrawerList
+          // {...menuProps}
+          {...props}
+          level={level}
+          open={open}
+          ref={ref}
+        >
+          {ListItems}
+        </StyledDrawerList>
+      </>
     )
   },
 )
