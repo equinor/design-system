@@ -1,4 +1,4 @@
-name: eds-tokens-$(Build.BuildId)
+name: eds-icons-$(Build.BuildId)
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -12,7 +12,7 @@ trigger:
       - theming
   paths:
     include:
-      - libraries/eds-tokens
+      - libraries/icons
 
 pr:
   branches:
@@ -22,7 +22,7 @@ pr:
       - theming
   paths:
     include:
-      - libraries/eds-tokens
+      - libraries/icons
 
 steps:
   - task: NodeTool@0
@@ -36,14 +36,14 @@ steps:
   - script: >-
       pnpm
       --filter eds
-      --filter ./libraries/eds-tokens
+      --filter ./libraries/icons
       install
     displayName: 'Install dependencies'
 
-  - script: pnpm --filter ./libraries/eds-tokens run build
+  - script: pnpm --filter ./libraries/eds-icons run build
     displayName: 'Run build'
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
-      ./libraries/eds-tokens
+      ./libraries/icons
     displayName: 'Run eslint'

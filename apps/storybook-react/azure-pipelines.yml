@@ -15,7 +15,7 @@ trigger:
       - develop
   paths:
     include:
-      - apps/storybook
+      - apps/storybook-react
 
 pool:
   vmImage: 'Ubuntu-16.04'
@@ -25,7 +25,7 @@ variables:
   - name: IMAGE_NAME
     value: eds-storybook-react:$(Build.BuildId)-$(Build.SourceBranchName)
   - name: ROOT_FOLDER
-    value: /apps/storybook
+    value: /apps/storybook-react
 
 steps:
   - task: NodeTool@0
@@ -41,7 +41,7 @@ steps:
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
-      ./apps/storybook
+      ./apps/storybook-react
       --ext jsx
       --ext js
     displayName: 'Run eslint'

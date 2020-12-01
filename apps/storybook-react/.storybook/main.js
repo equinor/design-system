@@ -28,8 +28,9 @@ module.exports = {
   webpackFinal: async (config, { configType }) => {
     // production build in Docker, where “libraries” is copied into the storybook root
 
-    const pathToLibraries =
-      configType === 'PRODUCTION' ? '../libraries' : '../../../libraries'
+    const isProduction = configType === 'PRODUCTION'
+
+    const pathToLibraries = isProduction ? '../libraries' : '../../../libraries'
 
     config.resolve.alias['styled-components'] = path.resolve(
       './node_modules',
@@ -38,14 +39,14 @@ module.exports = {
 
     config.resolve.alias['@hooks'] = path.resolve(
       __dirname,
-      `${pathToLibraries}/eds-core-react/src/hooks`,
+      `${pathToLibraries}/${isProduction ? `eds-` : ''}core-react/src/hooks`,
     )
     config.resolve.alias['@utils'] = path.resolve(
       __dirname,
-      `${pathToLibraries}/eds-core-react/src/utils`,
+      `${pathToLibraries}/${isProduction ? `eds-` : ''}core-react/src/utils`,
     )
 
-    configType === 'PRODUCTION'
+    isProduction
       ? (config.resolve.alias['@equinor'] = path.resolve(
           __dirname,
           pathToLibraries,

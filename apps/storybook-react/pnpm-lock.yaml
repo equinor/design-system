@@ -1,7 +1,7 @@
 dependencies:
-  '@equinor/eds-core-react': 'link:../../libraries/eds-core-react'
-  '@equinor/eds-icons': 'link:../../libraries/eds-icons'
-  '@equinor/eds-tokens': 'link:../../libraries/eds-tokens'
+  '@equinor/eds-core-react': 'link:../../libraries/core-react'
+  '@equinor/eds-icons': 'link:../../libraries/icons'
+  '@equinor/eds-tokens': 'link:../../libraries/tokens'
   '@storybook/react': 6.1.9_41259c06f59eda38314dba9dae4ab49a
   babel-runtime: 6.26.0
   react-dom: 17.0.1_react@17.0.1
@@ -2699,7 +2699,7 @@ packages:
   /autoprefixer/9.8.6:
     dependencies:
       browserslist: 4.14.7
-      caniuse-lite: 1.0.30001163
+      caniuse-lite: 1.0.30001164
       colorette: 1.2.1
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -3164,8 +3164,8 @@ packages:
       integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==
   /browserslist/4.10.0:
     dependencies:
-      caniuse-lite: 1.0.30001163
-      electron-to-chromium: 1.3.611
+      caniuse-lite: 1.0.30001164
+      electron-to-chromium: 1.3.612
       node-releases: 1.1.67
       pkg-up: 3.1.0
     hasBin: true
@@ -3173,9 +3173,9 @@ packages:
       integrity: sha512-TpfK0TDgv71dzuTsEAlQiHeWQ/tiPqgNZVdv046fvNtBZrjbv2O3TsWCDU0AWGJJKCF/KsjNdLzR9hXOsh/CfA==
   /browserslist/4.14.7:
     dependencies:
-      caniuse-lite: 1.0.30001163
+      caniuse-lite: 1.0.30001164
       colorette: 1.2.1
-      electron-to-chromium: 1.3.611
+      electron-to-chromium: 1.3.612
       escalade: 3.1.1
       node-releases: 1.1.67
     engines:
@@ -3226,7 +3226,7 @@ packages:
       rimraf: 2.7.1
       ssri: 6.0.1
       unique-filename: 1.1.1
-      y18n: 4.0.0
+      y18n: 4.0.1
     resolution:
       integrity: sha512-a0tMB40oefvuInr4Cwb3GerbL9xTj1D5yg0T5xrjGCGyfvbxseIXX7BAO/u/hIXdafzOI5JC3wDwHyf24buOAQ==
   /cacache/15.0.5:
@@ -3321,9 +3321,9 @@ packages:
     dev: false
     resolution:
       integrity: sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
-  /caniuse-lite/1.0.30001163:
+  /caniuse-lite/1.0.30001164:
     resolution:
-      integrity: sha512-QQbOGkHWnvhn3Dlf4scPlXTZVhGOK+2qCOP5gPxqzXHhtn3tZHwNdH9qNcQRWN0f3tDYrsyXFJCFiP/GLzI5Vg==
+      integrity: sha512-G+A/tkf4bu0dSp9+duNiXc7bGds35DioCyC6vgK2m/rjA4Krpy5WeZgZyfH2f0wj2kI6yAWWucyap6oOwmY1mg==
   /capture-exit/2.0.0:
     dependencies:
       rsvp: 4.8.5
@@ -4139,9 +4139,9 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-dldq3ZfFtgVTJMLjOe+/3sROTzALlL9E34V4/sDtUd/KlBSS0s6U1/+WPE1B4sj9CXHJpL1M6rhNJnc9Wbal9w==
-  /electron-to-chromium/1.3.611:
+  /electron-to-chromium/1.3.612:
     resolution:
-      integrity: sha512-YhqTzCXtEO2h0foGLGS60ortd6yY/yUQhqDEp1VWG3DIyHvckFFyaRwR41M0/M3m7Yb8Exqh+nzyb2TuxaoMTw==
+      integrity: sha512-CdrdX1B6mQqxfw+51MPWB5qA6TKWjza9f5voBtUlRfEZEwZiFaxJLrhFI8zHE9SBAuGt4h84rQU6Ho9Bauo1LA==
   /element-resize-detector/1.2.1:
     dependencies:
       batch-processor: 1.0.0
@@ -4248,7 +4248,7 @@ packages:
       has-symbols: 1.0.1
       is-callable: 1.2.2
       is-regex: 1.1.1
-      object-inspect: 1.8.0
+      object-inspect: 1.9.0
       object-keys: 1.1.1
       object.assign: 4.1.2
       string.prototype.trimend: 1.0.3
@@ -4266,7 +4266,7 @@ packages:
       is-callable: 1.2.2
       is-negative-zero: 2.0.0
       is-regex: 1.1.1
-      object-inspect: 1.8.0
+      object-inspect: 1.9.0
       object-keys: 1.1.1
       object.assign: 4.1.2
       string.prototype.trimend: 1.0.3
@@ -6581,9 +6581,9 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-fn2Fi3gb18mRpBupde04EnVOmYw=
-  /object-inspect/1.8.0:
+  /object-inspect/1.9.0:
     resolution:
-      integrity: sha512-jLdtEOB112fORuypAyl/50VRVIBIdVQOSUUGQHzJ4xBSbit81zRarz7GThkEFZy1RceYrWYcPcBFPQwHyAc1gA==
+      integrity: sha512-i3Bp9iTqwhaLZBxGkRfo5ZbE07BQRT7MGu8+nNgwW9ItGp1TzCTw2DLEoWwjClxBjOFI/hWljTAmYGCEwmtnOw==
   /object-keys/1.1.1:
     engines:
       node: '>= 0.4'
@@ -8050,7 +8050,7 @@ packages:
   /side-channel/1.0.3:
     dependencies:
       es-abstract: 1.18.0-next.1
-      object-inspect: 1.8.0
+      object-inspect: 1.9.0
     resolution:
       integrity: sha512-A6+ByhlLkksFoUepsGxfj5x1gTSrs+OydsRptUxeNCabQpCFUvcwIczgOigI8vhY/OJCnPnyE9rGiwgvr9cS1g==
   /signal-exit/3.0.3:
@@ -9155,9 +9155,9 @@ packages:
       node: '>=0.4'
     resolution:
       integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
-  /y18n/4.0.0:
+  /y18n/4.0.1:
     resolution:
-      integrity: sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
+      integrity: sha512-wNcy4NvjMYL8gogWWYAO7ZFWFfHcbdbE57tZO8e4cbpj8tfUcwrwqSl3ad8HxpYWCdXcJUCeKKZS62Av1affwQ==
   /yallist/3.1.1:
     resolution:
       integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==
