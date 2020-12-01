@@ -5,7 +5,11 @@ import {
   useState,
   HTMLAttributes,
 } from 'react'
-import { useCombobox, UseComboboxStateChange } from 'downshift'
+import {
+  useCombobox,
+  UseComboboxProps,
+  UseComboboxStateChange,
+} from 'downshift'
 import styled from 'styled-components'
 import { Label } from '../../Label'
 import { Button } from '../../Button'
@@ -26,6 +30,12 @@ type OptionType = {
 export type SingleSelectProps = {
   /** List of options to choose from */
   items: string[]
+  /** If your items are stored as, say, objects instead of strings, downshift still needs a string 
+   * representation for each one. This is required for accessibility aria-live messages (e.g., after 
+   * making a selection).
+  Note: This callback must include a null check: it is invoked with null whenever the user abandons 
+  input via <Esc>. */
+  itemToString: (item: any) => string
   /** Label for the select element */
   label: string
   /** Meta text, for instance unit */
@@ -112,25 +122,17 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       disabled = false,
       readOnly = false,
       initialSelectedItem,
-      selectedItem,
+      selectedItem = undefined,
       handleSelectedItemChange,
+
       ...other
     },
     ref,
   ) {
     const [inputItems, setInputItems] = useState(items)
-    const {
-      isOpen,
-      getToggleButtonProps,
-      getLabelProps,
-      getMenuProps,
-      getInputProps,
-      getComboboxProps,
-      highlightedIndex,
-      getItemProps,
-    } = useCombobox({
+    const isControlled = selectedItem ? true : false
+    let comboboxProps: UseComboboxProps<string> = {
       items: inputItems,
-      selectedItem,
       onSelectedItemChange: handleSelectedItemChange,
       onInputValueChange: ({ inputValue }) => {
         setInputItems(
@@ -140,7 +142,22 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
         )
       },
       initialSelectedItem: initialSelectedItem,
-    })
+    }
+
+    if (isControlled) {
+      comboboxProps = { ...comboboxProps, selectedItem }
+    }
+
+    const {
+      isOpen,
+      getToggleButtonProps,
+      getLabelProps,
+      getMenuProps,
+      getInputProps,
+      getComboboxProps,
+      highlightedIndex,
+      getItemProps,
+    } = useCombobox(comboboxProps)
 
     return (
       <Container className={className} ref={ref}>

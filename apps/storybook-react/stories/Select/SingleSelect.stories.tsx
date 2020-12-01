@@ -46,8 +46,19 @@ export const WithPreselected: Story<SingleSelectProps> = () => (
   </Container>
 )
 
+/* const 
+
+export const WithObjectRepresentation: Story<SingleSelectProps> = () => (
+  <Container>
+    <SingleSelect
+      label="I have a preselected option"
+      items=
+    />
+  </Container>
+) */
+
 export const Controlled: Story<SingleSelectProps> = () => {
-  const [selectedItem, setSelectedItem] = useState<string>(null)
+  const [selectedItem, setSelectedItem] = useState<string>('Troms og Finnmark')
   function handleSelectedItemChange(changes: UseComboboxStateChange<string>) {
     setSelectedItem(changes.selectedItem)
   }
