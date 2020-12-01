@@ -46,34 +46,6 @@ export const WithPreselected: Story<SingleSelectProps> = () => (
   </Container>
 )
 
-const objectItems = [
-  { id: 'one', value: 'Number one' },
-  { id: 'two', value: 'Number two' },
-  { id: 'two', value: 'Number three' },
-  { id: 'four', value: 'Number four' },
-]
-
-type ItemsType = {
-  id: string
-  value: string
-}
-
-const getString = (test: ItemsType) => {
-  return test ? test.value : ''
-}
-
-export const WithObjectRepresentation: Story<SingleSelectProps> = () => {
-  return (
-    <Container>
-      <SingleSelect
-        label="I have objects"
-        items={objectItems}
-        itemToString={getString}
-      />
-    </Container>
-  )
-}
-
 export const Controlled: Story<SingleSelectProps> = () => {
   const [selectedItem, setSelectedItem] = useState<string>('Troms og Finnmark')
   function handleSelectedItemChange(changes: UseComboboxStateChange<string>) {

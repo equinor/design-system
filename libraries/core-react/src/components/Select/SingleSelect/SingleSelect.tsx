@@ -22,18 +22,9 @@ import { select as tokens } from '../Select.tokens'
 
 const { ListItem } = List
 
-type OptionType = {
-  id: string
-  name: string
-}
-
 export type SingleSelectProps = {
   /** List of options to choose from */
-  items: any[]
-  /** If your items are stored as, say, objects instead of strings, we still needs a string
-   * representation for each one.
-   * Note: This callback must include a null check */
-  itemToString: (item: any) => string
+  items: string[]
   /** Label for the select element */
   label: string
   /** Meta text, for instance unit */
@@ -122,13 +113,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       initialSelectedItem,
       selectedItem = undefined,
       handleSelectedItemChange,
-      itemToString,
       ...other
     },
     ref,
   ) {
-    console.log('item to string', itemToString)
-
     const [inputItems, setInputItems] = useState(items)
     const isControlled = selectedItem ? true : false
     let comboboxProps: UseComboboxProps<string> = {
@@ -147,9 +135,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     if (isControlled) {
       comboboxProps = { ...comboboxProps, selectedItem }
     }
-    if (itemToString) {
-      comboboxProps = { ...comboboxProps, itemToString }
-    }
+
     const {
       isOpen,
       getToggleButtonProps,
@@ -160,6 +146,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       highlightedIndex,
       getItemProps,
     } = useCombobox(comboboxProps)
+
     return (
       <Container className={className} ref={ref}>
         <Label
@@ -189,19 +176,15 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
         </StyledInputWrapper>
         <StyledList {...getMenuProps()}>
           {isOpen &&
-            inputItems.map((item, index) => {
-              const itemAsString = itemToString ? itemToString(item) : item
-              console.log(itemAsString)
-              return (
-                <StyledListItem
-                  highlighted={highlightedIndex === index ? 'true' : 'false'}
-                  key={`${itemAsString}`}
-                  {...getItemProps({ item, index })}
-                >
-                  {itemAsString}
-                </StyledListItem>
-              )
-            })}
+            inputItems.map((item, index) => (
+              <StyledListItem
+                highlighted={highlightedIndex === index ? 'true' : 'false'}
+                key={`${item}`}
+                {...getItemProps({ item, index })}
+              >
+                {item}
+              </StyledListItem>
+            ))}
         </StyledList>
       </Container>
     )
