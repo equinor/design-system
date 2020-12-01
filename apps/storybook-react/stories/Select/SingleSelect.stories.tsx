@@ -57,7 +57,7 @@ export const Controlled: Story<SingleSelectProps> = () => {
       <SingleSelect
         label="I'm controlled"
         items={items}
-        selectedItem={selectedItem}
+        selectedOption={selectedItem}
         handleSelectedItemChange={handleSelectedItemChange}
       />
     </Container>

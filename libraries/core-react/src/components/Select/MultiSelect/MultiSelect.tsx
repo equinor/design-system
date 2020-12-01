@@ -11,6 +11,7 @@ import {
   useCombobox,
   useMultipleSelection,
   UseMultipleSelectionStateChange,
+  UseMultipleSelectionProps,
 } from 'downshift'
 import { Label } from '../../Label'
 import { Input } from '../../TextField/Input'
@@ -116,7 +117,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       className,
       disabled = false,
       readOnly = false,
-      selectedOptions = null,
+      selectedOptions,
       handleSelectedItemsChange,
       ...other
     },
@@ -124,11 +125,27 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
   ) {
     const isControlled = selectedOptions
 
-    const [options, setOptions] = useState(
+    /*   const [options, setOptions] = useState(
       isControlled ? selectedOptions : initialSelectedItems,
-    )
+    ) */
 
     const [inputValue, setInputValue] = useState('')
+
+    let multipleSelectionProps: UseMultipleSelectionProps<string> = {
+      initialSelectedItems: initialSelectedItems,
+      onSelectedItemsChange: (changes) => {
+        if (handleSelectedItemsChange) {
+          handleSelectedItemsChange(changes)
+        }
+      },
+    }
+
+    if (isControlled) {
+      multipleSelectionProps = {
+        ...multipleSelectionProps,
+        selectedItems: selectedOptions,
+      }
+    }
 
     const {
       getSelectedItemProps,
@@ -136,21 +153,12 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       addSelectedItem,
       removeSelectedItem,
       selectedItems,
-    } = useMultipleSelection({
-      selectedItems: options,
-      initialSelectedItems: initialSelectedItems,
-      onSelectedItemsChange: (changes) => {
-        setOptions(changes.selectedItems)
-        if (handleSelectedItemsChange) {
-          handleSelectedItemsChange(changes)
-        }
-      },
-      //onSelectedItemsChange: handleSelectedItemsChange,
-    })
+    } = useMultipleSelection(multipleSelectionProps)
     const getFilteredItems = (items: string[]) =>
       items.filter((item) =>
         // Remove selected items from the list
         /* selectedItems.indexOf(item) < 0 && */
+
         // Can be used if we need filter the list on first letters aka starts with search
         // item.toLowerCase().startsWith(inputValue.toLowerCase()),
         // Filter the list using contains search

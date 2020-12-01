@@ -39,7 +39,7 @@ export type SingleSelectProps = {
    * Note that this prop replaces the need for ```initialSelectedItem```
    *
    * The item that should be selected. */
-  selectedItem?: string
+  selectedOption?: string
   /** Callback for the selected item change
    * changes.selectedItem gives the selected item
    */
@@ -111,14 +111,14 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       disabled = false,
       readOnly = false,
       initialSelectedItem,
-      selectedItem = undefined,
+      selectedOption,
       handleSelectedItemChange,
       ...other
     },
     ref,
   ) {
     const [inputItems, setInputItems] = useState(items)
-    const isControlled = selectedItem ? true : false
+    const isControlled = selectedOption ? true : false
     let comboboxProps: UseComboboxProps<string> = {
       items: inputItems,
       onSelectedItemChange: handleSelectedItemChange,
@@ -133,7 +133,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     }
 
     if (isControlled) {
-      comboboxProps = { ...comboboxProps, selectedItem }
+      comboboxProps = { ...comboboxProps, selectedItem: selectedOption }
     }
 
     const {
