@@ -87,7 +87,7 @@ type StyledListItemType = {
 const StyledListItem = styled(ListItem)<StyledListItemType>`
   list-style: none;
   ${typographyTemplate(tokens.typography)};
-  ${spacingsTemplate(tokens.spacings)};
+  ${spacingsTemplate(tokens.spacings.single)};
   margin: 0;
   background-color: ${({ highlighted }) =>
     highlighted === 'true' ? tokens.hover.background : tokens.background};

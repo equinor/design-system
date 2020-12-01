@@ -76,6 +76,7 @@ const StyledListItem = styled(ListItem)<StyledListItemType>`
   display: flex;
   align-items: center;
   margin: 0;
+  padding: 0 ${tokens.spacings.multi.right} 0 ${tokens.spacings.multi.left};
   background-color: ${({ highlighted }) =>
     highlighted === 'true' ? tokens.hover.background : tokens.background};
   cursor: ${({ highlighted }) =>
@@ -164,6 +165,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
         // Filter the list using contains search
         item.toLowerCase().includes(inputValue.toLowerCase()),
       )
+
     const {
       isOpen,
       getToggleButtonProps,

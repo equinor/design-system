@@ -10,6 +10,7 @@ const {
   spacings: {
     comfortable: {
       small: spacingSmall,
+      medium_small: spacingMediumSmall,
       medium: spacingMedium,
       large: spacingLarge,
     },
@@ -22,7 +23,10 @@ type Select = {
   background: string
   boxShadow: string
   minHeight: string
-  spacings: Spacing
+  spacings: {
+    single: Spacing
+    multi: Spacing
+  }
   typography: Typography
   borderRadius: string
   hover: {
@@ -39,10 +43,16 @@ export const select: Select = {
   boxShadow,
   minHeight: clickbounds,
   spacings: {
-    top: spacingMedium,
-    right: spacingLarge,
-    bottom: spacingMedium,
-    left: spacingLarge,
+    single: {
+      top: spacingMedium,
+      right: spacingLarge,
+      bottom: spacingMedium,
+      left: spacingLarge,
+    },
+    multi: {
+      left: spacingMediumSmall,
+      right: spacingLarge,
+    },
   },
   typography: {
     ...typography.navigation.menu_title,
