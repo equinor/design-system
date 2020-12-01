@@ -251,7 +251,8 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       },
     })
 
-    const placeholderText = `${selectedItems.length}/${items.length} selected`
+    const placeholderText =
+      items.length > 0 ? `${selectedItems.length}/${items.length} selected` : ''
 
     return (
       <Container className={className} ref={ref}>
