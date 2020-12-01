@@ -100,7 +100,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     // const useref = React.useRef<HTMLUListElement>(null)
     // const { menuProps } = useMenu(
     //   children as AriaMenuOptions<unknown>,
-    //   (focusedIndex as unknown) as TreeState<unknown>, // Dont ask me about this (it works tho)
+    //   (focusedIndex as unknown) as TreeState<unknown>, // https://github.com/microsoft/TypeScript/issues/28067
     //   useref,
     // )
     let ListItems: Array<DrawerListChildrenType>
