@@ -26,7 +26,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "postinstall": "pnpm run build"
   },
   "keywords": [
     "eds",
