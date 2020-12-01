@@ -177,38 +177,9 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       getItemProps,
     } = useCombobox({
       inputValue,
-      // defaultHighlightedIndex: 0, // after selection, highlight the first item.
       selectedItem: null,
-      //items: items,
       items: getFilteredItems(items),
-      /* onSelectedItemChange: ({ selectedItem }) => {
-        if (!selectedItem) {
-          return
-        }
-        const index = selectedItems.indexOf(selectedItem)
-        if (index > 0) {
-          setSelectedItems([
-            ...selectedItems.slice(0, index),
-            ...selectedItems.slice(index + 1),
-          ])
-        } else if (index === 0) {
-          setSelectedItems([...selectedItems.slice(1)])
-        } else {
-          setSelectedItems([...selectedItems, selectedItem])
-        }
-      }, */
-      /*       stateReducer: (state, actionAndChanges) => {
-        const { changes, type } = actionAndChanges
-        switch (type) {
-          case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          case useCombobox.stateChangeTypes.ItemClick:
-            return {
-              ...changes,
-              isOpen: true, // keep the menu open after selection.
-            }
-        }
-        return changes
-      }, */
+
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
         switch (type) {
@@ -264,26 +235,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           meta={meta}
           disabled={disabled}
         />
-        {/* <div style={comboboxWrapperStyles}> */}
-        {/* {selectedItems.map((selectedItem, index) => (
-            <span
-              style={selectedItemStyles}
-              // eslint-disable-next-line react/no-array-index-key
-              key={`selected-item-${index}`}
-              {...getSelectedItemProps({ selectedItem, index })}
-            >
-              {selectedItem}
-              <span
-                style={selectedItemIconStyles}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  removeSelectedItem(selectedItem)
-                }}
-              >
-                &#10005;
-              </span>
-            </span>
-          ))} */}
+
         <StyledInputWrapper {...getComboboxProps()}>
           <PaddedInput
             {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
@@ -306,8 +258,6 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
         <StyledList {...getMenuProps()}>
           {isOpen &&
             getFilteredItems(items).map((item, index) => (
-              //items.map((item, index) => (
-
               <StyledListItem
                 key={`${item}`}
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
