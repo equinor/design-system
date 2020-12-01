@@ -130,7 +130,7 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
                     }
-                    selectedItem={value}
+                    selectedOption={value}
                     label="Where are you from?"
                     items={items}
                     aria-invalid={errors.fabFieldOne ? 'true' : 'false'}
@@ -164,7 +164,7 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
                     }
-                    selectedItem={value}
+                    selectedOption={value}
                     label="Choose your favourite county"
                     items={items}
                   />
@@ -180,7 +180,7 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
                     }
-                    selectedItem={value}
+                    selectedOption={value}
                     label="Pick a fruit (optional)"
                     items={['Banana', 'Apple', 'Orange']}
                   />
