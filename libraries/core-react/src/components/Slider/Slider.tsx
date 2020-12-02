@@ -23,12 +23,14 @@ const {
 } = tokens
 
 const fakeTrackBg = css`
-    background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.background}' width='100%' height='4' rx='2' /></svg>");
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled
+    .track.background}' width='100%' height='4' rx='2' /></svg>");
+  background-size: cover;
+  background-repeat: no-repeat;
 `
 const fakeTrackBgHover = css`
-    background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled.track.hover.background}' width='100%' height='4' rx='2' /></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled
+    .track.hover.background}' width='100%' height='4' rx='2' /></svg>");
 `
 
 const trackFill = css`
@@ -67,7 +69,7 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
     background: ${({ disabled }) =>
       disabled
         ? _disabled.track.indicator.color
-        : enabled.track.indicator.color} ;
+        : enabled.track.indicator.color};
   }
   /** Faking the active region of the slider */
   &::before {
@@ -121,7 +123,7 @@ const Wrapper = styled.div<WrapperProps>`
   &:hover:not([disabled]) {
     ${fakeTrackBgHover}
     &::after {
-      background: ${enabled.track.indicator.hover.color}
+      background: ${enabled.track.indicator.hover.color};
     }
   }
 `

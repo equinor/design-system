@@ -49,7 +49,7 @@ const StyledTooltip = styled.div`
   background: ${tokens.background};
   fill: #333;
   border-radius: ${tokens.borderRadius};
-  min-height:  ${tokens.tooltip.minHeight};
+  min-height: ${tokens.tooltip.minHeight};
   box-sizing: border-box;
   position: relative;
 `
@@ -73,7 +73,7 @@ const TooltipArrow = styled.svg<ArrowProps>`
   height: ${tokens.arrow.height};
   position: absolute;
   fill: inherit;
-  `
+`
 
 export type TooltipProps = {
   /** Tooltip placement relative to anchor */
