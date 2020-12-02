@@ -1,12 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from 'react'
-import {
-  forwardRef,
-  SelectHTMLAttributes,
-  useState,
-  HTMLAttributes,
-} from 'react'
+import { forwardRef, SelectHTMLAttributes, useState } from 'react'
 import {
   useCombobox,
   useMultipleSelection,
@@ -14,73 +9,24 @@ import {
   UseMultipleSelectionProps,
 } from 'downshift'
 import { Label } from '../../Label'
-import { Input } from '../../TextField/Input'
-import { Button } from '../../Button'
 import { Icon } from '../../Icon'
 import { CheckboxInput } from '../../SelectionControls/Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
-import { List } from '../../List'
 import styled from 'styled-components'
-import { typographyTemplate } from '@utils'
 import { select as tokens } from '../Select.tokens'
+import {
+  Container,
+  PaddedInput,
+  StyledButton,
+  StyledList,
+  StyledListItem,
+  StyledInputWrapper,
+} from '../commonStyles'
 
-const { ListItem } = List
-
-const StyledInputWrapper = styled.div`
-  position: relative;
-`
-
-type ContainerProps = HTMLAttributes<HTMLDivElement>
-
-const Container = styled.div<ContainerProps>`
-  position: relative;
-`
-
-const PaddedInput = styled(Input)`
-  /* Hack: Had to add + 0px to satisfy the style lint plugin */
-  padding-right: calc(
-    ${tokens.button.size} + ${tokens.button.spacings.left} +
-      ${tokens.button.spacings.right} + 0px
-  );
-`
-
-const StyledButton = styled(Button)`
-  position: absolute;
-  right: ${tokens.button.spacings.right};
-  top: ${tokens.button.spacings.top};
-  height: ${tokens.button.size};
-  width: ${tokens.button.size};
-`
-
-const StyledList = styled(List)`
-  background-color: ${tokens.background};
-  box-shadow: ${tokens.boxShadow};
-  overflow-y: scroll;
-  max-height: 300px;
-  padding: 0;
-  border-radius: ${tokens.borderRadius};
-  margin-top: 4px;
-  position: absolute;
-  right: 0;
-  left: 0;
-  z-index: 200;
-`
-
-type StyledListItemType = {
-  highlighted: string
-}
-
-const StyledListItem = styled(ListItem)<StyledListItemType>`
-  list-style: none;
-  ${typographyTemplate(tokens.typography)};
+const PaddedStyledListItem = styled(StyledListItem)`
+  padding: 0 ${tokens.spacings.multi.right} 0 ${tokens.spacings.multi.left};
   display: flex;
   align-items: center;
-  margin: 0;
-  padding: 0 ${tokens.spacings.multi.right} 0 ${tokens.spacings.multi.left};
-  background-color: ${({ highlighted }) =>
-    highlighted === 'true' ? tokens.hover.background : tokens.background};
-  cursor: ${({ highlighted }) =>
-    highlighted === 'true' ? 'pointer' : 'default'};
 `
 
 export type MultiSelectProps = {
@@ -125,11 +71,6 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     ref,
   ) {
     const isControlled = selectedOptions
-
-    /*   const [options, setOptions] = useState(
-      isControlled ? selectedOptions : initialSelectedItems,
-    ) */
-
     const [inputValue, setInputValue] = useState('')
 
     let multipleSelectionProps: UseMultipleSelectionProps<string> = {
@@ -258,7 +199,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
         <StyledList {...getMenuProps()}>
           {isOpen &&
             getFilteredItems(items).map((item, index) => (
-              <StyledListItem
+              <PaddedStyledListItem
                 key={`${item}`}
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
                 {...getItemProps({ item, index })}
@@ -271,7 +212,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                   }}
                 />
                 <span>{item}</span>
-              </StyledListItem>
+              </PaddedStyledListItem>
             ))}
         </StyledList>
       </Container>
