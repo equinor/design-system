@@ -70,7 +70,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     },
     ref,
   ) {
-    const isControlled = selectedOptions
+    const isControlled = selectedOptions !== undefined ? true : false
     const [inputValue, setInputValue] = useState('')
 
     let multipleSelectionProps: UseMultipleSelectionProps<string> = {

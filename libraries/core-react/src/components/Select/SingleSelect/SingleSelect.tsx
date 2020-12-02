@@ -65,7 +65,8 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     ref,
   ) {
     const [inputItems, setInputItems] = useState(items)
-    const isControlled = selectedOption ? true : false
+    const isControlled = selectedOption !== undefined ? true : false
+
     let comboboxProps: UseComboboxProps<string> = {
       items: inputItems,
       onSelectedItemChange: handleSelectedItemChange,
