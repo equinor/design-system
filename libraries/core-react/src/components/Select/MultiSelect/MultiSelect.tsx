@@ -183,6 +183,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             placeholder={placeholderText}
             disabled={disabled}
             readOnly={readOnly}
+            {...other}
           />
           <StyledButton
             variant="ghost_icon"
