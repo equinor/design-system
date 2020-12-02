@@ -10,5 +10,8 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "markdown.styles": ["common/styles/markdown.preview.css"]
+  "markdown.styles": [
+    "common/styles/markdown.preview.css"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
