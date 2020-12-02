@@ -40,7 +40,7 @@ steps:
       install
     displayName: 'Install dependencies'
 
-  - script: pnpm --filter ./libraries/eds-icons run build
+  - script: pnpm --filter ./libraries/icons run build
     displayName: 'Run build'
 
   - script: >-

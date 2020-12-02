@@ -2,6 +2,6 @@
 /../../apps/storybook-html/**
 /../../apps/storybook-react/**
 /../../libraries/icons/**
-/../../libraries/eds-core-react/**
-../../libraries/eds-core-react/dist/core-react.umd.js
+/../../libraries/core-react/**
+../../libraries/core-react/dist/core-react.umd.js
 node_modules

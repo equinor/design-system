@@ -47,10 +47,10 @@ steps:
       install
     displayName: 'Install dependencies'
 
-  - script: pnpm --filter ./libraries/eds-core-react test
+  - script: pnpm --filter ./libraries/core-react test
     displayName: 'Run tests'
 
   - script: >-
       ./node_modules/eslint/bin/eslint.js
-      ./libraries/eds-core-react
+      ./libraries/core-react
     displayName: 'Run eslint'
