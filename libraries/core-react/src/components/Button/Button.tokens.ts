@@ -5,13 +5,66 @@ import type {
   Hover,
   Spacing,
   Typography,
+  ComponentToken,
 } from '@equinor/eds-tokens'
 
 const {
   components: {
     button: { primary, secondary, danger, disabled },
   },
+  typography: {
+    navigation: { button: buttonTypography },
+  },
+  colors: {
+    text: {
+      static_icons__primary_white: { rgba: typographyColor },
+    },
+    ui: {
+      background__medium: { rgba: borderColor },
+    },
+    interactive: {
+      primary__resting: { rgba: containedBackgroundColor },
+      table__cell__fill_hover: { rgba: hoverBackgroundColor },
+      table__cell__fill_activated: { rgba: activeBackgroundColor },
+      danger__highlight: { rgba: errorColor },
+      primary__resting: { rgba: primaryRestingColor },
+      disabled__text: { rgba: disabledTextColor },
+      disabled__border: { rgba: disabledBorderColor },
+      focus: { rgba: focusColor },
+    },
+  },
+  spacings: {
+    comfortable: { medium },
+  },
+  shape: { button: buttonShape },
+  interactions: { focused: outline },
 } = tokens
+
+const button: ComponentToken = {
+  height: buttonShape.minHeight,
+  background: containedBackgroundColor,
+  typography: {
+    ...buttonTypography,
+    color: typographyColor,
+  },
+  border: {
+    type: 'border',
+    width: '1px',
+    color: containedBackgroundColor,
+    radius: buttonShape.borderRadius,
+  },
+  spacings: {
+    left: medium,
+    right: medium,
+  },
+  outline: {
+    type: 'outline',
+    offset: '4px',
+    style: 'dashed',
+    color: outline.color,
+    width: outline.width,
+  },
+}
 
 const colors = {
   primary: {
@@ -44,7 +97,7 @@ const colors = {
   },
 }
 
-export type Button = {
+export type Button_ = {
   height: string
   width?: string
   background: string
@@ -62,7 +115,7 @@ export type Button = {
 
 type Buttons = {
   [P in keyof typeof colors]: {
-    [P2 in keyof typeof colors[P]]: Button
+    [P2 in keyof typeof colors[P]]: Button_
   }
 }
 
@@ -72,7 +125,7 @@ export type ButtonGroups =
   | Buttons['danger']
   | Buttons['disabled']
 
-export const button: {
+export const button_: {
   colors: Buttons
   icon_size: {
     width: string

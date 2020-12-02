@@ -1,4 +1,4 @@
-import { Spacing, Borders, Typography, Outline } from './index'
+import { Spacing, Borders, Typography, Outline, Clickbound } from './index'
 
 export type ComponentToken = {
   height?: string
@@ -7,4 +7,13 @@ export type ComponentToken = {
   border: Borders
   typography: Typography
   outline?: Outline
+  clickbound?: Clickbound
+  states?: {
+    active?: ComponentState
+    disabled?: ComponentState
+    focus?: ComponentState
+    hover?: ComponentState
+  }
 }
+
+type ComponentState = Partial<Omit<ComponentToken, 'states'>>

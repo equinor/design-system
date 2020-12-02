@@ -4,6 +4,7 @@ import { elevation } from '../../base/elevation'
 export * from './borders'
 export * from './focus'
 export * from './component'
+export * from './clickbound'
 
 export type Typography = {
   color: string
@@ -76,17 +77,6 @@ export type Clickbounds = {
   jumbo__base: string
   default__base: string
   default__input: string
-}
-
-export type Clickbound = {
-  height: string
-  width: string
-  offset:
-    | {
-        x: string
-        y: string
-      }
-    | number
 }
 
 export type Background = string

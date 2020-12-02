@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { button, Button as ButtonType, ButtonGroups } from './Button.tokens'
+import { button_, Button_ as ButtonType, ButtonGroups } from './Button.tokens'
 import { typographyTemplate } from '@utils'
 
-const { colors } = button
+const { colors } = button_
 
 // display:grid; does not work on Webkit browser engine, so we have to wrap content in element where css-grid works
 const ButtonInner = styled.span`
@@ -32,8 +32,8 @@ const Base = ({
     fill: ${token.color};
     svg {
       justify-self: center;
-      height: ${button.icon_size.height};
-      width: ${button.icon_size.width};
+      height: ${button_.icon_size.height};
+      width: ${button_.icon_size.width};
     }
 
     border-radius: ${border.radius};
