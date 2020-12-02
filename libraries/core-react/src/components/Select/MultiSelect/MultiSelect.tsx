@@ -42,7 +42,8 @@ export type MultiSelectProps = {
   disabled?: boolean
   /** Read Only */
   readOnly?: boolean
-  /** If this prop is used, the select will become a controlled component.
+  /** If this prop is used, the select will become a controlled component. Use an empty
+   * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
    * The items that should be selected. */
   selectedOptions?: string[]
@@ -70,7 +71,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     },
     ref,
   ) {
-    const isControlled = selectedOptions !== undefined ? true : false
+    const isControlled = selectedOptions ? true : false
     const [inputValue, setInputValue] = useState('')
 
     let multipleSelectionProps: UseMultipleSelectionProps<string> = {

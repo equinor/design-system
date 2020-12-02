@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
-import { MultiSelect, MultiSelectProps } from '@equinor/eds-core-react'
+import {
+  MultiSelect,
+  MultiSelectProps,
+  Button,
+  Typography,
+} from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { UseMultipleSelectionStateChange } from 'downshift'
 import styled from 'styled-components'
+import { action } from '@storybook/addon-actions'
+import { useForm, Controller } from 'react-hook-form'
 import { items } from './data'
 
 export default {
@@ -84,6 +91,110 @@ export const Controlled: Story<MultiSelectProps> = () => {
         selectedOptions={selectedItems}
         handleSelectedItemsChange={handleSelectedItemsChange}
       />
+    </Container>
+  )
+}
+
+type FormValues = {
+  fieldOne: string[]
+}
+
+type ControllerTypes = {
+  onChange: (selectedItems: string[]) => void
+  value: string[]
+}
+
+const Field = styled.div`
+  margin: 1rem;
+`
+export const WithReactHookForm: Story<MultiSelectProps> = () => {
+  const defaultValues: FormValues = {
+    fieldOne: [],
+  }
+  const { handleSubmit, errors, control } = useForm<FormValues>({
+    defaultValues,
+  })
+  const [isSubmitted, updateIsSubmitted] = useState(false)
+  const [formData, updateFormData] = useState<FormData>(null)
+
+  const onSubmit = (data: FormData) => {
+    updateFormData(data)
+    updateIsSubmitted(true)
+    action('onSubmit')(data)
+  }
+
+  return (
+    <Container>
+      <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
+        Real life example with an external{' '}
+        <a
+          href="https://react-hook-form.com/"
+          rel="noreferrer noopener"
+          target="blank"
+        >
+          form library
+        </a>
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {isSubmitted ? (
+          <>
+            <span>Submitted data:</span>
+            <p>{JSON.stringify(formData)}</p>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                updateIsSubmitted(false)
+                updateFormData(null)
+              }}
+            >
+              Reset
+            </Button>
+          </>
+        ) : (
+          <>
+            <Field>
+              <Controller
+                control={control}
+                name="fieldOne"
+                rules={{
+                  validate: (value: string[]) => {
+                    return value.length > 0
+                  },
+                }}
+                render={({ onChange, value }: ControllerTypes) => (
+                  <MultiSelect
+                    handleSelectedItemsChange={({ selectedItems }) =>
+                      onChange(selectedItems)
+                    }
+                    selectedOptions={value}
+                    label="Where are you from?"
+                    items={items}
+                    aria-invalid={errors.fieldOne ? 'true' : 'false'}
+                    aria-describedby="error-county-required"
+                    aria-required
+                  />
+                )}
+              />
+              <span
+                role="alert"
+                id="error-county-required"
+                style={{
+                  color: 'red',
+                  paddingTop: '0.5rem',
+                  fontSize: '0.75rem',
+                  display: errors.fieldOne ? 'block' : 'none',
+                }}
+              >
+                Hey you! You will have to select <i>something</i>
+              </span>
+            </Field>
+
+            <Button type="submit" style={{ marginTop: '1rem' }}>
+              I have made my decision!
+            </Button>
+          </>
+        )}
+      </form>
     </Container>
   )
 }

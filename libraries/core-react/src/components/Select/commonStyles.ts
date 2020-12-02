@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { HTMLAttributes } from 'react'
 import { Input } from '../TextField/Input'
 import { List } from '../List'
