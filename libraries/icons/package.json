@@ -25,9 +25,10 @@
     "commonjs/*"
   ],
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "pnpm run build",
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "postinstall": "pnpm run build"
   },
   "keywords": [
     "eds",
