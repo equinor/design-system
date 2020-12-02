@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { Typography, Spacing } from '@equinor/eds-tokens'
 
 const {
   colors,
@@ -57,12 +58,33 @@ export type InputVariantProps = {
   }
 }
 
-export const input = {
+type InputProps = {
+  background: string
+  typography: Typography
+  placeholderColor: string
+  spacings: {
+    comfortable: {
+      input: Spacing
+      icon: Spacing
+    }
+    compact: {
+      input: Spacing
+      icon: Spacing
+    }
+  }
+  default: InputVariantProps
+  error: InputVariantProps
+  warning: InputVariantProps
+  success: InputVariantProps
+}
+
+export const input: InputProps = {
   background: colors.ui.background__light.hex,
   typography: {
     ...typography.input.text,
-    color: colors.text.static_icons__tertiary.hex,
+    color: colors.text.static_icons__default.hex,
   },
+  placeholderColor: colors.text.static_icons__tertiary.hex,
   spacings,
   default: {
     icon: {
