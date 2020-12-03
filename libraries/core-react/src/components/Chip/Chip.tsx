@@ -71,34 +71,34 @@ const StyledChips = styled.div.attrs<StyleProps>(
     `}
 
     ${({ variant }) => {
-      switch (variant) {
-        case 'active':
-          return css`
-            background: ${activeToken.background};
-          `
-        case 'error':
-          return css`
-            background: ${error.background};
-            border-color: ${error.border.color};
-            border-width: ${error.border.width};
-            border-style: ${error.border.type};
-            color: ${error.typography.color};
-            svg {
-              fill: ${error.icon.color};
-            }
+    switch (variant) {
+      case 'active':
+        return css`
+          background: ${activeToken.background};
+        `
+      case 'error':
+        return css`
+          background: ${error.background};
+          border-color: ${error.border.color};
+          border-width: ${error.border.width};
+          border-style: ${error.border.type};
+          color: ${error.typography.color};
+          svg {
+            fill: ${error.icon.color};
+          }
 
-            &:hover {
-              border-color: ${error.hover.color};
-              color: ${error.hover.color};
-              svg {
-                fill: ${error.hover.color};
-              }
+          &:hover {
+            border-color: ${error.hover.color};
+            color: ${error.hover.color};
+            svg {
+              fill: ${error.hover.color};
             }
-          `
-        default:
-          return ''
-      }
-    }}
+          }
+        `
+      default:
+        return ''
+    }
+  }}
 
   ${({ disabled }) =>
     disabled &&

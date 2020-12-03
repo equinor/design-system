@@ -129,6 +129,7 @@ module.exports = {
         '@typescript-eslint/no-unsafe-return': 1,
         '@typescript-eslint/restrict-plus-operands': 1,
         '@typescript-eslint/ban-ts-comment': 1,
+        'react/require-default-props': 1,
       },
     },
   ],

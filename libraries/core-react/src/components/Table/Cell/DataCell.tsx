@@ -13,7 +13,10 @@ const applyMutations = (
     case 'numeric':
       return {
         ...token,
-        ...token.variants.numeric,
+        typography: {
+          ...token.typography,
+          ...token.variants.numeric.typography,
+        },
       }
 
     default:

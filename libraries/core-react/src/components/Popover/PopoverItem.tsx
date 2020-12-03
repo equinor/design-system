@@ -68,7 +68,7 @@ const PopoverArrow = styled.svg<ArrowProps>`
   height: ${tokens.arrow.height};
   position: absolute;
   fill: ${tokens.background};
-  filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
+  filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));
 `
 
 const StyledCloseButton = styled(Button)`

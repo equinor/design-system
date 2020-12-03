@@ -23,7 +23,7 @@ const StyledOutput = styled.output<StyledProps>`
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
   /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
- transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
+  transform: translate(calc(-1 * calc(var(--realWidth) / 2)));
   grid-row: 2;
   grid-column: 1 / -1;
 `

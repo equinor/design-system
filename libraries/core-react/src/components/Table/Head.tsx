@@ -7,7 +7,6 @@ import { bordersTemplate } from '@utils'
 const StyledTableHead = styled.thead`
   ${bordersTemplate(token.border)}
   background: ${token.background};
-
 `
 
 export const Head: FunctionComponent = ({ children, ...props }) => {

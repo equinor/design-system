@@ -31,6 +31,7 @@ const InputWrapperSmall = styled(BaseInputWrapper)`
       isDisabled ? 'transparent' : enabled.hover.background};
   }
 `
+
 type InputWrapperProps = {
   children: ReactNode
   isDisabled?: boolean

@@ -32,7 +32,7 @@ const StyledSnackbar = styled.div.attrs(() => ({
 
   a,
   button {
-    color: ${tokens.buttonColor}
+    color: ${tokens.buttonColor};
   }
 `
 
