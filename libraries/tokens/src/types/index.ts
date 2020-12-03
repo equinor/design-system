@@ -5,6 +5,7 @@ export * from './borders'
 export * from './focus'
 export * from './component'
 export * from './clickbound'
+export * from './pressed'
 
 export type Typography = {
   color: string

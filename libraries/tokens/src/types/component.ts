@@ -1,4 +1,11 @@
-import { Spacing, Borders, Typography, Outline, Clickbound } from './index'
+import {
+  Spacing,
+  Borders,
+  Typography,
+  Outline,
+  Clickbound,
+  Pressed,
+} from './index'
 
 export type ComponentToken = {
   height?: string
@@ -6,13 +13,13 @@ export type ComponentToken = {
   spacings: Spacing
   border: Borders
   typography: Typography
-  outline?: Outline
   clickbound?: Clickbound
   states?: {
     active?: ComponentState
     disabled?: ComponentState
-    focus?: ComponentState
+    focus?: ComponentState & { outline?: Outline }
     hover?: ComponentState
+    pressed?: ComponentState & { pressed?: Pressed }
   }
 }
 

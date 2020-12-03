@@ -4,6 +4,7 @@ import type {
   Focus,
   Hover,
   Spacing,
+  Outline,
   Typography,
   ComponentToken,
 } from '@equinor/eds-tokens'
@@ -17,52 +18,123 @@ const {
   },
   colors: {
     text: {
-      static_icons__primary_white: { rgba: typographyColor },
-    },
-    ui: {
-      background__medium: { rgba: borderColor },
+      static_icons__primary_white: { rgba: primaryWhite },
     },
     interactive: {
-      primary__resting: { rgba: containedBackgroundColor },
-      table__cell__fill_hover: { rgba: hoverBackgroundColor },
-      table__cell__fill_activated: { rgba: activeBackgroundColor },
-      danger__highlight: { rgba: errorColor },
-      primary__resting: { rgba: primaryRestingColor },
+      primary__resting: { rgba: primaryColor },
+      primary__hover: { rgba: primaryHoverColor },
+      primary__hover_alt: { rgba: primaryHoverAltColor },
       disabled__text: { rgba: disabledTextColor },
       disabled__border: { rgba: disabledBorderColor },
-      focus: { rgba: focusColor },
+      disabled__fill: { rgba: disabledColor },
     },
   },
   spacings: {
     comfortable: { medium },
   },
-  shape: { button: buttonShape },
+  shape: {
+    button: { minHeight: buttonHeight, borderRadius: buttonBorderRadius },
+  },
   interactions: { focused: outline },
+  clickbounds: { default__base: clicboundHeight },
 } = tokens
 
-const button: ComponentToken = {
-  height: buttonShape.minHeight,
-  background: containedBackgroundColor,
+const buttonOutline: Outline = {
+  type: 'outline',
+  offset: '4px',
+  style: 'dashed',
+  color: outline.color,
+  width: outline.width,
+}
+
+const contained: ComponentToken = {
+  height: buttonHeight,
+  background: primaryColor,
   typography: {
     ...buttonTypography,
-    color: typographyColor,
+    color: primaryWhite,
   },
   border: {
     type: 'border',
     width: '1px',
-    color: containedBackgroundColor,
-    radius: buttonShape.borderRadius,
+    color: primaryColor,
+    radius: buttonBorderRadius,
   },
   spacings: {
     left: medium,
     right: medium,
   },
-  outline: {
-    type: 'outline',
-    offset: '4px',
-    style: 'dashed',
-    color: outline.color,
-    width: outline.width,
+  clickbound: {
+    height: clicboundHeight,
+    width: '100%',
+    offset: {
+      top: (parseInt(clicboundHeight) - parseInt(buttonHeight)) / 2,
+      left: 0,
+    },
+  },
+  states: {
+    focus: {
+      outline: buttonOutline,
+    },
+    hover: {
+      background: primaryHoverColor,
+    },
+    disabled: {
+      background: disabledColor,
+      border: {
+        type: 'border',
+        color: disabledBorderColor,
+      },
+      typography: {
+        ...buttonTypography,
+        color: disabledTextColor,
+      },
+    },
+  },
+}
+
+const outlined: ComponentToken = {
+  ...contained,
+  background: 'transparent',
+  typography: {
+    ...buttonTypography,
+    color: primaryColor,
+  },
+  states: {
+    hover: {
+      typography: {
+        ...buttonTypography,
+        color: primaryHoverColor,
+      },
+      background: primaryHoverAltColor,
+      border: {
+        ...contained.border,
+        type: 'border',
+        color: primaryHoverColor,
+      },
+    },
+  },
+}
+const ghost: ComponentToken = {
+  ...contained,
+  background: 'transparent',
+  typography: {
+    ...buttonTypography,
+    color: primaryColor,
+  },
+  border: {
+    ...contained.border,
+    type: 'border',
+    color: 'transparent',
+  },
+  states: {
+    hover: {
+      typography: {
+        ...buttonTypography,
+        color: primaryHoverColor,
+      },
+      background: primaryHoverAltColor,
+    },
   },
 }
 

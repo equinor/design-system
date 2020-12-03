@@ -3,8 +3,8 @@ export type Clickbound = {
   width: string
   offset:
     | {
-        x: string
-        y: string
+        top: number
+        left: number
       }
     | number
 }
