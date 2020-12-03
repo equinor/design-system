@@ -24,7 +24,7 @@ export const zIndex: Story = () => (
     <Typography>
       The CSS property z-index is used in a few of our components to layer
       content in a third axis. These values can be overridden, but such
-      customization is discouraged as far as it's possible. The chosen priority
+      customization is discouraged as far as it’s possible. The chosen priority
       is made to avoid unexpected collisions.
     </Typography>
     <List variant="numbered">
