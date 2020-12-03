@@ -9,6 +9,7 @@ import React, {
 import createId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
+import { Divider } from '../Divider'
 import { useFocus } from '@react-aria/interactions'
 import { useTreeState, TreeState, TreeProps } from '@react-stately/tree'
 import { mergeProps } from '@react-aria/utils'
@@ -33,7 +34,7 @@ const StyledDrawerSubtitle = styled.span<DrawerSubtitleProps>`
   padding-top: 7px;
   padding-left: 16px;
   padding-right: 16px;
-  border-top: ${subtitleBorder.top.width} solid ${subtitleBorder.top.color};
+  /* border-top: ${subtitleBorder.top.width} solid ${subtitleBorder.top.color}; */
   font-size: ${subtitleTypography.fontSize};
   font-weight: ${subtitleTypography.fontWeight};
   line-height: ${subtitleTypography.lineHeight};
@@ -125,14 +126,26 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     // )
     //  let ListItems: Array<DrawerListChildrenType>
 
-    console.log(ListItems)
+    ListItems.map((item, index) => {
+      console.log(
+        focusedIndex,
+        item.props.index,
+        item.props.drawerListId,
+        item.props.children,
+        item.props.level,
+        item.props.open,
+      )
+    })
 
     return (
       <>
         {level === 'grandparent' && subtitle && (
-          <StyledDrawerSubtitle name={subtitle}>
-            {subtitle}
-          </StyledDrawerSubtitle>
+          <>
+            <Divider style={{ padding: '0px 16px' }} />
+            <StyledDrawerSubtitle name={subtitle}>
+              {subtitle}
+            </StyledDrawerSubtitle>
+          </>
         )}
         <StyledDrawerList
           // {...menuProps}

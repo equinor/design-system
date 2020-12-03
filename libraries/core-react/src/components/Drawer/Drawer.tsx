@@ -8,6 +8,7 @@ type DrawerContainerProps = HTMLAttributes<HTMLElement>
 
 const StyledDrawerContainer = styled.nav<DrawerContainerProps>`
   background: ${background};
+  margin-top: 16px;
   width: 254px;
   height: 100%;
   border-right: ${border.right.width} solid ${border.right.color};

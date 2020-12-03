@@ -12,6 +12,7 @@ import { useCombinedRefs } from '@hooks'
 import { useDrawer } from './Drawer.context'
 import { drawer as tokens } from './Drawer.tokens'
 import { DrawerList } from './DrawerList'
+import { Item } from '@react-stately/collections'
 import { useMenu, useMenuItem, useMenuSection } from '@react-aria/menu'
 import { useFocus } from '@react-aria/interactions'
 
@@ -67,7 +68,7 @@ const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
     text-decoration: none;
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 48px);
+    /* width: calc(100% - 48px); */
     padding-left: 56px;
     padding-top: ${itemSpacings.top};
     padding-bottom: ${itemSpacings.bottom};
@@ -91,11 +92,12 @@ const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
     text-decoration: none;
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 32px);
-    padding-left: 66px;
+    /* width: calc(100% - 32px); */
     padding-top: ${itemSpacings.top};
     padding-bottom: ${itemSpacings.bottom};
-    /* border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
+    margin-left: 48px;
+    padding-left: 14px;
+    border-left: ${itemBorder.left.width} solid ${itemBorder.left.color};
 
     ${({ active }) =>
       active &&
@@ -167,7 +169,7 @@ export const DrawerItem = React.memo(
     const isFocused = index === focusedIndex // old isFocused
 
     let itemElements
-    let updatedChildren: Array<ChildType>
+    let updatedChildren
 
     // Experimenting with useMenuItem from react aria
     // let refLi = React.useRef<HTMLLIElement>(null)
@@ -207,8 +209,8 @@ export const DrawerItem = React.memo(
         }),
       ]
     }
-
-    // console.log('item children', updatedChildren, drawerOpen)
+    const isNested = updatedChildren[0].props.children.length > 0
+    console.log('item children', updatedChildren[0].props)
 
     const props = {
       ...rest,
@@ -228,7 +230,7 @@ export const DrawerItem = React.memo(
         onKeyDown={handleKeyDown}
         // onFocus={() => setFocusedIndex(index)}
       >
-        {updatedChildren.length > 1 && (
+        {isNested && (
           <Icon className="child_icon" name="chevron_down" size={16} />
         )}
         {itemElements}
