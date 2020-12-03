@@ -16,6 +16,7 @@ devDependencies:
   '@testing-library/user-event': 12.3.0
   '@types/jest': 26.0.15
   '@types/lodash': 4.14.165
+  '@types/ramda': 0.27.32
   '@types/react': 17.0.0
   '@types/react-dom': 17.0.0
   '@types/styled-components': 5.1.4
@@ -26,6 +27,7 @@ devDependencies:
   jest-styled-components: 7.0.3_styled-components@5.2.1
   lodash: 4.17.20
   prettier: 2.2.1
+  ramda: 0.27.1
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
   rollup: 2.34.0
@@ -1678,6 +1680,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
+  /@types/ramda/0.27.32:
+    dependencies:
+      ts-toolbelt: 6.15.5
+    dev: true
+    resolution:
+      integrity: sha512-vdwZcWC+hlTxB//LZQLS1+VEdArImGI4yVKUpeqB8b9mBXgDFXCuQoOt8spQbi8fTyNLOdqRv6liSm2ckxWLog==
   /@types/react-dom/17.0.0:
     dependencies:
       '@types/react': 17.0.0
@@ -5619,6 +5627,10 @@ packages:
       node: '>=0.4.x'
     resolution:
       integrity: sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
+  /ramda/0.27.1:
+    dev: true
+    resolution:
+      integrity: sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -6668,6 +6680,10 @@ packages:
       typescript: '>=3.8 <5.0'
     resolution:
       integrity: sha512-3lFWKbLxJm34QxyVNNCgXX1u4o/RV0myvA2y2Bxm46iGIjKlaY0own9gIckbjZJPn+WaJEnfPPJ20HHGpoq4yg==
+  /ts-toolbelt/6.15.5:
+    dev: true
+    resolution:
+      integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==
   /tslib/1.14.1:
     dev: true
     resolution:
@@ -7153,6 +7169,7 @@ specifiers:
   '@testing-library/user-event': ^12.2.2
   '@types/jest': ^26.0.15
   '@types/lodash': ^4.14.165
+  '@types/ramda': ^0.27.32
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
   '@types/styled-components': ^5.1.4
@@ -7163,6 +7180,7 @@ specifiers:
   jest-styled-components: ^7.0.3
   lodash: ^4.17.20
   prettier: ^2.2.1
+  ramda: ^0.27.1
   react: ^17.0.1
   react-dom: ^17.0.1
   rollup: ^2.34.0
