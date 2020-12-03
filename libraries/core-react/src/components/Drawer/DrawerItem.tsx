@@ -41,7 +41,7 @@ const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
   list-style: none;
   width: auto;
   position: relative;
-  border-left: ${itemBorder.left.width} solid ${itemBorder.left.color};
+  /* border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
   &:hover {
     background: ${itemHoverBackground};
   }
@@ -68,7 +68,7 @@ const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
     display: inline-block;
     vertical-align: middle;
     width: calc(100% - 48px);
-    padding-left: calc(${itemSpacings.top} - ${itemBorder.left.width});
+    padding-left: 56px;
     padding-top: ${itemSpacings.top};
     padding-bottom: ${itemSpacings.bottom};
     max-width: 160px;
@@ -92,9 +92,10 @@ const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
     display: inline-block;
     vertical-align: middle;
     width: calc(100% - 32px);
-    padding-left: calc(${itemSpacings.top} - ${itemBorder.left.width});
+    padding-left: 66px;
     padding-top: ${itemSpacings.top};
     padding-bottom: ${itemSpacings.bottom};
+    /* border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
 
     ${({ active }) =>
       active &&
@@ -142,8 +143,6 @@ export const DrawerItem = React.memo(
     // Add a level check and deeper context levels
 
     const [drawerOpen, setDrawerOpen] = useState(open)
-    const [isFocusedState, setFocused] = useState(false) // New isfocused
-    const { focusProps } = useFocus({ onFocusChange: setFocused })
 
     const handleClick = (
       event: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -169,6 +168,21 @@ export const DrawerItem = React.memo(
 
     let itemElements
     let updatedChildren: Array<ChildType>
+
+    // Experimenting with useMenuItem from react aria
+    // let refLi = React.useRef<HTMLLIElement>(null)
+    // let { menuItemProps } = useMenuItem(
+    //   {
+    //     key: index,
+    //     isDisabled: disabled,
+    //     // onAction
+    //   },
+    //   // state,
+    //   refLi,
+    // )
+
+    // const [isFocusedState, setFocused] = useState(false) // New isfocused
+    // const { focusProps } = useFocus({ onFocusChange: setFocused })
 
     if (Array.isArray(children)) {
       updatedChildren = React.Children.map(children, (child: ChildType) => {

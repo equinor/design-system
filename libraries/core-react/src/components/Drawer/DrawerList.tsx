@@ -1,8 +1,17 @@
-import React, { forwardRef, HTMLAttributes, useMemo } from 'react'
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useMemo,
+  ReactElement,
+  useRef,
+  useState,
+} from 'react'
 import createId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
-import { useTreeState, TreeState } from '@react-stately/tree'
+import { useFocus } from '@react-aria/interactions'
+import { useTreeState, TreeState, TreeProps } from '@react-stately/tree'
+import { mergeProps } from '@react-aria/utils'
 import {
   useMenu,
   useMenuItem,
@@ -16,9 +25,9 @@ const { background, subtitleBorder, subtitleTypography } = tokens
 type DrawerSubtitleProps = {
   /** Subtitle name */
   name?: string
-} & HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLSpanElement>
 
-const StyledDrawerSubtitle = styled.div<DrawerSubtitleProps>`
+const StyledDrawerSubtitle = styled.span<DrawerSubtitleProps>`
   background: ${background};
   width: 100%;
   padding-top: 7px;
@@ -30,9 +39,7 @@ const StyledDrawerSubtitle = styled.div<DrawerSubtitleProps>`
   line-height: ${subtitleTypography.lineHeight};
 `
 
-const StyledDrawerList = styled.ul.attrs((drawerOpen) => ({
-  drawerOpen,
-}))<DrawerListProps>`
+const StyledDrawerList = styled.ul<DrawerListProps>`
   margin: 0;
   padding: 0;
   background: ${background};
@@ -87,15 +94,28 @@ type DrawerListProps = {
 type DrawerListChildrenType = {
   drawerListId?: number | TreeState<unknown>
   children?: React.ReactElement | AriaMenuOptions<unknown>
-} & React.ReactElement
+  index?: number
+} & Pick<DrawerListProps, 'level' | 'open'> &
+  React.ReactElement
 
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
   function DrawerList(
     { children, level = 'child', subtitle, open, ...props },
     ref,
   ) {
-    const drawerListId = useMemo(() => createId('drawerlist-'), [])
+    const drawerListId = useMemo<string>(() => createId('drawerlist-'), [])
     const { focusedIndex, setFocusedIndex } = useDrawer()
+    const ListItems = React.Children.map(children, (child, index) => {
+      if (!child) return null
+      return React.cloneElement(child as ReactElement, {
+        drawerListId,
+        index,
+        level,
+        open,
+      })
+    })
+
+    // let state = useTreeState({ collection: ListItems, selectionMode: 'none' })
 
     // const useref = React.useRef<HTMLUListElement>(null)
     // const { menuProps } = useMenu(
@@ -103,34 +123,13 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     //   (focusedIndex as unknown) as TreeState<unknown>, // https://github.com/microsoft/TypeScript/issues/28067
     //   useref,
     // )
-    let ListItems: Array<DrawerListChildrenType>
+    //  let ListItems: Array<DrawerListChildrenType>
 
-    if (Array.isArray(children)) {
-      ListItems = React.Children.map(
-        children,
-        (child: DrawerListChildrenType, index) => {
-          return React.cloneElement(child, {
-            drawerListId,
-            index,
-            level,
-            open,
-          })
-        },
-      )
-    } else {
-      ListItems = []
-      ListItems.push(
-        React.cloneElement(children as DrawerListChildrenType, {
-          drawerListId,
-          level,
-          open,
-        }),
-      )
-    }
+    console.log(ListItems)
 
     return (
       <>
-        {level === 'grandparent' && subtitle !== '' && (
+        {level === 'grandparent' && subtitle && (
           <StyledDrawerSubtitle name={subtitle}>
             {subtitle}
           </StyledDrawerSubtitle>
@@ -148,3 +147,35 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     )
   },
 )
+
+// function MenuItem({ item, state, onAction }) {
+//   let ref = useRef<HTMLLIElement>(null)
+//   let { menuItemProps } = useMenuItem(
+//     {
+//       key: item.key,
+//       isDisabled: item.isDisabled,
+//       onAction,
+//     },
+//     state,
+//     ref,
+//   )
+
+//   let [isFocused, setFocused] = useState(false)
+//   let { focusProps } = useFocus({ onFocusChange: setFocused })
+
+//   return (
+//     <li
+//       {...mergeProps(menuItemProps, focusProps)}
+//       ref={ref}
+//       style={{
+//         background: isFocused ? 'gray' : 'transparent',
+//         color: isFocused ? 'white' : null,
+//         padding: '2px 5px',
+//         outline: 'none',
+//         cursor: 'pointer',
+//       }}
+//     >
+//       {item.rendered}
+//     </li>
+//   )
+// }
