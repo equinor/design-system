@@ -44,58 +44,45 @@ const tableHead: ComponentToken = {
     left: medium,
     right: medium,
   },
-}
-
-type states = {
-  active: Partial<ComponentToken>
-  disabled: Partial<ComponentToken>
-  focus: Partial<ComponentToken>
-  hover: Partial<ComponentToken>
-}
-
-const states: states = {
-  active: {
-    background: activeBackgroundColor,
-    typography: {
-      ...cellTypography,
-      color: primaryRestingColor,
-    },
-    border: {
-      bottom: {
+  states: {
+    active: {
+      background: activeBackgroundColor,
+      typography: {
+        ...cellTypography,
         color: primaryRestingColor,
       },
-    },
-  },
-  disabled: {
-    typography: {
-      ...cellTypography,
-      color: disabledTextColor,
-    },
-    border: {
-      type: 'bordergroup',
-      bottom: {
-        color: disabledBorderColor,
+      border: {
+        bottom: {
+          color: primaryRestingColor,
+        },
       },
     },
-  },
-  focus: {
-    outline: {
-      type: 'outline',
-      color: focusColor,
-      width: '1px',
-      style: 'dashed',
+    disabled: {
+      typography: {
+        ...cellTypography,
+        color: disabledTextColor,
+      },
+      border: {
+        type: 'bordergroup',
+        bottom: {
+          color: disabledBorderColor,
+        },
+      },
+    },
+    focus: {
+      outline: {
+        type: 'outline',
+        color: focusColor,
+        width: '1px',
+        style: 'dashed',
+      },
+    },
+    hover: {
+      background: hoverBackgroundColor,
     },
   },
-  hover: {
-    background: hoverBackgroundColor,
-  },
 }
 
-export type TableHeadToken = ComponentToken & {
-  states: states
-}
+export type TableHeadToken = ComponentToken
 
-export const token: TableHeadToken = {
-  ...tableHead,
-  states,
-}
+export const token: TableHeadToken = tableHead
