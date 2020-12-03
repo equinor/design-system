@@ -8,6 +8,7 @@ import type {
   Typography,
   ComponentToken,
 } from '@equinor/eds-tokens'
+import * as R from 'ramda'
 
 const {
   components: {
@@ -24,6 +25,12 @@ const {
       primary__resting: { rgba: primaryColor },
       primary__hover: { rgba: primaryHoverColor },
       primary__hover_alt: { rgba: primaryHoverAltColor },
+      secondary__resting: { rgba: secondaryColor },
+      secondary__link_hover: { rgba: secondaryHoverColor },
+      secondary__highlight: { rgba: secondaryHoverAltColor },
+      danger__resting: { rgba: dangerColor },
+      danger__hover: { rgba: dangerHoverColor },
+      danger__highlight: { rgba: dangerHoverAltColor },
       disabled__text: { rgba: disabledTextColor },
       disabled__border: { rgba: disabledBorderColor },
       disabled__fill: { rgba: disabledColor },
@@ -93,50 +100,108 @@ const contained: ComponentToken = {
   },
 }
 
-const outlined: ComponentToken = {
-  ...contained,
+const outlined: ComponentToken = R.mergeDeepRight(contained, {
   background: 'transparent',
   typography: {
-    ...buttonTypography,
     color: primaryColor,
   },
   states: {
     hover: {
       typography: {
-        ...buttonTypography,
         color: primaryHoverColor,
       },
       background: primaryHoverAltColor,
       border: {
-        ...contained.border,
-        type: 'border',
         color: primaryHoverColor,
       },
     },
   },
-}
-const ghost: ComponentToken = {
-  ...contained,
+})
+
+const ghost: ComponentToken = R.mergeDeepRight(contained, {
   background: 'transparent',
   typography: {
-    ...buttonTypography,
     color: primaryColor,
   },
   border: {
-    ...contained.border,
     type: 'border',
     color: 'transparent',
   },
   states: {
     hover: {
       typography: {
-        ...buttonTypography,
         color: primaryHoverColor,
       },
       background: primaryHoverAltColor,
     },
   },
+})
+
+const secondaryContained: Partial<ComponentToken> = {
+  background: secondaryColor,
+  border: {
+    color: secondaryColor,
+  },
+  states: {
+    hover: {
+      background: secondaryHoverColor,
+    },
+  },
 }
+
+const dangerContained: Partial<ComponentToken> = {
+  background: dangerColor,
+  border: {
+    color: dangerColor,
+  },
+  states: {
+    hover: {
+      background: dangerHoverColor,
+    },
+  },
+}
+
+const secondarOutlinedGhost: Partial<ComponentToken> = {
+  border: {
+    color: secondaryColor,
+  },
+  states: {
+    hover: {
+      border: {
+        color: secondaryHoverColor,
+      },
+      background: secondaryHoverAltColor,
+    },
+  },
+}
+
+const dangerOutlinedGhost: Partial<ComponentToken> = {
+  states: {
+    hover: {
+      background: dangerHoverAltColor,
+    },
+  },
+}
+
+const buttonTokens = {
+  primary: {
+    contained,
+    outlined,
+    ghost,
+  },
+  secondary: {
+    contained: R.mergeDeepRight(contained, secondaryContained),
+    outlined: R.mergeDeepRight(outlined, secondarOutlinedGhost),
+    ghost: R.mergeDeepRight(ghost, secondarOutlinedGhost),
+  },
+  danger: {
+    contained: R.mergeDeepRight(contained, dangerContained),
+    outlined: R.mergeDeepRight(outlined, dangerOutlinedGhost),
+    ghost: R.mergeDeepRight(ghost, dangerOutlinedGhost),
+  },
+}
+
+console.log('button tokens', buttonTokens)
 
 const colors = {
   primary: {
@@ -197,7 +262,7 @@ export type ButtonGroups =
   | Buttons['danger']
   | Buttons['disabled']
 
-export const button_: {
+export const oldButtoneToken: {
   colors: Buttons
   icon_size: {
     width: string
