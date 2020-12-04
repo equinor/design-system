@@ -31,7 +31,7 @@ const PaddedStyledListItem = styled(StyledListItem)`
 
 export type MultiSelectProps = {
   /** List of options to choose from */
-  items?: string[]
+  items: string[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
