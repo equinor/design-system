@@ -46,20 +46,20 @@ const {
   clickbounds: { default__base: clicboundHeight },
 } = tokens
 
-const buttonOutline: Outline = {
-  type: 'outline',
-  offset: '4px',
-  style: 'dashed',
-  color: outline.color,
-  width: outline.width,
+export type ButtonToken = ComponentToken & {
+  entities: {
+    icon: ComponentToken
+  }
 }
 
-const contained: ComponentToken = {
+const contained: ButtonToken = {
   height: buttonHeight,
+  width: '100%',
   background: primaryColor,
   typography: {
     ...buttonTypography,
     color: primaryWhite,
+    textAlign: 'center',
   },
   border: {
     type: 'border',
@@ -75,22 +75,44 @@ const contained: ComponentToken = {
     height: clicboundHeight,
     width: '100%',
     offset: {
-      top: (parseInt(clicboundHeight) - parseInt(buttonHeight)) / 2,
-      left: 0,
+      top: `${(parseInt(clicboundHeight) - parseInt(buttonHeight)) / 2}px`,
+      left: '0',
+    },
+  },
+  entities: {
+    icon: {
+      typography: {
+        color: primaryColor,
+      },
+      height: '24px',
+      width: '24px',
     },
   },
   states: {
     focus: {
-      outline: buttonOutline,
+      outline: {
+        type: 'outline',
+        offset: '4px',
+        style: 'dashed',
+        color: outline.color,
+        width: outline.width,
+      },
     },
     hover: {
+      border: {
+        type: 'border',
+        width: '1px',
+        color: primaryColor,
+        radius: buttonBorderRadius,
+      },
       background: primaryHoverColor,
     },
     disabled: {
       background: disabledColor,
       border: {
         type: 'border',
-        color: disabledBorderColor,
+        width: '1px',
+        color: disabledColor,
       },
       typography: {
         ...buttonTypography,
@@ -100,7 +122,7 @@ const contained: ComponentToken = {
   },
 }
 
-const outlined: ComponentToken = R.mergeDeepRight(contained, {
+const outlined: ButtonToken = R.mergeDeepRight(contained, {
   background: 'transparent',
   typography: {
     color: primaryColor,
@@ -115,58 +137,122 @@ const outlined: ComponentToken = R.mergeDeepRight(contained, {
         color: primaryHoverColor,
       },
     },
+    disabled: {
+      background: 'transparent',
+    },
   },
 })
 
-const ghost: ComponentToken = R.mergeDeepRight(contained, {
+const ghost: ButtonToken = R.mergeDeepRight(contained, {
   background: 'transparent',
   typography: {
     color: primaryColor,
   },
   border: {
-    type: 'border',
-    color: 'transparent',
+    width: '0',
   },
+
   states: {
     hover: {
+      border: {
+        width: '0',
+      },
       typography: {
         color: primaryHoverColor,
       },
       background: primaryHoverAltColor,
     },
+    disabled: {
+      border: {
+        width: '0',
+      },
+      background: 'transparent',
+    },
   },
 })
 
-const secondaryContained: Partial<ComponentToken> = {
+const ghost_icon: ButtonToken = R.mergeDeepRight(contained, {
+  height: '40px',
+  width: '40px',
+  border: {
+    width: '0',
+    radius: '50%',
+  },
+  background: 'transparent',
+  spacings: { left: '0', right: '0' },
+  states: {
+    hover: {
+      background: primaryHoverAltColor,
+      border: {
+        width: '0',
+        radius: '50%',
+      },
+    },
+    disabled: {
+      background: 'transparent',
+      border: {
+        width: '0',
+      },
+    },
+  },
+})
+
+const secondaryContained: Partial<ButtonToken> = {
   background: secondaryColor,
   border: {
     color: secondaryColor,
   },
+  entities: {
+    icon: {
+      typography: {
+        color: secondaryColor,
+      },
+    },
+  },
   states: {
     hover: {
+      border: {
+        color: secondaryHoverColor,
+      },
       background: secondaryHoverColor,
     },
   },
 }
 
-const dangerContained: Partial<ComponentToken> = {
+const dangerContained: Partial<ButtonToken> = {
   background: dangerColor,
   border: {
     color: dangerColor,
   },
   states: {
     hover: {
+      border: {
+        color: dangerHoverColor,
+      },
       background: dangerHoverColor,
     },
   },
 }
 
-const secondarOutlinedGhost: Partial<ComponentToken> = {
+const secondaryOutlined: Partial<ButtonToken> = {
+  typography: {
+    color: secondaryColor,
+  },
   border: {
     color: secondaryColor,
   },
+  entities: {
+    icon: {
+      typography: {
+        color: secondaryColor,
+      },
+    },
+  },
   states: {
     hover: {
+      typography: {
+        color: secondaryHoverColor,
+      },
       border: {
         color: secondaryHoverColor,
       },
@@ -175,103 +261,77 @@ const secondarOutlinedGhost: Partial<ComponentToken> = {
   },
 }
 
-const dangerOutlinedGhost: Partial<ComponentToken> = {
+const secondaryGhost: Partial<ButtonToken> = R.mergeDeepRight(
+  secondaryOutlined,
+  {
+    border: {
+      width: '0',
+    },
+  },
+)
+
+const dangerOutlined: Partial<ButtonToken> = {
+  typography: {
+    color: dangerColor,
+  },
+  border: {
+    color: dangerColor,
+  },
+  entities: {
+    icon: {
+      typography: {
+        color: dangerColor,
+      },
+    },
+  },
   states: {
     hover: {
+      typography: {
+        color: dangerHoverColor,
+      },
+      border: {
+        color: dangerHoverColor,
+      },
       background: dangerHoverAltColor,
     },
   },
 }
 
-const buttonTokens = {
+const dangerGhost: Partial<ButtonToken> = R.mergeDeepRight(dangerOutlined, {
+  border: {
+    width: '0',
+  },
+})
+
+export type ButtonTokenSet = {
+  contained: ButtonToken
+  outlined: ButtonToken
+  ghost: ButtonToken
+  ghost_icon: ButtonToken
+}
+type ButtonTokens = {
+  primary: ButtonTokenSet
+  secondary: ButtonTokenSet
+  danger: ButtonTokenSet
+}
+
+export const token: ButtonTokens = {
   primary: {
     contained,
     outlined,
     ghost,
+    ghost_icon,
   },
   secondary: {
     contained: R.mergeDeepRight(contained, secondaryContained),
-    outlined: R.mergeDeepRight(outlined, secondarOutlinedGhost),
-    ghost: R.mergeDeepRight(ghost, secondarOutlinedGhost),
+    outlined: R.mergeDeepRight(outlined, secondaryOutlined),
+    ghost: R.mergeDeepRight(ghost, secondaryGhost),
+    ghost_icon: R.mergeDeepRight(ghost_icon, secondaryGhost),
   },
   danger: {
     contained: R.mergeDeepRight(contained, dangerContained),
-    outlined: R.mergeDeepRight(outlined, dangerOutlinedGhost),
-    ghost: R.mergeDeepRight(ghost, dangerOutlinedGhost),
-  },
-}
-
-console.log('button tokens', buttonTokens)
-
-const colors = {
-  primary: {
-    ...primary,
-    ghost_icon: {
-      ...primary.ghost_icon,
-      typography: primary.ghost.typography,
-    },
-  },
-  secondary: {
-    ...secondary,
-    ghost_icon: {
-      ...secondary.ghost_icon,
-      typography: secondary.ghost.typography,
-    },
-  },
-  danger: {
-    ...danger,
-    ghost_icon: {
-      ...danger.ghost_icon,
-      typography: danger.ghost.typography,
-    },
-  },
-  disabled: {
-    ...disabled,
-    ghost_icon: {
-      ...disabled.ghost_icon,
-      typography: disabled.ghost.typography,
-    },
-  },
-}
-
-export type Button_ = {
-  height: string
-  width?: string
-  background: string
-  color: string
-  border: Border
-  typography: Typography
-  spacing?: Partial<Spacing>
-  focus?: Focus
-  hover?: Hover
-  // TODO Remove these once figma-broker is updated with proper types
-  pressedColor?: string
-  clickboundOffset?: number | string
-  clickbound?: string
-}
-
-type Buttons = {
-  [P in keyof typeof colors]: {
-    [P2 in keyof typeof colors[P]]: Button_
-  }
-}
-
-export type ButtonGroups =
-  | Buttons['primary']
-  | Buttons['secondary']
-  | Buttons['danger']
-  | Buttons['disabled']
-
-export const oldButtoneToken: {
-  colors: Buttons
-  icon_size: {
-    width: string
-    height: string
-  }
-} = {
-  colors,
-  icon_size: {
-    width: '24px',
-    height: '24px',
+    outlined: R.mergeDeepRight(outlined, dangerOutlined),
+    ghost: R.mergeDeepRight(ghost, dangerGhost),
+    ghost_icon: R.mergeDeepRight(ghost_icon, dangerGhost),
   },
 }

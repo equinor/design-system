@@ -9,10 +9,11 @@ import {
 
 export type ComponentToken = {
   height?: string
-  background: string
-  spacings: Spacing
-  border: Borders
-  typography: Typography
+  width?: string
+  background?: string
+  spacings?: Spacing
+  border?: Borders
+  typography?: Partial<Typography>
   clickbound?: Clickbound
   states?: {
     active?: ComponentState
