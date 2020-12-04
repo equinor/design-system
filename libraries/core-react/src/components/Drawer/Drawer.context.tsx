@@ -1,36 +1,55 @@
-import React, { useState, useContext, ReactNode } from 'react'
+import * as React from 'react'
+
+import {
+  useState,
+  useContext,
+  ReactNode,
+  MouseEvent,
+  KeyboardEvent,
+} from 'react'
 
 type State = {
   focusedIndex: number
+  onClose: (e?: MouseEvent | KeyboardEvent) => void
 }
 
 const initalState: State = {
   focusedIndex: -1,
+  onClose: null,
 }
 
 const DrawerContext = React.createContext<State>(initalState)
 
 type ProviderProps = { children: ReactNode }
 
+type UseDrawer<T> = T & {
+  setFocusedIndex: (index: number) => void
+  setOnClose: (onClose: (e?: MouseEvent | KeyboardEvent) => void) => void
+}
+
 export const DrawerProvider = ({ children }: ProviderProps): JSX.Element => {
   const [state, setState] = useState<State>(initalState)
-  const { focusedIndex } = state
+  const { focusedIndex, onClose } = state
 
   const setFocusedIndex: UseDrawer<State>['setFocusedIndex'] = (i) => {
-    setState({ focusedIndex: i })
+    setState({ ...state, focusedIndex: i })
+  }
+
+  const setOnClose: UseDrawer<State>['setOnClose'] = (onClose) => {
+    setState({ ...state, onClose })
   }
 
   const value = {
     setFocusedIndex,
     focusedIndex,
+    setOnClose,
+    onClose,
   }
+
+  console.log(value)
   return (
     <DrawerContext.Provider value={value}>{children}</DrawerContext.Provider>
   )
-}
-
-type UseDrawer<T> = T & {
-  setFocusedIndex: (index: number) => void
 }
 
 export const useDrawer = (): UseDrawer<State> =>

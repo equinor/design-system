@@ -126,16 +126,16 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     // )
     //  let ListItems: Array<DrawerListChildrenType>
 
-    ListItems.map((item, index) => {
-      console.log(
-        focusedIndex,
-        item.props.index,
-        item.props.drawerListId,
-        item.props.children,
-        item.props.level,
-        item.props.open,
-      )
-    })
+    // ListItems.map((item, index) => {
+    //   console.log(
+    //     focusedIndex,
+    //     item.props.index,
+    //     item.props.drawerListId,
+    //     item.props.children,
+    //     item.props.level,
+    //     item.props.open,
+    //   )
+    // })
 
     return (
       <>

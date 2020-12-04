@@ -209,14 +209,16 @@ export const DrawerItem = React.memo(
         }),
       ]
     }
-    const isNested = updatedChildren[0].props.children.length > 0
-    console.log('item children', updatedChildren[0].props)
+    const isNested =
+      updatedChildren[0].props.children.length > 0 &&
+      Array.isArray(updatedChildren[0].props.children)
+    // console.log('item children', updatedChildren[0].props)
 
     const props = {
       ...rest,
       disabled,
     }
-    console.log(updatedChildren)
+    // console.log(updatedChildren)
     return (
       <StyledDrawerItem
         {...props}
