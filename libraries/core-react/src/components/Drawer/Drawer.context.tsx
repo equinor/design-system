@@ -8,7 +8,7 @@ import {
   KeyboardEvent,
 } from 'react'
 
-type State = {
+export type State = {
   focusedIndex: number
   onClose: (e?: MouseEvent | KeyboardEvent) => void
 }

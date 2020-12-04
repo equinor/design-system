@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useEffect, ReactNode } from 'react'
 import styled from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
-import { useDrawer } from 'Drawer.context'
+import { useDrawer } from './Drawer.context'
 import { useCombinedRefs, useOutsideClick } from '@hooks'
 
 const { background, border } = tokens

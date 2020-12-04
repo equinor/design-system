@@ -122,13 +122,13 @@ export const Default: Story<DrawerProps> = () => {
             </DrawerItem>
             <DrawerItem>
               <DrawerLabel>Grandparent 2</DrawerLabel>
-              <DrawerList level="parent" open>
+              <DrawerList level="parent">
                 <DrawerItem>
                   <DrawerLabel>Parent 1</DrawerLabel>
-                  <DrawerList open>
-                    <DrawerItem active>
+                  <DrawerList>
+                    <DrawerItem>
                       <Typography variant="body_short" link href={'#href'}>
-                        Child 1 active
+                        Child 1
                       </Typography>
                     </DrawerItem>
                     <DrawerItem>

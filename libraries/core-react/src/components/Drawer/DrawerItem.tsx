@@ -4,6 +4,8 @@ import React, {
   useState,
   isValidElement,
   ReactElement,
+  MouseEvent,
+  KeyboardEvent,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
@@ -128,6 +130,8 @@ type DrawerItemProps = {
   disabled?: boolean
   /** List is open */
   open?: boolean
+  /** onClick handler */
+  onClick?: (e: MouseEvent) => void
   // children?: React.ReactElement
 } & HTMLAttributes<HTMLLIElement>
 
@@ -137,26 +141,31 @@ type ChildType = {
 
 export const DrawerItem = React.memo(
   forwardRef<HTMLLIElement, DrawerItemProps>(function DrawerItem(
-    { children, disabled, open, index, ...rest },
+    { children, disabled, open, index, onClick, ...rest },
     ref,
   ) {
-    // const { focusedIndex, setFocusedIndex } = useDrawer()
+    const { focusedIndex, setFocusedIndex, onClose } = useDrawer()
     // console.log('draweritem: ', rest.drawerListId)
     // Add a level check and deeper context levels
 
     const [drawerOpen, setDrawerOpen] = useState(open)
 
-    const handleClick = (
-      event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    ) => {
+    const handleClick = (event: MouseEvent<HTMLLIElement, MouseEvent>) => {
       if (!disabled) {
         console.log('click', index, rest)
         setDrawerOpen(!drawerOpen)
+        setFocusedIndex(index)
         event.stopPropagation()
       }
     }
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>) => {
+    const toggleFocus = (i: number) => {
+      if (focusedIndex !== i) {
+        setFocusedIndex(i)
+      }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
       const { key } = event
       if (key === 'Enter' || (key === ' ' && !disabled)) {
         console.log('click enter or space', index, rest)
@@ -165,8 +174,7 @@ export const DrawerItem = React.memo(
       }
     }
 
-    const focusedIndex = -1
-    const isFocused = index === focusedIndex // old isFocused
+    const isFocused = index === focusedIndex
 
     let itemElements
     let updatedChildren
@@ -218,6 +226,8 @@ export const DrawerItem = React.memo(
       ...rest,
       disabled,
     }
+
+    const chevronIcon = open ? 'chevron_up' : 'chevron_down'
     // console.log(updatedChildren)
     return (
       <StyledDrawerItem
@@ -230,10 +240,19 @@ export const DrawerItem = React.memo(
         )}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
+        onFocus={() => toggleFocus(index)}
+        // onClick={(e) => {
+        //   if (!disabled && onClick) {
+        //     onClick(e)
+        //     if (onClose !== null) {
+        //       onClose(e)
+        //     }
+        //   }
+        // }}
         // onFocus={() => setFocusedIndex(index)}
       >
         {isNested && (
-          <Icon className="child_icon" name="chevron_down" size={16} />
+          <Icon className="child_icon" name={chevronIcon} size={16} />
         )}
         {itemElements}
         {drawerOpen && updatedChildren}

@@ -104,7 +104,10 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     { children, level = 'child', subtitle, open, ...props },
     ref,
   ) {
-    const drawerListId = useMemo<string>(() => createId('drawerlist-'), [])
+    const drawerListId = useMemo<string>(
+      () => createId(level + '-drawerlist-'),
+      [],
+    )
     const { focusedIndex, setFocusedIndex } = useDrawer()
     const ListItems = React.Children.map(children, (child, index) => {
       if (!child) return null
