@@ -25,7 +25,7 @@ export const EditPageOnGithub = ({ slug }) => {
   return (
     <ExternalLink
       color={theme.colors.primary}
-      href={`https://github.com/equinor/design-system/blob/develop/apps/storefront/${slug}`}
+      href={`https://github.com/equinor/design-system/blob/documentation/apps/storefront/${slug}`}
     >
       <Icon name="edit_text" size={16} />
       Edit this page on GitHub
