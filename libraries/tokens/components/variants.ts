@@ -1,9 +1,3 @@
-export const accordion = {
-  dark_theme: ['false', 'true'],
-  state: ['resting', 'disabled', 'active', 'focus', 'hover'],
-  icon_placement: ['right', 'left', 'dual'],
-}
-
 export const buttons = {
   dark_theme: ['false', 'true'],
   color: ['primary', 'secondary', 'danger'],
@@ -20,17 +14,6 @@ export const buttons_toggle = {
   icon: ['false', 'true'],
 }
 
-export const cards = {
-  dark_theme: ['false', 'true'],
-  action_type: ['buttons', 'icons', 'meta'],
-  position: ['middle', 'last', 'leading_image'],
-  heading_size: ['h6', 'h4', 'h5'],
-  style: ['caption', 'overline', 'body_short'],
-  avatar: ['true', 'false'],
-  custom_icon: ['false', 'true'],
-  state: ['default', 'info', 'danger', 'warning'],
-}
-
 export const chips = {
   dark_theme: ['false', 'true'],
   avatar: ['false', 'true'],
@@ -39,14 +22,6 @@ export const chips = {
   state: ['enabled', 'disabled', 'focus', 'hover', 'pressed'],
   selected: ['false', 'true'],
   error: ['false', 'true'],
-}
-
-export const date_picker = {
-  dark_theme: ['false', 'true'],
-  today: ['false', 'true'],
-  position: ['single', 'left_period', 'right_period', 'center_period'],
-  selected: ['false', 'true'],
-  state: ['enabled', 'disabled', 'hover', 'pressed', 'focus'],
 }
 
 export const divider = {
@@ -63,11 +38,6 @@ export const navigation_pagination = {
   dark_theme: ['false', 'true'],
   range_and_total: ['true', 'false'],
   range_select: ['true', 'false'],
-}
-
-export const navigation_table_of_contents = {
-  dark_theme: ['false', 'true'],
-  state: ['enabled', 'focus', 'hover', 'pressed'],
 }
 
 export const navigation_tabs = {
@@ -117,31 +87,6 @@ export const popover = {
     '↓_bottom',
     '↙︎_bottom_left',
   ],
-}
-
-export const search = {
-  dark_theme: ['false', 'true'],
-  state: ['enabled', 'active', 'filled', 'focus', 'hover'],
-}
-
-export const select = {
-  dark_theme: ['false', 'true'],
-  multiselect: ['false', 'true'],
-  state: ['enabled', 'focus', 'hover', 'selected', 'disabled', 'active'],
-}
-
-export const selection_controls = {
-  dark_theme: ['false', 'true'],
-  state: ['resting', 'disabled', 'focus', 'hover', 'pressed'],
-  size: ['small', 'medium'],
-  on: ['on', 'off'],
-  selected: ['true', 'false'],
-  indeterminate: ['false', 'true'],
-}
-
-export const side_sheet = {
-  dark_theme: ['false', 'true'],
-  width: ['x_large', 'large', 'medium', 'small'],
 }
 
 export const stepper = {
