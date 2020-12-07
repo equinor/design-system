@@ -40,7 +40,12 @@ const StyledDrawerSubtitle = styled.span<DrawerSubtitleProps>`
   line-height: ${subtitleTypography.lineHeight};
 `
 
-const StyledDrawerList = styled.ul<DrawerListProps>`
+const StyledDrawerList = styled.ul.attrs<DrawerListProps>(
+  ({ open }): JSX.IntrinsicElements['ul'] => ({
+    'aria-hidden': !open,
+    'aria-expanded': open,
+  }),
+)<DrawerListProps>`
   margin: 0;
   padding: 0;
   background: ${background};
