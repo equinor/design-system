@@ -96,9 +96,10 @@ describe('SingleSelect', () => {
   it('Will focus on the first item when opening the list with the keyboard', () => {
     render(<SingleSelect items={items} label={labelText} />)
     const inputNode = screen.getAllByLabelText(labelText)[0]
-    const buttonNode = screen.getByLabelText('open')
+    const optionsNode = screen.getAllByLabelText(labelText)[1]
 
     fireEvent.keyDown(inputNode, { key: 'ArrowDown', code: 'ArrowDown' })
+    expect(optionsNode.children[0]).toHaveAttribute('aria-selected', 'true')
     fireEvent.keyDown(inputNode, { key: 'Enter', code: 'Enter' })
 
     expect(inputNode).toHaveValue('One')
@@ -113,7 +114,10 @@ describe('SingleSelect', () => {
     expect(optionsNode.children).toHaveLength(0)
 
     fireEvent.keyDown(inputNode, { key: 'ArrowDown', code: 'ArrowDown' })
+    expect(optionsNode.children[0]).toHaveAttribute('aria-selected', 'true')
     fireEvent.keyDown(inputNode, { key: 'ArrowDown', code: 'ArrowDown' })
+    expect(optionsNode.children[0]).toHaveAttribute('aria-selected', 'false')
+    expect(optionsNode.children[1]).toHaveAttribute('aria-selected', 'true')
     fireEvent.keyDown(inputNode, { key: 'Enter', code: 'Enter' })
 
     expect(inputNode).toHaveValue('Two')
