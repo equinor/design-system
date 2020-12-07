@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
-import { chevron_down } from '@equinor/eds-icons'
+import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { useCombinedRefs } from '@hooks'
 import { useDrawer } from './Drawer.context'
 import { drawer as tokens } from './Drawer.tokens'
@@ -20,6 +20,7 @@ import { useFocus } from '@react-aria/interactions'
 
 const icons = {
   chevron_down,
+  chevron_up,
 }
 
 Icon.add(icons)
@@ -32,13 +33,19 @@ const {
   itemSpacings,
 } = tokens
 
-type StyledDrawerItemProps = Pick<
+type StyledDrawerItemProps = { isNested: boolean } & Pick<
   DrawerItemProps,
-  'active' | 'open' | 'index'
+  'active' | 'open' | 'index' | 'onClick'
 > &
   HTMLAttributes<HTMLLIElement>
 
-const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
+const StyledDrawerItem = styled.li.attrs<StyledDrawerItemProps>(
+  ({ active, open, index, isNested }): JSX.IntrinsicElements['li'] => ({
+    'aria-current': index === active ? 'page' : undefined,
+    'aria-haspopup': isNested,
+    'aria-expanded': isNested && open,
+  }),
+)<StyledDrawerItemProps>`
   margin: 0;
   padding: 0;
   list-style: none;
@@ -53,7 +60,7 @@ const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
     width: 16px;
     vertical-align: middle;
   }
-  svg.child_icon {
+  svg.chevron_icon {
     position: absolute;
     right: 16px;
     top: 16px;
@@ -122,8 +129,8 @@ const StyledDrawerItem = styled.li<StyledDrawerItemProps>`
 `
 
 type DrawerItemProps = {
-  /** Active drawer item */
-  active?: boolean
+  /** Active drawer item id*/
+  active?: number
   /** @ignore index */
   index?: number
   /** Disabled drawer item */
@@ -139,9 +146,9 @@ type ChildType = {
   disabled?: boolean
 } & React.ReactElement
 
-export const DrawerItem = React.memo(
-  forwardRef<HTMLLIElement, DrawerItemProps>(function DrawerItem(
-    { children, disabled, open, index, onClick, ...rest },
+export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
+  function DrawerItem(
+    { children, disabled, open, index, onClick, active, ...rest },
     ref,
   ) {
     const { focusedIndex, setFocusedIndex, onClose } = useDrawer()
@@ -225,6 +232,7 @@ export const DrawerItem = React.memo(
     const props = {
       ...rest,
       disabled,
+      isNested,
     }
 
     const chevronIcon = open ? 'chevron_up' : 'chevron_down'
@@ -234,6 +242,7 @@ export const DrawerItem = React.memo(
         {...props}
         open={drawerOpen}
         index={index}
+        role="menuitem"
         ref={useCombinedRefs<HTMLLIElement>(
           ref,
           (el: HTMLLIElement) => isFocused && el.focus(),
@@ -252,13 +261,13 @@ export const DrawerItem = React.memo(
         // onFocus={() => setFocusedIndex(index)}
       >
         {isNested && (
-          <Icon className="child_icon" name={chevronIcon} size={16} />
+          <Icon className="chevron_icon" name={chevronIcon} size={16} />
         )}
         {itemElements}
         {drawerOpen && updatedChildren}
       </StyledDrawerItem>
     )
-  }),
+  },
 )
 
 DrawerItem.displayName = 'DrawerItem'

@@ -139,10 +139,11 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     //     item.props.open,
     //   )
     // })
+    const isGrandparent = level === 'grandparent'
 
     return (
       <>
-        {level === 'grandparent' && subtitle && (
+        {isGrandparent && subtitle && (
           <>
             <Divider style={{ padding: '0px 16px' }} />
             <StyledDrawerSubtitle name={subtitle}>
@@ -156,6 +157,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
           level={level}
           open={open}
           ref={ref}
+          role="menu"
         >
           {ListItems}
         </StyledDrawerList>

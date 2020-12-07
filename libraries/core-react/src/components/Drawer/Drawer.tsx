@@ -26,10 +26,12 @@ export type DrawerProps = {
   focusedIndex?: number
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
+  /** Description of the purpose of the drawer (for screen readers) */
+  ariaLabel?: string
 } & HTMLAttributes<HTMLDivElement>
 
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
-  { children, overlay = false, onClose: onCloseCallback, ...rest },
+  { children, overlay = false, onClose: onCloseCallback, ariaLabel, ...rest },
   ref,
 ) {
   const props = {
@@ -61,11 +63,13 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
     }
   }
 
+  const navProps = ariaLabel && { 'aria-label': ariaLabel }
+
   console.log(props)
 
   return (
     <StyledDrawer {...props} ref={ref}>
-      <StyledDrawerContainer>{children}</StyledDrawerContainer>
+      <StyledDrawerContainer {...navProps}>{children}</StyledDrawerContainer>
     </StyledDrawer>
   )
 })
