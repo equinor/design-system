@@ -4,6 +4,9 @@ import type { Borders } from '@equinor/eds-tokens'
 import { shorthand, StyledCSS } from './common'
 
 export const bordersTemplate = (border: Borders): StyledCSS => {
+  if (!border) {
+    return css({})
+  }
   switch (border.type) {
     case 'border':
       return css({

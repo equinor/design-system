@@ -1,15 +1,17 @@
 import * as React from 'react'
 import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
+import { token as buttonToken } from './tokens'
+import { ButtonTokenSet, ButtonToken } from './Button.types'
 import {
-  token as buttonToken,
-  ButtonTokenSet,
-  ButtonToken,
-} from './Button.tokens'
-import { typographyTemplate, bordersTemplate, outlineTemplate } from '@utils'
+  typographyTemplate,
+  bordersTemplate,
+  outlineTemplate,
+  spacingsTemplate,
+} from '@utils'
 
 type Colors = 'primary' | 'secondary' | 'danger'
-type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
+type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon' | 'icon'
 
 const getVariant = (
   tokenSet: ButtonTokenSet,
@@ -18,6 +20,7 @@ const getVariant = (
   switch (variant) {
     case 'ghost':
       return tokenSet.ghost
+    case 'icon':
     case 'ghost_icon':
       return tokenSet.ghost_icon
     case 'outlined':
@@ -59,17 +62,11 @@ const Base = ({ token }: { token: ButtonToken }) => {
     width: ${token.width};
     svg {
       justify-self: center;
-      fill: ${entities.icon.typography.color};
-      height: ${entities.icon.height};
-      width: ${entities.icon.width};
+      height: ${entities?.icon?.height};
+      width: ${entities?.icon?.width};
     }
 
-    ${spacings &&
-    css`
-      padding-left: ${spacings.left};
-      padding-right: ${spacings.right};
-    `}
-
+    ${spacingsTemplate(spacings)}
     ${bordersTemplate(token.border)}
     ${typographyTemplate(token.typography)}
 
@@ -86,9 +83,6 @@ const Base = ({ token }: { token: ButtonToken }) => {
       background: ${hover.background};
       color: ${hover.typography?.color};
       ${bordersTemplate(hover?.border)}
-      svg {
-        fill: ${hover.typography?.color};
-      }
     }
 
     &:focus {
@@ -111,10 +105,6 @@ const Base = ({ token }: { token: ButtonToken }) => {
 
       &:hover {
         background: ${disabled.background};
-      }
-
-      svg {
-        fill: ${disabled.typography.color};
       }
     }
   `
