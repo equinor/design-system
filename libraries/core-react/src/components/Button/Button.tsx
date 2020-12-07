@@ -11,7 +11,7 @@ import {
 } from '@utils'
 
 type Colors = 'primary' | 'secondary' | 'danger'
-type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon' | 'icon'
+type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
 
 const getVariant = (
   tokenSet: ButtonTokenSet,
@@ -20,7 +20,6 @@ const getVariant = (
   switch (variant) {
     case 'ghost':
       return tokenSet.ghost
-    case 'icon':
     case 'ghost_icon':
       return tokenSet.ghost_icon
     case 'outlined':
@@ -130,9 +129,9 @@ const ButtonBase = styled.button`
 `
 export type ButtonProps = {
   /**  Specifies color */
-  color?: Colors
+  color?: 'primary' | 'secondary' | 'danger'
   /** Specifies which variant to use */
-  variant?: Variants
+  variant?: 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
   /**
    * URL link destination
    * If defined, an 'a' element is used as root instead of 'button'
