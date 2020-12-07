@@ -180,16 +180,19 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
         <StyledInputWrapper {...getComboboxProps()}>
           <PaddedInput
-            {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
+            {...getInputProps(
+              getDropdownProps({
+                preventKeyAction: isOpen,
+                disabled: disabled,
+              }),
+            )}
             placeholder={placeholderText}
-            disabled={disabled}
             readOnly={readOnly}
             {...other}
           />
           <StyledButton
             variant="ghost_icon"
-            disabled={disabled || readOnly}
-            {...getToggleButtonProps()}
+            {...getToggleButtonProps({ disabled: disabled || readOnly })}
             aria-label={'toggle options'}
           >
             <Icon
@@ -204,7 +207,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               <PaddedStyledListItem
                 key={`${item}`}
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
-                {...getItemProps({ item, index })}
+                {...getItemProps({ item, index, disabled: disabled })}
               >
                 <CheckboxInput
                   checked={selectedItems.includes(item)}

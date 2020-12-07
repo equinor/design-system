@@ -106,16 +106,14 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
         />
         <StyledInputWrapper {...getComboboxProps()}>
           <PaddedInput
-            {...getInputProps()}
-            disabled={disabled}
+            {...getInputProps({ disabled: disabled })}
             readOnly={readOnly}
             {...other}
           />
           <StyledButton
             type="button"
             variant="ghost_icon"
-            disabled={disabled || readOnly}
-            {...getToggleButtonProps()}
+            {...getToggleButtonProps({ disabled: disabled || readOnly })}
           >
             <Icon
               data={isOpen ? arrow_drop_up : arrow_drop_down}
@@ -129,7 +127,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               <PaddedStyledListItem
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
                 key={`${item}`}
-                {...getItemProps({ item, index })}
+                {...getItemProps({ item, index, disabled: disabled })}
               >
                 {item}
               </PaddedStyledListItem>
