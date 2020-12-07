@@ -70,6 +70,11 @@ type FormValues = {
   optionalField: string
 }
 
+type ControllerTypes = {
+  onChange: (selectedItem: string) => void
+  value: string
+}
+
 const Field = styled.div`
   margin: 1rem;
 `
@@ -125,7 +130,7 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
                 control={control}
                 name="fabFieldOne"
                 rules={{ required: true }}
-                render={({ onChange, value }) => (
+                render={({ onChange, value }: ControllerTypes) => (
                   <SingleSelect
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
@@ -159,7 +164,7 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
               <Controller
                 control={control}
                 name="fabFieldTwo"
-                render={({ onChange, value }) => (
+                render={({ onChange, value }: ControllerTypes) => (
                   <SingleSelect
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
@@ -175,7 +180,7 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
               <Controller
                 control={control}
                 name="optionalField"
-                render={({ onChange, value }) => (
+                render={({ onChange, value }: ControllerTypes) => (
                   <SingleSelect
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
