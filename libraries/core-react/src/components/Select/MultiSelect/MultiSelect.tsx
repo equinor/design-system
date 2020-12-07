@@ -91,7 +91,6 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     }
 
     const {
-      getSelectedItemProps,
       getDropdownProps,
       addSelectedItem,
       removeSelectedItem,
@@ -212,7 +211,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                 <CheckboxInput
                   checked={selectedItems.includes(item)}
                   value={item}
-                  onChange={(e) => {
+                  onChange={() => {
                     return null
                   }}
                 />
