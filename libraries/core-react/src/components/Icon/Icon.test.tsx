@@ -41,8 +41,8 @@ describe('Icon', () => {
   it('Has correct size', () => {
     const { container } = render(<Icon name="save" size={48} />)
 
-    expect(container.firstChild).toHaveAttribute('height', '48')
-    expect(container.firstChild).toHaveAttribute('width', '48')
+    expect(container.firstChild).toHaveAttribute('height', '48px')
+    expect(container.firstChild).toHaveAttribute('width', '48px')
   })
   it('Has correct elements when using title', () => {
     const title = 'Save me'
