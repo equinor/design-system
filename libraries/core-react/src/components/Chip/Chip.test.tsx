@@ -43,6 +43,26 @@ describe('Chips', () => {
     expect(queryByText(chipText)).toBeDefined()
     expect(queryByTestId(iconTestId)).toBeDefined()
   })
+  it('Has correct styling when Icon is provided', () => {
+    const chipText = 'hello, I am a chip'
+    const iconTestId = 'avatar-chip-test'
+    const { queryByText, queryByTestId } = render(
+      <Chip>
+        <Icon name="add" data-testid={iconTestId} />
+        {chipText}
+      </Chip>,
+    )
+    const chip = queryByText(chipText)
+    const icon = queryByTestId(iconTestId)
+
+    expect(chip).toBeDefined()
+    expect(chip).toHaveStyleRule('padding-left', '4px')
+    expect(chip).toHaveStyleRule('padding-right', tokens.enabled.spacings.right)
+    expect(chip).toHaveStyleRule('border-radius', tokens.enabled.border.radius)
+    expect(icon).toBeDefined()
+    expect(icon).toHaveAttribute('height', tokens.enabled.icon.height)
+    expect(icon).toHaveAttribute('width', tokens.enabled.icon.width)
+  })
   it('Has provided Avatar', () => {
     const chipText = 'hello, I am a chip'
     const avatarTestId = 'avatar-chip-test'
@@ -60,6 +80,30 @@ describe('Chips', () => {
       imageUrl,
     )
   })
+
+  it('Has correct styling when Avatar is provided', () => {
+    const chipText = 'hello, I am a chip'
+    const avatarTestId = 'avatar-chip-test'
+    const imageUrl = 'https://i.imgur.com/UM3mrju.jpg'
+    const { queryByText, queryByTestId } = render(
+      <Chip>
+        <Avatar src={imageUrl} data-testid={avatarTestId} alt="avatar" />
+        {chipText}
+      </Chip>,
+    )
+    const chip = queryByText(chipText)
+    const avatar = queryByTestId(avatarTestId)
+
+    expect(chip).toBeDefined()
+    expect(chip).toHaveStyleRule('padding-left', '4px')
+    expect(chip).toHaveStyleRule('padding-right', tokens.enabled.spacings.right)
+    expect(chip).toHaveStyleRule('border-radius', tokens.enabled.border.radius)
+    expect(avatar).toBeDefined()
+    expect(avatar.firstChild).toHaveAttribute('src', imageUrl)
+    expect(avatar).toHaveStyleRule('height', tokens.enabled.icon.height)
+    expect(avatar).toHaveStyleRule('width', tokens.enabled.icon.width)
+  })
+
   it('Has called handleDelete once with props when close icon is clicked', () => {
     const chipText = 'hello, I am a chip'
     const chipId = 'avatar-chip-test'
