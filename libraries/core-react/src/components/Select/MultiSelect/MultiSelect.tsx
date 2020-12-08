@@ -96,12 +96,6 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     } = useMultipleSelection(multipleSelectionProps)
     const getFilteredItems = (items: string[]) =>
       items.filter((item) =>
-        // Remove selected items from the list
-        /* selectedItems.indexOf(item) < 0 && */
-
-        // Can be used if we need filter the list on first letters aka starts with search
-        // item.toLowerCase().startsWith(inputValue.toLowerCase()),
-        // Filter the list using contains search
         item.toLowerCase().includes(inputValue.toLowerCase()),
       )
 

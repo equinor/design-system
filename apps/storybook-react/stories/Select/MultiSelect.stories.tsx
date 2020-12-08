@@ -53,8 +53,6 @@ export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
     changes: UseMultipleSelectionStateChange<string>,
   ) {
     setSelectedItems(changes.selectedItems)
-
-    //setSelectedItem(changes.selectedItems)
   }
   return (
     <Container>
@@ -77,8 +75,6 @@ export const Controlled: Story<MultiSelectProps> = () => {
     changes: UseMultipleSelectionStateChange<string>,
   ) {
     setSelectedItems(changes.selectedItems)
-
-    //setSelectedItem(changes.selectedItems)
   }
   return (
     <Container>
