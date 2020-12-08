@@ -100,7 +100,9 @@ type FormValues = {
 }
 
 type ControllerTypes = {
+  // eslint-disable-next-line react/no-unused-prop-types
   onChange: (selectedItems: string[]) => void
+  // eslint-disable-next-line react/no-unused-prop-types
   value: string[]
 }
 
