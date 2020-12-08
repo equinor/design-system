@@ -39,7 +39,7 @@ export type SelectVariantProps = {
   }
 }
 
-export const select: SelectVariantProps = {
+export const nativeselect: SelectVariantProps = {
   background: colors.ui.background__light.hex,
   typography: {
     ...typography.input.text,

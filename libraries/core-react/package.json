@@ -83,7 +83,8 @@
   },
   "dependencies": {
     "@equinor/eds-icons": "workspace:*",
-    "@equinor/eds-tokens": "workspace:*"
+    "@equinor/eds-tokens": "workspace:*",
+    "downshift": "^6.0.6"
   },
   "engines": {
     "pnpm": ">=4",

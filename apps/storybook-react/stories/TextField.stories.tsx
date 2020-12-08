@@ -65,6 +65,7 @@ export const types: Story<TextFieldProps> = () => (
       placeholder="Placeholder text"
       label="Text"
       helperText="Helper text"
+      autoComplete="off"
     />
     <TextField
       type="number"

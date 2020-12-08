@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef, SelectHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { select as tokens } from './Select.tokens'
+import { nativeselect as tokens } from './Select.tokens'
 import type { NativeSelectProps } from '../NativeSelect'
 import { typographyTemplate, spacingsTemplate } from '@utils'
 

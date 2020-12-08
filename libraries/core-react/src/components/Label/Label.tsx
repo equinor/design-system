@@ -3,15 +3,19 @@ import styled from 'styled-components'
 import { typographyTemplate } from '@utils'
 import { label as tokens } from './Label.tokens'
 
-const LabelBase = styled.label`
+type LabelBaseType = {
+  disabledText: boolean
+}
+
+const LabelBase = styled.label<LabelBaseType>`
   display: flex;
   justify-content: space-between;
   position: relative;
-
   ${typographyTemplate(tokens.typography)}
   margin-left: ${tokens.spacings.left};
   margin-right: ${tokens.spacings.right};
-  color: ${tokens.color};
+  color: ${({ disabledText }) =>
+    disabledText ? tokens.disabled.color : tokens.color};
 `
 
 const Text = styled.span`
@@ -22,16 +26,18 @@ type TextfieldProps = {
   label: string
   meta: string
   inputId: string
+  disabled?: boolean
 }
 
 const TextFieldLabel = React.forwardRef<HTMLLabelElement, TextfieldProps>(
   function TextFieldLabel(props, ref) {
-    const { label = '', meta = '', inputId } = props
+    const { label = '', meta, inputId, disabled = false, ...other } = props
 
     return (
-      <LabelBase ref={ref} htmlFor={inputId}>
+      /*  @TODO: Other props spread has to be at the end for downshift to create the for attribute */
+      <LabelBase ref={ref} htmlFor={inputId} disabledText={disabled} {...other}>
         <Text>{label}</Text>
-        <Text>{meta}</Text>
+        {meta && <Text>{meta}</Text>}
       </LabelBase>
     )
   },

@@ -60,6 +60,9 @@ const StyledInput = styled.input<StyledProps>`
   ${typographyTemplate(tokens.typography)}
 
   ${Variation}
+  &::placeholder {
+    color: ${tokens.placeholderColor};
+  }
 `
 
 const Container = styled.div`
