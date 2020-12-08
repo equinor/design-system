@@ -37,7 +37,7 @@ export const StyledList = styled(List)`
   position: absolute;
   right: 0;
   left: 0;
-  z-index: 200;
+  z-index: 50;
 `
 export const StyledListItem = styled(ListItem)<StyledListItemType>`
   list-style: none;
