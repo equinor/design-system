@@ -14,6 +14,7 @@ import { useCombinedRefs } from '@hooks'
 import { useDrawer } from './Drawer.context'
 import { drawer as tokens } from './Drawer.tokens'
 import { DrawerList } from './DrawerList'
+import { List } from '../List'
 import { Item } from '@react-stately/collections'
 import { useMenu, useMenuItem, useMenuSection } from '@react-aria/menu'
 import { useFocus } from '@react-aria/interactions'
@@ -25,22 +26,32 @@ const icons = {
 
 Icon.add(icons)
 
+const { ListItem } = List
+
 const {
   itemHoverBackground,
   itemTypography,
   itemActive,
   itemBorder,
   itemSpacings,
+  outline,
+  outlineOffset,
 } = tokens
 
 type StyledDrawerItemProps = { isNested: boolean } & Pick<
   DrawerItemProps,
-  'active' | 'open' | 'index' | 'onClick'
+  'active' | 'open' | 'index' | 'disabled'
 > &
   HTMLAttributes<HTMLLIElement>
 
-const StyledDrawerItem = styled.li.attrs<StyledDrawerItemProps>(
-  ({ active, open, index, isNested }): JSX.IntrinsicElements['li'] => ({
+const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
+  ({
+    active,
+    open,
+    index,
+    isNested,
+    disabled,
+  }): JSX.IntrinsicElements['button'] => ({
     'aria-current': index === active ? 'page' : undefined,
     'aria-haspopup': isNested,
     'aria-expanded': isNested && open,
@@ -51,10 +62,28 @@ const StyledDrawerItem = styled.li.attrs<StyledDrawerItemProps>(
   list-style: none;
   width: auto;
   position: relative;
-  /* border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
-  &:hover {
-    background: ${itemHoverBackground};
+  
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          cursor: not-allowed;
+          tab-index: -1;
+        `
+      : css`
+          cursor: pointer;
+          tab-index: 0;
+          > * {
+            cursor: pointer;
+          }
+        `}
+
+  &[data-focus-visible-added]:focus {
+    outline: ${outline};
+    outline-offset: ${outlineOffset};
   }
+  
+  /* border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
+  
   svg {
     display: inline-block;
     width: 16px;
@@ -77,7 +106,7 @@ const StyledDrawerItem = styled.li.attrs<StyledDrawerItemProps>(
     text-decoration: none;
     display: inline-block;
     vertical-align: middle;
-    /* width: calc(100% - 48px); */
+    width: calc(100% - 48px);
     padding-left: 56px;
     padding-top: ${itemSpacings.top};
     padding-bottom: ${itemSpacings.bottom};
@@ -126,6 +155,8 @@ const StyledDrawerItem = styled.li.attrs<StyledDrawerItemProps>(
         }
       `}
   }
+  
+ 
 `
 
 type DrawerItemProps = {
@@ -140,7 +171,7 @@ type DrawerItemProps = {
   /** onClick handler */
   onClick?: (e: MouseEvent) => void
   // children?: React.ReactElement
-} & HTMLAttributes<HTMLLIElement>
+} & (HTMLAttributes<HTMLLIElement> | HTMLAttributes<HTMLAnchorElement>)
 
 type ChildType = {
   disabled?: boolean

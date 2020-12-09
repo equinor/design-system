@@ -19,6 +19,7 @@ import {
   useMenuSection,
   AriaMenuOptions,
 } from '@react-aria/menu'
+import { List } from '../List'
 import { useDrawer } from './Drawer.context'
 
 const { background, subtitleBorder, subtitleTypography } = tokens
@@ -40,8 +41,9 @@ const StyledDrawerSubtitle = styled.span<DrawerSubtitleProps>`
   line-height: ${subtitleTypography.lineHeight};
 `
 
-const StyledDrawerList = styled.ul.attrs<DrawerListProps>(
-  ({ open }): JSX.IntrinsicElements['ul'] => ({
+const StyledDrawerList = styled(List).attrs<DrawerListProps>(
+  ({ open, ariaLabelledBy }): JSX.IntrinsicElements['ul'] => ({
+    'aria-labelledby': ariaLabelledBy,
     'aria-hidden': !open,
     'aria-expanded': open,
   }),
@@ -106,7 +108,7 @@ type DrawerListChildrenType = {
 
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
   function DrawerList(
-    { children, level = 'child', subtitle, open, ...props },
+    { children, level = 'child', subtitle, open = true, ...props },
     ref,
   ) {
     const drawerListId = useMemo<string>(

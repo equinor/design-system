@@ -191,21 +191,16 @@ export const Default: Story<DrawerProps> = () => {
               </DrawerList>
             </DrawerItem>
           </DrawerList>
-          <DrawerList level="grandparent" subtitle="Grandparent orphans">
+          <DrawerList subtitle="Grandparent orphans">
             <DrawerItem>
-              <DrawerLabel>Grandparent orphans 1</DrawerLabel>
-              <DrawerList>
-                <DrawerItem>
-                  <Typography variant="body_short" link href={'#href'}>
-                    Child 1
-                  </Typography>
-                </DrawerItem>
-                <DrawerItem>
-                  <Typography variant="body_short" link href={'#href'}>
-                    Child 2
-                  </Typography>
-                </DrawerItem>
-              </DrawerList>
+              <Typography variant="body_short" link href={'#href'}>
+                Orphan 1
+              </Typography>
+            </DrawerItem>
+            <DrawerItem>
+              <Typography variant="body_short" link href={'#href'}>
+                Orphan 2
+              </Typography>
             </DrawerItem>
           </DrawerList>
         </Drawer>

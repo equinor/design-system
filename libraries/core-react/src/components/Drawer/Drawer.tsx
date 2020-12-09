@@ -2,6 +2,7 @@ import React, { forwardRef, HTMLAttributes, useEffect, ReactNode } from 'react'
 import styled from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 import { useDrawer } from './Drawer.context'
+import { List } from '../List'
 import { useCombinedRefs, useOutsideClick } from '@hooks'
 
 const { background, border } = tokens
@@ -20,14 +21,18 @@ const StyledDrawer = styled.div`
   background: none;
 `
 
+const StyledList = styled(List)`
+  padding: 0px;
+`
+
 export type DrawerProps = {
   overlay?: boolean
   /** Is Menu open */
   focusedIndex?: number
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
-  /** Description of the purpose of the drawer (for screen readers) */
-  ariaLabel?: string
+  /** Description  of the drawer (needed for screen readers) */
+  ariaLabel: string
 } & HTMLAttributes<HTMLDivElement>
 
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
@@ -68,8 +73,8 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
   console.log(props)
 
   return (
-    <StyledDrawer {...props} ref={ref}>
-      <StyledDrawerContainer {...navProps}>{children}</StyledDrawerContainer>
-    </StyledDrawer>
+    <StyledDrawerContainer {...navProps}>
+      <StyledList>{children}</StyledList>
+    </StyledDrawerContainer>
   )
 })

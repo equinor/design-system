@@ -8,6 +8,7 @@ const {
     },
     interactive: {
       primary__resting: { rgba: activeColor },
+      focus: { rgba: focusOutlineColor },
     },
   },
   spacings: { comfortable },
@@ -48,4 +49,6 @@ export const drawer = {
   itemBorder: {
     left: { color: lightGrayColor, width: '2px' },
   },
+  outline: `1px dashed ${focusOutlineColor}`,
+  outlineOffset: '2px',
 }
