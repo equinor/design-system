@@ -35,8 +35,8 @@ const transform = ({ rotation }: SvgProps): string =>
 const StyledSvg = styled.svg.attrs<StyledProps>(({ height, width, fill }) => ({
   name: null,
   xmlns: 'http://www.w3.org/2000/svg',
-  height,
-  width,
+  height: `${height}px`,
+  width: `${width}px`,
   fill,
 }))`
   ${transform}

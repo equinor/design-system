@@ -1,7 +1,13 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Icon, Chip, ChipProps, Avatar } from '@equinor/eds-core-react'
+import {
+  Icon,
+  Chip,
+  ChipProps,
+  Avatar,
+  AvatarProps,
+} from '@equinor/eds-core-react'
 import { Meta, Story } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
 
@@ -25,8 +31,8 @@ export default {
 const handleDelete = action('onDelete')
 const handleClick = action('onClick')
 
-const CatImage = () => (
-  <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} alt="cat" />
+const CatImage = (props: Partial<AvatarProps>) => (
+  <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} alt="cat" {...props} />
 )
 
 export const Default: Story<ChipProps> = (args) => (

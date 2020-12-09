@@ -20,6 +20,7 @@ type StyleProps = {
   clickable: boolean
   deletable: boolean
   disabled: boolean
+  onlyChild: boolean
 }
 
 const StyledChips = styled.div.attrs<StyleProps>(
@@ -124,11 +125,12 @@ const StyledChips = styled.div.attrs<StyleProps>(
       padding-right: 4px;
     `}
 
-  ${({ children }) =>
-    typeof children === 'string' &&
-    css`
-      padding-left: 8px;
-    `}
+  ${({ onlyChild }) =>
+    onlyChild
+      ? css`
+          padding-left: 8px;
+        `
+      : ''}
 `
 export type ChipProps = {
   /** Disabled */
@@ -193,8 +195,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     children,
     (child: React.ReactElement) => {
       // We force size on Icon & Avatar component
-      const childProps = child.props as childPropsType
-      if (child.props && childProps.size) {
+      if (child.props) {
         return React.cloneElement(child, {
           size: 16,
           disabled,
