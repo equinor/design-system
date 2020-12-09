@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2020-12-09
+
+### Added ✨
+
+- `SingeSelect` component ([#896](https://github.com/equinor/design-system/issues/896))
+- `MultiSelect` component ([#897](https://github.com/equinor/design-system/issues/897))
+
+### Fixed 🐛
+
+- Fix wrong spacings inside `Chip` causing the content to not be proper centered ([#956](https://github.com/equinor/design-system/issues/956))
+- Hover size on ghost buttons ([#595](https://github.com/equinor/design-system/issues/595))
+
+### Changed 📓
+
+- Use base tokens in `Button` component ([#831](https://github.com/equinor/design-system/issues/831))
+- Use base tokens in `Table` component ([#830](https://github.com/equinor/design-system/issues/830))
+- Support for React 17 ([#813](https://github.com/equinor/design-system/issues/813))
+- Update dependencies ([#904](https://github.com/equinor/design-system/issues/904))
+
 ## [0.7.1] - 2020-11-26
 
 ### Changed 📓
