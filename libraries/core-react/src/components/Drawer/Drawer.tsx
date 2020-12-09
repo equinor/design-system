@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 import { useDrawer } from './Drawer.context'
 import { List } from '../List'
-import { useCombinedRefs, useOutsideClick } from '@hooks'
+import { useCombinedRefs, useOutsideClick, useKeyboardNavigation } from '@hooks'
 
 const { background, border } = tokens
 
