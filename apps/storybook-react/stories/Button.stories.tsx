@@ -16,6 +16,15 @@ const Wrapper = styled.div`
 export default {
   title: 'Components/Button',
   component: Button,
+  argTypes: {
+    as: {
+      control: {
+        type: 'select',
+        options: ['span', 'a', 'button'],
+        defaultValue: 'button',
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<ButtonProps> = (args) => (
@@ -190,6 +199,11 @@ export const Ghost: Story<ButtonProps> = () => (
       Disabled
       <Icon name="save" title="save"></Icon>
     </Button>
+  </Wrapper>
+)
+
+export const GhostIcon: Story<ButtonProps> = () => (
+  <Wrapper>
     <Button variant="ghost_icon">
       <Icon name="save" title="save action"></Icon>
     </Button>

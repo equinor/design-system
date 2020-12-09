@@ -1,10 +1,46 @@
 import * as React from 'react'
 import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { button, Button as ButtonType, ButtonGroups } from './Button.tokens'
-import { typographyTemplate } from '@utils'
+import { token as buttonToken } from './tokens'
+import { ButtonTokenSet, ButtonToken } from './Button.types'
+import {
+  typographyTemplate,
+  bordersTemplate,
+  outlineTemplate,
+  spacingsTemplate,
+} from '@utils'
 
-const { colors } = button
+type Colors = 'primary' | 'secondary' | 'danger'
+type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
+
+const getVariant = (
+  tokenSet: ButtonTokenSet,
+  variant: Variants,
+): ButtonToken => {
+  switch (variant) {
+    case 'ghost':
+      return tokenSet.ghost
+    case 'ghost_icon':
+      return tokenSet.ghost_icon
+    case 'outlined':
+      return tokenSet.outlined
+    case 'contained':
+    default:
+      return tokenSet.contained
+  }
+}
+
+const getToken = (variant: Variants, color: Colors): ButtonToken => {
+  switch (color) {
+    case 'danger':
+      return getVariant(buttonToken.danger, variant)
+    case 'secondary':
+      return getVariant(buttonToken.secondary, variant)
+    case 'primary':
+    default:
+      return getVariant(buttonToken.primary, variant)
+  }
+}
 
 // display:grid; does not work on Webkit browser engine, so we have to wrap content in element where css-grid works
 const ButtonInner = styled.span`
@@ -15,54 +51,37 @@ const ButtonInner = styled.span`
   height: 100%;
 `
 
-const Base = ({
-  token,
-  disabledToken,
-}: {
-  token: ButtonType
-  disabledToken: ButtonType
-}) => {
-  const { border, spacing, typography, focus, hover } = token
+const Base = ({ token }: { token: ButtonToken }) => {
+  const { spacings, states, clickbound, entities } = token
+  const { focus, hover, disabled } = states
 
   return css`
     background: ${token.background};
     height: ${token.height};
     width: ${token.width};
-    color: ${token.color};
-    fill: ${token.color};
     svg {
       justify-self: center;
-      height: ${button.icon_size.height};
-      width: ${button.icon_size.width};
+      height: ${entities?.icon?.height};
+      width: ${entities?.icon?.width};
     }
 
-    border-radius: ${border.radius};
-    border-color: ${border.color};
-    border-width: ${border.width};
-    border-style: solid;
+    ${spacingsTemplate(spacings)}
+    ${bordersTemplate(token.border)}
+    ${typographyTemplate(token.typography)}
 
-    ${spacing &&
-    css`
-      padding-left: ${spacing.left};
-      padding-right: ${spacing.right};
-    `}
-
-    ${typographyTemplate(typography)}
     &::after {
       position: absolute;
-      top: -${token.clickboundOffset};
+      top: -${clickbound?.offset?.top};
       left: 0;
       width: 100%;
-      height: ${token.clickbound};
+      height: ${clickbound?.height};
       content: '';
     }
 
     &:hover {
       background: ${hover.background};
-      ${hover.radius &&
-      css`
-        border-radius: ${hover.radius};
-      `}
+      color: ${hover.typography?.color};
+      ${bordersTemplate(hover?.border)}
     }
 
     &:focus {
@@ -70,8 +89,7 @@ const Base = ({
     }
 
     &[data-focus-visible-added]:focus {
-      outline: ${focus.width} ${focus.type} ${focus.color};
-      outline-offset: 2px;
+      ${outlineTemplate(focus.outline)}
     }
     /* Get rid of ff focus border for buttons */
     &::-moz-focus-inner {
@@ -80,13 +98,12 @@ const Base = ({
 
     &:disabled {
       cursor: not-allowed;
-      background: ${disabledToken.background};
-      color: ${disabledToken.color};
-      fill: ${disabledToken.color};
-      border-color: ${disabledToken.border.color};
+      background: ${disabled.background};
+      ${bordersTemplate(disabled.border)}
+      ${typographyTemplate(disabled.typography)}
 
       &:hover {
-        background: ${disabledToken.background};
+        background: ${disabled.background};
       }
     }
   `
@@ -143,9 +160,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) {
-    const colorBase: ButtonGroups | Partial<ButtonGroups> = colors[color] || {}
-    const token = colorBase[variant] || {}
-    const disabledToken = colors.disabled[variant] || {}
+    const token = getToken(variant, color)
 
     const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
     const type = href || other.as ? undefined : 'button'
@@ -157,7 +172,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       href,
       type,
       token,
-      disabledToken,
       disabled,
       tabIndex,
       ...other,

@@ -31,13 +31,6 @@ const {
   },
 } = tokens
 
-type States = {
-  active: Partial<ComponentToken>
-  disabled: Partial<ComponentToken>
-  focus: Partial<ComponentToken>
-  hover: Partial<ComponentToken>
-}
-
 type Validation = {
   error: Partial<ComponentToken>
 }
@@ -47,7 +40,6 @@ type Variants = {
 }
 
 export type TableCellToken = ComponentToken & {
-  states: States
   validation: Validation
   variants: Variants
 }
@@ -71,43 +63,42 @@ const tableCell: ComponentToken = {
     ...cellTypography,
     color: typographyColor,
   },
-}
-
-const states: States = {
-  active: {
-    background: activeBackgroundColor,
-    typography: {
-      ...cellTypography,
-      color: primaryRestingColor,
-    },
-    border: {
-      bottom: {
+  states: {
+    active: {
+      background: activeBackgroundColor,
+      typography: {
+        ...cellTypography,
         color: primaryRestingColor,
       },
-    },
-  },
-  disabled: {
-    typography: {
-      ...cellTypography,
-      color: disabledTextColor,
-    },
-    border: {
-      type: 'bordergroup',
-      bottom: {
-        color: disabledBorderColor,
+      border: {
+        bottom: {
+          color: primaryRestingColor,
+        },
       },
     },
-  },
-  focus: {
-    outline: {
-      type: 'outline',
-      color: focusColor,
-      width: '1px',
-      style: 'dashed',
+    disabled: {
+      typography: {
+        ...cellTypography,
+        color: disabledTextColor,
+      },
+      border: {
+        type: 'bordergroup',
+        bottom: {
+          color: disabledBorderColor,
+        },
+      },
     },
-  },
-  hover: {
-    background: hoverBackgroundColor,
+    focus: {
+      outline: {
+        type: 'outline',
+        color: focusColor,
+        width: '1px',
+        style: 'dashed',
+      },
+    },
+    hover: {
+      background: hoverBackgroundColor,
+    },
   },
 }
 
@@ -125,7 +116,6 @@ const variants: Variants = {
 
 export const token: TableCellToken = {
   ...tableCell,
-  states,
   validation,
   variants,
 }
