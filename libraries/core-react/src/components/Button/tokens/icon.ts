@@ -16,16 +16,25 @@ const {
       danger__highlight: { rgba: dangerHoverAltColor },
     },
   },
+  clickbounds: { default__base: clicboundHeight },
 } = tokens
 
+const buttonSize = 40
+
 export const primary: ButtonToken = R.mergeDeepRight(button, {
-  height: '40px',
-  width: '40px',
+  height: `${buttonSize}px`,
+  width: `${buttonSize}px`,
   border: {
     radius: '50%',
   },
   background: 'transparent',
   spacings: { left: '0', right: '0' },
+  clickbound: {
+    width: clicboundHeight,
+    offset: {
+      left: `${(parseInt(clicboundHeight) - buttonSize) / 2}px`,
+    },
+  },
   states: {
     hover: {
       background: primaryHoverAltColor,
