@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added ✨
 
-- `SingeSelect` component ([#896](https://github.com/equinor/design-system/issues/896))
+- `SingleSelect` component ([#896](https://github.com/equinor/design-system/issues/896))
 - `MultiSelect` component ([#897](https://github.com/equinor/design-system/issues/897))
 
 ### Fixed 🐛
