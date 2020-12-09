@@ -19,9 +19,11 @@ const {
   clickbounds: { default__base: clicboundHeight },
 } = tokens
 
+const buttonSize = 40
+
 export const primary: ButtonToken = R.mergeDeepRight(button, {
-  height: '40px',
-  width: '40px',
+  height: `${buttonSize}px`,
+  width: `${buttonSize}px`,
   border: {
     radius: '50%',
   },
@@ -30,7 +32,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
   clickbound: {
     width: clicboundHeight,
     offset: {
-      left: `${(parseInt(clicboundHeight) - 40) / 2}px`,
+      left: `${(parseInt(clicboundHeight) - buttonSize) / 2}px`,
     },
   },
   states: {
