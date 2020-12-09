@@ -72,8 +72,8 @@ const Base = ({ token }: { token: ButtonToken }) => {
     &::after {
       position: absolute;
       top: -${clickbound?.offset?.top};
-      left: 0;
-      width: 100%;
+      left: -${clickbound?.offset?.left};
+      width: ${clickbound?.width};
       height: ${clickbound?.height};
       content: '';
     }
