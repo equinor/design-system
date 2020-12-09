@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.3] - 2020-12-09
 
-### Changed
+### Removed
 
 - Removed component tokens in favour of the base tokens approach
-  - `Table`
-  - `Button`
+  - `Table` ([#830](https://github.com/equinor/design-system/issues/830))
+  - `Button` ([#831](https://github.com/equinor/design-system/issues/831))
     - Danger
     - Disabled
     - Primary
