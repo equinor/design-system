@@ -70,6 +70,8 @@ render(<App />, document.getElementById('root'))
 - Scrim
 - Search
 - Select (Native Select)
+- Single Select
+- Multi Select
 - Selection Controls
 - Side Sheet
 - Slider
@@ -85,8 +87,6 @@ render(<App />, document.getElementById('root'))
 ### In progress 👷‍♀️
 
 - Navigation Drawer
-- Single Select
-- Multi Select
 
 ### TODO 🛠️
 
