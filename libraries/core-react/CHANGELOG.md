@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 🐛
 
 - Fix wrong spacings inside `Chip` causing the content to not be proper centered ([#956](https://github.com/equinor/design-system/issues/956))
+- Hover size on ghost buttons ([#595](https://github.com/equinor/design-system/issues/595))
 
 ### Changed 📓
 
@@ -22,7 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use base tokens in `Table` component ([#830](https://github.com/equinor/design-system/issues/830))
 - Support for React 17 ([#813](https://github.com/equinor/design-system/issues/813))
 - Update dependencies ([#904](https://github.com/equinor/design-system/issues/904))
-- Hover size on ghost buttons ([#595](https://github.com/equinor/design-system/issues/595))
 
 ## [0.7.1] - 2020-11-26
 
