@@ -43,8 +43,7 @@ const StyledDrawerSubtitle = styled.span<DrawerSubtitleProps>`
 `
 
 const StyledDrawerList = styled(List).attrs<DrawerListProps>(
-  ({ open, ariaLabelledBy }): JSX.IntrinsicElements['ul'] => ({
-    'aria-labelledby': ariaLabelledBy,
+  ({ open }): JSX.IntrinsicElements['ul'] => ({
     'aria-hidden': !open,
     'aria-expanded': open,
   }),
@@ -98,6 +97,10 @@ type DrawerListProps = {
   open?: boolean
   /** Subtitle (only available for grandparent) */
   subtitle?: string
+  /** Label */
+  label?: string
+  /** Is the list expandable / nested */
+  isExpandable?: boolean
 } & HTMLAttributes<HTMLUListElement>
 
 type DrawerListChildrenType = {
@@ -109,7 +112,7 @@ type DrawerListChildrenType = {
 
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
   function DrawerList(
-    { children, level = 'child', subtitle, open = true, ...props },
+    { children, level = 'child', subtitle, open, isExpandable, ...props },
     ref,
   ) {
     const drawerListId = useMemo<string>(
@@ -165,7 +168,6 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
           level={level}
           open={open}
           ref={ref}
-          role="menu"
         >
           {ListItems}
         </StyledDrawerList>

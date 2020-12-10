@@ -10,7 +10,7 @@ import React, {
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
-import { useCombinedRefs } from '@hooks'
+import { useCombinedRefs, useKeyboardNavigation } from '@hooks'
 import { useDrawer } from './Drawer.context'
 import { drawer as tokens } from './Drawer.tokens'
 import { DrawerList } from './DrawerList'
@@ -55,6 +55,8 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
     'aria-current': index === active ? 'page' : undefined,
     'aria-haspopup': isNested,
     'aria-expanded': isNested && open,
+    tabIndex: 0,
+    disabled,
   }),
 )<StyledDrawerItemProps>`
   margin: 0;
@@ -67,11 +69,10 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
     disabled
       ? css`
           cursor: not-allowed;
-          tab-index: -1;
         `
       : css`
           cursor: pointer;
-          tab-index: 0;
+
           > * {
             cursor: pointer;
           }
@@ -168,8 +169,10 @@ type DrawerItemProps = {
   disabled?: boolean
   /** List is open */
   open?: boolean
+  /** If item is expandable */
+  expandable?: boolean
   /** onClick handler */
-  onClick?: (e: MouseEvent) => void
+  onClick?: (event: MouseEvent<HTMLLIElement, MouseEvent>) => void
   // children?: React.ReactElement
 } & (HTMLAttributes<HTMLLIElement> | HTMLAttributes<HTMLAnchorElement>)
 
@@ -179,7 +182,7 @@ type ChildType = {
 
 export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
   function DrawerItem(
-    { children, disabled, open, index, onClick, active, ...rest },
+    { children, disabled, open = true, index, onClick, active, ...rest },
     ref,
   ) {
     const { focusedIndex, setFocusedIndex, onClose } = useDrawer()
@@ -264,22 +267,30 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
       ...rest,
       disabled,
       isNested,
+      index,
+      open: drawerOpen,
     }
 
-    const chevronIcon = open ? 'chevron_up' : 'chevron_down'
+    const chevronIcon = (
+      <Icon
+        key={`${index}-icon`}
+        name={drawerOpen ? 'chevron_up' : 'chevron_down'}
+        size={16}
+        className="chevron_icon"
+      />
+    )
+
     // console.log(updatedChildren)
     return (
       <StyledDrawerItem
         {...props}
-        open={drawerOpen}
-        index={index}
-        role="menuitem"
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        role="none"
         ref={useCombinedRefs<HTMLLIElement>(
           ref,
           (el: HTMLLIElement) => isFocused && el.focus(),
         )}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
         onFocus={() => toggleFocus(index)}
         // onClick={(e) => {
         //   if (!disabled && onClick) {
@@ -291,9 +302,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
         // }}
         // onFocus={() => setFocusedIndex(index)}
       >
-        {isNested && (
-          <Icon className="chevron_icon" name={chevronIcon} size={16} />
-        )}
+        {isNested && chevronIcon}
         {itemElements}
         {drawerOpen && updatedChildren}
       </StyledDrawerItem>

@@ -102,7 +102,12 @@ export const Default: Story<DrawerProps> = () => {
                   <DrawerLabel>Parent 1</DrawerLabel>
                   <DrawerList>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 1
                       </Typography>
                     </DrawerItem>
@@ -112,7 +117,12 @@ export const Default: Story<DrawerProps> = () => {
                   <DrawerLabel>Parent 2</DrawerLabel>
                   <DrawerList>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 1
                       </Typography>
                     </DrawerItem>
@@ -127,12 +137,22 @@ export const Default: Story<DrawerProps> = () => {
                   <DrawerLabel>Parent 1</DrawerLabel>
                   <DrawerList>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 1
                       </Typography>
                     </DrawerItem>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 2
                       </Typography>
                     </DrawerItem>
@@ -142,7 +162,12 @@ export const Default: Story<DrawerProps> = () => {
                   <DrawerLabel>Parent 2</DrawerLabel>
                   <DrawerList>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 1
                       </Typography>
                     </DrawerItem>
@@ -152,7 +177,12 @@ export const Default: Story<DrawerProps> = () => {
                   <DrawerLabel>Parent 3</DrawerLabel>
                   <DrawerList>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 1
                       </Typography>
                     </DrawerItem>
@@ -162,12 +192,22 @@ export const Default: Story<DrawerProps> = () => {
                   <DrawerLabel>Parent 4</DrawerLabel>
                   <DrawerList>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 1
                       </Typography>
                     </DrawerItem>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 2
                       </Typography>
                     </DrawerItem>
@@ -182,7 +222,12 @@ export const Default: Story<DrawerProps> = () => {
                   <DrawerLabel>Parent 1</DrawerLabel>
                   <DrawerList>
                     <DrawerItem>
-                      <Typography variant="body_short" link href={'#href'}>
+                      <Typography
+                        variant="body_short"
+                        role="menuitem"
+                        link
+                        href={'#href'}
+                      >
                         Child 1
                       </Typography>
                     </DrawerItem>
@@ -193,12 +238,22 @@ export const Default: Story<DrawerProps> = () => {
           </DrawerList>
           <DrawerList subtitle="Grandparent orphans">
             <DrawerItem>
-              <Typography variant="body_short" link href={'#href'}>
+              <Typography
+                variant="body_short"
+                role="menuitem"
+                link
+                href={'#href'}
+              >
                 Orphan 1
               </Typography>
             </DrawerItem>
             <DrawerItem>
-              <Typography variant="body_short" link href={'#href'}>
+              <Typography
+                variant="body_short"
+                role="menuitem"
+                link
+                href={'#href'}
+              >
                 Orphan 2
               </Typography>
             </DrawerItem>
@@ -211,5 +266,33 @@ export const Default: Story<DrawerProps> = () => {
         </Body>
       </Wrapper>
     </Fragment>
+  )
+}
+
+export const GroupList = <div></div>
+
+export const NewDesign: Story<DrawerProps> = () => {
+  return (
+    <Drawer>
+      <DrawerList label="Orphans">
+        <DrawerItem>Orpahn (child) 1</DrawerItem>
+        <DrawerItem>Orpahn (child) 2</DrawerItem>
+        <DrawerItem>Orpahn (child) 3</DrawerItem>
+      </DrawerList>
+      <DrawerList isExpandable label="With nesting">
+        <DrawerItem>
+          <DrawerList isExpandable label="Inner list">
+            <DrawerItem>Child 1</DrawerItem>
+            <DrawerItem>Child 2</DrawerItem>
+          </DrawerList>
+        </DrawerItem>
+        <DrawerItem>Child 1</DrawerItem>
+      </DrawerList>
+      <DrawerList label="With subtitle" subtitle="Subtitle">
+        <DrawerItem>Child 1</DrawerItem>
+        <DrawerItem>Child 2</DrawerItem>
+        <DrawerItem>Child 3</DrawerItem>
+      </DrawerList>
+    </Drawer>
   )
 }

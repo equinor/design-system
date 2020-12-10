@@ -74,7 +74,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
 
   return (
     <StyledDrawerContainer {...navProps}>
-      <StyledList>{children}</StyledList>
+      <StyledList role="menu">{children}</StyledList>
     </StyledDrawerContainer>
   )
 })
