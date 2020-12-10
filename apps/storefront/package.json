@@ -2,7 +2,7 @@
   "name": "@equinor/eds-storefront",
   "private": true,
   "description": "Documentation for Equinor Design System (EDS)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "pnpm": ">=4",
     "node": ">=14.0.0"
