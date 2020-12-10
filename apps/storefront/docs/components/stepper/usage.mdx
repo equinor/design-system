@@ -8,10 +8,6 @@ mode: publish
 route: /components/stepper/usage/
 ---
 
-## Figma
-
-Stepper is now available as a variant in the library
-
 ### How to add
 
 1. Locate the **Assets** tab in the **Layers Panel**.
@@ -22,7 +18,7 @@ Stepper is now available as a variant in the library
 
 ### How to use
 
-1. Place the first `Stepper` on your frame/artboard.
+1. Place the first `Stepper` on your frame/artboard and choose a _variant_ in the **Inspector Panel**. 
 2.Toggle the grid layout on/off by using the following shortcut:  
     _ Mac: `Control + G`
    _ PC: `Ctrl + Shift + 4`
@@ -31,9 +27,17 @@ Stepper is now available as a variant in the library
 5. Add a description if needed, if not hide the _layer_.
 6. Resize the stepper to the width and height needed. Keep in mind that maximum width for the `Stepper` is `451 px`  
 7. Choose the state and type of your `Stepper` in the control panel 
-8. If using the icon stepper, change the icon:
-   - Locate the icon in the **Assets Panel**
-   - Drag and drop the icon into the Placeholder icon
+8. There are two ways to change the action icon if using the icon stepper:
+   - **Drag and drop**
+   - Search or locate an icon in the **Assets Panel**
+   - Drag and drop the icon directly into the placeholder icon using:
+   - Mac: `Command` + `Option`
+   - PC: `Ctrl` + `ALT`
+   - **Manually**
+   - Locate and select the `Icon > Nested icon > Placeholder Icon` or `Icon > Nested icon > chevron down` _layer_ in the **Layers Panel**.
+   - Locate the **Design** tab in the **Inspector Panel**.
+   - Under the **Instance** section, click the icon name to expand the menu.
+   - Choose a new icon.
 9. Repeat steps 1–9 until all steps are inserted.
 10. Top align the steps. Make sure to use `8 px` spacing between each step.
 11. Select all the stepper _layers_ and convert them to a frame/artboard by using the following shortcut:

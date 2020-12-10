@@ -284,6 +284,15 @@ components:
         - *4
       react:
         - *4
+  - component: Time Picker
+    status:
+      documentation:
+        - *4
+      figma:
+        - *4
+        - *2
+      react:
+        - *1
   - component: Tooltip
     status:
       documentation:
@@ -308,3 +317,5 @@ components:
         - *4
       react:
         - *4
+  
+

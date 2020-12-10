@@ -8,31 +8,48 @@ toc:
   - Guidelines
   - Variations
   - Demo
-mode: draft
+mode: publish
 route: /components/select/
 ---
 
-<!--One to two sentences as an introduction to the component-->
-_Select_ allow users to ...
+The _Select_ component allows users to choose one or multiple items or options from a list.
 
 
 ## Guidelines
 
-<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+A select can be used in different settings: 
+* to filter or sort content on a page
+* to submit data
 
-**Don't**
 
-<!--Bullet point list if needed -->
+## Singleselect versus multiselect variant
 
-## Variations
+The `singleselect` variant is used to choose only one option from a list.
+The `multiselect` variant is used if multiple choices can be applied.
+
+### Best practices
+
+Use clear and simple language in the placeholder text. 
+It will help the user to understand what they are expected to choose from.
+
+Order your list of options in a way that will make the most sense to the user: 
+* alphabetically
+* numerically
+* by most commonly selected option
+
+Display a maximum of six items/options at a time.
+
+### Implementation
+
+A native select component is also available for implementation. We recommend using native select on products with limited space as it provides a better user experience.
+
+## Variant
 
 <!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
 
-### Single
-
-### Multi
-
-### Native
-
-## Demo
+<FigmaImage
+  url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17793%3A67"
+  alt="Select variant"
+/>
+      
 

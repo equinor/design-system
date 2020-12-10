@@ -25,7 +25,7 @@ import { Table } from '@equinor/eds-core-react'
 
 ### How to use
 
-1. Place the `Table` header components needed on the frame/artboard.
+1. Place the `Table` header components needed on the frame/artboard and choose a _variant_ in the **Inspector Panel**. 
 2. Select a `Table` header in the frame/artboard.
 3. Locate and expand the highlighted _layer_ in the **Layers Panel**.
 4. Edit the text label.
@@ -34,9 +34,21 @@ import { Table } from '@equinor/eds-core-react'
 - Mac: `Command` + `Option`
 - PC: `Ctrl` + `ALT`
 
-6. If you have multiple lines text in a cell, adjust the height with 20 pixels per additional lines. [See example in Figma](https://www.figma.com/file/luNobpDIWTuQ9rhyovGLBI/Desktop?node-id=2365%3A57007)
+6. There are two ways to change the action icon:
+   - **Drag and drop**
+   - Search or locate an icon in the **Assets Panel**
+   - Drag and drop the icon directly into the placeholder icon using:
+   - Mac: `Command` + `Option`
+   - PC: `Ctrl` + `ALT`
+   - **Manually**
+   - Locate and select the `Icon > Nested icon > Placeholder Icon` or `Icon > Nested icon > chevron down` _layer_ in the **Layers Panel**.
+   - Locate the **Design** tab in the **Inspector Panel**.
+   - Under the **Instance** section, click the icon name to expand the menu.
+   - Choose a new icon.
 
-7. Adjust the width of the header to fit the column width of the cells below, where the minimum width is defined by the right spacing.
+7. If you have multiple lines text in a cell, adjust the height with 20 pixels per additional lines. [See example in Figma](https://www.figma.com/file/luNobpDIWTuQ9rhyovGLBI/Desktop?node-id=2365%3A57007)
+
+8. Adjust the width of the header to fit the column width of the cells below, where the minimum width is defined by the right spacing.
 
 Now you can either use Auto layout or Constraints.
 

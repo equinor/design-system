@@ -25,12 +25,18 @@ import { Chip } from '@equinor/eds-core-react'
 
 ### How to use
 
-1. Select the `Chip` in the frame/artboard.
+1. Select the `Chip` in the frame/artboard and choose a _variant_ in the **Inspector Panel**.
 2. Locate and expand the highlighted _layer_ in the **Layers Panel**.
 3. Edit the Label. If the text wraps over one line, resize the width of the chip to avoid line breaks.
 4. Never add height to chips, only resize them horizontally in width.
-5. For chips that contain a nested icon:
-   - Locate and select the `Icon > Nested icon > Placeholder Icon` _layer_ in the **Layers Panel**.
+5. There are two ways to change the action icon for chips that contain a nested icon:
+    - **Drag and drop**
+   - Search or locate an icon in the **Assets Panel**
+   - Drag and drop the icon directly into the placeholder icon using:
+   - Mac: `Command` + `Option`
+   - PC: `Ctrl` + `ALT`
+   - **Manually**
+   - Locate and select the `Icon > Nested icon > Placeholder Icon` or `Icon > Nested icon > chevron down` _layer_ in the **Layers Panel**.
    - Locate the **Design** tab in the **Inspector Panel**.
    - Under the **Instance** section, click the icon name to expand the menu.
    - Choose a new icon.
