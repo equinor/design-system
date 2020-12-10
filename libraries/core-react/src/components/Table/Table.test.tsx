@@ -4,6 +4,7 @@ import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Table } from '.'
+import styled from 'styled-components'
 
 const { Caption, Cell, Head, Row, Body } = Table
 
@@ -17,6 +18,19 @@ describe('Caption', () => {
       </Table>,
     )
     expect(container.querySelector('Caption')).toBeInTheDocument()
+  })
+  it('Prints the caption', () => {
+    const text = "I'm da caption"
+    const { getByText } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell as="th">{text}</Cell>
+          </Row>
+        </Head>
+      </Table>,
+    )
+    expect(getByText(text)).toBeDefined()
   })
   it('Renders a table with caption, and caption-side set default to top', () => {
     const { container } = render(
@@ -43,7 +57,7 @@ describe('Caption', () => {
 })
 
 describe('Table', () => {
-  it('Renders a cell as a header cell', () => {
+  it('Can render a cell as a header cell', () => {
     const text = 'Name'
     const { getByText, container } = render(
       <Table>
@@ -60,7 +74,30 @@ describe('Table', () => {
     expect(headerCell).toEqual(th)
   })
 
-  it('Adjusts font if the text is a number', () => {
+  it('Renders the header row visually different than the other rows by using a background colour', () => {
+    const header = 'Header'
+    const body = 'Body content'
+    const { getByText } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell as="th">{header}</Cell>
+          </Row>
+        </Head>
+        <Body>
+          <Row>
+            <Cell>{body}</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+    const headElement = getByText(header).closest('thead')
+    const regularContent = getByText(body)
+    expect(headElement).not.toHaveStyleRule('background', 'rgba(255,255,255,1)')
+    expect(regularContent).toHaveStyleRule('background', 'rgba(255,255,255,1)')
+  })
+
+  it('Adjusts font for better readability if the text is a number', () => {
     const text = '369470'
     const { getByText } = render(
       <Table>
@@ -72,9 +109,18 @@ describe('Table', () => {
       </Table>,
     )
 
-    expect(getByText(369470)).toHaveStyleRule(
+    expect(getByText(text)).toHaveStyleRule(
       'font-feature-settings',
       "'tnum' on,'lnum' on",
     )
+  })
+
+  const StyledTable = styled(Table)`
+    clip-path: unset;
+  `
+
+  it('Can extend the css for the component', () => {
+    const { container } = render(<StyledTable />)
+    expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
   })
 })
