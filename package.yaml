@@ -13,16 +13,16 @@ scripts:
   'build:tokens': pnpm --filter @equinor/eds-tokens run build
   'build:icons': pnpm --filter @equinor/eds-icons run build
   'bump:core-react': >-
-    pnpm --filter @equinor/core-react recursive exec -- pnpm version
+    pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
     prerelease
   'publish:core-react': >-
-    pnpm --filter @equinor/core-react recursive exec -- pnpm publish --tag
+    pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
   storybook: pnpm --filter @equinor/eds-storybook-react run dev
   storefront: pnpm --filter @equinor/eds-storefront run dev
   'build:storefront': pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
-  'test:watch:core-react': 'pnpm --filter @equinor/core-react run test:watch'
+  'test:watch:core-react': 'pnpm --filter @equinor/eds-core-react run test:watch'
   dockerize-storybook-react: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
   storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
   storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh

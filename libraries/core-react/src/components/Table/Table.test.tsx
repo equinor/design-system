@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Table } from '.'
 
-const { Caption } = Table
+const { Caption, Cell, Head, Row, Body } = Table
 
 afterEach(cleanup)
 
@@ -38,6 +38,43 @@ describe('Caption', () => {
     expect(container.querySelector('Caption')).toHaveStyleRule(
       'caption-side',
       'bottom',
+    )
+  })
+})
+
+describe('Table', () => {
+  it('Renders a cell as a header cell', () => {
+    const text = 'Name'
+    const { getByText, container } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell as="th">{text}</Cell>
+          </Row>
+        </Head>
+      </Table>,
+    )
+
+    const headerCell = getByText(text)
+    const th = container.querySelector('th')
+    expect(headerCell).toEqual(th)
+  })
+
+  it('Adjusts font if the text is a number', () => {
+    const text = '369470'
+    const { getByText } = render(
+      <Table>
+        <Body>
+          <Row>
+            <Cell variant="numeric">{text}</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+
+    expect(getByText(369470)).toHaveStyleRule(
+      'font-feature-settings',
+      "'tnum' on,'lnum' on",
     )
   })
 })
