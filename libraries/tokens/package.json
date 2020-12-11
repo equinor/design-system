@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Design tokens for the Equinor Design System",
   "main": "dist/tokens.cjs.js",
   "module": "dist/tokens.esm.js",
@@ -27,8 +27,7 @@
   "scripts": {
     "prepare": "pnpm run build",
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "postinstall": "pnpm run build"
+    "dev": "rollup -c -w"
   },
   "keywords": [
     "eds",
