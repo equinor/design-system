@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-icons",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Icons from the Equinor Design System",
   "main": "dist/icons.cjs.js",
   "module": "dist/icons.esm.js",
@@ -27,8 +27,7 @@
   "scripts": {
     "prepare": "pnpm run build",
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "postinstall": "pnpm run build"
+    "dev": "rollup -c -w"
   },
   "keywords": [
     "eds",
