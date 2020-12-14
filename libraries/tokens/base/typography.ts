@@ -149,7 +149,7 @@ export const typography = {
       textAlign: 'left',
     },
     text_monospaced: {
-      fontFeature: "'tnum' on, 'lnum' on",
+      fontFeature: "'tnum' on,'lnum' on",
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
       fontSize: '1.000rem',
@@ -325,7 +325,7 @@ export const typography = {
       textAlign: 'left',
     },
     cell_numeric_monospaced: {
-      fontFeature: "'tnum' on, 'lnum' on",
+      fontFeature: "'tnum' on,'lnum' on",
       color: 'rgba(0, 0, 0, 1)',
       fontFamily: 'Equinor',
       fontSize: '0.875rem',

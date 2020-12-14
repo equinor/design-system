@@ -5,6 +5,7 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Table } from '.'
 import styled from 'styled-components'
+import { token } from './Cell/DataCell.tokens'
 
 const { Caption, Cell, Head, Row, Body } = Table
 
@@ -108,10 +109,14 @@ describe('Table', () => {
         </Body>
       </Table>,
     )
-
+    const typography = {
+      ...token.typography,
+      ...token.variants.numeric.typography,
+    }
+    const trimmedFontFeature = typography.fontFeature.replace(/\s*,\s*/g, ',')
     expect(getByText(text)).toHaveStyleRule(
       'font-feature-settings',
-      "'tnum' on,'lnum' on",
+      trimmedFontFeature,
     )
   })
 

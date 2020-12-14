@@ -29,7 +29,7 @@ export const toTypography = (figmaNode, name) => {
   if (isMonospaced) {
     typography = {
       ...typography,
-      fontFeature: "'tnum' on, 'lnum' on",
+      fontFeature: "'tnum' on,'lnum' on",
     }
   }
 
