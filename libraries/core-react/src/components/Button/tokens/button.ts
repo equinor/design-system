@@ -25,7 +25,6 @@ const {
 export const button: ButtonToken = {
   background: 'transparent',
   height: buttonHeight,
-  width: '100%',
   typography: {
     ...buttonTypography,
     textAlign: 'center',
