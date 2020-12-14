@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed unintended full width on `<Button>` ([#976](https://github.com/equinor/design-system/pull/976))
+- Removed unintended full width on `<Button>` ([#976](https://github.com/equinor/design-system/pull/976))
 
 ### Fixed
 
