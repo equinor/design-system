@@ -1,12 +1,6 @@
 import React, { Fragment, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import {
-  Drawer,
-  TopBar,
-  Icon,
-  Typography,
-  DrawerProps,
-} from '@equinor/eds-core-react'
+import { Drawer, TopBar, Icon, DrawerProps } from '@equinor/eds-core-react'
 import { Story, Meta } from '@storybook/react'
 
 import {
@@ -25,7 +19,7 @@ const {
   DrawerList,
   // DrawerTreeItem,
   DrawerItem,
-  DrawerSubtitle,
+  // DrawerSubtitle,
   DrawerLabel,
 } = Drawer
 const { Header, CustomContent } = TopBar
@@ -76,7 +70,6 @@ export default {
   component: Drawer,
   subcomponents: {
     DrawerLabel,
-    DrawerSubtitle,
     DrawerItem,
     DrawerList,
   },
@@ -93,7 +86,7 @@ export const NewDesign: Story<DrawerProps> = () => {
         <CustomContent>Drawer example</CustomContent>
       </TopBar>
       <Wrapper>
-        <Drawer>
+        <Drawer ariaLabel="Drawer Example">
           <DrawerItem>
             <DrawerList>
               <DrawerItem>Orphan (child) 1</DrawerItem>

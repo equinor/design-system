@@ -177,7 +177,7 @@ type DrawerItemProps = {
   /** Level of DrawerList parent */
   level?: string
   /** Id of parent (DrawerList) */
-  drawerListId?: string | undefined
+  drawerListId?: string
   // children?: React.ReactElement
 } & HTMLAttributes<HTMLLIElement>
 
@@ -207,8 +207,8 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
 
     const [drawerOpen, setDrawerOpen] = useState(open)
 
-    const isNested =
-      drawerListId && drawerListId.includes('child') ? true : false
+    // const isNested =
+    //   drawerListId && drawerListId.includes('child') ? true : false
 
     // let isNested: boolean
     // if ((drawerListId && drawerListId.includes('child')) || !drawerListId) {
@@ -263,22 +263,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     // const [isFocusedState, setFocused] = useState(false) // New isfocused
     // const { focusProps } = useFocus({ onFocusChange: setFocused })
 
-    // let Child
-    // if (!isNested) {
-    //   Child = React.Children.map(children, (child, childIndex) => {
-    //     return (
-    //       <Typography
-    //         key={`${index}-anchor-${childIndex}`}
-    //         variant="body_short"
-    //         role="menuitem"
-    //         link
-    //         href={href}
-    //       >
-    //         {child}
-    //       </Typography>
-    //     )
-    //   })
-    // }
+    let Child
 
     if (Array.isArray(children)) {
       updatedChildren = React.Children.map(children, (child: ChildType) => {
@@ -308,6 +293,28 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     //   updatedChildren[0].props.children.length > 0 &&
     //   Array.isArray(updatedChildren[0].props.children)
     // console.log('item children', updatedChildren[0].props)
+
+    let isNested = false
+
+    if (typeof children !== 'object' && children !== null) {
+      Child = React.Children.map(children, (child, childIndex) => {
+        console.log(child)
+        return (
+          <Typography
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${index}-anchor-${childIndex}`}
+            variant="body_short"
+            role="menuitem"
+            link
+            href={href}
+          >
+            {child}
+          </Typography>
+        )
+      })
+    } else {
+      isNested = true
+    }
 
     const props = {
       ...rest,
@@ -351,22 +358,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
         {isNested && level !== 'child' && chevronIcon}
         {isNested && itemElements}
         {isNested && drawerOpen && updatedChildren}
-        {!isNested &&
-          React.Children.map(children, (child, childIndex) => {
-            return (
-              <Typography
-                // eslint-disable-next-line react/no-array-index-key
-                key={`${index}-anchor-${childIndex}`}
-                variant="body_short"
-                role="menuitem"
-                link
-                href={href}
-                // onClick={handleClick}
-              >
-                {child}
-              </Typography>
-            )
-          })}
+        {Child && Child}
       </StyledDrawerItem>
     )
   },
