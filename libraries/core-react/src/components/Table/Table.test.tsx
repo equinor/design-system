@@ -94,8 +94,14 @@ describe('Table', () => {
     )
     const headElement = getByText(header).closest('thead')
     const regularContent = getByText(body)
-    expect(headElement).not.toHaveStyleRule('background', 'rgba(255,255,255,1)')
-    expect(regularContent).toHaveStyleRule('background', 'rgba(255,255,255,1)')
+    const cellBackground = token.background.replace(/ /g, '')
+
+    expect(headElement).not.toHaveStyleRule('background', cellBackground)
+    expect(headElement).toHaveStyleRule(
+      'border-bottom',
+      '2px solid rgba(220,220,220,1)',
+    )
+    expect(regularContent).toHaveStyleRule('background', cellBackground)
   })
 
   it('Adjusts font for better readability if the text is a number', () => {
