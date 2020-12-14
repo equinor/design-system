@@ -15,6 +15,7 @@ import { useDrawer } from './Drawer.context'
 import { drawer as tokens } from './Drawer.tokens'
 import { DrawerList } from './DrawerList'
 import { List } from '../List'
+import { Typography } from '../Typography'
 import { Item } from '@react-stately/collections'
 import { useMenu, useMenuItem, useMenuSection } from '@react-aria/menu'
 import { useFocus } from '@react-aria/interactions'
@@ -55,7 +56,7 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
     'aria-current': index === active ? 'page' : undefined,
     'aria-haspopup': isNested,
     'aria-expanded': isNested && open,
-    tabIndex: 0,
+    // tabIndex: 0,
     disabled,
   }),
 )<StyledDrawerItemProps>`
@@ -64,7 +65,7 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
   list-style: none;
   width: auto;
   position: relative;
-  
+
   ${({ disabled }) =>
     disabled
       ? css`
@@ -82,9 +83,9 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
     outline: ${outline};
     outline-offset: ${outlineOffset};
   }
-  
+
   /* border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
-  
+
   svg {
     display: inline-block;
     width: 16px;
@@ -156,8 +157,6 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
         }
       `}
   }
-  
- 
 `
 
 type DrawerItemProps = {
@@ -172,9 +171,15 @@ type DrawerItemProps = {
   /** If item is expandable */
   expandable?: boolean
   /** onClick handler */
-  onClick?: (event: MouseEvent<HTMLLIElement, MouseEvent>) => void
+  onClick?: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+  /** href for anchor tag */
+  href?: string
+  /** Level of DrawerList parent */
+  level?: string
+  /** Id of parent (DrawerList) */
+  drawerListId?: string | undefined
   // children?: React.ReactElement
-} & (HTMLAttributes<HTMLLIElement> | HTMLAttributes<HTMLAnchorElement>)
+} & HTMLAttributes<HTMLLIElement>
 
 type ChildType = {
   disabled?: boolean
@@ -182,7 +187,18 @@ type ChildType = {
 
 export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
   function DrawerItem(
-    { children, disabled, open = true, index, onClick, active, ...rest },
+    {
+      children,
+      disabled,
+      open = true,
+      index,
+      onClick,
+      href,
+      active,
+      level,
+      drawerListId = '',
+      ...rest
+    },
     ref,
   ) {
     const { focusedIndex, setFocusedIndex, onClose } = useDrawer()
@@ -191,11 +207,23 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
 
     const [drawerOpen, setDrawerOpen] = useState(open)
 
+    const isNested =
+      drawerListId && drawerListId.includes('child') ? true : false
+
+    // let isNested: boolean
+    // if ((drawerListId && drawerListId.includes('child')) || !drawerListId) {
+    //   isNested = false
+    // } else {
+    //   isNested = true
+    // }
+
+    //const isNested = false
+
     const handleClick = (event: MouseEvent<HTMLLIElement, MouseEvent>) => {
       if (!disabled) {
         console.log('click', index, rest)
         setDrawerOpen(!drawerOpen)
-        setFocusedIndex(index)
+        // setFocusedIndex(index)
         event.stopPropagation()
       }
     }
@@ -235,6 +263,23 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     // const [isFocusedState, setFocused] = useState(false) // New isfocused
     // const { focusProps } = useFocus({ onFocusChange: setFocused })
 
+    // let Child
+    // if (!isNested) {
+    //   Child = React.Children.map(children, (child, childIndex) => {
+    //     return (
+    //       <Typography
+    //         key={`${index}-anchor-${childIndex}`}
+    //         variant="body_short"
+    //         role="menuitem"
+    //         link
+    //         href={href}
+    //       >
+    //         {child}
+    //       </Typography>
+    //     )
+    //   })
+    // }
+
     if (Array.isArray(children)) {
       updatedChildren = React.Children.map(children, (child: ChildType) => {
         // console.log('item child', child.type.displayName)
@@ -258,9 +303,10 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
         }),
       ]
     }
-    const isNested =
-      updatedChildren[0].props.children.length > 0 &&
-      Array.isArray(updatedChildren[0].props.children)
+    // const isNested =
+    //   updatedChildren[0].props.children &&
+    //   updatedChildren[0].props.children.length > 0 &&
+    //   Array.isArray(updatedChildren[0].props.children)
     // console.log('item children', updatedChildren[0].props)
 
     const props = {
@@ -280,11 +326,11 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
       />
     )
 
-    // console.log(updatedChildren)
     return (
       <StyledDrawerItem
         {...props}
-        onClick={handleClick}
+        key={`${index}-list-item`}
+        // onClick={handleClick}
         onKeyDown={handleKeyDown}
         role="none"
         ref={useCombinedRefs<HTMLLIElement>(
@@ -302,9 +348,25 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
         // }}
         // onFocus={() => setFocusedIndex(index)}
       >
-        {isNested && chevronIcon}
-        {itemElements}
-        {drawerOpen && updatedChildren}
+        {isNested && level !== 'child' && chevronIcon}
+        {isNested && itemElements}
+        {isNested && drawerOpen && updatedChildren}
+        {!isNested &&
+          React.Children.map(children, (child, childIndex) => {
+            return (
+              <Typography
+                // eslint-disable-next-line react/no-array-index-key
+                key={`${index}-anchor-${childIndex}`}
+                variant="body_short"
+                role="menuitem"
+                link
+                href={href}
+                // onClick={handleClick}
+              >
+                {child}
+              </Typography>
+            )
+          })}
       </StyledDrawerItem>
     )
   },

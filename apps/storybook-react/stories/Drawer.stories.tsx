@@ -82,9 +82,9 @@ export default {
   },
 } as Meta
 
-export const Default: Story<DrawerProps> = () => {
+export const NewDesign: Story<DrawerProps> = () => {
   return (
-    <Fragment>
+    <>
       <TopBar>
         <Header>
           {' '}
@@ -94,205 +94,33 @@ export const Default: Story<DrawerProps> = () => {
       </TopBar>
       <Wrapper>
         <Drawer>
-          <DrawerList level="grandparent">
-            <DrawerItem>
-              <DrawerLabel>Grandparent 1</DrawerLabel>
-              <DrawerList level="parent">
-                <DrawerItem>
-                  <DrawerLabel>Parent 1</DrawerLabel>
-                  <DrawerList>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 1
-                      </Typography>
-                    </DrawerItem>
-                  </DrawerList>
-                </DrawerItem>
-                <DrawerItem>
-                  <DrawerLabel>Parent 2</DrawerLabel>
-                  <DrawerList>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 1
-                      </Typography>
-                    </DrawerItem>
-                  </DrawerList>
-                </DrawerItem>
-              </DrawerList>
-            </DrawerItem>
-            <DrawerItem>
-              <DrawerLabel>Grandparent 2</DrawerLabel>
-              <DrawerList level="parent">
-                <DrawerItem>
-                  <DrawerLabel>Parent 1</DrawerLabel>
-                  <DrawerList>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 1
-                      </Typography>
-                    </DrawerItem>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 2
-                      </Typography>
-                    </DrawerItem>
-                  </DrawerList>
-                </DrawerItem>
-                <DrawerItem>
-                  <DrawerLabel>Parent 2</DrawerLabel>
-                  <DrawerList>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 1
-                      </Typography>
-                    </DrawerItem>
-                  </DrawerList>
-                </DrawerItem>
-                <DrawerItem>
-                  <DrawerLabel>Parent 3</DrawerLabel>
-                  <DrawerList>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 1
-                      </Typography>
-                    </DrawerItem>
-                  </DrawerList>
-                </DrawerItem>
-                <DrawerItem>
-                  <DrawerLabel>Parent 4</DrawerLabel>
-                  <DrawerList>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 1
-                      </Typography>
-                    </DrawerItem>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 2
-                      </Typography>
-                    </DrawerItem>
-                  </DrawerList>
-                </DrawerItem>
-              </DrawerList>
-            </DrawerItem>
-            <DrawerItem>
-              <DrawerLabel>Grandparent with a really long name 3</DrawerLabel>
-              <DrawerList level="parent">
-                <DrawerItem>
-                  <DrawerLabel>Parent 1</DrawerLabel>
-                  <DrawerList>
-                    <DrawerItem>
-                      <Typography
-                        variant="body_short"
-                        role="menuitem"
-                        link
-                        href={'#href'}
-                      >
-                        Child 1
-                      </Typography>
-                    </DrawerItem>
-                  </DrawerList>
-                </DrawerItem>
-              </DrawerList>
-            </DrawerItem>
-          </DrawerList>
-          <DrawerList subtitle="Grandparent orphans">
-            <DrawerItem>
-              <Typography
-                variant="body_short"
-                role="menuitem"
-                link
-                href={'#href'}
-              >
-                Orphan 1
-              </Typography>
-            </DrawerItem>
-            <DrawerItem>
-              <Typography
-                variant="body_short"
-                role="menuitem"
-                link
-                href={'#href'}
-              >
-                Orphan 2
-              </Typography>
-            </DrawerItem>
-          </DrawerList>
+          <DrawerItem>
+            <DrawerList>
+              <DrawerItem>Orphan (child) 1</DrawerItem>
+              <DrawerItem>Orphan (child) 2</DrawerItem>
+              <DrawerItem>Orphan (child) 3</DrawerItem>
+            </DrawerList>
+          </DrawerItem>
+          <DrawerItem>
+            <DrawerList label="With subtitle" subtitle="Subtitle">
+              <DrawerItem>Sub Child 1</DrawerItem>
+              <DrawerItem>Sub Child 2</DrawerItem>
+              <DrawerItem>Sub Child 3</DrawerItem>
+            </DrawerList>
+          </DrawerItem>
+          <DrawerItem>
+            <DrawerList isExpandable label="With nesting" level="grandparent">
+              <DrawerItem>
+                <DrawerList isExpandable label="Inner list" level="parent">
+                  <DrawerItem>Inner Child 1</DrawerItem>
+                  <DrawerItem>Inner Child 2</DrawerItem>
+                </DrawerList>
+              </DrawerItem>
+              <DrawerItem>Child 1</DrawerItem>
+            </DrawerList>
+          </DrawerItem>
         </Drawer>
-        <Body>
-          <p>Top of page</p>
-          <p>Middle of page</p>
-          <p>Bottom of page</p>
-        </Body>
       </Wrapper>
-    </Fragment>
-  )
-}
-
-export const GroupList = <div></div>
-
-export const NewDesign: Story<DrawerProps> = () => {
-  return (
-    <Drawer>
-      <DrawerList label="Orphans">
-        <DrawerItem>Orpahn (child) 1</DrawerItem>
-        <DrawerItem>Orpahn (child) 2</DrawerItem>
-        <DrawerItem>Orpahn (child) 3</DrawerItem>
-      </DrawerList>
-      <DrawerList isExpandable label="With nesting">
-        <DrawerItem>
-          <DrawerList isExpandable label="Inner list">
-            <DrawerItem>Child 1</DrawerItem>
-            <DrawerItem>Child 2</DrawerItem>
-          </DrawerList>
-        </DrawerItem>
-        <DrawerItem>Child 1</DrawerItem>
-      </DrawerList>
-      <DrawerList label="With subtitle" subtitle="Subtitle">
-        <DrawerItem>Child 1</DrawerItem>
-        <DrawerItem>Child 2</DrawerItem>
-        <DrawerItem>Child 3</DrawerItem>
-      </DrawerList>
-    </Drawer>
+    </>
   )
 }

@@ -25,6 +25,8 @@ import { useDrawer } from './Drawer.context'
 
 const { background, subtitleBorder, subtitleTypography } = tokens
 
+import { DrawerLabel } from './DrawerLabel'
+
 type DrawerSubtitleProps = {
   /** Subtitle name */
   name?: string
@@ -36,7 +38,8 @@ const StyledDrawerSubtitle = styled.span<DrawerSubtitleProps>`
   padding-top: 7px;
   padding-left: 16px;
   padding-right: 16px;
-  /* border-top: ${subtitleBorder.top.width} solid ${subtitleBorder.top.color}; */
+  /* border-top: ${subtitleBorder.top.width} solid ${subtitleBorder.top
+    .color}; */
   font-size: ${subtitleTypography.fontSize};
   font-weight: ${subtitleTypography.fontWeight};
   line-height: ${subtitleTypography.lineHeight};
@@ -112,7 +115,15 @@ type DrawerListChildrenType = {
 
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
   function DrawerList(
-    { children, level = 'child', subtitle, open, isExpandable, ...props },
+    {
+      children,
+      level = 'child',
+      subtitle,
+      open,
+      isExpandable,
+      label,
+      ...props
+    },
     ref,
   ) {
     const drawerListId = useMemo<string>(
@@ -154,7 +165,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
 
     return (
       <>
-        {isGrandparent && subtitle && (
+        {level !== 'child' && subtitle && (
           <>
             <Divider style={{ padding: '0px 16px' }} />
             <StyledDrawerSubtitle name={subtitle}>
@@ -162,6 +173,11 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
             </StyledDrawerSubtitle>
           </>
         )}
+        {isExpandable && label !== '' ? (
+          <DrawerLabel>{label}</DrawerLabel>
+        ) : isExpandable && label === '' ? (
+          <DrawerLabel>Define a label</DrawerLabel>
+        ) : null}
         <StyledDrawerList
           // {...menuProps}
           {...props}
