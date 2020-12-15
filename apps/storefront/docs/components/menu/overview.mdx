@@ -11,21 +11,6 @@ mode: publish
 route: /components/menu/
 ---
 
-import { Menu, Typography, Button, Icon } from '@equinor/eds-core-react'
-import {
-  folder,
-  copy,
-  paste,
-  edit,
-  delete_to_trash,
-  settings,
-  arrow_drop_right,
-  more_vertical,
-  pressure,
-  bearing,
-  cable
-} from '@equinor/eds-icons'
-
 A _menu_, also known as a dropdown, is a temporary list of actions or functions.
 
 <!--One to two sentences as an introduction to the component-->
@@ -68,76 +53,4 @@ There are three item types available to place in the `Container`: `Subtitle`, `I
 
 ## Demo
 
-<Playground>
-  {() => {
-    const [state, setState] = React.useState({
-      one: null,
-      two: null,
-      three: null,
-      four: null,
-    })
-     Icon.add({
-      folder,
-      copy,
-      paste,
-      edit,
-      delete_to_trash,
-      settings,
-      arrow_drop_right,
-      more_vertical,
-      pressure,
-      bearing,
-      cable
-    })
-  const oneRef = React.useRef(null)
-  const twoRef = React.useRef(null)
-  const threeRef = React.useRef(null)
-  const fourRef = React.useRef(null)
-  React.useEffect(() => {
-    setState({
-      one: oneRef.current,
-      two: twoRef.current,
-      three: threeRef.current,
-      four: fourRef.current,
-    })
-  }, [state.one])
-  const { one, two, three, four } = state
-  return (
-    <div >
-      <div
-        id="menuButton"
-        aria-controls="menu-example"
-        aria-haspopup="true"
-        ref={oneRef}
-      >
-        Menu
-      </div>
-      <Menu
-        id="menu-example"
-        open
-        anchorEl={one}
-      >
-        <>
-        <Menu.MenuItem>
-      <Typography
-        group="navigation"
-        variant="label"
-      >
-        <Icon name="folder" />
-      </Typography>
-      <Typography group="navigation" variant="menu_title">
-        Open
-      </Typography>
-      <Typography
-        group="navigation"
-        variant="label"
-      >
-        CTRL+O
-      </Typography>
-    </Menu.MenuItem>
-        </>
-      </Menu>
-    </div>
-  )
-  }}
-</Playground>
+Please refer to the [Menu examples in Storybook](https://eds-storybook-react.azurewebsites.net/?path=/story/components-menu--button-toggle).
