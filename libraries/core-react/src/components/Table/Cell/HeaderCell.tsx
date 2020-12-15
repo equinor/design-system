@@ -16,7 +16,9 @@ const Base = ({ token }: BaseProps) => {
     height: ${height};
     background: ${background};
     ${spacingsTemplate(spacings)}
-    ${typographyTemplate(typography)}
+    ${typographyTemplate(typography)} /* &:hover {
+      background: ${tablehead.states.hover.background};
+    } */
   `
   return base
 }

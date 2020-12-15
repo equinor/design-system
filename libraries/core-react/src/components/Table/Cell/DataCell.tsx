@@ -34,7 +34,6 @@ const Base = ({ token }: BaseProps) => {
   const base = css`
     min-height: ${height};
     height: ${height};
-    background: ${background};
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
     ${bordersTemplate(border)}

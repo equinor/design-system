@@ -48,6 +48,11 @@ export const simpleTable: Story<TableProps> = () => (
         <Cell>Sith</Cell>
         <Cell variant="numeric">59</Cell>
       </Row>
+      <Row active>
+        <Cell>Jar Jar Binks</Cell>
+        <Cell>Republic</Cell>
+        <Cell variant="numeric">44</Cell>
+      </Row>
     </Body>
   </Table>
 )
