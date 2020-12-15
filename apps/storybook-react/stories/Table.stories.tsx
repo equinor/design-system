@@ -54,6 +54,13 @@ export const simpleTable: Story<TableProps> = () => (
         <Cell variant="numeric">44</Cell>
       </Row>
     </Body>
+    <Row>
+      <Cell>Boba Fett</Cell>
+      <Cell>Independet</Cell>
+      <Cell variant="numeric" color="error">
+        1
+      </Cell>
+    </Row>
   </Table>
 )
 

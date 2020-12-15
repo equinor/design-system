@@ -26,14 +26,19 @@ const applyMutations = (
 
 type BaseProps = {
   token: TableCellToken
+  color?: Colors
 }
 
-const Base = ({ token }: BaseProps) => {
-  const { background, height, typography, spacings, border } = token
+const Base = ({ token, color }: BaseProps) => {
+  const { height, typography, spacings, border } = token
+
+  const backgroundColor =
+    color === 'error' ? token.validation.error?.background : ''
 
   const base = css`
     min-height: ${height};
     height: ${height};
+    background: ${backgroundColor};
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
     ${bordersTemplate(border)}
@@ -45,9 +50,13 @@ const StyledTableCell = styled.td`
   ${Base}
 `
 
+type Colors = 'error'
+
 type CellProps = {
   /** Specifies which variant to use */
   variant?: Variants
+  /** Specifies validation coloring */
+  color?: Colors
 }
 
 export const TableDataCell = ({
