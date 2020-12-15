@@ -85,5 +85,5 @@ td {
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.429em;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
 }
