@@ -58,7 +58,7 @@ export const simpleTable: Story<TableProps> = () => (
         <Cell>
           <Icon
             data={warning_outlined}
-            color={tokens.colors.interactive.danger__resting.rgba}
+            color={tokens.colors.interactive.danger__text.rgba}
           ></Icon>
         </Cell>
         <Cell>Boba Fett</Cell>
