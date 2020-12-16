@@ -5,7 +5,9 @@ import React, {
   ReactElement,
   useRef,
   useState,
+  MouseEvent,
   useEffect,
+  AnchorHTMLAttributes,
 } from 'react'
 import createId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
@@ -55,6 +57,18 @@ const StyledDrawerSubtitle = styled.span<DrawerSubtitleProps>`
   line-height: ${subtitleTypography.lineHeight};
 `
 
+const Label = styled(Typography)`
+  width: calc(100% - 48px - 14px); // Todo: add dynamic tokens
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const StyledIcon = styled(Icon)`
+  width: 16px;
+  height: 16px;
+`
+
 const StyledDrawerList = styled(List).attrs<DrawerListProps>(
   ({ open }): JSX.IntrinsicElements['ul'] => ({
     'aria-hidden': !open,
@@ -66,23 +80,46 @@ const StyledDrawerList = styled(List).attrs<DrawerListProps>(
   background: ${background};
   width: 256px;
   border-right: none;
-  svg {
+
+  > li {
+    //padding-left: 16px;
+
+    border-left: none;
+  }
+
+  > li > a {
+    width: calc(100% - 48px - 14px); // Todo: add dynamic tokens
+    /* display: inline-flex; */
+    /* border-left: none; */
+  }
+
+  /* svg {
     display: inline-block;
     width: 16px;
     vertical-align: middle;
   }
   svg.chevron_icon {
-    position: absolute;
+    /* position: absolute;
     right: 16px;
-    top: 16px;
+    top: 16px; 
     width: 16px;
     height: 16px;
-  }
-  li {
-    //padding-left: 16px;
-  }
+  } */
 
-  ${({ level }) =>
+  ${({ isExpandable }) =>
+    isExpandable
+      ? css`
+          > li {
+            /* margin-left: 16px; */
+            padding-left: 0;
+            border-left: none;
+          }
+        `
+      : css`
+          > li {
+            /* border-left: none; */
+          }
+        `}/* ${({ level }) =>
     level === 'grandparent' &&
     css`
       > li {
@@ -102,16 +139,7 @@ const StyledDrawerList = styled(List).attrs<DrawerListProps>(
       > li > a {
         border-left: none;
       }
-    `}
-
-  ${({ level }) =>
-    level === 'child' &&
-    css`
-      > li {
-        /* margin-left: 16px; */
-        padding-left: 0;
-      }
-    `}
+    `} */
 `
 
 type DrawerListProps = {
@@ -130,8 +158,8 @@ type DrawerListProps = {
 } & HTMLAttributes<HTMLUListElement>
 
 type DrawerListChildrenType = {
-  drawerListId?: number | TreeState<unknown>
-  children?: React.ReactElement | AriaMenuOptions<unknown>
+  drawerListId?: number
+  children?: React.ReactElement
   index?: number
 } & Pick<DrawerListProps, 'level' | 'open'> &
   React.ReactElement
@@ -189,7 +217,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     // })
 
     // Expand nested list
-    const handleClick = (event: MouseEvent) => {
+    const handleClick = (event: MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       if (!disabled) {
         setIsExpanded(!isExpanded)
         event.stopPropagation()
@@ -199,11 +227,11 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     const isGrandparent = level === 'grandparent'
 
     const chevronIcon = (
-      <Icon
+      <StyledIcon
+        className="chevron_icon"
         key={`${drawerListId}-icon`}
         name={open ? 'chevron_up' : 'chevron_down'}
         size={16}
-        className="chevron_icon"
       />
     )
 
@@ -224,18 +252,24 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
           <DrawerLabel>Define a label</DrawerLabel>
         ) : null} */}
         {isExpandable && label !== '' && (
-          <Typography
+          <Label
             // eslint-disable-next-line react/no-array-index-key
+            className="submenuLabel"
             aria-haspopup="true"
             key={`${label}-submenu-label`}
             variant="body_short"
+            onClick={() => handleClick}
             link
             role="button"
             tabIndex={0}
+            // style={{
+            //   width: 'calc(100% - 48px - 14px)',
+            //   position: 'relative',
+            // }}
           >
             {label}
             {chevronIcon}
-          </Typography>
+          </Label>
         )}
         <StyledDrawerList
           // {...menuProps}

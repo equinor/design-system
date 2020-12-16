@@ -86,7 +86,7 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
 
   /* border-left: ${itemBorder.left.width} solid ${itemBorder.left.color}; */
 
-  svg {
+  /* svg {
     display: inline-block;
     width: 16px;
     vertical-align: middle;
@@ -97,7 +97,7 @@ const StyledDrawerItem = styled(ListItem).attrs<StyledDrawerItemProps>(
     top: 16px;
     width: 16px;
     height: 16px;
-  }
+  } */
   ul {
     width: auto;
   }
@@ -311,6 +311,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
             role="menuitem"
             link
             href={href}
+            tabIndex={0}
           >
             {child}
           </Typography>
