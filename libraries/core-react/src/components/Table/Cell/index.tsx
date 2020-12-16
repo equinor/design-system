@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { TdHTMLAttributes, ThHTMLAttributes } from 'react'
-import { Is, Variants } from '../Table.types'
+import { Is, Variants, Colors } from '../Table.types'
 import { TableDataCell } from './DataCell'
 import { TableHeaderCell } from './HeaderCell'
 
@@ -9,6 +9,8 @@ type CellProps = {
   as?: Is
   /** Specifies which variant to use */
   variant?: Variants
+  /** Specifies cell background color */
+  color?: Colors
 } & (
   | TdHTMLAttributes<HTMLTableDataCellElement>
   | ThHTMLAttributes<HTMLTableHeaderCellElement>

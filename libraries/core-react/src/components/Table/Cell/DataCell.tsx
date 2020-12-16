@@ -3,7 +3,7 @@ import { TdHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
 import { token as tablecell, TableCellToken } from './DataCell.tokens'
-import { Variants } from '../Table.types'
+import { Variants, Colors } from '../Table.types'
 
 const applyMutations = (
   variant: Variants,
@@ -49,8 +49,6 @@ const Base = ({ token, color }: BaseProps) => {
 const StyledTableCell = styled.td`
   ${Base}
 `
-
-type Colors = 'error'
 
 type CellProps = {
   /** Specifies which variant to use */
