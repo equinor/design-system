@@ -11,6 +11,9 @@ import createId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { drawer as tokens } from './Drawer.tokens'
 import { Divider } from '../Divider'
+import { Typography } from '../Typography'
+import { Icon } from '../Icon'
+import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { useFocus } from '@react-aria/interactions'
 import { useTreeState, TreeState, TreeProps } from '@react-stately/tree'
 import { mergeProps } from '@react-aria/utils'
@@ -24,6 +27,13 @@ import { List } from '../List'
 import { useDrawer } from './Drawer.context'
 
 const { background, subtitleBorder, subtitleTypography } = tokens
+
+const icons = {
+  chevron_down,
+  chevron_up,
+}
+
+Icon.add(icons)
 
 import { DrawerLabel } from './DrawerLabel'
 
@@ -56,7 +66,18 @@ const StyledDrawerList = styled(List).attrs<DrawerListProps>(
   background: ${background};
   width: 256px;
   border-right: none;
-
+  svg {
+    display: inline-block;
+    width: 16px;
+    vertical-align: middle;
+  }
+  svg.chevron_icon {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 16px;
+    height: 16px;
+  }
   li {
     //padding-left: 16px;
   }
@@ -104,6 +125,8 @@ type DrawerListProps = {
   label?: string
   /** Is the list expandable / nested */
   isExpandable?: boolean
+  /** Is the list disabled */
+  disabled?: boolean
 } & HTMLAttributes<HTMLUListElement>
 
 type DrawerListChildrenType = {
@@ -119,9 +142,10 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
       children,
       level = 'child',
       subtitle,
-      open,
+      open = true,
       isExpandable,
-      label,
+      label = '',
+      disabled,
       ...props
     },
     ref,
@@ -131,6 +155,8 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
       [],
     )
     const { focusedIndex, setFocusedIndex } = useDrawer()
+    const [isExpanded, setIsExpanded] = useState(open)
+
     const ListItems = React.Children.map(children, (child, index) => {
       if (!child) return null
       return React.cloneElement(child as ReactElement, {
@@ -161,7 +187,25 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     //     item.props.open,
     //   )
     // })
+
+    // Expand nested list
+    const handleClick = (event: MouseEvent) => {
+      if (!disabled) {
+        setIsExpanded(!isExpanded)
+        event.stopPropagation()
+      }
+    }
+
     const isGrandparent = level === 'grandparent'
+
+    const chevronIcon = (
+      <Icon
+        key={`${drawerListId}-icon`}
+        name={open ? 'chevron_up' : 'chevron_down'}
+        size={16}
+        className="chevron_icon"
+      />
+    )
 
     return (
       <>
@@ -173,11 +217,26 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
             </StyledDrawerSubtitle>
           </>
         )}
-        {isExpandable && label !== '' ? (
+
+        {/* {isExpandable && label !== '' ? (
           <DrawerLabel>{label}</DrawerLabel>
         ) : isExpandable && label === '' ? (
           <DrawerLabel>Define a label</DrawerLabel>
-        ) : null}
+        ) : null} */}
+        {isExpandable && label !== '' && (
+          <Typography
+            // eslint-disable-next-line react/no-array-index-key
+            aria-haspopup="true"
+            key={`${label}-submenu-label`}
+            variant="body_short"
+            link
+            role="button"
+            tabIndex={0}
+          >
+            {label}
+            {chevronIcon}
+          </Typography>
+        )}
         <StyledDrawerList
           // {...menuProps}
           {...props}

@@ -221,7 +221,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
 
     const handleClick = (event: MouseEvent<HTMLLIElement, MouseEvent>) => {
       if (!disabled) {
-        console.log('click', index, rest)
+        //console.log('click', index, rest)
         setDrawerOpen(!drawerOpen)
         // setFocusedIndex(index)
         event.stopPropagation()
@@ -237,7 +237,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
       const { key } = event
       if (key === 'Enter' || (key === ' ' && !disabled)) {
-        console.log('click enter or space', index, rest)
+        //console.log('click enter or space', index, rest)
         setDrawerOpen(!drawerOpen)
         event.preventDefault()
       }
@@ -296,9 +296,13 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
 
     let isNested = false
 
-    if (typeof children !== 'object' && children !== null) {
+    if (
+      typeof children !== 'object' &&
+      !Array.isArray(children) &&
+      children !== null
+    ) {
       Child = React.Children.map(children, (child, childIndex) => {
-        console.log(child)
+        console.log(children)
         return (
           <Typography
             // eslint-disable-next-line react/no-array-index-key
@@ -324,15 +328,6 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
       open: drawerOpen,
     }
 
-    const chevronIcon = (
-      <Icon
-        key={`${index}-icon`}
-        name={drawerOpen ? 'chevron_up' : 'chevron_down'}
-        size={16}
-        className="chevron_icon"
-      />
-    )
-
     return (
       <StyledDrawerItem
         {...props}
@@ -355,7 +350,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
         // }}
         // onFocus={() => setFocusedIndex(index)}
       >
-        {isNested && level !== 'child' && chevronIcon}
+        {/* {isNested && level !== 'child' && chevronIcon} */}
         {isNested && itemElements}
         {isNested && drawerOpen && updatedChildren}
         {Child && Child}
