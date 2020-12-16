@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Table } from '.'
 import styled from 'styled-components'
-import { token } from './Cell/DataCell.tokens'
+import { token as dataCellToken } from './Cell/DataCell.tokens'
+import { token as headerCellToken } from './Cell/HeaderCell.tokens'
 
 const { Caption, Cell, Head, Row, Body } = Table
 
@@ -94,14 +95,17 @@ describe('Table', () => {
     )
     const headElement = getByText(header).closest('thead')
     const regularContent = getByText(body)
-    const cellBackground = token.background.replace(/ /g, '')
+    const cellBackground = headerCellToken.background.replace(/ /g, '')
+    const cellBorderBottom =
+      headerCellToken.border.type === 'bordergroup'
+        ? `${headerCellToken.border.bottom.width} ${
+            headerCellToken.border.bottom.style
+          } ${headerCellToken.border.bottom.color.replace(/ /g, '')}`
+        : ''
 
-    expect(headElement).not.toHaveStyleRule('background', cellBackground)
-    expect(headElement).toHaveStyleRule(
-      'border-bottom',
-      '2px solid rgba(220,220,220,1)',
-    )
-    expect(regularContent).toHaveStyleRule('background', cellBackground)
+    expect(headElement).toHaveStyleRule('background', cellBackground)
+    expect(headElement).toHaveStyleRule('border-bottom', cellBorderBottom)
+    expect(regularContent).not.toHaveStyleRule('background', cellBackground)
   })
 
   it('Adjusts font for better readability if the text is a number', () => {
@@ -115,11 +119,11 @@ describe('Table', () => {
         </Body>
       </Table>,
     )
-    const typography = {
-      ...token.typography,
-      ...token.variants.numeric.typography,
-    }
-    const trimmedFontFeature = typography.fontFeature.replace(/\s*,\s*/g, ',')
+
+    const trimmedFontFeature = dataCellToken.variants.numeric.typography.fontFeature.replace(
+      /\s*,\s*/g,
+      ',',
+    )
     expect(getByText(text)).toHaveStyleRule(
       'font-feature-settings',
       trimmedFontFeature,
