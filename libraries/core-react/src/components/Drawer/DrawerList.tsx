@@ -192,7 +192,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
         drawerListId,
         index,
         level,
-        open,
+        open: isExpanded,
       })
     })
 
@@ -221,7 +221,6 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     const handleClick = (event: MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       if (!disabled) {
         setIsExpanded(!isExpanded)
-        event.stopPropagation()
       }
     }
 
@@ -231,7 +230,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
       <StyledIcon
         className="chevron_icon"
         key={`${drawerListId}-icon`}
-        name={open ? 'chevron_up' : 'chevron_down'}
+        name={isExpanded ? 'chevron_up' : 'chevron_down'}
         size={24}
       />
     )
@@ -259,7 +258,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
             aria-haspopup="true"
             key={`${label}-submenu-label`}
             variant="body_short"
-            onClick={() => handleClick}
+            onClick={handleClick}
             link
             role="button"
             tabIndex={0}
