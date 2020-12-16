@@ -55,7 +55,7 @@ type Colors = 'error'
 type CellProps = {
   /** Specifies which variant to use */
   variant?: Variants
-  /** Specifies validation coloring */
+  /** Specifies cell background color */
   color?: Colors
 }
 
