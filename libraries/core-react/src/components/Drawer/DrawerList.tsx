@@ -67,6 +67,7 @@ const Label = styled(Typography)`
 const StyledIcon = styled(Icon)`
   width: 16px;
   height: 16px;
+  padding: 0px 16px;
 `
 
 const StyledDrawerList = styled(List).attrs<DrawerListProps>(
@@ -231,7 +232,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
         className="chevron_icon"
         key={`${drawerListId}-icon`}
         name={open ? 'chevron_up' : 'chevron_down'}
-        size={16}
+        size={24}
       />
     )
 
@@ -262,10 +263,12 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
             link
             role="button"
             tabIndex={0}
-            // style={{
-            //   width: 'calc(100% - 48px - 14px)',
-            //   position: 'relative',
-            // }}
+            style={{
+              width: 'calc(100% - 48px - 14px)',
+              display: 'inline-flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
           >
             {label}
             {chevronIcon}
