@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Table } from '.'
@@ -9,6 +9,8 @@ import { token as dataCellToken } from './Cell/DataCell.tokens'
 import { token as headerCellToken } from './Cell/HeaderCell.tokens'
 
 const { Caption, Cell, Head, Row, Body } = Table
+
+const trim = (x: string): string => x.replace(/ /g, '')
 
 afterEach(cleanup)
 
@@ -95,12 +97,12 @@ describe('Table', () => {
     )
     const headElement = getByText(header).closest('thead')
     const regularContent = getByText(body)
-    const cellBackground = headerCellToken.background.replace(/ /g, '')
+    const cellBackground = trim(headerCellToken.background)
     const cellBorderBottom =
       headerCellToken.border.type === 'bordergroup'
         ? `${headerCellToken.border.bottom.width} ${
             headerCellToken.border.bottom.style
-          } ${headerCellToken.border.bottom.color.replace(/ /g, '')}`
+          } ${trim(headerCellToken.border.bottom.color)}`
         : ''
 
     expect(headElement).toHaveStyleRule('background', cellBackground)
@@ -137,5 +139,40 @@ describe('Table', () => {
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledTable />)
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+  })
+
+  it('Has correct color on active row', () => {
+    render(
+      <Table>
+        <Body>
+          <Row active data-testid="row">
+            <Cell>active</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+
+    const row = screen.getByTestId('row')
+    expect(row).toHaveStyleRule(
+      'background',
+      trim(dataCellToken.states.active.background),
+    )
+  })
+  it('Has correct color on error cell even when active', () => {
+    render(
+      <Table>
+        <Body>
+          <Row active>
+            <Cell color="error">error</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+
+    const cell = screen.getByText('error')
+    expect(cell).toHaveStyleRule(
+      'background',
+      trim(dataCellToken.validation.error.background),
+    )
   })
 })
