@@ -171,8 +171,8 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
       children,
       level = 'child',
       subtitle,
-      open = true,
       isExpandable,
+      open = isExpandable ? false : true,
       label = '',
       disabled,
       ...props
