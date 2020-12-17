@@ -6,11 +6,14 @@ tabs:
   - Usage
 toc:
   - Guidelines
-  - Variations
+  - Singleselect versus multiselect variant
+  - Variant
   - Demo
 mode: publish
 route: /components/select/
 ---
+
+import { SingleSelect, MultiSelect, NativeSelect } from '@equinor/eds-core-react'
 
 The _Select_ component allows users to choose one or multiple items or options from a list.
 
@@ -26,6 +29,8 @@ A select can be used in different settings:
 
 The `singleselect` variant is used to choose only one option from a list.
 The `multiselect` variant is used if multiple choices can be applied.
+
+A native select component is also available for implementation. We recommend using native select on product with limited space as it provide a better user experience.
 
 ### Best practices
 
@@ -51,5 +56,89 @@ A native select component is also available for implementation. We recommend usi
   url="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17793%3A67"
   alt="Select variant"
 />
-      
 
+      
+## Demo
+
+### SingleSelect
+
+<Playground>
+{() => {
+  const items = [
+  'Oslo',
+  'Rogaland',
+  'Møre og Romsdal',
+  'Nordland',
+  'Viken',
+  'Innlandet',
+  'Vestfold og Telemark',
+  'Agder',
+  'Vestland',
+  'Trøndelag',
+  'Troms og Finnmark',
+]
+  return (
+    <div
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+         
+        }}
+      >
+      <SingleSelect label="Where do you live?" items={items} />
+      <SingleSelect
+        label="I have a preselected option"
+        initialSelectedItem="Troms og Finnmark"
+        items={items}
+      />
+      <SingleSelect label="Choose an element" meta="km/t" items={items} disabled />
+    </div>
+  )
+}}
+</Playground>
+
+### MultiSelect
+
+<Playground>
+{() => {
+  const items = [
+  'Oslo',
+  'Rogaland',
+  'Møre og Romsdal',
+  'Nordland',
+  'Viken',
+  'Innlandet',
+  'Vestfold og Telemark',
+  'Agder',
+  'Vestland',
+  'Trøndelag',
+  'Troms og Finnmark',
+]
+  return (
+    <div
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+         
+        }}
+      >
+      <MultiSelect label="Choose several" items={items} />
+      <MultiSelect
+        label="I have preselected options"
+        initialSelectedItems={['Troms og Finnmark', 'Vestland']}
+        items={items}
+      />
+      <MultiSelect label="Choose an element" meta="km/t" items={items} disabled />
+    </div>
+  )
+}}
+</Playground>
+
+### NativeSelect
+
+<Playground>
+  <NativeSelect label="Label text" meta="m2" id="default-select">
+    <option>First option with a really really long text</option>
+    <option>Second</option>
+  </NativeSelect>
+</Playground>

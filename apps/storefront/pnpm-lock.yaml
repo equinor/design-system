@@ -1,8 +1,8 @@
 dependencies:
   '@emotion/core': 10.1.1_react@17.0.1
-  '@equinor/eds-core-react': 0.7.1_d56e21ef07fc37b6ee9b57ce562afcca
-  '@equinor/eds-icons': 0.6.0
-  '@equinor/eds-tokens': 0.5.2
+  '@equinor/eds-core-react': 0.8.3_d56e21ef07fc37b6ee9b57ce562afcca
+  '@equinor/eds-icons': 0.6.1
+  '@equinor/eds-tokens': 0.5.4
   '@mdx-js/react': 1.6.21_react@17.0.1
   '@mikaelkristiansson/domready': 1.0.10
   '@reach/router': 1.3.4_react-dom@17.0.1+react@17.0.1
@@ -1468,10 +1468,11 @@ packages:
       cosmiconfig: '>=6'
     resolution:
       integrity: sha512-QRVtqJuS1mcT56oHpVegkKBlgtWjXw/gHNWO3eL9oyB5Sc7HBoc2OLG/nYpVfT/Jejvo3NUrD0Udk7XgoyDKkA==
-  /@equinor/eds-core-react/0.7.1_d56e21ef07fc37b6ee9b57ce562afcca:
+  /@equinor/eds-core-react/0.8.3_d56e21ef07fc37b6ee9b57ce562afcca:
     dependencies:
-      '@equinor/eds-icons': 0.5.0-beta.2
-      '@equinor/eds-tokens': 0.5.1-beta.2
+      '@equinor/eds-icons': 0.6.1
+      '@equinor/eds-tokens': 0.5.4
+      downshift: 6.0.7_react@17.0.1
       react: 17.0.1
       react-dom: 17.0.1_react@17.0.1
       styled-components: 5.2.1_react-dom@17.0.1+react@17.0.1
@@ -1484,35 +1485,21 @@ packages:
       react-dom: '>=16.8'
       styled-components: '>=4.2'
     resolution:
-      integrity: sha512-/wG2GVOJ8CtT4bNXaG5bYwtXIgCEqRIIsllsYYIWgRKbKpft9RzZyiGU+mHROfLLAvUY8IpN3elhOkKU3eQ69w==
-  /@equinor/eds-icons/0.5.0-beta.2:
+      integrity: sha512-Py61onBu5V+2MSTsvFBd5mMwVeqmsid6UO4ruFpIPEboJVjN7V8ZnCaE6pDOJ9pLZ/g9q/+WTFTNSLZsQpm1NQ==
+  /@equinor/eds-icons/0.6.1:
     dev: false
     engines:
       node: '>=10.0.0'
       pnpm: '>=4'
     resolution:
-      integrity: sha512-sD574J11TMS/HhiNupDCASFFE++l5uywLc9zGcE5QAI4kXED4aC2KOWN9nnoshK5KKTyax8wkA2JDsNa7UPJeQ==
-  /@equinor/eds-icons/0.6.0:
+      integrity: sha512-GPzl83rk3wtse2HsfVu3qCY3f4uk8NZdkkh6Ze+9+BsmVrmOwKAG+ntDIQabv6DiEum54GtuqW0X2f6KkT0dnQ==
+  /@equinor/eds-tokens/0.5.4:
     dev: false
     engines:
       node: '>=10.0.0'
       pnpm: '>=4'
     resolution:
-      integrity: sha512-FJVZxND0QalCX66g+mWotRB89z/VBGssllL5YRKxYuvJYlh2lhO/Y0twO8OMUtWN17IkTkkCevNIcFgh/9+jPA==
-  /@equinor/eds-tokens/0.5.1-beta.2:
-    dev: false
-    engines:
-      node: '>=10.0.0'
-      pnpm: '>=4'
-    resolution:
-      integrity: sha512-54KCtyCKEu7srnbDO6D7mFONoT4bQ0tPjuvOHMSR+Bk+yg0+gGrwyt8C1s0C0NqTFDarTbu6d6VzWRGwKSkUeA==
-  /@equinor/eds-tokens/0.5.2:
-    dev: false
-    engines:
-      node: '>=10.0.0'
-      pnpm: '>=4'
-    resolution:
-      integrity: sha512-cNiSuYrECTNsPnh+kRzBHdXlc3NnvwVSxKveWutdgpodW6ZLccZINYYpkI6d0bLRgM0rtfRaJjc/vV863lGAIg==
+      integrity: sha512-BByowcN80LCOcK/buD9g+3gK92HsnY/54J9BH9dK5mpFKtFONu5pqBq7C2N6VqjvlLVY/tOG17jdCWMJ8P2eAQ==
   /@graphql-tools/batch-execute/7.0.0_graphql@14.7.0:
     dependencies:
       '@graphql-tools/utils': 7.1.0_graphql@14.7.0
@@ -4796,6 +4783,10 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha512-jaSIDzP9pZVS4ZfQ+TzvtiWhdpFhE2RDHz8QJkpX9SIpLq88VueF5jJw6t+6CUQcAoA6t+x89MLrWAqpfDE8iQ==
+  /compute-scroll-into-view/1.0.16:
+    dev: false
+    resolution:
+      integrity: sha512-a85LHKY81oQnikatZYA90pufpZ6sQx++BoCxOEMsjpZx+ZnaKGQnCyCehTRr/1p9GBIAHTjcU9k71kSYWloLiQ==
   /concat-map/0.0.1:
     dev: false
     resolution:
@@ -6102,6 +6093,18 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-xqnBTVd/E+GxJVrX5/eUJiLYjCGPwMpdL+jGhGU57BvtcA7wwhtHVbXBeUk51kOpW3S7Jn3BQbN9Q1R1Km2qDQ==
+  /downshift/6.0.7_react@17.0.1:
+    dependencies:
+      '@babel/runtime': 7.12.5
+      compute-scroll-into-view: 1.0.16
+      prop-types: 15.7.2
+      react: 17.0.1
+      react-is: 17.0.1
+    dev: false
+    peerDependencies:
+      react: '>=16.8.0'
+    resolution:
+      integrity: sha512-+rqgx3JTSs8b4V9q++hsLvaP8mhMOdX7u+jy5S2etg7+Y7uFLVzZaI0S7Xo2yEnNDmTcNnYZZ/vFjdWuJ2kZdg==
   /duplexer/0.1.2:
     dev: false
     resolution:
@@ -13831,6 +13834,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+  /react-is/17.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
   /react-lifecycles-compat/3.0.4:
     dev: false
     resolution:
@@ -17740,9 +17747,9 @@ packages:
       integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
 specifiers:
   '@emotion/core': ^10.1.1
-  '@equinor/eds-core-react': ^0.7.1
-  '@equinor/eds-icons': ^0.6.0
-  '@equinor/eds-tokens': ^0.5.2
+  '@equinor/eds-core-react': ^0.8.3
+  '@equinor/eds-icons': ^0.6.1
+  '@equinor/eds-tokens': ^0.5.4
   '@mdx-js/react': ^1.6.21
   '@mikaelkristiansson/domready': ^1.0.10
   '@reach/router': ^1.3.4
