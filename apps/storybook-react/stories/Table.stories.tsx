@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
-import { warning_outlined } from '@equinor/eds-icons'
-import { tokens } from '@equinor/eds-tokens'
 import './../style.css'
 
 const { Caption, Body, Row, Cell, Head } = Table
@@ -28,7 +26,6 @@ export const simpleTable: Story<TableProps> = () => (
     </Caption>
     <Head>
       <Row>
-        <Cell></Cell>
         <Cell as="th" scope="col">
           Name
         </Cell>
@@ -42,25 +39,16 @@ export const simpleTable: Story<TableProps> = () => (
     </Head>
     <Body>
       <Row>
-        <Cell></Cell>
         <Cell>Luke Skywalker</Cell>
         <Cell>Republic</Cell>
         <Cell variant="numeric">369470</Cell>
       </Row>
       <Row>
-        <Cell></Cell>
-
         <Cell>Darth Vader</Cell>
         <Cell>Sith</Cell>
         <Cell variant="numeric">59</Cell>
       </Row>
       <Row>
-        <Cell>
-          <Icon
-            data={warning_outlined}
-            color={tokens.colors.interactive.danger__text.rgba}
-          ></Icon>
-        </Cell>
         <Cell>Boba Fett</Cell>
         <Cell>Independet</Cell>
         <Cell variant="numeric" color="error">
@@ -68,7 +56,6 @@ export const simpleTable: Story<TableProps> = () => (
         </Cell>
       </Row>
       <Row active>
-        <Cell></Cell>
         <Cell>Jar Jar Binks</Cell>
         <Cell>Republic</Cell>
         <Cell variant="numeric">44</Cell>
