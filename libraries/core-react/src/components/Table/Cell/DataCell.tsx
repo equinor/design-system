@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
 import { token as tablecell, TableCellToken } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
+import { useTable } from '../Table.context'
+import { applyDensity } from './utils'
 
 const applyMutations = (
   variant: Variants,
@@ -62,7 +64,11 @@ export const TableDataCell = ({
   variant = 'text',
   ...rest
 }: CellProps & TdHTMLAttributes<HTMLTableDataCellElement>): JSX.Element => {
-  const token = applyMutations(variant, tablecell)
+  const { density } = useTable()
+
+  let token = applyMutations(variant, tablecell)
+  token = applyDensity(density, token)
+
   return (
     <StyledTableCell token={token} {...rest}>
       {children}

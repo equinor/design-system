@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
-import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
+import { Table, TableProps, Typography } from '@equinor/eds-core-react'
 import './../style.css'
 
 const { Caption, Body, Row, Cell, Head } = Table
@@ -17,10 +17,19 @@ export default {
       },
     },
   },
+  argTypes: {
+    density: {
+      control: {
+        type: 'select',
+        options: ['comfortable', 'compact'],
+        defaultValue: 'comfortable',
+      },
+    },
+  },
 } as Meta
 
-export const simpleTable: Story<TableProps> = () => (
-  <Table>
+export const simpleTable: Story<TableProps> = (args) => (
+  <Table {...args}>
     <Caption>
       <Typography variant="h2">Star Wars Kill Count</Typography>
     </Caption>
@@ -120,5 +129,44 @@ export const FixedTableHeader: Story<TableProps> = () => {
         </Body>
       </FullTable>
     </FixedContainer>
+  )
+}
+
+export const CompactTable: Story<TableProps> = () => {
+  const data = [
+    { number: '1', name: 'Banana', colour: 'Yellow' },
+    { number: '2', name: 'Orange', colour: 'Orange' },
+    { number: '4', name: 'Kiwi', colour: 'Greenish' },
+  ]
+  return (
+    <Table density="compact">
+      <Caption>
+        <Typography variant="h2">Fruits and their colours</Typography>
+      </Caption>
+      <Head>
+        <Row>
+          <Cell as="th" scope="col">
+            Number
+          </Cell>
+          <Cell as="th" scope="col">
+            Name
+          </Cell>
+          <Cell as="th" scope="col">
+            Colour
+          </Cell>
+        </Row>
+      </Head>
+      <Body>
+        {data.map((item) => {
+          return (
+            <Row key={item.number}>
+              <Cell>{item.number}</Cell>
+              <Cell>{item.name}</Cell>
+              <Cell>{item.colour}</Cell>
+            </Row>
+          )
+        })}
+      </Body>
+    </Table>
   )
 }

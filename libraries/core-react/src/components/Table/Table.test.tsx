@@ -175,4 +175,55 @@ describe('Table', () => {
       trim(dataCellToken.validation.error.background),
     )
   })
+  it('Has comfortable as default density', () => {
+    const cellText = 'Header content'
+    const headerText = 'Cell content'
+    const { getByText } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell as="th">{headerText}</Cell>
+          </Row>
+        </Head>
+        <Body>
+          <Row>
+            <Cell>{cellText}</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+
+    expect(getByText(headerText)).toHaveStyleRule(
+      'height',
+      headerCellToken.height,
+    )
+    expect(getByText(cellText)).toHaveStyleRule('height', dataCellToken.height)
+  })
+  it('Has compact density', () => {
+    const cellText = 'Header content'
+    const headerText = 'Cell content'
+    const { getByText } = render(
+      <Table density="compact">
+        <Head>
+          <Row>
+            <Cell as="th">{headerText}</Cell>
+          </Row>
+        </Head>
+        <Body>
+          <Row>
+            <Cell>{cellText}</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+
+    expect(getByText(headerText)).toHaveStyleRule(
+      'height',
+      headerCellToken.density.compact.height,
+    )
+    expect(getByText(cellText)).toHaveStyleRule(
+      'height',
+      dataCellToken.density.compact.height,
+    )
+  })
 })

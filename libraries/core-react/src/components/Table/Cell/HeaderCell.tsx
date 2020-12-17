@@ -3,6 +3,8 @@ import { ThHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, spacingsTemplate } from '@utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
+import { useTable } from '../Table.context'
+import { applyDensity } from './utils'
 
 type BaseProps = {
   token: TableHeadToken
@@ -31,8 +33,11 @@ export const TableHeaderCell = ({
   children,
   ...rest
 }: CellProps): JSX.Element => {
+  const { density } = useTable()
+  const token = applyDensity(density, tablehead)
+
   return (
-    <StyledTableCell token={tablehead} {...rest}>
+    <StyledTableCell token={token} {...rest}>
       {children}
     </StyledTableCell>
   )

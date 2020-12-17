@@ -1,11 +1,19 @@
-import { Table as BaseComponent, TableProps } from './Table'
+import * as React from 'react'
+import { Table as BaseTable, TableProps } from './Table'
 import { Body } from './Body'
 import { Cell } from './Cell'
 import { Head } from './Head'
 import { Row } from './Row'
 import { Caption } from './Caption'
+import { TableProvider } from './Table.context'
 
-type TableCompoundProps = typeof BaseComponent & {
+const TableWrapper = (props: TableProps) => (
+  <TableProvider>
+    <BaseTable {...props}></BaseTable>
+  </TableProvider>
+)
+
+type TableCompoundProps = typeof BaseTable & {
   Body: typeof Body
   Cell: typeof Cell
   Head: typeof Head
@@ -13,7 +21,7 @@ type TableCompoundProps = typeof BaseComponent & {
   Caption: typeof Caption
 }
 
-const Table = BaseComponent as TableCompoundProps
+const Table = TableWrapper as TableCompoundProps
 
 Table.Body = Body
 Table.Cell = Cell
