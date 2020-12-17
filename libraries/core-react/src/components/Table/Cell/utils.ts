@@ -3,7 +3,6 @@ import { TableHeadToken } from './HeaderCell.tokens'
 import { Density } from '../Table.types'
 
 type Cell = TableCellToken | TableHeadToken
-type ApplyDensity<T> = (density: Density, token: Partial<Cell>) => T
 
 export const applyDensity = <T extends Cell>(density: Density, token: T): T => {
   switch (density) {
