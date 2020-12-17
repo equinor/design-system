@@ -229,7 +229,6 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     }
 
     const toggleFocus = (i: number, drawerListId: string) => {
-      console.log('focus', i, drawerListId)
       if (focusedIndex !== i) {
         setFocusedIndex(i, drawerListId)
       }
@@ -297,6 +296,27 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     // console.log('item children', updatedChildren[0].props)
 
     let isNested = false
+
+    const itemChildren = React.Children.map(
+      children,
+      (child: ChildType, childIndex) => {
+        if (typeof child === 'string') {
+          return (
+            <Typography
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${index}-anchor-${childIndex}`}
+              variant="body_short"
+              role="menuitem"
+              link
+              href={href}
+              tabIndex={0}
+            >
+              {child}
+            </Typography>
+          )
+        }
+      },
+    )
 
     if (
       typeof children !== 'object' &&

@@ -5,6 +5,7 @@ import React, {
   ReactElement,
   useRef,
   useState,
+  isValidElement,
   MouseEvent,
   useEffect,
   AnchorHTMLAttributes,
@@ -165,6 +166,10 @@ type DrawerListChildrenType = {
 } & Pick<DrawerListProps, 'level' | 'open'> &
   React.ReactElement
 
+type ChildType = {
+  disabled?: boolean
+} & React.ReactElement
+
 export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
   function DrawerList(
     {
@@ -190,7 +195,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
 
     const ListItems = React.Children.map(children, (child, index) => {
       if (!child) return null
-      console.log(child)
+
       return React.cloneElement(child as ReactElement, {
         drawerListId,
         index,
@@ -227,7 +232,49 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
       }
     }
 
-    const isGrandparent = level === 'grandparent'
+    let itemElements
+    let updatedChildren
+
+    // Experimenting with useMenuItem from react aria
+    // let refLi = React.useRef<HTMLLIElement>(null)
+    // let { menuItemProps } = useMenuItem(
+    //   {
+    //     key: index,
+    //     isDisabled: disabled,
+    //     // onAction
+    //   },
+    //   // state,
+    //   refLi,
+    // )
+
+    // const [isFocusedState, setFocused] = useState(false) // New isfocused
+    // const { focusProps } = useFocus({ onFocusChange: setFocused })
+
+    let Child
+
+    if (Array.isArray(children)) {
+      updatedChildren = React.Children.map(children, (child: ChildType) => {
+        // console.log('item child', child.type.displayName)
+        if (isValidElement(child) && child.type === DrawerList) {
+          return React.cloneElement(child, {
+            disabled,
+          })
+        }
+      })
+      itemElements = React.Children.map(children, (child: ChildType) => {
+        if (!isValidElement(child) || child.type !== DrawerList) {
+          return React.cloneElement(child, {
+            disabled,
+          })
+        }
+      })
+    } else {
+      updatedChildren = [
+        React.cloneElement(children as ChildType, {
+          disabled,
+        }),
+      ]
+    }
 
     const chevronIcon = (
       <StyledIcon
@@ -284,6 +331,7 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
           ref={ref}
         >
           {ListItems}
+          {isExpanded ? updatedChildren : null}
         </StyledDrawerList>
       </>
     )

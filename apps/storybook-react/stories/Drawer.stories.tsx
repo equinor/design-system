@@ -15,13 +15,7 @@ import {
   world,
 } from '@equinor/eds-icons'
 
-const {
-  DrawerList,
-  // DrawerTreeItem,
-  DrawerItem,
-  // DrawerSubtitle,
-  DrawerLabel,
-} = Drawer
+const { DrawerList, DrawerItem, DrawerLabel } = Drawer
 const { Header, CustomContent } = TopBar
 
 const icons = {
@@ -75,7 +69,7 @@ export default {
   },
 } as Meta
 
-export const NewDesign: Story<DrawerProps> = () => {
+export const Default: Story<DrawerProps> = () => {
   return (
     <>
       <TopBar>

@@ -3,7 +3,7 @@ import { useState, useEffect, MutableRefObject } from 'react'
 export const useKeyboardNavigation = (
   ref: MutableRefObject<HTMLElement>,
   size: number,
-  callback: () => void,
+  // callback: () => void,
 ): number => {
   const [activeIndex, setActiveIndex] = useState(0)
 

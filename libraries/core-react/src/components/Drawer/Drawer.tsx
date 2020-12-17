@@ -28,7 +28,7 @@ const StyledList = styled(List)`
 export type DrawerProps = {
   overlay?: boolean
   /** Is Menu open */
-  focusedIndex?: number
+  // focusedIndex?: number
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
   /** Description  of the drawer (needed for screen readers) */
