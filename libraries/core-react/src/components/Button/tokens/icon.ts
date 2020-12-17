@@ -7,6 +7,7 @@ import { ButtonToken } from '../Button.types'
 const {
   colors: {
     interactive: {
+      primary__resting: { rgba: primaryColor },
       primary__hover_alt: { rgba: primaryHoverAltColor },
       secondary__resting: { rgba: secondaryColor },
       secondary__link_hover: { rgba: secondaryHoverColor },
@@ -24,6 +25,9 @@ const buttonSize = 40
 export const primary: ButtonToken = R.mergeDeepRight(button, {
   height: `${buttonSize}px`,
   width: `${buttonSize}px`,
+  typography: {
+    color: primaryColor,
+  },
   border: {
     radius: '50%',
   },
