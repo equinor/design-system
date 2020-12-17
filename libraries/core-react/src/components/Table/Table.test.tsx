@@ -5,9 +5,12 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Table } from '.'
 import styled from 'styled-components'
-import { token } from './Cell/DataCell.tokens'
+import { token as dataCellToken } from './Cell/DataCell.tokens'
+import { token as headerCellToken } from './Cell/HeaderCell.tokens'
 
 const { Caption, Cell, Head, Row, Body } = Table
+
+const trim = (x: string): string => x.replace(/ /g, '')
 
 afterEach(cleanup)
 
@@ -94,14 +97,17 @@ describe('Table', () => {
     )
     const headElement = getByText(header).closest('thead')
     const regularContent = getByText(body)
-    const cellBackground = token.background.replace(/ /g, '')
+    const cellBackground = trim(headerCellToken.background)
+    const cellBorderBottom =
+      headerCellToken.border.type === 'bordergroup'
+        ? `${headerCellToken.border.bottom.width} ${
+            headerCellToken.border.bottom.style
+          } ${trim(headerCellToken.border.bottom.color)}`
+        : ''
 
-    expect(headElement).not.toHaveStyleRule('background', cellBackground)
-    expect(headElement).toHaveStyleRule(
-      'border-bottom',
-      '2px solid rgba(220,220,220,1)',
-    )
-    expect(regularContent).toHaveStyleRule('background', cellBackground)
+    expect(headElement).toHaveStyleRule('background', cellBackground)
+    expect(headElement).toHaveStyleRule('border-bottom', cellBorderBottom)
+    expect(regularContent).not.toHaveStyleRule('background', cellBackground)
   })
 
   it('Adjusts font for better readability if the text is a number', () => {
@@ -115,11 +121,11 @@ describe('Table', () => {
         </Body>
       </Table>,
     )
-    const typography = {
-      ...token.typography,
-      ...token.variants.numeric.typography,
-    }
-    const trimmedFontFeature = typography.fontFeature.replace(/\s*,\s*/g, ',')
+
+    const trimmedFontFeature = dataCellToken.variants.numeric.typography.fontFeature.replace(
+      /\s*,\s*/g,
+      ',',
+    )
     expect(getByText(text)).toHaveStyleRule(
       'font-feature-settings',
       trimmedFontFeature,
@@ -133,5 +139,40 @@ describe('Table', () => {
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledTable />)
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+  })
+
+  it('Has correct color on active row', () => {
+    render(
+      <Table>
+        <Body>
+          <Row active data-testid="row">
+            <Cell>active</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+
+    const row = screen.getByTestId('row')
+    expect(row).toHaveStyleRule(
+      'background',
+      trim(dataCellToken.states.active.background),
+    )
+  })
+  it('Has correct color on error cell even when active', () => {
+    render(
+      <Table>
+        <Body>
+          <Row active>
+            <Cell color="error">error</Cell>
+          </Row>
+        </Body>
+      </Table>,
+    )
+
+    const cell = screen.getByText('error')
+    expect(cell).toHaveStyleRule(
+      'background',
+      trim(dataCellToken.validation.error.background),
+    )
   })
 })

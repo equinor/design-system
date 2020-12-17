@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Story, Meta } from '@storybook/react/types-6-0'
-import { Table, TableProps, Typography } from '@equinor/eds-core-react'
+import { Story, Meta } from '@storybook/react'
+import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
 import './../style.css'
 
 const { Caption, Body, Row, Cell, Head } = Table
@@ -47,6 +47,18 @@ export const simpleTable: Story<TableProps> = () => (
         <Cell>Darth Vader</Cell>
         <Cell>Sith</Cell>
         <Cell variant="numeric">59</Cell>
+      </Row>
+      <Row>
+        <Cell>Boba Fett</Cell>
+        <Cell>Independet</Cell>
+        <Cell variant="numeric" color="error">
+          1
+        </Cell>
+      </Row>
+      <Row active>
+        <Cell>Jar Jar Binks</Cell>
+        <Cell>Republic</Cell>
+        <Cell variant="numeric">44</Cell>
       </Row>
     </Body>
   </Table>
