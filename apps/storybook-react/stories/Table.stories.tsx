@@ -17,10 +17,19 @@ export default {
       },
     },
   },
+  argTypes: {
+    density: {
+      control: {
+        type: 'select',
+        options: ['comfortable', 'compact'],
+        defaultValue: 'comfortable',
+      },
+    },
+  },
 } as Meta
 
-export const simpleTable: Story<TableProps> = () => (
-  <Table>
+export const simpleTable: Story<TableProps> = (args) => (
+  <Table {...args}>
     <Caption>
       <Typography variant="h2">Star Wars Kill Count</Typography>
     </Caption>
