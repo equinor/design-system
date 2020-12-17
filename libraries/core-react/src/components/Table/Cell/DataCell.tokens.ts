@@ -42,6 +42,17 @@ type Variants = {
 export type TableCellToken = ComponentToken & {
   validation: Validation
   variants: Variants
+  density: Density
+}
+
+type Density = {
+  compact: ComponentToken
+}
+
+const density: Density = {
+  compact: {
+    height: '32px',
+  },
 }
 
 const tableCell: ComponentToken = {
@@ -118,4 +129,5 @@ export const token: TableCellToken = {
   ...tableCell,
   validation,
   variants,
+  density,
 }

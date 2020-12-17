@@ -27,6 +27,20 @@ const {
   },
 } = tokens
 
+export type TableHeadToken = ComponentToken & {
+  density: Density
+}
+
+type Density = {
+  compact: ComponentToken
+}
+
+const density: Density = {
+  compact: {
+    height: '32px',
+  },
+}
+
 const tableHead: ComponentToken = {
   height: '48px',
   background: backgroundColor,
@@ -83,6 +97,4 @@ const tableHead: ComponentToken = {
   },
 }
 
-export type TableHeadToken = ComponentToken
-
-export const token: TableHeadToken = tableHead
+export const token: TableHeadToken = { ...tableHead, density }
