@@ -43,7 +43,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
     ...rest,
     overlay,
   }
-  const { setOnClose, onClose } = useDrawer()
+  const { focusedIndex, setFocusedIndex, setOnClose, onClose } = useDrawer()
 
   useEffect(() => {
     document.addEventListener('keydown', handleGlobalKeyPress, true)
@@ -63,14 +63,18 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
         }
 
         break
+      case 'ArrowDown':
+        setFocusedIndex(focusedIndex + 1, 'id')
+        break
+      case 'ArrowUp':
+        setFocusedIndex(focusedIndex - 1, 'id')
+        break
       default:
         break
     }
   }
 
   const navProps = ariaLabel && { 'aria-label': ariaLabel }
-
-  console.log(props)
 
   return (
     <StyledDrawerContainer {...navProps}>

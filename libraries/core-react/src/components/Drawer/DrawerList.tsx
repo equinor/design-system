@@ -186,8 +186,11 @@ export const DrawerList = forwardRef<HTMLUListElement, DrawerListProps>(
     const { focusedIndex, setFocusedIndex } = useDrawer()
     const [isExpanded, setIsExpanded] = useState(open)
 
+    //console.log(isExpanded, children)
+
     const ListItems = React.Children.map(children, (child, index) => {
       if (!child) return null
+      console.log(child)
       return React.cloneElement(child as ReactElement, {
         drawerListId,
         index,

@@ -228,14 +228,16 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
       }
     }
 
-    const toggleFocus = (i: number) => {
+    const toggleFocus = (i: number, drawerListId: string) => {
+      console.log('focus', i, drawerListId)
       if (focusedIndex !== i) {
-        setFocusedIndex(i)
+        setFocusedIndex(i, drawerListId)
       }
     }
 
     const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
       const { key } = event
+
       if (key === 'Enter' || (key === ' ' && !disabled)) {
         //console.log('click enter or space', index, rest)
         setDrawerOpen(!drawerOpen)
@@ -302,7 +304,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
       children !== null
     ) {
       Child = React.Children.map(children, (child, childIndex) => {
-        console.log(children)
+        // console.log(children)
         return (
           <Typography
             // eslint-disable-next-line react/no-array-index-key
@@ -340,7 +342,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
           ref,
           (el: HTMLLIElement) => isFocused && el.focus(),
         )}
-        onFocus={() => toggleFocus(index)}
+        onFocus={() => toggleFocus(index, drawerListId)}
         // onClick={(e) => {
         //   if (!disabled && onClick) {
         //     onClick(e)

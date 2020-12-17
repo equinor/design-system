@@ -109,7 +109,7 @@ export const NewDesign: Story<DrawerProps> = () => {
                   <DrawerItem>Inner Child 2</DrawerItem>
                 </DrawerList>
               </DrawerItem>
-              <DrawerItem>Child 1</DrawerItem>
+              <DrawerItem>Outer 1</DrawerItem>
             </DrawerList>
           </DrawerItem>
         </Drawer>
