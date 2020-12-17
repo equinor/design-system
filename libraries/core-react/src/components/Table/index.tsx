@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { FC } from 'react'
 import { Table as BaseTable, TableProps } from './Table'
 import { Body } from './Body'
 import { Cell } from './Cell'
@@ -8,7 +7,7 @@ import { Row } from './Row'
 import { Caption } from './Caption'
 import { TableProvider } from './Table.context'
 
-const TableWrapper: FC<TableProps> = (props) => (
+const TableWrapper = (props: TableProps) => (
   <TableProvider>
     <BaseTable {...props}></BaseTable>
   </TableProvider>
