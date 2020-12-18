@@ -121,8 +121,10 @@ const StyledDrawerList = styled(List).attrs<DrawerListProps>(
           > li {
             /* border-left: none; */
           }
-        `}/* ${({ level }) =>
-    level === 'grandparent' &&
+        `}
+
+  ${({ isExpandable }) =>
+    isExpandable &&
     css`
       > li {
         border-left: none;
@@ -141,7 +143,7 @@ const StyledDrawerList = styled(List).attrs<DrawerListProps>(
       > li > a {
         border-left: none;
       }
-    `} */
+    `}
 `
 
 type DrawerListProps = {

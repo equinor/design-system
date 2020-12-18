@@ -30,7 +30,6 @@ type UseDrawer<T> = T & {
 export const DrawerProvider = ({ children }: ProviderProps): JSX.Element => {
   const [state, setState] = useState<State>(initalState)
   const { focusedIndex, onClose } = state
-
   const setFocusedIndex: UseDrawer<State>['setFocusedIndex'] = (
     i,
     drawerListId,
@@ -50,7 +49,6 @@ export const DrawerProvider = ({ children }: ProviderProps): JSX.Element => {
     onClose,
   }
 
-  console.log(value)
   return (
     <DrawerContext.Provider value={value}>{children}</DrawerContext.Provider>
   )

@@ -7,6 +7,7 @@ export const useKeyboardNavigation = (
 ): number => {
   const [activeIndex, setActiveIndex] = useState(0)
 
+  // only made for single tree structure, how to adjust it for nesting?
   const handleKeyPress = (event) => {
     if (event.key === 'ArrowDown') {
       setActiveIndex((prev) => (prev < size ? prev + 1 : 0))

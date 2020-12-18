@@ -6,6 +6,7 @@ import React, {
   ReactElement,
   MouseEvent,
   KeyboardEvent,
+  useRef,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
@@ -206,19 +207,9 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     // Add a level check and deeper context levels
 
     const [drawerOpen, setDrawerOpen] = useState(open)
+    const refLi = React.useRef<HTMLAnchorElement>(null)
 
-    // const isNested =
-    //   drawerListId && drawerListId.includes('child') ? true : false
-
-    // let isNested: boolean
-    // if ((drawerListId && drawerListId.includes('child')) || !drawerListId) {
-    //   isNested = false
-    // } else {
-    //   isNested = true
-    // }
-
-    //const isNested = false
-
+    // old logic before moving label up to DrawerList
     const handleClick = (event: MouseEvent<HTMLLIElement, MouseEvent>) => {
       if (!disabled) {
         //console.log('click', index, rest)
@@ -234,6 +225,7 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
       }
     }
 
+    // TODO: Move this to List instead
     const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
       const { key } = event
 
@@ -250,7 +242,6 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     let updatedChildren
 
     // Experimenting with useMenuItem from react aria
-    // let refLi = React.useRef<HTMLLIElement>(null)
     // let { menuItemProps } = useMenuItem(
     //   {
     //     key: index,
@@ -260,9 +251,6 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
     //   // state,
     //   refLi,
     // )
-
-    // const [isFocusedState, setFocused] = useState(false) // New isfocused
-    // const { focusProps } = useFocus({ onFocusChange: setFocused })
 
     let Child
 
@@ -289,18 +277,14 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
         }),
       ]
     }
-    // const isNested =
-    //   updatedChildren[0].props.children &&
-    //   updatedChildren[0].props.children.length > 0 &&
-    //   Array.isArray(updatedChildren[0].props.children)
-    // console.log('item children', updatedChildren[0].props)
 
-    let isNested = false
+    let isNested: boolean
 
     const itemChildren = React.Children.map(
       children,
       (child: ChildType, childIndex) => {
         if (typeof child === 'string') {
+          isNested = false
           return (
             <Typography
               // eslint-disable-next-line react/no-array-index-key
@@ -314,6 +298,8 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
               {child}
             </Typography>
           )
+        } else {
+          isNested = true
         }
       },
     )
@@ -333,14 +319,13 @@ export const DrawerItem = forwardRef<HTMLLIElement, DrawerItemProps>(
             role="menuitem"
             link
             href={href}
+            ref={refLi}
             tabIndex={0}
           >
             {child}
           </Typography>
         )
       })
-    } else {
-      isNested = true
     }
 
     const props = {
