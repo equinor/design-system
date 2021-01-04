@@ -54,7 +54,25 @@ export default {
   component: Icon,
   argTypes: {
     name: {
+      control: {
+        type: 'select',
+        options: [
+          'layers',
+          'layers_off',
+          'grid_off',
+          'compare',
+          'work',
+          'pregnant_woman',
+          'accessible_forward',
+          'save',
+          'info_circle',
+          'list',
+          'filter_alt',
+        ],
+      },
       defaultValue: 'save',
+      description:
+        'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
     color: {
       control: 'color',
