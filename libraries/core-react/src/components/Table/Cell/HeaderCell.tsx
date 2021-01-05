@@ -8,9 +8,11 @@ import { applyDensity } from './utils'
 
 type BaseProps = {
   token: TableHeadToken
+  'aria-sort'?: React.AriaAttributes['aria-sort']
 }
 
-const Base = ({ token }: BaseProps) => {
+const Base = (props: BaseProps) => {
+  const { token } = props
   const { background, height, typography, spacings } = token
 
   const base = css`
@@ -19,6 +21,14 @@ const Base = ({ token }: BaseProps) => {
     background: ${background};
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
+
+    &:hover {
+      ${props['aria-sort']
+        ? css`
+            background: ${token.states.hover.background};
+          `
+        : ''}
+    }
   `
   return base
 }
@@ -27,17 +37,20 @@ const StyledTableCell = styled.th`
   ${Base}
 `
 
-type CellProps = ThHTMLAttributes<HTMLTableHeaderCellElement>
+type CellProps = {
+  sortDirection?: React.AriaAttributes['aria-sort']
+} & ThHTMLAttributes<HTMLTableHeaderCellElement>
 
 export const TableHeaderCell = ({
   children,
+  sortDirection,
   ...rest
 }: CellProps): JSX.Element => {
   const { density } = useTable()
   const token = applyDensity(density, tablehead)
 
   return (
-    <StyledTableCell token={token} {...rest}>
+    <StyledTableCell token={token} aria-sort={sortDirection} {...rest}>
       {children}
     </StyledTableCell>
   )

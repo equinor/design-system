@@ -38,11 +38,14 @@ export const simpleTable: Story<TableProps> = (args) => (
         <Cell as="th" scope="col">
           Name
         </Cell>
-        <Cell as="th" scope="col">
+        <Cell as="th" scope="col" sortDirection="none">
           Allegiance
         </Cell>
         <Cell as="th" scope="col">
           Kill count
+          <Typography group="input" variant="label">
+            (num)
+          </Typography>
         </Cell>
       </Row>
     </Head>
