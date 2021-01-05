@@ -43,7 +43,7 @@ export const simpleTable: Story<TableProps> = (args) => (
         </Cell>
         <Cell as="th" scope="col" sortDirection="ascending">
           Kill count
-          <Typography group="input" variant="label" color="currentColor">
+          <Typography group="input" variant="label">
             (num)
           </Typography>
         </Cell>
