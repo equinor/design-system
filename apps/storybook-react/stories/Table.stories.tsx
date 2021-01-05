@@ -41,9 +41,9 @@ export const simpleTable: Story<TableProps> = (args) => (
         <Cell as="th" scope="col" sortDirection="none">
           Allegiance
         </Cell>
-        <Cell as="th" scope="col">
+        <Cell as="th" scope="col" sortDirection="ascending">
           Kill count
-          <Typography group="input" variant="label">
+          <Typography group="input" variant="label" color="currentColor">
             (num)
           </Typography>
         </Cell>

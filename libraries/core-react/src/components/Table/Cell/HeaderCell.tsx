@@ -1,7 +1,9 @@
 import * as React from 'react'
+import * as R from 'ramda'
+
 import { ThHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate, spacingsTemplate } from '@utils'
+import { typographyTemplate, spacingsTemplate, bordersTemplate } from '@utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
 import { useTable } from '../Table.context'
 import { applyDensity } from './utils'
@@ -14,6 +16,25 @@ type BaseProps = {
 const Base = (props: BaseProps) => {
   const { token } = props
   const { background, height, typography, spacings } = token
+  let sortStylingHover = css({})
+  let sortStylingActive = css({})
+
+  if (props['aria-sort']) {
+    sortStylingHover = css`
+      &:hover {
+        background: ${token.states.hover.background};
+      }
+    `
+  }
+
+  if (props['aria-sort'] && props['aria-sort'] !== 'none') {
+    const active = R.mergeDeepRight(token, token.states.active)
+    sortStylingActive = css`
+      ${bordersTemplate(active.border)}
+      background: ${active.background};
+      color: ${active.typography.color};
+    `
+  }
 
   const base = css`
     min-height: ${height};
@@ -21,15 +42,11 @@ const Base = (props: BaseProps) => {
     background: ${background};
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
-
-    &:hover {
-      ${props['aria-sort']
-        ? css`
-            background: ${token.states.hover.background};
-          `
-        : ''}
-    }
+    ${bordersTemplate(token.border)}
+    ${sortStylingHover}
+    ${sortStylingActive}
   `
+
   return base
 }
 
