@@ -56,19 +56,7 @@ export default {
     name: {
       control: {
         type: 'select',
-        options: [
-          'layers',
-          'layers_off',
-          'grid_off',
-          'compare',
-          'work',
-          'pregnant_woman',
-          'accessible_forward',
-          'save',
-          'info_circle',
-          'list',
-          'filter_alt',
-        ],
+        options: Object.keys(icons),
       },
       defaultValue: 'save',
       description:
