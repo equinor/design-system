@@ -54,7 +54,13 @@ export default {
   component: Icon,
   argTypes: {
     name: {
+      control: {
+        type: 'select',
+        options: Object.keys(icons),
+      },
       defaultValue: 'save',
+      description:
+        'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
     color: {
       control: 'color',
