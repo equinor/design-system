@@ -16,19 +16,23 @@ const BaseInputWrapper = styled.span<StyledProps>`
 `
 
 const InputWrapperDefault = styled(BaseInputWrapper)`
-  &:hover {
-    background-color: ${({ isDisabled }) =>
-      isDisabled ? 'transparent' : enabled.hover.background};
-  }
-  &:hover > span:last-child {
-    background-color: ${({ isDisabled }) =>
-      isDisabled ? _disabled.background : enabled.hover.handle.background};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ isDisabled }) =>
+        isDisabled ? 'transparent' : enabled.hover.background};
+    }
+    &:hover > span:last-child {
+      background-color: ${({ isDisabled }) =>
+        isDisabled ? _disabled.background : enabled.hover.handle.background};
+    }
   }
 `
 const InputWrapperSmall = styled(BaseInputWrapper)`
-  &:hover {
-    background-color: ${({ isDisabled }) =>
-      isDisabled ? 'transparent' : enabled.hover.background};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ isDisabled }) =>
+        isDisabled ? 'transparent' : enabled.hover.background};
+    }
   }
 `
 

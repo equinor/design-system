@@ -69,9 +69,11 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-flex;
   border-radius: 50%;
   padding: ${enabled.padding};
-  &:hover {
-    background-color: ${({ disabled }) =>
-      disabled ? 'transparent' : color.hover};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ disabled }) =>
+        disabled ? 'transparent' : color.hover};
+    }
   }
 `
 export type InputProps = {
