@@ -3,6 +3,7 @@
 This package is a collection of the `system icons` from the Equinor Design System as javascript objects.
 
 ## Installation
+Make sure you have Typescript v3.8 or newer
 
 ```sh
 npm install @equinor/eds-icons 

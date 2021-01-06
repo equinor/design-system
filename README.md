@@ -101,6 +101,7 @@ The [storefront][] is the official documentation for the EDS. As we’re getting
 This is the main implementation of the EDS, and will eventually contain accessible React components of each and every EDS component in Figma.
 
 ### Installation
+Make sure you have Typescript v3.8 or newer
 
 ```sh
 npm install @equinor/eds-core-react styled-components
