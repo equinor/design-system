@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useTable, useSortBy, Column } from 'react-table'
 import { Story, Meta } from '@storybook/react'
-import { Table, TableProps, Typography } from '@equinor/eds-core-react'
+import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
+import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import './../style.css'
+
+Icon.add({ chevron_down, chevron_up })
 
 const { Caption, Body, Row, Cell, Head } = Table
 
@@ -38,14 +42,16 @@ export const simpleTable: Story<TableProps> = (args) => (
         <Cell as="th" scope="col">
           Name
         </Cell>
-        <Cell as="th" scope="col" sortDirection="none">
+        <Cell as="th" scope="col" sort="none">
           Allegiance
+          <Icon name="chevron_down" />
         </Cell>
-        <Cell as="th" scope="col" sortDirection="ascending">
+        <Cell as="th" scope="col" sort="ascending">
           Kill count
           <Typography group="input" variant="label">
             (num)
           </Typography>
+          <Icon name="chevron_down" />
         </Cell>
       </Row>
     </Head>
@@ -166,6 +172,106 @@ export const CompactTable: Story<TableProps> = () => {
               <Cell>{item.number}</Cell>
               <Cell>{item.name}</Cell>
               <Cell>{item.colour}</Cell>
+            </Row>
+          )
+        })}
+      </Body>
+    </Table>
+  )
+}
+
+export const Sortable: Story<TableProps> = (args) => {
+  const columns: Column<HackHead>[] = React.useMemo(
+    () => [
+      {
+        Header: 'Number',
+        accessor: 'number',
+      },
+      {
+        Header: 'Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Colour',
+        accessor: 'colour',
+      },
+    ],
+    [],
+  )
+
+  const data: HackHead[] = [
+    { number: '1', name: 'Banana', colour: 'Yellow' },
+    { number: '2', name: 'Orange', colour: 'Orange' },
+    { number: '4', name: 'Kiwi', colour: 'Greenish' },
+  ]
+
+  type HackHead = {
+    number: string
+    name: string
+    colour: string
+    isSorted?: boolean
+    isSortedDesc?: boolean
+  }
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useSortBy,
+  )
+  /* eslint-disable react/jsx-key  */
+
+  return (
+    <Table {...args} {...getTableProps()}>
+      <Head>
+        {headerGroups.map((headerGroup, i) => (
+          <Row {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column, i) => {
+              const hackedCol = (column as unknown) as HackHead
+              return (
+                <Cell
+                  {...column.getHeaderProps()}
+                  as="th"
+                  scope="col"
+                  sort={
+                    hackedCol.isSorted
+                      ? hackedCol.isSortedDesc
+                        ? 'descending'
+                        : 'ascending'
+                      : 'none'
+                  }
+                >
+                  {column.render('Header')}
+                  {hackedCol.isSorted && (
+                    <Icon
+                      name={
+                        hackedCol.isSortedDesc ? 'chevron_down' : 'chevron_up'
+                      }
+                    />
+                  )}
+                </Cell>
+              )
+            })}
+          </Row>
+        ))}
+      </Head>
+      <Body {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+          prepareRow(row)
+          return (
+            <Row {...row.getRowProps()}>
+              {row.cells.map((cell) => {
+                return (
+                  <Cell {...cell.getCellProps()}>{cell.render('Cell')}</Cell>
+                )
+              })}
             </Row>
           )
         })}

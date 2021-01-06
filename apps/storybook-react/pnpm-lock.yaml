@@ -3,9 +3,11 @@ dependencies:
   '@equinor/eds-icons': 'link:../../libraries/icons'
   '@equinor/eds-tokens': 'link:../../libraries/tokens'
   '@storybook/react': 6.1.9_41259c06f59eda38314dba9dae4ab49a
+  '@types/react-table': 7.0.26
   babel-runtime: 6.26.0
   react-dom: 17.0.1_react@17.0.1
   react-hook-form: 6.12.1_react@17.0.1
+  react-table: 7.6.2_react@17.0.1
   styled-components: 5.2.1_5544908854c626bd13d8795d8f0cae8d
   typescript: 4.1.2
 devDependencies:
@@ -2177,6 +2179,12 @@ packages:
       '@types/react': 17.0.0
     resolution:
       integrity: sha512-9GfTo3a0PHwQeTVoqs0g5bS28KkSY48pp5659wA+Dp4MqceDEa8EHBqrllJvvtyusszyJhViUEap0FDvlk/9Zg==
+  /@types/react-table/7.0.26:
+    dependencies:
+      '@types/react': 17.0.0
+    dev: false
+    resolution:
+      integrity: sha512-LF1wKGXo5LN1MY5DqD8aaqHaIpN2atZ+NslxG0P8TNUdrZATqZ9lD6b81OQB6GjtN7n7Jw48TqfP5apOMyfulQ==
   /@types/react/17.0.0:
     dependencies:
       '@types/prop-types': 15.7.3
@@ -7519,6 +7527,14 @@ packages:
       react: '>= 0.14.0'
     resolution:
       integrity: sha512-crPaF+QGPeHNIblxxCdf2Lg936NAHKhNhuMzRL3F9ct6aYXL3NcZtCL0Rms9+qVo6Y1EQLdXGypBNSbPL/r+qg==
+  /react-table/7.6.2_react@17.0.1:
+    dependencies:
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      react: ^16.8.3 || ^17.0.0-0
+    resolution:
+      integrity: sha512-urwNZTieb+xg/+BITUIrqdH5jZfJlw7rKVAAq25iXpBPwbQojLCEKJuGycLbVwn8fzU+Ovly3y8HHNaLNrPCvQ==
   /react-textarea-autosize/8.3.0_@types+react@17.0.0+react@17.0.1:
     dependencies:
       '@babel/runtime': 7.12.5
@@ -9198,6 +9214,7 @@ specifiers:
   '@storybook/theming': ^6.1.9
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
+  '@types/react-table': ^7.0.26
   '@types/styled-components': ^5.1.4
   babel-loader: ^8.2.2
   babel-runtime: ^6.26.0
@@ -9206,5 +9223,6 @@ specifiers:
   react-dom: ^17.0.1
   react-hook-form: ^6.12.1
   react-is: ^17.0.1
+  react-table: ^7.6.2
   styled-components: ^5.2.1
   typescript: ^4.1.2

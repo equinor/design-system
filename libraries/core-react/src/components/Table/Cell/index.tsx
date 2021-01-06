@@ -12,7 +12,7 @@ type CellProps = {
   /** Specifies cell background color */
   color?: Colors
   /** Specifies cell sort direction */
-  sortDirection?: React.AriaAttributes['aria-sort']
+  sort?: React.AriaAttributes['aria-sort']
 } & (
   | TdHTMLAttributes<HTMLTableDataCellElement>
   | ThHTMLAttributes<HTMLTableHeaderCellElement>

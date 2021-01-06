@@ -10,29 +10,34 @@ import { applyDensity } from './utils'
 
 type BaseProps = {
   token: TableHeadToken
-  'aria-sort'?: React.AriaAttributes['aria-sort']
-}
+} & Pick<React.AriaAttributes, 'aria-sort'>
 
 const Base = (props: BaseProps) => {
   const { token } = props
   const { background, height, typography, spacings } = token
+  const activeToken = token.states.active
+  const ariaSort = props['aria-sort']
   let sortStylingHover = css({})
   let sortStylingActive = css({})
 
-  if (props['aria-sort']) {
+  if (ariaSort) {
     sortStylingHover = css`
       &:hover {
+        cursor: pointer;
         background: ${token.states.hover.background};
       }
     `
   }
 
-  if (props['aria-sort'] && props['aria-sort'] !== 'none') {
-    const active = R.mergeDeepRight(token, token.states.active)
+  if (ariaSort && ariaSort !== 'none') {
     sortStylingActive = css`
-      ${bordersTemplate(active.border)}
-      background: ${active.background};
-      color: ${active.typography.color};
+      ${activeToken.border.type === 'bordergroup'
+        ? css`
+            border-color: ${activeToken.border.bottom.color};
+          `
+        : ''};
+      background: ${activeToken.background};
+      color: ${activeToken.typography.color};
     `
   }
 
@@ -55,19 +60,19 @@ const StyledTableCell = styled.th`
 `
 
 type CellProps = {
-  sortDirection?: React.AriaAttributes['aria-sort']
+  sort?: React.AriaAttributes['aria-sort']
 } & ThHTMLAttributes<HTMLTableHeaderCellElement>
 
 export const TableHeaderCell = ({
   children,
-  sortDirection,
+  sort,
   ...rest
 }: CellProps): JSX.Element => {
   const { density } = useTable()
   const token = applyDensity(density, tablehead)
 
   return (
-    <StyledTableCell token={token} aria-sort={sortDirection} {...rest}>
+    <StyledTableCell token={token} aria-sort={sort} {...rest}>
       {children}
     </StyledTableCell>
   )
