@@ -398,9 +398,9 @@
       <title>restore_from_trash</title>
       <desc>ui-action-restore_from_trash</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 3l1 1H19v2H5V4h3.5l1-1h5zM8 21c-1.1 0-2-.9-2-2V7h12v12c0 1.1-.9 2-2 2H8zm0-7V9h8v5l-4-4-4 4zm0 0v5h8v-5h-2v4h-4v-4H8z"/>
-    </symbol><symbol id="close_cricle_outlined" viewBox="0 0 24 24">
-      <title>close_cricle_outlined</title>
-      <desc>ui-action-close_cricle_outlined</desc>
+    </symbol><symbol id="close_circle_outlined" viewBox="0 0 24 24">
+      <title>close_circle_outlined</title>
+      <desc>ui-action-close_circle_outlined</desc>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-9.41L15.59 7 17 8.41 13.41 12 17 15.59 15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59z"/>
     </symbol><symbol id="close" viewBox="0 0 24 24">
       <title>close</title>
