@@ -3,11 +3,15 @@
 [Design tokens] used in the Equinor Design System (EDS), such as colours, typography, spacings etc…
 
 ## Installation
-Make sure you have Typescript v3.8 or newer
 
 ```sh
 npm install @equinor/eds-tokens
 ```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
+```
+
 ## Usage
 
 ```js 

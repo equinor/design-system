@@ -101,10 +101,13 @@ The [storefront][] is the official documentation for the EDS. As we’re getting
 This is the main implementation of the EDS, and will eventually contain accessible React components of each and every EDS component in Figma.
 
 ### Installation
-Make sure you have Typescript v3.8 or newer
 
 ```sh
 npm install @equinor/eds-core-react styled-components
+```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
 ```
 
 ### Usage
@@ -128,10 +131,13 @@ All the icons are available in the [storefront](https://eds.equinor.com/assets/s
 The following example uses the `<Icon>` component from `@equinor/eds-core-react` – but the icons package can also be used without React.
 
 ### Installation
-Make sure you have Typescript v3.8 or newer
 
 ```sh
 npm install @equinor/eds-icons @equinor/eds-core-react
+```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
 ```
 
 ### Usage
@@ -150,10 +156,13 @@ Icon.add({ info_circle })
 Design tokens are design decisions from Figma extracted into code, and form the basis for the [EDS Core React library](#react). For projects that don’t use React, the tokens are available as an independent NPM package that can be used to build your own implementation of the EDS in your technology of choice. The following example uses vanilla javascript.
 
 ### Installation
-Make sure you have Typescript v3.8 or newer
 
 ```sh
 npm install @equinor/eds-tokens
+```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
 ```
 
 ### Usage 

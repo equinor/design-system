@@ -6,10 +6,13 @@ Make sure to check out our [Storybook](https://eds-storybook-react.azurewebsites
 Read the [changelog](https://github.com/equinor/design-system/blob/develop/libraries/core-react/CHANGELOG.md) for details on specific releases.
 
 ## Installation
-Make sure you have Typescript v3.8 or newer
 
 ```sh
 npm install @equinor/eds-core-react styled-components
+```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
 ```
 
 ## Usage
