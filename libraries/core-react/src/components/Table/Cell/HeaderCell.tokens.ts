@@ -66,6 +66,7 @@ const tableHead: ComponentToken = {
         color: primaryRestingColor,
       },
       border: {
+        type: 'bordergroup',
         bottom: {
           color: primaryRestingColor,
         },

@@ -180,101 +180,135 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 
-export const Sortable: Story<TableProps> = (args) => {
-  const columns: Column<HackHead>[] = React.useMemo(
-    () => [
-      {
-        Header: 'Number',
-        accessor: 'number',
-      },
-      {
-        Header: 'Name',
-        accessor: 'name',
-      },
-      {
-        Header: 'Colour',
-        accessor: 'colour',
-      },
-    ],
-    [],
-  )
-
-  const data: HackHead[] = [
-    { number: '1', name: 'Banana', colour: 'Yellow' },
-    { number: '2', name: 'Orange', colour: 'Orange' },
-    { number: '4', name: 'Kiwi', colour: 'Greenish' },
+export const Sortable: Story<TableProps> = () => {
+  const data = [
+    {
+      number: '123-456',
+      description: 'Pears',
+      origin: 'Europe',
+      price: 1.5,
+    },
+    {
+      number: '234-567',
+      description: 'Apples',
+      origin: 'Africa',
+      price: 1.2,
+    },
+    {
+      number: '45-6789',
+      description: 'Oranges',
+      origin: 'South America',
+      price: 1.8,
+    },
   ]
 
-  type HackHead = {
-    number: string
+  type SortDirection = 'ascending' | 'descending' | 'none'
+  type Column = {
     name: string
-    colour: string
+    accessor: string
+    sortDirection?: SortDirection
     isSorted?: boolean
-    isSortedDesc?: boolean
+  }
+  const columns: Column[] = [
+    {
+      name: 'Item nr',
+      accessor: 'number',
+      sortDirection: 'none',
+    },
+    {
+      name: 'Description',
+      accessor: 'description',
+      sortDirection: 'none',
+    },
+    {
+      name: 'Origin',
+      accessor: 'origin',
+      sortDirection: 'none',
+    },
+    {
+      name: 'Price',
+      accessor: 'price',
+      sortDirection: 'none',
+    },
+  ]
+
+  const [state, setState] = React.useState<{
+    columns: Column[]
+  }>({ columns })
+
+  const onSortClick = (sortCol: Column) => {
+    const updateColumns = state.columns.map((col) => {
+      if (sortCol.accessor === col.accessor) {
+        const sortDirection: SortDirection =
+          sortCol.sortDirection === 'descending' ? 'ascending' : 'descending'
+
+        return {
+          ...sortCol,
+          isSorted: true,
+          sortDirection,
+        }
+      }
+      return {
+        ...col,
+        isSorted: false,
+        sortDirection: col.sortDirection
+          ? ('none' as SortDirection)
+          : undefined,
+      }
+    })
+
+    setState({ columns: updateColumns })
   }
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useSortBy,
-  )
-  /* eslint-disable react/jsx-key  */
+  const sortedData = data.sort((left, right) => {
+    const sortedCol = state.columns.find((col) => col.isSorted)
+    if (!sortedCol) {
+      return 1
+    }
+    const { sortDirection, accessor } = sortedCol
+    if (sortDirection === 'ascending') {
+      return left[accessor] > right[accessor] ? 1 : -1
+    }
+    if (sortDirection === 'descending') {
+      return left[accessor] < right[accessor] ? 1 : -1
+    }
+  })
 
   return (
-    <Table {...args} {...getTableProps()}>
+    <Table>
       <Head>
-        {headerGroups.map((headerGroup, i) => (
-          <Row {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column, i) => {
-              const hackedCol = (column as unknown) as HackHead
-              return (
-                <Cell
-                  {...column.getHeaderProps()}
-                  as="th"
-                  scope="col"
-                  sort={
-                    hackedCol.isSorted
-                      ? hackedCol.isSortedDesc
-                        ? 'descending'
-                        : 'ascending'
-                      : 'none'
+        <Row>
+          {state.columns.map((col) => (
+            <Cell
+              as="th"
+              sort={col.sortDirection}
+              key={`head-${col.name}`}
+              onClick={col.sortDirection ? () => onSortClick(col) : undefined}
+            >
+              {col.name}
+              {col.isSorted ? `-${col.sortDirection}` : ''}
+              {col.isSorted && (
+                <Icon
+                  name={
+                    col.sortDirection === 'ascending'
+                      ? 'chevron_down'
+                      : 'chevron_up'
                   }
-                >
-                  {column.render('Header')}
-                  {hackedCol.isSorted && (
-                    <Icon
-                      name={
-                        hackedCol.isSortedDesc ? 'chevron_down' : 'chevron_up'
-                      }
-                    />
-                  )}
-                </Cell>
-              )
-            })}
+                />
+              )}
+            </Cell>
+          ))}
+        </Row>
+      </Head>
+      <Body>
+        {sortedData.map((row) => (
+          <Row key={row.number}>
+            <Cell>{row.number}</Cell>
+            <Cell>{row.description}</Cell>
+            <Cell>{row.origin}</Cell>
+            <Cell>{row.price}</Cell>
           </Row>
         ))}
-      </Head>
-      <Body {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row)
-          return (
-            <Row {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <Cell {...cell.getCellProps()}>{cell.render('Cell')}</Cell>
-                )
-              })}
-            </Row>
-          )
-        })}
       </Body>
     </Table>
   )
