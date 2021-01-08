@@ -73,7 +73,7 @@ describe('Table', () => {
       </Table>,
     )
 
-    const headerCell = getByText(text)
+    const headerCell = getByText(text).parentElement
     const th = container.querySelector('th')
     expect(headerCell).toEqual(th)
   })
@@ -193,7 +193,7 @@ describe('Table', () => {
       </Table>,
     )
 
-    expect(getByText(headerText)).toHaveStyleRule(
+    expect(getByText(headerText).parentElement).toHaveStyleRule(
       'height',
       headerCellToken.height,
     )
@@ -217,7 +217,7 @@ describe('Table', () => {
       </Table>,
     )
 
-    expect(getByText(headerText)).toHaveStyleRule(
+    expect(getByText(headerText).parentElement).toHaveStyleRule(
       'height',
       headerCellToken.density.compact.height,
     )
