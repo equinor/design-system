@@ -57,6 +57,11 @@ const StyledTableCell = styled.th`
   ${Base}
 `
 
+const CellInner = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 type CellProps = {
   sort?: React.AriaAttributes['aria-sort']
 } & ThHTMLAttributes<HTMLTableHeaderCellElement>
@@ -71,7 +76,7 @@ export const TableHeaderCell = ({
 
   return (
     <StyledTableCell token={token} aria-sort={sort} {...rest}>
-      {children}
+      <CellInner>{children}</CellInner>
     </StyledTableCell>
   )
 }
