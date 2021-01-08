@@ -226,4 +226,69 @@ describe('Table', () => {
       dataCellToken.density.compact.height,
     )
   })
+  it('Has aria-sort when sort is provided', () => {
+    const headerText = 'Cell content'
+    const { getByText } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell as="th" sort="ascending">
+              {headerText}
+            </Cell>
+          </Row>
+        </Head>
+      </Table>,
+    )
+    const headerCell = getByText(headerText).parentElement
+    expect(headerCell).toHaveAttribute('aria-sort', 'ascending')
+  })
+  it('Has active styling when sort is ascending or descending', () => {
+    const headerText1 = 'Cell content'
+    const headerText2 = 'Cell content 2'
+    const { getByText } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell as="th" sort="ascending">
+              {headerText1}
+            </Cell>
+            <Cell as="th" sort="descending">
+              {headerText2}
+            </Cell>
+          </Row>
+        </Head>
+      </Table>,
+    )
+
+    const borderBottomColor = trim(
+      headerCellToken.states.active.border.type === 'bordergroup'
+        ? headerCellToken.states.active.border.bottom.color
+        : '',
+    )
+    const headerCell1 = getByText(headerText1).parentElement
+    const headerCell2 = getByText(headerText2).parentElement
+
+    expect(headerCell1).toHaveAttribute('aria-sort', 'ascending')
+    expect(headerCell2).toHaveAttribute('aria-sort', 'descending')
+
+    expect(headerCell1).toHaveStyleRule(
+      'background',
+      trim(headerCellToken.states.active.background),
+    )
+    expect(headerCell1).toHaveStyleRule(
+      'color',
+      trim(headerCellToken.states.active.typography.color),
+    )
+    expect(headerCell1).toHaveStyleRule('border-color', borderBottomColor)
+
+    expect(headerCell2).toHaveStyleRule(
+      'background',
+      trim(headerCellToken.states.active.background),
+    )
+    expect(headerCell2).toHaveStyleRule(
+      'color',
+      trim(headerCellToken.states.active.typography.color),
+    )
+    expect(headerCell2).toHaveStyleRule('border-color', borderBottomColor)
+  })
 })
