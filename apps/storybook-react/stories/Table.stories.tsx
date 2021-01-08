@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useTable, useSortBy, Column } from 'react-table'
 import { Story, Meta } from '@storybook/react'
 import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
