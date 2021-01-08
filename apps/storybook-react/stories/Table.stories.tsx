@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
@@ -8,6 +8,76 @@ import './../style.css'
 Icon.add({ chevron_down, chevron_up })
 
 const { Caption, Body, Row, Cell, Head } = Table
+
+type Data = {
+  number: string
+  description: string
+  origin: string
+  price: number
+}
+
+const data: Data[] = [
+  {
+    number: '123-456',
+    description: 'Pears',
+    origin: 'Europe',
+    price: 1.5,
+  },
+  {
+    number: '234-567',
+    description: 'Apples',
+    origin: 'Africa',
+    price: 1.2,
+  },
+  {
+    number: '45-6789',
+    description: 'Oranges',
+    origin: 'South America',
+    price: 1.8,
+  },
+]
+
+type SortDirection = 'ascending' | 'descending' | 'none'
+type Column = {
+  name: string
+  accessor: string
+  sortDirection?: SortDirection
+  isSorted?: boolean
+}
+
+const columns: Column[] = [
+  {
+    name: 'Item nr',
+    accessor: 'number',
+    sortDirection: 'none',
+  },
+  {
+    name: 'Description',
+    accessor: 'description',
+    sortDirection: 'none',
+  },
+  {
+    name: 'Origin',
+    accessor: 'origin',
+    sortDirection: 'none',
+  },
+  {
+    name: 'Price',
+    accessor: 'price',
+    sortDirection: 'none',
+  },
+]
+
+// type PrepareData<T extends typeof data> = (data: T, columns: Column) => T[][]
+
+const toCellValues = (data: Data[], columns: Column[]) =>
+  data.map((item) =>
+    columns.map((column) =>
+      typeof item[column.accessor] !== 'undefined'
+        ? (item[column.accessor] as string)
+        : '',
+    ),
+  )
 
 export default {
   title: 'Components/Table',
@@ -180,59 +250,9 @@ export const CompactTable: Story<TableProps> = () => {
 }
 
 export const Sortable: Story<TableProps> = () => {
-  const data = [
-    {
-      number: '123-456',
-      description: 'Pears',
-      origin: 'Europe',
-      price: 1.5,
-    },
-    {
-      number: '234-567',
-      description: 'Apples',
-      origin: 'Africa',
-      price: 1.2,
-    },
-    {
-      number: '45-6789',
-      description: 'Oranges',
-      origin: 'South America',
-      price: 1.8,
-    },
-  ]
-
-  type SortDirection = 'ascending' | 'descending' | 'none'
-  type Column = {
-    name: string
-    accessor: string
-    sortDirection?: SortDirection
-    isSorted?: boolean
-  }
-  const columns: Column[] = [
-    {
-      name: 'Item nr',
-      accessor: 'number',
-      sortDirection: 'none',
-    },
-    {
-      name: 'Description',
-      accessor: 'description',
-      sortDirection: 'none',
-    },
-    {
-      name: 'Origin',
-      accessor: 'origin',
-      sortDirection: 'none',
-    },
-    {
-      name: 'Price',
-      accessor: 'price',
-      sortDirection: 'none',
-    },
-  ]
-
   const [state, setState] = React.useState<{
     columns: Column[]
+    cellValues?: string[][]
   }>({ columns })
 
   const onSortClick = (sortCol: Column) => {
@@ -256,22 +276,31 @@ export const Sortable: Story<TableProps> = () => {
       }
     })
 
-    setState({ columns: updateColumns })
+    setState({ ...state, columns: updateColumns })
   }
 
-  const sortedData = data.sort((left, right) => {
-    const sortedCol = state.columns.find((col) => col.isSorted)
-    if (!sortedCol) {
-      return 1
+  const sortData = (data: Data[]) =>
+    data.sort((left, right) => {
+      const sortedCol = state.columns.find((col) => col.isSorted)
+      if (!sortedCol) {
+        return 1
+      }
+      const { sortDirection, accessor } = sortedCol
+      if (sortDirection === 'ascending') {
+        return left[accessor] > right[accessor] ? 1 : -1
+      }
+      if (sortDirection === 'descending') {
+        return left[accessor] < right[accessor] ? 1 : -1
+      }
+    })
+
+  useEffect(() => {
+    if (state.columns) {
+      const sorted = sortData(data)
+      const cellValues = toCellValues(sorted, columns)
+      setState({ ...state, cellValues })
     }
-    const { sortDirection, accessor } = sortedCol
-    if (sortDirection === 'ascending') {
-      return left[accessor] > right[accessor] ? 1 : -1
-    }
-    if (sortDirection === 'descending') {
-      return left[accessor] < right[accessor] ? 1 : -1
-    }
-  })
+  }, [state.columns])
 
   return (
     <Table>
@@ -285,7 +314,6 @@ export const Sortable: Story<TableProps> = () => {
               onClick={col.sortDirection ? () => onSortClick(col) : undefined}
             >
               {col.name}
-              {col.isSorted ? `-${col.sortDirection}` : ''}
               {col.isSorted && (
                 <Icon
                   name={
@@ -300,12 +328,11 @@ export const Sortable: Story<TableProps> = () => {
         </Row>
       </Head>
       <Body>
-        {sortedData.map((row) => (
-          <Row key={row.number}>
-            <Cell>{row.number}</Cell>
-            <Cell>{row.description}</Cell>
-            <Cell>{row.origin}</Cell>
-            <Cell>{row.price}</Cell>
+        {state.cellValues?.map((row) => (
+          <Row key={row.toString()}>
+            {row.map((cellValue) => (
+              <Cell key={cellValue}>{cellValue}</Cell>
+            ))}
           </Row>
         ))}
       </Body>
