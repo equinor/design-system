@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import type { CSSProperties } from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
@@ -118,6 +119,9 @@ export const simpleTable: Story<TableProps> = (args) => {
 
   return (
     <Table {...args}>
+      <Caption>
+        <Typography variant="h2">Fruits cost price</Typography>
+      </Caption>
       <Head>
         <Row>
           {columns.map((col) => (
@@ -147,21 +151,20 @@ const FixedContainer = styled.div`
 
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
-
+  const cellStyle: CSSProperties = {
+    position: 'sticky',
+    top: 0,
+  }
   return (
     <FixedContainer>
       <Table>
+        <Caption>
+          <Typography variant="h2">Fruits cost price</Typography>
+        </Caption>
         <Head>
           <Row>
             {columns.map((col) => (
-              <Cell
-                as="th"
-                key={`head-${col.name}`}
-                style={{
-                  position: 'sticky',
-                  top: 0,
-                }}
-              >
+              <Cell as="th" key={`head-${col.name}`} style={cellStyle}>
                 {col.name}
               </Cell>
             ))}
@@ -187,7 +190,7 @@ export const CompactTable: Story<TableProps> = () => {
   return (
     <Table density="compact">
       <Caption>
-        <Typography variant="h2">Fruits and their colours</Typography>
+        <Typography variant="h2">Fruits cost price</Typography>
       </Caption>
       <Head>
         <Row>
@@ -266,6 +269,9 @@ export const Sortable: Story<TableProps> = () => {
 
   return (
     <Table>
+      <Caption>
+        <Typography variant="h2">Fruits cost price</Typography>
+      </Caption>
       <Head>
         <Row>
           {state.columns.map((col) => (
