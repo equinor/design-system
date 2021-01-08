@@ -1,6 +1,4 @@
 import * as React from 'react'
-import * as R from 'ramda'
-
 import { ThHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, spacingsTemplate, bordersTemplate } from '@utils'
