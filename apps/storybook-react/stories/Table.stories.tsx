@@ -52,7 +52,7 @@ const data: Data[] = [
 
 type SortDirection = 'ascending' | 'descending' | 'none'
 type Column = {
-  name: string
+  name: string | React.ReactNode
   accessor: string
   sortDirection?: SortDirection
   isSorted?: boolean
@@ -75,7 +75,14 @@ const columns: Column[] = [
     sortDirection: 'none',
   },
   {
-    name: 'Price',
+    name: (
+      <>
+        Price &nbsp;
+        <Typography group="input" variant="label" color="currentColor">
+          ($)
+        </Typography>
+      </>
+    ),
     accessor: 'price',
     sortDirection: 'none',
   },
@@ -125,7 +132,7 @@ export const simpleTable: Story<TableProps> = (args) => {
       <Head>
         <Row>
           {columns.map((col) => (
-            <Cell as="th" key={`head-${col.name}`}>
+            <Cell as="th" key={`head-${col.accessor}`}>
               {col.name}
             </Cell>
           ))}
@@ -164,7 +171,7 @@ export const FixedTableHeader: Story<TableProps> = () => {
         <Head>
           <Row>
             {columns.map((col) => (
-              <Cell as="th" key={`head-${col.name}`} style={cellStyle}>
+              <Cell as="th" key={`head-${col.accessor}`} style={cellStyle}>
                 {col.name}
               </Cell>
             ))}
@@ -195,7 +202,7 @@ export const CompactTable: Story<TableProps> = () => {
       <Head>
         <Row>
           {columns.map((col) => (
-            <Cell as="th" key={`head-${col.name}`}>
+            <Cell as="th" key={`head-${col.accessor}`}>
               {col.name}
             </Cell>
           ))}
@@ -278,19 +285,18 @@ export const Sortable: Story<TableProps> = () => {
             <Cell
               as="th"
               sort={col.sortDirection}
-              key={`head-${col.name}`}
+              key={`head-${col.accessor}`}
               onClick={col.sortDirection ? () => onSortClick(col) : undefined}
             >
               {col.name}
-              {col.isSorted && (
-                <Icon
-                  name={
-                    col.sortDirection === 'ascending'
-                      ? 'chevron_down'
-                      : 'chevron_up'
-                  }
-                />
-              )}
+              <Icon
+                style={col.isSorted ? {} : { visibility: 'hidden' }}
+                name={
+                  col.sortDirection === 'ascending'
+                    ? 'chevron_down'
+                    : 'chevron_up'
+                }
+              />
             </Cell>
           ))}
         </Row>
