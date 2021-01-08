@@ -52,7 +52,7 @@ const findTypography = (
 }
 
 const findColor: (a: ColorVariants | string) => string = (
-  inputColor = 'currentColor',
+  inputColor = null,
 ): string =>
   typeof colors[inputColor] === 'undefined'
     ? inputColor
