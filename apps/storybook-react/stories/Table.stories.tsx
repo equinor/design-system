@@ -88,8 +88,6 @@ const columns: Column[] = [
   },
 ]
 
-// type PrepareData<T extends typeof data> = (data: T, columns: Column) => T[][]
-
 const toCellValues = (data: Data[], columns: Column[]) =>
   data.map((item) =>
     columns.map((column) =>
