@@ -130,9 +130,7 @@ export const simpleTable: Story<TableProps> = (args) => {
       <Head>
         <Row>
           {columns.map((col) => (
-            <Cell as="th" key={`head-${col.accessor}`}>
-              {col.name}
-            </Cell>
+            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
           ))}
         </Row>
       </Head>
@@ -154,12 +152,14 @@ const FixedContainer = styled.div`
   overflow: auto;
 `
 
+const StickyCell = styled(Cell)`
+  position: sticky;
+  top: 0;
+`
+
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
-  const cellStyle: CSSProperties = {
-    position: 'sticky',
-    top: 0,
-  }
+
   return (
     <FixedContainer>
       <Table>
@@ -169,9 +169,7 @@ export const FixedTableHeader: Story<TableProps> = () => {
         <Head>
           <Row>
             {columns.map((col) => (
-              <Cell as="th" key={`head-${col.accessor}`} style={cellStyle}>
-                {col.name}
-              </Cell>
+              <StickyCell key={`head-${col.accessor}`}>{col.name}</StickyCell>
             ))}
           </Row>
         </Head>
@@ -200,9 +198,7 @@ export const CompactTable: Story<TableProps> = () => {
       <Head>
         <Row>
           {columns.map((col) => (
-            <Cell as="th" key={`head-${col.accessor}`}>
-              {col.name}
-            </Cell>
+            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
           ))}
         </Row>
       </Head>
@@ -281,7 +277,6 @@ export const Sortable: Story<TableProps> = () => {
         <Row>
           {state.columns.map((col) => (
             <Cell
-              as="th"
               sort={col.sortDirection}
               key={`head-${col.accessor}`}
               onClick={col.sortDirection ? () => onSortClick(col) : undefined}
