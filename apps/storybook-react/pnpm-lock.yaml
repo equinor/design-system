@@ -17,7 +17,6 @@ devDependencies:
   '@storybook/addon-essentials': 6.1.11_72fd71574903bfa997f0c41b0e2271c7
   '@storybook/addon-links': 6.1.9_react-dom@17.0.1+react@17.0.1
   '@storybook/addon-storysource': 6.1.9_4695a47c40ef995f48f8c834d2fb82ec
-  '@storybook/addons': 6.1.9_react-dom@17.0.1+react@17.0.1
   '@storybook/source-loader': 6.1.9_react-dom@17.0.1+react@17.0.1
   '@storybook/theming': 6.1.9_react-dom@17.0.1+react@17.0.1
   '@types/react': 17.0.0
@@ -10961,7 +10960,6 @@ specifiers:
   '@storybook/addon-essentials': ^6.1.11
   '@storybook/addon-links': ^6.1.9
   '@storybook/addon-storysource': ^6.1.9
-  '@storybook/addons': ^6.1.9
   '@storybook/react': ^6.1.9
   '@storybook/source-loader': ^6.1.9
   '@storybook/theming': ^6.1.9
