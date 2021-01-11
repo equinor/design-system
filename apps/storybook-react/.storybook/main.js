@@ -10,7 +10,7 @@ module.exports = {
   },
   stories: [
     '../docs/**/*.story.mdx',
-    '../stories/**/*.stor(y|ies).(jsx|mdx|tsx)',
+    '../stories/**/*.stor(y|ies).@(jsx|mdx|tsx)',
   ],
   addons: [
     '@storybook/addon-actions',
