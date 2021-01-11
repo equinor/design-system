@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/HeaderCell.tokens'
 import { bordersTemplate } from '@utils'
+import { InnerContext } from './Inner.context'
 
 const StyledTableHead = styled.thead`
   ${bordersTemplate(token.border)}
@@ -10,7 +11,11 @@ const StyledTableHead = styled.thead`
 `
 
 export const Head: FunctionComponent = ({ children, ...props }) => {
-  return <StyledTableHead {...props}>{children}</StyledTableHead>
+  return (
+    <InnerContext.Provider value={{ variant: 'head' }}>
+      <StyledTableHead {...props}>{children}</StyledTableHead>
+    </InnerContext.Provider>
+  )
 }
 
 // Head.displayName = 'eds-table-head'

@@ -29,7 +29,7 @@ describe('Caption', () => {
       <Table>
         <Head>
           <Row>
-            <Cell as="th">{text}</Cell>
+            <Cell>{text}</Cell>
           </Row>
         </Head>
       </Table>,
@@ -67,7 +67,7 @@ describe('Table', () => {
       <Table>
         <Head>
           <Row>
-            <Cell as="th">{text}</Cell>
+            <Cell>{text}</Cell>
           </Row>
         </Head>
       </Table>,
@@ -85,7 +85,7 @@ describe('Table', () => {
       <Table>
         <Head>
           <Row>
-            <Cell as="th">{header}</Cell>
+            <Cell>{header}</Cell>
           </Row>
         </Head>
         <Body>
@@ -182,7 +182,7 @@ describe('Table', () => {
       <Table>
         <Head>
           <Row>
-            <Cell as="th">{headerText}</Cell>
+            <Cell>{headerText}</Cell>
           </Row>
         </Head>
         <Body>
@@ -206,7 +206,7 @@ describe('Table', () => {
       <Table density="compact">
         <Head>
           <Row>
-            <Cell as="th">{headerText}</Cell>
+            <Cell>{headerText}</Cell>
           </Row>
         </Head>
         <Body>
@@ -232,9 +232,7 @@ describe('Table', () => {
       <Table>
         <Head>
           <Row>
-            <Cell as="th" sort="ascending">
-              {headerText}
-            </Cell>
+            <Cell sort="ascending">{headerText}</Cell>
           </Row>
         </Head>
       </Table>,
@@ -249,12 +247,8 @@ describe('Table', () => {
       <Table>
         <Head>
           <Row>
-            <Cell as="th" sort="ascending">
-              {headerText1}
-            </Cell>
-            <Cell as="th" sort="descending">
-              {headerText2}
-            </Cell>
+            <Cell sort="ascending">{headerText1}</Cell>
+            <Cell sort="descending">{headerText2}</Cell>
           </Row>
         </Head>
       </Table>,

@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { TdHTMLAttributes, ThHTMLAttributes } from 'react'
-import { Is, Variants, Colors } from '../Table.types'
+import { Variants, Colors } from '../Table.types'
 import { TableDataCell } from './DataCell'
 import { TableHeaderCell } from './HeaderCell'
+import { InnerContext } from '../Inner.context'
 
 type CellProps = {
-  /** Specifies which td or th to use */
-  as?: Is
   /** Specifies which variant to use */
   variant?: Variants
   /** Specifies cell background color */
@@ -18,14 +17,18 @@ type CellProps = {
   | ThHTMLAttributes<HTMLTableHeaderCellElement>
 )
 
-export const Cell = ({ as = 'td', ...props }: CellProps): JSX.Element => {
-  switch (as) {
-    case 'th':
-      return <TableHeaderCell {...props} />
-    default:
-    case 'td':
-      return <TableDataCell {...props} />
-  }
-}
+export const Cell = (props: CellProps): JSX.Element => (
+  <InnerContext.Consumer>
+    {(value) => {
+      switch (value.variant) {
+        case 'head':
+          return <TableHeaderCell {...props} />
+        default:
+        case 'body':
+          return <TableDataCell {...props} />
+      }
+    }}
+  </InnerContext.Consumer>
+)
 
 // Cell.displayName = 'eds-table-cell'
