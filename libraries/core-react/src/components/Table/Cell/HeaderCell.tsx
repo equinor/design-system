@@ -20,9 +20,11 @@ const Base = (props: BaseProps) => {
 
   if (ariaSort) {
     sortStylingHover = css`
-      &:hover {
-        cursor: pointer;
-        background: ${token.states.hover.background};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          cursor: pointer;
+          background: ${token.states.hover.background};
+        }
       }
     `
   }
