@@ -7,7 +7,6 @@ import { Density } from './Table.types'
 
 const TableBase = styled.table`
   border-spacing: 0;
-  border-collapse: collapse;
   background: ${token.background};
 `
 

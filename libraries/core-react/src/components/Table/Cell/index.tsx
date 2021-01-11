@@ -11,6 +11,8 @@ type CellProps = {
   variant?: Variants
   /** Specifies cell background color */
   color?: Colors
+  /** Specifies cell sort direction */
+  sort?: React.AriaAttributes['aria-sort']
 } & (
   | TdHTMLAttributes<HTMLTableDataCellElement>
   | ThHTMLAttributes<HTMLTableHeaderCellElement>
