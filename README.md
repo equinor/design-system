@@ -105,6 +105,10 @@ This is the main implementation of the EDS, and will eventually contain accessib
 ```sh
 npm install @equinor/eds-core-react styled-components
 ```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
+```
 
 ### Usage
 
@@ -131,6 +135,10 @@ The following example uses the `<Icon>` component from `@equinor/eds-core-react`
 ```sh
 npm install @equinor/eds-icons @equinor/eds-core-react
 ```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
+```
 
 ### Usage
 
@@ -151,6 +159,10 @@ Design tokens are design decisions from Figma extracted into code, and form the 
 
 ```sh
 npm install @equinor/eds-tokens
+```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
 ```
 
 ### Usage 

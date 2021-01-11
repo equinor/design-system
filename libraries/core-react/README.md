@@ -10,6 +10,10 @@ Read the [changelog](https://github.com/equinor/design-system/blob/develop/libra
 ```sh
 npm install @equinor/eds-core-react styled-components
 ```
+If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+```sh
+npm install typescript --save-dev
+```
 
 ## Usage
 
