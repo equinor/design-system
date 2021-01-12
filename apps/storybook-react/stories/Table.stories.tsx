@@ -224,12 +224,24 @@ export const Sortable: Story<TableProps> = () => {
   const onSortClick = (sortCol: Column) => {
     const updateColumns = state.columns.map((col) => {
       if (sortCol.accessor === col.accessor) {
-        const sortDirection: SortDirection =
-          sortCol.sortDirection === 'descending' ? 'ascending' : 'descending'
+        let isSorted = true
+        let sortDirection: SortDirection = 'none'
+        switch (sortCol.sortDirection) {
+          case 'descending':
+            isSorted = false
+            sortDirection = 'none'
+            break
+          case 'ascending':
+            sortDirection = 'descending'
+            break
+          default:
+            sortDirection = 'ascending'
+            break
+        }
 
         return {
           ...sortCol,
-          isSorted: true,
+          isSorted,
           sortDirection,
         }
       }
