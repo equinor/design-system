@@ -10,20 +10,19 @@ module.exports = {
   },
   stories: [
     '../docs/**/*.story.mdx',
-    '../stories/**/*.stor(y|ies).(jsx|mdx|tsx)',
+    '../stories/**/*.stor(y|ies).@(jsx|mdx|tsx)',
   ],
   addons: [
-    '@storybook/addon-actions',
     '@storybook/addon-links',
-    '@storybook/addon-storysource',
-    '@storybook/addon-a11y',
-    '@storybook/addon-knobs',
     {
       name: '@storybook/addon-docs',
       options: {
         configureJSX: true,
       },
     },
+    '@storybook/addon-essentials',
+    '@storybook/addon-storysource',
+    '@storybook/addon-a11y',
   ],
   webpackFinal: async (config, { configType }) => {
     // production build in Docker, where “libraries” is copied into the storybook root
