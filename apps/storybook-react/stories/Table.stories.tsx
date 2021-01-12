@@ -296,7 +296,7 @@ export const Sortable: Story<TableProps> = () => {
   }, [state.columns])
 
   return (
-    <Table density="compact">
+    <Table>
       <Caption>
         <Typography variant="h2">Fruits cost price</Typography>
       </Caption>
