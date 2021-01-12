@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FunctionComponent } from 'react'
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/DataCell.tokens'
 
@@ -17,10 +17,15 @@ export type RowProps = {
   active?: boolean
 } & React.HTMLAttributes<HTMLTableRowElement>
 
-export const Row: FunctionComponent<RowProps> = (props) => {
+export const Row = forwardRef<HTMLTableRowElement, RowProps>(function Row(
+  { ...props },
+  ref,
+) {
   const { children } = props
 
-  return <TableBase {...props}>{children}</TableBase>
-}
-
-// Row.displayName = 'EdsTableRow'
+  return (
+    <TableBase {...props} ref={ref}>
+      {children}
+    </TableBase>
+  )
+})

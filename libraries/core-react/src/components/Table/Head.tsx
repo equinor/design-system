@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FunctionComponent } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/HeaderCell.tokens'
 import { bordersTemplate } from '@utils'
@@ -10,12 +10,12 @@ const StyledTableHead = styled.thead`
   background: ${token.background};
 `
 
-export const Head: FunctionComponent = ({ children, ...props }) => {
+type HeadProps = { children: ReactNode }
+
+export const Head = ({ children, ...props }: HeadProps): JSX.Element => {
   return (
     <InnerContext.Provider value={{ variant: 'head' }}>
       <StyledTableHead {...props}>{children}</StyledTableHead>
     </InnerContext.Provider>
   )
 }
-
-// Head.displayName = 'eds-table-head'
