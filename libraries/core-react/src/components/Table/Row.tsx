@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/DataCell.tokens'
 
-type StyledProps = Pick<Props, 'active'>
+type StyledProps = Pick<RowProps, 'active'>
 
 const TableBase = styled.tr<StyledProps>(({ active }) => ({
   background: active ? token.states.active?.background : null,
@@ -12,12 +12,12 @@ const TableBase = styled.tr<StyledProps>(({ active }) => ({
   },
 }))
 
-type Props = {
+export type RowProps = {
   /** Hightlight row as active */
   active?: boolean
 } & React.HTMLAttributes<HTMLTableRowElement>
 
-export const Row: FunctionComponent<Props> = (props) => {
+export const Row: FunctionComponent<RowProps> = (props) => {
   const { children } = props
 
   return <TableBase {...props}>{children}</TableBase>

@@ -5,9 +5,9 @@ import { InnerContext } from './Inner.context'
 
 const TableBase = styled.tbody``
 
-type Props = HTMLAttributes<HTMLTableSectionElement>
+export type BodyProps = HTMLAttributes<HTMLTableSectionElement>
 
-export const Body = ({ children, ...props }: Props): JSX.Element => {
+export const Body = ({ children, ...props }: BodyProps): JSX.Element => {
   return (
     <InnerContext.Provider value={{ variant: 'body' }}>
       <TableBase {...props}>{children}</TableBase>
