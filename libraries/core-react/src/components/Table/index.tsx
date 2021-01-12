@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Table as BaseTable, TableProps } from './Table'
-import { Body } from './Body'
-import { Cell } from './Cell'
+import { Body, BodyProps } from './Body'
+import { Cell, CellProps } from './Cell'
 import { Head } from './Head'
-import { Row } from './Row'
-import { Caption } from './Caption'
+import { Row, RowProps } from './Row'
+import { Caption, CaptionProps } from './Caption'
 import { TableProvider } from './Table.context'
 
 const TableWrapper = (props: TableProps) => (
@@ -31,3 +31,7 @@ Table.Caption = Caption
 
 export { Table }
 export type { TableProps }
+export type { CellProps }
+export type { BodyProps }
+export type { RowProps }
+export type { CaptionProps }

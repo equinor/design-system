@@ -8,7 +8,7 @@ const StyledCaption = styled.caption<CaptionProps>(
   }),
 )
 
-type CaptionProps = Pick<CSSObject, 'captionSide'> &
+export type CaptionProps = Pick<CSSObject, 'captionSide'> &
   HTMLAttributes<HTMLTableCaptionElement>
 
 export const Caption = forwardRef<HTMLTableCaptionElement, CaptionProps>(

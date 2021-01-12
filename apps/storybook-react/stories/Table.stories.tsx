@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import type { CSSProperties } from 'styled-components'
 import { Story, Meta } from '@storybook/react'
-import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
+import {
+  Table,
+  TableProps,
+  Typography,
+  Icon,
+  CellProps,
+} from '@equinor/eds-core-react'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import './../style.css'
 
@@ -130,9 +135,7 @@ export const simpleTable: Story<TableProps> = (args) => {
       <Head>
         <Row>
           {columns.map((col) => (
-            <Cell as="th" key={`head-${col.accessor}`}>
-              {col.name}
-            </Cell>
+            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
           ))}
         </Row>
       </Head>
@@ -154,12 +157,14 @@ const FixedContainer = styled.div`
   overflow: auto;
 `
 
+const StickyCell = styled(Cell)`
+  position: sticky;
+  top: 0;
+`
+
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
-  const cellStyle: CSSProperties = {
-    position: 'sticky',
-    top: 0,
-  }
+
   return (
     <FixedContainer>
       <Table>
@@ -169,9 +174,7 @@ export const FixedTableHeader: Story<TableProps> = () => {
         <Head>
           <Row>
             {columns.map((col) => (
-              <Cell as="th" key={`head-${col.accessor}`} style={cellStyle}>
-                {col.name}
-              </Cell>
+              <StickyCell key={`head-${col.accessor}`}>{col.name}</StickyCell>
             ))}
           </Row>
         </Head>
@@ -200,9 +203,7 @@ export const CompactTable: Story<TableProps> = () => {
       <Head>
         <Row>
           {columns.map((col) => (
-            <Cell as="th" key={`head-${col.accessor}`}>
-              {col.name}
-            </Cell>
+            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
           ))}
         </Row>
       </Head>
@@ -219,6 +220,16 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 
+const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
+  svg {
+    visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
+  }
+  &:hover {
+    svg {
+      visibility: visible;
+    }
+  }
+`
 export const Sortable: Story<TableProps> = () => {
   const [state, setState] = React.useState<{
     columns: Column[]
@@ -228,12 +239,24 @@ export const Sortable: Story<TableProps> = () => {
   const onSortClick = (sortCol: Column) => {
     const updateColumns = state.columns.map((col) => {
       if (sortCol.accessor === col.accessor) {
-        const sortDirection: SortDirection =
-          sortCol.sortDirection === 'descending' ? 'ascending' : 'descending'
+        let isSorted = true
+        let sortDirection: SortDirection = 'none'
+        switch (sortCol.sortDirection) {
+          case 'descending':
+            isSorted = false
+            sortDirection = 'none'
+            break
+          case 'ascending':
+            sortDirection = 'descending'
+            break
+          default:
+            sortDirection = 'ascending'
+            break
+        }
 
         return {
           ...sortCol,
-          isSorted: true,
+          isSorted,
           sortDirection,
         }
       }
@@ -280,22 +303,21 @@ export const Sortable: Story<TableProps> = () => {
       <Head>
         <Row>
           {state.columns.map((col) => (
-            <Cell
-              as="th"
+            <SortCell
               sort={col.sortDirection}
               key={`head-${col.accessor}`}
               onClick={col.sortDirection ? () => onSortClick(col) : undefined}
+              isSorted={col.isSorted}
             >
               {col.name}
               <Icon
-                style={col.isSorted ? {} : { visibility: 'hidden' }}
                 name={
-                  col.sortDirection === 'ascending'
-                    ? 'chevron_down'
-                    : 'chevron_up'
+                  col.sortDirection === 'descending'
+                    ? 'chevron_up'
+                    : 'chevron_down'
                 }
               />
-            </Cell>
+            </SortCell>
           ))}
         </Row>
       </Head>
