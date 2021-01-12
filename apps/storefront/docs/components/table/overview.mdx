@@ -13,7 +13,7 @@ mode: publish
 route: /components/table/
 ---
 
-import { Table } from '@equinor/eds-core-react'
+import { Table, Typography } from '@equinor/eds-core-react'
 
 _Tables_ display data in a structured format.
 
@@ -78,29 +78,83 @@ If a Cell input is used in a column made out of Cell monospaced numeric componen
 
 <Playground>
   <Table>
+    <Table.Caption>
+      <Typography variant="h3">Fruits cost price</Typography>
+    </Table.Caption>
     <Table.Head>
       <Table.Row>
-        <Table.Cell as="th" scope="col">
-          Name
+        <Table.Cell scope="col">
+          Number
         </Table.Cell>
-        <Table.Cell as="th" scope="col">
-          Allegiance
+        <Table.Cell scope="col">
+          Description
         </Table.Cell>
-        <Table.Cell as="th" scope="col">
-          Kill count
+        <Table.Cell scope="col">
+         Origin
+        </Table.Cell>
+        <Table.Cell scope="col">
+         <>
+        Price 
+        <Typography group="input" variant="label" color="currentColor">
+          ($)
+        </Typography>
+      </>
         </Table.Cell>
       </Table.Row>
     </Table.Head>
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Luke Skywalker</Table.Cell>
-        <Table.Cell>Republic</Table.Cell>
-        <Table.Cell variant="numeric">369470</Table.Cell>
+        <Table.Cell variant="numeric">123-456</Table.Cell>
+        <Table.Cell>Pears</Table.Cell>
+        <Table.Cell>Europe</Table.Cell>
+        <Table.Cell variant="numeric">1.5</Table.Cell>
       </Table.Row>
       <Table.Row>
-        <Table.Cell>Darth Vader</Table.Cell>
-        <Table.Cell>Sith</Table.Cell>
-        <Table.Cell variant="numeric">59</Table.Cell>
+        <Table.Cell variant="numeric">234-567</Table.Cell>
+        <Table.Cell>Apples</Table.Cell>
+        <Table.Cell>Africa</Table.Cell>
+        <Table.Cell variant="numeric">1.2</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+
+   <Table density="compact" style={{marginTop: '2rem'}}>
+    <Table.Caption>
+      <Typography variant="h3">Fruits cost price (compact mode)</Typography>
+    </Table.Caption>
+    <Table.Head>
+      <Table.Row>
+        <Table.Cell scope="col">
+          Number
+        </Table.Cell>
+        <Table.Cell scope="col">
+          Description
+        </Table.Cell>
+        <Table.Cell scope="col">
+         Origin
+        </Table.Cell>
+        <Table.Cell scope="col">
+         <>
+        Price 
+        <Typography group="input" variant="label" color="currentColor">
+          ($)
+        </Typography>
+      </>
+        </Table.Cell>
+      </Table.Row>
+    </Table.Head>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell variant="numeric">123-456</Table.Cell>
+        <Table.Cell>Pears</Table.Cell>
+        <Table.Cell>Europe</Table.Cell>
+        <Table.Cell variant="numeric">1.5</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell variant="numeric">234-567</Table.Cell>
+        <Table.Cell>Apples</Table.Cell>
+        <Table.Cell>Africa</Table.Cell>
+        <Table.Cell variant="numeric">1.2</Table.Cell>
       </Table.Row>
     </Table.Body>
   </Table>
