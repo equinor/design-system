@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Table as BaseTable, TableProps } from './Table'
 import { Body } from './Body'
-import { Cell } from './Cell'
+import { Cell, CellProps } from './Cell'
 import { Head } from './Head'
 import { Row } from './Row'
 import { Caption } from './Caption'
@@ -31,3 +31,4 @@ Table.Caption = Caption
 
 export { Table }
 export type { TableProps }
+export type { CellProps }

@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import type { CSSProperties } from 'styled-components'
 import { Story, Meta } from '@storybook/react'
-import { Table, TableProps, Typography, Icon } from '@equinor/eds-core-react'
+import {
+  Table,
+  TableProps,
+  Typography,
+  Icon,
+  CellProps,
+} from '@equinor/eds-core-react'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import './../style.css'
 
@@ -215,6 +220,16 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 
+const SortCell = styled<CellProps>(Cell)`
+  svg {
+    visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
+  }
+  &:hover {
+    svg {
+      visibility: visible;
+    }
+  }
+`
 export const Sortable: Story<TableProps> = () => {
   const [state, setState] = React.useState<{
     columns: Column[]
@@ -288,21 +303,21 @@ export const Sortable: Story<TableProps> = () => {
       <Head>
         <Row>
           {state.columns.map((col) => (
-            <Cell
+            <SortCell
               sort={col.sortDirection}
               key={`head-${col.accessor}`}
               onClick={col.sortDirection ? () => onSortClick(col) : undefined}
+              isSorted={col.isSorted}
             >
               {col.name}
               <Icon
-                style={col.isSorted ? {} : { visibility: 'hidden' }}
                 name={
-                  col.sortDirection === 'ascending'
-                    ? 'chevron_down'
-                    : 'chevron_up'
+                  col.sortDirection === 'descending'
+                    ? 'chevron_up'
+                    : 'chevron_down'
                 }
               />
-            </Cell>
+            </SortCell>
           ))}
         </Row>
       </Head>

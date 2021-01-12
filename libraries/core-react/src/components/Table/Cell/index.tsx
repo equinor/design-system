@@ -5,7 +5,7 @@ import { TableDataCell } from './DataCell'
 import { TableHeaderCell } from './HeaderCell'
 import { InnerContext } from '../Inner.context'
 
-type CellProps = {
+export type CellProps = {
   /** Specifies which variant to use */
   variant?: Variants
   /** Specifies cell background color */
