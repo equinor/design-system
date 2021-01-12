@@ -220,7 +220,7 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 
-const SortCell = styled<CellProps>(Cell)`
+const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
   }
@@ -296,7 +296,7 @@ export const Sortable: Story<TableProps> = () => {
   }, [state.columns])
 
   return (
-    <Table>
+    <Table density="compact">
       <Caption>
         <Typography variant="h2">Fruits cost price</Typography>
       </Caption>
