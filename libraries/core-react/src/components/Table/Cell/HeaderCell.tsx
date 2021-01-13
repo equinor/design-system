@@ -82,5 +82,3 @@ export const TableHeaderCell = ({
     </StyledTableCell>
   )
 }
-
-// Cell.displayName = 'eds-table-cell'
