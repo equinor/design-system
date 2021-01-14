@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { TdHTMLAttributes } from 'react'
+import { TdHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
 import { token as tablecell, TableCellToken } from './DataCell.tokens'
@@ -57,23 +57,19 @@ type CellProps = {
   variant?: Variants
   /** Specifies cell background color */
   color?: Colors
-}
+} & TdHTMLAttributes<HTMLTableDataCellElement>
 
-export const TableDataCell = ({
-  children,
-  variant = 'text',
-  ...rest
-}: CellProps & TdHTMLAttributes<HTMLTableDataCellElement>): JSX.Element => {
-  const { density } = useTable()
+export const TableDataCell = forwardRef<HTMLTableDataCellElement, CellProps>(
+  function TableDataCell({ children, variant = 'text', ...rest }, ref) {
+    const { density } = useTable()
 
-  let token = applyMutations(variant, tablecell)
-  token = applyDensity(density, token)
+    let token = applyMutations(variant, tablecell)
+    token = applyDensity(density, token)
 
-  return (
-    <StyledTableCell token={token} {...rest}>
-      {children}
-    </StyledTableCell>
-  )
-}
-
-// Cell.displayName = 'eds-table-cell'
+    return (
+      <StyledTableCell token={token} {...rest} ref={ref}>
+        {children}
+      </StyledTableCell>
+    )
+  },
+)
