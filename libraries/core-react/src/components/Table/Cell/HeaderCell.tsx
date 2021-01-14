@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ThHTMLAttributes } from 'react'
+import { ThHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, spacingsTemplate, bordersTemplate } from '@utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
@@ -68,19 +68,16 @@ type CellProps = {
   sort?: React.AriaAttributes['aria-sort']
 } & ThHTMLAttributes<HTMLTableHeaderCellElement>
 
-export const TableHeaderCell = ({
-  children,
-  sort,
-  ...rest
-}: CellProps): JSX.Element => {
+export const TableHeaderCell = forwardRef<
+  HTMLTableHeaderCellElement,
+  CellProps
+>(function TableHeaderCell({ children, sort, ...rest }, ref) {
   const { density } = useTable()
   const token = applyDensity(density, tablehead)
 
   return (
-    <StyledTableCell token={token} aria-sort={sort} {...rest}>
+    <StyledTableCell token={token} aria-sort={sort} {...rest} ref={ref}>
       <CellInner>{children}</CellInner>
     </StyledTableCell>
   )
-}
-
-// Cell.displayName = 'eds-table-cell'
+})

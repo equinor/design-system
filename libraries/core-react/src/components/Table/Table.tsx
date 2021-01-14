@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FunctionComponent, HTMLAttributes, useEffect } from 'react'
+import { forwardRef, HTMLAttributes, useEffect } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/DataCell.tokens'
 import { useTable } from './Table.context'
@@ -14,18 +14,21 @@ export type TableProps = {
   density?: Density
 } & HTMLAttributes<HTMLTableElement>
 
-export const Table: FunctionComponent<TableProps> = ({
-  children,
-  density = 'comfortable',
-  ...props
-}) => {
+export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
+  { children, density = 'comfortable', ...props },
+  ref,
+) {
   const { setDensity } = useTable()
 
   useEffect(() => {
     setDensity(density)
   }, [density])
 
-  return <TableBase {...props}>{children}</TableBase>
-}
+  return (
+    <TableBase {...props} ref={ref}>
+      {children}
+    </TableBase>
+  )
+})
 
 // Table.displayName = 'EdsTable'
