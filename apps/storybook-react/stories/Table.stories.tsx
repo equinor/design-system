@@ -53,6 +53,18 @@ const data: Data[] = [
     origin: 'South Africa',
     price: 2.5,
   },
+  {
+    number: '89-012',
+    description: 'Pineapple',
+    origin: 'Paraguay',
+    price: 1.9,
+  },
+  {
+    number: '89-012',
+    description: 'Pomegranate',
+    origin: 'Persia',
+    price: 4.5,
+  },
 ]
 
 type SortDirection = 'ascending' | 'descending' | 'none'
@@ -157,11 +169,6 @@ const FixedContainer = styled.div`
   overflow: auto;
 `
 
-const StickyCell = styled(Cell)`
-  position: sticky;
-  top: 0;
-`
-
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
@@ -171,10 +178,10 @@ export const FixedTableHeader: Story<TableProps> = () => {
         <Caption>
           <Typography variant="h2">Fruits cost price</Typography>
         </Caption>
-        <Head>
+        <Head sticky>
           <Row>
             {columns.map((col) => (
-              <StickyCell key={`head-${col.accessor}`}>{col.name}</StickyCell>
+              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
             ))}
           </Row>
         </Head>

@@ -10,12 +10,15 @@ const StyledTableHead = styled.thead`
   background: ${token.background};
 `
 
-export type HeadProps = HTMLAttributes<HTMLTableSectionElement>
+export type HeadProps = {
+  /** Header will stick to top when scrolling */
+  sticky?: boolean
+} & HTMLAttributes<HTMLTableSectionElement>
 
 export const Head = forwardRef<HTMLTableSectionElement, HeadProps>(
-  function Head({ children, ...props }, ref) {
+  function Head({ children, sticky, ...props }, ref) {
     return (
-      <InnerContext.Provider value={{ variant: 'head' }}>
+      <InnerContext.Provider value={{ variant: 'head', sticky }}>
         <StyledTableHead {...props} ref={ref}>
           {children}
         </StyledTableHead>
