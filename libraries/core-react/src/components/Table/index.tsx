@@ -5,12 +5,13 @@ import { Cell, CellProps } from './Cell'
 import { Head } from './Head'
 import { Row, RowProps } from './Row'
 import { Caption, CaptionProps } from './Caption'
-import { TableProvider } from './Table.context'
+// import { TableProvider } from './Table.context'
+import { EdsProvider } from '../../contexts/eds.context'
 
 const TableWrapper = (props: TableProps) => (
-  <TableProvider>
+  <EdsProvider>
     <BaseTable {...props}></BaseTable>
-  </TableProvider>
+  </EdsProvider>
 )
 
 type TableCompoundProps = typeof BaseTable & {
