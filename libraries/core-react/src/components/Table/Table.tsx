@@ -1,9 +1,8 @@
 import * as React from 'react'
-import { forwardRef, HTMLAttributes, useEffect } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/DataCell.tokens'
-import { useTable } from './Table.context'
-import { useEds } from './../../contexts/eds.context'
+import { useEds, EdsProvider } from './../../contexts/eds.context'
 import { Density } from './Table.types'
 
 const TableBase = styled.table`
@@ -19,16 +18,12 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
   { children, density = 'comfortable', ...props },
   ref,
 ) {
-  const { setDensity } = useEds()
-
-  useEffect(() => {
-    setDensity(density)
-  }, [density])
-
   return (
-    <TableBase {...props} ref={ref}>
-      {children}
-    </TableBase>
+    <EdsProvider density={density}>
+      <TableBase {...props} ref={ref}>
+        {children}
+      </TableBase>
+    </EdsProvider>
   )
 })
 

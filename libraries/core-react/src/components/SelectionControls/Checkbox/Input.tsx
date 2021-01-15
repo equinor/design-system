@@ -1,7 +1,7 @@
 /* eslint camelcase: "off" */
 import * as React from 'react'
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   checkbox,
   checkbox_outline, // eslint-disable-line camelcase
@@ -9,6 +9,7 @@ import {
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { checkbox as tokens } from './Checkbox.tokens'
+import { useEds } from '../../../contexts/eds.context'
 
 const { color, enabled } = tokens
 
@@ -63,12 +64,20 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   fill,
 }))``
 
-type StyledInputWrapperProps = { disabled: boolean }
+type StyledInputWrapperProps = {
+  disabled: boolean
+  density: 'comfortable' | 'compact'
+}
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
+  ${({ density }) =>
+    density === 'comfortable'
+      ? css`
+          padding: ${enabled.padding};
+        `
+      : ''}
   display: inline-flex;
   border-radius: 50%;
-  padding: ${enabled.padding};
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ disabled }) =>
@@ -90,8 +99,10 @@ export type InputProps = {
 export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
   function CheckboxInput({ disabled = false, indeterminate, ...rest }, ref) {
     const iconSize = 24
+
+    const { density } = useEds()
     return (
-      <InputWrapper disabled={disabled}>
+      <InputWrapper disabled={disabled} density={density}>
         <Input
           {...rest}
           ref={ref}

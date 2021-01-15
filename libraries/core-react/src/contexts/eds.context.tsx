@@ -17,10 +17,16 @@ type UseEdsProps<T> = {
 
 const EdsContext = React.createContext<State>(initalState)
 
-type ProviderProps = { children: ReactNode }
+type ProviderProps = {
+  density?: Density
+  children: ReactNode
+}
 
-export const EdsProvider = ({ children }: ProviderProps): JSX.Element => {
-  const [state, setState] = useState<State>(initalState)
+export const EdsProvider = ({
+  children,
+  density = 'comfortable',
+}: ProviderProps): JSX.Element => {
+  const [state, setState] = useState<State>({ ...initalState, density })
 
   const setDensity = (density: Density) => setState({ ...state, density })
 

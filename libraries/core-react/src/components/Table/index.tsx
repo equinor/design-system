@@ -6,13 +6,6 @@ import { Head } from './Head'
 import { Row, RowProps } from './Row'
 import { Caption, CaptionProps } from './Caption'
 // import { TableProvider } from './Table.context'
-import { EdsProvider } from '../../contexts/eds.context'
-
-const TableWrapper = (props: TableProps) => (
-  <EdsProvider>
-    <BaseTable {...props}></BaseTable>
-  </EdsProvider>
-)
 
 type TableCompoundProps = typeof BaseTable & {
   Body: typeof Body
@@ -22,7 +15,7 @@ type TableCompoundProps = typeof BaseTable & {
   Caption: typeof Caption
 }
 
-const Table = TableWrapper as TableCompoundProps
+const Table = BaseTable as TableCompoundProps
 
 Table.Body = Body
 Table.Cell = Cell

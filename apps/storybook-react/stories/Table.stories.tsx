@@ -7,6 +7,7 @@ import {
   Typography,
   Icon,
   CellProps,
+  Checkbox,
 } from '@equinor/eds-core-react'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import './../style.css'
@@ -203,27 +204,34 @@ export const CompactTable: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   return (
-    <Table density="compact">
-      <Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
-      </Caption>
-      <Head>
-        <Row>
-          {columns.map((col) => (
-            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
-          ))}
-        </Row>
-      </Head>
-      <Body>
-        {cellValues?.map((row) => (
-          <Row key={row.toString()}>
-            {row.map((cellValue) => (
-              <Cell key={cellValue}>{cellValue}</Cell>
+    <div>
+      <Table density="compact">
+        <Caption>
+          <Typography variant="h2">Fruits cost price</Typography>
+        </Caption>
+        <Head>
+          <Row>
+            <Cell>Check</Cell>
+            {columns.map((col) => (
+              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
             ))}
           </Row>
-        ))}
-      </Body>
-    </Table>
+        </Head>
+        <Body>
+          {cellValues?.map((row) => (
+            <Row key={row.toString()}>
+              <Cell>
+                <Checkbox label="check me inside!" />
+              </Cell>
+              {row.map((cellValue) => (
+                <Cell key={cellValue}>{cellValue}</Cell>
+              ))}
+            </Row>
+          ))}
+        </Body>
+      </Table>
+      <Checkbox label="check me outside!" />
+    </div>
   )
 }
 
