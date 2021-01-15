@@ -19,10 +19,10 @@ export type CellProps = {
 
 export const Cell = (props: CellProps): JSX.Element => (
   <InnerContext.Consumer>
-    {(value) => {
-      switch (value.variant) {
+    {({ variant, sticky }) => {
+      switch (variant) {
         case 'head':
-          return <TableHeaderCell {...props} />
+          return <TableHeaderCell sticky={sticky} {...props} />
         default:
         case 'body':
           return <TableDataCell {...props} />

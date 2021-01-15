@@ -2,6 +2,7 @@ import * as React from 'react'
 
 type State = {
   variant: 'body' | 'head'
+  sticky?: boolean
 }
 
 const initalState: State = {

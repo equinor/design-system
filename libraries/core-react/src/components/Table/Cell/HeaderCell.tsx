@@ -8,10 +8,11 @@ import { applyDensity } from './utils'
 
 type BaseProps = {
   token: TableHeadToken
+  sticky?: boolean
 } & Pick<React.AriaAttributes, 'aria-sort'>
 
 const Base = (props: BaseProps) => {
-  const { token } = props
+  const { token, sticky } = props
   const { background, height, typography, spacings } = token
   const activeToken = token.states.active
   const ariaSort = props['aria-sort']
@@ -50,6 +51,13 @@ const Base = (props: BaseProps) => {
     ${bordersTemplate(token.border)}
     ${sortStylingHover}
     ${sortStylingActive}
+
+    ${sticky
+      ? css`
+          position: sticky;
+          top: 0;
+        `
+      : ''}
   `
 
   return base
@@ -66,6 +74,7 @@ const CellInner = styled.div`
 
 type CellProps = {
   sort?: React.AriaAttributes['aria-sort']
+  sticky?: boolean
 } & ThHTMLAttributes<HTMLTableHeaderCellElement>
 
 export const TableHeaderCell = forwardRef<
