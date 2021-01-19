@@ -1,7 +1,7 @@
 /* eslint camelcase: "off" */
 import * as React from 'react'
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import {
   checkbox,
   checkbox_outline, // eslint-disable-line camelcase
@@ -63,9 +63,7 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   fill,
 }))``
 
-type StyledInputWrapperProps = {
-  disabled: boolean
-}
+type StyledInputWrapperProps = { disabled: boolean }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-flex;
