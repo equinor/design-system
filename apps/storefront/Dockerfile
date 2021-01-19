@@ -2,7 +2,7 @@ FROM node:14 as builder
 WORKDIR /app
 
 # install pnpm
-RUN npm install -g pnpm
+RUN npm install -g pnpm@latest
 
 COPY ./package.yaml ./
 COPY ./pnpm-workspaces.yaml ./

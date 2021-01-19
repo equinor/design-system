@@ -4,7 +4,7 @@
   "description": "Documentation for Equinor Design System (EDS)",
   "version": "1.0.0",
   "engines": {
-    "pnpm": ">=4",
+    "pnpm": ">=5.13.5",
     "node": ">=14.0.0"
   },
   "author": {
