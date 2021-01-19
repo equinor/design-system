@@ -9,7 +9,7 @@ import {
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { checkbox as tokens } from './Checkbox.tokens'
-import { useEds } from '../../../contexts/eds.context'
+import { useEds } from '../../EdsProvider'
 
 const { color, enabled } = tokens
 

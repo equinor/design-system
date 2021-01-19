@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
 import { token as tablecell, TableCellToken } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
-import { useEds } from '../../../contexts/eds.context'
+import { useEds } from '../../EdsProvider'
 
 import { applyDensity } from './utils'
 

@@ -3,7 +3,7 @@ import { ThHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, spacingsTemplate, bordersTemplate } from '@utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
-import { useEds } from '../../../contexts/eds.context'
+import { useEds } from '../../EdsProvider'
 import { applyDensity } from './utils'
 
 type BaseProps = {

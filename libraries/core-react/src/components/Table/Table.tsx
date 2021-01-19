@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/DataCell.tokens'
-import { useEds, EdsProvider } from './../../contexts/eds.context'
+import { EdsProvider } from '../EdsProvider'
 import { Density } from './Table.types'
 
 const TableBase = styled.table`
