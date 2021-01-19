@@ -9,7 +9,6 @@ import {
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { checkbox as tokens } from './Checkbox.tokens'
-import { useEds } from '../../EdsProvider'
 
 const { color, enabled } = tokens
 
@@ -66,18 +65,12 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
 
 type StyledInputWrapperProps = {
   disabled: boolean
-  density: 'comfortable' | 'compact'
 }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
-  ${({ density }) =>
-    density === 'comfortable'
-      ? css`
-          padding: ${enabled.padding};
-        `
-      : ''}
   display: inline-flex;
   border-radius: 50%;
+  padding: ${enabled.padding};
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ disabled }) =>
@@ -100,9 +93,8 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
   function CheckboxInput({ disabled = false, indeterminate, ...rest }, ref) {
     const iconSize = 24
 
-    const { density } = useEds()
     return (
-      <InputWrapper disabled={disabled} density={density}>
+      <InputWrapper disabled={disabled}>
         <Input
           {...rest}
           ref={ref}
