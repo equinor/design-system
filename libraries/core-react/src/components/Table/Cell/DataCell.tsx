@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components'
 import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
 import { token as tablecell, TableCellToken } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
-import { useTable } from '../Table.context'
+import { useEds } from '../../EdsProvider'
+
 import { applyDensity } from './utils'
 
 const applyMutations = (
@@ -61,7 +62,7 @@ type CellProps = {
 
 export const TableDataCell = forwardRef<HTMLTableDataCellElement, CellProps>(
   function TableDataCell({ children, variant = 'text', ...rest }, ref) {
-    const { density } = useTable()
+    const { density } = useEds()
 
     let token = applyMutations(variant, tablecell)
     token = applyDensity(density, token)

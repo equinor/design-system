@@ -3,7 +3,7 @@ import { ThHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, spacingsTemplate, bordersTemplate } from '@utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
-import { useTable } from '../Table.context'
+import { useEds } from '../../EdsProvider'
 import { applyDensity } from './utils'
 
 type BaseProps = {
@@ -81,7 +81,7 @@ export const TableHeaderCell = forwardRef<
   HTMLTableHeaderCellElement,
   CellProps
 >(function TableHeaderCell({ children, sort, ...rest }, ref) {
-  const { density } = useTable()
+  const { density } = useEds()
   const token = applyDensity(density, tablehead)
 
   return (
