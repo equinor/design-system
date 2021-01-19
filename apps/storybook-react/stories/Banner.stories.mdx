@@ -1,0 +1,197 @@
+<!---Badge.stories.mdx --->
+
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import styled from 'styled-components'
+import { Banner, Icon, Button, BannerProps } from '@equinor/eds-core-react'
+import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
+
+
+<Meta title="MDX/Banner" component={Banner} subcomponents={{BannerMessage: Banner.BannerMessage, BannerIcon: Banner.BannerIcon, BannerActions: Banner.BannerActions}} />
+
+
+<!--- This is your Story template function, shown here in React 
+
+export const Template = (args) => <Banner {...args } /> -->
+export const Template = (args) => <Banner {...args } >This tag is not being preserved yet. Click start preservation to enable writing preservation records.</Banner>
+
+# Banner
+
+_Banners_ display important notifications and related optional actions.
+
+## Guidelines
+
+<!--List how to use it, sizes, widths, grid interactions, color allowances -->
+
+Notification banners should communicate a change or error. Banners are always at the top of the page but below the _Top bar_. Banners require an action in order to be dismissed. Banners deliver medium priority information---while _Snackbars_ deliver low priority and _Dialogs_ delivery high priority information. Banners are meant to be slightly interruptive but not overly distracting. Banners can be fixed or scroll away with content.
+
+Banners are also known as _Top bar_ or _Alerts_.
+
+**Don't**
+
+<!--Bullet point list if needed -->
+
+- Do not put a banner above the top bar.
+- Do not use more than one banner at a time.
+- Do not include links in the text.
+
+<Canvas>
+<Story name="Simple" >
+  {args => <Banner {...args } >This tag is not being preserved yet. Click start preservation to enable writing preservation records.</Banner>}
+</Story>
+</Canvas>
+
+
+## Variant
+
+<!--One ### heading per frame in Figma, explaining each component in that frame. One 'content' section per variation if needed -->
+
+The `Text` or `Text + icon` with the optional `Actions` combined are to fill 100% of the width of the main content area. They are not to go over open _Navigation drawers_ or fixed _sidesheets_ but beside them.
+
+### Text
+
+Banners should have a single message with specific actions (optional) related to that message. Banner messages should be written as full sentences with punctuation.
+
+<Canvas>
+  <Story name="Text" >
+      {args => <Banner {...args } >This tag is not being preserved yet. Click start preservation to enable writing preservation records.</Banner>}
+  </Story>
+</Canvas>
+
+### Text + icon
+
+To help weight the banner more on the screen a supporting icon can be added. Choose an icon from the `System Icons` that helps strengthen your message.
+
+<Canvas>
+  <Story name="Text and icon" >
+    {args => <Banner {...args}>
+      <Banner.BannerIcon>
+        <Icon data={thumbs_up} />
+      </Banner.BannerIcon><Banner.BannerMessage>We are in the making of a new design for this page.</Banner.BannerMessage></Banner>}
+  </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="Text and icon warning">
+    {args => <Banner {...args}>
+      <Banner.BannerIcon variant="warning">
+        <Icon data={thumbs_down} />
+      </Banner.BannerIcon><Banner.BannerMessage>Some warning information.</Banner.BannerMessage></Banner>}
+  </Story>
+</Canvas>
+
+### Actions
+
+Actions are optional. Actions should always be related to the message. Banners can have up to two actions. Action labels should be short and text only.
+
+If the screen is not wide enough, place the actions below the message on their own line. (In Figma, remember to turn off the `Text` layers bottom border.)
+
+<Canvas>
+    <Story name="Text and action">
+    {(args) => {
+      const InlineBannerActions = styled(Banner.BannerActions)`
+        display: flex;
+      `
+      return (
+        <Banner {...args}>
+          <Banner.BannerMessage>You are signed on with another account than Equinor account:
+        name.lastname@mail.com.</Banner.BannerMessage>
+           <InlineBannerActions>
+            <Button variant="ghost" style={{ marginRight: '1rem' }}>
+              Sign out
+            </Button>
+            <Button variant="ghost">OK</Button>
+          </InlineBannerActions>
+        </Banner>
+        )
+      }}
+  </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="Text with action on bottom">
+    {(args) => {
+      const InlineBannerActions = styled(Banner.BannerActions)`
+        display: flex;
+      `
+      return (
+        <Banner {...args}>
+          <Banner.BannerMessage>You are signed on with another account than Equinor account:
+        name.lastname@mail.com. This means you have to do something to be able
+        to use this service.</Banner.BannerMessage>
+           <InlineBannerActions placement="bottom">
+            <Button variant="ghost" style={{ marginRight: '1rem' }}>
+              Sign out
+            </Button>
+            <Button variant="ghost">OK</Button>
+          </InlineBannerActions>
+        </Banner>
+        )
+      }}
+  </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="Text and icon with action on bottom">
+    {(args) => {
+      const InlineBannerActions = styled(Banner.BannerActions)`
+        display: flex;
+      `
+      return (
+        <Banner {...args}>
+          <Banner.BannerIcon>
+            <Icon data={save} />
+          </Banner.BannerIcon>
+          <Banner.BannerMessage>
+            I&apos;m such a really really long message about some sad saving news
+            that there is not enough space for the actions on my left. That&apos;s
+            why the actions have been located at the bottom using the placement prop
+            instead.
+          </Banner.BannerMessage>
+           <InlineBannerActions placement="bottom">
+            <Button style={{ marginRight: '1rem' }}>First action</Button>
+            <Button color="secondary">Second action</Button>
+          </InlineBannerActions>
+        </Banner>
+        )
+      }}
+  </Story>
+</Canvas>
+
+## Figma
+
+### How to add
+
+1. Locate the **Assets** tab in the **Layers Panel**.
+2. There are two ways to locate the `Notification: Banner` component needed:
+   - Use the search bar to search for a component grouping name or variation name.
+   - Scroll through the folders list and open the grouping.
+3. Once the component needed is located, click and drag it into the frame/artboard.
+
+### How to use
+
+1. Place the `Notification: Banner` component needed on the frame/artboard and choose a _variant_ in the **Inspector Panel**.
+2. Locate and expand the highlighted _layer_ in the **Layers Panel**.
+3. Edit the text label.
+4. There are two ways to change the action icon:
+   - **Drag and drop**
+   - Search or locate an icon in the **Assets Panel**
+   - Drag and drop the icon directly into the placeholder icon using:
+   - Mac: `Command` + `Option`
+   - PC: `Ctrl` + `ALT`
+   - **Manually**
+   - Locate and select the `Icon > Nested icon > Placeholder Icon` or `Icon > Nested icon > chevron down` _layer_ in the **Layers Panel**.
+   - Locate the **Design** tab in the **Inspector Panel**.
+   - Under the **Instance** section, click the icon name to expand the menu.
+   - Choose a new icon.
+5. Select all the `Notification: Banner` header layers and convert them to a frame/artboard by using the following shortcut:
+
+- Mac: `Command` + `Option` + `G`
+- PC: `Ctrl` + `ALT` + `G`
+
+6. Make sure to rename the new group.
+7. Locate the **Design** tab in the **Inspector Panel**.
+8. Under the **Constraints** section, set up constraints.
+
+## API
+
+<ArgsTable of={Banner} />
