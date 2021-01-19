@@ -90,7 +90,6 @@ export type InputProps = {
 export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
   function CheckboxInput({ disabled = false, indeterminate, ...rest }, ref) {
     const iconSize = 24
-
     return (
       <InputWrapper disabled={disabled}>
         <Input
