@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import {
@@ -238,7 +238,7 @@ const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   }
 `
 export const Sortable: Story<TableProps> = () => {
-  const [state, setState] = React.useState<{
+  const [state, setState] = useState<{
     columns: Column[]
     cellValues?: string[][]
   }>({ columns })
