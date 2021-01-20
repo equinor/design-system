@@ -251,7 +251,7 @@ export const CompactTable: Story<TableProps> = () => {
   return (
     <div>
       <TopBar>
-        <TopBar.Header>Menu in Topbar</TopBar.Header>
+        <TopBar.Header>Compact table with switcher</TopBar.Header>
         <TopBar.Actions>
           <Button
             variant="ghost_icon"
@@ -271,12 +271,14 @@ export const CompactTable: Story<TableProps> = () => {
             anchorEl={buttonEl}
             onClose={closeMenu}
           >
-            <Menu.MenuItem onClick={() => setDensity('comfortable')}>
-              Comfortable
-            </Menu.MenuItem>
-            <Menu.MenuItem onClick={() => setDensity('compact')}>
-              Compact
-            </Menu.MenuItem>
+            <Menu.MenuSection title="Density">
+              <Menu.MenuItem onClick={() => setDensity('comfortable')}>
+                Comfortable
+              </Menu.MenuItem>
+              <Menu.MenuItem onClick={() => setDensity('compact')}>
+                Compact
+              </Menu.MenuItem>
+            </Menu.MenuSection>
           </Menu>
         </TopBar.Actions>
       </TopBar>
