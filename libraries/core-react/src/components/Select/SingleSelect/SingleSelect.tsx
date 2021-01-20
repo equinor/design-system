@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { forwardRef, SelectHTMLAttributes, useState } from 'react'
+import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
 import {
   useCombobox,
   UseComboboxProps,
@@ -66,6 +66,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
   ) {
     const [inputItems, setInputItems] = useState(items)
     const isControlled = selectedOption !== undefined ? true : false
+
+    useEffect(() => {
+      setInputItems(items)
+    }, [items])
 
     let comboboxProps: UseComboboxProps<string> = {
       items: inputItems,
