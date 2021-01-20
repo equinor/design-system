@@ -7,8 +7,11 @@ import {
   Typography,
   Icon,
   CellProps,
+  TopBar,
+  Menu,
+  Button,
 } from '@equinor/eds-core-react'
-import { chevron_down, chevron_up } from '@equinor/eds-icons'
+import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
 import './../style.css'
 
 Icon.add({ chevron_down, chevron_up })
@@ -202,28 +205,105 @@ export const FixedTableHeader: Story<TableProps> = () => {
 export const CompactTable: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
+  const [state, setState] = React.useState<{
+    buttonEl: HTMLButtonElement
+    density: 'comfortable' | 'compact'
+  }>({
+    density: 'comfortable',
+    buttonEl: null,
+  })
+
+  const { density, buttonEl } = state
+  const isOpen = Boolean(buttonEl)
+
+  const setDensity = (density: 'comfortable' | 'compact') =>
+    setState((prevState) => ({ ...prevState, density }))
+
+  const openMenu = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    const target = e.target as HTMLButtonElement
+    setState((prevState) => ({ ...prevState, buttonEl: target }))
+  }
+
+  const closeMenu = () =>
+    setState((prevState) => ({ ...prevState, buttonEl: null }))
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const { key } = e
+    switch (key) {
+      case 'ArrowDown':
+        isOpen ? closeMenu() : openMenu(e)
+        break
+      case 'ArrowUp':
+        isOpen ? closeMenu() : openMenu(e)
+        break
+      case 'Escape':
+        closeMenu()
+        break
+      default:
+        break
+    }
+  }
+
   return (
-    <Table density="compact">
-      <Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
-      </Caption>
-      <Head>
-        <Row>
-          {columns.map((col) => (
-            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
-          ))}
-        </Row>
-      </Head>
-      <Body>
-        {cellValues?.map((row) => (
-          <Row key={row.toString()}>
-            {row.map((cellValue) => (
-              <Cell key={cellValue}>{cellValue}</Cell>
+    <div>
+      <TopBar>
+        <TopBar.Header>Compact table with switcher</TopBar.Header>
+        <TopBar.Actions>
+          <Button
+            variant="ghost_icon"
+            id="menuButton"
+            aria-controls="menu-on-button"
+            aria-haspopup="true"
+            aria-expanded={Boolean(buttonEl)}
+            onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+            onKeyDown={onKeyPress}
+          >
+            <Icon data={accessible} title="accessible"></Icon>
+          </Button>
+          <Menu
+            id="menu-on-button"
+            aria-labelledby="menuButton"
+            open={Boolean(buttonEl)}
+            anchorEl={buttonEl}
+            onClose={closeMenu}
+          >
+            <Menu.MenuSection title="Density">
+              <Menu.MenuItem onClick={() => setDensity('comfortable')}>
+                Comfortable
+              </Menu.MenuItem>
+              <Menu.MenuItem onClick={() => setDensity('compact')}>
+                Compact
+              </Menu.MenuItem>
+            </Menu.MenuSection>
+          </Menu>
+        </TopBar.Actions>
+      </TopBar>
+      <Table density={density}>
+        <Caption>
+          <Typography variant="h2">Fruits cost price</Typography>
+        </Caption>
+        <Head>
+          <Row>
+            {columns.map((col) => (
+              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
             ))}
           </Row>
-        ))}
-      </Body>
-    </Table>
+        </Head>
+        <Body>
+          {cellValues?.map((row) => (
+            <Row key={row.toString()}>
+              {row.map((cellValue) => (
+                <Cell key={cellValue}>{cellValue}</Cell>
+              ))}
+            </Row>
+          ))}
+        </Body>
+      </Table>
+    </div>
   )
 }
 

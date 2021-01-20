@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useContext, ReactNode } from 'react'
+import { useState, useContext, ReactNode, useEffect } from 'react'
 
 type Density = 'compact' | 'comfortable'
 
@@ -24,14 +24,20 @@ type ProviderProps = {
 
 export const EdsProvider = ({
   children,
-  density = 'comfortable',
+  density,
 }: ProviderProps): JSX.Element => {
   const [state, setState] = useState<State>({ ...initalState, density })
 
-  const setDensity = (density: Density) => setState({ ...state, density })
+  const setDensity = (density: Density) =>
+    setState((prevState) => ({ ...prevState, density }))
+
+  useEffect(() => {
+    if (density !== state.density) {
+      setDensity(density)
+    }
+  }, [density])
 
   const value = {
-    setDensity,
     density: state.density,
   }
   return <EdsContext.Provider value={value}>{children}</EdsContext.Provider>
