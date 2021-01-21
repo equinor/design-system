@@ -72,7 +72,7 @@ export const MenuProvider = ({ children }: ProviderProps): JSX.Element => {
   const offset = 2
 
   const setFocusedIndex: UseMenu<State>['setFocusedIndex'] = (i) => {
-    setState({ ...state, focusedIndex: i })
+    setState((prevState) => ({ ...prevState, focusedIndex: i }))
   }
 
   const setPosition: UseMenu<State>['setPosition'] = (
@@ -80,19 +80,19 @@ export const MenuProvider = ({ children }: ProviderProps): JSX.Element => {
     menuRect,
     window,
   ) => {
-    setState({
-      ...state,
+    setState((prevState) => ({
+      ...prevState,
       isPositioned: true,
       position: {
         ...state.position,
         ...calculatePosition(anchorRect, offset),
         transform: calculateTransform(menuRect, anchorRect, window, offset),
       },
-    })
+    }))
   }
 
   const setOnClose: UseMenu<State>['setOnClose'] = (onClose) => {
-    setState({ ...state, onClose })
+    setState((prevState) => ({ ...prevState, onClose }))
   }
 
   const value = {

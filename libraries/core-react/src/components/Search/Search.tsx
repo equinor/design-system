@@ -210,15 +210,17 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     })
 
     useEffect(() => {
-      setState({ ...state, isActive })
+      setState((prevState) => ({ ...prevState, isActive }))
     }, [value, defaultValue])
 
     const handleOnClick = () => {
       const inputEl = inputRef.current
       inputEl.focus()
     }
-    const handleFocus = () => setState({ ...state, isFocused: true })
-    const handleBlur = () => setState({ ...state, isFocused: false })
+    const handleFocus = () =>
+      setState((prevState) => ({ ...prevState, isFocused: true }))
+    const handleBlur = () =>
+      setState((prevState) => ({ ...prevState, isFocused: false }))
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setIsActive((event.target as HTMLInputElement).value)
     }
@@ -227,10 +229,10 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       const input = inputRef.current
       const clearedValue = ''
       setReactInputValue(input, clearedValue)
-      setState({ ...state, isActive: false })
+      setState((prevState) => ({ ...prevState, isActive: false }))
     }
     const setIsActive = (newValue: string) =>
-      setState({ ...state, isActive: newValue !== '' })
+      setState((prevState) => ({ ...prevState, isActive: newValue !== '' }))
 
     /** Applying props for controlled vs. uncontrolled scnarios */
     const applyControllingProps: ControlledSearch = (
