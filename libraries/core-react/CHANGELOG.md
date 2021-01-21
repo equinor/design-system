@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.4] - 2021-01-21
+
+### Added ✨
+
+- Active, error and hover states in `Table` ([#940](https://github.com/equinor/design-system/issues/940))
+- Support for toggling sortable Table column styling. New property `sort` on `Table.Cell` ([#983](https://github.com/equinor/design-system/issues/983))
+- Sticky Table head (#1031). New property `sticky` on `Table.Head`
+
+### Fixed 🐛
+
+- Tests for Table ([#297](https://github.com/equinor/design-system/issues/297))
+- Missing primary color on `Button` `variant="ghost_icon"` ([#986](https://github.com/equinor/design-system/issues/986))
+- Hover bug on touch devices ([#987](https://github.com/equinor/design-system/issues/987))
+- Icon bug in Storybook when changing name ([#955](https://github.com/equinor/design-system/issues/955))
+- `SingleSelect` items are properly updated when changed after initial render (#1064)
+
+### Changed 📓
+
+- Improved `Table.Cell` ([#997](https://github.com/equinor/design-system/issues/997))
+- Refactored Table to use React.forwardRef (#1007)
+
+### Deprecated
+
+- `Table.Cell` `as` property on is removed. This had to be done due to technical limitations with new features. `Table.Cell` will now automatically render `th` or `td` based on "parent" element.
+
 ## [0.8.3] - 2020-12-14
 
 ### Fixed
