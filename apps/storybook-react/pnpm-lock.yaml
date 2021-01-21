@@ -27,6 +27,7 @@ devDependencies:
   downshift: 6.0.6_react@17.0.1
   react: 17.0.1
   react-is: 17.0.1
+  storybook-addon-designs: 5.4.3_9fb19348c6e5f815f88deefa4abb7f1a
 lockfileVersion: 5.2
 packages:
   /@babel/code-frame/7.10.4:
@@ -7925,6 +7926,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
+  /make-cancellable-promise/1.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-+YO6Grg2uy/z8Mv3uV90OP6yAUHIF43YGgEFbejmBrK9VWFsVO6DvzFMcopXr9wCNg3/QIltIKiSCROC7zFB2g==
   /make-dir/2.1.0:
     dependencies:
       pify: 4.0.1
@@ -7940,6 +7945,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
+  /make-event-props/1.2.0:
+    dev: true
+    resolution:
+      integrity: sha512-BmWFkm/jZzVH9A0tEBdkjAARUz/eha+5IRyfOndeSMKRadkgR5DawoBHoRwLxkYmjJOI5bHkXKpaZocxj+dKgg==
   /makeerror/1.0.11:
     dependencies:
       tmpl: 1.0.4
@@ -8068,6 +8077,10 @@ packages:
       node: '>=4.3.0 <5.0.0 || >=5.10'
     resolution:
       integrity: sha512-jA0rdU5KoQMC0e6ppoNRtpp6vjFq6+NY7r8hywnC7V+1Xj/MtHwGIbB1QaK/dunyjWteJzmkpd7ooeWg10T7GA==
+  /merge-class-names/1.4.0:
+    dev: true
+    resolution:
+      integrity: sha512-xNdBM7s+6uD+vNZJEymqrFbMBCDGzoA8clZTcj2F1XIy1QQKF+wjFVv7iDZFfdCBnViTdt54A4Ye2lmBsXrBjQ==
   /merge-descriptors/1.0.1:
     resolution:
       integrity: sha1-sAqqVW3YtEVoFQ7J0blT8/kMu2E=
@@ -8339,6 +8352,10 @@ packages:
       node: '>= 0.10.5'
     resolution:
       integrity: sha1-X1Zl2TNRM1yqvvjxxVRRbPXx5OU=
+  /node-ensure/0.0.0:
+    dev: true
+    resolution:
+      integrity: sha1-7K52QVDemYYexcgQ/V0Jaxg5Mqc=
   /node-fetch/2.6.1:
     engines:
       node: 4.x || >=6.0.0
@@ -8802,6 +8819,15 @@ packages:
       node: '>=0.12'
     resolution:
       integrity: sha512-4Ejy1OPxi9f2tt1rRV7Go7zmfDQ+ZectEQz3VGUQhgq62HtIRPDyG/JtnwIxs6x3uNMwo2V7q1fMvKjb+Tnpqg==
+  /pdfjs-dist/2.1.266:
+    dependencies:
+      node-ensure: 0.0.0
+      worker-loader: 2.0.0
+    dev: true
+    peerDependencies:
+      webpack: ^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0
+    resolution:
+      integrity: sha512-Jy7o1wE3NezPxozexSbq4ltuLT0Z21ew/qrEiAEeUZzHxMHGk4DUV1D7RuCXg5vJDvHmjX1YssN+we9QfRRgXQ==
   /picomatch/2.2.2:
     engines:
       node: '>=8.6'
@@ -9318,6 +9344,22 @@ packages:
   /react-lifecycles-compat/3.0.4:
     resolution:
       integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+  /react-pdf/4.2.0_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      '@babel/runtime': 7.12.5
+      make-cancellable-promise: 1.0.0
+      make-event-props: 1.2.0
+      merge-class-names: 1.4.0
+      pdfjs-dist: 2.1.266
+      prop-types: 15.7.2
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+    dev: true
+    peerDependencies:
+      react: ^16.3.0
+      react-dom: ^16.3.0
+    resolution:
+      integrity: sha512-Ao44mZszfPwtCUsrXHtXnhM+czTvPxfG5wqssbWgj2onL70TKSOKGzQfCH4csCnNDOKji/Pc/s0Og70/VOE+Rg==
   /react-popper-tooltip/3.1.1_react-dom@17.0.1+react@17.0.1:
     dependencies:
       '@babel/runtime': 7.12.5
@@ -9738,6 +9780,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-LKTe+2xNJBNxu/QhHvDR14wUXHRQbVY5ZOYpOGWRzhydZUqrLb2JBvLPY7cAqFmqrWuDED0Mjk7013SZiOz6Bw==
+  /schema-utils/0.4.7:
+    dependencies:
+      ajv: 6.12.6
+      ajv-keywords: 3.5.2_ajv@6.12.6
+    dev: true
+    engines:
+      node: '>= 4'
+    resolution:
+      integrity: sha512-v/iwU6wvwGK8HbU9yi3/nhGzP0yGSuhQMzL6ySiec1FSrZZDkhm4noOSWzrNFo/jEc+SJY6jRTwuwbSXJPDUnQ==
   /schema-utils/1.0.0:
     dependencies:
       ajv: 6.12.6
@@ -10038,6 +10089,20 @@ packages:
   /store2/2.12.0:
     resolution:
       integrity: sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
+  /storybook-addon-designs/5.4.3_9fb19348c6e5f815f88deefa4abb7f1a:
+    dependencies:
+      '@storybook/theming': 6.1.9_react-dom@17.0.1+react@17.0.1
+      react: 17.0.1
+      react-pdf: 4.2.0_react-dom@17.0.1+react@17.0.1
+    dev: true
+    peerDependencies:
+      '@storybook/addons': ^5.0.0 || ^6.0.0
+      '@storybook/components': ^5.0.0 || ^6.0.0
+      '@storybook/theming': ^5.0.0 || ^6.0.0
+      react: '>=16.8.0'
+      react-dom: '*'
+    resolution:
+      integrity: sha512-rSEC/jX0ig8qnQz1AzbEU+s2lmlDyZTCEy3Jh//XSBiZWycm0uPbP1vcknVXHbbGhkvHRvoyROqssiCjX661ZA==
   /stream-browserify/2.0.2:
     dependencies:
       inherits: 2.0.4
@@ -11115,6 +11180,17 @@ packages:
       errno: 0.1.8
     resolution:
       integrity: sha512-rvw3QTZc8lAxyVrqcSGVm5yP/IJ2UcB3U0graE3LCFoZ0Yn2x4EoVSqJKdB/T5M+FLcRPjz4TDacRf3OCfNUzw==
+  /worker-loader/2.0.0:
+    dependencies:
+      loader-utils: 1.4.0
+      schema-utils: 0.4.7
+    dev: true
+    engines:
+      node: '>= 6.9.0 || >= 8.9.0'
+    peerDependencies:
+      webpack: ^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0
+    resolution:
+      integrity: sha512-tnvNp4K3KQOpfRnD20m8xltE3eWh89Ye+5oj7wXEEHKac1P4oZ6p9oTj8/8ExqoSBnk9nu5Pr4nKfQ1hn2APJw==
   /worker-rpc/0.1.1:
     dependencies:
       microevent.ts: 0.1.1
@@ -11186,5 +11262,6 @@ specifiers:
   react-dom: ^17.0.1
   react-hook-form: ^6.12.1
   react-is: ^17.0.1
+  storybook-addon-designs: ^5.4.3
   styled-components: ^5.2.1
   typescript: ^4.1.2

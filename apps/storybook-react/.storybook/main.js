@@ -23,6 +23,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
     '@storybook/addon-a11y',
+    'storybook-addon-designs',
   ],
   webpackFinal: async (config, { configType }) => {
     // production build in Docker, where “libraries” is copied into the storybook root

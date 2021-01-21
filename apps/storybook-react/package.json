@@ -40,6 +40,7 @@
     "babel-loader": "^8.2.2",
     "downshift": "^6.0.6",
     "react": "^17.0.1",
-    "react-is": "^17.0.1"
+    "react-is": "^17.0.1",
+    "storybook-addon-designs": "^5.4.3"
   }
 }
