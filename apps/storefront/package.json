@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
-    "@equinor/eds-core-react": "^0.8.4",
+    "@equinor/eds-core-react": "^0.8.3",
     "@equinor/eds-icons": "^0.6.1",
     "@equinor/eds-tokens": "^0.5.4",
     "@mdx-js/react": "^1.6.21",
