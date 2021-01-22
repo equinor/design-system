@@ -32,7 +32,7 @@ export const EdsProvider = ({
     setState((prevState) => ({ ...prevState, density }))
 
   useEffect(() => {
-    if (typeof density !== 'undefined' && density !== state.density) {
+    if (density !== state.density) {
       setDensity(density)
     }
   }, [density])
