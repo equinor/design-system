@@ -1,0 +1,30 @@
+name: Deploy xxx Storybook
+on:
+  workflow_dispatch:
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Checkout 🛎️
+         run: |
+           REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+           git clone --filter=blob:none --no-checkout --depth 1 --sparse $REPO .
+           git sparse-checkout init --cone
+           git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
+           git checkout
+       - name: Install pnpm 📦  
+         uses: pnpm/action-setup@v1.2.1
+         with:
+           version: latest
+           run_install: |
+             - recursive: true
+       - name: Build storybook 🔧
+         run: pnpm build:storybook
+       - name: Deploy 🚀
+         uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+         with:
+          source_dir: './libraries/core-react/storybook-build'
+          container_name: '$web'
+          connection_string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING }}
+          sync: true
+          

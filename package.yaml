@@ -3,33 +3,34 @@ engines:
   pnpm: '>=5.13.5'
 scripts:
   lint: eslint
-  'lint:all': pnpm run lint .
-  'lint:storybook-react': pnpm run lint ./apps/storybook-react/stories
-  'lint:core-react': pnpm run lint ./libraries/core-react/src
+  lint:all: pnpm run lint .
+  lint:storybook-react: pnpm run lint ./apps/storybook-react/stories
+  lint:core-react: pnpm run lint ./libraries/core-react/src
   init: pnpm multi install --force && pnpm run build
   core-react: pnpm --filter @equinor/eds-core-react run dev
-  'test:core-react': pnpm --filter @equinor/eds-core-react run test
-  'build:core-react': pnpm --filter @equinor/eds-core-react run build
-  'build:tokens': pnpm --filter @equinor/eds-tokens run build
-  'build:icons': pnpm --filter @equinor/eds-icons run build
-  'bump:core-react': >-
+  test:core-react: pnpm --filter @equinor/eds-core-react run test
+  build:core-react: pnpm --filter @equinor/eds-core-react run build
+  build:tokens: pnpm --filter @equinor/eds-tokens run build
+  build:icons: pnpm --filter @equinor/eds-icons run build
+  bump:core-react: >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
     prerelease
-  'publish:core-react': >-
+  publish:core-react: >-
     pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
     alpha --access public
-  storybook: pnpm --filter @equinor/eds-storybook-react run dev
+  storybook: pnpm --filter ./libraries/core-react run storybook
+  build:storybook: pnpm --filter ./libraries/core-react run build:storybook
   storefront: pnpm --filter @equinor/eds-storefront run dev
-  'build:storefront': pnpm --filter @equinor/eds-storefront run build
+  build:storefront: pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
-  'test:watch:core-react': 'pnpm --filter @equinor/eds-core-react run test:watch'
+  test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   dockerize-storybook-react: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
-  storybook-docker-run: 'docker run -p 8080:80 eds/storybook-react'
+  storybook-docker-run: docker run -p 8080:80 eds/storybook-react
   storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
   dockerize-storefront: >-
     docker build --build-arg GATSBY_STAGE=prod -t eds/storefront -f
     apps/storefront/Dockerfile .
-  storefront-docker-run: 'docker run -p 8080:80 eds/storefront'
+  storefront-docker-run: docker run -p 8080:80 eds/storefront
   storefront-docker-inspect: docker run -it eds/storefront /bin/sh
 devDependencies:
   '@typescript-eslint/eslint-plugin': ^3.10.1
