@@ -18,6 +18,7 @@ jobs:
       - name: Install pnpm 📦  
         uses: pnpm/action-setup@v1.2.1
         with:
+          version: latest
           run_install: |
             - resursive: true
             - args: --filter ./libraries
