@@ -5,7 +5,7 @@ scripts:
   lint: eslint
   lint:all: pnpm run lint .
   lint:storybook-react: pnpm run lint ./apps/storybook-react/stories
-  lint:core-react: pnpm run lint ./libraries/core-react/src
+  lint:core-react: pnpm run lint ./libraries/core-react
   init: pnpm multi install --force && pnpm run build
   core-react: pnpm --filter @equinor/eds-core-react run dev
   test:core-react: pnpm --filter @equinor/eds-core-react run test
