@@ -1,4 +1,4 @@
-name: Deploy xxx Storybook
+name: Deploy Storybook
 on:
   workflow_dispatch:
 jobs:
@@ -18,6 +18,10 @@ jobs:
            version: latest
            run_install: |
              - recursive: true
+       - name: Run tests ✅
+         run: pnpm --filter ./libraries/core-react run test
+       - name: Lint core-react and stories ✅
+         run: pnpm run lint ./libraries/core-react
        - name: Build storybook 🔧
          run: pnpm build:storybook
        - name: Deploy 🚀
