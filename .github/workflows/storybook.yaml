@@ -1,6 +1,11 @@
 name: Deploy Storybook
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'libraries/core-react/**'
 jobs:
   upload:
     runs-on: ubuntu-latest
