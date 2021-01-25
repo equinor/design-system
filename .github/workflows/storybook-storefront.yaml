@@ -25,11 +25,11 @@ jobs:
            run_install: |
              - recursive: true
        - name: Build storybook 🔧
-         run: pnpm build:storybook
+         run: pnpm --filter ./apps/storybook-react run build
        - name: Deploy 🚀
          uses: bacongobbler/azure-blob-storage-upload@v1.1.1
          with:
-          source_dir: './libraries/core-react/storybook-build'
+          source_dir: './apps/storybook-react/dist'
           container_name: '$web'
           connection_string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING }}
           sync: true
