@@ -34,6 +34,6 @@ jobs:
          with:
           source_dir: './libraries/core-react/storybook-build'
           container_name: '$web'
-          connection_string: ${{ secrets.AZ_STORAGE_CONNECTION_STRING }}
+          connection_string: ${{ secrets.AZ_STORAGE_STORYBOOK_DEV_CONNECTION_STRING }}
           sync: true
           
