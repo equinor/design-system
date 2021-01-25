@@ -1,4 +1,4 @@
-name: Deploy Storybook
+name: Deploy Storefront-storybook
 on:
   workflow_dispatch:
   push:
