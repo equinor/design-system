@@ -17,7 +17,7 @@ jobs:
            git clone --filter=blob:none --no-checkout --depth 1 --sparse $REPO .
            git sparse-checkout init --cone
            git sparse-checkout set apps/storybook-react libraries/core-react libraries/tokens libraries/icons
-           git checkout
+           git checkout ${GITHUB_REF##*/}
        - name: Install pnpm 📦  
          uses: pnpm/action-setup@v1.2.1
          with:
