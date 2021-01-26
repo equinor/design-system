@@ -17,6 +17,14 @@ const Wrapper = styled.div`
 export default {
   title: 'Components/Avatar',
   component: Avatar,
+  parameters: {
+    docs: {
+      description: {
+        component: `An avatar is a small (user) picture. The avatar does 
+        not exist in Figma as a separate component.`,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<AvatarProps> = (args) => (

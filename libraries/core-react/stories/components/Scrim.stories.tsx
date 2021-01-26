@@ -18,6 +18,15 @@ const TestContent = styled.div`
 export default {
   title: 'Components/Scrim',
   component: Scrim,
+  parameters: {
+    docs: {
+      description: {
+        component: `A scrim is a temporary visual effect that fades the general 
+        interface while allowing the user to focus on an overlay.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<ScrimProps> = (args) => {

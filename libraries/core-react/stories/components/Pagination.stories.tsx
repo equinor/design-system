@@ -10,6 +10,15 @@ const PaddedTypography = styled(Typography)`
 export default {
   title: 'Components/Pagination',
   component: Pagination,
+  parameters: {
+    docs: {
+      description: {
+        component: `Pagination allows long sets of data or content to be 
+        divided into multiple pages with controls to navigate between these pages.
+        `,
+      },
+    },
+  },
   argTypes: {
     totalItems: {
       defaultValue: 40,

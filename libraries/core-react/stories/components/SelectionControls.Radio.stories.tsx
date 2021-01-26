@@ -19,6 +19,15 @@ const UnstyledList = styled.ul`
 export default {
   title: 'Components/Selection controls/Radio',
   component: Radio,
+  parameters: {
+    docs: {
+      description: {
+        component: `Selection controls allow users to select options, make 
+        decisions and set preferences.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<RadioProps> = (args) => (

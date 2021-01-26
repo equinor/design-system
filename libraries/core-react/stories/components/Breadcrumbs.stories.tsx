@@ -27,6 +27,14 @@ export default {
   subcomponents: {
     Breadcrumb,
   },
+  parameters: {
+    docs: {
+      description: {
+        component: `Breadcrumbs show the navigational path to users allowing them to navigate up the hierarchy.
+        `,
+      },
+    },
+  },
 } as Meta
 
 const handleClick = (e) => {

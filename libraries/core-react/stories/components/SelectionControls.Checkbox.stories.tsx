@@ -21,6 +21,15 @@ const UnstyledList = styled.ul`
 export default {
   title: 'Components/Selection controls/Checkbox',
   component: Checkbox,
+  parameters: {
+    docs: {
+      description: {
+        component: `Selection controls allow users to select options, make 
+        decisions and set preferences.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<CheckboxProps> = (args) => (

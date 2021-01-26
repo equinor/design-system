@@ -3,6 +3,25 @@ import styled from 'styled-components'
 import { Tooltip, TooltipProps, Typography, Button } from '@components'
 import { Story, Meta } from '@storybook/react'
 
+export default {
+  title: 'Components/Tooltip',
+  component: Tooltip,
+  argTypes: {
+    title: {
+      defaultValue: 'Tooltip title',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `A tooltip shows when hovered or focused, and displays information
+         such as a text label or a short description.
+        `,
+      },
+    },
+  },
+} as Meta
+
 const Body = styled.div`
   margin: 42px;
   display: grid;
@@ -20,16 +39,6 @@ const TextWrapper = styled.div`
   margin-bottom: 32px;
   width: 800px;
 `
-
-export default {
-  title: 'Components/Tooltip',
-  component: Tooltip,
-  argTypes: {
-    title: {
-      defaultValue: 'Tooltip title',
-    },
-  },
-} as Meta
 
 export const Default: Story<TooltipProps> = (args) => {
   return (

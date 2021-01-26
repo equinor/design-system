@@ -5,6 +5,15 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 export default {
   title: 'Components/Select/NativeSelect',
   component: NativeSelect,
+  parameters: {
+    docs: {
+      description: {
+        component: `The NativeSelect component allows users to choose one or 
+        multiple items or options from a list.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<NativeSelectProps> = (args) => (

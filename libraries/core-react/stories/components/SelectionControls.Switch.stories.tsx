@@ -34,6 +34,14 @@ const Examples = styled.div`
 export default {
   title: 'Components/Selection controls/Switch',
   component: Switch,
+  parameters: {
+    docs: {
+      description: {
+        component: `Selection controls allow users to select options, make decisions and set preferences.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<SwitchProps> = (args) => (

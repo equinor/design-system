@@ -33,6 +33,15 @@ const StyledSearch = styled(Search)`
 
 export default {
   title: 'Components/Search',
+  parameters: {
+    docs: {
+      description: {
+        component: `Search allows users to locate or refine content based on simple 
+        words or phrases.
+        `,
+      },
+    },
+  },
 } as Meta
 
 const handleOnChange = action('onChange')

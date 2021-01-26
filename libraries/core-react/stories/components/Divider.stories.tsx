@@ -10,6 +10,14 @@ export default {
     color: { control: 'radio' },
     variant: { control: 'radio' },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: `A divider is a thin line that separates content into clear groups.
+        `,
+      },
+    },
+  },
 } as Meta
 
 const Wrapper = styled.div`

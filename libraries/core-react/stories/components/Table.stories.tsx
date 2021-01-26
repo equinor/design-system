@@ -18,6 +18,28 @@ Icon.add({ chevron_down, chevron_up })
 
 const { Caption, Body, Row, Cell, Head } = Table
 
+export default {
+  title: 'Components/Table',
+  component: Table,
+  subcomponents: { Body, Row, Cell, Head },
+  parameters: {
+    docs: {
+      description: {
+        component: `A basic table component`,
+      },
+    },
+  },
+  argTypes: {
+    density: {
+      control: {
+        type: 'select',
+        options: ['comfortable', 'compact'],
+        defaultValue: 'comfortable',
+      },
+    },
+  },
+} as Meta
+
 type Data = {
   number: string
   description: string
@@ -116,28 +138,6 @@ const toCellValues = (data: Data[], columns: Column[]) =>
         : '',
     ),
   )
-
-export default {
-  title: 'Components/Table',
-  component: Table,
-  subcomponents: { Body, Row, Cell, Head },
-  parameters: {
-    docs: {
-      description: {
-        component: `A basic table component`,
-      },
-    },
-  },
-  argTypes: {
-    density: {
-      control: {
-        type: 'select',
-        options: ['comfortable', 'compact'],
-        defaultValue: 'comfortable',
-      },
-    },
-  },
-} as Meta
 
 export const simpleTable: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)

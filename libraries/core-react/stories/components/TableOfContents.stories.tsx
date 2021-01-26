@@ -21,6 +21,15 @@ const { LinkItem } = TableOfContents
 export default {
   title: 'Components/TableOfContents',
   component: TableOfContents,
+  parameters: {
+    docs: {
+      description: {
+        component: `A table of contents is a list of hyperlinks that scroll
+        to anchored text on the same page.
+        `,
+      },
+    },
+  },
 } as Meta
 
 const Wrapper = styled.div`

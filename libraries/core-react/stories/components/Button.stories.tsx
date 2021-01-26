@@ -25,6 +25,14 @@ export default {
       },
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: `Buttons allow users to take action with a single click or tap.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<ButtonProps> = (args) => (

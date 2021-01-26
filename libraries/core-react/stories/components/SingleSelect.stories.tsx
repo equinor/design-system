@@ -16,6 +16,15 @@ import { items } from './data'
 export default {
   title: 'Components/Select/SingleSelect',
   component: SingleSelect,
+  parameters: {
+    docs: {
+      description: {
+        component: `The SingleSelect component allows users to choose one 
+        item or option from a list.
+        `,
+      },
+    },
+  },
 } as Meta
 
 const Container = styled.div`

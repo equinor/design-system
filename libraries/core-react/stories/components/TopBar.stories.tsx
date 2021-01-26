@@ -13,6 +13,21 @@ import {
 
 const { Actions, Header, CustomContent } = TopBar
 
+export default {
+  title: 'Components/TopBar',
+  component: TopBar,
+  subcomponents: { Actions, Header, CustomContent },
+  parameters: {
+    docs: {
+      description: {
+        component: `The top bar displays navigation
+        and actions relating to the interface.
+        `,
+      },
+    },
+  },
+} as Meta
+
 const icons = {
   account_circle,
   accessible,
@@ -101,12 +116,6 @@ const RIGHT_CHOICES = {
     </Icons>
   ),
 }
-
-export default {
-  title: 'Components/TopBar',
-  component: TopBar,
-  subcomponents: { Actions, Header, CustomContent },
-} as Meta
 
 export const Basic: Story<TopbarProps> = (props): JSX.Element => {
   return (
