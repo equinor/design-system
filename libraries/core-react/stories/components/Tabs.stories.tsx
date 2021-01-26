@@ -4,7 +4,7 @@ import { Tabs, TabsProps, Typography, Search } from '@components'
 import { Story, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-const { TabList, Tab, TabPanels, TabPanel } = Tabs
+const { TabList, Tab, Panels, Panel } = Tabs
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
@@ -12,19 +12,27 @@ const noop = () => {}
 export default {
   title: 'Components/Tabs',
   component: Tabs,
-  subcomponents: { TabList, Tab, TabPanels, TabPanel },
+  subcomponents: { TabList, Tab, Panels, Panel },
+  parameters: {
+    docs: {
+      description: {
+        component: `Tabs organise related content across different views to be quickly navigated.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<TabsProps> = (args) => (
   <Tabs {...args}>
-    <TabList>
-      <Tab>One</Tab>
-      <Tab>Two</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Panel one</TabPanel>
-      <TabPanel>Panel two</TabPanel>
-    </TabPanels>
+    <Tabs.TabList>
+      <Tabs.Tab>One</Tabs.Tab>
+      <Tabs.Tab>Two</Tabs.Tab>
+    </Tabs.TabList>
+    <Tabs.Panels>
+      <Tabs.Panel>Panel one</Tabs.Panel>
+      <Tabs.Panel>Panel two</Tabs.Panel>
+    </Tabs.Panels>
   </Tabs>
 )
 
@@ -37,15 +45,15 @@ export const States: Story<TabsProps> = () => {
 
   return (
     <Tabs activeTab={2} onChange={noop}>
-      <TabList>
-        <Tab>Enabled</Tab>
-        <Tab disabled>Disabled</Tab>
-        <Tab active>Active</Tab>
-        <Tab data-hover>Hover</Tab>
-        <Tab data-focus ref={focusedRef}>
+      <Tabs.TabList>
+        <Tabs.Tab>Enabled</Tabs.Tab>
+        <Tabs.Tab disabled>Disabled</Tabs.Tab>
+        <Tabs.Tab active>Active</Tabs.Tab>
+        <Tabs.Tab data-hover>Hover</Tabs.Tab>
+        <Tabs.Tab data-focus ref={focusedRef}>
           Focus
-        </Tab>
-      </TabList>
+        </Tabs.Tab>
+      </Tabs.TabList>
     </Tabs>
   )
 }
@@ -55,27 +63,27 @@ export const Widths: Story<TabsProps> = () => {
     <>
       <Typography variant="h4">minWidth</Typography>
       <Tabs activeTab={1} onChange={noop} variant="minWidth">
-        <TabList>
-          <Tab>Text</Tab>
-          <Tab>More text</Tab>
-          <Tab>A really long line of text</Tab>
-        </TabList>
+        <Tabs.TabList>
+          <Tabs.Tab>Text</Tabs.Tab>
+          <Tabs.Tab>More text</Tabs.Tab>
+          <Tabs.Tab>A really long line of text</Tabs.Tab>
+        </Tabs.TabList>
       </Tabs>
       <Typography variant="h4" style={{ marginTop: '1rem' }}>
         fullWidth
       </Typography>
       <Tabs activeTab={1} onChange={noop} variant="fullWidth">
-        <TabList>
-          <Tab>Text</Tab>
-          <Tab>More text</Tab>
-          <Tab>A really long line of text</Tab>
-        </TabList>
+        <Tabs.TabList>
+          <Tabs.Tab>Text</Tabs.Tab>
+          <Tabs.Tab>More text</Tabs.Tab>
+          <Tabs.Tab>A really long line of text</Tabs.Tab>
+        </Tabs.TabList>
       </Tabs>
     </>
   )
 }
 
-export const Panels: Story<TabsProps> = () => {
+export const WithPanels: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(1)
 
   const handleChange = (index: number) => {
@@ -91,18 +99,18 @@ export const Panels: Story<TabsProps> = () => {
         only visible when navigating using the keyboard.
       </Typography>
       <Tabs activeTab={activeTab} onChange={handleChange}>
-        <TabList>
-          <Tab>Tab one</Tab>
-          <Tab>Tab two</Tab>
-          <Tab disabled>Tab three</Tab>
-          <Tab>Tab four</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Panel one</TabPanel>
-          <TabPanel>Panel two</TabPanel>
-          <TabPanel>Panel three</TabPanel>
-          <TabPanel>Panel four</TabPanel>
-        </TabPanels>
+        <Tabs.TabList>
+          <Tabs.Tab>Tab one</Tabs.Tab>
+          <Tabs.Tab>Tab two</Tabs.Tab>
+          <Tabs.Tab disabled>Tab three</Tabs.Tab>
+          <Tabs.Tab>Tab four</Tabs.Tab>
+        </Tabs.TabList>
+        <Tabs.Panels>
+          <Tabs.Panel>Panel one</Tabs.Panel>
+          <Tabs.Panel>Panel two</Tabs.Panel>
+          <Tabs.Panel>Panel three</Tabs.Panel>
+          <Tabs.Panel>Panel four</Tabs.Panel>
+        </Tabs.Panels>
       </Tabs>
     </>
   )
@@ -143,14 +151,14 @@ export const WithSearch: Story<TabsProps> = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       >
-        <TabList>
-          <Tab>Tags (5+)</Tab>
-          <Tab> Docs (5+)</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Panel one</TabPanel>
-          <TabPanel>Panel two</TabPanel>
-        </TabPanels>
+        <Tabs.TabList>
+          <Tabs.Tab>Tags (5+)</Tabs.Tab>
+          <Tabs.Tab> Docs (5+)</Tabs.Tab>
+        </Tabs.TabList>
+        <Tabs.Panels>
+          <Tabs.Panel>Panel one</Tabs.Panel>
+          <Tabs.Panel>Panel two</Tabs.Panel>
+        </Tabs.Panels>
       </Tabs>
     </>
   )
@@ -186,12 +194,12 @@ export const WithInputInPanel: Story<TabsProps> = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       >
-        <TabList>
-          <Tab>Tab with textfield</Tab>
-          <Tab>Other tab</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel style={{ maxWidth: '20em' }}>
+        <Tabs.TabList>
+          <Tabs.Tab>Tab with textfield</Tabs.Tab>
+          <Tabs.Tab>Other tab</Tabs.Tab>
+        </Tabs.TabList>
+        <Tabs.Panels>
+          <Tabs.Panel style={{ maxWidth: '20em' }}>
             <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
               Panel one
             </Typography>
@@ -200,21 +208,21 @@ export const WithInputInPanel: Story<TabsProps> = () => {
               placeholder={'Search '}
               onChange={handleOnTextChange}
             />
-          </TabPanel>
-          <TabPanel>
+          </Tabs.Panel>
+          <Tabs.Panel>
             <Typography variant="body_short">Panel two</Typography>
-          </TabPanel>
-        </TabPanels>
+          </Tabs.Panel>
+        </Tabs.Panels>
       </Tabs>
     </>
   )
 }
 
-const StyledTab = styled(Tab)`
+const StyledTab = styled(Tabs.Tab)`
   background: pink;
 `
 
-const StyledTabPanel = styled(TabPanel)`
+const StyledTabPanel = styled(Tabs.Panel)`
   padding: 32px;
   background: peachpuff;
 `
@@ -237,16 +245,16 @@ export const WithStyledComponent: Story<TabsProps> = () => {
         Tab with panels rendered from collection
       </Typography>
       <Tabs activeTab={activeTab} onChange={handleChange}>
-        <TabList>
+        <Tabs.TabList>
           {items.map(({ name }) => (
             <StyledTab key={name}>{name}</StyledTab>
           ))}
-        </TabList>
-        <TabPanels>
+        </Tabs.TabList>
+        <Tabs.Panels>
           {items.map(({ name, value }) => (
             <StyledTabPanel key={name}>{value}</StyledTabPanel>
           ))}
-        </TabPanels>
+        </Tabs.Panels>
       </Tabs>
     </>
   )
