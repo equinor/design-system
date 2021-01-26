@@ -34,8 +34,6 @@ Icon.add({
   cable,
 })
 
-const { Item, Section } = Menu
-const { Actions, Header } = TopBar
 const { colors } = tokens
 
 export default {
@@ -49,7 +47,7 @@ export default {
     },
     viewMode: 'story',
   },
-  subcomponents: { Item, Section },
+  subcomponents: { Item: Menu.Item, Section: Menu.Section },
 } as Meta
 
 const Wrapper = styled.div`
@@ -410,8 +408,8 @@ export const InTopbar: Story<MenuProps> = () => {
   return (
     <Wrapper style={{ margin: 0 }}>
       <TopBar>
-        <Header>Menu in Topbar</Header>
-        <Actions>
+        <TopBar.Header>Menu in Topbar</TopBar.Header>
+        <TopBar.Actions>
           <Button
             variant="ghost_icon"
             id="menuButton"
@@ -433,7 +431,7 @@ export const InTopbar: Story<MenuProps> = () => {
           >
             {bigMenuTemplate}
           </Menu>
-        </Actions>
+        </TopBar.Actions>
       </TopBar>
     </Wrapper>
   )

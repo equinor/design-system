@@ -3,9 +3,6 @@ import styled from 'styled-components'
 import { Typography, Button, Popover, PopoverProps, Card } from '@components'
 import { Meta, Story } from '@storybook/react'
 
-const { Anchor, Title, Content } = Popover
-const { Actions } = Card
-
 const Body = styled.div`
   margin: 42px;
   display: grid;
@@ -26,10 +23,10 @@ export default {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
-    Anchor,
-    Title,
-    Content,
-    Actions,
+    Anchor: Popover.Anchor,
+    Title: Popover.Title,
+    Content: Popover.Content,
+    Actions: Card.Actions,
   },
   parameters: {
     docs: {

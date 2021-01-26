@@ -2,12 +2,10 @@ import React, { useState } from 'react'
 import { Snackbar, SnackbarProps, Button } from '@components'
 import { Story, Meta } from '@storybook/react'
 
-const { Action } = Snackbar
-
 export default {
   title: 'Components/Snackbar',
   component: Snackbar,
-  subcomponents: { Action },
+  subcomponents: { Action: Snackbar.Action },
   parameters: {
     docs: {
       description: {

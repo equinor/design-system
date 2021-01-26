@@ -11,12 +11,14 @@ import {
   grid_on,
 } from '@equinor/eds-icons'
 
-const { Actions, Header, CustomContent } = TopBar
-
 export default {
   title: 'Components/TopBar',
   component: TopBar,
-  subcomponents: { Actions, Header, CustomContent },
+  subcomponents: {
+    Actions: TopBar.Actions,
+    Header: TopBar.Header,
+    CustomContent: TopBar.CustomContent,
+  },
   parameters: {
     docs: {
       description: {
@@ -121,7 +123,7 @@ export const Basic: Story<TopbarProps> = (props): JSX.Element => {
   return (
     <Wrapper>
       <TopBar {...props}>
-        <Header>{LEFT_CHOICES['text+icon']}</Header>
+        <TopBar.Header>{LEFT_CHOICES['text+icon']}</TopBar.Header>
       </TopBar>
       <Body>
         <p>Top of page</p>
@@ -135,9 +137,9 @@ export const Basic: Story<TopbarProps> = (props): JSX.Element => {
 export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => (
   <Wrapper>
     <TopBar>
-      <Header>{LEFT_CHOICES['text+icon']}</Header>
-      <CustomContent>{CENTER_CHOICES.search}</CustomContent>
-      <Actions>{RIGHT_CHOICES.icons}</Actions>
+      <TopBar.Header>{LEFT_CHOICES['text+icon']}</TopBar.Header>
+      <TopBar.CustomContent>{CENTER_CHOICES.search}</TopBar.CustomContent>
+      <TopBar.Actions>{RIGHT_CHOICES.icons}</TopBar.Actions>
     </TopBar>
     <Body>
       <p>Top of page</p>

@@ -2,8 +2,6 @@ import React from 'react'
 import { List, ListProps } from '@components'
 import { Meta, Story } from '@storybook/react'
 
-const { Item } = List
-
 const start = '15'
 
 export default {
@@ -17,7 +15,7 @@ export default {
       },
     },
   },
-  subcomponents: { Item },
+  subcomponents: { Item: List.Item },
 } as Meta
 
 export const Default: Story<ListProps> = (args) => (

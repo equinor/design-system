@@ -10,8 +10,6 @@ import {
   delete_to_trash,
 } from '@equinor/eds-icons'
 
-const { Item, Header, HeaderTitle, Panel } = Accordion
-
 Icon.add({ attach_file, notifications, edit, delete_to_trash })
 
 const Wrapper = styled.div`
@@ -24,10 +22,10 @@ export default {
   title: 'Components/Accordion',
   component: Accordion,
   subcomponents: {
-    Item,
-    Header,
-    HeaderTitle,
-    Panel,
+    Item: Accordion.Item,
+    Header: Accordion.Header,
+    HeaderTitle: Accordion.HeaderTitle,
+    Panel: Accordion.Panel,
   },
   parameters: {
     docs: {

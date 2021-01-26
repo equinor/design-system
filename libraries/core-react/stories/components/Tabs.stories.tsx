@@ -4,15 +4,18 @@ import { Tabs, TabsProps, Typography, Search } from '@components'
 import { Story, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-const { TabList, Tab, Panels, Panel } = Tabs
-
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
 
 export default {
   title: 'Components/Tabs',
   component: Tabs,
-  subcomponents: { TabList, Tab, Panels, Panel },
+  subcomponents: {
+    TabList: Tabs.TabList,
+    Tab: Tabs.Tab,
+    Panels: Tabs.Panels,
+    Panel: Tabs.Panel,
+  },
   parameters: {
     docs: {
       description: {

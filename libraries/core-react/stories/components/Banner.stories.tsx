@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
-import { Banner, Icon as EdsIcon, Button, BannerProps } from '@components'
+import { Banner, Icon, Button, BannerProps } from '@components'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 
 const icons = {
@@ -11,17 +11,20 @@ const icons = {
   mood_sad,
 }
 
-const { Icon, Message, Actions } = Banner
-EdsIcon.add(icons)
+Icon.add(icons)
 
-const Wrapper = styled(Actions)`
+const Wrapper = styled(Banner.Actions)`
   display: flex;
 `
 
 export default {
   title: 'Components/Banner',
   component: Banner,
-  subcomponents: { Message, Icon, Actions },
+  subcomponents: {
+    Message: Banner.Message,
+    Icon: Banner.Icon,
+    Actions: Banner.Actions,
+  },
   parameters: {
     docs: {
       description: {
@@ -45,7 +48,7 @@ export const IconAndText: Story<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Icon>
-        <EdsIcon name="thumbs_up" />
+        <Icon name="thumbs_up" />
       </Banner.Icon>
       <Banner.Message>
         We are in the making of a new design for this page.
@@ -53,7 +56,7 @@ export const IconAndText: Story<BannerProps> = () => (
     </Banner>
     <Banner>
       <Banner.Icon variant="warning">
-        <EdsIcon name="thumbs_down" />
+        <Icon name="thumbs_down" />
       </Banner.Icon>
       <Banner.Message>Some warning information.</Banner.Message>
     </Banner>
@@ -94,7 +97,7 @@ export const IconAndTextAndActions: Story<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Icon variant="warning">
-        <EdsIcon name="mood_sad" />
+        <Icon name="mood_sad" />
       </Banner.Icon>
       <Banner.Message>
         This tag is not being preserved yet. Click start preservation to enable
@@ -106,7 +109,7 @@ export const IconAndTextAndActions: Story<BannerProps> = () => (
     </Banner>
     <Banner>
       <Banner.Icon>
-        <EdsIcon name="save" />
+        <Icon name="save" />
       </Banner.Icon>
       <Banner.Message>
         I&apos;m such a really really long message about some sad saving news

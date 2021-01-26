@@ -4,8 +4,6 @@ import { Breadcrumbs, BreadcrumbsProps, Typography } from '@components'
 import { action } from '@storybook/addon-actions'
 import { Meta, Story } from '@storybook/react'
 
-const { Breadcrumb } = Breadcrumbs
-
 const Body = styled.div`
   margin: 42px;
   display: grid;
@@ -25,7 +23,7 @@ export default {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
   subcomponents: {
-    Breadcrumb,
+    Breadcrumb: Breadcrumbs.Breadcrumb,
   },
   parameters: {
     docs: {
@@ -46,11 +44,11 @@ export const Default: Story<BreadcrumbsProps> = (args) => {
   return (
     <Body>
       <Breadcrumbs {...args}>
-        <Breadcrumb>Label One</Breadcrumb>
-        <Breadcrumb>Label Two</Breadcrumb>
-        <Breadcrumb>Label Three</Breadcrumb>
-        <Breadcrumb>Label Four</Breadcrumb>
-        <Breadcrumb>Label Five</Breadcrumb>
+        <Breadcrumbs.Breadcrumb>Label One</Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb>Label Two</Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb>Label Three</Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb>Label Four</Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb>Label Five</Breadcrumbs.Breadcrumb>
       </Breadcrumbs>
     </Body>
   )
@@ -63,11 +61,15 @@ export const Variations: Story<BreadcrumbsProps> = () => {
         <Typography variant="h2">Normal</Typography>
       </TextWrapper>
       <Breadcrumbs>
-        <Breadcrumb onClick={handleClick}>Store</Breadcrumb>
-        <Breadcrumb onClick={handleClick}>Fruits</Breadcrumb>
-        <Breadcrumb onClick={handleClick} aria-current="page">
+        <Breadcrumbs.Breadcrumb onClick={handleClick}>
+          Store
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb onClick={handleClick}>
+          Fruits
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
           Apple
-        </Breadcrumb>
+        </Breadcrumbs.Breadcrumb>
       </Breadcrumbs>
       <TextWrapper>
         <Typography variant="h2">Collapsed</Typography>
@@ -77,12 +79,18 @@ export const Variations: Story<BreadcrumbsProps> = () => {
         </Typography>
       </TextWrapper>
       <Breadcrumbs collapse>
-        <Breadcrumb onClick={handleClick}>Store</Breadcrumb>
-        <Breadcrumb onClick={handleClick}>Fruits</Breadcrumb>
-        <Breadcrumb onClick={handleClick}>Apple</Breadcrumb>
-        <Breadcrumb onClick={handleClick} aria-current="page">
+        <Breadcrumbs.Breadcrumb onClick={handleClick}>
+          Store
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb onClick={handleClick}>
+          Fruits
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb onClick={handleClick}>
+          Apple
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
           Apple Juice
-        </Breadcrumb>
+        </Breadcrumbs.Breadcrumb>
       </Breadcrumbs>
       <TextWrapper>
         <Typography variant="h2">Truncated labels</Typography>
@@ -92,15 +100,19 @@ export const Variations: Story<BreadcrumbsProps> = () => {
         </Typography>
       </TextWrapper>
       <Breadcrumbs>
-        <Breadcrumb maxWidth={30} onClick={handleClick}>
+        <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
           Store
-        </Breadcrumb>
-        <Breadcrumb maxWidth={30} onClick={handleClick}>
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
           Fruits
-        </Breadcrumb>
-        <Breadcrumb maxWidth={30} onClick={handleClick} aria-current="page">
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb
+          maxWidth={30}
+          onClick={handleClick}
+          aria-current="page"
+        >
           Apple
-        </Breadcrumb>
+        </Breadcrumbs.Breadcrumb>
       </Breadcrumbs>
       <TextWrapper>
         <Typography variant="h2">Wrapped</Typography>
@@ -110,11 +122,15 @@ export const Variations: Story<BreadcrumbsProps> = () => {
       </TextWrapper>
       <WrapContainer>
         <Breadcrumbs>
-          <Breadcrumb onClick={handleClick}>Store</Breadcrumb>
-          <Breadcrumb onClick={handleClick}>Fruits</Breadcrumb>
-          <Breadcrumb onClick={handleClick} aria-current="page">
+          <Breadcrumbs.Breadcrumb onClick={handleClick}>
+            Store
+          </Breadcrumbs.Breadcrumb>
+          <Breadcrumbs.Breadcrumb onClick={handleClick}>
+            Fruits
+          </Breadcrumbs.Breadcrumb>
+          <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
             Apple
-          </Breadcrumb>
+          </Breadcrumbs.Breadcrumb>
         </Breadcrumbs>
       </WrapContainer>
     </Body>

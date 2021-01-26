@@ -23,7 +23,6 @@ const Wrapper = styled.div`
   grid-gap: 32px 32px;
   background: #ebebeb;
 `
-const { Header, HeaderTitle, Media, Actions } = Card
 
 export default {
   title: 'Components/Card',
@@ -38,7 +37,12 @@ export default {
       },
     },
   },
-  subcomponents: { Header, HeaderTitle, Media, Actions },
+  subcomponents: {
+    Header: Card.Header,
+    HeaderTitle: Card.HeaderTitle,
+    Media: Card.Media,
+    Actions: Card.Actions,
+  },
 } as Meta
 
 export const Default: Story<CardProps> = (args) => (
@@ -151,10 +155,10 @@ export const CardHeaderVariants: Story<CardProps> = () => (
     </Card>
     <Card variant="danger">
       <Card.Header>
-        <HeaderTitle>
+        <Card.HeaderTitle>
           <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
-        </HeaderTitle>
+        </Card.HeaderTitle>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
       </Card.Header>
     </Card>
