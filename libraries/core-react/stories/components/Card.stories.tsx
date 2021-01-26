@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   grid-gap: 32px 32px;
   background: #ebebeb;
 `
-const { Header, Title, Media, Actions } = Card
+const { Header, HeaderTitle, Media, Actions } = Card
 
 export default {
   title: 'Components/Card',
@@ -38,17 +38,17 @@ export default {
       },
     },
   },
-  subcomponents: { Header, Title, Media, Actions },
+  subcomponents: { Header, HeaderTitle, Media, Actions },
 } as Meta
 
 export const Default: Story<CardProps> = (args) => (
   <Wrapper>
     <Card {...args}>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h5">An interactive example</Typography>
           <Typography variant="body_short">With some short content.</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
         <Button variant="ghost_icon">
           <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
@@ -59,12 +59,12 @@ export const Default: Story<CardProps> = (args) => (
         <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
       </Card.Media>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h5">Another interactive example</Typography>
           <Typography variant="body_short">
             Unfortunately you cannot control children in storybook yet
           </Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
       <Typography variant="body_short">
         Leading images are full width, and go straight to the top - ignoring
@@ -104,18 +104,18 @@ export const CardHeaderVariants: Story<CardProps> = () => (
   <Wrapper>
     <Card variant="info">
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h4">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
     </Card>
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h4">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
         <Button variant="ghost_icon">
           <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
@@ -123,27 +123,27 @@ export const CardHeaderVariants: Story<CardProps> = () => (
     </Card>
     <Card variant="danger">
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h4">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
       </Card.Header>
     </Card>
     <Card variant="info">
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
     </Card>
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
         <Button variant="ghost_icon">
           <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
@@ -151,29 +151,29 @@ export const CardHeaderVariants: Story<CardProps> = () => (
     </Card>
     <Card variant="danger">
       <Card.Header>
-        <Title>
+        <HeaderTitle>
           <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
-        </Title>
+        </HeaderTitle>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
       </Card.Header>
     </Card>
     <Card>
       <Card.Header>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h6">Title goes here</Typography>
           <Typography variant="body_short">Caption</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
     </Card>
     <Card variant="danger">
       <Card.Header>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h6">Title goes here</Typography>
           <Typography variant="body_short">Caption</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
         <Button variant="ghost_icon">
           <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
@@ -182,19 +182,19 @@ export const CardHeaderVariants: Story<CardProps> = () => (
 
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="overline">Overline</Typography>
           <Typography variant="h6">Title goes here</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
       </Card.Header>
     </Card>
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="overline">Overline</Typography>
           <Typography variant="h6">Title goes here</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
         <Button variant="ghost_icon">
           <Icon name="more_vertical" title="more action" size={48}></Icon>
         </Button>
@@ -202,10 +202,10 @@ export const CardHeaderVariants: Story<CardProps> = () => (
     </Card>
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="overline">Overline</Typography>
           <Typography variant="h6">Title goes here</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
     </Card>
   </Wrapper>
@@ -223,12 +223,12 @@ export const WithMedia: Story<CardProps> = () => {
       <Card>
         <CardMediafullWidth />
         <Card.Header>
-          <Card.Title>
+          <Card.HeaderTitle>
             <Typography variant="h5">Full width</Typography>
             <Typography variant="body_short">
               Full width as leading block
             </Typography>
-          </Card.Title>
+          </Card.HeaderTitle>
         </Card.Header>
         <Typography variant="body_short">
           Leading images are full width, and go straight to the top - ignoring
@@ -237,12 +237,12 @@ export const WithMedia: Story<CardProps> = () => {
       </Card>
       <Card>
         <Card.Header>
-          <Card.Title>
+          <Card.HeaderTitle>
             <Typography variant="h5">Full width</Typography>
             <Typography variant="body_short">
               Full width as last block
             </Typography>
-          </Card.Title>
+          </Card.HeaderTitle>
         </Card.Header>
         <Typography variant="body_short">
           Last blocks with fullWidth ignores left and right spacings but keep
@@ -252,12 +252,12 @@ export const WithMedia: Story<CardProps> = () => {
       </Card>
       <Card>
         <Card.Header>
-          <Card.Title>
+          <Card.HeaderTitle>
             <Typography variant="h5">Middle</Typography>
             <Typography variant="body_short">
               To be used between blocks
             </Typography>
-          </Card.Title>
+          </Card.HeaderTitle>
         </Card.Header>
         <Card.Media>
           <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
@@ -275,10 +275,10 @@ export const WithActions: Story<CardProps> = () => (
   <Wrapper>
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h5">Default</Typography>
           <Typography variant="body_short">Left aligned buttons</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
       <Typography variant="body_short">
         Action elements are aligned left in this example
@@ -291,10 +291,10 @@ export const WithActions: Story<CardProps> = () => (
     </Card>
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h5">Right</Typography>
           <Typography variant="body_short">Right aligned buttons</Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
       <Typography variant="body_short">
         Action elements are aligned right in this example
@@ -313,12 +313,12 @@ export const WithActions: Story<CardProps> = () => (
     </Card>
     <Card>
       <Card.Header>
-        <Card.Title>
+        <Card.HeaderTitle>
           <Typography variant="h5">Meta</Typography>
           <Typography variant="body_short">
             Use as supporting text for icons
           </Typography>
-        </Card.Title>
+        </Card.HeaderTitle>
       </Card.Header>
       <Typography variant="body_short">
         Action elements with metadata

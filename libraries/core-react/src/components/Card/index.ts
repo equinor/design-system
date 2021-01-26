@@ -14,7 +14,7 @@ type CardCompoundProps = typeof CardWrapper & {
   Actions: typeof CardActions
   Header: typeof CardHeader
   Media: typeof CardMedia
-  Title: typeof CardHeaderTitle
+  HeaderTitle: typeof CardHeaderTitle
 }
 
 const Card = CardWrapper as CardCompoundProps
@@ -27,7 +27,7 @@ Card.CardHeaderTitle = CardHeaderTitle
 Card.Actions = CardActions
 Card.Header = CardHeader
 Card.Media = CardMedia
-Card.Title = CardHeaderTitle
+Card.HeaderTitle = CardHeaderTitle
 
 export { Card }
 export type { CardProps }
