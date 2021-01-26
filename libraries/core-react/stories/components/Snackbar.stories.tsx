@@ -2,12 +2,20 @@ import React, { useState } from 'react'
 import { Snackbar, SnackbarProps, Button } from '@components'
 import { Story, Meta } from '@storybook/react'
 
-const { SnackbarAction } = Snackbar
+const { Action } = Snackbar
 
 export default {
   title: 'Components/Snackbar',
   component: Snackbar,
-  subcomponents: { SnackbarAction },
+  subcomponents: { Action },
+  parameters: {
+    docs: {
+      description: {
+        component: `Snackbars provide brief temporary non-interrupting notifications at the bottom of the screen.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<SnackbarProps> = (args) => {
@@ -53,9 +61,9 @@ export const WithAction: Story<SnackbarProps> = () => {
       </Button>
       <Snackbar open={withActionOpen} onClose={() => setWithActionOpen(false)}>
         Your changes was saved
-        <SnackbarAction>
+        <Snackbar.Action>
           <Button variant="ghost">Undo</Button>
-        </SnackbarAction>
+        </Snackbar.Action>
       </Snackbar>
     </>
   )
