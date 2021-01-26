@@ -34,11 +34,25 @@ Icon.add({
   cable,
 })
 
-const { MenuItem, MenuSection } = Menu
+const { Item, Section } = Menu
 const { Actions, Header } = TopBar
 const { colors } = tokens
 
-const Grid = styled.div`
+export default {
+  title: 'Components/Menu',
+  component: Menu,
+  parameters: {
+    docs: {
+      description: {
+        component: `A menu, also known as a dropdown, is a temporary list of actions or functions.`,
+      },
+    },
+    viewMode: 'story',
+  },
+  subcomponents: { Item, Section },
+} as Meta
+
+const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
@@ -61,7 +75,7 @@ const onClick = (event: React.MouseEvent) => {
 
 const bigMenuTemplate = (
   <>
-    <MenuItem onClick={onClick}>
+    <Menu.Item onClick={onClick}>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
@@ -79,8 +93,8 @@ const bigMenuTemplate = (
       >
         CTRL+O
       </Typography>
-    </MenuItem>
-    <MenuItem active onClick={onClick}>
+    </Menu.Item>
+    <Menu.Item active onClick={onClick}>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
@@ -98,8 +112,8 @@ const bigMenuTemplate = (
       >
         CTRL+C
       </Typography>
-    </MenuItem>
-    <MenuItem disabled onClick={onClick}>
+    </Menu.Item>
+    <Menu.Item disabled onClick={onClick}>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
@@ -117,8 +131,8 @@ const bigMenuTemplate = (
       >
         CTRL+V
       </Typography>
-    </MenuItem>
-    <MenuItem onClick={onClick}>
+    </Menu.Item>
+    <Menu.Item onClick={onClick}>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
@@ -136,8 +150,8 @@ const bigMenuTemplate = (
       >
         CTRL+R
       </Typography>
-    </MenuItem>
-    <MenuItem onClick={onClick}>
+    </Menu.Item>
+    <Menu.Item onClick={onClick}>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
@@ -155,9 +169,9 @@ const bigMenuTemplate = (
       >
         DEL
       </Typography>
-    </MenuItem>
-    <MenuSection title="Section">
-      <MenuItem onClick={onClick}>
+    </Menu.Item>
+    <Menu.Section title="Section">
+      <Menu.Item onClick={onClick}>
         <Typography
           color={colors.text.static_icons__tertiary.hex}
           group="navigation"
@@ -168,18 +182,10 @@ const bigMenuTemplate = (
         <Typography group="navigation" variant="menu_title">
           Settings
         </Typography>
-      </MenuItem>
-    </MenuSection>
+      </Menu.Item>
+    </Menu.Section>
   </>
 )
-
-export default {
-  title: 'Components/Menu',
-  component: Menu,
-  parameters: {
-    viewMode: 'story',
-  },
-} as Meta
 
 export const ButtonToggle: Story<MenuProps> = () => {
   const [state, setState] = React.useState<{
@@ -226,7 +232,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
   }
 
   return (
-    <Grid style={{ gridAutoFlow: 'row' }}>
+    <Wrapper style={{ gridAutoFlow: 'row' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
       <Button
         variant="ghost_icon"
@@ -247,9 +253,117 @@ export const ButtonToggle: Story<MenuProps> = () => {
         onClose={closeMenu}
         focus={focus}
       >
-        {bigMenuTemplate}
+        <Menu.Item onClick={onClick}>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            <Icon name="folder" />
+          </Typography>
+          <Typography group="navigation" variant="menu_title">
+            Open
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            CTRL+O
+          </Typography>
+        </Menu.Item>
+        <Menu.Item active onClick={onClick}>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            <Icon name="copy" />
+          </Typography>
+          <Typography group="navigation" variant="menu_title">
+            Copy
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            CTRL+C
+          </Typography>
+        </Menu.Item>
+        <Menu.Item disabled onClick={onClick}>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            <Icon name="paste" />
+          </Typography>
+          <Typography group="navigation" variant="menu_title">
+            Paste
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            CTRL+V
+          </Typography>
+        </Menu.Item>
+        <Menu.Item onClick={onClick}>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            <Icon name="edit" />
+          </Typography>
+          <Typography group="navigation" variant="menu_title">
+            Rename
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            CTRL+R
+          </Typography>
+        </Menu.Item>
+        <Menu.Item onClick={onClick}>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            <Icon name="delete_to_trash" />
+          </Typography>
+          <Typography group="navigation" variant="menu_title">
+            Delete
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+          >
+            DEL
+          </Typography>
+        </Menu.Item>
+        <Menu.Section title="Section">
+          <Menu.Item onClick={onClick}>
+            <Typography
+              color={colors.text.static_icons__tertiary.hex}
+              group="navigation"
+              variant="label"
+            >
+              <Icon name="settings" />
+            </Typography>
+            <Typography group="navigation" variant="menu_title">
+              Settings
+            </Typography>
+          </Menu.Item>
+        </Menu.Section>
       </Menu>
-    </Grid>
+    </Wrapper>
   )
 }
 
@@ -294,7 +408,7 @@ export const InTopbar: Story<MenuProps> = () => {
   }
 
   return (
-    <Grid style={{ margin: 0 }}>
+    <Wrapper style={{ margin: 0 }}>
       <TopBar>
         <Header>Menu in Topbar</Header>
         <Actions>
@@ -321,7 +435,7 @@ export const InTopbar: Story<MenuProps> = () => {
           </Menu>
         </Actions>
       </TopBar>
-    </Grid>
+    </Wrapper>
   )
 }
 
@@ -355,7 +469,7 @@ export const Examples: Story<MenuProps> = () => {
   const { one, two, three, four } = state
 
   return (
-    <Grid>
+    <Wrapper>
       <Anchor
         id="anchor-iconbuttons"
         aria-controls="menu-iconbuttons"
@@ -387,9 +501,9 @@ export const Examples: Story<MenuProps> = () => {
         Text
       </Anchor>
       <Menu id="menu-plaintext" open anchorEl={two}>
-        <MenuItem>Pressure </MenuItem>
-        <MenuItem>Bearing</MenuItem>
-        <MenuItem>Cable</MenuItem>
+        <Menu.Item>Pressure </Menu.Item>
+        <Menu.Item>Bearing</Menu.Item>
+        <Menu.Item>Cable</Menu.Item>
       </Menu>
       <Anchor
         id="anchor-textIcon"
@@ -400,24 +514,24 @@ export const Examples: Story<MenuProps> = () => {
         Text with icons
       </Anchor>
       <Menu id="menu-textIcon" open anchorEl={three}>
-        <MenuItem>
+        <Menu.Item>
           <Typography group="navigation" variant="label">
             <Icon name="pressure" />
           </Typography>
           Pressure
-        </MenuItem>
-        <MenuItem>
+        </Menu.Item>
+        <Menu.Item>
           <Typography group="navigation" variant="label">
             <Icon name="bearing" />
           </Typography>
           Bearing
-        </MenuItem>
-        <MenuItem>
+        </Menu.Item>
+        <Menu.Item>
           <Typography group="navigation" variant="label">
             <Icon name="cable" />
           </Typography>
           Cable
-        </MenuItem>
+        </Menu.Item>
       </Menu>
 
       <Anchor
@@ -431,6 +545,6 @@ export const Examples: Story<MenuProps> = () => {
       <Menu id="menu-bigMenu" open anchorEl={four}>
         {bigMenuTemplate}
       </Menu>
-    </Grid>
+    </Wrapper>
   )
 }
