@@ -55,13 +55,16 @@ const ButtonInner = styled.span<{ isIcon: boolean }>`
   grid-gap: 8px;
   grid-template-areas: 'left center right';
 
+  > img:nth-child(1),
   > svg:nth-child(1) {
     grid-area: left;
   }
 
+  > img:nth-child(n + 2),
   > svg:nth-child(n + 2) {
     grid-area: right;
   }
+  > img:only-child,
   > svg:only-child {
     grid-area: center;
   }
