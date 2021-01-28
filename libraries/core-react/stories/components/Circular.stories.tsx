@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { CircularProgress, CircularProgressProps, Button } from '@components'
 import { Meta, Story } from '@storybook/react'
 import { useProgress } from './hooks/useProgress'
 
@@ -49,4 +50,12 @@ export const Sizes: Story<CircularProgressProps> = () => (
     <CircularProgress size={48} />
   </Wrapper>
 )
+
+export const InsideButton: Story<CircularProgressProps> = () => (
+  <Button>
+    <CircularProgress size={24} />
+    Loading...
+  </Button>
+)
+
 Default.storyName = 'Controllable example'
