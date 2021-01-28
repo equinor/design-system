@@ -42,13 +42,45 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
   }
 }
 
-// display:grid; does not work on Webkit browser engine, so we have to wrap content in element where css-grid works
+const ButtonInnerText = styled.span`
+  text-align: center;
+  grid-area: center;
+  flex: 1;
+`
+
 const ButtonInner = styled.span`
-  display: grid;
-  grid-gap: 8px;
-  grid-auto-flow: column;
-  align-items: center;
   height: 100%;
+  display: flex;
+  align-items: center;
+
+  > img:first-child,
+  > svg:first-child {
+    margin-right: 8px;
+  }
+
+  > img:last-child,
+  > svg:last-child {
+    margin-left: 8px;
+  }
+
+  > img:only-child,
+  > svg:only-child {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  > span:first-child {
+    margin-left: 32px;
+  }
+
+  > span:last-child {
+    margin-right: 32px;
+  }
+
+  > span:only-child {
+    margin-right: 0;
+    margin-left: 0;
+  }
 `
 
 const Base = ({ token }: { token: ButtonToken }) => {
@@ -177,9 +209,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ...other,
     }
 
+    // We need everything in elements for proper flexing 💪
+    const updatedChildren = React.Children.map(children, (child) =>
+      typeof child === 'string' ? (
+        <ButtonInnerText>{child}</ButtonInnerText>
+      ) : (
+        child
+      ),
+    )
+
     return (
       <ButtonBase {...buttonProps}>
-        <ButtonInner>{children}</ButtonInner>
+        <ButtonInner>{updatedChildren}</ButtonInner>
       </ButtonBase>
     )
   },

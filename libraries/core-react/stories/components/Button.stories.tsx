@@ -13,6 +13,14 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(4, fit-content(100%));
 `
 
+const FullWidthWrapper = styled.div`
+  margin: 32px;
+  display: grid;
+  justify-content: stretch;
+  flex-direction: column;
+  grid-gap: 16px;
+`
+
 export default {
   title: 'Components/Button',
   component: Button,
@@ -255,4 +263,40 @@ export const Link: Story<ButtonProps> = () => (
   <Wrapper>
     <Button href="#">Link</Button>
   </Wrapper>
+)
+
+export const FullWidth: Story<ButtonProps> = () => (
+  <FullWidthWrapper>
+    <Button>Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="danger">Danger</Button>
+    <Button disabled>Disabled</Button>
+    <Button>
+      <Icon name="save" title="save"></Icon>Primary
+    </Button>
+    <Button color="secondary">
+      <Icon name="save" title="save"></Icon>Secondary
+    </Button>
+    <Button color="danger">
+      <Icon name="save" title="save"></Icon>Danger
+    </Button>
+    <Button disabled>
+      <Icon name="save" title="save"></Icon>Disabled
+    </Button>
+    <Button>
+      Primary <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button color="secondary">
+      Secondary
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button color="danger">
+      Danger
+      <Icon name="save" title="save"></Icon>
+    </Button>
+    <Button disabled>
+      Disabled
+      <Icon name="save" title="save"></Icon>
+    </Button>
+  </FullWidthWrapper>
 )
