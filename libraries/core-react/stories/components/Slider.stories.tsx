@@ -34,6 +34,15 @@ export default {
       </div>
     ),
   ],
+  parameters: {
+    docs: {
+      description: {
+        component: `A slider is a flexible input that allows users to adjust
+        predefined values.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<SliderProps> = (args) => {

@@ -6,6 +6,15 @@ import { useProgress } from './hooks/useProgress'
 export default {
   title: 'Components/Progress Indicators/Linear',
   component: LinearProgress,
+  parameters: {
+    docs: {
+      description: {
+        component: `Progress indicators are animated helpers that indicate 
+        waiting time as content loads.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<LinearProgressProps> = (args) => {

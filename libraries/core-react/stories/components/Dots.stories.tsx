@@ -15,6 +15,15 @@ const Background = styled.div`
 export default {
   title: 'Components/Progress Indicators/Dots',
   component: DotProgress,
+  parameters: {
+    docs: {
+      description: {
+        component: `Progress indicators are animated helpers that indicate 
+        waiting time as content loads.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<DotProgressProps> = (args) => (

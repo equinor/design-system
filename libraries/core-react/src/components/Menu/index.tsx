@@ -6,8 +6,12 @@ import { MenuSection } from './MenuSection'
 import { MenuProvider } from './Menu.context'
 
 type MenuType = typeof BaseMenu & {
+  // Deprecated
   MenuItem: typeof MenuItem
   MenuSection: typeof MenuSection
+  // New
+  Item: typeof MenuItem
+  Section: typeof MenuSection
 }
 
 const MenuWrapper: FC<MenuProps> = ({ children, ...rest }) => (
@@ -17,11 +21,12 @@ const MenuWrapper: FC<MenuProps> = ({ children, ...rest }) => (
 )
 
 const Menu = MenuWrapper as MenuType
-
+// Deprecated
 Menu.MenuItem = MenuItem
 Menu.MenuSection = MenuSection
-
-// Menu.displayName = BaseMenu.displayName
+// New
+Menu.Item = MenuItem
+Menu.Section = MenuSection
 
 export { Menu }
 export type { MenuProps }

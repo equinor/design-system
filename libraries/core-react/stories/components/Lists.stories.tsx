@@ -2,76 +2,83 @@ import React from 'react'
 import { List, ListProps } from '@components'
 import { Meta, Story } from '@storybook/react'
 
-const { ListItem } = List
-
 const start = '15'
 
 export default {
   title: 'Components/Lists',
   component: List,
+  parameters: {
+    docs: {
+      description: {
+        component: `Lists organise information into related groups of content.
+        `,
+      },
+    },
+  },
+  subcomponents: { Item: List.Item },
 } as Meta
 
 export const Default: Story<ListProps> = (args) => (
   <List {...args}>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>
       List item
       <List {...args}>
-        <ListItem>List item</ListItem>
-        <ListItem>List item</ListItem>
-        <ListItem>List item</ListItem>
+        <List.Item>List item</List.Item>
+        <List.Item>List item</List.Item>
+        <List.Item>List item</List.Item>
       </List>
-    </ListItem>
+    </List.Item>
   </List>
 )
 
 export const Unordered: Story<ListProps> = () => (
   <List variant="bullet">
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>
       List item
       <List>
-        <ListItem>List item</ListItem>
-        <ListItem>List item</ListItem>
-        <ListItem>List item</ListItem>
+        <List.Item>List item</List.Item>
+        <List.Item>List item</List.Item>
+        <List.Item>List item</List.Item>
       </List>
-    </ListItem>
+    </List.Item>
   </List>
 )
 
 export const Ordered: Story<ListProps> = () => (
   <List variant="numbered">
-    <ListItem>List item</ListItem>
-    <ListItem>
+    <List.Item>List item</List.Item>
+    <List.Item>
       List item
       <List variant="numbered">
-        <ListItem>List item</ListItem>
-        <ListItem>List item</ListItem>
-        <ListItem>
+        <List.Item>List item</List.Item>
+        <List.Item>List item</List.Item>
+        <List.Item>
           List item
           <List variant="numbered">
-            <ListItem>List item</ListItem>
-            <ListItem>List item</ListItem>
-            <ListItem>List item</ListItem>
+            <List.Item>List item</List.Item>
+            <List.Item>List item</List.Item>
+            <List.Item>List item</List.Item>
           </List>
-        </ListItem>
+        </List.Item>
       </List>
-    </ListItem>
-    <ListItem>List item</ListItem>
+    </List.Item>
+    <List.Item>List item</List.Item>
   </List>
 )
 
 export const OrderedStartingOn15: Story<ListProps> = () => (
   <List variant="numbered" start={start}>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
-    <ListItem>List item</ListItem>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
+    <List.Item>List item</List.Item>
   </List>
 )

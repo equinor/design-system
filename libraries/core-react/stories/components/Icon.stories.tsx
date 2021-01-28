@@ -69,6 +69,16 @@ export default {
       control: 'object',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: `System icons enhance interfaces by adding visual communication
+         to actions, status and feedback while reducing cognitive load. They are to
+          provide meaning at a glance.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<IconProps> = (args) => <Icon {...args} />

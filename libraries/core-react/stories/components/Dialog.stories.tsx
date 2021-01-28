@@ -3,12 +3,14 @@ import { Dialog, DialogProps, Button, Scrim, Typography } from '@components'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
-const { Actions, Title, CustomContent } = Dialog
-
 export default {
   title: 'Components/Dialog',
   component: Dialog,
-  subcomponents: { Actions, Title, CustomContent },
+  subcomponents: {
+    Actions: Dialog.Actions,
+    Title: Dialog.Title,
+    CustomContent: Dialog.CustomContent,
+  },
   parameters: {
     docs: {
       description: {
@@ -89,14 +91,16 @@ const ACTION_CHOICES = {
 
 export const Default: Story<DialogProps> = () => (
   <Dialog>
-    <Title>{TITLE_CHOICES['text']}</Title>
-    <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
-    <Actions>
+    <Dialog.Title>{TITLE_CHOICES['text']}</Dialog.Title>
+    <Dialog.CustomContent>
+      {CUSTOM_CONTENT_CHOICES['description']}
+    </Dialog.CustomContent>
+    <Dialog.Actions>
       <TempButtonWrapper>
         <Button>OK</Button>
         <Button>Cancel</Button>
       </TempButtonWrapper>
-    </Actions>
+    </Dialog.Actions>
   </Dialog>
 )
 
@@ -113,18 +117,18 @@ export const WithScrim: Story<DialogProps> = () => {
       {visibleScrim && (
         <Scrim onClose={handleClose}>
           <Dialog>
-            <Title>{TITLE_CHOICES['text']}</Title>
-            <CustomContent scrollable>
+            <Dialog.Title>{TITLE_CHOICES['text']}</Dialog.Title>
+            <Dialog.CustomContent scrollable>
               {CUSTOM_CONTENT_CHOICES['scroll']}
-            </CustomContent>
-            <Actions>
+            </Dialog.CustomContent>
+            <Dialog.Actions>
               <TempButtonWrapper>
                 <Button variant="ghost" onClick={() => setVisibleScrim(false)}>
                   Cancel
                 </Button>
                 <Button onClick={() => setVisibleScrim(false)}>OK</Button>
               </TempButtonWrapper>
-            </Actions>
+            </Dialog.Actions>
           </Dialog>
         </Scrim>
       )}
@@ -134,39 +138,49 @@ export const WithScrim: Story<DialogProps> = () => {
 
 export const TextPlusAction: Story<DialogProps> = () => (
   <Dialog>
-    <Title>Text + actions</Title>
-    <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
-    <Actions>{ACTION_CHOICES['buttons']}</Actions>
+    <Dialog.Title>Text + actions</Dialog.Title>
+    <Dialog.CustomContent>
+      {CUSTOM_CONTENT_CHOICES['description']}
+    </Dialog.CustomContent>
+    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
   </Dialog>
 )
 
 export const PlaceholderPlusAction: Story<DialogProps> = () => (
   <Dialog>
-    <Title>Placeholder + actions</Title>
-    <CustomContent>{CUSTOM_CONTENT_CHOICES['empty']}</CustomContent>
-    <Actions>{ACTION_CHOICES['buttons']}</Actions>
+    <Dialog.Title>Placeholder + actions</Dialog.Title>
+    <Dialog.CustomContent>
+      {CUSTOM_CONTENT_CHOICES['empty']}
+    </Dialog.CustomContent>
+    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
   </Dialog>
 )
 
 export const PlaceholderOnly: Story<DialogProps> = () => (
   <Dialog>
-    <Title>Placeholder</Title>
-    <CustomContent>{CUSTOM_CONTENT_CHOICES['emptyLarge']}</CustomContent>
-    <Actions>{ACTION_CHOICES['none']}</Actions>
+    <Dialog.Title>Placeholder</Dialog.Title>
+    <Dialog.CustomContent>
+      {CUSTOM_CONTENT_CHOICES['emptyLarge']}
+    </Dialog.CustomContent>
+    <Dialog.Actions>{ACTION_CHOICES['none']}</Dialog.Actions>
   </Dialog>
 )
 
 export const ScrollablePlusActions: Story<DialogProps> = () => (
   <Dialog>
-    <Title>Scrollable + actions</Title>
-    <CustomContent scrollable>{CUSTOM_CONTENT_CHOICES['scroll']}</CustomContent>
-    <Actions>{ACTION_CHOICES['buttons']}</Actions>
+    <Dialog.Title>Scrollable + actions</Dialog.Title>
+    <Dialog.CustomContent scrollable>
+      {CUSTOM_CONTENT_CHOICES['scroll']}
+    </Dialog.CustomContent>
+    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
   </Dialog>
 )
 
 export const NoTitle: Story<DialogProps> = () => (
   <Dialog>
-    <CustomContent>{CUSTOM_CONTENT_CHOICES['description']}</CustomContent>
-    <Actions>{ACTION_CHOICES['buttons']}</Actions>
+    <Dialog.CustomContent>
+      {CUSTOM_CONTENT_CHOICES['description']}
+    </Dialog.CustomContent>
+    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
   </Dialog>
 )

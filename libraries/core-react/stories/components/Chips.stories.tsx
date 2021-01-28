@@ -20,6 +20,15 @@ const Wrapper = styled.div`
 export default {
   title: 'Components/Chips',
   component: Chip,
+  parameters: {
+    docs: {
+      description: {
+        component: `Chips, also known as tags or badges, are 
+        advanced badges that represent discrete information.
+        `,
+      },
+    },
+  },
 } as Meta
 
 const handleDelete = action('onDelete')

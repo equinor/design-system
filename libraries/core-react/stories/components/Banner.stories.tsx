@@ -11,43 +11,54 @@ const icons = {
   mood_sad,
 }
 
-const { BannerIcon, BannerMessage, BannerActions } = Banner
 Icon.add(icons)
 
-const InlineBannerActions = styled(BannerActions)`
+const Wrapper = styled(Banner.Actions)`
   display: flex;
 `
 
 export default {
   title: 'Components/Banner',
   component: Banner,
-  subcomponents: { BannerMessage, BannerIcon, BannerActions },
+  subcomponents: {
+    Message: Banner.Message,
+    Icon: Banner.Icon,
+    Actions: Banner.Actions,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `Banners display important notifications and related optional actions.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Basic: Story<BannerProps> = (args) => (
   <Banner {...args}>
-    <BannerMessage>
+    <Banner.Message>
       This tag is not being preserved yet. Click start preservation to enable
       writing preservation records.
-    </BannerMessage>
+    </Banner.Message>
   </Banner>
 )
 
 export const IconAndText: Story<BannerProps> = () => (
   <>
     <Banner>
-      <BannerIcon>
+      <Banner.Icon>
         <Icon name="thumbs_up" />
-      </BannerIcon>
-      <BannerMessage>
+      </Banner.Icon>
+      <Banner.Message>
         We are in the making of a new design for this page.
-      </BannerMessage>
+      </Banner.Message>
     </Banner>
     <Banner>
-      <BannerIcon variant="warning">
+      <Banner.Icon variant="warning">
         <Icon name="thumbs_down" />
-      </BannerIcon>
-      <BannerMessage>Some warning information.</BannerMessage>
+      </Banner.Icon>
+      <Banner.Message>Some warning information.</Banner.Message>
     </Banner>
   </>
 )
@@ -55,29 +66,29 @@ export const IconAndText: Story<BannerProps> = () => (
 export const TextAndAction: Story<BannerProps> = () => (
   <>
     <Banner>
-      <BannerMessage>
+      <Banner.Message>
         You are signed on with another account than Equinor account:
         name.lastname@mail.com.
-      </BannerMessage>
-      <InlineBannerActions>
+      </Banner.Message>
+      <Wrapper>
         <Button variant="ghost" style={{ marginRight: '1rem' }}>
           Sign out
         </Button>
         <Button variant="ghost">OK</Button>
-      </InlineBannerActions>
+      </Wrapper>
     </Banner>
     <Banner>
-      <BannerMessage>
+      <Banner.Message>
         You are signed on with another account than Equinor account:
         name.lastname@mail.com. This means you have to do something to be able
         to use this service.
-      </BannerMessage>
-      <InlineBannerActions placement="bottom">
+      </Banner.Message>
+      <Wrapper placement="bottom">
         <Button variant="ghost" style={{ marginRight: '1rem' }}>
           Sign out
         </Button>
         <Button variant="ghost">OK</Button>
-      </InlineBannerActions>
+      </Wrapper>
     </Banner>
   </>
 )
@@ -85,31 +96,31 @@ export const TextAndAction: Story<BannerProps> = () => (
 export const IconAndTextAndActions: Story<BannerProps> = () => (
   <>
     <Banner>
-      <BannerIcon variant="warning">
+      <Banner.Icon variant="warning">
         <Icon name="mood_sad" />
-      </BannerIcon>
-      <BannerMessage>
+      </Banner.Icon>
+      <Banner.Message>
         This tag is not being preserved yet. Click start preservation to enable
         writing preservation records.
-      </BannerMessage>
-      <BannerActions>
+      </Banner.Message>
+      <Banner.Actions>
         <Button>Action</Button>
-      </BannerActions>
+      </Banner.Actions>
     </Banner>
     <Banner>
-      <BannerIcon>
+      <Banner.Icon>
         <Icon name="save" />
-      </BannerIcon>
-      <BannerMessage>
+      </Banner.Icon>
+      <Banner.Message>
         I&apos;m such a really really long message about some sad saving news
         that there is not enough space for the actions on my left. That&apos;s
         why the actions have been located at the bottom using the placement prop
         instead.
-      </BannerMessage>
-      <InlineBannerActions placement="bottom">
+      </Banner.Message>
+      <Wrapper placement="bottom">
         <Button style={{ marginRight: '1rem' }}>First action</Button>
         <Button color="secondary">Second action</Button>
-      </InlineBannerActions>
+      </Wrapper>
     </Banner>
   </>
 )

@@ -10,13 +10,6 @@ import {
   delete_to_trash,
 } from '@equinor/eds-icons'
 
-const {
-  AccordionItem,
-  AccordionHeader,
-  AccordionHeaderTitle,
-  AccordionPanel,
-} = Accordion
-
 Icon.add({ attach_file, notifications, edit, delete_to_trash })
 
 const Wrapper = styled.div`
@@ -29,27 +22,35 @@ export default {
   title: 'Components/Accordion',
   component: Accordion,
   subcomponents: {
-    AccordionItem,
-    AccordionHeader,
-    AccordionHeaderTitle,
-    AccordionPanel,
+    Item: Accordion.Item,
+    Header: Accordion.Header,
+    HeaderTitle: Accordion.HeaderTitle,
+    Panel: Accordion.Panel,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `An accordion allows users to collapse and expand 
+        sections of content.`,
+      },
+    },
   },
 } as Meta
 
 export const simple: Story<AccordionProps> = (args) => (
   <Accordion {...args}>
-    <AccordionItem isExpanded>
-      <AccordionHeader>Header 1</AccordionHeader>
-      <AccordionPanel>Content 1</AccordionPanel>
-    </AccordionItem>
-    <AccordionItem>
-      <AccordionHeader>Header 2</AccordionHeader>
-      <AccordionPanel>Content 2</AccordionPanel>
-    </AccordionItem>
-    <AccordionItem>
-      <AccordionHeader>Header 3</AccordionHeader>
-      <AccordionPanel>Content 3</AccordionPanel>
-    </AccordionItem>
+    <Accordion.Item isExpanded>
+      <Accordion.Header>Header 1</Accordion.Header>
+      <Accordion.Panel>Content 1</Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Header 2</Accordion.Header>
+      <Accordion.Panel>Content 2</Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Header 3</Accordion.Header>
+      <Accordion.Panel>Content 3</Accordion.Panel>
+    </Accordion.Item>
   </Accordion>
 )
 
@@ -57,41 +58,41 @@ export const header: Story<AccordionProps> = () => {
   return (
     <Wrapper>
       <Accordion headerLevel="h3" chevronPosition="left">
-        <AccordionItem>
-          <AccordionHeader>Chevron left</AccordionHeader>
-        </AccordionItem>
+        <Accordion.Item>
+          <Accordion.Header>Chevron left</Accordion.Header>
+        </Accordion.Item>
       </Accordion>
 
       <Accordion headerLevel="h3" chevronPosition="right">
-        <AccordionItem>
-          <AccordionHeader>Chevron right</AccordionHeader>
-        </AccordionItem>
+        <Accordion.Item>
+          <Accordion.Header>Chevron right</Accordion.Header>
+        </Accordion.Item>
       </Accordion>
 
       <Accordion headerLevel="h3" chevronPosition="left">
-        <AccordionItem isExpanded>
-          <AccordionHeader>Chevron left expanded</AccordionHeader>
-        </AccordionItem>
+        <Accordion.Item isExpanded>
+          <Accordion.Header>Chevron left expanded</Accordion.Header>
+        </Accordion.Item>
       </Accordion>
 
       <Accordion headerLevel="h3" chevronPosition="right">
-        <AccordionItem disabled>
-          <AccordionHeader>Disabled</AccordionHeader>
-        </AccordionItem>
+        <Accordion.Item disabled>
+          <Accordion.Header>Disabled</Accordion.Header>
+        </Accordion.Item>
       </Accordion>
 
       <Accordion headerLevel="h3" chevronPosition="right">
-        <AccordionItem disabled isExpanded>
-          <AccordionHeader>Disabled expanded</AccordionHeader>
-        </AccordionItem>
+        <Accordion.Item disabled isExpanded>
+          <Accordion.Header>Disabled expanded</Accordion.Header>
+        </Accordion.Item>
       </Accordion>
 
       <Accordion headerLevel="h3" chevronPosition="left">
-        <AccordionItem>
-          <AccordionHeader>
-            <AccordionHeaderTitle>
+        <Accordion.Item>
+          <Accordion.Header>
+            <Accordion.HeaderTitle>
               Chevron left – custom icons right
-            </AccordionHeaderTitle>
+            </Accordion.HeaderTitle>
             <Icon
               name="attach_file"
               title="Attach file"
@@ -105,16 +106,16 @@ export const header: Story<AccordionProps> = () => {
               size={16}
               color="currentColor"
             />
-          </AccordionHeader>
-        </AccordionItem>
+          </Accordion.Header>
+        </Accordion.Item>
       </Accordion>
 
       <Accordion headerLevel="h3" chevronPosition="left">
-        <AccordionItem>
-          <AccordionHeader>
-            <AccordionHeaderTitle>
+        <Accordion.Item>
+          <Accordion.Header>
+            <Accordion.HeaderTitle>
               Chevron left – interactive options right
-            </AccordionHeaderTitle>
+            </Accordion.HeaderTitle>
             <Button
               variant="ghost_icon"
               onClick={(event) => {
@@ -134,19 +135,19 @@ export const header: Story<AccordionProps> = () => {
             >
               <Icon name="delete_to_trash" title="Delete" />
             </Button>
-          </AccordionHeader>
-        </AccordionItem>
+          </Accordion.Header>
+        </Accordion.Item>
       </Accordion>
 
       <Accordion headerLevel="h3" chevronPosition="left">
-        <AccordionItem>
-          <AccordionHeader>
-            <AccordionHeaderTitle>
+        <Accordion.Item>
+          <Accordion.Header>
+            <Accordion.HeaderTitle>
               Very long summary that will get truncated if the width of the
               header is narrower than the length of the text
-            </AccordionHeaderTitle>
-          </AccordionHeader>
-        </AccordionItem>
+            </Accordion.HeaderTitle>
+          </Accordion.Header>
+        </Accordion.Item>
       </Accordion>
     </Wrapper>
   )

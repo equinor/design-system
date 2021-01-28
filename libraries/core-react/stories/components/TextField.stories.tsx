@@ -4,6 +4,27 @@ import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
 
+export default {
+  title: 'Components/TextField',
+  component: TextField,
+  argTypes: {
+    rows: {
+      control: 'number',
+      description: 'Rows when "multiline" is true',
+      default: 1,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `A text field lets users enter, interact and edit content,
+        typically in forms and dialogs.
+        `,
+      },
+    },
+  },
+} as Meta
+
 const Wrapper = styled.div`
   margin: 32px;
   display: grid;
@@ -41,18 +62,6 @@ const ICONS = {
     </svg>
   ),
 }
-
-export default {
-  title: 'Components/TextField',
-  component: TextField,
-  argTypes: {
-    rows: {
-      control: 'number',
-      description: 'Rows when "multiline" is true',
-      default: 1,
-    },
-  },
-} as Meta
 
 export const Default: Story<TextFieldProps> = (args) => (
   <TextField {...args}></TextField>

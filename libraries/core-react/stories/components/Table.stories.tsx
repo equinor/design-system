@@ -16,7 +16,33 @@ import './style.css'
 
 Icon.add({ chevron_down, chevron_up })
 
-const { Caption, Body, Row, Cell, Head } = Table
+export default {
+  title: 'Components/Table',
+  component: Table,
+  subcomponents: {
+    Body: Table.Body,
+    Row: Table.Row,
+    Cell: Table.Cell,
+    Head: Table.Head,
+    Caption: Table.Caption,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `A basic table component`,
+      },
+    },
+  },
+  argTypes: {
+    density: {
+      control: {
+        type: 'select',
+        options: ['comfortable', 'compact'],
+        defaultValue: 'comfortable',
+      },
+    },
+  },
+} as Meta
 
 type Data = {
   number: string
@@ -117,52 +143,30 @@ const toCellValues = (data: Data[], columns: Column[]) =>
     ),
   )
 
-export default {
-  title: 'Components/Table',
-  component: Table,
-  subcomponents: { Body, Row, Cell, Head },
-  parameters: {
-    docs: {
-      description: {
-        component: `A basic table component`,
-      },
-    },
-  },
-  argTypes: {
-    density: {
-      control: {
-        type: 'select',
-        options: ['comfortable', 'compact'],
-        defaultValue: 'comfortable',
-      },
-    },
-  },
-} as Meta
-
 export const simpleTable: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
 
   return (
     <Table {...args}>
-      <Caption>
+      <Table.Caption>
         <Typography variant="h2">Fruits cost price</Typography>
-      </Caption>
-      <Head>
-        <Row>
+      </Table.Caption>
+      <Table.Head>
+        <Table.Row>
           {columns.map((col) => (
-            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+            <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
           ))}
-        </Row>
-      </Head>
-      <Body>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
         {cellValues?.map((row) => (
-          <Row key={row.toString()}>
+          <Table.Row key={row.toString()}>
             {row.map((cellValue) => (
-              <Cell key={cellValue}>{cellValue}</Cell>
+              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
             ))}
-          </Row>
+          </Table.Row>
         ))}
-      </Body>
+      </Table.Body>
     </Table>
   )
 }
@@ -178,25 +182,25 @@ export const FixedTableHeader: Story<TableProps> = () => {
   return (
     <FixedContainer>
       <Table>
-        <Caption>
+        <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>
-        </Caption>
-        <Head sticky>
-          <Row>
+        </Table.Caption>
+        <Table.Head sticky>
+          <Table.Row>
             {columns.map((col) => (
-              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
             ))}
-          </Row>
-        </Head>
-        <Body>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {cellValues?.map((row) => (
-            <Row key={row.toString()}>
+            <Table.Row key={row.toString()}>
               {row.map((cellValue) => (
-                <Cell key={cellValue}>{cellValue}</Cell>
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
               ))}
-            </Row>
+            </Table.Row>
           ))}
-        </Body>
+        </Table.Body>
       </Table>
     </FixedContainer>
   )
@@ -283,31 +287,31 @@ export const CompactTable: Story<TableProps> = () => {
         </TopBar.Actions>
       </TopBar>
       <Table density={density}>
-        <Caption>
+        <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>
-        </Caption>
-        <Head>
-          <Row>
+        </Table.Caption>
+        <Table.Head>
+          <Table.Row>
             {columns.map((col) => (
-              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
             ))}
-          </Row>
-        </Head>
-        <Body>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {cellValues?.map((row) => (
-            <Row key={row.toString()}>
+            <Table.Row key={row.toString()}>
               {row.map((cellValue) => (
-                <Cell key={cellValue}>{cellValue}</Cell>
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
               ))}
-            </Row>
+            </Table.Row>
           ))}
-        </Body>
+        </Table.Body>
       </Table>
     </div>
   )
 }
 
-const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
+const SortCell = styled(Table.Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
   }
@@ -384,11 +388,11 @@ export const Sortable: Story<TableProps> = () => {
 
   return (
     <Table>
-      <Caption>
+      <Table.Caption>
         <Typography variant="h2">Fruits cost price</Typography>
-      </Caption>
-      <Head>
-        <Row>
+      </Table.Caption>
+      <Table.Head>
+        <Table.Row>
           {state.columns.map((col) => (
             <SortCell
               sort={col.sortDirection}
@@ -406,17 +410,17 @@ export const Sortable: Story<TableProps> = () => {
               />
             </SortCell>
           ))}
-        </Row>
-      </Head>
-      <Body>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
         {state.cellValues?.map((row) => (
-          <Row key={row.toString()}>
+          <Table.Row key={row.toString()}>
             {row.map((cellValue) => (
-              <Cell key={cellValue}>{cellValue}</Cell>
+              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
             ))}
-          </Row>
+          </Table.Row>
         ))}
-      </Body>
+      </Table.Body>
     </Table>
   )
 }

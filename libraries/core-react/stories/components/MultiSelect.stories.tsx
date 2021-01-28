@@ -10,6 +10,15 @@ import { items } from './data'
 export default {
   title: 'Components/Select/MultiSelect',
   component: MultiSelect,
+  parameters: {
+    docs: {
+      description: {
+        component: `The MultiSelect component allows users to choose one or 
+        multiple items or options from a list.
+        `,
+      },
+    },
+  },
 } as Meta
 
 const Container = styled.div`

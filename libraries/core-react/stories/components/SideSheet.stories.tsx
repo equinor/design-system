@@ -19,6 +19,15 @@ export default {
       defaultValue: 'Title',
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: `A side sheet is a a toggleable area that is anchored to the edge 
+        of the viewport with supplementary content.
+        `,
+      },
+    },
+  },
 } as Meta
 
 export const Default: Story<SideSheetProps> = (args) => {
