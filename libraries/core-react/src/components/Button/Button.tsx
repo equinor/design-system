@@ -45,28 +45,41 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
 const ButtonInnerText = styled.span`
   text-align: center;
   grid-area: center;
+  flex: 1;
 `
 
-const ButtonInner = styled.span<{ isIcon: boolean }>`
+const ButtonInner = styled.span`
   height: 100%;
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: ${({ isIcon }) => (isIcon ? 'auto' : '24px 1fr 24px')};
-  grid-gap: 8px;
-  grid-template-areas: 'left center right';
 
-  > img:nth-child(1),
-  > svg:nth-child(1) {
-    grid-area: left;
+  > img:first-child,
+  > svg:first-child {
+    margin-right: 8px;
   }
 
-  > img:nth-child(n + 2),
-  > svg:nth-child(n + 2) {
-    grid-area: right;
+  > img:last-child,
+  > svg:last-child {
+    margin-left: 8px;
   }
+
   > img:only-child,
   > svg:only-child {
-    grid-area: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  > span:first-child {
+    margin-left: 32px;
+  }
+
+  > span:last-child {
+    margin-right: 32px;
+  }
+
+  > span:only-child {
+    margin-right: 0;
+    margin-left: 0;
   }
 `
 
@@ -184,7 +197,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
     const type = href || other.as ? undefined : 'button'
     tabIndex = disabled ? -1 : tabIndex
-    const isIcon = variant === 'ghost_icon'
 
     const buttonProps = {
       ref,
@@ -208,7 +220,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <ButtonBase {...buttonProps}>
-        <ButtonInner isIcon={isIcon}>{updatedChildren}</ButtonInner>
+        <ButtonInner>{updatedChildren}</ButtonInner>
       </ButtonBase>
     )
   },
