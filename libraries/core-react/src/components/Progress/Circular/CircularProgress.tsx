@@ -9,12 +9,17 @@ const indeterminate = keyframes`
       transform: rotate(360deg);
     }
 `
-type ProgressRootProps = Pick<CircularProgressProps, 'variant'>
+type ProgressRootProps = { size: number } & Pick<
+  CircularProgressProps,
+  'variant'
+>
 
 const ProgressRoot = styled.div<ProgressRootProps>`
   display: inline-block;
-  height: 48px;
-  width: 48px;
+  ${({ size }) => css`
+    height: ${size}px;
+    width: ${size}px;
+  `}
   color: ${tokens.linear.background};
   ${({ variant }) =>
     variant === 'indeterminate'
@@ -42,11 +47,19 @@ export type CircularProgressProps = {
   /**  The value of the progress indicator for determinate variant.
    * Value between 0 and 100 */
   value?: number
+  /** Size */
+  size?: 16 | 24 | 32 | 40 | 48
 } & HTMLAttributes<HTMLDivElement>
 
 const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>(
   function CircularProgress(
-    { variant = 'indeterminate', className = '', value = null, ...props },
+    {
+      variant = 'indeterminate',
+      className = '',
+      value = null,
+      size = 48,
+      ...props
+    },
     ref,
   ) {
     const thickness = 4
@@ -59,7 +72,7 @@ const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>(
       variant,
     }
 
-    const circumference = 2 * Math.PI * ((48 - thickness) / 2)
+    const circumference = 2 * Math.PI * ((size - thickness) / 2)
 
     if (variant === 'determinate') {
       circleStyle.stroke = circumference.toFixed(3)
@@ -77,30 +90,33 @@ const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>(
       }
     }
 
+    const viewBoxXY = size / 2
+
     return (
       <ProgressRoot
         {...rootProps}
         role="progressbar"
         className={`${className} ${variant}-progress`}
+        size={size}
       >
-        <svg viewBox="24 24 48 48">
+        <svg viewBox={`${viewBoxXY} ${viewBoxXY} ${size} ${size}`}>
           <BaseCircle
             style={circleStyle}
-            cx={48}
-            cy={48}
-            r={(48 - thickness) / 2}
+            cx={size}
+            cy={size}
+            r={(size - thickness) / 2}
             fill="none"
             strokeWidth={thickness}
           />
           <ProgressCircle
             style={circleStyle}
-            cx={48}
-            cy={48}
-            r={(48 - thickness) / 2}
+            cx={size}
+            cy={size}
+            r={(size - thickness) / 2}
             fill="none"
             strokeLinecap="round"
             strokeWidth={thickness}
-            strokeDasharray={variant === 'determinate' ? circumference : 48}
+            strokeDasharray={variant === 'determinate' ? circumference : size}
           />
         </svg>
       </ProgressRoot>

@@ -1,7 +1,14 @@
 import React from 'react'
-import { CircularProgress, CircularProgressProps } from '@components'
+import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { useProgress } from './hooks/useProgress'
+
+const Wrapper = styled.div`
+  margin: 32px;
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(5, fit-content(100%));
+`
 
 export default {
   title: 'Components/Progress Indicators/Circular',
@@ -9,7 +16,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Progress indicators are animated helpers 
+        component: `Progress indicators are animated helpers
         that indicate waiting time as content loads.
         `,
       },
@@ -33,4 +40,13 @@ export const Determinate: Story<CircularProgressProps> = () => {
   return <CircularProgress variant="determinate" value={progress} />
 }
 
+export const Sizes: Story<CircularProgressProps> = () => (
+  <Wrapper>
+    <CircularProgress size={16} />
+    <CircularProgress size={24} />
+    <CircularProgress size={32} />
+    <CircularProgress size={40} />
+    <CircularProgress size={48} />
+  </Wrapper>
+)
 Default.storyName = 'Controllable example'
