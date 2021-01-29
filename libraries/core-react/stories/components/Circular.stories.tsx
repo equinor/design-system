@@ -52,10 +52,12 @@ export const Sizes: Story<CircularProgressProps> = () => (
 )
 
 export const InsideButton: Story<CircularProgressProps> = () => (
-  <Button>
-    <CircularProgress size={24} />
-    Loading...
-  </Button>
+  <>
+    <Button>
+      <CircularProgress size={16} color="white" />
+      Loading...
+    </Button>
+  </>
 )
 
 Default.storyName = 'Controllable example'

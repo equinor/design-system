@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import { progress as tokens } from '../Progress.tokens'
+import * as tokens from './CircularProgress.tokens'
+import type { ProgressToken } from './CircularProgress.tokens'
 import type { CSSObject } from 'styled-components'
 
 const indeterminate = keyframes`
@@ -9,11 +10,10 @@ const indeterminate = keyframes`
       transform: rotate(360deg);
     }
 `
-type ProgressRootProps = Pick<CircularProgressProps, 'variant'>
+type SvgProps = Pick<CircularProgressProps, 'variant'>
 
-const ProgressRoot = styled.svg<ProgressRootProps>`
+const Svg = styled.svg<SvgProps>`
   display: inline-block;
-  color: ${tokens.linear.background};
   ${({ variant }) =>
     variant === 'indeterminate'
       ? css`
@@ -24,13 +24,24 @@ const ProgressRoot = styled.svg<ProgressRootProps>`
         `};
 `
 
-const BaseCircle = styled.circle`
-  stroke: ${tokens.linear.background};
-`
+const BackgroundCircle = styled.circle``
 
-const ProgressCircle = styled.circle`
-  stroke: ${tokens.linear.overlay};
-`
+const ProgressCircle = styled.circle``
+
+const getToken = (color: 'primary' | 'white'): ProgressToken => {
+  if (tokens[color]) {
+    return tokens[color]
+  }
+
+  return {
+    background: 'transparent',
+    entities: {
+      progress: {
+        background: color,
+      },
+    },
+  }
+}
 
 export type CircularProgressProps = {
   /**  Use indeterminate when there is no progress value */
@@ -42,6 +53,8 @@ export type CircularProgressProps = {
   value?: number
   /** Size */
   size?: 16 | 24 | 32 | 40 | 48
+  /** Color */
+  color?: 'primary' | 'white'
 } & HTMLAttributes<SVGSVGElement>
 
 const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
@@ -51,6 +64,7 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
       className = '',
       value = null,
       size = 48,
+      color = 'primary',
       ...props
     },
     ref,
@@ -58,12 +72,12 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
     const thickness = 4
     const progress = Math.round(value)
     const circleStyle: CSSObject = {}
-
     const rootProps = {
       ...props,
       ref,
       variant,
     }
+    const token = getToken(color)
 
     const circumference = 2 * Math.PI * ((48 - thickness) / 2)
 
@@ -84,7 +98,7 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
     }
 
     return (
-      <ProgressRoot
+      <Svg
         {...rootProps}
         viewBox="24 24 48 48"
         role="progressbar"
@@ -93,13 +107,14 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
         width={size}
         preserveAspectRatio="xMidYMid meet"
       >
-        <BaseCircle
+        <BackgroundCircle
           style={circleStyle}
           cx={48}
           cy={48}
           r={(48 - thickness) / 2}
           fill="none"
           strokeWidth={thickness}
+          stroke={token.background}
         />
         <ProgressCircle
           style={circleStyle}
@@ -110,8 +125,9 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
           strokeLinecap="round"
           strokeWidth={thickness}
           strokeDasharray={variant === 'determinate' ? circumference : 48}
+          stroke={token.entities.progress.background}
         />
-      </ProgressRoot>
+      </Svg>
     )
   },
 )
