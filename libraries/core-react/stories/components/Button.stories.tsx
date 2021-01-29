@@ -40,6 +40,7 @@ export default {
         `,
       },
     },
+    info: {},
   },
 } as Meta
 
