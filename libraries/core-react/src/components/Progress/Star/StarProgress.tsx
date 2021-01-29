@@ -32,7 +32,7 @@ const determinate = keyframes`
     opacity: 0.05;
   }
   20% {
-    opacity: 0.2:
+    opacity: 0.2;
   }
   40% {
     opacity: 0.4;
@@ -114,14 +114,24 @@ export type StarProgressProps = {
   value?: number
   /** @ignore */
   ref?: Ref<SVGSVGElement>
+  /** Size */
+  size?: 16 | 24 | 32 | 40 | 48
 } & SVGProps<SVGSVGElement>
 
 const StarProgress = forwardRef<SVGSVGElement, StarProgressProps>(
   function StarProgress(
-    { variant = 'indeterminate', className = '', value = null, ...rest },
+    {
+      variant = 'indeterminate',
+      className = '',
+      value = null,
+      size = 48,
+      ...rest
+    },
     ref,
   ) {
     const progress = Math.round(value)
+    const height = size
+    const width = size / 1.2
 
     const rootProps = {
       ref,
@@ -143,11 +153,12 @@ const StarProgress = forwardRef<SVGSVGElement, StarProgressProps>(
         {...rootProps}
         role="progressbar"
         className={`${className} ${variant}-progress`}
-        width="40"
-        height="48"
+        width={width}
+        height={height}
         viewBox="0 0 40 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
       >
         <path d="M32.756 34.6798L29.482 36.5817C29.4139 36.6219 29.3295 36.6227 29.2606 36.5829L25.9476 34.7151C25.7975 34.6306 25.7967 34.4149 25.9456 34.3284L29.2397 32.4256C29.3077 32.3858 29.3914 32.3858 29.4603 32.4248L32.754 34.2931C32.9033 34.3784 32.9041 34.5929 32.756 34.6798Z" />
         <path d="M25.9596 45.4706L22.6655 43.5867C22.5966 43.5469 22.554 43.4744 22.554 43.396V41.4289V39.5922C22.5519 39.4204 22.7381 39.3109 22.8878 39.397L26.1819 41.2981C26.25 41.3379 26.2926 41.4104 26.2934 41.4896V43.4268V45.2762C26.2947 45.4472 26.1085 45.5559 25.9596 45.4706Z" />
