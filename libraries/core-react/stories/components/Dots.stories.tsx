@@ -1,36 +1,32 @@
 import React from 'react'
-import { DotProgress, DotProgressProps, Typography } from '@components'
+import { DotProgress, DotProgressProps, Typography, Button } from '@components'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
-
-const Background = styled.div`
-  background-color: #ebebeb;
-  width: 36px;
-  padding: 8px;
-  &:not(:last-child) {
-    margin-bottom: 1rem;
-  }
-`
 
 export default {
   title: 'Components/Progress Indicators/Dots',
   component: DotProgress,
   parameters: {
+    backgrounds: { default: 'light' },
     docs: {
       description: {
-        component: `Progress indicators are animated helpers that indicate 
+        component: `Progress indicators are animated helpers that indicate
         waiting time as content loads.
         `,
       },
     },
   },
+  argTypes: {},
 } as Meta
 
 export const Default: Story<DotProgressProps> = (args) => (
-  <Background>
-    <DotProgress {...args} />
-  </Background>
+  <DotProgress {...args} />
 )
+
+Default.bind({})
+Default.args = {
+  variant: 'green',
+}
 
 export const Variants: Story<DotProgressProps> = () => (
   <>
@@ -38,15 +34,17 @@ export const Variants: Story<DotProgressProps> = () => (
       White
     </Typography>
 
-    <Background>
-      <DotProgress variant="white" />
-    </Background>
+    <DotProgress variant="white" />
 
     <Typography variant="h4" as="h2">
       Green
     </Typography>
-    <Background>
-      <DotProgress variant="green" />
-    </Background>
+    <DotProgress variant="green" />
   </>
+)
+
+export const InsideButton: Story<DotProgressProps> = () => (
+  <Button>
+    <DotProgress />
+  </Button>
 )
