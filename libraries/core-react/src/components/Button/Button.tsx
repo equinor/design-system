@@ -53,19 +53,16 @@ const ButtonInner = styled.span`
   display: flex;
   align-items: center;
 
-  > div:first-child,
   > img:first-child,
   > svg:first-child {
     margin-right: 8px;
   }
 
-  > div:last-child,
   > img:last-child,
   > svg:last-child {
     margin-left: 8px;
   }
 
-  > div:only-child,
   > img:only-child,
   > svg:only-child {
     margin-left: auto;
