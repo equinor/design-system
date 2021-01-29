@@ -10,9 +10,6 @@ const {
     interactive: {
       icon_on_interactive_colors: { rgba: icon_on_interactive_colors },
     },
-    logo: {
-      fill_positive: { rgba: starColor },
-    },
   },
 } = tokens
 
