@@ -107,52 +107,43 @@ const Svg = styled.svg<SvgProps>`
 export type StarProgressProps = {
   /** Use indeterminate when there is no progress value */
   variant?: 'indeterminate' | 'determinate'
-  /** @ignore */
-  className?: string
   /** The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
   value?: number
-  /** @ignore */
-  ref?: Ref<SVGSVGElement>
   /** Size */
   size?: 16 | 24 | 32 | 40 | 48
+  /** @ignore */
+  ref?: Ref<SVGSVGElement>
 } & SVGProps<SVGSVGElement>
 
 const StarProgress = forwardRef<SVGSVGElement, StarProgressProps>(
   function StarProgress(
-    {
-      variant = 'indeterminate',
-      className = '',
-      value = null,
-      size = 48,
-      ...rest
-    },
+    { variant = 'indeterminate', value = null, size = 48, ...rest },
     ref,
   ) {
     const progress = Math.round(value)
     const height = size
     const width = size / 1.2
 
-    const rootProps = {
-      ref,
+    const props = {
       ...rest,
+      ref,
       variant,
       progress,
     }
 
     if (variant === 'determinate') {
       if (value !== undefined) {
-        rootProps['aria-valuenow'] = progress
-        rootProps['aria-valuemin'] = 0
-        rootProps['aria-valuemax'] = 100
+        props['aria-valuenow'] = progress
+        props['aria-valuemin'] = 0
+        props['aria-valuemax'] = 100
       }
     }
 
     return (
       <Svg
-        {...rootProps}
+        {...props}
         role="progressbar"
-        className={`${className} ${variant}-progress`}
         width={width}
         height={height}
         viewBox="0 0 40 48"

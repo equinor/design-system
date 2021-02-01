@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes, Ref } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import type { CSSObject } from 'styled-components'
 
@@ -72,24 +72,24 @@ export type LinearProgressProps = {
    * Value between 0 and 100 */
   value?: number
   /** @ignore */
-  className?: string
+  ref?: Ref<SVGSVGElement>
 } & HTMLAttributes<HTMLDivElement>
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
   function LinearProgress(
-    { variant = 'indeterminate', className = '', value = null, ...props },
+    { variant = 'indeterminate', value = null, ...rest },
     ref,
   ) {
-    const rootProps = {
-      ...props,
+    const props = {
+      ...rest,
       ref,
     }
     let barStyle: string
     if (variant === 'determinate') {
       if (value !== undefined) {
-        rootProps['aria-valuenow'] = Math.round(value)
-        rootProps['aria-valuemin'] = 0
-        rootProps['aria-valuemax'] = 100
+        props['aria-valuenow'] = Math.round(value)
+        props['aria-valuemin'] = 0
+        props['aria-valuemax'] = 100
         const transform = value - 100
 
         barStyle = `translateX(${transform}%)`
@@ -105,11 +105,7 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
     }
 
     return (
-      <ProgressRoot
-        {...rootProps}
-        role="progressbar"
-        className={`${className} ${variant}-progress`}
-      >
+      <ProgressRoot {...props} role="progressbar">
         <ProgressBar {...progressProps} style={transformStyle} />
         {variant === 'indeterminate' && <IndeterminateProgress />}
       </ProgressRoot>
