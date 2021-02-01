@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, SVGProps, Ref } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import * as tokens from './CircularProgress.tokens'
-import type { ProgressToken } from './CircularProgress.tokens'
+import type { CircularProgressToken } from './CircularProgress.tokens'
 import type { CSSObject } from 'styled-components'
 
 const indeterminate = keyframes`
@@ -24,11 +24,11 @@ const Svg = styled.svg<SvgProps>`
         `};
 `
 
-const BackgroundCircle = styled.circle``
+const TrackCircle = styled.circle``
 
 const ProgressCircle = styled.circle``
 
-const getToken = (color: 'primary' | 'white'): ProgressToken => {
+const getToken = (color: 'primary' | 'neutral'): CircularProgressToken => {
   if (tokens[color]) {
     return tokens[color]
   }
@@ -53,27 +53,29 @@ export type CircularProgressProps = {
   value?: number
   /** Size */
   size?: 16 | 24 | 32 | 40 | 48
-  /** Color */
-  color?: 'primary' | 'white'
-} & HTMLAttributes<SVGSVGElement>
+  /** Color
+   * @default primary */
+  color?: 'primary' | 'neutral'
+  /** @ignore */
+  ref?: Ref<SVGSVGElement>
+} & SVGProps<SVGSVGElement>
 
 const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
   function CircularProgress(
     {
       variant = 'indeterminate',
-      className = '',
       value = null,
       size = 48,
       color = 'primary',
-      ...props
+      ...rest
     },
     ref,
   ) {
     const thickness = 4
     const progress = Math.round(value)
-    const circleStyle: CSSObject = {}
-    const rootProps = {
-      ...props,
+    const trackStyle: CSSObject = {}
+    const props = {
+      ...rest,
       ref,
       variant,
     }
@@ -82,33 +84,32 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
     const circumference = 2 * Math.PI * ((48 - thickness) / 2)
 
     if (variant === 'determinate') {
-      circleStyle.stroke = circumference.toFixed(3)
-      circleStyle.strokeDashoffset = `${(
+      trackStyle.stroke = circumference.toFixed(3)
+      trackStyle.strokeDashoffset = `${(
         ((100 - progress) / 100) *
         circumference
       ).toFixed(3)}px`
 
-      rootProps['aria-valuenow'] = progress
+      props['aria-valuenow'] = progress
 
       if (value !== undefined) {
-        rootProps['aria-valuenow'] = progress
-        rootProps['aria-valuemin'] = 0
-        rootProps['aria-valuemax'] = 100
+        props['aria-valuenow'] = progress
+        props['aria-valuemin'] = 0
+        props['aria-valuemax'] = 100
       }
     }
 
     return (
       <Svg
-        {...rootProps}
+        {...props}
         viewBox="24 24 48 48"
         role="progressbar"
-        className={`${className} ${variant}-progress`}
         height={size}
         width={size}
         preserveAspectRatio="xMidYMid meet"
       >
-        <BackgroundCircle
-          style={circleStyle}
+        <TrackCircle
+          style={trackStyle}
           cx={48}
           cy={48}
           r={(48 - thickness) / 2}
@@ -117,7 +118,7 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
           stroke={token.background}
         />
         <ProgressCircle
-          style={circleStyle}
+          style={trackStyle}
           cx={48}
           cy={48}
           r={(48 - thickness) / 2}

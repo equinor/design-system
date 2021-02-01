@@ -13,11 +13,11 @@ const {
   },
 } = tokens
 
-export type ProgressToken = ComponentToken & {
+export type CircularProgressToken = ComponentToken & {
   entities: { progress: ComponentToken }
 }
 
-export const primary: ProgressToken = {
+export const primary: CircularProgressToken = {
   background: primary13,
   entities: {
     progress: {
@@ -26,7 +26,7 @@ export const primary: ProgressToken = {
   },
 }
 
-export const white: ProgressToken = {
+export const neutral: CircularProgressToken = {
   // TODO replace with token color once Figma is updated 29.01.2021
   background: 'rgba(255,255,255,0.20)',
   entities: {
