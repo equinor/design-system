@@ -13,17 +13,7 @@ const StyledProgress = styled(LinearProgress)`
 afterEach(cleanup)
 
 describe('LinearProgress ', () => {
-  it('should render indeterminate as default', () => {
-    render(<LinearProgress />)
-    const progress = screen.getByRole('progressbar')
-    expect(progress).toHaveClass('indeterminate-progress')
-  })
-  it('should render determinate if stated in props', () => {
-    render(<LinearProgress variant="determinate" value={50} />)
-    const progress = screen.getByRole('progressbar')
-    expect(progress).toHaveClass('determinate-progress')
-  })
-  it('has aria values on variant=determinate', () => {
+  it('has coorect aria values when variant is "determinate"', () => {
     render(<LinearProgress variant="determinate" value={50} />)
     const progress = screen.getByRole('progressbar')
     expect(progress).toHaveAttribute('aria-valuenow', '50')
