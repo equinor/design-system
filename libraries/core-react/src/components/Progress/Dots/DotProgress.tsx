@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { forwardRef, Ref, SVGProps } from 'react'
+import { forwardRef, SVGProps, Ref } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { progress as tokens } from '../Progress.tokens'
+import * as tokens from './DotProgress.tokens'
+import type { DotProgressToken } from './DotProgress.tokens'
 
 const opacity = keyframes`
     0% {
@@ -27,28 +28,34 @@ const Svg = styled.svg`
   }
 `
 
+const getColor = (color: 'primary' | 'tertiary' | 'neutral'): string => {
+  if (tokens[color]) {
+    return (tokens[color] as DotProgressToken).background
+  }
+
+  return color
+}
+
 export type DotProgressProps = {
-  /** Choose between two colors */
-  variant?: 'white' | 'green'
-  /** @ignore */
-  className?: string
+  /** Color
+   * @default neutral */
+  color?: 'primary' | 'tertiary' | 'neutral'
   /** @ignore */
   ref?: Ref<SVGSVGElement>
 } & SVGProps<SVGSVGElement>
 
 const DotProgress = forwardRef<SVGSVGElement, DotProgressProps>(
-  function DotProgress({ variant = 'white', className = '', ...rest }, ref) {
+  function DotProgress({ color = 'neutral', ...rest }, ref) {
     const props = {
-      color: tokens.dots[variant].color,
-      ref,
       ...rest,
+      color: getColor(color),
+      ref,
     }
 
     return (
       <Svg
         {...props}
         role="progressbar"
-        className={`${className} ${variant}-progress`}
         viewBox="0 0 16 4"
         height="8px"
         width="32px"
@@ -60,7 +67,5 @@ const DotProgress = forwardRef<SVGSVGElement, DotProgressProps>(
     )
   },
 )
-
-// DotProgress.displayName = 'eds-dot-progress'
 
 export { DotProgress }

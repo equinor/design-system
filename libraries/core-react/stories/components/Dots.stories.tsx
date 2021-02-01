@@ -25,21 +25,25 @@ export const Default: Story<DotProgressProps> = (args) => (
 
 Default.bind({})
 Default.args = {
-  variant: 'green',
+  color: 'primary',
 }
 
 export const Variants: Story<DotProgressProps> = () => (
   <>
     <Typography variant="h4" as="h2">
-      White
+      Primary
     </Typography>
-
-    <DotProgress variant="white" />
+    <DotProgress color="primary" />
 
     <Typography variant="h4" as="h2">
-      Green
+      Tertiary
     </Typography>
-    <DotProgress variant="green" />
+    <DotProgress color="tertiary" />
+
+    <Typography variant="h4" as="h2">
+      Neutral
+    </Typography>
+    <DotProgress color="neutral" />
   </>
 )
 
