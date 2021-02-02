@@ -110,8 +110,7 @@ export type StarProgressProps = {
   /** The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
   value?: number
-  /** Size
-   * @default 48 */
+  /** Size */
   size?: 16 | 24 | 32 | 40 | 48
   /** @ignore */
   ref?: Ref<SVGSVGElement>
