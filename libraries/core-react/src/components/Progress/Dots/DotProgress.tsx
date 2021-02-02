@@ -30,7 +30,7 @@ const Svg = styled.svg`
 
 const getColor = (color: 'primary' | 'tertiary' | 'neutral'): string => {
   if (tokens[color]) {
-    return (tokens[color] as DotProgressToken).background
+    return tokens[color].background
   }
 
   return color
