@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes, Ref } from 'react'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import type { CSSObject } from 'styled-components'
 import * as tokens from './LinearProgress.tokens'
 
@@ -29,17 +29,10 @@ const Track = styled.div`
   width: 100%;
   border-radius: 50px;
 `
-type StyledProgressBarProps = {
-  variant: 'indeterminate' | 'determinate'
-}
 
-const ProgressBar = styled.div<StyledProgressBarProps>`
-  ${({ variant }) =>
-    variant === 'determinate' &&
-    css`
-      transition: transform 0.4s linear;
-      background-color: ${tokens.primary.entities.progress.background};
-    `}
+const ProgressBar = styled.div`
+  transition: transform 0.4s linear;
+  background-color: ${tokens.primary.entities.progress.background};
   width: 100%;
   border-radius: 50px;
   position: absolute;
@@ -95,18 +88,17 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
       }
     }
 
-    const progressProps = {
-      variant,
-    }
-
     const transformStyle: CSSObject = {
       transform: barStyle,
     }
 
     return (
       <Track {...props} role="progressbar">
-        <ProgressBar {...progressProps} style={transformStyle} />
-        {variant === 'indeterminate' && <IndeterminateProgressBar />}
+        {variant === 'indeterminate' ? (
+          <IndeterminateProgressBar />
+        ) : (
+          <ProgressBar style={transformStyle} />
+        )}
       </Track>
     )
   },
