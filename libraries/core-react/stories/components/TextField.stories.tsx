@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, TextFieldProps } from '@components'
+import { TextField, TextFieldProps, Icon } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
@@ -112,25 +112,28 @@ export const types: Story<TextFieldProps> = () => (
   </Wrapper>
 )
 
-export const Other: Story<TextFieldProps> = () => (
-  <Wrapper>
-    <TextField
-      id="storybook-multiline"
-      placeholder="Placeholder text"
-      label="Multline"
-      meta="Meta"
-      helperText="Helper Text"
-      multiline
-    />
-    <TextField
-      id="storybook-disabled"
-      placeholder="Placeholder text"
-      label="Disabled"
-      meta="Meta"
-      helperText="Helper Text"
-      disabled
-    />
-  </Wrapper>
+types.storyName = 'Types of input fields'
+
+export const Multiline: Story<TextFieldProps> = () => (
+  <TextField
+    id="storybook-multiline"
+    placeholder="Placeholder text"
+    label="Multline"
+    meta="Meta"
+    helperText="Helper Text"
+    multiline
+  />
+)
+
+export const Disabled: Story<TextFieldProps> = () => (
+  <TextField
+    id="storybook-disabled"
+    placeholder="Placeholder text"
+    label="Disabled"
+    meta="Meta"
+    helperText="Helper Text"
+    disabled
+  />
 )
 
 export const variants: Story<TextFieldProps> = () => (
