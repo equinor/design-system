@@ -18,19 +18,6 @@ const Wrapper = styled.div<WrapperStyleProps>`
   transition: all 0.36s;
 `
 
-const UnstyledList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-`
-
-const Examples = styled.div`
-  display: grid;
-  grid-gap: 3rem;
-  align-items: top;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-`
-
 export default {
   title: 'Components/Selection controls/Switch',
   component: Switch,
@@ -49,49 +36,52 @@ export const Default: Story<SwitchProps> = (args) => (
 )
 
 export const Variants: Story<SwitchProps> = () => {
+  const UnstyledList = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  `
   return (
     <Wrapper>
-      <Examples>
-        <div>
-          <span>Default</span>
-          <UnstyledList>
-            <li>
-              <Switch label="I'm default off" />
-            </li>
-            <li>
-              <Switch label="I'm default on" defaultChecked />
-            </li>
-            <li>
-              <Switch disabled label="You can't turn me on!" />
-            </li>
-            <li>
-              <Switch disabled defaultChecked label="You can't turn me off!" />
-            </li>
-          </UnstyledList>
-        </div>
-        <div>
-          <span>Small</span>
-          <UnstyledList>
-            <li>
-              <Switch label="I'm default off" size="small" />
-            </li>
-            <li>
-              <Switch label="I'm default on" defaultChecked size="small" />
-            </li>
-            <li>
-              <Switch disabled label="You can't turn me on!" size="small" />
-            </li>
-            <li>
-              <Switch
-                disabled
-                defaultChecked
-                label="You can't turn me off!"
-                size="small"
-              />
-            </li>
-          </UnstyledList>
-        </div>
-      </Examples>
+      <div>
+        <span>Default</span>
+        <UnstyledList>
+          <li>
+            <Switch label="I'm default off" />
+          </li>
+          <li>
+            <Switch label="I'm default on" defaultChecked />
+          </li>
+          <li>
+            <Switch disabled label="You can't turn me on!" />
+          </li>
+          <li>
+            <Switch disabled defaultChecked label="You can't turn me off!" />
+          </li>
+        </UnstyledList>
+      </div>
+      <div>
+        <span>Small</span>
+        <UnstyledList>
+          <li>
+            <Switch label="I'm default off" size="small" />
+          </li>
+          <li>
+            <Switch label="I'm default on" defaultChecked size="small" />
+          </li>
+          <li>
+            <Switch disabled label="You can't turn me on!" size="small" />
+          </li>
+          <li>
+            <Switch
+              disabled
+              defaultChecked
+              label="You can't turn me off!"
+              size="small"
+            />
+          </li>
+        </UnstyledList>
+      </div>
     </Wrapper>
   )
 }
