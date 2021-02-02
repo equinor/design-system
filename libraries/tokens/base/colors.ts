@@ -27,6 +27,11 @@ export const colors = {
       hsla: 'hsla(0, 0%, 100%, 1)',
       rgba: 'rgba(255, 255, 255, 1)',
     },
+    background__semitransparent: {
+      hex: '#ffffff',
+      hsla: 'hsla(0, 0%, 100%, 0.2)',
+      rgba: 'rgba(255, 255, 255, 0.2)',
+    },
     background__light: {
       hex: '#f7f7f7',
       hsla: 'hsla(0, 0%, 96.9%, 1)',

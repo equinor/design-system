@@ -1,9 +1,17 @@
 import R from 'ramda'
-import { propName, withType, pickChildren, toDict, mergeStrings } from '@utils'
+import {
+  propName,
+  withType,
+  pickChildren,
+  toDict,
+  mergeStrings,
+  withName,
+} from '@utils'
 import { px } from '@units'
 
 const toShapeTokens = R.pipe(
   R.filter(withType('frame')),
+  R.filter(withName('default')),
   pickChildren,
   R.filter(withType('component')),
   R.map((node) => {
