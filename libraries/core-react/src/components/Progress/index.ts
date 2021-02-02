@@ -12,12 +12,12 @@ type ProgressCompoundProps = {
   Linear: typeof LinearProgress
   Circular: typeof CircularProgress
   Star: typeof StarProgress
-  Dot: typeof DotProgress
+  Dots: typeof DotProgress
 }
 
 export const Progress: ProgressCompoundProps = {
   Linear: LinearProgress,
   Circular: CircularProgress,
   Star: StarProgress,
-  Dot: DotProgress,
+  Dots: DotProgress,
 }
