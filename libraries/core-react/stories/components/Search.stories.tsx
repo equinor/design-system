@@ -4,10 +4,6 @@ import styled from 'styled-components'
 import { Search, Typography, Button, SearchProps } from '@components'
 import { Story, Meta } from '@storybook/react'
 
-const Rows = styled.div`
-  margin: 32px;
-`
-
 const Columns = styled.div`
   display: grid;
   width: 100%;
@@ -16,7 +12,7 @@ const Columns = styled.div`
   grid-auto-columns: max-content;
 `
 
-const OuterContainer = styled.div`
+const Wrapper = styled.div`
   background: lightblue;
   padding: 8px;
   width: 50%;
@@ -33,6 +29,7 @@ const StyledSearch = styled(Search)`
 
 export default {
   title: 'Components/Search',
+  component: Search,
   parameters: {
     docs: {
       description: {
@@ -48,17 +45,20 @@ const handleOnChange = action('onChange')
 const handleOnBlur = action('onBlur')
 const handleOnFocus = action('onFocus')
 
-export const Examples: Story<SearchProps> = () => {
-  const [searchValue, setSearchValue] = useState('Initial value')
-  const [isFocused, setIsFocused] = useState(false)
+export const Default: Story<SearchProps> = () => {
+  // This story is not interactive, because Search has no props beyond the default HTML ones.
+  return (
+    <Search
+      aria-label="sitewide"
+      id="search-normal"
+      placeholder="Search"
+      onChange={handleOnChange}
+    />
+  )
+}
 
-  const handleOnSearchValueChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value = event.target.value
-    handleOnChange()
-    setSearchValue(value)
-  }
+export const WithOnFocusAndBlur: Story<SearchProps> = () => {
+  const [isFocused, setIsFocused] = useState(false)
 
   const handleFocus = () => {
     setIsFocused(true)
@@ -71,104 +71,102 @@ export const Examples: Story<SearchProps> = () => {
   }
 
   return (
+    <div
+      style={{
+        background: isFocused ? 'cyan' : 'transparent',
+      }}
+    >
+      <Typography variant="h4" as="h2">
+        I am connected to the search input
+      </Typography>
+      <Search
+        aria-label="Focused and not focused"
+        id="search-focusedAndNot"
+        placeholder="Search"
+        onChange={handleOnChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      />
+    </div>
+  )
+}
+WithOnFocusAndBlur.storyName = 'With on focus and blur'
+
+export const WithPredefinedValue: Story<SearchProps> = () => (
+  <Search
+    aria-label="predefined"
+    id="search-predefined"
+    placeholder="Search"
+    onChange={handleOnChange}
+    defaultValue="Predefined value"
+  />
+)
+WithPredefinedValue.storyName = 'With predefined value'
+
+export const CenteredAndStyled: Story<SearchProps> = () => (
+  <Wrapper>
+    50% width
+    <StyledSearch
+      aria-label="contained"
+      id="search-contained"
+      placeholder="Search"
+      onChange={handleOnChange}
+    />
+  </Wrapper>
+)
+
+CenteredAndStyled.storyName = 'Centered and styled'
+
+export const InsideAForm: Story<SearchProps> = () => (
+  <form action="/">
+    <Search placeholder="Search" onChange={handleOnChange} />
+  </form>
+)
+
+export const Disabled: Story<SearchProps> = () => (
+  <Search
+    aria-label="disabled"
+    id="search-disabled"
+    placeholder="Search"
+    onChange={handleOnChange}
+    onFocus={handleOnFocus}
+    onBlur={handleOnBlur}
+    disabled
+  />
+)
+InsideAForm.storyName = 'Inside a form element'
+
+export const Controlled: Story<SearchProps> = () => {
+  const [searchValue, setSearchValue] = useState('Initial value')
+
+  const handleOnSearchValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = event.target.value
+    handleOnChange()
+    setSearchValue(value)
+  }
+
+  return (
     <>
-      <Rows>
-        <Typography variant="h4" as="h2">
-          Normal
-        </Typography>
+      <Typography variant="body_short">Value: {searchValue}</Typography>
+      <Columns>
         <Search
-          aria-label="sitewide"
-          id="search-normal"
-          placeholder="Search"
-          onChange={handleOnChange}
+          aria-label="external set value"
+          id="search-external"
+          placeholder="Say hello! 🙋"
+          onChange={handleOnSearchValueChange}
+          value={searchValue}
         />
-      </Rows>
-      <Rows
-        style={{
-          background: isFocused ? 'cyan' : 'transparent',
-        }}
-      >
-        <Typography variant="h4" as="h2">
-          Normal with onFocus & onBlur
-        </Typography>
-        <Search
-          aria-label="focusedAndNot"
-          id="search-focusedAndNot"
-          placeholder="Search"
-          onChange={handleOnChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-      </Rows>
-      <Rows>
-        <Typography variant="h4" as="h2">
-          Predefined value
-        </Typography>
-        <Search
-          aria-label="predefined"
-          id="search-predefined"
-          placeholder="Search"
-          onChange={handleOnChange}
-          defaultValue="Predefined value"
-        />
-      </Rows>
-      <Rows>
-        <Typography variant="h4" as="h2">
-          Centered & styled inside a container
-        </Typography>
-        <OuterContainer>
-          50% width
-          <StyledSearch
-            aria-label="contained"
-            id="search-contained"
-            placeholder="Search"
-            onChange={handleOnChange}
-          />
-        </OuterContainer>
-      </Rows>
-      <Rows>
-        <Typography variant="h4" as="h2">
-          Inside form
-        </Typography>
-        <form action="/">
-          <Search placeholder="Search" onChange={handleOnChange} />
-        </form>
-      </Rows>
-      <Rows>
-        <Typography variant="h4">Disabled</Typography>
-        <Search
-          aria-label="disabled"
-          id="search-disabled"
-          placeholder="Search"
-          onChange={handleOnChange}
-          onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
-          disabled
-        />
-      </Rows>
-      <Rows>
-        <Typography variant="h4" as="h2">
-          Controlled input
-        </Typography>
-        <Typography variant="body_short">Value: {searchValue}</Typography>
-        <Columns>
-          <Search
-            aria-label="external set value"
-            id="search-external"
-            placeholder="Say hello! 🙋"
-            onChange={handleOnSearchValueChange}
-            value={searchValue}
-          />
-          <Button
-            onClick={() => {
-              setSearchValue('Hello search! 👋')
-              action('Set search value')()
-            }}
-          >
-            Say hello to search!
-          </Button>
-        </Columns>
-      </Rows>
+        <Button
+          onClick={() => {
+            setSearchValue('Hello search! 👋')
+            action('Set search value')()
+          }}
+        >
+          Say hello to search!
+        </Button>
+      </Columns>
     </>
   )
 }
