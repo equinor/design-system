@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { TopBar, Icon, TextField, TopbarProps } from '@components'
+import { TopBar, Icon, TextField, Search, TopbarProps } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 import {
@@ -45,7 +45,7 @@ const Wrapper = styled.div.attrs({ tabIndex: 0 })`
   overflow: auto;
 `
 
-const Body = styled.div`
+const BodyWrapper = styled.div`
   height: 1500px;
   background: #ebebeb;
   display: flex;
@@ -53,98 +53,56 @@ const Body = styled.div`
   align-items: center;
   justify-content: space-between;
 `
-const Icons = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-  > * {
-    margin-left: 40px;
-  }
-`
-
-const TempSearchWrapper = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-`
-
-const TempSearch = styled(TextField)`
-  width: 30%;
-  min-width: 200px;
-  input {
-    border-bottom: none;
-  }
-  label {
-    color: #fff;
-  }
-`
-
-const LEFT_CHOICES = {
-  none: null,
-  icon: <Icon name="grid_on" size={16} />,
-  text: 'Application name - subtitle',
-  'text+icon': (
-    <Fragment>
-      <Icon name="grid_on" size={16} />
-      Application name - subtitle
-    </Fragment>
-  ),
-}
-
-const CENTER_CHOICES = {
-  none: null,
-  search: (
-    <TempSearchWrapper>
-      <TempSearch
-        id="topbar-test"
-        type="search"
-        title="search"
-        placeholder="Replace with Search compoent"
-      />
-    </TempSearchWrapper>
-  ),
-  tabs: 'TODO: Use Tabs compoent',
-  text: 'Some Center Text',
-}
-
-const RIGHT_CHOICES = {
-  none: null,
-  text: 'Some Right Text',
-  icons: (
-    <Icons>
-      <Icon name="account_circle" size={16} title="user" />
-      <Icon name="accessible" size={16} />
-      <Icon name="notifications" size={16} />
-      <Icon name="fullscreen" size={16} />
-    </Icons>
-  ),
-}
 
 export const Basic: Story<TopbarProps> = (props): JSX.Element => {
   return (
     <Wrapper>
       <TopBar {...props}>
-        <TopBar.Header>{LEFT_CHOICES['text+icon']}</TopBar.Header>
+        <TopBar.Header>
+          <>
+            <Icon name="grid_on" size={16} />
+            Application name - subtitle
+          </>
+        </TopBar.Header>
       </TopBar>
-      <Body>
+      <BodyWrapper>
         <p>Top of page</p>
         <p>Middle of page</p>
         <p>Bottom of page</p>
-      </Body>
+      </BodyWrapper>
     </Wrapper>
   )
 }
 
-export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => (
-  <Wrapper>
+export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => {
+  const Icons = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    > * {
+      margin-left: 40px;
+    }
+  `
+
+  return (
     <TopBar>
-      <TopBar.Header>{LEFT_CHOICES['text+icon']}</TopBar.Header>
-      <TopBar.CustomContent>{CENTER_CHOICES.search}</TopBar.CustomContent>
-      <TopBar.Actions>{RIGHT_CHOICES.icons}</TopBar.Actions>
+      <TopBar.Header>
+        <Icon name="grid_on" size={16} />
+        Application name - subtitle
+      </TopBar.Header>
+      <TopBar.CustomContent>
+        <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
+      </TopBar.CustomContent>
+      <TopBar.Actions>
+        {' '}
+        <Icons>
+          <Icon name="account_circle" size={16} title="user" />
+          <Icon name="accessible" size={16} />
+          <Icon name="notifications" size={16} />
+          <Icon name="fullscreen" size={16} />
+        </Icons>
+      </TopBar.Actions>
     </TopBar>
-    <Body>
-      <p>Top of page</p>
-      <p>Middle of page</p>
-      <p>Bottom of page</p>
-    </Body>
-  </Wrapper>
-)
+  )
+}
+WithSearchAndIcons.storyName = 'With search and icons'
