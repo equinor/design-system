@@ -3,14 +3,6 @@ import styled from 'styled-components'
 import { SideSheet, SideSheetProps, Button } from '@components'
 import { Story, Meta } from '@storybook/react'
 
-const Child = styled.div`
-  padding: 6px;
-  background-color: rgba(255, 146, 0, 0.15);
-  box-sizing: border-box;
-  border: 1px dashed #ff9200;
-  border-radius: 4px;
-`
-
 export default {
   title: 'Components/SideSheet',
   component: SideSheet,
@@ -32,7 +24,13 @@ export default {
 
 export const Default: Story<SideSheetProps> = (args) => {
   const [toggle, setToggle] = useState(true)
-
+  const Child = styled.div`
+    padding: 6px;
+    background-color: rgba(255, 146, 0, 0.15);
+    box-sizing: border-box;
+    border: 1px dashed #ff9200;
+    border-radius: 4px;
+  `
   return (
     <div style={{ height: '400px' }}>
       <Button variant="outlined" onClick={() => setToggle(!toggle)}>
