@@ -44,7 +44,6 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
 
 const ButtonCenterContent = styled.span`
   text-align: center;
-  grid-area: center;
   flex: 1;
 `
 
