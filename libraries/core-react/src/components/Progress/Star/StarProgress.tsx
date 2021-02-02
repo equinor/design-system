@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef, SVGProps, Ref } from 'react'
 import styled, { keyframes, css } from 'styled-components'
-import { progress as tokens } from '../Progress.tokens'
+import { token } from './StarProgress.tokens'
 
 const indeterminate = keyframes`
     0% {
@@ -32,7 +32,7 @@ const determinate = keyframes`
     opacity: 0.05;
   }
   20% {
-    opacity: 0.2:
+    opacity: 0.2;
   }
   40% {
     opacity: 0.4;
@@ -54,7 +54,7 @@ type SvgProps = {
   SVGProps<SVGSVGElement>
 
 const Svg = styled.svg<SvgProps>`
-  fill: ${tokens.star.background};
+  fill: ${token.background};
   ${({ variant, progress }) =>
     variant === 'indeterminate'
       ? css`
@@ -107,47 +107,49 @@ const Svg = styled.svg<SvgProps>`
 export type StarProgressProps = {
   /** Use indeterminate when there is no progress value */
   variant?: 'indeterminate' | 'determinate'
-  /** @ignore */
-  className?: string
   /** The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
   value?: number
+  /** Size */
+  size?: 16 | 24 | 32 | 40 | 48
   /** @ignore */
   ref?: Ref<SVGSVGElement>
 } & SVGProps<SVGSVGElement>
 
 const StarProgress = forwardRef<SVGSVGElement, StarProgressProps>(
   function StarProgress(
-    { variant = 'indeterminate', className = '', value = null, ...rest },
+    { variant = 'indeterminate', value = null, size = 48, ...rest },
     ref,
   ) {
     const progress = Math.round(value)
+    const height = size * 1.2
+    const width = size
 
-    const rootProps = {
-      ref,
+    const props = {
       ...rest,
+      ref,
       variant,
       progress,
     }
 
     if (variant === 'determinate') {
       if (value !== undefined) {
-        rootProps['aria-valuenow'] = progress
-        rootProps['aria-valuemin'] = 0
-        rootProps['aria-valuemax'] = 100
+        props['aria-valuenow'] = progress
+        props['aria-valuemin'] = 0
+        props['aria-valuemax'] = 100
       }
     }
 
     return (
       <Svg
-        {...rootProps}
+        {...props}
         role="progressbar"
-        className={`${className} ${variant}-progress`}
-        width="40"
-        height="48"
+        width={width}
+        height={height}
         viewBox="0 0 40 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
       >
         <path d="M32.756 34.6798L29.482 36.5817C29.4139 36.6219 29.3295 36.6227 29.2606 36.5829L25.9476 34.7151C25.7975 34.6306 25.7967 34.4149 25.9456 34.3284L29.2397 32.4256C29.3077 32.3858 29.3914 32.3858 29.4603 32.4248L32.754 34.2931C32.9033 34.3784 32.9041 34.5929 32.756 34.6798Z" />
         <path d="M25.9596 45.4706L22.6655 43.5867C22.5966 43.5469 22.554 43.4744 22.554 43.396V41.4289V39.5922C22.5519 39.4204 22.7381 39.3109 22.8878 39.397L26.1819 41.2981C26.25 41.3379 26.2926 41.4104 26.2934 41.4896V43.4268V45.2762C26.2947 45.4472 26.1085 45.5559 25.9596 45.4706Z" />

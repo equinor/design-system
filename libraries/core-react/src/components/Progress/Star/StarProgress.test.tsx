@@ -13,17 +13,7 @@ const StyledProgress = styled(StarProgress)`
 afterEach(cleanup)
 
 describe('StarProgress', () => {
-  it('should render indeterminate as default', () => {
-    render(<StarProgress />)
-    const progressbar = screen.getByRole('progressbar')
-    expect(progressbar).toHaveClass('indeterminate-progress')
-  })
-  it('should render determinate if stated in props', () => {
-    render(<StarProgress variant="determinate" value={50} />)
-    const progressbar = screen.getByRole('progressbar')
-    expect(progressbar).toHaveClass('determinate-progress')
-  })
-  it('has aria values on variant=determinate', () => {
+  it('has correct aria values when variant is "determinate"', () => {
     render(<StarProgress variant="determinate" value={50} />)
     const progress = screen.getByRole('progressbar')
     expect(progress).toHaveAttribute('aria-valuenow', '50')
@@ -34,5 +24,15 @@ describe('StarProgress', () => {
     const { container } = render(<StyledProgress />)
     const progress = container.firstChild
     expect(progress).toHaveStyleRule('position', 'absolute')
+  })
+  it('has correct default width ', () => {
+    const { container } = render(<StarProgress />)
+    const progress = container.firstChild
+    expect(progress).toHaveAttribute('width', '48')
+  })
+  it('has correct width when size is 16', () => {
+    const { container } = render(<StarProgress size={16} />)
+    const progress = container.firstChild
+    expect(progress).toHaveAttribute('width', '16')
   })
 })

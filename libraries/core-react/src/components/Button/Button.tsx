@@ -93,8 +93,6 @@ const Base = ({ token }: { token: ButtonToken }) => {
     width: ${token.width};
     svg {
       justify-self: center;
-      height: ${entities?.icon?.height};
-      width: ${entities?.icon?.width};
     }
 
     ${spacingsTemplate(spacings)}

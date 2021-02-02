@@ -1,9 +1,8 @@
 import * as React from 'react'
-import { forwardRef, HTMLAttributes } from 'react'
-import styled, { css, keyframes } from 'styled-components'
+import { forwardRef, HTMLAttributes, Ref } from 'react'
+import styled, { keyframes } from 'styled-components'
 import type { CSSObject } from 'styled-components'
-
-import { progress as tokens } from '../Progress.tokens'
+import * as tokens from './LinearProgress.tokens'
 
 const indeterminate = keyframes`
   0%{
@@ -22,25 +21,18 @@ const indeterminate = keyframes`
 
 `
 
-const ProgressRoot = styled.div`
+const Track = styled.div`
   position: relative;
   overflow: hidden;
   height: 4px;
-  background-color: ${tokens.linear.background};
+  background-color: ${tokens.primary.background};
   width: 100%;
   border-radius: 50px;
 `
-type StyledProgressBarProps = {
-  variant: 'indeterminate' | 'determinate'
-}
 
-const ProgressBar = styled.div<StyledProgressBarProps>`
-  ${({ variant }) =>
-    variant === 'determinate' &&
-    css`
-      transition: transform 0.4s linear;
-      background-color: ${tokens.linear.overlay};
-    `}
+const ProgressBar = styled.div`
+  transition: transform 0.4s linear;
+  background-color: ${tokens.primary.entities.progress.background};
   width: 100%;
   border-radius: 50px;
   position: absolute;
@@ -50,7 +42,7 @@ const ProgressBar = styled.div<StyledProgressBarProps>`
   transition: transform 0.2s linear;
   transform-origin: left;
 `
-const IndeterminateProgress = styled.div`
+const IndeterminateProgressBar = styled.div`
   width: 75%;
   border-radius: 50px;
   position: absolute;
@@ -59,7 +51,7 @@ const IndeterminateProgress = styled.div`
   top: 0;
   transition: transform 0.2s linear;
   transform-origin: left;
-  background-color: ${tokens.linear.overlay};
+  background-color: ${tokens.primary.entities.progress.background};
   animation: ${indeterminate} 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 1s
     infinite;
 `
@@ -71,33 +63,27 @@ export type LinearProgressProps = {
   /** The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
   value?: number
-  /** @ignore */
-  className?: string
 } & HTMLAttributes<HTMLDivElement>
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
   function LinearProgress(
-    { variant = 'indeterminate', className = '', value = null, ...props },
+    { variant = 'indeterminate', value = null, ...rest },
     ref,
   ) {
-    const rootProps = {
-      ...props,
+    const props = {
+      ...rest,
       ref,
     }
     let barStyle: string
     if (variant === 'determinate') {
       if (value !== undefined) {
-        rootProps['aria-valuenow'] = Math.round(value)
-        rootProps['aria-valuemin'] = 0
-        rootProps['aria-valuemax'] = 100
+        props['aria-valuenow'] = Math.round(value)
+        props['aria-valuemin'] = 0
+        props['aria-valuemax'] = 100
         const transform = value - 100
 
         barStyle = `translateX(${transform}%)`
       }
-    }
-
-    const progressProps = {
-      variant,
     }
 
     const transformStyle: CSSObject = {
@@ -105,14 +91,13 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
     }
 
     return (
-      <ProgressRoot
-        {...rootProps}
-        role="progressbar"
-        className={`${className} ${variant}-progress`}
-      >
-        <ProgressBar {...progressProps} style={transformStyle} />
-        {variant === 'indeterminate' && <IndeterminateProgress />}
-      </ProgressRoot>
+      <Track {...props} role="progressbar">
+        {variant === 'indeterminate' ? (
+          <IndeterminateProgressBar />
+        ) : (
+          <ProgressBar style={transformStyle} />
+        )}
+      </Track>
     )
   },
 )
