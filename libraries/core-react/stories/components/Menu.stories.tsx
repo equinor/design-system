@@ -186,6 +186,8 @@ const bigMenuTemplate = (
 )
 
 export const ButtonToggle: Story<MenuProps> = () => {
+  //  Note: This example is not interactive, as Storybook
+  // doesn't yet support to manipulate subcomponents via Storybook Args
   const [state, setState] = React.useState<{
     buttonEl: HTMLButtonElement
     focus: 'first' | 'last'
