@@ -71,18 +71,16 @@ export const WithScrim: Story<DialogProps> = () => {
           <Dialog>
             <Dialog.Title>Title</Dialog.Title>
             <Dialog.CustomContent scrollable>
-              <>
-                <Typography variant="body_short">
-                  Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum
-                  dolor sit amet consecteur dit lot. Lorem ipsum dolor sit amet
-                  consecteur dit lot.
-                </Typography>
-                <Typography variant="body_short">
-                  Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum
-                  dolor sit amet consecteur dit lot. Lorem ipsum dolor sit amet
-                  consecteur dit lot.
-                </Typography>
-              </>
+              <Typography variant="body_short">
+                Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+                sit amet consecteur dit lot. Lorem ipsum dolor sit amet
+                consecteur dit lot.
+              </Typography>
+              <Typography variant="body_short">
+                Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
+                sit amet consecteur dit lot. Lorem ipsum dolor sit amet
+                consecteur dit lot.
+              </Typography>
             </Dialog.CustomContent>
             <Dialog.Actions>
               <Wrapper>
@@ -151,18 +149,14 @@ export const ScrollablePlusActions: Story<DialogProps> = () => (
   <Dialog>
     <Dialog.Title>Scrollable + actions</Dialog.Title>
     <Dialog.CustomContent scrollable>
-      <>
-        <Typography variant="body_short">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.
-        </Typography>
-        <Typography variant="body_short">
-          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-          lot.
-        </Typography>
-      </>
+      <Typography variant="body_short">
+        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.
+      </Typography>
+      <Typography variant="body_short">
+        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.
+      </Typography>
     </Dialog.CustomContent>
     <Dialog.Actions>
       <Wrapper>
