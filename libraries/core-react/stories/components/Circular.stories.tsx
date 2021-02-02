@@ -10,7 +10,6 @@ import { Meta, Story } from '@storybook/react'
 import { useProgress } from './hooks/useProgress'
 
 const Wrapper = styled.div`
-  margin: 32px;
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(5, fit-content(100%));
@@ -20,6 +19,7 @@ export default {
   title: 'Components/Progress Indicators/Circular',
   component: Progress.Circular,
   parameters: {
+    backgrounds: { default: 'light' },
     docs: {
       description: {
         component: `Progress indicators are animated helpers
@@ -74,12 +74,15 @@ export const Sizes: Story<CircularProgressProps> = () => (
 )
 
 export const InsideButton: Story<CircularProgressProps> = () => (
-  <>
+  <Wrapper>
     <Button>
       <Progress.Circular size={16} color="neutral" />
       Loading...
     </Button>
-  </>
+    <Button variant="ghost_icon">
+      <Progress.Circular size={24} />
+    </Button>
+  </Wrapper>
 )
 
 Default.storyName = 'Controllable example'

@@ -4,7 +4,6 @@ import { Progress, DotProgressProps, Typography, Button } from '@components'
 import { Meta, Story } from '@storybook/react'
 
 const Wrapper = styled.div`
-  margin: 32px;
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(5, fit-content(100%));
@@ -59,7 +58,12 @@ export const Colors: Story<DotProgressProps> = () => (
 )
 
 export const InsideButton: Story<DotProgressProps> = () => (
-  <Button>
-    <Progress.Dots />
-  </Button>
+  <Wrapper>
+    <Button>
+      <Progress.Dots />
+    </Button>
+    <Button variant="ghost_icon">
+      <Progress.Dots color="primary" />
+    </Button>
+  </Wrapper>
 )
