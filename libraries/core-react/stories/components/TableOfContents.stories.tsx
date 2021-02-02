@@ -16,11 +16,12 @@ const icons = {
 
 Icon.add(icons)
 
-const { LinkItem } = TableOfContents
-
 export default {
   title: 'Components/TableOfContents',
   component: TableOfContents,
+  subcomponents: {
+    LinkItem: TableOfContents.LinkItem,
+  },
   parameters: {
     docs: {
       description: {
@@ -161,24 +162,24 @@ export const Example: Story<TableOfContentsProps> = (args) => {
       </main>
       <aside>
         <TableOfContents {...args}>
-          <LinkItem>
+          <TableOfContents.LinkItem>
             <Typography variant="body_short" link href="#sub-section-one">
               <Icon name="subdirectory_arrow_right" size={16} />
               <span>Topic 1</span>
             </Typography>
-          </LinkItem>
-          <LinkItem title="A very long topic to test proper implementation">
+          </TableOfContents.LinkItem>
+          <TableOfContents.LinkItem title="A very long topic to test proper implementation">
             <Typography variant="body_short" link href="#sub-section-two">
               <Icon name="subdirectory_arrow_right" size={16} />
               <span>A very long topic to test proper implementation</span>
             </Typography>
-          </LinkItem>
-          <LinkItem>
+          </TableOfContents.LinkItem>
+          <TableOfContents.LinkItem>
             <Typography variant="body_short" link href="#sub-section-three">
               <Icon name="subdirectory_arrow_right" size={16} />
               <span>Topic 3</span>
             </Typography>
-          </LinkItem>
+          </TableOfContents.LinkItem>
         </TableOfContents>
       </aside>
     </Wrapper>
