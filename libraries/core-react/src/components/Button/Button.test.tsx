@@ -91,4 +91,28 @@ describe('Button', () => {
     const { container } = render(<MarginButton>Test me!</MarginButton>)
     expect(container.firstChild).toHaveStyleRule('margin', '12px')
   })
+
+  it('has put non-react content inside center container', () => {
+    render(
+      <>
+        <Button>123</Button>
+        <Button>text</Button>
+        <Button>
+          <div>other-content</div>
+        </Button>
+      </>,
+    )
+    const numericalContent = screen.queryByText('123')
+    const textContent = screen.queryByText('text')
+    const otherContent = screen.queryByText('other-content')
+
+    expect(numericalContent).toHaveStyleRule('flex', '1')
+    expect(numericalContent.nodeName).toBe('SPAN')
+
+    expect(textContent).toHaveStyleRule('flex', '1')
+    expect(textContent.nodeName).toBe('SPAN')
+
+    expect(otherContent).not.toHaveStyleRule('flex', '1')
+    expect(otherContent.nodeName).toBe('DIV')
+  })
 })
