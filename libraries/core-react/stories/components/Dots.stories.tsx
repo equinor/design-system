@@ -57,6 +57,14 @@ export const Colors: Story<DotProgressProps> = () => (
   </Wrapper>
 )
 
+export const Sizes: Story<DotProgressProps> = () => (
+  <Wrapper>
+    <Progress.Dots color="primary" size={32} />
+    <Progress.Dots color="primary" size={48} />
+    <Progress.Dots color="primary" size={64} />
+  </Wrapper>
+)
+
 export const InsideButton: Story<DotProgressProps> = () => (
   <Wrapper>
     <Button>

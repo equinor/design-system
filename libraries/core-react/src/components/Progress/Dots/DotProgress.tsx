@@ -38,25 +38,29 @@ const getColor = (color: 'primary' | 'tertiary' | 'neutral'): string => {
 export type DotProgressProps = {
   /** Color */
   color?: 'primary' | 'tertiary' | 'neutral'
+  /** Size */
+  size?: 32 | 48 | 64
   /** @ignore */
   ref?: Ref<SVGSVGElement>
 } & SVGProps<SVGSVGElement>
 
 const DotProgress = forwardRef<SVGSVGElement, DotProgressProps>(
-  function DotProgress({ color = 'neutral', ...rest }, ref) {
+  function DotProgress({ color = 'neutral', size = 32, ...rest }, ref) {
     const props = {
       ...rest,
       color: getColor(color),
       ref,
     }
-
+    const height = size / 4
+    const width = size
     return (
       <Svg
         {...props}
         role="progressbar"
         viewBox="0 0 16 4"
-        height="8px"
-        width="32px"
+        height={height}
+        width={width}
+        preserveAspectRatio="xMidYMid meet"
       >
         <circle cx={2} cy={2} r={2} />
         <circle cx={8} cy={2} r={2} />

@@ -36,4 +36,14 @@ describe('DotProgress', () => {
     const progressbar = screen.getByRole('progressbar')
     expect(progressbar).toHaveStyleRule('position', 'absolute')
   })
+  it('has correct default width ', () => {
+    const { container } = render(<StyledProgress />)
+    const progress = container.firstChild
+    expect(progress).toHaveAttribute('width', '32')
+  })
+  it('has correct width when size is 64', () => {
+    const { container } = render(<StyledProgress size={64} />)
+    const progress = container.firstChild
+    expect(progress).toHaveAttribute('width', '64')
+  })
 })
