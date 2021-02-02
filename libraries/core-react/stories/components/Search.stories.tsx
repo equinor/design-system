@@ -123,6 +123,8 @@ export const InsideAForm: Story<SearchProps> = () => (
   </form>
 )
 
+InsideAForm.storyName = 'Inside a form element'
+
 export const Disabled: Story<SearchProps> = () => (
   <Search
     aria-label="disabled"
@@ -134,7 +136,6 @@ export const Disabled: Story<SearchProps> = () => (
     disabled
   />
 )
-InsideAForm.storyName = 'Inside a form element'
 
 export const Controlled: Story<SearchProps> = () => {
   const [searchValue, setSearchValue] = useState('Initial value')
