@@ -21,14 +21,14 @@ export default {
   },
 } as Meta
 
-const Container = styled.div`
+const Wrapper = styled.div`
   margin-bottom: 350px;
 `
 
 export const Default: Story<MultiSelectProps> = (args) => (
-  <Container>
+  <Wrapper>
     <MultiSelect label="You can play with me" {...args} items={items} />
-  </Container>
+  </Wrapper>
 )
 export const Disabled: Story<MultiSelectProps> = () => (
   <MultiSelect label="Choose an element" meta="km/t" items={items} disabled />
@@ -41,13 +41,13 @@ export const ReadOnly: Story<MultiSelectProps> = () => (
 const initial = ['Troms og Finnmark', 'Vestland']
 
 export const WithPreselected: Story<MultiSelectProps> = () => (
-  <Container>
+  <Wrapper>
     <MultiSelect
       label="I have preselected options"
       items={items}
       initialSelectedItems={initial}
     />
-  </Container>
+  </Wrapper>
 )
 
 export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
@@ -59,7 +59,7 @@ export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
     setSelectedItems(changes.selectedItems)
   }
   return (
-    <Container>
+    <Wrapper>
       {selectedItems.length > 0 && (
         <p>My value is {selectedItems.join(', ')}</p>
       )}
@@ -69,7 +69,7 @@ export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
         initialSelectedItems={initial}
         handleSelectedItemsChange={handleSelectedItemsChange}
       />
-    </Container>
+    </Wrapper>
   )
 }
 export const Controlled: Story<MultiSelectProps> = () => {
@@ -81,7 +81,7 @@ export const Controlled: Story<MultiSelectProps> = () => {
     setSelectedItems(changes.selectedItems)
   }
   return (
-    <Container>
+    <Wrapper>
       {selectedItems.length > 0 && (
         <p>My value is {selectedItems.join(', ')}</p>
       )}
@@ -91,7 +91,7 @@ export const Controlled: Story<MultiSelectProps> = () => {
         selectedOptions={selectedItems}
         handleSelectedItemsChange={handleSelectedItemsChange}
       />
-    </Container>
+    </Wrapper>
   )
 }
 
@@ -126,7 +126,7 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
   }
 
   return (
-    <Container>
+    <Wrapper>
       <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
         Real life example with an external{' '}
         <a
@@ -190,13 +190,12 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
                 Hey you! You will have to select <i>something</i>
               </span>
             </Field>
-
             <Button type="submit" style={{ marginTop: '1rem' }}>
               I have made my decision!
             </Button>
           </>
         )}
       </form>
-    </Container>
+    </Wrapper>
   )
 }
