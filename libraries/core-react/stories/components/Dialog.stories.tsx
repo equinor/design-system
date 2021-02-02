@@ -103,10 +103,9 @@ export const TextPlusAction: Story<DialogProps> = () => (
   <Dialog>
     <Dialog.Title>Text + actions</Dialog.Title>
     <Dialog.CustomContent>
-      <Typography variant="body_short">Small description here.</Typography>{' '}
+      <Typography variant="body_short">Small description here.</Typography>
     </Dialog.CustomContent>
     <Dialog.Actions>
-      {' '}
       <Wrapper>
         <Button>OK</Button>
         <Button variant="ghost">Cancel</Button>
@@ -122,7 +121,6 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => (
       <Placeholder>Custom content</Placeholder>
     </Dialog.CustomContent>
     <Dialog.Actions>
-      {' '}
       <Wrapper>
         <Button>OK</Button>
         <Button variant="ghost">Cancel</Button>
@@ -141,7 +139,6 @@ export const PlaceholderOnly: Story<DialogProps> = () => (
       </Placeholder>
     </Dialog.CustomContent>
     <Dialog.Actions>
-      {' '}
       <Wrapper>
         <Button>OK</Button>
         <Button variant="ghost">Cancel</Button>

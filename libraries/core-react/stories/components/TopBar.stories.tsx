@@ -94,7 +94,6 @@ export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => {
         <Search aria-label="sitewide" id="search-normal" placeholder="Search" />
       </TopBar.CustomContent>
       <TopBar.Actions>
-        {' '}
         <Icons>
           <Icon name="account_circle" size={16} title="user" />
           <Icon name="accessible" size={16} />
