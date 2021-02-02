@@ -42,7 +42,7 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
   }
 }
 
-const ButtonInnerText = styled.span`
+const ButtonCenterContent = styled.span`
   text-align: center;
   grid-area: center;
   flex: 1;
@@ -209,8 +209,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     // We need everything in elements for proper flexing 💪
     const updatedChildren = React.Children.map(children, (child) =>
-      typeof child === 'string' ? (
-        <ButtonInnerText>{child}</ButtonInnerText>
+      typeof child !== 'object' ? (
+        <ButtonCenterContent>{child}</ButtonCenterContent>
       ) : (
         child
       ),
