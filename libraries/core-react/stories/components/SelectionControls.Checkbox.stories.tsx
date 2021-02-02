@@ -8,14 +8,8 @@ import { Meta, Story } from '@storybook/react'
 
 Icon.add({ checkbox })
 
-const BlockCheckbox = styled(Checkbox)`
+const Wrapper = styled(Checkbox)`
   display: flex;
-`
-
-const UnstyledList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
 `
 
 export default {
@@ -42,6 +36,11 @@ export const SingleCheckbox: Story<CheckboxProps> = () => {
   const indeterminateRef = useRef()
   // State for controlled example
   const [checked, updateChecked] = useState(false)
+  const UnstyledList = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  `
 
   return (
     <UnstyledList>
@@ -78,6 +77,11 @@ export const SingleCheckbox: Story<CheckboxProps> = () => {
 }
 
 export const GroupedCheckbox: Story<CheckboxProps> = () => {
+  const UnstyledList = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  `
   return (
     <fieldset>
       <legend>
@@ -151,25 +155,25 @@ export const WithFormsControl: Story<CheckboxProps> = () => {
             <fieldset>
               <legend>What‘s your favourites?</legend>
               {/* Just to demonstrate style addons, a list would have been better for semantic */}
-              <BlockCheckbox
+              <Wrapper
                 name="favourites"
                 value="pineapple"
                 ref={register}
                 label="Pineapple"
               />
-              <BlockCheckbox
+              <Wrapper
                 name="favourites"
                 value="strawberry"
                 ref={register}
                 label="Strawberries"
               />
-              <BlockCheckbox
+              <Wrapper
                 name="favourites"
                 value="honeyMelon"
                 ref={register}
                 label="Honey melon"
               />
-              <BlockCheckbox
+              <Wrapper
                 name="favourites"
                 value="apples"
                 ref={register}

@@ -3,8 +3,7 @@ import { Button, Icon, ButtonProps } from '@components'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import './style.css'
-import './button.css'
+import './styles/style.css'
 
 const Wrapper = styled.div`
   margin: 32px;

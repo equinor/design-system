@@ -35,14 +35,18 @@ export default {
   },
 } as Meta
 
-export const Basic: Story<BannerProps> = (args) => (
-  <Banner {...args}>
-    <Banner.Message>
-      This tag is not being preserved yet. Click start preservation to enable
-      writing preservation records.
-    </Banner.Message>
-  </Banner>
-)
+export const Default: Story<BannerProps> = () => {
+  //  Note: This example is not interactive, as Storybook
+  // doesn't yet support to manipulate subcomponents via Storybook Args
+  return (
+    <Banner>
+      <Banner.Message>
+        This tag is not being preserved yet. Click start preservation to enable
+        writing preservation records.
+      </Banner.Message>
+    </Banner>
+  )
+}
 
 export const IconAndText: Story<BannerProps> = () => (
   <>

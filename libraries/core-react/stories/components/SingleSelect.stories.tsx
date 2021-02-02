@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions'
 import { Story, Meta } from '@storybook/react'
 import { useForm, Controller } from 'react-hook-form'
 import styled from 'styled-components'
-import { items } from './data'
+import { items } from './helpers/data'
 
 export default {
   title: 'Components/Select/SingleSelect',

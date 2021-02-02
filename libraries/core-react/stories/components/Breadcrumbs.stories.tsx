@@ -15,7 +15,7 @@ const TextWrapper = styled.div`
   margin: 18px 0;
 `
 
-const WrapContainer = styled.div`
+const Wrapper = styled.div`
   width: 100px;
 `
 
@@ -120,7 +120,7 @@ export const Variations: Story<BreadcrumbsProps> = () => {
           Wraps over two or more lines. Controlled by parent width.
         </Typography>
       </TextWrapper>
-      <WrapContainer>
+      <Wrapper>
         <Breadcrumbs>
           <Breadcrumbs.Breadcrumb onClick={handleClick}>
             Store
@@ -132,7 +132,7 @@ export const Variations: Story<BreadcrumbsProps> = () => {
             Apple
           </Breadcrumbs.Breadcrumb>
         </Breadcrumbs>
-      </WrapContainer>
+      </Wrapper>
     </Body>
   )
 }

@@ -6,14 +6,8 @@ import { Meta, Story } from '@storybook/react'
 
 Icon.add({ checkbox })
 
-const BlockRadio = styled(Radio)`
+const Wrapper = styled(Radio)`
   display: flex;
-`
-
-const UnstyledList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
 `
 
 export default {
@@ -37,10 +31,10 @@ export const Default: Story<RadioProps> = (args) => (
 export const SingleRadio: Story<RadioProps> = () => {
   return (
     <div>
-      <BlockRadio label="Check me" name="first" />
-      <BlockRadio label="You can't check me!" disabled name="second" />
-      <BlockRadio label="I'm preselected" defaultChecked name="third" />
-      <BlockRadio
+      <Wrapper label="Check me" name="first" />
+      <Wrapper label="You can't check me!" disabled name="second" />
+      <Wrapper label="I'm preselected" defaultChecked name="third" />
+      <Wrapper
         label="You can't uncheck me!"
         disabled
         defaultChecked
@@ -54,6 +48,11 @@ export const GroupedRadio: Story<RadioProps> = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateChecked(event.target.value)
   }
+  const UnstyledList = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  `
   return (
     <fieldset>
       <legend>

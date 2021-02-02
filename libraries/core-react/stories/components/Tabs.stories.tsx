@@ -221,15 +221,15 @@ export const WithInputInPanel: Story<TabsProps> = () => {
   )
 }
 
-const StyledTab = styled(Tabs.Tab)`
-  background: pink;
-`
-
-const StyledTabPanel = styled(Tabs.Panel)`
-  padding: 32px;
-  background: peachpuff;
-`
 export const WithStyledComponent: Story<TabsProps> = () => {
+  const StyledTab = styled(Tabs.Tab)`
+    background: pink;
+  `
+
+  const StyledTabPanel = styled(Tabs.Panel)`
+    padding: 32px;
+    background: peachpuff;
+  `
   const [activeTab, setActiveTab] = useState(1)
 
   const handleChange = (index: number) => {

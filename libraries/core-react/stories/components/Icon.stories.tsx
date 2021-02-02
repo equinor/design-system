@@ -83,40 +83,45 @@ export default {
 
 export const Default: Story<IconProps> = (args) => <Icon {...args} />
 
-export const IconExamples: Story<IconProps> = () => (
-  <div>
-    <h2>Sizes</h2>
-    <Wrapper>
-      <Icon name="compare" size={16} />
-      <Icon name="compare" size={24} />
-      <Icon name="compare" size={32} />
-      <Icon name="compare" size={40} />
-      <Icon name="compare" size={48} />
-    </Wrapper>
-    <h2>Rotations</h2>
-
-    <Wrapper>
-      <Icon name="pregnant_woman" rotation={90} />
-      <Icon name="pregnant_woman" rotation={180} />
-      <Icon name="pregnant_woman" rotation={270} />
-    </Wrapper>
-    <h2>Color</h2>
-    <Wrapper>
-      <Icon name="work" color={'red'} />
-      <Icon name="work" color={'green'} />
-      <Icon name="work" color={'blue'} />
-    </Wrapper>
-    <h2>Accessible</h2>
-    <Wrapper>
-      <Icon name="grid_off" title="Save me!" />
-    </Wrapper>
-    <h2>Using data prop with eds-icon</h2>
-    <Wrapper>
-      <Icon data={save} />
-    </Wrapper>
-    <h2>Using data prop with custom icon</h2>
-    <Wrapper>
-      <Icon title="Its a moon" data={customIconData} />
-    </Wrapper>
-  </div>
+export const Sizes: Story<IconProps> = () => (
+  <Wrapper>
+    <Icon name="compare" size={16} />
+    <Icon name="compare" size={24} />
+    <Icon name="compare" size={32} />
+    <Icon name="compare" size={40} />
+    <Icon name="compare" size={48} />
+  </Wrapper>
 )
+export const Rotations: Story<IconProps> = () => (
+  <Wrapper>
+    <Icon name="pregnant_woman" rotation={90} />
+    <Icon name="pregnant_woman" rotation={180} />
+    <Icon name="pregnant_woman" rotation={270} />
+  </Wrapper>
+)
+export const Accessible: Story<IconProps> = () => (
+  <Wrapper>
+    <Icon name="grid_off" title="Save me!" />
+  </Wrapper>
+)
+export const Color: Story<IconProps> = () => (
+  <Wrapper>
+    <Icon name="work" color={'red'} />
+    <Icon name="work" color={'green'} />
+    <Icon name="work" color={'blue'} />
+  </Wrapper>
+)
+export const UsingDataPropWithEdsIcon: Story<IconProps> = () => (
+  <Wrapper>
+    <Icon data={save} />
+  </Wrapper>
+)
+
+UsingDataPropWithEdsIcon.storyName = 'Using data prop with EDS icon'
+
+export const UsingDataPropWithCustomIcon: Story<IconProps> = () => (
+  <Wrapper>
+    <Icon title="Its a moon" data={customIconData} />
+  </Wrapper>
+)
+UsingDataPropWithCustomIcon.storyName = 'Using data prop with custom icon'

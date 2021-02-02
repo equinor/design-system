@@ -22,12 +22,6 @@ export default {
   },
 } as Meta
 
-const Body = styled.div`
-  margin: 42px;
-  display: grid;
-  grid-auto-columns: auto;
-`
-
 const Wrapper = styled.div`
   margin: 32px;
   display: grid;
@@ -52,7 +46,7 @@ export const Default: Story<TooltipProps> = (args) => {
 
 export const Placement: Story<TooltipProps> = () => {
   return (
-    <Body>
+    <>
       <TextWrapper>
         <Typography variant="h3">Placement</Typography>
         <Typography variant="body_long">
@@ -108,13 +102,13 @@ export const Placement: Story<TooltipProps> = () => {
           <Button>Right bottom</Button>
         </Tooltip>
       </Wrapper>
-    </Body>
+    </>
   )
 }
 
 export const WithDisabledElements: Story<TooltipProps> = () => {
   return (
-    <Body>
+    <>
       <TextWrapper>
         <Typography variant="h3">Tooltip with disabled elements</Typography>
         <Typography variant="body_long">
@@ -138,6 +132,6 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
           </Button>
         </Tooltip>
       </Wrapper>
-    </Body>
+    </>
   )
 }
