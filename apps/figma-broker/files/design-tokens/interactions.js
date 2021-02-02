@@ -1,9 +1,10 @@
 import R from 'ramda'
-import { propName, withType, pickChildren, toDict } from '@utils'
+import { propName, withType, pickChildren, toDict, withName } from '@utils'
 import { toFocus, toOverlay } from '@transformers'
 
 const toInteractionsTokens = R.pipe(
   R.filter(withType('frame')),
+  R.filter(withName('default')),
   pickChildren,
   R.filter(withType('component')),
   R.map((node) => {
