@@ -63,8 +63,6 @@ export type LinearProgressProps = {
   /** The value of the progress indicator for determinate variant
    * Value between 0 and 100 */
   value?: number
-  /** @ignore */
-  ref?: Ref<SVGSVGElement>
 } & HTMLAttributes<HTMLDivElement>
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
