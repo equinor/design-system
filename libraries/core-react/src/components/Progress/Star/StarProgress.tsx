@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { forwardRef, SVGProps, Ref } from 'react'
 import styled, { keyframes, css } from 'styled-components'
-import { progress as tokens } from '../Progress.tokens'
+import { token } from './StarProgress.tokens'
 
 const indeterminate = keyframes`
     0% {
@@ -54,7 +54,7 @@ type SvgProps = {
   SVGProps<SVGSVGElement>
 
 const Svg = styled.svg<SvgProps>`
-  fill: ${tokens.star.background};
+  fill: ${token.background};
   ${({ variant, progress }) =>
     variant === 'indeterminate'
       ? css`

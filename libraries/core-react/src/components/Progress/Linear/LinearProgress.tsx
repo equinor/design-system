@@ -2,8 +2,7 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes, Ref } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import type { CSSObject } from 'styled-components'
-
-import { progress as tokens } from '../Progress.tokens'
+import * as tokens from './LinearProgress.tokens'
 
 const indeterminate = keyframes`
   0%{
@@ -22,11 +21,11 @@ const indeterminate = keyframes`
 
 `
 
-const ProgressRoot = styled.div`
+const Track = styled.div`
   position: relative;
   overflow: hidden;
   height: 4px;
-  background-color: ${tokens.linear.background};
+  background-color: ${tokens.primary.background};
   width: 100%;
   border-radius: 50px;
 `
@@ -39,7 +38,7 @@ const ProgressBar = styled.div<StyledProgressBarProps>`
     variant === 'determinate' &&
     css`
       transition: transform 0.4s linear;
-      background-color: ${tokens.linear.overlay};
+      background-color: ${tokens.primary.entities.progress.background};
     `}
   width: 100%;
   border-radius: 50px;
@@ -50,7 +49,7 @@ const ProgressBar = styled.div<StyledProgressBarProps>`
   transition: transform 0.2s linear;
   transform-origin: left;
 `
-const IndeterminateProgress = styled.div`
+const IndeterminateProgressBar = styled.div`
   width: 75%;
   border-radius: 50px;
   position: absolute;
@@ -59,7 +58,7 @@ const IndeterminateProgress = styled.div`
   top: 0;
   transition: transform 0.2s linear;
   transform-origin: left;
-  background-color: ${tokens.linear.overlay};
+  background-color: ${tokens.primary.entities.progress.background};
   animation: ${indeterminate} 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) 1s
     infinite;
 `
@@ -105,10 +104,10 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
     }
 
     return (
-      <ProgressRoot {...props} role="progressbar">
+      <Track {...props} role="progressbar">
         <ProgressBar {...progressProps} style={transformStyle} />
-        {variant === 'indeterminate' && <IndeterminateProgress />}
-      </ProgressRoot>
+        {variant === 'indeterminate' && <IndeterminateProgressBar />}
+      </Track>
     )
   },
 )
