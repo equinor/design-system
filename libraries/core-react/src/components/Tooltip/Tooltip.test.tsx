@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
 import { render, cleanup, screen } from '@testing-library/react'
-import '@components'
+import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Tooltip } from '.'
