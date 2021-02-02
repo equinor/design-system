@@ -2,7 +2,6 @@ import * as React from 'react'
 import { forwardRef, SVGProps, Ref } from 'react'
 import styled, { keyframes } from 'styled-components'
 import * as tokens from './DotProgress.tokens'
-import type { DotProgressToken } from './DotProgress.tokens'
 
 const opacity = keyframes`
     0% {
@@ -37,8 +36,7 @@ const getColor = (color: 'primary' | 'tertiary' | 'neutral'): string => {
 }
 
 export type DotProgressProps = {
-  /** Color
-   * @default neutral */
+  /** Color */
   color?: 'primary' | 'tertiary' | 'neutral'
   /** @ignore */
   ref?: Ref<SVGSVGElement>

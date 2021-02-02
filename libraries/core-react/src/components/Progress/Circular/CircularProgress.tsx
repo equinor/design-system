@@ -46,15 +46,12 @@ const getToken = (color: 'primary' | 'neutral'): CircularProgressToken => {
 export type CircularProgressProps = {
   /**  Use indeterminate when there is no progress value */
   variant?: 'determinate' | 'indeterminate'
-  /** @ignore */
-  className?: string
   /**  The value of the progress indicator for determinate variant.
    * Value between 0 and 100 */
   value?: number
   /** Size */
   size?: 16 | 24 | 32 | 40 | 48
-  /** Color
-   * @default primary */
+  /** Color */
   color?: 'primary' | 'neutral'
   /** @ignore */
   ref?: Ref<SVGSVGElement>
