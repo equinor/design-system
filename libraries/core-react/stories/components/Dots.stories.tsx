@@ -1,11 +1,18 @@
 import React from 'react'
-import { DotProgress, DotProgressProps, Typography, Button } from '@components'
 import styled from 'styled-components'
+import { Progress, DotProgressProps, Typography, Button } from '@components'
 import { Meta, Story } from '@storybook/react'
+
+const Wrapper = styled.div`
+  margin: 32px;
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(5, fit-content(100%));
+`
 
 export default {
   title: 'Components/Progress Indicators/Dots',
-  component: DotProgress,
+  component: Progress.Dots,
   parameters: {
     backgrounds: { default: 'light' },
     docs: {
@@ -20,7 +27,7 @@ export default {
 } as Meta
 
 export const Default: Story<DotProgressProps> = (args) => (
-  <DotProgress {...args} />
+  <Progress.Dots {...args} />
 )
 
 Default.bind({})
@@ -28,27 +35,31 @@ Default.args = {
   color: 'primary',
 }
 
-export const Variants: Story<DotProgressProps> = () => (
-  <>
-    <Typography variant="h4" as="h2">
-      Primary
-    </Typography>
-    <DotProgress color="primary" />
-
-    <Typography variant="h4" as="h2">
-      Tertiary
-    </Typography>
-    <DotProgress color="tertiary" />
-
-    <Typography variant="h4" as="h2">
-      Neutral
-    </Typography>
-    <DotProgress color="neutral" />
-  </>
+export const Colors: Story<DotProgressProps> = () => (
+  <Wrapper>
+    <div>
+      <Typography variant="h4" as="h2">
+        Primary
+      </Typography>
+      <Progress.Dots color="primary" />
+    </div>
+    <div>
+      <Typography variant="h4" as="h2">
+        Tertiary
+      </Typography>
+      <Progress.Dots color="tertiary" />
+    </div>
+    <div>
+      <Typography variant="h4" as="h2">
+        Neutral
+      </Typography>
+      <Progress.Dots color="neutral" />
+    </div>
+  </Wrapper>
 )
 
 export const InsideButton: Story<DotProgressProps> = () => (
   <Button>
-    <DotProgress />
+    <Progress.Dots />
   </Button>
 )

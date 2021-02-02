@@ -1,6 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CircularProgress, CircularProgressProps, Button } from '@components'
+import {
+  Progress,
+  CircularProgressProps,
+  Button,
+  Typography,
+} from '@components'
 import { Meta, Story } from '@storybook/react'
 import { useProgress } from './hooks/useProgress'
 
@@ -13,7 +18,7 @@ const Wrapper = styled.div`
 
 export default {
   title: 'Components/Progress Indicators/Circular',
-  component: CircularProgress,
+  component: Progress.Circular,
   parameters: {
     docs: {
       description: {
@@ -29,32 +34,49 @@ export const Default: Story<CircularProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = variant === 'indeterminate' ? null : useProgress(value)
 
-  return <CircularProgress {...args} value={progress} />
+  return <Progress.Circular {...args} value={progress} />
 }
 
 export const Indeterminate: Story<CircularProgressProps> = () => {
-  return <CircularProgress />
+  return <Progress.Circular />
 }
 
 export const Determinate: Story<CircularProgressProps> = () => {
   const progress = useProgress(0)
-  return <CircularProgress variant="determinate" value={progress} />
+  return <Progress.Circular variant="determinate" value={progress} />
 }
+
+export const Colors: Story<CircularProgressProps> = () => (
+  <Wrapper>
+    <div>
+      <Typography variant="h4" as="h2">
+        Primary
+      </Typography>
+      <Progress.Circular color="primary" />
+    </div>
+    <div>
+      <Typography variant="h4" as="h2">
+        Neutral
+      </Typography>
+      <Progress.Circular color="neutral" />
+    </div>
+  </Wrapper>
+)
 
 export const Sizes: Story<CircularProgressProps> = () => (
   <Wrapper>
-    <CircularProgress size={16} />
-    <CircularProgress size={24} />
-    <CircularProgress size={32} />
-    <CircularProgress size={40} />
-    <CircularProgress size={48} />
+    <Progress.Circular size={16} />
+    <Progress.Circular size={24} />
+    <Progress.Circular size={32} />
+    <Progress.Circular size={40} />
+    <Progress.Circular size={48} />
   </Wrapper>
 )
 
 export const InsideButton: Story<CircularProgressProps> = () => (
   <>
     <Button>
-      <CircularProgress size={16} color="neutral" />
+      <Progress.Circular size={16} color="neutral" />
       Loading...
     </Button>
   </>

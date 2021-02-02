@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { StarProgress, StarProgressProps } from '@components'
+import { Progress, StarProgressProps } from '@components'
 import { Meta, Story } from '@storybook/react'
 import { useProgress } from './hooks/useProgress'
 
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 export default {
   title: 'Components/Progress Indicators/Star',
-  component: StarProgress,
+  component: Progress.Star,
   parameters: {
     docs: {
       description: {
@@ -29,23 +29,23 @@ export const Default: Story<StarProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = variant === 'indeterminate' ? null : useProgress(value)
 
-  return <StarProgress value={progress} {...args} />
+  return <Progress.Star value={progress} {...args} />
 }
 
-export const Indeterminate: Story<StarProgressProps> = () => <StarProgress />
+export const Indeterminate: Story<StarProgressProps> = () => <Progress.Star />
 
 export const Determinate: Story<StarProgressProps> = () => {
   const progress = useProgress(0)
-  return <StarProgress value={progress} variant="determinate" />
+  return <Progress.Star value={progress} variant="determinate" />
 }
 
 export const Sizes: Story<StarProgressProps> = () => (
   <Wrapper>
-    <StarProgress size={16} />
-    <StarProgress size={24} />
-    <StarProgress size={32} />
-    <StarProgress size={40} />
-    <StarProgress size={48} />
+    <Progress.Star size={16} />
+    <Progress.Star size={24} />
+    <Progress.Star size={32} />
+    <Progress.Star size={40} />
+    <Progress.Star size={48} />
   </Wrapper>
 )
 

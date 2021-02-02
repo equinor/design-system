@@ -1,15 +1,15 @@
 import React from 'react'
-import { LinearProgress, LinearProgressProps } from '@components'
+import { Progress, LinearProgressProps } from '@components'
 import { Meta, Story } from '@storybook/react'
 import { useProgress } from './hooks/useProgress'
 
 export default {
   title: 'Components/Progress Indicators/Linear',
-  component: LinearProgress,
+  component: Progress.Linear,
   parameters: {
     docs: {
       description: {
-        component: `Progress indicators are animated helpers that indicate 
+        component: `Progress indicators are animated helpers that indicate
         waiting time as content loads.
         `,
       },
@@ -21,17 +21,17 @@ export const Default: Story<LinearProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = variant === 'indeterminate' ? null : useProgress(value)
 
-  return <LinearProgress {...args} value={progress} />
+  return <Progress.Linear value={progress} {...args} />
 }
 
 export const Indeterminate: Story<LinearProgressProps> = () => (
-  <LinearProgress />
+  <Progress.Linear />
 )
 
 export const Determinate: Story<LinearProgressProps> = () => {
   const progress = useProgress(0)
 
-  return <LinearProgress variant="determinate" value={progress} />
+  return <Progress.Linear variant="determinate" value={progress} />
 }
 
 Default.storyName = 'Controllable example'
