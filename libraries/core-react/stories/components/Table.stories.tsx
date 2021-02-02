@@ -12,7 +12,7 @@ import {
   Button,
 } from '@components'
 import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
-import './style.css'
+import './styles/style.css'
 
 Icon.add({ chevron_down, chevron_up })
 

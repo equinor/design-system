@@ -5,7 +5,7 @@ import { UseMultipleSelectionStateChange } from 'downshift'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { items } from './data'
+import { items } from './helpers/data'
 
 export default {
   title: 'Components/Select/MultiSelect',

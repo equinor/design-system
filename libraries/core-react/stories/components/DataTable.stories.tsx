@@ -13,7 +13,7 @@ import {
   SingleSelect,
 } from '@components'
 import { save, more_vertical } from '@equinor/eds-icons'
-import './style.css'
+import './styles/style.css'
 import { tokens } from '@equinor/eds-tokens'
 
 Icon.add({ save, more_vertical })
