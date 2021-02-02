@@ -25,14 +25,14 @@ describe('StarProgress', () => {
     const progress = container.firstChild
     expect(progress).toHaveStyleRule('position', 'absolute')
   })
-  it('has correct default height ', () => {
+  it('has correct default width ', () => {
     const { container } = render(<StarProgress />)
     const progress = container.firstChild
-    expect(progress).toHaveAttribute('height', '48')
+    expect(progress).toHaveAttribute('width', '48')
   })
-  it('has correct height when size is 16', () => {
+  it('has correct width when size is 16', () => {
     const { container } = render(<StarProgress size={16} />)
     const progress = container.firstChild
-    expect(progress).toHaveAttribute('height', '16')
+    expect(progress).toHaveAttribute('width', '16')
   })
 })

@@ -122,8 +122,8 @@ const StarProgress = forwardRef<SVGSVGElement, StarProgressProps>(
     ref,
   ) {
     const progress = Math.round(value)
-    const height = size
-    const width = size / 1.2
+    const height = size * 1.2
+    const width = size
 
     const props = {
       ...rest,
