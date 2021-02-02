@@ -14,23 +14,13 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A basic dialog component`,
+        component: `A basic dialog component.`,
       },
     },
   },
 } as Meta
 
-const Body = styled.div`
-  height: 200px;
-  background: #ebebeb;
-  display: grid;
-  grid-template-rows: 1fr auto 1fr;
-  padding: 32px;
-  grid-gap: 32px;
-  position: relative;
-`
-
-const TempButtonWrapper = styled.div`
+const Wrapper = styled.div`
   display: grid;
   column-gap: 16px;
   grid-template-columns: repeat(2, fit-content(100%));
@@ -48,91 +38,64 @@ const Placeholder = styled.div`
   display: inline-block;
 `
 
-const TITLE_CHOICES = {
-  none: null,
-  text: 'Title',
+export const Default: Story<DialogProps> = () => {
+  //  Note: This example is not interactive, as Storybook
+  // doesn't yet support to manipulate subcomponents via Storybook Args
+  return (
+    <Dialog>
+      <Dialog.Title>Title</Dialog.Title>
+      <Dialog.CustomContent>
+        <Typography variant="body_short">Small description here.</Typography>
+      </Dialog.CustomContent>
+      <Dialog.Actions>
+        <Wrapper>
+          <Button>OK</Button>
+          <Button>Cancel</Button>
+        </Wrapper>
+      </Dialog.Actions>
+    </Dialog>
+  )
 }
-
-const CUSTOM_CONTENT_CHOICES = {
-  none: null,
-  empty: <Placeholder>Custom content</Placeholder>,
-  emptyLarge: (
-    <Placeholder>
-      Custom content in a larger placeholder. No actions, only ESC or timedelay?
-      Test testestsetsest
-    </Placeholder>
-  ),
-  description: (
-    <Typography variant="body_short">Small description here.</Typography>
-  ),
-  scroll: (
-    <Fragment>
-      <Typography variant="body_short">
-        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.{' '}
-      </Typography>
-      <Typography variant="body_short">
-        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.{' '}
-      </Typography>
-    </Fragment>
-  ),
-}
-
-const ACTION_CHOICES = {
-  none: null,
-  buttons: (
-    <TempButtonWrapper>
-      <Button>OK</Button>
-      <Button variant="ghost">Cancel</Button>
-    </TempButtonWrapper>
-  ),
-}
-
-export const Default: Story<DialogProps> = () => (
-  <Dialog>
-    <Dialog.Title>{TITLE_CHOICES['text']}</Dialog.Title>
-    <Dialog.CustomContent>
-      {CUSTOM_CONTENT_CHOICES['description']}
-    </Dialog.CustomContent>
-    <Dialog.Actions>
-      <TempButtonWrapper>
-        <Button>OK</Button>
-        <Button>Cancel</Button>
-      </TempButtonWrapper>
-    </Dialog.Actions>
-  </Dialog>
-)
-
 export const WithScrim: Story<DialogProps> = () => {
   const [visibleScrim, setVisibleScrim] = useState(false)
   const handleClose = () => {
     setVisibleScrim(!visibleScrim)
   }
   return (
-    <Body>
+    <>
       <div>
         <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
       </div>
       {visibleScrim && (
         <Scrim onClose={handleClose}>
           <Dialog>
-            <Dialog.Title>{TITLE_CHOICES['text']}</Dialog.Title>
+            <Dialog.Title>Title</Dialog.Title>
             <Dialog.CustomContent scrollable>
-              {CUSTOM_CONTENT_CHOICES['scroll']}
+              <>
+                <Typography variant="body_short">
+                  Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum
+                  dolor sit amet consecteur dit lot. Lorem ipsum dolor sit amet
+                  consecteur dit lot.
+                </Typography>
+                <Typography variant="body_short">
+                  Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum
+                  dolor sit amet consecteur dit lot. Lorem ipsum dolor sit amet
+                  consecteur dit lot.
+                </Typography>
+              </>
             </Dialog.CustomContent>
             <Dialog.Actions>
-              <TempButtonWrapper>
+              <Wrapper>
                 <Button variant="ghost" onClick={() => setVisibleScrim(false)}>
                   Cancel
                 </Button>
                 <Button onClick={() => setVisibleScrim(false)}>OK</Button>
-              </TempButtonWrapper>
+              </Wrapper>
             </Dialog.Actions>
           </Dialog>
         </Scrim>
       )}
-    </Body>
+    </>
   )
 }
 
@@ -140,9 +103,15 @@ export const TextPlusAction: Story<DialogProps> = () => (
   <Dialog>
     <Dialog.Title>Text + actions</Dialog.Title>
     <Dialog.CustomContent>
-      {CUSTOM_CONTENT_CHOICES['description']}
+      <Typography variant="body_short">Small description here.</Typography>{' '}
     </Dialog.CustomContent>
-    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
+    <Dialog.Actions>
+      {' '}
+      <Wrapper>
+        <Button>OK</Button>
+        <Button variant="ghost">Cancel</Button>
+      </Wrapper>
+    </Dialog.Actions>
   </Dialog>
 )
 
@@ -150,9 +119,15 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => (
   <Dialog>
     <Dialog.Title>Placeholder + actions</Dialog.Title>
     <Dialog.CustomContent>
-      {CUSTOM_CONTENT_CHOICES['empty']}
+      <Placeholder>Custom content</Placeholder>
     </Dialog.CustomContent>
-    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
+    <Dialog.Actions>
+      {' '}
+      <Wrapper>
+        <Button>OK</Button>
+        <Button variant="ghost">Cancel</Button>
+      </Wrapper>
+    </Dialog.Actions>
   </Dialog>
 )
 
@@ -160,9 +135,18 @@ export const PlaceholderOnly: Story<DialogProps> = () => (
   <Dialog>
     <Dialog.Title>Placeholder</Dialog.Title>
     <Dialog.CustomContent>
-      {CUSTOM_CONTENT_CHOICES['emptyLarge']}
+      <Placeholder>
+        Custom content in a larger placeholder. No actions, only ESC or
+        timedelay
+      </Placeholder>
     </Dialog.CustomContent>
-    <Dialog.Actions>{ACTION_CHOICES['none']}</Dialog.Actions>
+    <Dialog.Actions>
+      {' '}
+      <Wrapper>
+        <Button>OK</Button>
+        <Button variant="ghost">Cancel</Button>
+      </Wrapper>
+    </Dialog.Actions>
   </Dialog>
 )
 
@@ -170,17 +154,38 @@ export const ScrollablePlusActions: Story<DialogProps> = () => (
   <Dialog>
     <Dialog.Title>Scrollable + actions</Dialog.Title>
     <Dialog.CustomContent scrollable>
-      {CUSTOM_CONTENT_CHOICES['scroll']}
+      <>
+        <Typography variant="body_short">
+          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+          lot.
+        </Typography>
+        <Typography variant="body_short">
+          Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+          amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+          lot.
+        </Typography>
+      </>
     </Dialog.CustomContent>
-    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
+    <Dialog.Actions>
+      <Wrapper>
+        <Button>OK</Button>
+        <Button variant="ghost">Cancel</Button>
+      </Wrapper>
+    </Dialog.Actions>
   </Dialog>
 )
 
 export const NoTitle: Story<DialogProps> = () => (
   <Dialog>
     <Dialog.CustomContent>
-      {CUSTOM_CONTENT_CHOICES['description']}
+      <Typography variant="body_short">Small description here.</Typography>
     </Dialog.CustomContent>
-    <Dialog.Actions>{ACTION_CHOICES['buttons']}</Dialog.Actions>
+    <Dialog.Actions>
+      <Wrapper>
+        <Button>OK</Button>
+        <Button variant="ghost">Cancel</Button>
+      </Wrapper>
+    </Dialog.Actions>
   </Dialog>
 )
