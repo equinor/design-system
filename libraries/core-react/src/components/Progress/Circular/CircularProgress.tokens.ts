@@ -10,6 +10,9 @@ const {
     interactive: {
       icon_on_interactive_colors: { rgba: icon_on_interactive_colors },
     },
+    ui: {
+      background__semitransparent: { rgba: background__semitransparent },
+    },
   },
 } = tokens
 
@@ -27,8 +30,7 @@ export const primary: CircularProgressToken = {
 }
 
 export const neutral: CircularProgressToken = {
-  // TODO replace with token color once Figma is updated 29.01.2021
-  background: 'rgba(255,255,255,0.20)',
+  background: background__semitransparent,
   entities: {
     progress: {
       background: icon_on_interactive_colors,
