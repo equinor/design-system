@@ -74,110 +74,103 @@ const onClick = (event: React.MouseEvent) => {
 const bigMenuTemplate = (
   <>
     <Menu.Item onClick={onClick}>
-      <Typography
+      <Icon
+        name="folder"
+        size={16}
         color={colors.text.static_icons__tertiary.hex}
-        group="navigation"
-        variant="label"
-      >
-        <Icon name="folder" />
-      </Typography>
-      <Typography group="navigation" variant="menu_title">
+      />
+      <Typography group="navigation" variant="menu_title" as="span">
         Open
       </Typography>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
         variant="label"
+        as="span"
       >
         CTRL+O
       </Typography>
     </Menu.Item>
     <Menu.Item active onClick={onClick}>
-      <Typography
+      <Icon
+        name="copy"
+        size={16}
         color={colors.text.static_icons__tertiary.hex}
-        group="navigation"
-        variant="label"
-      >
-        <Icon name="copy" />
-      </Typography>
-      <Typography group="navigation" variant="menu_title">
+      />
+      <Typography group="navigation" variant="menu_title" as="span">
         Copy
       </Typography>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
         variant="label"
+        as="span"
       >
         CTRL+C
       </Typography>
     </Menu.Item>
     <Menu.Item disabled onClick={onClick}>
-      <Typography
+      <Icon
+        name="paste"
+        size={16}
         color={colors.text.static_icons__tertiary.hex}
-        group="navigation"
-        variant="label"
-      >
-        <Icon name="paste" />
-      </Typography>
-      <Typography group="navigation" variant="menu_title">
+      />
+      <Typography group="navigation" variant="menu_title" as="span">
         Paste
       </Typography>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
         variant="label"
+        as="span"
       >
         CTRL+V
       </Typography>
     </Menu.Item>
     <Menu.Item onClick={onClick}>
-      <Typography
+      <Icon
+        name="edit"
+        size={16}
         color={colors.text.static_icons__tertiary.hex}
-        group="navigation"
-        variant="label"
-      >
-        <Icon name="edit" />
-      </Typography>
-      <Typography group="navigation" variant="menu_title">
+      />
+      <Typography group="navigation" variant="menu_title" as="span">
         Rename
       </Typography>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
         variant="label"
+        as="span"
       >
         CTRL+R
       </Typography>
     </Menu.Item>
     <Menu.Item onClick={onClick}>
-      <Typography
+      <Icon
+        name="delete_to_trash"
+        size={16}
         color={colors.text.static_icons__tertiary.hex}
-        group="navigation"
-        variant="label"
-      >
-        <Icon name="delete_to_trash" />
-      </Typography>
-      <Typography group="navigation" variant="menu_title">
+      />
+      <Typography group="navigation" variant="menu_title" as="span">
         Delete
       </Typography>
       <Typography
         color={colors.text.static_icons__tertiary.hex}
         group="navigation"
         variant="label"
+        as="span"
       >
         DEL
       </Typography>
     </Menu.Item>
     <Menu.Section title="Section">
       <Menu.Item onClick={onClick}>
-        <Typography
+        <Icon
+          name="settings"
+          size={16}
           color={colors.text.static_icons__tertiary.hex}
-          group="navigation"
-          variant="label"
-        >
-          <Icon name="settings" />
-        </Typography>
-        <Typography group="navigation" variant="menu_title">
+        />
+        <Typography group="navigation" variant="menu_title" as="span">
           Settings
         </Typography>
       </Menu.Item>
@@ -254,110 +247,99 @@ export const ButtonToggle: Story<MenuProps> = () => {
         focus={focus}
       >
         <Menu.Item onClick={onClick}>
-          <Typography
+          <Icon
+            name="folder"
+            size={16}
             color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="folder" />
-          </Typography>
-          <Typography group="navigation" variant="menu_title">
+          />
+          <Typography group="navigation" variant="menu_title" as="span">
             Open
           </Typography>
           <Typography
             color={colors.text.static_icons__tertiary.hex}
             group="navigation"
             variant="label"
+            as="span"
           >
             CTRL+O
           </Typography>
         </Menu.Item>
         <Menu.Item active onClick={onClick}>
-          <Typography
+          <Icon
+            name="copy"
+            size={16}
             color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="copy" />
-          </Typography>
-          <Typography group="navigation" variant="menu_title">
+          />
+          <Typography group="navigation" variant="menu_title" as="span">
             Copy
           </Typography>
           <Typography
             color={colors.text.static_icons__tertiary.hex}
             group="navigation"
             variant="label"
+            as="span"
           >
             CTRL+C
           </Typography>
         </Menu.Item>
         <Menu.Item disabled onClick={onClick}>
-          <Typography
+          <Icon
+            name="paste"
+            size={16}
             color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="paste" />
-          </Typography>
-          <Typography group="navigation" variant="menu_title">
+          />
+          <Typography group="navigation" variant="menu_title" as="span">
             Paste
           </Typography>
           <Typography
             color={colors.text.static_icons__tertiary.hex}
             group="navigation"
             variant="label"
+            as="span"
           >
             CTRL+V
           </Typography>
         </Menu.Item>
         <Menu.Item onClick={onClick}>
-          <Typography
+          <Icon
+            name="edit"
+            size={16}
             color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="edit" />
-          </Typography>
-          <Typography group="navigation" variant="menu_title">
+          />
+          <Typography group="navigation" variant="menu_title" as="span">
             Rename
           </Typography>
           <Typography
             color={colors.text.static_icons__tertiary.hex}
             group="navigation"
             variant="label"
+            as="span"
           >
             CTRL+R
           </Typography>
         </Menu.Item>
         <Menu.Item onClick={onClick}>
-          <Typography
+          <Icon
+            name="delete_to_trash"
+            size={16}
             color={colors.text.static_icons__tertiary.hex}
-            group="navigation"
-            variant="label"
-          >
-            <Icon name="delete_to_trash" />
-          </Typography>
-          <Typography group="navigation" variant="menu_title">
+          />
+          <Typography group="navigation" variant="menu_title" as="span">
             Delete
           </Typography>
           <Typography
-            color={colors.text.static_icons__tertiary.hex}
             group="navigation"
             variant="label"
+            as="span"
+            color={colors.text.static_icons__tertiary.hex}
           >
             DEL
           </Typography>
         </Menu.Item>
         <Menu.Section title="Section">
           <Menu.Item onClick={onClick}>
-            <Typography
-              color={colors.text.static_icons__tertiary.hex}
-              group="navigation"
-              variant="label"
-            >
-              <Icon name="settings" />
-            </Typography>
-            <Typography group="navigation" variant="menu_title">
+            <Icon name="settings" size={16} />
+            <Typography group="navigation" variant="menu_title" as="span">
               Settings
             </Typography>
           </Menu.Item>
@@ -421,7 +403,7 @@ export const InTopbar: Story<MenuProps> = () => {
             onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
             onKeyDown={onKeyPress}
           >
-            <Icon name="more_vertical" title="more"></Icon>
+            <Icon name="more_vertical" title="more" size={16}></Icon>
           </Button>
           <Menu
             id="menu-on-button"
@@ -480,16 +462,16 @@ export const Examples: Story<MenuProps> = () => {
       </Anchor>
       <Menu id="menu-iconbuttons" open anchorEl={one}>
         <Button variant="ghost_icon">
-          <Icon name="save" title="save"></Icon>
+          <Icon name="save" title="save" size={16}></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="folder" title="folder"></Icon>
+          <Icon name="folder" title="folder" size={16}></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="edit" title="edit"></Icon>
+          <Icon name="edit" title="edit" size={16}></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="settings" title="settings"></Icon>
+          <Icon name="settings" title="settings" size={16}></Icon>
         </Button>
       </Menu>
       <Anchor
@@ -501,9 +483,21 @@ export const Examples: Story<MenuProps> = () => {
         Text
       </Anchor>
       <Menu id="menu-plaintext" open anchorEl={two}>
-        <Menu.Item>Pressure </Menu.Item>
-        <Menu.Item>Bearing</Menu.Item>
-        <Menu.Item>Cable</Menu.Item>
+        <Menu.Item>
+          <Typography group="navigation" variant="menu_title" as="span">
+            Pressure
+          </Typography>
+        </Menu.Item>
+        <Menu.Item>
+          <Typography group="navigation" variant="menu_title" as="span">
+            Bearing
+          </Typography>
+        </Menu.Item>
+        <Menu.Item>
+          <Typography group="navigation" variant="menu_title" as="span">
+            Cable
+          </Typography>
+        </Menu.Item>
       </Menu>
       <Anchor
         id="anchor-textIcon"
@@ -515,22 +509,22 @@ export const Examples: Story<MenuProps> = () => {
       </Anchor>
       <Menu id="menu-textIcon" open anchorEl={three}>
         <Menu.Item>
-          <Typography group="navigation" variant="label">
-            <Icon name="pressure" />
+          <Icon name="pressure" size={16} />
+          <Typography group="navigation" variant="menu_title" as="span">
+            Pressure
           </Typography>
-          Pressure
         </Menu.Item>
         <Menu.Item>
-          <Typography group="navigation" variant="label">
-            <Icon name="bearing" />
+          <Icon name="bearing" size={16} />
+          <Typography group="navigation" variant="menu_title" as="span">
+            Bearing
           </Typography>
-          Bearing
         </Menu.Item>
         <Menu.Item>
-          <Typography group="navigation" variant="label">
-            <Icon name="cable" />
+          <Icon name="cable" size={16} />
+          <Typography group="navigation" variant="menu_title" as="span">
+            Cable
           </Typography>
-          Cable
         </Menu.Item>
       </Menu>
 
