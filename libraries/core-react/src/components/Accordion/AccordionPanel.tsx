@@ -38,6 +38,9 @@ const StyledAccordionPanel = styled.div.attrs(
 
 const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>(
   function AccordionPanel({ id, headerId, hidden, children, ...props }, ref) {
+    if (hidden) {
+      return null
+    }
     return (
       <StyledAccordionPanel
         headerId={headerId}
