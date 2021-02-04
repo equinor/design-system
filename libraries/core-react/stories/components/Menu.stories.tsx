@@ -79,7 +79,7 @@ const bigMenuTemplate = (
         group="navigation"
         variant="label"
       >
-        <Icon name="folder" />
+        <Icon name="folder" size={16} />
       </Typography>
       <Typography group="navigation" variant="menu_title">
         Open
@@ -98,7 +98,7 @@ const bigMenuTemplate = (
         group="navigation"
         variant="label"
       >
-        <Icon name="copy" />
+        <Icon name="copy" size={16} />
       </Typography>
       <Typography group="navigation" variant="menu_title">
         Copy
@@ -117,7 +117,7 @@ const bigMenuTemplate = (
         group="navigation"
         variant="label"
       >
-        <Icon name="paste" />
+        <Icon name="paste" size={16} />
       </Typography>
       <Typography group="navigation" variant="menu_title">
         Paste
@@ -136,7 +136,7 @@ const bigMenuTemplate = (
         group="navigation"
         variant="label"
       >
-        <Icon name="edit" />
+        <Icon name="edit" size={16} />
       </Typography>
       <Typography group="navigation" variant="menu_title">
         Rename
@@ -155,7 +155,7 @@ const bigMenuTemplate = (
         group="navigation"
         variant="label"
       >
-        <Icon name="delete_to_trash" />
+        <Icon name="delete_to_trash" size={16} />
       </Typography>
       <Typography group="navigation" variant="menu_title">
         Delete
@@ -175,7 +175,7 @@ const bigMenuTemplate = (
           group="navigation"
           variant="label"
         >
-          <Icon name="settings" />
+          <Icon name="settings" size={16} />
         </Typography>
         <Typography group="navigation" variant="menu_title">
           Settings
@@ -259,7 +259,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
             group="navigation"
             variant="label"
           >
-            <Icon name="folder" />
+            <Icon name="folder" size={16} />
           </Typography>
           <Typography group="navigation" variant="menu_title">
             Open
@@ -278,7 +278,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
             group="navigation"
             variant="label"
           >
-            <Icon name="copy" />
+            <Icon name="copy" size={16} />
           </Typography>
           <Typography group="navigation" variant="menu_title">
             Copy
@@ -297,7 +297,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
             group="navigation"
             variant="label"
           >
-            <Icon name="paste" />
+            <Icon name="paste" size={16} />
           </Typography>
           <Typography group="navigation" variant="menu_title">
             Paste
@@ -316,7 +316,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
             group="navigation"
             variant="label"
           >
-            <Icon name="edit" />
+            <Icon name="edit" size={16} />
           </Typography>
           <Typography group="navigation" variant="menu_title">
             Rename
@@ -335,7 +335,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
             group="navigation"
             variant="label"
           >
-            <Icon name="delete_to_trash" />
+            <Icon name="delete_to_trash" size={16} />
           </Typography>
           <Typography group="navigation" variant="menu_title">
             Delete
@@ -355,7 +355,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
               group="navigation"
               variant="label"
             >
-              <Icon name="settings" />
+              <Icon name="settings" size={16} />
             </Typography>
             <Typography group="navigation" variant="menu_title">
               Settings
@@ -421,7 +421,7 @@ export const InTopbar: Story<MenuProps> = () => {
             onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
             onKeyDown={onKeyPress}
           >
-            <Icon name="more_vertical" title="more"></Icon>
+            <Icon name="more_vertical" title="more" size={16}></Icon>
           </Button>
           <Menu
             id="menu-on-button"
@@ -480,16 +480,16 @@ export const Examples: Story<MenuProps> = () => {
       </Anchor>
       <Menu id="menu-iconbuttons" open anchorEl={one}>
         <Button variant="ghost_icon">
-          <Icon name="save" title="save"></Icon>
+          <Icon name="save" title="save" size={16}></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="folder" title="folder"></Icon>
+          <Icon name="folder" title="folder" size={16}></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="edit" title="edit"></Icon>
+          <Icon name="edit" title="edit" size={16}></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="settings" title="settings"></Icon>
+          <Icon name="settings" title="settings" size={16}></Icon>
         </Button>
       </Menu>
       <Anchor
@@ -516,19 +516,19 @@ export const Examples: Story<MenuProps> = () => {
       <Menu id="menu-textIcon" open anchorEl={three}>
         <Menu.Item>
           <Typography group="navigation" variant="label">
-            <Icon name="pressure" />
+            <Icon name="pressure" size={16} />
           </Typography>
           Pressure
         </Menu.Item>
         <Menu.Item>
           <Typography group="navigation" variant="label">
-            <Icon name="bearing" />
+            <Icon name="bearing" size={16} />
           </Typography>
           Bearing
         </Menu.Item>
         <Menu.Item>
           <Typography group="navigation" variant="label">
-            <Icon name="cable" />
+            <Icon name="cable" size={16} />
           </Typography>
           Cable
         </Menu.Item>
