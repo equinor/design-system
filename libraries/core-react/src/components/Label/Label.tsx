@@ -24,7 +24,7 @@ const Text = styled.span`
 
 type TextfieldProps = {
   label: string
-  meta: string
+  meta?: string
   inputId: string
   disabled?: boolean
 }
