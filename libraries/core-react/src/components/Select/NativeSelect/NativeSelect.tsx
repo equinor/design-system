@@ -53,7 +53,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
     }
 
     const labelProps = {
-      inputId: id,
+      htmlFor: id,
       label,
       meta,
     }

@@ -11,7 +11,7 @@ describe('Label', () => {
   it('Has correct label text', () => {
     const labelText = 'Some label'
     const { queryByText } = render(
-      <Label inputId="test-label" label={labelText} />,
+      <Label htmlFor="test-label" label={labelText} />,
     )
 
     expect(queryByText(labelText)).toBeInTheDocument()

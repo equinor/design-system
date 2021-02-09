@@ -87,7 +87,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     }
 
     const labelProps = {
-      inputId: id,
+      htmlFor: id,
       label,
       meta,
     }

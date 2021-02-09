@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { LabelHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '@utils'
 import { label as tokens } from './Label.tokens'
@@ -22,20 +23,19 @@ const Text = styled.span`
   margin: 0;
 `
 
-type TextfieldProps = {
+type LabelProps = {
   label: string
   meta?: string
-  inputId: string
   disabled?: boolean
-}
+} & LabelHTMLAttributes<HTMLLabelElement>
 
-const TextFieldLabel = React.forwardRef<HTMLLabelElement, TextfieldProps>(
-  function TextFieldLabel(props, ref) {
-    const { label = '', meta, inputId, disabled = false, ...other } = props
+export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+  function Label(props, ref) {
+    const { label = '', meta, disabled = false, ...other } = props
 
     return (
       /*  @TODO: Other props spread has to be at the end for downshift to create the for attribute */
-      <LabelBase ref={ref} htmlFor={inputId} disabledText={disabled} {...other}>
+      <LabelBase ref={ref} disabledText={disabled} {...other}>
         <Text>{label}</Text>
         {meta && <Text>{meta}</Text>}
       </LabelBase>
@@ -44,5 +44,3 @@ const TextFieldLabel = React.forwardRef<HTMLLabelElement, TextfieldProps>(
 )
 
 // Label.displayName = 'eds-text-field-label'
-
-export { TextFieldLabel as Label }
