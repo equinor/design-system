@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, fireEvent } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Label } from './Label'
@@ -28,7 +28,6 @@ describe('Label', () => {
   `
   it('Can extend the css of the component', () => {
     const labelText = 'Some label'
-
     const { container } = render(<StyledLabel label={labelText} />)
 
     expect(container.firstChild).toHaveStyleRule('margin-top', '48px')

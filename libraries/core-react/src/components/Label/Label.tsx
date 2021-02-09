@@ -23,7 +23,7 @@ const Text = styled.span`
   margin: 0;
 `
 
-type LabelProps = {
+export type LabelProps = {
   label: string
   meta?: string
   disabled?: boolean
