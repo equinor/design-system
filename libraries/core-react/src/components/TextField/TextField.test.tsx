@@ -4,13 +4,6 @@ import { render, cleanup, fireEvent } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { TextField } from '.'
-import { input as inputTokens } from './Input/Input.tokens'
-
-const {
-  error: errorToken,
-  success: successToken,
-  warning: warningToken,
-} = inputTokens
 
 afterEach(cleanup)
 
@@ -55,45 +48,6 @@ describe('TextField', () => {
     })
 
     expect(value).toBe(newValue)
-  })
-
-  it('Has correct outline on input when variant is success', () => {
-    const label = 'success outline on input'
-    const { getByLabelText } = render(
-      <TextField id="test-warning" variant="success" label={label} />,
-    )
-    const inputNode = getByLabelText(label)
-
-    expect(inputNode).toHaveStyleRule(
-      'outline',
-      `${successToken.border.outline.width} solid ${successToken.border.outline.color}`,
-    )
-  })
-
-  it('Has correct outline on input when variant is warning', () => {
-    const label = 'warning outline on input'
-    const { getByLabelText } = render(
-      <TextField id="test-warning" variant="warning" label={label} />,
-    )
-    const inputNode = getByLabelText(label)
-
-    expect(inputNode).toHaveStyleRule(
-      'outline',
-      `${warningToken.border.outline.width} solid ${warningToken.border.outline.color}`,
-    )
-  })
-
-  it('Has correct outline on input when variant is error', () => {
-    const label = 'error outline on input'
-    const { getByLabelText } = render(
-      <TextField id="test-error" variant="error" label={label} />,
-    )
-    const inputNode = getByLabelText(label)
-
-    expect(inputNode).toHaveStyleRule(
-      'outline',
-      `${errorToken.border.outline.width} solid ${errorToken.border.outline.color}`,
-    )
   })
 
   const StyledTextField = styled(TextField)`
