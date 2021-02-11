@@ -136,6 +136,33 @@ export const Disabled: Story<TextFieldProps> = () => (
   />
 )
 
+export const WithIcons: Story<TextFieldProps> = () => (
+  <Wrapper>
+    <TextField
+      id="storybook-warning-icon"
+      placeholder="Placeholder text"
+      label="Some warning input"
+      inputIcon={ICONS.WARNING}
+    />
+    <TextField
+      id="storybook-positive-icon"
+      placeholder="Placeholder text"
+      label="Some positive input"
+      inputIcon={ICONS.SUCCESS}
+    />
+    <TextField
+      id="storybook-disabled"
+      placeholder="Placeholder text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+      inputIcon={ICONS.SUCCESS}
+    />
+  </Wrapper>
+)
+WithIcons.storyName = 'With icons'
+
 export const variants: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField

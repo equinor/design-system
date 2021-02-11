@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { Input } from './Input'
+import { TextFieldInput } from './Input'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { TextFieldProvider } from './context'
@@ -99,7 +99,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       <Container {...containerProps}>
         <TextFieldProvider>
           {showLabel && <Label {...labelProps} />}
-          <Input {...inputProps} />
+          <TextFieldInput {...inputProps} />
           {showHelperText && <HelperText {...helperProps} />}
         </TextFieldProvider>
       </Container>

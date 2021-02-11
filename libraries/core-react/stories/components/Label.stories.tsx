@@ -40,7 +40,7 @@ export const Accessible: Story<LabelProps> = () => {
   // To wrap the input component is not yet supported
   return (
     <>
-      <Label label="Speed" htmlFor="speed" />
+      <Label label="I use the htmlFor prop" htmlFor="speed" />
       <input type="text" id="speed" />
     </>
   )

@@ -30,4 +30,5 @@ export * from './components/Menu'
 export * from './components/Pagination'
 export * from './components/Select'
 export * from './components/Label'
+export * from './components/Input'
 /* eslint-enable */
