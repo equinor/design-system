@@ -57,11 +57,11 @@ export const TextFieldInput = React.forwardRef<
   const spacings = tokens.spacings.comfortable
 
   const iconProps = {
-    spacings: spacings.icon,
+    spacings: spacings,
     isDisabled: disabled,
     color: inputVariant.icon.color,
     disabledColor: inputVariant.icon.disabledColor,
-    focusColor: inputVariant.focus.icon.color,
+    focusColor: inputVariant.icon.focus.color,
   }
 
   const inputProps = {
@@ -70,7 +70,6 @@ export const TextFieldInput = React.forwardRef<
     type,
     disabled,
     variant,
-    spacings: spacings.input,
     ...other,
   }
 
