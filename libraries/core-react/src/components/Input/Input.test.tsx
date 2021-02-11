@@ -30,7 +30,7 @@ describe('Input', () => {
     const { getByLabelText } = render(
       <label>
         {label}
-        <Input id="test-warning" variant="success" />,
+        <Input id="test-success" variant="success" />
       </label>,
     )
     const inputNode = getByLabelText(label)
