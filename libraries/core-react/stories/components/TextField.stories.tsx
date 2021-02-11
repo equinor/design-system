@@ -192,5 +192,32 @@ export const variants: Story<TextFieldProps> = () => (
       variant="success"
       helperIcon={ICONS.SUCCESS}
     />
+    <TextField
+      id="storybook-error-two"
+      placeholder="Placeholder text "
+      label="Error"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="error"
+      inputIcon={ICONS.ERROR}
+    />
+    <TextField
+      id="storybook-warning-two"
+      placeholder="Placeholder text Placeholder text Placeholder text"
+      label="Warning"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="warning"
+      inputIcon={ICONS.WARNING}
+    />
+    <TextField
+      id="storybook-success-two"
+      placeholder="Placeholder text Placeholder text Placeholder text"
+      label="Success"
+      meta="Meta"
+      helperText="Helper Text"
+      variant="success"
+      inputIcon={ICONS.SUCCESS}
+    />
   </Wrapper>
 )

@@ -1,30 +1,16 @@
 import * as React from 'react'
 import { ReactNode, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { input as tokens } from './Input.tokens'
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
 import { Input } from '../../Input'
 import type { Variants } from '../types'
-import type { Spacing } from '@equinor/eds-tokens'
 
 const Container = styled.div`
   position: relative;
 `
-
-type StyledIconProps = {
-  spacings: Spacing
-}
-
-export const PaddedInput = styled(Input)`
-  /* Hack: Had to add + 0px to satisfy the style lint plugin */
-`
-
-const StyledIcon = styled(Icon)<StyledIconProps>`
-  position: absolute;
-  right: ${({ spacings }) => spacings.right};
-  top: ${({ spacings }) => spacings.top};
-  bottom: ${({ spacings }) => spacings.bottom};
+const PaddedInput = styled(Input)`
+  padding-right: 32px;
 `
 
 type TextfieldInputProps = {
@@ -53,17 +39,6 @@ export const TextFieldInput = React.forwardRef<
 ) {
   const { handleFocus, handleBlur } = useTextField()
 
-  const inputVariant = tokens[variant]
-  const spacings = tokens.spacings.comfortable
-
-  const iconProps = {
-    spacings: spacings,
-    isDisabled: disabled,
-    color: inputVariant.icon.color,
-    disabledColor: inputVariant.icon.disabledColor,
-    focusColor: inputVariant.icon.focus.color,
-  }
-
   const inputProps = {
     multiline,
     ref,
@@ -75,8 +50,20 @@ export const TextFieldInput = React.forwardRef<
 
   return (
     <Container>
-      <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
-      {inputIcon && <StyledIcon {...iconProps}>{inputIcon}</StyledIcon>}
+      {inputIcon ? (
+        <>
+          <PaddedInput
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            {...inputProps}
+          />
+          <Icon isDisabled={disabled} variant={variant} inputIcon>
+            {inputIcon}
+          </Icon>
+        </>
+      ) : (
+        <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
+      )}
     </Container>
   )
 })
