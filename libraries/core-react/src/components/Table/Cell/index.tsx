@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { TdHTMLAttributes, ThHTMLAttributes } from 'react'
+import { TdHTMLAttributes, ThHTMLAttributes, forwardRef } from 'react'
 import { Variants, Colors } from '../Table.types'
 import { TableDataCell } from './DataCell'
 import { TableHeaderCell } from './HeaderCell'
@@ -16,19 +16,27 @@ export type CellProps = {
   | TdHTMLAttributes<HTMLTableDataCellElement>
   | ThHTMLAttributes<HTMLTableHeaderCellElement>
 )
+export const Cell = forwardRef<
+  HTMLTableDataCellElement | HTMLTableHeaderCellElement,
+  CellProps
+>(function Cell({ className, ...rest }, ref) {
+  const props = {
+    ...rest,
+    className,
+    ref,
+  }
 
-export const Cell = (props: CellProps): JSX.Element => (
-  <InnerContext.Consumer>
-    {({ variant, sticky }) => {
-      switch (variant) {
-        case 'head':
-          return <TableHeaderCell sticky={sticky} {...props} />
-        default:
-        case 'body':
-          return <TableDataCell {...props} />
-      }
-    }}
-  </InnerContext.Consumer>
-)
-
-// Cell.displayName = 'eds-table-cell'
+  return (
+    <InnerContext.Consumer>
+      {({ variant, sticky }) => {
+        switch (variant) {
+          case 'head':
+            return <TableHeaderCell sticky={sticky} {...props} />
+          default:
+          case 'body':
+            return <TableDataCell {...props} />
+        }
+      }}
+    </InnerContext.Consumer>
+  )
+})
