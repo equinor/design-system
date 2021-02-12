@@ -1,6 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
-import { ColorStateProps } from '../types'
 import type { Spacing, Typography } from '@equinor/eds-tokens'
+import { ColorStateProps } from '../types'
 
 const {
   colors,
