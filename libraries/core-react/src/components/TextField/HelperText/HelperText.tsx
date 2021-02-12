@@ -91,7 +91,12 @@ const TextfieldHelperText = React.forwardRef<
   return (
     <Container ref={ref} {...rest} spacings={spacings}>
       {icon && (
-        <StyledIcon isDisabled={isDisabled} spacings={spacings} colors={colors}>
+        <StyledIcon
+          isDisabled={isDisabled}
+          spacings={spacings}
+          colors={colors}
+          isInputIcon={false}
+        >
           {icon}
         </StyledIcon>
       )}

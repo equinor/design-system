@@ -37,7 +37,7 @@ const StyledIcon = styled.div<StyledIconProps>`
   ${Variation}
 `
 
-const StyledInlineIcon = styled(StyledIcon)`
+const StyledIputIcon = styled(StyledIcon)`
   position: absolute;
   right: ${({ spacings }) => spacings.right};
   top: ${({ spacings }) => spacings.top};
@@ -50,7 +50,7 @@ type TextfieldIconProps = {
   /** Variant */
   variant?: Variants
   /** Is the icon inside a text field */
-  inputIcon?: boolean
+  isInputIcon?: boolean
   /** Spacing object */
   spacings: Spacing
   /** Colors */
@@ -62,7 +62,7 @@ const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
     {
       variant = 'default',
       isDisabled = false,
-      inputIcon = false,
+      isInputIcon = true,
       spacings = tokens.spacings.comfortable,
       colors = {
         color: tokens[variant].color,
@@ -85,10 +85,10 @@ const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
 
     return (
       <>
-        {inputIcon ? (
-          <StyledInlineIcon ref={ref} {...iconProps} {...other}>
+        {isInputIcon ? (
+          <StyledIputIcon ref={ref} {...iconProps} {...other}>
             {children}
-          </StyledInlineIcon>
+          </StyledIputIcon>
         ) : (
           <StyledIcon ref={ref} {...iconProps} {...other}>
             {children}
