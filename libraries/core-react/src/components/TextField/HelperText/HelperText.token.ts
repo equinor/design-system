@@ -1,4 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
+import { ColorStateProps } from '../types'
+import type { Spacing, Typography } from '@equinor/eds-tokens'
 
 const {
   colors,
@@ -6,30 +8,36 @@ const {
   typography,
 } = tokens
 
-const spacings = {
-  comfortable: {
-    left: comfortable.small,
-    right: comfortable.small,
-    top: comfortable.small,
-    bottom: '6px',
-  },
-  compact: {
-    left: comfortable.small,
-    right: comfortable.small,
-    top: comfortable.xx_small,
-    bottom: '6px',
-  },
-}
-export type HelperTextVariantProps = {
-  color: string
-  disabledColor: string
-  focusColor: string
+export type HelperTextProps = {
+  background: string
+  typography: Typography
+  spacings: {
+    comfortable: Spacing
+    compact: Spacing
+  }
+  default: ColorStateProps
+  error: ColorStateProps
+  warning: ColorStateProps
+  success: ColorStateProps
 }
 
-export const helperText = {
+export const helperText: HelperTextProps = {
   background: colors.ui.background__light.hex,
   typography: typography.input.helper,
-  spacings,
+  spacings: {
+    comfortable: {
+      left: comfortable.small,
+      right: comfortable.small,
+      top: comfortable.small,
+      bottom: '6px',
+    },
+    compact: {
+      left: comfortable.small,
+      right: comfortable.small,
+      top: comfortable.xx_small,
+      bottom: '6px',
+    },
+  },
   default: {
     color: colors.text.static_icons__tertiary.hex,
     disabledColor: colors.interactive.disabled__text.hex,

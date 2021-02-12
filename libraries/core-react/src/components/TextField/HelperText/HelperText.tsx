@@ -2,17 +2,14 @@ import * as React from 'react'
 import { ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate } from '@utils'
-import {
-  HelperTextVariantProps,
-  helperText as tokens,
-} from './HelperText.token'
+import { helperText as tokens } from './HelperText.token'
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
-import type { Variants } from '../types'
+import type { Variants, ColorStateProps } from '../types'
 import type { Spacing } from '@equinor/eds-tokens'
 
 type VariantionProps = {
-  variant: HelperTextVariantProps
+  variant: ColorStateProps
   isFocused: boolean
   isDisabled: boolean
 }
@@ -85,9 +82,7 @@ const TextfieldHelperText = React.forwardRef<
 
   const { isFocused } = useTextField()
 
-  const iconProps = {
-    spacings,
-    isDisabled,
+  const colors = {
     color: helperVariant.color,
     disabledColor: helperVariant.disabledColor,
     focusColor: helperVariant.focusColor,
@@ -95,7 +90,11 @@ const TextfieldHelperText = React.forwardRef<
 
   return (
     <Container ref={ref} {...rest} spacings={spacings}>
-      {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
+      {icon && (
+        <StyledIcon isDisabled={isDisabled} spacings={spacings} colors={colors}>
+          {icon}
+        </StyledIcon>
+      )}
       <Text
         variant={helperVariant}
         isFocused={isFocused}

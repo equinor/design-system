@@ -2,9 +2,9 @@ import * as React from 'react'
 import { HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { useTextField } from '../context'
-import { input as tokens } from './Input.tokens'
+import { input as tokens } from './Icon.token'
 import type { Spacing } from '@equinor/eds-tokens'
-import type { Variants } from '../types'
+import type { Variants, ColorStateProps } from '../types'
 
 type StyledIconProps = {
   color: string
@@ -57,6 +57,10 @@ type TextfieldIconProps = {
   variant?: Variants
   /** Is the icon inside a text field */
   inputIcon?: boolean
+  /** Spacing object */
+  spacings: Spacing
+  /** Colors */
+  colors: ColorStateProps
 } & HTMLAttributes<HTMLDivElement>
 
 const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
