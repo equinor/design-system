@@ -7,21 +7,15 @@ import type { Spacing } from '@equinor/eds-tokens'
 import type { Variants, ColorStateProps } from '../types'
 
 type StyledIconProps = {
-  color: string
-  focusColor: string
-  disabledColor: string
+  colors: ColorStateProps
   isDisabled?: boolean
   isFocused?: boolean
   spacings: Spacing
 }
 
-const Variation = ({
-  color,
-  focusColor,
-  disabledColor,
-  isDisabled,
-  isFocused,
-}: StyledIconProps) => {
+const Variation = ({ colors, isDisabled, isFocused }: StyledIconProps) => {
+  const { focusColor, color, disabledColor } = colors
+
   if (isDisabled) {
     return css`
       fill: ${disabledColor};
@@ -69,6 +63,12 @@ const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
       variant = 'default',
       isDisabled = false,
       inputIcon = false,
+      spacings = tokens.spacings.comfortable,
+      colors = {
+        color: tokens[variant].color,
+        disabledColor: tokens[variant].disabledColor,
+        focusColor: tokens[variant].focusColor,
+      },
       children,
       ...other
     },
@@ -76,30 +76,21 @@ const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
   ) {
     const { isFocused } = useTextField()
 
-    const inputVariant = tokens[variant]
-    const spacings = tokens.spacings.comfortable
-
     const iconProps = {
-      spacings: spacings,
+      spacings,
       isDisabled,
-      color: inputVariant.color,
-      disabledColor: inputVariant.disabledColor,
-      focusColor: inputVariant.focusColor,
+      colors,
+      isFocused,
     }
 
     return (
       <>
         {inputIcon ? (
-          <StyledInlineIcon
-            ref={ref}
-            isFocused={isFocused}
-            {...iconProps}
-            {...other}
-          >
+          <StyledInlineIcon ref={ref} {...iconProps} {...other}>
             {children}
           </StyledInlineIcon>
         ) : (
-          <StyledIcon ref={ref} isFocused={isFocused} {...iconProps} {...other}>
+          <StyledIcon ref={ref} {...iconProps} {...other}>
             {children}
           </StyledIcon>
         )}
