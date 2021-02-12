@@ -51,10 +51,10 @@ type TextfieldIconProps = {
   variant?: Variants
   /** Is the icon inside a text field */
   isInputIcon?: boolean
-  /** Spacing object */
-  spacings: Spacing
+  /** Spacing object, comfortable is default */
+  spacings?: Spacing
   /** Colors */
-  colors: ColorStateProps
+  colors?: ColorStateProps
 } & HTMLAttributes<HTMLDivElement>
 
 const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
