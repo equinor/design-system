@@ -108,6 +108,4 @@ const TextfieldHelperText = React.forwardRef<
   )
 })
 
-// HelperText.displayName = 'eds-text-field-helperText'
-
 export { TextfieldHelperText as HelperText }

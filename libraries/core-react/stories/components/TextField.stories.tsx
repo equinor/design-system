@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, TextFieldProps, Icon } from '@components'
+import { TextField, TextFieldProps } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
@@ -224,7 +224,6 @@ export const Variants: Story<TextFieldProps> = () => (
 
 Variants.parameters = {
   docs: {
-    // The story now contains a description
     storyDescription: `Examples of validation states. You can add the icon in the helper
     text or inside the text input, both not both places.`,
   },

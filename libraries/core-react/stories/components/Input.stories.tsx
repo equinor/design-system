@@ -78,7 +78,6 @@ export const Accessiblity: Story<InputProps> = () => {
 
 Accessiblity.parameters = {
   docs: {
-    // The story now contains a description
     storyDescription: `It's important to link the <code>Input</code> to the corresponding label. `,
   },
 }

@@ -44,7 +44,6 @@ export const Accessiblity: Story<LabelProps> = () => {
 }
 Accessiblity.parameters = {
   docs: {
-    // The story now contains a description
     storyDescription: `It's important to link the <code>Label</code> to the corresponding input element. Use the React version of the html for attribute <code>htmlFor</code>
     as <code>Label</code> does not support to wrap the input field.
     `,
