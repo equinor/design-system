@@ -76,7 +76,6 @@ export type InputProps = {
   type?: string
   /** Read Only */
   readonly?: boolean
-  handleFocus?: () => void
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -93,6 +92,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const as: ElementType = multiline ? 'textarea' : 'input'
     const inputVariant = tokens[variant]
     const spacings = tokens.spacings.comfortable
+
     const inputProps = {
       as,
       ref,
