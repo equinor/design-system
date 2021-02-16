@@ -99,6 +99,4 @@ const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
   },
 )
 
-// Icon.displayName = 'eds-text-field-icon'
-
 export { InputIcon as Icon }

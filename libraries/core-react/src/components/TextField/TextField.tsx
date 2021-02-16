@@ -2,10 +2,10 @@ import * as React from 'react'
 import { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { Icon } from './Icon'
-import { Input } from '../Input'
+import { InputWrapper } from './InputWrapper'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
-import { TextFieldProvider, useTextField } from './context'
+import { TextFieldProvider } from './context'
 import type { Variants } from './types'
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const RelativeContainer = styled.div`
   position: relative;
 `
 
-const PaddedInput = styled(Input)`
+const PaddedInputWrapper = styled(InputWrapper)`
   padding-right: 32px;
 `
 
@@ -103,7 +103,6 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
 
     const showLabel = label || meta
     const showHelperText = helperText
-    const { handleFocus, handleBlur } = useTextField()
 
     return (
       <Container {...containerProps}>
@@ -112,21 +111,13 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           <RelativeContainer>
             {inputIcon ? (
               <>
-                <PaddedInput
-                  onBlur={handleBlur}
-                  onFocus={handleFocus}
-                  {...inputProps}
-                />
+                <PaddedInputWrapper {...inputProps} />
                 <Icon isDisabled={disabled} variant={variant}>
                   {inputIcon}
                 </Icon>
               </>
             ) : (
-              <Input
-                onBlur={handleBlur}
-                onFocus={handleFocus}
-                {...inputProps}
-              />
+              <InputWrapper {...inputProps} />
             )}
           </RelativeContainer>
           {showHelperText && <HelperText {...helperProps} />}
