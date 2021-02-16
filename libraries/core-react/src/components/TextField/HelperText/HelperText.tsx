@@ -8,13 +8,13 @@ import { Icon } from '../Icon'
 import type { Variants, ColorStateProps } from '../types'
 import type { Spacing } from '@equinor/eds-tokens'
 
-type VariantionProps = {
+type VariationProps = {
   variant: ColorStateProps
   isFocused: boolean
   isDisabled: boolean
 }
 
-const Variation = ({ variant, isFocused, isDisabled }: VariantionProps) => {
+const Variation = ({ variant, isFocused, isDisabled }: VariationProps) => {
   if (!variant) {
     return ``
   }
@@ -45,19 +45,15 @@ type StyledProps = {
 const Container = styled.div<StyledProps>`
   display: flex;
   align-items: flex-end;
-
-  margin-left: ${({ spacings }) => spacings.left};
   margin-top: ${({ spacings }) => spacings.top};
 `
-const Text = styled.p`
-  margin: 0;
+const Text = styled.p<StyledProps & VariationProps>`
   ${typographyTemplate(tokens.typography)}
+  margin: 0 0 0 ${({ spacings }) => spacings.left};
   ${Variation}
 `
 
-const StyledIcon = styled(Icon)<StyledProps>`
-  margin-right: ${({ spacings }) => spacings.left};
-`
+const StyledIcon = styled(Icon)<StyledProps>``
 
 type TextfieldHelperTextProps = {
   /** Helper text */
@@ -104,6 +100,7 @@ const TextfieldHelperText = React.forwardRef<
         variant={helperVariant}
         isFocused={isFocused}
         isDisabled={isDisabled}
+        spacings={spacings}
       >
         {helperText}
       </Text>

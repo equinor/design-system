@@ -146,7 +146,7 @@ export const WithIcons: Story<TextFieldProps> = () => (
     />
     <TextField
       id="storybook-positive-icon"
-      placeholder="Placeholder text"
+      placeholder="Placeholder text placeholder text"
       label="Some positive input"
       inputIcon={ICONS.SUCCESS}
     />
@@ -163,61 +163,69 @@ export const WithIcons: Story<TextFieldProps> = () => (
 )
 WithIcons.storyName = 'With icons'
 
-export const variants: Story<TextFieldProps> = () => (
+export const Variants: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
       id="storybook-error"
       placeholder="Placeholder text Placeholder text Placeholder text"
       label="Error"
       meta="Meta"
-      helperText="Helper Text"
+      helperText="Validation error"
       variant="error"
       helperIcon={ICONS.ERROR}
-    />
-    <TextField
-      id="storybook-warning"
-      placeholder="Placeholder text Placeholder text Placeholder text"
-      label="Warning"
-      meta="Meta"
-      helperText="Helper Text"
-      variant="warning"
-      helperIcon={ICONS.WARNING}
-    />
-    <TextField
-      id="storybook-success"
-      placeholder="Placeholder text Placeholder text Placeholder text"
-      label="Success"
-      meta="Meta"
-      helperText="Helper Text"
-      variant="success"
-      helperIcon={ICONS.SUCCESS}
     />
     <TextField
       id="storybook-error-two"
       placeholder="Placeholder text "
       label="Error"
       meta="Meta"
-      helperText="Helper Text"
+      helperText="Validation error"
       variant="error"
       inputIcon={ICONS.ERROR}
+    />
+    <TextField
+      id="storybook-warning"
+      placeholder="Placeholder text Placeholder text Placeholder text"
+      label="Warning"
+      meta="Meta"
+      helperText="Helper/warning text"
+      variant="warning"
+      helperIcon={ICONS.WARNING}
     />
     <TextField
       id="storybook-warning-two"
       placeholder="Placeholder text Placeholder text Placeholder text"
       label="Warning"
       meta="Meta"
-      helperText="Helper Text"
+      helperText="Helper/warning text"
       variant="warning"
       inputIcon={ICONS.WARNING}
+    />
+    <TextField
+      id="storybook-success"
+      placeholder="Placeholder text Placeholder text Placeholder text"
+      label="Success"
+      meta="Meta"
+      helperText="Helper text"
+      variant="success"
+      helperIcon={ICONS.SUCCESS}
     />
     <TextField
       id="storybook-success-two"
       placeholder="Placeholder text Placeholder text Placeholder text"
       label="Success"
       meta="Meta"
-      helperText="Helper Text"
+      helperText="Helper text"
       variant="success"
       inputIcon={ICONS.SUCCESS}
     />
   </Wrapper>
 )
+
+Variants.parameters = {
+  docs: {
+    // The story now contains a description
+    storyDescription: `Examples of validation states. You can add the icon in the helper
+    text or inside the text input, both not both places.`,
+  },
+}
