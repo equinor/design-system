@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import * as React from 'react'
 import {
   forwardRef,
@@ -8,15 +10,13 @@ import {
   isValidElement,
   MutableRefObject,
 } from 'react'
-import * as PopperJS from '@popperjs/core'
-import { usePopper, Popper } from 'react-popper'
 import styled from 'styled-components'
 import { Icon } from '../Icon'
 import { Card } from '../Card'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { useCombinedRefs } from '@hooks'
+import { useCombinedRefs, usePopper } from '@hooks'
 import { PopoverItem } from './PopoverItem'
 import { PopoverAnchor } from './PopoverAnchor'
 import { popover as tokens } from './Popover.tokens'
@@ -220,28 +220,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
 
     const { styles, attributes } = usePopper(
-      anchorEl.current,
-      popperRef.current,
-
-      {
-        placement: position,
-        modifiers: [
-          {
-            name: 'arrow',
-            options: {
-              element: arrowRef,
-            },
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 10],
-            },
-          },
-        ],
-      },
+      anchorEl,
+      popperRef,
+      arrowRef,
+      position,
     )
-
     return (
       <StyledPopover
         ref={popperRef}

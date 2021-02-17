@@ -5,8 +5,8 @@ import { usePopper as reactPopper } from 'react-popper'
 export const usePopper = (
   anchorRef: MutableRefObject<HTMLElement>,
   popperRef: MutableRefObject<HTMLElement>,
-  arrowRef: HTMLElement | string,
-  placement:
+  arrowRef?: HTMLElement | string,
+  placement?:
     | 'auto'
     | 'auto-start'
     | 'auto-end'
@@ -29,10 +29,12 @@ export const usePopper = (
   //   update: PopperJS.Instance['update'] | null
   //   forceUpdate: PopperJS.Instance['forceUpdate'] | null
 } => {
+  if (placement === undefined) {
+    placement = 'auto'
+  }
   const { styles, attributes } = reactPopper(
     anchorRef.current,
     popperRef.current,
-
     {
       placement,
       modifiers: [

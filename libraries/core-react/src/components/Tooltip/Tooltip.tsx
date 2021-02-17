@@ -9,6 +9,7 @@ import {
 import styled, { css } from 'styled-components'
 import type { CSSObject } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
+import { usePopper } from '@hooks'
 import { tooltip as tokens, Placement } from './Tooltip.tokens'
 
 const Wrapper = styled.div`
@@ -120,6 +121,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ref,
     }
 
+<<<<<<< HEAD
     const placementToken: Placement = tokens.placement[placement]
 
     const wrapperProps = {
@@ -129,6 +131,18 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       left: placementToken.tooltipLeft,
       transform: placementToken.transform,
     }
+=======
+    // React Popper example
+    const popperRef = useRef<HTMLDivElement | null>(null)
+    const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
+
+    const { styles, attributes } = usePopper(
+      anchorEl,
+      popperRef,
+      arrowRef,
+      placement,
+    )
+>>>>>>> 25ef5832 (🚧 Popper spiked with Menu)
 
     const arrowProps = {
       left: placementToken.arrowLeft,
