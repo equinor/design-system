@@ -12,7 +12,6 @@ import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
 import { useCombinedRefs, useOutsideClick, usePopper } from '@hooks'
 import { menu as tokens } from './Menu.tokens'
-import type { State } from './Menu.context'
 import type { FocusTarget } from './Menu.types'
 
 const {
@@ -20,9 +19,8 @@ const {
 } = tokens
 
 type StyledProps = {
-  isPositioned: State['isPositioned']
   open: boolean
-} & State['position']
+}
 
 const StyledPaper = styled(Paper)<StyledProps>`
   position: absolute;
@@ -31,37 +29,25 @@ const StyledPaper = styled(Paper)<StyledProps>`
   min-width: fit-content;
   border-radius: ${border.radius};
 
-  ${({ left, top, transform, open, isPositioned }) =>
+  ${({ open }) =>
     css({
-      // left,
-      // top,
-      // transform,
-      visibility: open && isPositioned ? 'visible' : 'hidden',
+      visibility: open ? 'visible' : 'hidden',
     })};
 `
 
 export type MenuProps = {
   /** Anchor element for Menu */
-  anchorEl: HTMLElement
+  anchorEl: HTMLElement | MutableRefObject<null>
   /** Is Menu open */
   open: boolean
   /** Which Menu child to focus when open */
   focus?: FocusTarget
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
-  /** Anchor element for Popper */
-  referenceEl?: MutableRefObject<null>
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  {
-    children,
-    anchorEl,
-    onClose: onCloseCallback,
-    open = false,
-    referenceEl,
-    ...rest
-  },
+  { children, anchorEl, onClose: onCloseCallback, open = false, ...rest },
   ref,
 ) {
   const listRef = useRef<HTMLUListElement>(null)
@@ -74,11 +60,12 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   })
 
   useEffect(() => {
-    if (anchorEl && listRef.current) {
-      const menuRect = listRef.current.getBoundingClientRect()
-      const anchorRect = anchorEl.getBoundingClientRect()
-      setPosition(anchorRect, menuRect, window)
-    }
+    // Deprecate with Popper
+    // if (anchorEl && listRef.current) {
+    //   const menuRect = listRef.current.getBoundingClientRect()
+    //   const anchorRect = anchorEl.getBoundingClientRect()
+    //   setPosition(anchorRect, menuRect, window)
+    // }
 
     if (onClose === null && onCloseCallback) {
       setOnClose(onCloseCallback)
@@ -102,13 +89,13 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
         break
     }
   }
+  console.log(anchorEl)
+  const popperRef = useRef<HTMLDivElement | null>(null)
+  const placement = 'right-end'
 
   // React Popper example
-  const popperRef = useRef<HTMLDivElement | null>(null)
-  // const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
-  const placement = 'right-end'
   const { styles, attributes } = usePopper(
-    referenceEl,
+    anchorEl as MutableRefObject<HTMLElement>,
     popperRef,
     null,
     placement,
@@ -125,20 +112,22 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   return (
-    <StyledPaper
-      {...paperProps}
-      elevation="raised"
-      ref={popperRef}
-      style={styles.popper}
-      {...attributes.popper}
-    >
-      <MenuList
-        {...menuProps}
-        ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}
+    anchorEl && (
+      <StyledPaper
+        {...paperProps}
+        elevation="raised"
+        ref={popperRef}
+        style={styles.popper}
+        {...attributes.popper}
       >
-        {children}
-      </MenuList>
-    </StyledPaper>
+        <MenuList
+          {...menuProps}
+          ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}
+        >
+          {children}
+        </MenuList>
+      </StyledPaper>
+    )
   )
 })
 
