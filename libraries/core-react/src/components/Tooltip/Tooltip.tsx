@@ -9,8 +9,8 @@ import {
 import styled, { css } from 'styled-components'
 import type { CSSObject } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { usePopper } from '@hooks'
-import { tooltip as tokens, Placement } from './Tooltip.tokens'
+import { usePopper, Placement } from '@hooks'
+import { tooltip as tokens } from './Tooltip.tokens'
 
 const Wrapper = styled.div`
   position: relative;
@@ -78,6 +78,7 @@ const TooltipArrow = styled.svg<ArrowProps>`
 
 export type TooltipProps = {
   /** Tooltip placement relative to anchor */
+<<<<<<< HEAD
   placement?:
     | 'topLeft'
     | 'top'
@@ -97,11 +98,19 @@ export type TooltipProps = {
   title?: string
   /** Tooltip reference/anchor element */
   children: ReactNode
+=======
+  placement?: Placement
+  /** Tooltip title when children is the anchor */
+  title?: string
+  /** Reference element for having tooltip decupled from the anchor (in tables etc) */
+  anchorEl?: MutableRefObject<null>
+>>>>>>> 85fc89b2 (♻️ Refactor Tooltip story)
 } & HTMLAttributes<HTMLDivElement>
 
 // Controller for TooltipItem
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
+<<<<<<< HEAD
     { className, title, children, placement = 'bottom', open = false, ...rest },
     ref,
   ) {
@@ -132,6 +141,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       transform: placementToken.transform,
     }
 =======
+=======
+    { className, title, children, placement = 'auto', anchorEl, ...rest },
+    ref,
+  ) {
+>>>>>>> 85fc89b2 (♻️ Refactor Tooltip story)
     // React Popper example
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
@@ -144,6 +158,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     )
 >>>>>>> 25ef5832 (🚧 Popper spiked with Menu)
 
+<<<<<<< HEAD
     const arrowProps = {
       left: placementToken.arrowLeft,
       right: placementToken.arrowRight,
@@ -182,6 +197,25 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           </StyledTooltipWrapper>
         )}
       </Wrapper>
+=======
+    const props = {
+      ...attributes.popper,
+      className,
+      ...rest,
+    }
+
+    // React popper example:
+    return (
+      <StyledTooltip
+        role="tooltip"
+        ref={popperRef}
+        style={styles.popper}
+        {...props}
+      >
+        {title}
+        <Arrow ref={setArrowRef} style={styles.arrow} className="arrow" />
+      </StyledTooltip>
+>>>>>>> 85fc89b2 (♻️ Refactor Tooltip story)
     )
   },
 )
