@@ -1,3 +1,4 @@
 export { useOutsideClick } from './useOutsideClick'
 export { useCombinedRefs } from './useCombinedRefs'
-export { usePopper, Placement } from './usePopper'
+export { usePopper } from './usePopper'
+export type { Placement } from './usePopper'
