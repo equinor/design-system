@@ -87,12 +87,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const placement = 'right-end'
 
   // React Popper example
-  const { styles, attributes } = usePopper(
-    anchorEl as MutableRefObject<HTMLElement>,
-    popperRef,
-    null,
-    placement,
-  )
+  const { styles, attributes } = usePopper(anchorEl, popperRef, null, placement)
 
   const paperProps = {
     ...position,
@@ -105,7 +100,8 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   return (
-    anchorEl && (
+    anchorEl &&
+    styles.popper && (
       <StyledPaper
         {...paperProps}
         elevation="raised"
