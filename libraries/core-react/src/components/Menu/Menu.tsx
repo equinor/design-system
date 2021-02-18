@@ -10,7 +10,7 @@ import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
-import { useCombinedRefs, useOutsideClick, usePopper } from '@hooks'
+import { useCombinedRefs, useOutsideClick, usePopper, Placement } from '@hooks'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
 
@@ -44,15 +44,24 @@ export type MenuProps = {
   focus?: FocusTarget
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
+  /** Menu placement relative to anchorEl */
+  placement?: Placement
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  { children, anchorEl, onClose: onCloseCallback, open = false, ...rest },
+  {
+    children,
+    anchorEl,
+    onClose: onCloseCallback,
+    open = false,
+    placement = 'auto',
+    ...rest
+  },
   ref,
 ) {
   const listRef = useRef<HTMLUListElement>(null)
 
-  const { position, isPositioned, setOnClose, onClose } = useMenu()
+  const { setOnClose, onClose } = useMenu()
   useOutsideClick(listRef, () => {
     if (open && onClose !== null) {
       onClose()
@@ -84,15 +93,11 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   const popperRef = useRef<HTMLDivElement | null>(null)
-  const placement = 'right-end'
-
   // React Popper example
   const { styles, attributes } = usePopper(anchorEl, popperRef, null, placement)
 
   const paperProps = {
-    ...position,
     open,
-    isPositioned,
   }
 
   const menuProps = {

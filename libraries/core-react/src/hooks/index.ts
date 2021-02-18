@@ -1,3 +1,3 @@
 export { useOutsideClick } from './useOutsideClick'
 export { useCombinedRefs } from './useCombinedRefs'
-export { usePopper } from './usePopper'
+export { usePopper, Placement } from './usePopper'
