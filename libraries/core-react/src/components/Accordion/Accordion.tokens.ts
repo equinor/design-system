@@ -41,27 +41,27 @@ const token = {
     typography,
     color: {
       default: typography.color,
-      disabled: disabledColor,
-      activated: activatedColor,
+      disabled: 'var(--eds_interactive_disabled__text)',
+      activated: 'var(--eds_interactive_primary__resting)',
     },
     background: {
-      default: backgroundDefault,
-      hover: backgroundHover,
+      default: 'var(--eds_ui_background__default)',
+      hover: 'var(--eds_ui_background__light)',
     },
   },
-  border: `1px solid ${borderColor}`,
-  outline: `1px dashed ${focusOutlineColor}`,
+  border: `1px solid var(--eds_ui_background__medium)`,
+  outline: `1px dashed var(--eds_interactive_focus)`,
   outlineOffset: '2px',
   chevronColor: {
-    default: activatedColor,
-    disabled: disabledIconColor,
+    default: 'var(--eds_interactive_primary__resting)',
+    disabled: 'var(--eds_interactive_disabled__fill)',
   },
   iconColor: {
     interactive: {
-      color: activatedColor,
+      color: 'var(--eds_interactive_primary__resting)',
     },
     static: {
-      color: focusHoverColor,
+      color: 'var(--eds_text_static_icons__default)',
     },
   },
 }

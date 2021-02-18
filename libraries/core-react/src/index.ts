@@ -30,3 +30,4 @@ export * from './components/Menu'
 export * from './components/Pagination'
 export * from './components/Select'
 /* eslint-enable */
+export * from './utils/globalStyles'
