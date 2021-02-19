@@ -47,6 +47,7 @@ const StyledTooltipWrapper = styled.div<WrapperProps>`
 const StyledTooltip = styled.div`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
+  z-index: 350;
   background: ${tokens.background};
   fill: ${tokens.background};
   border-radius: ${tokens.borderRadius};
