@@ -1,0 +1,154 @@
+name: Checks
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+jobs:
+  setup:
+    name: Setup base files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout, install pnpm & cache 🛎️
+        run: |
+          REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git clone --filter=blob:none --no-checkout --depth 1 --sparse $REPO .
+          git sparse-checkout init --cone
+          git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
+          git checkout
+      - name: Install pnpm & dependencies 📦
+        uses: pnpm/action-setup@v1.2.1
+        with:
+          version: latest
+          bin_dest: ./pnpm/bin
+          run_install: |
+            - recursive: true
+      - name: Cache base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Test eds-core-react
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run test
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Lint all libraries
+        run: ./pnpm/bin/pnpm run lint ./libraries
+  build-tokens:
+    name: Build eds-tokens
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
+      - name: Save build to cache
+        uses: actions/cache@v2
+        with:
+          path: ./libraries/tokens
+          key: ${{ github.sha }}-build-tokens
+  build-icons:
+    name: Build eds-icons
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
+      - name: Save build to cache
+        uses: actions/cache@v2
+        with:
+          path: ./libraries/icons
+          key: ${{ github.sha }}-build-icons
+  build-core-react:
+    name: Build eds-core-react
+    runs-on: ubuntu-latest
+    needs: [build-icons, build-tokens]
+    steps:
+      - uses: actions/cache@v2
+        name: Get base files
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Get eds-icons build
+        uses: actions/cache@v2
+        with:
+          path: ./libraries/icons
+          key: ${{ github.sha }}-build-icons
+      - name: Get eds-tokens build
+        uses: actions/cache@v2
+        with:
+          path: ./libraries/tokens
+          key: ${{ github.sha }}-build-tokens
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build
+      - name: Save build to cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}-build-core-react
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Build storybook
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build:storybook
