@@ -1,46 +1,30 @@
 import * as React from 'react'
 import {
   forwardRef,
+  useRef,
   useState,
   HTMLAttributes,
-  ReactNode,
   SVGProps,
+  MutableRefObject,
 } from 'react'
-import styled, { css } from 'styled-components'
-import type { CSSObject } from 'styled-components'
+import styled from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
 import { usePopper, Placement } from '@hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
-const Wrapper = styled.div`
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-`
+const Arrow = styled.div`
+  &,
+  &::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+  }
 
-type WrapperProps = {
-  top: string | number
-  bottom: string | number
-  right: string | number
-  left: string | number
-  transform: string
-}
-
-const StyledTooltipWrapper = styled.div<WrapperProps>`
-  ${({ top, bottom, right, left, transform }) =>
-    css`
-      bottom: ${bottom};
-      top: ${top};
-      right: ${right};
-      left: ${left};
-      transform: ${transform};
-    `}
-  position: absolute;
-  align-self: center;
-  z-index: 350;
-  white-space: nowrap;
-  ::after {
+  &::before {
     content: '';
+    transform: rotate(45deg);
+    background: #333;
   }
 `
 
@@ -53,101 +37,43 @@ const StyledTooltip = styled.div`
   border-radius: ${tokens.borderRadius};
   min-height: ${tokens.tooltip.minHeight};
   box-sizing: border-box;
-  position: relative;
-`
+  .arrow {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+  }
+  &[data-popper-placement^='top'] > .arrow {
+    bottom: -4px;
+  }
 
-type ArrowProps = {
-  top: string
-  bottom: string
-  right: string
-  left: string
-} & SVGProps<SVGSVGElement>
+  &[data-popper-placement^='bottom'] > .arrow {
+    top: -4px;
+  }
 
-const TooltipArrow = styled.svg<ArrowProps>`
-  ${({ top, bottom, right, left }) =>
-    css`
-      bottom: ${bottom};
-      top: ${top};
-      right: ${right};
-      left: ${left};
-    `}
-  width: ${tokens.arrow.width};
-  height: ${tokens.arrow.height};
-  position: absolute;
-  fill: inherit;
+  &[data-popper-placement^='left'] > .arrow {
+    right: -4px;
+  }
+
+  &[data-popper-placement^='right'] > .arrow {
+    left: -4px;
+  }
 `
 
 export type TooltipProps = {
   /** Tooltip placement relative to anchor */
-<<<<<<< HEAD
-  placement?:
-    | 'topLeft'
-    | 'top'
-    | 'topRight'
-    | 'rightTop'
-    | 'right'
-    | 'rightBottom'
-    | 'bottomLeft'
-    | 'bottom'
-    | 'bottomRight'
-    | 'leftTop'
-    | 'left'
-    | 'leftBottom'
-  /** For controlled Tooltip */
-  open?: boolean
-  /** Tooltip title */
-  title?: string
-  /** Tooltip reference/anchor element */
-  children: ReactNode
-=======
   placement?: Placement
   /** Tooltip title when children is the anchor */
   title?: string
   /** Reference element for having tooltip decupled from the anchor (in tables etc) */
   anchorEl?: MutableRefObject<null>
->>>>>>> 85fc89b2 (♻️ Refactor Tooltip story)
 } & HTMLAttributes<HTMLDivElement>
 
 // Controller for TooltipItem
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-<<<<<<< HEAD
-    { className, title, children, placement = 'bottom', open = false, ...rest },
+    { className, title, anchorEl, placement = 'bottom', ...rest },
     ref,
   ) {
-    const [openState, setOpenState] = useState(open)
-
-    const handleOpen = () => {
-      setOpenState(true)
-    }
-
-    const handleClose = () => {
-      setOpenState(false)
-    }
-
-    const props = {
-      ...rest,
-      className,
-      ref,
-    }
-
-<<<<<<< HEAD
-    const placementToken: Placement = tokens.placement[placement]
-
-    const wrapperProps = {
-      right: placementToken.tooltipRight,
-      top: placementToken.tooltipTop,
-      bottom: placementToken.tooltipBottom,
-      left: placementToken.tooltipLeft,
-      transform: placementToken.transform,
-    }
-=======
-=======
-    { className, title, children, placement = 'auto', anchorEl, ...rest },
-    ref,
-  ) {
->>>>>>> 85fc89b2 (♻️ Refactor Tooltip story)
-    // React Popper example
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
 
@@ -157,55 +83,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       arrowRef,
       placement,
     )
->>>>>>> 25ef5832 (🚧 Popper spiked with Menu)
 
-<<<<<<< HEAD
-    const arrowProps = {
-      left: placementToken.arrowLeft,
-      right: placementToken.arrowRight,
-      top: placementToken.arrowTop,
-      bottom: placementToken.arrowBottom,
-    }
-    const arrowStyle: CSSObject = {
-      transform: `${placementToken.arrowTransform}`,
-    }
-    return (
-      <Wrapper {...props}>
-        <div
-          onMouseOver={handleOpen}
-          onMouseEnter={handleOpen}
-          onPointerEnter={handleOpen}
-          onPointerLeave={handleClose}
-          onMouseOut={handleClose}
-          onMouseLeave={handleClose}
-          onBlur={handleClose}
-          onFocus={handleOpen}
-        >
-          {children}
-        </div>
-        {openState && title !== '' && (
-          <StyledTooltipWrapper
-            style={{ justifySelf: 'center' }}
-            role="tooltip"
-            {...wrapperProps}
-          >
-            <StyledTooltip>
-              <TooltipArrow {...arrowProps} style={arrowStyle}>
-                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-              </TooltipArrow>
-              {title}
-            </StyledTooltip>
-          </StyledTooltipWrapper>
-        )}
-      </Wrapper>
-=======
     const props = {
       ...attributes.popper,
       className,
       ...rest,
     }
 
-    // React popper example:
     return (
       <StyledTooltip
         role="tooltip"
@@ -216,9 +100,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         {title}
         <Arrow ref={setArrowRef} style={styles.arrow} className="arrow" />
       </StyledTooltip>
->>>>>>> 85fc89b2 (♻️ Refactor Tooltip story)
     )
   },
 )
-
-// Tooltip.displayName = 'eds-tooltip'
