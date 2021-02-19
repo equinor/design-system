@@ -6,10 +6,12 @@ module.exports = {
     '../stories/components/**/*.stories.@(ts|tsx|mdx)',
     // '../stories/screens/**/*.@(ts|tsx|mdx)',
   ],
+
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
+    'storybook-dark-mode',
   ],
   webpackFinal: async (config) => {
     config.resolve.alias['@components'] = path.resolve(__dirname, '../src')

@@ -143,5 +143,9 @@ export const GlobalStyle = createGlobalStyle`
 
 }
   
+html body.dark {
+  --eds_infographic_substitute__pink_salmon: rgba(23, 36, 47, 1);
+  }
+
 
 `
