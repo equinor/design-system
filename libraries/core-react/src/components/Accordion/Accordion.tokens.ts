@@ -41,7 +41,7 @@ const token = {
     typography,
     color: {
       default: typography.color,
-      disabled: 'var(--eds_interactive_disabled__text)',
+      disabled: disabledColor,
       activated: 'var(--eds_interactive_primary__resting)',
     },
     background: {
