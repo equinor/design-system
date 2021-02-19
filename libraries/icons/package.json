@@ -25,7 +25,6 @@
     "commonjs/*"
   ],
   "scripts": {
-    "prepare": "pnpm run build",
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },

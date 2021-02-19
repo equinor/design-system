@@ -27,7 +27,6 @@
     "dist/*"
   ],
   "scripts": {
-    "prepare": "pnpm run build",
     "build": "rollup -c",
     "dev": "rollup -c -w NODE_ENV=development",
     "test": "jest",
