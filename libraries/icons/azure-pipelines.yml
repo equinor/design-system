@@ -14,15 +14,7 @@ trigger:
     include:
       - libraries/icons
 
-pr:
-  branches:
-    include:
-      - develop
-      - typescript
-      - theming
-  paths:
-    include:
-      - libraries/icons
+pr: none
 
 steps:
   - task: NodeTool@0
