@@ -1,5 +1,0 @@
-# no need to extend when running eslint from the root
-rules:
-  # storybook expects both default and named exports in the stories
-  import/no-default-export:
-    - off

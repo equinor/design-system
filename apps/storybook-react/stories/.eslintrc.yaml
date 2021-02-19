@@ -1,4 +1,0 @@
-root: true
-extends: ../../../.eslintrc.js
-rules:
-  import/no-default-export: "off"
