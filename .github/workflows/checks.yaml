@@ -4,9 +4,17 @@ on:
   pull_request:
     branches:
       - develop
+    paths:
+      - 'libraries/core-react/**'
+      - 'libraries/tokens/**'
+      - 'libraries/icons/**'
   push:
     branches:
       - develop
+    paths:
+      - 'libraries/core-react/**'
+      - 'libraries/tokens/**'
+      - 'libraries/icons/**'
 jobs:
   setup:
     name: Setup base files
