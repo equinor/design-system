@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Circular`, `Star` and `Dots` now have a `size` property for adjusting size.
   - `Circular` and `Dots` now have a `color` property following the same color scheme as our other components.
   - Refactored as compound components. You can now find the progress indicators under `Progress`, such as `Progress.Dots`, `Progress.Star` etc..
+    - The individual `LinearProgress`, `CircularProgress`, `StarProgress` & `DotProgress` will be removed at a later time
 
 ### Fixed 🐛
 
