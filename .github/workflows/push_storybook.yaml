@@ -119,29 +119,39 @@ jobs:
         run: |
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./libraries/core-react/Dockerfile.storybook .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
-      - uses: azure/appservice-settings@v1
+      - uses: azure/webapps-deploy@v2
         with:
-          app-name: eds-storybook-react
-          images: ${{ steps.image_tag.outputs.image_tag }}
+          app-name: 'eds-storybook-react'
           slot-name: development
-          app-settings-json: |
-            [
-                {
-                    "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-                    "value": "${{ secrets.REGISTRY_PASSWORD }}",
-                    "slotSetting": false
-                },
-                {
-                    "name": "DOCKER_REGISTRY_SERVER_URL",
-                    "value": "${{ secrets.REGISTRY_LOGIN_SERVER }}",
-                    "slotSetting": false
-                },
-                {
-                    "name": "DOCKER_REGISTRY_SERVER_USERNAME",
-                    "value": "${{ secrets.REGISTRY_USERNAME  }}",
-                    "slotSetting": false
-                }
-            ]
+          images: ${{ steps.image_tag.outputs.image_tag }}
+
+      - name: Azure logout
+        run: |
+          az logout
+
+      # - uses: azure/appservice-settings@v1
+      #   with:
+      #     app-name: eds-storybook-react
+      #     images: ${{ steps.image_tag.outputs.image_tag }}
+      #     slot-name: development
+      #     app-settings-json: |
+      #       [
+      #           {
+      #               "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+      #               "value": "${{ secrets.REGISTRY_PASSWORD }}",
+      #               "slotSetting": false
+      #           },
+      #           {
+      #               "name": "DOCKER_REGISTRY_SERVER_URL",
+      #               "value": "${{ secrets.REGISTRY_LOGIN_SERVER }}",
+      #               "slotSetting": false
+      #           },
+      #           {
+      #               "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+      #               "value": "${{ secrets.REGISTRY_USERNAME  }}",
+      #               "slotSetting": false
+      #           }
+      #       ]
   # deploy_docker:
   #   name: Deploy to Web app
   #   runs-on: ubuntu-latest
