@@ -62,9 +62,9 @@ const StyledTooltip = styled.div`
 export type TooltipProps = {
   /** Tooltip placement relative to anchor */
   placement?: Placement
-  /** Tooltip title when children is the anchor */
+  /** Tooltip title */
   title?: string
-  /** Reference element for having tooltip decupled from the anchor (in tables etc) */
+  /** Reference element */
   anchorEl?: MutableRefObject<null>
 } & HTMLAttributes<HTMLDivElement>
 

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import * as React from 'react'
 import {
   forwardRef,
@@ -16,47 +14,8 @@ import { Card } from '../Card'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { useCombinedRefs, usePopper } from '@hooks'
-import { PopoverItem } from './PopoverItem'
-import { PopoverAnchor } from './PopoverAnchor'
+import { usePopper } from '@hooks'
 import { popover as tokens } from './Popover.tokens'
-
-const Container = styled.div`
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-`
-
-const Anchor = styled.div`
-  &:focus {
-    outline: none;
-  }
-`
-type PopoverSplit = {
-  anchorElement: ReactNode
-  childArray: ReactNode[]
-}
-
-//////////
-// Moved from PopoverItem
-type WrapperProps = {
-  top: string | number
-  bottom: string | number
-  right: string | number
-  left: string | number
-  transform: string
-}
-
-const StyledPopoverWrapper = styled.div`
-  width: max-content;
-  align-self: center;
-  position: absolute;
-  z-index: 100;
-  flex-shrink: 0;
-  ::after {
-    content: '';
-  }
-`
 
 const StyledPopover = styled(Card)`
   ${typographyTemplate(tokens.header)}
@@ -68,6 +27,7 @@ const StyledPopover = styled(Card)`
   max-width: ${tokens.popover.maxWidth};
   min-height: ${tokens.popover.minHeight};
   box-shadow: ${tokens.elevation};
+  z-index: 100;
 
   .arrow {
     position: absolute;
@@ -91,14 +51,6 @@ const StyledPopover = styled(Card)`
   }
 `
 
-const PopoverArrow = styled.div`
-  width: ${tokens.arrow.width};
-  height: ${tokens.arrow.height};
-  position: absolute;
-  fill: ${tokens.background};
-  filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));
-`
-
 const StyledCloseButton = styled(Button)`
   position: absolute;
   top: 8px;
@@ -109,7 +61,6 @@ const StyledCloseButton = styled(Button)`
     height: 32px;
   }
 `
-////////
 
 const Arrow = styled.div`
   &,
@@ -127,25 +78,9 @@ const Arrow = styled.div`
     filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));
   }
 `
-
-// TODO: clean up after popper js spike
 export type PopoverProps = {
   /**  Popover placement relative to anchor */
   placement?:
-    | 'topLeft'
-    | 'top'
-    | 'topRight'
-    | 'rightTop'
-    | 'right'
-    | 'rightBottom'
-    | 'bottomLeft'
-    | 'bottom'
-    | 'bottomRight'
-    | 'leftTop'
-    | 'left'
-    | 'leftBottom'
-  /** popper placement */
-  position?:
     | 'auto'
     | 'auto-start'
     | 'auto-end'
@@ -161,10 +96,8 @@ export type PopoverProps = {
     | 'left'
     | 'left-start'
     | 'left-end'
-  /**  On Close function */
+  /**  On Close callback */
   onClose?: () => void
-  /**  Open activates Popover */
-  open?: boolean
   /** Anchor element reference */
   anchorEl?: MutableRefObject<null>
 } & HTMLAttributes<HTMLDivElement>
@@ -172,49 +105,9 @@ export type PopoverProps = {
 // Controller Component for PopoverItem
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   function Popover(
-    {
-      open,
-      children,
-      placement = 'bottom',
-      position = 'bottom',
-      anchorEl,
-      onClose,
-      ...rest
-    },
+    { children, placement = 'bottom', anchorEl, onClose, ...rest },
     ref,
   ) {
-    const props = {
-      ...rest,
-      placement,
-      ref,
-    }
-    if (!children) {
-      return <Container {...props} />
-    }
-    const anchorRef = useRef<HTMLDivElement>(null)
-
-    const { anchorElement, childArray } = React.Children.toArray(
-      children,
-    ).reduce(
-      (acc: PopoverSplit, child): PopoverSplit => {
-        if (isValidElement(child) && child.type === PopoverAnchor) {
-          return {
-            ...acc,
-            anchorElement: child,
-          }
-        }
-        return {
-          ...acc,
-          childArray: [...acc.childArray, child],
-        }
-      },
-      { anchorElement: null, childArray: [] },
-    )
-
-    if (open && anchorRef.current) {
-      anchorRef.current.focus()
-    }
-
     // React Popper example
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
@@ -223,14 +116,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       anchorEl,
       popperRef,
       arrowRef,
-      position,
+      placement,
     )
+
+    const props = {
+      ...rest,
+      ...attributes.popper,
+    }
     return (
-      <StyledPopover
-        ref={popperRef}
-        style={styles.popper}
-        {...attributes.popper}
-      >
+      <StyledPopover ref={popperRef} style={styles.popper} {...props}>
         <Arrow ref={setArrowRef} style={styles.arrow} className="arrow" />
 
         {children}
@@ -241,19 +135,3 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     )
   },
 )
-
-// Popover.displayName = 'eds-popover'
-// Todo remove Old return:
-// return (
-//   <Container {...props}>
-//     <Anchor aria-haspopup="true" ref={anchorRef}>
-//       {anchorElement}
-//     </Anchor>
-
-//     {open && (
-//       <PopoverItem {...props} anchorRef={anchorRef}>
-//         {childArray}
-//       </PopoverItem>
-//     )}
-//   </Container>
-// )
