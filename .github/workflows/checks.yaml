@@ -34,7 +34,7 @@ jobs:
           git remote add origin https://github.com/$GITHUB_REPOSITORY
           git config --local gc.auto 0
           # Now interesting part
-          git config core.sparseCheckout true
+          git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
           git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
           # echo ...
