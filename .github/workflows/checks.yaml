@@ -19,7 +19,7 @@ jobs:
       - name: Checkout, install pnpm & cache 🛎️
         run: |
           REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
-          git clone -b ${{ steps.extract_branch.outputs.branch }} --filter=blob:none --no-checkout --depth 1 --sparse $REPO .
+          git clone -b pull/1119/head --filter=blob:none --no-checkout --depth 1 --sparse $REPO .
           git sparse-checkout init --cone
           git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
           git checkout
