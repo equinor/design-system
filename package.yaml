@@ -4,7 +4,6 @@ engines:
 scripts:
   lint: eslint
   lint:all: pnpm run lint .
-  lint:storybook-react: pnpm run lint ./apps/storybook-react/stories
   lint:core-react: pnpm run lint ./libraries/core-react
   init: pnpm multi install --force && pnpm run build
   core-react: pnpm --filter @equinor/eds-core-react run dev
@@ -24,9 +23,6 @@ scripts:
   build:storefront: pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
-  dockerize-storybook-react: docker build -t eds/storybook-react -f apps/storybook-react/Dockerfile.dev .
-  storybook-docker-run: docker run -p 8080:80 eds/storybook-react
-  storybook-docker-inspect: docker run -it eds/storybook-react /bin/sh
   dockerize-storefront: >-
     docker build --build-arg GATSBY_STAGE=prod -t eds/storefront -f
     apps/storefront/Dockerfile .
