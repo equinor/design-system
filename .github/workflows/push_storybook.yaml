@@ -105,26 +105,23 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}-build-storybook
-      - name: 'Login via Azure CLI'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: 'Login to registry'
+      # - name: Login via Azure CLI
+      #   uses: azure/login@v1
+      #   with:
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Login to registry
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: 'Build and push image'
+      - name: Build and push image
         run: |
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./libraries/core-react/Dockerfile.storybook .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
-      - uses: azure/webapps-deploy@v2
+      - name: Deploy to Web app
+        uses: azure/webapps-deploy@v2
         with:
           app-name: 'eds-storybook-react'
-          slot-name: development
-          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
-
-      - name: Azure logout
-        run: |
-          az logout
+          slot-name: 'development'
+          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}'
