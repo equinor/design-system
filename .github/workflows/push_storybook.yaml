@@ -117,8 +117,8 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: 'Build and push image'
         run: |
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }})-f ./libraries/core-react/Dockerfile.storybook .
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }})
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./libraries/core-react/Dockerfile.storybook .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
       - uses: azure/webapps-deploy@v2
         with:
           app-name: eds-storybook-react
