@@ -47,7 +47,7 @@ const StyledTooltip = styled.div`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   background: ${tokens.background};
-  fill: #333;
+  fill: ${tokens.background};
   border-radius: ${tokens.borderRadius};
   min-height: ${tokens.tooltip.minHeight};
   box-sizing: border-box;
