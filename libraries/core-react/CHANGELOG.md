@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.5] - 2021-02-22
+
+### Added ✨
+
+- Progress indicators ([#1090](https://github.com/equinor/design-system/issues/1090), [#1098](https://github.com/equinor/design-system/issues/1098))
+  - `Circular`, `Star` and `Dots` now have a `size` property for adjusting size.
+  - `Circular` and `Dots` now have a `color` property following the same color scheme as our other components.
+  - Refactored as compound components. You can now find the progress indicators under `Progress`, such as `Progress.Dots`, `Progress.Star` etc..
+    - The individual `LinearProgress`, `CircularProgress`, `StarProgress` & `DotProgress` will be removed at a later time
+- `Accordion.Header` now has an `onToggle` callback to help defer rendering of content when `Accordion` are opened/closed ([#1121](https://github.com/equinor/design-system/pull/1121))
+
+### Fixed 🐛
+
+- Adjusted text and icon placements inside `Button` so that `Icon` (svg) will always align to the sides regardless of button width ([#1085](https://github.com/equinor/design-system/issues/1085))
+- Fixed `Menu` story where content would skew the `MenuItem` height (#1104)
+- Progress indicators ([#1090](https://github.com/equinor/design-system/issues/1090), [#1098](https://github.com/equinor/design-system/issues/1098))
+  - Adjustments so that `Circular` and `Dots` can be used inside `Button`
+  - Cleaned up component so that they are pure svgs now (except for `Linear`)
+
+### Changed 📓
+
+- Cleaned up sub-component naming, so no more repeating names such as, `Card.CardActions` or `Menu.MenuSection` ([#1083](https://github.com/equinor/design-system/issues/1083))
+  - The old sub-component names are still there but will be removed at a later time
+- Updated our storybook stories to better reflect usages of components with sub-components ([#1094](https://github.com/equinor/design-system/issues/1094))
+
+### Deprecated
+
+- Progress indicators ([#1090](https://github.com/equinor/design-system/issues/1090))
+  - Removed `variant` property on `Dots` (replaced by `color` property)
+- `Button` do no longer force size on nested `Icon`
+
 ## [0.8.4] - 2021-01-21
 
 ### Added ✨
