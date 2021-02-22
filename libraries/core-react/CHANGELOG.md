@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Circular` and `Dots` now have a `color` property following the same color scheme as our other components.
   - Refactored as compound components. You can now find the progress indicators under `Progress`, such as `Progress.Dots`, `Progress.Star` etc..
     - The individual `LinearProgress`, `CircularProgress`, `StarProgress` & `DotProgress` will be removed at a later time
+- `Accordion.Header` now has an `onToggle` callback to help defer rendering of content when `Accordion` are opened/closed ([#1121](https://github.com/equinor/design-system/pull/1121))
 
 ### Fixed 🐛
 
