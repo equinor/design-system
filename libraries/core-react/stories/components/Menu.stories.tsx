@@ -1,14 +1,7 @@
 import React, { useEffect, MutableRefObject } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import {
-  Menu,
-  MenuProps,
-  Typography,
-  Button,
-  Icon,
-  TopBar,
-} from '@equinor/eds-core-react'
+import { Menu, MenuProps, Typography, Button, Icon, TopBar } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 import { tokens } from '@equinor/eds-tokens'

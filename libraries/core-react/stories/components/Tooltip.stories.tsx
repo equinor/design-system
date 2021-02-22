@@ -1,11 +1,6 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
-import {
-  Tooltip,
-  TooltipProps,
-  Typography,
-  Button,
-} from '@equinor/eds-core-react'
+import { Tooltip, TooltipProps, Typography, Button } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 const Body = styled.div`

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import {
@@ -11,9 +11,9 @@ import {
   Menu,
   Button,
   Tooltip,
-} from '@equinor/eds-core-react'
+} from '@components'
 import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
-import './../style.css'
+// import './../style.css'
 
 Icon.add({ chevron_down, chevron_up })
 
@@ -238,30 +238,24 @@ export const CompactTable: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   const [state, setState] = React.useState<{
-    buttonEl: HTMLButtonElement
+    isOpen: boolean
     density: 'comfortable' | 'compact'
   }>({
+    isOpen: false,
     density: 'comfortable',
-    buttonEl: null,
   })
 
-  const { density, buttonEl } = state
-  const isOpen = Boolean(buttonEl)
+  const { density, isOpen } = state
 
   const setDensity = (density: 'comfortable' | 'compact') =>
     setState((prevState) => ({ ...prevState, density }))
 
-  const openMenu = (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
-    const target = e.target as HTMLButtonElement
-    setState((prevState) => ({ ...prevState, buttonEl: target }))
+  const openMenu = () => {
+    setState((prevState) => ({ ...prevState, isOpen: true }))
   }
 
   const closeMenu = () =>
-    setState((prevState) => ({ ...prevState, buttonEl: null }))
+    setState((prevState) => ({ ...prevState, isOpen: false }))
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
@@ -280,6 +274,8 @@ export const CompactTable: Story<TableProps> = () => {
     }
   }
 
+  const referenceElement = useRef(null)
+
   return (
     <div>
       <TopBar>
@@ -290,8 +286,8 @@ export const CompactTable: Story<TableProps> = () => {
             id="menuButton"
             aria-controls="menu-on-button"
             aria-haspopup="true"
-            aria-expanded={Boolean(buttonEl)}
-            onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+            aria-expanded={isOpen}
+            onClick={(e) => (isOpen ? closeMenu() : openMenu())}
             onKeyDown={onKeyPress}
           >
             <Icon data={accessible} title="accessible"></Icon>
@@ -299,8 +295,7 @@ export const CompactTable: Story<TableProps> = () => {
           <Menu
             id="menu-on-button"
             aria-labelledby="menuButton"
-            open={Boolean(buttonEl)}
-            anchorEl={buttonEl}
+            anchorEl={referenceElement}
             onClose={closeMenu}
           >
             <Menu.MenuSection title="Density">

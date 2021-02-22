@@ -93,26 +93,23 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   const popperRef = useRef<HTMLDivElement | null>(null)
-  // React Popper example
   const { styles, attributes } = usePopper(anchorEl, popperRef, null, placement)
-
-  const paperProps = {
-    open,
-  }
 
   const menuProps = {
     ...rest,
   }
-
+  const props = {
+    ...attributes.popper,
+    open,
+  }
   return (
     anchorEl &&
     styles.popper && (
       <StyledPaper
-        {...paperProps}
         elevation="raised"
         ref={popperRef}
         style={styles.popper}
-        {...attributes.popper}
+        {...props}
       >
         <MenuList
           {...menuProps}
