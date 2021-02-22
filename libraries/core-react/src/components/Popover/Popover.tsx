@@ -31,7 +31,6 @@ const StyledPopover = styled(Card)`
   z-index: 100;
 
   .arrow {
-    position: absolute;
     z-index: -1;
     width: 10px;
     height: 10px;

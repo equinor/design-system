@@ -47,13 +47,6 @@ const Grid = styled.div`
   height: auto;
 `
 
-const Anchor = styled.div.attrs({ tabIndex: 0 })`
-  background: lightgrey;
-  padding: 14px;
-  height: min-content;
-  width: fit-content;
-`
-
 const onClick = (event: React.MouseEvent) => {
   action('clicked')(event)
   event.stopPropagation()
@@ -220,7 +213,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
   const referenceElement = React.useRef(null)
 
   return (
-    <Grid style={{ gridAutoFlow: 'row', position: 'relative' }}>
+    <Grid style={{ gridAutoFlow: 'row', position: 'relative', margin: '5rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
       <Button
         ref={referenceElement}
@@ -344,7 +337,7 @@ export const Examples: Story<MenuProps> = () => {
   }
 
   return (
-    <Grid>
+    <Grid style={{ marginBottom: '3rem' }}>
       <Button
         ref={oneRef}
         id="anchor-iconbuttons"

@@ -7,25 +7,39 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Menu } from '.'
 import { MenuProps } from './Menu'
+import { Button } from '../Button'
 
 const { MenuItem, MenuSection } = Menu
 
 // We override Menu for testing and set props to partial because AnchorEl is applied to children in custom render function
 const TestMenu = Menu as React.ForwardRefExoticComponent<Partial<MenuProps>>
 
-const StyledMenu = styled(TestMenu)`
+// const StyledMenu = styled(TestMenu)`
+//   background: red;
+// `
+
+const StyledMenu = styled(Menu)`
   background: red;
 `
 
 afterEach(cleanup)
 
+const MenuWithRef = () => {
+  const reference = React.useRef(null)
+
+  return (
+    <>
+      <Button ref={reference}>Ref</Button>
+      <StyledMenu open anchorEl={reference}>
+        <div>some random content</div>
+      </StyledMenu>
+    </>
+  )
+}
+
 describe('Menu', () => {
   it('Can extend the css for the component', () => {
-    render(
-      <StyledMenu open>
-        <div>some random content</div>
-      </StyledMenu>,
-    )
+    render(<MenuWithRef />)
     const menuContainer = screen.getByRole('menu', { hidden: true })
 
     expect(menuContainer).toHaveStyleRule('background', 'red')

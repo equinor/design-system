@@ -54,7 +54,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     anchorEl,
     onClose: onCloseCallback,
     open = false,
-    placement = 'auto',
+    placement,
     ...rest
   },
   ref,
