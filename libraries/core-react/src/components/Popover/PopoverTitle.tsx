@@ -16,6 +16,7 @@ const StyledPopoverTitle = styled.div`
 const StyledDivider = styled(Divider)`
   margin-left: -16px;
   margin-right: -16px;
+  margin-bottom: 0;
   width: auto;
   max-width: 560px;
 `

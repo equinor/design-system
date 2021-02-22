@@ -23,6 +23,7 @@ const StyledPopover = styled(Card)`
   background: ${tokens.background};
   fill: ${tokens.background};
   width: max-content;
+  height: auto;
   max-height: ${tokens.popover.maxHeight};
   max-width: ${tokens.popover.maxWidth};
   min-height: ${tokens.popover.minHeight};
@@ -31,6 +32,7 @@ const StyledPopover = styled(Card)`
 
   .arrow {
     position: absolute;
+    z-index: -1;
     width: 10px;
     height: 10px;
   }
@@ -108,7 +110,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     { children, placement = 'bottom', anchorEl, onClose, ...rest },
     ref,
   ) {
-    // React Popper example
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
 
