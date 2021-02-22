@@ -81,6 +81,17 @@ describe('Accordion', () => {
     fireEvent.click(header)
     expect(header).toHaveAttribute('aria-expanded', 'true')
   })
+  it('triggers onToggle callback', () => {
+    const mockOnToggle = jest.fn()
+    render(
+      <AccordionItem isExpanded>
+        <AccordionHeader onToggle={mockOnToggle}>Summary 1</AccordionHeader>
+      </AccordionItem>,
+    )
+    const header = screen.queryByText('Summary 1').parentNode
+    fireEvent.click(header)
+    expect(mockOnToggle).toHaveBeenCalled()
+  })
   it('Set header level', () => {
     render(<SimpleAccordion headerLevel="h3" />)
     expect(document.querySelectorAll('h3')).toHaveLength(2)

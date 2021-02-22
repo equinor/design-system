@@ -90,6 +90,8 @@ type AccordionHeaderProps = {
   disabled?: boolean
   /** @ignore */
   toggleExpanded?: () => void
+  /** Accordion item toggle callback */
+  onToggle?: () => void
 } & AccordionProps &
   HTMLAttributes<HTMLDivElement>
 
@@ -116,6 +118,9 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
     const handleClick = () => {
       if (!disabled) {
         toggleExpanded()
+        if (props.onToggle) {
+          props.onToggle()
+        }
       }
     }
 
@@ -123,6 +128,9 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
       const { key } = event
       if (key === 'Enter' || key === ' ') {
         toggleExpanded()
+        if (props.onToggle) {
+          props.onToggle()
+        }
         event.preventDefault()
       }
     }
