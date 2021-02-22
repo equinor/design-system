@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress indicators ([#1090](https://github.com/equinor/design-system/issues/1090), [#1098](https://github.com/equinor/design-system/issues/1098))
   - `Circular`, `Star` and `Dots` now have a `size` property for adjusting size.
   - `Circular` and `Dots` now have a `color` property following the same color scheme as our other components.
-  - Added compound component support. You can now find the progress indicators as `Progress.Dots`, `Progress.Star` etc..
+  - Refactored as compound components. You can now find the progress indicators under `Progress`, such as `Progress.Dots`, `Progress.Star` etc..
 
 ### Fixed 🐛
 
