@@ -123,47 +123,8 @@ jobs:
         with:
           app-name: 'eds-storybook-react'
           slot-name: development
-          images: ${{ steps.image_tag.outputs.image_tag }}
+          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
 
       - name: Azure logout
         run: |
           az logout
-
-      # - uses: azure/appservice-settings@v1
-      #   with:
-      #     app-name: eds-storybook-react
-      #     images: ${{ steps.image_tag.outputs.image_tag }}
-      #     slot-name: development
-      #     app-settings-json: |
-      #       [
-      #           {
-      #               "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-      #               "value": "${{ secrets.REGISTRY_PASSWORD }}",
-      #               "slotSetting": false
-      #           },
-      #           {
-      #               "name": "DOCKER_REGISTRY_SERVER_URL",
-      #               "value": "${{ secrets.REGISTRY_LOGIN_SERVER }}",
-      #               "slotSetting": false
-      #           },
-      #           {
-      #               "name": "DOCKER_REGISTRY_SERVER_USERNAME",
-      #               "value": "${{ secrets.REGISTRY_USERNAME  }}",
-      #               "slotSetting": false
-      #           }
-      #       ]
-  # deploy_docker:
-  #   name: Deploy to Web app
-  #   runs-on: ubuntu-latest
-  #   needs: [build_push_docker]
-  #   steps:
-  #     - name: 'Deploy to Azure Container Instances'
-  #       uses: 'azure/aci-deploy@v1'
-  #       with:
-  #         resource-group: ${{ secrets.RESOURCE_GROUP }}
-  #         dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-  #         image: ${{ needs.build_push_docker.outputs.image_tag }}
-  #         registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-  #         registry-username: ${{ secrets.REGISTRY_USERNAME }}
-  #         registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-  #         name: eds-storybook-react
