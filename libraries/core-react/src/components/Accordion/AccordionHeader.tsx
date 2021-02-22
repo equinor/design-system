@@ -60,7 +60,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     boxSizing: 'border-box',
     color:
       (disabled &&
-        `var(--eds_infographic_substitute__pink_salmon, ${headerColor.disabled})`) ||
+        `var(--eds_interactive_disabled__text, ${headerColor.disabled})`) ||
       headerColor.default,
     outline: 'none',
     '&[data-focus-visible-added]:focus': {
@@ -71,6 +71,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     cursor: disabled ? 'not-allowed' : 'pointer',
     paddingLeft: '16px',
     paddingRight: '16px',
+    paddingTop: '1rem',
   }),
 )
 
