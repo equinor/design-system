@@ -1,6 +1,16 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
+import { useRef } from 'react'
 import { render, cleanup, screen, fireEvent } from './test-utils'
+import {
+  // render,
+  // cleanup,
+  // screen,
+  // fireEvent,
+  RenderOptions,
+  RenderResult,
+} from '@testing-library/react'
+
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
@@ -14,18 +24,14 @@ const { MenuItem, MenuSection } = Menu
 // We override Menu for testing and set props to partial because AnchorEl is applied to children in custom render function
 const TestMenu = Menu as React.ForwardRefExoticComponent<Partial<MenuProps>>
 
-// const StyledMenu = styled(TestMenu)`
-//   background: red;
-// `
-
-const StyledMenu = styled(Menu)`
+const StyledMenu = styled(TestMenu)`
   background: red;
 `
 
 afterEach(cleanup)
 
 const MenuWithRef = () => {
-  const reference = React.useRef(null)
+  const reference = useRef(null)
 
   return (
     <>
@@ -39,7 +45,12 @@ const MenuWithRef = () => {
 
 describe('Menu', () => {
   it('Can extend the css for the component', () => {
-    render(<MenuWithRef />)
+    //render(<MenuWithRef />)
+    render(
+      <StyledMenu open>
+        <div>some random content</div>
+      </StyledMenu>,
+    )
     const menuContainer = screen.getByRole('menu', { hidden: true })
 
     expect(menuContainer).toHaveStyleRule('background', 'red')

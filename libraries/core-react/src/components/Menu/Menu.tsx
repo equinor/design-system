@@ -103,21 +103,18 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     open,
   }
   return (
-    anchorEl &&
-    styles.popper && (
-      <StyledPaper
-        elevation="raised"
-        ref={popperRef}
-        style={styles.popper}
-        {...props}
+    <StyledPaper
+      elevation="raised"
+      ref={popperRef}
+      style={styles.popper}
+      {...props}
+    >
+      <MenuList
+        {...menuProps}
+        ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}
       >
-        <MenuList
-          {...menuProps}
-          ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}
-        >
-          {children}
-        </MenuList>
-      </StyledPaper>
-    )
+        {children}
+      </MenuList>
+    </StyledPaper>
   )
 })

@@ -1,13 +1,13 @@
 import * as React from 'react'
-import { ElementType, ReactElement, ReactNode } from 'react'
+import { ElementType, ReactElement, ReactNode, MutableRefObject } from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 
 const AllTheProviders = ({ children }: { children: ReactNode }) => {
-  const anchorRef = React.useRef()
-  const [anchorEl, setAnchorEl] = React.useState<ElementType>(null)
+  const anchorRef = React.useRef(null)
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
   React.useEffect(() => {
-    setAnchorEl(anchorRef.current)
+    setAnchorEl(anchorRef)
   }, [anchorRef])
 
   const updatedChildren = React.Children.map(children, (child) =>
