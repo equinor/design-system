@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - develop
+      - beta-font
     paths:
       - 'libraries/core-react/**'
 jobs:
