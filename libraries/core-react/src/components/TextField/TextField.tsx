@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { Input } from './Input'
+import { Icon } from './Icon'
+import { InputWrapper } from './InputWrapper'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { TextFieldProvider } from './context'
@@ -10,6 +11,14 @@ import type { Variants } from './types'
 const Container = styled.div`
   min-width: 100px;
   width: 100%;
+`
+
+const RelativeContainer = styled.div`
+  position: relative;
+`
+
+const PaddedInputWrapper = styled(InputWrapper)`
+  padding-right: 32px;
 `
 
 export type TextFieldProps = {
@@ -87,7 +96,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     }
 
     const labelProps = {
-      inputId: id,
+      htmlFor: id,
       label,
       meta,
     }
@@ -99,12 +108,21 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       <Container {...containerProps}>
         <TextFieldProvider>
           {showLabel && <Label {...labelProps} />}
-          <Input {...inputProps} />
+          <RelativeContainer>
+            {inputIcon ? (
+              <>
+                <PaddedInputWrapper {...inputProps} />
+                <Icon isDisabled={disabled} variant={variant}>
+                  {inputIcon}
+                </Icon>
+              </>
+            ) : (
+              <InputWrapper {...inputProps} />
+            )}
+          </RelativeContainer>
           {showHelperText && <HelperText {...helperProps} />}
         </TextFieldProvider>
       </Container>
     )
   },
 )
-
-// TextField.displayName = 'eds-text-field'

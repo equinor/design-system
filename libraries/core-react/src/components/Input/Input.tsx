@@ -1,11 +1,9 @@
 import * as React from 'react'
-import { ReactNode, ElementType, InputHTMLAttributes } from 'react'
+import { ElementType, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
 import { typographyTemplate, spacingsTemplate } from '@utils'
-import { useTextField } from '../context'
-import { Icon } from '../Icon'
-import type { Variants } from '../types'
+import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 
 const Variation = ({ variant }: { variant: InputVariantProps }) => {
@@ -65,30 +63,13 @@ const StyledInput = styled.input<StyledProps>`
   }
 `
 
-const Container = styled.div`
-  position: relative;
-`
-
-type StyledIconProps = {
-  spacings: Spacing
-}
-
-const StyledIcon = styled(Icon)<StyledIconProps>`
-  position: absolute;
-  right: ${({ spacings }) => spacings.right};
-  top: ${({ spacings }) => spacings.top};
-  bottom: ${({ spacings }) => spacings.bottom};
-`
-
-type TextfieldInputProps = {
+export type InputProps = {
   /** Specifies if text should be bold */
   multiline?: boolean
   /** Placeholder */
   placeholder?: string
   /** Variant */
   variant?: Variants
-  /** Icon to be embeded in input field */
-  inputIcon?: ReactNode
   /** Disabled state */
   disabled?: boolean
   /** Type */
@@ -97,41 +78,20 @@ type TextfieldInputProps = {
   readonly?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
-const TextFieldInput = React.forwardRef<HTMLInputElement, TextfieldInputProps>(
-  function TextFieldInput(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  function Input(
     {
       multiline = false,
       variant = 'default',
-      inputIcon,
       disabled = false,
       type = 'text',
       ...other
     },
     ref,
   ) {
-    const { handleFocus, handleBlur } = useTextField()
-
     const as: ElementType = multiline ? 'textarea' : 'input'
     const inputVariant = tokens[variant]
-    let spacings = tokens.spacings.comfortable
-
-    if (inputIcon) {
-      spacings = {
-        ...spacings,
-        input: {
-          ...spacings.input,
-          right: '32px',
-        },
-      }
-    }
-
-    const iconProps = {
-      spacings: spacings.icon,
-      isDisabled: disabled,
-      color: inputVariant.icon.color,
-      disabledColor: inputVariant.icon.disabledColor,
-      focusColor: inputVariant.focus.icon.color,
-    }
+    const spacings = tokens.spacings.comfortable
 
     const inputProps = {
       as,
@@ -139,23 +99,10 @@ const TextFieldInput = React.forwardRef<HTMLInputElement, TextfieldInputProps>(
       type,
       disabled,
       variant: inputVariant,
-      spacings: spacings.input,
+      spacings: spacings,
       ...other,
     }
 
-    return (
-      <Container>
-        <StyledInput
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          {...inputProps}
-        />
-        {inputIcon && <StyledIcon {...iconProps}>{inputIcon}</StyledIcon>}
-      </Container>
-    )
+    return <StyledInput {...inputProps} />
   },
 )
-
-// Input.displayName = 'eds-text-field-input'
-
-export { TextFieldInput as Input }

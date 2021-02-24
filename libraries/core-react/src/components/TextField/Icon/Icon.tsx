@@ -1,22 +1,21 @@
 import * as React from 'react'
+import { HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { useTextField } from '../context'
+import { input as tokens } from './Icon.token'
+import type { Spacing } from '@equinor/eds-tokens'
+import type { Variants, ColorStateProps } from '../types'
 
-type VariationProps = {
-  color: string
-  focusColor: string
-  disabledColor: string
+type StyledIconProps = {
+  colors: ColorStateProps
   isDisabled?: boolean
   isFocused?: boolean
+  spacings: Spacing
 }
 
-const Variation = ({
-  color,
-  focusColor,
-  disabledColor,
-  isDisabled,
-  isFocused,
-}: VariationProps) => {
+const Variation = ({ colors, isDisabled, isFocused }: StyledIconProps) => {
+  const { focusColor, color, disabledColor } = colors
+
   if (isDisabled) {
     return css`
       fill: ${disabledColor};
@@ -32,35 +31,72 @@ const Variation = ({
   `
 }
 
-const StyledIcon = styled.div`
+const StyledIcon = styled.div<StyledIconProps>`
   width: 16px;
   height: 16px;
   ${Variation}
 `
 
+const StyledIputIcon = styled(StyledIcon)`
+  position: absolute;
+  right: ${({ spacings }) => spacings.right};
+  top: ${({ spacings }) => spacings.top};
+  bottom: ${({ spacings }) => spacings.bottom};
+`
+
 type TextfieldIconProps = {
-  /** Disabled color */
-  disabledColor: string
-  /** Focus color */
-  focusColor: string
-  /** Color */
-  color: string
   /** isDisabled */
   isDisabled?: boolean
-}
+  /** Variant */
+  variant?: Variants
+  /** Is the icon inside a text field */
+  isInputIcon?: boolean
+  /** Spacing object, comfortable is default */
+  spacings?: Spacing
+  /** Colors */
+  colors?: ColorStateProps
+} & HTMLAttributes<HTMLDivElement>
 
 const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
-  function InputIcon({ children, ...other }, ref) {
+  function InputIcon(
+    {
+      variant = 'default',
+      isDisabled = false,
+      isInputIcon = true,
+      spacings = tokens.spacings.comfortable,
+      colors = {
+        color: tokens[variant].color,
+        disabledColor: tokens[variant].disabledColor,
+        focusColor: tokens[variant].focusColor,
+      },
+      children,
+      ...other
+    },
+    ref,
+  ) {
     const { isFocused } = useTextField()
 
+    const iconProps = {
+      spacings,
+      isDisabled,
+      colors,
+      isFocused,
+    }
+
     return (
-      <StyledIcon ref={ref} isFocused={isFocused} {...other}>
-        {children}
-      </StyledIcon>
+      <>
+        {isInputIcon ? (
+          <StyledIputIcon ref={ref} {...iconProps} {...other}>
+            {children}
+          </StyledIputIcon>
+        ) : (
+          <StyledIcon ref={ref} {...iconProps} {...other}>
+            {children}
+          </StyledIcon>
+        )}
+      </>
     )
   },
 )
-
-// Icon.displayName = 'eds-text-field-icon'
 
 export { InputIcon as Icon }

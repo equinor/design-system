@@ -9,40 +9,20 @@ const {
 
 const spacings = {
   comfortable: {
-    input: {
-      left: comfortable.small,
-      right: comfortable.small,
-      top: '6px',
-      bottom: '6px',
-    },
-    icon: {
-      left: comfortable.small,
-      right: comfortable.small,
-      top: '10px',
-      bottom: '10px',
-    },
+    left: comfortable.small,
+    right: comfortable.small,
+    top: '6px',
+    bottom: '6px',
   },
   compact: {
-    input: {
-      left: comfortable.x_small,
-      right: comfortable.x_small,
-      top: comfortable.x_small,
-      bottom: comfortable.x_small,
-    },
-    icon: {
-      left: comfortable.small,
-      right: comfortable.small,
-      top: '10px',
-      bottom: '10px',
-    },
+    left: comfortable.x_small,
+    right: comfortable.x_small,
+    top: comfortable.x_small,
+    bottom: comfortable.x_small,
   },
 }
 
 export type InputVariantProps = {
-  icon: {
-    color: string
-    disabledColor: string
-  }
   border: {
     outline: { color: string; width: string }
     bottom: { color: string; width: string }
@@ -63,14 +43,8 @@ type InputProps = {
   typography: Typography
   placeholderColor: string
   spacings: {
-    comfortable: {
-      input: Spacing
-      icon: Spacing
-    }
-    compact: {
-      input: Spacing
-      icon: Spacing
-    }
+    comfortable: Spacing
+    compact: Spacing
   }
   default: InputVariantProps
   error: InputVariantProps
@@ -87,10 +61,6 @@ export const input: InputProps = {
   placeholderColor: colors.text.static_icons__tertiary.hex,
   spacings,
   default: {
-    icon: {
-      color: colors.text.static_icons__tertiary.hex,
-      disabledColor: colors.interactive.disabled__fill.hex,
-    },
     border: {
       outline: { color: 'transparent', width: '1px' },
       bottom: { color: colors.text.static_icons__tertiary.hex, width: '1px' },
@@ -106,10 +76,6 @@ export const input: InputProps = {
     },
   },
   error: {
-    icon: {
-      color: colors.interactive.danger__resting.hex,
-      disabledColor: colors.interactive.disabled__fill.hex,
-    },
     border: {
       outline: { color: colors.interactive.danger__resting.hex, width: '1px' },
       bottom: { color: 'transparent', width: '1px' },
@@ -125,10 +91,6 @@ export const input: InputProps = {
     },
   },
   warning: {
-    icon: {
-      color: colors.interactive.warning__resting.hex,
-      disabledColor: colors.interactive.disabled__fill.hex,
-    },
     border: {
       bottom: { color: 'transparent', width: '1px' },
       outline: { color: colors.interactive.warning__resting.hex, width: '1px' },
@@ -144,10 +106,6 @@ export const input: InputProps = {
     },
   },
   success: {
-    icon: {
-      color: colors.interactive.success__resting.hex,
-      disabledColor: colors.interactive.disabled__fill.hex,
-    },
     border: {
       outline: { color: colors.interactive.success__resting.hex, width: '1px' },
       bottom: { color: 'transparent', width: '1px' },

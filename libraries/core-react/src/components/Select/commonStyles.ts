@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react'
-import { Input } from '../TextField/Input'
+import { Input } from '../Input'
 import { List } from '../List'
 import { Button } from '../Button'
 import styled from 'styled-components'

@@ -2,22 +2,19 @@ import * as React from 'react'
 import { ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate } from '@utils'
-import {
-  HelperTextVariantProps,
-  helperText as tokens,
-} from './HelperText.token'
+import { helperText as tokens } from './HelperText.token'
 import { useTextField } from '../context'
 import { Icon } from '../Icon'
-import type { Variants } from '../types'
+import type { Variants, ColorStateProps } from '../types'
 import type { Spacing } from '@equinor/eds-tokens'
 
-type VariantionProps = {
-  variant: HelperTextVariantProps
+type VariationProps = {
+  variant: ColorStateProps
   isFocused: boolean
   isDisabled: boolean
 }
 
-const Variation = ({ variant, isFocused, isDisabled }: VariantionProps) => {
+const Variation = ({ variant, isFocused, isDisabled }: VariationProps) => {
   if (!variant) {
     return ``
   }
@@ -48,19 +45,15 @@ type StyledProps = {
 const Container = styled.div<StyledProps>`
   display: flex;
   align-items: flex-end;
-
-  margin-left: ${({ spacings }) => spacings.left};
   margin-top: ${({ spacings }) => spacings.top};
 `
-const Text = styled.p`
-  margin: 0;
+const Text = styled.p<StyledProps & VariationProps>`
   ${typographyTemplate(tokens.typography)}
+  margin: 0 0 0 ${({ spacings }) => spacings.left};
   ${Variation}
 `
 
-const StyledIcon = styled(Icon)<StyledProps>`
-  margin-right: ${({ spacings }) => spacings.left};
-`
+const StyledIcon = styled(Icon)<StyledProps>``
 
 type TextfieldHelperTextProps = {
   /** Helper text */
@@ -85,9 +78,7 @@ const TextfieldHelperText = React.forwardRef<
 
   const { isFocused } = useTextField()
 
-  const iconProps = {
-    spacings,
-    isDisabled,
+  const colors = {
     color: helperVariant.color,
     disabledColor: helperVariant.disabledColor,
     focusColor: helperVariant.focusColor,
@@ -95,18 +86,26 @@ const TextfieldHelperText = React.forwardRef<
 
   return (
     <Container ref={ref} {...rest} spacings={spacings}>
-      {icon && <StyledIcon {...iconProps}>{icon}</StyledIcon>}
+      {icon && (
+        <StyledIcon
+          isDisabled={isDisabled}
+          spacings={spacings}
+          colors={colors}
+          isInputIcon={false}
+        >
+          {icon}
+        </StyledIcon>
+      )}
       <Text
         variant={helperVariant}
         isFocused={isFocused}
         isDisabled={isDisabled}
+        spacings={spacings}
       >
         {helperText}
       </Text>
     </Container>
   )
 })
-
-// HelperText.displayName = 'eds-text-field-helperText'
 
 export { TextfieldHelperText as HelperText }

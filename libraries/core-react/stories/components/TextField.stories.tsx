@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, TextFieldProps, Icon } from '@components'
+import { TextField, TextFieldProps } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
@@ -136,34 +136,95 @@ export const Disabled: Story<TextFieldProps> = () => (
   />
 )
 
-export const variants: Story<TextFieldProps> = () => (
+export const WithIcons: Story<TextFieldProps> = () => (
+  <Wrapper>
+    <TextField
+      id="storybook-warning-icon"
+      placeholder="Placeholder text"
+      label="Some warning input"
+      inputIcon={ICONS.WARNING}
+    />
+    <TextField
+      id="storybook-positive-icon"
+      placeholder="Placeholder text placeholder text"
+      label="Some positive input"
+      inputIcon={ICONS.SUCCESS}
+    />
+    <TextField
+      id="storybook-disabled"
+      placeholder="Placeholder text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+      inputIcon={ICONS.SUCCESS}
+    />
+  </Wrapper>
+)
+WithIcons.storyName = 'With icons'
+
+export const Variants: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
       id="storybook-error"
       placeholder="Placeholder text Placeholder text Placeholder text"
       label="Error"
       meta="Meta"
-      helperText="Helper Text"
+      helperText="Validation error"
       variant="error"
       helperIcon={ICONS.ERROR}
+    />
+    <TextField
+      id="storybook-error-two"
+      placeholder="Placeholder text "
+      label="Error"
+      meta="Meta"
+      helperText="Validation error"
+      variant="error"
+      inputIcon={ICONS.ERROR}
     />
     <TextField
       id="storybook-warning"
       placeholder="Placeholder text Placeholder text Placeholder text"
       label="Warning"
       meta="Meta"
-      helperText="Helper Text"
+      helperText="Helper/warning text"
       variant="warning"
       helperIcon={ICONS.WARNING}
+    />
+    <TextField
+      id="storybook-warning-two"
+      placeholder="Placeholder text Placeholder text Placeholder text"
+      label="Warning"
+      meta="Meta"
+      helperText="Helper/warning text"
+      variant="warning"
+      inputIcon={ICONS.WARNING}
     />
     <TextField
       id="storybook-success"
       placeholder="Placeholder text Placeholder text Placeholder text"
       label="Success"
       meta="Meta"
-      helperText="Helper Text"
+      helperText="Helper text"
       variant="success"
       helperIcon={ICONS.SUCCESS}
     />
+    <TextField
+      id="storybook-success-two"
+      placeholder="Placeholder text Placeholder text Placeholder text"
+      label="Success"
+      meta="Meta"
+      helperText="Helper text"
+      variant="success"
+      inputIcon={ICONS.SUCCESS}
+    />
   </Wrapper>
 )
+
+Variants.parameters = {
+  docs: {
+    storyDescription: `Examples of validation states. You can add the icon in the helper
+    text or inside the text input, both not both places.`,
+  },
+}
