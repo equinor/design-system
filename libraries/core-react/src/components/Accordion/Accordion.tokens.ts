@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { Typography, Border } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -29,6 +29,7 @@ type AccordionToken = {
     color: typeof token.header.color
     background: typeof token.header.background
   }
+  //border: Border
   border: string
   outline: string
   outlineOffset: string
@@ -50,6 +51,11 @@ const token = {
     },
   },
   border: `1px solid ${borderColor}`,
+  /*   border: {
+    width: '1px',
+    color: borderColor,
+    type: 'border',
+  }, */
   outline: `1px dashed ${focusOutlineColor}`,
   outlineOffset: '2px',
   chevronColor: {

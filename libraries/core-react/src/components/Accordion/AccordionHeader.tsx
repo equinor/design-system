@@ -8,6 +8,7 @@ import { Icon } from '../Icon'
 import { AccordionHeaderTitle } from './AccordionHeaderTitle'
 import { accordion as tokens } from './Accordion.tokens'
 import type { AccordionProps } from './Accordion.types'
+// import { bordersTemplate } from '@utils'
 
 Icon.add({ chevron_down, chevron_up })
 
@@ -58,7 +59,10 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     borderBottom: border,
     borderLeft: border,
     boxSizing: 'border-box',
-    color: (disabled && headerColor.disabled) || headerColor.default,
+    color:
+      (disabled &&
+        `var(--eds_interactive_disabled__text, ${headerColor.disabled})`) ||
+      `var(--eds_text_static_icons__default, ${headerColor.default})`,
     outline: 'none',
     '&[data-focus-visible-added]:focus': {
       outline,
