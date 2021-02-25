@@ -1,13 +1,13 @@
 import { addDecorator } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
-import { GlobalStyle } from '../stories/testing/GlobalStyles'
+import { GlobalStyleDark } from '../stories/testing/GlobalStyles'
 
 addDecorator(withInfo)
 
 export const decorators = [
   (Story) => (
     <>
-      <GlobalStyle />
+      <GlobalStyleDark />
       <Story />
     </>
   ),

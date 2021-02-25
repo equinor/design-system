@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 import { Icon } from '../Icon'
 
-const { enabled } = tokens
-
 type BannerIconVariant = 'info' | 'warning'
 
 type StyledBannerIconProps = {
@@ -17,14 +15,14 @@ const StyledBannerIcon = styled.span<StyledBannerIconProps>`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-radius: ${enabled.icon.shape.borderRadius};
+  border-radius: ${tokens.icon.shape.borderRadius};
   background-color: ${({ variant }) =>
     variant === 'warning'
-      ? enabled.icon.warning.background
-      : enabled.icon.info.background};
-  width: ${enabled.icon.shape.minWidth};
-  height: ${enabled.icon.shape.minHeight};
-  margin-right: ${enabled.spacings};
+      ? tokens.icon.warning.background
+      : tokens.icon.info.background};
+  width: ${tokens.icon.shape.minWidth};
+  height: ${tokens.icon.shape.minHeight};
+  margin-right: ${tokens.spacings.right};
 `
 
 type BannerIconProps = {
@@ -41,9 +39,7 @@ export const BannerIcon: FC<BannerIconProps> = ({
 }) => {
   const childrenWithColor = React.Children.map(children, (child) => {
     const color =
-      variant === 'warning'
-        ? enabled.icon.warning.color
-        : enabled.icon.info.color
+      variant === 'warning' ? tokens.icon.warning.color : tokens.icon.info.color
     return (
       (React.isValidElement(child) &&
         child.type === Icon &&

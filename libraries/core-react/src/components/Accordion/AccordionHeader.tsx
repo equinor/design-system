@@ -48,6 +48,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     fontFamily: typography.fontFamily,
     fontSize: typography.fontSize,
     fontWeight: typography.fontWeight as number,
+    backgroundColor: headerBackground.default,
     lineHeight: typography.lineHeight,
     textAlign: typography.textAlign as CSSObject['textAlign'],
     margin: 0,
@@ -59,10 +60,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     borderBottom: border,
     borderLeft: border,
     boxSizing: 'border-box',
-    color:
-      (disabled &&
-        `var(--eds_interactive_disabled__text, ${headerColor.disabled})`) ||
-      `var(--eds_text_static_icons__default, ${headerColor.default})`,
+    color: (disabled && headerColor.disabled) || headerColor.default,
     outline: 'none',
     '&[data-focus-visible-added]:focus': {
       outline,
