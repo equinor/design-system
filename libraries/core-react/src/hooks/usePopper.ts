@@ -1,4 +1,12 @@
-import { MutableRefObject } from 'react'
+import * as React from 'react'
+import {
+  useEffect,
+  useState,
+  useRef,
+  ReactNode,
+  HTMLAttributes,
+  MutableRefObject,
+} from 'react'
 // import * as PopperJS from '@popperjs/core'
 import { usePopper as reactPopper } from 'react-popper'
 
@@ -20,8 +28,8 @@ export type Placement =
   | 'left-end'
 
 export const usePopper = (
-  anchorRef: MutableRefObject<HTMLElement>,
-  popperRef: MutableRefObject<HTMLElement>,
+  anchorEl: HTMLElement,
+  popperEl: HTMLElement,
   arrowRef?: HTMLElement | string,
   placement?: Placement,
 ): {
@@ -34,27 +42,24 @@ export const usePopper = (
   if (placement === undefined) {
     placement = 'auto'
   }
-  const { styles, attributes } = reactPopper(
-    anchorRef.current,
-    popperRef.current,
-    {
-      placement,
-      modifiers: [
-        {
-          name: 'arrow',
-          options: {
-            element: arrowRef,
-          },
+
+  const { styles, attributes } = reactPopper(anchorEl, popperEl, {
+    placement,
+    modifiers: [
+      {
+        name: 'arrow',
+        options: {
+          element: arrowRef,
         },
-        {
-          name: 'offset',
-          options: {
-            offset: [0, 10],
-          },
+      },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 10],
         },
-      ],
-    },
-  )
+      },
+    ],
+  })
 
   return { styles, attributes }
 }

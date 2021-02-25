@@ -45,9 +45,8 @@ const MenuWithRef = () => {
 
 describe('Menu', () => {
   it('Can extend the css for the component', () => {
-    //render(<MenuWithRef />)
     render(
-      <StyledMenu open>
+      <StyledMenu>
         <div>some random content</div>
       </StyledMenu>,
     )

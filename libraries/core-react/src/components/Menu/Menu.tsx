@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {
   useEffect,
+  useState,
   useRef,
   ReactNode,
   HTMLAttributes,
@@ -59,6 +60,18 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   },
   ref,
 ) {
+  const [anchorElem, setAnchorEl] = useState(null)
+  const [popperEl, setPopperEl] = useState(null)
+
+  const popperRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (anchorEl.current && popperRef.current) {
+      setAnchorEl(anchorEl.current)
+      setPopperEl(popperRef.current)
+    }
+  }, [anchorElem, popperRef])
+
   const listRef = useRef<HTMLUListElement>(null)
 
   const { setOnClose, onClose } = useMenu()
@@ -92,8 +105,16 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  const popperRef = useRef<HTMLDivElement | null>(null)
-  const { styles, attributes } = usePopper(anchorEl, popperRef, null, placement)
+  let styles, attributes
+
+  if (anchorElem && popperEl) {
+    const { styles, attributes } = usePopper(
+      anchorElem,
+      popperEl,
+      null,
+      placement,
+    )
+  }
 
   const menuProps = {
     ...rest,
@@ -106,7 +127,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     <StyledPaper
       elevation="raised"
       ref={popperRef}
-      style={styles.popper}
+      style={styles ? styles.popper : null}
       {...props}
     >
       <MenuList

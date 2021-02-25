@@ -11,16 +11,21 @@ const AllTheProviders = ({ children }: { children: ReactNode }) => {
   }, [anchorRef])
 
   const updatedChildren = React.Children.map(children, (child) =>
-    React.cloneElement(child as ReactElement, { anchorEl }),
+    React.cloneElement(child as ReactElement, {
+      anchorEl: anchorRef,
+      open: Boolean(anchorEl),
+    }),
   ) as ReactNode
 
   return (
-    <>
-      <button style={{ top: 0, right: 0, float: 'right' }} ref={anchorRef}>
-        Anchor
-      </button>
-      {updatedChildren}
-    </>
+    anchorRef && (
+      <>
+        <button style={{ top: 0, right: 0, float: 'right' }} ref={anchorRef}>
+          Anchor
+        </button>
+        {updatedChildren}
+      </>
+    )
   )
 }
 
