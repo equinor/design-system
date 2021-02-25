@@ -105,29 +105,27 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  let styles, attributes
+  const { styles, attributes } = usePopper(
+    anchorElem,
+    popperEl,
+    null,
+    placement,
+  )
 
-  if (anchorElem && popperEl) {
-    const { styles, attributes } = usePopper(
-      anchorElem,
-      popperEl,
-      null,
-      placement,
-    )
+  const props = {
+    ...attributes.popper,
+    open,
   }
 
   const menuProps = {
     ...rest,
   }
-  const props = {
-    ...attributes.popper,
-    open,
-  }
+
   return (
     <StyledPaper
       elevation="raised"
       ref={popperRef}
-      style={styles ? styles.popper : null}
+      style={styles.popper}
       {...props}
     >
       <MenuList
