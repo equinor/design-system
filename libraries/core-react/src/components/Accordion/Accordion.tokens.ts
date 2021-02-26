@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Border } from '@equinor/eds-tokens'
+import type { Typography } from '@equinor/eds-tokens'
 
 const {
   typography: {
