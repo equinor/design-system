@@ -2,6 +2,8 @@
   --eds_clickbound_jumbo__base: 88px;
   --eds_clickbound_default__base: 48px;
   --eds_clickbound_default__input: 56px;
+  --eds_clickbound_compact__standard: 32px;
+  --eds_clickbound_compact__input: 44px;
 
   --eds_text_static_icons__default: rgba(61, 61, 61, 1);
   --eds_text_static_icons__secondary: rgba(86, 86, 86, 1);
