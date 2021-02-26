@@ -4,6 +4,8 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
+import { card as token } from './Card.tokens'
+import { trimSpaces } from '@utils'
 
 import { Card } from '.'
 
@@ -44,7 +46,10 @@ describe('Card', () => {
   it('Has correct color', () => {
     const { container } = render(<Card variant="info" />)
     const card = container.firstChild
-    expect(card).toHaveStyleRule('background-color', 'rgba(213,234,244,1)')
+    expect(card).toHaveStyleRule(
+      'background-color',
+      trimSpaces(token.background.info),
+    )
   })
   it('Has provided title and subtitle in CardHeaderTitle', () => {
     const title = 'Title'
