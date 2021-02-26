@@ -48,7 +48,7 @@ describe('Card', () => {
     const card = container.firstChild
     expect(card).toHaveStyleRule(
       'background-color',
-      trimSpaces(token.background.info),
+      trimSpaces(token.backgroundVariants.info),
     )
   })
   it('Has provided title and subtitle in CardHeaderTitle', () => {
