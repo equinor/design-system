@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -15,11 +16,29 @@ const {
   },
 } = tokens
 
-export const breadcrumbs = {
-  colors: {
-    enabled: enabledColor,
-    hover: hoverColor,
+export const breadcrumbs: ComponentToken = {
+  spacings: {
+    x: spacingMedium,
   },
-  margin: spacingMedium,
-  outline: `1px dashed ${focusOutlineColor}`,
+  typography: {
+    color: enabledColor,
+  },
+  states: {
+    hover: {
+      typography: {
+        color: hoverColor,
+      },
+    },
+    focus: {
+      outline: {
+        width: '1px',
+        color: focusOutlineColor,
+        style: 'dashed',
+        type: 'outline',
+        offset: '6px',
+      },
+    },
+  },
+
+  //outline: `1px dashed ${focusOutlineColor}`,
 }

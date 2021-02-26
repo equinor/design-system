@@ -9,6 +9,9 @@ import {
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
+import { outlineTemplate } from '@utils'
+
+const { spacings, typography, states } = tokens
 
 const OrderedList = styled.ol`
   list-style: none;
@@ -23,23 +26,22 @@ const ListItem = styled.li`
 `
 
 const Separator = styled(Typography)`
-  color: ${tokens.colors.enabled};
-  margin: 0 ${tokens.margin};
+  color: ${typography.color};
+  margin: 0 ${spacings.x};
 `
 
 const Collapsed = styled(Typography)`
   &:hover {
     text-decoration: underline;
-    color: ${tokens.colors.hover};
+    color: ${states.hover.typography.color};
   }
   &:focus {
     outline: none;
   }
   &[data-focus-visible-added]:focus {
-    outline: ${tokens.outline};
-    outline-offset: 6px;
+    ${outlineTemplate(states.focus.outline)}
   }
-  color: ${tokens.colors.enabled};
+  color: ${typography.color};
   text-decoration: none;
 `
 
