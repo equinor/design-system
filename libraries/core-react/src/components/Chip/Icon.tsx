@@ -2,10 +2,11 @@ import styled, { css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
 import { Icon as Icon_ } from '../Icon'
 import { chip as tokens } from './Chip.tokens'
+import { bordersTemplate } from '@utils'
 
 Icon_.add({ close })
 
-const { enabled, hover, error } = tokens
+const { states, error, icon } = tokens
 
 type IconProps = {
   variant: 'active' | 'error' | 'default'
@@ -15,7 +16,8 @@ type IconProps = {
 export const Icon = styled(Icon_)<IconProps>`
   cursor: pointer;
   padding: 1px;
-  border-radius: ${enabled.icon.border.radius};
+  ${bordersTemplate(icon.border)}
+
   z-index: 11;
 
   &:hover {
@@ -25,14 +27,14 @@ export const Icon = styled(Icon_)<IconProps>`
           return css`
             background: ${error.icon.background};
             svg {
-              fill: ${error.icon.color};
+              fill: ${error.icon.typography.color};
             }
           `
         default:
           return css`
-            background: ${hover.icon.background};
+            background: ${icon.states.hover.background};
             svg {
-              fill: ${hover.typography.color};
+              fill: ${states.hover.typography.color};
             }
           `
       }

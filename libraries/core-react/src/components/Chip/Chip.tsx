@@ -3,16 +3,21 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
 import { chip as tokens } from './Chip.tokens'
-import { spacingsTemplate, typographyTemplate } from '@utils'
+import {
+  spacingsTemplate,
+  typographyTemplate,
+  outlineTemplate,
+  bordersTemplate,
+} from '@utils'
 
 const {
-  enabled,
-  disabled: disabledToken,
-  active: activeToken,
-  hover,
+  background,
+  height,
+  typography,
+  spacings,
+  border,
+  states,
   error,
-  outline,
-  outlineOffset,
 } = tokens
 
 type StyleProps = {
@@ -29,8 +34,8 @@ const StyledChips = styled.div.attrs<StyleProps>(
     role: clickable ? 'button' : null,
   }),
 )<StyleProps>`
-  background: ${enabled.background};
-  height: ${enabled.height};
+  background: ${background};
+  height: ${height};
   width: fit-content;
   display: grid;
   grid-gap: 8px;
@@ -40,13 +45,13 @@ const StyledChips = styled.div.attrs<StyleProps>(
   z-index: 10;
 
   svg {
-    fill: ${enabled.typography.color};
+    fill: ${typography.color};
   }
 
   &:hover {
-    color: ${hover.typography.color};
+    color: ${states.hover.typography.color};
     svg {
-      fill: ${hover.typography.color};
+      fill: ${states.hover.typography.color};
     }
   }
 
@@ -55,13 +60,12 @@ const StyledChips = styled.div.attrs<StyleProps>(
   }
 
   &[data-focus-visible-added]:focus {
-    outline: ${outline};
-    outline-offset: ${outlineOffset};
+    ${outlineTemplate(states.focus.outline)}
   }
+  ${bordersTemplate(border)}
 
-  border-radius: ${enabled.border.radius};
-  ${spacingsTemplate(enabled.spacings)}
-  ${typographyTemplate(enabled.typography)}
+  ${spacingsTemplate(spacings)}
+  ${typographyTemplate(typography)}
 
   ${({ clickable }) =>
     clickable &&
@@ -71,28 +75,25 @@ const StyledChips = styled.div.attrs<StyleProps>(
       }
     `}
 
-    ${({ variant }) => {
+  ${({ variant }) => {
     switch (variant) {
       case 'active':
         return css`
-          background: ${activeToken.background};
+          background: ${states.active.background};
         `
       case 'error':
         return css`
           background: ${error.background};
-          border-color: ${error.border.color};
-          border-width: ${error.border.width};
-          border-style: ${error.border.type};
           color: ${error.typography.color};
           svg {
-            fill: ${error.icon.color};
+            fill: ${error.icon.typography.color};
           }
-
+          ${bordersTemplate(error.border)};
           &:hover {
-            border-color: ${error.hover.color};
-            color: ${error.hover.color};
+            border-color: ${error.states.hover.typography.color};
+            color: ${error.states.hover.typography.color};
             svg {
-              fill: ${error.hover.color};
+              fill: ${error.states.hover.typography.color};
             }
           }
         `
@@ -105,16 +106,16 @@ const StyledChips = styled.div.attrs<StyleProps>(
     disabled &&
     css`
       cursor: not-allowed;
-      background: ${enabled.background};
-      color: ${disabledToken.typography.color};
+      background: ${background};
+      color: ${states.disabled.typography.color};
       svg {
-        fill: ${disabledToken.typography.color};
+        fill: ${states.disabled.typography.color};
       }
       &:hover {
-        color: ${disabledToken.typography.color};
+        color: ${states.disabled.typography.color};
         cursor: not-allowed;
         svg {
-          fill: ${disabledToken.typography.color};
+          fill: ${states.disabled.typography.color};
         }
       }
     `}
