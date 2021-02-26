@@ -29,7 +29,6 @@ type AccordionToken = {
     color: typeof token.header.color
     background: typeof token.header.background
   }
-  //border: Border
   border: string
   outline: string
   outlineOffset: string
@@ -47,15 +46,11 @@ const token = {
     },
     background: {
       default: backgroundDefault,
-      /* Mismatch i Figma!!!! --eds_ui_background__light */
       hover: backgroundHover,
     },
   },
-  /* Mismatch i Figma!! 
-  border: `1px solid var(--eds_ui_background__medium, ${borderColor,
-  */
-  border: borderColor,
-  outline: focusOutlineColor,
+  border: `1px solid ${borderColor}`,
+  outline: `1px dashed ${focusOutlineColor}`,
   outlineOffset: '2px',
   chevronColor: {
     default: activatedColor,
