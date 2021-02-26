@@ -176,21 +176,28 @@ export default {
 
 export const ButtonToggle: Story<MenuProps> = () => {
   const [state, setState] = React.useState<{
-    isOpen: boolean
+    buttonEl: HTMLButtonElement
     focus: 'first' | 'last'
   }>({
-    isOpen: false,
+    buttonEl: null,
     focus: 'first',
   })
 
-  const { isOpen, focus } = state
+  const { buttonEl, focus } = state
+  const isOpen = Boolean(buttonEl)
 
-  const openMenu = (focus: 'first' | 'last') => {
-    setState({ ...state, focus, isOpen: true })
+  const openMenu = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>,
+    focus: 'first' | 'last',
+  ) => {
+    const target = e.target as HTMLButtonElement
+    setState({ ...state, buttonEl: target, focus })
   }
 
   const closeMenu = () => {
-    setState({ ...state, focus, isOpen: false })
+    setState({ ...state, buttonEl: null, focus })
   }
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -198,10 +205,10 @@ export const ButtonToggle: Story<MenuProps> = () => {
     e.preventDefault()
     switch (key) {
       case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu('first')
+        isOpen ? closeMenu() : openMenu(e, 'first')
         break
       case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu('last')
+        isOpen ? closeMenu() : openMenu(e, 'last')
         break
       case 'Escape':
         closeMenu()
@@ -210,19 +217,19 @@ export const ButtonToggle: Story<MenuProps> = () => {
         break
     }
   }
-  const referenceElement = React.useRef(null)
+
+  console.log(isOpen)
 
   return (
     <Grid style={{ gridAutoFlow: 'row', position: 'relative', margin: '5rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
       <Button
-        ref={referenceElement}
         variant="ghost_icon"
         id="menuButton"
         aria-controls="menu-on-button"
         aria-haspopup="true"
         aria-expanded={isOpen}
-        onClick={() => (isOpen ? closeMenu() : openMenu(null))}
+        onClick={(e) => (isOpen ? closeMenu() : openMenu(e, null))}
         onKeyDown={onKeyPress}
       >
         Menu
@@ -231,7 +238,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
         id="menu-on-button"
         aria-labelledby="menuButton"
         open={isOpen}
-        anchorEl={referenceElement}
+        anchorEl={buttonEl}
         onClose={closeMenu}
         focus={focus}
         placement="right-end"
@@ -242,208 +249,208 @@ export const ButtonToggle: Story<MenuProps> = () => {
   )
 }
 
-export const InTopbar: Story<MenuProps> = () => {
-  const [state, setState] = React.useState<{
-    isOpen: boolean
-    focus: 'first' | 'last'
-  }>({
-    isOpen: false,
-    focus: 'first',
-  })
+// export const InTopbar: Story<MenuProps> = () => {
+//   const [state, setState] = React.useState<{
+//     isOpen: boolean
+//     focus: 'first' | 'last'
+//   }>({
+//     isOpen: false,
+//     focus: 'first',
+//   })
 
-  const { isOpen, focus } = state
+//   const { isOpen, focus } = state
 
-  const openMenu = (focus: 'first' | 'last') => {
-    setState({ ...state, focus, isOpen: true })
-  }
+//   const openMenu = (focus: 'first' | 'last') => {
+//     setState({ ...state, focus, isOpen: true })
+//   }
 
-  const closeMenu = () => {
-    setState({ ...state, focus, isOpen: false })
-  }
+//   const closeMenu = () => {
+//     setState({ ...state, focus, isOpen: false })
+//   }
 
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    e.preventDefault()
-    switch (key) {
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
-        break
-      default:
-        break
-    }
-  }
-  const referenceElement = React.useRef(null)
+//   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+//     const { key } = e
+//     e.preventDefault()
+//     switch (key) {
+//       case 'ArrowDown':
+//         isOpen ? closeMenu() : openMenu('first')
+//         break
+//       case 'ArrowUp':
+//         isOpen ? closeMenu() : openMenu('last')
+//         break
+//       case 'Escape':
+//         closeMenu()
+//         break
+//       default:
+//         break
+//     }
+//   }
+//   const referenceElement = React.useRef(null)
 
-  return (
-    <Grid style={{ margin: 0 }}>
-      <TopBar>
-        <Header>Menu in Topbar</Header>
-        <Actions>
-          <Button
-            ref={referenceElement}
-            variant="ghost_icon"
-            id="menuButton"
-            aria-controls="menu-on-button"
-            aria-haspopup="true"
-            aria-expanded={isOpen}
-            onClick={() => (isOpen ? closeMenu() : openMenu(null))}
-            onKeyDown={onKeyPress}
-          >
-            <Icon name="more_vertical" title="more"></Icon>
-          </Button>
-          <Menu
-            id="menu-on-button"
-            aria-labelledby="menuButton"
-            focus={focus}
-            open={isOpen}
-            anchorEl={referenceElement}
-            onClose={closeMenu}
-            placement="left-end"
-          >
-            {bigMenuTemplate}
-          </Menu>
-        </Actions>
-      </TopBar>
-    </Grid>
-  )
-}
+//   return (
+//     <Grid style={{ margin: 0 }}>
+//       <TopBar>
+//         <Header>Menu in Topbar</Header>
+//         <Actions>
+//           <Button
+//             ref={referenceElement}
+//             variant="ghost_icon"
+//             id="menuButton"
+//             aria-controls="menu-on-button"
+//             aria-haspopup="true"
+//             aria-expanded={isOpen}
+//             onClick={() => (isOpen ? closeMenu() : openMenu(null))}
+//             onKeyDown={onKeyPress}
+//           >
+//             <Icon name="more_vertical" title="more"></Icon>
+//           </Button>
+//           <Menu
+//             id="menu-on-button"
+//             aria-labelledby="menuButton"
+//             focus={focus}
+//             open={isOpen}
+//             anchorEl={referenceElement}
+//             onClose={closeMenu}
+//             placement="left-end"
+//           >
+//             {bigMenuTemplate}
+//           </Menu>
+//         </Actions>
+//       </TopBar>
+//     </Grid>
+//   )
+// }
 
-export const Examples: Story<MenuProps> = () => {
-  const [state, setState] = React.useState<{
-    open: 1 | 2 | 3 | 4 | null
-  }>({
-    open: null,
-  })
+// export const Examples: Story<MenuProps> = () => {
+//   const [state, setState] = React.useState<{
+//     open: 1 | 2 | 3 | 4 | null
+//   }>({
+//     open: null,
+//   })
 
-  const oneRef = React.useRef(null)
-  const twoRef = React.useRef(null)
-  const threeRef = React.useRef(null)
-  const fourRef = React.useRef(null)
+//   const oneRef = React.useRef(null)
+//   const twoRef = React.useRef(null)
+//   const threeRef = React.useRef(null)
+//   const fourRef = React.useRef(null)
 
-  const { open } = state
+//   const { open } = state
 
-  const openMenu = (open: 1 | 2 | 3 | 4) => {
-    setState({ open })
-  }
+//   const openMenu = (open: 1 | 2 | 3 | 4) => {
+//     setState({ open })
+//   }
 
-  const closeMenu = () => {
-    setState({ open: null })
-  }
+//   const closeMenu = () => {
+//     setState({ open: null })
+//   }
 
-  return (
-    <Grid style={{ marginBottom: '3rem' }}>
-      <Button
-        ref={oneRef}
-        id="anchor-iconbuttons"
-        aria-controls="menu-iconbuttons"
-        aria-haspopup="true"
-        aria-expanded={open === 1}
-        onClick={() => (open === 1 ? closeMenu() : openMenu(1))}
-      >
-        Icon Buttons
-      </Button>
-      <Menu
-        onClose={closeMenu}
-        id="menu-iconbuttons"
-        open={open === 1}
-        anchorEl={oneRef}
-        placement="bottom"
-      >
-        <Button variant="ghost_icon" onClick={closeMenu}>
-          <Icon name="save" title="save"></Icon>
-        </Button>
-        <Button variant="ghost_icon" onClick={closeMenu}>
-          <Icon name="folder" title="folder"></Icon>
-        </Button>
-        <Button variant="ghost_icon" onClick={closeMenu}>
-          <Icon name="edit" title="edit"></Icon>
-        </Button>
-        <Button variant="ghost_icon" onClick={closeMenu}>
-          <Icon name="settings" title="settings"></Icon>
-        </Button>
-      </Menu>
-      <Button
-        ref={twoRef}
-        id="anchor-plaintext"
-        aria-controls="menu-plaintext"
-        aria-haspopup="true"
-        aria-expanded={open === 2}
-        onClick={() => (open === 2 ? closeMenu() : openMenu(2))}
-      >
-        Text
-      </Button>
-      <Menu
-        onClose={closeMenu}
-        id="menu-plaintext"
-        open={open === 2}
-        anchorEl={twoRef}
-        placement="bottom"
-      >
-        <MenuItem onClick={onClick}>Pressure </MenuItem>
-        <MenuItem onClick={onClick}>Bearing</MenuItem>
-        <MenuItem onClick={onClick}>Cable</MenuItem>
-      </Menu>
-      <Button
-        ref={threeRef}
-        id="anchor-textIcon"
-        aria-controls="menu-textIcon"
-        aria-haspopup="true"
-        aria-expanded={open === 3}
-        onClick={() => (open === 3 ? closeMenu() : openMenu(3))}
-      >
-        Text with icons
-      </Button>
-      <Menu
-        id="menu-textIcon"
-        open={open === 3}
-        anchorEl={threeRef}
-        onClose={closeMenu}
-        placement="bottom"
-      >
-        <MenuItem onClick={onClick}>
-          <Typography group="navigation" variant="label">
-            <Icon name="pressure" />
-          </Typography>
-          Pressure
-        </MenuItem>
-        <MenuItem onClick={onClick}>
-          <Typography group="navigation" variant="label">
-            <Icon name="bearing" />
-          </Typography>
-          Bearing
-        </MenuItem>
-        <MenuItem onClick={onClick}>
-          <Typography group="navigation" variant="label">
-            <Icon name="cable" />
-          </Typography>
-          Cable
-        </MenuItem>
-      </Menu>
-      <Button
-        ref={fourRef}
-        id="anchor-bigMenu"
-        aria-controls="menu-bigMenu"
-        aria-haspopup="true"
-        aria-expanded={open === 4}
-        onClick={() => (open === 4 ? closeMenu() : openMenu(4))}
-      >
-        Complex menu
-      </Button>
-      <Menu
-        id="menu-bigMenu"
-        anchorEl={fourRef}
-        open={open === 4}
-        onClose={closeMenu}
-        placement="bottom"
-      >
-        {bigMenuTemplate}
-      </Menu>
-    </Grid>
-  )
-}
+//   return (
+//     <Grid style={{ marginBottom: '3rem' }}>
+//       <Button
+//         ref={oneRef}
+//         id="anchor-iconbuttons"
+//         aria-controls="menu-iconbuttons"
+//         aria-haspopup="true"
+//         aria-expanded={open === 1}
+//         onClick={() => (open === 1 ? closeMenu() : openMenu(1))}
+//       >
+//         Icon Buttons
+//       </Button>
+//       <Menu
+//         onClose={closeMenu}
+//         id="menu-iconbuttons"
+//         open={open === 1}
+//         anchorEl={oneRef}
+//         placement="bottom"
+//       >
+//         <Button variant="ghost_icon" onClick={closeMenu}>
+//           <Icon name="save" title="save"></Icon>
+//         </Button>
+//         <Button variant="ghost_icon" onClick={closeMenu}>
+//           <Icon name="folder" title="folder"></Icon>
+//         </Button>
+//         <Button variant="ghost_icon" onClick={closeMenu}>
+//           <Icon name="edit" title="edit"></Icon>
+//         </Button>
+//         <Button variant="ghost_icon" onClick={closeMenu}>
+//           <Icon name="settings" title="settings"></Icon>
+//         </Button>
+//       </Menu>
+//       <Button
+//         ref={twoRef}
+//         id="anchor-plaintext"
+//         aria-controls="menu-plaintext"
+//         aria-haspopup="true"
+//         aria-expanded={open === 2}
+//         onClick={() => (open === 2 ? closeMenu() : openMenu(2))}
+//       >
+//         Text
+//       </Button>
+//       <Menu
+//         onClose={closeMenu}
+//         id="menu-plaintext"
+//         open={open === 2}
+//         anchorEl={twoRef}
+//         placement="bottom"
+//       >
+//         <MenuItem onClick={onClick}>Pressure </MenuItem>
+//         <MenuItem onClick={onClick}>Bearing</MenuItem>
+//         <MenuItem onClick={onClick}>Cable</MenuItem>
+//       </Menu>
+//       <Button
+//         ref={threeRef}
+//         id="anchor-textIcon"
+//         aria-controls="menu-textIcon"
+//         aria-haspopup="true"
+//         aria-expanded={open === 3}
+//         onClick={() => (open === 3 ? closeMenu() : openMenu(3))}
+//       >
+//         Text with icons
+//       </Button>
+//       <Menu
+//         id="menu-textIcon"
+//         open={open === 3}
+//         anchorEl={threeRef}
+//         onClose={closeMenu}
+//         placement="bottom"
+//       >
+//         <MenuItem onClick={onClick}>
+//           <Typography group="navigation" variant="label">
+//             <Icon name="pressure" />
+//           </Typography>
+//           Pressure
+//         </MenuItem>
+//         <MenuItem onClick={onClick}>
+//           <Typography group="navigation" variant="label">
+//             <Icon name="bearing" />
+//           </Typography>
+//           Bearing
+//         </MenuItem>
+//         <MenuItem onClick={onClick}>
+//           <Typography group="navigation" variant="label">
+//             <Icon name="cable" />
+//           </Typography>
+//           Cable
+//         </MenuItem>
+//       </Menu>
+//       <Button
+//         ref={fourRef}
+//         id="anchor-bigMenu"
+//         aria-controls="menu-bigMenu"
+//         aria-haspopup="true"
+//         aria-expanded={open === 4}
+//         onClick={() => (open === 4 ? closeMenu() : openMenu(4))}
+//       >
+//         Complex menu
+//       </Button>
+//       <Menu
+//         id="menu-bigMenu"
+//         anchorEl={fourRef}
+//         open={open === 4}
+//         onClose={closeMenu}
+//         placement="bottom"
+//       >
+//         {bigMenuTemplate}
+//       </Menu>
+//     </Grid>
+//   )
+// }

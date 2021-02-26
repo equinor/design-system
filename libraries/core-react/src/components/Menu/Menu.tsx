@@ -38,7 +38,7 @@ const StyledPaper = styled(Paper)<StyledProps>`
 
 export type MenuProps = {
   /** Anchor element for Menu */
-  anchorEl: MutableRefObject<null>
+  anchorEl: HTMLElement
   /** Is Menu open */
   open: boolean
   /** Which Menu child to focus when open */
@@ -60,27 +60,15 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   },
   ref,
 ) {
-  const [anchorElem, setAnchorEl] = useState(null)
-  const [popperEl, setPopperEl] = useState(null)
-
   const popperRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (anchorEl.current && popperRef.current) {
-      setAnchorEl(anchorEl.current)
-      setPopperEl(popperRef.current)
-    }
-  }, [anchorElem, popperRef])
-
   const listRef = useRef<HTMLUListElement>(null)
 
+  // useOutsideClick(listRef, () => {
+  //   if (open && onClose !== null) {
+  //     onClose()
+  //   }
+  // })
   const { setOnClose, onClose } = useMenu()
-  useOutsideClick(listRef, () => {
-    if (open && onClose !== null) {
-      onClose()
-    }
-  })
-
   useEffect(() => {
     if (onClose === null && onCloseCallback) {
       setOnClose(onCloseCallback)
@@ -91,7 +79,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     return () => {
       document.removeEventListener('keydown', handleGlobalKeyPress, true)
     }
-  }, [listRef.current])
+  }, [open, listRef.current])
 
   const handleGlobalKeyPress = (e: KeyboardEvent) => {
     const { key } = e
@@ -106,15 +94,15 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   const { styles, attributes } = usePopper(
-    anchorElem,
-    popperEl,
+    anchorEl,
+    popperRef.current,
     null,
     placement,
   )
 
   const props = {
-    ...attributes.popper,
     open,
+    ...attributes.popper,
   }
 
   const menuProps = {

@@ -30,23 +30,10 @@ const StyledMenu = styled(TestMenu)`
 
 afterEach(cleanup)
 
-const MenuWithRef = () => {
-  const reference = useRef(null)
-
-  return (
-    <>
-      <Button ref={reference}>Ref</Button>
-      <StyledMenu open anchorEl={reference}>
-        <div>some random content</div>
-      </StyledMenu>
-    </>
-  )
-}
-
 describe('Menu', () => {
   it('Can extend the css for the component', () => {
     render(
-      <StyledMenu>
+      <StyledMenu open>
         <div>some random content</div>
       </StyledMenu>,
     )

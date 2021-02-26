@@ -4,16 +4,15 @@ import { render, RenderOptions, RenderResult } from '@testing-library/react'
 
 const AllTheProviders = ({ children }: { children: ReactNode }) => {
   const anchorRef = React.useRef(null)
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = React.useState<ElementType>(null)
 
   React.useEffect(() => {
-    setAnchorEl(anchorRef)
+    setAnchorEl(anchorRef.current)
   }, [anchorRef])
 
   const updatedChildren = React.Children.map(children, (child) =>
     React.cloneElement(child as ReactElement, {
-      anchorEl: anchorRef,
-      open: Boolean(anchorEl),
+      anchorEl,
     }),
   ) as ReactNode
 
