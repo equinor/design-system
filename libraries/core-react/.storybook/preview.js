@@ -1,10 +1,10 @@
 import { addDecorator } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
-import { GlobalStyleDark } from '../stories/testing/GlobalStyles'
-
+/* import { GlobalStyleDark } from '../stories/testing/GlobalStyles'
+ */
 addDecorator(withInfo)
 
-export const decorators = [
+/* export const decorators = [
   (Story) => (
     <>
       <GlobalStyleDark />
@@ -12,7 +12,7 @@ export const decorators = [
     </>
   ),
 ]
-
+ */
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   viewMode: 'docs',
