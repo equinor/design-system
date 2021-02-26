@@ -4,6 +4,8 @@ import styled from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
+const { spacings } = tokens
+
 export type CardHeaderProps = HTMLAttributes<HTMLDivElement>
 
 const StyledCardHeader = styled.div`
@@ -12,7 +14,7 @@ const StyledCardHeader = styled.div`
   align-items: center;
 
   > :not(:first-child) {
-    margin-left: ${tokens.spacings.left};
+    margin-left: ${spacings.left};
   }
 `
 

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { card as tokens } from './Card.tokens'
 import { spacingsTemplate } from '@utils'
 
-const { spacings, shape } = tokens
+const { spacings, shape, backgroundVariants } = tokens
 
 type StyledCardProps = {
   background: string
@@ -45,7 +45,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     ...rest,
     className,
     ref,
-    background: tokens.background[variant],
+    background: backgroundVariants[variant],
     cursor,
   }
 

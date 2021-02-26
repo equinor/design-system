@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -17,7 +18,21 @@ const {
   },
 } = tokens
 
-export const card = {
+export type CardToken = ComponentToken & {
+  shape: {
+    minHeight: string
+    minWidth: string
+    borderRadius: string
+  }
+  backgroundVariants: {
+    default: string
+    info: string
+    danger: string
+    warning: string
+  }
+}
+
+export const card: CardToken = {
   shape: {
     minHeight,
     minWidth,
@@ -29,7 +44,7 @@ export const card = {
     right: spacingMedium,
     top: spacingMedium,
   },
-  background: {
+  backgroundVariants: {
     default: background,
     info: backgroundInfo,
     danger: backgroundDanger,

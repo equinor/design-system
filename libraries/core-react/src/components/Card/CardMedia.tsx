@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 
 import { card as tokens } from './Card.tokens'
 
+const { spacings, shape } = tokens
+
 export type CardMediaProps = {
   /** Should the media be full width or not */
   fullWidth?: boolean
@@ -20,18 +22,16 @@ const StyledCardMedia = styled.div<CardMediaProps>`
     fullWidth
       ? css`
           > * {
-            width: calc(
-              100% + ${tokens.spacings.left} + ${tokens.spacings.right}
-            );
-            margin-left: -${tokens.spacings.left};
-            margin-right: -${tokens.spacings.right};
+            width: calc(100% + ${spacings.left} + ${spacings.right});
+            margin-left: -${spacings.left};
+            margin-right: -${spacings.right};
           }
 
           &:first-child {
-            margin-top: -${tokens.spacings.top};
+            margin-top: -${spacings.top};
             img {
-              border-top-right-radius: ${tokens.shape.borderRadius};
-              border-top-left-radius: ${tokens.shape.borderRadius};
+              border-top-right-radius: ${shape.borderRadius};
+              border-top-left-radius: ${shape.borderRadius};
             }
           }
         `
