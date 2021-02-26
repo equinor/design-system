@@ -16,8 +16,6 @@ const StyledBanner = styled(Banner)`
   position: relative;
 `
 
-const { enabled } = tokens
-
 const rgbaTrim = (x: string) => x.split(' ').join('')
 
 afterEach(cleanup)
@@ -83,9 +81,9 @@ describe('Banner', () => {
     const iconSvg = container.querySelector('svg')
     expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(enabled.icon.info.background),
+      rgbaTrim(tokens.icon.info.background),
     )
-    expect(iconSvg).toHaveAttribute('fill', enabled.icon.info.color)
+    expect(iconSvg).toHaveAttribute('fill', tokens.icon.info.color)
   })
   it('Has correct warning icon styling', () => {
     const bannerText = 'Banner test'
@@ -101,8 +99,8 @@ describe('Banner', () => {
     const iconSvg = container.querySelector('svg')
     expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(enabled.icon.warning.background),
+      rgbaTrim(tokens.icon.warning.background),
     )
-    expect(iconSvg).toHaveAttribute('fill', enabled.icon.warning.color)
+    expect(iconSvg).toHaveAttribute('fill', tokens.icon.warning.color)
   })
 })
