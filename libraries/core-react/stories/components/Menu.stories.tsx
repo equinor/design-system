@@ -234,6 +234,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
       >
         Menu
       </Button>
+
       <Menu
         id="menu-on-button"
         aria-labelledby="menuButton"

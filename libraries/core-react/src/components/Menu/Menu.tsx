@@ -11,9 +11,10 @@ import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
-import { useCombinedRefs, useOutsideClick, usePopper, Placement } from '@hooks'
+import { useCombinedRefs, useOutsideClick, Placement } from '@hooks'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
+import { usePopper } from 'react-popper'
 
 const {
   enabled: { border },
@@ -93,20 +94,38 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  const { styles, attributes } = usePopper(
-    anchorEl,
-    popperRef.current,
-    null,
+  // const { styles, attributes } = usePopper(
+  //   anchorEl,
+  //   popperRef.current,
+  //   null,
+  //   placement,
+  // )
+
+  const { styles, attributes } = usePopper(anchorEl, popperRef.current, {
     placement,
-  )
+    modifiers: [
+      // {
+      //   name: 'arrow',
+      //   options: {
+      //     element: arrowRef,
+      //   },
+      // },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 10],
+        },
+      },
+    ],
+  })
+
+  const menuProps = {
+    ...rest,
+  }
 
   const props = {
     open,
     ...attributes.popper,
-  }
-
-  const menuProps = {
-    ...rest,
   }
 
   return (
