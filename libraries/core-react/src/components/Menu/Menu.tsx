@@ -128,6 +128,11 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     ...attributes.popper,
   }
 
+  require('react-dom')
+  window.React2 = require('react')
+  console.log(window.React1, window.React2)
+
+  console.log('render menu', styles.popper)
   return (
     <StyledPaper
       elevation="raised"

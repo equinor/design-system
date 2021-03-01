@@ -218,8 +218,6 @@ export const ButtonToggle: Story<MenuProps> = () => {
     }
   }
 
-  console.log(isOpen)
-
   return (
     <Grid style={{ gridAutoFlow: 'row', position: 'relative', margin: '5rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
@@ -234,7 +232,6 @@ export const ButtonToggle: Story<MenuProps> = () => {
       >
         Menu
       </Button>
-
       <Menu
         id="menu-on-button"
         aria-labelledby="menuButton"
