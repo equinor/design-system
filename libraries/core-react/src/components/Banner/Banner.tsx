@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 import { Divider } from '../Divider'
 import { BannerIcon } from './BannerIcon'
+import { spacingsTemplate } from '@utils'
 
 const StyledBanner = styled.div``
 
@@ -11,14 +12,16 @@ type ContentProps = {
   hasIcon: boolean
 }
 
+const { spacings, background } = tokens
+
 const Content = styled.div<ContentProps>`
-  padding: ${tokens.spacings.top} ${tokens.spacings.right}
-    ${tokens.spacings.bottom} ${tokens.spacings.left};
+  ${spacingsTemplate(spacings)}
+
   display: grid;
   grid-template-columns: ${({ hasIcon }) =>
     hasIcon ? 'min-content 1fr auto' : '1fr auto'};
   align-items: center;
-  background-color: ${tokens.background};
+  background-color: ${background};
 `
 
 const NonMarginDivider = styled(Divider)`
