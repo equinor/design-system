@@ -58,7 +58,10 @@ describe('Chips', () => {
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
     expect(chip).toHaveStyleRule('padding-right', tokens.spacings.right)
-    // expect(chip).toHaveStyleRule('border-radius', border.radius)
+    expect(chip).toHaveStyleRule(
+      'border-radius',
+      border.type === 'border' && border.radius,
+    )
     expect(icon).toBeDefined()
     expect(icon).toHaveAttribute('height', tokens.icon.height)
     expect(icon).toHaveAttribute('width', tokens.icon.width)
@@ -93,11 +96,13 @@ describe('Chips', () => {
     )
     const chip = queryByText(chipText)
     const avatar = queryByTestId(avatarTestId)
-
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
     expect(chip).toHaveStyleRule('padding-right', tokens.spacings.right)
-    //expect(chip).toHaveStyleRule('border-radius', tokens.border.radius)
+    expect(chip).toHaveStyleRule(
+      'border-radius',
+      tokens.border.type === 'border' && tokens.border.radius,
+    )
     expect(avatar).toBeDefined()
     expect(avatar.firstChild).toHaveAttribute('src', imageUrl)
     expect(avatar).toHaveStyleRule('height', tokens.icon.height)
@@ -189,7 +194,12 @@ describe('Chips', () => {
     )
 
     expect(chip).toHaveStyleRule('background', rgbaTrim(error.background))
-    //expect(chip).toHaveStyleRule('border-color', rgbaTrim(error.border.color))
+    expect(chip).toHaveStyleRule(
+      'border',
+      `1px solid ${rgbaTrim(
+        error.border.type === 'border' && error.border.color,
+      )}`,
+    )
     expect(chip).toHaveStyleRule('color', rgbaTrim(error.typography.color))
     expect(chipIconStyle.fill).toBe(rgbaTrim(error.icon.typography.color))
   })
