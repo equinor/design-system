@@ -26,7 +26,7 @@ const {
 } = tokens
 
 export type BannerToken = ComponentToken & {
-  entities?: {
+  entities: {
     icon: ComponentToken
   }
 }
