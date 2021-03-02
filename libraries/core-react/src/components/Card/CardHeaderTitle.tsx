@@ -21,5 +21,3 @@ export const CardHeaderTitle = forwardRef<HTMLDivElement, CardHeaderTitleProps>(
     return <StyledCardHeaderTitle {...props}>{children}</StyledCardHeaderTitle>
   },
 )
-
-// CardHeaderTitle.displayName = 'eds-card-header-title'

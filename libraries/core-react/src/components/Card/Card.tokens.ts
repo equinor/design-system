@@ -14,29 +14,18 @@ const {
     comfortable: { medium: spacingMedium },
   },
   shape: {
-    corners: { minHeight, minWidth, borderRadius },
+    corners: { borderRadius },
   },
 } = tokens
 
-export type CardToken = ComponentToken & {
-  shape: {
-    minHeight: string
-    minWidth: string
-    borderRadius: string
-  }
-  backgroundVariants: {
-    default: string
-    info: string
-    danger: string
-    warning: string
-  }
-}
+export type CardToken = ComponentToken
 
-export const card: CardToken = {
-  shape: {
-    minHeight,
-    minWidth,
-    borderRadius,
+export const primary: CardToken = {
+  background: background,
+  border: {
+    type: 'border',
+    radius: borderRadius,
+    width: 0,
   },
   spacings: {
     left: spacingMedium,
@@ -44,10 +33,14 @@ export const card: CardToken = {
     right: spacingMedium,
     top: spacingMedium,
   },
-  backgroundVariants: {
-    default: background,
-    info: backgroundInfo,
-    danger: backgroundDanger,
-    warning: backgroundWarning,
-  },
+}
+
+export const info: CardToken = {
+  background: backgroundInfo,
+}
+export const danger: CardToken = {
+  background: backgroundDanger,
+}
+export const warning: CardToken = {
+  background: backgroundWarning,
 }

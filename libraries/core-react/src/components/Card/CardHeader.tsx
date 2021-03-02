@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-import { card as tokens } from './Card.tokens'
+import { primary as tokens } from './Card.tokens'
 
 const { spacings } = tokens
 
@@ -29,5 +29,3 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
     return <StyledCardHeader {...props}>{children}</StyledCardHeader>
   },
 )
-
-// CardHeader.displayName = 'eds-card-header'

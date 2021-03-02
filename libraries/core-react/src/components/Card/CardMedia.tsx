@@ -2,9 +2,9 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 
-import { card as tokens } from './Card.tokens'
+import { primary as tokens } from './Card.tokens'
 
-const { spacings, shape } = tokens
+const { spacings, border } = tokens
 
 export type CardMediaProps = {
   /** Should the media be full width or not */
@@ -30,8 +30,10 @@ const StyledCardMedia = styled.div<CardMediaProps>`
           &:first-child {
             margin-top: -${spacings.top};
             img {
-              border-top-right-radius: ${shape.borderRadius};
-              border-top-left-radius: ${shape.borderRadius};
+              border-top-right-radius: ${border.type === 'border' &&
+              border.radius};
+              border-top-left-radius: ${border.type === 'border' &&
+              border.radius};
             }
           }
         `
@@ -57,5 +59,3 @@ export const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>(
     return <StyledCardMedia {...props}>{children}</StyledCardMedia>
   },
 )
-
-// CardMedia.displayName = 'eds-card-media'

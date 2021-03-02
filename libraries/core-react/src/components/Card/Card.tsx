@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { card as tokens } from './Card.tokens'
-import { spacingsTemplate } from '@utils'
+import * as tokens from './Card.tokens'
+import { spacingsTemplate, bordersTemplate } from '@utils'
 
-const { spacings, shape, backgroundVariants } = tokens
+const { primary, info, warning, danger } = tokens
 
 type StyledCardProps = {
   background: string
@@ -19,7 +19,6 @@ export type CardProps = {
 const StyledCard = styled.div<StyledCardProps>`
   height: fit-content;
   width: 100%;
-  min-width: ${shape.minWidth};
   position: relative;
   background-color: ${({ background }) => background};
   box-sizing: border-box;
@@ -28,24 +27,35 @@ const StyledCard = styled.div<StyledCardProps>`
   grid-auto-columns: auto;
   align-items: center;
   align-content: start;
-  border-radius: ${shape.borderRadius};
-  min-height: ${shape.minHeight};
   cursor: ${({ cursor }) => cursor};
-
-  ${spacingsTemplate(spacings)}
+  ${bordersTemplate(primary.border)};
+  ${spacingsTemplate(primary.spacings)}
 `
+
+type backgroundVariants = { variant: string; backgroundColor: string }[]
+
+const backgroundVariants: backgroundVariants = [
+  { variant: 'default', backgroundColor: primary.background },
+  { variant: 'info', backgroundColor: info.background },
+  { variant: 'warning', backgroundColor: warning.background },
+  { variant: 'danger', backgroundColor: danger.background },
+]
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   { children, className, variant = 'default', onClick, ...rest },
   ref,
 ) {
+  const cardVariant = backgroundVariants.find((elem) => {
+    return elem.variant === variant
+  })
+
   const cursor = onClick ? 'pointer' : 'default'
 
   const props = {
     ...rest,
     className,
     ref,
-    background: backgroundVariants[variant],
+    background: cardVariant && cardVariant.backgroundColor,
     cursor,
   }
 
@@ -55,5 +65,3 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     </StyledCard>
   )
 })
-
-// Card.displayName = 'eds-card'
