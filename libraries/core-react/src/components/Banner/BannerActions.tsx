@@ -15,7 +15,7 @@ const StyledBannerActions = styled.div<StyledBannerActionsProps>`
   grid-column: ${({ placement }) => (placement === 'bottom' ? '1/-1' : 'auto')};
   ${({ placement }) =>
     placement === 'bottom' && {
-      marginTop: tokens.spacings.left,
+      marginTop: tokens.spacings.top,
       marginLeft: '0',
     }}
 `
