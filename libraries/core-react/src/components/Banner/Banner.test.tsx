@@ -12,6 +12,8 @@ import { banner as tokens } from './Banner.tokens'
 const { BannerMessage, BannerIcon, BannerActions } = Banner
 Icon.add({ add })
 
+const { entities } = tokens
+
 const StyledBanner = styled(Banner)`
   position: relative;
 `
@@ -81,9 +83,12 @@ describe('Banner', () => {
     const iconSvg = container.querySelector('svg')
     expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(tokens.icon.info.background),
+      rgbaTrim(entities.icon.variants.info.background),
     )
-    expect(iconSvg).toHaveAttribute('fill', tokens.icon.info.color)
+    expect(iconSvg).toHaveAttribute(
+      'fill',
+      entities.icon.variants.info.typography.color,
+    )
   })
   it('Has correct warning icon styling', () => {
     const bannerText = 'Banner test'
@@ -99,8 +104,11 @@ describe('Banner', () => {
     const iconSvg = container.querySelector('svg')
     expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(tokens.icon.warning.background),
+      rgbaTrim(entities.icon.variants.warning.background),
     )
-    expect(iconSvg).toHaveAttribute('fill', tokens.icon.warning.color)
+    expect(iconSvg).toHaveAttribute(
+      'fill',
+      entities.icon.variants.warning.typography.color,
+    )
   })
 })

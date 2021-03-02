@@ -26,19 +26,12 @@ const {
 } = tokens
 
 export type BannerToken = ComponentToken & {
-  icon: {
-    info: {
-      background: string
-      color: string
-    }
-    warning: {
-      background: string
-      color: string
-    }
-    shape: {
-      minHeight: string
-      minWidth: string
-      borderRadius: string
+  entities: {
+    icon: ComponentToken & {
+      variants: {
+        info: ComponentToken
+        warning: ComponentToken
+      }
     }
   }
 }
@@ -54,19 +47,30 @@ export const banner: BannerToken = {
     top: medium,
     bottom: medium,
   },
-  icon: {
-    info: {
-      background: infoBackground,
-      color: infoColor,
-    },
-    warning: {
-      background: warningBackground,
-      color: warningColor,
-    },
-    shape: {
-      minHeight,
-      minWidth,
-      borderRadius,
+  entities: {
+    icon: {
+      height: minHeight,
+      width: minWidth,
+      border: {
+        type: 'border',
+        radius: borderRadius,
+        width: 0,
+        color: 'transparent',
+      },
+      variants: {
+        info: {
+          background: infoBackground,
+          typography: {
+            color: infoColor,
+          },
+        },
+        warning: {
+          background: warningBackground,
+          typography: {
+            color: warningColor,
+          },
+        },
+      },
     },
   },
 }

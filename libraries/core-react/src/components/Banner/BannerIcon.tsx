@@ -3,6 +3,7 @@ import { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { banner as tokens } from './Banner.tokens'
 import { Icon } from '../Icon'
+import { bordersTemplate } from '@utils'
 
 type BannerIconVariant = 'info' | 'warning'
 
@@ -10,18 +11,21 @@ type StyledBannerIconProps = {
   variant: BannerIconVariant
 }
 
+const { entities } = tokens
+const { icon } = entities
+
 const StyledBannerIcon = styled.span<StyledBannerIconProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-radius: ${tokens.icon.shape.borderRadius};
+  ${bordersTemplate(icon.border)};
   background-color: ${({ variant }) =>
     variant === 'warning'
-      ? tokens.icon.warning.background
-      : tokens.icon.info.background};
-  width: ${tokens.icon.shape.minWidth};
-  height: ${tokens.icon.shape.minHeight};
+      ? icon.variants.warning.background
+      : icon.variants.info.background};
+  width: ${icon.width};
+  height: ${icon.height};
   margin-right: ${tokens.spacings.right};
 `
 
@@ -39,7 +43,9 @@ export const BannerIcon: FC<BannerIconProps> = ({
 }) => {
   const childrenWithColor = React.Children.map(children, (child) => {
     const color =
-      variant === 'warning' ? tokens.icon.warning.color : tokens.icon.info.color
+      variant === 'warning'
+        ? icon.variants.warning.typography.color
+        : icon.variants.info.typography.color
     return (
       (React.isValidElement(child) &&
         child.type === Icon &&
@@ -55,5 +61,3 @@ export const BannerIcon: FC<BannerIconProps> = ({
     </StyledBannerIcon>
   )
 }
-
-// BannerIcon.displayName = 'eds-banner-icon'
