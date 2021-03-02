@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
-import { chip as tokens } from './Chip.tokens'
+import * as tokens from './Chip.tokens'
 import {
   spacingsTemplate,
   typographyTemplate,
@@ -10,15 +10,9 @@ import {
   bordersTemplate,
 } from '@utils'
 
-const {
-  background,
-  height,
-  typography,
-  spacings,
-  border,
-  states,
-  error,
-} = tokens
+const { primary, error } = tokens
+
+const { background, height, typography, spacings, border, states } = primary
 
 type StyleProps = {
   variant: 'active' | 'error' | 'default'
@@ -86,7 +80,7 @@ const StyledChips = styled.div.attrs<StyleProps>(
           background: ${error.background};
           color: ${error.typography.color};
           svg {
-            fill: ${error.icon.typography.color};
+            fill: ${error.entities.icon.typography.color};
           }
           ${bordersTemplate(error.border)};
           &:hover {

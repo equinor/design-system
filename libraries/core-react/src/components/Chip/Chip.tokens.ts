@@ -31,13 +31,10 @@ const {
 } = tokens
 
 export type ChipToken = ComponentToken & {
-  icon: ComponentToken
-  error: ComponentToken & {
-    icon: ComponentToken
-  }
+  entities: { icon: ComponentToken }
 }
 
-export const chip: ChipToken = {
+export const primary: ChipToken = {
   background: backgroundColor,
   height: '22px',
   border: {
@@ -79,39 +76,44 @@ export const chip: ChipToken = {
       background: activeColor,
     },
   },
-  icon: {
-    height: medium,
-    width: medium,
-    border: {
-      radius: borderRadius,
-      type: 'border',
-      width: 0,
-    },
-    states: {
-      hover: {
-        background: primaryHoverAlt,
+  entities: {
+    icon: {
+      height: medium,
+      width: medium,
+      border: {
+        radius: borderRadius,
+        type: 'border',
+        width: 0,
       },
-    },
-  },
-  error: {
-    background: backgroundColorDefault,
-    border: {
-      type: 'border',
-      color: errorColor,
-      width: '1px',
-      style: 'solid',
-      radius: borderRadius,
-    },
-    typography: {
-      color: errorColor,
-    },
-    states: {
-      hover: {
-        typography: {
-          color: errorColorHover,
+      states: {
+        hover: {
+          background: primaryHoverAlt,
         },
       },
     },
+  },
+}
+
+export const error: ChipToken = {
+  background: backgroundColorDefault,
+  border: {
+    type: 'border',
+    color: errorColor,
+    width: '1px',
+    style: 'solid',
+    radius: borderRadius,
+  },
+  typography: {
+    color: errorColor,
+  },
+  states: {
+    hover: {
+      typography: {
+        color: errorColorHover,
+      },
+    },
+  },
+  entities: {
     icon: {
       typography: {
         color: errorColor,

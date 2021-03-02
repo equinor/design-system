@@ -7,7 +7,7 @@ import { add } from '@equinor/eds-icons'
 import { Chip } from './Chip'
 import { Avatar } from '../Avatar'
 import { Icon } from '../Icon'
-import { chip as tokens } from './Chip.tokens'
+import * as tokens from './Chip.tokens'
 
 Icon.add({ add })
 
@@ -15,7 +15,7 @@ const StyledChips = styled(Chip)`
   position: relative;
 `
 
-const { states, error, border } = tokens
+const { primary, error } = tokens
 
 const rgbaTrim = (x: string) => x.split(' ').join('')
 
@@ -57,14 +57,14 @@ describe('Chips', () => {
 
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
-    expect(chip).toHaveStyleRule('padding-right', tokens.spacings.right)
+    expect(chip).toHaveStyleRule('padding-right', primary.spacings.right)
     expect(chip).toHaveStyleRule(
       'border-radius',
-      border.type === 'border' && border.radius,
+      primary.border.type === 'border' && primary.border.radius,
     )
     expect(icon).toBeDefined()
-    expect(icon).toHaveAttribute('height', tokens.icon.height)
-    expect(icon).toHaveAttribute('width', tokens.icon.width)
+    expect(icon).toHaveAttribute('height', primary.entities.icon.height)
+    expect(icon).toHaveAttribute('width', primary.entities.icon.width)
   })
   it('Has provided Avatar', () => {
     const chipText = 'hello, I am a chip'
@@ -98,15 +98,15 @@ describe('Chips', () => {
     const avatar = queryByTestId(avatarTestId)
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
-    expect(chip).toHaveStyleRule('padding-right', tokens.spacings.right)
+    expect(chip).toHaveStyleRule('padding-right', primary.spacings.right)
     expect(chip).toHaveStyleRule(
       'border-radius',
-      tokens.border.type === 'border' && tokens.border.radius,
+      primary.border.type === 'border' && primary.border.radius,
     )
     expect(avatar).toBeDefined()
     expect(avatar.firstChild).toHaveAttribute('src', imageUrl)
-    expect(avatar).toHaveStyleRule('height', tokens.icon.height)
-    expect(avatar).toHaveStyleRule('width', tokens.icon.width)
+    expect(avatar).toHaveStyleRule('height', primary.entities.icon.height)
+    expect(avatar).toHaveStyleRule('width', primary.entities.icon.width)
   })
 
   it('Has called handleDelete once with props when close icon is clicked', () => {
@@ -175,7 +175,7 @@ describe('Chips', () => {
     const { queryByText } = render(<Chip variant="active">{chipText}</Chip>)
     expect(queryByText(chipText)).toHaveStyleRule(
       'background',
-      rgbaTrim(states.active.background),
+      rgbaTrim(primary.states.active.background),
     )
   })
   it('Has some correct error styling', () => {
@@ -201,6 +201,8 @@ describe('Chips', () => {
       )}`,
     )
     expect(chip).toHaveStyleRule('color', rgbaTrim(error.typography.color))
-    expect(chipIconStyle.fill).toBe(rgbaTrim(error.icon.typography.color))
+    expect(chipIconStyle.fill).toBe(
+      rgbaTrim(error.entities.icon.typography.color),
+    )
   })
 })
