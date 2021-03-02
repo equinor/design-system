@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
-import { banner as tokens } from './Banner.tokens'
+import * as tokens from './Banner.tokens'
 import { Divider } from '../Divider'
 import { BannerIcon } from './BannerIcon'
 import { spacingsTemplate } from '@utils'
@@ -12,16 +12,16 @@ type ContentProps = {
   hasIcon: boolean
 }
 
-const { spacings, background } = tokens
+const { primary } = tokens
 
 const Content = styled.div<ContentProps>`
-  ${spacingsTemplate(spacings)}
+  ${spacingsTemplate(primary.spacings)}
 
   display: grid;
   grid-template-columns: ${({ hasIcon }) =>
     hasIcon ? 'min-content 1fr auto' : '1fr auto'};
   align-items: center;
-  background-color: ${background};
+  background-color: ${primary.background};
 `
 
 const NonMarginDivider = styled(Divider)`
@@ -49,5 +49,3 @@ export const Banner: FC<BannerProps> = ({ children, className, ...props }) => {
     </StyledBanner>
   )
 }
-
-// Banner.displayName = 'eds-banner'

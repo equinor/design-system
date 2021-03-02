@@ -7,12 +7,12 @@ import styled from 'styled-components'
 import { add } from '@equinor/eds-icons'
 import { Banner } from '.'
 import { Icon } from '../Icon'
-import { banner as tokens } from './Banner.tokens'
+import * as tokens from './Banner.tokens'
 
 const { BannerMessage, BannerIcon, BannerActions } = Banner
 Icon.add({ add })
 
-const { entities } = tokens
+const { primary, info, warning } = tokens
 
 const StyledBanner = styled(Banner)`
   position: relative;
@@ -83,12 +83,9 @@ describe('Banner', () => {
     const iconSvg = container.querySelector('svg')
     expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(entities.icon.variants.info.background),
+      rgbaTrim(info.entities.icon.background),
     )
-    expect(iconSvg).toHaveAttribute(
-      'fill',
-      entities.icon.variants.info.typography.color,
-    )
+    expect(iconSvg).toHaveAttribute('fill', info.entities.icon.typography.color)
   })
   it('Has correct warning icon styling', () => {
     const bannerText = 'Banner test'
@@ -104,11 +101,11 @@ describe('Banner', () => {
     const iconSvg = container.querySelector('svg')
     expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
-      rgbaTrim(entities.icon.variants.warning.background),
+      rgbaTrim(warning.entities.icon.background),
     )
     expect(iconSvg).toHaveAttribute(
       'fill',
-      entities.icon.variants.warning.typography.color,
+      warning.entities.icon.typography.color,
     )
   })
 })

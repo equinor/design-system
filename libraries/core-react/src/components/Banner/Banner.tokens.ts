@@ -26,17 +26,12 @@ const {
 } = tokens
 
 export type BannerToken = ComponentToken & {
-  entities: {
-    icon: ComponentToken & {
-      variants: {
-        info: ComponentToken
-        warning: ComponentToken
-      }
-    }
+  entities?: {
+    icon: ComponentToken
   }
 }
 
-export const banner: BannerToken = {
+export const primary: BannerToken = {
   typography: {
     ...messageTypography,
   },
@@ -57,19 +52,27 @@ export const banner: BannerToken = {
         width: 0,
         color: 'transparent',
       },
-      variants: {
-        info: {
-          background: infoBackground,
-          typography: {
-            color: infoColor,
-          },
-        },
-        warning: {
-          background: warningBackground,
-          typography: {
-            color: warningColor,
-          },
-        },
+    },
+  },
+}
+
+export const info: BannerToken = {
+  entities: {
+    icon: {
+      background: infoBackground,
+      typography: {
+        color: infoColor,
+      },
+    },
+  },
+}
+
+export const warning: BannerToken = {
+  entities: {
+    icon: {
+      background: warningBackground,
+      typography: {
+        color: warningColor,
       },
     },
   },

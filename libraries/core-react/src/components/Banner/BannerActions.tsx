@@ -1,7 +1,9 @@
 import * as React from 'react'
 import { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
-import { banner as tokens } from './Banner.tokens'
+import * as tokens from './Banner.tokens'
+
+const { primary } = tokens
 
 type BannerActionsPlacement = 'bottom' | 'left'
 
@@ -11,11 +13,11 @@ type StyledBannerActionsProps = {
 }
 
 const StyledBannerActions = styled.div<StyledBannerActionsProps>`
-  margin-left: ${tokens.spacings.left};
+  margin-left: ${primary.spacings.left};
   grid-column: ${({ placement }) => (placement === 'bottom' ? '1/-1' : 'auto')};
   ${({ placement }) =>
     placement === 'bottom' && {
-      marginTop: tokens.spacings.top,
+      marginTop: primary.spacings.top,
       marginLeft: '0',
     }}
 `
@@ -37,5 +39,3 @@ export const BannerActions: FC<BannerActionProps> = ({
     </StyledBannerActions>
   )
 }
-
-// BannerActions.displayName = 'eds-banner-actions'
