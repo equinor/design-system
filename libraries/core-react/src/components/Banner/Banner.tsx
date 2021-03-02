@@ -12,16 +12,16 @@ type ContentProps = {
   hasIcon: boolean
 }
 
-const { primary } = tokens
+const { enabled } = tokens
 
 const Content = styled.div<ContentProps>`
-  ${spacingsTemplate(primary.spacings)}
+  ${spacingsTemplate(enabled.spacings)}
 
   display: grid;
   grid-template-columns: ${({ hasIcon }) =>
     hasIcon ? 'min-content 1fr auto' : '1fr auto'};
   align-items: center;
-  background-color: ${primary.background};
+  background-color: ${enabled.background};
 `
 
 const NonMarginDivider = styled(Divider)`

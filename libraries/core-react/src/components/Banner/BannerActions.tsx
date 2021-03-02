@@ -3,7 +3,7 @@ import { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Banner.tokens'
 
-const { primary } = tokens
+const { enabled } = tokens
 
 type BannerActionsPlacement = 'bottom' | 'left'
 
@@ -13,11 +13,11 @@ type StyledBannerActionsProps = {
 }
 
 const StyledBannerActions = styled.div<StyledBannerActionsProps>`
-  margin-left: ${primary.spacings.left};
+  margin-left: ${enabled.spacings.left};
   grid-column: ${({ placement }) => (placement === 'bottom' ? '1/-1' : 'auto')};
   ${({ placement }) =>
     placement === 'bottom' && {
-      marginTop: primary.spacings.top,
+      marginTop: enabled.spacings.top,
       marginLeft: '0',
     }}
 `

@@ -10,9 +10,9 @@ import {
   bordersTemplate,
 } from '@utils'
 
-const { primary, error } = tokens
+const { enabled, error } = tokens
 
-const { background, height, typography, spacings, border, states } = primary
+const { background, height, typography, spacings, border, states } = enabled
 
 type StyleProps = {
   variant: 'active' | 'error' | 'default'

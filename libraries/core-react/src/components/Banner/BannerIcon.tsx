@@ -11,21 +11,21 @@ type StyledBannerIconProps = {
   variant: BannerIconVariant
 }
 
-const { primary, info, warning } = tokens
+const { enabled, info, warning } = tokens
 
 const StyledBannerIcon = styled.span<StyledBannerIconProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  ${bordersTemplate(primary.entities.icon.border)};
+  ${bordersTemplate(enabled.entities.icon.border)};
   background-color: ${({ variant }) =>
     variant === 'warning'
       ? warning.entities.icon.background
       : info.entities.icon.background};
-  width: ${primary.entities.icon.width};
-  height: ${primary.entities.icon.height};
-  margin-right: ${primary.spacings.right};
+  width: ${enabled.entities.icon.width};
+  height: ${enabled.entities.icon.height};
+  margin-right: ${enabled.spacings.right};
 `
 
 type BannerIconProps = {

@@ -34,7 +34,7 @@ export type ChipToken = ComponentToken & {
   entities: { icon: ComponentToken }
 }
 
-export const primary: ChipToken = {
+export const enabled: ChipToken = {
   background: backgroundColor,
   height: '22px',
   border: {

@@ -12,7 +12,7 @@ import * as tokens from './Banner.tokens'
 const { BannerMessage, BannerIcon, BannerActions } = Banner
 Icon.add({ add })
 
-const { primary, info, warning } = tokens
+const { info, warning } = tokens
 
 const StyledBanner = styled(Banner)`
   position: relative;

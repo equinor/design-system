@@ -15,7 +15,7 @@ const StyledChips = styled(Chip)`
   position: relative;
 `
 
-const { primary, error } = tokens
+const { enabled, error } = tokens
 
 const rgbaTrim = (x: string) => x.split(' ').join('')
 
@@ -57,14 +57,14 @@ describe('Chips', () => {
 
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
-    expect(chip).toHaveStyleRule('padding-right', primary.spacings.right)
+    expect(chip).toHaveStyleRule('padding-right', enabled.spacings.right)
     expect(chip).toHaveStyleRule(
       'border-radius',
-      primary.border.type === 'border' && primary.border.radius,
+      enabled.border.type === 'border' && enabled.border.radius,
     )
     expect(icon).toBeDefined()
-    expect(icon).toHaveAttribute('height', primary.entities.icon.height)
-    expect(icon).toHaveAttribute('width', primary.entities.icon.width)
+    expect(icon).toHaveAttribute('height', enabled.entities.icon.height)
+    expect(icon).toHaveAttribute('width', enabled.entities.icon.width)
   })
   it('Has provided Avatar', () => {
     const chipText = 'hello, I am a chip'
@@ -98,15 +98,15 @@ describe('Chips', () => {
     const avatar = queryByTestId(avatarTestId)
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
-    expect(chip).toHaveStyleRule('padding-right', primary.spacings.right)
+    expect(chip).toHaveStyleRule('padding-right', enabled.spacings.right)
     expect(chip).toHaveStyleRule(
       'border-radius',
-      primary.border.type === 'border' && primary.border.radius,
+      enabled.border.type === 'border' && enabled.border.radius,
     )
     expect(avatar).toBeDefined()
     expect(avatar.firstChild).toHaveAttribute('src', imageUrl)
-    expect(avatar).toHaveStyleRule('height', primary.entities.icon.height)
-    expect(avatar).toHaveStyleRule('width', primary.entities.icon.width)
+    expect(avatar).toHaveStyleRule('height', enabled.entities.icon.height)
+    expect(avatar).toHaveStyleRule('width', enabled.entities.icon.width)
   })
 
   it('Has called handleDelete once with props when close icon is clicked', () => {
@@ -175,7 +175,7 @@ describe('Chips', () => {
     const { queryByText } = render(<Chip variant="active">{chipText}</Chip>)
     expect(queryByText(chipText)).toHaveStyleRule(
       'background',
-      rgbaTrim(primary.states.active.background),
+      rgbaTrim(enabled.states.active.background),
     )
   })
   it('Has some correct error styling', () => {

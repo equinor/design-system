@@ -6,7 +6,7 @@ import { bordersTemplate } from '@utils'
 
 Icon_.add({ close })
 
-const { primary, error } = tokens
+const { enabled, error } = tokens
 
 type IconProps = {
   variant: 'active' | 'error' | 'default'
@@ -16,7 +16,7 @@ type IconProps = {
 export const Icon = styled(Icon_)<IconProps>`
   cursor: pointer;
   padding: 1px;
-  ${bordersTemplate(primary.entities.icon.border)}
+  ${bordersTemplate(enabled.entities.icon.border)}
 
   z-index: 11;
 
@@ -32,9 +32,9 @@ export const Icon = styled(Icon_)<IconProps>`
           `
         default:
           return css`
-            background: ${primary.entities.icon.states.hover.background};
+            background: ${enabled.entities.icon.states.hover.background};
             svg {
-              fill: ${primary.states.hover.typography.color};
+              fill: ${enabled.states.hover.typography.color};
             }
           `
       }

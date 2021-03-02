@@ -31,7 +31,7 @@ export type BannerToken = ComponentToken & {
   }
 }
 
-export const primary: BannerToken = {
+export const enabled: BannerToken = {
   typography: {
     ...messageTypography,
   },
