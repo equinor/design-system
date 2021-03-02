@@ -8,7 +8,6 @@ import { Icon } from '../Icon'
 import { AccordionHeaderTitle } from './AccordionHeaderTitle'
 import { accordion as tokens } from './Accordion.tokens'
 import type { AccordionProps } from './Accordion.types'
-// import { bordersTemplate } from '@utils'
 
 Icon.add({ chevron_down, chevron_up })
 
