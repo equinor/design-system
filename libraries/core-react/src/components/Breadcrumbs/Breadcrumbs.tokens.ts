@@ -18,7 +18,8 @@ const {
 
 export const breadcrumbs: ComponentToken = {
   spacings: {
-    x: spacingMedium,
+    left: spacingMedium,
+    right: spacingMedium,
   },
   typography: {
     color: enabledColor,

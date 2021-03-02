@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
-import { outlineTemplate } from '@utils'
+import { outlineTemplate, spacingsTemplate } from '@utils'
 
 const { spacings, typography, states } = tokens
 
@@ -27,7 +27,7 @@ const ListItem = styled.li`
 
 const Separator = styled(Typography)`
   color: ${typography.color};
-  margin: 0 ${spacings.x};
+  ${spacingsTemplate(spacings)}
 `
 
 const Collapsed = styled(Typography)`

@@ -32,8 +32,6 @@ export type Spacing = {
   right?: string
   top?: string
   bottom?: string
-  x?: string
-  y?: string
 }
 
 export type SpacingTokens = {
