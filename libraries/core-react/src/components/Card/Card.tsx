@@ -34,28 +34,21 @@ const StyledCard = styled.div<StyledCardProps>`
 
 type backgroundVariants = { variant: string; backgroundColor: string }[]
 
-const backgroundVariants: backgroundVariants = [
-  { variant: 'default', backgroundColor: primary.background },
-  { variant: 'info', backgroundColor: info.background },
-  { variant: 'warning', backgroundColor: warning.background },
-  { variant: 'danger', backgroundColor: danger.background },
-]
-
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   { children, className, variant = 'default', onClick, ...rest },
   ref,
 ) {
-  const cardVariant = backgroundVariants.find((elem) => {
-    return elem.variant === variant
-  })
-
   const cursor = onClick ? 'pointer' : 'default'
+
+  const cardVariant = variant === 'default' ? 'primary' : variant
+
+  const token = tokens[cardVariant]
 
   const props = {
     ...rest,
     className,
     ref,
-    background: cardVariant && cardVariant.backgroundColor,
+    background: token.background,
     cursor,
   }
 
