@@ -11,6 +11,12 @@ scripts:
   'build:core-react': pnpm --filter @equinor/eds-core-react run build
   'build:tokens': pnpm --filter @equinor/eds-tokens run build
   'build:icons': pnpm --filter @equinor/eds-icons run build
+  'bump:core-react': >-
+    pnpm --filter @equinor/eds-core-react recursive exec -- pnpm version
+    prerelease
+  'publish:core-react': >-
+    pnpm --filter @equinor/eds-core-react recursive exec -- pnpm publish --tag
+    alpha --access public
   storybook: pnpm --filter ./libraries/core-react run storybook
   'build:storybook': 'pnpm --filter ./libraries/core-react run build:storybook'
   storefront: pnpm --filter @equinor/eds-storefront run dev
@@ -23,18 +29,19 @@ scripts:
   storefront-docker-run: 'docker run -p 8080:80 eds/storefront'
   storefront-docker-inspect: docker run -it eds/storefront /bin/sh
 devDependencies:
-  '@babel/core': ^7.13.10
-  '@babel/eslint-parser': ^7.13.10
-  '@typescript-eslint/eslint-plugin': ^4.17.0
-  '@typescript-eslint/parser': ^4.17.0
-  eslint: ^7.21.0
-  eslint-config-prettier: ^8.1.0
+  '@testing-library/react-hooks': ^5.1.0
+  '@typescript-eslint/eslint-plugin': ^3.10.1
+  '@typescript-eslint/parser': ^3.10.1
+  babel-eslint: ^10.1.0
+  eslint: ^7.14.0
+  eslint-config-prettier: ^6.15.0
   eslint-plugin-import: ^2.22.1
   eslint-plugin-jsx-a11y: ^6.4.1
   eslint-plugin-prettier: ^3.3.1
   eslint-plugin-react: ^7.22.0
   eslint-plugin-testing-library: ^3.10.1
   prettier: ^2.2.1
+  react-test-renderer: ^17.0.0
   typescript: ^4.1.2
 dependencies:
   '@popperjs/core': ^2.6.0

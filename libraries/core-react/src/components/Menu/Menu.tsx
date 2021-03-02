@@ -61,15 +61,35 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   },
   ref,
 ) {
-  const popperRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  const [popperEl, setPopperEl] = useState<HTMLDivElement>(null)
+
+  const { setOnClose, onClose } = useMenu()
+
+  const { styles, attributes } = usePopper(anchorEl, null, {
+    placement,
+    modifiers: [
+      // {
+      //   name: 'arrow',
+      //   options: {
+      //     element: arrowRef,
+      //   },
+      // },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 10],
+        },
+      },
+    ],
+  })
 
   // useOutsideClick(listRef, () => {
   //   if (open && onClose !== null) {
   //     onClose()
   //   }
   // })
-  const { setOnClose, onClose } = useMenu()
+
   useEffect(() => {
     if (onClose === null && onCloseCallback) {
       setOnClose(onCloseCallback)
@@ -101,45 +121,20 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   //   placement,
   // )
 
-  const { styles, attributes } = usePopper(anchorEl, popperRef.current, {
-    placement,
-    modifiers: [
-      // {
-      //   name: 'arrow',
-      //   options: {
-      //     element: arrowRef,
-      //   },
-      // },
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 10],
-        },
-      },
-    ],
-  })
-
   const menuProps = {
     ...rest,
   }
 
   const props = {
     open,
+    style: styles.popper,
     ...attributes.popper,
   }
 
-  require('react-dom')
-  window.React2 = require('react')
-  console.log(window.React1, window.React2)
+  //if (!open) return null
 
-  console.log('render menu', styles.popper)
   return (
-    <StyledPaper
-      elevation="raised"
-      ref={popperRef}
-      style={styles.popper}
-      {...props}
-    >
+    <StyledPaper elevation="raised" ref={setPopperEl} {...props}>
       <MenuList
         {...menuProps}
         ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}

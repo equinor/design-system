@@ -7,7 +7,9 @@ const AllTheProviders = ({ children }: { children: ReactNode }) => {
   const [anchorEl, setAnchorEl] = React.useState<ElementType>(null)
 
   React.useEffect(() => {
-    setAnchorEl(anchorRef.current)
+    if (anchorRef.current) {
+      setAnchorEl(anchorRef.current)
+    }
   }, [anchorRef])
 
   const updatedChildren = React.Children.map(children, (child) =>
