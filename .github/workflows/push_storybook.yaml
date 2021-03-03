@@ -1,10 +1,11 @@
 name: Publish storybook
 on:
   workflow_dispatch:
-    storybook-slot:
-    description: 'Azure webapp slot for Storybook'
-    required: true
-    default: 'development'
+    inputs:
+      storybook-slot:
+        description: 'Azure webapp slot for Storybook'
+        required: true
+        default: 'development'
 jobs:
   setup:
     name: Setup base files
