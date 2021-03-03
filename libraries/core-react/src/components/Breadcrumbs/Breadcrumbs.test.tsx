@@ -73,7 +73,7 @@ describe('Breadcrumbs', () => {
     )
   })
   it('should crop the labels and have tooltip on hover when maxWidth is defined', () => {
-    const { getAllByText } = render(
+    const { getAllByText, getByRole } = render(
       <Breadcrumbs>
         <Breadcrumb maxWidth={30}>Label 1</Breadcrumb>
         <Breadcrumb maxWidth={30}>Label 2</Breadcrumb>
@@ -83,10 +83,8 @@ describe('Breadcrumbs', () => {
     const crumb = getAllByText(/^Label\s\d$/)
     expect(crumb[0]).toHaveStyleRule('max-width', '30px')
     fireEvent.mouseEnter(crumb[0])
-    expect(crumb[0].parentNode.parentNode.lastChild).toHaveAttribute(
-      'role',
-      'tooltip',
-    )
+    const tooltip = getByRole('tooltip')
+    expect(tooltip).toBeDefined()
   })
   it('can extend the css for the component', () => {
     const { container } = render(
