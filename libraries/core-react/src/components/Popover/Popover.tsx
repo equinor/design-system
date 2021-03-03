@@ -8,16 +8,18 @@ import {
   isValidElement,
   MutableRefObject,
 } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { Card } from '../Card'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { usePopper } from '@hooks'
+import { usePopper, useOutsideClick } from '@hooks'
 import { popover as tokens } from './Popover.tokens'
 
-const StyledPopover = styled(Card)`
+type StyledPopoverProps = Pick<PopoverProps, 'open'>
+
+const StyledPopover = styled(Card)<StyledPopoverProps>`
   ${typographyTemplate(tokens.header)}
   ${spacingsTemplate(tokens.spacings)}
   background: ${tokens.background};
@@ -29,6 +31,11 @@ const StyledPopover = styled(Card)`
   min-height: ${tokens.popover.minHeight};
   box-shadow: ${tokens.elevation};
   z-index: 100;
+
+  ${({ open }) =>
+    css({
+      visibility: open ? 'visible' : 'hidden',
+    })};
 
   .arrow {
     z-index: -1;
@@ -100,26 +107,40 @@ export type PopoverProps = {
   /**  On Close callback */
   onClose?: () => void
   /** Anchor element reference */
-  anchorEl?: MutableRefObject<null>
+  anchorEl: HTMLElement
+  open?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 // Controller Component for PopoverItem
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   function Popover(
-    { children, placement = 'bottom', anchorEl, onClose, ...rest },
+    {
+      children,
+      placement = 'bottom',
+      anchorEl,
+      open = false,
+      onClose,
+      ...rest
+    },
     ref,
   ) {
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
+    useOutsideClick(popperRef, anchorEl, () => {
+      if (open && onClose !== null) {
+        onClose()
+      }
+    })
 
     const { styles, attributes } = usePopper(
       anchorEl,
-      popperRef,
+      popperRef.current,
       arrowRef,
       placement,
     )
 
     const props = {
+      open,
       ...rest,
       ...attributes.popper,
     }

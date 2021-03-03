@@ -46,18 +46,22 @@ export const Default: Story<PopoverProps> = (args) => {
       <Button ref={referenceElement} onClick={handleToggle}>
         Click me!
       </Button>
-      {openState && (
-        <Popover {...args} anchorEl={referenceElement} onClose={handleToggle}>
-          <PopoverTitle>Title</PopoverTitle>
-          <PopoverContent>
-            <Typography variant="body_short">Content</Typography>
-          </PopoverContent>
-          <CardActions>
-            <Button onClick={handleToggle}>Cancel</Button>
-            <Button onClick={handleToggle}>OK</Button>
-          </CardActions>
-        </Popover>
-      )}
+
+      <Popover
+        {...args}
+        anchorEl={referenceElement.current}
+        onClose={handleToggle}
+        open={openState}
+      >
+        <PopoverTitle>Title</PopoverTitle>
+        <PopoverContent>
+          <Typography variant="body_short">Content</Typography>
+        </PopoverContent>
+        <CardActions>
+          <Button onClick={handleToggle}>Cancel</Button>
+          <Button onClick={handleToggle}>OK</Button>
+        </CardActions>
+      </Popover>
     </div>
   )
 }
@@ -109,11 +113,14 @@ export const ActivationTypes: Story<PopoverProps> = () => {
         <Button ref={refOne} onClick={() => handleClick(1)}>
           Activate on click
         </Button>
-        {active === 1 && (
-          <Popover anchorEl={refOne} onClose={handleClose}>
-            <Content />
-          </Popover>
-        )}
+
+        <Popover
+          anchorEl={refOne.current}
+          onClose={handleClose}
+          open={active === 1}
+        >
+          <Content />
+        </Popover>
       </Wrapper>
       <Typography variant="body_long">
         Remember to use both onMouseEnter and onFocus attributes to your trigger
@@ -129,11 +136,14 @@ export const ActivationTypes: Story<PopoverProps> = () => {
         >
           On Hover
         </Button>
-        {active === 2 && (
-          <Popover anchorEl={refTwo} onClose={handleClose}>
-            <Content />
-          </Popover>
-        )}
+
+        <Popover
+          anchorEl={refTwo.current}
+          onClose={handleClose}
+          open={active === 2}
+        >
+          <Content />
+        </Popover>
       </Wrapper>
     </Body>
   )
