@@ -1,20 +1,12 @@
 import * as React from 'react'
-import {
-  useEffect,
-  useState,
-  useRef,
-  ReactNode,
-  HTMLAttributes,
-  MutableRefObject,
-} from 'react'
+import { useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
-import { useCombinedRefs, useOutsideClick, Placement } from '@hooks'
+import { useCombinedRefs, useOutsideClick, Placement, usePopper } from '@hooks'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
-import { usePopper } from 'react-popper'
 
 const {
   enabled: { border },
@@ -62,33 +54,21 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   ref,
 ) {
   const listRef = useRef<HTMLUListElement>(null)
-  const [popperEl, setPopperEl] = useState<HTMLDivElement>(null)
+  const popperRef = useRef<HTMLDivElement | null>(null)
 
   const { setOnClose, onClose } = useMenu()
-
-  const { styles, attributes } = usePopper(anchorEl, null, {
-    placement,
-    modifiers: [
-      // {
-      //   name: 'arrow',
-      //   options: {
-      //     element: arrowRef,
-      //   },
-      // },
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 10],
-        },
-      },
-    ],
-  })
-
   // useOutsideClick(listRef, () => {
   //   if (open && onClose !== null) {
   //     onClose()
   //   }
   // })
+
+  const { styles, attributes } = usePopper(
+    anchorEl,
+    popperRef.current,
+    null,
+    placement,
+  )
 
   useEffect(() => {
     if (onClose === null && onCloseCallback) {
@@ -100,7 +80,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     return () => {
       document.removeEventListener('keydown', handleGlobalKeyPress, true)
     }
-  }, [open, listRef.current])
+  }, [listRef.current])
 
   const handleGlobalKeyPress = (e: KeyboardEvent) => {
     const { key } = e
@@ -114,31 +94,15 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  // const { styles, attributes } = usePopper(
-  //   anchorEl,
-  //   popperRef.current,
-  //   null,
-  //   placement,
-  // )
-
-  const menuProps = {
-    ...rest,
-  }
-
   const props = {
     open,
     style: styles.popper,
     ...attributes.popper,
   }
 
-  //if (!open) return null
-
   return (
-    <StyledPaper elevation="raised" ref={setPopperEl} {...props}>
-      <MenuList
-        {...menuProps}
-        ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}
-      >
+    <StyledPaper elevation="raised" ref={popperRef} {...props}>
+      <MenuList {...rest} ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}>
         {children}
       </MenuList>
     </StyledPaper>
