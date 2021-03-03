@@ -176,7 +176,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}-build-core-react
       - name: Publish to npm
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ github.event.inputs.npm-tag }}
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   build-storybook:
