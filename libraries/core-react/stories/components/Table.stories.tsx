@@ -184,13 +184,12 @@ export const simpleTable: Story<TableProps> = (args) => {
               style={{ position: 'relative' }}
             >
               Hover test
-              {openState && (
-                <Tooltip
-                  placement="top"
-                  title="Tooltip"
-                  anchorEl={referenceElement}
-                />
-              )}
+              <Tooltip
+                open={openState}
+                placement="top"
+                title="Tooltip"
+                anchorEl={referenceElement.current}
+              />
             </Cell>
           </Row>
         </Body>
