@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
+import { useState, useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
@@ -57,11 +57,11 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const popperRef = useRef<HTMLDivElement | null>(null)
 
   const { setOnClose, onClose } = useMenu()
-  // useOutsideClick(listRef, () => {
-  //   if (open && onClose !== null) {
-  //     onClose()
-  //   }
-  // })
+  useOutsideClick(listRef, anchorEl, () => {
+    if (open && onClose !== null) {
+      onClose()
+    }
+  })
 
   const { styles, attributes } = usePopper(
     anchorEl,

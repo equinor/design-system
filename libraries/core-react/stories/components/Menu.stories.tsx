@@ -176,95 +176,19 @@ export default {
 
 export const ButtonToggle: Story<MenuProps> = () => {
   const [state, setState] = React.useState<{
-    buttonEl: HTMLButtonElement
-    focus: 'first' | 'last'
-  }>({
-    buttonEl: null,
-    focus: 'first',
-  })
-
-  const { buttonEl, focus } = state
-  const isOpen = Boolean(buttonEl)
-
-  const openMenu = (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLButtonElement>,
-    focus: 'first' | 'last',
-  ) => {
-    const target = e.target as HTMLButtonElement
-    setState({ ...state, buttonEl: target, focus })
-  }
-
-  const closeMenu = () => {
-    setState({ ...state, buttonEl: null, focus })
-  }
-
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    e.preventDefault()
-    switch (key) {
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu(e, 'first')
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu(e, 'last')
-        break
-      case 'Escape':
-        closeMenu()
-        break
-      default:
-        break
-    }
-  }
-
-  return (
-    <Grid style={{ gridAutoFlow: 'row', position: 'relative', margin: '5rem' }}>
-      <Typography variant="h4">Click button to open Menu</Typography>
-      <Button
-        variant="ghost_icon"
-        id="menuButton"
-        aria-controls="menu-on-button"
-        aria-haspopup="true"
-        aria-expanded={isOpen}
-        onClick={(e) => (isOpen ? closeMenu() : openMenu(e, null))}
-        onKeyDown={onKeyPress}
-      >
-        Menu
-      </Button>
-      <Menu
-        id="menu-on-button"
-        aria-labelledby="menuButton"
-        open={isOpen}
-        anchorEl={buttonEl}
-        onClose={closeMenu}
-        focus={focus}
-        placement="right-end"
-      >
-        {bigMenuTemplate}
-      </Menu>
-    </Grid>
-  )
-}
-
-export const InTopbar: Story<MenuProps> = () => {
-  const [state, setState] = useState<{
     isOpen: boolean
     focus: 'first' | 'last'
   }>({
-    isOpen: false,
     focus: 'first',
+    isOpen: false,
   })
 
-  const { isOpen, focus } = state
-
+  const { focus, isOpen } = state
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
   const openMenu = (focus: 'first' | 'last') => {
-    setState({ ...state, focus, isOpen: true })
+    setState({ ...state, isOpen: true, focus })
   }
-
-  const closeMenu = () => {
-    setState({ ...state, focus, isOpen: false })
-  }
+  const closeMenu = () => setState({ ...state, isOpen: false })
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
@@ -283,7 +207,70 @@ export const InTopbar: Story<MenuProps> = () => {
         break
     }
   }
-  const referenceElement = React.useRef(null)
+
+  return (
+    <Grid style={{ gridAutoFlow: 'row', position: 'relative', margin: '5rem' }}>
+      <Typography variant="h4">Click button to open Menu</Typography>
+      <Button
+        ref={buttonRef}
+        variant="ghost_icon"
+        id="menuButton"
+        aria-controls="menu-on-button"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        onClick={() => (isOpen ? closeMenu() : openMenu(null))}
+        onKeyDown={onKeyPress}
+      >
+        Menu
+      </Button>
+      <Menu
+        id="menu-on-button"
+        aria-labelledby="menuButton"
+        open={isOpen}
+        anchorEl={buttonRef.current}
+        onClose={() => closeMenu()}
+        focus={focus}
+        placement="right-end"
+      >
+        {bigMenuTemplate}
+      </Menu>
+    </Grid>
+  )
+}
+
+export const InTopbar: Story<MenuProps> = () => {
+  const [state, setState] = React.useState<{
+    isOpen: boolean
+    focus: 'first' | 'last'
+  }>({
+    focus: 'first',
+    isOpen: false,
+  })
+
+  const { focus, isOpen } = state
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
+  const openMenu = (focus: 'first' | 'last') => {
+    setState({ ...state, isOpen: true, focus })
+  }
+  const closeMenu = () => setState({ ...state, isOpen: false })
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const { key } = e
+    e.preventDefault()
+    switch (key) {
+      case 'ArrowDown':
+        isOpen ? closeMenu() : openMenu('first')
+        break
+      case 'ArrowUp':
+        isOpen ? closeMenu() : openMenu('last')
+        break
+      case 'Escape':
+        closeMenu()
+        break
+      default:
+        break
+    }
+  }
 
   return (
     <Grid style={{ margin: 0 }}>
@@ -291,7 +278,7 @@ export const InTopbar: Story<MenuProps> = () => {
         <Header>Menu in Topbar</Header>
         <Actions>
           <Button
-            ref={referenceElement}
+            ref={buttonRef}
             variant="ghost_icon"
             id="menuButton"
             aria-controls="menu-on-button"
@@ -307,7 +294,7 @@ export const InTopbar: Story<MenuProps> = () => {
             aria-labelledby="menuButton"
             focus={focus}
             open={isOpen}
-            anchorEl={referenceElement}
+            anchorEl={buttonRef.current}
             onClose={closeMenu}
             placement="left-end"
           >
