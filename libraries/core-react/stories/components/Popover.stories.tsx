@@ -64,10 +64,10 @@ export const Default: Story<PopoverProps> = (args) => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <CardActions>
+        <Card.Actions>
           <Button onClick={handleToggle}>Cancel</Button>
           <Button onClick={handleToggle}>OK</Button>
-        </CardActions>
+        </Card.Actions>
       </Popover>
     </div>
   )
@@ -96,10 +96,10 @@ export const ActivationTypes: Story<PopoverProps> = () => {
       <Popover.Content>
         <Typography variant="body_short">Content</Typography>
       </Popover.Content>
-      <CardActions>
+      <Card.Actions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button onClick={handleClose}>OK</Button>
-      </CardActions>
+      </Card.Actions>
     </>
   )
   const refOne = useRef(null)
@@ -155,7 +155,7 @@ export const ActivationTypes: Story<PopoverProps> = () => {
 
         <Popover
           id="hover-popover"
-          aria-expanded={open ===}
+          aria-expanded={open === 2}
           anchorEl={refTwo.current}
           onClose={handleClose}
           open={active === 2}
