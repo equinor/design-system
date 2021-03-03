@@ -40,6 +40,4 @@ export const breadcrumbs: ComponentToken = {
       },
     },
   },
-
-  //outline: `1px dashed ${focusOutlineColor}`,
 }
