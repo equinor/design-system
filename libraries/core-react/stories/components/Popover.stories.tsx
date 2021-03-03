@@ -43,12 +43,19 @@ export const Default: Story<PopoverProps> = (args) => {
 
   return (
     <div style={{ margin: '10em' }}>
-      <Button ref={referenceElement} onClick={handleToggle}>
+      <Button
+        id="default-popover-anchor"
+        aria-controls="default-popover"
+        ref={referenceElement}
+        onClick={handleToggle}
+      >
         Click me!
       </Button>
 
       <Popover
         {...args}
+        id="default-popover"
+        aria-expanded={openState}
         anchorEl={referenceElement.current}
         onClose={handleToggle}
         open={openState}
@@ -110,11 +117,18 @@ export const ActivationTypes: Story<PopoverProps> = () => {
         </Typography>
       </TextWrapper>
       <Wrapper>
-        <Button ref={refOne} onClick={() => handleClick(1)}>
+        <Button
+          id="click-popover-anchor"
+          aria-controls="click-popover"
+          ref={refOne}
+          onClick={() => handleClick(1)}
+        >
           Activate on click
         </Button>
 
         <Popover
+          id="click-popover"
+          aria-expanded={active === 1}
           anchorEl={refOne.current}
           onClose={handleClose}
           open={active === 1}
@@ -130,6 +144,8 @@ export const ActivationTypes: Story<PopoverProps> = () => {
       </Typography>
       <Wrapper>
         <Button
+          id="anchor-hover-popover"
+          aria-controls="hover-popover"
           ref={refTwo}
           onMouseEnter={() => handleHover(2)}
           onFocus={() => handleClick(2)}
@@ -138,6 +154,8 @@ export const ActivationTypes: Story<PopoverProps> = () => {
         </Button>
 
         <Popover
+          id="hover-popover"
+          aria-expanded={active === 2}
           anchorEl={refTwo.current}
           onClose={handleClose}
           open={active === 2}

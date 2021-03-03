@@ -145,11 +145,20 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       ...attributes.popper,
     }
     return (
-      <StyledPopover ref={popperRef} style={styles.popper} {...props}>
+      <StyledPopover
+        ref={popperRef}
+        style={styles.popper}
+        {...props}
+        data-testid="popover"
+      >
         <Arrow ref={setArrowRef} style={styles.arrow} className="arrow" />
 
         {children}
-        <StyledCloseButton onClick={onClose} variant="ghost_icon">
+        <StyledCloseButton
+          onClick={onClose}
+          variant="ghost_icon"
+          data-testid="popover-close"
+        >
           <Icon name="close" data={close} title="close" size={48} />
         </StyledCloseButton>
       </StyledPopover>
