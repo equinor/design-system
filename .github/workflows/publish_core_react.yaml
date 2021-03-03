@@ -179,6 +179,7 @@ jobs:
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
+          scope: '@equinor'
       - name: Publish to npm
         run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
