@@ -21,50 +21,12 @@ const TextWrapper = styled.div`
   width: 800px;
 `
 
-const Arrow = styled.div`
-  &,
-  &::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    z-index: -1;
-  }
-
-  &::before {
-    content: '';
-    transform: rotate(45deg);
-    background: #333;
-  }
-`
-
 export default {
   title: 'Components/Tooltip',
   component: Tooltip,
   argTypes: {
     title: {
       defaultValue: 'Tooltip title',
-    },
-    placement: {
-      control: {
-        type: 'select',
-        options: [
-          'auto',
-          'auto-start',
-          'auto-end',
-          'top',
-          'top-start',
-          'top-end',
-          'bottom',
-          'bottom-start',
-          'bottom-end',
-          'right',
-          'right-start',
-          'right-end',
-          'left',
-          'left-start',
-          'left-end',
-        ],
-      },
     },
   },
 } as Meta
@@ -86,12 +48,18 @@ export const Default: Story<TooltipProps> = (args) => {
     <div style={{ margin: '3rem 10rem' }}>
       <Button
         ref={referenceElement}
+        aria-describedby="tooltip"
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}
       >
         Hover me!
       </Button>
-      {openState && <Tooltip {...args} anchorEl={referenceElement} />}
+      <Tooltip
+        {...args}
+        open={openState}
+        id="tooltip"
+        anchorEl={referenceElement.current}
+      />
     </div>
   )
 }
@@ -130,28 +98,38 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
       <Wrapper>
         <Button
           disabled
+          aria-describedby="tooltip-disabled-chrome"
           ref={referenceElementOne}
           onPointerEnter={() => handleOpen(1)}
           onPointerLeave={handleClose}
         >
           Disabled, but hover works!
         </Button>
-        {openState === 1 && (
-          <Tooltip title="Tooltip works!" anchorEl={referenceElementOne} />
-        )}
+
+        <Tooltip
+          id="tooltip-disabled-chrome"
+          open={openState === 1}
+          title="Tooltip works!"
+          anchorEl={referenceElementOne.current}
+        />
+
         <div
           ref={referenceElementTwo}
           onPointerEnter={() => handleOpen(2)}
           onPointerLeave={handleClose}
+          aria-describedby="tooltip-disabled-safari"
         >
           <Button disabled style={{ pointerEvents: 'none' }}>
             Just Safari example
           </Button>
         </div>
 
-        {openState === 2 && (
-          <Tooltip title="Tooltip works!" anchorEl={referenceElementTwo} />
-        )}
+        <Tooltip
+          id="tooltip-disabled-safari"
+          open={openState === 2}
+          title="Tooltip works!"
+          anchorEl={referenceElementTwo.current}
+        />
       </Wrapper>
     </Body>
   )
