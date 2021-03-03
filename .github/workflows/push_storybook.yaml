@@ -1,5 +1,10 @@
-name: Push storybook
-on: workflow_dispatch
+name: Publish storybook
+on:
+  workflow_dispatch:
+    storybook-slot:
+    description: 'Azure webapp slot for Storybook'
+    required: true
+    default: 'development'
 jobs:
   setup:
     name: Setup base files
@@ -123,5 +128,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'eds-storybook-react'
-          slot-name: 'development'
+          slot-name: '${{ github.event.inputs.storybook-slot }}'
           images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}'
