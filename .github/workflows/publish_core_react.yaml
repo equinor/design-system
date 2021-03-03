@@ -1,4 +1,4 @@
-name: Publish storybook
+name: Publish core-react
 on:
   workflow_dispatch:
     inputs:
