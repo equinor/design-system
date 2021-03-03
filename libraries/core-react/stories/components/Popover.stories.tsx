@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Typography, Button, Popover, PopoverProps, Card } from '@components'
 import { Meta, Story } from '@storybook/react'
 
-const { PopoverTitle, PopoverContent } = Popover
-const { CardActions } = Card
+const { Title, Content } = Popover
+const { Actions } = Card
 
 const Body = styled.div`
   margin: 42px;
@@ -26,9 +26,9 @@ export default {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
-    PopoverTitle,
-    PopoverContent,
-    CardActions,
+    Title,
+    Content,
+    Actions,
   },
 } as Meta
 
@@ -60,10 +60,10 @@ export const Default: Story<PopoverProps> = (args) => {
         onClose={handleToggle}
         open={openState}
       >
-        <PopoverTitle>Title</PopoverTitle>
-        <PopoverContent>
+        <Popover.Title>Title</Popover.Title>
+        <Popover.Content>
           <Typography variant="body_short">Content</Typography>
-        </PopoverContent>
+        </Popover.Content>
         <CardActions>
           <Button onClick={handleToggle}>Cancel</Button>
           <Button onClick={handleToggle}>OK</Button>
@@ -92,10 +92,10 @@ export const ActivationTypes: Story<PopoverProps> = () => {
 
   const Content = () => (
     <>
-      <PopoverTitle>Title </PopoverTitle>
-      <PopoverContent>
+      <Popover.Title>Title </Popover.Title>
+      <Popover.Content>
         <Typography variant="body_short">Content</Typography>
-      </PopoverContent>
+      </Popover.Content>
       <CardActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button onClick={handleClose}>OK</Button>
@@ -155,7 +155,7 @@ export const ActivationTypes: Story<PopoverProps> = () => {
 
         <Popover
           id="hover-popover"
-          aria-expanded={active === 2}
+          aria-expanded={open ===}
           anchorEl={refTwo.current}
           onClose={handleClose}
           open={active === 2}
