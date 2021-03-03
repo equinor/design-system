@@ -19,14 +19,12 @@ const AllTheProviders = ({ children }: { children: ReactNode }) => {
   ) as ReactNode
 
   return (
-    anchorRef && (
-      <>
-        <button style={{ top: 0, right: 0, float: 'right' }} ref={anchorRef}>
-          Anchor
-        </button>
-        {updatedChildren}
-      </>
-    )
+    <>
+      <button style={{ top: 0, right: 0, float: 'right' }} ref={anchorRef}>
+        Anchor
+      </button>
+      {updatedChildren}
+    </>
   )
 }
 
