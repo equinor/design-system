@@ -175,10 +175,6 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}-build-core-react
-      - name: Append .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}
-          registry=https://registry.npmjs.org/
-          always-auth=true" >> .npmrc
       - name: Publish to npm
         run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
