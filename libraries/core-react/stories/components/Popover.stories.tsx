@@ -155,7 +155,7 @@ export const ActivationTypes: Story<PopoverProps> = () => {
 
         <Popover
           id="hover-popover"
-          aria-expanded={open === 2}
+          aria-expanded={active === 2}
           anchorEl={refTwo.current}
           onClose={handleClose}
           open={active === 2}
