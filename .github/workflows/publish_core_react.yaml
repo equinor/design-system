@@ -175,7 +175,8 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}-build-core-react
-      - uses: actions/setup-node@v2
+      - name: Setup .npmrc
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
