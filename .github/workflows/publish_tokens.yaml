@@ -47,7 +47,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
   lint:
-    name: Lint eds-tokens
+    name: Lint
     runs-on: ubuntu-latest
     needs: setup
     steps:
@@ -64,7 +64,7 @@ jobs:
       - name: List tokens folder
         run: ls -la libraries/tokens
       - name: Lint
-        run: ./pnpm/bin/pnpm run lint libraries/tokens
+        run: ./pnpm/bin/pnpm run lint ./libraries
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest

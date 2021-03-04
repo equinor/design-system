@@ -47,7 +47,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
   lint:
-    name: Lint eds-icons
+    name: Lint
     runs-on: ubuntu-latest
     needs: setup
     steps:
@@ -60,7 +60,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Lint
-        run: ./pnpm/bin/pnpm run lint libraries/icons
+        run: ./pnpm/bin/pnpm run lint ./libraries
   build-icons:
     name: Build eds-icons
     runs-on: ubuntu-latest
