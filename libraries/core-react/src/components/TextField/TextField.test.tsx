@@ -1,9 +1,13 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, fireEvent } from '@testing-library/react'
+import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { TextField } from '.'
+import { Icon } from '../Icon'
+import { save } from '@equinor/eds-icons'
+
+Icon.add({ save })
 
 afterEach(cleanup)
 
@@ -48,6 +52,40 @@ describe('TextField', () => {
     })
 
     expect(value).toBe(newValue)
+  })
+
+  it('Can have a helper text', () => {
+    const helperText = 'Help me'
+
+    render(<TextField id="test" helperText={helperText} />)
+    const inputNode = screen.getByText(helperText)
+    expect(inputNode).toBeDefined()
+  })
+
+  it('Can have an icon inside the input', () => {
+    const labelText = 'Label for test'
+    render(
+      <TextField
+        id="test"
+        label={labelText}
+        inputIcon={<Icon name="save" />}
+      />,
+    )
+    const inputNode = screen.getByLabelText(labelText).parentNode
+    expect(inputNode.querySelectorAll('svg')).toHaveLength(1)
+  })
+  it('Can have an icon by the helper text', () => {
+    const helperText = 'Help me'
+    render(
+      <TextField
+        id="test"
+        label="hi"
+        helperText={helperText}
+        helperIcon={<Icon name="save" />}
+      />,
+    )
+    const inputNode = screen.getByText(helperText).parentNode
+    expect(inputNode.querySelectorAll('svg')).toHaveLength(1)
   })
 
   const StyledTextField = styled(TextField)`
