@@ -44,9 +44,7 @@ export default [
       }),
       commonjs({
         namedExports: {
-          '../libraries/core-react/node_modules/react-fast-compare/index.js': [
-            'isEqual',
-          ],
+          '../../node_modules/react-fast-compare/index.js': ['isEqual'],
         },
       }),
       sizeSnapshot(),
