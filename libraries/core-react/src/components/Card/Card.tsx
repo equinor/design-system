@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { card as tokens } from './Card.tokens'
-import { spacingsTemplate } from '@utils'
+import * as tokens from './Card.tokens'
+import { spacingsTemplate, bordersTemplate } from '@utils'
 
-const { spacings, shape } = tokens
+const { primary } = tokens
 
 type StyledCardProps = {
   background: string
@@ -19,7 +19,6 @@ export type CardProps = {
 const StyledCard = styled.div<StyledCardProps>`
   height: fit-content;
   width: 100%;
-  min-width: ${shape.minWidth};
   position: relative;
   background-color: ${({ background }) => background};
   box-sizing: border-box;
@@ -28,11 +27,9 @@ const StyledCard = styled.div<StyledCardProps>`
   grid-auto-columns: auto;
   align-items: center;
   align-content: start;
-  border-radius: ${shape.borderRadius};
-  min-height: ${shape.minHeight};
   cursor: ${({ cursor }) => cursor};
-
-  ${spacingsTemplate(spacings)}
+  ${bordersTemplate(primary.border)};
+  ${spacingsTemplate(primary.spacings)}
 `
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
@@ -41,11 +38,15 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
 ) {
   const cursor = onClick ? 'pointer' : 'default'
 
+  const cardVariant = variant === 'default' ? 'primary' : variant
+
+  const token = tokens[cardVariant]
+
   const props = {
     ...rest,
     className,
     ref,
-    background: tokens.background[variant],
+    background: token.background,
     cursor,
   }
 
@@ -55,5 +56,3 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     </StyledCard>
   )
 })
-
-// Card.displayName = 'eds-card'

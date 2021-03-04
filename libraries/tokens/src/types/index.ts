@@ -28,8 +28,8 @@ export type TypographyTokens = {
 }
 
 export type Spacing = {
-  left: string
-  right: string
+  left?: string
+  right?: string
   top?: string
   bottom?: string
 }

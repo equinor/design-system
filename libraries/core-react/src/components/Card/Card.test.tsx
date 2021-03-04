@@ -4,12 +4,14 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
-import { card as token } from './Card.tokens'
+import * as tokens from './Card.tokens'
 import { trimSpaces } from '@utils'
 
 import { Card } from '.'
 
 const { CardHeader, CardHeaderTitle, CardMedia, CardActions } = Card
+
+const { info } = tokens
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -48,7 +50,7 @@ describe('Card', () => {
     const card = container.firstChild
     expect(card).toHaveStyleRule(
       'background-color',
-      trimSpaces(token.background.info),
+      trimSpaces(info.background),
     )
   })
   it('Has provided title and subtitle in CardHeaderTitle', () => {

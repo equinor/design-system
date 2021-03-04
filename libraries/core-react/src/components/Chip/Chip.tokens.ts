@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   spacings: {
@@ -29,66 +30,95 @@ const {
   },
 } = tokens
 
-export const chip = {
-  enabled: {
-    background: backgroundColor,
-    height: '24px',
-    border: {
-      radius: borderRadius,
+export type ChipToken = ComponentToken & {
+  entities: { icon: ComponentToken }
+}
+
+export const enabled: ChipToken = {
+  background: backgroundColor,
+  height: '22px',
+  border: {
+    radius: borderRadius,
+    color: 'transparent',
+    type: 'border',
+    width: '1px',
+  },
+  spacings: {
+    left: x_small,
+    right: small,
+  },
+  typography: {
+    ...chipTypography,
+    color: primaryColor,
+  },
+
+  states: {
+    hover: {
+      typography: {
+        color: primaryHover,
+      },
     },
-    spacings: {
-      left: x_small,
-      right: small,
+    disabled: {
+      typography: {
+        color: disabledColor,
+      },
     },
-    typography: {
-      ...chipTypography,
-      color: primaryColor,
+    focus: {
+      outline: {
+        width: '1px',
+        color: focusOutlineColor,
+        style: 'dashed',
+        type: 'outline',
+        offset: '2px',
+      },
     },
+    active: {
+      background: activeColor,
+    },
+  },
+  entities: {
     icon: {
       height: medium,
       width: medium,
       border: {
         radius: borderRadius,
+        type: 'border',
+        width: 0,
       },
-      hover: {
-        background: primaryHoverAlt,
+      states: {
+        hover: {
+          background: primaryHoverAlt,
+        },
       },
     },
   },
-  hover: {
-    icon: {
-      background: primaryHoverAlt,
-    },
-    typography: {
-      color: primaryHover,
-    },
+}
+
+export const error: ChipToken = {
+  background: backgroundColorDefault,
+  border: {
+    type: 'border',
+    color: errorColor,
+    width: '1px',
+    style: 'solid',
+    radius: borderRadius,
   },
-  disabled: {
-    typography: {
-      color: disabledColor,
-    },
+  typography: {
+    color: errorColor,
   },
-  outline: `1px dashed ${focusOutlineColor}`,
-  outlineOffset: '2px',
-  active: {
-    background: activeColor,
-  },
-  error: {
-    background: backgroundColorDefault,
-    border: {
-      color: errorColor,
-      width: '1px',
-      type: 'solid',
-    },
-    typography: {
-      color: errorColor,
-    },
-    icon: {
-      color: errorColor,
-      background: errorBackgroundHover,
-    },
+  states: {
     hover: {
-      color: errorColorHover,
+      typography: {
+        color: errorColorHover,
+      },
+    },
+  },
+  entities: {
+    icon: {
+      typography: {
+        color: errorColor,
+      },
+      background: errorBackgroundHover,
     },
   },
 }

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
-import { banner as tokens } from './Banner.tokens'
+import * as tokens from './Banner.tokens'
 
 const { enabled } = tokens
 
@@ -13,11 +13,11 @@ type StyledBannerActionsProps = {
 }
 
 const StyledBannerActions = styled.div<StyledBannerActionsProps>`
-  margin-left: ${enabled.spacings};
+  margin-left: ${enabled.spacings.left};
   grid-column: ${({ placement }) => (placement === 'bottom' ? '1/-1' : 'auto')};
   ${({ placement }) =>
     placement === 'bottom' && {
-      marginTop: enabled.spacings,
+      marginTop: enabled.spacings.top,
       marginLeft: '0',
     }}
 `
@@ -39,5 +39,3 @@ export const BannerActions: FC<BannerActionProps> = ({
     </StyledBannerActions>
   )
 }
-
-// BannerActions.displayName = 'eds-banner-actions'

@@ -47,6 +47,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     fontFamily: typography.fontFamily,
     fontSize: typography.fontSize,
     fontWeight: typography.fontWeight as number,
+    backgroundColor: headerBackground.default,
     lineHeight: typography.lineHeight,
     textAlign: typography.textAlign as CSSObject['textAlign'],
     margin: 0,

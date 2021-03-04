@@ -2,7 +2,9 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 
-import { card as tokens } from './Card.tokens'
+import { primary as tokens } from './Card.tokens'
+
+const { spacings, border } = tokens
 
 export type CardMediaProps = {
   /** Should the media be full width or not */
@@ -20,18 +22,18 @@ const StyledCardMedia = styled.div<CardMediaProps>`
     fullWidth
       ? css`
           > * {
-            width: calc(
-              100% + ${tokens.spacings.left} + ${tokens.spacings.right}
-            );
-            margin-left: -${tokens.spacings.left};
-            margin-right: -${tokens.spacings.right};
+            width: calc(100% + ${spacings.left} + ${spacings.right});
+            margin-left: -${spacings.left};
+            margin-right: -${spacings.right};
           }
 
           &:first-child {
-            margin-top: -${tokens.spacings.top};
+            margin-top: -${spacings.top};
             img {
-              border-top-right-radius: ${tokens.shape.borderRadius};
-              border-top-left-radius: ${tokens.shape.borderRadius};
+              border-top-right-radius: ${border.type === 'border' &&
+              border.radius};
+              border-top-left-radius: ${border.type === 'border' &&
+              border.radius};
             }
           }
         `
@@ -57,5 +59,3 @@ export const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>(
     return <StyledCardMedia {...props}>{children}</StyledCardMedia>
   },
 )
-
-// CardMedia.displayName = 'eds-card-media'

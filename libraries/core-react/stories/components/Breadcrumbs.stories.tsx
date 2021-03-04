@@ -11,14 +11,6 @@ const Body = styled.div`
   grid-gap: 8px;
 `
 
-const TextWrapper = styled.div`
-  margin: 18px 0;
-`
-
-const Wrapper = styled.div`
-  width: 100px;
-`
-
 export default {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
@@ -54,85 +46,76 @@ export const Default: Story<BreadcrumbsProps> = (args) => {
   )
 }
 
-export const Variations: Story<BreadcrumbsProps> = () => {
-  return (
-    <Body>
-      <TextWrapper>
-        <Typography variant="h2">Normal</Typography>
-      </TextWrapper>
-      <Breadcrumbs>
-        <Breadcrumbs.Breadcrumb onClick={handleClick}>
-          Store
-        </Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb onClick={handleClick}>
-          Fruits
-        </Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
-          Apple
-        </Breadcrumbs.Breadcrumb>
-      </Breadcrumbs>
-      <TextWrapper>
-        <Typography variant="h2">Collapsed</Typography>
-        <Typography variant="body_long">
-          Choose collapse prop to use ellipses to indicate the middle pages.
-          Click ellipses (...) to expand.
-        </Typography>
-      </TextWrapper>
-      <Breadcrumbs collapse>
-        <Breadcrumbs.Breadcrumb onClick={handleClick}>
-          Store
-        </Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb onClick={handleClick}>
-          Fruits
-        </Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb onClick={handleClick}>
-          Apple
-        </Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
-          Apple Juice
-        </Breadcrumbs.Breadcrumb>
-      </Breadcrumbs>
-      <TextWrapper>
-        <Typography variant="h2">Truncated labels</Typography>
-        <Typography variant="body_long">
-          Choose maxWidth in pixels to truncate labels. Hover on label to see
-          full text.
-        </Typography>
-      </TextWrapper>
-      <Breadcrumbs>
-        <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
-          Store
-        </Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
-          Fruits
-        </Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb
-          maxWidth={30}
-          onClick={handleClick}
-          aria-current="page"
-        >
-          Apple
-        </Breadcrumbs.Breadcrumb>
-      </Breadcrumbs>
-      <TextWrapper>
-        <Typography variant="h2">Wrapped</Typography>
-        <Typography variant="body_long">
-          Wraps over two or more lines. Controlled by parent width.
-        </Typography>
-      </TextWrapper>
-      <Wrapper>
-        <Breadcrumbs>
-          <Breadcrumbs.Breadcrumb onClick={handleClick}>
-            Store
-          </Breadcrumbs.Breadcrumb>
-          <Breadcrumbs.Breadcrumb onClick={handleClick}>
-            Fruits
-          </Breadcrumbs.Breadcrumb>
-          <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
-            Apple
-          </Breadcrumbs.Breadcrumb>
-        </Breadcrumbs>
-      </Wrapper>
-    </Body>
-  )
+export const Normal: Story<BreadcrumbsProps> = () => (
+  <Breadcrumbs>
+    <Breadcrumbs.Breadcrumb onClick={handleClick}>Store</Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      Fruits
+    </Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
+      Apple
+    </Breadcrumbs.Breadcrumb>
+  </Breadcrumbs>
+)
+
+export const Collapsed: Story<BreadcrumbsProps> = () => (
+  <Breadcrumbs collapse>
+    <Breadcrumbs.Breadcrumb onClick={handleClick}>Store</Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      Fruits
+    </Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb onClick={handleClick}>Apple</Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
+      Apple Juice
+    </Breadcrumbs.Breadcrumb>
+  </Breadcrumbs>
+)
+
+Collapsed.parameters = {
+  docs: {
+    storyDescription: `Choose collapse prop to use ellipses to indicate the middle pages.
+    Click ellipses (...) to expand.`,
+  },
+}
+
+export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
+  <Breadcrumbs>
+    <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
+      Store
+    </Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
+      Fruits
+    </Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb
+      maxWidth={30}
+      onClick={handleClick}
+      aria-current="page"
+    >
+      Apple
+    </Breadcrumbs.Breadcrumb>
+  </Breadcrumbs>
+)
+TruncatedLabels.parameters = {
+  docs: {
+    storyDescription: `Choose maxWidth in pixels to truncate labels. Hover on label to see
+    full text.`,
+  },
+}
+TruncatedLabels.storyName = 'Truncated labels'
+
+export const Wrapped: Story<BreadcrumbsProps> = () => (
+  <Breadcrumbs>
+    <Breadcrumbs.Breadcrumb onClick={handleClick}>Store</Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      Fruits
+    </Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
+      Apple
+    </Breadcrumbs.Breadcrumb>
+  </Breadcrumbs>
+)
+Wrapped.parameters = {
+  docs: {
+    storyDescription: `Wraps over two or more lines. Controlled by parent width.`,
+  },
 }

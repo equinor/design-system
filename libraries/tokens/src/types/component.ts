@@ -22,6 +22,7 @@ export type ComponentToken = {
     hover?: ComponentState
     pressed?: ComponentState & { pressed?: Pressed }
   }
+  entities?: Record<string, ComponentToken>
 }
 
 type ComponentState = Partial<Omit<ComponentToken, 'states'>>

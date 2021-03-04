@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -13,15 +14,18 @@ const {
     comfortable: { medium: spacingMedium },
   },
   shape: {
-    corners: { minHeight, minWidth, borderRadius },
+    corners: { borderRadius },
   },
 } = tokens
 
-export const card = {
-  shape: {
-    minHeight,
-    minWidth,
-    borderRadius,
+export type CardToken = ComponentToken
+
+export const primary: CardToken = {
+  background: background,
+  border: {
+    type: 'border',
+    radius: borderRadius,
+    width: 0,
   },
   spacings: {
     left: spacingMedium,
@@ -29,10 +33,14 @@ export const card = {
     right: spacingMedium,
     top: spacingMedium,
   },
-  background: {
-    default: background,
-    info: backgroundInfo,
-    danger: backgroundDanger,
-    warning: backgroundWarning,
-  },
+}
+
+export const info: CardToken = {
+  background: backgroundInfo,
+}
+export const danger: CardToken = {
+  background: backgroundDanger,
+}
+export const warning: CardToken = {
+  background: backgroundWarning,
 }
