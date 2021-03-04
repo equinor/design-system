@@ -42,7 +42,13 @@ export default [
         extensions,
         plugins: ['babel-plugin-styled-components'],
       }),
-      commonjs(),
+      commonjs({
+        namedExports: {
+          '../libraries/core-react/node_modules/react-fast-compare/index.js': [
+            'isEqual',
+          ],
+        },
+      }),
       sizeSnapshot(),
     ],
     output: [
