@@ -281,6 +281,7 @@ export const CompactTable: Story<TableProps> = () => {
         <TopBar.Header>Compact table with switcher</TopBar.Header>
         <TopBar.Actions>
           <Button
+            ref={referenceElement}
             variant="ghost_icon"
             id="menuButton"
             aria-controls="menu-on-button"
@@ -294,7 +295,7 @@ export const CompactTable: Story<TableProps> = () => {
           <Menu
             id="menu-on-button"
             aria-labelledby="menuButton"
-            anchorEl={referenceElement}
+            anchorEl={referenceElement.current}
             onClose={closeMenu}
           >
             <Menu.MenuSection title="Density">
