@@ -43,4 +43,5 @@ devDependencies:
   typescript: ^4.1.2
 dependencies:
   '@popperjs/core': ^2.9.0
+  react-fast-compare: ^3.2.0
   react-popper: ^2.2.4
