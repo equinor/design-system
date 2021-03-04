@@ -59,16 +59,14 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
-      - name: List folder
-        run: ls -la
       - name: Lint
-        run: ./pnpm/bin/pnpm run lint libraries/tokens
+        run: ./pnpm/bin/pnpm run lint ./libraries/tokens
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
     needs: [lint]
     steps:
-      - name: Get base files
+      - name: Get files
         uses: actions/cache@v2
         with:
           path: |
@@ -78,24 +76,27 @@ jobs:
           key: ${{ github.sha }}
       - name: Build
         run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
-      - name: Save build to cache
-        uses: actions/cache@v2
-        with:
-          path: ./libraries/tokens
-          key: ${{ github.sha }}-build-tokens
-  publish-tokens:
-    name: Publish eds-tokens to npm
-    runs-on: ubuntu-latest
-    needs: [build-tokens]
-    steps:
-      - name: Get tokens build
+      - name: Save files to cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}-build-tokens
+          key: ${{ github.sha }}
+  publish-tokens:
+    name: Publish eds-tokens to npm
+    runs-on: ubuntu-latest
+    needs: [build-tokens]
+    steps:
+      - name: Get files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
       - name: Publish to npm
         run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
