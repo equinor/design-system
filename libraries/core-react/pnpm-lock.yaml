@@ -4,7 +4,7 @@ dependencies:
   '@popperjs/core': 2.9.0
   downshift: 6.0.6_react@17.0.1
   react-fast-compare: 3.2.0
-  react-popper: 2.2.4
+  react-popper: 2.2.4_0f37b0a2b6010f7a27fd5452444922ac
 devDependencies:
   '@babel/cli': 7.12.8_@babel+core@7.12.9
   '@babel/core': 7.12.9
