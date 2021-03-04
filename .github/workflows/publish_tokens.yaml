@@ -59,6 +59,10 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
+      - name: List folder
+        run: ls -la
+      - name: List tokens folder
+        run: ls -la libraries/tokens
       - name: Lint
         run: ./pnpm/bin/pnpm run lint libraries/tokens
   build-tokens:
