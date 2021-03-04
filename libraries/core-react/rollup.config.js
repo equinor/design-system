@@ -42,9 +42,6 @@ export default [
         extensions,
         plugins: ['babel-plugin-styled-components'],
       }),
-      commonjs({
-        include: '/node_modules/react-fast-compare/',
-      }),
       sizeSnapshot(),
     ],
     output: [
