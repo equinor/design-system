@@ -9,6 +9,7 @@ export const useOutsideClick = (
     if (
       ref.current &&
       !ref.current.contains(e.target as Node) &&
+      anchorEl !== null &&
       !anchorEl.contains(e.target as Node)
     ) {
       callback()

@@ -151,6 +151,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <StyledPopover
         ref={popperRef}
+        elevation="overlay"
         style={styles.popper}
         {...props}
         data-testid="popover"
