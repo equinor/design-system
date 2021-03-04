@@ -117,14 +117,14 @@ export const WithIcons: Story<TextFieldProps> = () => (
       id="storybook-warning-icon"
       placeholder="Placeholder text"
       label="Some warning input"
-      inputIcon={<Icon name="thumbs_up" title="Notifications" />}
+      inputIcon={<Icon name="thumbs_up" />}
     />
     <TextField
       id="storybook-warning-icon"
       placeholder="Placeholder text"
       label="Disabled input"
       disabled
-      inputIcon={<Icon name="warning_filled" title="Warning" />}
+      inputIcon={<Icon name="warning_filled" />}
     />
 
     <TextField
@@ -133,7 +133,7 @@ export const WithIcons: Story<TextFieldProps> = () => (
       label="Label text"
       meta="Meta"
       helperText="Helper Text"
-      inputIcon={<Icon name="thumbs_up" title="Everything is OK" />}
+      inputIcon={<Icon name="thumbs_up" />}
     />
   </Wrapper>
 )
