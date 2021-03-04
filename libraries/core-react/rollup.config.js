@@ -42,6 +42,7 @@ export default [
         extensions,
         plugins: ['babel-plugin-styled-components'],
       }),
+      commonjs(),
       sizeSnapshot(),
     ],
     output: [
