@@ -10,7 +10,7 @@ import {
 } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
-import { Card } from '../Card'
+import { Paper } from '../Paper'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '@utils'
@@ -19,13 +19,17 @@ import { popover as tokens } from './Popover.tokens'
 
 type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
-const StyledPopover = styled(Card)<StyledPopoverProps>`
+const StyledPopover = styled(Paper)<StyledPopoverProps>`
   ${typographyTemplate(tokens.header)}
   ${spacingsTemplate(tokens.spacings)}
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-columns: auto;
+  align-items: center;
+  align-content: start;
   background: ${tokens.background};
   fill: ${tokens.background};
   width: max-content;
-  height: auto;
   max-height: ${tokens.popover.maxHeight};
   max-width: ${tokens.popover.maxWidth};
   min-height: ${tokens.popover.minHeight};
