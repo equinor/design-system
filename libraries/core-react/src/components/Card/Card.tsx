@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import * as tokens from './Card.tokens'
 import { spacingsTemplate, bordersTemplate } from '@utils'
 
-const { primary, info, warning, danger } = tokens
+const { primary } = tokens
 
 type StyledCardProps = {
   background: string
@@ -31,8 +31,6 @@ const StyledCard = styled.div<StyledCardProps>`
   ${bordersTemplate(primary.border)};
   ${spacingsTemplate(primary.spacings)}
 `
-
-type backgroundVariants = { variant: string; backgroundColor: string }[]
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   { children, className, variant = 'default', onClick, ...rest },
