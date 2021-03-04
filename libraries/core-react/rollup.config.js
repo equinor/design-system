@@ -43,7 +43,7 @@ export default [
         plugins: ['babel-plugin-styled-components'],
       }),
       commonjs({
-        include: '/node_modules/',
+        include: '/node_modules/react-fast-compare/',
       }),
       sizeSnapshot(),
     ],
