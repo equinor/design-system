@@ -1,9 +1,3 @@
-const pkg = require('./libraries/core-react/package.json')
-
-const {
-  devDependencies: { react: reactVersion },
-} = pkg
-
 module.exports = {
   root: true,
   extends: [
@@ -31,7 +25,7 @@ module.exports = {
   },
   settings: {
     react: {
-      version: reactVersion,
+      version: '>16.8.0',
     },
   },
   globals: {
