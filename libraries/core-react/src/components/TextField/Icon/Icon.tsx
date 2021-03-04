@@ -18,22 +18,34 @@ const Variation = ({ colors, isDisabled, isFocused }: StyledIconProps) => {
 
   if (isDisabled) {
     return css`
-      fill: ${disabledColor};
+      &,
+      svg {
+        fill: ${disabledColor};
+      }
     `
   }
   if (isFocused) {
     return css`
-      fill: ${focusColor};
+      &,
+      svg {
+        fill: ${focusColor};
+      }
     `
   }
   return css`
-    fill: ${color};
+    &,
+    svg {
+      fill: ${color};
+    }
   `
 }
 
 const StyledIcon = styled.div<StyledIconProps>`
-  width: 16px;
-  height: 16px;
+  &,
+  svg {
+    width: 16px;
+    height: 16px;
+  }
   ${Variation}
 `
 

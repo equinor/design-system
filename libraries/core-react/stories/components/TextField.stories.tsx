@@ -1,6 +1,13 @@
 import React from 'react'
-import { TextField, TextFieldProps } from '@components'
+import { TextField, TextFieldProps, Icon } from '@components'
 import { Story, Meta } from '@storybook/react'
+import { thumbs_up, warning_filled, error_filled } from '@equinor/eds-icons'
+
+Icon.add({
+  thumbs_up,
+  warning_filled,
+  error_filled,
+})
 
 import styled from 'styled-components'
 
@@ -31,38 +38,6 @@ const Wrapper = styled.div`
   grid-gap: 32px;
   grid-template-columns: repeat(2, fit-content(100%));
 `
-
-// TODO replace with eds react icon component
-const ICONS = {
-  ERROR: (
-    <svg viewBox="0 0 24 24" width="16px" height="16px">
-      <path
-        clipRule="evenodd"
-        fillRule="evenodd"
-        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z"
-      ></path>
-    </svg>
-  ),
-  WARNING: (
-    <svg viewBox="0 0 24 24" width="16px" height="16px">
-      <path
-        clipRule="evenodd"
-        fillRule="evenodd"
-        d="M23 21.5l-11-19-11 19h22zm-12-3v-2h2v2h-2zm0-4h2v-4h-2v4z"
-      ></path>
-    </svg>
-  ),
-  SUCCESS: (
-    <svg viewBox="0 0 24 24" width="16px" height="16px">
-      <path
-        clipRule="evenodd"
-        fillRule="evenodd"
-        d="M9 22h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 2 7.58 8.59C7.22 8.95 7 9.45 7 10v10c0 1.1.9 2 2 2zm0-12l4.34-4.34L12 11h9v2l-3 7H9V10zm-4 0H1v12h4V10z"
-      ></path>
-    </svg>
-  ),
-}
-
 export const Default: Story<TextFieldProps> = (args) => (
   <TextField {...args}></TextField>
 )
@@ -142,22 +117,23 @@ export const WithIcons: Story<TextFieldProps> = () => (
       id="storybook-warning-icon"
       placeholder="Placeholder text"
       label="Some warning input"
-      inputIcon={ICONS.WARNING}
+      inputIcon={<Icon name="thumbs_up" />}
     />
     <TextField
-      id="storybook-positive-icon"
-      placeholder="Placeholder text placeholder text"
-      label="Some positive input"
-      inputIcon={ICONS.SUCCESS}
+      id="storybook-warning-icon"
+      placeholder="Placeholder text"
+      label="Disabled input"
+      disabled
+      inputIcon={<Icon name="warning_filled" />}
     />
+
     <TextField
       id="storybook-disabled"
       placeholder="Placeholder text"
-      label="Disabled"
+      label="Label text"
       meta="Meta"
       helperText="Helper Text"
-      disabled
-      inputIcon={ICONS.SUCCESS}
+      inputIcon={<Icon name="thumbs_up" />}
     />
   </Wrapper>
 )
@@ -172,7 +148,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Validation error"
       variant="error"
-      helperIcon={ICONS.ERROR}
+      helperIcon={<Icon name="error_filled" title="Error" />}
     />
     <TextField
       id="storybook-error-two"
@@ -181,7 +157,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Validation error"
       variant="error"
-      inputIcon={ICONS.ERROR}
+      inputIcon={<Icon name="error_filled" title="Error" />}
     />
     <TextField
       id="storybook-warning"
@@ -190,7 +166,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper/warning text"
       variant="warning"
-      helperIcon={ICONS.WARNING}
+      helperIcon={<Icon name="warning_filled" title="Warning" />}
     />
     <TextField
       id="storybook-warning-two"
@@ -199,8 +175,9 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper/warning text"
       variant="warning"
-      inputIcon={ICONS.WARNING}
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
     />
+
     <TextField
       id="storybook-success"
       placeholder="Placeholder text Placeholder text Placeholder text"
@@ -208,7 +185,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper text"
       variant="success"
-      helperIcon={ICONS.SUCCESS}
+      helperIcon={<Icon name="thumbs_up" title="Success" />}
     />
     <TextField
       id="storybook-success-two"
@@ -217,7 +194,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper text"
       variant="success"
-      inputIcon={ICONS.SUCCESS}
+      inputIcon={<Icon name="thumbs_up" title="Success" />}
     />
   </Wrapper>
 )
