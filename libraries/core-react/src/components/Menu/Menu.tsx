@@ -39,7 +39,22 @@ export type MenuProps = {
   /** onClose handler */
   onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
   /** Menu placement relative to anchorEl */
-  placement?: Placement
+  placement?:
+    | 'auto'
+    | 'auto-start'
+    | 'auto-end'
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end'
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(

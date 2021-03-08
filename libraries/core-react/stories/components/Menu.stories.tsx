@@ -1,7 +1,20 @@
-import React, { useState, useEffect, MutableRefObject } from 'react'
+import React, {
+  useState,
+  useEffect,
+  MutableRefObject,
+  UseComboboxStateChange,
+} from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Menu, MenuProps, Typography, Button, Icon, TopBar } from '@components'
+import {
+  Menu,
+  MenuProps,
+  Typography,
+  Button,
+  Icon,
+  TopBar,
+  SingleSelect,
+} from '@components'
 import { Story, Meta } from '@storybook/react'
 
 import { tokens } from '@equinor/eds-tokens'
@@ -205,7 +218,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
   }
 
   return (
-    <Grid style={{ gridAutoFlow: 'row', position: 'relative', margin: '5rem' }}>
+    <Grid style={{ gridAutoFlow: 'row', margin: '5rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
       <Button
         ref={buttonRef}
@@ -298,6 +311,141 @@ export const InTopbar: Story<MenuProps> = () => {
           </Menu>
         </Actions>
       </TopBar>
+    </Grid>
+  )
+}
+
+export const Placement: Story<MenuProps> = () => {
+  const [placement, setPlacement] = useState<
+    | 'auto'
+    | 'auto-start'
+    | 'auto-end'
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end'
+  >('auto')
+
+  function handleChange(changes: UseComboboxStateChange<string>) {
+    setPlacement(changes.selectedItem)
+  }
+
+  const [state, setState] = React.useState<{
+    isOpen: boolean
+    focus: 'first' | 'last'
+  }>({
+    focus: 'first',
+    isOpen: false,
+  })
+
+  const { focus, isOpen } = state
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
+  const openMenu = (focus: 'first' | 'last') => {
+    setState({ ...state, isOpen: true, focus })
+  }
+  const closeMenu = () => setState({ ...state, isOpen: false })
+  console.log(placement, 'placement')
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const { key } = e
+    e.preventDefault()
+    switch (key) {
+      case 'ArrowDown':
+        isOpen ? closeMenu() : openMenu('first')
+        break
+      case 'ArrowUp':
+        isOpen ? closeMenu() : openMenu('last')
+        break
+      case 'Escape':
+        closeMenu()
+        break
+      default:
+        break
+    }
+  }
+  return (
+    <Grid
+      style={{
+        gridAutoFlow: 'row',
+        margin: '3rem',
+      }}
+    >
+      <Typography variant="h4">
+        Select a placement value to change Menu placement
+      </Typography>
+      <div
+        style={{
+          display: 'flex',
+          width: 400,
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          margin: '50px 100px',
+        }}
+      >
+        <SingleSelect
+          label="placement"
+          items={[
+            'auto',
+            'auto-start',
+            'auto-end',
+            'top',
+            'top-start',
+            'top-end',
+            'bottom',
+            'bottom-start',
+            'bottom-end',
+            'right',
+            'right-start',
+            'right-end',
+            'left',
+            'left-start',
+            'left-end',
+          ]}
+          selectedOption={placement}
+          handleSelectedItemChange={handleChange}
+        />
+        <Button
+          ref={buttonRef}
+          variant="ghost_icon"
+          id="anchor-placement-menu"
+          aria-controls="placement-menu"
+          aria-haspopup="true"
+          aria-expanded={isOpen}
+          onClick={() => (isOpen ? closeMenu() : openMenu(null))}
+        >
+          Menu
+        </Button>
+        <Menu
+          onClose={closeMenu}
+          id="placement-menu"
+          open={isOpen}
+          anchorEl={buttonRef.current}
+          placement={placement}
+        >
+          <Menu.Item onClick={onClick}>
+            <Typography group="navigation" variant="menu_title" as="span">
+              Pressure
+            </Typography>
+          </Menu.Item>
+          <Menu.Item onClick={onClick}>
+            <Typography group="navigation" variant="menu_title" as="span">
+              Bearing
+            </Typography>
+          </Menu.Item>
+          <Menu.Item onClick={onClick}>
+            <Typography group="navigation" variant="menu_title" as="span">
+              Cable
+            </Typography>
+          </Menu.Item>
+        </Menu>
+      </div>
     </Grid>
   )
 }
