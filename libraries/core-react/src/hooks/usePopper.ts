@@ -1,37 +1,25 @@
-import * as React from 'react'
-import {
-  useEffect,
-  useState,
-  useRef,
-  ReactNode,
-  HTMLAttributes,
-  MutableRefObject,
-} from 'react'
-// import * as PopperJS from '@popperjs/core'
 import { usePopper as reactPopper } from 'react-popper'
-
-export type Placement =
-  | 'auto'
-  | 'auto-start'
-  | 'auto-end'
-  | 'top'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'right'
-  | 'right-start'
-  | 'right-end'
-  | 'left'
-  | 'left-start'
-  | 'left-end'
 
 export const usePopper = (
   anchorEl: HTMLElement,
   popperEl: HTMLElement,
   arrowRef?: HTMLElement | string,
-  placement?: Placement,
+  placement?:
+    | 'auto'
+    | 'auto-start'
+    | 'auto-end'
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end',
 ): {
   styles: { [key: string]: any }
   attributes: { [key: string]: { [key: string]: string } }

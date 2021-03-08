@@ -1,9 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  MutableRefObject,
-  UseComboboxStateChange,
-} from 'react'
+import React, { useState } from 'react'
+import { UseComboboxStateChange } from 'downshift'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import {
@@ -335,7 +331,24 @@ export const Placement: Story<MenuProps> = () => {
   >('auto')
 
   function handleChange(changes: UseComboboxStateChange<string>) {
-    setPlacement(changes.selectedItem)
+    setPlacement(
+      changes.selectedItem as
+        | 'auto'
+        | 'auto-start'
+        | 'auto-end'
+        | 'top'
+        | 'top-start'
+        | 'top-end'
+        | 'bottom'
+        | 'bottom-start'
+        | 'bottom-end'
+        | 'right'
+        | 'right-start'
+        | 'right-end'
+        | 'left'
+        | 'left-start'
+        | 'left-end',
+    )
   }
 
   const [state, setState] = React.useState<{

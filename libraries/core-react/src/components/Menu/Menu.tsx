@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { useState, useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
+import { useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
-import { useCombinedRefs, useOutsideClick, Placement, usePopper } from '@hooks'
+import { useCombinedRefs, useOutsideClick, usePopper } from '@hooks'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
 

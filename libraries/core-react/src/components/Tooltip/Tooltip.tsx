@@ -1,12 +1,5 @@
 import * as React from 'react'
-import {
-  forwardRef,
-  useRef,
-  useState,
-  HTMLAttributes,
-  SVGProps,
-  MutableRefObject,
-} from 'react'
+import { forwardRef, useRef, useState, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
 import { usePopper } from '@hooks'
@@ -88,7 +81,6 @@ export type TooltipProps = {
   open: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-// Controller for TooltipItem
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
     { className, title, anchorEl, placement = 'bottom', open = false, ...rest },

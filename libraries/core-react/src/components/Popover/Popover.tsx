@@ -1,13 +1,5 @@
 import * as React from 'react'
-import {
-  forwardRef,
-  useRef,
-  useState,
-  HTMLAttributes,
-  ReactNode,
-  isValidElement,
-  MutableRefObject,
-} from 'react'
+import { forwardRef, useRef, useState, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { Paper } from '../Paper'

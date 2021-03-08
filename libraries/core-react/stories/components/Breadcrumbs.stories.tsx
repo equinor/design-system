@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Breadcrumbs, BreadcrumbsProps, Typography } from '@components'
+import { Breadcrumbs, BreadcrumbsProps } from '@components'
 import { action } from '@storybook/addon-actions'
 import { Meta, Story } from '@storybook/react'
 
