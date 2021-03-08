@@ -352,7 +352,7 @@ export const Placement: Story<MenuProps> = () => {
     setState({ ...state, isOpen: true, focus })
   }
   const closeMenu = () => setState({ ...state, isOpen: false })
-  console.log(placement, 'placement')
+
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
     e.preventDefault()
