@@ -10,7 +10,6 @@ import {
   TopBar,
   Menu,
   Button,
-  Tooltip,
 } from '@components'
 import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
 import './styles/style.css'
@@ -121,7 +120,7 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 export default {
   title: 'Components/Table',
   component: Table,
-  subcomponents: { Body, Row, Cell, Head },
+  subcomponents: { Caption, Body, Row, Cell, Head },
   parameters: {
     docs: {
       description: {
@@ -143,56 +142,30 @@ export default {
 export const simpleTable: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
 
-  const [openState, setOpenState] = useState(false)
-
-  const handleOpen = () => {
-    setOpenState(true)
-  }
-
-  const handleClose = () => {
-    setOpenState(false)
-  }
-
-  const referenceElement = React.useRef(null)
-
   return (
     <>
       <Table {...args}>
-        <Caption>
+        <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>
-        </Caption>
-        <Head>
-          <Row>
+        </Table.Caption>
+        <Table.Head>
+          <Table.Row>
             {columns.map((col) => (
-              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+              <Table.Cell key={`Table.Head-${col.accessor}`}>
+                {col.name}
+              </Table.Cell>
             ))}
-          </Row>
-        </Head>
-        <Body>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {cellValues?.map((row) => (
-            <Row key={row.toString()}>
+            <Table.Row key={row.toString()}>
               {row.map((cellValue) => (
-                <Cell key={cellValue}>{cellValue}</Cell>
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
               ))}
-            </Row>
+            </Table.Row>
           ))}
-          <Row>
-            <Cell
-              ref={referenceElement}
-              onMouseEnter={handleOpen}
-              onMouseLeave={handleClose}
-              style={{ position: 'relative' }}
-            >
-              Hover test
-              <Tooltip
-                open={openState}
-                placement="top"
-                title="Tooltip"
-                anchorEl={referenceElement.current}
-              />
-            </Cell>
-          </Row>
-        </Body>
+        </Table.Body>
       </Table>
     </>
   )
@@ -209,25 +182,27 @@ export const FixedTableHeader: Story<TableProps> = () => {
   return (
     <FixedContainer>
       <Table>
-        <Caption>
+        <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>
-        </Caption>
-        <Head sticky>
-          <Row>
+        </Table.Caption>
+        <Table.Head sticky>
+          <Table.Row>
             {columns.map((col) => (
-              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+              <Table.Cell key={`Table.Head-${col.accessor}`}>
+                {col.name}
+              </Table.Cell>
             ))}
-          </Row>
-        </Head>
-        <Body>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {cellValues?.map((row) => (
-            <Row key={row.toString()}>
+            <Table.Row key={row.toString()}>
               {row.map((cellValue) => (
-                <Cell key={cellValue}>{cellValue}</Cell>
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
               ))}
-            </Row>
+            </Table.Row>
           ))}
-        </Body>
+        </Table.Body>
       </Table>
     </FixedContainer>
   )
@@ -260,10 +235,10 @@ export const CompactTable: Story<TableProps> = () => {
     const { key } = e
     switch (key) {
       case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu(e)
+        isOpen ? closeMenu() : openMenu()
         break
       case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu(e)
+        isOpen ? closeMenu() : openMenu()
         break
       case 'Escape':
         closeMenu()
@@ -294,6 +269,7 @@ export const CompactTable: Story<TableProps> = () => {
           </Button>
           <Menu
             id="menu-on-button"
+            open={isOpen}
             aria-labelledby="menuButton"
             anchorEl={referenceElement.current}
             onClose={closeMenu}
@@ -310,31 +286,33 @@ export const CompactTable: Story<TableProps> = () => {
         </TopBar.Actions>
       </TopBar>
       <Table density={density}>
-        <Caption>
+        <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>
-        </Caption>
-        <Head>
-          <Row>
+        </Table.Caption>
+        <Table.Head>
+          <Table.Row>
             {columns.map((col) => (
-              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+              <Table.Cell key={`Table.Head-${col.accessor}`}>
+                {col.name}
+              </Table.Cell>
             ))}
-          </Row>
-        </Head>
-        <Body>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {cellValues?.map((row) => (
-            <Row key={row.toString()}>
+            <Table.Row key={row.toString()}>
               {row.map((cellValue) => (
-                <Cell key={cellValue}>{cellValue}</Cell>
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
               ))}
-            </Row>
+            </Table.Row>
           ))}
-        </Body>
+        </Table.Body>
       </Table>
     </div>
   )
 }
 
-const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
+const SortCell = styled(Table.Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
   }
@@ -411,15 +389,15 @@ export const Sortable: Story<TableProps> = () => {
 
   return (
     <Table>
-      <Caption>
+      <Table.Caption>
         <Typography variant="h2">Fruits cost price</Typography>
-      </Caption>
-      <Head>
-        <Row>
+      </Table.Caption>
+      <Table.Head>
+        <Table.Row>
           {state.columns.map((col) => (
             <SortCell
               sort={col.sortDirection}
-              key={`head-${col.accessor}`}
+              key={`Table.Head-${col.accessor}`}
               onClick={col.sortDirection ? () => onSortClick(col) : undefined}
               isSorted={col.isSorted}
             >
@@ -433,17 +411,17 @@ export const Sortable: Story<TableProps> = () => {
               />
             </SortCell>
           ))}
-        </Row>
-      </Head>
-      <Body>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
         {state.cellValues?.map((row) => (
-          <Row key={row.toString()}>
+          <Table.Row key={row.toString()}>
             {row.map((cellValue) => (
-              <Cell key={cellValue}>{cellValue}</Cell>
+              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
             ))}
-          </Row>
+          </Table.Row>
         ))}
-      </Body>
+      </Table.Body>
     </Table>
   )
 }
