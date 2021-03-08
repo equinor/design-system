@@ -218,7 +218,7 @@ export const ButtonToggle: Story<MenuProps> = () => {
   }
 
   return (
-    <Grid style={{ gridAutoFlow: 'row', margin: '5rem' }}>
+    <Grid style={{ gridAutoFlow: 'row', marginBottom: '20rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
       <Button
         ref={buttonRef}
@@ -282,7 +282,7 @@ export const InTopbar: Story<MenuProps> = () => {
   }
 
   return (
-    <Grid style={{ margin: 0 }}>
+    <Grid style={{ margin: 0, marginBottom: '20rem' }}>
       <TopBar>
         <Header>Menu in Topbar</Header>
         <Actions>
