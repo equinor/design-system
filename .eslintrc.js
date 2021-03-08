@@ -25,7 +25,7 @@ module.exports = {
   },
   settings: {
     react: {
-      version: '>=16.8.0',
+      version: '^17.0.1',
     },
   },
   globals: {
