@@ -33,9 +33,21 @@ Icon.add({
   bearing,
   cable,
 })
-
+const { Item, Section } = Menu
 const { Actions, Header } = TopBar
 const { colors } = tokens
+
+export default {
+  title: 'Components/Menu',
+  component: Menu,
+  subcomponents: {
+    Item,
+    Section,
+  },
+  parameters: {
+    viewMode: 'story',
+  },
+} as Meta
 
 const Grid = styled.div`
   margin: 32px;
@@ -157,14 +169,6 @@ const bigMenuTemplate = (
     </Menu.Section>
   </>
 )
-
-export default {
-  title: 'Components/Menu',
-  component: Menu,
-  parameters: {
-    viewMode: 'story',
-  },
-} as Meta
 
 export const ButtonToggle: Story<MenuProps> = () => {
   const [state, setState] = React.useState<{
