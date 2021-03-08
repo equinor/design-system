@@ -35,9 +35,7 @@ const StyledTooltip = styled.div<Pick<TooltipProps, 'open'>>`
   background: ${tokens.background};
   fill: ${tokens.background};
   border-radius: ${tokens.borderRadius};
-  min-height: ${tokens.tooltip.minHeight};
-  box-sizing: border-box;
-
+  white-space: nowrap;
   ${({ open }) =>
     css({
       visibility: open ? 'visible' : 'hidden',

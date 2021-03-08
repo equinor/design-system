@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
-import { Tooltip, TooltipProps, Typography, Button } from '@components'
+import { Tooltip, TooltipProps, Typography, Button, Table } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 const Body = styled.div`
@@ -132,5 +132,172 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
         />
       </Wrapper>
     </Body>
+  )
+}
+
+type Data = {
+  number: string
+  description: string
+  origin: string
+  price: number
+}
+
+const data: Data[] = [
+  {
+    number: '123-456',
+    description: 'Pears',
+    origin: 'Europe',
+    price: 1.5,
+  },
+  {
+    number: '234-567',
+    description: 'Apples',
+    origin: 'Africa',
+    price: 1.2,
+  },
+  {
+    number: '45-6789',
+    description: 'Oranges',
+    origin: 'South America',
+    price: 1.8,
+  },
+  {
+    number: '67-890',
+    description: 'Kiwi',
+    origin: 'Australia',
+    price: 2.1,
+  },
+  {
+    number: '89-012',
+    description: 'Mango',
+    origin: 'South Africa',
+    price: 2.5,
+  },
+  {
+    number: '89-012',
+    description: 'Pineapple',
+    origin: 'Paraguay',
+    price: 1.9,
+  },
+  {
+    number: '89-012',
+    description: 'Pomegranate',
+    origin: 'Persia',
+    price: 4.5,
+  },
+]
+
+type Column = {
+  name: string | React.ReactNode
+  accessor: string
+  sortDirection?: 'ascending' | 'descending' | 'none'
+  isSorted?: boolean
+}
+
+const columns: Column[] = [
+  {
+    name: 'Item nr',
+    accessor: 'number',
+    sortDirection: 'none',
+  },
+  {
+    name: 'Description',
+    accessor: 'description',
+    sortDirection: 'none',
+  },
+  {
+    name: 'Origin',
+    accessor: 'origin',
+    sortDirection: 'none',
+  },
+  {
+    name: (
+      <>
+        Price &nbsp;
+        <Typography group="input" variant="label" color="currentColor">
+          ($)
+        </Typography>
+      </>
+    ),
+    accessor: 'price',
+    sortDirection: 'none',
+  },
+]
+
+const toCellValues = (data: Data[], columns: Column[]) =>
+  data.map((item) =>
+    columns.map((column) =>
+      typeof item[column.accessor] !== 'undefined'
+        ? (item[column.accessor] as string)
+        : '',
+    ),
+  )
+
+export const TableCellsWithTooltip: Story<TooltipProps> = () => {
+  const cellValues = toCellValues(data, columns)
+  const [state, setState] = useState<{
+    openRow: number
+    openCell: number
+  }>({
+    openRow: null,
+    openCell: null,
+  })
+
+  const handleOpen = (openRow: number, openCell: number) => {
+    setState({
+      openRow,
+      openCell,
+    })
+  }
+
+  const handleClose = () => {
+    setState({ openRow: null, openCell: null })
+  }
+
+  const { openRow, openCell } = state
+
+  return (
+    <Table>
+      <Table.Caption>
+        <Typography variant="h2">Fruits cost price</Typography>
+      </Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          {columns.map((col) => (
+            <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
+          ))}
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {cellValues?.map((row, rowIndex) => (
+          <Table.Row key={row.toString()}>
+            {row.map((cellValue, cellIndex) => {
+              const createdRef = React.useRef(null)
+              return (
+                <Table.Cell key={cellValue}>
+                  <span
+                    ref={createdRef}
+                    onMouseEnter={() => handleOpen(rowIndex, cellIndex)}
+                    onMouseLeave={handleClose}
+                    style={{
+                      position: 'relative',
+                      display: 'inline-block',
+                    }}
+                  >
+                    {cellValue}
+                    <Tooltip
+                      open={openRow === rowIndex && openCell === cellIndex}
+                      placement="top"
+                      title={cellValue}
+                      anchorEl={createdRef.current}
+                    />
+                  </span>
+                </Table.Cell>
+              )
+            })}
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
   )
 }
