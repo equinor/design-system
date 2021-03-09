@@ -192,7 +192,7 @@ export const TableCellsWithTooltip: Story<TooltipProps> = () => {
                     <Tooltip
                       open={openRow === rowIndex && openCell === cellIndex}
                       placement="top"
-                      title={cellValue}
+                      title={`Tooltip title for ` + cellValue}
                       anchorEl={createdRef.current}
                     />
                   </span>

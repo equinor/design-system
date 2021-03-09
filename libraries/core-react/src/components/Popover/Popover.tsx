@@ -37,19 +37,19 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
     height: 10px;
   }
   &[data-popper-placement^='top'] > .arrow {
-    bottom: -4px;
+    bottom: -5px;
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
-    top: -4px;
+    top: -5px;
   }
 
   &[data-popper-placement^='left'] > .arrow {
-    right: -4px;
+    right: -5px;
   }
 
   &[data-popper-placement^='right'] > .arrow {
-    left: -4px;
+    left: -5px;
   }
 `
 
@@ -68,16 +68,16 @@ const Arrow = styled.div`
   &,
   &::before {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     z-index: -1;
   }
 
   &::before {
+    box-shadow: '0 1px 10px rgb(0 0 0 / 20%), 0 4px 5px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 14%)';
     content: '';
     transform: rotate(45deg);
     background: ${tokens.background};
-    filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));
   }
 `
 export type PopoverProps = {
