@@ -12,110 +12,13 @@ import {
   Button,
 } from '@components'
 import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
+import { data, columns, Column, Data, SortDirection } from './helpers/data'
+import { toCellValues } from './hooks/toCellValues'
 import './styles/style.css'
 
 Icon.add({ chevron_down, chevron_up })
 
 const { Caption, Body, Row, Cell, Head } = Table
-
-type Data = {
-  number: string
-  description: string
-  origin: string
-  price: number
-}
-
-const data: Data[] = [
-  {
-    number: '123-456',
-    description: 'Pears',
-    origin: 'Europe',
-    price: 1.5,
-  },
-  {
-    number: '234-567',
-    description: 'Apples',
-    origin: 'Africa',
-    price: 1.2,
-  },
-  {
-    number: '45-6789',
-    description: 'Oranges',
-    origin: 'South America',
-    price: 1.8,
-  },
-  {
-    number: '67-890',
-    description: 'Kiwi',
-    origin: 'Australia',
-    price: 2.1,
-  },
-  {
-    number: '89-012',
-    description: 'Mango',
-    origin: 'South Africa',
-    price: 2.5,
-  },
-  {
-    number: '89-012',
-    description: 'Pineapple',
-    origin: 'Paraguay',
-    price: 1.9,
-  },
-  {
-    number: '89-012',
-    description: 'Pomegranate',
-    origin: 'Persia',
-    price: 4.5,
-  },
-]
-
-type SortDirection = 'ascending' | 'descending' | 'none'
-type Column = {
-  name: string | React.ReactNode
-  accessor: string
-  sortDirection?: SortDirection
-  isSorted?: boolean
-}
-
-const columns: Column[] = [
-  {
-    name: 'Item nr',
-    accessor: 'number',
-    sortDirection: 'none',
-  },
-  {
-    name: 'Description',
-    accessor: 'description',
-    sortDirection: 'none',
-  },
-  {
-    name: 'Origin',
-    accessor: 'origin',
-    sortDirection: 'none',
-  },
-  {
-    name: (
-      <>
-        Price &nbsp;
-        <Typography group="input" variant="label" color="currentColor">
-          ($)
-        </Typography>
-      </>
-    ),
-    accessor: 'price',
-    sortDirection: 'none',
-  },
-]
-
-const toCellValues = (data: Data[], columns: Column[]) =>
-  data.map((item) =>
-    columns.map((column) =>
-      typeof item[column.accessor] !== 'undefined'
-        ? (item[column.accessor] as string)
-        : '',
-    ),
-  )
 
 export default {
   title: 'Components/Table',
