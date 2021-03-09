@@ -19,22 +19,16 @@ export type CellProps = {
 export const Cell = forwardRef<
   HTMLTableDataCellElement | HTMLTableHeaderCellElement,
   CellProps
->(function Cell({ className, ...rest }, ref) {
-  const props = {
-    ...rest,
-    className,
-    ref,
-  }
-
+>(function Cell({ ...rest }, ref) {
   return (
     <InnerContext.Consumer>
       {({ variant, sticky }) => {
         switch (variant) {
           case 'head':
-            return <TableHeaderCell sticky={sticky} {...props} />
+            return <TableHeaderCell ref={ref} sticky={sticky} {...rest} />
           default:
           case 'body':
-            return <TableDataCell {...props} />
+            return <TableDataCell ref={ref} {...rest} />
         }
       }}
     </InnerContext.Consumer>
