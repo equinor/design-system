@@ -38,9 +38,9 @@ type BreadcrumbProps = {
   onClick?: (e: MouseEvent | KeyboardEvent) => void
   /** Children is breadcrumb text */
   children: string
-} & HTMLAttributes<HTMLDivElement>
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
-export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
+export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
   function Breadcrumb({ children, maxWidth, ...other }, ref) {
     const [openState, setOpenState] = React.useState(false)
 

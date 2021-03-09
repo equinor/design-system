@@ -30,17 +30,28 @@ export default {
 const handleClick = (e) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   action('handleClick')(e.target.textContent)
+  e.preventDefault()
 }
 
 export const Default: Story<BreadcrumbsProps> = (args) => {
   return (
     <Body>
       <Breadcrumbs {...args}>
-        <Breadcrumbs.Breadcrumb>Label One</Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb>Label Two</Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb>Label Three</Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb>Label Four</Breadcrumbs.Breadcrumb>
-        <Breadcrumbs.Breadcrumb>Label Five</Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label One
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Two
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Three
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Four
+        </Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+          Label Five
+        </Breadcrumbs.Breadcrumb>
       </Breadcrumbs>
     </Body>
   )
@@ -49,13 +60,17 @@ export const Default: Story<BreadcrumbsProps> = (args) => {
 export const Normal: Story<BreadcrumbsProps> = () => (
   <Body>
     <Breadcrumbs>
-      <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Store
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Fruits
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
+      <Breadcrumbs.Breadcrumb
+        href="#"
+        onClick={handleClick}
+        aria-current="page"
+      >
         Apple
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
@@ -65,16 +80,20 @@ export const Normal: Story<BreadcrumbsProps> = () => (
 export const Collapsed: Story<BreadcrumbsProps> = () => (
   <Body>
     <Breadcrumbs collapse>
-      <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Store
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Fruits
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Apple
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
+      <Breadcrumbs.Breadcrumb
+        href="#"
+        onClick={handleClick}
+        aria-current="page"
+      >
         Apple Juice
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
@@ -91,14 +110,15 @@ Collapsed.parameters = {
 export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
   <Body>
     <Breadcrumbs>
-      <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" maxWidth={30} onClick={handleClick}>
         Store
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb maxWidth={30} onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" maxWidth={30} onClick={handleClick}>
         Fruits
       </Breadcrumbs.Breadcrumb>
       <Breadcrumbs.Breadcrumb
         maxWidth={30}
+        href="#"
         onClick={handleClick}
         aria-current="page"
       >
@@ -118,13 +138,17 @@ TruncatedLabels.storyName = 'Truncated labels'
 export const Wrapped: Story<BreadcrumbsProps> = () => (
   <Body>
     <Breadcrumbs>
-      <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Store
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Fruits
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb onClick={handleClick} aria-current="page">
+      <Breadcrumbs.Breadcrumb
+        href="#"
+        onClick={handleClick}
+        aria-current="page"
+      >
         Apple
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
