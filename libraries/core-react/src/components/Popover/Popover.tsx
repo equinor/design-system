@@ -20,12 +20,10 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
   align-items: center;
   align-content: start;
   background: ${tokens.background};
-  fill: ${tokens.background};
   width: max-content;
   max-height: ${tokens.popover.maxHeight};
   max-width: ${tokens.popover.maxWidth};
   min-height: ${tokens.popover.minHeight};
-  box-shadow: ${tokens.elevation};
   z-index: 100;
 
   ${({ open }) =>
