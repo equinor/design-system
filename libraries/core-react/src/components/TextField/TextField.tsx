@@ -33,6 +33,7 @@ const UnitAndIconWrapper = styled.div`
   top: ${tokens.spacings.top};
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
   & div:nth-child(2) {
     margin-left: ${tokens.spacings.left};
@@ -134,14 +135,14 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             {inputIcon || unit ? (
               <>
                 <PaddedInputWrapper {...inputProps} />
-                <UnitAndIconWrapper>
+                {/*  <UnitAndIconWrapper>
                   {unit && <Unit>{unit}</Unit>}
                   {inputIcon && (
                     <Icon isDisabled={disabled} variant={variant}>
                       {inputIcon}
                     </Icon>
                   )}
-                </UnitAndIconWrapper>
+                </UnitAndIconWrapper> */}
               </>
             ) : (
               <InputWrapper {...inputProps} />

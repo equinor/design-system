@@ -51,7 +51,6 @@ const StyledInput = styled.input<StyledProps>`
   margin: 0;
   border: none;
   appearance: none;
-
   background: ${tokens.background};
 
   ${({ spacings }) => spacingsTemplate(spacings)}
