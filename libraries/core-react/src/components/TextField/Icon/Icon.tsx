@@ -49,13 +49,6 @@ const StyledIcon = styled.div<StyledIconProps>`
   ${Variation}
 `
 
-const StyledIputIcon = styled(StyledIcon)`
-  position: absolute;
-  right: ${({ spacings }) => spacings.right};
-  top: ${({ spacings }) => spacings.top};
-  bottom: ${({ spacings }) => spacings.bottom};
-`
-
 type TextfieldIconProps = {
   /** isDisabled */
   isDisabled?: boolean
@@ -74,7 +67,6 @@ const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
     {
       variant = 'default',
       isDisabled = false,
-      isInputIcon = true,
       spacings = tokens.spacings.comfortable,
       colors = {
         color: tokens[variant].color,
@@ -96,17 +88,9 @@ const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
     }
 
     return (
-      <>
-        {isInputIcon ? (
-          <StyledIputIcon ref={ref} {...iconProps} {...other}>
-            {children}
-          </StyledIputIcon>
-        ) : (
-          <StyledIcon ref={ref} {...iconProps} {...other}>
-            {children}
-          </StyledIcon>
-        )}
-      </>
+      <StyledIcon ref={ref} {...iconProps} {...other}>
+        {children}
+      </StyledIcon>
     )
   },
 )

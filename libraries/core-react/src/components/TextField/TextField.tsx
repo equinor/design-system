@@ -27,6 +27,18 @@ const Unit = styled.span`
   ${typographyTemplate(tokens.entities.unit.typography)}
 `
 
+const UnitAndIconWrapper = styled.div`
+  position: absolute;
+  right: ${tokens.spacings.right};
+  top: ${tokens.spacings.top};
+  display: flex;
+  align-items: center;
+  height: 100%;
+  & div:nth-child(2) {
+    margin-left: ${tokens.spacings.left};
+  }
+`
+
 export type TextFieldProps = {
   /** @ignore */
   className?: string
@@ -122,10 +134,14 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             {inputIcon || unit ? (
               <>
                 <PaddedInputWrapper {...inputProps} />
-                <Icon isDisabled={disabled} variant={variant}>
-                  {inputIcon}
-                </Icon>
-                <Unit>{unit}</Unit>
+                <UnitAndIconWrapper>
+                  {unit && <Unit>{unit}</Unit>}
+                  {inputIcon && (
+                    <Icon isDisabled={disabled} variant={variant}>
+                      {inputIcon}
+                    </Icon>
+                  )}
+                </UnitAndIconWrapper>
               </>
             ) : (
               <InputWrapper {...inputProps} />

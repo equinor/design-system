@@ -111,12 +111,27 @@ export const Disabled: Story<TextFieldProps> = () => (
   />
 )
 export const WithUnit: Story<TextFieldProps> = () => (
-  <TextField
-    id="storybook-unit"
-    placeholder="Placeholder text"
-    label="Price"
-    unit="$"
-  />
+  <Wrapper>
+    <TextField
+      id="storybook-unit"
+      placeholder="Placeholder text text text"
+      label="Price"
+      unit="$"
+    />
+    <TextField
+      id="storybook-unit"
+      placeholder="Placeholder text text text"
+      label="Speed"
+      unit="km/h"
+    />
+    <TextField
+      id="storybook-unit"
+      placeholder="Placeholder text text text"
+      label="Price"
+      unit="$"
+      inputIcon={<Icon name="thumbs_up" />}
+    />
+  </Wrapper>
 )
 
 export const WithIcons: Story<TextFieldProps> = () => (
