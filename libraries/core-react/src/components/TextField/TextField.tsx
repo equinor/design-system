@@ -7,6 +7,8 @@ import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { TextFieldProvider } from './context'
 import type { Variants } from './types'
+import { typographyTemplate } from '@utils'
+import { textfield as tokens } from './TextField.tokens'
 
 const Container = styled.div`
   min-width: 100px;
@@ -21,6 +23,10 @@ const PaddedInputWrapper = styled(InputWrapper)`
   padding-right: 32px;
 `
 
+const Unit = styled.span`
+  ${typographyTemplate(tokens.entities.unit.typography)}
+`
+
 export type TextFieldProps = {
   /** @ignore */
   className?: string
@@ -32,6 +38,8 @@ export type TextFieldProps = {
   label?: string
   /** Meta text */
   meta?: string
+  /** Unit text */
+  unit?: string
   /** Helper text */
   helperText?: string
   /** Placeholder text */
@@ -59,6 +67,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       id,
       label,
       meta,
+      unit,
       helperText,
       placeholder,
       disabled,
@@ -80,6 +89,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       variant,
       ref: inputRef,
       inputIcon,
+      unit,
       ...other,
     }
 
@@ -109,12 +119,13 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
         <TextFieldProvider>
           {showLabel && <Label {...labelProps} />}
           <RelativeContainer>
-            {inputIcon ? (
+            {inputIcon || unit ? (
               <>
                 <PaddedInputWrapper {...inputProps} />
                 <Icon isDisabled={disabled} variant={variant}>
                   {inputIcon}
                 </Icon>
+                <Unit>{unit}</Unit>
               </>
             ) : (
               <InputWrapper {...inputProps} />
