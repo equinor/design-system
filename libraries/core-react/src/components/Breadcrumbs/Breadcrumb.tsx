@@ -61,25 +61,24 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
     const tooltip = Boolean(maxWidth)
 
     const WithTooltip = (
-      <>
-        <StyledTypography
-          ref={reference}
-          aria-describedby="tooltip"
-          onMouseEnter={handleOpen}
-          onMouseLeave={handleClose}
-          link
-          variant="body_short"
-          {...props}
-        >
-          {children}
-        </StyledTypography>
+      <StyledTypography
+        link
+        variant="body_short"
+        {...props}
+        ref={reference}
+        aria-describedby="tooltip"
+        onMouseEnter={handleOpen}
+        onMouseLeave={handleClose}
+      >
+        {children}
         <Tooltip
           title={children}
           open={openState}
           id="tooltip"
+          placement="top"
           anchorEl={reference.current}
         />
-      </>
+      </StyledTypography>
     )
 
     return tooltip ? (
