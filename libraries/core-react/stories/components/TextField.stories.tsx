@@ -110,6 +110,14 @@ export const Disabled: Story<TextFieldProps> = () => (
     disabled
   />
 )
+export const WithUnit: Story<TextFieldProps> = () => (
+  <TextField
+    id="storybook-unit"
+    placeholder="Placeholder text"
+    label="Price"
+    unit="$"
+  />
+)
 
 export const WithIcons: Story<TextFieldProps> = () => (
   <Wrapper>
