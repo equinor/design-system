@@ -47,6 +47,8 @@ jobs:
           bin_dest: ./pnpm/bin
           run_install: |
             - recursive: true
+      - name: Lint
+        run: ./pnpm/bin/pnpm run lint ./libraries/icons
       - name: Cache base files
         uses: actions/cache@v2
         with:
