@@ -143,31 +143,27 @@ export const simpleTable: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
 
   return (
-    <>
-      <Table {...args}>
-        <Table.Caption>
-          <Typography variant="h2">Fruits cost price</Typography>
-        </Table.Caption>
-        <Table.Head>
-          <Table.Row>
-            {columns.map((col) => (
-              <Table.Cell key={`Table.Head-${col.accessor}`}>
-                {col.name}
-              </Table.Cell>
+    <Table {...args}>
+      <Table.Caption>
+        <Typography variant="h2">Fruits cost price</Typography>
+      </Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          {columns.map((col) => (
+            <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
+          ))}
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {cellValues?.map((row) => (
+          <Table.Row key={row.toString()}>
+            {row.map((cellValue) => (
+              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
             ))}
           </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {cellValues?.map((row) => (
-            <Table.Row key={row.toString()}>
-              {row.map((cellValue) => (
-                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
-              ))}
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </>
+        ))}
+      </Table.Body>
+    </Table>
   )
 }
 
@@ -188,9 +184,7 @@ export const FixedTableHeader: Story<TableProps> = () => {
         <Table.Head sticky>
           <Table.Row>
             {columns.map((col) => (
-              <Table.Cell key={`Table.Head-${col.accessor}`}>
-                {col.name}
-              </Table.Cell>
+              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
             ))}
           </Table.Row>
         </Table.Head>
@@ -292,9 +286,7 @@ export const CompactTable: Story<TableProps> = () => {
         <Table.Head>
           <Table.Row>
             {columns.map((col) => (
-              <Table.Cell key={`Table.Head-${col.accessor}`}>
-                {col.name}
-              </Table.Cell>
+              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
             ))}
           </Table.Row>
         </Table.Head>
@@ -312,7 +304,7 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 
-const SortCell = styled(Table.Cell)<{ isSorted: boolean } & CellProps>`
+const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
   }
@@ -397,7 +389,7 @@ export const Sortable: Story<TableProps> = () => {
           {state.columns.map((col) => (
             <SortCell
               sort={col.sortDirection}
-              key={`Table.Head-${col.accessor}`}
+              key={`head-${col.accessor}`}
               onClick={col.sortDirection ? () => onSortClick(col) : undefined}
               isSorted={col.isSorted}
             >
