@@ -1,12 +1,11 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, screen } from '../../utils/test-utils'
+import { render, cleanup, screen } from '@utils'
 import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Tooltip } from '.'
-import { tooltip as tokens } from './Tooltip.tokens'
 import type { TooltipProps } from './Tooltip'
 
 // We override Tooltip for testing and set props to partial because AnchorEl is applied to children in custom render function

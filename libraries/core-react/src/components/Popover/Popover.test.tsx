@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, screen, fireEvent } from '../../utils/test-utils'
+import { render, cleanup, screen, fireEvent } from '@utils'
 import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { Popover } from '.'
 import type { PopoverProps } from './Popover'
 
-// We override Menu for testing and set props to partial because AnchorEl is applied to children in custom render function
+// We override Popover for testing and set props to partial because AnchorEl is applied to children in custom render function
 const TestPopover = Popover as React.ForwardRefExoticComponent<
   Partial<PopoverProps>
 >
