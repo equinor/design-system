@@ -26,7 +26,6 @@ const StyledTooltip = styled.div<Pick<TooltipProps, 'open'>>`
   ${spacingsTemplate(tokens.spacings)}
   z-index: 350;
   background: ${tokens.background};
-  fill: ${tokens.background};
   border-radius: ${tokens.borderRadius};
   white-space: nowrap;
   ${({ open }) =>
