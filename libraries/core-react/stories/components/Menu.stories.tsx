@@ -199,6 +199,9 @@ export const ComplexMenu: Story<MenuProps> = () => {
     const { key } = e
     e.preventDefault()
     switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
       case 'ArrowDown':
         isOpen ? closeMenu() : openMenu('first')
         break
@@ -263,6 +266,9 @@ export const InTopbar: Story<MenuProps> = () => {
     const { key } = e
     e.preventDefault()
     switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
       case 'ArrowDown':
         isOpen ? closeMenu() : openMenu('first')
         break
@@ -331,6 +337,9 @@ export const IconButtons: Story<MenuProps> = () => {
     const { key } = e
     e.preventDefault()
     switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
       case 'ArrowDown':
         isOpen ? closeMenu() : openMenu('first')
         break
@@ -403,6 +412,9 @@ export const Text: Story<MenuProps> = () => {
     const { key } = e
     e.preventDefault()
     switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
       case 'ArrowDown':
         isOpen ? closeMenu() : openMenu('first')
         break
@@ -478,6 +490,9 @@ export const TextWithIcons: Story<MenuProps> = () => {
     const { key } = e
     e.preventDefault()
     switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
       case 'ArrowDown':
         isOpen ? closeMenu() : openMenu('first')
         break
@@ -510,7 +525,7 @@ export const TextWithIcons: Story<MenuProps> = () => {
         open={isOpen}
         anchorEl={ref.current}
         onClose={closeMenu}
-        fous={focus}
+        focus={focus}
         placement="bottom"
       >
         <Menu.Item onClick={onClick}>
@@ -595,6 +610,9 @@ export const Placement: Story<MenuProps> = () => {
     const { key } = e
     e.preventDefault()
     switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
       case 'ArrowDown':
         isOpen ? closeMenu() : openMenu('first')
         break
