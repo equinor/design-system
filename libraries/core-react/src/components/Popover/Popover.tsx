@@ -6,7 +6,7 @@ import { Paper } from '../Paper'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { usePopper, useOutsideClick } from '@hooks'
+import { usePopper, useOutsideClick, Placement } from '@hooks'
 import { popover as tokens } from './Popover.tokens'
 
 type StyledPopoverProps = Pick<PopoverProps, 'open'>
@@ -74,7 +74,7 @@ const Arrow = styled.div`
   }
 
   &::before {
-    box-shadow: '0 1px 10px rgb(0 0 0 / 20%), 0 4px 5px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 14%)';
+    filter: drop-shadow(-2px 0px 2px rgba(0, 0, 0, 0.2));
     content: '';
     transform: rotate(45deg);
     background: ${tokens.background};
@@ -82,22 +82,7 @@ const Arrow = styled.div`
 `
 export type PopoverProps = {
   /**  Popover placement relative to anchor */
-  placement?:
-    | 'auto'
-    | 'auto-start'
-    | 'auto-end'
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'right'
-    | 'right-start'
-    | 'right-end'
-    | 'left'
-    | 'left-start'
-    | 'left-end'
+  placement?: Placement
   /**  On Close callback */
   onClose?: () => void
   /** Anchor element reference */

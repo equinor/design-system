@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, useRef, useState, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { usePopper } from '@hooks'
+import { usePopper, Placement } from '@hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
 const Arrow = styled.div`
@@ -56,22 +56,7 @@ const StyledTooltip = styled.div<Pick<TooltipProps, 'open'>>`
 
 export type TooltipProps = {
   /** Tooltip placement relative to anchor */
-  placement?:
-    | 'auto'
-    | 'auto-start'
-    | 'auto-end'
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'right'
-    | 'right-start'
-    | 'right-end'
-    | 'left'
-    | 'left-start'
-    | 'left-end'
+  placement?: Placement
   /** Tooltip title */
   title?: string
   /** Anchor element reference */
