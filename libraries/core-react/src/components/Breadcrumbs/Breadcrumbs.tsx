@@ -63,8 +63,16 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
     const [expanded, setExpanded] = useState(false)
 
     const collapsedCrumbs = (allCrumbs: JSX.Element[]) => {
-      const handleExpandClick = () => {
+      const handleExpandClick = (
+        e:
+          | React.KeyboardEvent<HTMLAnchorElement>
+          | React.MouseEvent<HTMLAnchorElement>,
+      ) => {
         setExpanded(true)
+        const { key } = e as React.KeyboardEvent
+        if (key === 'Enter') {
+          setExpanded(true)
+        }
       }
 
       if (allCrumbs.length < 3) {
@@ -80,6 +88,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
               role="button"
               variant="body_short"
               onClick={handleExpandClick}
+              onKeyPress={handleExpandClick}
               tabIndex={0}
             >
               …

@@ -68,6 +68,8 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
         ref={reference}
         aria-describedby="tooltip"
         onMouseEnter={handleOpen}
+        onFocus={handleOpen}
+        onBlur={handleClose}
         onMouseLeave={handleClose}
       >
         {children}
