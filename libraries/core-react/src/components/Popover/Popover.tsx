@@ -74,7 +74,6 @@ const Arrow = styled.div`
   }
 
   &::before {
-    filter: drop-shadow(-2px 0px 2px rgba(0, 0, 0, 0.2));
     content: '';
     transform: rotate(45deg);
     background: ${tokens.background};
