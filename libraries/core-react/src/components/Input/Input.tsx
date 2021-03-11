@@ -3,10 +3,17 @@ import { ElementType, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
 import { typographyTemplate, spacingsTemplate } from '@utils'
+import { InlineStuffWrapper } from '../TextField/InputWrapper'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 
-const Variation = ({ variant }: { variant: InputVariantProps }) => {
+const Variation = ({
+  variant,
+  token,
+}: {
+  variant: string
+  token: InputVariantProps
+}) => {
   if (!variant) {
     return ``
   }
@@ -14,17 +21,26 @@ const Variation = ({ variant }: { variant: InputVariantProps }) => {
   const {
     focus: { border: focusBorderOutline },
     border: { outline: borderOutline, bottom: borderBottom },
-  } = variant
+  } = token
 
   return css`
     border: none;
     outline: ${borderOutline.width} solid ${borderOutline.color};
     box-shadow: inset 0 -${borderBottom.width} 0 0 ${borderBottom.color};
+    ${InlineStuffWrapper} & {
+      outline: none;
+    }
     &:active,
     &:focus {
       outline-offset: 0;
       box-shadow: none;
       outline: ${focusBorderOutline.width} solid ${focusBorderOutline.color};
+    }
+
+    ${InlineStuffWrapper} &:active,
+    ${InlineStuffWrapper} &:focus {
+      outline: none;
+      box-shadow: none;
     }
 
     &:disabled {
@@ -42,7 +58,8 @@ const Variation = ({ variant }: { variant: InputVariantProps }) => {
 
 type StyledProps = {
   spacings: Spacing
-  variant: InputVariantProps
+  token: InputVariantProps
+  variant: string
 }
 
 const StyledInput = styled.input<StyledProps>`
@@ -75,6 +92,8 @@ export type InputProps = {
   type?: string
   /** Read Only */
   readonly?: boolean
+  /* By default Input will handle focus*/
+  handleFocus?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -97,7 +116,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       ref,
       type,
       disabled,
-      variant: inputVariant,
+      variant: variant,
+      token: inputVariant,
       spacings: spacings,
       ...other,
     }

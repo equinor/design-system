@@ -4,20 +4,68 @@ import { useTextField } from './context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
 import type { Variants } from './types'
-import styled from 'styled-components'
-import { typographyTemplate } from '@utils'
-import { textfield as tokens } from './TextField.tokens'
+import type { Outline, ComponentToken } from '@equinor/eds-tokens'
+import styled, { css } from 'styled-components'
+import { typographyTemplate, outlineTemplate } from '@utils'
+import * as tokens from './TextField.tokens'
 
-const InlineStuffWrapper = styled.div`
+const { textfield, error } = tokens
+
+const Variation = ({
+  variant,
+  isFocused,
+  token,
+}: {
+  variant: string
+  token: ComponentToken
+  isFocused: boolean
+}) => {
+  if (!variant) {
+    return ``
+  }
+  console.log('isFocused ----------', isFocused)
+  return css`
+    box-shadow: ${() =>
+      isFocused
+        ? `none`
+        : variant === 'default'
+        ? `inset 0 -1px 0 0 ${
+            token.border?.type === 'border' && token.border?.color
+          }`
+        : `0 0 0 1px ${
+            token.border?.type === 'border' && token.border?.color
+          }`};
+    outline: ${() =>
+      isFocused
+        ? `${token.states.focus.outline.width} solid ${token.states.focus.outline.color}`
+        : 'none'};
+  `
+}
+
+type InlineStuffWrapperType = {
+  isFocused: boolean
+  isDisabled: boolean
+  variant: string
+  token: ComponentToken
+}
+export const InlineStuffWrapper = styled.div<InlineStuffWrapperType>`
   display: flex;
   align-items: center;
-  box-shadow: inset 0 -1px 0 0 #6f6f6f;
+
   background: #f7f7f7;
-  padding-right: ${tokens.spacings.right};
+  padding-right: ${textfield.spacings.right};
+  ${Variation}
+  ${({ isDisabled }) =>
+    isDisabled && {
+      /* outlineTemplate(states.focus.outline) */
+      boxShadow: 'none',
+      cursor: 'not-allowed',
+      outline: 'none',
+    }}
 `
 
 const Unit = styled.span`
-  ${typographyTemplate(tokens.entities.unit.typography)}
+  ${typographyTemplate(textfield.entities.unit.typography)}
 `
 
 const UnitAndIconWrapper = styled.div`
@@ -25,9 +73,9 @@ const UnitAndIconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  margin-left: ${tokens.spacings.left};
+  margin-left: ${textfield.spacings.left};
   & div:nth-child(2) {
-    margin-left: ${tokens.spacings.left};
+    margin-left: ${textfield.spacings.left};
   }
 `
 
@@ -59,6 +107,9 @@ export const InputWrapper = React.forwardRef<
 
   console.log('is focused', isFocused)
 
+  const variantzz = variant === 'default' ? 'textfield' : variant
+  const inputVariant = tokens[variantzz]
+  console.log('variant', variant, inputVariant)
   const inputProps = {
     multiline,
     ref,
@@ -71,8 +122,18 @@ export const InputWrapper = React.forwardRef<
   return (
     <>
       {(!multiline && inputIcon) || unit ? (
-        <InlineStuffWrapper>
-          <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
+        <InlineStuffWrapper
+          isFocused={isFocused}
+          isDisabled={disabled}
+          variant={variant}
+          token={inputVariant}
+        >
+          <Input
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            {...inputProps}
+            handleFocus={false}
+          />
           <UnitAndIconWrapper>
             {unit && <Unit>{unit}</Unit>}
             {inputIcon && (
