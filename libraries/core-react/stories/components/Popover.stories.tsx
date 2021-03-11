@@ -38,6 +38,8 @@ export default {
         options: PlacementValues,
         defaultValue: 'auto',
       },
+      description:
+        `Popover placement relative to anchor, types: ' ` + PlacementValues,
     },
   },
 } as Meta
