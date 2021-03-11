@@ -24,6 +24,7 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
   max-height: ${tokens.popover.maxHeight};
   max-width: ${tokens.popover.maxWidth};
   min-height: ${tokens.popover.minHeight};
+  border-radius: ${tokens.borderRadius};
   z-index: 100;
 
   ${({ open }) =>
@@ -33,23 +34,23 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
 
   .arrow {
     z-index: -1;
-    width: 10px;
-    height: 10px;
+    width: ${tokens.arrow.width};
+    height: ${tokens.arrow.height};
   }
   &[data-popper-placement^='top'] > .arrow {
-    bottom: -5px;
+    bottom: ${tokens.arrow.height} / 2 + 'px';
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
-    top: -5px;
+    top: ${tokens.arrow.height} / 2 + 'px';
   }
 
   &[data-popper-placement^='left'] > .arrow {
-    right: -5px;
+    right: ${tokens.arrow.width} / 2 + 'px';
   }
 
   &[data-popper-placement^='right'] > .arrow {
-    left: -5px;
+    left: ${tokens.arrow.width} / 2 + 'px';
   }
 `
 
