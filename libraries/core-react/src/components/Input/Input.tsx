@@ -3,7 +3,7 @@ import { ElementType, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
 import { typographyTemplate, spacingsTemplate } from '@utils'
-import { InlineStuffWrapper } from '../TextField/InputWrapper'
+import { InputWithAdornments } from '../TextField/InputWrapper'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 
@@ -27,7 +27,7 @@ const Variation = ({
     border: none;
     outline: ${borderOutline.width} solid ${borderOutline.color};
     box-shadow: inset 0 -${borderBottom.width} 0 0 ${borderBottom.color};
-    ${InlineStuffWrapper} & {
+    ${InputWithAdornments} & {
       outline: none;
     }
     &:active,
@@ -37,8 +37,8 @@ const Variation = ({
       outline: ${focusBorderOutline.width} solid ${focusBorderOutline.color};
     }
 
-    ${InlineStuffWrapper} &:active,
-    ${InlineStuffWrapper} &:focus {
+    ${InputWithAdornments} &:active,
+    ${InputWithAdornments} &:focus {
       outline: none;
       box-shadow: none;
     }

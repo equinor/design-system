@@ -23,7 +23,7 @@ const Variation = ({
   if (!variant) {
     return ``
   }
-  console.log('isFocused ----------', isFocused)
+
   return css`
     box-shadow: ${() =>
       isFocused
@@ -42,21 +42,20 @@ const Variation = ({
   `
 }
 
-type InlineStuffWrapperType = {
+type InputWithAdornmentsType = {
   isFocused: boolean
   isDisabled: boolean
   variant: string
   token: ComponentToken
 }
 
-type UnitAndIconWrapper = {
+type AdornmentsType = {
   multiline: boolean
 }
-export const InlineStuffWrapper = styled.div<InlineStuffWrapperType>`
+export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
   display: flex;
   align-items: center;
-
-  background: #f7f7f7;
+  background: ${textfield.background};
   padding-right: ${textfield.spacings.right};
   ${Variation}
   ${({ isDisabled }) =>
@@ -72,7 +71,7 @@ const Unit = styled.span`
   ${typographyTemplate(textfield.entities.unit.typography)}
 `
 
-const UnitAndIconWrapper = styled.div<UnitAndIconWrapper>`
+const Adornments = styled.div<AdornmentsType>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,7 +132,7 @@ export const InputWrapper = React.forwardRef<
   return (
     <>
       {inputIcon || unit ? (
-        <InlineStuffWrapper
+        <InputWithAdornments
           isFocused={isFocused}
           isDisabled={disabled}
           variant={variant}
@@ -145,15 +144,15 @@ export const InputWrapper = React.forwardRef<
             {...inputProps}
             handleFocus={false}
           />
-          <UnitAndIconWrapper multiline={multiline}>
+          <Adornments multiline={multiline}>
             {unit && <Unit>{unit}</Unit>}
             {inputIcon && (
               <Icon isDisabled={disabled} variant={variant}>
                 {inputIcon}
               </Icon>
             )}
-          </UnitAndIconWrapper>
-        </InlineStuffWrapper>
+          </Adornments>
+        </InputWithAdornments>
       ) : (
         <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
       )}

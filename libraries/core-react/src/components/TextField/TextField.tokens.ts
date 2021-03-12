@@ -8,6 +8,7 @@ const {
 } = tokens
 
 export const textfield: ComponentToken = {
+  background: colors.ui.background__light.hex,
   border: {
     type: 'border',
     radius: 0,
