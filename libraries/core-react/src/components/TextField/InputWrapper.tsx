@@ -46,9 +46,6 @@ type InputWithAdornmentsType = {
   token: ComponentToken
 }
 
-type AdornmentsType = {
-  multiline: boolean
-}
 export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
   display: flex;
   align-items: center;
@@ -66,6 +63,10 @@ export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
 const Unit = styled.span`
   ${typographyTemplate(textfield.entities.unit.typography)}
 `
+
+type AdornmentsType = {
+  multiline: boolean
+}
 
 const Adornments = styled.div<AdornmentsType>`
   display: flex;
@@ -110,10 +111,8 @@ export const InputWrapper = React.forwardRef<
 ) {
   const { handleFocus, handleBlur, isFocused } = useTextField()
 
-  console.log('is focused', isFocused)
-
-  const variantzz = variant === 'default' ? 'textfield' : variant
-  const inputVariant = tokens[variantzz]
+  const actualVariant = variant === 'default' ? 'textfield' : variant
+  const inputVariant = tokens[actualVariant]
   const inputProps = {
     multiline,
     ref,
@@ -132,12 +131,7 @@ export const InputWrapper = React.forwardRef<
           variant={variant}
           token={inputVariant}
         >
-          <Input
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            {...inputProps}
-            handleFocus={false}
-          />
+          <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
           <Adornments multiline={multiline}>
             {unit && <Unit>{unit}</Unit>}
             {inputIcon && (

@@ -12,14 +12,6 @@ const Container = styled.div`
   width: 100%;
 `
 
-const RelativeContainer = styled.div`
-  position: relative;
-`
-
-const PaddedInputWrapper = styled(InputWrapper)`
-  padding-right: 32px;
-`
-
 export type TextFieldProps = {
   /** @ignore */
   className?: string
@@ -111,9 +103,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       <Container {...containerProps}>
         <TextFieldProvider>
           {showLabel && <Label {...labelProps} />}
-          <RelativeContainer>
-            <InputWrapper {...inputProps} />
-          </RelativeContainer>
+          <InputWrapper {...inputProps} />
           {showHelperText && <HelperText {...helperProps} />}
         </TextFieldProvider>
       </Container>
