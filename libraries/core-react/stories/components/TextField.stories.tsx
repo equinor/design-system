@@ -39,7 +39,14 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(2, fit-content(100%));
 `
 export const Default: Story<TextFieldProps> = (args) => (
-  <TextField {...args}></TextField>
+  <TextField
+    meta="meta"
+    id="playWithMe"
+    label="Play with me"
+    unit="Unit"
+    helperText="Helper text"
+    {...args}
+  ></TextField>
 )
 
 export const types: Story<TextFieldProps> = () => (
