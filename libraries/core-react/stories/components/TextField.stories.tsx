@@ -180,6 +180,8 @@ export const WithUnit: Story<TextFieldProps> = () => (
   </Wrapper>
 )
 
+WithUnit.storyName = 'With unit'
+
 export const WithIcons: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
@@ -256,7 +258,6 @@ export const Variants: Story<TextFieldProps> = () => (
       variant="warning"
       inputIcon={<Icon name="warning_filled" title="Warning" />}
     />
-
     <TextField
       id="storybook-success"
       placeholder="Placeholder text Placeholder text Placeholder text"
@@ -275,12 +276,72 @@ export const Variants: Story<TextFieldProps> = () => (
       variant="success"
       inputIcon={<Icon name="thumbs_up" title="Success" />}
     />
+    <TextField
+      id="multi-error"
+      label="Multline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Validation error"
+      variant="error"
+      helperIcon={<Icon name="error_filled" title="Error" />}
+    />
+    <TextField
+      id="multi-error-two"
+      label="Multline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Validation error"
+      variant="error"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
+    <TextField
+      id="multi-warning"
+      label="Multline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper/warning text"
+      variant="warning"
+      helperIcon={<Icon name="error_filled" title="Error" />}
+    />
+    <TextField
+      id="multi-warning-two"
+      label="Multline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper/warning text"
+      variant="warning"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
+    <TextField
+      id="multi-success"
+      label="Multline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper text"
+      variant="success"
+      helperIcon={<Icon name="error_filled" title="Error" />}
+    />
+    <TextField
+      id="multi-success-two"
+      label="Multline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper text"
+      variant="success"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
   </Wrapper>
 )
 
 Variants.parameters = {
   docs: {
     storyDescription: `Examples of validation states. You can add the icon in the helper
-    text or inside the text input, both not both places.`,
+    text or inside the text input, both not in both places.`,
   },
 }
