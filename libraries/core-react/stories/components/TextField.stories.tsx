@@ -45,6 +45,8 @@ export const Default: Story<TextFieldProps> = (args) => (
     label="Play with me"
     unit="Unit"
     helperText="Helper text"
+    style={{ resize: 'none' }}
+    rows={3}
     {...args}
   ></TextField>
 )
