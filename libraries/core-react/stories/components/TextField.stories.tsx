@@ -90,14 +90,23 @@ export const types: Story<TextFieldProps> = () => (
 types.storyName = 'Types of input fields'
 
 export const Multiline: Story<TextFieldProps> = () => (
-  <TextField
-    id="storybook-multiline"
-    placeholder="Placeholder text"
-    label="Multline"
-    meta="Meta"
-    helperText="Helper Text"
-    multiline
-  />
+  <>
+    <TextField
+      id="storybook-multiline"
+      placeholder="Placeholder text"
+      label="Multline"
+      meta="Meta"
+      helperText="Helper Text"
+      multiline
+    />
+    <TextField
+      id="storybook-multiline-two"
+      placeholder="Placeholder text"
+      label="Multline with icon"
+      multiline
+      inputIcon={<Icon name="warning_filled" />}
+    />
+  </>
 )
 
 export const Disabled: Story<TextFieldProps> = () => (
@@ -119,17 +128,25 @@ export const WithUnit: Story<TextFieldProps> = () => (
       unit="$"
     />
     <TextField
-      id="storybook-unit"
+      id="storybook-unit-two"
       placeholder="Placeholder text text text"
       label="Speed"
       unit="km/h"
     />
     <TextField
-      id="storybook-unit"
+      id="storybook-unit-three"
       placeholder="Placeholder text text text"
       label="Price"
       unit="$"
       inputIcon={<Icon name="thumbs_up" />}
+    />
+    <TextField
+      id="storybook-unit-four"
+      placeholder="Placeholder text text text"
+      label="Disabled price"
+      unit="$"
+      disabled
+      inputIcon={<Icon name="warning_filled" />}
     />
   </Wrapper>
 )
