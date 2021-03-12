@@ -95,7 +95,6 @@ export const Multiline: Story<TextFieldProps> = () => (
       id="storybook-multiline"
       placeholder="Placeholder text"
       label="Multline"
-      meta="Meta"
       helperText="Helper Text"
       multiline
       style={{ resize: 'none' }}
@@ -131,12 +130,38 @@ export const Disabled: Story<TextFieldProps> = () => (
       disabled
     />
     <TextField
+      id="storybook-unit-four"
+      placeholder="Placeholder text text text"
+      label="Disabled price"
+      unit="$"
+      disabled
+      inputIcon={<Icon name="warning_filled" />}
+    />
+    <TextField
       id="storybook-disabled-two"
       defaultValue="Input text"
       label="Disabled"
       meta="Meta"
       helperText="Helper Text"
       disabled
+    />
+    <TextField
+      id="storybook-disabled-two"
+      defaultValue="Input text"
+      label="Disabled with value"
+      meta="Meta"
+      disabled
+      helperText="Helper Text"
+      inputIcon={<Icon name="thumbs_up" />}
+    />
+
+    <TextField
+      id="storybook-unit-four"
+      defaultValue="Input value"
+      label="Disabled price"
+      unit="$"
+      disabled
+      inputIcon={<Icon name="warning_filled" />}
     />
   </Wrapper>
 )
@@ -153,29 +178,6 @@ export const WithUnit: Story<TextFieldProps> = () => (
       placeholder="Placeholder text text text"
       label="Speed"
       unit="km/h"
-    />
-    <TextField
-      id="storybook-unit-three"
-      placeholder="Placeholder text text text"
-      label="Price"
-      unit="$"
-      inputIcon={<Icon name="thumbs_up" />}
-    />
-    <TextField
-      id="storybook-unit-four"
-      placeholder="Placeholder text text text"
-      label="Disabled price"
-      unit="$"
-      disabled
-      inputIcon={<Icon name="warning_filled" />}
-    />
-    <TextField
-      id="storybook-unit-four"
-      defaultValue="Input value"
-      label="Disabled price"
-      unit="$"
-      disabled
-      inputIcon={<Icon name="warning_filled" />}
     />
   </Wrapper>
 )
@@ -206,16 +208,6 @@ export const WithIcons: Story<TextFieldProps> = () => (
       helperText="Helper Text"
       inputIcon={<Icon name="thumbs_up" />}
     />
-
-    <TextField
-      id="storybook-disabled-two"
-      defaultValue="Input text"
-      label="Disabled with value"
-      meta="Meta"
-      disabled
-      helperText="Helper Text"
-      inputIcon={<Icon name="thumbs_up" />}
-    />
   </Wrapper>
 )
 WithIcons.storyName = 'With icons'
@@ -235,7 +227,7 @@ export const Variants: Story<TextFieldProps> = () => (
       id="storybook-error-two"
       placeholder="Placeholder text "
       label="Error"
-      meta="Meta"
+      unit="Unit"
       helperText="Validation error"
       variant="error"
       inputIcon={<Icon name="error_filled" title="Error" />}
