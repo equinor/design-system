@@ -31,15 +31,6 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - name: Install pnpm & dependencies 📦
         uses: pnpm/action-setup@v1.2.1
         with:
@@ -47,6 +38,8 @@ jobs:
           bin_dest: ./pnpm/bin
           run_install: |
             - recursive: true
+      - name: Lint
+        run: ./pnpm/bin/pnpm run lint ./libraries/icons
       - name: Cache base files
         uses: actions/cache@v2
         with:
@@ -85,24 +78,27 @@ jobs:
           key: ${{ github.sha }}
       - name: Build
         run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
-      - name: Save build to cache
-        uses: actions/cache@v2
-        with:
-          path: ./libraries/icons
-          key: ${{ github.sha }}-build-icons
-  publish-icons:
-    name: Publish eds-icons to npm
-    runs-on: ubuntu-latest
-    needs: [build-icons]
-    steps:
-      - name: Get icons build
+      - name: Save files to cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}-build-icons
+          key: ${{ github.sha }}
+  publish-icons:
+    name: Publish eds-icons to npm
+    runs-on: ubuntu-latest
+    needs: [build-icons]
+    steps:
+      - name: Get files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
       - name: Publish to npm
         run: ./pnpm/bin/pnpm --filter @equinor/eds-icons publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:

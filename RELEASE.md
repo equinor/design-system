@@ -1,11 +1,25 @@
 # Releasing
 
-1. Log into npm in your terminal
-1. Build the package you want to publish. For example, to build the tokens package, run `pnpm --filter ./libraries/tokens run build`
-1. Update the changelog
-1. Bump the version-number. For example, to bump the version from 0.0.1-alpha.1 to 0.0.1-alpha.2, you run `pnpm --filter ./libraries/tokens recursive exec -- pnpm version prerelease`
-1. Push your changes to git: `git add .` then `git commit -m "update version"` and then `git push`
-1. Publish the package to npm by running `pnpm --filter ./libraries/tokens recursive exec -- pnpm publish --tag alpha --access public`
-1. If you want to also tag the published package with **latest**, then you have to run the following command (make sure you use the version-number you just published to npm): `npm dist-tag add @equinor/eds-tokens@0.0.1-alpha.1 latest`
-1. Then run `git tag eds-tokens@0.0.1-alpha.1` and `git push --tags origin develop`
-1. Head over to the [repository in Github](https://github.com/equinor/design-system) and draft a new release from the [new tag](https://github.com/equinor/equinor-brand-assets/tags) (ellipsis-menu on the right-hand side) and include the changes from the changelog in the description
+## Libraries
+
+### Prepare
+
+This can be done from develop or seperate release branches (before merging to develop)
+
+1. Change the version-number in accordance with the magnitude of change.
+   1. If its not a `@latest` release, the type should be "dashed", for example; `0.0.0-beta` or `0.0.0-dev.20210101`.
+   2. We try to follow [semver](https://semver.org/) but are holding back major v1 until we feel its ready.
+2. Update the changelog for your library in `CHANGELOG.md`.
+   1. Follow the guide in the changelog file.
+3. Add a [release on github](https://github.com/equinor/design-system/releases) with the changes you added in `CHANGELOG.md`.
+   1. Name the release in accordance with package name and version, for example; `eds-core-react@0.8.5`
+
+### Publish
+
+1. Find the corresponding workflow for your library, usually prepended with "Publish \<LIBRARY NAME\>".
+2. "Run workflow" and decide if input values need to be changed.
+   1. Storybok slot: If present, choose which environment Storybook should be updated.
+      1. _Leave this input *empty* for deployment to production_
+   2. NPM tag: Choose which tag to apply to the published package
+      1. _Choose `latest` for production release_
+3. ⚠️ Check "Publish eds-\<LIBRARY NAME\> to npm" step to verify the package was actually published. **_If an existing version exists on npmjs.org, the package will not be published, but this step will still pass._**
