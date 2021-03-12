@@ -60,12 +60,20 @@ export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
     }}
 `
 
-const Unit = styled.span`
+type UnitType = {
+  isDisabled: boolean
+}
+
+const Unit = styled.span<UnitType>`
   ${typographyTemplate(textfield.entities.unit.typography)};
   /*   Yes, we don't like magic numbers, but if you have both unit and icon, 
   the unit is slightly off due to line-height and font */
   display: inline-block;
   margin-top: 3px;
+  ${({ isDisabled }) =>
+    isDisabled && {
+      color: textfield.entities.unit.states.disabled.typography.color,
+    }}
 `
 
 type AdornmentsType = {
@@ -137,7 +145,7 @@ export const InputWrapper = React.forwardRef<
         >
           <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
           <Adornments multiline={multiline}>
-            {unit && <Unit>{unit}</Unit>}
+            {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
             {inputIcon && (
               <Icon isDisabled={disabled} variant={variant}>
                 {inputIcon}

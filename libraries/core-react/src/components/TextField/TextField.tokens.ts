@@ -37,6 +37,13 @@ export const textfield: ComponentToken = {
         ...typography.input.label,
         color: colors.text.static_icons__tertiary.hex,
       },
+      states: {
+        disabled: {
+          typography: {
+            color: colors.interactive.disabled__text.hex,
+          },
+        },
+      },
     },
   },
 }
