@@ -11,13 +11,14 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
   ],
   plugins: ['prettier', 'testing-library'],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 11,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
+    requireConfigFile: false,
   },
   env: {
     browser: true,
