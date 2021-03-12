@@ -4,12 +4,12 @@ import { useTextField } from './context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
 import type { Variants } from './types'
-import type { Outline, ComponentToken } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, outlineTemplate } from '@utils'
 import * as tokens from './TextField.tokens'
 
-const { textfield, error } = tokens
+const { textfield } = tokens
 
 const Variation = ({
   variant,
@@ -35,10 +35,7 @@ const Variation = ({
         : `0 0 0 1px ${
             token.border?.type === 'border' && token.border?.color
           }`};
-    outline: ${() =>
-      isFocused
-        ? `${token.states.focus.outline.width} solid ${token.states.focus.outline.color}`
-        : 'none'};
+    ${isFocused && outlineTemplate(token.states.focus.outline)}
   `
 }
 
@@ -119,7 +116,6 @@ export const InputWrapper = React.forwardRef<
 
   const variantzz = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[variantzz]
-  console.log('variant', variant, inputVariant)
   const inputProps = {
     multiline,
     ref,
