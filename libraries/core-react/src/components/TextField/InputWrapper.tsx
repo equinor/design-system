@@ -61,7 +61,11 @@ export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
 `
 
 const Unit = styled.span`
-  ${typographyTemplate(textfield.entities.unit.typography)}
+  ${typographyTemplate(textfield.entities.unit.typography)};
+  /*   Yes, we don't like magic numbers, but if you have both unit and icon, 
+  the unit is slightly off due to line-height and font */
+  display: inline-block;
+  margin-top: 3px;
 `
 
 type AdornmentsType = {
