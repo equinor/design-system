@@ -48,6 +48,10 @@ type InlineStuffWrapperType = {
   variant: string
   token: ComponentToken
 }
+
+type UnitAndIconWrapper = {
+  multiline: boolean
+}
 export const InlineStuffWrapper = styled.div<InlineStuffWrapperType>`
   display: flex;
   align-items: center;
@@ -68,15 +72,22 @@ const Unit = styled.span`
   ${typographyTemplate(textfield.entities.unit.typography)}
 `
 
-const UnitAndIconWrapper = styled.div`
+const UnitAndIconWrapper = styled.div<UnitAndIconWrapper>`
   display: flex;
   align-items: center;
   justify-content: center;
+
   height: 100%;
   margin-left: ${textfield.spacings.left};
   & div:nth-child(2) {
     margin-left: ${textfield.spacings.left};
   }
+  ${({ multiline }) =>
+    multiline && {
+      /* outlineTemplate(states.focus.outline) */
+      alignSelf: 'start',
+      marginTop: `${textfield.spacings.top}`,
+    }}
 `
 
 type TextfieldInputProps = {
@@ -121,7 +132,7 @@ export const InputWrapper = React.forwardRef<
 
   return (
     <>
-      {(!multiline && inputIcon) || unit ? (
+      {inputIcon || unit ? (
         <InlineStuffWrapper
           isFocused={isFocused}
           isDisabled={disabled}
@@ -134,7 +145,7 @@ export const InputWrapper = React.forwardRef<
             {...inputProps}
             handleFocus={false}
           />
-          <UnitAndIconWrapper>
+          <UnitAndIconWrapper multiline={multiline}>
             {unit && <Unit>{unit}</Unit>}
             {inputIcon && (
               <Icon isDisabled={disabled} variant={variant}>

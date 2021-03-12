@@ -17,7 +17,7 @@ export const textfield: ComponentToken = {
   spacings: {
     left: comfortable.small,
     right: comfortable.small,
-    top: '0px',
+    top: comfortable.small,
   },
   states: {
     focus: {

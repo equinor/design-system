@@ -104,6 +104,7 @@ export const Multiline: Story<TextFieldProps> = () => (
       placeholder="Placeholder text"
       label="Multline with icon"
       multiline
+      style={{ resize: 'none' }}
       inputIcon={<Icon name="warning_filled" />}
     />
   </>
