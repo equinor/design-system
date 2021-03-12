@@ -47,7 +47,6 @@ const Variation = ({
       cursor: not-allowed;
       box-shadow: none;
       outline: none;
-
       &:focus,
       &:active {
         outline: none;
@@ -76,6 +75,9 @@ const StyledInput = styled.input<StyledProps>`
   ${Variation}
   &::placeholder {
     color: ${tokens.placeholderColor};
+  }
+  &:disabled {
+    color: ${tokens.disabledColor};
   }
 `
 

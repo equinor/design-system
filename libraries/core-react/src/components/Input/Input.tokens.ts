@@ -42,6 +42,7 @@ type InputProps = {
   background: string
   typography: Typography
   placeholderColor: string
+  disabledColor: string
   spacings: {
     comfortable: Spacing
     compact: Spacing
@@ -59,6 +60,7 @@ export const input: InputProps = {
     color: colors.text.static_icons__default.hex,
   },
   placeholderColor: colors.text.static_icons__tertiary.hex,
+  disabledColor: colors.interactive.disabled__text.hex,
   spacings,
   default: {
     border: {
