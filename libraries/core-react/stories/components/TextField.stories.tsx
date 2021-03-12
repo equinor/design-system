@@ -3,22 +3,42 @@ import { TextField, TextFieldProps, Icon } from '@components'
 import { Story, Meta } from '@storybook/react'
 import { thumbs_up, warning_filled, error_filled } from '@equinor/eds-icons'
 
-Icon.add({
+const icons = {
   thumbs_up,
   warning_filled,
   error_filled,
-})
+}
 
+Icon.add(icons)
 import styled from 'styled-components'
 
 export default {
   title: 'Components/TextField',
   component: TextField,
   argTypes: {
-    rows: {
-      control: 'number',
-      description: 'Rows when "multiline" is true',
-      default: 1,
+    inputIcon: {
+      control: {
+        type: 'select',
+        options: {
+          error: [<Icon name="error_filled" key="error" />],
+          warning: [<Icon name="warning_filled" key="warning" />],
+          success: [<Icon name="thumbs_up" key="thumbs" />],
+        },
+      },
+      description:
+        'Please note that the option list of icons is not complete, this selection is only for demo purposes',
+    },
+    helperIcon: {
+      control: {
+        type: 'select',
+        options: {
+          error: [<Icon name="error_filled" key="error" />],
+          warning: [<Icon name="warning_filled" key="warning" />],
+          success: [<Icon name="thumbs_up" key="thumbs" />],
+        },
+      },
+      description:
+        'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
   },
   parameters: {
