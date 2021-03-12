@@ -98,17 +98,27 @@ export const Multiline: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper Text"
       multiline
+      style={{ resize: 'none' }}
+      rows={5}
     />
+    <div style={{ height: '2rem' }} />
     <TextField
       id="storybook-multiline-two"
       placeholder="Placeholder text"
       label="Multline with icon"
       multiline
       style={{ resize: 'none' }}
+      rows={3}
       inputIcon={<Icon name="warning_filled" />}
     />
   </>
 )
+Multiline.parameters = {
+  docs: {
+    storyDescription: `With multiline we recommend to use <code>rows</code> in combination with a CSS rule of
+    <code>resize: 'none'</code>`,
+  },
+}
 
 export const Disabled: Story<TextFieldProps> = () => (
   <Wrapper>
