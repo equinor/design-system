@@ -57,7 +57,6 @@ export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
   ${Variation}
   ${({ isDisabled }) =>
     isDisabled && {
-      /* outlineTemplate(states.focus.outline) */
       boxShadow: 'none',
       cursor: 'not-allowed',
       outline: 'none',
@@ -80,7 +79,6 @@ const Adornments = styled.div<AdornmentsType>`
   }
   ${({ multiline }) =>
     multiline && {
-      /* outlineTemplate(states.focus.outline) */
       alignSelf: 'start',
       marginTop: `${textfield.spacings.top}`,
     }}
