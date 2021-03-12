@@ -110,14 +110,24 @@ export const Multiline: Story<TextFieldProps> = () => (
 )
 
 export const Disabled: Story<TextFieldProps> = () => (
-  <TextField
-    id="storybook-disabled"
-    placeholder="Placeholder text"
-    label="Disabled"
-    meta="Meta"
-    helperText="Helper Text"
-    disabled
-  />
+  <Wrapper>
+    <TextField
+      id="storybook-disabled"
+      placeholder="Placeholder text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+    />
+    <TextField
+      id="storybook-disabled-two"
+      value="Input text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+    />
+  </Wrapper>
 )
 export const WithUnit: Story<TextFieldProps> = () => (
   <Wrapper>
@@ -148,6 +158,14 @@ export const WithUnit: Story<TextFieldProps> = () => (
       disabled
       inputIcon={<Icon name="warning_filled" />}
     />
+    <TextField
+      id="storybook-unit-four"
+      value="Input value"
+      label="Disabled price"
+      unit="$"
+      disabled
+      inputIcon={<Icon name="warning_filled" />}
+    />
   </Wrapper>
 )
 
@@ -156,11 +174,11 @@ export const WithIcons: Story<TextFieldProps> = () => (
     <TextField
       id="storybook-warning-icon"
       placeholder="Placeholder text"
-      label="Some warning input"
+      label="Label text"
       inputIcon={<Icon name="thumbs_up" />}
     />
     <TextField
-      id="storybook-warning-icon"
+      id="storybook-disabled"
       placeholder="Placeholder text"
       label="Disabled input"
       disabled
@@ -168,10 +186,20 @@ export const WithIcons: Story<TextFieldProps> = () => (
     />
 
     <TextField
-      id="storybook-disabled"
-      placeholder="Placeholder text"
+      id="icons-text"
+      value="Input text"
       label="Label text"
       meta="Meta"
+      helperText="Helper Text"
+      inputIcon={<Icon name="thumbs_up" />}
+    />
+
+    <TextField
+      id="storybook-disabled-two"
+      value="Input text"
+      label="Disabled with value"
+      meta="Meta"
+      disabled
       helperText="Helper Text"
       inputIcon={<Icon name="thumbs_up" />}
     />
