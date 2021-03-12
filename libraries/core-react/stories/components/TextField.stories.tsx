@@ -132,7 +132,7 @@ export const Disabled: Story<TextFieldProps> = () => (
     />
     <TextField
       id="storybook-disabled-two"
-      value="Input text"
+      defaultValue="Input text"
       label="Disabled"
       meta="Meta"
       helperText="Helper Text"
@@ -171,7 +171,7 @@ export const WithUnit: Story<TextFieldProps> = () => (
     />
     <TextField
       id="storybook-unit-four"
-      value="Input value"
+      defaultValue="Input value"
       label="Disabled price"
       unit="$"
       disabled
@@ -198,7 +198,7 @@ export const WithIcons: Story<TextFieldProps> = () => (
 
     <TextField
       id="icons-text"
-      value="Input text"
+      defaultValue="Input text"
       label="Label text"
       meta="Meta"
       helperText="Helper Text"
@@ -207,7 +207,7 @@ export const WithIcons: Story<TextFieldProps> = () => (
 
     <TextField
       id="storybook-disabled-two"
-      value="Input text"
+      defaultValue="Input text"
       label="Disabled with value"
       meta="Meta"
       disabled
