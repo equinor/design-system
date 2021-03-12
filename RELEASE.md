@@ -7,15 +7,17 @@
 This can be done from develop or seperate release branches (before merging to develop)
 
 1. Change the version-number in accordance with the magnitude of change.
-   1. If its not a `@latest` release, the type should be "dashed", for example; `0.0.0-beta` or `0.0.0-dev.20210101`
+   1. If its not a `@latest` release, the type should be "dashed", for example; `0.0.0-beta` or `0.0.0-dev.20210101`.
    2. We try to follow [semver](https://semver.org/) but are holding back major v1 until we feel its ready.
-2. Update the changelog
-3. Add a release in github
+2. Update the changelog for your library in `CHANGELOG.md`.
+   1. Follow the guide in the changelog file.
+3. Add a [release on github](https://github.com/equinor/design-system/releases) with the changes you added in `CHANGELOG.md`.
+   1. Name the release in accordance with package name and version, for example; `eds-core-react@0.8.5`
 
 ### Publish
 
-1. Find the corresponding workflow for your library, usually prepended with "Publish \<LIBRARY NAME\>"
-2. "Run workflow" and decide if input values need to be changed
+1. Find the corresponding workflow for your library, usually prepended with "Publish \<LIBRARY NAME\>".
+2. "Run workflow" and decide if input values need to be changed.
    1. Storybok slot: If present, choose which environment Storybook should be updated.
       1. _Leave this input *empty* for deployment to production_
    2. NPM tag: Choose which tag to apply to the published package
