@@ -31,6 +31,7 @@ type Popover = {
   arrow: {
     width: string
     height: string
+    placement: string
   }
   spacings: Spacing
   borderRadius: string
@@ -48,6 +49,7 @@ export const popover: Popover = {
   arrow: {
     width: '8px',
     height: '8px',
+    placement: '4px',
   },
   spacings: {
     top: spacingMedium,

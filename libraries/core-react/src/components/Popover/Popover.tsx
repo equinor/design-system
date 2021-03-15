@@ -38,19 +38,19 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
     height: ${tokens.arrow.height};
   }
   &[data-popper-placement^='top'] > .arrow {
-    bottom: ${tokens.arrow.height} / 2 + 'px';
+    bottom: ${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
-    top: ${tokens.arrow.height} / 2 + 'px';
+    top: ${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='left'] > .arrow {
-    right: ${tokens.arrow.width} / 2 + 'px';
+    right: ${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='right'] > .arrow {
-    left: ${tokens.arrow.width} / 2 + 'px';
+    left: ${tokens.arrow.placement};
   }
 `
 
