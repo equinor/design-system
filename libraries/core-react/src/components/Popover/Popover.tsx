@@ -15,7 +15,7 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
   ${typographyTemplate(tokens.header)}
   ${spacingsTemplate(tokens.spacings)}
   display: grid;
-  grid-gap: 16px;
+  grid-gap: ${tokens.gridGap};
   grid-auto-columns: auto;
   align-items: center;
   align-content: start;

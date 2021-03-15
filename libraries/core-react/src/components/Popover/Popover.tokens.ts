@@ -11,7 +11,7 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium: spacingMedium },
+    comfortable: { medium: spacingMedium, large: spacingLarge },
   },
   shape: {
     corners: { borderRadius },
@@ -23,6 +23,7 @@ type Popover = {
   header: Typography
   background: string
   elevation: string
+  gridGap: string
   popover: {
     minHeight: string
     maxWidth: string
@@ -41,6 +42,7 @@ export const popover: Popover = {
   header,
   background,
   elevation,
+  gridGap: spacingMedium,
   popover: {
     minHeight: '48px',
     maxWidth: '560px',
