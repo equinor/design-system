@@ -11,6 +11,6 @@
       "@components": ["src", "src/*"]
     }
   },
-  "include": ["./src/**/*.ts*"],
-  "exclude": ["node_modules"]
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "src/**/*.stories.ts*", "src/**/*.test.ts*"]
 }

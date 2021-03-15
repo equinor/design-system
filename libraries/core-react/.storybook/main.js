@@ -5,6 +5,7 @@ module.exports = {
     '../stories/docs/*.stories.mdx',
     '../stories/components/**/*.stories.@(ts|tsx|mdx)',
     // '../stories/screens/**/*.@(ts|tsx|mdx)',
+    '../src/**/*.stories.tsx',
   ],
   addons: [
     '@storybook/addon-a11y',
