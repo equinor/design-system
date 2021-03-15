@@ -123,7 +123,7 @@ export const Multiline: Story<TextFieldProps> = () => (
     <TextField
       id="storybook-multiline"
       placeholder="Placeholder text"
-      label="Multline"
+      label="Multiline"
       helperText="Helper Text"
       multiline
       style={{ resize: 'none' }}
