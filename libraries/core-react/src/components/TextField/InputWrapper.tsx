@@ -59,8 +59,10 @@ type InputWithAdornmentsType = {
 export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
   display: flex;
   align-items: center;
-  background: ${textfield.background};
-  padding-right: ${textfield.spacings.right};
+  ${{
+    background: textfield.background,
+    paddingRight: textfield.spacings.right,
+  }}
   ${Variation}
   ${({ isDisabled }) =>
     isDisabled && {
