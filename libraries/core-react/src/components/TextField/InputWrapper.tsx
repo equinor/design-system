@@ -4,7 +4,7 @@ import { useTextField } from './context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
 import type { Variants } from './types'
-import type { ComponentToken } from '@equinor/eds-tokens'
+import type { TextFieldToken } from './TextField.tokens'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, outlineTemplate } from '@utils'
 import * as tokens from './TextField.tokens'
@@ -17,7 +17,7 @@ const Variation = ({
   token,
 }: {
   variant: string
-  token: ComponentToken
+  token: TextFieldToken
   isFocused: boolean
 }) => {
   if (!variant) {
@@ -53,7 +53,7 @@ type InputWithAdornmentsType = {
   isFocused: boolean
   isDisabled: boolean
   variant: string
-  token: ComponentToken
+  token: TextFieldToken
 }
 
 export const InputWithAdornments = styled.div<InputWithAdornmentsType>`

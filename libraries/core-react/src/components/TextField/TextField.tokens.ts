@@ -7,7 +7,12 @@ const {
   spacings: { comfortable },
 } = tokens
 
-export const textfield: ComponentToken = {
+export type TextFieldToken = ComponentToken & {
+  entities?: {
+    unit: ComponentToken
+  }
+}
+export const textfield: TextFieldToken = {
   background: colors.ui.background__light.hex,
   border: {
     type: 'border',
@@ -48,7 +53,7 @@ export const textfield: ComponentToken = {
   },
 }
 
-export const error: ComponentToken = {
+export const error: TextFieldToken = {
   border: {
     type: 'border',
     radius: 0,
@@ -67,7 +72,7 @@ export const error: ComponentToken = {
     },
   },
 }
-export const warning: ComponentToken = {
+export const warning: TextFieldToken = {
   border: {
     type: 'border',
     radius: 0,
@@ -86,7 +91,7 @@ export const warning: ComponentToken = {
     },
   },
 }
-export const success: ComponentToken = {
+export const success: TextFieldToken = {
   border: {
     type: 'border',
     radius: 0,
