@@ -14,7 +14,7 @@ type MenuType = typeof BaseMenu & {
   Section: typeof MenuSection
 }
 
-const MenuWrapper: FC<MenuProps> = ({ children, ...rest }) => (
+const MenuWrapper = ({ children, ...rest }: MenuProps): JSX.Element => (
   <MenuProvider>
     <BaseMenu {...rest}>{children}</BaseMenu>
   </MenuProvider>
