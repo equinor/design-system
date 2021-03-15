@@ -94,8 +94,6 @@ export type InputProps = {
   type?: string
   /** Read Only */
   readonly?: boolean
-  /* By default Input will handle focus*/
-  handleFocus?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(

@@ -84,7 +84,6 @@ const Adornments = styled.div<AdornmentsType>`
   display: flex;
   align-items: center;
   justify-content: center;
-
   height: 100%;
   margin-left: ${textfield.spacings.left};
   & div:nth-child(2) {
