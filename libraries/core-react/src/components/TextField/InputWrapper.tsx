@@ -39,6 +39,16 @@ const Variation = ({
   `
 }
 
+const StyledInput = styled(Input)`
+  outline: none;
+
+  &:active,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+`
+
 type InputWithAdornmentsType = {
   isFocused: boolean
   isDisabled: boolean
@@ -142,7 +152,11 @@ export const InputWrapper = React.forwardRef<
           variant={variant}
           token={inputVariant}
         >
-          <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
+          <StyledInput
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            {...inputProps}
+          />
           <Adornments multiline={multiline}>
             {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
             {inputIcon && (
