@@ -11,7 +11,12 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium: spacingMedium, large: spacingLarge },
+    comfortable: {
+      x_large: spacingXlarge,
+      medium: spacingMedium,
+      small: spacingSmall,
+      x_small: spacingXsmall,
+    },
   },
   shape: {
     corners: { borderRadius },
@@ -34,8 +39,16 @@ type Popover = {
     height: string
     placement: string
   }
+  closeButton: {
+    width: string
+    height: string
+    placement: string
+  }
   spacings: Spacing
   borderRadius: string
+  popoverTitle: {
+    marginTop: string
+  }
 }
 
 export const popover: Popover = {
@@ -49,9 +62,14 @@ export const popover: Popover = {
     maxHeight: '80vh',
   },
   arrow: {
-    width: '8px',
-    height: '8px',
-    placement: '4px',
+    width: spacingSmall,
+    height: spacingSmall,
+    placement: spacingXsmall, // negative
+  },
+  closeButton: {
+    width: spacingXlarge,
+    height: spacingXlarge,
+    placement: spacingSmall,
   },
   spacings: {
     top: spacingMedium,
@@ -60,4 +78,7 @@ export const popover: Popover = {
     bottom: spacingMedium,
   },
   borderRadius,
+  popoverTitle: {
+    marginTop: spacingXsmall, // negative
+  },
 }

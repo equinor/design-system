@@ -9,8 +9,8 @@ const Arrow = styled.div`
   &,
   &::before {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: ${tokens.arrow.width};
+    height: ${tokens.arrow.height};
     z-index: -1;
   }
 
@@ -34,23 +34,23 @@ const StyledTooltip = styled.div<Pick<TooltipProps, 'open'>>`
     })};
   .arrow {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: ${tokens.arrow.width};
+    height: ${tokens.arrow.height};
   }
   &[data-popper-placement^='top'] > .arrow {
-    bottom: -4px;
+    bottom: -${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
-    top: -4px;
+    top: -${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='left'] > .arrow {
-    right: -4px;
+    right: -${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='right'] > .arrow {
-    left: -4px;
+    left: -${tokens.arrow.placement};
   }
 `
 

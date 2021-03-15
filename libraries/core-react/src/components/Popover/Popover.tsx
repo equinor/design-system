@@ -38,30 +38,30 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
     height: ${tokens.arrow.height};
   }
   &[data-popper-placement^='top'] > .arrow {
-    bottom: ${tokens.arrow.placement};
+    bottom: -${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
-    top: ${tokens.arrow.placement};
+    top: -${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='left'] > .arrow {
-    right: ${tokens.arrow.placement};
+    right: -${tokens.arrow.placement};
   }
 
   &[data-popper-placement^='right'] > .arrow {
-    left: ${tokens.arrow.placement};
+    left: -${tokens.arrow.placement};
   }
 `
 
 const StyledCloseButton = styled(Button)`
   position: absolute;
-  top: 8px;
-  right: 16px;
-  height: 32px;
-  width: 32px;
+  top: ${tokens.closeButton.placement};
+  right: ${tokens.spacings.right};
+  height: ${tokens.closeButton.height};
+  width: ${tokens.closeButton.width};
   &:after {
-    height: 32px;
+    height: ${tokens.closeButton.height};
   }
 `
 
@@ -69,8 +69,8 @@ const Arrow = styled.div`
   &,
   &::before {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: ${tokens.arrow.width};
+    height: ${tokens.arrow.height};
     z-index: -1;
   }
 
@@ -87,10 +87,10 @@ export type PopoverProps = {
   onClose?: () => void
   /** Anchor element reference */
   anchorEl: HTMLElement
+  /** Is Popover open */
   open?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-// Controller Component for PopoverItem
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   function Popover(
     {
@@ -123,6 +123,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       ...rest,
       ...attributes.popper,
     }
+
     return (
       <StyledPopover
         ref={popperRef}
@@ -139,7 +140,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           variant="ghost_icon"
           data-testid="popover-close"
         >
-          <Icon name="close" data={close} title="close" size={48} />
+          <Icon name="close" data={close} title="close" size={24} />
         </StyledCloseButton>
       </StyledPopover>
     )
