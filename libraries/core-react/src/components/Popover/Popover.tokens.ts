@@ -62,9 +62,9 @@ export const popover: Popover = {
     maxHeight: '80vh',
   },
   arrow: {
-    width: spacingSmall,
+    width: '6px',
     height: spacingSmall,
-    placement: spacingXsmall, // negative
+    placement: spacingSmall, // negative
   },
   closeButton: {
     width: spacingXlarge,

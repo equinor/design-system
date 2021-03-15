@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { forwardRef, useRef, useState, HTMLAttributes } from 'react'
+import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { Paper } from '../Paper'
@@ -65,7 +65,7 @@ const StyledCloseButton = styled(Button)`
   }
 `
 
-const Arrow = styled.div`
+const ArrowWrapper = styled.div`
   &,
   &::before {
     position: absolute;
@@ -76,9 +76,19 @@ const Arrow = styled.div`
 
   &::before {
     content: '';
-    transform: rotate(45deg);
-    background: ${tokens.background};
   }
+`
+
+type ArrowProps = {
+  ref?: React.MutableRefObject<null>
+} & SVGProps<SVGSVGElement>
+
+const PopoverArrow = styled.svg<ArrowProps>`
+  width: ${tokens.arrow.width};
+  height: ${tokens.arrow.height};
+  position: absolute;
+  fill: ${tokens.background};
+  filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));
 `
 export type PopoverProps = {
   /**  Popover placement relative to anchor */
@@ -132,7 +142,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         {...props}
         data-testid="popover"
       >
-        <Arrow ref={setArrowRef} style={styles.arrow} className="arrow" />
+        {/* <Arrow ref={setArrowRef} style={styles.arrow} className="arrow" /> */}
+        <ArrowWrapper ref={setArrowRef} style={styles.arrow} className="arrow">
+          <PopoverArrow>
+            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+          </PopoverArrow>
+        </ArrowWrapper>
 
         {children}
         <StyledCloseButton
