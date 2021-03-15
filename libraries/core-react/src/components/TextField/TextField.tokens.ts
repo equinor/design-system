@@ -9,7 +9,7 @@ const {
 
 export type TextFieldToken = ComponentToken & {
   entities?: {
-    unit: ComponentToken
+    unit?: ComponentToken
   }
 }
 export const textfield: TextFieldToken = {
