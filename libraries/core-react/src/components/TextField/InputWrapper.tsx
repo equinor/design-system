@@ -108,7 +108,7 @@ const Adornments = styled.div<AdornmentsType>`
     }}
 `
 
-type TextfieldInputProps = {
+type InputWrapperProps = {
   /** Specifies if text should be bold */
   multiline?: boolean
   /** Placeholder */
@@ -121,13 +121,15 @@ type TextfieldInputProps = {
   type?: string
   /** Read Only */
   readonly?: boolean
+  /** Unit text */
   unit?: string
+  /* Input icon */
   inputIcon?: ReactNode
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const InputWrapper = React.forwardRef<
   HTMLInputElement,
-  TextfieldInputProps
+  InputWrapperProps
 >(function InputWrapper(
   { multiline, variant, disabled, type, unit, inputIcon, ...other },
   ref,
