@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { Icon } from './Icon'
 import { InputWrapper } from './InputWrapper'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
@@ -11,14 +10,6 @@ import type { Variants } from './types'
 const Container = styled.div`
   min-width: 100px;
   width: 100%;
-`
-
-const RelativeContainer = styled.div`
-  position: relative;
-`
-
-const PaddedInputWrapper = styled(InputWrapper)`
-  padding-right: 32px;
 `
 
 export type TextFieldProps = {
@@ -32,6 +23,8 @@ export type TextFieldProps = {
   label?: string
   /** Meta text */
   meta?: string
+  /** Unit text */
+  unit?: string
   /** Helper text */
   helperText?: string
   /** Placeholder text */
@@ -59,6 +52,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       id,
       label,
       meta,
+      unit,
       helperText,
       placeholder,
       disabled,
@@ -80,6 +74,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       variant,
       ref: inputRef,
       inputIcon,
+      unit,
       ...other,
     }
 
@@ -108,18 +103,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       <Container {...containerProps}>
         <TextFieldProvider>
           {showLabel && <Label {...labelProps} />}
-          <RelativeContainer>
-            {inputIcon ? (
-              <>
-                <PaddedInputWrapper {...inputProps} />
-                <Icon isDisabled={disabled} variant={variant}>
-                  {inputIcon}
-                </Icon>
-              </>
-            ) : (
-              <InputWrapper {...inputProps} />
-            )}
-          </RelativeContainer>
+          <InputWrapper {...inputProps} />
           {showHelperText && <HelperText {...helperProps} />}
         </TextFieldProvider>
       </Container>

@@ -3,22 +3,42 @@ import { TextField, TextFieldProps, Icon } from '@components'
 import { Story, Meta } from '@storybook/react'
 import { thumbs_up, warning_filled, error_filled } from '@equinor/eds-icons'
 
-Icon.add({
+const icons = {
   thumbs_up,
   warning_filled,
   error_filled,
-})
+}
 
+Icon.add(icons)
 import styled from 'styled-components'
 
 export default {
   title: 'Components/TextField',
   component: TextField,
   argTypes: {
-    rows: {
-      control: 'number',
-      description: 'Rows when "multiline" is true',
-      default: 1,
+    inputIcon: {
+      control: {
+        type: 'select',
+        options: {
+          error: [<Icon name="error_filled" key="error" />],
+          warning: [<Icon name="warning_filled" key="warning" />],
+          success: [<Icon name="thumbs_up" key="thumbs" />],
+        },
+      },
+      description:
+        'Please note that the option list of icons is not complete, this selection is only for demo purposes',
+    },
+    helperIcon: {
+      control: {
+        type: 'select',
+        options: {
+          error: [<Icon name="error_filled" key="error" />],
+          warning: [<Icon name="warning_filled" key="warning" />],
+          success: [<Icon name="thumbs_up" key="thumbs" />],
+        },
+      },
+      description:
+        'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
   },
   parameters: {
@@ -39,7 +59,16 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(2, fit-content(100%));
 `
 export const Default: Story<TextFieldProps> = (args) => (
-  <TextField {...args}></TextField>
+  <TextField
+    meta="meta"
+    id="playWithMe"
+    label="Play with me"
+    unit="Unit"
+    helperText="Helper text"
+    style={{ resize: 'none' }}
+    rows={3}
+    {...args}
+  ></TextField>
 )
 
 export const types: Story<TextFieldProps> = () => (
@@ -90,37 +119,110 @@ export const types: Story<TextFieldProps> = () => (
 types.storyName = 'Types of input fields'
 
 export const Multiline: Story<TextFieldProps> = () => (
-  <TextField
-    id="storybook-multiline"
-    placeholder="Placeholder text"
-    label="Multline"
-    meta="Meta"
-    helperText="Helper Text"
-    multiline
-  />
+  <>
+    <TextField
+      id="storybook-multiline"
+      placeholder="Placeholder text"
+      label="Multiline"
+      helperText="Helper Text"
+      multiline
+      style={{ resize: 'none' }}
+      rows={5}
+    />
+    <div style={{ height: '2rem' }} />
+    <TextField
+      id="storybook-multiline-two"
+      placeholder="Placeholder text"
+      label="Multiline with icon"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      inputIcon={<Icon name="warning_filled" />}
+    />
+  </>
 )
+Multiline.parameters = {
+  docs: {
+    storyDescription: `With multiline we recommend to use <code>rows</code> in combination with a CSS rule of
+    <code>resize: 'none'</code>`,
+  },
+}
 
 export const Disabled: Story<TextFieldProps> = () => (
-  <TextField
-    id="storybook-disabled"
-    placeholder="Placeholder text"
-    label="Disabled"
-    meta="Meta"
-    helperText="Helper Text"
-    disabled
-  />
+  <Wrapper>
+    <TextField
+      id="storybook-disabled"
+      placeholder="Placeholder text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+    />
+    <TextField
+      id="storybook-unit-four"
+      placeholder="Placeholder text text text"
+      label="Disabled price"
+      unit="$"
+      disabled
+      inputIcon={<Icon name="warning_filled" />}
+    />
+    <TextField
+      id="storybook-disabled-two"
+      defaultValue="Input text"
+      label="Disabled"
+      meta="Meta"
+      helperText="Helper Text"
+      disabled
+    />
+    <TextField
+      id="storybook-disabled-thumbs"
+      defaultValue="Input text"
+      label="Disabled with value"
+      meta="Meta"
+      disabled
+      helperText="Helper Text"
+      inputIcon={<Icon name="thumbs_up" />}
+    />
+
+    <TextField
+      id="storybook-unit-four-input"
+      defaultValue="Input value"
+      label="Disabled price"
+      unit="$"
+      disabled
+      inputIcon={<Icon name="warning_filled" />}
+    />
+  </Wrapper>
 )
+export const WithUnit: Story<TextFieldProps> = () => (
+  <Wrapper>
+    <TextField
+      id="storybook-unit"
+      placeholder="Placeholder text text text"
+      label="Price"
+      unit="$"
+    />
+    <TextField
+      id="storybook-unit-two"
+      placeholder="Placeholder text text text"
+      label="Speed"
+      unit="km/h"
+    />
+  </Wrapper>
+)
+
+WithUnit.storyName = 'With unit'
 
 export const WithIcons: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
       id="storybook-warning-icon"
       placeholder="Placeholder text"
-      label="Some warning input"
+      label="Label text"
       inputIcon={<Icon name="thumbs_up" />}
     />
     <TextField
-      id="storybook-warning-icon"
+      id="storybook-disabled-with-icons"
       placeholder="Placeholder text"
       label="Disabled input"
       disabled
@@ -128,8 +230,8 @@ export const WithIcons: Story<TextFieldProps> = () => (
     />
 
     <TextField
-      id="storybook-disabled"
-      placeholder="Placeholder text"
+      id="icons-text"
+      defaultValue="Input text"
       label="Label text"
       meta="Meta"
       helperText="Helper Text"
@@ -154,7 +256,7 @@ export const Variants: Story<TextFieldProps> = () => (
       id="storybook-error-two"
       placeholder="Placeholder text "
       label="Error"
-      meta="Meta"
+      unit="Unit"
       helperText="Validation error"
       variant="error"
       inputIcon={<Icon name="error_filled" title="Error" />}
@@ -177,7 +279,6 @@ export const Variants: Story<TextFieldProps> = () => (
       variant="warning"
       inputIcon={<Icon name="warning_filled" title="Warning" />}
     />
-
     <TextField
       id="storybook-success"
       placeholder="Placeholder text Placeholder text Placeholder text"
@@ -196,12 +297,72 @@ export const Variants: Story<TextFieldProps> = () => (
       variant="success"
       inputIcon={<Icon name="thumbs_up" title="Success" />}
     />
+    <TextField
+      id="multi-error"
+      label="Multiline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Validation error"
+      variant="error"
+      helperIcon={<Icon name="error_filled" title="Error" />}
+    />
+    <TextField
+      id="multi-error-two"
+      label="Multiline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Validation error"
+      variant="error"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
+    <TextField
+      id="multi-warning"
+      label="Multiline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper/warning text"
+      variant="warning"
+      helperIcon={<Icon name="error_filled" title="Error" />}
+    />
+    <TextField
+      id="multi-warning-two"
+      label="Multiline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper/warning text"
+      variant="warning"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
+    <TextField
+      id="multi-success"
+      label="Multiline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper text"
+      variant="success"
+      helperIcon={<Icon name="error_filled" title="Error" />}
+    />
+    <TextField
+      id="multi-success-two"
+      label="Multiline"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      helperText="Helper text"
+      variant="success"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
   </Wrapper>
 )
 
 Variants.parameters = {
   docs: {
     storyDescription: `Examples of validation states. You can add the icon in the helper
-    text or inside the text input, both not both places.`,
+    text or inside the text input, both not in both places.`,
   },
 }

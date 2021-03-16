@@ -2,6 +2,6 @@ export type Outline = {
   type: 'outline'
   color: string
   width: string
-  style: 'dashed'
+  style: 'dashed' | 'solid'
   offset?: string
 }

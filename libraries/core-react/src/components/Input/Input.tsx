@@ -6,7 +6,13 @@ import { typographyTemplate, spacingsTemplate } from '@utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 
-const Variation = ({ variant }: { variant: InputVariantProps }) => {
+const Variation = ({
+  variant,
+  token,
+}: {
+  variant: string
+  token: InputVariantProps
+}) => {
   if (!variant) {
     return ``
   }
@@ -14,12 +20,13 @@ const Variation = ({ variant }: { variant: InputVariantProps }) => {
   const {
     focus: { border: focusBorderOutline },
     border: { outline: borderOutline, bottom: borderBottom },
-  } = variant
+  } = token
 
   return css`
     border: none;
     outline: ${borderOutline.width} solid ${borderOutline.color};
     box-shadow: inset 0 -${borderBottom.width} 0 0 ${borderBottom.color};
+
     &:active,
     &:focus {
       outline-offset: 0;
@@ -31,7 +38,6 @@ const Variation = ({ variant }: { variant: InputVariantProps }) => {
       cursor: not-allowed;
       box-shadow: none;
       outline: none;
-
       &:focus,
       &:active {
         outline: none;
@@ -42,7 +48,8 @@ const Variation = ({ variant }: { variant: InputVariantProps }) => {
 
 type StyledProps = {
   spacings: Spacing
-  variant: InputVariantProps
+  token: InputVariantProps
+  variant: string
 }
 
 const StyledInput = styled.input<StyledProps>`
@@ -51,7 +58,6 @@ const StyledInput = styled.input<StyledProps>`
   margin: 0;
   border: none;
   appearance: none;
-
   background: ${tokens.background};
 
   ${({ spacings }) => spacingsTemplate(spacings)}
@@ -60,6 +66,9 @@ const StyledInput = styled.input<StyledProps>`
   ${Variation}
   &::placeholder {
     color: ${tokens.placeholderColor};
+  }
+  &:disabled {
+    color: ${tokens.disabledColor};
   }
 `
 
@@ -98,7 +107,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       ref,
       type,
       disabled,
-      variant: inputVariant,
+      variant: variant,
+      token: inputVariant,
       spacings: spacings,
       ...other,
     }
