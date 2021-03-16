@@ -2,13 +2,12 @@ module.exports = {
   root: true,
   extends: [
     'eslint:recommended',
-    'prettier',
-    'prettier/react',
     'plugin:react/recommended',
     'plugin:testing-library/react',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:jsx-a11y/recommended',
+    'plugin:prettier/recommended',
   ],
   plugins: ['prettier', 'testing-library'],
   parser: '@babel/eslint-parser',
@@ -106,7 +105,6 @@ module.exports = {
       extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'prettier/@typescript-eslint',
       ],
       files: ['**/*.ts', '**/*.tsx'],
       rules: {
