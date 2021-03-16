@@ -9,11 +9,7 @@ const {
   },
   typography: { ui },
   spacings: {
-    comfortable: {
-      x_large: spacingXlarge,
-      small: spacingSmall,
-      x_small: spacingXsmall,
-    },
+    comfortable: { x_large: spacingXlarge, small: spacingSmall },
   },
   shape: {
     corners: { borderRadius },
@@ -45,9 +41,9 @@ export const tooltip: Tooltip = {
     minHeight: spacingXlarge,
   },
   arrow: {
-    width: spacingSmall,
+    width: '6px',
     height: spacingSmall,
-    placement: spacingXsmall, // negative
+    placement: '-6px',
   },
   spacings: {
     left: spacingSmall,

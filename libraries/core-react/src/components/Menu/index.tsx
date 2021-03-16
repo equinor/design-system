@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { FC } from 'react'
 import { Menu as BaseMenu, MenuProps } from './Menu'
 import { MenuItem } from './MenuItem'
 import { MenuSection } from './MenuSection'
