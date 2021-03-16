@@ -25,16 +25,13 @@ const Variation = ({
   }
 
   return css`
-    box-shadow: ${() =>
-      isFocused
-        ? `none`
-        : variant === 'default'
-        ? `inset 0 -1px 0 0 ${
-            token.border?.type === 'border' && token.border?.color
-          }`
-        : `0 0 0 1px ${
-            token.border?.type === 'border' && token.border?.color
-          }`};
+    box-shadow: ${isFocused
+      ? `none`
+      : variant === 'default'
+      ? `inset 0 -1px 0 0 ${
+          token.border?.type === 'border' && token.border?.color
+        }`
+      : `0 0 0 1px ${token.border?.type === 'border' && token.border?.color}`};
     ${isFocused && outlineTemplate(token.states.focus.outline)}
   `
 }
