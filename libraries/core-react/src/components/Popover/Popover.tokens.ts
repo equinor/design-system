@@ -64,7 +64,7 @@ export const popover: Popover = {
   arrow: {
     width: '6px',
     height: spacingSmall,
-    placement: spacingSmall, // negative
+    placement: '-5px', // 1px less than arrow width, if not the shadow would show between arrow and popover
   },
   closeButton: {
     width: spacingXlarge,
