@@ -133,7 +133,7 @@ export const Multiline: Story<TextFieldProps> = () => (
     <TextField
       id="storybook-multiline-two"
       placeholder="Placeholder text"
-      label="Multline with icon"
+      label="Multiline with icon"
       multiline
       style={{ resize: 'none' }}
       rows={3}
@@ -299,7 +299,7 @@ export const Variants: Story<TextFieldProps> = () => (
     />
     <TextField
       id="multi-error"
-      label="Multline"
+      label="Multiline"
       multiline
       style={{ resize: 'none' }}
       rows={3}
@@ -309,7 +309,7 @@ export const Variants: Story<TextFieldProps> = () => (
     />
     <TextField
       id="multi-error-two"
-      label="Multline"
+      label="Multiline"
       multiline
       style={{ resize: 'none' }}
       rows={3}
@@ -319,7 +319,7 @@ export const Variants: Story<TextFieldProps> = () => (
     />
     <TextField
       id="multi-warning"
-      label="Multline"
+      label="Multiline"
       multiline
       style={{ resize: 'none' }}
       rows={3}
@@ -329,7 +329,7 @@ export const Variants: Story<TextFieldProps> = () => (
     />
     <TextField
       id="multi-warning-two"
-      label="Multline"
+      label="Multiline"
       multiline
       style={{ resize: 'none' }}
       rows={3}
@@ -339,7 +339,7 @@ export const Variants: Story<TextFieldProps> = () => (
     />
     <TextField
       id="multi-success"
-      label="Multline"
+      label="Multiline"
       multiline
       style={{ resize: 'none' }}
       rows={3}
@@ -349,7 +349,7 @@ export const Variants: Story<TextFieldProps> = () => (
     />
     <TextField
       id="multi-success-two"
-      label="Multline"
+      label="Multiline"
       multiline
       style={{ resize: 'none' }}
       rows={3}
