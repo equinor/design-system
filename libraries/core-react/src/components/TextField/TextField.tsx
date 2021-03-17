@@ -94,6 +94,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       htmlFor: id,
       label,
       meta,
+      disabled,
     }
 
     const showLabel = label || meta
