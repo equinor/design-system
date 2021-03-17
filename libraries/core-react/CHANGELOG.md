@@ -9,14 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added ✨
 
-- TextField ([#1108](https://github.com/equinor/design-system/issues/1108), [#1107](https://github.com/equinor/design-system/issues/1107), [#1108](https://github.com/equinor/design-system/issues/1108), [#1111](https://github.com/equinor/design-system/issues/1111), [#1115](https://github.com/equinor/design-system/issues/115), [#1131](https://github.com/equinor/design-system/issues/1131), [#1128](https://github.com/equinor/design-system/issues/1128))
-  - `Input` and `Label` is now available as separate components. This will make it easier to customize for more advanced patterns or accessing libraries like `downshift` directly for spesialized use cases.
+- TextField ([#1107](https://github.com/equinor/design-system/issues/1107), [#1108](https://github.com/equinor/design-system/issues/1108), [#1111](https://github.com/equinor/design-system/issues/1111), [#1115](https://github.com/equinor/design-system/issues/115), [#1131](https://github.com/equinor/design-system/issues/1131), [#1128](https://github.com/equinor/design-system/issues/1128))
+  - `Input` and `Label` is now available as separate components. This will make it easier to customize for more advanced patterns or for making your own custom components for specialized use-cases.
   - `TextField` now support `unit` inside the input field. This is useful for e.g. currency and units of measurement.
 
 ### Changed 📓
 
-- Support for EDS icons in the TextArea's `inputIcon` and `helperIcon` props. This makes the behaviour here more similar to the rest of the EDS library. ([#1130](https://github.com/equinor/design-system/issues/1130))
-  - The old way of doing it with svg will still be supported but will be removed at a later time.
+- Textfield
+  - Improvements when using the `Icon` in the `inputIcon` and `helperIcon` props. This makes the behaviour here more similar to the rest of the EDS library. ([#1130](https://github.com/equinor/design-system/issues/1130))
+  - Internal fixes and optimization
+
+### Fixed 🐛
+
+- Textfield
+  - Fixed missing disabled colors ([#1160](https://github.com/equinor/design-system/issues/1160))
 
 ## [0.8.5] - 2021-02-22
 
