@@ -80,7 +80,6 @@ components:
         - *3
       figma:
         - *4
-        - *2
       react:
         - *1
   - component: Divider
@@ -138,7 +137,7 @@ components:
       figma:
         - *4
       react:
-        - *3
+        - *1
   - component: 'Navigation Pagination'
     status:
       documentation:
@@ -246,12 +245,11 @@ components:
   - component: Select
     status:
       documentation:
-        - *1
+        - *4
       figma:
         - *4
-        - *2
       react:
-        - *1
+        - *4
   - component: Slider
     status:
       documentation:
@@ -317,5 +315,3 @@ components:
         - *4
       react:
         - *4
-  
-
