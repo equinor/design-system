@@ -42,14 +42,14 @@ type BreadcrumbProps = {
 
 export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
   function Breadcrumb({ children, maxWidth, ...other }, ref) {
-    const [openState, setOpenState] = React.useState(false)
+    const [openTooltip, setopenTooltip] = React.useState(false)
 
     const handleOpen = () => {
-      setOpenState(true)
+      setopenTooltip(true)
     }
 
     const handleClose = () => {
-      setOpenState(false)
+      setopenTooltip(false)
     }
     const reference = useRef(null)
     const props = {
@@ -75,7 +75,7 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
         {children}
         <Tooltip
           title={children}
-          open={openState}
+          open={openTooltip}
           id="tooltip"
           placement="top"
           anchorEl={reference.current}
