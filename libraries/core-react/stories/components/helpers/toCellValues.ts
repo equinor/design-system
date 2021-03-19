@@ -1,4 +1,4 @@
-import { Data, Column } from '../helpers/data'
+import { Data, Column } from './data'
 
 export const toCellValues = (data: Data[], columns: Column[]): string[][] =>
   data.map((item) =>
