@@ -51,7 +51,7 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
     const handleClose = () => {
       setopenTooltip(false)
     }
-    const reference = useRef(null)
+    const linkRef = useRef(null)
     const props = {
       ...other,
       ref,
@@ -65,7 +65,7 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
         link
         variant="body_short"
         {...props}
-        ref={reference}
+        ref={linkRef}
         aria-describedby="tooltip"
         onMouseEnter={handleOpen}
         onFocus={handleOpen}
@@ -78,7 +78,7 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
           open={openTooltip}
           id="tooltip"
           placement="top"
-          anchorEl={reference.current}
+          anchorEl={linkRef.current}
         />
       </StyledTypography>
     )
