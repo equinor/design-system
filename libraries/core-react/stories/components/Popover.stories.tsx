@@ -159,6 +159,8 @@ export const ActivationTypes: Story<PopoverProps> = () => {
           ref={refTwo}
           onMouseEnter={() => handleHover(2)}
           onFocus={() => handleClick(2)}
+          onMouseLeave={handleClose}
+          onBlur={handleClose}
         >
           On Hover
         </Button>
