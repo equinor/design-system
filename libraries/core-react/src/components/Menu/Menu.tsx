@@ -57,12 +57,12 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const popperRef = useRef<HTMLDivElement | null>(null)
 
   const { setOnClose, onClose } = useMenu()
-  useOutsideClick(listRef, anchorEl, () => {
-    if (open && onClose !== null) {
+
+  useOutsideClick(listRef, (e: MouseEvent) => {
+    if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
       onClose()
     }
   })
-
   const { styles, attributes } = usePopper(
     anchorEl,
     popperRef.current,

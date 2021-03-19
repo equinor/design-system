@@ -2,17 +2,11 @@ import { useEffect, MutableRefObject } from 'react'
 
 export const useOutsideClick = (
   ref: MutableRefObject<HTMLElement>,
-  anchorEl: HTMLElement,
-  callback: () => void,
+  callback: (e: MouseEvent) => void,
 ): void => {
   const handleClick = (e: MouseEvent) => {
-    if (
-      ref.current &&
-      !ref.current.contains(e.target as Node) &&
-      anchorEl !== null &&
-      !anchorEl.contains(e.target as Node)
-    ) {
-      callback()
+    if (ref.current && !ref.current.contains(e.target as Node)) {
+      callback(e)
     }
   }
 

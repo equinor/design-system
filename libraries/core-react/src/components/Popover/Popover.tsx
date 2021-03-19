@@ -124,8 +124,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) {
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
-    useOutsideClick(popperRef, anchorEl, () => {
-      if (open && onClose !== null) {
+    useOutsideClick(popperRef, (e: MouseEvent) => {
+      if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
         onClose()
       }
     })
