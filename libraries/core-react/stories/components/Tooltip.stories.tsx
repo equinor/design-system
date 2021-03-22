@@ -53,14 +53,16 @@ export const Default: Story<TooltipProps> = (args) => {
         aria-describedby="tooltip"
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}
+        onFocus={handleOpen}
+        onBlur={handleClose}
       >
         Hover me!
       </Button>
       <Tooltip
-        {...args}
         open={openState}
         id="tooltip"
         anchorEl={referenceElement.current}
+        {...args}
       />
     </div>
   )
