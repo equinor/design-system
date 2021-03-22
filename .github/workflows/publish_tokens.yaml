@@ -100,6 +100,6 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Publish to npm
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
