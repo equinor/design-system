@@ -66,6 +66,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint]
     steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
       - name: Tokens build cache
         uses: actions/cache@v2
         with:
@@ -73,9 +83,7 @@ jobs:
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}-build-tokens
-      - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
+        key: ${{ github.sha }}-build-tokens
   publish-tokens:
     name: Publish eds-tokens to npm
     runs-on: ubuntu-latest
