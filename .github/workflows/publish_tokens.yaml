@@ -11,14 +11,6 @@ jobs:
     name: Setup base files
     runs-on: ubuntu-latest
     steps:
-      - name: Cache base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-            ~/setup-pnpm
-          key: ${{ github.sha }}
       - name: Checkout
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
@@ -46,6 +38,14 @@ jobs:
           bin_dest: ./pnpm/bin
           run_install: |
             - recursive: true
+      - name: Cache base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
   lint:
     name: Lint eds-tokens
     runs-on: ubuntu-latest
