@@ -68,14 +68,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint]
     steps:
-      - name: Use cache
+      - name: Tokens build cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-build-tokens
       - name: Build
         run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
   publish-tokens:
@@ -83,14 +83,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-tokens]
     steps:
-      - name: Get files
+      - name: Tokens build cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-build-tokens
       - name: Publish to npm
         run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks --dry-run
         env:
