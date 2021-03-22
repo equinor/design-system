@@ -83,7 +83,7 @@ jobs:
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-        key: ${{ github.sha }}-build-tokens
+          key: ${{ github.sha }}-build-tokens
   publish-tokens:
     name: Publish eds-tokens to npm
     runs-on: ubuntu-latest
