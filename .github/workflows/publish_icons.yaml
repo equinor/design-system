@@ -40,7 +40,7 @@ jobs:
             - recursive: true
       - name: Lint
         run: ./pnpm/bin/pnpm run lint ./libraries/icons
-      - name: Cache base files
+      - name: Use base files cache
         uses: actions/cache@v2
         with:
           path: |
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Get base files
+      - name: Use base files cache
         uses: actions/cache@v2
         with:
           path: |
@@ -76,29 +76,30 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
-      - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
-      - name: Save files to cache
+      - name: Use icons build cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-build-icons
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
+
   publish-icons:
     name: Publish eds-icons to npm
     runs-on: ubuntu-latest
     needs: [build-icons]
     steps:
-      - name: Get files
+      - name: Use icons build cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-build-icons
       - name: Publish to npm
         run: ./pnpm/bin/pnpm --filter @equinor/eds-icons publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
