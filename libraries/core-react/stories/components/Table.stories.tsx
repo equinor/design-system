@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import {
@@ -12,20 +12,18 @@ import {
   Button,
 } from '@components'
 import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
+import { data, columns, Column, Data, SortDirection } from './helpers/data'
+import { toCellValues } from './helpers/toCellValues'
 import './styles/style.css'
 
 Icon.add({ chevron_down, chevron_up })
 
+const { Caption, Body, Row, Cell, Head } = Table
+
 export default {
   title: 'Components/Table',
   component: Table,
-  subcomponents: {
-    Body: Table.Body,
-    Row: Table.Row,
-    Cell: Table.Cell,
-    Head: Table.Head,
-    Caption: Table.Caption,
-  },
+  subcomponents: { Caption, Body, Row, Cell, Head },
   parameters: {
     docs: {
       description: {
@@ -43,105 +41,6 @@ export default {
     },
   },
 } as Meta
-
-type Data = {
-  number: string
-  description: string
-  origin: string
-  price: number
-}
-
-const data: Data[] = [
-  {
-    number: '123-456',
-    description: 'Pears',
-    origin: 'Europe',
-    price: 1.5,
-  },
-  {
-    number: '234-567',
-    description: 'Apples',
-    origin: 'Africa',
-    price: 1.2,
-  },
-  {
-    number: '45-6789',
-    description: 'Oranges',
-    origin: 'South America',
-    price: 1.8,
-  },
-  {
-    number: '67-890',
-    description: 'Kiwi',
-    origin: 'Australia',
-    price: 2.1,
-  },
-  {
-    number: '89-012',
-    description: 'Mango',
-    origin: 'South Africa',
-    price: 2.5,
-  },
-  {
-    number: '89-012',
-    description: 'Pineapple',
-    origin: 'Paraguay',
-    price: 1.9,
-  },
-  {
-    number: '89-012',
-    description: 'Pomegranate',
-    origin: 'Persia',
-    price: 4.5,
-  },
-]
-
-type SortDirection = 'ascending' | 'descending' | 'none'
-type Column = {
-  name: string | React.ReactNode
-  accessor: string
-  sortDirection?: SortDirection
-  isSorted?: boolean
-}
-
-const columns: Column[] = [
-  {
-    name: 'Item nr',
-    accessor: 'number',
-    sortDirection: 'none',
-  },
-  {
-    name: 'Description',
-    accessor: 'description',
-    sortDirection: 'none',
-  },
-  {
-    name: 'Origin',
-    accessor: 'origin',
-    sortDirection: 'none',
-  },
-  {
-    name: (
-      <>
-        Price &nbsp;
-        <Typography group="input" variant="label" color="currentColor">
-          ($)
-        </Typography>
-      </>
-    ),
-    accessor: 'price',
-    sortDirection: 'none',
-  },
-]
-
-const toCellValues = (data: Data[], columns: Column[]) =>
-  data.map((item) =>
-    columns.map((column) =>
-      typeof item[column.accessor] !== 'undefined'
-        ? (item[column.accessor] as string)
-        : '',
-    ),
-  )
 
 export const simpleTable: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
@@ -210,39 +109,33 @@ export const CompactTable: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   const [state, setState] = React.useState<{
-    buttonEl: HTMLButtonElement
+    isOpen: boolean
     density: 'comfortable' | 'compact'
   }>({
+    isOpen: false,
     density: 'comfortable',
-    buttonEl: null,
   })
 
-  const { density, buttonEl } = state
-  const isOpen = Boolean(buttonEl)
+  const { density, isOpen } = state
 
   const setDensity = (density: 'comfortable' | 'compact') =>
     setState((prevState) => ({ ...prevState, density }))
 
-  const openMenu = (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
-    const target = e.target as HTMLButtonElement
-    setState((prevState) => ({ ...prevState, buttonEl: target }))
+  const openMenu = () => {
+    setState((prevState) => ({ ...prevState, isOpen: true }))
   }
 
   const closeMenu = () =>
-    setState((prevState) => ({ ...prevState, buttonEl: null }))
+    setState((prevState) => ({ ...prevState, isOpen: false }))
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
     switch (key) {
       case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu(e)
+        isOpen ? closeMenu() : openMenu()
         break
       case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu(e)
+        isOpen ? closeMenu() : openMenu()
         break
       case 'Escape':
         closeMenu()
@@ -252,27 +145,30 @@ export const CompactTable: Story<TableProps> = () => {
     }
   }
 
+  const referenceElement = useRef(null)
+
   return (
     <div>
       <TopBar>
         <TopBar.Header>Compact table with switcher</TopBar.Header>
         <TopBar.Actions>
           <Button
+            ref={referenceElement}
             variant="ghost_icon"
             id="menuButton"
             aria-controls="menu-on-button"
             aria-haspopup="true"
-            aria-expanded={Boolean(buttonEl)}
-            onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+            aria-expanded={isOpen}
+            onClick={(e) => (isOpen ? closeMenu() : openMenu())}
             onKeyDown={onKeyPress}
           >
             <Icon data={accessible} title="accessible"></Icon>
           </Button>
           <Menu
             id="menu-on-button"
+            open={isOpen}
             aria-labelledby="menuButton"
-            open={Boolean(buttonEl)}
-            anchorEl={buttonEl}
+            anchorEl={referenceElement.current}
             onClose={closeMenu}
           >
             <Menu.MenuSection title="Density">
@@ -311,7 +207,7 @@ export const CompactTable: Story<TableProps> = () => {
   )
 }
 
-const SortCell = styled(Table.Cell)<{ isSorted: boolean } & CellProps>`
+const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
   }

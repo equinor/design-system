@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { FC } from 'react'
 import { Menu as BaseMenu, MenuProps } from './Menu'
 import { MenuItem } from './MenuItem'
 import { MenuSection } from './MenuSection'
@@ -14,7 +13,7 @@ type MenuType = typeof BaseMenu & {
   Section: typeof MenuSection
 }
 
-const MenuWrapper: FC<MenuProps> = ({ children, ...rest }) => (
+const MenuWrapper = ({ children, ...rest }: MenuProps): JSX.Element => (
   <MenuProvider>
     <BaseMenu {...rest}>{children}</BaseMenu>
   </MenuProvider>

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Typography, Button, Popover, PopoverProps, Card } from '@components'
 import { Meta, Story } from '@storybook/react'
+import { PlacementValues } from '@hooks'
+
+const { Title, Content } = Popover
+const { Actions } = Card
 
 const Body = styled.div`
   margin: 42px;
@@ -23,34 +27,49 @@ export default {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
-    Anchor: Popover.Anchor,
-    Title: Popover.Title,
-    Content: Popover.Content,
-    Actions: Card.Actions,
+    Title,
+    Content,
+    Actions,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: `A popover is a floating card that provides more information or actions on hover or click.
-        `,
+  argTypes: {
+    placement: {
+      control: {
+        type: 'select',
+        options: PlacementValues,
+        defaultValue: 'auto',
       },
     },
   },
 } as Meta
 
 export const Default: Story<PopoverProps> = (args) => {
-  const [active, setActive] = React.useState(false)
+  const [openState, setOpenState] = useState(false)
+
   const handleToggle = () => {
-    setActive(!active)
+    setOpenState(!openState)
   }
+
+  const referenceElement = useRef(null)
+
   return (
     <div style={{ margin: '10em' }}>
-      <Popover {...args} onClose={handleToggle} open={active}>
-        <Popover.Anchor>
-          <Button id="1" onClick={handleToggle}>
-            Click me!
-          </Button>
-        </Popover.Anchor>
+      <Button
+        id="default-popover-anchor"
+        aria-controls="default-popover"
+        ref={referenceElement}
+        onClick={handleToggle}
+      >
+        Click me!
+      </Button>
+
+      <Popover
+        {...args}
+        id="default-popover"
+        aria-expanded={openState}
+        anchorEl={referenceElement.current}
+        onClose={handleToggle}
+        open={openState}
+      >
         <Popover.Title>Title</Popover.Title>
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
@@ -64,210 +83,21 @@ export const Default: Story<PopoverProps> = (args) => {
   )
 }
 
-export const Placements: Story<PopoverProps> = () => {
-  const [active, setActive] = React.useState('')
-
-  const handleClick = (event: React.SyntheticEvent) => {
-    setActive(event.currentTarget.id)
-  }
-
-  const handleClose = () => {
-    setActive('')
-  }
-
-  const Content = () => (
-    <>
-      <Popover.Title>Title </Popover.Title>
-      <Popover.Content>
-        <Typography variant="body_short">Content</Typography>
-      </Popover.Content>
-      <Card.Actions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>OK</Button>
-      </Card.Actions>
-    </>
-  )
-
-  return (
-    <Body>
-      <TextWrapper>
-        <Typography variant="h3">Placement</Typography>
-        <Typography variant="body_long">
-          Popover has 12 placement choices. The placement is relative to the
-          anchor element. Remember, you should always put the anchor element
-          inside the PopoverAnchor tag
-        </Typography>
-      </TextWrapper>
-      <Typography variant="h5" as="h4">
-        Top
-      </Typography>
-      <Wrapper>
-        <Popover
-          onClose={handleClose}
-          open={active === '1'}
-          placement="topLeft"
-        >
-          <Popover.Anchor>
-            <Button id="1" onClick={handleClick}>
-              Top left
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover onClose={handleClose} open={active === '2'} placement="top">
-          <Popover.Anchor>
-            <Button id="2" onClick={handleClick}>
-              Top
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover
-          onClose={handleClose}
-          open={active === '3'}
-          placement="topRight"
-        >
-          <Popover.Anchor>
-            <Button id="3" onClick={handleClick}>
-              Top right
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-      </Wrapper>
-
-      <Typography variant="h5" as="h4">
-        Bottom
-      </Typography>
-      <Wrapper>
-        <Popover
-          onClose={handleClose}
-          open={active === '4'}
-          placement="bottomLeft"
-        >
-          <Popover.Anchor>
-            <Button id="4" onClick={handleClick}>
-              Bottom left
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover onClose={handleClose} open={active === '5'} placement="bottom">
-          <Popover.Anchor>
-            <Button id="5" onClick={handleClick}>
-              Bottom
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover
-          onClose={handleClose}
-          open={active === '6'}
-          placement="bottomRight"
-        >
-          <Popover.Anchor>
-            <Button id="6" onClick={handleClick}>
-              Bottom right
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-      </Wrapper>
-
-      <Typography variant="h5" as="h4">
-        Left
-      </Typography>
-      <Wrapper>
-        <Popover
-          onClose={handleClose}
-          open={active === '7'}
-          placement="leftTop"
-        >
-          <Popover.Anchor>
-            <Button id="7" onClick={handleClick}>
-              Left top
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover onClose={handleClose} open={active === '8'} placement="left">
-          <Popover.Anchor>
-            <Button id="8" onClick={handleClick}>
-              Left
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover
-          onClose={handleClose}
-          open={active === '9'}
-          placement="leftBottom"
-        >
-          <Popover.Anchor>
-            <Button id="9" onClick={handleClick}>
-              Left bottom
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-      </Wrapper>
-      <Typography variant="h5" as="h4">
-        Right
-      </Typography>
-      <Wrapper>
-        <Popover
-          onClose={handleClose}
-          open={active === '10'}
-          placement="rightTop"
-        >
-          <Popover.Anchor>
-            <Button id="10" onClick={handleClick}>
-              Right top
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover onClose={handleClose} open={active === '11'} placement="right">
-          <Popover.Anchor>
-            <Button id="11" onClick={handleClick}>
-              Right
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-        <Popover
-          onClose={handleClose}
-          open={active === '12'}
-          placement="rightBottom"
-        >
-          <Popover.Anchor>
-            <Button id="12" onClick={handleClick}>
-              Right bottom
-            </Button>
-          </Popover.Anchor>
-          <Content />
-        </Popover>
-      </Wrapper>
-    </Body>
-  )
-}
-
 export const ActivationTypes: Story<PopoverProps> = () => {
-  const [active, setActive] = React.useState('')
+  const [active, setActive] = React.useState(null)
 
-  const handleClick = (event: React.SyntheticEvent) => {
-    setActive(event.currentTarget.id)
+  const handleClick = (num: 1 | 2) => {
+    setActive(num)
   }
 
-  const handleHover = (event: React.SyntheticEvent) => {
-    const current = event.currentTarget.id
+  const handleHover = (num: 1 | 2) => {
     setTimeout(() => {
-      setActive(current)
+      setActive(num)
     }, 300)
   }
 
   const handleClose = () => {
-    setActive('')
+    setActive(null)
   }
 
   const Content = () => (
@@ -282,6 +112,8 @@ export const ActivationTypes: Story<PopoverProps> = () => {
       </Card.Actions>
     </>
   )
+  const refOne = useRef(null)
+  const refTwo = useRef(null)
 
   return (
     <Body>
@@ -295,12 +127,22 @@ export const ActivationTypes: Story<PopoverProps> = () => {
         </Typography>
       </TextWrapper>
       <Wrapper>
-        <Popover onClose={handleClose} open={active === '1'}>
-          <Popover.Anchor>
-            <Button id="1" onClick={handleClick}>
-              On Click
-            </Button>
-          </Popover.Anchor>
+        <Button
+          id="click-popover-anchor"
+          aria-controls="click-popover"
+          ref={refOne}
+          onClick={() => handleClick(1)}
+        >
+          Activate on click
+        </Button>
+
+        <Popover
+          id="click-popover"
+          aria-expanded={active === 1}
+          anchorEl={refOne.current}
+          onClose={handleClose}
+          open={active === 1}
+        >
           <Content />
         </Popover>
       </Wrapper>
@@ -311,12 +153,25 @@ export const ActivationTypes: Story<PopoverProps> = () => {
         popup while browsing.
       </Typography>
       <Wrapper>
-        <Popover onClose={handleClose} open={active === '2'}>
-          <Popover.Anchor>
-            <Button id="2" onMouseEnter={handleHover} onFocus={handleClick}>
-              On Hover
-            </Button>
-          </Popover.Anchor>
+        <Button
+          id="anchor-hover-popover"
+          aria-controls="hover-popover"
+          ref={refTwo}
+          onMouseEnter={() => handleHover(2)}
+          onFocus={() => handleClick(2)}
+          onMouseLeave={handleClose}
+          onBlur={handleClose}
+        >
+          On Hover
+        </Button>
+
+        <Popover
+          id="hover-popover"
+          aria-expanded={active === 2}
+          anchorEl={refTwo.current}
+          onClose={handleClose}
+          open={active === 2}
+        >
           <Content />
         </Popover>
       </Wrapper>

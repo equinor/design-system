@@ -11,7 +11,12 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium: spacingMedium },
+    comfortable: {
+      x_large: spacingXlarge,
+      medium: spacingMedium,
+      small: spacingSmall,
+      x_small: spacingXsmall,
+    },
   },
   shape: {
     corners: { borderRadius },
@@ -19,24 +24,11 @@ const {
   elevation: { overlay: elevation },
 } = tokens
 
-export type Placement = {
-  arrowLeft?: string
-  arrowTop?: string
-  arrowRight?: string
-  arrowBottom?: string
-  arrowTransform?: string
-  transform?: string
-  width?: string
-  popoverBottom?: string | number
-  popoverLeft?: string | number
-  popoverRight?: string | number
-  popoverTop?: string | number
-}
-
 type Popover = {
   header: Typography
   background: string
   elevation: string
+  gridGap: string
   popover: {
     minHeight: string
     maxWidth: string
@@ -45,22 +37,17 @@ type Popover = {
   arrow: {
     width: string
     height: string
+    placement: string
+  }
+  closeButton: {
+    width: string
+    height: string
+    placement: string
   }
   spacings: Spacing
   borderRadius: string
-  placement: {
-    bottom: Placement
-    bottomRight: Placement
-    bottomLeft: Placement
-    top: Placement
-    topRight: Placement
-    topLeft: Placement
-    left: Placement
-    leftTop: Placement
-    leftBottom: Placement
-    right: Placement
-    rightTop: Placement
-    rightBottom: Placement
+  popoverTitle: {
+    marginTop: string
   }
 }
 
@@ -68,113 +55,30 @@ export const popover: Popover = {
   header,
   background,
   elevation,
+  gridGap: spacingMedium,
   popover: {
     minHeight: '48px',
     maxWidth: '560px',
     maxHeight: '80vh',
   },
   arrow: {
-    width: '8px',
-    height: '8px',
+    width: '6px',
+    height: spacingSmall,
+    placement: '-5px', // 1px less than arrow width, if not the shadow would show between arrow and popover
+  },
+  closeButton: {
+    width: spacingXlarge,
+    height: spacingXlarge,
+    placement: spacingSmall,
   },
   spacings: {
-    top: '12px',
+    top: spacingMedium,
     left: spacingMedium,
     right: spacingMedium,
     bottom: spacingMedium,
   },
   borderRadius,
-  placement: {
-    bottom: {
-      arrowLeft: 'calc(50% - 8px/2)',
-      arrowTop: '-5px',
-      popoverBottom: '-8px',
-      arrowTransform: 'rotate(90)',
-      transform: 'translateY(100%)',
-    },
-    bottomRight: {
-      arrowRight: '4px',
-      arrowTop: '-5px',
-      popoverRight: 0,
-      popoverBottom: '-8px',
-      arrowTransform: 'rotate(90)',
-      transform: 'translateY(100%)',
-    },
-    bottomLeft: {
-      arrowLeft: '4px',
-      arrowTop: '-5px',
-      popoverLeft: 0,
-      popoverBottom: '-8px',
-      arrowTransform: 'rotate(90)',
-      transform: 'translateY(100%)',
-    },
-    top: {
-      width: '100%',
-      arrowLeft: 'calc(50% - 8px/2)',
-      arrowBottom: '-5px',
-      popoverTop: '-8px',
-      arrowTransform: 'rotate(-90)',
-      transform: 'translateY(-100%)',
-    },
-    topRight: {
-      arrowRight: '4px',
-      arrowBottom: '-5px',
-      popoverRight: 0,
-      width: 'auto',
-      popoverTop: '-8px',
-      arrowTransform: 'rotate(-90)',
-      transform: 'translateY(-100%)',
-    },
-    topLeft: {
-      arrowLeft: '4px',
-      arrowBottom: '-5px',
-      popoverLeft: 0,
-      popoverTop: '-8px',
-      arrowTransform: 'rotate(-90)',
-      transform: 'translateY(-100%)',
-    },
-    left: {
-      arrowTop: 'calc(50% - 8px/2)',
-      arrowRight: '-5px',
-      popoverLeft: '-8px',
-      transform: 'translateX(-100%)',
-      arrowTransform: 'rotate(180)',
-    },
-    leftTop: {
-      arrowTop: '4px',
-      arrowRight: '-5px',
-      popoverLeft: '-8px',
-      popoverTop: 0,
-      transform: 'translateX(-100%)',
-      arrowTransform: 'rotate(180)',
-    },
-    leftBottom: {
-      arrowBottom: '4px',
-      arrowRight: '-5px',
-      popoverLeft: '-8px',
-      popoverBottom: 0,
-      transform: 'translateX(-100%)',
-      arrowTransform: 'rotate(180)',
-    },
-    right: {
-      arrowTop: 'calc(50% - 8px/2)',
-      arrowLeft: '-5px',
-      popoverRight: '-8px',
-      transform: 'translateX(100%)',
-    },
-    rightTop: {
-      arrowTop: '4px',
-      arrowLeft: '-5px',
-      popoverRight: '-8px',
-      popoverTop: 0,
-      transform: 'translateX(100%)',
-    },
-    rightBottom: {
-      arrowBottom: '4px',
-      arrowLeft: '-5px',
-      popoverRight: '-8px',
-      popoverBottom: 0,
-      transform: 'translateX(100%)',
-    },
+  popoverTitle: {
+    marginTop: spacingXsmall, // negative
   },
 }

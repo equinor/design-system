@@ -1,66 +1,42 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, cleanup, screen } from '@utils'
+import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Tooltip } from '.'
-import { tooltip as tokens } from './Tooltip.tokens'
+import type { TooltipProps } from './Tooltip'
 
-const StyledTooltip = styled(Tooltip)`
-  position: relative;
-  height: 100px;
-  width: 100px;
+// We override Tooltip for testing and set props to partial because AnchorEl is applied to children in custom render function
+const TestTooltip = Tooltip as React.ForwardRefExoticComponent<
+  Partial<TooltipProps>
+>
+
+const StyledTooltip = styled(TestTooltip)`
+  background: red;
 `
-
-const {
-  placement: { topRight },
-} = tokens
 
 afterEach(cleanup)
 
 describe('Tooltip', () => {
-  it('Tooltip has correct placement', () => {
-    const { container } = render(
-      <Tooltip open placement="topRight">
-        Anchor
-      </Tooltip>,
-    )
-    const tooltipWrapper = container.firstChild
-    const tooltip = screen.getByRole('tooltip')
+  it('can extend the css for the component', async () => {
+    render(<StyledTooltip open title="Tooltip" />)
+    const container = screen.getByRole('tooltip')
 
-    expect(tooltipWrapper).toHaveStyleRule('display', 'inline-flex')
-    expect(tooltip).toHaveStyleRule('top', `${topRight.tooltipTop}`)
-    expect(tooltip).toHaveStyleRule('right', `${topRight.tooltipRight}`)
+    await waitFor(() => expect(container).toHaveStyleRule('background', 'red'))
   })
-  it('Arrow has correct placement', () => {
-    const { container } = render(
-      <Tooltip open placement="topRight">
-        Anchor
-      </Tooltip>,
+  it('is visible when open is true & anchorEl is set', async () => {
+    render(<TestTooltip open placement="right-start" />)
+    const container = screen.getByRole('tooltip')
+    await waitFor(() =>
+      expect(container).toHaveStyleRule('visibility', 'visible'),
     )
-    const arrow = container.lastElementChild.lastChild.firstChild.firstChild
-    expect(arrow).toHaveStyleRule('right', `${topRight.arrowRight}`)
-    expect(arrow).toHaveStyleRule('bottom', `${topRight.arrowBottom}`)
+    expect(container).toHaveAttribute('data-popper-placement', 'right-start')
   })
-  it('Has provided necessary props', () => {
-    const title = 'Title'
-    const placement = 'topLeft'
-    const anchor = 'Anchor'
-    const { queryByText } = render(
-      <Tooltip open placement={placement} title={title}>
-        {anchor}
-      </Tooltip>,
-    )
-    expect(queryByText(title)).toBeDefined()
-    expect(queryByText(placement)).toBeDefined()
-    expect(queryByText(anchor)).toBeDefined()
-  })
-  it('Can extend the css for the component', () => {
-    const { container } = render(<StyledTooltip>Anchor</StyledTooltip>)
-    const tooltip = container.firstChild
-    expect(tooltip).toHaveStyleRule('position', 'relative')
-    expect(tooltip).toHaveStyleRule('height', '100px')
-    expect(tooltip).toHaveStyleRule('width', '100px')
+  it('renders with a title', async () => {
+    render(<TestTooltip open placement="right-start" title="Tooltip Text" />)
+    const title = screen.getByText('Tooltip Text')
+    await waitFor(() => expect(title).toBeDefined())
   })
 })

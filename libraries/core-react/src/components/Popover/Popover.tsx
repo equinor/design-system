@@ -1,101 +1,171 @@
 import * as React from 'react'
-import {
-  forwardRef,
-  useRef,
-  HTMLAttributes,
-  ReactNode,
-  isValidElement,
-} from 'react'
-import styled from 'styled-components'
-import { PopoverItem } from './PopoverItem'
-import { PopoverAnchor } from './PopoverAnchor'
+import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
+import styled, { css } from 'styled-components'
+import { Icon } from '../Icon'
+import { Paper } from '../Paper'
+import { Button } from '../Button'
+import { close } from '@equinor/eds-icons'
+import { spacingsTemplate, typographyTemplate } from '@utils'
+import { usePopper, useOutsideClick, Placement } from '@hooks'
+import { popover as tokens } from './Popover.tokens'
 
-const Container = styled.div`
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-`
+type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
-const Anchor = styled.div`
-  &:focus {
-    outline: none;
+const StyledPopover = styled(Paper)<StyledPopoverProps>`
+  ${typographyTemplate(tokens.header)}
+  ${spacingsTemplate(tokens.spacings)}
+  display: grid;
+  grid-gap: ${tokens.gridGap};
+  grid-auto-columns: auto;
+  align-items: center;
+  align-content: start;
+  background: ${tokens.background};
+  width: max-content;
+  max-height: ${tokens.popover.maxHeight};
+  max-width: ${tokens.popover.maxWidth};
+  min-height: ${tokens.popover.minHeight};
+  border-radius: ${tokens.borderRadius};
+  z-index: 100;
+
+  ${({ open }) =>
+    css({
+      visibility: open ? 'visible' : 'hidden',
+    })};
+
+  .arrow {
+    z-index: -1;
+    width: ${tokens.arrow.width};
+    height: ${tokens.arrow.height};
+  }
+  &[data-popper-placement^='top'] > .arrow {
+    bottom: ${tokens.arrow.placement};
+    .arrowSvg {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &[data-popper-placement^='bottom'] > .arrow {
+    top: ${tokens.arrow.placement};
+    .arrowSvg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-popper-placement^='left'] > .arrow {
+    right: ${tokens.arrow.placement};
+    .arrowSvg {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &[data-popper-placement^='right'] > .arrow {
+    left: ${tokens.arrow.placement};
   }
 `
-type PopoverSplit = {
-  anchorElement: ReactNode
-  childArray: ReactNode[]
-}
 
+const StyledCloseButton = styled(Button)`
+  position: absolute;
+  top: ${tokens.closeButton.placement};
+  right: ${tokens.spacings.right};
+  height: ${tokens.closeButton.height};
+  width: ${tokens.closeButton.width};
+  &:after {
+    height: ${tokens.closeButton.height};
+  }
+`
+
+const ArrowWrapper = styled.div`
+  &,
+  &::before {
+    position: absolute;
+    width: ${tokens.arrow.width};
+    height: ${tokens.arrow.height};
+    z-index: -1;
+  }
+
+  &::before {
+    content: '';
+  }
+`
+
+type ArrowProps = {
+  ref?: React.MutableRefObject<null>
+} & SVGProps<SVGSVGElement>
+
+const PopoverArrow = styled.svg<ArrowProps>`
+  width: ${tokens.arrow.width};
+  height: ${tokens.arrow.height};
+  position: absolute;
+  fill: ${tokens.background};
+  filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));
+`
 export type PopoverProps = {
   /**  Popover placement relative to anchor */
-  placement?:
-    | 'topLeft'
-    | 'top'
-    | 'topRight'
-    | 'rightTop'
-    | 'right'
-    | 'rightBottom'
-    | 'bottomLeft'
-    | 'bottom'
-    | 'bottomRight'
-    | 'leftTop'
-    | 'left'
-    | 'leftBottom'
-  /**  On Close function */
+  placement?: Placement
+  /**  On Close callback */
   onClose?: () => void
-  /**  Open activates Popover */
+  /** Anchor element reference */
+  anchorEl: HTMLElement
+  /** Is Popover open */
   open?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-// Controller Component for PopoverItem
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
-  function Popover({ open, children, placement = 'bottom', ...rest }, ref) {
-    const props = {
-      ...rest,
-      placement,
-      ref,
-    }
-    if (!children) {
-      return <Container {...props} />
-    }
-    const anchorRef = useRef<HTMLDivElement>(null)
-
-    const { anchorElement, childArray } = React.Children.toArray(
+  function Popover(
+    {
       children,
-    ).reduce(
-      (acc: PopoverSplit, child): PopoverSplit => {
-        if (isValidElement(child) && child.type === PopoverAnchor) {
-          return {
-            ...acc,
-            anchorElement: child,
-          }
-        }
-        return {
-          ...acc,
-          childArray: [...acc.childArray, child],
-        }
-      },
-      { anchorElement: null, childArray: [] },
+      placement = 'bottom',
+      anchorEl,
+      open = false,
+      onClose,
+      ...rest
+    },
+    ref,
+  ) {
+    const popperRef = useRef<HTMLDivElement | null>(null)
+    const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
+    useOutsideClick(popperRef, (e: MouseEvent) => {
+      if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
+        onClose()
+      }
+    })
+
+    const { styles, attributes } = usePopper(
+      anchorEl,
+      popperRef.current,
+      arrowRef,
+      placement,
     )
 
-    if (open && anchorRef.current) {
-      anchorRef.current.focus()
+    const props = {
+      open,
+      ...rest,
+      ...attributes.popper,
     }
 
     return (
-      <Container {...props}>
-        <Anchor aria-haspopup="true" ref={anchorRef}>
-          {anchorElement}
-        </Anchor>
+      <StyledPopover
+        ref={popperRef}
+        elevation="overlay"
+        style={styles.popper}
+        {...props}
+        data-testid="popover"
+      >
+        <ArrowWrapper ref={setArrowRef} style={styles.arrow} className="arrow">
+          <PopoverArrow className="arrowSvg">
+            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+          </PopoverArrow>
+        </ArrowWrapper>
 
-        {open && (
-          <PopoverItem {...props} anchorRef={anchorRef}>
-            {childArray}
-          </PopoverItem>
-        )}
-      </Container>
+        {children}
+        <StyledCloseButton
+          onClick={onClose}
+          variant="ghost_icon"
+          data-testid="popover-close"
+        >
+          <Icon name="close" data={close} title="close" size={24} />
+        </StyledCloseButton>
+      </StyledPopover>
     )
   },
 )
-
-// Popover.displayName = 'eds-popover'

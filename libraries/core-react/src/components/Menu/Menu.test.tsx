@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, screen, fireEvent } from './test-utils'
+import { render, cleanup, screen, fireEvent } from '@utils'
+import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
@@ -20,7 +21,7 @@ const StyledMenu = styled(TestMenu)`
 afterEach(cleanup)
 
 describe('Menu', () => {
-  it('Can extend the css for the component', () => {
+  it('Can extend the css for the component', async () => {
     render(
       <StyledMenu open>
         <div>some random content</div>
@@ -28,32 +29,36 @@ describe('Menu', () => {
     )
     const menuContainer = screen.getByRole('menu', { hidden: true })
 
-    expect(menuContainer).toHaveStyleRule('background', 'red')
+    await waitFor(() =>
+      expect(menuContainer).toHaveStyleRule('background', 'red'),
+    )
   })
-  it('is visible when open is true & anchorEl is set', () => {
+  it('is visible when open is true & anchorEl is set', async () => {
     render(
-      <TestMenu open>
+      <TestMenu open placement="right-start">
         <div>some random content</div>
       </TestMenu>,
     )
     const menuContainer = screen.getByRole('menu').parentElement
-
-    expect(menuContainer).toHaveStyleRule('visibility', 'visible')
-    expect(menuContainer).toHaveStyleRule('left', '0')
-    expect(menuContainer).toHaveStyleRule('top', '2px')
+    await waitFor(() =>
+      expect(menuContainer).toHaveStyleRule('visibility', 'visible'),
+    )
+    expect(menuContainer).toHaveAttribute(
+      'data-popper-placement',
+      'right-start',
+    )
   })
-  it('has rendered MenuItem', () => {
+  it('has rendered MenuItem', async () => {
     render(
       <TestMenu open>
         <MenuItem>Item 1</MenuItem>
       </TestMenu>,
     )
     const menuItem = screen.getByText('Item 1')
-
-    expect(menuItem).toBeDefined()
+    await waitFor(() => expect(menuItem).toBeDefined())
   })
 
-  it('has rendered MenuSection with MenuItem & title', () => {
+  it('has rendered MenuSection with MenuItem & title', async () => {
     render(
       <TestMenu open>
         <MenuSection title="Section title">
@@ -64,11 +69,11 @@ describe('Menu', () => {
     const menuItem = screen.getByText('Item 1')
     const menuSection = screen.getByText('Section title')
 
-    expect(menuItem).toBeDefined()
+    await waitFor(() => expect(menuItem).toBeDefined())
     expect(menuSection).toBeDefined()
   })
 
-  it('has called onClose when MenuItem is clicked', () => {
+  it('has called onClose when MenuItem is clicked', async () => {
     const handleOnClose = jest.fn()
     const handleOnClick = jest.fn()
 
@@ -82,11 +87,11 @@ describe('Menu', () => {
 
     fireEvent.click(menuItem)
 
-    expect(handleOnClick).toHaveBeenCalled()
+    await waitFor(() => expect(handleOnClick).toHaveBeenCalled())
     expect(handleOnClose).toHaveBeenCalled()
   })
 
-  it('has first menuItem focused when focus is set to first', () => {
+  it('has first menuItem focused when focus is set to first', async () => {
     render(
       <TestMenu open focus="first">
         <MenuItem>Item 1</MenuItem>
@@ -96,10 +101,10 @@ describe('Menu', () => {
     )
     const menuItem = screen.getByText('Item 1').parentElement
 
-    expect(document.activeElement == menuItem).toBeTruthy()
+    await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
   })
 
-  it('has last menuItem focused when focus is set to last', () => {
+  it('has last menuItem focused when focus is set to last', async () => {
     render(
       <TestMenu open focus="last">
         <MenuItem>Item 1</MenuItem>
@@ -109,9 +114,9 @@ describe('Menu', () => {
     )
     const menuItem = screen.getByText('Item 3').parentElement
 
-    expect(document.activeElement == menuItem).toBeTruthy()
+    await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
   })
-  it('has called onClose when MenuItem is clicked from inside a MenuSection', () => {
+  it('has called onClose when MenuItem is clicked from inside a MenuSection', async () => {
     const handleOnClose = jest.fn()
     const handleOnClick = jest.fn()
 
@@ -127,7 +132,7 @@ describe('Menu', () => {
 
     fireEvent.click(menuItem)
 
-    expect(handleOnClick).toHaveBeenCalled()
+    await waitFor(() => expect(handleOnClick).toHaveBeenCalled())
     expect(handleOnClose).toHaveBeenCalled()
   })
 })

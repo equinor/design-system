@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { forwardRef, HTMLAttributes } from 'react'
+import { useRef, forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
@@ -38,10 +38,20 @@ type BreadcrumbProps = {
   onClick?: (e: MouseEvent | KeyboardEvent) => void
   /** Children is breadcrumb text */
   children: string
-} & HTMLAttributes<HTMLDivElement>
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
-export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
+export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
   function Breadcrumb({ children, maxWidth, ...other }, ref) {
+    const [openTooltip, setopenTooltip] = React.useState(false)
+
+    const handleOpen = () => {
+      setopenTooltip(true)
+    }
+
+    const handleClose = () => {
+      setopenTooltip(false)
+    }
+    const linkRef = useRef(null)
     const props = {
       ...other,
       ref,
@@ -51,11 +61,26 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
     const tooltip = Boolean(maxWidth)
 
     const WithTooltip = (
-      <Tooltip title={children}>
-        <StyledTypography link variant="body_short" {...props}>
-          {children}
-        </StyledTypography>
-      </Tooltip>
+      <StyledTypography
+        link
+        variant="body_short"
+        {...props}
+        ref={linkRef}
+        aria-describedby="tooltip"
+        onMouseEnter={handleOpen}
+        onFocus={handleOpen}
+        onBlur={handleClose}
+        onMouseLeave={handleClose}
+      >
+        {children}
+        <Tooltip
+          title={children}
+          open={openTooltip}
+          id="tooltip"
+          placement="top"
+          anchorEl={linkRef.current}
+        />
+      </StyledTypography>
     )
 
     return tooltip ? (

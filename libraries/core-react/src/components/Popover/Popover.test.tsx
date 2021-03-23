@@ -1,119 +1,104 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen, fireEvent } from '@utils'
+import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { popover as tokens } from './Popover.tokens'
 import { Popover } from '.'
-import { Button } from '../Button'
-import { Typography } from '../Typography'
 import type { PopoverProps } from './Popover'
 
-const { PopoverTitle, PopoverContent, PopoverAnchor } = Popover
+// We override Popover for testing and set props to partial because AnchorEl is applied to children in custom render function
+const TestPopover = Popover as React.ForwardRefExoticComponent<
+  Partial<PopoverProps>
+>
 
-const StyledPopover = styled(Popover)`
-  position: absolute;
-  width: 100px;
+const StyledPopover = styled(TestPopover)`
+  background: red;
 `
-
-const {
-  placement: { topRight },
-} = tokens
 
 afterEach(cleanup)
 
-const SimplePopover = ({
-  open = false,
-  placement = 'bottom',
-}: PopoverProps) => (
-  <Popover open={open} placement={placement}>
-    <PopoverAnchor>
-      <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
-    </PopoverAnchor>
-    <PopoverTitle>Title</PopoverTitle>
-    <PopoverContent>
-      <Typography>Content</Typography>
-    </PopoverContent>
-  </Popover>
-)
-
 describe('Popover', () => {
-  it('Popover has correct placement', () => {
-    const { container } = render(<SimplePopover open placement="topRight" />)
-    const popoverWrapper = container.lastElementChild
-    const popover = popoverWrapper.lastChild
-    expect(popoverWrapper).toHaveStyleRule('display', 'inline-flex')
-    expect(popover).toHaveStyleRule('top', `${topRight.popoverTop}`)
-    expect(popover).toHaveStyleRule('right', `${topRight.popoverRight}`)
-  })
-  it('Arrow has correct placement', () => {
-    const { container } = render(<SimplePopover open placement="topRight" />)
-    const arrow = container.lastElementChild.lastChild.firstChild.firstChild
-    expect(arrow).toHaveStyleRule('right', `${topRight.arrowRight}`)
-    expect(arrow).toHaveStyleRule('bottom', `${topRight.arrowBottom}`)
-  })
-  it('Has provided necessary PopoverProps', () => {
-    const placement = 'topRight'
-    const { queryByText } = render(<SimplePopover open placement={placement} />)
-    expect(queryByText(placement)).toBeDefined()
-  })
-  it('Can extend the css for the component', () => {
-    const { container } = render(
-      <StyledPopover open placement="topRight">
-        <PopoverAnchor>
-          <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
-        </PopoverAnchor>
-        <PopoverTitle>Title</PopoverTitle>
-        <PopoverContent>
-          <Typography>Content</Typography>
-        </PopoverContent>
+  it('can extend the css for the component', async () => {
+    render(
+      <StyledPopover open>
+        <div>some random content</div>
       </StyledPopover>,
     )
-    const popover = container.firstChild
-    expect(popover).toHaveStyleRule('position', 'absolute')
-    expect(popover).toHaveStyleRule('width', '100px')
+    const container = screen.getByTestId('popover')
+
+    await waitFor(() => expect(container).toHaveStyleRule('background', 'red'))
   })
-})
-it("Doesn't crash if no children is provided to Popover component", () => {
-  const placement = 'topLeft'
-  const { queryByText } = render(<Popover placement={placement} />)
-  expect(queryByText(placement)).toBeDefined()
-})
-it("Doesn't crash if Popover anchor is missing content", () => {
-  const placement = 'topLeft'
-  const { queryByText } = render(
-    <Popover placement={placement}>
-      <PopoverAnchor />
-      <PopoverTitle>Title</PopoverTitle>
-      <PopoverContent>Content</PopoverContent>
-    </Popover>,
-  )
-  expect(queryByText(placement)).toBeDefined()
-})
-it("Doesn't crash if no children is provided to Popover content", () => {
-  const placement = 'topLeft'
-  const { queryByText } = render(
-    <Popover placement={placement}>
-      <PopoverAnchor>
-        <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
-      </PopoverAnchor>
-      <PopoverTitle>Title</PopoverTitle>
-      <PopoverContent />
-    </Popover>,
-  )
-  expect(queryByText(placement)).toBeDefined()
-})
-it("Doesn't crash if title is missing", () => {
-  const placement = 'topLeft'
-  const { queryByText } = render(
-    <Popover placement={placement}>
-      <PopoverAnchor>
-        <Button onClick={(e) => e.stopPropagation()}>On Click</Button>
-      </PopoverAnchor>
-      <PopoverTitle />
-      <PopoverContent>Content</PopoverContent>
-    </Popover>,
-  )
-  expect(queryByText(placement)).toBeDefined()
+  it('is visible when open is true & anchorEl is set', async () => {
+    render(
+      <TestPopover open placement="right-start">
+        <div>some random content</div>
+      </TestPopover>,
+    )
+    const container = screen.getByTestId('popover')
+    await waitFor(() =>
+      expect(container).toHaveStyleRule('visibility', 'visible'),
+    )
+    expect(container).toHaveAttribute('data-popper-placement', 'right-start')
+  })
+
+  it('has rendered Popover Title', async () => {
+    render(
+      <TestPopover open>
+        <Popover.Title>Title Text</Popover.Title>
+      </TestPopover>,
+    )
+    const title = screen.getByText('Title Text')
+    await waitFor(() => expect(title).toBeDefined())
+  })
+  it('has rendered Popover Content', async () => {
+    render(
+      <TestPopover open>
+        <Popover.Content>Content Text</Popover.Content>
+      </TestPopover>,
+    )
+    const content = screen.getByText('Content Text')
+    await waitFor(() => expect(content).toBeDefined())
+  })
+
+  it('has called onClose when close button is clicked', async () => {
+    const handleOnClose = jest.fn()
+
+    render(
+      <TestPopover open onClose={handleOnClose}>
+        <div>some random content</div>
+      </TestPopover>,
+    )
+    const closeButton = screen.getByTestId('popover-close')
+
+    fireEvent.click(closeButton)
+
+    await waitFor(() => expect(handleOnClose).toHaveBeenCalled())
+  })
+  it("doesn't crash if no children is provided to Popover component", async () => {
+    const placement = 'top'
+    const { queryByText } = render(<TestPopover placement={placement} />)
+    await waitFor(() => expect(queryByText(placement)).toBeDefined())
+  })
+  it("doesn't crash if Popover Content children is undefined", async () => {
+    const placement = 'top'
+    const { queryByText } = render(
+      <TestPopover placement={placement}>
+        <Popover.Title>Title</Popover.Title>
+        <Popover.Content></Popover.Content>
+      </TestPopover>,
+    )
+    await waitFor(() => expect(queryByText(placement)).toBeDefined())
+  })
+  it("doesn't crash if Popover Title children is undefined", async () => {
+    const placement = 'top'
+    const { queryByText } = render(
+      <TestPopover placement={placement}>
+        <Popover.Title></Popover.Title>
+        <Popover.Content>Content</Popover.Content>
+      </TestPopover>,
+    )
+    await waitFor(() => expect(queryByText(placement)).toBeDefined())
+  })
 })
