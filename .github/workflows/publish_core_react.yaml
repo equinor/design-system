@@ -102,13 +102,13 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
-      - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
-      - name: Save build to cache
+      - name: Use token build cache
         uses: actions/cache@v2
         with:
           path: ./libraries/tokens
           key: ${{ github.sha }}-build-tokens
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
   build-icons:
     name: Build eds-icons
     runs-on: ubuntu-latest
@@ -122,13 +122,13 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
-      - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
-      - name: Save build to cache
+      - name: Use icons build cache
         uses: actions/cache@v2
         with:
           path: ./libraries/icons
           key: ${{ github.sha }}-build-icons
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
   build-core-react:
     name: Build eds-core-react
     runs-on: ubuntu-latest
@@ -152,9 +152,7 @@ jobs:
         with:
           path: ./libraries/tokens
           key: ${{ github.sha }}-build-tokens
-      - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build
-      - name: Save build to cache
+      - name: Use core-react build cache
         uses: actions/cache@v2
         with:
           path: |
@@ -162,6 +160,8 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}-build-core-react
+      - name: Build
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build
   publish-core-react:
     name: Publish eds-core-react to npm
     runs-on: ubuntu-latest
@@ -192,16 +192,16 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
-      - name: Build storybook
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build:storybook
       - uses: actions/cache@v2
-        name: Save build to cache
+        name: Use storybook build cache
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}-build-storybook
+      - name: Build storybook
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build:storybook
   build_push_docker:
     name: Build & Deploy Docker
     runs-on: ubuntu-latest

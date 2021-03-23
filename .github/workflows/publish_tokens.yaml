@@ -31,16 +31,7 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Install pnpm & dependencies 📦
-        uses: pnpm/action-setup@v1.2.1
-        with:
-          version: latest
-          bin_dest: ./pnpm/bin
-          run_install: |
-            - recursive: true
-      - name: Lint
-        run: ./pnpm/bin/pnpm run lint ./libraries/tokens
-      - name: Cache base files
+      - name: Use base files cache
         uses: actions/cache@v2
         with:
           path: |
@@ -48,12 +39,19 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
+      - name: Install pnpm & dependencies 📦
+        uses: pnpm/action-setup@v1.2.1
+        with:
+          version: latest
+          bin_dest: ./pnpm/bin
+          run_install: |
+            - recursive: true
   lint:
     name: Lint eds-tokens
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Get base files
+      - name: Use base files cache
         uses: actions/cache@v2
         with:
           path: |
@@ -68,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint]
     steps:
-      - name: Get files
+      - name: Use base files cache
         uses: actions/cache@v2
         with:
           path: |
@@ -76,29 +74,30 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
+      - name: Use tokens build cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}-build-tokens
       - name: Build
         run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
-      - name: Save files to cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-            ~/setup-pnpm
-          key: ${{ github.sha }}
+
   publish-tokens:
     name: Publish eds-tokens to npm
     runs-on: ubuntu-latest
     needs: [build-tokens]
     steps:
-      - name: Get files
+      - name: Use tokens build cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-build-tokens
       - name: Publish to npm
         run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
