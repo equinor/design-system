@@ -136,16 +136,13 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
           onPointerEnter={() => handleOpen(1)}
           onPointerLeave={handleClose}
         >
-          <Icon
-            title="Chrome disabled button has Tooltip!"
-            name="chrome"
-          ></Icon>
+          <Icon title="Chrome disabled button has Tooltip" name="chrome"></Icon>
         </Button>
 
         <Tooltip
           id="tooltip-disabled-chrome"
           open={openState === 1}
-          title="Disabled button, but hover works!"
+          title="Disabled button, but hover works"
           anchorEl={referenceElementOne.current}
         />
 
@@ -161,7 +158,7 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
             variant="ghost_icon"
           >
             <Icon
-              title="Safari disabled button has Tooltip!"
+              title="Safari disabled button has Tooltip"
               name="explore"
             ></Icon>
           </Button>
@@ -170,7 +167,7 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
         <Tooltip
           id="tooltip-disabled-safari"
           open={openState === 2}
-          title="Disabled button, but hover works!"
+          title="Disabled button, but hover works"
           anchorEl={referenceElementTwo.current}
         />
       </Wrapper>
