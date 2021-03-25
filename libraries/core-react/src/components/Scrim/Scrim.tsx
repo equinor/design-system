@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { forwardRef, useEffect, MouseEvent, HTMLAttributes } from 'react'
+import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
+import { useEscapePress } from '@hooks'
 
 const { height, width, background } = tokens
 
@@ -40,13 +41,12 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
     isDismissable,
     ref,
   }
-  const handleKeyboardClose = (event: KeyboardEvent) => {
-    if (event) {
-      if (event.key === 'Escape' && isDismissable) {
-        onClose && onClose(event, false)
-      }
+
+  useEscapePress((e: KeyboardEvent) => {
+    if (isDismissable && onClose) {
+      onClose(e, false)
     }
-  }
+  })
 
   const handleMouseClose = (event: MouseEvent) => {
     if (event) {
@@ -61,21 +61,9 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
     event.stopPropagation()
   }
 
-  useEffect(() => {
-    if (isDismissable) {
-      document.addEventListener('keydown', handleKeyboardClose, false)
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyboardClose, false)
-    }
-  }, [])
-
   return (
     <StyledScrim onClick={handleMouseClose} {...props}>
       <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
     </StyledScrim>
   )
 })
-
-// Scrim.displayName = 'Scrim'

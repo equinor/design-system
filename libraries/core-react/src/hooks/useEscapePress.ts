@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 
-export const useEscapePress = (callback: () => void): void => {
+export const useEscapePress = (callback: (e: KeyboardEvent) => void): void => {
   const handleGlobalKeyPress = (e: KeyboardEvent) => {
     const { key } = e
 
     switch (key) {
       case 'Escape':
-        callback()
+        callback(e)
         break
       default:
         break
@@ -19,5 +19,5 @@ export const useEscapePress = (callback: () => void): void => {
     return () => {
       document.removeEventListener('keydown', handleGlobalKeyPress, true)
     }
-  })
+  }, [])
 }
