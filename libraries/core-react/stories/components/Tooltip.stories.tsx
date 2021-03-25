@@ -94,7 +94,7 @@ export const Default: Story<TooltipProps> = (args) => {
 export const WithDisabledElements: Story<TooltipProps> = () => {
   const [openState, setOpenState] = useState(null)
 
-  let timer: ReturnType<typeof setTimeout>
+  let timer: ReturnType<typeof setTimeout> = null
 
   const handleOpen = (num: 1 | 2) => {
     timer = setTimeout(() => {
