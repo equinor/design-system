@@ -208,9 +208,6 @@ export const ComplexMenu: Story<MenuProps> = () => {
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
         break
-      case 'Escape':
-        closeMenu()
-        break
       default:
         break
     }
@@ -274,9 +271,6 @@ export const InTopbar: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -345,9 +339,6 @@ export const IconButtons: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -420,9 +411,6 @@ export const Text: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -498,9 +486,6 @@ export const TextWithIcons: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -618,9 +603,6 @@ export const Placement: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break

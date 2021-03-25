@@ -4,7 +4,13 @@ import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
-import { useCombinedRefs, useOutsideClick, usePopper, Placement } from '@hooks'
+import {
+  useCombinedRefs,
+  useOutsideClick,
+  usePopper,
+  Placement,
+  useEscapePress,
+} from '@hooks'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
 
@@ -63,6 +69,13 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
       onClose()
     }
   })
+
+  useEscapePress(() => {
+    if (open && onClose !== null) {
+      onClose()
+    }
+  })
+
   const { styles, attributes } = usePopper(
     anchorEl,
     popperRef.current,
@@ -74,25 +87,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     if (onClose === null && onCloseCallback) {
       setOnClose(onCloseCallback)
     }
-
-    document.addEventListener('keydown', handleGlobalKeyPress, true)
-
-    return () => {
-      document.removeEventListener('keydown', handleGlobalKeyPress, true)
-    }
   }, [listRef.current])
-
-  const handleGlobalKeyPress = (e: KeyboardEvent) => {
-    const { key } = e
-
-    switch (key) {
-      case 'Escape':
-        onClose()
-        break
-      default:
-        break
-    }
-  }
 
   const props = {
     open,

@@ -1,9 +1,6 @@
-import { useEffect, MutableRefObject } from 'react'
+import { useEffect } from 'react'
 
-export const useOutsideClick = (
-  ref: MutableRefObject<HTMLElement>,
-  callback: () => void,
-): void => {
+export const useEscapePress = (callback: () => void): void => {
   const handleGlobalKeyPress = (e: KeyboardEvent) => {
     const { key } = e
 
@@ -22,5 +19,5 @@ export const useOutsideClick = (
     return () => {
       document.removeEventListener('keydown', handleGlobalKeyPress, true)
     }
-  }, [ref.current])
+  })
 }

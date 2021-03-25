@@ -6,7 +6,7 @@ import { Paper } from '../Paper'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { usePopper, useOutsideClick, Placement } from '@hooks'
+import { usePopper, useOutsideClick, Placement, useEscapePress } from '@hooks'
 import { popover as tokens } from './Popover.tokens'
 
 type StyledPopoverProps = Pick<PopoverProps, 'open'>
@@ -126,6 +126,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     useOutsideClick(popperRef, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
+        onClose()
+      }
+    })
+
+    useEscapePress(() => {
+      if (open && onClose !== null) {
         onClose()
       }
     })

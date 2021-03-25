@@ -51,17 +51,6 @@ export const Default: Story<PopoverProps> = (args) => {
 
   const referenceElement = useRef(null)
 
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    switch (key) {
-      case 'Escape':
-        handleToggle()
-        break
-      default:
-        break
-    }
-  }
-
   return (
     <div style={{ margin: '10em' }}>
       <Button
@@ -69,7 +58,6 @@ export const Default: Story<PopoverProps> = (args) => {
         aria-controls="default-popover"
         ref={referenceElement}
         onClick={handleToggle}
-        onKeyDown={onKeyPress}
       >
         Click me!
       </Button>
@@ -115,17 +103,6 @@ export const ActivationTypes: Story<PopoverProps> = () => {
     setActive(null)
   }
 
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    switch (key) {
-      case 'Escape':
-        handleClose()
-        break
-      default:
-        break
-    }
-  }
-
   const Content = () => (
     <>
       <Popover.Title>Title </Popover.Title>
@@ -158,7 +135,6 @@ export const ActivationTypes: Story<PopoverProps> = () => {
           aria-controls="click-popover"
           ref={refOne}
           onClick={() => handleClick(1)}
-          onKeyDown={onKeyPress}
         >
           Activate on click
         </Button>
@@ -188,7 +164,6 @@ export const ActivationTypes: Story<PopoverProps> = () => {
           onFocus={() => handleClick(2)}
           onMouseLeave={handleClose}
           onBlur={handleClose}
-          onKeyDown={onKeyPress}
         >
           On Hover
         </Button>
