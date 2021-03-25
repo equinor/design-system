@@ -38,6 +38,8 @@ export default {
         options: PlacementValues,
         defaultValue: 'auto',
       },
+      description:
+        `Popover placement relative to anchor, types: ' ` + PlacementValues,
     },
   },
 } as Meta
@@ -90,16 +92,13 @@ export const ActivationTypes: Story<PopoverProps> = () => {
     setActive(num)
   }
 
-  let timer: ReturnType<typeof setTimeout> = null
-
-  const handleHover = () => {
-    timer = setTimeout(() => {
-      setActive(2)
+  const handleHover = (num: 1 | 2) => {
+    setTimeout(() => {
+      setActive(num)
     }, 300)
   }
 
   const handleClose = () => {
-    clearTimeout(timer)
     setActive(null)
   }
 
@@ -160,10 +159,8 @@ export const ActivationTypes: Story<PopoverProps> = () => {
           id="anchor-hover-popover"
           aria-controls="hover-popover"
           ref={refTwo}
-          onMouseOver={handleHover}
+          onMouseEnter={() => handleHover(2)}
           onFocus={() => handleClick(2)}
-          onMouseLeave={handleClose}
-          onBlur={handleClose}
         >
           On Hover
         </Button>
