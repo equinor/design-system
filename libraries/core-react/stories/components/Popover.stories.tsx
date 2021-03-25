@@ -90,7 +90,7 @@ export const ActivationTypes: Story<PopoverProps> = () => {
     setActive(num)
   }
 
-  let timer: ReturnType<typeof setTimeout>
+  let timer: ReturnType<typeof setTimeout> = null
 
   const handleHover = () => {
     timer = setTimeout(() => {
