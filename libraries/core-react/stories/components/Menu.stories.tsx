@@ -194,7 +194,6 @@ export const ComplexMenu: Story<MenuProps> = () => {
     setState({ ...state, isOpen: true, focus })
   }
   const closeMenu = () => {
-    console.log('close')
     setState({ ...state, isOpen: false })
   }
 
@@ -215,7 +214,6 @@ export const ComplexMenu: Story<MenuProps> = () => {
         break
     }
   }
-  console.log(isOpen)
   return (
     <Grid style={{ gridAutoFlow: 'row', marginBottom: '20rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
