@@ -43,7 +43,7 @@ export const Banner: FC<BannerProps> = ({ children, className, ...props }) => {
   const hasIcon = childrenWhereBannerIcon.some((bool) => bool)
 
   return (
-    <StyledBanner {...props} className={className}>
+    <StyledBanner {...props} className={className} role="alert">
       <Content hasIcon={hasIcon}>{children}</Content>
       <NonMarginDivider color="light" />
     </StyledBanner>
