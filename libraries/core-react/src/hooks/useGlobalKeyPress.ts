@@ -16,7 +16,6 @@ export const useGlobalKeyPress = (
 ): void => {
   const handleGlobalKeyPress = (e: KeyboardEvent) => {
     const { key } = e
-
     switch (key) {
       case targetKey:
         callback(e)

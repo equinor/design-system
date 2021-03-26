@@ -193,7 +193,10 @@ export const ComplexMenu: Story<MenuProps> = () => {
   const openMenu = (focus: 'first' | 'last') => {
     setState({ ...state, isOpen: true, focus })
   }
-  const closeMenu = () => setState({ ...state, isOpen: false })
+  const closeMenu = () => {
+    console.log('close')
+    setState({ ...state, isOpen: false })
+  }
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
@@ -212,7 +215,7 @@ export const ComplexMenu: Story<MenuProps> = () => {
         break
     }
   }
-
+  console.log(isOpen)
   return (
     <Grid style={{ gridAutoFlow: 'row', marginBottom: '20rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
@@ -233,7 +236,7 @@ export const ComplexMenu: Story<MenuProps> = () => {
         aria-labelledby="menuButton"
         open={isOpen}
         anchorEl={buttonRef.current}
-        onClose={() => closeMenu()}
+        onClose={closeMenu}
         focus={focus}
         placement="right-end"
       >

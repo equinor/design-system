@@ -43,20 +43,13 @@ export type MenuProps = {
   /** Which Menu child to focus when open */
   focus?: FocusTarget
   /** onClose handler */
-  onClose?: (e?: React.MouseEvent<ReactNode, MouseEvent>) => void
+  onClose?: () => void
   /** Menu placement relative to anchorEl */
   placement?: Placement
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  {
-    children,
-    anchorEl,
-    onClose: onCloseCallback,
-    open = false,
-    placement,
-    ...rest
-  },
+  { children, anchorEl, onClose: onCloseCallback, open, placement, ...rest },
   ref,
 ) {
   const listRef = useRef<HTMLUListElement>(null)
@@ -71,8 +64,8 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   })
 
   useGlobalKeyPress('Escape', () => {
-    if (onClose !== null) {
-      onClose()
+    if (onCloseCallback !== null) {
+      onCloseCallback()
     }
   })
 
