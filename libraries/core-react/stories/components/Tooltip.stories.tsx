@@ -14,13 +14,6 @@ import { Story, Meta } from '@storybook/react'
 
 import { chrome, explore } from '@equinor/eds-icons'
 
-const icons = {
-  chrome,
-  explore,
-}
-
-Icon.add(icons)
-
 const Body = styled.div`
   margin: 42px;
   display: grid;
@@ -136,7 +129,7 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
           onPointerEnter={() => handleOpen(1)}
           onPointerLeave={handleClose}
         >
-          <Icon title="Chrome disabled button has Tooltip" name="chrome"></Icon>
+          <Icon title="Chrome disabled button has Tooltip" data={chrome}></Icon>
         </Button>
 
         <Tooltip
@@ -159,7 +152,7 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
           >
             <Icon
               title="Safari disabled button has Tooltip"
-              name="explore"
+              data={explore}
             ></Icon>
           </Button>
         </div>
