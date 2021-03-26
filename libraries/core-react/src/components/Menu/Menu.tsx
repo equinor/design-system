@@ -9,7 +9,7 @@ import {
   useOutsideClick,
   usePopper,
   Placement,
-  useEscapePress,
+  useGlobalKeyPress,
 } from '@hooks'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
@@ -70,8 +70,8 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   })
 
-  useEscapePress(() => {
-    if (open && onClose !== null) {
+  useGlobalKeyPress('Escape', () => {
+    if (onClose !== null) {
       onClose()
     }
   })

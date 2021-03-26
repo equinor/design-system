@@ -1,4 +1,4 @@
 export { useOutsideClick } from './useOutsideClick'
 export { useCombinedRefs } from './useCombinedRefs'
 export * from './usePopper'
-export { useEscapePress } from './useEscapePress'
+export { useGlobalKeyPress } from './useGlobalKeyPress'

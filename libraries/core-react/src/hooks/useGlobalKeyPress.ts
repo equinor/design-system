@@ -1,11 +1,24 @@
 import { useEffect } from 'react'
 
-export const useEscapePress = (callback: (e: KeyboardEvent) => void): void => {
+enum KEY {
+  Escape = 'Escape',
+  Enter = 'Enter',
+  Tab = 'Tab',
+  ArrowDown = 'ArrowDown',
+  ArrowUp = 'ArrowUp',
+}
+
+type KEYTYPES = keyof typeof KEY
+
+export const useGlobalKeyPress = (
+  targetKey: KEYTYPES,
+  callback: (e: KeyboardEvent) => void,
+): void => {
   const handleGlobalKeyPress = (e: KeyboardEvent) => {
     const { key } = e
 
     switch (key) {
-      case 'Escape':
+      case targetKey:
         callback(e)
         break
       default:

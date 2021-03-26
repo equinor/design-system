@@ -45,8 +45,12 @@ export default {
 export const Default: Story<PopoverProps> = (args) => {
   const [openState, setOpenState] = useState(false)
 
-  const handleToggle = () => {
-    setOpenState(!openState)
+  const handleOpen = () => {
+    setOpenState(true)
+  }
+
+  const handleClose = () => {
+    setOpenState(false)
   }
 
   const referenceElement = useRef(null)
@@ -57,7 +61,7 @@ export const Default: Story<PopoverProps> = (args) => {
         id="default-popover-anchor"
         aria-controls="default-popover"
         ref={referenceElement}
-        onClick={handleToggle}
+        onClick={handleOpen}
       >
         Click me!
       </Button>
@@ -67,7 +71,7 @@ export const Default: Story<PopoverProps> = (args) => {
         id="default-popover"
         aria-expanded={openState}
         anchorEl={referenceElement.current}
-        onClose={handleToggle}
+        onClose={handleClose}
         open={openState}
       >
         <Popover.Title>Title</Popover.Title>
@@ -75,8 +79,8 @@ export const Default: Story<PopoverProps> = (args) => {
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
         <Card.Actions>
-          <Button onClick={handleToggle}>Cancel</Button>
-          <Button onClick={handleToggle}>OK</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>OK</Button>
         </Card.Actions>
       </Popover>
     </div>

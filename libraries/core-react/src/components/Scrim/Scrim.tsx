@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { useEscapePress } from '@hooks'
+import { useGlobalKeyPress } from '@hooks'
 
 const { height, width, background } = tokens
 
@@ -42,7 +42,7 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
     ref,
   }
 
-  useEscapePress((e: KeyboardEvent) => {
+  useGlobalKeyPress('Escape', (e: KeyboardEvent) => {
     if (isDismissable && onClose) {
       onClose(e, false)
     }
