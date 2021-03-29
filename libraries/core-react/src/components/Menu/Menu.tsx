@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { useMenu } from './Menu.context'
+import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
 import {
@@ -33,6 +33,48 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
       visibility: open ? 'visible' : 'hidden',
     })};
 `
+type MenuContainerProps = MenuProps & {
+  containerRef: React.MutableRefObject<HTMLDivElement>
+}
+const MenuContainer = React.forwardRef<HTMLUListElement, MenuContainerProps>(
+  function MenuContainer(
+    {
+      children,
+      anchorEl,
+      onClose: onCloseCallback,
+      open,
+      containerRef,
+      ...rest
+    },
+    ref,
+  ) {
+    const { setOnClose, onClose } = useMenu()
+
+    useOutsideClick(containerRef, (e: MouseEvent) => {
+      if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
+        onClose()
+      }
+    })
+
+    useGlobalKeyPress('Escape', () => {
+      if (open && onClose !== null) {
+        onClose()
+      }
+    })
+
+    useEffect(() => {
+      if (onClose === null && onCloseCallback) {
+        setOnClose(onCloseCallback)
+      }
+    })
+
+    return (
+      <MenuList {...rest} ref={ref}>
+        {children}
+      </MenuList>
+    )
+  },
+)
 
 export type MenuProps = {
   /** Anchor element for Menu */
@@ -48,24 +90,10 @@ export type MenuProps = {
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  { children, anchorEl, onClose: onCloseCallback, open, placement, ...rest },
+  { anchorEl, open, placement, ...rest },
   ref,
 ) {
   const containerRef = useRef<HTMLDivElement>(null)
-
-  const { setOnClose, onClose } = useMenu()
-
-  useOutsideClick(containerRef, (e: MouseEvent) => {
-    if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
-      onClose()
-    }
-  })
-
-  useGlobalKeyPress('Escape', () => {
-    if (open && onClose !== null) {
-      onClose()
-    }
-  })
 
   const { styles, attributes } = usePopper(
     anchorEl,
@@ -74,23 +102,24 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     placement,
   )
 
-  useEffect(() => {
-    if (onClose === null && onCloseCallback) {
-      setOnClose(onCloseCallback)
-    }
-  })
-
   const props = {
     open,
     style: styles.popper,
     ...attributes.popper,
   }
 
+  const menuProps = {
+    ...rest,
+    anchorEl,
+    open,
+    containerRef,
+  }
+
   return (
     <MenuPaper elevation="raised" ref={containerRef} {...props}>
-      <MenuList {...rest} ref={ref}>
-        {children}
-      </MenuList>
+      <MenuProvider>
+        <MenuContainer {...menuProps} ref={ref} />
+      </MenuProvider>
     </MenuPaper>
   )
 })
