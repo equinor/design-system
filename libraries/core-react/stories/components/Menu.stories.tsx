@@ -193,7 +193,9 @@ export const ComplexMenu: Story<MenuProps> = () => {
   const openMenu = (focus: 'first' | 'last') => {
     setState({ ...state, isOpen: true, focus })
   }
-  const closeMenu = () => setState({ ...state, isOpen: false })
+  const closeMenu = () => {
+    setState({ ...state, isOpen: false })
+  }
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
@@ -208,14 +210,10 @@ export const ComplexMenu: Story<MenuProps> = () => {
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
         break
-      case 'Escape':
-        closeMenu()
-        break
       default:
         break
     }
   }
-
   return (
     <Grid style={{ gridAutoFlow: 'row', marginBottom: '20rem' }}>
       <Typography variant="h4">Click button to open Menu</Typography>
@@ -236,7 +234,7 @@ export const ComplexMenu: Story<MenuProps> = () => {
         aria-labelledby="menuButton"
         open={isOpen}
         anchorEl={buttonRef.current}
-        onClose={() => closeMenu()}
+        onClose={closeMenu}
         focus={focus}
         placement="right-end"
       >
@@ -274,9 +272,6 @@ export const InTopbar: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -345,9 +340,6 @@ export const IconButtons: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -420,9 +412,6 @@ export const Text: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -498,9 +487,6 @@ export const TextWithIcons: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
@@ -618,9 +604,6 @@ export const Placement: Story<MenuProps> = () => {
         break
       case 'ArrowUp':
         isOpen ? closeMenu() : openMenu('last')
-        break
-      case 'Escape':
-        closeMenu()
         break
       default:
         break
