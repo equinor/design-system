@@ -1,9 +1,18 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
-import { Tooltip, TooltipProps, Typography, Button, Table } from '@components'
+import {
+  Tooltip,
+  TooltipProps,
+  Typography,
+  Button,
+  Table,
+  Icon,
+} from '@components'
 import { data, columns } from './helpers/data'
 import { toCellValues } from './helpers/toCellValues'
 import { Story, Meta } from '@storybook/react'
+
+import { chrome, explore } from '@equinor/eds-icons'
 
 const Body = styled.div`
   margin: 42px;
@@ -28,7 +37,7 @@ export default {
   component: Tooltip,
   argTypes: {
     title: {
-      defaultValue: 'Tooltip title',
+      defaultValue: 'This is the tooltip title',
     },
   },
 } as Meta
@@ -36,11 +45,16 @@ export default {
 export const Default: Story<TooltipProps> = (args) => {
   const [openState, setOpenState] = useState(false)
 
+  let timer: ReturnType<typeof setTimeout>
+
   const handleOpen = () => {
-    setOpenState(true)
+    timer = setTimeout(() => {
+      setOpenState(true)
+    }, 300)
   }
 
   const handleClose = () => {
+    clearTimeout(timer)
     setOpenState(false)
   }
 
@@ -48,16 +62,18 @@ export const Default: Story<TooltipProps> = (args) => {
 
   return (
     <div style={{ margin: '3rem 10rem' }}>
-      <Button
+      <Typography
+        link
+        href="#"
         ref={referenceElement}
         aria-describedby="tooltip"
-        onMouseEnter={handleOpen}
+        onMouseOver={handleOpen}
         onMouseLeave={handleClose}
         onFocus={handleOpen}
         onBlur={handleClose}
       >
         Hover me!
-      </Button>
+      </Typography>
       <Tooltip
         open={openState}
         id="tooltip"
@@ -71,11 +87,16 @@ export const Default: Story<TooltipProps> = (args) => {
 export const WithDisabledElements: Story<TooltipProps> = () => {
   const [openState, setOpenState] = useState(null)
 
+  let timer: ReturnType<typeof setTimeout> = null
+
   const handleOpen = (num: 1 | 2) => {
-    setOpenState(num)
+    timer = setTimeout(() => {
+      setOpenState(num)
+    }, 300)
   }
 
   const handleClose = () => {
+    clearTimeout(timer)
     setOpenState(null)
   }
 
@@ -102,18 +123,19 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
       <Wrapper>
         <Button
           disabled
+          variant="ghost_icon"
           aria-describedby="tooltip-disabled-chrome"
           ref={referenceElementOne}
           onPointerEnter={() => handleOpen(1)}
           onPointerLeave={handleClose}
         >
-          Disabled, but hover works!
+          <Icon title="Chrome disabled button has Tooltip" data={chrome}></Icon>
         </Button>
 
         <Tooltip
           id="tooltip-disabled-chrome"
           open={openState === 1}
-          title="Tooltip works!"
+          title="Disabled button, but hover works"
           anchorEl={referenceElementOne.current}
         />
 
@@ -123,15 +145,22 @@ export const WithDisabledElements: Story<TooltipProps> = () => {
           onPointerLeave={handleClose}
           aria-describedby="tooltip-disabled-safari"
         >
-          <Button disabled style={{ pointerEvents: 'none' }}>
-            Just Safari example
+          <Button
+            disabled
+            style={{ pointerEvents: 'none' }}
+            variant="ghost_icon"
+          >
+            <Icon
+              title="Safari disabled button has Tooltip"
+              data={explore}
+            ></Icon>
           </Button>
         </div>
 
         <Tooltip
           id="tooltip-disabled-safari"
           open={openState === 2}
-          title="Tooltip works!"
+          title="Disabled button, but hover works"
           anchorEl={referenceElementTwo.current}
         />
       </Wrapper>
@@ -149,14 +178,19 @@ export const TableCellsWithTooltip: Story<TooltipProps> = () => {
     openCell: null,
   })
 
+  let timer: ReturnType<typeof setTimeout>
+
   const handleOpen = (openRow: number, openCell: number) => {
-    setState({
-      openRow,
-      openCell,
-    })
+    timer = setTimeout(() => {
+      setState({
+        openRow,
+        openCell,
+      })
+    }, 300)
   }
 
   const handleClose = () => {
+    clearTimeout(timer)
     setState({ openRow: null, openCell: null })
   }
 
@@ -183,8 +217,10 @@ export const TableCellsWithTooltip: Story<TooltipProps> = () => {
                 <Table.Cell key={cellValue}>
                   <span
                     ref={createdRef}
-                    onMouseEnter={() => handleOpen(rowIndex, cellIndex)}
+                    onMouseOver={() => handleOpen(rowIndex, cellIndex)}
                     onMouseLeave={handleClose}
+                    onFocus={() => handleOpen(rowIndex, cellIndex)}
+                    onBlur={handleClose}
                     style={{
                       position: 'relative',
                       display: 'inline-block',
