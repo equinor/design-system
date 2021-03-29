@@ -1,11 +1,10 @@
 import * as React from 'react'
-import { useEffect, useRef, ReactNode, HTMLAttributes } from 'react'
+import { useEffect, useRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { useMenu } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
 import {
-  useCombinedRefs,
   useOutsideClick,
   usePopper,
   Placement,
@@ -18,11 +17,11 @@ const {
   enabled: { border },
 } = tokens
 
-type StyledProps = {
+type MenuPaperProps = {
   open: boolean
 }
 
-const StyledPaper = styled(Paper)<StyledProps>`
+const MenuPaper = styled(Paper)<MenuPaperProps>`
   position: absolute;
   z-index: 150;
   width: fit-content;
@@ -52,26 +51,25 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   { children, anchorEl, onClose: onCloseCallback, open, placement, ...rest },
   ref,
 ) {
-  const listRef = useRef<HTMLUListElement>(null)
-  const popperRef = useRef<HTMLDivElement | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const { setOnClose, onClose } = useMenu()
 
-  useOutsideClick(listRef, (e: MouseEvent) => {
+  useOutsideClick(containerRef, (e: MouseEvent) => {
     if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
       onClose()
     }
   })
 
   useGlobalKeyPress('Escape', () => {
-    if (onCloseCallback !== null) {
-      onCloseCallback()
+    if (open && onClose !== null) {
+      onClose()
     }
   })
 
   const { styles, attributes } = usePopper(
     anchorEl,
-    popperRef.current,
+    containerRef.current,
     null,
     placement,
   )
@@ -80,7 +78,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     if (onClose === null && onCloseCallback) {
       setOnClose(onCloseCallback)
     }
-  }, [listRef.current])
+  })
 
   const props = {
     open,
@@ -89,10 +87,10 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   return (
-    <StyledPaper elevation="raised" ref={popperRef} {...props}>
-      <MenuList {...rest} ref={useCombinedRefs<HTMLUListElement>(ref, listRef)}>
+    <MenuPaper elevation="raised" ref={containerRef} {...props}>
+      <MenuList {...rest} ref={ref}>
         {children}
       </MenuList>
-    </StyledPaper>
+    </MenuPaper>
   )
 })
