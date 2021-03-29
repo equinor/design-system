@@ -90,7 +90,7 @@ export type MenuProps = {
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  { anchorEl, open, placement, ...rest },
+  { anchorEl, open, placement = 'auto', ...rest },
   ref,
 ) {
   const containerRef = useRef<HTMLDivElement>(null)
