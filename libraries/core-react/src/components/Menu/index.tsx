@@ -1,8 +1,6 @@
-import * as React from 'react'
 import { Menu as BaseMenu, MenuProps } from './Menu'
 import { MenuItem } from './MenuItem'
 import { MenuSection } from './MenuSection'
-import { MenuProvider } from './Menu.context'
 
 type MenuType = typeof BaseMenu & {
   // Deprecated
@@ -13,13 +11,7 @@ type MenuType = typeof BaseMenu & {
   Section: typeof MenuSection
 }
 
-const MenuWrapper = ({ children, ...rest }: MenuProps): JSX.Element => (
-  <MenuProvider>
-    <BaseMenu {...rest}>{children}</BaseMenu>
-  </MenuProvider>
-)
-
-const Menu = MenuWrapper as MenuType
+const Menu = BaseMenu as MenuType
 // Deprecated
 Menu.MenuItem = MenuItem
 Menu.MenuSection = MenuSection
