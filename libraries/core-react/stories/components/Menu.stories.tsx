@@ -24,9 +24,6 @@ export default {
     Item: Menu.Item,
     Section: Menu.Section,
   },
-  parameters: {
-    viewMode: 'story',
-  },
 } as Meta
 
 const onClick = (event: React.MouseEvent) => {
