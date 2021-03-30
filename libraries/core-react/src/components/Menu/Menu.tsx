@@ -50,6 +50,12 @@ const MenuContainer = React.forwardRef<HTMLUListElement, MenuContainerProps>(
   ) {
     const { setOnClose, onClose } = useMenu()
 
+    useEffect(() => {
+      if (onClose === null && onCloseCallback) {
+        setOnClose(onCloseCallback)
+      }
+    })
+
     useOutsideClick(containerRef, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
         onClose()
@@ -59,12 +65,6 @@ const MenuContainer = React.forwardRef<HTMLUListElement, MenuContainerProps>(
     useGlobalKeyPress('Escape', () => {
       if (open && onClose !== null) {
         onClose()
-      }
-    })
-
-    useEffect(() => {
-      if (onClose === null && onCloseCallback) {
-        setOnClose(onCloseCallback)
       }
     })
 
