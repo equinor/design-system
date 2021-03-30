@@ -26,6 +26,12 @@ export default {
   },
 } as Meta
 
+const StoryCenter = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  margin: '10rem',
+})
+
 const onClick = (event: React.MouseEvent) => {
   action('clicked')(event)
   event.stopPropagation()
@@ -71,7 +77,7 @@ export const Default: Story<MenuProps> = (args) => {
   }
 
   return (
-    <div style={{ margin: '3rem' }}>
+    <StoryCenter>
       <Button
         ref={anchorRef}
         id="anchor-default"
@@ -84,9 +90,9 @@ export const Default: Story<MenuProps> = (args) => {
         Click to open Menu!
       </Button>
       <Menu
+        open={isOpen}
         {...args}
         id="menu-default"
-        open={isOpen}
         focus={focus}
         onClose={closeMenu}
         anchorEl={anchorRef.current}
@@ -95,8 +101,13 @@ export const Default: Story<MenuProps> = (args) => {
         <Menu.Item onClick={onClick}>Bearing</Menu.Item>
         <Menu.Item onClick={onClick}>Cable</Menu.Item>
       </Menu>
-    </div>
+    </StoryCenter>
   )
+}
+
+Default.bind({})
+Default.args = {
+  placement: 'bottom-end',
 }
 
 export const ComplexMenu: Story<MenuProps> = () => {
@@ -132,7 +143,7 @@ export const ComplexMenu: Story<MenuProps> = () => {
     }
   }
   return (
-    <div>
+    <StoryCenter>
       <Button
         ref={anchorRef}
         id="anchor-complex"
@@ -256,14 +267,6 @@ export const ComplexMenu: Story<MenuProps> = () => {
           </Menu.Item>
         </Menu.Section>
       </Menu>
-    </div>
+    </StoryCenter>
   )
 }
-
-ComplexMenu.decorators = [
-  (Story) => (
-    <div style={{ padding: '10rem 32px' }}>
-      <Story />
-    </div>
-  ),
-]
