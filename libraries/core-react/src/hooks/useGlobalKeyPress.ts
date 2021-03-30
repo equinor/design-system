@@ -14,22 +14,22 @@ export const useGlobalKeyPress = (
   targetKey: KEYTYPES,
   callback: (e: KeyboardEvent) => void,
 ): void => {
-  const handleGlobalKeyPress = (e: KeyboardEvent) => {
-    const { key } = e
-    switch (key) {
-      case targetKey:
-        callback(e)
-        break
-      default:
-        break
-    }
-  }
-
   useEffect(() => {
+    const handleGlobalKeyPress = (e: KeyboardEvent) => {
+      const { key } = e
+      switch (key) {
+        case targetKey:
+          callback(e)
+          break
+        default:
+          break
+      }
+    }
+
     document.addEventListener('keydown', handleGlobalKeyPress, true)
 
     return () => {
       document.removeEventListener('keydown', handleGlobalKeyPress, true)
     }
-  }, [])
+  }, [targetKey, callback])
 }
