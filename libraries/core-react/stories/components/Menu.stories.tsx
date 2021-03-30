@@ -29,15 +29,6 @@ export default {
   },
 } as Meta
 
-const Grid = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 32px;
-  grid-auto-flow: column;
-  width: auto;
-  height: auto;
-`
-
 const onClick = (event: React.MouseEvent) => {
   action('clicked')(event)
   event.stopPropagation()
@@ -96,12 +87,12 @@ export const Default: Story<MenuProps> = (args) => {
         Click to open Menu!
       </Button>
       <Menu
+        {...args}
         id="menu-default"
         open={isOpen}
-        onClose={closeMenu}
         focus={focus}
+        onClose={closeMenu}
         anchorEl={anchorRef.current}
-        {...args}
       >
         <Menu.Item onClick={onClick}>Pressure</Menu.Item>
         <Menu.Item onClick={onClick}>Bearing</Menu.Item>
@@ -163,7 +154,7 @@ export const ComplexMenu: Story<MenuProps> = () => {
         anchorEl={anchorRef.current}
         onClose={closeMenu}
         focus={focus}
-        placement="right-end"
+        placement="right"
       >
         <Menu.Item onClick={onClick}>
           <Icon
@@ -271,3 +262,11 @@ export const ComplexMenu: Story<MenuProps> = () => {
     </div>
   )
 }
+
+ComplexMenu.decorators = [
+  (Story) => (
+    <div style={{ padding: '10rem 32px' }}>
+      <Story />
+    </div>
+  ),
+]
