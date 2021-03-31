@@ -110,7 +110,7 @@ Default.args = {
   placement: 'bottom-end',
 }
 
-export const ComplexMenu: Story<MenuProps> = () => {
+export const Complex: Story<MenuProps> = () => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const [focus, setFocus] = React.useState<'first' | 'last'>(null)
   const anchorRef = React.useRef<HTMLButtonElement>(null)

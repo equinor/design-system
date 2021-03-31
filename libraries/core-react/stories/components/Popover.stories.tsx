@@ -5,20 +5,6 @@ import { Meta, Story } from '@storybook/react'
 import { PlacementValues } from '@hooks'
 
 const { Title, Content } = Popover
-const { Actions } = Card
-
-const Body = styled.div`
-  margin: 42px;
-  display: grid;
-  grid-auto-columns: auto;
-`
-
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 64px;
-  grid-template-columns: repeat(3, fit-content(100%));
-`
 
 const StoryCenter = styled.div({
   display: 'flex',
@@ -26,16 +12,12 @@ const StoryCenter = styled.div({
   margin: '10rem',
 })
 
-const TextWrapper = styled.div`
-  margin-bottom: 32px;
-`
 export default {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
     Title,
     Content,
-    Actions,
   },
   argTypes: {
     placement: {
