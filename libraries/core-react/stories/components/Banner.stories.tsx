@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { Banner, Icon, Button, BannerProps } from '@components'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
@@ -12,10 +11,6 @@ const icons = {
 }
 
 Icon.add(icons)
-
-const Wrapper = styled(Banner.Actions)`
-  display: flex;
-`
 
 export default {
   title: 'Components/Banner',
@@ -74,12 +69,10 @@ export const TextAndAction: Story<BannerProps> = () => (
         You are signed on with another account than Equinor account:
         name.lastname@mail.com.
       </Banner.Message>
-      <Wrapper>
-        <Button variant="ghost" style={{ marginRight: '1rem' }}>
-          Sign out
-        </Button>
+      <Banner.Actions>
+        <Button variant="ghost">Sign out</Button>
         <Button variant="ghost">OK</Button>
-      </Wrapper>
+      </Banner.Actions>
     </Banner>
     <Banner>
       <Banner.Message>
@@ -87,12 +80,10 @@ export const TextAndAction: Story<BannerProps> = () => (
         name.lastname@mail.com. This means you have to do something to be able
         to use this service.
       </Banner.Message>
-      <Wrapper placement="bottom">
-        <Button variant="ghost" style={{ marginRight: '1rem' }}>
-          Sign out
-        </Button>
+      <Banner.Actions placement="bottom">
+        <Button variant="ghost">Sign out</Button>
         <Button variant="ghost">OK</Button>
-      </Wrapper>
+      </Banner.Actions>
     </Banner>
   </>
 )
@@ -121,10 +112,10 @@ export const IconAndTextAndActions: Story<BannerProps> = () => (
         why the actions have been located at the bottom using the placement prop
         instead.
       </Banner.Message>
-      <Wrapper placement="bottom">
-        <Button style={{ marginRight: '1rem' }}>First action</Button>
+      <Banner.Actions placement="bottom">
+        <Button>First action</Button>
         <Button color="secondary">Second action</Button>
-      </Wrapper>
+      </Banner.Actions>
     </Banner>
   </>
 )

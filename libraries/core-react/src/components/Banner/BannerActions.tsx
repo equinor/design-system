@@ -13,7 +13,9 @@ type StyledBannerActionsProps = {
 }
 
 const StyledBannerActions = styled.div<StyledBannerActionsProps>`
+  display: flex;
   margin-left: ${enabled.spacings.left};
+  grid-gap: 8px;
   grid-column: ${({ placement }) => (placement === 'bottom' ? '1/-1' : 'auto')};
   ${({ placement }) =>
     placement === 'bottom' && {
