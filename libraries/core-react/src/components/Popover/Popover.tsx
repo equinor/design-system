@@ -110,7 +110,7 @@ export type PopoverProps = {
   /**  On Close callback */
   onClose?: () => void
   /** Anchor element reference */
-  anchorEl: HTMLElement
+  anchorEl?: HTMLElement | null
   /** Is Popover open */
   open: boolean
 } & HTMLAttributes<HTMLDivElement>
