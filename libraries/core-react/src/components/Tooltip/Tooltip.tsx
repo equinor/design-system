@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
+import * as ReactDom from 'react-dom'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
 import { usePopper, Placement } from '@hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
-const StyledTooltip = styled.div<Pick<TooltipProps, 'open'>>`
+const StyledTooltip = styled.div<{ open: boolean }>`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   z-index: 350;
@@ -78,48 +79,78 @@ export type TooltipProps = {
   placement?: Placement
   /** Tooltip title */
   title?: string
-  /** Anchor element reference */
-  anchorEl?: HTMLElement | null
-  /** Is tooltip open */
-  open: boolean
+  /** Tooltip anchor element */
+  children: React.ReactElement
 } & HTMLAttributes<HTMLDivElement>
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
-  function Tooltip(
-    { className, title, anchorEl, placement = 'bottom', open = false, ...rest },
-    ref,
-  ) {
+  function Tooltip({ title, placement = 'bottom', children, ...rest }, ref) {
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
+    const [open, setOpen] = useState(false)
+    const anchorRef = useRef<HTMLDivElement>()
+    const tooltipId = 'eds-tooltip-container'
+    const tooltipContainerEl = document.getElementById(tooltipId)
+
+    React.useEffect(() => {
+      if (document.getElementById(tooltipId) === null) {
+        const tooltipContainerElement = document.createElement('div')
+        tooltipContainerElement.id = tooltipId
+        document.body.appendChild(tooltipContainerElement)
+      }
+    }, [])
+
+    const openTooltip = () => setOpen(true)
+    const closeTooltip = () => setOpen(false)
 
     const { styles, attributes } = usePopper(
-      anchorEl,
+      anchorRef.current,
       popperRef.current,
       arrowRef,
       placement,
     )
 
     const props = {
-      ...rest,
       open,
+      ...rest,
       ...attributes.popper,
-      className,
     }
 
+    const updatedChildren = React.cloneElement(children, {
+      ref: anchorRef,
+      onMouseOver: openTooltip,
+      onMouseLeave: closeTooltip,
+      onPointerEnter: openTooltip,
+      onPointerLeave: closeTooltip,
+      onBlur: closeTooltip,
+      onFocus: openTooltip,
+    })
+
     return (
-      <StyledTooltip
-        role="tooltip"
-        ref={popperRef}
-        style={styles.popper}
-        {...props}
-      >
-        {title}
-        <ArrowWrapper ref={setArrowRef} style={styles.arrow} className="arrow">
-          <TooltipArrow className="arrowSvg">
-            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-          </TooltipArrow>
-        </ArrowWrapper>
-      </StyledTooltip>
+      <>
+        {tooltipContainerEl &&
+          ReactDom.createPortal(
+            <StyledTooltip
+              role="tooltip"
+              ref={popperRef}
+              style={styles.popper}
+              {...props}
+            >
+              {title}
+              <ArrowWrapper
+                ref={setArrowRef}
+                style={styles.arrow}
+                className="arrow"
+              >
+                <TooltipArrow className="arrowSvg">
+                  <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+                </TooltipArrow>
+              </ArrowWrapper>
+            </StyledTooltip>,
+            tooltipContainerEl,
+          )}
+        {updatedChildren}
+      </>
     )
   },
 )

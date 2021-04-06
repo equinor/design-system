@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {
   Tooltip,
@@ -12,7 +12,7 @@ import { data, columns } from './helpers/data'
 import { toCellValues } from './helpers/toCellValues'
 import { Story, Meta } from '@storybook/react'
 
-import { chrome, explore } from '@equinor/eds-icons'
+import { explore } from '@equinor/eds-icons'
 
 const StoryCenter = styled.div({
   display: 'flex',
@@ -30,147 +30,81 @@ export default {
   },
 } as Meta
 
-export const Default: Story<TooltipProps> = (args) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const anchorRef = useRef<HTMLButtonElement>()
-
-  const openTooltip = () => setIsOpen(true)
-  const closeTooltip = () => setIsOpen(false)
-
-  return (
-    <StoryCenter>
-      <Typography
-        link
-        href="#"
-        ref={anchorRef}
-        aria-describedby="tooltip"
-        onMouseOver={openTooltip}
-        onMouseLeave={closeTooltip}
-        onFocus={openTooltip}
-        onBlur={closeTooltip}
-      >
+export const Default: Story<TooltipProps> = (args) => (
+  <StoryCenter>
+    <Tooltip id="tooltip" {...args}>
+      <Typography link href="#" aria-describedby="tooltip">
         Hover me!
       </Typography>
-      <Tooltip
-        open={isOpen}
-        id="tooltip"
-        anchorEl={anchorRef.current}
-        {...args}
-      />
-    </StoryCenter>
-  )
-}
+    </Tooltip>
+  </StoryCenter>
+)
+// export const WithDelay: Story<TooltipProps> = () => {
+//   const [isOpen, setIsOpen] = useState(false)
+//   const anchorRef = useRef<HTMLButtonElement>()
+//   let timer: number
 
-export const WithDelay: Story<TooltipProps> = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const anchorRef = useRef<HTMLButtonElement>()
-  let timer: number
+//   const openTooltip = () => {
+//     timer = setTimeout(() => {
+//       setIsOpen(true)
+//     }, 300)
+//   }
 
-  const openTooltip = () => {
-    timer = setTimeout(() => {
-      setIsOpen(true)
-    }, 300)
-  }
+//   const closeTooltip = () => {
+//     clearTimeout(timer)
+//     setIsOpen(false)
+//   }
 
-  const closeTooltip = () => {
-    clearTimeout(timer)
-    setIsOpen(false)
-  }
+//   return (
+//     <StoryCenter>
+//       <Typography
+//         link
+//         href="#"
+//         ref={anchorRef}
+//         aria-describedby="tooltip-delay"
+//         onMouseOver={openTooltip}
+//         onMouseLeave={closeTooltip}
+//         onFocus={openTooltip}
+//         onBlur={closeTooltip}
+//       >
+//         Hover me!
+//       </Typography>
+//       <Tooltip
+//         open={isOpen}
+//         title="Tooltip title"
+//         id="tooltip-delay"
+//         anchorEl={anchorRef.current}
+//       />
+//     </StoryCenter>
+//   )
+// }
 
-  return (
-    <StoryCenter>
-      <Typography
-        link
-        href="#"
-        ref={anchorRef}
-        aria-describedby="tooltip-delay"
-        onMouseOver={openTooltip}
-        onMouseLeave={closeTooltip}
-        onFocus={openTooltip}
-        onBlur={closeTooltip}
-      >
-        Hover me!
-      </Typography>
-      <Tooltip
-        open={isOpen}
-        title="Tooltip title"
-        id="tooltip-delay"
-        anchorEl={anchorRef.current}
-      />
-    </StoryCenter>
-  )
-}
-
-WithDelay.parameters = {
-  docs: {
-    storyDescription: 'Tooltip opening is delayed with `300ms`',
-  },
-}
-
-export const Disabled: Story<TooltipProps> = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const anchorRef = useRef<HTMLButtonElement>()
-
-  const openTooltip = () => setIsOpen(true)
-  const closeTooltip = () => setIsOpen(false)
-
-  return (
-    <StoryCenter>
-      <Button
-        disabled
-        variant="ghost_icon"
-        aria-describedby="tooltip-disabled-chrome"
-        ref={anchorRef}
-        onPointerEnter={openTooltip}
-        onPointerLeave={closeTooltip}
-      >
-        <Icon title="Chrome disabled button has Tooltip" data={chrome}></Icon>
-      </Button>
-      <Tooltip
-        id="tooltip-disabled-chrome"
-        open={isOpen}
-        title="Disabled button, but hover works"
-        anchorEl={anchorRef.current}
-      />
-    </StoryCenter>
-  )
-}
-Disabled.parameters = {
-  docs: {
-    storyDescription:
-      'Firefox, Edge and Chrome supports tooltip on disabled elements. We found onPointerEnter and onPointerLeave was the best way to trigger events on disabled elements.',
-  },
-}
+// WithDelay.parameters = {
+//   docs: {
+//     storyDescription: 'Tooltip opening is delayed with `300ms`',
+//   },
+// }
 
 export const DisabledInSafari: Story<TooltipProps> = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const anchorRef = useRef<HTMLDivElement>()
-
-  const openTooltip = () => setIsOpen(true)
-  const closeTooltip = () => setIsOpen(false)
-
   return (
     <StoryCenter>
-      <div
-        ref={anchorRef}
-        onPointerEnter={openTooltip}
-        onPointerLeave={closeTooltip}
-        aria-describedby="tooltip-disabled-safari"
-      >
-        <Button disabled style={{ pointerEvents: 'none' }} variant="ghost_icon">
-          <Icon
-            title="Safari disabled button has Tooltip"
-            data={explore}
-          ></Icon>
-        </Button>
-      </div>
-
       <Tooltip
         id="tooltip-disabled-safari"
-        open={isOpen}
         title="Disabled button, but hover works"
-        anchorEl={anchorRef.current}
-      />
+      >
+        <span>
+          <Button
+            disabled
+            variant="ghost_icon"
+            style={{ pointerEvents: 'none' }}
+          >
+            <Icon
+              title="Safari disabled button has Tooltip"
+              data={explore}
+            ></Icon>
+          </Button>
+        </span>
+      </Tooltip>
     </StoryCenter>
   )
 }
@@ -184,31 +118,6 @@ DisabledInSafari.parameters = {
 
 export const OnTableCells: Story<TooltipProps> = () => {
   const cellValues = toCellValues(data, columns)
-  const [state, setState] = useState<{
-    openRow: number
-    openCell: number
-  }>({
-    openRow: null,
-    openCell: null,
-  })
-
-  let timer: ReturnType<typeof setTimeout>
-
-  const handleOpen = (openRow: number, openCell: number) => {
-    timer = setTimeout(() => {
-      setState({
-        openRow,
-        openCell,
-      })
-    }, 300)
-  }
-
-  const handleClose = () => {
-    clearTimeout(timer)
-    setState({ openRow: null, openCell: null })
-  }
-
-  const { openRow, openCell } = state
 
   return (
     <Table>
@@ -223,32 +132,17 @@ export const OnTableCells: Story<TooltipProps> = () => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {cellValues?.map((row, rowIndex) => (
+        {cellValues?.map((row) => (
           <Table.Row key={row.toString()}>
-            {row.map((cellValue, cellIndex) => {
-              const createdRef = React.useRef(null)
+            {row.map((cellValue) => {
               return (
-                <Table.Cell key={cellValue}>
-                  <span
-                    ref={createdRef}
-                    onMouseOver={() => handleOpen(rowIndex, cellIndex)}
-                    onMouseLeave={handleClose}
-                    onFocus={() => handleOpen(rowIndex, cellIndex)}
-                    onBlur={handleClose}
-                    style={{
-                      position: 'relative',
-                      display: 'inline-block',
-                    }}
-                  >
-                    {cellValue}
-                    <Tooltip
-                      open={openRow === rowIndex && openCell === cellIndex}
-                      placement="top"
-                      title={`Tooltip title for ` + cellValue}
-                      anchorEl={createdRef.current}
-                    />
-                  </span>
-                </Table.Cell>
+                <Tooltip
+                  key={cellValue}
+                  placement="top"
+                  title={`Tooltip title for ` + cellValue}
+                >
+                  <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+                </Tooltip>
               )
             })}
           </Table.Row>

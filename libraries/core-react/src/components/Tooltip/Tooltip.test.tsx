@@ -1,19 +1,18 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, screen } from '@utils'
-import { waitFor } from '@testing-library/react'
+import {
+  fireEvent,
+  waitFor,
+  render,
+  cleanup,
+  screen,
+} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Tooltip } from '.'
-import type { TooltipProps } from './Tooltip'
 
-// We override Tooltip for testing and set props to partial because AnchorEl is applied to children in custom render function
-const TestTooltip = Tooltip as React.ForwardRefExoticComponent<
-  Partial<TooltipProps>
->
-
-const StyledTooltip = styled(TestTooltip)`
+const StyledTooltip = styled(Tooltip)`
   background: red;
 `
 
@@ -21,22 +20,53 @@ afterEach(cleanup)
 
 describe('Tooltip', () => {
   it('can extend the css for the component', async () => {
-    render(<StyledTooltip open title="Tooltip" />)
-    const container = screen.getByRole('tooltip')
-
-    await waitFor(() => expect(container).toHaveStyleRule('background', 'red'))
-  })
-  it('is visible when open is true & anchorEl is set', async () => {
-    render(<TestTooltip open placement="right-start" />)
-    const container = screen.getByRole('tooltip')
-    await waitFor(() =>
-      expect(container).toHaveStyleRule('visibility', 'visible'),
+    render(
+      <StyledTooltip title="Tooltip">
+        <span>Test</span>
+      </StyledTooltip>,
     )
-    expect(container).toHaveAttribute('data-popper-placement', 'right-start')
+
+    const content = screen.getByText('Test')
+
+    fireEvent.mouseOver(content)
+
+    const tooltip = screen.getByRole('tooltip')
+
+    await waitFor(() => expect(tooltip).toHaveStyleRule('background', 'red'))
+  })
+  it('is visible when content is being hovered', async () => {
+    render(
+      <Tooltip title="Tooltip" placement="right-start">
+        <div>Test</div>
+      </Tooltip>,
+    )
+    const content = screen.getByText('Test')
+
+    fireEvent.mouseOver(content)
+
+    const tooltip = screen.getByRole('tooltip')
+
+    await waitFor(() =>
+      expect(tooltip).toHaveStyleRule('visibility', 'visible'),
+    )
+    expect(tooltip).toHaveAttribute('data-popper-placement', 'right-start')
   })
   it('renders with a title', async () => {
-    render(<TestTooltip open placement="right-start" title="Tooltip Text" />)
-    const title = screen.getByText('Tooltip Text')
-    await waitFor(() => expect(title).toBeDefined())
+    render(
+      <Tooltip title="Tooltip" placement="right-start">
+        <span>Test</span>
+      </Tooltip>,
+    )
+
+    const content = screen.getByText('Test')
+
+    fireEvent.mouseOver(content)
+
+    const tooltip = screen.getByRole('tooltip')
+
+    await waitFor(() => {
+      expect(content).toBeDefined()
+      expect(tooltip).toBeDefined()
+    })
   })
 })
