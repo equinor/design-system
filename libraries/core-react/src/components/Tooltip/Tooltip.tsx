@@ -109,7 +109,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       arrowRef,
       placement,
     )
-    console.log('test')
+
     const props = {
       open,
       ...rest,
