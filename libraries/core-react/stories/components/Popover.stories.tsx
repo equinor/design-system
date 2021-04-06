@@ -1,35 +1,23 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Typography, Button, Popover, PopoverProps, Card } from '@components'
 import { Meta, Story } from '@storybook/react'
 import { PlacementValues } from '@hooks'
 
 const { Title, Content } = Popover
-const { Actions } = Card
 
-const Body = styled.div`
-  margin: 42px;
-  display: grid;
-  grid-auto-columns: auto;
-`
+const StoryCenter = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  margin: '10rem',
+})
 
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 64px;
-  grid-template-columns: repeat(3, fit-content(100%));
-`
-
-const TextWrapper = styled.div`
-  margin-bottom: 32px;
-`
 export default {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
     Title,
     Content,
-    Actions,
   },
   argTypes: {
     placement: {
@@ -43,23 +31,28 @@ export default {
 } as Meta
 
 export const Default: Story<PopoverProps> = (args) => {
-  const [openState, setOpenState] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => {
-    setOpenState(true)
+    setIsOpen(true)
   }
 
   const handleClose = () => {
-    setOpenState(false)
+    setIsOpen(false)
   }
 
   const referenceElement = useRef(null)
 
+  useEffect(() => {
+    setIsOpen(args.open)
+  }, [args.open])
+
   return (
-    <div style={{ margin: '10em' }}>
+    <StoryCenter>
       <Button
         id="default-popover-anchor"
         aria-controls="default-popover"
+        aria-expanded={isOpen}
         ref={referenceElement}
         onClick={handleOpen}
       >
@@ -67,12 +60,11 @@ export const Default: Story<PopoverProps> = (args) => {
       </Button>
 
       <Popover
+        open={isOpen}
         {...args}
         id="default-popover"
-        aria-expanded={openState}
         anchorEl={referenceElement.current}
         onClose={handleClose}
-        open={openState}
       >
         <Popover.Title>Title</Popover.Title>
         <Popover.Content>
@@ -83,105 +75,105 @@ export const Default: Story<PopoverProps> = (args) => {
           <Button onClick={handleClose}>OK</Button>
         </Card.Actions>
       </Popover>
-    </div>
+    </StoryCenter>
   )
 }
 
-export const ActivationTypes: Story<PopoverProps> = () => {
-  const [active, setActive] = React.useState(null)
+export const ActivateOnClick: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = React.useState<boolean>(false)
+  const anchorRef = React.useRef<HTMLButtonElement>(null)
 
-  const handleClick = (num: 1 | 2) => {
-    setActive(num)
-  }
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
 
-  let timer: ReturnType<typeof setTimeout> = null
+  return (
+    <StoryCenter>
+      <Button
+        id="click-popover-anchor"
+        aria-controls="click-popover"
+        ref={anchorRef}
+        onClick={openPopover}
+      >
+        Click to activate
+      </Button>
+
+      <Popover
+        id="click-popover"
+        aria-expanded={isOpen}
+        anchorEl={anchorRef.current}
+        onClose={closePopover}
+        open={isOpen}
+      >
+        <Popover.Title>Title</Popover.Title>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
+        <Button onClick={closePopover}>OK</Button>
+      </Popover>
+    </StoryCenter>
+  )
+}
+
+ActivateOnClick.parameters = {
+  docs: {
+    storyDescription:
+      'Popovers can be activated by hover or click. To dismiss a popover, use the close icon, press the ESC key, open another popover or click outside the popover. If there are no actions in the popover, then the close icon should be the first focusable element.',
+  },
+}
+
+export const ActivateOnHover: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = React.useState<boolean>(false)
+  const anchorRef = React.useRef<HTMLButtonElement>(null)
+  let timer: number = null
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
 
   const handleHover = () => {
     timer = setTimeout(() => {
-      setActive(2)
+      openPopover()
     }, 300)
   }
 
   const handleClose = () => {
     clearTimeout(timer)
-    setActive(null)
+    closePopover()
   }
 
-  const Content = () => (
-    <>
-      <Popover.Title>Title </Popover.Title>
-      <Popover.Content>
-        <Typography variant="body_short">Content</Typography>
-      </Popover.Content>
-      <Card.Actions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>OK</Button>
-      </Card.Actions>
-    </>
-  )
-  const refOne = useRef(null)
-  const refTwo = useRef(null)
-
   return (
-    <Body>
-      <TextWrapper>
-        <Typography variant="h3">Activation types</Typography>
-        <Typography variant="body_long">
-          Popovers can be activated by hover or click. To dismiss a popover, use
-          the close icon, press the ESC key, open another popover or click
-          outside the popover. If there are no actions in the popover, then the
-          close icon should be the first focusable element.
-        </Typography>
-      </TextWrapper>
-      <Wrapper>
-        <Button
-          id="click-popover-anchor"
-          aria-controls="click-popover"
-          ref={refOne}
-          onClick={() => handleClick(1)}
-        >
-          Activate on click
-        </Button>
+    <StoryCenter>
+      <Button
+        id="hover-popover-anchor"
+        aria-controls="hover-popover"
+        aria-expanded={isOpen}
+        ref={anchorRef}
+        onMouseOver={handleHover}
+        onFocus={openPopover}
+        onBlur={handleClose}
+      >
+        Hover to activate
+      </Button>
 
-        <Popover
-          id="click-popover"
-          aria-expanded={active === 1}
-          anchorEl={refOne.current}
-          onClose={handleClose}
-          open={active === 1}
-        >
-          <Content />
-        </Popover>
-      </Wrapper>
-      <Typography variant="body_long">
-        Remember to use both onMouseEnter and onFocus attributes to your trigger
-        element to be able to open the popover by tab iterations. A timeout
-        delay on onMouseEnter is recommended to avoid unwanted trigger of the
-        popup while browsing.
-      </Typography>
-      <Wrapper>
-        <Button
-          id="anchor-hover-popover"
-          aria-controls="hover-popover"
-          ref={refTwo}
-          onMouseOver={handleHover}
-          onFocus={() => handleClick(2)}
-          onMouseLeave={handleClose}
-          onBlur={handleClose}
-        >
-          On Hover
-        </Button>
-
-        <Popover
-          id="hover-popover"
-          aria-expanded={active === 2}
-          anchorEl={refTwo.current}
-          onClose={handleClose}
-          open={active === 2}
-        >
-          <Content />
-        </Popover>
-      </Wrapper>
-    </Body>
+      <Popover
+        id="hover-popover"
+        anchorEl={anchorRef.current}
+        onClose={handleClose}
+        open={isOpen}
+        placement="top"
+      >
+        <Popover.Title>Title</Popover.Title>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
+        <Button onClick={handleClose}>OK</Button>
+      </Popover>
+    </StoryCenter>
   )
+}
+
+ActivateOnHover.parameters = {
+  docs: {
+    storyDescription:
+      'Remember to use both `onMouseEnter` and `onFocus` attributes to your trigger element to be able to open the popover. A timeout delay (300ms) on `onMouseEnter` is recommended to avoid unwanted trigger while browsing.',
+  },
 }

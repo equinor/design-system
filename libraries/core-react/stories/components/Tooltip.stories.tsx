@@ -14,23 +14,11 @@ import { Story, Meta } from '@storybook/react'
 
 import { chrome, explore } from '@equinor/eds-icons'
 
-const Body = styled.div`
-  margin: 42px;
-  display: grid;
-  grid-auto-columns: auto;
-`
-
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 64px;
-  grid-template-columns: repeat(3, fit-content(100%));
-`
-
-const TextWrapper = styled.div`
-  margin-bottom: 32px;
-  width: 800px;
-`
+const StoryCenter = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  margin: '2.5rem',
+})
 
 export default {
   title: 'Components/Tooltip',
@@ -43,132 +31,158 @@ export default {
 } as Meta
 
 export const Default: Story<TooltipProps> = (args) => {
-  const [openState, setOpenState] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const anchorRef = useRef<HTMLButtonElement>()
 
-  let timer: ReturnType<typeof setTimeout>
-
-  const handleOpen = () => {
-    timer = setTimeout(() => {
-      setOpenState(true)
-    }, 300)
-  }
-
-  const handleClose = () => {
-    clearTimeout(timer)
-    setOpenState(false)
-  }
-
-  const referenceElement = useRef(null)
+  const openTooltip = () => setIsOpen(true)
+  const closeTooltip = () => setIsOpen(false)
 
   return (
-    <div style={{ margin: '3rem 10rem' }}>
+    <StoryCenter>
       <Typography
         link
         href="#"
-        ref={referenceElement}
+        ref={anchorRef}
         aria-describedby="tooltip"
-        onMouseOver={handleOpen}
-        onMouseLeave={handleClose}
-        onFocus={handleOpen}
-        onBlur={handleClose}
+        onMouseOver={openTooltip}
+        onMouseLeave={closeTooltip}
+        onFocus={openTooltip}
+        onBlur={closeTooltip}
       >
         Hover me!
       </Typography>
       <Tooltip
-        open={openState}
+        open={isOpen}
         id="tooltip"
-        anchorEl={referenceElement.current}
+        anchorEl={anchorRef.current}
         {...args}
       />
-    </div>
+    </StoryCenter>
   )
 }
 
-export const WithDisabledElements: Story<TooltipProps> = () => {
-  const [openState, setOpenState] = useState(null)
+export const WithDelay: Story<TooltipProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const anchorRef = useRef<HTMLButtonElement>()
+  let timer: number
 
-  let timer: ReturnType<typeof setTimeout> = null
-
-  const handleOpen = (num: 1 | 2) => {
+  const openTooltip = () => {
     timer = setTimeout(() => {
-      setOpenState(num)
+      setIsOpen(true)
     }, 300)
   }
 
-  const handleClose = () => {
+  const closeTooltip = () => {
     clearTimeout(timer)
-    setOpenState(null)
+    setIsOpen(false)
   }
 
-  const referenceElementOne = useRef(null)
-  const referenceElementTwo = useRef(null)
-
   return (
-    <Body>
-      <TextWrapper>
-        <Typography variant="h3">Tooltip with disabled elements</Typography>
-        <Typography variant="body_long">
-          Firefox, Edge and Chrome supports tooltip on disabled elements. We
-          found onPointerEnter and onPointerLeave was the best way to trigger
-          events on disabled elements.
-        </Typography>
-        <Typography variant="body_long" style={{ marginTop: 8 }}>
-          If you have Safari users, you will need to add inline style to your
-          disabled element, shown in the example below, as well as wrapping the
-          anchor inside a div which will handle the pointer event handlers. This
-          will help trigger the mouse events correctly. Unfortunately, this
-          workaround overwrites the &apos;not-allowed&apos; cursor.
-        </Typography>
-      </TextWrapper>
-      <Wrapper>
-        <Button
-          disabled
-          variant="ghost_icon"
-          aria-describedby="tooltip-disabled-chrome"
-          ref={referenceElementOne}
-          onPointerEnter={() => handleOpen(1)}
-          onPointerLeave={handleClose}
-        >
-          <Icon title="Chrome disabled button has Tooltip" data={chrome}></Icon>
-        </Button>
-
-        <Tooltip
-          id="tooltip-disabled-chrome"
-          open={openState === 1}
-          title="Disabled button, but hover works"
-          anchorEl={referenceElementOne.current}
-        />
-
-        <div
-          ref={referenceElementTwo}
-          onPointerEnter={() => handleOpen(2)}
-          onPointerLeave={handleClose}
-          aria-describedby="tooltip-disabled-safari"
-        >
-          <Button
-            disabled
-            style={{ pointerEvents: 'none' }}
-            variant="ghost_icon"
-          >
-            <Icon
-              title="Safari disabled button has Tooltip"
-              data={explore}
-            ></Icon>
-          </Button>
-        </div>
-
-        <Tooltip
-          id="tooltip-disabled-safari"
-          open={openState === 2}
-          title="Disabled button, but hover works"
-          anchorEl={referenceElementTwo.current}
-        />
-      </Wrapper>
-    </Body>
+    <StoryCenter>
+      <Typography
+        link
+        href="#"
+        ref={anchorRef}
+        aria-describedby="tooltip-delay"
+        onMouseOver={openTooltip}
+        onMouseLeave={closeTooltip}
+        onFocus={openTooltip}
+        onBlur={closeTooltip}
+      >
+        Hover me!
+      </Typography>
+      <Tooltip
+        open={isOpen}
+        title="Tooltip title"
+        id="tooltip-delay"
+        anchorEl={anchorRef.current}
+      />
+    </StoryCenter>
   )
 }
 
-export const TableCellsWithTooltip: Story<TooltipProps> = () => {
+WithDelay.parameters = {
+  docs: {
+    storyDescription: 'Tooltip opening is delayed with `300ms`',
+  },
+}
+
+export const Disabled: Story<TooltipProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const anchorRef = useRef<HTMLButtonElement>()
+
+  const openTooltip = () => setIsOpen(true)
+  const closeTooltip = () => setIsOpen(false)
+
+  return (
+    <StoryCenter>
+      <Button
+        disabled
+        variant="ghost_icon"
+        aria-describedby="tooltip-disabled-chrome"
+        ref={anchorRef}
+        onPointerEnter={openTooltip}
+        onPointerLeave={closeTooltip}
+      >
+        <Icon title="Chrome disabled button has Tooltip" data={chrome}></Icon>
+      </Button>
+      <Tooltip
+        id="tooltip-disabled-chrome"
+        open={isOpen}
+        title="Disabled button, but hover works"
+        anchorEl={anchorRef.current}
+      />
+    </StoryCenter>
+  )
+}
+Disabled.parameters = {
+  docs: {
+    storyDescription:
+      'Firefox, Edge and Chrome supports tooltip on disabled elements. We found onPointerEnter and onPointerLeave was the best way to trigger events on disabled elements.',
+  },
+}
+
+export const DisabledInSafari: Story<TooltipProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const anchorRef = useRef<HTMLDivElement>()
+
+  const openTooltip = () => setIsOpen(true)
+  const closeTooltip = () => setIsOpen(false)
+
+  return (
+    <StoryCenter>
+      <div
+        ref={anchorRef}
+        onPointerEnter={openTooltip}
+        onPointerLeave={closeTooltip}
+        aria-describedby="tooltip-disabled-safari"
+      >
+        <Button disabled style={{ pointerEvents: 'none' }} variant="ghost_icon">
+          <Icon
+            title="Safari disabled button has Tooltip"
+            data={explore}
+          ></Icon>
+        </Button>
+      </div>
+
+      <Tooltip
+        id="tooltip-disabled-safari"
+        open={isOpen}
+        title="Disabled button, but hover works"
+        anchorEl={anchorRef.current}
+      />
+    </StoryCenter>
+  )
+}
+
+DisabledInSafari.parameters = {
+  docs: {
+    storyDescription:
+      'If you have Safari users, you will need to add inline style to your disabled element, shown in the example below, as well as wrapping the anchor inside a div which will handle the pointer event handlers. This will help trigger the mouse events correctly. Unfortunately, this workaround overwrites the &apos;not-allowed&apos; cursor.',
+  },
+}
+
+export const OnTableCells: Story<TooltipProps> = () => {
   const cellValues = toCellValues(data, columns)
   const [state, setState] = useState<{
     openRow: number
@@ -242,4 +256,9 @@ export const TableCellsWithTooltip: Story<TooltipProps> = () => {
       </Table.Body>
     </Table>
   )
+}
+OnTableCells.parameters = {
+  docs: {
+    storyDescription: 'Example of how `Tooltip` can be used on `Table.Cell`',
+  },
 }
