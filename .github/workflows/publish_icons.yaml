@@ -32,7 +32,7 @@ jobs:
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
       - name: Install pnpm & dependencies 📦
-        uses: pnpm/action-setup@v1.2.1
+        uses: pnpm/action-setup@v2.0.0
         with:
           version: latest
           bin_dest: ./pnpm/bin
