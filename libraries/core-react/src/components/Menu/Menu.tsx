@@ -78,7 +78,7 @@ const MenuContainer = React.forwardRef<HTMLUListElement, MenuContainerProps>(
 
 export type MenuProps = {
   /** Anchor element for Menu */
-  anchorEl: HTMLElement
+  anchorEl?: HTMLElement | null
   /** Is Menu open */
   open: boolean
   /** Which Menu child to focus when open */

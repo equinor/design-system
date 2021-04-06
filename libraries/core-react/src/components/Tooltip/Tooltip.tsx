@@ -79,7 +79,7 @@ export type TooltipProps = {
   /** Tooltip title */
   title?: string
   /** Anchor element reference */
-  anchorEl: HTMLElement
+  anchorEl?: HTMLElement | null
   /** Is tooltip open */
   open: boolean
 } & HTMLAttributes<HTMLDivElement>
