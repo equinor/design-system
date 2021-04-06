@@ -39,51 +39,24 @@ export const Default: Story<TooltipProps> = (args) => (
     </Tooltip>
   </StoryCenter>
 )
-// export const WithDelay: Story<TooltipProps> = () => {
-//   const [isOpen, setIsOpen] = useState(false)
-//   const anchorRef = useRef<HTMLButtonElement>()
-//   let timer: number
 
-//   const openTooltip = () => {
-//     timer = setTimeout(() => {
-//       setIsOpen(true)
-//     }, 300)
-//   }
+export const WithDelay: Story<TooltipProps> = () => {
+  return (
+    <StoryCenter>
+      <Tooltip delay={300} title="Tooltip with delay" id="tooltip-delay">
+        <Typography link href="#" aria-describedby="tooltip-delay">
+          Hover me!
+        </Typography>
+      </Tooltip>
+    </StoryCenter>
+  )
+}
 
-//   const closeTooltip = () => {
-//     clearTimeout(timer)
-//     setIsOpen(false)
-//   }
-
-//   return (
-//     <StoryCenter>
-//       <Typography
-//         link
-//         href="#"
-//         ref={anchorRef}
-//         aria-describedby="tooltip-delay"
-//         onMouseOver={openTooltip}
-//         onMouseLeave={closeTooltip}
-//         onFocus={openTooltip}
-//         onBlur={closeTooltip}
-//       >
-//         Hover me!
-//       </Typography>
-//       <Tooltip
-//         open={isOpen}
-//         title="Tooltip title"
-//         id="tooltip-delay"
-//         anchorEl={anchorRef.current}
-//       />
-//     </StoryCenter>
-//   )
-// }
-
-// WithDelay.parameters = {
-//   docs: {
-//     storyDescription: 'Tooltip opening is delayed with `300ms`',
-//   },
-// }
+WithDelay.parameters = {
+  docs: {
+    storyDescription: 'Tooltip opening is delayed with `300ms`',
+  },
+}
 
 export const DisabledInSafari: Story<TooltipProps> = () => {
   return (
@@ -112,7 +85,7 @@ export const DisabledInSafari: Story<TooltipProps> = () => {
 DisabledInSafari.parameters = {
   docs: {
     storyDescription:
-      'If you have Safari users, you will need to add inline style to your disabled element, shown in the example below, as well as wrapping the anchor inside a div which will handle the pointer event handlers. This will help trigger the mouse events correctly. Unfortunately, this workaround overwrites the &apos;not-allowed&apos; cursor.',
+      'Chrome, Edge and Firefox all support mouse events on disabled elements. If you have Safari users, you will need to add inline style to your disabled element, shown in the example below, as well as wrapping the anchor inside a span. This will help trigger the mouse events correctly on disabled elements. Unfortunately, this workaround overwrites the &apos;not-allowed&apos; cursor.',
   },
 }
 

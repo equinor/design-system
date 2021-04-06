@@ -81,10 +81,15 @@ export type TooltipProps = {
   title?: string
   /** Tooltip anchor element */
   children: React.ReactElement
+  /** Delay in ms */
+  delay?: number
 } & HTMLAttributes<HTMLDivElement>
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
-  function Tooltip({ title, placement = 'bottom', children, ...rest }, ref) {
+  function Tooltip(
+    { title, placement = 'bottom', children, delay, ...rest },
+    ref,
+  ) {
     const popperRef = useRef<HTMLDivElement | null>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
@@ -100,8 +105,25 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     }, [])
 
-    const openTooltip = () => setOpen(true)
-    const closeTooltip = () => setOpen(false)
+    let timer: number
+
+    const openTooltip = () => {
+      if (delay) {
+        timer = setTimeout(() => {
+          setOpen(true)
+        }, delay)
+      } else {
+        setOpen(true)
+      }
+    }
+
+    const closeTooltip = () => {
+      if (delay) {
+        clearTimeout(timer)
+      }
+
+      setOpen(false)
+    }
 
     const { styles, attributes } = usePopper(
       anchorRef.current,
