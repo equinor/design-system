@@ -44,20 +44,18 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-      - name: Install pnpm & dependencies 📦
-        uses: pnpm/action-setup@v2.0.0
-        with:
-          version: latest
-          bin_dest: ./pnpm/bin
-          run_install: |
-            - recursive: true
+      - name: Install pnpm
+        run: npm i --no-save pnpm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install dependencies recursively
+        run: node_modules/.bin/pnpm m i
       - name: Cache base files
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
   test:
     name: Test
@@ -70,10 +68,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Test eds-core-react
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run test
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -85,10 +82,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Lint all libraries
-        run: ./pnpm/bin/pnpm run lint ./libraries
+        run: node_modules/.bin/pnpm run lint ./libraries
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
@@ -100,7 +96,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Use token build cache
         uses: actions/cache@v2
@@ -108,7 +103,7 @@ jobs:
           path: ./libraries/tokens
           key: ${{ github.sha }}-build-tokens
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
   build-icons:
     name: Build eds-icons
     runs-on: ubuntu-latest
@@ -120,7 +115,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Use icons build cache
         uses: actions/cache@v2
@@ -128,7 +122,7 @@ jobs:
           path: ./libraries/icons
           key: ${{ github.sha }}-build-icons
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
   build-core-react:
     name: Build eds-core-react
     runs-on: ubuntu-latest
@@ -140,7 +134,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Get eds-icons build
         uses: actions/cache@v2
@@ -158,10 +151,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-core-react
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build
   publish-core-react:
     name: Publish eds-core-react to npm
     runs-on: ubuntu-latest
@@ -173,10 +165,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-core-react
       - name: Publish to npm
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   build-storybook:
@@ -190,7 +181,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - uses: actions/cache@v2
         name: Use storybook build cache
@@ -198,10 +188,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-storybook
       - name: Build storybook
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build:storybook
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
   build_push_docker:
     name: Build & Deploy Docker
     runs-on: ubuntu-latest
@@ -225,7 +214,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-storybook
       - name: Login via Azure CLI
         uses: azure/login@v1

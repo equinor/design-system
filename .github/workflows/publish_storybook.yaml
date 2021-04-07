@@ -53,7 +53,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
   test:
     name: Test
@@ -66,10 +65,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Test eds-core-react
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run test
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -81,10 +79,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Lint all libraries
-        run: ./pnpm/bin/pnpm run lint ./libraries
+        run: node_modules/.bin/pnpm run lint ./libraries
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
@@ -96,17 +93,15 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Build storybook
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build:storybook
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
       - uses: actions/cache@v2
         name: Save build to cache
         with:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-storybook
   build_push_docker:
     name: Build & Deploy Docker
@@ -131,7 +126,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-storybook
       - name: Login via Azure CLI
         uses: azure/login@v1
