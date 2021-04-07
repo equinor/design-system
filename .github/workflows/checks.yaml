@@ -59,7 +59,7 @@ jobs:
       #     run_install: |
       #       - recursive: true
       - name: Install pnpm
-        run: npm i pnpm
+        run: npm i -g pnpm
       - name: Install recursive dependencies
         run: pnpm m i
       - name: Cache base files
