@@ -52,7 +52,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - name: Install pnpm
-        run: npm i pnpm
+        run: npm i --no-save pnpm
       - name: Install dependencies recursively
         run: node_modules/.bin/pnpm m i
       - name: Cache base files
