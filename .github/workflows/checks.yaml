@@ -53,7 +53,6 @@ jobs:
         uses: pnpm/action-setup@v2.0.0
         with:
           version: latest
-          dest: ./pnpm/bin
           run_install: |
             - recursive: true
       - name: Cache base files
@@ -66,6 +65,8 @@ jobs:
           key: ${{ github.sha }}
       - name: List folder
         run: ls -a
+      - name: List pnpm folder
+        run: ls pnpm -a
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -79,8 +80,14 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
+      - name: List folder
+        run: ls -a
+      - name: List pnpm folder
+        run: ls pnpm -a
+      - name: List node_modules/.bin folder
+        run: ls node_modules/.bin -a
       - name: Test eds-core-react
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run test
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -95,7 +102,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Lint all libraries
-        run: ./pnpm/bin/pnpm run lint ./libraries
+        run: node_modules/.bin/pnpm run lint ./libraries
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
@@ -110,7 +117,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
       - name: Save build to cache
         uses: actions/cache@v2
         with:
@@ -130,7 +137,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Save build to cache
         uses: actions/cache@v2
         with:
@@ -160,7 +167,7 @@ jobs:
           path: ./libraries/tokens
           key: ${{ github.sha }}-build-tokens
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build
       - name: Save build to cache
         uses: actions/cache@v2
         with:
@@ -183,4 +190,4 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Build storybook
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build:storybook
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
