@@ -64,6 +64,8 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
+      - name: List folder
+        run: ls -a
   test:
     name: Test
     runs-on: ubuntu-latest
