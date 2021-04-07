@@ -69,7 +69,7 @@ export const DisabledInSafari: Story<TooltipProps> = () => {
           <Button
             disabled
             variant="ghost_icon"
-            style={{ pointerEvents: 'none' }}
+            // style={{ pointerEvents: 'none' }}
           >
             <Icon
               title="Safari disabled button has Tooltip"
