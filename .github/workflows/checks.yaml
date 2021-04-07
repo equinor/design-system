@@ -53,6 +53,7 @@ jobs:
         uses: pnpm/action-setup@v2.0.0
         with:
           version: latest
+          dest: ./pnpm
           run_install: |
             - recursive: true
       - name: Cache base files
@@ -78,10 +79,10 @@ jobs:
           key: ${{ github.sha }}
       - name: List folder
         run: ls -a
-      - name: List node_modules folder
-        run: ls node_modules -a
+      - name: List pnpm/node_modules folder
+        run: ls pnpm/node_modules -a
       - name: Test eds-core-react
-        run: node_modules/pnpm/bin/pnpm --filter @equinor/eds-core-react run test
+        run: pnpm/node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
   lint:
     name: Lint
     runs-on: ubuntu-latest
