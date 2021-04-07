@@ -19,8 +19,6 @@ jobs:
   setup:
     name: Setup base files
     runs-on: ubuntu-latest
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - name: Checkout
         run: |
@@ -53,6 +51,8 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - name: Install pnpm
         run: npm i --no-save pnpm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Install dependencies recursively
         run: node_modules/.bin/pnpm m i
       - name: Cache base files
