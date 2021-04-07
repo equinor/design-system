@@ -3,7 +3,7 @@ import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
 import * as ReactDom from 'react-dom'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { usePopper, Placement } from '@hooks'
+import { usePopper, Placement, useId } from '@hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
 const StyledTooltip = styled.div<{ open: boolean }>`
@@ -94,13 +94,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
     const anchorRef = useRef<HTMLDivElement>()
-    const tooltipId = 'eds-tooltip-container'
-    const tooltipContainerEl = document.getElementById(tooltipId)
+    const containerId = 'eds-tooltip-container'
+    const tooltipContainerEl = document.getElementById(containerId)
+    const tooltipId = useId(rest.id?.toString(), 'tooltip') as string
 
     React.useEffect(() => {
-      if (document.getElementById(tooltipId) === null) {
+      if (document.getElementById(containerId) === null) {
         const tooltipContainerElement = document.createElement('div')
-        tooltipContainerElement.id = tooltipId
+        tooltipContainerElement.id = containerId
         document.body.appendChild(tooltipContainerElement)
       }
     }, [])
@@ -140,6 +141,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const updatedChildren = React.cloneElement(children, {
       ref: anchorRef,
+      'aria-describedby': tooltipId,
       onMouseOver: openTooltip,
       onMouseLeave: closeTooltip,
       onPointerEnter: openTooltip,
@@ -153,6 +155,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         {tooltipContainerEl &&
           ReactDom.createPortal(
             <StyledTooltip
+              id={tooltipId}
               role="tooltip"
               ref={popperRef}
               style={styles.popper}
