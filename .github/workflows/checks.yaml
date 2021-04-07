@@ -65,8 +65,6 @@ jobs:
           key: ${{ github.sha }}
       - name: List folder
         run: ls -a
-      - name: List pnpm folder
-        run: ls pnpm -a
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -82,8 +80,6 @@ jobs:
           key: ${{ github.sha }}
       - name: List folder
         run: ls -a
-      - name: List pnpm folder
-        run: ls pnpm -a
       - name: List node_modules/.bin folder
         run: ls node_modules/.bin -a
       - name: Test eds-core-react
