@@ -81,13 +81,13 @@ export type TooltipProps = {
   title?: string
   /** Tooltip anchor element */
   children: React.ReactElement
-  /** Delay in ms */
-  delay?: number
+  /** Delay in ms, default 100 */
+  enterDelay?: number
 } & HTMLAttributes<HTMLDivElement>
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    { title, placement = 'bottom', children, delay, ...rest },
+    { title, placement = 'bottom', children, enterDelay = 100, id, ...rest },
     ref,
   ) {
     const popperRef = useCombinedRefs(useRef<HTMLDivElement | null>(null), ref)
@@ -97,6 +97,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const containerId = 'eds-tooltip-container'
     const tooltipContainerEl = document.getElementById(containerId)
     const tooltipId = useId(id, 'tooltip')
+    let timer: number
 
     React.useEffect(() => {
       if (document.getElementById(containerId) === null) {
@@ -106,23 +107,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     }, [])
 
-    let timer: number
-
     const openTooltip = () => {
-      if (delay) {
-        timer = setTimeout(() => {
-          setOpen(true)
-        }, delay)
-      } else {
+      timer = setTimeout(() => {
         setOpen(true)
-      }
+      }, enterDelay)
     }
 
     const closeTooltip = () => {
-      if (delay) {
-        clearTimeout(timer)
-      }
-
+      clearTimeout(timer)
       setOpen(false)
     }
 

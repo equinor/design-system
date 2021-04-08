@@ -32,8 +32,8 @@ export default {
 
 export const Default: Story<TooltipProps> = (args) => (
   <StoryCenter>
-    <Tooltip id="tooltip" {...args}>
-      <Typography link href="#" aria-describedby="tooltip">
+    <Tooltip {...args}>
+      <Typography link href="#">
         Hover me!
       </Typography>
     </Tooltip>
@@ -43,8 +43,8 @@ export const Default: Story<TooltipProps> = (args) => (
 export const WithDelay: Story<TooltipProps> = () => {
   return (
     <StoryCenter>
-      <Tooltip delay={300} title="Tooltip with delay" id="tooltip-delay">
-        <Typography link href="#" aria-describedby="tooltip-delay">
+      <Tooltip enterDelay={300} title="Tooltip with delay">
+        <Typography link href="#">
           Hover me!
         </Typography>
       </Tooltip>
@@ -61,10 +61,7 @@ WithDelay.parameters = {
 export const DisabledInSafari: Story<TooltipProps> = () => {
   return (
     <StoryCenter>
-      <Tooltip
-        id="tooltip-disabled-safari"
-        title="Disabled button, but hover works"
-      >
+      <Tooltip title="Disabled button, but hover works">
         <span>
           <Button
             disabled
