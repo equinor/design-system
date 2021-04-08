@@ -25,7 +25,7 @@ export default {
   component: Tooltip,
   argTypes: {
     title: {
-      defaultValue: 'This is the tooltip title',
+      defaultValue: 'Explore more actions',
     },
   },
 } as Meta
@@ -33,11 +33,8 @@ export default {
 export const Default: Story<TooltipProps> = (args) => (
   <StoryCenter>
     <Tooltip {...args}>
-      {/* <Typography link href="#">
-        Hover me!
-      </Typography> */}
       <Button variant="ghost_icon">
-        <Icon title="Icon" data={explore}></Icon>
+        <Icon data={explore}></Icon>
       </Button>
     </Tooltip>
   </StoryCenter>
@@ -69,12 +66,9 @@ export const DisabledInSafari: Story<TooltipProps> = () => {
           <Button
             disabled
             variant="ghost_icon"
-            // style={{ pointerEvents: 'none' }}
+            style={{ pointerEvents: 'none' }}
           >
-            <Icon
-              title="Safari disabled button has Tooltip"
-              data={explore}
-            ></Icon>
+            <Icon data={explore}></Icon>
           </Button>
         </span>
       </Tooltip>
