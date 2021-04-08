@@ -119,6 +119,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const openTooltip = () => {
       if (isMounted) {
+        clearTimeout(timer)
+
         timer = setTimeout(() => {
           setOpen(true)
         }, enterDelay)
