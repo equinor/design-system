@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, fireEvent } from '@testing-library/react'
+import { render, cleanup, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -72,7 +72,7 @@ describe('Breadcrumbs', () => {
       'Label 1/Label 2/Label 3/Label 4/Label 5/Label 6',
     )
   })
-  it('should crop the labels and have tooltip on hover when maxWidth is defined', () => {
+  it('should crop the labels and have tooltip on hover when maxWidth is defined', async () => {
     const { getAllByText, getByRole } = render(
       <Breadcrumbs>
         <Breadcrumb maxWidth={30}>Label 1</Breadcrumb>
@@ -82,7 +82,11 @@ describe('Breadcrumbs', () => {
     )
     const crumb = getAllByText(/^Label\s\d$/)
     expect(crumb[0]).toHaveStyleRule('max-width', '30px')
-    fireEvent.mouseEnter(crumb[0])
+
+    fireEvent.mouseOver(crumb[0])
+
+    await act(() => new Promise((r) => setTimeout(r, 100)))
+
     const tooltip = getByRole('tooltip')
     expect(tooltip).toBeDefined()
   })
