@@ -3,7 +3,13 @@ import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
 import * as ReactDom from 'react-dom'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '@utils'
-import { usePopper, Placement, useId, useCombinedRefs } from '@hooks'
+import {
+  usePopper,
+  Placement,
+  useId,
+  useCombinedRefs,
+  useGlobalKeyPress,
+} from '@hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
 const StyledTooltip = styled.div<{ open: boolean }>`
@@ -117,6 +123,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       clearTimeout(timer)
       setOpen(false)
     }
+
+    useGlobalKeyPress('Escape', () => closeTooltip())
 
     const { styles, attributes } = usePopper(
       anchorRef.current,

@@ -33,9 +33,12 @@ export default {
 export const Default: Story<TooltipProps> = (args) => (
   <StoryCenter>
     <Tooltip {...args}>
-      <Typography link href="#">
+      {/* <Typography link href="#">
         Hover me!
-      </Typography>
+      </Typography> */}
+      <Button variant="ghost_icon">
+        <Icon title="Icon" data={explore}></Icon>
+      </Button>
     </Tooltip>
   </StoryCenter>
 )
