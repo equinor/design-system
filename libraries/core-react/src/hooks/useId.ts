@@ -7,7 +7,7 @@ export const useId = (idOverride: string, type?: string): string => {
   React.useEffect(() => {
     if (defaultId == null) {
       setDefaultId(
-        `eds-${type && type + `-`}${Math.round(Math.random() * 1e5)}`,
+        `eds-${type ? type + `-` : ''}${Math.round(Math.random() * 1e5)}`,
       )
     }
   }, [defaultId])
