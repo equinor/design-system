@@ -9,6 +9,7 @@ import {
   useId,
   useCombinedRefs,
   useGlobalKeyPress,
+  useIsMounted,
 } from '@hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
@@ -95,7 +96,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     { title, placement = 'bottom', children, enterDelay = 100, id, ...rest },
     ref,
   ) {
-    const [mounted, setMonunted] = useState(false)
+    const isMounted = useIsMounted()
     const popperRef = useCombinedRefs(useRef<HTMLDivElement | null>(null), ref)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
@@ -111,15 +112,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         tooltipContainerElement.id = containerId
         document.body.appendChild(tooltipContainerElement)
       }
-      setMonunted(true)
       return () => {
         clearTimeout(timer)
-        setMonunted(false)
       }
     }, [])
 
     const openTooltip = () => {
-      if (mounted) {
+      if (isMounted) {
         timer = setTimeout(() => {
           setOpen(true)
         }, enterDelay)
