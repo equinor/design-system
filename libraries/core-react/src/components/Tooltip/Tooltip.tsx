@@ -140,7 +140,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     const disabledElementStyle = {
-      'span > &$hover': {
+      'span > button:hover': {
         pointerEvents: 'none',
         cursor: 'default',
       },
@@ -157,7 +157,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       onFocus: openTooltip,
       style: disabledElementStyle,
     })
-    console.log(updatedChildren)
+
     return (
       <>
         {tooltipContainerEl &&
