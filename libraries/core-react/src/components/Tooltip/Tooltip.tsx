@@ -139,13 +139,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...attributes.popper,
     }
 
-    const disabledElementStyle = {
-      'span > button:hover': {
-        pointerEvents: 'none',
-        cursor: 'default',
-      },
-    }
-
     const updatedChildren = React.cloneElement(children, {
       ref: anchorRef,
       'aria-describedby': open ? tooltipId : null,
@@ -155,7 +148,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       onPointerLeave: closeTooltip,
       onBlur: closeTooltip,
       onFocus: openTooltip,
-      style: disabledElementStyle,
     } as HTMLAttributes<React.ReactElement>)
 
     return (
