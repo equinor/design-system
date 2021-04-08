@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useRef, forwardRef, HTMLAttributes } from 'react'
+import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
@@ -42,49 +42,19 @@ type BreadcrumbProps = {
 
 export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
   function Breadcrumb({ children, maxWidth, ...other }, ref) {
-    const [openTooltip, setopenTooltip] = React.useState(false)
-
-    const handleOpen = () => {
-      setopenTooltip(true)
-    }
-
-    const handleClose = () => {
-      setopenTooltip(false)
-    }
-    const linkRef = useRef(null)
     const props = {
       ...other,
       ref,
-      maxWidth: maxWidth,
+      maxWidth,
     }
+    const showTooltip = maxWidth > 0
 
-    const tooltip = Boolean(maxWidth)
-
-    const WithTooltip = (
-      <StyledTypography
-        link
-        variant="body_short"
-        {...props}
-        ref={linkRef}
-        aria-describedby="tooltip"
-        onMouseEnter={handleOpen}
-        onFocus={handleOpen}
-        onBlur={handleClose}
-        onMouseLeave={handleClose}
-      >
-        {children}
-        <Tooltip
-          title={children}
-          open={openTooltip}
-          id="tooltip"
-          placement="top"
-          anchorEl={linkRef.current}
-        />
-      </StyledTypography>
-    )
-
-    return tooltip ? (
-      WithTooltip
+    return showTooltip ? (
+      <Tooltip title={children} placement="top">
+        <StyledTypography link variant="body_short" {...props}>
+          {children}
+        </StyledTypography>
+      </Tooltip>
     ) : (
       <StyledTypography link variant="body_short" {...props}>
         {children}
