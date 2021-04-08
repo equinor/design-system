@@ -37,7 +37,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Install pnpm & dependencies 📦
         uses: pnpm/action-setup@v2.0.0
@@ -57,10 +56,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Lint
-        run: ./pnpm/bin/pnpm run lint ./libraries/tokens
+        run: node_modules/.bin/pnpm run lint ./libraries/tokens
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
@@ -72,7 +70,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Use tokens build cache
         uses: actions/cache@v2
@@ -80,10 +77,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-tokens
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
 
   publish-tokens:
     name: Publish eds-tokens to npm
@@ -96,9 +92,8 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-tokens
       - name: Publish to npm
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
+        run: node_modules/.bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -39,14 +39,13 @@ jobs:
           run_install: |
             - recursive: true
       - name: Lint
-        run: ./pnpm/bin/pnpm run lint ./libraries/icons
+        run: node_modules/.bin/pnpm run lint ./libraries/icons
       - name: Use base files cache
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
   lint:
     name: Lint eds-icons
@@ -59,10 +58,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Lint
-        run: ./pnpm/bin/pnpm run lint ./libraries/icons
+        run: node_modules/.bin/pnpm run lint ./libraries/icons
   build-icons:
     name: Build eds-icons
     runs-on: ubuntu-latest
@@ -74,7 +72,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
+
           key: ${{ github.sha }}
       - name: Use icons build cache
         uses: actions/cache@v2
@@ -82,10 +80,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-icons
       - name: Build
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
 
   publish-icons:
     name: Publish eds-icons to npm
@@ -98,9 +95,8 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-            ~/setup-pnpm
           key: ${{ github.sha }}-build-icons
       - name: Publish to npm
-        run: ./pnpm/bin/pnpm --filter @equinor/eds-icons publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
+        run: node_modules/.bin/pnpm --filter @equinor/eds-icons publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
