@@ -96,7 +96,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const anchorRef = useRef<HTMLDivElement>()
     const containerId = 'eds-tooltip-container'
     const tooltipContainerEl = document.getElementById(containerId)
-    const tooltipId = useId(rest.id?.toString(), 'tooltip') as string
+    const tooltipId = useId(id, 'tooltip')
 
     React.useEffect(() => {
       if (document.getElementById(containerId) === null) {
@@ -156,7 +156,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       onBlur: closeTooltip,
       onFocus: openTooltip,
       style: disabledElementStyle,
-    })
+    } as HTMLAttributes<React.ReactElement>)
 
     return (
       <>
