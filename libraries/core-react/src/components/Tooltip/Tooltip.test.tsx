@@ -84,7 +84,7 @@ describe('Tooltip', () => {
   })
   it('shows after correct delay', async () => {
     render(
-      <Tooltip title="Tooltip" placement="right-start">
+      <Tooltip title="Tooltip" placement="right-start" enterDelay={500}>
         <span>Test</span>
       </Tooltip>,
     )
@@ -92,10 +92,16 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
-    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
+
+    await act(() => new Promise((r) => setTimeout(r, 200)))
+
+    const hiddenTooltip = screen.getByRole('tooltip', { hidden: true })
+    expect(hiddenTooltip).toBeDefined()
+    expect(hiddenTooltip).toHaveStyleRule('visibility', 'hidden')
+
+    await act(() => new Promise((r) => setTimeout(r, 300)))
 
     const tooltip = screen.getByRole('tooltip')
-
     expect(content).toBeDefined()
     expect(tooltip).toBeDefined()
   })
