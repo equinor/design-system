@@ -138,6 +138,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       popperRef.current,
       arrowRef,
       placement,
+      14,
     )
 
     const props = {

@@ -25,6 +25,7 @@ export const usePopper = (
   popperEl: HTMLElement,
   arrowRef?: HTMLElement | string,
   placement?: Placement,
+  offset = 10,
 ): {
   styles: { [key: string]: any }
   attributes: { [key: string]: { [key: string]: string } }
@@ -48,7 +49,7 @@ export const usePopper = (
       {
         name: 'offset',
         options: {
-          offset: [0, 10],
+          offset: [0, offset],
         },
       },
     ],
