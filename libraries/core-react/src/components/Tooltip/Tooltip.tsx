@@ -95,6 +95,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     { title, placement = 'bottom', children, enterDelay = 100, id, ...rest },
     ref,
   ) {
+    const [mounted, setMonunted] = useState(false)
     const popperRef = useCombinedRefs(useRef<HTMLDivElement | null>(null), ref)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
@@ -110,12 +111,19 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         tooltipContainerElement.id = containerId
         document.body.appendChild(tooltipContainerElement)
       }
+      setMonunted(true)
+      return () => {
+        clearTimeout(timer)
+        setMonunted(false)
+      }
     }, [])
 
     const openTooltip = () => {
-      timer = setTimeout(() => {
-        setOpen(true)
-      }, enterDelay)
+      if (mounted) {
+        timer = setTimeout(() => {
+          setOpen(true)
+        }, enterDelay)
+      }
     }
 
     const closeTooltip = () => {

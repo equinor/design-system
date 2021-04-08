@@ -6,6 +6,7 @@ import {
   render,
   cleanup,
   screen,
+  act,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -15,6 +16,8 @@ import { Tooltip } from '.'
 const StyledTooltip = styled(Tooltip)`
   background: red;
 `
+
+const enterDelayDefault = 100
 
 afterEach(cleanup)
 
@@ -29,7 +32,6 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
-
     const tooltip = screen.getByRole('tooltip')
 
     await waitFor(() => expect(tooltip).toHaveStyleRule('background', 'red'))
@@ -40,18 +42,16 @@ describe('Tooltip', () => {
         <div>Test</div>
       </Tooltip>,
     )
-    const content = screen.getByText('Test')
 
+    const content = screen.getByText('Test')
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
 
     const tooltip = screen.getByRole('tooltip')
-
-    await waitFor(() =>
-      expect(tooltip).toHaveStyleRule('visibility', 'visible'),
-    )
+    expect(tooltip).toHaveStyleRule('visibility', 'visible')
     expect(tooltip).toHaveAttribute('data-popper-placement', 'right-start')
   })
-  it('renders with a title', async () => {
+  it('renders with a correct title', async () => {
     render(
       <Tooltip title="Tooltip" placement="right-start">
         <span>Test</span>
@@ -61,12 +61,42 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
+
+    const tooltip = screen.getByRole('tooltip')
+    expect(content).toBeDefined()
+    expect(tooltip).toBeDefined()
+  })
+  it('renders on focus', async () => {
+    render(
+      <Tooltip title="Tooltip" placement="right-start">
+        <span>Test</span>
+      </Tooltip>,
+    )
+
+    const content = screen.getByText('Test')
+
+    fireEvent.focusIn(content)
+    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
+
+    const tooltip = screen.getByRole('tooltip')
+    expect(tooltip).toHaveStyleRule('visibility', 'visible')
+  })
+  it('shows after correct delay', async () => {
+    render(
+      <Tooltip title="Tooltip" placement="right-start">
+        <span>Test</span>
+      </Tooltip>,
+    )
+
+    const content = screen.getByText('Test')
+
+    fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
 
     const tooltip = screen.getByRole('tooltip')
 
-    await waitFor(() => {
-      expect(content).toBeDefined()
-      expect(tooltip).toBeDefined()
-    })
+    expect(content).toBeDefined()
+    expect(tooltip).toBeDefined()
   })
 })
