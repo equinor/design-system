@@ -1,12 +1,19 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, screen } from '@testing-library/react'
+import {
+  render,
+  cleanup,
+  screen,
+  fireEvent,
+  act,
+  prettyDOM,
+} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Typography } from '.'
 import { tokens } from '@equinor/eds-tokens'
-import { colors } from './Typography.tokens'
+import { colors, link } from './Typography.tokens'
 import type { Typography as TypographyType } from '@equinor/eds-tokens'
 
 const StyledTypography = styled(Typography)`
@@ -147,5 +154,28 @@ describe('Typography', () => {
 
     expect(typography).toHaveStyleRule('margin-top', '16px')
     expect(typography).toHaveStyleRule('margin-bottom', '32px')
+  })
+  it('can focus links', async () => {
+    render(
+      <Typography link href="#">
+        Link
+      </Typography>,
+    )
+
+    const typography = screen.getByText('Link')
+
+    typography.focus()
+    await act(() => new Promise((r) => setTimeout(r, 100)))
+    console.log(prettyDOM(typography, 99999))
+    expect(typography).toHaveStyleRule(
+      'outline',
+      `${
+        link.states.focus.outline.width +
+        ' ' +
+        link.states.focus.outline.type +
+        ' ' +
+        link.states.focus.outline.color
+      }`,
+    )
   })
 })
