@@ -6,7 +6,7 @@ import {
   AnchorHTMLAttributes,
 } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate } from '@utils'
+import { typographyTemplate, outlineTemplate } from '@utils'
 import {
   quickVariants,
   colors,
@@ -14,6 +14,7 @@ import {
   TypographyVariants,
   ColorVariants,
   TypographyGroups,
+  link as linktokens,
 } from './Typography.tokens'
 import type { Typography as TypographyType } from '@equinor/eds-tokens'
 
@@ -88,6 +89,14 @@ const StyledTypography = styled.p<StyledProps>`
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+    `}
+  ${({ link }) =>
+    link &&
+    css`
+      width: max-content;
+      &[data-focus-visible-added]:focus {
+        ${outlineTemplate(linktokens.states.focus.outline)}
       }
     `}
 `

@@ -33,7 +33,7 @@ export const headings: Story<TypographyProps> = () => (
 
 export const paragraphs = (): JSX.Element => (
   <Grid>
-    <Typography variant="body_short" link>
+    <Typography variant="body_short" link href="#">
       Body short link
     </Typography>
     <Typography variant="body_short">Body short</Typography>
@@ -46,7 +46,7 @@ export const paragraphs = (): JSX.Element => (
     <Typography variant="body_short" bold italic>
       Body short bold italic
     </Typography>
-    <Typography variant="body_long" link>
+    <Typography variant="body_long" link href="#">
       Body long link
     </Typography>
     <Typography variant="body_long">Body long</Typography>
@@ -101,7 +101,7 @@ export const custom = (): JSX.Element => (
     <Typography group="table" variant="cell_text" bold>
       Table / Cell / Text / Bold
     </Typography>
-    <Typography group="table" variant="cell_text" link>
+    <Typography group="table" variant="cell_text" link href="#">
       Table / Cell / Text / Bold / Link
     </Typography>
 

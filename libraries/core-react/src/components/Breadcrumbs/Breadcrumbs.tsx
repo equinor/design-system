@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
-import { outlineTemplate, spacingsTemplate } from '@utils'
+import { spacingsTemplate } from '@utils'
 
 const { spacings, typography, states } = tokens
 
@@ -34,12 +34,6 @@ const Collapsed = styled(Typography)`
   &:hover {
     text-decoration: underline;
     color: ${states.hover.typography.color};
-  }
-  &:focus {
-    outline: none;
-  }
-  &[data-focus-visible-added]:focus {
-    ${outlineTemplate(states.focus.outline)}
   }
   color: ${typography.color};
   text-decoration: none;
