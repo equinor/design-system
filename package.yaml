@@ -1,34 +1,34 @@
 name: eds
-engines:
-  pnpm: '>=5.13.5'
+engines: {pnpm: '>=5.13.5'}
 scripts:
   lint: eslint
-  'lint:all': pnpm run lint .
-  'lint:core-react': pnpm run lint ./libraries/core-react
+  lint:all: pnpm run lint .
+  lint:core-react: pnpm run lint ./libraries/core-react
   init: pnpm multi install --force && pnpm run build
   core-react: pnpm --filter @equinor/eds-core-react run dev
-  'test:core-react': pnpm --filter @equinor/eds-core-react run test
-  'build:core-react': pnpm --filter @equinor/eds-core-react run build
-  'build:tokens': pnpm --filter @equinor/eds-tokens run build
-  'build:icons': pnpm --filter @equinor/eds-icons run build
+  test:core-react: pnpm --filter @equinor/eds-core-react run test
+  build:core-react: pnpm --filter @equinor/eds-core-react run build
+  build:tokens: pnpm --filter @equinor/eds-tokens run build
+  build:icons: pnpm --filter @equinor/eds-icons run build
   storybook: pnpm --filter ./libraries/core-react run storybook
-  'build:storybook': 'pnpm --filter ./libraries/core-react run build:storybook'
+  build:storybook: pnpm --filter ./libraries/core-react run build:storybook
   storefront: pnpm --filter @equinor/eds-storefront run dev
-  'build:storefront': pnpm --filter @equinor/eds-storefront run build
+  build:storefront: pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
-  'test:watch:core-react': 'pnpm --filter @equinor/eds-core-react run test:watch'
+  test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   dockerize-storefront: >-
     docker build --build-arg GATSBY_STAGE=prod -t eds/storefront -f
     apps/storefront/Dockerfile .
-  storefront-docker-run: 'docker run -p 8080:80 eds/storefront'
+  storefront-docker-run: docker run -p 8080:80 eds/storefront
   storefront-docker-inspect: docker run -it eds/storefront /bin/sh
 devDependencies:
   '@babel/core': ^7.13.10
   '@babel/eslint-parser': ^7.13.10
   '@typescript-eslint/eslint-plugin': ^4.17.0
-  '@typescript-eslint/parser': ^4.17.0
+  '@typescript-eslint/parser': ^4.21.0
   eslint: ^7.21.0
   eslint-config-prettier: ^8.1.0
+  eslint-import-resolver-typescript: ^2.4.0
   eslint-plugin-import: ^2.22.1
   eslint-plugin-jsx-a11y: ^6.4.1
   eslint-plugin-prettier: ^3.3.1
