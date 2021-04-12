@@ -45,6 +45,7 @@ export const Default: Story<PopoverProps> = (args) => {
 
   useEffect(() => {
     setIsOpen(args.open)
+    // eslint-disable-next-line react/destructuring-assignment
   }, [args.open])
 
   return (

@@ -55,6 +55,7 @@ export const Default: Story<MenuProps> = (args) => {
   useEffect(() => {
     setFocus(args.focus)
     setIsOpen(args.open)
+    // eslint-disable-next-line react/destructuring-assignment
   }, [args.open, args.focus])
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
