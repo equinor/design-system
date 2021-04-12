@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { Typography, Button, Popover, PopoverProps, Card } from '@components'
+import { Typography, Button, Popover, PopoverProps } from '@components'
 import { Meta, Story } from '@storybook/react'
 import { PlacementValues } from '@hooks'
 
