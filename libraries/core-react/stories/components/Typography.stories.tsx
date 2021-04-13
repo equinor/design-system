@@ -141,3 +141,37 @@ export const Lines = (): JSX.Element => (
     </Typography>
   </Wrapper>
 )
+
+export const Link: Story<TypographyProps> = () => (
+  <Grid>
+    <Typography link href="#">
+      Link
+    </Typography>
+    <Typography variant="body_long">
+      Cupcake ipsum dolor sit amet caramels powder. Chocolate powder donut
+      bonbon candy canes brownie donut wafer.{' '}
+      <Typography link href="#">
+        Cake
+      </Typography>{' '}
+      topping oat{' '}
+      <Typography link href="#">
+        cake
+      </Typography>{' '}
+      cheesecake. Candy canes tiramisu apple pie cookie. Pastry marshmallow
+      candy canes. Cookie jelly-o fruitcake caramels sweet. Brownie pastry sweet
+      roll. Caramels tiramisu cotton candy carrot{' '}
+      <Typography link href="#">
+        cake
+      </Typography>{' '}
+      jujubes cheesecake bear claw. Candy caramels dessert caramels. Lollipop
+      marshmallow wafer marzipan. Sesame snaps wafer apple pie sweet roll
+      chocolate bar fruitcake.
+    </Typography>
+  </Grid>
+)
+
+Link.parameters = {
+  docs: {
+    storyDescription: 'Link used in body of text',
+  },
+}

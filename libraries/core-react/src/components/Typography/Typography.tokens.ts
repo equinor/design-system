@@ -60,7 +60,7 @@ const link: ComponentToken = {
         color: focus,
         style: 'dashed',
         type: 'outline',
-        offset: '6px',
+        offset: '2px',
       },
     },
   },
