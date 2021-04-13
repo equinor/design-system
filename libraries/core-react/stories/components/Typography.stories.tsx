@@ -10,6 +10,7 @@ const Wrapper = styled.div`
 const Grid = styled(Wrapper)`
   display: grid;
   grid-gap: 32px;
+  justify-items: start;
 `
 
 export default {
