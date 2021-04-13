@@ -1,4 +1,5 @@
-import React from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import { Story, Meta } from '@storybook/react'
 import {
   Table,
@@ -135,7 +136,7 @@ export const CompactDataGrid: Story<TableProps> = () => {
     event.stopPropagation()
   }
 
-  const [state, setState] = React.useState<{
+  const [state, setState] = useState<{
     buttonEl: HTMLButtonElement
     focus: 'first' | 'last'
   }>({
