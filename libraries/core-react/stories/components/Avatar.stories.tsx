@@ -20,8 +20,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `An avatar is a small (user) picture. The avatar does 
-        not exist in Figma as a separate component.`,
+        component: `An avatar is a small (user) picture. The avatar does not exist in Figma as a separate component.`,
       },
     },
   },
