@@ -1,5 +1,5 @@
-export const jsonToSassString = json =>
+export const jsonToSassString = (json) =>
   Object.entries(json).reduce(
-    (acc, [name, value,]) => `${acc}$${name}: ${value};\n`,
-    ""
-  );
+    (acc, [name, value]) => `${acc}$${name}: ${value};\n`,
+    '',
+  )
