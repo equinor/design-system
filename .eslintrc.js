@@ -9,11 +9,6 @@ module.exports = {
     requireConfigFile: false,
     sourceType: 'module',
   },
-  settings: {
-    'import/parsers': {
-      '@babel/eslint-parser': ['*.js'],
-    },
-  },
   extends: [
     'eslint:recommended',
     'plugin:import/errors',
@@ -62,14 +57,15 @@ module.exports = {
           jsx: true,
         },
         requireConfigFile: false,
-        ecmaVersion: 12,
+        ecmaVersion: 11,
         sourceType: 'module',
+        tsconfigRootDir: __dirname,
         project: [
           './tsconfig.eslint.json',
+          './apps/*/tsconfig.json',
           './libraries/*/tsconfig.json',
           './libraries/*/*/tsconfig.json',
         ],
-        tsconfigRootDir: __dirname,
       },
       settings: {
         react: {
@@ -146,41 +142,4 @@ module.exports = {
       },
     },
   ],
-  // overrides: [
-  //   {
-  //     files: ['**/*.jsx'],
-  //   },
-  //   {
-  //     parser: '@typescript-eslint/parser',
-  //     parserOptions: {
-  //       tsconfigRootDir: __dirname,
-  //       project: ['./tsconfig.eslint.json'],
-  //       ecmaVersion: 2020,
-  //     },
-  //     plugins: ['@typescript-eslint'],
-  //     extends: [
-  //       'plugin:@typescript-eslint/recommended',
-  //       'plugin:@typescript-eslint/recommended-requiring-type-checking',
-  //     ],
-  //     files: ['**/*.ts', '**/*.tsx'],
-  //     rules: {
-  //       'react/prop-types': 'off',
-  //       'react/jsx-filename-extension': [
-  //         'error',
-  //         {
-  //           extensions: ['.jsx', '.tsx'],
-  //         },
-  //       ],
-  //       /* set rules to warn */
-  //       '@typescript-eslint/no-explicit-any': 1,
-  //       '@typescript-eslint/no-unsafe-assignment': 1,
-  //       '@typescript-eslint/no-unsafe-member-access': 1,
-  //       '@typescript-eslint/no-unsafe-call': 1,
-  //       '@typescript-eslint/no-unsafe-return': 1,
-  //       '@typescript-eslint/restrict-plus-operands': 1,
-  //       '@typescript-eslint/ban-ts-comment': 1,
-  //       'react/require-default-props': 1,
-  //     },
-  //   },
-  // ],
 }
