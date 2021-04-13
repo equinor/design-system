@@ -100,6 +100,7 @@ export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     containerRef.current,
     null,
     placement,
+    4,
   )
 
   const props = {
