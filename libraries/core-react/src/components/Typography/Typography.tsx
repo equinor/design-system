@@ -94,6 +94,9 @@ const StyledTypography = styled.p<StyledProps>`
   ${({ link }) =>
     link &&
     css`
+      &:focus {
+        outline: none;
+      }
       &[data-focus-visible-added]:focus {
         ${outlineTemplate(linktokens.states.focus.outline)}
       }
