@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { Typography, Button, Popover, PopoverProps, Card } from '@components'
+import { Typography, Button, Popover, PopoverProps } from '@components'
 import { Meta, Story } from '@storybook/react'
 import { PlacementValues } from '@hooks'
 
@@ -70,10 +70,7 @@ export const Default: Story<PopoverProps> = (args) => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Card.Actions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>OK</Button>
-        </Card.Actions>
+        <Button onClick={handleClose}>OK</Button>
       </Popover>
     </StoryCenter>
   )
