@@ -42,6 +42,7 @@ module.exports = {
       extends: [
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
+        // Disabled untill further notice as it we can't get it to work with aliases defined in core-react/tsconfig.json
         // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:import/typescript',
         'plugin:jsx-a11y/recommended',
@@ -72,7 +73,7 @@ module.exports = {
           version: 'detect', // uses latest when "detect"
         },
         'import/parsers': {
-          '@typescript-eslint/parser': ['*.ts*'],
+          '@typescript-eslint/parser': ['*.ts', '*.tsx'],
         },
         'import/resolver': {
           typescript: {
@@ -87,42 +88,26 @@ module.exports = {
         'prettier/prettier': ['error'],
         'no-underscore-dangle': ['off'],
         'no-use-before-define': ['off'],
-        'no-unused-vars': 'off',
+        // Disabled because of Typescript
+        'react/prop-types': ['off'],
+        'no-unused-vars': ['off'],
         '@typescript-eslint/no-unused-vars': ['warn'],
-        'import/default': 'off',
+        // Disabled because of react not having default export
+        'import/default': ['off'],
         'import/no-default-export': ['error'],
         'import/newline-after-import': ['error'],
         'import/prefer-default-export': ['off'],
         'import/namespace': ['error', { allowComputed: true }],
-        'react/prop-types': 'off',
         'react/require-default-props': [
           'warn',
           {
             forbidDefaultForRequired: true,
           },
         ],
-        'react/jsx-boolean-value': [
-          'error',
-          'never',
-          {
-            always: [],
-          },
-        ],
+        'react/jsx-boolean-value': ['warn'],
         'react/jsx-pascal-case': ['error'],
         'react/no-danger': ['warn'],
-        'react/prefer-stateless-function': [
-          'error',
-          {
-            ignorePureComponents: true,
-          },
-        ],
-        // '@typescript-eslint/no-explicit-any': 1,
-        // '@typescript-eslint/no-unsafe-assignment': 1,
-        // '@typescript-eslint/no-unsafe-member-access': 1,
-        // '@typescript-eslint/no-unsafe-call': 1,
-        // '@typescript-eslint/no-unsafe-return': 1,
-        // '@typescript-eslint/restrict-plus-operands': 1,
-        // '@typescript-eslint/ban-ts-comment': 1,
+        'react/prefer-stateless-function': ['error'],
         'react/no-unused-prop-types': ['error'],
         'react/no-array-index-key': ['error'],
         'react/no-typos': ['error'],
@@ -139,6 +124,14 @@ module.exports = {
             depth: 25,
           },
         ],
+        '@typescript-eslint/restrict-plus-operands': ['warn'],
+        '@typescript-eslint/ban-ts-comment': ['warn'],
+        //  Disabled untill further notice as it we can't get it to work with aliases defined in core-react/tsconfig.json
+        // '@typescript-eslint/no-unsafe-member-access': ['warn'],
+        // '@typescript-eslint/no-unsafe-call': ['warn'],
+        //'@typescript-eslint/no-unsafe-return': ['warn'],
+        // '@typescript-eslint/no-unsafe-assignment': ['warn'],
+        // '@typescript-eslint/no-explicit-any': ['warn'],
       },
     },
   ],
