@@ -10,6 +10,7 @@ const Wrapper = styled.div`
 const Grid = styled(Wrapper)`
   display: grid;
   grid-gap: 32px;
+  justify-items: start;
 `
 
 export default {
@@ -33,7 +34,7 @@ export const headings: Story<TypographyProps> = () => (
 
 export const paragraphs = (): JSX.Element => (
   <Grid>
-    <Typography variant="body_short" link>
+    <Typography variant="body_short" link href="#">
       Body short link
     </Typography>
     <Typography variant="body_short">Body short</Typography>
@@ -46,7 +47,7 @@ export const paragraphs = (): JSX.Element => (
     <Typography variant="body_short" bold italic>
       Body short bold italic
     </Typography>
-    <Typography variant="body_long" link>
+    <Typography variant="body_long" link href="#">
       Body long link
     </Typography>
     <Typography variant="body_long">Body long</Typography>
@@ -101,7 +102,7 @@ export const custom = (): JSX.Element => (
     <Typography group="table" variant="cell_text" bold>
       Table / Cell / Text / Bold
     </Typography>
-    <Typography group="table" variant="cell_text" link>
+    <Typography group="table" variant="cell_text" link href="#">
       Table / Cell / Text / Bold / Link
     </Typography>
 
@@ -141,3 +142,37 @@ export const Lines = (): JSX.Element => (
     </Typography>
   </Wrapper>
 )
+
+export const Link: Story<TypographyProps> = () => (
+  <Grid>
+    <Typography link href="#">
+      Link
+    </Typography>
+    <Typography variant="body_long">
+      Cupcake ipsum dolor sit amet caramels powder. Chocolate powder donut
+      bonbon candy canes brownie donut wafer.{' '}
+      <Typography link href="#">
+        Cake
+      </Typography>{' '}
+      topping oat{' '}
+      <Typography link href="#">
+        cake
+      </Typography>{' '}
+      cheesecake. Candy canes tiramisu apple pie cookie. Pastry marshmallow
+      candy canes. Cookie jelly-o fruitcake caramels sweet. Brownie pastry sweet
+      roll. Caramels tiramisu cotton candy carrot{' '}
+      <Typography link href="#">
+        cake
+      </Typography>{' '}
+      jujubes cheesecake bear claw. Candy caramels dessert caramels. Lollipop
+      marshmallow wafer marzipan. Sesame snaps wafer apple pie sweet roll
+      chocolate bar fruitcake.
+    </Typography>
+  </Grid>
+)
+
+Link.parameters = {
+  docs: {
+    storyDescription: 'Link used in body of text',
+  },
+}

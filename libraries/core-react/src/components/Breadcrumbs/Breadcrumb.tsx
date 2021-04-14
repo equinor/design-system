@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
-import { outlineTemplate } from '@utils'
 
 type StyledProps = Pick<BreadcrumbProps, 'maxWidth'>
 
@@ -14,12 +13,6 @@ const StyledTypography = styled(Typography)<StyledProps>`
   &:hover {
     text-decoration: underline;
     color: ${states.hover.typography.color};
-  }
-  &:focus {
-    outline: none;
-  }
-  &[data-focus-visible-added]:focus {
-    ${outlineTemplate(states.focus.outline)}
   }
   white-space: nowrap;
   overflow: hidden;

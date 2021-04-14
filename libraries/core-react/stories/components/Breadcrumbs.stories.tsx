@@ -136,20 +136,22 @@ TruncatedLabels.parameters = {
 TruncatedLabels.storyName = 'Truncated labels'
 
 export const Wrapped: Story<BreadcrumbsProps> = () => (
-  <Body>
+  <Body style={{ width: 300 }}>
     <Breadcrumbs>
       <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
-        Store
+        Label One
       </Breadcrumbs.Breadcrumb>
       <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
-        Fruits
+        Label Two
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb
-        href="#"
-        onClick={handleClick}
-        aria-current="page"
-      >
-        Apple
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+        Label Three
+      </Breadcrumbs.Breadcrumb>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+        Label Four
+      </Breadcrumbs.Breadcrumb>
+      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+        Label Five
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
   </Body>

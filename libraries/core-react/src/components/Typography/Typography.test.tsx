@@ -4,7 +4,7 @@ import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { Typography } from '.'
+import { Typography } from '../..'
 import { tokens } from '@equinor/eds-tokens'
 import { colors } from './Typography.tokens'
 import type { Typography as TypographyType } from '@equinor/eds-tokens'
@@ -147,5 +147,19 @@ describe('Typography', () => {
 
     expect(typography).toHaveStyleRule('margin-top', '16px')
     expect(typography).toHaveStyleRule('margin-bottom', '32px')
+  })
+  it('links get attribute data-focus-visible-added when focused', () => {
+    render(
+      <Typography link href="#">
+        Link
+      </Typography>,
+    )
+
+    const typography = screen.getByText('Link')
+
+    typography.focus()
+
+    expect(typography).toHaveAttribute('data-focus-visible-added')
+    expect(typography).toHaveFocus()
   })
 })

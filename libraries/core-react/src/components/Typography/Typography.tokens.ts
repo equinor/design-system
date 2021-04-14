@@ -1,4 +1,4 @@
-import { tokens } from '@equinor/eds-tokens'
+import { ComponentToken, tokens } from '@equinor/eds-tokens'
 import type { TypographyTokens } from '@equinor/eds-tokens'
 
 const { typography, colors: colorsToken } = tokens
@@ -12,6 +12,7 @@ const {
     warning__resting: { rgba: warning },
     success__resting: { rgba: success },
     disabled__text: { rgba: disabled },
+    focus: { rgba: focus },
   },
 } = colorsToken
 
@@ -51,6 +52,20 @@ type ColorVariants =
 
 type TypographyGroups = keyof typeof typography
 
+const link: ComponentToken = {
+  states: {
+    focus: {
+      outline: {
+        width: '1px',
+        color: focus,
+        style: 'dashed',
+        type: 'outline',
+        offset: '2px',
+      },
+    },
+  },
+}
+
 export {
   typography,
   colors,
@@ -58,4 +73,5 @@ export {
   TypographyVariants,
   ColorVariants,
   TypographyGroups,
+  link,
 }

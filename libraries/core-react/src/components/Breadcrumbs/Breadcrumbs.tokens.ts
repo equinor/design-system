@@ -8,7 +8,6 @@ const {
     },
     interactive: {
       primary__resting: { rgba: hoverColor },
-      focus: { rgba: focusOutlineColor },
     },
   },
   spacings: {
@@ -28,15 +27,6 @@ export const breadcrumbs: ComponentToken = {
     hover: {
       typography: {
         color: hoverColor,
-      },
-    },
-    focus: {
-      outline: {
-        width: '1px',
-        color: focusOutlineColor,
-        style: 'dashed',
-        type: 'outline',
-        offset: '6px',
       },
     },
   },
