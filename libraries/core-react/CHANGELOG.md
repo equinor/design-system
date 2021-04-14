@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2021-04-14
+
+### Added ✨
+
+- New `placement` property on `Menu` to define placement of opened `Menu`. List of available values [here](https://eds-storybook-react.azurewebsites.net/?path=/docs/components-menu--default) ([#952](https://github.com/equinor/design-system/issues/952))
+- New `anchorEl` property on `Popover`. Use this in combination with `ref` on anchor and `open` on `Popover`. ([#673](https://github.com/equinor/design-system/issues/673))
+- New `enterDelay` property on `Tooltip` to delay open ([#1154](https://github.com/equinor/design-system/issues/1154))
+- `Tooltip` can now be closed on global `ESC` keypress ([#1195](https://github.com/equinor/design-system/issues/1195))
+- `Tooltip` can now be used on `td` elements ([#984](https://github.com/equinor/design-system/issues/984))
+
+### Changed 📓
+
+- `Menu`, `Popover` and `Tooltip`
+  - Improved popup logic with the use of [popperJS](https://popper.js.org/) ([#673](https://github.com/equinor/design-system/issues/673))
+- Streamlined close logic for
+  - `Menu`, `Popover` and `Scrim` ([#1175](https://github.com/equinor/design-system/issues/1175))
+- `Menu` property `anchorEl` changed from required to optional ([#1193](https://github.com/equinor/design-system/issues/1193))
+
+### Fixed 🐛
+
+- Missing focus frame on `Breadcrumbs` ([#1134](https://github.com/equinor/design-system/issues/1134))
+- Missing props table for `Menu` in Storybook ([#1164](https://github.com/equinor/design-system/issues/1164))
+- Missing role on `Banner`([#1178](https://github.com/equinor/design-system/issues/1178))
+- Clarified use of `Banner.Actions` in Storybook ([#1188](https://github.com/equinor/design-system/issues/1188))
+- Missing focus frame on `Typography` links ([#1203](https://github.com/equinor/design-system/issues/1203))
+- Missing disabled colours on `TextField` ([#1161](https://github.com/equinor/design-system/pull/1161))
+- Wrong offset on `Button` focus frame ([#1218](https://github.com/equinor/design-system/pull/1218))
+
+### Breaking changes ⚠️
+
+- `Placement` values in `Tooltip` and `Popover` are changed to match [popperJS](https://popper.js.org/). List of available values [here](https://eds-storybook-react.azurewebsites.net/?path=/docs/components-popover--default)
+- `Popover.Anchor` deprecated, please use the `anchorEl` property on `Popover` instead.
+- Removed `open` property on `Tooltip` as it was not working as expected
+
+### Deprecated 🗑
+
+- `Popover.Anchor` deprecated due to streamlined popup logic
+
 ## [0.9.2] - 2021-03-19
 
 ### Fixed
