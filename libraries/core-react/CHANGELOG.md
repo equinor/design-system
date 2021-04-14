@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clarified use of `Banner.Actions` in Storybook ([#1188](https://github.com/equinor/design-system/issues/1188))
 - Missing focus frame on `Typography` links ([#1203](https://github.com/equinor/design-system/issues/1203))
 - Missing disabled colours on `TextField` ([#1161](https://github.com/equinor/design-system/pull/1161))
+- Wrong offset on `Button` focus frame ([#1218](https://github.com/equinor/design-system/pull/1218))
 
 ### Breaking changes ⚠️
 
