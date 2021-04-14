@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { TopBar, Icon, TextField, Search, TopbarProps } from '@components'
+import { TopBar, Icon, Search, TopbarProps } from '@components'
 import { Story, Meta } from '@storybook/react'
 
 import {

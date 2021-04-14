@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Menu, MenuProps, Typography, Button, Icon } from '@components'
@@ -38,9 +38,9 @@ const onClick = (event: React.MouseEvent) => {
 }
 
 export const Default: Story<MenuProps> = (args) => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false)
-  const [focus, setFocus] = React.useState<MenuProps['focus']>(null)
-  const anchorRef = React.useRef<HTMLButtonElement>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [focus, setFocus] = useState<MenuProps['focus']>(null)
+  const anchorRef = useRef<HTMLButtonElement>(null)
 
   const openMenu = (focus: MenuProps['focus']) => {
     setIsOpen(true)
@@ -55,6 +55,7 @@ export const Default: Story<MenuProps> = (args) => {
   useEffect(() => {
     setFocus(args.focus)
     setIsOpen(args.open)
+    // eslint-disable-next-line react/destructuring-assignment
   }, [args.open, args.focus])
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -111,9 +112,9 @@ Default.args = {
 }
 
 export const Complex: Story<MenuProps> = () => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false)
-  const [focus, setFocus] = React.useState<'first' | 'last'>(null)
-  const anchorRef = React.useRef<HTMLButtonElement>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [focus, setFocus] = useState<'first' | 'last'>(null)
+  const anchorRef = useRef<HTMLButtonElement>(null)
 
   const openMenu = (focus: 'first' | 'last') => {
     setIsOpen(true)

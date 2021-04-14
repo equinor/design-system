@@ -108,7 +108,7 @@ export const FixedTableHeader: Story<TableProps> = () => {
 export const CompactTable: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
-  const [state, setState] = React.useState<{
+  const [state, setState] = useState<{
     isOpen: boolean
     density: 'comfortable' | 'compact'
   }>({
@@ -159,7 +159,7 @@ export const CompactTable: Story<TableProps> = () => {
             aria-controls="menu-on-button"
             aria-haspopup="true"
             aria-expanded={isOpen}
-            onClick={(e) => (isOpen ? closeMenu() : openMenu())}
+            onClick={() => (isOpen ? closeMenu() : openMenu())}
             onKeyDown={onKeyPress}
           >
             <Icon data={accessible} title="accessible"></Icon>

@@ -45,6 +45,7 @@ export const Default: Story<PopoverProps> = (args) => {
 
   useEffect(() => {
     setIsOpen(args.open)
+    // eslint-disable-next-line react/destructuring-assignment
   }, [args.open])
 
   return (
@@ -77,8 +78,8 @@ export const Default: Story<PopoverProps> = (args) => {
 }
 
 export const ActivateOnClick: Story<PopoverProps> = () => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false)
-  const anchorRef = React.useRef<HTMLButtonElement>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
 
   const openPopover = () => setIsOpen(true)
   const closePopover = () => setIsOpen(false)
@@ -119,8 +120,8 @@ ActivateOnClick.parameters = {
 }
 
 export const ActivateOnHover: Story<PopoverProps> = () => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false)
-  const anchorRef = React.useRef<HTMLButtonElement>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
   let timer: number = null
 
   const openPopover = () => setIsOpen(true)

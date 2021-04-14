@@ -83,7 +83,7 @@ const ButtonInner = styled.span`
 `
 
 const Base = ({ token }: { token: ButtonToken }) => {
-  const { spacings, states, clickbound, entities } = token
+  const { spacings, states, clickbound } = token
   const { focus, hover, disabled } = states
 
   return css`

@@ -11,11 +11,11 @@
 //   "lineHeightPx": 48,
 //   "lineHeightPercent": 128
 // },
-const rootSize = 16;
+const rootSize = 16
 
-export const jsonToSassClassString = json =>
+export const jsonToSassClassString = (json) =>
   Object.entries(json).reduce(
-    (acc, [name, value,]) =>
+    (acc, [name, value]) =>
       `${acc}.${name} {
   font-family: ${value.fontFamily};
   font-size: ${pxToRem(value.fontSize)}rem;
@@ -24,16 +24,16 @@ export const jsonToSassClassString = json =>
   letter-spacing: ${pxToRem(value.letterSpacing)}rem;
   ${textTransform(value.textCase)}
 }\n`,
-    `:root {\nfont-size: ${rootSize}px;\n}\n`
-  );
-const pxToRem = unit => parseFloat((unit / rootSize).toFixed(3));
+    `:root {\nfont-size: ${rootSize}px;\n}\n`,
+  )
+const pxToRem = (unit) => parseFloat((unit / rootSize).toFixed(3))
 
-const textTransform = textCase => {
-  const template = x => `text-transform: ${x};`;
+const textTransform = (textCase) => {
+  const template = (x) => `text-transform: ${x};`
   switch (textCase) {
-    case "UPPER":
-      return template("uppercase");
+    case 'UPPER':
+      return template('uppercase')
     default:
-      return "";
+      return ''
   }
-};
+}

@@ -181,11 +181,6 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     }
   }
 
-  type childPropsType = {
-    size: number
-    disabled: boolean
-  }
-
   const resizedChildren = React.Children.map(
     children,
     (child: React.ReactElement) => {

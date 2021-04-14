@@ -22,10 +22,10 @@ type ProviderProps = {
   children: ReactNode
 }
 
-export const EdsProvider = ({
+export const EdsProvider: React.FC<ProviderProps> = ({
   children,
-  density,
-}: ProviderProps): JSX.Element => {
+  density = 'comfortable',
+}) => {
   const [state, setState] = useState<State>({ ...initalState, density })
 
   const setDensity = (density: Density) =>

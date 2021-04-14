@@ -11,6 +11,7 @@ import {
   useOutsideClick,
   Placement,
   useGlobalKeyPress,
+  useCombinedRefs,
 } from '@hooks'
 import { popover as tokens } from './Popover.tokens'
 
@@ -149,7 +150,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return (
       <StyledPopover
-        ref={popperRef}
+        ref={useCombinedRefs(popperRef, ref)}
         elevation="overlay"
         style={styles.popper}
         {...props}

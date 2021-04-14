@@ -1,3 +1,4 @@
+/* eslint-disable import/export */
 import * as React from 'react'
 import { ElementType, ReactElement, ReactNode } from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
