@@ -65,7 +65,7 @@ export const button: ButtonToken = {
     focus: {
       outline: {
         type: 'outline',
-        offset: '4px',
+        offset: '2px',
         style: 'dashed',
         color: outline.color,
         width: outline.width,
