@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Typography, Button, Popover, PopoverProps } from '@components'
 import { Meta, Story } from '@storybook/react'
-import { PlacementValues } from '@hooks'
 
 const { Title, Content } = Popover
 
@@ -18,15 +17,6 @@ export default {
   subcomponents: {
     Title,
     Content,
-  },
-  argTypes: {
-    placement: {
-      control: {
-        type: 'select',
-        options: PlacementValues,
-        defaultValue: 'auto',
-      },
-    },
   },
 } as Meta
 
