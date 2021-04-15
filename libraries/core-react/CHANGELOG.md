@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.10.1] - 2021-04-15
 
+### Fixed 🐛
+
+- Missing typescript suggestions on property `placement` ([#1229](https://github.com/equinor/design-system/issues/1229))
+- Crashing `Tooltip` component when refreshing using SSR ([#1230](https://github.com/equinor/design-system/issues/1230))
+
 ## [0.10.0] - 2021-04-14
 
 ### Added ✨
