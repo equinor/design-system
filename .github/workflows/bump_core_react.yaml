@@ -1,4 +1,4 @@
-name: Bump core-react
+name: Change npm package tag
 on:
   workflow_dispatch:
     inputs:
@@ -11,11 +11,11 @@ on:
         required: true
         default: 'next'
 jobs:
-  bump-core-react:
-    name: Bump eds-core-react version
+  change-npm-package:
+    name: Add tag
     runs-on: ubuntu-latest
     steps:
-      - name: Bump version
-        run: npm dist-tag add {{ github.event.inputs.npm-package }} --tag ${{ github.event.inputs.npm-tag }}
+      - name: Add tag
+        run: npm dist-tag add ${{ github.event.inputs.npm-package }} --tag ${{ github.event.inputs.npm-tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
