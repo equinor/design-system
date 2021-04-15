@@ -102,7 +102,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const [open, setOpen] = useState(false)
     const anchorRef = useRef<HTMLDivElement>()
     const containerId = 'eds-tooltip-container'
-    const tooltipContainerEl = document.getElementById(containerId)
     const tooltipId = useId(id, 'tooltip')
     let timer: number
 
@@ -161,7 +160,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        {tooltipContainerEl &&
+        {isMounted &&
           ReactDom.createPortal(
             <StyledTooltip
               id={tooltipId}
@@ -181,7 +180,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 </TooltipArrow>
               </ArrowWrapper>
             </StyledTooltip>,
-            tooltipContainerEl,
+            document.getElementById(containerId),
           )}
         {updatedChildren}
       </>
