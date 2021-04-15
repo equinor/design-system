@@ -10,7 +10,7 @@ import {
   useCombinedRefs,
   useGlobalKeyPress,
   useIsMounted,
-} from '@hooks'
+} from '../../hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
 const StyledTooltip = styled.div<{ open: boolean }>`

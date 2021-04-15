@@ -12,7 +12,7 @@ import {
   Placement,
   useGlobalKeyPress,
   useCombinedRefs,
-} from '@hooks'
+} from '../../hooks'
 import { popover as tokens } from './Popover.tokens'
 
 type StyledPopoverProps = Pick<PopoverProps, 'open'>

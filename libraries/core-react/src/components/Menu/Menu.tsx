@@ -9,7 +9,7 @@ import {
   usePopper,
   Placement,
   useGlobalKeyPress,
-} from '@hooks'
+} from '../../hooks'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
 
