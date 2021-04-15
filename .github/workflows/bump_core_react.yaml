@@ -1,0 +1,21 @@
+name: Bump core-react
+on:
+  workflow_dispatch:
+    inputs:
+      npm-package:
+        description: 'Npm package'
+        required: false
+        default: '@equinor/eds-core-react@0.10.1'
+      npm-tag:
+        description: 'Tag for npm package'
+        required: true
+        default: 'next'
+jobs:
+  bump-core-react:
+    name: Bump eds-core-react version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bump version
+        run: npm dist-tag add {{ github.event.inputs.npm-package }} --tag ${{ github.event.inputs.npm-tag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
