@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta, Story } from '@storybook/react'
-import { Banner, Icon, Button, BannerProps } from '@components'
+import { Banner, Icon, Button, BannerProps } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 
 const icons = {

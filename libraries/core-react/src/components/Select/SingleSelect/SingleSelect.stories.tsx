@@ -1,17 +1,12 @@
 import * as React from 'react'
 import { useState } from 'react'
-import {
-  SingleSelect,
-  SingleSelectProps,
-  Button,
-  Typography,
-} from '@components'
+import { SingleSelect, SingleSelectProps, Button, Typography } from '../../..'
 import { UseComboboxStateChange } from 'downshift'
 import { action } from '@storybook/addon-actions'
 import { Story, Meta } from '@storybook/react'
 import { useForm, Controller } from 'react-hook-form'
 import styled from 'styled-components'
-import { items } from './helpers/data'
+import { items } from '../../../stories/data'
 
 export default {
   title: 'Components/Select/SingleSelect',
@@ -19,7 +14,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `The SingleSelect component allows users to choose one 
+        component: `The SingleSelect component allows users to choose one
         item or option from a list.
         `,
       },

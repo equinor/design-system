@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Switch, SwitchProps } from '@components'
+import { Switch, SwitchProps } from '../../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 

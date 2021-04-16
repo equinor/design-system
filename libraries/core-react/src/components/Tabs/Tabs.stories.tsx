@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { Tabs, TabsProps, Typography, Search } from '@components'
+import { Tabs, TabsProps, Typography, Search } from '../..'
 import { Story, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 

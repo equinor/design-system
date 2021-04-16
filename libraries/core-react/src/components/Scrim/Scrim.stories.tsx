@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Scrim, Button, Typography, ScrimProps } from '@components'
+import { Scrim, Button, Typography, ScrimProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 import styled from 'styled-components'
@@ -21,7 +21,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A scrim is a temporary visual effect that fades the general 
+        component: `A scrim is a temporary visual effect that fades the general
         interface while allowing the user to focus on an overlay.
         `,
       },

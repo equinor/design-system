@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Snackbar, SnackbarProps, Button } from '@components'
+import { Snackbar, SnackbarProps, Button } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {

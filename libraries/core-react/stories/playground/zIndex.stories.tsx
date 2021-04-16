@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, List } from '@components'
+import { Typography, List } from '../../src'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 

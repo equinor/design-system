@@ -1,15 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  Tooltip,
-  TooltipProps,
-  Typography,
-  Button,
-  Table,
-  Icon,
-} from '@components'
-import { data, columns } from './helpers/data'
-import { toCellValues } from './helpers/toCellValues'
+import { Tooltip, TooltipProps, Typography, Button, Table, Icon } from '../..'
+import { data, columns, toCellValues } from '../../stories'
 import { Story, Meta } from '@storybook/react'
 
 import { explore } from '@equinor/eds-icons'

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { MultiSelect, MultiSelectProps, Button, Typography } from '@components'
+import { MultiSelect, MultiSelectProps, Button, Typography } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { UseMultipleSelectionStateChange } from 'downshift'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { items } from './helpers/data'
+import { items } from '../../../stories/data'
 
 export default {
   title: 'Components/Select/MultiSelect',
@@ -13,7 +13,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `The MultiSelect component allows users to choose one or 
+        component: `The MultiSelect component allows users to choose one or
         multiple items or options from a list.
         `,
       },

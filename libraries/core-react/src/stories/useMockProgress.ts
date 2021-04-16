@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export const useProgress = (value: number): number => {
+export const useMockProgress = (value: number): number => {
   const [progress, setProgress] = useState(value)
   useEffect(() => {
     const timer = setInterval(() => {

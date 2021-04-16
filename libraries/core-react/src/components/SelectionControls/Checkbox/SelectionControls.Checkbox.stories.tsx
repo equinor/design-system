@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Checkbox, Icon, Typography, Button, CheckboxProps } from '@components'
+import { Checkbox, Icon, Typography, Button, CheckboxProps } from '../../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { checkbox } from '@equinor/eds-icons'
@@ -18,7 +18,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Selection controls allow users to select options, make 
+        component: `Selection controls allow users to select options, make
         decisions and set preferences.
         `,
       },

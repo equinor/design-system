@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pagination, PaginationProps, Typography } from '@components'
+import { Pagination, PaginationProps, Typography } from '../..'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 
@@ -13,7 +13,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Pagination allows long sets of data or content to be 
+        component: `Pagination allows long sets of data or content to be
         divided into multiple pages with controls to navigate between these pages.
         `,
       },

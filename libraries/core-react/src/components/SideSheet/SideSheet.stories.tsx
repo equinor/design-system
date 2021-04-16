@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { SideSheet, SideSheetProps, Button } from '@components'
+import { SideSheet, SideSheetProps, Button } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {
@@ -14,7 +14,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A side sheet is a a toggleable area that is anchored to the edge 
+        component: `A side sheet is a a toggleable area that is anchored to the edge
         of the viewport with supplementary content.
         `,
       },

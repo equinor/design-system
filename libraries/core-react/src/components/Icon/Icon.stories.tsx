@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Icon, IconProps } from '@components'
+import { Icon, IconProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 import {

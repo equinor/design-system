@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Radio, RadioProps, Icon } from '@components'
+import { Radio, RadioProps, Icon } from '../../..'
 import styled from 'styled-components'
 import { checkbox } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
@@ -16,7 +16,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Selection controls allow users to select options, make 
+        component: `Selection controls allow users to select options, make
         decisions and set preferences.
         `,
       },

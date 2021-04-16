@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react'
-import { Slider, SliderProps } from '@components'
+import { Slider, SliderProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {

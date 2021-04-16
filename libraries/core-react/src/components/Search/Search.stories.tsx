@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Search, Typography, Button, SearchProps } from '@components'
+import { Search, Typography, Button, SearchProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 const Columns = styled.div`
@@ -33,7 +33,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Search allows users to locate or refine content based on simple 
+        component: `Search allows users to locate or refine content based on simple
         words or phrases.
         `,
       },

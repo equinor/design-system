@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Progress, DotProgressProps, Typography, Button } from '@components'
+import { Progress, DotProgressProps, Typography, Button } from '../../..'
 import { Meta, Story } from '@storybook/react'
 
 const Wrapper = styled.div`

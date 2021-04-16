@@ -1,7 +1,7 @@
 import React from 'react'
-import { Progress, LinearProgressProps } from '@components'
+import { Progress, LinearProgressProps } from '../../..'
 import { Meta, Story } from '@storybook/react'
-import { useProgress } from './hooks/useProgress'
+import { useMockProgress } from '../../../stories'
 
 export default {
   title: 'Components/Progress Indicators/Linear',
@@ -19,7 +19,7 @@ export default {
 
 export const Default: Story<LinearProgressProps> = (args) => {
   const { value = 0, variant } = args
-  const progress = variant === 'indeterminate' ? null : useProgress(value)
+  const progress = variant === 'indeterminate' ? null : useMockProgress(value)
 
   return <Progress.Linear value={progress} {...args} />
 }
@@ -29,7 +29,7 @@ export const Indeterminate: Story<LinearProgressProps> = () => (
 )
 
 export const Determinate: Story<LinearProgressProps> = () => {
-  const progress = useProgress(0)
+  const progress = useMockProgress(0)
 
   return <Progress.Linear variant="determinate" value={progress} />
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card, Avatar, Typography, Button, Icon, CardProps } from '@components'
+import { Card, Avatar, Typography, Button, Icon, CardProps } from '../..'
 import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
 
@@ -30,8 +30,8 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A card displays content related to a single subject and 
-        acts as an entry point to more detailed information. Card blocks can be 
+        component: `A card displays content related to a single subject and
+        acts as an entry point to more detailed information. Card blocks can be
         combined in a variety of ways.
         `,
       },

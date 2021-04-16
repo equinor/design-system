@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Menu, MenuProps, Typography, Button, Icon } from '@components'
+import { Menu, MenuProps, Typography, Button, Icon } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 import { tokens } from '@equinor/eds-tokens'

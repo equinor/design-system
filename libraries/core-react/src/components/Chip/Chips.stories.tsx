@@ -1,7 +1,7 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '@components'
+import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '../..'
 import { Meta, Story } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
 
@@ -23,7 +23,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Chips, also known as tags or badges, are 
+        component: `Chips, also known as tags or badges, are
         advanced badges that represent discrete information.
         `,
       },

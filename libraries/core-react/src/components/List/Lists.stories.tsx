@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, ListProps } from '@components'
+import { List, ListProps } from '../..'
 import { Meta, Story } from '@storybook/react'
 
 const start = '15'

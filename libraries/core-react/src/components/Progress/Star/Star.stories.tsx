@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Progress, StarProgressProps } from '@components'
+import { Progress, StarProgressProps } from '../../..'
 import { Meta, Story } from '@storybook/react'
-import { useProgress } from './hooks/useProgress'
+import { useMockProgress } from '../../../stories'
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -27,7 +27,7 @@ export default {
 
 export const Default: Story<StarProgressProps> = (args) => {
   const { value = 0, variant } = args
-  const progress = variant === 'indeterminate' ? null : useProgress(value)
+  const progress = variant === 'indeterminate' ? null : useMockProgress(value)
 
   return <Progress.Star value={progress} {...args} />
 }
@@ -35,7 +35,7 @@ export const Default: Story<StarProgressProps> = (args) => {
 export const Indeterminate: Story<StarProgressProps> = () => <Progress.Star />
 
 export const Determinate: Story<StarProgressProps> = () => {
-  const progress = useProgress(0)
+  const progress = useMockProgress(0)
   return <Progress.Star value={progress} variant="determinate" />
 }
 

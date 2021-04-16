@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
-import { Avatar, AvatarProps, Typography } from '@components'
+import { Avatar, AvatarProps, Typography } from '../..'
 
 const Container = styled.div`
   margin: 32px;

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Divider, DividerProps } from '@components'
+import { Divider, DividerProps } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {

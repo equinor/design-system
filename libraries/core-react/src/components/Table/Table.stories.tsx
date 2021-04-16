@@ -10,17 +10,11 @@ import {
   TopBar,
   Menu,
   Button,
-} from '@components'
+} from '../..'
 import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
-import {
-  data,
-  columns,
-  Column,
-  Data,
-  SortDirection,
-} from '../../../stories/components/helpers/data'
-import { toCellValues } from '../../../stories/components/helpers/toCellValues'
-import './styles/style.css'
+import { data, columns, Column, Data, SortDirection } from '../../stories/data'
+
+import { toCellValues } from '../../stories/toCellValues'
 
 Icon.add({ chevron_down, chevron_up })
 

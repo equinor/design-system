@@ -12,9 +12,8 @@ import {
   Button,
   Menu,
   SingleSelect,
-} from '@components'
+} from '../../src'
 import { save, more_vertical } from '@equinor/eds-icons'
-import './styles/style.css'
 import { tokens } from '@equinor/eds-tokens'
 
 Icon.add({ save, more_vertical })

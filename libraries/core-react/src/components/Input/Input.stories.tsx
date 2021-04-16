@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Input, InputProps, Label } from '@components'
+import { Input, InputProps, Label } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -10,7 +10,7 @@ export default {
     docs: {
       description: {
         component: `The **Input** component is intended to use if you need to more flexibility than the wrapped <code>TextField</code> or
-        select components give.  
+        select components give.
         `,
       },
     },

@@ -1,13 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  Progress,
-  CircularProgressProps,
-  Button,
-  Typography,
-} from '@components'
+import { Progress, CircularProgressProps, Button, Typography } from '../../..'
 import { Meta, Story } from '@storybook/react'
-import { useProgress } from './hooks/useProgress'
+import { useMockProgress } from '../../../stories'
 
 const Wrapper = styled.div`
   display: grid;
@@ -32,7 +27,7 @@ export default {
 
 export const Default: Story<CircularProgressProps> = (args) => {
   const { value = 0, variant } = args
-  const progress = variant === 'indeterminate' ? null : useProgress(value)
+  const progress = variant === 'indeterminate' ? null : useMockProgress(value)
 
   return <Progress.Circular {...args} value={progress} />
 }
@@ -42,7 +37,7 @@ export const Indeterminate: Story<CircularProgressProps> = () => {
 }
 
 export const Determinate: Story<CircularProgressProps> = () => {
-  const progress = useProgress(0)
+  const progress = useMockProgress(0)
   return <Progress.Circular variant="determinate" value={progress} />
 }
 

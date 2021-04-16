@@ -1,5 +1,5 @@
 import React from 'react'
-import { NativeSelect, NativeSelectProps } from '@components'
+import { NativeSelect, NativeSelectProps } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -8,7 +8,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `The NativeSelect component allows users to choose one or 
+        component: `The NativeSelect component allows users to choose one or
         multiple items or options from a list.
         `,
       },

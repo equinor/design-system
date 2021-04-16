@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { Accordion, Button, Icon, AccordionProps } from '@components'
+import { Accordion, Button, Icon, AccordionProps } from '../..'
 import { Meta, Story } from '@storybook/react'
 import {
   attach_file,
