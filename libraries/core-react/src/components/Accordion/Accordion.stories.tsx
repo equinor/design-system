@@ -30,7 +30,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `An accordion allows users to collapse and expand 
+        component: `An accordion allows users to collapse and expand
         sections of content.`,
       },
     },
