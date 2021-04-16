@@ -21,6 +21,12 @@ Table.Head = Head
 Table.Row = Row
 Table.Caption = Caption
 
+Table.Body.displayName = 'Table.Body'
+Table.Cell.displayName = 'Table.Cell'
+Table.Head.displayName = 'Table.Head'
+Table.Row.displayName = 'Table.Row'
+Table.Caption.displayName = 'Table.Caption'
+
 export { Table }
 export type { TableProps }
 export type { CellProps }

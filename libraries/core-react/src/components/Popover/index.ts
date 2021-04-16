@@ -19,5 +19,8 @@ Popover.PopoverContent = PopoverContent
 Popover.Title = PopoverTitle
 Popover.Content = PopoverContent
 
+Popover.Title.displayName = 'Popover.Title'
+Popover.Content.displayName = 'Popover.Content'
+
 export { Popover }
 export type { PopoverProps }

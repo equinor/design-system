@@ -15,5 +15,9 @@ TopBar.Actions = Actions
 TopBar.Header = Header
 TopBar.CustomContent = CustomContent
 
+TopBar.Actions.displayName = 'Topbar.Actions'
+TopBar.Header.displayName = 'Topbar.Header'
+TopBar.CustomContent.displayName = 'Topbar.CustomContent'
+
 export { TopBar }
 export type { TopbarProps }

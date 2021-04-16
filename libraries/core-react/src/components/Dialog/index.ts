@@ -15,5 +15,9 @@ Dialog.Actions = Actions
 Dialog.Title = Title
 Dialog.CustomContent = CustomContent
 
+Dialog.Actions.displayName = 'Dialog.Actions'
+Dialog.Title.displayName = 'Dialog.Title'
+Dialog.CustomContent.displayName = 'Dialog.CustomContent'
+
 export { Dialog }
 export type { DialogProps }

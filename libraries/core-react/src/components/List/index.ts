@@ -14,5 +14,7 @@ List.ListItem = ListItem
 // New
 List.Item = ListItem
 
+List.Item.displayName = 'List.Item'
+
 export { List }
 export type { ListProps }

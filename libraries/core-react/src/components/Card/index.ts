@@ -29,5 +29,10 @@ Card.Header = CardHeader
 Card.Media = CardMedia
 Card.HeaderTitle = CardHeaderTitle
 
+Card.Actions.displayName = 'Card.Actions'
+Card.Header.displayName = 'Card.Header'
+Card.Media.displayName = 'Card.Media'
+Card.HeaderTitle.displayName = 'Card.HeaderTitle'
+
 export { Card }
 export type { CardProps }
