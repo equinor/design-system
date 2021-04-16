@@ -1,18 +1,25 @@
 import { Meta } from '@storybook/addon-docs/blocks'
-import { Typography } from '@components'
+import { Typography, List } from '../../src'
 
 <Meta title="Introduction" />
 
-# @equinor/eds-core-react
-
-[![Version](https://img.shields.io/npm/v/@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react)
-
+<Typography variant="h1">Equinor Design System Storybook</Typography>
 <Typography variant="ingress">
-  This is the storybook for the React implementation of the Equinor Design
-  System. We have a <a href="https://eds.equinor.com/">storefront</a> with
-  extensive documentation, this storybook is just for showcasing the components
-  and as a place to put developer documentation until we move that to the
-  storefront.
+  This is the storybook for the packages of the Equinor Design
+  System. We have a <Typography link href="https://eds.equinor.com/">storefront</Typography> with
+  extensive documentation.
 </Typography>
 
-If you want to get in touch with the team, you’ll find us in the Equinor slack channel [#eds-design-system](https://equinor.slack.com/archives/CJT20H1B9). The `@equinor/eds-core-react` package can be installed from [NPM](https://equinor.slack.com/archives/CJT20H1B9) – and the source code (not public yet) is on [Github](https://github.com/equinor/design-system).
+<Typography variant="h2" style={{marginTop:'32px'}}>Packages</Typography>
+<List>
+    <List.Item><Typography link href="/?path=/docs/components">Components</Typography></List.Item>
+    <List.Item><Typography link href="/?path=/docs/icons">Icons</Typography> </List.Item>
+    <List.Item><Typography link href="/?path=/docs/tokens">Tokens</Typography> </List.Item>
+</List>
+
+<Typography variant="caption" style={{marginTop:'32px'}}>
+  If you want to get in touch with the team, you’ll find us in the Equinor slack channel  <Typography link href="https://equinor.slack.com/archives/CJT20H1B9">#eds-design-system</Typography>
+</Typography>
+
+[![Github](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/equinor/design-system)
+

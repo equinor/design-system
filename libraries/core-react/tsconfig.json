@@ -12,5 +12,10 @@
     }
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "src/**/*.stories.ts*", "src/**/*.test.ts*"]
+  "exclude": [
+    "node_modules",
+    "src/**/*.stories.ts*",
+    "src/**/*.test.ts*",
+    "src/stories"
+  ]
 }

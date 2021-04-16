@@ -2,10 +2,9 @@ const path = require('path')
 
 module.exports = {
   stories: [
-    '../stories/docs/*.stories.mdx',
-    '../stories/components/**/*.stories.@(ts|tsx|mdx)',
-    // '../stories/screens/**/*.@(ts|tsx|mdx)',
-    '../src/**/*.stories.tsx',
+    '../stories/docs/*.stories.@(ts|tsx|mdx)',
+    '../src/**/*.stories.@(ts|tsx|mdx)',
+    '../stories/**/*.stories.@(ts|tsx|mdx)',
   ],
   addons: [
     '@storybook/addon-a11y',
