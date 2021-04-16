@@ -29,6 +29,7 @@ module.exports = {
       files: ['*.test.ts*'],
       extends: ['plugin:testing-library/react'],
       plugins: ['testing-library'],
+
       rules: {
         // Remove these rules when linting errors in tests are fixed
         'testing-library/prefer-screen-queries': 'warn',
@@ -132,6 +133,13 @@ module.exports = {
         //'@typescript-eslint/no-unsafe-return': ['warn'],
         // '@typescript-eslint/no-unsafe-assignment': ['warn'],
         // '@typescript-eslint/no-explicit-any': ['warn'],
+      },
+    },
+    // Stories
+    {
+      files: ['*.stories.ts*'],
+      rules: {
+        'import/no-default-export': ['off'],
       },
     },
   ],
