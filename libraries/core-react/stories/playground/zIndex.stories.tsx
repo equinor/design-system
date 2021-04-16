@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const { ListItem } = List
 
 export default {
-  title: 'Documentation/Z-Index',
+  title: 'Playground/Z-Index',
   parameters: {
     viewMode: 'story',
   },
