@@ -19,5 +19,8 @@ Menu.MenuSection = MenuSection
 Menu.Item = MenuItem
 Menu.Section = MenuSection
 
+Menu.Item.displayName = 'Menu.Item'
+Menu.Section.displayName = 'Menu.Section'
+
 export { Menu }
 export type { MenuProps }

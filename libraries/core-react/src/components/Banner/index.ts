@@ -24,5 +24,9 @@ Banner.Icon = BannerIcon
 Banner.Message = BannerMessage
 Banner.Actions = BannerActions
 
+Banner.Icon.displayName = 'Banner.Icon'
+Banner.Message.displayName = 'Banner.Message'
+Banner.Actions.displayName = 'Banner.Actions'
+
 export { Banner }
 export type { BannerProps }

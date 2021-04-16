@@ -384,4 +384,4 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   )
 })
 
-// Slider.displayName = 'eds-slider'
+Slider.displayName = 'Slider'

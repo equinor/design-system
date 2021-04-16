@@ -12,5 +12,7 @@ const TableOfContents = BaseComponent as TableOfContentsCompoundProps
 
 TableOfContents.LinkItem = LinkItem
 
+TableOfContents.LinkItem.displayName = 'TableOfContents.LinkItem'
+
 export { TableOfContents }
 export type { TableOfContentsProps }
