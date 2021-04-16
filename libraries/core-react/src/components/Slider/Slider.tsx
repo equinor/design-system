@@ -383,5 +383,3 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     </>
   )
 })
-
-Slider.displayName = 'Slider'
