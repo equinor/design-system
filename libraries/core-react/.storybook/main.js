@@ -11,8 +11,4 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
   ],
-  webpackFinal: async (config) => {
-    config.resolve.alias['@utils'] = path.resolve(__dirname, '../src/utils')
-    return config
-  },
 }

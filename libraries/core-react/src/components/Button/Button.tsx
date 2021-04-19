@@ -8,7 +8,7 @@ import {
   bordersTemplate,
   outlineTemplate,
   spacingsTemplate,
-} from '@utils'
+} from '../../utils'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'

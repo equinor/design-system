@@ -7,7 +7,4 @@ module.exports = {
   },
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
-  moduleNameMapper: {
-    '@utils': '<rootDir>/src/utils',
-  },
 }

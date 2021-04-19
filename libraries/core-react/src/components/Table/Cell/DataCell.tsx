@@ -1,7 +1,11 @@
 import * as React from 'react'
 import { TdHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate, bordersTemplate, spacingsTemplate } from '@utils'
+import {
+  typographyTemplate,
+  bordersTemplate,
+  spacingsTemplate,
+} from '../../../utils'
 import { token as tablecell, TableCellToken } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
 import { useEds } from '../../EdsProvider'

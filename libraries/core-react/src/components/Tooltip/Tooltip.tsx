@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
 import * as ReactDom from 'react-dom'
 import styled, { css } from 'styled-components'
-import { spacingsTemplate, typographyTemplate } from '@utils'
+import { spacingsTemplate, typographyTemplate } from '../../utils'
 import {
   usePopper,
   Placement,

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup, screen, fireEvent } from '@utils'
+import { render, cleanup, screen, fireEvent } from '../../utils'
 import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'

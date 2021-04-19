@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 import { Typography } from '../Typography'
-import { spacingsTemplate } from '@utils'
+import { spacingsTemplate } from '../../utils'
 
 const { spacings, typography, states } = tokens
 

@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import { Label } from '../../Label'
 import { Icon } from '../../Icon'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
-import { spacingsTemplate } from '@utils'
+import { spacingsTemplate } from '../../../utils'
 import { select as tokens } from '../Select.tokens'
 import {
   Container,

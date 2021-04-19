@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ElementType, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
-import { typographyTemplate, spacingsTemplate } from '@utils'
+import { typographyTemplate, spacingsTemplate } from '../../utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 

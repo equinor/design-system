@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Card.tokens'
-import { spacingsTemplate, bordersTemplate } from '@utils'
+import { spacingsTemplate, bordersTemplate } from '../../utils'
 
 const { primary } = tokens
 

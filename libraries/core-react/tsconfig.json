@@ -4,10 +4,7 @@
     "declaration": true,
     "declarationDir": "./dist/types",
     "outDir": "./dist",
-    "baseUrl": ".",
-    "paths": {
-      "@utils": ["src/utils", "src/utils/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["./src/**/*"],
   "exclude": [
