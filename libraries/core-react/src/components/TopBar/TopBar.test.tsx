@@ -30,7 +30,7 @@ describe('TopBar', () => {
     )
     const topbar = screen.getByTestId('topbar')
 
-    expect(topbar).toHaveStyleRule('height', height as string)
+    expect(topbar).toHaveStyleRule('height', height)
   })
 
   it('Has all provided content', () => {
@@ -83,6 +83,6 @@ describe('TopBar', () => {
     const topbar = screen.getByTestId('topbar')
 
     expect(topbar).toHaveStyleRule('background', 'red')
-    expect(topbar).toHaveStyleRule('height', height as string)
+    expect(topbar).toHaveStyleRule('height', height)
   })
 })
