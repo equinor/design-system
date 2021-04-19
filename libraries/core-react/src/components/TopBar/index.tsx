@@ -1,7 +1,7 @@
 import { TopBar as BaseComponent, TopbarProps } from './TopBar'
-import { Actions } from './Actions'
-import { Header } from './Header'
-import { CustomContent } from './CustomContent'
+import { Actions, TopbarActionsProps } from './Actions'
+import { Header, TopbarHeaderProps } from './Header'
+import { CustomContent, TopbarCustomContentProps } from './CustomContent'
 
 type TopbarCompoundProps = typeof BaseComponent & {
   Actions: typeof Actions
@@ -20,4 +20,9 @@ TopBar.Header.displayName = 'Topbar.Header'
 TopBar.CustomContent.displayName = 'Topbar.CustomContent'
 
 export { TopBar }
-export type { TopbarProps }
+export type {
+  TopbarProps,
+  TopbarActionsProps,
+  TopbarCustomContentProps,
+  TopbarHeaderProps,
+}

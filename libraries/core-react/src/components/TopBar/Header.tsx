@@ -5,7 +5,7 @@ import { typographyTemplate } from '@utils'
 
 import { topbar as tokens } from './TopBar.tokens'
 
-type HeaderProps = HTMLAttributes<HTMLDivElement>
+export type TopbarHeaderProps = HTMLAttributes<HTMLDivElement>
 
 const {
   title: { typography },
@@ -20,15 +20,14 @@ const StyledHeader = styled.div`
   ${typographyTemplate(typography)}
 `
 
-export const Header = forwardRef<HTMLDivElement, HeaderProps>(function Header(
-  { children, ...props },
-  ref,
-) {
-  return (
-    <StyledHeader ref={ref} {...props}>
-      {children}
-    </StyledHeader>
-  )
-})
+export const Header = forwardRef<HTMLDivElement, TopbarHeaderProps>(
+  function Header({ children, ...props }, ref) {
+    return (
+      <StyledHeader ref={ref} {...props}>
+        {children}
+      </StyledHeader>
+    )
+  },
+)
 
 // Header.displayName = 'eds-topbar-header'
