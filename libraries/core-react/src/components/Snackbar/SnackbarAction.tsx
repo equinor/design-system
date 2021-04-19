@@ -10,7 +10,7 @@ const StyledSnackbarAction = styled.div`
   margin-bottom: -10px;
 `
 
-type SnackbarActionProps = {
+export type SnackbarActionProps = {
   children: ReactNode
 }
 
