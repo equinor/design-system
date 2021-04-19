@@ -23,6 +23,9 @@ export type ComponentToken = {
     pressed?: ComponentState & { pressed?: Pressed }
   }
   entities?: Record<string, ComponentToken>
+  modes?: {
+    compact?: ComponentToken
+  }
 }
 
 type ComponentState = Partial<Omit<ComponentToken, 'states'>>
