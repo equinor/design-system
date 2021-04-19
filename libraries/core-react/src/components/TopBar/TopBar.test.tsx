@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 import * as React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { screen, render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { topbar as tokens } from './TopBar.tokens'
+import { token } from './TopBar.tokens'
 import { TopBar } from '.'
 
 const { Actions, Header, CustomContent } = TopBar
@@ -17,23 +17,20 @@ const ScrollContainer = styled.div`
   height: 2000px;
   width: 500px;
 `
-const {
-  height,
-  border: { bottom },
-} = tokens
+const { height } = token
 
 afterEach(cleanup)
 
 describe('TopBar', () => {
   it('Has correct height', () => {
-    const title = 'Some application title'
-    const { container } = render(<TopBar title={title} />)
-    const topbar = container.firstChild
-    expect(topbar).toHaveStyleRule(
-      'border-bottom',
-      `${bottom.width} solid ${bottom.color.split(' ').join('')}`,
+    render(
+      <TopBar data-testid="topbar">
+        <Header>title</Header>
+      </TopBar>,
     )
-    expect(topbar).toHaveStyleRule('height', height)
+    const topbar = screen.getByTestId('topbar')
+
+    expect(topbar).toHaveStyleRule('height', height as string)
   })
 
   it('Has all provided content', () => {
@@ -41,7 +38,7 @@ describe('TopBar', () => {
     const testIdCenter = 'topbar-test-center'
     const testIdActions = 'topbar-test-actions'
 
-    const { queryByTestId } = render(
+    render(
       <TopBar>
         <Header>
           <button type="button" data-testid={testIdHeader}>
@@ -56,20 +53,20 @@ describe('TopBar', () => {
         </Actions>
       </TopBar>,
     )
-    expect(queryByTestId(testIdHeader)).toBeDefined()
-    expect(queryByTestId(testIdCenter)).toBeDefined()
-    expect(queryByTestId(testIdActions)).toBeDefined()
+    expect(screen.queryByTestId(testIdHeader)).toBeDefined()
+    expect(screen.queryByTestId(testIdCenter)).toBeDefined()
+    expect(screen.queryByTestId(testIdActions)).toBeDefined()
   })
 
   it('Has provided title', () => {
     const title = 'Some application title'
-    const { queryByText } = render(<TopBar title={title} />)
-    expect(queryByText(title)).toBeDefined()
+    render(<TopBar title={title} />)
+    expect(screen.queryByText(title)).toBeDefined()
   })
 
   it('Has sticky position in container', () => {
     const testId = 'topbar-test'
-    const { queryByTestId } = render(
+    render(
       <ScrollContainer>
         <TopBar className="test-bar" data-testid={testId}>
           Content
@@ -77,15 +74,15 @@ describe('TopBar', () => {
       </ScrollContainer>,
     )
 
-    // TODO Figure out how to check if TopBar fills container width
-    expect(queryByTestId(testId)).toHaveStyleRule('position', 'sticky')
-    expect(queryByTestId(testId)).toHaveStyleRule('top', '0')
+    expect(screen.queryByTestId(testId)).toHaveStyleRule('position', 'sticky')
+    expect(screen.queryByTestId(testId)).toHaveStyleRule('top', '0')
   })
 
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledTopBar />)
-    const topbar = container.firstChild
+    render(<StyledTopBar data-testid="topbar"></StyledTopBar>)
+    const topbar = screen.getByTestId('topbar')
+
     expect(topbar).toHaveStyleRule('background', 'red')
-    expect(topbar).toHaveStyleRule('height', height)
+    expect(topbar).toHaveStyleRule('height', height as string)
   })
 })
