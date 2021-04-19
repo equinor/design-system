@@ -1,8 +1,8 @@
 import { Card as CardWrapper, CardProps } from './Card'
-import { CardActions } from './CardActions'
-import { CardMedia } from './CardMedia'
-import { CardHeader } from './CardHeader'
-import { CardHeaderTitle } from './CardHeaderTitle'
+import { CardActions, CardActionsProps } from './CardActions'
+import { CardMedia, CardMediaProps } from './CardMedia'
+import { CardHeader, CardHeaderProps } from './CardHeader'
+import { CardHeaderTitle, CardHeaderTitleProps } from './CardHeaderTitle'
 
 type CardCompoundProps = typeof CardWrapper & {
   // Deprecated
@@ -35,4 +35,10 @@ Card.Media.displayName = 'Card.Media'
 Card.HeaderTitle.displayName = 'Card.HeaderTitle'
 
 export { Card }
-export type { CardProps }
+export type {
+  CardProps,
+  CardActionsProps,
+  CardMediaProps,
+  CardHeaderProps,
+  CardHeaderTitleProps,
+}

@@ -28,7 +28,7 @@ const StyledBannerIcon = styled.span<StyledBannerIconProps>`
   margin-right: ${enabled.spacings.right};
 `
 
-type BannerIconProps = {
+export type BannerIconProps = {
   /** Which icon background and fill color to use. Info = green, warning = red */
   variant?: BannerIconVariant
   /** @ignore */

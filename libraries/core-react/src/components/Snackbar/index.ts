@@ -1,4 +1,4 @@
-import { SnackbarAction } from './SnackbarAction'
+import { SnackbarAction, SnackbarActionProps } from './SnackbarAction'
 import { Snackbar as BaseComponent, SnackbarProps } from './Snackbar'
 
 type SnackbarTypes = typeof BaseComponent & {
@@ -15,4 +15,4 @@ Snackbar.SnackbarAction = SnackbarAction
 Snackbar.Action = SnackbarAction
 
 export { Snackbar }
-export type { SnackbarProps }
+export type { SnackbarProps, SnackbarActionProps }

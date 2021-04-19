@@ -1,6 +1,6 @@
 import { Popover as BaseComponent, PopoverProps } from './Popover'
-import { PopoverTitle } from './PopoverTitle'
-import { PopoverContent } from './PopoverContent'
+import { PopoverTitle, PopoverTitleProps } from './PopoverTitle'
+import { PopoverContent, PopoverContentProps } from './PopoverContent'
 
 type PopoverConformProps = typeof BaseComponent & {
   // Deprecated
@@ -23,4 +23,4 @@ Popover.Title.displayName = 'Popover.Title'
 Popover.Content.displayName = 'Popover.Content'
 
 export { Popover }
-export type { PopoverProps }
+export type { PopoverProps, PopoverContentProps, PopoverTitleProps }

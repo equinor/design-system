@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, ReactElement, useContext, HTMLAttributes } from 'react'
 import { TabsContext } from './Tabs.context'
 
-type TabPanelsProps = HTMLAttributes<HTMLDivElement>
+export type TabPanelsProps = HTMLAttributes<HTMLDivElement>
 
 const TabPanels = forwardRef<HTMLDivElement, TabPanelsProps>(function TabPanels(
   { children, ...props },

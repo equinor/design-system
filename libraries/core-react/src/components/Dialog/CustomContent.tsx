@@ -8,7 +8,7 @@ import { dialog as tokens } from './Dialog.tokens'
 
 const { description, spacingsMedium } = tokens
 
-const StyledCustomContent = styled.div<CustomContentProps>`
+const StyledCustomContent = styled.div<DialogCustomContentProps>`
   ${typographyTemplate(description)}
   min-height: 80px;
   margin-bottom: ${spacingsMedium};
@@ -31,34 +31,35 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-type CustomContentProps = {
+export type DialogCustomContentProps = {
   /** Control if the content should be scrollable */
   scrollable?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-export const CustomContent = forwardRef<HTMLDivElement, CustomContentProps>(
-  function CustomContent(
-    { children, className = '', scrollable = false, ...rest },
-    ref,
-  ) {
-    return (
-      <Fragment>
-        <StyledCustomContent
-          className={className}
-          scrollable={scrollable}
-          id="eds-dialog-customcontent"
-          ref={ref}
-          {...rest}
-        >
-          {children}
-        </StyledCustomContent>
+export const CustomContent = forwardRef<
+  HTMLDivElement,
+  DialogCustomContentProps
+>(function CustomContent(
+  { children, className = '', scrollable = false, ...rest },
+  ref,
+) {
+  return (
+    <Fragment>
+      <StyledCustomContent
+        className={className}
+        scrollable={scrollable}
+        id="eds-dialog-customcontent"
+        ref={ref}
+        {...rest}
+      >
+        {children}
+      </StyledCustomContent>
 
-        {children && scrollable && (
-          <StyledDivider color="medium" variant="small" />
-        )}
-      </Fragment>
-    )
-  },
-)
+      {children && scrollable && (
+        <StyledDivider color="medium" variant="small" />
+      )}
+    </Fragment>
+  )
+})
 
 // CustomContent.displayName = 'EdsDialogCustomcontent'

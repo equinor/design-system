@@ -78,7 +78,7 @@ const StyledIcon = styled(
   chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
 )
 
-type AccordionHeaderProps = {
+export type AccordionHeaderProps = {
   /** The id of the button that toggles expansion */
   id?: string
   /**  Is AccordionItem expanded */

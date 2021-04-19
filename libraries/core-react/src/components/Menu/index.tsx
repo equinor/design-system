@@ -1,6 +1,6 @@
 import { Menu as BaseMenu, MenuProps } from './Menu'
-import { MenuItem } from './MenuItem'
-import { MenuSection } from './MenuSection'
+import { MenuItem, MenuItemProps } from './MenuItem'
+import { MenuSection, MenuSectionProps } from './MenuSection'
 
 type MenuType = typeof BaseMenu & {
   // Deprecated
@@ -23,4 +23,4 @@ Menu.Item.displayName = 'Menu.Item'
 Menu.Section.displayName = 'Menu.Section'
 
 export { Menu }
-export type { MenuProps }
+export type { MenuProps, MenuItemProps, MenuSectionProps }

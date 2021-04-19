@@ -1,7 +1,7 @@
 import { Banner as BaseBanner, BannerProps } from './Banner'
-import { BannerIcon } from './BannerIcon'
-import { BannerMessage } from './BannerMessage'
-import { BannerActions } from './BannerActions'
+import { BannerIcon, BannerIconProps } from './BannerIcon'
+import { BannerMessage, BannerMessageProps } from './BannerMessage'
+import { BannerActions, BannerActionsProps } from './BannerActions'
 
 type BannerCompoundProps = typeof BaseBanner & {
   // Deprecated
@@ -29,4 +29,9 @@ Banner.Message.displayName = 'Banner.Message'
 Banner.Actions.displayName = 'Banner.Actions'
 
 export { Banner }
-export type { BannerProps }
+export type {
+  BannerProps,
+  BannerMessageProps,
+  BannerIconProps,
+  BannerActionsProps,
+}

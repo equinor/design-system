@@ -1,7 +1,7 @@
 import { Dialog as BaseComponent, DialogProps } from './Dialog'
-import { Actions } from './Actions'
-import { Title } from './Title'
-import { CustomContent } from './CustomContent'
+import { Actions, DialogActionsProps } from './Actions'
+import { Title, DialogTitleProps } from './Title'
+import { CustomContent, DialogCustomContentProps } from './CustomContent'
 
 type CompoundDialogProps = typeof BaseComponent & {
   Actions: typeof Actions
@@ -20,4 +20,9 @@ Dialog.Title.displayName = 'Dialog.Title'
 Dialog.CustomContent.displayName = 'Dialog.CustomContent'
 
 export { Dialog }
-export type { DialogProps }
+export type {
+  DialogProps,
+  DialogActionsProps,
+  DialogTitleProps,
+  DialogCustomContentProps,
+}

@@ -1,9 +1,12 @@
 import { Accordion as BaseAccordion } from './Accordion'
-import { AccordionItem } from './AccordionItem'
-import { AccordionHeader } from './AccordionHeader'
-import { AccordionHeaderTitle } from './AccordionHeaderTitle'
-import { AccordionPanel } from './AccordionPanel'
-import type { AccordionProps as Props } from './Accordion.types'
+import { AccordionItem, AccordionItemProps } from './AccordionItem'
+import { AccordionHeader, AccordionHeaderProps } from './AccordionHeader'
+import {
+  AccordionHeaderTitle,
+  AccordionHeaderTitleProps,
+} from './AccordionHeaderTitle'
+import { AccordionPanel, AccordionPanelProps } from './AccordionPanel'
+import type { AccordionProps } from './Accordion.types'
 
 type AccordionCompoundProps = typeof BaseAccordion & {
   // Deprecated
@@ -36,4 +39,10 @@ Accordion.HeaderTitle.displayName = 'Accorion.HeaderTitle'
 Accordion.Panel.displayName = 'Accorion.Panel'
 
 export { Accordion }
-export type AccordionProps = Props
+export type {
+  AccordionProps,
+  AccordionPanelProps,
+  AccordionHeaderProps,
+  AccordionHeaderTitleProps,
+  AccordionItemProps,
+}
