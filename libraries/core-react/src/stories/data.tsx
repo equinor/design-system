@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '../..'
+import { Typography } from '..'
 
 export const items = [
   'Oslo',
