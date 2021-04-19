@@ -1,5 +1,5 @@
 import { List as BaseComponent, ListProps } from './List'
-import { ListItem } from './ListItem'
+import { ListItem, ListItemProps } from './ListItem'
 
 type ListCompoundProps = typeof BaseComponent & {
   // Deprectated
@@ -17,4 +17,4 @@ List.Item = ListItem
 List.Item.displayName = 'List.Item'
 
 export { List }
-export type { ListProps }
+export type { ListProps, ListItemProps }
