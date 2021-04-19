@@ -1,7 +1,7 @@
 import { Table as BaseTable, TableProps } from './Table'
 import { Body, BodyProps } from './Body'
 import { Cell, CellProps } from './Cell'
-import { Head } from './Head'
+import { Head, HeadProps } from './Head'
 import { Row, RowProps } from './Row'
 import { Caption, CaptionProps } from './Caption'
 
@@ -28,8 +28,11 @@ Table.Row.displayName = 'Table.Row'
 Table.Caption.displayName = 'Table.Caption'
 
 export { Table }
-export type { TableProps }
-export type { CellProps }
-export type { BodyProps }
-export type { RowProps }
-export type { CaptionProps }
+export type {
+  TableProps,
+  CellProps,
+  BodyProps,
+  RowProps,
+  CaptionProps,
+  HeadProps,
+}
