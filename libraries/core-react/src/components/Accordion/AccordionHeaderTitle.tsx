@@ -3,7 +3,7 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { accordion as tokens } from './Accordion.tokens'
 
-type AccordionHeaderTitleProps = {
+export type AccordionHeaderTitleProps = {
   /**  Is AccordionItem expanded */
   isExpanded?: boolean
   /** Accordion item is disabled */
