@@ -27,8 +27,6 @@ type BreadcrumbProps = {
   /* Max label width in pixels,
    * truncate long labels based on this width */
   maxWidth?: number
-  /** click handler function */
-  onClick?: (e: MouseEvent | KeyboardEvent) => void
   /** Children is breadcrumb text */
   children: string
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>

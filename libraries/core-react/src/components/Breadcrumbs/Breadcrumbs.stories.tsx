@@ -27,9 +27,11 @@ export default {
   },
 } as Meta
 
-const handleClick = (e) => {
+const handleClick = (
+  e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  action('handleClick')(e.target.textContent)
+  action('handleClick')((e.target as HTMLElement).textContent)
   e.preventDefault()
 }
 

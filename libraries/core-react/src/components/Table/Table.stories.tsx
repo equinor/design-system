@@ -145,7 +145,7 @@ export const CompactTable: Story<TableProps> = () => {
     }
   }
 
-  const referenceElement = useRef(null)
+  const referenceElement = useRef<HTMLButtonElement>(null)
 
   return (
     <div>

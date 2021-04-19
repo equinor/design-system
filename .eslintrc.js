@@ -43,8 +43,7 @@ module.exports = {
       extends: [
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
-        // Disabled untill further notice as it we can't get it to work with aliases defined in core-react/tsconfig.json
-        // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:import/typescript',
         'plugin:jsx-a11y/recommended',
       ],
@@ -127,10 +126,9 @@ module.exports = {
         ],
         '@typescript-eslint/restrict-plus-operands': ['warn'],
         '@typescript-eslint/ban-ts-comment': ['warn'],
-        //  Disabled untill further notice as it we can't get it to work with aliases defined in core-react/tsconfig.json
         // '@typescript-eslint/no-unsafe-member-access': ['warn'],
         // '@typescript-eslint/no-unsafe-call': ['warn'],
-        //'@typescript-eslint/no-unsafe-return': ['warn'],
+        // '@typescript-eslint/no-unsafe-return': ['warn'],
         // '@typescript-eslint/no-unsafe-assignment': ['warn'],
         // '@typescript-eslint/no-explicit-any': ['warn'],
       },

@@ -31,7 +31,7 @@ export const Default: Story<PopoverProps> = (args) => {
     setIsOpen(false)
   }
 
-  const referenceElement = useRef(null)
+  const referenceElement = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     setIsOpen(args.open)
@@ -112,7 +112,7 @@ ActivateOnClick.parameters = {
 export const ActivateOnHover: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
-  let timer: number = null
+  let timer: ReturnType<typeof setTimeout> = null
 
   const openPopover = () => setIsOpen(true)
   const closePopover = () => setIsOpen(false)
