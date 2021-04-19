@@ -26,7 +26,7 @@ const StyledTabPanel = styled.div.attrs(
   },
 })
 
-type TabPanelProps = {
+export type TabPanelProps = {
   /** If `true`, the panel will be hidden. */
   hidden?: boolean
 } & HTMLAttributes<HTMLDivElement>

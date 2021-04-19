@@ -37,7 +37,7 @@ const StyledTabList = styled.div.attrs(
   grid-auto-columns: ${({ variant }) => variants[variant] as VariantsRecord};
 `
 
-type TabListProps = {
+export type TabListProps = {
   /** Sets the width of the tabs */
   variant?: Variants
 } & HTMLAttributes<HTMLDivElement>

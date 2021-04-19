@@ -1,8 +1,8 @@
 import { Tabs as BaseComponent, TabsProps } from './Tabs'
-import { TabList } from './TabList'
-import { Tab } from './Tab'
-import { TabPanels } from './TabPanels'
-import { TabPanel } from './TabPanel'
+import { TabList, TabListProps } from './TabList'
+import { Tab, TabProps } from './Tab'
+import { TabPanels, TabPanelsProps } from './TabPanels'
+import { TabPanel, TabPanelProps } from './TabPanel'
 
 type TabsCompoundProps = typeof BaseComponent & {
   Tab: typeof Tab
@@ -34,4 +34,4 @@ Tabs.Panel.displayName = 'Tabs.Panel'
 Tabs.List.displayName = 'Tabs.List'
 
 export { Tabs }
-export type { TabsProps }
+export type { TabsProps, TabProps, TabListProps, TabPanelProps, TabPanelsProps }
