@@ -6,8 +6,7 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@utils": ["src/utils", "src/utils/*"],
-      "@components": ["src", "src/*"]
+      "@utils": ["src/utils", "src/utils/*"]
     }
   },
   "include": ["./src/**/*"],
