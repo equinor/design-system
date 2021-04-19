@@ -6,7 +6,6 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@hooks": ["src/hooks", "src/hooks/*"],
       "@utils": ["src/utils", "src/utils/*"],
       "@components": ["src", "src/*"]
     }

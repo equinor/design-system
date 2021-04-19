@@ -15,7 +15,7 @@ import {
   typographyTemplate,
   setReactInputValue,
 } from '@utils'
-import { useCombinedRefs } from '@hooks'
+import { useCombinedRefs } from '../../hooks'
 
 const icons = {
   search,

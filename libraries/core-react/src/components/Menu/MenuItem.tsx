@@ -2,7 +2,7 @@ import * as React from 'react'
 import { MouseEvent } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { useCombinedRefs } from '@hooks'
+import { useCombinedRefs } from '../../hooks'
 import { spacingsTemplate, typographyTemplate } from '@utils'
 import { useMenu } from './Menu.context'
 

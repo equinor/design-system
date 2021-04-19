@@ -9,6 +9,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   moduleNameMapper: {
     '@utils': '<rootDir>/src/utils',
-    '@hooks': '<rootDir>/src/hooks',
   },
 }

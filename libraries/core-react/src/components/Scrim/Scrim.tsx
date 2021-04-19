@@ -2,7 +2,7 @@ import * as React from 'react'
 import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { useGlobalKeyPress } from '@hooks'
+import { useGlobalKeyPress } from '../../hooks'
 
 const { height, width, background } = tokens
 
