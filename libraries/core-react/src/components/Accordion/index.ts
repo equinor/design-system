@@ -6,7 +6,7 @@ import {
   AccordionHeaderTitleProps,
 } from './AccordionHeaderTitle'
 import { AccordionPanel, AccordionPanelProps } from './AccordionPanel'
-import type { AccordionProps as Props } from './Accordion.types'
+import type { AccordionProps } from './Accordion.types'
 
 type AccordionCompoundProps = typeof BaseAccordion & {
   // Deprecated
@@ -38,11 +38,11 @@ Accordion.Header.displayName = 'Accorion.Header'
 Accordion.HeaderTitle.displayName = 'Accorion.HeaderTitle'
 Accordion.Panel.displayName = 'Accorion.Panel'
 
-export {
-  Accordion,
+export { Accordion }
+export type {
+  AccordionProps,
   AccordionPanelProps,
   AccordionHeaderProps,
   AccordionHeaderTitleProps,
   AccordionItemProps,
 }
-export type AccordionProps = Props
