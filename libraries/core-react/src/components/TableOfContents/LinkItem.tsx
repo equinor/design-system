@@ -56,9 +56,9 @@ const StyledLinkItem = styled.li`
     }
   }
 `
-type LinkItemProps = HTMLAttributes<HTMLLIElement>
+export type TableOfContentsLinkItemProps = HTMLAttributes<HTMLLIElement>
 
-export const LinkItem = forwardRef<HTMLLIElement, LinkItemProps>(
+export const LinkItem = forwardRef<HTMLLIElement, TableOfContentsLinkItemProps>(
   function LinkItem({ children, ...props }, ref) {
     return (
       <StyledLinkItem {...props} ref={ref}>

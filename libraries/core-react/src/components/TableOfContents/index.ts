@@ -2,7 +2,7 @@ import {
   TableOfContents as BaseComponent,
   TableOfContentsProps,
 } from './TableOfContents'
-import { LinkItem } from './LinkItem'
+import { LinkItem, TableOfContentsLinkItemProps } from './LinkItem'
 
 type TableOfContentsCompoundProps = typeof BaseComponent & {
   LinkItem: typeof LinkItem
@@ -15,4 +15,4 @@ TableOfContents.LinkItem = LinkItem
 TableOfContents.LinkItem.displayName = 'TableOfContents.LinkItem'
 
 export { TableOfContents }
-export type { TableOfContentsProps }
+export type { TableOfContentsProps, TableOfContentsLinkItemProps }
