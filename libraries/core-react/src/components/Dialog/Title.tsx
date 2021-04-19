@@ -27,25 +27,24 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${spacingsMedium};
 `
 
-type TitleProps = React.HTMLAttributes<HTMLDivElement>
+export type DialogTitleProps = React.HTMLAttributes<HTMLDivElement>
 
-export const Title = forwardRef<HTMLDivElement, TitleProps>(function Title(
-  { children, className = '', ...props },
-  ref,
-) {
-  return (
-    <Fragment>
-      <StyledTitle
-        className={className}
-        id="eds-dialog-title"
-        ref={ref}
-        {...props}
-      >
-        {children}
-      </StyledTitle>
-      {children && <StyledDivider color="medium" variant="small" />}
-    </Fragment>
-  )
-})
+export const Title = forwardRef<HTMLDivElement, DialogTitleProps>(
+  function Title({ children, className = '', ...props }, ref) {
+    return (
+      <Fragment>
+        <StyledTitle
+          className={className}
+          id="eds-dialog-title"
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </StyledTitle>
+        {children && <StyledDivider color="medium" variant="small" />}
+      </Fragment>
+    )
+  },
+)
 
 // Title.displayName = 'EdsDialogTitle'
