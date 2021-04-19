@@ -5,10 +5,10 @@ import styled from 'styled-components'
 const ContentWrapper = styled.div`
   overflow: hidden;
 `
-type Props = HTMLAttributes<HTMLDivElement>
+export type PopoverContentProps = HTMLAttributes<HTMLDivElement>
 
-export const PopoverContent = forwardRef<HTMLDivElement, Props>(
-  function EdsPopoverContent({ children, ...rest }, ref) {
+export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
+  function PopoverContent({ children, ...rest }, ref) {
     const props = {
       ...rest,
       ref,
