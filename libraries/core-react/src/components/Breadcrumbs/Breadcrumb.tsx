@@ -23,7 +23,7 @@ const StyledTypography = styled(Typography)<StyledProps>`
   ${({ maxWidth }) => css({ maxWidth })}
 `
 
-type BreadcrumbProps = {
+export type BreadcrumbProps = {
   /* Max label width in pixels,
    * truncate long labels based on this width */
   maxWidth?: number

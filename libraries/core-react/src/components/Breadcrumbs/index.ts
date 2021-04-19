@@ -1,5 +1,5 @@
 import { Breadcrumbs as BaseComponent, BreadcrumbsProps } from './Breadcrumbs'
-import { Breadcrumb } from './Breadcrumb'
+import { Breadcrumb, BreadcrumbProps } from './Breadcrumb'
 
 type BreadcrumbsCompoundProps = typeof BaseComponent & {
   Breadcrumb: typeof Breadcrumb
@@ -12,4 +12,4 @@ Breadcrumbs.Breadcrumb = Breadcrumb
 Breadcrumbs.Breadcrumb.displayName = 'Breadcrumbs.Breadcrumb'
 
 export { Breadcrumbs }
-export type { BreadcrumbsProps }
+export type { BreadcrumbsProps, BreadcrumbProps }
