@@ -7,9 +7,14 @@ import {
   Pressed,
 } from './index'
 
+type Size = {
+  min?: string
+  max?: string
+}
+
 export type ComponentToken = {
-  height?: string
-  width?: string
+  height?: string | Size
+  width?: string | Size
   background?: string
   spacings?: Spacing
   border?: Borders
