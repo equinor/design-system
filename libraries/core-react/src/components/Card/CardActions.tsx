@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import type { CSSObject } from 'styled-components'
 import { Typography } from '../Typography'
 
-export type CardActionProps = {
+export type CardActionsProps = {
   /** Should the actions be right aligned */
   alignRight?: boolean
   /** Meta information */
@@ -20,7 +20,7 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   justify-content: ${({ justifyContent }) => justifyContent};
 `
 
-export const CardActions = forwardRef<HTMLDivElement, CardActionProps>(
+export const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
   function CardActions(
     { children, className = '', alignRight = false, meta = '', ...rest },
     ref,
