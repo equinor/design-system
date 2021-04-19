@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import * as tokens from './Banner.tokens'
 import { Divider } from '../Divider'
 import { BannerIcon } from './BannerIcon'
-import { spacingsTemplate } from '@utils'
+import { spacingsTemplate } from '../../utils'
 
 const StyledBanner = styled.div``
 

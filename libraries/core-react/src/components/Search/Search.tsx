@@ -14,8 +14,8 @@ import {
   spacingsTemplate,
   typographyTemplate,
   setReactInputValue,
-} from '@utils'
-import { useCombinedRefs } from '@hooks'
+} from '../../utils'
+import { useCombinedRefs } from '../../hooks'
 
 const icons = {
   search,

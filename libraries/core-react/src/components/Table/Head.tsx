@@ -2,7 +2,7 @@ import * as React from 'react'
 import { HTMLAttributes, forwardRef } from 'react'
 import styled from 'styled-components'
 import { token } from './Cell/HeaderCell.tokens'
-import { bordersTemplate } from '@utils'
+import { bordersTemplate } from '../../utils'
 import { InnerContext } from './Inner.context'
 
 const StyledTableHead = styled.thead`

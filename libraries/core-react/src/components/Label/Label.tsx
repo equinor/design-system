@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { LabelHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '@utils'
+import { typographyTemplate } from '../../utils'
 import { label as tokens } from './Label.tokens'
 
 type LabelBaseType = {

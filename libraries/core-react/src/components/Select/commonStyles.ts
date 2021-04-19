@@ -4,7 +4,7 @@ import { List } from '../List'
 import { Button } from '../Button'
 import styled from 'styled-components'
 import { select as tokens } from './Select.tokens'
-import { typographyTemplate } from '@utils'
+import { typographyTemplate } from '../../utils'
 
 const { ListItem } = List
 

@@ -5,7 +5,7 @@ import { Icon } from '../Icon'
 import { Paper } from '../Paper'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
-import { spacingsTemplate, typographyTemplate } from '@utils'
+import { spacingsTemplate, typographyTemplate } from '../../utils'
 import {
   usePopper,
   useOutsideClick,

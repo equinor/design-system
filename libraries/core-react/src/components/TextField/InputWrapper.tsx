@@ -6,7 +6,7 @@ import { Icon } from './Icon'
 import type { Variants } from './types'
 import type { TextFieldToken } from './TextField.tokens'
 import styled, { css } from 'styled-components'
-import { typographyTemplate, outlineTemplate } from '@utils'
+import { typographyTemplate, outlineTemplate } from '../../utils'
 import * as tokens from './TextField.tokens'
 
 const { textfield } = tokens

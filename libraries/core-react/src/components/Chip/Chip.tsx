@@ -8,7 +8,7 @@ import {
   typographyTemplate,
   outlineTemplate,
   bordersTemplate,
-} from '@utils'
+} from '../../utils'
 
 const { enabled, error } = tokens
 
