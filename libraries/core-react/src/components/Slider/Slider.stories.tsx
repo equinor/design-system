@@ -5,13 +5,6 @@ import { Story, Meta } from '@storybook/react'
 export default {
   title: 'Components/Slider',
   component: Slider,
-  decorators: [
-    (Story) => (
-      <div style={{ margin: '3rem' }}>
-        <Story />
-      </div>
-    ),
-  ],
   parameters: {
     docs: {
       description: {
@@ -24,7 +17,11 @@ export default {
 } as Meta
 
 export const Default: Story<SliderProps> = (args) => {
-  return <Slider {...args} />
+  return (
+    <div style={{ margin: '3rem' }}>
+      <Slider {...args} />
+    </div>
+  )
 }
 
 export const RangeSlider: Story<SliderProps> = () => {
@@ -51,6 +48,13 @@ export const RangeSlider: Story<SliderProps> = () => {
   )
 }
 RangeSlider.storyName = 'Range slider'
+RangeSlider.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
   const [value, updateValue] = useState([0, 500])
@@ -86,6 +90,13 @@ export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
   )
 }
 RangeSliderWithCommittedStep.storyName = 'Range slider with committed step'
+RangeSliderWithCommittedStep.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const RangeSliderWithInterval: Story<SliderProps> = () => (
   <>
@@ -101,6 +112,13 @@ export const RangeSliderWithInterval: Story<SliderProps> = () => (
 )
 
 RangeSliderWithInterval.storyName = 'Range slider with interval'
+RangeSliderWithInterval.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const RangeSliderWithDates: Story<SliderProps> = () => {
   const outputFunction = (value) => {
@@ -131,6 +149,13 @@ export const RangeSliderWithDates: Story<SliderProps> = () => {
 }
 
 RangeSliderWithDates.storyName = 'Range slider with dates'
+RangeSliderWithDates.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const SimpleSlider: Story<SliderProps> = () => (
   <>
@@ -139,6 +164,13 @@ export const SimpleSlider: Story<SliderProps> = () => (
   </>
 )
 SimpleSlider.storyName = 'Simple slider'
+SimpleSlider.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const SimpleSliderWithSteps: Story<SliderProps> = () => {
   return (
@@ -158,6 +190,13 @@ export const SimpleSliderWithSteps: Story<SliderProps> = () => {
 }
 
 SimpleSliderWithSteps.storyName = 'Simple slider with steps'
+SimpleSliderWithSteps.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const Disabled: Story<SliderProps> = () => (
   <>
@@ -170,3 +209,11 @@ export const Disabled: Story<SliderProps> = () => (
     />
   </>
 )
+
+Disabled.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
