@@ -32,28 +32,14 @@ export default {
   },
 } as Meta
 
-export const Default: Story<PaginationProps> = (args) => {
-  return <Pagination {...args} />
-}
+export const Default: Story<PaginationProps> = (args) => (
+  <Pagination {...args} />
+)
 
-export const Variants: Story<PaginationProps> = () => {
-  return (
-    <>
-      <PaddedTypography variant="h2">Length before truncation</PaddedTypography>
-      <Pagination totalItems={7} itemsPerPage={1} />
-      <PaddedTypography variant="h2">Truncated</PaddedTypography>
-      <Pagination totalItems={8} itemsPerPage={1} />
-      <PaddedTypography variant="h2">
-        With current and total items indicator
-      </PaddedTypography>
-      <Pagination totalItems={140} itemsPerPage={3} withItemIndicator />
-      <PaddedTypography variant="h2">Default page</PaddedTypography>
-      <Pagination
-        totalItems={140}
-        itemsPerPage={3}
-        withItemIndicator
-        defaultPage={6}
-      />
-    </>
-  )
-}
+export const Truncated: Story<PaginationProps> = () => (
+  <Pagination totalItems={8} itemsPerPage={1} />
+)
+
+export const WithIndicator: Story<PaginationProps> = () => (
+  <Pagination totalItems={140} itemsPerPage={3} withItemIndicator />
+)
