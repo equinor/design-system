@@ -1,15 +1,8 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '../../utils'
-
-import { topbar as tokens } from './TopBar.tokens'
 
 export type TopbarHeaderProps = HTMLAttributes<HTMLDivElement>
-
-const {
-  title: { typography },
-} = tokens
 
 const StyledHeader = styled.div`
   grid-area: left;
@@ -17,7 +10,6 @@ const StyledHeader = styled.div`
   grid-template-columns: auto auto;
   grid-gap: 24px;
   align-items: center;
-  ${typographyTemplate(typography)}
 `
 
 export const Header = forwardRef<HTMLDivElement, TopbarHeaderProps>(
