@@ -1,11 +1,6 @@
 import React from 'react'
-import { Pagination, PaginationProps, Typography } from '../..'
-import styled from 'styled-components'
+import { Pagination, PaginationProps } from '../..'
 import { Story, Meta } from '@storybook/react'
-
-const PaddedTypography = styled(Typography)`
-  margin: 16px 0;
-`
 
 export default {
   title: 'Components/Pagination',
