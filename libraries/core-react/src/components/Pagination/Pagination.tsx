@@ -35,7 +35,7 @@ const Navigation = styled.nav<NavigationStyledProps>`
   align-items: center;
   flex-wrap: nowrap;
   margin-left: ${({ withItemIndicator }) =>
-    withItemIndicator ? tokens.spacingSmall : 0};
+    withItemIndicator ? tokens.spacings.left : 0};
 `
 
 const OrderedList = styled.ol`
@@ -43,7 +43,7 @@ const OrderedList = styled.ol`
   margin: 0;
   padding: 0;
   display: grid;
-  grid-gap: ${tokens.spacingSmall};
+  grid-gap: ${tokens.spacings.left};
   grid-auto-flow: column;
 `
 
@@ -54,7 +54,7 @@ const ListItem = styled.li`
 const StyledIcon = styled(Icon)`
   align-self: center;
   justify-self: center;
-  fill: ${tokens.disabledColor};
+  fill: ${tokens.entities.icon.typography.color};
 `
 
 const FlexContainer = styled.div`
