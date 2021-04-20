@@ -2,7 +2,11 @@ import * as React from 'react'
 import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
 import * as ReactDom from 'react-dom'
 import styled, { css } from 'styled-components'
-import { spacingsTemplate, typographyTemplate } from '../../utils'
+import {
+  spacingsTemplate,
+  typographyTemplate,
+  bordersTemplate,
+} from '../../utils'
 import {
   usePopper,
   Placement,
@@ -16,9 +20,10 @@ import { tooltip as tokens } from './Tooltip.tokens'
 const StyledTooltip = styled.div<{ open: boolean }>`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
-  z-index: 350;
+  ${bordersTemplate(tokens.border)}
+
   background: ${tokens.background};
-  border-radius: ${tokens.borderRadius};
+  z-index: 350;
   white-space: nowrap;
   ${({ open }) =>
     css({
@@ -26,32 +31,32 @@ const StyledTooltip = styled.div<{ open: boolean }>`
     })};
   .arrow {
     z-index: -1;
-    width: ${tokens.arrow.width};
-    height: ${tokens.arrow.height};
+    width: ${tokens.entities.arrow.width};
+    height: ${tokens.entities.arrow.height};
   }
   &[data-popper-placement^='top'] > .arrow {
-    bottom: ${tokens.arrow.placement};
+    bottom: ${tokens.entities.arrow.spacings.bottom};
     .arrowSvg {
       transform: rotate(-90deg);
     }
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
-    top: ${tokens.arrow.placement};
+    top: ${tokens.entities.arrow.spacings.top};
     .arrowSvg {
       transform: rotate(90deg);
     }
   }
 
   &[data-popper-placement^='left'] > .arrow {
-    right: ${tokens.arrow.placement};
+    right: ${tokens.entities.arrow.spacings.right};
     .arrowSvg {
       transform: rotate(-180deg);
     }
   }
 
   &[data-popper-placement^='right'] > .arrow {
-    left: ${tokens.arrow.placement};
+    left: ${tokens.entities.arrow.spacings.left};
   }
 `
 
@@ -59,8 +64,8 @@ const ArrowWrapper = styled.div`
   &,
   &::before {
     position: absolute;
-    width: ${tokens.arrow.width};
-    height: ${tokens.arrow.height};
+    width: ${tokens.entities.arrow.width};
+    height: ${tokens.entities.arrow.height};
     z-index: -1;
   }
 
@@ -74,8 +79,8 @@ type ArrowProps = {
 } & SVGProps<SVGSVGElement>
 
 const TooltipArrow = styled.svg<ArrowProps>`
-  width: ${tokens.arrow.width};
-  height: ${tokens.arrow.height};
+  width: ${tokens.entities.arrow.width};
+  height: ${tokens.entities.arrow.height};
   position: absolute;
   fill: ${tokens.background};
 `
