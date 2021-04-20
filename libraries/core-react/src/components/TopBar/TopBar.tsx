@@ -1,17 +1,15 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { spacingsTemplate, typographyTemplate } from '../../utils'
-import { topbar as tokens } from './TopBar.tokens'
+import {
+  spacingsTemplate,
+  typographyTemplate,
+  bordersTemplate,
+} from '../../utils'
+import { token } from './TopBar.tokens'
 
 export type TopbarProps = HTMLAttributes<HTMLElement>
 
-const {
-  background,
-  height,
-  spacings,
-  border,
-  title: { typography },
-} = tokens
+const { background, height, spacings, border, typography } = token
 
 const StyledTopBar = styled.header`
   height: ${height};
@@ -25,8 +23,7 @@ const StyledTopBar = styled.header`
   grid-template-columns: auto 1fr auto;
   grid-template-areas: 'left center right';
   align-items: center;
-  border-bottom: ${border.bottom.width} solid ${border.bottom.color};
-
+  ${bordersTemplate(border)}
   ${spacingsTemplate(spacings)};
   ${typographyTemplate(typography)}
 `
