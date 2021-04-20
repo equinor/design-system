@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, SVGProps, Ref } from 'react'
 import styled, { keyframes } from 'styled-components'
 import * as tokens from './DotProgress.tokens'

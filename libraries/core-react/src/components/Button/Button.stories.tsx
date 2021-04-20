@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Icon, ButtonProps } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'

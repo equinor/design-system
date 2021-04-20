@@ -1,8 +1,8 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 export const useIsMounted = (): boolean => {
-  const [isMounted, setIsMounted] = React.useState<boolean>(null)
-  React.useEffect(() => {
+  const [isMounted, setIsMounted] = useState<boolean>(null)
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   })

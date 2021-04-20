@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { divider as tokens } from './Divider.tokens'

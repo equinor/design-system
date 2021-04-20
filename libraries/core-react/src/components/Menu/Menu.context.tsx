@@ -1,5 +1,10 @@
-import * as React from 'react'
-import { useState, useContext, ReactNode, MouseEvent } from 'react'
+import {
+  useState,
+  useContext,
+  ReactNode,
+  MouseEvent,
+  createContext,
+} from 'react'
 
 export type State = {
   focusedIndex: number
@@ -16,7 +21,7 @@ const initalState: State = {
   onClose: null,
 }
 
-const MenuContext = React.createContext<State>(initalState)
+const MenuContext = createContext<State>(initalState)
 
 type ProviderProps = { children: ReactNode }
 

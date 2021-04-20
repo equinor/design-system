@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Menu, MenuProps, Typography, Button, Icon } from '../..'

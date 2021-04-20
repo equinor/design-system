@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { ThHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import {

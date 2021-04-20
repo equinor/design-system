@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Tooltip, TooltipProps, Typography, Button, Table, Icon } from '../..'
 import { data, columns, toCellValues } from '../../stories'

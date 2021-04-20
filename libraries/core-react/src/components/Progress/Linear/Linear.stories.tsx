@@ -1,4 +1,3 @@
-import React from 'react'
 import { Progress, LinearProgressProps } from '../../..'
 import { Meta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'

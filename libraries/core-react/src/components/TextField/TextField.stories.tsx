@@ -1,4 +1,3 @@
-import React from 'react'
 import { TextField, TextFieldProps, Icon } from '../..'
 import { Story, Meta } from '@storybook/react'
 import { thumbs_up, warning_filled, error_filled } from '@equinor/eds-icons'

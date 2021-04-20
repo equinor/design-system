@@ -1,4 +1,5 @@
-import * as React from 'react'
+import { Children as ReactChildren, cloneElement } from 'react'
+
 import {
   forwardRef,
   useState,
@@ -38,12 +39,12 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       setExpanded(!expanded)
     }
 
-    const Children = React.Children.map(children, (child, childIndex) => {
+    const Children = ReactChildren.map(children, (child, childIndex) => {
       const headerId = `${accordionId}-header-${index + 1}`
       const panelId = `${accordionId}-panel-${index + 1}`
 
       return childIndex === 0
-        ? React.cloneElement(child as ReactElement, {
+        ? cloneElement(child as ReactElement, {
             isExpanded: expanded,
             toggleExpanded,
             id: headerId,
@@ -53,7 +54,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
             parentIndex: index,
             disabled,
           })
-        : React.cloneElement(child as ReactElement, {
+        : cloneElement(child as ReactElement, {
             hidden: !expanded,
             id: panelId,
             headerId,

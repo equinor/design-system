@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { ElementType, InputHTMLAttributes } from 'react'
+import { ElementType, InputHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { InputVariantProps, input as tokens } from './Input.tokens'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
@@ -87,32 +86,30 @@ export type InputProps = {
   readonly?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  function Input(
-    {
-      multiline = false,
-      variant = 'default',
-      disabled = false,
-      type = 'text',
-      ...other
-    },
-    ref,
-  ) {
-    const as: ElementType = multiline ? 'textarea' : 'input'
-    const inputVariant = tokens[variant]
-    const spacings = tokens.spacings.comfortable
-
-    const inputProps = {
-      as,
-      ref,
-      type,
-      disabled,
-      variant: variant,
-      token: inputVariant,
-      spacings: spacings,
-      ...other,
-    }
-
-    return <StyledInput {...inputProps} />
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  {
+    multiline = false,
+    variant = 'default',
+    disabled = false,
+    type = 'text',
+    ...other
   },
-)
+  ref,
+) {
+  const as: ElementType = multiline ? 'textarea' : 'input'
+  const inputVariant = tokens[variant]
+  const spacings = tokens.spacings.comfortable
+
+  const inputProps = {
+    as,
+    ref,
+    type,
+    disabled,
+    variant: variant,
+    token: inputVariant,
+    spacings: spacings,
+    ...other,
+  }
+
+  return <StyledInput {...inputProps} />
+})

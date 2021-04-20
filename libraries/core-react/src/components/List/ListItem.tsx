@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef } from 'react'
 
 export type ListItemProps = React.HTMLAttributes<HTMLLIElement>

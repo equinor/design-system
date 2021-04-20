@@ -1,5 +1,12 @@
-import * as React from 'react'
-import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
+import {
+  forwardRef,
+  useRef,
+  useState,
+  HTMLAttributes,
+  SVGProps,
+  useEffect,
+  cloneElement,
+} from 'react'
 import * as ReactDom from 'react-dom'
 import styled, { css } from 'styled-components'
 import { spacingsTemplate, typographyTemplate } from '../../utils'
@@ -105,7 +112,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const tooltipId = useId(id, 'tooltip')
     let timer: number
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (document.getElementById(containerId) === null) {
         const tooltipContainerElement = document.createElement('div')
         tooltipContainerElement.id = containerId
@@ -147,7 +154,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...attributes.popper,
     }
 
-    const updatedChildren = React.cloneElement(children, {
+    const updatedChildren = cloneElement(children, {
       ref: anchorRef,
       'aria-describedby': open ? tooltipId : null,
       onMouseOver: openTooltip,

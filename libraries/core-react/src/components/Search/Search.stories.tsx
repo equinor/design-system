@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Search, Typography, Button, SearchProps } from '../..'

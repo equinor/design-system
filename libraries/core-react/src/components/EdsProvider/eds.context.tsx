@@ -1,5 +1,10 @@
-import * as React from 'react'
-import { useState, useContext, ReactNode, useEffect } from 'react'
+import {
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+  createContext,
+} from 'react'
 
 type Density = 'compact' | 'comfortable'
 
@@ -15,7 +20,7 @@ type UseEdsProps<T> = {
   setDensity: (density: Density) => void
 } & T
 
-const EdsContext = React.createContext<State>(initalState)
+const EdsContext = createContext<State>(initalState)
 
 type ProviderProps = {
   density?: Density

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'

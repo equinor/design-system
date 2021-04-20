@@ -1,20 +1,28 @@
 /* eslint-disable import/export */
-import * as React from 'react'
-import { ElementType, ReactElement, ReactNode } from 'react'
+import {
+  ElementType,
+  ReactElement,
+  ReactNode,
+  cloneElement,
+  useRef,
+  Children as ReactChildren,
+  useState,
+  useEffect,
+} from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 
 const AllTheProviders = ({ children }: { children: ReactNode }) => {
-  const anchorRef = React.useRef(null)
-  const [anchorEl, setAnchorEl] = React.useState<ElementType>(null)
+  const anchorRef = useRef(null)
+  const [anchorEl, setAnchorEl] = useState<ElementType>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (anchorRef.current) {
       setAnchorEl(anchorRef.current)
     }
   }, [anchorRef])
 
-  const updatedChildren = React.Children.map(children, (child) =>
-    React.cloneElement(child as ReactElement, {
+  const updatedChildren = ReactChildren.map(children, (child) =>
+    cloneElement(child as ReactElement, {
       anchorEl,
     }),
   ) as ReactNode

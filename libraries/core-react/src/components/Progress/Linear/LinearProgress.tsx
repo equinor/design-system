@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { keyframes } from 'styled-components'
 import type { CSSObject } from 'styled-components'

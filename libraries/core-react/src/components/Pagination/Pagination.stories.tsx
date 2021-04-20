@@ -1,4 +1,3 @@
-import React from 'react'
 import { Pagination, PaginationProps, Typography } from '../..'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'

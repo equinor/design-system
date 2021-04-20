@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '../../utils'

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { Checkbox, Icon, Typography, Button, CheckboxProps } from '../../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'

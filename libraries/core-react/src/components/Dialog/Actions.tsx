@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { dialog as tokens } from './Dialog.tokens'

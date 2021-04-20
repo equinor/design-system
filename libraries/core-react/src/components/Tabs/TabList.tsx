@@ -1,4 +1,3 @@
-import * as React from 'react'
 import {
   forwardRef,
   useContext,
@@ -9,6 +8,8 @@ import {
   HTMLAttributes,
   ButtonHTMLAttributes,
   RefAttributes,
+  cloneElement,
+  Children as ReactChildren,
 } from 'react'
 import styled from 'styled-components'
 import { useCombinedRefs } from '../../hooks'
@@ -76,24 +77,21 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     currentTab.current = activeTab
   }, [activeTab])
 
-  const Tabs = React.Children.map(
-    children,
-    (child: TabChild, index: number) => {
-      const tabRef =
-        index === activeTab
-          ? useCombinedRefs<HTMLButtonElement>(child.ref, selectedTabRef)
-          : child.ref
+  const Tabs = ReactChildren.map(children, (child: TabChild, index: number) => {
+    const tabRef =
+      index === activeTab
+        ? useCombinedRefs<HTMLButtonElement>(child.ref, selectedTabRef)
+        : child.ref
 
-      return React.cloneElement(child, {
-        id: `${tabsId}-tab-${index + 1}`,
-        'aria-controls': `${tabsId}-panel-${index + 1}`,
-        active: index === activeTab,
-        index,
-        onClick: () => handleChange(index),
-        ref: tabRef,
-      })
-    },
-  )
+    return cloneElement(child, {
+      id: `${tabsId}-tab-${index + 1}`,
+      'aria-controls': `${tabsId}-panel-${index + 1}`,
+      active: index === activeTab,
+      index,
+      onClick: () => handleChange(index),
+      ref: tabRef,
+    })
+  })
 
   const focusableChildren: number[] = Tabs.filter((child: TabChild) => {
     const childProps = child.props as TabChild

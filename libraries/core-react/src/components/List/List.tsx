@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, HTMLAttributes, ElementType } from 'react'
 import styled, { css } from 'styled-components'
 import { list as tokens } from './List.tokens'

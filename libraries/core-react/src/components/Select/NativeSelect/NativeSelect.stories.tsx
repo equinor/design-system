@@ -1,4 +1,3 @@
-import React from 'react'
 import { NativeSelect, NativeSelectProps } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Radio, RadioProps, Icon } from '../../..'
 import styled from 'styled-components'
 import { checkbox } from '@equinor/eds-icons'

@@ -1,5 +1,4 @@
-import * as React from 'react'
-
+import { createContext } from 'react'
 type State = {
   variant: 'body' | 'head'
   sticky?: boolean
@@ -9,4 +8,4 @@ const initalState: State = {
   variant: 'body',
 }
 
-export const InnerContext = React.createContext<State>(initalState)
+export const InnerContext = createContext<State>(initalState)

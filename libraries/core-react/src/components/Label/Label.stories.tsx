@@ -1,4 +1,3 @@
-import React from 'react'
 import { Label, LabelProps, Input } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 

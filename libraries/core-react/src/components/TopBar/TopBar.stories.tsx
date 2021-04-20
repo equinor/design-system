@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import styled from 'styled-components'
 import { TopBar, Icon, Search, TopbarProps } from '../..'
 import { Story, Meta } from '@storybook/react'

@@ -1,10 +1,10 @@
-import * as React from 'react'
 import {
   useState,
   useRef,
   useEffect,
   InputHTMLAttributes,
   RefAttributes,
+  forwardRef,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
@@ -186,138 +186,136 @@ type ControlledSearch = (
 
 export type SearchProps = InputHTMLAttributes<HTMLInputElement>
 
-export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
-  function Search(
-    {
-      onChange,
-      defaultValue = '',
-      value,
-      className = '',
-      disabled = false,
-      onBlur,
-      onFocus,
-      ...rest
-    },
-    ref,
-  ) {
-    const isControlled = typeof value !== 'undefined'
-    const isActive = (isControlled && value !== '') || defaultValue !== ''
-    const inputRef = useCombinedRefs(useRef<HTMLInputElement>(null), ref)
+export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
+  {
+    onChange,
+    defaultValue = '',
+    value,
+    className = '',
+    disabled = false,
+    onBlur,
+    onFocus,
+    ...rest
+  },
+  ref,
+) {
+  const isControlled = typeof value !== 'undefined'
+  const isActive = (isControlled && value !== '') || defaultValue !== ''
+  const inputRef = useCombinedRefs(useRef<HTMLInputElement>(null), ref)
 
-    const [state, setState] = useState({
-      isActive,
-      isFocused: false,
-    })
+  const [state, setState] = useState({
+    isActive,
+    isFocused: false,
+  })
 
-    useEffect(() => {
-      setState((prevState) => ({ ...prevState, isActive }))
-    }, [value, defaultValue])
+  useEffect(() => {
+    setState((prevState) => ({ ...prevState, isActive }))
+  }, [value, defaultValue])
 
-    const handleOnClick = () => {
-      const inputEl = inputRef.current
-      inputEl.focus()
-    }
-    const handleFocus = () =>
-      setState((prevState) => ({ ...prevState, isFocused: true }))
-    const handleBlur = () =>
-      setState((prevState) => ({ ...prevState, isFocused: false }))
-    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsActive((event.target as HTMLInputElement).value)
-    }
+  const handleOnClick = () => {
+    const inputEl = inputRef.current
+    inputEl.focus()
+  }
+  const handleFocus = () =>
+    setState((prevState) => ({ ...prevState, isFocused: true }))
+  const handleBlur = () =>
+    setState((prevState) => ({ ...prevState, isFocused: false }))
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsActive((event.target as HTMLInputElement).value)
+  }
 
-    const handleOnDelete = () => {
-      const input = inputRef.current
-      const clearedValue = ''
-      setReactInputValue(input, clearedValue)
-      setState((prevState) => ({ ...prevState, isActive: false }))
-    }
-    const setIsActive = (newValue: string) =>
-      setState((prevState) => ({ ...prevState, isActive: newValue !== '' }))
+  const handleOnDelete = () => {
+    const input = inputRef.current
+    const clearedValue = ''
+    setReactInputValue(input, clearedValue)
+    setState((prevState) => ({ ...prevState, isActive: false }))
+  }
+  const setIsActive = (newValue: string) =>
+    setState((prevState) => ({ ...prevState, isActive: newValue !== '' }))
 
-    /** Applying props for controlled vs. uncontrolled scnarios */
-    const applyControllingProps: ControlledSearch = (
-      props,
-      value,
-      defaultValue,
-    ): SearchProps => {
-      if (isControlled) {
-        return {
-          ...props,
-          value,
-        }
-      }
-
+  /** Applying props for controlled vs. uncontrolled scnarios */
+  const applyControllingProps: ControlledSearch = (
+    props,
+    value,
+    defaultValue,
+  ): SearchProps => {
+    if (isControlled) {
       return {
         ...props,
-        defaultValue,
+        value,
       }
     }
 
-    const { isFocused } = state
-    const size = 16
-
-    const containerProps = {
-      isFocused,
-      className,
-      disabled,
-      role: 'search',
-      'aria-label': rest['aria-label'],
-      onClick: handleOnClick,
-    }
-
-    const inputProps = applyControllingProps(
-      {
-        ...rest,
-        disabled,
-        ref: inputRef,
-        type: 'search',
-        role: 'searchbox',
-        'aria-label': 'search input',
-        onBlur: (e) => {
-          handleBlur()
-          if (onBlur) {
-            onBlur(e)
-          }
-        },
-        onFocus: (e) => {
-          handleFocus()
-          if (onFocus) {
-            onFocus(e)
-          }
-        },
-        onChange: (e) => {
-          handleOnChange(e)
-          if (onChange) {
-            onChange(e)
-          }
-        },
-      },
-      value,
+    return {
+      ...props,
       defaultValue,
-    )
+    }
+  }
 
-    const clearButtonProps = {
-      isActive: state.isActive,
-      size,
-      role: 'button',
-      onClick: (e: React.MouseEvent) => {
-        e.stopPropagation()
-        if (state.isActive) {
-          handleOnDelete()
+  const { isFocused } = state
+  const size = 16
+
+  const containerProps = {
+    isFocused,
+    className,
+    disabled,
+    role: 'search',
+    'aria-label': rest['aria-label'],
+    onClick: handleOnClick,
+  }
+
+  const inputProps = applyControllingProps(
+    {
+      ...rest,
+      disabled,
+      ref: inputRef,
+      type: 'search',
+      role: 'searchbox',
+      'aria-label': 'search input',
+      onBlur: (e) => {
+        handleBlur()
+        if (onBlur) {
+          onBlur(e)
         }
       },
-    }
+      onFocus: (e) => {
+        handleFocus()
+        if (onFocus) {
+          onFocus(e)
+        }
+      },
+      onChange: (e) => {
+        handleOnChange(e)
+        if (onChange) {
+          onChange(e)
+        }
+      },
+    },
+    value,
+    defaultValue,
+  )
 
-    return (
-      <Container {...containerProps}>
-        <Icon name="search" title="search icon" size={size} />
-        <Input {...inputProps} />
-        <InsideButton {...clearButtonProps}>
-          <Icon name="close" title="clear" size={size} />
-        </InsideButton>
-      </Container>
-    )
-  },
-)
+  const clearButtonProps = {
+    isActive: state.isActive,
+    size,
+    role: 'button',
+    onClick: (e: React.MouseEvent) => {
+      e.stopPropagation()
+      if (state.isActive) {
+        handleOnDelete()
+      }
+    },
+  }
+
+  return (
+    <Container {...containerProps}>
+      <Icon name="search" title="search icon" size={size} />
+      <Input {...inputProps} />
+      <InsideButton {...clearButtonProps}>
+        <Icon name="close" title="clear" size={size} />
+      </InsideButton>
+    </Container>
+  )
+})
 
 // Search.displayName = 'eds-search'

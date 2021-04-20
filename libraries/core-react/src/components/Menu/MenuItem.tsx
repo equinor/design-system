@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { MouseEvent } from 'react'
+import { MouseEvent, memo, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { useCombinedRefs } from '../../hooks'
@@ -97,8 +96,8 @@ export type MenuItemProps = {
   onClick?: (e: React.MouseEvent) => void
 } & React.HTMLAttributes<HTMLLIElement>
 
-export const MenuItem = React.memo(
-  React.forwardRef<HTMLLIElement, MenuItemProps>(function MenuItem(
+export const MenuItem = memo(
+  forwardRef<HTMLLIElement, MenuItemProps>(function MenuItem(
     { children, disabled, index = 0, onClick, ...rest },
     ref,
   ) {

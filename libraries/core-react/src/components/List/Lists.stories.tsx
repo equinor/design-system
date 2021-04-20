@@ -1,4 +1,3 @@
-import React from 'react'
 import { List, ListProps } from '../..'
 import { Meta, Story } from '@storybook/react'
 
