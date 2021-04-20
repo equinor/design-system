@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing, ComponentToken } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -18,21 +18,6 @@ const {
     corners: { borderRadius },
   },
 } = tokens
-
-export type Tooltip = {
-  typography: Typography
-  background: string
-  tooltip: {
-    minHeight: string
-  }
-  arrow: {
-    width: string
-    height: string
-    placement: string
-  }
-  spacings: Spacing
-  borderRadius: string
-}
 
 type TooltipToken = ComponentToken
 
