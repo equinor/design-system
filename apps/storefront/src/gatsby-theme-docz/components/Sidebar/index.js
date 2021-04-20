@@ -1,7 +1,7 @@
 /* eslint react/jsx-filename-extension: off  */
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import React, { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { useThemeUI } from 'theme-ui'
 import { useDocs, useConfig, useCurrentDoc } from 'docz'

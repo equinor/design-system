@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Button, Icon } from '@equinor/eds-core-react'
 import { H2 } from './Titles'

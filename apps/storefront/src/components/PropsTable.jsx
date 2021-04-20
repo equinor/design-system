@@ -1,5 +1,3 @@
-import React from 'react'
-
 // @TODO: This is the version used before the Typescript migration.
 // In theory docz support typescript by adding a typescript: true flag to docz config.
 // This didn't work out of the box, at least not when the typescript version of react-core

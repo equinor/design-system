@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { Playground as DoczPlayground } from 'docz'
 
