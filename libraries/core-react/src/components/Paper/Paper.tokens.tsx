@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Elevations } from '@equinor/eds-tokens'
+import type { ComponentToken, Elevations } from '@equinor/eds-tokens'
 
 const {
   elevation,
@@ -12,7 +12,7 @@ const {
 
 export type ElevationTypes = keyof Elevations
 
-export const paper = {
-  elevation,
+export { elevation }
+export const paper: ComponentToken = {
   background,
 }
