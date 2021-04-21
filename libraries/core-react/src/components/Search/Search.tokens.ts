@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -21,41 +22,59 @@ const {
   },
 } = tokens
 
-export const search = {
-  enabled: {
-    background,
-    typography,
-    placeholder: {
-      color: placeholderColor,
-    },
-    height: '36px',
-    clickbounds: {
-      offset: '6px',
-      height: '48px',
-    },
-    spacings: {
-      left: small,
-      right: small,
-      top: '6px',
-      bottom: '6px',
-    },
-    border: {
-      width: '1px',
-      color: 'transparent',
-      focus: {
+type SearchToken = ComponentToken
+
+export const search: SearchToken = {
+  background,
+  typography,
+  height: '36px',
+  clickbound: {
+    offset: { top: '6px' },
+    height: '48px',
+  },
+  spacings: {
+    left: small,
+    right: small,
+    top: '6px',
+    bottom: '6px',
+  },
+  border: {
+    type: 'border',
+    width: '1px',
+    style: 'solid',
+    color: 'transparent',
+  },
+  states: {
+    focus: {
+      border: {
+        type: 'border',
+        width: '1px',
+        style: 'solid',
         color: primaryColor,
       },
     },
+  },
+  entities: {
+    placeholder: {
+      typography: {
+        color: placeholderColor,
+      },
+    },
     icon: {
-      color: placeholderColor,
+      typography: {
+        color: placeholderColor,
+      },
       border: {
+        type: 'border',
         radius: '50%',
       },
-      hover: {
-        background: primaryHoverAlt,
+      states: {
+        hover: {
+          background: primaryHoverAlt,
+        },
       },
-      clickbounds: {
-        offset: '6px',
+      clickbound: {
+        offset: { top: '6px' },
         height: '36px',
       },
     },
