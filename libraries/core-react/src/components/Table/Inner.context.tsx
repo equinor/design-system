@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+
 type State = {
   variant: 'body' | 'head'
   sticky?: boolean
