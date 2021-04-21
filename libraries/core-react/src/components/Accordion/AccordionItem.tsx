@@ -1,11 +1,11 @@
-import { Children as ReactChildren, cloneElement } from 'react'
-
 import {
   forwardRef,
   useState,
   useEffect,
   ReactElement,
   HTMLAttributes,
+  Children as ReactChildren,
+  cloneElement,
 } from 'react'
 import type { AccordionProps } from './Accordion.types'
 
