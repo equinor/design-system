@@ -18,7 +18,9 @@ const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
   text-align: left;
   font-family: Equinor;
   color: ${({ isExpanded, disabled }) =>
-    isExpanded && !disabled ? tokens.header.color.activated : 'inherit'};
+    isExpanded && !disabled
+      ? tokens.entities.header.states.active.typography?.color
+      : 'inherit'};
 `
 
 const AccordionHeaderTitle = forwardRef<

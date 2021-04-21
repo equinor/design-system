@@ -2,12 +2,10 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { accordion as tokens } from './Accordion.tokens'
+import { bordersTemplate, spacingsTemplate } from '../../utils'
 
 const {
-  header: {
-    background: { default: background },
-  },
-  border,
+  entities: { header, panel },
 } = tokens
 
 export type AccordionPanelProps = {
@@ -27,12 +25,10 @@ const StyledAccordionPanel = styled.div.attrs(
     'aria-labelledby': headerId,
   }),
 )<StyledAccordionPanelProps>`
-  background: ${background};
-  border-right: ${border};
-  border-bottom: ${border};
-  border-left: ${border};
+  ${bordersTemplate(tokens.border)}
+  ${spacingsTemplate(panel.spacings)}
+  background: ${header.background};
   min-height: 96px;
-  padding: 16px;
   box-sizing: border-box;
 `
 

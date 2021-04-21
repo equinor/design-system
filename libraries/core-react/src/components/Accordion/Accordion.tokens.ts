@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -11,9 +11,7 @@ const {
       background__medium: { rgba: borderColor },
       background__light: { rgba: backgroundHover },
     },
-    text: {
-      static_icons__default: { rgba: focusHoverColor },
-    },
+
     interactive: {
       primary__resting: { rgba: activatedColor },
       disabled__fill: { rgba: disabledIconColor },
@@ -21,49 +19,75 @@ const {
       focus: { rgba: focusOutlineColor },
     },
   },
+  spacings: {
+    comfortable: { medium: mediumSpacing },
+  },
 } = tokens
 
-type AccordionToken = {
-  header: {
-    typography: Typography
-    color: typeof token.header.color
-    background: typeof token.header.background
+type AccordionToken = ComponentToken & {
+  entities: {
+    chevron: ComponentToken
+    header: ComponentToken
   }
-  border: string
-  outline: string
-  outlineOffset: string
-  chevronColor: typeof token.chevronColor
-  iconColor: typeof token.iconColor
 }
 
-const token = {
-  header: {
-    typography,
-    color: {
-      default: typography.color,
-      disabled: disabledColor,
-      activated: activatedColor,
-    },
-    background: {
-      default: backgroundDefault,
-      hover: backgroundHover,
-    },
+export const accordion: AccordionToken = {
+  border: {
+    type: 'border',
+    color: borderColor,
+    style: 'solid',
+    width: '1px',
   },
-  border: `1px solid ${borderColor}`,
-  outline: `1px dashed ${focusOutlineColor}`,
-  outlineOffset: '2px',
-  chevronColor: {
-    default: activatedColor,
-    disabled: disabledIconColor,
-  },
-  iconColor: {
-    interactive: {
-      color: activatedColor,
+  entities: {
+    chevron: {
+      background: activatedColor,
+      states: {
+        disabled: { background: disabledIconColor },
+      },
     },
-    static: {
-      color: focusHoverColor,
+    header: {
+      height: '48px',
+      background: backgroundDefault,
+      typography,
+      spacings: {
+        left: mediumSpacing,
+        right: mediumSpacing,
+      },
+
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            color: focusOutlineColor,
+            style: 'dashed',
+            width: '1px',
+            offset: '2px',
+          },
+        },
+        disabled: {
+          typography: {
+            ...typography,
+            color: disabledColor,
+          },
+        },
+        active: {
+          typography: {
+            ...typography,
+            color: activatedColor,
+          },
+        },
+        hover: {
+          background: backgroundHover,
+        },
+      },
+    },
+    panel: {
+      spacings: {
+        bottom: mediumSpacing,
+        left: mediumSpacing,
+        right: mediumSpacing,
+        top: mediumSpacing,
+      },
     },
   },
 }
-
-export const accordion: AccordionToken = token
