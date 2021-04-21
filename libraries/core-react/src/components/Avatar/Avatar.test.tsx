@@ -7,10 +7,6 @@ import styled from 'styled-components'
 import { Avatar } from '.'
 import { avatar as tokens } from './Avatar.tokens'
 
-const {
-  disabled: { image: disabledImage },
-} = tokens
-
 const StyledAvatar = styled(Avatar)`
   position: relative;
 `
@@ -41,6 +37,6 @@ describe('Avatar', () => {
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { getByAltText } = render(<Avatar disabled src={src} alt={altText} />)
     const avatarImg = getByAltText(altText)
-    expect(avatarImg).toHaveStyleRule('opacity', disabledImage.opacity)
+    expect(avatarImg).toHaveStyleRule('opacity', tokens.states.disabled.opacity)
   })
 })
