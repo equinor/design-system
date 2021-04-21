@@ -1,11 +1,11 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { Typography, ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography: { paragraph },
 } = tokens
 
-type ListToken = {
+type ListToken = ComponentToken & {
   typography: Typography
 }
 
