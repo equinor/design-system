@@ -1,7 +1,7 @@
 export type Clickbound = {
-  height: string
+  height?: string
   width?: string
-  offset: {
+  offset?: {
     top?: string
     left?: string
   }
