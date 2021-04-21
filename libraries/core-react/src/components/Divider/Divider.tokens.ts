@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -25,23 +26,33 @@ const reduceByValue = (subtractValue: number) => (valueWithUnit: string) => {
 
 const reduceValueByDividerHeight = reduceByValue(dividerHeight)
 
-export const divider = {
+type DividerToken = ComponentToken & {
+  color: {
+    lighter: string
+    light: string
+    medium: string
+  }
+}
+
+export const divider: DividerToken = {
   height: `${dividerHeight}px`,
   color: {
     lighter,
     light,
     medium,
   },
-  small: {
-    spacings: {
-      top: spacingSmall,
-      bottom: reduceValueByDividerHeight(spacingSmall),
+  entities: {
+    small: {
+      spacings: {
+        top: spacingSmall,
+        bottom: reduceValueByDividerHeight(spacingSmall),
+      },
     },
-  },
-  medium: {
-    spacings: {
-      top: spacingMedium,
-      bottom: reduceValueByDividerHeight(spacingMedium),
+    medium: {
+      spacings: {
+        top: spacingMedium,
+        bottom: reduceValueByDividerHeight(spacingMedium),
+      },
     },
   },
 }

@@ -12,11 +12,13 @@ const StyledDivider = styled(Divider)`
 `
 const {
   color: { lighter, light, medium },
-  small: {
-    spacings: { top: spacingSmall },
-  },
-  medium: {
-    spacings: { top: spacingMedium },
+  entities: {
+    small: {
+      spacings: { top: spacingSmall },
+    },
+    medium: {
+      spacings: { top: spacingMedium },
+    },
   },
 } = tokens
 
