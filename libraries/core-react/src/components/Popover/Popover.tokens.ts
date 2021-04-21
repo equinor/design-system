@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing } from '@equinor/eds-tokens'
+import type { Typography, Spacing, ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -24,9 +24,7 @@ const {
   elevation: { overlay: elevation },
 } = tokens
 
-type Popover = {
-  header: Typography
-  background: string
+type Popover = ComponentToken & {
   elevation: string
   gridGap: string
   popover: {
@@ -52,20 +50,28 @@ type Popover = {
 }
 
 export const popover: Popover = {
-  header,
   background,
   elevation,
   gridGap: spacingMedium,
+  typography: header,
   popover: {
+    // TODO: Add to entites when min/max values are added to ComponentToken
     minHeight: '48px',
     maxWidth: '560px',
     maxHeight: '80vh',
   },
-  arrow: {
-    width: '6px',
-    height: spacingSmall,
-    placement: '-5px', // 1px less than arrow width, if not the shadow would show between arrow and popover
+  entities: {
+    arrow: {
+      width: '6px',
+      height: spacingSmall,
+      clickbound: {
+        offset: {
+          top: '-5px', // 1px less than arrow width, if not the shadow would show between arrow and popover
+        },
+      },
+    },
   },
+
   closeButton: {
     width: spacingXlarge,
     height: spacingXlarge,
