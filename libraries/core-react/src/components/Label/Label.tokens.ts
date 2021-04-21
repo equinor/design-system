@@ -10,10 +10,10 @@ const {
 type LabelToken = ComponentToken
 
 export const label: LabelToken = {
-  background: colors.ui.background__light.hex,
+  background: colors.ui.background__light.rgba,
   typography: {
     ...typography.input.label,
-    color: colors.text.static_icons__tertiary.hex,
+    color: colors.text.static_icons__tertiary.rgba,
   },
   spacings: {
     left: comfortable.small,
@@ -24,7 +24,7 @@ export const label: LabelToken = {
   states: {
     disabled: {
       typography: {
-        color: colors.interactive.disabled__text.hex,
+        color: colors.interactive.disabled__text.rgba,
       },
     },
   },
