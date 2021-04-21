@@ -1,5 +1,4 @@
-import { Pagination, PaginationProps, Typography } from '../..'
-import styled from 'styled-components'
+import { Pagination, PaginationProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {
