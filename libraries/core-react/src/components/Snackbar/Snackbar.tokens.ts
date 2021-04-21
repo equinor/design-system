@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { Typography, ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -21,42 +21,39 @@ const {
   },
   elevation: { overlay: boxShadow },
   clickbounds: { default__base: clickbounds },
+  shape: {
+    button: { borderRadius: radius },
+  },
 } = tokens
 
-type Snackbar = {
-  background: string
+type Snackbar = ComponentToken & {
   boxShadow: string
-  minHeight: string
-  spacings: {
-    left: string
-    bottom: string
-    padding: string
-    actionSpace: string
-  }
-  text: {
-    color: string
-    typography: Typography
-  }
-  borderRadius: string
-  buttonColor: string
+  minHeight: string // TODO
 }
 
 export const snackbar: Snackbar = {
   background,
   boxShadow,
-  minHeight: clickbounds,
+  minHeight: clickbounds, // TODO
+  border: {
+    type: 'border',
+    width: 0,
+    radius,
+  },
   spacings: {
     left: spacingMedium,
     bottom: spacingMedium,
     padding: spacingMedium,
     actionSpace: '32px',
   },
-  text: {
+  typography: {
+    ...typography,
     color,
-    typography: {
-      ...typography,
-    },
   },
-  borderRadius: '4px',
+  entities: {
+    button: {
+      color: buttonColor,
+    }
+  }
   buttonColor,
 }
