@@ -1,9 +1,13 @@
 import * as React from 'react'
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { paper as tokens, ElevationTypes } from './Paper.tokens'
+import {
+  paper as tokens,
+  ElevationTypes,
+  elevation as elevationToken,
+} from './Paper.tokens'
 
-const { elevation: elevationToken, background } = tokens
+const { background } = tokens
 
 type StyledProps = {
   elevation: string
@@ -31,5 +35,3 @@ export const Paper = forwardRef<HTMLDivElement, PaperProps>(function Paper(
 
   return <StyledPaper {...props} ref={ref} />
 })
-
-// Paper.displayName = 'eds-scrim'
