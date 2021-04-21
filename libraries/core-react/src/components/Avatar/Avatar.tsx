@@ -16,7 +16,7 @@ const StyledAvatar = styled.div<StyledAvatarProps>`
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  ${bordersTemplate(tokens.states.active.border)};
+  ${bordersTemplate(tokens.border)};
   ${({ size }) =>
     css`
       height: ${size}px;
