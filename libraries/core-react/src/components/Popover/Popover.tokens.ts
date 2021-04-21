@@ -26,7 +26,6 @@ const {
 
 type Popover = ComponentToken & {
   elevation: string
-  gridGap: string
   popover: {
     // TODO: Remove these when min/max values are added to ComponentToken
     minHeight: string
@@ -38,7 +37,6 @@ type Popover = ComponentToken & {
 export const popover: Popover = {
   background,
   elevation,
-  gridGap: spacingMedium,
   typography: header,
   popover: {
     // TODO: Add to entites when min/max values are added to ComponentToken
