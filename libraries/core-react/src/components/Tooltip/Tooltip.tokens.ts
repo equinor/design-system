@@ -1,8 +1,11 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
+    text: {
+      static_icons__primary_white: { rgba: white },
+    },
     ui: {
       background__overlay: { rgba: background },
     },
@@ -16,34 +19,32 @@ const {
   },
 } = tokens
 
-export type Tooltip = {
-  typography: Typography
-  background: string
-  tooltip: {
-    minHeight: string
-  }
-  arrow: {
-    width: string
-    height: string
-    placement: string
-  }
-  spacings: Spacing
-  borderRadius: string
-}
+type TooltipToken = ComponentToken
 
-export const tooltip: Tooltip = {
+export const tooltip: TooltipToken = {
   typography: {
     ...ui.tooltip,
-    color: '#fff',
+    color: white,
   },
   background,
-  tooltip: {
-    minHeight: spacingXlarge,
+  border: {
+    type: 'border',
+    radius: borderRadius,
   },
-  arrow: {
-    width: '6px',
-    height: spacingSmall,
-    placement: '-6px',
+  entities: {
+    tooltip: {
+      height: spacingXlarge,
+    },
+    arrow: {
+      width: '6px',
+      height: spacingSmall,
+      spacings: {
+        bottom: '-6px',
+        top: '-6px',
+        left: '-6px',
+        right: '-6px',
+      },
+    },
   },
   spacings: {
     left: spacingSmall,
@@ -51,5 +52,4 @@ export const tooltip: Tooltip = {
     top: spacingSmall,
     bottom: spacingSmall,
   },
-  borderRadius,
 }

@@ -12,7 +12,11 @@ export const shorthand: Shorthand = (token) => {
   if (!token) {
     return undefined
   }
-  const { width = '', style = 'solid', color = '' } = token
+  const { width = '', style = '', color = '' } = token
+
+  if (!width && !style && !color) {
+    return null
+  }
 
   return `${width} ${style} ${color}`
 }
