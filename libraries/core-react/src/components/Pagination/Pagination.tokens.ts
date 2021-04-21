@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -12,8 +13,18 @@ const {
   },
 } = tokens
 
-export const pagination = {
-  selectedColor,
-  disabledColor,
-  spacingSmall,
+export const pagination: ComponentToken = {
+  entities: {
+    item: {
+      states: { active: { background: selectedColor } },
+    },
+    icon: {
+      typography: {
+        color: disabledColor,
+      },
+    },
+  },
+  spacings: {
+    left: spacingSmall,
+  },
 }
