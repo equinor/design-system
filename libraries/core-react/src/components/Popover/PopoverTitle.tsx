@@ -1,16 +1,16 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { Divider } from '../Divider'
-import { typographyTemplate } from '../../utils'
 
 import { popover as tokens } from './Popover.tokens'
 
 const StyledPopoverTitle = styled.div`
-  ${typographyTemplate(tokens.header)}
-  margin-right: ${tokens.closeButton.width};
-  max-width: calc(${tokens.popover.maxWidth} - ${tokens.closeButton.width});
+  margin-right: ${tokens.entities.closeButton.width};
+  max-width: calc(
+    ${tokens.popover.maxWidth} - ${tokens.entities.closeButton.width}
+  );
   overflow: hidden;
-  margin-top: -${tokens.popoverTitle.marginTop};
+  margin-top: -${tokens.entities.title.spacings.top};
 `
 
 const StyledDivider = styled(Divider)`

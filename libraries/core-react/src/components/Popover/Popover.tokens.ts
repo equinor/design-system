@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing, ComponentToken } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -28,24 +28,10 @@ type Popover = ComponentToken & {
   elevation: string
   gridGap: string
   popover: {
+    // TODO: Remove these when min/max values are added to ComponentToken
     minHeight: string
     maxWidth: string
     maxHeight: string
-  }
-  arrow: {
-    width: string
-    height: string
-    placement: string
-  }
-  closeButton: {
-    width: string
-    height: string
-    placement: string
-  }
-  spacings: Spacing
-  borderRadius: string
-  popoverTitle: {
-    marginTop: string
   }
 }
 
@@ -64,18 +50,25 @@ export const popover: Popover = {
     arrow: {
       width: '6px',
       height: spacingSmall,
-      clickbound: {
-        offset: {
-          top: '-5px', // 1px less than arrow width, if not the shadow would show between arrow and popover
-        },
+      spacings: {
+        top: '-5px', // 1px less than arrow width, if not the shadow would show between arrow and popover
+        bottom: '-5px',
+        left: '-5px',
+        right: '-5px',
       },
     },
-  },
-
-  closeButton: {
-    width: spacingXlarge,
-    height: spacingXlarge,
-    placement: spacingSmall,
+    closeButton: {
+      width: spacingXlarge,
+      height: spacingXlarge,
+      spacings: {
+        top: spacingSmall,
+      },
+    },
+    title: {
+      spacings: {
+        top: spacingXsmall,
+      },
+    },
   },
   spacings: {
     top: spacingMedium,
@@ -83,8 +76,9 @@ export const popover: Popover = {
     right: spacingMedium,
     bottom: spacingMedium,
   },
-  borderRadius,
-  popoverTitle: {
-    marginTop: spacingXsmall, // negative
+  border: {
+    type: 'border',
+    radius: borderRadius,
+    width: 0,
   },
 }
