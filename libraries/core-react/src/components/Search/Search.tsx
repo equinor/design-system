@@ -14,6 +14,7 @@ import {
   spacingsTemplate,
   typographyTemplate,
   setReactInputValue,
+  bordersTemplate,
 } from '../../utils'
 import { useCombinedRefs } from '../../hooks'
 
@@ -25,16 +26,14 @@ const icons = {
 Icon.add(icons)
 
 const {
-  enabled: {
-    placeholder,
-    height,
-    spacings,
-    background,
-    typography,
-    icon,
-    border,
-    clickbounds,
-  },
+  height,
+  spacings,
+  background,
+  typography,
+  border,
+  clickbound,
+  entities: { icon, placeholder },
+  states,
 } = tokens
 
 type ContainerProps = {
@@ -53,11 +52,11 @@ const Container = styled.span<ContainerProps>`
   grid-auto-columns: max-content auto max-content;
   align-items: center;
   box-sizing: border-box;
-  border: ${border.width} solid ${border.color};
+  ${bordersTemplate(border)}
   z-index: 0;
 
   svg {
-    fill: ${icon.color};
+    fill: ${icon.typography.color};
   }
 
   ${spacingsTemplate(spacings)}
@@ -65,11 +64,11 @@ const Container = styled.span<ContainerProps>`
   ${({ isFocused }) =>
     isFocused &&
     css`
-      border: ${border.width} solid ${border.focus.color};
+      ${bordersTemplate(states.focus.border)}
     `}
 
   &::placeholder {
-    color: ${placeholder.color};
+    color: ${placeholder.typography.color};
   }
   ${({ disabled }) =>
     disabled
@@ -78,7 +77,7 @@ const Container = styled.span<ContainerProps>`
         `
       : css`
           &:hover {
-            border: ${border.width} solid ${border.focus.color};
+            ${bordersTemplate(states.focus.border)}
             cursor: text;
           }
         `}
@@ -86,10 +85,10 @@ const Container = styled.span<ContainerProps>`
   &::after {
     z-index: -1;
     position: absolute;
-    top: -${clickbounds.offset};
+    top: -${clickbound.offset};
     left: 0;
     width: 100%;
-    height: ${clickbounds.height};
+    height: ${clickbound.height};
     content: '';
   }
 
@@ -139,10 +138,10 @@ type InsideButtonProps = {
 }
 
 const InsideButton = styled.div<InsideButtonProps>`
+  ${bordersTemplate(icon.border)}
   display: flex;
   align-items: center;
   visibility: hidden;
-  border-radius: ${icon.border.radius};
   z-index: 1;
   padding: 4px;
   height: 16px;
@@ -152,10 +151,10 @@ const InsideButton = styled.div<InsideButtonProps>`
   &::after {
     z-index: -1;
     position: absolute;
-    top: -${icon.clickbounds.offset};
+    top: -${icon.clickbound.offset.top};
     left: 0;
     width: 100%;
-    height: ${icon.clickbounds.height};
+    height: ${icon.clickbound.height};
     content: '';
   }
 
@@ -174,7 +173,7 @@ const InsideButton = styled.div<InsideButtonProps>`
       visibility: visible;
       &:hover {
         cursor: pointer;
-        background: ${icon.hover.background};
+        background: ${icon.states.hover.background};
       }
     `}
 `

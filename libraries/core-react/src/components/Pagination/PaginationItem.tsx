@@ -21,11 +21,13 @@ export const PaginationItem = forwardRef<
     selected,
     ...other,
   }
-  const currentColor = selected ? tokens.selectedColor : null
+  const background = selected
+    ? tokens.entities.item.states.active.background
+    : null
 
   return (
     <Button
-      style={{ background: currentColor }}
+      style={{ background }}
       variant="ghost_icon"
       onClick={onClick ? onClick : undefined}
       {...props}
