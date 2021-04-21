@@ -1,12 +1,8 @@
 import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
+import { bordersTemplate } from '../../utils'
 import { avatar as tokens } from './Avatar.tokens'
-
-const {
-  enabled: { border },
-  disabled: { image: disabledImage },
-} = tokens
 
 type StyledAvatarProps = {
   size: number
@@ -20,7 +16,7 @@ const StyledAvatar = styled.div<StyledAvatarProps>`
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: ${border.radius};
+  ${bordersTemplate(tokens.states.active.border)};
   ${({ size }) =>
     css`
       height: ${size}px;
@@ -42,7 +38,7 @@ const StyledImage = styled.img<StyledImageProps>`
   ${({ disabled }) =>
     disabled &&
     css`
-      opacity: ${disabledImage.opacity};
+      opacity: ${tokens.states.disabled.opacity};
     `};
 `
 

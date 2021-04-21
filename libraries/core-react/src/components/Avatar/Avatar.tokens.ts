@@ -1,11 +1,21 @@
-export const avatar = {
-  enabled: {
-    border: {
-      radius: '50%',
-    },
+import type { ComponentToken } from '@equinor/eds-tokens'
+
+type AvatarToken = ComponentToken & {
+  states: {
+    disabled: {
+      opacity: string
+    }
+  }
+}
+
+export const avatar: AvatarToken = {
+  border: {
+    type: 'border',
+    radius: '50%',
+    width: 0,
   },
-  disabled: {
-    image: {
+  states: {
+    disabled: {
       opacity: '0.5',
     },
   },
