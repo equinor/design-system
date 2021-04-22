@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors,
@@ -7,26 +7,25 @@ const {
   typography,
 } = tokens
 
-type Label = {
-  background: string
-  spacings: Spacing
-  color: string
-  typography: Typography
-  disabled: {
-    color: string
-  }
-}
-export const label: Label = {
-  background: colors.ui.background__light.hex,
-  color: colors.text.static_icons__tertiary.hex,
-  typography: typography.input.label,
+type LabelToken = ComponentToken
+
+export const label: LabelToken = {
+  background: colors.ui.background__light.rgba,
+  typography: {
+    ...typography.input.label,
+    color: colors.text.static_icons__tertiary.rgba,
+  },
   spacings: {
     left: comfortable.small,
     right: comfortable.small,
     top: '6px',
     bottom: '6px',
   },
-  disabled: {
-    color: colors.interactive.disabled__text.hex,
+  states: {
+    disabled: {
+      typography: {
+        color: colors.interactive.disabled__text.rgba,
+      },
+    },
   },
 }

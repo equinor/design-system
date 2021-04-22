@@ -15,7 +15,9 @@ const LabelBase = styled.label<LabelBaseType>`
   margin-left: ${tokens.spacings.left};
   margin-right: ${tokens.spacings.right};
   color: ${({ disabledText }) =>
-    disabledText ? tokens.disabled.color : tokens.color};
+    disabledText
+      ? tokens.states.disabled.typography.color
+      : tokens.typography.color};
 `
 
 const Text = styled.span`
