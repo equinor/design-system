@@ -4,9 +4,9 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   colors: {
     ui: {
-      background__default: { hex: lighter },
-      background__light: { hex: light },
-      background__medium: { hex: medium },
+      background__default: { rgba: lighter },
+      background__light: { rgba: light },
+      background__medium: { rgba: medium },
     },
   },
   spacings: {
