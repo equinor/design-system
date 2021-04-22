@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import * as React from 'react'
 import { render, cleanup } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'

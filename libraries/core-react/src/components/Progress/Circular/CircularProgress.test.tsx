@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'

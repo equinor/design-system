@@ -1,6 +1,6 @@
 /* eslint react/jsx-filename-extension: off  */
 /* eslint react/jsx-pascal-case: off  */
-import * as React from 'react'
+//import * as React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet-async'
 // The doc prop contains some metadata about the page being rendered that you can use.

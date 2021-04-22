@@ -1,5 +1,9 @@
-import * as React from 'react'
-import { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
+import {
+  ReactNode,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  forwardRef,
+} from 'react'
 import styled from 'styled-components'
 import { InputWrapper } from './InputWrapper'
 import { Label } from '../Label'
@@ -46,7 +50,7 @@ export type TextFieldProps = {
 } & InputHTMLAttributes<HTMLInputElement> &
   TextareaHTMLAttributes<HTMLTextAreaElement>
 
-export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
     {
       id,

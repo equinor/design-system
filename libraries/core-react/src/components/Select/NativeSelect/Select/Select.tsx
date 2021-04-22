@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, SelectHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { nativeselect as tokens } from './Select.tokens'

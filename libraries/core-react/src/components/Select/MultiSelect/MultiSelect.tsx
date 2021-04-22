@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, SelectHTMLAttributes, useState } from 'react'
 import {
   useCombobox,

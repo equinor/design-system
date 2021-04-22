@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Search } from '@equinor/eds-core-react'
 
 const isSSR = typeof window === 'undefined'

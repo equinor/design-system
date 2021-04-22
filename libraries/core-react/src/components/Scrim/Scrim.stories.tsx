@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Scrim, Button, Typography, ScrimProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 

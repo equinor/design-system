@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react'
+import { useState, FormEvent } from 'react'
 import { Slider, SliderProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 

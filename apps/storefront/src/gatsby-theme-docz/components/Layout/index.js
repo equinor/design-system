@@ -1,7 +1,6 @@
 /* eslint react/jsx-filename-extension: off  */
 /* eslint react/jsx-pascal-case: off  */
 
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'

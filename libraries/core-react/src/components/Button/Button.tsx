@@ -1,5 +1,9 @@
-import * as React from 'react'
-import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
+import {
+  forwardRef,
+  ElementType,
+  ButtonHTMLAttributes,
+  Children as ReactChildren,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
@@ -207,7 +211,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     // We need everything in elements for proper flexing 💪
-    const updatedChildren = React.Children.map(children, (child) =>
+    const updatedChildren = ReactChildren.map(children, (child) =>
       typeof child !== 'object' ? (
         <ButtonCenterContent>{child}</ButtonCenterContent>
       ) : (

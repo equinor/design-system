@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { InputHTMLAttributes, ReactNode } from 'react'
+import { InputHTMLAttributes, ReactNode, forwardRef } from 'react'
 import { useTextField } from './context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
@@ -124,52 +123,51 @@ type InputWrapperProps = {
   inputIcon?: ReactNode
 } & InputHTMLAttributes<HTMLInputElement>
 
-export const InputWrapper = React.forwardRef<
-  HTMLInputElement,
-  InputWrapperProps
->(function InputWrapper(
-  { multiline, variant, disabled, type, unit, inputIcon, ...other },
-  ref,
-) {
-  const { handleFocus, handleBlur, isFocused } = useTextField()
-
-  const actualVariant = variant === 'default' ? 'textfield' : variant
-  const inputVariant = tokens[actualVariant]
-  const inputProps = {
-    multiline,
+export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
+  function InputWrapper(
+    { multiline, variant, disabled, type, unit, inputIcon, ...other },
     ref,
-    type,
-    disabled,
-    variant,
-    ...other,
-  }
+  ) {
+    const { handleFocus, handleBlur, isFocused } = useTextField()
 
-  return (
-    <>
-      {inputIcon || unit ? (
-        <InputWithAdornments
-          isFocused={isFocused}
-          isDisabled={disabled}
-          variant={variant}
-          token={inputVariant}
-        >
-          <StyledInput
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            {...inputProps}
-          />
-          <Adornments multiline={multiline}>
-            {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
-            {inputIcon && (
-              <Icon isDisabled={disabled} variant={variant}>
-                {inputIcon}
-              </Icon>
-            )}
-          </Adornments>
-        </InputWithAdornments>
-      ) : (
-        <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
-      )}
-    </>
-  )
-})
+    const actualVariant = variant === 'default' ? 'textfield' : variant
+    const inputVariant = tokens[actualVariant]
+    const inputProps = {
+      multiline,
+      ref,
+      type,
+      disabled,
+      variant,
+      ...other,
+    }
+
+    return (
+      <>
+        {inputIcon || unit ? (
+          <InputWithAdornments
+            isFocused={isFocused}
+            isDisabled={disabled}
+            variant={variant}
+            token={inputVariant}
+          >
+            <StyledInput
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              {...inputProps}
+            />
+            <Adornments multiline={multiline}>
+              {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
+              {inputIcon && (
+                <Icon isDisabled={disabled} variant={variant}>
+                  {inputIcon}
+                </Icon>
+              )}
+            </Adornments>
+          </InputWithAdornments>
+        ) : (
+          <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
+        )}
+      </>
+    )
+  },
+)

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { KeyboardEvent, Children as ReactChildren, cloneElement } from 'react'
 import { forwardRef, HTMLAttributes, isValidElement, ReactElement } from 'react'
 import styled from 'styled-components'
 import type { CSSObject } from 'styled-components'
@@ -125,7 +125,7 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
       }
     }
 
-    const handleKeyDown = (event: React.KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       const { key } = event
       if (key === 'Enter' || key === ' ') {
         toggleExpanded()
@@ -146,7 +146,7 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
       />
     )
 
-    const headerChildren = React.Children.map(
+    const headerChildren = ReactChildren.map(
       children,
       (child: AccordionChild) => {
         if (typeof child === 'string') {
@@ -158,7 +158,7 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
         }
 
         if (isValidElement(child) && child.type === AccordionHeaderTitle) {
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             isExpanded,
             disabled,
           })

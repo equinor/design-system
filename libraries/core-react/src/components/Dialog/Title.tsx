@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'

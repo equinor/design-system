@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, DialogProps, Button, Scrim, Typography } from '../..'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { cloneElement, Children as ReactChildren } from 'react'
 import { forwardRef, ReactElement, useContext, HTMLAttributes } from 'react'
 import { TabsContext } from './Tabs.context'
 
@@ -10,8 +10,8 @@ const TabPanels = forwardRef<HTMLDivElement, TabPanelsProps>(function TabPanels(
 ) {
   const { activeTab, tabsId } = useContext(TabsContext)
 
-  const Panels = React.Children.map(children, (child: ReactElement, index) =>
-    React.cloneElement(child, {
+  const Panels = ReactChildren.map(children, (child: ReactElement, index) =>
+    cloneElement(child, {
       id: `${tabsId}-panel-${index + 1}`,
       'aria-labelledby': `${tabsId}-tab-${index + 1}`,
       hidden: activeTab !== index,

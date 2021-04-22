@@ -1,7 +1,6 @@
 /* eslint react/jsx-filename-extension: off */
 /* eslint react/jsx-pascal-case: off */
 /* eslint import/no-default-export: off */
-import React from 'react'
 import { ComponentsProvider, theme, useConfig } from 'docz'
 import baseComponents from 'gatsby-theme-docz/src/components'
 import defaultConfig from 'gatsby-theme-docz/src/theme'

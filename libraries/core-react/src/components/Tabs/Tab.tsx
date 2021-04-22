@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { tab as tokens } from './Tabs.tokens'

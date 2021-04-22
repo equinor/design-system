@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, SelectHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { Label } from '../../Label'

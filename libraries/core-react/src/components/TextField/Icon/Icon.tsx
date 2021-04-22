@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useTextField } from '../context'
 import { input as tokens } from './Icon.token'
@@ -62,7 +61,7 @@ type TextfieldIconProps = {
   colors?: ColorStateProps
 } & HTMLAttributes<HTMLDivElement>
 
-const InputIcon = React.forwardRef<HTMLDivElement, TextfieldIconProps>(
+const InputIcon = forwardRef<HTMLDivElement, TextfieldIconProps>(
   function InputIcon(
     {
       variant = 'default',

@@ -91,6 +91,7 @@ module.exports = {
             forbidDefaultForRequired: true,
           },
         ],
+        'react/react-in-jsx-scope': 'off',
         'react/jsx-boolean-value': ['warn'],
         'react/jsx-pascal-case': ['error'],
         'react/no-danger': ['warn'],

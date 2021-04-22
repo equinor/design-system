@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { cloneElement, Children as ReactChildren } from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
@@ -181,12 +181,12 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     }
   }
 
-  const resizedChildren = React.Children.map(
+  const resizedChildren = ReactChildren.map(
     children,
     (child: React.ReactElement) => {
       // We force size on Icon & Avatar component
       if (child.props) {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           size: 16,
           disabled,
         })

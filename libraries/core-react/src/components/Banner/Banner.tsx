@@ -1,5 +1,10 @@
-import * as React from 'react'
-import { FC, HTMLAttributes, ReactNode } from 'react'
+import {
+  FC,
+  HTMLAttributes,
+  isValidElement,
+  ReactNode,
+  Children as ReactChildren,
+} from 'react'
 import styled from 'styled-components'
 import * as tokens from './Banner.tokens'
 import { Divider } from '../Divider'
@@ -34,10 +39,10 @@ export type BannerProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 export const Banner: FC<BannerProps> = ({ children, className, ...props }) => {
-  const childrenWhereBannerIcon: boolean[] = React.Children.map(
+  const childrenWhereBannerIcon: boolean[] = ReactChildren.map(
     children,
     (child) => {
-      return React.isValidElement(child) && child.type === BannerIcon
+      return isValidElement(child) && child.type === BannerIcon
     },
   )
   const hasIcon = childrenWhereBannerIcon.some((bool) => bool)

@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Card, Avatar, Typography, Button, Icon, CardProps } from '../..'
 import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'

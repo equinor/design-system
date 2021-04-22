@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import * as React from 'react'
 import { useRef, useEffect, useState, Fragment } from 'react'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'

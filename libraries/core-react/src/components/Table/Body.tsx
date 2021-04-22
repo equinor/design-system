@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { HTMLAttributes, forwardRef } from 'react'
 import styled from 'styled-components'
 import { InnerContext } from './Inner.context'

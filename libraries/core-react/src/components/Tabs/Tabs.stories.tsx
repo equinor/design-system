@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Tabs, TabsProps, Typography, Search } from '../..'
 import { Story, Meta } from '@storybook/react'

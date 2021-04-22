@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { TdHTMLAttributes, ThHTMLAttributes, forwardRef } from 'react'
 import { Variants, Colors } from '../Table.types'
 import { TableDataCell } from './DataCell'

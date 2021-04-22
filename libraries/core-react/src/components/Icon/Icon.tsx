@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, Ref, SVGProps } from 'react'
 import styled from 'styled-components'
 import { get } from './library'

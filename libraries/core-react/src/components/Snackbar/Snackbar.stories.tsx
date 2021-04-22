@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Snackbar, SnackbarProps, Button } from '../..'
 import { Story, Meta } from '@storybook/react'
 

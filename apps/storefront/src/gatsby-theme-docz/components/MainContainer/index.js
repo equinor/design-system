@@ -1,5 +1,4 @@
 /* eslint react/jsx-filename-extension: off  */
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useCurrentDoc, useDocs } from 'docz'

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState } from 'react'
 import { SingleSelect, SingleSelectProps, Button, Typography } from '../../..'
 import { UseComboboxStateChange } from 'downshift'

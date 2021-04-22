@@ -2,7 +2,6 @@
 /* eslint react/jsx-pascal-case: off  */
 /* eslint import/no-default-export: off */
 
-import React from 'react'
 import SEO from '../components/seo.jsx'
 
 const NotFoundPage = () => (

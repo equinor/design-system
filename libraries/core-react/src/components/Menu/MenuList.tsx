@@ -1,5 +1,13 @@
-import * as React from 'react'
-import { useEffect, ReactElement, ReactNode, isValidElement } from 'react'
+import {
+  useEffect,
+  ReactElement,
+  ReactNode,
+  isValidElement,
+  Fragment,
+  cloneElement,
+  forwardRef,
+  Children as ReactChildren,
+} from 'react'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
 import type { FocusTarget } from './Menu.types'
@@ -8,9 +16,9 @@ import { MenuSectionProps, MenuSection } from './MenuSection'
 
 const isFragment = (object: ReactNode): boolean => {
   if ((object as ReactElement).type) {
-    return (object as ReactElement).type === React.Fragment
+    return (object as ReactElement).type === Fragment
   }
-  return object === React.Fragment
+  return object === Fragment
 }
 
 const List = styled.ul`
@@ -32,7 +40,7 @@ type MenuChild = ReactElement<MenuItemProps> & ReactElement<MenuSectionProps>
 
 type Direction = 'down' | 'up'
 
-export const MenuList = React.forwardRef<HTMLUListElement, MenuListProps>(
+export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
   function MenuList({ children, focus, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex } = useMenu()
 
@@ -40,10 +48,10 @@ export const MenuList = React.forwardRef<HTMLUListElement, MenuListProps>(
       ? (children as MenuChild).props.children
       : children
 
-    const updatedChildren: Array<MenuChild> = React.Children.map(
+    const updatedChildren: Array<MenuChild> = ReactChildren.map(
       pickedChildren,
       (child: ReactNode, index: number) =>
-        React.cloneElement(child as MenuChild, { index }),
+        cloneElement(child as MenuChild, { index }),
     )
 
     const focusableIndexs: number[] = (updatedChildren || [])

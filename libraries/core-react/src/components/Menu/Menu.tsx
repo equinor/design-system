@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useEffect, useRef, HTMLAttributes } from 'react'
+import { useEffect, useRef, HTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
@@ -36,7 +35,7 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
 type MenuContainerProps = MenuProps & {
   containerRef: React.MutableRefObject<HTMLDivElement>
 }
-const MenuContainer = React.forwardRef<HTMLUListElement, MenuContainerProps>(
+const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
   function MenuContainer(
     {
       children,
@@ -89,7 +88,7 @@ export type MenuProps = {
   placement?: Placement
 } & HTMLAttributes<HTMLUListElement>
 
-export const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
+export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   { anchorEl, open, placement = 'auto', ...rest },
   ref,
 ) {

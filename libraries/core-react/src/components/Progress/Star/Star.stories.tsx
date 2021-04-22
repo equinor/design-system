@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Progress, StarProgressProps } from '../../..'
 import { Meta, Story } from '@storybook/react'

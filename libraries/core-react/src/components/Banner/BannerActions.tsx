@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { FC, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Banner.tokens'

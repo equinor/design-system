@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, useMemo, useState, HTMLAttributes } from 'react'
 import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'

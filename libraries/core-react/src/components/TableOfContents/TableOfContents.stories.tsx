@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Icon, TableOfContents, Typography, TableOfContentsProps } from '../..'
 import { Story, Meta } from '@storybook/react'

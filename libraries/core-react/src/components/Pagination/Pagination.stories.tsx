@@ -1,4 +1,3 @@
-import React from 'react'
 import { Pagination, PaginationProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 

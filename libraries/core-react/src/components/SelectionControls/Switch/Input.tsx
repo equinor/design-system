@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { switchControl as tokens } from './Switch.tokens'

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
