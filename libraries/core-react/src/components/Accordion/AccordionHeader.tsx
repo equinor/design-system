@@ -1,25 +1,22 @@
 import { KeyboardEvent, Children as ReactChildren, cloneElement } from 'react'
 import { forwardRef, HTMLAttributes, isValidElement, ReactElement } from 'react'
-import styled from 'styled-components'
-import type { CSSObject } from 'styled-components'
-// eslint-disable-next-line camelcase
+import styled, { css } from 'styled-components'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
 import { AccordionHeaderTitle } from './AccordionHeaderTitle'
 import { accordion as tokens } from './Accordion.tokens'
 import type { AccordionProps } from './Accordion.types'
+import {
+  typographyTemplate,
+  bordersTemplate,
+  spacingsTemplate,
+  outlineTemplate,
+} from '../../utils'
 
 Icon.add({ chevron_down, chevron_up })
 
 const {
-  header: { color: headerColor, background: headerBackground, typography },
-  border,
-  chevronColor: {
-    default: chevronDefaultColor,
-    disabled: chevronDisabledColor,
-  },
-  outline,
-  outlineOffset,
+  entities: { header, chevron: chevronToken },
 } = tokens
 
 type StyledAccordionHeaderProps = {
@@ -34,7 +31,7 @@ type StyledAccordionHeaderProps = {
 }
 
 const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
-  ({ panelId, isExpanded, disabled }): JSX.IntrinsicElements['button'] => ({
+  ({ panelId, isExpanded, disabled }) => ({
     'aria-expanded': isExpanded,
     'aria-controls': panelId,
     role: 'button',
@@ -42,35 +39,34 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     tabIndex: disabled ? -1 : 0,
     disabled,
   }),
-)(
-  ({ parentIndex, disabled }: StyledAccordionHeaderProps): CSSObject => ({
-    fontFamily: typography.fontFamily,
-    fontSize: typography.fontSize,
-    fontWeight: typography.fontWeight as number,
-    backgroundColor: headerBackground.default,
-    lineHeight: typography.lineHeight,
-    textAlign: typography.textAlign as CSSObject['textAlign'],
-    margin: 0,
-    height: '48px',
-    display: 'flex',
-    alignItems: 'center',
-    borderTop: parentIndex === 0 ? border : 'none',
-    borderRight: border,
-    borderBottom: border,
-    borderLeft: border,
-    boxSizing: 'border-box',
-    color: (disabled && headerColor.disabled) || headerColor.default,
-    outline: 'none',
-    '&[data-focus-visible-added]:focus': {
-      outline,
-      outlineOffset,
-    },
-    '&:hover': !disabled && { background: headerBackground.hover },
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    paddingLeft: '16px',
-    paddingRight: '16px',
-  }),
-)
+)<StyledAccordionHeaderProps>`
+  ${typographyTemplate(header.typography)}
+  ${bordersTemplate(tokens.border)}
+  ${spacingsTemplate(header.spacings)}
+  &[data-focus-visible-added]:focus {
+    ${outlineTemplate(header.states.focus.outline)}
+  }
+  border-top: ${({ parentIndex }) => (parentIndex === 0 ? null : 'none')};
+  background: ${header.background};
+  height: ${header.height};
+  margin: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  ${({ disabled }) =>
+    disabled
+      ? css({
+          color: header.states.disabled.typography.color,
+          cursor: 'not-allowed',
+        })
+      : css({
+          color: header.typography.color,
+          cursor: 'pointer',
+          ':hover': {
+            background: header.states.hover.background,
+          },
+        })}
+`
 
 const StyledIcon = styled(
   Icon,
@@ -142,7 +138,11 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
         name={isExpanded ? 'chevron_up' : 'chevron_down'}
         size={16}
         chevronPosition={chevronPosition}
-        color={disabled ? chevronDisabledColor : chevronDefaultColor}
+        color={
+          disabled
+            ? chevronToken.states.disabled.background
+            : chevronToken.background
+        }
       />
     )
 
