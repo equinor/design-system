@@ -6,16 +6,14 @@ import {
   elevation as elevationToken,
 } from './Paper.tokens'
 
-const { background } = tokens
-
 type StyledProps = {
   elevation: string
 }
 
 const StyledPaper = styled.div<StyledProps>`
-  min-width: 96px;
-  max-width: calc(100% - 32px);
-  background: ${background};
+  min-width: ${tokens.minWidth};
+  max-width: ${tokens.maxWidth};
+  background: ${tokens.background};
   box-shadow: ${({ elevation }) => elevation};
 `
 
