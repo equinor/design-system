@@ -6,7 +6,7 @@ const {
     ui: {
       background__default: { rgba: lighter },
       background__light: { rgba: light },
-      background__medium: { rgba: medium },
+      background__medium: { rgba: mediumColor },
     },
   },
   spacings: {
@@ -26,11 +26,11 @@ const reduceByValue = (subtractValue: number) => (valueWithUnit: string) => {
 
 const reduceValueByDividerHeight = reduceByValue(dividerHeight)
 
-type DividerToken = ComponentToken & {
-  color: {
+export type DividerToken = ComponentToken & {
+  color?: {
     lighter: string
     light: string
-    medium: string
+    mediumColor: string
   }
 }
 
@@ -39,20 +39,20 @@ export const divider: DividerToken = {
   color: {
     lighter,
     light,
-    medium,
+    mediumColor,
   },
-  entities: {
-    small: {
-      spacings: {
-        top: spacingSmall,
-        bottom: reduceValueByDividerHeight(spacingSmall),
-      },
-    },
-    medium: {
-      spacings: {
-        top: spacingMedium,
-        bottom: reduceValueByDividerHeight(spacingMedium),
-      },
-    },
+}
+
+export const small: DividerToken = {
+  spacings: {
+    top: spacingSmall,
+    bottom: reduceValueByDividerHeight(spacingSmall),
+  },
+}
+
+export const medium: DividerToken = {
+  spacings: {
+    top: spacingMedium,
+    bottom: reduceValueByDividerHeight(spacingMedium),
   },
 }
