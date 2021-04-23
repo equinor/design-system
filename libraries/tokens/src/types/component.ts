@@ -8,7 +8,11 @@ import {
 } from './index'
 
 export type ComponentToken = {
+  maxHeight?: string
+  minHeight?: string
   height?: string
+  maxWidth?: string
+  minWidth?: string
   width?: string
   background?: string
   spacings?: Spacing
