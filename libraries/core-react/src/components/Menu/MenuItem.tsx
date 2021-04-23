@@ -3,19 +3,21 @@ import { MouseEvent } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { useCombinedRefs } from '../../hooks'
-import { spacingsTemplate, typographyTemplate } from '../../utils'
+import {
+  outlineTemplate,
+  spacingsTemplate,
+  typographyTemplate,
+} from '../../utils'
 import { useMenu } from './Menu.context'
 
 const {
-  enabled: {
-    typography,
+  typography,
+  entities: {
     item: {
       spacings,
-      active: activeToken,
-      focus,
-      hover,
-      disabled: disabledToken,
+      states: { active: activeToken, focus, hover, disabled: disabledToken },
     },
+    icon,
   },
 } = tokens
 
@@ -44,7 +46,7 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
     css`
       background: ${activeToken.background};
       * {
-        color: ${activeToken.textColor};
+        color: ${activeToken.typography.color};
       }
     `}
 
@@ -52,10 +54,10 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
     disabled
       ? css`
           * {
-            color: ${disabledToken.textColor};
+            color: ${disabledToken.typography.color};
           }
           svg {
-            fill: ${disabledToken.iconColor};
+            fill: ${icon.states.disabled.typography.color};
           }
           &:focus {
             outline: none;
@@ -71,8 +73,7 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
             background: ${hover.background};
           }
           &:focus {
-            outline: ${focus.outline};
-            outline-offset: ${focus.outlineOffset};
+            ${outlineTemplate(focus.outline)}
           }
         `}
 `
