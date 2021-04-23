@@ -30,9 +30,9 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
   align-content: start;
   background: ${tokens.background};
   width: max-content;
-  max-height: ${tokens.popover.maxHeight};
-  max-width: ${tokens.popover.maxWidth};
-  min-height: ${tokens.popover.minHeight};
+  max-height: ${tokens.maxHeight};
+  max-width: ${tokens.maxWidth};
+  min-height: ${tokens.minHeight};
   ${bordersTemplate(tokens.border)}
   z-index: 100;
 

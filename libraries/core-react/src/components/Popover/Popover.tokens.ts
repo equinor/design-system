@@ -26,24 +26,15 @@ const {
 
 type Popover = ComponentToken & {
   elevation: string
-  popover: {
-    // TODO: Remove these when min/max values are added to ComponentToken
-    minHeight: string
-    maxWidth: string
-    maxHeight: string
-  }
 }
 
 export const popover: Popover = {
   background,
   elevation,
   typography: header,
-  popover: {
-    // TODO: Add to entites when min/max values are added to ComponentToken
-    minHeight: '48px',
-    maxWidth: '560px',
-    maxHeight: '80vh',
-  },
+  minHeight: '48px',
+  maxWidth: '560px',
+  maxHeight: '80vh',
   entities: {
     arrow: {
       width: '6px',
