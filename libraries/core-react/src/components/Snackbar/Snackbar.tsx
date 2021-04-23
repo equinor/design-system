@@ -1,7 +1,11 @@
 import { useState, useEffect, HTMLAttributes, FC } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
-import { typographyTemplate } from '../../utils'
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  bordersTemplate,
+} from '../../utils'
 
 type StyledProps = {
   leftAlignFrom: string
@@ -14,10 +18,9 @@ const StyledSnackbar = styled.div.attrs(() => ({
   left: ${tokens.spacings.left};
   bottom: ${tokens.spacings.bottom};
   background-color: ${tokens.background};
-  padding: ${tokens.spacings.padding};
-  border-radius: ${tokens.borderRadius};
-  ${typographyTemplate(tokens.text.typography)}
-  color: ${tokens.text.color};
+  ${spacingsTemplate(tokens.spacings)}
+  ${bordersTemplate(tokens.border)}
+  ${typographyTemplate(tokens.typography)}
   box-shadow: ${tokens.boxShadow};
   min-height: ${tokens.minHeight};
   box-sizing: border-box;
@@ -31,7 +34,7 @@ const StyledSnackbar = styled.div.attrs(() => ({
 
   a,
   button {
-    color: ${tokens.buttonColor};
+    color: ${tokens.entities.button.typography.color};
   }
 `
 

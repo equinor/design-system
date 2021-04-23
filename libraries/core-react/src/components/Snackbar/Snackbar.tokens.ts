@@ -17,7 +17,7 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium: spacingMedium },
+    comfortable: { medium: spacingMedium, x_large: spacingXLarge },
   },
   elevation: { overlay: boxShadow },
   clickbounds: { default__base: clickbounds },
@@ -28,32 +28,37 @@ const {
 
 type Snackbar = ComponentToken & {
   boxShadow: string
-  minHeight: string // TODO
 }
 
 export const snackbar: Snackbar = {
   background,
   boxShadow,
-  minHeight: clickbounds, // TODO
+  minHeight: clickbounds,
   border: {
     type: 'border',
     width: 0,
     radius,
   },
+  entities: {
+    actions: {
+      spacings: {
+        left: spacingXLarge,
+        top: '10px',
+        bottom: '10px',
+      },
+    },
+    button: {
+      typography: { color: buttonColor },
+    },
+  },
   spacings: {
     left: spacingMedium,
     bottom: spacingMedium,
-    padding: spacingMedium,
-    actionSpace: '32px',
+    right: spacingMedium,
+    top: spacingMedium,
   },
   typography: {
     ...typography,
     color,
   },
-  entities: {
-    button: {
-      color: buttonColor,
-    }
-  }
-  buttonColor,
 }
