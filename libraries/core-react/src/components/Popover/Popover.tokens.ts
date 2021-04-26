@@ -21,16 +21,12 @@ const {
   shape: {
     corners: { borderRadius },
   },
-  elevation: { overlay: elevation },
 } = tokens
 
-type Popover = ComponentToken & {
-  elevation: string
-}
+type Popover = ComponentToken
 
 export const popover: Popover = {
   background,
-  elevation,
   typography: header,
   minHeight: '48px',
   maxWidth: '560px',
