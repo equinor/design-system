@@ -10,29 +10,25 @@ const {
       background__overlay: { rgba: background },
     },
     text: {
-      static_icons__primary_white: { hex: color },
+      static_icons__primary_white: { rgba: color },
     },
     interactive: {
-      link_in_snackbars: { hex: buttonColor },
+      link_in_snackbars: { rgba: buttonColor },
     },
   },
   spacings: {
     comfortable: { medium: spacingMedium, x_large: spacingXLarge },
   },
-  elevation: { overlay: boxShadow },
   clickbounds: { default__base: clickbounds },
   shape: {
     button: { borderRadius: radius },
   },
 } = tokens
 
-type Snackbar = ComponentToken & {
-  boxShadow: string
-}
+type Snackbar = ComponentToken
 
 export const snackbar: Snackbar = {
   background,
-  boxShadow,
   minHeight: clickbounds,
   border: {
     type: 'border',

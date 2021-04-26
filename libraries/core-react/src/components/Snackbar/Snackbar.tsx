@@ -6,12 +6,13 @@ import {
   spacingsTemplate,
   bordersTemplate,
 } from '../../utils'
+import { Paper } from '../Paper'
 
 type StyledProps = {
   leftAlignFrom: string
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledSnackbar = styled.div.attrs(() => ({
+const StyledSnackbar = styled(Paper).attrs(() => ({
   role: 'alert',
 }))<StyledProps>`
   position: fixed;
@@ -21,7 +22,6 @@ const StyledSnackbar = styled.div.attrs(() => ({
   ${spacingsTemplate(tokens.spacings)}
   ${bordersTemplate(tokens.border)}
   ${typographyTemplate(tokens.typography)}
-  box-shadow: ${tokens.boxShadow};
   min-height: ${tokens.minHeight};
   box-sizing: border-box;
   left: 50%;
@@ -71,7 +71,11 @@ export const Snackbar: FC<SnackbarProps> = ({
   return (
     <>
       {visible && (
-        <StyledSnackbar leftAlignFrom={leftAlignFrom} className={className}>
+        <StyledSnackbar
+          elevation="overlay"
+          leftAlignFrom={leftAlignFrom}
+          className={className}
+        >
           {children}
         </StyledSnackbar>
       )}
