@@ -39,8 +39,8 @@ export const snackbar: Snackbar = {
     actions: {
       spacings: {
         left: spacingXLarge,
-        top: '10px',
-        bottom: '10px',
+        top: '-10px',
+        bottom: '-10px',
       },
     },
     button: {
