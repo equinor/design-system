@@ -2,7 +2,6 @@ import * as React from 'react'
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Divider.tokens'
-import type { DividerToken } from './Divider.tokens'
 
 const { divider } = tokens
 
@@ -21,19 +20,6 @@ const StyledDivider = styled.hr<StyleProps>`
   height: ${(props) => props.dividerHeight};
 `
 
-const getVariant = (variant: 'small' | 'medium'): DividerToken => {
-  if (tokens[variant]) {
-    return tokens[variant]
-  }
-}
-
-const getColor = (color: 'lighter' | 'light' | 'medium'): string => {
-  const colorValue = color === 'medium' ? 'mediumColor' : color
-  if (divider.color[colorValue]) {
-    return divider.color[colorValue]
-  }
-}
-
 export type DividerProps = {
   /** Color variants */
   color?: 'lighter' | 'light' | 'medium'
@@ -44,19 +30,17 @@ export type DividerProps = {
 } & HTMLAttributes<HTMLHRElement>
 
 export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
-  { color = 'medium', variant = 'medium', className = '' },
+  { color = 'medium', variant = 'medium', ...rest },
   ref,
 ) {
-  const variantToken = getVariant(variant)
-  const colorToken = getColor(color)
+  const colorValue = color === 'medium' ? 'mediumColor' : color
 
-  const styleProps: StyleProps = {
-    backgroundColor: colorToken,
-    marginTop: variantToken.spacings.top,
-    marginBottom: variantToken.spacings.bottom,
+  const props: StyleProps = {
+    backgroundColor: divider[colorValue].background,
+    marginTop: tokens[variant].spacings.top,
+    marginBottom: tokens[variant].spacings.bottom,
     dividerHeight: divider.height,
+    ...rest,
   }
-  return <StyledDivider {...styleProps} className={className} ref={ref} />
+  return <StyledDivider {...props} ref={ref} />
 })
-
-// Divider.displayName = 'Divider'

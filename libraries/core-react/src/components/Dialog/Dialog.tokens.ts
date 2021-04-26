@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { Typography, ComponentToken } from '@equinor/eds-tokens'
 
 const {
   spacings: {
@@ -20,7 +20,7 @@ const {
   },
 } = tokens
 
-type Dialog = {
+type Dialog = ComponentToken & {
   width: string
   minHeight: string
   background: string
