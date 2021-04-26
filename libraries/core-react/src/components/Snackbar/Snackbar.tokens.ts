@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography: {
@@ -10,53 +10,51 @@ const {
       background__overlay: { rgba: background },
     },
     text: {
-      static_icons__primary_white: { hex: color },
+      static_icons__primary_white: { rgba: color },
     },
     interactive: {
-      link_in_snackbars: { hex: buttonColor },
+      link_in_snackbars: { rgba: buttonColor },
     },
   },
   spacings: {
-    comfortable: { medium: spacingMedium },
+    comfortable: { medium: spacingMedium, x_large: spacingXLarge },
   },
-  elevation: { overlay: boxShadow },
   clickbounds: { default__base: clickbounds },
+  shape: {
+    button: { borderRadius: radius },
+  },
 } = tokens
 
-type Snackbar = {
-  background: string
-  boxShadow: string
-  minHeight: string
-  spacings: {
-    left: string
-    bottom: string
-    padding: string
-    actionSpace: string
-  }
-  text: {
-    color: string
-    typography: Typography
-  }
-  borderRadius: string
-  buttonColor: string
-}
+type Snackbar = ComponentToken
 
 export const snackbar: Snackbar = {
   background,
-  boxShadow,
   minHeight: clickbounds,
+  border: {
+    type: 'border',
+    width: 0,
+    radius,
+  },
+  entities: {
+    actions: {
+      spacings: {
+        left: spacingXLarge,
+        top: '-10px',
+        bottom: '-10px',
+      },
+    },
+    button: {
+      typography: { color: buttonColor },
+    },
+  },
   spacings: {
     left: spacingMedium,
     bottom: spacingMedium,
-    padding: spacingMedium,
-    actionSpace: '32px',
+    right: spacingMedium,
+    top: spacingMedium,
   },
-  text: {
+  typography: {
+    ...typography,
     color,
-    typography: {
-      ...typography,
-    },
   },
-  borderRadius: '4px',
-  buttonColor,
 }
