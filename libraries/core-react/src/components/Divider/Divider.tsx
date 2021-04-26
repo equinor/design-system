@@ -3,7 +3,7 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Divider.tokens'
 
-const { divider } = tokens
+const { divider, baseDivider } = tokens
 
 type StyleProps = {
   backgroundColor: string
@@ -39,7 +39,7 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
     backgroundColor: divider[colorValue].background,
     marginTop: tokens[variant].spacings.top,
     marginBottom: tokens[variant].spacings.bottom,
-    dividerHeight: divider.height,
+    dividerHeight: baseDivider.height,
     ...rest,
   }
   return <StyledDivider {...props} ref={ref} />

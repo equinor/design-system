@@ -34,7 +34,7 @@ type DividerVariantsToken = {
   mediumColor: DividerToken
 }
 
-const baseDivider: DividerToken = {
+export const baseDivider: DividerToken = {
   height: `${dividerHeight}px`,
 }
 
