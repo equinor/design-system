@@ -21,7 +21,7 @@ const StyledTableOfContents = styled.nav<TableOfContentsProps>`
     css`
       position: fixed;
       top: ${tokens.entities.sticky.spacings.top};
-      right: ${tokens.entities.sticky.spacings.bottom};
+      right: ${tokens.entities.sticky.spacings.right};
     `}
 `
 
