@@ -9,12 +9,9 @@ import {
   Placement,
   useGlobalKeyPress,
 } from '../../hooks'
+import { bordersTemplate } from '../../utils'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
-
-const {
-  enabled: { border },
-} = tokens
 
 type MenuPaperProps = {
   open: boolean
@@ -25,7 +22,7 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   z-index: 150;
   width: fit-content;
   min-width: fit-content;
-  border-radius: ${border.radius};
+  ${bordersTemplate(tokens.border)};
 
   ${({ open }) =>
     css({
