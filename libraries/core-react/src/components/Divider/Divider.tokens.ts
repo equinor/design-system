@@ -26,16 +26,19 @@ const reduceByValue = (subtractValue: number) => (valueWithUnit: string) => {
 
 const reduceValueByDividerHeight = reduceByValue(dividerHeight)
 
-export type DividerToken = ComponentToken
+type DividerToken = ComponentToken
 
-export type DividerVariantsToken = ComponentToken & {
+type DividerVariantsToken = {
   lighter: DividerToken
   light: DividerToken
   mediumColor: DividerToken
 }
 
-export const divider: DividerVariantsToken = {
+const baseDivider: DividerToken = {
   height: `${dividerHeight}px`,
+}
+
+export const divider: DividerVariantsToken = {
   lighter: {
     background: lighter,
   },
@@ -48,6 +51,7 @@ export const divider: DividerVariantsToken = {
 }
 
 export const small: DividerToken = {
+  ...baseDivider,
   spacings: {
     top: spacingSmall,
     bottom: reduceValueByDividerHeight(spacingSmall),
@@ -55,6 +59,7 @@ export const small: DividerToken = {
 }
 
 export const medium: DividerToken = {
+  ...baseDivider,
   spacings: {
     top: spacingMedium,
     bottom: reduceValueByDividerHeight(spacingMedium),
