@@ -13,7 +13,9 @@ const StyledDivider = styled(Divider)`
 `
 const {
   divider: {
-    color: { lighter, light, mediumColor },
+    lighter: { background: lighter },
+    light: { background: light },
+    mediumColor: { background: mediumColor },
   },
   small: {
     spacings: { top: spacingSmall },
