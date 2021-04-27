@@ -20,16 +20,14 @@ export type ComponentToken = {
   typography?: Partial<Typography>
   clickbound?: Clickbound
   states?: {
-    active?: ComponentState
-    disabled?: ComponentState
-    focus?: ComponentState & { outline?: Outline }
-    hover?: ComponentState
-    pressed?: ComponentState & { pressed?: Pressed }
+    active?: ComponentToken
+    disabled?: ComponentToken
+    focus?: ComponentToken & { outline?: Outline }
+    hover?: ComponentToken
+    pressed?: ComponentToken & { pressed?: Pressed }
   }
   entities?: Record<string, ComponentToken>
   modes?: {
     compact?: ComponentToken
   }
 }
-
-type ComponentState = Partial<Omit<ComponentToken, 'states'>>
