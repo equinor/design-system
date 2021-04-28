@@ -2,10 +2,8 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { List } from '../List'
 import { Typography } from '../Typography'
-
+import { typographyTemplate } from '../../utils'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
-
-const { labelText } = tokens
 
 export type TableOfContentsProps = {
   /** Sticky functionality */
@@ -15,14 +13,15 @@ export type TableOfContentsProps = {
 } & HTMLAttributes<HTMLElement>
 
 const StyledTableOfContents = styled.nav<TableOfContentsProps>`
-  margin: 48px 0 32px 0;
+  margin-top: ${tokens.spacings.top};
+  margin-bottom: ${tokens.spacings.bottom};
 
   ${({ sticky }) =>
     sticky &&
     css`
       position: fixed;
-      top: 32px;
-      right: 32px;
+      top: ${tokens.entities.sticky.spacings.top};
+      right: ${tokens.entities.sticky.spacings.right};
     `}
 `
 
@@ -32,7 +31,7 @@ const TocList = styled(List)`
 `
 
 const TocLabel = styled(Typography)`
-  color: ${labelText.color};
+  ${typographyTemplate(tokens.typography)}
 `
 
 const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(
