@@ -52,13 +52,9 @@ export const slider: SliderToken = {
         hover: {
           background: backgroundColorMedium,
         },
-        disabled: {
-          background: backgroundBorderDisabled,
-        },
       },
     },
     output: {
-      height: '14px',
       typography: {
         ...paragraph.overline,
         color: textColor,
