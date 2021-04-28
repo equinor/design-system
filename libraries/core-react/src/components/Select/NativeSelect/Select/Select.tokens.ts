@@ -30,7 +30,6 @@ export const nativeselect: SelectComponentToken = {
   },
   border: {
     type: 'bordergroup',
-    // outline: { color: 'transparent', width: '1px' },
     bottom: {
       color: colors.text.static_icons__tertiary.rgba,
       width: '1px',
