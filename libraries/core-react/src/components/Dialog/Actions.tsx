@@ -13,7 +13,7 @@ const StyledActions = styled.div<DialogActionsProps>`
     !children &&
     css`
       min-height: initial;
-      height: ${tokens.entities.actions.height};
+      height: '8px';
     `}
 `
 

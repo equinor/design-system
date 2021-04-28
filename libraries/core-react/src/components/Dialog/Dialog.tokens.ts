@@ -43,7 +43,6 @@ export const dialog: DialogToken = {
     },
     title: {
       minHeight: '24px',
-      height: '8px',
       typography: accordion_header,
     },
     content: {
