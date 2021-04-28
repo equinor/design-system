@@ -7,7 +7,7 @@ import { dialog as tokens } from './Dialog.tokens'
 const StyledCustomContent = styled.div<DialogCustomContentProps>`
   ${typographyTemplate(tokens.entities.content.typography)}
   min-height: ${tokens.entities.content.minHeight};
-  margin-bottom: ${tokens.entities.children.spacings.bottom};
+  margin-bottom: ${tokens.entities.content.spacings.bottom};
   align-self: stretch;
   justify-self: stretch;
   ${spacingsTemplate(tokens.entities.children.spacings)}
@@ -23,8 +23,7 @@ const StyledCustomContent = styled.div<DialogCustomContentProps>`
 
 const StyledDivider = styled(Divider)`
   width: 100%;
-  margin-top: ${tokens.entities.children.spacings.top};
-  margin-bottom: ${tokens.entities.children.spacings.bottom};
+  margin-bottom: ${tokens.entities.divider.spacings.bottom};
 `
 
 export type DialogCustomContentProps = {

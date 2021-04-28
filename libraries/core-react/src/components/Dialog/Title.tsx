@@ -9,19 +9,19 @@ const StyledTitle = styled.div`
   min-height: ${tokens.entities.title.minHeight};
   align-self: end;
   justify-self: start;
-  ${spacingsTemplate(tokens.entities.children.spacings)}
+  ${spacingsTemplate(tokens.entities.children.spacings)};
 
   ${({ children }) =>
     !children &&
     css`
       min-height: initial;
-      height: ${tokens.entities.title.height};
+      height: '-8px';
     `}
 `
 
 const StyledDivider = styled(Divider)`
   width: 100%;
-  margin-bottom: ${tokens.entities.children.spacings.bottom};
+  margin-bottom: ${tokens.entities.divider.spacings.bottom};
 `
 
 export type DialogTitleProps = React.HTMLAttributes<HTMLDivElement>

@@ -36,9 +36,14 @@ export const dialog: DialogToken = {
     children: {
       spacings: {
         top: '0px',
-        bottom: spacingMedium,
+        bottom: '0px',
         left: spacingMedium,
         right: spacingMedium,
+      },
+    },
+    divider: {
+      spacings: {
+        bottom: spacingMedium,
       },
     },
     title: {
@@ -49,10 +54,12 @@ export const dialog: DialogToken = {
       minHeight: '80px',
       height: '104px',
       typography: body_long,
+      spacings: {
+        bottom: spacingMedium,
+      },
     },
     actions: {
       minHeight: '48px',
-      height: '8px',
     },
   },
 }
