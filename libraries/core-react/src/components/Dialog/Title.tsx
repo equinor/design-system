@@ -15,7 +15,7 @@ const StyledTitle = styled.div`
     !children &&
     css`
       min-height: initial;
-      height: '-8px';
+      height: '8px';
     `}
 `
 
