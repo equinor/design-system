@@ -1,5 +1,11 @@
-import { cloneElement, Children as ReactChildren } from 'react'
-import { forwardRef, ReactElement, useContext, HTMLAttributes } from 'react'
+import {
+  forwardRef,
+  ReactElement,
+  useContext,
+  HTMLAttributes,
+  cloneElement,
+  Children as ReactChildren,
+} from 'react'
 import { TabsContext } from './Tabs.context'
 
 export type TabPanelsProps = HTMLAttributes<HTMLDivElement>

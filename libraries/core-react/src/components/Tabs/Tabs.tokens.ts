@@ -1,81 +1,111 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
     text: {
-      static_icons__tertiary: { hex: defaultColor },
+      static_icons__tertiary: { rgba: defaultColor },
     },
     ui: {
-      background__medium: { hex: defaultBorderColor },
+      background__medium: { rgba: defaultBorderColor },
     },
     interactive: {
-      focus: { hex: focusOutlineColor },
-      primary__hover_alt: { hex: hoverBackgroundColor },
-      primary__resting: { hex: activeColor },
-      primary__hover: { hex: activeHoverColor },
+      focus: { rgba: focusOutlineColor },
+      primary__hover_alt: { rgba: hoverBackgroundColor },
+      primary__resting: { rgba: activeColor },
+      primary__hover: { rgba: activeHoverColor },
     },
   },
-  clickbounds: { default__base: clickbound },
+  clickbounds: { default__base: clickboundsHeight },
   spacings: {
     comfortable: { medium: spacingMedium },
   },
 } = tokens
 
-const focused = {
-  outline: {
-    width: '1px',
-    style: 'dashed',
-    color: focusOutlineColor,
-  },
-  outlineOffset: '2px',
-}
-export const tab = {
-  clickbound,
-  spacing: {
-    left: spacingMedium,
-    right: spacingMedium,
-  },
-  states: {
-    enabled: {
-      backgroundColor: 'transparent',
-      color: defaultColor,
-      border: {
-        color: defaultBorderColor,
-        style: 'solid',
-        width: {
-          bottom: '2px',
+export const token: ComponentToken = {
+  entities: {
+    panel: {
+      spacings: {
+        top: spacingMedium,
+        bottom: spacingMedium,
+      },
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            width: '1px',
+            style: 'dashed',
+            color: focusOutlineColor,
+          },
         },
       },
-      textAlign: 'center',
     },
-    disabled: {
-      borderWidth: '0',
-      hover: {
-        cursor: 'not-allowed',
-        backgroundColor: 'transparent',
+    tab: {
+      background: 'transparent',
+      height: clickboundsHeight,
+      clickbound: {
+        height: clickboundsHeight,
+        offset: {
+          top: '2px',
+        },
       },
-    },
-    hover: {
-      backgroundColor: hoverBackgroundColor,
-    },
-    focused,
-    pressed: {},
-    activated: {
-      color: activeColor,
+      spacings: {
+        left: spacingMedium,
+        right: spacingMedium,
+      },
+      typography: {
+        color: defaultColor,
+        textAlign: 'center',
+      },
       border: {
-        color: activeColor,
+        type: 'bordergroup',
+        bottom: {
+          color: defaultBorderColor,
+          style: 'solid',
+          width: '2px',
+        },
       },
-      hover: {
-        color: activeHoverColor,
+      states: {
+        disabled: {
+          border: {
+            type: 'border',
+            width: 0,
+            color: 'transparent',
+            style: 'solid',
+          },
+        },
+        hover: {
+          background: hoverBackgroundColor,
+        },
+        focus: {
+          outline: {
+            type: 'outline',
+            width: '1px',
+            style: 'dashed',
+            color: focusOutlineColor,
+          },
+        },
+        active: {
+          typography: {
+            color: activeColor,
+          },
+          border: {
+            type: 'bordergroup',
+            bottom: {
+              color: activeColor,
+              style: 'solid',
+              width: '2px',
+            },
+          },
+          states: {
+            hover: {
+              typography: {
+                color: activeHoverColor,
+              },
+            },
+          },
+        },
       },
     },
   },
-}
-
-export const tabPanel = {
-  spacing: {
-    top: spacingMedium,
-    bottom: spacingMedium,
-  },
-  focused,
 }
