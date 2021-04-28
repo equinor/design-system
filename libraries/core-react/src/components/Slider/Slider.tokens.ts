@@ -25,134 +25,6 @@ const {
 
 type SliderToken = ComponentToken
 
-type Slider = {
-  enabled: {
-    background: string
-    track: {
-      background: string
-      height: string
-      realHeight: string
-      bottomOffset: string
-      indicator: {
-        color: string
-        hover: {
-          color: string
-        }
-      }
-      hover: {
-        background: string
-      }
-    }
-    output: {
-      height: string
-      typography: Typography
-      text: string
-    }
-    handle: {
-      background: string
-      size: string
-      border: {
-        color: string
-        radius: string
-        width: string
-        type: string
-      }
-      outline: string
-      outlineOffset: string
-      hover: {
-        background: string
-        border: {
-          color: string
-        }
-      }
-    }
-    dot: {
-      size: string
-      border: {
-        color: string
-        width: string
-        type: string
-        radius: string
-      }
-    }
-  }
-  disabled: {
-    background: string
-    border: {
-      color: string
-    }
-    track: {
-      indicator: {
-        color: string
-      }
-    }
-  }
-}
-
-export const sliderOld: Slider = {
-  enabled: {
-    background: backgroundColorDefault,
-    track: {
-      background: backgroundColor,
-      height: '4px',
-      realHeight: '24px',
-      bottomOffset: '9px',
-      indicator: {
-        color: indicatorColor,
-        hover: {
-          color: primaryHover,
-        },
-      },
-      hover: {
-        background: backgroundColorMedium,
-      },
-    },
-    output: {
-      height: '14px',
-      typography: paragraph.overline,
-      text: textColor,
-    },
-    handle: {
-      background: backgroundColorDefault,
-      size: '12px',
-      border: {
-        color: indicatorColor,
-        radius: '50%',
-        width: '2px',
-        type: 'solid',
-      },
-      outline: `1px dashed ${focusOutlineColor}`,
-      outlineOffset: '2px',
-      hover: {
-        background: primaryHoverAlt,
-        border: {
-          color: primaryHover,
-        },
-      },
-    },
-    dot: {
-      size: '6px',
-      border: {
-        color: backgroundColorMedium,
-        width: '1px',
-        type: 'solid',
-        radius: '50%',
-      },
-    },
-  },
-  disabled: {
-    background: backgroundColorDisabled,
-    border: {
-      color: backgroundColorMedium,
-    },
-    track: {
-      indicator: {
-        color: backgroundBorderDisabled,
-      },
-    },
-  },
-}
-
 export const slider: SliderToken = {
   background: backgroundColorDefault,
   entities: {
@@ -169,6 +41,9 @@ export const slider: SliderToken = {
           states: {
             hover: {
               background: primaryHover,
+            },
+            disabled: {
+              background: backgroundBorderDisabled,
             },
           },
         },
@@ -238,6 +113,7 @@ export const slider: SliderToken = {
     disabled: {
       background: backgroundColorDisabled,
       border: {
+        type: 'border',
         color: backgroundColorMedium,
       },
     },

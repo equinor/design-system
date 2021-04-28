@@ -24,8 +24,8 @@ const fakeTrackBg = css`
   background-repeat: no-repeat;
 `
 const fakeTrackBgHover = css`
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='
-  ${track.states.hover.background}' width='100%' height='4' rx='2' /></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track
+    .states.hover.background}' width='100%' height='4' rx='2' /></svg>");
 `
 
 const trackFill = css`
@@ -62,7 +62,9 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
   &::after {
     ${trackFill}
     background: ${({ disabled }) =>
-      disabled ? track.states.disabled.background : track.background};
+      disabled
+        ? track.entities.indicator.states.disabled.background
+        : track.entities.indicator.background};
   }
   /** Faking the active region of the slider */
   &::before {
@@ -84,7 +86,7 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
     ${fakeTrackBgHover}
     &::before,
     &::after {
-      background: ${track.states.hover.background};
+      background: ${track.entities.indicator.states.hover.background};
     }
   }
 `
@@ -102,7 +104,9 @@ const Wrapper = styled.div<WrapperProps>`
   &::after {
     ${trackFill}
     background: ${({ disabled }) =>
-      disabled ? track.states.disabled.background : track.background}
+      disabled
+        ? track.entities.indicator.states.disabled.background
+        : track.entities.indicator.background}
   }
   &::after {
     margin-right: calc(

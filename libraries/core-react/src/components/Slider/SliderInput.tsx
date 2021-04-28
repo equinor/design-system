@@ -27,7 +27,8 @@ const thumb = css`
 
 const thumbHover = css`
   box-shadow: 0px 0px 0px 6px ${handle.states.hover.background};
-  border-color: ${handle.states.hover.border.color};
+  border-color: ${handle.states.hover.border.type === 'border' &&
+  handle.states.hover.border.color};
 `
 
 const thumbHoverAndDisabled = css`
@@ -37,7 +38,7 @@ const thumbHoverAndDisabled = css`
 
 const thumbDisabled = css`
   background-color: ${_disabled.background};
-  border-color: ${_disabled.border.color};
+  border-color: ${_disabled.border.type === 'border' && _disabled.border.color};
 `
 
 type SliderInput = {
