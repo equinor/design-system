@@ -4,16 +4,16 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   colors: {
     text: {
-      static_icons__tertiary: { hex: defaultColor },
+      static_icons__tertiary: { rgba: defaultColor },
     },
     ui: {
-      background__medium: { hex: defaultBorderColor },
+      background__medium: { rgba: defaultBorderColor },
     },
     interactive: {
-      focus: { hex: focusOutlineColor },
-      primary__hover_alt: { hex: hoverBackgroundColor },
-      primary__resting: { hex: activeColor },
-      primary__hover: { hex: activeHoverColor },
+      focus: { rgba: focusOutlineColor },
+      primary__hover_alt: { rgba: hoverBackgroundColor },
+      primary__resting: { rgba: activeColor },
+      primary__hover: { rgba: activeHoverColor },
     },
   },
   clickbounds: { default__base: clickboundsHeight },
