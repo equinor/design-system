@@ -14,6 +14,7 @@ export type ComponentToken = {
   maxWidth?: string
   minWidth?: string
   width?: string
+  boxShadow?: string
   background?: string
   spacings?: Spacing
   border?: Borders

@@ -1,5 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing } from '@equinor/eds-tokens'
+import * as R from 'ramda'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   typography,
@@ -19,55 +20,46 @@ const {
   clickbounds: { default__base: clickbounds },
 } = tokens
 
-type Select = {
-  background: string
-  boxShadow: string
-  minHeight: string
-  spacings: {
-    single: Spacing
-    multi: Spacing
-  }
-  typography: Typography
-  borderRadius: string
-  hover: {
-    background: string
-  }
-  button: {
-    size: string
-    spacings: Spacing
-  }
-}
-
-export const select: Select = {
-  background: colors.ui.background__default.hex,
+export const select: ComponentToken = {
+  background: colors.ui.background__default.rgba,
   boxShadow,
   minHeight: clickbounds,
   spacings: {
-    single: {
-      top: spacingMedium,
-      right: spacingLarge,
-      bottom: spacingMedium,
-      left: spacingLarge,
-    },
-    multi: {
-      left: spacingMediumSmall,
-      right: spacingLarge,
-    },
+    top: spacingMedium,
+    right: spacingLarge,
+    bottom: spacingMedium,
+    left: spacingLarge,
   },
   typography: {
     ...typography.navigation.menu_title,
-    color: colors.text.static_icons__tertiary.hex,
+    color: colors.text.static_icons__tertiary.rgba,
   },
-  borderRadius,
-  hover: {
-    background: colors.ui.background__light.rgba,
+  border: {
+    type: 'border',
+    radius: borderRadius,
   },
-  button: {
-    size: '24px',
-    spacings: {
-      left: spacingSmall,
-      right: spacingSmall,
-      top: '6px',
+  states: {
+    hover: {
+      background: colors.ui.background__light.rgba,
+    },
+  },
+  entities: {
+    button: {
+      height: '24px',
+      spacings: {
+        left: spacingSmall,
+        right: spacingSmall,
+        top: '6px',
+      },
     },
   },
 }
+
+export const multiSelect: ComponentToken = R.mergeDeepRight(select, {
+  spacings: {
+    top: '0',
+    bottom: '0',
+    left: spacingMediumSmall,
+    right: spacingLarge,
+  },
+})

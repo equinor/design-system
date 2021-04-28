@@ -10,7 +10,7 @@ import { Icon } from '../../Icon'
 import { CheckboxInput } from '../../SelectionControls/Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
 import styled from 'styled-components'
-import { select as tokens } from '../Select.tokens'
+import { multiSelect as tokens } from '../Select.tokens'
 import {
   Container,
   PaddedInput,
@@ -19,9 +19,10 @@ import {
   StyledListItem,
   StyledInputWrapper,
 } from '../commonStyles'
+import { spacingsTemplate } from '../../../utils'
 
 const PaddedStyledListItem = styled(StyledListItem)`
-  padding: 0 ${tokens.spacings.multi.right} 0 ${tokens.spacings.multi.left};
+  ${spacingsTemplate(tokens.spacings)}
   display: flex;
   align-items: center;
 `

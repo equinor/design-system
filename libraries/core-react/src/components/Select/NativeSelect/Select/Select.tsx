@@ -2,16 +2,21 @@ import { forwardRef, SelectHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { nativeselect as tokens } from './Select.tokens'
 import type { NativeSelectProps } from '../NativeSelect'
-import { typographyTemplate, spacingsTemplate } from '../../../../utils'
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  bordersTemplate,
+  outlineTemplate,
+} from '../../../../utils'
 
 const StyledSelect = styled.select`
   border: none;
   border-radius: 0;
-  box-shadow: inset 0 -${tokens.default.border.bottom.width} 0 0 ${tokens.default.border.bottom.color};
-  ${spacingsTemplate(tokens.spacings.input)}
+  ${bordersTemplate(tokens.border)}
+  ${spacingsTemplate(tokens.entities.input.spacings)}
   ${typographyTemplate(tokens.typography)}
-  padding-right: calc(${tokens.spacings.input.right} *2 + ${tokens.default.icon
-    .width});
+  padding-right: calc(${tokens.entities.input.spacings.right} *2 + ${tokens
+    .entities.icon.width});
   display: block;
   margin: 0;
   appearance: none;
@@ -22,18 +27,17 @@ const StyledSelect = styled.select`
       ${tokens.background} 100%
     );
   background-repeat: no-repeat, repeat;
-  background-position: right ${tokens.spacings.input.right} top 50%;
+  background-position: right ${tokens.entities.input.spacings.right} top 50%;
   width: 100%;
   &:active,
   &:focus {
     outline-offset: 0;
     box-shadow: none;
-    outline: ${tokens.default.focus.border.width} solid
-      ${tokens.default.focus.border.color};
+    ${outlineTemplate(tokens.states.focus.outline)}
   }
 
   &:disabled {
-    color: ${tokens.default.disabled.color};
+    color: ${tokens.states.disabled.typography.color};
     background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23bebebe' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"),
       linear-gradient(
         to bottom,

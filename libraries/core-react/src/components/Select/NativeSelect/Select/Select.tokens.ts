@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing, Focus } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors,
@@ -7,61 +7,48 @@ const {
   typography,
 } = tokens
 
-const spacings = {
-  input: {
-    left: comfortable.small,
-    right: comfortable.small,
-    top: '6px',
-    bottom: '6px',
-  },
-}
+type SelectComponentToken = ComponentToken
 
-export type SelectVariantProps = {
-  background: string
-  typography: Typography
-  spacings: {
-    input: Spacing
-  }
-  default: {
-    icon: {
-      width: string
-    }
-    border: {
-      outline: { color: string; width: string }
-      bottom: { color: string; width: string }
-    }
-    focus: {
-      border: Focus
-    }
-    disabled: {
-      color: string
-    }
-  }
-}
-
-export const nativeselect: SelectVariantProps = {
-  background: colors.ui.background__light.hex,
+export const nativeselect: SelectComponentToken = {
+  background: colors.ui.background__light.rgba,
   typography: {
     ...typography.input.text,
-    color: colors.text.static_icons__tertiary.hex,
+    color: colors.text.static_icons__tertiary.rgba,
   },
-  spacings,
-  default: {
+  entities: {
+    input: {
+      spacings: {
+        left: comfortable.small,
+        right: comfortable.small,
+        top: '6px',
+        bottom: '6px',
+      },
+    },
     icon: {
       width: '24px',
     },
-    border: {
-      outline: { color: 'transparent', width: '1px' },
-      bottom: { color: colors.text.static_icons__tertiary.hex, width: '1px' },
+  },
+  border: {
+    type: 'bordergroup',
+    bottom: {
+      color: colors.text.static_icons__tertiary.rgba,
+      width: '1px',
+      style: 'solid',
     },
+  },
+  states: {
     focus: {
-      border: {
+      outline: {
+        type: 'outline',
         width: '2px',
-        color: colors.interactive.primary__resting.hex,
+        color: colors.interactive.primary__resting.rgba,
+        style: 'solid',
       },
     },
     disabled: {
-      color: colors.interactive.disabled__text.hex,
+      typography: {
+        color: colors.interactive.disabled__text.rgba,
+      },
     },
   },
 }
