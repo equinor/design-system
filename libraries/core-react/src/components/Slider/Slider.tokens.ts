@@ -159,13 +159,8 @@ export const slider: SliderToken = {
     track: {
       background: backgroundColor,
       height: '4px',
-      clickbound: {
-        height: '24px',
-        offset: {
-          top: '0px',
-        },
-      },
       spacings: {
+        top: '24px',
         bottom: '9px',
       },
       entities: {
@@ -218,6 +213,7 @@ export const slider: SliderToken = {
         hover: {
           background: primaryHoverAlt,
           border: {
+            type: 'border',
             color: primaryHover,
           },
         },
@@ -232,6 +228,9 @@ export const slider: SliderToken = {
         width: '1px',
         style: 'solid',
         radius: '50%',
+      },
+      spacings: {
+        bottom: '8px',
       },
     },
   },

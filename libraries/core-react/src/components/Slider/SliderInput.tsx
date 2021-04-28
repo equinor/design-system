@@ -1,13 +1,11 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
+import { bordersTemplate, outlineTemplate } from '../../utils'
 
 const {
-  enabled,
-  disabled: _disabled,
-  enabled: {
-    handle: { border: borderProps },
-  },
+  entities: { handle },
+  states: { disabled: _disabled },
 } = tokens
 
 const track = css`
@@ -18,19 +16,18 @@ const track = css`
 `
 
 const thumb = css`
-  border: ${borderProps.width} ${borderProps.type} ${borderProps.color};
-  height: ${enabled.handle.size};
-  width: ${enabled.handle.size};
-  border-radius: ${borderProps.radius};
-  background: ${enabled.handle.background};
+  ${bordersTemplate(handle.border)}
+  height: ${handle.height};
+  width: ${handle.width};
+  background: ${handle.background};
   cursor: pointer;
   position: relative;
   z-index: 1;
 `
 
 const thumbHover = css`
-  box-shadow: 0px 0px 0px 6px ${enabled.handle.hover.background};
-  border-color: ${enabled.handle.hover.border.color};
+  box-shadow: 0px 0px 0px 6px ${handle.states.hover.background};
+  border-color: ${handle.states.hover.border.color};
 `
 
 const thumbHoverAndDisabled = css`
@@ -71,12 +68,10 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
   &[data-focus-visible-added]:focus {
     z-index: 2;
     &::-webkit-slider-thumb {
-      outline: ${enabled.handle.outline};
-      outline-offset: ${enabled.handle.outlineOffset};
+      ${outlineTemplate(handle.states.focus.outline)};
     }
     &::-moz-range-thumb {
-      outline: ${enabled.handle.outline};
-      outline-offset: ${enabled.handle.outlineOffset};
+      ${outlineTemplate(handle.states.focus.outline)};
     }
   }
   &:hover,
