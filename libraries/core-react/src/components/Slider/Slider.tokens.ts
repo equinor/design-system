@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -22,6 +22,8 @@ const {
   },
   typography: { paragraph },
 } = tokens
+
+type SliderToken = ComponentToken
 
 type Slider = {
   enabled: {
@@ -87,7 +89,7 @@ type Slider = {
   }
 }
 
-export const slider: Slider = {
+export const sliderOld: Slider = {
   enabled: {
     background: backgroundColorDefault,
     track: {
@@ -146,6 +148,98 @@ export const slider: Slider = {
     track: {
       indicator: {
         color: backgroundBorderDisabled,
+      },
+    },
+  },
+}
+
+export const slider: SliderToken = {
+  background: backgroundColorDefault,
+  entities: {
+    track: {
+      background: backgroundColor,
+      height: '4px',
+      clickbound: {
+        height: '24px',
+        offset: {
+          top: '0px',
+        },
+      },
+      spacings: {
+        bottom: '9px',
+      },
+      entities: {
+        indicator: {
+          background: indicatorColor,
+          states: {
+            hover: {
+              background: primaryHover,
+            },
+          },
+        },
+      },
+      states: {
+        hover: {
+          background: backgroundColorMedium,
+        },
+        disabled: {
+          background: backgroundBorderDisabled,
+        },
+      },
+    },
+    output: {
+      height: '14px',
+      typography: {
+        ...paragraph.overline,
+        color: textColor,
+      },
+    },
+    handle: {
+      background: backgroundColorDefault,
+      height: '12px',
+      width: '12px',
+      border: {
+        type: 'border',
+        color: indicatorColor,
+        radius: '50%',
+        width: '2px',
+        style: 'solid',
+      },
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            color: focusOutlineColor,
+            width: '1px',
+            style: 'dashed',
+            offset: '2px',
+          },
+        },
+        hover: {
+          background: primaryHoverAlt,
+          border: {
+            color: primaryHover,
+          },
+        },
+      },
+    },
+    dot: {
+      height: '6px',
+      width: '6px',
+      border: {
+        type: 'border',
+        color: backgroundColorMedium,
+        width: '1px',
+        style: 'solid',
+        radius: '50%',
+      },
+    },
+  },
+  states: {
+    disabled: {
+      background: backgroundColorDisabled,
+      border: {
+        color: backgroundColorMedium,
       },
     },
   },

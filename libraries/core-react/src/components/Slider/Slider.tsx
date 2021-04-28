@@ -12,31 +12,27 @@ import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
 import { Output } from './Output'
 import { SliderInput } from './SliderInput'
+import { bordersTemplate } from '../../utils'
 
 const {
-  enabled,
-  disabled: _disabled,
-  enabled: {
-    dot: { border: borderToken },
-  },
+  entities: { track, handle, dot },
 } = tokens
 
 const fakeTrackBg = css`
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled
-    .track.background}' width='100%' height='4' rx='2' /></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track.background}' width='100%' height='4' rx='2' /></svg>");
   background-size: cover;
   background-repeat: no-repeat;
 `
 const fakeTrackBgHover = css`
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${enabled
-    .track.hover.background}' width='100%' height='4' rx='2' /></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='
+  ${track.states.hover.background}' width='100%' height='4' rx='2' /></svg>");
 `
 
 const trackFill = css`
   grid-column: 1 / span 2;
   grid-row: 2;
-  height: ${enabled.track.height};
-  margin-bottom: ${enabled.track.bottomOffset};
+  height: ${track.height};
+  margin-bottom: ${track.spacings.bottom};
   align-self: end;
   content: '';
 `
@@ -66,14 +62,12 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
   &::after {
     ${trackFill}
     background: ${({ disabled }) =>
-      disabled
-        ? _disabled.track.indicator.color
-        : enabled.track.indicator.color};
+      disabled ? track.states.disabled.background : track.background};
   }
   /** Faking the active region of the slider */
   &::before {
     margin-left: calc(
-      calc(${enabled.handle.size} / 2) + (var(--a) - var(--min)) / var(--dif) *
+      calc(${handle.width} / 2) + (var(--a) - var(--min)) / var(--dif) *
         var(--realWidth)
     );
     width: calc((var(--b) - var(--a)) / var(--dif) * var(--realWidth));
@@ -81,7 +75,7 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
 
   &::after {
     margin-left: calc(
-      calc(${enabled.handle.size} / 2) + (var(--b) - var(--min)) / var(--dif) *
+      calc(${handle.width} / 2) + (var(--b) - var(--min)) / var(--dif) *
         var(--realWidth)
     );
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
@@ -90,7 +84,7 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
     ${fakeTrackBgHover}
     &::before,
     &::after {
-      background: ${enabled.track.indicator.hover.color};
+      background: ${track.states.hover.background};
     }
   }
 `
@@ -108,9 +102,7 @@ const Wrapper = styled.div<WrapperProps>`
   &::after {
     ${trackFill}
     background: ${({ disabled }) =>
-      disabled
-        ? _disabled.track.indicator.color
-        : enabled.track.indicator.color};
+      disabled ? track.states.disabled.background : track.background}
   }
   &::after {
     margin-right: calc(
@@ -122,7 +114,7 @@ const Wrapper = styled.div<WrapperProps>`
   &:hover:not([disabled]) {
     ${fakeTrackBgHover}
     &::after {
-      background: ${enabled.track.indicator.hover.color};
+      background: ${track.states.hover.background};
     }
   }
 `
@@ -137,12 +129,11 @@ const WrapperGroupLabelDots = styled(WrapperGroupLabel)`
     content: ' ';
     display: block;
     position: absolute;
-    width: ${enabled.dot.size};
-    height: ${enabled.dot.size};
-    background: ${enabled.background};
-    border: ${borderToken.width} ${borderToken.type} ${borderToken.color};
-    border-radius: ${borderToken.radius};
-    bottom: 8px;
+    width: ${dot.width};
+    height: ${dot.height};
+    background: ${tokens.background};
+    ${bordersTemplate(dot.border)}
+    bottom: ${dot.spacings.bottom};
     left: 0;
   }
   &:after {
