@@ -115,6 +115,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const anchorRef = useRef<HTMLDivElement>()
     const containerId = 'eds-tooltip-container'
     const tooltipId = useId(id, 'tooltip')
+    const shouldOpen = isMounted && title !== ''
     let timer: number
 
     useEffect(() => {
@@ -129,7 +130,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }, [])
 
     const openTooltip = () => {
-      if (isMounted) {
+      if (shouldOpen) {
         clearTimeout(timer)
 
         timer = setTimeout(() => {
@@ -172,7 +173,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        {isMounted &&
+        {shouldOpen &&
           ReactDom.createPortal(
             <StyledTooltip
               id={tooltipId}
