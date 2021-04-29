@@ -1,20 +1,24 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { switchControl as tokens } from './Switch.tokens'
+import { compact as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
 import { Input } from './Input'
 
-const { enabled, disabled: _disabled } = tokens
+const {
+  entities: { track, handle },
+} = tokens
 
 type StyledProps = { isDisabled: boolean }
 
 const Track = styled.span<StyledProps>`
-  width: ${enabled.track.small.width};
-  height: ${enabled.track.small.height};
+  width: ${track.width};
+  height: ${track.height};
   border-radius: 10px;
   border: none;
   background-color: ${({ isDisabled }) =>
-    isDisabled ? _disabled.background : enabled.track.small.offBackground};
+    isDisabled
+      ? tokens.states.disabled.background
+      : track.states.disabled.background};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -22,9 +26,9 @@ const Track = styled.span<StyledProps>`
 `
 
 const Handle = styled.span`
-  background-color: ${enabled.handle.small.background};
-  width: ${enabled.handle.small.size};
-  height: ${enabled.handle.small.size};
+  background-color: ${handle.background};
+  width: ${handle.width};
+  height: ${handle.height};
   border-radius: 50%;
   display: inline-block;
   position: absolute;

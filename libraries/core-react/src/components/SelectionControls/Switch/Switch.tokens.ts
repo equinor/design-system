@@ -1,4 +1,5 @@
-import { tokens } from '@equinor/eds-tokens'
+import { ComponentToken, tokens } from '@equinor/eds-tokens'
+import * as R from 'ramda'
 
 const {
   colors: {
@@ -21,58 +22,100 @@ const {
   typography: {
     navigation: { menu_title: labelTypography },
   },
-  clickbounds: { default__base: clickbounds },
+  clickbounds,
   elevation: { raised: boxShadow },
 } = tokens
-export const switchControl = {
-  color: {},
-  enabled: {
-    typography: {
-      ...labelTypography,
-    },
-    clickSize: clickbounds,
+
+type SwitchToken = ComponentToken
+
+export const comfortable: SwitchToken = {
+  typography: labelTypography,
+  clickbound: {
+    height: clickbounds.default__base,
+    width: clickbounds.default__base,
+    offset: { top: '0' },
+  },
+  entities: {
     track: {
       width: '34px',
       height: '8px',
-      borderRadius: '4px',
       background: backgroundColorMedium,
-      activeBackground: activeColor,
-      small: {
-        width: '20px',
-        height: '10px',
-        background: primaryResting,
-        offBackground: handleColor,
+      border: {
+        type: 'border',
+        radius: '4px',
       },
-    },
-    handle: {
-      boxShadow,
-      background: handleColor,
-      activeBackground: primaryResting,
-      size: '16px',
-      small: {
-        size: '6px',
-        background: handleColorSmall,
-      },
-    },
-    hover: {
-      background: primaryHoverAlt,
-      handle: {
-        background: primaryHover,
-        small: {
-          background: primaryHoverAlt,
+      states: {
+        active: {
+          background: activeColor,
         },
-      },
-      track: {
-        small: {
+        hover: {
           background: primaryHover,
         },
       },
     },
-    outline: `1px dashed ${focusOutlineColor}`,
-    outlineOffset: '6px',
-    outlineOffsetSmall: '4px',
+    handle: {
+      height: '16px',
+      width: '16px',
+      boxShadow,
+      background: handleColor,
+      states: {
+        active: {
+          background: primaryResting,
+        },
+        hover: {
+          background: primaryHoverAlt,
+        },
+      },
+    },
   },
-  disabled: {
-    background: backgroundColorDisabled,
+  states: {
+    disabled: {
+      background: backgroundColorDisabled,
+    },
+    focus: {
+      outline: {
+        width: '1px',
+        type: 'outline',
+        style: 'dashed',
+        color: focusOutlineColor,
+        offset: '6px',
+      },
+    },
+    hover: {
+      background: primaryHoverAlt,
+      entities: {
+        handle: {
+          background: primaryHover,
+          // small: {
+          //   background: primaryHoverAlt,
+          // },
+        },
+        track: {
+          // small: {
+          //   background: primaryHover,
+          // },
+        },
+      },
+    },
   },
 }
+
+export const compact: SwitchToken = R.mergeDeepRight(comfortable, {
+  entities: {
+    track: {
+      width: '20px',
+      height: '10px',
+      background: primaryResting,
+      states: {
+        disabled: {
+          background: handleColor,
+        },
+      },
+    },
+    handle: {
+      height: '6px',
+      width: '6px',
+      background: handleColorSmall,
+    },
+  },
+})
