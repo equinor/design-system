@@ -31,9 +31,6 @@ const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
 `
 
 const SmallInput = styled(BaseInput)`
-  &:checked + span > span:last-child {
-    transform: translate(180%, -50%);
-  }
   &[data-focus-visible-added]:focus + span :first-child {
     outline-offset: 4px;
   }
@@ -46,6 +43,7 @@ const SmallInput = styled(BaseInput)`
   }
   /* Handle */
   &:checked + span > span:last-child {
+    transform: translate(180%, -50%);
     background-color: ${compactTokens.entities.handle.background};
   }
 `
@@ -55,15 +53,15 @@ const DefaultInput = styled(BaseInput)`
     background-color: ${({ disabled }) =>
       disabled
         ? tokens.states.disabled.background
-        : tokens.entities.track.background};
+        : tokens.entities.track.states.active.background};
   }
   /* Handle */
   &:checked + span > span:last-child {
+    transform: translate(135%, -50%);
     background-color: ${({ disabled }) =>
       disabled
         ? tokens.states.disabled.background
-        : tokens.entities.handle.background};
-    transform: translate(135%, -50%);
+        : tokens.entities.handle.states.active.background};
   }
 `
 
