@@ -23,10 +23,10 @@ const fakeTrackBg = css`
   background-size: cover;
   background-repeat: no-repeat;
 `
-const fakeTrackBgHover = css`
-  background-image: url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track
-    .states.hover.background}' width='100%' height='4' rx='2' /></svg>");
-`
+
+const fakeTrackBgHover = css({
+  backgroundImage: `url("data:image/svg+xml,<svg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'><rect x='0' y='11' fill='${track.states.hover.background}' width='100%' height='4' rx='2' /></svg>")`,
+})
 
 const trackFill = css`
   grid-column: 1 / span 2;
