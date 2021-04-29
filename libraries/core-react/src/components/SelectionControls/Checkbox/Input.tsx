@@ -7,9 +7,10 @@ import {
   checkbox_indeterminate, // eslint-disable-line camelcase
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
-import { checkbox as tokens } from './Checkbox.tokens'
+import { comfortable as tokens } from './Checkbox.tokens'
+import { spacingsTemplate, outlineTemplate } from '../../../utils'
 
-const { color, enabled } = tokens
+// const { color, enabled } = tokens
 
 type StyledIconPathProps = {
   icon: IconData
@@ -37,8 +38,7 @@ const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
     outline: none;
   }
   &[data-focus-visible-added]:focus + svg {
-    outline: ${enabled.outline};
-    outline-offset: ${enabled.outlineOffset};
+    ${outlineTemplate(tokens.states.focus.outline)}
   }
   &:not(:checked) ~ svg path[name='checked'] {
     display: none;
@@ -67,11 +67,11 @@ type StyledInputWrapperProps = { disabled: boolean }
 const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-flex;
   border-radius: 50%;
-  padding: ${enabled.padding};
+  ${spacingsTemplate(tokens.spacings)}
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ disabled }) =>
-        disabled ? 'transparent' : color.hover};
+        disabled ? 'transparent' : tokens.states.hover.background};
     }
   }
 `
@@ -89,6 +89,9 @@ export type InputProps = {
 export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
   function CheckboxInput({ disabled = false, indeterminate, ...rest }, ref) {
     const iconSize = 24
+    const fill = disabled
+      ? tokens.states.disabled.background
+      : tokens.background
     return (
       <InputWrapper disabled={disabled}>
         <Input
@@ -102,7 +105,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
             width={iconSize}
             height={iconSize}
             viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={disabled ? color.disabled : color.primary}
+            fill={fill}
             aria-hidden
           >
             <StyledPath icon={checkbox_indeterminate} name="indeterminate" />
@@ -112,7 +115,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
             width={iconSize}
             height={iconSize}
             viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={disabled ? color.disabled : color.primary}
+            fill={fill}
             aria-hidden
           >
             <StyledPath icon={checkbox} name="checked" />

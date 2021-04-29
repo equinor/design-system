@@ -1,11 +1,9 @@
 /* eslint camelcase: "off" */
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { checkbox as tokens } from './Checkbox.tokens'
+import { comfortable as tokens } from './Checkbox.tokens'
 import { typographyTemplate } from '../../../utils'
 import { CheckboxInput } from './Input'
-
-const { enabled } = tokens
 
 type StyledCheckboxProps = {
   disabled: boolean
@@ -18,7 +16,7 @@ const StyledCheckbox = styled.label<StyledCheckboxProps>`
 `
 
 const LabelText = styled.span`
-  ${typographyTemplate(enabled.typography)}
+  ${typographyTemplate(tokens.typography)}
 `
 
 export type CheckboxProps = {
