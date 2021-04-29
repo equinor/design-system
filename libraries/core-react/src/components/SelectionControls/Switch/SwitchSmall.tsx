@@ -1,12 +1,12 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { compact as tokens } from './Switch.tokens'
+import { comfortable as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
 import { Input } from './Input'
 
 const {
   entities: { track, handle },
-} = tokens
+} = tokens.modes.compact
 
 type StyledProps = { isDisabled: boolean }
 

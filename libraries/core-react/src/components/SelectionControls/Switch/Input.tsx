@@ -1,13 +1,14 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import {
-  comfortable as tokens,
-  compact as compactTokens,
-} from './Switch.tokens'
+import { comfortable as tokens } from './Switch.tokens'
 import type { Size } from './Switch.types'
 import { outlineTemplate } from '../../../utils'
 
 // const { enabled, disabled: _disabled } = tokens
+
+const {
+  modes: { compact: compactTokens },
+} = tokens
 
 type StyledProps = Pick<InputProps, 'disabled'>
 
@@ -39,7 +40,7 @@ const SmallInput = styled(BaseInput)`
     background-color: ${({ disabled }) =>
       disabled
         ? tokens.states.disabled.background
-        : compactTokens.entities.track.background};
+        : compactTokens.entities.track.states.active.background};
   }
   /* Handle */
   &:checked + span > span:last-child {

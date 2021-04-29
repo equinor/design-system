@@ -11,12 +11,12 @@ const {
       primary__hover: { rgba: primaryHover },
       primary__selected_highlight: { rgba: activeColor },
       primary__resting: { rgba: primaryResting },
-      disabled__fill: { rgba: backgroundColorDisabled },
+      disabled__fill: { rgba: backgroundDisabled },
       focus: { rgba: focusOutlineColor },
-      icon_on_interactive_colors: { rgba: handleColorSmall },
+      icon_on_interactive_colors: { rgba: iconInteractive },
     },
     text: {
-      static_icons__tertiary: { rgba: handleColor },
+      static_icons__tertiary: { rgba: iconTertiary },
     },
   },
   typography: {
@@ -57,7 +57,7 @@ export const comfortable: SwitchToken = {
       height: '16px',
       width: '16px',
       boxShadow,
-      background: handleColor,
+      background: iconTertiary,
       states: {
         active: {
           background: primaryResting,
@@ -68,9 +68,32 @@ export const comfortable: SwitchToken = {
       },
     },
   },
+  modes: {
+    compact: {
+      entities: {
+        track: {
+          width: '20px',
+          height: '10px',
+          states: {
+            disabled: {
+              background: iconTertiary,
+            },
+            active: {
+              background: primaryResting,
+            },
+          },
+        },
+        handle: {
+          height: '6px',
+          width: '6px',
+          background: iconInteractive,
+        },
+      },
+    },
+  },
   states: {
     disabled: {
-      background: backgroundColorDisabled,
+      background: backgroundDisabled,
     },
     focus: {
       outline: {
@@ -99,23 +122,3 @@ export const comfortable: SwitchToken = {
     },
   },
 }
-
-export const compact: SwitchToken = R.mergeDeepRight(comfortable, {
-  entities: {
-    track: {
-      width: '20px',
-      height: '10px',
-      background: primaryResting,
-      states: {
-        disabled: {
-          background: handleColor,
-        },
-      },
-    },
-    handle: {
-      height: '6px',
-      width: '6px',
-      background: handleColorSmall,
-    },
-  },
-})
