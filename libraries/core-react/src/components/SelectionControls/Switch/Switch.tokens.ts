@@ -108,7 +108,6 @@ export const comfortable: SwitchToken = {
         handle: {
           background: primaryHover,
         },
-        track: {},
       },
     },
   },
