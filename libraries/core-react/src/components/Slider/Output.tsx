@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { typographyTemplate } from '../../utils'
 import { slider as tokens } from './Slider.tokens'
 
-const { enabled } = tokens
+const {
+  entities: { track, output },
+} = tokens
 
 type StyledProps = Pick<OutputProps, 'value'>
 
@@ -13,11 +15,10 @@ const StyledOutput = styled.output<StyledProps>`
   width: fit-content;
   position: relative;
   z-index: 1;
-  color: ${enabled.output.text};
-  ${typographyTemplate(enabled.output.typography)}
-  background: ${enabled.background};
+  ${typographyTemplate(output.typography)}
+  background: ${tokens.background};
   padding: 0 5px;
-  top: ${enabled.track.realHeight};
+  top: ${track.spacings.top};
   pointer-events: none;
   /* Calculate the distance on the track*/
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
