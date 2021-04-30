@@ -4,8 +4,6 @@ import { comfortable as tokens } from './Switch.tokens'
 import type { Size } from './Switch.types'
 import { outlineTemplate } from '../../../utils'
 
-// const { enabled, disabled: _disabled } = tokens
-
 const {
   modes: { compact: compactTokens },
 } = tokens

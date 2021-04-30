@@ -1,5 +1,4 @@
 import { ComponentToken, tokens } from '@equinor/eds-tokens'
-import * as R from 'ramda'
 
 const {
   colors: {
@@ -33,7 +32,6 @@ export const comfortable: SwitchToken = {
   clickbound: {
     height: clickbounds.default__base,
     width: clickbounds.default__base,
-    offset: { top: '0' },
   },
   entities: {
     track: {
@@ -109,15 +107,8 @@ export const comfortable: SwitchToken = {
       entities: {
         handle: {
           background: primaryHover,
-          // small: {
-          //   background: primaryHoverAlt,
-          // },
         },
-        track: {
-          // small: {
-          //   background: primaryHover,
-          // },
-        },
+        track: {},
       },
     },
   },
