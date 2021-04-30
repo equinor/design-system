@@ -11,7 +11,7 @@ const Wrapper = styled(Radio)`
 `
 
 export default {
-  title: 'Components/Selection controls/Radio',
+  title: 'Components/Radio',
   component: Radio,
   parameters: {
     docs: {

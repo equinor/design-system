@@ -19,7 +19,7 @@ const Wrapper = styled.div<WrapperStyleProps>`
 `
 
 export default {
-  title: 'Components/Selection controls/Switch',
+  title: 'Components/Switch',
   component: Switch,
   parameters: {
     docs: {

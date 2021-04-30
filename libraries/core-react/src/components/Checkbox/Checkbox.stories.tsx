@@ -13,7 +13,7 @@ const Wrapper = styled(Checkbox)`
 `
 
 export default {
-  title: 'Components/Selection controls/Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
   parameters: {
     docs: {
