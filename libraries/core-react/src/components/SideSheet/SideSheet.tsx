@@ -1,17 +1,11 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
-import { spacingsTemplate } from '../../utils'
+import { spacingsTemplate, bordersTemplate } from '../../utils'
 import { Typography } from '../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
-import { sidesheet as tokens } from './SideSheet.tokens'
-
-const icons = {
-  clear,
-}
-
-Icon.add(icons)
+import { comfortable as tokens, variants } from './SideSheet.tokens'
 
 const { background, spacings, border } = tokens
 
@@ -37,10 +31,10 @@ const StyledSideSheet = styled.div<StyleProps>`
   top: 0;
   right: 0;
   box-sizing: border-box;
-  border-left: ${border.left.width} solid ${border.left.color};
   background: ${background};
   width: ${({ width }) => width};
 
+  ${bordersTemplate(border)}
   ${spacingsTemplate(spacings)};
 `
 
@@ -70,7 +64,7 @@ export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
       ...rest,
       className,
       ref,
-      width: tokens.width[variant],
+      width: variants[variant],
     }
 
     // Controller must set open={false} when pressing the close button
@@ -80,7 +74,7 @@ export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
           <Header>
             <Typography variant="h2">{title}</Typography>
             <Button variant="ghost_icon" onClick={onClose} title="Close">
-              <Icon name="clear" title="Close" />
+              <Icon name="clear" title="Close" data={clear} />
             </Button>
           </Header>
           {children}
