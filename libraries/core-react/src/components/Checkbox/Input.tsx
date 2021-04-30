@@ -8,7 +8,7 @@ import {
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { comfortable as tokens } from './Checkbox.tokens'
-import { spacingsTemplate, outlineTemplate } from '../../../utils'
+import { spacingsTemplate, outlineTemplate } from '../../utils'
 
 type StyledIconPathProps = {
   icon: IconData

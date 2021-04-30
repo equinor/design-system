@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { comfortable as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
 import { Input } from './Input'
-import { bordersTemplate } from '../../../utils'
+import { bordersTemplate } from '../../utils'
 
 const {
   entities: { track, handle },

@@ -11,7 +11,7 @@ import {
   typographyTemplate,
   spacingsTemplate,
   outlineTemplate,
-} from '../../../utils'
+} from '../../utils'
 
 const Input = styled.input.attrs(({ type = 'radio' }) => ({
   type,
