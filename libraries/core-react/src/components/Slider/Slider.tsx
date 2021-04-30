@@ -118,7 +118,7 @@ const Wrapper = styled.div<WrapperProps>`
   &:hover:not([disabled]) {
     ${fakeTrackBgHover}
     &::after {
-      background: ${track.states.hover.background};
+      background: ${track.entities.indicator.states.hover.background};
     }
   }
 `
