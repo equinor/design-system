@@ -78,7 +78,6 @@ export const input: InputVariantsToken = {
     },
     states: {
       focus: {
-        background: primary__resting.rgba, // icon
         outline: {
           type: 'outline',
           width: '2px',
@@ -111,7 +110,6 @@ export const input: InputVariantsToken = {
     },
     states: {
       focus: {
-        background: danger__hover.rgba, // icon
         outline: {
           type: 'outline',
           width: '2px',
@@ -144,7 +142,6 @@ export const input: InputVariantsToken = {
     },
     states: {
       focus: {
-        background: warning__hover.rgba, // icon
         outline: {
           type: 'outline',
           width: '2px',
@@ -177,7 +174,6 @@ export const input: InputVariantsToken = {
     },
     states: {
       focus: {
-        background: success__hover.rgba, // icon
         outline: {
           type: 'outline',
           width: '2px',
