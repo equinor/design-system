@@ -6,10 +6,12 @@ import {
   radio_button_unselected, // eslint-disable-line camelcase
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
-import { radio as tokens } from './Radio.tokens'
-import { typographyTemplate } from '../../../utils'
-
-const { color, enabled } = tokens
+import { comfortable as tokens } from './Radio.tokens'
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  outlineTemplate,
+} from '../../../utils'
 
 const Input = styled.input.attrs(({ type = 'radio' }) => ({
   type,
@@ -28,8 +30,7 @@ const Input = styled.input.attrs(({ type = 'radio' }) => ({
   }
 
   &[data-focus-visible-added]:focus + svg {
-    outline: ${enabled.outline};
-    outline-offset: ${enabled.outlineOffset};
+    ${outlineTemplate(tokens.states.focus.outline)}
   }
 
   &:not(:checked) ~ svg path[name='selected'] {
@@ -73,19 +74,19 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
 }))``
 
 const LabelText = styled.span`
-  ${typographyTemplate(enabled.typography)}
+  ${typographyTemplate(tokens.typography)}
 `
 
 type StyledInputWrapperProps = { disabled: boolean }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
+  ${spacingsTemplate(tokens.spacings)}
   display: inline-flex;
   border-radius: 50%;
-  padding: ${enabled.padding};
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ disabled }) =>
-        disabled ? 'transparent' : color.hover};
+        disabled ? 'transparent' : tokens.states.hover.background};
     }
   }
 `
@@ -103,6 +104,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   ref,
 ) {
   const iconSize = 24
+  const fill = disabled ? tokens.states.disabled.background : tokens.background
   return (
     <StyledRadio disabled={disabled} className={className}>
       <InputWrapper disabled={disabled}>
@@ -111,7 +113,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
           width={iconSize}
           height={iconSize}
           viewBox={`0 0 ${iconSize} ${iconSize}`}
-          fill={disabled ? color.disabled : color.primary}
+          fill={fill}
           aria-hidden
         >
           <StyledPath icon={radio_button_selected} name="selected" />
