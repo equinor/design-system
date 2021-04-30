@@ -1,29 +1,27 @@
 import { forwardRef, Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate, spacingsTemplate } from '../../utils'
 import { dialog as tokens } from './Dialog.tokens'
 
-const { title, spacingsMedium } = tokens
-
 const StyledTitle = styled.div`
-  ${typographyTemplate(title)}
-  min-height: 24px;
+  ${typographyTemplate(tokens.entities.title.typography)}
+  min-height: ${tokens.entities.title.minHeight};
   align-self: end;
   justify-self: start;
-  padding: 0 ${spacingsMedium};
+  ${spacingsTemplate(tokens.entities.children.spacings)};
 
   ${({ children }) =>
     !children &&
     css`
       min-height: initial;
-      height: 8px;
+      height: '8px';
     `}
 `
 
 const StyledDivider = styled(Divider)`
   width: 100%;
-  margin-bottom: ${spacingsMedium};
+  margin-bottom: ${tokens.entities.divider.spacings.bottom};
 `
 
 export type DialogTitleProps = React.HTMLAttributes<HTMLDivElement>
