@@ -1,19 +1,23 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { switchControl as tokens } from './Switch.tokens'
+import { comfortable as tokens } from './Switch.tokens'
 import { InputWrapper } from './InputWrapper'
 import { Input } from './Input'
+import { bordersTemplate } from '../../../utils'
 
-const { enabled, disabled: _disabled } = tokens
+const {
+  entities: { track, handle },
+} = tokens
 
 type StyledProps = { isDisabled: boolean }
 
 const Track = styled.span<StyledProps>`
-  width: ${enabled.track.width};
-  height: ${enabled.track.height};
-  border-radius: ${enabled.track.borderRadius};
+  ${bordersTemplate(track.border)}
   border: none;
-  background-color: ${enabled.track.background};
+
+  width: ${track.width};
+  height: ${track.height};
+  background-color: ${track.background};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -21,18 +25,18 @@ const Track = styled.span<StyledProps>`
   transition: background 0.36s;
   ${({ isDisabled }) =>
     isDisabled && {
-      backgroundColor: _disabled.background,
+      backgroundColor: tokens.states.disabled.background,
     }}
 `
 const Handle = styled.span<StyledProps>`
-  background-color: ${enabled.handle.background};
+  background-color: ${handle.background};
   ${({ isDisabled }) =>
     isDisabled && {
-      backgroundColor: _disabled.background,
+      backgroundColor: tokens.states.disabled.background,
     }}
-  box-shadow: ${enabled.handle.boxShadow};
-  width: ${enabled.handle.size};
-  height: ${enabled.handle.size};
+  box-shadow: ${handle.boxShadow};
+  width: ${handle.width};
+  height: ${handle.height};
   border-radius: 50%;
   display: inline-block;
   position: absolute;

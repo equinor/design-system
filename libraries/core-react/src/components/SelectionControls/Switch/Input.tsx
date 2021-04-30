@@ -1,9 +1,12 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { switchControl as tokens } from './Switch.tokens'
+import { comfortable as tokens } from './Switch.tokens'
 import type { Size } from './Switch.types'
+import { outlineTemplate } from '../../../utils'
 
-const { enabled, disabled: _disabled } = tokens
+const {
+  modes: { compact: compactTokens },
+} = tokens
 
 type StyledProps = Pick<InputProps, 'disabled'>
 
@@ -22,41 +25,42 @@ const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
     outline: none;
   }
   &[data-focus-visible-added]:focus + span :first-child {
-    outline: ${enabled.outline};
+    ${outlineTemplate(tokens.states.focus.outline)}
   }
 `
 
 const SmallInput = styled(BaseInput)`
-  &:checked + span > span:last-child {
-    transform: translate(180%, -50%);
-  }
   &[data-focus-visible-added]:focus + span :first-child {
-    outline-offset: ${enabled.outlineOffsetSmall};
+    outline-offset: 4px;
   }
   /*  Track */
   &:checked + span > span {
     background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.track.small.background};
+      disabled
+        ? tokens.states.disabled.background
+        : compactTokens.entities.track.states.active.background};
   }
   /* Handle */
   &:checked + span > span:last-child {
-    background-color: ${enabled.handle.small.background};
+    transform: translate(180%, -50%);
+    background-color: ${compactTokens.entities.handle.background};
   }
 `
 const DefaultInput = styled(BaseInput)`
   /*  Track */
   &:checked + span > span {
     background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.track.activeBackground};
+      disabled
+        ? tokens.states.disabled.background
+        : tokens.entities.track.states.active.background};
   }
   /* Handle */
   &:checked + span > span:last-child {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.background : enabled.handle.activeBackground};
     transform: translate(135%, -50%);
-  }
-  &[data-focus-visible-added]:focus + span :first-child {
-    outline-offset: ${enabled.outlineOffset};
+    background-color: ${({ disabled }) =>
+      disabled
+        ? tokens.states.disabled.background
+        : tokens.entities.handle.states.active.background};
   }
 `
 
