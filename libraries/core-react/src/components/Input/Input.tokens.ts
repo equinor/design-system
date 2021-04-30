@@ -1,11 +1,47 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing } from '@equinor/eds-tokens'
+import type { ComponentToken, Typography, Spacing } from '@equinor/eds-tokens'
 
 const {
   colors,
+  colors: {
+    ui: {
+      background__light: { rgba: background },
+    },
+    text: {
+      static_icons__default: { rgba: textColor },
+      static_icons__tertiary: { rgba: tertiary },
+    },
+    interactive: {
+      disabled__text: { rgba: textDisabled },
+    },
+  },
   spacings: { comfortable },
   typography,
 } = tokens
+
+type InputToken = ComponentToken
+
+export const input: InputToken = {
+  background,
+  typography: {
+    ...typography.input.text,
+    color: textColor,
+  },
+  entities: {
+    placeholder: {
+      typography: {
+        color: tertiary,
+      },
+    },
+  },
+  states: {
+    disabled: {
+      typography: {
+        color: textDisabled,
+      },
+    },
+  },
+}
 
 const spacings = {
   comfortable: {
@@ -53,7 +89,7 @@ type InputProps = {
   success: InputVariantProps
 }
 
-export const input: InputProps = {
+export const inputOld: InputProps = {
   background: colors.ui.background__light.hex,
   typography: {
     ...typography.input.text,
