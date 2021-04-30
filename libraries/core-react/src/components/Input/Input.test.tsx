@@ -4,6 +4,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Input } from './Input'
 import { input as inputTokens } from './Input.tokens'
+import { trimSpaces } from '../../utils'
 
 const {
   error: errorToken,
@@ -36,7 +37,13 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${successToken.border.outline.width} solid ${successToken.border.outline.color}`,
+      `${
+        successToken.entities.outline.border.type === 'border' &&
+        successToken.entities.outline.border.width
+      } solid ${trimSpaces(
+        successToken.entities.outline.border.type === 'border' &&
+          successToken.entities.outline.border.color,
+      )}`,
     )
   })
 
@@ -52,7 +59,13 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${warningToken.border.outline.width} solid ${warningToken.border.outline.color}`,
+      `${
+        warningToken.entities.outline.border.type === 'border' &&
+        warningToken.entities.outline.border.width
+      } solid ${trimSpaces(
+        warningToken.entities.outline.border.type === 'border' &&
+          warningToken.entities.outline.border.color,
+      )}`,
     )
   })
 
@@ -68,7 +81,13 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${errorToken.border.outline.width} solid ${errorToken.border.outline.color}`,
+      `${
+        errorToken.entities.outline.border.type === 'border' &&
+        errorToken.entities.outline.border.width
+      } solid ${trimSpaces(
+        errorToken.entities.outline.border.type === 'border' &&
+          errorToken.entities.outline.border.color,
+      )}`,
     )
   })
 
