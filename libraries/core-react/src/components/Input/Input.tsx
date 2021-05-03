@@ -10,7 +10,7 @@ import {
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 
-const { input, baseInput } = tokens
+const { input, inputVariants } = tokens
 
 const Variation = ({
   variant,
@@ -67,17 +67,17 @@ const StyledInput = styled.input<StyledProps>`
   margin: 0;
   border: none;
   appearance: none;
-  background: ${baseInput.background};
+  background: ${input.background};
 
   ${({ spacings }) => spacingsTemplate(spacings)}
-  ${typographyTemplate(baseInput.typography)}
+  ${typographyTemplate(input.typography)}
 
   ${Variation}
   &::placeholder {
-    color: ${baseInput.entities.placeholder.typography.color};
+    color: ${input.entities.placeholder.typography.color};
   }
   &:disabled {
-    color: ${baseInput.states.disabled.typography.color};
+    color: ${input.states.disabled.typography.color};
   }
 `
 
@@ -107,7 +107,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   ref,
 ) {
   const as: ElementType = multiline ? 'textarea' : 'input'
-  const inputVariant = input[variant]
+  const inputVariant = inputVariants[variant]
   const spacings = tokens.comfortable.spacings
 
   const inputProps = {

@@ -3,7 +3,7 @@ import { render, cleanup } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Input } from './Input'
-import { input as inputTokens } from './Input.tokens'
+import { inputVariants as inputTokens } from './Input.tokens'
 import { trimSpaces } from '../../utils'
 
 const {

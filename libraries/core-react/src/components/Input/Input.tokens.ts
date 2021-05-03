@@ -33,7 +33,7 @@ export type InputVariantsToken = {
   success: ComponentToken
 }
 
-export const baseInput: InputToken = {
+export const input: InputToken = {
   background,
   typography: {
     ...typography.input.text,
@@ -55,7 +55,7 @@ export const baseInput: InputToken = {
   },
 }
 
-export const input: InputVariantsToken = {
+export const inputVariants: InputVariantsToken = {
   default: {
     boxShadow: 'inset 0px -1px 0px 0px ' + static_icons__tertiary.rgba,
     states: {
