@@ -9,12 +9,6 @@ import { AccordionPanel, AccordionPanelProps } from './AccordionPanel'
 import type { AccordionProps } from './Accordion.types'
 
 type AccordionCompoundProps = typeof BaseAccordion & {
-  // Deprecated
-  AccordionItem: typeof AccordionItem
-  AccordionHeader: typeof AccordionHeader
-  AccordionHeaderTitle: typeof AccordionHeaderTitle
-  AccordionPanel: typeof AccordionPanel
-  // New
   Item: typeof AccordionItem
   Header: typeof AccordionHeader
   HeaderTitle: typeof AccordionHeaderTitle
@@ -22,12 +16,6 @@ type AccordionCompoundProps = typeof BaseAccordion & {
 }
 
 const Accordion = BaseAccordion as AccordionCompoundProps
-// Deprecated
-Accordion.AccordionItem = AccordionItem
-Accordion.AccordionHeader = AccordionHeader
-Accordion.AccordionHeaderTitle = AccordionHeaderTitle
-Accordion.AccordionPanel = AccordionPanel
-// New
 Accordion.Item = AccordionItem
 Accordion.Header = AccordionHeader
 Accordion.HeaderTitle = AccordionHeaderTitle

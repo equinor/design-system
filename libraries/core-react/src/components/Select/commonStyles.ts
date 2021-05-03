@@ -6,8 +6,6 @@ import styled from 'styled-components'
 import { select as selectToken } from './Select.tokens'
 import { typographyTemplate, bordersTemplate } from '../../utils'
 
-const { ListItem } = List
-
 const {
   entities: { button: buttonToken },
 } = selectToken
@@ -43,7 +41,7 @@ export const StyledList = styled(List)`
   left: 0;
   z-index: 50;
 `
-export const StyledListItem = styled(ListItem)<StyledListItemType>`
+export const StyledListItem = styled(List.Item)<StyledListItemType>`
   list-style: none;
   ${typographyTemplate(selectToken.typography)};
   margin: 0;

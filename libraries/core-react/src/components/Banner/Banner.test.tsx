@@ -8,7 +8,6 @@ import { Banner } from '.'
 import { Icon } from '../Icon'
 import * as tokens from './Banner.tokens'
 
-const { BannerMessage, BannerIcon, BannerActions } = Banner
 Icon.add({ add })
 
 const { info, warning } = tokens
@@ -25,7 +24,7 @@ describe('Banner', () => {
   it('Can extend the css for the component', () => {
     const { container } = render(
       <StyledBanner>
-        <BannerMessage>styled banner</BannerMessage>
+        <Banner.Message>styled banner</Banner.Message>
       </StyledBanner>,
     )
     expect(container.firstChild).toHaveStyleRule('position', 'relative')
@@ -34,7 +33,7 @@ describe('Banner', () => {
     const bannerText = 'Banner test message'
     const { queryByText } = render(
       <Banner>
-        <BannerMessage>{bannerText}</BannerMessage>
+        <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
     expect(queryByText(bannerText)).toBeDefined()
@@ -44,10 +43,10 @@ describe('Banner', () => {
     const iconTestId = 'banner-icon-test'
     const { queryByText, queryByTestId } = render(
       <Banner>
-        <BannerIcon>
+        <Banner.Icon>
           <Icon name="add" data-testid={iconTestId} />
-        </BannerIcon>
-        <BannerMessage>{bannerText}</BannerMessage>
+        </Banner.Icon>
+        <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
     expect(queryByText(bannerText)).toBeDefined()
@@ -58,10 +57,10 @@ describe('Banner', () => {
     const actionButtonText = 'Banner action button text'
     const { queryByText } = render(
       <Banner>
-        <BannerMessage>{bannerText}</BannerMessage>
-        <BannerActions>
+        <Banner.Message>{bannerText}</Banner.Message>
+        <Banner.Actions>
           <button type="button">{actionButtonText}</button>
-        </BannerActions>
+        </Banner.Actions>
       </Banner>,
     )
     expect(queryByText(bannerText)).toBeDefined()
@@ -73,10 +72,10 @@ describe('Banner', () => {
     const iconWrapperTestId = 'banner-icon-wrapper-test'
     const { queryByTestId, container } = render(
       <Banner>
-        <BannerIcon data-testid={iconWrapperTestId}>
+        <Banner.Icon data-testid={iconWrapperTestId}>
           <Icon name="add" />
-        </BannerIcon>
-        <BannerMessage>{bannerText}</BannerMessage>
+        </Banner.Icon>
+        <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
     const iconSvg = container.querySelector('svg')
@@ -91,10 +90,10 @@ describe('Banner', () => {
     const iconWrapperTestId = 'banner-icon-wrapper-test'
     const { queryByTestId, container } = render(
       <Banner>
-        <BannerIcon variant="warning" data-testid={iconWrapperTestId}>
+        <Banner.Icon variant="warning" data-testid={iconWrapperTestId}>
           <Icon name="add" />
-        </BannerIcon>
-        <BannerMessage>{bannerText}</BannerMessage>
+        </Banner.Icon>
+        <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
     const iconSvg = container.querySelector('svg')

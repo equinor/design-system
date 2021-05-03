@@ -6,11 +6,6 @@ import { TabPanel, TabPanelProps } from './TabPanel'
 
 type TabsCompoundProps = typeof BaseComponent & {
   Tab: typeof Tab
-  // Deprecated
-  TabList: typeof TabList
-  TabPanels: typeof TabPanels
-  TabPanel: typeof TabPanel
-  // New
   Panels: typeof TabPanels
   Panel: typeof TabPanel
   List: typeof TabList
@@ -19,11 +14,6 @@ type TabsCompoundProps = typeof BaseComponent & {
 const Tabs = BaseComponent as TabsCompoundProps
 
 Tabs.Tab = Tab
-// Deprecated
-Tabs.TabList = TabList
-Tabs.TabPanels = TabPanels
-Tabs.TabPanel = TabPanel
-// New
 Tabs.Panels = TabPanels
 Tabs.Panel = TabPanel
 Tabs.List = TabList

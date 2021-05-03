@@ -9,13 +9,6 @@ import { Button } from '../Button'
 import { Icon } from '../Icon'
 import type { AccordionProps } from './Accordion.types'
 
-const {
-  AccordionItem,
-  AccordionHeader,
-  AccordionHeaderTitle,
-  AccordionPanel,
-} = Accordion
-
 Icon.add({ attach_file, notifications })
 
 afterEach(cleanup)
@@ -25,44 +18,44 @@ const SimpleAccordion = ({
   chevronPosition = 'left',
 }: AccordionProps) => (
   <Accordion headerLevel={headerLevel} chevronPosition={chevronPosition}>
-    <AccordionItem isExpanded>
-      <AccordionHeader>Summary 1</AccordionHeader>
-      <AccordionPanel>Details 1</AccordionPanel>
-    </AccordionItem>
-    <AccordionItem>
-      <AccordionHeader>Summary 2</AccordionHeader>
-      <AccordionPanel>Details 2</AccordionPanel>
-    </AccordionItem>
+    <Accordion.Item isExpanded>
+      <Accordion.Header>Summary 1</Accordion.Header>
+      <Accordion.Panel>Details 1</Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Summary 2</Accordion.Header>
+      <Accordion.Panel>Details 2</Accordion.Panel>
+    </Accordion.Item>
   </Accordion>
 )
 
 const AccordionWithIcons = () => (
   <Accordion>
-    <AccordionItem>
-      <AccordionHeader>
-        <AccordionHeaderTitle>Summary</AccordionHeaderTitle>
+    <Accordion.Item>
+      <Accordion.Header>
+        <Accordion.HeaderTitle>Summary</Accordion.HeaderTitle>
         <Icon name="attach_file" title="Attach file" size={16} />
         <Icon name="notifications" title="Notifications" size={16} />
-      </AccordionHeader>
-      <AccordionPanel>Details</AccordionPanel>
-    </AccordionItem>
+      </Accordion.Header>
+      <Accordion.Panel>Details</Accordion.Panel>
+    </Accordion.Item>
   </Accordion>
 )
 
 const AccordionWithButtons = () => (
   <Accordion>
-    <AccordionItem>
-      <AccordionHeader>
-        <AccordionHeaderTitle>Summary</AccordionHeaderTitle>
+    <Accordion.Item>
+      <Accordion.Header>
+        <Accordion.HeaderTitle>Summary</Accordion.HeaderTitle>
         <Button variant="ghost_icon" onClick={(e) => e.stopPropagation()}>
           <Icon name="attach_file" title="Attach file" />
         </Button>
         <Button variant="ghost_icon" onClick={(e) => e.stopPropagation()}>
           <Icon name="notifications" title="Notifications" />
         </Button>
-      </AccordionHeader>
-      <AccordionPanel>Details</AccordionPanel>
-    </AccordionItem>
+      </Accordion.Header>
+      <Accordion.Panel>Details</Accordion.Panel>
+    </Accordion.Item>
   </Accordion>
 )
 
@@ -83,9 +76,9 @@ describe('Accordion', () => {
   it('triggers onToggle callback', () => {
     const mockOnToggle = jest.fn()
     render(
-      <AccordionItem isExpanded>
-        <AccordionHeader onToggle={mockOnToggle}>Summary 1</AccordionHeader>
-      </AccordionItem>,
+      <Accordion.Item isExpanded>
+        <Accordion.Header onToggle={mockOnToggle}>Summary 1</Accordion.Header>
+      </Accordion.Item>,
     )
     const header = screen.queryByText('Summary 1').parentNode
     fireEvent.click(header)

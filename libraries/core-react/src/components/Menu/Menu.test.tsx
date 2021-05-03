@@ -8,8 +8,6 @@ import styled from 'styled-components'
 import { Menu } from '.'
 import { MenuProps } from './Menu'
 
-const { MenuItem, MenuSection } = Menu
-
 // We override Menu for testing and set props to partial because AnchorEl is applied to children in custom render function
 const TestMenu = Menu as React.ForwardRefExoticComponent<Partial<MenuProps>>
 
@@ -47,22 +45,22 @@ describe('Menu', () => {
       'right-start',
     )
   })
-  it('has rendered MenuItem', async () => {
+  it('has rendered Menu.Item', async () => {
     render(
       <TestMenu open>
-        <MenuItem>Item 1</MenuItem>
+        <Menu.Item>Item 1</Menu.Item>
       </TestMenu>,
     )
     const menuItem = screen.getByText('Item 1')
     await waitFor(() => expect(menuItem).toBeDefined())
   })
 
-  it('has rendered MenuSection with MenuItem & title', async () => {
+  it('has rendered Menu.Section with Menu.Item & title', async () => {
     render(
       <TestMenu open>
-        <MenuSection title="Section title">
-          <MenuItem>Item 1</MenuItem>
-        </MenuSection>
+        <Menu.Section title="Section title">
+          <Menu.Item>Item 1</Menu.Item>
+        </Menu.Section>
       </TestMenu>,
     )
     const menuItem = screen.getByText('Item 1')
@@ -72,13 +70,13 @@ describe('Menu', () => {
     expect(menuSection).toBeDefined()
   })
 
-  it('has called onClose when MenuItem is clicked', async () => {
+  it('has called onClose when Menu.Item is clicked', async () => {
     const handleOnClose = jest.fn()
     const handleOnClick = jest.fn()
 
     render(
       <TestMenu open onClose={handleOnClose}>
-        <MenuItem onClick={handleOnClick}>Item 1</MenuItem>
+        <Menu.Item onClick={handleOnClick}>Item 1</Menu.Item>
       </TestMenu>,
     )
 
@@ -93,9 +91,9 @@ describe('Menu', () => {
   it('has first menuItem focused when focus is set to first', async () => {
     render(
       <TestMenu open focus="first">
-        <MenuItem>Item 1</MenuItem>
-        <MenuItem>Item 2</MenuItem>
-        <MenuItem>Item 3</MenuItem>
+        <Menu.Item>Item 1</Menu.Item>
+        <Menu.Item>Item 2</Menu.Item>
+        <Menu.Item>Item 3</Menu.Item>
       </TestMenu>,
     )
     const menuItem = screen.getByText('Item 1').parentElement
@@ -106,24 +104,24 @@ describe('Menu', () => {
   it('has last menuItem focused when focus is set to last', async () => {
     render(
       <TestMenu open focus="last">
-        <MenuItem>Item 1</MenuItem>
-        <MenuItem>Item 2</MenuItem>
-        <MenuItem>Item 3</MenuItem>
+        <Menu.Item>Item 1</Menu.Item>
+        <Menu.Item>Item 2</Menu.Item>
+        <Menu.Item>Item 3</Menu.Item>
       </TestMenu>,
     )
     const menuItem = screen.getByText('Item 3').parentElement
 
     await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
   })
-  it('has called onClose when MenuItem is clicked from inside a MenuSection', async () => {
+  it('has called onClose when Menu.Item is clicked from inside a Menu.Section', async () => {
     const handleOnClose = jest.fn()
     const handleOnClick = jest.fn()
 
     render(
       <TestMenu open onClose={handleOnClose}>
-        <MenuSection title="test">
-          <MenuItem onClick={handleOnClick}>Item 1</MenuItem>
-        </MenuSection>
+        <Menu.Section title="test">
+          <Menu.Item onClick={handleOnClick}>Item 1</Menu.Item>
+        </Menu.Section>
       </TestMenu>,
     )
 

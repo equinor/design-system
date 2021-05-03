@@ -5,12 +5,6 @@ import { CardHeader, CardHeaderProps } from './CardHeader'
 import { CardHeaderTitle, CardHeaderTitleProps } from './CardHeaderTitle'
 
 type CardCompoundProps = typeof CardWrapper & {
-  // Deprecated
-  CardActions: typeof CardActions
-  CardHeader: typeof CardHeader
-  CardMedia: typeof CardMedia
-  CardHeaderTitle: typeof CardHeaderTitle
-  // New way
   Actions: typeof CardActions
   Header: typeof CardHeader
   Media: typeof CardMedia
@@ -18,12 +12,6 @@ type CardCompoundProps = typeof CardWrapper & {
 }
 
 const Card = CardWrapper as CardCompoundProps
-// Deprecated
-Card.CardActions = CardActions
-Card.CardHeader = CardHeader
-Card.CardMedia = CardMedia
-Card.CardHeaderTitle = CardHeaderTitle
-// New
 Card.Actions = CardActions
 Card.Header = CardHeader
 Card.Media = CardMedia
