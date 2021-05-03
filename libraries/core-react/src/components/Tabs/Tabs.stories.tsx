@@ -11,7 +11,7 @@ export default {
   title: 'Components/Tabs',
   component: Tabs,
   subcomponents: {
-    TabList: Tabs.TabList,
+    List: Tabs.List,
     Tab: Tabs.Tab,
     Panels: Tabs.Panels,
     Panel: Tabs.Panel,
@@ -28,10 +28,10 @@ export default {
 
 export const Default: Story<TabsProps> = (args) => (
   <Tabs {...args}>
-    <Tabs.TabList>
+    <Tabs.List>
       <Tabs.Tab>One</Tabs.Tab>
       <Tabs.Tab>Two</Tabs.Tab>
-    </Tabs.TabList>
+    </Tabs.List>
     <Tabs.Panels>
       <Tabs.Panel>Panel one</Tabs.Panel>
       <Tabs.Panel>Panel two</Tabs.Panel>
@@ -48,7 +48,7 @@ export const States: Story<TabsProps> = () => {
 
   return (
     <Tabs activeTab={2} onChange={noop}>
-      <Tabs.TabList>
+      <Tabs.List>
         <Tabs.Tab>Enabled</Tabs.Tab>
         <Tabs.Tab disabled>Disabled</Tabs.Tab>
         <Tabs.Tab active>Active</Tabs.Tab>
@@ -56,7 +56,7 @@ export const States: Story<TabsProps> = () => {
         <Tabs.Tab data-focus ref={focusedRef}>
           Focus
         </Tabs.Tab>
-      </Tabs.TabList>
+      </Tabs.List>
     </Tabs>
   )
 }
@@ -66,21 +66,21 @@ export const Widths: Story<TabsProps> = () => {
     <>
       <Typography variant="h4">minWidth</Typography>
       <Tabs activeTab={1} onChange={noop} variant="minWidth">
-        <Tabs.TabList>
+        <Tabs.List>
           <Tabs.Tab>Text</Tabs.Tab>
           <Tabs.Tab>More text</Tabs.Tab>
           <Tabs.Tab>A really long line of text</Tabs.Tab>
-        </Tabs.TabList>
+        </Tabs.List>
       </Tabs>
       <Typography variant="h4" style={{ marginTop: '1rem' }}>
         fullWidth
       </Typography>
       <Tabs activeTab={1} onChange={noop} variant="fullWidth">
-        <Tabs.TabList>
+        <Tabs.List>
           <Tabs.Tab>Text</Tabs.Tab>
           <Tabs.Tab>More text</Tabs.Tab>
           <Tabs.Tab>A really long line of text</Tabs.Tab>
-        </Tabs.TabList>
+        </Tabs.List>
       </Tabs>
     </>
   )
@@ -102,12 +102,12 @@ export const WithPanels: Story<TabsProps> = () => {
         only visible when navigating using the keyboard.
       </Typography>
       <Tabs activeTab={activeTab} onChange={handleChange}>
-        <Tabs.TabList>
+        <Tabs.List>
           <Tabs.Tab>Tab one</Tabs.Tab>
           <Tabs.Tab>Tab two</Tabs.Tab>
           <Tabs.Tab disabled>Tab three</Tabs.Tab>
           <Tabs.Tab>Tab four</Tabs.Tab>
-        </Tabs.TabList>
+        </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>Panel one</Tabs.Panel>
           <Tabs.Panel>Panel two</Tabs.Panel>
@@ -154,10 +154,10 @@ export const WithSearch: Story<TabsProps> = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       >
-        <Tabs.TabList>
+        <Tabs.List>
           <Tabs.Tab>Tags (5+)</Tabs.Tab>
           <Tabs.Tab> Docs (5+)</Tabs.Tab>
-        </Tabs.TabList>
+        </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>Panel one</Tabs.Panel>
           <Tabs.Panel>Panel two</Tabs.Panel>
@@ -197,10 +197,10 @@ export const WithInputInPanel: Story<TabsProps> = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       >
-        <Tabs.TabList>
+        <Tabs.List>
           <Tabs.Tab>Tab with textfield</Tabs.Tab>
           <Tabs.Tab>Other tab</Tabs.Tab>
-        </Tabs.TabList>
+        </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel style={{ maxWidth: '20em' }}>
             <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
@@ -248,11 +248,11 @@ export const WithStyledComponent: Story<TabsProps> = () => {
         Tab with panels rendered from collection
       </Typography>
       <Tabs activeTab={activeTab} onChange={handleChange}>
-        <Tabs.TabList>
+        <Tabs.List>
           {items.map(({ name }) => (
             <StyledTab key={name}>{name}</StyledTab>
           ))}
-        </Tabs.TabList>
+        </Tabs.List>
         <Tabs.Panels>
           {items.map(({ name, value }) => (
             <StyledTabPanel key={name}>{value}</StyledTabPanel>
