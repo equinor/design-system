@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Border, Spacing, Typography } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -26,66 +26,61 @@ const {
   },
 } = tokens
 
-type MenuToken = {
-  enabled: {
-    background: string
-    border: Border
-    typography: Typography
-    item: {
-      active: {
-        background: string
-        textColor: string
-      }
-      spacings: Spacing
-      focus: {
-        outline: string
-        outlineOffset: string
-      }
-      hover: {
-        background: string
-      }
-      disabled: {
-        textColor: string
-        iconColor: string
-      }
-    }
-    title: {
-      spacings: Spacing
-    }
-  }
-}
+type MenuToken = ComponentToken
 
 export const menu: MenuToken = {
-  enabled: {
-    background,
-    border: {
-      radius: '4px',
-    },
-    typography: {
-      ...typography,
-      color: textColor,
+  background,
+  border: {
+    type: 'border',
+    radius: '4px',
+  },
+  typography: {
+    ...typography,
+    color: textColor,
+  },
+  entities: {
+    icon: {
+      states: {
+        disabled: {
+          typography: {
+            color: disabledIconColor,
+          },
+        },
+      },
     },
     item: {
-      active: {
-        background: activeBackground,
-        textColor: activeTextColor,
-      },
       spacings: {
         left: large,
         right: large,
         top: medium,
         bottom: medium,
       },
-      focus: {
-        outline: `2px dashed ${focusColor}`,
-        outlineOffset: '2px',
-      },
-      hover: {
-        background: hoverBackground,
-      },
-      disabled: {
-        textColor: disabledTextColor,
-        iconColor: disabledIconColor,
+      states: {
+        active: {
+          typography: {
+            ...typography,
+            color: activeTextColor,
+          },
+          background: activeBackground,
+        },
+        focus: {
+          outline: {
+            color: focusColor,
+            style: 'dashed',
+            type: 'outline',
+            width: '2px',
+            offset: '2px',
+          },
+        },
+        hover: {
+          background: hoverBackground,
+        },
+        disabled: {
+          typography: {
+            ...typography,
+            color: disabledTextColor,
+          },
+        },
       },
     },
     title: {

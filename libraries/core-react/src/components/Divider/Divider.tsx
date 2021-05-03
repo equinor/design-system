@@ -1,6 +1,8 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { divider as tokens } from './Divider.tokens'
+import * as tokens from './Divider.tokens'
+
+const { divider, baseDivider } = tokens
 
 type StyleProps = {
   backgroundColor: string
@@ -27,16 +29,17 @@ export type DividerProps = {
 } & HTMLAttributes<HTMLHRElement>
 
 export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
-  { color = 'medium', variant = 'medium', className = '' },
+  { color = 'medium', variant = 'medium', ...rest },
   ref,
 ) {
-  const styleProps = {
-    backgroundColor: tokens.color[color],
+  const colorValue = color === 'medium' ? 'mediumColor' : color
+
+  const props: StyleProps = {
+    backgroundColor: divider[colorValue].background,
     marginTop: tokens[variant].spacings.top,
     marginBottom: tokens[variant].spacings.bottom,
-    dividerHeight: tokens.height,
+    dividerHeight: baseDivider.height,
+    ...rest,
   }
-  return <StyledDivider {...styleProps} className={className} ref={ref} />
+  return <StyledDivider {...props} ref={ref} />
 })
-
-// Divider.displayName = 'Divider'

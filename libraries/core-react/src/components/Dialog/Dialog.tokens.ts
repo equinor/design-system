@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   spacings: {
@@ -9,7 +9,6 @@ const {
     ui: { accordion_header },
     paragraph: { body_long },
   },
-  elevation: { above_scrim: boxShadow },
   colors: {
     ui: {
       background__default: { rgba: background },
@@ -20,24 +19,47 @@ const {
   },
 } = tokens
 
-type Dialog = {
-  width: string
-  minHeight: string
-  background: string
-  borderRadius: string
-  spacingsMedium: string
-  title: Typography
-  description: Typography
-  boxShadow: string
-}
+type DialogToken = ComponentToken
 
-export const dialog: Dialog = {
+export const dialog: DialogToken = {
   width: '252px',
-  minHeight: '165px',
   background,
-  borderRadius,
-  spacingsMedium: spacingMedium,
-  title: accordion_header,
-  description: body_long,
-  boxShadow,
+  typography: accordion_header,
+  border: {
+    type: 'border',
+    radius: borderRadius,
+  },
+  spacings: {
+    top: spacingMedium,
+  },
+  entities: {
+    children: {
+      spacings: {
+        top: '0px',
+        bottom: '0px',
+        left: spacingMedium,
+        right: spacingMedium,
+      },
+    },
+    divider: {
+      spacings: {
+        bottom: spacingMedium,
+      },
+    },
+    title: {
+      minHeight: '24px',
+      typography: accordion_header,
+    },
+    content: {
+      minHeight: '80px',
+      height: '104px',
+      typography: body_long,
+      spacings: {
+        bottom: spacingMedium,
+      },
+    },
+    actions: {
+      minHeight: '48px',
+    },
+  },
 }

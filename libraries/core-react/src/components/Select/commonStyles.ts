@@ -3,8 +3,12 @@ import { Input } from '../Input'
 import { List } from '../List'
 import { Button } from '../Button'
 import styled from 'styled-components'
-import { select as tokens } from './Select.tokens'
-import { typographyTemplate } from '../../utils'
+import { select as selectToken } from './Select.tokens'
+import { typographyTemplate, bordersTemplate } from '../../utils'
+
+const {
+  entities: { button: buttonToken },
+} = selectToken
 
 type ContainerProps = HTMLAttributes<HTMLDivElement>
 
@@ -19,18 +23,18 @@ export const Container = styled.div<ContainerProps>`
 export const PaddedInput = styled(Input)`
   /* Hack: Had to add + 0px to satisfy the style lint plugin */
   padding-right: calc(
-    ${tokens.button.size} + ${tokens.button.spacings.left} +
-      ${tokens.button.spacings.right} + 0px
+    ${buttonToken.height} + ${buttonToken.spacings.left} +
+      ${buttonToken.spacings.right} + 0px
   );
 `
 
 export const StyledList = styled(List)`
-  background-color: ${tokens.background};
-  box-shadow: ${tokens.boxShadow};
+  background-color: ${selectToken.background};
+  box-shadow: ${selectToken.boxShadow};
   overflow-y: scroll;
   max-height: 300px;
   padding: 0;
-  border-radius: ${tokens.borderRadius};
+  ${bordersTemplate(selectToken.border)}
   margin-top: 4px;
   position: absolute;
   right: 0;
@@ -39,20 +43,22 @@ export const StyledList = styled(List)`
 `
 export const StyledListItem = styled(List.Item)<StyledListItemType>`
   list-style: none;
-  ${typographyTemplate(tokens.typography)};
+  ${typographyTemplate(selectToken.typography)};
   margin: 0;
   background-color: ${({ highlighted }) =>
-    highlighted === 'true' ? tokens.hover.background : tokens.background};
+    highlighted === 'true'
+      ? selectToken.states.hover.background
+      : selectToken.background};
   cursor: ${({ highlighted }) =>
     highlighted === 'true' ? 'pointer' : 'default'};
 `
 
 export const StyledButton = styled(Button)`
   position: absolute;
-  right: ${tokens.button.spacings.right};
-  top: ${tokens.button.spacings.top};
-  height: ${tokens.button.size};
-  width: ${tokens.button.size};
+  right: ${buttonToken.spacings.right};
+  top: ${buttonToken.spacings.top};
+  height: ${buttonToken.height};
+  width: ${buttonToken.height};
 `
 
 export const StyledInputWrapper = styled.div`

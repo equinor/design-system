@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -12,20 +13,37 @@ const {
   typography: {
     navigation: { menu_title: labelTypography },
   },
+  spacings: {
+    comfortable: { medium_small },
+  },
 } = tokens
 
-export const radio = {
-  color: {
-    primary: primaryColor,
-    hover: primaryHoverAlt,
-    disabled: disabledText,
+type RadioToken = ComponentToken
+
+export const comfortable: RadioToken = {
+  background: primaryColor,
+  typography: labelTypography,
+  spacings: {
+    bottom: medium_small,
+    top: medium_small,
+    left: medium_small,
+    right: medium_small,
   },
-  enabled: {
-    typography: {
-      ...labelTypography,
+  states: {
+    hover: {
+      background: primaryHoverAlt,
     },
-    padding: '12px', // 12*2 + 24 = 48
-    outline: `1px dashed ${focusOutlineColor}`,
-    outlineOffset: '4px',
+    disabled: {
+      background: disabledText,
+    },
+    focus: {
+      outline: {
+        type: 'outline',
+        style: 'dashed',
+        width: '1px',
+        color: focusOutlineColor,
+        offset: '4px',
+      },
+    },
   },
 }

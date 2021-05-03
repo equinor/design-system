@@ -1,15 +1,13 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
-import { switchControl as tokens } from './Switch.tokens'
+import { comfortable as tokens } from './Switch.tokens'
 import type { Size } from './Switch.types'
-
-const { enabled, disabled: _disabled } = tokens
 
 type StyledProps = Pick<InputWrapperProps, 'isDisabled'>
 
 const BaseInputWrapper = styled.span<StyledProps>`
-  width: ${enabled.clickSize};
-  height: ${enabled.clickSize};
+  width: ${tokens.clickbound.width};
+  height: ${tokens.clickbound.height};
   border-radius: 50%;
   position: relative;
 `
@@ -18,11 +16,13 @@ const InputWrapperDefault = styled(BaseInputWrapper)`
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ isDisabled }) =>
-        isDisabled ? 'transparent' : enabled.hover.background};
+        isDisabled ? 'transparent' : tokens.states.hover.background};
     }
     &:hover > span:last-child {
       background-color: ${({ isDisabled }) =>
-        isDisabled ? _disabled.background : enabled.hover.handle.background};
+        isDisabled
+          ? tokens.states.disabled.background
+          : tokens.states.hover.entities.handle.background};
     }
   }
 `
@@ -30,7 +30,7 @@ const InputWrapperSmall = styled(BaseInputWrapper)`
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ isDisabled }) =>
-        isDisabled ? 'transparent' : enabled.hover.background};
+        isDisabled ? 'transparent' : tokens.states.hover.background};
     }
   }
 `

@@ -6,16 +6,10 @@ import { spacingsTemplate } from '../../utils'
 import { Divider } from '../Divider'
 import { Typography } from '../Typography'
 
-const {
-  enabled: {
-    title: { spacings },
-  },
-} = tokens
-
 const ListItem = styled.li.attrs(() => ({
   tabIndex: 0,
 }))`
-  ${spacingsTemplate(spacings)}
+  ${spacingsTemplate(tokens.entities.title.spacings)}
   &:focus {
     outline: none;
   }

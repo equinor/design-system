@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -23,129 +23,94 @@ const {
   typography: { paragraph },
 } = tokens
 
-type Slider = {
-  enabled: {
-    background: string
-    track: {
-      background: string
-      height: string
-      realHeight: string
-      bottomOffset: string
-      indicator: {
-        color: string
-        hover: {
-          color: string
-        }
-      }
-      hover: {
-        background: string
-      }
-    }
-    output: {
-      height: string
-      typography: Typography
-      text: string
-    }
-    handle: {
-      background: string
-      size: string
-      border: {
-        color: string
-        radius: string
-        width: string
-        type: string
-      }
-      outline: string
-      outlineOffset: string
-      hover: {
-        background: string
-        border: {
-          color: string
-        }
-      }
-    }
-    dot: {
-      size: string
-      border: {
-        color: string
-        width: string
-        type: string
-        radius: string
-      }
-    }
-  }
-  disabled: {
-    background: string
-    border: {
-      color: string
-    }
-    track: {
-      indicator: {
-        color: string
-      }
-    }
-  }
-}
+type SliderToken = ComponentToken
 
-export const slider: Slider = {
-  enabled: {
-    background: backgroundColorDefault,
+export const slider: SliderToken = {
+  background: backgroundColorDefault,
+  entities: {
     track: {
       background: backgroundColor,
       height: '4px',
-      realHeight: '24px',
-      bottomOffset: '9px',
-      indicator: {
-        color: indicatorColor,
-        hover: {
-          color: primaryHover,
+      spacings: {
+        top: '24px',
+        bottom: '9px',
+      },
+      entities: {
+        indicator: {
+          background: indicatorColor,
+          states: {
+            hover: {
+              background: primaryHover,
+            },
+            disabled: {
+              background: backgroundBorderDisabled,
+            },
+          },
         },
       },
-      hover: {
-        background: backgroundColorMedium,
+      states: {
+        hover: {
+          background: backgroundColorMedium,
+        },
       },
     },
     output: {
-      height: '14px',
-      typography: paragraph.overline,
-      text: textColor,
+      typography: {
+        ...paragraph.overline,
+        color: textColor,
+      },
     },
     handle: {
       background: backgroundColorDefault,
-      size: '12px',
+      height: '12px',
+      width: '12px',
       border: {
+        type: 'border',
         color: indicatorColor,
         radius: '50%',
         width: '2px',
-        type: 'solid',
+        style: 'solid',
       },
-      outline: `1px dashed ${focusOutlineColor}`,
-      outlineOffset: '2px',
-      hover: {
-        background: primaryHoverAlt,
-        border: {
-          color: primaryHover,
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            color: focusOutlineColor,
+            width: '1px',
+            style: 'dashed',
+            offset: '2px',
+          },
+        },
+        hover: {
+          background: primaryHoverAlt,
+          border: {
+            type: 'border',
+            color: primaryHover,
+          },
         },
       },
     },
     dot: {
-      size: '6px',
+      height: '6px',
+      width: '6px',
       border: {
+        type: 'border',
         color: backgroundColorMedium,
         width: '1px',
-        type: 'solid',
+        style: 'solid',
         radius: '50%',
+      },
+      spacings: {
+        bottom: '8px',
       },
     },
   },
-  disabled: {
-    background: backgroundColorDisabled,
-    border: {
-      color: backgroundColorMedium,
-    },
-    track: {
-      indicator: {
-        color: backgroundBorderDisabled,
+  states: {
+    disabled: {
+      background: backgroundColorDisabled,
+      border: {
+        type: 'border',
+        color: backgroundColorMedium,
       },
     },
   },

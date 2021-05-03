@@ -44,7 +44,7 @@ export type SingleSelectProps = {
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const PaddedStyledListItem = styled(StyledListItem)`
-  ${spacingsTemplate(tokens.spacings.single)};
+  ${spacingsTemplate(tokens.spacings)};
 `
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(

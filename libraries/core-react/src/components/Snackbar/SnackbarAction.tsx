@@ -4,9 +4,9 @@ import { snackbar as tokens } from './Snackbar.tokens'
 
 const StyledSnackbarAction = styled.div`
   display: inline-flex;
-  margin-left: ${tokens.spacings.actionSpace};
-  margin-top: -10px;
-  margin-bottom: -10px;
+  margin-left: ${tokens.entities.actions.spacings.left};
+  margin-top: ${tokens.entities.actions.spacings.top};
+  margin-bottom: ${tokens.entities.actions.spacings.bottom};
 `
 
 export type SnackbarActionProps = {

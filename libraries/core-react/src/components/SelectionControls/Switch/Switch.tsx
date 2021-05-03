@@ -2,11 +2,9 @@ import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
-import { switchControl as tokens } from './Switch.tokens'
+import { comfortable as tokens } from './Switch.tokens'
 import { typographyTemplate } from '../../../utils'
 import type { Size } from './Switch.types'
-
-const { enabled } = tokens
 
 type StyledProps = { isDisabled: boolean }
 
@@ -21,7 +19,7 @@ const StyledSwitch = styled.label<StyledProps>`
 `
 
 const Label = styled.span`
-  ${typographyTemplate(enabled.typography)}
+  ${typographyTemplate(tokens.typography)}
 `
 
 export type SwitchProps = {

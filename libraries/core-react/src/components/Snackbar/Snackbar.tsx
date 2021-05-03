@@ -1,24 +1,27 @@
 import { useState, useEffect, HTMLAttributes, FC } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
-import { typographyTemplate } from '../../utils'
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  bordersTemplate,
+} from '../../utils'
+import { Paper } from '../Paper'
 
 type StyledProps = {
   leftAlignFrom: string
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledSnackbar = styled.div.attrs(() => ({
+const StyledSnackbar = styled(Paper).attrs(() => ({
   role: 'alert',
 }))<StyledProps>`
   position: fixed;
   left: ${tokens.spacings.left};
   bottom: ${tokens.spacings.bottom};
   background-color: ${tokens.background};
-  padding: ${tokens.spacings.padding};
-  border-radius: ${tokens.borderRadius};
-  ${typographyTemplate(tokens.text.typography)}
-  color: ${tokens.text.color};
-  box-shadow: ${tokens.boxShadow};
+  ${spacingsTemplate(tokens.spacings)}
+  ${bordersTemplate(tokens.border)}
+  ${typographyTemplate(tokens.typography)}
   min-height: ${tokens.minHeight};
   box-sizing: border-box;
   left: 50%;
@@ -31,7 +34,7 @@ const StyledSnackbar = styled.div.attrs(() => ({
 
   a,
   button {
-    color: ${tokens.buttonColor};
+    color: ${tokens.entities.button.typography.color};
   }
 `
 
@@ -68,7 +71,11 @@ export const Snackbar: FC<SnackbarProps> = ({
   return (
     <>
       {visible && (
-        <StyledSnackbar leftAlignFrom={leftAlignFrom} className={className}>
+        <StyledSnackbar
+          elevation="overlay"
+          leftAlignFrom={leftAlignFrom}
+          className={className}
+        >
           {children}
         </StyledSnackbar>
       )}

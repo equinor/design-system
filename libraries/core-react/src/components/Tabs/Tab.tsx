@@ -1,31 +1,11 @@
 import { forwardRef, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { tab as tokens } from './Tabs.tokens'
+import { token as tokens } from './Tabs.tokens'
+import { outlineTemplate, spacingsTemplate, bordersTemplate } from '../../utils'
 
 const {
-  clickbound: height,
-  spacing: { left: paddingLeft, right: paddingRight },
-  states: {
-    enabled: { border, ...enabled },
-    hover,
-    disabled: _disabled,
-    activated,
-    focused: {
-      outline: {
-        width: outlineWidth,
-        style: outlineStyle,
-        color: outlineColor,
-      },
-      outlineOffset,
-    },
-  },
+  entities: { tab },
 } = tokens
-
-const focusedStyles = css`
-  z-index: 1;
-  outline: ${outlineWidth} ${outlineStyle} ${outlineColor};
-  outline-offset: ${outlineOffset};
-`
 
 const StyledTab = styled.button.attrs<TabProps>(
   ({ active = false, disabled = false }) => ({
@@ -42,44 +22,51 @@ const StyledTab = styled.button.attrs<TabProps>(
   border: none;
   outline: none;
   font-size: 1rem;
-  height: ${height};
-  padding-left: ${paddingLeft};
-  padding-right: ${paddingRight};
-  color: ${({ active }) => (active ? activated.color : enabled.color)};
-  background-color: ${enabled.backgroundColor};
+  height: ${tab.height};
+  ${spacingsTemplate(tab.spacings)}
+
+  color: ${({ active }) =>
+    active ? tab.states.active.typography.color : tab.typography.color};
+  background-color: ${tab.background};
   position: relative;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow-x: hidden;
 
-  &[data-focus] {
-    ${focusedStyles}
+  &:focus {
+    outline: none;
   }
+
+  &[data-focus],
   &[data-focus-visible-added]:focus {
-    ${focusedStyles}
+    ${outlineTemplate(tab.states.focus.outline)}
   }
   &::-moz-focus-inner {
     border: 0;
   }
   &[data-hover],
   &:hover {
-    background-color: ${({ disabled }) =>
-      disabled ? _disabled.hover.backgroundColor : hover.backgroundColor};
-    color: ${({ active }) => (active ? activated.hover.color : enabled.color)};
-    cursor: ${({ disabled }) =>
-      disabled ? _disabled.hover.cursor : 'pointer'};
+    color: ${({ active }) =>
+      active
+        ? tab.states.active.states.hover.typography.color
+        : tab.typography.color};
+    ${({ disabled }) =>
+      disabled
+        ? css`
+            background: ${tab.states.disabled.background};
+            cursor: not-allowed;
+          `
+        : css`
+            background: ${tab.states.hover.background};
+            cursor: pointer;
+          `}
   }
 
-  &::after {
-    content: '';
-    height: ${({ disabled }) => (disabled ? '0' : border.width.bottom)};
-    background-color: ${({ active }) =>
-      active ? activated.border.color : border.color};
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
+  ${({ disabled }) =>
+    disabled
+      ? bordersTemplate(tab.states.disabled.border)
+      : bordersTemplate(tab.border)}
+  ${({ active }) => active && bordersTemplate(tab.states.active.border)}
 `
 
 export type TabProps = {

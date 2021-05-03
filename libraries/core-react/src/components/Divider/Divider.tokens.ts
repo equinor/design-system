@@ -1,11 +1,12 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
     ui: {
-      background__default: { hex: lighter },
-      background__light: { hex: light },
-      background__medium: { hex: medium },
+      background__default: { rgba: lighter },
+      background__light: { rgba: light },
+      background__medium: { rgba: mediumColor },
     },
   },
   spacings: {
@@ -25,23 +26,42 @@ const reduceByValue = (subtractValue: number) => (valueWithUnit: string) => {
 
 const reduceValueByDividerHeight = reduceByValue(dividerHeight)
 
-export const divider = {
+type DividerToken = ComponentToken
+
+type DividerVariantsToken = {
+  lighter: DividerToken
+  light: DividerToken
+  mediumColor: DividerToken
+}
+
+export const baseDivider: DividerToken = {
   height: `${dividerHeight}px`,
-  color: {
-    lighter,
-    light,
-    medium,
+}
+
+export const divider: DividerVariantsToken = {
+  lighter: {
+    background: lighter,
   },
-  small: {
-    spacings: {
-      top: spacingSmall,
-      bottom: reduceValueByDividerHeight(spacingSmall),
-    },
+  light: {
+    background: light,
   },
-  medium: {
-    spacings: {
-      top: spacingMedium,
-      bottom: reduceValueByDividerHeight(spacingMedium),
-    },
+  mediumColor: {
+    background: mediumColor,
+  },
+}
+
+export const small: DividerToken = {
+  ...baseDivider,
+  spacings: {
+    top: spacingSmall,
+    bottom: reduceValueByDividerHeight(spacingSmall),
+  },
+}
+
+export const medium: DividerToken = {
+  ...baseDivider,
+  spacings: {
+    top: spacingMedium,
+    bottom: reduceValueByDividerHeight(spacingMedium),
   },
 }

@@ -1,34 +1,26 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '../../utils'
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  bordersTemplate,
+} from '../../utils'
 import { dialog as tokens } from './Dialog.tokens'
+import { Paper } from '../Paper'
 
-const {
-  minHeight,
-  width,
-  title,
-  boxShadow,
-  background,
-  borderRadius,
-  spacingsMedium,
-} = tokens
-
-const StyledDialog = styled.div.attrs<DialogProps>(() => ({
+const StyledDialog = styled(Paper).attrs<DialogProps>(() => ({
   tabIndex: 0,
   role: 'dialog',
   'aria-labelledby': 'eds-dialog-title',
   'aria-describedby': 'eds-dialog-customcontent',
   'aria-modal': true,
 }))`
-  width: ${width};
-  /* min-height: ${minHeight}; */
-  box-shadow: ${boxShadow};
-  background: ${background};
-  border-radius: ${borderRadius};
+  width: ${tokens.width};
+  background: ${tokens.background};
   display: grid;
-  padding-top: ${spacingsMedium};
-
-  ${typographyTemplate(title)}
+  ${typographyTemplate(tokens.typography)}
+  ${spacingsTemplate(tokens.spacings)}
+  ${bordersTemplate(tokens.border)}
 `
 
 export type DialogProps = React.HTMLAttributes<HTMLDivElement>
@@ -38,7 +30,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
   ref,
 ) {
   return (
-    <StyledDialog {...props} ref={ref}>
+    <StyledDialog elevation="above_scrim" {...props} ref={ref}>
       {children}
     </StyledDialog>
   )

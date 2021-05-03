@@ -4,7 +4,11 @@ import { Icon } from '../Icon'
 import { Paper } from '../Paper'
 import { Button } from '../Button'
 import { close } from '@equinor/eds-icons'
-import { spacingsTemplate, typographyTemplate } from '../../utils'
+import {
+  spacingsTemplate,
+  typographyTemplate,
+  bordersTemplate,
+} from '../../utils'
 import {
   usePopper,
   useOutsideClick,
@@ -17,19 +21,19 @@ import { popover as tokens } from './Popover.tokens'
 type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
 const StyledPopover = styled(Paper)<StyledPopoverProps>`
-  ${typographyTemplate(tokens.header)}
+  ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   display: grid;
-  grid-gap: ${tokens.gridGap};
+  grid-gap: ${tokens.spacings.bottom};
   grid-auto-columns: auto;
   align-items: center;
   align-content: start;
   background: ${tokens.background};
   width: max-content;
-  max-height: ${tokens.popover.maxHeight};
-  max-width: ${tokens.popover.maxWidth};
-  min-height: ${tokens.popover.minHeight};
-  border-radius: ${tokens.borderRadius};
+  max-height: ${tokens.maxHeight};
+  max-width: ${tokens.maxWidth};
+  min-height: ${tokens.minHeight};
+  ${bordersTemplate(tokens.border)}
   z-index: 100;
 
   ${({ open }) =>
@@ -39,43 +43,43 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
 
   .arrow {
     z-index: -1;
-    width: ${tokens.arrow.width};
-    height: ${tokens.arrow.height};
+    width: ${tokens.entities.arrow.width};
+    height: ${tokens.entities.arrow.height};
   }
   &[data-popper-placement^='top'] > .arrow {
-    bottom: ${tokens.arrow.placement};
+    bottom: ${tokens.entities.arrow.spacings.bottom};
     .arrowSvg {
       transform: rotate(-90deg);
     }
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
-    top: ${tokens.arrow.placement};
+    top: ${tokens.entities.arrow.spacings.top};
     .arrowSvg {
       transform: rotate(90deg);
     }
   }
 
   &[data-popper-placement^='left'] > .arrow {
-    right: ${tokens.arrow.placement};
+    right: ${tokens.entities.arrow.spacings.right};
     .arrowSvg {
       transform: rotate(-180deg);
     }
   }
 
   &[data-popper-placement^='right'] > .arrow {
-    left: ${tokens.arrow.placement};
+    left: ${tokens.entities.arrow.spacings.left};
   }
 `
 
 const StyledCloseButton = styled(Button)`
   position: absolute;
-  top: ${tokens.closeButton.placement};
+  top: ${tokens.entities.closeButton.spacings.top};
   right: ${tokens.spacings.right};
-  height: ${tokens.closeButton.height};
-  width: ${tokens.closeButton.width};
+  height: ${tokens.entities.closeButton.height};
+  width: ${tokens.entities.closeButton.width};
   &:after {
-    height: ${tokens.closeButton.height};
+    height: ${tokens.entities.closeButton.height};
   }
 `
 
@@ -83,8 +87,8 @@ const ArrowWrapper = styled.div`
   &,
   &::before {
     position: absolute;
-    width: ${tokens.arrow.width};
-    height: ${tokens.arrow.height};
+    width: ${tokens.entities.arrow.width};
+    height: ${tokens.entities.arrow.height};
     z-index: -1;
   }
 
@@ -98,8 +102,8 @@ type ArrowProps = {
 } & SVGProps<SVGSVGElement>
 
 const PopoverArrow = styled.svg<ArrowProps>`
-  width: ${tokens.arrow.width};
-  height: ${tokens.arrow.height};
+  width: ${tokens.entities.arrow.width};
+  height: ${tokens.entities.arrow.height};
   position: absolute;
   fill: ${tokens.background};
   filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));

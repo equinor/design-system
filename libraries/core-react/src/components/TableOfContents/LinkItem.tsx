@@ -1,8 +1,12 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { tableOfContents as tokens } from './TableOfContents.tokens'
-
-const { icon, focus, hover, links, spacings } = tokens
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  outlineTemplate,
+  bordersTemplate,
+} from '../../utils'
 
 const StyledLinkItem = styled.li`
   list-style: none;
@@ -11,47 +15,44 @@ const StyledLinkItem = styled.li`
 
   a {
     text-decoration: none;
-    font-size: ${links.fontSize};
-    line-height: ${links.fontLineHeight};
-    padding: 10px 18px;
-    height: ${links.fontLineHeight};
-    width: calc(189px - 36px);
+    ${typographyTemplate(tokens.entities.links.typography)}
+    ${spacingsTemplate(tokens.entities.links.spacings)}
+    height: ${tokens.entities.links.typography.lineHeight};
+    width: ${tokens.entities.links.width};
     display: block;
     position: relative;
 
-    &:focus {
-      outline: 1px dashed ${focus.border.color};
-      outline-offset: 2px;
-      border-radius: ${focus.border.borderRadius};
-    }
-
-    &:hover {
-      background: ${hover.background};
-      color: ${hover.typography.color};
-      border-radius: ${hover.borderRadius};
-
-      svg {
-        fill: ${hover.typography.color};
-      }
-    }
-
-    &:active {
-      outline: none;
-    }
-
     svg {
-      fill: ${icon.fill};
-      margin-right: ${spacings.comfortable.smallSpacings};
+      fill: ${tokens.entities.icon.background};
+      margin-right: ${tokens.entities.icon.spacings.right};
       vertical-align: text-bottom;
     }
 
     span {
-      max-width: 115px;
+      max-width: ${tokens.entities.span.maxWidth};
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       vertical-align: text-bottom;
       display: inline-block;
+    }
+
+    &:focus {
+      ${outlineTemplate(tokens.states.focus.outline)};
+    }
+
+    &:hover {
+      ${typographyTemplate(tokens.states.hover.typography)}
+      background: ${tokens.states.hover.background};
+      ${bordersTemplate(tokens.states.hover.border)}
+
+      svg {
+        fill: ${tokens.states.hover.entities.icon.background};
+      }
+    }
+
+    &:active {
+      outline: none;
     }
   }
 `

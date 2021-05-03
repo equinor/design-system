@@ -1,13 +1,10 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { tabPanel as tokens } from './Tabs.tokens'
+import { token as tokens } from './Tabs.tokens'
+import { outlineTemplate, spacingsTemplate } from '../../utils'
 
 const {
-  spacing: { top: paddingTop, bottom: paddingBottom },
-  focused: {
-    outline: { width: outlineWidth, style: outlineStyle, color: outlineColor },
-    outlineOffset,
-  },
+  entities: { panel },
 } = tokens
 
 const StyledTabPanel = styled.div.attrs(
@@ -15,15 +12,15 @@ const StyledTabPanel = styled.div.attrs(
     tabIndex: 0,
     role: 'tabpanel',
   }),
-)({
-  paddingTop,
-  paddingBottom,
-  outline: 'none',
-  '&[data-focus-visible-added]:focus': {
-    outline: `${outlineWidth} ${outlineStyle} ${outlineColor}`,
-    outlineOffset: `${outlineOffset}`,
-  },
-})
+)`
+  ${spacingsTemplate(panel.spacings)}
+  &:focus {
+    outline: none;
+  }
+  &[data-focus-visible-added]:focus {
+    ${outlineTemplate(panel.states.focus.outline)}
+  }
+`
 
 export type TabPanelProps = {
   /** If `true`, the panel will be hidden. */

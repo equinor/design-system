@@ -1,4 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors: {
@@ -12,7 +13,9 @@ const {
   },
 } = tokens
 
-export const sidesheet = {
+type SidesheetToken = ComponentToken
+
+export const comfortable: SidesheetToken = {
   background,
   spacings: {
     left: '14px', // padding left is 14px, because of border-left 'steals' 2px of the padding
@@ -20,12 +23,14 @@ export const sidesheet = {
     top: spacingMedium,
   },
   border: {
-    left: { color: borderColor, width: spacingXXS },
+    type: 'bordergroup',
+    left: { color: borderColor, width: spacingXXS, style: 'solid' },
   },
-  width: {
-    small: '240px',
-    medium: '320px',
-    large: '480px',
-    xlarge: '640px',
-  },
+}
+
+export const variants = {
+  small: '240px',
+  medium: '320px',
+  large: '480px',
+  xlarge: '640px',
 }

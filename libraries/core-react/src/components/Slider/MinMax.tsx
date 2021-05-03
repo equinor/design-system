@@ -3,14 +3,16 @@ import styled from 'styled-components'
 import { typographyTemplate } from '../../utils'
 import { slider as tokens } from './Slider.tokens'
 
-const { enabled } = tokens
+const {
+  entities: { track, output },
+} = tokens
 
 const StyledMinMax = styled.span`
   grid-row: 2;
-  ${typographyTemplate(enabled.output.typography)}
+  ${typographyTemplate(output.typography)}
   position: absolute;
   left: 2px;
-  top: ${enabled.track.realHeight};
+  top: ${track.spacings.top};
   /* Avoid track hover on minmax mouse over */
   pointer-events: none;
   text-align: left;
