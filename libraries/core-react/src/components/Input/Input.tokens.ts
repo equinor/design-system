@@ -1,125 +1,169 @@
 import { tokens } from '@equinor/eds-tokens'
-import type { Typography, Spacing } from '@equinor/eds-tokens'
+import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
-  colors,
-  spacings: { comfortable },
+  colors: {
+    ui: {
+      background__light: { rgba: background },
+    },
+    text: { static_icons__default, static_icons__tertiary },
+    interactive: {
+      disabled__text,
+      primary__resting,
+      danger__resting,
+      danger__hover,
+      warning__resting,
+      warning__hover,
+      success__resting,
+      success__hover,
+    },
+  },
+  spacings: {
+    comfortable: { small, x_small },
+  },
   typography,
 } = tokens
 
-const spacings = {
-  comfortable: {
-    left: comfortable.small,
-    right: comfortable.small,
-    top: '6px',
-    bottom: '6px',
-  },
-  compact: {
-    left: comfortable.x_small,
-    right: comfortable.x_small,
-    top: comfortable.x_small,
-    bottom: comfortable.x_small,
-  },
+export type InputToken = ComponentToken
+
+export type InputVariantsToken = {
+  default: ComponentToken
+  error: ComponentToken
+  warning: ComponentToken
+  success: ComponentToken
 }
 
-export type InputVariantProps = {
-  border: {
-    outline: { color: string; width: string }
-    bottom: { color: string; width: string }
-  }
-  focus: {
-    icon: {
-      color: string
-    }
-    border: {
-      width: string
-      color: string
-    }
-  }
-}
-
-type InputProps = {
-  background: string
-  typography: Typography
-  placeholderColor: string
-  disabledColor: string
-  spacings: {
-    comfortable: Spacing
-    compact: Spacing
-  }
-  default: InputVariantProps
-  error: InputVariantProps
-  warning: InputVariantProps
-  success: InputVariantProps
-}
-
-export const input: InputProps = {
-  background: colors.ui.background__light.hex,
+export const input: InputToken = {
+  background,
   typography: {
     ...typography.input.text,
-    color: colors.text.static_icons__default.hex,
+    color: static_icons__default.rgba,
   },
-  placeholderColor: colors.text.static_icons__tertiary.hex,
-  disabledColor: colors.interactive.disabled__text.hex,
-  spacings,
-  default: {
-    border: {
-      outline: { color: 'transparent', width: '1px' },
-      bottom: { color: colors.text.static_icons__tertiary.hex, width: '1px' },
-    },
-    focus: {
-      icon: {
-        color: colors.interactive.primary__resting.hex,
+  entities: {
+    placeholder: {
+      typography: {
+        color: static_icons__tertiary.rgba,
       },
-      border: {
-        width: '2px',
-        color: colors.interactive.primary__resting.hex,
+    },
+  },
+  states: {
+    disabled: {
+      typography: {
+        color: disabled__text.rgba,
+      },
+    },
+  },
+}
+
+export const inputVariants: InputVariantsToken = {
+  default: {
+    boxShadow: 'inset 0px -1px 0px 0px ' + static_icons__tertiary.rgba,
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
+          color: 'transparent',
+          width: '1px',
+          style: 'solid',
+          offset: '0px',
+        },
+      },
+      focus: {
+        outline: {
+          type: 'outline',
+          width: '2px',
+          color: primary__resting.rgba,
+          style: 'solid',
+          offset: '0px',
+        },
       },
     },
   },
   error: {
-    border: {
-      outline: { color: colors.interactive.danger__resting.hex, width: '1px' },
-      bottom: { color: 'transparent', width: '1px' },
-    },
-    focus: {
-      icon: {
-        color: colors.interactive.danger__hover.hex,
+    boxShadow: 'inset 0px -1px 0px 0px transparent',
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
+          color: danger__resting.rgba,
+          width: '1px',
+          style: 'solid',
+          offset: '0px',
+        },
       },
-      border: {
-        width: '2px',
-        color: colors.interactive.danger__hover.hex,
+      focus: {
+        outline: {
+          type: 'outline',
+          width: '2px',
+          color: danger__hover.rgba,
+          style: 'solid',
+          offset: '0px',
+        },
       },
     },
   },
   warning: {
-    border: {
-      bottom: { color: 'transparent', width: '1px' },
-      outline: { color: colors.interactive.warning__resting.hex, width: '1px' },
-    },
-    focus: {
-      icon: {
-        color: colors.interactive.warning__hover.hex,
+    boxShadow: 'inset 0px -1px 0px 0px transparent',
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
+          color: warning__resting.rgba,
+          width: '1px',
+          style: 'solid',
+          offset: '0px',
+        },
       },
-      border: {
-        width: '2px',
-        color: colors.interactive.warning__hover.hex,
+      focus: {
+        outline: {
+          type: 'outline',
+          width: '2px',
+          color: warning__hover.rgba,
+          style: 'solid',
+          offset: '0px',
+        },
       },
     },
   },
   success: {
-    border: {
-      outline: { color: colors.interactive.success__resting.hex, width: '1px' },
-      bottom: { color: 'transparent', width: '1px' },
-    },
-    focus: {
-      icon: {
-        color: colors.interactive.success__hover.hex,
+    boxShadow: 'inset 0px -1px 0px 0px transparent',
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
+          color: success__resting.rgba,
+          width: '1px',
+          style: 'solid',
+          offset: '0px',
+        },
       },
-      border: {
-        width: '2px',
-        color: colors.interactive.success__hover.hex,
+      focus: {
+        outline: {
+          type: 'outline',
+          width: '2px',
+          color: success__hover.rgba,
+          style: 'solid',
+          offset: '0px',
+        },
       },
     },
+  },
+}
+
+export const comfortable: InputToken = {
+  spacings: {
+    left: small,
+    right: small,
+    top: '6px',
+    bottom: '6px',
+  },
+}
+
+export const compact: InputToken = {
+  spacings: {
+    left: x_small,
+    right: x_small,
+    top: x_small,
+    bottom: x_small,
   },
 }

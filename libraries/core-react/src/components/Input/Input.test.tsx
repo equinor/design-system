@@ -3,12 +3,19 @@ import { render, cleanup } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Input } from './Input'
-import { input as inputTokens } from './Input.tokens'
+import { inputVariants as inputTokens } from './Input.tokens'
+import { trimSpaces } from '../../utils'
 
 const {
-  error: errorToken,
-  success: successToken,
-  warning: warningToken,
+  error: {
+    states: { active: activeError },
+  },
+  success: {
+    states: { active: activeSuccess },
+  },
+  warning: {
+    states: { active: activeWarning },
+  },
 } = inputTokens
 
 afterEach(cleanup)
@@ -36,7 +43,9 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${successToken.border.outline.width} solid ${successToken.border.outline.color}`,
+      `${activeSuccess.outline.width} solid ${trimSpaces(
+        activeSuccess.outline.color,
+      )}`,
     )
   })
 
@@ -52,7 +61,9 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${warningToken.border.outline.width} solid ${warningToken.border.outline.color}`,
+      `${activeWarning.outline.width} solid ${trimSpaces(
+        activeWarning.outline.color,
+      )}`,
     )
   })
 
@@ -68,7 +79,9 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${errorToken.border.outline.width} solid ${errorToken.border.outline.color}`,
+      `${activeError.outline.width} solid ${trimSpaces(
+        activeError.outline.color,
+      )}`,
     )
   })
 

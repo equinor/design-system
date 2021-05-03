@@ -1,36 +1,46 @@
 import { ElementType, InputHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-import { InputVariantProps, input as tokens } from './Input.tokens'
-import { typographyTemplate, spacingsTemplate } from '../../utils'
+import * as tokens from './Input.tokens'
+import type { InputToken } from './Input.tokens'
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  outlineTemplate,
+} from '../../utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
+
+const { input, inputVariants } = tokens
 
 const Variation = ({
   variant,
   token,
 }: {
   variant: string
-  token: InputVariantProps
+  token: InputToken
 }) => {
   if (!variant) {
     return ``
   }
 
   const {
-    focus: { border: focusBorderOutline },
-    border: { outline: borderOutline, bottom: borderBottom },
+    states: {
+      focus: { outline: focusOutline },
+      active: { outline: activeOutline },
+    },
+    boxShadow,
   } = token
 
   return css`
     border: none;
-    outline: ${borderOutline.width} solid ${borderOutline.color};
-    box-shadow: inset 0 -${borderBottom.width} 0 0 ${borderBottom.color};
+    ${outlineTemplate(activeOutline)}
+    box-shadow: ${boxShadow};
 
     &:active,
     &:focus {
       outline-offset: 0;
       box-shadow: none;
-      outline: ${focusBorderOutline.width} solid ${focusBorderOutline.color};
+      ${outlineTemplate(focusOutline)}
     }
 
     &:disabled {
@@ -47,7 +57,7 @@ const Variation = ({
 
 type StyledProps = {
   spacings: Spacing
-  token: InputVariantProps
+  token: InputToken
   variant: string
 }
 
@@ -57,17 +67,17 @@ const StyledInput = styled.input<StyledProps>`
   margin: 0;
   border: none;
   appearance: none;
-  background: ${tokens.background};
+  background: ${input.background};
 
   ${({ spacings }) => spacingsTemplate(spacings)}
-  ${typographyTemplate(tokens.typography)}
+  ${typographyTemplate(input.typography)}
 
   ${Variation}
   &::placeholder {
-    color: ${tokens.placeholderColor};
+    color: ${input.entities.placeholder.typography.color};
   }
   &:disabled {
-    color: ${tokens.disabledColor};
+    color: ${input.states.disabled.typography.color};
   }
 `
 
@@ -97,17 +107,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   ref,
 ) {
   const as: ElementType = multiline ? 'textarea' : 'input'
-  const inputVariant = tokens[variant]
-  const spacings = tokens.spacings.comfortable
+  const inputVariant = inputVariants[variant]
+  const spacings = tokens.comfortable.spacings
 
   const inputProps = {
     as,
     ref,
     type,
     disabled,
-    variant: variant,
+    variant,
     token: inputVariant,
-    spacings: spacings,
+    spacings,
     ...other,
   }
 

@@ -21,7 +21,7 @@ export type ComponentToken = {
   typography?: Partial<Typography>
   clickbound?: Clickbound
   states?: {
-    active?: ComponentToken
+    active?: ComponentToken & { outline?: Outline }
     disabled?: ComponentToken
     focus?: ComponentToken & { outline?: Outline }
     hover?: ComponentToken
