@@ -7,9 +7,15 @@ import { input as inputTokens } from './Input.tokens'
 import { trimSpaces } from '../../utils'
 
 const {
-  error: errorToken,
-  success: successToken,
-  warning: warningToken,
+  error: {
+    states: { active: activeError },
+  },
+  success: {
+    states: { active: activeSuccess },
+  },
+  warning: {
+    states: { active: activeWarning },
+  },
 } = inputTokens
 
 afterEach(cleanup)
@@ -37,12 +43,8 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${
-        successToken.entities.outline.border.type === 'border' &&
-        successToken.entities.outline.border.width
-      } solid ${trimSpaces(
-        successToken.entities.outline.border.type === 'border' &&
-          successToken.entities.outline.border.color,
+      `${activeSuccess.outline.width} solid ${trimSpaces(
+        activeSuccess.outline.color,
       )}`,
     )
   })
@@ -59,12 +61,8 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${
-        warningToken.entities.outline.border.type === 'border' &&
-        warningToken.entities.outline.border.width
-      } solid ${trimSpaces(
-        warningToken.entities.outline.border.type === 'border' &&
-          warningToken.entities.outline.border.color,
+      `${activeWarning.outline.width} solid ${trimSpaces(
+        activeWarning.outline.color,
       )}`,
     )
   })
@@ -81,12 +79,8 @@ describe('Input', () => {
 
     expect(inputNode).toHaveStyleRule(
       'outline',
-      `${
-        errorToken.entities.outline.border.type === 'border' &&
-        errorToken.entities.outline.border.width
-      } solid ${trimSpaces(
-        errorToken.entities.outline.border.type === 'border' &&
-          errorToken.entities.outline.border.color,
+      `${activeError.outline.width} solid ${trimSpaces(
+        activeError.outline.color,
       )}`,
     )
   })
