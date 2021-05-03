@@ -1,17 +1,14 @@
 import { useState } from 'react'
-import { Radio, RadioProps, Icon } from '../../..'
+import { Radio, RadioProps } from '../..'
 import styled from 'styled-components'
-import { checkbox } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
-
-Icon.add({ checkbox })
 
 const Wrapper = styled(Radio)`
   display: flex;
 `
 
 export default {
-  title: 'Components/Selection controls/Radio',
+  title: 'Components/Radio',
   component: Radio,
   parameters: {
     docs: {

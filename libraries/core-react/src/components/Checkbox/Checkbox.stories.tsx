@@ -1,19 +1,16 @@
-import { useState, useRef } from 'react'
-import { Checkbox, Icon, Typography, Button, CheckboxProps } from '../../..'
+import { useState, useRef, ChangeEvent } from 'react'
+import { Checkbox, Typography, Button, CheckboxProps } from '../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { checkbox } from '@equinor/eds-icons'
 import { useForm } from 'react-hook-form'
 import { Meta, Story } from '@storybook/react'
-
-Icon.add({ checkbox })
 
 const Wrapper = styled(Checkbox)`
   display: flex;
 `
 
 export default {
-  title: 'Components/Selection controls/Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
   parameters: {
     docs: {
@@ -66,7 +63,7 @@ export const SingleCheckbox: Story<CheckboxProps> = () => {
       <li>
         <Checkbox
           label="I'm a controlled component"
-          onChange={(e) => {
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             updateChecked(e.target.checked)
           }}
           checked={checked}

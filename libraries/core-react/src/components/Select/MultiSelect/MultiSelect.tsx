@@ -7,7 +7,7 @@ import {
 } from 'downshift'
 import { Label } from '../../Label'
 import { Icon } from '../../Icon'
-import { CheckboxInput } from '../../SelectionControls/Checkbox/Input'
+import { CheckboxInput } from '../../Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
 import styled from 'styled-components'
 import { multiSelect as tokens } from '../Select.tokens'

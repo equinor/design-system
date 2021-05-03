@@ -2,7 +2,7 @@ import { forwardRef, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { comfortable as tokens } from './Switch.tokens'
 import type { Size } from './Switch.types'
-import { outlineTemplate } from '../../../utils'
+import { outlineTemplate } from '../../utils'
 
 const {
   modes: { compact: compactTokens },

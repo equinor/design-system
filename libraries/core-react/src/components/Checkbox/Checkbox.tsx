@@ -2,7 +2,7 @@
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { comfortable as tokens } from './Checkbox.tokens'
-import { typographyTemplate } from '../../../utils'
+import { typographyTemplate } from '../../utils'
 import { CheckboxInput } from './Input'
 
 type StyledCheckboxProps = {

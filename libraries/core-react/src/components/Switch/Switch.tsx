@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 import { comfortable as tokens } from './Switch.tokens'
-import { typographyTemplate } from '../../../utils'
+import { typographyTemplate } from '../../utils'
 import type { Size } from './Switch.types'
 
 type StyledProps = { isDisabled: boolean }

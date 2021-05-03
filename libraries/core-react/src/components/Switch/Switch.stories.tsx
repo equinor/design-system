@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Switch, SwitchProps } from '../../..'
+import { Switch, SwitchProps } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 
@@ -19,7 +19,7 @@ const Wrapper = styled.div<WrapperStyleProps>`
 `
 
 export default {
-  title: 'Components/Selection controls/Switch',
+  title: 'Components/Switch',
   component: Switch,
   parameters: {
     docs: {
