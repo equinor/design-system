@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Radio, RadioProps } from '../../..'
+import { Radio, RadioProps } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 

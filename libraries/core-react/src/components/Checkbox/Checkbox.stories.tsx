@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { Checkbox, Typography, Button, CheckboxProps } from '../../..'
+import { useState, useRef, ChangeEvent } from 'react'
+import { Checkbox, Typography, Button, CheckboxProps } from '../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm } from 'react-hook-form'
@@ -63,7 +63,7 @@ export const SingleCheckbox: Story<CheckboxProps> = () => {
       <li>
         <Checkbox
           label="I'm a controlled component"
-          onChange={(e) => {
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             updateChecked(e.target.checked)
           }}
           checked={checked}
