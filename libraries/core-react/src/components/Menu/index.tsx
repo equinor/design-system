@@ -3,19 +3,11 @@ import { MenuItem, MenuItemProps } from './MenuItem'
 import { MenuSection, MenuSectionProps } from './MenuSection'
 
 type MenuType = typeof BaseMenu & {
-  // Deprecated
-  MenuItem: typeof MenuItem
-  MenuSection: typeof MenuSection
-  // New
   Item: typeof MenuItem
   Section: typeof MenuSection
 }
 
 const Menu = BaseMenu as MenuType
-// Deprecated
-Menu.MenuItem = MenuItem
-Menu.MenuSection = MenuSection
-// New
 Menu.Item = MenuItem
 Menu.Section = MenuSection
 
