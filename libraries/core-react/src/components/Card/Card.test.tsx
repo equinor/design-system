@@ -8,7 +8,7 @@ import { trimSpaces } from '../../utils'
 
 import { Card } from '.'
 
-const { CardHeader, CardHeaderTitle, CardMedia, CardActions } = Card
+const { Header, HeaderTitle, Media, Actions } = Card
 
 const { info } = tokens
 
@@ -17,25 +17,25 @@ const StyledCard = styled(Card)`
   height: 100px;
   width: 100px;
 `
-const StyledCardHeader = styled(CardHeader)`
+const StyledHeader = styled(Header)`
   position: relative;
   height: 100px;
   width: 100px;
 `
 
-const StyledCardHeaderTitle = styled(CardHeaderTitle)`
+const StyledHeaderTitle = styled(HeaderTitle)`
   position: relative;
   height: 100px;
   width: 100px;
 `
 
-const StyledCardMedia = styled(CardMedia)`
+const StyledMedia = styled(Media)`
   position: relative;
   height: 100px;
   width: 100px;
 `
 
-const StyledCardActions = styled(CardActions)`
+const StyledActions = styled(Actions)`
   position: relative;
   height: 100px;
   width: 100px;
@@ -57,26 +57,26 @@ describe('Card', () => {
     const subtitle = 'subtitle'
     const { queryByText } = render(
       <Card>
-        <CardHeader>
-          <CardHeaderTitle>
+        <Header>
+          <Header>
             <Typography variant="h4">{title}</Typography>
             <Typography variant="body_short">{subtitle}</Typography>
-          </CardHeaderTitle>
-        </CardHeader>
+          </Header>
+        </Header>
       </Card>,
     )
 
     expect(queryByText(title)).toBeDefined()
     expect(queryByText(subtitle)).toBeDefined()
   })
-  it('Has provided image source and placement in CardMedia', () => {
+  it('Has provided image source and placement in Media', () => {
     const fullWidth = 'fullWidth'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { queryByText } = render(
       <Card>
-        <CardMedia fullWidth>
+        <Media fullWidth>
           <img src={src} alt="alt" />
-        </CardMedia>
+        </Media>
       </Card>,
     )
 
@@ -86,9 +86,9 @@ describe('Card', () => {
   it('CardActions items are placed correctly', () => {
     const { container } = render(
       <Card>
-        <CardActions alignRight>
+        <Actions alignRight>
           <button type="button">Click me!</button>
-        </CardActions>
+        </Actions>
       </Card>,
     )
     const child = container.firstChild
@@ -101,29 +101,29 @@ describe('Card', () => {
     expect(card).toHaveStyleRule('height', '100px')
     expect(card).toHaveStyleRule('width', '100px')
   })
-  it('Can extend the css for the CardHeader Component', () => {
-    const { container } = render(<StyledCardHeader />)
+  it('Can extend the css for the Header Component', () => {
+    const { container } = render(<StyledHeader />)
     const cardHeader = container.firstChild
     expect(cardHeader).toHaveStyleRule('position', 'relative')
     expect(cardHeader).toHaveStyleRule('height', '100px')
     expect(cardHeader).toHaveStyleRule('width', '100px')
   })
-  it('Can extend the css for the CardHeaderTitle Component', () => {
-    const { container } = render(<StyledCardHeaderTitle />)
+  it('Can extend the css for the HeaderTitle Component', () => {
+    const { container } = render(<StyledHeaderTitle />)
     const cardHeaderTitle = container.firstChild
     expect(cardHeaderTitle).toHaveStyleRule('position', 'relative')
     expect(cardHeaderTitle).toHaveStyleRule('height', '100px')
     expect(cardHeaderTitle).toHaveStyleRule('width', '100px')
   })
-  it('Can extend the css for the CardMedia Component', () => {
-    const { container } = render(<StyledCardMedia />)
+  it('Can extend the css for the Media Component', () => {
+    const { container } = render(<StyledMedia />)
     const cardMedia = container.firstChild
     expect(cardMedia).toHaveStyleRule('position', 'relative')
     expect(cardMedia).toHaveStyleRule('height', '100px')
     expect(cardMedia).toHaveStyleRule('width', '100px')
   })
-  it('Can extend the css for the CardActions Component', () => {
-    const { container } = render(<StyledCardActions />)
+  it('Can extend the css for the Actions Component', () => {
+    const { container } = render(<StyledActions />)
     const cardActions = container.firstChild
     expect(cardActions).toHaveStyleRule('position', 'relative')
     expect(cardActions).toHaveStyleRule('height', '100px')

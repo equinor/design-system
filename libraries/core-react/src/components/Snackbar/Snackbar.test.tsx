@@ -4,15 +4,10 @@ import {
   cleanup,
   waitForElementToBeRemoved,
 } from '@testing-library/react'
-
 import '@testing-library/jest-dom'
-
 import 'jest-styled-components'
 import styled from 'styled-components'
-
 import { Snackbar } from './index'
-
-const { SnackbarAction } = Snackbar
 
 afterEach(cleanup)
 
@@ -55,9 +50,9 @@ describe('Snackbar', () => {
     const { queryByText } = render(
       <Snackbar open>
         {message}
-        <SnackbarAction>
+        <Snackbar.Action>
           <button type="button">{buttonText}</button>
-        </SnackbarAction>
+        </Snackbar.Action>
       </Snackbar>,
     )
     expect(queryByText(buttonText)).toBeDefined()

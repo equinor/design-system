@@ -5,8 +5,6 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Tabs } from '.'
 
-const { TabList, Tab, TabPanels, TabPanel } = Tabs
-
 const noop = () => null
 
 afterEach(cleanup)
@@ -22,11 +20,11 @@ const TabsWithRefs = () => {
 
   return (
     <Tabs activeTab={0} onChange={noop}>
-      <TabList>
-        <Tab ref={activeRef}>Tab one</Tab>
-        <Tab ref={inactiveRef}>Tab two</Tab>
-        <Tab>Tab three</Tab>
-      </TabList>
+      <Tabs.List>
+        <Tabs.Tab ref={activeRef}>Tabs.Tab one</Tabs.Tab>
+        <Tabs.Tab ref={inactiveRef}>Tabs.Tab two</Tabs.Tab>
+        <Tabs.Tab>Tabs.Tab three</Tabs.Tab>
+      </Tabs.List>
     </Tabs>
   )
 }
@@ -45,16 +43,16 @@ const TabsWithPanels = ({
   return (
     <Fragment>
       <Tabs activeTab={activeTab} onChange={handleChange}>
-        <TabList>
-          <Tab>Tab one</Tab>
-          <Tab>Tab two</Tab>
-          <Tab disabled>Tab three</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Panel one</TabPanel>
-          <TabPanel>Panel two</TabPanel>
-          <TabPanel>Panel three</TabPanel>
-        </TabPanels>
+        <Tabs.List>
+          <Tabs.Tab>Tabs.Tab one</Tabs.Tab>
+          <Tabs.Tab>Tabs.Tab two</Tabs.Tab>
+          <Tabs.Tab disabled>Tabs.Tab three</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panels>
+          <Tabs.Panel>Panel one</Tabs.Panel>
+          <Tabs.Panel>Panel two</Tabs.Panel>
+          <Tabs.Panel>Panel three</Tabs.Panel>
+        </Tabs.Panels>
       </Tabs>
     </Fragment>
   )
@@ -64,11 +62,11 @@ describe('Tabs', () => {
   it('Renders a tablist with three tabs', () => {
     const { container } = render(
       <Tabs onChange={noop}>
-        <TabList>
-          <Tab>Tab one</Tab>
-          <Tab>Tab two</Tab>
-          <Tab>Tab three</Tab>
-        </TabList>
+        <Tabs.List>
+          <Tabs.Tab>Tabs.Tab one</Tabs.Tab>
+          <Tabs.Tab>Tabs.Tab two</Tabs.Tab>
+          <Tabs.Tab>Tabs.Tab three</Tabs.Tab>
+        </Tabs.List>
       </Tabs>,
     )
     expect(screen.queryByRole('tablist')).toBeInTheDocument()
@@ -81,14 +79,14 @@ describe('Tabs', () => {
   })
   it('Switches tabpanel when tab is clicked', () => {
     render(<TabsWithPanels />)
-    const targetTab = screen.queryByText('Tab two')
+    const targetTab = screen.queryByText('Tabs.Tab two')
     fireEvent.click(targetTab)
     expect(targetTab).toHaveAttribute('aria-selected', 'true')
     expect(screen.queryByText('Panel two')).toBeVisible()
   })
   it('Switches tabpanel when arrow key is clicked', () => {
     render(<TabsWithPanels />)
-    const targetTab = screen.queryByText('Tab two')
+    const targetTab = screen.queryByText('Tabs.Tab two')
     const tablist = screen.queryByRole('tablist')
     fireEvent.keyDown(tablist, {
       key: 'ArrowRight',
@@ -97,7 +95,7 @@ describe('Tabs', () => {
   })
   it('Skips disabled tabs when navigating using arrowkeys', () => {
     render(<TabsWithPanels selectedTabIndex={1} />)
-    const targetTab = screen.queryByText('Tab one')
+    const targetTab = screen.queryByText('Tabs.Tab one')
     const tablist = screen.queryByRole('tablist')
     fireEvent.keyDown(tablist, {
       key: 'ArrowRight',
@@ -109,41 +107,41 @@ describe('Tabs', () => {
     render(<Tabs data-testid={testId} />)
     expect(screen.queryByTestId(testId)).toBeDefined()
   })
-  it("Doesn't crash if no children is provided to TabPanel", () => {
+  it("Doesn't crash if no children is provided to Tabs.Panel", () => {
     const testId = 'tabspanel'
     render(
       <Tabs>
-        <TabList>
-          <Tab>Tab one</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel data-testid={testId}></TabPanel>
-        </TabPanels>
+        <Tabs.List>
+          <Tabs.Tab>Tabs.Tab one</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panels>
+          <Tabs.Panel data-testid={testId}></Tabs.Panel>
+        </Tabs.Panels>
       </Tabs>,
     )
     expect(screen.queryByTestId(testId)).toBeDefined()
   })
-  it("Doesn't crash if no children is provided to Tab", () => {
+  it("Doesn't crash if no children is provided to Tabs.Tab", () => {
     const testId = 'tab'
     render(
       <Tabs>
-        <TabList>
-          <Tab data-testid={testId}>Tab one</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Panel one</TabPanel>
-        </TabPanels>
+        <Tabs.List>
+          <Tabs.Tab data-testid={testId}>Tabs.Tab one</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panels>
+          <Tabs.Panel>Panel one</Tabs.Panel>
+        </Tabs.Panels>
       </Tabs>,
     )
     expect(screen.queryByTestId(testId)).toBeDefined()
   })
-  it("Doesn't crash if no children is provided to TabList or TabPanels", () => {
+  it("Doesn't crash if no children is provided to Tabs.List or Tabs.Panels", () => {
     const tablist = 'tablist'
     const tabpanels = 'tabpanels'
     render(
       <Tabs>
-        <TabList data-testid={tablist}></TabList>
-        <TabPanels data-testid={tabpanels}></TabPanels>
+        <Tabs.List data-testid={tablist}></Tabs.List>
+        <Tabs.Panels data-testid={tabpanels}></Tabs.Panels>
       </Tabs>,
     )
     expect(screen.queryByTestId(tablist)).toBeDefined()

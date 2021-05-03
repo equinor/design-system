@@ -5,8 +5,6 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { List } from '.'
 
-const { ListItem } = List
-
 afterEach(cleanup)
 
 const StyledList = styled(List)`
@@ -17,7 +15,7 @@ describe('Lists', () => {
   it('Renders an unordered list by default', () => {
     const { container } = render(
       <List>
-        <ListItem>Item 1</ListItem>
+        <List.Item>Item 1</List.Item>
       </List>,
     )
     expect(screen.queryByText('Item 1')).toBeInTheDocument()
@@ -26,7 +24,7 @@ describe('Lists', () => {
   it('Renders an unordered list with variant bullet', () => {
     const { container } = render(
       <List variant="bullet">
-        <ListItem>Item 1</ListItem>
+        <List.Item>Item 1</List.Item>
       </List>,
     )
     expect(screen.queryByText('Item 1')).toBeInTheDocument()
@@ -35,7 +33,7 @@ describe('Lists', () => {
   it('Renders an ordered list with variant numbered', () => {
     const { container } = render(
       <List variant="numbered">
-        <ListItem>Item 1</ListItem>
+        <List.Item>Item 1</List.Item>
       </List>,
     )
     expect(screen.queryByText('Item 1')).toBeInTheDocument()
@@ -44,7 +42,7 @@ describe('Lists', () => {
   it('Can extend the css for the component', () => {
     const { container } = render(
       <StyledList>
-        <ListItem>Item 1</ListItem>
+        <List.Item>Item 1</List.Item>
       </StyledList>,
     )
     expect(container.firstChild).toHaveStyleRule('margin-left', '0')
@@ -52,8 +50,8 @@ describe('Lists', () => {
   it('Has start attribute if list variant is numbered', () => {
     const { container } = render(
       <List variant="numbered" start="10">
-        <ListItem>Item 1</ListItem>
-        <ListItem>Item 2</ListItem>
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
       </List>,
     )
     expect(container.querySelector('ol')).toBeInTheDocument()
