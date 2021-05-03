@@ -1,7 +1,7 @@
 import { ElementType, InputHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import * as tokens from './Input.tokens'
-import type { InputToken } from './Input.tokens'
+import type { InputToken, InputVariantsToken } from './Input.tokens'
 import {
   typographyTemplate,
   spacingsTemplate,
