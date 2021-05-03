@@ -21,9 +21,9 @@ const TabsWithRefs = () => {
   return (
     <Tabs activeTab={0} onChange={noop}>
       <Tabs.List>
-        <Tabs.Tab ref={activeRef}>Tabs.Tab one</Tabs.Tab>
-        <Tabs.Tab ref={inactiveRef}>Tabs.Tab two</Tabs.Tab>
-        <Tabs.Tab>Tabs.Tab three</Tabs.Tab>
+        <Tabs.Tab ref={activeRef}>Tab one</Tabs.Tab>
+        <Tabs.Tab ref={inactiveRef}>Tab two</Tabs.Tab>
+        <Tabs.Tab>Tab three</Tabs.Tab>
       </Tabs.List>
     </Tabs>
   )
@@ -44,9 +44,9 @@ const TabsWithPanels = ({
     <Fragment>
       <Tabs activeTab={activeTab} onChange={handleChange}>
         <Tabs.List>
-          <Tabs.Tab>Tabs.Tab one</Tabs.Tab>
-          <Tabs.Tab>Tabs.Tab two</Tabs.Tab>
-          <Tabs.Tab disabled>Tabs.Tab three</Tabs.Tab>
+          <Tabs.Tab>Tab one</Tabs.Tab>
+          <Tabs.Tab>Tab two</Tabs.Tab>
+          <Tabs.Tab disabled>Tab three</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>Panel one</Tabs.Panel>
@@ -63,9 +63,9 @@ describe('Tabs', () => {
     const { container } = render(
       <Tabs onChange={noop}>
         <Tabs.List>
-          <Tabs.Tab>Tabs.Tab one</Tabs.Tab>
-          <Tabs.Tab>Tabs.Tab two</Tabs.Tab>
-          <Tabs.Tab>Tabs.Tab three</Tabs.Tab>
+          <Tabs.Tab>Tab one</Tabs.Tab>
+          <Tabs.Tab>Tab two</Tabs.Tab>
+          <Tabs.Tab>Tab three</Tabs.Tab>
         </Tabs.List>
       </Tabs>,
     )
@@ -79,14 +79,14 @@ describe('Tabs', () => {
   })
   it('Switches tabpanel when tab is clicked', () => {
     render(<TabsWithPanels />)
-    const targetTab = screen.queryByText('Tabs.Tab two')
+    const targetTab = screen.queryByText('Tab two')
     fireEvent.click(targetTab)
     expect(targetTab).toHaveAttribute('aria-selected', 'true')
     expect(screen.queryByText('Panel two')).toBeVisible()
   })
   it('Switches tabpanel when arrow key is clicked', () => {
     render(<TabsWithPanels />)
-    const targetTab = screen.queryByText('Tabs.Tab two')
+    const targetTab = screen.queryByText('Tab two')
     const tablist = screen.queryByRole('tablist')
     fireEvent.keyDown(tablist, {
       key: 'ArrowRight',
@@ -95,7 +95,7 @@ describe('Tabs', () => {
   })
   it('Skips disabled tabs when navigating using arrowkeys', () => {
     render(<TabsWithPanels selectedTabIndex={1} />)
-    const targetTab = screen.queryByText('Tabs.Tab one')
+    const targetTab = screen.queryByText('Tab one')
     const tablist = screen.queryByRole('tablist')
     fireEvent.keyDown(tablist, {
       key: 'ArrowRight',
@@ -112,7 +112,7 @@ describe('Tabs', () => {
     render(
       <Tabs>
         <Tabs.List>
-          <Tabs.Tab>Tabs.Tab one</Tabs.Tab>
+          <Tabs.Tab>Tab one</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel data-testid={testId}></Tabs.Panel>
@@ -126,7 +126,7 @@ describe('Tabs', () => {
     render(
       <Tabs>
         <Tabs.List>
-          <Tabs.Tab data-testid={testId}>Tabs.Tab one</Tabs.Tab>
+          <Tabs.Tab data-testid={testId}>Tab one</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>Panel one</Tabs.Panel>

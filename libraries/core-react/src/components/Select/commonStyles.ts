@@ -6,8 +6,6 @@ import styled from 'styled-components'
 import { select as tokens } from './Select.tokens'
 import { typographyTemplate } from '../../utils'
 
-const { ListItem } = List
-
 type ContainerProps = HTMLAttributes<HTMLDivElement>
 
 type StyledListItemType = {
@@ -39,7 +37,7 @@ export const StyledList = styled(List)`
   left: 0;
   z-index: 50;
 `
-export const StyledListItem = styled(ListItem)<StyledListItemType>`
+export const StyledListItem = styled(List.Item)<StyledListItemType>`
   list-style: none;
   ${typographyTemplate(tokens.typography)};
   margin: 0;
