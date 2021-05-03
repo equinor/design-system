@@ -57,128 +57,93 @@ export const baseInput: InputToken = {
 
 export const input: InputVariantsToken = {
   default: {
-    entities: {
-      border: {
-        border: {
-          type: 'bordergroup',
-          bottom: {
-            style: 'solid',
-            color: static_icons__tertiary.rgba,
-            width: '1px',
-          },
-        },
-      },
-      outline: {
-        border: {
-          type: 'border',
+    boxShadow: 'inset 0px -1px 0px 0px ' + static_icons__tertiary.rgba,
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
           color: 'transparent',
           width: '1px',
+          style: 'solid',
+          offset: '0px',
         },
       },
-    },
-    states: {
       focus: {
         outline: {
           type: 'outline',
           width: '2px',
           color: primary__resting.rgba,
           style: 'solid',
+          offset: '0px',
         },
       },
     },
   },
   error: {
-    entities: {
-      border: {
-        border: {
-          type: 'bordergroup',
-          bottom: {
-            style: 'solid',
-            color: 'transparent',
-            width: '1px',
-          },
-        },
-      },
-      outline: {
-        border: {
-          type: 'border',
-          style: 'solid',
+    boxShadow: 'inset 0px -1px 0px 0px transparent',
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
           color: danger__resting.rgba,
           width: '1px',
+          style: 'solid',
+          offset: '0px',
         },
       },
-    },
-    states: {
       focus: {
         outline: {
           type: 'outline',
           width: '2px',
           color: danger__hover.rgba,
           style: 'solid',
+          offset: '0px',
         },
       },
     },
   },
   warning: {
-    entities: {
-      border: {
-        border: {
-          type: 'bordergroup',
-          bottom: {
-            style: 'solid',
-            color: 'transparent',
-            width: '1px',
-          },
-        },
-      },
-      outline: {
-        border: {
-          type: 'border',
-          style: 'solid',
+    boxShadow: 'inset 0px -1px 0px 0px transparent',
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
           color: warning__resting.rgba,
           width: '1px',
+          style: 'solid',
+          offset: '0px',
         },
       },
-    },
-    states: {
       focus: {
         outline: {
           type: 'outline',
           width: '2px',
           color: warning__hover.rgba,
           style: 'solid',
+          offset: '0px',
         },
       },
     },
   },
   success: {
-    entities: {
-      border: {
-        border: {
-          type: 'bordergroup',
-          bottom: {
-            style: 'solid',
-            color: 'transparent',
-            width: '1px',
-          },
-        },
-      },
-      outline: {
-        border: {
-          type: 'border',
-          style: 'solid',
+    boxShadow: 'inset 0px -1px 0px 0px transparent',
+    states: {
+      active: {
+        outline: {
+          type: 'outline',
           color: success__resting.rgba,
           width: '1px',
+          style: 'solid',
+          offset: '0px',
         },
       },
-    },
-    states: {
       focus: {
         outline: {
           type: 'outline',
           width: '2px',
           color: success__hover.rgba,
           style: 'solid',
+          offset: '0px',
         },
       },
     },

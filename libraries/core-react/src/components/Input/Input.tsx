@@ -2,7 +2,11 @@ import { ElementType, InputHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import * as tokens from './Input.tokens'
 import type { InputToken } from './Input.tokens'
-import { typographyTemplate, spacingsTemplate } from '../../utils'
+import {
+  typographyTemplate,
+  spacingsTemplate,
+  outlineTemplate,
+} from '../../utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 
@@ -22,25 +26,21 @@ const Variation = ({
   const {
     states: {
       focus: { outline: focusOutline },
+      active: { outline: activeOutline },
     },
-    entities: {
-      border: { border },
-      outline: { border: outline },
-    },
+    boxShadow,
   } = token
 
   return css`
     border: none;
-    outline: ${outline.type === 'border' && outline.width} solid
-      ${outline.type === 'border' && outline.color};
-    box-shadow: inset 0 -${border.type === 'bordergroup' && border.bottom.width}
-      0 0 ${border.type === 'bordergroup' && border.bottom.color};
+    ${outlineTemplate(activeOutline)}
+    box-shadow: ${boxShadow};
 
     &:active,
     &:focus {
       outline-offset: 0;
       box-shadow: none;
-      outline: ${focusOutline.width} solid ${focusOutline.color};
+      ${outlineTemplate(focusOutline)}
     }
 
     &:disabled {
