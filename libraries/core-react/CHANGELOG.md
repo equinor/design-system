@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2021-05-04
+
+### Added
+
+- Export types for all sub-components ([#1127](https://github.com/equinor/design-system/issues/1127))
+
+### Fixed 🐛
+
+- Hide `Tooltip` when `title` is empty string ([#1292](https://github.com/equinor/design-system/issues/1292))
+- `Tooltip` errors when used in SSR(server-side rendering) ([#1230](https://github.com/equinor/design-system/issues/1230))
+- To big offset on focus-frame for `Button` ([#1218](https://github.com/equinor/design-system/issues/1218))
+
+### Removed
+
+- Sub-components exposed with double-names ([#1317](https://github.com/equinor/design-system/issues/1317))
+
 ## [0.10.1] - 2021-04-15
 
 ### Fixed 🐛
