@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hide `Tooltip` when `title` is empty string ([#1292](https://github.com/equinor/design-system/issues/1292))
 - `Tooltip` errors when used in SSR(server-side rendering) ([#1230](https://github.com/equinor/design-system/issues/1230))
-- To big offset on focus-frame for `Button` ([#1218](https://github.com/equinor/design-system/issues/1218))
+- Too big offset on focus-frame for `Button` ([#1218](https://github.com/equinor/design-system/issues/1218))
 
 ### Removed
 
