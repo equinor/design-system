@@ -5,14 +5,13 @@ import type { NativeSelectProps } from '../NativeSelect'
 import {
   typographyTemplate,
   spacingsTemplate,
-  bordersTemplate,
   outlineTemplate,
 } from '../../../../utils'
 
 const StyledSelect = styled.select`
   border: none;
   border-radius: 0;
-  ${bordersTemplate(tokens.border)}
+  box-shadow: ${tokens.boxShadow};
   ${spacingsTemplate(tokens.entities.input.spacings)}
   ${typographyTemplate(tokens.typography)}
   padding-right: calc(${tokens.entities.input.spacings.right} *2 + ${tokens
@@ -31,7 +30,6 @@ const StyledSelect = styled.select`
   width: 100%;
   &:active,
   &:focus {
-    outline-offset: 0;
     box-shadow: none;
     ${outlineTemplate(tokens.states.focus.outline)}
   }
