@@ -49,31 +49,6 @@ WithDelay.parameters = {
   },
 }
 
-// export const DisabledInSafari: Story<TooltipProps> = () => {
-//   return (
-//     <StoryCenter>
-//       <Tooltip title="Disabled button, but hover works">
-//         <span>
-//           <Button
-//             disabled
-//             variant="ghost_icon"
-//             style={{ pointerEvents: 'none' }}
-//           >
-//             <Icon data={explore}></Icon>
-//           </Button>
-//         </span>
-//       </Tooltip>
-//     </StoryCenter>
-//   )
-// }
-
-// DisabledInSafari.parameters = {
-//   docs: {
-//     storyDescription:
-//       'Chrome, Edge and Firefox all support mouse events on disabled elements. If you have Safari users, you will need to add inline style to your disabled element, shown in the example below, as well as wrapping the anchor inside a span. This will help trigger the mouse events correctly on disabled elements. Unfortunately, this workaround overwrites the &apos;not-allowed&apos; cursor.',
-//   },
-// }
-
 export const OnTableCells: Story<TooltipProps> = () => {
   const cellValues = toCellValues(data, columns)
 
@@ -119,7 +94,7 @@ export const LonglistWithTooltips: Story<TooltipProps> = () => {
   const items = Array(100).fill(1)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '200px' }}>
       {items.map((_, i) => (
         // eslint-disable-next-line react/no-array-index-key
         <span key={i}>
