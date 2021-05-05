@@ -221,7 +221,9 @@ export const Sortable: Story<TableProps> = () => {
   const [state, setState] = useState<{
     columns: Column[]
     cellValues?: string[][]
-  }>({ columns })
+    isOpen: boolean
+    density: 'comfortable' | 'compact'
+  }>({ columns, isOpen: false, density: 'comfortable' })
 
   const onSortClick = (sortCol: Column) => {
     const updateColumns = state.columns.map((col) => {
@@ -282,6 +284,20 @@ export const Sortable: Story<TableProps> = () => {
     }
   }, [state.columns])
 
+  const { density, isOpen } = state
+
+  const setDensity = (density: 'comfortable' | 'compact') =>
+    setState((prevState) => ({ ...prevState, density }))
+
+  const openMenu = () => {
+    setState((prevState) => ({ ...prevState, isOpen: true }))
+  }
+
+  const closeMenu = () =>
+    setState((prevState) => ({ ...prevState, isOpen: false }))
+
+  const referenceElement = useRef<HTMLButtonElement>(null)
+
   return (
     <Table>
       <Table.Caption>
@@ -309,6 +325,41 @@ export const Sortable: Story<TableProps> = () => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
+        <Table.Row>
+          <Table.Cell>1</Table.Cell>
+          <Table.Cell>2</Table.Cell>
+          <Table.Cell>3</Table.Cell>
+          <Table.Cell>
+            <Button
+              ref={referenceElement}
+              variant="ghost_icon"
+              id="menuButton"
+              aria-controls="menu-on-button"
+              aria-haspopup="true"
+              aria-expanded={isOpen}
+              onClick={() => (isOpen ? closeMenu() : openMenu())}
+            >
+              <Icon data={accessible} title="accessible"></Icon>
+            </Button>
+            <Menu
+              id="menu-on-button"
+              open={isOpen}
+              placement="bottom-end"
+              aria-labelledby="menuButton"
+              anchorEl={referenceElement.current}
+              onClose={closeMenu}
+            >
+              <Menu.MenuSection title="Density">
+                <Menu.MenuItem onClick={() => setDensity('comfortable')}>
+                  Comfortable
+                </Menu.MenuItem>
+                <Menu.MenuItem onClick={() => setDensity('compact')}>
+                  Compact
+                </Menu.MenuItem>
+              </Menu.MenuSection>
+            </Menu>
+          </Table.Cell>
+        </Table.Row>
         {state.cellValues?.map((row) => (
           <Table.Row key={row.toString()}>
             {row.map((cellValue) => (
