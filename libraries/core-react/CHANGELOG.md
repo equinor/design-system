@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.11.0] - 2021-05-04
+## [0.11.0] - 2021-05-05
 
 ### Added
 
@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hide `Tooltip` when `title` is empty string ([#1292](https://github.com/equinor/design-system/issues/1292))
 - `Tooltip` errors when used in SSR(server-side rendering) ([#1230](https://github.com/equinor/design-system/issues/1230))
+- `Tooltip` being stuck when scrolling while open([#1325](https://github.com/equinor/design-system/issues/1325))
 - Too big offset on focus-frame for `Button` ([#1218](https://github.com/equinor/design-system/issues/1218))
 
 ### Removed
