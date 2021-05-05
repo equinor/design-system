@@ -114,3 +114,26 @@ OnTableCells.parameters = {
     storyDescription: 'Example of how `Tooltip` can be used on `Table.Cell`',
   },
 }
+
+export const LonglistWithTooltips: Story<TooltipProps> = () => {
+  const items = Array(100).fill(1)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      {items.map((_, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <span key={i}>
+          <Tooltip title={`Icon ${i}`} placement="right">
+            <Icon data={explore} />
+          </Tooltip>
+        </span>
+      ))}
+    </div>
+  )
+}
+LonglistWithTooltips.parameters = {
+  docs: {
+    storyDescription:
+      'Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible`',
+  },
+}
