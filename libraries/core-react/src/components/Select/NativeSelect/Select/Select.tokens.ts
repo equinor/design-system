@@ -29,14 +29,6 @@ export const nativeselect: SelectComponentToken = {
     },
   },
   boxShadow: 'inset 0 -1px 0 0 ' + colors.text.static_icons__tertiary.rgba,
-  // border: {
-  //   type: 'bordergroup',
-  //   bottom: {
-  //     color: colors.text.static_icons__tertiary.rgba,
-  //     width: '1px',
-  //     style: 'solid',
-  //   },
-  // },
   states: {
     focus: {
       outline: {
