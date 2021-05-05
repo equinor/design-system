@@ -116,7 +116,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const containerId = 'eds-tooltip-container'
     const tooltipId = useId(id, 'tooltip')
     const shouldOpen = isMounted && title !== ''
-    let timer: number
+    const openTimer = useRef<number>()
 
     useEffect(() => {
       if (document.getElementById(containerId) === null) {
@@ -125,22 +125,22 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         document.body.appendChild(tooltipContainerElement)
       }
       return () => {
-        clearTimeout(timer)
+        clearTimeout(openTimer.current)
       }
     }, [])
 
     const openTooltip = () => {
       if (shouldOpen) {
-        clearTimeout(timer)
+        clearTimeout(openTimer.current)
 
-        timer = setTimeout(() => {
+        openTimer.current = setTimeout(() => {
           setOpen(true)
         }, enterDelay)
       }
     }
 
     const closeTooltip = () => {
-      clearTimeout(timer)
+      clearTimeout(openTimer.current)
       setOpen(false)
     }
 
