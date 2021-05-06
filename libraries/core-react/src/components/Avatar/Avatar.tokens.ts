@@ -12,7 +12,6 @@ export const avatar: AvatarToken = {
   border: {
     type: 'border',
     radius: '50%',
-    width: 0,
   },
   states: {
     disabled: {

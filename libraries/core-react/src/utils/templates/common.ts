@@ -14,7 +14,7 @@ export const shorthand: Shorthand = (token) => {
   }
   const { width = '', style = '', color = '' } = token
 
-  if (!width && !style && !color) {
+  if (!width) {
     return null
   }
 
