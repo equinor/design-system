@@ -90,6 +90,24 @@ jobs:
           key: ${{ github.sha }}
       - name: Lint all libraries
         run: node_modules/.bin/pnpm run lint ./libraries
+  types:
+    name: Check types
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}
+      - name: Run type checks in core-react
+        run: node_modules/.bin/tsc -p ./libraries/core-react
+      - name: Run type checks in tokens
+        run: node_modules/.bin/tsc -p ./libraries/icons
+      - name: Run type checks in icons
+        run: node_modules/.bin/tsc -p ./libraries/tokens
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
