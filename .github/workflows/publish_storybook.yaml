@@ -40,13 +40,12 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-      - name: Install pnpm & dependencies 📦
-        uses: pnpm/action-setup@v2.0.0
-        with:
-          version: latest
-          bin_dest: ./pnpm/bin
-          run_install: |
-            - recursive: true
+      - name: Install pnpm
+        run: npm i --no-save pnpm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install dependencies recursively
+        run: node_modules/.bin/pnpm m i
       - name: Cache base files
         uses: actions/cache@v2
         with:
