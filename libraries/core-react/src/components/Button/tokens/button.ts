@@ -34,6 +34,7 @@ export const button: ButtonToken = {
     width: '1px',
     color: 'transparent',
     radius: buttonBorderRadius,
+    style: 'solid',
   },
   spacings: {
     left: medium,
@@ -60,6 +61,7 @@ export const button: ButtonToken = {
         width: '1px',
         color: 'transparent',
         radius: buttonBorderRadius,
+        style: 'solid',
       },
     },
     focus: {
@@ -77,6 +79,7 @@ export const button: ButtonToken = {
         type: 'border',
         width: '1px',
         color: disabledBorderColor,
+        style: 'solid',
       },
       typography: {
         ...buttonTypography,

@@ -29,6 +29,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
   },
   border: {
     type: 'border',
+    style: 'solid',
     width: '1px',
     color: primaryColor,
     radius: buttonBorderRadius,
@@ -40,6 +41,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
       },
       background: primaryHoverAltColor,
       border: {
+        style: 'solid',
         type: 'border',
         width: '1px',
         color: primaryHoverColor,
