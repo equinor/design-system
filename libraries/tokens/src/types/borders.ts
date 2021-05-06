@@ -1,9 +1,9 @@
 export type Border = {
   type?: 'border'
   radius?: string | number
-  color?: string
-  width?: string | number
-  style?: 'solid'
+  color: string
+  width: string | number
+  style: 'solid'
 }
 
 export type Bordergroup = {
