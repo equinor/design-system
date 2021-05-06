@@ -171,14 +171,14 @@ export const CompactTable: Story<TableProps> = () => {
             anchorEl={referenceElement.current}
             onClose={closeMenu}
           >
-            <Menu.MenuSection title="Density">
-              <Menu.MenuItem onClick={() => setDensity('comfortable')}>
+            <Menu.Section title="Density">
+              <Menu.Item onClick={() => setDensity('comfortable')}>
                 Comfortable
-              </Menu.MenuItem>
-              <Menu.MenuItem onClick={() => setDensity('compact')}>
+              </Menu.Item>
+              <Menu.Item onClick={() => setDensity('compact')}>
                 Compact
-              </Menu.MenuItem>
-            </Menu.MenuSection>
+              </Menu.Item>
+            </Menu.Section>
           </Menu>
         </TopBar.Actions>
       </TopBar>
