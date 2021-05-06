@@ -1,6 +1,6 @@
 import prettier from 'prettier'
 import R from 'ramda'
-import { fetchFigmaFile, processFigmaFile } from '../functions/figma'
+import { getFigmaFile, processFigmaFile } from '../functions/figma'
 import { writeFile, writeResults } from '../functions/file'
 import { makeTokens } from '../files/design-tokens'
 import { makeColorCss } from '../files/design-tokens/color'
@@ -84,8 +84,8 @@ const writeCSSTokens = (tokens) => {
   writeFile(PATHS.TOKENS, 'elements', 'css', elements)
 }
 
-export async function createTokens(ctx) {
-  const data = await fetchFigmaFile(FILE_IDS.TOKENS)
+export async function createTokens({ query }) {
+  const data = await getFigmaFile(FILE_IDS.TOKENS, query.force)
 
   const figmaFile = processFigmaFile(data)
   const tokens = makeTokens(figmaFile)

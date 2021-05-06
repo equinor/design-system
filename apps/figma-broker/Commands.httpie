@@ -1,7 +1,7 @@
 // Use with plugin: https://marketplace.visualstudio.com/items?itemName=wk-j.vscode-httpie
 
 // Generates design tokens from Figma
-http POST http://localhost:9001/create-tokens
+http POST http://localhost:9001/create-tokens?force=false
 
 // Generates component tokens from Figma
 http POST http://localhost:9001/create-variants
