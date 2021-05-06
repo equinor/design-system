@@ -31,6 +31,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
   },
   border: {
     type: 'border',
+    style: 'solid',
     width: '1px',
     color: primaryColor,
     radius: buttonBorderRadius,

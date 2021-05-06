@@ -64,6 +64,5 @@ export const popover: Popover = {
   border: {
     type: 'border',
     radius: borderRadius,
-    width: 0,
   },
 }

@@ -49,8 +49,6 @@ export const enabled: BannerToken = {
       border: {
         type: 'border',
         radius: borderRadius,
-        width: 0,
-        color: 'transparent',
       },
     },
   },

@@ -42,6 +42,7 @@ export const enabled: ChipToken = {
     color: 'transparent',
     type: 'border',
     width: '1px',
+    style: 'solid',
   },
   spacings: {
     left: x_small,

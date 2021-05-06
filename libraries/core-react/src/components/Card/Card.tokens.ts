@@ -25,7 +25,6 @@ export const primary: CardToken = {
   border: {
     type: 'border',
     radius: borderRadius,
-    width: 0,
   },
   spacings: {
     left: spacingMedium,
