@@ -111,7 +111,7 @@ jobs:
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
-    needs: [test, lint]
+    needs: [types, test, lint]
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -130,7 +130,7 @@ jobs:
   build-icons:
     name: Build eds-icons
     runs-on: ubuntu-latest
-    needs: [test, lint]
+    needs: [types, test, lint]
     steps:
       - name: Get base files
         uses: actions/cache@v2
