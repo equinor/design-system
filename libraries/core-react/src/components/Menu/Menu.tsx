@@ -1,4 +1,12 @@
-import { useEffect, useRef, HTMLAttributes, forwardRef, useState } from 'react'
+import {
+  useEffect,
+  useRef,
+  HTMLAttributes,
+  forwardRef,
+  useState,
+  cloneElement,
+} from 'react'
+import * as ReactDom from 'react-dom'
 import styled, { css } from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
@@ -8,11 +16,12 @@ import {
   usePopper,
   Placement,
   useGlobalKeyPress,
+  useIsMounted,
 } from '../../hooks'
 import { bordersTemplate } from '../../utils'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
-import { usePopper as reactPopper } from 'react-popper'
+//import { usePopper as reactPopper } from 'react-popper'
 
 type MenuPaperProps = {
   open: boolean
@@ -25,10 +34,10 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   min-width: fit-content;
   ${bordersTemplate(tokens.border)};
 
-  /* ${({ open }) =>
+  ${({ open }) =>
     css({
       visibility: open ? 'visible' : 'hidden',
-    })}; */
+    })};
 `
 type MenuContainerProps = MenuProps & {
   containerRef: React.MutableRefObject<HTMLDivElement>
@@ -90,34 +99,27 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   { anchorEl, open, placement = 'auto', ...rest },
   ref,
 ) {
+  const isMounted = useIsMounted()
   const containerRef = useRef<HTMLDivElement>(null)
-
-  // const { styles, attributes } = usePopper(
-  //   anchorEl,
-  //   containerRef.current,
-  //   null,
-  //   placement,
-  //   4,
-  // )
-  const [anchor, setAnchor] = useState<HTMLElement>(null)
+  const containerId = 'eds-menu-container'
+  const shouldOpen = isMounted && open
+  // const [anchor, setAnchor] = useState<HTMLElement>(null)
 
   useEffect(() => {
-    if (anchorEl && anchorEl !== anchor) {
-      setAnchor(anchorEl)
+    if (document.getElementById(containerId) === null) {
+      const menuContainerElement = document.createElement('div')
+      menuContainerElement.id = containerId
+      document.body.appendChild(menuContainerElement)
     }
-  }, [anchorEl])
+  }, [])
 
-  const { styles, attributes } = reactPopper(anchor, containerRef.current, {
+  const { styles, attributes } = usePopper(
+    anchorEl,
+    containerRef.current,
+    null,
     placement,
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 4],
-        },
-      },
-    ],
-  })
+    4,
+  )
 
   const props = {
     open,
@@ -127,18 +129,19 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   const menuProps = {
     ...rest,
-    anchorEl: anchor,
+    anchorEl,
     open,
     containerRef,
   }
 
-  console.log(anchor, anchorEl)
-
-  return open ? (
-    <MenuPaper elevation="raised" ref={containerRef} {...props}>
-      <MenuProvider>
-        <MenuContainer {...menuProps} ref={ref} />
-      </MenuProvider>
-    </MenuPaper>
-  ) : null
+  return shouldOpen
+    ? ReactDom.createPortal(
+        <MenuPaper elevation="raised" ref={containerRef} {...props}>
+          <MenuProvider>
+            <MenuContainer {...menuProps} ref={ref} />
+          </MenuProvider>
+        </MenuPaper>,
+        document.getElementById(containerId),
+      )
+    : null
 })
