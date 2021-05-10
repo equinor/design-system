@@ -26,7 +26,7 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   ${bordersTemplate(tokens.border)};
 `
 type MenuContainerProps = MenuProps & {
-  containerElement: HTMLElement | React.MutableRefObject<HTMLElement>
+  containerElement: React.MutableRefObject<HTMLElement>
 }
 const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
   function MenuContainer(
@@ -48,14 +48,11 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       }
     })
 
-    useOutsideClick(
-      containerElement as React.MutableRefObject<HTMLElement>,
-      (e: MouseEvent) => {
-        if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
-          onClose()
-        }
-      },
-    )
+    useOutsideClick(containerElement, (e: MouseEvent) => {
+      if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
+        onClose()
+      }
+    })
 
     useGlobalKeyPress('Escape', () => {
       if (open && onClose !== null) {
@@ -90,7 +87,8 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 ) {
   const [open, setOpen] = useState(openProp)
   const [containerElement, setContainerElement] = useState<HTMLElement>(null)
-  const containerRef = useRef(null)
+  const containerRef = useRef<HTMLElement>(null)
+  const combinedRefs = useCombinedRefs(setContainerElement, containerRef)
 
   const { styles, attributes } = usePopper(
     anchorEl,
@@ -116,13 +114,18 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     ...rest,
     anchorEl,
     open,
-    containerElement: setContainerElement,
+    // containerElement: setContainerElement,
+    containerElement: containerRef,
   }
 
   return (
     <>
       {open && (
-        <MenuPaper elevation="raised" ref={setContainerElement} {...props}>
+        <MenuPaper
+          elevation="raised"
+          ref={combinedRefs as React.Ref<HTMLDivElement>}
+          {...props}
+        >
           <MenuProvider>
             <MenuContainer {...menuProps} ref={ref} />
           </MenuProvider>
