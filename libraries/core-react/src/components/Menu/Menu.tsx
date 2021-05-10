@@ -1,4 +1,11 @@
-import { useEffect, HTMLAttributes, forwardRef, useState, useRef } from 'react'
+import {
+  useEffect,
+  HTMLAttributes,
+  forwardRef,
+  useState,
+  useRef,
+  MutableRefObject,
+} from 'react'
 import styled from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
@@ -26,8 +33,9 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   ${bordersTemplate(tokens.border)};
 `
 type MenuContainerProps = MenuProps & {
-  containerRef: React.MutableRefObject<HTMLElement>
+  containerRef: MutableRefObject<HTMLElement>
 }
+
 const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
   function MenuContainer(
     {
@@ -114,8 +122,9 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     ...rest,
     anchorEl,
     open,
-    // containerElement: setContainerElement,
     containerRef,
+    //containerRef: (setContainerElement as unknown) as MutableRefObject<HTMLElement>,
+    //containerRef: combinedRefs,
   }
 
   return (
