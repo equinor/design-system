@@ -1,7 +1,7 @@
 import { useEffect, MutableRefObject } from 'react'
 
 export const useOutsideClick = (
-  ref: MutableRefObject<HTMLElement>,
+  ref: MutableRefObject<HTMLElement> | MutableRefObject<HTMLDivElement>,
   callback: (e: MouseEvent) => void,
 ): void => {
   useEffect(() => {

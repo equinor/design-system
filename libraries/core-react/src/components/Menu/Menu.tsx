@@ -26,7 +26,7 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   ${bordersTemplate(tokens.border)};
 `
 type MenuContainerProps = MenuProps & {
-  containerElement: React.MutableRefObject<HTMLElement>
+  containerRef: React.MutableRefObject<HTMLElement>
 }
 const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
   function MenuContainer(
@@ -35,7 +35,7 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       anchorEl,
       onClose: onCloseCallback,
       open,
-      containerElement,
+      containerRef,
       ...rest
     },
     ref,
@@ -48,7 +48,7 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       }
     })
 
-    useOutsideClick(containerElement, (e: MouseEvent) => {
+    useOutsideClick(containerRef, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
         onClose()
       }
@@ -115,7 +115,7 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     anchorEl,
     open,
     // containerElement: setContainerElement,
-    containerElement: containerRef,
+    containerRef,
   }
 
   return (
