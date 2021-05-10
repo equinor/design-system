@@ -1,13 +1,5 @@
-import {
-  useEffect,
-  useRef,
-  HTMLAttributes,
-  forwardRef,
-  useState,
-  cloneElement,
-} from 'react'
-import * as ReactDom from 'react-dom'
-import styled, { css } from 'styled-components'
+import { useEffect, HTMLAttributes, forwardRef, useState } from 'react'
+import styled from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
@@ -16,12 +8,10 @@ import {
   usePopper,
   Placement,
   useGlobalKeyPress,
-  useIsMounted,
 } from '../../hooks'
 import { bordersTemplate } from '../../utils'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
-//import { usePopper as reactPopper } from 'react-popper'
 
 type MenuPaperProps = {
   open: boolean
@@ -33,14 +23,9 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   width: fit-content;
   min-width: fit-content;
   ${bordersTemplate(tokens.border)};
-
-  ${({ open }) =>
-    css({
-      visibility: open ? 'visible' : 'hidden',
-    })};
 `
 type MenuContainerProps = MenuProps & {
-  containerRef: React.MutableRefObject<HTMLDivElement>
+  containerElement: HTMLElement | React.MutableRefObject<HTMLElement>
 }
 const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
   function MenuContainer(
@@ -49,7 +34,7 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       anchorEl,
       onClose: onCloseCallback,
       open,
-      containerRef,
+      containerElement,
       ...rest
     },
     ref,
@@ -62,11 +47,14 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       }
     })
 
-    useOutsideClick(containerRef, (e: MouseEvent) => {
-      if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
-        onClose()
-      }
-    })
+    useOutsideClick(
+      containerElement as React.MutableRefObject<HTMLElement>,
+      (e: MouseEvent) => {
+        if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
+          onClose()
+        }
+      },
+    )
 
     useGlobalKeyPress('Escape', () => {
       if (open && onClose !== null) {
@@ -96,30 +84,25 @@ export type MenuProps = {
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  { anchorEl, open, placement = 'auto', ...rest },
+  { anchorEl, open: openProp, placement = 'auto', ...rest },
   ref,
 ) {
-  const isMounted = useIsMounted()
-  const containerRef = useRef<HTMLDivElement>(null)
-  const containerId = 'eds-menu-container'
-  const shouldOpen = isMounted && open
-  // const [anchor, setAnchor] = useState<HTMLElement>(null)
-
-  useEffect(() => {
-    if (document.getElementById(containerId) === null) {
-      const menuContainerElement = document.createElement('div')
-      menuContainerElement.id = containerId
-      document.body.appendChild(menuContainerElement)
-    }
-  }, [])
+  const [open, setOpen] = useState(openProp)
+  const [containerElement, setContainerElement] = useState<HTMLElement>(null)
 
   const { styles, attributes } = usePopper(
     anchorEl,
-    containerRef.current,
+    containerElement,
     null,
     placement,
     4,
   )
+
+  useEffect(() => {
+    if (open !== openProp) {
+      setOpen(openProp)
+    }
+  }, [openProp])
 
   const props = {
     open,
@@ -131,17 +114,18 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     ...rest,
     anchorEl,
     open,
-    containerRef,
+    containerElement: setContainerElement,
   }
 
-  return shouldOpen
-    ? ReactDom.createPortal(
-        <MenuPaper elevation="raised" ref={containerRef} {...props}>
+  return (
+    <>
+      {open && (
+        <MenuPaper elevation="raised" ref={setContainerElement} {...props}>
           <MenuProvider>
             <MenuContainer {...menuProps} ref={ref} />
           </MenuProvider>
-        </MenuPaper>,
-        document.getElementById(containerId),
-      )
-    : null
+        </MenuPaper>
+      )}
+    </>
+  )
 })
