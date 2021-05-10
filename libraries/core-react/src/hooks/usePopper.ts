@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react'
 import { usePopper as reactPopper } from 'react-popper'
-import * as PopperJS from '@popperjs/core'
 
 export type Placement =
   | 'auto'
@@ -28,15 +27,12 @@ export const usePopper = (
 ): {
   styles: { [key: string]: CSSProperties }
   attributes: { [key: string]: { [key: string]: string } }
-  //state: PopperJS.State | null
-  update: PopperJS.Instance['update']
-  //forceUpdate: PopperJS.Instance['forceUpdate'] | null
 } => {
   if (placement === undefined) {
     placement = 'auto'
   }
 
-  const { styles, attributes, update } = reactPopper(anchorEl, popperEl, {
+  const { styles, attributes } = reactPopper(anchorEl, popperEl, {
     placement,
     modifiers: [
       {
@@ -54,5 +50,5 @@ export const usePopper = (
     ],
   })
 
-  return { styles, attributes, update }
+  return { styles, attributes }
 }

@@ -1,4 +1,4 @@
-import { useEffect, HTMLAttributes, forwardRef, useState } from 'react'
+import { useEffect, HTMLAttributes, forwardRef, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
@@ -8,6 +8,7 @@ import {
   usePopper,
   Placement,
   useGlobalKeyPress,
+  useCombinedRefs,
 } from '../../hooks'
 import { bordersTemplate } from '../../utils'
 import { menu as tokens } from './Menu.tokens'
@@ -89,6 +90,7 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 ) {
   const [open, setOpen] = useState(openProp)
   const [containerElement, setContainerElement] = useState<HTMLElement>(null)
+  const containerRef = useRef(null)
 
   const { styles, attributes } = usePopper(
     anchorEl,
