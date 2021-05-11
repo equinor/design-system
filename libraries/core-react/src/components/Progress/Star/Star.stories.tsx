@@ -26,7 +26,7 @@ export default {
 
 export const Default: Story<StarProgressProps> = (args) => {
   const { value = 0, variant } = args
-  const progress = variant === 'indeterminate' ? null : useMockProgress(value)
+  const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
   return <Progress.Star value={progress} {...args} />
 }

@@ -207,9 +207,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   ref,
 ) {
   const isRangeSlider = Array.isArray(value)
-  const [sliderValue, setSliderValue] = isRangeSlider
-    ? useState(value)
-    : useState([value])
+  const [sliderValue, setSliderValue] = useState(
+    isRangeSlider ? value : [value],
+  )
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
   const onValueChange = (
