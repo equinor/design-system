@@ -82,10 +82,9 @@ export type MenuProps = {
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  { anchorEl, open: openProp, placement = 'auto', ...rest },
+  { anchorEl, open, placement = 'auto', ...rest },
   ref,
 ) {
-  const [open, setOpen] = useState(openProp)
   const [containerEl, setContainerEl] = useState<HTMLElement>(null)
 
   const { styles, attributes } = usePopper(
@@ -95,12 +94,6 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     placement,
     4,
   )
-
-  useEffect(() => {
-    if (open !== openProp) {
-      setOpen(openProp)
-    }
-  }, [openProp])
 
   const props = {
     open,
