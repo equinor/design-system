@@ -12,6 +12,7 @@ specifiers:
   eslint-plugin-jsx-a11y: ^6.4.1
   eslint-plugin-prettier: ^3.3.1
   eslint-plugin-react: ^7.23.2
+  eslint-plugin-react-hooks: ^4.2.0
   eslint-plugin-testing-library: ^4.0.0
   prettier: ^2.2.1
   typescript: ^4.2.4
@@ -28,6 +29,7 @@ devDependencies:
   eslint-plugin-jsx-a11y: 6.4.1_eslint@7.24.0
   eslint-plugin-prettier: 3.3.1_b9c73a8f62f15c88eece82c557486b0e
   eslint-plugin-react: 7.23.2_eslint@7.24.0
+  eslint-plugin-react-hooks: 4.2.0_eslint@7.24.0
   eslint-plugin-testing-library: 4.0.0_eslint@7.24.0+typescript@4.2.4
   prettier: 2.2.1
   typescript: 4.2.4
@@ -872,6 +874,15 @@ packages:
       eslint-config-prettier: 8.1.0_eslint@7.24.0
       prettier: 2.2.1
       prettier-linter-helpers: 1.0.0
+    dev: true
+
+  /eslint-plugin-react-hooks/4.2.0_eslint@7.24.0:
+    resolution: {integrity: sha512-623WEiZJqxR7VdxFCKLI6d6LLpwJkGPYKODnkH3D7WpOG5KM8yWueBd8TLsNAetEJNF5iJmolaAKO3F8yzyVBQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+    dependencies:
+      eslint: 7.24.0
     dev: true
 
   /eslint-plugin-react/7.23.2_eslint@7.24.0:
