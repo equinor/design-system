@@ -95,6 +95,7 @@ export const Default: Story<MenuProps> = (args) => {
         {...args}
         id="menu-default"
         focus={focus}
+        aria-labelledby="anchor-default"
         onClose={closeMenu}
         anchorEl={anchorRef.current}
       >
@@ -159,7 +160,7 @@ export const Complex: Story<MenuProps> = () => {
 
       <Menu
         id="menu-complex"
-        aria-labelledby="menuButton"
+        aria-labelledby="anchor-complex"
         open={isOpen}
         anchorEl={anchorRef.current}
         onClose={closeMenu}

@@ -36,14 +36,13 @@ describe('Menu', () => {
         <div>some random content</div>
       </TestMenu>,
     )
-    const menuContainer = screen.getByRole('menu').parentElement
-    await waitFor(() =>
-      expect(menuContainer).toHaveStyleRule('visibility', 'visible'),
-    )
-    expect(menuContainer).toHaveAttribute(
-      'data-popper-placement',
-      'right-start',
-    )
+    const menuContainer = screen.getByRole('menu')
+    // eslint-disable-next-line testing-library/no-node-access
+    const menuPaper = menuContainer.parentElement
+    await waitFor(() => {
+      expect(menuPaper).toBeDefined()
+      expect(menuPaper).toHaveAttribute('data-popper-placement', 'right-start')
+    })
   })
   it('has rendered Menu.Item', async () => {
     render(
@@ -96,8 +95,9 @@ describe('Menu', () => {
         <Menu.Item>Item 3</Menu.Item>
       </TestMenu>,
     )
-    const menuItem = screen.getByText('Item 1').parentElement
+    const menuItem = screen.getAllByRole('menuitem')[0]
 
+    // eslint-disable-next-line testing-library/no-node-access
     await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
   })
 
@@ -109,8 +109,9 @@ describe('Menu', () => {
         <Menu.Item>Item 3</Menu.Item>
       </TestMenu>,
     )
-    const menuItem = screen.getByText('Item 3').parentElement
+    const menuItem = screen.getAllByRole('menuitem')[2]
 
+    // eslint-disable-next-line testing-library/no-node-access
     await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
   })
   it('has called onClose when Menu.Item is clicked from inside a Menu.Section', async () => {
