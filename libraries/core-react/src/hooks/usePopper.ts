@@ -27,14 +27,10 @@ export const usePopper = (
 ): {
   styles: { [key: string]: CSSProperties }
   attributes: { [key: string]: { [key: string]: string } }
-  //   state: PopperJS.State | null
-  //   update: PopperJS.Instance['update'] | null
-  //   forceUpdate: PopperJS.Instance['forceUpdate'] | null
 } => {
   if (placement === undefined) {
     placement = 'auto'
   }
-
   const { styles, attributes } = reactPopper(anchorEl, popperEl, {
     placement,
     modifiers: [

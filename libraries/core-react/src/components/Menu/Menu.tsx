@@ -1,5 +1,5 @@
-import { useEffect, useRef, HTMLAttributes, forwardRef } from 'react'
-import styled, { css } from 'styled-components'
+import { useEffect, HTMLAttributes, forwardRef, useState } from 'react'
+import styled from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
@@ -23,15 +23,11 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   width: fit-content;
   min-width: fit-content;
   ${bordersTemplate(tokens.border)};
-
-  ${({ open }) =>
-    css({
-      visibility: open ? 'visible' : 'hidden',
-    })};
 `
 type MenuContainerProps = MenuProps & {
-  containerRef: React.MutableRefObject<HTMLDivElement>
+  containerEl: HTMLElement
 }
+
 const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
   function MenuContainer(
     {
@@ -39,7 +35,7 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       anchorEl,
       onClose: onCloseCallback,
       open,
-      containerRef,
+      containerEl,
       ...rest
     },
     ref,
@@ -52,7 +48,7 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       }
     })
 
-    useOutsideClick(containerRef, (e: MouseEvent) => {
+    useOutsideClick(containerEl, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
         onClose()
       }
@@ -89,11 +85,11 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   { anchorEl, open, placement = 'auto', ...rest },
   ref,
 ) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [containerEl, setContainerEl] = useState<HTMLElement>(null)
 
   const { styles, attributes } = usePopper(
     anchorEl,
-    containerRef.current,
+    containerEl,
     null,
     placement,
     4,
@@ -109,14 +105,18 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     ...rest,
     anchorEl,
     open,
-    containerRef,
+    containerEl,
   }
 
   return (
-    <MenuPaper elevation="raised" ref={containerRef} {...props}>
-      <MenuProvider>
-        <MenuContainer {...menuProps} ref={ref} />
-      </MenuProvider>
-    </MenuPaper>
+    <>
+      {open && (
+        <MenuPaper elevation="raised" ref={setContainerEl} {...props}>
+          <MenuProvider>
+            <MenuContainer {...menuProps} ref={ref} />
+          </MenuProvider>
+        </MenuPaper>
+      )}
+    </>
   )
 })
