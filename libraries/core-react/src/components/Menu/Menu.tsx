@@ -1,11 +1,4 @@
-import {
-  useEffect,
-  HTMLAttributes,
-  forwardRef,
-  useState,
-  useRef,
-  MutableRefObject,
-} from 'react'
+import { useEffect, HTMLAttributes, forwardRef, useState } from 'react'
 import styled from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
@@ -15,7 +8,6 @@ import {
   usePopper,
   Placement,
   useGlobalKeyPress,
-  useCombinedRefs,
 } from '../../hooks'
 import { bordersTemplate } from '../../utils'
 import { menu as tokens } from './Menu.tokens'
