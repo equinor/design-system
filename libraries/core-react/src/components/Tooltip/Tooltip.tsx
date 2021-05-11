@@ -18,7 +18,6 @@ import {
   usePopper,
   Placement,
   useId,
-  useCombinedRefs,
   useGlobalKeyPress,
   useIsMounted,
 } from '../../hooks'
@@ -32,10 +31,7 @@ const StyledTooltip = styled.div<{ open: boolean }>`
   background: ${tokens.background};
   z-index: 350;
   white-space: nowrap;
-  ${({ open }) =>
-    css({
-      visibility: open ? 'visible' : 'hidden',
-    })};
+
   .arrow {
     z-index: -1;
     width: ${tokens.entities.arrow.width};
@@ -109,7 +105,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     ref,
   ) {
     const isMounted = useIsMounted()
-    const popperRef = useCombinedRefs(useRef<HTMLDivElement | null>(null), ref)
+    const [popperEl, setPopperEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
     const anchorRef = useRef<HTMLDivElement>()
@@ -148,7 +144,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const { styles, attributes } = usePopper(
       anchorRef.current,
-      popperRef.current,
+      popperEl,
       arrowRef,
       placement,
       14,
@@ -174,11 +170,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     return (
       <>
         {shouldOpen &&
+          open &&
           ReactDom.createPortal(
             <StyledTooltip
               id={tooltipId}
               role="tooltip"
-              ref={popperRef}
+              ref={setPopperEl}
               style={styles.popper}
               {...props}
             >
