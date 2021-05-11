@@ -31,9 +31,11 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
-    const tooltip = screen.getByRole('tooltip')
 
-    await waitFor(() => expect(tooltip).toHaveStyleRule('background', 'red'))
+    await waitFor(() => {
+      const tooltip = screen.getByRole('tooltip')
+      expect(tooltip).toHaveStyleRule('background', 'red')
+    })
   })
   it('is visible when content is being hovered', async () => {
     render(
@@ -45,10 +47,10 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
     fireEvent.mouseOver(content)
     await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
-
-    const tooltip = screen.getByRole('tooltip')
-    expect(tooltip).toHaveStyleRule('visibility', 'visible')
-    expect(tooltip).toHaveAttribute('data-popper-placement', 'right-start')
+    await waitFor(() => {
+      const tooltip = screen.getByRole('tooltip')
+      expect(tooltip).toHaveAttribute('data-popper-placement', 'right-start')
+    })
   })
   it('renders with a correct title', async () => {
     render(
@@ -61,10 +63,11 @@ describe('Tooltip', () => {
 
     fireEvent.mouseOver(content)
     await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
-
-    const tooltip = screen.getByRole('tooltip')
-    expect(content).toBeDefined()
-    expect(tooltip).toBeDefined()
+    await waitFor(() => {
+      const tooltip = screen.getByRole('tooltip')
+      expect(content).toBeDefined()
+      expect(tooltip).toBeDefined()
+    })
   })
   it('renders on focus', async () => {
     render(
@@ -77,9 +80,9 @@ describe('Tooltip', () => {
 
     fireEvent.focusIn(content)
     await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
-
-    const tooltip = screen.getByRole('tooltip')
-    expect(tooltip).toHaveStyleRule('visibility', 'visible')
+    await waitFor(() => {
+      expect(screen.getByRole('tooltip')).toBeDefined()
+    })
   })
   it('shows after correct delay', async () => {
     render(
@@ -93,15 +96,13 @@ describe('Tooltip', () => {
     fireEvent.mouseOver(content)
 
     await act(() => new Promise((r) => setTimeout(r, 200)))
-
-    const hiddenTooltip = screen.getByRole('tooltip', { hidden: true })
-    expect(hiddenTooltip).toBeDefined()
-    expect(hiddenTooltip).toHaveStyleRule('visibility', 'hidden')
+    expect(screen.queryByText('Tooltip')).not.toBeInTheDocument()
 
     await act(() => new Promise((r) => setTimeout(r, 300)))
-
-    const tooltip = screen.getByRole('tooltip')
-    expect(content).toBeDefined()
-    expect(tooltip).toBeDefined()
+    await waitFor(() => {
+      const tooltip = screen.getByRole('tooltip')
+      expect(content).toBeDefined()
+      expect(tooltip).toBeDefined()
+    })
   })
 })
