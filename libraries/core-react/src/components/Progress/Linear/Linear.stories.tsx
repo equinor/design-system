@@ -18,7 +18,7 @@ export default {
 
 export const Default: Story<LinearProgressProps> = (args) => {
   const { value = 0, variant } = args
-  const progress = variant === 'indeterminate' ? null : useMockProgress(value)
+  const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
   return <Progress.Linear value={progress} {...args} />
 }

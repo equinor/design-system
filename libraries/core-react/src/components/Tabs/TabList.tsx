@@ -80,7 +80,8 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   const Tabs = ReactChildren.map(children, (child: TabChild, index: number) => {
     const tabRef =
       index === activeTab
-        ? useCombinedRefs<HTMLButtonElement>(child.ref, selectedTabRef)
+        ? // eslint-disable-next-line react-hooks/rules-of-hooks
+          useCombinedRefs<HTMLButtonElement>(child.ref, selectedTabRef)
         : child.ref
 
     return cloneElement(child, {
