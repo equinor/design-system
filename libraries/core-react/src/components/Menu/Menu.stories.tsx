@@ -156,6 +156,7 @@ export const Complex: Story<MenuProps> = () => {
       >
         Click to open Menu!
       </Button>
+
       <Menu
         id="menu-complex"
         aria-labelledby="menuButton"

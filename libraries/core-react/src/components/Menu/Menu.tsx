@@ -33,7 +33,7 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   ${bordersTemplate(tokens.border)};
 `
 type MenuContainerProps = MenuProps & {
-  containerRef: MutableRefObject<HTMLElement>
+  containerEl: HTMLElement
 }
 
 const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
@@ -43,7 +43,7 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       anchorEl,
       onClose: onCloseCallback,
       open,
-      containerRef,
+      containerEl,
       ...rest
     },
     ref,
@@ -56,7 +56,7 @@ const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
       }
     })
 
-    useOutsideClick(containerRef, (e: MouseEvent) => {
+    useOutsideClick(containerEl, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
         onClose()
       }
@@ -94,13 +94,11 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   ref,
 ) {
   const [open, setOpen] = useState(openProp)
-  const [containerElement, setContainerElement] = useState<HTMLElement>(null)
-  const containerRef = useRef<HTMLElement>(null)
-  const combinedRefs = useCombinedRefs(setContainerElement, containerRef)
+  const [containerEl, setContainerEl] = useState<HTMLElement>(null)
 
   const { styles, attributes } = usePopper(
     anchorEl,
-    containerElement,
+    containerEl,
     null,
     placement,
     4,
@@ -122,19 +120,13 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     ...rest,
     anchorEl,
     open,
-    containerRef,
-    //containerRef: (setContainerElement as unknown) as MutableRefObject<HTMLElement>,
-    //containerRef: combinedRefs,
+    containerEl,
   }
 
   return (
     <>
       {open && (
-        <MenuPaper
-          elevation="raised"
-          ref={combinedRefs as React.Ref<HTMLDivElement>}
-          {...props}
-        >
+        <MenuPaper elevation="raised" ref={setContainerEl} {...props}>
           <MenuProvider>
             <MenuContainer {...menuProps} ref={ref} />
           </MenuProvider>

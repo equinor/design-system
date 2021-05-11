@@ -31,7 +31,7 @@ export const usePopper = (
   if (placement === undefined) {
     placement = 'auto'
   }
-
+  console.log('a', anchorEl, 'p', popperEl)
   const { styles, attributes } = reactPopper(anchorEl, popperEl, {
     placement,
     modifiers: [
