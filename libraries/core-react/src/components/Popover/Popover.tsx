@@ -1,5 +1,5 @@
-import { forwardRef, useRef, useState, HTMLAttributes, SVGProps } from 'react'
-import styled, { css } from 'styled-components'
+import { forwardRef, useState, HTMLAttributes, SVGProps } from 'react'
+import styled from 'styled-components'
 import { Icon } from '../Icon'
 import { Paper } from '../Paper'
 import { Button } from '../Button'
@@ -14,7 +14,6 @@ import {
   useOutsideClick,
   Placement,
   useGlobalKeyPress,
-  useCombinedRefs,
 } from '../../hooks'
 import { popover as tokens } from './Popover.tokens'
 
@@ -35,11 +34,6 @@ const StyledPopover = styled(Paper)<StyledPopoverProps>`
   min-height: ${tokens.minHeight};
   ${bordersTemplate(tokens.border)}
   z-index: 100;
-
-  ${({ open }) =>
-    css({
-      visibility: open ? 'visible' : 'hidden',
-    })};
 
   .arrow {
     z-index: -1;
@@ -152,28 +146,36 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }
 
     return (
-      <StyledPopover
-        ref={setPopperEl}
-        elevation="overlay"
-        style={styles.popper}
-        {...props}
-        data-testid="popover"
-      >
-        <ArrowWrapper ref={setArrowRef} style={styles.arrow} className="arrow">
-          <PopoverArrow className="arrowSvg">
-            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-          </PopoverArrow>
-        </ArrowWrapper>
+      <>
+        {open && (
+          <StyledPopover
+            ref={setPopperEl}
+            elevation="overlay"
+            style={styles.popper}
+            {...props}
+            data-testid="popover"
+          >
+            <ArrowWrapper
+              ref={setArrowRef}
+              style={styles.arrow}
+              className="arrow"
+            >
+              <PopoverArrow className="arrowSvg">
+                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+              </PopoverArrow>
+            </ArrowWrapper>
 
-        {children}
-        <StyledCloseButton
-          onClick={onClose}
-          variant="ghost_icon"
-          data-testid="popover-close"
-        >
-          <Icon name="close" data={close} title="close" size={24} />
-        </StyledCloseButton>
-      </StyledPopover>
+            {children}
+            <StyledCloseButton
+              onClick={onClose}
+              variant="ghost_icon"
+              data-testid="popover-close"
+            >
+              <Icon name="close" data={close} title="close" size={24} />
+            </StyledCloseButton>
+          </StyledPopover>
+        )}
+      </>
     )
   },
 )
