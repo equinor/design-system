@@ -174,7 +174,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     return (
       <>
         {shouldOpen &&
-          open &&
           ReactDom.createPortal(
             <StyledTooltip
               id={tooltipId}
