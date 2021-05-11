@@ -124,9 +124,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     { children, placement = 'bottom', anchorEl, open, onClose, ...rest },
     ref,
   ) {
-    const popperRef = useRef<HTMLDivElement | null>(null)
+    const [popperEl, setPopperEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
-    useOutsideClick(popperRef.current, (e: MouseEvent) => {
+    useOutsideClick(popperEl, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
         onClose()
       }
@@ -140,7 +140,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const { styles, attributes } = usePopper(
       anchorEl,
-      popperRef.current,
+      popperEl,
       arrowRef,
       placement,
     )
@@ -153,7 +153,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return (
       <StyledPopover
-        ref={useCombinedRefs(popperRef, ref)}
+        ref={setPopperEl}
         elevation="overlay"
         style={styles.popper}
         {...props}
