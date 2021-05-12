@@ -66,6 +66,7 @@ export const Default: Story<TextFieldProps> = (args) => (
     helperText="Helper text"
     style={{ resize: 'none' }}
     rows={3}
+    rowsMax={7}
     {...args}
   ></TextField>
 )
@@ -137,6 +138,16 @@ export const Multiline: Story<TextFieldProps> = () => (
       style={{ resize: 'none' }}
       rows={3}
       inputIcon={<Icon name="warning_filled" />}
+    />
+    <div style={{ height: '2rem' }} />
+    <TextField
+      id="storybook-multiline-three"
+      placeholder="Placeholder text"
+      label="Multiline with rowsMax"
+      multiline
+      style={{ resize: 'none' }}
+      rows={3}
+      rowsMax={10}
     />
   </>
 )

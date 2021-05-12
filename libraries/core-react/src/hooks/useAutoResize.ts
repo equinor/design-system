@@ -5,24 +5,20 @@ export const useAutoResize = (
   targetEl: HTMLElement,
   // Height in pixels
   maxHeight?: number,
-): number => {
+): void => {
   let newHeight = 0
 
   useEffect(() => {
     const handleResize = () => {
+      targetEl.style.height = 'auto'
       newHeight = targetEl.clientHeight
-      console.log(targetEl, maxHeight)
       if (!maxHeight || maxHeight > newHeight) {
         newHeight = Math.max(targetEl.scrollHeight, newHeight)
-        console.log('first call', newHeight)
-
         if (maxHeight) {
           newHeight = Math.min(maxHeight, newHeight)
-          console.log('maxheight is set', newHeight)
         }
         if (newHeight > targetEl.clientHeight) {
           targetEl.style.height = `${newHeight}px`
-          console.log('newheight added to style', newHeight)
         }
       }
     }
@@ -32,6 +28,4 @@ export const useAutoResize = (
       targetEl?.removeEventListener('keyup', handleResize, true)
     }
   }, [targetEl, maxHeight])
-
-  return newHeight
 }
