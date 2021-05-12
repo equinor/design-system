@@ -6,12 +6,10 @@ export const useAutoResize = (
   // Height in pixels
   maxHeight?: number,
 ): void => {
-  let newHeight = 0
-
   useEffect(() => {
     const handleResize = () => {
       targetEl.style.height = 'auto'
-      newHeight = targetEl.clientHeight
+      let newHeight = targetEl.clientHeight
       if (!maxHeight || maxHeight > newHeight) {
         newHeight = Math.max(targetEl.scrollHeight, newHeight)
         if (maxHeight) {
