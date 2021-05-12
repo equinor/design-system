@@ -8,7 +8,6 @@ import styled, { css } from 'styled-components'
 import { typographyTemplate, outlineTemplate } from '../../utils'
 import { useAutoResize } from '../../hooks'
 import * as tokens from './TextField.tokens'
-import { composeP } from 'ramda'
 
 const { textfield } = tokens
 
