@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.2] - 2021-05-XX
+
+### Fixed 🐛
+
+- `Menu` does did not respect anchor position if used with conditional rendering [(#1330)](https://github.com/equinor/design-system/issues/1330)
+- Wrong `Tooltip` position if surrounding content would skew its anchor element [(#1331)](https://github.com/equinor/design-system/issues/1331)
+
+### Changed
+
+- `Menu` now uses conditional rendering [(#1330)](https://github.com/equinor/design-system/issues/1330)
+- `Tooltip` now uses conditional rendering [(#1341)](https://github.com/equinor/design-system/issues/1341)
+- `Popover` now uses conditional rendering [(#1340)](https://github.com/equinor/design-system/issues/1340)
+
 ## [0.11.1] - 2021-05-06
 
 ### Fixed 🐛
