@@ -36,10 +36,10 @@ describe('Popover', () => {
       </TestPopover>,
     )
     const container = screen.getByTestId('popover')
-    await waitFor(() =>
-      expect(container).toHaveStyleRule('visibility', 'visible'),
-    )
-    expect(container).toHaveAttribute('data-popper-placement', 'right-start')
+    await waitFor(() => {
+      expect(container).toBeDefined()
+      expect(container).toHaveAttribute('data-popper-placement', 'right-start')
+    })
   })
 
   it('has rendered Popover Title', async () => {
@@ -77,27 +77,27 @@ describe('Popover', () => {
   })
   it("doesn't crash if no children is provided to Popover component", async () => {
     const placement = 'top'
-    const { queryByText } = render(<TestPopover placement={placement} />)
-    await waitFor(() => expect(queryByText(placement)).toBeDefined())
+    render(<TestPopover placement={placement} />)
+    await waitFor(() => expect(screen.queryByText(placement)).toBeDefined())
   })
   it("doesn't crash if Popover Content children is undefined", async () => {
     const placement = 'top'
-    const { queryByText } = render(
+    render(
       <TestPopover placement={placement}>
         <Popover.Title>Title</Popover.Title>
         <Popover.Content></Popover.Content>
       </TestPopover>,
     )
-    await waitFor(() => expect(queryByText(placement)).toBeDefined())
+    await waitFor(() => expect(screen.queryByText(placement)).toBeDefined())
   })
   it("doesn't crash if Popover Title children is undefined", async () => {
     const placement = 'top'
-    const { queryByText } = render(
+    render(
       <TestPopover placement={placement}>
         <Popover.Title></Popover.Title>
         <Popover.Content>Content</Popover.Content>
       </TestPopover>,
     )
-    await waitFor(() => expect(queryByText(placement)).toBeDefined())
+    await waitFor(() => expect(screen.queryByText(placement)).toBeDefined())
   })
 })
