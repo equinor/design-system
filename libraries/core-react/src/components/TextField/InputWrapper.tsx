@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode, forwardRef } from 'react'
+import { InputHTMLAttributes, ReactNode, forwardRef, useState } from 'react'
 import { useTextField } from './context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
@@ -6,7 +6,9 @@ import type { Variants } from './types'
 import type { TextFieldToken } from './TextField.tokens'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, outlineTemplate } from '../../utils'
+import { useAutoResize } from '../../hooks'
 import * as tokens from './TextField.tokens'
+import { composeP } from 'ramda'
 
 const { textfield } = tokens
 
@@ -105,7 +107,7 @@ const Adornments = styled.div<AdornmentsType>`
 `
 
 type InputWrapperProps = {
-  /** Specifies if text should be bold */
+  /** Specifies if input should be multiline*/
   multiline?: boolean
   /** Placeholder */
   placeholder?: string
@@ -121,14 +123,17 @@ type InputWrapperProps = {
   unit?: string
   /* Input icon */
   inputIcon?: ReactNode
+  /** Specifies max rows for multiline input */
+  rowsMax?: number
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
   function InputWrapper(
-    { multiline, variant, disabled, type, unit, inputIcon, ...other },
+    { multiline, variant, disabled, type, unit, inputIcon, rowsMax, ...other },
     ref,
   ) {
     const { handleFocus, handleBlur, isFocused } = useTextField()
+    const [inputEl, setInputEl] = useState<HTMLInputElement>(null)
 
     const actualVariant = variant === 'default' ? 'textfield' : variant
     const inputVariant = tokens[actualVariant]
@@ -139,6 +144,15 @@ export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
       disabled,
       variant,
       ...other,
+    }
+
+    if (multiline) {
+      const lineHeight = 1.5
+      const fontSize = 16
+      const maxHeight = lineHeight * fontSize * 5 // TODO: Add rowsMax here
+
+      useAutoResize(inputEl, maxHeight)
+      console.log('hei')
     }
 
     return (
@@ -154,6 +168,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
               onBlur={handleBlur}
               onFocus={handleFocus}
               {...inputProps}
+              ref={setInputEl}
             />
             <Adornments multiline={multiline}>
               {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
@@ -165,7 +180,12 @@ export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
             </Adornments>
           </InputWithAdornments>
         ) : (
-          <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
+          <Input
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            {...inputProps}
+            ref={setInputEl}
+          />
         )}
       </>
     )
