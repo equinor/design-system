@@ -200,7 +200,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 ) {
   const isControlled = typeof value !== 'undefined'
   const isActive = (isControlled && value !== '') || defaultValue !== ''
-  const inputRef = useCombinedRefs(useRef<HTMLInputElement>(null), ref)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const [state, setState] = useState({
     isActive,
@@ -209,7 +209,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 
   useEffect(() => {
     setState((prevState) => ({ ...prevState, isActive }))
-  }, [value, defaultValue])
+  }, [value, defaultValue, isActive])
 
   const handleOnClick = () => {
     const inputEl = inputRef.current
@@ -267,7 +267,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     {
       ...rest,
       disabled,
-      ref: inputRef,
+      ref: useCombinedRefs<HTMLInputElement>(inputRef, ref),
       type: 'search',
       role: 'searchbox',
       'aria-label': 'search input',
