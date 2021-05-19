@@ -4,6 +4,8 @@ import {
   forwardRef,
   TextareaHTMLAttributes,
   FocusEventHandler,
+  Ref,
+  ForwardedRef,
 } from 'react'
 import { useTextField } from './context'
 import { Input } from '../Input'
@@ -140,13 +142,10 @@ type InputWrapperProps = {
   inputIcon?: ReactNode
   /** Specifies max rows for multiline input */
   rowsMax?: number
-} & (
-  | InputHTMLAttributes<HTMLInputElement>
-  | TextareaHTMLAttributes<HTMLTextAreaElement>
-)
+}
 
 export const InputWrapper = forwardRef<
-  HTMLInputElement | HTMLTextAreaElement,
+  HTMLTextAreaElement | HTMLInputElement,
   InputWrapperProps
 >(function InputWrapper(
   {

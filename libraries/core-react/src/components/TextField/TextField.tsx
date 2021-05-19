@@ -3,6 +3,7 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   forwardRef,
+  Ref,
 } from 'react'
 import styled from 'styled-components'
 import { InputWrapper } from './InputWrapper'
@@ -40,7 +41,7 @@ export type TextFieldProps = {
   /** Specifies max rows for multiline input */
   rowsMax?: number
   /** Input ref */
-  inputRef?: React.Ref<HTMLInputElement>
+  inputRef?: Ref<HTMLInputElement> | Ref<HTMLTextAreaElement>
   /** InputIcon */
   inputIcon?: ReactNode
   /** HelperIcon */
