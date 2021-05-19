@@ -1,4 +1,4 @@
-import { ElementType, InputHTMLAttributes, forwardRef } from 'react'
+import { InputHTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import * as tokens from './Input.tokens'
 import type { InputToken } from './Input.tokens'
@@ -82,8 +82,6 @@ const StyledInput = styled.input<StyledProps>`
 `
 
 export type InputProps = {
-  /** Specifies if text should be bold */
-  multiline?: boolean
   /** Placeholder */
   placeholder?: string
   /** Variant */
@@ -97,21 +95,13 @@ export type InputProps = {
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    multiline = false,
-    variant = 'default',
-    disabled = false,
-    type = 'text',
-    ...other
-  },
+  { variant = 'default', disabled = false, type = 'text', ...other },
   ref,
 ) {
-  const as: ElementType = multiline ? 'textarea' : 'input'
   const inputVariant = inputVariants[variant]
   const spacings = tokens.comfortable.spacings
 
   const inputProps = {
-    as,
     ref,
     type,
     disabled,

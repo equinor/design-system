@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 
 export const useAutoResize = (
-  // Should element resize ?
-  resize: boolean,
   // Target element to resize
   targetEl: HTMLElement,
   // Height in pixels
@@ -23,12 +21,10 @@ export const useAutoResize = (
       }
     }
 
-    if (resize) {
-      targetEl?.addEventListener('keyup', handleResize, true)
-    }
+    targetEl?.addEventListener('keyup', handleResize, true)
 
     return () => {
       targetEl?.removeEventListener('keyup', handleResize, true)
     }
-  }, [targetEl, maxHeight, resize])
+  }, [targetEl, maxHeight])
 }

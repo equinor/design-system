@@ -1,6 +1,6 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState, TextareaHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import * as tokens from '../Input/Input.tokens'
+import * as inputTokens from '../Input/Input.tokens'
 import type { InputToken } from '../Input/Input.tokens'
 import {
   typographyTemplate,
@@ -9,9 +9,9 @@ import {
 } from '../../utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
-import { TextareaHTMLAttributes } from 'react'
+import { useAutoResize } from '../../hooks'
 
-const { input, inputVariants } = tokens
+const { input, inputVariants } = inputTokens
 
 const Variation = ({
   variant,
@@ -93,32 +93,47 @@ export type TextareaProps = {
   type?: string
   /** Read Only */
   readonly?: boolean
+  /** Specifies max rows for multiline input */
+  rowsMax?: number
 } & TextareaHTMLAttributes<HTMLTextAreaElement>
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
     {
-      multiline = false,
       variant = 'default',
       disabled = false,
       type = 'text',
+      rowsMax = 2,
       ...other
     },
     ref,
   ) {
-    const textareaVariant = inputVariants[variant]
-    const spacings = tokens.comfortable.spacings
+    const inputVariant = inputVariants[variant]
+    const spacings = inputTokens.comfortable.spacings
+    const [inputEl, setInputEl] = useState<HTMLTextAreaElement>(null)
+
+    const { lineHeight } = inputTokens.input.typography
+    const { top, bottom } = inputTokens.comfortable.spacings
+    let fontSize = 16
+
+    if (inputEl) {
+      fontSize = parseInt(window.getComputedStyle(inputEl).fontSize)
+    }
+
+    const padding = parseInt(top) + parseInt(bottom)
+    const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
+    useAutoResize(inputEl, maxHeight)
 
     const inputProps = {
       ref,
       type,
       disabled,
       variant,
-      token: textareaVariant,
+      token: inputVariant,
       spacings,
       ...other,
     }
 
-    return <StyledTextarea {...inputProps} />
+    return <StyledTextarea {...inputProps} ref={setInputEl} />
   },
 )

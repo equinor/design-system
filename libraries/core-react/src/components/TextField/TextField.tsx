@@ -49,10 +49,12 @@ export type TextFieldProps = {
   value?: string
   /** Read Only */
   readOnly?: boolean
-} & InputHTMLAttributes<HTMLInputElement> &
-  TextareaHTMLAttributes<HTMLTextAreaElement>
+} & (
+  | InputHTMLAttributes<HTMLInputElement>
+  | TextareaHTMLAttributes<HTMLTextAreaElement>
+)
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   function TextField(
     {
       id,
