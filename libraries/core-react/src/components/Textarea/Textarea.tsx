@@ -1,6 +1,6 @@
 import { forwardRef, useState, TextareaHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import * as inputTokens from '../Input/Input.tokens'
+import * as tokens from '../Input/Input.tokens'
 import type { InputToken } from '../Input/Input.tokens'
 import {
   typographyTemplate,
@@ -11,7 +11,7 @@ import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
 import { useAutoResize } from '../../hooks'
 
-const { input, inputVariants } = inputTokens
+const { input, inputVariants } = tokens
 
 const Variation = ({
   variant,
@@ -109,11 +109,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ref,
   ) {
     const inputVariant = inputVariants[variant]
-    const spacings = inputTokens.comfortable.spacings
+    const spacings = tokens.comfortable.spacings
     const [inputEl, setInputEl] = useState<HTMLTextAreaElement>(null)
 
-    const { lineHeight } = inputTokens.input.typography
-    const { top, bottom } = inputTokens.comfortable.spacings
+    const { lineHeight } = tokens.input.typography
+    const { top, bottom } = tokens.comfortable.spacings
     let fontSize = 16
 
     if (inputEl) {

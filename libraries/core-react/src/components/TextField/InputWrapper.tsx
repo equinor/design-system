@@ -1,4 +1,10 @@
-import { ReactNode, forwardRef, Ref } from 'react'
+import {
+  ReactNode,
+  forwardRef,
+  Ref,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+} from 'react'
 import { useTextField } from './context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
