@@ -37,6 +37,8 @@ export type TextFieldProps = {
   disabled?: boolean
   /** Multiline input */
   multiline?: boolean
+  /** Specifies max rows for multiline input */
+  rowsMax?: number
   /** Input ref */
   inputRef?: React.Ref<HTMLInputElement>
   /** InputIcon */
@@ -66,6 +68,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       inputRef,
       inputIcon,
       helperIcon,
+      rowsMax,
       ...other
     },
     ref,
@@ -79,6 +82,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ref: inputRef,
       inputIcon,
       unit,
+      rowsMax,
       ...other,
     }
 
