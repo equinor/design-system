@@ -164,8 +164,9 @@ export const InputWrapper = forwardRef<
 
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
+
   const inputProps = {
-    ref,
+    ref: ref as Ref<HTMLInputElement>,
     type,
     disabled,
     variant,
@@ -175,6 +176,7 @@ export const InputWrapper = forwardRef<
   const textareaProps = {
     ...inputProps,
     rowsMax,
+    ref: ref as Ref<HTMLTextAreaElement>,
   }
 
   return (
