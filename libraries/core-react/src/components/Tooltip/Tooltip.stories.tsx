@@ -111,7 +111,9 @@ export const OnTableCells: Story<TooltipProps> = () => {
 }
 OnTableCells.parameters = {
   docs: {
-    storyDescription: 'Example of how `Tooltip` can be used on `Table.Cell`',
+    description: {
+      story: 'Example of how `Tooltip` can be used on `Table.Cell`',
+    },
   },
 }
 
@@ -133,7 +135,9 @@ export const LonglistWithTooltips: Story<TooltipProps> = () => {
 }
 LonglistWithTooltips.parameters = {
   docs: {
-    storyDescription:
-      'Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible`',
+    description: {
+      story:
+        'Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible',
+    },
   },
 }
