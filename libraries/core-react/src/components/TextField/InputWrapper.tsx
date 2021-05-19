@@ -155,19 +155,18 @@ export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
       ...other,
     }
 
-    if (multiline) {
-      const { lineHeight } = inputTokens.typography
-      const { top, bottom } = comfortable.spacings
-      let fontSize = 16
+    // autoresize logic:
+    const { lineHeight } = inputTokens.typography
+    const { top, bottom } = comfortable.spacings
+    let fontSize = 16
 
-      if (inputEl) {
-        fontSize = parseInt(window.getComputedStyle(inputEl).fontSize)
-      }
-
-      const padding = parseInt(top) + parseInt(bottom)
-      const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
-      useAutoResize(inputEl, maxHeight)
+    if (inputEl) {
+      fontSize = parseInt(window.getComputedStyle(inputEl).fontSize)
     }
+
+    const padding = parseInt(top) + parseInt(bottom)
+    const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
+    useAutoResize(multiline, inputEl, maxHeight)
 
     return (
       <>
