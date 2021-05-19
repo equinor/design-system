@@ -82,7 +82,6 @@ export const Default: Story<MenuProps> = (args) => {
       <Button
         ref={anchorRef}
         id="anchor-default"
-        aria-controls="menu-default"
         aria-haspopup="true"
         aria-expanded={isOpen}
         onClick={() => (isOpen ? closeMenu() : openMenu(null))}

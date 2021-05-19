@@ -87,6 +87,20 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 ) {
   const [containerEl, setContainerEl] = useState<HTMLElement>(null)
 
+  useEffect(() => {
+    if (anchorEl && open) {
+      anchorEl.setAttribute('aria-controls', rest.id)
+    }
+    if (anchorEl && !open) {
+      anchorEl.removeAttribute('aria-controls')
+    }
+    return () => {
+      if (anchorEl && !open) {
+        anchorEl.removeAttribute('aria-controls')
+      }
+    }
+  }, [rest.id, anchorEl, open])
+
   const { styles, attributes } = usePopper(
     anchorEl,
     containerEl,
