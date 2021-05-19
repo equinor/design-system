@@ -125,7 +125,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     useAutoResize(inputEl, maxHeight)
 
     const inputProps = {
-      ref,
+      ref: setInputEl,
       type,
       disabled,
       variant,
@@ -134,6 +134,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...other,
     }
 
-    return <StyledTextarea {...inputProps} ref={setInputEl} />
+    return <StyledTextarea {...inputProps} />
   },
 )
