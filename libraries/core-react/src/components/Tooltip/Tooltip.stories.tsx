@@ -14,23 +14,22 @@ const StoryCenter = styled.div({
 export default {
   title: 'Components/Tooltip',
   component: Tooltip,
-  argTypes: {
-    title: {
-      defaultValue: 'Explore more actions',
-    },
-  },
 } as Meta
 
 export const Default: Story<TooltipProps> = (args) => (
   <StoryCenter>
     <Tooltip {...args}>
       <Button variant="ghost_icon">
-        <Icon data={explore}></Icon>
+        <Icon data={explore} title="explore"></Icon>
       </Button>
     </Tooltip>
   </StoryCenter>
 )
 
+Default.bind({})
+Default.args = {
+  title: 'Explore more actions',
+}
 export const WithDelay: Story<TooltipProps> = () => {
   return (
     <StoryCenter>
@@ -42,10 +41,11 @@ export const WithDelay: Story<TooltipProps> = () => {
     </StoryCenter>
   )
 }
-
 WithDelay.parameters = {
   docs: {
-    storyDescription: 'Tooltip opening is delayed with `300ms`',
+    description: {
+      story: 'Tooltip opening is delayed with `300ms`',
+    },
   },
 }
 

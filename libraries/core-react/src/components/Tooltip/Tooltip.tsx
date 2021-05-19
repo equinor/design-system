@@ -8,7 +8,7 @@ import {
   cloneElement,
 } from 'react'
 import * as ReactDom from 'react-dom'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import {
   spacingsTemplate,
   typographyTemplate,
@@ -20,6 +20,7 @@ import {
   useId,
   useGlobalKeyPress,
   useIsMounted,
+  useCombinedRefs,
 } from '../../hooks'
 import { tooltip as tokens } from './Tooltip.tokens'
 
@@ -109,10 +110,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
     const anchorRef = useRef<HTMLDivElement>()
-    const containerId = 'eds-tooltip-container'
-    const tooltipId = useId(id, 'tooltip')
-    const shouldOpen = isMounted && title !== ''
     const openTimer = useRef<number>()
+    const tooltipRef = useCombinedRefs<HTMLDivElement>(setPopperEl, ref)
+    const tooltipId = useId(id, 'tooltip')
+    const containerId = 'eds-tooltip-container'
+    const shouldOpen = isMounted && title !== ''
 
     useEffect(() => {
       if (document.getElementById(containerId) === null) {
@@ -175,7 +177,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             <StyledTooltip
               id={tooltipId}
               role="tooltip"
-              ref={setPopperEl}
+              ref={tooltipRef}
               style={styles.popper}
               {...props}
             >
