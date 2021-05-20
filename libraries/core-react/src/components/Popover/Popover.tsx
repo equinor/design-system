@@ -1,5 +1,6 @@
 import { forwardRef, useState, HTMLAttributes, SVGProps } from 'react'
-import styled from 'styled-components'
+import * as ReactDom from 'react-dom'
+import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { Paper } from '../Paper'
 import { Button } from '../Button'
@@ -14,12 +15,15 @@ import {
   useOutsideClick,
   Placement,
   useGlobalKeyPress,
+  useCombinedRefs,
+  useIsMounted,
 } from '../../hooks'
 import { popover as tokens } from './Popover.tokens'
 
 type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
-const StyledPopover = styled(Paper)<StyledPopoverProps>`
+const PopoverPaper = styled(Paper)<StyledPopoverProps>`
+  ${({ open }) => css({ visibility: open ? null : 'hidden' })}
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   display: grid;
@@ -120,6 +124,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) {
     const [popperEl, setPopperEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
+    const popoverRef = useCombinedRefs(ref, setPopperEl)
+    const isMounted = useIsMounted()
+
     useOutsideClick(popperEl, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
         onClose()
@@ -147,34 +154,37 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return (
       <>
-        {open && (
-          <StyledPopover
-            ref={setPopperEl}
-            elevation="overlay"
-            style={styles.popper}
-            {...props}
-            data-testid="popover"
-          >
-            <ArrowWrapper
-              ref={setArrowRef}
-              style={styles.arrow}
-              className="arrow"
+        {isMounted &&
+          ReactDom.createPortal(
+            <PopoverPaper
+              ref={popoverRef}
+              elevation="overlay"
+              style={styles.popper}
+              data-testid="popover"
+              role="presentation"
+              {...props}
             >
-              <PopoverArrow className="arrowSvg">
-                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-              </PopoverArrow>
-            </ArrowWrapper>
+              <ArrowWrapper
+                ref={setArrowRef}
+                style={styles.arrow}
+                className="arrow"
+              >
+                <PopoverArrow className="arrowSvg">
+                  <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+                </PopoverArrow>
+              </ArrowWrapper>
 
-            {children}
-            <StyledCloseButton
-              onClick={onClose}
-              variant="ghost_icon"
-              data-testid="popover-close"
-            >
-              <Icon name="close" data={close} title="close" size={24} />
-            </StyledCloseButton>
-          </StyledPopover>
-        )}
+              {children}
+              <StyledCloseButton
+                onClick={onClose}
+                variant="ghost_icon"
+                data-testid="popover-close"
+              >
+                <Icon name="close" data={close} title="close" size={24} />
+              </StyledCloseButton>
+            </PopoverPaper>,
+            document.body,
+          )}
       </>
     )
   },
