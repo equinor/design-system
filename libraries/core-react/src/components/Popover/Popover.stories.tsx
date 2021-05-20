@@ -41,6 +41,7 @@ export const Default: Story<PopoverProps> = (args) => {
   return (
     <StoryCenter>
       <Button
+        aria-haspopup
         id="default-popover-anchor"
         aria-controls="default-popover"
         aria-expanded={isOpen}
