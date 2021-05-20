@@ -40,7 +40,7 @@ export type SingleSelectProps = {
   /** Callback for the selected item change
    * changes.selectedItem gives the selected item
    */
-  /** Allow for filtering of options to be turned off */
+  /** Allow for filtering of options when one is selected to be turned off */
   disableFilter?: boolean
   handleSelectedItemChange?: (changes: UseComboboxStateChange<string>) => void
 } & SelectHTMLAttributes<HTMLSelectElement>
