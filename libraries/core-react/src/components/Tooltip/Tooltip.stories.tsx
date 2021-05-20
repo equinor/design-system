@@ -14,23 +14,22 @@ const StoryCenter = styled.div({
 export default {
   title: 'Components/Tooltip',
   component: Tooltip,
-  argTypes: {
-    title: {
-      defaultValue: 'Explore more actions',
-    },
-  },
 } as Meta
 
 export const Default: Story<TooltipProps> = (args) => (
   <StoryCenter>
     <Tooltip {...args}>
       <Button variant="ghost_icon">
-        <Icon data={explore}></Icon>
+        <Icon data={explore} title="explore"></Icon>
       </Button>
     </Tooltip>
   </StoryCenter>
 )
 
+Default.bind({})
+Default.args = {
+  title: 'Explore more actions',
+}
 export const WithDelay: Story<TooltipProps> = () => {
   return (
     <StoryCenter>
@@ -42,10 +41,11 @@ export const WithDelay: Story<TooltipProps> = () => {
     </StoryCenter>
   )
 }
-
 WithDelay.parameters = {
   docs: {
-    storyDescription: 'Tooltip opening is delayed with `300ms`',
+    description: {
+      story: 'Tooltip opening is delayed with `300ms`',
+    },
   },
 }
 
@@ -111,7 +111,9 @@ export const OnTableCells: Story<TooltipProps> = () => {
 }
 OnTableCells.parameters = {
   docs: {
-    storyDescription: 'Example of how `Tooltip` can be used on `Table.Cell`',
+    description: {
+      story: 'Example of how `Tooltip` can be used on `Table.Cell`',
+    },
   },
 }
 
@@ -133,7 +135,9 @@ export const LonglistWithTooltips: Story<TooltipProps> = () => {
 }
 LonglistWithTooltips.parameters = {
   docs: {
-    storyDescription:
-      'Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible`',
+    description: {
+      story:
+        'Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible',
+    },
   },
 }

@@ -5,6 +5,6 @@ export const useIsMounted = (): boolean => {
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
-  })
+  }, [])
   return isMounted
 }

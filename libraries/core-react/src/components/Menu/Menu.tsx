@@ -1,5 +1,6 @@
 import { useEffect, HTMLAttributes, forwardRef, useState } from 'react'
-import styled from 'styled-components'
+import * as ReactDom from 'react-dom'
+import styled, { css } from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
@@ -8,6 +9,7 @@ import {
   usePopper,
   Placement,
   useGlobalKeyPress,
+  useIsMounted,
 } from '../../hooks'
 import { bordersTemplate } from '../../utils'
 import { menu as tokens } from './Menu.tokens'
@@ -23,6 +25,7 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   width: fit-content;
   min-width: fit-content;
   ${bordersTemplate(tokens.border)};
+  ${({ open }) => css({ visibility: open ? null : 'hidden' })}
 `
 type MenuContainerProps = MenuProps & {
   containerEl: HTMLElement
@@ -86,6 +89,7 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   ref,
 ) {
   const [containerEl, setContainerEl] = useState<HTMLElement>(null)
+  const isMounted = useIsMounted()
 
   const { styles, attributes } = usePopper(
     anchorEl,
@@ -110,13 +114,15 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   return (
     <>
-      {open && (
-        <MenuPaper elevation="raised" ref={setContainerEl} {...props}>
-          <MenuProvider>
-            <MenuContainer {...menuProps} ref={ref} />
-          </MenuProvider>
-        </MenuPaper>
-      )}
+      {isMounted &&
+        ReactDom.createPortal(
+          <MenuPaper elevation="raised" ref={setContainerEl} {...props}>
+            <MenuProvider>
+              <MenuContainer {...menuProps} ref={ref} />
+            </MenuProvider>
+          </MenuPaper>,
+          document.body,
+        )}
     </>
   )
 })
