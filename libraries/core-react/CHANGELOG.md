@@ -7,16 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.11.2] - 2021-05-XX
 
+### Added
+
+- `TextField` has a new property, `rowsMax` for determining how many rows it will grow before overflow (scrollbars) show [(#1336)](https://github.com/equinor/design-system/issues/1336)
+
 ### Fixed 🐛
 
 - `Menu` does did not respect anchor position if used with conditional rendering [(#1330)](https://github.com/equinor/design-system/issues/1330)
 - Wrong `Tooltip` position if surrounding content would skew its anchor element [(#1331)](https://github.com/equinor/design-system/issues/1331)
+- Tweaks to `Menu`, `Popover` & `Tooltip` component and stories in terms of `a11y` use-cases with screen-readers [(#1352)](https://github.com/equinor/design-system/issues/1352)
 
 ### Changed
 
-- `Menu` now uses conditional rendering [(#1330)](https://github.com/equinor/design-system/issues/1330)
-- `Tooltip` now uses conditional rendering [(#1341)](https://github.com/equinor/design-system/issues/1341)
-- `Popover` now uses conditional rendering [(#1340)](https://github.com/equinor/design-system/issues/1340)
+- Improvements to `useCombinedRef` hook [(#1347)](https://github.com/equinor/design-system/issues/1347)
 
 ## [0.11.1] - 2021-05-06
 
