@@ -41,7 +41,7 @@ export type SingleSelectProps = {
    * changes.selectedItem gives the selected item
    */
   /** Allow for filtering of options to be turned off */
-  filterOptions?: boolean
+  disableFilter?: boolean
   handleSelectedItemChange?: (changes: UseComboboxStateChange<string>) => void
 } & SelectHTMLAttributes<HTMLSelectElement>
 
@@ -61,7 +61,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       initialSelectedItem,
       selectedOption,
       handleSelectedItemChange,
-      filterOptions = true,
+      disableFilter = false,
       ...other
     },
     ref,
@@ -77,7 +77,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       items: inputItems,
       onSelectedItemChange: handleSelectedItemChange,
       onInputValueChange: ({ inputValue }) => {
-        if (filterOptions) {
+        if (!disableFilter) {
           setInputItems(
             items.filter((item) =>
               item.toLowerCase().includes(inputValue.toLowerCase()),

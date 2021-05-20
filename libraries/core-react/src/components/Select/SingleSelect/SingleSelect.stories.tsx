@@ -41,11 +41,7 @@ export const ReadOnly: Story = () => (
 
 export const NoFilter: Story = () => (
   <Container>
-    <SingleSelect
-      label="Doesn't filter options"
-      items={items}
-      filterOptions={false}
-    />
+    <SingleSelect label="Doesn't filter options" items={items} disableFilter />
   </Container>
 )
 
