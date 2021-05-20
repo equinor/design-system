@@ -39,6 +39,16 @@ export const ReadOnly: Story = () => (
   <SingleSelect label="This is read only" items={items} readOnly />
 )
 
+export const NoFilter: Story = () => (
+  <Container>
+    <SingleSelect
+      label="Doesn't filter options"
+      items={items}
+      filterOptions={false}
+    />
+  </Container>
+)
+
 export const WithPreselected: Story<SingleSelectProps> = () => (
   <Container>
     <SingleSelect
