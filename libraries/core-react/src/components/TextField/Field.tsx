@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode, forwardRef, useState } from 'react'
+import { ReactNode, forwardRef, Ref } from 'react'
 import { useTextField } from './context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
@@ -6,9 +6,8 @@ import type { Variants } from './types'
 import type { TextFieldToken } from './TextField.tokens'
 import styled, { css } from 'styled-components'
 import { typographyTemplate, outlineTemplate } from '../../utils'
-import { useAutoResize } from '../../hooks'
 import * as tokens from './TextField.tokens'
-import { input as inputTokens, comfortable } from '../Input/Input.tokens'
+import { Textarea } from '../Textarea'
 
 const { textfield } = tokens
 
@@ -37,7 +36,17 @@ const Variation = ({
   `
 }
 
-const StyledInput = styled(Input)`
+const StrippedInput = styled(Input)`
+  outline: none;
+
+  &:active,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+`
+
+const StrippedTextarea = styled(Textarea)`
   outline: none;
 
   &:active,
@@ -106,7 +115,7 @@ const Adornments = styled.div<AdornmentsType>`
     }}
 `
 
-type InputWrapperProps = {
+type FieldProps = {
   /** Specifies if input should be multiline*/
   multiline?: boolean
   /** Placeholder */
@@ -125,82 +134,83 @@ type InputWrapperProps = {
   inputIcon?: ReactNode
   /** Specifies max rows for multiline input */
   rowsMax?: number
-} & InputHTMLAttributes<HTMLInputElement>
+}
 
-export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
-  function InputWrapper(
-    {
-      multiline,
-      variant,
-      disabled,
-      type,
-      unit,
-      inputIcon,
-      rowsMax = 2,
-      ...other
-    },
-    ref,
-  ) {
-    const { handleFocus, handleBlur, isFocused } = useTextField()
-    const [inputEl, setInputEl] = useState<HTMLInputElement>(null)
+export const Field = forwardRef<
+  HTMLTextAreaElement | HTMLInputElement,
+  FieldProps
+>(function Field(
+  {
+    multiline,
+    variant,
+    disabled,
+    type,
+    unit,
+    inputIcon,
+    rowsMax = 2,
+    ...other
+  },
+  ref,
+) {
+  const { handleFocus, handleBlur, isFocused } = useTextField()
 
-    const actualVariant = variant === 'default' ? 'textfield' : variant
-    const inputVariant = tokens[actualVariant]
-    const inputProps = {
-      multiline,
-      ref,
-      type,
-      disabled,
-      variant,
-      ...other,
-    }
+  const actualVariant = variant === 'default' ? 'textfield' : variant
+  const inputVariant = tokens[actualVariant]
 
-    // autoresize logic:
-    const { lineHeight } = inputTokens.typography
-    const { top, bottom } = comfortable.spacings
-    let fontSize = 16
+  const inputProps = {
+    ref: ref as Ref<HTMLInputElement>,
+    type,
+    disabled,
+    variant,
+    ...other,
+  }
 
-    if (inputEl) {
-      fontSize = parseInt(window.getComputedStyle(inputEl).fontSize)
-    }
+  const textareaProps = {
+    ...inputProps,
+    rowsMax,
+    ref: ref as Ref<HTMLTextAreaElement>,
+  }
 
-    const padding = parseInt(top) + parseInt(bottom)
-    const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
-    useAutoResize(multiline, inputEl, maxHeight)
-
-    return (
-      <>
-        {inputIcon || unit ? (
-          <InputWithAdornments
-            isFocused={isFocused}
-            isDisabled={disabled}
-            variant={variant}
-            token={inputVariant}
-          >
-            <StyledInput
+  return (
+    <>
+      {inputIcon || unit ? (
+        <InputWithAdornments
+          isFocused={isFocused}
+          isDisabled={disabled}
+          variant={variant}
+          token={inputVariant}
+        >
+          {multiline ? (
+            <StrippedTextarea
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              {...textareaProps}
+            />
+          ) : (
+            <StrippedInput
               onBlur={handleBlur}
               onFocus={handleFocus}
               {...inputProps}
-              ref={setInputEl}
             />
-            <Adornments multiline={multiline}>
-              {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
-              {inputIcon && (
-                <Icon isDisabled={disabled} variant={variant}>
-                  {inputIcon}
-                </Icon>
-              )}
-            </Adornments>
-          </InputWithAdornments>
-        ) : (
-          <Input
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            {...inputProps}
-            ref={setInputEl}
-          />
-        )}
-      </>
-    )
-  },
-)
+          )}
+          <Adornments multiline={multiline}>
+            {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
+            {inputIcon && (
+              <Icon isDisabled={disabled} variant={variant}>
+                {inputIcon}
+              </Icon>
+            )}
+          </Adornments>
+        </InputWithAdornments>
+      ) : multiline ? (
+        <Textarea
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          {...textareaProps}
+        />
+      ) : (
+        <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
+      )}
+    </>
+  )
+})

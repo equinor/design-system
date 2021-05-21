@@ -1,7 +1,7 @@
-import { InputHTMLAttributes, forwardRef } from 'react'
+import { forwardRef, useState, TextareaHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import * as tokens from './Input.tokens'
-import type { InputToken } from './Input.tokens'
+import * as tokens from '../Input/Input.tokens'
+import type { InputToken } from '../Input/Input.tokens'
 import {
   typographyTemplate,
   spacingsTemplate,
@@ -9,6 +9,7 @@ import {
 } from '../../utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
+import { useAutoResize, useCombinedRefs } from '../../hooks'
 
 const { input, inputVariants } = tokens
 
@@ -61,7 +62,7 @@ type StyledProps = {
   variant: string
 }
 
-const StyledInput = styled.input<StyledProps>`
+const StyledTextarea = styled.textarea<StyledProps>`
   width: 100%;
   box-sizing: border-box;
   margin: 0;
@@ -81,7 +82,7 @@ const StyledInput = styled.input<StyledProps>`
   }
 `
 
-export type InputProps = {
+export type TextareaProps = {
   /** Placeholder */
   placeholder?: string
   /** Variant */
@@ -92,24 +93,47 @@ export type InputProps = {
   type?: string
   /** Read Only */
   readonly?: boolean
-} & InputHTMLAttributes<HTMLInputElement>
+  /** Specifies max rows for multiline input */
+  rowsMax?: number
+} & TextareaHTMLAttributes<HTMLTextAreaElement>
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { variant = 'default', disabled = false, type = 'text', ...other },
-  ref,
-) {
-  const inputVariant = inputVariants[variant]
-  const spacings = tokens.comfortable.spacings
-
-  const inputProps = {
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  function Textarea(
+    {
+      variant = 'default',
+      disabled = false,
+      type = 'text',
+      rowsMax = 2,
+      ...other
+    },
     ref,
-    type,
-    disabled,
-    variant,
-    token: inputVariant,
-    spacings,
-    ...other,
-  }
+  ) {
+    const inputVariant = inputVariants[variant]
+    const spacings = tokens.comfortable.spacings
+    const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
 
-  return <StyledInput {...inputProps} />
-})
+    const { lineHeight } = tokens.input.typography
+    const { top, bottom } = tokens.comfortable.spacings
+    let fontSize = 16
+
+    if (textareaEl) {
+      fontSize = parseInt(window.getComputedStyle(textareaEl).fontSize)
+    }
+
+    const padding = parseInt(top) + parseInt(bottom)
+    const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
+    useAutoResize(textareaEl, maxHeight)
+
+    const inputProps = {
+      ref: useCombinedRefs<HTMLTextAreaElement>(ref, setTextareaEl),
+      type,
+      disabled,
+      variant,
+      token: inputVariant,
+      spacings,
+      ...other,
+    }
+
+    return <StyledTextarea {...inputProps} />
+  },
+)
