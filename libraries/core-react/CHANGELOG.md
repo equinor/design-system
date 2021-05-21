@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed 🐛
 
-- `Menu` does did not respect anchor position if used with conditional rendering [(#1330)](https://github.com/equinor/design-system/issues/1330)
+- `Menu` did not respect anchor position when used with conditional rendering [(#1330)](https://github.com/equinor/design-system/issues/1330)
 - Wrong `Tooltip` position if surrounding content would skew its anchor element [(#1331)](https://github.com/equinor/design-system/issues/1331)
 - Tweaks to `Menu`, `Popover` & `Tooltip` component and stories in terms of `a11y` use-cases with screen-readers [(#1352)](https://github.com/equinor/design-system/issues/1352)
 
