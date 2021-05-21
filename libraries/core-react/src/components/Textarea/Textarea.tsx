@@ -9,7 +9,7 @@ import {
 } from '../../utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
-import { useAutoResize } from '../../hooks'
+import { useAutoResize, useCombinedRefs } from '../../hooks'
 
 const { input, inputVariants } = tokens
 
@@ -125,7 +125,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     useAutoResize(textareaEl, maxHeight)
 
     const inputProps = {
-      ref: setTextareaEl,
+      ref: useCombinedRefs<HTMLTextAreaElement>(ref, setTextareaEl),
       type,
       disabled,
       variant,
