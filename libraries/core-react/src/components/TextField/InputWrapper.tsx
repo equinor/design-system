@@ -209,17 +209,13 @@ export const InputWrapper = forwardRef<
           </Adornments>
         </InputWithAdornments>
       ) : multiline ? (
-        <StyledTextarea
+        <Textarea
           onBlur={handleBlur}
           onFocus={handleFocus}
           {...textareaProps}
         />
       ) : (
-        <StyledInput
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          {...inputProps}
-        />
+        <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
       )}
     </>
   )
