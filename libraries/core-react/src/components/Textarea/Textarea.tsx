@@ -110,22 +110,22 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ) {
     const inputVariant = inputVariants[variant]
     const spacings = tokens.comfortable.spacings
-    const [inputEl, setInputEl] = useState<HTMLTextAreaElement>(null)
+    const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
 
     const { lineHeight } = tokens.input.typography
     const { top, bottom } = tokens.comfortable.spacings
     let fontSize = 16
 
-    if (inputEl) {
-      fontSize = parseInt(window.getComputedStyle(inputEl).fontSize)
+    if (textareaEl) {
+      fontSize = parseInt(window.getComputedStyle(textareaEl).fontSize)
     }
 
     const padding = parseInt(top) + parseInt(bottom)
     const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
-    useAutoResize(inputEl, maxHeight)
+    useAutoResize(textareaEl, maxHeight)
 
     const inputProps = {
-      ref: setInputEl,
+      ref: setTextareaEl,
       type,
       disabled,
       variant,
