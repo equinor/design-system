@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Improvements to `useCombinedRef` hook [(#1347)](https://github.com/equinor/design-system/issues/1347)
 - `Menu` is now using React portals and positioned under `body` [(#1352)](https://github.com/equinor/design-system/issues/1352)
+- `Tooltip` is now conditionally rendered internally [(#1341)](https://github.com/equinor/design-system/issues/1341)
 
 ## [0.11.1] - 2021-05-06
 
