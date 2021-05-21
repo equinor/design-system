@@ -6,7 +6,7 @@ import {
   Ref,
 } from 'react'
 import styled from 'styled-components'
-import { InputWrapper } from './InputWrapper'
+import { Field } from './Field'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { TextFieldProvider } from './context'
@@ -115,7 +115,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       <Container {...containerProps}>
         <TextFieldProvider>
           {showLabel && <Label {...labelProps} />}
-          <InputWrapper {...inputProps} />
+          <Field {...inputProps} />
           {showHelperText && <HelperText {...helperProps} />}
         </TextFieldProvider>
       </Container>

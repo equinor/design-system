@@ -36,7 +36,7 @@ const Variation = ({
   `
 }
 
-const StyledInput = styled(Input)`
+const StrippedInput = styled(Input)`
   outline: none;
 
   &:active,
@@ -46,7 +46,7 @@ const StyledInput = styled(Input)`
   }
 `
 
-const StyledTextarea = styled(Textarea)`
+const StrippedTextarea = styled(Textarea)`
   outline: none;
 
   &:active,
@@ -115,7 +115,7 @@ const Adornments = styled.div<AdornmentsType>`
     }}
 `
 
-type InputWrapperProps = {
+type FieldProps = {
   /** Specifies if input should be multiline*/
   multiline?: boolean
   /** Placeholder */
@@ -136,10 +136,10 @@ type InputWrapperProps = {
   rowsMax?: number
 }
 
-export const InputWrapper = forwardRef<
+export const Field = forwardRef<
   HTMLTextAreaElement | HTMLInputElement,
-  InputWrapperProps
->(function InputWrapper(
+  FieldProps
+>(function Field(
   {
     multiline,
     variant,
@@ -181,13 +181,13 @@ export const InputWrapper = forwardRef<
           token={inputVariant}
         >
           {multiline ? (
-            <StyledTextarea
+            <StrippedTextarea
               onBlur={handleBlur}
               onFocus={handleFocus}
               {...textareaProps}
             />
           ) : (
-            <StyledInput
+            <StrippedInput
               onBlur={handleBlur}
               onFocus={handleFocus}
               {...inputProps}
