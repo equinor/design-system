@@ -3,6 +3,7 @@ import {
   ElementType,
   ButtonHTMLAttributes,
   Children as ReactChildren,
+  AnchorHTMLAttributes,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { token as buttonToken } from './tokens'
@@ -178,53 +179,57 @@ export type ButtonProps = {
    * @default 'button'
    */
   type?: string
-} & ButtonHTMLAttributes<HTMLButtonElement>
-
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button(
-    {
-      color = 'primary',
-      variant = 'contained',
-      children,
-      disabled = false,
-      href,
-      tabIndex = 0,
-      ...other
-    },
-    ref,
-  ) {
-    const token = getToken(variant, color)
-
-    const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
-    const type = href || other.as ? undefined : 'button'
-    tabIndex = disabled ? -1 : tabIndex
-
-    const buttonProps = {
-      ref,
-      as,
-      href,
-      type,
-      token,
-      disabled,
-      tabIndex,
-      ...other,
-    }
-
-    // We need everything in elements for proper flexing 💪
-    const updatedChildren = ReactChildren.map(children, (child) =>
-      typeof child !== 'object' ? (
-        <ButtonCenterContent>{child}</ButtonCenterContent>
-      ) : (
-        child
-      ),
-    )
-
-    return (
-      <ButtonBase {...buttonProps}>
-        <ButtonInner>{updatedChildren}</ButtonInner>
-      </ButtonBase>
-    )
-  },
+} & (
+  | ButtonHTMLAttributes<HTMLButtonElement>
+  | AnchorHTMLAttributes<HTMLAnchorElement>
 )
+
+export const Button = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  ButtonProps
+>(function Button(
+  {
+    color = 'primary',
+    variant = 'contained',
+    children,
+    disabled = false,
+    href,
+    tabIndex = 0,
+    ...other
+  },
+  ref,
+) {
+  const token = getToken(variant, color)
+
+  const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
+  const type = href || other.as ? undefined : 'button'
+  tabIndex = disabled ? -1 : tabIndex
+
+  const buttonProps = {
+    ref,
+    as,
+    href,
+    type,
+    token,
+    disabled,
+    tabIndex,
+    ...other,
+  }
+
+  // We need everything in elements for proper flexing 💪
+  const updatedChildren = ReactChildren.map(children, (child) =>
+    typeof child !== 'object' ? (
+      <ButtonCenterContent>{child}</ButtonCenterContent>
+    ) : (
+      child
+    ),
+  )
+
+  return (
+    <ButtonBase {...buttonProps}>
+      <ButtonInner>{updatedChildren}</ButtonInner>
+    </ButtonBase>
+  )
+})
 
 // Button.displayName = 'Button'
