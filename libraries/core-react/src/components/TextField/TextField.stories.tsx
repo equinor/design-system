@@ -147,7 +147,7 @@ export const Multiline: Story<TextFieldProps> = () => (
       multiline
       style={{ resize: 'none' }}
       rows={3}
-      rowsMax={5}
+      rowsMax={10}
     />
   </>
 )
