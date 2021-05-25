@@ -8,6 +8,7 @@ export const useAutoResize = (
 ): void => {
   useEffect(() => {
     const handleResize = () => {
+      targetEl.style.height = 'auto'
       let newHeight = targetEl.clientHeight
 
       if (!maxHeight || maxHeight > newHeight) {
@@ -18,7 +19,9 @@ export const useAutoResize = (
         if (newHeight > targetEl.clientHeight) {
           targetEl.style.height = `${newHeight}px`
         }
-      } else if (maxHeight) {
+      }
+
+      if (maxHeight <= targetEl.clientHeight) {
         targetEl.style.overflow = 'auto'
       }
     }

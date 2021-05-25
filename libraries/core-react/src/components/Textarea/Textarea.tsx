@@ -69,7 +69,7 @@ const StyledTextarea = styled.textarea<StyledProps>`
   border: none;
   appearance: none;
   background: ${input.background};
-  height: 100%;
+  height: auto;
   overflow: hidden;
   ${({ spacings }) => spacingsTemplate(spacings)}
   ${typographyTemplate(input.typography)}
@@ -124,8 +124,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const padding = parseInt(top) + parseInt(bottom)
     const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
     useAutoResize(textareaEl, maxHeight)
-
-    console.log()
 
     const inputProps = {
       ref: useCombinedRefs<HTMLTextAreaElement>(ref, setTextareaEl),
