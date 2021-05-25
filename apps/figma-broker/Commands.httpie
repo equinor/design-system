@@ -4,13 +4,8 @@
 // Querystring force is used to force new file fetch from Figma
 http POST http://localhost:9001/create-tokens?force=false
 
-// Generates component tokens from Figma
-http POST http://localhost:9001/create-variants
-
 // Generates assets from Figma
 http POST http://localhost:9001/create-assets
 
-// Generates images of components linked to in Storefront mdx files
-http POST http://localhost:9001/create-figma-images
 
 

@@ -7,12 +7,7 @@ import KoaLogger from 'koa-logger'
 import KoaBody from 'koa-body'
 import R from 'ramda'
 
-import {
-  createTokens,
-  createAssets,
-  createVariantTokens,
-  createFigmaImages,
-} from './actions'
+import { createTokens, createAssets } from './actions'
 
 dotenv.config()
 
@@ -29,9 +24,7 @@ const runAction = R.curry(async (action, ctx) => {
 
 router
   .post('/create-tokens', KoaBody(), runAction(createTokens))
-  .post('/create-variants', KoaBody(), runAction(createVariantTokens))
   .post('/create-assets', KoaBody(), runAction(createAssets))
-  .post('/create-figma-images', KoaBody(), runAction(createFigmaImages))
 
 app.use(logger).use(router.routes()).use(router.allowedMethods())
 
