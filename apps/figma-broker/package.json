@@ -33,5 +33,10 @@
     "@utils": "./functions/utils.js",
     "@units": "./functions/units.js",
     "@transformers": "./transformers/index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "raw/*"
+    ]
   }
 }

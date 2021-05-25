@@ -1,5 +1,6 @@
 import R from 'ramda'
 import fetch from 'node-fetch'
+import { readFile, writeFile } from './file'
 
 const options = () => ({
   headers: {
@@ -33,4 +34,28 @@ export async function fetchFigmaImageUrls(fileId, ids, format = 'svg') {
   // https://www.figma.com/developers/docs#get-images-endpoint
   const url = `https://api.figma.com/v1/images/${fileId}?ids=${ids}&format=${format}`
   return fetch(url, options()).then(handleResponse)
+}
+
+export async function getFigmaFile(fileId, force = false) {
+  let data = null
+
+  if (force === 'true') {
+    console.info('Forced fetching new file from Figma')
+    data = await fetchFigmaFile(fileId)
+    writeFile('raw', fileId, 'json', `${JSON.stringify(data, null, 2)}\n`)
+  } else {
+    try {
+      console.info('Reading local raw file...')
+      data = await readFile('raw', fileId, 'json')
+    } catch (error) {
+      console.info(
+        'Local figma file not found, fetching new file from Figma',
+        error.message,
+      )
+      data = await fetchFigmaFile(fileId)
+      writeFile('raw', fileId, 'json', `${JSON.stringify(data, null, 2)}\n`)
+    }
+  }
+
+  return data
 }

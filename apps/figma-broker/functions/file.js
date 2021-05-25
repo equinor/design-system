@@ -52,18 +52,11 @@ export const writeFile = (path, name, ext, file) => {
 
 export const curriedWriteFile = R.curry(writeFile)
 
-export const readFile = (path, name, ext, callback) => {
-  fs.readFile(getFilePath(path, name, ext), (err, data) => {
-    if (err) {
-      callback(err)
-      return
-    }
-    try {
-      callback(null, JSON.parse(data))
-    } catch (exception) {
-      callback(exception)
-    }
+export async function readFile(path, name, ext) {
+  const data = await fs.promises.readFile(getFilePath(path, name, ext), {
+    encoding: 'utf8',
   })
+  return Promise.resolve(JSON.parse(data))
 }
 
 export const readTokens = (path) =>
