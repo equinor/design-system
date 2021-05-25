@@ -8,8 +8,8 @@ export const useAutoResize = (
 ): void => {
   useEffect(() => {
     const handleResize = () => {
-      targetEl.style.height = 'auto'
       let newHeight = targetEl.clientHeight
+
       if (!maxHeight || maxHeight > newHeight) {
         newHeight = Math.max(targetEl.scrollHeight, newHeight)
         if (maxHeight) {
@@ -18,7 +18,13 @@ export const useAutoResize = (
         if (newHeight > targetEl.clientHeight) {
           targetEl.style.height = `${newHeight}px`
         }
+      } else if (maxHeight) {
+        targetEl.style.overflow = 'auto'
       }
+    }
+
+    if (targetEl) {
+      handleResize()
     }
 
     targetEl?.addEventListener('keyup', handleResize, true)
