@@ -15,14 +15,14 @@ export const useAutoResize = (
         newHeight = Math.max(targetEl.scrollHeight, newHeight)
         if (maxHeight) {
           newHeight = Math.min(maxHeight, newHeight)
+          if (targetEl.scrollHeight > maxHeight) {
+            console.log(targetEl.scrollHeight, newHeight, maxHeight)
+            targetEl.style.overflow = 'auto'
+          }
         }
         if (newHeight > targetEl.clientHeight) {
           targetEl.style.height = `${newHeight}px`
         }
-      }
-
-      if (maxHeight <= targetEl.clientHeight) {
-        targetEl.style.overflow = 'auto'
       }
     }
 

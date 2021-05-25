@@ -118,6 +118,9 @@ export const types: Story<TextFieldProps> = () => (
 
 types.storyName = 'Types of input fields'
 
+const value =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus sit amet velit in tristique. Morbi ultrices arcu sit amet enim scelerisque euismod. Donec blandit malesuada felis vitae accumsan. Proin vel nisi vel orci bibendum facilisis sit amet vitae nibh. Fusce eros nisl, auctor et erat quis, malesuada accumsan ligula. Nullam gravida eu enim sed pellentesque. Phasellus tincidunt consequat elit. Integer et neque imperdiet, commodo lacus a, commodo tellus.'
+
 export const Multiline: Story<TextFieldProps> = () => (
   <>
     <TextField
@@ -146,8 +149,9 @@ export const Multiline: Story<TextFieldProps> = () => (
       label="Multiline with rowsMax"
       multiline
       style={{ resize: 'none' }}
+      defaultValue={value}
       rows={3}
-      rowsMax={10}
+      rowsMax={100}
     />
   </>
 )
