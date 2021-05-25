@@ -69,7 +69,7 @@ const StyledTextarea = styled.textarea<StyledProps>`
   border: none;
   appearance: none;
   background: ${input.background};
-
+  height: auto;
   ${({ spacings }) => spacingsTemplate(spacings)}
   ${typographyTemplate(input.typography)}
 
