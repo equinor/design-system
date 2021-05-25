@@ -37,11 +37,22 @@ export async function fetchFigmaImageUrls(fileId, ids, format = 'svg') {
 }
 
 export async function getFigmaFile(fileId, force = false) {
-  let data = await readFile('raw', fileId, 'json')
+  let data = null
 
-  if (!data || force === true) {
+  if (force === 'true') {
+    console.info('Forced fetching new file from Figma')
     data = await fetchFigmaFile(fileId)
     writeFile('raw', fileId, 'json', `${JSON.stringify(data, null, 2)}\n`)
+  } else {
+    try {
+      console.info('Reading local raw file...')
+      data = await readFile('raw', fileId, 'json')
+    } catch (error) {
+      console.info('Local figma file not found, fetching new file from Figma')
+      data = await fetchFigmaFile(fileId)
+      writeFile('raw', fileId, 'json', `${JSON.stringify(data, null, 2)}\n`)
+    }
   }
+
   return data
 }

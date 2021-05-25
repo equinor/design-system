@@ -21,7 +21,9 @@ export const makeTextTokens = (typographies, getStyle) =>
         name = propName(style.name)
         value = toTypography(node, name)
       } catch (error) {
-        throw Error(`Error parsing typography for ${name}. ${error.message}`)
+        throw Error(
+          `Error parsing typography for ${node.name}. ${error.message}`,
+        )
       }
       return {
         name,
