@@ -70,7 +70,6 @@ const StyledTextarea = styled.textarea<StyledProps>`
   appearance: none;
   background: ${input.background};
   height: auto;
-  overflow: hidden;
   ${({ spacings }) => spacingsTemplate(spacings)}
   ${typographyTemplate(input.typography)}
 
