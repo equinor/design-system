@@ -48,7 +48,10 @@ export async function getFigmaFile(fileId, force = false) {
       console.info('Reading local raw file...')
       data = await readFile('raw', fileId, 'json')
     } catch (error) {
-      console.info('Local figma file not found, fetching new file from Figma')
+      console.info(
+        'Local figma file not found, fetching new file from Figma',
+        error.message,
+      )
       data = await fetchFigmaFile(fileId)
       writeFile('raw', fileId, 'json', `${JSON.stringify(data, null, 2)}\n`)
     }
