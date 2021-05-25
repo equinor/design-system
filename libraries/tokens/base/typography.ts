@@ -5,7 +5,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '2.000rem',
       fontWeight: 700,
-      lineHeight: '1.500em',
+      lineHeight: '1.250em',
       textAlign: 'left',
     },
     h1: {
@@ -13,7 +13,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '2.000rem',
       fontWeight: 400,
-      lineHeight: '1.500em',
+      lineHeight: '1.250em',
       textAlign: 'left',
     },
     h2: {
@@ -21,7 +21,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '1.750rem',
       fontWeight: 400,
-      lineHeight: '1.429em',
+      lineHeight: '1.250em',
       textAlign: 'left',
     },
     h3: {
@@ -29,7 +29,7 @@ export const typography = {
       fontFamily: 'Equinor',
       fontSize: '1.500rem',
       fontWeight: 400,
-      lineHeight: '1.667em',
+      lineHeight: '1.250em',
       textAlign: 'left',
     },
     h4: {
@@ -127,6 +127,15 @@ export const typography = {
       fontWeight: 500,
       lineHeight: '1.143em',
       textDecoration: 'underline',
+      textAlign: 'left',
+    },
+    menu_title_hover: {
+      color: 'rgba(61, 61, 61, 1)',
+      fontFamily: 'Equinor',
+      fontSize: '1.000rem',
+      fontWeight: 700,
+      letterSpacing: '0.013em',
+      lineHeight: '1.000em',
       textAlign: 'left',
     },
   },
