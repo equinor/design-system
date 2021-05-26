@@ -1,7 +1,5 @@
 import R from 'ramda'
 
-const head = R.pipe(R.defaultTo([]), R.head)
-
 const removeForbiddenCharacters = (str) => {
   if (str) {
     return str.replace(/[|]|[.]|[-]|[–]|[—]/g, '').replace(/^[0-9]*/, '')
@@ -69,9 +67,6 @@ export const toDictDeep = R.curry(R.reduce)(
   {},
 )
 
-export const instanceOfComponent = (name) =>
-  R.curry((x) => withName(name, head(x.children) || { name: '' }))
-
 export const isNotNil = R.complement(R.isNil)
 export const isNotEmpty = R.complement(R.isEmpty)
 export const removeNilAndEmpty = R.curry(R.pickBy)(R.both(isNotEmpty, isNotNil))
@@ -81,11 +76,4 @@ export const sleep = (ms) =>
     setTimeout(resolve, ms)
   })
 
-const capitalize = (word) => {
-  return `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`
-}
-
 export const mergeStrings = R.reduce((acc, val) => `${acc}${val}`, '')
-
-export const toConst = (name, value) =>
-  `export const ${name} = ${JSON.stringify(value, null, 2)}\n`

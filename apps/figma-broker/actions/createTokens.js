@@ -1,4 +1,3 @@
-import prettier from 'prettier'
 import R from 'ramda'
 import { getFigmaFile, processFigmaFile } from '../functions/figma'
 import { writeFile, writeResults } from '../functions/file'
@@ -9,7 +8,7 @@ import { makeElevationCss } from '../files/design-tokens/elevation'
 import { makeClickboundsCss } from '../files/design-tokens/clickbounds'
 import { makeTypographyCss } from '../files/design-tokens/typography'
 import { makeShapeCss } from '../files/design-tokens/shape'
-import { PATHS, FILE_IDS } from '../constants'
+import { PATHS } from '../constants'
 import { mergeStrings } from '@utils'
 
 const TOKENS_LIB_DIR = PATHS.BASE_TOKENS
@@ -85,7 +84,7 @@ const writeCSSTokens = (tokens) => {
 }
 
 export async function createTokens({ query }) {
-  const data = await getFigmaFile(FILE_IDS.TOKENS, query.force)
+  const data = await getFigmaFile(query)
 
   const figmaFile = processFigmaFile(data)
   const tokens = makeTokens(figmaFile)

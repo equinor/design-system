@@ -2,15 +2,10 @@
 
 // Generates design tokens from Figma
 // Querystring force is used to force new file fetch from Figma
-http POST http://localhost:9001/create-tokens?force=false
-
-// Generates component tokens from Figma
-http POST http://localhost:9001/create-variants
+http POST http://localhost:9001/create-tokens?fileId=0TbIXrrObWj80Cf7KucKYFL0&force=false
 
 // Generates assets from Figma
-http POST http://localhost:9001/create-assets
+http POST http://localhost:9001/create-assets?fileId=BQjYMxdSdgRkdhKTDDU7L4KU&?force=false
 
-// Generates images of components linked to in Storefront mdx files
-http POST http://localhost:9001/create-figma-images
 
 
