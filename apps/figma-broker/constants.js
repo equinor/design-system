@@ -4,12 +4,6 @@ const STATIC_DIR = '../../libraries/static'
 const ICONS_DIR = '../../libraries/icons'
 const STOREFRONT_DIR = '../storefront'
 
-export const FILE_IDS = {
-  TOKENS: '0TbIXrrObWj80Cf7KucKYFL0',
-  ASSETS: 'BQjYMxdSdgRkdhKTDDU7L4KU',
-  DESKTOP_UI: '0bGXR2sCwMVSDNyyzu5BXrO5',
-}
-
 export const PATHS = {
   TOKENS: TOKENS_DIR,
   BASE_TOKENS: `${TOKENS_DIR}/base`,

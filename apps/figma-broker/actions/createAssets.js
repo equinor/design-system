@@ -1,7 +1,7 @@
 import SVGO from 'svgo'
 import R from 'ramda'
 import {
-  fetchFigmaFile,
+  getFigmaFile,
   processFigmaFile,
   fetchFigmaImageUrls,
 } from '../functions/figma'
@@ -12,7 +12,7 @@ import {
   writeResultsIndividually,
 } from '../functions/file'
 import { getAssets } from '../files/assets'
-import { PATHS, FILE_IDS } from '../constants'
+import { PATHS } from '../constants'
 import { sleep, mergeStrings } from '@utils'
 
 const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
@@ -89,7 +89,7 @@ const writeSVGs = (assets) => {
   writeResultsIndividually(assets, PATHS.ASSETS_ICONS, 'svg')
 }
 
-export async function createAssets(ctx) {
+export async function createAssets({ query }) {
   const plugins = [
     { removeDoctype: true },
     { cleanupAttrs: true },
@@ -106,7 +106,7 @@ export async function createAssets(ctx) {
     plugins,
   })
 
-  const data = await fetchFigmaFile(FILE_IDS.ASSETS)
+  const data = await getFigmaFile(query)
 
   const figmaFile = processFigmaFile(data)
   const assetPages = getAssets(figmaFile)
@@ -115,7 +115,7 @@ export async function createAssets(ctx) {
   const assetsWithUrl = await Promise.all(
     assetPages.map(async (assetPage) => {
       const ids = assetPage.value.map((x) => x.id)
-      const result = await fetchFigmaImageUrls(FILE_IDS.ASSETS, ids)
+      const result = await fetchFigmaImageUrls(query.fileId, ids)
       if (!result.err) {
         return {
           ...assetPage,

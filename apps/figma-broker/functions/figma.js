@@ -36,7 +36,7 @@ export async function fetchFigmaImageUrls(fileId, ids, format = 'svg') {
   return fetch(url, options()).then(handleResponse)
 }
 
-export async function getFigmaFile(fileId, force = false) {
+export async function getFigmaFile({ fileId, force = false }) {
   let data = null
 
   if (force === 'true') {
