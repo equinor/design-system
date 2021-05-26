@@ -1,7 +1,5 @@
 import R from 'ramda'
 
-const head = R.pipe(R.defaultTo([]), R.head)
-
 const removeForbiddenCharacters = (str) => {
   if (str) {
     return str.replace(/[|]|[.]|[-]|[–]|[—]/g, '').replace(/^[0-9]*/, '')

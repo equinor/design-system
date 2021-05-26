@@ -1,4 +1,3 @@
-import prettier from 'prettier'
 import R from 'ramda'
 import { getFigmaFile, processFigmaFile } from '../functions/figma'
 import { writeFile, writeResults } from '../functions/file'
