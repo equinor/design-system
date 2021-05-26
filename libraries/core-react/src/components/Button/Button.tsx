@@ -3,6 +3,7 @@ import {
   ElementType,
   ButtonHTMLAttributes,
   Children as ReactChildren,
+  AnchorHTMLAttributes,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { token as buttonToken } from './tokens'
@@ -13,6 +14,7 @@ import {
   outlineTemplate,
   spacingsTemplate,
 } from '../../utils'
+import { InnerFullWidth } from './InnerFullWidth'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
@@ -46,44 +48,12 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
   }
 }
 
-const ButtonCenterContent = styled.span`
-  text-align: center;
-  flex: 1;
-`
-
 const ButtonInner = styled.span`
-  height: 100%;
-  display: flex;
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
   align-items: center;
-
-  > img:first-child,
-  > svg:first-child {
-    margin-right: 8px;
-  }
-
-  > img:last-child,
-  > svg:last-child {
-    margin-left: 8px;
-  }
-
-  > img:only-child,
-  > svg:only-child {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  > span:first-child {
-    margin-left: 32px;
-  }
-
-  > span:last-child {
-    margin-right: 32px;
-  }
-
-  > span:only-child {
-    margin-right: 0;
-    margin-left: 0;
-  }
+  height: 100%;
 `
 
 const Base = ({ token }: { token: ButtonToken }) => {
@@ -178,6 +148,8 @@ export type ButtonProps = {
    * @default 'button'
    */
   type?: string
+  /** FullWidth (stretched) button  */
+  fullWidth?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -189,6 +161,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       disabled = false,
       href,
       tabIndex = 0,
+      fullWidth = false,
       ...other
     },
     ref,
@@ -210,21 +183,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ...other,
     }
 
-    // We need everything in elements for proper flexing 💪
-    const updatedChildren = ReactChildren.map(children, (child) =>
-      typeof child !== 'object' ? (
-        <ButtonCenterContent>{child}</ButtonCenterContent>
-      ) : (
-        child
-      ),
-    )
-
     return (
       <ButtonBase {...buttonProps}>
-        <ButtonInner>{updatedChildren}</ButtonInner>
+        {fullWidth ? (
+          <InnerFullWidth>{children}</InnerFullWidth>
+        ) : (
+          <ButtonInner>{children}</ButtonInner>
+        )}
       </ButtonBase>
     )
   },
 )
-
-// Button.displayName = 'Button'

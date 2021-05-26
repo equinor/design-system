@@ -117,7 +117,9 @@ export const header: Story<AccordionProps> = () => {
             </Accordion.HeaderTitle>
             <Button
               variant="ghost_icon"
-              onClick={(event) => {
+              onClick={(
+                event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+              ) => {
                 action('clicked edit button')(event)
                 event.stopPropagation()
               }}
@@ -126,7 +128,9 @@ export const header: Story<AccordionProps> = () => {
             </Button>
             <Button
               variant="ghost_icon"
-              onClick={(event) => {
+              onClick={(
+                event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+              ) => {
                 action('clicked delete button')(event)
                 event.stopPropagation()
               }}
