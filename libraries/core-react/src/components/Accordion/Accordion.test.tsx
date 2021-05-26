@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import { MouseEventHandler } from 'react'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -8,6 +9,7 @@ import { Accordion } from '.'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import type { AccordionProps } from './Accordion.types'
+import React from 'react'
 
 Icon.add({ attach_file, notifications })
 
@@ -47,10 +49,20 @@ const AccordionWithButtons = () => (
     <Accordion.Item>
       <Accordion.Header>
         <Accordion.HeaderTitle>Summary</Accordion.HeaderTitle>
-        <Button variant="ghost_icon" onClick={(e) => e.stopPropagation()}>
+        <Button
+          variant="ghost_icon"
+          onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+            event.stopPropagation()
+          }
+        >
           <Icon name="attach_file" title="Attach file" />
         </Button>
-        <Button variant="ghost_icon" onClick={(e) => e.stopPropagation()}>
+        <Button
+          variant="ghost_icon"
+          onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+            event.stopPropagation()
+          }
+        >
           <Icon name="notifications" title="Notifications" />
         </Button>
       </Accordion.Header>
