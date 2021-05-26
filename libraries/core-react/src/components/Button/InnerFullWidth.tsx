@@ -1,12 +1,12 @@
 import { forwardRef, Children as ReactChildren, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-const ButtonCenterContent = styled.span`
+const FullWidthCenterContent = styled.span`
   text-align: center;
   flex: 1;
 `
 
-const ButtonInner = styled.span`
+const FullWidthInner = styled.span`
   height: 100%;
   display: flex;
   align-items: center;
@@ -41,18 +41,18 @@ const ButtonInner = styled.span`
   }
 `
 
-export const ButtonFullWidth = forwardRef<
+export const InnerFullWidth = forwardRef<
   HTMLSpanElement,
   HTMLAttributes<HTMLSpanElement>
->(function ButtonFullWidth({ children, ...other }, ref) {
+>(function InnerFullWidth({ children }) {
   // We need everything in elements for proper flexing 💪
   const updatedChildren = ReactChildren.map(children, (child) =>
     typeof child !== 'object' ? (
-      <ButtonCenterContent>{child}</ButtonCenterContent>
+      <FullWidthCenterContent>{child}</FullWidthCenterContent>
     ) : (
       child
     ),
   )
 
-  return <ButtonInner>{updatedChildren}</ButtonInner>
+  return <FullWidthInner>{updatedChildren}</FullWidthInner>
 })

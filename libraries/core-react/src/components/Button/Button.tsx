@@ -14,7 +14,7 @@ import {
   outlineTemplate,
   spacingsTemplate,
 } from '../../utils'
-import { ButtonFullWidth } from './ButtonFullWidth'
+import { InnerFullWidth } from './InnerFullWidth'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
@@ -150,51 +150,47 @@ export type ButtonProps = {
   type?: string
   /** FullWidth (stretched) button  */
   fullWidth?: boolean
-} & (
-  | ButtonHTMLAttributes<HTMLButtonElement>
-  | AnchorHTMLAttributes<HTMLAnchorElement>
-)
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = forwardRef<
-  HTMLButtonElement | HTMLAnchorElement,
-  ButtonProps
->(function Button(
-  {
-    color = 'primary',
-    variant = 'contained',
-    children,
-    disabled = false,
-    href,
-    tabIndex = 0,
-    fullWidth = false,
-    ...other
-  },
-  ref,
-) {
-  const token = getToken(variant, color)
-
-  const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
-  const type = href || other.as ? undefined : 'button'
-  tabIndex = disabled ? -1 : tabIndex
-
-  const buttonProps = {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
+    {
+      color = 'primary',
+      variant = 'contained',
+      children,
+      disabled = false,
+      href,
+      tabIndex = 0,
+      fullWidth = false,
+      ...other
+    },
     ref,
-    as,
-    href,
-    type,
-    token,
-    disabled,
-    tabIndex,
-    ...other,
-  }
+  ) {
+    const token = getToken(variant, color)
 
-  return (
-    <ButtonBase {...buttonProps}>
-      {fullWidth ? (
-        <ButtonFullWidth>{children}</ButtonFullWidth>
-      ) : (
-        <ButtonInner>{children}</ButtonInner>
-      )}
-    </ButtonBase>
-  )
-})
+    const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
+    const type = href || other.as ? undefined : 'button'
+    tabIndex = disabled ? -1 : tabIndex
+
+    const buttonProps = {
+      ref,
+      as,
+      href,
+      type,
+      token,
+      disabled,
+      tabIndex,
+      ...other,
+    }
+
+    return (
+      <ButtonBase {...buttonProps}>
+        {fullWidth ? (
+          <InnerFullWidth>{children}</InnerFullWidth>
+        ) : (
+          <ButtonInner>{children}</ButtonInner>
+        )}
+      </ButtonBase>
+    )
+  },
+)
