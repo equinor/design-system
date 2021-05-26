@@ -265,34 +265,40 @@ export const Link: Story<ButtonProps> = () => (
 
 export const FullWidth: Story<ButtonProps> = () => (
   <FullWidthWrapper>
-    <Button>Primary</Button>
-    <Button color="secondary">Secondary</Button>
-    <Button color="danger">Danger</Button>
-    <Button disabled>Disabled</Button>
-    <Button>
+    <Button fullWidth>Primary</Button>
+    <Button color="secondary" fullWidth>
+      Secondary
+    </Button>
+    <Button color="danger" fullWidth>
+      Danger
+    </Button>
+    <Button disabled fullWidth>
+      Disabled
+    </Button>
+    <Button fullWidth>
       <Icon name="save" title="save"></Icon>Primary
     </Button>
-    <Button color="secondary">
+    <Button color="secondary" fullWidth>
       <Icon name="save" title="save"></Icon>Secondary
     </Button>
-    <Button color="danger">
+    <Button color="danger" fullWidth>
       <Icon name="save" title="save"></Icon>Danger
     </Button>
-    <Button disabled>
+    <Button disabled fullWidth>
       <Icon name="save" title="save"></Icon>Disabled
     </Button>
-    <Button>
+    <Button fullWidth>
       Primary <Icon name="save" title="save"></Icon>
     </Button>
-    <Button color="secondary">
+    <Button color="secondary" fullWidth>
       Secondary
       <Icon name="save" title="save"></Icon>
     </Button>
-    <Button color="danger">
+    <Button color="danger" fullWidth>
       Danger
       <Icon name="save" title="save"></Icon>
     </Button>
-    <Button disabled>
+    <Button disabled fullWidth>
       Disabled
       <Icon name="save" title="save"></Icon>
     </Button>
