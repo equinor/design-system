@@ -172,7 +172,7 @@ MultilineFixedHeight.parameters = {
   docs: {
     description: {
       story:
-        'Please note that a multiline with fixed height overwrites the `rows` property. `rowsMax` overwrites fixed height, so it is not recommended to use those together.',
+        'Please note that a multiline with fixed `height` overwrites the `rows` property. `rowsMax` overwrites fixed `height`, so it is not recommended to use those together.',
     },
   },
 }
