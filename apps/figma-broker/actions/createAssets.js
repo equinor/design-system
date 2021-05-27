@@ -1,4 +1,4 @@
-import SVGO from 'svgo'
+import * as SVGO from 'svgo'
 import R from 'ramda'
 import {
   getFigmaFile,
@@ -90,26 +90,24 @@ const writeSVGs = (assets) => {
 }
 
 export async function createAssets({ query }) {
-  const plugins = [
-    { removeDoctype: true },
-    { cleanupAttrs: true },
-    { removeUnknownsAndDefaults: true },
-    { removeUselessStrokeAndFill: true },
-    { removeAttrs: { attrs: '(fill)' } },
-    { removeViewBox: false },
-  ]
-  const svgo = new SVGO({
-    plugins,
-  })
-  const svgoDataUri = new SVGO({
-    datauri: 'base64',
-    plugins,
-  })
-
   const data = await getFigmaFile(query)
 
   const figmaFile = processFigmaFile(data)
   const assetPages = getAssets(figmaFile)
+
+  const plugins = SVGO.extendDefaultPlugins([
+    {
+      name: 'removeAttrs',
+      active: true,
+      params: {
+        attrs: '(fill)',
+      },
+    },
+    {
+      name: 'removeViewBox',
+      active: false,
+    },
+  ])
 
   // Update with svg image urls from Figma
   const assetsWithUrl = await Promise.all(
@@ -138,9 +136,14 @@ export async function createAssets({ query }) {
       value: await Promise.all(
         assetPage.value.map(async (asset) => {
           const svgDirty = await fetchFile(asset.url)
-          const svgClean = await svgo.optimize(svgDirty)
+          const svgClean = SVGO.optimize(svgDirty, {
+            plugins,
+          })
           // TODO: Remove datauri when storefront uses eds-icons
-          const svgCleanDataUri = await svgoDataUri.optimize(svgDirty)
+          const svgCleanDataUri = SVGO.optimize(svgDirty, {
+            plugins,
+            datauri: 'base64',
+          })
           const { height, width } = svgClean.info
 
           return {
