@@ -139,11 +139,7 @@ export async function createAssets({ query }) {
           const svgClean = SVGO.optimize(svgDirty, {
             plugins,
           })
-          // TODO: Remove datauri when storefront uses eds-icons
-          const svgCleanDataUri = SVGO.optimize(svgDirty, {
-            plugins,
-            datauri: 'base64',
-          })
+
           const { height, width } = svgClean.info
 
           return {
@@ -152,7 +148,6 @@ export async function createAssets({ query }) {
             viewbox: `0 0 ${height} ${width}`,
             height,
             width,
-            datauri: svgCleanDataUri.data,
             pathData: svgPathData(svgClean.data),
           }
         }),
@@ -166,7 +161,7 @@ export async function createAssets({ query }) {
   writeSVGs(assetsWithSvg)
   writeSVGSprite(assetsWithSvg)
 
-  writeJsonAssets(assetsWithSvg)
+  // writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
 
   return assetsWithSvg
