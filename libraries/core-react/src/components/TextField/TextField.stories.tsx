@@ -171,8 +171,8 @@ export const MultilineFixedHeight: Story<TextFieldProps> = () => (
 MultilineFixedHeight.parameters = {
   docs: {
     description: {
-      story: `Please note that a multiline with fixed height overwrites the <code>rows</code> property. 
-      Property <code>rowsMax</code> overwrites fixed height, so it is not recommended to use those together.`,
+      story:
+        'Please note that a multiline with fixed height overwrites the `rows` property. `rowsMax` overwrites fixed height, so it is not recommended to use those together.',
     },
   },
 }
