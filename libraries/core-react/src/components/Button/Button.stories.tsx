@@ -13,8 +13,6 @@ const Wrapper = styled.div`
 const FullWidthWrapper = styled.div`
   margin: 32px;
   display: grid;
-  justify-content: stretch;
-  flex-direction: column;
   grid-gap: 16px;
 `
 
