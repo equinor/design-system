@@ -99,13 +99,7 @@ export type TextareaProps = {
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
-    {
-      variant = 'default',
-      disabled = false,
-      type = 'text',
-      rowsMax = 2,
-      ...other
-    },
+    { variant = 'default', disabled = false, type = 'text', rowsMax, ...other },
     ref,
   ) {
     const inputVariant = inputVariants[variant]
@@ -122,7 +116,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const padding = parseInt(top) + parseInt(bottom)
     const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
-    useAutoResize(textareaEl, maxHeight)
+    useAutoResize(textareaEl, rowsMax ? maxHeight : null)
 
     const inputProps = {
       ref: useCombinedRefs<HTMLTextAreaElement>(ref, setTextareaEl),
