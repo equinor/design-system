@@ -27,11 +27,10 @@ export const useAutoResize = (
       }
     }
 
-    if (targetEl) {
+    if (targetEl && maxHeight) {
       handleResize()
+      targetEl.addEventListener('keyup', handleResize, true)
     }
-
-    targetEl?.addEventListener('keyup', handleResize, true)
 
     return () => {
       targetEl?.removeEventListener('keyup', handleResize, true)

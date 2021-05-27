@@ -140,16 +140,7 @@ export const Field = forwardRef<
   HTMLTextAreaElement | HTMLInputElement,
   FieldProps
 >(function Field(
-  {
-    multiline,
-    variant,
-    disabled,
-    type,
-    unit,
-    inputIcon,
-    rowsMax = 2,
-    ...other
-  },
+  { multiline, variant, disabled, type, unit, inputIcon, rowsMax, ...other },
   ref,
 ) {
   const { handleFocus, handleBlur, isFocused } = useTextField()

@@ -158,6 +158,25 @@ Multiline.parameters = {
   },
 }
 
+export const MultilineFixedHeight: Story<TextFieldProps> = () => (
+  <TextField
+    id="storybook-multiline-fixedheight"
+    placeholder="Placeholder text"
+    label="Multiline with fixed height"
+    multiline
+    style={{ height: '100px', resize: 'none' }}
+  />
+)
+
+MultilineFixedHeight.parameters = {
+  docs: {
+    description: {
+      story:
+        'Please note that a multiline with fixed `height` overwrites the `rows` property. `rowsMax` overwrites fixed `height`, so it is not recommended to use those together.',
+    },
+  },
+}
+
 export const Disabled: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
