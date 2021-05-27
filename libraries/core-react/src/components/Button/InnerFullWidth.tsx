@@ -44,7 +44,7 @@ const FullWidthInner = styled.span`
 export const InnerFullWidth = forwardRef<
   HTMLSpanElement,
   HTMLAttributes<HTMLSpanElement>
->(function InnerFullWidth({ children }) {
+>(function InnerFullWidth({ children }, ref) {
   // We need everything in elements for proper flexing 💪
   const updatedChildren = ReactChildren.map(children, (child) =>
     typeof child !== 'object' ? (
@@ -54,5 +54,5 @@ export const InnerFullWidth = forwardRef<
     ),
   )
 
-  return <FullWidthInner>{updatedChildren}</FullWidthInner>
+  return <FullWidthInner ref={ref}>{updatedChildren}</FullWidthInner>
 })
