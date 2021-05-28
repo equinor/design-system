@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated `Typography` tokens
-  - Reduced line-height on ´h1´,´h2´ & ´h3´
+  - Reduced line-height on `h1`, `h2` & `h3`
 
 ## [0.5.8] - 2021-05-06
 
