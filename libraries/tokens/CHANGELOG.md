@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- New `Typography` token
+- New `Typography` token [(#1370)](https://github.com/equinor/design-system/issues/1370)
   - `menu_title_hover`
 
 ### Changed
 
-- Updated `Typography` tokens
+- Updated `Typography` tokens [(#1370)](https://github.com/equinor/design-system/issues/1370)
   - Reduced line-height on `h1`, `h2` & `h3`
 
 ## [0.5.8] - 2021-05-06
