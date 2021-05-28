@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.1] - 2021-05-28
+
+### Fixed 🐛
+
+- Multiline `TextField` did not follow `rowsMax` rules on initial render [(#1367)](https://github.com/equinor/design-system/issues/1367)
+- Multiline `TextField` resized on input when having a fixed height [(#1375)](https://github.com/equinor/design-system/issues/1375)
+- Wrong spacing in `Button` when an icon was used [(#1364)](https://github.com/equinor/design-system/issues/1364)
+
+### Changed
+
+- Clarified `Radio` story [(#1382)](https://github.com/equinor/design-system/issues/1382)
+
 ## [0.12.0] - 2021-05-21
 
 ### Added
