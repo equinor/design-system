@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Clarified `Radio` story [(#1382)](https://github.com/equinor/design-system/issues/1382)
+- Reduced line-height on `Typography` (for `h1`, `h2` & `h3`) [(#1370)](https://github.com/equinor/design-system/issues/1370)
 
 ## [0.12.0] - 2021-05-21
 
