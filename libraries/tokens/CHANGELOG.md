@@ -5,17 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.6.0] - 2021-xx-xx
+## [0.6.0] - 2021-05-28
 
 ### Added
 
-- New `Typography` token
+- New `Typography` token [(#1370)](https://github.com/equinor/design-system/issues/1370)
   - `menu_title_hover`
 
 ### Changed
 
-- Updated `Typography` tokens
-  - Reduced line-height on ´h1´,´h2´ & ´h3´
+- Updated `Typography` tokens [(#1370)](https://github.com/equinor/design-system/issues/1370)
+  - Reduced line-height on `h1`, `h2` & `h3`
 
 ## [0.5.8] - 2021-05-06
 
