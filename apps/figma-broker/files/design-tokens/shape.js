@@ -9,9 +9,7 @@ import {
 } from '@utils'
 import { px } from '@units'
 
-const toShapeTokens = R.pipe(
-  R.filter(withType('frame')),
-  R.filter(withName('default')),
+const processGroup = R.pipe(
   pickChildren,
   R.filter(withType('component')),
   R.map((node) => {
@@ -39,15 +37,48 @@ const toShapeTokens = R.pipe(
   }),
   toDict,
 )
+
+const toShapeTokens = R.pipe(
+  R.filter(withType('frame')),
+  R.groupBy((group) => {
+    if (withName('default')(group)) {
+      return 'default'
+    }
+    if (withName('compact')(group)) {
+      return 'compact'
+    }
+    return 'unknown'
+  }),
+  R.evolve({
+    default: processGroup,
+    compact: processGroup,
+    unknown: (x) => {
+      if (x.length > 0) {
+        console.warn('Unknown token group', x)
+      }
+    },
+  }),
+  (groups) => ({
+    _modes: {
+      compact: groups.compact,
+    },
+    ...groups.default,
+  }),
+)
+
 export const makeShapeTokens = (shapes) => toShapeTokens(shapes)
 
-const classTemplate = (shape, name) =>
-  `\n  --eds_shape_${name}_min_height: ${shape.minHeight};
+const classTemplate = (shape, name) => {
+  if (name === '_modes') {
+    return ''
+  }
+  return `\n  --eds_shape_${name}_min_height: ${shape.minHeight};
   --eds_shape_${name}_min_width: ${shape.minHeight};${
     R.isEmpty(shape.borderRadius)
       ? ''
       : `\n  --eds_shape_${name}_border_radius: ${shape.borderRadius};`
   }\n`
+}
 
 export const makeShapeCss = R.pipe(
   R.mapObjIndexed(classTemplate),
