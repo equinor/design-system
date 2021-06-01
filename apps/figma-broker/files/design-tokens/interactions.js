@@ -2,9 +2,7 @@ import R from 'ramda'
 import { propName, withType, pickChildren, toDict, withName } from '@utils'
 import { toFocus, toOverlay } from '@transformers'
 
-const toInteractionsTokens = R.pipe(
-  R.filter(withType('frame')),
-  R.filter(withName('default')),
+const processGroup = R.pipe(
   pickChildren,
   R.filter(withType('component')),
   R.map((node) => {
@@ -29,5 +27,33 @@ const toInteractionsTokens = R.pipe(
     }
   }),
   toDict,
+)
+
+const toInteractionsTokens = R.pipe(
+  R.filter(withType('frame')),
+  R.groupBy((group) => {
+    if (withName('default')(group)) {
+      return 'default'
+    }
+    if (withName('compact')(group)) {
+      return 'compact'
+    }
+    return 'unknown'
+  }),
+  R.evolve({
+    default: processGroup,
+    compact: processGroup,
+    unknown: (x) => {
+      if (x.length > 0) {
+        console.warn('Unknown token group', x)
+      }
+    },
+  }),
+  (groups) => ({
+    _modes: {
+      compact: groups.compact,
+    },
+    ...groups.default,
+  }),
 )
 export const makeInteractionsTokens = (states) => toInteractionsTokens(states)
