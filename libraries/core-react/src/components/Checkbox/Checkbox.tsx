@@ -21,7 +21,9 @@ const LabelText = styled.span`
 `
 
 export type CheckboxProps = {
-  /** Label for the checkbox */
+  /** Label for the checkbox.
+   * Allowed to leave this blank _only_ when using `aria-labelledby` instead.
+   */
   label?: string
   /** If true, the checkbox will be disabled */
   disabled?: boolean
