@@ -255,6 +255,15 @@ export const FileUpload: Story<ButtonProps> = () => (
   </Wrapper>
 )
 
+FileUpload.parameters = {
+  docs: {
+    description: {
+      story:
+        'Please note this demo only works in Storybook Canvas (isolated example only)',
+    },
+  },
+}
+
 export const Link: Story<ButtonProps> = () => (
   <Wrapper>
     <Button href="#">Link</Button>
