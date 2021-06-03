@@ -14,7 +14,7 @@ const {
     navigation: { menu_title: labelTypography },
   },
   spacings: {
-    comfortable: { medium, medium_small, small },
+    comfortable: { medium_small },
   },
 } = tokens
 
