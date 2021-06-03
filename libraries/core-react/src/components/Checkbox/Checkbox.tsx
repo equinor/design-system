@@ -2,7 +2,7 @@
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { checkbox as tokens } from './Checkbox.tokens'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate, spacingsTemplate } from '../../utils'
 import { CheckboxInput } from './Input'
 
 type StyledCheckboxProps = {
@@ -16,7 +16,8 @@ const StyledCheckbox = styled.label<StyledCheckboxProps>`
 `
 
 const LabelText = styled.span`
-  ${typographyTemplate(tokens.typography)}
+  ${typographyTemplate(tokens.typography)};
+  ${spacingsTemplate(tokens.entities.label.spacings)}
 `
 
 export type CheckboxProps = {
