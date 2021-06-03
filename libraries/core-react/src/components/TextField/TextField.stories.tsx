@@ -1,6 +1,12 @@
-import { TextField, TextFieldProps, Icon } from '../..'
+import { TextField, TextFieldProps, Icon, EdsProvider } from '../..'
 import { Story, Meta } from '@storybook/react'
-import { thumbs_up, warning_filled, error_filled } from '@equinor/eds-icons'
+import {
+  thumbs_up,
+  warning_filled,
+  error_filled,
+  info_circle,
+} from '@equinor/eds-icons'
+import styled from 'styled-components'
 
 const icons = {
   thumbs_up,
@@ -9,7 +15,6 @@ const icons = {
 }
 
 Icon.add(icons)
-import styled from 'styled-components'
 
 export default {
   title: 'Components/TextField',
@@ -153,8 +158,10 @@ export const Multiline: Story<TextFieldProps> = () => (
 )
 Multiline.parameters = {
   docs: {
-    storyDescription: `With multiline we recommend to use <code>rows</code> in combination with a CSS rule of
-    <code>resize: 'none'</code>`,
+    description: {
+      story: `With multiline we recommend to use <code>rows</code> in combination with a CSS rule of
+      <code>resize: 'none'</code>`,
+    },
   },
 }
 
@@ -388,10 +395,38 @@ export const Variants: Story<TextFieldProps> = () => (
     />
   </Wrapper>
 )
-
 Variants.parameters = {
   docs: {
-    storyDescription: `Examples of validation states. You can add the icon in the helper
-    text or inside the text input, both not in both places.`,
+    description: {
+      story: `Examples of validation states. You can add the icon in the helper
+      text or inside the text input, both not in both places.`,
+    },
   },
 }
+
+export const Compact: Story<TextFieldProps> = () => (
+  <Wrapper>
+    <EdsProvider density="compact">
+      <TextField
+        id="compact-textfield"
+        placeholder="Placeholder text"
+        label="Default"
+        inputIcon={<Icon name="thumbs_up" title="Success" />}
+        helperIcon={<Icon data={info_circle} title="info" />}
+        helperText="Helper information text over several lines so that it breaks"
+        style={{ width: '200px' }}
+      />
+      <TextField
+        id="compact-textfield-multiline"
+        placeholder="Placeholder text"
+        label="Multiline"
+        multiline
+        rowsMax={10}
+        inputIcon={<Icon name="thumbs_up" title="Success" />}
+        style={{ resize: 'none' }}
+        helperIcon={<Icon data={info_circle} title="info" />}
+        helperText="Helper information text thats very very veyr loooonooooooong"
+      />
+    </EdsProvider>
+  </Wrapper>
+)
