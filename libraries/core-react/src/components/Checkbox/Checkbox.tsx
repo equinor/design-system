@@ -22,7 +22,7 @@ const LabelText = styled.span`
 
 export type CheckboxProps = {
   /** Label for the checkbox */
-  label: string
+  label?: string
   /** If true, the checkbox will be disabled */
   disabled?: boolean
   /** If true, the checkbox appears indeterminate. Important! You'll have to
@@ -46,7 +46,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ref={ref}
           indeterminate={indeterminate}
         ></CheckboxInput>
-        <LabelText>{label}</LabelText>
+        {label && <LabelText>{label}</LabelText>}
       </StyledCheckbox>
     )
   },
