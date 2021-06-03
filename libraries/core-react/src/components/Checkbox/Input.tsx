@@ -22,9 +22,11 @@ const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
   d: icon.svgPathData,
 }))<StyledIconPathProps>``
 
+type StyledInputProps = { density: string }
+
 const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
-}))`
+}))<StyledInputProps>`
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -37,7 +39,10 @@ const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
     outline: none;
   }
   &[data-focus-visible-added]:focus + svg {
-    ${outlineTemplate(tokens.states.focus.outline)}
+    ${({ density }) =>
+      density === 'compact'
+        ? outlineTemplate(tokens.modes.compact.states.focus.outline)
+        : outlineTemplate(tokens.states.focus.outline)}
   }
   &:not(:checked) ~ svg path[name='checked'] {
     display: none;
@@ -102,14 +107,17 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
       disabled,
     }
 
+    const inputProps = {
+      ref,
+      disabled,
+      ['data-indeterminate']: indeterminate,
+      density,
+      ...rest,
+    }
+
     return (
       <InputWrapper {...inputWrapperProps}>
-        <Input
-          {...rest}
-          ref={ref}
-          disabled={disabled}
-          data-indeterminate={indeterminate}
-        />
+        <Input {...inputProps} />
         {indeterminate ? (
           <Svg
             width={iconSize}

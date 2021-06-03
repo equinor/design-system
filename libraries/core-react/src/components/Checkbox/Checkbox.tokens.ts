@@ -42,7 +42,7 @@ export const checkbox: CheckboxToken = {
         style: 'dashed',
         width: '1px',
         color: focusOutlineColor,
-        offset: '4px',
+        offset: medium_small,
       },
     },
   },
@@ -53,6 +53,17 @@ export const checkbox: CheckboxToken = {
         top: small,
         left: small,
         right: small,
+      },
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            style: 'dashed',
+            width: '1px',
+            color: focusOutlineColor,
+            offset: small,
+          },
+        },
       },
     },
   },
