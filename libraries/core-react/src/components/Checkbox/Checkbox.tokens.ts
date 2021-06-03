@@ -14,13 +14,13 @@ const {
     navigation: { menu_title: labelTypography },
   },
   spacings: {
-    comfortable: { medium_small },
+    comfortable: { medium_small, small },
   },
 } = tokens
 
 type CheckboxToken = ComponentToken
 
-export const comfortable: CheckboxToken = {
+export const checkbox: CheckboxToken = {
   background: primaryColor,
   typography: labelTypography,
   spacings: {
@@ -43,6 +43,16 @@ export const comfortable: CheckboxToken = {
         width: '1px',
         color: focusOutlineColor,
         offset: '4px',
+      },
+    },
+  },
+  modes: {
+    compact: {
+      spacings: {
+        bottom: small,
+        top: small,
+        left: small,
+        right: small,
       },
     },
   },

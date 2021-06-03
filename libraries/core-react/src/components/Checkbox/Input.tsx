@@ -7,8 +7,9 @@ import {
   checkbox_indeterminate, // eslint-disable-line camelcase
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
-import { comfortable as tokens } from './Checkbox.tokens'
+import { checkbox as tokens } from './Checkbox.tokens'
 import { spacingsTemplate, outlineTemplate } from '../../utils'
+import { useEds } from './../EdsProvider'
 
 type StyledIconPathProps = {
   icon: IconData
@@ -60,12 +61,16 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   fill,
 }))``
 
-type StyledInputWrapperProps = { disabled: boolean }
+type StyledInputWrapperProps = { disabled: boolean; density: string }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-flex;
   border-radius: 50%;
-  ${spacingsTemplate(tokens.spacings)}
+  ${({ density }) =>
+    density === 'compact'
+      ? spacingsTemplate(tokens.modes.compact.spacings)
+      : spacingsTemplate(tokens.spacings)}
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ disabled }) =>
@@ -90,8 +95,15 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     const fill = disabled
       ? tokens.states.disabled.background
       : tokens.background
+    const { density } = useEds()
+
+    const inputWrapperProps = {
+      density,
+      disabled,
+    }
+
     return (
-      <InputWrapper disabled={disabled}>
+      <InputWrapper {...inputWrapperProps}>
         <Input
           {...rest}
           ref={ref}
