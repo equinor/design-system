@@ -1,7 +1,10 @@
 ---
-name: Feature request 💡
+name: "Feature request \U0001F4A1"
 about: Suggest an idea
-labels: 'feature request'
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 **Is your feature request related to a problem? Please describe.**

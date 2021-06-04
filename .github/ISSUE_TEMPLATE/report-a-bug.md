@@ -1,7 +1,10 @@
 ---
-name: Bug 🐛
+name: "Bug \U0001F41B"
 about: Report a bug
-labels: 'bug'
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 **Describe the bug**
