@@ -160,7 +160,7 @@ Multiline.parameters = {
   docs: {
     description: {
       story: `With multiline we recommend to use <code>rows</code> in combination with a CSS rule of
-      <code>resize: 'none'</code>`,
+      `resize: 'none'`',
     },
   },
 }
