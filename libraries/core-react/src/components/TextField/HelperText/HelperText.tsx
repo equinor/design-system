@@ -43,7 +43,7 @@ type StyledProps = {
 
 const Container = styled.div<StyledProps>`
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   margin-top: ${({ spacings }) => spacings.top};
 `
 const Text = styled.p<StyledProps & VariationProps>`

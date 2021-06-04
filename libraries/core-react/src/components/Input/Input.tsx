@@ -9,16 +9,11 @@ import {
 } from '../../utils'
 import type { Variants } from '../TextField/types'
 import type { Spacing } from '@equinor/eds-tokens'
+import { useEds } from '../EdsProvider'
 
 const { input, inputVariants } = tokens
 
-const Variation = ({
-  variant,
-  token,
-}: {
-  variant: string
-  token: InputToken
-}) => {
+const Variation = ({ variant, token, density }: StyledProps) => {
   if (!variant) {
     return ``
   }
@@ -31,9 +26,19 @@ const Variation = ({
     boxShadow,
   } = token
 
+  let spacings = input.spacings
+  let height = input.minHeight
+  if (density === 'compact') {
+    spacings = input.modes.compact.spacings
+    height = input.modes.compact.minHeight
+  }
+
   return css`
+    height: ${height};
     border: none;
     ${outlineTemplate(activeOutline)}
+    ${spacingsTemplate(spacings)}
+
     box-shadow: ${boxShadow};
 
     &:active,
@@ -56,7 +61,7 @@ const Variation = ({
 }
 
 type StyledProps = {
-  spacings: Spacing
+  density: string
   token: InputToken
   variant: string
 }
@@ -69,7 +74,6 @@ const StyledInput = styled.input<StyledProps>`
   appearance: none;
   background: ${input.background};
 
-  ${({ spacings }) => spacingsTemplate(spacings)}
   ${typographyTemplate(input.typography)}
 
   ${Variation}
@@ -99,7 +103,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   ref,
 ) {
   const inputVariant = inputVariants[variant]
-  const spacings = tokens.comfortable.spacings
+  const { density } = useEds()
 
   const inputProps = {
     ref,
@@ -107,7 +111,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     disabled,
     variant,
     token: inputVariant,
-    spacings,
+    density,
     ...other,
   }
 

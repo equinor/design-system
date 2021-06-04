@@ -8,18 +8,12 @@ import {
   outlineTemplate,
 } from '../../utils'
 import type { Variants } from '../TextField/types'
-import type { Spacing } from '@equinor/eds-tokens'
 import { useAutoResize, useCombinedRefs } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 const { input, inputVariants } = tokens
 
-const Variation = ({
-  variant,
-  token,
-}: {
-  variant: string
-  token: InputToken
-}) => {
+const Variation = ({ variant, token, density }: StyledProps) => {
   if (!variant) {
     return ``
   }
@@ -32,8 +26,14 @@ const Variation = ({
     boxShadow,
   } = token
 
+  let spacings = input.spacings
+  if (density === 'compact') {
+    spacings = input.modes.compact.spacings
+  }
+
   return css`
     border: none;
+    ${spacingsTemplate(spacings)}
     ${outlineTemplate(activeOutline)}
     box-shadow: ${boxShadow};
 
@@ -57,9 +57,9 @@ const Variation = ({
 }
 
 type StyledProps = {
-  spacings: Spacing
   token: InputToken
   variant: string
+  density: string
 }
 
 const StyledTextarea = styled.textarea<StyledProps>`
@@ -70,7 +70,6 @@ const StyledTextarea = styled.textarea<StyledProps>`
   appearance: none;
   background: ${input.background};
   height: auto;
-  ${({ spacings }) => spacingsTemplate(spacings)}
   ${typographyTemplate(input.typography)}
 
   ${Variation}
@@ -103,11 +102,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ref,
   ) {
     const inputVariant = inputVariants[variant]
-    const spacings = tokens.comfortable.spacings
     const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
-
+    const { density } = useEds()
+    const spacings =
+      density === 'compact' ? input.modes.compact.spacings : input.spacings
     const { lineHeight } = tokens.input.typography
-    const { top, bottom } = tokens.comfortable.spacings
+    const { top, bottom } = spacings
     let fontSize = 16
 
     if (textareaEl) {
@@ -124,7 +124,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       disabled,
       variant,
       token: inputVariant,
-      spacings,
+      density,
       ...other,
     }
 

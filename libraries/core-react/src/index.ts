@@ -33,4 +33,5 @@ export * from './components/Input'
 export * from './components/Checkbox'
 export * from './components/Radio'
 export * from './components/Switch'
+export * from './components/EdsProvider'
 /* eslint-enable */

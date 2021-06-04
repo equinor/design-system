@@ -99,6 +99,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     const containerProps = {
       ref,
       className,
+      style: other.style,
     }
 
     const labelProps = {

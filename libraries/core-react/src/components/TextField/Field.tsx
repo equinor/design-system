@@ -1,6 +1,7 @@
 import { ReactNode, forwardRef, Ref } from 'react'
 import { useTextField } from './context'
 import { Input } from '../Input'
+import { input as inputToken } from '../Input/Input.tokens'
 import { Icon } from './Icon'
 import type { Variants } from './types'
 import type { TextFieldToken } from './TextField.tokens'
@@ -8,6 +9,7 @@ import styled, { css } from 'styled-components'
 import { typographyTemplate, outlineTemplate } from '../../utils'
 import * as tokens from './TextField.tokens'
 import { Textarea } from '../Textarea'
+import { useEds } from '../EdsProvider'
 
 const { textfield } = tokens
 
@@ -97,6 +99,7 @@ const Unit = styled.span<UnitType>`
 
 type AdornmentsType = {
   multiline: boolean
+  density: string
 }
 
 const Adornments = styled.div<AdornmentsType>`
@@ -108,10 +111,13 @@ const Adornments = styled.div<AdornmentsType>`
   & div:nth-child(2) {
     margin-left: ${textfield.spacings.left};
   }
-  ${({ multiline }) =>
+  ${({ multiline, density }) =>
     multiline && {
       alignSelf: 'start',
-      marginTop: `${textfield.spacings.top}`,
+      marginTop:
+        density === 'compact'
+          ? inputToken.modes.compact.spacings.top
+          : textfield.spacings.top,
     }}
 `
 
@@ -144,6 +150,7 @@ export const Field = forwardRef<
   ref,
 ) {
   const { handleFocus, handleBlur, isFocused } = useTextField()
+  const { density } = useEds()
 
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
@@ -184,7 +191,7 @@ export const Field = forwardRef<
               {...inputProps}
             />
           )}
-          <Adornments multiline={multiline}>
+          <Adornments multiline={multiline} density={density}>
             {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
             {inputIcon && (
               <Icon isDisabled={disabled} variant={variant}>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Input, InputProps, Label } from '../..'
+import { Input, InputProps, Label, EdsProvider } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -77,6 +77,26 @@ export const Accessiblity: Story<InputProps> = () => {
 
 Accessiblity.parameters = {
   docs: {
-    storyDescription: `It's important to link the <code>Input</code> to the corresponding label. `,
+    description: {
+      story: 'It's important to link the `Input` to the corresponding label. ',
+    },
+  },
+}
+
+export const Compact: Story<InputProps> = () => {
+  // To wrap the input component inside the label element is not yet supported
+  return (
+    <EdsProvider density="compact">
+      <Label htmlFor="compact" label="Compact" />
+      <Input type="text" id="compact" />
+    </EdsProvider>
+  )
+}
+
+Accessiblity.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Input` using `EdsProvder` ',
+    },
   },
 }

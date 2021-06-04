@@ -22,6 +22,7 @@ const {
     comfortable: { small, x_small },
   },
   typography,
+  shape,
 } = tokens
 
 export type InputToken = ComponentToken
@@ -34,7 +35,14 @@ export type InputVariantsToken = {
 }
 
 export const input: InputToken = {
+  minHeight: shape.straight.minHeight,
   background,
+  spacings: {
+    left: small,
+    right: small,
+    top: '6px',
+    bottom: '6px',
+  },
   typography: {
     ...typography.input.text,
     color: static_icons__default.rgba,
@@ -50,6 +58,17 @@ export const input: InputToken = {
     disabled: {
       typography: {
         color: disabled__text.rgba,
+      },
+    },
+  },
+  modes: {
+    compact: {
+      minHeight: shape._modes.compact.straight.minHeight,
+      spacings: {
+        left: x_small,
+        right: x_small,
+        top: x_small,
+        bottom: x_small,
       },
     },
   },
@@ -147,23 +166,5 @@ export const inputVariants: InputVariantsToken = {
         },
       },
     },
-  },
-}
-
-export const comfortable: InputToken = {
-  spacings: {
-    left: small,
-    right: small,
-    top: '6px',
-    bottom: '6px',
-  },
-}
-
-export const compact: InputToken = {
-  spacings: {
-    left: x_small,
-    right: x_small,
-    top: x_small,
-    bottom: x_small,
   },
 }
