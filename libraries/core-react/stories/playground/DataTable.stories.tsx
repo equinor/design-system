@@ -12,13 +12,12 @@ import {
   Menu,
   SingleSelect,
 } from '../../src'
-import { save, more_vertical } from '@equinor/eds-icons'
+import { save, more_vertical, copy, folder } from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
 
-Icon.add({ save, more_vertical })
+Icon.add({ save, more_vertical, copy, folder })
 
 const { Caption, Body, Row, Cell, Head } = Table
-const { MenuItem } = Menu
 const { colors } = tokens
 
 type Data = {
@@ -179,7 +178,9 @@ export const CompactDataGrid: Story<TableProps> = () => {
       </Caption>
       <Head>
         <Row>
-          <Cell key="head-fav">Favourite</Cell>
+          <Cell key="head-fav" id="head-fav">
+            Favourite
+          </Cell>
           {columns.map((col) => (
             <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
           ))}
@@ -194,7 +195,7 @@ export const CompactDataGrid: Story<TableProps> = () => {
         {cellValues?.map((row) => (
           <Row key={row.toString()}>
             <Cell>
-              <Checkbox label="Label" />
+              <Checkbox aria-labelledby="head-fav" />
             </Cell>
             {row.map((cellValue, idx) => {
               if (idx === 1) {
@@ -257,7 +258,7 @@ export const CompactDataGrid: Story<TableProps> = () => {
                 anchorEl={buttonEl}
                 onClose={closeMenu}
               >
-                <MenuItem onClick={onClick}>
+                <Menu.Item onClick={onClick}>
                   <Typography
                     color={colors.text.static_icons__tertiary.hex}
                     group="navigation"
@@ -275,8 +276,8 @@ export const CompactDataGrid: Story<TableProps> = () => {
                   >
                     CTRL+O
                   </Typography>
-                </MenuItem>
-                <MenuItem active onClick={onClick}>
+                </Menu.Item>
+                <Menu.Item active onClick={onClick}>
                   <Typography
                     color={colors.text.static_icons__tertiary.hex}
                     group="navigation"
@@ -294,7 +295,7 @@ export const CompactDataGrid: Story<TableProps> = () => {
                   >
                     CTRL+C
                   </Typography>
-                </MenuItem>
+                </Menu.Item>
               </Menu>
             </Cell>
           </Row>

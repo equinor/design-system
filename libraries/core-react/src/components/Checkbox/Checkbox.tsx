@@ -1,8 +1,8 @@
 /* eslint camelcase: "off" */
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { comfortable as tokens } from './Checkbox.tokens'
-import { typographyTemplate } from '../../utils'
+import { checkbox as tokens } from './Checkbox.tokens'
+import { typographyTemplate, spacingsTemplate } from '../../utils'
 import { CheckboxInput } from './Input'
 
 type StyledCheckboxProps = {
@@ -16,12 +16,14 @@ const StyledCheckbox = styled.label<StyledCheckboxProps>`
 `
 
 const LabelText = styled.span`
-  ${typographyTemplate(tokens.typography)}
+  ${typographyTemplate(tokens.typography)};
+  ${spacingsTemplate(tokens.entities.label.spacings)}
 `
 
 export type CheckboxProps = {
-  /** Label for the checkbox */
-  label: string
+  /** Label for the checkbox
+   */
+  label?: string
   /** If true, the checkbox will be disabled */
   disabled?: boolean
   /** If true, the checkbox appears indeterminate. Important! You'll have to
@@ -45,7 +47,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ref={ref}
           indeterminate={indeterminate}
         ></CheckboxInput>
-        <LabelText>{label}</LabelText>
+        {label && <LabelText>{label}</LabelText>}
       </StyledCheckbox>
     )
   },

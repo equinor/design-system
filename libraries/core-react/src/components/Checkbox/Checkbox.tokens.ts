@@ -20,7 +20,7 @@ const {
 
 type CheckboxToken = ComponentToken
 
-export const comfortable: CheckboxToken = {
+export const checkbox: CheckboxToken = {
   background: primaryColor,
   typography: labelTypography,
   spacings: {
@@ -42,7 +42,35 @@ export const comfortable: CheckboxToken = {
         style: 'dashed',
         width: '1px',
         color: focusOutlineColor,
-        offset: '4px',
+        offset: '11px',
+      },
+    },
+  },
+  entities: {
+    label: {
+      spacings: {
+        left: medium_small,
+      },
+    },
+  },
+  modes: {
+    compact: {
+      spacings: {
+        bottom: '6px',
+        top: '6px',
+        left: '6px',
+        right: '6px',
+      },
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            style: 'dashed',
+            width: '1px',
+            color: focusOutlineColor,
+            offset: '5px',
+          },
+        },
       },
     },
   },
