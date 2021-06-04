@@ -425,7 +425,7 @@ export const Compact: Story<TextFieldProps> = () => (
         inputIcon={<Icon name="thumbs_up" title="Success" />}
         style={{ resize: 'none' }}
         helperIcon={<Icon data={info_circle} title="info" />}
-        helperText="Helper information text thats very very veyr loooonooooooong"
+        helperText="Helper information text thats very very very loooonooooooong"
       />
     </EdsProvider>
   </Wrapper>
