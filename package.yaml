@@ -1,5 +1,5 @@
 name: eds
-engines: {pnpm: '>=5.13.5'}
+engines: { pnpm: '>=5.13.5' }
 scripts:
   lint: eslint
   lint:all: pnpm run lint .
@@ -7,6 +7,7 @@ scripts:
   init: pnpm multi install --force && pnpm run build
   core-react: pnpm --filter @equinor/eds-core-react run dev
   test:core-react: pnpm --filter @equinor/eds-core-react run test
+  build: pnpm run build:tokens && pnpm run build:tokens && pnpm run build:core-react
   build:core-react: pnpm --filter @equinor/eds-core-react run build
   build:tokens: pnpm --filter @equinor/eds-tokens run build
   build:icons: pnpm --filter @equinor/eds-icons run build
