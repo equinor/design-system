@@ -21,6 +21,10 @@ export const token: TopBarToken = {
   },
   border: {
     type: 'bordergroup',
-    bottom: { color: colors.ui.background__light.rgba, width: '2px' },
+    bottom: {
+      style: 'solid',
+      color: colors.ui.background__light.rgba,
+      width: '2px',
+    },
   },
 }
