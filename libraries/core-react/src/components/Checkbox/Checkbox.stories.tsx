@@ -219,3 +219,11 @@ export const Compact: Story<CheckboxProps> = () => (
     <Checkbox label="I am compact" />
   </EdsProvider>
 )
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Checkbox` using `EdsProvder` ',
+    },
+  },
+}
