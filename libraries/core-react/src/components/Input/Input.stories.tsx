@@ -93,7 +93,7 @@ export const Compact: Story<InputProps> = () => {
   )
 }
 
-Accessiblity.parameters = {
+Compact.parameters = {
   docs: {
     description: {
       story: 'Compact `Input` using `EdsProvder` ',
