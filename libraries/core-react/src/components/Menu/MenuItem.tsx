@@ -75,7 +75,8 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
           }
         `
       : css`
-          &:hover {
+          &:hover,
+          &:hover p {
             z-index: 1;
             cursor: pointer;
             background: ${hover.background};
