@@ -34,7 +34,6 @@ const Variation = ({ variant, token, density }: StyledProps) => {
   return css`
     border: none;
     ${spacingsTemplate(spacings)}
-
     ${outlineTemplate(activeOutline)}
     box-shadow: ${boxShadow};
 
