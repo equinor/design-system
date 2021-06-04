@@ -1,4 +1,4 @@
-import { MouseEvent, memo, forwardRef } from 'react'
+import { MouseEvent, memo, forwardRef, ReactNode, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { useCombinedRefs } from '../../hooks'
@@ -23,7 +23,7 @@ const {
 type StyleProps = {
   active?: boolean
   disabled?: boolean
-}
+} & HTMLAttributes<HTMLLIElement>
 
 type StyleAttrsProps = {
   isFocused: string
@@ -40,6 +40,15 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
   ${typographyTemplate(typography)}
   ${spacingsTemplate(spacings)};
 
+  // Hack to avoid width auto adjusting on hover (bold text)
+  ::before {
+    display: block;
+    content: attr(title);
+    ${typographyTemplate(hover.typography)}
+    height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+  }
   ${({ active }) =>
     active &&
     css`
@@ -70,6 +79,7 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
             z-index: 1;
             cursor: pointer;
             background: ${hover.background};
+            ${typographyTemplate(hover.typography)}
           }
           &:focus {
             ${outlineTemplate(focus.outline)}
@@ -135,6 +145,7 @@ export const MenuItem = memo(
             }
           }
         }}
+        title={typeof children === 'string' ? children : ''}
       >
         <Content>{children}</Content>
       </ListItem>

@@ -74,6 +74,10 @@ export const menu: MenuToken = {
         },
         hover: {
           background: hoverBackground,
+          typography: {
+            ...typography,
+            fontWeight: 'bold',
+          },
         },
         disabled: {
           typography: {
