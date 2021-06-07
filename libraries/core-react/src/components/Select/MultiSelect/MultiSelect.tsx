@@ -9,7 +9,7 @@ import { Label } from '../../Label'
 import { Icon } from '../../Icon'
 import { CheckboxInput } from '../../Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { multiSelect as tokens } from '../Select.tokens'
 import {
   Container,
@@ -20,11 +20,19 @@ import {
   StyledInputWrapper,
 } from '../commonStyles'
 import { spacingsTemplate } from '../../../utils'
+import { useEds } from '../../EdsProvider'
 
 const PaddedStyledListItem = styled(StyledListItem)`
-  ${spacingsTemplate(tokens.spacings)}
   display: flex;
   align-items: center;
+  ${({ density }) =>
+    density === 'compact'
+      ? css`
+          ${spacingsTemplate(tokens.modes.compact.spacings)};
+        `
+      : css`
+          ${spacingsTemplate(tokens.spacings)};
+        `}
 `
 
 export type MultiSelectProps = {
@@ -71,6 +79,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
   ) {
     const isControlled = selectedOptions ? true : false
     const [inputValue, setInputValue] = useState('')
+    const { density } = useEds()
 
     let multipleSelectionProps: UseMultipleSelectionProps<string> = {
       initialSelectedItems: initialSelectedItems,
@@ -185,6 +194,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             variant="ghost_icon"
             {...getToggleButtonProps({ disabled: disabled || readOnly })}
             aria-label={'toggle options'}
+            density={density}
           >
             <Icon
               data={isOpen ? arrow_drop_up : arrow_drop_down}
@@ -199,6 +209,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                 key={`${item}`}
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
                 {...getItemProps({ item, index, disabled: disabled })}
+                density={density}
               >
                 <CheckboxInput
                   checked={selectedItems.includes(item)}

@@ -1,6 +1,7 @@
 import { tokens } from '@equinor/eds-tokens'
 import * as R from 'ramda'
 import type { ComponentToken } from '@equinor/eds-tokens'
+import { shape } from '@equinor/eds-tokens/base/shape'
 
 const {
   typography,
@@ -14,16 +15,16 @@ const {
       medium_small: spacingMediumSmall,
       medium: spacingMedium,
       large: spacingLarge,
+      x_small,
     },
   },
   elevation: { temporary_nav: boxShadow },
-  clickbounds: { default__base: clickbounds },
 } = tokens
 
 export const select: ComponentToken = {
   background: colors.ui.background__default.rgba,
   boxShadow,
-  minHeight: clickbounds,
+  minHeight: shape.straight.minHeight,
   spacings: {
     top: spacingMedium,
     right: spacingLarge,
@@ -53,6 +54,26 @@ export const select: ComponentToken = {
       },
     },
   },
+  modes: {
+    compact: {
+      spacings: {
+        left: spacingLarge,
+        right: spacingLarge,
+        top: spacingSmall,
+        bottom: spacingSmall,
+      },
+      entities: {
+        button: {
+          height: '24px',
+          spacings: {
+            left: spacingSmall,
+            right: spacingSmall,
+            top: '0',
+          },
+        },
+      },
+    },
+  },
 }
 
 export const multiSelect: ComponentToken = R.mergeDeepRight(select, {
@@ -61,5 +82,13 @@ export const multiSelect: ComponentToken = R.mergeDeepRight(select, {
     bottom: '0',
     left: spacingMediumSmall,
     right: spacingLarge,
+  },
+  modes: {
+    compact: {
+      spacings: {
+        top: '0',
+        bottom: '0',
+      },
+    },
   },
 })

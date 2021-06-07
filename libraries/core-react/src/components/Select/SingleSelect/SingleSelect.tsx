@@ -4,7 +4,7 @@ import {
   UseComboboxProps,
   UseComboboxStateChange,
 } from 'downshift'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Label } from '../../Label'
 import { Icon } from '../../Icon'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
@@ -18,6 +18,7 @@ import {
   StyledListItem,
   StyledInputWrapper,
 } from '../commonStyles'
+import { useEds } from '../../EdsProvider'
 
 export type SingleSelectProps = {
   /** List of options to choose from */
@@ -44,7 +45,14 @@ export type SingleSelectProps = {
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const PaddedStyledListItem = styled(StyledListItem)`
-  ${spacingsTemplate(tokens.spacings)};
+  ${({ density }) =>
+    density === 'compact'
+      ? css`
+          ${spacingsTemplate(tokens.modes.compact.spacings)};
+        `
+      : css`
+          ${spacingsTemplate(tokens.spacings)};
+        `}
 `
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
@@ -65,6 +73,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
   ) {
     const [inputItems, setInputItems] = useState(items)
     const isControlled = selectedOption !== undefined ? true : false
+    const { density } = useEds()
 
     useEffect(() => {
       setInputItems(items)
@@ -116,6 +125,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
             type="button"
             variant="ghost_icon"
             {...getToggleButtonProps({ disabled: disabled || readOnly })}
+            density={density}
           >
             <Icon
               data={isOpen ? arrow_drop_up : arrow_drop_down}
@@ -130,6 +140,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
                 key={`${item}`}
                 {...getItemProps({ item, index, disabled: disabled })}
+                density={density}
               >
                 {item}
               </PaddedStyledListItem>

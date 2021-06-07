@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react'
 import { Input } from '../Input'
 import { List } from '../List'
 import { Button } from '../Button'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { select as selectToken } from './Select.tokens'
 import { typographyTemplate, bordersTemplate } from '../../utils'
 
@@ -14,6 +14,11 @@ type ContainerProps = HTMLAttributes<HTMLDivElement>
 
 type StyledListItemType = {
   highlighted: string
+  density: string
+}
+
+type StyledButtonType = {
+  density: string
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -53,12 +58,15 @@ export const StyledListItem = styled(List.Item)<StyledListItemType>`
     highlighted === 'true' ? 'pointer' : 'default'};
 `
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)<StyledButtonType>`
   position: absolute;
   right: ${buttonToken.spacings.right};
-  top: ${buttonToken.spacings.top};
   height: ${buttonToken.height};
   width: ${buttonToken.height};
+  ${({ density }) =>
+    density === 'compact'
+      ? css({ top: selectToken.modes.compact.entities.button.spacings.top })
+      : css({ top: buttonToken.spacings.top })}
 `
 
 export const StyledInputWrapper = styled.div`
