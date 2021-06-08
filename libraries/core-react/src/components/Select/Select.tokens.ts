@@ -57,8 +57,8 @@ export const select: ComponentToken = {
   modes: {
     compact: {
       spacings: {
-        left: spacingLarge,
-        right: spacingLarge,
+        left: spacingSmall,
+        right: spacingSmall,
         top: spacingSmall,
         bottom: spacingSmall,
       },
@@ -86,7 +86,7 @@ export const multiSelect: ComponentToken = R.mergeDeepRight(select, {
   modes: {
     compact: {
       spacings: {
-        top: '0',
+        top: '2px',
         bottom: '0',
       },
     },
