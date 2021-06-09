@@ -102,7 +102,7 @@ const StyledTypography = styled.p<StyledProps>`
         ${outlineTemplate(linktokens.states.focus.outline)}
       }
     `}
-   ${({ variant }) =>
+   ${({ variant, group }) =>
     // Hack to avoid width auto adjusting on hover (bold text in Menu)
     variant === 'menu_title' &&
     css`
@@ -113,12 +113,6 @@ const StyledTypography = styled.p<StyledProps>`
         height: 0px;
         overflow: hidden;
         visibility: hidden;
-      }
-      &:hover p {
-        z-index: 1;
-        cursor: pointer;
-        background: ${menuTokens.entities.item.states.hover.background};
-        ${typographyTemplate(menuTokens.entities.item.states.hover.typography)}
       }
     `}
 `

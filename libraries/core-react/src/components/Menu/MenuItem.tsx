@@ -94,6 +94,9 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
             background: ${hover.background};
             ${typographyTemplate(hover.typography)}
           }
+          &:hover span {
+            color: ${typography.color};
+          }
           &:focus {
             ${outlineTemplate(focus.outline)}
           }
