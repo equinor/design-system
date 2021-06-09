@@ -18,7 +18,7 @@ export const textfield: TextFieldToken = {
     type: 'border',
     radius: 0,
     width: '1px',
-    color: colors.interactive.primary__resting.hex,
+    color: colors.text.static_icons__tertiary.hex,
   },
   spacings: {
     left: comfortable.small,
