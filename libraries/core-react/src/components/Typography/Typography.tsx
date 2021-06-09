@@ -171,7 +171,7 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
         typography={{ ...typography, ...token }}
         link={link}
         ref={ref}
-        title={variant === 'menu_title' && children}
+        title={variant === 'menu_title' ? children : undefined}
         variant={variant}
         {...other}
       >

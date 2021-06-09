@@ -161,7 +161,7 @@ export const MenuItem = memo(
             }
           }
         }}
-        title={typeof children === 'string' ? children : ''}
+        title={typeof children === 'string' ? children : undefined}
       >
         <Content>{children}</Content>
       </ListItem>
