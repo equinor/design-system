@@ -16,6 +16,7 @@ import {
   link as linktokens,
 } from './Typography.tokens'
 import type { Typography as TypographyType } from '@equinor/eds-tokens'
+import { menu as menuTokens } from '../Menu/Menu.tokens'
 
 const getElementType = (variant: string, link: boolean): ElementType => {
   if (link) {
@@ -73,6 +74,7 @@ type StyledProps = {
   link: boolean
   color: ColorVariants
   lines: number
+  variant?: TypographyVariants
 }
 
 const StyledTypography = styled.p<StyledProps>`
@@ -98,6 +100,24 @@ const StyledTypography = styled.p<StyledProps>`
       }
       &[data-focus-visible-added]:focus {
         ${outlineTemplate(linktokens.states.focus.outline)}
+      }
+    `}
+   ${({ variant }) =>
+    variant === 'menu_title' &&
+    css`
+      ::before {
+        display: block;
+        content: attr(title);
+        ${typographyTemplate(menuTokens.entities.item.states.hover.typography)}
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+      }
+      &:hover p {
+        z-index: 1;
+        cursor: pointer;
+        background: ${menuTokens.entities.item.states.hover.background};
+        ${typographyTemplate(menuTokens.entities.item.states.hover.typography)}
       }
     `}
 `
@@ -150,12 +170,16 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       )
     }
 
+    console.log(variant)
+
     return (
       <StyledTypography
         as={as}
         typography={{ ...typography, ...token }}
         link={link}
         ref={ref}
+        title={variant === 'menu_title' && children}
+        variant={variant}
         {...other}
       >
         {children}

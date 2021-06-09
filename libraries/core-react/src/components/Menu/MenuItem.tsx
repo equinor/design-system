@@ -1,4 +1,11 @@
-import { MouseEvent, memo, forwardRef, ReactNode, HTMLAttributes } from 'react'
+import {
+  MouseEvent,
+  memo,
+  forwardRef,
+  ReactNode,
+  HTMLAttributes,
+  Children as ReactChildren,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { useCombinedRefs } from '../../hooks'
@@ -41,14 +48,18 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
   ${spacingsTemplate(spacings)};
 
   // Hack to avoid width auto adjusting on hover (bold text)
-  ::before {
+  ${({ title }) =>
+    title &&
+    css`
+    ::before {
     display: block;
     content: attr(title);
     ${typographyTemplate(hover.typography)}
     height: 0px;
     overflow: hidden;
-    visibility: hidden;
+    visibility: hidden;`}
   }
+  
   ${({ active }) =>
     active &&
     css`
@@ -120,6 +131,18 @@ export const MenuItem = memo(
         setFocusedIndex(index_)
       }
     }
+
+    // const updatedChildren = ReactChildren.map(
+    //   children,
+    //   (child: ReactNode, index: number) => {
+    //     if (typeof child === 'string') {
+    //       return child
+    //     } else if ((child as Object).props?.variant?) {
+    //       console.log(child)
+    //     }
+    //   },
+    // )
+    //console.log(updatedChildren)
 
     const isFocused = index === focusedIndex
 
