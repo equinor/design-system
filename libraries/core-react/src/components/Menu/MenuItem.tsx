@@ -51,15 +51,16 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
   ${({ title }) =>
     title &&
     css`
-    ::before {
-    display: block;
-    content: attr(title);
-    ${typographyTemplate(hover.typography)}
-    height: 0px;
-    overflow: hidden;
-    visibility: hidden;`}
-  }
-  
+      ::before {
+        display: block;
+        content: attr(title);
+        ${typographyTemplate(hover.typography)}
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+      }
+    `}
+
   ${({ active }) =>
     active &&
     css`
@@ -131,18 +132,6 @@ export const MenuItem = memo(
         setFocusedIndex(index_)
       }
     }
-
-    // const updatedChildren = ReactChildren.map(
-    //   children,
-    //   (child: ReactNode, index: number) => {
-    //     if (typeof child === 'string') {
-    //       return child
-    //     } else if ((child as Object).props?.variant?) {
-    //       console.log(child)
-    //     }
-    //   },
-    // )
-    //console.log(updatedChildren)
 
     const isFocused = index === focusedIndex
 
