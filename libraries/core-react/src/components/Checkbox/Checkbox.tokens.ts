@@ -14,7 +14,7 @@ const {
     navigation: { menu_title: labelTypography },
   },
   spacings: {
-    comfortable: { medium_small },
+    comfortable: { medium_small, x_small },
   },
 } = tokens
 
@@ -56,10 +56,10 @@ export const checkbox: CheckboxToken = {
   modes: {
     compact: {
       spacings: {
-        bottom: '6px',
-        top: '6px',
-        left: '6px',
-        right: '6px',
+        bottom: x_small,
+        top: x_small,
+        left: x_small,
+        right: x_small,
       },
       states: {
         focus: {
@@ -68,7 +68,7 @@ export const checkbox: CheckboxToken = {
             style: 'dashed',
             width: '1px',
             color: focusOutlineColor,
-            offset: '5px',
+            offset: '3px',
           },
         },
       },
