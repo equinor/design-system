@@ -171,8 +171,6 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       )
     }
 
-    console.log(variant)
-
     return (
       <StyledTypography
         as={as}
