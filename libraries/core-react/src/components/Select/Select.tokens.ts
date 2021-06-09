@@ -15,7 +15,7 @@ const {
       medium_small: spacingMediumSmall,
       medium: spacingMedium,
       large: spacingLarge,
-      x_small,
+      xx_small,
     },
   },
   elevation: { temporary_nav: boxShadow },
@@ -64,7 +64,6 @@ export const select: ComponentToken = {
       },
       entities: {
         button: {
-          height: '24px',
           spacings: {
             left: spacingSmall,
             right: spacingSmall,
@@ -86,7 +85,7 @@ export const multiSelect: ComponentToken = R.mergeDeepRight(select, {
   modes: {
     compact: {
       spacings: {
-        top: '2px',
+        top: xx_small,
         bottom: '0',
       },
     },
