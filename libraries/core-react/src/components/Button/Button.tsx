@@ -54,6 +54,7 @@ const ButtonInner = styled.span`
   grid-auto-flow: column;
   align-items: center;
   height: 100%;
+  justify-content: center;
 `
 
 const Base = ({ token }: { token: ButtonToken }) => {
