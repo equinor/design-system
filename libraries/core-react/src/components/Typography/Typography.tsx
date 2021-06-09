@@ -102,7 +102,7 @@ const StyledTypography = styled.p<StyledProps>`
         ${outlineTemplate(linktokens.states.focus.outline)}
       }
     `}
-   ${({ variant, group }) =>
+   ${({ variant }) =>
     // Hack to avoid width auto adjusting on hover (bold text in Menu)
     variant === 'menu_title' &&
     css`
