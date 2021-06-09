@@ -76,7 +76,7 @@ export const menu: MenuToken = {
           background: hoverBackground,
           typography: {
             ...typography,
-            fontWeight: 'bold',
+            fontWeight: 700,
           },
         },
         disabled: {
