@@ -1,12 +1,12 @@
 import { forwardRef, SelectHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { nativeselect as tokens } from './Select.tokens'
-import type { NativeSelectProps } from '../NativeSelect'
+import type { NativeSelectProps } from './NativeSelect'
 import {
   typographyTemplate,
   spacingsTemplate,
   outlineTemplate,
-} from '../../../../utils'
+} from '../../../utils'
 
 const StyledSelect = styled.select`
   border: none;
