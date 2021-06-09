@@ -6,6 +6,7 @@ import { Story, Meta } from '@storybook/react'
 import { useForm, Controller } from 'react-hook-form'
 import styled from 'styled-components'
 import { items } from '../../../stories/data'
+import { EdsProvider } from '../../EdsProvider'
 
 export default {
   title: 'Components/Select/SingleSelect',
@@ -206,3 +207,9 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
     </Container>
   )
 }
+
+export const Compact: Story = () => (
+  <EdsProvider density="compact">
+    <SingleSelect label="This is compact" items={items} />
+  </EdsProvider>
+)

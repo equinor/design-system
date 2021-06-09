@@ -11,6 +11,7 @@ import {
   Button,
   Menu,
   SingleSelect,
+  EdsProvider,
 } from '../../src'
 import { save, more_vertical, copy, folder } from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
@@ -172,135 +173,137 @@ export const CompactDataGrid: Story<TableProps> = () => {
     }
   }
   return (
-    <Table density="compact">
-      <Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
-      </Caption>
-      <Head>
-        <Row>
-          <Cell key="head-fav" id="head-fav">
-            Favourite
-          </Cell>
-          {columns.map((col) => (
-            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
-          ))}
-          <Cell key="head-buy">Buy</Cell>
-          <Cell key="head-action">Some action</Cell>
-          <Cell key="head-save">Save</Cell>
-          <Cell key="head-icon">Icon</Cell>
-          <Cell key="head-settings">Settings</Cell>
-        </Row>
-      </Head>
-      <Body>
-        {cellValues?.map((row) => (
-          <Row key={row.toString()}>
-            <Cell>
-              <Checkbox aria-labelledby="head-fav" />
+    <EdsProvider density="compact">
+      <Table density="compact">
+        <Caption>
+          <Typography variant="h2">Fruits cost price</Typography>
+        </Caption>
+        <Head>
+          <Row>
+            <Cell key="head-fav" id="head-fav">
+              Favourite
             </Cell>
-            {row.map((cellValue, idx) => {
-              if (idx === 1) {
-                return (
-                  <Cell key={cellValue}>
-                    <TextField
-                      id={cellValue}
-                      value={cellValue}
-                      onChange={onChange}
-                    />
-                  </Cell>
-                )
-              }
-              if (idx === 2) {
-                return (
-                  <Cell key={cellValue}>
-                    <SingleSelect
-                      label="Label"
-                      initialSelectedItem={cellValue}
-                      items={items}
-                    />
-                  </Cell>
-                )
-              }
-              return <Cell key={cellValue}>{cellValue}</Cell>
-            })}
-            <Cell>
-              <Switch label="Label" size="small" />
-            </Cell>
-            <Cell>
-              {' '}
-              <Button variant="ghost">Action</Button>
-            </Cell>
-
-            <Cell>
-              <Button variant="ghost_icon">
-                <Icon name="save" title="save"></Icon>
-              </Button>
-            </Cell>
-            <Cell>
-              <Icon name="save" />
-            </Cell>
-            <Cell>
-              <Button
-                variant="ghost_icon"
-                id="menuButton"
-                aria-controls="menu-on-button"
-                aria-haspopup="true"
-                aria-expanded={Boolean(buttonEl)}
-                onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
-                onKeyDown={onKeyPress}
-              >
-                <Icon name="more_vertical" title="more"></Icon>
-              </Button>
-              <Menu
-                id="menu-on-button"
-                aria-labelledby="menuButton"
-                focus={focus}
-                open={Boolean(buttonEl)}
-                anchorEl={buttonEl}
-                onClose={closeMenu}
-              >
-                <Menu.Item onClick={onClick}>
-                  <Typography
-                    color={colors.text.static_icons__tertiary.hex}
-                    group="navigation"
-                    variant="label"
-                  >
-                    <Icon name="folder" />
-                  </Typography>
-                  <Typography group="navigation" variant="menu_title">
-                    Open
-                  </Typography>
-                  <Typography
-                    color={colors.text.static_icons__tertiary.hex}
-                    group="navigation"
-                    variant="label"
-                  >
-                    CTRL+O
-                  </Typography>
-                </Menu.Item>
-                <Menu.Item active onClick={onClick}>
-                  <Typography
-                    color={colors.text.static_icons__tertiary.hex}
-                    group="navigation"
-                    variant="label"
-                  >
-                    <Icon name="copy" />
-                  </Typography>
-                  <Typography group="navigation" variant="menu_title">
-                    Copy
-                  </Typography>
-                  <Typography
-                    color={colors.text.static_icons__tertiary.hex}
-                    group="navigation"
-                    variant="label"
-                  >
-                    CTRL+C
-                  </Typography>
-                </Menu.Item>
-              </Menu>
-            </Cell>
+            {columns.map((col) => (
+              <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+            ))}
+            <Cell key="head-buy">Buy</Cell>
+            <Cell key="head-action">Some action</Cell>
+            <Cell key="head-save">Save</Cell>
+            <Cell key="head-icon">Icon</Cell>
+            <Cell key="head-settings">Settings</Cell>
           </Row>
-        ))}
-      </Body>
-    </Table>
+        </Head>
+        <Body>
+          {cellValues?.map((row) => (
+            <Row key={row.toString()}>
+              <Cell>
+                <Checkbox aria-labelledby="head-fav" />
+              </Cell>
+              {row.map((cellValue, idx) => {
+                if (idx === 1) {
+                  return (
+                    <Cell key={cellValue}>
+                      <TextField
+                        id={cellValue}
+                        value={cellValue}
+                        onChange={onChange}
+                      />
+                    </Cell>
+                  )
+                }
+                if (idx === 2) {
+                  return (
+                    <Cell key={cellValue}>
+                      <SingleSelect
+                        label=""
+                        initialSelectedItem={cellValue}
+                        items={items}
+                      />
+                    </Cell>
+                  )
+                }
+                return <Cell key={cellValue}>{cellValue}</Cell>
+              })}
+              <Cell>
+                <Switch label="Label" size="small" />
+              </Cell>
+              <Cell>
+                {' '}
+                <Button variant="ghost">Action</Button>
+              </Cell>
+
+              <Cell>
+                <Button variant="ghost_icon">
+                  <Icon name="save" title="save"></Icon>
+                </Button>
+              </Cell>
+              <Cell>
+                <Icon name="save" />
+              </Cell>
+              <Cell>
+                <Button
+                  variant="ghost_icon"
+                  id="menuButton"
+                  aria-controls="menu-on-button"
+                  aria-haspopup="true"
+                  aria-expanded={Boolean(buttonEl)}
+                  onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
+                  onKeyDown={onKeyPress}
+                >
+                  <Icon name="more_vertical" title="more"></Icon>
+                </Button>
+                <Menu
+                  id="menu-on-button"
+                  aria-labelledby="menuButton"
+                  focus={focus}
+                  open={Boolean(buttonEl)}
+                  anchorEl={buttonEl}
+                  onClose={closeMenu}
+                >
+                  <Menu.Item onClick={onClick}>
+                    <Typography
+                      color={colors.text.static_icons__tertiary.hex}
+                      group="navigation"
+                      variant="label"
+                    >
+                      <Icon name="folder" />
+                    </Typography>
+                    <Typography group="navigation" variant="menu_title">
+                      Open
+                    </Typography>
+                    <Typography
+                      color={colors.text.static_icons__tertiary.hex}
+                      group="navigation"
+                      variant="label"
+                    >
+                      CTRL+O
+                    </Typography>
+                  </Menu.Item>
+                  <Menu.Item active onClick={onClick}>
+                    <Typography
+                      color={colors.text.static_icons__tertiary.hex}
+                      group="navigation"
+                      variant="label"
+                    >
+                      <Icon name="copy" />
+                    </Typography>
+                    <Typography group="navigation" variant="menu_title">
+                      Copy
+                    </Typography>
+                    <Typography
+                      color={colors.text.static_icons__tertiary.hex}
+                      group="navigation"
+                      variant="label"
+                    >
+                      CTRL+C
+                    </Typography>
+                  </Menu.Item>
+                </Menu>
+              </Cell>
+            </Row>
+          ))}
+        </Body>
+      </Table>
+    </EdsProvider>
   )
 }

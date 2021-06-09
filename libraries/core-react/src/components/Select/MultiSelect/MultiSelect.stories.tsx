@@ -1,5 +1,11 @@
 import { useState } from 'react'
-import { MultiSelect, MultiSelectProps, Button, Typography } from '../../..'
+import {
+  MultiSelect,
+  MultiSelectProps,
+  Button,
+  Typography,
+  EdsProvider,
+} from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { UseMultipleSelectionStateChange } from 'downshift'
 import styled from 'styled-components'
@@ -199,3 +205,9 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
     </Wrapper>
   )
 }
+
+export const Compact: Story = () => (
+  <EdsProvider density="compact">
+    <MultiSelect label="This is compact" items={items} />
+  </EdsProvider>
+)
