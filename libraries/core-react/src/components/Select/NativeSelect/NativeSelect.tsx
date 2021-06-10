@@ -1,5 +1,5 @@
 import { forwardRef, SelectHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Label } from '../../Label'
 import { nativeselect as tokens } from './NativeSelect.tokens'
 import {
@@ -7,18 +7,32 @@ import {
   spacingsTemplate,
   outlineTemplate,
 } from '../../../utils'
+import { useEds } from '../../EdsProvider'
 
 const Container = styled.div`
   min-width: 100px;
   width: 100%;
 `
 
-const StyledSelect = styled.select`
+type StyledSelectProps = {
+  density: string
+}
+
+const StyledSelect = styled.select<StyledSelectProps>`
   border: none;
   border-radius: 0;
   box-shadow: ${tokens.boxShadow};
-  ${spacingsTemplate(tokens.entities.input.spacings)}
+
   ${typographyTemplate(tokens.typography)}
+  ${({ density }) =>
+    density === 'compact'
+      ? css`
+          height: ${tokens.modes.compact.minHeight};
+          ${spacingsTemplate(tokens.modes.compact.entities.input.spacings)}
+        `
+      : css`
+          ${spacingsTemplate(tokens.entities.input.spacings)}
+        `}
   padding-right: calc(${tokens.entities.input.spacings.right} *2 + ${tokens
     .entities.icon.width});
   display: block;
@@ -90,6 +104,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
     },
     ref,
   ) {
+    const { density } = useEds()
     const containerProps = {
       ref,
       className,
@@ -100,6 +115,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
       id,
       disabled,
       multiple,
+      density,
       ...other,
     }
 

@@ -1,4 +1,4 @@
-import { NativeSelect, NativeSelectProps } from '../../..'
+import { NativeSelect, NativeSelectProps, EdsProvider } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -34,4 +34,16 @@ export const Disabled: Story<NativeSelectProps> = () => (
   <NativeSelect label="Label text" disabled id="disabled-select">
     <option>Pick one</option>
   </NativeSelect>
+)
+
+export const Compact: Story = () => (
+  <EdsProvider density="compact">
+    <NativeSelect label="This is compact" id="compact-select">
+      <option>First option with a really really long text</option>
+      <option>Second</option>
+      <option>Third</option>
+      <option>Another</option>
+      <option>Even another</option>
+    </NativeSelect>
+  </EdsProvider>
 )

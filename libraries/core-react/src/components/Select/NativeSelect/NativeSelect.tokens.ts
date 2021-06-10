@@ -3,8 +3,11 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   colors,
-  spacings: { comfortable },
+  spacings: {
+    comfortable: { small, x_small },
+  },
   typography,
+  shape,
 } = tokens
 
 type SelectComponentToken = ComponentToken
@@ -18,8 +21,8 @@ export const nativeselect: SelectComponentToken = {
   entities: {
     input: {
       spacings: {
-        left: comfortable.small,
-        right: comfortable.small,
+        left: small,
+        right: small,
         top: '6px',
         bottom: '6px',
       },
@@ -42,6 +45,21 @@ export const nativeselect: SelectComponentToken = {
     disabled: {
       typography: {
         color: colors.interactive.disabled__text.rgba,
+      },
+    },
+  },
+  modes: {
+    compact: {
+      minHeight: shape._modes.compact.straight.minHeight,
+      entities: {
+        input: {
+          spacings: {
+            left: x_small,
+            right: x_small,
+            top: '0',
+            bottom: '0',
+          },
+        },
       },
     },
   },
