@@ -8,7 +8,6 @@ import {
   outlineTemplate,
 } from '../../utils'
 import type { Variants } from '../TextField/types'
-import type { Spacing } from '@equinor/eds-tokens'
 import { useEds } from '../EdsProvider'
 
 const { input, inputVariants } = tokens

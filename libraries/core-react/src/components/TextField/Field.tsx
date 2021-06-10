@@ -58,20 +58,27 @@ const StrippedTextarea = styled(Textarea)`
   }
 `
 
-type InputWithAdornmentsType = {
+type InputWrapperType = {
   isFocused: boolean
   isDisabled: boolean
   variant: string
   token: TextFieldToken
+  inputIcon?: ReactNode
+  unit?: string
 }
 
-export const InputWithAdornments = styled.div<InputWithAdornmentsType>`
-  display: flex;
-  align-items: center;
-  ${{
-    background: textfield.background,
-    paddingRight: textfield.spacings.right,
-  }}
+export const InputWrapper = styled.div<InputWrapperType>`
+  ${({ inputIcon, unit }) =>
+    (inputIcon || unit) &&
+    css`
+      display: flex;
+      align-items: center;
+      ${{
+        background: textfield.background,
+        paddingRight: textfield.spacings.right,
+      }}
+    `}
+
   ${Variation}
   ${({ isDisabled }) =>
     isDisabled && {
@@ -155,6 +162,15 @@ export const Field = forwardRef<
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
 
+  const inputWrapperProps = {
+    isFocused,
+    isDisabled: disabled,
+    variant,
+    token: inputVariant,
+    inputIcon,
+    unit,
+  }
+
   const inputProps = {
     ref: ref as Ref<HTMLInputElement>,
     type,
@@ -170,45 +186,30 @@ export const Field = forwardRef<
   }
 
   return (
-    <>
-      {inputIcon || unit ? (
-        <InputWithAdornments
-          isFocused={isFocused}
-          isDisabled={disabled}
-          variant={variant}
-          token={inputVariant}
-        >
-          {multiline ? (
-            <StrippedTextarea
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              {...textareaProps}
-            />
-          ) : (
-            <StrippedInput
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              {...inputProps}
-            />
-          )}
-          <Adornments multiline={multiline} density={density}>
-            {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
-            {inputIcon && (
-              <Icon isDisabled={disabled} variant={variant}>
-                {inputIcon}
-              </Icon>
-            )}
-          </Adornments>
-        </InputWithAdornments>
-      ) : multiline ? (
-        <Textarea
+    <InputWrapper {...inputWrapperProps}>
+      {multiline ? (
+        <StrippedTextarea
           onBlur={handleBlur}
           onFocus={handleFocus}
           {...textareaProps}
         />
       ) : (
-        <Input onBlur={handleBlur} onFocus={handleFocus} {...inputProps} />
+        <StrippedInput
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          {...inputProps}
+        />
       )}
-    </>
+      {(inputIcon || unit) && (
+        <Adornments multiline={multiline} density={density}>
+          {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
+          {inputIcon && (
+            <Icon isDisabled={disabled} variant={variant}>
+              {inputIcon}
+            </Icon>
+          )}
+        </Adornments>
+      )}
+    </InputWrapper>
   )
 })

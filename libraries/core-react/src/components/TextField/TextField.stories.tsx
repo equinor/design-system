@@ -456,9 +456,11 @@ export const Validation: Story<TextFieldProps> = () => {
             placeholder="digits only"
             label="Focus issues"
             inputRef={ref}
-            inputIcon={invalid ? icon : undefined}
+            inputIcon={
+              invalid ? <Icon data={error_filled} title="error" /> : undefined
+            }
             helperText={error?.message}
-            helperIcon={icon}
+            helperIcon={<Icon data={error_filled} title="error" />}
             variant={invalid ? 'error' : 'default'}
           />
         )}
