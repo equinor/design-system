@@ -17,14 +17,16 @@ const {
       danger__highlight: { rgba: dangerHoverAltColor },
     },
   },
-  clickbounds: { default__base: clicboundHeight },
+  clickbounds: {
+    default__base: clicboundHeight,
+    compact__standard: compactClickboundHeight,
+  },
+  shape,
 } = tokens
 
-const buttonSize = 40
-
 export const primary: ButtonToken = R.mergeDeepRight(button, {
-  height: `${buttonSize}px`,
-  width: `${buttonSize}px`,
+  height: shape.icon_button.minHeight,
+  width: shape.icon_button.minWidth,
   typography: {
     color: primaryColor,
   },
@@ -36,7 +38,9 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
   clickbound: {
     width: clicboundHeight,
     offset: {
-      left: `${(parseInt(clicboundHeight) - buttonSize) / 2}px`,
+      left: `${
+        (parseInt(clicboundHeight) - parseInt(shape.icon_button.minWidth)) / 2
+      }px`,
     },
   },
   states: {
@@ -50,6 +54,22 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
       background: 'transparent',
       border: {
         color: 'transparent',
+      },
+    },
+  },
+  modes: {
+    compact: {
+      height: shape._modes.compact.icon_button.minHeight,
+      width: shape._modes.compact.icon_button.minWidth,
+      clickbound: {
+        width: compactClickboundHeight,
+        offset: {
+          left: `${
+            (parseInt(compactClickboundHeight) -
+              parseInt(shape._modes.compact.icon_button.minWidth)) /
+            2
+          }px`,
+        },
       },
     },
   },

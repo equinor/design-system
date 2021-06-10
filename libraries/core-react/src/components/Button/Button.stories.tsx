@@ -1,7 +1,8 @@
-import { Button, Icon, ButtonProps } from '../..'
+import { Button, Icon, ButtonProps, EdsProvider } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import { menu } from '@equinor/eds-icons'
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -311,3 +312,25 @@ export const FullWidth: Story<ButtonProps> = () => (
     </Button>
   </FullWidthWrapper>
 )
+
+export const Compact: Story<ButtonProps> = () => (
+  <EdsProvider density="compact">
+    <Wrapper>
+      <Button>Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="ghost_icon">
+        <Icon data={menu} title="Ghost icon menu"></Icon>
+      </Button>
+    </Wrapper>
+  </EdsProvider>
+)
+
+Compact.bind({})
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Button` using `EdsProvider`',
+    },
+  },
+}
