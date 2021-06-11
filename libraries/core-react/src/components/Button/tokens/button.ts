@@ -52,7 +52,7 @@ export const button: ButtonToken = {
     height: clicboundHeight,
     width: '100%',
     offset: {
-      top: `${(parseInt(clicboundHeight) - parseInt(buttonHeight)) / 2}px`,
+      top: `${(parseInt(clicboundHeight) - parseInt(buttonHeight)) / 2 + 1}px`,
       left: '0',
     },
   },
@@ -106,7 +106,8 @@ export const button: ButtonToken = {
           top: `${
             (parseInt(compactClickboundHeight) -
               parseInt(compactButtonHeight)) /
-            2
+              2 +
+            1
           }px`,
           left: '0',
         },

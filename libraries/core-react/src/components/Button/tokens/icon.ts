@@ -31,6 +31,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
     color: primaryColor,
   },
   border: {
+    width: '0px',
     radius: '50%',
   },
   background: 'transparent',
@@ -38,6 +39,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
   clickbound: {
     width: clicboundHeight,
     offset: {
+      top: '0',
       left: `${
         (parseInt(clicboundHeight) - parseInt(shape.icon_button.minWidth)) / 2
       }px`,
@@ -47,6 +49,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
     hover: {
       background: primaryHoverAltColor,
       border: {
+        width: '0px',
         radius: '50%',
       },
     },
@@ -64,6 +67,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
       clickbound: {
         width: compactClickboundHeight,
         offset: {
+          top: '0',
           left: `${
             (parseInt(compactClickboundHeight) -
               parseInt(shape._modes.compact.icon_button.minWidth)) /
