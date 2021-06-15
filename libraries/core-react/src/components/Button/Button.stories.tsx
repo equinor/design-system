@@ -326,7 +326,6 @@ export const Compact: Story<ButtonProps> = () => (
   </EdsProvider>
 )
 
-Compact.bind({})
 Compact.parameters = {
   docs: {
     description: {
