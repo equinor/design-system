@@ -82,7 +82,7 @@ export type PaginationProps = {
   onChange?: (event: MouseEvent | KeyboardEvent, page: number) => void
   /** Default start page */
   defaultPage?: number
-} & HTMLAttributes<HTMLElement>
+} & Omit<HTMLAttributes<HTMLElement>, 'onChange'>
 
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   function Pagination(
