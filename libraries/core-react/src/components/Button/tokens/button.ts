@@ -17,9 +17,17 @@ const {
   },
   shape: {
     button: { minHeight: buttonHeight, borderRadius: buttonBorderRadius },
+    _modes: {
+      compact: {
+        button: { minHeight: compactButtonHeight },
+      },
+    },
   },
   interactions: { focused: outline },
-  clickbounds: { default__base: clicboundHeight },
+  clickbounds: {
+    default__base: clicboundHeight,
+    compact__standard: compactClickboundHeight,
+  },
 } = tokens
 
 export const button: ButtonToken = {
@@ -44,7 +52,7 @@ export const button: ButtonToken = {
     height: clicboundHeight,
     width: '100%',
     offset: {
-      top: `${(parseInt(clicboundHeight) - parseInt(buttonHeight)) / 2}px`,
+      top: `${(parseInt(clicboundHeight) - parseInt(buttonHeight)) / 2 + 1}px`,
       left: '0',
     },
   },
@@ -85,6 +93,24 @@ export const button: ButtonToken = {
         ...buttonTypography,
         color: disabledTextColor,
         textAlign: 'center',
+      },
+    },
+  },
+  modes: {
+    compact: {
+      height: compactButtonHeight,
+      clickbound: {
+        height: compactClickboundHeight,
+        width: '100%',
+        offset: {
+          top: `${
+            (parseInt(compactClickboundHeight) -
+              parseInt(compactButtonHeight)) /
+              2 +
+            1
+          }px`,
+          left: '0',
+        },
       },
     },
   },

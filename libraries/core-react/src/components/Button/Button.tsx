@@ -1,10 +1,4 @@
-import {
-  forwardRef,
-  ElementType,
-  ButtonHTMLAttributes,
-  Children as ReactChildren,
-  AnchorHTMLAttributes,
-} from 'react'
+import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
@@ -15,6 +9,7 @@ import {
   spacingsTemplate,
 } from '../../utils'
 import { InnerFullWidth } from './InnerFullWidth'
+import { useEds } from '../EdsProvider'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
@@ -57,14 +52,24 @@ const ButtonInner = styled.span`
   justify-content: center;
 `
 
-const Base = ({ token }: { token: ButtonToken }) => {
-  const { spacings, states, clickbound } = token
+const Base = ({ token, density }: { token: ButtonToken; density: string }) => {
+  const { spacings, states } = token
   const { focus, hover, disabled } = states
+
+  let height = token.height
+  let width = token.width
+  let clickbound = token.clickbound
+
+  if (density === 'compact') {
+    height = token.modes.compact.height
+    width = token.modes.compact.width
+    clickbound = token.modes.compact.clickbound
+  }
 
   return css`
     background: ${token.background};
-    height: ${token.height};
-    width: ${token.width};
+    height: ${height};
+    width: ${width};
     svg {
       justify-self: center;
     }
@@ -168,6 +173,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) {
     const token = getToken(variant, color)
+    const { density } = useEds()
 
     const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
     const type = href || other.as ? undefined : 'button'
@@ -181,6 +187,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       token,
       disabled,
       tabIndex,
+      density,
       ...other,
     }
 
