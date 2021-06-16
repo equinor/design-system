@@ -1,14 +1,40 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { comfortable as tokens } from './Switch.tokens'
-import { InputWrapper } from './InputWrapper'
-import { Input } from './Input'
+import { BaseInput, BaseInputWrapper } from './Switch.styles'
 
 const {
   entities: { track, handle },
 } = tokens.modes.compact
 
 type StyledProps = { isDisabled: boolean }
+
+const Wrapper = styled(BaseInputWrapper)<StyledProps>`
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ isDisabled }) =>
+        isDisabled ? 'transparent' : tokens.states.hover.background};
+    }
+  }
+`
+
+const Input = styled(BaseInput)`
+  &[data-focus-visible-added]:focus + span :first-child {
+    outline-offset: 4px;
+  }
+  /*  Track */
+  &:checked + span > span {
+    background-color: ${({ disabled }) =>
+      disabled
+        ? tokens.states.disabled.background
+        : track.states.active.background};
+  }
+  /* Handle */
+  &:checked + span > span:last-child {
+    transform: translate(180%, -50%);
+    background-color: ${handle.background};
+  }
+`
 
 const Track = styled.span<StyledProps>`
   width: ${track.width};
@@ -46,11 +72,11 @@ export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
   function SwitchSmall({ disabled, ...rest }, ref) {
     return (
       <>
-        <Input {...rest} ref={ref} disabled={disabled} size="small" />
-        <InputWrapper isDisabled={disabled} size="small">
+        <Input {...rest} ref={ref} disabled={disabled} />
+        <Wrapper isDisabled={disabled}>
           <Track isDisabled={disabled} />
           <Handle />
-        </InputWrapper>
+        </Wrapper>
       </>
     )
   },

@@ -1,15 +1,47 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { comfortable as tokens } from './Switch.tokens'
-import { InputWrapper } from './InputWrapper'
-import { Input } from './Input'
 import { bordersTemplate } from '../../utils'
+import { BaseInput, BaseInputWrapper } from './Switch.styles'
 
 const {
   entities: { track, handle },
 } = tokens
 
 type StyledProps = { isDisabled: boolean }
+
+const Wrapper = styled(BaseInputWrapper)<StyledProps>`
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ isDisabled }) =>
+        isDisabled ? 'transparent' : tokens.states.hover.background};
+    }
+    &:hover > span:last-child {
+      background-color: ${({ isDisabled }) =>
+        isDisabled
+          ? tokens.states.disabled.background
+          : tokens.states.hover.entities.handle.background};
+    }
+  }
+`
+
+const Input = styled(BaseInput)`
+  /*  Track */
+  &:checked + span > span {
+    background-color: ${({ disabled }) =>
+      disabled
+        ? tokens.states.disabled.background
+        : tokens.entities.track.states.active.background};
+  }
+  /* Handle */
+  &:checked + span > span:last-child {
+    transform: translate(135%, -50%);
+    background-color: ${({ disabled }) =>
+      disabled
+        ? tokens.states.disabled.background
+        : tokens.entities.handle.states.active.background};
+  }
+`
 
 const Track = styled.span<StyledProps>`
   ${bordersTemplate(track.border)}
@@ -55,10 +87,10 @@ export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
     return (
       <>
         <Input {...rest} ref={ref} disabled={disabled} />
-        <InputWrapper isDisabled={disabled}>
+        <Wrapper isDisabled={disabled}>
           <Track isDisabled={disabled} />
           <Handle isDisabled={disabled} />
-        </InputWrapper>
+        </Wrapper>
       </>
     )
   },
