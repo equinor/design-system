@@ -35,13 +35,13 @@ export const Default: Story<SwitchProps> = (args) => (
   <Switch label="Play with me" {...args} />
 )
 
-const UnstyledList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-`
-
 export const DefaultStates: Story<SwitchProps> = () => {
+  const UnstyledList = styled.ul`
+    list-style-type: none;
+    li {
+      margin-bottom: 8px;
+    }
+  `
   return (
     <Wrapper>
       <UnstyledList>
@@ -63,6 +63,12 @@ export const DefaultStates: Story<SwitchProps> = () => {
 }
 
 export const SmallStates: Story<SwitchProps> = () => {
+  const UnstyledList = styled.ul`
+    list-style-type: none;
+    li {
+      margin-bottom: 8px;
+    }
+  `
   return (
     <Wrapper>
       <UnstyledList>
