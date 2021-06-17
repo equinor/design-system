@@ -1,11 +1,4 @@
-import {
-  MouseEvent,
-  memo,
-  forwardRef,
-  ReactNode,
-  HTMLAttributes,
-  Children as ReactChildren,
-} from 'react'
+import { MouseEvent, memo, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { useCombinedRefs } from '../../hooks'
@@ -30,7 +23,7 @@ const {
 type StyleProps = {
   active?: boolean
   disabled?: boolean
-} & HTMLAttributes<HTMLLIElement>
+}
 
 type StyleAttrsProps = {
   isFocused: string

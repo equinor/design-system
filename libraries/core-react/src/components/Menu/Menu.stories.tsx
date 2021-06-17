@@ -173,7 +173,7 @@ export const Complex: Story<MenuProps> = () => {
             size={16}
             color={colors.text.static_icons__tertiary.hex}
           />
-          <Typography group="navigation" variant="menu_title">
+          <Typography group="navigation" variant="menu_title" as="span">
             Open
           </Typography>
           <Typography
@@ -191,7 +191,7 @@ export const Complex: Story<MenuProps> = () => {
             size={16}
             color={colors.text.static_icons__tertiary.hex}
           />
-          <Typography group="navigation" variant="menu_title">
+          <Typography group="navigation" variant="menu_title" as="span">
             Copy
           </Typography>
           <Typography
@@ -209,7 +209,7 @@ export const Complex: Story<MenuProps> = () => {
             size={16}
             color={colors.text.static_icons__tertiary.hex}
           />
-          <Typography group="navigation" variant="menu_title">
+          <Typography group="navigation" variant="menu_title" as="span">
             Paste
           </Typography>
           <Typography
@@ -227,7 +227,7 @@ export const Complex: Story<MenuProps> = () => {
             size={16}
             color={colors.text.static_icons__tertiary.hex}
           />
-          <Typography group="navigation" variant="menu_title">
+          <Typography group="navigation" variant="menu_title" as="span">
             Rename
           </Typography>
           <Typography
@@ -245,7 +245,7 @@ export const Complex: Story<MenuProps> = () => {
             size={16}
             color={colors.text.static_icons__tertiary.hex}
           />
-          <Typography group="navigation" variant="menu_title">
+          <Typography group="navigation" variant="menu_title" as="span">
             Delete
           </Typography>
           <Typography
@@ -264,7 +264,7 @@ export const Complex: Story<MenuProps> = () => {
               size={16}
               color={colors.text.static_icons__tertiary.hex}
             />
-            <Typography group="navigation" variant="menu_title">
+            <Typography group="navigation" variant="menu_title" as="span">
               Settings
             </Typography>
           </Menu.Item>
