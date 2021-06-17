@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useState } from 'react'
 import { SingleSelect, SingleSelectProps, Button, Typography } from '../../..'
 import { UseComboboxStateChange } from 'downshift'
@@ -74,23 +76,20 @@ type FormValues = {
   optionalField: string
 }
 
-type ControllerTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  onChange: (selectedItem: string) => void
-  // eslint-disable-next-line react/no-unused-prop-types
-  value: string
-}
-
 const Field = styled.div`
   margin: 1rem;
 `
 export const WithReactHookForm: Story<SingleSelectProps> = () => {
   const defaultValues: FormValues = {
     fabFieldOne: null,
-    fabFieldTwo: 'Vestland',
+    fabFieldTwo: null,
     optionalField: null,
   }
-  const { handleSubmit, errors, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<FormValues>({
     defaultValues,
   })
   const [isSubmitted, updateIsSubmitted] = useState(false)
@@ -136,12 +135,11 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
                 control={control}
                 name="fabFieldOne"
                 rules={{ required: true }}
-                render={({ onChange, value }: ControllerTypes) => (
+                render={({ field: { onChange } }) => (
                   <SingleSelect
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
                     }
-                    selectedOption={value}
                     label="Where are you from?"
                     items={items}
                     aria-invalid={errors.fabFieldOne ? 'true' : 'false'}
@@ -170,12 +168,11 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
               <Controller
                 control={control}
                 name="fabFieldTwo"
-                render={({ onChange, value }: ControllerTypes) => (
+                render={({ field: { onChange } }) => (
                   <SingleSelect
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
                     }
-                    selectedOption={value}
                     label="Choose your favourite county"
                     items={items}
                   />
@@ -186,12 +183,11 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
               <Controller
                 control={control}
                 name="optionalField"
-                render={({ onChange, value }: ControllerTypes) => (
+                render={({ field: { onChange } }) => (
                   <SingleSelect
                     handleSelectedItemChange={({ selectedItem }) =>
                       onChange(selectedItem)
                     }
-                    selectedOption={value}
                     label="Pick a fruit (optional)"
                     items={['Banana', 'Apple', 'Orange']}
                   />

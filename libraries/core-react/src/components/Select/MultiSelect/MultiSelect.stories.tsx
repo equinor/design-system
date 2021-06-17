@@ -170,7 +170,6 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
                 render={({ field: { onChange } }) => (
                   <MultiSelect
                     handleSelectedItemsChange={({ selectedItems }) =>
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                       onChange(selectedItems)
                     }

@@ -2,7 +2,7 @@ import { useState, useRef, ChangeEvent } from 'react'
 import { Checkbox, Typography, Button, CheckboxProps, EdsProvider } from '../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Meta, Story } from '@storybook/react'
 
 const Wrapper = styled(Checkbox)`
