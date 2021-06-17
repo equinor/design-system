@@ -105,13 +105,6 @@ type FormValues = {
   fieldOne: string[]
 }
 
-type ControllerTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  onChange: (selectedItems: string[]) => void
-  // eslint-disable-next-line react/no-unused-prop-types
-  value: string[]
-}
-
 const Field = styled.div`
   margin: 1rem;
 `
@@ -119,18 +112,32 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
   const defaultValues: FormValues = {
     fieldOne: [],
   }
-  const { handleSubmit, errors, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<FormValues>({
     defaultValues,
   })
   const [isSubmitted, updateIsSubmitted] = useState(false)
   const [formData, updateFormData] = useState<FormData>(null)
 
   const onSubmit = (data: FormData) => {
+    console.log('submit!')
     updateFormData(data)
     updateIsSubmitted(true)
     action('onSubmit')(data)
   }
 
+  // const [selectedItems, setSelectedItems] = useState<string[]>(null)
+
+  // function handleSelectedItemsChange(
+  //   changes: UseMultipleSelectionStateChange<string>,
+  // ) {
+  //   setSelectedItems(changes.selectedItems)
+  // }
+
+  console.log(errors)
   return (
     <Wrapper>
       <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
@@ -166,15 +173,14 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
                 name="fieldOne"
                 rules={{
                   validate: (value: string[]) => {
+                    console.log(value, 'value')
                     return value.length > 0
                   },
                 }}
-                render={({ onChange, value }: ControllerTypes) => (
+                render={({ field }) => (
                   <MultiSelect
-                    handleSelectedItemsChange={({ selectedItems }) =>
-                      onChange(selectedItems)
-                    }
-                    selectedOptions={value}
+                    {...field}
+                    // handleSelectedItemsChange={handleSelectedItemsChange}
                     label="Where are you from?"
                     items={items}
                     aria-invalid={errors.fieldOne ? 'true' : 'false'}
