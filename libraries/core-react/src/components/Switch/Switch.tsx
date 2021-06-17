@@ -4,7 +4,6 @@ import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 import { comfortable as tokens } from './Switch.tokens'
 import { typographyTemplate } from '../../utils'
-import type { Size } from './Switch.types'
 
 type StyledProps = { isDisabled: boolean }
 
@@ -20,13 +19,14 @@ const StyledSwitch = styled.label<StyledProps>`
 
 const Label = styled.span`
   ${typographyTemplate(tokens.typography)}
+  margin-left: ${tokens.entities.label.spacings.left};
 `
 
 export type SwitchProps = {
   /** Label for the switch. Required to make it a11y compliant */
   label: string
   /** Switch size, use the small version with caution */
-  size?: Size
+  size?: 'default' | 'small'
   /** If true, the switch will be disabled */
   disabled?: boolean
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {

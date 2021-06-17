@@ -35,53 +35,61 @@ export const Default: Story<SwitchProps> = (args) => (
   <Switch label="Play with me" {...args} />
 )
 
-export const Variants: Story<SwitchProps> = () => {
+export const DefaultStates: Story<SwitchProps> = () => {
   const UnstyledList = styled.ul`
-    margin: 0;
-    padding: 0;
     list-style-type: none;
+    li {
+      margin-bottom: 8px;
+    }
   `
   return (
     <Wrapper>
-      <div>
-        <span>Default</span>
-        <UnstyledList>
-          <li>
-            <Switch label="I'm default off" />
-          </li>
-          <li>
-            <Switch label="I'm default on" defaultChecked />
-          </li>
-          <li>
-            <Switch disabled label="You can't turn me on!" />
-          </li>
-          <li>
-            <Switch disabled defaultChecked label="You can't turn me off!" />
-          </li>
-        </UnstyledList>
-      </div>
-      <div>
-        <span>Small</span>
-        <UnstyledList>
-          <li>
-            <Switch label="I'm default off" size="small" />
-          </li>
-          <li>
-            <Switch label="I'm default on" defaultChecked size="small" />
-          </li>
-          <li>
-            <Switch disabled label="You can't turn me on!" size="small" />
-          </li>
-          <li>
-            <Switch
-              disabled
-              defaultChecked
-              label="You can't turn me off!"
-              size="small"
-            />
-          </li>
-        </UnstyledList>
-      </div>
+      <UnstyledList>
+        <li>
+          <Switch label="I'm default off" />
+        </li>
+        <li>
+          <Switch label="I'm default on" defaultChecked />
+        </li>
+        <li>
+          <Switch disabled label="You can't turn me on!" />
+        </li>
+        <li>
+          <Switch disabled defaultChecked label="You can't turn me off!" />
+        </li>
+      </UnstyledList>
+    </Wrapper>
+  )
+}
+
+export const SmallStates: Story<SwitchProps> = () => {
+  const UnstyledList = styled.ul`
+    list-style-type: none;
+    li {
+      margin-bottom: 8px;
+    }
+  `
+  return (
+    <Wrapper>
+      <UnstyledList>
+        <li>
+          <Switch label="I'm default off" size="small" />
+        </li>
+        <li>
+          <Switch label="I'm default on" defaultChecked size="small" />
+        </li>
+        <li>
+          <Switch disabled label="You can't turn me on!" size="small" />
+        </li>
+        <li>
+          <Switch
+            disabled
+            defaultChecked
+            label="You can't turn me off!"
+            size="small"
+          />
+        </li>
+      </UnstyledList>
     </Wrapper>
   )
 }
