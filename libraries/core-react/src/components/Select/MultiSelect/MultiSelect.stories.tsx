@@ -164,13 +164,11 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
                 name="fieldOne"
                 rules={{
                   validate: (value: string[]) => {
-                    console.log(value, 'value')
                     return value.length > 0
                   },
                 }}
-                render={({ field: { onChange, ...props } }) => (
+                render={({ field: { onChange } }) => (
                   <MultiSelect
-                    {...props}
                     handleSelectedItemsChange={({ selectedItems }) =>
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
