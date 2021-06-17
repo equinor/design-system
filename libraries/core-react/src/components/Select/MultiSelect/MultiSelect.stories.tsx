@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState } from 'react'
 import {
   MultiSelect,
@@ -123,21 +124,11 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
   const [formData, updateFormData] = useState<FormData>(null)
 
   const onSubmit = (data: FormData) => {
-    console.log('submit!')
     updateFormData(data)
     updateIsSubmitted(true)
     action('onSubmit')(data)
   }
 
-  // const [selectedItems, setSelectedItems] = useState<string[]>(null)
-
-  // function handleSelectedItemsChange(
-  //   changes: UseMultipleSelectionStateChange<string>,
-  // ) {
-  //   setSelectedItems(changes.selectedItems)
-  // }
-
-  console.log(errors)
   return (
     <Wrapper>
       <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
@@ -177,10 +168,14 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
                     return value.length > 0
                   },
                 }}
-                render={({ field }) => (
+                render={({ field: { onChange, ...props } }) => (
                   <MultiSelect
-                    {...field}
-                    // handleSelectedItemsChange={handleSelectedItemsChange}
+                    {...props}
+                    handleSelectedItemsChange={({ selectedItems }) =>
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+                      onChange(selectedItems)
+                    }
                     label="Where are you from?"
                     items={items}
                     aria-invalid={errors.fieldOne ? 'true' : 'false'}
