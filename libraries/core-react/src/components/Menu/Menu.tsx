@@ -19,13 +19,24 @@ type MenuPaperProps = {
   open: boolean
 }
 
+const { border } = tokens
+
 const MenuPaper = styled(Paper)<MenuPaperProps>`
   position: absolute;
   z-index: 150;
   width: fit-content;
   min-width: fit-content;
-  ${bordersTemplate(tokens.border)};
+  ${bordersTemplate(border)};
   ${({ open }) => css({ visibility: open ? null : 'hidden' })}
+
+  li:first-child {
+    border-top-left-radius: ${border.type === 'border' && border.radius};
+    border-top-right-radius: ${border.type === 'border' && border.radius};
+  }
+  li:last-child {
+    border-bottom-left-radius: ${border.type === 'border' && border.radius};
+    border-bottom-right-radius: ${border.type === 'border' && border.radius};
+  }
 `
 type MenuContainerProps = MenuProps & {
   containerEl: HTMLElement

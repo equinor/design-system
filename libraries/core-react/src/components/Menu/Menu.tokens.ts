@@ -4,7 +4,6 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   colors: {
     ui: {
-      background__light: { rgba: hoverBackground },
       background__default: { rgba: background },
     },
     interactive: {
@@ -13,6 +12,7 @@ const {
       focus: { rgba: focusColor },
       disabled__fill: { rgba: disabledIconColor },
       disabled__text: { rgba: disabledTextColor },
+      table__header__fill_hover: { rgba: hoverBackground },
     },
     text: {
       static_icons__default: { rgba: textColor },
@@ -74,10 +74,6 @@ export const menu: MenuToken = {
         },
         hover: {
           background: hoverBackground,
-          typography: {
-            ...typography,
-            fontWeight: 700,
-          },
         },
         disabled: {
           typography: {

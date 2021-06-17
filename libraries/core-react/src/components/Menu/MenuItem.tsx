@@ -47,20 +47,6 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
   ${typographyTemplate(typography)}
   ${spacingsTemplate(spacings)};
 
-  // Hack to avoid width auto adjusting on hover (bold text)
-  ${({ title }) =>
-    title &&
-    css`
-      ::before {
-        display: block;
-        content: attr(title);
-        ${typographyTemplate(hover.typography)}
-        height: 0px;
-        overflow: hidden;
-        visibility: hidden;
-      }
-    `}
-
   ${({ active }) =>
     active &&
     css`
@@ -87,15 +73,10 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
           }
         `
       : css`
-          &:hover,
-          &:hover p {
+          &:hover {
             z-index: 1;
             cursor: pointer;
             background: ${hover.background};
-            ${typographyTemplate(hover.typography)}
-          }
-          &:hover span {
-            color: ${typography.color};
           }
           &:focus {
             ${outlineTemplate(focus.outline)}
@@ -161,7 +142,6 @@ export const MenuItem = memo(
             }
           }
         }}
-        title={typeof children === 'string' ? children : undefined}
       >
         <Content>{children}</Content>
       </ListItem>
