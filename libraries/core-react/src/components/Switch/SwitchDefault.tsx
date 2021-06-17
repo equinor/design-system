@@ -35,7 +35,7 @@ const Input = styled(BaseInput)`
   }
   /* Handle */
   &:checked + span > span:last-child {
-    transform: translate(135%, -50%);
+    transform: translate(105%, -50%);
     background-color: ${({ disabled }) =>
       disabled
         ? tokens.states.disabled.background
@@ -74,7 +74,7 @@ const Handle = styled.span<StyledProps>`
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
-  left: 6px;
+  left: 4px;
   transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 

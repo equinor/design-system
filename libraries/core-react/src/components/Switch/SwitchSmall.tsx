@@ -60,7 +60,7 @@ const Handle = styled.span`
   position: absolute;
   top: 50%;
   transform: translate(11%, -50%);
-  left: 15px;
+  left: 11px;
   transition: transform 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 `
 

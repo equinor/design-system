@@ -26,15 +26,26 @@ const {
   spacings: {
     comfortable: { small },
   },
+  shape: { circle },
 } = tokens
 
 type SwitchToken = ComponentToken
 
 export const comfortable: SwitchToken = {
   typography: labelTypography,
+  height: circle.minHeight,
+  width: circle.minWidth,
   clickbound: {
     height: clickbounds.default__base,
     width: clickbounds.default__base,
+    offset: {
+      top: `${
+        (parseInt(clickbounds.default__base) - parseInt(circle.minHeight)) / 2
+      }px`,
+      left: `${
+        (parseInt(clickbounds.default__base) - parseInt(circle.minWidth)) / 2
+      }px`,
+    },
   },
   entities: {
     label: {
@@ -43,7 +54,7 @@ export const comfortable: SwitchToken = {
       },
     },
     track: {
-      width: '34px',
+      width: '32px',
       height: '8px',
       background: backgroundColorMedium,
       border: {
