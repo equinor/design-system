@@ -432,7 +432,7 @@ export const Compact: Story<TextFieldProps> = () => (
   </Wrapper>
 )
 
-export const Validation: Story<TextFieldProps> = () => {
+export const ExampleWithReactHookForm: Story<TextFieldProps> = () => {
   const { handleSubmit, control } = useForm({
     defaultValues: { data: '' },
   })
@@ -444,7 +444,7 @@ export const Validation: Story<TextFieldProps> = () => {
         control={control}
         rules={{
           required: 'Required',
-          pattern: { value: /^[0-9]+$/g, message: 'Pattern' },
+          pattern: { value: /^[0-9]+$/g, message: 'Only digits allowed' },
         }}
         render={({
           field: { ref, ...props },
@@ -453,8 +453,8 @@ export const Validation: Story<TextFieldProps> = () => {
           <TextField
             {...props}
             id={props.name}
-            placeholder="digits only"
-            label="Focus issues"
+            placeholder="Digits only"
+            label="Validation example, only digits allowed"
             inputRef={ref}
             inputIcon={
               invalid ? <Icon data={error_filled} title="error" /> : undefined
@@ -465,7 +465,9 @@ export const Validation: Story<TextFieldProps> = () => {
           />
         )}
       />
-      <Button type="submit">Submit</Button>
+      <Button type="submit" style={{ marginTop: '14px' }}>
+        Submit
+      </Button>
     </form>
   )
 }

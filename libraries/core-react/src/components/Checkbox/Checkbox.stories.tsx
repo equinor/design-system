@@ -2,7 +2,7 @@ import { useState, useRef, ChangeEvent } from 'react'
 import { Checkbox, Typography, Button, CheckboxProps, EdsProvider } from '../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { Meta, Story } from '@storybook/react'
 
 const Wrapper = styled(Checkbox)`
@@ -110,7 +110,11 @@ type FormData = {
 export const WithFormsControl: Story<CheckboxProps> = () => {
   // Example with external forms library, react-hook-form
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { register, handleSubmit, watch, errors } = useForm<FormData>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>()
   const [isSubmitted, updateIsSubmitted] = useState(false)
   const [formData, updateFormData] = useState<FormData>(null)
 
@@ -119,7 +123,7 @@ export const WithFormsControl: Story<CheckboxProps> = () => {
     updateIsSubmitted(true)
     action('onSubmit')(data)
   }
-  console.log(watch('example'))
+
   return (
     <div>
       <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
@@ -155,36 +159,36 @@ export const WithFormsControl: Story<CheckboxProps> = () => {
               <Wrapper
                 name="favourites"
                 value="pineapple"
-                ref={register}
                 label="Pineapple"
+                {...register('favourites')}
               />
               <Wrapper
                 name="favourites"
                 value="strawberry"
-                ref={register}
                 label="Strawberries"
+                {...register('favourites')}
               />
               <Wrapper
                 name="favourites"
                 value="honeyMelon"
-                ref={register}
                 label="Honey melon"
+                {...register('favourites')}
               />
               <Wrapper
                 name="favourites"
                 value="apples"
-                ref={register}
                 label="Apples"
+                {...register('favourites')}
               />
             </fieldset>
             <Checkbox
               name="agree"
-              ref={register({ required: true })}
               label="I understand that these preferences will not be saved*"
               id="agree"
               aria-invalid={errors.agree ? 'true' : 'false'}
               aria-describedby="error-name-required"
               aria-required
+              {...register('agree', { required: true })}
             />
             <span
               role="alert"
