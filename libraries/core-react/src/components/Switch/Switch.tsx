@@ -19,6 +19,7 @@ const StyledSwitch = styled.label<StyledProps>`
 
 const Label = styled.span`
   ${typographyTemplate(tokens.typography)}
+  margin-left: ${tokens.entities.label.spacings.left};
 `
 
 export type SwitchProps = {

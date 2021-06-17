@@ -23,6 +23,9 @@ const {
   },
   clickbounds,
   elevation: { raised: boxShadow },
+  spacings: {
+    comfortable: { small },
+  },
 } = tokens
 
 type SwitchToken = ComponentToken
@@ -34,6 +37,11 @@ export const comfortable: SwitchToken = {
     width: clickbounds.default__base,
   },
   entities: {
+    label: {
+      spacings: {
+        left: small,
+      },
+    },
     track: {
       width: '34px',
       height: '8px',

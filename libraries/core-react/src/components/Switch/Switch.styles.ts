@@ -23,7 +23,7 @@ export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   &:focus {
     outline: none;
   }
-  &[data-focus-visible-added]:focus + span :first-child {
+  &[data-focus-visible-added]:focus + span {
     ${outlineTemplate(tokens.states.focus.outline)}
   }
 `

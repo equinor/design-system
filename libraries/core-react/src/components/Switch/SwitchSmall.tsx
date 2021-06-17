@@ -19,7 +19,7 @@ const Wrapper = styled(BaseInputWrapper)<StyledProps>`
 `
 
 const Input = styled(BaseInput)`
-  &[data-focus-visible-added]:focus + span :first-child {
+  &[data-focus-visible-added]:focus + span {
     outline-offset: 4px;
   }
   /*  Track */
