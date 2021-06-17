@@ -7,6 +7,7 @@ import {
   info_circle,
 } from '@equinor/eds-icons'
 import styled from 'styled-components'
+//import { Controller, useForm } from 'react-hook-form'
 
 const icons = {
   thumbs_up,
@@ -430,3 +431,41 @@ export const Compact: Story<TextFieldProps> = () => (
     </EdsProvider>
   </Wrapper>
 )
+
+// export const Validation: Story<TextFieldProps> = () => {
+//   const { handleSubmit, control } = useForm({
+//     defaultValues: { data: '' },
+//   })
+
+//   return (
+//     <form className="Form" onSubmit={handleSubmit((data) => console.log(data))}>
+//       <Controller
+//         name="data"
+//         control={control}
+//         rules={{
+//           required: 'Required',
+//           pattern: { value: /^[0-9]+$/g, message: 'Pattern' },
+//         }}
+//         render={({
+//           field: { ref, ...props },
+//           fieldState: { invalid, error },
+//         }) => (
+//           <TextField
+//             {...props}
+//             id={props.name}
+//             placeholder="digits only"
+//             label="Focus issues"
+//             inputRef={ref}
+//             inputIcon={
+//               invalid ? <Icon data={error_filled} title="error" /> : undefined
+//             }
+//             helperText={error?.message}
+//             helperIcon={<Icon data={error_filled} title="error" />}
+//             variant={invalid ? 'error' : 'default'}
+//           />
+//         )}
+//       />
+//       <Button type="submit">Submit</Button>
+//     </form>
+//   )
+// }
