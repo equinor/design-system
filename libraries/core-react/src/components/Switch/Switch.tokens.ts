@@ -29,7 +29,7 @@ const {
   shape: { circle },
 } = tokens
 
-type SwitchToken = ComponentToken
+export type SwitchToken = ComponentToken
 
 export const comfortable: SwitchToken = {
   typography: labelTypography,
@@ -87,6 +87,8 @@ export const comfortable: SwitchToken = {
   },
   modes: {
     compact: {
+      height: '30px',
+      width: '30px',
       entities: {
         track: {
           width: '20px',

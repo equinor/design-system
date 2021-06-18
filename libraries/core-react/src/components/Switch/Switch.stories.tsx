@@ -62,11 +62,11 @@ export const DefaultStates: Story<SwitchProps> = () => {
   )
 }
 
-export const SmallStates: Story<SwitchProps> = () => {
+export const Compact: Story<SwitchProps> = () => {
   const UnstyledList = styled.ul`
     list-style-type: none;
     li {
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
   `
   return (
