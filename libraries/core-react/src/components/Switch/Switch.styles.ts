@@ -2,11 +2,7 @@ import styled, { css } from 'styled-components'
 import { outlineTemplate } from '../../utils'
 
 export const BaseInputWrapper = styled.span(
-  ({
-    theme: {
-      token: { clickbound, width, height },
-    },
-  }) => css`
+  ({ theme: { clickbound, width, height } }) => css`
     width: ${width};
     height: ${height};
     border-radius: 50%;
@@ -34,7 +30,7 @@ export const BaseInputWrapper = styled.span(
 export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
 }))(
-  ({ theme: { token } }) => css`
+  ({ theme }) => css`
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -47,7 +43,7 @@ export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
       outline: none;
     }
     &[data-focus-visible-added]:focus + span {
-      ${outlineTemplate(token.states.focus.outline)}
+      ${outlineTemplate(theme.states.focus.outline)}
     }
   `,
 )

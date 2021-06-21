@@ -20,9 +20,9 @@ const StyledSwitch = styled.label<StyledProps>`
 `
 
 const Label = styled.span(
-  ({ theme: { token } }) => css`
-    ${typographyTemplate(token.typography)}
-    margin-left: ${token.entities.label.spacings.left};
+  ({ theme }) => css`
+    ${typographyTemplate(theme.typography)}
+    margin-left: ${theme.entities.label.spacings.left};
   `,
 )
 
@@ -44,8 +44,10 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   const { density } = useEds()
   const token = useToken({ density }, tokens)()
 
+  console.log({ density, token })
+
   return (
-    <ThemeProvider theme={{ token }}>
+    <ThemeProvider theme={token}>
       <StyledSwitch isDisabled={disabled} className={className}>
         {size === 'small' ? (
           <SwitchSmall disabled={disabled} {...rest} ref={ref} />

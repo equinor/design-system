@@ -1,4 +1,5 @@
 import { ComponentToken, tokens } from '@equinor/eds-tokens'
+import { shape } from '../../../../tokens/base/shape'
 
 const {
   colors: {
@@ -87,8 +88,24 @@ export const comfortable: SwitchToken = {
   },
   modes: {
     compact: {
-      height: '30px',
-      width: '30px',
+      height: shape._modes.compact.icon_button.minHeight,
+      width: shape._modes.compact.icon_button.minWidth,
+      clickbound: {
+        height: clickbounds.compact__standard,
+        width: clickbounds.compact__standard,
+        offset: {
+          top: `${
+            (parseInt(clickbounds.compact__standard) -
+              parseInt(shape._modes.compact.icon_button.minHeight)) /
+            2
+          }px`,
+          left: `${
+            (parseInt(clickbounds.compact__standard) -
+              parseInt(shape._modes.compact.icon_button.minWidth)) /
+            2
+          }px`,
+        },
+      },
       entities: {
         track: {
           width: '20px',
@@ -120,7 +137,7 @@ export const comfortable: SwitchToken = {
         type: 'outline',
         style: 'dashed',
         color: focusOutlineColor,
-        offset: '6px',
+        offset: '2px',
       },
     },
     hover: {

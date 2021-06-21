@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Switch, SwitchProps } from '../..'
+import { Switch, SwitchProps, EdsProvider } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 
@@ -70,27 +70,29 @@ export const Compact: Story<SwitchProps> = () => {
     }
   `
   return (
-    <Wrapper>
-      <UnstyledList>
-        <li>
-          <Switch label="I'm default off" size="small" />
-        </li>
-        <li>
-          <Switch label="I'm default on" defaultChecked size="small" />
-        </li>
-        <li>
-          <Switch disabled label="You can't turn me on!" size="small" />
-        </li>
-        <li>
-          <Switch
-            disabled
-            defaultChecked
-            label="You can't turn me off!"
-            size="small"
-          />
-        </li>
-      </UnstyledList>
-    </Wrapper>
+    <EdsProvider density="compact">
+      <Wrapper>
+        <UnstyledList>
+          <li>
+            <Switch label="I'm default off" size="small" />
+          </li>
+          <li>
+            <Switch label="I'm default on" defaultChecked size="small" />
+          </li>
+          <li>
+            <Switch disabled label="You can't turn me on!" size="small" />
+          </li>
+          <li>
+            <Switch
+              disabled
+              defaultChecked
+              label="You can't turn me off!"
+              size="small"
+            />
+          </li>
+        </UnstyledList>
+      </Wrapper>
+    </EdsProvider>
   )
 }
 
