@@ -115,6 +115,12 @@ module.exports = {
         ],
         '@typescript-eslint/restrict-plus-operands': ['warn'],
         '@typescript-eslint/ban-ts-comment': ['warn'],
+        '@typescript-eslint/no-empty-interface': [
+          'error',
+          {
+            allowSingleExtends: true,
+          },
+        ],
         // '@typescript-eslint/no-unsafe-member-access': ['warn'],
         // '@typescript-eslint/no-unsafe-call': ['warn'],
         // '@typescript-eslint/no-unsafe-return': ['warn'],

@@ -42,9 +42,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   ref,
 ) {
   const { density } = useEds()
-  const token = useToken({ density }, tokens)()
-
-  console.log({ density, token })
+  // TODO Temporary workaround untill we can deprecate "size" property (controlled by EdsProvider in the future)
+  const overrideDensity = size === 'small' ? 'compact' : density
+  const token = useToken({ density: overrideDensity }, tokens)()
 
   return (
     <ThemeProvider theme={token}>
