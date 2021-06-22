@@ -96,4 +96,18 @@ export const menu: MenuToken = {
       },
     },
   },
+  modes: {
+    compact: {
+      entities: {
+        item: {
+          spacings: {
+            left: large,
+            right: large,
+            top: small,
+            bottom: small,
+          },
+        },
+      },
+    },
+  },
 }
