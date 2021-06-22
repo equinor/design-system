@@ -21,10 +21,10 @@ Accordion.Header = AccordionHeader
 Accordion.HeaderTitle = AccordionHeaderTitle
 Accordion.Panel = AccordionPanel
 
-Accordion.Item.displayName = 'Accorion.Item'
-Accordion.Header.displayName = 'Accorion.Header'
-Accordion.HeaderTitle.displayName = 'Accorion.HeaderTitle'
-Accordion.Panel.displayName = 'Accorion.Panel'
+Accordion.Item.displayName = 'Accordion.Item'
+Accordion.Header.displayName = 'Accordion.Header'
+Accordion.HeaderTitle.displayName = 'Accordion.HeaderTitle'
+Accordion.Panel.displayName = 'Accordion.Panel'
 
 export { Accordion }
 export type {
