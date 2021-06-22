@@ -1,4 +1,4 @@
-import { TextField, TextFieldProps, Icon, EdsProvider } from '../..'
+import { TextField, TextFieldProps, Icon, EdsProvider, Button } from '../..'
 import { Story, Meta } from '@storybook/react'
 import {
   thumbs_up,
@@ -7,7 +7,7 @@ import {
   info_circle,
 } from '@equinor/eds-icons'
 import styled from 'styled-components'
-//import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 const icons = {
   thumbs_up,
@@ -432,40 +432,42 @@ export const Compact: Story<TextFieldProps> = () => (
   </Wrapper>
 )
 
-// export const Validation: Story<TextFieldProps> = () => {
-//   const { handleSubmit, control } = useForm({
-//     defaultValues: { data: '' },
-//   })
+export const ExampleWithReactHookForm: Story<TextFieldProps> = () => {
+  const { handleSubmit, control } = useForm({
+    defaultValues: { data: '' },
+  })
 
-//   return (
-//     <form className="Form" onSubmit={handleSubmit((data) => console.log(data))}>
-//       <Controller
-//         name="data"
-//         control={control}
-//         rules={{
-//           required: 'Required',
-//           pattern: { value: /^[0-9]+$/g, message: 'Pattern' },
-//         }}
-//         render={({
-//           field: { ref, ...props },
-//           fieldState: { invalid, error },
-//         }) => (
-//           <TextField
-//             {...props}
-//             id={props.name}
-//             placeholder="digits only"
-//             label="Focus issues"
-//             inputRef={ref}
-//             inputIcon={
-//               invalid ? <Icon data={error_filled} title="error" /> : undefined
-//             }
-//             helperText={error?.message}
-//             helperIcon={<Icon data={error_filled} title="error" />}
-//             variant={invalid ? 'error' : 'default'}
-//           />
-//         )}
-//       />
-//       <Button type="submit">Submit</Button>
-//     </form>
-//   )
-// }
+  return (
+    <form className="Form" onSubmit={handleSubmit((data) => console.log(data))}>
+      <Controller
+        name="data"
+        control={control}
+        rules={{
+          required: 'Required',
+          pattern: { value: /^[0-9]+$/g, message: 'Only digits allowed' },
+        }}
+        render={({
+          field: { ref, ...props },
+          fieldState: { invalid, error },
+        }) => (
+          <TextField
+            {...props}
+            id={props.name}
+            placeholder="Digits only"
+            label="Validation example, only digits allowed"
+            inputRef={ref}
+            inputIcon={
+              invalid ? <Icon data={error_filled} title="error" /> : undefined
+            }
+            helperText={error?.message}
+            helperIcon={<Icon data={error_filled} title="error" />}
+            variant={invalid ? 'error' : 'default'}
+          />
+        )}
+      />
+      <Button type="submit" style={{ marginTop: '14px' }}>
+        Submit
+      </Button>
+    </form>
+  )
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState } from 'react'
 import {
   MultiSelect,
@@ -105,13 +106,6 @@ type FormValues = {
   fieldOne: string[]
 }
 
-type ControllerTypes = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  onChange: (selectedItems: string[]) => void
-  // eslint-disable-next-line react/no-unused-prop-types
-  value: string[]
-}
-
 const Field = styled.div`
   margin: 1rem;
 `
@@ -119,7 +113,11 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
   const defaultValues: FormValues = {
     fieldOne: [],
   }
-  const { handleSubmit, errors, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<FormValues>({
     defaultValues,
   })
   const [isSubmitted, updateIsSubmitted] = useState(false)
@@ -169,12 +167,12 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
                     return value.length > 0
                   },
                 }}
-                render={({ onChange, value }: ControllerTypes) => (
+                render={({ field: { onChange } }) => (
                   <MultiSelect
                     handleSelectedItemsChange={({ selectedItems }) =>
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                       onChange(selectedItems)
                     }
-                    selectedOptions={value}
                     label="Where are you from?"
                     items={items}
                     aria-invalid={errors.fieldOne ? 'true' : 'false'}
