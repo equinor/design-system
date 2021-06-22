@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Menu, MenuProps, Typography, Button, Icon } from '../..'
+import { Menu, MenuProps, Typography, Button, Icon, EdsProvider } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 import { tokens } from '@equinor/eds-tokens'
@@ -320,18 +320,20 @@ export const Compact: Story<MenuProps> = () => {
       >
         Click to open Menu!
       </Button>
-      <Menu
-        open={isOpen}
-        id="menu-compact"
-        focus={focus}
-        aria-labelledby="anchor-compact"
-        onClose={closeMenu}
-        anchorEl={anchorRef.current}
-      >
-        <Menu.Item onClick={onClick}>Pressure</Menu.Item>
-        <Menu.Item onClick={onClick}>Bearing</Menu.Item>
-        <Menu.Item onClick={onClick}>Cable</Menu.Item>
-      </Menu>
+      <EdsProvider density="compact">
+        <Menu
+          open={isOpen}
+          id="menu-compact"
+          focus={focus}
+          aria-labelledby="anchor-compact"
+          onClose={closeMenu}
+          anchorEl={anchorRef.current}
+        >
+          <Menu.Item onClick={onClick}>Pressure</Menu.Item>
+          <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+          <Menu.Item onClick={onClick}>Cable</Menu.Item>
+        </Menu>
+      </EdsProvider>
     </StoryCenter>
   )
 }
