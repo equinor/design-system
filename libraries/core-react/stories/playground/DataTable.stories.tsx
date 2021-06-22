@@ -265,8 +265,9 @@ export const CompactDataGrid: Story<TableProps> = () => {
                       color={colors.text.static_icons__tertiary.hex}
                       group="navigation"
                       variant="label"
+                      style={{ height: 16 }}
                     >
-                      <Icon name="folder" />
+                      <Icon name="folder" size={16} />
                     </Typography>
                     <Typography group="navigation" variant="menu_title">
                       Open
@@ -275,6 +276,7 @@ export const CompactDataGrid: Story<TableProps> = () => {
                       color={colors.text.static_icons__tertiary.hex}
                       group="navigation"
                       variant="label"
+                      style={{ height: 12 }}
                     >
                       CTRL+O
                     </Typography>
@@ -284,8 +286,10 @@ export const CompactDataGrid: Story<TableProps> = () => {
                       color={colors.text.static_icons__tertiary.hex}
                       group="navigation"
                       variant="label"
+                      as="span"
+                      style={{ height: 16 }}
                     >
-                      <Icon name="copy" />
+                      <Icon name="copy" size={16} />
                     </Typography>
                     <Typography group="navigation" variant="menu_title">
                       Copy
@@ -294,6 +298,8 @@ export const CompactDataGrid: Story<TableProps> = () => {
                       color={colors.text.static_icons__tertiary.hex}
                       group="navigation"
                       variant="label"
+                      as="span"
+                      style={{ height: 12 }}
                     >
                       CTRL+C
                     </Typography>
