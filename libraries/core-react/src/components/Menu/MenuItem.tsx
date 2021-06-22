@@ -14,7 +14,6 @@ const {
   typography,
   entities: {
     item: {
-      spacings,
       states: { active: activeToken, focus, hover, disabled: disabledToken },
     },
     icon,
