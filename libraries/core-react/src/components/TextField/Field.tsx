@@ -81,16 +81,16 @@ export const InputWrapper = styled.div<InputWrapperType>(
 
     ${isDisabled &&
     css`
-      box-shadow: 'none';
-      cursor: 'not-allowed';
-      outline: 'none';
+      box-shadow: none;
+      cursor: not-allowed;
+      outline: none;
     `} 
     ${multiline &&
     variant === 'default' &&
     !inputIcon &&
     !unit &&
     css`
-      box-shadow: 'none';
+      box-shadow: none;
     `}
   `,
 )
