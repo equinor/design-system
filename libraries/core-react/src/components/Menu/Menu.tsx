@@ -28,15 +28,6 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   min-width: fit-content;
   ${bordersTemplate(border)};
   ${({ open }) => css({ visibility: open ? null : 'hidden' })}
-
-  li:first-child {
-    border-top-left-radius: ${border.type === 'border' && border.radius};
-    border-top-right-radius: ${border.type === 'border' && border.radius};
-  }
-  li:last-child {
-    border-bottom-left-radius: ${border.type === 'border' && border.radius};
-    border-bottom-right-radius: ${border.type === 'border' && border.radius};
-  }
 `
 type MenuContainerProps = MenuProps & {
   containerEl: HTMLElement

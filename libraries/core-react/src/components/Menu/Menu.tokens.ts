@@ -30,6 +30,10 @@ type MenuToken = ComponentToken
 
 export const menu: MenuToken = {
   background,
+  spacings: {
+    top: small,
+    bottom: small,
+  },
   border: {
     type: 'border',
     radius: '4px',
