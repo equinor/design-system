@@ -33,6 +33,8 @@ export const menu: MenuToken = {
   spacings: {
     top: small,
     bottom: small,
+    left: '0px',
+    right: '0px',
   },
   border: {
     type: 'border',

@@ -26,7 +26,6 @@ const isFragment = (object: ReactNode): boolean => {
 const List = styled.ul`
   position: relative;
   list-style: none;
-  padding: 0;
   margin: 0;
   ${spacingsTemplate(tokens.spacings)}
   li:first-child {
