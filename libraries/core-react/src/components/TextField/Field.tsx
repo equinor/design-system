@@ -68,33 +68,32 @@ type InputWrapperType = {
   multiline?: boolean
 }
 
-export const InputWrapper = styled.div<InputWrapperType>`
-  ${({ inputIcon, unit }) =>
-    (inputIcon || unit) &&
+export const InputWrapper = styled.div<InputWrapperType>(
+  ({ inputIcon, unit, isDisabled, multiline, variant }) => css`
+    ${Variation}
+    ${(inputIcon || unit) &&
     css`
       display: flex;
       align-items: center;
-      ${{
-        background: textfield.background,
-        paddingRight: textfield.spacings.right,
-      }}
+      background: ${textfield.background};
+      padding-right: ${textfield.spacings.right};
     `}
 
-  ${Variation}
-  ${({ isDisabled }) =>
-    isDisabled && {
-      boxShadow: 'none',
-      cursor: 'not-allowed',
-      outline: 'none',
-    }}
-  ${({ multiline, variant, inputIcon, unit }) =>
-    multiline &&
+    ${isDisabled &&
+    css`
+      box-shadow: 'none';
+      cursor: 'not-allowed';
+      outline: 'none';
+    `} 
+    ${multiline &&
     variant === 'default' &&
     !inputIcon &&
-    !unit && {
-      boxShadow: 'none',
-    }}
-`
+    !unit &&
+    css`
+      box-shadow: 'none';
+    `}
+  `,
+)
 
 type UnitType = {
   isDisabled: boolean
