@@ -65,28 +65,35 @@ type InputWrapperType = {
   token: TextFieldToken
   inputIcon?: ReactNode
   unit?: string
+  multiline?: boolean
 }
 
-export const InputWrapper = styled.div<InputWrapperType>`
-  ${({ inputIcon, unit }) =>
-    (inputIcon || unit) &&
+export const InputWrapper = styled.div<InputWrapperType>(
+  ({ inputIcon, unit, isDisabled, multiline, variant }) => css`
+    ${Variation}
+    ${(inputIcon || unit) &&
     css`
       display: flex;
       align-items: center;
-      ${{
-        background: textfield.background,
-        paddingRight: textfield.spacings.right,
-      }}
+      background: ${textfield.background};
+      padding-right: ${textfield.spacings.right};
     `}
 
-  ${Variation}
-  ${({ isDisabled }) =>
-    isDisabled && {
-      boxShadow: 'none',
-      cursor: 'not-allowed',
-      outline: 'none',
-    }}
-`
+    ${isDisabled &&
+    css`
+      box-shadow: none;
+      cursor: not-allowed;
+      outline: none;
+    `} 
+    ${multiline &&
+    variant === 'default' &&
+    !inputIcon &&
+    !unit &&
+    css`
+      box-shadow: none;
+    `}
+  `,
+)
 
 type UnitType = {
   isDisabled: boolean
@@ -169,6 +176,7 @@ export const Field = forwardRef<
     token: inputVariant,
     inputIcon,
     unit,
+    multiline,
   }
 
   const inputProps = {
