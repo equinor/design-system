@@ -6,7 +6,7 @@ import {
   createContext,
 } from 'react'
 
-type Density = 'compact' | 'comfortable'
+export type Density = 'compact' | 'comfortable'
 
 type State = {
   density: Density

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Switch, SwitchProps } from '../..'
+import { Switch, SwitchProps, EdsProvider } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 
@@ -62,35 +62,37 @@ export const DefaultStates: Story<SwitchProps> = () => {
   )
 }
 
-export const SmallStates: Story<SwitchProps> = () => {
+export const Compact: Story<SwitchProps> = () => {
   const UnstyledList = styled.ul`
     list-style-type: none;
     li {
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
   `
   return (
-    <Wrapper>
-      <UnstyledList>
-        <li>
-          <Switch label="I'm default off" size="small" />
-        </li>
-        <li>
-          <Switch label="I'm default on" defaultChecked size="small" />
-        </li>
-        <li>
-          <Switch disabled label="You can't turn me on!" size="small" />
-        </li>
-        <li>
-          <Switch
-            disabled
-            defaultChecked
-            label="You can't turn me off!"
-            size="small"
-          />
-        </li>
-      </UnstyledList>
-    </Wrapper>
+    <EdsProvider density="compact">
+      <Wrapper>
+        <UnstyledList>
+          <li>
+            <Switch label="I'm default off" size="small" />
+          </li>
+          <li>
+            <Switch label="I'm default on" defaultChecked size="small" />
+          </li>
+          <li>
+            <Switch disabled label="You can't turn me on!" size="small" />
+          </li>
+          <li>
+            <Switch
+              disabled
+              defaultChecked
+              label="You can't turn me off!"
+              size="small"
+            />
+          </li>
+        </UnstyledList>
+      </Wrapper>
+    </EdsProvider>
   )
 }
 

@@ -1,9 +1,11 @@
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider, css } from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 import { comfortable as tokens } from './Switch.tokens'
 import { typographyTemplate } from '../../utils'
+import { useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 type StyledProps = { isDisabled: boolean }
 
@@ -17,10 +19,12 @@ const StyledSwitch = styled.label<StyledProps>`
   position: relative;
 `
 
-const Label = styled.span`
-  ${typographyTemplate(tokens.typography)}
-  margin-left: ${tokens.entities.label.spacings.left};
-`
+const Label = styled.span(
+  ({ theme }) => css`
+    ${typographyTemplate(theme.typography)}
+    margin-left: ${theme.entities.label.spacings.left};
+  `,
+)
 
 export type SwitchProps = {
   /** Label for the switch. Required to make it a11y compliant */
@@ -37,16 +41,23 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   { size = 'default', disabled, label, className, ...rest },
   ref,
 ) {
-  return (
-    <StyledSwitch isDisabled={disabled} className={className}>
-      {size === 'small' ? (
-        <SwitchSmall disabled={disabled} {...rest} ref={ref} />
-      ) : (
-        <SwitchDefault disabled={disabled} {...rest} ref={ref} />
-      )}
+  const { density } = useEds()
+  // TODO Temporary workaround untill we can deprecate "size" property (controlled by EdsProvider in the future)
+  const overrideDensity = size === 'small' ? 'compact' : density
+  const token = useToken({ density: overrideDensity }, tokens)()
 
-      <Label>{label}</Label>
-    </StyledSwitch>
+  return (
+    <ThemeProvider theme={token}>
+      <StyledSwitch isDisabled={disabled} className={className}>
+        {size === 'small' ? (
+          <SwitchSmall disabled={disabled} {...rest} ref={ref} />
+        ) : (
+          <SwitchDefault disabled={disabled} {...rest} ref={ref} />
+        )}
+
+        <Label>{label}</Label>
+      </StyledSwitch>
+    </ThemeProvider>
   )
 })
 

@@ -26,10 +26,15 @@ const {
   spacings: {
     comfortable: { small },
   },
-  shape: { circle },
+  shape: {
+    circle,
+    _modes: {
+      compact: { icon_button: compactIconButton },
+    },
+  },
 } = tokens
 
-type SwitchToken = ComponentToken
+export type SwitchToken = ComponentToken
 
 export const comfortable: SwitchToken = {
   typography: labelTypography,
@@ -87,6 +92,24 @@ export const comfortable: SwitchToken = {
   },
   modes: {
     compact: {
+      height: compactIconButton.minHeight,
+      width: compactIconButton.minWidth,
+      clickbound: {
+        height: clickbounds.compact__standard,
+        width: clickbounds.compact__standard,
+        offset: {
+          top: `${
+            (parseInt(clickbounds.compact__standard) -
+              parseInt(compactIconButton.minHeight)) /
+            2
+          }px`,
+          left: `${
+            (parseInt(clickbounds.compact__standard) -
+              parseInt(compactIconButton.minWidth)) /
+            2
+          }px`,
+        },
+      },
       entities: {
         track: {
           width: '20px',
@@ -118,7 +141,7 @@ export const comfortable: SwitchToken = {
         type: 'outline',
         style: 'dashed',
         color: focusOutlineColor,
-        offset: '6px',
+        offset: '2px',
       },
     },
     hover: {
