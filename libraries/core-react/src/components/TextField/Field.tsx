@@ -65,6 +65,7 @@ type InputWrapperType = {
   token: TextFieldToken
   inputIcon?: ReactNode
   unit?: string
+  multiline?: boolean
 }
 
 export const InputWrapper = styled.div<InputWrapperType>`
@@ -85,6 +86,13 @@ export const InputWrapper = styled.div<InputWrapperType>`
       boxShadow: 'none',
       cursor: 'not-allowed',
       outline: 'none',
+    }}
+  ${({ multiline, variant, inputIcon, unit }) =>
+    multiline &&
+    variant === 'default' &&
+    !inputIcon &&
+    !unit && {
+      boxShadow: 'none',
     }}
 `
 
@@ -169,6 +177,7 @@ export const Field = forwardRef<
     token: inputVariant,
     inputIcon,
     unit,
+    multiline,
   }
 
   const inputProps = {
