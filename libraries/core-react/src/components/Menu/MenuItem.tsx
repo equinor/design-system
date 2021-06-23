@@ -1,14 +1,13 @@
 import { MouseEvent, memo, forwardRef } from 'react'
-import styled, { ThemeProvider, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { useCombinedRefs, useToken } from '../../hooks'
+import { useCombinedRefs } from '../../hooks'
 import {
   outlineTemplate,
   spacingsTemplate,
   typographyTemplate,
 } from '../../utils'
 import { useMenu } from './Menu.context'
-import { useEds } from '../EdsProvider'
 
 const {
   typography,
@@ -102,9 +101,7 @@ export const MenuItem = memo(
     { children, disabled, index = 0, onClick, ...rest },
     ref,
   ) {
-    const { density } = useEds()
     const { focusedIndex, setFocusedIndex, onClose } = useMenu()
-    const token = useToken({ density }, tokens)()
 
     const toggleFocus = (index_) => {
       if (focusedIndex !== index_) {
@@ -121,27 +118,25 @@ export const MenuItem = memo(
     }
 
     return (
-      <ThemeProvider theme={token}>
-        <ListItem
-          {...props}
-          ref={useCombinedRefs<HTMLLIElement>(ref, (el) => {
-            if (el !== null && isFocused) {
-              el.focus()
+      <ListItem
+        {...props}
+        ref={useCombinedRefs<HTMLLIElement>(ref, (el) => {
+          if (el !== null && isFocused) {
+            el.focus()
+          }
+        })}
+        onFocus={() => toggleFocus(index)}
+        onClick={(e) => {
+          if (!disabled && onClick) {
+            onClick(e)
+            if (onClose !== null) {
+              onClose(e)
             }
-          })}
-          onFocus={() => toggleFocus(index)}
-          onClick={(e) => {
-            if (!disabled && onClick) {
-              onClick(e)
-              if (onClose !== null) {
-                onClose(e)
-              }
-            }
-          }}
-        >
-          <Content>{children}</Content>
-        </ListItem>
-      </ThemeProvider>
+          }
+        }}
+      >
+        <Content>{children}</Content>
+      </ListItem>
     )
   }),
 )
