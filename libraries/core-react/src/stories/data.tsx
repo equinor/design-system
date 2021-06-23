@@ -53,13 +53,13 @@ export const data: Data[] = [
     price: 2.5,
   },
   {
-    number: '89-012',
+    number: '89-123',
     description: 'Pineapple',
     origin: 'Paraguay',
     price: 1.9,
   },
   {
-    number: '89-012',
+    number: '89-456',
     description: 'Pomegranate',
     origin: 'Persia',
     price: 4.5,

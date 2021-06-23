@@ -28,7 +28,7 @@ const Label = styled.span(
 
 export type SwitchProps = {
   /** Label for the switch. Required to make it a11y compliant */
-  label: string
+  label?: string
   /** Switch size, use the small version with caution */
   size?: 'default' | 'small'
   /** If true, the switch will be disabled */
@@ -45,17 +45,22 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   // TODO Temporary workaround untill we can deprecate "size" property (controlled by EdsProvider in the future)
   const overrideDensity = size === 'small' ? 'compact' : density
   const token = useToken({ density: overrideDensity }, tokens)()
+  const as = label ? 'label' : 'span'
 
   return (
     <ThemeProvider theme={token}>
-      <StyledSwitch isDisabled={disabled} className={className}>
+      <StyledSwitch
+        isDisabled={disabled}
+        className={className}
+        as={as}
+        role="checkbox"
+      >
         {size === 'small' ? (
           <SwitchSmall disabled={disabled} {...rest} ref={ref} />
         ) : (
           <SwitchDefault disabled={disabled} {...rest} ref={ref} />
         )}
-
-        <Label>{label}</Label>
+        {label && <Label>{label}</Label>}
       </StyledSwitch>
     </ThemeProvider>
   )
