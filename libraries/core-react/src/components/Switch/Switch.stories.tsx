@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { Switch, SwitchProps, EdsProvider, Table } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
-import { data, columns, Column, Data, SortDirection } from '../../stories/data'
-import { toCellValues } from '../../stories/toCellValues'
+import { data } from '../../stories/data'
 
 type WrapperStyleProps = {
   darkMode?: boolean
@@ -129,11 +128,6 @@ export const TableSwitch: Story<SwitchProps> = () => {
             </Table.Cell>
           </Table.Row>
         ))}
-        {/* <Table.Row>
-          <Table.Cell>
-            <Switch></Switch>
-          </Table.Cell>
-        </Table.Row> */}
       </Table.Body>
     </Table>
   )
