@@ -45,16 +45,10 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   // TODO Temporary workaround untill we can deprecate "size" property (controlled by EdsProvider in the future)
   const overrideDensity = size === 'small' ? 'compact' : density
   const token = useToken({ density: overrideDensity }, tokens)()
-  const as = label ? 'label' : 'span'
 
   return (
     <ThemeProvider theme={token}>
-      <StyledSwitch
-        isDisabled={disabled}
-        className={className}
-        as={as}
-        role="checkbox"
-      >
+      <StyledSwitch isDisabled={disabled} className={className}>
         {size === 'small' ? (
           <SwitchSmall disabled={disabled} {...rest} ref={ref} />
         ) : (
