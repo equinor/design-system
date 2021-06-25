@@ -13,7 +13,6 @@ const {
   typography,
   entities: {
     item: {
-      spacings,
       states: { active: activeToken, focus, hover, disabled: disabledToken },
     },
     icon,
@@ -38,7 +37,7 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
   z-index: 2;
 
   ${typographyTemplate(typography)}
-  ${spacingsTemplate(spacings)};
+  ${({ theme }) => spacingsTemplate(theme.entities.item.spacings)}
 
   ${({ active }) =>
     active &&

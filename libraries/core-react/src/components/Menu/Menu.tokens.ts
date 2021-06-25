@@ -30,6 +30,12 @@ type MenuToken = ComponentToken
 
 export const menu: MenuToken = {
   background,
+  spacings: {
+    top: small,
+    bottom: small,
+    left: '0px',
+    right: '0px',
+  },
   border: {
     type: 'border',
     radius: '4px',
@@ -89,6 +95,20 @@ export const menu: MenuToken = {
         right: large,
         top: small,
         bottom: small,
+      },
+    },
+  },
+  modes: {
+    compact: {
+      entities: {
+        item: {
+          spacings: {
+            left: large,
+            right: large,
+            top: small,
+            bottom: small,
+          },
+        },
       },
     },
   },

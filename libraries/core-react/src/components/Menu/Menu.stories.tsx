@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Menu, MenuProps, Typography, Button, Icon } from '../..'
+import { Menu, MenuProps, Typography, Button, Icon, EdsProvider } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 import { tokens } from '@equinor/eds-tokens'
@@ -270,6 +270,70 @@ export const Complex: Story<MenuProps> = () => {
           </Menu.Item>
         </Menu.Section>
       </Menu>
+    </StoryCenter>
+  )
+}
+
+export const Compact: Story<MenuProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [focus, setFocus] = useState<'first' | 'last'>(null)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openMenu = (focus: 'first' | 'last') => {
+    setIsOpen(true)
+    setFocus(focus)
+  }
+  const closeMenu = () => {
+    setIsOpen(false)
+    setFocus(null)
+  }
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const { key } = e
+    e.preventDefault()
+    e.stopPropagation()
+    switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
+      case 'ArrowDown':
+        isOpen ? closeMenu() : openMenu('first')
+        break
+      case 'ArrowUp':
+        isOpen ? closeMenu() : openMenu('last')
+        break
+      default:
+        break
+    }
+  }
+
+  return (
+    <StoryCenter>
+      <Button
+        ref={anchorRef}
+        id="anchor-compact"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-controls="menu-compact"
+        onClick={() => (isOpen ? closeMenu() : openMenu(null))}
+        onKeyDown={onKeyPress}
+      >
+        Click to open Menu!
+      </Button>
+      <EdsProvider density="compact">
+        <Menu
+          open={isOpen}
+          id="menu-compact"
+          focus={focus}
+          aria-labelledby="anchor-compact"
+          onClose={closeMenu}
+          anchorEl={anchorRef.current}
+        >
+          <Menu.Item onClick={onClick}>Pressure</Menu.Item>
+          <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+          <Menu.Item onClick={onClick}>Cable</Menu.Item>
+        </Menu>
+      </EdsProvider>
     </StoryCenter>
   )
 }

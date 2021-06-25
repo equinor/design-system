@@ -261,13 +261,7 @@ export const CompactDataGrid: Story<TableProps> = () => {
                   onClose={closeMenu}
                 >
                   <Menu.Item onClick={onClick}>
-                    <Typography
-                      color={colors.text.static_icons__tertiary.hex}
-                      group="navigation"
-                      variant="label"
-                    >
-                      <Icon name="folder" />
-                    </Typography>
+                    <Icon name="folder" size={16} />
                     <Typography group="navigation" variant="menu_title">
                       Open
                     </Typography>
@@ -275,18 +269,13 @@ export const CompactDataGrid: Story<TableProps> = () => {
                       color={colors.text.static_icons__tertiary.hex}
                       group="navigation"
                       variant="label"
+                      style={{ height: 12 }}
                     >
                       CTRL+O
                     </Typography>
                   </Menu.Item>
                   <Menu.Item active onClick={onClick}>
-                    <Typography
-                      color={colors.text.static_icons__tertiary.hex}
-                      group="navigation"
-                      variant="label"
-                    >
-                      <Icon name="copy" />
-                    </Typography>
+                    <Icon name="copy" size={16} />
                     <Typography group="navigation" variant="menu_title">
                       Copy
                     </Typography>
@@ -294,6 +283,8 @@ export const CompactDataGrid: Story<TableProps> = () => {
                       color={colors.text.static_icons__tertiary.hex}
                       group="navigation"
                       variant="label"
+                      as="span"
+                      style={{ height: 12 }}
                     >
                       CTRL+C
                     </Typography>

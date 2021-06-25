@@ -13,6 +13,8 @@ import { useMenu } from './Menu.context'
 import type { FocusTarget } from './Menu.types'
 import { MenuItemProps, MenuItem } from './MenuItem'
 import { MenuSectionProps, MenuSection } from './MenuSection'
+import { menu as tokens } from './Menu.tokens'
+import { spacingsTemplate } from '../../utils'
 
 const isFragment = (object: ReactNode): boolean => {
   if ((object as ReactElement).type) {
@@ -24,9 +26,8 @@ const isFragment = (object: ReactNode): boolean => {
 const List = styled.ul`
   position: relative;
   list-style: none;
-  padding: 0;
   margin: 0;
-
+  ${spacingsTemplate(tokens.spacings)}
   li:first-child {
     z-index: 3;
   }
