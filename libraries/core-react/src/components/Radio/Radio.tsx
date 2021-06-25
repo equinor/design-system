@@ -92,7 +92,7 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
 `
 export type RadioProps = {
   /** Label for the radio */
-  label: string
+  label?: string
   /** If true, the radio button will be disabled */
   disabled?: boolean
 } & InputHTMLAttributes<HTMLInputElement> & {
@@ -120,7 +120,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
           <StyledPath icon={radio_button_unselected} name="unselected" />
         </Svg>
       </InputWrapper>
-      <LabelText>{label}</LabelText>
+      {label && <LabelText>{label}</LabelText>}
     </StyledRadio>
   )
 })

@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Radio, RadioProps } from '../..'
+import { Radio, RadioProps, Table } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
+import { data } from '../../stories/data'
 
 const Wrapper = styled(Radio)`
   display: flex;
@@ -95,3 +96,31 @@ export const GroupedRadio: Story<RadioProps> = () => {
 
 GroupedRadio.storyName = 'Multiple radio buttons in a group'
 SingleRadio.storyName = 'Single radio buttons'
+
+export const TableRadio: Story<RadioProps> = () => (
+  <Table>
+    <Table.Head>
+      <Table.Row>
+        <Table.Cell>Selected</Table.Cell>
+      </Table.Row>
+    </Table.Head>
+    <Table.Body>
+      {data.map((data) => (
+        <Table.Row key={data.number}>
+          <Table.Cell>
+            <Radio aria-label={`Select ${data.description}`} />
+          </Table.Cell>
+        </Table.Row>
+      ))}
+    </Table.Body>
+  </Table>
+)
+
+TableRadio.parameters = {
+  docs: {
+    description: {
+      story:
+        'Example of usage with `Radio` and `aria-label` in tables for accessibility',
+    },
+  },
+}
