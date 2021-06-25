@@ -28,7 +28,7 @@ const Label = styled.span(
 
 export type SwitchProps = {
   /** Label for the switch. Required to make it a11y compliant */
-  label: string
+  label?: string
   /** Switch size, use the small version with caution */
   size?: 'default' | 'small'
   /** If true, the switch will be disabled */
@@ -54,8 +54,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         ) : (
           <SwitchDefault disabled={disabled} {...rest} ref={ref} />
         )}
-
-        <Label>{label}</Label>
+        {label && <Label>{label}</Label>}
       </StyledSwitch>
     </ThemeProvider>
   )

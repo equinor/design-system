@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Switch, SwitchProps, EdsProvider } from '../..'
+import { Switch, SwitchProps, EdsProvider, Table } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
+import { data } from '../../stories/data'
 
 type WrapperStyleProps = {
   darkMode?: boolean
@@ -110,3 +111,32 @@ export const ControlledSwitchControl: Story<SwitchProps> = () => {
 }
 
 ControlledSwitchControl.storyName = 'Use case with controlled component'
+
+export const TableSwitch: Story<SwitchProps> = () => {
+  return (
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Cell>Selected</Table.Cell>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {data.map((data) => (
+          <Table.Row key={data.number}>
+            <Table.Cell>
+              <Switch aria-label={`Select ${data.description}`} />
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  )
+}
+TableSwitch.parameters = {
+  docs: {
+    description: {
+      story:
+        'Example of usage with `Switch` and `aria-label` in tables for accessibility',
+    },
+  },
+}
