@@ -1,9 +1,17 @@
 import { useState, useRef, ChangeEvent } from 'react'
-import { Checkbox, Typography, Button, CheckboxProps, EdsProvider } from '../..'
+import {
+  Checkbox,
+  Typography,
+  Button,
+  CheckboxProps,
+  EdsProvider,
+  Table,
+} from '../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm } from 'react-hook-form'
 import { Meta, Story } from '@storybook/react'
+import { data } from '../../stories/data'
 
 const Wrapper = styled(Checkbox)`
   display: flex;
@@ -228,6 +236,34 @@ Compact.parameters = {
   docs: {
     description: {
       story: 'Compact `Checkbox` using `EdsProvder` ',
+    },
+  },
+}
+
+export const TableCheckbox: Story<CheckboxProps> = () => (
+  <Table>
+    <Table.Head>
+      <Table.Row>
+        <Table.Cell>Selected</Table.Cell>
+      </Table.Row>
+    </Table.Head>
+    <Table.Body>
+      {data.map((data) => (
+        <Table.Row key={data.number}>
+          <Table.Cell>
+            <Checkbox aria-label={`Select ${data.description}`} />
+          </Table.Cell>
+        </Table.Row>
+      ))}
+    </Table.Body>
+  </Table>
+)
+
+TableCheckbox.parameters = {
+  docs: {
+    description: {
+      story:
+        'Example of usage with `Checkbox` and `aria-label` in tables for accessibility',
     },
   },
 }
