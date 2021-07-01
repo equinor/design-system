@@ -289,7 +289,7 @@ DisabledLink.parameters = {
   docs: {
     description: {
       story:
-        "Disabling a `Button` with a valid `href` URL is not possible, as it's not possible to disable links. A workaround for this is to set `href={undefined}`",
+        "Disabling a `Button` with a valid `href` URL does not work, as it's not possible to disable links. A workaround for this is to set `href={undefined}`.",
     },
   },
 }
