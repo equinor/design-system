@@ -120,17 +120,15 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   return (
     <>
-      {isMounted &&
-        ReactDom.createPortal(
-          <ThemeProvider theme={token}>
-            <MenuPaper elevation="raised" ref={setContainerEl} {...props}>
-              <MenuProvider>
-                <MenuContainer {...menuProps} ref={ref} />
-              </MenuProvider>
-            </MenuPaper>
-          </ThemeProvider>,
-          document.body,
-        )}
+      {isMounted && (
+        <ThemeProvider theme={token}>
+          <MenuPaper elevation="raised" ref={setContainerEl} {...props}>
+            <MenuProvider>
+              <MenuContainer {...menuProps} ref={ref} />
+            </MenuProvider>
+          </MenuPaper>
+        </ThemeProvider>
+      )}
     </>
   )
 })
