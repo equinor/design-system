@@ -111,7 +111,7 @@ const toCellValues = (data: Data[], columns: Column[]) =>
   )
 
 export default {
-  title: 'Playground/CompactDataGrid',
+  title: 'Playground/Examples',
   parameters: {
     viewMode: 'story',
     docs: {
