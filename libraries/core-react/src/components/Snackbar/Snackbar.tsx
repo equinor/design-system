@@ -26,7 +26,7 @@ const StyledSnackbar = styled(Paper).attrs(() => ({
   box-sizing: border-box;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 400;
+  z-index: 300;
   @media (min-width: ${({ leftAlignFrom }) => leftAlignFrom}) {
     left: auto;
     transform: none;

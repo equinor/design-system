@@ -35,7 +35,7 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>`
   max-width: ${tokens.maxWidth};
   min-height: ${tokens.minHeight};
   ${bordersTemplate(tokens.border)}
-  z-index: 100;
+  z-index: 300;
 
   .arrow {
     z-index: -1;
