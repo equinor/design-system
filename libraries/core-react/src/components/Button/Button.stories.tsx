@@ -272,13 +272,9 @@ export const Link: Story<ButtonProps> = () => (
 )
 
 export const DisabledLink: Story<ButtonProps> = () => {
-  const isLinkValid = false
   return (
     <Wrapper>
-      <Button
-        href={isLinkValid ? '#' : undefined}
-        disabled={isLinkValid ? false : true}
-      >
+      <Button href={'#'} disabled>
         Disabled Link
       </Button>
     </Wrapper>
