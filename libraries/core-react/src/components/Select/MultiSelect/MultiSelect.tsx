@@ -9,7 +9,7 @@ import { Label } from '../../Label'
 import { Icon } from '../../Icon'
 import { CheckboxInput } from '../../Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
-import styled, { css } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { multiSelect as tokens } from '../Select.tokens'
 import {
   Container,
@@ -21,18 +21,12 @@ import {
 } from '../commonStyles'
 import { spacingsTemplate } from '../../../utils'
 import { useEds } from '../../EdsProvider'
+import { useToken } from '../../../hooks'
 
 const PaddedStyledListItem = styled(StyledListItem)`
   display: flex;
   align-items: center;
-  ${({ density }) =>
-    density === 'compact'
-      ? css`
-          ${spacingsTemplate(tokens.modes.compact.spacings)};
-        `
-      : css`
-          ${spacingsTemplate(tokens.spacings)};
-        `}
+  ${({ theme }) => spacingsTemplate(theme.spacings)}
 `
 
 export type MultiSelectProps = {
@@ -80,6 +74,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     const isControlled = selectedOptions ? true : false
     const [inputValue, setInputValue] = useState('')
     const { density } = useEds()
+    const token = useToken({ density }, tokens)()
 
     let multipleSelectionProps: UseMultipleSelectionProps<string> = {
       initialSelectedItems: initialSelectedItems,
@@ -170,59 +165,61 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       items.length > 0 ? `${selectedItems.length}/${items.length} selected` : ''
 
     return (
-      <Container className={className} ref={ref}>
-        <Label
-          {...getLabelProps()}
-          label={label}
-          meta={meta}
-          disabled={disabled}
-        />
-
-        <StyledInputWrapper {...getComboboxProps()}>
-          <PaddedInput
-            {...getInputProps(
-              getDropdownProps({
-                preventKeyAction: isOpen,
-                disabled: disabled,
-              }),
-            )}
-            placeholder={placeholderText}
-            readOnly={readOnly}
-            {...other}
+      <ThemeProvider theme={token}>
+        <Container className={className} ref={ref}>
+          <Label
+            {...getLabelProps()}
+            label={label}
+            meta={meta}
+            disabled={disabled}
           />
-          <StyledButton
-            variant="ghost_icon"
-            {...getToggleButtonProps({ disabled: disabled || readOnly })}
-            aria-label={'toggle options'}
-            density={density}
-          >
-            <Icon
-              data={isOpen ? arrow_drop_up : arrow_drop_down}
-              title="open"
-            ></Icon>
-          </StyledButton>
-        </StyledInputWrapper>
-        <StyledList {...getMenuProps()}>
-          {isOpen &&
-            getFilteredItems(items).map((item, index) => (
-              <PaddedStyledListItem
-                key={`${item}`}
-                highlighted={highlightedIndex === index ? 'true' : 'false'}
-                {...getItemProps({ item, index, disabled: disabled })}
-                density={density}
-              >
-                <CheckboxInput
-                  checked={selectedItems.includes(item)}
-                  value={item}
-                  onChange={() => {
-                    return null
-                  }}
-                />
-                <span>{item}</span>
-              </PaddedStyledListItem>
-            ))}
-        </StyledList>
-      </Container>
+
+          <StyledInputWrapper {...getComboboxProps()}>
+            <PaddedInput
+              {...getInputProps(
+                getDropdownProps({
+                  preventKeyAction: isOpen,
+                  disabled: disabled,
+                }),
+              )}
+              placeholder={placeholderText}
+              readOnly={readOnly}
+              {...other}
+            />
+            <StyledButton
+              variant="ghost_icon"
+              {...getToggleButtonProps({ disabled: disabled || readOnly })}
+              aria-label={'toggle options'}
+              density={density}
+            >
+              <Icon
+                data={isOpen ? arrow_drop_up : arrow_drop_down}
+                title="open"
+              ></Icon>
+            </StyledButton>
+          </StyledInputWrapper>
+          <StyledList {...getMenuProps()}>
+            {isOpen &&
+              getFilteredItems(items).map((item, index) => (
+                <PaddedStyledListItem
+                  key={`${item}`}
+                  highlighted={highlightedIndex === index ? 'true' : 'false'}
+                  {...getItemProps({ item, index, disabled: disabled })}
+                  density={density}
+                >
+                  <CheckboxInput
+                    checked={selectedItems.includes(item)}
+                    value={item}
+                    onChange={() => {
+                      return null
+                    }}
+                  />
+                  <span>{item}</span>
+                </PaddedStyledListItem>
+              ))}
+          </StyledList>
+        </Container>
+      </ThemeProvider>
     )
   },
 )
