@@ -1,9 +1,11 @@
 /* eslint camelcase: "off" */
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { checkbox as tokens } from './Checkbox.tokens'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
 import { CheckboxInput } from './Input'
+import { useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 type StyledCheckboxProps = {
   disabled: boolean
@@ -39,16 +41,20 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     { label, disabled = false, indeterminate, className, ...rest },
     ref,
   ) {
+    const { density } = useEds()
+    const token = useToken({ density }, tokens)()
     return (
-      <StyledCheckbox disabled={disabled} className={className}>
-        <CheckboxInput
-          {...rest}
-          disabled={disabled}
-          ref={ref}
-          indeterminate={indeterminate}
-        ></CheckboxInput>
-        {label && <LabelText>{label}</LabelText>}
-      </StyledCheckbox>
+      <ThemeProvider theme={token}>
+        <StyledCheckbox disabled={disabled} className={className}>
+          <CheckboxInput
+            {...rest}
+            disabled={disabled}
+            ref={ref}
+            indeterminate={indeterminate}
+          ></CheckboxInput>
+          {label && <LabelText>{label}</LabelText>}
+        </StyledCheckbox>
+      </ThemeProvider>
     )
   },
 )
