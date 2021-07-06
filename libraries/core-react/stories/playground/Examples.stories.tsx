@@ -23,7 +23,39 @@ const onClick = (event: React.MouseEvent) => {
   event.stopPropagation()
 }
 
-export const DefaultContainer: Story = (args) => {
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: 64px auto;
+  height: 100%;
+`
+
+const Content = styled.div`
+  margin: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-gap: 8px;
+  grid-auto-columns: max-content;
+  grid-auto-flow: column;
+`
+
+const Toolbar = styled.div`
+  padding-top: 16px;
+  display: grid;
+  grid-gap: 8px;
+  grid-column-start: 3;
+  grid-column-end: span end;
+  grid-auto-columns: max-content;
+  grid-auto-flow: column;
+`
+
+const Sidebar = styled.div`
+  padding-top: 16px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border-right: 1px solid rgba(247, 247, 247, 1);
+`
+
+export const Page: Story = (args) => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
   const [isOpenSnackbar, setIsOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false)
@@ -65,38 +97,6 @@ export const DefaultContainer: Story = (args) => {
         break
     }
   }
-
-  const Container = styled.div`
-    display: grid;
-    grid-template-rows: 64px auto;
-    height: 100%;
-  `
-
-  const Content = styled.div`
-    margin: 0 16px;
-    display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-gap: 8px;
-    grid-auto-columns: max-content;
-    grid-auto-flow: column;
-  `
-
-  const Toolbar = styled.div`
-    padding-top: 16px;
-    display: grid;
-    grid-gap: 8px;
-    grid-column-start: 3;
-    grid-column-end: span end;
-    grid-auto-columns: max-content;
-    grid-auto-flow: column;
-  `
-
-  const Sidebar = styled.div`
-    padding-top: 16px;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    border-right: 1px solid rgba(247, 247, 247, 1);
-  `
 
   return (
     <Container>
