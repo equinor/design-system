@@ -44,7 +44,7 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
   }
 }
 
-const ButtonInner = styled.span`
+const Inner = styled.span`
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
@@ -53,14 +53,21 @@ const ButtonInner = styled.span`
   justify-content: center;
 `
 
-const Base = ({ theme }: { theme: ButtonToken }) => {
+const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
   const { states, clickbound } = theme
   const { focus, hover, disabled } = states
 
   return css`
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
     background: ${theme.background};
     height: ${theme.height};
     width: ${theme.width};
+
     svg {
       justify-self: center;
     }
@@ -68,6 +75,15 @@ const Base = ({ theme }: { theme: ButtonToken }) => {
     ${spacingsTemplate(theme.spacings)}
     ${bordersTemplate(theme.border)}
     ${typographyTemplate(theme.typography)}
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: auto;
+      min-height: auto;
+      content: '';
+    }
 
     &::after {
       position: absolute;
@@ -107,26 +123,8 @@ const Base = ({ theme }: { theme: ButtonToken }) => {
       }
     }
   `
-}
+})
 
-const ButtonBase = styled.button`
-  margin: 0;
-  padding: 0;
-  ${Base}
-  text-decoration: none;
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    min-height: auto;
-    content: '';
-  }
-`
 export type ButtonProps = {
   /**  Specifies color */
   color?: 'primary' | 'secondary' | 'danger'
@@ -188,7 +186,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           {fullWidth ? (
             <InnerFullWidth>{children}</InnerFullWidth>
           ) : (
-            <ButtonInner>{children}</ButtonInner>
+            <Inner>{children}</Inner>
           )}
         </ButtonBase>
       </ThemeProvider>
