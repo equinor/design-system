@@ -271,25 +271,6 @@ export const Link: Story<ButtonProps> = () => (
   </Wrapper>
 )
 
-export const DisabledLink: Story<ButtonProps> = () => {
-  return (
-    <Wrapper>
-      <Button href={'#'} disabled>
-        Disabled Link
-      </Button>
-    </Wrapper>
-  )
-}
-
-DisabledLink.parameters = {
-  docs: {
-    description: {
-      story:
-        "Disabling a `Button` with a valid `href` URL does not work, as it's not possible to disable links. A workaround for this is to set `href={undefined}`.",
-    },
-  },
-}
-
 export const FullWidth: Story<ButtonProps> = () => (
   <FullWidthWrapper>
     <Button fullWidth>Primary</Button>
