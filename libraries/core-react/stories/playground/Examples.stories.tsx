@@ -55,7 +55,7 @@ const Sidebar = styled.div`
   border-right: 1px solid rgba(247, 247, 247, 1);
 `
 
-export const Page: Story = (args) => {
+export const DefaultPage: Story = (args) => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
   const [isOpenSnackbar, setIsOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false)
