@@ -174,9 +174,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) {
     const token = getToken(variant, color)
     const { density } = useEds()
-
-    const as: ElementType = href ? 'a' : other.as ? other.as : 'button'
+    const as: ElementType =
+      href && !disabled ? 'a' : other.as ? other.as : 'button'
     const type = href || other.as ? undefined : 'button'
+
     tabIndex = disabled ? -1 : tabIndex
 
     const buttonProps = {
