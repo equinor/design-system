@@ -4,7 +4,9 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   colors,
   typography,
-  spacings: { comfortable },
+  spacings: {
+    comfortable: { small, x_small },
+  },
 } = tokens
 
 export type TextFieldToken = ComponentToken & {
@@ -21,9 +23,9 @@ export const textfield: TextFieldToken = {
     color: colors.text.static_icons__tertiary.hex,
   },
   spacings: {
-    left: comfortable.small,
-    right: comfortable.small,
-    top: comfortable.small,
+    left: small,
+    right: small,
+    top: small,
   },
   states: {
     focus: {
@@ -48,6 +50,16 @@ export const textfield: TextFieldToken = {
             color: colors.interactive.disabled__text.hex,
           },
         },
+      },
+    },
+  },
+  modes: {
+    compact: {
+      spacings: {
+        left: x_small,
+        right: x_small,
+        top: x_small,
+        bottom: x_small,
       },
     },
   },
