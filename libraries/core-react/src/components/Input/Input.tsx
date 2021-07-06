@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, forwardRef } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import * as tokens from './Input.tokens'
 import type { InputToken } from './Input.tokens'
 import {
@@ -9,10 +9,11 @@ import {
 } from '../../utils'
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
+import { useToken } from '../../hooks'
 
 const { input, inputVariants } = tokens
 
-const Variation = ({ variant, token, density }: StyledProps) => {
+const Variation = ({ variant, token }: StyledProps) => {
   if (!variant) {
     return ``
   }
@@ -25,18 +26,13 @@ const Variation = ({ variant, token, density }: StyledProps) => {
     boxShadow,
   } = token
 
-  let spacings = input.spacings
-  let height = input.minHeight
-  if (density === 'compact') {
-    spacings = input.modes.compact.spacings
-    height = input.modes.compact.minHeight
-  }
-
   return css`
-    height: ${height};
     border: none;
     ${outlineTemplate(activeOutline)}
-    ${spacingsTemplate(spacings)}
+    ${({ theme }) => css`
+      height: ${theme.minHeight};
+      ${spacingsTemplate(theme.spacings)};
+    `}
 
     box-shadow: ${boxShadow};
 
@@ -60,7 +56,6 @@ const Variation = ({ variant, token, density }: StyledProps) => {
 }
 
 type StyledProps = {
-  density: string
   token: InputToken
   variant: string
 }
@@ -103,6 +98,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
   const inputVariant = inputVariants[variant]
   const { density } = useEds()
+  const token = useToken({ density }, input)()
 
   const inputProps = {
     ref,
@@ -114,5 +110,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     ...other,
   }
 
-  return <StyledInput {...inputProps} />
+  return (
+    <ThemeProvider theme={token}>
+      <StyledInput {...inputProps} />
+    </ThemeProvider>
+  )
 })
