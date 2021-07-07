@@ -4,8 +4,8 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { Table } from '.'
 import styled from 'styled-components'
-import { token as dataCellToken } from './Cell/DataCell.tokens'
-import { token as headerCellToken } from './Cell/HeaderCell.tokens'
+import { token as dataCellToken } from './DataCell/DataCell.tokens'
+import { token as headerCellToken } from './HeaderCell/HeaderCell.tokens'
 
 const { Caption, Cell, Head, Row, Body } = Table
 
@@ -218,11 +218,11 @@ describe('Table', () => {
 
     expect(getByText(headerText).parentElement).toHaveStyleRule(
       'height',
-      headerCellToken.density.compact.height,
+      headerCellToken.modes.compact.height,
     )
     expect(getByText(cellText)).toHaveStyleRule(
       'height',
-      dataCellToken.density.compact.height,
+      dataCellToken.modes.compact.height,
     )
   })
   it('Has aria-sort when sort is provided', () => {
