@@ -61,7 +61,7 @@ type CellProps = {
 export const TableDataCell = forwardRef<HTMLTableDataCellElement, CellProps>(
   function TableDataCell({ children, variant = 'text', ...rest }, ref) {
     const { density } = useEds()
-    const token = useToken({ density }, applyMutations(variant, tablecell))
+    const token = useToken({ density }, applyMutations(variant, tablecell))()
 
     return (
       <ThemeProvider theme={token}>
