@@ -1,6 +1,6 @@
-import { TableCellToken } from './DataCell.tokens'
-import { TableHeadToken } from './HeaderCell.tokens'
-import { Density } from '../Table.types'
+import { TableCellToken } from './DataCell/DataCell.tokens'
+import { TableHeadToken } from './HeaderCell/HeaderCell.tokens'
+import { Density } from './Table.types'
 
 type Cell = TableCellToken | TableHeadToken
 

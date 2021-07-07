@@ -9,7 +9,7 @@ import { token as tablecell, TableCellToken } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
 import { useEds } from '../../EdsProvider'
 
-import { applyDensity } from './utils'
+import { applyDensity } from '../utils'
 
 const applyMutations = (
   variant: Variants,

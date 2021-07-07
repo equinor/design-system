@@ -7,7 +7,7 @@ import {
 } from '../../../utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
 import { useEds } from '../../EdsProvider'
-import { applyDensity } from './utils'
+import { applyDensity } from '../utils'
 
 type BaseProps = {
   token: TableHeadToken

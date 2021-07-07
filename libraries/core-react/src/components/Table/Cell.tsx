@@ -1,8 +1,8 @@
 import { TdHTMLAttributes, ThHTMLAttributes, forwardRef } from 'react'
-import { Variants, Colors } from '../Table.types'
+import { Variants, Colors } from './Table.types'
 import { TableDataCell } from './DataCell'
 import { TableHeaderCell } from './HeaderCell'
-import { InnerContext } from '../Inner.context'
+import { InnerContext } from './Inner.context'
 
 export type CellProps = {
   /** Specifies which variant to use */
