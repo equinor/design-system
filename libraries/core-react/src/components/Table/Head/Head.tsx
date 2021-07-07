@@ -1,8 +1,8 @@
 import { HTMLAttributes, forwardRef } from 'react'
 import styled from 'styled-components'
-import { token } from './Cell/HeaderCell.tokens'
-import { bordersTemplate } from '../../utils'
-import { InnerContext } from './Inner.context'
+import { token } from './Head.tokens'
+import { bordersTemplate } from '../../../utils'
+import { InnerContext } from '../Inner.context'
 
 const StyledTableHead = styled.thead`
   ${bordersTemplate(token.border)}
