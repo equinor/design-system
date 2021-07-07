@@ -1,5 +1,5 @@
 import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
 import {
@@ -8,6 +8,7 @@ import {
   outlineTemplate,
   spacingsTemplate,
 } from '../../utils'
+import { useToken } from '../../hooks'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
 
@@ -43,7 +44,7 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
   }
 }
 
-const ButtonInner = styled.span`
+const Inner = styled.span`
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
@@ -52,31 +53,37 @@ const ButtonInner = styled.span`
   justify-content: center;
 `
 
-const Base = ({ token, density }: { token: ButtonToken; density: string }) => {
-  const { spacings, states } = token
+const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
+  const { states, clickbound } = theme
   const { focus, hover, disabled } = states
 
-  let height = token.height
-  let width = token.width
-  let clickbound = token.clickbound
-
-  if (density === 'compact') {
-    height = token.modes.compact.height
-    width = token.modes.compact.width
-    clickbound = token.modes.compact.clickbound
-  }
-
   return css`
-    background: ${token.background};
-    height: ${height};
-    width: ${width};
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    background: ${theme.background};
+    height: ${theme.height};
+    width: ${theme.width};
+
     svg {
       justify-self: center;
     }
 
-    ${spacingsTemplate(spacings)}
-    ${bordersTemplate(token.border)}
-    ${typographyTemplate(token.typography)}
+    ${spacingsTemplate(theme.spacings)}
+    ${bordersTemplate(theme.border)}
+    ${typographyTemplate(theme.typography)}
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: auto;
+      min-height: auto;
+      content: '';
+    }
 
     &::after {
       position: absolute;
@@ -116,26 +123,8 @@ const Base = ({ token, density }: { token: ButtonToken; density: string }) => {
       }
     }
   `
-}
+})
 
-const ButtonBase = styled.button`
-  margin: 0;
-  padding: 0;
-  ${Base}
-  text-decoration: none;
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    min-height: auto;
-    content: '';
-  }
-`
 export type ButtonProps = {
   /**  Specifies color */
   color?: 'primary' | 'secondary' | 'danger'
@@ -172,8 +161,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) {
-    const token = getToken(variant, color)
     const { density } = useEds()
+    const token = useToken({ density }, getToken(variant, color))()
+
     const as: ElementType =
       href && !disabled ? 'a' : other.as ? other.as : 'button'
     const type = href || other.as ? undefined : 'button'
@@ -185,21 +175,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       as,
       href,
       type,
-      token,
       disabled,
       tabIndex,
-      density,
       ...other,
     }
 
     return (
-      <ButtonBase {...buttonProps}>
-        {fullWidth ? (
-          <InnerFullWidth>{children}</InnerFullWidth>
-        ) : (
-          <ButtonInner>{children}</ButtonInner>
-        )}
-      </ButtonBase>
+      <ThemeProvider theme={token}>
+        <ButtonBase {...buttonProps}>
+          {fullWidth ? (
+            <InnerFullWidth>{children}</InnerFullWidth>
+          ) : (
+            <Inner>{children}</Inner>
+          )}
+        </ButtonBase>
+      </ThemeProvider>
     )
   },
 )
