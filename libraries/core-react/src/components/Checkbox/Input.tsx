@@ -1,6 +1,6 @@
 /* eslint camelcase: "off" */
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import {
   checkbox,
   checkbox_outline, // eslint-disable-line camelcase
@@ -9,7 +9,8 @@ import {
 import type { IconData } from '@equinor/eds-icons'
 import { checkbox as tokens } from './Checkbox.tokens'
 import { spacingsTemplate, outlineTemplate } from '../../utils'
-import { useEds } from './../EdsProvider'
+import { useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 type StyledIconPathProps = {
   icon: IconData
@@ -22,11 +23,9 @@ const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
   d: icon.svgPathData,
 }))<StyledIconPathProps>``
 
-type StyledInputProps = { density: string }
-
 const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
-}))<StyledInputProps>`
+}))`
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -39,10 +38,7 @@ const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
     outline: none;
   }
   &[data-focus-visible-added]:focus + svg {
-    ${({ density }) =>
-      density === 'compact'
-        ? outlineTemplate(tokens.modes.compact.states.focus.outline)
-        : outlineTemplate(tokens.states.focus.outline)}
+    ${({ theme }) => outlineTemplate(theme.states.focus.outline)}
   }
   &:not(:checked) ~ svg path[name='checked'] {
     display: none;
@@ -66,16 +62,12 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   fill,
 }))``
 
-type StyledInputWrapperProps = { disabled: boolean; density: string }
+type StyledInputWrapperProps = { disabled: boolean }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
   display: inline-flex;
   border-radius: 50%;
-  ${({ density }) =>
-    density === 'compact'
-      ? spacingsTemplate(tokens.modes.compact.spacings)
-      : spacingsTemplate(tokens.spacings)}
-
+  ${({ theme }) => spacingsTemplate(theme.spacings)}
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ disabled }) =>
@@ -96,14 +88,15 @@ export type InputProps = {
 
 export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
   function CheckboxInput({ disabled = false, indeterminate, ...rest }, ref) {
+    const { density } = useEds()
+    const token = useToken({ density }, tokens)()
+
     const iconSize = 24
     const fill = disabled
       ? tokens.states.disabled.background
       : tokens.background
-    const { density } = useEds()
 
     const inputWrapperProps = {
-      density,
       disabled,
     }
 
@@ -111,36 +104,37 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
       ref,
       disabled,
       ['data-indeterminate']: indeterminate,
-      density,
       ...rest,
     }
 
     return (
-      <InputWrapper {...inputWrapperProps}>
-        <Input {...inputProps} />
-        {indeterminate ? (
-          <Svg
-            width={iconSize}
-            height={iconSize}
-            viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={fill}
-            aria-hidden
-          >
-            <StyledPath icon={checkbox_indeterminate} name="indeterminate" />
-          </Svg>
-        ) : (
-          <Svg
-            width={iconSize}
-            height={iconSize}
-            viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={fill}
-            aria-hidden
-          >
-            <StyledPath icon={checkbox} name="checked" />
-            <StyledPath icon={checkbox_outline} name="not-checked" />
-          </Svg>
-        )}
-      </InputWrapper>
+      <ThemeProvider theme={token}>
+        <InputWrapper {...inputWrapperProps}>
+          <Input {...inputProps} />
+          {indeterminate ? (
+            <Svg
+              width={iconSize}
+              height={iconSize}
+              viewBox={`0 0 ${iconSize} ${iconSize}`}
+              fill={fill}
+              aria-hidden
+            >
+              <StyledPath icon={checkbox_indeterminate} name="indeterminate" />
+            </Svg>
+          ) : (
+            <Svg
+              width={iconSize}
+              height={iconSize}
+              viewBox={`0 0 ${iconSize} ${iconSize}`}
+              fill={fill}
+              aria-hidden
+            >
+              <StyledPath icon={checkbox} name="checked" />
+              <StyledPath icon={checkbox_outline} name="not-checked" />
+            </Svg>
+          )}
+        </InputWrapper>
+      </ThemeProvider>
     )
   },
 )
