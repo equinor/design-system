@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
-import { action } from '@storybook/addon-actions'
 import {
   Typography,
   Icon,
@@ -20,11 +19,6 @@ import { accessible } from '@equinor/eds-icons'
 export default {
   title: 'Playground/Examples',
 } as Meta
-
-const onClick = (event: React.MouseEvent) => {
-  action('clicked')(event)
-  event.stopPropagation()
-}
 
 const Container = styled.div`
   display: grid;

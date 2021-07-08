@@ -12,7 +12,6 @@ import {
   Button,
   Menu,
   SingleSelect,
-  EdsProvider,
 } from '../../src'
 import { save, more_vertical, copy, folder } from '@equinor/eds-icons'
 import { tokens } from '@equinor/eds-tokens'
@@ -123,6 +122,64 @@ export default {
   },
 } as Meta
 
+const MenuButton = ({ row }: { row: string[] }) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement>()
+  const isOpen = Boolean(anchorEl)
+  return (
+    <>
+      <Button
+        variant="ghost_icon"
+        id={`menu-button-${row.toString()}`}
+        aria-controls={`menu-${row.toString()}`}
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        onClick={(e) => setAnchorEl(e.currentTarget)}
+      >
+        <Icon name="more_vertical" title="more"></Icon>
+      </Button>
+      {isOpen && (
+        <Menu
+          id={`menu-${row.toString()}`}
+          aria-labelledby={`menu-button-${row.toString()}`}
+          open={isOpen}
+          anchorEl={anchorEl}
+          onClose={() => setAnchorEl(null)}
+        >
+          <Menu.Item>
+            <Icon name="folder" size={16} />
+            <Typography group="navigation" variant="menu_title">
+              Open
+            </Typography>
+            <Typography
+              color={colors.text.static_icons__tertiary.hex}
+              group="navigation"
+              variant="label"
+              style={{ height: 12 }}
+            >
+              CTRL+O
+            </Typography>
+          </Menu.Item>
+          <Menu.Item>
+            <Icon name="copy" size={16} />
+            <Typography group="navigation" variant="menu_title">
+              Copy
+            </Typography>
+            <Typography
+              color={colors.text.static_icons__tertiary.hex}
+              group="navigation"
+              variant="label"
+              as="span"
+              style={{ height: 12 }}
+            >
+              CTRL+C
+            </Typography>
+          </Menu.Item>
+        </Menu>
+      )}
+    </>
+  )
+}
+
 export const CompactDataGrid: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
   const onChange = (event: React.InputHTMLAttributes<HTMLInputElement>) => {
@@ -131,48 +188,6 @@ export const CompactDataGrid: Story<TableProps> = (args) => {
     return event.value
   }
 
-  const onClick = (event: React.MouseEvent) => {
-    event.stopPropagation()
-  }
-
-  const [state, setState] = useState<{
-    buttonEl: HTMLButtonElement
-    focus: 'first' | 'last'
-  }>({
-    focus: 'first',
-    buttonEl: null,
-  })
-
-  const { focus, buttonEl } = state
-  const isOpen = Boolean(buttonEl)
-
-  const openMenu = (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
-    const target = e.target as HTMLButtonElement
-    setState({ ...state, buttonEl: target })
-  }
-
-  const closeMenu = () => setState({ ...state, buttonEl: null })
-
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    switch (key) {
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu(e)
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu(e)
-        break
-      case 'Escape':
-        closeMenu()
-        break
-      default:
-        break
-    }
-  }
   return (
     <Table {...args}>
       <Caption>
@@ -239,55 +254,7 @@ export const CompactDataGrid: Story<TableProps> = (args) => {
               <Icon name="save" />
             </Cell>
             <Cell>
-              <Button
-                variant="ghost_icon"
-                id="menuButton"
-                aria-controls="menu-on-button"
-                aria-haspopup="true"
-                aria-expanded={Boolean(buttonEl)}
-                onClick={(e) => (isOpen ? closeMenu() : openMenu(e))}
-                onKeyDown={onKeyPress}
-              >
-                <Icon name="more_vertical" title="more"></Icon>
-              </Button>
-              <Menu
-                id="menu-on-button"
-                aria-labelledby="menuButton"
-                focus={focus}
-                open={Boolean(buttonEl)}
-                anchorEl={buttonEl}
-                onClose={closeMenu}
-              >
-                <Menu.Item onClick={onClick}>
-                  <Icon name="folder" size={16} />
-                  <Typography group="navigation" variant="menu_title">
-                    Open
-                  </Typography>
-                  <Typography
-                    color={colors.text.static_icons__tertiary.hex}
-                    group="navigation"
-                    variant="label"
-                    style={{ height: 12 }}
-                  >
-                    CTRL+O
-                  </Typography>
-                </Menu.Item>
-                <Menu.Item active onClick={onClick}>
-                  <Icon name="copy" size={16} />
-                  <Typography group="navigation" variant="menu_title">
-                    Copy
-                  </Typography>
-                  <Typography
-                    color={colors.text.static_icons__tertiary.hex}
-                    group="navigation"
-                    variant="label"
-                    as="span"
-                    style={{ height: 12 }}
-                  >
-                    CTRL+C
-                  </Typography>
-                </Menu.Item>
-              </Menu>
+              <MenuButton row={row} />
             </Cell>
           </Row>
         ))}
