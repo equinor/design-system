@@ -1,10 +1,10 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
-import { token } from './Cell/DataCell.tokens'
+import { token } from './Row.tokens'
 
 type StyledProps = Pick<RowProps, 'active'>
 
-const TableBase = styled.tr<StyledProps>(({ active }) => ({
+const StyledRow = styled.tr<StyledProps>(({ active }) => ({
   background: active ? token.states.active?.background : null,
   ':hover': {
     background: token.states.hover?.background,
@@ -23,8 +23,8 @@ export const Row = forwardRef<HTMLTableRowElement, RowProps>(function Row(
   const { children } = props
 
   return (
-    <TableBase {...props} ref={ref}>
+    <StyledRow {...props} ref={ref}>
       {children}
-    </TableBase>
+    </StyledRow>
   )
 })

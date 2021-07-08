@@ -1,6 +1,6 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { token } from './Cell/DataCell.tokens'
+import { token } from './DataCell/DataCell.tokens'
 import { EdsProvider } from '../EdsProvider'
 import { Density } from './Table.types'
 

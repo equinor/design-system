@@ -1,5 +1,5 @@
 import { TdHTMLAttributes, forwardRef } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
   bordersTemplate,
@@ -8,8 +8,7 @@ import {
 import { token as tablecell, TableCellToken } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
 import { useEds } from '../../EdsProvider'
-
-import { applyDensity } from './utils'
+import { useToken } from '../../../hooks'
 
 const applyMutations = (
   variant: Variants,
@@ -31,15 +30,15 @@ const applyMutations = (
 }
 
 type BaseProps = {
-  token: TableCellToken
+  theme: TableCellToken
   color?: Colors
 }
 
-const Base = ({ token, color }: BaseProps) => {
-  const { height, typography, spacings, border } = token
+const StyledTableCell = styled.td(({ theme, color }: BaseProps) => {
+  const { height, typography, spacings, border } = theme
 
   const backgroundColor =
-    color === 'error' ? token.validation.error?.background : ''
+    color === 'error' ? theme.validation.error?.background : ''
 
   const base = css`
     min-height: ${height};
@@ -50,11 +49,7 @@ const Base = ({ token, color }: BaseProps) => {
     ${bordersTemplate(border)}
   `
   return base
-}
-
-const StyledTableCell = styled.td`
-  ${Base}
-`
+})
 
 type CellProps = {
   /** Specifies which variant to use */
@@ -66,14 +61,14 @@ type CellProps = {
 export const TableDataCell = forwardRef<HTMLTableDataCellElement, CellProps>(
   function TableDataCell({ children, variant = 'text', ...rest }, ref) {
     const { density } = useEds()
-
-    let token = applyMutations(variant, tablecell)
-    token = applyDensity(density, token)
+    const token = useToken({ density }, applyMutations(variant, tablecell))()
 
     return (
-      <StyledTableCell token={token} {...rest} ref={ref}>
-        {children}
-      </StyledTableCell>
+      <ThemeProvider theme={token}>
+        <StyledTableCell {...rest} ref={ref}>
+          {children}
+        </StyledTableCell>
+      </ThemeProvider>
     )
   },
 )

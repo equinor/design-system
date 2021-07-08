@@ -1,5 +1,5 @@
 import { ThHTMLAttributes, forwardRef } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
   spacingsTemplate,
@@ -7,17 +7,17 @@ import {
 } from '../../../utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
 import { useEds } from '../../EdsProvider'
-import { applyDensity } from './utils'
+import { useToken } from '../../../hooks'
 
 type BaseProps = {
-  token: TableHeadToken
+  theme: TableHeadToken
   sticky?: boolean
 } & Pick<React.AriaAttributes, 'aria-sort'>
 
-const Base = (props: BaseProps) => {
-  const { token, sticky } = props
-  const { background, height, typography, spacings } = token
-  const activeToken = token.states.active
+const StyledTableCell = styled.th((props: BaseProps) => {
+  const { theme, sticky } = props
+  const { background, height, typography, spacings } = theme
+  const activeToken = theme.states.active
   const ariaSort = props['aria-sort']
   let sortStylingHover = css({})
   let sortStylingActive = css({})
@@ -27,7 +27,7 @@ const Base = (props: BaseProps) => {
       @media (hover: hover) and (pointer: fine) {
         &:hover {
           cursor: pointer;
-          background: ${token.states.hover.background};
+          background: ${theme.states.hover.background};
         }
       }
     `
@@ -45,30 +45,24 @@ const Base = (props: BaseProps) => {
     `
   }
 
-  const base = css`
+  return css`
     min-height: ${height};
     height: ${height};
     background: ${background};
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
-    ${bordersTemplate(token.border)}
-    ${sortStylingHover}
-    ${sortStylingActive}
+  ${bordersTemplate(theme.border)}
+  ${sortStylingHover}
+  ${sortStylingActive}
 
-    ${sticky
+  ${sticky
       ? css`
           position: sticky;
           top: 0;
         `
       : ''}
   `
-
-  return base
-}
-
-const StyledTableCell = styled.th`
-  ${Base}
-`
+})
 
 const CellInner = styled.div`
   display: flex;
@@ -85,11 +79,13 @@ export const TableHeaderCell = forwardRef<
   CellProps
 >(function TableHeaderCell({ children, sort, ...rest }, ref) {
   const { density } = useEds()
-  const token = applyDensity(density, tablehead)
+  const token = useToken({ density }, tablehead)()
 
   return (
-    <StyledTableCell token={token} aria-sort={sort} {...rest} ref={ref}>
-      <CellInner>{children}</CellInner>
-    </StyledTableCell>
+    <ThemeProvider theme={token}>
+      <StyledTableCell aria-sort={sort} {...rest} ref={ref}>
+        <CellInner>{children}</CellInner>
+      </StyledTableCell>
+    </ThemeProvider>
   )
 })
