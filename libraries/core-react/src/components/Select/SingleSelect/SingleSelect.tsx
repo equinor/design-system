@@ -4,7 +4,7 @@ import {
   UseComboboxProps,
   UseComboboxStateChange,
 } from 'downshift'
-import styled, { css } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { Label } from '../../Label'
 import { Icon } from '../../Icon'
 import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
@@ -19,6 +19,7 @@ import {
   StyledInputWrapper,
 } from '../commonStyles'
 import { useEds } from '../../EdsProvider'
+import { useToken } from '../../../hooks'
 
 export type SingleSelectProps = {
   /** List of options to choose from */
@@ -45,14 +46,7 @@ export type SingleSelectProps = {
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 const PaddedStyledListItem = styled(StyledListItem)`
-  ${({ density }) =>
-    density === 'compact'
-      ? css`
-          ${spacingsTemplate(tokens.modes.compact.spacings)};
-        `
-      : css`
-          ${spacingsTemplate(tokens.spacings)};
-        `}
+  ${({ theme }) => spacingsTemplate(theme.spacings)}
 `
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
@@ -74,6 +68,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     const [inputItems, setInputItems] = useState(items)
     const isControlled = selectedOption !== undefined ? true : false
     const { density } = useEds()
+    const token = useToken({ density }, tokens)()
 
     useEffect(() => {
       setInputItems(items)
@@ -108,45 +103,47 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     } = useCombobox(comboboxProps)
 
     return (
-      <Container className={className} ref={ref}>
-        <Label
-          {...getLabelProps()}
-          label={label}
-          meta={meta}
-          disabled={disabled}
-        />
-        <StyledInputWrapper {...getComboboxProps()}>
-          <PaddedInput
-            {...getInputProps({ disabled: disabled })}
-            readOnly={readOnly}
-            {...other}
+      <ThemeProvider theme={token}>
+        <Container className={className} ref={ref}>
+          <Label
+            {...getLabelProps()}
+            label={label}
+            meta={meta}
+            disabled={disabled}
           />
-          <StyledButton
-            type="button"
-            variant="ghost_icon"
-            {...getToggleButtonProps({ disabled: disabled || readOnly })}
-            density={density}
-          >
-            <Icon
-              data={isOpen ? arrow_drop_up : arrow_drop_down}
-              title="open"
-            ></Icon>
-          </StyledButton>
-        </StyledInputWrapper>
-        <StyledList {...getMenuProps()}>
-          {isOpen &&
-            inputItems.map((item, index) => (
-              <PaddedStyledListItem
-                highlighted={highlightedIndex === index ? 'true' : 'false'}
-                key={`${item}`}
-                {...getItemProps({ item, index, disabled: disabled })}
-                density={density}
-              >
-                {item}
-              </PaddedStyledListItem>
-            ))}
-        </StyledList>
-      </Container>
+          <StyledInputWrapper {...getComboboxProps()}>
+            <PaddedInput
+              {...getInputProps({ disabled: disabled })}
+              readOnly={readOnly}
+              {...other}
+            />
+            <StyledButton
+              type="button"
+              variant="ghost_icon"
+              {...getToggleButtonProps({ disabled: disabled || readOnly })}
+              density={density}
+            >
+              <Icon
+                data={isOpen ? arrow_drop_up : arrow_drop_down}
+                title="open"
+              ></Icon>
+            </StyledButton>
+          </StyledInputWrapper>
+          <StyledList {...getMenuProps()}>
+            {isOpen &&
+              inputItems.map((item, index) => (
+                <PaddedStyledListItem
+                  highlighted={highlightedIndex === index ? 'true' : 'false'}
+                  key={`${item}`}
+                  {...getItemProps({ item, index, disabled: disabled })}
+                  density={density}
+                >
+                  {item}
+                </PaddedStyledListItem>
+              ))}
+          </StyledList>
+        </Container>
+      </ThemeProvider>
     )
   },
 )
