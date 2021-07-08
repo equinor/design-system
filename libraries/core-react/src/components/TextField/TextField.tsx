@@ -5,12 +5,15 @@ import {
   forwardRef,
   Ref,
 } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { Field } from './Field'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { TextFieldProvider } from './context'
 import type { Variants } from './types'
+import { textfield as tokens } from './TextField.tokens'
+import { useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 const Container = styled.div`
   min-width: 100px;
@@ -112,14 +115,19 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     const showLabel = label || meta
     const showHelperText = helperText
 
+    const { density } = useEds()
+    const token = useToken({ density }, tokens)()
+
     return (
-      <Container {...containerProps}>
-        <TextFieldProvider>
-          {showLabel && <Label {...labelProps} />}
-          <Field {...inputProps} />
-          {showHelperText && <HelperText {...helperProps} />}
-        </TextFieldProvider>
-      </Container>
+      <ThemeProvider theme={token}>
+        <Container {...containerProps}>
+          <TextFieldProvider>
+            {showLabel && <Label {...labelProps} />}
+            <Field {...inputProps} />
+            {showHelperText && <HelperText {...helperProps} />}
+          </TextFieldProvider>
+        </Container>
+      </ThemeProvider>
     )
   },
 )
