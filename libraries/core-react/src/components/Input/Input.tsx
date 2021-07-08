@@ -11,7 +11,7 @@ import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 
-const { input, inputVariants } = tokens
+const { input } = tokens
 
 const Variation = ({ variant, token, theme }: StyledProps) => {
   if (!variant) {
@@ -96,7 +96,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { variant = 'default', disabled = false, type = 'text', ...other },
   ref,
 ) {
-  const inputVariant = inputVariants[variant]
+  const actualVariant = variant === 'default' ? 'input' : variant
+  const inputVariant = tokens[actualVariant]
   const { density } = useEds()
   const token = useToken({ density }, input)()
 
