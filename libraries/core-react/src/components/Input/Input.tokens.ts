@@ -1,5 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
 import type { ComponentToken } from '@equinor/eds-tokens'
+import { mergeDeepRight } from 'ramda'
 
 const {
   colors: {
@@ -86,7 +87,7 @@ export const input: InputToken = {
   },
 }
 
-export const error: InputToken = {
+export const error: InputToken = mergeDeepRight(input, {
   boxShadow: 'inset 0px -1px 0px 0px transparent',
   states: {
     active: {
@@ -108,9 +109,9 @@ export const error: InputToken = {
       },
     },
   },
-}
+})
 
-export const warning: InputToken = {
+export const warning: InputToken = mergeDeepRight(input, {
   boxShadow: 'inset 0px -1px 0px 0px transparent',
   states: {
     active: {
@@ -132,9 +133,9 @@ export const warning: InputToken = {
       },
     },
   },
-}
+})
 
-export const success: InputToken = {
+export const success: InputToken = mergeDeepRight(input, {
   boxShadow: 'inset 0px -1px 0px 0px transparent',
   states: {
     active: {
@@ -156,4 +157,4 @@ export const success: InputToken = {
       },
     },
   },
-}
+})
