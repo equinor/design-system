@@ -122,9 +122,9 @@ const Adornments = styled.div<AdornmentsType>`
   & div:nth-child(2) {
     margin-left: ${textfield.spacings.left};
   }
-  margin-top: ${({ theme }) => theme.spacings.top};
-  ${({ multiline }) =>
+  ${({ multiline, theme }) =>
     multiline && {
+      marginTop: theme.spacings.top,
       alignSelf: 'start',
     }}
 `
