@@ -13,6 +13,9 @@ import {
   Tooltip,
   Popover,
 } from '../../src'
+import * as TableExamples from './DataTable.stories'
+
+import { accessible } from '@equinor/eds-icons'
 
 export default {
   title: 'Playground/Examples',
@@ -31,51 +34,42 @@ const Container = styled.div`
 
 const Content = styled.div`
   margin: 0 16px;
+  height: 100%;
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-gap: 8px;
-  grid-auto-columns: max-content;
-  grid-auto-flow: column;
+  grid-auto-rows: max-content max-content;
+  grid-gap: 16px;
 `
 
 const Toolbar = styled.div`
   padding-top: 16px;
   display: grid;
   grid-gap: 8px;
-  grid-column-start: 3;
-  grid-column-end: span end;
   grid-auto-columns: max-content;
   grid-auto-flow: column;
 `
 
-const Sidebar = styled.div`
-  padding-top: 16px;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  border-right: 1px solid rgba(247, 247, 247, 1);
-`
-
 export const DefaultPage: Story = (args) => {
-  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
-  const [isOpenSnackbar, setIsOpenSnackbar] = useState<boolean>(false)
-  const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false)
+  const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
+  const [isOpenSnackbar, setOpenSnackbar] = useState<boolean>(false)
+  const [isPopoverOpen, setPopoverOpen] = useState<boolean>(false)
   const [focus, setFocus] = useState<MenuProps['focus']>(null)
+  const [density, setDensity] = useState<'comfortable' | 'compact'>('compact')
   const menuAnchorRef = useRef<HTMLButtonElement>(null)
   const popverAnchorRef = useRef<HTMLButtonElement>(null)
 
   const openMenu = (focus: MenuProps['focus']) => {
-    setIsOpenMenu(true)
+    setOpenMenu(true)
     setFocus(focus)
   }
   const closeMenu = () => {
-    setIsOpenMenu(false)
+    setOpenMenu(false)
     setFocus(null)
   }
 
   // This is just for storybook and changes done via controls addon
   useEffect(() => {
     setFocus(args.focus)
-    setIsOpenMenu(args.open)
+    setOpenMenu(args.open)
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.open, args.focus])
 
@@ -108,6 +102,7 @@ export const DefaultPage: Story = (args) => {
 
         <TopBar.Actions>
           <Button
+            variant="ghost_icon"
             ref={menuAnchorRef}
             id="anchor-menu"
             aria-haspopup="true"
@@ -116,7 +111,7 @@ export const DefaultPage: Story = (args) => {
             onClick={() => (isOpenMenu ? closeMenu() : openMenu(null))}
             onKeyDown={onKeyPress}
           >
-            Show Menu
+            <Icon data={accessible} />
           </Button>
           <Menu
             open={isOpenMenu}
@@ -127,21 +122,21 @@ export const DefaultPage: Story = (args) => {
             onClose={closeMenu}
             anchorEl={menuAnchorRef.current}
           >
-            <Menu.Item onClick={onClick}>Pressure</Menu.Item>
-            <Menu.Item onClick={onClick}>Bearing</Menu.Item>
-            <Menu.Item onClick={onClick}>Cable</Menu.Item>
+            <Menu.Item onClick={() => setDensity('comfortable')}>
+              Comfortable
+            </Menu.Item>
+            <Menu.Item onClick={() => setDensity('compact')}>Compact</Menu.Item>
           </Menu>
         </TopBar.Actions>
       </TopBar>
       <Content>
-        <Sidebar>Sidebar</Sidebar>
         <Toolbar>
-          <Button type="button" onClick={() => setIsOpenSnackbar(true)}>
+          <Button type="button" onClick={() => setOpenSnackbar(true)}>
             Show Snackbar
           </Button>
           <Snackbar
             open={isOpenSnackbar}
-            onClose={() => setIsOpenSnackbar(false)}
+            onClose={() => setOpenSnackbar(false)}
             autoHideDuration={5000}
           >
             Message goes here
@@ -155,7 +150,7 @@ export const DefaultPage: Story = (args) => {
             aria-controls="popover"
             aria-expanded={isPopoverOpen}
             ref={popverAnchorRef}
-            onClick={() => setIsPopoverOpen(true)}
+            onClick={() => setPopoverOpen(true)}
           >
             Show Popover
           </Button>
@@ -164,15 +159,16 @@ export const DefaultPage: Story = (args) => {
             open={isPopoverOpen}
             id="popover"
             anchorEl={popverAnchorRef.current}
-            onClose={() => setIsPopoverOpen(false)}
+            onClose={() => setPopoverOpen(false)}
           >
             <Popover.Title>Title</Popover.Title>
             <Popover.Content>
               <Typography variant="body_short">Content</Typography>
             </Popover.Content>
-            <Button onClick={() => setIsPopoverOpen(false)}>OK</Button>
+            <Button onClick={() => setPopoverOpen(false)}>OK</Button>
           </Popover>
         </Toolbar>
+        <TableExamples.CompactDataGrid density={density} />
       </Content>
     </Container>
   )
