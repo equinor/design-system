@@ -13,7 +13,7 @@ import { useToken } from '../../hooks'
 
 const { input } = tokens
 
-const Variation = ({ variant, token, theme }: StyledProps) => {
+const Variation = ({ variant, theme }: StyledProps) => {
   if (!variant) {
     return ``
   }
@@ -24,15 +24,13 @@ const Variation = ({ variant, token, theme }: StyledProps) => {
       active: { outline: activeOutline },
     },
     boxShadow,
-  } = token
+  } = theme
 
   return css`
     border: none;
     ${outlineTemplate(activeOutline)}
-
     height: ${theme.minHeight};
     ${spacingsTemplate(theme.spacings)};
-
     box-shadow: ${boxShadow};
 
     &:active,
@@ -55,7 +53,6 @@ const Variation = ({ variant, token, theme }: StyledProps) => {
 }
 
 type StyledProps = {
-  token: InputToken
   variant: string
   theme: InputToken
 }
