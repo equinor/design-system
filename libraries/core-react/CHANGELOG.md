@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0] - 2021-07-XX
+
+### Added
+
+- Compact components part 1 ([#1249](https://github.com/equinor/design-system/issues/1249)):
+  - `TextField`, `Input`, `Checkbox`, `Menu`, `NativeSelect`, `SingleSelect`, `MultiSelect`, `Button`, `Switch` & `Table`
+
+### Fixed
+
+- `TopBar` missing bottom-border ([#1395](https://github.com/equinor/design-system/issues/1395))
+- Wrong types in the `onChange` callback in `Pagination` ([#1397](https://github.com/equinor/design-system/issues/1397))
+- Misaligned `Icon` when used inside `Button` variant `ghost_icon` ([#1423](https://github.com/equinor/design-system/issues/1423))
+- `TextField` lost focus if `inputIcon` was toggled conditionally ([#1425](https://github.com/equinor/design-system/issues/1425))
+- `TextField` with `inputIcon` had wrong border color ([#1425](https://github.com/equinor/design-system/issues/1425))
+- Typo in `Accordion` `displayName` ([#1450](https://github.com/equinor/design-system/pull/1450))
+- Disabled `Button` was not disabled if `href` was set ([#1456](https://github.com/equinor/design-system/issues/1456))
+- Stacking order for overlay components (`Menu`, `Popover`, `Scrim` etc.) ([#1462](https://github.com/equinor/design-system/issues/1462), [#1466](https://github.com/equinor/design-system/issues/1466))
+
+### Changed
+
+- Darker hover background in `Menu` for better accessibility ([#1363](https://github.com/equinor/design-system/issues/1363))
+- `Switch` sizes, hover, label spacing and focus frame to match the design in Figma ([#1433](https://github.com/equinor/design-system/issues/1433))
+- Optional `label` for `Switch` ([#1445](https://github.com/equinor/design-system/issues/1453)), `Checkbox` ([#1425](https://github.com/equinor/design-system/issues/1453)), `Radio` ([#1459](https://github.com/equinor/design-system/issues/1459))
+
 ## [0.12.1] - 2021-05-28
 
 ### Fixed 🐛
