@@ -11,6 +11,8 @@ import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 
+const { input } = tokens
+
 const Variation = ({ variant, theme }: StyledProps) => {
   if (!variant) {
     return ``
@@ -55,31 +57,46 @@ type StyledProps = {
   theme: InputToken
 }
 
-const InputBase = styled.input(({ theme }: { theme: InputToken }) => {
-  const {
-    states: { disabled },
-    entities,
-  } = theme
+const StyledInput = styled.input<StyledProps>`
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  appearance: none;
+  background: ${input.background};
 
-  return css`
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    border: none;
-    appearance: none;
-    background: ${theme.background};
+  ${typographyTemplate(input.typography)}
 
-    ${typographyTemplate(theme.typography)}
+  ${Variation}
+  &::placeholder {
+    color: ${input.entities.placeholder.typography.color};
+  }
+  &:disabled {
+    color: ${input.states.disabled.typography.color};
+  }
+`
 
-    ${Variation}
+const InputBase = styled.input(
+  ({ theme }: { theme: InputToken }) =>
+    css`
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      border: none;
+      appearance: none;
+      background: ${theme.background};
+
+      ${typographyTemplate(theme.typography)}
+
+      ${Variation}
     &::placeholder {
-      color: ${entities.placeholder.typography.color};
-    }
-    &:disabled {
-      color: ${disabled.typography.color};
-    }
-  `
-})
+        color: ${theme.entities.placeholder.typography.color};
+      }
+      &:disabled {
+        color: ${theme.states.disabled.typography.color};
+      }
+    `,
+)
 
 export type InputProps = {
   /** Placeholder */
@@ -115,7 +132,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 
   return (
     <ThemeProvider theme={token}>
-      <InputBase {...inputProps} />
+      <StyledInput {...inputProps} />
     </ThemeProvider>
   )
 })
