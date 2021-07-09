@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, forwardRef } from 'react'
-import styled, { css } from 'styled-components'
-import * as tokens from './Input.tokens'
+import styled, { css, ThemeProvider } from 'styled-components'
+import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
 import {
   typographyTemplate,
@@ -9,36 +9,35 @@ import {
 } from '../../utils'
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
+import { useToken } from '../../hooks'
 
-const { input, inputVariants } = tokens
-
-const Variation = ({ variant, token, density }: StyledProps) => {
-  if (!variant) {
-    return ``
-  }
-
+const StyledInput = styled.input(({ theme }: StyledProps) => {
   const {
     states: {
       focus: { outline: focusOutline },
       active: { outline: activeOutline },
+      disabled,
     },
     boxShadow,
-  } = token
-
-  let spacings = input.spacings
-  let height = input.minHeight
-  if (density === 'compact') {
-    spacings = input.modes.compact.spacings
-    height = input.modes.compact.minHeight
-  }
+  } = theme
 
   return css`
-    height: ${height};
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    appearance: none;
+    background: ${theme.background};
     border: none;
-    ${outlineTemplate(activeOutline)}
-    ${spacingsTemplate(spacings)}
-
+    height: ${theme.minHeight};
     box-shadow: ${boxShadow};
+
+    ${outlineTemplate(activeOutline)}
+    ${typographyTemplate(theme.typography)}
+    ${spacingsTemplate(theme.spacings)};
+
+    &::placeholder {
+      color: ${theme.entities.placeholder.typography.color};
+    }
 
     &:active,
     &:focus {
@@ -48,6 +47,7 @@ const Variation = ({ variant, token, density }: StyledProps) => {
     }
 
     &:disabled {
+      color: ${disabled.typography.color};
       cursor: not-allowed;
       box-shadow: none;
       outline: none;
@@ -57,32 +57,11 @@ const Variation = ({ variant, token, density }: StyledProps) => {
       }
     }
   `
-}
+})
 
 type StyledProps = {
-  density: string
-  token: InputToken
-  variant: string
+  theme: InputToken
 }
-
-const StyledInput = styled.input<StyledProps>`
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  border: none;
-  appearance: none;
-  background: ${input.background};
-
-  ${typographyTemplate(input.typography)}
-
-  ${Variation}
-  &::placeholder {
-    color: ${input.entities.placeholder.typography.color};
-  }
-  &:disabled {
-    color: ${input.states.disabled.typography.color};
-  }
-`
 
 export type InputProps = {
   /** Placeholder */
@@ -101,18 +80,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { variant = 'default', disabled = false, type = 'text', ...other },
   ref,
 ) {
-  const inputVariant = inputVariants[variant]
+  const actualVariant = variant === 'default' ? 'input' : variant
+  const inputVariant = tokens[actualVariant]
   const { density } = useEds()
+  const token = useToken({ density }, inputVariant)()
 
   const inputProps = {
     ref,
     type,
     disabled,
-    variant,
-    token: inputVariant,
-    density,
     ...other,
   }
 
-  return <StyledInput {...inputProps} />
+  return (
+    <ThemeProvider theme={token}>
+      <StyledInput {...inputProps} />
+    </ThemeProvider>
+  )
 })

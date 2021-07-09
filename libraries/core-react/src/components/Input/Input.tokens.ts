@@ -1,5 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
 import type { ComponentToken } from '@equinor/eds-tokens'
+import { mergeDeepRight } from 'ramda'
 
 const {
   colors: {
@@ -27,13 +28,6 @@ const {
 
 export type InputToken = ComponentToken
 
-export type InputVariantsToken = {
-  default: ComponentToken
-  error: ComponentToken
-  warning: ComponentToken
-  success: ComponentToken
-}
-
 export const input: InputToken = {
   minHeight: shape.straight.minHeight,
   background,
@@ -60,7 +54,26 @@ export const input: InputToken = {
         color: disabled__text.rgba,
       },
     },
+    active: {
+      outline: {
+        type: 'outline',
+        color: 'transparent',
+        width: '1px',
+        style: 'solid',
+        offset: '0px',
+      },
+    },
+    focus: {
+      outline: {
+        type: 'outline',
+        width: '2px',
+        color: primary__resting.rgba,
+        style: 'solid',
+        offset: '0px',
+      },
+    },
   },
+  boxShadow: 'inset 0px -1px 0px 0px ' + static_icons__tertiary.rgba,
   modes: {
     compact: {
       minHeight: shape._modes.compact.straight.minHeight,
@@ -74,97 +87,76 @@ export const input: InputToken = {
   },
 }
 
-export const inputVariants: InputVariantsToken = {
-  default: {
-    boxShadow: 'inset 0px -1px 0px 0px ' + static_icons__tertiary.rgba,
-    states: {
-      active: {
-        outline: {
-          type: 'outline',
-          color: 'transparent',
-          width: '1px',
-          style: 'solid',
-          offset: '0px',
-        },
+export const error: InputToken = mergeDeepRight(input, {
+  boxShadow: 'inset 0px -1px 0px 0px transparent',
+  states: {
+    active: {
+      outline: {
+        type: 'outline',
+        color: danger__resting.rgba,
+        width: '1px',
+        style: 'solid',
+        offset: '0px',
       },
-      focus: {
-        outline: {
-          type: 'outline',
-          width: '2px',
-          color: primary__resting.rgba,
-          style: 'solid',
-          offset: '0px',
-        },
+    },
+    focus: {
+      outline: {
+        type: 'outline',
+        width: '2px',
+        color: danger__hover.rgba,
+        style: 'solid',
+        offset: '0px',
       },
     },
   },
-  error: {
-    boxShadow: 'inset 0px -1px 0px 0px transparent',
-    states: {
-      active: {
-        outline: {
-          type: 'outline',
-          color: danger__resting.rgba,
-          width: '1px',
-          style: 'solid',
-          offset: '0px',
-        },
+})
+
+export const warning: InputToken = mergeDeepRight(input, {
+  boxShadow: 'inset 0px -1px 0px 0px transparent',
+  states: {
+    active: {
+      outline: {
+        type: 'outline',
+        color: warning__resting.rgba,
+        width: '1px',
+        style: 'solid',
+        offset: '0px',
       },
-      focus: {
-        outline: {
-          type: 'outline',
-          width: '2px',
-          color: danger__hover.rgba,
-          style: 'solid',
-          offset: '0px',
-        },
+    },
+    focus: {
+      outline: {
+        type: 'outline',
+        width: '2px',
+        color: warning__hover.rgba,
+        style: 'solid',
+        offset: '0px',
       },
     },
   },
-  warning: {
-    boxShadow: 'inset 0px -1px 0px 0px transparent',
-    states: {
-      active: {
-        outline: {
-          type: 'outline',
-          color: warning__resting.rgba,
-          width: '1px',
-          style: 'solid',
-          offset: '0px',
-        },
+})
+
+export const success: InputToken = mergeDeepRight(input, {
+  boxShadow: 'inset 0px -1px 0px 0px transparent',
+  states: {
+    active: {
+      outline: {
+        type: 'outline',
+        color: success__resting.rgba,
+        width: '1px',
+        style: 'solid',
+        offset: '0px',
       },
-      focus: {
-        outline: {
-          type: 'outline',
-          width: '2px',
-          color: warning__hover.rgba,
-          style: 'solid',
-          offset: '0px',
-        },
+    },
+    focus: {
+      outline: {
+        type: 'outline',
+        width: '2px',
+        color: success__hover.rgba,
+        style: 'solid',
+        offset: '0px',
       },
     },
   },
-  success: {
-    boxShadow: 'inset 0px -1px 0px 0px transparent',
-    states: {
-      active: {
-        outline: {
-          type: 'outline',
-          color: success__resting.rgba,
-          width: '1px',
-          style: 'solid',
-          offset: '0px',
-        },
-      },
-      focus: {
-        outline: {
-          type: 'outline',
-          width: '2px',
-          color: success__hover.rgba,
-          style: 'solid',
-          offset: '0px',
-        },
-      },
-    },
-  },
-}
+})
+
+export const inputToken = { input, error, warning, success }

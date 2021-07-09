@@ -11,7 +11,7 @@ import type { Variants } from '../TextField/types'
 import { useAutoResize, useCombinedRefs } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
-const { input, inputVariants } = tokens
+const { input } = tokens
 
 const Variation = ({ variant, token, density }: StyledProps) => {
   if (!variant) {
@@ -101,7 +101,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     { variant = 'default', disabled = false, type = 'text', rowsMax, ...other },
     ref,
   ) {
-    const inputVariant = inputVariants[variant]
+    const actualVariant = variant === 'default' ? 'input' : variant
+    const inputVariant = tokens[actualVariant]
     const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
     const { density } = useEds()
     const spacings =

@@ -3,7 +3,7 @@ import { render, cleanup } from '@testing-library/react'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Input } from './Input'
-import { inputVariants as inputTokens } from './Input.tokens'
+import * as tokens from './Input.tokens'
 import { trimSpaces } from '../../utils'
 
 const {
@@ -16,7 +16,7 @@ const {
   warning: {
     states: { active: activeWarning },
   },
-} = inputTokens
+} = tokens
 
 afterEach(cleanup)
 
