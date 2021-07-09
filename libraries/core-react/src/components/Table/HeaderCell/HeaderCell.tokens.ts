@@ -43,6 +43,8 @@ export const token: TableHeadToken = {
     },
   },
   spacings: {
+    top: '0',
+    bottom: '0',
     left: medium,
     right: medium,
   },
@@ -87,6 +89,9 @@ export const token: TableHeadToken = {
   modes: {
     compact: {
       height: '32px',
+      typography: {
+        lineHeight: '1rem',
+      },
     },
   },
 }
