@@ -11,9 +11,7 @@ import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 
-const { input } = tokens
-
-const Variation = ({ variant, theme }: StyledProps) => {
+const StyledInput = styled.input(({ variant, theme }: StyledProps) => {
   if (!variant) {
     return ``
   }
@@ -27,11 +25,22 @@ const Variation = ({ variant, theme }: StyledProps) => {
   } = theme
 
   return css`
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    appearance: none;
+    background: ${theme.background};
     border: none;
-    ${outlineTemplate(activeOutline)}
     height: ${theme.minHeight};
-    ${spacingsTemplate(theme.spacings)};
     box-shadow: ${boxShadow};
+
+    ${outlineTemplate(activeOutline)}
+    ${typographyTemplate(theme.typography)}
+    ${spacingsTemplate(theme.spacings)};
+
+    &::placeholder {
+      color: ${theme.entities.placeholder.typography.color};
+    }
 
     &:active,
     &:focus {
@@ -41,6 +50,7 @@ const Variation = ({ variant, theme }: StyledProps) => {
     }
 
     &:disabled {
+      color: ${theme.states.disabled.typography.color};
       cursor: not-allowed;
       box-shadow: none;
       outline: none;
@@ -50,53 +60,12 @@ const Variation = ({ variant, theme }: StyledProps) => {
       }
     }
   `
-}
+})
 
 type StyledProps = {
   variant: string
   theme: InputToken
 }
-
-const StyledInput = styled.input<StyledProps>`
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  border: none;
-  appearance: none;
-  background: ${input.background};
-
-  ${typographyTemplate(input.typography)}
-
-  ${Variation}
-  &::placeholder {
-    color: ${input.entities.placeholder.typography.color};
-  }
-  &:disabled {
-    color: ${input.states.disabled.typography.color};
-  }
-`
-
-const InputBase = styled.input(
-  ({ theme }: { theme: InputToken }) =>
-    css`
-      width: 100%;
-      box-sizing: border-box;
-      margin: 0;
-      border: none;
-      appearance: none;
-      background: ${theme.background};
-
-      ${typographyTemplate(theme.typography)}
-
-      ${Variation}
-    &::placeholder {
-        color: ${theme.entities.placeholder.typography.color};
-      }
-      &:disabled {
-        color: ${theme.states.disabled.typography.color};
-      }
-    `,
-)
 
 export type InputProps = {
   /** Placeholder */
