@@ -85,7 +85,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   ref,
 ) {
   const actualVariant = variant === 'default' ? 'input' : variant
-  const inputVariant = tokens[actualVariant] as InputToken
+  const inputVariant = tokens[actualVariant]
   const { density } = useEds()
   const token = useToken({ density }, inputVariant)()
 
@@ -94,8 +94,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     type,
     disabled,
     variant,
-    token: inputVariant,
-    density,
     ...other,
   }
 
