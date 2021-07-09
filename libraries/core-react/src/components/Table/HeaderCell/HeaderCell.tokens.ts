@@ -87,6 +87,9 @@ export const token: TableHeadToken = {
   modes: {
     compact: {
       height: '32px',
+      typography: {
+        lineHeight: '1rem',
+      },
     },
   },
 }

@@ -103,6 +103,9 @@ const tableCell: ComponentToken = {
   modes: {
     compact: {
       height: '32px',
+      typography: {
+        lineHeight: '1rem',
+      },
     },
   },
 }
