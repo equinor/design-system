@@ -158,3 +158,5 @@ export const success: InputToken = mergeDeepRight(input, {
     },
   },
 })
+
+export const inputToken = { input, error, warning, success }

@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, forwardRef } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
-import * as tokens from './Input.tokens'
+import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
 import {
   typographyTemplate,
@@ -11,15 +11,12 @@ import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 
-const StyledInput = styled.input(({ variant, theme }: StyledProps) => {
-  if (!variant) {
-    return ``
-  }
-
+const StyledInput = styled.input(({ theme }: StyledProps) => {
   const {
     states: {
       focus: { outline: focusOutline },
       active: { outline: activeOutline },
+      disabled,
     },
     boxShadow,
   } = theme
@@ -50,7 +47,7 @@ const StyledInput = styled.input(({ variant, theme }: StyledProps) => {
     }
 
     &:disabled {
-      color: ${theme.states.disabled.typography.color};
+      color: ${disabled.typography.color};
       cursor: not-allowed;
       box-shadow: none;
       outline: none;
@@ -63,7 +60,6 @@ const StyledInput = styled.input(({ variant, theme }: StyledProps) => {
 })
 
 type StyledProps = {
-  variant: string
   theme: InputToken
 }
 
@@ -93,7 +89,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     ref,
     type,
     disabled,
-    variant,
     ...other,
   }
 
