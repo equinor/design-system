@@ -56,6 +56,8 @@ const tableCell: ComponentToken = {
     },
   },
   spacings: {
+    top: '0',
+    bottom: '0',
     left: medium,
     right: medium,
   },
@@ -103,10 +105,6 @@ const tableCell: ComponentToken = {
   modes: {
     compact: {
       height: '32px',
-      spacings: {
-        top: '0',
-        bottom: '0',
-      },
       typography: {
         lineHeight: '1rem',
       },
