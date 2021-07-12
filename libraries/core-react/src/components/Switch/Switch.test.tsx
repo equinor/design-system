@@ -16,9 +16,11 @@ const StyledSwitch = styled(Switch)`
 
 describe('Switch', () => {
   it('Matches snapshot', () => {
-    const { asFragment } = render(<Switch />)
+    render(<Switch label="switch" />)
 
-    expect(asFragment).toMatchSnapshot()
+    const switchNode = screen.getByLabelText('switch').parentElement
+
+    expect(switchNode).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSwitch label="switch-test" />)
