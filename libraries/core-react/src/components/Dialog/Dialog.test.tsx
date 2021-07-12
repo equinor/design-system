@@ -19,6 +19,18 @@ const StyledDialog = styled(Dialog)`
 afterEach(cleanup)
 
 describe('Dialog', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Dialog>
+        <Title>Title</Title>
+        <CustomContent>Description</CustomContent>
+        <Actions>
+          <button type="button">OK</button>
+        </Actions>
+      </Dialog>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has all provided content', () => {
     const testIdTitle = 'dialog-test-title'
     const testIdCenter = 'dialog-test-center'

@@ -3,6 +3,7 @@ import {
   render,
   cleanup,
   waitForElementToBeRemoved,
+  screen,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -17,6 +18,12 @@ const StyledSnackbar = styled(Snackbar)`
 const message = "Hi, I'm the snackbar"
 
 describe('Snackbar', () => {
+  it('Matches snapshot', () => {
+    render(<Snackbar open>snacks</Snackbar>)
+    const snackbar = screen.getByText('snacks')
+
+    expect(snackbar).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(
       <StyledSnackbar open>{message}</StyledSnackbar>,

@@ -17,6 +17,14 @@ const StyledIcon = styled(Icon)`
 afterEach(cleanup)
 
 describe('Icon', () => {
+  it('Matches snapshot using data', () => {
+    const { asFragment } = render(<Icon data={save} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
+  it('Matches snapshot using name ', () => {
+    const { asFragment } = render(<Icon name="save" />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has correct svg data', () => {
     const { queryByTestId } = render(<Icon name="save" />)
     expect(queryByTestId('eds-icon-path')).toHaveAttribute(

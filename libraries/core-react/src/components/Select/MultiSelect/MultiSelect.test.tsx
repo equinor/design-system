@@ -13,6 +13,13 @@ const labelText = 'Select label test'
 afterEach(cleanup)
 
 describe('MultiSelect', () => {
+  it('Matches snapshot', () => {
+    render(<MultiSelect items={items} label={labelText} />)
+    const optionsNode = screen.getAllByLabelText(labelText)[1]
+    const buttonNode = screen.getByLabelText('open')
+    expect(optionsNode).toMatchSnapshot()
+    expect(buttonNode).toMatchSnapshot()
+  })
   it('Has provided label', () => {
     render(<MultiSelect label={labelText} items={items} id="id" />)
     // The same label is used for both the input field and the list of options

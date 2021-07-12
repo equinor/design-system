@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chips Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  height: 22px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 10;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  padding-left: 4px;
+  padding-right: 8px;
+  margin: 0;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  text-align: left;
+}
+
+.c0 svg {
+  fill: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+}
+
+.c0:hover {
+  color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+}
+
+.c0:hover svg {
+  fill: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0[data-focus-visible-added]:focus {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 2px;
+}
+
+<div
+    class="c0"
+  >
+    <svg
+      aria-hidden="true"
+      class=""
+      fill="currentColor"
+      height="16px"
+      viewBox="0 0 16 16"
+      width="16px"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        class=""
+        clip-rule="evenodd"
+        d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+        data-testid="eds-icon-path"
+        fill-rule="evenodd"
+        height="24"
+        transform="scale(0.6666666666666666)"
+      />
+    </svg>
+    Chip
+  </div>
+</DocumentFragment>
+`;

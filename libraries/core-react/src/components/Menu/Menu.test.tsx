@@ -18,6 +18,18 @@ const StyledMenu = styled(TestMenu)`
 afterEach(cleanup)
 
 describe('Menu', () => {
+  it('Matches snapshot', async () => {
+    render(
+      <StyledMenu open>
+        <div>some random content</div>
+      </StyledMenu>,
+    )
+
+    const menuContainer = screen.getByRole('menu', { hidden: true })
+
+    await waitFor(() => expect(menuContainer).toMatchSnapshot())
+  })
+
   it('Can extend the css for the component', async () => {
     render(
       <StyledMenu open>

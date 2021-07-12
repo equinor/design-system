@@ -12,6 +12,10 @@ const StyledProgress = styled(StarProgress)`
 afterEach(cleanup)
 
 describe('StarProgress', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<StarProgress />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('has correct aria values when variant is "determinate"', () => {
     render(<StarProgress variant="determinate" value={50} />)
     const progress = screen.getByRole('progressbar')

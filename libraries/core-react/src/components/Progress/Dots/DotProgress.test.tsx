@@ -14,6 +14,10 @@ const StyledProgress = styled(DotProgress)`
 afterEach(cleanup)
 
 describe('DotProgress', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<DotProgress />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('should render neutral as default', () => {
     render(<DotProgress />)
     const progressbar = screen.getByRole('progressbar')

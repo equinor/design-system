@@ -12,6 +12,10 @@ const StyledPagination = styled(Pagination)`
 afterEach(cleanup)
 
 describe('Pagination', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Pagination totalItems={10} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('can extend the css for the component', () => {
     const { container } = render(<StyledPagination totalItems={10} />)
     const pagination = container.firstChild

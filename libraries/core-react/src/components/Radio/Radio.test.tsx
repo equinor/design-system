@@ -15,6 +15,10 @@ const StyledRadio = styled(Radio)`
 `
 
 describe('Radio', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Radio label="label" />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledRadio label="radio-test" />)
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')

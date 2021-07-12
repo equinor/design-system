@@ -34,6 +34,10 @@ const ControlledCheckbox = ({ onChange }: ControlledProps) => {
 }
 
 describe('Checkbox', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Checkbox label={'checkbox'} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledCheckbox label="checkbox-test" />)
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')

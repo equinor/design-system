@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinearProgress  Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  position: relative;
+  overflow: hidden;
+  height: 4px;
+  background-color: var(--eds_infographic_primary__moss_green_13,rgba(222,237,238,1));
+  width: 100%;
+  border-radius: 50px;
+}
+
+.c1 {
+  width: 75%;
+  border-radius: 50px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  -webkit-transition: transform 0.2s linear;
+  transition: transform 0.2s linear;
+  -webkit-transform-origin: left;
+  -ms-transform-origin: left;
+  transform-origin: left;
+  background-color: var(--eds_infographic_primary__moss_green_100,rgba(0,112,121,1));
+  -webkit-animation: bVfVYg 1.5s cubic-bezier(0.165,0.84,0.44,1) 1s infinite;
+  animation: bVfVYg 1.5s cubic-bezier(0.165,0.84,0.44,1) 1s infinite;
+}
+
+<div
+    class="c0"
+    role="progressbar"
+  >
+    <div
+      class="c1"
+    />
+  </div>
+</DocumentFragment>
+`;

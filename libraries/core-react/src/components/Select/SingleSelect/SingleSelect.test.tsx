@@ -30,6 +30,12 @@ const ControlledSelect = ({ onChange }: ControlledProps) => {
 }
 
 describe('SingleSelect', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <SingleSelect label={labelText} items={items} />,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has provided label', () => {
     render(<SingleSelect label={labelText} items={items} />)
     // The same label is used for both the input field and the list of options

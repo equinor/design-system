@@ -72,6 +72,10 @@ const AccordionWithButtons = () => (
 )
 
 describe('Accordion', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<SimpleAccordion />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Expands items based on prop', () => {
     render(<SimpleAccordion />)
     const header1 = screen.queryByText('Summary 1').parentNode

@@ -12,6 +12,15 @@ const StyledList = styled(List)`
 `
 
 describe('Lists', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <List>
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
+      </List>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Renders an unordered list by default', () => {
     const { container } = render(
       <List>

@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio Matches snapshot 1`] = `
+<DocumentFragment>
+  .c2 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.c2:focus {
+  outline: none;
+}
+
+.c2[data-focus-visible-added]:focus + svg {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 4px;
+}
+
+.c2:not(:checked) ~ svg path[name='selected'] {
+  display: none;
+}
+
+.c2:not(:checked) ~ svg path[name='unselected'] {
+  display: inline;
+}
+
+.c2:checked ~ svg path[name='unselected'] {
+  display: none;
+}
+
+.c2:checked ~ svg path[name='selected'] {
+  display: inline;
+}
+
+.c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c3 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.000em;
+  -webkit-letter-spacing: 0.013em;
+  -moz-letter-spacing: 0.013em;
+  -ms-letter-spacing: 0.013em;
+  letter-spacing: 0.013em;
+  text-align: left;
+}
+
+.c1 {
+  padding-left: 12px;
+  padding-top: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: 50%;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c1:hover {
+    background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+  }
+}
+
+<label
+    class="c0"
+  >
+    <span
+      class="c1"
+    >
+      <input
+        class="c2"
+        type="radio"
+      />
+      <svg
+        aria-hidden="true"
+        class=""
+        fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          class=""
+          clip-rule="evenodd"
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-5-8a5 5 0 1110 0 5 5 0 01-10 0z"
+          fill-rule="evenodd"
+          name="selected"
+        />
+        <path
+          class=""
+          clip-rule="evenodd"
+          d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8-8 3.58-8 8z"
+          fill-rule="evenodd"
+          name="unselected"
+        />
+      </svg>
+    </span>
+    <span
+      class="c3"
+    >
+      label
+    </span>
+  </label>
+</DocumentFragment>
+`;

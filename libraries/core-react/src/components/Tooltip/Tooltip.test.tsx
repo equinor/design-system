@@ -21,6 +21,22 @@ const enterDelayDefault = 100
 afterEach(cleanup)
 
 describe('Tooltip', () => {
+  it('Matches snapshot', async () => {
+    render(
+      <Tooltip title="Tooltip">
+        <span>Test</span>
+      </Tooltip>,
+    )
+
+    const content = screen.getByText('Test')
+
+    fireEvent.mouseOver(content)
+
+    await waitFor(() => {
+      const tooltip = screen.getByRole('tooltip')
+      expect(tooltip).toMatchSnapshot()
+    })
+  })
   it('can extend the css for the component', async () => {
     render(
       <StyledTooltip title="Tooltip">

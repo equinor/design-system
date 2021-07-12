@@ -13,6 +13,10 @@ const StyledSidesheet = styled(SideSheet)`
 afterEach(cleanup)
 
 describe('SideSheet', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<SideSheet variant="large" title="Title" />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has correct width', () => {
     const { container } = render(<SideSheet variant="large" title="Title" />)
     const sidesheet = container.firstChild

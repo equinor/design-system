@@ -38,6 +38,12 @@ const DateSlider = ({
 }
 
 describe('Simple slider', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Slider value={0} ariaLabelledby="test-one" />,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Creates a simple slider when providing a number as value', () => {
     const { container } = render(<Slider value={0} ariaLabelledby="test-one" />)
     const input = container.querySelector('input')

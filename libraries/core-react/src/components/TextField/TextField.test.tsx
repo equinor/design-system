@@ -11,6 +11,13 @@ Icon.add({ save })
 afterEach(cleanup)
 
 describe('TextField', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <TextField id="textfield" label="textfield" />,
+    )
+
+    expect(asFragment).toMatchSnapshot()
+  })
   it('Has correct label text', () => {
     const labelText = 'Some label'
     const { queryByText } = render(

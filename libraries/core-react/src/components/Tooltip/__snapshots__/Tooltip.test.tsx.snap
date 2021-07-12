@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip Matches snapshot 1`] = `
+.c0 {
+  margin: 0;
+  color: var(--eds_text__static_icons__primary_white,rgba(255,255,255,1));
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  text-align: left;
+  padding-left: 8px;
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  border-radius: 4px;
+  background: var(--eds_ui_background__overlay,rgba(0,0,0,0.8));
+  z-index: 350;
+  white-space: nowrap;
+}
+
+.c0 .arrow {
+  z-index: -1;
+  width: 6px;
+  height: 8px;
+}
+
+.c0[data-popper-placement^='top'] > .arrow {
+  bottom: -6px;
+}
+
+.c0[data-popper-placement^='top'] > .arrow .arrowSvg {
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.c0[data-popper-placement^='bottom'] > .arrow {
+  top: -6px;
+}
+
+.c0[data-popper-placement^='bottom'] > .arrow .arrowSvg {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.c0[data-popper-placement^='left'] > .arrow {
+  right: -6px;
+}
+
+.c0[data-popper-placement^='left'] > .arrow .arrowSvg {
+  -webkit-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+.c0[data-popper-placement^='right'] > .arrow {
+  left: -6px;
+}
+
+.c2,
+.c2::before {
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  z-index: -1;
+}
+
+.c2::before {
+  content: '';
+}
+
+.c3 {
+  width: 6px;
+  height: 8px;
+  position: absolute;
+  fill: var(--eds_ui_background__overlay,rgba(0,0,0,0.8));
+}
+
+.c1 {
+  background: red;
+}
+
+<div
+  class="c0 c1"
+  id="eds-tooltip-92414"
+  open=""
+  role="tooltip"
+  style="position: absolute; left: 0px; top: 0px;"
+>
+  Tooltip
+  <div
+    class="c2 arrow"
+  >
+    <svg
+      class="c3 arrowSvg"
+    >
+      <path
+        d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z"
+      />
+    </svg>
+  </div>
+</div>
+`;

@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Simple slider Matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-eCssSg imFDhh"
+    max="100"
+    min="0"
+    value="0"
+  >
+    <input
+      aria-labelledby="test-one"
+      class="sc-dlfnbm clBnoA"
+      id="test-one-thumb"
+      max="100"
+      min="0"
+      step="1"
+      type="range"
+      value="0"
+    />
+    <output
+      class="sc-gsTCUz enCDSy"
+      for="test-one-thumb"
+      value="0"
+    >
+      0
+    </output>
+    <div
+      class="sc-jSgupP sc-gKsewC bxFDfR fzKbTb"
+    />
+    <span
+      class="sc-bdfBwQ hDUCP"
+    >
+      0
+    </span>
+    <span
+      class="sc-bdfBwQ hDUCP"
+    >
+      100
+    </span>
+  </div>
+</DocumentFragment>
+`;

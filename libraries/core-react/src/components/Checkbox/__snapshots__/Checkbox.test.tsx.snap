@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox Matches snapshot 1`] = `
+<DocumentFragment>
+  .c2 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.c2:focus {
+  outline: none;
+}
+
+.c2[data-focus-visible-added]:focus + svg {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 11px;
+}
+
+.c2:not(:checked) ~ svg path[name='checked'] {
+  display: none;
+}
+
+.c2:not(:checked) ~ svg path[name='not-checked'] {
+  display: inline;
+}
+
+.c2:checked ~ svg path[name='not-checked'] {
+  display: none;
+}
+
+.c2:checked ~ svg path[name='checked'] {
+  display: inline;
+}
+
+.c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: 50%;
+  padding-left: 12px;
+  padding-top: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+}
+
+.c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c3 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.000em;
+  -webkit-letter-spacing: 0.013em;
+  -moz-letter-spacing: 0.013em;
+  -ms-letter-spacing: 0.013em;
+  letter-spacing: 0.013em;
+  text-align: left;
+  padding-left: 12px;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c1:hover {
+    background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+  }
+}
+
+<label
+    class="c0"
+  >
+    <span
+      class="c1"
+    >
+      <input
+        class="c2"
+        type="checkbox"
+      />
+      <svg
+        aria-hidden="true"
+        class=""
+        fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          class=""
+          clip-rule="evenodd"
+          d="M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm4.3 13.29c.39.39 1.02.39 1.41 0l7.58-7.59a.996.996 0 10-1.41-1.41L10 14.17l-2.88-2.88a.996.996 0 10-1.41 1.41l3.59 3.59z"
+          fill-rule="evenodd"
+          name="checked"
+        />
+        <path
+          class=""
+          clip-rule="evenodd"
+          d="M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z"
+          fill-rule="evenodd"
+          name="not-checked"
+        />
+      </svg>
+    </span>
+    <span
+      class="c3"
+    >
+      checkbox
+    </span>
+  </label>
+</DocumentFragment>
+`;

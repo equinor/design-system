@@ -60,6 +60,19 @@ describe('Caption', () => {
 })
 
 describe('Table', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell></Cell>
+          </Row>
+        </Head>
+      </Table>,
+    )
+
+    expect(asFragment).toMatchSnapshot()
+  })
   it('Can render a cell as a header cell', () => {
     const text = 'Name'
     const { getByText, container } = render(

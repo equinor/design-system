@@ -12,6 +12,10 @@ const StyledProgress = styled(CircularProgress)`
 afterEach(cleanup)
 
 describe('CircularProgress', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<StyledProgress />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('has correct aria values when variant is "determinate"', () => {
     render(<CircularProgress variant="determinate" value={50} />)
     const progress = screen.getByRole('progressbar')

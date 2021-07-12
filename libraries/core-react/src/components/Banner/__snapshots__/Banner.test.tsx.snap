@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Banner Matches snapshot 1`] = `
+<DocumentFragment>
+  .c3 {
+  border: none;
+  background-color: var(--eds_ui_background__light,rgba(247,247,247,1));
+  margin-top: 16px;
+  margin-bottom: 15px;
+  height: 1px;
+}
+
+.c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background-color: var(--eds_infographic_primary__moss_green_13,rgba(222,237,238,1));
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+}
+
+.c0 {
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  display: grid;
+  grid-template-columns: min-content 1fr auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
+}
+
+.c4 {
+  margin: 0;
+  height: 2px;
+}
+
+.c2 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  text-align: left;
+}
+
+<div
+    class=""
+    role="alert"
+  >
+    <div
+      class="c0"
+    >
+      <span
+        class="c1"
+      >
+        <svg
+          aria-hidden="true"
+          class=""
+          fill="var(--eds_infographic_primary__moss_green_100, rgba(0, 112, 121, 1))"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class=""
+            clip-rule="evenodd"
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+            data-testid="eds-icon-path"
+            fill-rule="evenodd"
+            height="24"
+          />
+        </svg>
+      </span>
+      <p
+        class="c2 "
+      >
+        Banner message
+      </p>
+    </div>
+    <hr
+      class="c3 c4"
+    />
+  </div>
+</DocumentFragment>
+`;

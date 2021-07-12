@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect Matches snapshot 1`] = `
+.c0 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+  text-align: left;
+}
+
+.c1 {
+  background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
+  box-shadow: 0 7px 8px rgba(0,0,0,0.2),0 5px 22px rgba(0,0,0,0.12),0 12px 17px rgba(0,0,0,0.14);
+  overflow-y: scroll;
+  max-height: 300px;
+  padding: 0;
+  border-radius: 4px;
+  margin-top: 4px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 50;
+}
+
+<ul
+  aria-labelledby="downshift-1-label"
+  class="c0 c1"
+  id="downshift-1-menu"
+  role="listbox"
+/>
+`;
+
+exports[`MultiSelect Matches snapshot 2`] = `
+<svg
+  aria-labelledby="eds-arrow_drop_down-194"
+  class=""
+  fill="currentColor"
+  height="24px"
+  role="img"
+  title="open"
+  viewBox="0 0 24 24"
+  width="24px"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title
+    id="eds-arrow_drop_down-194"
+  >
+    open
+  </title>
+  <path
+    class=""
+    clip-rule="evenodd"
+    d="M7 9.5l5 5 5-5H7z"
+    data-testid="eds-icon-path"
+    fill-rule="evenodd"
+    height="24"
+  />
+</svg>
+`;

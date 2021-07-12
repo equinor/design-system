@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu Matches snapshot 1`] = `
+.c0 {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding-left: 0px;
+  padding-top: 8px;
+  padding-right: 0px;
+  padding-bottom: 8px;
+}
+
+.c0 li:first-child {
+  z-index: 3;
+}
+
+.c1 {
+  background: red;
+}
+
+<ul
+  class="c0 c1"
+  role="menu"
+>
+  <div
+    index="0"
+  >
+    some random content
+  </div>
+</ul>
+`;
