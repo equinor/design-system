@@ -12,12 +12,15 @@ import {
   Tooltip,
   Popover,
 } from '../../src'
-import * as TableExamples from './DataTable.stories'
+import { DataTable } from './DataTable'
 
 import { accessible } from '@equinor/eds-icons'
 
 export default {
   title: 'Playground/Examples',
+  parameters: {
+    viewMode: 'canvas',
+  },
 } as Meta
 
 const Container = styled.div`
@@ -42,7 +45,7 @@ const Toolbar = styled.div`
   grid-auto-flow: column;
 `
 
-export const DefaultPage: Story = (args) => {
+export const TestPage: Story = (args) => {
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
   const [isOpenSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setPopoverOpen] = useState<boolean>(false)
@@ -162,7 +165,7 @@ export const DefaultPage: Story = (args) => {
             <Button onClick={() => setPopoverOpen(false)}>OK</Button>
           </Popover>
         </Toolbar>
-        <TableExamples.CompactDataGrid density={density} />
+        <DataTable density={density} />
       </Content>
     </Container>
   )

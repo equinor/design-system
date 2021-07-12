@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import { useState } from 'react'
-import { Story, Meta } from '@storybook/react'
+import { Story } from '@storybook/react'
 import {
   Table,
   TableProps,
@@ -110,18 +110,6 @@ const toCellValues = (data: Data[], columns: Column[]) =>
     ),
   )
 
-export default {
-  title: 'Playground/Examples',
-  parameters: {
-    viewMode: 'story',
-    docs: {
-      description: {
-        component: `A playground for testing input fields in tables.`,
-      },
-    },
-  },
-} as Meta
-
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
   const isOpen = Boolean(anchorEl)
@@ -180,7 +168,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
   )
 }
 
-export const CompactDataGrid: Story<TableProps> = (args) => {
+export const DataTable: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
   const onChange = (event: React.InputHTMLAttributes<HTMLInputElement>) => {
     // const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -261,4 +249,9 @@ export const CompactDataGrid: Story<TableProps> = (args) => {
       </Body>
     </Table>
   )
+}
+
+DataTable.bind({})
+DataTable.args = {
+  density: 'compact',
 }
