@@ -168,8 +168,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           onClick={onClose}
           variant="ghost_icon"
           data-testid="popover-close"
+          aria-label="Close popover"
         >
-          <Icon name="close" data={close} title="close" size={24} />
+          <Icon name="close" data={close} size={24} />
         </StyledCloseButton>
       </PopoverPaper>
     )

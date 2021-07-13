@@ -73,8 +73,13 @@ export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
         <StyledSideSheet {...props} id="side-sheet">
           <Header>
             <Typography variant="h2">{title}</Typography>
-            <Button variant="ghost_icon" onClick={onClose} title="Close">
-              <Icon name="clear" title="Close" data={clear} />
+            <Button
+              variant="ghost_icon"
+              onClick={onClose}
+              title="Close"
+              aria-label="Close sidesheet"
+            >
+              <Icon name="clear" data={clear} />
             </Button>
           </Header>
           {children}

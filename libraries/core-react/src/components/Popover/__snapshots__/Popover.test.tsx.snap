@@ -237,6 +237,7 @@ exports[`Popover Matches snapshot 1`] = `
     some random content
   </div>
   <button
+    aria-label="Close popover"
     class="c5 c6"
     data-testid="popover-close"
     tabindex="0"
@@ -246,21 +247,14 @@ exports[`Popover Matches snapshot 1`] = `
       class="c7"
     >
       <svg
-        aria-labelledby="eds-close-898"
+        aria-hidden="true"
         class=""
         fill="currentColor"
         height="24px"
-        role="img"
-        title="close"
         viewBox="0 0 24 24"
         width="24px"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <title
-          id="eds-close-898"
-        >
-          close
-        </title>
         <path
           class=""
           clip-rule="evenodd"

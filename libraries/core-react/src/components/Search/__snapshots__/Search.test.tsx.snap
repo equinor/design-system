@@ -147,21 +147,14 @@ exports[`Search Matches snapshot 1`] = `
     role="search"
   >
     <svg
-      aria-labelledby="eds-search-3"
+      aria-hidden="true"
       class=""
       fill="currentColor"
       height="16px"
-      role="img"
-      title="search icon"
       viewBox="0 0 16 16"
       width="16px"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <title
-        id="eds-search-3"
-      >
-        search icon
-      </title>
       <path
         class=""
         clip-rule="evenodd"
@@ -180,26 +173,20 @@ exports[`Search Matches snapshot 1`] = `
       value=""
     />
     <div
+      aria-label="Clear search"
       class="c2"
       role="button"
       size="16"
     >
       <svg
-        aria-labelledby="eds-close-4"
+        aria-hidden="true"
         class=""
         fill="currentColor"
         height="16px"
-        role="img"
-        title="clear"
         viewBox="0 0 16 16"
         width="16px"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <title
-          id="eds-close-4"
-        >
-          clear
-        </title>
         <path
           class=""
           clip-rule="evenodd"

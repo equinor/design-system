@@ -153,21 +153,14 @@ exports[`Pagination Matches snapshot 1`] = `
             class="c4"
           >
             <svg
-              aria-labelledby="eds-chevron_left-1"
+              aria-hidden="true"
               class=""
               fill="currentColor"
               height="24px"
-              role="img"
-              title="previous"
               viewBox="0 0 24 24"
               width="24px"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title
-                id="eds-chevron_left-1"
-              >
-                previous
-              </title>
               <path
                 class=""
                 clip-rule="evenodd"
@@ -211,21 +204,14 @@ exports[`Pagination Matches snapshot 1`] = `
             class="c4"
           >
             <svg
-              aria-labelledby="eds-chevron_right-2"
+              aria-hidden="true"
               class=""
               fill="currentColor"
               height="24px"
-              role="img"
-              title="next"
               viewBox="0 0 24 24"
               width="24px"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title
-                id="eds-chevron_right-2"
-              >
-                next
-              </title>
               <path
                 class=""
                 clip-rule="evenodd"

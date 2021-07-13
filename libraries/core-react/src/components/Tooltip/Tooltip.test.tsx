@@ -23,7 +23,7 @@ afterEach(cleanup)
 describe('Tooltip', () => {
   it('Matches snapshot', async () => {
     render(
-      <Tooltip title="Tooltip">
+      <Tooltip title="Tooltip" id="snapshot-tooltip">
         <span>Test</span>
       </Tooltip>,
     )

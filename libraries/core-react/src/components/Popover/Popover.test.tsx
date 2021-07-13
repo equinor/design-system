@@ -80,7 +80,7 @@ describe('Popover', () => {
         <div>some random content</div>
       </TestPopover>,
     )
-    const closeButton = screen.getByTestId('popover-close')
+    const closeButton = screen.getByLabelText('Close popover')
 
     fireEvent.click(closeButton)
 

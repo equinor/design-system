@@ -267,6 +267,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
         value=""
       />
       <button
+        aria-label="toggle options"
         class="c6 c7"
         id="downshift-1-toggle-button"
         tabindex="-1"
@@ -276,21 +277,14 @@ exports[`SingleSelect Matches snapshot 1`] = `
           class="c8"
         >
           <svg
-            aria-labelledby="eds-arrow_drop_down-869"
+            aria-hidden="true"
             class=""
             fill="currentColor"
             height="24px"
-            role="img"
-            title="open"
             viewBox="0 0 24 24"
             width="24px"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <title
-              id="eds-arrow_drop_down-869"
-            >
-              open
-            </title>
             <path
               class=""
               clip-rule="evenodd"

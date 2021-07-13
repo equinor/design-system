@@ -158,6 +158,7 @@ exports[`SideSheet Matches snapshot 1`] = `
         Title
       </h2>
       <button
+        aria-label="Close sidesheet"
         class="c3"
         tabindex="0"
         title="Close"
@@ -167,21 +168,14 @@ exports[`SideSheet Matches snapshot 1`] = `
           class="c4"
         >
           <svg
-            aria-labelledby="eds-clear-515"
+            aria-hidden="true"
             class=""
             fill="currentColor"
             height="24px"
-            role="img"
-            title="Close"
             viewBox="0 0 24 24"
             width="24px"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <title
-              id="eds-clear-515"
-            >
-              Close
-            </title>
             <path
               class=""
               clip-rule="evenodd"
