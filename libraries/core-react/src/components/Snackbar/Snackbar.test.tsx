@@ -8,21 +8,14 @@ import {
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { Snackbar, SnackbarProps } from '.'
+import { Snackbar } from '.'
 
 afterEach(cleanup)
 
-const StyledSnackbar = styled(Snackbar)<SnackbarProps>`
+const StyledSnackbar = styled(Snackbar)`
   clip-path: unset;
 `
 const message = "Hi, I'm the snackbar"
-const TestSnackbar = (open: boolean) => {
-  return (
-    <StyledSnackbar open={open} data-testid="test-snackbar">
-      {message}
-    </StyledSnackbar>
-  )
-}
 
 describe('Snackbar', () => {
   it('Can extend the css for the component', () => {
@@ -56,17 +49,17 @@ describe('Snackbar', () => {
     expect(screen.getByTestId('test-snackbar-2')).toBeDefined()
   })
   it('Disappears automatically after a provided timeout', async () => {
-    const { queryByText } = render(
+    render(
       <Snackbar open autoHideDuration={1000}>
         {message}
       </Snackbar>,
     )
-    expect(queryByText(message)).toBeDefined()
-    await waitForElementToBeRemoved(() => queryByText(message))
+    expect(screen.queryByText(message)).toBeDefined()
+    await waitForElementToBeRemoved(() => screen.queryByText(message))
   })
   it('Can have one button attached', () => {
     const buttonText = "I'm the button"
-    const { queryByText } = render(
+    render(
       <Snackbar open>
         {message}
         <Snackbar.Action>
@@ -74,6 +67,6 @@ describe('Snackbar', () => {
         </Snackbar.Action>
       </Snackbar>,
     )
-    expect(queryByText(buttonText)).toBeDefined()
+    expect(screen.queryByText(buttonText)).toBeDefined()
   })
 })
