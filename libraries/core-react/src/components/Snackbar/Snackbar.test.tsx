@@ -2,39 +2,58 @@
 import {
   render,
   cleanup,
+  screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { Snackbar } from './index'
+import { Snackbar, SnackbarProps } from '.'
 
 afterEach(cleanup)
 
-const StyledSnackbar = styled(Snackbar)`
+const StyledSnackbar = styled(Snackbar)<SnackbarProps>`
   clip-path: unset;
 `
 const message = "Hi, I'm the snackbar"
+const TestSnackbar = (open: boolean) => {
+  return (
+    <StyledSnackbar open={open} data-testid="test-snackbar">
+      {message}
+    </StyledSnackbar>
+  )
+}
 
 describe('Snackbar', () => {
   it('Can extend the css for the component', () => {
-    const { container } = render(
-      <StyledSnackbar open>{message}</StyledSnackbar>,
+    render(
+      <StyledSnackbar open data-testid="test-snackbar">
+        {message}
+      </StyledSnackbar>,
     )
-    expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+    expect(screen.getByTestId('test-snackbar')).toHaveStyleRule(
+      'clip-path',
+      'unset',
+    )
   })
   it('Sets the message', () => {
-    const { getByText } = render(<Snackbar open>{message}</Snackbar>)
-    const snackbar = getByText(message)
+    render(<Snackbar open>{message}</Snackbar>)
+    const snackbar = screen.getByText(message)
     expect(snackbar).toBeDefined()
   })
   it('Is only visible when the open prop is true', () => {
-    const { rerender, container } = render(
-      <StyledSnackbar open={false}>{message}</StyledSnackbar>,
+    const { rerender } = render(
+      <StyledSnackbar open={false} data-testid="test-snackbar-1">
+        {message}
+      </StyledSnackbar>,
     )
-    expect(container.firstChild).toBe(null)
-    rerender(<StyledSnackbar open>{message}</StyledSnackbar>)
-    expect(container.firstChild).not.toBe(null)
+    expect(screen.queryAllByTestId('test-snackbar-1')).toHaveLength(0)
+    rerender(
+      <StyledSnackbar open data-testid="test-snackbar-2">
+        {message}
+      </StyledSnackbar>,
+    )
+    expect(screen.getByTestId('test-snackbar-2')).toBeDefined()
   })
   it('Disappears automatically after a provided timeout', async () => {
     const { queryByText } = render(
