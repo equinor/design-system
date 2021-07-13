@@ -1,4 +1,5 @@
 import { useState, useEffect, HTMLAttributes, FC } from 'react'
+import * as ReactDom from 'react-dom'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 import {
@@ -70,17 +71,17 @@ export const Snackbar: FC<SnackbarProps> = ({
   }, [open])
   return (
     <>
-      {visible && (
-        <StyledSnackbar
-          elevation="overlay"
-          leftAlignFrom={leftAlignFrom}
-          className={className}
-        >
-          {children}
-        </StyledSnackbar>
-      )}
+      {visible &&
+        ReactDom.createPortal(
+          <StyledSnackbar
+            elevation="overlay"
+            leftAlignFrom={leftAlignFrom}
+            className={className}
+          >
+            {children}
+          </StyledSnackbar>,
+          document.body,
+        )}
     </>
   )
 }
-
-// Snackbar.displayName = 'Snackbar'
