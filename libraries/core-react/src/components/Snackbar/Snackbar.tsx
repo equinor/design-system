@@ -1,4 +1,4 @@
-import { useState, useEffect, HTMLAttributes, forwardRef } from 'react'
+import { useState, useEffect, HTMLAttributes, forwardRef, useRef } from 'react'
 import * as ReactDom from 'react-dom'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
@@ -64,16 +64,22 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
     ref,
   ) {
     const [visible, setVisible] = useState(open)
+    const timer = useRef<number>()
+
     useEffect(() => {
       setVisible(open)
-      const timer = setTimeout(() => {
+
+      timer.current = setTimeout(() => {
         setVisible(false)
+
         if (onClose) {
           onClose()
         }
       }, autoHideDuration)
-      return () => clearTimeout(timer)
+
+      return () => clearTimeout(timer.current)
     }, [open])
+
     return (
       <>
         {visible &&
