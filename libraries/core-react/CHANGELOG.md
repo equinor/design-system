@@ -5,12 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.13.0] - 2021-07-XX
+## [0.13.0] - 2021-07-15
 
 ### Added
 
-- Compact components part 1 ([#1249](https://github.com/equinor/design-system/issues/1249)):
-  - `TextField`, `Input`, `Checkbox`, `Menu`, `NativeSelect`, `SingleSelect`, `MultiSelect`, `Button`, `Switch` & `Table`
+#### Compact components part 1 ([#1249](https://github.com/equinor/design-system/issues/1249))
+
+- Compact mode can be activated by using the `EdsProvider` as a parent component and setting the `density` property to `"compact"`. This will toggle compact mode on all nested components.
+- Components with compact support:
+  - `TextField`
+  - `Input`
+  - `Checkbox`
+  - `Menu`
+  - `NativeSelect`
+  - `SingleSelect`
+  - `MultiSelect`
+  - `Button`
+  - `Switch`
+  - `Table`
+- Example:
+
+```typescript
+// This renders a compact Table with compact Button & Checkbox inside
+<EdsProvider density="compact">
+  <Table>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>
+          <Button>Compact</Button>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>
+          <Checkbox />
+        </Table.Cell>
+      </Table.Row>
+      ...
+    </Table.Body>
+  </Table>
+</EdsProvider>
+```
 
 ### Fixed
 
