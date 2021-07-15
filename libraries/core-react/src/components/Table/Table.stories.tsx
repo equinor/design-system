@@ -10,6 +10,8 @@ import {
   TopBar,
   Menu,
   Button,
+  EdsProvider,
+  EdsProviderProps,
 } from '../..'
 import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
 import { data, columns, Column, Data, SortDirection } from '../../stories/data'
@@ -110,7 +112,7 @@ export const CompactTable: Story<TableProps> = () => {
 
   const [state, setState] = useState<{
     isOpen: boolean
-    density: 'comfortable' | 'compact'
+    density: EdsProviderProps['density']
   }>({
     isOpen: false,
     density: 'comfortable',
@@ -182,29 +184,40 @@ export const CompactTable: Story<TableProps> = () => {
           </Menu>
         </TopBar.Actions>
       </TopBar>
-      <Table density={density}>
-        <Table.Caption>
-          <Typography variant="h2">Fruits cost price</Typography>
-        </Table.Caption>
-        <Table.Head>
-          <Table.Row>
-            {columns.map((col) => (
-              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
-            ))}
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {cellValues?.map((row) => (
-            <Table.Row key={row.toString()}>
-              {row.map((cellValue) => (
-                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+      <EdsProvider density={density}>
+        <Table>
+          <Table.Caption>
+            <Typography variant="h2">Fruits cost price</Typography>
+          </Table.Caption>
+          <Table.Head>
+            <Table.Row>
+              {columns.map((col) => (
+                <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
               ))}
             </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
+          </Table.Head>
+          <Table.Body>
+            {cellValues?.map((row) => (
+              <Table.Row key={row.toString()}>
+                {row.map((cellValue) => (
+                  <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+                ))}
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </EdsProvider>
     </div>
   )
+}
+
+CompactTable.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact `Table` using `EdsProvider` (this will also apply compact on all nested components)',
+    },
+  },
 }
 
 const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
