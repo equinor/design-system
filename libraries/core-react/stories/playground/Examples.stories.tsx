@@ -12,6 +12,8 @@ import {
   Tooltip,
   Popover,
   Checkbox,
+  EdsProvider,
+  EdsProviderProps,
 } from '../../src'
 import { DataTable } from './DataTable'
 
@@ -64,7 +66,9 @@ export const TestPage: Story = (args) => {
   const [isOpenSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setPopoverOpen] = useState<boolean>(false)
   const [focus, setFocus] = useState<MenuProps['focus']>(null)
-  const [density, setDensity] = useState<'comfortable' | 'compact'>('compact')
+  const [density, setDensity] = useState<EdsProviderProps['density']>(
+    'comfortable',
+  )
   const menuAnchorRef = useRef<HTMLButtonElement>(null)
   const popverAnchorRef = useRef<HTMLButtonElement>(null)
 
@@ -197,7 +201,9 @@ export const TestPage: Story = (args) => {
               <Button onClick={() => setPopoverOpen(false)}>OK</Button>
             </Popover>
           </Toolbar>
-          <DataTable density={density} />
+          <EdsProvider density={density}>
+            <DataTable />
+          </EdsProvider>
         </Middle>
       </Content>
     </Container>

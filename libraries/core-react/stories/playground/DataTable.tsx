@@ -179,7 +179,7 @@ export const DataTable: Story<TableProps> = (args) => {
   return (
     <Table {...args}>
       <Caption>
-        <Typography variant="h2">Fruits cost price - {args.density}</Typography>
+        <Typography variant="h2">Fruits cost price</Typography>
       </Caption>
       <Head>
         <Row>
@@ -249,9 +249,4 @@ export const DataTable: Story<TableProps> = (args) => {
       </Body>
     </Table>
   )
-}
-
-DataTable.bind({})
-DataTable.args = {
-  density: 'compact',
 }
