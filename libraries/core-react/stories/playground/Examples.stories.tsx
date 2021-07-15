@@ -11,6 +11,7 @@ import {
   Snackbar,
   Tooltip,
   Popover,
+  Checkbox,
 } from '../../src'
 import { DataTable } from './DataTable'
 
@@ -30,11 +31,11 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-  margin: 0 16px;
   height: 100%;
   display: grid;
-  grid-auto-rows: max-content max-content;
+  grid-auto-columns: 200px max-content;
   grid-gap: 16px;
+  grid-auto-flow: column;
 `
 
 const Toolbar = styled.div`
@@ -43,6 +44,19 @@ const Toolbar = styled.div`
   grid-gap: 8px;
   grid-auto-columns: max-content;
   grid-auto-flow: column;
+`
+
+const Sidebar = styled.div`
+  display: grid;
+  height: 100%;
+  padding-top: 16px;
+  border-right: 1px solid
+    var(--eds_ui_background__light, rgba(247, 247, 247, 1));
+`
+const Middle = styled.div`
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-rows: max-content max-content;
 `
 
 export const TestPage: Story = (args) => {
@@ -127,45 +141,64 @@ export const TestPage: Story = (args) => {
         </TopBar.Actions>
       </TopBar>
       <Content>
-        <Toolbar>
-          <Button type="button" onClick={() => setOpenSnackbar(true)}>
-            Show Snackbar
-          </Button>
-          <Snackbar
-            open={isOpenSnackbar}
-            onClose={() => setOpenSnackbar(false)}
-            autoHideDuration={5000}
-          >
-            Message goes here
-          </Snackbar>
-          <Tooltip title="Tooltip!" placement="top">
-            <Button>Show Tooltip</Button>
-          </Tooltip>
+        <Sidebar>
+          <Typography variant="h3">Sidebar</Typography>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <li>
+              <Checkbox label="Check me first" name="multiple" value="first" />
+            </li>
+            <li>
+              <Checkbox
+                label="Check me second"
+                name="multiple"
+                value="second"
+              />
+            </li>
+            <li>
+              <Checkbox label="Check me third" name="multiple" value="third" />
+            </li>
+          </ul>
+        </Sidebar>
+        <Middle>
+          <Toolbar>
+            <Button type="button" onClick={() => setOpenSnackbar(true)}>
+              Show Snackbar
+            </Button>
+            <Snackbar
+              open={isOpenSnackbar}
+              onClose={() => setOpenSnackbar(false)}
+              autoHideDuration={5000}
+            >
+              Message goes here
+            </Snackbar>
+            <Tooltip title="Tooltip!">
+              <Button>Show Tooltip</Button>
+            </Tooltip>
+            <Button
+              aria-haspopup
+              aria-controls="popover"
+              aria-expanded={isPopoverOpen}
+              ref={popverAnchorRef}
+              onClick={() => setPopoverOpen(true)}
+            >
+              Show Popover
+            </Button>
 
-          <Button
-            aria-haspopup
-            aria-controls="popover"
-            aria-expanded={isPopoverOpen}
-            ref={popverAnchorRef}
-            onClick={() => setPopoverOpen(true)}
-          >
-            Show Popover
-          </Button>
-
-          <Popover
-            open={isPopoverOpen}
-            id="popover"
-            anchorEl={popverAnchorRef.current}
-            onClose={() => setPopoverOpen(false)}
-          >
-            <Popover.Title>Title</Popover.Title>
-            <Popover.Content>
-              <Typography variant="body_short">Content</Typography>
-            </Popover.Content>
-            <Button onClick={() => setPopoverOpen(false)}>OK</Button>
-          </Popover>
-        </Toolbar>
-        <DataTable density={density} />
+            <Popover
+              open={isPopoverOpen}
+              id="popover"
+              anchorEl={popverAnchorRef.current}
+              onClose={() => setPopoverOpen(false)}
+            >
+              <Popover.Title>Title</Popover.Title>
+              <Popover.Content>
+                <Typography variant="body_short">Content</Typography>
+              </Popover.Content>
+              <Button onClick={() => setPopoverOpen(false)}>OK</Button>
+            </Popover>
+          </Toolbar>
+          <DataTable density={density} />
+        </Middle>
       </Content>
     </Container>
   )
