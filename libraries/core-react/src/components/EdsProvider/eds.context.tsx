@@ -22,12 +22,12 @@ type UseEdsProps<T> = {
 
 const EdsContext = createContext<State>(initalState)
 
-type ProviderProps = {
+export type EdsProviderProps = {
   density?: Density
   children: ReactNode
 }
 
-export const EdsProvider: React.FC<ProviderProps> = ({
+export const EdsProvider: React.FC<EdsProviderProps> = ({
   children,
   density = 'comfortable',
 }) => {
@@ -40,7 +40,7 @@ export const EdsProvider: React.FC<ProviderProps> = ({
     if (typeof density !== 'undefined' && density !== state.density) {
       setDensity(density)
     }
-  }, [density])
+  }, [density, state.density])
 
   const value = {
     density: state.density,
