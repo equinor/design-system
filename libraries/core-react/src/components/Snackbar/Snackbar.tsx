@@ -1,4 +1,5 @@
-import { useState, useEffect, HTMLAttributes, FC } from 'react'
+import { useState, useEffect, HTMLAttributes, forwardRef } from 'react'
+import * as ReactDom from 'react-dom'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 import {
@@ -10,9 +11,9 @@ import { Paper } from '../Paper'
 
 type StyledProps = {
   leftAlignFrom: string
-} & HTMLAttributes<HTMLDivElement>
+}
 
-const StyledSnackbar = styled(Paper).attrs(() => ({
+const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
   role: 'alert',
 }))<StyledProps>`
   position: fixed;
@@ -49,38 +50,46 @@ export type SnackbarProps = {
   leftAlignFrom?: string
 } & HTMLAttributes<HTMLDivElement>
 
-export const Snackbar: FC<SnackbarProps> = ({
-  open = false,
-  autoHideDuration = 7000,
-  onClose,
-  leftAlignFrom = '1200px',
-  children,
-  className,
-}) => {
-  const [visible, setVisible] = useState(open)
-  useEffect(() => {
-    setVisible(open)
-    const timer = setTimeout(() => {
-      setVisible(false)
-      if (onClose) {
-        onClose()
-      }
-    }, autoHideDuration)
-    return () => clearTimeout(timer)
-  }, [open])
-  return (
-    <>
-      {visible && (
-        <StyledSnackbar
-          elevation="overlay"
-          leftAlignFrom={leftAlignFrom}
-          className={className}
-        >
-          {children}
-        </StyledSnackbar>
-      )}
-    </>
-  )
-}
-
-// Snackbar.displayName = 'Snackbar'
+export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
+  function Snackbar(
+    {
+      open = false,
+      autoHideDuration = 7000,
+      onClose,
+      leftAlignFrom = '1200px',
+      children,
+      className,
+      ...rest
+    },
+    ref,
+  ) {
+    const [visible, setVisible] = useState(open)
+    useEffect(() => {
+      setVisible(open)
+      const timer = setTimeout(() => {
+        setVisible(false)
+        if (onClose) {
+          onClose()
+        }
+      }, autoHideDuration)
+      return () => clearTimeout(timer)
+    }, [open])
+    return (
+      <>
+        {visible &&
+          ReactDom.createPortal(
+            <StyledSnackbar
+              elevation="overlay"
+              leftAlignFrom={leftAlignFrom}
+              className={className}
+              ref={ref}
+              {...rest}
+            >
+              {children}
+            </StyledSnackbar>,
+            document.body,
+          )}
+      </>
+    )
+  },
+)
