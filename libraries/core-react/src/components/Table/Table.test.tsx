@@ -6,6 +6,7 @@ import { Table } from '.'
 import styled from 'styled-components'
 import { token as dataCellToken } from './DataCell/DataCell.tokens'
 import { token as headerCellToken } from './HeaderCell/HeaderCell.tokens'
+import { EdsProvider } from '../EdsProvider'
 
 const { Caption, Cell, Head, Row, Body } = Table
 
@@ -202,18 +203,20 @@ describe('Table', () => {
     const cellText = 'Header content'
     const headerText = 'Cell content'
     const { getByText } = render(
-      <Table density="compact">
-        <Head>
-          <Row>
-            <Cell>{headerText}</Cell>
-          </Row>
-        </Head>
-        <Body>
-          <Row>
-            <Cell>{cellText}</Cell>
-          </Row>
-        </Body>
-      </Table>,
+      <EdsProvider density="compact">
+        <Table>
+          <Head>
+            <Row>
+              <Cell>{headerText}</Cell>
+            </Row>
+          </Head>
+          <Body>
+            <Row>
+              <Cell>{cellText}</Cell>
+            </Row>
+          </Body>
+        </Table>
+      </EdsProvider>,
     )
 
     expect(getByText(headerText).parentElement).toHaveStyleRule(
