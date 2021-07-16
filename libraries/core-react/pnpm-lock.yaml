@@ -8,7 +8,7 @@ specifiers:
   '@babel/preset-typescript': ^7.14.5
   '@equinor/eds-icons': workspace:*
   '@equinor/eds-tokens': workspace:*
-  '@popperjs/core': 2.9.0
+  '@popperjs/core': 2.9.2
   '@rollup/plugin-babel': ^5.3.0
   '@rollup/plugin-commonjs': ^16.0.0
   '@rollup/plugin-node-resolve': ^10.0.0
@@ -42,7 +42,7 @@ specifiers:
   react-dom: ^17.0.2
   react-fast-compare: 3.2.0
   react-hook-form: ^7.11.0
-  react-popper: 2.2.4
+  react-popper: 2.2.5
   rollup: ^2.53.2
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-size-snapshot: ^0.12.0
@@ -56,10 +56,10 @@ specifiers:
 dependencies:
   '@equinor/eds-icons': link:../icons
   '@equinor/eds-tokens': link:../tokens
-  '@popperjs/core': 2.9.0
+  '@popperjs/core': 2.9.2
   downshift: 6.1.3_react@17.0.2
   react-fast-compare: 3.2.0
-  react-popper: 2.2.4_69426ddbd994faff2e3b3da5e39313c8
+  react-popper: 2.2.5_a16f30364266ce234ee1188a6d27cb60
 
 devDependencies:
   '@babel/cli': 7.14.5_@babel+core@7.14.6
@@ -2089,6 +2089,11 @@ packages:
 
   /@popperjs/core/2.9.0:
     resolution: {integrity: sha512-wjtKehFAIARq2OxK8j3JrggNlEslJfNuSm2ArteIbKyRMts2g0a7KzTxfRVNUM+O0gnBJ2hNV8nWPOYBgI1sew==}
+    dev: true
+
+  /@popperjs/core/2.9.2:
+    resolution: {integrity: sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==}
+    dev: false
 
   /@reach/router/1.3.4_react-dom@17.0.2+react@16.14.0:
     resolution: {integrity: sha512-+mtn9wjlB9NN2CNnnC/BRYtwdKBfSyyasPYraNAyvaV1occr/5NnB4CVzjEZipNHwYebQwcndGUmpFzxAUoqSA==}
@@ -10413,6 +10418,19 @@ packages:
       react: 17.0.2
       react-fast-compare: 3.2.0
       warning: 4.0.3
+    dev: true
+
+  /react-popper/2.2.5_a16f30364266ce234ee1188a6d27cb60:
+    resolution: {integrity: sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==}
+    peerDependencies:
+      '@popperjs/core': ^2.0.0
+      react: ^16.8.0 || ^17
+    dependencies:
+      '@popperjs/core': 2.9.2
+      react: 17.0.2
+      react-fast-compare: 3.2.0
+      warning: 4.0.3
+    dev: false
 
   /react-refresh/0.8.3:
     resolution: {integrity: sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==}
