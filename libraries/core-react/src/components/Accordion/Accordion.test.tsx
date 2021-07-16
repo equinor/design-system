@@ -100,11 +100,6 @@ describe('Accordion', () => {
     fireEvent.click(header)
     expect(mockOnToggle).toHaveBeenCalled()
   })
-  it('Set header level', () => {
-    render(<SimpleAccordion headerLevel="h3" />)
-    const header = screen.getByTestId('header1')
-    expect(header).toBeDefined()
-  })
   it('Add custom icons', () => {
     render(<AccordionWithIcons />)
     const header = screen.getByTestId('header1')
