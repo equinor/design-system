@@ -80,7 +80,6 @@ exports[`Accordion Matches snapshot 1`] = `
           class="c1"
           fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
           height="16px"
-          role="img"
           viewBox="0 0 16 16"
           width="16px"
           xmlns="http://www.w3.org/2000/svg"
