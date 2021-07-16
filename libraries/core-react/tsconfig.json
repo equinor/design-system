@@ -11,6 +11,7 @@
     "node_modules",
     "src/**/*.stories.ts*",
     "src/**/*.test.ts*",
-    "src/stories"
+    "src/stories",
+    "src/test"
   ]
 }
