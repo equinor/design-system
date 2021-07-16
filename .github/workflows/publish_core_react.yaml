@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       storybook-slot:
-        description: 'Azure webapp slot for Storybook (no value deploys to production)'
+        description: 'Azure webapp slot for Storybook (development | production)'
         required: false
         default: 'development'
       npm-tag:
-        description: 'Tag for npm package'
+        description: 'Tag for npm package (next | latest)'
         required: true
         default: 'next'
 jobs:

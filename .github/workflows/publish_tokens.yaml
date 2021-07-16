@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       npm-tag:
-        description: 'Tag for npm package'
+        description: 'Tag for npm package (next | latest)'
         required: true
         default: 'next'
 jobs:

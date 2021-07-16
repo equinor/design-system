@@ -5,7 +5,7 @@ on:
       npm-package:
         description: 'Npm package'
         required: false
-        default: '@equinor/eds-core-react@0.10.1'
+        default: '@equinor/eds-core-react@0.13.1'
       npm-tag:
         description: 'Tag for npm package'
         required: true
