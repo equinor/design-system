@@ -73,7 +73,7 @@ const AccordionWithButtons = () => (
 
 describe('Accordion', () => {
   it('Matches snapshot', () => {
-    const { asFragment } = render(<Accordion />)
+    const { asFragment } = render(<SimpleAccordion />)
     expect(asFragment()).toMatchSnapshot()
   })
   it('Expands items based on prop', () => {
