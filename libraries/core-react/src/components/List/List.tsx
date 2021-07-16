@@ -8,7 +8,7 @@ const { typography } = tokens
 type StyledListProps = {
   as: ElementType
 }
-const StyledList = styled.div<StyledListProps>`
+const StyledList = styled.ul<StyledListProps>`
   ${({ as }) =>
     as === 'ol'
       ? css`
