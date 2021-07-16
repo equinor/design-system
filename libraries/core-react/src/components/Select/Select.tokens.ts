@@ -1,12 +1,12 @@
 import { tokens } from '@equinor/eds-tokens'
 import * as R from 'ramda'
 import type { ComponentToken } from '@equinor/eds-tokens'
-import { shape } from '@equinor/eds-tokens/base/shape'
 
 const {
   typography,
   colors,
   shape: {
+    straight,
     corners: { borderRadius },
   },
   spacings: {
@@ -24,7 +24,7 @@ const {
 export const select: ComponentToken = {
   background: colors.ui.background__default.rgba,
   boxShadow,
-  minHeight: shape.straight.minHeight,
+  minHeight: straight.minHeight,
   spacings: {
     top: spacingMedium,
     right: spacingLarge,
