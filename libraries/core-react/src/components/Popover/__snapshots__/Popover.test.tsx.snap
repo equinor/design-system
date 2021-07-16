@@ -224,6 +224,7 @@ exports[`Popover Matches snapshot 1`] = `
 >
   <div
     class="c3 arrow"
+    style="position: absolute;"
   >
     <svg
       class="c4 arrowSvg"
