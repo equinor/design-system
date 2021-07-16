@@ -96,7 +96,6 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     name,
     'aria-hidden': true,
     title: null,
-    role: 'img',
   }
 
   const pathProps = {
@@ -113,6 +112,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     svgProps = {
       ...svgProps,
       title,
+      role: 'img',
       'aria-hidden': undefined,
       'aria-labelledby': titleId,
     }
