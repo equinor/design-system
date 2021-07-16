@@ -21,6 +21,10 @@ const {
 afterEach(cleanup)
 
 describe('Input', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Input value="input value" readOnly />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has correct default value', () => {
     const value = 'Some value'
     const { queryByDisplayValue } = render(

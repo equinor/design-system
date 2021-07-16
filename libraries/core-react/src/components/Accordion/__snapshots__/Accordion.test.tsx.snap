@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion Matches snapshot 1`] = `
+<DocumentFragment>
+  .c2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  font-family: Equinor;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+}
+
+.c5 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  font-family: Equinor;
+  color: inherit;
+}
+
+.c0 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.500em;
+  text-align: left;
+  border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+  padding-left: 16px;
+  padding-right: 16px;
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  height: 48px;
+  margin: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  color: rgba(61,61,61,1);
+  cursor: pointer;
+}
+
+.c0[data-focus-visible-added]:focus {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 2px;
+}
+
+.c0:hover {
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+}
+
+.c4 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.500em;
+  text-align: left;
+  border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+  padding-left: 16px;
+  padding-right: 16px;
+  border-top: none;
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  height: 48px;
+  margin: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  color: rgba(61,61,61,1);
+  cursor: pointer;
+}
+
+.c4[data-focus-visible-added]:focus {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 2px;
+}
+
+.c4:hover {
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+}
+
+.c1 {
+  margin-right: 32px;
+}
+
+.c3 {
+  border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  min-height: 96px;
+  box-sizing: border-box;
+}
+
+<div>
+    <div>
+      <h2
+        aria-controls="accordion-1-panel-1"
+        aria-expanded="true"
+        class="c0"
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="c1"
+          fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
+          height="16px"
+          viewBox="0 0 16 16"
+          width="16px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class=""
+            clip-rule="evenodd"
+            d="M7.41 15.705l4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
+            data-testid="eds-icon-path"
+            fill-rule="evenodd"
+            height="24"
+            transform="scale(0.6666666666666666)"
+          />
+        </svg>
+        <span
+          class="c2"
+        >
+          Summary 1
+        </span>
+      </h2>
+      <div
+        aria-labelledby="accordion-1-header-1"
+        class="c3"
+        id="accordion-1-panel-1"
+        role="region"
+      >
+        Details 1
+      </div>
+    </div>
+    <div>
+      <h2
+        aria-controls="accordion-1-panel-2"
+        aria-disabled="false"
+        aria-expanded="false"
+        class="c4"
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="c1"
+          fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
+          height="16px"
+          viewBox="0 0 16 16"
+          width="16px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class=""
+            clip-rule="evenodd"
+            d="M7.41 8.295l4.59 4.58 4.59-4.58L18 9.705l-6 6-6-6 1.41-1.41z"
+            data-testid="eds-icon-path"
+            fill-rule="evenodd"
+            height="24"
+            transform="scale(0.6666666666666666)"
+          />
+        </svg>
+        <span
+          class="c5"
+        >
+          Summary 2
+        </span>
+      </h2>
+      <div
+        aria-labelledby="accordion-1-header-2"
+        class="c3"
+        hidden=""
+        id="accordion-1-panel-2"
+        role="region"
+      >
+        Details 2
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

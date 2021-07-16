@@ -308,10 +308,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 
   return (
     <Container {...containerProps}>
-      <Icon name="search" title="search icon" size={size} />
+      <Icon name="search" aria-hidden size={size} />
       <Input {...inputProps} />
-      <InsideButton {...clearButtonProps}>
-        <Icon name="close" title="clear" size={size} />
+      <InsideButton {...clearButtonProps} aria-label="Clear search">
+        <Icon name="close" size={size} />
       </InsideButton>
     </Container>
   )

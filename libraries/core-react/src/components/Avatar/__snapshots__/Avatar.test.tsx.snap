@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+}
+
+.c1 {
+  height: 100%;
+  text-align: center;
+  color: transparent;
+}
+
+<div
+    class="c0"
+    size="24"
+  >
+    <img
+      alt="avatar"
+      class="c1"
+      src="https://i.imgur.com/UM3mrju.jpg"
+    />
+  </div>
+</DocumentFragment>
+`;

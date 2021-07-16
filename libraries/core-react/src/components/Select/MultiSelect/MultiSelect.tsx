@@ -192,10 +192,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               aria-label={'toggle options'}
               density={density}
             >
-              <Icon
-                data={isOpen ? arrow_drop_up : arrow_drop_down}
-                title="open"
-              ></Icon>
+              <Icon data={isOpen ? arrow_drop_up : arrow_drop_down}></Icon>
             </StyledButton>
           </StyledInputWrapper>
           <StyledList {...getMenuProps()}>

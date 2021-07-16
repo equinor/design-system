@@ -30,6 +30,12 @@ const ControlledSelect = ({ onChange }: ControlledProps) => {
 }
 
 describe('SingleSelect', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <SingleSelect label={labelText} items={items} />,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has provided label', () => {
     render(<SingleSelect label={labelText} items={items} />)
     // The same label is used for both the input field and the list of options
@@ -58,7 +64,9 @@ describe('SingleSelect', () => {
   it('Can open the options on button click', () => {
     render(<SingleSelect items={items} label={labelText} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
-    const buttonNode = screen.getByLabelText('open')
+    const buttonNode = screen.getByLabelText('toggle options', {
+      selector: 'button',
+    })
     expect(optionsNode.children).toHaveLength(0)
     fireEvent.click(buttonNode)
     expect(optionsNode.children).toHaveLength(3)
@@ -69,8 +77,9 @@ describe('SingleSelect', () => {
     const inputNode = screen.getAllByLabelText(labelText)[0]
 
     const optionsNode = screen.getAllByLabelText(labelText)[1]
-
-    const buttonNode = screen.getByLabelText('open')
+    const buttonNode = screen.getByLabelText('toggle options', {
+      selector: 'button',
+    })
     expect(optionsNode.children).toHaveLength(0)
     fireEvent.click(buttonNode)
     expect(optionsNode.children).toHaveLength(3)
@@ -127,7 +136,9 @@ describe('SingleSelect', () => {
     render(<ControlledSelect onChange={handleChange} />)
     const inputNode = screen.getAllByLabelText(labelText)[0]
     const optionsNode = screen.getAllByLabelText(labelText)[1]
-    const buttonNode = screen.getByLabelText('open')
+    const buttonNode = screen.getByLabelText('toggle options', {
+      selector: 'button',
+    })
     expect(inputNode).toHaveValue('One')
 
     expect(handleChange).toHaveBeenCalledTimes(0)

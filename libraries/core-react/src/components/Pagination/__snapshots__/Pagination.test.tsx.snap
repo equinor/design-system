@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination Matches snapshot 1`] = `
+<DocumentFragment>
+  .c4 {
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c3 {
+  margin: 0;
+  padding: 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  background: transparent;
+  height: 48px;
+  width: 48px;
+  padding-left: 0;
+  padding-right: 0;
+  border: 0px solid transparent;
+  border-radius: 50%;
+  margin: 0;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c3 svg {
+  justify-self: center;
+}
+
+.c3::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  min-height: auto;
+  content: '';
+}
+
+.c3::after {
+  position: absolute;
+  top: -0;
+  left: -0px;
+  width: 48px;
+  height: 48px;
+  content: '';
+}
+
+.c3:hover {
+  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+  border: 0px solid transparent;
+  border-radius: 50%;
+}
+
+.c3:focus {
+  outline: none;
+}
+
+.c3[data-focus-visible-added]:focus {
+  outline: 1px dashed rgba(0,112,121,1);
+  outline-offset: 2px;
+}
+
+.c3::-moz-focus-inner {
+  border: 0;
+}
+
+.c3:disabled {
+  cursor: not-allowed;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c3:disabled:hover {
+  background: transparent;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  margin-left: 0;
+}
+
+.c1 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+}
+
+.c2 {
+  display: inline-grid;
+}
+
+<nav
+    aria-label="pagination"
+    class="c0"
+  >
+    <ol
+      class="c1"
+      style="grid-template-columns: repeat(3, 48px);"
+    >
+      <li
+        class="c2"
+      >
+        <button
+          aria-label="Go to previous page"
+          class="c3"
+          disabled=""
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="c4"
+          >
+            <svg
+              aria-hidden="true"
+              class=""
+              fill="currentColor"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class=""
+                clip-rule="evenodd"
+                d="M15.705 16.59L11.125 12l4.58-4.59L14.295 6l-6 6 6 6 1.41-1.41z"
+                data-testid="eds-icon-path"
+                fill-rule="evenodd"
+                height="24"
+              />
+            </svg>
+          </span>
+        </button>
+      </li>
+      <li
+        class="c2"
+      >
+        <button
+          aria-current="1"
+          aria-label="Current page, page 1"
+          class="c3"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="c4"
+          >
+            1
+          </span>
+        </button>
+      </li>
+      <li
+        class="c2"
+      >
+        <button
+          aria-label="Go to next page"
+          class="c3"
+          disabled=""
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="c4"
+          >
+            <svg
+              aria-hidden="true"
+              class=""
+              fill="currentColor"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class=""
+                clip-rule="evenodd"
+                d="M8.295 16.59l4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41z"
+                data-testid="eds-icon-path"
+                fill-rule="evenodd"
+                height="24"
+              />
+            </svg>
+          </span>
+        </button>
+      </li>
+    </ol>
+  </nav>
+</DocumentFragment>
+`;

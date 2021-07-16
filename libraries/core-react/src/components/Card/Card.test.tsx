@@ -44,6 +44,28 @@ const StyledActions = styled(Actions)`
 afterEach(cleanup)
 
 describe('Card', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Card>
+        <Card.Media fullWidth>
+          <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        </Card.Media>
+        <Card.Header>
+          <Card.HeaderTitle>
+            <Typography variant="h5">Another interactive example</Typography>
+            <Typography variant="body_short">
+              Unfortunately you cannot control children in storybook yet
+            </Typography>
+          </Card.HeaderTitle>
+        </Card.Header>
+        <Typography variant="body_short">
+          Leading images are full width, and go straight to the top - ignoring
+          spacings
+        </Typography>
+      </Card>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has correct color', () => {
     const { container } = render(<Card variant="info" />)
     const card = container.firstChild
@@ -58,10 +80,8 @@ describe('Card', () => {
     const { queryByText } = render(
       <Card>
         <Header>
-          <Header>
-            <Typography variant="h4">{title}</Typography>
-            <Typography variant="body_short">{subtitle}</Typography>
-          </Header>
+          <Typography variant="h4">{title}</Typography>
+          <Typography variant="body_short">{subtitle}</Typography>
         </Header>
       </Card>,
     )

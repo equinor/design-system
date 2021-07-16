@@ -15,6 +15,13 @@ const StyledSwitch = styled(Switch)`
 `
 
 describe('Switch', () => {
+  it('Matches snapshot', () => {
+    render(<Switch label="switch" />)
+
+    const switchNode = screen.getByLabelText('switch').parentElement
+
+    expect(switchNode).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSwitch label="switch-test" />)
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')

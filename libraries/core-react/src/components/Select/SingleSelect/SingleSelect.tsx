@@ -118,15 +118,12 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               {...other}
             />
             <StyledButton
-              type="button"
               variant="ghost_icon"
               {...getToggleButtonProps({ disabled: disabled || readOnly })}
+              aria-label={'toggle options'}
               density={density}
             >
-              <Icon
-                data={isOpen ? arrow_drop_up : arrow_drop_down}
-                title="open"
-              ></Icon>
+              <Icon data={isOpen ? arrow_drop_up : arrow_drop_down} />
             </StyledButton>
           </StyledInputWrapper>
           <StyledList {...getMenuProps()}>

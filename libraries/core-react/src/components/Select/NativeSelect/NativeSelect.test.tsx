@@ -22,6 +22,16 @@ const SelectMarkup = ({ label, id }: SelectProps) => {
 }
 
 describe('NativeSelect', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <NativeSelect label="label" id="native-select-snapshot">
+        <option>Option one</option>
+        <option>Option two</option>
+        <option>Option three</option>
+      </NativeSelect>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has provided label', () => {
     const label = 'Select label'
     render(<SelectMarkup label={label} id="test-id" />)

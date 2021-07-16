@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popover Matches snapshot 1`] = `
+.c0 {
+  min-width: 96px;
+  max-width: calc(100% - 32px);
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  box-shadow: 0 1px 10px rgba(0,0,0,0.2),0 4px 5px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.14);
+}
+
+.c7 {
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c5 {
+  margin: 0;
+  padding: 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  background: transparent;
+  height: 48px;
+  width: 48px;
+  padding-left: 0;
+  padding-right: 0;
+  border: 0px solid transparent;
+  border-radius: 50%;
+  margin: 0;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c5 svg {
+  justify-self: center;
+}
+
+.c5::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  min-height: auto;
+  content: '';
+}
+
+.c5::after {
+  position: absolute;
+  top: -0;
+  left: -0px;
+  width: 48px;
+  height: 48px;
+  content: '';
+}
+
+.c5:hover {
+  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+  border: 0px solid transparent;
+  border-radius: 50%;
+}
+
+.c5:focus {
+  outline: none;
+}
+
+.c5[data-focus-visible-added]:focus {
+  outline: 1px dashed rgba(0,112,121,1);
+  outline-offset: 2px;
+}
+
+.c5::-moz-focus-inner {
+  border: 0;
+}
+
+.c5:disabled {
+  cursor: not-allowed;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c5:disabled:hover {
+  background: transparent;
+}
+
+.c1 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.500em;
+  text-align: left;
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-columns: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-content: start;
+  -ms-flex-line-pack: start;
+  align-content: start;
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  max-height: 80vh;
+  max-width: 560px;
+  min-height: 48px;
+  border-radius: 4px;
+  z-index: 300;
+}
+
+.c1 .arrow {
+  z-index: -1;
+  width: 6px;
+  height: 8px;
+}
+
+.c1[data-popper-placement^='top'] > .arrow {
+  bottom: -5px;
+}
+
+.c1[data-popper-placement^='top'] > .arrow .arrowSvg {
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.c1[data-popper-placement^='bottom'] > .arrow {
+  top: -5px;
+}
+
+.c1[data-popper-placement^='bottom'] > .arrow .arrowSvg {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.c1[data-popper-placement^='left'] > .arrow {
+  right: -5px;
+}
+
+.c1[data-popper-placement^='left'] > .arrow .arrowSvg {
+  -webkit-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+.c1[data-popper-placement^='right'] > .arrow {
+  left: -5px;
+}
+
+.c6 {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  height: 32px;
+  width: 32px;
+}
+
+.c6:after {
+  height: 32px;
+}
+
+.c3,
+.c3::before {
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  z-index: -1;
+}
+
+.c3::before {
+  content: '';
+}
+
+.c4 {
+  width: 6px;
+  height: 8px;
+  position: absolute;
+  fill: var(--eds_ui_background__default,rgba(255,255,255,1));
+  -webkit-filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
+  filter: drop-shadow(-4px 0px 2px rgba(0,0,0,0.2));
+}
+
+.c2 {
+  background: red;
+}
+
+<div
+  class="c0 c1 c2"
+  data-testid="popover"
+  elevation="0 1px 10px rgba(0, 0, 0, 0.2),0 4px 5px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14)"
+  open=""
+  style="position: absolute; left: 0px; top: 0px;"
+>
+  <div
+    class="c3 arrow"
+  >
+    <svg
+      class="c4 arrowSvg"
+    >
+      <path
+        d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z"
+      />
+    </svg>
+  </div>
+  <div>
+    some random content
+  </div>
+  <button
+    aria-label="Close popover"
+    class="c5 c6"
+    data-testid="popover-close"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="c7"
+    >
+      <svg
+        aria-hidden="true"
+        class=""
+        fill="currentColor"
+        height="24px"
+        viewBox="0 0 24 24"
+        width="24px"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          class=""
+          clip-rule="evenodd"
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+          data-testid="eds-icon-path"
+          fill-rule="evenodd"
+          height="24"
+        />
+      </svg>
+    </span>
+  </button>
+</div>
+`;

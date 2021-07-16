@@ -14,6 +14,16 @@ const StyledBreadcrumbs = styled(Breadcrumbs)`
 afterEach(cleanup)
 
 describe('Breadcrumbs', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Breadcrumbs>
+        <Breadcrumb>Label 1</Breadcrumb>
+        <Breadcrumb>Label 2</Breadcrumb>
+        <Breadcrumb>Label 3</Breadcrumb>
+      </Breadcrumbs>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('has aria label', () => {
     const { container } = render(
       <Breadcrumbs>

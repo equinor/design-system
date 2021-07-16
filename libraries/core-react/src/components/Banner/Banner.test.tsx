@@ -21,6 +21,18 @@ const rgbaTrim = (x: string) => x.split(' ').join('')
 afterEach(cleanup)
 
 describe('Banner', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Banner>
+        <Banner.Icon>
+          <Icon data={add} />
+        </Banner.Icon>
+        <Banner.Message>Banner message</Banner.Message>
+      </Banner>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
   it('Can extend the css for the component', () => {
     const { container } = render(
       <StyledBanner>

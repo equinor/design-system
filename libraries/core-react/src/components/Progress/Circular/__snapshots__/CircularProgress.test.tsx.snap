@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CircularProgress Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  display: inline-block;
+  -webkit-animation: gJxBWH 1.4s linear infinite;
+  animation: gJxBWH 1.4s linear infinite;
+}
+
+.c1 {
+  position: absolute;
+}
+
+<svg
+    class="c0 c1"
+    height="48"
+    preserveAspectRatio="xMidYMid meet"
+    role="progressbar"
+    viewBox="24 24 48 48"
+    width="48"
+  >
+    <circle
+      class=""
+      cx="48"
+      cy="48"
+      fill="none"
+      r="22"
+      stroke="var(--eds_infographic_primary__moss_green_13, rgba(222, 237, 238, 1))"
+      stroke-width="4"
+    />
+    <circle
+      class=""
+      cx="48"
+      cy="48"
+      fill="none"
+      r="22"
+      stroke="var(--eds_infographic_primary__moss_green_100, rgba(0, 112, 121, 1))"
+      stroke-dasharray="48"
+      stroke-linecap="round"
+      stroke-width="4"
+    />
+  </svg>
+</DocumentFragment>
+`;

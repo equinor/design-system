@@ -19,6 +19,15 @@ const ScrollContainer = styled.div`
 afterEach(cleanup)
 
 describe('TableOfContents', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <TableOfContents>
+        <LinkItem>Anchor</LinkItem>
+      </TableOfContents>,
+    )
+
+    expect(asFragment).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(
       <StyledTableOfContents>Stuff</StyledTableOfContents>,

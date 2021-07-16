@@ -13,6 +13,11 @@ const StyledAvatar = styled(Avatar)`
 afterEach(cleanup)
 
 describe('Avatar', () => {
+  it('Matches snapshot', () => {
+    const src = 'https://i.imgur.com/UM3mrju.jpg'
+    const { asFragment } = render(<Avatar alt="avatar" src={src} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledAvatar alt="avatar" />)
     expect(container.firstChild).toHaveStyleRule('position', 'relative')

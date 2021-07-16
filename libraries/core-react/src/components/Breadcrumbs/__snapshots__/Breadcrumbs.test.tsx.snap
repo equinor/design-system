@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs Matches snapshot 1`] = `
+<DocumentFragment>
+  .c2 {
+  margin: 0;
+  color: rgba(0,112,121,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-align: left;
+  cursor: pointer;
+}
+
+.c2:focus {
+  outline: none;
+}
+
+.c2[data-focus-visible-added]:focus {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 2px;
+}
+
+.c4 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+  text-align: left;
+}
+
+.c0 {
+  list-style: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c1 {
+  display: inline-block;
+}
+
+.c5 {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.c3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c3:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+}
+
+<nav
+    aria-label="breadcrumbs"
+  >
+    <ol
+      class="c0"
+    >
+      <li
+        class="c1"
+      >
+        <a
+          class="c2 c3"
+        >
+          Label 1
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+      >
+        <p
+          class="c4 c5"
+        >
+          /
+        </p>
+      </li>
+      <li
+        class="c1"
+      >
+        <a
+          class="c2 c3"
+        >
+          Label 2
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+      >
+        <p
+          class="c4 c5"
+        >
+          /
+        </p>
+      </li>
+      <li
+        class="c1"
+      >
+        <a
+          class="c2 c3"
+        >
+          Label 3
+        </a>
+      </li>
+    </ol>
+  </nav>
+</DocumentFragment>
+`;

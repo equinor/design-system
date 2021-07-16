@@ -146,7 +146,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               disabled={activePage === 1}
               aria-label="Go to previous page"
             >
-              <Icon name="chevron_left" title="previous" />
+              <Icon name="chevron_left" />
             </Button>
           </ListItem>
 
@@ -171,7 +171,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                     // eslint-disable-next-line react/no-array-index-key
                     key={`ellipsis-${index}`}
                   >
-                    <StyledIcon name="more_horizontal" title="ellipsis" />
+                    <StyledIcon
+                      name="more_horizontal"
+                      aria-label="Ellipsis of pages"
+                    />
                   </ListItem>
                 ),
               )
@@ -189,7 +192,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               aria-label="Go to next page"
               disabled={activePage === pages}
             >
-              <Icon name="chevron_right" title="next" />
+              <Icon name="chevron_right" />
             </Button>
           </ListItem>
         </OrderedList>

@@ -34,6 +34,15 @@ const expectToMatchTypography = (element, token: TypographyType) => {
 afterEach(cleanup)
 
 describe('Typography', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Typography variant="body_short" color="primary">
+        Test
+      </Typography>,
+    )
+
+    expect(asFragment).toMatchSnapshot()
+  })
   it('throws error when variant is wrong', () => {
     jest.spyOn(console, 'error').mockImplementation()
 

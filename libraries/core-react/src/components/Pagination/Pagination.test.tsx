@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -12,6 +12,10 @@ const StyledPagination = styled(Pagination)`
 afterEach(cleanup)
 
 describe('Pagination', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Pagination totalItems={10} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('can extend the css for the component', () => {
     const { container } = render(<StyledPagination totalItems={10} />)
     const pagination = container.firstChild
@@ -46,17 +50,14 @@ describe('Pagination', () => {
     expect(getAllByRole('listitem')).toHaveLength(6) // totalItems + 2: the < + > buttons)
   })
   it('should render ellipsis if number of pages is larger than 7', () => {
-    const { getAllByRole } = render(
-      <Pagination totalItems={8} itemsPerPage={1} />,
-    )
-    expect(getAllByRole('img')[1]).toHaveAttribute('title', 'ellipsis')
+    render(<Pagination totalItems={8} itemsPerPage={1} />)
+    expect(screen.getByLabelText('Ellipsis of pages')).toBeDefined()
   })
   it('should render two ellipsises if number of pages is larger than 9 and default page is 5', () => {
-    const { getAllByRole } = render(
-      <Pagination totalItems={9} itemsPerPage={1} defaultPage={5} />,
-    )
-    expect(getAllByRole('img')[1]).toHaveAttribute('title', 'ellipsis')
-    expect(getAllByRole('img')[2]).toHaveAttribute('title', 'ellipsis')
+    render(<Pagination totalItems={9} itemsPerPage={1} defaultPage={5} />)
+
+    expect(screen.getAllByLabelText('Ellipsis of pages')[0]).toBeDefined()
+    expect(screen.getAllByLabelText('Ellipsis of pages')[1]).toBeDefined()
   })
   it('should render next and previous buttons', () => {
     const { getAllByRole } = render(

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Label Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  margin: 0;
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  text-align: left;
+  margin-left: 8px;
+  margin-right: 8px;
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c1 {
+  margin: 0;
+}
+
+<label
+    class="c0"
+  >
+    <span
+      class="c1"
+    >
+      label
+    </span>
+  </label>
+</DocumentFragment>
+`;

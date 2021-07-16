@@ -21,6 +21,23 @@ const { height } = token
 afterEach(cleanup)
 
 describe('TopBar', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <TopBar>
+        <Header>
+          <button type="button">Click me!</button>
+        </Header>
+        <CustomContent>
+          <input type="text" />
+        </CustomContent>
+        <Actions>
+          <p>icon</p>
+        </Actions>
+      </TopBar>,
+    )
+
+    expect(asFragment).toMatchSnapshot()
+  })
   it('Has correct height', () => {
     render(
       <TopBar data-testid="topbar">

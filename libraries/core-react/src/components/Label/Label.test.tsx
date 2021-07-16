@@ -7,6 +7,10 @@ import { Label } from './Label'
 afterEach(cleanup)
 
 describe('Label', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Label label="label" />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has correct label text', () => {
     const labelText = 'Some label'
     const { queryByText } = render(<Label label={labelText} />)

@@ -21,6 +21,15 @@ const rgbaTrim = (x: string) => x.split(' ').join('')
 afterEach(cleanup)
 
 describe('Chips', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Chip>
+        <Icon name="add" />
+        Chip
+      </Chip>,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledChips>styled chip</StyledChips>)
     expect(container.firstChild).toHaveStyleRule('position', 'relative')

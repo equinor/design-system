@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Matches snapshot 1`] = `
+<DocumentFragment>
+  .c1 {
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c0 {
+  margin: 0;
+  padding: 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  background: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  height: 36px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  border-radius: 4px;
+  margin: 0;
+  color: var(--eds_text__static_icons__primary_white,rgba(255,255,255,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c0 svg {
+  justify-self: center;
+}
+
+.c0::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  min-height: auto;
+  content: '';
+}
+
+.c0::after {
+  position: absolute;
+  top: -7px;
+  left: -0;
+  width: 100%;
+  height: 48px;
+  content: '';
+}
+
+.c0:hover {
+  background: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0[data-focus-visible-added]:focus {
+  outline: 1px dashed rgba(0,112,121,1);
+  outline-offset: 2px;
+}
+
+.c0::-moz-focus-inner {
+  border: 0;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+  background: var(--eds_interactive__disabled__fill,rgba(234,234,234,1));
+  border: 1px solid var(--eds_interactive__disabled__border,rgba(220,220,220,1));
+  margin: 0;
+  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c0:disabled:hover {
+  background: var(--eds_interactive__disabled__fill,rgba(234,234,234,1));
+}
+
+<button
+    class="c0"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="c1"
+    >
+      Button
+    </span>
+  </button>
+</DocumentFragment>
+`;

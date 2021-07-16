@@ -19,6 +19,17 @@ const StyledPopover = styled(TestPopover)`
 afterEach(cleanup)
 
 describe('Popover', () => {
+  it('Matches snapshot', async () => {
+    render(
+      <StyledPopover open>
+        <div>some random content</div>
+      </StyledPopover>,
+    )
+    const container = screen.getByTestId('popover')
+
+    await waitFor(() => expect(container).toMatchSnapshot())
+  })
+
   it('can extend the css for the component', async () => {
     render(
       <StyledPopover open>
@@ -69,7 +80,7 @@ describe('Popover', () => {
         <div>some random content</div>
       </TestPopover>,
     )
-    const closeButton = screen.getByTestId('popover-close')
+    const closeButton = screen.getByLabelText('Close popover')
 
     fireEvent.click(closeButton)
 

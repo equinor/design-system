@@ -27,6 +27,10 @@ const {
 afterEach(cleanup)
 
 describe('Divider', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Divider />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has medium colour and medium spacing as default', () => {
     const { container } = render(<Divider />)
     expect(container.firstChild).toHaveStyleRule(

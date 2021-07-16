@@ -59,6 +59,19 @@ const TabsWithPanels = ({
 }
 
 describe('Tabs', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(
+      <Tabs onChange={noop}>
+        <Tabs.List>
+          <Tabs.Tab>Tab one</Tabs.Tab>
+          <Tabs.Tab>Tab two</Tabs.Tab>
+          <Tabs.Tab>Tab three</Tabs.Tab>
+        </Tabs.List>
+      </Tabs>,
+    )
+
+    expect(asFragment).toMatchSnapshot()
+  })
   it('Renders a tablist with three tabs', () => {
     const { container } = render(
       <Tabs onChange={noop}>

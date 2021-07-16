@@ -13,6 +13,15 @@ const labelText = 'Select label test'
 afterEach(cleanup)
 
 describe('MultiSelect', () => {
+  it('Matches snapshot', () => {
+    render(<MultiSelect items={items} label={labelText} />)
+    const optionsNode = screen.getAllByLabelText(labelText)[1]
+    const buttonNode = screen.getByLabelText('toggle options', {
+      selector: 'button',
+    })
+    expect(optionsNode).toMatchSnapshot()
+    expect(buttonNode).toMatchSnapshot()
+  })
   it('Has provided label', () => {
     render(<MultiSelect label={labelText} items={items} id="id" />)
     // The same label is used for both the input field and the list of options
@@ -41,7 +50,9 @@ describe('MultiSelect', () => {
   it('Can open the options on button click', () => {
     render(<MultiSelect items={items} label={labelText} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
-    const buttonNode = screen.getByLabelText('open')
+    const buttonNode = screen.getByLabelText('toggle options', {
+      selector: 'button',
+    })
     expect(optionsNode.children).toHaveLength(0)
     fireEvent.click(buttonNode)
     expect(optionsNode.children).toHaveLength(3)
@@ -72,7 +83,9 @@ describe('MultiSelect', () => {
     const handleChange = jest.fn()
     render(<HandleMultipleSelect onChange={handleChange} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
-    const buttonNode = screen.getByLabelText('open')
+    const buttonNode = screen.getByLabelText('toggle options', {
+      selector: 'button',
+    })
 
     expect(handleChange).toHaveBeenCalledTimes(0)
     fireEvent.click(buttonNode)
@@ -86,7 +99,9 @@ describe('MultiSelect', () => {
 
     const optionsNode = screen.getAllByLabelText(labelText)[1]
 
-    const buttonNode = screen.getByLabelText('open')
+    const buttonNode = screen.getByLabelText('toggle options', {
+      selector: 'button',
+    })
     expect(optionsNode.children).toHaveLength(0)
     fireEvent.click(buttonNode)
     expect(optionsNode.children).toHaveLength(3)

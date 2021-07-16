@@ -22,6 +22,10 @@ const MarginButton = styled(Button)`
 afterEach(cleanup)
 
 describe('Button', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Button>Button</Button>)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Has provided icon when variant is icon', () => {
     const { queryByTestId, container } = render(
       <Button variant="ghost_icon">

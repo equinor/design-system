@@ -36,6 +36,10 @@ const DismissableScrim = () => {
 }
 
 describe('Scrim', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<DismissableScrim />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Is dismissable with button click', () => {
     const { container } = render(<DismissableScrim />)
     const scrim = container.firstChild

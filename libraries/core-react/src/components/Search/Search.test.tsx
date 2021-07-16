@@ -12,6 +12,10 @@ const StyledSearch = styled(Search)`
 afterEach(cleanup)
 
 describe('Search', () => {
+  it('Matches snapshot', () => {
+    const { asFragment } = render(<Search />)
+    expect(asFragment()).toMatchSnapshot()
+  })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSearch />)
     expect(container.firstChild).toHaveStyleRule('position', 'relative')
