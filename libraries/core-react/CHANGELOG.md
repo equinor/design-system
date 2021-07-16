@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.1] - 2021-07-16
+
+### Fixed
+
+- Jest/react-testing-library errors in bundle when using with Webpack 5 ([#1490](https://github.com/equinor/design-system/issues/1490)) & ([#1406](https://github.com/equinor/design-system/issues/1406))
+- Snackbar timeout improvements to avoid "missed" timeout ([#1486](https://github.com/equinor/design-system/issues/1486))
+- Snackbar centering was wrong when used inside certain elements ([#1172](https://github.com/equinor/design-system/issues/1172))
+- Snackbar stacking content order, should now be on top most of the time ([#1173](https://github.com/equinor/design-system/issues/1173))
+
 ## [0.13.0] - 2021-07-15
 
 ### Added
