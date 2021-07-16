@@ -1,7 +1,7 @@
 import { HTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useTextField } from '../context'
-import { input as tokens } from './Icon.token'
+import { input as tokens } from './Icon.tokens'
 import type { Spacing } from '@equinor/eds-tokens'
 import type { Variants, ColorStateProps } from '../types'
 

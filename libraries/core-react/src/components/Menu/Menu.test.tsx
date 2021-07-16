@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, fireEvent } from '../../utils'
+import { render, cleanup, screen, fireEvent } from '../../test'
 import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'

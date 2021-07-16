@@ -26,9 +26,9 @@ exports[`MultiSelect Matches snapshot 1`] = `
 }
 
 <ul
-  aria-labelledby="downshift-1-label"
+  aria-labelledby="downshift-0-label"
   class="c0 c1"
-  id="downshift-1-menu"
+  id="downshift-0-menu"
   role="listbox"
 />
 `;
@@ -142,7 +142,7 @@ exports[`MultiSelect Matches snapshot 2`] = `
 <button
   aria-label="toggle options"
   class="c0 c1"
-  id="downshift-1-toggle-button"
+  id="downshift-0-toggle-button"
   tabindex="-1"
   type="button"
 >

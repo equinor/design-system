@@ -88,6 +88,7 @@ exports[`Tooltip Matches snapshot 1`] = `
   Tooltip
   <div
     class="c1 arrow"
+    style="position: absolute;"
   >
     <svg
       class="c2 arrowSvg"

@@ -115,6 +115,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const tooltipId = useId(id, 'tooltip')
     const containerId = 'eds-tooltip-container'
     const shouldOpen = isMounted && title !== ''
+    const { setTimeout, clearTimeout } = window
 
     useEffect(() => {
       if (document.getElementById(containerId) === null) {

@@ -3,14 +3,14 @@
 exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-eCssSg imFDhh"
+    class="sc-eCApnc llImFF"
     max="100"
     min="0"
     value="0"
   >
     <input
       aria-labelledby="test-one"
-      class="sc-dlfnbm clBnoA"
+      class="sc-dlnjwi jURbfl"
       id="test-one-thumb"
       max="100"
       min="0"
@@ -19,22 +19,22 @@ exports[`Simple slider Matches snapshot 1`] = `
       value="0"
     />
     <output
-      class="sc-gsTCUz enCDSy"
+      class="sc-gtsrHT hdPYbM"
       for="test-one-thumb"
       value="0"
     >
       0
     </output>
     <div
-      class="sc-jSgupP sc-gKsewC bxFDfR fzKbTb"
+      class="sc-jSFjdj sc-gKAaRy kJxeqp jaBCMe"
     />
     <span
-      class="sc-bdfBwQ hDUCP"
+      class="sc-bdnxRM hQEkFM"
     >
       0
     </span>
     <span
-      class="sc-bdfBwQ hDUCP"
+      class="sc-bdnxRM hQEkFM"
     >
       100
     </span>
