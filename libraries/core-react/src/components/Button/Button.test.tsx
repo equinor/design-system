@@ -27,22 +27,24 @@ describe('Button', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Has provided icon when variant is icon', () => {
-    const { queryByTestId, container } = render(
+    render(
       <Button variant="ghost_icon">
         <Icon name="save" title="save me test" />
       </Button>,
     )
-    expect(container.querySelector('svg')).toBeInTheDocument()
-    expect(queryByTestId('eds-icon-path')).toHaveAttribute(
+    expect(screen.getByLabelText('save me test')).toBeInTheDocument()
+    expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
       'd',
       save.svgPathData,
     )
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledButton>Test me!</StyledButton>)
-    expect(container.firstChild).toHaveStyleRule('position', 'relative')
-    expect(container.firstChild).toHaveStyleRule('height', '100px')
-    expect(container.firstChild).toHaveStyleRule('width', '100px')
+    render(<StyledButton>Test me!</StyledButton>)
+    const button = screen.getByRole('button')
+
+    expect(button).toHaveStyleRule('position', 'relative')
+    expect(button).toHaveStyleRule('height', '100px')
+    expect(button).toHaveStyleRule('width', '100px')
   })
   it('onSubmit is called one time when used in form', () => {
     const handleSubmit = jest.fn()
@@ -75,23 +77,26 @@ describe('Button', () => {
     expect(handleSubmit).toHaveBeenCalledTimes(0)
   })
   it('Has provided icon when icon and text is defined', () => {
-    const { queryByTestId, container } = render(
+    render(
       <Button>
         <Icon name="save" title="save"></Icon>Button
       </Button>,
     )
-    expect(container.querySelector('svg')).toBeInTheDocument()
-    expect(queryByTestId('eds-icon-path')).toHaveAttribute(
+    expect(screen.getByLabelText('save')).toBeInTheDocument()
+    expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
       'd',
       save.svgPathData,
     )
   })
-  it('renders an a as root node when href prop is defined', () => {
-    const { container } = render(<Button href="/" />)
-    expect(container.querySelector('a')).toBeInTheDocument()
+  it('Renders as a link when href prop is defined', () => {
+    render(<Button href="/" />)
+    const button = screen.getByRole('link')
+
+    expect(button).toBeInTheDocument()
   })
   it('Can change margins', () => {
-    const { container } = render(<MarginButton>Test me!</MarginButton>)
-    expect(container.firstChild).toHaveStyleRule('margin', '12px')
+    render(<MarginButton>Test me!</MarginButton>)
+    const button = screen.getByRole('button')
+    expect(button).toHaveStyleRule('margin', '12px')
   })
 })
