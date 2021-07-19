@@ -39,8 +39,10 @@ describe('Checkbox', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledCheckbox label="checkbox-test" />)
-    expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+    render(<StyledCheckbox label="checkbox-test" />)
+    // eslint-disable-next-line testing-library/no-node-access
+    const checkbox = screen.getByText('checkbox-test').parentElement
+    expect(checkbox).toHaveStyleRule('clip-path', 'unset')
   })
   it('Has provided label', () => {
     const label = 'Checkbox label'
@@ -50,8 +52,8 @@ describe('Checkbox', () => {
   })
   it('Can be selected', () => {
     const labelText = 'Checkbox label'
-    const { getByLabelText } = render(<Checkbox label={labelText} />)
-    const checkbox = getByLabelText(labelText)
+    render(<Checkbox label={labelText} />)
+    const checkbox = screen.getByLabelText(labelText)
     expect(checkbox).not.toBeChecked()
     fireEvent.click(checkbox)
     expect(checkbox).toBeChecked()
@@ -69,12 +71,12 @@ describe('Checkbox', () => {
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
   it('Can be disabeld', () => {
-    const { getByLabelText } = render(
+    render(
       <div>
         <Checkbox label="Checkbox one" disabled />
       </div>,
     )
-    const one = getByLabelText('Checkbox one')
+    const one = screen.getByLabelText('Checkbox one')
     expect(one).not.toBeChecked()
     userEvent.click(one)
     expect(one).not.toBeChecked()
