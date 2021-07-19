@@ -1,4 +1,4 @@
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -67,8 +67,8 @@ describe('Card', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Has correct color', () => {
-    const { container } = render(<Card variant="info" />)
-    const card = container.firstChild
+    render(<Card variant="info" data-testid="card" />)
+    const card = screen.getByTestId('card')
     expect(card).toHaveStyleRule(
       'background-color',
       trimSpaces(info.background),
@@ -77,7 +77,7 @@ describe('Card', () => {
   it('Has provided title and subtitle in CardHeaderTitle', () => {
     const title = 'Title'
     const subtitle = 'subtitle'
-    const { queryByText } = render(
+    render(
       <Card>
         <Header>
           <Typography variant="h4">{title}</Typography>
@@ -86,13 +86,13 @@ describe('Card', () => {
       </Card>,
     )
 
-    expect(queryByText(title)).toBeDefined()
-    expect(queryByText(subtitle)).toBeDefined()
+    expect(screen.queryByText(title)).toBeDefined()
+    expect(screen.queryByText(subtitle)).toBeDefined()
   })
   it('Has provided image source and placement in Media', () => {
     const fullWidth = 'fullWidth'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
-    const { queryByText } = render(
+    render(
       <Card>
         <Media fullWidth>
           <img src={src} alt="alt" />
@@ -100,51 +100,53 @@ describe('Card', () => {
       </Card>,
     )
 
-    expect(queryByText(fullWidth)).toBeDefined()
-    expect(queryByText(src)).toBeDefined()
+    expect(screen.queryByText(fullWidth)).toBeDefined()
+    expect(screen.queryByText(src)).toBeDefined()
   })
   it('CardActions items are placed correctly', () => {
-    const { container } = render(
+    render(
       <Card>
-        <Actions alignRight>
+        <Actions alignRight data-testid="card-actions">
           <button type="button">Click me!</button>
         </Actions>
       </Card>,
     )
-    const child = container.firstChild
-    expect(child.firstChild).toHaveStyleRule('justify-content', 'flex-end')
+    expect(screen.getByTestId('card-actions')).toHaveStyleRule(
+      'justify-content',
+      'flex-end',
+    )
   })
   it('Can extend the css for the Card Component', () => {
-    const { container } = render(<StyledCard />)
-    const card = container.firstChild
+    render(<StyledCard data-testid="test-me" />)
+    const card = screen.getByTestId('test-me')
     expect(card).toHaveStyleRule('position', 'relative')
     expect(card).toHaveStyleRule('height', '100px')
     expect(card).toHaveStyleRule('width', '100px')
   })
   it('Can extend the css for the Header Component', () => {
-    const { container } = render(<StyledHeader />)
-    const cardHeader = container.firstChild
+    render(<StyledHeader data-testid="test-me" />)
+    const cardHeader = screen.getByTestId('test-me')
     expect(cardHeader).toHaveStyleRule('position', 'relative')
     expect(cardHeader).toHaveStyleRule('height', '100px')
     expect(cardHeader).toHaveStyleRule('width', '100px')
   })
   it('Can extend the css for the HeaderTitle Component', () => {
-    const { container } = render(<StyledHeaderTitle />)
-    const cardHeaderTitle = container.firstChild
+    render(<StyledHeaderTitle data-testid="test-me" />)
+    const cardHeaderTitle = screen.getByTestId('test-me')
     expect(cardHeaderTitle).toHaveStyleRule('position', 'relative')
     expect(cardHeaderTitle).toHaveStyleRule('height', '100px')
     expect(cardHeaderTitle).toHaveStyleRule('width', '100px')
   })
   it('Can extend the css for the Media Component', () => {
-    const { container } = render(<StyledMedia />)
-    const cardMedia = container.firstChild
+    render(<StyledMedia data-testid="test-me" />)
+    const cardMedia = screen.getByTestId('test-me')
     expect(cardMedia).toHaveStyleRule('position', 'relative')
     expect(cardMedia).toHaveStyleRule('height', '100px')
     expect(cardMedia).toHaveStyleRule('width', '100px')
   })
   it('Can extend the css for the Actions Component', () => {
-    const { container } = render(<StyledActions />)
-    const cardActions = container.firstChild
+    render(<StyledActions data-testid="test-me" />)
+    const cardActions = screen.getByTestId('test-me')
     expect(cardActions).toHaveStyleRule('position', 'relative')
     expect(cardActions).toHaveStyleRule('height', '100px')
     expect(cardActions).toHaveStyleRule('width', '100px')
