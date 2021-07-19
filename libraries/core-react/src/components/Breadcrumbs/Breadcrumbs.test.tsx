@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, fireEvent, act } from '@testing-library/react'
+import { render, cleanup, fireEvent, act, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -25,19 +25,19 @@ describe('Breadcrumbs', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('has aria label', () => {
-    const { container } = render(
+    render(
       <Breadcrumbs>
         <Breadcrumb>Label 1</Breadcrumb>
         <Breadcrumb>Label 2</Breadcrumb>
         <Breadcrumb>Label 3</Breadcrumb>
       </Breadcrumbs>,
     )
-    const breadcrumbs = container.firstChild
+    const breadcrumbs = screen.getByLabelText('breadcrumbs')
 
     expect(breadcrumbs).toHaveAttribute('aria-label', 'breadcrumbs')
   })
   it('should render three normal breadcrumbs', () => {
-    const { getByRole, getAllByRole } = render(
+    render(
       <Breadcrumbs>
         <Breadcrumb>Label 1</Breadcrumb>
         <Breadcrumb>Label 2</Breadcrumb>
@@ -45,11 +45,13 @@ describe('Breadcrumbs', () => {
       </Breadcrumbs>,
     )
 
-    expect(getAllByRole('listitem', { hidden: false })).toHaveLength(3)
-    expect(getByRole('list')).toHaveTextContent('Label 1/Label 2/Label 3')
+    expect(screen.getAllByRole('listitem', { hidden: false })).toHaveLength(3)
+    expect(screen.getByRole('list')).toHaveTextContent(
+      'Label 1/Label 2/Label 3',
+    )
   })
   it('should render ellipsis between first and last crumb when collapsed', () => {
-    const { getByRole, getAllByRole } = render(
+    render(
       <Breadcrumbs collapse>
         <Breadcrumb>Label 1</Breadcrumb>
         <Breadcrumb>Label 2</Breadcrumb>
@@ -60,11 +62,11 @@ describe('Breadcrumbs', () => {
       </Breadcrumbs>,
     )
 
-    expect(getAllByRole('listitem', { hidden: false })).toHaveLength(3)
-    expect(getByRole('list')).toHaveTextContent('Label 1/…/Label 6')
+    expect(screen.getAllByRole('listitem', { hidden: false })).toHaveLength(3)
+    expect(screen.getByRole('list')).toHaveTextContent('Label 1/…/Label 6')
   })
   it('should expand from collapsed state when clicking the ellipsis', () => {
-    const { getByRole } = render(
+    render(
       <Breadcrumbs collapse>
         <Breadcrumb>Label 1</Breadcrumb>
         <Breadcrumb>Label 2</Breadcrumb>
@@ -74,38 +76,41 @@ describe('Breadcrumbs', () => {
         <Breadcrumb>Label 6</Breadcrumb>
       </Breadcrumbs>,
     )
-    const ellipsisButton = getByRole('button')
-    expect(getByRole('list')).toHaveTextContent('Label 1/…/Label 6')
+    const ellipsisButton = screen.getByRole('button')
+    expect(screen.getByRole('list')).toHaveTextContent('Label 1/…/Label 6')
     fireEvent.click(ellipsisButton)
-    expect(getByRole('list')).toHaveTextContent(
+    expect(screen.getByRole('list')).toHaveTextContent(
       'Label 1/Label 2/Label 3/Label 4/Label 5/Label 6',
     )
   })
   it('should crop the labels and have tooltip on hover when maxWidth is defined', async () => {
-    const { getAllByText, getByRole } = render(
+    render(
       <Breadcrumbs>
         <Breadcrumb maxWidth={30}>Label 1</Breadcrumb>
         <Breadcrumb maxWidth={30}>Label 2</Breadcrumb>
         <Breadcrumb maxWidth={30}>Label 3</Breadcrumb>
       </Breadcrumbs>,
     )
-    const crumb = getAllByText(/^Label\s\d$/)
+    const crumb = screen.getAllByText(/^Label\s\d$/)
     expect(crumb[0]).toHaveStyleRule('max-width', '30px')
 
     fireEvent.mouseOver(crumb[0])
 
     await act(() => new Promise((r) => setTimeout(r, 100)))
 
-    const tooltip = getByRole('tooltip')
+    const tooltip = screen.getByRole('tooltip')
     expect(tooltip).toBeDefined()
   })
   it('can extend the css for the component', () => {
-    const { container } = render(
+    render(
       <StyledBreadcrumbs>
         <Breadcrumb>Label</Breadcrumb>
       </StyledBreadcrumbs>,
     )
 
-    expect(container.firstChild).toHaveStyleRule('position', 'absolute')
+    expect(screen.getByLabelText('breadcrumbs')).toHaveStyleRule(
+      'position',
+      'absolute',
+    )
   })
 })
