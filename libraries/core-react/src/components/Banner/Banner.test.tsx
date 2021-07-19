@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -34,26 +34,26 @@ describe('Banner', () => {
   })
 
   it('Can extend the css for the component', () => {
-    const { container } = render(
+    render(
       <StyledBanner>
         <Banner.Message>styled banner</Banner.Message>
       </StyledBanner>,
     )
-    expect(container.firstChild).toHaveStyleRule('position', 'relative')
+    expect(screen.getByRole('alert')).toHaveStyleRule('position', 'relative')
   })
   it('Has provided Message', () => {
     const bannerText = 'Banner test message'
-    const { queryByText } = render(
+    render(
       <Banner>
         <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
-    expect(queryByText(bannerText)).toBeDefined()
+    expect(screen.queryByText(bannerText)).toBeDefined()
   })
   it('Has provided Icon', () => {
     const bannerText = 'Banner test'
     const iconTestId = 'banner-icon-test'
-    const { queryByText, queryByTestId } = render(
+    render(
       <Banner>
         <Banner.Icon>
           <Icon name="add" data-testid={iconTestId} />
@@ -61,13 +61,13 @@ describe('Banner', () => {
         <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
-    expect(queryByText(bannerText)).toBeDefined()
-    expect(queryByTestId(iconTestId)).toBeDefined()
+    expect(screen.queryByText(bannerText)).toBeDefined()
+    expect(screen.queryByTestId(iconTestId)).toBeDefined()
   })
   it('Has provided Actions', () => {
     const bannerText = 'Banner test'
     const actionButtonText = 'Banner action button text'
-    const { queryByText } = render(
+    render(
       <Banner>
         <Banner.Message>{bannerText}</Banner.Message>
         <Banner.Actions>
@@ -75,23 +75,23 @@ describe('Banner', () => {
         </Banner.Actions>
       </Banner>,
     )
-    expect(queryByText(bannerText)).toBeDefined()
-    expect(queryByText(actionButtonText)).toBeDefined()
+    expect(screen.queryByText(bannerText)).toBeDefined()
+    expect(screen.queryByText(actionButtonText)).toBeDefined()
   })
 
   it('Has correct default icon styling as info color', () => {
     const bannerText = 'Banner test'
     const iconWrapperTestId = 'banner-icon-wrapper-test'
-    const { queryByTestId, container } = render(
+    render(
       <Banner>
         <Banner.Icon data-testid={iconWrapperTestId}>
-          <Icon name="add" />
+          <Icon name="add" data-testid="icon" />
         </Banner.Icon>
         <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
-    const iconSvg = container.querySelector('svg')
-    expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
+    const iconSvg = screen.getByTestId('icon')
+    expect(screen.queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
       rgbaTrim(info.entities.icon.background),
     )
@@ -100,16 +100,17 @@ describe('Banner', () => {
   it('Has correct warning icon styling', () => {
     const bannerText = 'Banner test'
     const iconWrapperTestId = 'banner-icon-wrapper-test'
-    const { queryByTestId, container } = render(
+    render(
       <Banner>
         <Banner.Icon variant="warning" data-testid={iconWrapperTestId}>
-          <Icon name="add" />
+          <Icon name="add" data-testid="icon" />
         </Banner.Icon>
         <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
-    const iconSvg = container.querySelector('svg')
-    expect(queryByTestId(iconWrapperTestId)).toHaveStyleRule(
+    const iconSvg = screen.getByTestId('icon')
+
+    expect(screen.queryByTestId(iconWrapperTestId)).toHaveStyleRule(
       'background-color',
       rgbaTrim(warning.entities.icon.background),
     )
