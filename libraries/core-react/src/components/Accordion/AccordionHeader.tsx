@@ -1,5 +1,12 @@
-import { KeyboardEvent, Children as ReactChildren, cloneElement } from 'react'
-import { forwardRef, HTMLAttributes, isValidElement, ReactElement } from 'react'
+import {
+  KeyboardEvent,
+  Children as ReactChildren,
+  cloneElement,
+  forwardRef,
+  HTMLAttributes,
+  isValidElement,
+  ReactElement,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
