@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -16,31 +16,37 @@ describe('Avatar', () => {
   it('Matches snapshot', () => {
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { asFragment } = render(<Avatar alt="avatar" src={src} />)
+
     expect(asFragment()).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledAvatar alt="avatar" />)
-    expect(container.firstChild).toHaveStyleRule('position', 'relative')
+    render(<StyledAvatar alt="avatar" data-testid="avatar" />)
+    const avatar = screen.getByTestId('avatar')
+
+    expect(avatar).toHaveStyleRule('position', 'relative')
   })
   it('Image has provided src', () => {
     const src = 'https://i.imgur.com/UM3mrju.jpg'
-    const { getByAltText } = render(<Avatar alt="avatar" src={src} />)
-    const avatarImg = getByAltText('avatar')
+    render(<Avatar alt="avatar" src={src} />)
+    const avatarImg = screen.getByAltText('avatar')
+
     expect(avatarImg).toHaveAttribute('src', src)
   })
   it('Has correct size', () => {
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const size = 32
-    const { container } = render(<Avatar src={src} size={size} alt="avatar" />)
-    const avatar = container.firstChild
+    render(<Avatar src={src} size={size} alt="avatar" data-testid="avatar" />)
+    const avatar = screen.getByTestId('avatar')
+
     expect(avatar).toHaveStyleRule('width', `${size}px`)
     expect(avatar).toHaveStyleRule('height', `${size}px`)
   })
   it('Has faded image when disabled', () => {
     const altText = 'avatar'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
-    const { getByAltText } = render(<Avatar disabled src={src} alt={altText} />)
-    const avatarImg = getByAltText(altText)
+    render(<Avatar disabled src={src} alt={altText} />)
+    const avatarImg = screen.getByAltText(altText)
+
     expect(avatarImg).toHaveStyleRule('opacity', tokens.states.disabled.opacity)
   })
 })
