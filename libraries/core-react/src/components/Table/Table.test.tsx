@@ -15,17 +15,9 @@ const trim = (x: string): string => x.replace(/ /g, '')
 afterEach(cleanup)
 
 describe('Caption', () => {
-  it('Renders a table with caption element present in the document', () => {
-    const { container } = render(
-      <Table>
-        <Caption>test</Caption>
-      </Table>,
-    )
-    expect(container.querySelector('Caption')).toBeInTheDocument()
-  })
-  it('Prints the caption', () => {
+  it('Renders a caption with provided text', () => {
     const text = "I'm da caption"
-    const { getByText } = render(
+    render(
       <Table>
         <Head>
           <Row>
@@ -34,29 +26,23 @@ describe('Caption', () => {
         </Head>
       </Table>,
     )
-    expect(getByText(text)).toBeDefined()
+    expect(screen.getByText(text)).toBeDefined()
   })
   it('Renders a table with caption, and caption-side set default to top', () => {
-    const { container } = render(
+    render(
       <Table>
         <Caption>test</Caption>
       </Table>,
     )
-    expect(container.querySelector('Caption')).toHaveStyleRule(
-      'caption-side',
-      'top',
-    )
+    expect(screen.getByText('test')).toHaveStyleRule('caption-side', 'top')
   })
   it('Renders a table with caption, and caption-side set to bottom', () => {
-    const { container } = render(
+    render(
       <Table>
         <Caption captionSide="bottom">test</Caption>
       </Table>,
     )
-    expect(container.querySelector('Caption')).toHaveStyleRule(
-      'caption-side',
-      'bottom',
-    )
+    expect(screen.getByText('test')).toHaveStyleRule('caption-side', 'bottom')
   })
 })
 
@@ -76,27 +62,26 @@ describe('Table', () => {
   })
   it('Can render a cell as a header cell', () => {
     const text = 'Name'
-    const { getByText, container } = render(
+    render(
       <Table>
         <Head>
           <Row>
-            <Cell>{text}</Cell>
+            <Cell data-testid="headercell">{text}</Cell>
           </Row>
         </Head>
       </Table>,
     )
 
-    const headerCell = getByText(text).parentElement
-    const th = container.querySelector('th')
-    expect(headerCell).toEqual(th)
+    const th = screen.getByTestId('headercell')
+    expect(th.nodeName).toEqual('TH')
   })
 
   it('Renders the header row visually different than the other rows by using a background colour', () => {
     const header = 'Header'
     const body = 'Body content'
-    const { getByText } = render(
+    render(
       <Table>
-        <Head>
+        <Head data-testid="head">
           <Row>
             <Cell>{header}</Cell>
           </Row>
@@ -108,8 +93,8 @@ describe('Table', () => {
         </Body>
       </Table>,
     )
-    const headElement = getByText(header).closest('thead')
-    const regularContent = getByText(body)
+    const headElement = screen.getByTestId('head')
+    const regularContent = screen.getByText(body)
     const cellBackground = trim(headerCellToken.background)
     const cellBorderBottom =
       headerCellToken.border.type === 'bordergroup'
@@ -125,7 +110,7 @@ describe('Table', () => {
 
   it('Adjusts font for better readability if the text is a number', () => {
     const text = '369470'
-    const { getByText } = render(
+    render(
       <Table>
         <Body>
           <Row>
@@ -134,12 +119,15 @@ describe('Table', () => {
         </Body>
       </Table>,
     )
+    // deconstructing so linter doesnt have a fit
+    const {
+      variants: {
+        numeric: { typography },
+      },
+    } = dataCellToken
+    const trimmedFontFeature = typography.fontFeature.replace(/\s*,\s*/g, ',')
 
-    const trimmedFontFeature = dataCellToken.variants.numeric.typography.fontFeature.replace(
-      /\s*,\s*/g,
-      ',',
-    )
-    expect(getByText(text)).toHaveStyleRule(
+    expect(screen.getByText(text)).toHaveStyleRule(
       'font-feature-settings',
       trimmedFontFeature,
     )
@@ -150,8 +138,8 @@ describe('Table', () => {
   `
 
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledTable />)
-    expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+    render(<StyledTable />)
+    expect(screen.getByRole('table')).toHaveStyleRule('clip-path', 'unset')
   })
 
   it('Has correct color on active row', () => {
@@ -189,33 +177,36 @@ describe('Table', () => {
     )
   })
   it('Has comfortable as default density', () => {
-    const cellText = 'Header content'
-    const headerText = 'Cell content'
-    const { getByText } = render(
+    const cellText = 'Cell content'
+    const headerText = 'Header content'
+    render(
       <Table>
         <Head>
-          <Row>
+          <Row data-testid="header-row">
             <Cell>{headerText}</Cell>
           </Row>
         </Head>
         <Body>
-          <Row>
+          <Row data-testid="body-row">
             <Cell>{cellText}</Cell>
           </Row>
         </Body>
       </Table>,
     )
 
-    expect(getByText(headerText).parentElement).toHaveStyleRule(
+    expect(screen.getByRole('columnheader')).toHaveStyleRule(
       'height',
       headerCellToken.height,
     )
-    expect(getByText(cellText)).toHaveStyleRule('height', dataCellToken.height)
+    expect(screen.getByRole('cell')).toHaveStyleRule(
+      'height',
+      dataCellToken.height,
+    )
   })
   it('Has compact density', () => {
-    const cellText = 'Header content'
-    const headerText = 'Cell content'
-    const { getByText } = render(
+    const cellText = 'Cell content'
+    const headerText = 'Header content'
+    render(
       <EdsProvider density="compact">
         <Table>
           <Head>
@@ -232,18 +223,18 @@ describe('Table', () => {
       </EdsProvider>,
     )
 
-    expect(getByText(headerText).parentElement).toHaveStyleRule(
+    expect(screen.getByRole('columnheader')).toHaveStyleRule(
       'height',
       headerCellToken.modes.compact.height,
     )
-    expect(getByText(cellText)).toHaveStyleRule(
+    expect(screen.getByRole('cell')).toHaveStyleRule(
       'height',
       dataCellToken.modes.compact.height,
     )
   })
   it('Has aria-sort when sort is provided', () => {
     const headerText = 'Cell content'
-    const { getByText } = render(
+    render(
       <Table>
         <Head>
           <Row>
@@ -252,13 +243,13 @@ describe('Table', () => {
         </Head>
       </Table>,
     )
-    const headerCell = getByText(headerText).parentElement
+    const headerCell = screen.getByRole('columnheader')
     expect(headerCell).toHaveAttribute('aria-sort', 'ascending')
   })
   it('Has active styling when sort is ascending or descending', () => {
     const headerText1 = 'Cell content'
     const headerText2 = 'Cell content 2'
-    const { getByText } = render(
+    render(
       <Table>
         <Head>
           <Row>
@@ -274,8 +265,8 @@ describe('Table', () => {
         ? headerCellToken.states.active.border.bottom.color
         : '',
     )
-    const headerCell1 = getByText(headerText1).parentElement
-    const headerCell2 = getByText(headerText2).parentElement
+    const headerCell1 = screen.getAllByRole('columnheader')[0]
+    const headerCell2 = screen.getAllByRole('columnheader')[1]
 
     expect(headerCell1).toHaveAttribute('aria-sort', 'ascending')
     expect(headerCell2).toHaveAttribute('aria-sort', 'descending')
