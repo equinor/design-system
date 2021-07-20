@@ -6,8 +6,6 @@ import { TextField } from '.'
 import { Icon } from '../Icon'
 import { save } from '@equinor/eds-icons'
 
-Icon.add({ save })
-
 afterEach(cleanup)
 
 describe('TextField', () => {
@@ -20,19 +18,15 @@ describe('TextField', () => {
   })
   it('Has correct label text', () => {
     const labelText = 'Some label'
-    const { queryByText } = render(
-      <TextField id="test-label" label={labelText} />,
-    )
+    render(<TextField id="test-label" label={labelText} />)
 
-    expect(queryByText(labelText)).toBeInTheDocument()
+    expect(screen.queryByText(labelText)).toBeInTheDocument()
   })
 
   it('Has correct default value', () => {
     const value = 'Some value'
-    const { queryByDisplayValue } = render(
-      <TextField id="test-value" value={value} readOnly />,
-    )
-    const inputElement = queryByDisplayValue(value) as HTMLInputElement
+    render(<TextField id="test-value" value={value} readOnly />)
+    const inputElement = screen.queryByDisplayValue(value) as HTMLInputElement
 
     expect(inputElement.value).toBe(value)
   })
@@ -45,7 +39,7 @@ describe('TextField', () => {
       value = ele.target.value
     }
 
-    const { getByDisplayValue } = render(
+    render(
       <TextField
         id="test-value-updated"
         value={value}
@@ -53,7 +47,7 @@ describe('TextField', () => {
       />,
     )
 
-    fireEvent.change(getByDisplayValue(value), {
+    fireEvent.change(screen.getByDisplayValue(value), {
       target: { value: newValue },
     })
 
@@ -74,10 +68,12 @@ describe('TextField', () => {
       <TextField
         id="test"
         label={labelText}
-        inputIcon={<Icon name="save" />}
+        inputIcon={<Icon data={save} />}
       />,
     )
-    const inputNode = screen.getByLabelText(labelText).parentNode
+    // eslint-disable-next-line testing-library/no-node-access
+    const inputNode = screen.getByLabelText(labelText).parentElement
+    // eslint-disable-next-line testing-library/no-node-access
     expect(inputNode.querySelectorAll('svg')).toHaveLength(1)
   })
   it('Can have an icon by the helper text', () => {
@@ -87,11 +83,13 @@ describe('TextField', () => {
         id="test"
         label="hi"
         helperText={helperText}
-        helperIcon={<Icon name="save" />}
+        helperIcon={<Icon data={save} />}
       />,
     )
-    const inputNode = screen.getByText(helperText).parentNode
-    expect(inputNode.querySelectorAll('svg')).toHaveLength(1)
+    // eslint-disable-next-line testing-library/no-node-access
+    const helperNode = screen.getByText(helperText).parentNode
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(helperNode.querySelectorAll('svg')).toHaveLength(1)
   })
 
   const StyledTextField = styled(TextField)`
@@ -102,6 +100,7 @@ describe('TextField', () => {
       <StyledTextField id="test-css-extend" variant="error" />,
     )
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('margin-top', '48px')
   })
 })
