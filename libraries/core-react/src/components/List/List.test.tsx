@@ -22,48 +22,48 @@ describe('Lists', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Renders an unordered list by default', () => {
-    const { container } = render(
+    render(
       <List>
         <List.Item>Item 1</List.Item>
       </List>,
     )
     expect(screen.queryByText('Item 1')).toBeInTheDocument()
-    expect(container.querySelector('ul')).toBeInTheDocument()
+    expect(screen.getByRole('list').nodeName).toEqual('UL')
   })
   it('Renders an unordered list with variant bullet', () => {
-    const { container } = render(
+    render(
       <List variant="bullet">
         <List.Item>Item 1</List.Item>
       </List>,
     )
     expect(screen.queryByText('Item 1')).toBeInTheDocument()
-    expect(container.querySelector('ul')).toBeInTheDocument()
+    expect(screen.getByRole('list').nodeName).toEqual('UL')
   })
   it('Renders an ordered list with variant numbered', () => {
-    const { container } = render(
+    render(
       <List variant="numbered">
         <List.Item>Item 1</List.Item>
       </List>,
     )
     expect(screen.queryByText('Item 1')).toBeInTheDocument()
-    expect(container.querySelector('ol')).toBeInTheDocument()
+    expect(screen.getByRole('list').nodeName).toEqual('OL')
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(
+    render(
       <StyledList>
         <List.Item>Item 1</List.Item>
       </StyledList>,
     )
-    expect(container.firstChild).toHaveStyleRule('margin-left', '0')
+    expect(screen.getByRole('list')).toHaveStyleRule('margin-left', '0')
   })
   it('Has start attribute if list variant is numbered', () => {
-    const { container } = render(
+    render(
       <List variant="numbered" start="10">
         <List.Item>Item 1</List.Item>
         <List.Item>Item 2</List.Item>
       </List>,
     )
-    expect(container.querySelector('ol')).toBeInTheDocument()
-    expect(container.firstChild).toHaveAttribute('start')
+    expect(screen.getByRole('list').nodeName).toEqual('OL')
+    expect(screen.getByRole('list')).toHaveAttribute('start')
   })
 })
