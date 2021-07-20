@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -26,45 +26,46 @@ describe('Icon', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Has correct svg data', () => {
-    const { queryByTestId } = render(<Icon name="save" />)
-    expect(queryByTestId('eds-icon-path')).toHaveAttribute(
+    render(<Icon name="save" />)
+    expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
       'd',
       save.svgPathData,
     )
   })
   it('Has correct svg data when using data property', () => {
-    const { queryByTestId } = render(<Icon data={save} />)
+    render(<Icon data={save} />)
 
-    expect(queryByTestId('eds-icon-path')).toHaveAttribute(
+    expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
       'd',
       save.svgPathData,
     )
   })
   it('Has correct color', () => {
-    const { container } = render(<Icon name="save" color="red" />)
+    render(<Icon name="save" color="red" title="icon" />)
 
-    expect(container.firstChild).toHaveAttribute('fill', 'red')
+    expect(screen.getByLabelText('icon')).toHaveAttribute('fill', 'red')
   })
   it('Has correct size', () => {
-    const { container } = render(<Icon name="save" size={48} />)
+    render(<Icon name="save" size={48} title="icon" />)
+    const icon = screen.getByLabelText('icon')
 
-    expect(container.firstChild).toHaveAttribute('height', '48px')
-    expect(container.firstChild).toHaveAttribute('width', '48px')
+    expect(icon).toHaveAttribute('height', '48px')
+    expect(icon).toHaveAttribute('width', '48px')
   })
   it('Has correct elements when using title', () => {
     const title = 'Save me'
-    const { container, queryAllByTitle } = render(
-      <Icon name="save" title={title} />,
-    )
+    render(<Icon name="save" title={title} />)
+    const icon = screen.getByLabelText(title)
 
-    expect(container.firstChild).toHaveAttribute('aria-labelledby')
-    expect(container.firstChild).toHaveAttribute('role', 'img')
-    expect(queryAllByTitle(title)).toHaveLength(2)
+    expect(icon).toHaveAttribute('aria-labelledby')
+    expect(icon).toHaveAttribute('role', 'img')
+    expect(screen.queryAllByTitle(title)).toHaveLength(2)
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledIcon name="save" />)
-    expect(container.firstChild).toHaveStyleRule('position', 'relative')
-    expect(container.firstChild).toHaveStyleRule('height', '100px')
-    expect(container.firstChild).toHaveStyleRule('width', '100px')
+    render(<StyledIcon name="save" title="icon" />)
+    const icon = screen.getByLabelText('icon')
+    expect(icon).toHaveStyleRule('position', 'relative')
+    expect(icon).toHaveStyleRule('height', '100px')
+    expect(icon).toHaveStyleRule('width', '100px')
   })
 })
