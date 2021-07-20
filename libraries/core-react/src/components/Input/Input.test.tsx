@@ -96,6 +96,7 @@ describe('Input', () => {
         id="test-css-extend"
         variant="error"
         value="textfield"
+        readOnly
       />,
     )
 
