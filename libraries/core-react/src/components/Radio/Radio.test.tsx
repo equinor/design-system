@@ -20,8 +20,11 @@ describe('Radio', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledRadio label="radio-test" />)
-    expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+    render(<StyledRadio label="radio-test" />)
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByLabelText('radio-test').parentElement.parentElement,
+    ).toHaveStyleRule('clip-path', 'unset')
   })
   it('Has provided label', () => {
     const label = 'Radio label'
@@ -31,8 +34,8 @@ describe('Radio', () => {
   })
   it('Can be selected', () => {
     const labelText = 'Radio label'
-    const { getByLabelText } = render(<Radio label={labelText} />)
-    const radio = getByLabelText(labelText)
+    render(<Radio label={labelText} />)
+    const radio = screen.getByLabelText(labelText)
     expect(radio).not.toBeChecked()
     fireEvent.click(radio)
     expect(radio).toBeChecked()
@@ -40,7 +43,7 @@ describe('Radio', () => {
   it('Can be a controlled component', () => {
     const handleChange = jest.fn()
     const labelText = 'Radio label'
-    const { getByLabelText } = render(
+    render(
       <Radio
         label={labelText}
         name="test"
@@ -48,7 +51,7 @@ describe('Radio', () => {
         onChange={handleChange}
       />,
     )
-    const radio = getByLabelText(labelText)
+    const radio = screen.getByLabelText(labelText)
     expect(radio).not.toBeChecked()
     expect(handleChange).toHaveBeenCalledTimes(0)
     fireEvent.click(radio)
@@ -57,14 +60,14 @@ describe('Radio', () => {
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
   it('Can be used in a group', () => {
-    const { getByLabelText } = render(
+    render(
       <div>
         <Radio label="Radio one" name="test" value="one" />
         <Radio label="Radio two" name="test" value="two" />
       </div>,
     )
-    const one = getByLabelText('Radio one')
-    const two = getByLabelText('Radio two')
+    const one = screen.getByLabelText('Radio one')
+    const two = screen.getByLabelText('Radio two')
     expect(one).not.toBeChecked()
     expect(two).not.toBeChecked()
     fireEvent.click(one)
@@ -75,8 +78,8 @@ describe('Radio', () => {
     expect(two).toBeChecked()
   })
   it('Can be disabled', () => {
-    const { getByLabelText } = render(<Radio label="Radio" disabled />)
-    const one = getByLabelText('Radio')
+    render(<Radio label="Radio" disabled />)
+    const one = screen.getByLabelText('Radio')
     expect(one).not.toBeChecked()
     // Can't use fireEvent
     // See https://github.com/testing-library/react-testing-library/issues/275
