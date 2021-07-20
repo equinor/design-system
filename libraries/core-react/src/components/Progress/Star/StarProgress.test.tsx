@@ -18,24 +18,27 @@ describe('StarProgress', () => {
   })
   it('has correct aria values when variant is "determinate"', () => {
     render(<StarProgress variant="determinate" value={50} />)
-    const progress = screen.getByRole('progressbar')
-    expect(progress).toHaveAttribute('aria-valuenow', '50')
-    expect(progress).toHaveAttribute('aria-valuemin', '0')
-    expect(progress).toHaveAttribute('aria-valuemax', '100')
+    const progressbar = screen.getByRole('progressbar')
+    expect(progressbar).toHaveAttribute('aria-valuenow', '50')
+    expect(progressbar).toHaveAttribute('aria-valuemin', '0')
+    expect(progressbar).toHaveAttribute('aria-valuemax', '100')
   })
   it('can extend the css for the component', () => {
-    const { container } = render(<StyledProgress />)
-    const progress = container.firstChild
-    expect(progress).toHaveStyleRule('position', 'absolute')
+    render(<StyledProgress />)
+    const progressbar = screen.getByRole('progressbar')
+
+    expect(progressbar).toHaveStyleRule('position', 'absolute')
   })
   it('has correct default width ', () => {
-    const { container } = render(<StarProgress />)
-    const progress = container.firstChild
-    expect(progress).toHaveAttribute('width', '48')
+    render(<StarProgress />)
+    const progressbar = screen.getByRole('progressbar')
+
+    expect(progressbar).toHaveAttribute('width', '48')
   })
   it('has correct width when size is 16', () => {
-    const { container } = render(<StarProgress size={16} />)
-    const progress = container.firstChild
-    expect(progress).toHaveAttribute('width', '16')
+    render(<StarProgress size={16} />)
+    const progressbar = screen.getByRole('progressbar')
+
+    expect(progressbar).toHaveAttribute('width', '16')
   })
 })
