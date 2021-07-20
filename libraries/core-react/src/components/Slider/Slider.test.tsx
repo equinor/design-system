@@ -45,20 +45,18 @@ describe('Simple slider', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Creates a simple slider when providing a number as value', () => {
-    const { container } = render(<Slider value={0} ariaLabelledby="test-one" />)
-    const input = container.querySelector('input')
+    render(<Slider value={0} ariaLabelledby="test-one" />)
+    const input = screen.getByRole('slider')
 
     expect(input).toBeDefined()
   })
   it('Sets the aria label', () => {
-    const { container } = render(
-      <Slider value={5} ariaLabelledby="test-label" />,
-    )
-    const input = container.querySelector('input')
+    render(<Slider value={5} ariaLabelledby="test-label" />)
+    const input = screen.getByRole('slider')
     expect(input).toHaveAttribute('aria-labelledby', 'test-label')
   })
   it('Can set min, max and step values', () => {
-    const { container } = render(
+    render(
       <Slider
         value={5}
         min={4}
@@ -67,32 +65,32 @@ describe('Simple slider', () => {
         ariaLabelledby="test-minmax"
       />,
     )
-    const input = container.querySelector('input')
+    const input = screen.getByRole('slider')
     expect(input).toHaveAttribute('min', '4')
     expect(input).toHaveAttribute('max', '10')
     expect(input).toHaveAttribute('step', '2')
   })
   it('Updates output according to value change', () => {
     const handleChange = jest.fn()
-    const { container } = render(
+    render(
       <Slider value={5} ariaLabelledby="test-value" onChange={handleChange} />,
     )
-    const input = container.querySelector('input')
-    const outputValue = container.querySelector('output')
+    const input = screen.getByRole('slider')
+    const outputValue = screen.getByRole('status')
     expect(outputValue).toHaveTextContent('5')
     fireEvent.change(input, { target: { value: '6' } })
     expect(outputValue).toHaveTextContent('6')
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
   it('Can format the output if a formatting function is provided', () => {
-    const { container } = render(
+    render(
       <DateSlider
         value={getUnixTime('2020-01-01')}
         ariaLabelledby="date-test"
       />,
     )
-    const outputValue = container.querySelector('output')
-    const input = container.querySelector('input')
+    const input = screen.getByRole('slider')
+    const outputValue = screen.getByRole('status')
     expect(outputValue).toHaveTextContent('Wednesday, January 1, 2020')
     expect(outputValue).not.toHaveTextContent('getUnixTime')
     expect(input).toHaveValue(getUnixTime('2020-01-01').toString())
@@ -121,14 +119,12 @@ describe('Simple slider', () => {
 
 describe('Range slider', () => {
   it('Creates a range slider when providing an array as value', () => {
-    const { container } = render(
-      <Slider value={[0, 20]} ariaLabelledby="test-array" />,
-    )
-    const inputs = container.querySelectorAll('input')
+    render(<Slider value={[0, 20]} ariaLabelledby="test-array" />)
+    const inputs = screen.queryAllByRole('slider')
     expect(inputs).toHaveLength(2)
   })
   it('Can set min, max and step values', () => {
-    const { container } = render(
+    render(
       <Slider
         value={[5, 6]}
         min={4}
@@ -137,7 +133,7 @@ describe('Range slider', () => {
         ariaLabelledby="test-range-minmax"
       />,
     )
-    const input = container.querySelector('input')
+    const input = screen.getAllByRole('slider')[1]
     expect(input).toHaveAttribute('min', '4')
     expect(input).toHaveAttribute('max', '10')
     expect(input).toHaveAttribute('step', '2')
@@ -145,14 +141,15 @@ describe('Range slider', () => {
   it('Updates output according to value change', () => {
     const handleChange = jest.fn()
     const ariaId = 'test-rangechange'
-    const { container } = render(
+    render(
       <Slider value={[3, 6]} ariaLabelledby={ariaId} onChange={handleChange} />,
     )
 
-    const inputA = container.querySelector(`#${ariaId}-thumb-a`)
-    const inputB = container.querySelector(`#${ariaId}-thumb-b`)
-    const outputA = container.querySelector(`output[for="${ariaId}-thumb-a"]`)
-    const outputB = container.querySelector(`output[for="${ariaId}-thumb-b"]`)
+    const inputA = screen.getAllByRole('slider')[0]
+    const inputB = screen.getAllByRole('slider')[1]
+    const outputA = screen.getAllByRole('status')[0]
+    const outputB = screen.getAllByRole('status')[1]
+
     expect(outputA).toHaveTextContent('3')
     expect(outputB).toHaveTextContent('6')
     fireEvent.change(inputA, { target: { value: '4' } })
@@ -164,16 +161,17 @@ describe('Range slider', () => {
   })
   it('Can format the output if a formatting function is provided', () => {
     const ariaId = 'test-output-formatting'
-    const { container } = render(
+    render(
       <DateSlider
         value={[getUnixTime('2020-01-01'), getUnixTime('2020-01-31')]}
         ariaLabelledby={ariaId}
       />,
     )
-    const outputA = container.querySelector(`output[for="${ariaId}-thumb-a"]`)
-    const outputB = container.querySelector(`output[for="${ariaId}-thumb-b"]`)
-    const inputA = container.querySelector(`#${ariaId}-thumb-a`)
-    const inputB = container.querySelector(`#${ariaId}-thumb-b`)
+    const inputA = screen.getAllByRole('slider')[0]
+    const inputB = screen.getAllByRole('slider')[1]
+    const outputA = screen.getAllByRole('status')[0]
+    const outputB = screen.getAllByRole('status')[1]
+
     expect(outputA).toHaveTextContent('Wednesday, January 1, 2020')
     expect(outputA).not.toHaveTextContent('getUnixTime')
     expect(outputB).toHaveTextContent('Friday, January 31, 2020')
