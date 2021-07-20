@@ -17,9 +17,10 @@ describe('Search', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledSearch />)
-    expect(container.firstChild).toHaveStyleRule('position', 'relative')
-    expect(container.firstChild).toHaveStyleRule('width', '50%')
+    render(<StyledSearch data-testid="search" />)
+    const search = screen.getByRole('search')
+    expect(search).toHaveStyleRule('position', 'relative')
+    expect(search).toHaveStyleRule('width', '50%')
   })
   it('Has rendered provided value in input field', () => {
     const value = 'provided value'
