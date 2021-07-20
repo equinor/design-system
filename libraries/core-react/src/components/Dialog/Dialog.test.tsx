@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -36,7 +36,7 @@ describe('Dialog', () => {
     const testIdCenter = 'dialog-test-center'
     const testIdActions = 'dialog-test-actions'
 
-    const { queryByTestId } = render(
+    render(
       <Dialog>
         <Title>
           <div data-testid={testIdTitle}>Title</div>
@@ -51,14 +51,14 @@ describe('Dialog', () => {
         </Actions>
       </Dialog>,
     )
-    expect(queryByTestId(testIdTitle)).toBeDefined()
-    expect(queryByTestId(testIdCenter)).toBeDefined()
-    expect(queryByTestId(testIdActions)).toBeDefined()
+    expect(screen.queryByTestId(testIdTitle)).toBeDefined()
+    expect(screen.queryByTestId(testIdCenter)).toBeDefined()
+    expect(screen.queryByTestId(testIdActions)).toBeDefined()
   })
   it('Has scrollable content when scrollable props is present', () => {
     const testIdCenter = 'dialog-test-center'
 
-    const { queryByTestId } = render(
+    render(
       <Dialog>
         <Title>
           <div>Title</div>
@@ -71,12 +71,15 @@ describe('Dialog', () => {
         </Actions>
       </Dialog>,
     )
-    expect(queryByTestId(testIdCenter)).toHaveStyleRule('overflow-y', 'auto')
+    expect(screen.queryByTestId(testIdCenter)).toHaveStyleRule(
+      'overflow-y',
+      'auto',
+    )
   })
 
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledDialog />)
-    const dialog = container.firstChild
+    render(<StyledDialog data-testid="dialog" />)
+    const dialog = screen.getByTestId('dialog')
     expect(dialog).toHaveStyleRule('background', 'red')
     expect(dialog).toHaveStyleRule('width', width)
     expect(dialog).toHaveStyleRule('min-height', minHeight)
