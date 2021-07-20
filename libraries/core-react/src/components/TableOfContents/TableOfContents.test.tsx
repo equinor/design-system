@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -29,16 +29,14 @@ describe('TableOfContents', () => {
     expect(asFragment).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(
-      <StyledTableOfContents>Stuff</StyledTableOfContents>,
-    )
-    const toc = container.firstChild
+    render(<StyledTableOfContents>Stuff</StyledTableOfContents>)
+    const toc = screen.getByRole('navigation')
     expect(toc).toHaveStyleRule('background', 'red')
   })
 
   it('Can have fixed position in container', () => {
     const testId = 'toc-test'
-    const { queryByTestId } = render(
+    render(
       <ScrollContainer>
         <TableOfContents data-testid={testId} sticky>
           Content
@@ -46,31 +44,31 @@ describe('TableOfContents', () => {
       </ScrollContainer>,
     )
 
-    expect(queryByTestId(testId)).toHaveStyleRule('position', 'fixed')
-    expect(queryByTestId(testId)).toHaveStyleRule('top', '32px')
-    expect(queryByTestId(testId)).toHaveStyleRule('right', '32px')
+    expect(screen.queryByTestId(testId)).toHaveStyleRule('position', 'fixed')
+    expect(screen.queryByTestId(testId)).toHaveStyleRule('top', '32px')
+    expect(screen.queryByTestId(testId)).toHaveStyleRule('right', '32px')
   })
 
   it('Has provided label', () => {
     const label = 'Some toc label'
-    const { queryByText } = render(
+    render(
       <TableOfContents label={label}>
         <LinkItem>Anchor</LinkItem>
       </TableOfContents>,
     )
-    expect(queryByText(label)).toBeDefined()
+    expect(screen.queryByText(label)).toBeDefined()
   })
 
   it('Has all provided content', () => {
     const testIdItem = 'toc-test-linkitem'
 
-    const { queryByTestId } = render(
+    render(
       <TableOfContents>
         <LinkItem data-testid={testIdItem}>
           <p>TestItem</p>
         </LinkItem>
       </TableOfContents>,
     )
-    expect(queryByTestId(testIdItem)).toBeDefined()
+    expect(screen.queryByTestId(testIdItem)).toBeDefined()
   })
 })
