@@ -10,6 +10,6 @@ export const useId = (idOverride: string, type?: string): string => {
         `eds-${type ? type + `-` : ''}${Math.round(Math.random() * 1e5)}`,
       )
     }
-  }, [defaultId])
+  }, [defaultId, type])
   return id
 }

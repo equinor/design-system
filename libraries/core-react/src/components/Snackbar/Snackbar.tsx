@@ -79,7 +79,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       }, autoHideDuration)
 
       return () => clearTimeout(timer.current)
-    }, [open])
+    }, [open, autoHideDuration, setVisible, onClose, clearTimeout, setTimeout])
 
     return (
       <>

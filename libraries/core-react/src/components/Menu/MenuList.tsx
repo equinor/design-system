@@ -73,7 +73,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
       if (focus === 'last') {
         setFocusedIndex(lastFocusIndex)
       }
-    }, [focus])
+    }, [focus, firstFocusIndex, lastFocusIndex, setFocusedIndex])
 
     const handleMenuItemChange = (
       direction: Direction,

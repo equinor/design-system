@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import {
@@ -272,28 +272,31 @@ export const Sortable: Story<TableProps> = () => {
     setState({ ...state, columns: updateColumns })
   }
 
-  const sortData = (data: Data[]) =>
-    data.sort((left, right) => {
-      const sortedCol = state.columns.find((col) => col.isSorted)
-      if (!sortedCol) {
-        return 1
-      }
-      const { sortDirection, accessor } = sortedCol
-      if (sortDirection === 'ascending') {
-        return left[accessor] > right[accessor] ? 1 : -1
-      }
-      if (sortDirection === 'descending') {
-        return left[accessor] < right[accessor] ? 1 : -1
-      }
-    })
+  const sortData = useCallback(
+    (data: Data[]) =>
+      data.sort((left, right) => {
+        const sortedCol = state.columns.find((col) => col.isSorted)
+        if (!sortedCol) {
+          return 1
+        }
+        const { sortDirection, accessor } = sortedCol
+        if (sortDirection === 'ascending') {
+          return left[accessor] > right[accessor] ? 1 : -1
+        }
+        if (sortDirection === 'descending') {
+          return left[accessor] < right[accessor] ? 1 : -1
+        }
+      }),
+    [state.columns],
+  )
 
   useEffect(() => {
     if (state.columns) {
       const sorted = sortData(data)
       const cellValues = toCellValues(sorted, columns)
-      setState({ ...state, cellValues })
+      setState((prevState) => ({ ...prevState, cellValues }))
     }
-  }, [state.columns])
+  }, [state.columns, setState, sortData])
 
   return (
     <Table>

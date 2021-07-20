@@ -126,7 +126,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return () => {
         clearTimeout(openTimer.current)
       }
-    }, [])
+    }, [clearTimeout])
 
     const openTooltip = () => {
       if (shouldOpen) {

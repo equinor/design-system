@@ -1,5 +1,9 @@
-import { cloneElement, Children as ReactChildren } from 'react'
-import { forwardRef, HTMLAttributes } from 'react'
+import {
+  cloneElement,
+  Children as ReactChildren,
+  forwardRef,
+  HTMLAttributes,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { Icon } from './Icon'
 import * as tokens from './Chip.tokens'
