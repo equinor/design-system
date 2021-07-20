@@ -131,7 +131,7 @@ module.exports = {
     // Testing linting
     {
       files: ['*.test.ts*'],
-      extends: ['plugin:testing-library/react'],
+      extends: ['plugin:testing-library/react', 'plugin:testing-library/dom'],
       plugins: ['testing-library'],
 
       rules: {
