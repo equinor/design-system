@@ -32,6 +32,7 @@ const TabsWithRefs = () => {
 const TabsWithPanels = ({
   selectedTabIndex = 0,
 }: {
+  // eslint-disable-next-line react/require-default-props
   selectedTabIndex?: number
 }) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
@@ -73,7 +74,7 @@ describe('Tabs', () => {
     expect(asFragment).toMatchSnapshot()
   })
   it('Renders a tablist with three tabs', () => {
-    const { container } = render(
+    render(
       <Tabs onChange={noop}>
         <Tabs.List>
           <Tabs.Tab>Tab one</Tabs.Tab>
@@ -83,7 +84,7 @@ describe('Tabs', () => {
       </Tabs>,
     )
     expect(screen.queryByRole('tablist')).toBeInTheDocument()
-    expect(container.querySelectorAll('[role = "tab"]')).toHaveLength(3)
+    expect(screen.queryAllByRole('tab')).toHaveLength(3)
   })
   it('Merges forwarded and local refs', () => {
     render(<TabsWithRefs />)
