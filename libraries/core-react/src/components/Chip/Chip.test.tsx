@@ -8,8 +8,6 @@ import { Avatar } from '../Avatar'
 import { Icon } from '../Icon'
 import * as tokens from './Chip.tokens'
 
-Icon.add({ add })
-
 const StyledChips = styled(Chip)`
   position: relative;
 `
@@ -24,44 +22,47 @@ describe('Chips', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(
       <Chip>
-        <Icon name="add" />
+        <Icon data={add} />
         Chip
       </Chip>,
     )
     expect(asFragment()).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledChips>styled chip</StyledChips>)
-    expect(container.firstChild).toHaveStyleRule('position', 'relative')
+    render(<StyledChips>styled chip</StyledChips>)
+    expect(screen.getByText('styled chip')).toHaveStyleRule(
+      'position',
+      'relative',
+    )
   })
   it('Has provided text', () => {
     const chipText = 'hello, I am a chip'
-    const { queryByText } = render(<Chip>{chipText}</Chip>)
-    expect(queryByText(chipText)).toBeDefined()
+    render(<Chip>{chipText}</Chip>)
+    expect(screen.queryByText(chipText)).toBeDefined()
   })
   it('Has provided Icon', () => {
     const chipText = 'hello, I am a chip'
     const iconTestId = 'avatar-chip-test'
-    const { queryByText, queryByTestId } = render(
+    render(
       <Chip>
-        <Icon name="add" data-testid={iconTestId} />
+        <Icon data={add} data-testid={iconTestId} />
         {chipText}
       </Chip>,
     )
-    expect(queryByText(chipText)).toBeDefined()
-    expect(queryByTestId(iconTestId)).toBeDefined()
+    expect(screen.queryByText(chipText)).toBeDefined()
+    expect(screen.queryByTestId(iconTestId)).toBeDefined()
   })
   it('Has correct styling when Icon is provided', () => {
     const chipText = 'hello, I am a chip'
     const iconTestId = 'avatar-chip-test'
-    const { queryByText, queryByTestId } = render(
+    render(
       <Chip>
-        <Icon name="add" data-testid={iconTestId} />
+        <Icon data={add} data-testid={iconTestId} />
         {chipText}
       </Chip>,
     )
-    const chip = queryByText(chipText)
-    const icon = queryByTestId(iconTestId)
+    const chip = screen.queryByText(chipText)
+    const icon = screen.queryByTestId(iconTestId)
 
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
@@ -78,32 +79,29 @@ describe('Chips', () => {
     const chipText = 'hello, I am a chip'
     const avatarTestId = 'avatar-chip-test'
     const imageUrl = 'https://i.imgur.com/UM3mrju.jpg'
-    const { queryByText, queryByTestId } = render(
+    render(
       <Chip>
         <Avatar src={imageUrl} data-testid={avatarTestId} alt="avatar" />
         {chipText}
       </Chip>,
     )
-    expect(queryByText(chipText)).toBeDefined()
-    expect(queryByTestId(avatarTestId)).toBeDefined()
-    expect(queryByTestId(avatarTestId).firstChild).toHaveAttribute(
-      'src',
-      imageUrl,
-    )
+    expect(screen.queryByText(chipText)).toBeDefined()
+    expect(screen.queryByTestId(avatarTestId)).toBeDefined()
+    expect(screen.getByAltText('avatar')).toHaveAttribute('src', imageUrl)
   })
 
   it('Has correct styling when Avatar is provided', () => {
     const chipText = 'hello, I am a chip'
     const avatarTestId = 'avatar-chip-test'
     const imageUrl = 'https://i.imgur.com/UM3mrju.jpg'
-    const { queryByText, queryByTestId } = render(
+    render(
       <Chip>
         <Avatar src={imageUrl} data-testid={avatarTestId} alt="avatar" />
         {chipText}
       </Chip>,
     )
-    const chip = queryByText(chipText)
-    const avatar = queryByTestId(avatarTestId)
+    const chip = screen.queryByText(chipText)
+    const avatar = screen.queryByTestId(avatarTestId)
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')
     expect(chip).toHaveStyleRule('padding-right', enabled.spacings.right)
@@ -112,7 +110,7 @@ describe('Chips', () => {
       enabled.border.type === 'border' && enabled.border.radius,
     )
     expect(avatar).toBeDefined()
-    expect(avatar.firstChild).toHaveAttribute('src', imageUrl)
+    expect(screen.getByAltText('avatar')).toHaveAttribute('src', imageUrl)
     expect(avatar).toHaveStyleRule('height', enabled.entities.icon.height)
     expect(avatar).toHaveStyleRule('width', enabled.entities.icon.width)
   })
@@ -122,16 +120,17 @@ describe('Chips', () => {
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleDelete = jest.fn((x: React.MouseEvent<HTMLElement>) => {
+      // eslint-disable-next-line testing-library/no-node-access
       callbackId = (x.target as HTMLElement).parentElement.id
     })
 
-    const { queryAllByTitle } = render(
+    render(
       <Chip id={chipId} onDelete={handleDelete}>
         {chipText}
       </Chip>,
     )
 
-    const closeIcon = queryAllByTitle('close')[0]
+    const closeIcon = screen.queryAllByTitle('close')[0]
 
     fireEvent.click(closeIcon)
 
@@ -146,13 +145,13 @@ describe('Chips', () => {
       callbackId = (x.target as HTMLElement).id
     })
 
-    const { container } = render(
-      <Chip id={chipId} onClick={handleClick}>
+    render(
+      <Chip id={chipId} onClick={handleClick} data-testid="chip">
         {chipText}
       </Chip>,
     )
 
-    fireEvent.click(container.firstChild)
+    fireEvent.click(screen.getByTestId('chip'))
 
     expect(handleClick).toHaveBeenCalled()
     expect(callbackId).toEqual(chipId)
@@ -165,13 +164,13 @@ describe('Chips', () => {
       callbackId = (x.target as HTMLElement).id
     })
 
-    const { container } = render(
-      <Chip id={chipId} onClick={handleClick}>
+    render(
+      <Chip id={chipId} onClick={handleClick} data-testid="chip">
         {chipText}
       </Chip>,
     )
 
-    fireEvent.click(container.firstChild, {
+    fireEvent.click(screen.getByTestId('chip'), {
       key: 'Enter',
     })
 
@@ -180,8 +179,8 @@ describe('Chips', () => {
   })
   it('Has correct active styling', () => {
     const chipText = 'hello, I am a chip'
-    const { queryByText } = render(<Chip variant="active">{chipText}</Chip>)
-    expect(queryByText(chipText)).toHaveStyleRule(
+    render(<Chip variant="active">{chipText}</Chip>)
+    expect(screen.queryByText(chipText)).toHaveStyleRule(
       'background',
       rgbaTrim(enabled.states.active.background),
     )
@@ -192,7 +191,7 @@ describe('Chips', () => {
 
     render(
       <Chip variant="error">
-        <Icon name="add" data-testid={iconTestId} />
+        <Icon data={add} data-testid={iconTestId} />
         {chipText}
       </Chip>,
     )
