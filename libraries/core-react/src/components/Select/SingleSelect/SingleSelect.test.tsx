@@ -1,5 +1,11 @@
 import { useState } from 'react'
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import {
+  render,
+  cleanup,
+  fireEvent,
+  screen,
+  within,
+} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
@@ -67,9 +73,9 @@ describe('SingleSelect', () => {
     const buttonNode = screen.getByLabelText('toggle options', {
       selector: 'button',
     })
-    expect(optionsNode.children).toHaveLength(0)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
     fireEvent.click(buttonNode)
-    expect(optionsNode.children).toHaveLength(3)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(3)
   })
 
   it('Can filter results by contains search', () => {
@@ -80,13 +86,13 @@ describe('SingleSelect', () => {
     const buttonNode = screen.getByLabelText('toggle options', {
       selector: 'button',
     })
-    expect(optionsNode.children).toHaveLength(0)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
     fireEvent.click(buttonNode)
-    expect(optionsNode.children).toHaveLength(3)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(3)
     fireEvent.change(inputNode, {
       target: { value: 'ree' },
     })
-    expect(optionsNode.children).toHaveLength(1)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(1)
   })
 
   it('Can be opened by using the keyboard', () => {
@@ -95,10 +101,10 @@ describe('SingleSelect', () => {
 
     const optionsNode = screen.getAllByLabelText(labelText)[1]
 
-    expect(optionsNode.children).toHaveLength(0)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
 
     fireEvent.keyDown(inputNode, { key: 'ArrowDown', code: 'ArrowDown' })
-    expect(optionsNode.children).toHaveLength(3)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(3)
   })
 
   it('Will focus on the first item when opening the list with the keyboard', () => {
@@ -107,7 +113,10 @@ describe('SingleSelect', () => {
     const optionsNode = screen.getAllByLabelText(labelText)[1]
 
     fireEvent.keyDown(inputNode, { key: 'ArrowDown', code: 'ArrowDown' })
-    expect(optionsNode.children[0]).toHaveAttribute('aria-selected', 'true')
+    expect(within(optionsNode).queryAllByRole('option')[0]).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
     fireEvent.keyDown(inputNode, { key: 'Enter', code: 'Enter' })
 
     expect(inputNode).toHaveValue('One')
@@ -119,13 +128,22 @@ describe('SingleSelect', () => {
 
     const optionsNode = screen.getAllByLabelText(labelText)[1]
 
-    expect(optionsNode.children).toHaveLength(0)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
 
     fireEvent.keyDown(inputNode, { key: 'ArrowDown', code: 'ArrowDown' })
-    expect(optionsNode.children[0]).toHaveAttribute('aria-selected', 'true')
+    expect(within(optionsNode).queryAllByRole('option')[0]).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
     fireEvent.keyDown(inputNode, { key: 'ArrowDown', code: 'ArrowDown' })
-    expect(optionsNode.children[0]).toHaveAttribute('aria-selected', 'false')
-    expect(optionsNode.children[1]).toHaveAttribute('aria-selected', 'true')
+    expect(within(optionsNode).queryAllByRole('option')[0]).toHaveAttribute(
+      'aria-selected',
+      'false',
+    )
+    expect(within(optionsNode).queryAllByRole('option')[1]).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
     fireEvent.keyDown(inputNode, { key: 'Enter', code: 'Enter' })
 
     expect(inputNode).toHaveValue('Two')
@@ -143,7 +161,7 @@ describe('SingleSelect', () => {
 
     expect(handleChange).toHaveBeenCalledTimes(0)
     fireEvent.click(buttonNode)
-    fireEvent.click(optionsNode.children[2])
+    fireEvent.click(within(optionsNode).queryAllByRole('option')[2])
     expect(inputNode).toHaveValue('Three')
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
@@ -156,6 +174,7 @@ describe('SingleSelect', () => {
     const { container } = render(
       <StyledSingleSelect label="test" items={items} />,
     )
+    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
   })
 })

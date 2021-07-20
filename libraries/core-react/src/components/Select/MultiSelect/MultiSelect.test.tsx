@@ -1,5 +1,11 @@
 import { useState } from 'react'
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import {
+  render,
+  cleanup,
+  fireEvent,
+  screen,
+  within,
+} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { UseMultipleSelectionStateChange } from 'downshift'
@@ -53,9 +59,9 @@ describe('MultiSelect', () => {
     const buttonNode = screen.getByLabelText('toggle options', {
       selector: 'button',
     })
-    expect(optionsNode.children).toHaveLength(0)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
     fireEvent.click(buttonNode)
-    expect(optionsNode.children).toHaveLength(3)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(3)
   })
 
   type ControlledProps = {
@@ -89,7 +95,7 @@ describe('MultiSelect', () => {
 
     expect(handleChange).toHaveBeenCalledTimes(0)
     fireEvent.click(buttonNode)
-    fireEvent.click(optionsNode.children[2])
+    fireEvent.click(within(optionsNode).queryAllByRole('option')[2])
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
 
@@ -102,13 +108,13 @@ describe('MultiSelect', () => {
     const buttonNode = screen.getByLabelText('toggle options', {
       selector: 'button',
     })
-    expect(optionsNode.children).toHaveLength(0)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
     fireEvent.click(buttonNode)
-    expect(optionsNode.children).toHaveLength(3)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(3)
     fireEvent.change(inputNode, {
       target: { value: 'ree' },
     })
-    expect(optionsNode.children).toHaveLength(1)
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(1)
   })
 
   const StyledMultiSelect = styled(MultiSelect)`
@@ -119,6 +125,7 @@ describe('MultiSelect', () => {
     const { container } = render(
       <StyledMultiSelect label="test" items={items} />,
     )
+    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
   })
 })

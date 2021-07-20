@@ -123,6 +123,7 @@ describe('NativeSelect', () => {
   `
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSelect label="test" id="testId" />)
+    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
   })
 })
