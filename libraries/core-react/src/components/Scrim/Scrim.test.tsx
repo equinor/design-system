@@ -15,7 +15,7 @@ const { width, height } = tokens
 
 afterEach(cleanup)
 
-const DismissableScrim = () => {
+const DismissableScrim = (props) => {
   const [visibleScrim, setVisibleScrim] = useState(true)
 
   const handleClose = (event, closed) => {
@@ -27,7 +27,7 @@ const DismissableScrim = () => {
   }
 
   return visibleScrim ? (
-    <Scrim onClose={handleClose} isDismissable>
+    <Scrim onClose={handleClose} isDismissable {...props}>
       <button type="button" onClick={() => setVisibleScrim(false)}>
         OK
       </button>
@@ -41,8 +41,8 @@ describe('Scrim', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Is dismissable with button click', () => {
-    const { container } = render(<DismissableScrim />)
-    const scrim = container.firstChild
+    render(<DismissableScrim data-testid="scrim" />)
+    const scrim = screen.getByTestId('scrim')
 
     expect(scrim).toBeInTheDocument()
     expect(screen.queryByText('OK')).toBeVisible()
@@ -51,8 +51,8 @@ describe('Scrim', () => {
     expect(scrim).not.toBeInTheDocument()
   })
   it('Is dismissable with Esc', () => {
-    const { container } = render(<DismissableScrim />)
-    const scrim = container.firstChild
+    render(<DismissableScrim data-testid="scrim" />)
+    const scrim = screen.getByTestId('scrim')
 
     expect(scrim).toBeInTheDocument()
     expect(screen.queryByText('OK')).toBeVisible()
@@ -64,13 +64,15 @@ describe('Scrim', () => {
   })
 
   it('Has correct style rules when visible', () => {
-    const { container } = render(<StyledScrim />)
-    const scrim = container.firstChild
+    render(<StyledScrim data-testid="scrim" />)
+    const scrim = screen.getByTestId('scrim')
+
     expect(scrim).toHaveStyleRule('display', 'flex')
   })
   it('Can extend the css for the component', () => {
-    const { container } = render(<StyledScrim />)
-    const scrim = container.firstChild
+    render(<StyledScrim data-testid="scrim" />)
+    const scrim = screen.getByTestId('scrim')
+
     expect(scrim).toHaveStyleRule('background', 'red')
     expect(scrim).toHaveStyleRule('width', width)
     expect(scrim).toHaveStyleRule('height', height)
