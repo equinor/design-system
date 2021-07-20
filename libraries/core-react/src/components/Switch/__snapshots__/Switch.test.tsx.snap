@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Switch Matches snapshot 1`] = `
-.c3 {
+<DocumentFragment>
+  .c3 {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -134,26 +135,27 @@ exports[`Switch Matches snapshot 1`] = `
 }
 
 <label
-  class="c0"
->
-  <input
-    class="c1 c2"
-    type="checkbox"
-  />
-  <span
-    class="c3 c4"
+    class="c0"
   >
-    <span
-      class="c5"
+    <input
+      class="c1 c2"
+      type="checkbox"
     />
     <span
-      class="c6"
-    />
-  </span>
-  <span
-    class="c7"
-  >
-    switch
-  </span>
-</label>
+      class="c3 c4"
+    >
+      <span
+        class="c5"
+      />
+      <span
+        class="c6"
+      />
+    </span>
+    <span
+      class="c7"
+    >
+      switch
+    </span>
+  </label>
+</DocumentFragment>
 `;

@@ -16,14 +16,12 @@ const StyledSwitch = styled(Switch)`
 
 describe('Switch', () => {
   it('Matches snapshot', () => {
-    render(<Switch label="switch" />)
-
-    const switchNode = screen.getByLabelText('switch').parentElement
-
-    expect(switchNode).toMatchSnapshot()
+    const { asFragment } = render(<Switch label="switch" />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSwitch label="switch-test" />)
+    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
   })
   it('Has provided label', () => {
@@ -34,8 +32,8 @@ describe('Switch', () => {
   })
   it('Can be turned on and off', () => {
     const labelText = 'Switch label'
-    const { getByLabelText } = render(<Switch label={labelText} />)
-    const switchElement = getByLabelText(labelText)
+    render(<Switch label={labelText} />)
+    const switchElement = screen.getByLabelText(labelText)
     expect(switchElement).not.toBeChecked()
     fireEvent.click(switchElement)
     expect(switchElement).toBeChecked()
@@ -44,27 +42,25 @@ describe('Switch', () => {
   })
   it('Has a small version', () => {
     const labelText = 'Small switch'
-    const { getByLabelText } = render(<Switch label={labelText} size="small" />)
-    const smallSwitch = getByLabelText(labelText)
+    render(<Switch label={labelText} size="small" />)
+    const smallSwitch = screen.getByLabelText(labelText)
     expect(smallSwitch).toBeDefined()
   })
   it('Can be disabled', () => {
-    const { getByLabelText } = render(
+    render(
       <div>
         <Switch label="Checkbox one" disabled />
       </div>,
     )
-    const one = getByLabelText('Checkbox one')
+    const one = screen.getByLabelText('Checkbox one')
     expect(one).not.toBeChecked()
     userEvent.click(one)
     expect(one).not.toBeChecked()
   })
   it('Can be set as default on without being a controlled component', () => {
     const labelText = 'Default checked switch'
-    const { getByLabelText } = render(
-      <Switch label={labelText} defaultChecked />,
-    )
-    const switchElement = getByLabelText(labelText)
+    render(<Switch label={labelText} defaultChecked />)
+    const switchElement = screen.getByLabelText(labelText)
     expect(switchElement).toBeChecked()
   })
 })
