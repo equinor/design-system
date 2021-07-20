@@ -79,7 +79,7 @@ module.exports = {
         // Disabled because of Typescript
         'react/prop-types': ['off'],
         'no-unused-vars': ['off'],
-        '@typescript-eslint/no-unused-vars': ['warn'],
+        // '@typescript-eslint/no-unused-vars': ['warn'],
         // Disabled because of react not having default export
         'import/default': ['off'],
         'import/no-default-export': ['error'],
@@ -93,16 +93,16 @@ module.exports = {
           },
         ],
         'react/react-in-jsx-scope': 'off',
-        'react/jsx-boolean-value': ['warn'],
+        // 'react/jsx-boolean-value': ['warn'],
         'react/jsx-pascal-case': ['error'],
-        'react/no-danger': ['warn'],
+        // 'react/no-danger': ['warn'],
         'react/prefer-stateless-function': ['error'],
         'react/no-unused-prop-types': ['error'],
         'react/no-array-index-key': ['error'],
         'react/no-typos': ['error'],
         'react/destructuring-assignment': ['error', 'always'],
-        'jsx-a11y/accessible-emoji': ['warn'],
-        'jsx-a11y/control-has-associated-label': ['warn'],
+        // 'jsx-a11y/accessible-emoji': ['warn'],
+        // 'jsx-a11y/control-has-associated-label': ['warn'],
         'jsx-a11y/label-has-associated-control': [
           'warn',
           {
@@ -113,8 +113,8 @@ module.exports = {
             depth: 25,
           },
         ],
-        '@typescript-eslint/restrict-plus-operands': ['warn'],
-        '@typescript-eslint/ban-ts-comment': ['warn'],
+        // '@typescript-eslint/restrict-plus-operands': ['warn'],
+        // '@typescript-eslint/ban-ts-comment': ['warn'],
         '@typescript-eslint/no-empty-interface': [
           'error',
           {
@@ -133,13 +133,6 @@ module.exports = {
       files: ['*.test.ts*'],
       extends: ['plugin:testing-library/react', 'plugin:testing-library/dom'],
       plugins: ['testing-library'],
-
-      rules: {
-        // Remove these rules when linting errors in tests are fixed
-        'testing-library/prefer-screen-queries': 'warn',
-        'testing-library/no-node-access': 'warn',
-        'testing-library/no-container': 'warn',
-      },
     },
     // Stories
     {
