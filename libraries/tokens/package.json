@@ -22,7 +22,8 @@
   },
   "files": [
     "dist/*",
-    "commonjs/*"
+    "commonjs/*",
+    "css/*"
   ],
   "scripts": {
     "build": "rollup -c",
