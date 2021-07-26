@@ -6,6 +6,7 @@ import typescript from 'rollup-plugin-typescript2'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 import del from 'rollup-plugin-delete'
 import { typescriptPaths } from 'rollup-plugin-typescript-paths'
+import styles from 'rollup-plugin-styles'
 
 import pkg from './package.json'
 
@@ -20,7 +21,7 @@ const globals = {
   'styled-components': 'styled',
 }
 
-const extensions = ['.jsx', '.js', '.tsx', '.ts']
+const extensions = ['.jsx', '.js', '.tsx', '.ts', '.css']
 
 export default [
   {
@@ -33,6 +34,7 @@ export default [
     plugins: [
       del({ targets: 'dist/*', runOnce: true }),
       resolve({ extensions }),
+      styles(),
       typescript({ useTsconfigDeclarationDir: true }),
       typescriptPaths(),
       babel({

@@ -35,3 +35,5 @@ export * from './components/Radio'
 export * from './components/Switch'
 export * from './components/EdsProvider'
 /* eslint-enable */
+
+import '@equinor/eds-tokens/css/tokens.css'

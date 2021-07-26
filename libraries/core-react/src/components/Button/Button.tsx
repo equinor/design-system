@@ -11,6 +11,7 @@ import {
 import { useToken } from '../../hooks'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
+import './button.module.css'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
@@ -142,7 +143,7 @@ export type ButtonProps = {
   /** Type of button
    * @default 'button'
    */
-  type?: string
+  // type?: string
   /** FullWidth (stretched) button  */
   fullWidth?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -166,7 +167,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const as: ElementType =
       href && !disabled ? 'a' : other.as ? other.as : 'button'
-    const type = href || other.as ? undefined : 'button'
+    // const type = href || other.as ? undefined : 'button'
 
     tabIndex = disabled ? -1 : tabIndex
 
@@ -174,7 +175,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ref,
       as,
       href,
-      type,
+      // type,
       disabled,
       tabIndex,
       ...other,
@@ -182,13 +183,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <ButtonBase {...buttonProps}>
+        <button {...buttonProps} className="eds-btn eds-btn-outlined">
           {fullWidth ? (
             <InnerFullWidth>{children}</InnerFullWidth>
           ) : (
             <Inner>{children}</Inner>
           )}
-        </ButtonBase>
+        </button>
       </ThemeProvider>
     )
   },
