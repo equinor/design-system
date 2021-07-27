@@ -183,7 +183,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <button {...buttonProps} className="eds-btn eds-btn-outlined">
+        <button
+          {...buttonProps}
+          className="eds-btn eds-typography-navigation__btn eds-btn--outlined eds-btn--secondary "
+        >
           {fullWidth ? (
             <InnerFullWidth>{children}</InnerFullWidth>
           ) : (

@@ -1,3 +1,13 @@
+/* TODO update Figma-broker css generation with utility classes */
+
+.eds-typography-navigation__btn {
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+}
+/* TODO  */
+
 /* Default is primary & contained styling */
 .eds-btn {
   --eds-btn-color: var(--eds_text_static_icons__primary_white);
@@ -12,8 +22,8 @@
   --eds-btn-width: var(--eds_shape_button_min_width), inherit;
 
   --eds-btn-border-width: 1px;
-  --eds-btn-border-color: transparent;
-  --eds-btn-border-color--hover: transparent;
+  --eds-btn-border-color: var(--eds_interactive_primary__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
   --eds-btn-border-color--disabled: var(--eds_interactive_disabled__border);
   --eds-btn-border-radius: var(--eds_shape_button_border_radius);
 
@@ -44,10 +54,6 @@
   border-radius: var(--eds-btn-border-radius);
 
   color: var(--eds-btn-color);
-  font-family: Equinor;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.143em;
   text-align: center;
 }
 
@@ -97,18 +103,58 @@
   color: var(--eds-btn-color--disabled);
 }
 
-.eds-btn-secondary {
+/** Colors */
+
+.eds-btn--primary {
   --eds-btn-background: var(--eds_interactive_primary__resting);
+
+  --eds-btn-color: var(--eds_text_static_icons__primary_white);
+  --eds-btn-color--hover: var(--eds_text_static_icons__primary_white);
+  --eds-btn-background--hover: var(--eds_interactive_primary__hover);
+  --eds-btn-border-color: var(--eds_interactive_primary__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
+}
+.eds-btn--secondary {
+  --eds-btn-background: var(--eds_interactive_secondary__resting);
+
+  --eds-btn-color: var(--eds_interactive_secondary__resting);
+  --eds-btn-color--hover: var(--eds_interactive_secondary__resting);
+  --eds-btn-background--hover: var(--eds_interactive_secondary__highlight);
+  --eds-btn-border-color: var(--eds_interactive_secondary__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_secondary__link_hover);
+}
+.eds-btn--danger {
+  --eds-btn-background: var(--eds_interactive_danger__resting);
+
+  --eds-btn-color: var(--eds_interactive_danger__resting);
+  --eds-btn-color--hover: var(--eds_interactive_danger__resting);
+  --eds-btn-background--hover: var(--eds_interactive_danger__hover);
+  --eds-btn-border-color: var(--eds_interactive_danger__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_danger__hover);
 }
 
-.eds-btn-outlined {
+/** Variants */
+.eds-btn--outlined {
+  --eds-btn-background: transparent;
+}
+
+/* .eds-btn--outlined.eds-btn--secondary,
+.eds-btn--outlined.eds-btn--secondary:hover {
+  --eds-btn-color: var(--eds_interactive_secondary__resting);
+  --eds-btn-color--hover: var(--eds_interactive_secondary__resting);
+  --eds-btn-background--hover: var(--eds_interactive_secondary__highlight);
+  --eds-btn-border-color: var(--eds_interactive_secondary__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_secondary__link_hover);
+} */
+
+.eds-btn--ghost {
+  --eds-btn-background: transparent;
+  --eds-btn-border-width: none;
+}
+
+.eds-btn--ghost-icon {
   --eds-btn-background: transparent;
   --eds-btn-color: var(--eds_interactive_primary__resting);
-  --eds-btn-border-color: var(--eds_interactive_primary__resting);
-}
-
-.eds-btn-outlined:hover {
-  --eds-btn-color--hover: var(--eds_interactive_primary__hover);
-  --eds-btn-background--hover: var(--eds_interactive_primary__hover_alt);
-  --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
+  --eds-btn-border-width: none;
+  --eds-btn-border-radius: 50%;
 }
