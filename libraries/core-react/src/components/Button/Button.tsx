@@ -1,5 +1,6 @@
 import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
+import clsx from 'clsx'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
 import {
@@ -11,7 +12,7 @@ import {
 import { useToken } from '../../hooks'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
-import './button.module.css'
+import './button.css'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
@@ -44,6 +45,12 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
       return getVariant(buttonToken.primary, variant)
   }
 }
+
+const getVariantClass = (variant: Variants): string =>
+  `eds-btn--${variant.replace('_', '-')}`
+
+const getColorClass = (color: Colors): string =>
+  `eds-btn--${color.replace('_', '-')}`
 
 const Inner = styled.span`
   display: grid;
@@ -181,12 +188,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ...other,
     }
 
+    const classNames = clsx([
+      'eds-btn',
+      'eds-typography-navigation__btn',
+      getColorClass(color),
+      getVariantClass(variant),
+    ])
+
     return (
       <ThemeProvider theme={token}>
-        <button
-          {...buttonProps}
-          className="eds-btn eds-typography-navigation__btn eds-btn--outlined eds-btn--secondary "
-        >
+        <button {...buttonProps} className={classNames}>
           {fullWidth ? (
             <InnerFullWidth>{children}</InnerFullWidth>
           ) : (

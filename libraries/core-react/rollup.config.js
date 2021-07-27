@@ -34,7 +34,7 @@ export default [
     plugins: [
       del({ targets: 'dist/*', runOnce: true }),
       resolve({ extensions }),
-      styles(),
+      styles({}),
       typescript({ useTsconfigDeclarationDir: true }),
       typescriptPaths(),
       babel({

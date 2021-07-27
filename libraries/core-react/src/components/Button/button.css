@@ -28,12 +28,10 @@
   --eds-btn-border-radius: var(--eds_shape_button_border_radius);
 
   --eds-btn-clickbound-height: var(--eds_clickbound_default__base);
-  --eds-btn-clicbound-top: calc(
-      -1 * var(--eds-btn-clicbound-top) - var(--eds-btn-height) / 2 + 1
-    )
-    px;
+  --eds-btn-clickbound-top: -7px; /** calc didnt work :( */
   --eds-btn-clicbound-left: -0px;
 
+  /** TODO make css token */
   --eds-btn-outline-color: rgba(0, 112, 121, 1);
 
   margin: 0;
@@ -72,7 +70,7 @@
 
 .eds-btn::after {
   position: absolute;
-  top: var(--eds-btn-clicbound-top);
+  top: var(--eds-btn-clickbound-top);
   left: var(--eds-btn-clicbound-left);
   width: 100%;
   height: var(--eds-btn-clickbound-height);
@@ -108,9 +106,9 @@
 .eds-btn--primary {
   --eds-btn-background: var(--eds_interactive_primary__resting);
 
-  --eds-btn-color: var(--eds_text_static_icons__primary_white);
-  --eds-btn-color--hover: var(--eds_text_static_icons__primary_white);
-  --eds-btn-background--hover: var(--eds_interactive_primary__hover);
+  --eds-btn-color: var(--eds_interactive_primary__resting);
+  --eds-btn-color--hover: var(--eds_interactive_primary__resting);
+  --eds-btn-background--hover: var(--eds_interactive_primary__hover_alt);
   --eds-btn-border-color: var(--eds_interactive_primary__resting);
   --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
 }
@@ -128,33 +126,47 @@
 
   --eds-btn-color: var(--eds_interactive_danger__resting);
   --eds-btn-color--hover: var(--eds_interactive_danger__resting);
-  --eds-btn-background--hover: var(--eds_interactive_danger__hover);
+  --eds-btn-background--hover: var(--eds_interactive_danger__highlight);
   --eds-btn-border-color: var(--eds_interactive_danger__resting);
   --eds-btn-border-color--hover: var(--eds_interactive_danger__hover);
 }
 
 /** Variants */
-.eds-btn--outlined {
-  --eds-btn-background: transparent;
+.eds-btn--contained {
+  --eds-btn-color: var(--eds_text_static_icons__primary_white);
+  --eds-btn-color--hover: var(--eds_text_static_icons__primary_white);
+}
+.eds-btn--contained.eds-btn--primary {
+  --eds-btn-background--hover: var(--eds_interactive_primary__hover);
+  --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
+}
+.eds-btn--contained.eds-btn--secondary {
+  --eds-btn-background--hover: var(--eds_interactive_secondary__link_hover);
+  --eds-btn-border-color--hover: var(--eds_interactive_secondary__link_hover);
+}
+.eds-btn--contained.eds-btn--danger {
+  --eds-btn-background--hover: var(--eds_interactive_danger__hover);
+  --eds-btn-border-color--hover: var(--eds_interactive_danger__hover);
 }
 
-/* .eds-btn--outlined.eds-btn--secondary,
-.eds-btn--outlined.eds-btn--secondary:hover {
-  --eds-btn-color: var(--eds_interactive_secondary__resting);
-  --eds-btn-color--hover: var(--eds_interactive_secondary__resting);
-  --eds-btn-background--hover: var(--eds_interactive_secondary__highlight);
-  --eds-btn-border-color: var(--eds_interactive_secondary__resting);
-  --eds-btn-border-color--hover: var(--eds_interactive_secondary__link_hover);
-} */
+.eds-btn--outlined {
+  --eds-btn-background: transparent;
+  --eds-btn-background--disabled: transparent;
+}
 
 .eds-btn--ghost {
   --eds-btn-background: transparent;
-  --eds-btn-border-width: none;
+  --eds-btn-background--disabled: transparent;
+  --eds-btn-border-width: 0;
 }
 
 .eds-btn--ghost-icon {
   --eds-btn-background: transparent;
-  --eds-btn-color: var(--eds_interactive_primary__resting);
-  --eds-btn-border-width: none;
+  --eds-btn-background--disabled: transparent;
+
+  --eds-btn-height: var(--eds_shape_icon_button_min_height);
+  --eds-btn-width: var(--eds_shape_icon_button_min_width);
+
+  --eds-btn-border-width: 0;
   --eds-btn-border-radius: 50%;
 }
