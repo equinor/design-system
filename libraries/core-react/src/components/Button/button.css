@@ -170,3 +170,17 @@
   --eds-btn-border-width: 0;
   --eds-btn-border-radius: 50%;
 }
+
+.eds-btn--compact {
+  /** TODO add compact shape css tokens */
+  --eds-btn-height: 24px;
+  --eds-btn-clickbound-height: var(--eds_clickbound_compact__standard);
+  --eds-btn-clickbound-top: -5px;
+}
+
+.eds-btn--compact.eds-btn--ghost-icon {
+  /** TODO add compact shape css tokens */
+  --eds-btn-height: 32px;
+  --eds-btn-width: 32px;
+  --eds-btn-clickbound-top: 0px;
+}

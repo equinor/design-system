@@ -52,6 +52,13 @@ const getVariantClass = (variant: Variants): string =>
 const getColorClass = (color: Colors): string =>
   `eds-btn--${color.replace('_', '-')}`
 
+const getDensityClass = (density: string): string => {
+  if (density === 'compact') {
+    return `eds-btn--compact`
+  }
+  return ''
+}
+
 const Inner = styled.span`
   display: grid;
   grid-gap: 8px;
@@ -193,6 +200,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'eds-typography-navigation__btn',
       getColorClass(color),
       getVariantClass(variant),
+      getDensityClass(density),
     ])
 
     return (
