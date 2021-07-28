@@ -94,7 +94,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
   outline: none;
 }
 
-.c9 {
+.c7 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -102,103 +102,6 @@ exports[`SingleSelect Matches snapshot 1`] = `
   font-weight: 400;
   line-height: 1.250em;
   text-align: left;
-}
-
-.c8 {
-  display: grid;
-  grid-gap: 8px;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c6 {
-  margin: 0;
-  padding: 0;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  background: transparent;
-  height: 48px;
-  width: 48px;
-  padding-left: 0;
-  padding-right: 0;
-  border: 0px solid transparent;
-  border-radius: 50%;
-  margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  font-family: Equinor;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.143em;
-  text-align: center;
-}
-
-.c6 svg {
-  justify-self: center;
-}
-
-.c6::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  min-height: auto;
-  content: '';
-}
-
-.c6::after {
-  position: absolute;
-  top: -0;
-  left: -0px;
-  width: 48px;
-  height: 48px;
-  content: '';
-}
-
-.c6:hover {
-  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
-  border: 0px solid transparent;
-  border-radius: 50%;
-}
-
-.c6:focus {
-  outline: none;
-}
-
-.c6[data-focus-visible-added]:focus {
-  outline: 1px dashed rgba(0,112,121,1);
-  outline-offset: 2px;
-}
-
-.c6::-moz-focus-inner {
-  border: 0;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-  background: transparent;
-  border: 1px solid transparent;
-  margin: 0;
-  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
-  font-family: Equinor;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.143em;
-  text-align: center;
-}
-
-.c6:disabled:hover {
-  background: transparent;
 }
 
 .c0 {
@@ -209,7 +112,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
   padding-right: calc( 24px + 8px + 8px + 0px );
 }
 
-.c10 {
+.c8 {
   background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
   box-shadow: 0 7px 8px rgba(0,0,0,0.2),0 5px 22px rgba(0,0,0,0.12),0 12px 17px rgba(0,0,0,0.14);
   overflow-y: scroll;
@@ -223,7 +126,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
   z-index: 50;
 }
 
-.c7 {
+.c6 {
   position: absolute;
   right: 8px;
   height: 24px;
@@ -268,13 +171,13 @@ exports[`SingleSelect Matches snapshot 1`] = `
       />
       <button
         aria-label="toggle options"
-        class="c6 c7"
+        class="c6"
+        density="comfortable"
         id="downshift-0-toggle-button"
         tabindex="-1"
-        type="button"
       >
         <span
-          class="c8"
+          class="eds-btn-inner"
         >
           <svg
             aria-hidden="true"
@@ -299,7 +202,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
     </div>
     <ul
       aria-labelledby="downshift-0-label"
-      class="c9 c10"
+      class="c7 c8"
       id="downshift-0-menu"
       role="listbox"
     />

@@ -2,104 +2,7 @@
 
 exports[`Pagination Matches snapshot 1`] = `
 <DocumentFragment>
-  .c4 {
-  display: grid;
-  grid-gap: 8px;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c3 {
-  margin: 0;
-  padding: 0;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  background: transparent;
-  height: 48px;
-  width: 48px;
-  padding-left: 0;
-  padding-right: 0;
-  border: 0px solid transparent;
-  border-radius: 50%;
-  margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  font-family: Equinor;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.143em;
-  text-align: center;
-}
-
-.c3 svg {
-  justify-self: center;
-}
-
-.c3::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  min-height: auto;
-  content: '';
-}
-
-.c3::after {
-  position: absolute;
-  top: -0;
-  left: -0px;
-  width: 48px;
-  height: 48px;
-  content: '';
-}
-
-.c3:hover {
-  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
-  border: 0px solid transparent;
-  border-radius: 50%;
-}
-
-.c3:focus {
-  outline: none;
-}
-
-.c3[data-focus-visible-added]:focus {
-  outline: 1px dashed rgba(0,112,121,1);
-  outline-offset: 2px;
-}
-
-.c3::-moz-focus-inner {
-  border: 0;
-}
-
-.c3:disabled {
-  cursor: not-allowed;
-  background: transparent;
-  border: 1px solid transparent;
-  margin: 0;
-  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
-  font-family: Equinor;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.143em;
-  text-align: center;
-}
-
-.c3:disabled:hover {
-  background: transparent;
-}
-
-.c0 {
+  .c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -144,13 +47,12 @@ exports[`Pagination Matches snapshot 1`] = `
       >
         <button
           aria-label="Go to previous page"
-          class="c3"
+          class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--ghost-icon"
           disabled=""
-          tabindex="-1"
-          type="button"
+          tabindex="0"
         >
           <span
-            class="c4"
+            class="eds-btn-inner"
           >
             <svg
               aria-hidden="true"
@@ -179,12 +81,12 @@ exports[`Pagination Matches snapshot 1`] = `
         <button
           aria-current="1"
           aria-label="Current page, page 1"
-          class="c3"
+          class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--ghost-icon"
+          page="1"
           tabindex="0"
-          type="button"
         >
           <span
-            class="c4"
+            class="eds-btn-inner"
           >
             1
           </span>
@@ -195,13 +97,12 @@ exports[`Pagination Matches snapshot 1`] = `
       >
         <button
           aria-label="Go to next page"
-          class="c3"
+          class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--ghost-icon"
           disabled=""
-          tabindex="-1"
-          type="button"
+          tabindex="0"
         >
           <span
-            class="c4"
+            class="eds-btn-inner"
           >
             <svg
               aria-hidden="true"

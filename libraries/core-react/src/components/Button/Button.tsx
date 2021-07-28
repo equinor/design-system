@@ -74,7 +74,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const buttonProps = {
       ref,
-      as,
       href,
       disabled,
       tabIndex,

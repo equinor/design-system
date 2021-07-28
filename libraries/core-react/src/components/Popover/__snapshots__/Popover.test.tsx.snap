@@ -8,103 +8,6 @@ exports[`Popover Matches snapshot 1`] = `
   box-shadow: 0 1px 10px rgba(0,0,0,0.2),0 4px 5px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.14);
 }
 
-.c7 {
-  display: grid;
-  grid-gap: 8px;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c5 {
-  margin: 0;
-  padding: 0;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  background: transparent;
-  height: 48px;
-  width: 48px;
-  padding-left: 0;
-  padding-right: 0;
-  border: 0px solid transparent;
-  border-radius: 50%;
-  margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  font-family: Equinor;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.143em;
-  text-align: center;
-}
-
-.c5 svg {
-  justify-self: center;
-}
-
-.c5::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  min-height: auto;
-  content: '';
-}
-
-.c5::after {
-  position: absolute;
-  top: -0;
-  left: -0px;
-  width: 48px;
-  height: 48px;
-  content: '';
-}
-
-.c5:hover {
-  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
-  border: 0px solid transparent;
-  border-radius: 50%;
-}
-
-.c5:focus {
-  outline: none;
-}
-
-.c5[data-focus-visible-added]:focus {
-  outline: 1px dashed rgba(0,112,121,1);
-  outline-offset: 2px;
-}
-
-.c5::-moz-focus-inner {
-  border: 0;
-}
-
-.c5:disabled {
-  cursor: not-allowed;
-  background: transparent;
-  border: 1px solid transparent;
-  margin: 0;
-  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
-  font-family: Equinor;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.143em;
-  text-align: center;
-}
-
-.c5:disabled:hover {
-  background: transparent;
-}
-
 .c1 {
   margin: 0;
   color: rgba(61,61,61,1);
@@ -178,7 +81,7 @@ exports[`Popover Matches snapshot 1`] = `
   left: -5px;
 }
 
-.c6 {
+.c5 {
   position: absolute;
   top: 8px;
   right: 16px;
@@ -186,7 +89,7 @@ exports[`Popover Matches snapshot 1`] = `
   width: 32px;
 }
 
-.c6:after {
+.c5:after {
   height: 32px;
 }
 
@@ -239,13 +142,12 @@ exports[`Popover Matches snapshot 1`] = `
   </div>
   <button
     aria-label="Close popover"
-    class="c5 c6"
+    class="c5"
     data-testid="popover-close"
     tabindex="0"
-    type="button"
   >
     <span
-      class="c7"
+      class="eds-btn-inner"
     >
       <svg
         aria-hidden="true"
