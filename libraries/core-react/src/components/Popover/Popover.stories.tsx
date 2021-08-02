@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { Typography, Button, Popover, PopoverProps } from '../..'
+import { Typography, Button, Popover, PopoverProps, Icon, Tooltip } from '../..'
+import { more_vertical } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
 
 const { Title, Content } = Popover
@@ -165,4 +166,31 @@ ActivateOnHover.parameters = {
     storyDescription:
       'Remember to use both `onMouseEnter` and `onFocus` attributes to your trigger element to be able to open the popover. A timeout delay (300ms) on `onMouseEnter` is recommended to avoid unwanted trigger while browsing.',
   },
+}
+
+export const WithTooltip: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  return (
+    <StoryCenter>
+      <Tooltip title="Menu">
+        <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
+          <Icon data={more_vertical} />
+        </Button>
+      </Tooltip>
+      <Popover
+        anchorEl={anchorRef.current}
+        open={isOpen}
+        onClose={closePopover}
+        placement="top"
+      >
+        <Popover.Title>Title</Popover.Title>
+        <Popover.Content>Content</Popover.Content>
+      </Popover>
+    </StoryCenter>
+  )
 }
