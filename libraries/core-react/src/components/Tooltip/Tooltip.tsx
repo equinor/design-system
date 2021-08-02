@@ -95,7 +95,7 @@ export type TooltipProps = {
   /** Tooltip title */
   title?: string
   /** Tooltip anchor element */
-  children: React.ReactElement
+  children: React.ReactElement & React.RefAttributes<HTMLElement>
   /** Delay in ms, default 100 */
   enterDelay?: number
 } & HTMLAttributes<HTMLDivElement>
@@ -109,9 +109,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const [popperEl, setPopperEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
-    const anchorRef = useRef<HTMLDivElement>()
     const openTimer = useRef<number>()
     const tooltipRef = useCombinedRefs<HTMLDivElement>(setPopperEl, ref)
+    const anchorRef = useRef<HTMLElement>()
+    const combinedChilddRef = useCombinedRefs<HTMLElement>(
+      anchorRef,
+      children?.ref,
+    )
     const tooltipId = useId(id, 'tooltip')
     const containerId = 'eds-tooltip-container'
     const shouldOpen = isMounted && title !== ''
@@ -160,7 +164,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     const updatedChildren = cloneElement(children, {
-      ref: anchorRef,
+      ref: combinedChilddRef,
       'aria-describedby': open ? tooltipId : null,
       onMouseOver: openTooltip,
       onMouseLeave: closeTooltip,
