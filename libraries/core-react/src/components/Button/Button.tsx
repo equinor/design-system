@@ -10,21 +10,6 @@ import { useEds } from '../EdsProvider'
 import './button.css'
 import './button.inner.css'
 
-type Colors = 'primary' | 'secondary' | 'danger'
-type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
-const getVariantClass = (variant: Variants): string =>
-  `eds-btn--${variant.replace('_', '-')}`
-
-const getColorClass = (color: Colors): string =>
-  `eds-btn--${color.replace('_', '-')}`
-
-const getDensityClass = (density: string): string => {
-  if (density === 'compact') {
-    return `eds-btn--compact`
-  }
-  return ''
-}
-
 export type ButtonProps = {
   /**  Specifies color */
   color?: 'primary' | 'secondary' | 'danger'
@@ -64,11 +49,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     // const type = href || other.as ? undefined : 'button'
 
     const classNames = clsx([
-      'eds-btn',
       'eds-typography-navigation__btn',
-      getColorClass(color),
-      getVariantClass(variant),
-      getDensityClass(density),
+      'eds-btn',
+      color,
+      variant,
+      density,
       other.className,
     ])
 
