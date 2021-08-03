@@ -47,7 +47,7 @@ exports[`Pagination Matches snapshot 1`] = `
       >
         <button
           aria-label="Go to previous page"
-          class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--ghost-icon"
+          class="eds-typography-navigation__btn eds-btn primary ghost_icon comfortable"
           disabled=""
           tabindex="0"
         >
@@ -81,7 +81,7 @@ exports[`Pagination Matches snapshot 1`] = `
         <button
           aria-current="1"
           aria-label="Current page, page 1"
-          class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--ghost-icon"
+          class="eds-typography-navigation__btn eds-btn primary ghost_icon comfortable"
           page="1"
           tabindex="0"
         >
@@ -97,7 +97,7 @@ exports[`Pagination Matches snapshot 1`] = `
       >
         <button
           aria-label="Go to next page"
-          class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--ghost-icon"
+          class="eds-typography-navigation__btn eds-btn primary ghost_icon comfortable"
           disabled=""
           tabindex="0"
         >

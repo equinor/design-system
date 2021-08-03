@@ -3,7 +3,7 @@
 exports[`Button Matches snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--contained"
+    class="eds-typography-navigation__btn eds-btn primary contained comfortable"
     tabindex="0"
   >
     <span

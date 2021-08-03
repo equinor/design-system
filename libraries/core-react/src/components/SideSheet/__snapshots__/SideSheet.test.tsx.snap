@@ -62,7 +62,7 @@ exports[`SideSheet Matches snapshot 1`] = `
       </h2>
       <button
         aria-label="Close sidesheet"
-        class="eds-btn eds-typography-navigation__btn eds-btn--primary eds-btn--ghost-icon"
+        class="eds-typography-navigation__btn eds-btn primary ghost_icon comfortable"
         tabindex="0"
         title="Close"
       >
