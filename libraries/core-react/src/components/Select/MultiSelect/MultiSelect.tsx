@@ -112,6 +112,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       getComboboxProps,
       highlightedIndex,
       getItemProps,
+      openMenu,
     } = useCombobox({
       inputValue,
       selectedItem: null,
@@ -184,6 +185,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               )}
               placeholder={placeholderText}
               readOnly={readOnly}
+              onFocus={openMenu}
               {...other}
             />
             <StyledButton
