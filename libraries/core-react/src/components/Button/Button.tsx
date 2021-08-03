@@ -37,6 +37,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       href,
       tabIndex = 0,
       fullWidth = false,
+      className,
       ...other
     },
     ref,
@@ -53,7 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       color,
       variant,
       density,
-      other.className,
+      className,
     ])
 
     const buttonProps = {
