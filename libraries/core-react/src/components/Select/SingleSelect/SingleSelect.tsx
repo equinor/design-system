@@ -78,7 +78,6 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       items,
       onSelectedItemChange: handleSelectedItemChange,
       onInputValueChange: ({ inputValue }) => {
-        console.log('inputValue', inputValue)
         setInputItems(
           items.filter((item) =>
             item.toLowerCase().includes(inputValue.toLowerCase()),
