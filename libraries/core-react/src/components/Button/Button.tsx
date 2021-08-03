@@ -8,7 +8,6 @@ import clsx from 'clsx'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
 import './button.css'
-import './button.inner.css'
 
 export type ButtonProps = {
   /**  Specifies color */
@@ -66,14 +65,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ...other,
     }
 
-    return createElement(as, buttonProps, [
+    return createElement(
+      as,
+      buttonProps,
       fullWidth ? (
-        <InnerFullWidth key="inner-full-width">{children}</InnerFullWidth>
+        <InnerFullWidth>{children}</InnerFullWidth>
       ) : (
-        <span className="eds-btn-inner" key="inner">
-          {children}
-        </span>
+        <span className="eds-btn-inner">{children}</span>
       ),
-    ])
+    )
   },
 )

@@ -1,5 +1,5 @@
 import { forwardRef, Children as ReactChildren, HTMLAttributes } from 'react'
-import './button.inner.css'
+import './button.css'
 
 export const InnerFullWidth = forwardRef<
   HTMLSpanElement,
@@ -15,7 +15,7 @@ export const InnerFullWidth = forwardRef<
   )
 
   return (
-    <span className="eds-btn-inner--full-width" ref={ref}>
+    <span className="eds-btn-inner full-width" ref={ref}>
       {updatedChildren}
     </span>
   )
