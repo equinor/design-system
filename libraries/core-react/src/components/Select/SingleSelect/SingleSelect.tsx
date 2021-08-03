@@ -75,9 +75,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     }, [items])
 
     let comboboxProps: UseComboboxProps<string> = {
-      items: inputItems,
+      items,
       onSelectedItemChange: handleSelectedItemChange,
       onInputValueChange: ({ inputValue }) => {
+        console.log('inputValue', inputValue)
         setInputItems(
           items.filter((item) =>
             item.toLowerCase().includes(inputValue.toLowerCase()),
@@ -101,11 +102,17 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       highlightedIndex,
       getItemProps,
       openMenu,
+      selectedItem,
+      inputValue,
     } = useCombobox(comboboxProps)
 
     const openSelect = () => {
       !isOpen && openMenu()
     }
+    const displayedItems =
+      inputItems.length === 1 && inputValue === inputItems[0]
+        ? items
+        : inputItems
 
     return (
       <ThemeProvider theme={token}>
@@ -135,9 +142,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
           </StyledInputWrapper>
           <StyledList {...getMenuProps()}>
             {isOpen &&
-              inputItems.map((item, index) => (
+              displayedItems.map((item, index) => (
                 <PaddedStyledListItem
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
+                  active={selectedItem === item ? 'true' : 'false'}
                   key={`${item}`}
                   {...getItemProps({ item, index, disabled: disabled })}
                   density={density}

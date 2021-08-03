@@ -43,6 +43,9 @@ export const select: ComponentToken = {
     hover: {
       background: colors.ui.background__light.rgba,
     },
+    active: {
+      background: colors.interactive.primary__selected_highlight.rgba,
+    },
   },
   entities: {
     button: {

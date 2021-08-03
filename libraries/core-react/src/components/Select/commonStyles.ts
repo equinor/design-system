@@ -14,7 +14,7 @@ type ContainerProps = HTMLAttributes<HTMLDivElement>
 
 type StyledListItemType = {
   highlighted: string
-  density: string
+  active: string
 }
 
 type StyledButtonType = {
@@ -46,17 +46,22 @@ export const StyledList = styled(List)`
   left: 0;
   z-index: 50;
 `
-export const StyledListItem = styled(List.Item)<StyledListItemType>`
-  list-style: none;
-  ${typographyTemplate(selectToken.typography)};
-  margin: 0;
-  background-color: ${({ highlighted }) =>
-    highlighted === 'true'
-      ? selectToken.states.hover.background
-      : selectToken.background};
-  cursor: ${({ highlighted }) =>
-    highlighted === 'true' ? 'pointer' : 'default'};
-`
+
+export const StyledListItem = styled(List.Item)<StyledListItemType>(
+  ({ theme, highlighted, active }) => {
+    return css`
+      margin: 0;
+      list-style: none;
+      ${typographyTemplate(theme.typography)};
+      background-color: ${highlighted === 'true'
+        ? theme.states.hover.background
+        : active === 'true'
+        ? theme.states.active.background
+        : theme.background};
+      cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
+    `
+  },
+)
 
 export const StyledButton = styled(Button)<StyledButtonType>`
   position: absolute;
