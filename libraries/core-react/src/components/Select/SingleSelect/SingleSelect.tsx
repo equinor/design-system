@@ -66,6 +66,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     ref,
   ) {
     const [inputItems, setInputItems] = useState(items)
+
     const isControlled = selectedOption !== undefined ? true : false
     const { density } = useEds()
     const token = useToken({ density }, tokens)()
@@ -75,7 +76,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     }, [items])
 
     let comboboxProps: UseComboboxProps<string> = {
-      items,
+      items: inputItems,
       onSelectedItemChange: handleSelectedItemChange,
       onInputValueChange: ({ inputValue }) => {
         setInputItems(
@@ -83,6 +84,11 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
             item.toLowerCase().includes(inputValue.toLowerCase()),
           ),
         )
+      },
+      onIsOpenChange: ({ selectedItem }) => {
+        if (inputItems.length === 1 && selectedItem === inputItems[0]) {
+          setInputItems(items)
+        }
       },
       initialSelectedItem,
     }
@@ -102,7 +108,6 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       getItemProps,
       openMenu,
       selectedItem,
-      inputValue,
     } = useCombobox(comboboxProps)
 
     const openSelect = () => {
@@ -141,7 +146,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
           </StyledInputWrapper>
           <StyledList {...getMenuProps()}>
             {isOpen &&
-              displayedItems.map((item, index) => (
+              inputItems.map((item, index) => (
                 <PaddedStyledListItem
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
                   active={selectedItem === item ? 'true' : 'false'}
