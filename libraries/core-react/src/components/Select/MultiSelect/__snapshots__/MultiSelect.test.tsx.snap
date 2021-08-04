@@ -44,7 +44,7 @@ exports[`MultiSelect Matches snapshot 2`] = `
 
 <button
   aria-label="toggle options"
-  class="c0"
+  class="eds-typography-navigation__btn eds-btn primary ghost_icon comfortable c0"
   density="comfortable"
   id="downshift-0-toggle-button"
   tabindex="-1"

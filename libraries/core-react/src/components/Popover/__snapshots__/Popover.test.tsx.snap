@@ -142,7 +142,7 @@ exports[`Popover Matches snapshot 1`] = `
   </div>
   <button
     aria-label="Close popover"
-    class="c5"
+    class="eds-typography-navigation__btn eds-btn primary ghost_icon comfortable c5"
     data-testid="popover-close"
     tabindex="0"
   >
