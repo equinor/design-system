@@ -98,6 +98,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       removeSelectedItem,
       selectedItems,
     } = useMultipleSelection(multipleSelectionProps)
+
     const getFilteredItems = (items: string[]) =>
       items.filter((item) =>
         item.toLowerCase().includes(inputValue.toLowerCase()),
@@ -117,7 +118,6 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       inputValue,
       selectedItem: null,
       items: getFilteredItems(items),
-
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
         switch (type) {
@@ -185,7 +185,9 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               )}
               placeholder={placeholderText}
               readOnly={readOnly}
-              onFocus={openMenu}
+              onFocus={() => {
+                !isOpen && openMenu()
+              }}
               {...other}
             />
             <StyledButton

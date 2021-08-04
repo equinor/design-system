@@ -116,7 +116,9 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
             <PaddedInput
               {...getInputProps({ disabled: disabled })}
               readOnly={readOnly}
-              onFocus={openMenu}
+              onFocus={() => {
+                !isOpen && openMenu()
+              }}
               {...other}
             />
             <StyledButton
