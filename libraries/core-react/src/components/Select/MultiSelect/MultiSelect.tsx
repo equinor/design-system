@@ -8,7 +8,7 @@ import {
 import { Label } from '../../Label'
 import { Icon } from '../../Icon'
 import { CheckboxInput } from '../../Checkbox/Input'
-import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
+import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import styled, { ThemeProvider } from 'styled-components'
 import { multiSelect as tokens } from '../Select.tokens'
 import {
@@ -97,6 +97,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       addSelectedItem,
       removeSelectedItem,
       selectedItems,
+      reset,
     } = useMultipleSelection(multipleSelectionProps)
 
     const getFilteredItems = (items: string[]) =>
@@ -190,6 +191,18 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               }}
               {...other}
             />
+            {Boolean(selectedItems.length || inputValue) && (
+              <StyledButton
+                variant="ghost_icon"
+                disabled={disabled || readOnly}
+                aria-label={'clear options'}
+                title="clear"
+                onClick={reset}
+                style={{ right: 32 }}
+              >
+                <Icon data={close} size={16} />
+              </StyledButton>
+            )}
             <StyledButton
               variant="ghost_icon"
               {...getToggleButtonProps({ disabled: disabled || readOnly })}

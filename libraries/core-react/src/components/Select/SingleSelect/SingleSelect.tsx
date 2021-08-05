@@ -7,7 +7,7 @@ import {
 import styled, { ThemeProvider } from 'styled-components'
 import { Label } from '../../Label'
 import { Icon } from '../../Icon'
-import { arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
+import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import { spacingsTemplate } from '../../../utils'
 import { select as tokens } from '../Select.tokens'
 import {
@@ -107,6 +107,8 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       getItemProps,
       openMenu,
       selectedItem,
+      reset,
+      inputValue,
     } = useCombobox(comboboxProps)
 
     const openSelect = () => {
@@ -132,6 +134,18 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               onClick={openSelect}
               {...other}
             />
+            {Boolean(inputValue) && (
+              <StyledButton
+                variant="ghost_icon"
+                disabled={disabled || readOnly}
+                aria-label={'clear options'}
+                title="clear"
+                onClick={reset}
+                style={{ right: 32 }}
+              >
+                <Icon data={close} size={16} />
+              </StyledButton>
+            )}
             <StyledButton
               variant="ghost_icon"
               {...getToggleButtonProps({ disabled: disabled || readOnly })}
