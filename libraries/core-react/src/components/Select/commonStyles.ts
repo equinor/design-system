@@ -14,11 +14,7 @@ type ContainerProps = HTMLAttributes<HTMLDivElement>
 
 type StyledListItemType = {
   highlighted: string
-  density: string
-}
-
-type StyledButtonType = {
-  density: string
+  active?: string
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -46,28 +42,41 @@ export const StyledList = styled(List)`
   left: 0;
   z-index: 50;
 `
-export const StyledListItem = styled(List.Item)<StyledListItemType>`
-  list-style: none;
-  ${typographyTemplate(selectToken.typography)};
-  margin: 0;
-  background-color: ${({ highlighted }) =>
-    highlighted === 'true'
-      ? selectToken.states.hover.background
-      : selectToken.background};
-  cursor: ${({ highlighted }) =>
-    highlighted === 'true' ? 'pointer' : 'default'};
-`
 
-export const StyledButton = styled(Button)<StyledButtonType>`
-  position: absolute;
-  right: ${buttonToken.spacings.right};
-  height: ${buttonToken.height};
-  width: ${buttonToken.height};
-  ${({ density }) =>
-    density === 'compact'
-      ? css({ top: selectToken.modes.compact.entities.button.spacings.top })
-      : css({ top: buttonToken.spacings.top })}
-`
+export const StyledListItem = styled(List.Item)<StyledListItemType>(
+  ({ theme, highlighted, active }) => {
+    const backgroundColor =
+      highlighted === 'true'
+        ? theme.states.hover.background
+        : active === 'true'
+        ? theme.states.active.background
+        : theme.background
+
+    return css`
+      margin: 0;
+      list-style: none;
+      background-color: ${backgroundColor};
+      ${typographyTemplate(theme.typography)};
+      cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
+    `
+  },
+)
+
+export const StyledButton = styled(Button)(
+  ({
+    theme: {
+      entities: { button },
+    },
+  }) => {
+    return css`
+      position: absolute;
+      right: ${button.spacings.right};
+      height: ${button.height};
+      width: ${button.height};
+      top: ${button.spacings.top};
+    `
+  },
+)
 
 export const StyledInputWrapper = styled.div`
   position: relative;

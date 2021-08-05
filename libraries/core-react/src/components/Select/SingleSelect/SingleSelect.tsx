@@ -84,6 +84,11 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
           ),
         )
       },
+      onIsOpenChange: ({ selectedItem }) => {
+        if (inputItems.length === 1 && selectedItem === inputItems[0]) {
+          setInputItems(items)
+        }
+      },
       initialSelectedItem,
     }
 
@@ -101,6 +106,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       highlightedIndex,
       getItemProps,
       openMenu,
+      selectedItem,
     } = useCombobox(comboboxProps)
 
     const openSelect = () => {
@@ -128,7 +134,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               variant="ghost_icon"
               {...getToggleButtonProps({ disabled: disabled || readOnly })}
               aria-label={'toggle options'}
-              density={density}
+              title="open"
             >
               <Icon data={isOpen ? arrow_drop_up : arrow_drop_down} />
             </StyledButton>
@@ -138,9 +144,9 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               inputItems.map((item, index) => (
                 <PaddedStyledListItem
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
+                  active={selectedItem === item ? 'true' : 'false'}
                   key={`${item}`}
                   {...getItemProps({ item, index, disabled: disabled })}
-                  density={density}
                 >
                   {item}
                 </PaddedStyledListItem>

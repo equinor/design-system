@@ -271,6 +271,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
         class="c6 c7"
         id="downshift-0-toggle-button"
         tabindex="-1"
+        title="open"
         type="button"
       >
         <span

@@ -144,6 +144,7 @@ exports[`MultiSelect Matches snapshot 2`] = `
   class="c0 c1"
   id="downshift-0-toggle-button"
   tabindex="-1"
+  title="open"
   type="button"
 >
   <span
