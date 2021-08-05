@@ -166,6 +166,12 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     const placeholderText =
       items.length > 0 ? `${selectedItems.length}/${items.length} selected` : ''
 
+    const openSelect = () => {
+      if (!isOpen && !(disabled || readOnly)) {
+        openMenu()
+      }
+    }
+
     return (
       <ThemeProvider theme={token}>
         <Container className={className} ref={ref}>
@@ -186,9 +192,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               )}
               placeholder={placeholderText}
               readOnly={readOnly}
-              onFocus={() => {
-                !isOpen && openMenu()
-              }}
+              onFocus={openSelect}
               {...other}
             />
             {Boolean(selectedItems.length || inputValue) && (
