@@ -113,10 +113,6 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     const openSelect = () => {
       !isOpen && openMenu()
     }
-    const displayedItems =
-      inputItems.length === 1 && inputValue === inputItems[0]
-        ? items
-        : inputItems
 
     return (
       <ThemeProvider theme={token}>
