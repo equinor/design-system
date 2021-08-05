@@ -17,10 +17,6 @@ type StyledListItemType = {
   active?: string
 }
 
-type StyledButtonType = {
-  density: string
-}
-
 export const Container = styled.div<ContainerProps>`
   position: relative;
 `
@@ -66,16 +62,21 @@ export const StyledListItem = styled(List.Item)<StyledListItemType>(
   },
 )
 
-export const StyledButton = styled(Button)<StyledButtonType>`
-  position: absolute;
-  right: ${buttonToken.spacings.right};
-  height: ${buttonToken.height};
-  width: ${buttonToken.height};
-  ${({ density }) =>
-    density === 'compact'
-      ? css({ top: selectToken.modes.compact.entities.button.spacings.top })
-      : css({ top: buttonToken.spacings.top })}
-`
+export const StyledButton = styled(Button)(
+  ({
+    theme: {
+      entities: { button },
+    },
+  }) => {
+    return css`
+      position: absolute;
+      right: ${button.spacings.right};
+      height: ${button.height};
+      width: ${button.height};
+      top: ${button.spacings.top};
+    `
+  },
+)
 
 export const StyledInputWrapper = styled.div`
   position: relative;

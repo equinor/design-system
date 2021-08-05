@@ -134,7 +134,6 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               variant="ghost_icon"
               {...getToggleButtonProps({ disabled: disabled || readOnly })}
               aria-label={'toggle options'}
-              density={density}
               title="open"
             >
               <Icon data={isOpen ? arrow_drop_up : arrow_drop_down} />
@@ -148,7 +147,6 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
                   active={selectedItem === item ? 'true' : 'false'}
                   key={`${item}`}
                   {...getItemProps({ item, index, disabled: disabled })}
-                  density={density}
                 >
                   {item}
                 </PaddedStyledListItem>
