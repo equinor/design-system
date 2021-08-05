@@ -135,6 +135,7 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
               {...getToggleButtonProps({ disabled: disabled || readOnly })}
               aria-label={'toggle options'}
               density={density}
+              title="open"
             >
               <Icon data={isOpen ? arrow_drop_up : arrow_drop_down} />
             </StyledButton>
