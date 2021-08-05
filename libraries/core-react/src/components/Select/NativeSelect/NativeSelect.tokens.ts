@@ -16,7 +16,7 @@ export const nativeselect: SelectComponentToken = {
   background: colors.ui.background__light.rgba,
   typography: {
     ...typography.input.text,
-    color: colors.text.static_icons__tertiary.rgba,
+    color: colors.text.static_icons__default.rgba,
   },
   entities: {
     input: {

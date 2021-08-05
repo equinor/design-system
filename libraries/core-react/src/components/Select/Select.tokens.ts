@@ -33,7 +33,7 @@ export const select: ComponentToken = {
   },
   typography: {
     ...typography.navigation.menu_title,
-    color: colors.text.static_icons__tertiary.rgba,
+    color: colors.text.static_icons__default.rgba,
   },
   border: {
     type: 'border',
@@ -41,7 +41,7 @@ export const select: ComponentToken = {
   },
   states: {
     hover: {
-      background: colors.ui.background__light.rgba,
+      background: colors.ui.background__medium.rgba,
     },
     active: {
       background: colors.interactive.primary__selected_highlight.rgba,
