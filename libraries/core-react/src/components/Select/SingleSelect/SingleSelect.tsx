@@ -110,7 +110,9 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     } = useCombobox(comboboxProps)
 
     const openSelect = () => {
-      !isOpen && openMenu()
+      if (!isOpen && !(disabled || readOnly)) {
+        openMenu()
+      }
     }
 
     return (
