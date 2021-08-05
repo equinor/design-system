@@ -14,7 +14,7 @@ type ContainerProps = HTMLAttributes<HTMLDivElement>
 
 type StyledListItemType = {
   highlighted: string
-  active: string
+  active?: string
 }
 
 type StyledButtonType = {
@@ -49,15 +49,18 @@ export const StyledList = styled(List)`
 
 export const StyledListItem = styled(List.Item)<StyledListItemType>(
   ({ theme, highlighted, active }) => {
-    return css`
-      margin: 0;
-      list-style: none;
-      ${typographyTemplate(theme.typography)};
-      background-color: ${highlighted === 'true'
+    const backgroundColor =
+      highlighted === 'true'
         ? theme.states.hover.background
         : active === 'true'
         ? theme.states.active.background
-        : theme.background};
+        : theme.background
+
+    return css`
+      margin: 0;
+      list-style: none;
+      background-color: ${backgroundColor};
+      ${typographyTemplate(theme.typography)};
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
     `
   },

@@ -66,7 +66,6 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
     ref,
   ) {
     const [inputItems, setInputItems] = useState(items)
-
     const isControlled = selectedOption !== undefined ? true : false
     const { density } = useEds()
     const token = useToken({ density }, tokens)()
