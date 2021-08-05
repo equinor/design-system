@@ -103,6 +103,10 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
       openMenu,
     } = useCombobox(comboboxProps)
 
+    const openSelect = () => {
+      !isOpen && openMenu()
+    }
+
     return (
       <ThemeProvider theme={token}>
         <Container className={className} ref={ref}>
@@ -116,9 +120,8 @@ export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
             <PaddedInput
               {...getInputProps({ disabled: disabled })}
               readOnly={readOnly}
-              onFocus={() => {
-                !isOpen && openMenu()
-              }}
+              onFocus={openSelect}
+              onClick={openSelect}
               {...other}
             />
             <StyledButton
