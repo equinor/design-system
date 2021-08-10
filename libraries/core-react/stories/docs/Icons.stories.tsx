@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   grid-template-columns: auto 14rem;
 `
 
-const Label = styled.p`
+const Label = styled(Typography)`
   text-align: center;
   margin: 4px;
 `
@@ -147,8 +147,8 @@ export const Preview: Story = () => {
       <aside>
         <TableOfContents>
           {groups.map((item, key) => (
-            <TableOfContents.LinkItem key={item}>
-              <Typography variant="body_short" link href={`#` + item}>
+            <TableOfContents.LinkItem key={item} title={item}>
+              <Typography href={`#` + item} link variant="body_short">
                 <Icon name="subdirectory_arrow_right" size={16} />
                 <span>{item}</span>
               </Typography>

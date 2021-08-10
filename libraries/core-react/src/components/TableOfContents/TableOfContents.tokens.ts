@@ -19,16 +19,17 @@ const {
   spacings: {
     comfortable: { small, x_large, xxx_large },
   },
-  typography: {
-    paragraph: {
-      caption: { fontSize, lineHeight },
-    },
-  },
+  typography,
 } = tokens
 
 type TableOfContentsType = ComponentToken
 
 export const tableOfContents: TableOfContentsType = {
+  typography: { ...typography.navigation.button, color: labelColor },
+  spacings: {
+    top: xxx_large,
+    bottom: x_large,
+  },
   entities: {
     icon: {
       background: primaryColor,
@@ -39,8 +40,8 @@ export const tableOfContents: TableOfContentsType = {
     links: {
       width: 'calc(189px - 36px)',
       typography: {
-        fontSize,
-        lineHeight,
+        ...typography.navigation.button,
+        color: primaryColor,
       },
       spacings: {
         top: '10px',
@@ -80,13 +81,9 @@ export const tableOfContents: TableOfContentsType = {
         },
       },
       typography: {
+        ...typography.navigation.button,
         color: primaryHover,
       },
     },
-  },
-  typography: { color: labelColor },
-  spacings: {
-    top: xxx_large,
-    bottom: x_large,
   },
 }
