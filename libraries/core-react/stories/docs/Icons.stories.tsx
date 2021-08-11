@@ -122,22 +122,24 @@ export const Preview: Story = () => {
                   {key}
                 </Typography>
                 <Group>
-                  {iconsByGroup[key].map((icon) => {
-                    const { name, datauri } = icon
-                    return (
-                      <IconItem key={name}>
-                        <Image src={datauri} alt={name} />
-                        <Label>{name}</Label>
-                        <DownloadLabel
-                          variant="outlined"
-                          onClick={() => downloadAsSvg(icon.value, name)}
-                        >
-                          <Icon data={download} />
-                          SVG
-                        </DownloadLabel>
-                      </IconItem>
-                    )
-                  })}
+                  {(iconsByGroup[key] as [Record<string, string>]).map(
+                    (icon) => {
+                      const { name, datauri } = icon
+                      return (
+                        <IconItem key={name}>
+                          <Image src={datauri} alt={name} />
+                          <Label>{name}</Label>
+                          <DownloadLabel
+                            variant="outlined"
+                            onClick={() => downloadAsSvg(icon.value, name)}
+                          >
+                            <Icon data={download} />
+                            SVG
+                          </DownloadLabel>
+                        </IconItem>
+                      )
+                    },
+                  )}
                 </Group>
               </div>
             )
@@ -145,8 +147,8 @@ export const Preview: Story = () => {
         </article>
       </main>
       <aside>
-        <TableOfContents>
-          {groups.map((item, key) => (
+        <TableOfContents sticky>
+          {groups.map((item) => (
             <TableOfContents.LinkItem key={item} title={item}>
               <Typography href={`#` + item} link variant="body_short">
                 <Icon name="subdirectory_arrow_right" size={16} />
