@@ -26,9 +26,6 @@ const Label = styled(Typography)`
 `
 
 const DownloadLabel = styled(Button)`
-  padding: 8px;
-  display: flex;
-  align-items: center;
   margin-top: 8px;
   &:not(:focus):not(:active) {
     clip: rect(0 0 0 0);
@@ -66,7 +63,6 @@ const IconItem = styled.li`
     ${DownloadLabel} {
       clip: auto;
       clip-path: none;
-
       overflow: hidden;
       white-space: nowrap;
     }
