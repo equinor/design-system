@@ -109,7 +109,7 @@ export const Preview: Story = () => {
       ...acc,
       [val.group]: [...group, val],
     }
-  }, {})
+  }, {} as Record<string, string>)
 
   return (
     <Wrapper>
