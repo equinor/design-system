@@ -6,32 +6,6 @@ import systemIcons from '../../../../apps/storefront/src/assets/icons/system-ico
 
 import { download } from '@equinor/eds-icons'
 
-const groups = [
-  'UI views',
-  'UI action',
-  'Time + date',
-  'Technical',
-  'Social',
-  'Security',
-  'Places',
-  'People',
-  'Payment + shipping',
-  'Notifications + alerts',
-  'Navigation',
-  'Map + transportation',
-  'Hardware',
-  'Food + objects',
-  'File + collections',
-  'Energy',
-  'WYSIWYG',
-  'Communication + feedback',
-  'Charts',
-  'AV',
-  'Arrows',
-  'Labels',
-  'Accessibility',
-]
-
 export default {
   title: 'Icons',
   parameters: {
@@ -110,6 +84,32 @@ export const Preview: Story = () => {
       [val.group]: [...group, val],
     }
   }, {} as Record<string, string>)
+
+  const groups = [
+    'UI views',
+    'UI action',
+    'Time + date',
+    'Technical',
+    'Social',
+    'Security',
+    'Places',
+    'People',
+    'Payment + shipping',
+    'Notifications + alerts',
+    'Navigation',
+    'Map + transportation',
+    'Hardware',
+    'Food + objects',
+    'File + collections',
+    'Energy',
+    'WYSIWYG',
+    'Communication + feedback',
+    'Charts',
+    'AV',
+    'Arrows',
+    'Labels',
+    'Accessibility',
+  ]
 
   return (
     <Wrapper>
