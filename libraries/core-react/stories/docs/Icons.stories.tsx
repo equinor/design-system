@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { Icon, Button, Typography, TableOfContents } from '../../src'
