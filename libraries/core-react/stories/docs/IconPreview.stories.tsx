@@ -6,7 +6,7 @@ import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { Icon, Button, Typography, TableOfContents } from '../../src'
 import fileDownload from 'js-file-download'
-import systemIcons from '../../../../apps/storefront/src/assets/icons/system-icons.json'
+import systemIcons from '../assets/icons/system-icons.json'
 
 import { download } from '@equinor/eds-icons'
 
