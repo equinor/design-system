@@ -112,7 +112,7 @@ export const Preview: Story = () => {
 
   return (
     <Wrapper>
-      {/* <main>
+      <main>
         <article>
           {Object.keys(iconsByGroup).map((key) => {
             return (
@@ -156,7 +156,7 @@ export const Preview: Story = () => {
             </TableOfContents.LinkItem>
           ))}
         </TableOfContents>
-      </aside> */}
+      </aside>
     </Wrapper>
   )
 }
