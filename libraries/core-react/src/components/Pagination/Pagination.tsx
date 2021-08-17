@@ -92,8 +92,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       withItemIndicator,
       itemsPerPage = 10,
       onChange,
-      className,
-      ...other
+      ...rest
     },
     ref,
   ) {
@@ -122,8 +121,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     const props = {
       ref,
       withItemIndicator,
-      className,
-      ...other,
+      ...rest,
     }
 
     const pagination = (
@@ -218,5 +216,3 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     )
   },
 )
-
-// Pagination.displayName = 'eds-pagination'
