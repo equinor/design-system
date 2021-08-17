@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, ReactNode } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Banner.tokens'
 
@@ -28,15 +28,16 @@ export type BannerActionsProps = {
   placement?: BannerActionsPlacement
 } & HTMLAttributes<HTMLDivElement>
 
-export const BannerActions: FC<BannerActionsProps> = ({
-  children,
-  placement = 'left',
-  className,
-  ...props
-}) => {
-  return (
-    <StyledBannerActions {...props} placement={placement} className={className}>
-      {children}
-    </StyledBannerActions>
-  )
-}
+export const BannerActions = forwardRef<HTMLDivElement, BannerActionsProps>(
+  function BannerActions({ children, placement = 'left', ...rest }, ref) {
+    const props = {
+      ref,
+      ...rest,
+    }
+    return (
+      <StyledBannerActions placement={placement} {...props}>
+        {children}
+      </StyledBannerActions>
+    )
+  },
+)
