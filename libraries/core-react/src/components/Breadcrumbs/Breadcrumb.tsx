@@ -12,6 +12,7 @@ const StyledTypography = styled(Typography)<StyledProps>`
   &:hover {
     text-decoration: underline;
     color: ${states.hover.typography.color};
+    cursor: pointer;
   }
   white-space: nowrap;
   overflow: hidden;
@@ -31,26 +32,32 @@ export type BreadcrumbProps = {
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
-  function Breadcrumb({ children, maxWidth, ...other }, ref) {
+  function Breadcrumb({ children, maxWidth, href, ...other }, ref) {
     const props = {
       ...other,
       ref,
       maxWidth,
     }
     const showTooltip = maxWidth > 0
+    const isValidLink = href !== undefined
 
-    return showTooltip ? (
-      <Tooltip title={children} placement="top">
-        <StyledTypography link variant="body_short" {...props}>
-          {children}
-        </StyledTypography>
-      </Tooltip>
-    ) : (
-      <StyledTypography link variant="body_short" {...props}>
+    const crumb = (
+      <StyledTypography
+        link={isValidLink}
+        as={isValidLink ? null : 'span'}
+        variant="body_short"
+        {...props}
+      >
         {children}
       </StyledTypography>
     )
+
+    return showTooltip ? (
+      <Tooltip title={children} placement="top">
+        {crumb}
+      </Tooltip>
+    ) : (
+      crumb
+    )
   },
 )
-
-// Breadcrumb.displayName = 'eds-breadcrumb'

@@ -151,7 +151,7 @@ export const Wrapped: Story<BreadcrumbsProps> = () => (
       <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Label Four
       </Breadcrumbs.Breadcrumb>
-      <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
+      <Breadcrumbs.Breadcrumb onClick={handleClick}>
         Label Five
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
