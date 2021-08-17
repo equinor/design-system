@@ -39,12 +39,12 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
       maxWidth,
     }
     const showTooltip = maxWidth > 0
-    const isValidLink = href !== undefined
+    const isLinkDefined = href !== undefined
 
     const crumb = (
       <StyledTypography
-        link={isValidLink}
-        as={isValidLink ? null : 'span'}
+        link={isLinkDefined}
+        as={isLinkDefined ? null : 'span'}
         variant="body_short"
         {...props}
       >
