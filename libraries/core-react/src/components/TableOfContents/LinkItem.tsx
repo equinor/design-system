@@ -67,5 +67,3 @@ export const LinkItem = forwardRef<HTMLLIElement, TableOfContentsLinkItemProps>(
     )
   },
 )
-
-// LinkItem.displayName = 'eds-linkitem'
