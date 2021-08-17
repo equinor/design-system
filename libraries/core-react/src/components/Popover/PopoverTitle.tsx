@@ -22,10 +22,9 @@ const StyledDivider = styled(Divider)`
 export type PopoverTitleProps = HTMLAttributes<HTMLDivElement>
 
 export const PopoverTitle = forwardRef<HTMLDivElement, PopoverTitleProps>(
-  function PopoverTitle({ children, className, ...rest }, ref) {
+  function PopoverTitle({ children, ...rest }, ref) {
     const props = {
       ...rest,
-      className,
       ref,
     }
 
@@ -37,5 +36,3 @@ export const PopoverTitle = forwardRef<HTMLDivElement, PopoverTitleProps>(
     )
   },
 )
-
-// PopoverTitle.displayName = 'eds-popover-title'
