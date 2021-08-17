@@ -1,4 +1,4 @@
-import { forwardRef, Fragment, HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
@@ -34,27 +34,21 @@ export type DialogCustomContentProps = {
 export const CustomContent = forwardRef<
   HTMLDivElement,
   DialogCustomContentProps
->(function CustomContent(
-  { children, className = '', scrollable = false, ...rest },
-  ref,
-) {
+>(function CustomContent({ children, scrollable = false, ...rest }, ref) {
+  const props = {
+    scrollable,
+    ref,
+    ...rest,
+  }
   return (
-    <Fragment>
-      <StyledCustomContent
-        className={className}
-        scrollable={scrollable}
-        id="eds-dialog-customcontent"
-        ref={ref}
-        {...rest}
-      >
+    <>
+      <StyledCustomContent id="eds-dialog-customcontent" {...props}>
         {children}
       </StyledCustomContent>
 
       {children && scrollable && (
         <StyledDivider color="medium" variant="small" />
       )}
-    </Fragment>
+    </>
   )
 })
-
-// CustomContent.displayName = 'EdsDialogCustomcontent'

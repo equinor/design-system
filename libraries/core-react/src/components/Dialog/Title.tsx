@@ -1,4 +1,4 @@
-import { forwardRef, Fragment } from 'react'
+import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
@@ -27,21 +27,14 @@ const StyledDivider = styled(Divider)`
 export type DialogTitleProps = React.HTMLAttributes<HTMLDivElement>
 
 export const Title = forwardRef<HTMLDivElement, DialogTitleProps>(
-  function Title({ children, className = '', ...props }, ref) {
+  function Title({ children, ...rest }, ref) {
     return (
-      <Fragment>
-        <StyledTitle
-          className={className}
-          id="eds-dialog-title"
-          ref={ref}
-          {...props}
-        >
+      <>
+        <StyledTitle id="eds-dialog-title" ref={ref} {...rest}>
           {children}
         </StyledTitle>
         {children && <StyledDivider color="medium" variant="small" />}
-      </Fragment>
+      </>
     )
   },
 )
-
-// Title.displayName = 'EdsDialogTitle'
