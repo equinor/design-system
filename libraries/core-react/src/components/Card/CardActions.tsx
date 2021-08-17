@@ -21,15 +21,14 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
 
 export const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
   function CardActions(
-    { children, className = '', alignRight = false, meta = '', ...rest },
+    { children, alignRight = false, meta = '', ...rest },
     ref,
   ) {
     const justifyContent = alignRight ? 'flex-end' : 'flex-start'
     const props = {
-      ...rest,
-      className,
       ref,
       justifyContent,
+      ...rest,
     }
 
     return (

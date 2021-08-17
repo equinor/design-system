@@ -44,13 +44,9 @@ const StyledCardMedia = styled.div<CardMediaProps>`
 `
 
 export const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>(
-  function CardMedia(
-    { children, className = '', fullWidth = false, ...rest },
-    ref,
-  ) {
+  function CardMedia({ children, fullWidth = false, ...rest }, ref) {
     const props = {
       ...rest,
-      className,
       ref,
       fullWidth,
     }

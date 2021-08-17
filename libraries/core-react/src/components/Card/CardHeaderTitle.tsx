@@ -10,10 +10,9 @@ const StyledCardHeaderTitle = styled.div`
 `
 
 export const CardHeaderTitle = forwardRef<HTMLDivElement, CardHeaderTitleProps>(
-  function CardHeaderTitle({ children, className = '', ...rest }, ref) {
+  function CardHeaderTitle({ children, ...rest }, ref) {
     const props = {
       ...rest,
-      className,
       ref,
     }
 
