@@ -58,7 +58,6 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       onClose,
       leftAlignFrom = '1200px',
       children,
-      className,
       ...rest
     },
     ref,
@@ -88,7 +87,6 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
             <StyledSnackbar
               elevation="overlay"
               leftAlignFrom={leftAlignFrom}
-              className={className}
               ref={ref}
               {...rest}
             >
