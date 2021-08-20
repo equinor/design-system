@@ -187,7 +187,9 @@ export const DataTable: Story<TableProps> = (args) => {
             Favourite
           </Cell>
           {columns.map((col) => (
-            <Cell key={`head-${col.accessor}`}>{col.name}</Cell>
+            <Cell key={`head-${col.accessor}`}>
+              <span id={`head-${col.accessor}`}>{col.name}</span>
+            </Cell>
           ))}
           <Cell key="head-buy">Buy</Cell>
           <Cell key="head-action">Some action</Cell>
@@ -221,6 +223,8 @@ export const DataTable: Story<TableProps> = (args) => {
                       label=""
                       initialSelectedItem={cellValue}
                       items={items}
+                      title="Origin"
+                      aria-labelledby="head-origin"
                     />
                   </Cell>
                 )
