@@ -212,6 +212,8 @@ export const DataTable: Story<TableProps> = (args) => {
                       id={cellValue}
                       value={cellValue}
                       onChange={onChange}
+                      title={cellValue}
+                      aria-label={cellValue}
                     />
                   </Cell>
                 )
