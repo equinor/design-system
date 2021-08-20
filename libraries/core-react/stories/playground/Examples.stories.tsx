@@ -66,9 +66,8 @@ export const TestPage: Story = (args) => {
   const [isOpenSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setPopoverOpen] = useState<boolean>(false)
   const [focus, setFocus] = useState<MenuProps['focus']>(null)
-  const [density, setDensity] = useState<EdsProviderProps['density']>(
-    'comfortable',
-  )
+  const [density, setDensity] =
+    useState<EdsProviderProps['density']>('comfortable')
   const menuAnchorRef = useRef<HTMLButtonElement>(null)
   const popverAnchorRef = useRef<HTMLButtonElement>(null)
 
@@ -126,7 +125,7 @@ export const TestPage: Story = (args) => {
             onClick={() => (isOpenMenu ? closeMenu() : openMenu(null))}
             onKeyDown={onKeyPress}
           >
-            <Icon data={accessible} />
+            <Icon data={accessible} title="Choose density" />
           </Button>
           <Menu
             open={isOpenMenu}
