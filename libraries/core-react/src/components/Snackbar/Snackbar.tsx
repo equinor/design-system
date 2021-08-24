@@ -1,37 +1,61 @@
 import { useState, useEffect, HTMLAttributes, forwardRef, useRef } from 'react'
 import * as ReactDom from 'react-dom'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 import {
   typographyTemplate,
   spacingsTemplate,
   bordersTemplate,
 } from '../../utils'
+import { Placement } from '../../hooks'
 import { Paper } from '../Paper'
 
 type StyledProps = {
-  leftAlignFrom: string
+  placement: string
 }
 
 const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
   role: 'alert',
 }))<StyledProps>`
   position: fixed;
-  left: ${tokens.spacings.left};
-  bottom: ${tokens.spacings.bottom};
   background-color: ${tokens.background};
   ${spacingsTemplate(tokens.spacings)}
   ${bordersTemplate(tokens.border)}
   ${typographyTemplate(tokens.typography)}
   min-height: ${tokens.minHeight};
   box-sizing: border-box;
-  left: 50%;
-  transform: translateX(-50%);
+  //transform: translateX(-50%);
   z-index: 300;
-  @media (min-width: ${({ leftAlignFrom }) => leftAlignFrom}) {
-    left: auto;
-    transform: none;
-  }
+
+  ${({ placement }) =>
+    css({
+      left: [
+        'left',
+        'left-start',
+        'left-end',
+        'bottom-start',
+        'top-start',
+      ].some((el) => placement.includes(el))
+        ? tokens.spacings.left
+        : undefined,
+      right: [
+        'right',
+        'right-start',
+        'right-end',
+        'bottom-end',
+        'top-end',
+      ].some((el) => placement.includes(el))
+        ? tokens.spacings.right
+        : undefined,
+      top: ['top', 'top-start', 'top-end'].some((el) => placement.includes(el))
+        ? tokens.spacings.top
+        : undefined,
+      bottom: ['bottom', 'bottom-start', 'bottom-end'].some((el) =>
+        placement.includes(el),
+      )
+        ? tokens.spacings.bottom
+        : undefined,
+    })}
 
   a,
   button {
@@ -46,8 +70,8 @@ export type SnackbarProps = {
   autoHideDuration?: number
   /** Callback fired when the snackbar is closed by auto hide duration timeout */
   onClose?: () => void
-  /** Media query from which the snackbar will be horizontal centered */
-  leftAlignFrom?: string
+  /** Placement of the snackbar */
+  placement?: Placement
 } & HTMLAttributes<HTMLDivElement>
 
 export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
@@ -56,7 +80,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       open = false,
       autoHideDuration = 7000,
       onClose,
-      leftAlignFrom = '1200px',
+      placement = 'auto',
       children,
       ...rest
     },
@@ -80,16 +104,16 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       return () => clearTimeout(timer.current)
     }, [open, autoHideDuration, setVisible, onClose, clearTimeout, setTimeout])
 
+    const props = {
+      placement,
+      ref,
+      ...rest,
+    }
     return (
       <>
         {visible &&
           ReactDom.createPortal(
-            <StyledSnackbar
-              elevation="overlay"
-              leftAlignFrom={leftAlignFrom}
-              ref={ref}
-              {...rest}
-            >
+            <StyledSnackbar elevation="overlay" {...props}>
               {children}
             </StyledSnackbar>,
             document.body,
