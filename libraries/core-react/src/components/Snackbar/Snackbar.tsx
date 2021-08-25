@@ -55,7 +55,7 @@ export type SnackbarProps = {
   autoHideDuration?: number
   /** Callback fired when the snackbar is closed by auto hide duration timeout */
   onClose?: () => void
-  /** Placement of the snackbar */
+  /** Placement of the snackbar relative to the viewport */
   placement?:
     | 'left'
     | 'right'
