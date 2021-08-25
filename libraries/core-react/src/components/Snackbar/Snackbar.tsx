@@ -8,7 +8,6 @@ import {
   bordersTemplate,
 } from '../../utils'
 import { Paper } from '../Paper'
-import { translate } from '../../../../icons'
 
 type StyledProps = {
   top: string
@@ -116,7 +115,6 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       : undefined
 
     const props = {
-      placement,
       left,
       right,
       top,
