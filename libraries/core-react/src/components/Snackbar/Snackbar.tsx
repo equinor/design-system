@@ -73,7 +73,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       open = false,
       autoHideDuration = 7000,
       onClose,
-      placement = 'bottom-left',
+      placement = 'bottom',
       children,
       ...rest
     },
