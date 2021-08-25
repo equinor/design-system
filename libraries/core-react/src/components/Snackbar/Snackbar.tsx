@@ -61,10 +61,10 @@ export type SnackbarProps = {
     | 'right'
     | 'top'
     | 'bottom'
-    | 'left-top'
-    | 'left-bottom'
-    | 'right-top'
-    | 'right-bottom'
+    | 'top-left'
+    | 'bottom-left'
+    | 'top-right'
+    | 'bottom-right'
 } & HTMLAttributes<HTMLDivElement>
 
 export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
@@ -73,7 +73,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       open = false,
       autoHideDuration = 7000,
       onClose,
-      placement = 'left-bottom',
+      placement = 'bottom-left',
       children,
       ...rest
     },
