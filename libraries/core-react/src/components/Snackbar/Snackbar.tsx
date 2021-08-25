@@ -35,9 +35,9 @@ const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
       right: right,
       bottom: bottom,
       transform:
-        right === '50%' || left === '50%'
+        left === '50%'
           ? 'translateX(-50%)'
-          : top === '50%' || top === '50%'
+          : top === '50%'
           ? 'translateY(-50%)'
           : undefined,
     })}
