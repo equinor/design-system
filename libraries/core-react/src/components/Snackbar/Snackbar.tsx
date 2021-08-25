@@ -7,11 +7,14 @@ import {
   spacingsTemplate,
   bordersTemplate,
 } from '../../utils'
-import { Placement } from '../../hooks'
 import { Paper } from '../Paper'
+import { translate } from '../../../../icons'
 
 type StyledProps = {
-  placement: string
+  top: string
+  bottom: string
+  right: string
+  left: string
 }
 
 const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
@@ -24,37 +27,20 @@ const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
   ${typographyTemplate(tokens.typography)}
   min-height: ${tokens.minHeight};
   box-sizing: border-box;
-  //transform: translateX(-50%);
   z-index: 300;
 
-  ${({ placement }) =>
+  ${({ top, bottom, right, left }) =>
     css({
-      left: [
-        'left',
-        'left-start',
-        'left-end',
-        'bottom-start',
-        'top-start',
-      ].some((el) => placement.includes(el))
-        ? tokens.spacings.left
-        : undefined,
-      right: [
-        'right',
-        'right-start',
-        'right-end',
-        'bottom-end',
-        'top-end',
-      ].some((el) => placement.includes(el))
-        ? tokens.spacings.right
-        : undefined,
-      top: ['top', 'top-start', 'top-end'].some((el) => placement.includes(el))
-        ? tokens.spacings.top
-        : undefined,
-      bottom: ['bottom', 'bottom-start', 'bottom-end'].some((el) =>
-        placement.includes(el),
-      )
-        ? tokens.spacings.bottom
-        : undefined,
+      top: top,
+      left: left,
+      right: right,
+      bottom: bottom,
+      transform:
+        right === '50%' || left === '50%'
+          ? 'translateX(-50%)'
+          : top === '50%' || top === '50%'
+          ? 'translateY(-50%)'
+          : undefined,
     })}
 
   a,
@@ -71,7 +57,15 @@ export type SnackbarProps = {
   /** Callback fired when the snackbar is closed by auto hide duration timeout */
   onClose?: () => void
   /** Placement of the snackbar */
-  placement?: Placement
+  placement?:
+    | 'left'
+    | 'right'
+    | 'top'
+    | 'bottom'
+    | 'left-top'
+    | 'left-bottom'
+    | 'right-top'
+    | 'right-bottom'
 } & HTMLAttributes<HTMLDivElement>
 
 export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
@@ -80,7 +74,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       open = false,
       autoHideDuration = 7000,
       onClose,
-      placement = 'auto',
+      placement = 'left-bottom',
       children,
       ...rest
     },
@@ -104,8 +98,29 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       return () => clearTimeout(timer.current)
     }, [open, autoHideDuration, setVisible, onClose, clearTimeout, setTimeout])
 
+    const top = placement.includes('top')
+      ? tokens.spacings.top
+      : placement === 'left' || placement === 'right'
+      ? '50%'
+      : undefined
+    const bottom = placement.includes('bottom')
+      ? tokens.spacings.bottom
+      : undefined
+    const right = placement.includes('right')
+      ? tokens.spacings.right
+      : undefined
+    const left = placement.includes('left')
+      ? tokens.spacings.left
+      : placement === 'top' || placement === 'bottom'
+      ? '50%'
+      : undefined
+
     const props = {
       placement,
+      left,
+      right,
+      top,
+      bottom,
       ref,
       ...rest,
     }
