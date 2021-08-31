@@ -66,6 +66,21 @@ export const toDictDeep = R.curry(R.reduce)(
     ),
   {},
 )
+export const toDictMode = R.curry(R.reduce)(
+  (acc, { name, value, mode }) =>
+    R.set(
+      R.pipe(
+        R.split(new RegExp(/(^[^_]+)/)),
+        R.filter(isNotEmpty),
+        R.map(R.curry(R.replace)(/\_*/, '')),
+        (path) => (mode === 'default' ? path : ['_mode', mode, ...path]),
+        R.lensPath,
+      )(name),
+      value,
+      acc,
+    ),
+  {},
+)
 
 export const isNotNil = R.complement(R.isNil)
 export const isNotEmpty = R.complement(R.isEmpty)
