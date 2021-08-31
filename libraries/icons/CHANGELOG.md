@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2021-08-31
+
+### Added
+
+- New icons:
+  - `power_bi`
+  - `engineering`
+  - `boundaries`
+  - `inspect3d`
+  - `inspectrotation`
+  - `invert`
+
+### Changed
+
+- Updated `svgo` from `1.3.2` to `2.3.0` with new parsing, bundling and minimizing plugins.
+
 ## [0.6.2] - 2021-01-21
 
 ### Fixed 🐛
