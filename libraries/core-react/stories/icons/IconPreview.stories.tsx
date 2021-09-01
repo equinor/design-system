@@ -81,32 +81,6 @@ export const Preview: Story = () => {
     }
   }, {} as Record<string, string>)
 
-  const groups = [
-    'UI views',
-    'UI action',
-    'Time + date',
-    'Technical',
-    'Social',
-    'Security',
-    'Places',
-    'People',
-    'Payment + shipping',
-    'Notifications + alerts',
-    'Navigation',
-    'Map + transportation',
-    'Hardware',
-    'Food + objects',
-    'File + collections',
-    'Energy',
-    'WYSIWYG',
-    'Communication + feedback',
-    'Charts',
-    'AV',
-    'Arrows',
-    'Labels',
-    'Accessibility',
-  ]
-
   return (
     <Wrapper>
       <main>
@@ -140,7 +114,7 @@ export const Preview: Story = () => {
       </main>
       <aside>
         <TableOfContents sticky>
-          {groups.map((item) => (
+          {Object.keys(iconsByGroup).map((item) => (
             <TableOfContents.LinkItem key={item} title={item}>
               <Typography href={`#` + item} link variant="body_short">
                 <Icon name="subdirectory_arrow_right" size={16} />
