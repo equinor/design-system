@@ -13,6 +13,6 @@ export const PATHS = {
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
   IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
-  ICONS: `${STORYBOOK_DIR}/src/assets/icons`,
+  ICONS: `${STORYBOOK_DIR}/assets/icons`,
   ICON_FILES: `${ICONS_DIR}/src`,
 }
