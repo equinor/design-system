@@ -1,5 +1,5 @@
 import R from 'ramda'
-import { propName, withType, pickChildren, isNotEmpty } from '@utils'
+import { propName, withType, pickChildren, toDictMode } from '@utils'
 import { fillToRgba, fillToHex, fillToHsla, toCSSVars } from '@transformers'
 
 const findMode = (name) => {
@@ -9,22 +9,6 @@ const findMode = (name) => {
 
   return 'default'
 }
-
-export const toDictMode = R.curry(R.reduce)(
-  (acc, { name, value, mode }) =>
-    R.set(
-      R.pipe(
-        R.split(new RegExp(/(^[^_]+)/)),
-        R.filter(isNotEmpty),
-        R.map(R.curry(R.replace)(/\_*/, '')),
-        (path) => (mode === 'default' ? path : ['modes', mode, ...path]),
-        R.lensPath,
-      )(name),
-      value,
-      acc,
-    ),
-  {},
-)
 
 const cssVarName = (name) => `eds_${name}`
 
@@ -59,7 +43,7 @@ export const makeColorToken = (colors, getStyle) =>
       }
     }),
     toDictMode,
-    R.dissoc('modes'),
+    R.dissoc('_mode'),
   )(colors)
 
 export const makeColorCss = R.pipe(

@@ -3,10 +3,18 @@ import {
   propName,
   withType,
   pickChildren,
-  toDictDeep,
   mergeStrings,
+  toDictMode,
 } from '@utils'
 import { toTypography } from '@transformers'
+
+const findMode = (name) => {
+  if (name.toLowerCase().includes('compact')) {
+    return 'compact'
+  }
+
+  return 'default'
+}
 
 export const makeTextTokens = (typographies, getStyle) =>
   R.pipe(
@@ -14,11 +22,13 @@ export const makeTextTokens = (typographies, getStyle) =>
     pickChildren,
     R.filter(withType('text')),
     R.map((node) => {
-      let name
-      let value = ''
+      let name,
+        value,
+        mode = ''
       try {
         const style = getStyle(node.styles.text)
-        name = propName(style.name)
+        name = propName(style.name).replace('_compact', '')
+        mode = findMode(style.name)
         value = toTypography(node, name)
       } catch (error) {
         throw Error(
@@ -28,9 +38,10 @@ export const makeTextTokens = (typographies, getStyle) =>
       return {
         name,
         value,
+        mode,
       }
     }),
-    toDictDeep,
+    toDictMode,
   )(typographies)
 
 // This is a duplicate from eds-core-react/common for now...

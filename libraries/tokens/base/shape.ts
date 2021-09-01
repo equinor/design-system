@@ -41,6 +41,11 @@ export const shape = {
         minWidth: '2px',
         borderRadius: '',
       },
+      circle: {
+        minHeight: '24px',
+        minWidth: '24px',
+        borderRadius: '100px',
+      },
     },
   },
   toggle_straight_border: {
