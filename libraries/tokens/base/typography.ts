@@ -343,7 +343,7 @@ export const typography = {
       textAlign: 'left',
     },
   },
-  _mode: {
+  _modes: {
     compact: {
       table: {
         cell_header: {
