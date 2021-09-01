@@ -110,37 +110,33 @@ export const Preview: Story = () => {
   return (
     <Wrapper>
       <main>
-        <article>
-          {Object.keys(iconsByGroup).map((key) => {
-            return (
-              <div key={key}>
-                <Typography variant="h2" id={key}>
-                  {key}
-                </Typography>
-                <Group>
-                  {(iconsByGroup[key] as [Record<string, string>]).map(
-                    (icon) => {
-                      const { name, datauri } = icon
-                      return (
-                        <IconItem key={name}>
-                          <Image src={datauri} alt={name} />
-                          <Label>{name}</Label>
-                          <DownloadLabel
-                            variant="outlined"
-                            onClick={() => downloadAsSvg(icon.value, name)}
-                          >
-                            <Icon data={download} />
-                            SVG
-                          </DownloadLabel>
-                        </IconItem>
-                      )
-                    },
-                  )}
-                </Group>
-              </div>
-            )
-          })}
-        </article>
+        {Object.keys(iconsByGroup).map((key) => {
+          return (
+            <article key={key}>
+              <Typography variant="h2" id={key}>
+                {key}
+              </Typography>
+              <Group>
+                {(iconsByGroup[key] as [Record<string, string>]).map((icon) => {
+                  const { name, datauri } = icon
+                  return (
+                    <IconItem key={name}>
+                      <Image src={datauri} alt={name} />
+                      <Label>{name}</Label>
+                      <DownloadLabel
+                        variant="outlined"
+                        onClick={() => downloadAsSvg(icon.value, name)}
+                      >
+                        <Icon data={download} />
+                        SVG
+                      </DownloadLabel>
+                    </IconItem>
+                  )
+                })}
+              </Group>
+            </article>
+          )
+        })}
       </main>
       <aside>
         <TableOfContents sticky>
