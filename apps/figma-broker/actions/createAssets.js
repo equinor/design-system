@@ -161,7 +161,7 @@ export async function createAssets({ query }) {
   writeSVGs(assetsWithSvg)
   writeSVGSprite(assetsWithSvg)
 
-  // writeJsonAssets(assetsWithSvg)
+  writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
 
   return assetsWithSvg
