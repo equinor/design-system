@@ -7,6 +7,7 @@ const {
       cell_text: cellTypography,
       cell_numeric_monospaced: cellNumericTypography,
     },
+    _modes: { compact: compactTypography },
   },
   colors: {
     text: {
@@ -105,9 +106,7 @@ const tableCell: ComponentToken = {
   modes: {
     compact: {
       height: '32px',
-      typography: {
-        lineHeight: '1rem',
-      },
+      typography: compactTypography.table.cell_text,
     },
   },
 }

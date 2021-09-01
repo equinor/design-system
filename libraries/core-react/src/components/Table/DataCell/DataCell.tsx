@@ -19,8 +19,8 @@ const applyMutations = (
       return {
         ...token,
         typography: {
-          ...token.typography,
           ...token.variants.numeric.typography,
+          ...token.typography,
         },
       }
 
