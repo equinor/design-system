@@ -2,29 +2,7 @@
 
 exports[`Breadcrumbs Matches snapshot 1`] = `
 <DocumentFragment>
-  .c2 {
-  margin: 0;
-  color: rgba(0,112,121,1);
-  font-family: Equinor;
-  font-size: 1.000rem;
-  font-weight: 400;
-  line-height: 1.250em;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  text-align: left;
-  cursor: pointer;
-}
-
-.c2:focus {
-  outline: none;
-}
-
-.c2[data-focus-visible-added]:focus {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
-  outline-offset: 2px;
-}
-
-.c4 {
+  .c3 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -51,13 +29,13 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   display: inline-block;
 }
 
-.c5 {
+.c4 {
   color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
   padding-left: 16px;
   padding-right: 16px;
 }
 
-.c3 {
+.c2 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -67,10 +45,11 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
 }
 
-.c3:hover {
+.c2:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  cursor: pointer;
 }
 
 <nav
@@ -82,17 +61,17 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
       <li
         class="c1"
       >
-        <a
-          class="c2 c3"
+        <span
+          class="c2"
         >
           Label 1
-        </a>
+        </span>
       </li>
       <li
         aria-hidden="true"
       >
         <p
-          class="c4 c5"
+          class="c3 c4"
         >
           /
         </p>
@@ -100,17 +79,17 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
       <li
         class="c1"
       >
-        <a
-          class="c2 c3"
+        <span
+          class="c2"
         >
           Label 2
-        </a>
+        </span>
       </li>
       <li
         aria-hidden="true"
       >
         <p
-          class="c4 c5"
+          class="c3 c4"
         >
           /
         </p>
@@ -118,11 +97,11 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
       <li
         class="c1"
       >
-        <a
-          class="c2 c3"
+        <span
+          class="c2"
         >
           Label 3
-        </a>
+        </span>
       </li>
     </ol>
   </nav>
