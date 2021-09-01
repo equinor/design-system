@@ -136,7 +136,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     })
 
     useGlobalKeyPress('Escape', () => {
-      if (onClose !== null) {
+      if (onClose !== null && open) {
         onClose()
       }
     })
