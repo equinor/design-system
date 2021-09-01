@@ -14,12 +14,12 @@ type PaginationItemProps = {
 export const PaginationItem = forwardRef<
   HTMLButtonElement,
   PaginationItemProps
->(function PaginationItem({ page, selected, onClick, ...other }, ref) {
+>(function PaginationItem({ page, selected, onClick, ...rest }, ref) {
   const props = {
     ref,
     page,
     selected,
-    ...other,
+    ...rest,
   }
   const background = selected
     ? tokens.entities.item.states.active.background
@@ -36,5 +36,3 @@ export const PaginationItem = forwardRef<
     </Button>
   )
 })
-
-// PaginationItem.displayName = 'eds-pagination-item'

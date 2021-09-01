@@ -49,20 +49,11 @@ const Header = styled.div`
 
 export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
   function SideSheet(
-    {
-      variant = 'medium',
-      title = '',
-      children,
-      className = '',
-      open = true,
-      onClose,
-      ...rest
-    },
+    { variant = 'medium', title = '', children, open = true, onClose, ...rest },
     ref,
   ) {
     const props = {
       ...rest,
-      className,
       ref,
       width: variants[variant],
     }
@@ -88,5 +79,3 @@ export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
     )
   },
 )
-
-// SideSheet.displayName = 'eds-sidesheet'

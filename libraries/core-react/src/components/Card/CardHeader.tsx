@@ -18,10 +18,9 @@ const StyledCardHeader = styled.div`
 `
 
 export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
-  function CardHeader({ children, className = '', ...rest }, ref) {
+  function CardHeader({ children, ...rest }, ref) {
     const props = {
       ...rest,
-      className,
       ref,
     }
 

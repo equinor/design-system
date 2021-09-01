@@ -1,5 +1,5 @@
 import {
-  FC,
+  forwardRef,
   HTMLAttributes,
   ReactNode,
   Children as ReactChildren,
@@ -41,28 +41,32 @@ export type BannerIconProps = {
   children: ReactNode
 } & HTMLAttributes<HTMLSpanElement>
 
-export const BannerIcon: FC<BannerIconProps> = ({
-  children,
-  variant = 'info',
-  ...props
-}) => {
-  const childrenWithColor = ReactChildren.map(children, (child) => {
-    const color =
-      variant === 'warning'
-        ? warning.entities.icon.typography.color
-        : info.entities.icon.typography.color
+export const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
+  function BannerIcon({ children, variant = 'info', ...rest }, ref) {
+    const childrenWithColor = ReactChildren.map(children, (child) => {
+      const color =
+        variant === 'warning'
+          ? warning.entities.icon.typography.color
+          : info.entities.icon.typography.color
+      return (
+        (isValidElement(child) &&
+          child.type === Icon &&
+          cloneElement(child, {
+            color,
+          })) ||
+        child
+      )
+    })
+
+    const props = {
+      ref,
+      ...rest,
+    }
+
     return (
-      (isValidElement(child) &&
-        child.type === Icon &&
-        cloneElement(child, {
-          color,
-        })) ||
-      child
+      <StyledBannerIcon variant={variant} {...props}>
+        {childrenWithColor}
+      </StyledBannerIcon>
     )
-  })
-  return (
-    <StyledBannerIcon variant={variant} {...props}>
-      {childrenWithColor}
-    </StyledBannerIcon>
-  )
-}
+  },
+)

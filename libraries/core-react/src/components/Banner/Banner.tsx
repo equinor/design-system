@@ -1,5 +1,5 @@
 import {
-  FC,
+  forwardRef,
   HTMLAttributes,
   isValidElement,
   ReactNode,
@@ -38,7 +38,10 @@ export type BannerProps = {
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
-export const Banner: FC<BannerProps> = ({ children, className, ...props }) => {
+export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
+  { children, className, ...rest },
+  ref,
+) {
   const childrenWhereBannerIcon: boolean[] = ReactChildren.map(
     children,
     (child) => {
@@ -47,10 +50,15 @@ export const Banner: FC<BannerProps> = ({ children, className, ...props }) => {
   )
   const hasIcon = childrenWhereBannerIcon.some((bool) => bool)
 
+  const props = {
+    ref,
+    ...rest,
+  }
+
   return (
     <StyledBanner {...props} className={className} role="alert">
       <Content hasIcon={hasIcon}>{children}</Content>
       <NonMarginDivider color="light" />
     </StyledBanner>
   )
-}
+})

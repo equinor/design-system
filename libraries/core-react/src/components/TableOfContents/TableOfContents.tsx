@@ -36,24 +36,16 @@ const TocLabel = styled(Typography)`
 
 const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(
   function TableOfContents(
-    { children, sticky = false, label = '', className, ...rest },
+    { children, sticky = false, label = '', ...rest },
     ref,
   ) {
     return (
-      <StyledTableOfContents
-        className={className}
-        ref={ref}
-        label={label}
-        sticky={sticky}
-        {...rest}
-      >
+      <StyledTableOfContents ref={ref} label={label} sticky={sticky} {...rest}>
         <TocLabel variant="overline">{label}</TocLabel>
         <TocList>{children}</TocList>
       </StyledTableOfContents>
     )
   },
 )
-
-// TableOfContents.displayName = 'eds-toc'
 
 export { TableOfContents }

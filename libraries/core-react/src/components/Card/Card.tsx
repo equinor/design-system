@@ -32,7 +32,7 @@ const StyledCard = styled.div<StyledCardProps>`
 `
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { children, className, variant = 'default', onClick, ...rest },
+  { children, variant = 'default', onClick, ...rest },
   ref,
 ) {
   const cursor = onClick ? 'pointer' : 'default'
@@ -42,11 +42,10 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   const token = tokens[cardVariant]
 
   const props = {
-    ...rest,
-    className,
     ref,
     background: token.background,
     cursor,
+    ...rest,
   }
 
   return (

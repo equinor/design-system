@@ -1,4 +1,4 @@
-import { Children, ReactNode } from 'react'
+import { Children, ReactNode, forwardRef } from 'react'
 import styled from 'styled-components'
 import { snackbar as tokens } from './Snackbar.tokens'
 
@@ -13,8 +13,16 @@ export type SnackbarActionProps = {
   children: ReactNode
 }
 
-export const SnackbarAction = ({
-  children,
-}: SnackbarActionProps): JSX.Element => {
-  return <StyledSnackbarAction>{Children.only(children)}</StyledSnackbarAction>
-}
+export const SnackbarAction = forwardRef<HTMLDivElement, SnackbarActionProps>(
+  function SnackbarAction({ children, ...rest }, ref) {
+    const props = {
+      ...rest,
+      ref,
+    }
+    return (
+      <StyledSnackbarAction {...props}>
+        {Children.only(children)}
+      </StyledSnackbarAction>
+    )
+  },
+)

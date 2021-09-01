@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
 import { TypographyProps } from '../Typography/Typography'
@@ -10,15 +10,17 @@ export type BannerMessageProps = {
   children: string
 } & Omit<TypographyProps, 'children'>
 
-export const BannerMessage: FC<BannerMessageProps> = ({
-  children,
-  ...props
-}) => {
-  return (
-    <StyledBannerMessage variant="body_long" {...props}>
-      {children}
-    </StyledBannerMessage>
-  )
-}
+export const BannerMessage = forwardRef<HTMLElement, BannerMessageProps>(
+  function BannerMessage({ children, ...rest }, ref) {
+    const props = {
+      ref,
+      ...rest,
+    }
 
-// BannerMessage.displayName = 'eds-banner-message'
+    return (
+      <StyledBannerMessage variant="body_long" {...props}>
+        {children}
+      </StyledBannerMessage>
+    )
+  },
+)
