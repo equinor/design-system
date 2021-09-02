@@ -8,6 +8,7 @@ import styled, { css } from 'styled-components'
 import { typographyTemplate, outlineTemplate } from '../../utils'
 import * as tokens from './TextField.tokens'
 import { Textarea } from '../Textarea'
+import { useEds } from './../EdsProvider'
 
 const { textfield } = tokens
 
@@ -158,6 +159,8 @@ export const Field = forwardRef<
   ref,
 ) {
   const { handleFocus, handleBlur, isFocused } = useTextField()
+  const { density } = useEds()
+  const iconSize = density === 'compact' ? 16 : 24
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
 
@@ -204,7 +207,7 @@ export const Field = forwardRef<
         <Adornments multiline={multiline}>
           {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
           {inputIcon && (
-            <Icon isDisabled={disabled} variant={variant}>
+            <Icon isDisabled={disabled} variant={variant} size={iconSize}>
               {inputIcon}
             </Icon>
           )}
