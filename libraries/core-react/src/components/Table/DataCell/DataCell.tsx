@@ -5,29 +5,10 @@ import {
   bordersTemplate,
   spacingsTemplate,
 } from '../../../utils'
-import { token as tablecell, TableCellToken } from './DataCell.tokens'
+import { tableCell, TableCellToken, applyVariant } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
 import { useEds } from '../../EdsProvider'
 import { useToken } from '../../../hooks'
-
-const applyMutations = (
-  variant: Variants,
-  token: TableCellToken,
-): TableCellToken => {
-  switch (variant) {
-    case 'numeric':
-      return {
-        ...token,
-        typography: {
-          ...token.variants.numeric.typography,
-          ...token.typography,
-        },
-      }
-
-    default:
-      return token
-  }
-}
 
 type BaseProps = {
   theme: TableCellToken
@@ -61,7 +42,7 @@ type CellProps = {
 export const TableDataCell = forwardRef<HTMLTableDataCellElement, CellProps>(
   function TableDataCell({ children, variant = 'text', ...rest }, ref) {
     const { density } = useEds()
-    const token = useToken({ density }, applyMutations(variant, tablecell))()
+    const token = useToken({ density }, applyVariant(variant, tableCell))()
 
     return (
       <ThemeProvider theme={token}>

@@ -1,5 +1,7 @@
 import { tokens } from '@equinor/eds-tokens'
+import * as R from 'ramda'
 import type { ComponentToken } from '@equinor/eds-tokens'
+import { Variants } from '../Table.types'
 
 const {
   typography: {
@@ -36,16 +38,16 @@ type Validation = {
   error: Partial<ComponentToken>
 }
 
-type Variants = {
+type VariantsType = {
   numeric: Partial<ComponentToken>
 }
 
 export type TableCellToken = ComponentToken & {
   validation: Validation
-  variants: Variants
+  variants: VariantsType
 }
 
-const tableCell: ComponentToken = {
+export const tableCell: TableCellToken = {
   height: '48px',
   background: backgroundColor,
   border: {
@@ -106,25 +108,41 @@ const tableCell: ComponentToken = {
   modes: {
     compact: {
       height: '32px',
-      typography: compactTypography.table.cell_text,
+      typography: {
+        ...compactTypography.table.cell_text,
+        color: typographyColor,
+      },
+    },
+  },
+  validation: {
+    error: {
+      background: errorColor,
+    },
+  },
+  variants: {
+    numeric: {
+      typography: { ...cellNumericTypography, color: typographyColor },
+      modes: {
+        compact: {
+          typography: {
+            ...compactTypography.table.cell_numeric_monospaced,
+            color: typographyColor,
+          },
+        },
+      },
     },
   },
 }
 
-const validation: Validation = {
-  error: {
-    background: errorColor,
-  },
-}
+export const applyVariant = (
+  variant: Variants,
+  token: TableCellToken,
+): TableCellToken => {
+  switch (variant) {
+    case 'numeric':
+      return R.mergeDeepRight(token, token.variants.numeric)
 
-const variants: Variants = {
-  numeric: {
-    typography: { ...cellNumericTypography, color: typographyColor },
-  },
-}
-
-export const token: TableCellToken = {
-  ...tableCell,
-  validation,
-  variants,
+    default:
+      return token
+  }
 }
