@@ -1,5 +1,5 @@
 import { ReactNode, forwardRef, Ref } from 'react'
-import { useTextField } from './context'
+import { useTextField } from './TextField.context'
 import { Input } from '../Input'
 import { Icon } from './Icon'
 import type { Variants } from './types'
@@ -82,7 +82,7 @@ export const InputWrapper = styled.div<InputWrapperType>(
       box-shadow: none;
       cursor: not-allowed;
       outline: none;
-    `} 
+    `}
     ${multiline &&
     variant === 'default' &&
     !inputIcon &&
