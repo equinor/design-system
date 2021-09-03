@@ -4,6 +4,7 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   typography: {
     table: { cell_header: cellTypography },
+    _modes: { compact: compactTypography },
   },
   colors: {
     text: {
@@ -89,9 +90,7 @@ export const token: TableHeadToken = {
   modes: {
     compact: {
       height: '32px',
-      typography: {
-        lineHeight: '1rem',
-      },
+      typography: compactTypography.table.cell_header,
     },
   },
 }

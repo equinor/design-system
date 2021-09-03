@@ -43,7 +43,7 @@ export const makeColorToken = (colors, getStyle) =>
       }
     }),
     toDictMode,
-    R.dissoc('_mode'),
+    R.dissoc('_modes'),
   )(colors)
 
 export const makeColorCss = R.pipe(

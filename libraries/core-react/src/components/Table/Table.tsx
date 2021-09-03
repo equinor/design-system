@@ -1,10 +1,10 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { token } from './DataCell/DataCell.tokens'
+import { tableCell } from './DataCell/DataCell.tokens'
 
 const TableBase = styled.table`
   border-spacing: 0;
-  background: ${token.background};
+  background: ${tableCell.background};
 `
 
 export type TableProps = HTMLAttributes<HTMLTableElement>

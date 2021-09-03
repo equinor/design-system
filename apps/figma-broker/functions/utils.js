@@ -73,7 +73,7 @@ export const toDictMode = R.curry(R.reduce)(
         R.split(new RegExp(/(^[^_]+)/)),
         R.filter(isNotEmpty),
         R.map(R.curry(R.replace)(/\_*/, '')),
-        (path) => (mode === 'default' ? path : ['_mode', mode, ...path]),
+        (path) => (mode === 'default' ? path : ['_modes', mode, ...path]),
         R.lensPath,
       )(name),
       value,
