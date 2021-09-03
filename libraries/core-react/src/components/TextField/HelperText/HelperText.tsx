@@ -2,7 +2,7 @@ import { ReactNode, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { typographyTemplate } from '../../../utils'
 import { helperText as tokens } from './HelperText.token'
-import { useTextField } from '../context'
+import { useTextField } from '../TextField.context'
 import { Icon } from '../Icon'
 import type { Variants, ColorStateProps } from '../types'
 import type { Spacing } from '@equinor/eds-tokens'
@@ -52,8 +52,6 @@ const Text = styled.p<StyledProps & VariationProps>`
   ${Variation}
 `
 
-const StyledIcon = styled(Icon)<StyledProps>``
-
 type TextfieldHelperTextProps = {
   /** Helper text */
   helperText?: string
@@ -86,14 +84,9 @@ const TextfieldHelperText = forwardRef<
   return (
     <Container ref={ref} {...rest} spacings={spacings}>
       {icon && (
-        <StyledIcon
-          isDisabled={isDisabled}
-          spacings={spacings}
-          colors={colors}
-          isInputIcon={false}
-        >
+        <Icon isDisabled={isDisabled} colors={colors} size={16}>
           {icon}
-        </StyledIcon>
+        </Icon>
       )}
       <Text
         variant={helperVariant}
