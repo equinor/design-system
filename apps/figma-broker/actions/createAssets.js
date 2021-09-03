@@ -67,7 +67,6 @@ export const ${name}: IconData = {
   height: '${height}',
   width: '${width}',
   svgPathData: '${pathData}',
-  
 }
 `
           return `${acc}${svgObj}`
