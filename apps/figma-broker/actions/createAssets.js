@@ -67,6 +67,7 @@ export const ${name}: IconData = {
   height: '${height}',
   width: '${width}',
   svgPathData: '${pathData}',
+  
 }
 `
           return `${acc}${svgObj}`
@@ -148,7 +149,7 @@ export async function createAssets({ query }) {
             viewbox: `0 0 ${height} ${width}`,
             height,
             width,
-            pathData: svgPathData(svgClean.data),
+            svgPathData: svgPathData(svgClean.data),
           }
         }),
       ),

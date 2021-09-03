@@ -1,10 +1,9 @@
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { Icon, Button, Typography, TableOfContents } from '../../src'
+import { download, IconData } from '@equinor/eds-icons'
 import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
-
-import { download } from '@equinor/eds-icons'
 
 export default {
   title: 'Icons',
@@ -45,11 +44,6 @@ const Group = styled.ul`
   padding: 0;
 `
 
-const Image = styled.img`
-  background: transparent !important;
-  width: 48px;
-`
-
 const IconItem = styled.li`
   display: flex;
   padding: 16px 0;
@@ -72,6 +66,10 @@ const IconItem = styled.li`
 const downloadAsSvg = (data: string | Blob, name: string) =>
   fileDownload(data, `${name}.svg`)
 
+type IconType = {
+  value?: string
+} & IconData
+
 export const Preview: Story = () => {
   const iconsByGroup = systemIcons.reduce((acc, val) => {
     const group = typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
@@ -91,11 +89,11 @@ export const Preview: Story = () => {
                 {key}
               </Typography>
               <Group>
-                {(iconsByGroup[key] as [Record<string, string>]).map((icon) => {
-                  const { name, datauri } = icon
+                {(iconsByGroup[key] as [IconType]).map((icon: IconType) => {
+                  const { name } = icon
                   return (
                     <IconItem key={name}>
-                      <Image src={datauri} alt={name} />
+                      <Icon data={icon} />
                       <Label>{name}</Label>
                       <DownloadLabel
                         variant="outlined"
