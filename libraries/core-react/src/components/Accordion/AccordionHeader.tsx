@@ -75,10 +75,11 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
         })}
 `
 
-const StyledIcon = styled(
-  Icon,
-)(({ chevronPosition }: Omit<AccordionProps, 'headerLevel'>) =>
-  chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
+const StyledIcon = styled(Icon)(
+  ({ chevronPosition }: Omit<AccordionProps, 'headerLevel'>) =>
+    chevronPosition === 'left'
+      ? { marginRight: '32px' }
+      : { marginLeft: '16px' },
 )
 
 export type AccordionHeaderProps = {
@@ -143,7 +144,7 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
       <StyledIcon
         key={`${id}-icon`}
         name={isExpanded ? 'chevron_up' : 'chevron_down'}
-        size={16}
+        size={24}
         chevronPosition={chevronPosition}
         color={
           disabled
