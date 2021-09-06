@@ -252,7 +252,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   }
 
   const { isFocused } = state
-  const size = 16
+  const size = 24
 
   const containerProps = {
     isFocused,
