@@ -20,8 +20,6 @@ import {
   outlineTemplate,
 } from '../../utils'
 
-Icon.add({ chevron_down, chevron_up })
-
 const {
   entities: { header, chevron: chevronToken },
 } = tokens
@@ -74,12 +72,10 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
           },
         })}
 `
+type StyledIconProps = Omit<AccordionProps, 'headerLevel'>
 
-const StyledIcon = styled(Icon)(
-  ({ chevronPosition }: Omit<AccordionProps, 'headerLevel'>) =>
-    chevronPosition === 'left'
-      ? { marginRight: '32px' }
-      : { marginLeft: '16px' },
+const StyledIcon = styled(Icon)(({ chevronPosition }: StyledIconProps) =>
+  chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
 )
 
 export type AccordionHeaderProps = {
@@ -143,7 +139,7 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
     const chevron = (
       <StyledIcon
         key={`${id}-icon`}
-        name={isExpanded ? 'chevron_up' : 'chevron_down'}
+        data={isExpanded ? chevron_up : chevron_down}
         size={24}
         chevronPosition={chevronPosition}
         color={
