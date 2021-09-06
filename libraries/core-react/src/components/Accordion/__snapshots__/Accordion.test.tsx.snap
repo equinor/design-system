@@ -87,7 +87,7 @@ exports[`Accordion Matches snapshot 1`] = `
           <path
             class=""
             clip-rule="evenodd"
-            d="M7.41 15.705l4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
+            d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
             data-testid="eds-icon-path"
             fill-rule="evenodd"
             height="24"

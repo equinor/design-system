@@ -289,7 +289,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
             <path
               class=""
               clip-rule="evenodd"
-              d="M7 9.5l5 5 5-5H7z"
+              d="m7 9.5 5 5 5-5H7z"
               data-testid="eds-icon-path"
               fill-rule="evenodd"
               height="24"
