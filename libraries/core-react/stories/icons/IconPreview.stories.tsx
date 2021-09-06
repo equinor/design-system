@@ -70,15 +70,15 @@ type IconType = {
   value?: string
 } & IconData
 
-export const Preview: Story = () => {
-  const iconsByGroup = systemIcons.reduce((acc, val) => {
-    const group = typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
-    return {
-      ...acc,
-      [val.group]: [...group, val],
-    }
-  }, {} as Record<string, string>)
+const iconsByGroup = systemIcons.reduce((acc, val) => {
+  const group = typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
+  return {
+    ...acc,
+    [val.group]: [...group, val],
+  }
+}, {} as Record<string, IconType[]>)
 
+export const Preview: Story = () => {
   return (
     <Wrapper>
       <main>
@@ -89,7 +89,7 @@ export const Preview: Story = () => {
                 {key}
               </Typography>
               <Group>
-                {(iconsByGroup[key] as [IconType]).map((icon: IconType) => {
+                {iconsByGroup[key].map((icon: IconType) => {
                   const { name } = icon
                   return (
                     <IconItem key={name}>
