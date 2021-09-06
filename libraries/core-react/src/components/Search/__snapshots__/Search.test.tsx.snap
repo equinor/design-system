@@ -150,9 +150,9 @@ exports[`Search Matches snapshot 1`] = `
       aria-hidden="true"
       class=""
       fill="currentColor"
-      height="16px"
-      viewBox="0 0 16 16"
-      width="16px"
+      height="24px"
+      viewBox="0 0 24 24"
+      width="24px"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -162,7 +162,6 @@ exports[`Search Matches snapshot 1`] = `
         data-testid="eds-icon-path"
         fill-rule="evenodd"
         height="24"
-        transform="scale(0.6666666666666666)"
       />
     </svg>
     <input
@@ -176,15 +175,15 @@ exports[`Search Matches snapshot 1`] = `
       aria-label="Clear search"
       class="c2"
       role="button"
-      size="16"
+      size="24"
     >
       <svg
         aria-hidden="true"
         class=""
         fill="currentColor"
-        height="16px"
-        viewBox="0 0 16 16"
-        width="16px"
+        height="24px"
+        viewBox="0 0 24 24"
+        width="24px"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -194,7 +193,6 @@ exports[`Search Matches snapshot 1`] = `
           data-testid="eds-icon-path"
           fill-rule="evenodd"
           height="24"
-          transform="scale(0.6666666666666666)"
         />
       </svg>
     </div>
