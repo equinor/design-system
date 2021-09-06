@@ -148,7 +148,7 @@ export async function createAssets({ query }) {
             viewbox: `0 0 ${height} ${width}`,
             height,
             width,
-            pathData: svgPathData(svgClean.data),
+            svgPathData: svgPathData(svgClean.data),
           }
         }),
       ),
@@ -161,7 +161,7 @@ export async function createAssets({ query }) {
   writeSVGs(assetsWithSvg)
   writeSVGSprite(assetsWithSvg)
 
-  // writeJsonAssets(assetsWithSvg)
+  writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
 
   return assetsWithSvg
