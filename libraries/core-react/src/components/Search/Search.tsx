@@ -18,13 +18,6 @@ import {
 } from '../../utils'
 import { useCombinedRefs } from '../../hooks'
 
-const icons = {
-  search,
-  close,
-}
-
-Icon.add(icons)
-
 const {
   height,
   spacings,
@@ -308,10 +301,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 
   return (
     <Container {...containerProps}>
-      <Icon name="search" aria-hidden size={size} />
+      <Icon data={search} aria-hidden size={size} />
       <Input {...inputProps} />
       <InsideButton {...clearButtonProps} aria-label="Clear search">
-        <Icon name="close" size={size} />
+        <Icon data={close} size={size} />
       </InsideButton>
     </Container>
   )
