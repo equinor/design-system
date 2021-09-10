@@ -9,12 +9,7 @@ import {
 } from '../../utils'
 import { Paper } from '../Paper'
 
-type StyledProps = {
-  top: string
-  bottom: string
-  right: string
-  left: string
-}
+type StyledProps = Pick<SnackbarProps, 'placement'>
 
 const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
   role: 'alert',
@@ -28,20 +23,27 @@ const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
   box-sizing: border-box;
   z-index: 300;
 
-  ${({ top, bottom, right, left }) =>
+  ${({ placement }) =>
     css({
-      top: top,
-      left: left,
-      right: right,
-      bottom: bottom,
+      top: placement.includes('top')
+        ? tokens.spacings.top
+        : placement === 'left' || placement === 'right'
+        ? '50%'
+        : undefined,
+      bottom: placement.includes('bottom') ? tokens.spacings.bottom : undefined,
+      right: placement.includes('right') ? tokens.spacings.right : undefined,
+      left: placement.includes('left')
+        ? tokens.spacings.left
+        : placement === 'top' || placement === 'bottom'
+        ? '50%'
+        : undefined,
       transform:
-        left === '50%'
-          ? 'translateX(-50%)'
-          : top === '50%'
+        placement === 'left' || placement === 'right'
           ? 'translateY(-50%)'
+          : placement === 'top' || placement === 'bottom'
+          ? 'translateX(-50%)'
           : undefined,
     })}
-
   a,
   button {
     color: ${tokens.entities.button.typography.color};
@@ -97,29 +99,9 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       return () => clearTimeout(timer.current)
     }, [open, autoHideDuration, setVisible, onClose, clearTimeout, setTimeout])
 
-    const top = placement.includes('top')
-      ? tokens.spacings.top
-      : placement === 'left' || placement === 'right'
-      ? '50%'
-      : undefined
-    const bottom = placement.includes('bottom')
-      ? tokens.spacings.bottom
-      : undefined
-    const right = placement.includes('right')
-      ? tokens.spacings.right
-      : undefined
-    const left = placement.includes('left')
-      ? tokens.spacings.left
-      : placement === 'top' || placement === 'bottom'
-      ? '50%'
-      : undefined
-
     const props = {
-      left,
-      right,
-      top,
-      bottom,
       ref,
+      placement,
       ...rest,
     }
     return (
