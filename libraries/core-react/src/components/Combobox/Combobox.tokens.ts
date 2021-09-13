@@ -21,7 +21,7 @@ const {
   elevation: { temporary_nav: boxShadow },
 } = tokens
 
-export const select: ComponentToken = {
+export const selectTokens: ComponentToken = {
   background: colors.ui.background__default.rgba,
   boxShadow,
   minHeight: straight.minHeight,
@@ -78,7 +78,7 @@ export const select: ComponentToken = {
   },
 }
 
-export const multiSelect: ComponentToken = R.mergeDeepRight(select, {
+export const multiSelect: ComponentToken = R.mergeDeepRight(selectTokens, {
   spacings: {
     top: '0',
     bottom: '0',

@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState } from 'react'
-import {
-  MultiSelect,
-  MultiSelectProps,
-  Button,
-  Typography,
-  EdsProvider,
-} from '../..'
+import { Combobox, ComboboxProps, Button, Typography, EdsProvider } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { UseMultipleSelectionStateChange } from 'downshift'
 import styled from 'styled-components'
@@ -16,7 +10,7 @@ import { items } from '../../stories/data'
 
 export default {
   title: 'Components/Combobox',
-  component: MultiSelect,
+  component: Combobox,
   parameters: {
     docs: {
       description: {
@@ -32,24 +26,30 @@ const Wrapper = styled.div`
   margin-bottom: 350px;
 `
 
-export const Default: Story<MultiSelectProps> = (args) => (
+export const Default: Story<ComboboxProps> = (args) => (
   <Wrapper>
-    <MultiSelect label="You can play with me" {...args} items={items} />
+    <Combobox label="You can play with me" {...args} items={items} />
   </Wrapper>
 )
-export const Disabled: Story<MultiSelectProps> = () => (
-  <MultiSelect label="Choose an element" meta="km/t" items={items} disabled />
+export const Multiple: Story<ComboboxProps> = (args) => (
+  <Wrapper>
+    <Combobox label="Single" {...args} items={items} />
+    <Combobox label="Multiple" {...args} items={items} multiple />
+  </Wrapper>
+)
+export const Disabled: Story<ComboboxProps> = () => (
+  <Combobox label="Choose an element" meta="km/t" items={items} disabled />
 )
 
-export const ReadOnly: Story<MultiSelectProps> = () => (
-  <MultiSelect label="This is read only" items={items} readOnly></MultiSelect>
+export const ReadOnly: Story<ComboboxProps> = () => (
+  <Combobox label="This is read only" items={items} readOnly></Combobox>
 )
 
 const initial = ['Troms og Finnmark', 'Vestland']
 
-export const WithPreselected: Story<MultiSelectProps> = () => (
+export const WithPreselected: Story<ComboboxProps> = () => (
   <Wrapper>
-    <MultiSelect
+    <Combobox
       label="I have preselected options"
       items={items}
       initialSelectedItems={initial}
@@ -57,7 +57,7 @@ export const WithPreselected: Story<MultiSelectProps> = () => (
   </Wrapper>
 )
 
-export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
+export const UseOnChangeHandler: Story<ComboboxProps> = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>(initial)
 
   function handleSelectedItemsChange(
@@ -70,7 +70,7 @@ export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
       {selectedItems.length > 0 && (
         <p>My value is {selectedItems.join(', ')}</p>
       )}
-      <MultiSelect
+      <Combobox
         label="I can show my values outside the component itself"
         items={items}
         initialSelectedItems={initial}
@@ -79,7 +79,7 @@ export const UseOnChangeHandler: Story<MultiSelectProps> = () => {
     </Wrapper>
   )
 }
-export const Controlled: Story<MultiSelectProps> = () => {
+export const Controlled: Story<ComboboxProps> = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>(initial)
 
   function handleSelectedItemsChange(
@@ -92,7 +92,7 @@ export const Controlled: Story<MultiSelectProps> = () => {
       {selectedItems.length > 0 && (
         <p>My value is {selectedItems.join(', ')}</p>
       )}
-      <MultiSelect
+      <Combobox
         label="I'm a controlled component"
         items={items}
         selectedOptions={selectedItems}
@@ -109,7 +109,7 @@ type FormValues = {
 const Field = styled.div`
   margin: 1rem;
 `
-export const WithReactHookForm: Story<MultiSelectProps> = () => {
+export const WithReactHookForm: Story<ComboboxProps> = () => {
   const defaultValues: FormValues = {
     fieldOne: [],
   }
@@ -168,7 +168,7 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
                   },
                 }}
                 render={({ field: { onChange } }) => (
-                  <MultiSelect
+                  <Combobox
                     handleSelectedItemsChange={({ selectedItems }) =>
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                       onChange(selectedItems)
@@ -206,6 +206,6 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
 
 export const Compact: Story = () => (
   <EdsProvider density="compact">
-    <MultiSelect label="This is compact" items={items} />
+    <Combobox label="This is compact" items={items} />
   </EdsProvider>
 )

@@ -4,6 +4,8 @@ import {
   useMultipleSelection,
   UseMultipleSelectionStateChange,
   UseMultipleSelectionProps,
+  UseComboboxProps,
+  UseComboboxGetInputPropsOptions,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
@@ -11,7 +13,10 @@ import { Icon } from '../Icon'
 import { Input } from '../Input'
 import { CheckboxInput } from '../Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
-import { multiSelect as tokens } from './Combobox.tokens'
+import {
+  multiSelect as multiSelectTokens,
+  selectTokens as selectTokens,
+} from './Combobox.tokens'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 import { List } from '../List'
@@ -22,42 +27,47 @@ import {
   spacingsTemplate,
 } from '../../utils'
 
-const {
-  entities: { button: buttonToken },
-} = tokens
-
 type StyledListItemType = {
   highlighted: string
   active?: string
 }
 
-export const Container = styled.div`
+const Container = styled.div`
   position: relative;
 `
 
-const PaddedInput = styled(Input)`
-  /* Hack: Had to add + 0px to satisfy the style lint plugin */
-  padding-right: calc(
-    ${buttonToken.height} + ${buttonToken.spacings.left} +
-      ${buttonToken.spacings.right} + 0px
-  );
-`
+const PaddedInput = styled(Input)(
+  ({
+    theme: {
+      entities: { button },
+    },
+  }) => {
+    return css`
+      padding-right: calc(
+        ${button.spacings.left} + ${button.spacings.right} +
+          (${button.height} * 2)
+      );
+    `
+  },
+)
 
-export const StyledList = styled(List)`
-  background-color: ${tokens.background};
-  box-shadow: ${tokens.boxShadow};
-  overflow-y: scroll;
-  max-height: 300px;
-  padding: 0;
-  ${bordersTemplate(tokens.border)}
-  margin-top: 4px;
-  position: absolute;
-  right: 0;
-  left: 0;
-  z-index: 50;
-`
+const StyledList = styled(List)(
+  ({ theme }) => css`
+    background-color: ${theme.background};
+    box-shadow: ${theme.boxShadow};
+    ${bordersTemplate(theme.border)}
+    overflow-y: scroll;
+    max-height: 300px;
+    padding: 0;
+    margin-top: 4px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 50;
+  `,
+)
 
-export const StyledListItem = styled(List.Item)<StyledListItemType>(
+const StyledListItem = styled(List.Item)<StyledListItemType>(
   ({ theme, highlighted, active }) => {
     const backgroundColor =
       highlighted === 'true'
@@ -96,7 +106,10 @@ const PaddedStyledListItem = styled(StyledListItem)`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
 `
 
-export type MultiSelectProps = {
+const getFilteredItems = (items: string[], inputValue: string) =>
+  items.filter((item) => item.toLowerCase().includes(inputValue?.toLowerCase()))
+
+export type ComboboxProps = {
   /** List of options to choose from */
   items: string[]
   /** Label for the select element */
@@ -120,20 +133,23 @@ export type MultiSelectProps = {
   handleSelectedItemsChange?: (
     changes: UseMultipleSelectionStateChange<string>,
   ) => void
+  /** Enable multiselect */
+  multiple?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
 
-export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
-  function MultiSelect(
+export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
+  function Combobox(
     {
       items = [],
-      initialSelectedItems = [],
       label,
       meta,
       className,
       disabled = false,
       readOnly = false,
+      initialSelectedItems = [],
       selectedOptions,
       handleSelectedItemsChange,
+      multiple,
       ...other
     },
     ref,
@@ -141,7 +157,10 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     const isControlled = selectedOptions ? true : false
     const [inputValue, setInputValue] = useState('')
     const { density } = useEds()
-    const token = useToken({ density }, tokens)()
+    const token = useToken(
+      { density },
+      multiple ? multiSelectTokens : selectTokens,
+    )()
 
     let multipleSelectionProps: UseMultipleSelectionProps<string> = {
       initialSelectedItems: initialSelectedItems,
@@ -165,12 +184,67 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       removeSelectedItem,
       selectedItems,
       reset,
+      setSelectedItems,
     } = useMultipleSelection(multipleSelectionProps)
 
-    const getFilteredItems = (items: string[]) =>
-      items.filter((item) =>
-        item.toLowerCase().includes(inputValue.toLowerCase()),
-      )
+    let comboBoxProps: UseComboboxProps<string> = {
+      inputValue,
+      selectedItem: null,
+      items: getFilteredItems(items, inputValue),
+      onInputValueChange: ({ inputValue }) => {
+        console.log('value change: ', inputValue)
+      },
+      onStateChange: ({ inputValue, type, selectedItem }) => {
+        switch (type) {
+          case useCombobox.stateChangeTypes.InputChange:
+            setInputValue(inputValue)
+            setSelectedItems([selectedItem])
+            break
+          case useCombobox.stateChangeTypes.InputKeyDownEnter:
+          case useCombobox.stateChangeTypes.ItemClick:
+          case useCombobox.stateChangeTypes.InputBlur:
+            if (selectedItem && multiple) {
+              setInputValue('')
+
+              selectedItems.includes(selectedItem)
+                ? removeSelectedItem(selectedItem)
+                : addSelectedItem(selectedItem)
+            }
+            if (!multiple) {
+              setInputValue(inputValue)
+            }
+            break
+          default:
+            break
+        }
+      },
+    }
+
+    if (multiple) {
+      comboBoxProps = {
+        ...comboBoxProps,
+        stateReducer: (state, actionAndChanges) => {
+          const { changes, type } = actionAndChanges
+          switch (type) {
+            case useCombobox.stateChangeTypes.InputKeyDownEnter:
+            case useCombobox.stateChangeTypes.ItemClick:
+              return {
+                ...changes,
+                isOpen: true, // keep menu open after selection.
+                highlightedIndex: state.highlightedIndex,
+                inputValue: '', // don't add the item string as input value at selection. */
+              }
+            case useCombobox.stateChangeTypes.InputBlur:
+              return {
+                ...changes,
+                inputValue: '', // don't add the item string as input value at selection.
+              }
+            default:
+              return changes
+          }
+        },
+      }
+    }
 
     const {
       isOpen,
@@ -182,53 +256,8 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       highlightedIndex,
       getItemProps,
       openMenu,
-    } = useCombobox({
-      inputValue,
-      selectedItem: null,
-      items: getFilteredItems(items),
-      stateReducer: (state, actionAndChanges) => {
-        const { changes, type } = actionAndChanges
-        switch (type) {
-          case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          case useCombobox.stateChangeTypes.ItemClick:
-            return {
-              ...changes,
-              isOpen: true, // keep menu open after selection.
-              highlightedIndex: state.highlightedIndex,
-              inputValue: '', // don't add the item string as input value at selection. */
-            }
-          case useCombobox.stateChangeTypes.InputBlur:
-            return {
-              ...changes,
-              inputValue: '', // don't add the item string as input value at selection.
-            }
-          default:
-            return changes
-        }
-      },
-
-      onStateChange: ({ inputValue, type, selectedItem }) => {
-        switch (type) {
-          case useCombobox.stateChangeTypes.InputChange:
-            setInputValue(inputValue)
-            break
-          case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          case useCombobox.stateChangeTypes.ItemClick:
-          case useCombobox.stateChangeTypes.InputBlur:
-            if (selectedItem) {
-              setInputValue('')
-
-              selectedItems.includes(selectedItem)
-                ? removeSelectedItem(selectedItem)
-                : addSelectedItem(selectedItem)
-            }
-
-            break
-          default:
-            break
-        }
-      },
-    })
+      selectedItem,
+    } = useCombobox(comboBoxProps)
 
     const placeholderText =
       items.length > 0 ? `${selectedItems.length}/${items.length} selected` : ''
@@ -238,6 +267,15 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
         openMenu()
       }
     }
+
+    const inputProps: UseComboboxGetInputPropsOptions = multiple
+      ? (getDropdownProps({
+          preventKeyAction: isOpen,
+          disabled: disabled,
+        }) as UseComboboxGetInputPropsOptions)
+      : (getDropdownProps({
+          disabled: disabled,
+        }) as UseComboboxGetInputPropsOptions)
 
     return (
       <ThemeProvider theme={token}>
@@ -251,15 +289,11 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
 
           <Container {...getComboboxProps()}>
             <PaddedInput
-              {...getInputProps(
-                getDropdownProps({
-                  preventKeyAction: isOpen,
-                  disabled: disabled,
-                }),
-              )}
-              placeholder={placeholderText}
+              {...getInputProps(inputProps)}
+              placeholder={multiple ? placeholderText : undefined}
               readOnly={readOnly}
               onFocus={openSelect}
+              onClick={openSelect}
               {...other}
             />
             {Boolean(selectedItems.length || inputValue) && (
@@ -285,19 +319,22 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           </Container>
           <StyledList {...getMenuProps()}>
             {isOpen &&
-              getFilteredItems(items).map((item, index) => (
+              getFilteredItems(items, inputValue).map((item, index) => (
                 <PaddedStyledListItem
                   key={`${item}`}
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
+                  active={selectedItem === item ? 'true' : 'false'}
                   {...getItemProps({ item, index, disabled: disabled })}
                 >
-                  <CheckboxInput
-                    checked={selectedItems.includes(item)}
-                    value={item}
-                    onChange={() => {
-                      return null
-                    }}
-                  />
+                  {multiple && (
+                    <CheckboxInput
+                      checked={selectedItems.includes(item)}
+                      value={item}
+                      onChange={() => {
+                        return null
+                      }}
+                    />
+                  )}
                   <span>{item}</span>
                 </PaddedStyledListItem>
               ))}
