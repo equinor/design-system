@@ -1,4 +1,4 @@
-import { forwardRef, SelectHTMLAttributes, useState } from 'react'
+import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
 import {
   useCombobox,
   useMultipleSelection,
@@ -6,6 +6,7 @@ import {
   UseMultipleSelectionProps,
   UseComboboxProps,
   UseComboboxGetInputPropsOptions,
+  UseComboboxStateChange,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
@@ -130,9 +131,7 @@ export type ComboboxProps = {
   /** Callback for the selected item change
    * changes.selectedItem gives the selected item
    */
-  handleSelectedItemsChange?: (
-    changes: UseMultipleSelectionStateChange<string>,
-  ) => void
+  handleSelectedItemsChange?: (changes: UseComboboxStateChange<string>) => void
   /** Enable multiselect */
   multiple?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
@@ -154,65 +153,82 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     },
     ref,
   ) {
-    const isControlled = selectedOptions ? true : false
-    const [inputValue, setInputValue] = useState('')
+    const [inputItems, setInputItems] = useState(items)
+    const isControlled = Boolean(selectedOptions)
+    const [selectedItems, setSelectedItems] = useState<string[]>(
+      isControlled ? selectedOptions : [],
+    )
     const { density } = useEds()
     const token = useToken(
       { density },
       multiple ? multiSelectTokens : selectTokens,
     )()
 
-    let multipleSelectionProps: UseMultipleSelectionProps<string> = {
-      initialSelectedItems: initialSelectedItems,
-      onSelectedItemsChange: (changes) => {
-        if (handleSelectedItemsChange) {
-          handleSelectedItemsChange(changes)
-        }
-      },
-    }
-
-    if (isControlled) {
-      multipleSelectionProps = {
-        ...multipleSelectionProps,
-        selectedItems: selectedOptions,
+    useEffect(() => {
+      if (isControlled) {
+        setSelectedItems(selectedOptions)
       }
-    }
-
-    const {
-      getDropdownProps,
-      addSelectedItem,
-      removeSelectedItem,
-      selectedItems,
-      reset,
-      setSelectedItems,
-    } = useMultipleSelection(multipleSelectionProps)
+      if (initialSelectedItems.length) {
+        setSelectedItems(initialSelectedItems)
+      }
+    }, [selectedOptions, isControlled, initialSelectedItems])
 
     let comboBoxProps: UseComboboxProps<string> = {
-      inputValue,
-      selectedItem: null,
-      items: getFilteredItems(items, inputValue),
+      items: inputItems,
       onInputValueChange: ({ inputValue }) => {
-        console.log('value change: ', inputValue)
+        setInputItems(
+          items.filter((item) =>
+            item.toLowerCase().includes(inputValue.toLowerCase()),
+          ),
+        )
       },
+      onIsOpenChange: ({ selectedItem }) => {
+        if (inputItems.length === 1 && selectedItem === inputItems[0]) {
+          setInputItems(items)
+        }
+      },
+      // onSelectedItemChange: ({ selectedItem }) => {
+      //   if (!selectedItem) {
+      //     return
+      //   }
+      //   const index = selectedItems.indexOf(selectedItem)
+      //   console.log(`index: ${index}, ${selectedItem}`)
+      //   if (index > 0) {
+      //     setSelectedItems([
+      //       ...selectedItems.slice(0, index),
+      //       ...selectedItems.slice(index + 1),
+      //     ])
+      //   } else if (index === 0) {
+      //     setSelectedItems([...selectedItems.slice(1)])
+      //   } else {
+      //     setSelectedItems([...selectedItems, selectedItem])
+      //   }
+      // },
       onStateChange: ({ inputValue, type, selectedItem }) => {
         switch (type) {
           case useCombobox.stateChangeTypes.InputChange:
-            setInputValue(inputValue)
-            setSelectedItems([selectedItem])
             break
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
           case useCombobox.stateChangeTypes.InputBlur:
-            if (selectedItem && multiple) {
-              setInputValue('')
+            console.log(`selected, ${selectedItem}`)
+            if (selectedItem) {
+              const index = selectedItems.indexOf(selectedItem)
+              if (index > 0) {
+                console.log('remove', selectedItem)
+                setSelectedItems([
+                  ...selectedItems.slice(0, index),
+                  ...selectedItems.slice(index + 1),
+                ])
+              } else if (index === 0) {
+                console.log('remove', selectedItem)
+                setSelectedItems([...selectedItems.slice(1)])
+              } else {
+                console.log('adding', selectedItem)
+                setSelectedItems([...selectedItems, selectedItem])
+              }
+            }
 
-              selectedItems.includes(selectedItem)
-                ? removeSelectedItem(selectedItem)
-                : addSelectedItem(selectedItem)
-            }
-            if (!multiple) {
-              setInputValue(inputValue)
-            }
             break
           default:
             break
@@ -257,25 +273,19 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       getItemProps,
       openMenu,
       selectedItem,
+      reset,
+      inputValue,
     } = useCombobox(comboBoxProps)
 
-    const placeholderText =
-      items.length > 0 ? `${selectedItems.length}/${items.length} selected` : ''
+    const placeholderText = multiple
+      ? `${selectedItems.length}/${items.length} selected`
+      : ''
 
     const openSelect = () => {
       if (!isOpen && !(disabled || readOnly)) {
         openMenu()
       }
     }
-
-    const inputProps: UseComboboxGetInputPropsOptions = multiple
-      ? (getDropdownProps({
-          preventKeyAction: isOpen,
-          disabled: disabled,
-        }) as UseComboboxGetInputPropsOptions)
-      : (getDropdownProps({
-          disabled: disabled,
-        }) as UseComboboxGetInputPropsOptions)
 
     return (
       <ThemeProvider theme={token}>
@@ -289,7 +299,9 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
           <Container {...getComboboxProps()}>
             <PaddedInput
-              {...getInputProps(inputProps)}
+              {...getInputProps({
+                disabled: disabled,
+              })}
               placeholder={multiple ? placeholderText : undefined}
               readOnly={readOnly}
               onFocus={openSelect}
@@ -319,11 +331,11 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           </Container>
           <StyledList {...getMenuProps()}>
             {isOpen &&
-              getFilteredItems(items, inputValue).map((item, index) => (
+              inputItems.map((item, index) => (
                 <PaddedStyledListItem
                   key={`${item}`}
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
-                  active={selectedItem === item ? 'true' : 'false'}
+                  active={!multiple && selectedItem === item ? 'true' : 'false'}
                   {...getItemProps({ item, index, disabled: disabled })}
                 >
                   {multiple && (
