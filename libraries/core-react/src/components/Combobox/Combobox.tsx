@@ -300,7 +300,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           <Container {...getComboboxProps()}>
             <PaddedInput
               {...getInputProps({
-                disabled: disabled,
+                disabled,
               })}
               placeholder={multiple ? placeholderText : undefined}
               readOnly={readOnly}
@@ -336,7 +336,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                   key={`${item}`}
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
                   active={!multiple && selectedItem === item ? 'true' : 'false'}
-                  {...getItemProps({ item, index, disabled: disabled })}
+                  {...getItemProps({ item, index, disabled })}
                 >
                   {multiple && (
                     <CheckboxInput

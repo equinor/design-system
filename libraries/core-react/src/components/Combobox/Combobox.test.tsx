@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
-import { UseMultipleSelectionStateChange } from 'downshift'
+import { UseComboboxStateChange } from 'downshift'
 
 import styled from 'styled-components'
 import { Combobox } from '.'
@@ -76,9 +76,9 @@ describe('MultiSelect', () => {
         label={labelText}
         selectedOptions={selected}
         handleSelectedItemsChange={(
-          changes: UseMultipleSelectionStateChange<string>,
+          changes: UseComboboxStateChange<string>,
         ) => {
-          setSelected(changes.selectedItems)
+          setSelected([changes.selectedItem])
           onChange()
         }}
       />
