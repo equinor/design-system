@@ -2,12 +2,25 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: npm
+  - name: Install
     init: |
       npm i -g pnpm@6
       pnpm install
       pnpm recursive install --filter ./libraries
+      gp sync-done install
     command: pnpm storybook
+  - name: Lint
+    init: gp sync-await install
+    command: pnpm lint:all
+    openMode: split-right
+  - name: Test 
+    init: gp sync-await install
+    command: pnpm test:core-react
+    openMode: split-right
+
+ports:
+  - port: 9000
+    onOpen: open-preview    
 
 gitConfig:
   alias.co: checkout
