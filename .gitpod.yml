@@ -1,5 +1,5 @@
-image:
-  file: .gitpod.Dockerfile
+#image:
+#  file: .gitpod.Dockerfile
 
 tasks:
   - name: Install
@@ -9,6 +9,9 @@ tasks:
       pnpm recursive install --filter ./libraries
       gp sync-done install
     command: pnpm storybook
+  # - name: Preview 
+  #   init: gp sync-await install
+    command: gp preview $(gp url 9000)
   - name: Lint
     init: gp sync-await install
     command: pnpm lint:all
