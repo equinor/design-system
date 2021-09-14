@@ -1,0 +1,27 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: npm
+    init: |
+      npm i -g pnpm@6
+      pnpm install
+      pnpm recursive install --filter ./libraries
+    command: pnpm storybook
+
+gitConfig:
+  alias.co: checkout
+  alias.br: branch
+  alias.ci: commit
+  alias.st: status
+  pull.rebase: merges
+
+vscode:
+  extensions:
+    - vtrois.gitmoji-vscode
+    - esbenp.prettier-vscode
+    - stylelint.vscode-stylelint
+    - eamodio.gitlens
+    - coenraads.bracket-pair-colorizer-2
+    - dbaeumer.vscode-eslint
+    - pflannery.vscode-versionlens
