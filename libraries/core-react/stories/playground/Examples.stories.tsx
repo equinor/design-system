@@ -126,7 +126,7 @@ export const TestPage: Story = (args) => {
             onClick={() => (isOpenMenu ? closeMenu() : openMenu(null))}
             onKeyDown={onKeyPress}
           >
-            <Icon data={accessible} />
+            <Icon data={accessible} title="Choose density" />
           </Button>
           <Menu
             open={isOpenMenu}
