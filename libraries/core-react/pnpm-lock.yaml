@@ -31,7 +31,7 @@ specifiers:
   '@types/testing-library__jest-dom': ^5.14.1
   babel-loader: ^8.2.2
   babel-plugin-styled-components: ^1.13.2
-  downshift: ^6.1.3
+  downshift: ^6.1.7
   focus-visible: ^5.2.0
   jest: ^27.0.6
   jest-styled-components: ^7.0.5
@@ -58,7 +58,7 @@ dependencies:
   '@equinor/eds-icons': link:../icons
   '@equinor/eds-tokens': link:../tokens
   '@popperjs/core': 2.9.2
-  downshift: 6.1.3_react@17.0.2
+  downshift: 6.1.7_react@17.0.2
   react-fast-compare: 3.2.0
   react-popper: 2.2.5_a16f30364266ce234ee1188a6d27cb60
 
@@ -1515,6 +1515,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
+    dev: true
+
+  /@babel/runtime/7.15.4:
+    resolution: {integrity: sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.9
+    dev: false
 
   /@babel/standalone/7.14.8:
     resolution: {integrity: sha512-5Aa1Bhis4oZD23iLJE5CDYHEs1zSC3ejppHE5aim0OWjGCWTa9Oq1PwopK4u1++ao6B6POW/PqNZjOCZNTSx0Q==}
@@ -6117,6 +6125,20 @@ packages:
       prop-types: 15.7.2
       react: 17.0.2
       react-is: 17.0.2
+    dev: true
+
+  /downshift/6.1.7_react@17.0.2:
+    resolution: {integrity: sha512-cVprZg/9Lvj/uhYRxELzlu1aezRcgPWBjTvspiGTVEU64gF5pRdSRKFVLcxqsZC637cLAGMbL40JavEfWnqgNg==}
+    peerDependencies:
+      react: '>=16.12.0'
+    dependencies:
+      '@babel/runtime': 7.15.4
+      compute-scroll-into-view: 1.0.17
+      prop-types: 15.7.2
+      react: 17.0.2
+      react-is: 17.0.2
+      tslib: 2.3.0
+    dev: false
 
   /duplexer/0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
@@ -12118,7 +12140,6 @@ packages:
 
   /tslib/2.3.0:
     resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
-    dev: true
 
   /tty-browserify/0.0.0:
     resolution: {integrity: sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=}
