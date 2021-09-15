@@ -47,6 +47,7 @@ describe('MultiSelect', () => {
         items={items}
         label={labelText}
         initialSelectedItems={['One', 'Two']}
+        multiple
       />,
     )
     const placeholderText = screen.getByPlaceholderText('2/3 selected')
@@ -72,6 +73,7 @@ describe('MultiSelect', () => {
     const [selected, setSelected] = useState([])
     return (
       <Combobox
+        multiple
         items={items}
         label={labelText}
         selectedOptions={selected}

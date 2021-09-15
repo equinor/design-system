@@ -188,24 +188,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           setInputItems(items)
         }
       },
-      // onSelectedItemChange: handleSelectedItemsChange,
-      // onSelectedItemChange: ({ selectedItem }) => {
-      //   if (!selectedItem) {
-      //     return
-      //   }
-      //   const index = selectedItems.indexOf(selectedItem)
-      //   console.log(`index: ${index}, ${selectedItem}`)
-      //   if (index > 0) {
-      //     setSelectedItems([
-      //       ...selectedItems.slice(0, index),
-      //       ...selectedItems.slice(index + 1),
-      //     ])
-      //   } else if (index === 0) {
-      //     setSelectedItems([...selectedItems.slice(1)])
-      //   } else {
-      //     setSelectedItems([...selectedItems, selectedItem])
-      //   }
-      // },
+      onSelectedItemChange: handleSelectedItemsChange,
       onStateChange: ({ inputValue, type, selectedItem }) => {
         switch (type) {
           case useCombobox.stateChangeTypes.InputChange:
@@ -213,20 +196,16 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
           case useCombobox.stateChangeTypes.InputBlur:
-            console.log(`selected, ${selectedItem}`)
             if (selectedItem) {
               const index = selectedItems.indexOf(selectedItem)
               if (index > 0) {
-                console.log('remove', selectedItem)
                 setSelectedItems([
                   ...selectedItems.slice(0, index),
                   ...selectedItems.slice(index + 1),
                 ])
               } else if (index === 0) {
-                console.log('remove', selectedItem)
                 setSelectedItems([...selectedItems.slice(1)])
               } else {
-                console.log('adding', selectedItem)
                 setSelectedItems([...selectedItems, selectedItem])
               }
             }
