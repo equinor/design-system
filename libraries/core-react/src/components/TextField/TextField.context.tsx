@@ -25,12 +25,9 @@ export const TextFieldProvider = ({ children }: ProviderProps): JSX.Element => {
   const [state, setState] = useState<State>(initalState)
 
   const handleFocus = () => {
-    console.log('foc', state)
     setState((prevState) => ({ ...prevState, isFocused: true }))
   }
   const handleBlur = () => {
-    console.log('blr', state)
-
     setState((prevState) => ({ ...prevState, isFocused: false }))
   }
   const value = {
