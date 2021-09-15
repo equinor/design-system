@@ -178,18 +178,14 @@ export const Field = forwardRef<
   const focusHandler = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    if (!isFocused) {
-      handleFocus
-    }
+    handleFocus()
     onFocus && onFocus(e)
   }
 
   const blurHandler = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    if (isFocused) {
-      handleBlur
-    }
+    handleBlur()
     onBlur && onBlur(e)
   }
 
@@ -208,8 +204,8 @@ export const Field = forwardRef<
     type,
     disabled,
     variant,
-    onBlur: (e: React.FocusEvent<HTMLInputElement>) => blurHandler(e),
-    onFocus: (e: React.FocusEvent<HTMLInputElement>) => focusHandler(e),
+    onBlur: blurHandler,
+    onFocus: focusHandler,
     ...other,
   }
 
