@@ -175,6 +175,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
     let comboBoxProps: UseComboboxProps<string> = {
       items: inputItems,
+      selectedItem: multiple ? null : undefined,
       onInputValueChange: ({ inputValue }) => {
         setInputItems(
           items.filter((item) =>
@@ -187,6 +188,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           setInputItems(items)
         }
       },
+      // onSelectedItemChange: handleSelectedItemsChange,
       // onSelectedItemChange: ({ selectedItem }) => {
       //   if (!selectedItem) {
       //     return
@@ -248,7 +250,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                 ...changes,
                 isOpen: true, // keep menu open after selection.
                 highlightedIndex: state.highlightedIndex,
-                inputValue: '', // don't add the item string as input value at selection. */
+                inputValue: '', // don't add the item string as input value at selection.
               }
             case useCombobox.stateChangeTypes.InputBlur:
               return {
