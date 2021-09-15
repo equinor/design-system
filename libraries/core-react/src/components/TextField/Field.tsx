@@ -213,8 +213,6 @@ export const Field = forwardRef<
     ...inputProps,
     rowsMax,
     ref: ref as Ref<HTMLTextAreaElement>,
-    onBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => blurHandler(e),
-    onFocus: (e: React.FocusEvent<HTMLTextAreaElement>) => focusHandler(e),
   }
 
   return (
