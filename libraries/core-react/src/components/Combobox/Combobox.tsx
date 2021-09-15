@@ -1,11 +1,7 @@
 import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
 import {
   useCombobox,
-  useMultipleSelection,
-  UseMultipleSelectionStateChange,
-  UseMultipleSelectionProps,
   UseComboboxProps,
-  UseComboboxGetInputPropsOptions,
   UseComboboxStateChange,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
@@ -28,16 +24,11 @@ import {
   spacingsTemplate,
 } from '../../utils'
 
-type StyledListItemType = {
-  highlighted: string
-  active?: string
-}
-
 const Container = styled.div`
   position: relative;
 `
 
-const PaddedInput = styled(Input)(
+const StyledInput = styled(Input)(
   ({
     theme: {
       entities: { button },
@@ -68,6 +59,11 @@ const StyledList = styled(List)(
   `,
 )
 
+type StyledListItemType = {
+  highlighted: string
+  active?: string
+}
+
 const StyledListItem = styled(List.Item)<StyledListItemType>(
   ({ theme, highlighted, active }) => {
     const backgroundColor =
@@ -78,16 +74,19 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
         : theme.background
 
     return css`
+      display: flex;
+      align-items: center;
       margin: 0;
       list-style: none;
       background-color: ${backgroundColor};
-      ${typographyTemplate(theme.typography)};
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
+      ${typographyTemplate(theme.typography)}
+      ${spacingsTemplate(theme.spacings)}
     `
   },
 )
 
-const AbsoluteButton = styled(Button)(
+const StyledButton = styled(Button)(
   ({
     theme: {
       entities: { button },
@@ -100,15 +99,6 @@ const AbsoluteButton = styled(Button)(
     top: ${button.spacings.top};
   `,
 )
-
-const PaddedStyledListItem = styled(StyledListItem)`
-  display: flex;
-  align-items: center;
-  ${({ theme }) => spacingsTemplate(theme.spacings)}
-`
-
-const getFilteredItems = (items: string[], inputValue: string) =>
-  items.filter((item) => item.toLowerCase().includes(inputValue?.toLowerCase()))
 
 export type ComboboxProps = {
   /** List of options to choose from */
@@ -189,7 +179,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         }
       },
       onSelectedItemChange: handleSelectedItemsChange,
-      onStateChange: ({ inputValue, type, selectedItem }) => {
+      onStateChange: ({ type, selectedItem }) => {
         switch (type) {
           case useCombobox.stateChangeTypes.InputChange:
             break
@@ -279,7 +269,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           />
 
           <Container {...getComboboxProps()}>
-            <PaddedInput
+            <StyledInput
               {...getInputProps({
                 disabled,
               })}
@@ -290,7 +280,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
               {...other}
             />
             {Boolean(selectedItems.length || inputValue) && (
-              <AbsoluteButton
+              <StyledButton
                 variant="ghost_icon"
                 disabled={disabled || readOnly}
                 aria-label={'clear options'}
@@ -299,21 +289,21 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                 style={{ right: 32 }}
               >
                 <Icon data={close} size={16} />
-              </AbsoluteButton>
+              </StyledButton>
             )}
-            <AbsoluteButton
+            <StyledButton
               variant="ghost_icon"
               {...getToggleButtonProps({ disabled: disabled || readOnly })}
               aria-label={'toggle options'}
               title="open"
             >
               <Icon data={isOpen ? arrow_drop_up : arrow_drop_down}></Icon>
-            </AbsoluteButton>
+            </StyledButton>
           </Container>
           <StyledList {...getMenuProps()}>
             {isOpen &&
               inputItems.map((item, index) => (
-                <PaddedStyledListItem
+                <StyledListItem
                   key={`${item}`}
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
                   active={!multiple && selectedItem === item ? 'true' : 'false'}
@@ -329,7 +319,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                     />
                   )}
                   <span>{item}</span>
-                </PaddedStyledListItem>
+                </StyledListItem>
               ))}
           </StyledList>
         </Container>
