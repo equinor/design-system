@@ -1,0 +1,37 @@
+tasks:
+  - name: Install
+    init: |
+      npm i -g pnpm@6
+      pnpm install
+      pnpm recursive install --filter ./libraries
+      gp sync-done install
+    command: pnpm storybook
+  - name: Lint
+    init: gp sync-await install
+    command: pnpm lint:all
+    openMode: split-right
+  - name: Test
+    init: gp sync-await install
+    command: pnpm test:core-react
+    openMode: split-right
+
+ports:
+  - port: 9000
+    onOpen: open-preview
+
+gitConfig:
+  alias.co: checkout
+  alias.br: branch
+  alias.ci: commit
+  alias.st: status
+  pull.rebase: merges
+
+vscode:
+  extensions:
+    - vtrois.gitmoji-vscode
+    - esbenp.prettier-vscode
+    - stylelint.vscode-stylelint
+    - eamodio.gitlens
+    - coenraads.bracket-pair-colorizer-2
+    - dbaeumer.vscode-eslint
+    - pflannery.vscode-versionlens
