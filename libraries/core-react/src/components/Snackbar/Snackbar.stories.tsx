@@ -42,7 +42,6 @@ export const Simple: Story<SnackbarProps> = () => {
         open={open}
         onClose={() => setOpen(false)}
         autoHideDuration={5000}
-        leftAlignFrom="1500px"
       >
         Message goes here
       </Snackbar>

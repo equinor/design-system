@@ -10,8 +10,6 @@ exports[`Snackbar Matches snapshot 1`] = `
 
 .c1 {
   position: fixed;
-  left: 16px;
-  bottom: 16px;
   background-color: var(--eds_ui_background__overlay,rgba(0,0,0,0.8));
   padding-left: 16px;
   padding-top: 16px;
@@ -27,25 +25,17 @@ exports[`Snackbar Matches snapshot 1`] = `
   text-align: left;
   min-height: 48px;
   box-sizing: border-box;
+  z-index: 300;
+  bottom: 16px;
   left: 50%;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  z-index: 300;
 }
 
 .c1 a,
 .c1 button {
   color: var(--eds_interactive__link_in_snackbars,rgba(151,202,206,1));
-}
-
-@media (min-width:1200px) {
-  .c1 {
-    left: auto;
-    -webkit-transform: none;
-    -ms-transform: none;
-    transform: none;
-  }
 }
 
 <div

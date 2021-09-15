@@ -9,6 +9,7 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Snackbar } from '.'
+import { snackbar as tokens } from './Snackbar.tokens'
 
 afterEach(cleanup)
 
@@ -74,5 +75,17 @@ describe('Snackbar', () => {
       </Snackbar>,
     )
     expect(screen.queryByText(buttonText)).toBeDefined()
+  })
+  it('Placement prop is placing the snackbar as expected', () => {
+    render(
+      <Snackbar open placement="top" data-testid="test-snackbar-3">
+        {message}
+      </Snackbar>,
+    )
+    expect(screen.getByTestId('test-snackbar-3')).toHaveStyleRule(
+      'top',
+      tokens.spacings.top,
+    )
+    expect(screen.getByTestId('test-snackbar-3')).toHaveStyleRule('left', '50%')
   })
 })
