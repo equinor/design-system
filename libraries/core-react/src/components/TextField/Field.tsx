@@ -149,13 +149,24 @@ type FieldProps = {
   inputIcon?: ReactNode
   /** Specifies max rows for multiline input */
   rowsMax?: number
-}
+} & React.HTMLAttributes<HTMLTextAreaElement | HTMLInputElement>
 
 export const Field = forwardRef<
   HTMLTextAreaElement | HTMLInputElement,
   FieldProps
 >(function Field(
-  { multiline, variant, disabled, type, unit, inputIcon, rowsMax, ...other },
+  {
+    multiline,
+    variant,
+    disabled,
+    type,
+    unit,
+    inputIcon,
+    rowsMax,
+    onBlur,
+    onFocus,
+    ...other
+  },
   ref,
 ) {
   const { handleFocus, handleBlur, isFocused } = useTextField()
@@ -163,6 +174,24 @@ export const Field = forwardRef<
   const iconSize = density === 'compact' ? 16 : 24
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
+
+  const focusHandler = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    if (!isFocused) {
+      handleFocus
+    }
+    onFocus && onFocus(e)
+  }
+
+  const blurHandler = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    if (isFocused) {
+      handleBlur
+    }
+    onBlur && onBlur(e)
+  }
 
   const inputWrapperProps = {
     isFocused,
@@ -179,6 +208,8 @@ export const Field = forwardRef<
     type,
     disabled,
     variant,
+    onBlur: (e: React.FocusEvent<HTMLInputElement>) => blurHandler(e),
+    onFocus: (e: React.FocusEvent<HTMLInputElement>) => focusHandler(e),
     ...other,
   }
 
@@ -186,22 +217,16 @@ export const Field = forwardRef<
     ...inputProps,
     rowsMax,
     ref: ref as Ref<HTMLTextAreaElement>,
+    onBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => blurHandler(e),
+    onFocus: (e: React.FocusEvent<HTMLTextAreaElement>) => focusHandler(e),
   }
 
   return (
     <InputWrapper {...inputWrapperProps}>
       {multiline ? (
-        <StrippedTextarea
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          {...textareaProps}
-        />
+        <StrippedTextarea {...textareaProps} />
       ) : (
-        <StrippedInput
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          {...inputProps}
-        />
+        <StrippedInput {...inputProps} />
       )}
       {(inputIcon || unit) && (
         <Adornments multiline={multiline}>
