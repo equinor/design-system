@@ -153,6 +153,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       { density },
       multiple ? multiSelectTokens : selectTokens,
     )()
+    let placeholderText: string = undefined
 
     useEffect(() => {
       if (isControlled) {
@@ -208,6 +209,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     }
 
     if (multiple) {
+      placeholderText = `${selectedItems.length}/${items.length} selected`
       comboBoxProps = {
         ...comboBoxProps,
         stateReducer: (state, actionAndChanges) => {
@@ -248,10 +250,6 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       inputValue,
     } = useCombobox(comboBoxProps)
 
-    const placeholderText = multiple
-      ? `${selectedItems.length}/${items.length} selected`
-      : ''
-
     const openSelect = () => {
       if (!isOpen && !(disabled || readOnly)) {
         openMenu()
@@ -273,7 +271,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
               {...getInputProps({
                 disabled,
               })}
-              placeholder={multiple ? placeholderText : undefined}
+              placeholder={placeholderText}
               readOnly={readOnly}
               onFocus={openSelect}
               onClick={openSelect}
