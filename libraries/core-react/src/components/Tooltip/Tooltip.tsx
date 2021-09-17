@@ -1,4 +1,4 @@
-import {
+import React, {
   forwardRef,
   useRef,
   useState,
@@ -13,6 +13,7 @@ import {
   spacingsTemplate,
   typographyTemplate,
   bordersTemplate,
+  joinHandlers,
 } from '../../utils'
 import {
   usePopper,
@@ -163,6 +164,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...attributes.popper,
     }
 
+    const childProps = children.props as HTMLAttributes<HTMLElement>
     const updatedChildren = cloneElement(children, {
       ref: combinedChilddRef,
       'aria-describedby': open ? tooltipId : null,
@@ -170,9 +172,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       onMouseLeave: closeTooltip,
       onPointerEnter: openTooltip,
       onPointerLeave: closeTooltip,
-      onBlur: closeTooltip,
-      onFocus: openTooltip,
-    } as HTMLAttributes<React.ReactElement>)
+      onBlur: joinHandlers(closeTooltip, childProps.onBlur),
+      onFocus: joinHandlers(openTooltip, childProps.onFocus),
+    } as HTMLAttributes<HTMLElement>)
 
     return (
       <>
