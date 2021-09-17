@@ -11,7 +11,7 @@ import 'jest-styled-components'
 import { UseComboboxStateChange } from 'downshift'
 
 import styled from 'styled-components'
-import { Combobox } from '.'
+import { Combobox, ComboboxChanges } from '.'
 
 const items = ['One', 'Two', 'Three']
 const labelText = 'Select label test'
@@ -77,10 +77,8 @@ describe('MultiSelect', () => {
         items={items}
         label={labelText}
         selectedOptions={selected}
-        handleSelectedItemsChange={(
-          changes: UseComboboxStateChange<string>,
-        ) => {
-          setSelected([changes.selectedItem])
+        handleSelectedItemsChange={(changes: ComboboxChanges) => {
+          setSelected(changes.selectedItems)
           onChange()
         }}
       />

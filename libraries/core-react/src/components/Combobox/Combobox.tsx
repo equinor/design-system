@@ -1,9 +1,5 @@
 import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
-import {
-  useCombobox,
-  UseComboboxProps,
-  UseComboboxStateChange,
-} from 'downshift'
+import { useCombobox, UseComboboxProps } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
 import { Icon } from '../Icon'
@@ -100,6 +96,11 @@ const StyledButton = styled(Button)(
   `,
 )
 
+export type ComboboxChanges = {
+  selectedItems: string[]
+  inputValue: string
+}
+
 export type ComboboxProps = {
   /** List of options to choose from */
   items: string[]
@@ -121,7 +122,7 @@ export type ComboboxProps = {
   /** Callback for the selected item change
    * changes.selectedItem gives the selected item
    */
-  handleSelectedItemsChange?: (changes: UseComboboxStateChange<string>) => void
+  handleSelectedItemsChange?: (changes: ComboboxChanges) => void
   /** Enable multiselect */
   multiple?: boolean
 } & SelectHTMLAttributes<HTMLSelectElement>
@@ -179,8 +180,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           setInputItems(items)
         }
       },
-      onSelectedItemChange: handleSelectedItemsChange,
-      onStateChange: ({ type, selectedItem }) => {
+      onStateChange: ({ type, selectedItem, inputValue }) => {
         switch (type) {
           case useCombobox.stateChangeTypes.InputChange:
             break
@@ -189,15 +189,24 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           case useCombobox.stateChangeTypes.InputBlur:
             if (selectedItem) {
               const index = selectedItems.indexOf(selectedItem)
+              let updatedSelectItems: string[] = []
               if (index > 0) {
-                setSelectedItems([
+                updatedSelectItems = [
                   ...selectedItems.slice(0, index),
                   ...selectedItems.slice(index + 1),
-                ])
+                ]
               } else if (index === 0) {
-                setSelectedItems([...selectedItems.slice(1)])
+                updatedSelectItems = [...selectedItems.slice(1)]
               } else {
-                setSelectedItems([...selectedItems, selectedItem])
+                updatedSelectItems = [...selectedItems, selectedItem]
+              }
+
+              setSelectedItems(updatedSelectItems)
+              if (handleSelectedItemsChange) {
+                handleSelectedItemsChange({
+                  selectedItems: updatedSelectItems,
+                  inputValue,
+                })
               }
             }
 

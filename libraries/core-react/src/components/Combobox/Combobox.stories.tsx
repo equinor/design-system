@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState } from 'react'
-import { Combobox, ComboboxProps, Button, Typography, EdsProvider } from '../..'
+import {
+  Combobox,
+  ComboboxProps,
+  ComboboxChanges,
+  Button,
+  Typography,
+  EdsProvider,
+} from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
-import { UseMultipleSelectionStateChange } from 'downshift'
+import { UseComboboxStateChange } from 'downshift'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
@@ -50,6 +57,7 @@ const initial = ['Troms og Finnmark', 'Vestland']
 export const WithPreselected: Story<ComboboxProps> = () => (
   <Wrapper>
     <Combobox
+      multiple
       label="I have preselected options"
       items={items}
       initialSelectedItems={initial}
@@ -60,9 +68,7 @@ export const WithPreselected: Story<ComboboxProps> = () => (
 export const UseOnChangeHandler: Story<ComboboxProps> = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>(initial)
 
-  function handleSelectedItemsChange(
-    changes: UseMultipleSelectionStateChange<string>,
-  ) {
+  function handleSelectedItemsChange(changes: ComboboxChanges) {
     setSelectedItems(changes.selectedItems)
   }
   return (
@@ -71,6 +77,7 @@ export const UseOnChangeHandler: Story<ComboboxProps> = () => {
         <p>My value is {selectedItems.join(', ')}</p>
       )}
       <Combobox
+        multiple
         label="I can show my values outside the component itself"
         items={items}
         initialSelectedItems={initial}
@@ -82,9 +89,7 @@ export const UseOnChangeHandler: Story<ComboboxProps> = () => {
 export const Controlled: Story<ComboboxProps> = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>(initial)
 
-  function handleSelectedItemsChange(
-    changes: UseMultipleSelectionStateChange<string>,
-  ) {
+  function handleSelectedItemsChange(changes: ComboboxChanges) {
     setSelectedItems(changes.selectedItems)
   }
   return (
@@ -93,6 +98,7 @@ export const Controlled: Story<ComboboxProps> = () => {
         <p>My value is {selectedItems.join(', ')}</p>
       )}
       <Combobox
+        multiple
         label="I'm a controlled component"
         items={items}
         selectedOptions={selectedItems}
