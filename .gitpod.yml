@@ -1,7 +1,6 @@
 tasks:
   - name: Install
     init: |
-      npm i -g pnpm@6
       pnpm install
       pnpm recursive install --filter ./libraries
       gp sync-done install
