@@ -12,6 +12,8 @@ const icons = {
 
 Icon.add(icons)
 
+const iconSize = 24
+
 const Wrapper = styled.div`
   height: auto;
   width: 100%;
@@ -53,7 +55,7 @@ export const Default: Story<CardProps> = (args) => (
           <Typography variant="body_short">With some short content.</Typography>
         </Card.HeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_vertical" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
         </Button>
       </Card.Header>
     </Card>
@@ -120,7 +122,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="body_short">Body short</Typography>
         </Card.HeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_vertical" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
         </Button>
       </Card.Header>
     </Card>
@@ -148,7 +150,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="body_short">Body short</Typography>
         </Card.HeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_vertical" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
         </Button>
       </Card.Header>
     </Card>
@@ -178,7 +180,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="body_short">Caption</Typography>
         </Card.HeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_vertical" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
         </Button>
       </Card.Header>
     </Card>
@@ -199,7 +201,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
           <Typography variant="h6">Title goes here</Typography>
         </Card.HeaderTitle>
         <Button variant="ghost_icon">
-          <Icon name="more_vertical" title="more action" size={48}></Icon>
+          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
         </Button>
       </Card.Header>
     </Card>
@@ -304,13 +306,17 @@ export const WithActions: Story<CardProps> = () => (
       </Typography>
       <Card.Actions alignRight>
         <Button variant="ghost_icon">
-          <Icon name="person_add" title="add person action" size={48}></Icon>
+          <Icon
+            name="person_add"
+            title="add person action"
+            size={iconSize}
+          ></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="settings" title="settings action" size={48}></Icon>
+          <Icon name="settings" title="settings action" size={iconSize}></Icon>
         </Button>
         <Button variant="ghost_icon">
-          <Icon name="save" title="save action" size={48}></Icon>
+          <Icon name="save" title="save action" size={iconSize}></Icon>
         </Button>
       </Card.Actions>
     </Card>
@@ -328,7 +334,7 @@ export const WithActions: Story<CardProps> = () => (
       </Typography>
       <Card.Actions meta="Share">
         <Button variant="ghost_icon">
-          <Icon name="share" title="share action" size={48}></Icon>
+          <Icon name="share" title="share action" size={iconSize}></Icon>
         </Button>
       </Card.Actions>
     </Card>
