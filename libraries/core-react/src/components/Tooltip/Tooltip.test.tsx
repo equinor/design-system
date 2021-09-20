@@ -10,7 +10,8 @@ import {
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { Tooltip } from '.'
+import { Tooltip, Button } from '../../'
+import React from 'react'
 
 const StyledTooltip = styled(Tooltip)`
   background: red;
@@ -120,5 +121,15 @@ describe('Tooltip', () => {
       expect(content).toBeDefined()
       expect(tooltip).toBeDefined()
     })
+  })
+  it('child onFocus is called when focusd', () => {
+    const handler = jest.fn()
+    render(
+      <Tooltip title="Tooltip">
+        <Button onFocus={handler}>Test</Button>
+      </Tooltip>,
+    )
+
+    expect(handler).toBeCalled()
   })
 })
