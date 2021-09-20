@@ -170,7 +170,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       'aria-describedby': open ? tooltipId : null,
       onMouseOver: joinHandlers(openTooltip, childProps.onMouseOver),
       onMouseLeave: joinHandlers(closeTooltip, childProps.onMouseLeave),
-      onPointerEnter: joinHandlers(closeTooltip, childProps.onPointerEnter),
+      onPointerEnter: joinHandlers(openTooltip, childProps.onPointerEnter),
       onPointerLeave: joinHandlers(closeTooltip, childProps.onPointerLeave),
       onBlur: joinHandlers(closeTooltip, childProps.onBlur),
       onFocus: joinHandlers(openTooltip, childProps.onFocus),
