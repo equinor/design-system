@@ -15,7 +15,7 @@ export default {
     docs: {
       description: {
         component:
-          'Selection controls allow users to select options, make decisions and set preferences. Parent must have `position: relative',
+          'Selection controls allow users to select options, make decisions and set preferences. Parent must have `position: relative`',
       },
     },
   },
