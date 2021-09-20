@@ -11,7 +11,6 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Tooltip, Button } from '../../'
-import React from 'react'
 
 const StyledTooltip = styled(Tooltip)`
   background: red;
@@ -130,6 +129,8 @@ describe('Tooltip', () => {
       </Tooltip>,
     )
 
+    const button = screen.getByText('test')
+    fireEvent.focus(button)
     expect(handler).toBeCalled()
   })
 })
