@@ -13,6 +13,7 @@ import {
   spacingsTemplate,
   typographyTemplate,
   bordersTemplate,
+  joinHandlers,
 } from '../../utils'
 import {
   usePopper,
@@ -163,16 +164,17 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...attributes.popper,
     }
 
+    const childProps = children.props as HTMLAttributes<HTMLElement>
     const updatedChildren = cloneElement(children, {
       ref: combinedChilddRef,
       'aria-describedby': open ? tooltipId : null,
-      onMouseOver: openTooltip,
-      onMouseLeave: closeTooltip,
-      onPointerEnter: openTooltip,
-      onPointerLeave: closeTooltip,
-      onBlur: closeTooltip,
-      onFocus: openTooltip,
-    } as HTMLAttributes<React.ReactElement>)
+      onMouseOver: joinHandlers(openTooltip, childProps.onMouseOver),
+      onMouseLeave: joinHandlers(closeTooltip, childProps.onMouseLeave),
+      onPointerEnter: joinHandlers(openTooltip, childProps.onPointerEnter),
+      onPointerLeave: joinHandlers(closeTooltip, childProps.onPointerLeave),
+      onBlur: joinHandlers(closeTooltip, childProps.onBlur),
+      onFocus: joinHandlers(openTooltip, childProps.onFocus),
+    } as HTMLAttributes<HTMLElement>)
 
     return (
       <>
