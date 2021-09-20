@@ -168,10 +168,10 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const updatedChildren = cloneElement(children, {
       ref: combinedChilddRef,
       'aria-describedby': open ? tooltipId : null,
-      onMouseOver: openTooltip,
-      onMouseLeave: closeTooltip,
-      onPointerEnter: openTooltip,
-      onPointerLeave: closeTooltip,
+      onMouseOver: joinHandlers(openTooltip, childProps.onMouseOver),
+      onMouseLeave: joinHandlers(closeTooltip, childProps.onMouseLeave),
+      onPointerEnter: joinHandlers(closeTooltip, childProps.onPointerEnter),
+      onPointerLeave: joinHandlers(closeTooltip, childProps.onPointerLeave),
       onBlur: joinHandlers(closeTooltip, childProps.onBlur),
       onFocus: joinHandlers(openTooltip, childProps.onFocus),
     } as HTMLAttributes<HTMLElement>)
