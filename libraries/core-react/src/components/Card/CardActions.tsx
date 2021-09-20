@@ -14,7 +14,6 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
-  grid-auto-columns: max-content;
   align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
 `
