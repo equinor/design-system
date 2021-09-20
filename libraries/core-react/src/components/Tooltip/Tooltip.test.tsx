@@ -129,8 +129,9 @@ describe('Tooltip', () => {
       </Tooltip>,
     )
 
-    const button = screen.getByText('test')
+    const button = screen.getByText('Test')
     fireEvent.focus(button)
+
     expect(handler).toBeCalled()
   })
 })
