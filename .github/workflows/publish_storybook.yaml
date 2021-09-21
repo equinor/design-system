@@ -6,6 +6,13 @@ on:
         description: 'Azure webapp slot for Storybook (development | production)'
         required: false
         default: 'development'
+  push:
+    branches:
+      - develop
+    paths:
+      - 'libraries/core-react/**'
+      - 'libraries/tokens/**'
+      - 'libraries/icons/**'
 jobs:
   setup:
     name: Setup base files
