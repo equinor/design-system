@@ -61,7 +61,6 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
     },
     focus: {
       outline: {
-        type: 'outline',
         offset: '0px',
       },
     },
