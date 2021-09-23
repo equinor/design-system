@@ -9,10 +9,10 @@ exports[`Input Matches snapshot 1`] = `
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: transparent;
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
   border: none;
   height: 36px;
-  box-shadow: none;
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
   outline: 1px solid transparent;
   outline-offset: 0px;
   margin: 0;
@@ -66,6 +66,11 @@ exports[`Input Matches snapshot 1`] = `
 .c0:disabled:focus,
 .c0:disabled:active {
   outline: none;
+}
+
+.c0[readOnly] {
+  background: transparent;
+  box-shadow: none;
 }
 
 <input
