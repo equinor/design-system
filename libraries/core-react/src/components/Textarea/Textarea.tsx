@@ -13,7 +13,7 @@ import { useEds } from '../EdsProvider'
 
 const { input } = tokens
 
-const Variation = ({ variant, token, density }: StyledProps) => {
+const Variation = ({ variant, token, density, readOnly }: StyledProps) => {
   if (!variant) {
     return ``
   }
@@ -36,6 +36,7 @@ const Variation = ({ variant, token, density }: StyledProps) => {
     ${spacingsTemplate(spacings)}
     ${outlineTemplate(activeOutline)}
     box-shadow: ${boxShadow};
+    box-shadow: ${readOnly ? 'none' : boxShadow};
 
     &:active,
     &:focus {
@@ -60,6 +61,7 @@ type StyledProps = {
   token: InputToken
   variant: string
   density: string
+  readOnly: boolean
 }
 
 const StyledTextarea = styled.textarea<StyledProps>`
@@ -68,7 +70,8 @@ const StyledTextarea = styled.textarea<StyledProps>`
   margin: 0;
   border: none;
   appearance: none;
-  background: ${input.background};
+  background: ${({ readOnly }) =>
+    readOnly ? 'transparent' : input.background};
   height: auto;
   ${typographyTemplate(input.typography)}
 
@@ -91,14 +94,21 @@ export type TextareaProps = {
   /** Type */
   type?: string
   /** Read Only */
-  readonly?: boolean
+  readOnly?: boolean
   /** Specifies max rows for multiline input */
   rowsMax?: number
 } & TextareaHTMLAttributes<HTMLTextAreaElement>
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
-    { variant = 'default', disabled = false, type = 'text', rowsMax, ...other },
+    {
+      variant = 'default',
+      disabled = false,
+      readOnly = false,
+      type = 'text',
+      rowsMax,
+      ...other
+    },
     ref,
   ) {
     const actualVariant = variant === 'default' ? 'input' : variant
@@ -123,6 +133,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ref: useCombinedRefs<HTMLTextAreaElement>(ref, setTextareaEl),
       type,
       disabled,
+      readOnly,
       variant,
       token: inputVariant,
       density,

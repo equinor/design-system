@@ -60,6 +60,7 @@ const StrippedTextarea = styled(Textarea)`
 type InputWrapperType = {
   isFocused: boolean
   isDisabled: boolean
+  isReadOnly: boolean
   variant: string
   token: TextFieldToken
   inputIcon?: ReactNode
@@ -68,7 +69,7 @@ type InputWrapperType = {
 }
 
 export const InputWrapper = styled.div<InputWrapperType>(
-  ({ inputIcon, unit, isDisabled, multiline, variant }) => css`
+  ({ inputIcon, unit, isDisabled, isReadOnly, multiline, variant }) => css`
     ${Variation}
     ${(inputIcon || unit) &&
     css`
@@ -77,7 +78,11 @@ export const InputWrapper = styled.div<InputWrapperType>(
       background: ${textfield.background};
       padding-right: ${textfield.spacings.right};
     `}
-
+    ${isReadOnly &&
+    css`
+      box-shadow: none;
+      background: transparent;
+    `}
     ${isDisabled &&
     css`
       box-shadow: none;
@@ -142,7 +147,7 @@ type FieldProps = {
   /** Type */
   type?: string
   /** Read Only */
-  readonly?: boolean
+  readOnly?: boolean
   /** Unit text */
   unit?: string
   /* Input icon */
@@ -159,6 +164,7 @@ export const Field = forwardRef<
     multiline,
     variant,
     disabled,
+    readOnly,
     type,
     unit,
     inputIcon,
@@ -192,6 +198,7 @@ export const Field = forwardRef<
   const inputWrapperProps = {
     isFocused,
     isDisabled: disabled,
+    isReadOnly: readOnly,
     variant,
     token: inputVariant,
     inputIcon,
@@ -203,6 +210,7 @@ export const Field = forwardRef<
     ref: ref as Ref<HTMLInputElement>,
     type,
     disabled,
+    readOnly,
     variant,
     onBlur: blurHandler,
     onFocus: focusHandler,

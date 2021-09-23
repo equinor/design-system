@@ -11,7 +11,7 @@ import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 
-const StyledInput = styled.input(({ theme }: StyledProps) => {
+const StyledInput = styled.input(({ theme, isReadOnly }: StyledProps) => {
   const {
     states: {
       focus: { outline: focusOutline },
@@ -26,10 +26,10 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
     box-sizing: border-box;
     margin: 0;
     appearance: none;
-    background: ${theme.background};
+    background: ${isReadOnly ? 'transparent' : theme.background};
     border: none;
     height: ${theme.minHeight};
-    box-shadow: ${boxShadow};
+    box-shadow: ${isReadOnly ? 'none' : boxShadow};
 
     ${outlineTemplate(activeOutline)}
     ${typographyTemplate(theme.typography)}
@@ -61,6 +61,7 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
 
 type StyledProps = {
   theme: InputToken
+  isReadOnly: boolean
 }
 
 export type InputProps = {
@@ -73,11 +74,17 @@ export type InputProps = {
   /** Type */
   type?: string
   /** Read Only */
-  readonly?: boolean
+  readOnly?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { variant = 'default', disabled = false, type = 'text', ...other },
+  {
+    variant = 'default',
+    disabled = false,
+    readOnly = false,
+    type = 'text',
+    ...other
+  },
   ref,
 ) {
   const actualVariant = variant === 'default' ? 'input' : variant
@@ -89,12 +96,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     ref,
     type,
     disabled,
+    readOnly,
     ...other,
   }
 
   return (
     <ThemeProvider theme={token}>
-      <StyledInput {...inputProps} />
+      <StyledInput isReadOnly={readOnly} {...inputProps} />
     </ThemeProvider>
   )
 })
