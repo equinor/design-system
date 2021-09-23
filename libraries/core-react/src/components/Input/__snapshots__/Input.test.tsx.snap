@@ -9,10 +9,10 @@ exports[`Input Matches snapshot 1`] = `
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  background: transparent;
   border: none;
   height: 36px;
-  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  box-shadow: none;
   outline: 1px solid transparent;
   outline-offset: 0px;
   margin: 0;
