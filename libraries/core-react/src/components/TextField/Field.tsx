@@ -80,8 +80,8 @@ export const InputWrapper = styled.div<InputWrapperType>(
     `}
     ${isReadOnly &&
     css`
-      box-shadow: none;
-      background: transparent;
+      box-shadow: ${textfield.states.readOnly.boxShadow};
+      background: ${textfield.states.readOnly.background};
     `}
     ${isDisabled &&
     css`

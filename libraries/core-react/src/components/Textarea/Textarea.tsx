@@ -13,7 +13,7 @@ import { useEds } from '../EdsProvider'
 
 const { input } = tokens
 
-const Variation = ({ variant, token, density, readOnly }: StyledProps) => {
+const Variation = ({ variant, token, density }: StyledProps) => {
   if (!variant) {
     return ``
   }
@@ -36,7 +36,6 @@ const Variation = ({ variant, token, density, readOnly }: StyledProps) => {
     ${spacingsTemplate(spacings)}
     ${outlineTemplate(activeOutline)}
     box-shadow: ${boxShadow};
-    box-shadow: ${readOnly ? 'none' : boxShadow};
 
     &:active,
     &:focus {
@@ -61,7 +60,6 @@ type StyledProps = {
   token: InputToken
   variant: string
   density: string
-  readOnly: boolean
 }
 
 const StyledTextarea = styled.textarea<StyledProps>`
@@ -70,8 +68,7 @@ const StyledTextarea = styled.textarea<StyledProps>`
   margin: 0;
   border: none;
   appearance: none;
-  background: ${({ readOnly }) =>
-    readOnly ? 'transparent' : input.background};
+  background: ${input.background};
   height: auto;
   ${typographyTemplate(input.typography)}
 
@@ -81,6 +78,10 @@ const StyledTextarea = styled.textarea<StyledProps>`
   }
   &:disabled {
     color: ${input.states.disabled.typography.color};
+  }
+  &[readOnly] {
+    box-shadow: ${input.states.readOnly.boxShadow};
+    background: ${input.states.readOnly.background};
   }
 `
 
@@ -101,14 +102,7 @@ export type TextareaProps = {
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
-    {
-      variant = 'default',
-      disabled = false,
-      readOnly = false,
-      type = 'text',
-      rowsMax,
-      ...other
-    },
+    { variant = 'default', disabled = false, type = 'text', rowsMax, ...other },
     ref,
   ) {
     const actualVariant = variant === 'default' ? 'input' : variant
@@ -133,7 +127,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ref: useCombinedRefs<HTMLTextAreaElement>(ref, setTextareaEl),
       type,
       disabled,
-      readOnly,
       variant,
       token: inputVariant,
       density,

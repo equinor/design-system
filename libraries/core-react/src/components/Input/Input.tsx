@@ -17,6 +17,7 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
       focus: { outline: focusOutline },
       active: { outline: activeOutline },
       disabled,
+      readOnly,
     },
     boxShadow,
   } = theme
@@ -57,8 +58,8 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
       }
     }
     &[readOnly] {
-      background: transparent;
-      box-shadow: none;
+      background: ${readOnly.background};
+      box-shadow: ${readOnly.boxShadow};
     }
   `
 })
