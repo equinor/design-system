@@ -1,10 +1,17 @@
-import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
+import React, {
+  Children,
+  forwardRef,
+  SelectHTMLAttributes,
+  useEffect,
+  cloneElement,
+  PropsWithChildren,
+  useMemo,
+} from 'react'
 import { useCombobox, UseComboboxProps } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
-import { CheckboxInput } from '../Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
@@ -24,6 +31,7 @@ import {
   ComboboxProvider,
   useComboboxContext,
 } from './Combobox.context'
+import { ComboboxOptionProps } from './Option'
 
 const Container = styled.div`
   position: relative;
@@ -113,21 +121,26 @@ const ComboboxContainer = forwardRef<HTMLDivElement, ComboboxProps>(
       initialSelectedItems = [],
       handleSelectedItemsChange,
       multiple,
+      children,
       ...other
     },
     ref,
   ) {
-    const { inputItems, setInputItems, selectedItems, setSelectedItems } =
-      // eslint-disable-next-line prettier/prettier
-      useComboboxContext()
+    const {
+      inputItems,
+      setInputItems,
+      selectedItems,
+      setSelectedItems,
+      setHighlightedIndex,
+    } = useComboboxContext()
 
     let placeholderText: string = undefined
 
-    useEffect(() => {
-      if (initialSelectedItems.length) {
-        setSelectedItems(initialSelectedItems)
-      }
-    }, [])
+    // useEffect(() => {
+    //   if (initialSelectedItems.length) {
+    //     setSelectedItems(initialSelectedItems)
+    //   }
+    // }, [])
 
     let comboBoxProps: UseComboboxProps<string> = {
       items: inputItems || [],
@@ -230,6 +243,22 @@ const ComboboxContainer = forwardRef<HTMLDivElement, ComboboxProps>(
       }
     }
 
+    // useEffect(() => {
+    //   setHighlightedIndex(highlightedIndex)
+    // }, [highlightedIndex, setHighlightedIndex])
+
+    const comboboxChildren = useMemo(
+      () =>
+        Children.map(children, (child, index) => {
+          const item = child as OptionChild
+          return cloneElement(item, {
+            index,
+            ...getItemProps({ item: item.props.value, index, disabled }),
+          })
+        }),
+      [children, disabled, getItemProps],
+    )
+
     return (
       <Container className={className} ref={ref}>
         <Label
@@ -272,31 +301,14 @@ const ComboboxContainer = forwardRef<HTMLDivElement, ComboboxProps>(
           </StyledButton>
         </Container>
         <StyledList {...getMenuProps()}>
-          {isOpen &&
-            inputItems?.map((item, index) => (
-              <StyledListItem
-                key={`${item}`}
-                highlighted={highlightedIndex === index ? 'true' : 'false'}
-                active={!multiple && selectedItem === item ? 'true' : 'false'}
-                {...getItemProps({ item, index, disabled })}
-              >
-                {multiple && (
-                  <CheckboxInput
-                    checked={selectedItems?.includes(item)}
-                    value={item}
-                    onChange={() => {
-                      return null
-                    }}
-                  />
-                )}
-                <span>{item}</span>
-              </StyledListItem>
-            ))}
+          {isOpen && comboboxChildren}
         </StyledList>
       </Container>
     )
   },
 )
+
+type OptionChild = React.ReactElement<PropsWithChildren<ComboboxOptionProps>>
 
 export type ComboboxChanges = {
   selectedItems: string[]
@@ -330,7 +342,7 @@ export type ComboboxProps = {
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
-  function Combobox({ multiple, items, selectedOptions, ...other }, ref) {
+  function Combobox({ multiple, selectedOptions, children, ...other }, ref) {
     const { density } = useEds()
     const token = useToken(
       { density },
@@ -339,17 +351,27 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
     const isControlled = typeof selectedOptions !== 'undefined'
 
-    const provideProps: ComboboxProvideProps = {
-      multiple,
-      inputItems: items,
-      selectedItems: isControlled ? selectedOptions : [],
-    }
+    const items = useMemo(
+      () =>
+        Children.toArray(children).map((x) => (x as OptionChild).props.value),
+      [children],
+    )
+
+    const provideProps: ComboboxProvideProps = useMemo(
+      () => ({
+        multiple,
+        inputItems: items,
+        selectedItems: isControlled ? selectedOptions : [],
+      }),
+      [isControlled, items, multiple, selectedOptions],
+    )
 
     const props = {
       items,
       selectedOptions,
       multiple,
       ref,
+      children,
       ...other,
     }
 
