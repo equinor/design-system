@@ -79,6 +79,10 @@ const StyledTextarea = styled.textarea<StyledProps>`
   &:disabled {
     color: ${input.states.disabled.typography.color};
   }
+  &[readOnly] {
+    box-shadow: ${input.states.readOnly.boxShadow};
+    background: ${input.states.readOnly.background};
+  }
 `
 
 export type TextareaProps = {
@@ -91,7 +95,7 @@ export type TextareaProps = {
   /** Type */
   type?: string
   /** Read Only */
-  readonly?: boolean
+  readOnly?: boolean
   /** Specifies max rows for multiline input */
   rowsMax?: number
 } & TextareaHTMLAttributes<HTMLTextAreaElement>

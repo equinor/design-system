@@ -54,6 +54,10 @@ export const input: InputToken = {
         color: disabled__text.rgba,
       },
     },
+    readOnly: {
+      background: 'transparent',
+      boxShadow: 'none',
+    },
     active: {
       outline: {
         type: 'outline',

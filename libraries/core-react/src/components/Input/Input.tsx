@@ -17,6 +17,7 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
       focus: { outline: focusOutline },
       active: { outline: activeOutline },
       disabled,
+      readOnly,
     },
     boxShadow,
   } = theme
@@ -56,6 +57,10 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
         outline: none;
       }
     }
+    &[readOnly] {
+      background: ${readOnly.background};
+      box-shadow: ${readOnly.boxShadow};
+    }
   `
 })
 
@@ -73,7 +78,7 @@ export type InputProps = {
   /** Type */
   type?: string
   /** Read Only */
-  readonly?: boolean
+  readOnly?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(

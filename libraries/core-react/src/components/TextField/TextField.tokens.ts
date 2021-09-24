@@ -37,6 +37,10 @@ export const textfield: TextFieldToken = {
         offset: '0px',
       },
     },
+    readOnly: {
+      background: 'transparent',
+      boxShadow: 'none',
+    },
   },
   entities: {
     unit: {

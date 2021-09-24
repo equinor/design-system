@@ -68,6 +68,11 @@ exports[`Input Matches snapshot 1`] = `
   outline: none;
 }
 
+.c0[readOnly] {
+  background: transparent;
+  box-shadow: none;
+}
+
 <input
     class="c0"
     readonly=""

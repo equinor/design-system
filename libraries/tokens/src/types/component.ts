@@ -23,6 +23,7 @@ export type ComponentToken = {
   states?: {
     active?: ComponentToken & { outline?: Outline }
     disabled?: ComponentToken
+    readOnly?: ComponentToken & { outline?: Outline }
     focus?: ComponentToken & { outline?: Outline }
     hover?: ComponentToken
     pressed?: ComponentToken & { pressed?: Pressed }

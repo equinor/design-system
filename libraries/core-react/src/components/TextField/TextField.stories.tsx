@@ -231,6 +231,49 @@ export const Disabled: Story<TextFieldProps> = () => (
     />
   </Wrapper>
 )
+
+export const ReadOnly: Story<TextFieldProps> = () => (
+  <Wrapper>
+    <TextField
+      id="storybook-readonly"
+      placeholder="Placeholder text"
+      label="Read only"
+      meta="Meta"
+      helperText="Helper Text"
+      readOnly
+    />
+    <TextField
+      id="storybook-readonly-two"
+      defaultValue="Input text"
+      label="Read only"
+      meta="Meta"
+      helperText="Helper Text"
+      readOnly
+    />
+    <TextField
+      id="storybook-unit-readonly-three"
+      defaultValue="Input value"
+      label="Read only icon + unit"
+      unit="$"
+      readOnly
+      inputIcon={<Icon name="thumbs_up" />}
+    />
+    <TextField
+      id="storybook-multi-readonly"
+      label="Multiline variant read only"
+      defaultValue="Input value that spans multiple lines"
+      multiline
+      variant="error"
+      readOnly
+      style={{ resize: 'none' }}
+      rows={2}
+      helperText="helper text"
+      inputIcon={<Icon name="warning_filled" title="Warning" />}
+    />
+  </Wrapper>
+)
+ReadOnly.storyName = 'Read only'
+
 export const WithUnit: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
