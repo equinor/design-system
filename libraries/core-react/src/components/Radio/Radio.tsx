@@ -1,6 +1,6 @@
 /* eslint camelcase: "off" */
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import {
   radio_button_selected, // eslint-disable-line camelcase
   radio_button_unselected, // eslint-disable-line camelcase
@@ -12,6 +12,8 @@ import {
   spacingsTemplate,
   outlineTemplate,
 } from '../../utils'
+import { useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 const Input = styled.input.attrs(({ type = 'radio' }) => ({
   type,
@@ -30,7 +32,7 @@ const Input = styled.input.attrs(({ type = 'radio' }) => ({
   }
 
   &[data-focus-visible-added]:focus + svg {
-    ${outlineTemplate(tokens.states.focus.outline)}
+    ${({ theme }) => outlineTemplate(theme.states.focus.outline)}
   }
 
   &:not(:checked) ~ svg path[name='selected'] {
@@ -75,12 +77,13 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
 
 const LabelText = styled.span`
   ${typographyTemplate(tokens.typography)}
+  ${spacingsTemplate(tokens.entities.label.spacings)}
 `
 
 type StyledInputWrapperProps = { disabled: boolean }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
-  ${spacingsTemplate(tokens.spacings)}
+  ${({ theme }) => spacingsTemplate(theme.spacings)}
   display: inline-flex;
   border-radius: 50%;
   @media (hover: hover) and (pointer: fine) {
@@ -103,25 +106,30 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   { label, disabled = false, className, ...rest },
   ref,
 ) {
+  const { density } = useEds()
+  const token = useToken({ density }, tokens)()
+
   const iconSize = 24
   const fill = disabled ? tokens.states.disabled.background : tokens.background
   return (
-    <StyledRadio disabled={disabled} className={className}>
-      <InputWrapper disabled={disabled}>
-        <Input {...rest} ref={ref} disabled={disabled} />
-        <Svg
-          width={iconSize}
-          height={iconSize}
-          viewBox={`0 0 ${iconSize} ${iconSize}`}
-          fill={fill}
-          aria-hidden
-        >
-          <StyledPath icon={radio_button_selected} name="selected" />
-          <StyledPath icon={radio_button_unselected} name="unselected" />
-        </Svg>
-      </InputWrapper>
-      {label && <LabelText>{label}</LabelText>}
-    </StyledRadio>
+    <ThemeProvider theme={token}>
+      <StyledRadio disabled={disabled} className={className}>
+        <InputWrapper disabled={disabled}>
+          <Input {...rest} ref={ref} disabled={disabled} />
+          <Svg
+            width={iconSize}
+            height={iconSize}
+            viewBox={`0 0 ${iconSize} ${iconSize}`}
+            fill={fill}
+            aria-hidden
+          >
+            <StyledPath icon={radio_button_selected} name="selected" />
+            <StyledPath icon={radio_button_unselected} name="unselected" />
+          </Svg>
+        </InputWrapper>
+        {label && <LabelText>{label}</LabelText>}
+      </StyledRadio>
+    </ThemeProvider>
   )
 })
 

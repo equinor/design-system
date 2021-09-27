@@ -14,7 +14,7 @@ const {
     navigation: { menu_title: labelTypography },
   },
   spacings: {
-    comfortable: { medium_small },
+    comfortable: { medium_small, x_small },
   },
 } = tokens
 
@@ -42,7 +42,35 @@ export const comfortable: RadioToken = {
         style: 'dashed',
         width: '1px',
         color: focusOutlineColor,
-        offset: '4px',
+        offset: '11px',
+      },
+    },
+  },
+  entities: {
+    label: {
+      spacings: {
+        left: medium_small,
+      },
+    },
+  },
+  modes: {
+    compact: {
+      spacings: {
+        bottom: x_small,
+        top: x_small,
+        left: x_small,
+        right: x_small,
+      },
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            style: 'dashed',
+            width: '1px',
+            color: focusOutlineColor,
+            offset: '3px',
+          },
+        },
       },
     },
   },
