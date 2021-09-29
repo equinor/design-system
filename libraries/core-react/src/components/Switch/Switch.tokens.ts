@@ -24,7 +24,7 @@ const {
   clickbounds,
   elevation: { raised: boxShadow },
   spacings: {
-    comfortable: { small, medium_small },
+    comfortable: { medium_small },
   },
   shape: {
     circle,
