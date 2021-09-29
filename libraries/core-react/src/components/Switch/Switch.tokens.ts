@@ -24,7 +24,7 @@ const {
   clickbounds,
   elevation: { raised: boxShadow },
   spacings: {
-    comfortable: { small },
+    comfortable: { small, medium_small },
   },
   shape: {
     circle,
@@ -55,7 +55,7 @@ export const comfortable: SwitchToken = {
   entities: {
     label: {
       spacings: {
-        left: small,
+        left: medium_small,
       },
     },
     track: {
@@ -141,7 +141,6 @@ export const comfortable: SwitchToken = {
         type: 'outline',
         style: 'dashed',
         color: focusOutlineColor,
-        offset: '2px',
       },
     },
     hover: {
