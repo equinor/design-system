@@ -8,7 +8,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `The **Input** component is intended to use if you need to more flexibility than the wrapped <code>TextField</code> or
+        component: `The **Input** component is intended to use if you need to more flexibility than the wrapped TextField or
         select components give.
         `,
       },

@@ -7,7 +7,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `The **Label** component is intended to use if you need to more flexibility than the wrapped <code>TextField</code> or
+        component: `The **Label** component is intended to use if you need to more flexibility than the wrapped TextField or
         select components give.<br/>
         `,
       },
@@ -43,8 +43,8 @@ export const Accessiblity: Story<LabelProps> = () => {
 }
 Accessiblity.parameters = {
   docs: {
-    storyDescription: `It's important to link the <code>Label</code> to the corresponding input element. Use the React version of the html for attribute <code>htmlFor</code>
-    as <code>Label</code> does not support to wrap the input field.
+    storyDescription: `It's important to link the Label to the corresponding input element. Use the React version of the html for attribute htmlFor
+    as Label does not support to wrap the input field.
     `,
   },
 }
