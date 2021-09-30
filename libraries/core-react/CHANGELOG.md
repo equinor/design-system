@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0] - 2021-09-30
+
+### Added
+
+- New `placement` property for `Snackbar` for more placement variety ([#1488](https://github.com/equinor/design-system/issues/1488))
+- "Clear selection" button for `SingleSelect` & `MultiSelect` ([#1411](https://github.com/equinor/design-system/issues/1411))
+- `SingleSelect` & `MultiSelect` will show all items when reopnened, with selected items being highlighted ([#1065](https://github.com/equinor/design-system/issues/1065))
+- `SingleSelect` & `MultiSelect` will now open on focus ([#1165](https://github.com/equinor/design-system/issues/1165))
+
+### Fixed
+
+- Missing `readOnly` styles for `Textfield` ([#1162](https://github.com/equinor/design-system/issues/1162))
+- `Tooltip` should now respect external handlers ([#1558](https://github.com/equinor/design-system/issues/1558))
+- `TextField` should now respect external handlers ([#1538](https://github.com/equinor/design-system/issues/1538))
+- `Popover` should now only close on `ESC` key when is open ([#1529](https://github.com/equinor/design-system/issues/1529))
+- `Breadcrumbs.Breadcrumb` will now be rendered as `span` when `href` is undefined to avoid duplicate `a` elements when used with router libraries ([#1505](https://github.com/equinor/design-system/issues/1505))
+- `Snackbar` & `Banner` components should now accept `ref` properties! ([#810](https://github.com/equinor/design-system/issues/810))
+- `Tooltip` should now work when used in combination with `Popover` or `Menu` with anchor elements ([#1496](https://github.com/equinor/design-system/issues/1496))
+- Adjustments and added missing `compact` styling for `Radio` ([#1580 ](https://github.com/equinor/design-system/pull/1580))
+
+### Changed
+
+- Reduced focus offset for `Button` variant `ghost_icon` ([#1565 ](https://github.com/equinor/design-system/issues/1565))
+- Cleaned up styling i `Card.Actions` ([#1520 ](https://github.com/equinor/design-system/issues/1520))
+- `Search` & `Accordion` icon sizes are aligned with other components ([#1403](https://github.com/equinor/design-system/issues/1403))
+- Adjusted colors for select components ([#1514](https://github.com/equinor/design-system/issues/1514))
+- Adjusted focus and label spacing for `Switch` ([#1567](https://github.com/equinor/design-system/issues/1567))
+
+### Removed
+
+- `Snackbar` `leftAlignFrom` property is replaced by `placement` for more placement options. ([#1488](https://github.com/equinor/design-system/issues/1488))
+
 ## [0.13.1] - 2021-07-16
 
 ### Fixed
