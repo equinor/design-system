@@ -4,7 +4,6 @@ import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
-import { CheckboxInput } from '../Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
@@ -14,11 +13,8 @@ import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 import { List } from '../List'
 import { Button } from '../Button'
-import {
-  typographyTemplate,
-  bordersTemplate,
-  spacingsTemplate,
-} from '../../utils'
+import { bordersTemplate } from '../../utils'
+import { ComboboxOption } from './Option'
 
 const Container = styled.div`
   position: relative;
@@ -53,33 +49,6 @@ const StyledList = styled(List)(
     left: 0;
     z-index: 50;
   `,
-)
-
-type StyledListItemType = {
-  highlighted: string
-  active?: string
-}
-
-const StyledListItem = styled(List.Item)<StyledListItemType>(
-  ({ theme, highlighted, active }) => {
-    const backgroundColor =
-      highlighted === 'true'
-        ? theme.states.hover.background
-        : active === 'true'
-        ? theme.states.active.background
-        : theme.background
-
-    return css`
-      display: flex;
-      align-items: center;
-      margin: 0;
-      list-style: none;
-      background-color: ${backgroundColor};
-      cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
-      ${typographyTemplate(theme.typography)}
-      ${spacingsTemplate(theme.spacings)}
-    `
-  },
 )
 
 const StyledButton = styled(Button)(
@@ -310,23 +279,19 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           <StyledList {...getMenuProps()}>
             {isOpen &&
               inputItems.map((item, index) => (
-                <StyledListItem
-                  key={`${item}`}
+                <ComboboxOption
+                  key={item}
+                  value={item}
+                  index={index}
+                  multiple={multiple}
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
-                  active={!multiple && selectedItem === item ? 'true' : 'false'}
+                  isSelected={
+                    multiple
+                      ? selectedItems.includes(item)
+                      : selectedItem === item
+                  }
                   {...getItemProps({ item, index, disabled })}
-                >
-                  {multiple && (
-                    <CheckboxInput
-                      checked={selectedItems.includes(item)}
-                      value={item}
-                      onChange={() => {
-                        return null
-                      }}
-                    />
-                  )}
-                  <span>{item}</span>
-                </StyledListItem>
+                />
               ))}
           </StyledList>
         </Container>
