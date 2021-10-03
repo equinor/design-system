@@ -1,11 +1,15 @@
-import React, { useState, useCallback, createRef } from 'react'
-import DatePicker, { registerLocale } from 'react-datepicker'
+import React, { useState, useCallback, createRef, forwardRef } from 'react'
+import DatePicker, {
+  ReactDatePickerProps,
+  registerLocale,
+} from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
 import styled from 'styled-components'
 import { Icon } from '../Icon'
 import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
+import { datePicker as tokens, DatePickerToken } from './DatePicker.tokens'
 
 registerLocale('en-gb', enGb)
 
@@ -39,80 +43,92 @@ export interface DatePickerProps {
   locale?: string
 }
 
-const ReactDatePicker: React.FC<DatePickerProps> = ({
-  label,
-  value,
-  onChanged,
-  id,
-  disableFuture,
-  disableBeforeDate,
-  className,
-  dateFormat = 'dd.MM.yyyy',
-  placeholder = 'DD.MM.YYYY',
-  readOnly = false,
-  popperPlacement,
-  locale = 'en-gb',
-}) => {
-  const ref = createRef<DatePicker | undefined>()
-  const [date, setDate] = useState(value)
-  const onDateValueChange = useCallback(
-    (date: Date): void => {
-      setDate(date)
-      onChanged?.(date)
-    },
-    [onChanged],
-  )
-
-  return (
-    <Container className={`date-picker ${className}`}>
-      <DateLabel
-        htmlFor={id}
-        className={`date-label`}
-        onClick={(): void => {
-          ref?.current?.setOpen(true)
-        }}
-      >
-        {label}
-        <CalendarIcon
-          name="calendar"
-          className="calendar-icon"
-          data={calendar}
-          size={24}
-        />
-      </DateLabel>
-      <StyledDatepicker
-        ref={ref}
-        locale={locale}
-        selected={date}
-        onChange={onDateValueChange}
-        dateFormat={dateFormat}
-        placeholderText={placeholder}
-        id={id}
-        filterDate={(date: Date): boolean => {
-          if (disableFuture) {
-            return new Date() > date
-          }
-          if (disableBeforeDate) {
-            return date >= disableBeforeDate
-          }
-          return true
-        }}
-        onChangeRaw={(): void => {
-          ref?.current?.setOpen(false)
-        }}
-        autoComplete="false"
-        popperPlacement={popperPlacement}
-        renderCustomHeader={(props) => (
-          <PopupHeader {...props} changeDate={onDateValueChange} />
-        )}
-        shouldCloseOnSelect={true}
-        readOnly={readOnly}
-      />
-    </Container>
-  )
+export interface DatePickerRefProps extends ReactDatePickerProps {
+  setBlur: () => void
+  setFocus: () => void
+  setOpen: (open: boolean, skipSetBlur?: boolean) => void
+  isCalendarOpen: () => boolean
 }
 
-const Container = styled.div`
+const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
+  function DatePicker(
+    {
+      label,
+      value,
+      onChanged,
+      id,
+      disableFuture,
+      disableBeforeDate,
+      className,
+      dateFormat = 'dd.MM.yyyy',
+      placeholder = 'DD.MM.YYYY',
+      readOnly = false,
+      popperPlacement,
+      locale = 'en-gb',
+    },
+    ref,
+  ) {
+    const [date, setDate] = useState(value)
+    const onDateValueChange = useCallback(
+      (date: Date): void => {
+        setDate(date)
+        onChanged?.(date)
+      },
+      [onChanged],
+    )
+
+    return (
+      <Container className={`date-picker ${className}`}>
+        <DateLabel
+          htmlFor={id}
+          className={`date-label`}
+          onClick={(): void => {
+            ref?.setOpen?.(true)
+          }}
+        >
+          {label}
+          <CalendarIcon
+            name="calendar"
+            className="calendar-icon"
+            data={calendar}
+            size={24}
+          />
+        </DateLabel>
+        <StyledDatepicker
+          ref={ref}
+          locale={locale}
+          selected={date}
+          onChange={onDateValueChange}
+          dateFormat={dateFormat}
+          placeholderText={placeholder}
+          id={id}
+          filterDate={(date: Date): boolean => {
+            if (disableFuture) {
+              return new Date() > date
+            }
+            if (disableBeforeDate) {
+              return date >= disableBeforeDate
+            }
+            return true
+          }}
+          onChangeRaw={(): void => {
+            ref?.setOpen?.(false)
+          }}
+          autoComplete="false"
+          popperPlacement={popperPlacement}
+          renderCustomHeader={(props) => (
+            <PopupHeader {...props} changeDate={onDateValueChange} />
+          )}
+          shouldCloseOnSelect={true}
+          readOnly={readOnly}
+        />
+      </Container>
+    )
+  },
+)
+console.log('tokens ---> ', tokens)
+
+const Container = styled.div.attrs<DatePickerToken>(tokens)`
   width: 100%;
   display: flex;
   flex-direction: column;

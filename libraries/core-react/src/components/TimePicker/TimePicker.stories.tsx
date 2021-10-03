@@ -8,7 +8,9 @@ export default {
   argTypes: {},
 } as Meta
 
-const Default: Story<TimePickerProps> = (args) => <TimePicker {...args} />
+export const Default: Story<TimePickerProps> = (args) => (
+  <TimePicker {...args} />
+)
 
 Default.args = {
   id: 'StoryTimePicker',

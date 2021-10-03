@@ -57,7 +57,7 @@ export default {
   argTypes: {},
 } as Meta
 
-const Default: Story<DatePickerProps> = (args) => (
+export const Default: Story<DatePickerProps> = (args) => (
   <DatePickerWrapper {...args} />
 )
 
