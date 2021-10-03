@@ -45,6 +45,7 @@ export const datePicker: DatePickerToken = {
     top: spacingLarge,
     bottom: spacingLarge,
     right: '20px',
+    left: '20px',
   },
   entities: {
     button: {

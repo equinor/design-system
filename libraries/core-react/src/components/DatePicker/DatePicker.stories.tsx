@@ -56,7 +56,6 @@ const DatePickerWrapper: React.FC<DatePickerProps> = ({
             popperPlacement={popperPlacement}
           />
           <TimePicker
-            id="timePickerElement"
             label="Choose Time"
             value={timeValue}
             onValueChanged={onTimeChanged}

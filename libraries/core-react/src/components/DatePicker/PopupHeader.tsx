@@ -79,7 +79,7 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({
 }
 
 const Header = styled.div`
-  padding: 24px 20px;
+  padding: ${tokens.spacings.top} ${tokens.spacings.right};
   width: 100%;
   max-width: ${tokens.width};
   display: grid;

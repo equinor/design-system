@@ -129,7 +129,8 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
 console.log('tokens ---> ', tokens)
 
 const Container = styled.div.attrs<DatePickerToken>(tokens)`
-  width: ${tokens.width};
+  width: 100%;
+  max-width: 148px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -226,7 +227,7 @@ const CalendarIcon = styled(Icon)`
   width: 18px;
   height: 18px;
   top: ${tokens.spacings.top};
-  right: 6px;
+  right: 0;
   color: ${tokens.entities.title.typography.color};
   cursor: pointer;
 `
