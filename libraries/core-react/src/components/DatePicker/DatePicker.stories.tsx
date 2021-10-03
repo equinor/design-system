@@ -1,7 +1,19 @@
-import { Meta, Story } from '@storybook/react/types-6-0'
 import React, { useState } from 'react'
+import styled from 'styled-components'
+import { Meta, Story } from '@storybook/react/types-6-0'
 import { DatePicker, DatePickerProps } from './DatePicker'
 import { TimePicker } from '../TimePicker/TimePicker'
+
+const Container = styled.div`
+  height: 800px;
+  width: 100%;
+  padding: 32px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 200px;
+  grid-gap: 32px 32px;
+  background: #ebebeb;
+`
 
 const DatePickerWrapper: React.FC<DatePickerProps> = ({
   id,
@@ -20,34 +32,38 @@ const DatePickerWrapper: React.FC<DatePickerProps> = ({
   }
 
   return (
-    <div style={{ width: '500px' }}>
-      <h2>Default date picker</h2>
-      <DatePicker
-        id={id}
-        value={dateValue}
-        label={'Date'}
-        onChanged={onChanged}
-        className={className}
-        popperPlacement={popperPlacement}
-      />
-      <h2>Date picker with TimePicker</h2>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <Container>
+      <div>
+        <h2>Default date picker</h2>
         <DatePicker
-          id={id + 't'}
+          id={id}
           value={dateValue}
-          label={'Choose date'}
+          label={'Date'}
           onChanged={onChanged}
           className={className}
           popperPlacement={popperPlacement}
         />
-        <TimePicker
-          id="timePickerElement"
-          label="Choose Time"
-          value={timeValue}
-          onValueChanged={onTimeChanged}
-        />
       </div>
-    </div>
+      <div>
+        <h2>Date picker with TimePicker</h2>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <DatePicker
+            id={id + 't'}
+            value={dateValue}
+            label={'Choose date'}
+            onChanged={onChanged}
+            className={className}
+            popperPlacement={popperPlacement}
+          />
+          <TimePicker
+            id="timePickerElement"
+            label="Choose Time"
+            value={timeValue}
+            onValueChanged={onTimeChanged}
+          />
+        </div>
+      </div>
+    </Container>
   )
 }
 
