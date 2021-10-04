@@ -9,10 +9,12 @@ type StyledProps = Pick<BreadcrumbProps, 'maxWidth'>
 const { states, typography } = tokens
 
 const StyledTypography = styled(Typography)<StyledProps>`
-  &:hover {
-    text-decoration: underline;
-    color: ${states.hover.typography.color};
-    cursor: pointer;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      text-decoration: underline;
+      color: ${states.hover.typography.color};
+      cursor: pointer;
+    }
   }
   white-space: nowrap;
   overflow: hidden;

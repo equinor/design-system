@@ -31,9 +31,11 @@ const Separator = styled(Typography)`
 `
 
 const Collapsed = styled(Typography)`
-  &:hover {
-    text-decoration: underline;
-    color: ${states.hover.typography.color};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      text-decoration: underline;
+      color: ${states.hover.typography.color};
+    }
   }
   color: ${typography.color};
   text-decoration: none;
