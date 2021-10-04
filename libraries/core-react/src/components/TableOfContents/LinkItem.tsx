@@ -41,13 +41,15 @@ const StyledLinkItem = styled.li`
       ${outlineTemplate(tokens.states.focus.outline)};
     }
 
-    &:hover {
-      ${typographyTemplate(tokens.states.hover.typography)}
-      background: ${tokens.states.hover.background};
-      ${bordersTemplate(tokens.states.hover.border)}
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        ${typographyTemplate(tokens.states.hover.typography)}
+        background: ${tokens.states.hover.background};
 
-      svg {
-        fill: ${tokens.states.hover.entities.icon.background};
+        ${bordersTemplate(tokens.states.hover.border)}
+        svg {
+          fill: ${tokens.states.hover.entities.icon.background};
+        }
       }
     }
 
