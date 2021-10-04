@@ -44,22 +44,24 @@ const StyledTab = styled.button.attrs<TabProps>(
   &::-moz-focus-inner {
     border: 0;
   }
-  &[data-hover],
-  &:hover {
-    color: ${({ active }) =>
-      active
-        ? tab.states.active.states.hover.typography.color
-        : tab.typography.color};
-    ${({ disabled }) =>
-      disabled
-        ? css`
-            background: ${tab.states.disabled.background};
-            cursor: not-allowed;
-          `
-        : css`
-            background: ${tab.states.hover.background};
-            cursor: pointer;
-          `}
+  @media (hover: hover) and (pointer: fine) {
+    &[data-hover],
+    &:hover {
+      color: ${({ active }) =>
+              active
+                      ? tab.states.active.states.hover.typography.color
+                      : tab.typography.color};
+      ${({ disabled }) =>
+              disabled
+                      ? css`
+                        background: ${tab.states.disabled.background};
+                        cursor: not-allowed;
+                      `
+                      : css`
+                        background: ${tab.states.hover.background};
+                        cursor: pointer;
+                      `}
+    }
   }
 
   ${({ disabled }) =>
