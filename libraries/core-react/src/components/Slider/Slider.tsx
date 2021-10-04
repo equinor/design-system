@@ -82,11 +82,13 @@ const RangeWrapper = styled.div<RangeWrapperProps>`
     );
     width: calc((var(--a) - var(--b)) / var(--dif) * var(--realWidth));
   }
-  &:hover:not([disabled]) {
-    ${fakeTrackBgHover}
-    &::before,
-    &::after {
-      background: ${track.entities.indicator.states.hover.background};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not([disabled]) {
+      ${fakeTrackBgHover}
+      &::before,
+      &::after {
+        background: ${track.entities.indicator.states.hover.background};
+      }
     }
   }
 `
@@ -115,10 +117,12 @@ const Wrapper = styled.div<WrapperProps>`
     /* Adjusting for start dot circle */
     margin-left: 3px;
   }
-  &:hover:not([disabled]) {
-    ${fakeTrackBgHover}
-    &::after {
-      background: ${track.entities.indicator.states.hover.background};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not([disabled]) {
+      ${fakeTrackBgHover}
+      &::after {
+        background: ${track.entities.indicator.states.hover.background};
+      }
     }
   }
 `
