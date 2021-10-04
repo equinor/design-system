@@ -60,15 +60,19 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
           &:focus {
             outline: none;
           }
+        @media (hover: hover) and (pointer: fine) {
           &:hover {
             cursor: not-allowed;
           }
+        }
         `
       : css`
-          &:hover {
-            z-index: 1;
-            cursor: pointer;
-            background: ${hover.background};
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              z-index: 1;
+              cursor: pointer;
+              background: ${hover.background};
+            }
           }
           &:focus {
             ${outlineTemplate(focus.outline)}
