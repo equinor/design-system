@@ -46,7 +46,8 @@ const StyledChips = styled.div.attrs<StyleProps>(
     fill: ${typography.color};
   }
 
-  &:hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
     color: ${states.hover.typography.color};
     svg {
       fill: ${states.hover.typography.color};
@@ -68,8 +69,10 @@ const StyledChips = styled.div.attrs<StyleProps>(
   ${({ clickable }) =>
     clickable &&
     css`
-      &:hover {
-        cursor: pointer;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          cursor: pointer;
+        }
       }
     `}
 
@@ -87,11 +90,14 @@ const StyledChips = styled.div.attrs<StyleProps>(
             fill: ${error.entities.icon.typography.color};
           }
           ${bordersTemplate(error.border)};
-          &:hover {
-            border-color: ${error.states.hover.typography.color};
-            color: ${error.states.hover.typography.color};
-            svg {
-              fill: ${error.states.hover.typography.color};
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              border-color: ${error.states.hover.typography.color};
+              color: ${error.states.hover.typography.color};
+
+              svg {
+                fill: ${error.states.hover.typography.color};
+              }
             }
           }
         `
@@ -109,11 +115,14 @@ const StyledChips = styled.div.attrs<StyleProps>(
       svg {
         fill: ${states.disabled.typography.color};
       }
-      &:hover {
-        color: ${states.disabled.typography.color};
-        cursor: not-allowed;
-        svg {
-          fill: ${states.disabled.typography.color};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: ${states.disabled.typography.color};
+          cursor: not-allowed;
+
+          svg {
+            fill: ${states.disabled.typography.color};
+          }
         }
       }
     `}
