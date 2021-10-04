@@ -69,9 +69,11 @@ const Container = styled.span<ContainerProps>`
           cursor: not-allowed;
         `
       : css`
-          &:hover {
-            ${bordersTemplate(states.focus.border)}
-            cursor: text;
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              ${bordersTemplate(states.focus.border)}
+              cursor: text;
+            }
           }
         `}
 
@@ -164,9 +166,11 @@ const InsideButton = styled.div<InsideButtonProps>`
     isActive &&
     css`
       visibility: visible;
-      &:hover {
-        cursor: pointer;
-        background: ${icon.states.hover.background};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          cursor: pointer;
+          background: ${icon.states.hover.background};
+        }
       }
     `}
 `
