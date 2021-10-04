@@ -1,4 +1,0 @@
-extends: 'stylelint-config-recommended'
-rules:
-    property-no-vendor-prefix: true
-    font-family-no-missing-generic-family-keyword: null
