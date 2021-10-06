@@ -13,16 +13,9 @@ scripts:
   build:icons: pnpm --filter @equinor/eds-icons run build
   storybook: pnpm --filter ./libraries/core-react run storybook
   build:storybook: pnpm --filter ./libraries/core-react run build:storybook
-  storefront: pnpm --filter @equinor/eds-storefront run dev
-  build:storefront: pnpm --filter @equinor/eds-storefront run build
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
-  dockerize-storefront: >-
-    docker build --build-arg GATSBY_STAGE=prod -t eds/storefront -f
-    apps/storefront/Dockerfile .
-  storefront-docker-run: docker run -p 8080:80 eds/storefront
-  storefront-docker-inspect: docker run -it eds/storefront /bin/sh
 devDependencies:
   '@babel/core': ^7.13.15
   '@babel/eslint-parser': ^7.13.14

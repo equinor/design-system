@@ -2,7 +2,6 @@ const COMMON_DIR = '../../common'
 const TOKENS_DIR = '../../libraries/tokens'
 const STATIC_DIR = '../../libraries/static'
 const ICONS_DIR = '../../libraries/icons'
-const STOREFRONT_DIR = '../storefront'
 const STORYBOOK_DIR = '../../libraries/core-react/stories'
 
 export const PATHS = {
@@ -12,7 +11,6 @@ export const PATHS = {
   ASSETS_ICONS: `${STATIC_DIR}/icons`,
   SASS: `${COMMON_DIR}/public/sass`,
   CSS: `${COMMON_DIR}/public/css`,
-  IMAGES: `${STOREFRONT_DIR}/src/assets/figma`,
   ICONS: `${STORYBOOK_DIR}/assets/icons`,
   ICON_FILES: `${ICONS_DIR}/src`,
 }
