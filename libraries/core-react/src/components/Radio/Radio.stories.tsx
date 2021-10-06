@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Radio, RadioProps, Table, EdsProvider } from '../..'
+import { Radio, RadioProps, Table, EdsProvider, Tooltip } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
@@ -22,7 +22,9 @@ export default {
 } as Meta
 
 export const Default: Story<RadioProps> = (args) => (
-  <Radio label="Play with me" {...args} />
+  <Tooltip title="Hi!">
+    <Radio label="Play with me" {...args} />
+  </Tooltip>
 )
 
 export const SingleRadio: Story<RadioProps> = () => {
