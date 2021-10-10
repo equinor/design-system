@@ -6,8 +6,10 @@ type StyledProps = Pick<RowProps, 'active'>
 
 const StyledRow = styled.tr<StyledProps>(({ active }) => ({
   background: active ? token.states.active?.background : null,
-  ':hover': {
-    background: token.states.hover?.background,
+  '@media (hover: hover) and (pointer: fine)': {
+    ':hover': {
+      background: token.states.hover?.background,
+    },
   },
 }))
 
