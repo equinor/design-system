@@ -5,8 +5,9 @@ import { datePicker as tokens } from './DatePicker.tokens'
 import { Icon, Typography } from '../../'
 import { arrow_back, arrow_forward } from '@equinor/eds-icons'
 import { typographyTemplate } from '../../utils'
+import { Button } from '../Button'
 
-interface PopupHeaderProps {
+type PopupHeaderProps = {
   monthDate: Date
   date: Date
   changeYear: (year: number) => void
@@ -49,6 +50,7 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({
   return (
     <Header>
       <IconButton
+        variant="ghost_icon"
         onClick={(event: React.MouseEvent) => {
           event.preventDefault()
           event.stopPropagation()
@@ -56,15 +58,18 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({
         }}
         disabled={prevMonthButtonDisabled}
       >
-        <Icon size={16} data={arrow_back} />
+        <Icon data={arrow_back} />
       </IconButton>
-      <HeaderTitle variant="body_short">
-        {months[getMonth(date)]} {getYear(date)}
-      </HeaderTitle>
-      <TodayLabel variant="body_short" onClick={() => changeDate?.(new Date())}>
-        Today
-      </TodayLabel>
+      <HeaderControls>
+        <HeaderTitle variant="body_short">
+          {months[getMonth(date)]} {getYear(date)}
+        </HeaderTitle>
+        <TodayLabel variant="ghost" onClick={() => changeDate?.(new Date())}>
+          Today
+        </TodayLabel>
+      </HeaderControls>
       <IconButton
+        variant="ghost_icon"
         onClick={(event: React.MouseEvent) => {
           event.preventDefault()
           event.stopPropagation()
@@ -72,7 +77,7 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({
         }}
         disabled={nextMonthButtonDisabled}
       >
-        <Icon size={16} data={arrow_forward} onClick={increaseMonth} />
+        <Icon data={arrow_forward} onClick={increaseMonth} />
       </IconButton>
     </Header>
   )
@@ -83,33 +88,42 @@ const Header = styled.div`
   width: 100%;
   max-width: ${tokens.width};
   display: grid;
-  grid-template-columns: 20px auto auto 20px;
+  grid-template-columns: auto max-content auto;
   align-items: center;
-  column-gap: 16px;
+  justify-content: space-between;
   box-sizing: border-box;
 `
 
-const IconButton = styled.button`
+const HeaderControls = styled.div`
+  display: grid;
+  place-items: center;
+  grid-auto-flow: column;
+`
+
+const IconButton = styled(Button)`
   padding: 0;
   margin: 0;
-  width: 20px;
-  height: 20px;
   line-height: 0;
   text-align: center;
   color: ${tokens.colors.green100};
   background-color: ${tokens.background};
   border: none;
+
+  span {
+    padding-left: 0 !important;
+  }
 `
 
 const HeaderTitle = styled(Typography)`
   ${typographyTemplate(tokens.entities.title.typography)}
 `
 
-const TodayLabel = styled(Typography)`
-  ${typographyTemplate(tokens.entities.button.typography)}
-  text-align: right;
-  cursor: pointer;
-  color: ${tokens.colors.green100};
+const TodayLabel = styled(Button)`
+  width: 100%;
+
+  span {
+    padding-left: 0 !important;
+  }
 `
 
 export { PopupHeader }

@@ -1,19 +1,26 @@
-import React, { useState, useCallback, forwardRef } from 'react'
+import React, {
+  useState,
+  useCallback,
+  forwardRef,
+  InputHTMLAttributes,
+} from 'react'
 import DatePicker, {
   ReactDatePickerProps,
   registerLocale,
 } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
-import styled from 'styled-components'
-import { Icon } from '../Icon'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
-import { datePicker as tokens, DatePickerToken } from './DatePicker.tokens'
+import { datePicker as tokens } from './DatePicker.tokens'
+import { outlineTemplate } from '../../utils'
+import { Paper } from '../Paper'
+import { Input, Icon } from '../..'
 
 registerLocale('en-gb', enGb)
 
-export interface DatePickerProps {
+export type DatePickerProps = {
   id: string
   value: Date | undefined | null
   label: string
@@ -41,14 +48,15 @@ export interface DatePickerProps {
     | 'left'
     | 'left-start'
   locale?: string
-}
+} & InputHTMLAttributes<HTMLInputElement>
 
-export interface DatePickerRefProps extends ReactDatePickerProps {
-  setBlur: () => void
-  setFocus: () => void
-  setOpen: (open: boolean, skipSetBlur?: boolean) => void
-  isCalendarOpen: () => boolean
-}
+export type DatePickerRefProps = ReactDatePickerProps &
+  InputHTMLAttributes<HTMLInputElement> & {
+    setBlur: () => void
+    setFocus: () => void
+    setOpen: (open: boolean, skipSetBlur?: boolean) => void
+    isCalendarOpen: () => boolean
+  }
 
 const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
   function DatePicker(
@@ -78,57 +86,69 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
     )
 
     return (
-      <Container className={`date-picker ${className}`}>
-        <DateLabel
-          htmlFor={id}
-          className={`date-label`}
-          onClick={(): void => {
-            ref?.setOpen?.(true)
-          }}
-        >
-          <span>{label}</span>
-          <StyledDatepicker
-            ref={ref}
-            locale={locale}
-            selected={date}
-            onChange={onDateValueChange}
-            dateFormat={dateFormat}
-            placeholderText={placeholder}
-            id={id}
-            filterDate={(date: Date): boolean => {
-              if (disableFuture) {
-                return new Date() > date
-              }
-              if (disableBeforeDate) {
-                return date >= disableBeforeDate
-              }
-              return true
+      <ThemeProvider theme={tokens}>
+        <Container className={`date-picker ${className}`}>
+          <DateLabel
+            htmlFor={id}
+            className={`date-label`}
+            onClick={(): void => {
+              ref?.setOpen?.(true)
             }}
-            onChangeRaw={(): void => {
-              ref?.setOpen?.(false)
-            }}
-            autoComplete="false"
-            popperPlacement={popperPlacement}
-            renderCustomHeader={(props) => (
-              <PopupHeader {...props} changeDate={onDateValueChange} />
-            )}
-            shouldCloseOnSelect={true}
-            readOnly={readOnly}
-          />
-          <CalendarIcon
-            name="calendar"
-            className="calendar-icon"
-            data={calendar}
-            size={24}
-          />
-        </DateLabel>
-      </Container>
+          >
+            <span>{label}</span>
+            <StyledDatepicker
+              ref={ref}
+              locale={locale}
+              selected={date}
+              className="eds-datepicker"
+              calendarClassName="eds-datepicker-calendar"
+              onChange={onDateValueChange}
+              dateFormat={dateFormat}
+              placeholderText={placeholder}
+              id={id}
+              filterDate={(date: Date): boolean => {
+                if (disableFuture) {
+                  return new Date() > date
+                }
+                if (disableBeforeDate) {
+                  return date >= disableBeforeDate
+                }
+                return true
+              }}
+              onChangeRaw={(): void => {
+                ref?.setOpen?.(false)
+              }}
+              autoComplete="false"
+              popperPlacement={popperPlacement}
+              renderCustomHeader={(props) => (
+                <PopupHeader {...props} changeDate={onDateValueChange} />
+              )}
+              shouldCloseOnSelect={true}
+              readOnly={readOnly}
+              calendarContainer={({ children, ...rest }) => (
+                <Paper
+                  {...rest}
+                  elevation="temporary_nav"
+                  style={{ maxWidth: '312px' }}
+                >
+                  {children}
+                </Paper>
+              )}
+            />
+            <CalendarIcon
+              name="calendar"
+              className="calendar-icon"
+              data={calendar}
+              size={24}
+            />
+          </DateLabel>
+        </Container>
+      </ThemeProvider>
     )
   },
 )
-console.log('tokens ---> ', tokens)
 
-const Container = styled.div.attrs<DatePickerToken>(tokens)`
+const Container = styled.div`
   width: 100%;
   max-width: 148px;
   display: flex;
@@ -136,15 +156,16 @@ const Container = styled.div.attrs<DatePickerToken>(tokens)`
   position: relative;
   box-sizing: border-box;
 
-  .react-datepicker {
+  .eds-datepicker {
     font-family: ${tokens.entities.title.typography.fontFamily} !important;
   }
   .react-datepicker__month-container {
-    -width: ${tokens.width};
+    width: ${tokens.width};
   }
   .react-datepicker__header {
     background-color: ${tokens.background};
     border-bottom: none;
+    padding: 0;
   }
   .react-datepicker__current-month {
     font-weight: 500;
@@ -190,46 +211,53 @@ const Container = styled.div.attrs<DatePickerToken>(tokens)`
 `
 
 const DateLabel = styled.label`
-  position: relative;
-  color: ${tokens.entities.label.typography.color};
-  font-family: ${tokens.entities.label.typography.fontFamily};
-  font-size: ${tokens.entities.label.typography.fontSize};
-  line-height: ${tokens.entities.label.typography.lineHeight};
+  ${({ theme }) => css`
+    position: relative;
+    color: ${theme.entities.label.typography.color};
+    font-family: ${theme.entities.label.typography.fontFamily};
+    font-size: ${theme.entities.label.typography.fontSize};
+    line-height: ${theme.entities.label.typography.lineHeight};
 
-  span {
-    padding-left: 8px;
-  }
+    span {
+      padding-left: 8px;
+    }
+  `}
 `
 
 const StyledDatepicker = styled(DatePicker)`
-  height: 24px;
-  font-family: ${tokens.entities.title.typography.fontFamily};
-  font-size: ${tokens.entities.title.typography.fontSize};
-  color: ${tokens.entities.title.typography.color};
-  line-height: ${tokens.entities.title.typography.lineHeight};
-  box-shadow: inset 0 -1px 0 0 #6f6f6f;
-  background-color: ${tokens.background};
-  border: none;
-  padding: 6px;
-  width: 100%;
-  max-width: ${tokens.width};
-  border-radius: 0%;
+  ${({ theme }) => css`
+    height: 24px;
+    font-family: ${theme.entities.title.typography.fontFamily};
+    font-size: ${theme.entities.title.typography.fontSize};
+    color: ${theme.entities.title.typography.color};
+    line-height: ${theme.entities.title.typography.lineHeight};
+    box-shadow: inset 0 -1px 0 0 #6f6f6f;
+    background-color: ${theme.background};
+    border: none;
+    padding: 6px;
+    width: 100%;
+    max-width: 136px;
+    border-radius: 0%;
 
-  &:focus {
-    border-radius: none;
-    outline: 2px solid ${tokens.colors.green100};
-  }
+    &:focus {
+      border-radius: none;
+      ${outlineTemplate(theme.states.focus.outline)}
+    }
+  `}
 `
 
 const CalendarIcon = styled(Icon)`
-  position: absolute;
-  z-index: 1;
-  width: 18px;
-  height: 18px;
-  top: ${tokens.spacings.top};
-  right: 0;
-  color: ${tokens.entities.title.typography.color};
-  cursor: pointer;
+  ${({ theme }) =>
+    css`
+      position: absolute;
+      z-index: 1;
+      width: 24px;
+      height: 24px;
+      top: 21px;
+      right: 6px;
+      color: ${theme.entities.title.typography.color};
+      cursor: pointer;
+    `}
 `
 
 export { ReactDatePicker as DatePicker }

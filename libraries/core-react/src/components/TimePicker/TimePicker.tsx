@@ -1,4 +1,4 @@
-import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import {
   useCombobox,
   UseComboboxProps,
@@ -66,7 +66,7 @@ export interface TimePickerProps {
 }
 
 const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
-  function SingleSelect(
+  function TimePicker(
     {
       label,
       className,

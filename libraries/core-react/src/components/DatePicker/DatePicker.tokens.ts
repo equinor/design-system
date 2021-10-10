@@ -3,13 +3,16 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
   spacings: {
-    comfortable: { large: spacingLarge },
+    comfortable: { medium: spacingM },
   },
   typography: {
     input: { text, label },
     navigation: { menu_title, button },
   },
   colors: {
+    interactive: {
+      primary__resting: { rgba: focusColor },
+    },
     ui: {
       background__light: { rgba: background },
     },
@@ -42,10 +45,10 @@ export const datePicker: DatePickerToken = {
     radius: borderRadius,
   },
   spacings: {
-    top: spacingLarge,
-    bottom: spacingLarge,
-    right: '20px',
-    left: '20px',
+    top: spacingM,
+    bottom: spacingM,
+    right: spacingM,
+    left: spacingM,
   },
   entities: {
     button: {
@@ -59,6 +62,16 @@ export const datePicker: DatePickerToken = {
     },
     label: {
       typography: label,
+    },
+  },
+  states: {
+    focus: {
+      outline: {
+        width: '2px',
+        style: 'solid',
+        type: 'outline',
+        color: focusColor,
+      },
     },
   },
 }

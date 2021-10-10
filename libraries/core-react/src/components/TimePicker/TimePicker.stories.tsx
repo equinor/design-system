@@ -10,14 +10,9 @@ export default {
 } as Meta
 
 const Container = styled.div`
-  height: 480px;
+  height: 360px;
   width: 100%;
-  padding: 32px;
   box-sizing: border-box;
-  display: grid;
-  grid-template-rows: 200px;
-  grid-gap: 32px 32px;
-  background: #ebebeb;
 `
 
 export const Default: Story<TimePickerProps> = (args) => (
