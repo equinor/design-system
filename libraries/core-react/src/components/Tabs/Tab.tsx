@@ -48,19 +48,19 @@ const StyledTab = styled.button.attrs<TabProps>(
     &[data-hover],
     &:hover {
       color: ${({ active }) =>
-              active
-                      ? tab.states.active.states.hover.typography.color
-                      : tab.typography.color};
+        active
+          ? tab.states.active.states.hover.typography.color
+          : tab.typography.color};
       ${({ disabled }) =>
-              disabled
-                      ? css`
-                        background: ${tab.states.disabled.background};
-                        cursor: not-allowed;
-                      `
-                      : css`
-                        background: ${tab.states.hover.background};
-                        cursor: pointer;
-                      `}
+        disabled
+          ? css`
+              background: ${tab.states.disabled.background};
+              cursor: not-allowed;
+            `
+          : css`
+              background: ${tab.states.hover.background};
+              cursor: pointer;
+            `}
     }
   }
 
