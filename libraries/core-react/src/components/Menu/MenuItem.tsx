@@ -60,11 +60,11 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
           &:focus {
             outline: none;
           }
-        @media (hover: hover) and (pointer: fine) {
-          &:hover {
-            cursor: not-allowed;
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              cursor: not-allowed;
+            }
           }
-        }
         `
       : css`
           @media (hover: hover) and (pointer: fine) {
