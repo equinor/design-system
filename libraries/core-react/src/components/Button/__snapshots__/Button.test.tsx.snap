@@ -62,12 +62,6 @@ exports[`Button Matches snapshot 1`] = `
   content: '';
 }
 
-.c0:hover {
-  background: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-
 .c0:focus {
   outline: none;
 }
@@ -94,8 +88,18 @@ exports[`Button Matches snapshot 1`] = `
   text-align: center;
 }
 
-.c0:disabled:hover {
-  background: var(--eds_interactive__disabled__fill,rgba(234,234,234,1));
+@media (hover:hover) and (pointer:fine) {
+  .c0:hover {
+    background: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c0:disabled:hover {
+    background: var(--eds_interactive__disabled__fill,rgba(234,234,234,1));
+  }
 }
 
 <button

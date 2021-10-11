@@ -69,12 +69,6 @@ exports[`Popover Matches snapshot 1`] = `
   content: '';
 }
 
-.c5:hover {
-  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
-  border: 0px solid transparent;
-  border-radius: 50%;
-}
-
 .c5:focus {
   outline: none;
 }
@@ -99,10 +93,6 @@ exports[`Popover Matches snapshot 1`] = `
   font-weight: 500;
   line-height: 1.143em;
   text-align: center;
-}
-
-.c5:disabled:hover {
-  background: transparent;
 }
 
 .c1 {
@@ -213,6 +203,20 @@ exports[`Popover Matches snapshot 1`] = `
 
 .c2 {
   background: red;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c5:hover {
+    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    border: 0px solid transparent;
+    border-radius: 50%;
+  }
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c5:disabled:hover {
+    background: transparent;
+  }
 }
 
 <div

@@ -25,6 +25,14 @@ exports[`MultiSelect Matches snapshot 1`] = `
   z-index: 50;
 }
 
+@media (hover:hover) and (pointer:fine) {
+
+}
+
+@media (hover:hover) and (pointer:fine) {
+
+}
+
 <ul
   aria-labelledby="downshift-0-label"
   class="c0 c1"
@@ -95,12 +103,6 @@ exports[`MultiSelect Matches snapshot 2`] = `
   content: '';
 }
 
-.c0:hover {
-  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
-  border: 0px solid transparent;
-  border-radius: 50%;
-}
-
 .c0:focus {
   outline: none;
 }
@@ -127,16 +129,26 @@ exports[`MultiSelect Matches snapshot 2`] = `
   text-align: center;
 }
 
-.c0:disabled:hover {
-  background: transparent;
-}
-
 .c1 {
   position: absolute;
   right: 8px;
   height: 24px;
   width: 24px;
   top: 6px;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c0:hover {
+    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    border: 0px solid transparent;
+    border-radius: 50%;
+  }
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c0:disabled:hover {
+    background: transparent;
+  }
 }
 
 <button

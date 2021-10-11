@@ -17,38 +17,43 @@ exports[`Chips Matches snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   z-index: 10;
-  border: 1px solid transparent;
-  border-radius: 100px;
-  padding-left: 4px;
-  padding-right: 8px;
-  margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  font-family: Equinor;
-  font-size: 0.750rem;
-  font-weight: 500;
-  line-height: 1.333em;
-  text-align: left;
 }
 
 .c0 svg {
   fill: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
 }
 
-.c0:hover {
-  color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
-}
+@media (hover:hover) and (pointer:fine) {
+  .c0 {
+    border: 1px solid transparent;
+    border-radius: 100px;
+    padding-left: 4px;
+    padding-right: 8px;
+    margin: 0;
+    color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+    font-family: Equinor;
+    font-size: 0.750rem;
+    font-weight: 500;
+    line-height: 1.333em;
+    text-align: left;
+  }
 
-.c0:hover svg {
-  fill: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
-}
+  .c0:hover {
+    color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+  }
 
-.c0:focus {
-  outline: none;
-}
+  .c0:hover svg {
+    fill: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+  }
 
-.c0[data-focus-visible-added]:focus {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
-  outline-offset: 2px;
+  .c0:focus {
+    outline: none;
+  }
+
+  .c0[data-focus-visible-added]:focus {
+    outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+    outline-offset: 2px;
+  }
 }
 
 <div

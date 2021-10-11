@@ -3,14 +3,14 @@
 exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-eCApnc llImFF"
+    class="sc-eCApnc ctpHWT"
     max="100"
     min="0"
     value="0"
   >
     <input
       aria-labelledby="test-one"
-      class="sc-dlnjwi jURbfl"
+      class="sc-dlnjwi jkqlDl"
       id="test-one-thumb"
       max="100"
       min="0"

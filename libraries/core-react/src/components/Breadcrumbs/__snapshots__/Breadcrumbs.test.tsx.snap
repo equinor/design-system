@@ -45,11 +45,13 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
 }
 
-.c2:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  cursor: pointer;
+@media (hover:hover) and (pointer:fine) {
+  .c2:hover {
+    -webkit-text-decoration: underline;
+    text-decoration: underline;
+    color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+    cursor: pointer;
+  }
 }
 
 <nav
