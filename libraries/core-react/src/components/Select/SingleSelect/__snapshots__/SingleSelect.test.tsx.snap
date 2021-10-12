@@ -170,12 +170,6 @@ exports[`SingleSelect Matches snapshot 1`] = `
   content: '';
 }
 
-.c6:hover {
-  background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
-  border: 0px solid transparent;
-  border-radius: 50%;
-}
-
 .c6:focus {
   outline: none;
 }
@@ -200,10 +194,6 @@ exports[`SingleSelect Matches snapshot 1`] = `
   font-weight: 500;
   line-height: 1.143em;
   text-align: center;
-}
-
-.c6:disabled:hover {
-  background: transparent;
 }
 
 .c0 {
@@ -238,6 +228,20 @@ exports[`SingleSelect Matches snapshot 1`] = `
 
 .c3 {
   position: relative;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c6:hover {
+    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    border: 0px solid transparent;
+    border-radius: 50%;
+  }
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c6:disabled:hover {
+    background: transparent;
+  }
 }
 
 <div

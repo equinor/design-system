@@ -67,8 +67,10 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
       : css({
           color: header.typography.color,
           cursor: 'pointer',
-          ':hover': {
-            background: header.states.hover.background,
+          '@media (hover: hover) and (pointer: fine)': {
+            ':hover': {
+              background: header.states.hover.background,
+            },
           },
         })}
 `

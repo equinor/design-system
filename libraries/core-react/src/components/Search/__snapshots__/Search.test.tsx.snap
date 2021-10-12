@@ -44,11 +44,6 @@ exports[`Search Matches snapshot 1`] = `
   color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
 }
 
-.c0:hover {
-  border: 1px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  cursor: text;
-}
-
 .c0::after {
   z-index: -1;
   position: absolute;
@@ -140,6 +135,13 @@ exports[`Search Matches snapshot 1`] = `
   width: auto;
   min-height: auto;
   content: '';
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c0:hover {
+    border: 1px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+    cursor: text;
+  }
 }
 
 <span

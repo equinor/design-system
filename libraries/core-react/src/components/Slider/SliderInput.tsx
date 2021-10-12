@@ -26,14 +26,18 @@ const thumb = css`
 `
 
 const thumbHover = css`
-  box-shadow: 0px 0px 0px 6px ${handle.states.hover.background};
-  border-color: ${handle.states.hover.border.type === 'border' &&
-  handle.states.hover.border.color};
+  @media (hover: hover) and (pointer: fine) {
+    box-shadow: 0px 0px 0px 6px ${handle.states.hover.background};
+    border-color: ${handle.states.hover.border.type === 'border' &&
+    handle.states.hover.border.color};
+  }
 `
 
 const thumbHoverAndDisabled = css`
-  cursor: not-allowed;
-  box-shadow: none;
+  @media (hover: hover) and (pointer: fine) {
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 `
 
 const thumbDisabled = css`

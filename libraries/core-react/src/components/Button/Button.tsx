@@ -94,10 +94,12 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
       content: '';
     }
 
-    &:hover {
-      background: ${hover.background};
-      color: ${hover.typography?.color};
-      ${bordersTemplate(hover?.border)}
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: ${hover.background};
+        color: ${hover.typography?.color};
+        ${bordersTemplate(hover?.border)};
+      }
     }
 
     &:focus {
@@ -115,11 +117,13 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
     &:disabled {
       cursor: not-allowed;
       background: ${disabled.background};
-      ${bordersTemplate(disabled.border)}
-      ${typographyTemplate(disabled.typography)}
+      ${bordersTemplate(disabled.border)};
+      ${typographyTemplate(disabled.typography)};
 
-      &:hover {
-        background: ${disabled.background};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: ${disabled.background};
+        }
       }
     }
   `
