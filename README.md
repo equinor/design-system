@@ -49,7 +49,13 @@ While the design system itself lives in [Figma][], this repository contains impl
 
 Would you like to contribute? Awesome! 👏
 
-We use a fork and pull-request workflow, so start with forking the repository on Github, then clone your fork.
+We use a fork and pull-request workflow, so start with forking the repository on Github, then either open it in Gitpod or clone your fork locally.
+
+### Use [Gitpod](https://www.gitpod.io/) and develop in the browser
+
+Just prepend the url to your fork with https://gitpod.io/#, so for example https://gitpod.io/#https://github.com/yourusername/design-system. Dependencies will be installed automatically, then tests and linting will run, and finally the storybook will open in it’s own preview window ready to start coding.
+
+### Clone and develop locally
 
     $ git clone git@github.com:your-github-username/design-system
 
