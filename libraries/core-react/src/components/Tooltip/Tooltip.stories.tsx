@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { Tooltip, TooltipProps, Typography, Button, Table, Icon } from '../..'
+import {
+  Tooltip,
+  TooltipProps,
+  Typography,
+  Button,
+  Table,
+  Icon,
+  Radio,
+} from '../..'
 import { data, columns, toCellValues } from '../../stories'
 import { Story, Meta } from '@storybook/react'
 
@@ -138,6 +146,28 @@ LonglistWithTooltips.parameters = {
     description: {
       story:
         'Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible',
+    },
+  },
+}
+
+export const radioAndCheckboxes: Story<TooltipProps> = () => (
+  <>
+    <Tooltip title="tooltip on an input">
+      <Radio id="radio1" label="Radio with tooltip" />
+    </Tooltip>
+    <br />
+    <Tooltip title="Tooltip on a span around input">
+      <span>
+        <Radio id="radio2" label="Radio in span with tooltip" />
+      </span>
+    </Tooltip>
+  </>
+)
+radioAndCheckboxes.parameters = {
+  docs: {
+    description: {
+      story:
+        'Tooltips on inputs of type radio, checkbox and switch will apply the tooltip on the input element. A good way to get the tooltip to also apply to the label text is to simply wrap the input in a span',
     },
   },
 }
