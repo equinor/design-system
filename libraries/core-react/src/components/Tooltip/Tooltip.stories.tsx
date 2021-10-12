@@ -6,7 +6,7 @@ import {
   Button,
   Table,
   Icon,
-  Radio,
+  Checkbox,
 } from '../..'
 import { data, columns, toCellValues } from '../../stories'
 import { Story, Meta } from '@storybook/react'
@@ -153,12 +153,12 @@ LonglistWithTooltips.parameters = {
 export const radioAndCheckboxes: Story<TooltipProps> = () => (
   <>
     <Tooltip title="tooltip on an input">
-      <Radio id="radio1" label="Radio with tooltip" />
+      <Checkbox label="Checkbox with tooltip" />
     </Tooltip>
     <br />
     <Tooltip title="Tooltip on a span around input">
       <span>
-        <Radio id="radio2" label="Radio in span with tooltip" />
+        <Checkbox label="Checkbox in span with tooltip" />
       </span>
     </Tooltip>
   </>
@@ -167,7 +167,7 @@ radioAndCheckboxes.parameters = {
   docs: {
     description: {
       story:
-        'Tooltips on inputs of type radio, checkbox and switch will apply the tooltip on the input element. A good way to get the tooltip to also apply to the label text is to simply wrap the input in a span',
+        'Inputs of type radio, checkbox and switch will have the tooltip applied to the input element. A good way to get the tooltip to also apply to the label is to simply wrap the input in a span',
     },
   },
 }

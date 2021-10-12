@@ -240,6 +240,16 @@ Compact.parameters = {
   },
 }
 
+export const NoLabel: Story<CheckboxProps> = () => <Checkbox />
+
+NoLabel.parameters = {
+  docs: {
+    description: {
+      story: 'Checkbox without label text is just the input wrapped in a span',
+    },
+  },
+}
+
 export const TableCheckbox: Story<CheckboxProps> = () => (
   <Table>
     <Table.Head>

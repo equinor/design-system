@@ -5,11 +5,11 @@ import { checkbox as tokens } from './Checkbox.tokens'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
 import { CheckboxInput } from './Input'
 
-type StyledCheckboxProps = {
+type StyledLabelProps = {
   disabled: boolean
 }
 
-const StyledCheckbox = styled.label<StyledCheckboxProps>`
+const StyledLabel = styled.label<StyledLabelProps>`
   display: inline-flex;
   align-items: center;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -40,15 +40,26 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     ref,
   ) {
     return (
-      <StyledCheckbox disabled={disabled} className={className}>
-        <CheckboxInput
-          {...rest}
-          disabled={disabled}
-          ref={ref}
-          indeterminate={indeterminate}
-        ></CheckboxInput>
-        {label && <LabelText>{label}</LabelText>}
-      </StyledCheckbox>
+      <>
+        {label ? (
+          <StyledLabel disabled={disabled} className={className}>
+            <CheckboxInput
+              {...rest}
+              disabled={disabled}
+              ref={ref}
+              indeterminate={indeterminate}
+            ></CheckboxInput>
+            <LabelText>{label}</LabelText>
+          </StyledLabel>
+        ) : (
+          <CheckboxInput
+            {...rest}
+            disabled={disabled}
+            ref={ref}
+            indeterminate={indeterminate}
+          ></CheckboxInput>
+        )}
+      </>
     )
   },
 )
