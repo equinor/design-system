@@ -108,6 +108,16 @@ Compact.parameters = {
   },
 }
 
+export const NoLabel: Story<RadioProps> = () => <Radio />
+
+NoLabel.parameters = {
+  docs: {
+    description: {
+      story: 'Radio without label text is just the input wrapped in a span',
+    },
+  },
+}
+
 export const TableRadio: Story<RadioProps> = () => (
   <Table>
     <Table.Head>
