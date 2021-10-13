@@ -10,6 +10,7 @@ exports[`Radio Matches snapshot 1`] = `
   height: 100%;
   margin: 0;
   grid-area: input;
+  cursor: pointer;
 }
 
 .c2:focus {
