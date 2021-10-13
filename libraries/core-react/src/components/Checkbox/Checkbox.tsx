@@ -39,27 +39,23 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     { label, disabled = false, indeterminate, className, ...rest },
     ref,
   ) {
-    return (
-      <>
-        {label ? (
-          <StyledLabel disabled={disabled} className={className}>
-            <CheckboxInput
-              {...rest}
-              disabled={disabled}
-              ref={ref}
-              indeterminate={indeterminate}
-            ></CheckboxInput>
-            <LabelText>{label}</LabelText>
-          </StyledLabel>
-        ) : (
-          <CheckboxInput
-            {...rest}
-            disabled={disabled}
-            ref={ref}
-            indeterminate={indeterminate}
-          ></CheckboxInput>
-        )}
-      </>
+    return label ? (
+      <StyledLabel disabled={disabled} className={className}>
+        <CheckboxInput
+          {...rest}
+          disabled={disabled}
+          ref={ref}
+          indeterminate={indeterminate}
+        ></CheckboxInput>
+        <LabelText>{label}</LabelText>
+      </StyledLabel>
+    ) : (
+      <CheckboxInput
+        {...rest}
+        disabled={disabled}
+        ref={ref}
+        indeterminate={indeterminate}
+      ></CheckboxInput>
     )
   },
 )
