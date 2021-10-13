@@ -46,6 +46,10 @@ exports[`Accordion Matches snapshot 1`] = `
   outline-offset: 2px;
 }
 
+.c0 svg {
+  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+}
+
 .c1 {
   margin-right: 32px;
 }
