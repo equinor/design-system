@@ -31,6 +31,7 @@ const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
   height: 100%;
   margin: 0;
   grid-area: input;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:focus {
     outline: none;
   }

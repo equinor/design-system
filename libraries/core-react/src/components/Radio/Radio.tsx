@@ -23,6 +23,7 @@ const Input = styled.input.attrs(({ type = 'radio' }) => ({
   height: 100%;
   margin: 0;
   grid-area: input;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:focus {
     outline: none;
   }
