@@ -152,7 +152,7 @@ LonglistWithTooltips.parameters = {
 
 export const radioAndCheckboxes: Story<TooltipProps> = () => (
   <>
-    <Tooltip title="tooltip on an input">
+    <Tooltip placement="top" title="tooltip on an input">
       <Checkbox label="Checkbox with tooltip" />
     </Tooltip>
     <br />
