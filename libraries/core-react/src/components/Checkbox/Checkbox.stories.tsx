@@ -240,6 +240,19 @@ Compact.parameters = {
   },
 }
 
+export const alternativeToLabel: Story<CheckboxProps> = () => (
+  <Checkbox aria-label="This label is invisible, but read by screen-readers" />
+)
+
+alternativeToLabel.parameters = {
+  docs: {
+    description: {
+      story:
+        'To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. In such cases `aria-label` or `aria-labelledby` should be used',
+    },
+  },
+}
+
 export const TableCheckbox: Story<CheckboxProps> = () => (
   <Table>
     <Table.Head>

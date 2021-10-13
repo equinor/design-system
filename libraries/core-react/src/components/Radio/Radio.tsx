@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import { forwardRef, Ref, InputHTMLAttributes } from 'react'
+import { forwardRef, Ref, InputHTMLAttributes, useMemo } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import {
   radio_button_selected, // eslint-disable-line camelcase
@@ -18,15 +18,12 @@ import { useEds } from '../EdsProvider'
 const Input = styled.input.attrs(({ type = 'radio' }) => ({
   type,
 }))`
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: input;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:focus {
     outline: none;
   }
@@ -50,7 +47,7 @@ const Input = styled.input.attrs(({ type = 'radio' }) => ({
 `
 type StyledRadioProps = Pick<RadioProps, 'disabled'>
 
-const StyledRadio = styled.label<StyledRadioProps>`
+const StyledLabel = styled.label<StyledRadioProps>`
   display: inline-flex;
   align-items: center;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -73,7 +70,10 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   height,
   width,
   fill,
-}))``
+}))`
+  grid-area: input;
+  pointer-events: none;
+`
 
 const LabelText = styled.span`
   ${typographyTemplate(tokens.typography)}
@@ -84,8 +84,10 @@ type StyledInputWrapperProps = { disabled: boolean }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
-  display: inline-flex;
+  display: inline-grid;
+  grid: [input] 1fr / [input] 1fr;
   border-radius: 50%;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: ${({ disabled }) =>
@@ -111,24 +113,38 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
 
   const iconSize = 24
   const fill = disabled ? tokens.states.disabled.background : tokens.background
+
+  const renderSVG = useMemo<JSX.Element>(() => {
+    return (
+      <Svg
+        width={iconSize}
+        height={iconSize}
+        viewBox={`0 0 ${iconSize} ${iconSize}`}
+        fill={fill}
+        aria-hidden
+      >
+        <StyledPath icon={radio_button_selected} name="selected" />
+        <StyledPath icon={radio_button_unselected} name="unselected" />
+      </Svg>
+    )
+  }, [fill])
+
   return (
     <ThemeProvider theme={token}>
-      <StyledRadio disabled={disabled} className={className}>
+      {label ? (
+        <StyledLabel disabled={disabled} className={className}>
+          <InputWrapper disabled={disabled}>
+            <Input {...rest} ref={ref} disabled={disabled} />
+            {renderSVG}
+          </InputWrapper>
+          <LabelText>{label}</LabelText>
+        </StyledLabel>
+      ) : (
         <InputWrapper disabled={disabled}>
           <Input {...rest} ref={ref} disabled={disabled} />
-          <Svg
-            width={iconSize}
-            height={iconSize}
-            viewBox={`0 0 ${iconSize} ${iconSize}`}
-            fill={fill}
-            aria-hidden
-          >
-            <StyledPath icon={radio_button_selected} name="selected" />
-            <StyledPath icon={radio_button_unselected} name="unselected" />
-          </Svg>
+          {renderSVG}
         </InputWrapper>
-        {label && <LabelText>{label}</LabelText>}
-      </StyledRadio>
+      )}
     </ThemeProvider>
   )
 })

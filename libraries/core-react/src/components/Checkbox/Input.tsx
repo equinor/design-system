@@ -26,14 +26,12 @@ const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
 const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
 }))`
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: input;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:focus {
     outline: none;
   }
@@ -60,12 +58,16 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   height,
   width,
   fill,
-}))``
+}))`
+  grid-area: input;
+  pointer-events: none;
+`
 
 type StyledInputWrapperProps = { disabled: boolean }
 
 const InputWrapper = styled.span<StyledInputWrapperProps>`
-  display: inline-flex;
+  display: inline-grid;
+  grid: [input] 1fr / [input] 1fr;
   border-radius: 50%;
   ${({ theme }) => spacingsTemplate(theme.spacings)}
   @media (hover: hover) and (pointer: fine) {
