@@ -108,12 +108,15 @@ Compact.parameters = {
   },
 }
 
-export const NoLabel: Story<RadioProps> = () => <Radio />
+export const alternativeToLabel: Story<RadioProps> = () => (
+  <Radio aria-label="This label is invisible, but read by screen-readers" />
+)
 
-NoLabel.parameters = {
+alternativeToLabel.parameters = {
   docs: {
     description: {
-      story: 'Radio without label text is just the input wrapped in a span',
+      story:
+        'To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. In such cases `aria-label` or `aria-labelledby` should be used',
     },
   },
 }
