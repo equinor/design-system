@@ -10,6 +10,8 @@ While the design system itself lives in [Figma][], this repository contains impl
   - [Table of contents](#table-of-contents)
   - [Status](#status)
   - [How to run](#how-to-run)
+    - [Use Gitpod and develop in the browser](#use-gitpod-and-develop-in-the-browser)
+    - [Clone and develop locally](#clone-and-develop-locally)
     - [Work with the React components](#work-with-the-react-components)
   - [Figma](#figma)
   - [Storefront](#storefront)
@@ -48,7 +50,8 @@ While the design system itself lives in [Figma][], this repository contains impl
 
 Would you like to contribute? Awesome! 👏
 
-We use a fork and pull-request workflow, so start with forking the repository on Github, then either open it in Gitpod or clone your fork locally.
+We use a fork and pull-request workflow, so start with forking the repository on Github, then either open it in Gitpod or clone your fork locally.  
+Checkout Github docs on [how to work with forks](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks)
 
 ### Use [Gitpod](https://www.gitpod.io/) and develop in the browser
 
