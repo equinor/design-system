@@ -96,9 +96,8 @@ The EDS in Figma is the single source of truth. You can apply for access to Figm
 
 ## Storefront
 
-The [storefront][] is the official documentation for the EDS. As we’re getting [close to finishing][status] the EDS Core React library, we’ve started work on implementing the EDS in the storefront as well to replace the bare bones design it currently has. 
+The [storefront][] is the official documentation for the EDS.
 
-[status]: https://eds.equinor.com/components/component-status
 [storefront]: https://eds.equinor.com
 [Figma]: https://www.figma.com/
 
