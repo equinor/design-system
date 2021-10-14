@@ -88,7 +88,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const actualVariant = variant === 'default' ? 'input' : variant
   const inputVariant = tokens[actualVariant]
   const { density } = useEds()
-  const token = useToken({ density }, inputVariant)()
+  const token = useToken({ density }, inputVariant)
 
   const inputProps = {
     ref,

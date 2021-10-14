@@ -109,7 +109,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   ref,
 ) {
   const { density } = useEds()
-  const token = useToken({ density }, tokens)()
+  const token = useToken({ density }, tokens)
 
   const iconSize = 24
   const fill = disabled ? tokens.states.disabled.background : tokens.background

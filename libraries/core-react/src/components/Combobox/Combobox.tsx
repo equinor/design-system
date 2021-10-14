@@ -153,7 +153,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     const token = useToken(
       { density },
       multiple ? multiSelectTokens : selectTokens,
-    )()
+    )
     let placeholderText: string = undefined
 
     useEffect(() => {

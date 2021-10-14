@@ -79,7 +79,7 @@ export const TableHeaderCell = forwardRef<
   CellProps
 >(function TableHeaderCell({ children, sort, ...rest }, ref) {
   const { density } = useEds()
-  const token = useToken({ density }, tablehead)()
+  const token = useToken({ density }, tablehead)
 
   return (
     <ThemeProvider theme={token}>

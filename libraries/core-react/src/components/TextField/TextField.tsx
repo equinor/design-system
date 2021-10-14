@@ -116,7 +116,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     const showHelperText = helperText
 
     const { density } = useEds()
-    const token = useToken({ density }, tokens)()
+    const token = useToken({ density }, tokens)
 
     return (
       <ThemeProvider theme={token}>
