@@ -2,7 +2,7 @@
 name: "\U0001F4A1 Feature request"
 about: Suggest an idea
 title: ''
-labels: '\U0001F4A1 feature request'
+labels: '💡 feature request'
 assignees: ''
 ---
 
