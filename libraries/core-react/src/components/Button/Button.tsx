@@ -166,7 +166,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) {
     const { density } = useEds()
-    const token = useToken({ density }, getToken(variant, color))()
+    const token = useToken({ density }, getToken(variant, color))
 
     const as: ElementType =
       href && !disabled ? 'a' : other.as ? other.as : 'button'

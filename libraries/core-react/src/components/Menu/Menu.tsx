@@ -95,7 +95,7 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const [containerEl, setContainerEl] = useState<HTMLElement>(null)
   const isMounted = useIsMounted()
   const { density } = useEds()
-  const token = useToken({ density }, tokens)()
+  const token = useToken({ density }, tokens)
 
   const { styles, attributes } = usePopper(
     anchorEl,

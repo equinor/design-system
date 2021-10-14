@@ -74,7 +74,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     const isControlled = selectedOptions ? true : false
     const [inputValue, setInputValue] = useState('')
     const { density } = useEds()
-    const token = useToken({ density }, tokens)()
+    const token = useToken({ density }, tokens)
 
     let multipleSelectionProps: UseMultipleSelectionProps<string> = {
       initialSelectedItems: initialSelectedItems,

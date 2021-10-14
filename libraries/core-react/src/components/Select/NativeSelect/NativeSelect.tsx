@@ -26,7 +26,7 @@ const StyledSelect = styled.select`
       height: ${theme.minHeight};
       ${spacingsTemplate(theme.entities.input.spacings)}
     `}
-  
+
   padding-right: calc(${tokens.entities.input.spacings.right} *2 + ${tokens
     .entities.icon.width});
   display: block;
@@ -99,7 +99,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
     ref,
   ) {
     const { density } = useEds()
-    const token = useToken({ density }, tokens)()
+    const token = useToken({ density }, tokens)
 
     const containerProps = {
       ref,
