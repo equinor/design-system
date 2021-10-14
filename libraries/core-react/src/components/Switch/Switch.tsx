@@ -9,7 +9,7 @@ import { useEds } from '../EdsProvider'
 
 type StyledProps = { isDisabled: boolean }
 
-const StyledSwitch = styled.label<StyledProps>`
+const StyledLabel = styled.label<StyledProps>`
   cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};
   border: none;
   background-color: transparent;
@@ -48,14 +48,20 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 
   return (
     <ThemeProvider theme={token}>
-      <StyledSwitch isDisabled={disabled} className={className}>
-        {size === 'small' ? (
-          <SwitchSmall disabled={disabled} {...rest} ref={ref} />
-        ) : (
-          <SwitchDefault disabled={disabled} {...rest} ref={ref} />
-        )}
-        {label && <Label>{label}</Label>}
-      </StyledSwitch>
+      {label ? (
+        <StyledLabel isDisabled={disabled} className={className}>
+          {size === 'small' ? (
+            <SwitchSmall disabled={disabled} {...rest} ref={ref} />
+          ) : (
+            <SwitchDefault disabled={disabled} {...rest} ref={ref} />
+          )}
+          {label && <Label>{label}</Label>}
+        </StyledLabel>
+      ) : size === 'small' ? (
+        <SwitchSmall disabled={disabled} {...rest} ref={ref} />
+      ) : (
+        <SwitchDefault disabled={disabled} {...rest} ref={ref} />
+      )}
     </ThemeProvider>
   )
 })

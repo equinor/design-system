@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { bordersTemplate } from '../../utils'
-import { BaseInput, BaseInputWrapper } from './Switch.styles'
+import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 
 type StyledProps = { isDisabled: boolean }
 
@@ -96,13 +96,13 @@ type SwitchDefaultProps = {
 export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
   function SwitchDefault({ disabled, ...rest }, ref) {
     return (
-      <>
+      <GridWrapper>
         <Input {...rest} ref={ref} disabled={disabled} />
         <Wrapper isDisabled={disabled}>
           <Track isDisabled={disabled} />
           <Handle isDisabled={disabled} />
         </Wrapper>
-      </>
+      </GridWrapper>
     )
   },
 )

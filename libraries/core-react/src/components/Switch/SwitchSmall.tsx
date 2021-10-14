@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-import { BaseInput, BaseInputWrapper } from './Switch.styles'
+import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 
 type StyledProps = { isDisabled: boolean }
 
@@ -89,13 +89,13 @@ type SwitchSmallProps = {
 export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
   function SwitchSmall({ disabled, ...rest }, ref) {
     return (
-      <>
+      <GridWrapper>
         <Input {...rest} ref={ref} disabled={disabled} />
         <Wrapper isDisabled={disabled}>
           <Track isDisabled={disabled} />
           <Handle />
         </Wrapper>
-      </>
+      </GridWrapper>
     )
   },
 )
