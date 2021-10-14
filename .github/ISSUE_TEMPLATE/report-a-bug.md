@@ -1,10 +1,9 @@
 ---
-name: "Bug \U0001F41B"
+name: "\U0001F41B Bug"
 about: Report a bug
 title: ''
-labels: ''
+labels: '\U0001F41B bug'
 assignees: ''
-
 ---
 
 **Describe the bug**
@@ -24,10 +23,10 @@ A clear and concise description of what you expected to happen.
 
 **Specifications**
 
-- Version: 
-- Browser: 
-- OS: 
+- Version:
+- Browser:
+- OS:
 
 **Additional context**
 
-Add any other context or screenshots about the bug.
+Add any other context or screenshots about the bug. An example in [CodeSandbox](https://codesandbox.io/) is very helpful

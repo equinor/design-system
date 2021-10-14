@@ -1,10 +1,9 @@
 ---
-name: "Feature request \U0001F4A1"
+name: "\U0001F4A1 Feature request"
 about: Suggest an idea
 title: ''
-labels: ''
+labels: '\U0001F4A1 feature request'
 assignees: ''
-
 ---
 
 **Is your feature request related to a problem? Please describe.**
