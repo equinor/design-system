@@ -3,8 +3,8 @@
 exports[`Scrim Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: var(--eds_ui_background__scrim,rgba(0,0,0,0.4));
   position: fixed;
   z-index: 500;
