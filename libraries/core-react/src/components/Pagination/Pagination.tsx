@@ -123,7 +123,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     useLayoutEffect(() => {
       if (isMounted) {
         setActivePage(1)
-        if (onChange) onChange(null, 1)
+        onChange?.(null, 1)
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [itemsPerPage])
