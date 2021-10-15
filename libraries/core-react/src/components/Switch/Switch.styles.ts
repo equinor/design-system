@@ -7,6 +7,8 @@ export const BaseInputWrapper = styled.span(
     height: ${height};
     border-radius: 50%;
     position: relative;
+    grid-area: input;
+    pointer-events: none;
 
     &::before {
       position: absolute;
@@ -30,15 +32,13 @@ export const BaseInputWrapper = styled.span(
 export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
 }))(
-  ({ theme }) => css`
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+  ({ disabled, theme }) => css`
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    grid-area: input;
+    margin: 0;
+    cursor: ${disabled ? 'not-allowed' : 'pointer'};
     &:focus {
       outline: none;
     }
@@ -47,3 +47,9 @@ export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
     }
   `,
 )
+
+export const GridWrapper = styled.span`
+  display: inline-grid;
+  vertical-align: middle;
+  grid: [input] 1fr / [input] 1fr;
+`
