@@ -89,7 +89,9 @@ describe('Popover', () => {
   it("doesn't crash if no children is provided to Popover component", async () => {
     const placement = 'top'
     render(<TestPopover placement={placement} />)
-    await waitFor(() => expect(screen.queryByText(placement)).toBeDefined())
+    await waitFor(() => {
+      expect(screen.queryByText(placement)).toBeDefined()
+    })
   })
   it("doesn't crash if Popover Content children is undefined", async () => {
     const placement = 'top'
@@ -99,7 +101,9 @@ describe('Popover', () => {
         <Popover.Content></Popover.Content>
       </TestPopover>,
     )
-    await waitFor(() => expect(screen.queryByText(placement)).toBeDefined())
+    await waitFor(() => {
+      expect(screen.queryByText(placement)).toBeDefined()
+    })
   })
   it("doesn't crash if Popover Title children is undefined", async () => {
     const placement = 'top'
@@ -109,6 +113,8 @@ describe('Popover', () => {
         <Popover.Content>Content</Popover.Content>
       </TestPopover>,
     )
-    await waitFor(() => expect(screen.queryByText(placement)).toBeDefined())
+    await waitFor(() => {
+      expect(screen.queryByText(placement)).toBeDefined()
+    })
   })
 })
