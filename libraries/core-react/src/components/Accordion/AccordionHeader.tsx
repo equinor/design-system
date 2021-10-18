@@ -73,7 +73,7 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
             },
           },
         })}
-  svg {
+  > svg {
     color: ${iconToken.typography.color};
   }
 `
