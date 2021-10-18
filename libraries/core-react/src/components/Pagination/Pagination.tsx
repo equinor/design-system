@@ -1,11 +1,13 @@
 import {
   forwardRef,
   useState,
+  useLayoutEffect,
   MouseEvent,
   KeyboardEvent,
   HTMLAttributes,
 } from 'react'
 import styled from 'styled-components'
+import { useIsMounted } from '../../hooks'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
@@ -79,7 +81,7 @@ export type PaginationProps = {
   /** Choose number of items per page */
   itemsPerPage?: number
   /** Callback fired on page change */
-  onChange?: (event: MouseEvent | KeyboardEvent, page: number) => void
+  onChange?: (event: MouseEvent | KeyboardEvent | null, page: number) => void
   /** Default start page */
   defaultPage?: number
 } & Omit<HTMLAttributes<HTMLElement>, 'onChange'>
@@ -115,8 +117,16 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         return undefined
       }
     }
-
+    const isMounted = useIsMounted()
     const items = PaginationControl(pages, activePage)
+
+    useLayoutEffect(() => {
+      if (isMounted) {
+        setActivePage(1)
+        onChange?.(null, 1)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [itemsPerPage])
 
     const props = {
       ref,
