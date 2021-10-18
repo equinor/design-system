@@ -31,7 +31,6 @@ type AccordionToken = ComponentToken & {
   entities: {
     chevron: ComponentToken
     header: ComponentToken
-    panel: ComponentToken
     icon: ComponentToken
   }
 }
