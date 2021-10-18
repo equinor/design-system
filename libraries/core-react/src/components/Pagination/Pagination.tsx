@@ -81,7 +81,7 @@ export type PaginationProps = {
   /** Choose number of items per page */
   itemsPerPage?: number
   /** Callback fired on page change */
-  onChange?: (event: MouseEvent | KeyboardEvent, page: number) => void
+  onChange?: (event: MouseEvent | KeyboardEvent | null, page: number) => void
   /** Default start page */
   defaultPage?: number
 } & Omit<HTMLAttributes<HTMLElement>, 'onChange'>
