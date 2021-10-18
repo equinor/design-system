@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.1] - 2021-19-18
+
+### Added
+- Hover effects are wrapped with Media Query to only target devices with mouse pointer ([#1589](https://github.com/equinor/design-system/issues/1589))
+- `Pagination` control now changes to first page if the `itemsPerPage` value changes ([#1621](https://github.com/equinor/design-system/issues/1621))
+
+### Fixed
+- `Tooltip` now works when wrapping `Radio` or `Checkbox` ([#1605](https://github.com/equinor/design-system/issues/1605))
+- Fixed an issue where an external themeprovider can overwrite unset values in certain components ([#1617](https://github.com/equinor/design-system/issues/1617)
+- `Scrim` now correctly covers entire screen when used in conjunction with the css `zoom` property  ([#1625](https://github.com/equinor/design-system/issues/1625)))
+
+### Changed
+- `Radio`, `Checkbox` refactored to no longer be wrapped in `label`-element when no label-prop is provided ([#1610](https://github.com/equinor/design-system/issues/1610))
+- `Switch` refactored to no longer be wrapped in `label`-element when no label-prop is provided ([#1613](https://github.com/equinor/design-system/issues/1613))
+- Updated `Accordion` non-interactive icons color ([#1296](https://github.com/equinor/design-system/issues/1296))
+
 ## [0.14.0] - 2021-09-30
 
 ### Added
