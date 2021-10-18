@@ -63,9 +63,9 @@ export const Dynamic: Story<PaginationProps> = () => {
       <div
         style={{
           display: 'flex',
-          gap: '1ch',
+          gap: '8px',
           alignItems: 'center',
-          marginBottom: '2ch',
+          marginBottom: '16px',
         }}
       >
         <p>Items per page:</p>
