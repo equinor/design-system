@@ -18,6 +18,9 @@ const {
       disabled__text: { rgba: disabledColor },
       focus: { rgba: focusOutlineColor },
     },
+    text: {
+      static_icons__default: { rgba: defaultIconColor },
+    },
   },
   spacings: {
     comfortable: { medium: mediumSpacing },
@@ -28,6 +31,7 @@ type AccordionToken = ComponentToken & {
   entities: {
     chevron: ComponentToken
     header: ComponentToken
+    icon: ComponentToken
   }
 }
 
@@ -87,6 +91,11 @@ export const accordion: AccordionToken = {
         left: mediumSpacing,
         right: mediumSpacing,
         top: mediumSpacing,
+      },
+    },
+    icon: {
+      typography: {
+        color: defaultIconColor,
       },
     },
   },

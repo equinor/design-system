@@ -21,7 +21,7 @@ import {
 } from '../../utils'
 
 const {
-  entities: { header, chevron: chevronToken },
+  entities: { header, chevron: chevronToken, icon: iconToken },
 } = tokens
 
 type StyledAccordionHeaderProps = {
@@ -73,6 +73,9 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
             },
           },
         })}
+  > svg {
+    color: ${iconToken.typography.color};
+  }
 `
 type StyledIconProps = Omit<AccordionProps, 'headerLevel'>
 
