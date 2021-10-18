@@ -1,7 +1,7 @@
 import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { useGlobalKeyPress } from '../../hooks'
+import { useGlobalKeyPress, useHideBodyScroll } from '../../hooks'
 
 const { height, width, background } = tokens
 
@@ -40,6 +40,9 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
     isDismissable,
     ref,
   }
+
+  const overflowState = document.body.style.overflow
+  useHideBodyScroll(overflowState)
 
   useGlobalKeyPress('Escape', (e: KeyboardEvent) => {
     if (isDismissable && onClose) {
