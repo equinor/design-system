@@ -3,6 +3,7 @@
 exports[`Radio Matches snapshot 1`] = `
 <DocumentFragment>
   .c2 {
+  --scale: 2;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -10,6 +11,9 @@ exports[`Radio Matches snapshot 1`] = `
   height: 100%;
   margin: 0;
   grid-area: input;
+  -webkit-transform: scale(var(--scale));
+  -ms-transform: scale(var(--scale));
+  transform: scale(var(--scale));
   cursor: pointer;
 }
 

@@ -23,14 +23,21 @@ const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
   d: icon.svgPathData,
 }))<StyledIconPathProps>``
 
-const Input = styled.input.attrs(({ type = 'checkbox' }) => ({
+type StyledInputProps = {
+  iconSize: number
+}
+
+const Input = styled.input.attrs<StyledInputProps>(({ type = 'checkbox' }) => ({
   type,
-}))`
+}))<StyledInputProps>`
+  --scale: ${({ theme, iconSize }) =>
+    parseFloat(theme.clickbound.height) / iconSize};
   appearance: none;
   width: 100%;
   height: 100%;
   margin: 0;
   grid-area: input;
+  transform: scale(var(--scale));
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:focus {
     outline: none;
@@ -112,7 +119,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     return (
       <ThemeProvider theme={token}>
         <InputWrapper {...inputWrapperProps}>
-          <Input {...inputProps} />
+          <Input iconSize={iconSize} {...inputProps} />
           {indeterminate ? (
             <Svg
               width={iconSize}
