@@ -13,8 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - `Tooltip` now works when wrapping `Radio` or `Checkbox` ([#1605](https://github.com/equinor/design-system/issues/1605))
-- Fixed an issue where an external themeprovider can overwrite unset values in certain components ([#1617](https://github.com/equinor/design-system/issues/1617)
-- `Scrim` now correctly covers entire screen when used in conjunction with the css `zoom` property  ([#1625](https://github.com/equinor/design-system/issues/1625)))
+- Fixed an issue where an external themeprovider can overwrite unset values in certain components ([#1617](https://github.com/equinor/design-system/issues/1617))
+- `Scrim` now correctly covers entire screen when used in conjunction with the css `zoom` property  ([#1625](https://github.com/equinor/design-system/issues/1625))
+- `Scrim` now disables scroll on body when open ([#1587](https://github.com/equinor/design-system/issues/1587))
 
 ### Changed
 - `Radio`, `Checkbox` refactored to no longer be wrapped in `label`-element when no label-prop is provided ([#1610](https://github.com/equinor/design-system/issues/1610))
