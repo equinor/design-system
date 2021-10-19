@@ -16,6 +16,10 @@ const {
   spacings: {
     comfortable: { medium_small, x_small },
   },
+  clickbounds: {
+    default__base: clicboundSize,
+    compact__standard: compactClickboundSize,
+  },
 } = tokens
 
 type RadioToken = ComponentToken
@@ -28,6 +32,9 @@ export const comfortable: RadioToken = {
     top: medium_small,
     left: medium_small,
     right: medium_small,
+  },
+  clickbound: {
+    height: clicboundSize,
   },
   states: {
     hover: {
@@ -60,6 +67,9 @@ export const comfortable: RadioToken = {
         top: x_small,
         left: x_small,
         right: x_small,
+      },
+      clickbound: {
+        height: compactClickboundSize,
       },
       states: {
         focus: {

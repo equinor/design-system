@@ -15,14 +15,21 @@ import {
 import { useToken } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
-const Input = styled.input.attrs(({ type = 'radio' }) => ({
+type StyledInputProps = {
+  clickbound: number
+}
+
+const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
   type,
-}))`
+}))<StyledInputProps>`
+  --scale: ${({ theme, clickbound }) =>
+    parseFloat(theme.clickbound.height) / clickbound};
   appearance: none;
   width: 100%;
   height: 100%;
   margin: 0;
   grid-area: input;
+  transform: scale(var(--scale));
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:focus {
     outline: none;
@@ -134,14 +141,24 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       {label ? (
         <StyledLabel disabled={disabled} className={className}>
           <InputWrapper disabled={disabled}>
-            <Input {...rest} ref={ref} disabled={disabled} />
+            <Input
+              {...rest}
+              ref={ref}
+              disabled={disabled}
+              clickbound={iconSize}
+            />
             {renderSVG}
           </InputWrapper>
           <LabelText>{label}</LabelText>
         </StyledLabel>
       ) : (
         <InputWrapper disabled={disabled}>
-          <Input {...rest} ref={ref} disabled={disabled} />
+          <Input
+            {...rest}
+            ref={ref}
+            disabled={disabled}
+            clickbound={iconSize}
+          />
           {renderSVG}
         </InputWrapper>
       )}
