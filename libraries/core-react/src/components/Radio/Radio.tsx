@@ -16,14 +16,14 @@ import { useToken } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
 type StyledInputProps = {
-  clickbound: number
+  iconSize: number
 }
 
 const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
   type,
 }))<StyledInputProps>`
-  --scale: ${({ theme, clickbound }) =>
-    parseFloat(theme.clickbound.height) / clickbound};
+  --scale: ${({ theme, iconSize }) =>
+    parseFloat(theme.clickbound.height) / iconSize};
   appearance: none;
   width: 100%;
   height: 100%;
@@ -145,7 +145,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
               {...rest}
               ref={ref}
               disabled={disabled}
-              clickbound={iconSize}
+              iconSize={iconSize}
             />
             {renderSVG}
           </InputWrapper>
@@ -153,12 +153,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         </StyledLabel>
       ) : (
         <InputWrapper disabled={disabled}>
-          <Input
-            {...rest}
-            ref={ref}
-            disabled={disabled}
-            clickbound={iconSize}
-          />
+          <Input {...rest} ref={ref} disabled={disabled} iconSize={iconSize} />
           {renderSVG}
         </InputWrapper>
       )}

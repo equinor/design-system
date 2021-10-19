@@ -24,14 +24,14 @@ const StyledPath = styled.path.attrs<StyledIconPathProps>(({ icon }) => ({
 }))<StyledIconPathProps>``
 
 type StyledInputProps = {
-  clickbound: number
+  iconSize: number
 }
 
 const Input = styled.input.attrs<StyledInputProps>(({ type = 'checkbox' }) => ({
   type,
 }))<StyledInputProps>`
-  --scale: ${({ theme, clickbound }) =>
-    parseFloat(theme.clickbound.height) / clickbound};
+  --scale: ${({ theme, iconSize }) =>
+    parseFloat(theme.clickbound.height) / iconSize};
   appearance: none;
   width: 100%;
   height: 100%;
@@ -119,7 +119,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     return (
       <ThemeProvider theme={token}>
         <InputWrapper {...inputWrapperProps}>
-          <Input clickbound={iconSize} {...inputProps} />
+          <Input iconSize={iconSize} {...inputProps} />
           {indeterminate ? (
             <Svg
               width={iconSize}
