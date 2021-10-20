@@ -131,7 +131,7 @@ See our [storybook](https://eds-storybook-react.azurewebsites.net) for more exam
 
 Built on a copy of the Outlined Material Design icons, the icons have been customised and renamed for Equinor’s use and supplemented with our own icons for Equinor specific domains.
 
-All the icons are available in the [storefront](https://eds.equinor.com/assets/system-icons/library/), and can also be installed from NPM.
+All the icons are available in our [Storybook](https://eds-storybook-react.azurewebsites.net/?path=/story/icons--preview), and can also be installed from NPM.
 
 The following example uses the `<Icon>` component from `@equinor/eds-core-react` – but the icons package can also be used without React.
 
@@ -151,9 +151,7 @@ npm install typescript --save-dev
 import { Icon } from '@equinor/eds-core-react'
 import { info_circle } from '@equinor/eds-icons'
 
-Icon.add({ info_circle })
-
-<Icon name="info_circle" size={24} />
+<Icon data={info_circle} size={24} />
 ```
 
 ## Tokens
