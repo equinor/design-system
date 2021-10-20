@@ -4,18 +4,6 @@ import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 
 type StyledProps = { isDisabled: boolean }
 
-const Wrapper = styled(BaseInputWrapper)<StyledProps>(
-  ({ isDisabled, theme }) => css`
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        background-color: ${isDisabled
-          ? 'transparent'
-          : theme.states.hover.background};
-      }
-    }
-  `,
-)
-
 const Input = styled(BaseInput)(
   ({
     disabled,
@@ -37,6 +25,11 @@ const Input = styled(BaseInput)(
     &:checked + span > span:last-child {
       transform: translate(180%, -50%);
       background-color: ${handle.background};
+    }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover + span {
+        background-color: ${disabled ? 'transparent' : states.hover.background};
+      }
     }
   `,
 )
@@ -91,10 +84,10 @@ export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
     return (
       <GridWrapper>
         <Input {...rest} ref={ref} disabled={disabled} />
-        <Wrapper isDisabled={disabled}>
+        <BaseInputWrapper>
           <Track isDisabled={disabled} />
           <Handle />
-        </Wrapper>
+        </BaseInputWrapper>
       </GridWrapper>
     )
   },
