@@ -65,18 +65,35 @@ const StyledButton = styled(Button)(
   `,
 )
 
+const isObjects = (items: unknown[]) =>
+  items.length > 0 ? typeof items[0] === 'object' : false
+
+const stringify: (
+  items: ComboboxItems,
+  label: (option: ComboboxDataProps) => string,
+) => string[] = (items, label) =>
+  isObjects(items)
+    ? (items as ComboboxDataProps[]).map(label)
+    : (items as string[])
+
+type ComboboxDataProps = {
+  label: string
+}
+
+type ComboboxItems = Partial<ComboboxDataProps>[] | string[]
+
 export type ComboboxChanges = {
-  selectedItems: string[]
+  selectedItems: ComboboxItems
   inputValue: string
 }
 
 export type ComboboxProps = {
   /** List of options to choose from */
-  items: string[]
+  items: ComboboxItems
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
-  initialSelectedItems?: string[]
+  initialSelectedItems?: ComboboxItems
   /** Meta text, for instance unit */
   meta?: string
   /** Disabled state */
@@ -87,13 +104,17 @@ export type ComboboxProps = {
    * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
    * The items that should be selected. */
-  selectedOptions?: string[]
+  selectedOptions?: ComboboxItems
   /** Callback for the selected item change
    * changes.selectedItem gives the selected item
    */
   handleSelectedItemsChange?: (changes: ComboboxChanges) => void
   /** Enable multiselect */
   multiple?: boolean
+  /**  Custom option label */
+  optionLabel?: (option: ComboboxDataProps) => string
+  /** Predicate for disabling option */
+  optionDisabled?: (option: ComboboxDataProps) => string
 } & SelectHTMLAttributes<HTMLSelectElement>
 
 export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
@@ -109,14 +130,16 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       selectedOptions,
       handleSelectedItemsChange,
       multiple,
+      optionLabel = (item) => item.label,
       ...other
     },
     ref,
   ) {
-    const [inputItems, setInputItems] = useState(items)
     const isControlled = Boolean(selectedOptions)
+    const labelItems = stringify(items, optionLabel)
+    const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
     const [selectedItems, setSelectedItems] = useState<string[]>(
-      isControlled ? selectedOptions : [],
+      isControlled ? stringify(selectedOptions, optionLabel) : [],
     )
     const { density } = useEds()
     const token = useToken(
@@ -127,26 +150,26 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
     useEffect(() => {
       if (isControlled) {
-        setSelectedItems(selectedOptions)
+        setSelectedItems(stringify(selectedOptions, optionLabel))
       }
       if (initialSelectedItems.length) {
-        setSelectedItems(initialSelectedItems)
+        setSelectedItems(stringify(initialSelectedItems, optionLabel))
       }
-    }, [selectedOptions, isControlled, initialSelectedItems])
+    }, [selectedOptions, isControlled, initialSelectedItems, optionLabel])
 
     let comboBoxProps: UseComboboxProps<string> = {
-      items: inputItems,
+      items: availableItems,
       selectedItem: multiple ? null : undefined,
       onInputValueChange: ({ inputValue }) => {
-        setInputItems(
-          items.filter((item) =>
+        setAvailableItems(
+          labelItems.filter((item) =>
             item.toLowerCase().includes(inputValue.toLowerCase()),
           ),
         )
       },
       onIsOpenChange: ({ selectedItem }) => {
-        if (inputItems.length === 1 && selectedItem === inputItems[0]) {
-          setInputItems(items)
+        if (availableItems.length === 1 && selectedItem === availableItems[0]) {
+          setAvailableItems(labelItems)
         }
       },
       onStateChange: ({ type, selectedItem, inputValue }) => {
@@ -278,7 +301,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           </Container>
           <StyledList {...getMenuProps()}>
             {isOpen &&
-              inputItems.map((item, index) => (
+              availableItems.map((item, index) => (
                 <ComboboxOption
                   key={item}
                   value={item}
