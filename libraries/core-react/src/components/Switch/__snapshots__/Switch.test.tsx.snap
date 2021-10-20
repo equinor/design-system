@@ -66,7 +66,15 @@ exports[`Switch Matches snapshot 1`] = `
   background-color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
 }
 
-.c6 {
+.c3:hover + span {
+  background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+}
+
+.c3:hover + span > span:last-child {
+  background-color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+}
+
+.c5 {
   border-radius: 4px;
   border: none;
   width: 32px;
@@ -82,7 +90,7 @@ exports[`Switch Matches snapshot 1`] = `
   transition: background 0.36s;
 }
 
-.c7 {
+.c6 {
   background-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
   box-shadow: 0 1px 5px rgba(0,0,0,0.2),0 3px 4px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.14);
   width: 16px;
@@ -116,7 +124,7 @@ exports[`Switch Matches snapshot 1`] = `
   position: relative;
 }
 
-.c8 {
+.c7 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -131,16 +139,6 @@ exports[`Switch Matches snapshot 1`] = `
   margin-left: 12px;
 }
 
-@media (hover:hover) and (pointer:fine) {
-  .c5:hover {
-    background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
-  }
-
-  .c5:hover > span:last-child {
-    background-color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
-  }
-}
-
 <label
     class="c0"
   >
@@ -152,18 +150,18 @@ exports[`Switch Matches snapshot 1`] = `
         type="checkbox"
       />
       <span
-        class="c4 c5"
+        class="c4"
       >
         <span
-          class="c6"
+          class="c5"
         />
         <span
-          class="c7"
+          class="c6"
         />
       </span>
     </span>
     <span
-      class="c8"
+      class="c7"
     >
       switch
     </span>
