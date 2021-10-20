@@ -90,12 +90,9 @@ Run tests once or by watching
 
 ## Figma
 
-The EDS in Figma is the single source of truth. You can apply for access to Figma in [AccessIT]. See the [changelog][figma-changelog] for updates. The EDS Core team has workshops and demos on using Figma from time to time, these are announced in Slack and Teams (see [«Get in touch»](#get-in-touch))
+The EDS in Figma is the single source of truth. You can apply for access to Figma in [AccessIT]. The EDS Core team has workshops and demos on using Figma from time to time, these are announced in Slack and Teams (see [«Get in touch»](#get-in-touch))
 
 [accessit]: https://accessit.equinor.com/Search/Search?term=figma
-[figma-changelog]: https://eds.equinor.com/updates/release-information/changelog/
-
-
 
 ## Storefront
 
