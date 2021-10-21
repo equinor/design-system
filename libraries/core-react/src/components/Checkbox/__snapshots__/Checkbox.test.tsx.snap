@@ -81,7 +81,6 @@ exports[`Checkbox Matches snapshot 1`] = `
   -ms-letter-spacing: 0.013em;
   letter-spacing: 0.013em;
   text-align: left;
-  padding-left: 12px;
 }
 
 @media (hover:hover) and (pointer:fine) {
