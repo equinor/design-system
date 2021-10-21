@@ -53,13 +53,6 @@ export const checkbox: CheckboxToken = {
       },
     },
   },
-  entities: {
-    label: {
-      spacings: {
-        left: medium_small,
-      },
-    },
-  },
   modes: {
     compact: {
       spacings: {

@@ -84,7 +84,6 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
 
 const LabelText = styled.span`
   ${typographyTemplate(tokens.typography)}
-  ${spacingsTemplate(tokens.entities.label.spacings)}
 `
 
 type StyledInputWrapperProps = { disabled: boolean }
