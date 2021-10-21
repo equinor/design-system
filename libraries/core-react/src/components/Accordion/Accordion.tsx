@@ -1,22 +1,21 @@
 import {
   forwardRef,
-  useMemo,
   ReactElement,
   HTMLAttributes,
   cloneElement,
   Children as ReactChildren,
 } from 'react'
-import createId from 'lodash/uniqueId'
 import type { AccordionProps } from './Accordion.types'
+import { useId } from '../../hooks'
 
 const Accordion = forwardRef<
   HTMLDivElement,
   AccordionProps & HTMLAttributes<HTMLDivElement>
 >(function Accordion(
-  { headerLevel = 'h2', chevronPosition = 'left', children, ...props },
+  { headerLevel = 'h2', chevronPosition = 'left', children, id, ...props },
   ref,
 ) {
-  const accordionId = useMemo<string>(() => createId('accordion-'), [])
+  const accordionId = useId(id, 'accordion')
 
   const AccordionItems = ReactChildren.map(children, (child, index) => {
     if (!child) return null
