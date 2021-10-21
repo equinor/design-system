@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.2] - 2021-10-21
+
+### Fixed
+- `Switch` hover effect broke in the previous release, this is now fixed ([#1641](https://github.com/equinor/design-system/issues/1641))
+
+### Changed
+- `Radio`, `Checkbox`: Removed extra padding between input clickbounds and label ([#1640](https://github.com/equinor/design-system/issues/1640))
+
 ## [0.14.1] - 2021-10-19
 
 ### Added
