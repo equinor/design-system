@@ -11,7 +11,14 @@ import React from 'react'
 
 Icon.add({ attach_file, notifications })
 
-afterEach(cleanup)
+beforeEach(() => {
+  jest.spyOn(Math, 'random').mockReturnValue(0.12345)
+})
+
+afterEach(() => {
+  jest.spyOn(Math, 'random').mockRestore()
+  cleanup
+})
 
 type TestProps = {
   isExpanded?: boolean
