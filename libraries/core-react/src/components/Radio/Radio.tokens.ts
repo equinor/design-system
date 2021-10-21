@@ -53,13 +53,6 @@ export const comfortable: RadioToken = {
       },
     },
   },
-  entities: {
-    label: {
-      spacings: {
-        left: medium_small,
-      },
-    },
-  },
   modes: {
     compact: {
       spacings: {
