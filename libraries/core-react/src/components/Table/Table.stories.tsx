@@ -13,12 +13,12 @@ import {
   EdsProvider,
   EdsProviderProps,
 } from '../..'
-import { chevron_down, chevron_up, accessible } from '@equinor/eds-icons'
+import { arrow_down, arrow_up, accessible } from '@equinor/eds-icons'
 import { data, columns, Column, Data, SortDirection } from '../../stories/data'
 
 import { toCellValues } from '../../stories/toCellValues'
 
-Icon.add({ chevron_down, chevron_up })
+Icon.add({ arrow_down, arrow_up })
 
 const { Caption, Body, Row, Cell, Head } = Table
 
@@ -315,9 +315,7 @@ export const Sortable: Story<TableProps> = () => {
               {col.name}
               <Icon
                 name={
-                  col.sortDirection === 'descending'
-                    ? 'chevron_up'
-                    : 'chevron_down'
+                  col.sortDirection === 'descending' ? 'arrow_down' : 'arrow_up'
                 }
               />
             </SortCell>
