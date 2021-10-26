@@ -51,13 +51,15 @@ const customIconData = {
 export default {
   title: 'Components/Icon',
   component: Icon,
+  args: {
+    name: 'save',
+  },
   argTypes: {
     name: {
       control: {
         type: 'select',
         options: Object.keys(icons),
       },
-      defaultValue: 'save',
       description:
         'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },

@@ -33,12 +33,14 @@ export default {
       },
     },
   },
+  args: {
+    density: 'comfortable',
+  },
   argTypes: {
     density: {
       control: {
         type: 'select',
         options: ['comfortable', 'compact'],
-        defaultValue: 'comfortable',
       },
     },
   },

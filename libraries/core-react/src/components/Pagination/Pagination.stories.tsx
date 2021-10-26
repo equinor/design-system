@@ -14,9 +14,11 @@ export default {
       },
     },
   },
+  args: {
+    totalItems: 40,
+  },
   argTypes: {
     totalItems: {
-      defaultValue: 40,
       control: {
         type: 'number',
         min: 10,
