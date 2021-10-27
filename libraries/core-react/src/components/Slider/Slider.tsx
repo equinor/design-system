@@ -221,7 +221,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     valueArrIdx?: number,
   ) => {
     const target = event.target as HTMLInputElement
-    const changedValue = parseInt(target.value, 10)
+    const changedValue = parseFloat(target.value)
     if (isRangeSlider) {
       const newValue = (sliderValue as number[]).slice()
       newValue[valueArrIdx] = changedValue
@@ -269,8 +269,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
 
     const normX = (x / inputWidth) * diff + min
 
-    const maxX = Math.abs(normX - parseInt(maxValue))
-    const minX = Math.abs(normX - parseInt(minValue))
+    const maxX = Math.abs(normX - parseFloat(maxValue))
+    const minX = Math.abs(normX - parseFloat(minValue))
     if (minX > maxX) {
       minRange.current.style.zIndex = '10'
       maxRange.current.style.zIndex = '20'
