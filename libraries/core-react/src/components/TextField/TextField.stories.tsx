@@ -22,25 +22,27 @@ export default {
   component: TextField,
   argTypes: {
     inputIcon: {
+      options: ['error', 'warning', 'success'],
+      mapping: {
+        error: [<Icon name="error_filled" key="error" />],
+        warning: [<Icon name="warning_filled" key="warning" />],
+        success: [<Icon name="thumbs_up" key="thumbs" />],
+      },
       control: {
         type: 'select',
-        options: {
-          error: [<Icon name="error_filled" key="error" />],
-          warning: [<Icon name="warning_filled" key="warning" />],
-          success: [<Icon name="thumbs_up" key="thumbs" />],
-        },
       },
       description:
         'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
     helperIcon: {
+      options: ['error', 'warning', 'success'],
+      mapping: {
+        error: [<Icon name="error_filled" key="error" />],
+        warning: [<Icon name="warning_filled" key="warning" />],
+        success: [<Icon name="thumbs_up" key="thumbs" />],
+      },
       control: {
         type: 'select',
-        options: {
-          error: [<Icon name="error_filled" key="error" />],
-          warning: [<Icon name="warning_filled" key="warning" />],
-          success: [<Icon name="thumbs_up" key="thumbs" />],
-        },
       },
       description:
         'Please note that the option list of icons is not complete, this selection is only for demo purposes',

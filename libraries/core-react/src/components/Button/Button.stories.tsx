@@ -25,9 +25,9 @@ export default {
   },
   argTypes: {
     as: {
+      options: ['span', 'a', 'button'],
       control: {
         type: 'select',
-        options: ['span', 'a', 'button'],
       },
     },
   },

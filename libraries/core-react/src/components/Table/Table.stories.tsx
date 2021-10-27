@@ -38,9 +38,9 @@ export default {
   },
   argTypes: {
     density: {
+      options: ['comfortable', 'compact'],
       control: {
         type: 'select',
-        options: ['comfortable', 'compact'],
       },
     },
   },

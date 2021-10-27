@@ -56,9 +56,9 @@ export default {
   },
   argTypes: {
     name: {
+      options: Object.keys(icons),
       control: {
         type: 'select',
-        options: Object.keys(icons),
       },
       description:
         'Please note that the option list of icons is not complete, this selection is only for demo purposes',
