@@ -4,7 +4,6 @@
   "description": "Icons from the Equinor Design System",
   "main": "dist/icons.cjs.js",
   "module": "dist/icons.esm.js",
-  "browser": "dist/icons.umd.js",
   "types": "dist/types/index.d.ts",
   "license": "Apache-2.0",
   "author": {
