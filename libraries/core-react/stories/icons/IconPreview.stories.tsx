@@ -1,6 +1,7 @@
+import { useState, useMemo } from 'react'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
-import { Icon, Button, Typography, TableOfContents } from '../../src'
+import { Icon, Button, Typography, TableOfContents, Search } from '../../src'
 import { download, IconData } from '@equinor/eds-icons'
 import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
@@ -63,6 +64,10 @@ const IconItem = styled.li`
   }
 `
 
+const StyledSearch = styled(Search)`
+  margin-bottom: 24px;
+`
+
 const downloadAsSvg = (data: string | Blob, name: string) =>
   fileDownload(data, `${name}.svg`)
 
@@ -70,18 +75,33 @@ type IconType = {
   value?: string
 } & IconData
 
-const iconsByGroup = systemIcons.reduce((acc, val) => {
-  const group = typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
-  return {
-    ...acc,
-    [val.group]: [...group, val],
-  }
-}, {} as Record<string, IconType[]>)
-
 export const Preview: Story = () => {
+  const [searchValue, setSearchValue] = useState<string>('')
+  const iconsByGroup = useMemo(() => {
+    return systemIcons.reduce((acc, val) => {
+      if (val.name.includes(searchValue)) {
+        const group =
+          typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
+        return {
+          ...acc,
+          [val.group]: [...group, (val as unknown) as IconType],
+        }
+      } else {
+        return acc
+      }
+    }, {} as Record<string, IconType[]>)
+  }, [searchValue])
   return (
     <Wrapper>
       <main>
+        <StyledSearch
+          aria-label="Search for icons"
+          id="search-normal"
+          placeholder="Search"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchValue(event.target.value)
+          }
+        />
         {Object.keys(iconsByGroup).map((key) => {
           return (
             <article key={key}>
