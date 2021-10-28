@@ -1,8 +1,5 @@
-import { addDecorator } from '@storybook/react'
-import { withInfo } from '@storybook/addon-info'
 /* import { GlobalStyleDark } from '../stories/testing/GlobalStyles'
  */
-addDecorator(withInfo)
 
 /* export const decorators = [
   (Story) => (

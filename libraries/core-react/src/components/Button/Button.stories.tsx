@@ -20,12 +20,14 @@ const FullWidthWrapper = styled.div`
 export default {
   title: 'Components/Button',
   component: Button,
+  args: {
+    as: 'button',
+  },
   argTypes: {
     as: {
+      options: ['span', 'a', 'button'],
       control: {
         type: 'select',
-        options: ['span', 'a', 'button'],
-        defaultValue: 'button',
       },
     },
   },
@@ -36,7 +38,6 @@ export default {
         `,
       },
     },
-    info: {},
   },
 } as Meta
 

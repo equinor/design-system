@@ -6,10 +6,8 @@ import { Story, Meta } from '@storybook/react'
 export default {
   title: 'Components/SideSheet',
   component: SideSheet,
-  argTypes: {
-    title: {
-      defaultValue: 'Title',
-    },
+  args: {
+    title: 'Title',
   },
   parameters: {
     docs: {
