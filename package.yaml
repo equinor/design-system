@@ -16,6 +16,7 @@ scripts:
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
+  test:generate-output:core-react: pnpm --filter @equinor/eds-core-react run test:generate-output
 devDependencies:
   '@babel/core': ^7.13.15
   '@babel/eslint-parser': ^7.13.14

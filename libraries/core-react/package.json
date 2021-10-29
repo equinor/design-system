@@ -32,6 +32,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:update-snapshots": "jest --updateSnapshot",
+    "test:generate-output": "jest --json --outputFile=.jest-test-results.json",
     "storybook": "start-storybook -p 9000 --ci",
     "build:storybook": "build-storybook -o storybook-build"
   },
@@ -53,6 +54,7 @@
     "@storybook/addon-a11y": "^6.3.12",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-jest": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
     "@storybook/react": "^6.3.12",
     "@testing-library/jest-dom": "^5.14.1",
