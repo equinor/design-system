@@ -8,19 +8,11 @@ import { typographyTemplate } from '../../utils'
 import { Button } from '../Button'
 
 type PopupHeaderProps = {
-  monthDate: Date
   date: Date
-  changeYear: (year: number) => void
-  changeMonth: (month: number) => void
-  customHeaderCount: number
   decreaseMonth: VoidFunction
   increaseMonth: VoidFunction
   prevMonthButtonDisabled: boolean
   nextMonthButtonDisabled: boolean
-  decreaseYear: VoidFunction
-  increaseYear: VoidFunction
-  prevYearButtonDisabled: boolean
-  nextYearButtonDisabled: boolean
   changeDate?: (date: Date) => void
 }
 

@@ -4,10 +4,7 @@ import React, {
   forwardRef,
   InputHTMLAttributes,
 } from 'react'
-import DatePicker, {
-  ReactDatePickerProps,
-  registerLocale,
-} from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
 import styled, { css, ThemeProvider } from 'styled-components'
@@ -16,7 +13,7 @@ import { PopupHeader } from './PopupHeader'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { outlineTemplate } from '../../utils'
 import { Paper } from '../Paper'
-import { Input, Icon } from '../..'
+import { Icon } from '../..'
 
 registerLocale('en-gb', enGb)
 
@@ -50,7 +47,7 @@ export type DatePickerProps = {
   locale?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
-export type DatePickerRefProps = ReactDatePickerProps &
+export type DatePickerRefProps = DatePicker &
   InputHTMLAttributes<HTMLInputElement> & {
     setBlur: () => void
     setFocus: () => void
@@ -76,7 +73,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
     },
     ref,
   ) {
-    const [date, setDate] = useState(value)
+    const [date, setDate] = useState<Date>(value)
     const onDateValueChange = useCallback(
       (date: Date): void => {
         setDate(date)
@@ -88,13 +85,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
     return (
       <ThemeProvider theme={tokens}>
         <Container className={`date-picker ${className}`}>
-          <DateLabel
-            htmlFor={id}
-            className={`date-label`}
-            onClick={(): void => {
-              ref?.setOpen?.(true)
-            }}
-          >
+          <DateLabel htmlFor={id} className={`date-label`}>
             <span>{label}</span>
             <StyledDatepicker
               ref={ref}
@@ -114,9 +105,6 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
                   return date >= disableBeforeDate
                 }
                 return true
-              }}
-              onChangeRaw={(): void => {
-                ref?.setOpen?.(false)
               }}
               autoComplete="false"
               popperPlacement={popperPlacement}
