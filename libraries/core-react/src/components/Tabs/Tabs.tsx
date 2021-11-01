@@ -1,7 +1,7 @@
 import { forwardRef, useMemo, useState, HTMLAttributes } from 'react'
-import createId from 'lodash/uniqueId'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
+import { useId } from '../../hooks'
 
 export type TabsProps = {
   /** The index of the active tab */
@@ -13,10 +13,10 @@ export type TabsProps = {
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
-  { activeTab = 0, onChange, onBlur, onFocus, variant = 'minWidth', ...props },
+  { activeTab = 0, onChange, onBlur, onFocus, variant = 'minWidth', id, ...props },
   ref,
 ) {
-  const tabsId = useMemo(() => createId('tabs-'), [])
+  const tabsId = useId(id, 'tabs')
 
   const [tabsFocused, setTabsFocused] = useState(false)
 
