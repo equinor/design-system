@@ -22,7 +22,6 @@ specifiers:
   '@testing-library/react-hooks': ^7.0.1
   '@testing-library/user-event': ^13.2.0
   '@types/jest': ^26.0.24
-  '@types/lodash': ^4.14.171
   '@types/ramda': ^0.27.44
   '@types/react': ^17.0.14
   '@types/react-dom': ^17.0.9
@@ -35,7 +34,6 @@ specifiers:
   jest: ^27.0.6
   jest-styled-components: ^7.0.5
   js-file-download: ^0.4.12
-  lodash: ^4.17.21
   prettier: ^2.3.2
   ramda: ^0.27.1
   react: ^17.0.2
@@ -80,7 +78,6 @@ devDependencies:
   '@testing-library/react-hooks': 7.0.1_react-dom@17.0.2+react@17.0.2
   '@testing-library/user-event': 13.2.0
   '@types/jest': 26.0.24
-  '@types/lodash': 4.14.171
   '@types/ramda': 0.27.44
   '@types/react': 17.0.14
   '@types/react-dom': 17.0.9
@@ -92,7 +89,6 @@ devDependencies:
   jest: 27.0.6
   jest-styled-components: 7.0.5_styled-components@5.3.0
   js-file-download: 0.4.12
-  lodash: 4.17.21
   prettier: 2.3.2
   ramda: 0.27.1
   react: 17.0.2
@@ -5341,10 +5337,6 @@ packages:
 
   /@types/json-schema/7.0.9:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
-    dev: true
-
-  /@types/lodash/4.14.171:
-    resolution: {integrity: sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==}
     dev: true
 
   /@types/markdown-to-jsx/6.11.3:
