@@ -3,7 +3,6 @@ import {
   ReactElement,
   ReactNode,
   isValidElement,
-  Fragment,
   cloneElement,
   forwardRef,
   Children as ReactChildren,
@@ -15,13 +14,6 @@ import { MenuItemProps, MenuItem } from './MenuItem'
 import { MenuSectionProps, MenuSection } from './MenuSection'
 import { menu as tokens } from './Menu.tokens'
 import { spacingsTemplate } from '../../utils'
-
-const isFragment = (object: ReactNode): boolean => {
-  if ((object as ReactElement).type) {
-    return (object as ReactElement).type === Fragment
-  }
-  return object === Fragment
-}
 
 const List = styled.ul`
   position: relative;
@@ -45,17 +37,36 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
   function MenuList({ children, focus, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex } = useMenu()
 
-    const pickedChildren = isFragment(children)
-      ? (children as MenuChild).props.children
-      : children
-
+    let index = -1
     const updatedChildren: Array<MenuChild> = ReactChildren.map(
-      pickedChildren,
-      (child: ReactNode, index: number) =>
-        cloneElement(child as MenuChild, { index }),
+      children,
+      (child: ReactNode) => {
+        if ((child as MenuChild).type === MenuSection) {
+          const updatedGrandChildren = ReactChildren.map(
+            (child as MenuChild).props.children,
+            (grandChild: ReactNode) => {
+              index++
+              return cloneElement(grandChild as MenuChild, { index })
+            })
+          return cloneElement(child as MenuChild, null, updatedGrandChildren)
+        } else {
+          index++
+          return cloneElement(child as MenuChild, { index })
+        }
+      }
     )
 
-    const focusableIndexs: number[] = (updatedChildren || [])
+    const flattenedChildren = ReactChildren.map(
+      updatedChildren,
+      (child: ReactNode) => {
+        if ((child as MenuChild).type === MenuSection) {
+          return (child as MenuChild).props.children
+        } else {
+          return child
+        }
+      })
+
+    const focusableIndexs: number[] = ((flattenedChildren as MenuChild[]) || [])
       .filter((x) => !x.props.disabled)
       .filter(
         (x) =>
@@ -94,9 +105,11 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
       event.stopPropagation()
 
       if (key === 'ArrowDown') {
+        event.preventDefault()
         handleMenuItemChange('down', firstFocusIndex)
       }
       if (key === 'ArrowUp') {
+        event.preventDefault()
         handleMenuItemChange('up', lastFocusIndex)
       }
     }
