@@ -47,13 +47,14 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
             (grandChild: ReactNode) => {
               index++
               return cloneElement(grandChild as MenuChild, { index })
-            })
+            },
+          )
           return cloneElement(child as MenuChild, null, updatedGrandChildren)
         } else {
           index++
           return cloneElement(child as MenuChild, { index })
         }
-      }
+      },
     )
 
     const flattenedChildren = ReactChildren.map(
@@ -64,7 +65,8 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
         } else {
           return child
         }
-      })
+      },
+    )
 
     const focusableIndexs: number[] = ((flattenedChildren as MenuChild[]) || [])
       .filter((x) => !x.props.disabled)
