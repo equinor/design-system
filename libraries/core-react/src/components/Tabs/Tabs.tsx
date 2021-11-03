@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useState, HTMLAttributes } from 'react'
+import { forwardRef, useState, HTMLAttributes } from 'react'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 import { useId } from '../../hooks'
@@ -13,7 +13,15 @@ export type TabsProps = {
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
-  { activeTab = 0, onChange, onBlur, onFocus, variant = 'minWidth', id, ...props },
+  {
+    activeTab = 0,
+    onChange,
+    onBlur,
+    onFocus,
+    variant = 'minWidth',
+    id,
+    ...props
+  },
   ref,
 ) {
   const tabsId = useId(id, 'tabs')
