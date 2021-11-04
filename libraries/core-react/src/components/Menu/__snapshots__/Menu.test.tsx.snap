@@ -15,12 +15,8 @@ exports[`Menu Matches snapshot 1`] = `
   z-index: 3;
 }
 
-.c1 {
-  background: red;
-}
-
 <ul
-  class="c0 c1"
+  class="c0"
   role="menu"
 >
   <div
