@@ -105,11 +105,9 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     4,
   )
 
-  const combinedStyles = { ...styles.popper, ...style }
-
   const props = {
     open,
-    style: combinedStyles,
+    style: { ...styles.popper, ...style },
     className,
     ...attributes.popper,
   }
