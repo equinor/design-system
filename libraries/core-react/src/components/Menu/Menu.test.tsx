@@ -31,15 +31,15 @@ describe('Menu', () => {
   })
 
   it('Can extend the css for the component', async () => {
-    render(
+    const { container } = render(
       <StyledMenu open>
         <div>some random content</div>
       </StyledMenu>,
     )
-    const menuContainer = screen.getByRole('menu', { hidden: true })
 
     await waitFor(() =>
-      expect(menuContainer).toHaveStyleRule('background', 'red'),
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.nextSibling).toHaveStyleRule('background', 'red'),
     )
   })
   it('is visible when open is true & anchorEl is set', async () => {

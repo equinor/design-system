@@ -89,7 +89,7 @@ export type MenuProps = {
 } & HTMLAttributes<HTMLUListElement>
 
 export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
-  { anchorEl, open, placement = 'auto', ...rest },
+  { anchorEl, open, placement = 'auto', style, className, ...rest },
   ref,
 ) {
   const [containerEl, setContainerEl] = useState<HTMLElement>(null)
@@ -107,7 +107,8 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   const props = {
     open,
-    style: styles.popper,
+    style: { ...styles.popper, ...style },
+    className,
     ...attributes.popper,
   }
 
