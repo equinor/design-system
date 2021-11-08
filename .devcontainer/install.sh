@@ -1,1 +1,0 @@
-npm i -g pnpm
