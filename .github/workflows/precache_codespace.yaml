@@ -1,9 +1,12 @@
 name: Precache Codespace
 on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - develop
   push:
     branches:
       - develop
-  workflow_dispatch:
 jobs:
   createPrebuild:
     runs-on: ubuntu-latest
