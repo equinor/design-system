@@ -1,8 +1,8 @@
-name: precache codespace
+name: Precache Codespace
 on:
   push:
     branches:
-      - main
+      - develop
   workflow_dispatch:
 jobs:
   createPrebuild:
