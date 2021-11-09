@@ -19,9 +19,15 @@
     "editor.formatOnSave": true,
     "git.rebaseWhenSync": true,
     "git.autofetch": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "yaml.schemas": {
       "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
       "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
+    },
+    "files.associations": {
+      "*.json": "jsonc",
+      "[Dd]ockerfile*": "dockerfile",
+      "docker-compose*": "yaml"
     },
   },
   "extensions": [
