@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "pnpm test:core-react",
+      "label": "Test",
       "type": "shell",
       "command": "pnpm",
       "args": [
@@ -23,7 +23,7 @@
       }
     },
     {
-      "label": "pnpm lint:core-react",
+      "label": "Lint",
       "type": "shell",
       "command": "pnpm",
       "args": [
@@ -41,6 +41,24 @@
       },
       "runOptions": {
         "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Storybook",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "storybook"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "group": "run",
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
       }
     },
   ]
