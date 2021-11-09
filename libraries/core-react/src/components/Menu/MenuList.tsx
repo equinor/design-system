@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useMemo,
   ReactElement,
   ReactNode,
   isValidElement,
@@ -44,27 +45,28 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
     const { focusedIndex, setFocusedIndex } = useMenu()
 
     let index = -1
-    const focusableIndexs: number[] = []
+    const focusableIndexs: number[] = useMemo<number[]>(() => [], [])
 
-    const updatedChildren: Array<MenuChild> = ReactChildren.map(
-      children,
-      (child: MenuChild) => {
-        if (child.type === MenuSection) {
-          const updatedGrandChildren = ReactChildren.map(
-            child.props.children,
-            (grandChild: MenuChild) => {
-              index++
-              if (isIndexable(grandChild)) focusableIndexs.push(index)
-              return cloneElement(grandChild, { index })
-            },
-          )
-          return cloneElement(child, null, updatedGrandChildren)
-        } else {
-          index++
-          if (isIndexable(child)) focusableIndexs.push(index)
-          return cloneElement(child, { index })
-        }
-      },
+    const updatedChildren: Array<MenuChild> = useMemo(
+      () =>
+        ReactChildren.map(children, (child: MenuChild) => {
+          if (child.type === MenuSection) {
+            const updatedGrandChildren = ReactChildren.map(
+              child.props.children,
+              (grandChild: MenuChild) => {
+                index++
+                if (isIndexable(grandChild)) focusableIndexs.push(index)
+                return cloneElement(grandChild, { index })
+              },
+            )
+            return cloneElement(child, null, updatedGrandChildren)
+          } else {
+            index++
+            if (isIndexable(child)) focusableIndexs.push(index)
+            return cloneElement(child, { index })
+          }
+        }),
+      [children, focusableIndexs, index],
     )
 
     const firstFocusIndex = focusableIndexs[0]
