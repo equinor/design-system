@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "pnpm test:core-react",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "test:core-react"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "group": "test",
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "pnpm lint:core-react",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "lint:core-react"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "group": "test",
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+  ]
+}
