@@ -1,9 +1,9 @@
 import {
   useEffect,
+  useMemo,
   ReactElement,
   ReactNode,
   isValidElement,
-  Fragment,
   cloneElement,
   forwardRef,
   Children as ReactChildren,
@@ -15,13 +15,6 @@ import { MenuItemProps, MenuItem } from './MenuItem'
 import { MenuSectionProps, MenuSection } from './MenuSection'
 import { menu as tokens } from './Menu.tokens'
 import { spacingsTemplate } from '../../utils'
-
-const isFragment = (object: ReactNode): boolean => {
-  if ((object as ReactElement).type) {
-    return (object as ReactElement).type === Fragment
-  }
-  return object === Fragment
-}
 
 const List = styled.ul`
   position: relative;
@@ -41,27 +34,40 @@ type MenuChild = ReactElement<MenuItemProps> & ReactElement<MenuSectionProps>
 
 type Direction = 'down' | 'up'
 
+function isIndexable(item: MenuChild) {
+  if (isValidElement(item) && !item.props.disabled && item.type === MenuItem)
+    return true
+  return false
+}
+
 export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
   function MenuList({ children, focus, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex } = useMenu()
 
-    const pickedChildren = isFragment(children)
-      ? (children as MenuChild).props.children
-      : children
+    let index = -1
+    const focusableIndexs: number[] = useMemo<number[]>(() => [], [])
 
-    const updatedChildren: Array<MenuChild> = ReactChildren.map(
-      pickedChildren,
-      (child: ReactNode, index: number) =>
-        cloneElement(child as MenuChild, { index }),
+    const updatedChildren: Array<MenuChild> = useMemo(
+      () =>
+        ReactChildren.map(children, (child: MenuChild) => {
+          if (child.type === MenuSection) {
+            const updatedGrandChildren = ReactChildren.map(
+              child.props.children,
+              (grandChild: MenuChild) => {
+                index++
+                if (isIndexable(grandChild)) focusableIndexs.push(index)
+                return cloneElement(grandChild, { index })
+              },
+            )
+            return cloneElement(child, null, updatedGrandChildren)
+          } else {
+            index++
+            if (isIndexable(child)) focusableIndexs.push(index)
+            return cloneElement(child, { index })
+          }
+        }),
+      [children, focusableIndexs, index],
     )
-
-    const focusableIndexs: number[] = (updatedChildren || [])
-      .filter((x) => !x.props.disabled)
-      .filter(
-        (x) =>
-          isValidElement(x) && (x.type === MenuSection || x.type === MenuItem),
-      )
-      .map((x) => x.props.index)
 
     const firstFocusIndex = focusableIndexs[0]
     const lastFocusIndex = focusableIndexs[focusableIndexs.length - 1]
@@ -94,9 +100,11 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
       event.stopPropagation()
 
       if (key === 'ArrowDown') {
+        event.preventDefault()
         handleMenuItemChange('down', firstFocusIndex)
       }
       if (key === 'ArrowUp') {
+        event.preventDefault()
         handleMenuItemChange('up', lastFocusIndex)
       }
     }
