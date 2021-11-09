@@ -14,33 +14,38 @@
       "VARIANT": "16-bullseye"
     }
   },
-  // Set *default* container specific settings.json values on container create.
   "settings": {
+    "extensions.ignoreRecommendations": true,
     "editor.formatOnSave": true,
+    "git.rebaseWhenSync": true,
+    "git.autofetch": true,
     "yaml.schemas": {
       "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
       "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
     },
   },
-  // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "vtrois.gitmoji-vscode",
     "editorconfig.editorconfig",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "vtrois.gitmoji-vscode"
   ],
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "yarn install",
-  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "forwardPorts": [
+    9000
+  ],
+  "portsAttributes": {
+    "9000": {
+      "label": "Storybook",
+      "onAutoForward": "notify",
+    },
+  },
+  "postCreateCommand": "pnpm install && pnpm recursive install --filter ./libraries",
   "remoteUser": "node",
   "features": {
     "docker-in-docker": "20.10",
     "docker-from-docker": "20.10",
     "git": "2.33.1",
-    "github-cli": "2.2.0",
-    "homebrew": "1.9.4"
+    "github-cli": "2.2.0"
   }
 }
