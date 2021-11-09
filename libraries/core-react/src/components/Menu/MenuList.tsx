@@ -33,48 +33,39 @@ type MenuChild = ReactElement<MenuItemProps> & ReactElement<MenuSectionProps>
 
 type Direction = 'down' | 'up'
 
+function isIndexable(item: MenuChild) {
+  if (isValidElement(item) && !item.props.disabled && item.type === MenuItem)
+    return true
+  return false
+}
+
 export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
   function MenuList({ children, focus, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex } = useMenu()
 
     let index = -1
+    const focusableIndexs: number[] = []
+
     const updatedChildren: Array<MenuChild> = ReactChildren.map(
       children,
-      (child: ReactNode) => {
-        if ((child as MenuChild).type === MenuSection) {
+      (child: MenuChild) => {
+        if (child.type === MenuSection) {
           const updatedGrandChildren = ReactChildren.map(
-            (child as MenuChild).props.children,
-            (grandChild: ReactNode) => {
+            child.props.children,
+            (grandChild: MenuChild) => {
               index++
-              return cloneElement(grandChild as MenuChild, { index })
+              if (isIndexable(grandChild)) focusableIndexs.push(index)
+              return cloneElement(grandChild, { index })
             },
           )
-          return cloneElement(child as MenuChild, null, updatedGrandChildren)
+          return cloneElement(child, null, updatedGrandChildren)
         } else {
           index++
-          return cloneElement(child as MenuChild, { index })
+          if (isIndexable(child)) focusableIndexs.push(index)
+          return cloneElement(child, { index })
         }
       },
     )
-
-    const flattenedChildren = ReactChildren.map(
-      updatedChildren,
-      (child: ReactNode) => {
-        if ((child as MenuChild).type === MenuSection) {
-          return (child as MenuChild).props.children
-        } else {
-          return child
-        }
-      },
-    )
-
-    const focusableIndexs: number[] = ((flattenedChildren as MenuChild[]) || [])
-      .filter((x) => !x.props.disabled)
-      .filter(
-        (x) =>
-          isValidElement(x) && (x.type === MenuSection || x.type === MenuItem),
-      )
-      .map((x) => x.props.index)
 
     const firstFocusIndex = focusableIndexs[0]
     const lastFocusIndex = focusableIndexs[focusableIndexs.length - 1]
