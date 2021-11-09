@@ -40,7 +40,7 @@
       "onAutoForward": "notify",
     },
   },
-  "postCreateCommand": "pnpm install && pnpm recursive install --filter ./libraries",
+  "onCreateCommand": "pnpm install && pnpm recursive install --filter ./libraries",
   "remoteUser": "node",
   "features": {
     "docker-in-docker": "20.10",
