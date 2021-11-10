@@ -2,11 +2,11 @@
   "name": "@equinor/eds-core-react",
   "version": "0.15.0",
   "description": "The React implementation of the Equinor Design System",
-  "main": "src/index.ts",
+  "sideEffects": false,
+  "main": "dist/core-react.cjs.js",
   "publishConfig": {
     "main": "dist/core-react.cjs.js",
-    "module": "dist/core-react.esm.js",
-    "browser": "dist/core-react.umd.js"
+    "module": "dist/esm/index.js"
   },
   "types": "dist/types/index.d.ts",
   "license": "MIT",
@@ -67,11 +67,10 @@
     "@types/testing-library__jest-dom": "^5.14.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.13.2",
-    "focus-visible": "^5.2.0",
     "jest": "^27.0.6",
     "jest-styled-components": "^7.0.5",
     "js-file-download": "^0.4.12",
-    "ramda": "^0.27.1",
+    "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.11.1",
@@ -82,7 +81,6 @@
     "rollup-plugin-typescript2": "^0.30.0",
     "styled-components": "5.3.0",
     "ts-jest": "^27.0.4",
-    "tslib": "^2.3.0",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
@@ -96,7 +94,10 @@
     "@popperjs/core": "2.9.2",
     "downshift": "^6.1.7",
     "react-fast-compare": "3.2.0",
-    "react-popper": "2.2.5"
+    "react-popper": "2.2.5",
+    "focus-visible": "^5.2.0",
+    "tslib": "^2.3.0",
+    "ramda": "^0.27.1"
   },
   "engines": {
     "pnpm": ">=4",
