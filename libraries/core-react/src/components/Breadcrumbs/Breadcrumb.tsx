@@ -37,6 +37,7 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
   function Breadcrumb({ children, maxWidth, href, ...other }, ref) {
     const props = {
       ...other,
+      href,
       ref,
       maxWidth,
     }
