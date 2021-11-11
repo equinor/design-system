@@ -3,7 +3,10 @@ module.exports = function babelConfig(api) {
 
   const presets = ['@babel/preset-env', '@babel/preset-react']
 
-  const plugins = ['babel-plugin-styled-components']
+  const plugins = [
+    'babel-plugin-styled-components',
+    '@babel/plugin-transform-runtime',
+  ]
 
   const env = {
     test: {
