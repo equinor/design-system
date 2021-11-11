@@ -95,7 +95,7 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
     let comboboxProps: UseComboboxProps<string> = {
       items: timeValues,
       onSelectedItemChange: (changes: UseComboboxStateChange<string>) => {
-        onValueChanged(changes.selectedItem)
+        onValueChanged?.(changes.selectedItem)
       },
       onInputValueChange: ({ inputValue }) => {
         setSelectedTime(
@@ -162,7 +162,7 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
               />
             </StyledButton>
           </StyledInputWrapper>
-          <StyledList {...getMenuProps()}>
+          <StyledList {...getMenuProps()} role="dialog">
             {isOpen &&
               timeValues.map((item, index) => (
                 <PaddedStyledListItem

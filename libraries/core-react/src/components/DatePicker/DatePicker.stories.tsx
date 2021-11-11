@@ -24,7 +24,7 @@ export const Default: Story<DatePickerProps> = (args) => (
 
 Default.args = {
   id: 'StoryDatePicker',
-  value: new Date(),
+  dateValue: new Date(),
   label: 'Test Date',
   className: 'storyPicker',
   popperPlacement: 'bottom',
@@ -32,13 +32,13 @@ Default.args = {
 
 export const WithTimePicker: Story<DatePickerProps> = ({
   id,
-  value,
+  dateValue,
   className,
   popperPlacement,
 }: DatePickerProps) => {
-  const [dateValue, setDateValue] = useState(value)
+  const [startDate, setStartDate] = useState(dateValue)
   const onChanged = (date): void => {
-    setDateValue(date)
+    setStartDate(date)
   }
 
   const [timeValue, setTimeValue] = useState('11:00')
@@ -51,7 +51,7 @@ export const WithTimePicker: Story<DatePickerProps> = ({
       <Row>
         <DatePicker
           id={id + 't'}
-          value={dateValue}
+          dateValue={startDate}
           label={'Choose date'}
           onChanged={onChanged}
           className={className}
@@ -77,19 +77,19 @@ WithTimePicker.parameters = {
 
 export const DatePickerDisabledBefore: Story<DatePickerProps> = ({
   id,
-  value,
+  dateValue,
   className,
   popperPlacement,
 }: DatePickerProps) => {
-  const [dateValue, setDateValue] = useState(value)
+  const [startDate, setStartDate] = useState(dateValue)
   const onChanged = (date): void => {
-    setDateValue(date)
+    setStartDate(date)
   }
 
   return (
     <DatePicker
       id={id}
-      value={dateValue}
+      dateValue={startDate}
       label={'Date'}
       onChanged={onChanged}
       className={className}
@@ -116,19 +116,19 @@ DatePickerDisabledBefore.parameters = {
 
 export const DatePickerDisabledFuture: Story<DatePickerProps> = ({
   id,
-  value,
+  dateValue,
   className,
   popperPlacement,
 }: DatePickerProps) => {
-  const [dateValue, setDateValue] = useState(value)
+  const [startDate, setStartDate] = useState(dateValue)
   const onChanged = (date): void => {
-    setDateValue(date)
+    setStartDate(date)
   }
 
   return (
     <DatePicker
       id={id}
-      value={dateValue}
+      dateValue={startDate}
       label={'Date'}
       onChanged={onChanged}
       className={className}

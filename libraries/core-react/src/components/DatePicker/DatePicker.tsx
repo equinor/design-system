@@ -19,7 +19,7 @@ registerLocale('en-gb', enGb)
 
 export type DatePickerProps = {
   id: string
-  value: Date | undefined | null
+  dateValue: Date | undefined | null
   label: string
   onChanged?: (date: Date | null) => void
   disableFuture?: boolean
@@ -59,7 +59,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
   function DatePicker(
     {
       label,
-      value,
+      dateValue,
       onChanged,
       id,
       disableFuture,
@@ -73,7 +73,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
     },
     ref,
   ) {
-    const [date, setDate] = useState<Date>(value)
+    const [date, setDate] = useState<Date>(dateValue)
     const onDateValueChange = useCallback(
       (date: Date): void => {
         setDate(date)
