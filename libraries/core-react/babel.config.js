@@ -3,6 +3,8 @@ module.exports = function babelConfig(api) {
 
   const presets = ['@babel/preset-env', '@babel/preset-react']
 
+  const exclude = ['node_modules/**']
+
   const plugins = [
     'babel-plugin-styled-components',
     '@babel/plugin-transform-runtime',
@@ -19,6 +21,7 @@ module.exports = function babelConfig(api) {
   }
 
   return {
+    exclude,
     presets,
     plugins,
     env,

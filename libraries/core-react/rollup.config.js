@@ -44,14 +44,8 @@ export default [
       }),
       commonjs(),
       babel({
-        exclude: ['node_modules/**'],
         babelHelpers: 'runtime',
-        presets: ['@babel/preset-env', '@babel/preset-react'],
         extensions,
-        plugins: [
-          'babel-plugin-styled-components',
-          '@babel/plugin-transform-runtime',
-        ],
       }),
     ],
     output: [
