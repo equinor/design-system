@@ -1,7 +1,11 @@
 module.exports = function babelConfig(api) {
   api.cache(true)
 
-  const presets = ['@babel/preset-env', '@babel/preset-react']
+  const presets = [
+    '@babel/preset-typescript',
+    '@babel/preset-env',
+    '@babel/preset-react',
+  ]
 
   const exclude = ['node_modules/**']
 
