@@ -1,13 +1,10 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import babel from '@rollup/plugin-babel'
+import { babel } from '@rollup/plugin-babel'
 import typescript from 'rollup-plugin-typescript2'
 import del from 'rollup-plugin-delete'
 import pkg from './package.json'
-import createStyledComponentsTransformer from 'typescript-plugin-styled-components'
-
-const styledComponentsTransformer = createStyledComponentsTransformer()
 
 const environment = process.env.NODE_ENV
 
@@ -36,11 +33,6 @@ export default [
       resolve({ extensions }),
       typescript({
         useTsconfigDeclarationDir: true,
-        // transformers: [
-        //   () => ({
-        //     before: [styledComponentsTransformer],
-        //   }),
-        // ],
       }),
       commonjs(),
       babel({
