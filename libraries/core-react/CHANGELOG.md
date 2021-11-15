@@ -5,27 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.3] - 2021-11-16
+
+### Fixed
+
+- `Menu` should now have correct focus when clicking & navigating with keyboard ([#1668](https://github.com/equinor/design-system/issues/1668))
+- `Menu` now puts `className` on container element so its easier to apply your own styles ([#1672](https://github.com/equinor/design-system/issues/1672))
+- `Breadcrumbs.Breadcrumb` will now respect your `href` again ([#1687](https://github.com/equinor/design-system/issues/1687))
+
+### Changed
+
+- `Slider` now accepts decimal values ([#724](https://github.com/equinor/design-system/issues/724))
+
 ## [0.14.2] - 2021-10-21
 
 ### Fixed
+
 - `Switch` hover effect broke in the previous release, this is now fixed ([#1641](https://github.com/equinor/design-system/issues/1641))
 
 ### Changed
+
 - `Radio`, `Checkbox`: Removed extra padding between input clickbounds and label ([#1640](https://github.com/equinor/design-system/issues/1640))
 
 ## [0.14.1] - 2021-10-19
 
 ### Added
+
 - Hover effects are wrapped with Media Query to only target devices with mouse pointer ([#1589](https://github.com/equinor/design-system/issues/1589))
 - `Pagination` control now changes to first page if the `itemsPerPage` value changes ([#1621](https://github.com/equinor/design-system/issues/1621))
 
 ### Fixed
+
 - `Tooltip` now works when wrapping `Radio` or `Checkbox` ([#1605](https://github.com/equinor/design-system/issues/1605))
 - Fixed an issue where an external themeprovider can overwrite unset values in certain components ([#1617](https://github.com/equinor/design-system/issues/1617))
-- `Scrim` now correctly covers entire screen when used in conjunction with the css `zoom` property  ([#1625](https://github.com/equinor/design-system/issues/1625))
+- `Scrim` now correctly covers entire screen when used in conjunction with the css `zoom` property ([#1625](https://github.com/equinor/design-system/issues/1625))
 - `Scrim` now disables scroll on body when open ([#1587](https://github.com/equinor/design-system/issues/1587))
 
 ### Changed
+
 - `Radio`, `Checkbox` refactored to no longer be wrapped in `label`-element when no label-prop is provided ([#1610](https://github.com/equinor/design-system/issues/1610))
 - `Switch` refactored to no longer be wrapped in `label`-element when no label-prop is provided ([#1613](https://github.com/equinor/design-system/issues/1613))
 - Updated `Accordion` non-interactive icons color ([#1296](https://github.com/equinor/design-system/issues/1296))
