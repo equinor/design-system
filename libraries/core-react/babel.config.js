@@ -8,7 +8,7 @@ module.exports = function babelConfig(api) {
     [
       '@babel/preset-env',
       {
-        targets: 'defaults',
+        targets: 'defaults, not IE 11',
       },
     ],
     '@babel/preset-react',
