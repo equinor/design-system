@@ -83,7 +83,7 @@ exports[`Accordion Matches snapshot 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="c1"
+          class="Icon__StyledSvg-sc-6evbi1-0 c1"
           fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
           height="24px"
           viewBox="0 0 24 24"
@@ -91,7 +91,7 @@ exports[`Accordion Matches snapshot 1`] = `
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            class=""
+            class="Icon__StyledPath-sc-6evbi1-1"
             clip-rule="evenodd"
             d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
             data-testid="eds-icon-path"

@@ -158,7 +158,7 @@ exports[`Pagination Matches snapshot 1`] = `
           >
             <svg
               aria-hidden="true"
-              class=""
+              class="Icon__StyledSvg-sc-6evbi1-0"
               fill="currentColor"
               height="24px"
               viewBox="0 0 24 24"
@@ -166,7 +166,7 @@ exports[`Pagination Matches snapshot 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                class=""
+                class="Icon__StyledPath-sc-6evbi1-1"
                 clip-rule="evenodd"
                 d="M15.705 16.59 11.125 12l4.58-4.59L14.295 6l-6 6 6 6 1.41-1.41z"
                 data-testid="eds-icon-path"
@@ -209,7 +209,7 @@ exports[`Pagination Matches snapshot 1`] = `
           >
             <svg
               aria-hidden="true"
-              class=""
+              class="Icon__StyledSvg-sc-6evbi1-0"
               fill="currentColor"
               height="24px"
               viewBox="0 0 24 24"
@@ -217,7 +217,7 @@ exports[`Pagination Matches snapshot 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                class=""
+                class="Icon__StyledPath-sc-6evbi1-1"
                 clip-rule="evenodd"
                 d="m8.295 16.59 4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41z"
                 data-testid="eds-icon-path"

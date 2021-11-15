@@ -288,7 +288,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class=""
+            class="Icon__StyledSvg-sc-6evbi1-0"
             fill="currentColor"
             height="24px"
             viewBox="0 0 24 24"
@@ -296,7 +296,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              class=""
+              class="Icon__StyledPath-sc-6evbi1-1"
               clip-rule="evenodd"
               d="m7 9.5 5 5 5-5H7z"
               data-testid="eds-icon-path"

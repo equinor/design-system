@@ -4,8 +4,8 @@ exports[`CircularProgress Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
   display: inline-block;
-  -webkit-animation: gJxBWH 1.4s linear infinite;
-  animation: gJxBWH 1.4s linear infinite;
+  -webkit-animation: GLFYz 1.4s linear infinite;
+  animation: GLFYz 1.4s linear infinite;
 }
 
 .c1 {
@@ -21,7 +21,7 @@ exports[`CircularProgress Matches snapshot 1`] = `
     width="48"
   >
     <circle
-      class=""
+      class="CircularProgress__TrackCircle-sc-hib054-1"
       cx="48"
       cy="48"
       fill="none"
@@ -30,7 +30,7 @@ exports[`CircularProgress Matches snapshot 1`] = `
       stroke-width="4"
     />
     <circle
-      class=""
+      class="CircularProgress__ProgressCircle-sc-hib054-2"
       cx="48"
       cy="48"
       fill="none"

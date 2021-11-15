@@ -30,7 +30,7 @@
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.json",
     "dev": "rollup -c -w NODE_ENV=development",
-    "test": "jest",
+    "test": "tsc && jest",
     "test:watch": "jest --watch",
     "test:update-snapshots": "jest --updateSnapshot",
     "storybook": "start-storybook -p 9000 --ci",

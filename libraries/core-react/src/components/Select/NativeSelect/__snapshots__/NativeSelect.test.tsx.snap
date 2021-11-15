@@ -58,7 +58,7 @@ exports[`NativeSelect Matches snapshot 1`] = `
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%236f6f6f' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"), linear-gradient( to bottom, var(--eds_ui_background__light,rgba(247,247,247,1)) 0%, var(--eds_ui_background__light,rgba(247,247,247,1)) 100% );
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%236f6f6f' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"),linear-gradient( to bottom,var(--eds_ui_background__light,rgba(247,247,247,1)) 0%,var(--eds_ui_background__light,rgba(247,247,247,1)) 100% );
   background-repeat: no-repeat,repeat;
   background-position: right 8px top 50%;
   width: 100%;
@@ -73,7 +73,7 @@ exports[`NativeSelect Matches snapshot 1`] = `
 
 .c3:disabled {
   color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23bebebe' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"), linear-gradient( to bottom, var(--eds_ui_background__light,rgba(247,247,247,1)) 0%, var(--eds_ui_background__light,rgba(247,247,247,1)) 100% );
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23bebebe' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E"),linear-gradient( to bottom,var(--eds_ui_background__light,rgba(247,247,247,1)) 0%,var(--eds_ui_background__light,rgba(247,247,247,1)) 100% );
   cursor: not-allowed;
   box-shadow: none;
   outline: none;

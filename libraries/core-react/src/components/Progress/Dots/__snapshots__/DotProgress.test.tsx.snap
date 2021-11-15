@@ -7,18 +7,18 @@ exports[`DotProgress Matches snapshot 1`] = `
 }
 
 .c0 circle:nth-child(1) {
-  -webkit-animation: bHXQhO 1s ease infinite;
-  animation: bHXQhO 1s ease infinite;
+  -webkit-animation: jkwjQg 1s ease infinite;
+  animation: jkwjQg 1s ease infinite;
 }
 
 .c0 circle:nth-child(2) {
-  -webkit-animation: bHXQhO 1s ease 0.2s infinite;
-  animation: bHXQhO 1s ease 0.2s infinite;
+  -webkit-animation: jkwjQg 1s ease 0.2s infinite;
+  animation: jkwjQg 1s ease 0.2s infinite;
 }
 
 .c0 circle:nth-child(3) {
-  -webkit-animation: bHXQhO 1s ease 0.4s infinite;
-  animation: bHXQhO 1s ease 0.4s infinite;
+  -webkit-animation: jkwjQg 1s ease 0.4s infinite;
+  animation: jkwjQg 1s ease 0.4s infinite;
 }
 
 <svg
