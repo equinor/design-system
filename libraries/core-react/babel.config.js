@@ -1,9 +1,16 @@
+const installedBabelVersion = require('@babel/runtime/package.json').version
+
 module.exports = function babelConfig(api) {
   api.cache(true)
 
   const presets = [
     '@babel/preset-typescript',
-    '@babel/preset-env',
+    [
+      '@babel/preset-env',
+      {
+        targets: 'defaults',
+      },
+    ],
     '@babel/preset-react',
   ]
 
@@ -11,7 +18,12 @@ module.exports = function babelConfig(api) {
 
   const plugins = [
     'babel-plugin-styled-components',
-    '@babel/plugin-transform-runtime',
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        version: installedBabelVersion,
+      },
+    ],
   ]
 
   const env = {
