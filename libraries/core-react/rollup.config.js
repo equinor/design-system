@@ -16,7 +16,6 @@ export default [
     input: ['./src/index.ts'],
     external: [
       /@babel\/runtime/,
-      'tslib',
       'react/jsx-runtime',
       ...Object.keys({
         ...pkg.peerDependencies,
