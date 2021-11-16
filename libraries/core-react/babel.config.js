@@ -11,7 +11,12 @@ module.exports = function babelConfig(api) {
         targets: 'defaults, not IE 11',
       },
     ],
-    '@babel/preset-react',
+    [
+      '@babel/preset-react',
+      {
+        runtime: 'automatic',
+      },
+    ],
   ]
 
   const exclude = ['node_modules/**']
