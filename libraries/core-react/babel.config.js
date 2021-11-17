@@ -5,12 +5,7 @@ module.exports = function babelConfig(api) {
 
   const presets = [
     '@babel/preset-typescript',
-    [
-      '@babel/preset-env',
-      {
-        targets: 'defaults, not IE 11',
-      },
-    ],
+    ['@babel/preset-env'],
     [
       '@babel/preset-react',
       {
