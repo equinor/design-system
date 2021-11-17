@@ -35,7 +35,11 @@ export const MenuProvider = ({ children }: ProviderProps): JSX.Element => {
   }
 
   const setOnClose: UseMenu<State>['setOnClose'] = (onClose) => {
-    setState((prevState) => ({ ...prevState, onClose }))
+    const onCloseHelper = () => {
+      onClose()
+      setFocusedIndex(-1)
+    }
+    setState((prevState) => ({ ...prevState, onClose: onCloseHelper }))
   }
 
   const value = {
