@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
+import { outlineTemplate } from '../../utils'
 
 type StyledProps = { isDisabled: boolean }
 
@@ -13,7 +14,7 @@ const Input = styled(BaseInput)(
     },
   }) => css`
     &[data-focus-visible-added]:focus + span {
-      outline-offset: ${states.focus.outline.offset};
+      ${outlineTemplate(states.focus.outline)}
     }
     /*  Track */
     &:checked + span > span {
