@@ -11,8 +11,13 @@ export type CardMediaProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledCardMedia = styled.div<CardMediaProps>`
-  display: flex;
-  width: 100%;
+  /* MARTA */
+  display: grid;
+  place-items: center;
+  grid-area: yyy;
+  /* MARTA */
+  /* display: flex; */
+  /* width: 100%; */
   &:last-child {
     margin-bottom: 8px;
     /* Last child to have 24px total spacing to bottom */
@@ -21,9 +26,10 @@ const StyledCardMedia = styled.div<CardMediaProps>`
     fullWidth
       ? css`
           > * {
-            width: calc(100% + ${spacings.left} + ${spacings.right});
+            width: 100%;
+            /* width: calc(100% + ${spacings.left} + ${spacings.right});
             margin-left: -${spacings.left};
-            margin-right: -${spacings.right};
+            margin-right: -${spacings.right}; */
           }
 
           &:first-child {
@@ -38,6 +44,7 @@ const StyledCardMedia = styled.div<CardMediaProps>`
         `
       : css`
           > * {
+            /* middle */
             width: 100%;
           }
         `}

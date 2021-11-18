@@ -7,6 +7,9 @@ const StyledCardHeaderTitle = styled.div`
   display: grid;
   flex-grow: 2;
   grid-auto-columns: auto;
+  /* MARTA */
+  /* grid-area: title; */
+  /* MARTA */
 `
 
 export const CardHeaderTitle = forwardRef<HTMLDivElement, CardHeaderTitleProps>(

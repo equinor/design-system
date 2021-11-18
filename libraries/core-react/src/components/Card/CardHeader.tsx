@@ -8,7 +8,9 @@ const { spacings } = tokens
 export type CardHeaderProps = HTMLAttributes<HTMLDivElement>
 
 const StyledCardHeader = styled.div`
-  display: flex;
+  display: grid;
+  grid-area: yyy;
+  /* display: flex; */
   justify-content: space-between;
   align-items: center;
 

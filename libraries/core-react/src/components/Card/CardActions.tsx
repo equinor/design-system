@@ -16,6 +16,9 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   grid-auto-flow: column;
   align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
+  /* MARTA */
+  grid-area: yyy;
+  /* MARTA */
 `
 
 export const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
