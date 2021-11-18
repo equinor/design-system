@@ -20,6 +20,7 @@
     "git.rebaseWhenSync": true,
     "git.autofetch": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {"source.fixAll.eslint": true},
     "yaml.schemas": {
       "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
       "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
