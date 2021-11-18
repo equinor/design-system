@@ -68,7 +68,7 @@ const StyledButton = styled(Button)(
 const isObjects = (items: unknown[]) =>
   items.length > 0 ? typeof items[0] === 'object' : false
 
-const stringify: (
+const convertToLabeledItems: (
   items: ComboboxItems,
   label: (option: ComboboxDataProps) => string,
 ) => string[] = (items, label) =>
@@ -136,10 +136,10 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     ref,
   ) {
     const isControlled = Boolean(selectedOptions)
-    const labelItems = stringify(items, optionLabel)
+    const labelItems = convertToLabeledItems(items, optionLabel)
     const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
     const [selectedItems, setSelectedItems] = useState<string[]>(
-      isControlled ? stringify(selectedOptions, optionLabel) : [],
+      isControlled ? convertToLabeledItems(selectedOptions, optionLabel) : [],
     )
     const { density } = useEds()
     const token = useToken(
@@ -150,10 +150,12 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
     useEffect(() => {
       if (isControlled) {
-        setSelectedItems(stringify(selectedOptions, optionLabel))
+        setSelectedItems(convertToLabeledItems(selectedOptions, optionLabel))
       }
       if (initialSelectedItems.length) {
-        setSelectedItems(stringify(initialSelectedItems, optionLabel))
+        setSelectedItems(
+          convertToLabeledItems(initialSelectedItems, optionLabel),
+        )
       }
     }, [selectedOptions, isControlled, initialSelectedItems, optionLabel])
 
@@ -168,6 +170,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         )
       },
       onIsOpenChange: ({ selectedItem }) => {
+        // Show all options when single select is reopened with a selected item
         if (availableItems.length === 1 && selectedItem === availableItems[0]) {
           setAvailableItems(labelItems)
         }
@@ -257,6 +260,11 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       }
     }
 
+    const resetSelection = () => {
+      reset()
+      setSelectedItems([])
+    }
+
     return (
       <ThemeProvider theme={token}>
         <Container className={className} ref={ref}>
@@ -284,7 +292,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                 disabled={disabled || readOnly}
                 aria-label={'clear options'}
                 title="clear"
-                onClick={reset}
+                onClick={resetSelection}
                 style={{ right: 32 }}
               >
                 <Icon data={close} size={16} />
