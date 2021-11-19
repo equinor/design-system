@@ -26,29 +26,62 @@ const Wrapper = styled.div`
   margin-bottom: 350px;
 `
 
-export const Default: Story<ComboboxProps> = (args) => (
+type CustomDataType = {
+  label: string
+  custom?: string
+  id?: number
+}
+
+const data = items.map<CustomDataType>((x) => ({
+  label: x,
+  custom: 'custom property',
+}))
+
+export const Default: Story<ComboboxProps<CustomDataType>> = (args) => (
   <Wrapper>
-    <Combobox label="You can play with me" {...args} items={items} />
+    <Combobox label="You can play with me" {...args} items={data} />
   </Wrapper>
 )
-export const Multiple: Story<ComboboxProps> = (args) => (
+export const Multiple: Story<ComboboxProps<CustomDataType>> = (args) => (
   <Wrapper>
-    <Combobox label="Single" {...args} items={items} />
-    <Combobox label="Multiple" {...args} items={items} multiple />
+    <Combobox label="Single" {...args} items={data} />
+    <Combobox label="Multiple" {...args} items={data} multiple />
   </Wrapper>
 )
 
-const data = items.map((val) => ({
-  label: val,
-  custom: 'custom',
-}))
-export const DataObject: Story<ComboboxProps> = () => (
+export const DataObject: Story<ComboboxProps<CustomDataType>> = () => (
   <Wrapper>
     <Combobox
       label="Single"
       items={data}
-      optionLabel={(opt) => `${opt.label} TEMPLATE`}
+      optionLabel={(opt) => `${opt.label}`}
     />
     <Combobox label="Multiple" items={data} multiple />
   </Wrapper>
+)
+
+const test = [
+  {
+    label: 'dfsdf',
+    id: 12312,
+    foo: {
+      bar: 'jaja',
+    },
+  },
+]
+
+export const Test = () => (
+  <Combobox
+    label="Pick one"
+    items={[
+      {
+        label: 'dfsdf',
+        id: 12312,
+        foo: {
+          bar: 'jaja',
+        },
+      },
+    ]}
+    optionLabel={(opt) => opt.label}
+  ></Combobox>
 )
