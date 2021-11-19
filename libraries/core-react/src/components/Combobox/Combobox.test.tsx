@@ -20,7 +20,7 @@ afterEach(cleanup)
 
 describe('MultiSelect', () => {
   it('Matches snapshot', () => {
-    render(<Combobox items={items} label={labelText} />)
+    render(<Combobox options={items} label={labelText} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
     const buttonNode = screen.getByLabelText('toggle options', {
       selector: 'button',
@@ -29,14 +29,14 @@ describe('MultiSelect', () => {
     expect(buttonNode).toMatchSnapshot()
   })
   it('Has provided label', () => {
-    render(<Combobox label={labelText} items={items} id="id" />)
+    render(<Combobox label={labelText} options={items} id="id" />)
     // The same label is used for both the input field and the list of options
     const inputNode = screen.getAllByLabelText(labelText)
     expect(inputNode).toBeDefined()
   })
 
   it('Can be disabled', () => {
-    render(<Combobox label={labelText} items={items} disabled />)
+    render(<Combobox label={labelText} options={items} disabled />)
     const inputNode = screen.getAllByLabelText(labelText)[0]
     expect(inputNode).toBeDisabled()
   })
@@ -44,9 +44,9 @@ describe('MultiSelect', () => {
   it('Can preselect specific options', () => {
     render(
       <Combobox
-        items={items}
+        options={items}
         label={labelText}
-        initialSelectedItems={['One', 'Two']}
+        initialSelectedOptions={['One', 'Two']}
         multiple
       />,
     )
@@ -55,7 +55,7 @@ describe('MultiSelect', () => {
   })
 
   it('Can open the options on button click', () => {
-    render(<Combobox items={items} label={labelText} />)
+    render(<Combobox options={items} label={labelText} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
     const buttonNode = screen.getByLabelText('toggle options', {
       selector: 'button',
@@ -74,7 +74,7 @@ describe('MultiSelect', () => {
     return (
       <Combobox
         multiple
-        items={items}
+        options={items}
         label={labelText}
         selectedOptions={selected}
         handleSelectedItemsChange={(changes: ComboboxChanges) => {
@@ -100,7 +100,7 @@ describe('MultiSelect', () => {
   })
 
   it('Can filter results by contains search', () => {
-    render(<Combobox items={items} label={labelText} />)
+    render(<Combobox options={items} label={labelText} />)
     const inputNode = screen.getAllByLabelText(labelText)[0]
 
     const optionsNode = screen.getAllByLabelText(labelText)[1]
@@ -123,7 +123,7 @@ describe('MultiSelect', () => {
 
   it('Can extend the css for the component', () => {
     const { container } = render(
-      <StyledMultiSelect label="test" items={items} />,
+      <StyledMultiSelect label="test" options={items} />,
     )
     // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')

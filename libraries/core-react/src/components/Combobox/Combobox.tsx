@@ -72,22 +72,9 @@ const StyledButton = styled(Button)(
   `,
 )
 
-const isObjects = (items: unknown[]) =>
-  items.length > 0 ? typeof items[0] === 'object' : false
-
-const convertToLabeledItems: (
-  items: ComboboxItems,
-  label: (option: ComboboxDataProps) => string,
-) => string[] = (items, label) =>
-  isObjects(items)
-    ? (items as ComboboxDataProps[]).map(label)
-    : (items as string[])
-
-type ComboboxDataProps = {
+type ComboboxOption = {
   label: string
 }
-
-type ComboboxItems = Partial<ComboboxDataProps>[] | string[]
 
 export type ComboboxChanges<T> = {
   selectedItems: T[]
@@ -96,11 +83,11 @@ export type ComboboxChanges<T> = {
 
 export type ComboboxProps<T> = {
   /** List of options to choose from */
-  items: T[]
+  options: T[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
-  initialSelectedItems?: ComboboxItems
+  initialSelectedOptions?: T[]
   /** Meta text, for instance unit */
   meta?: string
   /** Disabled state */
@@ -111,17 +98,15 @@ export type ComboboxProps<T> = {
    * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
    * The items that should be selected. */
-  selectedOptions?: ComboboxItems
+  selectedOptions?: T[]
   /** Callback for the selected item change
-   * changes.selectedItem gives the selected item
+   * changes.selectedItems gives the selected items
    */
-  handleSelectedItemsChange?: (changes: ComboboxChanges<T>) => void
+  onChange?: (changes: ComboboxChanges<T>) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
-  optionLabel?: (option: T & ComboboxDataProps) => string
-  /** Predicate for disabling option */
-  optionDisabled?: (option: ComboboxDataProps) => string
+  optionLabel?: (option: T & ComboboxOption) => string
 } & HTMLAttributes<HTMLDivElement>
 
 function ComboboxInner<T>(
@@ -129,25 +114,27 @@ function ComboboxInner<T>(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
-    items = [],
+    options = [],
     label,
     meta,
     className,
     disabled = false,
     readOnly = false,
-    initialSelectedItems = [],
+    onChange,
     selectedOptions,
-    handleSelectedItemsChange,
     multiple,
+    initialSelectedOptions = [],
     optionLabel = (item) => item.label,
     ...other
   } = props
+
   const isControlled = Boolean(selectedOptions)
-  const labelItems = convertToLabeledItems(items, optionLabel)
+  const labelItems = options.map(optionLabel)
   const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
   const [selectedItems, setSelectedItems] = useState<string[]>(
-    isControlled ? convertToLabeledItems(selectedOptions, optionLabel) : [],
+    isControlled ? options.map(optionLabel) : [],
   )
+
   const { density } = useEds()
   const token = useToken(
     { density },
@@ -157,12 +144,12 @@ function ComboboxInner<T>(
 
   useEffect(() => {
     if (isControlled) {
-      setSelectedItems(convertToLabeledItems(selectedOptions, optionLabel))
+      setSelectedItems(selectedOptions.map(optionLabel))
     }
-    if (initialSelectedItems.length) {
-      setSelectedItems(convertToLabeledItems(initialSelectedItems, optionLabel))
+    if (initialSelectedOptions.length) {
+      setSelectedItems(initialSelectedOptions.map(optionLabel))
     }
-  }, [selectedOptions, isControlled, initialSelectedItems, optionLabel])
+  }, [selectedOptions, isControlled, initialSelectedOptions, optionLabel])
 
   let comboBoxProps: UseComboboxProps<string> = {
     items: availableItems,
@@ -202,9 +189,13 @@ function ComboboxInner<T>(
             }
 
             setSelectedItems(updatedSelectItems)
-            if (handleSelectedItemsChange) {
-              handleSelectedItemsChange({
-                selectedItems: updatedSelectItems,
+
+            if (onChange) {
+              onChange({
+                // This feels slow....
+                selectedItems: options.filter((x) =>
+                  selectedItems.includes(optionLabel(x)),
+                ),
                 inputValue,
               })
             }
@@ -218,7 +209,7 @@ function ComboboxInner<T>(
   }
 
   if (multiple) {
-    placeholderText = `${selectedItems.length}/${items.length} selected`
+    placeholderText = `${selectedItems.length}/${options.length} selected`
     comboBoxProps = {
       ...comboBoxProps,
       stateReducer: (state, actionAndChanges) => {
