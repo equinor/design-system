@@ -27,18 +27,19 @@ const StyledCard = styled.div<StyledCardProps>`
   align-items: center;
   align-content: start;
   /* MARTA */
-  grid-template-columns: ${primary.spacings.left} auto ${primary.spacings.right};
+  /* grid-template-columns: ${primary.spacings.left} auto ${primary.spacings
+    .right};
   grid-template-rows: ${primary.spacings.top} auto ${primary.spacings.bottom};
   grid-template-areas:
-    'xxx xxx xxx'
-    'zzz yyy aaa'
-    'qqq qqq qqq';
-  /* 'text text text'
-    'actions actions actions'; */
+    'header header header'
+    'title title title'
+    'con con con'
+    'media media media'
+    'action action action'; */
   /* MARTA */
   cursor: ${({ cursor }) => cursor};
   ${bordersTemplate(primary.border)};
-  /* ${spacingsTemplate(primary.spacings)} */
+  ${spacingsTemplate(primary.spacings)}
 `
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(

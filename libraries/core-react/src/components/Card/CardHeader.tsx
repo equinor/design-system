@@ -9,7 +9,7 @@ export type CardHeaderProps = HTMLAttributes<HTMLDivElement>
 
 const StyledCardHeader = styled.div`
   display: grid;
-  grid-area: yyy;
+  /* grid-area: header; */
   /* display: flex; */
   justify-content: space-between;
   align-items: center;

@@ -17,7 +17,7 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
   /* MARTA */
-  grid-area: yyy;
+  /* grid-area: action; */
   /* MARTA */
 `
 

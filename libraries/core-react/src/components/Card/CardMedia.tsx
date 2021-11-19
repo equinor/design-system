@@ -14,7 +14,7 @@ const StyledCardMedia = styled.div<CardMediaProps>`
   /* MARTA */
   display: grid;
   place-items: center;
-  grid-area: yyy;
+  /* grid-area: media; */
   /* MARTA */
   /* display: flex; */
   /* width: 100%; */
@@ -26,10 +26,10 @@ const StyledCardMedia = styled.div<CardMediaProps>`
     fullWidth
       ? css`
           > * {
-            width: 100%;
-            /* width: calc(100% + ${spacings.left} + ${spacings.right});
+            /* width: 100%; */
+            width: calc(100% + ${spacings.left} + ${spacings.right});
             margin-left: -${spacings.left};
-            margin-right: -${spacings.right}; */
+            margin-right: -${spacings.right};
           }
 
           &:first-child {
