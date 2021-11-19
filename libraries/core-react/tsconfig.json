@@ -5,6 +5,7 @@
     "declarationDir": "./dist/types",
     "noEmit": false,
     "emitDeclarationOnly": true,
+    "isolatedModules": true,
     "outDir": "./dist",
     "baseUrl": "."
   },

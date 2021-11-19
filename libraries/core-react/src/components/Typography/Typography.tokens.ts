@@ -66,12 +66,5 @@ const link: ComponentToken = {
   },
 }
 
-export {
-  typography,
-  colors,
-  quickVariants,
-  TypographyVariants,
-  ColorVariants,
-  TypographyGroups,
-  link,
-}
+export { typography, colors, quickVariants, link }
+export type { TypographyVariants, ColorVariants, TypographyGroups }
