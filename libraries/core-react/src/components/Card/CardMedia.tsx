@@ -11,27 +11,18 @@ export type CardMediaProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledCardMedia = styled.div<CardMediaProps>`
-  /* MARTA */
   display: grid;
   place-items: center;
-  /* grid-area: media; */
-  /* MARTA */
-  /* display: flex; */
-  /* width: 100%; */
   &:last-child {
-    margin-bottom: 8px;
+    padding-bottom: 24px;
     /* Last child to have 24px total spacing to bottom */
   }
   ${({ fullWidth }) =>
     fullWidth
       ? css`
           > * {
-            /* width: 100%; */
-            width: calc(100% + ${spacings.left} + ${spacings.right});
-            margin-left: -${spacings.left};
-            margin-right: -${spacings.right};
+            width: 100%;
           }
-
           &:first-child {
             margin-top: -${spacings.top};
             img {
@@ -43,8 +34,8 @@ const StyledCardMedia = styled.div<CardMediaProps>`
           }
         `
       : css`
+          padding: 0 16px;
           > * {
-            /* middle */
             width: 100%;
           }
         `}
