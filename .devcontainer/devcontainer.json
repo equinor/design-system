@@ -32,12 +32,13 @@
     },
   },
   "extensions": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "editorconfig.editorconfig",
-    "redhat.vscode-yaml",
-    "vtrois.gitmoji-vscode"
-  ],
+	"dbaeumer.vscode-eslint",
+	"esbenp.prettier-vscode",
+	"editorconfig.editorconfig",
+	"redhat.vscode-yaml",
+	"vtrois.gitmoji-vscode",
+	"silvenon.mdx"
+],
   "forwardPorts": [
     9000
   ],

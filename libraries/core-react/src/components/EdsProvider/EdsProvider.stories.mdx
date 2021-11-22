@@ -1,0 +1,30 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks'
+import styled from 'styled-components'
+import { EdsProvider } from '../..'
+import * as stories from './EdsProvider.stories.tsx'
+
+<Meta title="Components/EdsProvider"
+  component={EdsProvider}
+  args={{  density: 'comfortable' }}
+  argTypes={{ 
+  density: {
+    name: 'density',
+    description: 'Specifies density'
+  }
+  }}
+  parameters={{  docs: { source: { type: 'code' } } }} />
+
+export const Abbr = styled.abbr`
+  cursor: help;
+`
+
+# EdsProvider
+
+The `<EdsProvider />` can be used to provide users with the option of compressing the user interface to see more information at the same time without having to scroll.
+It‘s important **not** to use `compact` as a direct value to density as that breaks comformity to <Abbr title="Web Content Accessibility Guidelines">WCAG</Abbr> 2.1 guidelines and makes it harder to use the application for users with disabilities.
+
+<Canvas>
+  <Story story={stories.Default}  />
+</Canvas>
+
+<ArgsTable of={EdsProvider} />
