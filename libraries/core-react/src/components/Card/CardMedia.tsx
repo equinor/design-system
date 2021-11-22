@@ -11,8 +11,8 @@ export type CardMediaProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledCardMedia = styled.div<CardMediaProps>`
-  display: grid;
-  place-items: center;
+  display: flex;
+  width: auto;
   &:last-child {
     padding-bottom: 24px;
     /* Last child to have 24px total spacing to bottom */
@@ -34,7 +34,7 @@ const StyledCardMedia = styled.div<CardMediaProps>`
           }
         `
       : css`
-          padding: 0 16px;
+          padding: 0 ${spacings.right} 0 ${spacings.left};
           > * {
             width: 100%;
           }
