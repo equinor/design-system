@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": false,
+    "noEmit": true,
+    "isolatedModules": true,
+    "baseUrl": "."
+  },
+  "include": ["src/**/*.test.ts*",],
+  "exclude": [
+    "node_modules",
+    "src/**/*.stories.ts*",
+    "src/stories",
+    "src/test"
+  ]
+}
