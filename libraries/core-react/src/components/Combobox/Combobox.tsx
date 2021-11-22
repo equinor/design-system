@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState, HTMLAttributes } from 'react'
 import { useCombobox, UseComboboxProps } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
@@ -15,7 +15,6 @@ import { List } from '../List'
 import { Button } from '../Button'
 import { bordersTemplate } from '../../utils'
 import { ComboboxOption } from './Option'
-import { HTMLAttributes } from '.pnpm/@types+react@17.0.33/node_modules/@types/react'
 
 const Container = styled.div`
   position: relative;
