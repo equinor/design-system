@@ -49,8 +49,11 @@ exports[`Card Matches snapshot 1`] = `
 }
 
 .c1 {
-  display: grid;
-  place-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
 }
 
 .c1:last-child {
