@@ -32,9 +32,10 @@ type CustomDataType = {
   id?: number
 }
 
-const data = items.map<CustomDataType>((label, index) => ({
+const data = items.map((label, index) => ({
   label,
   index,
+  id: index,
 }))
 
 export const Default: Story<ComboboxProps<CustomDataType>> = (args) => (
@@ -55,7 +56,7 @@ export const DataObject: Story<ComboboxProps<CustomDataType>> = () => {
       <Combobox
         label="Single"
         options={data}
-        optionLabel={(opt) => `${opt.index + 1}. ${opt.label}`}
+        optionLabel={(opt) => `${opt.id + 1}. ${opt.label}`}
       />
       <Combobox
         label="Multiple"

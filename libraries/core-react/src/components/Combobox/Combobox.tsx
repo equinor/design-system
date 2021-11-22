@@ -1,4 +1,4 @@
-import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { useCombobox, UseComboboxProps } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
@@ -16,12 +16,6 @@ import { Button } from '../Button'
 import { bordersTemplate } from '../../utils'
 import { ComboboxOption } from './Option'
 import { HTMLAttributes } from '.pnpm/@types+react@17.0.33/node_modules/@types/react'
-
-declare module 'react' {
-  function forwardRef<T, P = Record<string, unknown>>(
-    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null,
-  ): (props: P & React.RefAttributes<T>) => React.ReactElement | null
-}
 
 const Container = styled.div`
   position: relative;
@@ -72,7 +66,7 @@ const StyledButton = styled(Button)(
   `,
 )
 
-type ComboboxOption = {
+type ComboboxOption<T> = T & {
   label: string
 }
 
@@ -83,7 +77,7 @@ export type ComboboxChanges<T> = {
 
 export type ComboboxProps<T> = {
   /** List of options to choose from */
-  options: T[]
+  options: ComboboxOption<T>[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
@@ -106,7 +100,7 @@ export type ComboboxProps<T> = {
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
-  optionLabel?: (option: T & ComboboxOption) => string
+  optionLabel?: (option: ComboboxOption<T>) => string
 } & HTMLAttributes<HTMLDivElement>
 
 function ComboboxInner<T>(
@@ -326,4 +320,9 @@ function ComboboxInner<T>(
   )
 }
 
-export const Combobox = forwardRef(ComboboxInner)
+export const Combobox = forwardRef(ComboboxInner) as <T>(
+  props: ComboboxProps<T> & {
+    ref?: React.ForwardedRef<HTMLDivElement>
+    displayName: string | undefined
+  },
+) => ReturnType<typeof ComboboxInner>
