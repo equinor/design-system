@@ -4,6 +4,13 @@ exports[`Menu Matches snapshot 1`] = `
 .c0 {
   position: relative;
   list-style: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin: 0;
   padding-left: 0px;
   padding-top: 8px;
@@ -15,7 +22,7 @@ exports[`Menu Matches snapshot 1`] = `
   z-index: 3;
 }
 
-<ul
+<div
   class="c0"
   role="menu"
 >
@@ -24,5 +31,5 @@ exports[`Menu Matches snapshot 1`] = `
   >
     some random content
   </div>
-</ul>
+</div>
 `;
