@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   MultiSelect,
   MultiSelectProps,
   Button,
   Typography,
   EdsProvider,
+  EdsProviderProps,
 } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { UseMultipleSelectionStateChange } from 'downshift'
@@ -204,8 +205,23 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
   )
 }
 
-export const Compact: Story = () => (
-  <EdsProvider density="compact">
-    <MultiSelect label="This is compact" items={items} />
-  </EdsProvider>
-)
+export const Compact: Story = () => {
+  /* prettier-ignore */
+  const [density, setDensity] = useState<EdsProviderProps['density']>(
+    'comfortable',
+  )
+
+  useEffect(() => {
+    /*
+     * In this example we use useEffect for brevity, but this should be a user choice –
+     * do NOT set density to compact directly or use it as the default value!
+     */
+    setDensity('compact')
+  }, [])
+
+  return (
+    <EdsProvider density={density}>
+      <MultiSelect label="This is compact" items={items} />
+    </EdsProvider>
+  )
+}
