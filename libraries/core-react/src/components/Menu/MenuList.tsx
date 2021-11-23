@@ -16,9 +16,11 @@ import { MenuSectionProps, MenuSection } from './MenuSection'
 import { menu as tokens } from './Menu.tokens'
 import { spacingsTemplate } from '../../utils'
 
-const List = styled.ul`
+const List = styled.div`
   position: relative;
   list-style: none;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   ${spacingsTemplate(tokens.spacings)}
   li:first-child {
@@ -40,7 +42,7 @@ function isIndexable(item: MenuChild) {
   return false
 }
 
-export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
+export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
   function MenuList({ children, focus, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex } = useMenu()
 
@@ -95,7 +97,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(
       setFocusedIndex(nextFocusedIndex)
     }
 
-    const handleKeyPress = (event: React.KeyboardEvent<HTMLUListElement>) => {
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
       const { key } = event
       event.stopPropagation()
 
