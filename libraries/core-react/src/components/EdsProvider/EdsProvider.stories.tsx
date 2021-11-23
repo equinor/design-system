@@ -19,22 +19,16 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(4, fit-content(100%));
 `
 
-type StoryProps = {
-  isOpen: boolean
-} & EdsProviderProps['density']
-
-export const Default: Story<StoryProps> = (args) => {
-  const [state, setState] = useArgs()
-  // const [isOpen, setIsOpen] = useState<boolean>(false)
-
-  const { isOpen } = state
+export const Default: Story<EdsProviderProps['density']> = (args) => {
+  const [_, setState] = useArgs()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const setDensity = (density: 'comfortable' | 'compact') =>
     setState({ density })
 
-  const openMenu = () => setState({ isOpen: true })
+  const openMenu = () => setIsOpen(true)
 
-  const closeMenu = () => setState({ isOpen: false })
+  const closeMenu = () => setIsOpen(false)
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
@@ -59,7 +53,7 @@ export const Default: Story<StoryProps> = (args) => {
     <div>
       <EdsProvider {...args}>
         <TopBar>
-          <TopBar.Header>Some header</TopBar.Header>
+          <TopBar.Header>My Application</TopBar.Header>
           <TopBar.Actions>
             <Button
               ref={referenceElement}

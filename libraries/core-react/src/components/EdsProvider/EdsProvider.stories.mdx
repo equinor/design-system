@@ -5,22 +5,7 @@ import * as stories from './EdsProvider.stories.tsx'
 
 <Meta title="Components/EdsProvider"
   component={EdsProvider}
-  args={{  density: 'comfortable', isOpen: false }}
-  argTypes={{ 
-    density: {
-      name: 'density',
-      description: 'Specifies density',
-      options: ['compact', 'comfortable'],
-      control: { type: 'radio' }
-    },
-    isOpen: {
-      name: 'is open',
-      description: 'Specifies if the menu is open or closed',
-      options: [true, false],
-      control: { type: 'radio' }
-    }
-  }}
-  parameters={{ docs: { source: { type: 'code' } } }} />
+  args={{  density: 'comfortable' }} />
 
 export const Abbr = styled.abbr`
   cursor: help;
