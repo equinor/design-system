@@ -316,19 +316,16 @@ export const FullWidth: Story<ButtonProps> = () => (
 )
 
 export const Compact: Story<ButtonProps> = () => {
-  const [density, setDensity] = useState<EdsProviderProps['density']>(
-    'comfortable',
-  )
+  const [density, setDensity] =
+    useState<EdsProviderProps['density']>('comfortable')
 
   useEffect(() => {
-    /* In this example we use useEffect for brevity, but this should be a user choice –
-     * do NOT set density to compact as the default value!
-     * See Playground -> Examples -> Test Page
+    /*
+     * In this example we use useEffect for brevity, but this should be a user choice –
+     * do NOT set density to compact directly or use it as the default value!
      */
     setDensity('compact')
   }, [])
-
-  // const density: EdsProviderProps['density'] = 'compact'
 
   return (
     <EdsProvider density={density}>
@@ -347,7 +344,8 @@ export const Compact: Story<ButtonProps> = () => {
 Compact.parameters = {
   docs: {
     description: {
-      story: 'Compact `Button` using `EdsProvider`',
+      story:
+        'Compact `Button` using `EdsProvider`. See the docs for `EdsProvider` for how to use it.',
     },
   },
 }
