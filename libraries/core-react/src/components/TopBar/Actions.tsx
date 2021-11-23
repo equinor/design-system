@@ -6,6 +6,8 @@ export type TopbarActionsProps = HTMLAttributes<HTMLDivElement>
 const StyledActions = styled.div`
   grid-area: right;
   text-align: right;
+  align-items: center;
+  display: flex;
 `
 
 export const Actions = forwardRef<HTMLDivElement, TopbarActionsProps>(
