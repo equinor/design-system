@@ -500,6 +500,15 @@ export const Compact: Story<TextFieldProps> = () => {
   )
 }
 
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact `TextField` using `EdsProvider`. See the docs for `EdsProvider` for how to use it.',
+    },
+  },
+}
+
 export const ExampleWithReactHookForm: Story<TextFieldProps> = () => {
   const { handleSubmit, control } = useForm({
     defaultValues: { data: '' },

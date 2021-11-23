@@ -337,3 +337,12 @@ export const Compact: Story<MenuProps> = () => {
     </StoryCenter>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact `Menu` using `EdsProvider`. See the docs for `EdsProvider` for how to use it.',
+    },
+  },
+}

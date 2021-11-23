@@ -68,3 +68,12 @@ export const Compact: Story = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact `NativeSelect` using `EdsProvider`. See the docs for `EdsProvider` for how to use it.',
+    },
+  },
+}

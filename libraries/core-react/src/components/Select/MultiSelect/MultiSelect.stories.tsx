@@ -225,3 +225,12 @@ export const Compact: Story = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact `MultiSelect` using `EdsProvider`. See the docs for `EdsProvider` for how to use it.',
+    },
+  },
+}

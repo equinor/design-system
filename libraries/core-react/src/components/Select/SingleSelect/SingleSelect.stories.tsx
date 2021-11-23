@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SingleSelect, SingleSelectProps, Button, Typography } from '../../..'
 import { UseComboboxStateChange } from 'downshift'
 import { action } from '@storybook/addon-actions'
@@ -8,7 +8,7 @@ import { Story, Meta } from '@storybook/react'
 import { useForm, Controller } from 'react-hook-form'
 import styled from 'styled-components'
 import { items } from '../../../stories/data'
-import { EdsProvider } from '../../EdsProvider'
+import { EdsProvider, EdsProviderProps } from '../../EdsProvider'
 
 export default {
   title: 'Components/Select/SingleSelect',
@@ -204,8 +204,32 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
   )
 }
 
-export const Compact: Story = () => (
-  <EdsProvider density="compact">
-    <SingleSelect label="This is compact" items={items} />
-  </EdsProvider>
-)
+export const Compact: Story = () => {
+  /* prettier-ignore */
+  const [density, setDensity] = useState<EdsProviderProps['density']>(
+    'comfortable',
+  )
+
+  useEffect(() => {
+    /*
+     * In this example we use useEffect for brevity, but this should be a user choice –
+     * do NOT set density to compact directly or use it as the default value!
+     */
+    setDensity('compact')
+  }, [])
+
+  return (
+    <EdsProvider density={density}>
+      <SingleSelect label="This is compact" items={items} />
+    </EdsProvider>
+  )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact `SingleSelect` using `EdsProvider`. See the docs for `EdsProvider` for how to use it.',
+    },
+  },
+}
