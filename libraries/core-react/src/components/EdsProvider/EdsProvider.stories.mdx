@@ -1,18 +1,26 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import styled from 'styled-components'
 import { EdsProvider } from '../..'
 import * as stories from './EdsProvider.stories.tsx'
 
 <Meta title="Components/EdsProvider"
   component={EdsProvider}
-  args={{  density: 'comfortable' }}
+  args={{  density: 'comfortable', isOpen: false }}
   argTypes={{ 
-  density: {
-    name: 'density',
-    description: 'Specifies density'
-  }
+    density: {
+      name: 'density',
+      description: 'Specifies density',
+      options: ['compact', 'comfortable'],
+      control: { type: 'radio' }
+    },
+    isOpen: {
+      name: 'is open',
+      description: 'Specifies if the menu is open or closed',
+      options: [true, false],
+      control: { type: 'radio' }
+    }
   }}
-  parameters={{  docs: { source: { type: 'code' } } }} />
+  parameters={{ docs: { source: { type: 'code' } } }} />
 
 export const Abbr = styled.abbr`
   cursor: help;
@@ -20,11 +28,13 @@ export const Abbr = styled.abbr`
 
 # EdsProvider
 
-The `<EdsProvider />` can be used to provide users with the option of compressing the user interface to see more information at the same time without having to scroll.
-It‘s important **not** to use `compact` as a direct value to density as that breaks comformity to <Abbr title="Web Content Accessibility Guidelines">WCAG</Abbr> 2.1 guidelines and makes it harder to use the application for users with disabilities.
+Use the `<EdsProvider />` to provide users with the option of compressing the user interface to see more information at the same time without having to scroll.
+It‘s important **not** to use `compact` as a direct value to density as that breaks comformity to <Abbr title="Web Content Accessibility Guidelines">WCAG</Abbr> 2.1 guidelines and makes it harder to use the application for users with either permanent disabilities, or temporary disabilities such as being outdoors under harsh weather conditions with a tablet.
+
+The following example shows how to use the `<Menu />` to change the density of a collection of components. Click `Show code` to see an example of how you might want to set this up.
 
 <Canvas>
-  <Story story={stories.Default}  />
+  <Story story={stories.Default} />
 </Canvas>
 
 <ArgsTable of={EdsProvider} />
