@@ -139,14 +139,22 @@ function ComboboxInner<T>(
     if (isControlled) {
       setSelectedItems(selectedOptions.map(optionLabel))
     }
-    if (initialSelectedOptions.length) {
+    if (selectedItems.length === 0 && initialSelectedOptions.length > 0) {
       setSelectedItems(initialSelectedOptions.map(optionLabel))
     }
-  }, [selectedOptions, isControlled, initialSelectedOptions, optionLabel])
+  }, [
+    selectedOptions,
+    isControlled,
+    initialSelectedOptions,
+    optionLabel,
+    selectedItems,
+  ])
 
   let comboBoxProps: UseComboboxProps<string> = {
     items: availableItems,
-    selectedItem: multiple ? null : undefined,
+    initialSelectedItem: multiple
+      ? null
+      : initialSelectedOptions.map(optionLabel)[0],
     onInputValueChange: ({ inputValue }) => {
       setAvailableItems(
         labelItems.filter((item) =>
@@ -238,7 +246,6 @@ function ComboboxInner<T>(
     highlightedIndex,
     getItemProps,
     openMenu,
-    selectedItem,
     reset,
     inputValue,
   } = useCombobox(comboBoxProps)
@@ -305,11 +312,7 @@ function ComboboxInner<T>(
                 index={index}
                 multiple={multiple}
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
-                isSelected={
-                  multiple
-                    ? selectedItems.includes(item)
-                    : selectedItem === item
-                }
+                isSelected={selectedItems.includes(item)}
                 {...getItemProps({ item, index, disabled })}
               />
             ))}
@@ -322,6 +325,6 @@ function ComboboxInner<T>(
 export const Combobox = forwardRef(ComboboxInner) as <T>(
   props: ComboboxProps<T> & {
     ref?: React.ForwardedRef<HTMLDivElement>
-    displayName: string | undefined
+    displayName?: string | undefined
   },
 ) => ReturnType<typeof ComboboxInner>

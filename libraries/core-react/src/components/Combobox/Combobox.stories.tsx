@@ -28,41 +28,103 @@ const Wrapper = styled.div`
 
 type CustomDataType = {
   label: string
-  index?: number
-  id?: number
+  areaCode: string
 }
 
-const data = items.map((label, index) => ({
-  label,
-  index,
-  id: index,
-}))
+export const Default: Story<ComboboxProps<CustomDataType>> = (args) => {
+  return (
+    <Wrapper>
+      <Combobox {...args} />
+    </Wrapper>
+  )
+}
 
-export const Default: Story<ComboboxProps<CustomDataType>> = (args) => (
-  <Wrapper>
-    <Combobox label="You can play with me" {...args} options={data} />
-  </Wrapper>
-)
-export const Multiple: Story<ComboboxProps<CustomDataType>> = (args) => (
-  <Wrapper>
-    <Combobox label="Single" {...args} options={data} />
-    <Combobox label="Multiple" {...args} options={data} multiple />
-  </Wrapper>
-)
+Default.bind({})
+Default.args = {
+  label: 'Telefon areacodes',
+  options: [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ],
+}
 
-export const DataObject: Story<ComboboxProps<CustomDataType>> = () => {
+export const Multiple: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
+
+  return (
+    <Wrapper>
+      <Combobox label="Telefon areacodes" {...args} options={data} multiple />
+    </Wrapper>
+  )
+}
+
+export const UsingOptionLabel: Story<ComboboxProps<CustomDataType>> = () => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
+
   return (
     <Wrapper>
       <Combobox
-        label="Single"
+        label="Telefon areacodes"
         options={data}
-        optionLabel={(opt) => `${opt.id + 1}. ${opt.label}`}
+        optionLabel={(opt) => `${opt.areaCode} - ${opt.label}`}
       />
+    </Wrapper>
+  )
+}
+
+export const Disabled: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
+
+  return (
+    <Wrapper>
+      <Combobox label="Telefon areacodes" {...args} options={data} disabled />
+    </Wrapper>
+  )
+}
+
+export const Readonly: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
+
+  return (
+    <Wrapper>
       <Combobox
-        label="Multiple"
+        label="Telefon areacodes"
+        initialSelectedOptions={[data[0]]}
         options={data}
-        multiple
-        optionLabel={(opt) => `${opt.index + 1}. ${opt.label}`}
+        readOnly
+        {...args}
       />
     </Wrapper>
   )
