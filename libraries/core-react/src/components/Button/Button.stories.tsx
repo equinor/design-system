@@ -316,8 +316,10 @@ export const FullWidth: Story<ButtonProps> = () => (
 )
 
 export const Compact: Story<ButtonProps> = () => {
-  const [density, setDensity] =
-    useState<EdsProviderProps['density']>('comfortable')
+  /* prettier-ignore */
+  const [density, setDensity] = useState<EdsProviderProps['density']>(
+    'comfortable',
+  )
 
   useEffect(() => {
     /*

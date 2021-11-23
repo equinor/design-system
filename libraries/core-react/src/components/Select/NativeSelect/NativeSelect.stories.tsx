@@ -1,4 +1,10 @@
-import { NativeSelect, NativeSelectProps, EdsProvider } from '../../..'
+import { useEffect, useState } from 'react'
+import {
+  NativeSelect,
+  NativeSelectProps,
+  EdsProvider,
+  EdsProviderProps,
+} from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -36,14 +42,29 @@ export const Disabled: Story<NativeSelectProps> = () => (
   </NativeSelect>
 )
 
-export const Compact: Story = () => (
-  <EdsProvider density="compact">
-    <NativeSelect label="This is compact" id="compact-select">
-      <option>First option with a really really long text</option>
-      <option>Second</option>
-      <option>Third</option>
-      <option>Another</option>
-      <option>Even another</option>
-    </NativeSelect>
-  </EdsProvider>
-)
+export const Compact: Story = () => {
+  /* prettier-ignore */
+  const [density, setDensity] = useState<EdsProviderProps['density']>(
+    'comfortable',
+  )
+
+  useEffect(() => {
+    /*
+     * In this example we use useEffect for brevity, but this should be a user choice –
+     * do NOT set density to compact directly or use it as the default value!
+     */
+    setDensity('compact')
+  }, [])
+
+  return (
+    <EdsProvider density={density}>
+      <NativeSelect label="This is compact" id="compact-select">
+        <option>First option with a really really long text</option>
+        <option>Second</option>
+        <option>Third</option>
+        <option>Another</option>
+        <option>Even another</option>
+      </NativeSelect>
+    </EdsProvider>
+  )
+}
