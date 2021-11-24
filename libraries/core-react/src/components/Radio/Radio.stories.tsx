@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Radio, RadioProps, Table, EdsProvider } from '../..'
+import { useState, useEffect } from 'react'
+import { Radio, RadioProps, Table, EdsProvider, EdsProviderProps } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
@@ -94,16 +94,32 @@ export const GroupedRadio: Story<RadioProps> = () => {
 GroupedRadio.storyName = 'Multiple radio buttons in a group'
 SingleRadio.storyName = 'Single radio buttons'
 
-export const Compact: Story<RadioProps> = () => (
-  <EdsProvider density="compact">
-    <Radio label="I am compact" />
-  </EdsProvider>
-)
+export const Compact: Story<RadioProps> = () => {
+  /* prettier-ignore */
+  const [density, setDensity] = useState<EdsProviderProps['density']>(
+    'comfortable',
+  )
+
+  useEffect(() => {
+    /*
+     * In this example we use useEffect for brevity, but this should be a user choice –
+     * do NOT set density to compact directly or use it as the default value!
+     */
+    setDensity('compact')
+  }, [])
+
+  return (
+    <EdsProvider density={density}>
+      <Radio label="I am compact" />
+    </EdsProvider>
+  )
+}
 
 Compact.parameters = {
   docs: {
     description: {
-      story: 'Compact `Radio` using `EdsProvder` ',
+      story:
+        'Compact `Radio` using `EdsProvder`. See the docs for `EdsProvider` for how to use it.',
     },
   },
 }

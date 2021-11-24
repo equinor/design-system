@@ -217,7 +217,7 @@ CompactTable.parameters = {
   docs: {
     description: {
       story:
-        'Compact `Table` using `EdsProvider` (this will also apply compact on all nested components)',
+        'Compact `Table` using `EdsProvider` (this will also apply compact on all nested components). See the docs for `EdsProvider` for how to use it.',
     },
   },
 }

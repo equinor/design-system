@@ -1,5 +1,11 @@
-import { useState } from 'react'
-import { Switch, SwitchProps, EdsProvider, Table } from '../..'
+import { useState, useEffect } from 'react'
+import {
+  Switch,
+  SwitchProps,
+  EdsProvider,
+  EdsProviderProps,
+  Table,
+} from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
@@ -64,6 +70,19 @@ export const DefaultStates: Story<SwitchProps> = () => {
 }
 
 export const Compact: Story<SwitchProps> = () => {
+  /* prettier-ignore */
+  const [density, setDensity] = useState<EdsProviderProps['density']>(
+    'comfortable',
+  )
+
+  useEffect(() => {
+    /*
+     * In this example we use useEffect for brevity, but this should be a user choice –
+     * do NOT set density to compact directly or use it as the default value!
+     */
+    setDensity('compact')
+  }, [])
+
   const UnstyledList = styled.ul`
     list-style-type: none;
     li {
@@ -71,7 +90,7 @@ export const Compact: Story<SwitchProps> = () => {
     }
   `
   return (
-    <EdsProvider density="compact">
+    <EdsProvider density={density}>
       <Wrapper>
         <UnstyledList>
           <li>
@@ -95,6 +114,15 @@ export const Compact: Story<SwitchProps> = () => {
       </Wrapper>
     </EdsProvider>
   )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compact `Switch` using `EdsProvider`. See the docs for `EdsProvider` for how to use it.',
+    },
+  },
 }
 
 export const ControlledSwitchControl: Story<SwitchProps> = () => {
