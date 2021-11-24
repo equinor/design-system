@@ -16,10 +16,12 @@
   },
   "settings": {
     "extensions.ignoreRecommendations": true,
-    "editor.formatOnSave": true,
     "git.rebaseWhenSync": true,
     "git.autofetch": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    /* pretter-vscode needs this line to find the locally installed prettier */
+    "prettier.prettierPath": "./node_modules/prettier",
+    "editor.formatOnSave": true,
     "yaml.schemas": {
       "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
       "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
@@ -35,7 +37,8 @@
     "esbenp.prettier-vscode",
     "editorconfig.editorconfig",
     "redhat.vscode-yaml",
-    "vtrois.gitmoji-vscode"
+    "vtrois.gitmoji-vscode",
+    "silvenon.mdx",
   ],
   "forwardPorts": [
     9000
