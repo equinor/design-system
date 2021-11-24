@@ -16,11 +16,12 @@
   },
   "settings": {
     "extensions.ignoreRecommendations": true,
-    "editor.formatOnSave": true,
     "git.rebaseWhenSync": true,
     "git.autofetch": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {"source.fixAll.eslint": true},
+    /* pretter-vscode needs this line to find the locally installed prettier */
+    "prettier.prettierPath": "./node_modules/prettier",
+    "editor.formatOnSave": false,
     "yaml.schemas": {
       "http://json.schemastore.org/stylelintrc": ".stylelintrc.yaml",
       "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
@@ -32,13 +33,13 @@
     },
   },
   "extensions": [
-	"dbaeumer.vscode-eslint",
-	"esbenp.prettier-vscode",
-	"editorconfig.editorconfig",
-	"redhat.vscode-yaml",
-	"vtrois.gitmoji-vscode",
-	"silvenon.mdx"
-],
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "redhat.vscode-yaml",
+    "vtrois.gitmoji-vscode",
+    "silvenon.mdx",
+  ],
   "forwardPorts": [
     9000
   ],
