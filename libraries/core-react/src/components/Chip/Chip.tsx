@@ -63,7 +63,7 @@ const StyledChips = styled.div.attrs<StyleProps>(
   &[data-focus-visible-added]:focus {
     ${outlineTemplate(states.focus.outline)}
   }
-  :focus-visible {
+  &:focus-visible {
     ${outlineTemplate(states.focus.outline)}
   }
   ${bordersTemplate(border)}
