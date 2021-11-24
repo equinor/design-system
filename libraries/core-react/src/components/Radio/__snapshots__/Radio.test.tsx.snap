@@ -26,6 +26,11 @@ exports[`Radio Matches snapshot 1`] = `
   outline-offset: 11px;
 }
 
+.c2:focus-visible + svg {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 11px;
+}
+
 .c2:not(:checked) ~ svg path[name='selected'] {
   display: none;
 }

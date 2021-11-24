@@ -112,6 +112,11 @@ exports[`MultiSelect Matches snapshot 2`] = `
   outline-offset: 0px;
 }
 
+.c0:focus-visible {
+  outline: 1px dashed rgba(0,112,121,1);
+  outline-offset: 0px;
+}
+
 .c0::-moz-focus-inner {
   border: 0;
 }

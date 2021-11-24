@@ -43,6 +43,11 @@ exports[`Chips Matches snapshot 1`] = `
   outline-offset: 2px;
 }
 
+.c0:focus-visible {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 2px;
+}
+
 @media (hover:hover) and (pointer:fine) {
   .c0:hover {
     color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));

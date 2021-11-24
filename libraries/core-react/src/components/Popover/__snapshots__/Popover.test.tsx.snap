@@ -78,6 +78,11 @@ exports[`Popover Matches snapshot 1`] = `
   outline-offset: 0px;
 }
 
+.c5:focus-visible {
+  outline: 1px dashed rgba(0,112,121,1);
+  outline-offset: 0px;
+}
+
 .c5::-moz-focus-inner {
   border: 0;
 }
