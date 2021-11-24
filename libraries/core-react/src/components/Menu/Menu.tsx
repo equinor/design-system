@@ -64,6 +64,13 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
     useGlobalKeyPress('Escape', () => {
       if (open && onClose !== null) {
         onClose()
+        anchorEl.focus()
+      }
+    })
+
+    useGlobalKeyPress('Enter', () => {
+      if (open && onClose !== null) {
+        if (window.document.contains(anchorEl)) anchorEl.focus()
       }
     })
 
