@@ -32,7 +32,7 @@ export const MenuSection = React.memo(function MenuSection(
     <>
       {index !== 0 && (
         <div>
-          <Divider variant="small"></Divider>
+          <Divider variant="small" />
         </div>
       )}
       {title && (
