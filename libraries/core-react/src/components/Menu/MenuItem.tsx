@@ -134,7 +134,7 @@ export const MenuItem = memo(
         })}
         onFocus={() => toggleFocus(index)}
         onClick={(e) => {
-          if (!disabled && onClick) {
+          if (onClick) {
             onClick(e)
             if (onClose !== null) {
               onClose(e)
