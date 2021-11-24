@@ -28,10 +28,12 @@ type StyleAttrsProps = {
   isFocused: string
 }
 
-const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
+const Item = styled.button.attrs<StyleAttrsProps>(({ isFocused }) => ({
   role: 'menuitem',
   tabIndex: isFocused ? -1 : 0,
 }))<StyleProps>`
+  border: 0;
+  background-color: transparent;
   width: auto;
   position: relative;
   z-index: 2;
@@ -75,6 +77,7 @@ const ListItem = styled.li.attrs<StyleAttrsProps>(({ isFocused }) => ({
             }
           }
           &:focus {
+            z-index: 3;
             ${outlineTemplate(focus.outline)}
           }
         `}
@@ -98,10 +101,10 @@ export type MenuItemProps = {
   disabled?: boolean
   /** onClick handler */
   onClick?: (e: React.MouseEvent) => void
-} & React.HTMLAttributes<HTMLLIElement>
+} & React.HTMLAttributes<HTMLButtonElement>
 
 export const MenuItem = memo(
-  forwardRef<HTMLLIElement, MenuItemProps>(function MenuItem(
+  forwardRef<HTMLButtonElement, MenuItemProps>(function MenuItem(
     { children, disabled, index = 0, onClick, ...rest },
     ref,
   ) {
@@ -122,16 +125,16 @@ export const MenuItem = memo(
     }
 
     return (
-      <ListItem
+      <Item
         {...props}
-        ref={useCombinedRefs<HTMLLIElement>(ref, (el) => {
+        ref={useCombinedRefs<HTMLButtonElement>(ref, (el) => {
           if (el !== null && isFocused) {
             el.focus()
           }
         })}
         onFocus={() => toggleFocus(index)}
         onClick={(e) => {
-          if (!disabled && onClick) {
+          if (onClick) {
             onClick(e)
             if (onClose !== null) {
               onClose(e)
@@ -140,7 +143,7 @@ export const MenuItem = memo(
         }}
       >
         <Content>{children}</Content>
-      </ListItem>
+      </Item>
     )
   }),
 )

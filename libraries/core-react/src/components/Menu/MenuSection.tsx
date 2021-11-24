@@ -6,7 +6,7 @@ import { spacingsTemplate } from '../../utils'
 import { Divider } from '../Divider'
 import { Typography } from '../Typography'
 
-const ListItem = styled.li.attrs(() => ({
+const Header = styled.div.attrs(() => ({
   tabIndex: 0,
 }))`
   ${spacingsTemplate(tokens.entities.title.spacings)}
@@ -31,16 +31,16 @@ export const MenuSection = React.memo(function MenuSection(
   return (
     <>
       {index !== 0 && (
-        <li>
-          <Divider variant="small"></Divider>
-        </li>
+        <div>
+          <Divider variant="small" />
+        </div>
       )}
       {title && (
-        <ListItem>
+        <Header>
           <Typography group="navigation" variant="label">
             {title}
           </Typography>
-        </ListItem>
+        </Header>
       )}
       {children}
     </>

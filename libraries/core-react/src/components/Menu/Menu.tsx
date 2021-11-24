@@ -35,7 +35,7 @@ type MenuContainerProps = MenuProps & {
   containerEl: HTMLElement
 }
 
-const MenuContainer = forwardRef<HTMLUListElement, MenuContainerProps>(
+const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
   function MenuContainer(
     {
       children,
@@ -86,9 +86,9 @@ export type MenuProps = {
   onClose?: () => void
   /** Menu placement relative to anchorEl */
   placement?: Placement
-} & HTMLAttributes<HTMLUListElement>
+} & HTMLAttributes<HTMLDivElement>
 
-export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
+export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
   { anchorEl, open, placement = 'auto', style, className, ...rest },
   ref,
 ) {
