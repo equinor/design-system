@@ -28,7 +28,7 @@ type StyleAttrsProps = {
   isFocused: string
 }
 
-const ListItem = styled.button.attrs<StyleAttrsProps>(({ isFocused }) => ({
+const Item = styled.button.attrs<StyleAttrsProps>(({ isFocused }) => ({
   role: 'menuitem',
   tabIndex: isFocused ? -1 : 0,
 }))<StyleProps>`
@@ -125,7 +125,7 @@ export const MenuItem = memo(
     }
 
     return (
-      <ListItem
+      <Item
         {...props}
         ref={useCombinedRefs<HTMLButtonElement>(ref, (el) => {
           if (el !== null && isFocused) {
@@ -143,7 +143,7 @@ export const MenuItem = memo(
         }}
       >
         <Content>{children}</Content>
-      </ListItem>
+      </Item>
     )
   }),
 )
