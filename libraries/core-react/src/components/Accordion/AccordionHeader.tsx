@@ -51,6 +51,9 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
   &[data-focus-visible-added]:focus {
     ${outlineTemplate(header.states.focus.outline)}
   }
+  &:focus-visible {
+    ${outlineTemplate(header.states.focus.outline)}
+  }
   border-top: ${({ parentIndex }) => (parentIndex === 0 ? null : 'none')};
   background: ${header.background};
   height: ${header.height};

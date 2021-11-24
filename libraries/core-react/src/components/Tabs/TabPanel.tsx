@@ -20,6 +20,9 @@ const StyledTabPanel = styled.div.attrs(
   &[data-focus-visible-added]:focus {
     ${outlineTemplate(panel.states.focus.outline)}
   }
+  &:focus-visible {
+    ${outlineTemplate(panel.states.focus.outline)}
+  }
 `
 
 export type TabPanelProps = {

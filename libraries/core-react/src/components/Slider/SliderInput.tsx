@@ -79,6 +79,15 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
       ${outlineTemplate(handle.states.focus.outline)};
     }
   }
+  &:focus-visible {
+    z-index: 2;
+    &::-webkit-slider-thumb {
+      ${outlineTemplate(handle.states.focus.outline)};
+    }
+    &::-moz-range-thumb {
+      ${outlineTemplate(handle.states.focus.outline)};
+    }
+  }
   &:hover,
   &:active {
     &::-webkit-slider-thumb {

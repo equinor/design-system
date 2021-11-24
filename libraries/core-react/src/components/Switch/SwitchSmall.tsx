@@ -16,6 +16,9 @@ const Input = styled(BaseInput)(
     &[data-focus-visible-added]:focus + span {
       ${outlineTemplate(states.focus.outline)}
     }
+    &:focus-visible + span {
+      ${outlineTemplate(states.focus.outline)}
+    }
     /*  Track */
     &:checked + span > span {
       background-color: ${disabled

@@ -41,6 +41,9 @@ const StyledTab = styled.button.attrs<TabProps>(
   &[data-focus-visible-added]:focus {
     ${outlineTemplate(tab.states.focus.outline)}
   }
+  &:focus-visible {
+    ${outlineTemplate(tab.states.focus.outline)}
+  }
   &::-moz-focus-inner {
     border: 0;
   }

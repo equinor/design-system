@@ -109,6 +109,9 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
     &[data-focus-visible-added]:focus {
       ${outlineTemplate(focus.outline)}
     }
+    &:focus-visible {
+      ${outlineTemplate(focus.outline)}
+    }
     /* Get rid of ff focus border for buttons */
     &::-moz-focus-inner {
       border: 0;
