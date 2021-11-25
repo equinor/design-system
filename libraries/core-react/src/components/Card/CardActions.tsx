@@ -2,6 +2,9 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import type { CSSObject } from 'styled-components'
 import { Typography } from '../Typography'
+import { primary as tokens } from './Card.tokens'
+
+const { spacings } = tokens
 
 export type CardActionsProps = {
   /** Should the actions be right aligned */
@@ -16,6 +19,13 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   grid-auto-flow: column;
   align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
+  padding: 0 ${spacings.right} 0 ${spacings.left};
+  :first-child {
+    padding-top: ${spacings.top};
+  }
+  :last-child {
+    padding-bottom: ${spacings.bottom};
+  }
 `
 
 export const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(

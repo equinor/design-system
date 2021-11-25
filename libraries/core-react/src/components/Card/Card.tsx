@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Card.tokens'
-import { spacingsTemplate, bordersTemplate } from '../../utils'
+import { bordersTemplate } from '../../utils'
 
 const { primary } = tokens
 
@@ -28,7 +28,6 @@ const StyledCard = styled.div<StyledCardProps>`
   align-content: start;
   cursor: ${({ cursor }) => cursor};
   ${bordersTemplate(primary.border)};
-  ${spacingsTemplate(primary.spacings)}
 `
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(

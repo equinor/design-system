@@ -46,10 +46,6 @@ exports[`Card Matches snapshot 1`] = `
   align-content: start;
   cursor: default;
   border-radius: 4px;
-  padding-left: 16px;
-  padding-top: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
 }
 
 .c1 {
@@ -57,17 +53,15 @@ exports[`Card Matches snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
+  width: auto;
 }
 
 .c1:last-child {
-  margin-bottom: 8px;
+  padding-bottom: 24px;
 }
 
 .c1 > * {
-  width: calc(100% + 16px + 16px);
-  margin-left: -16px;
-  margin-right: -16px;
+  width: 100%;
 }
 
 .c1:first-child {
@@ -92,10 +86,19 @@ exports[`Card Matches snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  padding: 0 16px 0 16px;
 }
 
 .c2 > :not(:first-child) {
   margin-left: 16px;
+}
+
+.c2:first-child {
+  padding-top: 16px;
+}
+
+.c2:last-child {
+  padding-bottom: 16px;
 }
 
 .c3 {

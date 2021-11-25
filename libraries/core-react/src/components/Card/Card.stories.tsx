@@ -71,10 +71,12 @@ export const Default: Story<CardProps> = (args) => (
           </Typography>
         </Card.HeaderTitle>
       </Card.Header>
-      <Typography variant="body_short">
-        Leading images are full width, and go straight to the top - ignoring
-        spacings
-      </Typography>
+      <Card.Content>
+        <Typography variant="body_short">
+          Leading images are full width, and go straight to the top - ignoring
+          spacings
+        </Typography>
+      </Card.Content>
     </Card>
   </Wrapper>
 )
@@ -235,10 +237,12 @@ export const WithMedia: Story<CardProps> = () => {
             </Typography>
           </Card.HeaderTitle>
         </Card.Header>
-        <Typography variant="body_short">
-          Leading images are full width, and go straight to the top - ignoring
-          spacings
-        </Typography>
+        <Card.Content>
+          <Typography variant="body_short">
+            Leading images are full width, and go straight to the top - ignoring
+            spacings
+          </Typography>
+        </Card.Content>
       </Card>
       <Card>
         <Card.Header>
@@ -249,10 +253,12 @@ export const WithMedia: Story<CardProps> = () => {
             </Typography>
           </Card.HeaderTitle>
         </Card.Header>
-        <Typography variant="body_short">
-          Last blocks with fullWidth ignores left and right spacings but keep
-          24px bottom spacing
-        </Typography>
+        <Card.Content>
+          <Typography variant="body_short">
+            Last blocks with fullWidth ignores left and right spacings but keep
+            24px bottom spacing
+          </Typography>
+        </Card.Content>
         <CardMediafullWidth />
       </Card>
       <Card>
@@ -267,9 +273,11 @@ export const WithMedia: Story<CardProps> = () => {
         <Card.Media>
           <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
         </Card.Media>
-        <Typography variant="body_short">
-          Default spacing is 16px between middle blocks
-        </Typography>
+        <Card.Content>
+          <Typography variant="body_short">
+            Default spacing is 16px between middle blocks
+          </Typography>
+        </Card.Content>
       </Card>
     </Wrapper>
   )
@@ -285,9 +293,11 @@ export const WithActions: Story<CardProps> = () => (
           <Typography variant="body_short">Left aligned buttons</Typography>
         </Card.HeaderTitle>
       </Card.Header>
-      <Typography variant="body_short">
-        Action elements are aligned left in this example
-      </Typography>
+      <Card.Content>
+        <Typography variant="body_short">
+          Action elements are aligned left in this example
+        </Typography>
+      </Card.Content>
 
       <Card.Actions>
         <Button>Cancel</Button>
@@ -301,9 +311,11 @@ export const WithActions: Story<CardProps> = () => (
           <Typography variant="body_short">Right aligned buttons</Typography>
         </Card.HeaderTitle>
       </Card.Header>
-      <Typography variant="body_short">
-        Action elements are aligned right in this example
-      </Typography>
+      <Card.Content>
+        <Typography variant="body_short">
+          Action elements are aligned right in this example
+        </Typography>
+      </Card.Content>
       <Card.Actions alignRight>
         <Button variant="ghost_icon">
           <Icon
@@ -329,9 +341,11 @@ export const WithActions: Story<CardProps> = () => (
           </Typography>
         </Card.HeaderTitle>
       </Card.Header>
-      <Typography variant="body_short">
-        Action elements with metadata
-      </Typography>
+      <Card.Content>
+        <Typography variant="body_short">
+          Action elements with metadata
+        </Typography>
+      </Card.Content>
       <Card.Actions meta="Share">
         <Button variant="ghost_icon">
           <Icon name="share" title="share action" size={iconSize}></Icon>

@@ -12,20 +12,17 @@ export type CardMediaProps = {
 
 const StyledCardMedia = styled.div<CardMediaProps>`
   display: flex;
-  width: 100%;
+  width: auto;
   &:last-child {
-    margin-bottom: 8px;
+    padding-bottom: 24px;
     /* Last child to have 24px total spacing to bottom */
   }
   ${({ fullWidth }) =>
     fullWidth
       ? css`
           > * {
-            width: calc(100% + ${spacings.left} + ${spacings.right});
-            margin-left: -${spacings.left};
-            margin-right: -${spacings.right};
+            width: 100%;
           }
-
           &:first-child {
             margin-top: -${spacings.top};
             img {
@@ -37,6 +34,7 @@ const StyledCardMedia = styled.div<CardMediaProps>`
           }
         `
       : css`
+          padding: 0 ${spacings.right} 0 ${spacings.left};
           > * {
             width: 100%;
           }
