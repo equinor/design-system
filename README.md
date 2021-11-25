@@ -79,9 +79,6 @@ Start storybook on localhost:9000 by running the following command from root:
 
     $ pnpm run storybook
 
-Watch the React components folder `(/libraries/core-react)`
-
-    $ pnpm run core-react
 
 Run tests once or by watching
 
@@ -113,6 +110,15 @@ npm install @equinor/eds-core-react styled-components
 If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
 ```sh
 npm install typescript --save-dev
+```
+* _Note_ from version `0.16.0` we added native support for focus-visible (enable focus-ring on elements when using <kbd>TAB</kbd> key) and removed the [polyfill](https://github.com/WICG/focus-visible). Optionally, if your project requires support for keyboard navigation with Safari, you now need to include the polyfill yourself:
+
+```bash
+npm install --save-dev focus-visible
+```
+```jsx
+ // import focus-visible polyfill only once
+    import 'focus-visible';
 ```
 
 ### Usage
