@@ -91,7 +91,6 @@
     "@equinor/eds-tokens": "workspace:*",
     "@popperjs/core": "2.9.2",
     "downshift": "^6.1.7",
-    "focus-visible": "^5.2.0",
     "ramda": "^0.27.1",
     "react-fast-compare": "3.2.0",
     "react-popper": "2.2.5"

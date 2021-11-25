@@ -1,4 +1,3 @@
-import 'focus-visible'
 import { css } from 'styled-components'
 
 import { Outline, tokens } from '@equinor/eds-tokens'
