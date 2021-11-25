@@ -84,7 +84,7 @@ export const Preview: Story = () => {
           typeof acc[val.group] !== 'undefined' ? acc[val.group] : []
         return {
           ...acc,
-          [val.group]: [...group, (val as unknown) as IconType],
+          [val.group]: [...group, val as unknown as IconType],
         }
       } else {
         return acc

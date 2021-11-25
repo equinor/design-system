@@ -9,7 +9,7 @@ specifiers:
   koa-logger: ^3.2.1
   node-fetch: ^2.6.1
   nodemon: ^2.0.7
-  prettier: ^2.3.0
+  prettier: 2.4.1
   ramda: ^0.27.1
   svgo: ^2.3.0
 
@@ -22,7 +22,7 @@ dependencies:
   koa-logger: 3.2.1
   node-fetch: 2.6.1
   nodemon: 2.0.7
-  prettier: 2.3.0
+  prettier: 2.4.1
   ramda: 0.27.1
   svgo: 2.3.0
 
@@ -621,6 +621,7 @@ packages:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -1209,8 +1210,8 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /prettier/2.3.0:
-    resolution: {integrity: sha512-kXtO4s0Lz/DW/IJ9QdWhAf7/NmPWQXkFr/r/WkR3vyI+0v8amTDxiaQSLzs8NBlytfLWX/7uQUMIW677yLKl4w==}
+  /prettier/2.4.1:
+    resolution: {integrity: sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: false
