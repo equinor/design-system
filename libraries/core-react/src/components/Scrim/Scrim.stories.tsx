@@ -43,7 +43,7 @@ export const Default: Story<ScrimProps> = (args) => {
     <>
       <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
       {visibleScrim && (
-        <Scrim {...args} onClose={handleClose}>
+        <Scrim isDismissable {...args} onClose={handleClose}>
           <TestContent>
             <Typography variant="body_short">
               Press close or hit “ESC” to close scrim.
