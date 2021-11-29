@@ -15,10 +15,10 @@ export type CellProps = {
   | TdHTMLAttributes<HTMLTableCellElement>
   | ThHTMLAttributes<HTMLTableCellElement>
 )
-export const Cell = forwardRef<
-  HTMLTableCellElement | HTMLTableCellElement,
-  CellProps
->(function Cell({ ...rest }, ref) {
+export const Cell = forwardRef<HTMLTableCellElement, CellProps>(function Cell(
+  { ...rest },
+  ref,
+) {
   return (
     <InnerContext.Consumer>
       {({ variant, sticky }) => {
