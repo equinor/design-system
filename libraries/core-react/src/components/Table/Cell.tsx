@@ -12,11 +12,11 @@ export type CellProps = {
   /** Specifies cell sort direction */
   sort?: React.AriaAttributes['aria-sort']
 } & (
-  | TdHTMLAttributes<HTMLTableDataCellElement>
-  | ThHTMLAttributes<HTMLTableHeaderCellElement>
+  | TdHTMLAttributes<HTMLTableCellElement>
+  | ThHTMLAttributes<HTMLTableCellElement>
 )
 export const Cell = forwardRef<
-  HTMLTableDataCellElement | HTMLTableHeaderCellElement,
+  HTMLTableCellElement | HTMLTableCellElement,
   CellProps
 >(function Cell({ ...rest }, ref) {
   return (
