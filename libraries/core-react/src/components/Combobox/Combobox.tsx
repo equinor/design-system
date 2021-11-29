@@ -95,7 +95,7 @@ export type ComboboxProps<T> = {
   /** Callback for the selected item change
    * changes.selectedItems gives the selected items
    */
-  onChange?: (changes: ComboboxChanges<T>) => void
+  onOptionsChange?: (changes: ComboboxChanges<T>) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
@@ -113,7 +113,7 @@ function ComboboxInner<T>(
     className,
     disabled = false,
     readOnly = false,
-    onChange,
+    onOptionsChange,
     selectedOptions,
     multiple,
     initialSelectedOptions = [],
@@ -191,12 +191,14 @@ function ComboboxInner<T>(
 
             setSelectedItems(updatedSelectItems)
 
-            if (onChange) {
-              onChange({
+            if (onOptionsChange) {
+              const items = options.filter((x) =>
+                updatedSelectItems.includes(optionLabel(x)),
+              )
+              console.log('trigger change', items)
+              onOptionsChange({
                 // This feels slow....
-                selectedItems: options.filter((x) =>
-                  selectedItems.includes(optionLabel(x)),
-                ),
+                selectedItems: items,
                 inputValue,
               })
             }
