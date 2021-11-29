@@ -13,12 +13,6 @@ export type CardMediaProps = {
 const StyledCardMedia = styled.div<CardMediaProps>`
   display: flex;
   width: auto;
-  &:last-child {
-    img {
-      border-bottom-right-radius: ${border.type === 'border' && border.radius};
-      border-bottom-left-radius: ${border.type === 'border' && border.radius};
-    }
-  }
   ${({ fullWidth }) =>
     fullWidth
       ? css`
@@ -26,11 +20,18 @@ const StyledCardMedia = styled.div<CardMediaProps>`
             width: 100%;
           }
           &:first-child {
-            margin-top: -${spacings.top};
             img {
               border-top-right-radius: ${border.type === 'border' &&
               border.radius};
               border-top-left-radius: ${border.type === 'border' &&
+              border.radius};
+            }
+          }
+          &:last-child {
+            img {
+              border-bottom-right-radius: ${border.type === 'border' &&
+              border.radius};
+              border-bottom-left-radius: ${border.type === 'border' &&
               border.radius};
             }
           }
