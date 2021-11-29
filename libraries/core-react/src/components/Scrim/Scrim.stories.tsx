@@ -18,6 +18,9 @@ const TestContent = styled.div`
 export default {
   title: 'Components/Scrim',
   component: Scrim,
+  args: {
+    isDismissable: true,
+  },
   parameters: {
     docs: {
       description: {
@@ -54,8 +57,4 @@ export const Default: Story<ScrimProps> = (args) => {
       )}
     </>
   )
-}
-
-Scrim.defaultProps = {
-  isDismissable: true,
 }
