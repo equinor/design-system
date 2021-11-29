@@ -14,8 +14,10 @@ const StyledCardMedia = styled.div<CardMediaProps>`
   display: flex;
   width: auto;
   &:last-child {
-    padding-bottom: 24px;
-    /* Last child to have 24px total spacing to bottom */
+    img {
+      border-bottom-right-radius: ${border.type === 'border' && border.radius};
+      border-bottom-left-radius: ${border.type === 'border' && border.radius};
+    }
   }
   ${({ fullWidth }) =>
     fullWidth
