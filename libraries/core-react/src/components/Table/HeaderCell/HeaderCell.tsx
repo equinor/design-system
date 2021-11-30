@@ -72,20 +72,19 @@ const CellInner = styled.div`
 type CellProps = {
   sort?: React.AriaAttributes['aria-sort']
   sticky?: boolean
-} & ThHTMLAttributes<HTMLTableHeaderCellElement>
+} & ThHTMLAttributes<HTMLTableCellElement>
 
-export const TableHeaderCell = forwardRef<
-  HTMLTableHeaderCellElement,
-  CellProps
->(function TableHeaderCell({ children, sort, ...rest }, ref) {
-  const { density } = useEds()
-  const token = useToken({ density }, tablehead)
+export const TableHeaderCell = forwardRef<HTMLTableCellElement, CellProps>(
+  function TableHeaderCell({ children, sort, ...rest }, ref) {
+    const { density } = useEds()
+    const token = useToken({ density }, tablehead)
 
-  return (
-    <ThemeProvider theme={token}>
-      <StyledTableCell aria-sort={sort} {...rest} ref={ref}>
-        <CellInner>{children}</CellInner>
-      </StyledTableCell>
-    </ThemeProvider>
-  )
-})
+    return (
+      <ThemeProvider theme={token}>
+        <StyledTableCell aria-sort={sort} {...rest} ref={ref}>
+          <CellInner>{children}</CellInner>
+        </StyledTableCell>
+      </ThemeProvider>
+    )
+  },
+)
