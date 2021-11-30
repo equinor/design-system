@@ -9,6 +9,7 @@ import {
 import styled, { css } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
 import { search as tokens } from './Search.tokens'
+import { Button } from '../Button'
 import { Icon } from '../Icon'
 import {
   spacingsTemplate,
@@ -25,7 +26,7 @@ const {
   typography,
   border,
   clickbound,
-  entities: { icon, placeholder },
+  entities: { icon, placeholder, button },
   states,
 } = tokens
 
@@ -132,48 +133,20 @@ type InsideButtonProps = {
   isActive: boolean
 }
 
-const InsideButton = styled.div<InsideButtonProps>`
-  ${bordersTemplate(icon.border)}
-  display: flex;
-  align-items: center;
+const InsideButton = styled(Button)<InsideButtonProps>`
   visibility: hidden;
-  z-index: 1;
-  padding: 4px;
-  height: 16px;
-  width: 16px;
-  position: relative;
-
-  &::after {
-    z-index: -1;
-    position: absolute;
-    top: -${icon.clickbound.offset.top};
-    left: 0;
-    width: 100%;
-    height: ${icon.clickbound.height};
-    content: '';
-  }
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    min-height: auto;
-    content: '';
-  }
+  position: absolute;
+  right: ${button.spacings.right};
+  height: ${button.height};
+  width: ${button.width};
 
   ${({ isActive }) =>
     isActive &&
     css`
       visibility: visible;
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          cursor: pointer;
-          background: ${icon.states.hover.background};
-        }
-      }
     `}
 `
+
 type ControlledSearch = (
   props: SearchProps & RefAttributes<HTMLInputElement>,
   value: SearchProps['value'],
@@ -294,7 +267,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   const clearButtonProps = {
     isActive: state.isActive,
     size,
-    role: 'button',
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation()
       if (state.isActive) {
@@ -307,8 +279,14 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     <Container {...containerProps}>
       <Icon data={search} aria-hidden size={size} />
       <Input {...inputProps} />
-      <InsideButton {...clearButtonProps} aria-label="Clear search">
-        <Icon data={close} size={size} />
+      <InsideButton
+        {...clearButtonProps}
+        aria-label={'clear search'}
+        title="clear"
+        variant="ghost_icon"
+        type="button"
+      >
+        <Icon data={close} size={16} />
       </InsideButton>
     </Container>
   )
