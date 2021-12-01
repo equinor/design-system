@@ -37,9 +37,9 @@ type CellProps = {
   variant?: Variants
   /** Specifies cell background color */
   color?: Colors
-} & TdHTMLAttributes<HTMLTableDataCellElement>
+} & TdHTMLAttributes<HTMLTableCellElement>
 
-export const TableDataCell = forwardRef<HTMLTableDataCellElement, CellProps>(
+export const TableDataCell = forwardRef<HTMLTableCellElement, CellProps>(
   function TableDataCell({ children, variant = 'text', ...rest }, ref) {
     const { density } = useEds()
     const token = useToken({ density }, applyVariant(variant, tableCell))

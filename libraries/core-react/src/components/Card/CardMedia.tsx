@@ -13,10 +13,6 @@ export type CardMediaProps = {
 const StyledCardMedia = styled.div<CardMediaProps>`
   display: flex;
   width: auto;
-  &:last-child {
-    padding-bottom: 24px;
-    /* Last child to have 24px total spacing to bottom */
-  }
   ${({ fullWidth }) =>
     fullWidth
       ? css`
@@ -24,7 +20,6 @@ const StyledCardMedia = styled.div<CardMediaProps>`
             width: 100%;
           }
           &:first-child {
-            margin-top: -${spacings.top};
             img {
               border-top-right-radius: ${border.type === 'border' &&
               border.radius};
@@ -32,9 +27,23 @@ const StyledCardMedia = styled.div<CardMediaProps>`
               border.radius};
             }
           }
+          &:last-child {
+            img {
+              border-bottom-right-radius: ${border.type === 'border' &&
+              border.radius};
+              border-bottom-left-radius: ${border.type === 'border' &&
+              border.radius};
+            }
+          }
         `
       : css`
           padding: 0 ${spacings.right} 0 ${spacings.left};
+          &:first-child {
+            padding: ${spacings.top} ${spacings.right} 0 ${spacings.left};
+          }
+          &:last-child {
+            padding: 0 ${spacings.right} ${spacings.bottom} ${spacings.left};
+          }
           > * {
             width: 100%;
           }
