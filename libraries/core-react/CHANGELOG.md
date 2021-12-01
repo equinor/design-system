@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 
 - Adjusted `Topbar.Actions` to vertically align elements. ([#1680](https://github.com/equinor/design-system/issues/1680))
-- Adjusted `Card.Media` spacings. ([#1713](https://github.com/equinor/design-system/issues/1681))
+- Adjusted `Card.Media` spacings. ([#1713](https://github.com/equinor/design-system/issues/1713))
 
 ## Fixed
 
