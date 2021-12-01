@@ -78,5 +78,12 @@ export const search: SearchToken = {
         height: '36px',
       },
     },
+    button: {
+      height: '24px',
+      width: '24px',
+      spacings: {
+        right: small,
+      },
+    },
   },
 }

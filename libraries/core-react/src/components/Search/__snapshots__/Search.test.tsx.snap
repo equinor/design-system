@@ -2,7 +2,94 @@
 
 exports[`Search Matches snapshot 1`] = `
 <DocumentFragment>
-  .c0 {
+  .c4 {
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c2 {
+  margin: 0;
+  padding: 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  background: transparent;
+  height: 48px;
+  width: 48px;
+  padding-left: 0;
+  padding-right: 0;
+  border: 0px solid transparent;
+  border-radius: 50%;
+  margin: 0;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c2 svg {
+  justify-self: center;
+}
+
+.c2::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  min-height: auto;
+  content: '';
+}
+
+.c2::after {
+  position: absolute;
+  top: -0;
+  left: -0px;
+  width: 48px;
+  height: 48px;
+  content: '';
+}
+
+.c2:focus {
+  outline: none;
+}
+
+.c2[data-focus-visible-added]:focus {
+  outline: 1px dashed rgba(0,112,121,1);
+  outline-offset: 0px;
+}
+
+.c2::-moz-focus-inner {
+  border: 0;
+}
+
+.c2:disabled {
+  cursor: not-allowed;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: center;
+}
+
+.c0 {
   position: relative;
   background: var(--eds_ui_background__light,rgba(247,247,247,1));
   width: 100%;
@@ -100,41 +187,26 @@ exports[`Search Matches snapshot 1`] = `
   outline: none;
 }
 
-.c2 {
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.c3 {
   visibility: hidden;
-  z-index: 1;
-  padding: 4px;
-  height: 16px;
-  width: 16px;
-  position: relative;
+  position: absolute;
+  right: 8px;
+  height: 24px;
+  width: 24px;
 }
 
-.c2::after {
-  z-index: -1;
-  position: absolute;
-  top: -6px;
-  left: 0;
-  width: 100%;
-  height: 36px;
-  content: '';
+@media (hover:hover) and (pointer:fine) {
+  .c2:hover {
+    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    border: 0px solid transparent;
+    border-radius: 50%;
+  }
 }
 
-.c2::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  min-height: auto;
-  content: '';
+@media (hover:hover) and (pointer:fine) {
+  .c2:disabled:hover {
+    background: transparent;
+  }
 }
 
 @media (hover:hover) and (pointer:fine) {
@@ -173,31 +245,37 @@ exports[`Search Matches snapshot 1`] = `
       type="search"
       value=""
     />
-    <div
-      aria-label="Clear search"
-      class="c2"
-      role="button"
-      size="24"
+    <button
+      aria-label="clear search"
+      class="c2 c3"
+      tabindex="0"
+      title="clear"
+      type="button"
     >
-      <svg
-        aria-hidden="true"
-        class=""
-        fill="currentColor"
-        height="24px"
-        viewBox="0 0 24 24"
-        width="24px"
-        xmlns="http://www.w3.org/2000/svg"
+      <span
+        class="c4"
       >
-        <path
+        <svg
+          aria-hidden="true"
           class=""
-          clip-rule="evenodd"
-          d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-          data-testid="eds-icon-path"
-          fill-rule="evenodd"
-          height="24"
-        />
-      </svg>
-    </div>
+          fill="currentColor"
+          height="16px"
+          viewBox="0 0 16 16"
+          width="16px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class=""
+            clip-rule="evenodd"
+            d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+            data-testid="eds-icon-path"
+            fill-rule="evenodd"
+            height="24"
+            transform="scale(0.6666666666666666)"
+          />
+        </svg>
+      </span>
+    </button>
   </span>
 </DocumentFragment>
 `;
