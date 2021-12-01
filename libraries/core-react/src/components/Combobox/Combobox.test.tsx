@@ -8,12 +8,11 @@ import {
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
-import { UseComboboxStateChange } from 'downshift'
 
 import styled from 'styled-components'
-import { Combobox, ComboboxChanges } from '.'
+import { Combobox } from '.'
 
-const items = ['One', 'Two', 'Three']
+const items = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]
 const labelText = 'Select label test'
 
 afterEach(cleanup)
@@ -46,7 +45,7 @@ describe('MultiSelect', () => {
       <Combobox
         options={items}
         label={labelText}
-        initialSelectedOptions={['One', 'Two']}
+        initialSelectedOptions={[{ label: 'One' }, { label: 'Two' }]}
         multiple
       />,
     )
@@ -77,7 +76,7 @@ describe('MultiSelect', () => {
         options={items}
         label={labelText}
         selectedOptions={selected}
-        handleSelectedItemsChange={(changes: ComboboxChanges) => {
+        onOptionsChange={(changes) => {
           setSelected(changes.selectedItems)
           onChange()
         }}
