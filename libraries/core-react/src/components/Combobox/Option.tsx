@@ -33,7 +33,6 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
 
 export type ComboboxOptionProps = {
   value: string
-  index: number
   multiple: boolean
   highlighted: string
   isSelected: boolean

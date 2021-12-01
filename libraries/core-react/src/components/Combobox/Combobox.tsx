@@ -1,5 +1,10 @@
-import { forwardRef, useEffect, useState, HTMLAttributes } from 'react'
-import { useCombobox, UseComboboxProps } from 'downshift'
+import { forwardRef, useState, HTMLAttributes } from 'react'
+import {
+  useCombobox,
+  UseComboboxProps,
+  useMultipleSelection,
+  UseMultipleSelectionProps,
+} from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
 import { Icon } from '../Icon'
@@ -71,7 +76,6 @@ type ComboboxOption<T> = T & {
 
 export type ComboboxChanges<T> = {
   selectedItems: T[]
-  inputValue: string
 }
 
 export type ComboboxProps<T> = {
@@ -80,7 +84,7 @@ export type ComboboxProps<T> = {
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
-  initialSelectedOptions?: T[]
+  initialSelectedOptions?: ComboboxOption<T>[]
   /** Meta text, for instance unit */
   meta?: string
   /** Disabled state */
@@ -124,9 +128,8 @@ function ComboboxInner<T>(
   const isControlled = Boolean(selectedOptions)
   const labelItems = options.map(optionLabel)
   const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
-  const [selectedItems, setSelectedItems] = useState<string[]>(
-    isControlled ? options.map(optionLabel) : [],
-  )
+  const initialSelectedItems = initialSelectedOptions.map(optionLabel)
+  const controlledSelectedItems = (selectedOptions || []).map(optionLabel)
 
   const { density } = useEds()
   const token = useToken(
@@ -135,26 +138,43 @@ function ComboboxInner<T>(
   )
   let placeholderText: string = undefined
 
-  useEffect(() => {
-    if (isControlled) {
-      setSelectedItems(selectedOptions.map(optionLabel))
+  let multipleSelectionProps: UseMultipleSelectionProps<string> = {
+    initialSelectedItems: multiple
+      ? initialSelectedItems
+      : initialSelectedItems[0]
+      ? [initialSelectedItems[0]]
+      : [],
+    onSelectedItemsChange: (changes) => {
+      if (onOptionsChange) {
+        const items = options.filter((x) =>
+          changes.selectedItems.includes(optionLabel(x)),
+        )
+        onOptionsChange({
+          selectedItems: items,
+        })
+      }
+    },
+  }
+
+  if (isControlled) {
+    multipleSelectionProps = {
+      ...multipleSelectionProps,
+      selectedItems: controlledSelectedItems,
     }
-    if (selectedItems.length === 0 && initialSelectedOptions.length > 0) {
-      setSelectedItems(initialSelectedOptions.map(optionLabel))
-    }
-  }, [
-    selectedOptions,
-    isControlled,
-    initialSelectedOptions,
-    optionLabel,
+  }
+
+  const {
+    getDropdownProps,
+    addSelectedItem,
+    removeSelectedItem,
     selectedItems,
-  ])
+    reset: resetSelection,
+    setSelectedItems,
+  } = useMultipleSelection(multipleSelectionProps)
 
   let comboBoxProps: UseComboboxProps<string> = {
     items: availableItems,
-    initialSelectedItem: multiple
-      ? null
-      : initialSelectedOptions.map(optionLabel)[0],
+    initialSelectedItem: initialSelectedItems[0],
     onInputValueChange: ({ inputValue }) => {
       setAvailableItems(
         labelItems.filter((item) =>
@@ -168,7 +188,7 @@ function ComboboxInner<T>(
         setAvailableItems(labelItems)
       }
     },
-    onStateChange: ({ type, selectedItem, inputValue }) => {
+    onStateChange: ({ type, selectedItem }) => {
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           break
@@ -176,31 +196,12 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
-            const index = selectedItems.indexOf(selectedItem)
-            let updatedSelectItems: string[] = []
-            if (index > 0) {
-              updatedSelectItems = [
-                ...selectedItems.slice(0, index),
-                ...selectedItems.slice(index + 1),
-              ]
-            } else if (index === 0) {
-              updatedSelectItems = [...selectedItems.slice(1)]
+            if (multiple) {
+              selectedItems.includes(selectedItem)
+                ? removeSelectedItem(selectedItem)
+                : addSelectedItem(selectedItem)
             } else {
-              updatedSelectItems = [...selectedItems, selectedItem]
-            }
-
-            setSelectedItems(updatedSelectItems)
-
-            if (onOptionsChange) {
-              const items = options.filter((x) =>
-                updatedSelectItems.includes(optionLabel(x)),
-              )
-              console.log('trigger change', items)
-              onOptionsChange({
-                // This feels slow....
-                selectedItems: items,
-                inputValue,
-              })
+              setSelectedItems([selectedItem])
             }
           }
 
@@ -211,10 +212,18 @@ function ComboboxInner<T>(
     },
   }
 
+  if (isControlled && !multiple) {
+    comboBoxProps = {
+      ...comboBoxProps,
+      selectedItem: controlledSelectedItems[0],
+    }
+  }
+
   if (multiple) {
     placeholderText = `${selectedItems.length}/${options.length} selected`
     comboBoxProps = {
       ...comboBoxProps,
+      selectedItem: null,
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
         switch (type) {
@@ -248,8 +257,8 @@ function ComboboxInner<T>(
     highlightedIndex,
     getItemProps,
     openMenu,
-    reset,
     inputValue,
+    reset: resetCombobox,
   } = useCombobox(comboBoxProps)
 
   const openSelect = () => {
@@ -258,10 +267,11 @@ function ComboboxInner<T>(
     }
   }
 
-  const resetSelection = () => {
-    reset()
-    setSelectedItems([])
+  const clear = () => {
+    resetCombobox()
+    resetSelection()
   }
+  const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
 
   return (
     <ThemeProvider theme={token}>
@@ -275,22 +285,25 @@ function ComboboxInner<T>(
 
         <Container {...getComboboxProps()}>
           <StyledInput
-            {...getInputProps({
-              disabled,
-            })}
+            {...getInputProps(
+              getDropdownProps({
+                preventKeyAction: multiple ? isOpen : undefined,
+                disabled,
+              }),
+            )}
             placeholder={placeholderText}
             readOnly={readOnly}
             onFocus={openSelect}
             onClick={openSelect}
             {...other}
           />
-          {Boolean(selectedItems.length || inputValue) && (
+          {showClearButton && (
             <StyledButton
               variant="ghost_icon"
               disabled={disabled || readOnly}
               aria-label={'clear options'}
               title="clear"
-              onClick={resetSelection}
+              onClick={clear}
               style={{ right: 32 }}
             >
               <Icon data={close} size={16} />
@@ -302,7 +315,9 @@ function ComboboxInner<T>(
             aria-label={'toggle options'}
             title="open"
           >
-            <Icon data={isOpen ? arrow_drop_up : arrow_drop_down}></Icon>
+            {!readOnly && (
+              <Icon data={isOpen ? arrow_drop_up : arrow_drop_down}></Icon>
+            )}
           </StyledButton>
         </Container>
         <StyledList {...getMenuProps()}>
@@ -311,7 +326,6 @@ function ComboboxInner<T>(
               <ComboboxOption
                 key={item}
                 value={item}
-                index={index}
                 multiple={multiple}
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
                 isSelected={selectedItems.includes(item)}
