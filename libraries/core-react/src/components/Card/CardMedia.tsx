@@ -38,6 +38,12 @@ const StyledCardMedia = styled.div<CardMediaProps>`
         `
       : css`
           padding: 0 ${spacings.right} 0 ${spacings.left};
+          &:first-child {
+            padding: ${spacings.top} ${spacings.right} 0 ${spacings.left};
+          }
+          &:last-child {
+            padding: 0 ${spacings.right} ${spacings.bottom} ${spacings.left};
+          }
           > * {
             width: 100%;
           }
