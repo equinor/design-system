@@ -266,7 +266,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 
   const clearButtonProps = {
     isActive: state.isActive,
-    size,
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation()
       if (state.isActive) {
@@ -284,7 +283,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
         aria-label={'clear search'}
         title="clear"
         variant="ghost_icon"
-        type="button"
       >
         <Icon data={close} size={16} />
       </InsideButton>
