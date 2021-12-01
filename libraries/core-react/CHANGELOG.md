@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.15.0] - 2021-12-01
+
+## Added
+
+- New sub-component `Card.Content` for content inside `Card`. ([#1711](https://github.com/equinor/design-system/issues/1711))
+
+## Changed
+
+- Adjusted `Topbar.Actions` to vertically align elements. ([#1680](https://github.com/equinor/design-system/issues/1680))
+- Adjusted `Card.Media` spacings. ([#1713](https://github.com/equinor/design-system/issues/1681))
+
+## Fixed
+
+- `Menu.Item` focus should no longer jump after being re-opened. ([#1681](https://github.com/equinor/design-system/issues/1681))
+- Keyboard interaction in `Menu` should now work as intended. ([#1702](https://github.com/equinor/design-system/issues/1702))
+- Focus should now return to anchor when `Menu` is closed by esc/enter. ([#1704](https://github.com/equinor/design-system/issues/1704))
+- Replaced deprecated `HTMLTableHeaderCellElement` & `HTMLTableDataCellElement` types with `HTMLTableCellElement`.([#1739](https://github.com/equinor/design-system/issues/1739))
+- `Search` clear button is now an actual button! Rejoice a11y! ([#1737](https://github.com/equinor/design-system/issues/1737))
+
+### Removed
+
+- `Card` no longer has padding, its now moved to the individual sub-components. Use `Card.Content` for padded content inside `Card`. ([#1711](https://github.com/equinor/design-system/issues/1711))
+
 ## [0.14.3] - 2021-11-16
 
 ### Fixed
