@@ -248,7 +248,6 @@ exports[`Search Matches snapshot 1`] = `
     <button
       aria-label="clear search"
       class="c2 c3"
-      size="24"
       tabindex="0"
       title="clear"
       type="button"
