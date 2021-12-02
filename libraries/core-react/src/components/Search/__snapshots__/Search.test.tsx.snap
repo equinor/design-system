@@ -2,7 +2,7 @@
 
 exports[`Search Matches snapshot 1`] = `
 <DocumentFragment>
-  .c4 {
+  .c5 {
   display: grid;
   grid-gap: 8px;
   grid-auto-flow: column;
@@ -17,7 +17,7 @@ exports[`Search Matches snapshot 1`] = `
   justify-content: center;
 }
 
-.c2 {
+.c3 {
   margin: 0;
   padding: 0;
   -webkit-text-decoration: none;
@@ -41,11 +41,11 @@ exports[`Search Matches snapshot 1`] = `
   text-align: center;
 }
 
-.c2 svg {
+.c3 svg {
   justify-self: center;
 }
 
-.c2::before {
+.c3::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -54,7 +54,7 @@ exports[`Search Matches snapshot 1`] = `
   content: '';
 }
 
-.c2::after {
+.c3::after {
   position: absolute;
   top: -0;
   left: -0px;
@@ -63,11 +63,11 @@ exports[`Search Matches snapshot 1`] = `
   content: '';
 }
 
-.c2:focus {
+.c3:focus {
   outline: none;
 }
 
-.c2[data-focus-visible-added]:focus {
+.c3[data-focus-visible-added]:focus {
   outline: 1px dashed rgba(0,112,121,1);
   outline-offset: 0px;
 }
@@ -81,7 +81,7 @@ exports[`Search Matches snapshot 1`] = `
   border: 0;
 }
 
-.c2:disabled {
+.c3:disabled {
   cursor: not-allowed;
   background: transparent;
   border: 1px solid transparent;
@@ -92,6 +92,77 @@ exports[`Search Matches snapshot 1`] = `
   font-weight: 500;
   line-height: 1.143em;
   text-align: center;
+}
+
+.c1 {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  border: none;
+  height: 36px;
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  outline: 1px solid transparent;
+  outline-offset: 0px;
+  margin: 0;
+  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  -webkit-letter-spacing: 0.025em;
+  -moz-letter-spacing: 0.025em;
+  -ms-letter-spacing: 0.025em;
+  letter-spacing: 0.025em;
+  text-align: left;
+  padding-left: 8px;
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+}
+
+.c1::-webkit-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c1::-moz-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c1:-ms-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c1::placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c1:active,
+.c1:focus {
+  outline-offset: 0;
+  box-shadow: none;
+  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  outline-offset: 0px;
+}
+
+.c1:disabled {
+  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  cursor: not-allowed;
+  box-shadow: none;
+  outline: none;
+}
+
+.c1:disabled:focus,
+.c1:disabled:active {
+  outline: none;
+}
+
+.c1[readOnly] {
+  background: transparent;
+  box-shadow: none;
 }
 
 .c0 {
@@ -107,13 +178,11 @@ exports[`Search Matches snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  box-sizing: border-box;
+  box-sizing: content-box;
   border: 1px solid transparent;
   z-index: 0;
   padding-left: 8px;
-  padding-top: 6px;
   padding-right: 8px;
-  padding-bottom: 6px;
 }
 
 .c0 svg {
@@ -155,19 +224,8 @@ exports[`Search Matches snapshot 1`] = `
   content: '';
 }
 
-.c1 {
-  min-height: 0;
-  min-width: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  box-sizing: border-box;
-  background: transparent;
+.c2 {
+  box-shadow: unset;
   margin: 0;
   color: rgba(0,0,0,1);
   font-family: Equinor;
@@ -181,18 +239,18 @@ exports[`Search Matches snapshot 1`] = `
   text-align: left;
 }
 
-.c1[type='search']::-webkit-search-decoration,
-.c1[type='search']::-webkit-search-cancel-button,
-.c1[type='search']::-webkit-search-results-button,
-.c1[type='search']::-webkit-search-results-decoration {
+.c2[type='search']::-webkit-search-decoration,
+.c2[type='search']::-webkit-search-cancel-button,
+.c2[type='search']::-webkit-search-results-button,
+.c2[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
-.c1:focus {
+.c2:focus {
   outline: none;
 }
 
-.c3 {
+.c4 {
   visibility: hidden;
   position: absolute;
   right: 8px;
@@ -201,7 +259,7 @@ exports[`Search Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c2:hover {
+  .c3:hover {
     background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
     border: 0px solid transparent;
     border-radius: 50%;
@@ -209,7 +267,7 @@ exports[`Search Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c2:disabled:hover {
+  .c3:disabled:hover {
     background: transparent;
   }
 }
@@ -245,20 +303,20 @@ exports[`Search Matches snapshot 1`] = `
     </svg>
     <input
       aria-label="search input"
-      class="c1"
+      class="c1 c2"
       role="searchbox"
       type="search"
       value=""
     />
     <button
       aria-label="clear search"
-      class="c2 c3"
+      class="c3 c4"
       tabindex="0"
       title="clear"
       type="button"
     >
       <span
-        class="c4"
+        class="c5"
       >
         <svg
           aria-hidden="true"
