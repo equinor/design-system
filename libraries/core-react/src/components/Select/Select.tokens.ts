@@ -55,6 +55,9 @@ export const select: ComponentToken = {
         right: spacingSmall,
         top: '6px',
       },
+      typography: {
+        color: colors.text.static_icons__tertiary.rgba,
+      },
     },
   },
   modes: {

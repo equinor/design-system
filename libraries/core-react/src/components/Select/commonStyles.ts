@@ -74,6 +74,7 @@ export const StyledButton = styled(Button)(
       height: ${button.height};
       width: ${button.height};
       top: ${button.spacings.top};
+      color: ${button.typography.color};
     `
   },
 )
