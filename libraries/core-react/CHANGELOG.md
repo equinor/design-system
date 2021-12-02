@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2021-12-02
+
+### Changed
+
+- Esm package is now unbundled enabling tree-shaking ([#1043](https://github.com/equinor/design-system/issues/1043))
+- Package.json: added `browserslist`: `defaults, not IE 11` resulting in less babel transpiled code and polyfill bloat ([#1043](https://github.com/equinor/design-system/issues/1043))
+
+### Added
+
+- Native support for `focus-visible` (enables focus-ring on elements when using `TAB` key). [Browser support](https://caniuse.com/?search=focus-visible) ([#1043](https://github.com/equinor/design-system/issues/1043))
+
+### Removed
+
+- Removed umd package from build. ([#1043](https://github.com/equinor/design-system/issues/1043))
+- Removed focus-visible polyfill, while still retaining support for it in the components. Users who need to support focus-visible in Safari now have to add the [polyfill](https://github.com/WICG/focus-visible) themselves. ([#1043](https://github.com/equinor/design-system/issues/1043))
+
 ## [0.15.0] - 2021-12-01
 
 ## Added
