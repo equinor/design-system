@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Esm package is now unbundled enabling tree-shaking ([#1043](https://github.com/equinor/design-system/issues/1043))
-- Package.json: added `browserslist`: `defaults, not IE 11` resulting in less babel transpiled code and polyfill bloat ([#1043](https://github.com/equinor/design-system/issues/1043))
+- Adjusted `browserslist` to `defaults, not IE 11` resulting in less babel transpiled code and polyfill bloat ([#1043](https://github.com/equinor/design-system/issues/1043))
 
 ### Added
 
@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Removed umd package from build. ([#1043](https://github.com/equinor/design-system/issues/1043))
-- Removed focus-visible polyfill, while still retaining support for it in the components. Users who need to support focus-visible in Safari now have to add the [polyfill](https://github.com/WICG/focus-visible) themselves. ([#1043](https://github.com/equinor/design-system/issues/1043))
+- Removed [focus-visible polyfill](https://github.com/WICG/focus-visible), while still retaining support for it in the components. Users who need to support focus-visible in Safari now have to add the polyfill themselves. ([#1043](https://github.com/equinor/design-system/issues/1043))
 
 ## [0.15.0] - 2021-12-01
 
