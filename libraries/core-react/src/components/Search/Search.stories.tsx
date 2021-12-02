@@ -1,7 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Search, Typography, Button, SearchProps } from '../..'
+import {
+  Search,
+  Typography,
+  Button,
+  SearchProps,
+  EdsProvider,
+  Density,
+} from '../..'
 import { Story, Meta } from '@storybook/react'
 
 const Columns = styled.div`
@@ -169,5 +176,25 @@ export const Controlled: Story<SearchProps> = () => {
         </Button>
       </Columns>
     </>
+  )
+}
+
+export const Compact: Story<SearchProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Search
+        aria-label="compact"
+        id="search-compact"
+        placeholder="Search"
+        onChange={handleOnChange}
+      />
+    </EdsProvider>
   )
 }

@@ -20,6 +20,7 @@ const {
   typography: {
     input: { text: typography },
   },
+  shape,
 } = tokens
 
 type SearchToken = ComponentToken
@@ -35,8 +36,6 @@ export const search: SearchToken = {
   spacings: {
     left: small,
     right: small,
-    top: '6px',
-    bottom: '6px',
   },
   border: {
     type: 'border',
@@ -84,6 +83,11 @@ export const search: SearchToken = {
       spacings: {
         right: small,
       },
+    },
+  },
+  modes: {
+    compact: {
+      height: shape._modes.compact.straight.minHeight,
     },
   },
 }

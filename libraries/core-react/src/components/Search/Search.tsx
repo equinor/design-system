@@ -6,146 +6,145 @@ import {
   RefAttributes,
   forwardRef,
 } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
-import { search as tokens } from './Search.tokens'
+import { search as searchToken } from './Search.tokens'
+import { useEds } from '../EdsProvider'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
+import { Input } from '../Input'
 import {
   spacingsTemplate,
   typographyTemplate,
   setReactInputValue,
   bordersTemplate,
 } from '../../utils'
-import { useCombinedRefs } from '../../hooks'
-
-const {
-  height,
-  spacings,
-  background,
-  typography,
-  border,
-  clickbound,
-  entities: { icon, placeholder, button },
-  states,
-} = tokens
+import { useCombinedRefs, useToken } from '../../hooks'
 
 type ContainerProps = {
   isFocused: boolean
   disabled: boolean
 }
 
-const Container = styled.span<ContainerProps>`
-  position: relative;
-  background: ${background};
-  width: 100%;
-  height: ${height};
-  display: grid;
-  grid-gap: 8px;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content auto max-content;
-  align-items: center;
-  box-sizing: border-box;
-  ${bordersTemplate(border)}
-  z-index: 0;
+const Container = styled.span<ContainerProps>(
+  ({ disabled, isFocused, theme }) => {
+    const {
+      height,
+      spacings,
+      background,
+      border,
+      clickbound,
+      entities: { icon, placeholder },
+      states,
+    } = theme
 
-  svg {
-    fill: ${icon.typography.color};
-  }
+    return css`
+      position: relative;
+      background: ${background};
+      width: 100%;
+      height: ${height};
+      display: grid;
+      grid-gap: 8px;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content auto max-content;
+      align-items: center;
+      box-sizing: content-box;
+      ${bordersTemplate(border)}
+      z-index: 0;
 
-  ${spacingsTemplate(spacings)}
+      svg {
+        fill: ${icon.typography.color};
+      }
 
-  ${({ isFocused }) =>
-    isFocused &&
-    css`
-      ${bordersTemplate(states.focus.border)}
-    `}
+      ${spacingsTemplate(spacings)}
 
-  &::placeholder {
-    color: ${placeholder.typography.color};
-  }
-  ${({ disabled }) =>
-    disabled
-      ? css`
-          cursor: not-allowed;
-        `
-      : css`
-          @media (hover: hover) and (pointer: fine) {
-            &:hover {
-              ${bordersTemplate(states.focus.border)}
-              cursor: text;
+      ${isFocused && bordersTemplate(states.focus.border)}
+
+
+    &::placeholder {
+        color: ${placeholder.typography.color};
+      }
+      ${disabled
+        ? css`
+            cursor: not-allowed;
+          `
+        : css`
+            @media (hover: hover) and (pointer: fine) {
+              &:hover {
+                ${bordersTemplate(states.focus.border)}
+                cursor: text;
+              }
             }
-          }
-        `}
+          `}
 
-  &::after {
-    z-index: -1;
-    position: absolute;
-    top: -${clickbound.offset};
-    left: 0;
-    width: 100%;
-    height: ${clickbound.height};
-    content: '';
-  }
+      &::after {
+        z-index: -1;
+        position: absolute;
+        top: -${clickbound.offset};
+        left: 0;
+        width: 100%;
+        height: ${clickbound.height};
+        content: '';
+      }
 
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    min-height: auto;
-    content: '';
-  }
-`
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: auto;
+        min-height: auto;
+        content: '';
+      }
+    `
+  },
+)
 
-const Input = styled.input`
-  min-height: 0;
-  min-width: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  appearance: none;
-  box-sizing: border-box;
-  background: transparent;
+const SearchInput = styled(Input)(({ theme, disabled }) => {
+  return css`
+    box-shadow: unset;
+    &[type='search']::-webkit-search-decoration,
+    &[type='search']::-webkit-search-cancel-button,
+    &[type='search']::-webkit-search-results-button,
+    &[type='search']::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
 
-  &[type='search']::-webkit-search-decoration,
-  &[type='search']::-webkit-search-cancel-button,
-  &[type='search']::-webkit-search-results-button,
-  &[type='search']::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-  }
+    ${typographyTemplate(theme.typography)}
 
-  ${typographyTemplate(typography)}
-
-  &:focus {
-    outline: none;
-  }
-  ${({ disabled }) =>
-    disabled &&
+    &:focus {
+      outline: none;
+    }
+    ${disabled &&
     css`
       cursor: not-allowed;
     `}
-`
+  `
+})
 
 type InsideButtonProps = {
   isActive: boolean
 }
 
-const InsideButton = styled(Button)<InsideButtonProps>`
-  visibility: hidden;
-  position: absolute;
-  right: ${button.spacings.right};
-  height: ${button.height};
-  width: ${button.width};
+const InsideButton = styled(Button)<InsideButtonProps>(
+  ({ theme, isActive }) => {
+    const {
+      entities: { button },
+    } = theme
 
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      visibility: visible;
-    `}
-`
+    return css`
+      visibility: hidden;
+      position: absolute;
+      right: ${button.spacings.right};
+      height: ${button.height};
+      width: ${button.width};
+
+      ${isActive &&
+      css`
+        visibility: visible;
+      `}
+    `
+  },
+)
 
 type ControlledSearch = (
   props: SearchProps & RefAttributes<HTMLInputElement>,
@@ -168,6 +167,9 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   },
   ref,
 ) {
+  const { density } = useEds()
+  const token = useToken({ density }, searchToken)
+
   const isControlled = typeof value !== 'undefined'
   const isActive = (isControlled && value !== '') || defaultValue !== ''
   const inputRef = useRef<HTMLInputElement>(null)
@@ -275,18 +277,20 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   }
 
   return (
-    <Container {...containerProps}>
-      <Icon data={search} aria-hidden size={size} />
-      <Input {...inputProps} />
-      <InsideButton
-        {...clearButtonProps}
-        aria-label={'clear search'}
-        title="clear"
-        variant="ghost_icon"
-      >
-        <Icon data={close} size={16} />
-      </InsideButton>
-    </Container>
+    <ThemeProvider theme={token}>
+      <Container {...containerProps}>
+        <Icon data={search} aria-hidden size={size} />
+        <SearchInput {...inputProps} />
+        <InsideButton
+          {...clearButtonProps}
+          aria-label={'clear search'}
+          title="clear"
+          variant="ghost_icon"
+        >
+          <Icon data={close} size={16} />
+        </InsideButton>
+      </Container>
+    </ThemeProvider>
   )
 })
 
