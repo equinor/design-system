@@ -86,7 +86,7 @@ exports[`Card Matches snapshot 1`] = `
   padding: 0 16px 0 16px;
 }
 
-.c2 > :not(:first-child) {
+.c2 >:not(:first-child) {
   margin-left: 16px;
 }
 

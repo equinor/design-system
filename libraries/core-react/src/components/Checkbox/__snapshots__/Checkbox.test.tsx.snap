@@ -26,6 +26,11 @@ exports[`Checkbox Matches snapshot 1`] = `
   outline-offset: 11px;
 }
 
+.c2:focus-visible + svg {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 11px;
+}
+
 .c2:not(:checked) ~ svg path[name='checked'] {
   display: none;
 }
@@ -109,14 +114,14 @@ exports[`Checkbox Matches snapshot 1`] = `
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          class=""
+          class="Input__StyledPath-sc-rqj7qf-0"
           clip-rule="evenodd"
           d="M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm4.3 13.29c.39.39 1.02.39 1.41 0l7.58-7.59a.996.996 0 1 0-1.41-1.41L10 14.17l-2.88-2.88a.996.996 0 1 0-1.41 1.41l3.59 3.59z"
           fill-rule="evenodd"
           name="checked"
         />
         <path
-          class=""
+          class="Input__StyledPath-sc-rqj7qf-0"
           clip-rule="evenodd"
           d="M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z"
           fill-rule="evenodd"

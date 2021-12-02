@@ -63,7 +63,7 @@ exports[`Banner Matches snapshot 1`] = `
 }
 
 <div
-    class=""
+    class="Banner__StyledBanner-sc-1ju451i-0"
     role="alert"
   >
     <div
@@ -74,7 +74,7 @@ exports[`Banner Matches snapshot 1`] = `
       >
         <svg
           aria-hidden="true"
-          class=""
+          class="Icon__StyledSvg-sc-6evbi1-0"
           fill="var(--eds_infographic_primary__moss_green_100, rgba(0, 112, 121, 1))"
           height="24px"
           viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ exports[`Banner Matches snapshot 1`] = `
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            class=""
+            class="Icon__StyledPath-sc-6evbi1-1"
             clip-rule="evenodd"
             d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
             data-testid="eds-icon-path"
@@ -92,7 +92,7 @@ exports[`Banner Matches snapshot 1`] = `
         </svg>
       </span>
       <p
-        class="c2 "
+        class="c2 BannerMessage__StyledBannerMessage-sc-1lfqos1-0"
       >
         Banner message
       </p>

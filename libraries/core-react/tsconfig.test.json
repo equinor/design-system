@@ -1,19 +1,15 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "./dist/types",
-    "noEmit": false,
-    "emitDeclarationOnly": true,
+    "declaration": false,
+    "noEmit": true,
     "isolatedModules": true,
-    "outDir": "./dist",
     "baseUrl": "."
   },
-  "include": ["./src/**/*"],
+  "include": ["src/**/*.test.ts*",],
   "exclude": [
     "node_modules",
     "src/**/*.stories.ts*",
-    "src/**/*.test.ts*",
     "src/stories",
     "src/test"
   ]

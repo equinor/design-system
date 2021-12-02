@@ -1,4 +1,3 @@
-import 'focus-visible'
 /* eslint-disable import/prefer-default-export */
 export * from './components/Button'
 export * from './components/Typography'

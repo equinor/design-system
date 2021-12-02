@@ -150,18 +150,4 @@ describe('Typography', () => {
     expect(typography).toHaveStyleRule('margin-top', '16px')
     expect(typography).toHaveStyleRule('margin-bottom', '32px')
   })
-  it('links get attribute data-focus-visible-added when focused', () => {
-    render(
-      <Typography link href="#">
-        Link
-      </Typography>,
-    )
-
-    const typography = screen.getByText('Link')
-
-    typography.focus()
-
-    expect(typography).toHaveAttribute('data-focus-visible-added')
-    expect(typography).toHaveFocus()
-  })
 })

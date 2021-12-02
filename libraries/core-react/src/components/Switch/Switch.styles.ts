@@ -45,6 +45,9 @@ export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
     &[data-focus-visible-added]:focus + span {
       ${outlineTemplate(theme.states.focus.outline)}
     }
+    &:focus-visible + span {
+      ${outlineTemplate(theme.states.focus.outline)}
+    }
   `,
 )
 

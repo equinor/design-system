@@ -3,14 +3,14 @@
 exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-eCApnc ctpHWT"
+    class="Slider__Wrapper-sc-n1grrg-1 jxDwAm"
     max="100"
     min="0"
     value="0"
   >
     <input
       aria-labelledby="test-one"
-      class="sc-dlnjwi jkqlDl"
+      class="SliderInput__StyledSliderInput-sc-17orw4f-0 heeaNq"
       id="test-one-thumb"
       max="100"
       min="0"
@@ -19,22 +19,22 @@ exports[`Simple slider Matches snapshot 1`] = `
       value="0"
     />
     <output
-      class="sc-gtsrHT hdPYbM"
+      class="Output__StyledOutput-sc-1dy945x-0 ebnTLx"
       for="test-one-thumb"
       value="0"
     >
       0
     </output>
     <div
-      class="sc-jSFjdj sc-gKAaRy kJxeqp jaBCMe"
+      class="Slider__WrapperGroupLabel-sc-n1grrg-2 Slider__WrapperGroupLabelDots-sc-n1grrg-3 eQFXTO hUGjhc"
     />
     <span
-      class="sc-bdnxRM hQEkFM"
+      class="MinMax__StyledMinMax-sc-lxmlid-0 kvbbns"
     >
       0
     </span>
     <span
-      class="sc-bdnxRM hQEkFM"
+      class="MinMax__StyledMinMax-sc-lxmlid-0 kvbbns"
     >
       100
     </span>
