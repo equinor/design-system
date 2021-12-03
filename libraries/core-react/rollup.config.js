@@ -1,5 +1,6 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
+import css from 'rollup-plugin-import-css'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
 import del from 'rollup-plugin-delete'
@@ -30,6 +31,7 @@ export default [
       del({ targets: 'dist/*', runOnce: true }),
       resolve({ extensions }),
       commonjs(),
+      css(),
       babel({
         babelHelpers: 'runtime',
         extensions,
