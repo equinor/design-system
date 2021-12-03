@@ -1,30 +1,36 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
-import { dialog as tokens } from './Dialog.tokens'
+import { dialog as dialogToken } from './Dialog.tokens'
+import { useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
-const StyledCustomContent = styled.div<DialogCustomContentProps>`
-  ${typographyTemplate(tokens.entities.content.typography)}
-  min-height: ${tokens.entities.content.minHeight};
-  margin-bottom: ${tokens.entities.content.spacings.bottom};
-  align-self: stretch;
-  justify-self: stretch;
-  ${spacingsTemplate(tokens.entities.children.spacings)}
+const StyledCustomContent = styled.div<DialogCustomContentProps>(
+  ({ theme, scrollable }) => {
+    return css`
+      ${typographyTemplate(theme.entities.content.typography)}
+      min-height: ${theme.entities.content.minHeight};
+      margin-bottom: ${theme.entities.content.spacings.bottom};
+      align-self: stretch;
+      justify-self: stretch;
+      ${spacingsTemplate(theme.entities.children.spacings)}
+      ${scrollable &&
+      css`
+        min-height: initial;
+        height: ${theme.entities.content.height};
+        overflow-y: auto;
+      `}
+    `
+  },
+)
 
-  ${({ scrollable }) =>
-    scrollable &&
-    css`
-      min-height: initial;
-      height: ${tokens.entities.content.height};
-      overflow-y: auto;
-    `}
-`
-
-const StyledDivider = styled(Divider)`
-  width: 100%;
-  margin-bottom: ${tokens.entities.divider.spacings.bottom};
-`
+const StyledDivider = styled(Divider)(({ theme }) => {
+  return css`
+    width: 100%;
+    margin-bottom: ${theme.entities.divider.spacings.bottom};
+  `
+})
 
 export type DialogCustomContentProps = {
   /** Control if the content should be scrollable */
@@ -40,8 +46,10 @@ export const CustomContent = forwardRef<
     ref,
     ...rest,
   }
+  const { density } = useEds()
+  const token = useToken({ density }, dialogToken)
   return (
-    <>
+    <ThemeProvider theme={token}>
       <StyledCustomContent id="eds-dialog-customcontent" {...props}>
         {children}
       </StyledCustomContent>
@@ -49,6 +57,6 @@ export const CustomContent = forwardRef<
       {children && scrollable && (
         <StyledDivider color="medium" variant="small" />
       )}
-    </>
+    </ThemeProvider>
   )
 })

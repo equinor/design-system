@@ -1,30 +1,37 @@
 import { forwardRef } from 'react'
-import styled, { css } from 'styled-components'
-import { dialog as tokens } from './Dialog.tokens'
+import styled, { css, ThemeProvider } from 'styled-components'
+import { dialog as dialogToken } from './Dialog.tokens'
 import { spacingsTemplate } from '../../utils'
+import { useEds } from '../EdsProvider'
+import { useToken } from '../../hooks'
 
-const StyledActions = styled.div<DialogActionsProps>`
-  min-height: ${tokens.entities.actions.minHeight};
-  ${spacingsTemplate(tokens.entities.children.spacings)}
-  align-self: end;
-  justify-self: start;
+const StyledActions = styled.div<DialogActionsProps>(({ theme, children }) => {
+  return css`
+    min-height: ${theme.entities.actions.minHeight};
+    ${spacingsTemplate(theme.entities.children.spacings)}
+    align-self: end;
+    justify-self: start;
 
-  ${({ children }) =>
-    !children &&
+    ${!children &&
     css`
       min-height: initial;
       height: '8px';
     `}
-`
+  `
+})
 
 export type DialogActionsProps = React.HTMLAttributes<HTMLDivElement>
 
 export const Actions = forwardRef<HTMLDivElement, DialogActionsProps>(
   function Actions({ children, ...props }, ref) {
+    const { density } = useEds()
+    const token = useToken({ density }, dialogToken)
     return (
-      <StyledActions ref={ref} {...props}>
-        {children}
-      </StyledActions>
+      <ThemeProvider theme={token}>
+        <StyledActions ref={ref} {...props}>
+          {children}
+        </StyledActions>
+      </ThemeProvider>
     )
   },
 )
