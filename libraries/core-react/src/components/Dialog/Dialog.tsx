@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import styled, { ThemeProvider } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
   spacingsTemplate,
@@ -10,21 +10,22 @@ import { dialog as dialogToken } from './Dialog.tokens'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 
-const StyledDialog = styled(Paper).attrs<DialogProps>(({ theme }) => ({
-  theme,
+const StyledDialog = styled(Paper).attrs<DialogProps>({
   tabIndex: 0,
   role: 'dialog',
   'aria-labelledby': 'eds-dialog-title',
   'aria-describedby': 'eds-dialog-customcontent',
   'aria-modal': true,
-}))`
-  width: ${dialogToken.width};
-  background: ${dialogToken.background};
-  display: grid;
-  ${typographyTemplate(dialogToken.typography)}
-  ${spacingsTemplate(dialogToken.spacings)}
-  ${bordersTemplate(dialogToken.border)}
-`
+})(({ theme }) => {
+  return css`
+    width: ${theme.width};
+    background: ${theme.background};
+    display: grid;
+    ${typographyTemplate(theme.typography)}
+    ${spacingsTemplate(theme.spacings)}
+  ${bordersTemplate(theme.border)}
+  `
+})
 
 export type DialogProps = React.HTMLAttributes<HTMLDivElement>
 
