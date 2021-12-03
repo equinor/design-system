@@ -1,6 +1,6 @@
-import { Fragment } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { TopBar, Icon, Search, TopbarProps } from '../..'
+import { TopBar, Icon, Search, TopbarProps, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 import {
@@ -105,3 +105,45 @@ export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => {
   )
 }
 WithSearchAndIcons.storyName = 'With search and icons'
+
+export const Compact: Story<TopbarProps> = (): JSX.Element => {
+  const Icons = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    > * {
+      margin-left: 40px;
+    }
+  `
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <TopBar>
+        <TopBar.Header>
+          <Icon name="grid_on" size={16} />
+          Application name - subtitle
+        </TopBar.Header>
+        <TopBar.CustomContent>
+          <Search
+            aria-label="sitewide"
+            id="search-normal"
+            placeholder="Search"
+          />
+        </TopBar.CustomContent>
+        <TopBar.Actions>
+          <Icons>
+            <Icon name="account_circle" size={16} title="user" />
+            <Icon name="accessible" size={16} />
+            <Icon name="notifications" size={16} />
+            <Icon name="fullscreen" size={16} />
+          </Icons>
+        </TopBar.Actions>
+      </TopBar>
+    </EdsProvider>
+  )
+}
