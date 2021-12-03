@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { Typography, Button, Popover, PopoverProps, Icon, Tooltip } from '../..'
+import {
+  Typography,
+  Button,
+  Popover,
+  PopoverProps,
+  Icon,
+  Tooltip,
+  EdsProvider,
+  Density,
+} from '../..'
 import { more_vertical } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
 
@@ -192,5 +201,49 @@ export const WithTooltip: Story<PopoverProps> = () => {
         <Popover.Content>Content</Popover.Content>
       </Popover>
     </StoryCenter>
+  )
+}
+
+export const Compact: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <StoryCenter>
+        <Button
+          id="click-popover-anchor"
+          aria-controls="click-popover"
+          ref={anchorRef}
+          onClick={openPopover}
+        >
+          Click to activate
+        </Button>
+
+        <Popover
+          id="click-popover"
+          aria-expanded={isOpen}
+          anchorEl={anchorRef.current}
+          onClose={closePopover}
+          open={isOpen}
+        >
+          <Popover.Title>Title</Popover.Title>
+          <Popover.Content>
+            <Typography variant="body_short">Content</Typography>
+          </Popover.Content>
+          <Button onClick={closePopover}>OK</Button>
+        </Popover>
+      </StoryCenter>
+    </EdsProvider>
   )
 }

@@ -21,6 +21,7 @@ const {
   shape: {
     corners: { borderRadius },
   },
+  shape,
 } = tokens
 
 type Popover = ComponentToken
@@ -64,5 +65,10 @@ export const popover: Popover = {
   border: {
     type: 'border',
     radius: borderRadius,
+  },
+  modes: {
+    compact: {
+      height: shape._modes.compact.straight.minHeight,
+    },
   },
 }
