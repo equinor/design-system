@@ -17,7 +17,6 @@ const {
   shape: {
     corners: { borderRadius },
   },
-  shape,
 } = tokens
 
 type DialogToken = ComponentToken
@@ -61,11 +60,6 @@ export const dialog: DialogToken = {
     },
     actions: {
       minHeight: '48px',
-    },
-  },
-  modes: {
-    compact: {
-      height: shape._modes.compact.straight.minHeight,
     },
   },
 }
