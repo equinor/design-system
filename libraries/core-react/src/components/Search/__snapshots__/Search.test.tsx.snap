@@ -72,12 +72,12 @@ exports[`Search Matches snapshot 1`] = `
   outline-offset: 0px;
 }
 
-.c2:focus-visible {
+.c3:focus-visible {
   outline: 1px dashed rgba(0,112,121,1);
   outline-offset: 0px;
 }
 
-.c2::-moz-focus-inner {
+.c3::-moz-focus-inner {
   border: 0;
 }
 
