@@ -1,39 +1,39 @@
 import { useState, useEffect, HTMLAttributes, forwardRef, useRef } from 'react'
 import * as ReactDom from 'react-dom'
-import styled, { css } from 'styled-components'
-import { snackbar as tokens } from './Snackbar.tokens'
+import styled, { css, ThemeProvider } from 'styled-components'
+import { snackbar as SnackbarToken } from './Snackbar.tokens'
 import {
   typographyTemplate,
   spacingsTemplate,
   bordersTemplate,
 } from '../../utils'
 import { Paper } from '../Paper'
+import { useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 type StyledProps = Pick<SnackbarProps, 'placement'>
 
-const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
-  role: 'alert',
-}))<StyledProps>`
-  position: fixed;
-  background-color: ${tokens.background};
-  ${spacingsTemplate(tokens.spacings)}
-  ${bordersTemplate(tokens.border)}
-  ${typographyTemplate(tokens.typography)}
-  min-height: ${tokens.minHeight};
-  box-sizing: border-box;
-  z-index: 300;
+const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, placement }) => {
+  return css`
+    position: fixed;
+    background-color: ${theme.background};
+    ${spacingsTemplate(theme.spacings)}
+    ${bordersTemplate(theme.border)}
+    ${typographyTemplate(theme.typography)}
+    min-height: ${theme.minHeight};
+    box-sizing: border-box;
+    z-index: 300;
 
-  ${({ placement }) =>
-    css({
+    ${{
       top: placement.includes('top')
-        ? tokens.spacings.top
+        ? theme.spacings.top
         : placement === 'left' || placement === 'right'
         ? '50%'
         : undefined,
-      bottom: placement.includes('bottom') ? tokens.spacings.bottom : undefined,
-      right: placement.includes('right') ? tokens.spacings.right : undefined,
+      bottom: placement.includes('bottom') ? theme.spacings.bottom : undefined,
+      right: placement.includes('right') ? theme.spacings.right : undefined,
       left: placement.includes('left')
-        ? tokens.spacings.left
+        ? theme.spacings.left
         : placement === 'top' || placement === 'bottom'
         ? '50%'
         : undefined,
@@ -43,12 +43,14 @@ const StyledSnackbar = styled(Paper).attrs<StyledProps>(() => ({
           : placement === 'top' || placement === 'bottom'
           ? 'translateX(-50%)'
           : undefined,
-    })}
-  a,
-  button {
-    color: ${tokens.entities.button.typography.color};
-  }
-`
+    }}
+
+    a,
+    button {
+      color: ${theme.entities.button.typography.color};
+    }
+  `
+})
 
 export type SnackbarProps = {
   /**  Controls the visibility of the snackbar */
@@ -104,16 +106,19 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       placement,
       ...rest,
     }
+    const { density } = useEds()
+    const token = useToken({ density }, SnackbarToken)
+
     return (
-      <>
+      <ThemeProvider theme={token}>
         {visible &&
           ReactDom.createPortal(
-            <StyledSnackbar elevation="overlay" {...props}>
+            <StyledSnackbar role="alert" elevation="overlay" {...props}>
               {children}
             </StyledSnackbar>,
             document.body,
           )}
-      </>
+      </ThemeProvider>
     )
   },
 )
