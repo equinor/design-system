@@ -53,7 +53,6 @@ dependencies:
   '@equinor/eds-tokens': link:../tokens
   '@popperjs/core': 2.9.2
   downshift: 6.1.7_react@17.0.2
-  ramda: 0.27.1
   react-fast-compare: 3.2.0
   react-popper: 2.2.5_a16f30364266ce234ee1188a6d27cb60
 
@@ -87,6 +86,7 @@ devDependencies:
   jest: 27.0.6
   jest-styled-components: 7.0.5_styled-components@5.3.0
   js-file-download: 0.4.12
+  ramda: 0.27.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-hook-form: 7.11.1_react@17.0.2
@@ -11816,7 +11816,7 @@ packages:
 
   /ramda/0.27.1:
     resolution: {integrity: sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==}
-    dev: false
+    dev: true
 
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
