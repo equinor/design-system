@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import * as R from 'ramda'
+import mergeDeepRight from 'ramda/es/mergeDeepRight'
 import type { ComponentToken } from '@equinor/eds-tokens'
 import { Variants } from '../Table.types'
 
@@ -140,7 +140,7 @@ export const applyVariant = (
 ): TableCellToken => {
   switch (variant) {
     case 'numeric':
-      return R.mergeDeepRight(token, token.variants.numeric)
+      return mergeDeepRight(token, token.variants.numeric)
 
     default:
       return token

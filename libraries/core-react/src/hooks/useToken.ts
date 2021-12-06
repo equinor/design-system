@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import type { ComponentToken } from '@equinor/eds-tokens'
 import type { Density } from '../components/EdsProvider'
-import { mergeDeepRight } from 'ramda'
+import mergeDeepRight from 'ramda/es/mergeDeepRight'
 
 type UseToken = (
   options: { density: Density },

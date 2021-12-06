@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import * as R from 'ramda'
+import mergeDeepRight from 'ramda/es/mergeDeepRight'
 import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
@@ -78,7 +78,7 @@ export const select: ComponentToken = {
   },
 }
 
-export const multiSelect: ComponentToken = R.mergeDeepRight(select, {
+export const multiSelect: ComponentToken = mergeDeepRight(select, {
   spacings: {
     top: '0',
     bottom: '0',
