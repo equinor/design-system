@@ -24,7 +24,7 @@ type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
 const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
   return css`
-    ${({ open }) => css({ visibility: open ? null : 'hidden' })}
+    ${{ visibility: open ? null : 'hidden' }}
     ${typographyTemplate(theme.typography)}
     ${spacingsTemplate(theme.spacings)}
     display: grid;
