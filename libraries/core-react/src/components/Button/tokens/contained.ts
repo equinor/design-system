@@ -2,7 +2,7 @@ import { tokens } from '@equinor/eds-tokens'
 import { ButtonToken } from '../Button.types'
 import { button } from './button'
 
-import mergeDeepRight from 'ramda/es/mergeDeepRight'
+import mergeDeepRight from 'ramda/src/mergeDeepRight'
 
 const {
   colors: {

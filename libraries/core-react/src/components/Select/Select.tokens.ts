@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import mergeDeepRight from 'ramda/es/mergeDeepRight'
+import mergeDeepRight from 'ramda/src/mergeDeepRight'
 import type { ComponentToken } from '@equinor/eds-tokens'
 
 const {
