@@ -5,7 +5,6 @@ const {
   colors,
   spacings: { comfortable },
   typography: { navigation },
-  shape,
 } = tokens
 
 type TopBarToken = ComponentToken
@@ -26,11 +25,6 @@ export const topbar: TopBarToken = {
       style: 'solid',
       color: colors.ui.background__light.rgba,
       width: '2px',
-    },
-  },
-  modes: {
-    compact: {
-      height: shape._modes.compact.straight.minHeight,
     },
   },
 }

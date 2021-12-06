@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { TopBar, Icon, Search, TopbarProps, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react'
@@ -115,11 +115,7 @@ export const Compact: Story<TopbarProps> = (): JSX.Element => {
       margin-left: 40px;
     }
   `
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    setDensity('compact')
-  }, [density])
+  const [density] = useState<Density>('comfortable')
 
   return (
     <EdsProvider density={density}>

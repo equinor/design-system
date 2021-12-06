@@ -11,8 +11,6 @@ import { useEds } from '../EdsProvider'
 
 export type TopbarProps = HTMLAttributes<HTMLElement>
 
-// const { background, height, spacings, border, typography } = topbarToken
-
 const StyledTopBar = styled.header(({ theme }) => {
   return css`
     height: ${theme.height};
