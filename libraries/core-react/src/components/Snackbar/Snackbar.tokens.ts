@@ -23,7 +23,6 @@ const {
   shape: {
     button: { borderRadius: radius },
   },
-  shape,
 } = tokens
 
 type Snackbar = ComponentToken
@@ -57,10 +56,5 @@ export const snackbar: Snackbar = {
   typography: {
     ...typography,
     color,
-  },
-  modes: {
-    compact: {
-      height: shape._modes.compact.straight.minHeight,
-    },
   },
 }

@@ -1,13 +1,14 @@
 import { Children, ReactNode, forwardRef } from 'react'
-import styled from 'styled-components'
-import { snackbar as tokens } from './Snackbar.tokens'
+import styled, { css } from 'styled-components'
 
-const StyledSnackbarAction = styled.div`
-  display: inline-flex;
-  margin-left: ${tokens.entities.actions.spacings.left};
-  margin-top: ${tokens.entities.actions.spacings.top};
-  margin-bottom: ${tokens.entities.actions.spacings.bottom};
-`
+const StyledSnackbarAction = styled.div(({ theme }) => {
+  return css`
+    display: inline-flex;
+    margin-left: ${theme.entities.actions.spacings.left};
+    margin-top: ${theme.entities.actions.spacings.top};
+    margin-bottom: ${theme.entities.actions.spacings.bottom};
+  `
+})
 
 export type SnackbarActionProps = {
   children: ReactNode
