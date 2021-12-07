@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bundle pre tree-shaked ramda instead of having it as dependency to avoid security warning for users ([#1768](https://github.com/equinor/design-system/issues/1768))
+- Bundle tree-shaked ramda instead of having it as dependency to avoid security warning for users ([#1768](https://github.com/equinor/design-system/issues/1768))
 
 ## [0.16.0] - 2021-12-02
 
