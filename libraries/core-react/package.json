@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-core-react",
-  "version": "0.16.1-dev.12072021",
+  "version": "0.16.0",
   "description": "The React implementation of the Equinor Design System",
   "sideEffects": false,
   "main": "dist/core-react.cjs.js",
