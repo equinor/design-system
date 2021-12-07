@@ -178,7 +178,7 @@ exports[`Search Matches snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  box-sizing: content-box;
+  box-sizing: border-box;
   border: 1px solid transparent;
   z-index: 0;
   padding-left: 8px;
@@ -225,6 +225,7 @@ exports[`Search Matches snapshot 1`] = `
 }
 
 .c2 {
+  height: calc(36px - 4px);
   box-shadow: unset;
   margin: 0;
   color: rgba(0,0,0,1);
