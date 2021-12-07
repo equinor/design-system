@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { Meta, Story } from '@storybook/react'
-import { Banner, Icon, Button, BannerProps } from '../..'
+import { Banner, Icon, Button, BannerProps, EdsProvider, Density } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 
 const icons = {
@@ -118,3 +119,39 @@ export const IconAndTextAndActions: Story<BannerProps> = () => (
     </Banner>
   </>
 )
+
+export const Compact: Story<BannerProps> = () => {
+  const [density] = useState<Density>('comfortable')
+
+  return (
+    <EdsProvider density={density}>
+      <Banner>
+        <Banner.Icon variant="warning">
+          <Icon name="mood_sad" />
+        </Banner.Icon>
+        <Banner.Message>
+          This tag is not being preserved yet. Click start preservation to
+          enable writing preservation records.
+        </Banner.Message>
+        <Banner.Actions>
+          <Button>Action</Button>
+        </Banner.Actions>
+      </Banner>
+      <Banner>
+        <Banner.Icon>
+          <Icon name="save" />
+        </Banner.Icon>
+        <Banner.Message>
+          I&apos;m such a really really long message about some sad saving news
+          that there is not enough space for the actions on my left. That&apos;s
+          why the actions have been located at the bottom using the placement
+          prop instead.
+        </Banner.Message>
+        <Banner.Actions placement="bottom">
+          <Button>First action</Button>
+          <Button color="secondary">Second action</Button>
+        </Banner.Actions>
+      </Banner>
+    </EdsProvider>
+  )
+}

@@ -6,7 +6,7 @@ import {
   isValidElement,
   cloneElement,
 } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import * as tokens from './Banner.tokens'
 import { Icon } from '../Icon'
 import { bordersTemplate } from '../../utils'
@@ -17,22 +17,25 @@ type StyledBannerIconProps = {
   variant: BannerIconVariant
 }
 
-const { enabled, info, warning } = tokens
+const { info, warning } = tokens
 
-const StyledBannerIcon = styled.span<StyledBannerIconProps>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  ${bordersTemplate(enabled.entities.icon.border)};
-  background-color: ${({ variant }) =>
-    variant === 'warning'
-      ? warning.entities.icon.background
-      : info.entities.icon.background};
-  width: ${enabled.entities.icon.width};
-  height: ${enabled.entities.icon.height};
-  margin-right: ${enabled.spacings.right};
-`
+const StyledBannerIcon = styled.span<StyledBannerIconProps>(
+  ({ theme, variant }) => {
+    return css`
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      ${bordersTemplate(theme.entities.icon.border)};
+      background-color: ${variant === 'warning'
+        ? warning.entities.icon.background
+        : info.entities.icon.background};
+      width: ${theme.entities.icon.width};
+      height: ${theme.entities.icon.height};
+      margin-right: ${theme.spacings.right};
+    `
+  },
+)
 
 export type BannerIconProps = {
   /** Which icon background and fill color to use. Info = green, warning = red */
