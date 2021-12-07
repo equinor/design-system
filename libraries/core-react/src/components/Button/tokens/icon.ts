@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import * as R from 'ramda'
+import mergeDeepRight from 'ramda/src/mergeDeepRight'
 
 import { button } from './button'
 import { ButtonToken } from '../Button.types'
@@ -24,7 +24,7 @@ const {
   shape,
 } = tokens
 
-export const primary: ButtonToken = R.mergeDeepRight(button, {
+export const primary: ButtonToken = mergeDeepRight(button, {
   height: shape.icon_button.minHeight,
   width: shape.icon_button.minWidth,
   typography: {
@@ -84,7 +84,7 @@ export const primary: ButtonToken = R.mergeDeepRight(button, {
   },
 })
 
-export const secondary: Partial<ButtonToken> = R.mergeDeepRight(primary, {
+export const secondary: Partial<ButtonToken> = mergeDeepRight(primary, {
   typography: {
     color: secondaryColor,
   },
@@ -98,7 +98,7 @@ export const secondary: Partial<ButtonToken> = R.mergeDeepRight(primary, {
   },
 })
 
-export const danger: Partial<ButtonToken> = R.mergeDeepRight(primary, {
+export const danger: Partial<ButtonToken> = mergeDeepRight(primary, {
   typography: {
     color: dangerColor,
   },

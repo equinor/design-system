@@ -14,7 +14,7 @@ module.exports = function babelConfig(api) {
     ],
   ]
 
-  const exclude = ['node_modules/**']
+  const exclude = ['/node_modules/**']
 
   const plugins = [
     'babel-plugin-styled-components',
