@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added
 
+New icons ([#1743](https://github.com/equinor/design-system/issues/1743)) ([#1581](https://github.com/equinor/design-system/issues/1581)) ([#1734](https://github.com/equinor/design-system/issues/1734))
+
 - `ducting`
 - `electrical`
 - `fault`
@@ -38,8 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Changed
 
-- `launch` (should no longer be confused with `external_link` icon)
--
+- `launch` (should no longer be confused with `external_link` icon) ([#1742](https://github.com/equinor/design-system/issues/1742))
+- Renamed `inspectrotation` to `inspect_rotation` ([#1781](https://github.com/equinor/design-system/issues/1781))
+- Renamed `inspect3d` to `inspect_3d` ([#1781](https://github.com/equinor/design-system/issues/1781))
+- Renamed `rotate3d` to `rotate_3d` ([#1781](https://github.com/equinor/design-system/issues/1781))
 
 ## [0.8.0] - 2021-11-09
 
