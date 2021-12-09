@@ -36,14 +36,15 @@
     },
   },
   "extensions": [
-	"dbaeumer.vscode-eslint",
-	"esbenp.prettier-vscode",
-	"editorconfig.editorconfig",
-	"redhat.vscode-yaml",
-	"vtrois.gitmoji-vscode",
-	"silvenon.mdx",
-	"jock.svg"
-],
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "redhat.vscode-yaml",
+    "vtrois.gitmoji-vscode",
+    "silvenon.mdx",
+    "jock.svg",
+    "wk-j.vscode-httpie"
+  ],
   "forwardPorts": [
     9000
   ],
