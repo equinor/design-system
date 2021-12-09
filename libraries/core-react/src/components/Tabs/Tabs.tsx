@@ -1,7 +1,10 @@
 import { forwardRef, useState, HTMLAttributes } from 'react'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
-import { useId } from '../../hooks'
+import { token as tabsToken } from './Tabs.tokens'
+import { useId, useToken } from '../../hooks'
+import { ThemeProvider } from 'styled-components'
+import { useEds } from '../EdsProvider'
 
 export type TabsProps = {
   /** The index of the active tab */
@@ -50,18 +53,23 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
     onFocus && onFocus(e)
   }
 
+  const { density } = useEds()
+  const token = useToken({ density }, tabsToken)
+
   return (
-    <TabsProvider
-      value={{
-        activeTab,
-        handleChange: onChange,
-        tabsId,
-        variant,
-        tabsFocused,
-      }}
-    >
-      <div ref={ref} {...props} onBlur={handleBlur} onFocus={handleFocus} />
-    </TabsProvider>
+    <ThemeProvider theme={token}>
+      <TabsProvider
+        value={{
+          activeTab,
+          handleChange: onChange,
+          tabsId,
+          variant,
+          tabsFocused,
+        }}
+      >
+        <div ref={ref} {...props} onBlur={handleBlur} onFocus={handleFocus} />
+      </TabsProvider>
+    </ThemeProvider>
   )
 })
 
