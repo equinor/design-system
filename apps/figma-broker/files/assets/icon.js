@@ -4,7 +4,7 @@ export const makeAssetTokens = (assets, groupName) =>
   assets
     .filter((x) => x.type === 'COMPONENT')
     .map((x) => ({
-      name: propName(x.name),
+      name: propName(x.name.replace('-', ' ')),
       value: '',
       id: x.id,
       url: '',
