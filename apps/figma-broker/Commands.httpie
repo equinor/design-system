@@ -5,7 +5,7 @@
 http POST http://localhost:9001/create-tokens?fileId=0TbIXrrObWj80Cf7KucKYFL0&force=false
 
 // Generates assets from Figma
-http POST http://localhost:9001/create-assets?fileId=BQjYMxdSdgRkdhKTDDU7L4KU&force=false
+http POST http://localhost:9001/create-assets?fileId=BQjYMxdSdgRkdhKTDDU7L4KU&force=true
 
 
 

@@ -5,36 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.9.0] - 2021-12-08
+## [0.9.0] - 2021-12-09
 
 ## Added
 
-go_to
-fault
-grid_layer
-grid_layers
-hill_shading
-well
-surface_layer
-electrical
-ducting
-function
-manual_valve
-pipe_support
-heat_trace
-instrument
-junction_box
-line
-telecom
-tag_main_equipment
-tag_special_equipment
-tag_more
-thumb_pin
-log_in
-log_out
-miniplayer
-miniplayer_fullscreen
-tag_relations
+- `ducting`
+- `electrical`
+- `fault`
+- `formula`
+- `go_to`
+- `grid_layer`
+- `grid_layers`
+- `heat_trace`
+- `hill_shading`
+- `instrument`
+- `junction_box`
+- `line`
+- `log_in`
+- `log_out`
+- `manual_valve`
+- `miniplayer_fullscreen`
+- `miniplayer`
+- `pipe_support`
+- `surface_layer`
+- `tag_main_equipment`
+- `tag_more`
+- `tag_relations`
+- `tag_special_equipment`
+- `telecom`
+- `thumb_pin`
+- `well`
 
 ## Changed
 
