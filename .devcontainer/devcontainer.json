@@ -54,7 +54,7 @@
   "features": {
     "docker-in-docker": "20.10",
     "docker-from-docker": "20.10",
-    "git": "2.33.1",
-    "github-cli": "2.2.0"
+    "git": "latest",
+    "github-cli": "latest"
   }
 }
