@@ -397,8 +397,8 @@ export const invert: IconData = {
     'M11.553 2.106a1 1 0 0 1 .894 0l8 4A1 1 0 0 1 21 7v10a1 1 0 0 1-.553.894l-8 4a1 1 0 0 1-.894 0l-8-4A1 1 0 0 1 3 17V7a1 1 0 0 1 .553-.894l8-4zM5 8.618 12 12v7.882l-7-3.5V8.618zm7 1.264L6.236 7 12 4.118v5.764z',
 }
 
-export const inspectrotation: IconData = {
-  name: 'inspectrotation',
+export const inspect_rotation: IconData = {
+  name: 'inspect_rotation',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -406,8 +406,8 @@ export const inspectrotation: IconData = {
     'M12 5a8 8 0 1 0 5.646 2.333l1.412-1.417A9.972 9.972 0 0 1 22 13c0 5.523-4.477 10-10 10S2 18.523 2 13 6.477 3 12 3v2z',
 }
 
-export const inspect3d: IconData = {
-  name: 'inspect3d',
+export const inspect_3d: IconData = {
+  name: 'inspect_3d',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -4284,8 +4284,8 @@ export const keyboard_tab: IconData = {
     'm15.67 11-3.58-3.59L13.5 6l6 6-6 6-1.42-1.41L15.67 13H1.5v-2h14.17zm6.83 7h-2V6h2v12z',
 }
 
-export const rotate3d: IconData = {
-  name: 'rotate3d',
+export const rotate_3d: IconData = {
+  name: 'rotate_3d',
   prefix: 'eds',
   height: '24',
   width: '24',
