@@ -58,7 +58,7 @@ const writeJsFile = (assets) => {
     R.map((iconGroups) =>
       R.pipe(
         R.reduce((acc, icon) => {
-          const { name, height, width, pathData } = icon
+          const { name, height, width, svgPathData } = icon
 
           const svgObj = `
 export const ${name}: IconData = {
@@ -66,7 +66,7 @@ export const ${name}: IconData = {
   prefix: '${prefix}',
   height: '${height}',
   width: '${width}',
-  svgPathData: '${pathData}',
+  svgPathData: '${svgPathData}',
 }
 `
           return `${acc}${svgObj}`
