@@ -67,5 +67,6 @@ export const rootFontSize = 16
 
 1. Log into figma.com and create a personal access token
 1. Paste the token in a Codespaces secret on Github that you call FIGMA_TOKEN _or_ create a .env file in the root of the application if you party like it’s 1999 😎
-1. Start the application with `pnpm start` or `pnpm run develop` for development
-1. Run commands from Commands.httpie by clicking the lines prefixed with ⚡ (requires the httpie vs code extension and a locally installed version of httpie)
+1. Run `pnpm install --filter ./apps/figma-broker` from the root of the repo
+1. Run `pnpm figma-broker dev` from the root of the repo to run in dev mode if you’re developing on the application _or_ run `pnpm figma-broker start` if you’re just using it
+1. Run commands from [Commands.httpie](./Commands.httpie) by clicking the lines prefixed with ⚡ (requires the httpie vs code extension and a locally installed version of httpie – already installed if you use Codespaces)

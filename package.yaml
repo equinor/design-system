@@ -12,7 +12,7 @@ scripts:
   build:icons: pnpm --filter @equinor/eds-icons run build
   storybook: pnpm --filter ./libraries/core-react run storybook
   build:storybook: pnpm --filter ./libraries/core-react run build:storybook
-  figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
+  figma-broker: pnpm --filter @equinor/eds-figma-broker
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
 devDependencies:
