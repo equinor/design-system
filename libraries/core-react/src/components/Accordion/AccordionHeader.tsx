@@ -46,7 +46,8 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
   }),
 )<StyledAccordionHeaderProps>(({ theme, disabled, parentIndex }) => {
   const {
-    entities: { header, icon: iconToken, border },
+    entities: { header, icon: iconToken },
+    border,
   } = theme
   return css`
     ${typographyTemplate(header.typography)}

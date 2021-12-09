@@ -20,7 +20,8 @@ const StyledAccordionPanel = styled.div.attrs(
   }),
 )<StyledAccordionPanelProps>(({ theme }) => {
   const {
-    entities: { header, panel, border },
+    entities: { header, panel },
+    border,
   } = theme
   return css`
     ${bordersTemplate(border)}
