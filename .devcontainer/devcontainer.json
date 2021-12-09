@@ -19,6 +19,9 @@
     "git.rebaseWhenSync": true,
     "git.autofetch": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[svg]": {
+      "editor.defaultFormatter": "jock.svg"
+    },
     /* pretter-vscode needs this line to find the locally installed prettier */
     "prettier.prettierPath": "./node_modules/prettier",
     "editor.formatOnSave": true,
@@ -39,6 +42,7 @@
     "redhat.vscode-yaml",
     "vtrois.gitmoji-vscode",
     "silvenon.mdx",
+    "jock.svg"
   ],
   "forwardPorts": [
     9000
