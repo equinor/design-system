@@ -21,7 +21,7 @@ import {
 } from '../../utils'
 
 const {
-  entities: { header, chevron: chevronToken, icon: iconToken },
+  entities: { chevron: chevronToken },
 } = tokens
 
 type StyledAccordionHeaderProps = {
@@ -44,25 +44,28 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
     tabIndex: disabled ? -1 : 0,
     disabled,
   }),
-)<StyledAccordionHeaderProps>`
-  ${typographyTemplate(header.typography)}
-  ${bordersTemplate(tokens.border)}
-  ${spacingsTemplate(header.spacings)}
-  &[data-focus-visible-added]:focus {
-    ${outlineTemplate(header.states.focus.outline)}
-  }
-  &:focus-visible {
-    ${outlineTemplate(header.states.focus.outline)}
-  }
-  border-top: ${({ parentIndex }) => (parentIndex === 0 ? null : 'none')};
-  background: ${header.background};
-  height: ${header.height};
-  margin: 0;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  ${({ disabled }) =>
-    disabled
+)<StyledAccordionHeaderProps>(({ theme, disabled, parentIndex }) => {
+  const {
+    entities: { header, icon: iconToken, border },
+  } = theme
+  return css`
+    ${typographyTemplate(header.typography)}
+    ${bordersTemplate(border)}
+    ${spacingsTemplate(header.spacings)}
+    &[data-focus-visible-added]:focus {
+      ${outlineTemplate(header.states.focus.outline)}
+    }
+    &:focus-visible {
+      ${outlineTemplate(header.states.focus.outline)}
+    }
+    border-top: ${parentIndex === 0 ? null : 'none'};
+    background: ${header.background};
+    height: ${header.height};
+    margin: 0;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    ${disabled
       ? css({
           color: header.states.disabled.typography.color,
           cursor: 'not-allowed',
@@ -76,10 +79,12 @@ const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
             },
           },
         })}
-  > svg {
-    color: ${iconToken.typography.color};
-  }
-`
+    > svg {
+      color: ${iconToken.typography.color};
+    }
+  `
+})
+
 type StyledIconProps = Omit<AccordionProps, 'headerLevel'>
 
 const StyledIcon = styled(Icon)(({ chevronPosition }: StyledIconProps) =>

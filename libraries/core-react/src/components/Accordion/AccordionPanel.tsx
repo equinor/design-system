@@ -1,11 +1,6 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
-import { accordion as tokens } from './Accordion.tokens'
+import styled, { css } from 'styled-components'
 import { bordersTemplate, spacingsTemplate } from '../../utils'
-
-const {
-  entities: { header, panel },
-} = tokens
 
 export type AccordionPanelProps = {
   /** The ID of the element that controls the panel */
@@ -23,13 +18,18 @@ const StyledAccordionPanel = styled.div.attrs(
     role: 'region',
     'aria-labelledby': headerId,
   }),
-)<StyledAccordionPanelProps>`
-  ${bordersTemplate(tokens.border)}
-  ${spacingsTemplate(panel.spacings)}
-  background: ${header.background};
-  min-height: 96px;
-  box-sizing: border-box;
-`
+)<StyledAccordionPanelProps>(({ theme }) => {
+  const {
+    entities: { header, panel, border },
+  } = theme
+  return css`
+    ${bordersTemplate(border)}
+    ${spacingsTemplate(panel.spacings)}
+    background: ${header.background};
+    min-height: 96px;
+    box-sizing: border-box;
+  `
+})
 
 const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>(
   function AccordionPanel({ id, headerId, hidden, children, ...props }, ref) {

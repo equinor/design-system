@@ -1,6 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
-import { accordion as tokens } from './Accordion.tokens'
+import styled, { css } from 'styled-components'
 
 export type AccordionHeaderTitleProps = {
   /**  Is AccordionItem expanded */
@@ -9,18 +8,21 @@ export type AccordionHeaderTitleProps = {
   disabled?: boolean
 } & HTMLAttributes<HTMLSpanElement>
 
-const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>`
-  flex: 1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  text-align: left;
-  font-family: Equinor;
-  color: ${({ isExpanded, disabled }) =>
-    isExpanded && !disabled
-      ? tokens.entities.header.states.active.typography?.color
-      : 'inherit'};
-`
+const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>(
+  ({ theme, isExpanded, disabled }) => {
+    return css`
+      flex: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: left;
+      font-family: Equinor;
+      color: ${isExpanded && !disabled
+        ? theme.entities.header.states.active.typography?.color
+        : 'inherit'};
+    `
+  },
+)
 
 const AccordionHeaderTitle = forwardRef<
   HTMLSpanElement,
