@@ -7,9 +7,14 @@
     <title>font subset test</title>
     <style>
       @import 'subset.css';
-
+      :root {
+        --unit: clamp(2rem, 4vw, 3rem);
+      }
+      body {
+        margin: var(--unit);
+      }
       p {
-        font-size: 3rem;
+        font-size: var(--unit);
         font-family: Equinor, cursive;
       }
     </style>

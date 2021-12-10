@@ -11,7 +11,7 @@ scripts:
   build:tokens: pnpm --filter @equinor/eds-tokens run build
   build:icons: pnpm --filter @equinor/eds-icons run build
   storybook: pnpm --filter ./libraries/core-react run storybook
-  graphics: pnpm --filter ./graphics/storefront run dev
+  graphics: pnpm --filter ./graphics/woman run dev
   build:storybook: pnpm --filter ./libraries/core-react run build:storybook
   figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
