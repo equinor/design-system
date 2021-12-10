@@ -52,6 +52,10 @@
       "label": "Storybook",
       "onAutoForward": "notify",
     },
+    "3000": {
+      "label": "Graphics",
+      "onAutoForward": "notify",
+    },
   },
   "onCreateCommand": "pnpm install && pnpm recursive install --filter ./libraries",
   "remoteUser": "node",
