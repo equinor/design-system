@@ -1,5 +1,6 @@
 /* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
+import postcss from 'rollup-plugin-postcss'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
 import del from 'rollup-plugin-delete'
@@ -30,6 +31,10 @@ export default [
       del({ targets: 'dist/*', runOnce: true }),
       resolve({ extensions }),
       commonjs(),
+      postcss({
+        extensions: ['.css'],
+        extract: false,
+      }),
       babel({
         babelHelpers: 'runtime',
         extensions,
