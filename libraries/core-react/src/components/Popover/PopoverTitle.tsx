@@ -1,23 +1,25 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 
-import { popover as tokens } from './Popover.tokens'
+const StyledPopoverTitle = styled.div(({ theme }) => {
+  return css`
+    margin-right: ${theme.entities.closeButton.width};
+    max-width: calc(${theme.maxWidth} - ${theme.entities.closeButton.width});
+    overflow: hidden;
+    margin-top: -${theme.entities.title.spacings.top};
+  `
+})
 
-const StyledPopoverTitle = styled.div`
-  margin-right: ${tokens.entities.closeButton.width};
-  max-width: calc(${tokens.maxWidth} - ${tokens.entities.closeButton.width});
-  overflow: hidden;
-  margin-top: -${tokens.entities.title.spacings.top};
-`
-
-const StyledDivider = styled(Divider)`
-  margin-left: -${tokens.spacings.left};
-  margin-right: -${tokens.spacings.right};
-  margin-bottom: 0;
-  width: auto;
-  max-width: ${tokens.maxWidth};
-`
+const StyledDivider = styled(Divider)(({ theme }) => {
+  return css`
+    margin-left: -${theme.spacings.left};
+    margin-right: -${theme.spacings.right};
+    margin-bottom: 0;
+    width: auto;
+    max-width: ${theme.maxWidth};
+  `
+})
 
 export type PopoverTitleProps = HTMLAttributes<HTMLDivElement>
 
