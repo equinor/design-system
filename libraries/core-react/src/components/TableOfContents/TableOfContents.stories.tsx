@@ -188,7 +188,7 @@ export const Example: Story<TableOfContentsProps> = (args) => {
   )
 }
 
-export const Compact: Story<TableOfContentsProps> = (args) => {
+export const Compact: Story<TableOfContentsProps> = () => {
   const [density] = useState<Density>('comfortable')
 
   return (
@@ -212,7 +212,7 @@ export const Compact: Story<TableOfContentsProps> = (args) => {
               sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
               dit lot.
             </Typography>
-            <Typography variant="h2" id="sub-section-one">
+            <Typography variant="h2" id="sub-section-compact-one">
               Topic 1
             </Typography>
             <Typography variant="body_long">
@@ -246,7 +246,7 @@ export const Compact: Story<TableOfContentsProps> = (args) => {
               sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
               dit lot.
             </Typography>
-            <Typography variant="h2" id="sub-section-two">
+            <Typography variant="h2" id="sub-section-compact-two">
               A very long topic to test implementation details
             </Typography>
             <Typography variant="body_long">
@@ -290,7 +290,7 @@ export const Compact: Story<TableOfContentsProps> = (args) => {
               sit amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur
               dit lot.
             </Typography>
-            <Typography variant="h2" id="sub-section-three">
+            <Typography variant="h2" id="sub-section-compact-three">
               Topic 3
             </Typography>
             <Typography variant="body_long">
@@ -312,21 +312,33 @@ export const Compact: Story<TableOfContentsProps> = (args) => {
           </article>
         </main>
         <aside>
-          <TableOfContents {...args}>
+          <TableOfContents>
             <TableOfContents.LinkItem>
-              <Typography variant="body_short" link href="#sub-section-one">
+              <Typography
+                variant="body_short"
+                link
+                href="#sub-section-compact-one"
+              >
                 <Icon name="subdirectory_arrow_right" size={16} />
                 <span>Topic 1</span>
               </Typography>
             </TableOfContents.LinkItem>
             <TableOfContents.LinkItem title="A very long topic to test proper implementation">
-              <Typography variant="body_short" link href="#sub-section-two">
+              <Typography
+                variant="body_short"
+                link
+                href="#sub-section-compact-two"
+              >
                 <Icon name="subdirectory_arrow_right" size={16} />
                 <span>A very long topic to test proper implementation</span>
               </Typography>
             </TableOfContents.LinkItem>
             <TableOfContents.LinkItem>
-              <Typography variant="body_short" link href="#sub-section-three">
+              <Typography
+                variant="body_short"
+                link
+                href="#sub-section-compact-three"
+              >
                 <Icon name="subdirectory_arrow_right" size={16} />
                 <span>Topic 3</span>
               </Typography>
