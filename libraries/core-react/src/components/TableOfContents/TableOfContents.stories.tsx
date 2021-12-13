@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import {
   Icon,
@@ -189,7 +189,12 @@ export const Example: Story<TableOfContentsProps> = (args) => {
 }
 
 export const Compact: Story<TableOfContentsProps> = () => {
-  const [density] = useState<Density>('comfortable')
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
   return (
     <EdsProvider density={density}>

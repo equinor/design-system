@@ -86,4 +86,7 @@ export const tableOfContents: TableOfContentsType = {
       },
     },
   },
+  modes: {
+    compact: {},
+  },
 }
