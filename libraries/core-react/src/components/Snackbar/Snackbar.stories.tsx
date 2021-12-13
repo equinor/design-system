@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Snackbar, SnackbarProps, Button } from '../..'
+import { useState, useEffect } from 'react'
+import { Snackbar, SnackbarProps, Button, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {
@@ -30,6 +30,7 @@ export const Default: Story<SnackbarProps> = (args) => {
     </>
   )
 }
+
 export const Simple: Story<SnackbarProps> = () => {
   const [open, setOpen] = useState(false)
 
@@ -67,3 +68,28 @@ export const WithAction: Story<SnackbarProps> = () => {
 }
 
 WithAction.storyName = 'With action'
+
+export const Compact: Story<SnackbarProps> = () => {
+  const [open, setOpen] = useState(false)
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Button type="button" onClick={() => setOpen(true)}>
+        Show a simple compact snackbar
+      </Button>
+      <Snackbar
+        open={open}
+        onClose={() => setOpen(false)}
+        autoHideDuration={5000}
+      >
+        Message goes here
+      </Snackbar>
+    </EdsProvider>
+  )
+}

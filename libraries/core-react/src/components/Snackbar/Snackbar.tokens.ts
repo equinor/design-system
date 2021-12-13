@@ -57,4 +57,7 @@ export const snackbar: Snackbar = {
     ...typography,
     color,
   },
+  modes: {
+    compact: {},
+  },
 }
