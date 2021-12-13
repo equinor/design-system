@@ -1,8 +1,5 @@
 import { forwardRef, HTMLAttributes, ReactNode } from 'react'
-import styled from 'styled-components'
-import * as tokens from './Banner.tokens'
-
-const { enabled } = tokens
+import styled, { css } from 'styled-components'
 
 type BannerActionsPlacement = 'bottom' | 'left'
 
@@ -11,17 +8,20 @@ type StyledBannerActionsProps = {
   placement: BannerActionsPlacement
 }
 
-const StyledBannerActions = styled.div<StyledBannerActionsProps>`
-  display: flex;
-  margin-left: ${enabled.spacings.left};
-  grid-gap: 8px;
-  grid-column: ${({ placement }) => (placement === 'bottom' ? '1/-1' : 'auto')};
-  ${({ placement }) =>
-    placement === 'bottom' && {
-      marginTop: enabled.spacings.top,
-      marginLeft: '0',
-    }}
-`
+const StyledBannerActions = styled.div<StyledBannerActionsProps>(
+  ({ theme, placement }) => {
+    return css`
+      display: flex;
+      margin-left: ${theme.spacings.left};
+      grid-gap: 8px;
+      grid-column: ${placement === 'bottom' ? '1/-1' : 'auto'};
+      ${placement === 'bottom' && {
+        marginTop: theme.spacings.top,
+        marginLeft: '0',
+      }}
+    `
+  },
+)
 
 export type BannerActionsProps = {
   children: ReactNode

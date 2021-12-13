@@ -5,11 +5,13 @@ import {
   ReactNode,
   Children as ReactChildren,
 } from 'react'
-import styled from 'styled-components'
-import * as tokens from './Banner.tokens'
+import styled, { css, ThemeProvider } from 'styled-components'
+import { enabled as bannerToken } from './Banner.tokens'
 import { Divider } from '../Divider'
 import { BannerIcon } from './BannerIcon'
 import { spacingsTemplate } from '../../utils'
+import { useEds } from '../EdsProvider'
+import { useToken } from '../../hooks'
 
 const StyledBanner = styled.div``
 
@@ -17,17 +19,16 @@ type ContentProps = {
   hasIcon: boolean
 }
 
-const { enabled } = tokens
+const Content = styled.div<ContentProps>(({ theme, hasIcon }) => {
+  return css`
+    ${spacingsTemplate(theme.spacings)}
 
-const Content = styled.div<ContentProps>`
-  ${spacingsTemplate(enabled.spacings)}
-
-  display: grid;
-  grid-template-columns: ${({ hasIcon }) =>
-    hasIcon ? 'min-content 1fr auto' : '1fr auto'};
-  align-items: center;
-  background-color: ${enabled.background};
-`
+    display: grid;
+    grid-template-columns: ${hasIcon ? 'min-content 1fr auto' : '1fr auto'};
+    align-items: center;
+    background-color: ${theme.background};
+  `
+})
 
 const NonMarginDivider = styled(Divider)`
   margin: 0;
@@ -55,10 +56,15 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
     ...rest,
   }
 
+  const { density } = useEds()
+  const token = useToken({ density }, bannerToken)
+
   return (
-    <StyledBanner {...props} className={className} role="alert">
-      <Content hasIcon={hasIcon}>{children}</Content>
-      <NonMarginDivider color="light" />
-    </StyledBanner>
+    <ThemeProvider theme={token}>
+      <StyledBanner {...props} className={className} role="alert">
+        <Content hasIcon={hasIcon}>{children}</Content>
+        <NonMarginDivider color="light" />
+      </StyledBanner>
+    </ThemeProvider>
   )
 })
