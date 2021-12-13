@@ -211,7 +211,12 @@ export const Compact: Story<PopoverProps> = () => {
   const openPopover = () => setIsOpen(true)
   const closePopover = () => setIsOpen(false)
 
-  const [density] = useState<Density>('comfortable')
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
   return (
     <EdsProvider density={density}>
