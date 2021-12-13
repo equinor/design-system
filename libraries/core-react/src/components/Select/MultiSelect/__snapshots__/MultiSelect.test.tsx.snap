@@ -140,6 +140,7 @@ exports[`MultiSelect Matches snapshot 2`] = `
   height: 24px;
   width: 24px;
   top: 6px;
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
 }
 
 @media (hover:hover) and (pointer:fine) {
