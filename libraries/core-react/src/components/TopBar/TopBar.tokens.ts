@@ -27,4 +27,7 @@ export const topbar: TopBarToken = {
       width: '2px',
     },
   },
+  modes: {
+    compact: {},
+  },
 }
