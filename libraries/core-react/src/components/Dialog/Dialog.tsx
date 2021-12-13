@@ -1,27 +1,31 @@
 import { forwardRef } from 'react'
-import styled from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
   spacingsTemplate,
   bordersTemplate,
 } from '../../utils'
-import { dialog as tokens } from './Dialog.tokens'
 import { Paper } from '../Paper'
+import { dialog as dialogToken } from './Dialog.tokens'
+import { useEds } from '../EdsProvider'
+import { useToken } from '../../hooks'
 
-const StyledDialog = styled(Paper).attrs<DialogProps>(() => ({
+const StyledDialog = styled(Paper).attrs<DialogProps>({
   tabIndex: 0,
   role: 'dialog',
   'aria-labelledby': 'eds-dialog-title',
   'aria-describedby': 'eds-dialog-customcontent',
   'aria-modal': true,
-}))`
-  width: ${tokens.width};
-  background: ${tokens.background};
-  display: grid;
-  ${typographyTemplate(tokens.typography)}
-  ${spacingsTemplate(tokens.spacings)}
-  ${bordersTemplate(tokens.border)}
-`
+})(({ theme }) => {
+  return css`
+    width: ${theme.width};
+    background: ${theme.background};
+    display: grid;
+    ${typographyTemplate(theme.typography)}
+    ${spacingsTemplate(theme.spacings)}
+  ${bordersTemplate(theme.border)}
+  `
+})
 
 export type DialogProps = React.HTMLAttributes<HTMLDivElement>
 
@@ -29,10 +33,15 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
   { children, ...props },
   ref,
 ) {
+  const { density } = useEds()
+  const token = useToken({ density }, dialogToken)
+
   return (
-    <StyledDialog elevation="above_scrim" {...props} ref={ref}>
-      {children}
-    </StyledDialog>
+    <ThemeProvider theme={token}>
+      <StyledDialog elevation="above_scrim" {...props} ref={ref}>
+        {children}
+      </StyledDialog>
+    </ThemeProvider>
   )
 })
 

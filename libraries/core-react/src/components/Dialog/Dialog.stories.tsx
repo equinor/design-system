@@ -1,5 +1,13 @@
-import { Fragment, useState } from 'react'
-import { Dialog, DialogProps, Button, Scrim, Typography } from '../..'
+import { Fragment, useState, useEffect } from 'react'
+import {
+  Dialog,
+  DialogProps,
+  Button,
+  Scrim,
+  Typography,
+  EdsProvider,
+  Density,
+} from '../..'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
@@ -180,3 +188,29 @@ export const NoTitle: Story<DialogProps> = () => (
     </Dialog.Actions>
   </Dialog>
 )
+
+export const Compact: Story<DialogProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Dialog>
+        <Dialog.Title>Compact</Dialog.Title>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">Small description here.</Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button>OK</Button>
+            <Button variant="ghost">Cancel</Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </EdsProvider>
+  )
+}
