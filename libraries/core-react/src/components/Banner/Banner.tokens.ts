@@ -52,6 +52,9 @@ export const enabled: BannerToken = {
       },
     },
   },
+  modes: {
+    compact: {},
+  },
 }
 
 export const info: BannerToken = {
@@ -63,6 +66,9 @@ export const info: BannerToken = {
       },
     },
   },
+  modes: {
+    compact: {},
+  },
 }
 
 export const warning: BannerToken = {
@@ -73,5 +79,8 @@ export const warning: BannerToken = {
         color: warningColor,
       },
     },
+  },
+  modes: {
+    compact: {},
   },
 }

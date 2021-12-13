@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Meta, Story } from '@storybook/react'
 import { Banner, Icon, Button, BannerProps, EdsProvider, Density } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
@@ -121,7 +121,12 @@ export const IconAndTextAndActions: Story<BannerProps> = () => (
 )
 
 export const Compact: Story<BannerProps> = () => {
-  const [density] = useState<Density>('comfortable')
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
   return (
     <EdsProvider density={density}>
