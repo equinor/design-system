@@ -48,7 +48,7 @@ const Container = styled.span<ContainerProps>(
       grid-auto-flow: column;
       grid-auto-columns: max-content auto max-content;
       align-items: center;
-      box-sizing: content-box;
+      box-sizing: border-box;
       ${bordersTemplate(border)}
       z-index: 0;
 
@@ -101,7 +101,7 @@ const Container = styled.span<ContainerProps>(
 
 const SearchInput = styled(Input)(({ theme, disabled }) => {
   return css`
-    height: calc(${theme.height} - 2px);
+    height: calc(${theme.height} - 4px);
     box-shadow: unset;
     &[type='search']::-webkit-search-decoration,
     &[type='search']::-webkit-search-cancel-button,

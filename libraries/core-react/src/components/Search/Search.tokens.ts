@@ -28,7 +28,7 @@ type SearchToken = ComponentToken
 export const search: SearchToken = {
   background,
   typography,
-  height: '34px', // deduct 2px borders because of content-bpx
+  height: '36px',
   clickbound: {
     offset: { top: '6px' },
     height: '48px',
