@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { Tabs, TabsProps, Typography, Search } from '../..'
+import {
+  Tabs,
+  TabsProps,
+  Typography,
+  Search,
+  EdsProvider,
+  Density,
+} from '../..'
 import { Story, Meta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
@@ -260,6 +267,31 @@ export const WithStyledComponent: Story<TabsProps> = () => {
         </Tabs.Panels>
       </Tabs>
     </>
+  )
+}
+
+export const Compact: Story<TabsProps> = () => {
+  const focusedRef = useRef<HTMLButtonElement>(null)
+  const [density] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    focusedRef.current.focus()
+  }, [])
+
+  return (
+    <EdsProvider density={density}>
+      <Tabs activeTab={2} onChange={noop}>
+        <Tabs.List>
+          <Tabs.Tab>Enabled</Tabs.Tab>
+          <Tabs.Tab disabled>Disabled</Tabs.Tab>
+          <Tabs.Tab active>Active</Tabs.Tab>
+          <Tabs.Tab data-hover>Hover</Tabs.Tab>
+          <Tabs.Tab data-focus ref={focusedRef}>
+            Focus
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs>
+    </EdsProvider>
   )
 }
 
