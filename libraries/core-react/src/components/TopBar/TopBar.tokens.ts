@@ -9,7 +9,7 @@ const {
 
 type TopBarToken = ComponentToken
 
-export const token: TopBarToken = {
+export const topbar: TopBarToken = {
   height: '64px',
   background: colors.ui.background__default.rgba,
   typography: navigation.menu_title,
@@ -26,5 +26,8 @@ export const token: TopBarToken = {
       color: colors.ui.background__light.rgba,
       width: '2px',
     },
+  },
+  modes: {
+    compact: {},
   },
 }

@@ -3,7 +3,7 @@ import { render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
-import { token } from './TopBar.tokens'
+import { topbar as topbarToken } from './TopBar.tokens'
 import { TopBar } from '.'
 
 const { Actions, Header, CustomContent } = TopBar
@@ -16,7 +16,7 @@ const ScrollContainer = styled.div`
   height: 2000px;
   width: 500px;
 `
-const { height } = token
+const { height } = topbarToken
 
 afterEach(cleanup)
 
