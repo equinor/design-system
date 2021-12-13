@@ -5,8 +5,11 @@ import {
   cloneElement,
   Children as ReactChildren,
 } from 'react'
+import { ThemeProvider } from 'styled-components'
 import type { AccordionProps } from './Accordion.types'
-import { useId } from '../../hooks'
+import { accordion as tokens } from './Accordion.tokens'
+import { useId, useToken } from '../../hooks'
+import { useEds } from '../EdsProvider'
 
 const Accordion = forwardRef<
   HTMLDivElement,
@@ -16,6 +19,8 @@ const Accordion = forwardRef<
   ref,
 ) {
   const accordionId = useId(id, 'accordion')
+  const { density } = useEds()
+  const token = useToken({ density }, tokens)
 
   const AccordionItems = ReactChildren.map(children, (child, index) => {
     if (!child) return null
@@ -28,9 +33,11 @@ const Accordion = forwardRef<
   })
 
   return (
-    <div {...props} ref={ref}>
-      {AccordionItems}
-    </div>
+    <ThemeProvider theme={token}>
+      <div {...props} ref={ref}>
+        {AccordionItems}
+      </div>
+    </ThemeProvider>
   )
 })
 

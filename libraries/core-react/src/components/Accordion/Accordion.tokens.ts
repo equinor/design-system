@@ -99,4 +99,7 @@ export const accordion: AccordionToken = {
       },
     },
   },
+  modes: {
+    compact: {},
+  },
 }

@@ -97,11 +97,13 @@ describe('Accordion', () => {
   it('triggers onToggle callback', () => {
     const mockOnToggle = jest.fn()
     render(
-      <Accordion.Item isExpanded>
-        <Accordion.Header onToggle={mockOnToggle} data-testid="header">
-          Summary 1
-        </Accordion.Header>
-      </Accordion.Item>,
+      <Accordion>
+        <Accordion.Item isExpanded>
+          <Accordion.Header onToggle={mockOnToggle} data-testid="header">
+            Summary 1
+          </Accordion.Header>
+        </Accordion.Item>
+      </Accordion>,
     )
     const header = screen.getByTestId('header')
     fireEvent.click(header)

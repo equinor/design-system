@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { Accordion, Button, Icon, AccordionProps } from '../..'
+import {
+  Accordion,
+  Button,
+  Icon,
+  AccordionProps,
+  Density,
+  EdsProvider,
+} from '../..'
+import { useState, useEffect } from 'react'
 import { Meta, Story } from '@storybook/react'
 import {
   attach_file,
@@ -152,6 +160,35 @@ export const header: Story<AccordionProps> = () => {
           </Accordion.Header>
         </Accordion.Item>
       </Accordion>
+    </Wrapper>
+  )
+}
+
+export const Compact: Story<AccordionProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+  return (
+    <Wrapper>
+      <EdsProvider density={density}>
+        <Accordion>
+          <Accordion.Item isExpanded>
+            <Accordion.Header>Header 1</Accordion.Header>
+            <Accordion.Panel>Content 1</Accordion.Panel>
+          </Accordion.Item>
+          <Accordion.Item>
+            <Accordion.Header>Header 2</Accordion.Header>
+            <Accordion.Panel>Content 2</Accordion.Panel>
+          </Accordion.Item>
+          <Accordion.Item>
+            <Accordion.Header>Header 3</Accordion.Header>
+            <Accordion.Panel>Content 3</Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+      </EdsProvider>
     </Wrapper>
   )
 }
