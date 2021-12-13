@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import {
   Dialog,
   DialogProps,
@@ -190,7 +190,12 @@ export const NoTitle: Story<DialogProps> = () => (
 )
 
 export const Compact: Story<DialogProps> = () => {
-  const [density] = useState<Density>('comfortable')
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
   return (
     <EdsProvider density={density}>
