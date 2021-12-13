@@ -1,6 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
-import { tableOfContents as tokens } from './TableOfContents.tokens'
+import styled, { css } from 'styled-components'
 import {
   typographyTemplate,
   spacingsTemplate,
@@ -8,56 +7,59 @@ import {
   bordersTemplate,
 } from '../../utils'
 
-const StyledLinkItem = styled.li`
-  list-style: none;
-  margin: 0;
-  padding: 0;
+const StyledLinkItem = styled.li(({ theme }) => {
+  return css`
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-  a {
-    text-decoration: none;
-    ${typographyTemplate(tokens.entities.links.typography)}
-    ${spacingsTemplate(tokens.entities.links.spacings)}
-    height: ${tokens.entities.links.typography.lineHeight};
-    width: ${tokens.entities.links.width};
-    display: block;
-    position: relative;
+    a {
+      text-decoration: none;
+      ${typographyTemplate(theme.entities.links.typography)}
+      ${spacingsTemplate(theme.entities.links.spacings)}
+  height: ${theme.entities.links.typography.lineHeight};
+      width: ${theme.entities.links.width};
+      display: block;
+      position: relative;
 
-    svg {
-      fill: ${tokens.entities.icon.background};
-      margin-right: ${tokens.entities.icon.spacings.right};
-      vertical-align: text-bottom;
-    }
+      svg {
+        fill: ${theme.entities.icon.background};
+        margin-right: ${theme.entities.icon.spacings.right};
+        vertical-align: text-bottom;
+      }
 
-    span {
-      max-width: ${tokens.entities.span.maxWidth};
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      vertical-align: text-bottom;
-      display: inline-block;
-    }
+      span {
+        max-width: ${theme.entities.span.maxWidth};
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: text-bottom;
+        display: inline-block;
+      }
 
-    &:focus {
-      ${outlineTemplate(tokens.states.focus.outline)};
-    }
+      &:focus {
+        ${outlineTemplate(theme.states.focus.outline)};
+      }
 
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        ${typographyTemplate(tokens.states.hover.typography)}
-        background: ${tokens.states.hover.background};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          ${typographyTemplate(theme.states.hover.typography)}
+          background: ${theme.states.hover.background};
 
-        ${bordersTemplate(tokens.states.hover.border)}
-        svg {
-          fill: ${tokens.states.hover.entities.icon.background};
+          ${bordersTemplate(theme.states.hover.border)}
+          svg {
+            fill: ${theme.states.hover.entities.icon.background};
+          }
         }
       }
-    }
 
-    &:active {
-      outline: none;
+      &:active {
+        outline: none;
+      }
     }
-  }
-`
+  `
+})
+
 export type TableOfContentsLinkItemProps = HTMLAttributes<HTMLLIElement>
 
 export const LinkItem = forwardRef<HTMLLIElement, TableOfContentsLinkItemProps>(
