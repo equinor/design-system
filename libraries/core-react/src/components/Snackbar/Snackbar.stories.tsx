@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Snackbar, SnackbarProps, Button, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react'
 
@@ -71,7 +71,12 @@ WithAction.storyName = 'With action'
 
 export const Compact: Story<SnackbarProps> = () => {
   const [open, setOpen] = useState(false)
-  const [density] = useState<Density>('comfortable')
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
   return (
     <EdsProvider density={density}>
