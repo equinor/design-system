@@ -62,4 +62,7 @@ export const dialog: DialogToken = {
       minHeight: '48px',
     },
   },
+  modes: {
+    compact: {},
+  },
 }
