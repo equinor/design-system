@@ -3,15 +3,19 @@ import { promises as fs } from 'fs'
 import bent from 'bent'
 
 const { writeFile } = fs
-const getBuffer = bent('buffer')
 
-const buffer = await getBuffer(
+const getBuffer = bent(
+  'buffer',
   'https://eds-static.equinor.com/font/Equinor-Regular.woff',
 )
 
-const subsetBuffer = await subsetFont(buffer, 'Equinor Design System', {
-  targetFormat: 'woff',
-})
+const fontData = await getBuffer()
+
+const subsetString = 'Equinor Design System'
+
+const fontFormat = { targetFormat: 'woff' }
+
+const subsetBuffer = await subsetFont(fontData, subsetString, fontFormat)
 
 const css = `@font-face {
   font-family: Equinor;
