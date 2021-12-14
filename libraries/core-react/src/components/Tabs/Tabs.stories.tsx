@@ -272,11 +272,12 @@ export const WithStyledComponent: Story<TabsProps> = () => {
 
 export const Compact: Story<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
-  const [density] = useState<Density>('comfortable')
+  const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
     focusedRef.current.focus()
-  }, [])
+    setDensity('compact')
+  }, [density])
 
   return (
     <EdsProvider density={density}>

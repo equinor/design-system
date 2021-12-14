@@ -108,4 +108,7 @@ export const token: ComponentToken = {
       },
     },
   },
+  modes: {
+    compact: {},
+  },
 }
