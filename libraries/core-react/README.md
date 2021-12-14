@@ -91,6 +91,7 @@ render(<App />, document.getElementById('root'))
 ### In progress 👷‍♀️
 
 - Navigation Drawer
+- Toggle Button
 
 ### TODO 🛠️
 
