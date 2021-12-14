@@ -1,11 +1,11 @@
 {
   "name": "@equinor/eds-font-embedder",
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "subset": "node subset.js",
     "serve": "http-server -p 9999"
   },
-  "type": "module",
   "dependencies": {
     "bent": "^7.3.12",
     "http-server": "^14.0.0",
