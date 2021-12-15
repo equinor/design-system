@@ -1,6 +1,5 @@
 import { argv } from 'process'
 import dotenv from 'dotenv'
-import * as R from 'ramda'
 
 import { createTokens, createAssets } from './actions'
 
@@ -18,8 +17,6 @@ const options = {
   },
 }
 
-console.info('Started Figma Broker 👨🏻')
-
 switch (action) {
   case 'tokens':
     createTokens(options)
@@ -30,8 +27,6 @@ switch (action) {
   default:
     console.warn(
       `Aborting, action not found for ${action}`,
-      JSON.stringify({ action, options }),
+      JSON.stringify(options),
     )
 }
-
-// eslint-disable-next-line no-console
