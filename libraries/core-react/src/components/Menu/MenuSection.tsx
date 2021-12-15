@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 import styled from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import { spacingsTemplate } from '../../utils'
@@ -24,9 +23,7 @@ export type MenuSectionProps = {
   title?: string
 }
 
-export const MenuSection = React.memo(function MenuSection(
-  props: MenuSectionProps,
-) {
+export const MenuSection = memo(function MenuSection(props: MenuSectionProps) {
   const { children, title, index } = props
   return (
     <>
