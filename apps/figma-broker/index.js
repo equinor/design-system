@@ -6,31 +6,32 @@ import { createTokens, createAssets } from './actions'
 
 dotenv.config()
 
-console.log('argsv', JSON.stringify(argv))
+const action = argv[2]
+const fileId = argv[3]
+const force = argv[4]
 
-// const runAction = R.curry(async (action, ctx) => {
-//   const result = await action(ctx)
-//   ctx.response.body = JSON.stringify(result)
-// })
+const options = {
+  action,
+  query: {
+    fileId,
+    force,
+  },
+}
 
-// router
-//   .post('/create-tokens', KoaBody(), runAction(createTokens))
-//   .post('/create-assets', KoaBody(), runAction(createAssets))
+console.info('Started Figma Broker 👨🏻')
 
-// app.use(logger).use(router.routes()).use(router.allowedMethods())
-
-// app.use(async (ctx, next) => {
-//   try {
-//     await next()
-//   } catch (err) {
-//     ctx.status = err.statusCode || err.status || 500
-//     ctx.body = {
-//       message: err.message,
-//     }
-//   }
-// })
-
-// app.listen(PORT)
+switch (action) {
+  case 'tokens':
+    createTokens(options)
+    break
+  case 'assets':
+    createAssets(options)
+    break
+  default:
+    console.warn(
+      `Aborting, action not found for ${action}`,
+      JSON.stringify({ action, options }),
+    )
+}
 
 // eslint-disable-next-line no-console
-console.info('Started Figma Broker 👨🏻‍💼💼🎉')

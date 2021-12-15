@@ -84,6 +84,8 @@ const writeCSSTokens = (tokens) => {
 }
 
 export async function createTokens({ query }) {
+  console.info('Started exporting tokens')
+
   const data = await getFigmaFile(query)
 
   const figmaFile = processFigmaFile(data)
@@ -92,6 +94,8 @@ export async function createTokens({ query }) {
   writeJSTokens(tokens)
   // writeJsonTokens(tokens)
   writeCSSTokens(tokens)
+
+  console.info('Finished exporting tokens')
 
   return tokens
 }

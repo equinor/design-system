@@ -40,12 +40,12 @@ export async function getFigmaFile({ fileId, force = 'false' }) {
   let data = null
 
   if (force === 'true') {
-    console.info('Forced fetching new file from Figma')
+    console.info('Fetching new file from Figma')
     data = await fetchFigmaFile(fileId)
     writeFile('raw', fileId, 'json', `${JSON.stringify(data, null, 2)}\n`)
   } else {
     try {
-      console.info('Reading local raw file...')
+      console.info('Reading local Figma file...')
       data = await readFile('raw', fileId, 'json')
     } catch (error) {
       console.info(

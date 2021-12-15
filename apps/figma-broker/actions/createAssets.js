@@ -90,6 +90,8 @@ const writeSVGs = (assets) => {
 }
 
 export async function createAssets({ query }) {
+  console.info('Started exporting assets')
+
   const data = await getFigmaFile(query)
 
   const figmaFile = processFigmaFile(data)
@@ -163,6 +165,8 @@ export async function createAssets({ query }) {
 
   writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
+
+  console.info('Finished exporting assets')
 
   return assetsWithSvg
 }
