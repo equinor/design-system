@@ -107,6 +107,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
 
   useEffect(() => {
     open ? setStoredAnchorEl(anchorEl) : setStoredAnchorEl(null)
+    return () => setStoredAnchorEl(null)
   }, [anchorEl, open])
 
   const { styles, attributes } = usePopper(

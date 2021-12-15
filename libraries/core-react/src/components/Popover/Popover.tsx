@@ -161,6 +161,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     useEffect(() => {
       open ? setStoredAnchorEl(anchorEl) : setStoredAnchorEl(null)
+      return () => setStoredAnchorEl(null)
     }, [anchorEl, open])
 
     const { styles, attributes } = usePopper(
