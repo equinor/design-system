@@ -1,4 +1,10 @@
-import { forwardRef, useState, HTMLAttributes, SVGProps } from 'react'
+import {
+  forwardRef,
+  useState,
+  HTMLAttributes,
+  SVGProps,
+  useEffect,
+} from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Icon } from '../Icon'
 import { Paper } from '../Paper'
@@ -132,6 +138,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     ref,
   ) {
     const [popperEl, setPopperEl] = useState<HTMLElement>(null)
+    const [storedAnchorEl, setStoredAnchorEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const popoverRef = useCombinedRefs<HTMLDivElement>(ref, setPopperEl)
 
@@ -152,8 +159,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     })
 
+    useEffect(() => {
+      open ? setStoredAnchorEl(anchorEl) : setStoredAnchorEl(null)
+    }, [anchorEl, open])
+
     const { styles, attributes } = usePopper(
-      anchorEl,
+      storedAnchorEl,
       popperEl,
       arrowRef,
       placement,
