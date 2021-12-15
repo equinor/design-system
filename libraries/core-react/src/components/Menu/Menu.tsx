@@ -53,7 +53,7 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
       if (onClose === null && onCloseCallback) {
         setOnClose(onCloseCallback)
       }
-    })
+    }, [onClose, onCloseCallback, setOnClose])
 
     useOutsideClick(containerEl, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
@@ -100,12 +100,17 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
   ref,
 ) {
   const [containerEl, setContainerEl] = useState<HTMLElement>(null)
+  const [storedAnchorEl, setStoredAnchorEl] = useState<HTMLElement>(null)
   const isMounted = useIsMounted()
   const { density } = useEds()
   const token = useToken({ density }, tokens)
 
+  useEffect(() => {
+    open ? setStoredAnchorEl(anchorEl) : setStoredAnchorEl(null)
+  }, [anchorEl, open])
+
   const { styles, attributes } = usePopper(
-    anchorEl,
+    storedAnchorEl,
     containerEl,
     null,
     placement,
