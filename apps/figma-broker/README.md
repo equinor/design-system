@@ -18,6 +18,7 @@ Extracts design decisions into [design tokens] from Figma using the [Figma Web A
 1. Run either `tokens` or `assets` script with a `fileId` and/or flag for forcing to fetch new data from Figma.
 
 The `fileId` for any figma file can be found in the url, after `https://www.figma.com/file/<fileId>` when opened in a browser.
+
 #### Example
 
 ```text
@@ -35,7 +36,7 @@ pnpm run tokens 0TbIXrrObWj80Cf7KucKYFL0 # Reads local figma json file
 
 ### Components
 
-Components in Figma (Buttons, Tables, Input etc…) are built using tokens as building blocks. For example, a button can be built up of shape, typography, spacing and colors tokens. 
+Components in Figma (Buttons, Tables, Input etc…) are built using tokens as building blocks. For example, a button can be built up of shape, typography, spacing and colors tokens.
 
 Figma broker exports the result of this union of tokens and lets Figma be in charge of upholding inheritance from tokens as its the single source of truth. Exporting which tokens a component is built up of and patching this together is more complex and intensive so no point in doing when figma already does this for you.
 
@@ -51,7 +52,6 @@ Figma broker exports the result of this union of tokens and lets Figma be in cha
 ```
 
 #### [transformers/colors](./transformers/colors.js)
-
 
 Figma provides colors and alpha as RGBA _percentages_. Figma broker convert these to RGBA _decimals_ for further for conversion to the other color spaces.
 
@@ -84,6 +84,7 @@ Opacity is defined in either a seperate `opacity` property or in the alpha chann
 #### [transformers/typography](./transformers/typography.js)
 
 Figma provides typography in pixel and percent values. Figma broker converts typography to `rem` and `em` values using a default font size declared in [functions/units](functions/units)
+
 ```js
 export const rootFontSize = 16
 ```
