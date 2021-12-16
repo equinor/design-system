@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { useState } from 'react'
-import { SingleSelect, SingleSelectProps, Button, Typography } from '../../..'
+import { useState, useEffect } from 'react'
+import {
+  SingleSelect,
+  SingleSelectProps,
+  Button,
+  Typography,
+  Density,
+} from '../../..'
 import { UseComboboxStateChange } from 'downshift'
 import { action } from '@storybook/addon-actions'
 import { Story, Meta } from '@storybook/react'
@@ -29,10 +35,10 @@ const Container = styled.div`
 `
 
 export const Default: Story<SingleSelectProps> = (args) => (
-  <Container>
-    <SingleSelect label="Choose an element" {...args} items={items} />
-  </Container>
-)
+      <Container>
+        <SingleSelect label="Choose an element" {...args} items={items} />
+      </Container>
+  )
 
 export const Disabled: Story = () => (
   <SingleSelect label="Choose an element" meta="km/t" items={items} disabled />
@@ -204,8 +210,25 @@ export const WithReactHookForm: Story<SingleSelectProps> = () => {
   )
 }
 
-export const Compact: Story = () => (
-  <EdsProvider density="compact">
-    <SingleSelect label="This is compact" items={items} />
-  </EdsProvider>
-)
+export const Compact: Story = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <SingleSelect label="This is compact" items={items} />
+    </EdsProvider>
+  )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `SingleSelect` using `EdsProvder` ',
+    },
+  },
+}

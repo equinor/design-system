@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Radio, RadioProps, Table, EdsProvider } from '../..'
+import { useState, useEffect } from 'react'
+import { Radio, RadioProps, Table, EdsProvider, Density } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
@@ -94,16 +94,25 @@ export const GroupedRadio: Story<RadioProps> = () => {
 GroupedRadio.storyName = 'Multiple radio buttons in a group'
 SingleRadio.storyName = 'Single radio buttons'
 
-export const Compact: Story<RadioProps> = () => (
-  <EdsProvider density="compact">
-    <Radio label="I am compact" />
-  </EdsProvider>
-)
+export const Compact: Story<RadioProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Radio label="I am compact" />
+    </EdsProvider>
+  )
+}
 
 Compact.parameters = {
   docs: {
     description: {
-      story: 'Compact `Radio` using `EdsProvder` ',
+      story: 'Compact `Radio` using `EdsProvider` ',
     },
   },
 }

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   MultiSelect,
   MultiSelectProps,
   Button,
   Typography,
   EdsProvider,
+  Density,
 } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { UseMultipleSelectionStateChange } from 'downshift'
@@ -204,8 +205,25 @@ export const WithReactHookForm: Story<MultiSelectProps> = () => {
   )
 }
 
-export const Compact: Story = () => (
-  <EdsProvider density="compact">
-    <MultiSelect label="This is compact" items={items} />
-  </EdsProvider>
-)
+export const Compact: Story = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <MultiSelect label="This is compact" items={items} />
+    </EdsProvider>
+  )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `MultiSelect` using `EdsProvider` ',
+    },
+  },
+}

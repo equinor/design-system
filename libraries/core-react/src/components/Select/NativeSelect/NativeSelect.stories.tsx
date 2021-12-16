@@ -1,4 +1,5 @@
-import { NativeSelect, NativeSelectProps, EdsProvider } from '../../..'
+import { useState, useEffect } from 'react'
+import { NativeSelect, NativeSelectProps, EdsProvider, Density } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -36,14 +37,31 @@ export const Disabled: Story<NativeSelectProps> = () => (
   </NativeSelect>
 )
 
-export const Compact: Story = () => (
-  <EdsProvider density="compact">
-    <NativeSelect label="This is compact" id="compact-select">
-      <option>First option with a really really long text</option>
-      <option>Second</option>
-      <option>Third</option>
-      <option>Another</option>
-      <option>Even another</option>
-    </NativeSelect>
-  </EdsProvider>
-)
+export const Compact: Story = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <NativeSelect label="This is compact" id="compact-select">
+        <option>First option with a really really long text</option>
+        <option>Second</option>
+        <option>Third</option>
+        <option>Another</option>
+        <option>Even another</option>
+      </NativeSelect>
+    </EdsProvider>
+  )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `NativeSelect` using `EdsProvider` ',
+    },
+  },
+}
