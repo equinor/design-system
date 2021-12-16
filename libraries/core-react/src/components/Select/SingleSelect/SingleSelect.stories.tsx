@@ -35,10 +35,10 @@ const Container = styled.div`
 `
 
 export const Default: Story<SingleSelectProps> = (args) => (
-      <Container>
-        <SingleSelect label="Choose an element" {...args} items={items} />
-      </Container>
-  )
+  <Container>
+    <SingleSelect label="Choose an element" {...args} items={items} />
+  </Container>
+)
 
 export const Disabled: Story = () => (
   <SingleSelect label="Choose an element" meta="km/t" items={items} disabled />
