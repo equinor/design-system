@@ -9,15 +9,22 @@ Extracts design decisions into [design tokens] from Figma using the [Figma Web A
 
 ### Setup
 
-1. Add an .env file in the root.
-2. Go to Figma and generate a new personal access token (Found under your account settings).
-3. Set `FIGMA_TOKEN` env variable to the new personal access token.
+1. Go to Figma and generate a new personal access token (Found under your account settings)
+2. Add an `.env` file in the root or if you are using Codespaces, add a new secret called `FIGMA_TOKEN`
+3. Set `FIGMA_TOKEN` env variable to the new personal access token
 
 ### Run
 
 1. Run either `tokens` or `assets` script with a `fileId` and/or flag for forcing to fetch new data from Figma.
 
+The `fileId` for any figma file can be found in the url, after `https://www.figma.com/file/<fileId>` when opened in a browser.
 #### Example
+
+```text
+https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=0%3A1
+                                   ☝
+                                 fileId
+```
 
 ```sh
 pnpm run tokens 0TbIXrrObWj80Cf7KucKYFL0 true  # Fetches new data from Figma
