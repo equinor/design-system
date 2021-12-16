@@ -228,7 +228,7 @@ export const Compact: Story = () => {
 Compact.parameters = {
   docs: {
     description: {
-      story: 'Compact `SingleSelect` using `EdsProvder` ',
+      story: 'Compact `SingleSelect` using `EdsProvider` ',
     },
   },
 }
