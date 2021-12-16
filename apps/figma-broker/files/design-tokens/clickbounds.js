@@ -1,7 +1,12 @@
 import R from 'ramda'
-import { propName, withType, pickChildren, toDictDeep } from '@utils'
-import { px } from '@units'
-import { toCSSVars } from '@transformers'
+import {
+  propName,
+  withType,
+  pickChildren,
+  toDictDeep,
+} from '../../functions/utils'
+import { px } from '../../functions/units'
+import { toCSSVars } from '../../transformers'
 
 const toHeightTokens = R.pipe(
   R.filter(withType('frame')),

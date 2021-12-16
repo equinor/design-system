@@ -13,7 +13,7 @@ import {
 } from '../functions/file'
 import { getAssets } from '../files/assets'
 import { PATHS } from '../constants'
-import { sleep, mergeStrings } from '@utils'
+import { sleep, mergeStrings } from '../functions/utils'
 
 const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
 

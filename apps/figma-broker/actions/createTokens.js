@@ -9,7 +9,7 @@ import { makeClickboundsCss } from '../files/design-tokens/clickbounds'
 import { makeTypographyCss } from '../files/design-tokens/typography'
 import { makeShapeCss } from '../files/design-tokens/shape'
 import { PATHS } from '../constants'
-import { mergeStrings } from '@utils'
+import { mergeStrings } from '../functions/utils'
 
 const TOKENS_LIB_DIR = PATHS.BASE_TOKENS
 

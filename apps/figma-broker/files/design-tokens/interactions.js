@@ -1,6 +1,12 @@
 import R from 'ramda'
-import { propName, withType, pickChildren, toDict, withName } from '@utils'
-import { toFocus, toOverlay } from '@transformers'
+import {
+  propName,
+  withType,
+  pickChildren,
+  toDict,
+  withName,
+} from '../../functions/utils'
+import { toFocus, toOverlay } from '../../transformers'
 
 const processGroup = R.pipe(
   pickChildren,

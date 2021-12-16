@@ -9,8 +9,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "tokens": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js tokens",
-    "assets": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node --loader ./alias-loader.js index.js assets"
+    "tokens": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node index.js tokens",
+    "assets": "node --inspect=33455 --no-warnings --experimental-modules --es-module-specifier-resolution=node index.js assets"
   },
   "author": "",
   "license": "ISC",
@@ -21,12 +21,6 @@
     "prettier": "2.4.1",
     "ramda": "^0.27.1",
     "svgo": "^2.3.0"
-  },
-  "aliases": {
-    "@root": ".",
-    "@utils": "./functions/utils.js",
-    "@units": "./functions/units.js",
-    "@transformers": "./transformers/index.js"
   },
   "nodemonConfig": {
     "ignore": [

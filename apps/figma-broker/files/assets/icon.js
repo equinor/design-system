@@ -1,4 +1,4 @@
-import { pathName, propName } from '@utils'
+import { pathName, propName } from '../../functions/utils'
 
 export const makeAssetTokens = (assets, groupName) =>
   assets

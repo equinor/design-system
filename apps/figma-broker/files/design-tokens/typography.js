@@ -5,8 +5,8 @@ import {
   pickChildren,
   mergeStrings,
   toDictMode,
-} from '@utils'
-import { toTypography } from '@transformers'
+} from '../../functions/utils'
+import { toTypography } from '../../transformers'
 
 const findMode = (name) => {
   if (name.toLowerCase().includes('compact')) {
