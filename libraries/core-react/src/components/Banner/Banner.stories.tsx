@@ -160,3 +160,11 @@ export const Compact: Story<BannerProps> = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Banner` using `EdsProvider` ',
+    },
+  },
+}

@@ -296,6 +296,14 @@ export const Compact: Story<TabsProps> = () => {
   )
 }
 
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Tabs` using `EdsProvider` ',
+    },
+  },
+}
+
 WithSearch.storyName = 'With search'
 WithInputInPanel.storyName = 'With input in panel'
 WithStyledComponent.storyName = 'With styled component'

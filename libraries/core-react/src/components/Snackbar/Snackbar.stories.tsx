@@ -93,3 +93,11 @@ export const Compact: Story<SnackbarProps> = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Snackbar` using `EdsProvider` ',
+    },
+  },
+}

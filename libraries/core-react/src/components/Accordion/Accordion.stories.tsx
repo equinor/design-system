@@ -193,3 +193,11 @@ export const Compact: Story<AccordionProps> = () => {
     </Wrapper>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Accordion` using `EdsProvider` ',
+    },
+  },
+}
