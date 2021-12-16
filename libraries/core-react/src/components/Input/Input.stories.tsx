@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Input, InputProps, Label, EdsProvider } from '../..'
+import { Input, InputProps, Label, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -85,8 +86,15 @@ Accessiblity.parameters = {
 
 export const Compact: Story<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
   return (
-    <EdsProvider density="compact">
+    <EdsProvider density={density}>
       <Label htmlFor="compact" label="Compact" />
       <Input type="text" id="compact" />
     </EdsProvider>
@@ -96,7 +104,7 @@ export const Compact: Story<InputProps> = () => {
 Compact.parameters = {
   docs: {
     description: {
-      story: 'Compact `Input` using `EdsProvder` ',
+      story: 'Compact `Input` using `EdsProvider` ',
     },
   },
 }

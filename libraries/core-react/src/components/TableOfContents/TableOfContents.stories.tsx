@@ -354,3 +354,11 @@ export const Compact: Story<TableOfContentsProps> = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `TableOfContents` using `EdsProvider` ',
+    },
+  },
+}

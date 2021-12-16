@@ -1,4 +1,12 @@
-import { TextField, TextFieldProps, Icon, EdsProvider, Button } from '../..'
+import { useState, useEffect } from 'react'
+import {
+  TextField,
+  TextFieldProps,
+  Icon,
+  EdsProvider,
+  Button,
+  Density,
+} from '../..'
 import { Story, Meta } from '@storybook/react'
 import {
   thumbs_up,
@@ -450,32 +458,51 @@ Variants.parameters = {
   },
 }
 
-export const Compact: Story<TextFieldProps> = () => (
-  <Wrapper>
-    <EdsProvider density="compact">
-      <TextField
-        id="compact-textfield"
-        placeholder="Placeholder text"
-        label="Default"
-        inputIcon={<Icon name="thumbs_up" title="Success" />}
-        helperIcon={<Icon data={info_circle} title="info" />}
-        helperText="Helper information text over several lines so that it breaks"
-        style={{ width: '200px' }}
-      />
-      <TextField
-        id="compact-textfield-multiline"
-        placeholder="Placeholder text"
-        label="Multiline"
-        multiline
-        rowsMax={10}
-        inputIcon={<Icon name="thumbs_up" title="Success" />}
-        style={{ resize: 'none' }}
-        helperIcon={<Icon data={info_circle} title="info" />}
-        helperText="Helper information text thats very very very loooonooooooong"
-      />
+export const Compact: Story<TextFieldProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Wrapper>
+        <EdsProvider density="compact">
+          <TextField
+            id="compact-textfield"
+            placeholder="Placeholder text"
+            label="Default"
+            inputIcon={<Icon name="thumbs_up" title="Success" />}
+            helperIcon={<Icon data={info_circle} title="info" />}
+            helperText="Helper information text over several lines so that it breaks"
+            style={{ width: '200px' }}
+          />
+          <TextField
+            id="compact-textfield-multiline"
+            placeholder="Placeholder text"
+            label="Multiline"
+            multiline
+            rowsMax={10}
+            inputIcon={<Icon name="thumbs_up" title="Success" />}
+            style={{ resize: 'none' }}
+            helperIcon={<Icon data={info_circle} title="info" />}
+            helperText="Helper information text thats very very very loooonooooooong"
+          />
+        </EdsProvider>
+      </Wrapper>
     </EdsProvider>
-  </Wrapper>
-)
+  )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `TextField` using `EdsProvider` ',
+    },
+  },
+}
 
 export const ExampleWithReactHookForm: Story<TextFieldProps> = () => {
   const { handleSubmit, control } = useForm({

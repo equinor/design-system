@@ -198,3 +198,11 @@ export const Compact: Story<SearchProps> = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Search` using `EdsProvider` ',
+    },
+  },
+}

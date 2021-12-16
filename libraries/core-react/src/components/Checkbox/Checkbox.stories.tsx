@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent } from 'react'
+import { useState, useEffect, useRef, ChangeEvent } from 'react'
 import {
   Checkbox,
   Typography,
@@ -6,6 +6,7 @@ import {
   CheckboxProps,
   EdsProvider,
   Table,
+  Density,
 } from '../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
@@ -226,16 +227,25 @@ export const WithFormsControl: Story<CheckboxProps> = () => {
 GroupedCheckbox.storyName = 'Multiple checkboxes in a group'
 WithFormsControl.storyName = 'Example with React Hook Form'
 
-export const Compact: Story<CheckboxProps> = () => (
-  <EdsProvider density="compact">
-    <Checkbox label="I am compact" />
-  </EdsProvider>
-)
+export const Compact: Story<CheckboxProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Checkbox label="I am compact" />
+    </EdsProvider>
+  )
+}
 
 Compact.parameters = {
   docs: {
     description: {
-      story: 'Compact `Checkbox` using `EdsProvder` ',
+      story: 'Compact `Checkbox` using `EdsProvider` ',
     },
   },
 }

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Switch, SwitchProps, EdsProvider, Table } from '../..'
+import { useState, useEffect } from 'react'
+import { Switch, SwitchProps, EdsProvider, Table, Density } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
@@ -64,6 +64,13 @@ export const DefaultStates: Story<SwitchProps> = () => {
 }
 
 export const Compact: Story<SwitchProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
   const UnstyledList = styled.ul`
     list-style-type: none;
     li {
@@ -71,7 +78,7 @@ export const Compact: Story<SwitchProps> = () => {
     }
   `
   return (
-    <EdsProvider density="compact">
+    <EdsProvider density={density}>
       <Wrapper>
         <UnstyledList>
           <li>
@@ -95,6 +102,14 @@ export const Compact: Story<SwitchProps> = () => {
       </Wrapper>
     </EdsProvider>
   )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Switch` using `EdsProvider` ',
+    },
+  },
 }
 
 export const ControlledSwitchControl: Story<SwitchProps> = () => {

@@ -148,3 +148,11 @@ export const Compact: Story<TopbarProps> = (): JSX.Element => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `TopBar` using `EdsProvider` ',
+    },
+  },
+}

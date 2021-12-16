@@ -1,7 +1,15 @@
 import { useEffect, useState, useRef } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
-import { Menu, MenuProps, Typography, Button, Icon, EdsProvider } from '../..'
+import {
+  Menu,
+  MenuProps,
+  Typography,
+  Button,
+  Icon,
+  EdsProvider,
+  Density,
+} from '../..'
 import { Story, Meta } from '@storybook/react'
 
 import { tokens } from '@equinor/eds-tokens'
@@ -275,6 +283,7 @@ export const Complex: Story<MenuProps> = () => {
 }
 
 export const Compact: Story<MenuProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [focus, setFocus] = useState<'first' | 'last'>(null)
   const anchorRef = useRef<HTMLButtonElement>(null)
@@ -283,10 +292,16 @@ export const Compact: Story<MenuProps> = () => {
     setIsOpen(true)
     setFocus(focus)
   }
+
   const closeMenu = () => {
     setIsOpen(false)
     setFocus(null)
   }
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
@@ -308,32 +323,42 @@ export const Compact: Story<MenuProps> = () => {
   }
 
   return (
-    <StoryCenter>
-      <Button
-        ref={anchorRef}
-        id="anchor-compact"
-        aria-haspopup="true"
-        aria-expanded={isOpen}
-        aria-controls="menu-compact"
-        onClick={() => (isOpen ? closeMenu() : openMenu(null))}
-        onKeyDown={onKeyPress}
-      >
-        Click to open Menu!
-      </Button>
-      <EdsProvider density="compact">
-        <Menu
-          open={isOpen}
-          id="menu-compact"
-          focus={focus}
-          aria-labelledby="anchor-compact"
-          onClose={closeMenu}
-          anchorEl={anchorRef.current}
+    <EdsProvider density={density}>
+      <StoryCenter>
+        <Button
+          ref={anchorRef}
+          id="anchor-compact"
+          aria-haspopup="true"
+          aria-expanded={isOpen}
+          aria-controls="menu-compact"
+          onClick={() => (isOpen ? closeMenu() : openMenu(null))}
+          onKeyDown={onKeyPress}
         >
-          <Menu.Item onClick={onClick}>Pressure</Menu.Item>
-          <Menu.Item onClick={onClick}>Bearing</Menu.Item>
-          <Menu.Item onClick={onClick}>Cable</Menu.Item>
-        </Menu>
-      </EdsProvider>
-    </StoryCenter>
+          Click to open Menu!
+        </Button>
+        <EdsProvider density="compact">
+          <Menu
+            open={isOpen}
+            id="menu-compact"
+            focus={focus}
+            aria-labelledby="anchor-compact"
+            onClose={closeMenu}
+            anchorEl={anchorRef.current}
+          >
+            <Menu.Item onClick={onClick}>Pressure</Menu.Item>
+            <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+            <Menu.Item onClick={onClick}>Cable</Menu.Item>
+          </Menu>
+        </EdsProvider>
+      </StoryCenter>
+    </EdsProvider>
   )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Menu` using `EdsProvider` ',
+    },
+  },
 }

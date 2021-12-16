@@ -247,3 +247,11 @@ export const Compact: Story<PopoverProps> = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Popover` using `EdsProvider` ',
+    },
+  },
+}

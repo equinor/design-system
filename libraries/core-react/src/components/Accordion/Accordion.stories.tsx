@@ -171,6 +171,7 @@ export const Compact: Story<AccordionProps> = () => {
     // Simulate user change
     setDensity('compact')
   }, [density])
+
   return (
     <Wrapper>
       <EdsProvider density={density}>
@@ -191,4 +192,12 @@ export const Compact: Story<AccordionProps> = () => {
       </EdsProvider>
     </Wrapper>
   )
+}
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Accordion` using `EdsProvider` ',
+    },
+  },
 }

@@ -214,3 +214,11 @@ export const Compact: Story<DialogProps> = () => {
     </EdsProvider>
   )
 }
+
+Compact.parameters = {
+  docs: {
+    description: {
+      story: 'Compact `Dialog` using `EdsProvider` ',
+    },
+  },
+}

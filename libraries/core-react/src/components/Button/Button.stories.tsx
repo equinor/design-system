@@ -1,4 +1,5 @@
-import { Button, Icon, ButtonProps, EdsProvider } from '../..'
+import { useState, useEffect } from 'react'
+import { Button, Icon, ButtonProps, EdsProvider, Density } from '../..'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
@@ -314,18 +315,27 @@ export const FullWidth: Story<ButtonProps> = () => (
   </FullWidthWrapper>
 )
 
-export const Compact: Story<ButtonProps> = () => (
-  <EdsProvider density="compact">
-    <Wrapper>
-      <Button>Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="ghost_icon">
-        <Icon data={menu} title="Ghost icon menu"></Icon>
-      </Button>
-    </Wrapper>
-  </EdsProvider>
-)
+export const Compact: Story<ButtonProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Wrapper>
+        <Button>Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="ghost_icon">
+          <Icon data={menu} title="Ghost icon menu"></Icon>
+        </Button>
+      </Wrapper>
+    </EdsProvider>
+  )
+}
 
 Compact.parameters = {
   docs: {
