@@ -171,6 +171,7 @@ export const Compact: Story<AccordionProps> = () => {
     // Simulate user change
     setDensity('compact')
   }, [density])
+
   return (
     <Wrapper>
       <EdsProvider density={density}>
