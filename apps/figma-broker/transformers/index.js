@@ -1,6 +1,6 @@
-import R from 'ramda'
-import { withType, removeNilAndEmpty } from '@utils'
-import { px } from '@units'
+import * as R from 'ramda'
+import { withType, removeNilAndEmpty } from '../functions/utils'
+import { px } from '../functions/units'
 import { fillToRgba } from './colors'
 
 export * from './typography'

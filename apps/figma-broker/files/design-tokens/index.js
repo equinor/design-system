@@ -5,7 +5,7 @@ import { makeClickboundsTokens } from './clickbounds'
 import { makeTextTokens } from './typography'
 import { makeShapeTokens } from './shape'
 import { makeInteractionsTokens } from './interactions'
-import { fixPageName } from '@utils'
+import { fixPageName } from '../../functions/utils'
 
 export const makeTokens = (figmaFile) => {
   const tokens = []

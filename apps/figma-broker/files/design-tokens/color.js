@@ -1,6 +1,16 @@
-import R from 'ramda'
-import { propName, withType, pickChildren, toDictMode } from '@utils'
-import { fillToRgba, fillToHex, fillToHsla, toCSSVars } from '@transformers'
+import * as R from 'ramda'
+import {
+  propName,
+  withType,
+  pickChildren,
+  toDictMode,
+} from '../../functions/utils'
+import {
+  fillToRgba,
+  fillToHex,
+  fillToHsla,
+  toCSSVars,
+} from '../../transformers'
 
 const findMode = (name) => {
   if (/⚫/.test(name)) {

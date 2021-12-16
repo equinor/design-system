@@ -1,6 +1,6 @@
-import R from 'ramda'
-import { withType, withName, removeNilAndEmpty } from '@utils'
-import { rootFontSize, rem, em } from '@units'
+import * as R from 'ramda'
+import { withType, withName, removeNilAndEmpty } from '../functions/utils'
+import { rootFontSize, rem, em } from '../functions/units'
 import { fillToRgba } from './colors'
 
 export { fillToHex, fillToHsla, fillToRgba } from './colors'

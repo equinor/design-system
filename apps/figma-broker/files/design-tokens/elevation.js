@@ -1,7 +1,12 @@
-import R from 'ramda'
-import { propName, withType, pickChildren, toDictDeep } from '@utils'
-import { px } from '@units'
-import { fillToRgba, toCSSVars } from '@transformers'
+import * as R from 'ramda'
+import {
+  propName,
+  withType,
+  pickChildren,
+  toDictDeep,
+} from '../../functions/utils'
+import { px } from '../../functions/units'
+import { fillToRgba, toCSSVars } from '../../transformers'
 
 const toBoxShadow = (effect) =>
   `${px(effect.offset.x)} ${px(effect.offset.y)} ${px(

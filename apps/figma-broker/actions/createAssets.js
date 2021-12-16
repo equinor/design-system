@@ -1,5 +1,5 @@
 import * as SVGO from 'svgo'
-import R from 'ramda'
+import * as R from 'ramda'
 import {
   getFigmaFile,
   processFigmaFile,
@@ -13,7 +13,7 @@ import {
 } from '../functions/file'
 import { getAssets } from '../files/assets'
 import { PATHS } from '../constants'
-import { sleep, mergeStrings } from '@utils'
+import { sleep, mergeStrings } from '../functions/utils'
 
 const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
 
@@ -90,6 +90,8 @@ const writeSVGs = (assets) => {
 }
 
 export async function createAssets({ query }) {
+  console.info('Started exporting assets')
+
   const data = await getFigmaFile(query)
 
   const figmaFile = processFigmaFile(data)
@@ -163,6 +165,8 @@ export async function createAssets({ query }) {
 
   writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
+
+  console.info('Finished exporting assets')
 
   return assetsWithSvg
 }

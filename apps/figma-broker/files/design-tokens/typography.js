@@ -1,12 +1,12 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import {
   propName,
   withType,
   pickChildren,
   mergeStrings,
   toDictMode,
-} from '@utils'
-import { toTypography } from '@transformers'
+} from '../../functions/utils'
+import { toTypography } from '../../transformers'
 
 const findMode = (name) => {
   if (name.toLowerCase().includes('compact')) {

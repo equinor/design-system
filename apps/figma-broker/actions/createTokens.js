@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import { getFigmaFile, processFigmaFile } from '../functions/figma'
 import { writeFile, writeResults } from '../functions/file'
 import { makeTokens } from '../files/design-tokens'
@@ -9,7 +9,7 @@ import { makeClickboundsCss } from '../files/design-tokens/clickbounds'
 import { makeTypographyCss } from '../files/design-tokens/typography'
 import { makeShapeCss } from '../files/design-tokens/shape'
 import { PATHS } from '../constants'
-import { mergeStrings } from '@utils'
+import { mergeStrings } from '../functions/utils'
 
 const TOKENS_LIB_DIR = PATHS.BASE_TOKENS
 
@@ -84,6 +84,8 @@ const writeCSSTokens = (tokens) => {
 }
 
 export async function createTokens({ query }) {
+  console.info('Started exporting tokens')
+
   const data = await getFigmaFile(query)
 
   const figmaFile = processFigmaFile(data)
@@ -92,6 +94,8 @@ export async function createTokens({ query }) {
   writeJSTokens(tokens)
   // writeJsonTokens(tokens)
   writeCSSTokens(tokens)
+
+  console.info('Finished exporting tokens')
 
   return tokens
 }

@@ -1,5 +1,5 @@
-import R from 'ramda'
-import { fixPageName } from '@utils'
+import * as R from 'ramda'
+import { fixPageName } from '../../functions/utils'
 import { makeAssetTokens } from './icon'
 
 const getAssetTokens = R.pipe(

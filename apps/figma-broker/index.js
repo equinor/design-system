@@ -1,45 +1,32 @@
-#!/usr/bin/env NODE_NO_WARNINGS=1 node
-/* eslint-disable no-unused-vars */
+import { argv } from 'process'
 import dotenv from 'dotenv'
-import Koa from 'koa'
-import KoaRouter from '@koa/router'
-import KoaLogger from 'koa-logger'
-import KoaBody from 'koa-body'
-import R from 'ramda'
 
 import { createTokens, createAssets } from './actions'
 
 dotenv.config()
 
-const PORT = process.env.PORT || 9001
+const action = argv[2]
+const fileId = argv[3]
+const force = argv[4]
 
-const app = new Koa()
-const router = new KoaRouter()
-const logger = new KoaLogger()
+const options = {
+  action,
+  query: {
+    fileId,
+    force,
+  },
+}
 
-const runAction = R.curry(async (action, ctx) => {
-  const result = await action(ctx)
-  ctx.response.body = JSON.stringify(result)
-})
-
-router
-  .post('/create-tokens', KoaBody(), runAction(createTokens))
-  .post('/create-assets', KoaBody(), runAction(createAssets))
-
-app.use(logger).use(router.routes()).use(router.allowedMethods())
-
-app.use(async (ctx, next) => {
-  try {
-    await next()
-  } catch (err) {
-    ctx.status = err.statusCode || err.status || 500
-    ctx.body = {
-      message: err.message,
-    }
-  }
-})
-
-app.listen(PORT)
-
-// eslint-disable-next-line no-console
-console.info('Started Figma Broker 👨🏻‍💼💼🎉')
+switch (action) {
+  case 'tokens':
+    createTokens(options)
+    break
+  case 'assets':
+    createAssets(options)
+    break
+  default:
+    console.warn(
+      `Aborting, action not found for ${action}`,
+      JSON.stringify(options),
+    )
+}

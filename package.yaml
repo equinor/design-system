@@ -13,7 +13,8 @@ scripts:
   storybook: pnpm --filter ./libraries/core-react run storybook
   graphics: pnpm --filter ./assets/woman run dev
   build:storybook: pnpm --filter ./libraries/core-react run build:storybook
-  figma-broker: pnpm --filter @equinor/eds-figma-broker run dev
+  export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0
+  export:assets: pnpm --filter @equinor/eds-figma-broker assets BQjYMxdSdgRkdhKTDDU7L4KU
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
 devDependencies:
