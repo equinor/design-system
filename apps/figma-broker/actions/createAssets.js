@@ -1,5 +1,5 @@
 import * as SVGO from 'svgo'
-import R from 'ramda'
+import * as R from 'ramda'
 import {
   getFigmaFile,
   processFigmaFile,

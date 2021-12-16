@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import fetch from 'node-fetch'
 import { readFile, writeFile } from './file'
 

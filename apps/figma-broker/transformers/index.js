@@ -1,4 +1,4 @@
-import R from 'ramda'
+import * as R from 'ramda'
 import { withType, removeNilAndEmpty } from '../functions/utils'
 import { px } from '../functions/units'
 import { fillToRgba } from './colors'
