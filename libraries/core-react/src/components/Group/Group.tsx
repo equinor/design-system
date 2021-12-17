@@ -7,6 +7,11 @@ const { border } = tokens
 const GroupBase = styled.div`
   > * {
     border-radius: 0;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-radius: 0;
+      }
+    }
   }
   > :first-child {
     border-top-left-radius: ${border.type === 'border' && border.radius};
@@ -15,6 +20,9 @@ const GroupBase = styled.div`
   > :last-child {
     border-top-right-radius: ${border.type === 'border' && border.radius};
     border-bottom-right-radius: ${border.type === 'border' && border.radius};
+  }
+  > :not(:last-child) {
+    border-right: none;
   }
 `
 

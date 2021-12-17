@@ -19,6 +19,12 @@ const FullWidthWrapper = styled.div`
   grid-gap: 16px;
 `
 
+const GroupWrapper = styled.div`
+  margin: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, fit-content(100%));
+`
+
 export default {
   title: 'Components/Button',
   component: Button,
@@ -346,11 +352,13 @@ Compact.parameters = {
   },
 }
 
-export const GroupButtons: Story<ButtonProps> = () => (
-  <Group>
-    <Button>Contained</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
-  </Group>
+export const ButtonGroup: Story<ButtonProps> = () => (
+  <GroupWrapper>
+    <Group>
+      <Button>Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Group>
+  </GroupWrapper>
 )
