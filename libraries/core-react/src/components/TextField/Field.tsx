@@ -180,6 +180,7 @@ export const Field = forwardRef<
   const iconSize = density === 'compact' ? 16 : 24
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
+  const isError = actualVariant === 'error' ? true : false
 
   const focusHandler = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -208,6 +209,7 @@ export const Field = forwardRef<
 
   const inputProps = {
     ref: ref as Ref<HTMLInputElement>,
+    'aria-invalid': isError,
     type,
     disabled,
     readOnly,
