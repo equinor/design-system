@@ -12,7 +12,7 @@ import { HelperText } from './HelperText'
 import { TextFieldProvider } from './TextField.context'
 import type { Variants } from './types'
 import { textfield as tokens } from './TextField.tokens'
-import { useToken } from '../../hooks'
+import { useToken, useId } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
 const Container = styled.div`
@@ -79,7 +79,9 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     },
     ref,
   ) {
+    const helperTextId = useId(null, 'helpertext')
     const inputProps = {
+      'aria-describedby': helperTextId,
       multiline,
       disabled,
       placeholder,
@@ -93,6 +95,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     }
 
     const helperProps = {
+      id: helperTextId,
       variant,
       helperText,
       icon: helperIcon,
