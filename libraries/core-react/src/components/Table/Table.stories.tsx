@@ -81,6 +81,7 @@ const FixedContainer = styled.div`
 
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
+  const buttonIndex = cellValues[0].length - 1
 
   return (
     <FixedContainer>
@@ -98,8 +99,14 @@ export const FixedTableHeader: Story<TableProps> = () => {
         <Table.Body>
           {cellValues?.map((row) => (
             <Table.Row key={row.toString()}>
-              {row.map((cellValue) => (
-                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+              {row.map((cellValue, index) => (
+                <Table.Cell key={cellValue}>
+                  {index === buttonIndex ? (
+                    <Button variant="outlined">{cellValue}</Button>
+                  ) : (
+                    cellValue
+                  )}
+                </Table.Cell>
               ))}
             </Table.Row>
           ))}
