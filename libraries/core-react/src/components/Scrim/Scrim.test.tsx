@@ -18,21 +18,17 @@ afterEach(cleanup)
 const DismissableScrim = (props) => {
   const [visibleScrim, setVisibleScrim] = useState(true)
 
-  const handleClose = (event, closed) => {
-    if (closed !== undefined) {
-      setVisibleScrim(closed)
-    } else {
-      setVisibleScrim(!visibleScrim)
-    }
+  const handleClose = () => {
+    setVisibleScrim(false)
   }
 
-  return visibleScrim ? (
-    <Scrim onClose={handleClose} isDismissable {...props}>
-      <button type="button" onClick={() => setVisibleScrim(false)}>
+  return (
+    <Scrim onClose={handleClose} open={visibleScrim} isDismissable {...props}>
+      <button type="button" onClick={handleClose}>
         OK
       </button>
     </Scrim>
-  ) : null
+  )
 }
 
 describe('Scrim', () => {
@@ -44,33 +40,33 @@ describe('Scrim', () => {
     render(<DismissableScrim data-testid="scrim" />)
     const scrim = screen.getByTestId('scrim')
 
-    expect(scrim).toBeInTheDocument()
+    expect(scrim).not.toBeEmptyDOMElement()
     expect(screen.queryByText('OK')).toBeVisible()
     const targetButton = screen.queryByText('OK')
     fireEvent.click(targetButton)
-    expect(scrim).not.toBeInTheDocument()
+    expect(scrim).toBeEmptyDOMElement()
   })
   it('Is dismissable with Esc', () => {
     render(<DismissableScrim data-testid="scrim" />)
     const scrim = screen.getByTestId('scrim')
 
-    expect(scrim).toBeInTheDocument()
+    expect(scrim).not.toBeEmptyDOMElement()
     expect(screen.queryByText('OK')).toBeVisible()
     fireEvent.keyDown(scrim, {
       key: 'Escape',
       keyCode: 27,
     })
-    expect(scrim).not.toBeInTheDocument()
+    expect(scrim).toBeEmptyDOMElement()
   })
 
   it('Has correct style rules when visible', () => {
-    render(<StyledScrim data-testid="scrim" />)
+    render(<StyledScrim open={true} data-testid="scrim" />)
     const scrim = screen.getByTestId('scrim')
 
     expect(scrim).toHaveStyleRule('display', 'flex')
   })
   it('Can extend the css for the component', () => {
-    render(<StyledScrim data-testid="scrim" />)
+    render(<StyledScrim open={true} data-testid="scrim" />)
     const scrim = screen.getByTestId('scrim')
 
     expect(scrim).toHaveStyleRule('background', 'red')
