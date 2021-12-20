@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2021-12-20
+
+## Added
+
+- `wind_turbine` icon ([#1801](https://github.com/equinor/design-system/issues/1801))
+
+## Fixed
+
+- `calendar` icon should no longer misaligned with other "calendar" icons ([#1809](https://github.com/equinor/design-system/issues/1809))
+
 ## [0.9.1] - 2021-12-10
 
 ## Fixed
