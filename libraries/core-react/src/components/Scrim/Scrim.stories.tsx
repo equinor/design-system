@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Scrim, Button, Typography, ScrimProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
@@ -20,6 +20,7 @@ export default {
   component: Scrim,
   args: {
     isDismissable: true,
+    open: false,
   },
   parameters: {
     docs: {
@@ -33,28 +34,33 @@ export default {
 } as Meta
 
 export const Default: Story<ScrimProps> = (args) => {
-  const [visibleScrim, setVisibleScrim] = useState(false)
-  const handleClose = (event, closed) => {
-    if (closed) {
-      setVisibleScrim(closed)
-    } else {
-      setVisibleScrim(!visibleScrim)
-    }
+  const { open } = args
+  const [isOpen, setIsOpen] = useState(open)
+
+  const handleOpen = () => {
+    setIsOpen(true)
   }
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  // This is just for storybook and changes done via controls addon
+  useEffect(() => {
+    setIsOpen(open)
+  }, [open])
 
   return (
     <>
-      <Button onClick={() => setVisibleScrim(true)}>Trigger Scrim</Button>
-      {visibleScrim && (
-        <Scrim {...args} onClose={handleClose}>
-          <TestContent>
-            <Typography variant="body_short">
-              Press close or hit “ESC” to close scrim.
-            </Typography>
-            <Button onClick={() => setVisibleScrim(false)}>Close</Button>
-          </TestContent>
-        </Scrim>
-      )}
+      <Button onClick={handleOpen}>Trigger Scrim</Button>
+      <Scrim {...args} open={isOpen} onClose={handleClose}>
+        <TestContent>
+          <Typography variant="body_short">
+            Press close or hit “ESC” to close scrim.
+          </Typography>
+          <Button onClick={handleClose}>Close</Button>
+        </TestContent>
+      </Scrim>
     </>
   )
 }
