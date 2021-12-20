@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
-- `calendar` icon should no longer missaligned with other "calendar" icons ([#1809](https://github.com/equinor/design-system/issues/1809))
+- `calendar` icon should no longer misaligned with other "calendar" icons ([#1809](https://github.com/equinor/design-system/issues/1809))
 
 ## [0.9.1] - 2021-12-10
 
