@@ -180,7 +180,7 @@ export const Field = forwardRef<
   const iconSize = density === 'compact' ? 16 : 24
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
-  const isError = actualVariant === 'error' ? true : false
+  const isError = actualVariant === 'error'
 
   const focusHandler = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
