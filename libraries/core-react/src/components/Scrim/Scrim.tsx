@@ -1,11 +1,11 @@
 import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 import { useGlobalKeyPress, useHideBodyScroll } from '../../hooks'
 
 const { height, width, background } = tokens
 
-const StyledScrim = styled.div`
+const StyledScrim = styled.div<StyledScrimProps>`
   width: ${width};
   height: ${height};
   background: ${background};
@@ -15,7 +15,7 @@ const StyledScrim = styled.div`
   left: 0;
   align-items: center;
   justify-content: center;
-  display: flex;
+  ${({ open }) => css({ display: open ? 'flex' : 'none' })}
 `
 
 const ScrimContent = styled.div`
@@ -23,37 +23,41 @@ const ScrimContent = styled.div`
   height: auto;
 `
 
+type StyledScrimProps = Pick<ScrimProps, 'open'>
+
 export type ScrimProps = {
   /** Whether scrim can be dismissed with esc key and outside click
    */
   isDismissable?: boolean
+  /** programmatically toggle scrim */
+  open: boolean
   /** function to handle closing scrim */
-  onClose?: (event: MouseEvent | KeyboardEvent, open: boolean) => void
+  onClose?: (event: MouseEvent | KeyboardEvent) => void
 } & HTMLAttributes<HTMLDivElement>
 
 export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
-  { children, onClose, isDismissable = false, ...rest },
+  { children, onClose, open, isDismissable = false, ...rest },
   ref,
 ) {
   const props = {
     ...rest,
+    open,
     isDismissable,
     ref,
   }
 
-  const overflowState = document.body.style.overflow
-  useHideBodyScroll(overflowState)
+  useHideBodyScroll(open)
 
   useGlobalKeyPress('Escape', (e: KeyboardEvent) => {
-    if (isDismissable && onClose) {
-      onClose(e, false)
+    if (isDismissable && onClose && open) {
+      onClose(e)
     }
   })
 
   const handleMouseClose = (event: MouseEvent) => {
     if (event) {
-      if (event.type === 'click' && isDismissable) {
-        onClose && onClose(event, false)
+      if (event.type === 'click' && isDismissable && open) {
+        onClose && onClose(event)
       }
     }
   }
@@ -65,7 +69,9 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
 
   return (
     <StyledScrim onClick={handleMouseClose} {...props}>
-      <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
+      {open && (
+        <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
+      )}
     </StyledScrim>
   )
 })
