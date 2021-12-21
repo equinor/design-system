@@ -1,5 +1,5 @@
 import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 import { useGlobalKeyPress, useHideBodyScroll } from '../../hooks'
 
