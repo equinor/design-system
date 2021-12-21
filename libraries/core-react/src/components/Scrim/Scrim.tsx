@@ -32,7 +32,7 @@ export type ScrimProps = {
   /** programmatically toggle scrim */
   open: boolean
   /** function to handle closing scrim */
-  onClose?: (event: MouseEvent | KeyboardEvent) => void
+  onClose?: () => void
 } & HTMLAttributes<HTMLDivElement>
 
 export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
@@ -48,16 +48,16 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
 
   useHideBodyScroll(open)
 
-  useGlobalKeyPress('Escape', (e: KeyboardEvent) => {
+  useGlobalKeyPress('Escape', () => {
     if (isDismissable && onClose && open) {
-      onClose(e)
+      onClose()
     }
   })
 
   const handleMouseClose = (event: MouseEvent) => {
     if (event) {
       if (event.type === 'click' && isDismissable && open) {
-        onClose && onClose(event)
+        onClose && onClose()
       }
     }
   }
