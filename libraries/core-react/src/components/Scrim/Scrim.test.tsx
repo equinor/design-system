@@ -40,23 +40,23 @@ describe('Scrim', () => {
     render(<DismissableScrim data-testid="scrim" />)
     const scrim = screen.getByTestId('scrim')
 
-    expect(scrim).not.toBeEmptyDOMElement()
+    expect(scrim).toBeInTheDocument()
     expect(screen.queryByText('OK')).toBeVisible()
     const targetButton = screen.queryByText('OK')
     fireEvent.click(targetButton)
-    expect(scrim).toBeEmptyDOMElement()
+    expect(scrim).not.toBeInTheDocument()
   })
   it('Is dismissable with Esc', () => {
     render(<DismissableScrim data-testid="scrim" />)
     const scrim = screen.getByTestId('scrim')
 
-    expect(scrim).not.toBeEmptyDOMElement()
+    expect(scrim).toBeInTheDocument()
     expect(screen.queryByText('OK')).toBeVisible()
     fireEvent.keyDown(scrim, {
       key: 'Escape',
       keyCode: 27,
     })
-    expect(scrim).toBeEmptyDOMElement()
+    expect(scrim).not.toBeInTheDocument()
   })
 
   it('Has correct style rules when visible', () => {
