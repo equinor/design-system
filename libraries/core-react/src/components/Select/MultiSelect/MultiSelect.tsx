@@ -148,9 +148,8 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
           case useCombobox.stateChangeTypes.InputBlur:
+            setInputValue('')
             if (selectedItem) {
-              setInputValue('')
-
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
                 : addSelectedItem(selectedItem)
@@ -170,6 +169,11 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       if (!isOpen && !(disabled || readOnly)) {
         openMenu()
       }
+    }
+
+    const handleClear = () => {
+      reset()
+      setInputValue('')
     }
 
     return (
@@ -201,7 +205,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                 disabled={disabled || readOnly}
                 aria-label={'clear options'}
                 title="clear"
-                onClick={reset}
+                onClick={handleClear}
                 style={{ right: 32 }}
               >
                 <Icon data={close} size={16} />
