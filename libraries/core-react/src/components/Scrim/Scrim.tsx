@@ -27,33 +27,35 @@ export type ScrimProps = {
   /** Whether scrim can be dismissed with esc key and outside click
    */
   isDismissable?: boolean
+  /** programmatically toggle scrim */
+  open: boolean
   /** function to handle closing scrim */
-  onClose?: (event: MouseEvent | KeyboardEvent, open: boolean) => void
+  onClose?: () => void
 } & HTMLAttributes<HTMLDivElement>
 
 export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
-  { children, onClose, isDismissable = false, ...rest },
+  { children, onClose, open, isDismissable = false, ...rest },
   ref,
 ) {
   const props = {
     ...rest,
+    open,
     isDismissable,
     ref,
   }
 
-  const overflowState = document.body.style.overflow
-  useHideBodyScroll(overflowState)
+  useHideBodyScroll(open)
 
-  useGlobalKeyPress('Escape', (e: KeyboardEvent) => {
-    if (isDismissable && onClose) {
-      onClose(e, false)
+  useGlobalKeyPress('Escape', () => {
+    if (isDismissable && onClose && open) {
+      onClose()
     }
   })
 
   const handleMouseClose = (event: MouseEvent) => {
     if (event) {
-      if (event.type === 'click' && isDismissable) {
-        onClose && onClose(event, false)
+      if (event.type === 'click' && isDismissable && open) {
+        onClose && onClose()
       }
     }
   }
@@ -61,6 +63,10 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   const handleContentClick = (event: MouseEvent) => {
     // Avoid event bubbling inside dialog/content inside scrim
     event.stopPropagation()
+  }
+
+  if (!open) {
+    return null
   }
 
   return (
