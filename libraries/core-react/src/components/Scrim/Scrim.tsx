@@ -5,7 +5,7 @@ import { useGlobalKeyPress, useHideBodyScroll } from '../../hooks'
 
 const { height, width, background } = tokens
 
-const StyledScrim = styled.div<StyledScrimProps>`
+const StyledScrim = styled.div`
   width: ${width};
   height: ${height};
   background: ${background};
@@ -15,15 +15,13 @@ const StyledScrim = styled.div<StyledScrimProps>`
   left: 0;
   align-items: center;
   justify-content: center;
-  ${({ open }) => css({ display: open ? 'flex' : 'none' })}
+  display: flex;
 `
 
 const ScrimContent = styled.div`
   width: auto;
   height: auto;
 `
-
-type StyledScrimProps = Pick<ScrimProps, 'open'>
 
 export type ScrimProps = {
   /** Whether scrim can be dismissed with esc key and outside click
@@ -67,11 +65,13 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
     event.stopPropagation()
   }
 
+  if (!open) {
+    return null
+  }
+
   return (
     <StyledScrim onClick={handleMouseClose} {...props}>
-      {open && (
-        <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
-      )}
+      <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
     </StyledScrim>
   )
 })
