@@ -2,33 +2,7 @@ import styled from 'styled-components'
 import { Icon, IconProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
-import {
-  layers,
-  layers_off,
-  grid_off,
-  compare,
-  work,
-  pregnant_woman,
-  accessible_forward,
-  save,
-  info_circle,
-  list,
-  filter_alt,
-} from '@equinor/eds-icons'
-
-const icons = {
-  layers,
-  layers_off,
-  grid_off,
-  compare,
-  work,
-  pregnant_woman,
-  accessible_forward,
-  save,
-  info_circle,
-  list,
-  filter_alt,
-}
+import * as icons from '@equinor/eds-icons'
 
 Icon.add(icons)
 
@@ -60,14 +34,9 @@ export default {
       control: {
         type: 'select',
       },
-      description:
-        'Please note that the option list of icons is not complete, this selection is only for demo purposes',
     },
     color: {
       control: 'color',
-    },
-    data: {
-      control: 'object',
     },
   },
   parameters: {
@@ -114,7 +83,7 @@ export const Color: Story<IconProps> = () => (
 )
 export const UsingDataPropWithEdsIcon: Story<IconProps> = () => (
   <Wrapper>
-    <Icon data={save} />
+    <Icon data={icons.save} />
   </Wrapper>
 )
 
