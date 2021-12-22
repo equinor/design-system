@@ -6,19 +6,21 @@
   "configurations": [
     {
       "type": "node",
-      "request": "attach",
-      "name": "Attach",
-      "port": 33455,
-      "restart": true
+      "request": "launch",
+      "name": "Debug export:tokens",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run-script", "export:tokens"],
+      "restart": true,
+      "port": 33455
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch via NPM",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run-script", "dev"],
+      "name": "Debug export:assets",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run-script", "export:assets"],
       "restart": true,
-      "port": 33477
+      "port": 33455
     }
   ]
 }
