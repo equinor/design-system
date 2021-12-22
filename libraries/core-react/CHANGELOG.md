@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.17.0] - 2021-12-22
+
+### Added
+
+- `Scrim` is now controlled via an `open` property. ([#1176](https://github.com/equinor/design-system/issues/1176))
+
+### Changed
+
+- Improvements to `Menu` & `Popover` DOM imprint when closed and subsuquent opennings. ([#1675](https://github.com/equinor/design-system/issues/1675))
+
+### Removed
+
+- `event` & `open` was removed as parameters to the `onClose` callback for `Scrim`. ([#1176](https://github.com/equinor/design-system/issues/1176))
+
+### Fixed
+
+- `MultiSelect` should now clear properly on blur and clicking clear button. ([#1664](https://github.com/equinor/design-system/issues/1664))
+- Improved `TextField` a11y for when error messages are displayed as `helperText`. ([#1145](https://github.com/equinor/design-system/issues/1145))
+- `Button` in tables should now have proper stacking context for sticky table header. ([#1816](https://github.com/equinor/design-system/issues/1816))
+
 ## [0.16.1] - 2021-12-07
 
 ### Changed
