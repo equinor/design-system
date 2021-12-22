@@ -41,7 +41,7 @@ export const writeFile = (path, name, ext, file) => {
 
     if (ext === 'js' || ext === 'ts') {
       const options = prettier.resolveConfig.sync(prettierConfig)
-      value = prettier.format(file, options)
+      value = prettier.format(file, { ...options, parser: 'babel' })
     }
 
     write(value, path, name, ext)
