@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug export:tokens",
+      "name": "export:tokens",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run-script", "export:tokens"],
       "restart": true,
@@ -16,7 +16,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug export:assets",
+      "name": "export:assets",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run-script", "export:assets"],
       "restart": true,
