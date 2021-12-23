@@ -64,6 +64,7 @@
     "@types/jest": "^26.0.24",
     "@types/ramda": "^0.27.44",
     "@types/react": "^17.0.14",
+    "@types/react-datepicker": "^4.1.7",
     "@types/react-dom": "^17.0.9",
     "@types/styled-components": "^5.1.11",
     "@types/testing-library__jest-dom": "^5.14.1",
@@ -94,7 +95,9 @@
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "@popperjs/core": "2.9.2",
+    "date-fns": "^2.24.0",
     "downshift": "^6.1.7",
+    "react-datepicker": "^4.2.1",
     "react-fast-compare": "3.2.0",
     "react-popper": "2.2.5"
   },
