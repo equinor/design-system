@@ -1,217 +1,400 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState } from 'react'
 import {
-  // Combobox,
-  // ComboboxProps,
-  // ComboboxChanges,
-  Button,
-  Typography,
+  Combobox,
+  ComboboxProps,
+  ComboboxChanges,
   EdsProvider,
+  Button,
 } from '../..'
-import { Story, Meta } from '@storybook/react/types-6-0'
-import { UseComboboxStateChange } from 'downshift'
+import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
+import { Typography } from '../Typography'
 import { items } from '../../stories/data'
 
-// export default {
-//   title: 'Components/Combobox',
-//   // component: Combobox,
-//   parameters: {
-//     docs: {
-//       description: {
-//         component: `The Combobox component allows users to choose one or
-//         multiple items or options from a list.
-//         `,
-//       },
-//     },
-//   },
-// } as Meta
+export default {
+  title: 'Components/Combobox',
+  component: Combobox,
+  parameters: {
+    docs: {
+      description: {
+        component: `The Combobox component allows users to choose one or
+        multiple items or options from a list.
+        `,
+      },
+    },
+  },
+} as Meta
 
 const Wrapper = styled.div`
   margin-bottom: 350px;
 `
 
-// export const Default: Story<ComboboxProps> = (args) => (
-//   <Wrapper>
-//     <Combobox label="You can play with me" {...args} items={items} />
-//   </Wrapper>
-// )
-// export const Multiple: Story<ComboboxProps> = (args) => (
-//   <Wrapper>
-//     <Combobox label="Single" {...args} items={items} />
-//     <Combobox label="Multiple" {...args} items={items} multiple />
-//   </Wrapper>
-// )
-// export const Disabled: Story<ComboboxProps> = () => (
-//   <Combobox label="Choose an element" meta="km/t" items={items} disabled />
-// )
+type CustomDataType = {
+  label: string
+  areaCode?: string
+  emoji?: string
+}
 
-// export const ReadOnly: Story<ComboboxProps> = () => (
-//   <Combobox label="This is read only" items={items} readOnly></Combobox>
-// )
+export const Default: Story<ComboboxProps<CustomDataType>> = (args) => {
+  return (
+    <Wrapper>
+      <Combobox {...args} />
+    </Wrapper>
+  )
+}
 
-// const initial = ['Troms og Finnmark', 'Vestland']
+Default.bind({})
+Default.args = {
+  label: 'Telefon areacodes',
+  options: [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ],
+  multiple: false,
+}
 
-// export const WithPreselected: Story<ComboboxProps> = () => (
-//   <Wrapper>
-//     <Combobox
-//       multiple
-//       label="I have preselected options"
-//       items={items}
-//       initialSelectedItems={initial}
-//     />
-//   </Wrapper>
-// )
+export const UsingOptionLabel: Story<ComboboxProps<CustomDataType>> = () => {
+  const data = [
+    { label: 'Oslo', areaCode: '02', emoji: '☎️' },
+    { label: 'Rogaland', areaCode: '04', emoji: '☎️' },
+    { label: 'Møre og Romsdal', areaCode: '070', emoji: '☎️' },
+    { label: 'Nord-Norge', areaCode: '08x', emoji: '☎️' },
+    { label: 'Hordaland', areaCode: '54', emoji: '☎️' },
+    { label: 'Østfold', areaCode: '09', emoji: '☎️' },
+  ]
 
-// export const UseOnChangeHandler: Story<ComboboxProps> = () => {
-//   const [selectedItems, setSelectedItems] = useState<string[]>(initial)
+  return (
+    <Wrapper>
+      <Combobox
+        label="Telefon areacodes"
+        options={data}
+        optionLabel={(opt) => `${opt.emoji} ${opt.areaCode} - ${opt.label}`}
+        initialSelectedOptions={[data[0]]}
+      />
+      <Combobox
+        label="Telefon areacodes"
+        options={data}
+        optionLabel={(opt) => `${opt.emoji} ${opt.areaCode} - ${opt.label}`}
+        initialSelectedOptions={[data[0], data[2]]}
+        multiple
+      />
+    </Wrapper>
+  )
+}
 
-//   function handleSelectedItemsChange(changes: ComboboxChanges) {
-//     setSelectedItems(changes.selectedItems)
-//   }
-//   return (
-//     <Wrapper>
-//       {selectedItems.length > 0 && (
-//         <p>My value is {selectedItems.join(', ')}</p>
-//       )}
-//       <Combobox
-//         multiple
-//         label="I can show my values outside the component itself"
-//         items={items}
-//         initialSelectedItems={initial}
-//         handleSelectedItemsChange={handleSelectedItemsChange}
-//       />
-//     </Wrapper>
-//   )
-// }
-// export const Controlled: Story<ComboboxProps> = () => {
-//   const [selectedItems, setSelectedItems] = useState<string[]>(initial)
+export const Disabled: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
 
-//   function handleSelectedItemsChange(changes: ComboboxChanges) {
-//     setSelectedItems(changes.selectedItems)
-//   }
-//   return (
-//     <Wrapper>
-//       {selectedItems.length > 0 && (
-//         <p>My value is {selectedItems.join(', ')}</p>
-//       )}
-//       <Combobox
-//         multiple
-//         label="I'm a controlled component"
-//         items={items}
-//         selectedOptions={selectedItems}
-//         handleSelectedItemsChange={handleSelectedItemsChange}
-//       />
-//     </Wrapper>
-//   )
-// }
+  return (
+    <Wrapper>
+      <Combobox
+        label="Single Telefon areacodes"
+        {...args}
+        options={data}
+        disabled
+      />
+      <Combobox
+        label="Multiple Telefon areacodes"
+        {...args}
+        options={data}
+        disabled
+        multiple
+      />
+    </Wrapper>
+  )
+}
 
-// type FormValues = {
-//   fieldOne: string[]
-// }
+export const Readonly: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
 
-// const Field = styled.div`
-//   margin: 1rem;
-// `
-// export const WithReactHookForm: Story<ComboboxProps> = () => {
-//   const defaultValues: FormValues = {
-//     fieldOne: [],
-//   }
-//   const {
-//     handleSubmit,
-//     formState: { errors },
-//     control,
-//   } = useForm<FormValues>({
-//     defaultValues,
-//   })
-//   const [isSubmitted, updateIsSubmitted] = useState(false)
-//   const [formData, updateFormData] = useState<FormData>(null)
+  return (
+    <Wrapper>
+      <Combobox
+        label="Single Telefon areacodes"
+        initialSelectedOptions={[data[0]]}
+        options={data}
+        readOnly
+        {...args}
+      />
+      <Combobox
+        label="Multiple Telefon areacodes"
+        initialSelectedOptions={[data[0], data[1]]}
+        options={data}
+        multiple
+        readOnly
+        {...args}
+      />
+    </Wrapper>
+  )
+}
 
-//   const onSubmit = (data: FormData) => {
-//     updateFormData(data)
-//     updateIsSubmitted(true)
-//     action('onSubmit')(data)
-//   }
+export const WithPreselected: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
 
-//   return (
-//     <Wrapper>
-//       <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-//         Real life example with an external{' '}
-//         <a
-//           href="https://react-hook-form.com/"
-//           rel="noreferrer noopener"
-//           target="blank"
-//         >
-//           form library
-//         </a>
-//       </Typography>
-//       <form onSubmit={handleSubmit(onSubmit)}>
-//         {isSubmitted ? (
-//           <>
-//             <span>Submitted data:</span>
-//             <p>{JSON.stringify(formData)}</p>
-//             <Button
-//               variant="outlined"
-//               onClick={() => {
-//                 updateIsSubmitted(false)
-//                 updateFormData(null)
-//               }}
-//             >
-//               Reset
-//             </Button>
-//           </>
-//         ) : (
-//           <>
-//             <Field>
-//               <Controller
-//                 control={control}
-//                 name="fieldOne"
-//                 rules={{
-//                   validate: (value: string[]) => {
-//                     return value.length > 0
-//                   },
-//                 }}
-//                 render={({ field: { onChange } }) => (
-//                   <Combobox
-//                     handleSelectedItemsChange={({ selectedItems }) =>
-//                       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-//                       onChange(selectedItems)
-//                     }
-//                     label="Where are you from?"
-//                     items={items}
-//                     aria-invalid={errors.fieldOne ? 'true' : 'false'}
-//                     aria-describedby="error-county-required"
-//                     aria-required
-//                   />
-//                 )}
-//               />
-//               <span
-//                 role="alert"
-//                 id="error-county-required"
-//                 style={{
-//                   color: 'red',
-//                   paddingTop: '0.5rem',
-//                   fontSize: '0.75rem',
-//                   display: errors.fieldOne ? 'block' : 'none',
-//                 }}
-//               >
-//                 Hey you! You will have to select <i>something</i>
-//               </span>
-//             </Field>
-//             <Button type="submit" style={{ marginTop: '1rem' }}>
-//               I have made my decision!
-//             </Button>
-//           </>
-//         )}
-//       </form>
-//     </Wrapper>
-//   )
-// }
+  return (
+    <Wrapper>
+      <Combobox
+        label="Single Telefon areacodes"
+        initialSelectedOptions={[data[0]]}
+        options={data}
+        {...args}
+      />
+      <Combobox
+        label="Multiple Telefon areacodes"
+        initialSelectedOptions={[data[0], data[1], data[5]]}
+        options={data}
+        multiple
+        {...args}
+      />
+    </Wrapper>
+  )
+}
 
-// export const Compact: Story = () => (
-//   <EdsProvider density="compact">
-//     <Combobox label="This is compact" items={items} />
-//   </EdsProvider>
-// )
+export const OnChange: Story<ComboboxProps<CustomDataType>> = () => {
+  const data: CustomDataType[] = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
+  const initialSelectedOptions = [data[0], data[1], data[5]]
+  const [selectedItems, setSelectedItems] = useState(initialSelectedOptions)
+
+  const onChange = (changes: ComboboxChanges<CustomDataType>) => {
+    console.log('options', changes.selectedItems)
+    setSelectedItems(changes.selectedItems)
+  }
+
+  return (
+    <Wrapper>
+      <Typography>
+        Selected items:{selectedItems.map((x) => x.label).toString()}
+      </Typography>
+      <Combobox
+        label="Single Telefon areacodes"
+        options={data}
+        onOptionsChange={onChange}
+        initialSelectedOptions={initialSelectedOptions}
+      />
+      <Combobox
+        label="Multiple Telefon areacodes"
+        options={data}
+        onOptionsChange={onChange}
+        initialSelectedOptions={initialSelectedOptions}
+        multiple
+      />
+    </Wrapper>
+  )
+}
+
+export const Compact: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04' },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x' },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
+
+  return (
+    <EdsProvider density="compact">
+      <Wrapper>
+        <Combobox
+          label="Single Telefon areacodes"
+          initialSelectedOptions={[data[0]]}
+          options={data}
+          {...args}
+        />
+        <Combobox
+          label="Multiple Telefon areacodes"
+          initialSelectedOptions={[data[0], data[1]]}
+          options={data}
+          multiple
+          {...args}
+        />
+      </Wrapper>
+    </EdsProvider>
+  )
+}
+
+type FormValues = {
+  fabFieldOne: string
+  fabFieldTwo: string
+  optionalField: string
+}
+
+const Field = styled.div`
+  margin: 1rem;
+`
+
+const Container = styled.div`
+  margin-bottom: 350px;
+`
+
+export const WithReactHookForm: Story<ComboboxProps<CustomDataType>> = () => {
+  const defaultValues: FormValues = {
+    fabFieldOne: null,
+    fabFieldTwo: null,
+    optionalField: null,
+  }
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<FormValues>({
+    defaultValues,
+  })
+  const [isSubmitted, updateIsSubmitted] = useState(false)
+  const [formData, updateFormData] = useState<FormData>(null)
+
+  const onSubmit = (data: FormData) => {
+    updateFormData(data)
+    updateIsSubmitted(true)
+    action('onSubmit')(data)
+  }
+
+  return (
+    <Container>
+      <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
+        Real life example with an external{' '}
+        <a
+          href="https://react-hook-form.com/"
+          rel="noreferrer noopener"
+          target="blank"
+        >
+          form library
+        </a>
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {isSubmitted ? (
+          <>
+            <span>Submitted data:</span>
+            <p>{JSON.stringify(formData)}</p>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                updateIsSubmitted(false)
+                updateFormData(null)
+              }}
+            >
+              Reset
+            </Button>
+          </>
+        ) : (
+          <>
+            <Field>
+              <Controller
+                control={control}
+                name="fabFieldOne"
+                rules={{ required: true }}
+                render={({ field: { onChange } }) => (
+                  <Combobox
+                    onOptionsChange={({ selectedItems }) =>
+                      onChange(selectedItems)
+                    }
+                    label="Where are you from?"
+                    options={items.map((opt) => ({
+                      label: opt,
+                    }))}
+                    aria-invalid={errors.fabFieldOne ? 'true' : 'false'}
+                    aria-describedby="error-county-required"
+                    aria-required
+                  />
+                )}
+              />
+              <span
+                role="alert"
+                id="error-county-required"
+                style={{
+                  color: 'red',
+                  paddingTop: '0.5rem',
+                  fontSize: '0.75rem',
+                  display:
+                    errors.fabFieldOne && errors.fabFieldOne.type === 'required'
+                      ? 'block'
+                      : 'none',
+                }}
+              >
+                Hey you! This field is required
+              </span>
+            </Field>
+            <Field>
+              <Controller
+                control={control}
+                name="fabFieldTwo"
+                render={({ field: { onChange } }) => (
+                  <Combobox
+                    onOptionsChange={({ selectedItems }) =>
+                      onChange(selectedItems)
+                    }
+                    label="Choose your favourite county"
+                    options={items.map((opt) => ({
+                      label: opt,
+                    }))}
+                  />
+                )}
+              />
+            </Field>
+            <Field>
+              <Controller
+                control={control}
+                name="optionalField"
+                render={({ field: { onChange } }) => (
+                  <Combobox
+                    onOptionsChange={({ selectedItems }) =>
+                      onChange(selectedItems)
+                    }
+                    label="Pick atleast two fruits (optional)"
+                    options={[
+                      { label: 'Banana', emoji: '🍌' },
+                      { label: 'Apple', emoji: '🍎' },
+                      { label: 'Grapes', emoji: '🍇' },
+                      { label: 'Kiwi', emoji: '🥝' },
+                      { label: 'Pineapple', emoji: '🍍' },
+                    ]}
+                    optionLabel={(opt) => `${opt.emoji} ${opt.label}`}
+                    multiple
+                  />
+                )}
+              />
+            </Field>
+            <Button type="submit" style={{ marginTop: '1rem' }}>
+              I have made my decisions!
+            </Button>
+          </>
+        )}
+      </form>
+    </Container>
+  )
+}

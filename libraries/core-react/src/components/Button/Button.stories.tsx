@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { menu } from '@equinor/eds-icons'
-import { Group } from '../Group'
+// import { Group } from '../Group'
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -346,13 +346,13 @@ Compact.parameters = {
   },
 }
 
-export const ButtonGroup: Story<ButtonProps> = () => (
-  <Wrapper style={{ gridGap: 0 }}>
-    <Group>
-      <Button>Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="outlined">Outlined</Button>
-    </Group>
-  </Wrapper>
-)
+// export const ButtonGroup: Story<ButtonProps> = () => (
+//   <Wrapper style={{ gridGap: 0 }}>
+//     <Group>
+//       <Button>Contained</Button>
+//       <Button variant="outlined">Outlined</Button>
+//       <Button variant="outlined">Outlined</Button>
+//       <Button variant="outlined">Outlined</Button>
+//     </Group>
+//   </Wrapper>
+// )
