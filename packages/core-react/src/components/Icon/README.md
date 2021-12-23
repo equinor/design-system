@@ -1,7 +1,7 @@
 
 # Icon
 
-React component for rendering SVG icons. The component is just an empty render compoent intended to use provided icons libraries.
+React component for rendering SVG icons. The component is just an empty render compoent intended to use provided icons packages.
 
 ## Usage
 

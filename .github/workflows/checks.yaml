@@ -28,7 +28,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
+          git sparse-checkout set packages/core-react packages/tokens packages/icons
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -80,8 +80,8 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
-      - name: Lint all libraries
-        run: node_modules/.bin/pnpm run lint ./libraries
+      - name: Lint all packages
+        run: node_modules/.bin/pnpm run lint ./packages
   types:
     name: Check types
     runs-on: ubuntu-latest
@@ -95,11 +95,11 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
       - name: Run type checks in core-react
-        run: node_modules/.bin/tsc -p ./libraries/core-react
+        run: node_modules/.bin/tsc -p ./packages/core-react
       - name: Run type checks in tokens
-        run: node_modules/.bin/tsc -p ./libraries/icons
+        run: node_modules/.bin/tsc -p ./packages/icons
       - name: Run type checks in icons
-        run: node_modules/.bin/tsc -p ./libraries/tokens
+        run: node_modules/.bin/tsc -p ./packages/tokens
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
@@ -117,7 +117,7 @@ jobs:
       - name: Save build to cache
         uses: actions/cache@v2
         with:
-          path: ./libraries/tokens
+          path: ./packages/tokens
           key: ${{ github.sha }}-build-tokens
   build-icons:
     name: Build eds-icons
@@ -136,7 +136,7 @@ jobs:
       - name: Save build to cache
         uses: actions/cache@v2
         with:
-          path: ./libraries/icons
+          path: ./packages/icons
           key: ${{ github.sha }}-build-icons
   build-core-react:
     name: Build eds-core-react
@@ -153,12 +153,12 @@ jobs:
       - name: Get eds-icons build
         uses: actions/cache@v2
         with:
-          path: ./libraries/icons
+          path: ./packages/icons
           key: ${{ github.sha }}-build-icons
       - name: Get eds-tokens build
         uses: actions/cache@v2
         with:
-          path: ./libraries/tokens
+          path: ./packages/tokens
           key: ${{ github.sha }}-build-tokens
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build

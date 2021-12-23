@@ -3,16 +3,16 @@ engines: { pnpm: '>=5.13.5' }
 scripts:
   lint: eslint
   lint:all: pnpm run lint .
-  lint:core-react: pnpm run lint ./libraries/core-react
+  lint:core-react: pnpm run lint ./packages/core-react
   init: pnpm multi install --force && pnpm run build
   test:core-react: pnpm --filter @equinor/eds-core-react run test
   build: pnpm run build:icons && pnpm run build:tokens && pnpm run build:core-react
   build:core-react: pnpm --filter @equinor/eds-core-react run build
   build:tokens: pnpm --filter @equinor/eds-tokens run build
   build:icons: pnpm --filter @equinor/eds-icons run build
-  storybook: pnpm --filter ./libraries/core-react run storybook
+  storybook: pnpm --filter @equinor/eds-core-react run storybook
   graphics: pnpm --filter ./assets/woman run dev
-  build:storybook: pnpm --filter ./libraries/core-react run build:storybook
+  build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
   export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0
   export:assets: pnpm --filter @equinor/eds-figma-broker assets BQjYMxdSdgRkdhKTDDU7L4KU
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
