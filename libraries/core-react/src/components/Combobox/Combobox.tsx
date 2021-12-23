@@ -1,10 +1,14 @@
-import { forwardRef, SelectHTMLAttributes, useEffect, useState } from 'react'
-import { useCombobox, UseComboboxProps } from 'downshift'
+import { forwardRef, useState, HTMLAttributes } from 'react'
+import {
+  useCombobox,
+  UseComboboxProps,
+  useMultipleSelection,
+  UseMultipleSelectionProps,
+} from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Label } from '../Label'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
-import { CheckboxInput } from '../Checkbox/Input'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
@@ -14,11 +18,8 @@ import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 import { List } from '../List'
 import { Button } from '../Button'
-import {
-  typographyTemplate,
-  bordersTemplate,
-  spacingsTemplate,
-} from '../../utils'
+import { bordersTemplate } from '../../utils'
+import { ComboboxOption } from './Option'
 
 const Container = styled.div`
   position: relative;
@@ -55,33 +56,6 @@ const StyledList = styled(List)(
   `,
 )
 
-type StyledListItemType = {
-  highlighted: string
-  active?: string
-}
-
-const StyledListItem = styled(List.Item)<StyledListItemType>(
-  ({ theme, highlighted, active }) => {
-    const backgroundColor =
-      highlighted === 'true'
-        ? theme.states.hover.background
-        : active === 'true'
-        ? theme.states.active.background
-        : theme.background
-
-    return css`
-      display: flex;
-      align-items: center;
-      margin: 0;
-      list-style: none;
-      background-color: ${backgroundColor};
-      cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
-      ${typographyTemplate(theme.typography)}
-      ${spacingsTemplate(theme.spacings)}
-    `
-  },
-)
-
 const StyledButton = styled(Button)(
   ({
     theme: {
@@ -96,18 +70,21 @@ const StyledButton = styled(Button)(
   `,
 )
 
-export type ComboboxChanges = {
-  selectedItems: string[]
-  inputValue: string
+type ComboboxOption<T> = T & {
+  label: string
 }
 
-export type ComboboxProps = {
+export type ComboboxChanges<T> = {
+  selectedItems: T[]
+}
+
+export type ComboboxProps<T> = {
   /** List of options to choose from */
-  items: string[]
+  options: ComboboxOption<T>[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
-  initialSelectedItems?: string[]
+  initialSelectedOptions?: ComboboxOption<T>[]
   /** Meta text, for instance unit */
   meta?: string
   /** Disabled state */
@@ -118,219 +95,252 @@ export type ComboboxProps = {
    * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
    * The items that should be selected. */
-  selectedOptions?: string[]
+  selectedOptions?: T[]
   /** Callback for the selected item change
-   * changes.selectedItem gives the selected item
+   * changes.selectedItems gives the selected items
    */
-  handleSelectedItemsChange?: (changes: ComboboxChanges) => void
+  onOptionsChange?: (changes: ComboboxChanges<T>) => void
   /** Enable multiselect */
   multiple?: boolean
-} & SelectHTMLAttributes<HTMLSelectElement>
+  /**  Custom option label */
+  optionLabel?: (option: ComboboxOption<T>) => string
+} & HTMLAttributes<HTMLDivElement>
 
-export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
-  function Combobox(
-    {
-      items = [],
-      label,
-      meta,
-      className,
-      disabled = false,
-      readOnly = false,
-      initialSelectedItems = [],
-      selectedOptions,
-      handleSelectedItemsChange,
-      multiple,
-      ...other
-    },
-    ref,
-  ) {
-    const [inputItems, setInputItems] = useState(items)
-    const isControlled = Boolean(selectedOptions)
-    const [selectedItems, setSelectedItems] = useState<string[]>(
-      isControlled ? selectedOptions : [],
-    )
-    const { density } = useEds()
-    const token = useToken(
-      { density },
-      multiple ? multiSelectTokens : selectTokens,
-    )
-    let placeholderText: string = undefined
+function ComboboxInner<T>(
+  props: ComboboxProps<T>,
+  ref: React.ForwardedRef<HTMLDivElement>,
+) {
+  const {
+    options = [],
+    label,
+    meta,
+    className,
+    disabled = false,
+    readOnly = false,
+    onOptionsChange,
+    selectedOptions,
+    multiple,
+    initialSelectedOptions = [],
+    optionLabel = (item) => item.label,
+    ...other
+  } = props
 
-    useEffect(() => {
-      if (isControlled) {
-        setSelectedItems(selectedOptions)
-      }
-      if (initialSelectedItems.length) {
-        setSelectedItems(initialSelectedItems)
-      }
-    }, [selectedOptions, isControlled, initialSelectedItems])
+  const isControlled = Boolean(selectedOptions)
+  const labelItems = options.map(optionLabel)
+  const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
+  const initialSelectedItems = initialSelectedOptions.map(optionLabel)
+  const controlledSelectedItems = (selectedOptions || []).map(optionLabel)
 
-    let comboBoxProps: UseComboboxProps<string> = {
-      items: inputItems,
-      selectedItem: multiple ? null : undefined,
-      onInputValueChange: ({ inputValue }) => {
-        setInputItems(
-          items.filter((item) =>
-            item.toLowerCase().includes(inputValue.toLowerCase()),
-          ),
+  const { density } = useEds()
+  const token = useToken(
+    { density },
+    multiple ? multiSelectTokens : selectTokens,
+  )
+  let placeholderText: string = undefined
+
+  let multipleSelectionProps: UseMultipleSelectionProps<string> = {
+    initialSelectedItems: multiple
+      ? initialSelectedItems
+      : initialSelectedItems[0]
+      ? [initialSelectedItems[0]]
+      : [],
+    onSelectedItemsChange: (changes) => {
+      if (onOptionsChange) {
+        const items = options.filter((x) =>
+          changes.selectedItems.includes(optionLabel(x)),
         )
-      },
-      onIsOpenChange: ({ selectedItem }) => {
-        if (inputItems.length === 1 && selectedItem === inputItems[0]) {
-          setInputItems(items)
-        }
-      },
-      onStateChange: ({ type, selectedItem, inputValue }) => {
+        onOptionsChange({
+          selectedItems: items,
+        })
+      }
+    },
+  }
+
+  if (isControlled) {
+    multipleSelectionProps = {
+      ...multipleSelectionProps,
+      selectedItems: controlledSelectedItems,
+    }
+  }
+
+  const {
+    getDropdownProps,
+    addSelectedItem,
+    removeSelectedItem,
+    selectedItems,
+    reset: resetSelection,
+    setSelectedItems,
+  } = useMultipleSelection(multipleSelectionProps)
+
+  let comboBoxProps: UseComboboxProps<string> = {
+    items: availableItems,
+    initialSelectedItem: initialSelectedItems[0],
+    onInputValueChange: ({ inputValue }) => {
+      setAvailableItems(
+        labelItems.filter((item) =>
+          item.toLowerCase().includes(inputValue.toLowerCase()),
+        ),
+      )
+    },
+    onIsOpenChange: ({ selectedItem }) => {
+      // Show all options when single select is reopened with a selected item
+      if (availableItems.length === 1 && selectedItem === availableItems[0]) {
+        setAvailableItems(labelItems)
+      }
+    },
+    onStateChange: ({ type, selectedItem }) => {
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputChange:
+          break
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.ItemClick:
+        case useCombobox.stateChangeTypes.InputBlur:
+          if (selectedItem) {
+            if (multiple) {
+              selectedItems.includes(selectedItem)
+                ? removeSelectedItem(selectedItem)
+                : addSelectedItem(selectedItem)
+            } else {
+              setSelectedItems([selectedItem])
+            }
+          }
+
+          break
+        default:
+          break
+      }
+    },
+  }
+
+  if (isControlled && !multiple) {
+    comboBoxProps = {
+      ...comboBoxProps,
+      selectedItem: controlledSelectedItems[0],
+    }
+  }
+
+  if (multiple) {
+    placeholderText = `${selectedItems.length}/${options.length} selected`
+    comboBoxProps = {
+      ...comboBoxProps,
+      selectedItem: null,
+      stateReducer: (state, actionAndChanges) => {
+        const { changes, type } = actionAndChanges
         switch (type) {
-          case useCombobox.stateChangeTypes.InputChange:
-            break
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
-          case useCombobox.stateChangeTypes.InputBlur:
-            if (selectedItem) {
-              const index = selectedItems.indexOf(selectedItem)
-              let updatedSelectItems: string[] = []
-              if (index > 0) {
-                updatedSelectItems = [
-                  ...selectedItems.slice(0, index),
-                  ...selectedItems.slice(index + 1),
-                ]
-              } else if (index === 0) {
-                updatedSelectItems = [...selectedItems.slice(1)]
-              } else {
-                updatedSelectItems = [...selectedItems, selectedItem]
-              }
-
-              setSelectedItems(updatedSelectItems)
-              if (handleSelectedItemsChange) {
-                handleSelectedItemsChange({
-                  selectedItems: updatedSelectItems,
-                  inputValue,
-                })
-              }
+            return {
+              ...changes,
+              isOpen: true, // keep menu open after selection.
+              highlightedIndex: state.highlightedIndex,
+              inputValue: '', // don't add the item string as input value at selection.
             }
-
-            break
+          case useCombobox.stateChangeTypes.InputBlur:
+            return {
+              ...changes,
+              inputValue: '', // don't add the item string as input value at selection.
+            }
           default:
-            break
+            return changes
         }
       },
     }
+  }
 
-    if (multiple) {
-      placeholderText = `${selectedItems.length}/${items.length} selected`
-      comboBoxProps = {
-        ...comboBoxProps,
-        stateReducer: (state, actionAndChanges) => {
-          const { changes, type } = actionAndChanges
-          switch (type) {
-            case useCombobox.stateChangeTypes.InputKeyDownEnter:
-            case useCombobox.stateChangeTypes.ItemClick:
-              return {
-                ...changes,
-                isOpen: true, // keep menu open after selection.
-                highlightedIndex: state.highlightedIndex,
-                inputValue: '', // don't add the item string as input value at selection.
-              }
-            case useCombobox.stateChangeTypes.InputBlur:
-              return {
-                ...changes,
-                inputValue: '', // don't add the item string as input value at selection.
-              }
-            default:
-              return changes
-          }
-        },
-      }
+  const {
+    isOpen,
+    getToggleButtonProps,
+    getLabelProps,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+    openMenu,
+    inputValue,
+    reset: resetCombobox,
+  } = useCombobox(comboBoxProps)
+
+  const openSelect = () => {
+    if (!isOpen && !(disabled || readOnly)) {
+      openMenu()
     }
+  }
 
-    const {
-      isOpen,
-      getToggleButtonProps,
-      getLabelProps,
-      getMenuProps,
-      getInputProps,
-      getComboboxProps,
-      highlightedIndex,
-      getItemProps,
-      openMenu,
-      selectedItem,
-      reset,
-      inputValue,
-    } = useCombobox(comboBoxProps)
+  const clear = () => {
+    resetCombobox()
+    resetSelection()
+  }
+  const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
 
-    const openSelect = () => {
-      if (!isOpen && !(disabled || readOnly)) {
-        openMenu()
-      }
-    }
+  return (
+    <ThemeProvider theme={token}>
+      <Container className={className} ref={ref}>
+        <Label
+          {...getLabelProps()}
+          label={label}
+          meta={meta}
+          disabled={disabled}
+        />
 
-    return (
-      <ThemeProvider theme={token}>
-        <Container className={className} ref={ref}>
-          <Label
-            {...getLabelProps()}
-            label={label}
-            meta={meta}
-            disabled={disabled}
-          />
-
-          <Container {...getComboboxProps()}>
-            <StyledInput
-              {...getInputProps({
+        <Container {...getComboboxProps()}>
+          <StyledInput
+            {...getInputProps(
+              getDropdownProps({
+                preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-              })}
-              placeholder={placeholderText}
-              readOnly={readOnly}
-              onFocus={openSelect}
-              onClick={openSelect}
-              {...other}
-            />
-            {Boolean(selectedItems.length || inputValue) && (
-              <StyledButton
-                variant="ghost_icon"
-                disabled={disabled || readOnly}
-                aria-label={'clear options'}
-                title="clear"
-                onClick={reset}
-                style={{ right: 32 }}
-              >
-                <Icon data={close} size={16} />
-              </StyledButton>
+              }),
             )}
+            placeholder={placeholderText}
+            readOnly={readOnly}
+            onFocus={openSelect}
+            onClick={openSelect}
+            {...other}
+          />
+          {showClearButton && (
             <StyledButton
               variant="ghost_icon"
-              {...getToggleButtonProps({ disabled: disabled || readOnly })}
-              aria-label={'toggle options'}
-              title="open"
+              disabled={disabled || readOnly}
+              aria-label={'clear options'}
+              title="clear"
+              onClick={clear}
+              style={{ right: 32 }}
             >
-              <Icon data={isOpen ? arrow_drop_up : arrow_drop_down}></Icon>
+              <Icon data={close} size={16} />
             </StyledButton>
-          </Container>
-          <StyledList {...getMenuProps()}>
-            {isOpen &&
-              inputItems.map((item, index) => (
-                <StyledListItem
-                  key={`${item}`}
-                  highlighted={highlightedIndex === index ? 'true' : 'false'}
-                  active={!multiple && selectedItem === item ? 'true' : 'false'}
-                  {...getItemProps({ item, index, disabled })}
-                >
-                  {multiple && (
-                    <CheckboxInput
-                      checked={selectedItems.includes(item)}
-                      value={item}
-                      onChange={() => {
-                        return null
-                      }}
-                    />
-                  )}
-                  <span>{item}</span>
-                </StyledListItem>
-              ))}
-          </StyledList>
+          )}
+          <StyledButton
+            variant="ghost_icon"
+            {...getToggleButtonProps({ disabled: disabled || readOnly })}
+            aria-label={'toggle options'}
+            title="open"
+          >
+            {!readOnly && (
+              <Icon data={isOpen ? arrow_drop_up : arrow_drop_down}></Icon>
+            )}
+          </StyledButton>
         </Container>
-      </ThemeProvider>
-    )
+        <StyledList {...getMenuProps()}>
+          {isOpen &&
+            availableItems.map((item, index) => (
+              <ComboboxOption
+                key={item}
+                value={item}
+                multiple={multiple}
+                highlighted={highlightedIndex === index ? 'true' : 'false'}
+                isSelected={selectedItems.includes(item)}
+                {...getItemProps({ item, index, disabled })}
+              />
+            ))}
+        </StyledList>
+      </Container>
+    </ThemeProvider>
+  )
+}
+
+export const Combobox = forwardRef(ComboboxInner) as <T>(
+  props: ComboboxProps<T> & {
+    ref?: React.ForwardedRef<HTMLDivElement>
+    displayName?: string | undefined
   },
-)
+) => ReturnType<typeof ComboboxInner>
