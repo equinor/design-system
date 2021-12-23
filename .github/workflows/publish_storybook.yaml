@@ -12,7 +12,7 @@ on:
     paths:
       - 'packages/eds-core-react/**'
       - 'packages/tokens/**'
-      - 'packages/icons/**'
+      - 'packages/eds-icons/**'
 jobs:
   setup:
     name: Setup base files
@@ -34,7 +34,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/eds-core-react packages/tokens packages/icons
+          git sparse-checkout set packages/eds-core-react packages/tokens packages/eds-icons
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
