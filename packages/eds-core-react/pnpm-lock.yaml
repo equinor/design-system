@@ -54,8 +54,8 @@ specifiers:
 
 dependencies:
   '@babel/runtime': 7.16.3
-  '@equinor/eds-icons': link:../icons
-  '@equinor/eds-tokens': link:../tokens
+  '@equinor/eds-icons': link:../eds-icons
+  '@equinor/eds-tokens': link:../eds-tokens
   '@popperjs/core': 2.9.2
   date-fns: 2.27.0
   downshift: 6.1.7_react@17.0.2
