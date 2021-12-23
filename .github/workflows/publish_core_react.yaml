@@ -31,7 +31,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/eds-core-react packages/tokens packages/eds-icons
+          git sparse-checkout set packages/eds-core-react packages/eds-tokens packages/eds-icons
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -100,7 +100,7 @@ jobs:
       - name: Use token build cache
         uses: actions/cache@v2
         with:
-          path: ./packages/tokens
+          path: ./packages/eds-tokens
           key: ${{ github.sha }}-build-tokens
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
@@ -143,7 +143,7 @@ jobs:
       - name: Get eds-tokens build
         uses: actions/cache@v2
         with:
-          path: ./packages/tokens
+          path: ./packages/eds-tokens
           key: ${{ github.sha }}-build-tokens
       - name: Use core-react build cache
         uses: actions/cache@v2

@@ -1,5 +1,5 @@
 const COMMON_DIR = '../../common'
-const TOKENS_DIR = '../../packages/tokens'
+const TOKENS_DIR = '../../packages/eds-tokens'
 const STATIC_DIR = '../../packages/static'
 const ICONS_DIR = '../../packages/eds-icons'
 const STORYBOOK_DIR = '../../packages/eds-core-react/stories'

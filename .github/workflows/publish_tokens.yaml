@@ -27,7 +27,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/tokens
+          git sparse-checkout set packages/eds-tokens
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -57,7 +57,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
       - name: Lint
-        run: node_modules/.bin/pnpm run lint ./packages/tokens
+        run: node_modules/.bin/pnpm run lint ./packages/eds-tokens
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
