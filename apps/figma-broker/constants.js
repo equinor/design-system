@@ -2,7 +2,7 @@ const COMMON_DIR = '../../common'
 const TOKENS_DIR = '../../packages/tokens'
 const STATIC_DIR = '../../packages/static'
 const ICONS_DIR = '../../packages/icons'
-const STORYBOOK_DIR = '../../packages/core-react/stories'
+const STORYBOOK_DIR = '../../packages/eds-core-react/stories'
 
 export const PATHS = {
   TOKENS: TOKENS_DIR,

@@ -3,7 +3,7 @@ engines: { pnpm: '>=5.13.5' }
 scripts:
   lint: eslint
   lint:all: pnpm run lint .
-  lint:core-react: pnpm run lint ./packages/core-react
+  lint:core-react: pnpm run lint ./packages/eds-core-react
   init: pnpm multi install --force && pnpm run build
   test:core-react: pnpm --filter @equinor/eds-core-react run test
   build: pnpm run build:icons && pnpm run build:tokens && pnpm run build:core-react
