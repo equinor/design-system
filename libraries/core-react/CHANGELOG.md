@@ -469,7 +469,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added outside click support for closing `Menu`. Outside clicks will now call the `onClose` handler function. ([#548](https://github.com/equinor/design-system/issues/548))
 - Added `data` property to `Icon` component to easily compose icon to be rendered. ([#584](https://github.com/equinor/design-system/issues/584))
-  - See `Icon` [README](https://github.com/equinor/design-system/tree/develop/libraries/core-react/src/Icon) for more information
+  - See `Icon` [README](https://github.com/equinor/design-system/tree/develop/packages/core-react/src/Icon) for more information
 
 ## [0.6.1] - 2020-09-04
 

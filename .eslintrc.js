@@ -52,8 +52,8 @@ module.exports = {
         project: [
           './tsconfig.eslint.json',
           './apps/*/tsconfig.json',
-          './libraries/*/tsconfig.json',
-          './libraries/*/*/tsconfig.json',
+          './packages/*/tsconfig.json',
+          './packages/*/*/tsconfig.json',
         ],
       },
       settings: {
@@ -66,8 +66,8 @@ module.exports = {
         'import/resolver': {
           typescript: {
             project: [
-              './libraries/*/tsconfig.json',
-              './libraries/*/*/tsconfig.json',
+              './packages/*/tsconfig.json',
+              './packages/*/*/tsconfig.json',
             ],
           },
         },

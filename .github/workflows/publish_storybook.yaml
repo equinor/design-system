@@ -10,9 +10,9 @@ on:
     branches:
       - develop
     paths:
-      - 'libraries/core-react/**'
-      - 'libraries/tokens/**'
-      - 'libraries/icons/**'
+      - 'packages/core-react/**'
+      - 'packages/tokens/**'
+      - 'packages/icons/**'
 jobs:
   setup:
     name: Setup base files
@@ -34,7 +34,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
+          git sparse-checkout set packages/core-react packages/tokens packages/icons
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -145,7 +145,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build and push image
         run: |
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./libraries/core-react/Dockerfile.storybook .
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./packages/core-react/Dockerfile.storybook .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
       - name: Deploy to Web app
         uses: azure/webapps-deploy@v2
