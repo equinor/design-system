@@ -2,9 +2,7 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.203.0/containers/typescript-node
 {
   "name": "Node.js & TypeScript",
-  "runArgs": [
-    "--init"
-  ],
+  "runArgs": ["--init"],
   "build": {
     "dockerfile": "Dockerfile",
     // Update 'VARIANT' to pick a Node version: 16, 14, 12.
@@ -33,7 +31,7 @@
       "*.json": "jsonc",
       "[Dd]ockerfile*": "dockerfile",
       "docker-compose*": "yaml"
-    },
+    }
   },
   "extensions": [
     "dbaeumer.vscode-eslint",
@@ -44,20 +42,18 @@
     "silvenon.mdx",
     "jock.svg"
   ],
-  "forwardPorts": [
-    9000
-  ],
+  "forwardPorts": [9000],
   "portsAttributes": {
     "9000": {
       "label": "Storybook",
-      "onAutoForward": "notify",
+      "onAutoForward": "notify"
     },
     "3000": {
       "label": "Graphics",
-      "onAutoForward": "notify",
-    },
+      "onAutoForward": "notify"
+    }
   },
-  "onCreateCommand": "pnpm install && pnpm recursive install --filter ./libraries",
+  "onCreateCommand": "pnpm install && pnpm recursive install --filter ./packages",
   "remoteUser": "node",
   "features": {
     "docker-in-docker": "20.10",

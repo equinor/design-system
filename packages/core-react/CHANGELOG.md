@@ -127,7 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Tooltip` should now respect external handlers ([#1558](https://github.com/equinor/design-system/issues/1558))
 - `TextField` should now respect external handlers ([#1538](https://github.com/equinor/design-system/issues/1538))
 - `Popover` should now only close on `ESC` key when is open ([#1529](https://github.com/equinor/design-system/issues/1529))
-- `Breadcrumbs.Breadcrumb` will now be rendered as `span` when `href` is undefined to avoid duplicate `a` elements when used with router libraries ([#1505](https://github.com/equinor/design-system/issues/1505))
+- `Breadcrumbs.Breadcrumb` will now be rendered as `span` when `href` is undefined to avoid duplicate `a` elements when used with router packages ([#1505](https://github.com/equinor/design-system/issues/1505))
 - `Snackbar` & `Banner` components should now accept `ref` properties! ([#810](https://github.com/equinor/design-system/issues/810))
 - `Tooltip` should now work when used in combination with `Popover` or `Menu` with anchor elements ([#1496](https://github.com/equinor/design-system/issues/1496))
 - Adjustments and added missing `compact` styling for `Radio` ([#1580 ](https://github.com/equinor/design-system/pull/1580))

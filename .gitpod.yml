@@ -5,7 +5,7 @@ tasks:
   - name: Install
     init: |
       pnpm install
-      pnpm recursive install --filter ./libraries
+      pnpm recursive install --filter ./packages
       gp sync-done install
     command: pnpm storybook
   - name: Lint

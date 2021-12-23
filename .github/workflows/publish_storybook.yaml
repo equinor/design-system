@@ -86,8 +86,8 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
-      - name: Lint all libraries
-        run: node_modules/.bin/pnpm run lint ./libraries
+      - name: Lint all packages
+        run: node_modules/.bin/pnpm run lint ./packages
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest

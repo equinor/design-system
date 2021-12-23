@@ -80,8 +80,8 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
-      - name: Lint all libraries
-        run: node_modules/.bin/pnpm run lint ./libraries
+      - name: Lint all packages
+        run: node_modules/.bin/pnpm run lint ./packages
   types:
     name: Check types
     runs-on: ubuntu-latest
