@@ -5,7 +5,7 @@ import {
   UseComboboxStateChange,
 } from 'downshift'
 import styled, { ThemeProvider } from 'styled-components'
-import { Label, Icon } from '../../'
+import { Label, Icon, useEds } from '@equinor/eds-core-react'
 import { time } from '@equinor/eds-icons'
 import { spacingsTemplate } from '../../utils'
 import { timePicker as tokens } from './TimePicker.tokens'
@@ -17,7 +17,6 @@ import {
   StyledListItem,
   StyledInputWrapper,
 } from './commonStyles'
-import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
 
 const PaddedStyledListItem = styled(StyledListItem)`

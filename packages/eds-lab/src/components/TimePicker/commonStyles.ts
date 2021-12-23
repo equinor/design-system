@@ -1,7 +1,5 @@
 import { HTMLAttributes } from 'react'
-import { Input } from '../Input'
-import { List } from '../List'
-import { Button } from '../Button'
+import { Button, List, Input } from '@equinor/eds-core-react'
 import styled, { css } from 'styled-components'
 import { timePicker as timePickerToken } from './TimePicker.tokens'
 import { typographyTemplate, bordersTemplate } from '../../utils'

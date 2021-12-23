@@ -1,7 +1,6 @@
 import { forwardRef, LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { CheckboxInput } from '../Checkbox/Input'
-import { List } from '../List'
+import { List } from '@equinor/eds-core-react'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
 
 type StyledListItemType = {
@@ -46,7 +45,7 @@ export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         active={!multiple && isSelected ? 'true' : 'false'}
         {...other}
       >
-        {multiple && (
+        {/* {multiple && (
           <CheckboxInput
             checked={isSelected}
             value={value}
@@ -54,7 +53,7 @@ export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
               return null
             }}
           />
-        )}
+        )} */}
         <span>{value}</span>
       </StyledListItem>
     )

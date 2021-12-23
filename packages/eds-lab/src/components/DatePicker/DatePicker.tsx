@@ -12,8 +12,7 @@ import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { outlineTemplate } from '../../utils'
-import { Paper } from '../Paper'
-import { Icon } from '../..'
+import { Paper, Icon } from '@equinor/eds-core-react'
 
 registerLocale('en-gb', enGb)
 

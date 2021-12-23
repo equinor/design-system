@@ -2,10 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { getMonth, getYear } from 'date-fns'
 import { datePicker as tokens } from './DatePicker.tokens'
-import { Icon, Typography } from '../../'
 import { arrow_back, arrow_forward } from '@equinor/eds-icons'
 import { typographyTemplate } from '../../utils'
-import { Button } from '../Button'
+import { Typography, Icon, Button } from '@equinor/eds-core-react'
 
 type PopupHeaderProps = {
   date: Date

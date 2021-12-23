@@ -73,8 +73,8 @@
     "jest": "^27.0.6",
     "jest-styled-components": "^7.0.5",
     "js-file-download": "^0.4.12",
-    "ramda": "^0.27.1",
     "postcss": "^8.4.4",
+    "ramda": "^0.27.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.11.1",
@@ -92,6 +92,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.16.3",
+    "@equinor/eds-core-react": "workspace:*",
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "@popperjs/core": "2.9.2",

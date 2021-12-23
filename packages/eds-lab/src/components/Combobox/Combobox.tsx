@@ -6,18 +6,20 @@ import {
   UseMultipleSelectionProps,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
-import { Label } from '../Label'
-import { Icon } from '../Icon'
-import { Input } from '../Input'
+import {
+  Label,
+  Icon,
+  Input,
+  useEds,
+  List,
+  Button,
+} from '@equinor/eds-core-react'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Combobox.tokens'
-import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
-import { List } from '../List'
-import { Button } from '../Button'
 import { bordersTemplate } from '../../utils'
 import { ComboboxOption } from './Option'
 
