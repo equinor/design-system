@@ -1,17 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState } from 'react'
-import {
-  Combobox,
-  ComboboxProps,
-  ComboboxChanges,
-  EdsProvider,
-  Button,
-} from '../..'
+import { Combobox, ComboboxProps, ComboboxChanges } from '../..'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography } from '../Typography'
+import { Typography, EdsProvider, Button } from '@equinor/eds-core-react'
 import { items } from '../../stories/data'
 
 export default {

@@ -1,4 +1,4 @@
-import { Typography } from '..'
+import { Typography } from '@equinor/eds-core-react'
 
 export const items = [
   'Oslo',
