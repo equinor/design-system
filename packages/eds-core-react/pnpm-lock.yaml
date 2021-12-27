@@ -26,13 +26,11 @@ specifiers:
   '@types/jest': ^26.0.24
   '@types/ramda': ^0.27.44
   '@types/react': ^17.0.14
-  '@types/react-datepicker': ^4.1.7
   '@types/react-dom': ^17.0.9
   '@types/styled-components': ^5.1.11
   '@types/testing-library__jest-dom': ^5.14.1
   babel-loader: ^8.2.2
   babel-plugin-styled-components: ^1.13.2
-  date-fns: ^2.24.0
   downshift: ^6.1.7
   jest: ^27.0.6
   jest-styled-components: ^7.0.5
@@ -40,7 +38,6 @@ specifiers:
   postcss: ^8.4.4
   ramda: ^0.27.1
   react: ^17.0.2
-  react-datepicker: ^4.2.1
   react-dom: ^17.0.2
   react-fast-compare: 3.2.0
   react-hook-form: ^7.11.1
@@ -57,9 +54,7 @@ dependencies:
   '@equinor/eds-icons': link:../eds-icons
   '@equinor/eds-tokens': link:../eds-tokens
   '@popperjs/core': 2.9.2
-  date-fns: 2.27.0
   downshift: 6.1.7_react@17.0.2
-  react-datepicker: 4.5.0_react-dom@17.0.2+react@17.0.2
   react-fast-compare: 3.2.0
   react-popper: 2.2.5_a16f30364266ce234ee1188a6d27cb60
 
@@ -85,7 +80,6 @@ devDependencies:
   '@types/jest': 26.0.24
   '@types/ramda': 0.27.44
   '@types/react': 17.0.14
-  '@types/react-datepicker': 4.3.2_react@17.0.2
   '@types/react-dom': 17.0.9
   '@types/styled-components': 5.1.11
   '@types/testing-library__jest-dom': 5.14.1
@@ -5397,17 +5391,6 @@ packages:
       '@types/react': 17.0.33
     dev: true
 
-  /@types/react-datepicker/4.3.2_react@17.0.2:
-    resolution: {integrity: sha512-vj8sN+tdQPF13bH4CU8DdTuT0Z4h6+3IG14lGCSDlIw1QvTe3svr2Yqp7KbDlcRpbdcnhya3e91SnCVk+kH/RQ==}
-    dependencies:
-      '@popperjs/core': 2.9.2
-      '@types/react': 17.0.33
-      date-fns: 2.27.0
-      react-popper: 2.2.5_a16f30364266ce234ee1188a6d27cb60
-    transitivePeerDependencies:
-      - react
-    dev: true
-
   /@types/react-dom/17.0.9:
     resolution: {integrity: sha512-wIvGxLfgpVDSAMH5utdL9Ngm5Owu0VsGmldro3ORLXV8CShrL8awVj06NuEXFQ5xyaYfdca7Sgbk/50Ri1GdPg==}
     dependencies:
@@ -6926,10 +6909,6 @@ packages:
       static-extend: 0.1.2
     dev: true
 
-  /classnames/2.3.1:
-    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
-    dev: false
-
   /clean-css/4.2.4:
     resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==}
     engines: {node: '>= 4.0'}
@@ -7527,10 +7506,6 @@ packages:
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
     dev: true
-
-  /date-fns/2.27.0:
-    resolution: {integrity: sha512-sj+J0Mo2p2X1e306MHq282WS4/A8Pz/95GIFcsPNMPMZVI3EUrAdSv90al1k+p74WGLCruMXk23bfEDZa71X9Q==}
-    engines: {node: '>=0.11'}
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -12484,22 +12459,6 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: true
 
-  /react-datepicker/4.5.0_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-mFP/SbtFSXx21Wx3Nfv+RREwd/x0q14x7QL79ZCi/PVkHSFLwLWhXyOtj3OIzi1AcVYb/fMMcvi8e5b12n8/sg==}
-    peerDependencies:
-      react: ^16.9.0 || ^17
-      react-dom: ^16.9.0 || ^17
-    dependencies:
-      '@popperjs/core': 2.9.2
-      classnames: 2.3.1
-      date-fns: 2.27.0
-      prop-types: 15.7.2
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      react-onclickoutside: 6.12.1_react-dom@17.0.2+react@17.0.2
-      react-popper: 2.2.5_a16f30364266ce234ee1188a6d27cb60
-    dev: false
-
   /react-dev-utils/11.0.4:
     resolution: {integrity: sha512-dx0LvIGHcOPtKbeiSUM4jqpBl3TcY7CDjZdfOIcKeznE7BWr9dg0iPG90G5yfVQ+p/rGNMXdbfStvzQZEVEi4A==}
     engines: {node: '>=10'}
@@ -12653,16 +12612,6 @@ packages:
   /react-lifecycles-compat/3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: true
-
-  /react-onclickoutside/6.12.1_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-a5Q7CkWznBRUWPmocCvE8b6lEYw1s6+opp/60dCunhO+G6E4tDTO2Sd2jKE+leEnnrLAE2Wj5DlDHNqj5wPv1Q==}
-    peerDependencies:
-      react: ^15.5.x || ^16.x || ^17.x
-      react-dom: ^15.5.x || ^16.x || ^17.x
-    dependencies:
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-    dev: false
 
   /react-popper-tooltip/3.1.1_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-EnERAnnKRptQBJyaee5GJScWNUKQPDD2ywvzZyUjst/wj5U64C8/CnSYLNEmP2hG0IJ3ZhtDxE8oDN+KOyavXQ==}
