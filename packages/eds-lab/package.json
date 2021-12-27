@@ -1,7 +1,7 @@
 {
   "name": "@equinor/eds-lab",
-  "version": "0.17.0",
-  "description": "The React implementation of the Equinor Design System",
+  "version": "0.1.0",
+  "description": "The lab for the Equinor Design System",
   "sideEffects": [
     "**/*.css"
   ],
@@ -40,7 +40,8 @@
     "eds",
     "design system",
     "equinor",
-    "react"
+    "react",
+    "lab"
   ],
   "devDependencies": {
     "@babel/cli": "^7.14.8",
