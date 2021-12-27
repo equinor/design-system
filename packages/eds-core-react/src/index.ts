@@ -33,6 +33,5 @@ export * from './components/Checkbox'
 export * from './components/Radio'
 export * from './components/Switch'
 export * from './components/EdsProvider'
-export * from './components/Combobox'
 export * from './components/Paper'
 /* eslint-enable */
