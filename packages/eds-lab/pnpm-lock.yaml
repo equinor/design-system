@@ -8,7 +8,7 @@ specifiers:
   '@babel/preset-react': ^7.14.5
   '@babel/preset-typescript': ^7.14.5
   '@babel/runtime': ^7.16.3
-  '@equinor/eds-core-react': ^0.17.0
+  '@equinor/eds-core-react': workspace:*
   '@equinor/eds-icons': workspace:*
   '@equinor/eds-tokens': workspace:*
   '@popperjs/core': 2.9.2
