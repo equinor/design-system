@@ -1,9 +1,13 @@
-name: Checks
+name: Checks core-react
 on:
   workflow_dispatch:
   pull_request:
     branches:
       - develop
+    paths:
+      - 'packages/eds-core-react/**'
+      - 'packages/eds-tokens/**'
+      - 'packages/eds-icons/**'
   push:
     branches:
       - develop
