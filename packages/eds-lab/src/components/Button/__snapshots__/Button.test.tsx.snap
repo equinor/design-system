@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Matches snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="eds-typography-navigation__btn eds-btn primary contained comfortable"
+    tabindex="0"
+  >
+    <span
+      class="eds-btn-inner"
+    >
+      Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
