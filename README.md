@@ -17,6 +17,7 @@ While the design system itself lives in [Figma][], this repository contains impl
   - [Storefront](#storefront)
   - [React](#react)
     - [Installation](#installation)
+    - [Safari](#safari)
     - [Usage](#usage)
   - [Icons](#icons)
     - [Installation](#installation-1)
@@ -73,7 +74,7 @@ Install dependencies using the shorthand version of `pnpm multi install`
 [pnpm]: https://pnpm.js.org
 
 ### Work with the React components
-We use [storybook](https://storybook.js.org/) as a development environment `(/apps/storybook-react)`.
+We use [storybook](https://storybook.js.org/) as a development environment.
 
 Start storybook on localhost:9000 by running the following command from root:
 
