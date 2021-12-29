@@ -57,7 +57,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -69,7 +69,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
       - name: Test eds-core-react
         run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
   lint:
@@ -83,7 +83,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
       - name: Lint all packages
         run: node_modules/.bin/pnpm run lint ./packages
   types:
@@ -97,7 +97,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
       - name: Run type checks in core-react
         run: node_modules/.bin/tsc -p ./packages/eds-core-react
       - name: Run type checks in tokens
@@ -115,7 +115,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
       - name: Save build to cache
@@ -134,7 +134,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Save build to cache
@@ -153,7 +153,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
       - name: Get eds-icons build
         uses: actions/cache@v2
         with:
@@ -184,6 +184,6 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
       - name: Build storybook
         run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
