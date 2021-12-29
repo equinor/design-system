@@ -1,13 +1,11 @@
-name: Checks core-react
+name: Checks lab
 on:
   workflow_dispatch:
   pull_request:
     branches:
       - develop
     paths:
-      - 'packages/eds-core-react/**'
-      - 'packages/eds-tokens/**'
-      - 'packages/eds-icons/**'
+      - 'packages/eds-lab/**'
   push:
     branches:
       - develop
@@ -32,7 +30,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/eds-core-react packages/eds-tokens packages/eds-icons
+          git sparse-checkout set packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -57,57 +55,11 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-core
-      - name: Test eds-core-react
-        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-core
-      - name: Lint all packages
-        run: node_modules/.bin/pnpm run lint ./packages
-  types:
-    name: Check types
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-core
-      - name: Run type checks in core-react
-        run: node_modules/.bin/tsc -p ./packages/eds-core-react
-      - name: Run type checks in tokens
-        run: node_modules/.bin/tsc -p ./packages/eds-icons
-      - name: Run type checks in icons
-        run: node_modules/.bin/tsc -p ./packages/eds-tokens
+          key: ${{ github.sha }}-lab
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
-    needs: [types, test, lint]
+    needs: setup
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -115,7 +67,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
+          key: ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
       - name: Save build to cache
@@ -126,7 +78,7 @@ jobs:
   build-icons:
     name: Build eds-icons
     runs-on: ubuntu-latest
-    needs: [types, test, lint]
+    needs: setup
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -134,7 +86,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
+          key: ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Save build to cache
@@ -153,7 +105,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
+          key: ${{ github.sha }}-lab
       - name: Get eds-icons build
         uses: actions/cache@v2
         with:
@@ -173,17 +125,87 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-build-core-react
-  build-storybook:
-    name: Build Storybook
+  test:
+    name: Test
     runs-on: ubuntu-latest
-    needs: [test, lint]
+    needs: [build-core-react]
     steps:
-      - name: Get base files
+      - name: Get core-react build
         uses: actions/cache@v2
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
+          key: ${{ github.sha }}-build-core-react
+      - name: Test eds-lab
+        run: node_modules/.bin/pnpm --filter @equinor/eds-lab run test
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: [build-core-react]
+    steps:
+      - name: Get core-react build
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-build-core-react
+      - name: Lint all packages
+        run: node_modules/.bin/pnpm run lint ./packages
+  types:
+    name: Check types
+    runs-on: ubuntu-latest
+    needs: [build-core-react]
+    steps:
+      - name: Get core-react build
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-build-core-react
+      - name: Run type checks in lab
+        run: node_modules/.bin/tsc -p ./packages/eds-lab
+  build-lab:
+    name: Build eds-lab
+    runs-on: ubuntu-latest
+    needs: [test, lint, types]
+    steps:
+      - uses: actions/cache@v2
+        name: Get base files
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-lab
+      - name: Get core-react build
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-build-core-react
+      - name: Build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-lab run build
+      - name: Save build to cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-build-lab
+  build-storybook:
+    name: Build lab Storybook
+    runs-on: ubuntu-latest
+    needs: [test, lint, types]
+    steps:
+      - name: Get core-react build
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-build-core-react
       - name: Build storybook
-        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
+        run: node_modules/.bin/pnpm --filter @equinor/eds-lab run build:storybook

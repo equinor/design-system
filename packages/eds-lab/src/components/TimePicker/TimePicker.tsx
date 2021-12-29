@@ -4,24 +4,104 @@ import {
   UseComboboxProps,
   UseComboboxStateChange,
 } from 'downshift'
-import styled, { ThemeProvider } from 'styled-components'
-import { Label, Icon } from '../../'
-import { time } from '@equinor/eds-icons'
-import { spacingsTemplate } from '../../utils'
-import { timePicker as tokens } from './TimePicker.tokens'
+import styled, { css, ThemeProvider } from 'styled-components'
 import {
-  Container,
-  PaddedInput,
-  StyledList,
-  StyledButton,
-  StyledListItem,
-  StyledInputWrapper,
-} from './commonStyles'
-import { useEds } from '../EdsProvider'
+  Label,
+  Icon,
+  useEds,
+  Input,
+  Button,
+  List,
+} from '@equinor/eds-core-react'
+import { time } from '@equinor/eds-icons'
+import {
+  spacingsTemplate,
+  bordersTemplate,
+  typographyTemplate,
+} from '../../utils'
+import { timePicker as tokens } from './TimePicker.tokens'
 import { useToken } from '../../hooks'
+
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 102px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`
+
+type StyledListItemType = {
+  highlighted: string
+  active?: string
+}
+
+const StyledList = styled(List)`
+  background-color: ${tokens.background};
+  box-shadow: ${tokens.boxShadow};
+  overflow-y: scroll;
+  max-height: 300px;
+  padding: 0;
+  ${bordersTemplate(tokens.border)}
+  margin-top: 4px;
+  position: absolute;
+  top: 54px;
+  right: 0;
+  left: 0;
+  z-index: 50;
+`
+
+const StyledListItem = styled(List.Item)<StyledListItemType>(
+  ({ theme, highlighted, active }) => {
+    const backgroundColor =
+      highlighted === 'true'
+        ? theme.states.hover.background
+        : active === 'true'
+        ? theme.states.active.background
+        : theme.background
+
+    return css`
+      margin: 0;
+      list-style: none;
+      background-color: ${backgroundColor};
+      ${typographyTemplate(theme.typography)};
+      cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
+      max-width: 90px;
+    `
+  },
+)
+
+const StyledButton = styled(Button)(
+  ({
+    theme: {
+      entities: { button },
+    },
+  }) => {
+    return css`
+      position: absolute;
+      right: ${button.spacings.right};
+      height: ${button.height};
+      width: ${button.height};
+      top: ${button.spacings.top};
+    `
+  },
+)
+
+const StyledInputWrapper = styled.div`
+  position: relative;
+`
 
 const PaddedStyledListItem = styled(StyledListItem)`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
+`
+
+const TimeIcon = styled(Icon)`
+  position: absolute;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  color: #616161;
+  cursor: pointer;
 `
 
 const defaultRange = [
@@ -140,7 +220,7 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
         <Container className={className} ref={ref}>
           <Label {...getLabelProps()} label={label} disabled={disabled} />
           <StyledInputWrapper {...getComboboxProps()}>
-            <PaddedInput
+            <Input
               {...getInputProps({ disabled: disabled })}
               readOnly={readOnly}
               onFocus={openSelect}
@@ -180,14 +260,5 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
     )
   },
 )
-
-const TimeIcon = styled(Icon)`
-  position: absolute;
-  z-index: 1;
-  width: 18px;
-  height: 18px;
-  color: #616161;
-  cursor: pointer;
-`
 
 export { TimePicker }
