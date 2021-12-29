@@ -15,6 +15,7 @@ scripts:
   test:lab: pnpm --filter @equinor/eds-lab run test
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
+  test:update-snapshots:lab: pnpm --filter @equinor/eds-lab run test:update-snapshots
   storybook:core-react: pnpm --filter @equinor/eds-core-react run storybook
   storybook:lab: pnpm --filter @equinor/eds-lab run storybook
   graphics: pnpm --filter ./assets/woman run dev
