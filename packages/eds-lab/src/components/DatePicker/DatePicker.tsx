@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  forwardRef,
-  InputHTMLAttributes,
-} from 'react'
+import { useState, useCallback, forwardRef, InputHTMLAttributes } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'

@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { getMonth, getYear } from 'date-fns'
 import { datePicker as tokens } from './DatePicker.tokens'
