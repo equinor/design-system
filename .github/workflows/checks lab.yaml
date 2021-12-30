@@ -62,7 +62,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-lab
+          restore-keys: ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
       - name: Save build to cache
@@ -81,7 +81,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-lab
+          restore-keys: ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Save build to cache
