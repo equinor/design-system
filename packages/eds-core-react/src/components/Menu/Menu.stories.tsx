@@ -26,7 +26,7 @@ import {
 const { colors } = tokens
 
 export default {
-  title: 'Components/Menu',
+  title: 'Navigation/Menu',
   component: Menu,
   subcomponents: {
     Item: Menu.Item,

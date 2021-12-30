@@ -35,7 +35,7 @@ const StyledSearch = styled(Search)`
 `
 
 export default {
-  title: 'Components/Search',
+  title: 'Inputs/Search',
   component: Search,
   parameters: {
     docs: {

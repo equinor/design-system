@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
 
 export default {
-  title: 'Components/Progress Indicators/Linear',
+  title: 'Feedback/Progress Indicators/Linear',
   component: Progress.Linear,
   parameters: {
     docs: {

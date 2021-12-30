@@ -12,7 +12,7 @@ import {
 } from '@equinor/eds-icons'
 
 export default {
-  title: 'Components/TopBar',
+  title: 'Navigation/TopBar',
   component: TopBar,
   subcomponents: {
     Actions: TopBar.Actions,

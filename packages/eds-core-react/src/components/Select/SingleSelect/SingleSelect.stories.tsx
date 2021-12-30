@@ -17,7 +17,7 @@ import { items } from '../../../stories/data'
 import { EdsProvider } from '../../EdsProvider'
 
 export default {
-  title: 'Components/Select/SingleSelect',
+  title: 'Inputs/Select/SingleSelect',
   component: SingleSelect,
   parameters: {
     docs: {

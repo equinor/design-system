@@ -20,7 +20,7 @@ const StoryCenter = styled.div({
 })
 
 export default {
-  title: 'Components/Tooltip',
+  title: 'Data Display/Tooltip',
   component: Tooltip,
 } as Meta
 

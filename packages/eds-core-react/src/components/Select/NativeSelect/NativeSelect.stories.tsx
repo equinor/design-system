@@ -3,7 +3,7 @@ import { NativeSelect, NativeSelectProps, EdsProvider, Density } from '../../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Components/Select/NativeSelect',
+  title: 'Inputs/Select/NativeSelect',
   component: NativeSelect,
   parameters: {
     docs: {

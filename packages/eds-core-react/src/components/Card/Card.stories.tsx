@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Card',
+  title: 'Surfaces/Card',
   component: Card,
   parameters: {
     docs: {

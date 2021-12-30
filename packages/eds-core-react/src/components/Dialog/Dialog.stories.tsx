@@ -12,7 +12,7 @@ import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Components/Dialog',
+  title: 'Feedback/Dialog',
   component: Dialog,
   subcomponents: {
     Actions: Dialog.Actions,

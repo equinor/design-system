@@ -23,7 +23,7 @@ Icon.add({ arrow_down, arrow_up })
 const { Caption, Body, Row, Cell, Head } = Table
 
 export default {
-  title: 'Components/Table',
+  title: 'Data Display/Table',
   component: Table,
   subcomponents: { Caption, Body, Row, Cell, Head },
   parameters: {

@@ -3,7 +3,7 @@ import { Slider, SliderProps } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {
-  title: 'Components/Slider',
+  title: 'Inputs/Slider',
   component: Slider,
   parameters: {
     docs: {

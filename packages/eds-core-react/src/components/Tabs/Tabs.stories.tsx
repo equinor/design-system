@@ -15,7 +15,7 @@ import { action } from '@storybook/addon-actions'
 const noop = () => {}
 
 export default {
-  title: 'Components/Tabs',
+  title: 'Navigation/Tabs',
   component: Tabs,
   subcomponents: {
     List: Tabs.List,

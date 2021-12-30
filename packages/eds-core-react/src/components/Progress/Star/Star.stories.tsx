@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Progress Indicators/Star',
+  title: 'Feedback/Progress Indicators/Star',
   component: Progress.Star,
   parameters: {
     docs: {

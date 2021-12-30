@@ -4,7 +4,7 @@ import { Input, InputProps, Label, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Components/Input',
+  title: 'Inputs/Input',
   component: Input,
   parameters: {
     docs: {

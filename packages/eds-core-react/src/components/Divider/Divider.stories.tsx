@@ -3,7 +3,7 @@ import { Divider, DividerProps } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Components/Divider',
+  title: 'Data Display/Divider',
   component: Divider,
   argTypes: {
     color: { control: 'radio' },
