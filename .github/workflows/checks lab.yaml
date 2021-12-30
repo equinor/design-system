@@ -46,7 +46,6 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-
       - name: Cache commit files
         uses: actions/cache@v2
         with:
@@ -55,12 +54,10 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-lab
       - name: Install pnpm
-        if: steps.cache-base.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Install dependencies recursively
-        if: steps.cache-base.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
       - name: Print node_modules files
         shell: bash
