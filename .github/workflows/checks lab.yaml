@@ -34,28 +34,23 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+
       - name: Install pnpm
         run: npm i --no-save pnpm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Install dependencies recursively
         run: node_modules/.bin/pnpm m i
-      - name: Cache base files
+      - name: Cache pnpm store & base files
         uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-modules
         with:
-          path: |
-            ./*
-            ~/.pnpm-store
+          path: ~/.pnpm-store
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+            ${{ github.sha }}-lab
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
@@ -67,7 +62,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
+          key: ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
       - name: Save build to cache
@@ -86,7 +81,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
+          key: ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Save build to cache
@@ -99,6 +94,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-icons, build-tokens]
     steps:
+      - uses: actions/cache@v2
+        name: Get base files
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-lab
       - name: Get eds-icons build
         uses: actions/cache@v2
         with:
@@ -165,6 +167,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test, lint, types]
     steps:
+      - uses: actions/cache@v2
+        name: Get base files
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-lab
       - name: Get core-react build
         uses: actions/cache@v2
         with:
