@@ -38,7 +38,7 @@ jobs:
         id: cache-base
         uses: actions/cache@v2
         env:
-          cache-name: cache-pnpm-modules
+          cache-name: cache-pnpm-node_modules
         with:
           path: |
             ./packages/**/node_modules
@@ -46,6 +46,11 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+      - name: Print files
+        shell: bash
+        run: |
+          echo "Cache hit: ${{steps.get-cache.outputs.cache-hit}}"
+          ls ./packages/**/node_modules
       - name: Cache job files
         uses: actions/cache@v2
         with:
