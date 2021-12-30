@@ -47,7 +47,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
 
-      - name: Cache job files
+      - name: Cache commit files
         uses: actions/cache@v2
         with:
           path: |
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Get job files
+      - name: Get commit files
         uses: actions/cache@v2
         with:
           path: |
@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Get job files
+      - name: Get commit files
         uses: actions/cache@v2
         with:
           path: |
@@ -112,7 +112,7 @@ jobs:
     needs: [build-icons, build-tokens]
     steps:
       - uses: actions/cache@v2
-        name: Get job files
+        name: Get commit files
         with:
           path: |
             ./*
@@ -185,7 +185,7 @@ jobs:
     needs: [test, lint, types]
     steps:
       - uses: actions/cache@v2
-        name: Get job files
+        name: Get commit files
         with:
           path: |
             ./*
