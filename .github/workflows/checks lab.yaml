@@ -46,11 +46,11 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-      - name: Print files
+      - name: Print node_modules files
         shell: bash
         run: |
           echo "Cache hit: ${{steps.get-cache.outputs.cache-hit}}"
-          ls ./packages/**/node_modules
+          ls ./packages/**/node_modules 2> /dev/null
       - name: Cache job files
         uses: actions/cache@v2
         with:
