@@ -106,11 +106,4 @@ describe('Button', () => {
     const button = screen.getByRole('button')
     expect(button).toHaveStyleRule('margin', '12px')
   })
-
-  it('This is a new test to check if cache picks up new tests ', () => {
-    expect(true).toBeTruthy()
-  })
-  it('y u no getting tested :(', () => {
-    expect(true).toBeTruthy()
-  })
 })
