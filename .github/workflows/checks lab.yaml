@@ -34,19 +34,18 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Cache pnpm store & base files
+      - name: Cache pnpm-store & packages node_modules
         id: cache-base
         uses: actions/cache@v2
         env:
           cache-name: cache-pnpm-modules
         with:
           path: |
-            ./*
+            ./packages/**/node_modules
             ~/.pnpm-store
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-            ${{ github.sha }}-lab
       - name: Cache job files
         uses: actions/cache@v2
         with:
