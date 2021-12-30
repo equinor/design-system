@@ -46,11 +46,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}-lab
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-      - name: Print node_modules files
-        shell: bash
-        run: |
-          echo "Cache hit: ${{steps.get-cache.outputs.cache-hit}}"
-          ls ./packages/**/node_modules 2> /dev/null
+
       - name: Cache job files
         uses: actions/cache@v2
         with:
@@ -66,6 +62,11 @@ jobs:
       - name: Install dependencies recursively
         if: steps.cache-base.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
+      - name: Print node_modules files
+        shell: bash
+        run: |
+          echo "Cache hit: ${{steps.get-cache.outputs.cache-hit}}"
+          ls ./packages/**/node_modules
 
   build-tokens:
     name: Build eds-tokens
