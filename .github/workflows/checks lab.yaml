@@ -34,14 +34,8 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-
-      - name: Install pnpm
-        run: npm i --no-save pnpm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Install dependencies recursively
-        run: node_modules/.bin/pnpm m i
       - name: Cache pnpm store & base files
+        id: base-store-cache
         uses: actions/cache@v2
         env:
           cache-name: cache-pnpm-modules
@@ -51,6 +45,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
             ${{ github.sha }}-lab
+      - name: Install pnpm
+        if: steps.base-store-cache.outputs.cache-hit != 'true'
+        run: npm i --no-save pnpm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install dependencies recursively
+        if: steps.base-store-cache.outputs.cache-hit != 'true'
+        run: node_modules/.bin/pnpm m i
+
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
@@ -62,7 +65,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          restore-keys: ${{ github.sha }}-lab
+          key: ${{ github.sha }}-lab
+          restore-keys: |
+            ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
       - name: Save build to cache
@@ -81,7 +86,9 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          restore-keys: ${{ github.sha }}-lab
+          key: ${{ github.sha }}-lab
+          restore-keys: |
+            ${{ github.sha }}-lab
       - name: Build
         run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Save build to cache
