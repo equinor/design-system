@@ -7,7 +7,7 @@ tasks:
       pnpm install
       pnpm recursive install --filter ./packages
       gp sync-done install
-    command: pnpm storybook
+    command: pnpm storybook:core-react
   - name: Lint
     init: gp sync-await install
     command: pnpm lint:core-react
