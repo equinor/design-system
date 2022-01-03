@@ -22,7 +22,7 @@ const StoryCenter = styled.div({
 })
 
 export default {
-  title: 'Components/Popover',
+  title: 'Data Display/Popover',
   component: Popover,
   subcomponents: {
     Title,

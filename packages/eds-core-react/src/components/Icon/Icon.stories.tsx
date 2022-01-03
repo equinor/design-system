@@ -23,7 +23,7 @@ const customIconData = {
 }
 
 export default {
-  title: 'Components/Icon',
+  title: 'Icons/Icon',
   component: Icon,
   args: {
     name: 'save',

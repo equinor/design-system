@@ -20,7 +20,7 @@ const FullWidthWrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Button',
+  title: 'Inputs/Button',
   component: Button,
   args: {
     as: 'button',

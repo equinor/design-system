@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Avatar',
+  title: 'Data Display/Avatar',
   component: Avatar,
   parameters: {
     docs: {

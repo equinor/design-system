@@ -13,7 +13,7 @@ const icons = {
 Icon.add(icons)
 
 export default {
-  title: 'Components/Banner',
+  title: 'Feedback/Banner',
   component: Banner,
   subcomponents: {
     Message: Banner.Message,

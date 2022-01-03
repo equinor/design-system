@@ -3,7 +3,7 @@ import { Snackbar, SnackbarProps, Button, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {
-  title: 'Components/Snackbar',
+  title: 'Feedback/Snackbar',
   component: Snackbar,
   subcomponents: { Action: Snackbar.Action },
   parameters: {

@@ -16,7 +16,7 @@ const TestContent = styled.div`
 `
 
 export default {
-  title: 'Components/Scrim',
+  title: 'Feedback/Scrim',
   component: Scrim,
   args: {
     isDismissable: true,

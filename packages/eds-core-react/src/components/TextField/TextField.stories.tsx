@@ -26,7 +26,7 @@ const icons = {
 Icon.add(icons)
 
 export default {
-  title: 'Components/TextField',
+  title: 'Inputs/TextField',
   component: TextField,
   argTypes: {
     inputIcon: {

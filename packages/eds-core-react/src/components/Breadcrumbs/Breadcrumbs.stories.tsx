@@ -11,7 +11,7 @@ const Body = styled.div`
 `
 
 export default {
-  title: 'Components/Breadcrumbs',
+  title: 'Navigation/Breadcrumbs',
   component: Breadcrumbs,
   subcomponents: {
     Breadcrumb: Breadcrumbs.Breadcrumb,

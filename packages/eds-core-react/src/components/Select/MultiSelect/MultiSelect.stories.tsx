@@ -16,7 +16,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { items } from '../../../stories/data'
 
 export default {
-  title: 'Components/Select/MultiSelect',
+  title: 'Inputs/Select/MultiSelect',
   component: MultiSelect,
   parameters: {
     docs: {

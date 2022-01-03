@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Progress Indicators/Circular',
+  title: 'Feedback/Progress Indicators/Circular',
   component: Progress.Circular,
   parameters: {
     backgrounds: { default: 'light' },

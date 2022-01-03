@@ -4,7 +4,7 @@ import { Meta, Story } from '@storybook/react'
 const start = '15'
 
 export default {
-  title: 'Components/Lists',
+  title: 'Data Display/Lists',
   component: List,
   parameters: {
     docs: {

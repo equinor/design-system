@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Chips',
+  title: 'Data Display/Chips',
   component: Chip,
   parameters: {
     docs: {

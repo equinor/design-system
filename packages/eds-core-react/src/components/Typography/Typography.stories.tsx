@@ -13,7 +13,7 @@ const Grid = styled(Wrapper)`
 `
 
 export default {
-  title: 'Components/Typography',
+  title: 'Typography/Typography',
   component: Typography,
 } as Meta
 

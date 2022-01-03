@@ -9,7 +9,7 @@ const Wrapper = styled(Radio)`
 `
 
 export default {
-  title: 'Components/Radio',
+  title: 'Inputs/Selection Controls/Radio',
   component: Radio,
   parameters: {
     docs: {

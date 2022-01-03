@@ -19,7 +19,7 @@ const icons = {
 Icon.add(icons)
 
 export default {
-  title: 'Components/TableOfContents',
+  title: 'Navigation/TableOfContents',
   component: TableOfContents,
   subcomponents: {
     LinkItem: TableOfContents.LinkItem,

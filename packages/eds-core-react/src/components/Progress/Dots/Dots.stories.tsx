@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Progress Indicators/Dots',
+  title: 'Feedback/Progress Indicators/Dots',
   component: Progress.Dots,
   parameters: {
     backgrounds: { default: 'light' },

@@ -4,7 +4,7 @@ import { SideSheet, SideSheetProps, Button } from '../..'
 import { Story, Meta } from '@storybook/react'
 
 export default {
-  title: 'Components/SideSheet',
+  title: 'Surfaces/SideSheet',
   component: SideSheet,
   args: {
     title: 'Title',

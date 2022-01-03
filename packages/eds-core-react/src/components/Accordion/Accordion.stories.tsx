@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 `
 
 export default {
-  title: 'Components/Accordion',
+  title: 'Surfaces/Accordion',
   component: Accordion,
   subcomponents: {
     Item: Accordion.Item,
