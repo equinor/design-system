@@ -34,6 +34,7 @@
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
     "storybook": "start-storybook -p 9000 --ci",
+    "storybook:docs": "start-storybook -p 9000 --docs",
     "build:storybook": "build-storybook -o storybook-build"
   },
   "keywords": [

@@ -28,27 +28,25 @@ export default {
   args: {
     name: 'save',
   },
-  argTypes: {
-    name: {
-      options: Object.keys(icons),
-      control: {
-        type: 'select',
-      },
-    },
-    color: {
-      control: 'color',
-    },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: `System icons enhance interfaces by adding visual communication
-         to actions, status and feedback while reducing cognitive load. They are to
-          provide meaning at a glance.
-        `,
-      },
-    },
-  },
+  // argTypes: {
+  //   name: {
+  //     options: Object.keys(icons),
+  //     control: {
+  //       type: 'select',
+  //     },
+  //   },
+  //   color: {
+  //     control: 'color',
+  //   },
+  // },
+  // parameters: {
+  //   docs: {
+  //     description: {
+  //       component:
+  //         'Component for rendering icons from the `@equinor/eds-icons` package.',
+  //     },
+  //   },
+  // },
 } as Meta
 
 export const Default: Story<IconProps> = (args) => <Icon {...args} />
@@ -76,9 +74,9 @@ export const Accessible: Story<IconProps> = () => (
 )
 export const Color: Story<IconProps> = () => (
   <Wrapper>
-    <Icon name="work" color={'red'} />
-    <Icon name="work" color={'green'} />
-    <Icon name="work" color={'blue'} />
+    <Icon name="save" color={'red'} />
+    <Icon name="save" color={'green'} />
+    <Icon name="save" color={'blue'} />
   </Wrapper>
 )
 export const UsingDataPropWithEdsIcon: Story<IconProps> = () => (
