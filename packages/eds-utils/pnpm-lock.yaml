@@ -8,8 +8,6 @@ specifiers:
   '@babel/preset-react': ^7.14.5
   '@babel/preset-typescript': ^7.14.5
   '@babel/runtime': ^7.16.3
-  '@equinor/eds-core-react': workspace:*
-  '@equinor/eds-icons': workspace:*
   '@equinor/eds-tokens': workspace:*
   '@popperjs/core': 2.9.2
   '@rollup/plugin-babel': ^5.3.0
@@ -33,8 +31,6 @@ specifiers:
   ramda: ^0.27.1
   react: ^17.0.2
   react-dom: ^17.0.2
-  react-fast-compare: 3.2.0
-  react-hook-form: ^7.11.1
   react-popper: 2.2.5
   rollup: ^2.53.3
   rollup-plugin-delete: ^2.0.0
@@ -44,11 +40,8 @@ specifiers:
 
 dependencies:
   '@babel/runtime': 7.16.7
-  '@equinor/eds-core-react': link:../eds-core-react
-  '@equinor/eds-icons': link:../eds-icons
   '@equinor/eds-tokens': link:../eds-tokens
   '@popperjs/core': 2.9.2
-  react-fast-compare: 3.2.0
   react-popper: 2.2.5_a16f30364266ce234ee1188a6d27cb60
 
 devDependencies:
@@ -79,7 +72,6 @@ devDependencies:
   ramda: 0.27.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
-  react-hook-form: 7.22.5_react@17.0.2
   rollup: 2.62.0
   rollup-plugin-delete: 2.0.0
   styled-components: 5.3.0_react-dom@17.0.2+react@17.0.2
@@ -4147,15 +4139,6 @@ packages:
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
     dev: false
-
-  /react-hook-form/7.22.5_react@17.0.2:
-    resolution: {integrity: sha512-Q2zaeQFXdVQ8l3hcywhltH+Nzj4vo50wMVujHDVN/1Xy9IOaSZJwYBXA2CYTpK6rq41fnXviw3jTLb04c7Gu9Q==}
-    engines: {node: '>=12.22.0'}
-    peerDependencies:
-      react: ^16.8.0 || ^17
-    dependencies:
-      react: 17.0.2
-    dev: true
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}

@@ -67,7 +67,6 @@
     "ramda": "^0.27.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.11.1",
     "rollup": "^2.53.3",
     "rollup-plugin-delete": "^2.0.0",
     "styled-components": "5.3.0",
@@ -81,11 +80,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.16.3",
-    "@equinor/eds-core-react": "workspace:*",
-    "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "@popperjs/core": "2.9.2",
-    "react-fast-compare": "3.2.0",
     "react-popper": "2.2.5"
   },
   "engines": {
