@@ -1,37 +1,18 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import styled from 'styled-components'
 import { Icon  } from '.'
 import * as stories from './Icon.stories.tsx'
 import * as icons from '@equinor/eds-icons'
 
 
-<Meta 
-  title="Icons/Icon"
-  component={Icon}
-  args={{name:"save"}}
-  argTypes={{
-    name: {
-      options: Object.keys(icons),
-      control: {
-        type: 'select',
-      },
-    },
-    color: {
-      control: 'color',
-    },
-  }}
-  />
-
-export const Abbr = styled.abbr`
-  cursor: help;
-`
 
 # Icon 
 Component for rendering icons from the `@equinor/eds-icons` package.
 
+<Story id="icons-icon--demo" />
+
 ## Installation 
 
-Install the packages in your project directory with your npm package manager
+Install the packages in your project directory with your package manager (npm/npm/pnpm).
 ```shell
 npm install @equinor/eds-core-react @equinor/eds-icons
 ```
@@ -61,6 +42,7 @@ import { save } from '@equinor/eds-icons' // import "save" icon
 <Icon data={save} />
 ```
 
+
 ## Accessibility
 If you are using the icons semantically you need to provide the `title` property so that your icons are correctly accessible.
 ```tsx
@@ -70,28 +52,24 @@ If you are using the icons semantically you need to provide the `title` property
 
 ## Color
 <Canvas>
-  <Story story={stories.Color} />
+  <Story id="icons-icon--color" />
 </Canvas>
-
 
 
 ## Rotations
 <Canvas>
-  <Story story={stories.Rotations} />
+  <Story id="icons-icon--rotations" />
 </Canvas>
 
 
 ## Sizes
 <Canvas>
-  <Story story={stories.Sizes} />
+  <Story id="icons-icon--sizes" />
 </Canvas>
 
 
-## Props
-<Canvas>
-  <Story story={stories.Default} />
-</Canvas>
 
-<ArgsTable of={Icon} />
+
+
 
 
