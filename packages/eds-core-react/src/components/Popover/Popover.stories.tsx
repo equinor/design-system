@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   Typography,
   Button,
@@ -10,7 +10,7 @@ import {
   EdsProvider,
   Density,
 } from '../..'
-import { more_vertical } from '@equinor/eds-icons'
+import { more_vertical, close } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
 
 const { Title, Content, Header } = Popover
@@ -19,6 +19,19 @@ const StoryCenter = styled.div({
   display: 'flex',
   justifyContent: 'center',
   margin: '10rem',
+})
+
+const StyledCloseButton = styled(Button)(({ theme }) => {
+  return css`
+    position: absolute;
+    top: ${theme.entities.closeButton.spacings.top};
+    right: ${theme.spacings.right};
+    height: ${theme.entities.closeButton.height};
+    width: ${theme.entities.closeButton.width};
+    &:after {
+      height: ${theme.entities.closeButton.height};
+    }
+  `
 })
 
 export default {
@@ -284,6 +297,14 @@ export const WithCloseButton: Story<PopoverProps> = () => {
           open={isOpen}
         >
           <Popover.Header>
+            <StyledCloseButton
+              variant="ghost_icon"
+              data-testid="popover-close"
+              aria-label="Close popover"
+              onClick={closePopover}
+            >
+              <Icon name="close" data={close} size={24} />
+            </StyledCloseButton>
             <Popover.Title>Title</Popover.Title>
           </Popover.Header>
 
