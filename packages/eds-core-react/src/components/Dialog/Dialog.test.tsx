@@ -40,8 +40,8 @@ const DismissableDialog = (props) => {
 
 describe('Dialog', () => {
   it('Matches snapshot', () => {
-    const { asFragment } = render(
-      <Dialog open={true}>
+    render(
+      <Dialog open={true} data-testid="dialog">
         <Title>Title</Title>
         <CustomContent>Description</CustomContent>
         <Actions>
@@ -49,7 +49,8 @@ describe('Dialog', () => {
         </Actions>
       </Dialog>,
     )
-    expect(asFragment()).toMatchSnapshot()
+    const modalComponent = screen.getByTestId('dialog')
+    expect(modalComponent).toMatchSnapshot()
   })
   it('Is dismissable with button click', () => {
     render(<DismissableDialog data-testid="dialog" />)
