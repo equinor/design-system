@@ -67,12 +67,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
             isDismissable={isDismissable}
             onClose={handleDismiss}
           >
-            <StyledDialog
-              role="dialog"
-              aria-labelledby="eds-dialog-title"
-              elevation="above_scrim"
-              {...rest}
-            >
+            <StyledDialog elevation="above_scrim" {...rest}>
               {children}
             </StyledDialog>
           </Scrim>
