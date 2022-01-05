@@ -2,14 +2,41 @@
 
 exports[`Dialog Matches snapshot 1`] = `
 <DocumentFragment>
-  .c0 {
+  .c2 {
   min-width: 96px;
   max-width: calc(100% - 32px);
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
   box-shadow: 0 11px 15px rgba(0,0,0,0.2),0 9px 46px rgba(0,0,0,0.12),0 24px 38px rgba(0,0,0,0.14);
 }
 
+.c0 {
+  width: 100%;
+  height: 100%;
+  background: var(--eds_ui_background__scrim,rgba(0,0,0,0.4));
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .c1 {
+  width: auto;
+  height: auto;
+}
+
+.c3 {
   width: 252px;
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
   display: grid;
@@ -24,7 +51,7 @@ exports[`Dialog Matches snapshot 1`] = `
   border-radius: 4px;
 }
 
-.c6 {
+.c8 {
   min-height: 48px;
   padding-left: 16px;
   padding-top: 0px;
@@ -36,7 +63,7 @@ exports[`Dialog Matches snapshot 1`] = `
   justify-self: start;
 }
 
-.c3 {
+.c5 {
   border: none;
   background-color: var(--eds_ui_background__medium,rgba(220,220,220,1));
   margin-top: 8px;
@@ -44,7 +71,7 @@ exports[`Dialog Matches snapshot 1`] = `
   height: 1px;
 }
 
-.c2 {
+.c4 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -63,12 +90,12 @@ exports[`Dialog Matches snapshot 1`] = `
   padding-bottom: 0px;
 }
 
-.c4 {
+.c6 {
   width: 100%;
   margin-bottom: 16px;
 }
 
-.c5 {
+.c7 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -89,37 +116,47 @@ exports[`Dialog Matches snapshot 1`] = `
 }
 
 <div
-    aria-describedby="eds-dialog-customcontent"
-    aria-labelledby="eds-dialog-title"
-    aria-modal="true"
-    class="c0 c1"
-    elevation="0 11px 15px rgba(0, 0, 0, 0.2),0 9px 46px rgba(0, 0, 0, 0.12),0 24px 38px rgba(0, 0, 0, 0.14)"
-    role="dialog"
-    tabindex="0"
+    class="c0"
+    open=""
   >
     <div
-      class="c2"
-      id="eds-dialog-title"
+      class="c1"
     >
-      Title
-    </div>
-    <hr
-      class="c3 c4"
-    />
-    <div
-      class="c5"
-      id="eds-dialog-customcontent"
-    >
-      Description
-    </div>
-    <div
-      class="c6"
-    >
-      <button
-        type="button"
+      <div
+        aria-describedby="eds-dialog-customcontent"
+        aria-labelledby="eds-dialog-title"
+        aria-modal="true"
+        class="c2 c3"
+        elevation="0 11px 15px rgba(0, 0, 0, 0.2),0 9px 46px rgba(0, 0, 0, 0.12),0 24px 38px rgba(0, 0, 0, 0.14)"
+        open=""
+        role="dialog"
+        tabindex="0"
       >
-        OK
-      </button>
+        <div
+          class="c4"
+          id="eds-dialog-title"
+        >
+          Title
+        </div>
+        <hr
+          class="c5 c6"
+        />
+        <div
+          class="c7"
+          id="eds-dialog-customcontent"
+        >
+          Description
+        </div>
+        <div
+          class="c8"
+        >
+          <button
+            type="button"
+          >
+            OK
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </DocumentFragment>
