@@ -62,11 +62,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
     <>
       {createPortal(
         <ThemeProvider theme={token}>
-          <Scrim
-            open={true}
-            isDismissable={isDismissable}
-            onClose={handleDismiss}
-          >
+          <Scrim open isDismissable={isDismissable} onClose={handleDismiss}>
             <StyledDialog elevation="above_scrim" {...rest}>
               {children}
             </StyledDialog>

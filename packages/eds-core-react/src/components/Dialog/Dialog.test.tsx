@@ -41,7 +41,7 @@ const DismissableDialog = (props) => {
 describe('Dialog', () => {
   it('Matches snapshot', () => {
     render(
-      <Dialog open={true} data-testid="dialog">
+      <Dialog open data-testid="dialog">
         <Title>Title</Title>
         <CustomContent>Description</CustomContent>
         <Actions>
@@ -80,7 +80,7 @@ describe('Dialog', () => {
     const testIdActions = 'dialog-test-actions'
 
     render(
-      <Dialog open={true}>
+      <Dialog open>
         <Title>
           <div data-testid={testIdTitle}>Title</div>
         </Title>
@@ -102,7 +102,7 @@ describe('Dialog', () => {
     const testIdCenter = 'dialog-test-center'
 
     render(
-      <Dialog open={true}>
+      <Dialog open>
         <Title>
           <div>Title</div>
         </Title>
@@ -121,7 +121,7 @@ describe('Dialog', () => {
   })
 
   it('Can extend the css for the component', () => {
-    render(<StyledDialog open={true} data-testid="dialog" />)
+    render(<StyledDialog open data-testid="dialog" />)
     const dialog = screen.getByTestId('dialog')
     expect(dialog).toHaveStyleRule('background', 'red')
     expect(dialog).toHaveStyleRule('width', width)
