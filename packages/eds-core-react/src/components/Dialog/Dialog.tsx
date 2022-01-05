@@ -6,6 +6,7 @@ import {
   bordersTemplate,
 } from '../../utils'
 import { Paper } from '../Paper'
+import { Scrim } from '../Scrim'
 import { dialog as dialogToken } from './Dialog.tokens'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
@@ -23,24 +24,43 @@ const StyledDialog = styled(Paper).attrs<DialogProps>({
     display: grid;
     ${typographyTemplate(theme.typography)}
     ${spacingsTemplate(theme.spacings)}
-  ${bordersTemplate(theme.border)}
+    ${bordersTemplate(theme.border)}
   `
 })
 
-export type DialogProps = React.HTMLAttributes<HTMLDivElement>
+export type DialogProps = {
+  /** programmatically toggle dialog */
+  open: boolean
+} & React.HTMLAttributes<HTMLDivElement>
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
-  { children, ...props },
+  { children, open, ...props },
   ref,
 ) {
+  const rest = {
+    ...props,
+    open,
+    ref,
+  }
   const { density } = useEds()
   const token = useToken({ density }, dialogToken)
 
+  if (!open) {
+    return null
+  }
+
   return (
     <ThemeProvider theme={token}>
-      <StyledDialog elevation="above_scrim" {...props} ref={ref}>
-        {children}
-      </StyledDialog>
+      <Scrim open={true}>
+        <StyledDialog
+          role="dialog"
+          aria-labelledby="eds-dialog-title"
+          elevation="above_scrim"
+          {...rest}
+        >
+          {children}
+        </StyledDialog>
+      </Scrim>
     </ThemeProvider>
   )
 })
