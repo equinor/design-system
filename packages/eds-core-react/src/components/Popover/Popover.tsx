@@ -6,10 +6,7 @@ import {
   useEffect,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Icon } from '../Icon'
 import { Paper } from '../Paper'
-import { Button } from '../Button'
-import { close } from '@equinor/eds-icons'
 import {
   spacingsTemplate,
   typographyTemplate,
@@ -74,19 +71,6 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
 
     &[data-popper-placement^='right'] > .arrow {
       left: ${theme.entities.arrow.spacings.left};
-    }
-  `
-})
-
-const StyledCloseButton = styled(Button)(({ theme }) => {
-  return css`
-    position: absolute;
-    top: ${theme.entities.closeButton.spacings.top};
-    right: ${theme.spacings.right};
-    height: ${theme.entities.closeButton.height};
-    width: ${theme.entities.closeButton.width};
-    &:after {
-      height: ${theme.entities.closeButton.height};
     }
   `
 })
@@ -200,14 +184,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           </ArrowWrapper>
 
           {children}
-          <StyledCloseButton
-            onClick={onClose}
-            variant="ghost_icon"
-            data-testid="popover-close"
-            aria-label="Close popover"
-          >
-            <Icon name="close" data={close} size={24} />
-          </StyledCloseButton>
         </PopoverPaper>
       </ThemeProvider>
     )
