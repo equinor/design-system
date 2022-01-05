@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export type PopoverHeaderProps = HTMLAttributes<HTMLDivElement>
 
 const StyledPopoverHeader = styled.div`
-  display: flex;
+  display: block;
 `
 
 export const PopoverHeader = forwardRef<HTMLDivElement, PopoverHeaderProps>(

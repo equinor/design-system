@@ -13,7 +13,7 @@ import {
 import { more_vertical } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
 
-const { Title, Content } = Popover
+const { Title, Content, Header } = Popover
 
 const StoryCenter = styled.div({
   display: 'flex',
@@ -27,6 +27,7 @@ export default {
   subcomponents: {
     Title,
     Content,
+    Header,
   },
 } as Meta
 
@@ -252,6 +253,53 @@ Compact.parameters = {
   docs: {
     description: {
       story: 'Compact `Popover` using `EdsProvider` ',
+    },
+  },
+}
+
+export const WithCloseButton: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  return (
+    <EdsProvider>
+      <StoryCenter>
+        <Button
+          id="click-popover-anchor"
+          aria-controls="click-popover"
+          ref={anchorRef}
+          onClick={openPopover}
+        >
+          Click to activate
+        </Button>
+
+        <Popover
+          id="click-popover"
+          aria-expanded={isOpen}
+          anchorEl={anchorRef.current}
+          onClose={closePopover}
+          open={isOpen}
+        >
+          <Popover.Header>
+            <Popover.Title>Title</Popover.Title>
+          </Popover.Header>
+
+          <Popover.Content>
+            <Typography variant="body_short">Content</Typography>
+          </Popover.Content>
+        </Popover>
+      </StoryCenter>
+    </EdsProvider>
+  )
+}
+
+WithCloseButton.parameters = {
+  docs: {
+    description: {
+      story: 'Description comes here ',
     },
   },
 }
