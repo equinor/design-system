@@ -21,7 +21,7 @@ afterEach(cleanup)
 describe('Dialog', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(
-      <Dialog>
+      <Dialog open={true}>
         <Title>Title</Title>
         <CustomContent>Description</CustomContent>
         <Actions>
@@ -37,7 +37,7 @@ describe('Dialog', () => {
     const testIdActions = 'dialog-test-actions'
 
     render(
-      <Dialog>
+      <Dialog open={true}>
         <Title>
           <div data-testid={testIdTitle}>Title</div>
         </Title>
@@ -59,7 +59,7 @@ describe('Dialog', () => {
     const testIdCenter = 'dialog-test-center'
 
     render(
-      <Dialog>
+      <Dialog open={true}>
         <Title>
           <div>Title</div>
         </Title>
@@ -78,7 +78,7 @@ describe('Dialog', () => {
   })
 
   it('Can extend the css for the component', () => {
-    render(<StyledDialog data-testid="dialog" />)
+    render(<StyledDialog open={true} data-testid="dialog" />)
     const dialog = screen.getByTestId('dialog')
     expect(dialog).toHaveStyleRule('background', 'red')
     expect(dialog).toHaveStyleRule('width', width)
