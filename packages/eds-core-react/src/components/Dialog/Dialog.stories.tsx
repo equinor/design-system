@@ -15,6 +15,7 @@ export default {
   component: Dialog,
   args: {
     open: false,
+    isDismissable: false,
   },
   subcomponents: {
     Actions: Dialog.Actions,
@@ -51,14 +52,17 @@ const Placeholder = styled.div`
 export const Default: Story<DialogProps> = (args) => {
   //  Note: This example is not interactive, as Storybook
   // doesn't yet support to manipulate subcomponents via Storybook Args
-  const { open } = args
+  const { open, isDismissable } = args
   const [isOpen, setIsOpen] = useState(open)
+  const handleClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
       <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
         Trigger Dialog
       </Button>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} onClose={handleClose} isDismissable={isDismissable}>
         <Dialog.Title>Title</Dialog.Title>
         <Dialog.CustomContent>
           <Typography variant="body_short">Small description here.</Typography>
@@ -208,6 +212,44 @@ export const NoTitle: Story<DialogProps> = () => {
       </Dialog>
     </>
   )
+}
+
+export const Dismissable: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen} isDismissable onClose={handleClose}>
+        <Dialog.Title>Dismissable dialog</Dialog.Title>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">
+            closes dialog on click outside and escape key.
+          </Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+Dismissable.parameters = {
+  docs: {
+    description: {
+      story:
+        '`isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`',
+    },
+  },
 }
 
 export const Compact: Story<DialogProps> = () => {
