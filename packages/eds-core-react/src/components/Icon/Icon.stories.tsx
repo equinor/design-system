@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 import { Icon, IconProps } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs'
+import {
+  ArgsTable,
+  PRIMARY_STORY,
+  Title,
+  Description,
+} from '@storybook/addon-docs'
 import mdx from './Icon.docs.mdx'
 import * as icons from '@equinor/eds-icons'
 
@@ -44,8 +49,12 @@ export default {
   },
 } as ComponentMeta<typeof Icon>
 
-export const Demo: Story<IconProps> = (args) => (
+export const intro: Story<IconProps> = (args) => (
   <div>
+    <Title>Icon</Title>
+    <Description>
+      Component for rendering icons from the `@equinor/eds-icons` package.
+    </Description>
     <Preview>
       <Icon {...args} />
     </Preview>
