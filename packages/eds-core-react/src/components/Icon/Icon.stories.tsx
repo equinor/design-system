@@ -27,9 +27,9 @@ export default {
   },
 } as ComponentMeta<typeof Icon>
 
-export const Base: Story<IconProps> = (args) => <Icon {...args} />
+export const Introduction: Story<IconProps> = (args) => <Icon {...args} />
 
-Base.args = {
+Introduction.args = {
   name: 'save',
   size: 24,
   title: 'save',
