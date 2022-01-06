@@ -82,7 +82,10 @@ export const Default: Story<PopoverProps> = (args) => {
         anchorEl={referenceElement.current}
         onClose={handleClose}
       >
-        <Popover.Title>Title</Popover.Title>
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+        </Popover.Header>
+
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
@@ -117,7 +120,9 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
         onClose={closePopover}
         open={isOpen}
       >
-        <Popover.Title>Title</Popover.Title>
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+        </Popover.Header>
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
@@ -174,7 +179,9 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
         open={isOpen}
         placement="top"
       >
-        <Popover.Title>Title</Popover.Title>
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+        </Popover.Header>
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
@@ -211,7 +218,9 @@ export const WithTooltip: Story<PopoverProps> = () => {
         onClose={closePopover}
         placement="top"
       >
-        <Popover.Title>Title</Popover.Title>
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+        </Popover.Header>
         <Popover.Content>Content</Popover.Content>
       </Popover>
     </StoryCenter>
@@ -251,7 +260,9 @@ export const Compact: Story<PopoverProps> = () => {
           onClose={closePopover}
           open={isOpen}
         >
-          <Popover.Title>Title</Popover.Title>
+          <Popover.Header>
+            <Popover.Title>Title</Popover.Title>
+          </Popover.Header>
           <Popover.Content>
             <Typography variant="body_short">Content</Typography>
           </Popover.Content>
@@ -297,17 +308,16 @@ export const WithCloseButton: Story<PopoverProps> = () => {
           open={isOpen}
         >
           <Popover.Header>
+            <Popover.Title>Title</Popover.Title>
             <StyledCloseButton
               variant="ghost_icon"
-              data-testid="popover-close"
               aria-label="Close popover"
+              data-testid="popover-close"
               onClick={closePopover}
             >
               <Icon name="close" data={close} size={24} />
             </StyledCloseButton>
-            <Popover.Title>Title</Popover.Title>
           </Popover.Header>
-
           <Popover.Content>
             <Typography variant="body_short">Content</Typography>
           </Popover.Content>
