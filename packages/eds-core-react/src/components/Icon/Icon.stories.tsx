@@ -9,9 +9,6 @@ Icon.add(icons)
 export default {
   title: 'Icons/Icon',
   component: Icon,
-  args: {
-    name: 'save',
-  },
   argTypes: {
     name: {
       options: Object.keys(icons),
@@ -31,6 +28,12 @@ export default {
 } as ComponentMeta<typeof Icon>
 
 export const Base: Story<IconProps> = (args) => <Icon {...args} />
+
+Base.args = {
+  name: 'save',
+  size: 24,
+  title: 'save',
+}
 
 export const Color: Story<IconProps> = () => (
   <Stack>
