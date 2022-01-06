@@ -1,9 +1,8 @@
-import { Icon, IconProps } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { Stack } from './../../../.storybook/components'
-
-import mdx from './Icon.docs.mdx'
 import * as icons from '@equinor/eds-icons'
+import { Stack } from './../../../.storybook/components'
+import { Icon, IconProps } from '../..'
+import page from './Icon.docs.mdx'
 
 Icon.add(icons)
 
@@ -26,7 +25,7 @@ export default {
   },
   parameters: {
     docs: {
-      page: mdx,
+      page,
     },
   },
 } as ComponentMeta<typeof Icon>
