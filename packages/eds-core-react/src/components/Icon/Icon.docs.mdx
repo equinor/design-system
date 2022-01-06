@@ -1,10 +1,14 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { Icon  } from '.'
-import * as stories from './Icon.stories.tsx'
+
+import { Story,Props } from './../../../.storybook/components'
 import * as icons from '@equinor/eds-icons'
+import { Icon  } from '.'
 
 
-<Story id="icons-icon--intro" />
+# Icon 
+Component for rendering icons from the `@equinor/eds-icons` package.
+
+<Story id="icons-icon--base" />
+<Props/>
 
 ## Installation 
 
@@ -47,21 +51,15 @@ If you are using the icons semantically you need to provide the `title` property
 
 
 ## Color
-<Canvas>
-  <Story id="icons-icon--color" />
-</Canvas>
+<Story id="icons-icon--color" />
 
 
 ## Rotations
-<Canvas>
-  <Story id="icons-icon--rotations" />
-</Canvas>
+<Story id="icons-icon--rotations" />
 
 
 ## Sizes
-<Canvas>
-  <Story id="icons-icon--sizes" />
-</Canvas>
+<Story id="icons-icon--sizes" />
 
 
 

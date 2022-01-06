@@ -1,29 +1,11 @@
-import styled from 'styled-components'
 import { Icon, IconProps } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import {
-  ArgsTable,
-  PRIMARY_STORY,
-  Title,
-  Description,
-} from '@storybook/addon-docs'
+import { Stack } from './../../../.storybook/components'
+
 import mdx from './Icon.docs.mdx'
 import * as icons from '@equinor/eds-icons'
 
 Icon.add(icons)
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-gap: 32px;
-  grid-template-columns: repeat(5, fit-content(100%));
-`
-
-const Preview = styled.div`
-  box-shadow: rgb(0 0 0 / 10%) 0 1px 3px 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 30px 20px;
-  border-radius: 4px;
-`
 
 export default {
   title: 'Icons/Icon',
@@ -49,41 +31,30 @@ export default {
   },
 } as ComponentMeta<typeof Icon>
 
-export const intro: Story<IconProps> = (args) => (
-  <div>
-    <Title>Icon</Title>
-    <Description>
-      Component for rendering icons from the `@equinor/eds-icons` package.
-    </Description>
-    <Preview>
-      <Icon {...args} />
-    </Preview>
-    <ArgsTable story={PRIMARY_STORY}></ArgsTable>
-  </div>
-)
+export const Base: Story<IconProps> = (args) => <Icon {...args} />
 
 export const Color: Story<IconProps> = () => (
-  <Wrapper>
+  <Stack>
     <Icon name="save" color={'red'} />
     <Icon name="save" color={'green'} />
     <Icon name="save" color={'blue'} />
-  </Wrapper>
+  </Stack>
 )
 
 export const Rotations: Story<IconProps> = () => (
-  <Wrapper>
+  <Stack>
     <Icon name="pregnant_woman" rotation={90} />
     <Icon name="pregnant_woman" rotation={180} />
     <Icon name="pregnant_woman" rotation={270} />
-  </Wrapper>
+  </Stack>
 )
 
 export const Sizes: Story<IconProps> = () => (
-  <Wrapper>
+  <Stack>
     <Icon name="compare" size={16} />
     <Icon name="compare" size={24} />
     <Icon name="compare" size={32} />
     <Icon name="compare" size={40} />
     <Icon name="compare" size={48} />
-  </Wrapper>
+  </Stack>
 )
