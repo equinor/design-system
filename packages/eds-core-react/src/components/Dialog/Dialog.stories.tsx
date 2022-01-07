@@ -78,6 +78,44 @@ export const Default: Story<DialogProps> = (args) => {
   )
 }
 
+export const Dismissable: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen} isDismissable onClose={handleClose}>
+        <Dialog.Title>Dismissable dialog</Dialog.Title>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">
+            closes dialog on click outside and escape key.
+          </Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+Dismissable.parameters = {
+  docs: {
+    description: {
+      story:
+        '`isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`',
+    },
+  },
+}
+
 export const TextPlusAction: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
@@ -130,12 +168,15 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
 
 export const PlaceholderOnly: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const handleClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
       <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
         Trigger Dialog
       </Button>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} isDismissable onClose={handleClose}>
         <Dialog.Title>Placeholder</Dialog.Title>
         <Dialog.CustomContent>
           <Placeholder>
@@ -143,14 +184,6 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
             timedelay
           </Placeholder>
         </Dialog.CustomContent>
-        <Dialog.Actions>
-          <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button onClick={() => setIsOpen(false)} variant="ghost">
-              Cancel
-            </Button>
-          </Wrapper>
-        </Dialog.Actions>
       </Dialog>
     </>
   )
@@ -212,44 +245,6 @@ export const NoTitle: Story<DialogProps> = () => {
       </Dialog>
     </>
   )
-}
-
-export const Dismissable: Story<DialogProps> = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-  return (
-    <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
-        Trigger Dialog
-      </Button>
-      <Dialog open={isOpen} isDismissable onClose={handleClose}>
-        <Dialog.Title>Dismissable dialog</Dialog.Title>
-        <Dialog.CustomContent>
-          <Typography variant="body_short">
-            closes dialog on click outside and escape key.
-          </Typography>
-        </Dialog.CustomContent>
-        <Dialog.Actions>
-          <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button variant="ghost" onClick={() => setIsOpen(false)}>
-              Cancel
-            </Button>
-          </Wrapper>
-        </Dialog.Actions>
-      </Dialog>
-    </>
-  )
-}
-Dismissable.parameters = {
-  docs: {
-    description: {
-      story:
-        '`isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`',
-    },
-  },
 }
 
 export const Compact: Story<DialogProps> = () => {
