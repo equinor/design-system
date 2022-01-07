@@ -1,9 +1,8 @@
-import { Fragment, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Dialog,
   DialogProps,
   Button,
-  Scrim,
   Typography,
   EdsProvider,
   Density,
@@ -14,6 +13,10 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 export default {
   title: 'Feedback/Dialog',
   component: Dialog,
+  args: {
+    open: false,
+    isDismissable: false,
+  },
   subcomponents: {
     Actions: Dialog.Actions,
     Title: Dialog.Title,
@@ -46,150 +49,206 @@ const Placeholder = styled.div`
   display: inline-block;
 `
 
-export const Default: Story<DialogProps> = () => {
+export const Default: Story<DialogProps> = (args) => {
   //  Note: This example is not interactive, as Storybook
   // doesn't yet support to manipulate subcomponents via Storybook Args
-  return (
-    <Dialog>
-      <Dialog.Title>Title</Dialog.Title>
-      <Dialog.CustomContent>
-        <Typography variant="body_short">Small description here.</Typography>
-      </Dialog.CustomContent>
-      <Dialog.Actions>
-        <Wrapper>
-          <Button>OK</Button>
-          <Button>Cancel</Button>
-        </Wrapper>
-      </Dialog.Actions>
-    </Dialog>
-  )
-}
-export const WithScrim: Story<DialogProps> = () => {
-  const [visibleScrim, setVisibleScrim] = useState(false)
+  const { open, isDismissable } = args
+  const [isOpen, setIsOpen] = useState(open)
   const handleClose = () => {
-    setVisibleScrim(!visibleScrim)
+    setIsOpen(false)
   }
   return (
     <>
-      <div>
-        <Button onClick={() => setVisibleScrim(true)}>Trigger Dialog</Button>
-      </div>
-      {visibleScrim && (
-        <Scrim onClose={handleClose}>
-          <Dialog>
-            <Dialog.Title>Title</Dialog.Title>
-            <Dialog.CustomContent scrollable>
-              <Typography variant="body_short">
-                Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
-                sit amet consecteur dit lot. Lorem ipsum dolor sit amet
-                consecteur dit lot.
-              </Typography>
-              <Typography variant="body_short">
-                Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor
-                sit amet consecteur dit lot. Lorem ipsum dolor sit amet
-                consecteur dit lot.
-              </Typography>
-            </Dialog.CustomContent>
-            <Dialog.Actions>
-              <Wrapper>
-                <Button variant="ghost" onClick={() => setVisibleScrim(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={() => setVisibleScrim(false)}>OK</Button>
-              </Wrapper>
-            </Dialog.Actions>
-          </Dialog>
-        </Scrim>
-      )}
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen} onClose={handleClose} isDismissable={isDismissable}>
+        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">Small description here.</Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button onClick={() => setIsOpen(false)}>Cancel</Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
     </>
   )
 }
 
-export const TextPlusAction: Story<DialogProps> = () => (
-  <Dialog>
-    <Dialog.Title>Text + actions</Dialog.Title>
-    <Dialog.CustomContent>
-      <Typography variant="body_short">Small description here.</Typography>
-    </Dialog.CustomContent>
-    <Dialog.Actions>
-      <Wrapper>
-        <Button>OK</Button>
-        <Button variant="ghost">Cancel</Button>
-      </Wrapper>
-    </Dialog.Actions>
-  </Dialog>
-)
+export const Dismissable: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen} isDismissable onClose={handleClose}>
+        <Dialog.Title>Dismissable dialog</Dialog.Title>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">
+            closes dialog on click outside and escape key.
+          </Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+Dismissable.parameters = {
+  docs: {
+    description: {
+      story:
+        '`isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`',
+    },
+  },
+}
 
-export const PlaceholderPlusAction: Story<DialogProps> = () => (
-  <Dialog>
-    <Dialog.Title>Placeholder + actions</Dialog.Title>
-    <Dialog.CustomContent>
-      <Placeholder>Custom content</Placeholder>
-    </Dialog.CustomContent>
-    <Dialog.Actions>
-      <Wrapper>
-        <Button>OK</Button>
-        <Button variant="ghost">Cancel</Button>
-      </Wrapper>
-    </Dialog.Actions>
-  </Dialog>
-)
+export const TextPlusAction: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen}>
+        <Dialog.Title>Text + actions</Dialog.Title>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">Small description here.</Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
 
-export const PlaceholderOnly: Story<DialogProps> = () => (
-  <Dialog>
-    <Dialog.Title>Placeholder</Dialog.Title>
-    <Dialog.CustomContent>
-      <Placeholder>
-        Custom content in a larger placeholder. No actions, only ESC or
-        timedelay
-      </Placeholder>
-    </Dialog.CustomContent>
-    <Dialog.Actions>
-      <Wrapper>
-        <Button>OK</Button>
-        <Button variant="ghost">Cancel</Button>
-      </Wrapper>
-    </Dialog.Actions>
-  </Dialog>
-)
+export const PlaceholderPlusAction: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen}>
+        <Dialog.Title>Placeholder + actions</Dialog.Title>
+        <Dialog.CustomContent>
+          <Placeholder>Custom content</Placeholder>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button onClick={() => setIsOpen(false)} variant="ghost">
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
 
-export const ScrollablePlusActions: Story<DialogProps> = () => (
-  <Dialog>
-    <Dialog.Title>Scrollable + actions</Dialog.Title>
-    <Dialog.CustomContent scrollable>
-      <Typography variant="body_short">
-        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.
-      </Typography>
-      <Typography variant="body_short">
-        Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-        amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit lot.
-      </Typography>
-    </Dialog.CustomContent>
-    <Dialog.Actions>
-      <Wrapper>
-        <Button>OK</Button>
-        <Button variant="ghost">Cancel</Button>
-      </Wrapper>
-    </Dialog.Actions>
-  </Dialog>
-)
+export const PlaceholderOnly: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen} isDismissable onClose={handleClose}>
+        <Dialog.Title>Placeholder</Dialog.Title>
+        <Dialog.CustomContent>
+          <Placeholder>
+            Custom content in a larger placeholder. No actions, only ESC or
+            timedelay
+          </Placeholder>
+        </Dialog.CustomContent>
+      </Dialog>
+    </>
+  )
+}
 
-export const NoTitle: Story<DialogProps> = () => (
-  <Dialog>
-    <Dialog.CustomContent>
-      <Typography variant="body_short">Small description here.</Typography>
-    </Dialog.CustomContent>
-    <Dialog.Actions>
-      <Wrapper>
-        <Button>OK</Button>
-        <Button variant="ghost">Cancel</Button>
-      </Wrapper>
-    </Dialog.Actions>
-  </Dialog>
-)
+export const ScrollablePlusActions: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen}>
+        <Dialog.Title>Scrollable + actions</Dialog.Title>
+        <Dialog.CustomContent scrollable>
+          <Typography variant="body_short">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.
+          </Typography>
+          <Typography variant="body_short">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.
+          </Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button onClick={() => setIsOpen(false)} variant="ghost">
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+
+export const NoTitle: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen}>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">Small description here.</Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button onClick={() => setIsOpen(false)} variant="ghost">
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
 
 export const Compact: Story<DialogProps> = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -199,15 +258,20 @@ export const Compact: Story<DialogProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Dialog>
+      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen}>
         <Dialog.Title>Compact</Dialog.Title>
         <Dialog.CustomContent>
           <Typography variant="body_short">Small description here.</Typography>
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button>OK</Button>
-            <Button variant="ghost">Cancel</Button>
+            <Button onClick={() => setIsOpen(false)}>OK</Button>
+            <Button onClick={() => setIsOpen(false)} variant="ghost">
+              Cancel
+            </Button>
           </Wrapper>
         </Dialog.Actions>
       </Dialog>

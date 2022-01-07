@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Dialog Matches snapshot 1`] = `
-<DocumentFragment>
-  .c0 {
+.c0 {
   min-width: 96px;
   max-width: calc(100% - 32px);
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
@@ -89,38 +88,39 @@ exports[`Dialog Matches snapshot 1`] = `
 }
 
 <div
-    aria-describedby="eds-dialog-customcontent"
-    aria-labelledby="eds-dialog-title"
-    aria-modal="true"
-    class="c0 c1"
-    elevation="0 11px 15px rgba(0, 0, 0, 0.2),0 9px 46px rgba(0, 0, 0, 0.12),0 24px 38px rgba(0, 0, 0, 0.14)"
-    role="dialog"
-    tabindex="0"
+  aria-describedby="eds-dialog-customcontent"
+  aria-labelledby="eds-dialog-title"
+  aria-modal="true"
+  class="c0 c1"
+  data-testid="dialog"
+  elevation="0 11px 15px rgba(0, 0, 0, 0.2),0 9px 46px rgba(0, 0, 0, 0.12),0 24px 38px rgba(0, 0, 0, 0.14)"
+  open=""
+  role="dialog"
+  tabindex="0"
+>
+  <div
+    class="c2"
+    id="eds-dialog-title"
   >
-    <div
-      class="c2"
-      id="eds-dialog-title"
-    >
-      Title
-    </div>
-    <hr
-      class="c3 c4"
-    />
-    <div
-      class="c5"
-      id="eds-dialog-customcontent"
-    >
-      Description
-    </div>
-    <div
-      class="c6"
-    >
-      <button
-        type="button"
-      >
-        OK
-      </button>
-    </div>
+    Title
   </div>
-</DocumentFragment>
+  <hr
+    class="c3 c4"
+  />
+  <div
+    class="c5"
+    id="eds-dialog-customcontent"
+  >
+    Description
+  </div>
+  <div
+    class="c6"
+  >
+    <button
+      type="button"
+    >
+      OK
+    </button>
+  </div>
+</div>
 `;
