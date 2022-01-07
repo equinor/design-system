@@ -1,3 +1,3 @@
 export { PropsTable } from './PropsTable'
-export { Story } from './story'
-export { Stack } from './stack'
+export { Story } from './Story'
+export { Stack } from './Stack'
