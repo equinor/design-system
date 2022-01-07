@@ -1,0 +1,68 @@
+
+import { Story, PropsTable } from './../../../.storybook/components'
+import * as icons from '@equinor/eds-icons'
+import { Icon  } from '.'
+
+
+# Icon 
+Component for rendering icons from the `@equinor/eds-icons` package.
+
+<Story id="icons-icon--introduction" />
+<PropsTable />
+
+## Installation 
+
+Install the packages in your project directory with your package manager (npm/yarn/pnpm).
+```shell
+npm install @equinor/eds-core-react @equinor/eds-icons
+```
+
+## Usage
+
+The `Icon` can then render the icons in two ways: 
+
+### Option 1 
+
+Using the `name` property. This allows you to setup all your icons once and use the `name` property to render it.
+```tsx
+import { Icon } from '@equinor/eds-core-react'
+import { save } from '@equinor/eds-icons' // import "save" icon
+
+Icon.add({ save }) // needs only to be done once
+
+<Icon name="save" />
+```
+### Option 2
+
+Use the `data` property for directly rendering the imported icon
+```tsx
+import { Icon } from '@equinor/eds-core-react'
+import { save } from '@equinor/eds-icons' // import "save" icon
+
+<Icon data={save} />
+```
+
+
+## Accessibility
+If you are using the icons alone to convey meaning you need to provide the `title` property so that your icons are correctly accessible.
+```tsx
+ <Icon name="save" title="Save me!" />
+```
+
+
+## Colour
+<Story id="icons-icon--color" />
+
+
+## Rotations
+<Story id="icons-icon--rotations" />
+
+
+## Sizes
+<Story id="icons-icon--sizes" />
+
+
+
+
+
+
