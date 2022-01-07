@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useArgs } from '@storybook/client-api'
 import {
   Dialog,
   DialogProps,
@@ -50,27 +51,25 @@ const Placeholder = styled.div`
 `
 
 export const Default: Story<DialogProps> = (args) => {
-  //  Note: This example is not interactive, as Storybook
-  // doesn't yet support to manipulate subcomponents via Storybook Args
   const { open, isDismissable } = args
-  const [isOpen, setIsOpen] = useState(open)
+  const [, updateArgs] = useArgs()
   const handleClose = () => {
-    setIsOpen(false)
+    updateArgs({ open: false })
   }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={() => updateArgs({ open: true })}>
         Trigger Dialog
       </Button>
-      <Dialog open={isOpen} onClose={handleClose} isDismissable={isDismissable}>
+      <Dialog open={open} onClose={handleClose} isDismissable={isDismissable}>
         <Dialog.Title>Title</Dialog.Title>
         <Dialog.CustomContent>
           <Typography variant="body_short">Small description here.</Typography>
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button onClick={() => setIsOpen(false)}>Cancel</Button>
+            <Button onClick={handleClose}>OK</Button>
+            <Button onClick={handleClose}>Cancel</Button>
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
