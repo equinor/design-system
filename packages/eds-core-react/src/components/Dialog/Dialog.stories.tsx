@@ -56,9 +56,12 @@ export const Default: Story<DialogProps> = (args) => {
   const handleClose = () => {
     updateArgs({ open: false })
   }
+  const handleOpen = () => {
+    updateArgs({ open: true })
+  }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => updateArgs({ open: true })}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={open} onClose={handleClose} isDismissable={isDismissable}>
@@ -79,12 +82,15 @@ export const Default: Story<DialogProps> = (args) => {
 
 export const Dismissable: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
   const handleClose = () => {
     setIsOpen(false)
   }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={isOpen} isDismissable onClose={handleClose}>
@@ -96,8 +102,8 @@ export const Dismissable: Story<DialogProps> = () => {
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+            <Button onClick={handleClose}>OK</Button>
+            <Button variant="ghost" onClick={handleClose}>
               Cancel
             </Button>
           </Wrapper>
@@ -117,9 +123,15 @@ Dismissable.parameters = {
 
 export const TextPlusAction: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
@@ -129,8 +141,8 @@ export const TextPlusAction: Story<DialogProps> = () => {
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+            <Button onClick={handleClose}>OK</Button>
+            <Button variant="ghost" onClick={handleClose}>
               Cancel
             </Button>
           </Wrapper>
@@ -142,9 +154,15 @@ export const TextPlusAction: Story<DialogProps> = () => {
 
 export const PlaceholderPlusAction: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
@@ -154,8 +172,8 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button onClick={() => setIsOpen(false)} variant="ghost">
+            <Button onClick={handleClose}>OK</Button>
+            <Button onClick={handleClose} variant="ghost">
               Cancel
             </Button>
           </Wrapper>
@@ -167,12 +185,15 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
 
 export const PlaceholderOnly: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
   const handleClose = () => {
     setIsOpen(false)
   }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={isOpen} isDismissable onClose={handleClose}>
@@ -190,9 +211,15 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
 
 export const ScrollablePlusActions: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
@@ -211,8 +238,8 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button onClick={() => setIsOpen(false)} variant="ghost">
+            <Button onClick={handleClose}>OK</Button>
+            <Button onClick={handleClose} variant="ghost">
               Cancel
             </Button>
           </Wrapper>
@@ -224,9 +251,15 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
 
 export const NoTitle: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
@@ -235,8 +268,8 @@ export const NoTitle: Story<DialogProps> = () => {
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button onClick={() => setIsOpen(false)} variant="ghost">
+            <Button onClick={handleClose}>OK</Button>
+            <Button onClick={handleClose} variant="ghost">
               Cancel
             </Button>
           </Wrapper>
@@ -249,6 +282,12 @@ export const NoTitle: Story<DialogProps> = () => {
 export const Compact: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [density, setDensity] = useState<Density>('comfortable')
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
 
   useEffect(() => {
     // Simulate user change
@@ -257,7 +296,7 @@ export const Compact: Story<DialogProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Button aria-haspopup="dialog" onClick={() => setIsOpen(true)}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
@@ -267,8 +306,8 @@ export const Compact: Story<DialogProps> = () => {
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
-            <Button onClick={() => setIsOpen(false)}>OK</Button>
-            <Button onClick={() => setIsOpen(false)} variant="ghost">
+            <Button onClick={handleClose}>OK</Button>
+            <Button onClick={handleClose} variant="ghost">
               Cancel
             </Button>
           </Wrapper>
