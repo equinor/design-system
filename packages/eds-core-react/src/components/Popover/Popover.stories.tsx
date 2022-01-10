@@ -309,15 +309,13 @@ export const WithCloseButton: Story<PopoverProps> = () => {
         >
           <Popover.Header>
             <Popover.Title>Title</Popover.Title>
-            <Button
+            <StyledCloseButton
               variant="ghost_icon"
-              aria-label="Close popover"
               title="Close popover"
-              data-testid="popover-close"
               onClick={closePopover}
             >
               <Icon name="close" data={close} size={24} />
-            </Button>
+            </StyledCloseButton>
           </Popover.Header>
           <Popover.Content>
             <Typography variant="body_short">Content</Typography>
