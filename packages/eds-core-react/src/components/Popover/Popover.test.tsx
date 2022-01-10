@@ -6,6 +6,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Popover } from '.'
 import type { PopoverProps } from './Popover'
+import { Button } from '../Button'
 
 // We override Popover for testing and set props to partial because AnchorEl is applied to children in custom render function
 const TestPopover = Popover as React.ForwardRefExoticComponent<
@@ -77,11 +78,14 @@ describe('Popover', () => {
 
     render(
       <TestPopover open onClose={handleOnClose}>
-        <div>some random content</div>
+        <Popover.Header>
+          <Popover.Title>Title Text</Popover.Title>
+          <Button aria-label="Close popover" onClick={handleOnClose}></Button>,
+        </Popover.Header>
       </TestPopover>,
     )
-    const closeButton = screen.getByLabelText('Close popover')
 
+    const closeButton = screen.getByLabelText('Close popover')
     fireEvent.click(closeButton)
 
     await waitFor(() => expect(handleOnClose).toHaveBeenCalled())
