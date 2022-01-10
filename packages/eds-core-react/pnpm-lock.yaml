@@ -19,6 +19,7 @@ specifiers:
   '@storybook/addon-docs': ^6.4.9
   '@storybook/addon-essentials': ^6.4.9
   '@storybook/addon-links': ^6.4.9
+  '@storybook/client-api': ^6.4.9
   '@storybook/react': ^6.4.9
   '@testing-library/jest-dom': ^5.14.1
   '@testing-library/react': ^12.0.0
@@ -74,6 +75,7 @@ devDependencies:
   '@storybook/addon-docs': 6.4.9_c0acb08ee8f8c409ede2d0ccce701684
   '@storybook/addon-essentials': 6.4.9_53dd3ffcdaed58bdafedc1c94a88f364
   '@storybook/addon-links': 6.4.9_react-dom@17.0.2+react@17.0.2
+  '@storybook/client-api': 6.4.9_react-dom@17.0.2+react@17.0.2
   '@storybook/react': 6.4.9_d1bf9d6de68e4a95195ed4f60b64fa76
   '@testing-library/jest-dom': 5.14.1
   '@testing-library/react': 12.0.0_react-dom@17.0.2+react@17.0.2
@@ -5144,7 +5146,7 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.15.8
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.16.7
       '@types/aria-query': 4.2.2
       aria-query: 4.2.2
       chalk: 4.1.2
@@ -5911,7 +5913,7 @@ packages:
     resolution: {integrity: sha512-o/HelwhuKpTj/frsOsbNLNgnNGVIFsVP/SW2BSF14gVl7kAfMOJ6/8wUAUvG1R1NHKrfG+2sHZTu0yauT1qBrA==}
     engines: {node: '>=6.0'}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.16.7
       '@babel/runtime-corejs3': 7.14.8
     dev: true
 
@@ -12615,7 +12617,7 @@ packages:
     peerDependencies:
       react: '>=16.13.1'
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.16.7
       react: 17.0.2
     dev: true
 
@@ -14264,6 +14266,7 @@ packages:
     resolution: {integrity: sha512-qZukoSxOG0urUTvjc2ERMTcAy+BiFh3weWAkeurLwjrCba73poHmG3E36XEjd/JGukMzwTL7uCxZiAexj8ppvQ==}
     engines: {node: '>=0.8.0'}
     hasBin: true
+    requiresBuild: true
     dev: true
     optional: true
 

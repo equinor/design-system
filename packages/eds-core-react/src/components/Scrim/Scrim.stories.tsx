@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
 import { Scrim, Button, Typography, ScrimProps } from '../..'
 import { Story, Meta } from '@storybook/react'
+import { useArgs } from '@storybook/client-api'
 
 import styled from 'styled-components'
 
@@ -35,25 +35,20 @@ export default {
 
 export const Default: Story<ScrimProps> = (args) => {
   const { open } = args
-  const [isOpen, setIsOpen] = useState(open)
+  const [, updateArgs] = useArgs()
 
   const handleOpen = () => {
-    setIsOpen(true)
+    updateArgs({ open: true })
   }
 
   const handleClose = () => {
-    setIsOpen(false)
+    updateArgs({ open: false })
   }
-
-  // This is just for storybook and changes done via controls addon
-  useEffect(() => {
-    setIsOpen(open)
-  }, [open])
 
   return (
     <>
       <Button onClick={handleOpen}>Trigger Scrim</Button>
-      <Scrim {...args} open={isOpen} onClose={handleClose}>
+      <Scrim {...args} open={open} onClose={handleClose}>
         <TestContent>
           <Typography variant="body_short">
             Press close or hit “ESC” to close scrim.
