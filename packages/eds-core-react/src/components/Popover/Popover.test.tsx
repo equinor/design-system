@@ -72,24 +72,6 @@ describe('Popover', () => {
     const content = screen.getByText('Content Text')
     await waitFor(() => expect(content).toBeDefined())
   })
-
-  it('has called onClose when close button is clicked', async () => {
-    const handleOnClose = jest.fn()
-
-    render(
-      <TestPopover open onClose={handleOnClose}>
-        <Popover.Header>
-          <Popover.Title>Title Text</Popover.Title>
-          <Button aria-label="Close popover" onClick={handleOnClose}></Button>,
-        </Popover.Header>
-      </TestPopover>,
-    )
-
-    const closeButton = screen.getByLabelText('Close popover')
-    fireEvent.click(closeButton)
-
-    await waitFor(() => expect(handleOnClose).toHaveBeenCalled())
-  })
   it("doesn't crash if no children is provided to Popover component", async () => {
     const placement = 'top'
     render(<TestPopover placement={placement} />)
