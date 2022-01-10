@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import {
   Typography,
   Button,
@@ -19,19 +19,6 @@ const StoryCenter = styled.div({
   display: 'flex',
   justifyContent: 'center',
   margin: '10rem',
-})
-
-const StyledCloseButton = styled(Button)(({ theme }) => {
-  return css`
-    position: absolute;
-    top: ${theme.entities.closeButton.spacings.top};
-    right: ${theme.spacings.right};
-    height: ${theme.entities.closeButton.height};
-    width: ${theme.entities.closeButton.width};
-    &:after {
-      height: ${theme.entities.closeButton.height};
-    }
-  `
 })
 
 export default {
@@ -309,13 +296,13 @@ export const WithCloseButton: Story<PopoverProps> = () => {
         >
           <Popover.Header>
             <Popover.Title>Title</Popover.Title>
-            <StyledCloseButton
+            <Button
               variant="ghost_icon"
               title="Close popover"
               onClick={closePopover}
             >
               <Icon name="close" data={close} size={24} />
-            </StyledCloseButton>
+            </Button>
           </Popover.Header>
           <Popover.Content>
             <Typography variant="body_short">Content</Typography>
