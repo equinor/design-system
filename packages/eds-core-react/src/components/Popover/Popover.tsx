@@ -7,11 +7,7 @@ import {
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Paper } from '../Paper'
-import {
-  spacingsTemplate,
-  typographyTemplate,
-  bordersTemplate,
-} from '../../utils'
+import { typographyTemplate, bordersTemplate } from '../../utils'
 import {
   usePopper,
   useOutsideClick,
