@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components'
 
 const StyledPopoverTitle = styled.div(({ theme }) => {
   return css`
-    margin-right: ${theme.entities.closeButton.width};
-    max-width: calc(${theme.maxWidth} - ${theme.entities.closeButton.width});
+    max-width: ${theme.maxWidth};
+    margin-right: ${theme.spacings.right};
     overflow: hidden;
   `
 })
