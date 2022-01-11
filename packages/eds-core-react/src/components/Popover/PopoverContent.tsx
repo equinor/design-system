@@ -1,9 +1,16 @@
 import { forwardRef, HTMLAttributes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const ContentWrapper = styled.div`
-  overflow: hidden;
-`
+const ContentWrapper = styled.div(({ theme }) => {
+  return css`
+    overflow: hidden;
+    padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
+    :last-child {
+      padding-bottom: ${theme.spacings.bottom};
+    }
+  `
+})
+
 export type PopoverContentProps = HTMLAttributes<HTMLDivElement>
 
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
