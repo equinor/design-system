@@ -160,10 +160,10 @@ export async function createAssets({ query }) {
   // Write svg to files
 
   // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-  writeSVGs(assetsWithSvg)
-  writeSVGSprite(assetsWithSvg)
+  // writeSVGs(assetsWithSvg)
+  // writeSVGSprite(assetsWithSvg)
 
-  writeJsonAssets(assetsWithSvg)
+  // writeJsonAssets(assetsWithSvg)
   writeJsFile(assetsWithSvg)
 
   console.info('Finished exporting assets')
