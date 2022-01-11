@@ -21,14 +21,63 @@ const getVariant = (
 ): ButtonToken => {
   switch (variant) {
     case 'ghost':
-      return tokenSet.ghost
+      return { ...tokenSet.ghost, background: 'orange' }
     case 'ghost_icon':
-      return tokenSet.ghost_icon
+      return {
+        ...tokenSet.ghost_icon,
+        background: 'lime',
+        border: {
+          type: 'border',
+          width: '1px',
+          style: 'solid',
+          color: 'maroon',
+          radius: '50% !important',
+        },
+      }
     case 'outlined':
-      return tokenSet.outlined
+      return {
+        ...tokenSet.outlined,
+        background: 'yellow',
+        height: 'unset',
+        spacings: {
+          top: 'inherit',
+          bottom: 'inherit',
+        },
+      }
     case 'contained':
     default:
-      return tokenSet.contained
+      return {
+        ...tokenSet.contained,
+        background: 'violet',
+        height: 'unset',
+        spacings: {
+          ...tokenSet.contained.spacings,
+          top: 'calc(0.7142em - 1px)', // calc(10px - 1px) - 10/14 (line-height er 1.143em = 16.002px)
+          bottom: 'calc(0.7142em - 1px)',
+        },
+        border: {
+          ...tokenSet.contained.border,
+          type: 'border',
+          radius: '0.2857em', // 4px - 4/14
+        },
+        minHeight: '0.875rem',
+        typography: {
+          fontSize: '0.875rem', // 14px - 14/16
+        },
+        modes: {
+          compact: {
+            ...tokenSet.contained.modes.compact,
+            height: 'unset',
+            spacings: {
+              ...tokenSet.contained.modes.compact.spacings,
+              top: 'calc(0.5714em - 1px)', // calc(8px - 1px) - 8/14
+              bottom: 'calc(0.5714em - 1px)',
+              left: '1.1428em',
+              right: '1.1428em',
+            },
+          },
+        },
+      }
   }
 }
 
@@ -46,11 +95,16 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
 
 const Inner = styled.span`
   display: grid;
-  grid-gap: 8px;
+  grid-gap: 0.5714em; // 8px - (16/14)/2
   grid-auto-flow: column;
   align-items: center;
   height: 100%;
   justify-content: center;
+
+  & > :is(svg, img) {
+    margin-top: -4px;
+    margin-bottom: -4px;
+  }
 `
 
 const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
