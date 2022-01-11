@@ -13,7 +13,7 @@ import {
 import { more_vertical, close } from '@equinor/eds-icons'
 import { Meta, Story } from '@storybook/react'
 
-const { Title, Content, Header } = Popover
+const { Title, Content, Header, Actions } = Popover
 
 const StoryCenter = styled.div({
   display: 'flex',
@@ -28,6 +28,7 @@ export default {
     Title,
     Content,
     Header,
+    Actions,
   },
 } as Meta
 
@@ -76,7 +77,9 @@ export const Default: Story<PopoverProps> = (args) => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Button onClick={handleClose}>OK</Button>
+        <Popover.Actions>
+          <Button onClick={handleClose}>OK</Button>
+        </Popover.Actions>
       </Popover>
     </StoryCenter>
   )
@@ -113,7 +116,9 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Button onClick={closePopover}>OK</Button>
+        <Popover.Actions>
+          <Button onClick={closePopover}>OK</Button>
+        </Popover.Actions>
       </Popover>
     </StoryCenter>
   )
@@ -172,7 +177,9 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Button onClick={handleClose}>OK</Button>
+        <Popover.Actions>
+          <Button onClick={handleClose}>OK</Button>
+        </Popover.Actions>
       </Popover>
     </StoryCenter>
   )
@@ -253,7 +260,9 @@ export const Compact: Story<PopoverProps> = () => {
           <Popover.Content>
             <Typography variant="body_short">Content</Typography>
           </Popover.Content>
-          <Button onClick={closePopover}>OK</Button>
+          <Popover.Actions>
+            <Button onClick={closePopover}>OK</Button>
+          </Popover.Actions>
         </Popover>
       </StoryCenter>
     </EdsProvider>

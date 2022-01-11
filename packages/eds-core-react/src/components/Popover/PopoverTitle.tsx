@@ -6,7 +6,6 @@ const StyledPopoverTitle = styled.div(({ theme }) => {
     margin-right: ${theme.entities.closeButton.width};
     max-width: calc(${theme.maxWidth} - ${theme.entities.closeButton.width});
     overflow: hidden;
-    margin-top: -${theme.entities.title.spacings.top};
   `
 })
 
