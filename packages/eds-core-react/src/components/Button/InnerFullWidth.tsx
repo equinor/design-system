@@ -11,28 +11,30 @@ const FullWidthInner = styled.span`
   display: flex;
   align-items: center;
 
-  > img:first-child,
-  > svg:first-child {
-    margin-right: 8px;
+  > :is(svg, img) {
+    margin-top: -4px;
+    margin-bottom: -4px;
   }
 
-  > img:last-child,
-  > svg:last-child {
-    margin-left: 8px;
+  > :is(svg, img):first-child {
+    margin-right: 0.5714em; //8px
   }
 
-  > img:only-child,
-  > svg:only-child {
+  > :is(svg, img):last-child {
+    margin-left: 0.5714em; // 80px
+  }
+
+  > :is(svg, img):only-child {
     margin-left: auto;
     margin-right: auto;
   }
 
   > span:first-child {
-    margin-left: 32px;
+    margin-left: 2.2857em; // 32px
   }
 
   > span:last-child {
-    margin-right: 32px;
+    margin-right: 2.2857em; // 32px
   }
 
   > span:only-child {
