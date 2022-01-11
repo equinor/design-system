@@ -32,21 +32,27 @@ const {
 
 export const button: ButtonToken = {
   background: 'transparent',
-  height: buttonHeight,
+  // height: buttonHeight,
   typography: {
     ...buttonTypography,
     textAlign: 'center',
+    fontSize: '0.875rem', // 14px - 14/16
   },
   border: {
     type: 'border',
     width: '1px',
     color: 'transparent',
-    radius: buttonBorderRadius,
+    //radius: buttonBorderRadius,
+    radius: '0.2857em', // 4px - 4/14
     style: 'solid',
   },
   spacings: {
-    left: medium,
-    right: medium,
+    top: 'calc(0.7142em - 1px)', // calc(10px - 1px) - 10/14 (line-height er 1.143em = 16.002px)
+    bottom: 'calc(0.7142em - 1px)',
+    left: '1.1428em',
+    right: '1.1428em',
+    // left: medium,
+    // right: medium,
   },
   clickbound: {
     height: clicboundHeight,
@@ -68,7 +74,8 @@ export const button: ButtonToken = {
         type: 'border',
         width: '1px',
         color: 'transparent',
-        radius: buttonBorderRadius,
+        //radius: buttonBorderRadius,
+        radius: '0.2857em', // 4px - 4/14
         style: 'solid',
       },
     },
@@ -98,7 +105,11 @@ export const button: ButtonToken = {
   },
   modes: {
     compact: {
-      height: compactButtonHeight,
+      minHeight: '1.7142em', // 24px
+      spacings: {
+        top: 'calc(0.2857em - 1px)', // calc(4px - 1px) - 4/14
+        bottom: 'calc(0.2857em - 1px)',
+      },
       clickbound: {
         height: compactClickboundHeight,
         width: '100%',
