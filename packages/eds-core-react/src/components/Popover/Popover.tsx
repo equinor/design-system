@@ -29,7 +29,6 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
   return css`
     ${{ visibility: open ? null : 'hidden' }}
     ${typographyTemplate(theme.typography)}
-    ${spacingsTemplate(theme.spacings)}
     display: grid;
     grid-gap: ${theme.spacings.bottom};
     grid-auto-columns: auto;
