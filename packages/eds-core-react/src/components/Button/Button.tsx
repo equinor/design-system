@@ -1,6 +1,5 @@
 import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
-import mergeDeepRight from 'ramda/src/mergeDeepRight'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
 import {
