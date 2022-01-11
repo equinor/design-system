@@ -53,28 +53,76 @@ const writeSVGSprite = (assets) => {
 }
 
 const writeJsFile = (assets) => {
-  const prefix = 'eds'
+  const iconDataObj = (icon) => {
+    const prefix = 'eds'
+    const { name, height, width, svgPathData, sizes } = icon
+
+    return `{
+      name: '${name}',
+      prefix: '${prefix}',
+      height: '${height}',
+      width: '${width}',
+      svgPathData: '${svgPathData}',
+      ${sizes ? `sizes: { small: ${iconDataObj(sizes.small)} }` : ``}
+    }
+    `
+  }
+  const iconDataTemplate = (icon) =>
+    `export const ${icon.name}: IconData = {${JSON.stringify(
+      iconDataObj(icon),
+    )}}`
+
+  const mergedSizes = R.map(
+    (iconGroup) => ({
+      ...iconGroup,
+      value: R.reduce(
+        (acc, val) => {
+          const smallAnnote = '__small'
+
+          if (R.endsWith(smallAnnote, val.name)) {
+            const parentName = R.head(R.split(smallAnnote, val.name))
+            const parent = acc.find(
+              (p) => p.name === parentName,
+              iconGroup.value,
+            )
+
+            if (parent) {
+              // This will result in double iconData 🤔
+              return [
+                ...acc,
+                {
+                  ...parent,
+                  sizes: {
+                    small: val,
+                  },
+                },
+              ]
+            } else {
+              console.log(
+                'parent icon not found, skipped: ',
+                JSON.stringify({ parentName, name: val.name }),
+              )
+              return acc
+            }
+          }
+
+          return [...acc, val]
+        },
+        [],
+        iconGroup.value,
+      ),
+    }),
+    assets,
+  )
+
   const svgObjects = R.pipe(
     R.map((iconGroups) =>
-      R.pipe(
-        R.reduce((acc, icon) => {
-          const { name, height, width, svgPathData } = icon
-
-          const svgObj = `
-export const ${name}: IconData = {
-  name: '${name}',
-  prefix: '${prefix}',
-  height: '${height}',
-  width: '${width}',
-  svgPathData: '${svgPathData}',
-}
-`
-          return `${acc}${svgObj}`
-        }, ''),
-      )(iconGroups.value),
+      R.pipe(R.reduce((acc, icon) => `${acc}${iconDataTemplate(icon)}`, ''))(
+        iconGroups.value,
+      ),
     ),
     R.head,
-  )(assets)
+  )(mergedSizes)
 
   const jsFile = `import type { IconData } from './types'\n${svgObjects}`
 
