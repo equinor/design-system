@@ -306,6 +306,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
           <Popover.Header>
             <Popover.Title>Title</Popover.Title>
             <Button
+              style={{ height: '32px', width: '32px' }}
               variant="ghost_icon"
               title="Close popover"
               onClick={closePopover}
