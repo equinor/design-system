@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(4, fit-content(100%));
+  align-items: start;
 `
 
 const FullWidthWrapper = styled.div`
