@@ -324,7 +324,8 @@ export const WithCloseButton: Story<PopoverProps> = () => {
 WithCloseButton.parameters = {
   docs: {
     description: {
-      story: 'Description comes here ',
+      story:
+        'In some cases an explicit close button is recommended. Here is an example of how this can be implemented in the Header.',
     },
   },
 }
