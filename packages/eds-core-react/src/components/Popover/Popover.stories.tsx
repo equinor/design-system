@@ -285,41 +285,39 @@ export const WithCloseButton: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <EdsProvider>
-      <StoryCenter>
-        <Button
-          id="click-popover-anchor"
-          aria-controls="click-popover"
-          ref={anchorRef}
-          onClick={openPopover}
-        >
-          Click to activate
-        </Button>
+    <StoryCenter>
+      <Button
+        id="click-popover-anchor"
+        aria-controls="click-popover"
+        ref={anchorRef}
+        onClick={openPopover}
+      >
+        Click to activate
+      </Button>
 
-        <Popover
-          id="click-popover"
-          aria-expanded={isOpen}
-          anchorEl={anchorRef.current}
-          onClose={closePopover}
-          open={isOpen}
-        >
-          <Popover.Header>
-            <Popover.Title>Title</Popover.Title>
-            <Button
-              style={{ height: '32px', width: '32px' }}
-              variant="ghost_icon"
-              title="Close popover"
-              onClick={closePopover}
-            >
-              <Icon name="close" data={close} size={24} />
-            </Button>
-          </Popover.Header>
-          <Popover.Content>
-            <Typography variant="body_short">Content</Typography>
-          </Popover.Content>
-        </Popover>
-      </StoryCenter>
-    </EdsProvider>
+      <Popover
+        id="click-popover"
+        aria-expanded={isOpen}
+        anchorEl={anchorRef.current}
+        onClose={closePopover}
+        open={isOpen}
+      >
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+          <Button
+            style={{ height: '32px', width: '32px' }}
+            variant="ghost_icon"
+            aria-label="Close popover"
+            onClick={closePopover}
+          >
+            <Icon name="close" data={close} size={24} />
+          </Button>
+        </Popover.Header>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
+      </Popover>
+    </StoryCenter>
   )
 }
 
