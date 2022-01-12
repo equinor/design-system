@@ -110,6 +110,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     titleId = `${icon.prefix}-${icon.name}-${count}`
     svgProps = {
       ...svgProps,
+      title,
       role: 'img',
       'aria-hidden': undefined,
       'aria-labelledby': titleId,
