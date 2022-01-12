@@ -45,7 +45,7 @@ export async function getFigmaFile({ fileId, force = 'false' }) {
     writeFile('raw', fileId, 'json', `${JSON.stringify(data, null, 2)}\n`)
   } else {
     try {
-      console.info('Reading local Figma file...')
+      console.info('Reading local Figma file')
       data = await readFile('raw', fileId, 'json')
     } catch (error) {
       console.info(

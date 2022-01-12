@@ -68,16 +68,14 @@ const writeJsFile = (assets) => {
     `
   }
   const iconDataTemplate = (icon) =>
-    `export const ${icon.name}: IconData = {${JSON.stringify(
-      iconDataObj(icon),
-    )}}`
+    `export const ${icon.name}: IconData = ${iconDataObj(icon)} \n`
 
   const mergedSizes = R.map(
     (iconGroup) => ({
       ...iconGroup,
       value: R.reduce(
         (acc, val) => {
-          const smallAnnote = '__small'
+          const smallAnnote = '_small'
 
           if (R.endsWith(smallAnnote, val.name)) {
             const parentName = R.head(R.split(smallAnnote, val.name))
@@ -87,9 +85,10 @@ const writeJsFile = (assets) => {
             )
 
             if (parent) {
-              // This will result in double iconData 🤔
+              // remove "old" parent as its replaced by new
+              const updatedAcc = R.filter((x) => x.name !== parent.name, acc)
               return [
-                ...acc,
+                ...updatedAcc,
                 {
                   ...parent,
                   sizes: {
@@ -124,9 +123,12 @@ const writeJsFile = (assets) => {
     R.head,
   )(mergedSizes)
 
-  const jsFile = `import type { IconData } from './types'\n${svgObjects}`
-
-  writeFile(PATHS.ICON_FILES, 'data', 'ts', jsFile)
+  writeFile(
+    PATHS.ICON_FILES,
+    'data',
+    'ts',
+    `import type { IconData } from './types' \n\n ${svgObjects}\n`,
+  )
 }
 
 const writeJsonAssets = (assets) => {
@@ -138,7 +140,7 @@ const writeSVGs = (assets) => {
 }
 
 export async function createAssets({ query }) {
-  console.info('Started exporting assets')
+  console.info('Started exporting assets from Figma')
 
   const data = await getFigmaFile(query)
 
@@ -159,6 +161,7 @@ export async function createAssets({ query }) {
     },
   ])
 
+  console.info('Get asset urls from Figma')
   // Update with svg image urls from Figma
   const assetsWithUrl = await Promise.all(
     assetPages.map(async (assetPage) => {
@@ -176,10 +179,20 @@ export async function createAssets({ query }) {
       return assetPage
     }),
   )
-  // Wait for Figma to generate all endpoints
-  await sleep(20000)
 
-  // Fetch svg image as string for each asset
+  const sleepTimer = 20000
+  console.info(
+    `Waiting ${sleepTimer / 1000}s for asset urls to generate in Figma`,
+  )
+  // Wait for Figma to generate all endpoints
+  await sleep(sleepTimer)
+
+  assetPages.forEach((x) =>
+    console.info(`Found ${R.length(x.value)} ${x.name}`),
+  )
+  console.info(
+    `Fetching ${R.head(assetPages).name} assets as svgs from Figma urls`,
+  )
   const assetsWithSvg = await Promise.all(
     [R.head(assetsWithUrl)].map(async (assetPage) => ({
       ...assetPage,

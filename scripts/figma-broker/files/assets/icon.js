@@ -1,5 +1,4 @@
 import { pathName, propName } from '../../functions/utils'
-import { endsWith, not } from 'ramda'
 
 const parseComponent = (groupName, x) => ({
   name: propName(x.name.replace('-', ' ')),
@@ -31,7 +30,7 @@ export const makeAssetTokens = (assets, groupName) =>
           compact = {
             ...parseComponent(groupName, {
               ...small,
-              name: `${x.name}__small`,
+              name: `${x.name}_small`,
             }),
           }
         } else {
