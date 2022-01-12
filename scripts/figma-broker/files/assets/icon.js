@@ -19,25 +19,25 @@ export const makeAssetTokens = (assets, groupName) =>
       }
 
       if (x.type === 'COMPONENT_SET') {
-        const small = x.children.find((child) => /small/i.test(child.name))
-        const normal = x.children.find((child) => /default/i.test(child.name))
+        const smallIcon = x.children.find((child) => /small/i.test(child.name))
+        const defaultIcon = x.children.find((child) =>
+          /default/i.test(child.name),
+        )
 
-        let compact, comfortable
-
-        comfortable = parseComponent(groupName, { ...normal, name: x.name })
-
-        if (small) {
-          compact = {
-            ...parseComponent(groupName, {
-              ...small,
+        if (smallIcon) {
+          assets = [
+            parseComponent(groupName, {
+              ...defaultIcon,
+              name: x.name,
+            }),
+            parseComponent(groupName, {
+              ...smallIcon,
               name: `${x.name}_small`,
             }),
-          }
+          ]
         } else {
-          console.warn('child not found for: ', x.name)
+          console.error('Failed parsing component set for: ', x.name)
         }
-
-        assets = [comfortable, compact]
       }
 
       return assets
