@@ -12,7 +12,6 @@ const {
   },
   spacings: {
     comfortable: {
-      x_large: spacingXlarge,
       medium: spacingMedium,
       small: spacingSmall,
       x_small: spacingXsmall,
