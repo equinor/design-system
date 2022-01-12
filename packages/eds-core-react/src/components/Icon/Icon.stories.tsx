@@ -1,7 +1,8 @@
+import { useState, useEffect } from 'react'
 import { Story, ComponentMeta } from '@storybook/react'
 import * as icons from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
-import { Icon, IconProps } from '../..'
+import { Icon, IconProps, Density, EdsProvider } from '../..'
 import page from './Icon.docs.mdx'
 
 Icon.add(icons)
@@ -60,3 +61,22 @@ export const Sizes: Story<IconProps> = () => (
     <Icon name="compare" size={48} />
   </Stack>
 )
+
+export const Compact: Story<IconProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Stack>
+        <Icon data={icons.fullscreen} />
+        <Icon data={icons.search} />
+        <Icon data={icons.check_circle_outlined} />
+      </Stack>
+    </EdsProvider>
+  )
+}

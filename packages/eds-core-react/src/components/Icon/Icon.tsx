@@ -1,8 +1,9 @@
 import { forwardRef, Ref, SVGProps } from 'react'
-import styled from 'styled-components'
-import { get } from './library'
 import type { IconData } from '@equinor/eds-icons'
+import styled from 'styled-components'
 import type { IconBasket, Name } from './Icon.types'
+import { useEds } from '../EdsProvider'
+import { get } from './library'
 
 type StyledProps = {
   height: number
@@ -12,10 +13,9 @@ type StyledProps = {
   rotation?: number
 }
 
-type SvgProps = {
+type SimpleSVGProps = {
   name: string
   viewBox: string
-  className: string
   rotation?: number
   title?: string
   role?: string
@@ -28,7 +28,7 @@ const customIcon = (icon: IconData): IconBasket => ({
   count: Math.floor(Math.random() * 1000),
 })
 
-const transform = ({ rotation }: SvgProps): string =>
+const transform = ({ rotation }: SimpleSVGProps): string =>
   rotation ? `transform: rotate(${rotation}deg)` : ''
 
 const StyledSvg = styled.svg.attrs<StyledProps>(({ height, width, fill }) => ({
@@ -54,7 +54,7 @@ export type IconProps = {
   /** Color */
   color?: string
   /** Size */
-  size?: 16 | 24 | 32 | 40 | 48
+  size?: 16 | 18 | 24 | 32 | 40 | 48
   /** Rotation */
   rotation?: 0 | 90 | 180 | 270
   /** Name */
@@ -66,19 +66,17 @@ export type IconProps = {
 } & SVGProps<SVGSVGElement>
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
-  {
-    size = 24,
-    color = 'currentColor',
-    name,
-    className,
-    rotation,
-    title,
-    data,
-    ...rest
-  },
+  { size, color = 'currentColor', name, rotation, title, data, ...rest },
   ref,
 ) {
-  const { icon, count }: IconBasket = data ? customIcon(data) : get(name)
+  const { density } = useEds()
+  // eslint-disable-next-line prefer-const
+  let { icon, count }: IconBasket = data ? customIcon(data) : get(name)
+
+  if (density === 'compact') {
+    // fallback to normal icon if small is not made yet
+    icon = icon?.sizes?.small || icon
+  }
 
   if (typeof icon === 'undefined') {
     throw Error(
@@ -86,22 +84,23 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     )
   }
 
-  let svgProps: SvgProps & StyledProps = {
-    height: size,
-    width: size,
+  const height = size ? size : parseInt(icon.width)
+  const width = size ? size : parseInt(icon.height)
+
+  let svgProps: SimpleSVGProps & StyledProps = {
+    height,
+    width,
     fill: color,
-    viewBox: `0 0 ${size} ${size}`,
-    className,
+    viewBox: `0 0 ${width} ${height}`,
     rotation,
     name,
     'aria-hidden': true,
-    title: null,
   }
 
   const pathProps = {
     d: icon.svgPathData,
     height: icon.height ? icon.height : size,
-    size,
+    size: size || icon.height,
   }
 
   // Accessibility
@@ -111,7 +110,6 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     titleId = `${icon.prefix}-${icon.name}-${count}`
     svgProps = {
       ...svgProps,
-      title,
       role: 'img',
       'aria-hidden': undefined,
       'aria-labelledby': titleId,
