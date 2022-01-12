@@ -42,13 +42,6 @@ export const popover: Popover = {
         right: '-5px',
       },
     },
-    // closeButton: {
-    //   width: spacingXlarge,
-    //   height: spacingXlarge,
-    //   spacings: {
-    //     top: spacingSmall,
-    //   },
-    // },
     title: {
       spacings: {
         top: spacingXsmall,
