@@ -17,7 +17,7 @@ import { sleep, mergeStrings } from '../functions/utils'
 
 const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
 
-const svgPathData = R.pipe(
+const getSvgPathData = R.pipe(
   R.match(/d="(.+?)"/g),
   R.map(R.match(/[^d="](.+)[^"]/g)),
   mergeStrings,
@@ -52,7 +52,8 @@ const writeSVGSprite = (assets) => {
   )
 }
 
-const writeJsFile = (assets) => {
+const makeIconDataFile = (assets) => {
+  console.info('Making & saving data file for eds-icons')
   const iconDataObj = (icon) => {
     const prefix = 'eds'
     const { name, height, width, svgPathData, sizes } = icon
@@ -132,10 +133,13 @@ const writeJsFile = (assets) => {
 }
 
 const writeJsonAssets = (assets) => {
+  console.info('Save working json data to file')
+
   writeResults(assets, PATHS.ICONS, 'json')
 }
 
 const writeSVGs = (assets) => {
+  console.info('Save icons as svg files')
   writeResultsIndividually(assets, PATHS.ASSETS_ICONS, 'svg')
 }
 
@@ -211,7 +215,7 @@ export async function createAssets({ query }) {
             viewbox: `0 0 ${height} ${width}`,
             height,
             width,
-            svgPathData: svgPathData(svgClean.data),
+            svgPathData: getSvgPathData(svgClean.data),
           }
         }),
       ),
@@ -221,11 +225,11 @@ export async function createAssets({ query }) {
   // Write svg to files
 
   // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-  // writeSVGs(assetsWithSvg)
   // writeSVGSprite(assetsWithSvg)
 
-  // writeJsonAssets(assetsWithSvg)
-  writeJsFile(assetsWithSvg)
+  writeSVGs(assetsWithSvg)
+  writeJsonAssets(assetsWithSvg)
+  makeIconDataFile(assetsWithSvg)
 
   console.info('Finished exporting assets')
 
