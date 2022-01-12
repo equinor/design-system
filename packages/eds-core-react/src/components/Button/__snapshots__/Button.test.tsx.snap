@@ -4,7 +4,7 @@ exports[`Button Matches snapshot 1`] = `
 <DocumentFragment>
   .c1 {
   display: grid;
-  grid-gap: 8px;
+  grid-gap: 0.5714em;
   grid-auto-flow: column;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -17,6 +17,11 @@ exports[`Button Matches snapshot 1`] = `
   justify-content: center;
 }
 
+.c1 >:is(svg,img) {
+  margin-top: -4px;
+  margin-bottom: -4px;
+}
+
 .c0 {
   margin: 0;
   padding: 0;
@@ -26,9 +31,10 @@ exports[`Button Matches snapshot 1`] = `
   cursor: pointer;
   display: inline-block;
   background: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  height: 36px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 1.1428em;
+  padding-top: calc(0.7142em - 1px);
+  padding-right: 1.1428em;
+  padding-bottom: calc(0.7142em - 1px);
   border: 1px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   border-radius: 4px;
   margin: 0;
@@ -97,7 +103,7 @@ exports[`Button Matches snapshot 1`] = `
   .c0:hover {
     background: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 0.2857em;
   }
 }
 

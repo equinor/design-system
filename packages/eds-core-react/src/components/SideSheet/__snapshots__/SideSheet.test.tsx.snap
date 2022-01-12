@@ -14,7 +14,7 @@ exports[`SideSheet Matches snapshot 1`] = `
 
 .c4 {
   display: grid;
-  grid-gap: 8px;
+  grid-gap: 0.5714em;
   grid-auto-flow: column;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -25,6 +25,11 @@ exports[`SideSheet Matches snapshot 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.c4 >:is(svg,img) {
+  margin-top: -4px;
+  margin-bottom: -4px;
 }
 
 .c3 {
@@ -39,7 +44,9 @@ exports[`SideSheet Matches snapshot 1`] = `
   height: 48px;
   width: 48px;
   padding-left: 0;
+  padding-top: calc(0.7142em - 1px);
   padding-right: 0;
+  padding-bottom: calc(0.7142em - 1px);
   border: 0px solid transparent;
   border-radius: 50%;
   margin: 0;
