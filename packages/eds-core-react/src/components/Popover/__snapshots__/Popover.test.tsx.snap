@@ -87,6 +87,11 @@ exports[`Popover Matches snapshot 1`] = `
   content: '';
 }
 
+.c5 {
+  display: grid;
+  grid-gap: 16px;
+}
+
 .c4 {
   width: 6px;
   height: 8px;
@@ -119,8 +124,12 @@ exports[`Popover Matches snapshot 1`] = `
       />
     </svg>
   </div>
-  <div>
-    some random content
+  <div
+    class="c5"
+  >
+    <div>
+      some random content
+    </div>
   </div>
 </div>
 `;
