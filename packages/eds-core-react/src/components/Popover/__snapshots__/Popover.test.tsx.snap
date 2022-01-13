@@ -17,7 +17,6 @@ exports[`Popover Matches snapshot 1`] = `
   line-height: 1.500em;
   text-align: left;
   display: grid;
-  grid-gap: 16px;
   grid-auto-columns: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -32,7 +31,6 @@ exports[`Popover Matches snapshot 1`] = `
   width: max-content;
   max-height: 80vh;
   max-width: 560px;
-  min-height: 48px;
   border-radius: 4px;
   z-index: 300;
 }
