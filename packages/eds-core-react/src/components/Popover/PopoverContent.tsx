@@ -6,7 +6,11 @@ const ContentWrapper = styled.div(({ theme }) => {
     overflow: hidden;
     padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
     :last-child {
+      padding-top: ${theme.spacings.top};
       padding-bottom: ${theme.spacings.bottom};
+    }
+    :nth-last-child(2) {
+      padding-top: ${theme.spacings.top};
     }
   `
 })

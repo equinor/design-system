@@ -11,11 +11,7 @@ const {
     },
   },
   spacings: {
-    comfortable: {
-      medium: spacingMedium,
-      small: spacingSmall,
-      x_small: spacingXsmall,
-    },
+    comfortable: { medium: spacingMedium, small: spacingSmall },
   },
   shape: {
     corners: { borderRadius },
@@ -27,7 +23,6 @@ type Popover = ComponentToken
 export const popover: Popover = {
   background,
   typography: header,
-  minHeight: '48px',
   maxWidth: '560px',
   maxHeight: '80vh',
   entities: {
@@ -43,7 +38,7 @@ export const popover: Popover = {
     },
     title: {
       spacings: {
-        top: spacingXsmall,
+        top: '12px',
       },
     },
   },

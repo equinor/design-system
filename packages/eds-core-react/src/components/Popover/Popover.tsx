@@ -26,7 +26,6 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
     ${{ visibility: open ? null : 'hidden' }}
     ${typographyTemplate(theme.typography)}
     display: grid;
-    grid-gap: ${theme.spacings.bottom};
     grid-auto-columns: auto;
     align-items: center;
     align-content: start;
@@ -34,7 +33,6 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
     width: max-content;
     max-height: ${theme.maxHeight};
     max-width: ${theme.maxWidth};
-    min-height: ${theme.minHeight};
     ${bordersTemplate(theme.border)}
     z-index: 300;
 

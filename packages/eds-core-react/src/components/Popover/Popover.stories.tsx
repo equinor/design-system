@@ -73,7 +73,6 @@ export const Default: Story<PopoverProps> = (args) => {
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
         </Popover.Header>
-
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
