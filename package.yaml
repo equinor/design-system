@@ -4,23 +4,23 @@ scripts:
   lint: eslint
   lint:all: pnpm run lint .
   lint:core-react: pnpm run lint ./packages/eds-core-react
-  lint:lab: pnpm run lint ./packages/eds-lab
+  lint:lab: pnpm run lint ./packages/eds-lab-react
   lint:utils: pnpm run lint ./packages/eds-utils
   init: pnpm multi install --force && pnpm run build
   build: pnpm run build:icons && pnpm run build:tokens && pnpm run build:core-react && pnpm run build:lab
   build:core-react: pnpm --filter @equinor/eds-core-react run build
-  build:lab: pnpm --filter @equinor/eds-lab run build
+  build:lab: pnpm --filter @equinor/eds-lab-react run build
   build:utils: pnpm --filter @equinor/eds-utils run build
   build:tokens: pnpm --filter @equinor/eds-tokens run build
   build:icons: pnpm --filter @equinor/eds-icons run build
   test:core-react: pnpm --filter @equinor/eds-core-react run test
-  test:lab: pnpm --filter @equinor/eds-lab run test
+  test:lab: pnpm --filter @equinor/eds-lab-react run test
   test:utils: pnpm --filter @equinor/eds-utils run test
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
-  test:update-snapshots:lab: pnpm --filter @equinor/eds-lab run test:update-snapshots
+  test:update-snapshots:lab: pnpm --filter @equinor/eds-lab-react run test:update-snapshots
   storybook:core-react: pnpm --filter @equinor/eds-core-react run storybook
-  storybook:lab: pnpm --filter @equinor/eds-lab run storybook
+  storybook:lab: pnpm --filter @equinor/eds-lab-react run storybook
   graphics: pnpm --filter ./assets/woman run dev
   build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
   export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0

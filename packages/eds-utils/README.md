@@ -1,6 +1,6 @@
 # @equinor/eds-utils
 
-This package host hooks and utility functions that are used by [eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react) and [eds-lab](https://www.npmjs.com/package/@equinor/eds-lab).
+This package host hooks and utility functions that are used by [eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react) and [eds-lab-react](https://www.npmjs.com/package/@equinor/eds-lab-react).
 
 ## Installation
 
