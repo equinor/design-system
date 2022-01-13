@@ -84,6 +84,13 @@ const ArrowWrapper = styled.div(({ theme }) => {
   `
 })
 
+const InnerWrapper = styled.div(({ theme }) => {
+  return css`
+    display: grid;
+    grid-gap: ${theme.spacings.bottom};
+  `
+})
+
 type ArrowProps = {
   ref?: React.MutableRefObject<null>
 } & SVGProps<SVGSVGElement>
@@ -175,7 +182,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
             </PopoverArrow>
           </ArrowWrapper>
-          {children}
+          <InnerWrapper>{children}</InnerWrapper>
         </PopoverPaper>
       </ThemeProvider>
     )
