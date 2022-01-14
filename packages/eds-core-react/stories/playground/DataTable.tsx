@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import { useState } from 'react'
+import { useState, MouseEvent } from 'react'
 import { Story } from '@storybook/react'
 import {
   Table,
@@ -159,7 +159,9 @@ const MenuButton = ({ row }: { row: string[] }) => {
         aria-controls={`menu-${row.toString()}`}
         aria-haspopup="true"
         aria-expanded={isOpen}
-        onClick={(e) => setAnchorEl(e.currentTarget)}
+        onClick={(e: MouseEvent<HTMLButtonElement>) =>
+          setAnchorEl(e.currentTarget)
+        }
         onKeyDown={onKeyPress}
       >
         <Icon name="more_vertical" title="more"></Icon>

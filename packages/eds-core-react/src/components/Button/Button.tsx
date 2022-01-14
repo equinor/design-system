@@ -1,4 +1,4 @@
-import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
+import { forwardRef, ElementType, ReactElement } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
@@ -7,6 +7,8 @@ import {
   bordersTemplate,
   outlineTemplate,
   spacingsTemplate,
+  PolymorphicComponentPropsWithRef,
+  PolymorphicRef,
   useToken,
 } from '@equinor/eds-utils'
 import { InnerFullWidth } from './InnerFullWidth'
@@ -58,7 +60,9 @@ const Inner = styled.span`
   }
 `
 
-const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
+const ButtonBase: PolymorphicStyledComponent<ButtonProps, 'button'> = styled(
+  'button',
+)<ButtonProps>(({ theme }: { theme: ButtonToken }) => {
   const { states, clickbound } = theme
   const { focus, hover, disabled } = states
 
@@ -157,10 +161,29 @@ export type ButtonProps = {
   type?: string
   /** FullWidth (stretched) button  */
   fullWidth?: boolean
-} & ButtonHTMLAttributes<HTMLButtonElement>
+  tabIndex?: number
+}
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button(
+export type ButtonAllProps<C extends ElementType> =
+  PolymorphicComponentPropsWithRef<C, ButtonProps>
+
+type ButtonComponent = <C extends ElementType = 'button'>(
+  props: ButtonAllProps<C>,
+) => ReactElement | null
+
+//TODO can these two styled component types be made fully generic?
+//based on solution from https://github.com/kripod/react-polymorphic-box
+type PolymorphicStyledComponentProps<E extends ElementType, P> = P &
+  ButtonAllProps<E>
+
+type PolymorphicStyledComponent<P, D extends ElementType = 'button'> = <
+  E extends ElementType = D,
+>(
+  props: PolymorphicStyledComponentProps<E, P>,
+) => ReactElement | null
+
+export const Button: ButtonComponent = forwardRef(
+  <C extends ElementType = 'button'>(
     {
       color = 'primary',
       variant = 'contained',
@@ -170,9 +193,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       tabIndex = 0,
       fullWidth = false,
       ...other
-    },
-    ref,
-  ) {
+    }: ButtonAllProps<C>,
+    ref: PolymorphicRef<C>,
+  ) => {
     const { density } = useEds()
     const token = useToken({ density }, getToken(variant, color))
 
