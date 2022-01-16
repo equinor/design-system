@@ -359,10 +359,10 @@ export const multilineTable: Story<TableProps> = (args) => {
   `
 
   const vars = css`
-    --tableCell-height: auto;
-    --tableCell-paddingTop: 1em;
-    --tableCell-paddingBottom: 1em;
-    --tableCell-verticalAlign: top;
+    --eds_table__cell__height: auto;
+    --eds_table__cell__padding_top: 1em;
+    --eds_table__cell__padding_bottom: 1em;
+    --eds_table__cell__vertical_align: top;
   `
 
   return (

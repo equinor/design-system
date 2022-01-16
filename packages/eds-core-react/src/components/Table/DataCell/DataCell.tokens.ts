@@ -46,14 +46,12 @@ type VariantsType = {
 export type TableCellToken = ComponentToken & {
   validation: Validation
   variants: VariantsType
-  verticalAlign: string
-  css?: CSSProp
 }
 
 export const tableCell: TableCellToken = {
-  height: 'var(--tableCell-height, 48px)',
+  height: 'var(--eds_table__cell__height, 48px)',
   background: backgroundColor,
-  verticalAlign: 'var(--tableCell-verticalAlign, inherit)',
+  verticalAlign: 'var(--eds_table__cell__vertical_align, inherit)',
   border: {
     type: 'bordergroup',
     bottom: {
@@ -63,10 +61,10 @@ export const tableCell: TableCellToken = {
     },
   },
   spacings: {
-    top: 'var(--tableCell-paddingTop, 0)',
-    bottom: 'var(--tableCell-paddingBottom, 0)',
-    left: `var(--tableCell-paddingLeft, ${medium})`,
-    right: `var(--tableCell-paddingRight, ${medium})`,
+    top: 'var(--eds_table__cell__padding_top, 0)',
+    bottom: 'var(--eds_table__cell__padding_bottom, 0)',
+    left: `var(--eds_table__cell__padding_left, ${medium})`,
+    right: `var(--eds_table__cell__padding_right, ${medium})`,
   },
   typography: {
     ...cellTypography,
@@ -111,10 +109,16 @@ export const tableCell: TableCellToken = {
   },
   modes: {
     compact: {
-      height: '32px',
+      height: 'var(--eds_table__cell__height_compact, 32px)',
       typography: {
         ...compactTypography.table.cell_text,
         color: typographyColor,
+      },
+      spacings: {
+        top: 'var(--eds_table__cell__padding_top_compact, 0)',
+        bottom: 'var(--eds_table__cell__padding_bottom_compact, 0)',
+        left: `var(--eds_table__cell__padding_left_compact, ${medium})`,
+        right: `var(--eds_table__cell__padding_right_compact, ${medium})`,
       },
     },
   },

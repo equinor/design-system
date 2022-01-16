@@ -18,6 +18,7 @@ scripts:
   test:update-snapshots:lab: pnpm --filter @equinor/eds-lab run test:update-snapshots
   storybook:core-react: pnpm --filter @equinor/eds-core-react run storybook
   storybook:lab: pnpm --filter @equinor/eds-lab run storybook
+  storybook: pnpm storybook:core-react # default storybook
   graphics: pnpm --filter ./assets/woman run dev
   build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
   export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0

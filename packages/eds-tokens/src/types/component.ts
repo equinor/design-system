@@ -16,6 +16,7 @@ export type ComponentToken = {
   width?: string
   boxShadow?: string
   background?: string
+  verticalAlign?: string
   spacings?: Spacing
   border?: Borders
   typography?: Partial<Typography>

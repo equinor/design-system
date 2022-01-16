@@ -41,7 +41,8 @@
 	"vtrois.gitmoji-vscode",
 	"silvenon.mdx",
 	"jock.svg",
-	"styled-components.vscode-styled-components"
+	"styled-components.vscode-styled-components",
+	"seatonjiang.gitmoji-vscode"
 ],
   "forwardPorts": [9000],
   "portsAttributes": {
