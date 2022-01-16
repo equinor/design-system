@@ -1,3 +1,4 @@
+import { CSSProp } from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import mergeDeepRight from 'ramda/src/mergeDeepRight'
 import type { ComponentToken } from '@equinor/eds-tokens'
@@ -45,11 +46,14 @@ type VariantsType = {
 export type TableCellToken = ComponentToken & {
   validation: Validation
   variants: VariantsType
+  verticalAlign: string
+  css?: CSSProp
 }
 
 export const tableCell: TableCellToken = {
-  height: '48px',
+  height: 'var(--tableCell-height, 48px)',
   background: backgroundColor,
+  verticalAlign: 'var(--tableCell-verticalAlign, inherit)',
   border: {
     type: 'bordergroup',
     bottom: {
@@ -59,10 +63,10 @@ export const tableCell: TableCellToken = {
     },
   },
   spacings: {
-    top: '0',
-    bottom: '0',
-    left: medium,
-    right: medium,
+    top: 'var(--tableCell-paddingTop, 0)',
+    bottom: 'var(--tableCell-paddingBottom, 0)',
+    left: `var(--tableCell-paddingLeft, ${medium})`,
+    right: `var(--tableCell-paddingRight, ${medium})`,
   },
   typography: {
     ...cellTypography,

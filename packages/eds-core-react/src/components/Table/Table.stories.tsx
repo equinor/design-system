@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 import {
   Table,
@@ -14,7 +14,14 @@ import {
   EdsProviderProps,
 } from '../..'
 import { arrow_down, arrow_up, accessible } from '@equinor/eds-icons'
-import { data, columns, Column, Data, SortDirection } from '../../stories/data'
+import {
+  data,
+  multilineText,
+  columns,
+  Column,
+  Data,
+  SortDirection,
+} from '../../stories/data'
 
 import { toCellValues } from '../../stories/toCellValues'
 
@@ -337,6 +344,49 @@ export const Sortable: Story<TableProps> = () => {
             {row.map((cellValue) => (
               <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
             ))}
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  )
+}
+
+export const multilineTable: Story<TableProps> = (args) => {
+  const cellValues = toCellValues([...data, multilineText], columns)
+
+  const CellNoWrap = styled(Table.Cell)`
+    white-space: nowrap;
+  `
+
+  const vars = css`
+    --tableCell-height: auto;
+    --tableCell-paddingTop: 1em;
+    --tableCell-paddingBottom: 1em;
+    --tableCell-verticalAlign: top;
+  `
+
+  return (
+    <Table {...args} css={vars}>
+      <Table.Caption>
+        <Typography variant="h2">Fruits cost price</Typography>
+      </Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          {columns.map((col) => (
+            <CellNoWrap key={`head-${col.accessor}`}>{col.name}</CellNoWrap>
+          ))}
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {cellValues?.map((row) => (
+          <Table.Row key={row.toString()}>
+            {row.map((cellValue, index) =>
+              index < 2 ? (
+                <CellNoWrap key={cellValue}>{cellValue}</CellNoWrap>
+              ) : (
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+              ),
+            )}
           </Table.Row>
         ))}
       </Table.Body>
