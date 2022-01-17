@@ -5,6 +5,7 @@ import {
   Outline,
   Clickbound,
   Pressed,
+  Align,
 } from './index'
 
 export type ComponentToken = {
@@ -16,7 +17,7 @@ export type ComponentToken = {
   width?: string
   boxShadow?: string
   background?: string
-  verticalAlign?: string
+  align?: Align
   spacings?: Spacing
   border?: Borders
   typography?: Partial<Typography>

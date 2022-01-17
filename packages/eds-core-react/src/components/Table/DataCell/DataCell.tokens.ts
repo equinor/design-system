@@ -61,10 +61,10 @@ export const tableCell: TableCellToken = {
     },
   },
   spacings: {
-    top: 'var(--eds_table__cell__padding_top, 0)',
-    bottom: 'var(--eds_table__cell__padding_bottom, 0)',
-    left: `var(--eds_table__cell__padding_left, ${medium})`,
-    right: `var(--eds_table__cell__padding_right, ${medium})`,
+    top: 'var(--eds_table__cell__padding_y, 0)',
+    bottom: 'var(--eds_table__cell__padding_y, 0)',
+    left: `var(--eds_table__cell__padding_x, ${medium})`,
+    right: `var(--eds_table__cell__padding_x, ${medium})`,
   },
   typography: {
     ...cellTypography,

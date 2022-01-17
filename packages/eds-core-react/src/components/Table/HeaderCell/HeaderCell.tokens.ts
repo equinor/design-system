@@ -33,7 +33,9 @@ export type TableHeadToken = ComponentToken
 export const token: TableHeadToken = {
   height: 'var(--eds_table__header__height, 48px)',
   background: backgroundColor,
-  verticalAlign: 'var(--eds_table__header__vertical_align, inherit)',
+  align: {
+    vertical: 'var(--eds_table__header__vertical_align, inherit)',
+  },
   typography: { ...cellTypography, color: typographyColor },
   border: {
     type: 'bordergroup',
@@ -45,10 +47,10 @@ export const token: TableHeadToken = {
     },
   },
   spacings: {
-    top: 'var(--eds_table__header__padding_top, 0)',
-    bottom: 'var(--eds_table__header__padding_bottom, 0)',
-    left: `var(--eds_table__header__padding_left, ${medium})`,
-    right: `var(--eds_table__header__padding_right, ${medium})`,
+    top: 'var(--eds_table__cell__padding_y, 0)',
+    bottom: 'var(--eds_table__cell__padding_y, 0)',
+    left: `var(--eds_table__cell__padding_x, ${medium})`,
+    right: `var(--eds_table__cell__padding_x, ${medium})`,
   },
   states: {
     active: {

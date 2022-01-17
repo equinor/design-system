@@ -32,27 +32,24 @@ const {
 
 export const button: ButtonToken = {
   background: 'transparent',
-  // height: buttonHeight,
+  height: `var(--eds_button__height, ${buttonHeight})`,
   typography: {
     ...buttonTypography,
     textAlign: 'center',
-    fontSize: '0.875rem', // 14px - 14/16
+    fontSize: `var(--eds_button__font_size, ${buttonTypography.fontSize})`,
   },
   border: {
     type: 'border',
-    width: '1px',
+    width: `var(--eds_button__border_width, 1px)`,
     color: 'transparent',
-    //radius: buttonBorderRadius,
-    radius: '0.2857em', // 4px - 4/14
+    radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
     style: 'solid',
   },
   spacings: {
-    top: 'calc(0.7142em - 1px)', // calc(10px - 1px) - 10/14 (line-height er 1.143em = 16.002px)
-    bottom: 'calc(0.7142em - 1px)',
-    left: '1.1428em',
-    right: '1.1428em',
-    // left: medium,
-    // right: medium,
+    top: 'var(eds_button__padding_y, 0)',
+    bottom: 'var(eds_button__padding_y, 0)',
+    left: `var(--eds_button__padding_x, ${medium})`,
+    right: `var(--eds_button__padding_x, ${medium})`,
   },
   clickbound: {
     height: clicboundHeight,
@@ -64,8 +61,8 @@ export const button: ButtonToken = {
   },
   entities: {
     icon: {
-      height: '24px',
-      width: '24px',
+      height: 'var(--eds_button__icon__size, 24px)',
+      width: 'var(--eds_button__icon__size, 24px)',
     },
   },
   states: {
@@ -74,8 +71,7 @@ export const button: ButtonToken = {
         type: 'border',
         width: '1px',
         color: 'transparent',
-        //radius: buttonBorderRadius,
-        radius: '0.2857em', // 4px - 4/14
+        radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
         style: 'solid',
       },
     },
@@ -105,10 +101,10 @@ export const button: ButtonToken = {
   },
   modes: {
     compact: {
-      minHeight: '1.7142em', // 24px
+      minHeight: `var(--eds_button__height_compact, ${compactButtonHeight})`,
       spacings: {
-        top: 'calc(0.2857em - 1px)', // calc(4px - 1px) - 4/14
-        bottom: 'calc(0.2857em - 1px)',
+        top: 'var(--eds_button__padding_y_compact, 0)',
+        bottom: 'var(--eds_button__padding_y_compact, 0)',
       },
       clickbound: {
         height: compactClickboundHeight,
