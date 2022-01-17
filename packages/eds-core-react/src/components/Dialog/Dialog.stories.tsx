@@ -22,6 +22,7 @@ export default {
     Actions: Dialog.Actions,
     Title: Dialog.Title,
     CustomContent: Dialog.CustomContent,
+    Header: Dialog.Header,
   },
   parameters: {
     docs: {
@@ -65,7 +66,9 @@ export const Default: Story<DialogProps> = (args) => {
         Trigger Dialog
       </Button>
       <Dialog open={open} onClose={handleClose} isDismissable={isDismissable}>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>Title</Dialog.Title>
+        </Dialog.Header>
         <Dialog.CustomContent>
           <Typography variant="body_short">Small description here.</Typography>
         </Dialog.CustomContent>
@@ -94,7 +97,9 @@ export const Dismissable: Story<DialogProps> = () => {
         Trigger Dialog
       </Button>
       <Dialog open={isOpen} isDismissable onClose={handleClose}>
-        <Dialog.Title>Dismissable dialog</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>Dismissable dialog</Dialog.Title>
+        </Dialog.Header>
         <Dialog.CustomContent>
           <Typography variant="body_short">
             closes dialog on click outside and escape key.
@@ -135,7 +140,9 @@ export const TextPlusAction: Story<DialogProps> = () => {
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
-        <Dialog.Title>Text + actions</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>Text + actions</Dialog.Title>
+        </Dialog.Header>
         <Dialog.CustomContent>
           <Typography variant="body_short">Small description here.</Typography>
         </Dialog.CustomContent>
@@ -166,7 +173,9 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
-        <Dialog.Title>Placeholder + actions</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>Placeholder + actions</Dialog.Title>
+        </Dialog.Header>
         <Dialog.CustomContent>
           <Placeholder>Custom content</Placeholder>
         </Dialog.CustomContent>
@@ -197,7 +206,9 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
         Trigger Dialog
       </Button>
       <Dialog open={isOpen} isDismissable onClose={handleClose}>
-        <Dialog.Title>Placeholder</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>Placeholder</Dialog.Title>
+        </Dialog.Header>
         <Dialog.CustomContent>
           <Placeholder>
             Custom content in a larger placeholder. No actions, only ESC or
@@ -223,7 +234,9 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
-        <Dialog.Title>Scrollable + actions</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>Scrollable + actions</Dialog.Title>
+        </Dialog.Header>
         <Dialog.CustomContent scrollable>
           <Typography variant="body_short">
             Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
@@ -300,7 +313,9 @@ export const Compact: Story<DialogProps> = () => {
         Trigger Dialog
       </Button>
       <Dialog open={isOpen}>
-        <Dialog.Title>Compact</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>Compact</Dialog.Title>
+        </Dialog.Header>
         <Dialog.CustomContent>
           <Typography variant="body_short">Small description here.</Typography>
         </Dialog.CustomContent>
