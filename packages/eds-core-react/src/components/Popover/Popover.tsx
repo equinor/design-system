@@ -6,15 +6,8 @@ import {
   useEffect,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Icon } from '../Icon'
 import { Paper } from '../Paper'
-import { Button } from '../Button'
-import { close } from '@equinor/eds-icons'
-import {
-  spacingsTemplate,
-  typographyTemplate,
-  bordersTemplate,
-} from '../../utils'
+import { typographyTemplate, bordersTemplate } from '../../utils'
 import {
   usePopper,
   useOutsideClick,
@@ -32,9 +25,7 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
   return css`
     ${{ visibility: open ? null : 'hidden' }}
     ${typographyTemplate(theme.typography)}
-    ${spacingsTemplate(theme.spacings)}
     display: grid;
-    grid-gap: ${theme.spacings.bottom};
     grid-auto-columns: auto;
     align-items: center;
     align-content: start;
@@ -42,7 +33,6 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
     width: max-content;
     max-height: ${theme.maxHeight};
     max-width: ${theme.maxWidth};
-    min-height: ${theme.minHeight};
     ${bordersTemplate(theme.border)}
     z-index: 300;
 
@@ -78,19 +68,6 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
   `
 })
 
-const StyledCloseButton = styled(Button)(({ theme }) => {
-  return css`
-    position: absolute;
-    top: ${theme.entities.closeButton.spacings.top};
-    right: ${theme.spacings.right};
-    height: ${theme.entities.closeButton.height};
-    width: ${theme.entities.closeButton.width};
-    &:after {
-      height: ${theme.entities.closeButton.height};
-    }
-  `
-})
-
 const ArrowWrapper = styled.div(({ theme }) => {
   return css`
     &,
@@ -104,6 +81,13 @@ const ArrowWrapper = styled.div(({ theme }) => {
     &::before {
       content: '';
     }
+  `
+})
+
+const InnerWrapper = styled.div(({ theme }) => {
+  return css`
+    display: grid;
+    grid-gap: ${theme.spacings.bottom};
   `
 })
 
@@ -198,16 +182,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
             </PopoverArrow>
           </ArrowWrapper>
-
-          {children}
-          <StyledCloseButton
-            onClick={onClose}
-            variant="ghost_icon"
-            data-testid="popover-close"
-            aria-label="Close popover"
-          >
-            <Icon name="close" data={close} size={24} />
-          </StyledCloseButton>
+          <InnerWrapper>{children}</InnerWrapper>
         </PopoverPaper>
       </ThemeProvider>
     )

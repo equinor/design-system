@@ -11,12 +11,7 @@ const {
     },
   },
   spacings: {
-    comfortable: {
-      x_large: spacingXlarge,
-      medium: spacingMedium,
-      small: spacingSmall,
-      x_small: spacingXsmall,
-    },
+    comfortable: { medium: spacingMedium, small: spacingSmall },
   },
   shape: {
     corners: { borderRadius },
@@ -28,7 +23,6 @@ type Popover = ComponentToken
 export const popover: Popover = {
   background,
   typography: header,
-  minHeight: '48px',
   maxWidth: '560px',
   maxHeight: '80vh',
   entities: {
@@ -42,16 +36,9 @@ export const popover: Popover = {
         right: '-5px',
       },
     },
-    closeButton: {
-      width: spacingXlarge,
-      height: spacingXlarge,
-      spacings: {
-        top: spacingSmall,
-      },
-    },
     title: {
       spacings: {
-        top: spacingXsmall,
+        top: '12px',
       },
     },
   },
