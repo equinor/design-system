@@ -30,12 +30,10 @@ const FullWidthInner = styled.span`
   }
 
   > span:first-child {
-    background: orange;
     margin-left: var(--eds_button__fullwidth__margin_x, 32px);
   }
 
   > span:last-child {
-    background: deeppink;
     margin-right: var(--eds_button__fullwidth__margin_x, 32px);
   }
 

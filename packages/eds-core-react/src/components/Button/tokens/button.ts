@@ -101,7 +101,7 @@ export const button: ButtonToken = {
   },
   modes: {
     compact: {
-      minHeight: `var(--eds_button__height_compact, ${compactButtonHeight})`,
+      height: `var(--eds_button__height_compact, ${compactButtonHeight})`,
       spacings: {
         top: 'var(--eds_button__padding_y_compact, 0)',
         bottom: 'var(--eds_button__padding_y_compact, 0)',

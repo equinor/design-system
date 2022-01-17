@@ -31,10 +31,10 @@ const {
 export type TableHeadToken = ComponentToken
 
 export const token: TableHeadToken = {
-  height: 'var(--eds_table__header__height, 48px)',
+  height: 'var(--eds_table__cell__height, 48px)',
   background: backgroundColor,
   align: {
-    vertical: 'var(--eds_table__header__vertical_align, inherit)',
+    vertical: 'var(--eds_table__cell__vertical_align, inherit)',
   },
   typography: { ...cellTypography, color: typographyColor },
   border: {
@@ -92,13 +92,13 @@ export const token: TableHeadToken = {
   },
   modes: {
     compact: {
-      height: 'var(--eds_table__header__height_compact, 32px)',
+      height: 'var(--eds_table__cell__height_compact, 32px)',
       typography: compactTypography.table.cell_header,
       spacings: {
-        top: 'var(--eds_table__header__padding_top_compact, 0)',
-        bottom: 'var(--eds_table__header__padding_bottom_compact, 0)',
-        left: `var(--eds_table__header__padding_left_compact, ${medium})`,
-        right: `var(--eds_table__header__padding_right_compact, ${medium})`,
+        top: 'var(--eds_table__cell__padding_y_compact, 0)',
+        bottom: 'var(--eds_table__cell__padding_y_compact, 0)',
+        left: `var(--eds_table__cell__padding_x_compact, ${medium})`,
+        right: `var(--eds_table__cell__padding_x_compact, ${medium})`,
       },
     },
   },

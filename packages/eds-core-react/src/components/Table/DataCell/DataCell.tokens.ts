@@ -51,7 +51,9 @@ export type TableCellToken = ComponentToken & {
 export const tableCell: TableCellToken = {
   height: 'var(--eds_table__cell__height, 48px)',
   background: backgroundColor,
-  verticalAlign: 'var(--eds_table__cell__vertical_align, inherit)',
+  align: {
+    vertical: 'var(--eds_table__cell__vertical_align, inherit)',
+  },
   border: {
     type: 'bordergroup',
     bottom: {
@@ -115,10 +117,10 @@ export const tableCell: TableCellToken = {
         color: typographyColor,
       },
       spacings: {
-        top: 'var(--eds_table__cell__padding_top_compact, 0)',
-        bottom: 'var(--eds_table__cell__padding_bottom_compact, 0)',
-        left: `var(--eds_table__cell__padding_left_compact, ${medium})`,
-        right: `var(--eds_table__cell__padding_right_compact, ${medium})`,
+        top: 'var(--eds_table__cell__padding_y_compact, 0)',
+        bottom: 'var(--eds_table__cell__padding_y_compact, 0)',
+        left: `var(--eds_table__cell__padding_x_compact, ${medium})`,
+        right: `var(--eds_table__cell__padding_x_compact, ${medium})`,
       },
     },
   },
