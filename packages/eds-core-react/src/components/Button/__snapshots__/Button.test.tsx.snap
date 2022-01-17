@@ -33,9 +33,9 @@ exports[`Button Matches snapshot 1`] = `
   background: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   height: var(--eds_button__height,36px);
   padding-left: var(--eds_button__padding_x,16px);
-  padding-top: var(eds_button__padding_y,0);
+  padding-top: var(--eds_button__padding_y,0);
   padding-right: var(--eds_button__padding_x,16px);
-  padding-bottom: var(eds_button__padding_y,0);
+  padding-bottom: var(--eds_button__padding_y,0);
   border: 1px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   border-radius: 4px;
   margin: 0;

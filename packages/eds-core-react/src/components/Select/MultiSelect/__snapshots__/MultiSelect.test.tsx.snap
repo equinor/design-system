@@ -74,9 +74,9 @@ exports[`MultiSelect Matches snapshot 2`] = `
   height: 48px;
   width: 48px;
   padding-left: 0;
-  padding-top: var(eds_button__padding_y,0);
+  padding-top: var(--eds_button__padding_y,0);
   padding-right: 0;
-  padding-bottom: var(eds_button__padding_y,0);
+  padding-bottom: var(--eds_button__padding_y,0);
   border: 0px solid transparent;
   border-radius: 50%;
   margin: 0;
