@@ -71,6 +71,7 @@ export const tableCell: TableCellToken = {
   typography: {
     ...cellTypography,
     color: typographyColor,
+    fontSize: `var(--eds_table__font_size, ${cellTypography.fontSize})`,
   },
   states: {
     active: {

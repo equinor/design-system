@@ -36,7 +36,11 @@ export const token: TableHeadToken = {
   align: {
     vertical: 'var(--eds_table__cell__vertical_align, inherit)',
   },
-  typography: { ...cellTypography, color: typographyColor },
+  typography: {
+    ...cellTypography,
+    color: typographyColor,
+    fontSize: `var(--eds_table__font_size, ${cellTypography.fontSize})`,
+  },
   border: {
     type: 'bordergroup',
     bottom: {
