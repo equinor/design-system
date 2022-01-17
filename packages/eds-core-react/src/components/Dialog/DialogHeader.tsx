@@ -31,7 +31,7 @@ export const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
     return (
       <div {...props}>
         <StyledDialogHeader>{children}</StyledDialogHeader>
-        <StyledDivider variant="small" />
+        <StyledDivider variant="small" color="medium" />
       </div>
     )
   },

@@ -1,6 +1,5 @@
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-import { Divider } from '../Divider'
 import { typographyTemplate, spacingsTemplate } from '../../utils'
 
 const StyledTitle = styled.div(({ theme, children }) => {
@@ -19,13 +18,6 @@ const StyledTitle = styled.div(({ theme, children }) => {
   `
 })
 
-const StyledDivider = styled(Divider)(({ theme }) => {
-  return css`
-    width: 100%;
-    margin-bottom: ${theme.entities.divider.spacings.bottom};
-  `
-})
-
 export type DialogTitleProps = React.HTMLAttributes<HTMLDivElement>
 
 export const Title = forwardRef<HTMLDivElement, DialogTitleProps>(
@@ -35,7 +27,6 @@ export const Title = forwardRef<HTMLDivElement, DialogTitleProps>(
         <StyledTitle id="eds-dialog-title" ref={ref} {...rest}>
           {children}
         </StyledTitle>
-        {children && <StyledDivider color="medium" variant="small" />}
       </>
     )
   },
