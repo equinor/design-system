@@ -46,8 +46,8 @@ export const button: ButtonToken = {
     style: 'solid',
   },
   spacings: {
-    top: 'var(eds_button__padding_y, 0)',
-    bottom: 'var(eds_button__padding_y, 0)',
+    top: 'var(--eds_button__padding_y, 0)',
+    bottom: 'var(--eds_button__padding_y, 0)',
     left: `var(--eds_button__padding_x, ${medium})`,
     right: `var(--eds_button__padding_x, ${medium})`,
   },
