@@ -208,7 +208,6 @@ export const OnChange: Story<ComboboxProps<CustomDataType>> = () => {
   const [selectedItems, setSelectedItems] = useState(initialSelectedOptions)
 
   const onChange = (changes: ComboboxChanges<CustomDataType>) => {
-    console.log('options', changes.selectedItems)
     setSelectedItems(changes.selectedItems)
   }
 

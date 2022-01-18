@@ -6,11 +6,12 @@ import { typographyTemplate, spacingsTemplate } from '../../utils'
 type StyledListItemType = {
   highlighted?: string
   active?: string
-  isDisabled?: boolean
+  isdisabled?: string
 }
 
 const StyledListItem = styled(List.Item)<StyledListItemType>(
-  ({ theme, highlighted, active, isDisabled }) => {
+  ({ theme, highlighted, active, isdisabled }) => {
+    const isDisabled = isdisabled === 'true'
     const backgroundColor =
       highlighted === 'true'
         ? theme.states.hover.background
@@ -46,18 +47,16 @@ export type ComboboxOptionProps = {
 
 export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
   function ComboboxOption(
-    { value, multiple, isSelected, isDisabled, ...other },
+    { value, multiple, isSelected, isDisabled, onClick, ...other },
     ref,
   ) {
-    if (isDisabled) {
-      console.log('isDisabled', value)
-    }
     return (
       <StyledListItem
         ref={ref}
-        isDisabled={isDisabled}
+        isdisabled={isDisabled ? 'true' : 'false'}
         aria-hidden={isDisabled}
         active={!multiple && isSelected ? 'true' : 'false'}
+        onClick={(e) => !isDisabled && onClick(e)}
         {...other}
       >
         {multiple && (

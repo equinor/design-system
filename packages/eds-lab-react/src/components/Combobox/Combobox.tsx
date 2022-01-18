@@ -195,13 +195,15 @@ function ComboboxInner<T>(
       }
     },
     onStateChange: ({ type, selectedItem }) => {
+      const isDisabled = disabledItems.includes(selectedItem)
+
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
-          if (selectedItem) {
+          if (selectedItem && !isDisabled) {
             if (multiple) {
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
@@ -214,6 +216,58 @@ function ComboboxInner<T>(
           break
         default:
           break
+      }
+    },
+    stateReducer: (state, actionAndChanges) => {
+      const { changes, type } = actionAndChanges
+      let nextItemIndex = actionAndChanges.highlightedIndex
+      let previousItemIndex = state.highlightedIndex
+      let nextItem = actionAndChanges.selectedItem
+
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+        case useCombobox.stateChangeTypes.InputKeyDownEnd:
+          nextItemIndex = availableItems.indexOf(state.selectedItem)
+
+          if (nextItemIndex === availableItems.length - 1) {
+            return { ...changes, selectedItem: availableItems[0] }
+          }
+
+          nextItem = availableItems[nextItemIndex + 1]
+
+          if (disabledItems.includes(nextItem)) {
+            return {
+              ...changes,
+              selectedItem: availableItems[nextItemIndex + 2],
+              highlightedIndex: nextItemIndex + 2,
+            }
+          }
+
+          return { ...changes, selectedItem: nextItem }
+        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+        case useCombobox.stateChangeTypes.InputKeyDownHome:
+          previousItemIndex = availableItems.indexOf(state.selectedItem)
+
+          if (previousItemIndex === 0) {
+            return {
+              ...changes,
+              selectedItem: availableItems[availableItems.length - 1],
+            }
+          }
+
+          nextItem = availableItems[previousItemIndex - 1]
+
+          if (disabledItems.includes(nextItem)) {
+            return {
+              ...changes,
+              selectedItem: availableItems[previousItemIndex - 2],
+              highlightedIndex: previousItemIndex - 2,
+            }
+          }
+
+          return { ...changes, selectedItem: nextItem }
+        default:
+          return changes
       }
     },
   }
@@ -232,7 +286,52 @@ function ComboboxInner<T>(
       selectedItem: null,
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
+        let nextItemIndex = actionAndChanges.highlightedIndex
+        let previousItemIndex = state.highlightedIndex
+        let nextItem = actionAndChanges.selectedItem
+
         switch (type) {
+          case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+          case useCombobox.stateChangeTypes.InputKeyDownEnd:
+            nextItemIndex = availableItems.indexOf(state.selectedItem)
+
+            if (nextItemIndex === availableItems.length - 1) {
+              return { ...changes, selectedItem: availableItems[0] }
+            }
+
+            nextItem = availableItems[nextItemIndex + 1]
+
+            if (disabledItems.includes(nextItem)) {
+              return {
+                ...changes,
+                selectedItem: availableItems[nextItemIndex + 2],
+                highlightedIndex: nextItemIndex + 2,
+              }
+            }
+
+            return { ...changes, selectedItem: nextItem }
+          case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+          case useCombobox.stateChangeTypes.InputKeyDownHome:
+            previousItemIndex = availableItems.indexOf(state.selectedItem)
+
+            if (previousItemIndex === 0) {
+              return {
+                ...changes,
+                selectedItem: availableItems[availableItems.length - 1],
+              }
+            }
+
+            nextItem = availableItems[previousItemIndex - 1]
+
+            if (disabledItems.includes(nextItem)) {
+              return {
+                ...changes,
+                selectedItem: availableItems[previousItemIndex - 2],
+                highlightedIndex: previousItemIndex - 2,
+              }
+            }
+
+            return { ...changes, selectedItem: nextItem }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
             return {
