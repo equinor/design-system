@@ -30,7 +30,6 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
       ${isDisabled
         ? css`
             color: ${theme.states.disabled.typography.color};
-            cursor: not-allowed;
           `
         : ''}
     `
@@ -63,6 +62,7 @@ export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       >
         {multiple && (
           <Checkbox
+            disabled={isDisabled}
             checked={isSelected}
             value={value}
             onChange={() => {

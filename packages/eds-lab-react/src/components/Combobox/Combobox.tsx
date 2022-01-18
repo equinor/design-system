@@ -328,17 +328,22 @@ function ComboboxInner<T>(
         </Container>
         <StyledList {...getMenuProps()}>
           {isOpen &&
-            availableItems.map((item, index) => (
-              <ComboboxOption
-                key={item}
-                value={item}
-                multiple={multiple}
-                highlighted={highlightedIndex === index ? 'true' : 'false'}
-                isSelected={selectedItems.includes(item)}
-                isDisabled={disabledItems.includes(item)}
-                {...getItemProps({ item, index, disabled })}
-              />
-            ))}
+            availableItems.map((item, index) => {
+              const isDisabled = disabledItems.includes(item)
+              return (
+                <ComboboxOption
+                  key={item}
+                  value={item}
+                  multiple={multiple}
+                  highlighted={
+                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                  }
+                  isSelected={selectedItems.includes(item)}
+                  isDisabled={isDisabled}
+                  {...getItemProps({ item, index, disabled })}
+                />
+              )
+            })}
         </StyledList>
       </Container>
     </ThemeProvider>
