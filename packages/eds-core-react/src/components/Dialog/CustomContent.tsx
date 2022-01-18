@@ -16,7 +16,7 @@ const StyledCustomContent = styled.div<DialogCustomContentProps>(
         padding-top: ${theme.entities.children.spacings.top};
       }
       &:last-child {
-        padding-bottom: ${theme.entities.content.spacings.bottom};
+        padding-bottom: ${theme.entities.children.spacings.bottom};
       }
 
       ${scrollable &&

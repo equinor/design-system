@@ -22,7 +22,7 @@ const StyledDialog = styled(Paper).attrs<DialogProps>({
     grid-auto-columns: auto;
     ${typographyTemplate(theme.typography)}
     ${bordersTemplate(theme.border)}
-    grid-gap: 16px;
+    grid-gap: ${theme.spacings.bottom};
   `
 })
 

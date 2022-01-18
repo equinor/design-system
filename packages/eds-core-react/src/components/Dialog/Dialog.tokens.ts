@@ -30,7 +30,6 @@ export const dialog: DialogToken = {
     radius: borderRadius,
   },
   spacings: {
-    top: spacingMedium,
     bottom: spacingMedium,
   },
   entities: {
@@ -42,11 +41,6 @@ export const dialog: DialogToken = {
         right: spacingMedium,
       },
     },
-    divider: {
-      spacings: {
-        bottom: spacingMedium,
-      },
-    },
     title: {
       minHeight: '24px',
       typography: accordion_header,
@@ -55,9 +49,6 @@ export const dialog: DialogToken = {
       minHeight: '80px',
       height: '104px',
       typography: body_long,
-      spacings: {
-        bottom: spacingMedium,
-      },
     },
     actions: {
       minHeight: '48px',
