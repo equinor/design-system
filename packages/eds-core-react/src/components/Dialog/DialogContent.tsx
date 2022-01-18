@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
 import { typographyTemplate } from '../../utils'
 
-const StyledCustomContent = styled.div<DialogCustomContentProps>(
+const StyledDialogContent = styled.div<DialogContentProps>(
   ({ theme, scrollable }) => {
     return css`
       ${typographyTemplate(theme.entities.content.typography)}
@@ -34,29 +34,28 @@ const StyledDivider = styled(Divider)`
   margin-bottom: 0;
 `
 
-export type DialogCustomContentProps = {
+export type DialogContentProps = {
   /** Control if the content should be scrollable */
   scrollable?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-export const CustomContent = forwardRef<
-  HTMLDivElement,
-  DialogCustomContentProps
->(function CustomContent({ children, scrollable = false, ...rest }, ref) {
-  const props = {
-    scrollable,
-    ref,
-    ...rest,
-  }
-  return (
-    <>
-      <StyledCustomContent id="eds-dialog-customcontent" {...props}>
-        {children}
-      </StyledCustomContent>
+export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
+  function DialogContent({ children, scrollable = false, ...rest }, ref) {
+    const props = {
+      scrollable,
+      ref,
+      ...rest,
+    }
+    return (
+      <>
+        <StyledDialogContent id="eds-dialog-customcontent" {...props}>
+          {children}
+        </StyledDialogContent>
 
-      {children && scrollable && (
-        <StyledDivider color="medium" variant="small" />
-      )}
-    </>
-  )
-})
+        {children && scrollable && (
+          <StyledDivider color="medium" variant="small" />
+        )}
+      </>
+    )
+  },
+)
