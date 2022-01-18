@@ -74,6 +74,7 @@ const StyledButton = styled(Button)(
 
 type ComboboxOption<T> = T & {
   label: string
+  disabled?: boolean
 }
 
 export type ComboboxChanges<T> = {
@@ -129,6 +130,9 @@ function ComboboxInner<T>(
 
   const isControlled = Boolean(selectedOptions)
   const labelItems = options.map(optionLabel)
+  const [disabledItems] = useState<string[]>(
+    options.filter((x) => x.disabled).map(optionLabel),
+  )
   const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
   const initialSelectedItems = initialSelectedOptions.map(optionLabel)
   const controlledSelectedItems = (selectedOptions || []).map(optionLabel)
@@ -331,6 +335,7 @@ function ComboboxInner<T>(
                 multiple={multiple}
                 highlighted={highlightedIndex === index ? 'true' : 'false'}
                 isSelected={selectedItems.includes(item)}
+                isDisabled={disabledItems.includes(item)}
                 {...getItemProps({ item, index, disabled })}
               />
             ))}

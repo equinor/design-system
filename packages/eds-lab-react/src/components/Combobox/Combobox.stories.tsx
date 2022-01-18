@@ -112,6 +112,29 @@ export const Disabled: Story<ComboboxProps<CustomDataType>> = (args) => {
   )
 }
 
+export const DisabledItems: Story<ComboboxProps<CustomDataType>> = (args) => {
+  const data = [
+    { label: 'Oslo', areaCode: '02' },
+    { label: 'Rogaland', areaCode: '04', disabled: true },
+    { label: 'Møre og Romsdal', areaCode: '070' },
+    { label: 'Nord-Norge', areaCode: '08x', disabled: true },
+    { label: 'Hordaland', areaCode: '54' },
+    { label: 'Østfold', areaCode: '09' },
+  ]
+
+  return (
+    <Wrapper>
+      <Combobox label="Single Telefon areacodes" options={data} {...args} />
+      <Combobox
+        label="Multiple Telefon areacodes"
+        options={data}
+        multiple
+        {...args}
+      />
+    </Wrapper>
+  )
+}
+
 export const Readonly: Story<ComboboxProps<CustomDataType>> = (args) => {
   const data = [
     { label: 'Oslo', areaCode: '02' },
