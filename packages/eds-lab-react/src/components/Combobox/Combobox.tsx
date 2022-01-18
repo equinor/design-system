@@ -178,6 +178,19 @@ function ComboboxInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
+  const findNextIndex = (
+    calc: (n: number) => number,
+    index: number,
+  ): [string, number] => {
+    const nextIndex = calc(index)
+    const nextItem = availableItems[nextIndex]
+    if (!disabledItems.includes(nextItem)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      return [nextItem, nextIndex]
+    }
+    return findNextIndex(calc, nextIndex)
+  }
+
   let comboBoxProps: UseComboboxProps<string> = {
     items: availableItems,
     initialSelectedItem: initialSelectedItems[0],
@@ -220,52 +233,61 @@ function ComboboxInner<T>(
     },
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
-      let nextItemIndex = actionAndChanges.highlightedIndex
-      let previousItemIndex = state.highlightedIndex
-      let nextItem = actionAndChanges.selectedItem
 
       switch (type) {
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
-          nextItemIndex = availableItems.indexOf(state.selectedItem)
+          // eslint-disable-next-line no-case-declarations
+          const add = (num: number) => num + 1
 
-          if (nextItemIndex === availableItems.length - 1) {
-            return { ...changes, selectedItem: availableItems[0] }
-          }
+          // eslint-disable-next-line no-case-declarations
+          const [nextItem, nextIndex] = findNextIndex(
+            add,
+            availableItems.indexOf(state.selectedItem),
+          )
 
-          nextItem = availableItems[nextItemIndex + 1]
+          if (nextIndex >= availableItems.length) {
+            const [nextItem, nextIndex] = findNextIndex(add, 0)
 
-          if (disabledItems.includes(nextItem)) {
             return {
               ...changes,
-              selectedItem: availableItems[nextItemIndex + 2],
-              highlightedIndex: nextItemIndex + 2,
+              selectedItem: nextItem,
+              highlightedIndex: nextIndex,
             }
           }
 
-          return { ...changes, selectedItem: nextItem }
+          return {
+            ...changes,
+            selectedItem: nextItem,
+            highlightedIndex: nextIndex,
+          }
         case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
         case useCombobox.stateChangeTypes.InputKeyDownHome:
-          previousItemIndex = availableItems.indexOf(state.selectedItem)
+          // eslint-disable-next-line no-case-declarations
+          const substract = (num: number) => num - 1
+          // eslint-disable-next-line no-case-declarations
+          const [prevItem, prevIndex] = findNextIndex(
+            substract,
+            availableItems.indexOf(state.selectedItem),
+          )
 
-          if (previousItemIndex === 0) {
+          if (prevIndex < 0) {
+            const [prevItem, prevIndex] = findNextIndex(
+              substract,
+              availableItems.length,
+            )
             return {
               ...changes,
-              selectedItem: availableItems[availableItems.length - 1],
+              selectedItem: prevItem,
+              highlightedIndex: prevIndex,
             }
           }
 
-          nextItem = availableItems[previousItemIndex - 1]
-
-          if (disabledItems.includes(nextItem)) {
-            return {
-              ...changes,
-              selectedItem: availableItems[previousItemIndex - 2],
-              highlightedIndex: previousItemIndex - 2,
-            }
+          return {
+            ...changes,
+            selectedItem: prevItem,
+            highlightedIndex: prevIndex,
           }
-
-          return { ...changes, selectedItem: nextItem }
         default:
           return changes
       }
@@ -286,52 +308,61 @@ function ComboboxInner<T>(
       selectedItem: null,
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
-        let nextItemIndex = actionAndChanges.highlightedIndex
-        let previousItemIndex = state.highlightedIndex
-        let nextItem = actionAndChanges.selectedItem
 
         switch (type) {
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
-            nextItemIndex = availableItems.indexOf(state.selectedItem)
+            // eslint-disable-next-line no-case-declarations
+            const add = (num: number) => num + 1
 
-            if (nextItemIndex === availableItems.length - 1) {
-              return { ...changes, selectedItem: availableItems[0] }
-            }
+            // eslint-disable-next-line no-case-declarations
+            const [nextItem, nextIndex] = findNextIndex(
+              add,
+              availableItems.indexOf(state.selectedItem),
+            )
 
-            nextItem = availableItems[nextItemIndex + 1]
+            if (nextIndex >= availableItems.length) {
+              const [nextItem, nextIndex] = findNextIndex(add, 0)
 
-            if (disabledItems.includes(nextItem)) {
               return {
                 ...changes,
-                selectedItem: availableItems[nextItemIndex + 2],
-                highlightedIndex: nextItemIndex + 2,
+                selectedItem: nextItem,
+                highlightedIndex: nextIndex,
               }
             }
 
-            return { ...changes, selectedItem: nextItem }
+            return {
+              ...changes,
+              selectedItem: nextItem,
+              highlightedIndex: nextIndex,
+            }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
-            previousItemIndex = availableItems.indexOf(state.selectedItem)
+            // eslint-disable-next-line no-case-declarations
+            const substract = (num: number) => num - 1
+            // eslint-disable-next-line no-case-declarations
+            const [prevItem, prevIndex] = findNextIndex(
+              substract,
+              availableItems.indexOf(state.selectedItem),
+            )
 
-            if (previousItemIndex === 0) {
+            if (prevIndex < 0) {
+              const [prevItem, prevIndex] = findNextIndex(
+                substract,
+                availableItems.length,
+              )
               return {
                 ...changes,
-                selectedItem: availableItems[availableItems.length - 1],
+                selectedItem: prevItem,
+                highlightedIndex: prevIndex,
               }
             }
 
-            nextItem = availableItems[previousItemIndex - 1]
-
-            if (disabledItems.includes(nextItem)) {
-              return {
-                ...changes,
-                selectedItem: availableItems[previousItemIndex - 2],
-                highlightedIndex: previousItemIndex - 2,
-              }
+            return {
+              ...changes,
+              selectedItem: prevItem,
+              highlightedIndex: prevIndex,
             }
-
-            return { ...changes, selectedItem: nextItem }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
             return {

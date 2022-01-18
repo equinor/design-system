@@ -11,7 +11,6 @@ type StyledListItemType = {
 
 const StyledListItem = styled(List.Item)<StyledListItemType>(
   ({ theme, highlighted, active, isdisabled }) => {
-    const isDisabled = isdisabled === 'true'
     const backgroundColor =
       highlighted === 'true'
         ? theme.states.hover.background
@@ -28,7 +27,7 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
-      ${isDisabled
+      ${isdisabled === 'true'
         ? css`
             color: ${theme.states.disabled.typography.color};
           `
