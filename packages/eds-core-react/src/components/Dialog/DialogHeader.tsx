@@ -15,11 +15,9 @@ const StyledDialogHeader = styled.div(({ theme }) => {
   `
 })
 
-const StyledDivider = styled(Divider)(({ theme }) => {
-  return css`
-    margin-bottom: ${theme.entities.divider.spacings.bottom};
-  `
-})
+const StyledDivider = styled(Divider)`
+  margin-bottom: 0;
+`
 
 export const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
   function DialogHeader({ children, ...rest }, ref) {

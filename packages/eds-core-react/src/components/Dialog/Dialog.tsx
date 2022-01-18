@@ -1,11 +1,7 @@
 import { forwardRef } from 'react'
 import { createPortal } from 'react-dom'
 import styled, { css, ThemeProvider } from 'styled-components'
-import {
-  typographyTemplate,
-  spacingsTemplate,
-  bordersTemplate,
-} from '../../utils'
+import { typographyTemplate, bordersTemplate } from '../../utils'
 import { Paper } from '../Paper'
 import { Scrim } from '../Scrim'
 import { dialog as dialogToken } from './Dialog.tokens'
@@ -23,9 +19,10 @@ const StyledDialog = styled(Paper).attrs<DialogProps>({
     width: ${theme.width};
     background: ${theme.background};
     display: grid;
+    grid-auto-columns: auto;
     ${typographyTemplate(theme.typography)}
-    ${spacingsTemplate(theme.spacings)}
     ${bordersTemplate(theme.border)}
+    grid-gap: 16px;
   `
 })
 

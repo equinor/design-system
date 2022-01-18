@@ -1,17 +1,24 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
-import { typographyTemplate, spacingsTemplate } from '../../utils'
+import { typographyTemplate } from '../../utils'
 
 const StyledCustomContent = styled.div<DialogCustomContentProps>(
   ({ theme, scrollable }) => {
     return css`
       ${typographyTemplate(theme.entities.content.typography)}
       min-height: ${theme.entities.content.minHeight};
-      margin-bottom: ${theme.entities.content.spacings.bottom};
       align-self: stretch;
       justify-self: stretch;
-      ${spacingsTemplate(theme.entities.children.spacings)}
+      padding: 0 ${theme.entities.children.spacings.right} 0
+        ${theme.entities.children.spacings.left};
+      &:first-child {
+        padding-top: ${theme.entities.children.spacings.top};
+      }
+      &:last-child {
+        padding-bottom: ${theme.entities.content.spacings.bottom};
+      }
+
       ${scrollable &&
       css`
         min-height: initial;
@@ -22,12 +29,10 @@ const StyledCustomContent = styled.div<DialogCustomContentProps>(
   },
 )
 
-const StyledDivider = styled(Divider)(({ theme }) => {
-  return css`
-    width: 100%;
-    margin-bottom: ${theme.entities.divider.spacings.bottom};
-  `
-})
+const StyledDivider = styled(Divider)`
+  width: 100%;
+  margin-bottom: 0;
+`
 
 export type DialogCustomContentProps = {
   /** Control if the content should be scrollable */

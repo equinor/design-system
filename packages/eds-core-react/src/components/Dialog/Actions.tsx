@@ -1,13 +1,18 @@
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-import { spacingsTemplate } from '../../utils'
 
 const StyledActions = styled.div<DialogActionsProps>(({ theme, children }) => {
   return css`
-    min-height: ${theme.entities.actions.minHeight};
-    ${spacingsTemplate(theme.entities.children.spacings)}
     align-self: end;
     justify-self: start;
+    padding: 0 ${theme.entities.children.spacings.right} 0
+      ${theme.entities.children.spacings.left};
+    &:first-child {
+      padding-top: ${theme.entities.children.spacings.top};
+    }
+    &:last-child {
+      padding-bottom: ${theme.entities.content.spacings.bottom};
+    }
 
     ${!children &&
     css`

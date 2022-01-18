@@ -31,12 +31,13 @@ export const dialog: DialogToken = {
   },
   spacings: {
     top: spacingMedium,
+    bottom: spacingMedium,
   },
   entities: {
     children: {
       spacings: {
-        top: '0px',
-        bottom: '0px',
+        top: spacingMedium,
+        bottom: spacingMedium,
         left: spacingMedium,
         right: spacingMedium,
       },
