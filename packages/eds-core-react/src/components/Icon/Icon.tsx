@@ -1,7 +1,7 @@
 import { forwardRef, Ref, SVGProps } from 'react'
 import type { IconData } from '@equinor/eds-icons'
 import styled from 'styled-components'
-import type { IconBasket, Name } from './Icon.types'
+import type { Name } from './Icon.types'
 import { get } from './library'
 
 type StyledProps = {
@@ -22,11 +22,6 @@ type SimpleSVGProps = {
   'aria-labelledby'?: string
 }
 
-const customIcon = (icon: IconData): IconBasket => ({
-  icon,
-  count: Math.floor(Math.random() * 1000),
-})
-
 const transform = ({ rotation }: SimpleSVGProps): string =>
   rotation ? `transform: rotate(${rotation}deg)` : ''
 
@@ -46,6 +41,23 @@ const StyledPath = styled.path.attrs<StyledProps>(({ height, size }) => ({
   clipRule: 'evenodd',
   transform: size / height !== 1 ? `scale(${size / height})` : null,
 }))``
+
+const customIcon = (icon: IconData) => ({
+  icon,
+  count: Math.floor(Math.random() * 1000),
+})
+
+const findIcon = (name: string, data: IconData, size: number) => {
+  // eslint-disable-next-line prefer-const
+  let { icon, count } = data ? customIcon(data) : get(name)
+
+  if (size < 24) {
+    // fallback to normal icon if small is not made yet
+    icon = icon.sizes?.small || icon
+  }
+
+  return { icon, count }
+}
 
 export type IconProps = {
   /** Title for icon when used semantically */
@@ -69,12 +81,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   ref,
 ) {
   // eslint-disable-next-line prefer-const
-  let { icon, count }: IconBasket = data ? customIcon(data) : get(name)
-
-  if (size > 24) {
-    // fallback to normal icon if small is not made yet
-    icon = icon?.sizes?.small || icon
-  }
+  const { icon, count } = findIcon(name, data, size)
 
   if (typeof icon === 'undefined') {
     throw Error(
