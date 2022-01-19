@@ -77,6 +77,9 @@ type ComboboxOption<T> = T & {
   disabled?: boolean
 }
 
+const add = (num: number) => num + 1
+const substract = (num: number) => num - 1
+
 export type ComboboxChanges<T> = {
   selectedItems: T[]
 }
@@ -238,12 +241,9 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
           // eslint-disable-next-line no-case-declarations
-          const add = (num: number) => num + 1
-
-          // eslint-disable-next-line no-case-declarations
           const [nextItem, nextIndex] = findNextIndex(
             add,
-            availableItems.indexOf(state.selectedItem),
+            state.highlightedIndex,
           )
 
           if (nextIndex >= availableItems.length) {
@@ -264,13 +264,10 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
         case useCombobox.stateChangeTypes.InputKeyDownHome:
           // eslint-disable-next-line no-case-declarations
-          const substract = (num: number) => num - 1
-          // eslint-disable-next-line no-case-declarations
           const [prevItem, prevIndex] = findNextIndex(
             substract,
-            availableItems.indexOf(state.selectedItem),
+            state.highlightedIndex,
           )
-
           if (prevIndex < 0) {
             const [prevItem, prevIndex] = findNextIndex(
               substract,
@@ -313,12 +310,9 @@ function ComboboxInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
             // eslint-disable-next-line no-case-declarations
-            const add = (num: number) => num + 1
-
-            // eslint-disable-next-line no-case-declarations
             const [nextItem, nextIndex] = findNextIndex(
               add,
-              availableItems.indexOf(state.selectedItem),
+              state.highlightedIndex,
             )
 
             if (nextIndex >= availableItems.length) {
@@ -339,13 +333,10 @@ function ComboboxInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
             // eslint-disable-next-line no-case-declarations
-            const substract = (num: number) => num - 1
-            // eslint-disable-next-line no-case-declarations
             const [prevItem, prevIndex] = findNextIndex(
               substract,
-              availableItems.indexOf(state.selectedItem),
+              state.highlightedIndex,
             )
-
             if (prevIndex < 0) {
               const [prevItem, prevIndex] = findNextIndex(
                 substract,
