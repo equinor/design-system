@@ -2,7 +2,6 @@ import { forwardRef, Ref, SVGProps } from 'react'
 import type { IconData } from '@equinor/eds-icons'
 import styled from 'styled-components'
 import type { IconBasket, Name } from './Icon.types'
-import { useEds } from '../EdsProvider'
 import { get } from './library'
 
 type StyledProps = {
@@ -66,14 +65,13 @@ export type IconProps = {
 } & SVGProps<SVGSVGElement>
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
-  { size, color = 'currentColor', name, rotation, title, data, ...rest },
+  { size = 24, color = 'currentColor', name, rotation, title, data, ...rest },
   ref,
 ) {
-  const { density } = useEds()
   // eslint-disable-next-line prefer-const
   let { icon, count }: IconBasket = data ? customIcon(data) : get(name)
 
-  if (density === 'compact') {
+  if (size > 24) {
     // fallback to normal icon if small is not made yet
     icon = icon?.sizes?.small || icon
   }
