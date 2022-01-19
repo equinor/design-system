@@ -35,6 +35,10 @@ Introduction.args = {
   title: 'save',
 }
 
+export const Accessibility: Story<IconProps> = () => (
+  <Icon name="save" title="Save me!" />
+)
+
 export const Color: Story<IconProps> = () => (
   <Stack>
     <Icon name="save" color={'red'} />
@@ -53,10 +57,11 @@ export const Rotations: Story<IconProps> = () => (
 
 export const Sizes: Story<IconProps> = () => (
   <Stack>
-    <Icon name="compare" size={16} />
-    <Icon name="compare" size={24} />
-    <Icon name="compare" size={32} />
-    <Icon name="compare" size={40} />
-    <Icon name="compare" size={48} />
+    <Icon name="fullscreen" size={16} />
+    <Icon name="fullscreen" size={18} />
+    <Icon name="fullscreen" size={24} />
+    <Icon name="fullscreen" size={32} />
+    <Icon name="fullscreen" size={40} />
+    <Icon name="fullscreen" size={48} />
   </Stack>
 )
