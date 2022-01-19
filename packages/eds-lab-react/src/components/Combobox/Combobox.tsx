@@ -299,7 +299,9 @@ function ComboboxInner<T>(
   }
 
   if (multiple) {
-    placeholderText = `${selectedItems.length}/${options.length} selected`
+    placeholderText = `${selectedItems.length}/${
+      options.length - disabledItems.length
+    } selected`
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
