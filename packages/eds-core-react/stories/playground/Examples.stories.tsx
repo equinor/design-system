@@ -193,11 +193,15 @@ export const TestPage: Story = (args) => {
               anchorEl={popverAnchorRef.current}
               onClose={() => setPopoverOpen(false)}
             >
-              <Popover.Title>Title</Popover.Title>
+              <Popover.Header>
+                <Popover.Title>Title</Popover.Title>
+              </Popover.Header>
               <Popover.Content>
                 <Typography variant="body_short">Content</Typography>
               </Popover.Content>
-              <Button onClick={() => setPopoverOpen(false)}>OK</Button>
+              <Popover.Actions>
+                <Button onClick={() => setPopoverOpen(false)}>OK</Button>
+              </Popover.Actions>
             </Popover>
           </Toolbar>
           <EdsProvider density={density}>
