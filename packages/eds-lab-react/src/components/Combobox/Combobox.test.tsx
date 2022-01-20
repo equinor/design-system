@@ -17,7 +17,7 @@ const labelText = 'Select label test'
 
 afterEach(cleanup)
 
-describe('MultiSelect', () => {
+describe('Combobox', () => {
   it('Matches snapshot', () => {
     render(<Combobox options={items} label={labelText} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
@@ -65,10 +65,10 @@ describe('MultiSelect', () => {
   })
 
   type ControlledProps = {
-    onChange: () => void
+    onOptionsChange: () => void
   }
 
-  const HandleMultipleSelect = ({ onChange }: ControlledProps) => {
+  const HandleMultipleSelect = ({ onOptionsChange }: ControlledProps) => {
     const [selected, setSelected] = useState([])
     return (
       <Combobox
@@ -78,7 +78,7 @@ describe('MultiSelect', () => {
         selectedOptions={selected}
         onOptionsChange={(changes) => {
           setSelected(changes.selectedItems)
-          onChange()
+          onOptionsChange()
         }}
       />
     )
@@ -86,7 +86,7 @@ describe('MultiSelect', () => {
 
   it('Can be a controlled component', () => {
     const handleChange = jest.fn()
-    render(<HandleMultipleSelect onChange={handleChange} />)
+    render(<HandleMultipleSelect onOptionsChange={handleChange} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
     const buttonNode = screen.getByLabelText('toggle options', {
       selector: 'button',
@@ -114,6 +114,33 @@ describe('MultiSelect', () => {
       target: { value: 'ree' },
     })
     expect(within(optionsNode).queryAllByRole('option')).toHaveLength(1)
+  })
+
+  it('Second option is first when first option is disabled', () => {
+    const options = [
+      {
+        label: 'option1',
+        id: 1,
+        disabled: true,
+      },
+      {
+        label: 'option2',
+        id: 2,
+      },
+      {
+        label: 'option3',
+        id: 3,
+      },
+    ]
+
+    render(<Combobox options={options} label={labelText} />)
+    const inputNode = screen.getAllByLabelText(labelText)[0]
+    const optionsNode = screen.getByRole('listbox')
+
+    fireEvent.keyDown(inputNode, { key: 'ArrowDown' })
+    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(2) // since one option is disabled
+    const firstOption = within(optionsNode).queryAllByRole('option')[0]
+    expect(within(firstOption).getByText(options[1].label)).toBeDefined()
   })
 
   const StyledMultiSelect = styled(Combobox)`

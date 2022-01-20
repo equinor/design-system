@@ -17,6 +17,7 @@ scripts:
   test:lab: pnpm --filter @equinor/eds-lab-react run test
   test:utils: pnpm --filter @equinor/eds-utils run test
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
+  test:watch:lab: pnpm --filter @equinor/eds-lab-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
   test:update-snapshots:lab: pnpm --filter @equinor/eds-lab-react run test:update-snapshots
   storybook:core-react: pnpm --filter @equinor/eds-core-react run storybook
