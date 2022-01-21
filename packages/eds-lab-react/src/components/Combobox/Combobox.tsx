@@ -187,11 +187,10 @@ function ComboboxInner<T>(
   ): [string, number] => {
     const nextIndex = calc(index)
     const nextItem = availableItems[nextIndex]
-    if (!disabledItems.includes(nextItem)) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return [nextItem, nextIndex]
+    if (disabledItems.includes(nextItem)) {
+      return findNextIndex(calc, nextIndex)
     }
-    return findNextIndex(calc, nextIndex)
+    return [nextItem, nextIndex]
   }
 
   let comboBoxProps: UseComboboxProps<string> = {
@@ -246,19 +245,19 @@ function ComboboxInner<T>(
             state.highlightedIndex,
           )
 
-          if (nextIndex >= availableItems.length) {
-            const [nextItem, nextIndex] = findNextIndex(add, 0)
+          if (!nextItem) {
+            const [, nextIndex] = findNextIndex(add, -1)
 
             return {
               ...changes,
-              selectedItem: nextItem,
+              type,
               highlightedIndex: nextIndex,
             }
           }
 
           return {
             ...changes,
-            selectedItem: nextItem,
+            type,
             highlightedIndex: nextIndex,
           }
         case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
@@ -268,21 +267,22 @@ function ComboboxInner<T>(
             substract,
             state.highlightedIndex,
           )
-          if (prevIndex < 0) {
-            const [prevItem, prevIndex] = findNextIndex(
+          if (!prevItem) {
+            const [, prevIndex] = findNextIndex(
               substract,
-              availableItems.length,
+              availableItems.length + 1,
             )
+
             return {
               ...changes,
-              selectedItem: prevItem,
+              type,
               highlightedIndex: prevIndex,
             }
           }
 
           return {
             ...changes,
-            selectedItem: prevItem,
+            type,
             highlightedIndex: prevIndex,
           }
         default:
@@ -317,19 +317,19 @@ function ComboboxInner<T>(
               state.highlightedIndex,
             )
 
-            if (nextIndex >= availableItems.length) {
-              const [nextItem, nextIndex] = findNextIndex(add, 0)
+            if (!nextItem) {
+              const [, nextIndex] = findNextIndex(add, -1)
 
               return {
                 ...changes,
-                selectedItem: nextItem,
+                type,
                 highlightedIndex: nextIndex,
               }
             }
 
             return {
               ...changes,
-              selectedItem: nextItem,
+              type,
               highlightedIndex: nextIndex,
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
@@ -339,21 +339,22 @@ function ComboboxInner<T>(
               substract,
               state.highlightedIndex,
             )
-            if (prevIndex < 0) {
-              const [prevItem, prevIndex] = findNextIndex(
+            if (!prevItem) {
+              const [, prevIndex] = findNextIndex(
                 substract,
-                availableItems.length,
+                availableItems.length + 1,
               )
+
               return {
                 ...changes,
-                selectedItem: prevItem,
+                type,
                 highlightedIndex: prevIndex,
               }
             }
 
             return {
               ...changes,
-              selectedItem: prevItem,
+              type,
               highlightedIndex: prevIndex,
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
