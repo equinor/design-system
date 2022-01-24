@@ -174,7 +174,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
           focus={focus}
           onClose={closeMenu}
         >
-          <Menu.Item onKeyDown={onKeyPress}>
+          <Menu.Item onKeyDown={onKeyPress} onClick={closeMenu}>
             <Icon name="folder" size={16} />
             <Typography group="navigation" variant="menu_title">
               Open
@@ -188,7 +188,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
               CTRL+O
             </Typography>
           </Menu.Item>
-          <Menu.Item onKeyDown={onKeyPress}>
+          <Menu.Item onKeyDown={onKeyPress} onClick={closeMenu}>
             <Icon name="copy" size={16} />
             <Typography group="navigation" variant="menu_title">
               Copy
