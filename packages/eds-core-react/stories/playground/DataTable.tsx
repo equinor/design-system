@@ -11,6 +11,7 @@ import {
   Switch,
   Button,
   Menu,
+  MenuProps,
   SingleSelect,
 } from '../../src'
 import { save, more_vertical, copy, folder } from '@equinor/eds-icons'
@@ -112,7 +113,45 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
-  const isOpen = Boolean(anchorEl)
+  const isElement = Boolean(anchorEl)
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [focus, setFocus] = useState<MenuProps['focus']>(null)
+
+  const openMenu = (focus: MenuProps['focus']) => {
+    setIsOpen(true)
+    setFocus(focus)
+  }
+  const closeMenu = () => {
+    setIsOpen(false)
+    setFocus(null)
+    setAnchorEl(null)
+  }
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const { key } = e
+    e.preventDefault()
+    e.stopPropagation()
+    setAnchorEl(e.currentTarget)
+    switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first')
+        break
+      case 'ArrowDown':
+        if (isOpen) {
+          setFocus('last')
+        }
+        break
+      case 'ArrowUp':
+        if (isOpen) {
+          setFocus('first')
+        }
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <>
       <Button
@@ -122,18 +161,20 @@ const MenuButton = ({ row }: { row: string[] }) => {
         aria-haspopup="true"
         aria-expanded={isOpen}
         onClick={(e) => setAnchorEl(e.currentTarget)}
+        onKeyDown={onKeyPress}
       >
         <Icon name="more_vertical" title="more"></Icon>
       </Button>
-      {isOpen && (
+      {isElement && (
         <Menu
           id={`menu-${row.toString()}`}
           aria-labelledby={`menu-button-${row.toString()}`}
-          open={isOpen}
+          open={isElement}
           anchorEl={anchorEl}
-          onClose={() => setAnchorEl(null)}
+          focus={focus}
+          onClose={closeMenu}
         >
-          <Menu.Item>
+          <Menu.Item onKeyDown={onKeyPress}>
             <Icon name="folder" size={16} />
             <Typography group="navigation" variant="menu_title">
               Open
@@ -147,7 +188,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
               CTRL+O
             </Typography>
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item onKeyDown={onKeyPress}>
             <Icon name="copy" size={16} />
             <Typography group="navigation" variant="menu_title">
               Copy
