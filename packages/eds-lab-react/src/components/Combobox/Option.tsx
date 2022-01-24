@@ -29,6 +29,7 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
       ${spacingsTemplate(theme.spacings)}
       ${isdisabled === 'true'
         ? css`
+            user-select: none;
             color: ${theme.states.disabled.typography.color};
           `
         : ''}
