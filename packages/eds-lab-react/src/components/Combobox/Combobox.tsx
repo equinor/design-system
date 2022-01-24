@@ -184,13 +184,13 @@ function ComboboxInner<T>(
   const findNextIndex = (
     calc: (n: number) => number,
     index: number,
-  ): [string, number] => {
+  ): number => {
     const nextIndex = calc(index)
     const nextItem = availableItems[nextIndex]
     if (disabledItems.includes(nextItem)) {
       return findNextIndex(calc, nextIndex)
     }
-    return [nextItem, nextIndex]
+    return nextIndex
   }
 
   let comboBoxProps: UseComboboxProps<string> = {
@@ -235,18 +235,15 @@ function ComboboxInner<T>(
     },
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
+      let nextIndex: number, prevIndex: number
 
       switch (type) {
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
-          // eslint-disable-next-line no-case-declarations
-          const [nextItem, nextIndex] = findNextIndex(
-            add,
-            state.highlightedIndex,
-          )
+          nextIndex = findNextIndex(add, state.highlightedIndex)
 
-          if (!nextItem) {
-            const [, nextIndex] = findNextIndex(add, -1)
+          if (nextIndex > availableItems.length - 1) {
+            nextIndex = findNextIndex(add, -1)
 
             return {
               ...changes,
@@ -262,16 +259,10 @@ function ComboboxInner<T>(
           }
         case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
         case useCombobox.stateChangeTypes.InputKeyDownHome:
-          // eslint-disable-next-line no-case-declarations
-          const [prevItem, prevIndex] = findNextIndex(
-            substract,
-            state.highlightedIndex,
-          )
-          if (!prevItem) {
-            const [, prevIndex] = findNextIndex(
-              substract,
-              availableItems.length + 1,
-            )
+          prevIndex = findNextIndex(substract, state.highlightedIndex)
+
+          if (prevIndex < 0) {
+            prevIndex = findNextIndex(substract, availableItems.length)
 
             return {
               ...changes,
@@ -307,18 +298,15 @@ function ComboboxInner<T>(
       selectedItem: null,
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
+        let nextIndex: number, prevIndex: number
 
         switch (type) {
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
-            // eslint-disable-next-line no-case-declarations
-            const [nextItem, nextIndex] = findNextIndex(
-              add,
-              state.highlightedIndex,
-            )
+            nextIndex = findNextIndex(add, state.highlightedIndex)
 
-            if (!nextItem) {
-              const [, nextIndex] = findNextIndex(add, -1)
+            if (nextIndex > availableItems.length - 1) {
+              nextIndex = findNextIndex(add, -1)
 
               return {
                 ...changes,
@@ -334,16 +322,10 @@ function ComboboxInner<T>(
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
-            // eslint-disable-next-line no-case-declarations
-            const [prevItem, prevIndex] = findNextIndex(
-              substract,
-              state.highlightedIndex,
-            )
-            if (!prevItem) {
-              const [, prevIndex] = findNextIndex(
-                substract,
-                availableItems.length + 1,
-              )
+            prevIndex = findNextIndex(substract, state.highlightedIndex)
+
+            if (prevIndex < 0) {
+              prevIndex = findNextIndex(substract, availableItems.length)
 
               return {
                 ...changes,
