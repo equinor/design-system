@@ -95,12 +95,12 @@ const findIndex: IndexFinderType = ({
   disabledItems,
   availableItems,
 }) => {
-  const nextIndex = calc(index)
-  const nextItem = availableItems[nextIndex]
+  const nextItem = availableItems[index]
   if (disabledItems.includes(nextItem)) {
+    const nextIndex = calc(index)
     return findIndex({ calc, index: nextIndex, availableItems, disabledItems })
   }
-  return nextIndex
+  return index
 }
 
 const findNextIndex: IndexFinderType = ({
@@ -118,7 +118,7 @@ const findNextIndex: IndexFinderType = ({
 
   if (nextIndex > availableItems.length - 1) {
     // jump to start of list
-    return findIndex({ ...options, index: -1 })
+    return findIndex({ ...options, index: 0 })
   }
 
   return nextIndex
@@ -140,7 +140,7 @@ const findPrevIndex: IndexFinderType = ({
 
   if (prevIndex < 0) {
     // jump to end of list
-    return findIndex({ ...options, index: availableItems.length })
+    return findIndex({ ...options, index: availableItems.length - 1 })
   }
 
   return prevIndex
@@ -292,21 +292,21 @@ function ComboboxInner<T>(
 
       switch (type) {
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-        case useCombobox.stateChangeTypes.InputKeyDownEnd:
+        case useCombobox.stateChangeTypes.InputKeyDownHome:
           return {
             ...changes,
             highlightedIndex: findNextIndex({
-              index: state.highlightedIndex,
+              index: changes.highlightedIndex,
               availableItems,
               disabledItems,
             }),
           }
         case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-        case useCombobox.stateChangeTypes.InputKeyDownHome:
+        case useCombobox.stateChangeTypes.InputKeyDownEnd:
           return {
             ...changes,
             highlightedIndex: findPrevIndex({
-              index: state.highlightedIndex,
+              index: changes.highlightedIndex,
               availableItems,
               disabledItems,
             }),
@@ -336,21 +336,21 @@ function ComboboxInner<T>(
 
         switch (type) {
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-          case useCombobox.stateChangeTypes.InputKeyDownEnd:
+          case useCombobox.stateChangeTypes.InputKeyDownHome:
             return {
               ...changes,
               highlightedIndex: findNextIndex({
-                index: state.highlightedIndex,
+                index: changes.highlightedIndex,
                 availableItems,
                 disabledItems,
               }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-          case useCombobox.stateChangeTypes.InputKeyDownHome:
+          case useCombobox.stateChangeTypes.InputKeyDownEnd:
             return {
               ...changes,
               highlightedIndex: findPrevIndex({
-                index: state.highlightedIndex,
+                index: changes.highlightedIndex,
                 availableItems,
                 disabledItems,
               }),
