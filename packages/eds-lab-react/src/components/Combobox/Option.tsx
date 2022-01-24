@@ -6,10 +6,11 @@ import { typographyTemplate, spacingsTemplate } from '../../utils'
 type StyledListItemType = {
   highlighted?: string
   active?: string
+  isdisabled?: string
 }
 
 const StyledListItem = styled(List.Item)<StyledListItemType>(
-  ({ theme, highlighted, active }) => {
+  ({ theme, highlighted, active, isdisabled }) => {
     const backgroundColor =
       highlighted === 'true'
         ? theme.states.hover.background
@@ -23,9 +24,15 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
       margin: 0;
       list-style: none;
       background-color: ${backgroundColor};
+      user-select: none;
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
+      ${isdisabled === 'true'
+        ? css`
+            color: ${theme.states.disabled.typography.color};
+          `
+        : ''}
     `
   },
 )
@@ -35,18 +42,26 @@ export type ComboboxOptionProps = {
   multiple: boolean
   highlighted: string
   isSelected: boolean
+  isDisabled?: boolean
 } & LiHTMLAttributes<HTMLLIElement>
 
 export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
-  function ComboboxOption({ value, multiple, isSelected, ...other }, ref) {
+  function ComboboxOption(
+    { value, multiple, isSelected, isDisabled, onClick, ...other },
+    ref,
+  ) {
     return (
       <StyledListItem
         ref={ref}
+        isdisabled={isDisabled ? 'true' : 'false'}
+        aria-hidden={isDisabled}
         active={!multiple && isSelected ? 'true' : 'false'}
+        onClick={(e) => !isDisabled && onClick(e)}
         {...other}
       >
         {multiple && (
           <Checkbox
+            disabled={isDisabled}
             checked={isSelected}
             value={value}
             onChange={() => {

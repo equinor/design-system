@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MultiSelect Matches snapshot 1`] = `
+exports[`Combobox Matches snapshot 1`] = `
 .c0 {
   margin: 0;
   color: rgba(61,61,61,1);
@@ -41,7 +41,7 @@ exports[`MultiSelect Matches snapshot 1`] = `
 />
 `;
 
-exports[`MultiSelect Matches snapshot 2`] = `
+exports[`Combobox Matches snapshot 2`] = `
 .c2 {
   display: grid;
   grid-gap: 8px;

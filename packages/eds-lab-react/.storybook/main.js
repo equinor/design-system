@@ -11,4 +11,19 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
   ],
+  webpackFinal: async (config) => {
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        'styled-components': path.resolve(
+          __dirname,
+          '../node_modules',
+          'styled-components',
+        ),
+      },
+    }
+
+    return config
+  },
 }

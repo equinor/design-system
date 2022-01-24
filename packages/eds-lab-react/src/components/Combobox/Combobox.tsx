@@ -74,6 +74,76 @@ const StyledButton = styled(Button)(
 
 type ComboboxOption<T> = T & {
   label: string
+  disabled?: boolean
+}
+
+type IndexFinderType = ({
+  calc,
+  index,
+  disabledItems,
+  availableItems,
+}: {
+  index: number
+  disabledItems: string[]
+  availableItems: string[]
+  calc?: (n: number) => number
+}) => number
+
+const findIndex: IndexFinderType = ({
+  calc,
+  index,
+  disabledItems,
+  availableItems,
+}) => {
+  const nextItem = availableItems[index]
+  if (disabledItems.includes(nextItem)) {
+    const nextIndex = calc(index)
+    return findIndex({ calc, index: nextIndex, availableItems, disabledItems })
+  }
+  return index
+}
+
+const findNextIndex: IndexFinderType = ({
+  index,
+  disabledItems,
+  availableItems,
+}) => {
+  const options = {
+    index,
+    disabledItems,
+    availableItems,
+    calc: (num: number) => num + 1,
+  }
+  const nextIndex = findIndex(options)
+
+  if (nextIndex > availableItems.length - 1) {
+    // jump to start of list
+    return findIndex({ ...options, index: 0 })
+  }
+
+  return nextIndex
+}
+
+const findPrevIndex: IndexFinderType = ({
+  index,
+  disabledItems,
+  availableItems,
+}) => {
+  const options = {
+    index,
+    disabledItems,
+    availableItems,
+    calc: (num: number) => num - 1,
+  }
+
+  const prevIndex = findIndex(options)
+
+  if (prevIndex < 0) {
+    // jump to end of list
+    return findIndex({ ...options, index: availableItems.length - 1 })
+  }
+
+  return prevIndex
 }
 
 export type ComboboxChanges<T> = {
@@ -129,6 +199,9 @@ function ComboboxInner<T>(
 
   const isControlled = Boolean(selectedOptions)
   const labelItems = options.map(optionLabel)
+  const [disabledItems] = useState<string[]>(
+    options.filter((x) => x.disabled).map(optionLabel),
+  )
   const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
   const initialSelectedItems = initialSelectedOptions.map(optionLabel)
   const controlledSelectedItems = (selectedOptions || []).map(optionLabel)
@@ -191,13 +264,15 @@ function ComboboxInner<T>(
       }
     },
     onStateChange: ({ type, selectedItem }) => {
+      const isDisabled = disabledItems.includes(selectedItem)
+
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
-          if (selectedItem) {
+          if (selectedItem && !isDisabled) {
             if (multiple) {
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
@@ -212,6 +287,34 @@ function ComboboxInner<T>(
           break
       }
     },
+    stateReducer: (state, actionAndChanges) => {
+      const { changes, type } = actionAndChanges
+
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+        case useCombobox.stateChangeTypes.InputKeyDownHome:
+          return {
+            ...changes,
+            highlightedIndex: findNextIndex({
+              index: changes.highlightedIndex,
+              availableItems,
+              disabledItems,
+            }),
+          }
+        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+        case useCombobox.stateChangeTypes.InputKeyDownEnd:
+          return {
+            ...changes,
+            highlightedIndex: findPrevIndex({
+              index: changes.highlightedIndex,
+              availableItems,
+              disabledItems,
+            }),
+          }
+        default:
+          return changes
+      }
+    },
   }
 
   if (isControlled && !multiple) {
@@ -222,13 +325,36 @@ function ComboboxInner<T>(
   }
 
   if (multiple) {
-    placeholderText = `${selectedItems.length}/${options.length} selected`
+    placeholderText = `${selectedItems.length}/${
+      options.length - disabledItems.length
+    } selected`
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
+
         switch (type) {
+          case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
+          case useCombobox.stateChangeTypes.InputKeyDownHome:
+            return {
+              ...changes,
+              highlightedIndex: findNextIndex({
+                index: changes.highlightedIndex,
+                availableItems,
+                disabledItems,
+              }),
+            }
+          case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
+          case useCombobox.stateChangeTypes.InputKeyDownEnd:
+            return {
+              ...changes,
+              highlightedIndex: findPrevIndex({
+                index: changes.highlightedIndex,
+                availableItems,
+                disabledItems,
+              }),
+            }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
             return {
@@ -324,16 +450,22 @@ function ComboboxInner<T>(
         </Container>
         <StyledList {...getMenuProps()}>
           {isOpen &&
-            availableItems.map((item, index) => (
-              <ComboboxOption
-                key={item}
-                value={item}
-                multiple={multiple}
-                highlighted={highlightedIndex === index ? 'true' : 'false'}
-                isSelected={selectedItems.includes(item)}
-                {...getItemProps({ item, index, disabled })}
-              />
-            ))}
+            availableItems.map((item, index) => {
+              const isDisabled = disabledItems.includes(item)
+              return (
+                <ComboboxOption
+                  key={item}
+                  value={item}
+                  multiple={multiple}
+                  highlighted={
+                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                  }
+                  isSelected={selectedItems.includes(item)}
+                  isDisabled={isDisabled}
+                  {...getItemProps({ item, index, disabled })}
+                />
+              )
+            })}
         </StyledList>
       </Container>
     </ThemeProvider>

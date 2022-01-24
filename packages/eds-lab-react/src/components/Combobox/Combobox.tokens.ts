@@ -46,6 +46,11 @@ export const selectTokens: ComponentToken = {
     active: {
       background: colors.interactive.primary__selected_highlight.rgba,
     },
+    disabled: {
+      typography: {
+        color: colors.interactive.disabled__text.rgba,
+      },
+    },
   },
   entities: {
     button: {
