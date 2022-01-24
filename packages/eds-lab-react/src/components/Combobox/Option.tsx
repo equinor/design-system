@@ -24,12 +24,12 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
       margin: 0;
       list-style: none;
       background-color: ${backgroundColor};
+      user-select: none;
       cursor: ${highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
       ${isdisabled === 'true'
         ? css`
-            user-select: none;
             color: ${theme.states.disabled.typography.color};
           `
         : ''}
