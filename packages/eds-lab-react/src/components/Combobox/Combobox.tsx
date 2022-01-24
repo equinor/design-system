@@ -295,7 +295,6 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
           return {
             ...changes,
-            type,
             highlightedIndex: findNextIndex({
               index: state.highlightedIndex,
               availableItems,
@@ -306,7 +305,6 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownHome:
           return {
             ...changes,
-            type,
             highlightedIndex: findPrevIndex({
               index: state.highlightedIndex,
               availableItems,
@@ -341,7 +339,6 @@ function ComboboxInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
             return {
               ...changes,
-              type,
               highlightedIndex: findNextIndex({
                 index: state.highlightedIndex,
                 availableItems,
@@ -352,7 +349,6 @@ function ComboboxInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownHome:
             return {
               ...changes,
-              type,
               highlightedIndex: findPrevIndex({
                 index: state.highlightedIndex,
                 availableItems,
