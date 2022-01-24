@@ -77,8 +77,74 @@ type ComboboxOption<T> = T & {
   disabled?: boolean
 }
 
-const add = (num: number) => num + 1
-const substract = (num: number) => num - 1
+type IndexFinderType = ({
+  calc,
+  index,
+  disabledItems,
+  availableItems,
+}: {
+  index: number
+  disabledItems: string[]
+  availableItems: string[]
+  calc?: (n: number) => number
+}) => number
+
+const findIndex: IndexFinderType = ({
+  calc,
+  index,
+  disabledItems,
+  availableItems,
+}) => {
+  const nextIndex = calc(index)
+  const nextItem = availableItems[nextIndex]
+  if (disabledItems.includes(nextItem)) {
+    return findIndex({ calc, index: nextIndex, availableItems, disabledItems })
+  }
+  return nextIndex
+}
+
+const findNextIndex: IndexFinderType = ({
+  index,
+  disabledItems,
+  availableItems,
+}) => {
+  const options = {
+    index,
+    disabledItems,
+    availableItems,
+    calc: (num: number) => num + 1,
+  }
+  const nextIndex = findIndex(options)
+
+  if (nextIndex > availableItems.length - 1) {
+    // jump to start of list
+    return findIndex({ ...options, index: -1 })
+  }
+
+  return nextIndex
+}
+
+const findPrevIndex: IndexFinderType = ({
+  index,
+  disabledItems,
+  availableItems,
+}) => {
+  const options = {
+    index,
+    disabledItems,
+    availableItems,
+    calc: (num: number) => num - 1,
+  }
+
+  const prevIndex = findIndex(options)
+
+  if (prevIndex < 0) {
+    // jump to end of list
+    return findIndex({ ...options, index: availableItems.length })
+  }
+
+  return prevIndex
+}
 
 export type ComboboxChanges<T> = {
   selectedItems: T[]
@@ -181,18 +247,6 @@ function ComboboxInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
-  const findNextIndex = (
-    calc: (n: number) => number,
-    index: number,
-  ): number => {
-    const nextIndex = calc(index)
-    const nextItem = availableItems[nextIndex]
-    if (disabledItems.includes(nextItem)) {
-      return findNextIndex(calc, nextIndex)
-    }
-    return nextIndex
-  }
-
   let comboBoxProps: UseComboboxProps<string> = {
     items: availableItems,
     initialSelectedItem: initialSelectedItems[0],
@@ -235,46 +289,29 @@ function ComboboxInner<T>(
     },
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
-      let nextIndex: number, prevIndex: number
 
       switch (type) {
         case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
-          nextIndex = findNextIndex(add, state.highlightedIndex)
-
-          if (nextIndex > availableItems.length - 1) {
-            nextIndex = findNextIndex(add, -1)
-
-            return {
-              ...changes,
-              type,
-              highlightedIndex: nextIndex,
-            }
-          }
-
           return {
             ...changes,
             type,
-            highlightedIndex: nextIndex,
+            highlightedIndex: findNextIndex({
+              index: state.highlightedIndex,
+              availableItems,
+              disabledItems,
+            }),
           }
         case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
         case useCombobox.stateChangeTypes.InputKeyDownHome:
-          prevIndex = findNextIndex(substract, state.highlightedIndex)
-
-          if (prevIndex < 0) {
-            prevIndex = findNextIndex(substract, availableItems.length)
-
-            return {
-              ...changes,
-              type,
-              highlightedIndex: prevIndex,
-            }
-          }
-
           return {
             ...changes,
             type,
-            highlightedIndex: prevIndex,
+            highlightedIndex: findPrevIndex({
+              index: state.highlightedIndex,
+              availableItems,
+              disabledItems,
+            }),
           }
         default:
           return changes
@@ -298,46 +335,29 @@ function ComboboxInner<T>(
       selectedItem: null,
       stateReducer: (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
-        let nextIndex: number, prevIndex: number
 
         switch (type) {
           case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
-            nextIndex = findNextIndex(add, state.highlightedIndex)
-
-            if (nextIndex > availableItems.length - 1) {
-              nextIndex = findNextIndex(add, -1)
-
-              return {
-                ...changes,
-                type,
-                highlightedIndex: nextIndex,
-              }
-            }
-
             return {
               ...changes,
               type,
-              highlightedIndex: nextIndex,
+              highlightedIndex: findNextIndex({
+                index: state.highlightedIndex,
+                availableItems,
+                disabledItems,
+              }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownHome:
-            prevIndex = findNextIndex(substract, state.highlightedIndex)
-
-            if (prevIndex < 0) {
-              prevIndex = findNextIndex(substract, availableItems.length)
-
-              return {
-                ...changes,
-                type,
-                highlightedIndex: prevIndex,
-              }
-            }
-
             return {
               ...changes,
               type,
-              highlightedIndex: prevIndex,
+              highlightedIndex: findPrevIndex({
+                index: state.highlightedIndex,
+                availableItems,
+                disabledItems,
+              }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
