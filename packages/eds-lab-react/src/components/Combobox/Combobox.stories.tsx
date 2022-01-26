@@ -7,6 +7,7 @@ import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
 import { Typography, EdsProvider, Button } from '@equinor/eds-core-react'
 import { items } from '../../stories/data'
+import { Stack } from '../../../.storybook/components'
 import page from './Combobox.docs.mdx'
 
 export default {
@@ -18,10 +19,6 @@ export default {
     },
   },
 } as Meta
-
-const Wrapper = styled.div`
-  margin-bottom: 350px;
-`
 
 type MyOptionType = {
   label: string
@@ -72,80 +69,102 @@ const options = [
   },
 ]
 
-export const introduction: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Introduction: Story<ComboboxProps<MyOptionType>> = (args) => {
   return (
-    <Wrapper>
+    <Stack>
       <Combobox {...args} />
-    </Wrapper>
+    </Stack>
   )
 }
 
-introduction.bind({})
-introduction.args = {
-  label: 'Stocks',
+Introduction.bind({})
+Introduction.args = {
+  label: 'Select a stock',
   options,
   multiple: false,
   readOnly: false,
   disabled: false,
 }
 
-export const optionLabel: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Multiple: Story<ComboboxProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
-    <Wrapper>
+    <Stack direction="column">
+      <Combobox label="Select a stock" options={options} />
+      <Combobox label="Select multiple stocks" options={options} multiple />
+    </Stack>
+  )
+}
+Multiple.args = {
+  options,
+}
+
+export const OptionLabel: Story<ComboboxProps<MyOptionType>> = (args) => {
+  const { options } = args
+
+  return (
+    <Stack direction="column">
       <Combobox
+        label="Select a stock"
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         initialSelectedOptions={[options[0]]}
       />
-    </Wrapper>
+      <Combobox
+        label="Select multiple stocks"
+        options={options}
+        optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
+        initialSelectedOptions={[options[0]]}
+        multiple
+      />
+    </Stack>
   )
 }
-optionLabel.args = {
-  label: 'Stocks',
+OptionLabel.args = {
   options,
 }
 
-export const readonly: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Readonly: Story<ComboboxProps<MyOptionType>> = (args) => {
   const { options } = args
   return (
-    <Wrapper>
+    <Stack direction="column">
       <Combobox
+        label="Select a stock"
         initialSelectedOptions={[options[0]]}
         options={options}
         readOnly
         {...args}
       />
       <Combobox
+        label="Select multiple stocks"
         initialSelectedOptions={[options[0], options[1]]}
         options={options}
         multiple
         readOnly
         {...args}
       />
-    </Wrapper>
+    </Stack>
   )
 }
 
-readonly.args = {
-  label: 'Stocks',
+Readonly.args = {
   options,
 }
 
-export const disabled: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Disabled: Story<ComboboxProps<MyOptionType>> = (args) => {
   return (
-    <Wrapper>
-      <Combobox disabled {...args} />
-    </Wrapper>
+    <Stack direction="column">
+      <Combobox label="Select a stock" disabled {...args} />
+      <Combobox label="Select multiple stocks" disabled multiple {...args} />
+    </Stack>
   )
 }
-optionLabel.args = {
-  label: 'Stocks',
+OptionLabel.args = {
   options,
 }
 
-export const disabledOption: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const DisabledOption: Story<ComboboxProps<MyOptionType>> = (args) => {
   const options = [
     {
       label: 'Microsoft Corporation',
@@ -185,39 +204,48 @@ export const disabledOption: Story<ComboboxProps<MyOptionType>> = (args) => {
   ]
 
   return (
-    <Wrapper>
-      <Combobox label="Stocks" {...args} options={options} />
-    </Wrapper>
+    <Stack direction="column">
+      <Combobox label="Select a stock" options={options} {...args} />
+      <Combobox
+        label="Select multiple stocks"
+        options={options}
+        {...args}
+        multiple
+      />
+    </Stack>
   )
 }
 
-export const preselectedOptions: Story<ComboboxProps<MyOptionType>> = (
+export const PreselectedOptions: Story<ComboboxProps<MyOptionType>> = (
   args,
 ) => {
   const { options } = args
 
   return (
-    <Wrapper>
-      <Combobox initialSelectedOptions={[options[0]]} {...args} />
+    <Stack direction="column">
       <Combobox
+        label="Select a stock"
+        initialSelectedOptions={[options[0]]}
+        {...args}
+      />
+      <Combobox
+        label="Select multiple stocks"
         initialSelectedOptions={[options[0], options[1], options[5]]}
         multiple
         {...args}
       />
-    </Wrapper>
+    </Stack>
   )
 }
 
-preselectedOptions.args = {
-  label: 'Stocks',
+PreselectedOptions.args = {
   options,
 }
 
-export const onOptionsChange: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const OnOptionsChange: Story<ComboboxProps<MyOptionType>> = (args) => {
   const { options } = args
 
   const initialSelectedOptions = [options[0], options[1], options[5]]
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedItems, setSelectedItems] = useState(initialSelectedOptions)
 
   const onChange = (changes: ComboboxChanges<MyOptionType>) => {
@@ -225,61 +253,57 @@ export const onOptionsChange: Story<ComboboxProps<MyOptionType>> = (args) => {
   }
 
   return (
-    <Wrapper>
+    <Stack direction="column">
       <Typography>
         Selected items:{selectedItems.map((x) => x.label).toString()}
       </Typography>
       <Combobox
-        label="Single Telefon areacodes"
+        label="Select a stock"
         options={options}
         onOptionsChange={onChange}
         initialSelectedOptions={initialSelectedOptions}
       />
       <Combobox
-        label="Multiple Telefon areacodes"
+        label="Select multiple stocks"
         options={options}
         onOptionsChange={onChange}
         initialSelectedOptions={initialSelectedOptions}
         multiple
       />
-    </Wrapper>
+    </Stack>
   )
 }
 
-onOptionsChange.args = {
-  label: 'Stocks',
+OnOptionsChange.args = {
   options,
 }
 
 export const Compact: Story<ComboboxProps<MyOptionType>> = (args) => {
-  const data = [
-    { label: 'Oslo', areaCode: '02' },
-    { label: 'Rogaland', areaCode: '04' },
-    { label: 'Møre og Romsdal', areaCode: '070' },
-    { label: 'Nord-Norge', areaCode: '08x' },
-    { label: 'Hordaland', areaCode: '54' },
-    { label: 'Østfold', areaCode: '09' },
-  ]
+  const { options } = args
 
   return (
     <EdsProvider density="compact">
-      <Wrapper>
+      <Stack direction="column">
         <Combobox
-          label="Single Telefon areacodes"
-          initialSelectedOptions={[data[0]]}
-          options={data}
+          label="Select a stock"
+          initialSelectedOptions={[options[0]]}
+          options={options}
           {...args}
         />
         <Combobox
-          label="Multiple Telefon areacodes"
-          initialSelectedOptions={[data[0], data[1]]}
-          options={data}
+          label="Select multiple stocks"
+          initialSelectedOptions={[options[0], options[1]]}
+          options={options}
           multiple
           {...args}
         />
-      </Wrapper>
+      </Stack>
     </EdsProvider>
   )
+}
+
+Compact.args = {
+  options,
 }
 
 type FormValues = {

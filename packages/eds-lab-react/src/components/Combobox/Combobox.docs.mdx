@@ -9,12 +9,6 @@ The Combobox component allows users to choose one or multiple options from a lis
 <Story id="components-combobox--introduction" />
 <PropsTable />
 
-## Installation 
-
-Install the packages in your project directory with your package manager (npm/yarn/pnpm).
-```shell
-npm install @equinor/eds-core-react
-```
 
 ## Usage
 
@@ -52,7 +46,10 @@ const options = [
 ## Accessibility
 The property `label` is mandatory and make sure you have a descriptive label for screen readers.
 
+## Multiple
 
+Enable the `multiple` property for multiple selection of values
+<Story id="components-combobox--multiple" />
 
 ## Option label
 
@@ -78,3 +75,9 @@ You can disable an option by setting the `disabled:true` on option
 
 ## On options change
 <Story id="components-combobox--on-options-change" />
+
+## Compact
+<Story id="components-combobox--compact" />
+
+## With React Hook Form
+<Story id="components-combobox--with-react-hook-form" />
