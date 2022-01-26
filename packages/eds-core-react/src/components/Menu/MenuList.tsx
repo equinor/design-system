@@ -100,6 +100,7 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
     const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
       const { key } = event
       event.stopPropagation()
+      event.preventDefault()
 
       if (key === 'ArrowDown') {
         event.preventDefault()
