@@ -114,7 +114,6 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
   const isElement = Boolean(anchorEl)
-
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [focus, setFocus] = useState<MenuProps['focus']>(null)
 
@@ -133,6 +132,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
     e.preventDefault()
     e.stopPropagation()
     setAnchorEl(e.currentTarget)
+
     switch (key) {
       case 'Enter':
         isOpen ? closeMenu() : openMenu('first')
@@ -174,7 +174,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
           focus={focus}
           onClose={closeMenu}
         >
-          <Menu.Item onKeyDown={onKeyPress} onClick={closeMenu}>
+          <Menu.Item onClick={closeMenu}>
             <Icon name="folder" size={16} />
             <Typography group="navigation" variant="menu_title">
               Open
@@ -188,7 +188,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
               CTRL+O
             </Typography>
           </Menu.Item>
-          <Menu.Item onKeyDown={onKeyPress} onClick={closeMenu}>
+          <Menu.Item onClick={closeMenu}>
             <Icon name="copy" size={16} />
             <Typography group="navigation" variant="menu_title">
               Copy
