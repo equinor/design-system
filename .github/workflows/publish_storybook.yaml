@@ -115,6 +115,7 @@ jobs:
     name: Build & Deploy Docker
     runs-on: ubuntu-latest
     needs: [build-storybook-core-react, build-storybook-lab]
+    if: ${{ build-storybook-lab.status == 'success' || build-storybook-core-react.status == 'success'  }}
     outputs:
       image_tag: ${{ steps.tag_name.outputs.image_tag }})
     steps:
