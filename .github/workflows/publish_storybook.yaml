@@ -65,7 +65,7 @@ jobs:
     name: Build Storybook
     runs-on: ubuntu-latest
     needs: setup
-    if: ${{ github.event.inputs.storybook-slot != lab }}
+    if: ${{ github.event.inputs.storybook-slot != 'lab' }}
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -87,7 +87,7 @@ jobs:
     name: Build Storybook
     runs-on: ubuntu-latest
     needs: setup
-    if: ${{ github.event.inputs.storybook-slot == lab }}
+    if: ${{ github.event.inputs.storybook-slot == 'lab' }}
     steps:
       - name: Get base files
         uses: actions/cache@v2
