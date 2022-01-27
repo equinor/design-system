@@ -62,7 +62,7 @@ jobs:
           key: ${{ github.sha }}
 
   build-storybook-core-react:
-    name: Build Storybook
+    name: Build Storybook core
     runs-on: ubuntu-latest
     needs: setup
     if: ${{ github.event.inputs.storybook-slot != 'lab' }}
@@ -84,7 +84,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-build-storybook
   build-storybook-lab:
-    name: Build Storybook
+    name: Build Storybook lab
     runs-on: ubuntu-latest
     needs: setup
     if: ${{ github.event.inputs.storybook-slot == 'lab' }}
