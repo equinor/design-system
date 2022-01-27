@@ -101,6 +101,8 @@ export type MenuItemProps = {
   disabled?: boolean
   /** onClick handler */
   onClick?: (e: React.MouseEvent) => void
+  /** onClose handler */
+  onClose?: (e: React.KeyboardEvent) => void
 } & React.HTMLAttributes<HTMLButtonElement>
 
 export const MenuItem = memo(
@@ -117,6 +119,13 @@ export const MenuItem = memo(
     }
 
     const isFocused = index === focusedIndex
+
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      const { key } = e
+      if (key === 'Enter') {
+        onClose()
+      }
+    }
 
     const props = {
       ...rest,
@@ -141,6 +150,7 @@ export const MenuItem = memo(
             }
           }
         }}
+        onKeyDown={handleKeyPress}
       >
         <Content>{children}</Content>
       </Item>
