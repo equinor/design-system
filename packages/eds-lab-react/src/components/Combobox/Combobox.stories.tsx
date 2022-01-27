@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Combobox, ComboboxProps, ComboboxChanges } from '../..'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import { Typography, EdsProvider, Button } from '@equinor/eds-core-react'
+import {
+  Typography,
+  EdsProvider,
+  Button,
+  Density,
+} from '@equinor/eds-core-react'
 import { items } from '../../stories/data'
 import { Stack } from '../../../.storybook/components'
 import page from './Combobox.docs.mdx'
@@ -280,9 +285,15 @@ OnOptionsChange.args = {
 
 export const Compact: Story<ComboboxProps<MyOptionType>> = (args) => {
   const { options } = args
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
   return (
-    <EdsProvider density="compact">
+    <EdsProvider density={density}>
       <Stack direction="column">
         <Combobox
           label="Select a stock"
