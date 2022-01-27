@@ -17,6 +17,7 @@ specifiers:
   '@rollup/plugin-node-resolve': ^13.0.2
   '@storybook/addon-a11y': ^6.3.12
   '@storybook/addon-actions': ^6.3.12
+  '@storybook/addon-docs': ^6.4.9
   '@storybook/addon-essentials': ^6.3.12
   '@storybook/addon-links': ^6.3.12
   '@storybook/react': ^6.3.12
@@ -78,6 +79,7 @@ devDependencies:
   '@rollup/plugin-node-resolve': 13.1.1_rollup@2.61.1
   '@storybook/addon-a11y': 6.4.9_8ad52fb0879b111fbc385791d11df5b0
   '@storybook/addon-actions': 6.4.9_8ad52fb0879b111fbc385791d11df5b0
+  '@storybook/addon-docs': 6.4.9_4677ca02f2cbe82e18e6a09c50153b90
   '@storybook/addon-essentials': 6.4.9_84c53036416aed70094a81d0bf9e5a38
   '@storybook/addon-links': 6.4.9_react-dom@17.0.2+react@17.0.2
   '@storybook/react': 6.4.9_15c0e06346e63ba349eb467ecbb0c5bb
@@ -635,7 +637,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.10.4
+      '@babel/helper-plugin-utils': 7.16.5
       '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.12.9
       '@babel/plugin-transform-parameters': 7.16.5_@babel+core@7.12.9
     dev: true
