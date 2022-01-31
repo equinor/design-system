@@ -18,7 +18,6 @@ exports[`Combobox Matches snapshot 1`] = `
   overflow-y: scroll;
   max-height: 300px;
   padding: 0;
-  margin-top: 4px;
   position: absolute;
   right: 0;
   left: 0;
@@ -38,6 +37,7 @@ exports[`Combobox Matches snapshot 1`] = `
   class="c0 c1"
   id="downshift-0-menu"
   role="listbox"
+  style="position: absolute; left: 0px; top: 0px;"
 />
 `;
 
