@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       storybook-slot:
-        description: 'Azure webapp slot for Storybook (development | production)'
+        description: 'Azure webapp slot for Storybook (development | production | lab)'
         required: false
         default: 'development'
   push:
@@ -34,7 +34,7 @@ jobs:
           # Now interesting part
           git sparse-checkout init --cone
           # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/eds-core-react packages/eds-tokens packages/eds-icons
+          git sparse-checkout set packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
@@ -60,38 +60,12 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
-  test:
-    name: Test
+
+  build-storybook-core-react:
+    name: Build Storybook core
     runs-on: ubuntu-latest
     needs: setup
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}
-      - name: Test eds-core-react
-        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}
-      - name: Lint all packages
-        run: node_modules/.bin/pnpm run lint ./packages
-  build-storybook:
-    name: Build Storybook
-    runs-on: ubuntu-latest
-    needs: [test, lint]
+    if: ${{ github.event.inputs.storybook-slot != 'lab' }}
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -109,10 +83,38 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-build-storybook
-  build_push_docker:
-    name: Build & Deploy Docker
+  build-storybook-lab:
+    name: Build Storybook lab
     runs-on: ubuntu-latest
-    needs: [build-storybook]
+    needs: setup
+    if: ${{ github.event.inputs.storybook-slot == 'lab' }}
+    steps:
+      - name: Get base files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}
+      - name: Build tokens
+        run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
+      - name: Build icons
+        run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
+      - name: Build core-react
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build
+      - name: Build storybook
+        run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react run build:storybook
+      - uses: actions/cache@v2
+        name: Save build to cache
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-build-storybook
+  build_push_docker_core:
+    name: Build & Deploy Docker core
+    runs-on: ubuntu-latest
+    needs: [build-storybook-core-react]
     outputs:
       image_tag: ${{ steps.tag_name.outputs.image_tag }})
     steps:
@@ -146,6 +148,50 @@ jobs:
       - name: Build and push image
         run: |
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./packages/eds-core-react/Dockerfile.storybook .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
+      - name: Deploy to Web app
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'eds-storybook-react'
+          slot-name: '${{ github.event.inputs.storybook-slot }}'
+          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}'
+  build_push_docker_lab:
+    name: Build & Deploy Docker lab
+    runs-on: ubuntu-latest
+    needs: [build-storybook-lab]
+    outputs:
+      image_tag: ${{ steps.tag_name.outputs.image_tag }})
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Create docker image tag
+        id: image_tag
+        run: echo "::set-output name=image_tag::$(echo ${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }})"
+      - name: Get Storybook build from cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-build-storybook
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Login to registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build and push image
+        run: |
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./packages/eds-lab-react/Dockerfile.storybook .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
       - name: Deploy to Web app
         uses: azure/webapps-deploy@v2
