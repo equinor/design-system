@@ -20,7 +20,7 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Combobox.tokens'
-import { useToken, usePopper } from '../../hooks'
+import { useToken, usePopper, useIsMounted } from '../../hooks'
 import { bordersTemplate } from '../../utils'
 import { ComboboxOption } from './Option'
 
@@ -195,6 +195,7 @@ function ComboboxInner<T>(
   } = props
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>()
   const [containerEl, setContainerEl] = useState<HTMLElement>()
+  const isMounted = useIsMounted()
 
   const { styles, attributes } = usePopper(
     anchorEl,
@@ -465,28 +466,30 @@ function ComboboxInner<T>(
           </StyledButton>
         </Container>
 
-        {!isOpen
+        {!isMounted
           ? null
           : createPortal(
               <StyledList {...menuProps}>
-                {availableItems.map((item, index) => {
-                  const isDisabled = disabledItems.includes(item)
-                  return (
-                    <ComboboxOption
-                      key={item}
-                      value={item}
-                      multiple={multiple}
-                      highlighted={
-                        highlightedIndex === index && !isDisabled
-                          ? 'true'
-                          : 'false'
-                      }
-                      isSelected={selectedItems.includes(item)}
-                      isDisabled={isDisabled}
-                      {...getItemProps({ item, index, disabled })}
-                    />
-                  )
-                })}
+                {!isOpen
+                  ? null
+                  : availableItems.map((item, index) => {
+                      const isDisabled = disabledItems.includes(item)
+                      return (
+                        <ComboboxOption
+                          key={item}
+                          value={item}
+                          multiple={multiple}
+                          highlighted={
+                            highlightedIndex === index && !isDisabled
+                              ? 'true'
+                              : 'false'
+                          }
+                          isSelected={selectedItems.includes(item)}
+                          isDisabled={isDisabled}
+                          {...getItemProps({ item, index, disabled })}
+                        />
+                      )
+                    })}
               </StyledList>,
               document.body,
             )}
