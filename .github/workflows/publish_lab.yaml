@@ -215,7 +215,7 @@ jobs:
   build-storybook-lab:
     name: Build Storybook lab
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [build-core-react]
     steps:
       - name: Get core-react build
         uses: actions/cache@v2
