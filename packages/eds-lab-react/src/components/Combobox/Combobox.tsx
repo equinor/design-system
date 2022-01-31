@@ -5,6 +5,7 @@ import {
   UseComboboxProps,
   useMultipleSelection,
   UseMultipleSelectionProps,
+  UseComboboxGetMenuPropsOptions,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import {
@@ -52,6 +53,9 @@ const StyledList = styled(List)(
     max-height: 300px;
     padding: 0;
     position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 50;
   `,
 )
 
@@ -173,6 +177,8 @@ export type ComboboxProps<T> = {
   multiple?: boolean
   /**  Custom option label */
   optionLabel?: (option: ComboboxOption<T>) => string
+  /** Disable use of react portal for dropdown */
+  disablePortal?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function ComboboxInner<T>(
@@ -191,6 +197,7 @@ function ComboboxInner<T>(
     multiple,
     initialSelectedOptions = [],
     optionLabel = (item) => item.label,
+    disablePortal,
     ...other
   } = props
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>()
@@ -408,15 +415,39 @@ function ComboboxInner<T>(
     resetSelection()
   }
   const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const menuProps = getMenuProps(
-    {
-      ref: setContainerEl,
-      style: styles.popper,
-      ...attributes.popper,
-    },
-    { suppressRefError: true },
+
+  const optionsList = (
+    <StyledList
+      {...getMenuProps(
+        {
+          ref: setContainerEl,
+          style: styles.popper as UseComboboxGetMenuPropsOptions['style'],
+          ...attributes.popper,
+        },
+        { suppressRefError: true },
+      )}
+    >
+      {!isOpen
+        ? null
+        : availableItems.map((item, index) => {
+            const isDisabled = disabledItems.includes(item)
+            return (
+              <ComboboxOption
+                key={item}
+                value={item}
+                multiple={multiple}
+                highlighted={
+                  highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                }
+                isSelected={selectedItems.includes(item)}
+                isDisabled={isDisabled}
+                {...getItemProps({ item, index, disabled })}
+              />
+            )
+          })}
+    </StyledList>
   )
+
   return (
     <ThemeProvider theme={token}>
       <Container className={className} ref={ref}>
@@ -465,34 +496,11 @@ function ComboboxInner<T>(
             )}
           </StyledButton>
         </Container>
-
-        {!isMounted
+        {disablePortal
+          ? optionsList
+          : !isMounted
           ? null
-          : createPortal(
-              <StyledList {...menuProps}>
-                {!isOpen
-                  ? null
-                  : availableItems.map((item, index) => {
-                      const isDisabled = disabledItems.includes(item)
-                      return (
-                        <ComboboxOption
-                          key={item}
-                          value={item}
-                          multiple={multiple}
-                          highlighted={
-                            highlightedIndex === index && !isDisabled
-                              ? 'true'
-                              : 'false'
-                          }
-                          isSelected={selectedItems.includes(item)}
-                          isDisabled={isDisabled}
-                          {...getItemProps({ item, index, disabled })}
-                        />
-                      )
-                    })}
-              </StyledList>,
-              document.body,
-            )}
+          : createPortal(optionsList, document.body)}
       </Container>
     </ThemeProvider>
   )
