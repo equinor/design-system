@@ -1,9 +1,11 @@
-import { forwardRef, useState, HTMLAttributes } from 'react'
+import { forwardRef, useState, HTMLAttributes, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import {
   useCombobox,
   UseComboboxProps,
   useMultipleSelection,
   UseMultipleSelectionProps,
+  UseComboboxGetMenuPropsOptions,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import {
@@ -19,7 +21,7 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Combobox.tokens'
-import { useToken } from '../../hooks'
+import { useToken, usePopper, useIsMounted } from '../../hooks'
 import { bordersTemplate } from '../../utils'
 import { ComboboxOption } from './Option'
 
@@ -50,7 +52,6 @@ const StyledList = styled(List)(
     overflow-y: scroll;
     max-height: 300px;
     padding: 0;
-    margin-top: 4px;
     position: absolute;
     right: 0;
     left: 0;
@@ -176,6 +177,8 @@ export type ComboboxProps<T> = {
   multiple?: boolean
   /**  Custom option label */
   optionLabel?: (option: ComboboxOption<T>) => string
+  /** Disable use of react portal for dropdown */
+  disablePortal?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function ComboboxInner<T>(
@@ -194,8 +197,14 @@ function ComboboxInner<T>(
     multiple,
     initialSelectedOptions = [],
     optionLabel = (item) => item.label,
+    disablePortal,
     ...other
   } = props
+
+  const anchorRef = useRef()
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>()
+  const [containerEl, setContainerEl] = useState<HTMLElement>()
+  const isMounted = useIsMounted()
 
   const isControlled = Boolean(selectedOptions)
   const labelItems = options.map(optionLabel)
@@ -389,6 +398,24 @@ function ComboboxInner<T>(
     reset: resetCombobox,
   } = useCombobox(comboBoxProps)
 
+  useEffect(() => {
+    if (anchorRef.current) {
+      setAnchorEl(anchorRef.current)
+    }
+    return () => {
+      setAnchorEl(null)
+      setContainerEl(null)
+    }
+  }, [anchorRef, isOpen])
+
+  const { styles, attributes } = usePopper(
+    anchorEl,
+    containerEl,
+    null,
+    'bottom-start',
+    4,
+  )
+
   const openSelect = () => {
     if (!isOpen && !(disabled || readOnly)) {
       openMenu()
@@ -400,6 +427,38 @@ function ComboboxInner<T>(
     resetSelection()
   }
   const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
+
+  const optionsList = (
+    <StyledList
+      {...getMenuProps(
+        {
+          ref: setContainerEl,
+          style: styles.popper as UseComboboxGetMenuPropsOptions['style'],
+          ...attributes.popper,
+        },
+        { suppressRefError: true },
+      )}
+    >
+      {!isOpen
+        ? null
+        : availableItems.map((item, index) => {
+            const isDisabled = disabledItems.includes(item)
+            return (
+              <ComboboxOption
+                key={item}
+                value={item}
+                multiple={multiple}
+                highlighted={
+                  highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                }
+                isSelected={selectedItems.includes(item)}
+                isDisabled={isDisabled}
+                {...getItemProps({ item, index, disabled })}
+              />
+            )
+          })}
+    </StyledList>
+  )
 
   return (
     <ThemeProvider theme={token}>
@@ -417,6 +476,7 @@ function ComboboxInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
+                ref: anchorRef,
               }),
             )}
             placeholder={placeholderText}
@@ -448,25 +508,11 @@ function ComboboxInner<T>(
             )}
           </StyledButton>
         </Container>
-        <StyledList {...getMenuProps()}>
-          {isOpen &&
-            availableItems.map((item, index) => {
-              const isDisabled = disabledItems.includes(item)
-              return (
-                <ComboboxOption
-                  key={item}
-                  value={item}
-                  multiple={multiple}
-                  highlighted={
-                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
-                  }
-                  isSelected={selectedItems.includes(item)}
-                  isDisabled={isDisabled}
-                  {...getItemProps({ item, index, disabled })}
-                />
-              )
-            })}
-        </StyledList>
+        {disablePortal
+          ? optionsList
+          : !isMounted
+          ? null
+          : createPortal(optionsList, document.body)}
       </Container>
     </ThemeProvider>
   )
