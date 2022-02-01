@@ -124,7 +124,7 @@ jobs:
           path: ./packages/eds-tokens
           key: ${{ github.sha }}-build-tokens
   test-utils:
-    name: Test
+    name: Test eds-utils
     runs-on: ubuntu-latest
     needs: [build-tokens]
     steps:
