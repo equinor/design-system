@@ -1,4 +1,4 @@
-import { forwardRef, useState, HTMLAttributes } from 'react'
+import { forwardRef, useState, HTMLAttributes, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import {
   useCombobox,
@@ -200,17 +200,11 @@ function ComboboxInner<T>(
     disablePortal,
     ...other
   } = props
+
+  const anchorRef = useRef()
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>()
   const [containerEl, setContainerEl] = useState<HTMLElement>()
   const isMounted = useIsMounted()
-
-  const { styles, attributes } = usePopper(
-    anchorEl,
-    containerEl,
-    null,
-    'bottom-start',
-    4,
-  )
 
   const isControlled = Boolean(selectedOptions)
   const labelItems = options.map(optionLabel)
@@ -404,6 +398,24 @@ function ComboboxInner<T>(
     reset: resetCombobox,
   } = useCombobox(comboBoxProps)
 
+  useEffect(() => {
+    if (isMounted && anchorRef.current) {
+      setAnchorEl(anchorRef.current)
+    }
+    return () => {
+      setAnchorEl(null)
+      setContainerEl(null)
+    }
+  }, [anchorRef, isMounted, isOpen])
+
+  const { styles, attributes } = usePopper(
+    anchorEl,
+    containerEl,
+    null,
+    'bottom-start',
+    4,
+  )
+
   const openSelect = () => {
     if (!isOpen && !(disabled || readOnly)) {
       openMenu()
@@ -464,7 +476,7 @@ function ComboboxInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-                ref: setAnchorEl,
+                ref: anchorRef,
               }),
             )}
             placeholder={placeholderText}
