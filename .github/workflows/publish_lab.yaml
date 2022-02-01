@@ -260,7 +260,7 @@ jobs:
   publish-lab:
     name: Publish eds-lab-react to npm
     runs-on: ubuntu-latest
-    needs: [build-lab]
+    needs: [build-lab, publish-utils]
     steps:
       - name: Get lab build
         uses: actions/cache@v2
