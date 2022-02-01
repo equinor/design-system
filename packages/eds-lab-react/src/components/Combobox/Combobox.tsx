@@ -399,14 +399,14 @@ function ComboboxInner<T>(
   } = useCombobox(comboBoxProps)
 
   useEffect(() => {
-    if (isMounted && anchorRef.current) {
+    if (anchorRef.current) {
       setAnchorEl(anchorRef.current)
     }
     return () => {
       setAnchorEl(null)
       setContainerEl(null)
     }
-  }, [anchorRef, isMounted, isOpen])
+  }, [anchorRef, isOpen])
 
   const { styles, attributes } = usePopper(
     anchorEl,
