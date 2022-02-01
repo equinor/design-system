@@ -14,6 +14,7 @@ specifiers:
   eslint-plugin-react: ^7.26.1
   eslint-plugin-react-hooks: ^4.2.0
   eslint-plugin-testing-library: ^4.12.4
+  jest-axe: ^5.0.1
   prettier: 2.4.1
   typescript: ^4.2.4
 
@@ -31,6 +32,7 @@ devDependencies:
   eslint-plugin-react: 7.26.1_eslint@7.32.0
   eslint-plugin-react-hooks: 4.2.0_eslint@7.32.0
   eslint-plugin-testing-library: 4.12.4_eslint@7.32.0+typescript@4.2.4
+  jest-axe: 5.0.1
   prettier: 2.4.1
   typescript: 4.2.4
 
@@ -544,8 +546,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /ansi-regex/5.0.0:
-    resolution: {integrity: sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==}
+  /ansi-regex/5.0.1:
+    resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
     dev: true
 
@@ -556,11 +558,16 @@ packages:
       color-convert: 1.9.3
     dev: true
 
-  /ansi-styles/4.3.0:
-    resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
-    engines: {node: '>=8'}
-    dependencies:
-      color-convert: 2.0.1
+  # /ansi-styles/4.3.0:
+  #   resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
+  #   engines: {node: '>=8'}
+  #   dependencies:
+  #     color-convert: 2.0.1
+  #   dev: true
+
+  /ansi-styles/5.2.0:
+    resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==}
+    engines: {node: '>=10'}
     dev: true
 
   /argparse/1.0.10:
@@ -632,8 +639,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /axe-core/4.1.3:
-    resolution: {integrity: sha512-vwPpH4Aj4122EW38mxO/fxhGKtwWTMLDIJfZ1He0Edbtjcfna/R3YB67yVhezUMzqc3Jr3+Ii50KRntlENL4xQ==}
+  # /axe-core/4.1.3:
+  #   resolution: {integrity: sha512-vwPpH4Aj4122EW38mxO/fxhGKtwWTMLDIJfZ1He0Edbtjcfna/R3YB67yVhezUMzqc3Jr3+Ii50KRntlENL4xQ==}
+  #   engines: {node: '>=4'}
+  #   dev: true
+
+  /axe-core/4.2.1:
+    resolution: {integrity: sha512-evY7DN8qSIbsW2H/TWQ1bX3sXN1d4MNb5Vb4n7BzPuCwRHdkZ1H2eNLuSh73EoQqkGKUtju2G2HCcjCfhvZIAA==}
     engines: {node: '>=4'}
     dev: true
 
@@ -802,6 +814,11 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       object-keys: 1.1.1
+    dev: true
+
+  /diff-sequences/27.4.0:
+    resolution: {integrity: sha512-YqiQzkrsmHMH5uuh8OdQFU9/ZpADnwzml8z0O5HvRNda+5UZsaX/xN+AAxfR2hWq1Y7HZnAzO9J5lJXOuDz2Ww==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dev: true
 
   /dir-glob/3.0.1:
@@ -1606,6 +1623,41 @@ packages:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
     dev: true
 
+  /jest-axe/5.0.1:
+    resolution: {integrity: sha512-MMOWA6gT4pcZGbTLS8ZEqABH08Lnj5bInfLPpn9ADWX2wFF++odbbh8csmSfkwKjHaioVPzlCtIypAtxFDx/rw==}
+    engines: {node: '>= 10.0.0'}
+    dependencies:
+      axe-core: 4.2.1
+      chalk: 4.1.0
+      jest-matcher-utils: 27.0.2
+      lodash.merge: 4.6.2
+    dev: true
+
+  /jest-diff/27.4.6:
+    resolution: {integrity: sha512-zjaB0sh0Lb13VyPsd92V7HkqF6yKRH9vm33rwBt7rPYrpQvS1nCvlIy2pICbKta+ZjWngYLNn4cCK4nyZkjS/w==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
+    dependencies:
+      chalk: 4.1.0
+      diff-sequences: 27.4.0
+      jest-get-type: 27.4.0
+      pretty-format: 27.4.6
+    dev: true
+
+  /jest-get-type/27.4.0:
+    resolution: {integrity: sha512-tk9o+ld5TWq41DkK14L4wox4s2D9MtTpKaAVzXfr5CUKm5ZK2ExcaFE0qls2W71zE/6R2TxxrK9w2r6svAFDBQ==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
+    dev: true
+
+  /jest-matcher-utils/27.0.2:
+    resolution: {integrity: sha512-Qczi5xnTNjkhcIB0Yy75Txt+Ez51xdhOxsukN7awzq2auZQGPHcQrJ623PZj0ECDEMOk2soxWx05EXdXGd1CbA==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
+    dependencies:
+      chalk: 4.1.0
+      jest-diff: 27.4.6
+      jest-get-type: 27.4.0
+      pretty-format: 27.4.6
+    dev: true
+
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: true
@@ -1923,6 +1975,15 @@ packages:
     hasBin: true
     dev: true
 
+  /pretty-format/27.4.6:
+    resolution: {integrity: sha512-NblstegA1y/RJW2VyML+3LlpFjzx62cUrtBIKIWDXEDkjNeleA7Od7nrzcs/VLQvAeV4CgSYhrN39DRN88Qi/g==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
+    dependencies:
+      ansi-regex: 5.0.1
+      ansi-styles: 5.2.0
+      react-is: 17.0.2
+    dev: true
+
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
@@ -1945,8 +2006,12 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /react-is/16.13.1:
-    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+  # /react-is/16.13.1:
+  #   resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+  #   dev: true
+
+  /react-is/17.0.2:
+    resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: true
 
   /regenerator-runtime/0.13.7:
@@ -2108,7 +2173,7 @@ packages:
     resolution: {integrity: sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==}
     engines: {node: '>=8'}
     dependencies:
-      ansi-regex: 5.0.0
+      ansi-regex: 5.0.1
     dev: true
 
   /strip-bom/3.0.0:
