@@ -21,8 +21,12 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Combobox.tokens'
-import { useToken, usePopper, useIsMounted } from '../../hooks'
-import { bordersTemplate } from '../../utils'
+import {
+  useToken,
+  usePopper,
+  useIsMounted,
+  bordersTemplate,
+} from '@equinor/eds-utils'
 import { ComboboxOption } from './Option'
 
 const Container = styled.div`
@@ -200,7 +204,6 @@ function ComboboxInner<T>(
     disablePortal,
     ...other
   } = props
-
   const anchorRef = useRef()
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>()
   const [containerEl, setContainerEl] = useState<HTMLElement>()

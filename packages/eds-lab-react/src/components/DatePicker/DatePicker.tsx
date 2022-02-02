@@ -6,7 +6,7 @@ import styled, { css, ThemeProvider } from 'styled-components'
 import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
 import { datePicker as tokens } from './DatePicker.tokens'
-import { outlineTemplate } from '../../utils'
+import { outlineTemplate } from '@equinor/eds-utils'
 import { Paper, Icon } from '@equinor/eds-core-react'
 
 registerLocale('en-gb', enGb)
