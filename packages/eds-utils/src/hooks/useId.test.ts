@@ -8,10 +8,10 @@ describe('useId', () => {
   })
   it('should return generated id in the format "eds-[XXXXX]" when override is NULL', () => {
     const { result } = renderHook(() => useId(null))
-    expect(result.current).toMatch(/eds-[0-9]{5}/)
+    expect(result.current).toMatch(/eds-[0-9]{1,5}/)
   })
   it('should return generated id in the format "eds-[type]-[XXXXX]" when override is NULL and type param is included', () => {
     const { result } = renderHook(() => useId(null, 'test'))
-    expect(result.current).toMatch(/eds-test-[0-9]{5}/)
+    expect(result.current).toMatch(/eds-test-[0-9]{1,5}/)
   })
 })
