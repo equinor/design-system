@@ -110,6 +110,7 @@ exports[`Button Matches snapshot 1`] = `
 <button
     class="c0"
     tabindex="0"
+    title="Button"
     type="button"
   >
     <span
