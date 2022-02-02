@@ -128,8 +128,10 @@ export const MenuItem = memo(
       <Item
         {...props}
         ref={useCombinedRefs<HTMLButtonElement>(ref, (el) => {
-          if (el !== null && isFocused) {
-            el.focus()
+          if (isFocused) {
+            requestAnimationFrame(() => {
+              if (el !== null) el.focus()
+            })
           }
         })}
         onFocus={() => toggleFocus(index)}
