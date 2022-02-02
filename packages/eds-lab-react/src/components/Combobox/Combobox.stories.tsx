@@ -11,7 +11,6 @@ import {
   Button,
   Density,
 } from '@equinor/eds-core-react'
-import { items } from '../../stories/data'
 import { Stack } from '../../../.storybook/components'
 import page from './Combobox.docs.mdx'
 
@@ -31,7 +30,21 @@ type MyOptionType = {
   trend?: string
 }
 
-const options = [
+export const counties = [
+  'Oslo',
+  'Rogaland',
+  'Møre og Romsdal',
+  'Nordland',
+  'Viken',
+  'Innlandet',
+  'Vestfold og Telemark',
+  'Agder',
+  'Vestland',
+  'Trøndelag',
+  'Troms og Finnmark',
+]
+
+const stocks = [
   {
     label: 'Microsoft Corporation',
     symbol: 'MSFT',
@@ -85,7 +98,7 @@ export const Introduction: Story<ComboboxProps<MyOptionType>> = (args) => {
 Introduction.bind({})
 Introduction.args = {
   label: 'Select a stock',
-  options,
+  options: stocks,
   multiple: false,
   readOnly: false,
   disabled: false,
@@ -103,7 +116,7 @@ export const Multiple: Story<ComboboxProps<MyOptionType>> = (args) => {
   )
 }
 Multiple.args = {
-  options,
+  options: stocks,
 }
 
 export const OptionLabel: Story<ComboboxProps<MyOptionType>> = (args) => {
@@ -128,7 +141,7 @@ export const OptionLabel: Story<ComboboxProps<MyOptionType>> = (args) => {
   )
 }
 OptionLabel.args = {
-  options,
+  options: stocks,
 }
 
 export const Readonly: Story<ComboboxProps<MyOptionType>> = (args) => {
@@ -155,7 +168,7 @@ export const Readonly: Story<ComboboxProps<MyOptionType>> = (args) => {
 }
 
 Readonly.args = {
-  options,
+  options: stocks,
 }
 
 export const Disabled: Story<ComboboxProps<MyOptionType>> = (args) => {
@@ -167,7 +180,7 @@ export const Disabled: Story<ComboboxProps<MyOptionType>> = (args) => {
   )
 }
 OptionLabel.args = {
-  options,
+  options: stocks,
 }
 
 export const DisabledOption: Story<ComboboxProps<MyOptionType>> = (args) => {
@@ -245,7 +258,7 @@ export const PreselectedOptions: Story<ComboboxProps<MyOptionType>> = (
 }
 
 PreselectedOptions.args = {
-  options,
+  options: stocks,
 }
 
 export const OnOptionsChange: Story<ComboboxProps<MyOptionType>> = (args) => {
@@ -281,7 +294,7 @@ export const OnOptionsChange: Story<ComboboxProps<MyOptionType>> = (args) => {
 }
 
 OnOptionsChange.args = {
-  options,
+  options: stocks,
 }
 
 export const Compact: Story<ComboboxProps<MyOptionType>> = (args) => {
@@ -315,7 +328,7 @@ export const Compact: Story<ComboboxProps<MyOptionType>> = (args) => {
 }
 
 Compact.args = {
-  options,
+  options: stocks,
 }
 
 type FormValues = {
@@ -394,7 +407,7 @@ export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
                       onChange(selectedItems)
                     }
                     label="Where are you from?"
-                    options={items.map((opt) => ({
+                    options={counties.map((opt) => ({
                       label: opt,
                     }))}
                     aria-invalid={errors.fabFieldOne ? 'true' : 'false'}
@@ -429,7 +442,7 @@ export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
                       onChange(selectedItems)
                     }
                     label="Choose your favourite county"
-                    options={items.map((opt) => ({
+                    options={counties.map((opt) => ({
                       label: opt,
                     }))}
                   />

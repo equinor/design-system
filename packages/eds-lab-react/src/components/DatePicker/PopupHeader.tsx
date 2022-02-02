@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { getMonth, getYear } from 'date-fns'
 import { datePicker as tokens } from './DatePicker.tokens'
 import { arrow_back, arrow_forward } from '@equinor/eds-icons'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate } from '@equinor/eds-utils'
 import { Typography, Icon, Button } from '@equinor/eds-core-react'
 
 type PopupHeaderProps = {

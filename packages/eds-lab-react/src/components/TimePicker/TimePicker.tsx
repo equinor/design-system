@@ -15,12 +15,12 @@ import {
 } from '@equinor/eds-core-react'
 import { time } from '@equinor/eds-icons'
 import {
+  useToken,
   spacingsTemplate,
   bordersTemplate,
   typographyTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 import { timePicker as tokens } from './TimePicker.tokens'
-import { useToken } from '../../hooks'
 
 const Container = styled.div`
   position: relative;
