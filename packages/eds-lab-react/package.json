@@ -98,6 +98,7 @@
     "@equinor/eds-core-react": "workspace:*",
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
+    "@equinor/eds-utils": "workspace:*",
     "@popperjs/core": "2.9.2",
     "date-fns": "^2.24.0",
     "downshift": "^6.1.7",
