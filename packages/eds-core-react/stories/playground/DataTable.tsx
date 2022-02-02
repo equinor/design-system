@@ -113,16 +113,13 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
-  const isElement = Boolean(anchorEl)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [focus, setFocus] = useState<MenuProps['focus']>(null)
+  const isOpen = Boolean(anchorEl)
 
   const openMenu = (focus: MenuProps['focus']) => {
-    setIsOpen(true)
     setFocus(focus)
   }
   const closeMenu = () => {
-    setIsOpen(false)
     setFocus(null)
     setAnchorEl(null)
   }
@@ -165,11 +162,11 @@ const MenuButton = ({ row }: { row: string[] }) => {
       >
         <Icon name="more_vertical" title="more"></Icon>
       </Button>
-      {isElement && (
+      {isOpen && (
         <Menu
           id={`menu-${row.toString()}`}
           aria-labelledby={`menu-button-${row.toString()}`}
-          open={isElement}
+          open={isOpen}
           anchorEl={anchorEl}
           focus={focus}
           onClose={closeMenu}
