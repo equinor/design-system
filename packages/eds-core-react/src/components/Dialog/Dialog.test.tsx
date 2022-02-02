@@ -53,7 +53,7 @@ describe('Dialog', () => {
     const modalComponent = screen.getByTestId('dialog')
     expect(modalComponent).toMatchSnapshot()
   })
-  it('should not fail any accessibility tests', async () => {
+  it('Should not fail any accessibility tests', async () => {
     const { container } = render(<Dialog open />)
     expect(await axe(container)).toHaveNoViolations()
   })

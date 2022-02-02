@@ -2,6 +2,7 @@
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { save } from '@equinor/eds-icons'
 import { Button } from './Button'
@@ -25,6 +26,10 @@ describe('Button', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Button>Button</Button>)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should not fail any accessibility tests', async () => {
+    const { container } = render(<Button />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Has provided icon when variant is icon', () => {
     render(
