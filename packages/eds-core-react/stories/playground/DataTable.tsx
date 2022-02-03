@@ -116,8 +116,12 @@ const MenuButton = ({ row }: { row: string[] }) => {
   const [focus, setFocus] = useState<MenuProps['focus']>(null)
   const isOpen = Boolean(anchorEl)
 
-  const openMenu = (focus: MenuProps['focus']) => {
+  const openMenu = (
+    focus: MenuProps['focus'],
+    e: React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
     setFocus(focus)
+    setAnchorEl(e.currentTarget)
   }
   const closeMenu = () => {
     setFocus(null)
@@ -126,13 +130,15 @@ const MenuButton = ({ row }: { row: string[] }) => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
+    if (key === 'Tab') {
+      return
+    }
     e.preventDefault()
     e.stopPropagation()
-    setAnchorEl(e.currentTarget)
 
     switch (key) {
       case 'Enter':
-        isOpen ? closeMenu() : openMenu('first')
+        isOpen ? closeMenu() : openMenu('first', e)
         break
       case 'ArrowDown':
         if (isOpen) {
