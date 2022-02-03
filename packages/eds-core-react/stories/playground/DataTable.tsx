@@ -141,14 +141,10 @@ const MenuButton = ({ row }: { row: string[] }) => {
         isOpen ? closeMenu() : openMenu('first', e)
         break
       case 'ArrowDown':
-        if (isOpen) {
-          setFocus('last')
-        }
+        isOpen ? closeMenu() : openMenu('first', e)
         break
       case 'ArrowUp':
-        if (isOpen) {
-          setFocus('first')
-        }
+        isOpen ? closeMenu() : openMenu('last', e)
         break
       default:
         break
