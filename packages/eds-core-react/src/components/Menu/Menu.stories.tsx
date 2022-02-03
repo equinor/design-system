@@ -68,6 +68,7 @@ export const Default: Story<MenuProps> = (args) => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
+    if (key === 'Tab') return
     e.preventDefault()
     e.stopPropagation()
     switch (key) {
@@ -136,6 +137,7 @@ export const Complex: Story<MenuProps> = () => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
+    if (key === 'Tab') return
     e.preventDefault()
     e.stopPropagation()
     switch (key) {
@@ -305,6 +307,7 @@ export const Compact: Story<MenuProps> = () => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
+    if (key === 'Tab') return
     e.preventDefault()
     e.stopPropagation()
     switch (key) {
