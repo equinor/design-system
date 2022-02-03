@@ -10,6 +10,7 @@ specifiers:
   '@babel/runtime': ^7.16.3
   '@equinor/eds-icons': workspace:*
   '@equinor/eds-tokens': workspace:*
+  '@equinor/eds-utils': workspace:*
   '@popperjs/core': 2.9.2
   '@rollup/plugin-babel': ^5.3.0
   '@rollup/plugin-commonjs': ^19.0.1
@@ -55,6 +56,7 @@ dependencies:
   '@babel/runtime': 7.16.3
   '@equinor/eds-icons': link:../eds-icons
   '@equinor/eds-tokens': link:../eds-tokens
+  '@equinor/eds-utils': link:../eds-utils
   '@popperjs/core': 2.9.2
   downshift: 6.1.7_react@17.0.2
   react-fast-compare: 3.2.0
