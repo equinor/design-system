@@ -1,6 +1,6 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { bordersTemplate } from '../../utils'
+import { bordersTemplate } from '@equinor/eds-utils'
 import { avatar as tokens } from './Avatar.tokens'
 
 type StyledAvatarProps = {

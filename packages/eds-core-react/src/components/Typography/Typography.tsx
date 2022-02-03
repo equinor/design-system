@@ -5,7 +5,7 @@ import {
   AnchorHTMLAttributes,
 } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate, outlineTemplate } from '../../utils'
+import { typographyTemplate, outlineTemplate } from '@equinor/eds-utils'
 import {
   quickVariants,
   colors,

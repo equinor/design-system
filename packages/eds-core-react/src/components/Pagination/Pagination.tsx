@@ -7,7 +7,7 @@ import {
   HTMLAttributes,
 } from 'react'
 import styled from 'styled-components'
-import { useIsMounted } from '../../hooks'
+import { useIsMounted } from '@equinor/eds-utils'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'

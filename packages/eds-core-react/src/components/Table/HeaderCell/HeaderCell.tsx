@@ -4,10 +4,10 @@ import {
   typographyTemplate,
   spacingsTemplate,
   bordersTemplate,
-} from '../../../utils'
+  useToken,
+} from '@equinor/eds-utils'
 import { token as tablehead, TableHeadToken } from './HeaderCell.tokens'
 import { useEds } from '../../EdsProvider'
-import { useToken } from '../../../hooks'
 
 type BaseProps = {
   theme: TableHeadToken

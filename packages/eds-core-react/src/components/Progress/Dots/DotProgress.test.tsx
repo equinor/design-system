@@ -5,7 +5,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import * as tokens from './DotProgress.tokens'
 import { DotProgress } from './DotProgress'
-import { trimSpaces } from '../../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 const StyledProgress = styled(DotProgress)`
   position: absolute;

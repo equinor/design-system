@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate } from '@equinor/eds-utils'
 
 const StyledDialogTitle = styled.div(({ theme, children }) => {
   return css`

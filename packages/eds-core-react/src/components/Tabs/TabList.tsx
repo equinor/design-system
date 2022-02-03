@@ -12,7 +12,7 @@ import {
   Children as ReactChildren,
 } from 'react'
 import styled from 'styled-components'
-import { useCombinedRefs } from '../../hooks'
+import { useCombinedRefs } from '@equinor/eds-utils'
 import { TabsContext } from './Tabs.context'
 import { Variants } from './Tabs.types'
 

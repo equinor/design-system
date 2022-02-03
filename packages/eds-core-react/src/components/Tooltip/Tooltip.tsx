@@ -14,15 +14,13 @@ import {
   typographyTemplate,
   bordersTemplate,
   joinHandlers,
-} from '../../utils'
-import {
   usePopper,
   Placement,
   useId,
   useGlobalKeyPress,
   useIsMounted,
   useCombinedRefs,
-} from '../../hooks'
+} from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 
 const StyledTooltip = styled.div<{ open: boolean }>`

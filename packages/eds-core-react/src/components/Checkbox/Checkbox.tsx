@@ -2,7 +2,7 @@
 import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { checkbox as tokens } from './Checkbox.tokens'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate } from '@equinor/eds-utils'
 import { CheckboxInput } from './Input'
 
 type StyledLabelProps = {

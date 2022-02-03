@@ -18,7 +18,7 @@ import {
   bordersTemplate,
   spacingsTemplate,
   outlineTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 
 const {
   entities: { chevron: chevronToken },

@@ -4,7 +4,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
-import { trimSpaces } from '../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 const {
   error: {

@@ -14,7 +14,7 @@ import type { FocusTarget } from './Menu.types'
 import { MenuItemProps, MenuItem } from './MenuItem'
 import { MenuSectionProps, MenuSection } from './MenuSection'
 import { menu as tokens } from './Menu.tokens'
-import { spacingsTemplate } from '../../utils'
+import { spacingsTemplate } from '@equinor/eds-utils'
 
 const List = styled.div`
   position: relative;

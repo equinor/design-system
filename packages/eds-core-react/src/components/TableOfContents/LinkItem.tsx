@@ -5,7 +5,7 @@ import {
   spacingsTemplate,
   outlineTemplate,
   bordersTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 
 const StyledLinkItem = styled.li(({ theme }) => {
   return css`

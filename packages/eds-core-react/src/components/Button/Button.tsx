@@ -7,8 +7,8 @@ import {
   bordersTemplate,
   outlineTemplate,
   spacingsTemplate,
-} from '../../utils'
-import { useToken } from '../../hooks'
+  useToken,
+} from '@equinor/eds-utils'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
 

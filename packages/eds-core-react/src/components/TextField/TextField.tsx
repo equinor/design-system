@@ -12,7 +12,7 @@ import { HelperText } from './HelperText'
 import { TextFieldProvider } from './TextField.context'
 import type { Variants } from './types'
 import { textfield as tokens } from './TextField.tokens'
-import { useToken, useId } from '../../hooks'
+import { useToken, useId } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
 const Container = styled.div`

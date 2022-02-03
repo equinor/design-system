@@ -6,10 +6,10 @@ import {
   typographyTemplate,
   spacingsTemplate,
   outlineTemplate,
-} from '../../utils'
+  useToken,
+} from '@equinor/eds-utils'
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
-import { useToken } from '../../hooks'
 
 const StyledInput = styled.input(({ theme }: StyledProps) => {
   const {

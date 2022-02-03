@@ -2,7 +2,7 @@ import { forwardRef, useState, HTMLAttributes } from 'react'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 import { token as tabsToken } from './Tabs.tokens'
-import { useId, useToken } from '../../hooks'
+import { useId, useToken } from '@equinor/eds-utils'
 import { ThemeProvider } from 'styled-components'
 import { useEds } from '../EdsProvider'
 
