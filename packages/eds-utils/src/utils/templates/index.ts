@@ -1,11 +1,9 @@
 import { css } from 'styled-components'
-import type { FlattenSimpleInterpolation } from 'styled-components'
+import { StyledCSS } from './common'
 import type { Typography, Border, Spacing } from '@equinor/eds-tokens'
 
 export * from './borders'
 export * from './focus'
-
-type StyledCSS = FlattenSimpleInterpolation
 
 export const typographyTemplate = (
   typography: Partial<Typography>,
