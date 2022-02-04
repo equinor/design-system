@@ -189,7 +189,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <ButtonBase title="Button" {...buttonProps}>
+        <ButtonBase {...buttonProps}>
           {fullWidth ? (
             <InnerFullWidth>{children}</InnerFullWidth>
           ) : (

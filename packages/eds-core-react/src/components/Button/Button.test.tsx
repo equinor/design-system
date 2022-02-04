@@ -27,8 +27,44 @@ describe('Button', () => {
     const { asFragment } = render(<Button>Button</Button>)
     expect(asFragment()).toMatchSnapshot()
   })
-  it('Should not fail any accessibility tests', async () => {
-    const { container } = render(<Button />)
+  it('Should not fail accessibility test when has text only', async () => {
+    const { container } = render(<Button>Button</Button>)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should not fail accessibility test when variant is ghost_icon', async () => {
+    const { container } = render(
+      <Button variant="ghost_icon">
+        <Icon name="save" title="save me test" />
+      </Button>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should not fail accessibility test when icon and text is defined', async () => {
+    const { container } = render(
+      <Button>
+        <Icon name="save" title="save"></Icon>Button
+      </Button>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should not fail accessibility test when used in form', async () => {
+    const { container } = render(
+      <form>
+        <Button type="submit">Submit button</Button>
+      </form>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should not fail accessibility test when label', async () => {
+    const { container } = render(
+      <label htmlFor="file-upload">
+        <Button as="span">Upload</Button>
+      </label>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should not fail accessibility test when link', async () => {
+    const { container } = render(<Button href="/">Link</Button>)
     expect(await axe(container)).toHaveNoViolations()
   })
   it('Has provided icon when variant is icon', () => {

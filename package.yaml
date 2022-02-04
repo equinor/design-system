@@ -7,9 +7,7 @@ scripts:
   lint:lab: pnpm run lint ./packages/eds-lab-react
   lint:utils: pnpm run lint ./packages/eds-utils
   init: pnpm multi install --force && pnpm run build
-  build: >-
-    pnpm run build:icons && pnpm run build:tokens && pnpm run build:core-react
-    && pnpm run build:lab
+  build: pnpm run build:icons && pnpm run build:tokens && pnpm run build:core-react && pnpm run build:lab
   build:core-react: pnpm --filter @equinor/eds-core-react run build
   build:lab: pnpm --filter @equinor/eds-lab-react run build
   build:utils: pnpm --filter @equinor/eds-utils run build
