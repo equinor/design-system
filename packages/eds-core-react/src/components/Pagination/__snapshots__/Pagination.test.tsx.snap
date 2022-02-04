@@ -156,7 +156,6 @@ exports[`Pagination Matches snapshot 1`] = `
           class="c3"
           disabled=""
           tabindex="-1"
-          title="Button"
           type="button"
         >
           <span
@@ -191,7 +190,6 @@ exports[`Pagination Matches snapshot 1`] = `
           aria-label="Current page, page 1"
           class="c3"
           tabindex="0"
-          title="Button"
           type="button"
         >
           <span
@@ -209,7 +207,6 @@ exports[`Pagination Matches snapshot 1`] = `
           class="c3"
           disabled=""
           tabindex="-1"
-          title="Button"
           type="button"
         >
           <span
