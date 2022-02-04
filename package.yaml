@@ -1,5 +1,5 @@
 name: eds
-engines: { pnpm: '>=5.13.5' }
+engines: {pnpm: '>=5.13.5'}
 scripts:
   lint: eslint
   lint:all: pnpm run lint .
@@ -29,6 +29,7 @@ scripts:
 devDependencies:
   '@babel/core': ^7.13.15
   '@babel/eslint-parser': ^7.13.14
+  '@types/jest-axe': ^3.5.3
   '@typescript-eslint/eslint-plugin': ^4.21.0
   '@typescript-eslint/parser': ^4.21.0
   eslint: ^7.32.0
@@ -40,5 +41,6 @@ devDependencies:
   eslint-plugin-react: ^7.26.1
   eslint-plugin-react-hooks: ^4.2.0
   eslint-plugin-testing-library: ^4.12.4
+  jest-axe: ^5.0.1
   prettier: 2.4.1
   typescript: ^4.2.4

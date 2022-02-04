@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { dialog as tokens } from './Dialog.tokens'
 import { Dialog } from '.'
@@ -51,6 +52,10 @@ describe('Dialog', () => {
     )
     const modalComponent = screen.getByTestId('dialog')
     expect(modalComponent).toMatchSnapshot()
+  })
+  it('Should not fail any accessibility tests', async () => {
+    const { container } = render(<Dialog open />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Is dismissable with button click', () => {
     render(<DismissableDialog data-testid="dialog" />)
