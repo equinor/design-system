@@ -94,7 +94,7 @@ jobs:
   types:
     name: Check packages types
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [build-utils]
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -103,6 +103,11 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-core
+      - name: Get eds-utils build
+        uses: actions/cache@v2
+        with:
+          path: ./packages/eds-utils
+          key: ${{ github.sha }}-build-utils
       - name: Run type checks in core-react
         run: node_modules/.bin/tsc -p ./packages/eds-core-react
       - name: Run type checks in tokens
