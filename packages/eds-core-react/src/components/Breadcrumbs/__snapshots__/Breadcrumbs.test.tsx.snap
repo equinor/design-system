@@ -2,7 +2,7 @@
 
 exports[`Breadcrumbs Matches snapshot 1`] = `
 <DocumentFragment>
-  .c3 {
+  .c2 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -35,7 +35,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   padding-right: 16px;
 }
 
-.c2 {
+.c3 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -46,7 +46,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c2:hover {
+  .c3:hover {
     -webkit-text-decoration: underline;
     text-decoration: underline;
     color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
@@ -64,7 +64,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
         class="c1"
       >
         <span
-          class="c2"
+          class="c2 c3"
         >
           Label 1
         </span>
@@ -73,7 +73,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
         aria-hidden="true"
       >
         <p
-          class="c3 c4"
+          class="c2 c4"
         >
           /
         </p>
@@ -82,7 +82,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
         class="c1"
       >
         <span
-          class="c2"
+          class="c2 c3"
         >
           Label 2
         </span>
@@ -91,7 +91,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
         aria-hidden="true"
       >
         <p
-          class="c3 c4"
+          class="c2 c4"
         >
           /
         </p>
@@ -100,7 +100,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
         class="c1"
       >
         <span
-          class="c2"
+          class="c2 c3"
         >
           Label 3
         </span>
