@@ -5,7 +5,8 @@ module.exports = {
     '.(js|ts|tsx)': 'babel-jest',
   },
   moduleNameMapper: {
-    '\\.(css)$': '<rootDir>/src/test/__mocks__/styleMock.js',
+    '\\.(css)$':
+      '<rootDir>/node_modules/@equinor/eds-utils/src/test/__mocks__/styleMock.js',
   },
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
