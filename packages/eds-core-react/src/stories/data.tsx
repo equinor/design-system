@@ -66,6 +66,14 @@ export const data: Data[] = [
   },
 ]
 
+export const multilineText: Data = {
+  number: '77-999',
+  description: 'Pourouma cecropiaefoli',
+  origin:
+    'Tropical South America, the western Amazon Basin in northern Bolivia, western Brazil, southeastern Colombia, eastern Ecuador, eastern Peru, or southern Venezuela',
+  price: 2.3,
+}
+
 export type SortDirection = 'ascending' | 'descending' | 'none'
 export type Column = {
   name: string | React.ReactNode

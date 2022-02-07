@@ -32,21 +32,24 @@ const {
 
 export const button: ButtonToken = {
   background: 'transparent',
-  height: buttonHeight,
+  height: `var(--eds_button__height, ${buttonHeight})`,
   typography: {
     ...buttonTypography,
     textAlign: 'center',
+    fontSize: `var(--eds_button__font_size, ${buttonTypography.fontSize})`,
   },
   border: {
     type: 'border',
-    width: '1px',
+    width: `var(--eds_button__border_width, 1px)`,
     color: 'transparent',
-    radius: buttonBorderRadius,
+    radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
     style: 'solid',
   },
   spacings: {
-    left: medium,
-    right: medium,
+    top: 'var(--eds_button__padding_y, 0)',
+    bottom: 'var(--eds_button__padding_y, 0)',
+    left: `var(--eds_button__padding_x, ${medium})`,
+    right: `var(--eds_button__padding_x, ${medium})`,
   },
   clickbound: {
     height: clicboundHeight,
@@ -58,8 +61,8 @@ export const button: ButtonToken = {
   },
   entities: {
     icon: {
-      height: '24px',
-      width: '24px',
+      height: 'var(--eds_button__icon__size, 24px)',
+      width: 'var(--eds_button__icon__size, 24px)',
     },
   },
   states: {
@@ -68,7 +71,7 @@ export const button: ButtonToken = {
         type: 'border',
         width: '1px',
         color: 'transparent',
-        radius: buttonBorderRadius,
+        radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
         style: 'solid',
       },
     },
@@ -98,7 +101,11 @@ export const button: ButtonToken = {
   },
   modes: {
     compact: {
-      height: compactButtonHeight,
+      height: `var(--eds_button__height_compact, ${compactButtonHeight})`,
+      spacings: {
+        top: 'var(--eds_button__padding_y_compact, 0)',
+        bottom: 'var(--eds_button__padding_y_compact, 0)',
+      },
       clickbound: {
         height: compactClickboundHeight,
         width: '100%',

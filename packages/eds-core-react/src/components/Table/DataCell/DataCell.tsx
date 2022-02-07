@@ -16,7 +16,7 @@ type BaseProps = {
 }
 
 const StyledTableCell = styled.td(({ theme, color }: BaseProps) => {
-  const { height, typography, spacings, border } = theme
+  const { height, typography, spacings, border, align } = theme
 
   const backgroundColor =
     color === 'error' ? theme.validation.error?.background : ''
@@ -25,6 +25,7 @@ const StyledTableCell = styled.td(({ theme, color }: BaseProps) => {
     min-height: ${height};
     height: ${height};
     background: ${backgroundColor};
+    vertical-align: ${align.vertical};
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
     ${bordersTemplate(border)}

@@ -34,6 +34,11 @@ export type Spacing = {
   bottom?: string
 }
 
+export type Align = {
+  horizontal?: string
+  vertical?: string
+}
+
 export type SpacingTokens = {
   comfortable: {
     xxx_large: string

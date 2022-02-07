@@ -1,3 +1,4 @@
+import { CSSProp } from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import mergeDeepRight from 'ramda/src/mergeDeepRight'
 import type { ComponentToken } from '@equinor/eds-tokens'
@@ -48,8 +49,11 @@ export type TableCellToken = ComponentToken & {
 }
 
 export const tableCell: TableCellToken = {
-  height: '48px',
+  height: 'var(--eds_table__cell__height, 48px)',
   background: backgroundColor,
+  align: {
+    vertical: 'var(--eds_table__cell__vertical_align, inherit)',
+  },
   border: {
     type: 'bordergroup',
     bottom: {
@@ -59,14 +63,15 @@ export const tableCell: TableCellToken = {
     },
   },
   spacings: {
-    top: '0',
-    bottom: '0',
-    left: medium,
-    right: medium,
+    top: 'var(--eds_table__cell__padding_y, 0)',
+    bottom: 'var(--eds_table__cell__padding_y, 0)',
+    left: `var(--eds_table__cell__padding_x, ${medium})`,
+    right: `var(--eds_table__cell__padding_x, ${medium})`,
   },
   typography: {
     ...cellTypography,
     color: typographyColor,
+    fontSize: `var(--eds_table__font_size, ${cellTypography.fontSize})`,
   },
   states: {
     active: {
@@ -107,10 +112,16 @@ export const tableCell: TableCellToken = {
   },
   modes: {
     compact: {
-      height: '32px',
+      height: 'var(--eds_table__cell__height_compact, 32px)',
       typography: {
         ...compactTypography.table.cell_text,
         color: typographyColor,
+      },
+      spacings: {
+        top: 'var(--eds_table__cell__padding_y_compact, 0)',
+        bottom: 'var(--eds_table__cell__padding_y_compact, 0)',
+        left: `var(--eds_table__cell__padding_x_compact, ${medium})`,
+        right: `var(--eds_table__cell__padding_x_compact, ${medium})`,
       },
     },
   },

@@ -44,7 +44,7 @@ exports[`MultiSelect Matches snapshot 1`] = `
 exports[`MultiSelect Matches snapshot 2`] = `
 .c2 {
   display: grid;
-  grid-gap: 8px;
+  grid-gap: var(--eds_button__gap,8px);
   grid-auto-flow: column;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -55,6 +55,11 @@ exports[`MultiSelect Matches snapshot 2`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.c2 >:is(svg,img) {
+  margin-top: var(--eds_button__icon__margin_y,0);
+  margin-bottom: var(--eds_button__icon__margin_y,0);
 }
 
 .c0 {
@@ -69,13 +74,15 @@ exports[`MultiSelect Matches snapshot 2`] = `
   height: 48px;
   width: 48px;
   padding-left: 0;
+  padding-top: var(--eds_button__padding_y,0);
   padding-right: 0;
+  padding-bottom: var(--eds_button__padding_y,0);
   border: 0px solid transparent;
   border-radius: 50%;
   margin: 0;
   color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   font-family: Equinor;
-  font-size: 0.875rem;
+  font-size: var(--eds_button__font_size,0.875rem);
   font-weight: 500;
   line-height: 1.143em;
   text-align: center;

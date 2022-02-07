@@ -31,9 +31,16 @@ const {
 export type TableHeadToken = ComponentToken
 
 export const token: TableHeadToken = {
-  height: '48px',
+  height: 'var(--eds_table__cell__height, 48px)',
   background: backgroundColor,
-  typography: { ...cellTypography, color: typographyColor },
+  align: {
+    vertical: 'var(--eds_table__cell__vertical_align, inherit)',
+  },
+  typography: {
+    ...cellTypography,
+    color: typographyColor,
+    fontSize: `var(--eds_table__font_size, ${cellTypography.fontSize})`,
+  },
   border: {
     type: 'bordergroup',
     bottom: {
@@ -44,10 +51,10 @@ export const token: TableHeadToken = {
     },
   },
   spacings: {
-    top: '0',
-    bottom: '0',
-    left: medium,
-    right: medium,
+    top: 'var(--eds_table__cell__padding_y, 0)',
+    bottom: 'var(--eds_table__cell__padding_y, 0)',
+    left: `var(--eds_table__cell__padding_x, ${medium})`,
+    right: `var(--eds_table__cell__padding_x, ${medium})`,
   },
   states: {
     active: {
@@ -89,8 +96,14 @@ export const token: TableHeadToken = {
   },
   modes: {
     compact: {
-      height: '32px',
+      height: 'var(--eds_table__cell__height_compact, 32px)',
       typography: compactTypography.table.cell_header,
+      spacings: {
+        top: 'var(--eds_table__cell__padding_y_compact, 0)',
+        bottom: 'var(--eds_table__cell__padding_y_compact, 0)',
+        left: `var(--eds_table__cell__padding_x_compact, ${medium})`,
+        right: `var(--eds_table__cell__padding_x_compact, ${medium})`,
+      },
     },
   },
 }

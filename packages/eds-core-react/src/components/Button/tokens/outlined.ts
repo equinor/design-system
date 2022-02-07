@@ -32,7 +32,7 @@ export const primary: ButtonToken = mergeDeepRight(button, {
     style: 'solid',
     width: '1px',
     color: primaryColor,
-    radius: buttonBorderRadius,
+    radius: `var(--eds_button__radius, ${buttonBorderRadius})`,
   },
   states: {
     hover: {

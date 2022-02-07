@@ -11,28 +11,30 @@ const FullWidthInner = styled.span`
   display: flex;
   align-items: center;
 
-  > img:first-child,
-  > svg:first-child {
-    margin-right: 8px;
+  > :is(svg, img) {
+    margin-top: var(--eds_button__margin_y, inherit);
+    margin-bottom: var(--eds_button__margin_y, inherit);
   }
 
-  > img:last-child,
-  > svg:last-child {
-    margin-left: 8px;
+  > :is(svg, img):first-child {
+    margin-right: var(--eds_button__fullwidth__icon__margin_x, 8px);
   }
 
-  > img:only-child,
-  > svg:only-child {
+  > :is(svg, img):last-child {
+    margin-left: var(--eds_button__fullwidth__icon__margin_x, 8px);
+  }
+
+  > :is(svg, img):only-child {
     margin-left: auto;
     margin-right: auto;
   }
 
   > span:first-child {
-    margin-left: 32px;
+    margin-left: var(--eds_button__fullwidth__margin_x, 32px);
   }
 
   > span:last-child {
-    margin-right: 32px;
+    margin-right: var(--eds_button__fullwidth__margin_x, 32px);
   }
 
   > span:only-child {

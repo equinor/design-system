@@ -46,11 +46,16 @@ const getToken = (variant: Variants, color: Colors): ButtonToken => {
 
 const Inner = styled.span`
   display: grid;
-  grid-gap: 8px;
+  grid-gap: var(--eds_button__gap, 8px);
   grid-auto-flow: column;
   align-items: center;
   height: 100%;
   justify-content: center;
+
+  & > :is(svg, img) {
+    margin-top: var(--eds_button__icon__margin_y, 0);
+    margin-bottom: var(--eds_button__icon__margin_y, 0);
+  }
 `
 
 const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
