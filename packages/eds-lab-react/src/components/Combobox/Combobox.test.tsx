@@ -21,11 +21,8 @@ describe('Combobox', () => {
   it('Matches snapshot', () => {
     render(<Combobox options={items} label={labelText} />)
     const optionsNode = screen.getAllByLabelText(labelText)[1]
-    const buttonNode = screen.getByLabelText('toggle options', {
-      selector: 'button',
-    })
+
     expect(optionsNode).toMatchSnapshot()
-    expect(buttonNode).toMatchSnapshot()
   })
   it('Has provided label', () => {
     render(<Combobox label={labelText} options={items} id="id" />)
