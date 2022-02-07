@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Avatar } from '.'
 import { avatar as tokens } from './Avatar.tokens'
@@ -18,6 +19,10 @@ describe('Avatar', () => {
     const { asFragment } = render(<Avatar alt="avatar" src={src} />)
 
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Avatar alt="avatar" />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Can extend the css for the component', () => {
     render(<StyledAvatar alt="avatar" data-testid="avatar" />)
