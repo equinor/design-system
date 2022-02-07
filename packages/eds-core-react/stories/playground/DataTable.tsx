@@ -11,6 +11,7 @@ import {
   Switch,
   Button,
   Menu,
+  MenuProps,
   SingleSelect,
 } from '../../src'
 import { save, more_vertical, copy, folder } from '@equinor/eds-icons'
@@ -112,7 +113,44 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
+  const [focus, setFocus] = useState<MenuProps['focus']>(null)
   const isOpen = Boolean(anchorEl)
+
+  const openMenu = (
+    focus: MenuProps['focus'],
+    e: React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    setFocus(focus)
+    setAnchorEl(e.currentTarget)
+  }
+  const closeMenu = () => {
+    setFocus(null)
+    setAnchorEl(null)
+  }
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const { key } = e
+    if (key === 'Tab') {
+      return
+    }
+    e.preventDefault()
+    e.stopPropagation()
+
+    switch (key) {
+      case 'Enter':
+        isOpen ? closeMenu() : openMenu('first', e)
+        break
+      case 'ArrowDown':
+        isOpen ? closeMenu() : openMenu('first', e)
+        break
+      case 'ArrowUp':
+        isOpen ? closeMenu() : openMenu('last', e)
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <>
       <Button
@@ -122,6 +160,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
         aria-haspopup="true"
         aria-expanded={isOpen}
         onClick={(e) => setAnchorEl(e.currentTarget)}
+        onKeyDown={onKeyPress}
       >
         <Icon name="more_vertical" title="more"></Icon>
       </Button>
@@ -131,9 +170,10 @@ const MenuButton = ({ row }: { row: string[] }) => {
           aria-labelledby={`menu-button-${row.toString()}`}
           open={isOpen}
           anchorEl={anchorEl}
-          onClose={() => setAnchorEl(null)}
+          focus={focus}
+          onClose={closeMenu}
         >
-          <Menu.Item>
+          <Menu.Item onClick={closeMenu}>
             <Icon name="folder" size={16} />
             <Typography group="navigation" variant="menu_title">
               Open
@@ -147,7 +187,7 @@ const MenuButton = ({ row }: { row: string[] }) => {
               CTRL+O
             </Typography>
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item onClick={closeMenu}>
             <Icon name="copy" size={16} />
             <Typography group="navigation" variant="menu_title">
               Copy

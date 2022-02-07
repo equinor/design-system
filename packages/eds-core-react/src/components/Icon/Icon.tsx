@@ -1,8 +1,8 @@
 import { forwardRef, Ref, SVGProps } from 'react'
-import styled from 'styled-components'
-import { get } from './library'
 import type { IconData } from '@equinor/eds-icons'
-import type { IconBasket, Name } from './Icon.types'
+import styled from 'styled-components'
+import type { Name } from './Icon.types'
+import { get } from './library'
 
 type StyledProps = {
   height: number
@@ -12,10 +12,9 @@ type StyledProps = {
   rotation?: number
 }
 
-type SvgProps = {
+type SimpleSVGProps = {
   name: string
   viewBox: string
-  className: string
   rotation?: number
   title?: string
   role?: string
@@ -23,12 +22,7 @@ type SvgProps = {
   'aria-labelledby'?: string
 }
 
-const customIcon = (icon: IconData): IconBasket => ({
-  icon,
-  count: Math.floor(Math.random() * 1000),
-})
-
-const transform = ({ rotation }: SvgProps): string =>
+const transform = ({ rotation }: SimpleSVGProps): string =>
   rotation ? `transform: rotate(${rotation}deg)` : ''
 
 const StyledSvg = styled.svg.attrs<StyledProps>(({ height, width, fill }) => ({
@@ -48,13 +42,30 @@ const StyledPath = styled.path.attrs<StyledProps>(({ height, size }) => ({
   transform: size / height !== 1 ? `scale(${size / height})` : null,
 }))``
 
+const customIcon = (icon: IconData) => ({
+  icon,
+  count: Math.floor(Math.random() * 1000),
+})
+
+const findIcon = (name: string, data: IconData, size: number) => {
+  // eslint-disable-next-line prefer-const
+  let { icon, count } = data ? customIcon(data) : get(name)
+
+  if (size < 24) {
+    // fallback to normal icon if small is not made yet
+    icon = icon.sizes?.small || icon
+  }
+
+  return { icon, count }
+}
+
 export type IconProps = {
   /** Title for icon when used semantically */
   title?: string
   /** Color */
   color?: string
   /** Size */
-  size?: 16 | 24 | 32 | 40 | 48
+  size?: 16 | 18 | 24 | 32 | 40 | 48
   /** Rotation */
   rotation?: 0 | 90 | 180 | 270
   /** Name */
@@ -66,19 +77,11 @@ export type IconProps = {
 } & SVGProps<SVGSVGElement>
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
-  {
-    size = 24,
-    color = 'currentColor',
-    name,
-    className,
-    rotation,
-    title,
-    data,
-    ...rest
-  },
+  { size = 24, color = 'currentColor', name, rotation, title, data, ...rest },
   ref,
 ) {
-  const { icon, count }: IconBasket = data ? customIcon(data) : get(name)
+  // eslint-disable-next-line prefer-const
+  const { icon, count } = findIcon(name, data, size)
 
   if (typeof icon === 'undefined') {
     throw Error(
@@ -86,22 +89,23 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     )
   }
 
-  let svgProps: SvgProps & StyledProps = {
-    height: size,
-    width: size,
+  const height = size ? size : parseInt(icon.width)
+  const width = size ? size : parseInt(icon.height)
+
+  let svgProps: SimpleSVGProps & StyledProps = {
+    height,
+    width,
     fill: color,
-    viewBox: `0 0 ${size} ${size}`,
-    className,
+    viewBox: `0 0 ${width} ${height}`,
     rotation,
     name,
     'aria-hidden': true,
-    title: null,
   }
 
   const pathProps = {
     d: icon.svgPathData,
     height: icon.height ? icon.height : size,
-    size,
+    size: size || icon.height,
   }
 
   // Accessibility

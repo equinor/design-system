@@ -1,11 +1,9 @@
 import { forwardRef } from 'react'
+import { createPortal } from 'react-dom'
 import styled, { css, ThemeProvider } from 'styled-components'
-import {
-  typographyTemplate,
-  spacingsTemplate,
-  bordersTemplate,
-} from '../../utils'
+import { typographyTemplate, bordersTemplate } from '../../utils'
 import { Paper } from '../Paper'
+import { Scrim } from '../Scrim'
 import { dialog as dialogToken } from './Dialog.tokens'
 import { useEds } from '../EdsProvider'
 import { useToken } from '../../hooks'
@@ -21,27 +19,55 @@ const StyledDialog = styled(Paper).attrs<DialogProps>({
     width: ${theme.width};
     background: ${theme.background};
     display: grid;
+    grid-auto-columns: auto;
     ${typographyTemplate(theme.typography)}
-    ${spacingsTemplate(theme.spacings)}
-  ${bordersTemplate(theme.border)}
+    ${bordersTemplate(theme.border)}
+    grid-gap: ${theme.spacings.bottom};
   `
 })
 
-export type DialogProps = React.HTMLAttributes<HTMLDivElement>
+export type DialogProps = {
+  /** Whether Dialog can be dismissed with esc key and outside click
+   */
+  isDismissable?: boolean
+  /** programmatically toggle dialog */
+  open: boolean
+  /** callback to handle closing scrim */
+  onClose?: () => void
+} & React.HTMLAttributes<HTMLDivElement>
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
-  { children, ...props },
+  { children, open, onClose, isDismissable = false, ...props },
   ref,
 ) {
+  const rest = {
+    ...props,
+    open,
+    ref,
+  }
   const { density } = useEds()
   const token = useToken({ density }, dialogToken)
+  const handleDismiss = () => {
+    onClose && onClose()
+  }
+
+  if (!open) {
+    return null
+  }
 
   return (
-    <ThemeProvider theme={token}>
-      <StyledDialog elevation="above_scrim" {...props} ref={ref}>
-        {children}
-      </StyledDialog>
-    </ThemeProvider>
+    <>
+      {createPortal(
+        <ThemeProvider theme={token}>
+          <Scrim open isDismissable={isDismissable} onClose={handleDismiss}>
+            <StyledDialog elevation="above_scrim" {...rest}>
+              {children}
+            </StyledDialog>
+          </Scrim>
+        </ThemeProvider>,
+        document.body,
+      )}
+    </>
   )
 })
 

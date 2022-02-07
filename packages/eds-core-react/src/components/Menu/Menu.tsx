@@ -70,7 +70,11 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
 
     useGlobalKeyPress('Enter', () => {
       if (open && onClose !== null) {
-        if (window.document.contains(anchorEl)) anchorEl.focus()
+        setTimeout(() => {
+          if (window.document.contains(anchorEl)) {
+            anchorEl.focus()
+          }
+        }, 0)
       }
     })
 

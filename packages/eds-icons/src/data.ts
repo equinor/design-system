@@ -45,15 +45,6 @@ export const fullscreen_exit: IconData = {
     'M5 8h3V5h2v5H5V8zm3 8H5v-2h5v5H8v-3zm6 3h2v-3h3v-2h-5v5zm2-14v3h3v2h-5V5h2z',
 }
 
-export const fullscreen: IconData = {
-  name: 'fullscreen',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M7 10H5V5h5v2H7v3zm-2 4h2v3h3v2H5v-5zm12 3h-3v2h5v-5h-2v3zM14 7V5h5v5h-2V7h-3z',
-}
-
 export const vertical_split: IconData = {
   name: 'vertical_split',
   prefix: 'eds',
@@ -487,6 +478,25 @@ export const miniplayer_fullscreen: IconData = {
     'M3 2h18c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-7v2h2v2H8v-2h2v-2H3c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2zm0 2v12h18V4H3zm16 9h1v2h-2v-1h1v-1zm-7 0h1v1h1v1h-2v-2zm8-4v2h-1v-1h-1V9h2zm-8 2V9h2v1h-1v1h-1z',
 }
 
+export const fullscreen: IconData = {
+  name: 'fullscreen',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M7 10H5V5h5v2H7v3zm-2 4h2v3h3v2H5v-5zm12 3h-3v2h5v-5h-2v3zM14 7V5h5v5h-2V7h-3z',
+  sizes: {
+    small: {
+      name: 'fullscreen_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M5 7H3V3h4v2H5v2zm-2 4h2v2h2v2H3v-4zm10 2h-2v2h4v-4h-2v2zm-2-8V3h4v4h-2V5h-2z',
+    },
+  },
+}
+
 export const select_all: IconData = {
   name: 'select_all',
   prefix: 'eds',
@@ -836,15 +846,6 @@ export const setting_backup_restore: IconData = {
     'M4.5 12a9 9 0 1 1 3.52 7.14l1.42-1.44A6.995 6.995 0 0 0 20.5 12c0-3.87-3.13-7-7-7s-7 3.13-7 7h3l-4 4-4-4h3zm9-2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z',
 }
 
-export const search: IconData = {
-  name: 'search',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M14.966 14.255h.79l4.99 5-1.49 1.49-5-4.99v-.79l-.27-.28a6.471 6.471 0 0 1-4.23 1.57 6.5 6.5 0 1 1 6.5-6.5c0 1.61-.59 3.09-1.57 4.23l.28.27zm-9.71-4.5c0 2.49 2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5-4.5 2.01-4.5 4.5z',
-}
-
 export const searched_history: IconData = {
   name: 'searched_history',
   prefix: 'eds',
@@ -996,24 +997,6 @@ export const close_circle_outlined: IconData = {
     'M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-9.41L15.59 7 17 8.41 13.41 12 17 15.59 15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59z',
 }
 
-export const close: IconData = {
-  name: 'close',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z',
-}
-
-export const check_circle_outlined: IconData = {
-  name: 'check_circle_outlined',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-5.83 6.59-6.59L18 9l-8 8-4-4 1.41-1.41L10 14.17z',
-}
-
 export const check: IconData = {
   name: 'check',
   prefix: 'eds',
@@ -1021,33 +1004,6 @@ export const check: IconData = {
   width: '24',
   svgPathData:
     'm8.795 15.875-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41-10.59 10.58z',
-}
-
-export const checkbox: IconData = {
-  name: 'checkbox',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm4.3 13.29c.39.39 1.02.39 1.41 0l7.58-7.59a.996.996 0 1 0-1.41-1.41L10 14.17l-2.88-2.88a.996.996 0 1 0-1.41 1.41l3.59 3.59z',
-}
-
-export const checkbox_outline: IconData = {
-  name: 'checkbox_outline',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z',
-}
-
-export const checkbox_indeterminate: IconData = {
-  name: 'checkbox_indeterminate',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm3 10h8c.55 0 1-.45 1-1s-.45-1-1-1H8c-.55 0-1 .45-1 1s.45 1 1 1z',
 }
 
 export const radio_button_selected: IconData = {
@@ -1104,6 +1060,120 @@ export const log_in: IconData = {
     'M17.95 4H10V2h7.95a2 2 0 0 1 1.988 2v16a2 2 0 0 1-1.988 2H10v-2h7.95V4zM9.366 17.3l-1.491-1.4 2.956-2.9H4v-2h6.857L7.875 8l1.391-1.4 5.367 5.4-5.267 5.3z',
 }
 
+export const check_circle_outlined: IconData = {
+  name: 'check_circle_outlined',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-5.83 6.59-6.59L18 9l-8 8-4-4 1.41-1.41L10 14.17z',
+  sizes: {
+    small: {
+      name: 'check_circle_outlined_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M9 1C4.584 1 1 4.584 1 9s3.584 8 8 8 8-3.584 8-8-3.584-8-8-8zm0 14c-3.308 0-6-2.693-6-6 0-3.308 2.692-6 6-6 3.307 0 6 2.692 6 6 0 3.307-2.693 6-6 6zm-1.599-4.264 5.272-5.272L13.801 6.6l-6.4 6.4-3.2-3.2L5.33 8.672l2.072 2.064z',
+    },
+  },
+}
+
+export const close: IconData = {
+  name: 'close',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z',
+  sizes: {
+    small: {
+      name: 'close_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M14 5.007 12.993 4 9 7.993 5.007 4 4 5.007 7.993 9 4 12.993 5.007 14 9 10.007 12.993 14 14 12.993 10.007 9 14 5.007z',
+    },
+  },
+}
+
+export const search: IconData = {
+  name: 'search',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M14.966 14.255h.79l4.99 5-1.49 1.49-5-4.99v-.79l-.27-.28a6.471 6.471 0 0 1-4.23 1.57 6.5 6.5 0 1 1 6.5-6.5c0 1.61-.59 3.09-1.57 4.23l.28.27zm-9.71-4.5c0 2.49 2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5-4.5 2.01-4.5 4.5z',
+  sizes: {
+    small: {
+      name: 'search_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M11.034 10.547h.542L15 13.977 13.978 15l-3.43-3.424v-.542l-.186-.192A4.44 4.44 0 0 1 7.46 11.92a4.46 4.46 0 1 1 4.46-4.46 4.44 4.44 0 0 1-1.078 2.903l.192.185zM5 7.5C5 8.883 6.117 10 7.5 10S10 8.883 10 7.5 8.883 5 7.5 5A2.497 2.497 0 0 0 5 7.5z',
+    },
+  },
+}
+
+export const checkbox: IconData = {
+  name: 'checkbox',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm4.3 13.29c.39.39 1.02.39 1.41 0l7.58-7.59a.996.996 0 1 0-1.41-1.41L10 14.17l-2.88-2.88a.996.996 0 1 0-1.41 1.41l3.59 3.59z',
+  sizes: {
+    small: {
+      name: 'checkbox_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M3.75 2h10.5c.825 0 1.75.925 1.75 1.75v10.5c0 .825-.925 1.75-1.75 1.75H3.75c-.825 0-1.662-.925-1.662-1.75V3.75c0-.825.837-1.75 1.662-1.75zm3.225 10.217a.747.747 0 0 0 1.057 0l5.685-5.692a.747.747 0 1 0-1.057-1.058l-5.16 5.16-2.16-2.16a.747.747 0 1 0-1.058 1.058l2.693 2.692z',
+    },
+  },
+}
+
+export const checkbox_outline: IconData = {
+  name: 'checkbox_outline',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z',
+  sizes: {
+    small: {
+      name: 'checkbox_outline_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M3.5 2H14c.825 0 2 .925 2 1.75v10.5c0 .825-1.175 1.75-2 1.75H3.5c-.825 0-1.5-.925-1.5-1.75V3.75C2 2.925 2.675 2 3.5 2zm1.214 12h8.572a.716.716 0 0 0 .714-.714V4.714A.716.716 0 0 0 13.286 4H4.714A.716.716 0 0 0 4 4.714v8.572c0 .393.321.714.714.714z',
+    },
+  },
+}
+
+export const checkbox_indeterminate: IconData = {
+  name: 'checkbox_indeterminate',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm3 10h8c.55 0 1-.45 1-1s-.45-1-1-1H8c-.55 0-1 .45-1 1s.45 1 1 1z',
+  sizes: {
+    small: {
+      name: 'checkbox_indeterminate_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M3.5 2H14c.825 0 2 .925 2 1.75V14c0 .825-1.175 2-2 2H4c-.825 0-2-1.175-2-2V3.75C2 2.925 2.675 2 3.5 2zm2.3 8h6.4c.44 0 .8-.45.8-1s-.36-1-.8-1H5.8c-.44 0-.8.45-.8 1s.36 1 .8 1z',
+    },
+  },
+}
+
 export const calendar_event: IconData = {
   name: 'calendar_event',
   prefix: 'eds',
@@ -1149,15 +1219,6 @@ export const timer_off: IconData = {
     'M9.625 1h6v2h-6V1zm2 7v.86l2 2V8h-2zm8 5c0-3.87-3.13-7-7-7-1.12 0-2.18.27-3.12.74l-1.47-1.47c1.34-.8 2.91-1.27 4.59-1.27 2.12 0 4.07.74 5.62 1.98l1.42-1.42c.51.42.98.9 1.41 1.41l-1.42 1.42a8.963 8.963 0 0 1 1.97 5.61c0 1.68-.47 3.25-1.27 4.59l-1.47-1.47c.47-.94.74-2 .74-3.12zM3.785 3.86l-1.41 1.41 2.75 2.75a9.043 9.043 0 0 0-1.5 4.98c0 4.97 4.02 9 9 9 1.84 0 3.55-.55 4.98-1.5l2.5 2.5 1.41-1.41L3.785 3.86zM5.625 13c0 3.87 3.13 7 7 7 1.29 0 2.49-.35 3.53-.95l-9.57-9.57a6.876 6.876 0 0 0-.96 3.52z',
 }
 
-export const calendar: IconData = {
-  name: 'calendar',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 6v2h14V6H5z',
-}
-
 export const calendar_today: IconData = {
   name: 'calendar_today',
   prefix: 'eds',
@@ -1165,15 +1226,6 @@ export const calendar_today: IconData = {
   width: '24',
   svgPathData:
     'M18 4h1c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V2h2v2h8V2h2v2zM5 10v10h14V10H5zm14-2H5V6h14v2zm-7 4H7v5h5v-5z',
-}
-
-export const time: IconData = {
-  name: 'time',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h1.5v5.2l4.5 2.7-.8 1.3L11 13V7z',
 }
 
 export const calendar_date_range: IconData = {
@@ -1246,6 +1298,44 @@ export const hourglass_full: IconData = {
   width: '24',
   svgPathData:
     'M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z',
+}
+
+export const calendar: IconData = {
+  name: 'calendar',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 6v2h14V6H5z',
+  sizes: {
+    small: {
+      name: 'calendar_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M13.5 3H13V2h-1v1H6V2H5v1h-.5C3.5 3 3 3.5 3 4.6v9.1c0 .715.6 1.3 1.333 1.3h9.334C14.4 15 15 14.415 15 13.7V4.6c0-1.1-.5-1.6-1.5-1.6zm.5 11H4V8h10v6zM4 4v3h10V4H4z',
+    },
+  },
+}
+
+export const time: IconData = {
+  name: 'time',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h1.5v5.2l4.5 2.7-.8 1.3L11 13V7z',
+  sizes: {
+    small: {
+      name: 'time_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M9 2C5.15 2 2 5.15 2 9s3.15 7 7 7 7-3.15 7-7-3.15-7-7-7zm-.002 12.6a5.607 5.607 0 0 1-5.6-5.6c0-3.087 2.513-5.6 5.6-5.6 3.087 0 5.6 2.513 5.6 5.6 0 3.087-2.513 5.6-5.6 5.6zM8 6h1v3.391l3 1.761-.533.848L8 9.913V6z',
+    },
+  },
 }
 
 export const cable: IconData = {
@@ -2003,33 +2093,6 @@ export const do_not_disturb: IconData = {
     'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31A7.902 7.902 0 0 1 12 20zM7.1 5.69 18.31 16.9A7.902 7.902 0 0 0 20 12c0-4.42-3.58-8-8-8-1.85 0-3.55.63-4.9 1.69z',
 }
 
-export const notifications: IconData = {
-  name: 'notifications',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6z',
-}
-
-export const notifications_active: IconData = {
-  name: 'notifications_active',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6zM7.58 3.83 6.15 2.4c-2.4 1.83-3.98 4.65-4.12 7.85h2a8.445 8.445 0 0 1 3.55-6.42zm14.39 6.42h-2a8.495 8.495 0 0 0-3.54-6.42l1.42-1.43c2.39 1.83 3.97 4.65 4.12 7.85z',
-}
-
-export const notifications_off: IconData = {
-  name: 'notifications_off',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M15.305 10.75c0-2.48-1.51-4.5-4-4.5-.144 0-.282.017-.42.034l-.13.016-1.64-1.64.105-.038c.188-.07.383-.141.585-.192v-.68c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v.68c2.87.68 4.5 3.25 4.5 6.32v2.1l-2-2v-.1zm-2 9c0 1.1-.9 2-2 2s-2-.9-2-2h4zM4.715 3.1l-1.41 1.41 2.81 2.81c-.52 1-.81 2.17-.81 3.43v5l-2 2v1h14.24l1.74 1.74 1.41-1.41L4.715 3.1zm2.59 13.65h8v-.24l-7.66-7.66c-.22.58-.34 1.22-.34 1.9v6z',
-}
-
 export const notifications_paused: IconData = {
   name: 'notifications_paused',
   prefix: 'eds',
@@ -2048,14 +2111,6 @@ export const warning_outlined: IconData = {
     'm1 21.5 11-19 11 19H1zm18.53-2L12 6.49 4.47 19.5h15.06zm-8.53-3v2h2v-2h-2zm0-6h2v4h-2v-4z',
 }
 
-export const warning_filled: IconData = {
-  name: 'warning_filled',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm23 21.5-11-19-11 19h22zm-12-3v-2h2v2h-2zm0-4h2v-4h-2v4z',
-}
-
 export const error_outlined: IconData = {
   name: 'error_outlined',
   prefix: 'eds',
@@ -2063,15 +2118,6 @@ export const error_outlined: IconData = {
   width: '24',
   svgPathData:
     'M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM13 13V7h-2v6h2zm0 4v-2h-2v2h2zm-9-5c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8-8 3.58-8 8z',
-}
-
-export const error_filled: IconData = {
-  name: 'error_filled',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z',
 }
 
 export const sync: IconData = {
@@ -2099,6 +2145,99 @@ export const sync_problem: IconData = {
   width: '24',
   svgPathData:
     'M21 4h-6v6l2.24-2.24A6.003 6.003 0 0 1 19 12a5.99 5.99 0 0 1-4 5.65v2.09c3.45-.89 6-4.01 6-7.74 0-2.21-.91-4.2-2.36-5.64L21 4zM5.36 17.64A7.925 7.925 0 0 1 3 12c0-3.73 2.55-6.85 6-7.74v2.09C6.67 7.17 5 9.39 5 12c0 1.66.68 3.15 1.76 4.24L9 14v6H3l2.36-2.36zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z',
+}
+
+export const notifications: IconData = {
+  name: 'notifications',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6z',
+  sizes: {
+    small: {
+      name: 'notifications_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M13.5 11.911v-3.67c0-2.254-1.223-4.141-3.375-4.64v-.5C10.125 2.491 9.623 2 9 2s-1.125.492-1.125 1.101v.5C5.73 4.1 4.5 5.979 4.5 8.24v3.67L3 13.38v.673h12v-.673l-1.5-1.469zM9 16.001c.825 0 1.5-.49 1.5-1.47h-3c0 .98.675 1.47 1.5 1.47zm-3-3.356h6V8.24c0-1.82-1.133-3.303-3-3.303S6 6.42 6 8.24v4.405z',
+    },
+  },
+}
+
+export const notifications_active: IconData = {
+  name: 'notifications_active',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6zM7.58 3.83 6.15 2.4c-2.4 1.83-3.98 4.65-4.12 7.85h2a8.445 8.445 0 0 1 3.55-6.42zm14.39 6.42h-2a8.495 8.495 0 0 0-3.54-6.42l1.42-1.43c2.39 1.83 3.97 4.65 4.12 7.85z',
+  sizes: {
+    small: {
+      name: 'notifications_active_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M13.5 11.813v-3.75c0-2.303-1.223-4.23-3.375-4.74v-.51c0-.623-.503-1.126-1.125-1.126-.623 0-1.125.503-1.125 1.125v.51C5.73 3.832 4.5 5.752 4.5 8.063v3.75l-1.5 1.5V14h12v-.688l-1.5-1.5zM9 16c1 0 1.5-.871 1.5-1.5h-3c0 .629.5 1.5 1.5 1.5zm-3-3.438h6v-4.5c0-1.86-1.133-3.374-3-3.374-1.868 0-3 1.514-3 3.375v4.5zm-.315-9.69L4.612 1.8a7.819 7.819 0 0 0-3.09 5.888h1.5a6.334 6.334 0 0 1 2.663-4.815zm10.793 4.816h-1.5a6.371 6.371 0 0 0-2.655-4.815L13.386 1.8a7.866 7.866 0 0 1 3.09 5.888z',
+    },
+  },
+}
+
+export const notifications_off: IconData = {
+  name: 'notifications_off',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M15.305 10.75c0-2.48-1.51-4.5-4-4.5-.144 0-.282.017-.42.034l-.13.016-1.64-1.64.105-.038c.188-.07.383-.141.585-.192v-.68c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v.68c2.87.68 4.5 3.25 4.5 6.32v2.1l-2-2v-.1zm-2 9c0 1.1-.9 2-2 2s-2-.9-2-2h4zM4.715 3.1l-1.41 1.41 2.81 2.81c-.52 1-.81 2.17-.81 3.43v5l-2 2v1h14.24l1.74 1.74 1.41-1.41L4.715 3.1zm2.59 13.65h8v-.24l-7.66-7.66c-.22.58-.34 1.22-.34 1.9v6z',
+  sizes: {
+    small: {
+      name: 'notifications_off_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M11.47 8.236c0-1.82-1.129-3.302-2.99-3.302-.108 0-.21.013-.313.026l-.098.011-1.226-1.203.078-.028c.14-.051.287-.104.438-.14v-.5c0-.608.5-1.1 1.121-1.1.62 0 1.121.492 1.121 1.1v.5c2.146.498 3.364 2.384 3.364 4.636v1.54L11.47 8.31v-.073zm-1.473 6.297c0 .978-.673 1.467-1.495 1.467-.822 0-1.495-.49-1.495-1.467h2.99zM3.554 2.623 2.5 3.659l2.1 2.061a5.36 5.36 0 0 0-.605 2.517v3.668L2.5 13.37v.672h10.487l1.459 1.338 1.054-1.034L3.554 2.624zM5.49 12.639h5.98v-.176l-5.726-5.62a3.856 3.856 0 0 0-.254 1.394v4.402z',
+    },
+  },
+}
+
+export const error_filled: IconData = {
+  name: 'error_filled',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z',
+  sizes: {
+    small: {
+      name: 'error_filled_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M9 2C5.136 2 2 5.136 2 9s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zM8 13v-2h2v2H8zm0-8v5h2V5H8z',
+    },
+  },
+}
+
+export const warning_filled: IconData = {
+  name: 'warning_filled',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm23 21.5-11-19-11 19h22zm-12-3v-2h2v2h-2zm0-4h2v-4h-2v4z',
+  sizes: {
+    small: {
+      name: 'warning_filled_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'M17.5 16 9 2 .5 16h17zM8 14v-2h2v2H8zm0-4h2V6H8v4z',
+    },
+  },
 }
 
 export const menu: IconData = {
@@ -3322,15 +3461,6 @@ export const puzzle: IconData = {
     'M8.25 4.75a2.5 2.5 0 0 1 5 0h4c1.1 0 2 .9 2 2v4a2.5 2.5 0 0 1 0 5v4c0 1.1-.9 2-2 2h-3.8v-.3c0-1.49-1.21-2.7-2.7-2.7-1.49 0-2.7 1.21-2.7 2.7v.3h-3.8c-1.1 0-2-.9-2-2v-3.8h.3c1.49 0 2.7-1.21 2.7-2.7 0-1.49-1.21-2.7-2.7-2.7h-.29v-3.8c0-1.1.89-2 1.99-2h4zm3 0c0-.28-.22-.5-.5-.5s-.5.22-.5.5v2h-6l.01 2.12c1.75.68 2.99 2.39 2.99 4.38 0 1.99-1.25 3.7-3 4.38v2.12h2.12c.68-1.75 2.39-3 4.38-3 1.99 0 3.7 1.25 4.38 3h2.12v-6h2c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-2v-6h-6v-2z',
 }
 
-export const placeholder_icon: IconData = {
-  name: 'placeholder_icon',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M5 5H3c0-1.1.9-2 2-2v2zm0 8H3v-2h2v2zm2 8h2v-2H7v2zM5 9H3V7h2v2zm8-6h-2v2h2V3zm6 2V3c1.1 0 2 .9 2 2h-2zM5 21v-2H3c0 1.1.9 2 2 2zm0-4H3v-2h2v2zM9 3H7v2h2V3zm4 18h-2v-2h2v2zm6-8h2v-2h-2v2zm2 6c0 1.1-.9 2-2 2v-2h2zM19 9h2V7h-2v2zm2 8h-2v-2h2v2zm-6 4h2v-2h-2v2zm2-16h-2V3h2v2z',
-}
-
 export const smoking_off: IconData = {
   name: 'smoking_off',
   prefix: 'eds',
@@ -3419,6 +3549,25 @@ export const gavel: IconData = {
   width: '24',
   svgPathData:
     'm18.375 6.66-2.83 2.83-5.66-5.66L12.715 1l5.66 5.66zm-9.91-1.42-2.83 2.83 14.14 14.14 2.83-2.83L8.465 5.24zM13.395 21h-12v2h12v-2zm-3.51-5.86-5.66-5.66-2.83 2.83 5.66 5.66 2.83-2.83z',
+}
+
+export const placeholder_icon: IconData = {
+  name: 'placeholder_icon',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M5 5H3c0-1.1.9-2 2-2v2zm0 8H3v-2h2v2zm2 8h2v-2H7v2zM5 9H3V7h2v2zm8-6h-2v2h2V3zm6 2V3c1.1 0 2 .9 2 2h-2zM5 21v-2H3c0 1.1.9 2 2 2zm0-4H3v-2h2v2zM9 3H7v2h2V3zm4 18h-2v-2h2v2zm6-8h2v-2h-2v2zm2 6c0 1.1-.9 2-2 2v-2h2zM19 9h2V7h-2v2zm2 8h-2v-2h2v2zm-6 4h2v-2h-2v2zm2-16h-2V3h2v2z',
+  sizes: {
+    small: {
+      name: 'placeholder_icon_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z',
+    },
+  },
 }
 
 export const folder_shared: IconData = {
@@ -4860,15 +5009,6 @@ export const thumbs_down: IconData = {
     'M15 2H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 22l6.59-6.59c.36-.36.58-.86.58-1.41V4c0-1.1-.9-2-2-2zm0 12-4.34 4.34L12 13H3v-2l3-7h9v10zm8-12h-4v12h4V2z',
 }
 
-export const thumbs_up: IconData = {
-  name: 'thumbs_up',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M9 22h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 2 7.58 8.59C7.22 8.95 7 9.45 7 10v10c0 1.1.9 2 2 2zm0-12 4.34-4.34L12 11h9v2l-3 7H9V10zm-4 0H1v12h4V10z',
-}
-
 export const thumbs_up_down: IconData = {
   name: 'thumbs_up_down',
   prefix: 'eds',
@@ -4912,6 +5052,25 @@ export const info_circle: IconData = {
   width: '24',
   svgPathData:
     'M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10zM13 9V7h-2v2h2zm0 8v-6h-2v6h2zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8z',
+}
+
+export const thumbs_up: IconData = {
+  name: 'thumbs_up',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M9 22h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 2 7.58 8.59C7.22 8.95 7 9.45 7 10v10c0 1.1.9 2 2 2zm0-12 4.34-4.34L12 11h9v2l-3 7H9V10zm-4 0H1v12h4V10z',
+  sizes: {
+    small: {
+      name: 'thumbs_up_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M5.625 17h7.313c.674 0 1.25-.4 1.494-.976l2.454-5.64c.073-.184.114-.376.114-.584V8.2c0-.88-.606-1.2-1.5-1.2H10l1.02-4.056.024-.256c0-.328-.138-.632-.357-.848L9.826 1 4.47 6.272A1.578 1.578 0 0 0 4 7.4v8c0 .88.731 1.6 1.625 1.6zM6 7.5l3.5-4L8 9h7v1l-2 5H6V7.5zM3 7H1v10h2V7z',
+    },
+  },
 }
 
 export const donut_large: IconData = {
@@ -5511,24 +5670,6 @@ export const record_voice_off: IconData = {
     'm18.442 4.13 1.63-1.63c3.86 3.99 3.89 9.94.15 13.83l-1.64-1.64c2.62-3.17 2.58-7.59-.14-10.56zm-3.36 3.42 1.68-1.69c1.98 2.15 2.01 5.11.11 7.13l-1.7-1.7c.74-1.16.71-2.61-.09-3.74zm-5.65-2.01 3.53 3.53a3.979 3.979 0 0 0-3.53-3.53zm-6.43-.77 1.41-1.41 16.73 16.73-1.41 1.41-3.02-3.02c.18.32.29.65.29 1.02v2h-16v-2c0-2.66 5.33-4 8-4 1.78 0 4.74.6 6.51 1.78l-4.4-4.4c-.61.39-1.33.62-2.11.62-2.21 0-4-1.79-4-4 0-.78.23-1.5.62-2.11l-2.62-2.62zm0 14.73c.22-.72 3.31-2 6-2 2.7 0 5.8 1.29 6 2h-12zm4-10c0 1.1.9 2 2 2 .22 0 .42-.04.62-.11l-2.51-2.51c-.07.2-.11.4-.11.62z',
 }
 
-export const subdirectory_arrow_right: IconData = {
-  name: 'subdirectory_arrow_right',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'm19.5 14.5-6 6-1.42-1.42 3.59-3.58H4.5v-12h2v10h9.17l-3.59-3.58L13.5 8.5l6 6z',
-}
-
-export const subdirectory_arrow_left: IconData = {
-  name: 'subdirectory_arrow_left',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'm10.5 8.5 1.42 1.42-3.59 3.58h9.17v-10h2v12H8.33l3.59 3.58-1.42 1.42-6-6 6-6z',
-}
-
 export const last_page: IconData = {
   name: 'last_page',
   prefix: 'eds',
@@ -5565,120 +5706,6 @@ export const unfold_less: IconData = {
     'm15.17 4 1.42 1.41L12 10 7.41 5.41 8.83 4 12 7.17 15.17 4zM8.83 20l-1.42-1.41L12 14l4.58 4.59L15.17 20 12 16.83 8.83 20z',
 }
 
-export const arrow_drop_left: IconData = {
-  name: 'arrow_drop_left',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm14.5 7-5 5 5 5V7z',
-}
-
-export const arrow_drop_right: IconData = {
-  name: 'arrow_drop_right',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm9.5 17 5-5-5-5v10z',
-}
-
-export const arrow_drop_up: IconData = {
-  name: 'arrow_drop_up',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm7 14.5 5-5 5 5H7z',
-}
-
-export const arrow_drop_down: IconData = {
-  name: 'arrow_drop_down',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm7 9.5 5 5 5-5H7z',
-}
-
-export const arrow_forward_ios: IconData = {
-  name: 'arrow_forward_ios',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'm6.165 20.13 1.77 1.77 9.9-9.9-9.9-9.9-1.77 1.77 8.13 8.13-8.13 8.13z',
-}
-
-export const arrow_back_ios: IconData = {
-  name: 'arrow_back_ios',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'm17.835 3.87-1.78-1.77-9.89 9.9 9.9 9.9 1.77-1.77L9.705 12l8.13-8.13z',
-}
-
-export const arrow_up: IconData = {
-  name: 'arrow_up',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z',
-}
-
-export const arrow_forward: IconData = {
-  name: 'arrow_forward',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z',
-}
-
-export const arrow_down: IconData = {
-  name: 'arrow_down',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z',
-}
-
-export const arrow_back: IconData = {
-  name: 'arrow_back',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z',
-}
-
-export const chevron_down: IconData = {
-  name: 'chevron_down',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm7.41 8.295 4.59 4.58 4.59-4.58L18 9.705l-6 6-6-6 1.41-1.41z',
-}
-
-export const chevron_left: IconData = {
-  name: 'chevron_left',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'M15.705 16.59 11.125 12l4.58-4.59L14.295 6l-6 6 6 6 1.41-1.41z',
-}
-
-export const chevron_right: IconData = {
-  name: 'chevron_right',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm8.295 16.59 4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41z',
-}
-
-export const chevron_up: IconData = {
-  name: 'chevron_up',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData: 'm7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z',
-}
-
 export const swap_horizontal: IconData = {
   name: 'swap_horizontal',
   prefix: 'eds',
@@ -5713,6 +5740,289 @@ export const swap_vertical_circle: IconData = {
   width: '24',
   svgPathData:
     'M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm2.5-3L10 5.5 13.5 9H11v4H9V9H6.5zm7.5 9.5 3.5-3.5H15v-4h-2v4h-2.5l3.5 3.5z',
+}
+
+export const chevron_down: IconData = {
+  name: 'chevron_down',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm7.41 8.295 4.59 4.58 4.59-4.58L18 9.705l-6 6-6-6 1.41-1.41z',
+  sizes: {
+    small: {
+      name: 'chevron_down_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'M5.175 6 9 9.709 12.825 6 14 7.142 9 12 4 7.142 5.175 6z',
+    },
+  },
+}
+
+export const chevron_left: IconData = {
+  name: 'chevron_left',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'M15.705 16.59 11.125 12l4.58-4.59L14.295 6l-6 6 6 6 1.41-1.41z',
+  sizes: {
+    small: {
+      name: 'chevron_left_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M12 12.827 8.291 9.002 12 5.177l-1.142-1.175-4.858 5 4.858 5L12 12.827z',
+    },
+  },
+}
+
+export const chevron_right: IconData = {
+  name: 'chevron_right',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm8.295 16.59 4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41z',
+  sizes: {
+    small: {
+      name: 'chevron_right_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'm6 12.827 3.709-3.825L6 5.177l1.142-1.175 4.858 5-4.858 5L6 12.827z',
+    },
+  },
+}
+
+export const chevron_up: IconData = {
+  name: 'chevron_up',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z',
+  sizes: {
+    small: {
+      name: 'chevron_up_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'm5.174 12.002 3.825-3.709 3.825 3.709 1.175-1.142-5-4.859-5 4.859 1.175 1.142z',
+    },
+  },
+}
+
+export const arrow_back: IconData = {
+  name: 'arrow_back',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z',
+  sizes: {
+    small: {
+      name: 'arrow_back_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'M15 8H6.5l4-4L9 3 3 9l6 6 1.5-1-4-4H15V8z',
+    },
+  },
+}
+
+export const arrow_down: IconData = {
+  name: 'arrow_down',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z',
+  sizes: {
+    small: {
+      name: 'arrow_down_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'M8 3v8.5l-4-4L3 9l6 6 6-6-1-1.5-4 4V3H8z',
+    },
+  },
+}
+
+export const arrow_forward: IconData = {
+  name: 'arrow_forward',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z',
+  sizes: {
+    small: {
+      name: 'arrow_forward_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'M3 10h8.5l-4 4L9 15l6-6-6-6-1.5 1 4 4H3v2z',
+    },
+  },
+}
+
+export const arrow_up: IconData = {
+  name: 'arrow_up',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z',
+  sizes: {
+    small: {
+      name: 'arrow_up_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'M10 15V6.5l4 4L15 9 9 3 3 9l1 1.5 4-4V15h2z',
+    },
+  },
+}
+
+export const arrow_back_ios: IconData = {
+  name: 'arrow_back_ios',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'm17.835 3.87-1.78-1.77-9.89 9.9 9.9 9.9 1.77-1.77L9.705 12l8.13-8.13z',
+  sizes: {
+    small: {
+      name: 'arrow_back_ios_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M13.377 2.903 12.04 1.575 4.624 9l7.425 7.425 1.328-1.327L7.279 9l6.098-6.097z',
+    },
+  },
+}
+
+export const arrow_forward_ios: IconData = {
+  name: 'arrow_forward_ios',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'm6.165 20.13 1.77 1.77 9.9-9.9-9.9-9.9-1.77 1.77 8.13 8.13-8.13 8.13z',
+  sizes: {
+    small: {
+      name: 'arrow_forward_ios_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'm4.623 2.903 1.335-1.328L13.376 9l-7.425 7.425-1.328-1.327L10.721 9 4.623 2.903z',
+    },
+  },
+}
+
+export const arrow_drop_down: IconData = {
+  name: 'arrow_drop_down',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm7 9.5 5 5 5-5H7z',
+  sizes: {
+    small: {
+      name: 'arrow_drop_down_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'm4 6.5 5 5 5-5H4z',
+    },
+  },
+}
+
+export const arrow_drop_up: IconData = {
+  name: 'arrow_drop_up',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm7 14.5 5-5 5 5H7z',
+  sizes: {
+    small: {
+      name: 'arrow_drop_up_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'm14 11.5-5-5-5 5h10z',
+    },
+  },
+}
+
+export const arrow_drop_right: IconData = {
+  name: 'arrow_drop_right',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm9.5 17 5-5-5-5v10z',
+  sizes: {
+    small: {
+      name: 'arrow_drop_right_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'm6.5 14 5-5-5-5v10z',
+    },
+  },
+}
+
+export const arrow_drop_left: IconData = {
+  name: 'arrow_drop_left',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'm14.5 7-5 5 5 5V7z',
+  sizes: {
+    small: {
+      name: 'arrow_drop_left_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData: 'm11.5 4-5 5 5 5V4z',
+    },
+  },
+}
+
+export const subdirectory_arrow_left: IconData = {
+  name: 'subdirectory_arrow_left',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'm10.5 8.5 1.42 1.42-3.59 3.58h9.17v-10h2v12H8.33l3.59 3.58-1.42 1.42-6-6 6-6z',
+  sizes: {
+    small: {
+      name: 'subdirectory_arrow_left_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'm8 7 1 1-2.753 2.125h6.878V3h1.5v8.625H6.247L9 14l-1 1-4.625-4.125L8 7z',
+    },
+  },
+}
+
+export const subdirectory_arrow_right: IconData = {
+  name: 'subdirectory_arrow_right',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'm19.5 14.5-6 6-1.42-1.42 3.59-3.58H4.5v-12h2v10h9.17l-3.59-3.58L13.5 8.5l6 6z',
+  sizes: {
+    small: {
+      name: 'subdirectory_arrow_right_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M10 7 9 8l2.752 2.125H4.875V3h-1.5v8.625h8.377L9 14l1 1 4.625-4.125L10 7z',
+    },
+  },
 }
 
 export const label: IconData = {
@@ -5831,15 +6141,6 @@ export const pregnant_woman: IconData = {
     'M11 2c-1.11 0-2 .89-2 2 0 1.11.89 2 2 2 1.11 0 2-.89 2-2 0-1.11-.89-2-2-2zm3 8c1.17.49 1.99 1.66 2 3v4h-3v5h-3v-5H8v-7c0-1.66 1.34-3 3-3s3 1.34 3 3z',
 }
 
-export const accessible: IconData = {
-  name: 'accessible',
-  prefix: 'eds',
-  height: '24',
-  width: '24',
-  svgPathData:
-    'M14 4c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2 3c2.83 0 5.89-.3 8.5-1l.5 2c-1.86.5-4 .83-6 1v13h-2v-6h-2v6H9V9c-2-.17-4.14-.5-6-1l.5-2c2.61.7 5.67 1 8.5 1z',
-}
-
 export const wheelchair: IconData = {
   name: 'wheelchair',
   prefix: 'eds',
@@ -5892,4 +6193,23 @@ export const translate: IconData = {
   width: '24',
   svgPathData:
     'm12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-1 2.67L15.88 17h3.24l-1.62-4.33z',
+}
+
+export const accessible: IconData = {
+  name: 'accessible',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M14 4c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2 3c2.83 0 5.89-.3 8.5-1l.5 2c-1.86.5-4 .83-6 1v13h-2v-6h-2v6H9V9c-2-.17-4.14-.5-6-1l.5-2c2.61.7 5.67 1 8.5 1z',
+  sizes: {
+    small: {
+      name: 'accessible_small',
+      prefix: 'eds',
+      height: '18',
+      width: '18',
+      svgPathData:
+        'M10.5 3c0 .825-.675 1.5-1.5 1.5S7.5 3.825 7.5 3 8.175 1.5 9 1.5s1.5.675 1.5 1.5zM9 5.25c2.123 0 4.418-.225 6.375-.75L15.75 6c-1.395.375-3 .622-4.5.75v9.75h-1.5V12h-1.5v4.5h-1.5V6.75c-1.5-.128-3.105-.375-4.5-.75l.375-1.5c1.957.525 4.253.75 6.375.75z',
+    },
+  },
 }

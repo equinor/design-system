@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, fireEvent } from '../../test'
+import { render, cleanup, screen } from '../../test'
 import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -70,21 +70,6 @@ describe('Popover', () => {
     )
     const content = screen.getByText('Content Text')
     await waitFor(() => expect(content).toBeDefined())
-  })
-
-  it('has called onClose when close button is clicked', async () => {
-    const handleOnClose = jest.fn()
-
-    render(
-      <TestPopover open onClose={handleOnClose}>
-        <div>some random content</div>
-      </TestPopover>,
-    )
-    const closeButton = screen.getByLabelText('Close popover')
-
-    fireEvent.click(closeButton)
-
-    await waitFor(() => expect(handleOnClose).toHaveBeenCalled())
   })
   it("doesn't crash if no children is provided to Popover component", async () => {
     const placement = 'top'

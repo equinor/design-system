@@ -10,7 +10,6 @@
       "name": "export:tokens",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run-script", "export:tokens"],
-      "restart": true,
       "port": 33455
     },
     {
@@ -19,7 +18,6 @@
       "name": "export:assets",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run-script", "export:assets"],
-      "restart": true,
       "port": 33455
     }
   ]

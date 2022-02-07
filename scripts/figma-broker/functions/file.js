@@ -35,18 +35,24 @@ export const writeFileStream = (url, path, name, ext) => {
   }
 }
 export const writeFile = (path, name, ext, file) => {
-  if (file && path && name && ext) {
-    createFolder(path)
-    let value = file
+  try {
+    if (file && path && name && ext) {
+      createFolder(path)
+      let value = file
 
-    if (ext === 'js' || ext === 'ts') {
-      const options = prettier.resolveConfig.sync(prettierConfig)
-      value = prettier.format(file, { ...options, parser: 'babel' })
+      if (ext === 'js' || ext === 'ts') {
+        const options = prettier.resolveConfig.sync(prettierConfig)
+        value = prettier.format(file, { ...options, parser: 'babel' })
+      }
+
+      write(value, path, name, ext)
+    } else {
+      throw new Error(
+        'Missing required parameters to correctly run writeFile()!',
+      )
     }
-
-    write(value, path, name, ext)
-  } else {
-    throw new Error('Missing required parameters to correctly run writeFile()!')
+  } catch (error) {
+    console.error('Failed writing file: ', error.message)
   }
 }
 

@@ -1,24 +1,28 @@
 name: eds
-engines: { pnpm: '>=5.13.5' }
+engines: {pnpm: '>=5.13.5'}
 scripts:
   lint: eslint
   lint:all: pnpm run lint .
   lint:core-react: pnpm run lint ./packages/eds-core-react
-  lint:lab: pnpm run lint ./packages/eds-lab
+  lint:lab: pnpm run lint ./packages/eds-lab-react
+  lint:utils: pnpm run lint ./packages/eds-utils
   init: pnpm multi install --force && pnpm run build
-  build: pnpm run build:icons && pnpm run build:tokens && pnpm run build:core-react && pnpm run build:lab
+  build: pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:lab
   build:core-react: pnpm --filter @equinor/eds-core-react run build
-  build:lab: pnpm --filter @equinor/eds-lab run build
+  build:lab: pnpm --filter @equinor/eds-lab-react run build
+  build:utils: pnpm --filter @equinor/eds-utils run build
   build:tokens: pnpm --filter @equinor/eds-tokens run build
   build:icons: pnpm --filter @equinor/eds-icons run build
   test:core-react: pnpm --filter @equinor/eds-core-react run test
-  test:lab: pnpm --filter @equinor/eds-lab run test
+  test:lab: pnpm --filter @equinor/eds-lab-react run test
+  test:utils: pnpm --filter @equinor/eds-utils run test
   test:watch:core-react: pnpm --filter @equinor/eds-core-react run test:watch
+  test:watch:lab: pnpm --filter @equinor/eds-lab-react run test:watch
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
-  test:update-snapshots:lab: pnpm --filter @equinor/eds-lab run test:update-snapshots
+  test:update-snapshots:lab: pnpm --filter @equinor/eds-lab-react run test:update-snapshots
   storybook:core-react: pnpm --filter @equinor/eds-core-react run storybook
-  storybook:lab: pnpm --filter @equinor/eds-lab run storybook
   storybook: pnpm storybook:core-react # default storybook
+  storybook:lab: pnpm --filter @equinor/eds-lab-react run storybook
   graphics: pnpm --filter ./assets/woman run dev
   build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
   export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0
@@ -26,6 +30,7 @@ scripts:
 devDependencies:
   '@babel/core': ^7.13.15
   '@babel/eslint-parser': ^7.13.14
+  '@types/jest-axe': ^3.5.3
   '@typescript-eslint/eslint-plugin': ^4.21.0
   '@typescript-eslint/parser': ^4.21.0
   eslint: ^7.32.0
@@ -37,5 +42,6 @@ devDependencies:
   eslint-plugin-react: ^7.26.1
   eslint-plugin-react-hooks: ^4.2.0
   eslint-plugin-testing-library: ^4.12.4
+  jest-axe: ^5.0.1
   prettier: 2.4.1
   typescript: ^4.2.4
