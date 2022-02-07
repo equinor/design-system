@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { render, cleanup, screen } from '@testing-library/react'
 import 'jest-styled-components'
+import '@testing-library/jest-dom'
 import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
