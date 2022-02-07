@@ -241,7 +241,7 @@ jobs:
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
-    needs: [test, lint]
+    needs: [test, lint, build-utils]
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -250,5 +250,10 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-core
+      - name: Get eds-utils build
+        uses: actions/cache@v2
+        with:
+          path: ./packages/eds-utils
+          key: ${{ github.sha }}-build-utils
       - name: Build storybook
         run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
