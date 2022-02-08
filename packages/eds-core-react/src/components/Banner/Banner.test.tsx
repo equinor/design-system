@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { add } from '@equinor/eds-icons'
 import { Banner } from '.'
@@ -32,7 +33,38 @@ describe('Banner', () => {
     )
     expect(asFragment()).toMatchSnapshot()
   })
-
+  it('Should pass a11y test when only text', async () => {
+    const { container } = render(
+      <StyledBanner>
+        <Banner.Message>Banner message</Banner.Message>
+      </StyledBanner>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when text and icon', async () => {
+    const iconTestId = 'banner-icon-test'
+    const { container } = render(
+      <StyledBanner>
+        <Banner.Icon>
+          <Icon name="add" data-testid={iconTestId} />
+        </Banner.Icon>
+        <Banner.Message>Banner message</Banner.Message>
+      </StyledBanner>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when text and actions', async () => {
+    const actionButtonText = 'Banner action button text'
+    const { container } = render(
+      <StyledBanner>
+        <Banner.Message>Banner message</Banner.Message>
+        <Banner.Actions>
+          <button type="button">{actionButtonText}</button>
+        </Banner.Actions>
+      </StyledBanner>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('Can extend the css for the component', () => {
     render(
       <StyledBanner>
