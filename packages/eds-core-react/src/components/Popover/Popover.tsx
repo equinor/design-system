@@ -7,15 +7,16 @@ import {
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Paper } from '../Paper'
-import { typographyTemplate, bordersTemplate } from '../../utils'
 import {
+  typographyTemplate,
+  bordersTemplate,
   usePopper,
   useOutsideClick,
   Placement,
   useGlobalKeyPress,
   useCombinedRefs,
   useToken,
-} from '../../hooks'
+} from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
 

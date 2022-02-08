@@ -1,6 +1,6 @@
 import { forwardRef, OutputHTMLAttributes, ReactNode } from 'react'
 import styled from 'styled-components'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate } from '@equinor/eds-utils'
 import { slider as tokens } from './Slider.tokens'
 
 const {

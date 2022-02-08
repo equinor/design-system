@@ -3,8 +3,7 @@ import styled, { ThemeProvider, css } from 'styled-components'
 import { SwitchSmall } from './SwitchSmall'
 import { SwitchDefault } from './SwitchDefault'
 import { comfortable as tokens } from './Switch.tokens'
-import { typographyTemplate } from '../../utils'
-import { useToken } from '../../hooks'
+import { typographyTemplate, useToken } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
 type StyledProps = { isDisabled: boolean }

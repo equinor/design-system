@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
-import { spacingsTemplate, bordersTemplate } from '../../utils'
+import { spacingsTemplate, bordersTemplate } from '@equinor/eds-utils'
 import { Typography } from '../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'

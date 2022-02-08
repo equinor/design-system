@@ -12,7 +12,7 @@ import {
   typographyTemplate,
   outlineTemplate,
   bordersTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 
 const { enabled, error } = tokens
 

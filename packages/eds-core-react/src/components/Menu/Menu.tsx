@@ -11,8 +11,8 @@ import {
   useGlobalKeyPress,
   useIsMounted,
   useToken,
-} from '../../hooks'
-import { bordersTemplate } from '../../utils'
+  bordersTemplate,
+} from '@equinor/eds-utils'
 import { menu as tokens } from './Menu.tokens'
 import type { FocusTarget } from './Menu.types'
 import { useEds } from '../EdsProvider'

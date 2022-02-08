@@ -4,11 +4,11 @@ import {
   typographyTemplate,
   bordersTemplate,
   spacingsTemplate,
-} from '../../../utils'
+  useToken,
+} from '@equinor/eds-utils'
 import { tableCell, TableCellToken, applyVariant } from './DataCell.tokens'
 import { Variants, Colors } from '../Table.types'
 import { useEds } from '../../EdsProvider'
-import { useToken } from '../../../hooks'
 
 type BaseProps = {
   theme: TableCellToken

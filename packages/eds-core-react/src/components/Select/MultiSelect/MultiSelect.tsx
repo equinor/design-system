@@ -19,9 +19,8 @@ import {
   StyledListItem,
   StyledInputWrapper,
 } from '../commonStyles'
-import { spacingsTemplate } from '../../../utils'
+import { spacingsTemplate, useToken } from '@equinor/eds-utils'
 import { useEds } from '../../EdsProvider'
-import { useToken } from '../../../hooks'
 
 const PaddedStyledListItem = styled(StyledListItem)`
   display: flex;

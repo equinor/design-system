@@ -1,12 +1,12 @@
 import { MouseEvent, memo, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
-import { useCombinedRefs } from '../../hooks'
 import {
+  useCombinedRefs,
   outlineTemplate,
   spacingsTemplate,
   typographyTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 import { useMenu } from './Menu.context'
 
 const {

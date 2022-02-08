@@ -3,12 +3,12 @@ import * as ReactDom from 'react-dom'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { snackbar as SnackbarToken } from './Snackbar.tokens'
 import {
+  useToken,
   typographyTemplate,
   spacingsTemplate,
   bordersTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 import { Paper } from '../Paper'
-import { useToken } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
 type StyledProps = Pick<SnackbarProps, 'placement'>

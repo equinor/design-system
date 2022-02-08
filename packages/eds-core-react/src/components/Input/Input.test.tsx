@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 import { render, cleanup, screen } from '@testing-library/react'
 import 'jest-styled-components'
+import '@testing-library/jest-dom'
 import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
-import { trimSpaces } from '../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 const {
   error: {
@@ -28,7 +29,7 @@ describe('Input', () => {
   it('Has correct default value', () => {
     const value = 'Some value'
     render(<Input id="test-value" value={value} readOnly />)
-    const inputElement = screen.queryByDisplayValue(value) as HTMLInputElement
+    const inputElement: HTMLInputElement = screen.queryByDisplayValue(value)
 
     expect(inputElement.value).toBe(value)
   })

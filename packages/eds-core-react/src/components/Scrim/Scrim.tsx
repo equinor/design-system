@@ -1,7 +1,7 @@
 import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { useGlobalKeyPress, useHideBodyScroll } from '../../hooks'
+import { useGlobalKeyPress, useHideBodyScroll } from '@equinor/eds-utils'
 
 const { height, width, background } = tokens
 

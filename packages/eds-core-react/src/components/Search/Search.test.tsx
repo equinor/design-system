@@ -118,7 +118,7 @@ describe('Search', () => {
 
     rerender(<Search value="new" />)
 
-    const searchBox = screen.queryByRole('searchbox') as HTMLInputElement
+    const searchBox: HTMLInputElement = screen.queryByRole('searchbox')
 
     expect(searchBox.value).toEqual('new')
   })

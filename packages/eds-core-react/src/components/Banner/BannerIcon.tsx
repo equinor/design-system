@@ -9,7 +9,7 @@ import {
 import styled, { css } from 'styled-components'
 import * as tokens from './Banner.tokens'
 import { Icon } from '../Icon'
-import { bordersTemplate } from '../../utils'
+import { bordersTemplate } from '@equinor/eds-utils'
 
 type BannerIconVariant = 'info' | 'warning'
 

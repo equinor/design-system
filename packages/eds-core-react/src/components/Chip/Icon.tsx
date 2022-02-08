@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { close } from '@equinor/eds-icons'
 import { Icon as Icon_ } from '../Icon'
 import * as tokens from './Chip.tokens'
-import { bordersTemplate } from '../../utils'
+import { bordersTemplate } from '@equinor/eds-utils'
 
 Icon_.add({ close })
 

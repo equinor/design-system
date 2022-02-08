@@ -1,6 +1,6 @@
-import type { FlattenSimpleInterpolation } from 'styled-components'
+import type { css } from 'styled-components'
 
-export type StyledCSS = FlattenSimpleInterpolation
+export type StyledCSS = ReturnType<typeof css>
 
 type Shorthand = (token: {
   width?: string | number

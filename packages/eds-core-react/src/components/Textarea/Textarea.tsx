@@ -6,9 +6,10 @@ import {
   typographyTemplate,
   spacingsTemplate,
   outlineTemplate,
-} from '../../utils'
+  useAutoResize,
+  useCombinedRefs,
+} from '@equinor/eds-utils'
 import type { Variants } from '../TextField/types'
-import { useAutoResize, useCombinedRefs } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
 const { input } = tokens

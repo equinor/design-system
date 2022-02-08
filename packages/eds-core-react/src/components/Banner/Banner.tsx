@@ -6,12 +6,11 @@ import {
   Children as ReactChildren,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
+import { spacingsTemplate, useToken } from '@equinor/eds-utils'
 import { enabled as bannerToken } from './Banner.tokens'
 import { Divider } from '../Divider'
 import { BannerIcon } from './BannerIcon'
-import { spacingsTemplate } from '../../utils'
 import { useEds } from '../EdsProvider'
-import { useToken } from '../../hooks'
 
 const StyledBanner = styled.div``
 

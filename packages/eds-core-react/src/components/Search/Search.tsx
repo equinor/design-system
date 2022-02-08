@@ -18,8 +18,9 @@ import {
   typographyTemplate,
   setReactInputValue,
   bordersTemplate,
-} from '../../utils'
-import { useCombinedRefs, useToken } from '../../hooks'
+  useCombinedRefs,
+  useToken,
+} from '@equinor/eds-utils'
 
 type ContainerProps = {
   isFocused: boolean

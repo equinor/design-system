@@ -4,9 +4,9 @@ import {
   spacingsTemplate,
   typographyTemplate,
   bordersTemplate,
-} from '../../utils'
+  useToken,
+} from '@equinor/eds-utils'
 import { topbar as topbarToken } from './TopBar.tokens'
-import { useToken } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
 export type TopbarProps = HTMLAttributes<HTMLElement>

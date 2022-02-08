@@ -5,7 +5,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import * as tokens from './Divider.tokens'
 import { Divider } from '.'
-import { trimSpaces } from '../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 const StyledDivider = styled(Divider)`
   position: relative;

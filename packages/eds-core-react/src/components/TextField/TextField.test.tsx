@@ -26,7 +26,7 @@ describe('TextField', () => {
   it('Has correct default value', () => {
     const value = 'Some value'
     render(<TextField id="test-value" value={value} readOnly />)
-    const inputElement = screen.queryByDisplayValue(value) as HTMLInputElement
+    const inputElement: HTMLInputElement = screen.queryByDisplayValue(value)
 
     expect(inputElement.value).toBe(value)
   })

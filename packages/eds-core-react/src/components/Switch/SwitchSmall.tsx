@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
-import { outlineTemplate } from '../../utils'
+import { outlineTemplate } from '@equinor/eds-utils'
 
 type StyledProps = { isDisabled: boolean }
 

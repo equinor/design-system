@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { Divider } from '../Divider'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate } from '@equinor/eds-utils'
 
 const StyledDialogContent = styled.div<DialogContentProps>(
   ({ theme, scrollable }) => {

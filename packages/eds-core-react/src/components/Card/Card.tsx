@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import * as tokens from './Card.tokens'
-import { bordersTemplate } from '../../utils'
+import { bordersTemplate } from '@equinor/eds-utils'
 
 const { primary } = tokens
 

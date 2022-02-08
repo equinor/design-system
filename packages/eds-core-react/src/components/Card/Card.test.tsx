@@ -4,7 +4,7 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
 import * as tokens from './Card.tokens'
-import { trimSpaces } from '../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 import { Card } from '.'
 
