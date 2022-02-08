@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import styled from 'styled-components'
 import {
   Tabs,
+  Button,
+  Icon,
   TabsProps,
   Typography,
   Search,
@@ -13,6 +15,13 @@ import { action } from '@storybook/addon-actions'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
+
+const TabsRow = styled.div`
+  display: flex;
+`
+const NavButton = styled(Button)`
+  flex-shrink: 0;
+`
 
 export default {
   title: 'Navigation/Tabs',
@@ -66,6 +75,102 @@ export const States: Story<TabsProps> = () => {
       </Tabs.List>
     </Tabs>
   )
+}
+
+export const Overflow: Story<TabsProps> = () => {
+  const [activeTab, setActiveTab] = useState(0)
+  const list = useRef<HTMLDivElement>(null)
+  const [containerWidth, setContainerWidth] = useState(0)
+  const [totalWidth, setTotalWidth] = useState(0)
+  const [scrollPos, setScrollPos] = useState(0)
+  const [nextDisabled, setNextDisabled] = useState(false)
+  const { setTimeout, clearTimeout } = window
+
+  const handleChange = (index: number) => {
+    setActiveTab(index)
+  }
+
+  useLayoutEffect(() => {
+    const cachedList = list.current
+    let delayToScrollEnd = 0
+    const handleScroll = () => {
+      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
+      delayToScrollEnd = setTimeout(() => {
+        setScrollPos(cachedList.scrollLeft)
+        if (containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth) {
+          setNextDisabled(true)
+        } else {
+          setNextDisabled(false)
+        }
+      }, 20)
+    }
+    if (cachedList) {
+      setContainerWidth(cachedList.clientWidth)
+      setTotalWidth(cachedList.scrollWidth)
+      cachedList.addEventListener('scroll', handleScroll, { passive: true })
+    }
+
+    return () => {
+      clearTimeout(delayToScrollEnd)
+      cachedList.removeEventListener('scroll', handleScroll)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [containerWidth, list, totalWidth])
+
+  const scroll = (direction: string) => {
+    //Tabs have "scroll-snap-align: end" so we need to scroll less than
+    //the full row to avoid skipping past tabs. Here we set it to 80%
+    const SCROLL_AMOUNT = 0.8
+    let target = 0
+    const signifier = direction === 'left' ? -1 : 1
+    target =
+      list.current.scrollLeft + signifier * containerWidth * SCROLL_AMOUNT
+    list.current.scrollTo(target, 0)
+  }
+
+  return (
+    <Tabs activeTab={activeTab} onChange={handleChange}>
+      <TabsRow>
+        <NavButton
+          variant="ghost_icon"
+          onClick={() => scroll('left')}
+          aria-hidden="true"
+          tabIndex={-1}
+          disabled={scrollPos === 0}
+        >
+          <Icon name="chevron_left" />
+        </NavButton>
+        <Tabs.List ref={list}>
+          {Array.from({ length: 20 }, (_, i) => (
+            <Tabs.Tab key={i}>Tab Title {i + 1}</Tabs.Tab>
+          ))}
+        </Tabs.List>
+        <NavButton
+          variant="ghost_icon"
+          onClick={() => scroll('right')}
+          aria-hidden="true"
+          tabIndex={-1}
+          disabled={nextDisabled}
+        >
+          <Icon name="chevron_right" />
+        </NavButton>
+      </TabsRow>
+      <Tabs.Panels>
+        {Array.from({ length: 20 }, (_, i) => (
+          <Tabs.Panel key={i}>Panel {i + 1}</Tabs.Panel>
+        ))}
+      </Tabs.Panels>
+    </Tabs>
+  )
+}
+
+Overflow.parameters = {
+  docs: {
+    description: {
+      story:
+        'Tabs uses css `scroll-snap`, so in a case where there is overflow and the user wants to add next/previous buttons for scrolling, they can use `element.scrollTo` some amount and then css will take care of alignment',
+    },
+  },
 }
 
 export const Widths: Story<TabsProps> = () => {
@@ -307,3 +412,4 @@ Compact.parameters = {
 WithSearch.storyName = 'With search'
 WithInputInPanel.storyName = 'With input in panel'
 WithStyledComponent.storyName = 'With styled component'
+Overflow.storyName = 'Overflow with next/previous buttons'
