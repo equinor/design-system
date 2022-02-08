@@ -36,6 +36,22 @@ const StyledTabList = styled.div.attrs(
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: ${({ variant }) => variants[variant] as VariantsRecord};
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+  @media (hover: none) {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: 0;
+    & ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
 `
 
 export type TabListProps = {

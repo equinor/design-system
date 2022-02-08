@@ -38,6 +38,9 @@ const StyledTab = styled.button.attrs<TabProps>(
     text-overflow: ellipsis;
     overflow-x: hidden;
 
+    scroll-snap-align: end;
+    scroll-snap-stop: always;
+
     &:focus {
       outline: none;
     }

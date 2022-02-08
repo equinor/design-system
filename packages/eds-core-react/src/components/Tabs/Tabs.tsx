@@ -47,9 +47,15 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
       return
     }
     clearTimeout(blurTimer)
-    if (!tabsFocused) {
-      setTabsFocused(true)
+
+    //Only force focus on active Tab if Tabs was navigated to with keyboard
+    const checkIfTabWasPressed = (event: KeyboardEvent) => {
+      document.removeEventListener('keyup', checkIfTabWasPressed, true)
+      if (event.key === 'Tab') setTabsFocused(true)
     }
+    if (!tabsFocused)
+      document.addEventListener('keyup', checkIfTabWasPressed, true)
+
     onFocus && onFocus(e)
   }
 
