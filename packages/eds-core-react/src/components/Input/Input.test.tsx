@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import 'jest-styled-components'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
@@ -25,6 +26,10 @@ describe('Input', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Input value="input value" readOnly />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Input value="input value" readOnly />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Has correct default value', () => {
     const value = 'Some value'
