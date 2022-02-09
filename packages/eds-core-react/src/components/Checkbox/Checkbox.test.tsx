@@ -40,7 +40,17 @@ describe('Checkbox', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('should pass a11y test', async () => {
-    const { container } = render(<StyledCheckbox label="checkbox-test" />)
+    const { container } = render(<Checkbox label="checkbox-test" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('should pass a11y test with external label', async () => {
+    const label = 'Description'
+    const { container } = render(
+      <label>
+        <Checkbox />
+        {label}
+      </label>,
+    )
     expect(await axe(container)).toHaveNoViolations()
   })
   it('Can extend the css for the component', () => {
