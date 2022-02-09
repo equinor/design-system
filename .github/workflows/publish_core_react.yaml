@@ -155,9 +155,7 @@ jobs:
       - name: Save build to cache
         uses: actions/cache@v2
         with:
-          path: |
-            ./*
-            ~/.pnpm-store
+          path: ./packages/eds-utils
           key: ${{ github.sha }}-build-utils
   publish-utils:
     name: Publish eds-utils to npm
