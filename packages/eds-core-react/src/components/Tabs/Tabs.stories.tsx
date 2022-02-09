@@ -22,6 +22,27 @@ const TabsRow = styled.div`
 const NavButton = styled(Button)`
   flex-shrink: 0;
 `
+const StyledTabList = styled(Tabs.List)`
+  --track-color: #ffffff;
+  --thumb-color: #dcdcdc;
+  scrollbar-color: var(--track-color) var(--thumb-color);
+  scrollbar-width: thin;
+  padding-bottom: 8px;
+
+  // For Google Chrome/webkit
+  & ::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    background: var(--thumb-color);
+    border-radius: 8px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: var(--track-color);
+  }
+`
 
 export default {
   title: 'Navigation/Tabs',
@@ -206,27 +227,6 @@ OverflowScroll.parameters = {
 }
 
 export const OverflowScrollStyled: Story<TabsProps> = () => {
-  const StyledTabList = styled(Tabs.List)`
-    --track-color: #ffffff;
-    --thumb-color: #cacaca;
-    scrollbar-color: var(--track-color) var(--thumb-color);
-    scrollbar-width: thin;
-    padding-bottom: 8px;
-
-    // For Google Chrome/webkit
-    & ::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    & ::-webkit-scrollbar-thumb {
-      background: var(--thumb-color);
-      border-radius: 8px;
-    }
-
-    & ::-webkit-scrollbar-track {
-      background: var(--track-color);
-    }
-  `
   const [activeTab, setActiveTab] = useState(0)
 
   const handleChange = (index: number) => {
