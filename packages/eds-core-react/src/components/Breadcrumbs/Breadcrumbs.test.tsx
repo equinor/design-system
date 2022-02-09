@@ -28,9 +28,9 @@ describe('Breadcrumbs', () => {
   it('Should pass a11y test', async () => {
     const { container } = render(
       <Breadcrumbs>
-        <Breadcrumb>Label 1</Breadcrumb>
-        <Breadcrumb>Label 2</Breadcrumb>
-        <Breadcrumb>Label 3</Breadcrumb>
+        <Breadcrumb href="#">Label 1</Breadcrumb>
+        <Breadcrumb href="#">Label 2</Breadcrumb>
+        <Breadcrumb href="#">Label 3</Breadcrumb>
       </Breadcrumbs>,
     )
     expect(await axe(container)).toHaveNoViolations()
