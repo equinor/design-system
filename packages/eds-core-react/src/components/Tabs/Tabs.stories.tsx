@@ -173,6 +173,90 @@ Overflow.parameters = {
   },
 }
 
+export const OverflowScroll: Story<TabsProps> = () => {
+  const [activeTab, setActiveTab] = useState(0)
+
+  const handleChange = (index: number) => {
+    setActiveTab(index)
+  }
+
+  return (
+    <Tabs activeTab={activeTab} onChange={handleChange} scrollable>
+      <Tabs.List>
+        {Array.from({ length: 20 }, (_, i) => (
+          <Tabs.Tab key={i}>Tab Title {i + 1}</Tabs.Tab>
+        ))}
+      </Tabs.List>
+      <Tabs.Panels>
+        {Array.from({ length: 20 }, (_, i) => (
+          <Tabs.Panel key={i}>Panel {i + 1}</Tabs.Panel>
+        ))}
+      </Tabs.Panels>
+    </Tabs>
+  )
+}
+
+OverflowScroll.parameters = {
+  docs: {
+    description: {
+      story:
+        'In the case of tabs overflowing, and where next/previous buttons are not desired, the `scrollable` prop adds `overflow-x: auto` to the tabs list. Tabs uses css `scroll-snap` which handles alignment and tabs snapping into place',
+    },
+  },
+}
+
+export const OverflowScrollStyled: Story<TabsProps> = () => {
+  const StyledTabList = styled(Tabs.List)`
+    --track-color: #ffffff;
+    --thumb-color: #cacaca;
+    scrollbar-color: var(--track-color) var(--thumb-color);
+    scrollbar-width: thin;
+    padding-bottom: 8px;
+
+    // For Google Chrome/webkit
+    & ::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    & ::-webkit-scrollbar-thumb {
+      background: var(--thumb-color);
+      border-radius: 8px;
+    }
+
+    & ::-webkit-scrollbar-track {
+      background: var(--track-color);
+    }
+  `
+  const [activeTab, setActiveTab] = useState(0)
+
+  const handleChange = (index: number) => {
+    setActiveTab(index)
+  }
+
+  return (
+    <Tabs activeTab={activeTab} onChange={handleChange} scrollable>
+      <StyledTabList>
+        {Array.from({ length: 15 }, (_, i) => (
+          <Tabs.Tab key={i}>Tab Title {i + 1}</Tabs.Tab>
+        ))}
+      </StyledTabList>
+      <Tabs.Panels>
+        {Array.from({ length: 15 }, (_, i) => (
+          <Tabs.Panel key={i}>Panel {i + 1}</Tabs.Panel>
+        ))}
+      </Tabs.Panels>
+    </Tabs>
+  )
+}
+
+OverflowScrollStyled.parameters = {
+  docs: {
+    description: {
+      story: '`scrollable` with custom styled scrollbar',
+    },
+  },
+}
+
 export const Widths: Story<TabsProps> = () => {
   return (
     <>
@@ -413,3 +497,5 @@ WithSearch.storyName = 'With search'
 WithInputInPanel.storyName = 'With input in panel'
 WithStyledComponent.storyName = 'With styled component'
 Overflow.storyName = 'Overflow with next/previous buttons'
+OverflowScroll.storyName = 'Overflow with standard scrollbar'
+OverflowScrollStyled.storyName = 'Overflow with customized scrollbar'
