@@ -41,21 +41,18 @@ describe('Chips', () => {
     expect(await axe(container)).toHaveNoViolations()
   })
   it('Should pass a11y test when has icon', async () => {
-    const iconTestId = 'avatar-chip-test'
     const { container } = render(
       <Chip>
-        <Icon data={add} data-testid={iconTestId} />I am chip
+        <Icon data={add} />I am chip
       </Chip>,
     )
     expect(await axe(container)).toHaveNoViolations()
   })
   it('Should pass a11y test when has avatar', async () => {
-    const avatarTestId = 'avatar-chip-test'
     const imageUrl = 'https://i.imgur.com/UM3mrju.jpg'
     const { container } = render(
       <Chip>
-        <Avatar src={imageUrl} data-testid={avatarTestId} alt="avatar" />I am
-        chip
+        <Avatar src={imageUrl} alt="avatar" />I am chip
       </Chip>,
     )
     expect(await axe(container)).toHaveNoViolations()
