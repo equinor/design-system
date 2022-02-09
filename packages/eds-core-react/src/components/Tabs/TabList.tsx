@@ -2,6 +2,7 @@ import {
   forwardRef,
   useContext,
   useRef,
+  useState,
   useCallback,
   useEffect,
   ReactElement,
@@ -80,13 +81,18 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
 
   const currentTab = useRef(activeTab)
 
+  const [arrowNavigating, setArrowNavigating] = useState(false)
   const selectedTabRef = useCallback(
     (node: HTMLElement) => {
-      if (node !== null && tabsFocused) {
+      if (
+        (node !== null && tabsFocused) ||
+        (node !== null && arrowNavigating)
+      ) {
+        setArrowNavigating(false)
         node.focus()
       }
     },
-    [tabsFocused],
+    [arrowNavigating, tabsFocused],
   )
 
   useEffect(() => {
@@ -125,15 +131,18 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     const i = direction === 'left' ? 1 : -1
     const nextTab =
       focusableChildren[focusableChildren.indexOf(currentTab.current) - i]
+    setArrowNavigating(true)
     handleChange(nextTab === undefined ? fallbackTab : nextTab)
   }
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const { key } = event
     if (key === 'ArrowLeft') {
+      event.preventDefault()
       handleTabsChange('left', lastFocusableChild)
     }
     if (key === 'ArrowRight') {
+      event.preventDefault()
       handleTabsChange('right', firstFocusableChild)
     }
   }
