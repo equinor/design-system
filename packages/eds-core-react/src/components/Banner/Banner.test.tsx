@@ -42,11 +42,10 @@ describe('Banner', () => {
     expect(await axe(container)).toHaveNoViolations()
   })
   it('Should pass a11y test when text and icon', async () => {
-    const iconTestId = 'banner-icon-test'
     const { container } = render(
       <StyledBanner>
         <Banner.Icon>
-          <Icon name="add" data-testid={iconTestId} />
+          <Icon name="add" />
         </Banner.Icon>
         <Banner.Message>Banner message</Banner.Message>
       </StyledBanner>,
