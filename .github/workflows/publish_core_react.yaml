@@ -165,9 +165,7 @@ jobs:
       - name: Get utils build
         uses: actions/cache@v2
         with:
-          path: |
-            ./*
-            ~/.pnpm-store
+          path: ./packages/eds-utils
           key: ${{ github.sha }}-build-utils
       - name: Publish to npm
         run: node_modules/.bin/pnpm --filter @equinor/eds-utils publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
@@ -204,6 +202,11 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
+      - name: Get utils build
+        uses: actions/cache@v2
+        with:
+          path: ./packages/eds-utils
+          key: ${{ github.sha }}-build-utils
       - name: Get eds-icons build
         uses: actions/cache@v2
         with:
@@ -251,6 +254,11 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
+      - name: Get utils build
+        uses: actions/cache@v2
+        with:
+          path: ./packages/eds-utils
+          key: ${{ github.sha }}-build-utils
       - uses: actions/cache@v2
         name: Use storybook build cache
         with:
