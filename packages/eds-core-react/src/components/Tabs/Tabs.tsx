@@ -1,8 +1,8 @@
-import { forwardRef, useState, HTMLAttributes } from 'react'
+import { forwardRef, useState, HTMLAttributes, useEffect, useRef } from 'react'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 import { token as tabsToken } from './Tabs.tokens'
-import { useId, useToken } from '@equinor/eds-utils'
+import { useId, useToken, useCombinedRefs } from '@equinor/eds-utils'
 import { ThemeProvider } from 'styled-components'
 import { useEds } from '../EdsProvider'
 
@@ -28,12 +28,18 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   ref,
 ) {
   const tabsId = useId(id, 'tabs')
-
+  const tabsRef = useRef<HTMLDivElement>(null)
+  const combinedTabsRef = useCombinedRefs<HTMLDivElement>(tabsRef, ref)
   const [tabsFocused, setTabsFocused] = useState(false)
+  const [listenerAttached, setListenerAttached] = useState(false)
 
   let blurTimer
 
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    setListenerAttached(false)
+    if (tabsRef.current) {
+      tabsRef.current.removeEventListener('keyup', checkIfTabWasPressed)
+    }
     blurTimer = setTimeout(() => {
       if (tabsFocused) {
         setTabsFocused(false)
@@ -48,16 +54,32 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
     }
     clearTimeout(blurTimer)
 
-    //Only force focus on active Tab if Tabs was navigated to with keyboard
-    const checkIfTabWasPressed = (event: KeyboardEvent) => {
-      document.removeEventListener('keyup', checkIfTabWasPressed, true)
-      if (event.key === 'Tab') setTabsFocused(true)
+    if (tabsFocused) return
+    if (!listenerAttached) {
+      setListenerAttached(true)
+      if (tabsRef.current) {
+        tabsRef.current.addEventListener('keyup', checkIfTabWasPressed, {
+          once: true,
+          capture: true,
+        })
+      }
     }
-    if (!tabsFocused)
-      document.addEventListener('keyup', checkIfTabWasPressed, true)
-
     onFocus && onFocus(e)
   }
+
+  //Only force focus on active Tab if Tabs was navigated to with keyboard
+  const checkIfTabWasPressed = (event: KeyboardEvent) => {
+    setListenerAttached(false)
+    if (event.key === 'Tab') setTabsFocused(true)
+  }
+
+  useEffect(() => {
+    const tabs = tabsRef.current
+    return () => {
+      if (tabs) tabs.removeEventListener('keyup', checkIfTabWasPressed)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const { density } = useEds()
   const token = useToken({ density }, tabsToken)
@@ -73,7 +95,12 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
           tabsFocused,
         }}
       >
-        <div ref={ref} {...props} onBlur={handleBlur} onFocus={handleFocus} />
+        <div
+          ref={combinedTabsRef}
+          {...props}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
       </TabsProvider>
     </ThemeProvider>
   )
