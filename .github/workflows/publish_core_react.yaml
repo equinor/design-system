@@ -68,7 +68,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
+          key: ${{ github.sha }}
       - name: Get eds-utils build
         uses: actions/cache@v2
         with:
@@ -87,7 +87,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
+          key: ${{ github.sha }}
       - name: Get eds-utils build
         uses: actions/cache@v2
         with:
@@ -125,7 +125,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-lab
+          key: ${{ github.sha }}
       - name: Get eds-tokens build
         uses: actions/cache@v2
         with:
@@ -144,7 +144,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-lab
+          key: ${{ github.sha }}
       - name: Get eds-tokens build
         uses: actions/cache@v2
         with:
