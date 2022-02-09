@@ -59,8 +59,8 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
 
     if (tabsFocused) return
     if (!listenerAttached) {
-      setListenerAttached(true)
       if (tabsRef.current) {
+        setListenerAttached(true)
         tabsRef.current.addEventListener('keyup', checkIfTabWasPressed, {
           once: true,
           capture: true,
