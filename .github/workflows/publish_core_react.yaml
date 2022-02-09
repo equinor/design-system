@@ -58,9 +58,9 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
   test:
-    name: Test
+    name: Test eds-core-react
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [build-utils]
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -68,13 +68,18 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
+      - name: Get eds-utils build
+        uses: actions/cache@v2
+        with:
+          path: ./packages/eds-utils
+          key: ${{ github.sha }}-build-utils
       - name: Test eds-core-react
         run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
   lint:
-    name: Lint
+    name: Lint packages
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [build-utils]
     steps:
       - name: Get base files
         uses: actions/cache@v2
@@ -82,13 +87,18 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-core
+      - name: Get eds-utils build
+        uses: actions/cache@v2
+        with:
+          path: ./packages/eds-utils
+          key: ${{ github.sha }}-build-utils
       - name: Lint all packages
         run: node_modules/.bin/pnpm run lint ./packages
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
-    needs: [test, lint]
+    needs: setup
     steps:
       - name: Get base files
         uses: actions/cache@v2
