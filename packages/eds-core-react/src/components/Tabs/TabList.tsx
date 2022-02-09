@@ -37,7 +37,7 @@ const StyledTabList = styled.div.attrs(
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: ${({ variant }) => variants[variant] as VariantsRecord};
-  overflow-x: hidden;
+  overflow-x: ${({ scrollable }) => (scrollable ? 'auto' : 'hidden')};
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
 
@@ -58,6 +58,8 @@ const StyledTabList = styled.div.attrs(
 export type TabListProps = {
   /** Sets the width of the tabs */
   variant?: Variants
+  /** adds scrollbar if tabs overflow on non-touch devices */
+  scrollable?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 type TabChild = {
@@ -76,6 +78,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     handleChange,
     tabsId,
     variant = 'minWidth',
+    scrollable = false,
     tabsFocused,
   } = useContext(TabsContext)
 
@@ -153,6 +156,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
       ref={ref}
       {...props}
       variant={variant}
+      scrollable={scrollable}
     >
       {Tabs}
     </StyledTabList>

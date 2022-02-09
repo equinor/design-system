@@ -3,6 +3,7 @@ import { Variants } from './Tabs.types'
 
 type State = {
   variant: Variants
+  scrollable: boolean
   handleChange: (index: number) => void
   activeTab: number
   tabsId: string
@@ -11,6 +12,7 @@ type State = {
 
 const TabsContext = createContext<State>({
   variant: 'minWidth',
+  scrollable: false,
   handleChange: () => null,
   activeTab: 0,
   tabsId: '',

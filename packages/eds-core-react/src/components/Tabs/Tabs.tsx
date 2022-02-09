@@ -13,6 +13,8 @@ export type TabsProps = {
   onChange?: (index: number) => void
   /** Sets the width of the tabs. Tabs can have a maximum width of 360px */
   variant?: Variants
+  /** adds scrollbar if tabs overflow on non-touch devices */
+  scrollable?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
@@ -22,6 +24,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
     onBlur,
     onFocus,
     variant = 'minWidth',
+    scrollable,
     id,
     ...props
   },
@@ -92,6 +95,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
           handleChange: onChange,
           tabsId,
           variant,
+          scrollable,
           tabsFocused,
         }}
       >
