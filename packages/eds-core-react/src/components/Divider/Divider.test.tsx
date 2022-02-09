@@ -33,7 +33,13 @@ describe('Divider', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
-    const { container } = render(<Divider />)
+    const { container } = render(
+      <>
+        <p>Some text</p>
+        <Divider />
+        <p>Some text</p>
+      </>,
+    )
     expect(await axe(container)).toHaveNoViolations()
   })
   it('Has medium colour and medium spacing as default', () => {
