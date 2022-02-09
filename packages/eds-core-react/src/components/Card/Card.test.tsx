@@ -67,16 +67,12 @@ describe('Card', () => {
     )
     expect(asFragment()).toMatchSnapshot()
   })
-  it('Should pass a11y test', async () => {
-    const { container } = render(<Card></Card>)
-    expect(await axe(container)).toHaveNoViolations()
-  })
   it('Should pass a11y test when has header', async () => {
     const { container } = render(
       <Card>
         <Header>
-          <Typography variant="h4">Title</Typography>
-          <Typography variant="body_short">Subtitle</Typography>
+          <Typography>Title</Typography>
+          <Typography>Subtitle</Typography>
         </Header>
       </Card>,
     )
@@ -85,7 +81,7 @@ describe('Card', () => {
   it('Should pass a11y test when has actions', async () => {
     const { container } = render(
       <Card>
-        <Actions alignRight data-testid="card-actions">
+        <Actions>
           <button type="button">Click me!</button>
         </Actions>
       </Card>,
@@ -104,7 +100,7 @@ describe('Card', () => {
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     const { container } = render(
       <Card>
-        <Media fullWidth>
+        <Media>
           <img src={src} alt="alt" />
         </Media>
       </Card>,
