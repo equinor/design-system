@@ -103,9 +103,8 @@ export const Overflow: Story<TabsProps> = () => {
   const list = useRef<HTMLDivElement>(null)
   const [containerWidth, setContainerWidth] = useState(0)
   const [totalWidth, setTotalWidth] = useState(0)
-  const [scrollPos, setScrollPos] = useState(0)
+  const [prevDisabled, setPrevDisabled] = useState(true)
   const [nextDisabled, setNextDisabled] = useState(false)
-  const { setTimeout, clearTimeout } = window
 
   const handleChange = (index: number) => {
     setActiveTab(index)
@@ -113,18 +112,20 @@ export const Overflow: Story<TabsProps> = () => {
 
   useLayoutEffect(() => {
     const cachedList = list.current
-    let delayToScrollEnd = 0
+    let delayToScrollEnd: ReturnType<typeof setTimeout>
+
     const handleScroll = () => {
       if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
       delayToScrollEnd = setTimeout(() => {
-        setScrollPos(cachedList.scrollLeft)
-        if (containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth) {
-          setNextDisabled(true)
-        } else {
-          setNextDisabled(false)
-        }
+        cachedList.scrollLeft === 0
+          ? setPrevDisabled(true)
+          : setPrevDisabled(false)
+        containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth
+          ? setNextDisabled(true)
+          : setNextDisabled(false)
       }, 20)
     }
+
     if (cachedList) {
       setContainerWidth(cachedList.clientWidth)
       setTotalWidth(cachedList.scrollWidth)
@@ -132,7 +133,7 @@ export const Overflow: Story<TabsProps> = () => {
     }
 
     return () => {
-      clearTimeout(delayToScrollEnd)
+      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
       cachedList.removeEventListener('scroll', handleScroll)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -157,7 +158,7 @@ export const Overflow: Story<TabsProps> = () => {
           onClick={() => scroll('left')}
           aria-hidden="true"
           tabIndex={-1}
-          disabled={scrollPos === 0}
+          disabled={prevDisabled}
         >
           <Icon name="chevron_left" />
         </NavButton>
