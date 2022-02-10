@@ -183,6 +183,8 @@ export type ComboboxProps<T> = {
   optionLabel?: (option: ComboboxOption<T>) => string
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
+  /** Disable option */
+  optionDisabled?: (option: ComboboxOption<T>) => boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function ComboboxInner<T>(
@@ -202,6 +204,7 @@ function ComboboxInner<T>(
     initialSelectedOptions = [],
     optionLabel = (item) => item.label,
     disablePortal,
+    optionDisabled = () => false,
     ...other
   } = props
   const anchorRef = useRef()
@@ -212,7 +215,7 @@ function ComboboxInner<T>(
   const isControlled = Boolean(selectedOptions)
   const labelItems = options.map(optionLabel)
   const [disabledItems] = useState<string[]>(
-    options.filter((x) => x.disabled).map(optionLabel),
+    options.filter(optionDisabled).map(optionLabel),
   )
   const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
   const initialSelectedItems = initialSelectedOptions.map(optionLabel)

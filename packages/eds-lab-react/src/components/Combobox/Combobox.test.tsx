@@ -148,23 +148,13 @@ describe('Combobox', () => {
   })
 
   it('Second option is first when first option is disabled', async () => {
-    const optionsData = [
-      {
-        label: 'option1',
-        id: 1,
-        disabled: true,
-      },
-      {
-        label: 'option2',
-        id: 2,
-      },
-      {
-        label: 'option3',
-        id: 3,
-      },
-    ]
-
-    render(<Combobox options={optionsData} label={labelText} />)
+    render(
+      <Combobox
+        options={items}
+        label={labelText}
+        optionDisabled={(item) => item === items[0]}
+      />,
+    )
 
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
@@ -173,9 +163,7 @@ describe('Combobox', () => {
     fireEvent.keyDown(input, { key: 'ArrowDown' })
     const options = await within(optionsList).findAllByRole('option')
     expect(options).toHaveLength(2) // since one option is disabled
-    expect(
-      await within(options[0]).findByText(optionsData[1].label),
-    ).toBeDefined()
+    expect(await within(options[0]).findByText(items[1].label)).toBeDefined()
 
     const withDisabledOptions = await within(optionsList).findAllByRole(
       'option',
@@ -185,7 +173,7 @@ describe('Combobox', () => {
     )
     expect(withDisabledOptions[0]).toHaveAttribute('aria-hidden')
     expect(
-      await within(withDisabledOptions[0]).findByText(optionsData[0].label),
+      await within(withDisabledOptions[0]).findByText(items[0].label),
     ).toBeDefined()
   })
 
