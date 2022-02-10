@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-utils",
-  "version": "0.1.0",
+  "version": "0.1.0-dev.20220210",
   "description": "Utility functions and hooks for the Equinor Design System",
   "sideEffects": false,
   "main": "dist/eds-utils.cjs.js",
