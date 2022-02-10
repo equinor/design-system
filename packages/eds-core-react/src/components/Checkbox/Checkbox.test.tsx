@@ -44,11 +44,10 @@ describe('Checkbox', () => {
     expect(await axe(container)).toHaveNoViolations()
   })
   it('should pass a11y test with external label', async () => {
-    const label = 'Description'
     const { container } = render(
-      <label>
-        <Checkbox />
-        {label}
+      <label htmlFor="text">
+        <Checkbox id="text" />
+        Label text
       </label>,
     )
     expect(await axe(container)).toHaveNoViolations()
