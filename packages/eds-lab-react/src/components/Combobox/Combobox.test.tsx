@@ -18,26 +18,45 @@ const labelText = 'Select label test'
 afterEach(cleanup)
 
 describe('Combobox', () => {
-  it('Matches snapshot', () => {
+  it('Matches snapshot', async () => {
     render(<Combobox options={items} label={labelText} />)
-    const optionsNode = screen.getAllByLabelText(labelText)[1]
 
-    expect(optionsNode).toMatchSnapshot()
+    const combobox = screen.getAllByLabelText(labelText)
+    const input = combobox[0]
+
+    fireEvent.click(input)
+
+    const openCombobox = await screen.findAllByLabelText(labelText)
+    const optionsList = openCombobox[1]
+
+    expect(optionsList).toMatchSnapshot()
   })
-  it('Has provided label', () => {
-    render(<Combobox label={labelText} options={items} id="id" />)
+  it('Has provided label', async () => {
+    render(<Combobox label={labelText} options={items} />)
+
     // The same label is used for both the input field and the list of options
-    const inputNode = screen.getAllByLabelText(labelText)
-    expect(inputNode).toBeDefined()
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
+
+    expect(input).toBeDefined()
+    expect(input).toHaveAccessibleName(labelText)
+    expect(input.nodeName).toBe('INPUT')
+
+    expect(optionsList).toBeDefined()
+    expect(optionsList).toHaveAccessibleName(labelText)
+    expect(optionsList.nodeName).toBe('UL')
   })
 
-  it('Can be disabled', () => {
+  it('Can be disabled', async () => {
     render(<Combobox label={labelText} options={items} disabled />)
-    const inputNode = screen.getAllByLabelText(labelText)[0]
-    expect(inputNode).toBeDisabled()
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+
+    expect(input).toBeDisabled()
   })
 
-  it('Can preselect specific options', () => {
+  it('Can preselect specific options', async () => {
     render(
       <Combobox
         options={items}
@@ -46,19 +65,30 @@ describe('Combobox', () => {
         multiple
       />,
     )
-    const placeholderText = screen.getByPlaceholderText('2/3 selected')
-    expect(placeholderText).toBeDefined()
+    const input = await screen.findByPlaceholderText('2/3 selected')
+    fireEvent.click(input)
+
+    const checkboxes = await screen.findAllByRole('checkbox')
+    const checked = checkboxes.filter((x) => x.hasAttribute('checked'))
+
+    expect(input).toBeDefined()
+    expect(checked.length).toBe(2)
   })
 
-  it('Can open the options on button click', () => {
+  it('Can open the options on button click', async () => {
     render(<Combobox options={items} label={labelText} />)
-    const optionsNode = screen.getAllByLabelText(labelText)[1]
-    const buttonNode = screen.getByLabelText('toggle options', {
+
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const optionsList = labeledNodes[1]
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
       selector: 'button',
     })
-    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
+    expect(optionsList.childNodes).toHaveLength(0)
+
     fireEvent.click(buttonNode)
-    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(3)
+
+    expect(await within(optionsList).findAllByRole('option')).toHaveLength(3)
   })
 
   type ControlledProps = {
@@ -81,40 +111,44 @@ describe('Combobox', () => {
     )
   }
 
-  it('Can be a controlled component', () => {
+  it('Can be a controlled component', async () => {
     const handleChange = jest.fn()
     render(<HandleMultipleSelect onOptionsChange={handleChange} />)
-    const optionsNode = screen.getAllByLabelText(labelText)[1]
-    const buttonNode = screen.getByLabelText('toggle options', {
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const optionsList = labeledNodes[1]
+    const buttonNode = await screen.findByLabelText('toggle options', {
       selector: 'button',
     })
 
     expect(handleChange).toHaveBeenCalledTimes(0)
     fireEvent.click(buttonNode)
-    fireEvent.click(within(optionsNode).queryAllByRole('option')[2])
+    const options = await within(optionsList).findAllByRole('option')
+    fireEvent.click(options[2])
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
 
-  it('Can filter results by contains search', () => {
+  it('Can filter results by input value', async () => {
     render(<Combobox options={items} label={labelText} />)
-    const inputNode = screen.getAllByLabelText(labelText)[0]
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
 
-    const optionsNode = screen.getAllByLabelText(labelText)[1]
-
-    const buttonNode = screen.getByLabelText('toggle options', {
+    const buttonNode = await screen.findByLabelText('toggle options', {
       selector: 'button',
     })
-    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(0)
+    expect(optionsList.childNodes).toHaveLength(0)
+
     fireEvent.click(buttonNode)
-    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(3)
-    fireEvent.change(inputNode, {
+    expect(await within(optionsList).findAllByRole('option')).toHaveLength(3)
+
+    fireEvent.change(input, {
       target: { value: 'ree' },
     })
-    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(1)
+    expect(await within(optionsList).findAllByRole('option')).toHaveLength(1)
   })
 
-  it('Second option is first when first option is disabled', () => {
-    const options = [
+  it('Second option is first when first option is disabled', async () => {
+    const optionsData = [
       {
         label: 'option1',
         id: 1,
@@ -130,25 +164,48 @@ describe('Combobox', () => {
       },
     ]
 
-    render(<Combobox options={options} label={labelText} />)
-    const inputNode = screen.getAllByLabelText(labelText)[0]
-    const optionsNode = screen.getByRole('listbox')
+    render(<Combobox options={optionsData} label={labelText} />)
 
-    fireEvent.keyDown(inputNode, { key: 'ArrowDown' })
-    expect(within(optionsNode).queryAllByRole('option')).toHaveLength(2) // since one option is disabled
-    const firstOption = within(optionsNode).queryAllByRole('option')[0]
-    expect(within(firstOption).getByText(options[1].label)).toBeDefined()
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const input = labeledNodes[0]
+    const optionsList = labeledNodes[1]
+
+    fireEvent.keyDown(input, { key: 'ArrowDown' })
+    const options = await within(optionsList).findAllByRole('option')
+    expect(options).toHaveLength(2) // since one option is disabled
+    expect(
+      await within(options[0]).findByText(optionsData[1].label),
+    ).toBeDefined()
+
+    const withDisabledOptions = await within(optionsList).findAllByRole(
+      'option',
+      {
+        hidden: true,
+      },
+    )
+    expect(withDisabledOptions[0]).toHaveAttribute('aria-hidden')
+    expect(
+      await within(withDisabledOptions[0]).findByText(optionsData[0].label),
+    ).toBeDefined()
   })
 
-  const StyledMultiSelect = styled(Combobox)`
+  const StyledCombobox = styled(Combobox)`
     clip-path: unset;
   `
 
-  it('Can extend the css for the component', () => {
+  it('Can extend the css for the component & props are passed correctly to input', async () => {
     const { container } = render(
-      <StyledMultiSelect label="test" options={items} />,
+      <StyledCombobox
+        label="test"
+        options={items}
+        data-testid="styled-combobox"
+      />,
     )
+
+    const combobox = await screen.findByTestId('styled-combobox')
+
     // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
+    expect(combobox.nodeName).toBe('INPUT')
   })
 })
