@@ -30,7 +30,7 @@ describe('Input', () => {
   it('Should pass a11y test when using label', async () => {
     const { container } = render(
       <label>
-        {label}
+        Label text
         <Input />
       </label>,
     )
