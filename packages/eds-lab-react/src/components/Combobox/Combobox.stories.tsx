@@ -184,55 +184,28 @@ OptionLabel.args = {
 }
 
 export const DisabledOption: Story<ComboboxProps<MyOptionType>> = (args) => {
-  const options = [
-    {
-      label: 'Microsoft Corporation',
-      symbol: 'MSFT',
-      disabled: true,
-    },
-    {
-      label: 'Tesla, Inc',
-      symbol: 'TSLA',
-    },
-    {
-      label: 'Apple Inc.',
-      symbol: 'AAPL',
-    },
-    {
-      label: 'NVIDIA Corporation',
-      symbol: 'NVDA',
-    },
-    {
-      label: 'Alphabet Inc.',
-      symbol: 'GOOG',
-      disabled: true,
-    },
-    {
-      label: 'Amazon.com, Inc.',
-      symbol: 'AMZN',
-    },
-    {
-      label: 'Meta Platforms, Inc.',
-      symbol: 'FB',
-      disabled: true,
-    },
-    {
-      label: 'Berkshire Hathaway Inc.',
-      symbol: 'BRK',
-    },
-  ]
-
+  const { options } = args
+  const isOptionDisabled = (item: MyOptionType) =>
+    item === options[0] || item === options[options.length - 1]
   return (
     <Stack direction="column">
-      <Combobox label="Select a stock" options={options} {...args} />
+      <Combobox
+        label="Select a stock"
+        optionDisabled={isOptionDisabled}
+        {...args}
+      />
       <Combobox
         label="Select multiple stocks"
-        options={options}
+        optionDisabled={isOptionDisabled}
         {...args}
         multiple
       />
     </Stack>
   )
+}
+
+DisabledOption.args = {
+  options: stocks,
 }
 
 export const PreselectedOptions: Story<ComboboxProps<MyOptionType>> = (
