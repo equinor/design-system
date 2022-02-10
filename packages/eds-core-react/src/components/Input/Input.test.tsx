@@ -28,7 +28,6 @@ describe('Input', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Should pass a11y test when using label', async () => {
-    const label = 'Input'
     const { container } = render(
       <label>
         {label}
