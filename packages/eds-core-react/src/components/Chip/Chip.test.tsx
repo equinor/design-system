@@ -1,5 +1,6 @@
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { add } from '@equinor/eds-icons'
@@ -34,6 +35,27 @@ describe('Chips', () => {
       'position',
       'relative',
     )
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Chip>I am chip</Chip>)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when has icon', async () => {
+    const { container } = render(
+      <Chip>
+        <Icon data={add} />I am chip
+      </Chip>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when has avatar', async () => {
+    const imageUrl = 'https://i.imgur.com/UM3mrju.jpg'
+    const { container } = render(
+      <Chip>
+        <Avatar src={imageUrl} alt="avatar" />I am chip
+      </Chip>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Has provided text', () => {
     const chipText = 'hello, I am a chip'
