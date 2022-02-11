@@ -183,7 +183,7 @@ export type ComboboxProps<T> = {
   /** Callback for the selected item change
    * changes.selectedItems gives the selected items
    */
-  onOptionsChange?: (changes: ComboboxChanges<T>) => void
+  onOptionsChange?: (changes: ComboboxChanges<ComboboxOption<T>>) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
@@ -224,7 +224,6 @@ function ComboboxInner<T>(
 
   const isControlled = Boolean(selectedOptions)
   const [availableItems, setAvailableItems] = useState(options)
-  const initialSelectedItems = initialSelectedOptions
   const disabledItems = useMemo(
     () => options.filter(optionDisabled),
     [options, optionDisabled],
@@ -238,9 +237,9 @@ function ComboboxInner<T>(
 
   let multipleSelectionProps: UseMultipleSelectionProps<ComboboxOption<T>> = {
     initialSelectedItems: multiple
-      ? initialSelectedItems
-      : initialSelectedItems[0]
-      ? [initialSelectedItems[0]]
+      ? initialSelectedOptions
+      : initialSelectedOptions[0]
+      ? [initialSelectedOptions[0]]
       : [],
     onSelectedItemsChange: ({ selectedItems }) => {
       if (onOptionsChange) {
@@ -254,7 +253,7 @@ function ComboboxInner<T>(
   if (isControlled) {
     multipleSelectionProps = {
       ...multipleSelectionProps,
-      selectedItems: selectedOptions,
+      selectedItems: selectedOptions || [],
     }
   }
 
@@ -269,7 +268,7 @@ function ComboboxInner<T>(
 
   let comboBoxProps: UseComboboxProps<ComboboxOption<T>> = {
     items: availableItems,
-    initialSelectedItem: initialSelectedItems[0],
+    initialSelectedItem: initialSelectedOptions[0],
     itemToString: (item) => (item ? optionLabel(item) : ''),
     onInputValueChange: ({ inputValue }) => {
       setAvailableItems(
@@ -291,15 +290,13 @@ function ComboboxInner<T>(
       }
     },
     onStateChange: ({ type, selectedItem }) => {
-      const isDisabled = optionDisabled(selectedItem)
-
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
-          if (selectedItem && !isDisabled) {
+          if (selectedItem && !optionDisabled(selectedItem)) {
             if (multiple) {
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
@@ -462,6 +459,11 @@ function ComboboxInner<T>(
         : availableItems.map((item, index) => {
             const isDisabled = optionDisabled(item)
             const label = optionLabel(item)
+            const isSelected = Boolean(
+              selectedItems.find(
+                (selectedItem) => optionLabel(selectedItem) === label,
+              ),
+            )
             return (
               <ComboboxOption
                 key={label}
@@ -470,7 +472,7 @@ function ComboboxInner<T>(
                 highlighted={
                   highlightedIndex === index && !isDisabled ? 'true' : 'false'
                 }
-                isSelected={selectedItems.includes(item)}
+                isSelected={isSelected}
                 isDisabled={isDisabled}
                 {...getItemProps({ item, index, disabled })}
               />
