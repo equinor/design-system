@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
@@ -37,6 +38,19 @@ describe('Checkbox', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Checkbox label={'checkbox'} />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('should pass a11y test', async () => {
+    const { container } = render(<Checkbox label="checkbox-test" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('should pass a11y test with external label', async () => {
+    const { container } = render(
+      <>
+        <label htmlFor="checkbox">Label text</label>
+        <Checkbox id="checkbox" />
+      </>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Can extend the css for the component', () => {
     render(<StyledCheckbox label="checkbox-test" />)
