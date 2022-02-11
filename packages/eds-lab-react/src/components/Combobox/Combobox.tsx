@@ -1,4 +1,11 @@
-import { forwardRef, useState, HTMLAttributes, useEffect, useRef } from 'react'
+import {
+  forwardRef,
+  useState,
+  HTMLAttributes,
+  useEffect,
+  useRef,
+  useMemo,
+} from 'react'
 import { createPortal } from 'react-dom'
 import {
   useCombobox,
@@ -82,40 +89,40 @@ type ComboboxOption<T> = T & {
   disabled?: boolean
 }
 
-type IndexFinderType = ({
+type IndexFinderType = <T>({
   calc,
   index,
-  disabledItems,
+  optionDisabled,
   availableItems,
 }: {
   index: number
-  disabledItems: string[]
-  availableItems: string[]
+  optionDisabled: ComboboxProps<T>['optionDisabled']
+  availableItems: ComboboxProps<T>['options']
   calc?: (n: number) => number
 }) => number
 
 const findIndex: IndexFinderType = ({
   calc,
   index,
-  disabledItems,
+  optionDisabled,
   availableItems,
 }) => {
   const nextItem = availableItems[index]
-  if (disabledItems.includes(nextItem)) {
+  if (optionDisabled(nextItem)) {
     const nextIndex = calc(index)
-    return findIndex({ calc, index: nextIndex, availableItems, disabledItems })
+    return findIndex({ calc, index: nextIndex, availableItems, optionDisabled })
   }
   return index
 }
 
 const findNextIndex: IndexFinderType = ({
   index,
-  disabledItems,
+  optionDisabled,
   availableItems,
 }) => {
   const options = {
     index,
-    disabledItems,
+    optionDisabled,
     availableItems,
     calc: (num: number) => num + 1,
   }
@@ -131,12 +138,12 @@ const findNextIndex: IndexFinderType = ({
 
 const findPrevIndex: IndexFinderType = ({
   index,
-  disabledItems,
+  optionDisabled,
   availableItems,
 }) => {
   const options = {
     index,
-    disabledItems,
+    optionDisabled,
     availableItems,
     calc: (num: number) => num - 1,
   }
@@ -172,11 +179,11 @@ export type ComboboxProps<T> = {
    * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
    * The items that should be selected. */
-  selectedOptions?: T[]
+  selectedOptions?: ComboboxOption<T>[]
   /** Callback for the selected item change
    * changes.selectedItems gives the selected items
    */
-  onOptionsChange?: (changes: ComboboxChanges<T>) => void
+  onOptionsChange?: (changes: ComboboxChanges<ComboboxOption<T>>) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
@@ -185,6 +192,8 @@ export type ComboboxProps<T> = {
   disablePortal?: boolean
   /** Disable option */
   optionDisabled?: (option: ComboboxOption<T>) => boolean
+  /** Filter function for options */
+  optionsFilter?: (option: ComboboxOption<T>, inputValue: string) => boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function ComboboxInner<T>(
@@ -205,6 +214,7 @@ function ComboboxInner<T>(
     optionLabel = (item) => item.label,
     disablePortal,
     optionDisabled = () => false,
+    optionsFilter,
     ...other
   } = props
   const anchorRef = useRef()
@@ -213,14 +223,11 @@ function ComboboxInner<T>(
   const isMounted = useIsMounted()
 
   const isControlled = Boolean(selectedOptions)
-  const labelItems = options.map(optionLabel)
-  const [disabledItems] = useState<string[]>(
-    options.filter(optionDisabled).map(optionLabel),
+  const [availableItems, setAvailableItems] = useState(options)
+  const disabledItems = useMemo(
+    () => options.filter(optionDisabled),
+    [options, optionDisabled],
   )
-  const [availableItems, setAvailableItems] = useState<string[]>(labelItems)
-  const initialSelectedItems = initialSelectedOptions.map(optionLabel)
-  const controlledSelectedItems = (selectedOptions || []).map(optionLabel)
-
   const { density } = useEds()
   const token = useToken(
     { density },
@@ -228,19 +235,16 @@ function ComboboxInner<T>(
   )
   let placeholderText: string = undefined
 
-  let multipleSelectionProps: UseMultipleSelectionProps<string> = {
+  let multipleSelectionProps: UseMultipleSelectionProps<ComboboxOption<T>> = {
     initialSelectedItems: multiple
-      ? initialSelectedItems
-      : initialSelectedItems[0]
-      ? [initialSelectedItems[0]]
+      ? initialSelectedOptions
+      : initialSelectedOptions[0]
+      ? [initialSelectedOptions[0]]
       : [],
-    onSelectedItemsChange: (changes) => {
+    onSelectedItemsChange: ({ selectedItems }) => {
       if (onOptionsChange) {
-        const items = options.filter((x) =>
-          changes.selectedItems.includes(optionLabel(x)),
-        )
         onOptionsChange({
-          selectedItems: items,
+          selectedItems,
         })
       }
     },
@@ -249,7 +253,7 @@ function ComboboxInner<T>(
   if (isControlled) {
     multipleSelectionProps = {
       ...multipleSelectionProps,
-      selectedItems: controlledSelectedItems,
+      selectedItems: selectedOptions || [],
     }
   }
 
@@ -262,32 +266,37 @@ function ComboboxInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
-  let comboBoxProps: UseComboboxProps<string> = {
+  let comboBoxProps: UseComboboxProps<ComboboxOption<T>> = {
     items: availableItems,
-    initialSelectedItem: initialSelectedItems[0],
+    initialSelectedItem: initialSelectedOptions[0],
+    itemToString: (item) => (item ? optionLabel(item) : ''),
     onInputValueChange: ({ inputValue }) => {
       setAvailableItems(
-        labelItems.filter((item) =>
-          item.toLowerCase().includes(inputValue.toLowerCase()),
-        ),
+        options.filter((item) => {
+          if (optionsFilter) {
+            return optionsFilter(item, inputValue)
+          }
+
+          return optionLabel(item)
+            .toLowerCase()
+            .includes(inputValue.toLowerCase())
+        }),
       )
     },
     onIsOpenChange: ({ selectedItem }) => {
       // Show all options when single select is reopened with a selected item
       if (availableItems.length === 1 && selectedItem === availableItems[0]) {
-        setAvailableItems(labelItems)
+        setAvailableItems(options)
       }
     },
     onStateChange: ({ type, selectedItem }) => {
-      const isDisabled = disabledItems.includes(selectedItem)
-
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
-          if (selectedItem && !isDisabled) {
+          if (selectedItem && !optionDisabled(selectedItem)) {
             if (multiple) {
               selectedItems.includes(selectedItem)
                 ? removeSelectedItem(selectedItem)
@@ -302,7 +311,7 @@ function ComboboxInner<T>(
           break
       }
     },
-    stateReducer: (state, actionAndChanges) => {
+    stateReducer: (_, actionAndChanges) => {
       const { changes, type } = actionAndChanges
 
       switch (type) {
@@ -310,20 +319,20 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownHome:
           return {
             ...changes,
-            highlightedIndex: findNextIndex({
+            highlightedIndex: findNextIndex<ComboboxOption<T>>({
               index: changes.highlightedIndex,
               availableItems,
-              disabledItems,
+              optionDisabled,
             }),
           }
         case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
           return {
             ...changes,
-            highlightedIndex: findPrevIndex({
+            highlightedIndex: findPrevIndex<ComboboxOption<T>>({
               index: changes.highlightedIndex,
               availableItems,
-              disabledItems,
+              optionDisabled,
             }),
           }
         default:
@@ -335,7 +344,7 @@ function ComboboxInner<T>(
   if (isControlled && !multiple) {
     comboBoxProps = {
       ...comboBoxProps,
-      selectedItem: controlledSelectedItems[0],
+      selectedItem: selectedOptions[0],
     }
   }
 
@@ -354,20 +363,20 @@ function ComboboxInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownHome:
             return {
               ...changes,
-              highlightedIndex: findNextIndex({
+              highlightedIndex: findNextIndex<ComboboxOption<T>>({
                 index: changes.highlightedIndex,
                 availableItems,
-                disabledItems,
+                optionDisabled,
               }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
             return {
               ...changes,
-              highlightedIndex: findPrevIndex({
+              highlightedIndex: findPrevIndex<ComboboxOption<T>>({
                 index: changes.highlightedIndex,
                 availableItems,
-                disabledItems,
+                optionDisabled,
               }),
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
@@ -434,6 +443,11 @@ function ComboboxInner<T>(
   }
   const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
 
+  const selectedItemsLabels = useMemo(
+    () => selectedItems.map(optionLabel),
+    [selectedItems, optionLabel],
+  )
+
   const optionsList = (
     <StyledList
       {...getMenuProps(
@@ -448,16 +462,18 @@ function ComboboxInner<T>(
       {!isOpen
         ? null
         : availableItems.map((item, index) => {
-            const isDisabled = disabledItems.includes(item)
+            const label = optionLabel(item)
+            const isDisabled = optionDisabled(item)
+            const isSelected = selectedItemsLabels.includes(label)
             return (
               <ComboboxOption
-                key={item}
-                value={item}
+                key={label}
+                value={label}
                 multiple={multiple}
                 highlighted={
                   highlightedIndex === index && !isDisabled ? 'true' : 'false'
                 }
-                isSelected={selectedItems.includes(item)}
+                isSelected={isSelected}
                 isDisabled={isDisabled}
                 {...getItemProps({ item, index, disabled })}
               />

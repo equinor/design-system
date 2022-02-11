@@ -30,7 +30,7 @@ type MyOptionType = {
   trend?: string
 }
 
-export const counties = [
+const counties = [
   'Oslo',
   'Rogaland',
   'Møre og Romsdal',
@@ -453,4 +453,35 @@ export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
       </form>
     </Container>
   )
+}
+
+export const CustomOptionsFilter: Story<ComboboxProps<MyOptionType>> = (
+  args,
+) => {
+  const optionsFilter: ComboboxProps<MyOptionType>['optionsFilter'] = (
+    option,
+    inputValue,
+  ) =>
+    (option.label + option.symbol)
+      .toLowerCase()
+      .includes(inputValue.toLocaleLowerCase())
+  return (
+    <Stack direction="column">
+      <Combobox
+        label="Select a stock"
+        optionsFilter={optionsFilter}
+        {...args}
+      />
+      <Combobox
+        label="Select multiple stocks"
+        multiple
+        optionsFilter={optionsFilter}
+        {...args}
+      />
+    </Stack>
+  )
+}
+
+CustomOptionsFilter.args = {
+  options: stocks,
 }
