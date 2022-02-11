@@ -443,6 +443,11 @@ function ComboboxInner<T>(
   }
   const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
 
+  const selectedItemsLabels = useMemo(
+    () => selectedItems.map(optionLabel),
+    [selectedItems, optionLabel],
+  )
+
   const optionsList = (
     <StyledList
       {...getMenuProps(
@@ -457,13 +462,9 @@ function ComboboxInner<T>(
       {!isOpen
         ? null
         : availableItems.map((item, index) => {
-            const isDisabled = optionDisabled(item)
             const label = optionLabel(item)
-            const isSelected = Boolean(
-              selectedItems.find(
-                (selectedItem) => optionLabel(selectedItem) === label,
-              ),
-            )
+            const isDisabled = optionDisabled(item)
+            const isSelected = selectedItemsLabels.includes(label)
             return (
               <ComboboxOption
                 key={label}
