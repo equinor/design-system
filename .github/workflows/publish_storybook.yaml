@@ -78,6 +78,8 @@ jobs:
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
       - name: Build utils
         run: node_modules/.bin/pnpm --filter @equinor/eds-utils run build
+      - name: Build icons
+        run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Build storybook
         run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
       - uses: actions/cache@v2
@@ -102,6 +104,8 @@ jobs:
           key: ${{ github.sha }}
       - name: Build tokens
         run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
+      - name: Build utils
+        run: node_modules/.bin/pnpm --filter @equinor/eds-utils run build
       - name: Build icons
         run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
       - name: Build core-react
