@@ -454,6 +454,7 @@ function ComboboxInner<T>(
         {
           ref: setContainerEl,
           style: styles.popper as UseComboboxGetMenuPropsOptions['style'],
+          'aria-multiselectable': multiple ? 'true' : null,
           ...attributes.popper,
         },
         { suppressRefError: true },

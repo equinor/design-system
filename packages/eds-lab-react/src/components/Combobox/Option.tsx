@@ -47,7 +47,15 @@ export type ComboboxOptionProps = {
 
 export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
   function ComboboxOption(
-    { value, multiple, isSelected, isDisabled, onClick, ...other },
+    {
+      value,
+      multiple,
+      isSelected,
+      isDisabled,
+      onClick,
+      'aria-selected': ariaSelected,
+      ...other
+    },
     ref,
   ) {
     return (
@@ -57,6 +65,7 @@ export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         aria-hidden={isDisabled}
         active={!multiple && isSelected ? 'true' : 'false'}
         onClick={(e) => !isDisabled && onClick(e)}
+        aria-selected={multiple ? isSelected : ariaSelected}
         {...other}
       >
         {multiple && (
