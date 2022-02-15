@@ -29,7 +29,7 @@ const StyledTooltip = styled.div<{ open: boolean }>`
   ${bordersTemplate(tokens.border)}
 
   background: ${tokens.background};
-  z-index: 350;
+  z-index: 1500;
   white-space: nowrap;
 
   .arrow {
