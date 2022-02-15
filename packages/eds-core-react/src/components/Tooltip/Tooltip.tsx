@@ -108,7 +108,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const [popperEl, setPopperEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
-    const openTimer = useRef<number>()
+    const openTimer = useRef<ReturnType<typeof setTimeout>>()
     const tooltipRef = useCombinedRefs<HTMLDivElement>(setPopperEl, ref)
     const anchorRef = useRef<HTMLElement>()
     const combinedChilddRef = useCombinedRefs<HTMLElement>(
@@ -118,7 +118,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const tooltipId = useId(id, 'tooltip')
     const containerId = 'eds-tooltip-container'
     const shouldOpen = isMounted && title !== ''
-    const { setTimeout, clearTimeout } = window
 
     useEffect(() => {
       if (document.getElementById(containerId) === null) {
@@ -129,7 +128,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return () => {
         clearTimeout(openTimer.current)
       }
-    }, [clearTimeout])
+    }, [])
 
     const openTooltip = () => {
       if (shouldOpen) {
