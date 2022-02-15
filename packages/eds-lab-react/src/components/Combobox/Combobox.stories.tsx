@@ -485,3 +485,55 @@ export const CustomOptionsFilter: Story<ComboboxProps<MyOptionType>> = (
 CustomOptionsFilter.args = {
   options: stocks,
 }
+
+export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
+  const { options } = args
+
+  const selectAllOption: MyOptionType = {
+    label: 'Select All',
+  }
+  const optionsWithAll = [selectAllOption, ...options]
+  const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
+  const [hasSelectedAll, setHasSelectedAll] = useState<boolean>(false)
+
+  const onChange = (changes: ComboboxChanges<MyOptionType>) => {
+    console.log('changes', changes)
+    const selectAll = changes.selectedItems.find(
+      (item) => item.label === selectAllOption.label,
+    )
+
+    if (!selectAll && hasSelectedAll) {
+      // select all was de-selected; reset selection
+      console.log('reset selection')
+      setSelectedItems([])
+      setHasSelectedAll(false)
+    } else if (selectAll && !hasSelectedAll) {
+      // select all was added; select all
+      console.log('select all')
+      setSelectedItems(optionsWithAll)
+      setHasSelectedAll(true)
+    } else {
+      setSelectedItems(changes.selectedItems)
+    }
+  }
+
+  return (
+    <Stack direction="column">
+      <Typography>
+        Selected items:{selectedItems.map((x) => x.label).toString()}
+      </Typography>
+      <Combobox
+        label="Select multiple stocks"
+        options={optionsWithAll}
+        initialSelectedOptions={[]}
+        selectedOptions={selectedItems}
+        onOptionsChange={onChange}
+        multiple
+      />
+    </Stack>
+  )
+}
+
+SelectAll.args = {
+  options: stocks,
+}
