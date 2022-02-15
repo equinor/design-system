@@ -101,7 +101,15 @@ export type TooltipProps = {
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    { title, placement = 'bottom', children, enterDelay = 100, id, ...rest },
+    {
+      title,
+      placement = 'bottom',
+      children,
+      enterDelay = 100,
+      id,
+      style,
+      ...rest
+    },
     ref,
   ) {
     const isMounted = useIsMounted()
@@ -158,6 +166,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const props = {
       open,
+      style: { ...styles.popper, ...style },
       ...rest,
       ...attributes.popper,
     }
@@ -183,7 +192,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               id={tooltipId}
               role="tooltip"
               ref={tooltipRef}
-              style={styles.popper}
               {...props}
             >
               {title}
