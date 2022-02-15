@@ -84,8 +84,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
     ref,
   ) {
     const [visible, setVisible] = useState(open)
-    const timer = useRef<number>()
-    const { setTimeout, clearTimeout } = window
+    const timer = useRef<ReturnType<typeof setTimeout>>()
 
     useEffect(() => {
       setVisible(open)
@@ -99,7 +98,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       }, autoHideDuration)
 
       return () => clearTimeout(timer.current)
-    }, [open, autoHideDuration, setVisible, onClose, clearTimeout, setTimeout])
+    }, [open, autoHideDuration, setVisible, onClose])
 
     const props = {
       ref,
