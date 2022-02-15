@@ -18,7 +18,7 @@ const StyledTopBar = styled.header(({ theme }) => {
     position: sticky;
     background: ${theme.background};
     box-sizing: border-box;
-    z-index: 250;
+    z-index: 1100;
     display: grid;
     grid-column-gap: ${theme.spacings.left};
     grid-template-columns: auto 1fr auto;
