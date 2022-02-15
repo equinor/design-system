@@ -158,9 +158,7 @@ const findPrevIndex: IndexFinderType = ({
   return prevIndex
 }
 
-export type ComboboxChanges<T> = {
-  selectedItems: T[]
-}
+export type ComboboxChanges<T> = UseMultipleSelectionProps<ComboboxOption<T>>
 
 export type ComboboxProps<T> = {
   /** List of options to choose from */
@@ -241,11 +239,9 @@ function ComboboxInner<T>(
       : initialSelectedOptions[0]
       ? [initialSelectedOptions[0]]
       : [],
-    onSelectedItemsChange: ({ selectedItems }) => {
+    onSelectedItemsChange: (changes) => {
       if (onOptionsChange) {
-        onOptionsChange({
-          selectedItems,
-        })
+        onOptionsChange(changes)
       }
     },
   }
