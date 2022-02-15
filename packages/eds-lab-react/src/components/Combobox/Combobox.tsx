@@ -344,7 +344,7 @@ function ComboboxInner<T>(
   if (isControlled && !multiple) {
     comboBoxProps = {
       ...comboBoxProps,
-      selectedItem: selectedOptions[0],
+      selectedItem: selectedOptions[0] || null,
     }
   }
 
