@@ -1,8 +1,8 @@
-import { forwardRef, useState, HTMLAttributes } from 'react'
+import { forwardRef, useState, HTMLAttributes, useEffect, useRef } from 'react'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 import { token as tabsToken } from './Tabs.tokens'
-import { useId, useToken } from '@equinor/eds-utils'
+import { useId, useToken, useCombinedRefs } from '@equinor/eds-utils'
 import { ThemeProvider } from 'styled-components'
 import { useEds } from '../EdsProvider'
 
@@ -13,6 +13,8 @@ export type TabsProps = {
   onChange?: (index: number) => void
   /** Sets the width of the tabs. Tabs can have a maximum width of 360px */
   variant?: Variants
+  /** adds scrollbar if tabs overflow on non-touch devices */
+  scrollable?: boolean
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
@@ -22,18 +24,25 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
     onBlur,
     onFocus,
     variant = 'minWidth',
+    scrollable,
     id,
     ...props
   },
   ref,
 ) {
   const tabsId = useId(id, 'tabs')
-
+  const tabsRef = useRef<HTMLDivElement>(null)
+  const combinedTabsRef = useCombinedRefs<HTMLDivElement>(tabsRef, ref)
   const [tabsFocused, setTabsFocused] = useState(false)
+  const [listenerAttached, setListenerAttached] = useState(false)
 
   let blurTimer
 
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    setListenerAttached(false)
+    if (tabsRef.current) {
+      tabsRef.current.removeEventListener('keyup', checkIfTabWasPressed)
+    }
     blurTimer = setTimeout(() => {
       if (tabsFocused) {
         setTabsFocused(false)
@@ -47,11 +56,33 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
       return
     }
     clearTimeout(blurTimer)
-    if (!tabsFocused) {
-      setTabsFocused(true)
+
+    if (tabsFocused) return
+    if (!listenerAttached) {
+      if (tabsRef.current) {
+        setListenerAttached(true)
+        tabsRef.current.addEventListener('keyup', checkIfTabWasPressed, {
+          once: true,
+          capture: true,
+        })
+      }
     }
     onFocus && onFocus(e)
   }
+
+  //Only force focus on active Tab if Tabs was navigated to with keyboard
+  const checkIfTabWasPressed = (event: KeyboardEvent) => {
+    setListenerAttached(false)
+    if (event.key === 'Tab') setTabsFocused(true)
+  }
+
+  useEffect(() => {
+    const tabs = tabsRef.current
+    return () => {
+      if (tabs) tabs.removeEventListener('keyup', checkIfTabWasPressed)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const { density } = useEds()
   const token = useToken({ density }, tabsToken)
@@ -64,10 +95,16 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
           handleChange: onChange,
           tabsId,
           variant,
+          scrollable,
           tabsFocused,
         }}
       >
-        <div ref={ref} {...props} onBlur={handleBlur} onFocus={handleFocus} />
+        <div
+          ref={combinedTabsRef}
+          {...props}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
       </TabsProvider>
     </ThemeProvider>
   )

@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import styled from 'styled-components'
 import {
   Tabs,
+  Button,
+  Icon,
   TabsProps,
   Typography,
   Search,
@@ -13,6 +15,34 @@ import { action } from '@storybook/addon-actions'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
+
+const TabsRow = styled.div`
+  display: flex;
+`
+const NavButton = styled(Button)`
+  flex-shrink: 0;
+`
+const StyledTabList = styled(Tabs.List)`
+  --track-color: #ffffff;
+  --thumb-color: #dcdcdc;
+  scrollbar-color: var(--track-color) var(--thumb-color);
+  scrollbar-width: thin;
+  padding-bottom: 8px;
+
+  // For Google Chrome/webkit
+  & ::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    background: var(--thumb-color);
+    border-radius: 8px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: var(--track-color);
+  }
+`
 
 export default {
   title: 'Navigation/Tabs',
@@ -270,6 +300,192 @@ export const WithStyledComponent: Story<TabsProps> = () => {
   )
 }
 
+export const Overflow: Story<TabsProps> = () => {
+  const [activeTab, setActiveTab] = useState(0)
+  const list = useRef<HTMLDivElement>(null)
+  const [containerWidth, setContainerWidth] = useState(0)
+  const [totalWidth, setTotalWidth] = useState(0)
+  const [prevDisabled, setPrevDisabled] = useState(true)
+  const [nextDisabled, setNextDisabled] = useState(false)
+
+  const handleChange = (index: number) => {
+    setActiveTab(index)
+  }
+
+  useLayoutEffect(() => {
+    const cachedList = list.current
+    let delayToScrollEnd: ReturnType<typeof setTimeout>
+
+    const handleScroll = () => {
+      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
+      delayToScrollEnd = setTimeout(() => {
+        cachedList.scrollLeft === 0
+          ? setPrevDisabled(true)
+          : setPrevDisabled(false)
+        containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth
+          ? setNextDisabled(true)
+          : setNextDisabled(false)
+      }, 20)
+    }
+
+    if (cachedList) {
+      setContainerWidth(cachedList.clientWidth)
+      setTotalWidth(cachedList.scrollWidth)
+      cachedList.addEventListener('scroll', handleScroll, { passive: true })
+    }
+
+    return () => {
+      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
+      cachedList.removeEventListener('scroll', handleScroll)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [containerWidth, list, totalWidth])
+
+  const scroll = (direction: string) => {
+    //Tabs have "scroll-snap-align: end" so we need to scroll less than
+    //the full row to avoid skipping past tabs. Here we set it to 80%
+    const SCROLL_AMOUNT = 0.8
+    let target = 0
+    const signifier = direction === 'left' ? -1 : 1
+    target =
+      list.current.scrollLeft + signifier * containerWidth * SCROLL_AMOUNT
+    list.current.scrollTo(target, 0)
+  }
+
+  return (
+    <Tabs activeTab={activeTab} onChange={handleChange}>
+      <TabsRow>
+        <NavButton
+          variant="ghost_icon"
+          onClick={() => scroll('left')}
+          aria-hidden="true"
+          tabIndex={-1}
+          disabled={prevDisabled}
+        >
+          <Icon name="chevron_left" />
+        </NavButton>
+        <Tabs.List ref={list}>
+          {Array.from({ length: 20 }, (_, i) => (
+            <Tabs.Tab key={i}>Tab Title {i + 1}</Tabs.Tab>
+          ))}
+        </Tabs.List>
+        <NavButton
+          variant="ghost_icon"
+          onClick={() => scroll('right')}
+          aria-hidden="true"
+          tabIndex={-1}
+          disabled={nextDisabled}
+        >
+          <Icon name="chevron_right" />
+        </NavButton>
+      </TabsRow>
+      <Tabs.Panels>
+        {Array.from({ length: 20 }, (_, i) => (
+          <Tabs.Panel key={i}>Panel {i + 1}</Tabs.Panel>
+        ))}
+      </Tabs.Panels>
+    </Tabs>
+  )
+}
+
+Overflow.parameters = {
+  docs: {
+    description: {
+      story:
+        'Tabs uses css `scroll-snap`, so in a case where there is overflow and the user wants to add next/previous buttons for scrolling, they can use `element.scrollTo` some amount and then css will take care of alignment',
+    },
+  },
+}
+
+export const OverflowScroll: Story<TabsProps> = () => {
+  const [activeTab, setActiveTab] = useState(0)
+
+  const handleChange = (index: number) => {
+    setActiveTab(index)
+  }
+
+  return (
+    <Tabs activeTab={activeTab} onChange={handleChange} scrollable>
+      <Tabs.List>
+        {Array.from({ length: 20 }, (_, i) => (
+          <Tabs.Tab key={i}>Tab Title {i + 1}</Tabs.Tab>
+        ))}
+      </Tabs.List>
+      <Tabs.Panels>
+        {Array.from({ length: 20 }, (_, i) => (
+          <Tabs.Panel key={i}>Panel {i + 1}</Tabs.Panel>
+        ))}
+      </Tabs.Panels>
+    </Tabs>
+  )
+}
+
+OverflowScroll.parameters = {
+  docs: {
+    description: {
+      story:
+        'In the case of tabs overflowing, and where next/previous buttons are not desired, the `scrollable` prop adds `overflow-x: auto` to the tabs list. Tabs uses css `scroll-snap` which handles alignment and tabs snapping into place. Note that scrollbar had been disabled for touch devices since the tabs are swipeable',
+    },
+  },
+}
+
+export const OverflowScrollStyled: Story<TabsProps> = () => {
+  const [activeTab, setActiveTab] = useState(0)
+
+  const handleChange = (index: number) => {
+    setActiveTab(index)
+  }
+
+  /*
+  //An example of how to make custom styled scrollbar for the Tabs.List
+   const StyledTabList = styled(Tabs.List)`
+    --track-color: #ffffff;
+    --thumb-color: #dcdcdc;
+    scrollbar-color: var(--track-color) var(--thumb-color);
+
+    //For firefox
+    scrollbar-width: thin;
+    padding-bottom: 8px;
+
+    // For Google Chrome/Safari/Edge
+    & ::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    & ::-webkit-scrollbar-thumb {
+      background: var(--thumb-color);
+      border-radius: 8px;
+    }
+
+    & ::-webkit-scrollbar-track {
+      background: var(--track-color);
+    }
+  ` */
+
+  return (
+    <Tabs activeTab={activeTab} onChange={handleChange} scrollable>
+      <StyledTabList>
+        {Array.from({ length: 15 }, (_, i) => (
+          <Tabs.Tab key={i}>Tab Title {i + 1}</Tabs.Tab>
+        ))}
+      </StyledTabList>
+      <Tabs.Panels>
+        {Array.from({ length: 15 }, (_, i) => (
+          <Tabs.Panel key={i}>Panel {i + 1}</Tabs.Panel>
+        ))}
+      </Tabs.Panels>
+    </Tabs>
+  )
+}
+
+OverflowScrollStyled.parameters = {
+  docs: {
+    description: {
+      story: ' The scrollbar styles for Tabs.List can be overwritten',
+    },
+  },
+}
+
 export const Compact: Story<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
   const [density, setDensity] = useState<Density>('comfortable')
@@ -307,3 +523,6 @@ Compact.parameters = {
 WithSearch.storyName = 'With search'
 WithInputInPanel.storyName = 'With input in panel'
 WithStyledComponent.storyName = 'With styled component'
+Overflow.storyName = 'Overflow with next/previous buttons'
+OverflowScroll.storyName = 'Overflow with default scrollbar'
+OverflowScrollStyled.storyName = 'Overflow with customized scrollbar'

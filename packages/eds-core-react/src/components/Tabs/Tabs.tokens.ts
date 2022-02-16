@@ -81,6 +81,7 @@ export const token: ComponentToken = {
           outline: {
             type: 'outline',
             width: '1px',
+            offset: '-1px',
             style: 'dashed',
             color: focusOutlineColor,
           },
