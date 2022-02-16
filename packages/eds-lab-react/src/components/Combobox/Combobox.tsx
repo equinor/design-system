@@ -246,13 +246,6 @@ function ComboboxInner<T>(
     },
   }
 
-  if (isControlled) {
-    multipleSelectionProps = {
-      ...multipleSelectionProps,
-      selectedItems: selectedOptions || [],
-    }
-  }
-
   const {
     getDropdownProps,
     addSelectedItem,
@@ -337,10 +330,17 @@ function ComboboxInner<T>(
     },
   }
 
+  if (isControlled) {
+    multipleSelectionProps = {
+      ...multipleSelectionProps,
+      selectedItems: selectedOptions,
+    }
+  }
+
   if (isControlled && !multiple) {
     comboBoxProps = {
       ...comboBoxProps,
-      selectedItem: selectedOptions[0] || null,
+      selectedItem: selectedOptions[0],
     }
   }
 

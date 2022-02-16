@@ -512,6 +512,7 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
       console.log('select all')
       setSelectedItems(optionsWithAll)
     } else {
+      console.log('select')
       setSelectedItems(changes.selectedItems)
     }
   }
