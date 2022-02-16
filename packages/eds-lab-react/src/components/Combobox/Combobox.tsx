@@ -246,6 +246,13 @@ function ComboboxInner<T>(
     },
   }
 
+  if (isControlled) {
+    multipleSelectionProps = {
+      ...multipleSelectionProps,
+      selectedItems: selectedOptions,
+    }
+  }
+
   const {
     getDropdownProps,
     addSelectedItem,
@@ -330,13 +337,6 @@ function ComboboxInner<T>(
     },
   }
 
-  if (isControlled) {
-    multipleSelectionProps = {
-      ...multipleSelectionProps,
-      selectedItems: selectedOptions,
-    }
-  }
-
   if (isControlled && !multiple) {
     comboBoxProps = {
       ...comboBoxProps,
@@ -412,6 +412,9 @@ function ComboboxInner<T>(
   useEffect(() => {
     if (anchorRef.current) {
       setAnchorEl(anchorRef.current)
+    }
+    if (isControlled) {
+      setSelectedItems(selectedOptions)
     }
     return () => {
       setAnchorEl(null)

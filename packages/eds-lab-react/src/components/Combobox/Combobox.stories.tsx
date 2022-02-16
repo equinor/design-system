@@ -525,7 +525,6 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
       <Combobox
         label="Select multiple stocks"
         options={optionsWithAll}
-        initialSelectedOptions={[]}
         selectedOptions={selectedItems}
         onOptionsChange={onChange}
         multiple
