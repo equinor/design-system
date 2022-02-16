@@ -27,7 +27,7 @@ export type SideSheetProps = {
 const StyledSideSheet = styled.div<StyleProps>`
   height: 100%;
   position: absolute;
-  z-index: 200;
+  z-index: 1200;
   top: 0;
   right: 0;
   box-sizing: border-box;

@@ -7,7 +7,7 @@ exports[`Scrim Matches snapshot 1`] = `
   height: 100%;
   background: var(--eds_ui_background__scrim,rgba(0,0,0,0.4));
   position: fixed;
-  z-index: 500;
+  z-index: 1300;
   top: 0;
   left: 0;
   -webkit-align-items: center;

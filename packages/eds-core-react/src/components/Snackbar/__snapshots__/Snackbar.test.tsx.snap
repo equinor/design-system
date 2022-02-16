@@ -25,7 +25,7 @@ exports[`Snackbar Matches snapshot 1`] = `
   text-align: left;
   min-height: 48px;
   box-sizing: border-box;
-  z-index: 300;
+  z-index: 1400;
   bottom: 16px;
   left: 50%;
   -webkit-transform: translateX(-50%);

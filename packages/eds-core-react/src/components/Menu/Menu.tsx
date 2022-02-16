@@ -25,7 +25,7 @@ const { border } = tokens
 
 const MenuPaper = styled(Paper)<MenuPaperProps>`
   position: absolute;
-  z-index: 300;
+  z-index: 1400;
   width: fit-content;
   min-width: fit-content;
   ${bordersTemplate(border)};
