@@ -494,24 +494,23 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
   }
   const optionsWithAll = [selectAllOption, ...options]
   const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
-  const [hasSelectedAll, setHasSelectedAll] = useState<boolean>(false)
 
   const onChange = (changes: ComboboxChanges<MyOptionType>) => {
-    console.log('changes', changes)
-    const selectAll = changes.selectedItems.find(
+    const nextAll = changes.selectedItems.find(
+      (item) => item.label === selectAllOption.label,
+    )
+    const prevAll = selectedItems.find(
       (item) => item.label === selectAllOption.label,
     )
 
-    if (!selectAll && hasSelectedAll) {
+    if (!nextAll && prevAll) {
       // select all was de-selected; reset selection
       console.log('reset selection')
       setSelectedItems([])
-      setHasSelectedAll(false)
-    } else if (selectAll && !hasSelectedAll) {
+    } else if (nextAll && !prevAll) {
       // select all was added; select all
       console.log('select all')
       setSelectedItems(optionsWithAll)
-      setHasSelectedAll(true)
     } else {
       setSelectedItems(changes.selectedItems)
     }
