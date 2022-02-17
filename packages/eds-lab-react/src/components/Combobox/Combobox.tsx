@@ -86,7 +86,6 @@ const StyledButton = styled(Button)(
 
 type ComboboxOption<T> = T & {
   label: string
-  disabled?: boolean
 }
 
 type IndexFinderType = <T>({
@@ -420,7 +419,7 @@ function ComboboxInner<T>(
       setAnchorEl(null)
       setContainerEl(null)
     }
-  }, [anchorRef, isOpen])
+  }, [anchorRef, isControlled, isOpen, selectedOptions, setSelectedItems])
 
   const { styles, attributes } = usePopper(
     anchorEl,
