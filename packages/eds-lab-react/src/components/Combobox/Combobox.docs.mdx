@@ -90,5 +90,6 @@ We stronlgy recommend always including all the characters a search might filter 
 <Story id="components-combobox--custom-options-filter" />
 
 ## With Select All option
-This is an example of how to make a "Select All" option for quicker selection.
+This is an example of how to make a "Select All" option for quicker selection. 
+Make sure to use `useMemo` if you are mutating the options in the render function to avoid object memory references bugs on re-renders.
 <Story id="components-combobox--select-all" />

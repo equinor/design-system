@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Combobox, ComboboxProps, ComboboxChanges } from '../..'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
@@ -489,10 +489,17 @@ CustomOptionsFilter.args = {
 export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
   const { options } = args
 
-  const selectAllOption: MyOptionType = {
-    label: 'Select All',
-  }
-  const optionsWithAll = [selectAllOption, ...options]
+  const selectAllOption: MyOptionType = useMemo(
+    () => ({
+      label: 'Select All',
+    }),
+    [],
+  )
+
+  const optionsWithAll = useMemo(
+    () => [selectAllOption, ...options],
+    [options, selectAllOption],
+  )
   const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
 
   const onChange = (changes: ComboboxChanges<MyOptionType>) => {
@@ -505,14 +512,11 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
 
     if (!nextAll && prevAll) {
       // select all was de-selected; reset selection
-      console.log('reset selection')
       setSelectedItems([])
     } else if (nextAll && !prevAll) {
       // select all was added; select all
-      console.log('select all')
       setSelectedItems(optionsWithAll)
     } else {
-      console.log('select')
       setSelectedItems(changes.selectedItems)
     }
   }
