@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.0] - 2022-02-17
+
+### Added
+
+ - Added support for `18`px `Icon` size in preparation for compact mode ([#1827](https://github.com/equinor/design-system/issues/1827))
+ - `Button`: Enabled support for multiple lines and relative scaling by exposing a multitude of css-variables (see storybook for example of how this can be done)([#1858](https://github.com/equinor/design-system/issues/1858))
+ - `Table.Cell`: Enabled support for multiple lines using css-variables similar to `Button`, (see storybook for example) ([#1867](https://github.com/equinor/design-system/pull/1867))
+ - `Tabs`: Enabled `Tabs.List` horizontal overflow. Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar. Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list. 
+ - New dependency: ([@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils)) was created to host utility functions and hooks used by ([@equinor/eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react)) and ([@equinor/eds-lab-react](https://www.npmjs.com/package/@equinor/eds-lab-react)) ([#1846](https://github.com/equinor/design-system/issues/1846))
+
+### Changed
+
+- `Dialog` is now opened in a portal and within a scrim. It is now controlled via an `open` property. `isDismissable` and `onClose` properties were also added to conform to other similar components. ([#1177](https://github.com/equinor/design-system/issues/1177))
+- `Dialog`: Moved padding from outer element to subcomponents. Added new subcomponent `Dialog.Header`, and added `Dialog.Content` as an alias to `Dialog.CustomContent` ([#1896](https://github.com/equinor/design-system/issues/1896))
+-  `Popover`: Moved padding from outer element to subcomponents. Added two new subcomponents `Popover.Actions` and `Popover.Header`. Removed fixed close button (see storybook for example of how this can be added using existing components instead). ([#1365](https://github.com/equinor/design-system/issues/1365))
+- Bumped z-index on certain components to match that of MUI's z-indexes ([#1981](https://github.com/equinor/design-system/issues/1981))
+
+### Fixed
+
+- Fixed a bug where scroll on body was not restored after closing `Scrim` ([#1892](https://github.com/equinor/design-system/issues/1892))
+- Fixed an issue with `Menu` `onClose` where potentially a function could be called after unmounting the component. ([#1898](https://github.com/equinor/design-system/issues/1898))
+- Fixed `Menu.Item` `onClick` not triggering with keyboard enter ([#1910](https://github.com/equinor/design-system/issues/1910))
+- Fixed an issue where opening `Menu` using keyboard navigation while scrolled down would cause page to scroll to top ([#1932](https://github.com/equinor/design-system/issues/1932))
+- Removed reference to `window` in `Snackbar` and `Tooltip` which broke server side rendering ([#1970](https://github.com/equinor/design-system/issues/1970))
+- Fixed an issue where trying to add a `style` tag to `Tooltip` would break the rendering ([#1982](https://github.com/equinor/design-system/issues/1982))
+
 ## [0.17.0] - 2021-12-22
 
 ### Added
