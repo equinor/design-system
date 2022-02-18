@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState, useEffect, useMemo } from 'react'
-import { Combobox, ComboboxProps, ComboboxChanges } from '../..'
+import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '../..'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
@@ -16,8 +16,8 @@ import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
 export default {
-  title: 'Components/Combobox',
-  component: Combobox,
+  title: 'Components/Autocomplete',
+  component: Autocomplete,
   parameters: {
     docs: {
       page,
@@ -88,10 +88,10 @@ const stocks = [
   },
 ]
 
-export const Introduction: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Introduction: Story<AutocompleteProps<MyOptionType>> = (args) => {
   return (
     <Stack>
-      <Combobox {...args} />
+      <Autocomplete {...args} />
     </Stack>
   )
 }
@@ -106,13 +106,13 @@ Introduction.args = {
   disablePortal: false,
 }
 
-export const Multiple: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
     <Stack direction="column">
-      <Combobox label="Select a stock" options={options} />
-      <Combobox label="Select multiple stocks" options={options} multiple />
+      <Autocomplete label="Select a stock" options={options} />
+      <Autocomplete label="Select multiple stocks" options={options} multiple />
     </Stack>
   )
 }
@@ -120,18 +120,18 @@ Multiple.args = {
   options: stocks,
 }
 
-export const OptionLabel: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
     <Stack direction="column">
-      <Combobox
+      <Autocomplete
         label="Select a stock"
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
         initialSelectedOptions={[options[0]]}
       />
-      <Combobox
+      <Autocomplete
         label="Select multiple stocks"
         options={options}
         optionLabel={(opt) => `${opt.trend} ${opt.label} (${opt.symbol})`}
@@ -145,18 +145,18 @@ OptionLabel.args = {
   options: stocks,
 }
 
-export const Readonly: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Readonly: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
   return (
     <Stack direction="column">
-      <Combobox
+      <Autocomplete
         label="Select a stock"
         initialSelectedOptions={[options[0]]}
         options={options}
         readOnly
         {...args}
       />
-      <Combobox
+      <Autocomplete
         label="Select multiple stocks"
         initialSelectedOptions={[options[0], options[1]]}
         options={options}
@@ -172,11 +172,16 @@ Readonly.args = {
   options: stocks,
 }
 
-export const Disabled: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Disabled: Story<AutocompleteProps<MyOptionType>> = (args) => {
   return (
     <Stack direction="column">
-      <Combobox label="Select a stock" disabled {...args} />
-      <Combobox label="Select multiple stocks" disabled multiple {...args} />
+      <Autocomplete label="Select a stock" disabled {...args} />
+      <Autocomplete
+        label="Select multiple stocks"
+        disabled
+        multiple
+        {...args}
+      />
     </Stack>
   )
 }
@@ -184,18 +189,20 @@ OptionLabel.args = {
   options: stocks,
 }
 
-export const DisabledOption: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
+  args,
+) => {
   const { options } = args
   const isOptionDisabled = (item: MyOptionType) =>
     item === options[0] || item === options[options.length - 1]
   return (
     <Stack direction="column">
-      <Combobox
+      <Autocomplete
         label="Select a stock"
         optionDisabled={isOptionDisabled}
         {...args}
       />
-      <Combobox
+      <Autocomplete
         label="Select multiple stocks"
         optionDisabled={isOptionDisabled}
         {...args}
@@ -209,19 +216,19 @@ DisabledOption.args = {
   options: stocks,
 }
 
-export const PreselectedOptions: Story<ComboboxProps<MyOptionType>> = (
+export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
   const { options } = args
 
   return (
     <Stack direction="column">
-      <Combobox
+      <Autocomplete
         label="Select a stock"
         initialSelectedOptions={[options[0]]}
         {...args}
       />
-      <Combobox
+      <Autocomplete
         label="Select multiple stocks"
         initialSelectedOptions={[options[0], options[1], options[5]]}
         multiple
@@ -235,13 +242,15 @@ PreselectedOptions.args = {
   options: stocks,
 }
 
-export const OnOptionsChange: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const OnOptionsChange: Story<AutocompleteProps<MyOptionType>> = (
+  args,
+) => {
   const { options } = args
 
   const initialSelectedOptions = [options[0], options[1], options[5]]
   const [selectedItems, setSelectedItems] = useState(initialSelectedOptions)
 
-  const onChange = (changes: ComboboxChanges<MyOptionType>) => {
+  const onChange = (changes: AutocompleteChanges<MyOptionType>) => {
     setSelectedItems(changes.selectedItems)
   }
 
@@ -250,13 +259,13 @@ export const OnOptionsChange: Story<ComboboxProps<MyOptionType>> = (args) => {
       <Typography>
         Selected items:{selectedItems.map((x) => x.label).toString()}
       </Typography>
-      <Combobox
+      <Autocomplete
         label="Select a stock"
         options={options}
         onOptionsChange={onChange}
         initialSelectedOptions={initialSelectedOptions}
       />
-      <Combobox
+      <Autocomplete
         label="Select multiple stocks"
         options={options}
         onOptionsChange={onChange}
@@ -271,7 +280,7 @@ OnOptionsChange.args = {
   options: stocks,
 }
 
-export const Compact: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
   const [density, setDensity] = useState<Density>('comfortable')
 
@@ -283,13 +292,13 @@ export const Compact: Story<ComboboxProps<MyOptionType>> = (args) => {
   return (
     <EdsProvider density={density}>
       <Stack direction="column">
-        <Combobox
+        <Autocomplete
           label="Select a stock"
           initialSelectedOptions={[options[0]]}
           options={options}
           {...args}
         />
-        <Combobox
+        <Autocomplete
           label="Select multiple stocks"
           initialSelectedOptions={[options[0], options[1]]}
           options={options}
@@ -319,7 +328,7 @@ const Container = styled.div`
   margin-bottom: 350px;
 `
 
-export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
+export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
   const defaultValues: FormValues = {
     fabFieldOne: null,
     fabFieldTwo: null,
@@ -376,7 +385,7 @@ export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
                 name="fabFieldOne"
                 rules={{ required: true }}
                 render={({ field: { onChange } }) => (
-                  <Combobox
+                  <Autocomplete
                     onOptionsChange={({ selectedItems }) =>
                       onChange(selectedItems)
                     }
@@ -411,7 +420,7 @@ export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
                 control={control}
                 name="fabFieldTwo"
                 render={({ field: { onChange } }) => (
-                  <Combobox
+                  <Autocomplete
                     onOptionsChange={({ selectedItems }) =>
                       onChange(selectedItems)
                     }
@@ -428,7 +437,7 @@ export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
                 control={control}
                 name="optionalField"
                 render={({ field: { onChange } }) => (
-                  <Combobox
+                  <Autocomplete
                     onOptionsChange={({ selectedItems }) =>
                       onChange(selectedItems)
                     }
@@ -456,10 +465,10 @@ export const WithReactHookForm: Story<ComboboxProps<MyOptionType>> = () => {
   )
 }
 
-export const CustomOptionsFilter: Story<ComboboxProps<MyOptionType>> = (
+export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
-  const optionsFilter: ComboboxProps<MyOptionType>['optionsFilter'] = (
+  const optionsFilter: AutocompleteProps<MyOptionType>['optionsFilter'] = (
     option,
     inputValue,
   ) =>
@@ -468,12 +477,12 @@ export const CustomOptionsFilter: Story<ComboboxProps<MyOptionType>> = (
       .includes(inputValue.toLocaleLowerCase())
   return (
     <Stack direction="column">
-      <Combobox
+      <Autocomplete
         label="Select a stock"
         optionsFilter={optionsFilter}
         {...args}
       />
-      <Combobox
+      <Autocomplete
         label="Select multiple stocks"
         multiple
         optionsFilter={optionsFilter}
@@ -487,7 +496,7 @@ CustomOptionsFilter.args = {
   options: stocks,
 }
 
-export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   const selectAllOption: MyOptionType = useMemo(
@@ -503,7 +512,7 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
   )
   const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
 
-  const onChange = (changes: ComboboxChanges<MyOptionType>) => {
+  const onChange = (changes: AutocompleteChanges<MyOptionType>) => {
     const nextAll = changes.selectedItems.find(
       (item) => item.label === selectAllOption.label,
     )
@@ -548,7 +557,7 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
             </Chip>
           ))}
       </Stack>
-      <Combobox
+      <Autocomplete
         label="Select multiple stocks"
         options={optionsWithAll}
         selectedOptions={selectedItems}
@@ -563,18 +572,18 @@ SelectAll.args = {
   options: stocks,
 }
 
-export const AutoWidth: Story<ComboboxProps<MyOptionType>> = (args) => {
+export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
     <Stack direction="column">
-      <Combobox
+      <Autocomplete
         optionLabel={(opt) => `${opt.trend} ${opt.label}`}
         label="Select a stock"
         options={options}
         autoWidth
       />
-      <Combobox
+      <Autocomplete
         optionLabel={(opt) => `${opt.trend} ${opt.label}`}
         label="Select multiple stocks"
         options={options}
