@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Combobox, ComboboxProps, ComboboxChanges } from '../..'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
@@ -10,6 +10,7 @@ import {
   EdsProvider,
   Button,
   Density,
+  Chip,
 } from '@equinor/eds-core-react'
 import { Stack } from '../../../.storybook/components'
 import page from './Combobox.docs.mdx'
@@ -483,5 +484,81 @@ export const CustomOptionsFilter: Story<ComboboxProps<MyOptionType>> = (
 }
 
 CustomOptionsFilter.args = {
+  options: stocks,
+}
+
+export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
+  const { options } = args
+
+  const selectAllOption: MyOptionType = useMemo(
+    () => ({
+      label: 'Select All',
+    }),
+    [],
+  )
+
+  const optionsWithAll = useMemo(
+    () => [selectAllOption, ...options],
+    [options, selectAllOption],
+  )
+  const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
+
+  const onChange = (changes: ComboboxChanges<MyOptionType>) => {
+    const nextAll = changes.selectedItems.find(
+      (item) => item.label === selectAllOption.label,
+    )
+    const prevAll = selectedItems.find(
+      (item) => item.label === selectAllOption.label,
+    )
+
+    switch (true) {
+      case nextAll && selectedItems.length === 1:
+      case prevAll && !nextAll:
+        setSelectedItems([])
+        break
+      case !prevAll && changes.selectedItems.length === options.length:
+      case nextAll && !prevAll:
+        setSelectedItems(optionsWithAll)
+        break
+      case nextAll &&
+        changes.selectedItems.length === optionsWithAll.length - 1:
+        setSelectedItems(
+          changes.selectedItems.filter(
+            (option) => !(option.label === selectAllOption.label),
+          ),
+        )
+        break
+      default:
+        setSelectedItems(changes.selectedItems)
+        break
+    }
+  }
+
+  const onDelete = (itemLabel: string) =>
+    setSelectedItems(selectedItems.filter((x) => !(x.label === itemLabel)))
+
+  return (
+    <Stack direction="column">
+      <Combobox
+        label="Select multiple stocks"
+        options={optionsWithAll}
+        selectedOptions={selectedItems}
+        onOptionsChange={onChange}
+        multiple
+      />
+      <Stack>
+        {selectedItems
+          .filter((option) => !(option.label === selectAllOption.label))
+          .map((x) => (
+            <Chip key={x.label} onDelete={() => onDelete(x.label)}>
+              {x.label}
+            </Chip>
+          ))}
+      </Stack>
+    </Stack>
+  )
+}
+
+SelectAll.args = {
   options: stocks,
 }

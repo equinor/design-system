@@ -86,7 +86,6 @@ const StyledButton = styled(Button)(
 
 type ComboboxOption<T> = T & {
   label: string
-  disabled?: boolean
 }
 
 type IndexFinderType = <T>({
@@ -158,9 +157,7 @@ const findPrevIndex: IndexFinderType = ({
   return prevIndex
 }
 
-export type ComboboxChanges<T> = {
-  selectedItems: T[]
-}
+export type ComboboxChanges<T> = UseMultipleSelectionProps<ComboboxOption<T>>
 
 export type ComboboxProps<T> = {
   /** List of options to choose from */
@@ -241,11 +238,9 @@ function ComboboxInner<T>(
       : initialSelectedOptions[0]
       ? [initialSelectedOptions[0]]
       : [],
-    onSelectedItemsChange: ({ selectedItems }) => {
+    onSelectedItemsChange: (changes) => {
       if (onOptionsChange) {
-        onOptionsChange({
-          selectedItems,
-        })
+        onOptionsChange(changes)
       }
     },
   }
@@ -253,7 +248,7 @@ function ComboboxInner<T>(
   if (isControlled) {
     multipleSelectionProps = {
       ...multipleSelectionProps,
-      selectedItems: selectedOptions || [],
+      selectedItems: selectedOptions,
     }
   }
 
@@ -417,11 +412,14 @@ function ComboboxInner<T>(
     if (anchorRef.current) {
       setAnchorEl(anchorRef.current)
     }
+    if (isControlled) {
+      setSelectedItems(selectedOptions)
+    }
     return () => {
       setAnchorEl(null)
       setContainerEl(null)
     }
-  }, [anchorRef, isOpen])
+  }, [anchorRef, isControlled, isOpen, selectedOptions, setSelectedItems])
 
   const { styles, attributes } = usePopper(
     anchorEl,
