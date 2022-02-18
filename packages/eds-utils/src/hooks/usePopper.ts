@@ -20,12 +20,30 @@ export type Placement =
   | 'left-start'
   | 'left-end'
 
+type PopperModifier = Modifier<string, Record<string, unknown>>
+
+const autoWidthModifier = {
+  name: 'sameWidth',
+  enabled: true,
+  phase: 'beforeWrite' as ModifierPhases,
+  requires: ['computeStyles'],
+  fn({ state }) {
+    state.styles.popper.width = `${state.rects.reference.width}px`
+  },
+  effect({ state }) {
+    state.elements.popper.style.width = `${
+      (state.elements.reference as Element).clientWidth
+    }px`
+  },
+} as PopperModifier
+
 export const usePopper = (
   anchorEl: HTMLElement,
   popperEl: HTMLElement,
   arrowRef?: HTMLElement | string,
   placement?: Placement,
   offset = 10,
+  autoWidth?: boolean,
 ): {
   styles: { [key: string]: CSSProperties }
   attributes: { [key: string]: { [key: string]: string } }
@@ -34,8 +52,8 @@ export const usePopper = (
     placement = 'auto'
   }
 
-  const modifiers = useMemo(
-    () => [
+  const modifiers = useMemo(() => {
+    let modifiers: Partial<PopperModifier>[] = [
       {
         name: 'arrow',
         options: {
@@ -48,23 +66,14 @@ export const usePopper = (
           offset: [0, offset],
         },
       },
-      {
-        name: 'sameWidth',
-        enabled: true,
-        phase: 'beforeWrite' as ModifierPhases,
-        requires: ['computeStyles'],
-        fn({ state }) {
-          state.styles.popper.width = `${state.rects.reference.width}px`
-        },
-        effect({ state }) {
-          state.elements.popper.style.width = `${
-            (state.elements.reference as Element).clientWidth
-          }px`
-        },
-      } as Modifier<string, Record<string, unknown>>,
-    ],
-    [arrowRef, offset],
-  )
+    ]
+
+    if (autoWidth) {
+      modifiers = [...modifiers, autoWidthModifier]
+    }
+
+    return modifiers
+  }, [arrowRef, offset, autoWidth])
 
   const { styles, attributes } = reactPopper(anchorEl, popperEl, {
     placement,
