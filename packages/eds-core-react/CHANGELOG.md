@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Dialog` is now opened in a portal and within a scrim. It is now controlled via an `open` property. `isDismissable` and `onClose` properties were also added to conform to other similar components. ([#1177](https://github.com/equinor/design-system/issues/1177))
 - `Dialog`: Moved padding from outer element to subcomponents. Added new subcomponent `Dialog.Header`, and added `Dialog.Content` as an alias to `Dialog.CustomContent` ([#1896](https://github.com/equinor/design-system/issues/1896))
 -  `Popover`: Moved padding from outer element to subcomponents. Added two new subcomponents `Popover.Actions` and `Popover.Header`. Removed fixed close button (see storybook for example of how this can be added using existing components instead). ([#1365](https://github.com/equinor/design-system/issues/1365))
-- Bumped z-index on certain components to match that of MUI's z-indexes ([#1981](https://github.com/equinor/design-system/issues/1981))
+- Increased z-index on certain components to match that of MUI's z-indexes ([#1981](https://github.com/equinor/design-system/issues/1981))
 
 ### Fixed
 
