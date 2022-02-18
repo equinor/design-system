@@ -27,7 +27,7 @@ import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
-} from './Combobox.tokens'
+} from './Autocomplete.tokens'
 import {
   useToken,
   usePopper,

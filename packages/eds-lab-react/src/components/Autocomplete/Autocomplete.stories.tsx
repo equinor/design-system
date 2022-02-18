@@ -13,7 +13,7 @@ import {
   Chip,
 } from '@equinor/eds-core-react'
 import { Stack } from '../../../.storybook/components'
-import page from './Combobox.docs.mdx'
+import page from './Autocomplete.docs.mdx'
 
 export default {
   title: 'Components/Combobox',
