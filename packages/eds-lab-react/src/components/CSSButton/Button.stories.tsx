@@ -21,7 +21,7 @@ const FullWidthWrapper = styled.div`
 `
 
 export default {
-  title: 'Components/CSS Button',
+  title: 'Core-react experimental features/CSS Button',
   component: Button,
   argTypes: {
     as: {
