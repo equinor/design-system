@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
-import { Button, Icon, ButtonProps, EdsProvider, Density } from '../..'
+import { Button, ButtonProps } from '.'
+import { Icon, EdsProvider } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { menu } from '@equinor/eds-icons'
-// import { Group } from '../Group'
+import { menu, save } from '@equinor/eds-icons'
+
+Icon.add({ save })
 
 const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(4, fit-content(100%));
-  align-items: start;
 `
 
 const FullWidthWrapper = styled.div`
@@ -21,26 +21,25 @@ const FullWidthWrapper = styled.div`
 `
 
 export default {
-  title: 'Inputs/Button',
+  title: 'Core-react experimental features/CSS Button',
   component: Button,
-  args: {
-    as: 'button',
-  },
   argTypes: {
     as: {
-      options: ['span', 'a', 'button'],
       control: {
         type: 'select',
+        options: ['span', 'a', 'button'],
+        defaultValue: 'button',
       },
     },
   },
   parameters: {
     docs: {
       description: {
-        component: `Buttons allow users to take action with a single click or tap.
-        `,
+        component:
+          'This is a test using only CSS and CSS custom properties for making a component.  \n ⚠️  `:root` custom css properties are loaded via the component now  for this test.',
       },
     },
+    info: {},
   },
 } as Meta
 
@@ -317,27 +316,18 @@ export const FullWidth: Story<ButtonProps> = () => (
   </FullWidthWrapper>
 )
 
-export const Compact: Story<ButtonProps> = () => {
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
-  return (
-    <EdsProvider density={density}>
-      <Wrapper>
-        <Button>Contained</Button>
-        <Button variant="outlined">Outlined</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button variant="ghost_icon">
-          <Icon data={menu} title="Ghost icon menu"></Icon>
-        </Button>
-      </Wrapper>
-    </EdsProvider>
-  )
-}
+export const Compact: Story<ButtonProps> = () => (
+  <EdsProvider density="compact">
+    <Wrapper>
+      <Button>Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="ghost_icon">
+        <Icon data={menu} title="Ghost icon menu"></Icon>
+      </Button>
+    </Wrapper>
+  </EdsProvider>
+)
 
 Compact.parameters = {
   docs: {
@@ -346,14 +336,3 @@ Compact.parameters = {
     },
   },
 }
-
-// export const ButtonGroup: Story<ButtonProps> = () => (
-//   <Wrapper style={{ gridGap: 0 }}>
-//     <Group>
-//       <Button>Contained</Button>
-//       <Button variant="outlined">Outlined</Button>
-//       <Button variant="outlined">Outlined</Button>
-//       <Button variant="outlined">Outlined</Button>
-//     </Group>
-//   </Wrapper>
-// )
