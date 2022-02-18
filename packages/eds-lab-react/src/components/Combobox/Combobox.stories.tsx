@@ -539,13 +539,6 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
 
   return (
     <Stack direction="column">
-      <Combobox
-        label="Select multiple stocks"
-        options={optionsWithAll}
-        selectedOptions={selectedItems}
-        onOptionsChange={onChange}
-        multiple
-      />
       <Stack>
         {selectedItems
           .filter((option) => !(option.label === selectAllOption.label))
@@ -555,10 +548,42 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
             </Chip>
           ))}
       </Stack>
+      <Combobox
+        label="Select multiple stocks"
+        options={optionsWithAll}
+        selectedOptions={selectedItems}
+        onOptionsChange={onChange}
+        multiple
+      />
     </Stack>
   )
 }
 
 SelectAll.args = {
+  options: stocks,
+}
+
+export const AutoWidth: Story<ComboboxProps<MyOptionType>> = (args) => {
+  const { options } = args
+
+  return (
+    <Stack direction="column">
+      <Combobox
+        optionLabel={(opt) => `${opt.trend} ${opt.label}`}
+        label="Select a stock"
+        options={options}
+        autoWidth
+      />
+      <Combobox
+        optionLabel={(opt) => `${opt.trend} ${opt.label}`}
+        label="Select multiple stocks"
+        options={options}
+        multiple
+        autoWidth
+      />
+    </Stack>
+  )
+}
+AutoWidth.args = {
   options: stocks,
 }

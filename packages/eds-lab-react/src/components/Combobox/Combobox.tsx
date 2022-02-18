@@ -191,6 +191,9 @@ export type ComboboxProps<T> = {
   optionDisabled?: (option: ComboboxOption<T>) => boolean
   /** Filter function for options */
   optionsFilter?: (option: ComboboxOption<T>, inputValue: string) => boolean
+  /** If `true` the width of the popper will adjust accordingly to the options label,
+   * else it will follow the width of the input */
+  autoWidth?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function ComboboxInner<T>(
@@ -212,6 +215,7 @@ function ComboboxInner<T>(
     disablePortal,
     optionDisabled = () => false,
     optionsFilter,
+    autoWidth,
     ...other
   } = props
   const anchorRef = useRef()
@@ -427,6 +431,7 @@ function ComboboxInner<T>(
     null,
     'bottom-start',
     4,
+    autoWidth,
   )
 
   const openSelect = () => {
