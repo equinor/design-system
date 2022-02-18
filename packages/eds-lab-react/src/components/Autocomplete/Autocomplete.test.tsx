@@ -21,8 +21,8 @@ describe('Autocomplete', () => {
   it('Matches snapshot', async () => {
     render(<Autocomplete options={items} label={labelText} />)
 
-    const combobox = screen.getAllByLabelText(labelText)
-    const input = combobox[0]
+    const autocomplete = screen.getAllByLabelText(labelText)
+    const input = autocomplete[0]
 
     fireEvent.click(input)
 
@@ -186,14 +186,14 @@ describe('Autocomplete', () => {
       <StyledAutocomplete
         label="test"
         options={items}
-        data-testid="styled-combobox"
+        data-testid="styled-autocomplete"
       />,
     )
 
-    const combobox = await screen.findByTestId('styled-combobox')
+    const autocomplete = await screen.findByTestId('styled-autocomplete')
 
     // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
-    expect(combobox.nodeName).toBe('INPUT')
+    expect(autocomplete.nodeName).toBe('INPUT')
   })
 })
