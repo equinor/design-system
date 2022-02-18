@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
- - Added support for `18`px `Icon` size in preparation for compact mode ([#1827](https://github.com/equinor/design-system/issues/1827))
- - `Button`: Enabled support for multiple lines and relative scaling by exposing a multitude of css-variables (see storybook for example of how this can be done)([#1858](https://github.com/equinor/design-system/issues/1858))
- - `Table.Cell`: Enabled support for multiple lines using css-variables similar to `Button`, (see storybook for example) ([#1867](https://github.com/equinor/design-system/pull/1867))
- - `Tabs`: Enabled `Tabs.List` horizontal overflow. Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar. Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list. 
- - New dependency: ([@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils)) was created to host utility functions and hooks used by ([@equinor/eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react)) and ([@equinor/eds-lab-react](https://www.npmjs.com/package/@equinor/eds-lab-react)) ([#1846](https://github.com/equinor/design-system/issues/1846))
+- Added support for `18`px `Icon` size in preparation for compact mode ([#1827](https://github.com/equinor/design-system/issues/1827))
+- `Tabs`: Enabled `Tabs.List` horizontal overflow. 
+  - Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar. 
+  - Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list. 
+- New dependency: ([@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils)). Utility functions and hook have been moved out of eds-core-react and into its own package ([#1846](https://github.com/equinor/design-system/issues/1846))
 
 ### Changed
 
