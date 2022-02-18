@@ -10,6 +10,7 @@ import {
   EdsProvider,
   Button,
   Density,
+  Chip,
 } from '@equinor/eds-core-react'
 import { Stack } from '../../../.storybook/components'
 import page from './Combobox.docs.mdx'
@@ -533,11 +534,11 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
     }
   }
 
+  const onDelete = (itemLabel: string) =>
+    setSelectedItems(selectedItems.filter((x) => !(x.label === itemLabel)))
+
   return (
     <Stack direction="column">
-      <Typography>
-        Selected items:{selectedItems.map((x) => x.label).toString()}
-      </Typography>
       <Combobox
         label="Select multiple stocks"
         options={optionsWithAll}
@@ -545,6 +546,15 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
         onOptionsChange={onChange}
         multiple
       />
+      <Stack>
+        {selectedItems
+          .filter((option) => !(option.label === selectAllOption.label))
+          .map((x) => (
+            <Chip key={x.label} onDelete={() => onDelete(x.label)}>
+              {x.label}
+            </Chip>
+          ))}
+      </Stack>
     </Stack>
   )
 }
