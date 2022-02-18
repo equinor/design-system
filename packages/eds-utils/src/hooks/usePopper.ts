@@ -57,12 +57,13 @@ export const usePopper = (
           state.styles.popper.width = `${state.rects.reference.width}px`
         },
         effect({ state }) {
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-          state.elements.popper.style.width = `${state.elements.reference.clientWidth}px`
+          state.elements.popper.style.width = `${
+            (state.elements.reference as Element).clientWidth
+          }px`
         },
       } as Modifier<string, Record<string, unknown>>,
     ],
-    [],
+    [arrowRef, offset],
   )
 
   const { styles, attributes } = reactPopper(anchorEl, popperEl, {
