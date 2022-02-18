@@ -5,12 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.18.0] - 2022-02-17
+## [0.18.0] - 2022-02-18
 
 ### Added
 
 - Added support for `18`px `Icon` size in preparation for compact mode ([#1827](https://github.com/equinor/design-system/issues/1827))
-- `Tabs`: Enabled `Tabs.List` horizontal overflow. 
+- `Tabs`: Enabled `Tabs.List` horizontal overflow. ([#1650](https://github.com/equinor/design-system/issues/1650))
   - Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar. 
   - Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list. 
 - New dependency: ([@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils)). Utility functions and hook have been moved out of eds-core-react and into its own package ([#1846](https://github.com/equinor/design-system/issues/1846))
@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `Dialog` is now opened in a portal and within a scrim. It is now controlled via an `open` property. `isDismissable` and `onClose` properties were also added to conform to other similar components. ([#1177](https://github.com/equinor/design-system/issues/1177))
 - `Dialog`: Moved padding from outer element to subcomponents. Added new subcomponent `Dialog.Header`, and added `Dialog.Content` as an alias to `Dialog.CustomContent` ([#1896](https://github.com/equinor/design-system/issues/1896))
--  `Popover`: Moved padding from outer element to subcomponents. Added two new subcomponents `Popover.Actions` and `Popover.Header`. Removed fixed close button (see storybook for example of how this can be added using existing components instead). ([#1365](https://github.com/equinor/design-system/issues/1365))
+- `Popover`: Moved padding from outer element to subcomponents. Added two new subcomponents `Popover.Actions` and `Popover.Header`. Removed fixed close button (see storybook for example of how this can be added using existing components instead). ([#1365](https://github.com/equinor/design-system/issues/1365))
 - Increased z-index on certain components to match that of MUI's z-indexes ([#1981](https://github.com/equinor/design-system/issues/1981))
 
 ### Fixed
