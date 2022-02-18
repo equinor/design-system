@@ -510,14 +510,26 @@ export const SelectAll: Story<ComboboxProps<MyOptionType>> = (args) => {
       (item) => item.label === selectAllOption.label,
     )
 
-    if (!nextAll && prevAll) {
-      // select all was de-selected; reset selection
-      setSelectedItems([])
-    } else if (nextAll && !prevAll) {
-      // select all was added; select all
-      setSelectedItems(optionsWithAll)
-    } else {
-      setSelectedItems(changes.selectedItems)
+    switch (true) {
+      case nextAll && selectedItems.length === 1:
+      case prevAll && !nextAll:
+        setSelectedItems([])
+        break
+      case !prevAll && changes.selectedItems.length === options.length:
+      case nextAll && !prevAll:
+        setSelectedItems(optionsWithAll)
+        break
+      case nextAll &&
+        changes.selectedItems.length === optionsWithAll.length - 1:
+        setSelectedItems(
+          changes.selectedItems.filter(
+            (option) => !(option.label === selectAllOption.label),
+          ),
+        )
+        break
+      default:
+        setSelectedItems(changes.selectedItems)
+        break
     }
   }
 
