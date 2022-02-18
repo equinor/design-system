@@ -27,14 +27,14 @@ import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
-} from './Combobox.tokens'
+} from './Autocomplete.tokens'
 import {
   useToken,
   usePopper,
   useIsMounted,
   bordersTemplate,
 } from '@equinor/eds-utils'
-import { ComboboxOption } from './Option'
+import { AutocompleteOption } from './Option'
 
 const Container = styled.div`
   position: relative;
@@ -84,7 +84,7 @@ const StyledButton = styled(Button)(
   `,
 )
 
-type ComboboxOption<T> = T & {
+type AutocompleteOption<T> = T & {
   label: string
 }
 
@@ -95,8 +95,8 @@ type IndexFinderType = <T>({
   availableItems,
 }: {
   index: number
-  optionDisabled: ComboboxProps<T>['optionDisabled']
-  availableItems: ComboboxProps<T>['options']
+  optionDisabled: AutocompleteProps<T>['optionDisabled']
+  availableItems: AutocompleteProps<T>['options']
   calc?: (n: number) => number
 }) => number
 
@@ -157,15 +157,17 @@ const findPrevIndex: IndexFinderType = ({
   return prevIndex
 }
 
-export type ComboboxChanges<T> = UseMultipleSelectionProps<ComboboxOption<T>>
+export type AutocompleteChanges<T> = UseMultipleSelectionProps<
+  AutocompleteOption<T>
+>
 
-export type ComboboxProps<T> = {
+export type AutocompleteProps<T> = {
   /** List of options to choose from */
-  options: ComboboxOption<T>[]
+  options: AutocompleteOption<T>[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
-  initialSelectedOptions?: ComboboxOption<T>[]
+  initialSelectedOptions?: AutocompleteOption<T>[]
   /** Meta text, for instance unit */
   meta?: string
   /** Disabled state */
@@ -176,28 +178,30 @@ export type ComboboxProps<T> = {
    * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
    * The items that should be selected. */
-  selectedOptions?: ComboboxOption<T>[]
+  selectedOptions?: AutocompleteOption<T>[]
   /** Callback for the selected item change
    * changes.selectedItems gives the selected items
    */
-  onOptionsChange?: (changes: ComboboxChanges<ComboboxOption<T>>) => void
+  onOptionsChange?: (
+    changes: AutocompleteChanges<AutocompleteOption<T>>,
+  ) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
-  optionLabel?: (option: ComboboxOption<T>) => string
+  optionLabel?: (option: AutocompleteOption<T>) => string
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
   /** Disable option */
-  optionDisabled?: (option: ComboboxOption<T>) => boolean
+  optionDisabled?: (option: AutocompleteOption<T>) => boolean
   /** Filter function for options */
-  optionsFilter?: (option: ComboboxOption<T>, inputValue: string) => boolean
+  optionsFilter?: (option: AutocompleteOption<T>, inputValue: string) => boolean
   /** If `true` the width of the popper will adjust accordingly to the options label,
    * else it will follow the width of the input */
   autoWidth?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-function ComboboxInner<T>(
-  props: ComboboxProps<T>,
+function AutocompleteInner<T>(
+  props: AutocompleteProps<T>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -236,18 +240,19 @@ function ComboboxInner<T>(
   )
   let placeholderText: string = undefined
 
-  let multipleSelectionProps: UseMultipleSelectionProps<ComboboxOption<T>> = {
-    initialSelectedItems: multiple
-      ? initialSelectedOptions
-      : initialSelectedOptions[0]
-      ? [initialSelectedOptions[0]]
-      : [],
-    onSelectedItemsChange: (changes) => {
-      if (onOptionsChange) {
-        onOptionsChange(changes)
-      }
-    },
-  }
+  let multipleSelectionProps: UseMultipleSelectionProps<AutocompleteOption<T>> =
+    {
+      initialSelectedItems: multiple
+        ? initialSelectedOptions
+        : initialSelectedOptions[0]
+        ? [initialSelectedOptions[0]]
+        : [],
+      onSelectedItemsChange: (changes) => {
+        if (onOptionsChange) {
+          onOptionsChange(changes)
+        }
+      },
+    }
 
   if (isControlled) {
     multipleSelectionProps = {
@@ -265,7 +270,7 @@ function ComboboxInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
-  let comboBoxProps: UseComboboxProps<ComboboxOption<T>> = {
+  let comboBoxProps: UseComboboxProps<AutocompleteOption<T>> = {
     items: availableItems,
     initialSelectedItem: initialSelectedOptions[0],
     itemToString: (item) => (item ? optionLabel(item) : ''),
@@ -318,7 +323,7 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownHome:
           return {
             ...changes,
-            highlightedIndex: findNextIndex<ComboboxOption<T>>({
+            highlightedIndex: findNextIndex<AutocompleteOption<T>>({
               index: changes.highlightedIndex,
               availableItems,
               optionDisabled,
@@ -328,7 +333,7 @@ function ComboboxInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
           return {
             ...changes,
-            highlightedIndex: findPrevIndex<ComboboxOption<T>>({
+            highlightedIndex: findPrevIndex<AutocompleteOption<T>>({
               index: changes.highlightedIndex,
               availableItems,
               optionDisabled,
@@ -362,7 +367,7 @@ function ComboboxInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownHome:
             return {
               ...changes,
-              highlightedIndex: findNextIndex<ComboboxOption<T>>({
+              highlightedIndex: findNextIndex<AutocompleteOption<T>>({
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
@@ -372,7 +377,7 @@ function ComboboxInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
             return {
               ...changes,
-              highlightedIndex: findPrevIndex<ComboboxOption<T>>({
+              highlightedIndex: findPrevIndex<AutocompleteOption<T>>({
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
@@ -470,7 +475,7 @@ function ComboboxInner<T>(
             const isDisabled = optionDisabled(item)
             const isSelected = selectedItemsLabels.includes(label)
             return (
-              <ComboboxOption
+              <AutocompleteOption
                 key={label}
                 value={label}
                 multiple={multiple}
@@ -544,9 +549,9 @@ function ComboboxInner<T>(
   )
 }
 
-export const Combobox = forwardRef(ComboboxInner) as <T>(
-  props: ComboboxProps<T> & {
+export const Autocomplete = forwardRef(AutocompleteInner) as <T>(
+  props: AutocompleteProps<T> & {
     ref?: React.ForwardedRef<HTMLDivElement>
     displayName?: string | undefined
   },
-) => ReturnType<typeof ComboboxInner>
+) => ReturnType<typeof AutocompleteInner>

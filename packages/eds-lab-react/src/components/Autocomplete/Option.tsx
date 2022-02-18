@@ -37,7 +37,7 @@ const StyledListItem = styled(List.Item)<StyledListItemType>(
   },
 )
 
-export type ComboboxOptionProps = {
+export type AutocompleteOptionProps = {
   value: string
   multiple: boolean
   highlighted: string
@@ -45,41 +45,42 @@ export type ComboboxOptionProps = {
   isDisabled?: boolean
 } & LiHTMLAttributes<HTMLLIElement>
 
-export const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
-  function ComboboxOption(
-    {
-      value,
-      multiple,
-      isSelected,
-      isDisabled,
-      onClick,
-      'aria-selected': ariaSelected,
-      ...other
-    },
-    ref,
-  ) {
-    return (
-      <StyledListItem
-        ref={ref}
-        isdisabled={isDisabled ? 'true' : 'false'}
-        aria-hidden={isDisabled}
-        active={!multiple && isSelected ? 'true' : 'false'}
-        onClick={(e) => !isDisabled && onClick(e)}
-        aria-selected={multiple ? isSelected : ariaSelected}
-        {...other}
-      >
-        {multiple && (
-          <Checkbox
-            disabled={isDisabled}
-            checked={isSelected}
-            value={value}
-            onChange={() => {
-              return null
-            }}
-          />
-        )}
-        <span>{value}</span>
-      </StyledListItem>
-    )
+export const AutocompleteOption = forwardRef<
+  HTMLLIElement,
+  AutocompleteOptionProps
+>(function AutocompleteOption(
+  {
+    value,
+    multiple,
+    isSelected,
+    isDisabled,
+    onClick,
+    'aria-selected': ariaSelected,
+    ...other
   },
-)
+  ref,
+) {
+  return (
+    <StyledListItem
+      ref={ref}
+      isdisabled={isDisabled ? 'true' : 'false'}
+      aria-hidden={isDisabled}
+      active={!multiple && isSelected ? 'true' : 'false'}
+      onClick={(e) => !isDisabled && onClick(e)}
+      aria-selected={multiple ? isSelected : ariaSelected}
+      {...other}
+    >
+      {multiple && (
+        <Checkbox
+          disabled={isDisabled}
+          checked={isSelected}
+          value={value}
+          onChange={() => {
+            return null
+          }}
+        />
+      )}
+      <span>{value}</span>
+    </StyledListItem>
+  )
+})

@@ -10,29 +10,29 @@ import '@testing-library/jest-dom'
 import 'jest-styled-components'
 
 import styled from 'styled-components'
-import { Combobox } from '.'
+import { Autocomplete } from '.'
 
 const items = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]
 const labelText = 'Select label test'
 
 afterEach(cleanup)
 
-describe('Combobox', () => {
+describe('Autocomplete', () => {
   it('Matches snapshot', async () => {
-    render(<Combobox options={items} label={labelText} />)
+    render(<Autocomplete options={items} label={labelText} />)
 
-    const combobox = screen.getAllByLabelText(labelText)
-    const input = combobox[0]
+    const autocomplete = screen.getAllByLabelText(labelText)
+    const input = autocomplete[0]
 
     fireEvent.click(input)
 
-    const openCombobox = await screen.findAllByLabelText(labelText)
-    const optionsList = openCombobox[1]
+    const openAutocomplete = await screen.findAllByLabelText(labelText)
+    const optionsList = openAutocomplete[1]
 
     expect(optionsList).toMatchSnapshot()
   })
   it('Has provided label', async () => {
-    render(<Combobox label={labelText} options={items} />)
+    render(<Autocomplete label={labelText} options={items} />)
 
     // The same label is used for both the input field and the list of options
     const labeledNodes = await screen.findAllByLabelText(labelText)
@@ -49,7 +49,7 @@ describe('Combobox', () => {
   })
 
   it('Can be disabled', async () => {
-    render(<Combobox label={labelText} options={items} disabled />)
+    render(<Autocomplete label={labelText} options={items} disabled />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
 
@@ -58,7 +58,7 @@ describe('Combobox', () => {
 
   it('Can preselect specific options', async () => {
     render(
-      <Combobox
+      <Autocomplete
         options={items}
         label={labelText}
         initialSelectedOptions={[{ label: 'One' }, { label: 'Two' }]}
@@ -76,7 +76,7 @@ describe('Combobox', () => {
   })
 
   it('Can open the options on button click', async () => {
-    render(<Combobox options={items} label={labelText} />)
+    render(<Autocomplete options={items} label={labelText} />)
 
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const optionsList = labeledNodes[1]
@@ -98,7 +98,7 @@ describe('Combobox', () => {
   const HandleMultipleSelect = ({ onOptionsChange }: ControlledProps) => {
     const [selected, setSelected] = useState([])
     return (
-      <Combobox
+      <Autocomplete
         multiple
         options={items}
         label={labelText}
@@ -128,7 +128,7 @@ describe('Combobox', () => {
   })
 
   it('Can filter results by input value', async () => {
-    render(<Combobox options={items} label={labelText} />)
+    render(<Autocomplete options={items} label={labelText} />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const input = labeledNodes[0]
     const optionsList = labeledNodes[1]
@@ -149,7 +149,7 @@ describe('Combobox', () => {
 
   it('Second option is first when first option is disabled', async () => {
     render(
-      <Combobox
+      <Autocomplete
         options={items}
         label={labelText}
         optionDisabled={(item) => item === items[0]}
@@ -177,23 +177,23 @@ describe('Combobox', () => {
     ).toBeDefined()
   })
 
-  const StyledCombobox = styled(Combobox)`
+  const StyledAutocomplete = styled(Autocomplete)`
     clip-path: unset;
   `
 
   it('Can extend the css for the component & props are passed correctly to input', async () => {
     const { container } = render(
-      <StyledCombobox
+      <StyledAutocomplete
         label="test"
         options={items}
-        data-testid="styled-combobox"
+        data-testid="styled-autocomplete"
       />,
     )
 
-    const combobox = await screen.findByTestId('styled-combobox')
+    const autocomplete = await screen.findByTestId('styled-autocomplete')
 
     // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toHaveStyleRule('clip-path', 'unset')
-    expect(combobox.nodeName).toBe('INPUT')
+    expect(autocomplete.nodeName).toBe('INPUT')
   })
 })
