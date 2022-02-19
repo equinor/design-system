@@ -355,10 +355,11 @@ function AutocompleteInner<T>(
 
   if (multiple) {
     placeholderText =
-      placeholderText ||
-      `${selectedItems.length}/${
-        options.length - disabledItems.length
-      } selected`
+      typeof placeholderText !== 'undefined'
+        ? placeholderText
+        : `${selectedItems.length}/${
+            options.length - disabledItems.length
+          } selected`
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
