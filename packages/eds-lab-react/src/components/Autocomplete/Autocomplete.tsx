@@ -220,6 +220,7 @@ function AutocompleteInner<T>(
     optionDisabled = () => false,
     optionsFilter,
     autoWidth,
+    placeholder,
     ...other
   } = props
   const anchorRef = useRef()
@@ -238,7 +239,7 @@ function AutocompleteInner<T>(
     { density },
     multiple ? multiSelectTokens : selectTokens,
   )
-  let placeholderText: string = undefined
+  let placeholderText = placeholder
 
   let multipleSelectionProps: UseMultipleSelectionProps<AutocompleteOption<T>> =
     {
@@ -353,9 +354,11 @@ function AutocompleteInner<T>(
   }
 
   if (multiple) {
-    placeholderText = `${selectedItems.length}/${
-      options.length - disabledItems.length
-    } selected`
+    placeholderText =
+      placeholderText ||
+      `${selectedItems.length}/${
+        options.length - disabledItems.length
+      } selected`
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
