@@ -114,13 +114,12 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     return () => setStoredAnchorEl(null)
   }, [anchorEl, open])
 
-  const { styles, attributes } = usePopper(
-    storedAnchorEl,
-    containerEl,
-    null,
+  const { styles, attributes } = usePopper({
+    anchorEl: storedAnchorEl,
+    popperEl: containerEl,
     placement,
-    4,
-  )
+    offset: 4,
+  })
 
   const props = {
     open,

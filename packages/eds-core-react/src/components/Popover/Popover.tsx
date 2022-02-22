@@ -149,12 +149,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       return () => setStoredAnchorEl(null)
     }, [anchorEl, open])
 
-    const { styles, attributes } = usePopper(
-      storedAnchorEl,
+    const { styles, attributes } = usePopper({
+      anchorEl: storedAnchorEl,
       popperEl,
       arrowRef,
       placement,
-    )
+    })
 
     const props = {
       open,

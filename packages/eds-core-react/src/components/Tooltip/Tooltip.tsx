@@ -155,13 +155,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     useGlobalKeyPress('Escape', () => closeTooltip())
 
-    const { styles, attributes } = usePopper(
-      anchorRef.current,
+    const { styles, attributes } = usePopper({
+      anchorEl: anchorRef.current,
       popperEl,
       arrowRef,
       placement,
-      14,
-    )
+      offset: 14,
+    })
 
     const props = {
       open,
