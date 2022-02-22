@@ -1,5 +1,6 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { CircularProgress } from './CircularProgress'
@@ -15,6 +16,14 @@ describe('CircularProgress', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<StyledProgress />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<CircularProgress />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with variant', async () => {
+    const { container } = render(<CircularProgress variant="determinate" />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('has correct aria values when variant is "determinate"', () => {
     render(<CircularProgress variant="determinate" value={50} />)
