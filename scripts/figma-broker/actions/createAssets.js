@@ -54,7 +54,7 @@ const writeSVGSprite = (assets) => {
 
 const makeIconDataFile = (assets) => {
   console.info('Making & saving data file for eds-icons')
-  const iconDataObj = (icon) => {
+  const toIconDataString = (icon) => {
     const prefix = 'eds'
     const { name, height, width, svgPathData, sizes } = icon
 
@@ -64,12 +64,10 @@ const makeIconDataFile = (assets) => {
       height: '${height}',
       width: '${width}',
       svgPathData: '${svgPathData}',
-      ${sizes ? `sizes: { small: ${iconDataObj(sizes.small)} }` : ``}
+      ${sizes ? `sizes: { small: ${toIconDataString(sizes.small)} }` : ``}
     }
     `
   }
-  const iconDataTemplate = (icon) =>
-    `export const ${icon.name}: IconData = ${iconDataObj(icon)} \n`
 
   const mergedSizes = R.map(
     (iconGroup) => ({
@@ -115,11 +113,17 @@ const makeIconDataFile = (assets) => {
     assets,
   )
 
-  const svgObjects = R.pipe(
+  const iconDatasString = R.pipe(
     R.map((iconGroups) =>
-      R.pipe(R.reduce((acc, icon) => `${acc}${iconDataTemplate(icon)}`, ''))(
-        iconGroups.value,
-      ),
+      R.pipe(
+        R.reduce(
+          (acc, icon) =>
+            `${acc}export const ${icon.name}: IconData = ${toIconDataString(
+              icon,
+            )} \n`,
+          '',
+        ),
+      )(iconGroups.value),
     ),
     R.head,
   )(mergedSizes)
@@ -128,7 +132,7 @@ const makeIconDataFile = (assets) => {
     PATHS.ICON_FILES,
     'data',
     'ts',
-    `import type { IconData } from './types' \n\n ${svgObjects}\n`,
+    `import type { IconData } from './types' \n\n ${iconDatasString}\n`,
   )
 }
 
