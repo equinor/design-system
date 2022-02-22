@@ -4,6 +4,7 @@ import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Menu } from '.'
 import { MenuProps } from './Menu'
@@ -29,7 +30,33 @@ describe('Menu', () => {
 
     await waitFor(() => expect(menuContainer).toMatchSnapshot())
   })
-
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <TestMenu open>
+        <div>some random content</div>
+      </TestMenu>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with Item', async () => {
+    const { container } = render(
+      <TestMenu open>
+        <Menu.Item>Item 1</Menu.Item>
+        <Menu.Item>Item 2</Menu.Item>
+      </TestMenu>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with Section & title', async () => {
+    const { container } = render(
+      <TestMenu open>
+        <Menu.Section title="Section title">
+          <Menu.Item>Item 1</Menu.Item>
+        </Menu.Section>
+      </TestMenu>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('Can extend the css for the component', async () => {
     const { container } = render(
       <StyledMenu open>
@@ -65,7 +92,6 @@ describe('Menu', () => {
     const menuItem = screen.getByText('Item 1')
     await waitFor(() => expect(menuItem).toBeDefined())
   })
-
   it('has rendered Menu.Section with Menu.Item & title', async () => {
     render(
       <TestMenu open>
@@ -80,7 +106,6 @@ describe('Menu', () => {
     await waitFor(() => expect(menuItem).toBeDefined())
     expect(menuSection).toBeDefined()
   })
-
   it('has called onClose when Menu.Item is clicked', async () => {
     const handleOnClose = jest.fn()
     const handleOnClick = jest.fn()
@@ -98,7 +123,6 @@ describe('Menu', () => {
     await waitFor(() => expect(handleOnClick).toHaveBeenCalled())
     expect(handleOnClose).toHaveBeenCalled()
   })
-
   it('has first menuItem focused when focus is set to first', async () => {
     render(
       <TestMenu open focus="first">
@@ -112,7 +136,6 @@ describe('Menu', () => {
     // eslint-disable-next-line testing-library/no-node-access
     await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
   })
-
   it('has last menuItem focused when focus is set to last', async () => {
     render(
       <TestMenu open focus="last">
