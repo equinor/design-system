@@ -2,6 +2,7 @@
 import { render, cleanup, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Pagination } from '.'
 
@@ -15,6 +16,26 @@ describe('Pagination', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Pagination totalItems={10} />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Pagination totalItems={10} />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with aria label', async () => {
+    const { container } = render(
+      <Pagination totalItems={10} aria-label="description" />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with default page', async () => {
+    const { container } = render(<Pagination totalItems={10} defaultPage={3} />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with number of pages', async () => {
+    const { container } = render(
+      <Pagination totalItems={10} itemsPerPage={1} />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('can extend the css for the component', () => {
     render(<StyledPagination totalItems={10} />)
