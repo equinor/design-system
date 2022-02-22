@@ -15,7 +15,25 @@ import { getAssets } from '../files/assets'
 import { PATHS } from '../constants'
 import { sleep, mergeStrings } from '../functions/utils'
 
-const svgContent = (svg) => R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
+const svgBody = (
+  content,
+) => `<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ ${content}
+</svg>`
+
+const svgSymbol = (iconDataObj) => {
+  if (!iconDataObj) return ''
+
+  const { svgPathData, name, viewBox } = iconDataObj
+  const id = R.endsWith('_small', name) ? 'small' : 'default'
+
+  return `<symbol id=${id} viewBox="${viewBox}">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="${svgPathData}"/>
+  </symbol>`
+}
+
+const getSvgContent = (svg) =>
+  R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
 
 const getSvgPathData = R.pipe(
   R.match(/d="(.+?)"/g),
@@ -32,7 +50,7 @@ const writeSVGSprite = (assets) => {
         `${acc}${`<symbol id="${val.name}" viewBox="${val.viewbox}">
       <title>${val.name}</title>
       <desc>${val.path}-${val.name}</desc>
-      ${svgContent(val.value)}
+      ${getSvgContent(val.value)}
     </symbol>`}`,
       '',
     ),
@@ -52,6 +70,49 @@ const writeSVGSprite = (assets) => {
   )
 }
 
+const mergeAssetsSizes = R.map((iconGroup) => ({
+  ...iconGroup,
+  value: R.reduce(
+    (acc, val) => {
+      const smallAnnote = '_small'
+
+      if (R.endsWith(smallAnnote, val.name)) {
+        const parentName = R.head(R.split(smallAnnote, val.name))
+        const parent = acc.find((p) => p.name === parentName, iconGroup.value)
+
+        if (parent) {
+          // remove "old" parent as its replaced by new
+          const updatedAcc = R.filter((x) => x.name !== parent.name, acc)
+          return [
+            ...updatedAcc,
+            {
+              ...parent,
+              sizes: {
+                small: val,
+              },
+            },
+          ]
+        } else {
+          console.log(
+            'parent icon not found, skipped: ',
+            JSON.stringify({ parentName, name: val.name }),
+          )
+          return acc
+        }
+      }
+
+      return [...acc, val]
+    },
+    [],
+    iconGroup.value,
+  ),
+}))
+
+const removeSmallAssets = R.map((group) => ({
+  ...group,
+  value: R.filter((asset) => R.not(R.endsWith('_small', asset)), group.value),
+}))
+
 const makeIconDataFile = (assets) => {
   console.info('Making & saving data file for eds-icons')
   const toIconDataString = (icon) => {
@@ -69,50 +130,6 @@ const makeIconDataFile = (assets) => {
     `
   }
 
-  const mergedSizes = R.map(
-    (iconGroup) => ({
-      ...iconGroup,
-      value: R.reduce(
-        (acc, val) => {
-          const smallAnnote = '_small'
-
-          if (R.endsWith(smallAnnote, val.name)) {
-            const parentName = R.head(R.split(smallAnnote, val.name))
-            const parent = acc.find(
-              (p) => p.name === parentName,
-              iconGroup.value,
-            )
-
-            if (parent) {
-              // remove "old" parent as its replaced by new
-              const updatedAcc = R.filter((x) => x.name !== parent.name, acc)
-              return [
-                ...updatedAcc,
-                {
-                  ...parent,
-                  sizes: {
-                    small: val,
-                  },
-                },
-              ]
-            } else {
-              console.log(
-                'parent icon not found, skipped: ',
-                JSON.stringify({ parentName, name: val.name }),
-              )
-              return acc
-            }
-          }
-
-          return [...acc, val]
-        },
-        [],
-        iconGroup.value,
-      ),
-    }),
-    assets,
-  )
-
   const iconDatasString = R.pipe(
     R.map((iconGroups) =>
       R.pipe(
@@ -126,7 +143,7 @@ const makeIconDataFile = (assets) => {
       )(iconGroups.value),
     ),
     R.head,
-  )(mergedSizes)
+  )(assets)
 
   writeFile(
     PATHS.ICON_FILES,
@@ -144,7 +161,23 @@ const writeJsonAssets = (assets) => {
 
 const writeSVGs = (assets) => {
   console.info('Save icons as svg files')
-  writeResultsIndividually(assets, PATHS.ASSETS_ICONS, 'svg')
+
+  const svgSprite = (asset) => ({
+    ...asset,
+    value: svgBody(
+      `${svgSymbol(asset)}
+      ${svgSymbol(asset.sizes ? asset.sizes.small : null)}`,
+    ),
+  })
+
+  const updateAssets = R.pipe(
+    R.map((iconGroup) => ({
+      ...iconGroup,
+      value: R.map(svgSprite, iconGroup.value),
+    })),
+  )(assets)
+
+  writeResultsIndividually(updateAssets, PATHS.ASSETS_ICONS, 'svg')
 }
 
 export async function createAssets({ query }) {
@@ -154,6 +187,18 @@ export async function createAssets({ query }) {
 
   const figmaFile = processFigmaFile(data)
   const assetPages = getAssets(figmaFile)
+
+  const assetsTest = R.pipe(
+    R.head,
+    R.prop('value'),
+    R.filter((x) => x.name.includes('fullscreen')),
+    (value) => [
+      {
+        name: 'system-icons',
+        value,
+      },
+    ],
+  )(assetPages)
 
   const plugins = SVGO.extendDefaultPlugins([
     {
@@ -172,7 +217,7 @@ export async function createAssets({ query }) {
   console.info('Get asset urls from Figma')
   // Update with svg image urls from Figma
   const assetsWithUrl = await Promise.all(
-    assetPages.map(async (assetPage) => {
+    assetsTest.map(async (assetPage) => {
       const ids = assetPage.value.map((x) => x.id)
       const result = await fetchFigmaImageUrls(query.fileId, ids)
       if (!result.err) {
@@ -231,9 +276,14 @@ export async function createAssets({ query }) {
   // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
   // writeSVGSprite(assetsWithSvg)
 
-  writeSVGs(assetsWithSvg)
-  writeJsonAssets(assetsWithSvg)
-  makeIconDataFile(assetsWithSvg)
+  const mergedAssets = R.pipe(
+    mergeAssetsSizes,
+    removeSmallAssets,
+  )(assetsWithSvg)
+
+  writeSVGs(mergedAssets)
+  writeJsonAssets(mergedAssets)
+  makeIconDataFile(mergedAssets)
 
   console.info('Finished exporting assets')
 
