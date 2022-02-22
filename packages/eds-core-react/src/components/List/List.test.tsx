@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { List } from '.'
 
@@ -20,6 +21,24 @@ describe('Lists', () => {
       </List>,
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <List>
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
+      </List>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with variant', async () => {
+    const { container } = render(
+      <List variant="bullet">
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
+      </List>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Renders an unordered list by default', () => {
     render(
