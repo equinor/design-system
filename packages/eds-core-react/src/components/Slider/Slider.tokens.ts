@@ -21,6 +21,9 @@ const {
     },
   },
   typography: { paragraph },
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
 } = tokens
 
 type SliderToken = ComponentToken
@@ -76,9 +79,9 @@ export const slider: SliderToken = {
           outline: {
             type: 'outline',
             color: focusOutlineColor,
-            width: '1px',
+            width: focusOutlineWidth,
             style: 'dashed',
-            offset: '2px',
+            offset: '3px',
           },
         },
         hover: {
