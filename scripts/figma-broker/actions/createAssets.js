@@ -15,59 +15,32 @@ import { getAssets } from '../files/assets'
 import { PATHS } from '../constants'
 import { sleep, mergeStrings } from '../functions/utils'
 
-const svgBody = (
-  content,
-) => `<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
- ${content}
-</svg>`
-
-const svgSymbol = (iconDataObj) => {
-  if (!iconDataObj) return ''
-
-  const { svgPathData, name, viewBox } = iconDataObj
-  const id = R.endsWith('_small', name) ? 'small' : 'default'
-
-  return `<symbol id=${id} viewBox="${viewBox}">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="${svgPathData}"/>
-  </symbol>`
-}
-
-const getSvgContent = (svg) =>
-  R.head(R.match(/(?<=svg">)(.*?)(?=<\/svg>)/g, svg))
-
 const getSvgPathData = R.pipe(
   R.match(/d="(.+?)"/g),
   R.map(R.match(/[^d="](.+)[^"]/g)),
   mergeStrings,
 )
 
-const writeSVGSprite = (assets) => {
-  const value = R.pipe(
-    R.find((x) => x.name === 'system-icons'),
-    R.prop('value'),
-    R.reduce(
-      (acc, val) =>
-        `${acc}${`<symbol id="${val.name}" viewBox="${val.viewbox}">
-      <title>${val.name}</title>
-      <desc>${val.path}-${val.name}</desc>
-      ${getSvgContent(val.value)}
-    </symbol>`}`,
-      '',
-    ),
-    (x) => `
-    <svg style="display: none;"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink">
-     ${x}
-    </svg>
-    `,
-  )(assets)
+const svg = (
+  content,
+) => `<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+use,
+use:target~use:last-child { display: none; }
+use:target,
+use:last-child { display: inline; }
+</style>${content}</svg>`
 
-  writeResults(
-    [{ name: 'system-icons', value }],
-    `${PATHS.ASSETS_ICONS}`,
-    'svg',
-  )
+const svgContent = (asset) => {
+  if (!asset) return { symbol: '', use: '' }
+
+  const { svgPathData, name, viewbox } = asset
+  const id = R.endsWith('_small', name) ? 'small' : 'medium'
+
+  return {
+    symbol: `<symbol id="${name}" viewBox="${viewbox}"><path fill-rule="evenodd" clip-rule="evenodd" d="${svgPathData}"/></symbol>`,
+    use: `<use id="${id}" xlink:href="#${name}" />`,
+  }
 }
 
 const mergeAssetsSizes = R.map((iconGroup) => ({
@@ -162,13 +135,16 @@ const writeJsonAssets = (assets) => {
 const writeSVGs = (assets) => {
   console.info('Save icons as svg files')
 
-  const svgSprite = (asset) => ({
-    ...asset,
-    value: svgBody(
-      `${svgSymbol(asset)}
-      ${svgSymbol(asset.sizes ? asset.sizes.small : null)}`,
-    ),
-  })
+  const svgSprite = (asset) => {
+    const normal = svgContent(asset)
+    const small = svgContent(asset.sizes ? asset.sizes.small : null)
+    return {
+      ...asset,
+      value: svg(
+        `<defs>${normal.symbol}${small.symbol}</defs>${small.use}${normal.use}`,
+      ),
+    }
+  }
 
   const updateAssets = R.pipe(
     R.map((iconGroup) => ({
@@ -188,17 +164,17 @@ export async function createAssets({ query }) {
   const figmaFile = processFigmaFile(data)
   const assetPages = getAssets(figmaFile)
 
-  const assetsTest = R.pipe(
-    R.head,
-    R.prop('value'),
-    R.filter((x) => x.name.includes('fullscreen')),
-    (value) => [
-      {
-        name: 'system-icons',
-        value,
-      },
-    ],
-  )(assetPages)
+  // const assetsTest = R.pipe(
+  //   R.head,
+  //   R.prop('value'),
+  //   R.filter((x) => x.name.includes('fullscreen')),
+  //   (value) => [
+  //     {
+  //       name: 'system-icons',
+  //       value,
+  //     },
+  //   ],
+  // )(assetPages)
 
   const plugins = SVGO.extendDefaultPlugins([
     {
@@ -217,7 +193,7 @@ export async function createAssets({ query }) {
   console.info('Get asset urls from Figma')
   // Update with svg image urls from Figma
   const assetsWithUrl = await Promise.all(
-    assetsTest.map(async (assetPage) => {
+    assetPages.map(async (assetPage) => {
       const ids = assetPage.value.map((x) => x.id)
       const result = await fetchFigmaImageUrls(query.fileId, ids)
       if (!result.err) {
