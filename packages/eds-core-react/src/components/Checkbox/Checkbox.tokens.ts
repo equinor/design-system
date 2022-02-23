@@ -20,6 +20,9 @@ const {
     default__base: clicboundSize,
     compact__standard: compactClickboundSize,
   },
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
 } = tokens
 
 type CheckboxToken = ComponentToken
@@ -47,9 +50,9 @@ export const checkbox: CheckboxToken = {
       outline: {
         type: 'outline',
         style: 'dashed',
-        width: '1px',
+        width: focusOutlineWidth,
         color: focusOutlineColor,
-        offset: '11px',
+        offset: '10px',
       },
     },
   },
@@ -69,9 +72,9 @@ export const checkbox: CheckboxToken = {
           outline: {
             type: 'outline',
             style: 'dashed',
-            width: '1px',
+            width: focusOutlineWidth,
             color: focusOutlineColor,
-            offset: '3px',
+            offset: '2px',
           },
         },
       },
