@@ -1,1 +1,7 @@
-<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z"/></svg>
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+use,
+use:target~use:last-child { display: none; }
+use:target,
+use:last-child { display: inline; }
+</style><defs><symbol id="hourglass_full" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z"/></symbol></defs><use id="medium" xlink:href="#hourglass_full" /></svg>

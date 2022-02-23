@@ -1,1 +1,7 @@
-<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"/></svg>
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+use,
+use:target~use:last-child { display: none; }
+use:target,
+use:last-child { display: inline; }
+</style><defs><symbol id="chevron_up" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"/></symbol><symbol id="chevron_up_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="m5.174 12.002 3.825-3.709 3.825 3.709 1.175-1.142-5-4.859-5 4.859 1.175 1.142z"/></symbol></defs><use id="small" xlink:href="#chevron_up_small" /><use id="medium" xlink:href="#chevron_up" /></svg>

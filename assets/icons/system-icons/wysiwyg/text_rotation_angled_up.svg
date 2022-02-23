@@ -1,1 +1,7 @@
-<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m8.23 12.13 3.54-3.54 2.19.92 1.48-1.48L4.31 3.61 3.25 4.67l4.42 11.14 1.48-1.48-.92-2.2zm8.28-3.75 1.41 1.41-9.19 9.19 1.41 1.41 9.19-9.19 1.42 1.42V8.38h-4.24zM5.18 5.54l2.23 4.87 2.64-2.64-4.87-2.23z"/></svg>
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+use,
+use:target~use:last-child { display: none; }
+use:target,
+use:last-child { display: inline; }
+</style><defs><symbol id="text_rotation_angled_up" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m8.23 12.13 3.54-3.54 2.19.92 1.48-1.48L4.31 3.61 3.25 4.67l4.42 11.14 1.48-1.48-.92-2.2zm8.28-3.75 1.41 1.41-9.19 9.19 1.41 1.41 9.19-9.19 1.42 1.42V8.38h-4.24zM5.18 5.54l2.23 4.87 2.64-2.64-4.87-2.23z"/></symbol></defs><use id="medium" xlink:href="#text_rotation_angled_up" /></svg>

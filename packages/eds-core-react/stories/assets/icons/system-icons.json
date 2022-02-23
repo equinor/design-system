@@ -657,19 +657,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M7 10H5V5h5v2H7v3zm-2 4h2v3h3v2H5v-5zm12 3h-3v2h5v-5h-2v3zM14 7V5h5v5h-2V7h-3z"
-  },
-  {
-    "name": "fullscreen_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M5 7H3V3h4v2H5v2zm-2 4h2v2h2v2H3v-4zm10 2h-2v2h4v-4h-2v2zm-2-8V3h4v4h-2V5h-2z\"/></svg>",
-    "id": "7153:7728",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/73aa/51af/954c396c7c79cc6200c76948851a6802",
-    "path": "ui-views",
-    "group": "UI views",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M5 7H3V3h4v2H5v2zm-2 4h2v2h2v2H3v-4zm10 2h-2v2h4v-4h-2v2zm-2-8V3h4v4h-2V5h-2z"
+    "svgPathData": "M7 10H5V5h5v2H7v3zm-2 4h2v3h3v2H5v-5zm12 3h-3v2h5v-5h-2v3zM14 7V5h5v5h-2V7h-3z",
+    "sizes": {
+      "small": {
+        "name": "fullscreen_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M5 7H3V3h4v2H5v2zm-2 4h2v2h2v2H3v-4zm10 2h-2v2h4v-4h-2v2zm-2-8V3h4v4h-2V5h-2z\"/></svg>",
+        "id": "7153:7728",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/73aa/51af/954c396c7c79cc6200c76948851a6802",
+        "path": "ui-views",
+        "group": "UI views",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M5 7H3V3h4v2H5v2zm-2 4h2v2h2v2H3v-4zm10 2h-2v2h4v-4h-2v2zm-2-8V3h4v4h-2V5h-2z"
+      }
+    }
   },
   {
     "name": "select_all",
@@ -1437,19 +1439,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-5.83 6.59-6.59L18 9l-8 8-4-4 1.41-1.41L10 14.17z"
-  },
-  {
-    "name": "check_circle_outlined_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9 1C4.584 1 1 4.584 1 9s3.584 8 8 8 8-3.584 8-8-3.584-8-8-8zm0 14c-3.308 0-6-2.693-6-6 0-3.308 2.692-6 6-6 3.307 0 6 2.692 6 6 0 3.307-2.693 6-6 6zm-1.599-4.264 5.272-5.272L13.801 6.6l-6.4 6.4-3.2-3.2L5.33 8.672l2.072 2.064z\"/></svg>",
-    "id": "7153:23695",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/1e0b/537e/933ec7f81867c3bd66f031511f566024",
-    "path": "ui-action",
-    "group": "UI action",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M9 1C4.584 1 1 4.584 1 9s3.584 8 8 8 8-3.584 8-8-3.584-8-8-8zm0 14c-3.308 0-6-2.693-6-6 0-3.308 2.692-6 6-6 3.307 0 6 2.692 6 6 0 3.307-2.693 6-6 6zm-1.599-4.264 5.272-5.272L13.801 6.6l-6.4 6.4-3.2-3.2L5.33 8.672l2.072 2.064z"
+    "svgPathData": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-5.83 6.59-6.59L18 9l-8 8-4-4 1.41-1.41L10 14.17z",
+    "sizes": {
+      "small": {
+        "name": "check_circle_outlined_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9 1C4.584 1 1 4.584 1 9s3.584 8 8 8 8-3.584 8-8-3.584-8-8-8zm0 14c-3.308 0-6-2.693-6-6 0-3.308 2.692-6 6-6 3.307 0 6 2.692 6 6 0 3.307-2.693 6-6 6zm-1.599-4.264 5.272-5.272L13.801 6.6l-6.4 6.4-3.2-3.2L5.33 8.672l2.072 2.064z\"/></svg>",
+        "id": "7153:23695",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/1e0b/537e/933ec7f81867c3bd66f031511f566024",
+        "path": "ui-action",
+        "group": "UI action",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M9 1C4.584 1 1 4.584 1 9s3.584 8 8 8 8-3.584 8-8-3.584-8-8-8zm0 14c-3.308 0-6-2.693-6-6 0-3.308 2.692-6 6-6 3.307 0 6 2.692 6 6 0 3.307-2.693 6-6 6zm-1.599-4.264 5.272-5.272L13.801 6.6l-6.4 6.4-3.2-3.2L5.33 8.672l2.072 2.064z"
+      }
+    }
   },
   {
     "name": "close",
@@ -1461,19 +1465,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-  },
-  {
-    "name": "close_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14 5.007 12.993 4 9 7.993 5.007 4 4 5.007 7.993 9 4 12.993 5.007 14 9 10.007 12.993 14 14 12.993 10.007 9 14 5.007z\"/></svg>",
-    "id": "7118:7421",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/da5b/54a0/4f03eb89a18296b39893403d9407a045",
-    "path": "ui-action",
-    "group": "UI action",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M14 5.007 12.993 4 9 7.993 5.007 4 4 5.007 7.993 9 4 12.993 5.007 14 9 10.007 12.993 14 14 12.993 10.007 9 14 5.007z"
+    "svgPathData": "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z",
+    "sizes": {
+      "small": {
+        "name": "close_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14 5.007 12.993 4 9 7.993 5.007 4 4 5.007 7.993 9 4 12.993 5.007 14 9 10.007 12.993 14 14 12.993 10.007 9 14 5.007z\"/></svg>",
+        "id": "7118:7421",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/da5b/54a0/4f03eb89a18296b39893403d9407a045",
+        "path": "ui-action",
+        "group": "UI action",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M14 5.007 12.993 4 9 7.993 5.007 4 4 5.007 7.993 9 4 12.993 5.007 14 9 10.007 12.993 14 14 12.993 10.007 9 14 5.007z"
+      }
+    }
   },
   {
     "name": "search",
@@ -1485,19 +1491,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M14.966 14.255h.79l4.99 5-1.49 1.49-5-4.99v-.79l-.27-.28a6.471 6.471 0 0 1-4.23 1.57 6.5 6.5 0 1 1 6.5-6.5c0 1.61-.59 3.09-1.57 4.23l.28.27zm-9.71-4.5c0 2.49 2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5-4.5 2.01-4.5 4.5z"
-  },
-  {
-    "name": "search_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.224 10.691h.592l3.743 3.75-1.118 1.118-3.75-3.743v-.592l-.202-.21a4.853 4.853 0 0 1-3.173 1.177 4.875 4.875 0 1 1 4.875-4.875 4.853 4.853 0 0 1-1.177 3.173l.21.202zM3.94 7.316a3.37 3.37 0 0 0 3.375 3.375 3.37 3.37 0 0 0 3.375-3.375 3.37 3.37 0 0 0-3.375-3.375 3.37 3.37 0 0 0-3.375 3.375z\"/></svg>",
-    "id": "7214:7348",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/12d6/4f5f/8b501b161b4b5a5cc4026da5d5e10455",
-    "path": "ui-action",
-    "group": "UI action",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M11.224 10.691h.592l3.743 3.75-1.118 1.118-3.75-3.743v-.592l-.202-.21a4.853 4.853 0 0 1-3.173 1.177 4.875 4.875 0 1 1 4.875-4.875 4.853 4.853 0 0 1-1.177 3.173l.21.202zM3.94 7.316a3.37 3.37 0 0 0 3.375 3.375 3.37 3.37 0 0 0 3.375-3.375 3.37 3.37 0 0 0-3.375-3.375 3.37 3.37 0 0 0-3.375 3.375z"
+    "svgPathData": "M14.966 14.255h.79l4.99 5-1.49 1.49-5-4.99v-.79l-.27-.28a6.471 6.471 0 0 1-4.23 1.57 6.5 6.5 0 1 1 6.5-6.5c0 1.61-.59 3.09-1.57 4.23l.28.27zm-9.71-4.5c0 2.49 2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5-4.5 2.01-4.5 4.5z",
+    "sizes": {
+      "small": {
+        "name": "search_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.224 10.691h.592l3.743 3.75-1.118 1.118-3.75-3.743v-.592l-.202-.21a4.853 4.853 0 0 1-3.173 1.177 4.875 4.875 0 1 1 4.875-4.875 4.853 4.853 0 0 1-1.177 3.173l.21.202zM3.94 7.316a3.37 3.37 0 0 0 3.375 3.375 3.37 3.37 0 0 0 3.375-3.375 3.37 3.37 0 0 0-3.375-3.375 3.37 3.37 0 0 0-3.375 3.375z\"/></svg>",
+        "id": "7214:7348",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/12d6/4f5f/8b501b161b4b5a5cc4026da5d5e10455",
+        "path": "ui-action",
+        "group": "UI action",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M11.224 10.691h.592l3.743 3.75-1.118 1.118-3.75-3.743v-.592l-.202-.21a4.853 4.853 0 0 1-3.173 1.177 4.875 4.875 0 1 1 4.875-4.875 4.853 4.853 0 0 1-1.177 3.173l.21.202zM3.94 7.316a3.37 3.37 0 0 0 3.375 3.375 3.37 3.37 0 0 0 3.375-3.375 3.37 3.37 0 0 0-3.375-3.375 3.37 3.37 0 0 0-3.375 3.375z"
+      }
+    }
   },
   {
     "name": "checkbox",
@@ -1509,19 +1517,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm4.3 13.29c.39.39 1.02.39 1.41 0l7.58-7.59a.996.996 0 1 0-1.41-1.41L10 14.17l-2.88-2.88a.996.996 0 1 0-1.41 1.41l3.59 3.59z"
-  },
-  {
-    "name": "checkbox_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.75 2h10.5c.825 0 1.75.925 1.75 1.75v10.5c0 .825-.925 1.75-1.75 1.75H3.75c-.825 0-1.662-.925-1.662-1.75V3.75c0-.825.837-1.75 1.662-1.75zm3.225 10.217a.747.747 0 0 0 1.057 0l5.685-5.692a.747.747 0 1 0-1.057-1.058l-5.16 5.16-2.16-2.16a.747.747 0 1 0-1.058 1.058l2.693 2.692z\"/></svg>",
-    "id": "7135:7499",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/d675/93a6/4a9167b3781fddb5813b402f6da9d7ac",
-    "path": "ui-action",
-    "group": "UI action",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M3.75 2h10.5c.825 0 1.75.925 1.75 1.75v10.5c0 .825-.925 1.75-1.75 1.75H3.75c-.825 0-1.662-.925-1.662-1.75V3.75c0-.825.837-1.75 1.662-1.75zm3.225 10.217a.747.747 0 0 0 1.057 0l5.685-5.692a.747.747 0 1 0-1.057-1.058l-5.16 5.16-2.16-2.16a.747.747 0 1 0-1.058 1.058l2.693 2.692z"
+    "svgPathData": "M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm4.3 13.29c.39.39 1.02.39 1.41 0l7.58-7.59a.996.996 0 1 0-1.41-1.41L10 14.17l-2.88-2.88a.996.996 0 1 0-1.41 1.41l3.59 3.59z",
+    "sizes": {
+      "small": {
+        "name": "checkbox_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.75 2h10.5c.825 0 1.75.925 1.75 1.75v10.5c0 .825-.925 1.75-1.75 1.75H3.75c-.825 0-1.662-.925-1.662-1.75V3.75c0-.825.837-1.75 1.662-1.75zm3.225 10.217a.747.747 0 0 0 1.057 0l5.685-5.692a.747.747 0 1 0-1.057-1.058l-5.16 5.16-2.16-2.16a.747.747 0 1 0-1.058 1.058l2.693 2.692z\"/></svg>",
+        "id": "7135:7499",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/d675/93a6/4a9167b3781fddb5813b402f6da9d7ac",
+        "path": "ui-action",
+        "group": "UI action",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M3.75 2h10.5c.825 0 1.75.925 1.75 1.75v10.5c0 .825-.925 1.75-1.75 1.75H3.75c-.825 0-1.662-.925-1.662-1.75V3.75c0-.825.837-1.75 1.662-1.75zm3.225 10.217a.747.747 0 0 0 1.057 0l5.685-5.692a.747.747 0 1 0-1.057-1.058l-5.16 5.16-2.16-2.16a.747.747 0 1 0-1.058 1.058l2.693 2.692z"
+      }
+    }
   },
   {
     "name": "checkbox_outline",
@@ -1533,19 +1543,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z"
-  },
-  {
-    "name": "checkbox_outline_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.5 2H14c.825 0 2 .925 2 1.75v10.5c0 .825-1.175 1.75-2 1.75H3.5c-.825 0-1.5-.925-1.5-1.75V3.75C2 2.925 2.675 2 3.5 2zm1.214 12h8.572a.716.716 0 0 0 .714-.714V4.714A.716.716 0 0 0 13.286 4H4.714A.716.716 0 0 0 4 4.714v8.572c0 .393.321.714.714.714z\"/></svg>",
-    "id": "7135:7516",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/9c2c/02b8/c5a8388ecdad887056536af68f78a5c7",
-    "path": "ui-action",
-    "group": "UI action",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M3.5 2H14c.825 0 2 .925 2 1.75v10.5c0 .825-1.175 1.75-2 1.75H3.5c-.825 0-1.5-.925-1.5-1.75V3.75C2 2.925 2.675 2 3.5 2zm1.214 12h8.572a.716.716 0 0 0 .714-.714V4.714A.716.716 0 0 0 13.286 4H4.714A.716.716 0 0 0 4 4.714v8.572c0 .393.321.714.714.714z"
+    "svgPathData": "M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z",
+    "sizes": {
+      "small": {
+        "name": "checkbox_outline_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.5 2H14c.825 0 2 .925 2 1.75v10.5c0 .825-1.175 1.75-2 1.75H3.5c-.825 0-1.5-.925-1.5-1.75V3.75C2 2.925 2.675 2 3.5 2zm1.214 12h8.572a.716.716 0 0 0 .714-.714V4.714A.716.716 0 0 0 13.286 4H4.714A.716.716 0 0 0 4 4.714v8.572c0 .393.321.714.714.714z\"/></svg>",
+        "id": "7135:7516",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/9c2c/02b8/c5a8388ecdad887056536af68f78a5c7",
+        "path": "ui-action",
+        "group": "UI action",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M3.5 2H14c.825 0 2 .925 2 1.75v10.5c0 .825-1.175 1.75-2 1.75H3.5c-.825 0-1.5-.925-1.5-1.75V3.75C2 2.925 2.675 2 3.5 2zm1.214 12h8.572a.716.716 0 0 0 .714-.714V4.714A.716.716 0 0 0 13.286 4H4.714A.716.716 0 0 0 4 4.714v8.572c0 .393.321.714.714.714z"
+      }
+    }
   },
   {
     "name": "checkbox_indeterminate",
@@ -1557,19 +1569,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm3 10h8c.55 0 1-.45 1-1s-.45-1-1-1H8c-.55 0-1 .45-1 1s.45 1 1 1z"
-  },
-  {
-    "name": "checkbox_indeterminate_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.5 2H14c.825 0 2 .925 2 1.75V14c0 .825-1.175 2-2 2H4c-.825 0-2-1.175-2-2V3.75C2 2.925 2.675 2 3.5 2zm2.3 8h6.4c.44 0 .8-.45.8-1s-.36-1-.8-1H5.8c-.44 0-.8.45-.8 1s.36 1 .8 1z\"/></svg>",
-    "id": "7135:7525",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/c972/ef0b/5068fb5ffe1761f735a78518412131ca",
-    "path": "ui-action",
-    "group": "UI action",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M3.5 2H14c.825 0 2 .925 2 1.75V14c0 .825-1.175 2-2 2H4c-.825 0-2-1.175-2-2V3.75C2 2.925 2.675 2 3.5 2zm2.3 8h6.4c.44 0 .8-.45.8-1s-.36-1-.8-1H5.8c-.44 0-.8.45-.8 1s.36 1 .8 1z"
+    "svgPathData": "M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm3 10h8c.55 0 1-.45 1-1s-.45-1-1-1H8c-.55 0-1 .45-1 1s.45 1 1 1z",
+    "sizes": {
+      "small": {
+        "name": "checkbox_indeterminate_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.5 2H14c.825 0 2 .925 2 1.75V14c0 .825-1.175 2-2 2H4c-.825 0-2-1.175-2-2V3.75C2 2.925 2.675 2 3.5 2zm2.3 8h6.4c.44 0 .8-.45.8-1s-.36-1-.8-1H5.8c-.44 0-.8.45-.8 1s.36 1 .8 1z\"/></svg>",
+        "id": "7135:7525",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/c972/ef0b/5068fb5ffe1761f735a78518412131ca",
+        "path": "ui-action",
+        "group": "UI action",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M3.5 2H14c.825 0 2 .925 2 1.75V14c0 .825-1.175 2-2 2H4c-.825 0-2-1.175-2-2V3.75C2 2.925 2.675 2 3.5 2zm2.3 8h6.4c.44 0 .8-.45.8-1s-.36-1-.8-1H5.8c-.44 0-.8.45-.8 1s.36 1 .8 1z"
+      }
+    }
   },
   {
     "name": "calendar_event",
@@ -1749,19 +1763,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 6v2h14V6H5z"
-  },
-  {
-    "name": "calendar_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5 3H13V2h-1v1H6V2H5v1h-.5C3.5 3 3 3.5 3 4.6v9.1c0 .715.6 1.3 1.333 1.3h9.334C14.4 15 15 14.415 15 13.7V4.6c0-1.1-.5-1.6-1.5-1.6zM13 13H5V8h8v5zM5 5v1h8V5H5z\"/></svg>",
-    "id": "7118:7420",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/6250/e368/43d1073cc93c57c731c2f73391430f24",
-    "path": "time-date",
-    "group": "Time + date",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M13.5 3H13V2h-1v1H6V2H5v1h-.5C3.5 3 3 3.5 3 4.6v9.1c0 .715.6 1.3 1.333 1.3h9.334C14.4 15 15 14.415 15 13.7V4.6c0-1.1-.5-1.6-1.5-1.6zM13 13H5V8h8v5zM5 5v1h8V5H5z"
+    "svgPathData": "M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 6v2h14V6H5z",
+    "sizes": {
+      "small": {
+        "name": "calendar_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5 3H13V2h-1v1H6V2H5v1h-.5C3.5 3 3 3.5 3 4.6v9.1c0 .715.6 1.3 1.333 1.3h9.334C14.4 15 15 14.415 15 13.7V4.6c0-1.1-.5-1.6-1.5-1.6zM13 13H5V8h8v5zM5 5v1h8V5H5z\"/></svg>",
+        "id": "7118:7420",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/6250/e368/43d1073cc93c57c731c2f73391430f24",
+        "path": "time-date",
+        "group": "Time + date",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M13.5 3H13V2h-1v1H6V2H5v1h-.5C3.5 3 3 3.5 3 4.6v9.1c0 .715.6 1.3 1.333 1.3h9.334C14.4 15 15 14.415 15 13.7V4.6c0-1.1-.5-1.6-1.5-1.6zM13 13H5V8h8v5zM5 5v1h8V5H5z"
+      }
+    }
   },
   {
     "name": "time",
@@ -1773,19 +1789,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h1.5v5.2l4.5 2.7-.8 1.3L11 13V7z"
-  },
-  {
-    "name": "time_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9 2C5.15 2 2 5.15 2 9s3.15 7 7 7 7-3.15 7-7-3.15-7-7-7zm-.002 12.6a5.607 5.607 0 0 1-5.6-5.6c0-3.087 2.513-5.6 5.6-5.6 3.087 0 5.6 2.513 5.6 5.6 0 3.087-2.513 5.6-5.6 5.6zM8 6h1v3.391l3 1.761-.533.848L8 9.913V6z\"/></svg>",
-    "id": "7135:7479",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/421f/8ca7/3a347c0a46a99442682998191ca911ec",
-    "path": "time-date",
-    "group": "Time + date",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M9 2C5.15 2 2 5.15 2 9s3.15 7 7 7 7-3.15 7-7-3.15-7-7-7zm-.002 12.6a5.607 5.607 0 0 1-5.6-5.6c0-3.087 2.513-5.6 5.6-5.6 3.087 0 5.6 2.513 5.6 5.6 0 3.087-2.513 5.6-5.6 5.6zM8 6h1v3.391l3 1.761-.533.848L8 9.913V6z"
+    "svgPathData": "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h1.5v5.2l4.5 2.7-.8 1.3L11 13V7z",
+    "sizes": {
+      "small": {
+        "name": "time_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9 2C5.15 2 2 5.15 2 9s3.15 7 7 7 7-3.15 7-7-3.15-7-7-7zm-.002 12.6a5.607 5.607 0 0 1-5.6-5.6c0-3.087 2.513-5.6 5.6-5.6 3.087 0 5.6 2.513 5.6 5.6 0 3.087-2.513 5.6-5.6 5.6zM8 6h1v3.391l3 1.761-.533.848L8 9.913V6z\"/></svg>",
+        "id": "7135:7479",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/421f/8ca7/3a347c0a46a99442682998191ca911ec",
+        "path": "time-date",
+        "group": "Time + date",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M9 2C5.15 2 2 5.15 2 9s3.15 7 7 7 7-3.15 7-7-3.15-7-7-7zm-.002 12.6a5.607 5.607 0 0 1-5.6-5.6c0-3.087 2.513-5.6 5.6-5.6 3.087 0 5.6 2.513 5.6 5.6 0 3.087-2.513 5.6-5.6 5.6zM8 6h1v3.391l3 1.761-.533.848L8 9.913V6z"
+      }
+    }
   },
   {
     "name": "cable",
@@ -2877,19 +2895,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6z"
-  },
-  {
-    "name": "notifications_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5 11.911v-3.67c0-2.254-1.223-4.141-3.375-4.64v-.5C10.125 2.491 9.623 2 9 2s-1.125.492-1.125 1.101v.5C5.73 4.1 4.5 5.979 4.5 8.24v3.67L3 13.38v.673h12v-.673l-1.5-1.469zM9 16.001c.825 0 1.5-.49 1.5-1.47h-3c0 .98.675 1.47 1.5 1.47zm-3-3.356h6V8.24c0-1.82-1.133-3.303-3-3.303S6 6.42 6 8.24v4.405z\"/></svg>",
-    "id": "7135:7536",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/9206/81ae/8d1e8d194da31134ee39802570989ca1",
-    "path": "notifications-alerts",
-    "group": "Notifications + alerts",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M13.5 11.911v-3.67c0-2.254-1.223-4.141-3.375-4.64v-.5C10.125 2.491 9.623 2 9 2s-1.125.492-1.125 1.101v.5C5.73 4.1 4.5 5.979 4.5 8.24v3.67L3 13.38v.673h12v-.673l-1.5-1.469zM9 16.001c.825 0 1.5-.49 1.5-1.47h-3c0 .98.675 1.47 1.5 1.47zm-3-3.356h6V8.24c0-1.82-1.133-3.303-3-3.303S6 6.42 6 8.24v4.405z"
+    "svgPathData": "M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6z",
+    "sizes": {
+      "small": {
+        "name": "notifications_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5 11.911v-3.67c0-2.254-1.223-4.141-3.375-4.64v-.5C10.125 2.491 9.623 2 9 2s-1.125.492-1.125 1.101v.5C5.73 4.1 4.5 5.979 4.5 8.24v3.67L3 13.38v.673h12v-.673l-1.5-1.469zM9 16.001c.825 0 1.5-.49 1.5-1.47h-3c0 .98.675 1.47 1.5 1.47zm-3-3.356h6V8.24c0-1.82-1.133-3.303-3-3.303S6 6.42 6 8.24v4.405z\"/></svg>",
+        "id": "7135:7536",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/9206/81ae/8d1e8d194da31134ee39802570989ca1",
+        "path": "notifications-alerts",
+        "group": "Notifications + alerts",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M13.5 11.911v-3.67c0-2.254-1.223-4.141-3.375-4.64v-.5C10.125 2.491 9.623 2 9 2s-1.125.492-1.125 1.101v.5C5.73 4.1 4.5 5.979 4.5 8.24v3.67L3 13.38v.673h12v-.673l-1.5-1.469zM9 16.001c.825 0 1.5-.49 1.5-1.47h-3c0 .98.675 1.47 1.5 1.47zm-3-3.356h6V8.24c0-1.82-1.133-3.303-3-3.303S6 6.42 6 8.24v4.405z"
+      }
+    }
   },
   {
     "name": "notifications_active",
@@ -2901,19 +2921,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6zM7.58 3.83 6.15 2.4c-2.4 1.83-3.98 4.65-4.12 7.85h2a8.445 8.445 0 0 1 3.55-6.42zm14.39 6.42h-2a8.495 8.495 0 0 0-3.54-6.42l1.42-1.43c2.39 1.83 3.97 4.65 4.12 7.85z"
-  },
-  {
-    "name": "notifications_active_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5 11.813v-3.75c0-2.303-1.223-4.23-3.375-4.74v-.51c0-.623-.503-1.126-1.125-1.126-.623 0-1.125.503-1.125 1.125v.51C5.73 3.832 4.5 5.752 4.5 8.063v3.75l-1.5 1.5V14h12v-.688l-1.5-1.5zM9 16c1 0 1.5-.871 1.5-1.5h-3c0 .629.5 1.5 1.5 1.5zm-3-3.438h6v-4.5c0-1.86-1.133-3.374-3-3.374-1.868 0-3 1.514-3 3.375v4.5zm-.315-9.69L4.612 1.8a7.819 7.819 0 0 0-3.09 5.888h1.5a6.334 6.334 0 0 1 2.663-4.815zm10.793 4.816h-1.5a6.371 6.371 0 0 0-2.655-4.815L13.386 1.8a7.866 7.866 0 0 1 3.09 5.888z\"/></svg>",
-    "id": "7143:7557",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/22a0/1556/fb4e86f81b9aeffa815dfdb47ae61a64",
-    "path": "notifications-alerts",
-    "group": "Notifications + alerts",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M13.5 11.813v-3.75c0-2.303-1.223-4.23-3.375-4.74v-.51c0-.623-.503-1.126-1.125-1.126-.623 0-1.125.503-1.125 1.125v.51C5.73 3.832 4.5 5.752 4.5 8.063v3.75l-1.5 1.5V14h12v-.688l-1.5-1.5zM9 16c1 0 1.5-.871 1.5-1.5h-3c0 .629.5 1.5 1.5 1.5zm-3-3.438h6v-4.5c0-1.86-1.133-3.374-3-3.374-1.868 0-3 1.514-3 3.375v4.5zm-.315-9.69L4.612 1.8a7.819 7.819 0 0 0-3.09 5.888h1.5a6.334 6.334 0 0 1 2.663-4.815zm10.793 4.816h-1.5a6.371 6.371 0 0 0-2.655-4.815L13.386 1.8a7.866 7.866 0 0 1 3.09 5.888z"
+    "svgPathData": "M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6zM7.58 3.83 6.15 2.4c-2.4 1.83-3.98 4.65-4.12 7.85h2a8.445 8.445 0 0 1 3.55-6.42zm14.39 6.42h-2a8.495 8.495 0 0 0-3.54-6.42l1.42-1.43c2.39 1.83 3.97 4.65 4.12 7.85z",
+    "sizes": {
+      "small": {
+        "name": "notifications_active_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5 11.813v-3.75c0-2.303-1.223-4.23-3.375-4.74v-.51c0-.623-.503-1.126-1.125-1.126-.623 0-1.125.503-1.125 1.125v.51C5.73 3.832 4.5 5.752 4.5 8.063v3.75l-1.5 1.5V14h12v-.688l-1.5-1.5zM9 16c1 0 1.5-.871 1.5-1.5h-3c0 .629.5 1.5 1.5 1.5zm-3-3.438h6v-4.5c0-1.86-1.133-3.374-3-3.374-1.868 0-3 1.514-3 3.375v4.5zm-.315-9.69L4.612 1.8a7.819 7.819 0 0 0-3.09 5.888h1.5a6.334 6.334 0 0 1 2.663-4.815zm10.793 4.816h-1.5a6.371 6.371 0 0 0-2.655-4.815L13.386 1.8a7.866 7.866 0 0 1 3.09 5.888z\"/></svg>",
+        "id": "7143:7557",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/22a0/1556/fb4e86f81b9aeffa815dfdb47ae61a64",
+        "path": "notifications-alerts",
+        "group": "Notifications + alerts",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M13.5 11.813v-3.75c0-2.303-1.223-4.23-3.375-4.74v-.51c0-.623-.503-1.126-1.125-1.126-.623 0-1.125.503-1.125 1.125v.51C5.73 3.832 4.5 5.752 4.5 8.063v3.75l-1.5 1.5V14h12v-.688l-1.5-1.5zM9 16c1 0 1.5-.871 1.5-1.5h-3c0 .629.5 1.5 1.5 1.5zm-3-3.438h6v-4.5c0-1.86-1.133-3.374-3-3.374-1.868 0-3 1.514-3 3.375v4.5zm-.315-9.69L4.612 1.8a7.819 7.819 0 0 0-3.09 5.888h1.5a6.334 6.334 0 0 1 2.663-4.815zm10.793 4.816h-1.5a6.371 6.371 0 0 0-2.655-4.815L13.386 1.8a7.866 7.866 0 0 1 3.09 5.888z"
+      }
+    }
   },
   {
     "name": "notifications_off",
@@ -2925,19 +2947,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M15.305 10.75c0-2.48-1.51-4.5-4-4.5-.144 0-.282.017-.42.034l-.13.016-1.64-1.64.105-.038c.188-.07.383-.141.585-.192v-.68c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v.68c2.87.68 4.5 3.25 4.5 6.32v2.1l-2-2v-.1zm-2 9c0 1.1-.9 2-2 2s-2-.9-2-2h4zM4.715 3.1l-1.41 1.41 2.81 2.81c-.52 1-.81 2.17-.81 3.43v5l-2 2v1h14.24l1.74 1.74 1.41-1.41L4.715 3.1zm2.59 13.65h8v-.24l-7.66-7.66c-.22.58-.34 1.22-.34 1.9v6z"
-  },
-  {
-    "name": "notifications_off_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.47 8.236c0-1.82-1.129-3.302-2.99-3.302-.108 0-.21.013-.313.026l-.098.011-1.226-1.203.078-.028c.14-.051.287-.104.438-.14v-.5c0-.608.5-1.1 1.121-1.1.62 0 1.121.492 1.121 1.1v.5c2.146.498 3.364 2.384 3.364 4.636v1.54L11.47 8.31v-.073zm-1.473 6.297c0 .978-.673 1.467-1.495 1.467-.822 0-1.495-.49-1.495-1.467h2.99zM3.554 2.623 2.5 3.659l2.1 2.061a5.36 5.36 0 0 0-.605 2.517v3.668L2.5 13.37v.672h10.487l1.459 1.338 1.054-1.034L3.554 2.624zM5.49 12.639h5.98v-.176l-5.726-5.62a3.856 3.856 0 0 0-.254 1.394v4.402z\"/></svg>",
-    "id": "7144:7608",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/a329/1783/31e3bbf10f02201647f29551df5e28de",
-    "path": "notifications-alerts",
-    "group": "Notifications + alerts",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M11.47 8.236c0-1.82-1.129-3.302-2.99-3.302-.108 0-.21.013-.313.026l-.098.011-1.226-1.203.078-.028c.14-.051.287-.104.438-.14v-.5c0-.608.5-1.1 1.121-1.1.62 0 1.121.492 1.121 1.1v.5c2.146.498 3.364 2.384 3.364 4.636v1.54L11.47 8.31v-.073zm-1.473 6.297c0 .978-.673 1.467-1.495 1.467-.822 0-1.495-.49-1.495-1.467h2.99zM3.554 2.623 2.5 3.659l2.1 2.061a5.36 5.36 0 0 0-.605 2.517v3.668L2.5 13.37v.672h10.487l1.459 1.338 1.054-1.034L3.554 2.624zM5.49 12.639h5.98v-.176l-5.726-5.62a3.856 3.856 0 0 0-.254 1.394v4.402z"
+    "svgPathData": "M15.305 10.75c0-2.48-1.51-4.5-4-4.5-.144 0-.282.017-.42.034l-.13.016-1.64-1.64.105-.038c.188-.07.383-.141.585-.192v-.68c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v.68c2.87.68 4.5 3.25 4.5 6.32v2.1l-2-2v-.1zm-2 9c0 1.1-.9 2-2 2s-2-.9-2-2h4zM4.715 3.1l-1.41 1.41 2.81 2.81c-.52 1-.81 2.17-.81 3.43v5l-2 2v1h14.24l1.74 1.74 1.41-1.41L4.715 3.1zm2.59 13.65h8v-.24l-7.66-7.66c-.22.58-.34 1.22-.34 1.9v6z",
+    "sizes": {
+      "small": {
+        "name": "notifications_off_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.47 8.236c0-1.82-1.129-3.302-2.99-3.302-.108 0-.21.013-.313.026l-.098.011-1.226-1.203.078-.028c.14-.051.287-.104.438-.14v-.5c0-.608.5-1.1 1.121-1.1.62 0 1.121.492 1.121 1.1v.5c2.146.498 3.364 2.384 3.364 4.636v1.54L11.47 8.31v-.073zm-1.473 6.297c0 .978-.673 1.467-1.495 1.467-.822 0-1.495-.49-1.495-1.467h2.99zM3.554 2.623 2.5 3.659l2.1 2.061a5.36 5.36 0 0 0-.605 2.517v3.668L2.5 13.37v.672h10.487l1.459 1.338 1.054-1.034L3.554 2.624zM5.49 12.639h5.98v-.176l-5.726-5.62a3.856 3.856 0 0 0-.254 1.394v4.402z\"/></svg>",
+        "id": "7144:7608",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/a329/1783/31e3bbf10f02201647f29551df5e28de",
+        "path": "notifications-alerts",
+        "group": "Notifications + alerts",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M11.47 8.236c0-1.82-1.129-3.302-2.99-3.302-.108 0-.21.013-.313.026l-.098.011-1.226-1.203.078-.028c.14-.051.287-.104.438-.14v-.5c0-.608.5-1.1 1.121-1.1.62 0 1.121.492 1.121 1.1v.5c2.146.498 3.364 2.384 3.364 4.636v1.54L11.47 8.31v-.073zm-1.473 6.297c0 .978-.673 1.467-1.495 1.467-.822 0-1.495-.49-1.495-1.467h2.99zM3.554 2.623 2.5 3.659l2.1 2.061a5.36 5.36 0 0 0-.605 2.517v3.668L2.5 13.37v.672h10.487l1.459 1.338 1.054-1.034L3.554 2.624zM5.49 12.639h5.98v-.176l-5.726-5.62a3.856 3.856 0 0 0-.254 1.394v4.402z"
+      }
+    }
   },
   {
     "name": "error_filled",
@@ -2949,19 +2973,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z"
-  },
-  {
-    "name": "error_filled_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9 2C5.136 2 2 5.136 2 9s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zM8 13v-2h2v2H8zm0-8v5h2V5H8z\"/></svg>",
-    "id": "7118:7408",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/d834/5ef1/bd92932a3b22aa3245fbcb30ad4c5d15",
-    "path": "notifications-alerts",
-    "group": "Notifications + alerts",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M9 2C5.136 2 2 5.136 2 9s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zM8 13v-2h2v2H8zm0-8v5h2V5H8z"
+    "svgPathData": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z",
+    "sizes": {
+      "small": {
+        "name": "error_filled_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9 2C5.136 2 2 5.136 2 9s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zM8 13v-2h2v2H8zm0-8v5h2V5H8z\"/></svg>",
+        "id": "7118:7408",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/d834/5ef1/bd92932a3b22aa3245fbcb30ad4c5d15",
+        "path": "notifications-alerts",
+        "group": "Notifications + alerts",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M9 2C5.136 2 2 5.136 2 9s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zM8 13v-2h2v2H8zm0-8v5h2V5H8z"
+      }
+    }
   },
   {
     "name": "warning_filled",
@@ -2973,19 +2999,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m23 21.5-11-19-11 19h22zm-12-3v-2h2v2h-2zm0-4h2v-4h-2v4z"
-  },
-  {
-    "name": "warning_filled_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M17.5 16 9 2 .5 16h17zM8 14v-2h2v2H8zm0-4h2V6H8v4z\"/></svg>",
-    "id": "7118:7419",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/5fbe/6ce2/b0198602e69439239638cd26e06a4238",
-    "path": "notifications-alerts",
-    "group": "Notifications + alerts",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M17.5 16 9 2 .5 16h17zM8 14v-2h2v2H8zm0-4h2V6H8v4z"
+    "svgPathData": "m23 21.5-11-19-11 19h22zm-12-3v-2h2v2h-2zm0-4h2v-4h-2v4z",
+    "sizes": {
+      "small": {
+        "name": "warning_filled_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M17.5 16 9 2 .5 16h17zM8 14v-2h2v2H8zm0-4h2V6H8v4z\"/></svg>",
+        "id": "7118:7419",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/5fbe/6ce2/b0198602e69439239638cd26e06a4238",
+        "path": "notifications-alerts",
+        "group": "Notifications + alerts",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M17.5 16 9 2 .5 16h17zM8 14v-2h2v2H8zm0-4h2V6H8v4z"
+      }
+    }
   },
   {
     "name": "menu",
@@ -4749,19 +4777,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M5 5H3c0-1.1.9-2 2-2v2zm0 8H3v-2h2v2zm2 8h2v-2H7v2zM5 9H3V7h2v2zm8-6h-2v2h2V3zm6 2V3c1.1 0 2 .9 2 2h-2zM5 21v-2H3c0 1.1.9 2 2 2zm0-4H3v-2h2v2zM9 3H7v2h2V3zm4 18h-2v-2h2v2zm6-8h2v-2h-2v2zm2 6c0 1.1-.9 2-2 2v-2h2zM19 9h2V7h-2v2zm2 8h-2v-2h2v2zm-6 4h2v-2h-2v2zm2-16h-2V3h2v2z"
-  },
-  {
-    "name": "placeholder_icon_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z\"/></svg>",
-    "id": "7038:7386",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/95cb/2d5b/90cbbaa9510300d3bac8d1bfe5102ca4",
-    "path": "food-objects",
-    "group": "Food + objects",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z"
+    "svgPathData": "M5 5H3c0-1.1.9-2 2-2v2zm0 8H3v-2h2v2zm2 8h2v-2H7v2zM5 9H3V7h2v2zm8-6h-2v2h2V3zm6 2V3c1.1 0 2 .9 2 2h-2zM5 21v-2H3c0 1.1.9 2 2 2zm0-4H3v-2h2v2zM9 3H7v2h2V3zm4 18h-2v-2h2v2zm6-8h2v-2h-2v2zm2 6c0 1.1-.9 2-2 2v-2h2zM19 9h2V7h-2v2zm2 8h-2v-2h2v2zm-6 4h2v-2h-2v2zm2-16h-2V3h2v2z",
+    "sizes": {
+      "small": {
+        "name": "placeholder_icon_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z\"/></svg>",
+        "id": "7038:7386",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/95cb/2d5b/90cbbaa9510300d3bac8d1bfe5102ca4",
+        "path": "food-objects",
+        "group": "Food + objects",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z"
+      }
+    }
   },
   {
     "name": "folder_shared",
@@ -6765,19 +6795,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M9 22h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 2 7.58 8.59C7.22 8.95 7 9.45 7 10v10c0 1.1.9 2 2 2zm0-12 4.34-4.34L12 11h9v2l-3 7H9V10zm-4 0H1v12h4V10z"
-  },
-  {
-    "name": "thumbs_up_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M5.625 17h7.313c.674 0 1.25-.4 1.494-.976l2.454-5.64c.073-.184.114-.376.114-.584V8.2c0-.88-.606-1.2-1.5-1.2H10l1.02-4.056.024-.256c0-.328-.138-.632-.357-.848L9.826 1 4.47 6.272A1.578 1.578 0 0 0 4 7.4v8c0 .88.731 1.6 1.625 1.6zM6 7.5l3.5-4L8 9h7v1l-2 5H6V7.5zM3 7H1v10h2V7z\"/></svg>",
-    "id": "7118:7438",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/e402/0659/5c504e05b291b7dd68e1ae78599fcf4c",
-    "path": "communication-feedback",
-    "group": "Communication + feedback",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M5.625 17h7.313c.674 0 1.25-.4 1.494-.976l2.454-5.64c.073-.184.114-.376.114-.584V8.2c0-.88-.606-1.2-1.5-1.2H10l1.02-4.056.024-.256c0-.328-.138-.632-.357-.848L9.826 1 4.47 6.272A1.578 1.578 0 0 0 4 7.4v8c0 .88.731 1.6 1.625 1.6zM6 7.5l3.5-4L8 9h7v1l-2 5H6V7.5zM3 7H1v10h2V7z"
+    "svgPathData": "M9 22h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 2 7.58 8.59C7.22 8.95 7 9.45 7 10v10c0 1.1.9 2 2 2zm0-12 4.34-4.34L12 11h9v2l-3 7H9V10zm-4 0H1v12h4V10z",
+    "sizes": {
+      "small": {
+        "name": "thumbs_up_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M5.625 17h7.313c.674 0 1.25-.4 1.494-.976l2.454-5.64c.073-.184.114-.376.114-.584V8.2c0-.88-.606-1.2-1.5-1.2H10l1.02-4.056.024-.256c0-.328-.138-.632-.357-.848L9.826 1 4.47 6.272A1.578 1.578 0 0 0 4 7.4v8c0 .88.731 1.6 1.625 1.6zM6 7.5l3.5-4L8 9h7v1l-2 5H6V7.5zM3 7H1v10h2V7z\"/></svg>",
+        "id": "7118:7438",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/e402/0659/5c504e05b291b7dd68e1ae78599fcf4c",
+        "path": "communication-feedback",
+        "group": "Communication + feedback",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M5.625 17h7.313c.674 0 1.25-.4 1.494-.976l2.454-5.64c.073-.184.114-.376.114-.584V8.2c0-.88-.606-1.2-1.5-1.2H10l1.02-4.056.024-.256c0-.328-.138-.632-.357-.848L9.826 1 4.47 6.272A1.578 1.578 0 0 0 4 7.4v8c0 .88.731 1.6 1.625 1.6zM6 7.5l3.5-4L8 9h7v1l-2 5H6V7.5zM3 7H1v10h2V7z"
+      }
+    }
   },
   {
     "name": "donut_large",
@@ -7689,19 +7721,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m7.41 8.295 4.59 4.58 4.59-4.58L18 9.705l-6 6-6-6 1.41-1.41z"
-  },
-  {
-    "name": "chevron_down_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.175 6 9 9.709 12.825 6 14 7.142 9 12 4 7.142 5.175 6z\"/></svg>",
-    "id": "7144:7633",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/3524/8312/e0dd9293012c6d95bf73fe910bf174f0",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M5.175 6 9 9.709 12.825 6 14 7.142 9 12 4 7.142 5.175 6z"
+    "svgPathData": "m7.41 8.295 4.59 4.58 4.59-4.58L18 9.705l-6 6-6-6 1.41-1.41z",
+    "sizes": {
+      "small": {
+        "name": "chevron_down_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.175 6 9 9.709 12.825 6 14 7.142 9 12 4 7.142 5.175 6z\"/></svg>",
+        "id": "7144:7633",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/3524/8312/e0dd9293012c6d95bf73fe910bf174f0",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M5.175 6 9 9.709 12.825 6 14 7.142 9 12 4 7.142 5.175 6z"
+      }
+    }
   },
   {
     "name": "chevron_left",
@@ -7713,19 +7747,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M15.705 16.59 11.125 12l4.58-4.59L14.295 6l-6 6 6 6 1.41-1.41z"
-  },
-  {
-    "name": "chevron_left_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 12.827 8.291 9.002 12 5.177l-1.142-1.175-4.858 5 4.858 5L12 12.827z\"/></svg>",
-    "id": "7144:7643",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/2bb8/3f84/10468ceb59e68b4e2543f7a6f071055a",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M12 12.827 8.291 9.002 12 5.177l-1.142-1.175-4.858 5 4.858 5L12 12.827z"
+    "svgPathData": "M15.705 16.59 11.125 12l4.58-4.59L14.295 6l-6 6 6 6 1.41-1.41z",
+    "sizes": {
+      "small": {
+        "name": "chevron_left_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 12.827 8.291 9.002 12 5.177l-1.142-1.175-4.858 5 4.858 5L12 12.827z\"/></svg>",
+        "id": "7144:7643",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/2bb8/3f84/10468ceb59e68b4e2543f7a6f071055a",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M12 12.827 8.291 9.002 12 5.177l-1.142-1.175-4.858 5 4.858 5L12 12.827z"
+      }
+    }
   },
   {
     "name": "chevron_right",
@@ -7737,19 +7773,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m8.295 16.59 4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41z"
-  },
-  {
-    "name": "chevron_right_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m6 12.827 3.709-3.825L6 5.177l1.142-1.175 4.858 5-4.858 5L6 12.827z\"/></svg>",
-    "id": "7144:7638",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/9eb6/70a4/51abcd2cba645b6a24992a3d4bd55f5d",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m6 12.827 3.709-3.825L6 5.177l1.142-1.175 4.858 5-4.858 5L6 12.827z"
+    "svgPathData": "m8.295 16.59 4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41z",
+    "sizes": {
+      "small": {
+        "name": "chevron_right_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m6 12.827 3.709-3.825L6 5.177l1.142-1.175 4.858 5-4.858 5L6 12.827z\"/></svg>",
+        "id": "7144:7638",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/9eb6/70a4/51abcd2cba645b6a24992a3d4bd55f5d",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m6 12.827 3.709-3.825L6 5.177l1.142-1.175 4.858 5-4.858 5L6 12.827z"
+      }
+    }
   },
   {
     "name": "chevron_up",
@@ -7761,19 +7799,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
-  },
-  {
-    "name": "chevron_up_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m5.174 12.002 3.825-3.709 3.825 3.709 1.175-1.142-5-4.859-5 4.859 1.175 1.142z\"/></svg>",
-    "id": "7144:7648",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/e2d4/291e/24e5de221c876108a62a082997f770e5",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m5.174 12.002 3.825-3.709 3.825 3.709 1.175-1.142-5-4.859-5 4.859 1.175 1.142z"
+    "svgPathData": "m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z",
+    "sizes": {
+      "small": {
+        "name": "chevron_up_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m5.174 12.002 3.825-3.709 3.825 3.709 1.175-1.142-5-4.859-5 4.859 1.175 1.142z\"/></svg>",
+        "id": "7144:7648",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/e2d4/291e/24e5de221c876108a62a082997f770e5",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m5.174 12.002 3.825-3.709 3.825 3.709 1.175-1.142-5-4.859-5 4.859 1.175 1.142z"
+      }
+    }
   },
   {
     "name": "arrow_back",
@@ -7785,19 +7825,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
-  },
-  {
-    "name": "arrow_back_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M15 8H6.5l4-4L9 3 3 9l6 6 1.5-1-4-4H15V8z\"/></svg>",
-    "id": "7153:7680",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/1cbc/d4a9/5f38a0cf272422e83c83df293c4a64f9",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M15 8H6.5l4-4L9 3 3 9l6 6 1.5-1-4-4H15V8z"
+    "svgPathData": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+    "sizes": {
+      "small": {
+        "name": "arrow_back_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M15 8H6.5l4-4L9 3 3 9l6 6 1.5-1-4-4H15V8z\"/></svg>",
+        "id": "7153:7680",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/1cbc/d4a9/5f38a0cf272422e83c83df293c4a64f9",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M15 8H6.5l4-4L9 3 3 9l6 6 1.5-1-4-4H15V8z"
+      }
+    }
   },
   {
     "name": "arrow_down",
@@ -7809,19 +7851,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
-  },
-  {
-    "name": "arrow_down_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 3v8.5l-4-4L3 9l6 6 6-6-1-1.5-4 4V3H8z\"/></svg>",
-    "id": "7153:7677",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/bd92/a46a/03bc99de8c6dc355d95d86fce96f9ff7",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M8 3v8.5l-4-4L3 9l6 6 6-6-1-1.5-4 4V3H8z"
+    "svgPathData": "m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z",
+    "sizes": {
+      "small": {
+        "name": "arrow_down_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 3v8.5l-4-4L3 9l6 6 6-6-1-1.5-4 4V3H8z\"/></svg>",
+        "id": "7153:7677",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/bd92/a46a/03bc99de8c6dc355d95d86fce96f9ff7",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M8 3v8.5l-4-4L3 9l6 6 6-6-1-1.5-4 4V3H8z"
+      }
+    }
   },
   {
     "name": "arrow_forward",
@@ -7833,19 +7877,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"
-  },
-  {
-    "name": "arrow_forward_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 10h8.5l-4 4L9 15l6-6-6-6-1.5 1 4 4H3v2z\"/></svg>",
-    "id": "7153:7681",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/ce31/d418/19ccee4ee6d55de6a3a62c8bd474911f",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M3 10h8.5l-4 4L9 15l6-6-6-6-1.5 1 4 4H3v2z"
+    "svgPathData": "m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z",
+    "sizes": {
+      "small": {
+        "name": "arrow_forward_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 10h8.5l-4 4L9 15l6-6-6-6-1.5 1 4 4H3v2z\"/></svg>",
+        "id": "7153:7681",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/ce31/d418/19ccee4ee6d55de6a3a62c8bd474911f",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M3 10h8.5l-4 4L9 15l6-6-6-6-1.5 1 4 4H3v2z"
+      }
+    }
   },
   {
     "name": "arrow_up",
@@ -7857,19 +7903,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
-  },
-  {
-    "name": "arrow_up_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 15V6.5l4 4L15 9 9 3 3 9l1 1.5 4-4V15h2z\"/></svg>",
-    "id": "7153:7682",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/2f3d/3b6e/758d93b1e969ee05fafdd4e23fdb91d8",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M10 15V6.5l4 4L15 9 9 3 3 9l1 1.5 4-4V15h2z"
+    "svgPathData": "m4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z",
+    "sizes": {
+      "small": {
+        "name": "arrow_up_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 15V6.5l4 4L15 9 9 3 3 9l1 1.5 4-4V15h2z\"/></svg>",
+        "id": "7153:7682",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/2f3d/3b6e/758d93b1e969ee05fafdd4e23fdb91d8",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M10 15V6.5l4 4L15 9 9 3 3 9l1 1.5 4-4V15h2z"
+      }
+    }
   },
   {
     "name": "arrow_back_ios",
@@ -7881,19 +7929,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m17.835 3.87-1.78-1.77-9.89 9.9 9.9 9.9 1.77-1.77L9.705 12l8.13-8.13z"
-  },
-  {
-    "name": "arrow_back_ios_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13.377 2.903 12.04 1.575 4.624 9l7.425 7.425 1.328-1.327L7.279 9l6.098-6.097z\"/></svg>",
-    "id": "7153:7689",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/4c8a/9593/3733f6ccb9f250e60c610024988e7c8e",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M13.377 2.903 12.04 1.575 4.624 9l7.425 7.425 1.328-1.327L7.279 9l6.098-6.097z"
+    "svgPathData": "m17.835 3.87-1.78-1.77-9.89 9.9 9.9 9.9 1.77-1.77L9.705 12l8.13-8.13z",
+    "sizes": {
+      "small": {
+        "name": "arrow_back_ios_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13.377 2.903 12.04 1.575 4.624 9l7.425 7.425 1.328-1.327L7.279 9l6.098-6.097z\"/></svg>",
+        "id": "7153:7689",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/4c8a/9593/3733f6ccb9f250e60c610024988e7c8e",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M13.377 2.903 12.04 1.575 4.624 9l7.425 7.425 1.328-1.327L7.279 9l6.098-6.097z"
+      }
+    }
   },
   {
     "name": "arrow_forward_ios",
@@ -7905,19 +7955,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m6.165 20.13 1.77 1.77 9.9-9.9-9.9-9.9-1.77 1.77 8.13 8.13-8.13 8.13z"
-  },
-  {
-    "name": "arrow_forward_ios_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m4.623 2.903 1.335-1.328L13.376 9l-7.425 7.425-1.328-1.327L10.721 9 4.623 2.903z\"/></svg>",
-    "id": "7153:7694",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/0328/21ad/573e08458b6301c787bdcce449b85a5d",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m4.623 2.903 1.335-1.328L13.376 9l-7.425 7.425-1.328-1.327L10.721 9 4.623 2.903z"
+    "svgPathData": "m6.165 20.13 1.77 1.77 9.9-9.9-9.9-9.9-1.77 1.77 8.13 8.13-8.13 8.13z",
+    "sizes": {
+      "small": {
+        "name": "arrow_forward_ios_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m4.623 2.903 1.335-1.328L13.376 9l-7.425 7.425-1.328-1.327L10.721 9 4.623 2.903z\"/></svg>",
+        "id": "7153:7694",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/0328/21ad/573e08458b6301c787bdcce449b85a5d",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m4.623 2.903 1.335-1.328L13.376 9l-7.425 7.425-1.328-1.327L10.721 9 4.623 2.903z"
+      }
+    }
   },
   {
     "name": "arrow_drop_down",
@@ -7929,19 +7981,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m7 9.5 5 5 5-5H7z"
-  },
-  {
-    "name": "arrow_drop_down_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m4 6.5 5 5 5-5H4z\"/></svg>",
-    "id": "7054:7394",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/40df/b89c/0355e8cfe9b2101256162a98a76ea563",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m4 6.5 5 5 5-5H4z"
+    "svgPathData": "m7 9.5 5 5 5-5H7z",
+    "sizes": {
+      "small": {
+        "name": "arrow_drop_down_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m4 6.5 5 5 5-5H4z\"/></svg>",
+        "id": "7054:7394",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/40df/b89c/0355e8cfe9b2101256162a98a76ea563",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m4 6.5 5 5 5-5H4z"
+      }
+    }
   },
   {
     "name": "arrow_drop_up",
@@ -7953,19 +8007,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m7 14.5 5-5 5 5H7z"
-  },
-  {
-    "name": "arrow_drop_up_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m14 11.5-5-5-5 5h10z\"/></svg>",
-    "id": "7148:7657",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/50bc/82e9/c38f154d8cc705cacfc2aacdc0055d0e",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m14 11.5-5-5-5 5h10z"
+    "svgPathData": "m7 14.5 5-5 5 5H7z",
+    "sizes": {
+      "small": {
+        "name": "arrow_drop_up_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m14 11.5-5-5-5 5h10z\"/></svg>",
+        "id": "7148:7657",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/50bc/82e9/c38f154d8cc705cacfc2aacdc0055d0e",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m14 11.5-5-5-5 5h10z"
+      }
+    }
   },
   {
     "name": "arrow_drop_right",
@@ -7977,19 +8033,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m9.5 17 5-5-5-5v10z"
-  },
-  {
-    "name": "arrow_drop_right_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m6.5 14 5-5-5-5v10z\"/></svg>",
-    "id": "7148:7660",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/baf1/05a5/17c5eef60dba92e75b8cad0cac79cf6d",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m6.5 14 5-5-5-5v10z"
+    "svgPathData": "m9.5 17 5-5-5-5v10z",
+    "sizes": {
+      "small": {
+        "name": "arrow_drop_right_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m6.5 14 5-5-5-5v10z\"/></svg>",
+        "id": "7148:7660",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/baf1/05a5/17c5eef60dba92e75b8cad0cac79cf6d",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m6.5 14 5-5-5-5v10z"
+      }
+    }
   },
   {
     "name": "arrow_drop_left",
@@ -8001,19 +8059,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m14.5 7-5 5 5 5V7z"
-  },
-  {
-    "name": "arrow_drop_left_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m11.5 4-5 5 5 5V4z\"/></svg>",
-    "id": "7148:7663",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/33ba/32d8/b2a7171f1270bb940b10cc300e71543b",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m11.5 4-5 5 5 5V4z"
+    "svgPathData": "m14.5 7-5 5 5 5V7z",
+    "sizes": {
+      "small": {
+        "name": "arrow_drop_left_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m11.5 4-5 5 5 5V4z\"/></svg>",
+        "id": "7148:7663",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/33ba/32d8/b2a7171f1270bb940b10cc300e71543b",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m11.5 4-5 5 5 5V4z"
+      }
+    }
   },
   {
     "name": "subdirectory_arrow_left",
@@ -8025,19 +8085,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m10.5 8.5 1.42 1.42-3.59 3.58h9.17v-10h2v12H8.33l3.59 3.58-1.42 1.42-6-6 6-6z"
-  },
-  {
-    "name": "subdirectory_arrow_left_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m8 7 1 1-2.753 2.125h6.878V3h1.5v8.625H6.247L9 14l-1 1-4.625-4.125L8 7z\"/></svg>",
-    "id": "7153:7735",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/b849/e473/00243dfcaa4e9b90e05a9acb325c7e60",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "m8 7 1 1-2.753 2.125h6.878V3h1.5v8.625H6.247L9 14l-1 1-4.625-4.125L8 7z"
+    "svgPathData": "m10.5 8.5 1.42 1.42-3.59 3.58h9.17v-10h2v12H8.33l3.59 3.58-1.42 1.42-6-6 6-6z",
+    "sizes": {
+      "small": {
+        "name": "subdirectory_arrow_left_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m8 7 1 1-2.753 2.125h6.878V3h1.5v8.625H6.247L9 14l-1 1-4.625-4.125L8 7z\"/></svg>",
+        "id": "7153:7735",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/b849/e473/00243dfcaa4e9b90e05a9acb325c7e60",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "m8 7 1 1-2.753 2.125h6.878V3h1.5v8.625H6.247L9 14l-1 1-4.625-4.125L8 7z"
+      }
+    }
   },
   {
     "name": "subdirectory_arrow_right",
@@ -8049,19 +8111,21 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "m19.5 14.5-6 6-1.42-1.42 3.59-3.58H4.5v-12h2v10h9.17l-3.59-3.58L13.5 8.5l6 6z"
-  },
-  {
-    "name": "subdirectory_arrow_right_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 7 9 8l2.752 2.125H4.875V3h-1.5v8.625h8.377L9 14l1 1 4.625-4.125L10 7z\"/></svg>",
-    "id": "7153:7736",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/3925/fba7/cb4325a3ccdbfb1693d921948bac50cc",
-    "path": "arrows",
-    "group": "Arrows",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M10 7 9 8l2.752 2.125H4.875V3h-1.5v8.625h8.377L9 14l1 1 4.625-4.125L10 7z"
+    "svgPathData": "m19.5 14.5-6 6-1.42-1.42 3.59-3.58H4.5v-12h2v10h9.17l-3.59-3.58L13.5 8.5l6 6z",
+    "sizes": {
+      "small": {
+        "name": "subdirectory_arrow_right_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 7 9 8l2.752 2.125H4.875V3h-1.5v8.625h8.377L9 14l1 1 4.625-4.125L10 7z\"/></svg>",
+        "id": "7153:7736",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/3925/fba7/cb4325a3ccdbfb1693d921948bac50cc",
+        "path": "arrows",
+        "group": "Arrows",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M10 7 9 8l2.752 2.125H4.875V3h-1.5v8.625h8.377L9 14l1 1 4.625-4.125L10 7z"
+      }
+    }
   },
   {
     "name": "label",
@@ -8301,18 +8365,20 @@
     "viewbox": "0 0 24 24",
     "height": "24",
     "width": "24",
-    "svgPathData": "M14 4c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2 3c2.83 0 5.89-.3 8.5-1l.5 2c-1.86.5-4 .83-6 1v13h-2v-6h-2v6H9V9c-2-.17-4.14-.5-6-1l.5-2c2.61.7 5.67 1 8.5 1z"
-  },
-  {
-    "name": "accessible_small",
-    "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.5 3c0 .825-.675 1.5-1.5 1.5S7.5 3.825 7.5 3 8.175 1.5 9 1.5s1.5.675 1.5 1.5zM9 5.25c2.123 0 4.418-.225 6.375-.75L15.75 6c-1.395.375-3 .622-4.5.75v9.75h-1.5V12h-1.5v4.5h-1.5V6.75c-1.5-.128-3.105-.375-4.5-.75l.375-1.5c1.957.525 4.253.75 6.375.75z\"/></svg>",
-    "id": "7153:23684",
-    "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/39f4/b5ba/f33056e2a5efa790701ca30d863f02de",
-    "path": "accessibility",
-    "group": "Accessibility",
-    "viewbox": "0 0 18 18",
-    "height": "18",
-    "width": "18",
-    "svgPathData": "M10.5 3c0 .825-.675 1.5-1.5 1.5S7.5 3.825 7.5 3 8.175 1.5 9 1.5s1.5.675 1.5 1.5zM9 5.25c2.123 0 4.418-.225 6.375-.75L15.75 6c-1.395.375-3 .622-4.5.75v9.75h-1.5V12h-1.5v4.5h-1.5V6.75c-1.5-.128-3.105-.375-4.5-.75l.375-1.5c1.957.525 4.253.75 6.375.75z"
+    "svgPathData": "M14 4c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2 3c2.83 0 5.89-.3 8.5-1l.5 2c-1.86.5-4 .83-6 1v13h-2v-6h-2v6H9V9c-2-.17-4.14-.5-6-1l.5-2c2.61.7 5.67 1 8.5 1z",
+    "sizes": {
+      "small": {
+        "name": "accessible_small",
+        "value": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.5 3c0 .825-.675 1.5-1.5 1.5S7.5 3.825 7.5 3 8.175 1.5 9 1.5s1.5.675 1.5 1.5zM9 5.25c2.123 0 4.418-.225 6.375-.75L15.75 6c-1.395.375-3 .622-4.5.75v9.75h-1.5V12h-1.5v4.5h-1.5V6.75c-1.5-.128-3.105-.375-4.5-.75l.375-1.5c1.957.525 4.253.75 6.375.75z\"/></svg>",
+        "id": "7153:23684",
+        "url": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/39f4/b5ba/f33056e2a5efa790701ca30d863f02de",
+        "path": "accessibility",
+        "group": "Accessibility",
+        "viewbox": "0 0 18 18",
+        "height": "18",
+        "width": "18",
+        "svgPathData": "M10.5 3c0 .825-.675 1.5-1.5 1.5S7.5 3.825 7.5 3 8.175 1.5 9 1.5s1.5.675 1.5 1.5zM9 5.25c2.123 0 4.418-.225 6.375-.75L15.75 6c-1.395.375-3 .622-4.5.75v9.75h-1.5V12h-1.5v4.5h-1.5V6.75c-1.5-.128-3.105-.375-4.5-.75l.375-1.5c1.957.525 4.253.75 6.375.75z"
+      }
+    }
   }
 ]
