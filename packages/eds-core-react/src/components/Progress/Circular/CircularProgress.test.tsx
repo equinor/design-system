@@ -21,8 +21,10 @@ describe('CircularProgress', () => {
     const { container } = render(<CircularProgress />)
     expect(await axe(container)).toHaveNoViolations()
   })
-  it('Should pass a11y test with variant', async () => {
-    const { container } = render(<CircularProgress variant="determinate" />)
+  it('Should pass a11y test with variant & value', async () => {
+    const { container } = render(
+      <CircularProgress variant="determinate" value={50} />,
+    )
     expect(await axe(container)).toHaveNoViolations()
   })
   it('has correct aria values when variant is "determinate"', () => {
