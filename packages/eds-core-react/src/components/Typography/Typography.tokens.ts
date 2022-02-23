@@ -1,7 +1,13 @@
 import { ComponentToken, tokens } from '@equinor/eds-tokens'
 import type { TypographyTokens } from '@equinor/eds-tokens'
 
-const { typography, colors: colorsToken } = tokens
+const {
+  typography,
+  colors: colorsToken,
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
+} = tokens
 const { heading, paragraph } = typography
 
 const {
@@ -56,7 +62,7 @@ const link: ComponentToken = {
   states: {
     focus: {
       outline: {
-        width: '1px',
+        width: focusOutlineWidth,
         color: focus,
         style: 'dashed',
         type: 'outline',

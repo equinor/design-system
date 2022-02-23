@@ -25,6 +25,9 @@ const {
   spacings: {
     comfortable: { medium: mediumSpacing },
   },
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
 } = tokens
 
 type AccordionToken = ComponentToken & {
@@ -64,7 +67,7 @@ export const accordion: AccordionToken = {
             type: 'outline',
             color: focusOutlineColor,
             style: 'dashed',
-            width: '1px',
+            width: focusOutlineWidth,
             offset: '2px',
           },
         },
