@@ -33,30 +33,8 @@ describe('Popover', () => {
   it('Should pass a11y test', async () => {
     const { container } = render(
       <TestPopover open>
-        <div>some random content</div>
-      </TestPopover>,
-    )
-    expect(await axe(container)).toHaveNoViolations()
-  })
-  it('Should pass a11y test with Title', async () => {
-    const { container } = render(
-      <TestPopover open>
         <Popover.Title>Title Text</Popover.Title>
-      </TestPopover>,
-    )
-    expect(await axe(container)).toHaveNoViolations()
-  })
-  it('Should pass a11y test with Content', async () => {
-    const { container } = render(
-      <TestPopover open>
         <Popover.Content>Content Text</Popover.Content>
-      </TestPopover>,
-    )
-    expect(await axe(container)).toHaveNoViolations()
-  })
-  it('Should pass a11y test with Actions', async () => {
-    const { container } = render(
-      <TestPopover open>
         <Popover.Actions>
           <button type="button">OK</button>
         </Popover.Actions>
