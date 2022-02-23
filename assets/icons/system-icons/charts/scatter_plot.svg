@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="scatter_plot" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.2 10.2c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-8 4c0 2.21 1.79 4 4 4s4-1.79 4-4-1.79-4-4-4-4 1.79-4 4zm2 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm4-8c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm7.6 15.6c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-2-4c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/></symbol></defs><use id="medium" xlink:href="#scatter_plot" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="scatter_plot" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.2 10.2c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-8 4c0 2.21 1.79 4 4 4s4-1.79 4-4-1.79-4-4-4-4 1.79-4 4zm2 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm4-8c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm7.6 15.6c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-2-4c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/></symbol></defs><use id="medium" xlink:href="#scatter_plot" />
+</svg>

@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="arrow_up" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></symbol><symbol id="arrow_up_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 15V6.5l4 4L15 9 9 3 3 9l1 1.5 4-4V15h2z"/></symbol></defs><use id="small" xlink:href="#arrow_up_small" /><use id="medium" xlink:href="#arrow_up" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="arrow_up" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></symbol><symbol id="arrow_up_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 15V6.5l4 4L15 9 9 3 3 9l1 1.5 4-4V15h2z"/></symbol></defs><use id="small" xlink:href="#arrow_up_small" /><use id="medium" xlink:href="#arrow_up" />
+</svg>

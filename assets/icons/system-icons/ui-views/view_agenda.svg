@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="view_agenda" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.5 3h-17c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h17c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zm-1 6V5h-15v4h15zm0 10v-4h-15v4h15zm-16-6h17c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1h-17c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1z"/></symbol></defs><use id="medium" xlink:href="#view_agenda" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="view_agenda" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.5 3h-17c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h17c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zm-1 6V5h-15v4h15zm0 10v-4h-15v4h15zm-16-6h17c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1h-17c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1z"/></symbol></defs><use id="medium" xlink:href="#view_agenda" />
+</svg>

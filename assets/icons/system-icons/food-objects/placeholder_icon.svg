@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="placeholder_icon" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 5H3c0-1.1.9-2 2-2v2zm0 8H3v-2h2v2zm2 8h2v-2H7v2zM5 9H3V7h2v2zm8-6h-2v2h2V3zm6 2V3c1.1 0 2 .9 2 2h-2zM5 21v-2H3c0 1.1.9 2 2 2zm0-4H3v-2h2v2zM9 3H7v2h2V3zm4 18h-2v-2h2v2zm6-8h2v-2h-2v2zm2 6c0 1.1-.9 2-2 2v-2h2zM19 9h2V7h-2v2zm2 8h-2v-2h2v2zm-6 4h2v-2h-2v2zm2-16h-2V3h2v2z"/></symbol><symbol id="placeholder_icon_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z"/></symbol></defs><use id="small" xlink:href="#placeholder_icon_small" /><use id="medium" xlink:href="#placeholder_icon" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="placeholder_icon" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 5H3c0-1.1.9-2 2-2v2zm0 8H3v-2h2v2zm2 8h2v-2H7v2zM5 9H3V7h2v2zm8-6h-2v2h2V3zm6 2V3c1.1 0 2 .9 2 2h-2zM5 21v-2H3c0 1.1.9 2 2 2zm0-4H3v-2h2v2zM9 3H7v2h2V3zm4 18h-2v-2h2v2zm6-8h2v-2h-2v2zm2 6c0 1.1-.9 2-2 2v-2h2zM19 9h2V7h-2v2zm2 8h-2v-2h2v2zm-6 4h2v-2h-2v2zm2-16h-2V3h2v2z"/></symbol><symbol id="placeholder_icon_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 4H2c0-1.1.9-2 2-2v2zm0 6H2V8h2v2zm1 6h2v-2H5v2zM4 7H2V5h2v2zm6-5H8v2h2V2zm4 2V2c1.1 0 2 .9 2 2h-2zM4 16v-2H2c0 1.1.9 2 2 2zm0-3H2v-2h2v2zM7 2H5v2h2V2zm3 14H8v-2h2v2zm4-6h2V8h-2v2zm2 4c0 1.1-.9 2-2 2v-2h2zm-2-7h2V5h-2v2zm2 6h-2v-2h2v2zm-5 3h2v-2h-2v2zm2-12h-2V2h2v2z"/></symbol></defs><use id="small" xlink:href="#placeholder_icon_small" /><use id="medium" xlink:href="#placeholder_icon" />
+</svg>

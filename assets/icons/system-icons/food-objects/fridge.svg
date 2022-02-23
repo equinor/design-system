@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="fridge" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m6 2 12 .01c1.1 0 2 .88 2 1.99v16c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V4a2 2 0 0 1 2-2zm2 3h2v3H8V5zm0 7h2v5H8v-5zm10 8H6v-9.02h12V20zM6 9h12V4H6v5z"/></symbol></defs><use id="medium" xlink:href="#fridge" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="fridge" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m6 2 12 .01c1.1 0 2 .88 2 1.99v16c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V4a2 2 0 0 1 2-2zm2 3h2v3H8V5zm0 7h2v5H8v-5zm10 8H6v-9.02h12V20zM6 9h12V4H6v5z"/></symbol></defs><use id="medium" xlink:href="#fridge" />
+</svg>

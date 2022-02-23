@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="checkbox_outline" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z"/></symbol><symbol id="checkbox_outline_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 2H14c.825 0 2 .925 2 1.75v10.5c0 .825-1.175 1.75-2 1.75H3.5c-.825 0-1.5-.925-1.5-1.75V3.75C2 2.925 2.675 2 3.5 2zm1.214 12h8.572a.716.716 0 0 0 .714-.714V4.714A.716.716 0 0 0 13.286 4H4.714A.716.716 0 0 0 4 4.714v8.572c0 .393.321.714.714.714z"/></symbol></defs><use id="small" xlink:href="#checkbox_outline_small" /><use id="medium" xlink:href="#checkbox_outline" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="checkbox_outline" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 3h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm1 16h12c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1z"/></symbol><symbol id="checkbox_outline_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 2H14c.825 0 2 .925 2 1.75v10.5c0 .825-1.175 1.75-2 1.75H3.5c-.825 0-1.5-.925-1.5-1.75V3.75C2 2.925 2.675 2 3.5 2zm1.214 12h8.572a.716.716 0 0 0 .714-.714V4.714A.716.716 0 0 0 13.286 4H4.714A.716.716 0 0 0 4 4.714v8.572c0 .393.321.714.714.714z"/></symbol></defs><use id="small" xlink:href="#checkbox_outline_small" /><use id="medium" xlink:href="#checkbox_outline" />
+</svg>

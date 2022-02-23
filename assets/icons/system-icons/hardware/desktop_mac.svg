@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="desktop_mac" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 2h18c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-7l2 3v1H8v-1l2-3H3c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2zm0 12h18V4H3v10z"/></symbol></defs><use id="medium" xlink:href="#desktop_mac" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="desktop_mac" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 2h18c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-7l2 3v1H8v-1l2-3H3c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2zm0 12h18V4H3v10z"/></symbol></defs><use id="medium" xlink:href="#desktop_mac" />
+</svg>

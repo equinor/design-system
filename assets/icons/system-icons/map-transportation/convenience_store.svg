@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="convenience_store" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 4v3h3v13h-8v-4h-4v4H2V7h3V4h14zm-3 14h4V9h-3V6H7v3H4v9h4v-4h8v4zM8 8h2v1H8v3h3v-1H9v-1h2V7H8v1zm6 1h1V7h1v5h-1v-2h-2V7h1v2z"/></symbol></defs><use id="medium" xlink:href="#convenience_store" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="convenience_store" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 4v3h3v13h-8v-4h-4v4H2V7h3V4h14zm-3 14h4V9h-3V6H7v3H4v9h4v-4h8v4zM8 8h2v1H8v3h3v-1H9v-1h2V7H8v1zm6 1h1V7h1v5h-1v-2h-2V7h1v2z"/></symbol></defs><use id="medium" xlink:href="#convenience_store" />
+</svg>

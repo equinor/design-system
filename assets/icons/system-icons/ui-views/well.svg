@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="well" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 3h5.4v.9h1.8v1.8h-.9v1.717L17.784 19.2H19.2V21H4.8v-1.8h1.418L8.4 7.417V5.7h-.9V3.9h1.8V3zm4.5 2.7v1.8l.005.023-1.804 1.11-1.804-1.11.004-.023V5.7h3.6zm-3.778 2.772-.286 1.555 1.406-.865-1.12-.69zm1.979 1.218-2.484 1.529-.298 1.62L12 14.386l2.782-1.545-.298-1.621L12 9.689zm2.265.337-.286-1.555-1.12.69 1.406.865zM11.074 14.9l-2.027-1.126-.462 2.509 2.49-1.383zm.927.515 3.626 2.015.326 1.77H8.049l.325-1.77 3.627-2.015zm3.415.868L12.927 14.9l2.028-1.126.461 2.509z"/></symbol></defs><use id="medium" xlink:href="#well" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="well" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 3h5.4v.9h1.8v1.8h-.9v1.717L17.784 19.2H19.2V21H4.8v-1.8h1.418L8.4 7.417V5.7h-.9V3.9h1.8V3zm4.5 2.7v1.8l.005.023-1.804 1.11-1.804-1.11.004-.023V5.7h3.6zm-3.778 2.772-.286 1.555 1.406-.865-1.12-.69zm1.979 1.218-2.484 1.529-.298 1.62L12 14.386l2.782-1.545-.298-1.621L12 9.689zm2.265.337-.286-1.555-1.12.69 1.406.865zM11.074 14.9l-2.027-1.126-.462 2.509 2.49-1.383zm.927.515 3.626 2.015.326 1.77H8.049l.325-1.77 3.627-2.015zm3.415.868L12.927 14.9l2.028-1.126.461 2.509z"/></symbol></defs><use id="medium" xlink:href="#well" />
+</svg>

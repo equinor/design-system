@@ -25,11 +25,11 @@ const svg = (
   content,
 ) => `<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style>${content}</svg>`
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+${content}
+</svg>\n`
 
 const svgContent = (asset) => {
   if (!asset) return { symbol: '', use: '' }

@@ -1,7 +1,7 @@
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>
-use,
-use:target~use:last-child { display: none; }
-use:target,
-use:last-child { display: inline; }
-</style><defs><symbol id="restore" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 12a9 9 0 1 1 9 9c-2.49 0-4.73-1.01-6.36-2.64l1.42-1.42A6.944 6.944 0 0 0 13.5 19c3.87 0 7-3.13 7-7s-3.13-7-7-7-7 3.13-7 7h3l-4 3.99-4-3.99h3zm8 1V8H14v4.15l3.52 2.09-.77 1.28L12.5 13z"/></symbol></defs><use id="medium" xlink:href="#restore" /></svg>
+use,use:target~use:last-child { display: none; }
+use:target,use:last-child { display: inline; }
+</style>
+<defs><symbol id="restore" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 12a9 9 0 1 1 9 9c-2.49 0-4.73-1.01-6.36-2.64l1.42-1.42A6.944 6.944 0 0 0 13.5 19c3.87 0 7-3.13 7-7s-3.13-7-7-7-7 3.13-7 7h3l-4 3.99-4-3.99h3zm8 1V8H14v4.15l3.52 2.09-.77 1.28L12.5 13z"/></symbol></defs><use id="medium" xlink:href="#restore" />
+</svg>
