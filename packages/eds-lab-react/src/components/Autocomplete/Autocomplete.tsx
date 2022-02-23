@@ -198,6 +198,8 @@ export type AutocompleteProps<T> = {
   /** If `true` the width of the popper will adjust accordingly to the options label,
    * else it will follow the width of the input */
   autoWidth?: boolean
+  /** Descriptive text for whats selected or about to be selected */
+  placeholder?: string
 } & HTMLAttributes<HTMLDivElement>
 
 function AutocompleteInner<T>(
