@@ -198,6 +198,8 @@ export type AutocompleteProps<T> = {
   /** If `true` the width of the popper will adjust accordingly to the options label,
    * else it will follow the width of the input */
   autoWidth?: boolean
+  /** Descriptive text for whats selected or about to be selected */
+  placeholder?: string
 } & HTMLAttributes<HTMLDivElement>
 
 function AutocompleteInner<T>(
@@ -220,6 +222,7 @@ function AutocompleteInner<T>(
     optionDisabled = () => false,
     optionsFilter,
     autoWidth,
+    placeholder,
     ...other
   } = props
   const anchorRef = useRef()
@@ -238,7 +241,7 @@ function AutocompleteInner<T>(
     { density },
     multiple ? multiSelectTokens : selectTokens,
   )
-  let placeholderText: string = undefined
+  let placeholderText = placeholder
 
   let multipleSelectionProps: UseMultipleSelectionProps<AutocompleteOption<T>> =
     {
@@ -353,9 +356,12 @@ function AutocompleteInner<T>(
   }
 
   if (multiple) {
-    placeholderText = `${selectedItems.length}/${
-      options.length - disabledItems.length
-    } selected`
+    placeholderText =
+      typeof placeholderText !== 'undefined'
+        ? placeholderText
+        : `${selectedItems.length}/${
+            options.length - disabledItems.length
+          } selected`
     comboBoxProps = {
       ...comboBoxProps,
       selectedItem: null,
