@@ -182,13 +182,13 @@ exports[`SingleSelect Matches snapshot 1`] = `
 }
 
 .c6[data-focus-visible-added]:focus {
-  outline: 1px dashed rgba(0,112,121,1);
-  outline-offset: 0px;
+  outline: 2px dashed rgba(0,112,121,1);
+  outline-offset: -2px;
 }
 
 .c6:focus-visible {
-  outline: 1px dashed rgba(0,112,121,1);
-  outline-offset: 0px;
+  outline: 2px dashed rgba(0,112,121,1);
+  outline-offset: -2px;
 }
 
 .c6::-moz-focus-inner {
