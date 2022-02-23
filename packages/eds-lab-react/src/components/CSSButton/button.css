@@ -33,6 +33,8 @@
 
   /** TODO make css token */
   --eds-btn-outline-color: rgba(0, 112, 121, 1);
+  --eds-btn-outline-width: 2px;
+  --eds-btn-outline-offset: 3px;
 
   margin: 0;
   padding: 0;
@@ -89,8 +91,14 @@
 
 .eds-btn[data-focus-visible-added]:focus {
   outline-style: dashed;
-  outline-offset: 2px;
-  outline-width: 1px;
+  outline-offset: var(--eds-btn-outline-offset);
+  outline-width: var(--eds-btn-outline-width);
+  outline-color: var(--eds-btn-outline-color);
+}
+.eds-btn:focus-visible {
+  outline-style: dashed;
+  outline-offset: var(--eds-btn-outline-offset);
+  outline-width: var(--eds-btn-outline-width);
   outline-color: var(--eds-btn-outline-color);
 }
 
@@ -169,6 +177,8 @@
 
   --eds-btn-border-width: 0;
   --eds-btn-border-radius: 50%;
+
+  --eds-btn-outline-offset: calc(var(--eds-btn-outline-width) * -1);
 }
 
 .eds-btn.compact {
