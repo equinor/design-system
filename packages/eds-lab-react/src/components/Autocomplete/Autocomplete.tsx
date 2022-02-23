@@ -436,14 +436,13 @@ function AutocompleteInner<T>(
     }
   }, [anchorRef, isControlled, isOpen, selectedOptions, setSelectedItems])
 
-  const { styles, attributes } = usePopper(
+  const { styles, attributes } = usePopper({
     anchorEl,
-    containerEl,
-    null,
-    'bottom-start',
-    4,
+    popperEl: containerEl,
+    placement: 'bottom-start',
+    offset: 4,
     autoWidth,
-  )
+  })
 
   const openSelect = () => {
     if (!isOpen && !(disabled || readOnly)) {

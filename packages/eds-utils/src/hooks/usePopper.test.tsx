@@ -23,13 +23,12 @@ const TestComponent = ({
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
   const anchorRef = useRef<HTMLButtonElement>(null)
   const [popperEl, setPopperEl] = useState<HTMLDivElement>(null)
-  const { styles, attributes } = usePopper(
+  const { styles, attributes } = usePopper({
     anchorEl,
     popperEl,
-    null,
     placement,
     offset,
-  )
+  })
 
   const handleClick = () => {
     if (!isOpen) {

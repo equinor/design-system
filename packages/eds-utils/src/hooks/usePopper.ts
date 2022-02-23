@@ -22,6 +22,15 @@ export type Placement =
 
 type PopperModifier = Modifier<string, Record<string, unknown>>
 
+type PopperParams = {
+  anchorEl: HTMLElement
+  popperEl: HTMLElement
+  arrowRef?: HTMLElement | string
+  placement?: Placement
+  offset?: number
+  autoWidth?: boolean
+}
+
 const autoWidthModifier = {
   name: 'sameWidth',
   enabled: true,
@@ -37,14 +46,14 @@ const autoWidthModifier = {
   },
 } as PopperModifier
 
-export const usePopper = (
-  anchorEl: HTMLElement,
-  popperEl: HTMLElement,
-  arrowRef?: HTMLElement | string,
-  placement?: Placement,
+export const usePopper = ({
+  anchorEl = null,
+  popperEl = null,
+  arrowRef = null,
+  placement,
   offset = 10,
-  autoWidth?: boolean,
-): {
+  autoWidth,
+}: PopperParams): {
   styles: { [key: string]: CSSProperties }
   attributes: { [key: string]: { [key: string]: string } }
 } => {
