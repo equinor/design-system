@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@equinor/eds-utils/src/test'
 import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Popover } from '.'
@@ -29,7 +30,18 @@ describe('Popover', () => {
 
     await waitFor(() => expect(container).toMatchSnapshot())
   })
-
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <TestPopover open>
+        <Popover.Title>Title Text</Popover.Title>
+        <Popover.Content>Content Text</Popover.Content>
+        <Popover.Actions>
+          <button type="button">OK</button>
+        </Popover.Actions>
+      </TestPopover>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('can extend the css for the component', async () => {
     render(
       <StyledPopover open>
