@@ -18,7 +18,7 @@ describe('LinearProgress ', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
-    const { container } = render(<LinearProgress />)
+    const { container } = render(<LinearProgress aria-label="Label text" />)
     expect(await axe(container)).toHaveNoViolations()
   })
   it('has coorect aria values when variant is "determinate"', () => {
