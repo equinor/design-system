@@ -167,18 +167,6 @@ export async function createAssets({ query }) {
   const figmaFile = processFigmaFile(data)
   const assetPages = getAssets(figmaFile)
 
-  // const assetsTest = R.pipe(
-  //   R.head,
-  //   R.prop('value'),
-  //   R.filter((x) => x.name.includes('fullscreen')),
-  //   (value) => [
-  //     {
-  //       name: 'system-icons',
-  //       value,
-  //     },
-  //   ],
-  // )(assetPages)
-
   const plugins = SVGO.extendDefaultPlugins([
     {
       name: 'removeAttrs',
