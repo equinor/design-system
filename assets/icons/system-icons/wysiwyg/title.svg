@@ -1,7 +1,1 @@
-<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<style>
-use,use:target~use:last-child { display: none; }
-use:target,use:last-child { display: inline; }
-</style>
-<defs><symbol id="title" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 4.5v3h5.5v12h3v-12H19v-3H5z"/></symbol></defs><use id="medium" xlink:href="#title" />
-</svg>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 4.5v3h5.5v12h3v-12H19v-3H5z"/></svg>

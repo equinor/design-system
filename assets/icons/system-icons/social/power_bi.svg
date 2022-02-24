@@ -1,7 +1,1 @@
-<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<style>
-use,use:target~use:last-child { display: none; }
-use:target,use:last-child { display: inline; }
-</style>
-<defs><symbol id="power_bi" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h2v-2H4V6h16v12h-1v2h1c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7 15h2v5H7v-5zM10 13h2v7h-2v-7zM13 14h2v6h-2v-6zM16 11h2v9h-2v-9z"/></symbol></defs><use id="medium" xlink:href="#power_bi" />
-</svg>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h2v-2H4V6h16v12h-1v2h1c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/><path d="M7 15h2v5H7v-5zM10 13h2v7h-2v-7zM13 14h2v6h-2v-6zM16 11h2v9h-2v-9z"/></svg>

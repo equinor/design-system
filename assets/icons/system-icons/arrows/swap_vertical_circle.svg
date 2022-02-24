@@ -1,7 +1,1 @@
-<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<style>
-use,use:target~use:last-child { display: none; }
-use:target,use:last-child { display: inline; }
-</style>
-<defs><symbol id="swap_vertical_circle" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm2.5-3L10 5.5 13.5 9H11v4H9V9H6.5zm7.5 9.5 3.5-3.5H15v-4h-2v4h-2.5l3.5 3.5z"/></symbol></defs><use id="medium" xlink:href="#swap_vertical_circle" />
-</svg>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm2 0c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm2.5-3L10 5.5 13.5 9H11v4H9V9H6.5zm7.5 9.5 3.5-3.5H15v-4h-2v4h-2.5l3.5 3.5z"/></svg>

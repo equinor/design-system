@@ -3,5 +3,5 @@
 use,use:target~use:last-child { display: none; }
 use:target,use:last-child { display: inline; }
 </style>
-<defs><symbol id="error_filled" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z"/></symbol><symbol id="error_filled_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 2C5.136 2 2 5.136 2 9s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zM8 13v-2h2v2H8zm0-8v5h2V5H8z"/></symbol></defs><use id="small" xlink:href="#error_filled_small" /><use id="medium" xlink:href="#error_filled" />
+<defs><symbol height="24" width="24" id="error_filled" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-10v6h2V7h-2z"/></symbol><symbol height="18" width="18" id="error_filled_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 2C5.136 2 2 5.136 2 9s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zM8 13v-2h2v2H8zm0-8v5h2V5H8z"/></symbol></defs><use id="small" xlink:href="#error_filled_small" /><use id="medium" xlink:href="#error_filled" />
 </svg>

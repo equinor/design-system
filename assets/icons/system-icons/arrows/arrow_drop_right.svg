@@ -3,5 +3,5 @@
 use,use:target~use:last-child { display: none; }
 use:target,use:last-child { display: inline; }
 </style>
-<defs><symbol id="arrow_drop_right" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m9.5 17 5-5-5-5v10z"/></symbol><symbol id="arrow_drop_right_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="m6.5 14 5-5-5-5v10z"/></symbol></defs><use id="small" xlink:href="#arrow_drop_right_small" /><use id="medium" xlink:href="#arrow_drop_right" />
+<defs><symbol height="24" width="24" id="arrow_drop_right" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="m9.5 17 5-5-5-5v10z"/></symbol><symbol height="18" width="18" id="arrow_drop_right_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="m6.5 14 5-5-5-5v10z"/></symbol></defs><use id="small" xlink:href="#arrow_drop_right_small" /><use id="medium" xlink:href="#arrow_drop_right" />
 </svg>
