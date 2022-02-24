@@ -20,6 +20,9 @@ const {
   spacings: {
     comfortable: { medium: spacingMedium },
   },
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
 } = tokens
 
 export const token: ComponentToken = {
@@ -33,7 +36,7 @@ export const token: ComponentToken = {
         focus: {
           outline: {
             type: 'outline',
-            width: '1px',
+            width: focusOutlineWidth,
             style: 'dashed',
             color: focusOutlineColor,
           },
@@ -80,8 +83,8 @@ export const token: ComponentToken = {
         focus: {
           outline: {
             type: 'outline',
-            width: '1px',
-            offset: '-1px',
+            width: focusOutlineWidth,
+            offset: `-${parseInt(focusOutlineWidth)}px`,
             style: 'dashed',
             color: focusOutlineColor,
           },

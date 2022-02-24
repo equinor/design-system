@@ -15,7 +15,7 @@ export const outlineTemplate = (outline: Outline): StyledCSS => {
   const {
     color = focusColor,
     style = 'dashed',
-    width = '1px',
+    width = '2px',
     offset = '0px',
     type,
   } = outline
