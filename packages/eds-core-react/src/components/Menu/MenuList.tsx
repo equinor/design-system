@@ -54,6 +54,8 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
         ReactChildren.map(children, (child: MenuChild) => {
           if (!child) return child
           if (child.type === MenuSection) {
+            index++
+            const menuSectionIndex = index
             const updatedGrandChildren = ReactChildren.map(
               child.props.children,
               (grandChild: MenuChild) => {
@@ -62,7 +64,11 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
                 return cloneElement(grandChild, { index })
               },
             )
-            return cloneElement(child, null, updatedGrandChildren)
+            return cloneElement(
+              child,
+              { index: menuSectionIndex },
+              updatedGrandChildren,
+            )
           } else {
             index++
             if (isIndexable(child)) focusableIndexs.push(index)
