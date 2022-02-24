@@ -1,6 +1,11 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '@equinor/eds-utils/src/test'
-import { waitFor } from '@testing-library/react'
+import {
+  render,
+  cleanup,
+  screen,
+  waitFor,
+  act,
+} from '@equinor/eds-utils/src/test'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import 'jest-styled-components'
@@ -40,8 +45,12 @@ describe('Popover', () => {
         </Popover.Actions>
       </TestPopover>,
     )
-    expect(await axe(container)).toHaveNoViolations()
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
+
   it('can extend the css for the component', async () => {
     render(
       <StyledPopover open>
