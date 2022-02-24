@@ -7,7 +7,6 @@ import {
   act,
   waitFor,
 } from '@equinor/eds-utils/src/test'
-//import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
