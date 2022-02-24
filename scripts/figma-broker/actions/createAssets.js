@@ -34,11 +34,11 @@ ${content}
 const svgContent = (asset) => {
   if (!asset) return { symbol: '', use: '' }
 
-  const { svgPathData, name, viewbox } = asset
+  const { svgPathData, name, viewbox, width, height } = asset
   const id = R.endsWith('_small', name) ? 'small' : 'medium'
 
   return {
-    symbol: `<symbol id="${name}" viewBox="${viewbox}"><path fill-rule="evenodd" clip-rule="evenodd" d="${svgPathData}"/></symbol>`,
+    symbol: `<symbol height="${height}" width="${width}" id="${name}" viewBox="${viewbox}"><path fill-rule="evenodd" clip-rule="evenodd" d="${svgPathData}"/></symbol>`,
     use: `<use id="${id}" xlink:href="#${name}" />`,
   }
 }
@@ -136,6 +136,9 @@ const writeSVGs = (assets) => {
   console.info('Save icons as svg files')
 
   const svgSprite = (asset) => {
+    if (!asset.sizes) {
+      return asset
+    }
     const normal = svgContent(asset)
     const small = svgContent(asset.sizes ? asset.sizes.small : null)
     return {
