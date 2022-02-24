@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { StarProgress } from './StarProgress'
 
@@ -15,6 +16,16 @@ describe('StarProgress', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<StarProgress />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<StarProgress />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with variant & value', async () => {
+    const { container } = render(
+      <StarProgress variant="determinate" value={50} />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('has correct aria values when variant is "determinate"', () => {
     render(<StarProgress variant="determinate" value={50} />)

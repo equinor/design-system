@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { LinearProgress } from './LinearProgress'
@@ -15,6 +16,10 @@ describe('LinearProgress ', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<LinearProgress />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<LinearProgress aria-label="Label text" />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('has coorect aria values when variant is "determinate"', () => {
     render(<LinearProgress variant="determinate" value={50} />)
