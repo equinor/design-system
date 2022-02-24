@@ -52,6 +52,7 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
     const updatedChildren: Array<MenuChild> = useMemo(
       () =>
         ReactChildren.map(children, (child: MenuChild) => {
+          if (!child) return child
           if (child.type === MenuSection) {
             const updatedGrandChildren = ReactChildren.map(
               child.props.children,
