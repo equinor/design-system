@@ -267,7 +267,8 @@ export const GroupsOverview = (): JSX.Element => (
 )
 GroupsOverview.parameters = {
   docs: {
-    storyDescription: 'Variants ordered by their required group parameter. Example `<Typography group="input" variant="label"></Typography>`',
+    storyDescription:
+      'Variants ordered by their required group parameter. Example `<Typography group="input" variant="label"></Typography>`',
   },
 }
 
