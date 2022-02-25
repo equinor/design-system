@@ -5,9 +5,11 @@ import {
   fireEvent,
   screen,
   within,
+  act,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import { UseMultipleSelectionStateChange } from 'downshift'
 
 import styled from 'styled-components'
@@ -27,6 +29,13 @@ describe('MultiSelect', () => {
     })
     expect(optionsNode).toMatchSnapshot()
     expect(buttonNode).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<MultiSelect items={items} label="label" />)
+    await act(async () => {
+      const result = await axe(container)
+      expect(result).toHaveNoViolations()
+    })
   })
   it('Has provided label', () => {
     render(<MultiSelect label={labelText} items={items} id="id" />)
