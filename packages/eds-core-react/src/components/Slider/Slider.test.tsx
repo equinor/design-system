@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import { render, cleanup, fireEvent, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import { Slider } from './Slider'
 import type { SliderProps } from './Slider'
 
@@ -43,6 +44,18 @@ describe('Simple slider', () => {
       <Slider value={0} ariaLabelledby="test-one" />,
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a1yy test', async () => {
+    const { container } = render(
+      <>
+        <span id="a11y-test">Text</span>
+        <Slider value={40} ariaLabelledby="a11y-test" />
+      </>,
+    )
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
   it('Creates a simple slider when providing a number as value', () => {
     render(<Slider value={0} ariaLabelledby="test-one" />)
