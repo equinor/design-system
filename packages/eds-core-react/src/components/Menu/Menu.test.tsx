@@ -1,6 +1,12 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, fireEvent } from '@equinor/eds-utils/src/test'
-import { waitFor } from '@testing-library/react'
+import {
+  render,
+  cleanup,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from '@equinor/eds-utils/src/test'
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
 import 'jest-styled-components'
@@ -36,7 +42,10 @@ describe('Menu', () => {
         <div>some random content</div>
       </TestMenu>,
     )
-    expect(await axe(container)).toHaveNoViolations()
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
   it('Should pass a11y test with Item', async () => {
     const { container } = render(
@@ -45,7 +54,10 @@ describe('Menu', () => {
         <Menu.Item>Item 2</Menu.Item>
       </TestMenu>,
     )
-    expect(await axe(container)).toHaveNoViolations()
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
   it('Should pass a11y test with Section & title', async () => {
     const { container } = render(
@@ -55,7 +67,10 @@ describe('Menu', () => {
         </Menu.Section>
       </TestMenu>,
     )
-    expect(await axe(container)).toHaveNoViolations()
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
   it('Can extend the css for the component', async () => {
     const { container } = render(
