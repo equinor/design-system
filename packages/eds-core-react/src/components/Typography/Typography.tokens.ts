@@ -2,7 +2,7 @@ import { ComponentToken, tokens } from '@equinor/eds-tokens'
 import type { TypographyTokens } from '@equinor/eds-tokens'
 
 const { typography, colors: colorsToken } = tokens
-const { heading, paragraph, ui, table, input, navigation } = typography
+const { heading, paragraph } = typography
 
 const {
   interactive: {
@@ -28,18 +28,10 @@ const colors = {
 export type QuickTypographyVariants =
   | TypographyTokens['heading']
   | TypographyTokens['paragraph']
-  | TypographyTokens['ui']
-  | TypographyTokens['table']
-  | TypographyTokens['input']
-  | TypographyTokens['navigation']
 
 const quickVariants: QuickTypographyVariants = {
   ...heading,
   ...paragraph,
-  ...ui,
-  ...table,
-  ...input,
-  ...navigation,
 }
 
 type TypographyVariants =
