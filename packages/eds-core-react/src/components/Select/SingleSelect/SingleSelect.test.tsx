@@ -5,9 +5,11 @@ import {
   fireEvent,
   screen,
   within,
+  act,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { SingleSelect } from '.'
 
@@ -41,6 +43,13 @@ describe('SingleSelect', () => {
       <SingleSelect label={labelText} items={items} />,
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<SingleSelect label="label" items={items} />)
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
   it('Has provided label', () => {
     render(<SingleSelect label={labelText} items={items} />)

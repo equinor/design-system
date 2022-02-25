@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import { render, cleanup, fireEvent, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { NativeSelect } from '.'
 
@@ -31,6 +32,18 @@ describe('NativeSelect', () => {
       </NativeSelect>,
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <NativeSelect label="label" id="a11y-id">
+        <option>Option one</option>
+        <option>Option two</option>
+      </NativeSelect>,
+    )
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
   it('Has provided label', () => {
     const label = 'Select label'
