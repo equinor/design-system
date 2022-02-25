@@ -1,4 +1,4 @@
-import { Typography, TypographyProps } from '../..'
+import { Typography, TypographyProps, List } from '../..'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react'
 
@@ -125,6 +125,151 @@ export const custom = (): JSX.Element => (
     </Typography>
   </Grid>
 )
+
+export const GroupsOverview = (): JSX.Element => (
+  <List>
+    <List.Item>
+      input
+      <List>
+        <List.Item>
+          <Typography group="input" variant="label">
+            label
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="input" variant="text">
+            text
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="input" variant="text_monospaced">
+            text_monospaced
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="input" variant="helper">
+            helper
+          </Typography>
+        </List.Item>
+      </List>
+    </List.Item>
+    <List.Item>
+      navigation
+      <List>
+        <List.Item>
+          <Typography group="navigation" variant="menu_title">
+            menu_title
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="menu_title_hover">
+            menu_title_hover
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="menu_tabs">
+            menu_tabs
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="label">
+            label
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="drawer_active">
+            drawer_active
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="drawer_inactive">
+            drawer_inactive
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="button">
+            button
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="breadcrumb">
+            breadcrumb
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="navigation" variant="breadcrumb_hover">
+            breadcrumb_hover
+          </Typography>
+        </List.Item>
+      </List>
+    </List.Item>
+    <List.Item>
+      table
+      <List>
+        <List.Item>
+          <Typography group="table" variant="cell_header">
+            cell_header
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="table" variant="cell_text">
+            cell_text
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="table" variant="cell_text_bold">
+            cell_text_bold
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="table" variant="cell_text_link">
+            cell_text_link
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="table" variant="cell_numeric_monospaced">
+            cell_numeric_monospaced
+          </Typography>
+        </List.Item>
+      </List>
+    </List.Item>
+    <List.Item>
+      ui
+      <List>
+        <List.Item>
+          <Typography group="ui" variant="tooltip">
+            tooltip
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="ui" variant="snackbar">
+            snackbar
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="ui" variant="accordion_header">
+            accordion_header
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="ui" variant="chip__badge">
+            chip__badge
+          </Typography>
+        </List.Item>
+        <List.Item>
+          <Typography group="ui" variant="chart">
+            chart
+          </Typography>
+        </List.Item>
+      </List>
+    </List.Item>
+  </List>
+)
+GroupsOverview.parameters = {
+  docs: {
+    storyDescription: 'Variants ordered by their required group parameter. Example `<Typography group="input" variant="label"></Typography>`',
+  },
+}
 
 export const Lines = (): JSX.Element => (
   <Wrapper>
