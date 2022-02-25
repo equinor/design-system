@@ -67,65 +67,6 @@ export const paragraphs = (): JSX.Element => (
   </Grid>
 )
 
-export const colors = (): JSX.Element => (
-  <Grid>
-    <Typography color="primary"> Primary</Typography>
-    <Typography color="secondary">Secondary</Typography>
-    <Typography color="danger">Danger</Typography>
-    <Typography color="warning">Warning</Typography>
-    <Typography color="success">Success</Typography>
-    <Typography color="disabled">Disabled</Typography>
-    <Typography color="currentColor">CSS currentColor</Typography>
-    <Typography color="pink">CSS pink</Typography>
-  </Grid>
-)
-
-export const custom = (): JSX.Element => (
-  <Grid>
-    <Typography group="navigation" variant="label">
-      Navigation / Label
-    </Typography>
-    <Typography group="navigation" variant="menu_title">
-      Navigation / Menu / Title
-    </Typography>
-    <Typography group="table" variant="cell_text">
-      Table / Cell / Text
-    </Typography>
-    <Typography
-      group="table"
-      variant="cell_text"
-      token={{ fontWeight: 'medium' }}
-    >
-      Table / Cell / Text / Medium
-    </Typography>
-    <Typography group="table" variant="cell_text" bold>
-      Table / Cell / Text / Bold
-    </Typography>
-    <Typography group="table" variant="cell_text" link href="#">
-      Table / Cell / Text / Bold / Link
-    </Typography>
-
-    <Typography variant="h3" token={{ fontWeight: 700 }}>
-      Heading 3 Bold
-    </Typography>
-    <Typography variant="ingress" token={{ fontWeight: 'bold' }}>
-      Ingress Bold
-    </Typography>
-    <Typography
-      token={{
-        color: 'purple',
-        fontFamily: 'Arial',
-        fontSize: '1.875rem',
-        fontWeight: 300,
-        lineHeight: '1.714em',
-        textTransform: 'uppercase',
-      }}
-    >
-      Custom token
-    </Typography>
-  </Grid>
-)
-
 export const GroupsOverview = (): JSX.Element => (
   <List>
     <List.Item>
@@ -268,9 +209,68 @@ export const GroupsOverview = (): JSX.Element => (
 GroupsOverview.parameters = {
   docs: {
     storyDescription:
-      'Variants ordered by their required group parameter. Example `<Typography group="input" variant="label"></Typography>`',
+      'Variants ordered by their required group parameter. Example `<Typography group="input" variant="label"></Typography>`. Variants under `heading` and `paragraph` does not require the group parameter and are therefore not included here.',
   },
 }
+
+export const colors = (): JSX.Element => (
+  <Grid>
+    <Typography color="primary"> Primary</Typography>
+    <Typography color="secondary">Secondary</Typography>
+    <Typography color="danger">Danger</Typography>
+    <Typography color="warning">Warning</Typography>
+    <Typography color="success">Success</Typography>
+    <Typography color="disabled">Disabled</Typography>
+    <Typography color="currentColor">CSS currentColor</Typography>
+    <Typography color="pink">CSS pink</Typography>
+  </Grid>
+)
+
+export const custom = (): JSX.Element => (
+  <Grid>
+    <Typography group="navigation" variant="label">
+      Navigation / Label
+    </Typography>
+    <Typography group="navigation" variant="menu_title">
+      Navigation / Menu / Title
+    </Typography>
+    <Typography group="table" variant="cell_text">
+      Table / Cell / Text
+    </Typography>
+    <Typography
+      group="table"
+      variant="cell_text"
+      token={{ fontWeight: 'medium' }}
+    >
+      Table / Cell / Text / Medium
+    </Typography>
+    <Typography group="table" variant="cell_text" bold>
+      Table / Cell / Text / Bold
+    </Typography>
+    <Typography group="table" variant="cell_text" link href="#">
+      Table / Cell / Text / Bold / Link
+    </Typography>
+
+    <Typography variant="h3" token={{ fontWeight: 700 }}>
+      Heading 3 Bold
+    </Typography>
+    <Typography variant="ingress" token={{ fontWeight: 'bold' }}>
+      Ingress Bold
+    </Typography>
+    <Typography
+      token={{
+        color: 'purple',
+        fontFamily: 'Arial',
+        fontSize: '1.875rem',
+        fontWeight: 300,
+        lineHeight: '1.714em',
+        textTransform: 'uppercase',
+      }}
+    >
+      Custom token
+    </Typography>
+  </Grid>
+)
 
 export const Lines = (): JSX.Element => (
   <Wrapper>
