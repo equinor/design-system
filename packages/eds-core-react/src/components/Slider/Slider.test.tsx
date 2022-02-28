@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, fireEvent, screen, act } from '@testing-library/react'
+import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import { Slider } from './Slider'
