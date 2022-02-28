@@ -1,6 +1,7 @@
-import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import { render, cleanup, fireEvent, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Search } from '.'
 
@@ -15,6 +16,17 @@ describe('Search', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Search />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    /** workaround the console error */
+    const { getComputedStyle } = window
+    window.getComputedStyle = (elt) => getComputedStyle(elt)
+
+    const { container } = render(<Search />)
+    await act(async () => {
+      const result = await axe(container)
+      expect(result).toHaveNoViolations()
+    })
   })
   it('Can extend the css for the component', () => {
     render(<StyledSearch data-testid="search" />)
