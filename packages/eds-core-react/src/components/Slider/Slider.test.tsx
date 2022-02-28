@@ -45,17 +45,14 @@ describe('Simple slider', () => {
     )
     expect(asFragment()).toMatchSnapshot()
   })
-  it('Should pass a1yy test', async () => {
+  it('Should pass a11y test', async () => {
     const { container } = render(
       <>
         <span id="a11y-test">Text</span>
         <Slider value={40} ariaLabelledby="a11y-test" />
       </>,
     )
-    await act(async () => {
-      const results = await axe(container)
-      expect(results).toHaveNoViolations()
-    })
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Creates a simple slider when providing a number as value', () => {
     render(<Slider value={0} ariaLabelledby="test-one" />)
