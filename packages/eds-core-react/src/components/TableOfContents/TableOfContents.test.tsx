@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { TableOfContents } from '.'
 
@@ -27,6 +28,18 @@ describe('TableOfContents', () => {
     )
 
     expect(asFragment).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<TableOfContents />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with link', async () => {
+    const { container } = render(
+      <TableOfContents>
+        <LinkItem>Anchor</LinkItem>
+      </TableOfContents>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Can extend the css for the component', () => {
     render(<StyledTableOfContents>Stuff</StyledTableOfContents>)
