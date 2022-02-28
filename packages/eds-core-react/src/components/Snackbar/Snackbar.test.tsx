@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Snackbar } from '.'
 import { snackbar as tokens } from './Snackbar.tokens'
@@ -24,6 +25,10 @@ describe('Snackbar', () => {
     const snackbar = screen.getByText('snacks')
 
     expect(snackbar).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Snackbar open>snacks</Snackbar>)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Can extend the css for the component', () => {
     render(
