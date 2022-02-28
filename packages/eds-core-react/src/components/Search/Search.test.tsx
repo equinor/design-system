@@ -18,6 +18,10 @@ describe('Search', () => {
     expect(asFragment()).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
+    /** workaround the console error */
+    const { getComputedStyle } = window
+    window.getComputedStyle = (elt) => getComputedStyle(elt)
+
     const { container } = render(<Search />)
     await act(async () => {
       const result = await axe(container)
