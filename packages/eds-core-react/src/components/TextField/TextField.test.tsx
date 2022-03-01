@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { TextField } from '.'
 import { Icon } from '../Icon'
@@ -15,6 +17,31 @@ describe('TextField', () => {
     )
 
     expect(asFragment).toMatchSnapshot()
+  })
+  it('Should pas a11y test', async () => {
+    const { container } = render(<TextField id="textfield" label="textfield" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pas a11y test with meta & text helper', async () => {
+    const { container } = render(
+      <TextField
+        id="textfield"
+        label="textfield"
+        meta="meta"
+        helperText="helper text"
+      />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pas a11y test with icon', async () => {
+    const { container } = render(
+      <TextField
+        id="textfield"
+        label="textfield"
+        helperIcon={<Icon data={save} />}
+      />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Has correct label text', () => {
     const labelText = 'Some label'
