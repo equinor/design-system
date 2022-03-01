@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Typography } from '../..'
 import { tokens } from '@equinor/eds-tokens'
@@ -36,6 +37,10 @@ describe('Typography', () => {
     )
 
     expect(asFragment).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Typography>Text</Typography>)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('throws error when variant is wrong', () => {
     jest.spyOn(console, 'error').mockImplementation()
