@@ -39,8 +39,9 @@ describe('Tooltip', () => {
     })
   })
   it('Should pass a11y test', async () => {
+    const handler = jest.fn()
     const { container } = render(
-      <Tooltip title="Tooltip">
+      <Tooltip onMouseOver={handler} title="Tooltip">
         <span>Test</span>
       </Tooltip>,
     )
