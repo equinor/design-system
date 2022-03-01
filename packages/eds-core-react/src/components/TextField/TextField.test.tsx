@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { TextField } from '.'
