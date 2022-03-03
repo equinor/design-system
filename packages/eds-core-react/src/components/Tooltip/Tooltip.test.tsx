@@ -47,7 +47,6 @@ describe('Tooltip', () => {
 
     const content = screen.getByText('Test')
     fireEvent.mouseOver(content)
-
     const results = await axe(container)
 
     await waitFor(() => {
