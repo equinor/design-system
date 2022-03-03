@@ -42,6 +42,22 @@ describe('Typography', () => {
     const { container } = render(<Typography>Text</Typography>)
     expect(await axe(container)).toHaveNoViolations()
   })
+  it('Should pass a11y test with variant & color', async () => {
+    const { container } = render(
+      <Typography variant="body_short" color="primary">
+        Text area
+      </Typography>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test as link', async () => {
+    const { container } = render(
+      <Typography link href="#">
+        Link
+      </Typography>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('throws error when variant is wrong', () => {
     jest.spyOn(console, 'error').mockImplementation()
 
