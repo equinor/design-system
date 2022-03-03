@@ -82,6 +82,7 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
     const lastFocusIndex = focusableIndexs[focusableIndexs.length - 1]
 
     useEffect(() => {
+      console.log('focus: ', focus)
       if (focus === 'first') {
         setFocusedIndex(firstFocusIndex)
       }

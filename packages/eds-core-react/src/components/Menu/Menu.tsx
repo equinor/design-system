@@ -42,18 +42,36 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
       anchorEl,
       onClose: onCloseCallback,
       open,
+      focus,
       containerEl,
       ...rest
     },
     ref,
   ) {
     const { setOnClose, onClose } = useMenu()
+    const [focused, setFocused] = useState<string | null>(focus)
 
     useEffect(() => {
       if (onClose === null && onCloseCallback) {
         setOnClose(onCloseCallback)
       }
     }, [onClose, onCloseCallback, setOnClose])
+
+    useEffect(() => {
+      console.log('useEffect')
+      const openWithEnter = (event: KeyboardEvent) => {
+        console.log('openWithEnter')
+        if (event.key === 'Enter') {
+          console.log('enter ')
+          setFocused('first')
+        }
+      }
+      if (anchorEl) anchorEl.addEventListener('keydown', openWithEnter)
+      return () => {
+        console.log('anchor deleted return')
+        if (anchorEl) anchorEl.removeEventListener('keydown', openWithEnter)
+      }
+    }, [anchorEl])
 
     useOutsideClick(containerEl, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
@@ -78,8 +96,13 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
       }
     })
 
+    const menuListProps = {
+      ...rest,
+      focused,
+    }
+
     return (
-      <MenuList {...rest} ref={ref}>
+      <MenuList {...menuListProps} ref={ref}>
         {children}
       </MenuList>
     )
@@ -100,7 +123,7 @@ export type MenuProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
-  { anchorEl, open, placement = 'auto', style, className, ...rest },
+  { anchorEl, open, focus, placement = 'auto', style, className, ...rest },
   ref,
 ) {
   const [containerEl, setContainerEl] = useState<HTMLElement>(null)
@@ -132,6 +155,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     ...rest,
     anchorEl,
     open,
+    focus,
     containerEl,
   }
 

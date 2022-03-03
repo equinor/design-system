@@ -65,7 +65,7 @@ export const Default: Story<MenuProps> = (args) => {
     setIsOpen(args.open)
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.open, args.focus])
-
+/*
   const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = e
     if (key === 'Tab') return
@@ -84,7 +84,7 @@ export const Default: Story<MenuProps> = (args) => {
       default:
         break
     }
-  }
+  } */
 
   return (
     <StoryCenter>
@@ -95,7 +95,6 @@ export const Default: Story<MenuProps> = (args) => {
         aria-expanded={isOpen}
         aria-controls="menu-default"
         onClick={() => (isOpen ? closeMenu() : openMenu(null))}
-        onKeyDown={onKeyPress}
       >
         Click to open Menu!
       </Button>
