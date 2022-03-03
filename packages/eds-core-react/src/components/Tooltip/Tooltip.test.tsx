@@ -39,13 +39,20 @@ describe('Tooltip', () => {
     })
   })
   it('Should pass a11y test', async () => {
-    const handler = jest.fn()
     const { container } = render(
-      <Tooltip onMouseOver={handler} title="Tooltip">
+      <Tooltip title="Tooltip">
         <span>Test</span>
       </Tooltip>,
     )
-    expect(await axe(container)).toHaveNoViolations()
+
+    const content = screen.getByText('Test')
+    fireEvent.mouseOver(content)
+
+    const results = await axe(container)
+
+    await waitFor(() => {
+      expect(results).toHaveNoViolations()
+    })
   })
   it('Should pass a11y test with id & placement', async () => {
     const { container } = render(
@@ -53,7 +60,15 @@ describe('Tooltip', () => {
         <span>Test</span>
       </Tooltip>,
     )
-    expect(await axe(container)).toHaveNoViolations()
+
+    const content = screen.getByText('Test')
+    fireEvent.mouseOver(content)
+
+    const results = await axe(container)
+
+    await waitFor(() => {
+      expect(results).toHaveNoViolations()
+    })
   })
   it('can extend the css for the component', async () => {
     render(
