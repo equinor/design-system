@@ -113,42 +113,13 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
-  const [focus, setFocus] = useState<MenuProps['focus']>(null)
   const isOpen = Boolean(anchorEl)
 
-  const openMenu = (
-    focus: MenuProps['focus'],
-    e: React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
-    setFocus(focus)
+  const openMenu = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget)
   }
   const closeMenu = () => {
-    setFocus(null)
     setAnchorEl(null)
-  }
-
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    if (key === 'Tab') {
-      return
-    }
-    e.preventDefault()
-    e.stopPropagation()
-
-    switch (key) {
-      case 'Enter':
-        isOpen ? closeMenu() : openMenu('first', e)
-        break
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu('first', e)
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu('last', e)
-        break
-      default:
-        break
-    }
   }
 
   return (
@@ -160,7 +131,6 @@ const MenuButton = ({ row }: { row: string[] }) => {
         aria-haspopup="true"
         aria-expanded={isOpen}
         onClick={(e) => setAnchorEl(e.currentTarget)}
-        onKeyDown={onKeyPress}
       >
         <Icon name="more_vertical" title="more"></Icon>
       </Button>
@@ -170,7 +140,6 @@ const MenuButton = ({ row }: { row: string[] }) => {
           aria-labelledby={`menu-button-${row.toString()}`}
           open={isOpen}
           anchorEl={anchorEl}
-          focus={focus}
           onClose={closeMenu}
         >
           <Menu.Item onClick={closeMenu}>

@@ -47,54 +47,30 @@ const onClick = (event: React.MouseEvent) => {
 
 export const Default: Story<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [focus, setFocus] = useState<MenuProps['focus']>(null)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement>(null)
 
-  const openMenu = (focus: MenuProps['focus']) => {
+  const openMenu = () => {
     setIsOpen(true)
-    setFocus(focus)
   }
   const closeMenu = () => {
     setIsOpen(false)
-    setFocus(null)
   }
 
   // This is just for storybook and changes done via controls addon
   useEffect(() => {
-    setFocus(args.focus)
     setIsOpen(args.open)
     // eslint-disable-next-line react/destructuring-assignment
-  }, [args.open, args.focus])
-/*
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    if (key === 'Tab') return
-    e.preventDefault()
-    e.stopPropagation()
-    switch (key) {
-      case 'Enter':
-        isOpen ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu('last')
-        break
-      default:
-        break
-    }
-  } */
+  }, [args.open])
 
   return (
     <StoryCenter>
       <Button
-        ref={anchorRef}
+        ref={setAnchorRef}
         id="anchor-default"
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-controls="menu-default"
-        onClick={() => (isOpen ? closeMenu() : openMenu(null))}
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
       >
         Click to open Menu!
       </Button>
@@ -102,10 +78,9 @@ export const Default: Story<MenuProps> = (args) => {
         open={isOpen}
         {...args}
         id="menu-default"
-        focus={focus}
         aria-labelledby="anchor-default"
         onClose={closeMenu}
-        anchorEl={anchorRef.current}
+        anchorEl={anchorRef}
       >
         <Menu.Item onClick={onClick}>Pressure</Menu.Item>
         <Menu.Item onClick={onClick}>Bearing</Menu.Item>
@@ -122,47 +97,24 @@ Default.args = {
 
 export const Complex: Story<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [focus, setFocus] = useState<'first' | 'last'>(null)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement>(null)
 
-  const openMenu = (focus: 'first' | 'last') => {
+  const openMenu = () => {
     setIsOpen(true)
-    setFocus(focus)
   }
   const closeMenu = () => {
     setIsOpen(false)
-    setFocus(null)
   }
 
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    if (key === 'Tab') return
-    e.preventDefault()
-    e.stopPropagation()
-    switch (key) {
-      case 'Enter':
-        isOpen ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu('last')
-        break
-      default:
-        break
-    }
-  }
   return (
     <StoryCenter>
       <Button
-        ref={anchorRef}
+        ref={setAnchorRef}
         id="anchor-complex"
         aria-controls="menu-complex"
         aria-haspopup="true"
         aria-expanded={isOpen}
-        onClick={() => (isOpen ? closeMenu() : openMenu(null))}
-        onKeyDown={onKeyPress}
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
       >
         Click to open Menu!
       </Button>
@@ -171,9 +123,8 @@ export const Complex: Story<MenuProps> = () => {
         id="menu-complex"
         aria-labelledby="anchor-complex"
         open={isOpen}
-        anchorEl={anchorRef.current}
+        anchorEl={anchorRef}
         onClose={closeMenu}
-        focus={focus}
         placement="right"
       >
         <Menu.Item onClick={onClick}>
@@ -286,17 +237,14 @@ export const Complex: Story<MenuProps> = () => {
 export const Compact: Story<MenuProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [focus, setFocus] = useState<'first' | 'last'>(null)
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement>(null)
 
-  const openMenu = (focus: 'first' | 'last') => {
+  const openMenu = () => {
     setIsOpen(true)
-    setFocus(focus)
   }
 
   const closeMenu = () => {
     setIsOpen(false)
-    setFocus(null)
   }
 
   useEffect(() => {
@@ -304,37 +252,16 @@ export const Compact: Story<MenuProps> = () => {
     setDensity('compact')
   }, [density])
 
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    if (key === 'Tab') return
-    e.preventDefault()
-    e.stopPropagation()
-    switch (key) {
-      case 'Enter':
-        isOpen ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu('last')
-        break
-      default:
-        break
-    }
-  }
-
   return (
     <EdsProvider density={density}>
       <StoryCenter>
         <Button
-          ref={anchorRef}
+          ref={setAnchorRef}
           id="anchor-compact"
           aria-haspopup="true"
           aria-expanded={isOpen}
           aria-controls="menu-compact"
-          onClick={() => (isOpen ? closeMenu() : openMenu(null))}
-          onKeyDown={onKeyPress}
+          onClick={() => (isOpen ? closeMenu() : openMenu())}
         >
           Click to open Menu!
         </Button>
@@ -342,10 +269,9 @@ export const Compact: Story<MenuProps> = () => {
           <Menu
             open={isOpen}
             id="menu-compact"
-            focus={focus}
             aria-labelledby="anchor-compact"
             onClose={closeMenu}
-            anchorEl={anchorRef.current}
+            anchorEl={anchorRef}
           >
             <Menu.Item onClick={onClick}>Pressure</Menu.Item>
             <Menu.Item onClick={onClick}>Bearing</Menu.Item>
