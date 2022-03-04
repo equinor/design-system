@@ -547,7 +547,7 @@ ValidationWithReactHookForm.parameters = {
   docs: {
     description: {
       story:
-        'How input validation is handled is up to the user. In this example we use <a href="https://react-hook-form.com/">React Hook Form</a>.',
+        'How input validation is handled is up to the developer. In this example we use <a href="https://react-hook-form.com/">React Hook Form</a>.',
     },
   },
 }
