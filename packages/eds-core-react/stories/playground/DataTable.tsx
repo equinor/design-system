@@ -113,13 +113,13 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
-  const isOpen = Boolean(anchorEl)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const openMenu = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    setAnchorEl(e.currentTarget)
+  const openMenu = () => {
+    setIsOpen(true)
   }
   const closeMenu = () => {
-    setAnchorEl(null)
+    setIsOpen(false)
   }
 
   return (
@@ -130,49 +130,48 @@ const MenuButton = ({ row }: { row: string[] }) => {
         aria-controls={`menu-${row.toString()}`}
         aria-haspopup="true"
         aria-expanded={isOpen}
-        onClick={(e) => setAnchorEl(e.currentTarget)}
+        ref={setAnchorEl}
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
       >
         <Icon name="more_vertical" title="more"></Icon>
       </Button>
-      {isOpen && (
-        <Menu
-          id={`menu-${row.toString()}`}
-          aria-labelledby={`menu-button-${row.toString()}`}
-          open={isOpen}
-          anchorEl={anchorEl}
-          onClose={closeMenu}
-        >
-          <Menu.Item onClick={closeMenu}>
-            <Icon name="folder" size={16} />
-            <Typography group="navigation" variant="menu_title">
-              Open
-            </Typography>
-            <Typography
-              color={colors.text.static_icons__tertiary.hex}
-              group="navigation"
-              variant="label"
-              style={{ height: 12 }}
-            >
-              CTRL+O
-            </Typography>
-          </Menu.Item>
-          <Menu.Item onClick={closeMenu}>
-            <Icon name="copy" size={16} />
-            <Typography group="navigation" variant="menu_title">
-              Copy
-            </Typography>
-            <Typography
-              color={colors.text.static_icons__tertiary.hex}
-              group="navigation"
-              variant="label"
-              as="span"
-              style={{ height: 12 }}
-            >
-              CTRL+C
-            </Typography>
-          </Menu.Item>
-        </Menu>
-      )}
+      <Menu
+        id={`menu-${row.toString()}`}
+        aria-labelledby={`menu-button-${row.toString()}`}
+        open={isOpen}
+        anchorEl={anchorEl}
+        onClose={closeMenu}
+      >
+        <Menu.Item onClick={closeMenu}>
+          <Icon name="folder" size={16} />
+          <Typography group="navigation" variant="menu_title">
+            Open
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+            style={{ height: 12 }}
+          >
+            CTRL+O
+          </Typography>
+        </Menu.Item>
+        <Menu.Item onClick={closeMenu}>
+          <Icon name="copy" size={16} />
+          <Typography group="navigation" variant="menu_title">
+            Copy
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+            as="span"
+            style={{ height: 12 }}
+          >
+            CTRL+C
+          </Typography>
+        </Menu.Item>
+      </Menu>
     </>
   )
 }
