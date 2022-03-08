@@ -76,9 +76,11 @@ exports[`Accordion Matches snapshot 1`] = `
   }
 }
 
-<div>
+<div
+    headerlevel="h2"
+  >
     <div>
-      <h2
+      <div
         aria-controls="eds-accordion-12345-panel-1"
         aria-expanded="true"
         class="c0"
@@ -109,7 +111,7 @@ exports[`Accordion Matches snapshot 1`] = `
         >
           Summary 1
         </span>
-      </h2>
+      </div>
       <div
         aria-labelledby="eds-accordion-12345-header-1"
         class="c3"
