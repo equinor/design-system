@@ -76,9 +76,7 @@ exports[`Accordion Matches snapshot 1`] = `
   }
 }
 
-<div
-    headerlevel="h2"
-  >
+<div>
     <div>
       <div
         aria-controls="eds-accordion-12345-panel-1"
