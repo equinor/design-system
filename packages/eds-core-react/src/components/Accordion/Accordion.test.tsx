@@ -87,6 +87,10 @@ describe('Accordion', () => {
     const { container } = render(<SimpleAccordion />)
     expect(await axe(container)).toHaveNoViolations()
   })
+  it('Should pass a11y test with icons ', async () => {
+    const { container } = render(<AccordionWithIcons />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('Expands items based on prop', () => {
     render(<SimpleAccordion isExpanded />)
     const header1 = screen.getByTestId('header1')
