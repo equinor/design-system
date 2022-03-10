@@ -1,5 +1,5 @@
 import { SideBar as BaseSideBar } from './SideBar'
-import MenuItem, { MenuItemType as ItemType } from './MenuItem'
+import { MenuItem, MenuItemType as ItemType } from './MenuItem'
 
 type SidebarType = typeof BaseSideBar & {
   Item: typeof MenuItem

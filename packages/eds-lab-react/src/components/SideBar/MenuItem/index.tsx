@@ -1,21 +1,21 @@
-import React, { forwardRef } from 'react';
-import { tokens } from '@equinor/eds-tokens';
+import React, { forwardRef } from 'react'
+import { tokens } from '@equinor/eds-tokens'
 import {
   Button,
   ButtonProps,
   Icon,
   Tooltip as EDSTooltip,
   Typography,
-} from '@equinor/eds-core-react';
-import styled from 'styled-components';
-import { IconData } from '@equinor/eds-icons';
-import { useSideBar } from '../SideBar';
+} from '@equinor/eds-core-react'
+import styled from 'styled-components'
+import { IconData } from '@equinor/eds-icons'
+import { useSideBar } from '../SideBar'
 
-const { colors, spacings } = tokens;
+const { colors, spacings } = tokens
 
 interface ContainerProps extends ButtonProps {
-  active?: boolean;
-  open?: boolean;
+  active?: boolean
+  open?: boolean
 }
 
 const Container = styled(Button)<ContainerProps>`
@@ -41,15 +41,15 @@ const Container = styled(Button)<ContainerProps>`
     background: ${colors.interactive.disabled__fill.hsla};
     color: ${colors.interactive.disabled__text.hsla};
   }
-`;
+`
 
 const ItemIcon = styled(Icon)`
   grid-column: 2;
   margin-left: -4px;
-`;
+`
 
 interface ItemTextProps {
-  active?: boolean;
+  active?: boolean
 }
 
 const ItemText = styled(Typography)<ItemTextProps>`
@@ -59,34 +59,34 @@ const ItemText = styled(Typography)<ItemTextProps>`
   &::first-letter {
     text-transform: capitalize;
   }
-`;
+`
 
 const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;
-`;
+`
 
 export type MenuItemType = {
-  icon?: IconData;
-  name: string;
-  link?: string;
-  onClick?: () => void;
-};
+  icon?: IconData
+  name: string
+  link?: string
+  onClick?: () => void
+}
 
 export type MenuItemProps = {
-  currentUrl?: string;
+  currentUrl?: string
 } & MenuItemType &
-  React.HTMLAttributes<HTMLAnchorElement>;
+  React.HTMLAttributes<HTMLAnchorElement>
 
-const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
+export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
   ({ currentUrl, icon, name, link, onClick }, ref) => {
-    const isCurrentUrl = () => currentUrl?.includes(link!);
-    const { isOpen } = useSideBar();
+    const isCurrentUrl = () => currentUrl?.includes(link)
+    const { isOpen } = useSideBar()
 
     const getIconColor = () => {
       return isCurrentUrl()
         ? colors.interactive.primary__resting.hsla
-        : colors.text.static_icons__default.hsla;
-    };
+        : colors.text.static_icons__default.hsla
+    }
 
     if (isOpen) {
       return (
@@ -104,7 +104,7 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
             {name}
           </ItemText>
         </Container>
-      );
+      )
     }
 
     return (
@@ -121,10 +121,8 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
           {icon && <ItemIcon data={icon} color={getIconColor()} />}
         </Container>
       </Tooltip>
-    );
-  }
-);
+    )
+  },
+)
 
-MenuItem.displayName = 'MenuItem';
-
-export default MenuItem;
+MenuItem.displayName = 'MenuItem'
