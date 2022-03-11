@@ -7,7 +7,9 @@ scripts:
   lint:lab: pnpm run lint ./packages/eds-lab-react
   lint:utils: pnpm run lint ./packages/eds-utils
   init: pnpm multi install --force && pnpm run build
-  build: pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:lab
+  build: >-
+    pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils &&
+    pnpm run build:core-react && pnpm run build:lab
   build:core-react: pnpm --filter @equinor/eds-core-react run build
   build:lab: pnpm --filter @equinor/eds-lab-react run build
   build:utils: pnpm --filter @equinor/eds-utils run build
@@ -21,7 +23,7 @@ scripts:
   test:update-snapshots:core-react: pnpm --filter @equinor/eds-core-react run test:update-snapshots
   test:update-snapshots:lab: pnpm --filter @equinor/eds-lab-react run test:update-snapshots
   storybook:core-react: pnpm --filter @equinor/eds-core-react run storybook
-  storybook: pnpm storybook:core-react # default storybook
+  storybook: pnpm storybook:core-react
   storybook:lab: pnpm --filter @equinor/eds-lab-react run storybook
   graphics: pnpm --filter ./assets/woman run dev
   build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
@@ -44,4 +46,6 @@ devDependencies:
   eslint-plugin-testing-library: ^4.12.4
   jest-axe: ^5.0.1
   prettier: 2.4.1
+  stylelint: ^14.5.3
+  stylelint-config-standard: ^25.0.0
   typescript: ^4.2.4
