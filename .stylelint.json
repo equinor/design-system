@@ -1,7 +1,7 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
-  "rules": {
-    "no-eol-whitespace": true,
-    "no-extra-semicolons": true
-  }
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-standard",
+    "stylelint-config-prettier"
+  ]
 }
