@@ -21,16 +21,6 @@ const getSvgPathData = R.pipe(
   mergeStrings,
 )
 
-const svg = (
-  content,
-) => `<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<style>
-use,use:target~use:last-child { display: none; }
-use:target,use:last-child { display: inline; }
-</style>
-${content}
-</svg>\n`
-
 const svgContent = (asset) => {
   if (!asset) return { symbol: '', use: '' }
 
@@ -41,6 +31,19 @@ const svgContent = (asset) => {
     symbol: `<symbol height="${height}" width="${width}" id="${name}" viewBox="${viewbox}"><path fill-rule="evenodd" clip-rule="evenodd" d="${svgPathData}"/></symbol>`,
     use: `<use id="${id}" xlink:href="#${name}" />`,
   }
+}
+
+const svgSprite = (asset) => {
+  if (!asset.sizes) {
+    return asset
+  }
+  const normal = svgContent(asset)
+  const small = svgContent(asset.sizes ? asset.sizes.small : null)
+
+  return `<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>use,use:target~use:last-child { display: none; }use:target,use:last-child { display: inline; }</style>
+<defs>${normal.symbol}${small.symbol}</defs>${small.use}${normal.use}
+</svg>\n`
 }
 
 const mergeAssetsSizes = R.map((iconGroup) => ({
@@ -135,24 +138,13 @@ const writeJsonAssets = (assets) => {
 const writeSVGs = (assets) => {
   console.info('Save icons as svg files')
 
-  const svgSprite = (asset) => {
-    if (!asset.sizes) {
-      return asset
-    }
-    const normal = svgContent(asset)
-    const small = svgContent(asset.sizes ? asset.sizes.small : null)
-    return {
-      ...asset,
-      value: svg(
-        `<defs>${normal.symbol}${small.symbol}</defs>${small.use}${normal.use}`,
-      ),
-    }
-  }
-
   const updateAssets = R.pipe(
     R.map((iconGroup) => ({
       ...iconGroup,
-      value: R.map(svgSprite, iconGroup.value),
+      value: R.map(
+        (asset) => ({ ...asset, value: svgSprite(asset) }),
+        iconGroup.value,
+      ),
     })),
   )(assets)
 
