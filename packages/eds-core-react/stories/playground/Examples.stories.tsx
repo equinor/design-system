@@ -65,46 +65,23 @@ export const TestPage: Story = (args) => {
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
   const [isOpenSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setPopoverOpen] = useState<boolean>(false)
-  const [focus, setFocus] = useState<MenuProps['focus']>(null)
   const [density, setDensity] =
     useState<EdsProviderProps['density']>('comfortable')
-  const menuAnchorRef = useRef<HTMLButtonElement>(null)
+  const [menuAnchorRef, setMenuAnchorRef] = useState<HTMLButtonElement>(null)
   const popverAnchorRef = useRef<HTMLButtonElement>(null)
 
-  const openMenu = (focus: MenuProps['focus']) => {
+  const openMenu = () => {
     setOpenMenu(true)
-    setFocus(focus)
   }
   const closeMenu = () => {
     setOpenMenu(false)
-    setFocus(null)
   }
 
   // This is just for storybook and changes done via controls addon
   useEffect(() => {
-    setFocus(args.focus)
     setOpenMenu(args.open)
     // eslint-disable-next-line react/destructuring-assignment
-  }, [args.open, args.focus])
-
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    e.preventDefault()
-    e.stopPropagation()
-    switch (key) {
-      case 'Enter':
-        isOpenMenu ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowDown':
-        isOpenMenu ? closeMenu() : openMenu('first')
-        break
-      case 'ArrowUp':
-        isOpenMenu ? closeMenu() : openMenu('last')
-        break
-      default:
-        break
-    }
-  }
+  }, [args.open])
 
   return (
     <Container>
@@ -117,13 +94,12 @@ export const TestPage: Story = (args) => {
         <TopBar.Actions>
           <Button
             variant="ghost_icon"
-            ref={menuAnchorRef}
+            ref={setMenuAnchorRef}
             id="anchor-menu"
             aria-haspopup="true"
             aria-expanded={isOpenMenu}
             aria-controls="menu"
-            onClick={() => (isOpenMenu ? closeMenu() : openMenu(null))}
-            onKeyDown={onKeyPress}
+            onClick={() => (isOpenMenu ? closeMenu() : openMenu())}
           >
             <Icon data={accessible} title="Choose density" />
           </Button>
@@ -131,10 +107,9 @@ export const TestPage: Story = (args) => {
             open={isOpenMenu}
             {...args}
             id="menu"
-            focus={focus}
             aria-labelledby="anchor-menu"
             onClose={closeMenu}
-            anchorEl={menuAnchorRef.current}
+            anchorEl={menuAnchorRef}
           >
             <Menu.Item onClick={() => setDensity('comfortable')}>
               Comfortable

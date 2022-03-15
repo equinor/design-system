@@ -10,7 +10,6 @@ import {
 } from 'react'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
-import type { FocusTarget } from './Menu.types'
 import { MenuItemProps, MenuItem } from './MenuItem'
 import { MenuSectionProps, MenuSection } from './MenuSection'
 import { menu as tokens } from './Menu.tokens'
@@ -28,7 +27,6 @@ const List = styled.div`
   }
 `
 type MenuListProps = {
-  focus?: FocusTarget
   children: ReactNode
 }
 
@@ -43,8 +41,8 @@ function isIndexable(item: MenuChild) {
 }
 
 export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
-  function MenuList({ children, focus, ...rest }, ref) {
-    const { focusedIndex, setFocusedIndex } = useMenu()
+  function MenuList({ children, ...rest }, ref) {
+    const { focusedIndex, setFocusedIndex, initialFocus } = useMenu()
 
     let index = -1
     const focusableIndexs: number[] = useMemo<number[]>(() => [], [])
@@ -82,14 +80,14 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
     const lastFocusIndex = focusableIndexs[focusableIndexs.length - 1]
 
     useEffect(() => {
-      if (focus === 'first') {
+      if (initialFocus === 'first') {
         setFocusedIndex(firstFocusIndex)
       }
-      if (focus === 'last') {
+      if (initialFocus === 'last') {
         setFocusedIndex(lastFocusIndex)
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [focus, firstFocusIndex, lastFocusIndex])
+    }, [initialFocus, firstFocusIndex, lastFocusIndex])
 
     const handleMenuItemChange = (
       direction: Direction,

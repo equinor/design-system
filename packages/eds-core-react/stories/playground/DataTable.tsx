@@ -113,42 +113,13 @@ const toCellValues = (data: Data[], columns: Column[]) =>
 
 const MenuButton = ({ row }: { row: string[] }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>()
-  const [focus, setFocus] = useState<MenuProps['focus']>(null)
-  const isOpen = Boolean(anchorEl)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const openMenu = (
-    focus: MenuProps['focus'],
-    e: React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
-    setFocus(focus)
-    setAnchorEl(e.currentTarget)
+  const openMenu = () => {
+    setIsOpen(true)
   }
   const closeMenu = () => {
-    setFocus(null)
-    setAnchorEl(null)
-  }
-
-  const onKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const { key } = e
-    if (key === 'Tab') {
-      return
-    }
-    e.preventDefault()
-    e.stopPropagation()
-
-    switch (key) {
-      case 'Enter':
-        isOpen ? closeMenu() : openMenu('first', e)
-        break
-      case 'ArrowDown':
-        isOpen ? closeMenu() : openMenu('first', e)
-        break
-      case 'ArrowUp':
-        isOpen ? closeMenu() : openMenu('last', e)
-        break
-      default:
-        break
-    }
+    setIsOpen(false)
   }
 
   return (
@@ -159,51 +130,48 @@ const MenuButton = ({ row }: { row: string[] }) => {
         aria-controls={`menu-${row.toString()}`}
         aria-haspopup="true"
         aria-expanded={isOpen}
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-        onKeyDown={onKeyPress}
+        ref={setAnchorEl}
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
       >
         <Icon name="more_vertical" title="more"></Icon>
       </Button>
-      {isOpen && (
-        <Menu
-          id={`menu-${row.toString()}`}
-          aria-labelledby={`menu-button-${row.toString()}`}
-          open={isOpen}
-          anchorEl={anchorEl}
-          focus={focus}
-          onClose={closeMenu}
-        >
-          <Menu.Item onClick={closeMenu}>
-            <Icon name="folder" size={16} />
-            <Typography group="navigation" variant="menu_title">
-              Open
-            </Typography>
-            <Typography
-              color={colors.text.static_icons__tertiary.hex}
-              group="navigation"
-              variant="label"
-              style={{ height: 12 }}
-            >
-              CTRL+O
-            </Typography>
-          </Menu.Item>
-          <Menu.Item onClick={closeMenu}>
-            <Icon name="copy" size={16} />
-            <Typography group="navigation" variant="menu_title">
-              Copy
-            </Typography>
-            <Typography
-              color={colors.text.static_icons__tertiary.hex}
-              group="navigation"
-              variant="label"
-              as="span"
-              style={{ height: 12 }}
-            >
-              CTRL+C
-            </Typography>
-          </Menu.Item>
-        </Menu>
-      )}
+      <Menu
+        id={`menu-${row.toString()}`}
+        aria-labelledby={`menu-button-${row.toString()}`}
+        open={isOpen}
+        anchorEl={anchorEl}
+        onClose={closeMenu}
+      >
+        <Menu.Item onClick={closeMenu}>
+          <Icon name="folder" size={16} />
+          <Typography group="navigation" variant="menu_title">
+            Open
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+            style={{ height: 12 }}
+          >
+            CTRL+O
+          </Typography>
+        </Menu.Item>
+        <Menu.Item onClick={closeMenu}>
+          <Icon name="copy" size={16} />
+          <Typography group="navigation" variant="menu_title">
+            Copy
+          </Typography>
+          <Typography
+            color={colors.text.static_icons__tertiary.hex}
+            group="navigation"
+            variant="label"
+            as="span"
+            style={{ height: 12 }}
+          >
+            CTRL+C
+          </Typography>
+        </Menu.Item>
+      </Menu>
     </>
   )
 }
