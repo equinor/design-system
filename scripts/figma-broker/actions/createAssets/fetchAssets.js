@@ -39,6 +39,7 @@ export async function fetchAssets({ query }) {
 
   console.info('Get asset urls from Figma')
   // Update with svg image urls from Figma
+  // eslint-disable-next-line no-undef
   const assetsWithUrl = await Promise.all(
     assetPages.map(async (assetPage) => {
       const ids = assetPage.value.map((x) => x.id)
@@ -69,9 +70,11 @@ export async function fetchAssets({ query }) {
   console.info(
     `Fetching ${R.head(assetPages).name} assets as svgs from Figma urls`,
   )
+  // eslint-disable-next-line no-undef
   const assetsWithSvg = await Promise.all(
     [R.head(assetsWithUrl)].map(async (assetPage) => ({
       ...assetPage,
+      // eslint-disable-next-line no-undef
       value: await Promise.all(
         assetPage.value.map(async (asset) => {
           const svgDirty = await fetchFile(asset.url)
@@ -95,11 +98,6 @@ export async function fetchAssets({ query }) {
   )
 
   console.info('Finished fetching assets')
-
-  // Write svg to files
-
-  // TODO: Disabled for now as not sure if needed yet and not to polute repo with 600+ svgs yet...
-  // writeSVGSprite(assetsWithSvg)
 
   return assetsWithSvg
 }
