@@ -4,16 +4,16 @@ import {
   getFigmaFile,
   processFigmaFile,
   fetchFigmaImageUrls,
-} from '../functions/figma'
+} from '../../functions/figma'
 import {
   writeResults,
   writeFile,
   fetchFile,
   writeResultsIndividually,
-} from '../functions/file'
-import { getAssets } from '../files/assets'
-import { PATHS } from '../constants'
-import { sleep, mergeStrings } from '../functions/utils'
+} from '../../functions/file'
+import { getAssets } from '../../files/assets'
+import { PATHS } from '../../constants'
+import { sleep, mergeStrings } from '../../functions/utils'
 
 const getSvgPathData = R.pipe(
   R.match(/d="(.+?)"/g),
