@@ -1,7 +1,1 @@
-<svg style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<style>
-use,use:target~use:last-child { display: none; }
-use:target,use:last-child { display: inline; }
-</style>
-<defs><symbol height="24" width="24" id="notifications" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6z"/></symbol><symbol height="18" width="18" id="notifications_small" viewBox="0 0 18 18"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5 11.911v-3.67c0-2.254-1.223-4.141-3.375-4.64v-.5C10.125 2.491 9.623 2 9 2s-1.125.492-1.125 1.101v.5C5.73 4.1 4.5 5.979 4.5 8.24v3.67L3 13.38v.673h12v-.673l-1.5-1.469zM9 16.001c.825 0 1.5-.49 1.5-1.47h-3c0 .98.675 1.47 1.5 1.47zm-3-3.356h6V8.24c0-1.82-1.133-3.303-3-3.303S6 6.42 6 8.24v4.405z"/></symbol></defs><use id="small" xlink:href="#notifications_small" /><use id="medium" xlink:href="#notifications" />
-</svg>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6z"/></svg>
