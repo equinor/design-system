@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import {
@@ -47,7 +47,7 @@ const onClick = (event: React.MouseEvent) => {
 
 export const Default: Story<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -65,7 +65,7 @@ export const Default: Story<MenuProps> = (args) => {
   return (
     <StoryCenter>
       <Button
-        ref={setAnchorRef}
+        ref={setAnchorEl}
         id="anchor-default"
         aria-haspopup="true"
         aria-expanded={isOpen}
@@ -80,7 +80,7 @@ export const Default: Story<MenuProps> = (args) => {
         id="menu-default"
         aria-labelledby="anchor-default"
         onClose={closeMenu}
-        anchorEl={anchorRef}
+        anchorEl={anchorEl}
       >
         <Menu.Item onClick={onClick}>Pressure</Menu.Item>
         <Menu.Item onClick={onClick}>Bearing</Menu.Item>
@@ -97,7 +97,7 @@ Default.args = {
 
 export const Complex: Story<MenuProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -109,7 +109,7 @@ export const Complex: Story<MenuProps> = () => {
   return (
     <StoryCenter>
       <Button
-        ref={setAnchorRef}
+        ref={setAnchorEl}
         id="anchor-complex"
         aria-controls="menu-complex"
         aria-haspopup="true"
@@ -123,7 +123,7 @@ export const Complex: Story<MenuProps> = () => {
         id="menu-complex"
         aria-labelledby="anchor-complex"
         open={isOpen}
-        anchorEl={anchorRef}
+        anchorEl={anchorEl}
         onClose={closeMenu}
         placement="right"
       >
@@ -237,7 +237,7 @@ export const Complex: Story<MenuProps> = () => {
 export const Compact: Story<MenuProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
   const openMenu = () => {
     setIsOpen(true)
@@ -256,7 +256,7 @@ export const Compact: Story<MenuProps> = () => {
     <EdsProvider density={density}>
       <StoryCenter>
         <Button
-          ref={setAnchorRef}
+          ref={setAnchorEl}
           id="anchor-compact"
           aria-haspopup="true"
           aria-expanded={isOpen}
@@ -271,7 +271,7 @@ export const Compact: Story<MenuProps> = () => {
             id="menu-compact"
             aria-labelledby="anchor-compact"
             onClose={closeMenu}
-            anchorEl={anchorRef}
+            anchorEl={anchorEl}
           >
             <Menu.Item onClick={onClick}>Pressure</Menu.Item>
             <Menu.Item onClick={onClick}>Bearing</Menu.Item>
