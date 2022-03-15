@@ -125,17 +125,7 @@ const writeJsonAssets = (assets) => {
 const writeSVGs = (assets) => {
   console.info('Save icons as svg files')
 
-  const updateAssets = R.pipe(
-    R.map((iconGroup) => ({
-      ...iconGroup,
-      value: R.map(
-        (asset) => ({ ...asset, value: svgSprite(asset) }),
-        iconGroup.value,
-      ),
-    })),
-  )(assets)
-
-  writeResultsIndividually(updateAssets, PATHS.ASSETS_ICONS, 'svg')
+  writeResultsIndividually(assets, PATHS.ASSETS_ICONS, 'svg')
 }
 
 export async function createAssets(args) {
@@ -143,8 +133,8 @@ export async function createAssets(args) {
 
   const mergedAssets = R.pipe(mergeAssetsSizes, removeSmallAssets)(assets)
 
-  writeSVGs(mergedAssets)
-  writeJsonAssets(mergedAssets)
+  writeSVGs(assets)
+  writeJsonAssets(assets)
   makeIconDataFile(mergedAssets)
 
   console.info('Finished exporting assets')
