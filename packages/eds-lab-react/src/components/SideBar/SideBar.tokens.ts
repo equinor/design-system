@@ -33,16 +33,15 @@ const {
 
 type SideBarToken = ComponentToken
 
-export const menu: SideBarToken = {
+export const sidebar: SideBarToken = {
   background,
   spacings: {
     top: large,
     bottom: large,
   },
   border: {
-    type: 'border',
-    color: borderColor,
-    width: '1px',
+    type: 'bordergroup',
+    right: { color: borderColor, width: '1px', style: 'solid' },
   },
   entities: {
     createItem: {

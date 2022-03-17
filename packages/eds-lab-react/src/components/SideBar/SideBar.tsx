@@ -1,22 +1,25 @@
 import React, { forwardRef, useContext, useState } from 'react'
 import styled from 'styled-components'
-import { tokens } from '@equinor/eds-tokens'
+//import { tokens } from '@equinor/eds-tokens'
+import { sidebar as tokens } from './SideBar.tokens'
+import { spacingsTemplate, bordersTemplate } from '@equinor/eds-utils'
 //import EquinorLogo from '../EquinorLogo'
 import { ToggleOpen } from './ToggleOpen'
 import { CreateItem } from './CreateItem'
 
-const { colors, spacings } = tokens
+const { background, border, spacings } = tokens
+console.log(border)
 interface ContainerProps {
   open: boolean
   maxHeight?: string
 }
 
 const Container = styled.div<ContainerProps>`
-  border-right: 1px solid ${colors.ui.background__medium.hsla};
-  background-color: ${colors.ui.background__default.hsla};
+  ${bordersTemplate(border)}
+  background-color: ${background};
   display: flex;
   flex-direction: column;
-  padding-bottom: ${spacings.comfortable.large};
+  padding-bottom: ${spacings.bottom};
   overflow: hidden;
   width: ${(props) => (props.open ? '256px' : '72px')};
   min-width: ${(props) => (props.open ? '256px' : '72px')};
@@ -26,8 +29,8 @@ const Container = styled.div<ContainerProps>`
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
-  border-top: 1px solid ${colors.ui.background__medium.hex};
-  padding-top: ${spacings.comfortable.large};
+  border-top: 1px solid rgba(220, 220, 220, 1); //how to solve this with bordersTemplate???
+  padding-top: ${spacings.top};
 `
 
 const TopContainer = styled.div`
