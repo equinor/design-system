@@ -1,10 +1,10 @@
-/* import React from 'react';
-import { render, screen } from '../../../test-utils';
-import '@testing-library/jest-dom/extend-expect';
-import userEvent from '@testing-library/user-event';
-import SideBar from '..';
-import { MenuItemType } from '../MenuItem';
-import { home, star_half } from '@equinor/eds-icons';
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+//import '@testing-library/jest-dom/extend-expect'
+import userEvent from '@testing-library/user-event'
+import { SideBar } from '.'
+import { MenuItemType } from './MenuItem'
+import { home, star_half } from '@equinor/eds-icons'
 
 const defaultMenuItems: MenuItemType[] = [
   {
@@ -15,18 +15,18 @@ const defaultMenuItems: MenuItemType[] = [
     name: 'Another Link',
     icon: star_half,
   },
-];
+]
 
 test('Sidebar renders', () => {
-  const currentUrl = 'home';
+  const currentUrl = 'home'
   render(
     <SideBar>
       {defaultMenuItems.map((m) => {
-        return <SideBar.Item key={m.name} currentUrl={currentUrl} {...m} />;
+        return <SideBar.Item key={m.name} currentUrl={currentUrl} {...m} />
       })}
-    </SideBar>
-  );
-});
+    </SideBar>,
+  )
+})
 
 test('Renders create new button when onCreate prop is given', () => {
   render(
@@ -38,10 +38,10 @@ test('Renders create new button when onCreate prop is given', () => {
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
-    </SideBar>
-  );
-  expect(screen.getByText('createlabel')).toBeInTheDocument();
-});
+    </SideBar>,
+  )
+  expect(screen.getByText('createlabel')).toBeInTheDocument()
+})
 
 test('Renders closed width when closed', () => {
   render(
@@ -49,11 +49,11 @@ test('Renders closed width when closed', () => {
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
-    </SideBar>
-  );
+    </SideBar>,
+  )
 
-  expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '72px' });
-});
+  expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '72px' })
+})
 
 test('Renders open width when open', () => {
   render(
@@ -61,58 +61,57 @@ test('Renders open width when open', () => {
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
-    </SideBar>
-  );
+    </SideBar>,
+  )
 
-  expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '256px' });
-});
+  expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '256px' })
+})
 
 test('Triggers onToggle callback when closed', () => {
-  const cb = jest.fn();
+  const cb = jest.fn()
   render(
     <SideBar open={true} onToggle={cb}>
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
-    </SideBar>
-  );
+    </SideBar>,
+  )
 
-  const collapse = screen.getByRole('button', { name: /collapse/i });
-  userEvent.click(collapse);
+  const collapse = screen.getByRole('button', { name: /collapse/i })
+  userEvent.click(collapse)
 
-  expect(cb).toHaveBeenCalled();
-});
+  expect(cb).toHaveBeenCalled()
+})
 
 test('Triggers onToggle callback when opened', () => {
-  const cb = jest.fn();
+  const cb = jest.fn()
   render(
     <SideBar open={false} onToggle={cb}>
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
-    </SideBar>
-  );
+    </SideBar>,
+  )
 
-  const expand = screen.getByRole('button');
-  userEvent.click(expand);
+  const expand = screen.getByRole('button')
+  userEvent.click(expand)
 
-  expect(cb).toHaveBeenCalled();
-});
+  expect(cb).toHaveBeenCalled()
+})
 
 test('onToggle send correct state back', () => {
-  const toggle = jest.fn();
+  const toggle = jest.fn()
   render(
     <SideBar open={false} onToggle={toggle}>
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
-    </SideBar>
-  );
+    </SideBar>,
+  )
 
-  const expand = screen.getByRole('button');
-  userEvent.click(expand);
+  const expand = screen.getByRole('button')
+  userEvent.click(expand)
 
-  expect(toggle).toBeCalled();
-  expect(toggle).toHaveBeenCalledWith(true); // Since we send in false to start with
-});
- */
+  expect(toggle).toBeCalled()
+  expect(toggle).toHaveBeenCalledWith(true) // Since we send in false to start with
+})
