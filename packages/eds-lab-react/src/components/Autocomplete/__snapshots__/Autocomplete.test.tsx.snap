@@ -49,7 +49,7 @@ exports[`Autocomplete Matches snapshot 1`] = `
   background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
   box-shadow: 0 7px 8px rgba(0,0,0,0.2),0 5px 22px rgba(0,0,0,0.12),0 12px 17px rgba(0,0,0,0.14);
   border-radius: 4px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 300px;
   padding: 0;
   position: absolute;
