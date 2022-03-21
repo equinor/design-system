@@ -93,7 +93,7 @@ export const writeResults = (results, savePath, extension = 'json') =>
         break
 
       default:
-        writeFileToDisk(value)
+        writeFileToDisk(`${value}\n`)
     }
   })
 
