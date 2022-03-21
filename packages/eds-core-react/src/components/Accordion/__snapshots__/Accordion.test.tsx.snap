@@ -2,7 +2,7 @@
 
 exports[`Accordion Matches snapshot 1`] = `
 <DocumentFragment>
-  .c2 {
+  .c3 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -16,6 +16,11 @@ exports[`Accordion Matches snapshot 1`] = `
 
 .c0 {
   margin: 0;
+  padding: 0;
+}
+
+.c1 {
+  margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
   font-size: 1.000rem;
@@ -25,6 +30,7 @@ exports[`Accordion Matches snapshot 1`] = `
   border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
   padding-left: 16px;
   padding-right: 16px;
+  width: 100%;
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
   height: 48px;
   margin: 0;
@@ -41,25 +47,25 @@ exports[`Accordion Matches snapshot 1`] = `
   cursor: pointer;
 }
 
-.c0[data-focus-visible-added]:focus {
+.c1[data-focus-visible-added]:focus {
   outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 2px;
 }
 
-.c0:focus-visible {
+.c1:focus-visible {
   outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 2px;
 }
 
-.c0 > svg {
+.c1 > svg {
   color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
 }
 
-.c1 {
+.c2 {
   margin-right: 32px;
 }
 
-.c3 {
+.c4 {
   border: 1px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
   padding-left: 16px;
   padding-top: 16px;
@@ -71,48 +77,51 @@ exports[`Accordion Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c0:hover {
+  .c1:hover {
     background: var(--eds_ui_background__light,rgba(247,247,247,1));
   }
 }
 
 <div>
     <div>
-      <div
-        aria-controls="eds-accordion-12345-panel-1"
-        aria-expanded="true"
+      <h2
         class="c0"
-        data-testid="header1"
-        role="button"
-        tabindex="0"
       >
-        <svg
-          aria-hidden="true"
-          class="Icon__StyledSvg-sc-6evbi1-0 c1"
-          fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
-          height="24px"
-          viewBox="0 0 24 24"
-          width="24px"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          aria-controls="eds-accordion-12345-panel-1"
+          aria-expanded="true"
+          class="c1"
+          data-testid="header1"
+          tabindex="0"
         >
-          <path
-            class="Icon__StyledPath-sc-6evbi1-1"
-            clip-rule="evenodd"
-            d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
-            data-testid="eds-icon-path"
-            fill-rule="evenodd"
-            height="24"
-          />
-        </svg>
-        <span
-          class="c2"
-        >
-          Summary 1
-        </span>
-      </div>
+          <svg
+            aria-hidden="true"
+            class="Icon__StyledSvg-sc-6evbi1-0 c2"
+            fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
+            height="24px"
+            viewBox="0 0 24 24"
+            width="24px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              class="Icon__StyledPath-sc-6evbi1-1"
+              clip-rule="evenodd"
+              d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
+              data-testid="eds-icon-path"
+              fill-rule="evenodd"
+              height="24"
+            />
+          </svg>
+          <span
+            class="c3"
+          >
+            Summary 1
+          </span>
+        </button>
+      </h2>
       <div
         aria-labelledby="eds-accordion-12345-header-1"
-        class="c3"
+        class="c4"
         id="eds-accordion-12345-panel-1"
         role="region"
       >
