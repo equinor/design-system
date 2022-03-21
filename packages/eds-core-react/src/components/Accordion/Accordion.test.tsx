@@ -27,9 +27,10 @@ type TestProps = {
 
 const SimpleAccordion = ({
   isExpanded = true,
+  headerLevel = 'h2',
   chevronPosition = 'left',
 }: TestProps) => (
-  <Accordion chevronPosition={chevronPosition}>
+  <Accordion headerLevel={headerLevel} chevronPosition={chevronPosition}>
     <Accordion.Item isExpanded={isExpanded}>
       <Accordion.Header data-testid="header1">Summary 1</Accordion.Header>
       <Accordion.Panel>Details 1</Accordion.Panel>

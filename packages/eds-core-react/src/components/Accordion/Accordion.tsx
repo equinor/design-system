@@ -15,7 +15,7 @@ const Accordion = forwardRef<
   HTMLDivElement,
   AccordionProps & HTMLAttributes<HTMLDivElement>
 >(function Accordion(
-  { chevronPosition = 'left', children, id, ...props },
+  { headerLevel = 'h2', chevronPosition = 'left', children, id, ...props },
   ref,
 ) {
   const accordionId = useId(id, 'accordion')
@@ -27,6 +27,7 @@ const Accordion = forwardRef<
     return cloneElement(child as ReactElement, {
       accordionId,
       index,
+      headerLevel,
       chevronPosition,
     })
   })
