@@ -3,6 +3,7 @@ import { useRef, useEffect, useState, Fragment } from 'react'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import { Tabs } from '.'
 
 const noop = () => null
@@ -72,6 +73,23 @@ describe('Tabs', () => {
     )
 
     expect(asFragment).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <Tabs>
+        <Tabs.List>
+          <Tabs.Tab>Tab one</Tabs.Tab>
+          <Tabs.Tab>Tab two</Tabs.Tab>
+          <Tabs.Tab>Tab three</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panels>
+          <Tabs.Panel>Panel one</Tabs.Panel>
+          <Tabs.Panel>Panel two</Tabs.Panel>
+          <Tabs.Panel>Panel three</Tabs.Panel>
+        </Tabs.Panels>
+      </Tabs>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Renders a tablist with three tabs', () => {
     render(

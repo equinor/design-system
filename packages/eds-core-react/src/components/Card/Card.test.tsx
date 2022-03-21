@@ -1,14 +1,15 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Typography } from '../Typography'
 import * as tokens from './Card.tokens'
-import { trimSpaces } from '../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 import { Card } from '.'
 
-const { Header, HeaderTitle, Media, Actions } = Card
+const { Header, HeaderTitle, Media, Actions, Content } = Card
 
 const { info } = tokens
 
@@ -65,6 +66,46 @@ describe('Card', () => {
       </Card>,
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test when has header', async () => {
+    const { container } = render(
+      <Card>
+        <Header>
+          <Typography>Title</Typography>
+          <Typography>Subtitle</Typography>
+        </Header>
+      </Card>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when has actions', async () => {
+    const { container } = render(
+      <Card>
+        <Actions>
+          <button type="button">Click me!</button>
+        </Actions>
+      </Card>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when has content', async () => {
+    const { container } = render(
+      <Card>
+        <Content>Content text</Content>
+      </Card>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when has media', async () => {
+    const src = 'https://i.imgur.com/UM3mrju.jpg'
+    const { container } = render(
+      <Card>
+        <Media>
+          <img src={src} alt="alt" />
+        </Media>
+      </Card>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Has correct color', () => {
     render(<Card variant="info" data-testid="card" />)

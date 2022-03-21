@@ -28,6 +28,9 @@ const {
   shape: {
     rounded: { borderRadius },
   },
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
 } = tokens
 
 export type ChipToken = ComponentToken & {
@@ -66,11 +69,11 @@ export const enabled: ChipToken = {
     },
     focus: {
       outline: {
-        width: '1px',
+        width: focusOutlineWidth,
         color: focusOutlineColor,
         style: 'dashed',
         type: 'outline',
-        offset: '2px',
+        offset: '3px',
       },
     },
     active: {

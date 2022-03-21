@@ -14,15 +14,13 @@ import {
   typographyTemplate,
   bordersTemplate,
   joinHandlers,
-} from '../../utils'
-import {
   usePopper,
   Placement,
   useId,
   useGlobalKeyPress,
   useIsMounted,
   useCombinedRefs,
-} from '../../hooks'
+} from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 
 const StyledTooltip = styled.div<{ open: boolean }>`
@@ -31,7 +29,7 @@ const StyledTooltip = styled.div<{ open: boolean }>`
   ${bordersTemplate(tokens.border)}
 
   background: ${tokens.background};
-  z-index: 350;
+  z-index: 1500;
   white-space: nowrap;
 
   .arrow {
@@ -103,14 +101,22 @@ export type TooltipProps = {
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    { title, placement = 'bottom', children, enterDelay = 100, id, ...rest },
+    {
+      title,
+      placement = 'bottom',
+      children,
+      enterDelay = 100,
+      id,
+      style,
+      ...rest
+    },
     ref,
   ) {
     const isMounted = useIsMounted()
     const [popperEl, setPopperEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
-    const openTimer = useRef<number>()
+    const openTimer = useRef<ReturnType<typeof setTimeout>>()
     const tooltipRef = useCombinedRefs<HTMLDivElement>(setPopperEl, ref)
     const anchorRef = useRef<HTMLElement>()
     const combinedChilddRef = useCombinedRefs<HTMLElement>(
@@ -120,7 +126,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const tooltipId = useId(id, 'tooltip')
     const containerId = 'eds-tooltip-container'
     const shouldOpen = isMounted && title !== ''
-    const { setTimeout, clearTimeout } = window
 
     useEffect(() => {
       if (document.getElementById(containerId) === null) {
@@ -131,7 +136,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return () => {
         clearTimeout(openTimer.current)
       }
-    }, [clearTimeout])
+    }, [])
 
     const openTooltip = () => {
       if (shouldOpen) {
@@ -150,16 +155,17 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     useGlobalKeyPress('Escape', () => closeTooltip())
 
-    const { styles, attributes } = usePopper(
-      anchorRef.current,
+    const { styles, attributes } = usePopper({
+      anchorEl: anchorRef.current,
       popperEl,
       arrowRef,
       placement,
-      14,
-    )
+      offset: 14,
+    })
 
     const props = {
       open,
+      style: { ...styles.popper, ...style },
       ...rest,
       ...attributes.popper,
     }
@@ -185,7 +191,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               id={tooltipId}
               role="tooltip"
               ref={tooltipRef}
-              style={styles.popper}
               {...props}
             >
               {title}

@@ -1,10 +1,12 @@
 /* eslint-disable no-undef */
 import { render, cleanup, screen } from '@testing-library/react'
 import 'jest-styled-components'
+import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Input } from './Input'
 import * as tokens from './Input.tokens'
-import { trimSpaces } from '../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 const {
   error: {
@@ -25,10 +27,23 @@ describe('Input', () => {
     const { asFragment } = render(<Input value="input value" readOnly />)
     expect(asFragment()).toMatchSnapshot()
   })
+  it('Should pass a11y test when using label', async () => {
+    const { container } = render(
+      <label>
+        Label text
+        <Input />
+      </label>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test when using aria-label', async () => {
+    const { container } = render(<Input aria-label="description" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('Has correct default value', () => {
     const value = 'Some value'
     render(<Input id="test-value" value={value} readOnly />)
-    const inputElement = screen.queryByDisplayValue(value) as HTMLInputElement
+    const inputElement: HTMLInputElement = screen.queryByDisplayValue(value)
 
     expect(inputElement.value).toBe(value)
   })

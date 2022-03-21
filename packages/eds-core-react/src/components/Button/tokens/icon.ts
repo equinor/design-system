@@ -22,6 +22,9 @@ const {
     compact__standard: compactClickboundHeight,
   },
   shape,
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
 } = tokens
 
 export const primary: ButtonToken = mergeDeepRight(button, {
@@ -61,7 +64,7 @@ export const primary: ButtonToken = mergeDeepRight(button, {
     },
     focus: {
       outline: {
-        offset: '0px',
+        offset: `-${parseInt(focusOutlineWidth)}px`,
       },
     },
   },

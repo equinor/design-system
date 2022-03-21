@@ -12,7 +12,7 @@ import {
   typographyTemplate,
   outlineTemplate,
   bordersTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 
 const { enabled, error } = tokens
 
@@ -40,7 +40,6 @@ const StyledChips = styled.div.attrs<StyleProps>(
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   align-items: center;
-  z-index: 10;
 
   svg {
     fill: ${typography.color};

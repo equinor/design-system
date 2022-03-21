@@ -1,6 +1,6 @@
 import { ReactNode, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate } from '../../../utils'
+import { typographyTemplate } from '@equinor/eds-utils'
 import { helperText as tokens } from './HelperText.token'
 import { useTextField } from '../TextField.context'
 import { Icon } from '../Icon'

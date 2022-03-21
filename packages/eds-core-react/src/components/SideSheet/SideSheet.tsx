@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
-import { spacingsTemplate, bordersTemplate } from '../../utils'
+import { spacingsTemplate, bordersTemplate } from '@equinor/eds-utils'
 import { Typography } from '../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
@@ -27,7 +27,7 @@ export type SideSheetProps = {
 const StyledSideSheet = styled.div<StyleProps>`
   height: 100%;
   position: absolute;
-  z-index: 200;
+  z-index: 1200;
   top: 0;
   right: 0;
   box-sizing: border-box;

@@ -6,9 +6,9 @@ import {
   typographyTemplate,
   spacingsTemplate,
   outlineTemplate,
-} from '../../../utils'
+  useToken,
+} from '@equinor/eds-utils'
 import { useEds } from '../../EdsProvider'
-import { useToken } from '../../../hooks'
 
 const Container = styled.div`
   min-width: 100px;

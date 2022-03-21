@@ -8,7 +8,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import { Label } from '../../Label'
 import { Icon } from '../../Icon'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
-import { spacingsTemplate } from '../../../utils'
+import { spacingsTemplate, useToken } from '@equinor/eds-utils'
 import { select as tokens } from '../Select.tokens'
 import {
   Container,
@@ -19,7 +19,6 @@ import {
   StyledInputWrapper,
 } from '../commonStyles'
 import { useEds } from '../../EdsProvider'
-import { useToken } from '../../../hooks'
 
 export type SingleSelectProps = {
   /** List of options to choose from */

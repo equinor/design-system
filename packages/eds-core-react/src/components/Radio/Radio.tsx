@@ -8,11 +8,11 @@ import {
 import type { IconData } from '@equinor/eds-icons'
 import { comfortable as tokens } from './Radio.tokens'
 import {
+  useToken,
   typographyTemplate,
   spacingsTemplate,
   outlineTemplate,
-} from '../../utils'
-import { useToken } from '../../hooks'
+} from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
 type StyledInputProps = {

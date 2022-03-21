@@ -45,12 +45,12 @@ exports[`Switch Matches snapshot 1`] = `
 }
 
 .c2[data-focus-visible-added]:focus + span {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 0px;
 }
 
 .c2:focus-visible + span {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 0px;
 }
 

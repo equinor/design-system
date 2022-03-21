@@ -2,10 +2,11 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import * as tokens from './DotProgress.tokens'
 import { DotProgress } from './DotProgress'
-import { trimSpaces } from '../../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 const StyledProgress = styled(DotProgress)`
   position: absolute;
@@ -17,6 +18,10 @@ describe('DotProgress', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<DotProgress />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<DotProgress />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('should render neutral as default', () => {
     render(<DotProgress />)

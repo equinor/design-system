@@ -8,7 +8,7 @@ export const interactions = {
       focused: {
         style: 'dashed',
         color: 'rgba(0, 112, 121, 1)',
-        width: '1px',
+        width: '2px',
       },
       pressed_light_overlay: {
         blendMode: 'pass_through',
@@ -23,7 +23,7 @@ export const interactions = {
   focused: {
     style: 'dashed',
     color: 'rgba(0, 112, 121, 1)',
-    width: '1px',
+    width: '2px',
   },
   pressed_light_overlay: {
     blendMode: 'pass_through',

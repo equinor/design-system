@@ -1,338 +1,90 @@
-import { Button, ButtonProps } from '.'
-import { Icon, EdsProvider } from '@equinor/eds-core-react'
-import styled from 'styled-components'
+import { useState, useEffect } from 'react'
+import {
+  Button,
+  Icon,
+  ButtonProps,
+  EdsProvider,
+  Density,
+} from '@equinor/eds-core-react'
+import styled, { css } from 'styled-components'
 import { Meta, Story } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
-import { menu, save } from '@equinor/eds-icons'
-
-Icon.add({ save })
 
 const Wrapper = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(4, fit-content(100%));
-`
-
-const FullWidthWrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 16px;
+  align-items: start;
 `
 
 export default {
-  title: 'Components/CSS Button',
+  title:
+    'Core-react experimental features/css-variables/Button With Relative Units',
   component: Button,
-  argTypes: {
-    as: {
-      control: {
-        type: 'select',
-        options: ['span', 'a', 'button'],
-        defaultValue: 'button',
-      },
-    },
-  },
   parameters: {
     docs: {
       description: {
-        component:
-          'This is a test using only CSS and CSS custom properties for making a component.  \n ⚠️  `:root` custom css properties are loaded via the component now  for this test.',
+        component: `Overriding exposed css variables.
+        `,
       },
     },
-    info: {},
   },
 } as Meta
 
-export const Default: Story<ButtonProps> = (args) => (
-  <Button {...args}>You can control me</Button>
-)
+export const Default: Story<ButtonProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
 
-export const All: Story<ButtonProps> = () => (
-  <Wrapper>
-    <Button>Primary</Button>
-    <Button color="secondary">Secondary</Button>
-    <Button color="danger">Danger</Button>
-    <Button disabled>Disabled</Button>
-    <Button variant="outlined">Primary</Button>
-    <Button variant="outlined" color="secondary">
-      Secondary
-    </Button>
-    <Button variant="outlined" color="danger">
-      Danger
-    </Button>
-    <Button variant="outlined" disabled>
-      Disabled
-    </Button>
-    <Button variant="ghost">Primary</Button>
-    <Button variant="ghost" color="secondary">
-      Secondary
-    </Button>
-    <Button variant="ghost" color="danger">
-      Danger
-    </Button>
-    <Button variant="ghost" disabled>
-      Disabled
-    </Button>
-    <Button variant="ghost_icon">
-      <Icon name="save" title="save action"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="secondary">
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="danger">
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" disabled>
-      <Icon name="save" title="save"></Icon>
-    </Button>
-  </Wrapper>
-)
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
 
-export const Contained: Story<ButtonProps> = () => (
-  <Wrapper>
-    <Button>Primary</Button>
-    <Button color="secondary">Secondary</Button>
-    <Button color="danger">Danger</Button>
-    <Button disabled>Disabled</Button>
-    <Button>
-      <Icon name="save" title="save"></Icon>Primary
-    </Button>
-    <Button color="secondary">
-      <Icon name="save" title="save"></Icon>Secondary
-    </Button>
-    <Button color="danger">
-      <Icon name="save" title="save"></Icon>Danger
-    </Button>
-    <Button disabled>
-      <Icon name="save" title="save"></Icon>Disabled
-    </Button>
-    <Button>
-      Primary <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="secondary">
-      Secondary
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="danger">
-      Danger
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button disabled>
-      Disabled
-      <Icon name="save" title="save"></Icon>
-    </Button>
-  </Wrapper>
-)
-
-export const Outlined: Story<ButtonProps> = () => (
-  <Wrapper>
-    <Button variant="outlined">Primary</Button>
-    <Button variant="outlined" color="secondary">
-      Secondary
-    </Button>
-    <Button variant="outlined" color="danger">
-      Danger
-    </Button>
-    <Button variant="outlined" disabled>
-      Disabled
-    </Button>
-    <Button variant="outlined">
-      <Icon name="save" title="save"></Icon>
-      Primary
-    </Button>
-    <Button variant="outlined" color="secondary">
-      <Icon name="save" title="save"></Icon>
-      Secondary
-    </Button>
-    <Button variant="outlined" color="danger">
-      <Icon name="save" title="save"></Icon>
-      Danger
-    </Button>
-    <Button variant="outlined" disabled>
-      <Icon name="save" title="save"></Icon>
-      Disabled
-    </Button>
-    <Button variant="outlined">
-      Primary
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="outlined" color="secondary">
-      Secondary
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="outlined" color="danger">
-      Danger
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="outlined" disabled>
-      Disabled
-      <Icon name="save" title="save"></Icon>
-    </Button>
-  </Wrapper>
-)
-
-export const Ghost: Story<ButtonProps> = () => (
-  <Wrapper>
-    <Button variant="ghost">Primary</Button>
-    <Button variant="ghost" color="secondary">
-      Secondary
-    </Button>
-    <Button variant="ghost" color="danger">
-      Danger
-    </Button>
-    <Button variant="ghost" disabled>
-      Disabled
-    </Button>
-    <Button variant="ghost">
-      <Icon name="save" title="save"></Icon>
-      Primary
-    </Button>
-    <Button variant="ghost" color="secondary">
-      <Icon name="save" title="save"></Icon>
-      Secondary
-    </Button>
-    <Button variant="ghost" color="danger">
-      <Icon name="save" title="save"></Icon>
-      Danger
-    </Button>
-    <Button variant="ghost" disabled>
-      <Icon name="save" title="save"></Icon>
-      Disabled
-    </Button>
-    <Button variant="ghost">
-      Primary
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost" color="secondary">
-      Secondary
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost" color="danger">
-      Danger
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost" disabled>
-      Disabled
-      <Icon name="save" title="save"></Icon>
-    </Button>
-  </Wrapper>
-)
-
-export const GhostIcon: Story<ButtonProps> = () => (
-  <Wrapper>
-    <Button variant="ghost_icon">
-      <Icon name="save" title="save action"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="secondary">
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="danger">
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" disabled>
-      <Icon name="save" title="save"></Icon>
-    </Button>
-  </Wrapper>
-)
-
-export const Form: Story<ButtonProps> = () => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault() // to prevent navigation from storybook
-    action('onSubmit')(e)
-  }
+  const vars = css`
+    --eds_button__font_size: calc(14 / 16 * 1rem);
+    --eds_button__radius: calc(4 / 14 * 1em);
+    --eds_button__height: auto;
+    --eds_button__height_compact: auto;
+    --eds_button__gap: calc(8 / 14 * 1em);
+    --eds_button__border_width: 1px;
+    --eds_button__padding_y: calc(
+      10 / 14 * 1em - var(--eds_button__border_width)
+    );
+    --eds_button__padding_y_compact: calc(
+      4 / 14 * 1em - var(--eds_button__border_width)
+    );
+    --eds_button__padding_x: calc(16 / 14 * 1em);
+    --eds_button__icon__size: 24px;
+    --eds_button__icon__margin_y: -4px; // icon = 24px, line-height: 16px, (24 - 16) / 2 = 4px
+    --eds_button__fullwidth__icon__margin_x: calc(8 / 14 * 1em);
+    --eds_button__fullwidth__label__margin_x: calc(32 / 14 * 1em);
+  `
 
   return (
-    <Wrapper>
-      <form onSubmit={handleSubmit}>
-        <Button type="submit">Submit form</Button>
-      </form>
-    </Wrapper>
-  )
-}
-
-export const FileUpload: Story<ButtonProps> = () => (
-  <Wrapper>
-    <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
-    <label htmlFor="file-upload">
-      <Button as="span">Upload</Button>
-    </label>
-  </Wrapper>
-)
-
-FileUpload.parameters = {
-  docs: {
-    description: {
-      story:
-        'Please note this demo only works in Storybook Canvas (isolated example only)',
-    },
-  },
-}
-
-export const Link: Story<ButtonProps> = () => (
-  <Wrapper>
-    <Button href="#">Link</Button>
-  </Wrapper>
-)
-
-export const FullWidth: Story<ButtonProps> = () => (
-  <FullWidthWrapper>
-    <Button fullWidth>Primary</Button>
-    <Button color="secondary" fullWidth>
-      Secondary
-    </Button>
-    <Button color="danger" fullWidth>
-      Danger
-    </Button>
-    <Button disabled fullWidth>
-      Disabled
-    </Button>
-    <Button fullWidth>
-      <Icon name="save" title="save"></Icon>Primary
-    </Button>
-    <Button color="secondary" fullWidth>
-      <Icon name="save" title="save"></Icon>Secondary
-    </Button>
-    <Button color="danger" fullWidth>
-      <Icon name="save" title="save"></Icon>Danger
-    </Button>
-    <Button disabled fullWidth>
-      <Icon name="save" title="save"></Icon>Disabled
-    </Button>
-    <Button fullWidth>
-      Primary <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="secondary" fullWidth>
-      Secondary
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="danger" fullWidth>
-      Danger
-      <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button disabled fullWidth>
-      Disabled
-      <Icon name="save" title="save"></Icon>
-    </Button>
-  </FullWidthWrapper>
-)
-
-export const Compact: Story<ButtonProps> = () => (
-  <EdsProvider density="compact">
-    <Wrapper>
-      <Button>Contained</Button>
+    <Wrapper css={vars}>
       <Button variant="outlined">Outlined</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="ghost_icon">
-        <Icon data={menu} title="Ghost icon menu"></Icon>
+      <Button>
+        Contained
+        <br />
+        multiline
+      </Button>
+      <EdsProvider density={density}>
+        <Button variant="outlined">Compact</Button>
+        <Button variant="outlined">
+          Compact
+          <br />
+          multiline
+        </Button>
+      </EdsProvider>
+      <Button>
+        <Icon name="save" title="save" />
+        Icon
+      </Button>
+      <Button>
+        <Icon name="save" title="save" />
+        Icon
+        <br />
+        multiline
       </Button>
     </Wrapper>
-  </EdsProvider>
-)
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Button` using `EdsProvider`',
-    },
-  },
+  )
 }

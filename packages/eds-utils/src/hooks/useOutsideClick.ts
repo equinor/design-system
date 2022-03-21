@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 export const useOutsideClick = (
-  el: HTMLElement,
+  el: HTMLElement | null,
   callback: (e: MouseEvent) => void,
 ): void => {
   useEffect(() => {

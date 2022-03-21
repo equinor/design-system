@@ -1,7 +1,7 @@
 import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { useGlobalKeyPress, useHideBodyScroll } from '../../hooks'
+import { useGlobalKeyPress, useHideBodyScroll } from '@equinor/eds-utils'
 
 const { height, width, background } = tokens
 
@@ -10,7 +10,7 @@ const StyledScrim = styled.div`
   height: ${height};
   background: ${background};
   position: fixed;
-  z-index: 500;
+  z-index: 1300;
   top: 0;
   left: 0;
   align-items: center;

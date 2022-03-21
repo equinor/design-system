@@ -10,11 +10,10 @@ import {
 } from 'react'
 import styled from 'styled-components'
 import { useMenu } from './Menu.context'
-import type { FocusTarget } from './Menu.types'
 import { MenuItemProps, MenuItem } from './MenuItem'
 import { MenuSectionProps, MenuSection } from './MenuSection'
 import { menu as tokens } from './Menu.tokens'
-import { spacingsTemplate } from '../../utils'
+import { spacingsTemplate } from '@equinor/eds-utils'
 
 const List = styled.div`
   position: relative;
@@ -28,7 +27,6 @@ const List = styled.div`
   }
 `
 type MenuListProps = {
-  focus?: FocusTarget
   children: ReactNode
 }
 
@@ -43,8 +41,8 @@ function isIndexable(item: MenuChild) {
 }
 
 export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
-  function MenuList({ children, focus, ...rest }, ref) {
-    const { focusedIndex, setFocusedIndex } = useMenu()
+  function MenuList({ children, ...rest }, ref) {
+    const { focusedIndex, setFocusedIndex, initialFocus } = useMenu()
 
     let index = -1
     const focusableIndexs: number[] = useMemo<number[]>(() => [], [])
@@ -52,7 +50,10 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
     const updatedChildren: Array<MenuChild> = useMemo(
       () =>
         ReactChildren.map(children, (child: MenuChild) => {
+          if (!child) return child
           if (child.type === MenuSection) {
+            index++
+            const menuSectionIndex = index
             const updatedGrandChildren = ReactChildren.map(
               child.props.children,
               (grandChild: MenuChild) => {
@@ -61,7 +62,11 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
                 return cloneElement(grandChild, { index })
               },
             )
-            return cloneElement(child, null, updatedGrandChildren)
+            return cloneElement(
+              child,
+              { index: menuSectionIndex },
+              updatedGrandChildren,
+            )
           } else {
             index++
             if (isIndexable(child)) focusableIndexs.push(index)
@@ -75,14 +80,14 @@ export const MenuList = forwardRef<HTMLDivElement, MenuListProps>(
     const lastFocusIndex = focusableIndexs[focusableIndexs.length - 1]
 
     useEffect(() => {
-      if (focus === 'first') {
+      if (initialFocus === 'first') {
         setFocusedIndex(firstFocusIndex)
       }
-      if (focus === 'last') {
+      if (initialFocus === 'last') {
         setFocusedIndex(lastFocusIndex)
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [focus, firstFocusIndex, lastFocusIndex])
+    }, [initialFocus, firstFocusIndex, lastFocusIndex])
 
     const handleMenuItemChange = (
       direction: Direction,

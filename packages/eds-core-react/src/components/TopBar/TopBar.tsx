@@ -4,9 +4,9 @@ import {
   spacingsTemplate,
   typographyTemplate,
   bordersTemplate,
-} from '../../utils'
+  useToken,
+} from '@equinor/eds-utils'
 import { topbar as topbarToken } from './TopBar.tokens'
-import { useToken } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
 export type TopbarProps = HTMLAttributes<HTMLElement>
@@ -18,7 +18,7 @@ const StyledTopBar = styled.header(({ theme }) => {
     position: sticky;
     background: ${theme.background};
     box-sizing: border-box;
-    z-index: 250;
+    z-index: 1100;
     display: grid;
     grid-column-gap: ${theme.spacings.left};
     grid-template-columns: auto 1fr auto;

@@ -8,7 +8,7 @@ import {
 import { ThemeProvider } from 'styled-components'
 import type { AccordionProps } from './Accordion.types'
 import { accordion as tokens } from './Accordion.tokens'
-import { useId, useToken } from '../../hooks'
+import { useId, useToken } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
 const Accordion = forwardRef<

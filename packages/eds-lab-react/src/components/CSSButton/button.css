@@ -1,0 +1,240 @@
+/* TODO update Figma-broker css generation with utility classes */
+
+.eds-typography-navigation__btn {
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+}
+/* TODO  */
+
+/* Default is primary & contained styling */
+.eds-btn {
+  --eds-btn-color: var(--eds_text_static_icons__primary_white);
+  --eds-btn-color--hover: var(--eds_text_static_icons__primary_white);
+  --eds-btn-color--disabled: var(--eds_interactive_disabled__text);
+
+  --eds-btn-background: var(--eds_interactive_primary__resting);
+  --eds-btn-background--hover: var(--eds_interactive_primary__hover);
+  --eds-btn-background--disabled: var(--eds_interactive_disabled__fill);
+
+  --eds-btn-height: var(--eds_shape_button_min_height);
+  --eds-btn-width: var(--eds_shape_button_min_width), inherit;
+
+  --eds-btn-border-width: 1px;
+  --eds-btn-border-color: var(--eds_interactive_primary__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
+  --eds-btn-border-color--disabled: var(--eds_interactive_disabled__border);
+  --eds-btn-border-radius: var(--eds_shape_button_border_radius);
+
+  --eds-btn-clickbound-height: var(--eds_clickbound_default__base);
+  --eds-btn-clickbound-top: -7px; /** calc didnt work :( */
+  --eds-btn-clicbound-left: -0px;
+
+  /** TODO make css token */
+  --eds-btn-outline-color: rgba(0, 112, 121, 1);
+  --eds-btn-outline-width: 2px;
+  --eds-btn-outline-offset: 3px;
+
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  background: var(--eds-btn-background);
+  height: var(--eds-btn-height);
+  width: var(--eds-btn-width);
+  padding-left: var(--eds_spacing_medium);
+  padding-right: var(--eds_spacing_medium);
+
+  border-width: var(--eds-btn-border-width);
+  border-style: solid;
+  border-color: var(--eds-btn-border-color);
+  border-radius: var(--eds-btn-border-radius);
+
+  color: var(--eds-btn-color);
+  text-align: center;
+}
+
+.eds-btn::-moz-focus-inner {
+  border: 0;
+}
+
+.eds-btn::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  min-height: auto;
+  content: '';
+}
+
+.eds-btn::after {
+  position: absolute;
+  top: var(--eds-btn-clickbound-top);
+  left: var(--eds-btn-clicbound-left);
+  width: 100%;
+  height: var(--eds-btn-clickbound-height);
+  content: '';
+}
+
+.eds-btn:hover {
+  background: var(--eds-btn-background--hover);
+  color: var(--eds-btn-color--hover);
+  border-color: var(--eds-btn-border-color);
+}
+
+.eds-btn:focus {
+  outline: none;
+}
+
+.eds-btn[data-focus-visible-added]:focus {
+  outline-style: dashed;
+  outline-offset: var(--eds-btn-outline-offset);
+  outline-width: var(--eds-btn-outline-width);
+  outline-color: var(--eds-btn-outline-color);
+}
+.eds-btn:focus-visible {
+  outline-style: dashed;
+  outline-offset: var(--eds-btn-outline-offset);
+  outline-width: var(--eds-btn-outline-width);
+  outline-color: var(--eds-btn-outline-color);
+}
+
+.eds-btn:disabled {
+  cursor: not-allowed;
+  background: var(--eds-btn-background--disabled);
+  border-color: var(--eds-btn-border-color--disabled);
+  color: var(--eds-btn-color--disabled);
+}
+
+/** Colors */
+
+.eds-btn.primary {
+  --eds-btn-background: var(--eds_interactive_primary__resting);
+
+  --eds-btn-color: var(--eds_interactive_primary__resting);
+  --eds-btn-color--hover: var(--eds_interactive_primary__resting);
+  --eds-btn-background--hover: var(--eds_interactive_primary__hover_alt);
+  --eds-btn-border-color: var(--eds_interactive_primary__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
+}
+.eds-btn.secondary {
+  --eds-btn-background: var(--eds_interactive_secondary__resting);
+
+  --eds-btn-color: var(--eds_interactive_secondary__resting);
+  --eds-btn-color--hover: var(--eds_interactive_secondary__resting);
+  --eds-btn-background--hover: var(--eds_interactive_secondary__highlight);
+  --eds-btn-border-color: var(--eds_interactive_secondary__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_secondary__link_hover);
+}
+.eds-btn.danger {
+  --eds-btn-background: var(--eds_interactive_danger__resting);
+
+  --eds-btn-color: var(--eds_interactive_danger__resting);
+  --eds-btn-color--hover: var(--eds_interactive_danger__resting);
+  --eds-btn-background--hover: var(--eds_interactive_danger__highlight);
+  --eds-btn-border-color: var(--eds_interactive_danger__resting);
+  --eds-btn-border-color--hover: var(--eds_interactive_danger__hover);
+}
+
+/** Variants */
+.eds-btn.contained {
+  --eds-btn-color: var(--eds_text_static_icons__primary_white);
+  --eds-btn-color--hover: var(--eds_text_static_icons__primary_white);
+}
+.eds-btn.contained.primary {
+  --eds-btn-background--hover: var(--eds_interactive_primary__hover);
+  --eds-btn-border-color--hover: var(--eds_interactive_primary__hover);
+}
+.eds-btn.contained.secondary {
+  --eds-btn-background--hover: var(--eds_interactive_secondary__link_hover);
+  --eds-btn-border-color--hover: var(--eds_interactive_secondary__link_hover);
+}
+.eds-btn.contained.danger {
+  --eds-btn-background--hover: var(--eds_interactive_danger__hover);
+  --eds-btn-border-color--hover: var(--eds_interactive_danger__hover);
+}
+
+.eds-btn.outlined {
+  --eds-btn-background: transparent;
+  --eds-btn-background--disabled: transparent;
+}
+
+.eds-btn.ghost {
+  --eds-btn-background: transparent;
+  --eds-btn-background--disabled: transparent;
+  --eds-btn-border-width: 0;
+}
+
+.eds-btn.ghost_icon {
+  --eds-btn-background: transparent;
+  --eds-btn-background--disabled: transparent;
+
+  --eds-btn-height: var(--eds_shape_icon_button_min_height);
+  --eds-btn-width: var(--eds_shape_icon_button_min_width);
+
+  --eds-btn-border-width: 0;
+  --eds-btn-border-radius: 50%;
+
+  --eds-btn-outline-offset: calc(var(--eds-btn-outline-width) * -1);
+}
+
+.eds-btn.compact {
+  /** TODO add compact shape css tokens */
+  --eds-btn-height: 24px;
+  --eds-btn-clickbound-height: var(--eds_clickbound_compact__standard);
+  --eds-btn-clickbound-top: -5px;
+}
+
+.eds-btn.ghost_icon.compact {
+  /** TODO add compact shape css tokens */
+  --eds-btn-height: 32px;
+  --eds-btn-width: 32px;
+  --eds-btn-clickbound-top: 0px;
+}
+
+.eds-btn-inner {
+  display: grid;
+  grid-gap: 8px;
+  grid-auto-flow: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+
+.eds-btn-inner.full-width {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.eds-btn-inner.full-width > img:first-child,
+.eds-btn-inner.full-width > svg:first-child {
+  margin-right: 8px;
+}
+
+.eds-btn-inner.full-width > img:last-child,
+.eds-btn-inner.full-width > svg:last-child {
+  margin-left: 8px;
+}
+
+.eds-btn-inner.full-width > img:only-child,
+.eds-btn-inner.full-width > svg:only-child {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.eds-btn-inner.full-width > span:first-child {
+  margin-left: 32px;
+}
+
+.eds-btn-inner.full-width > span:last-child {
+  margin-right: 32px;
+}
+
+.eds-btn-inner.full-width > span:only-child {
+  margin-right: 0;
+  margin-left: 0;
+}

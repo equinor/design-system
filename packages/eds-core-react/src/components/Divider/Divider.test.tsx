@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import * as tokens from './Divider.tokens'
 import { Divider } from '.'
-import { trimSpaces } from '../../utils'
+import { trimSpaces } from '@equinor/eds-utils'
 
 const StyledDivider = styled(Divider)`
   position: relative;
@@ -30,6 +31,16 @@ describe('Divider', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Divider />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <>
+        <p>Some text</p>
+        <Divider />
+        <p>Some text</p>
+      </>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Has medium colour and medium spacing as default', () => {
     render(<Divider />)

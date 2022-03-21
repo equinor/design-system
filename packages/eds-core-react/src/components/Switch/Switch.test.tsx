@@ -3,6 +3,7 @@
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
@@ -18,6 +19,14 @@ describe('Switch', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Switch label="switch" />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Switch label="switch" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with aria-label', async () => {
+    const { container } = render(<Switch aria-label="switch" />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Can extend the css for the component', () => {
     const { container } = render(<StyledSwitch label="switch-test" />)

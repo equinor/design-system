@@ -2,6 +2,7 @@ import {
   forwardRef,
   useContext,
   useRef,
+  useState,
   useCallback,
   useEffect,
   ReactElement,
@@ -12,7 +13,7 @@ import {
   Children as ReactChildren,
 } from 'react'
 import styled from 'styled-components'
-import { useCombinedRefs } from '../../hooks'
+import { useCombinedRefs } from '@equinor/eds-utils'
 import { TabsContext } from './Tabs.context'
 import { Variants } from './Tabs.types'
 
@@ -36,11 +37,29 @@ const StyledTabList = styled.div.attrs(
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: ${({ variant }) => variants[variant] as VariantsRecord};
+  overflow-x: ${({ scrollable }) => (scrollable ? 'auto' : 'hidden')};
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+  @media (hover: none) {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: 0;
+    & ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
 `
 
 export type TabListProps = {
   /** Sets the width of the tabs */
   variant?: Variants
+  /** adds scrollbar if tabs overflow on non-touch devices */
+  scrollable?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 type TabChild = {
@@ -59,18 +78,24 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     handleChange,
     tabsId,
     variant = 'minWidth',
+    scrollable = false,
     tabsFocused,
   } = useContext(TabsContext)
 
   const currentTab = useRef(activeTab)
 
+  const [arrowNavigating, setArrowNavigating] = useState(false)
   const selectedTabRef = useCallback(
     (node: HTMLElement) => {
-      if (node !== null && tabsFocused) {
+      if (
+        (node !== null && tabsFocused) ||
+        (node !== null && arrowNavigating)
+      ) {
+        setArrowNavigating(false)
         node.focus()
       }
     },
-    [tabsFocused],
+    [arrowNavigating, tabsFocused],
   )
 
   useEffect(() => {
@@ -109,15 +134,18 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
     const i = direction === 'left' ? 1 : -1
     const nextTab =
       focusableChildren[focusableChildren.indexOf(currentTab.current) - i]
+    setArrowNavigating(true)
     handleChange(nextTab === undefined ? fallbackTab : nextTab)
   }
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const { key } = event
     if (key === 'ArrowLeft') {
+      event.preventDefault()
       handleTabsChange('left', lastFocusableChild)
     }
     if (key === 'ArrowRight') {
+      event.preventDefault()
       handleTabsChange('right', firstFocusableChild)
     }
   }
@@ -128,6 +156,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
       ref={ref}
       {...props}
       variant={variant}
+      scrollable={scrollable}
     >
       {Tabs}
     </StyledTabList>

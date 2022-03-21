@@ -2,7 +2,7 @@
 import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-
+import { axe } from 'jest-axe'
 import 'jest-styled-components'
 import styled from 'styled-components'
 
@@ -18,6 +18,20 @@ describe('Radio', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<Radio label="label" />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<Radio label="label" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with aria-label', async () => {
+    const { container } = render(<Radio aria-label="Aria label" />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with aria-labelledby', async () => {
+    const { container } = render(
+      <Radio label="label" aria-labelledby="Aria labelledby" />,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Can extend the css for the component', () => {
     render(<StyledRadio label="radio-test" />)

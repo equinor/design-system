@@ -1,12 +1,15 @@
 import { forwardRef } from 'react'
 import { createPortal } from 'react-dom'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { typographyTemplate, bordersTemplate } from '../../utils'
+import {
+  typographyTemplate,
+  bordersTemplate,
+  useToken,
+} from '@equinor/eds-utils'
 import { Paper } from '../Paper'
 import { Scrim } from '../Scrim'
 import { dialog as dialogToken } from './Dialog.tokens'
 import { useEds } from '../EdsProvider'
-import { useToken } from '../../hooks'
 
 const StyledDialog = styled(Paper).attrs<DialogProps>({
   tabIndex: 0,

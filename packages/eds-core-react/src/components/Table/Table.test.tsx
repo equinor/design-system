@@ -2,6 +2,7 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import { Table } from '.'
 import styled from 'styled-components'
 import { tableCell as dataCellToken } from './DataCell/DataCell.tokens'
@@ -59,6 +60,18 @@ describe('Table', () => {
     )
 
     expect(asFragment).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <Table>
+        <Head>
+          <Row>
+            <Cell></Cell>
+          </Row>
+        </Head>
+      </Table>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Can render a cell as a header cell', () => {
     const text = 'Name'

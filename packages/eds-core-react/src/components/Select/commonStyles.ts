@@ -4,7 +4,7 @@ import { List } from '../List'
 import { Button } from '../Button'
 import styled, { css } from 'styled-components'
 import { select as selectToken } from './Select.tokens'
-import { typographyTemplate, bordersTemplate } from '../../utils'
+import { typographyTemplate, bordersTemplate } from '@equinor/eds-utils'
 
 const {
   entities: { button: buttonToken },

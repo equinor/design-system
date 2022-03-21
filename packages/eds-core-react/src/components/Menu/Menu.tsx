@@ -11,10 +11,9 @@ import {
   useGlobalKeyPress,
   useIsMounted,
   useToken,
-} from '../../hooks'
-import { bordersTemplate } from '../../utils'
+  bordersTemplate,
+} from '@equinor/eds-utils'
 import { menu as tokens } from './Menu.tokens'
-import type { FocusTarget } from './Menu.types'
 import { useEds } from '../EdsProvider'
 
 type MenuPaperProps = {
@@ -25,7 +24,7 @@ const { border } = tokens
 
 const MenuPaper = styled(Paper)<MenuPaperProps>`
   position: absolute;
-  z-index: 300;
+  z-index: 1400;
   width: fit-content;
   min-width: fit-content;
   ${bordersTemplate(border)};
@@ -47,13 +46,41 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
     },
     ref,
   ) {
-    const { setOnClose, onClose } = useMenu()
+    const { setOnClose, onClose, setInitialFocus } = useMenu()
 
     useEffect(() => {
       if (onClose === null && onCloseCallback) {
         setOnClose(onCloseCallback)
       }
     }, [onClose, onCloseCallback, setOnClose])
+
+    useEffect(() => {
+      const openWithKey = (e: KeyboardEvent) => {
+        const { key } = e
+        //activate menu with arrows according to wai-aria best practices
+        if (key === 'ArrowDown' || key === 'ArrowUp') {
+          e.preventDefault()
+          e.stopPropagation()
+          anchorEl.dispatchEvent(new Event('click', { bubbles: true }))
+        }
+        switch (key) {
+          case 'Enter':
+          case 'ArrowDown':
+            setInitialFocus('first')
+            break
+          case 'ArrowUp':
+            setInitialFocus('last')
+            break
+          default:
+            break
+        }
+      }
+      if (anchorEl) anchorEl.addEventListener('keydown', openWithKey)
+      return () => {
+        if (anchorEl) anchorEl.removeEventListener('keydown', openWithKey)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [anchorEl])
 
     useOutsideClick(containerEl, (e: MouseEvent) => {
       if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
@@ -91,8 +118,6 @@ export type MenuProps = {
   anchorEl?: HTMLElement | null
   /** Is Menu open */
   open: boolean
-  /** Which Menu child to focus when open */
-  focus?: FocusTarget
   /** onClose handler */
   onClose?: () => void
   /** Menu placement relative to anchorEl */
@@ -114,13 +139,12 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
     return () => setStoredAnchorEl(null)
   }, [anchorEl, open])
 
-  const { styles, attributes } = usePopper(
-    storedAnchorEl,
-    containerEl,
-    null,
+  const { styles, attributes } = usePopper({
+    anchorEl: storedAnchorEl,
+    popperEl: containerEl,
     placement,
-    4,
-  )
+    offset: 4,
+  })
 
   const props = {
     open,

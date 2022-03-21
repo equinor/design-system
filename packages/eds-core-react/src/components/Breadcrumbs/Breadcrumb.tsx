@@ -47,7 +47,7 @@ export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
     const crumb = (
       <StyledTypography
         link={isHrefDefined}
-        as={isHrefDefined ? null : 'span'}
+        forwardedAs={isHrefDefined ? null : 'span'}
         variant="body_short"
         {...props}
       >

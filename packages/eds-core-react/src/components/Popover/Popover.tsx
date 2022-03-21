@@ -7,15 +7,16 @@ import {
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Paper } from '../Paper'
-import { typographyTemplate, bordersTemplate } from '../../utils'
 import {
+  typographyTemplate,
+  bordersTemplate,
   usePopper,
   useOutsideClick,
   Placement,
   useGlobalKeyPress,
   useCombinedRefs,
   useToken,
-} from '../../hooks'
+} from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
 
@@ -34,7 +35,7 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
     max-height: ${theme.maxHeight};
     max-width: ${theme.maxWidth};
     ${bordersTemplate(theme.border)}
-    z-index: 300;
+    z-index: 1400;
 
     .arrow {
       z-index: -1;
@@ -148,12 +149,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       return () => setStoredAnchorEl(null)
     }, [anchorEl, open])
 
-    const { styles, attributes } = usePopper(
-      storedAnchorEl,
+    const { styles, attributes } = usePopper({
+      anchorEl: storedAnchorEl,
       popperEl,
       arrowRef,
       placement,
-    )
+    })
 
     const props = {
       open,

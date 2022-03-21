@@ -1,7 +1,13 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen } from '../../test'
-import { waitFor } from '@testing-library/react'
+import {
+  render,
+  cleanup,
+  screen,
+  waitFor,
+  act,
+} from '@equinor/eds-utils/src/test'
 import '@testing-library/jest-dom'
+import { axe } from 'jest-axe'
 import 'jest-styled-components'
 import styled from 'styled-components'
 import { Popover } from '.'
@@ -28,6 +34,21 @@ describe('Popover', () => {
     const container = screen.getByTestId('popover')
 
     await waitFor(() => expect(container).toMatchSnapshot())
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <TestPopover open>
+        <Popover.Title>Title Text</Popover.Title>
+        <Popover.Content>Content Text</Popover.Content>
+        <Popover.Actions>
+          <button type="button">OK</button>
+        </Popover.Actions>
+      </TestPopover>,
+    )
+    await act(async () => {
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
 
   it('can extend the css for the component', async () => {

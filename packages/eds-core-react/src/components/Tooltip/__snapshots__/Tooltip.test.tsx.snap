@@ -15,7 +15,7 @@ exports[`Tooltip Matches snapshot 1`] = `
   padding-bottom: 8px;
   border-radius: 4px;
   background: var(--eds_ui_background__overlay,rgba(0,0,0,0.8));
-  z-index: 350;
+  z-index: 1500;
   white-space: nowrap;
 }
 

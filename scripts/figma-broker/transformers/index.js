@@ -16,13 +16,12 @@ export const toFocus = (figmaNode) => {
     : figmaNode
   const { strokeDashes, strokes } = focus
   const stroke = strokes.find(withType('solid')) || fallback
-  const [dashWidth] = strokeDashes
   const style = typeof strokeDashes === 'undefined' ? '' : 'dashed'
 
   return removeNilAndEmpty({
     style,
     color: fillToRgba(stroke),
-    width: px(dashWidth),
+    width: '2px',
   })
 }
 

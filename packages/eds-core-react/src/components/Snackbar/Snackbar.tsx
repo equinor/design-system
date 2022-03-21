@@ -3,12 +3,12 @@ import * as ReactDom from 'react-dom'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { snackbar as SnackbarToken } from './Snackbar.tokens'
 import {
+  useToken,
   typographyTemplate,
   spacingsTemplate,
   bordersTemplate,
-} from '../../utils'
+} from '@equinor/eds-utils'
 import { Paper } from '../Paper'
-import { useToken } from '../../hooks'
 import { useEds } from '../EdsProvider'
 
 type StyledProps = Pick<SnackbarProps, 'placement'>
@@ -22,7 +22,7 @@ const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, placement }) => {
     ${typographyTemplate(theme.typography)}
     min-height: ${theme.minHeight};
     box-sizing: border-box;
-    z-index: 300;
+    z-index: 1400;
 
     ${{
       top: placement.includes('top')
@@ -84,8 +84,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
     ref,
   ) {
     const [visible, setVisible] = useState(open)
-    const timer = useRef<number>()
-    const { setTimeout, clearTimeout } = window
+    const timer = useRef<ReturnType<typeof setTimeout>>()
 
     useEffect(() => {
       setVisible(open)
@@ -99,7 +98,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       }, autoHideDuration)
 
       return () => clearTimeout(timer.current)
-    }, [open, autoHideDuration, setVisible, onClose, clearTimeout, setTimeout])
+    }, [open, autoHideDuration, setVisible, onClose])
 
     const props = {
       ref,

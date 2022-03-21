@@ -1,6 +1,6 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { bordersTemplate, spacingsTemplate } from '../../utils'
+import { bordersTemplate, spacingsTemplate } from '@equinor/eds-utils'
 
 export type AccordionPanelProps = {
   /** The ID of the element that controls the panel */

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 import { Scrim } from '.'
@@ -35,6 +36,10 @@ describe('Scrim', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(<DismissableScrim />)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Shoud pass a11y test', async () => {
+    const { container } = render(<DismissableScrim />)
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Is dismissable with button click', () => {
     render(<DismissableScrim data-testid="scrim" />)

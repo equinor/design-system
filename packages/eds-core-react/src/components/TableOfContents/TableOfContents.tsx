@@ -2,10 +2,9 @@ import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { List } from '../List'
 import { Typography } from '../Typography'
-import { typographyTemplate } from '../../utils'
+import { typographyTemplate, useToken } from '@equinor/eds-utils'
 import { tableOfContents as tableOfContentToken } from './TableOfContents.tokens'
 import { useEds } from '../EdsProvider'
-import { useToken } from '../../hooks'
 
 export type TableOfContentsProps = {
   /** Sticky functionality */

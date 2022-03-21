@@ -16,7 +16,6 @@ exports[`Chips Matches snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  z-index: 10;
   border: 1px solid transparent;
   border-radius: 100px;
   padding-left: 4px;
@@ -39,13 +38,13 @@ exports[`Chips Matches snapshot 1`] = `
 }
 
 .c0[data-focus-visible-added]:focus {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
-  outline-offset: 2px;
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 3px;
 }
 
 .c0:focus-visible {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
-  outline-offset: 2px;
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 3px;
 }
 
 @media (hover:hover) and (pointer:fine) {
@@ -63,7 +62,7 @@ exports[`Chips Matches snapshot 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="Icon__StyledSvg-sc-6evbi1-0"
+      class=""
       fill="currentColor"
       height="16px"
       viewBox="0 0 16 16"
@@ -71,7 +70,7 @@ exports[`Chips Matches snapshot 1`] = `
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        class="Icon__StyledPath-sc-6evbi1-1"
+        class=""
         clip-rule="evenodd"
         d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
         data-testid="eds-icon-path"

@@ -2,6 +2,7 @@
 import { render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { topbar as topbarToken } from './TopBar.tokens'
 import { TopBar } from '.'
@@ -37,6 +38,18 @@ describe('TopBar', () => {
     )
 
     expect(asFragment).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <TopBar>
+        <Header>Header tex</Header>
+        <CustomContent>Content text</CustomContent>
+        <Actions>
+          <p>Icon</p>
+        </Actions>
+      </TopBar>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('Has correct height', () => {
     render(

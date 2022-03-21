@@ -1,6 +1,10 @@
 import { forwardRef, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { outlineTemplate, spacingsTemplate, bordersTemplate } from '../../utils'
+import {
+  outlineTemplate,
+  spacingsTemplate,
+  bordersTemplate,
+} from '@equinor/eds-utils'
 
 const StyledTab = styled.button.attrs<TabProps>(
   ({ active = false, disabled = false }) => ({
@@ -33,6 +37,9 @@ const StyledTab = styled.button.attrs<TabProps>(
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow-x: hidden;
+
+    scroll-snap-align: end;
+    scroll-snap-stop: always;
 
     &:focus {
       outline: none;

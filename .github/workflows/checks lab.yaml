@@ -6,6 +6,7 @@ on:
       - develop
     paths:
       - 'packages/eds-lab-react/**'
+      - 'packages/eds-utils/**'
   push:
     branches:
       - develop

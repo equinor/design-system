@@ -32,6 +32,9 @@ const {
       compact: { icon_button: compactIconButton },
     },
   },
+  interactions: {
+    focused: { width: focusOutlineWidth },
+  },
 } = tokens
 
 export type SwitchToken = ComponentToken
@@ -137,7 +140,7 @@ export const comfortable: SwitchToken = {
     },
     focus: {
       outline: {
-        width: '1px',
+        width: focusOutlineWidth,
         type: 'outline',
         style: 'dashed',
         color: focusOutlineColor,

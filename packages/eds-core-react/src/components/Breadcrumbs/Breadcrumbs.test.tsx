@@ -2,6 +2,7 @@
 import { render, cleanup, fireEvent, act, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Breadcrumbs } from '.'
 
@@ -23,6 +24,16 @@ describe('Breadcrumbs', () => {
       </Breadcrumbs>,
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <Breadcrumbs>
+        <Breadcrumb href="#">Label 1</Breadcrumb>
+        <Breadcrumb href="#">Label 2</Breadcrumb>
+        <Breadcrumb href="#">Label 3</Breadcrumb>
+      </Breadcrumbs>,
+    )
+    expect(await axe(container)).toHaveNoViolations()
   })
   it('has aria label', () => {
     render(
