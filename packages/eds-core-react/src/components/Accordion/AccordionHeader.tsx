@@ -114,13 +114,13 @@ export type AccordionHeaderProps = {
   /** Accordion item toggle callback */
   onToggle?: () => void
 } & AccordionProps &
-  HTMLAttributes<HTMLDivElement>
+  HTMLAttributes<HTMLButtonElement>
 
 type AccordionChild = {
   type: { displayName: string }
 } & ReactElement
 
-const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
+const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
   function AccordionHeader(
     {
       parentIndex,
@@ -195,7 +195,7 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
     const newChildren = [chevron, headerChildren]
 
     return (
-      <StyledAccordionHeader as={headerLevel} {...props} ref={ref}>
+      <StyledAccordionHeader as={headerLevel}>
         <StyledAccordionHeaderButton
           isExpanded={isExpanded}
           parentIndex={parentIndex}
@@ -203,6 +203,8 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
           panelId={panelId}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
+          ref={ref}
+          {...props}
         >
           {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
         </StyledAccordionHeaderButton>
