@@ -48,12 +48,12 @@ exports[`Accordion Matches snapshot 1`] = `
 }
 
 .c1[data-focus-visible-added]:focus {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 2px;
 }
 
 .c1:focus-visible {
-  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 2px;
 }
 
@@ -96,7 +96,7 @@ exports[`Accordion Matches snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="Icon__StyledSvg-sc-6evbi1-0 c2"
+            class="c2"
             fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
             height="24px"
             viewBox="0 0 24 24"
@@ -104,7 +104,7 @@ exports[`Accordion Matches snapshot 1`] = `
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              class="Icon__StyledPath-sc-6evbi1-1"
+              class=""
               clip-rule="evenodd"
               d="m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6 1.41 1.41z"
               data-testid="eds-icon-path"
