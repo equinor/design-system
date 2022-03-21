@@ -24,7 +24,12 @@ const {
   entities: { chevron: chevronToken },
 } = tokens
 
-type StyledAccordionHeaderProps = {
+const StyledAccordionHeader = styled.div`
+  margin: 0;
+  padding: 0;
+`
+
+type StyledAccordionHeaderButtonProps = {
   /** The ID of the panel */
   panelId?: string
   /**  Is AccordionItem expanded */
@@ -35,56 +40,57 @@ type StyledAccordionHeaderProps = {
   parentIndex?: number
 }
 
-const StyledAccordionHeader = styled.div.attrs<StyledAccordionHeaderProps>(
-  ({ panelId, isExpanded, disabled }) => ({
-    'aria-expanded': isExpanded,
-    'aria-controls': panelId,
-    role: 'button',
-    'aria-disabled': isExpanded && disabled,
-    tabIndex: disabled ? -1 : 0,
-    disabled,
-  }),
-)<StyledAccordionHeaderProps>(({ theme, disabled, parentIndex }) => {
-  const {
-    entities: { header, icon: iconToken },
-    border,
-  } = theme
-  return css`
-    ${typographyTemplate(header.typography)}
-    ${bordersTemplate(border)}
-    ${spacingsTemplate(header.spacings)}
-    &[data-focus-visible-added]:focus {
-      ${outlineTemplate(header.states.focus.outline)}
-    }
-    &:focus-visible {
-      ${outlineTemplate(header.states.focus.outline)}
-    }
-    border-top: ${parentIndex === 0 ? null : 'none'};
-    background: ${header.background};
-    height: ${header.height};
-    margin: 0;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    ${disabled
-      ? css({
-          color: header.states.disabled.typography.color,
-          cursor: 'not-allowed',
-        })
-      : css({
-          color: header.typography.color,
-          cursor: 'pointer',
-          '@media (hover: hover) and (pointer: fine)': {
-            ':hover': {
-              background: header.states.hover.background,
+const StyledAccordionHeaderButton =
+  styled.button.attrs<StyledAccordionHeaderButtonProps>(
+    ({ panelId, isExpanded, disabled }) => ({
+      'aria-expanded': isExpanded,
+      'aria-controls': panelId,
+      'aria-disabled': isExpanded && disabled,
+      tabIndex: disabled ? -1 : 0,
+      disabled,
+    }),
+  )<StyledAccordionHeaderButtonProps>(({ theme, disabled, parentIndex }) => {
+    const {
+      entities: { header, icon: iconToken },
+      border,
+    } = theme
+    return css`
+      ${typographyTemplate(header.typography)}
+      ${bordersTemplate(border)}
+      ${spacingsTemplate(header.spacings)}
+      &[data-focus-visible-added]:focus {
+        ${outlineTemplate(header.states.focus.outline)}
+      }
+      &:focus-visible {
+        ${outlineTemplate(header.states.focus.outline)}
+      }
+      border-top: ${parentIndex === 0 ? null : 'none'};
+      width: 100%;
+      background: ${header.background};
+      height: ${header.height};
+      margin: 0;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      ${disabled
+        ? css({
+            color: header.states.disabled.typography.color,
+            cursor: 'not-allowed',
+          })
+        : css({
+            color: header.typography.color,
+            cursor: 'pointer',
+            '@media (hover: hover) and (pointer: fine)': {
+              ':hover': {
+                background: header.states.hover.background,
+              },
             },
-          },
-        })}
-    > svg {
-      color: ${iconToken.typography.color};
-    }
-  `
-})
+          })}
+      > svg {
+        color: ${iconToken.typography.color};
+      }
+    `
+  })
 
 type StyledIconProps = Omit<AccordionProps, 'headerLevel'>
 
@@ -189,18 +195,17 @@ const AccordionHeader = forwardRef<HTMLDivElement, AccordionHeaderProps>(
     const newChildren = [chevron, headerChildren]
 
     return (
-      <StyledAccordionHeader
-        isExpanded={isExpanded}
-        parentIndex={parentIndex}
-        as={headerLevel}
-        disabled={disabled}
-        {...props}
-        panelId={panelId}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        ref={ref}
-      >
-        {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
+      <StyledAccordionHeader as={headerLevel} {...props} ref={ref}>
+        <StyledAccordionHeaderButton
+          isExpanded={isExpanded}
+          parentIndex={parentIndex}
+          disabled={disabled}
+          panelId={panelId}
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
+        >
+          {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
+        </StyledAccordionHeaderButton>
       </StyledAccordionHeader>
     )
   },
