@@ -1,0 +1,51 @@
+
+import { Story, PropsTable, Links } from './../../../.storybook/components'
+import { Button  } from '.'
+
+
+# Button 
+Buttons allow users to take action with a single click or tap
+
+<Links ariaUrl="https://www.w3.org/TR/wai-aria-practices/#button" 
+figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17394%3A47297" documentationUrl="https://eds.equinor.com/0b0c666ab/p/83185a-button/b/86826a"/>
+
+<Story id="inputs-button--introduction" />
+<PropsTable />
+
+## Installation 
+
+Install the packages in your project directory with your package manager (npm/yarn/pnpm).
+```shell
+npm install @equinor/eds-core-react
+```
+
+## Usage
+
+```tsx
+import { Button } from '@equinor/eds-core-react'
+<Button>Click me!</Button>
+```
+## Basic
+
+The `Button` come with four variants; `contained`, `outlined`, `ghost` and `ghost_icon`.
+<Story id="inputs-button--basic" />
+
+## Icon button
+
+The `ghost_icon` variant is meant for standalone icon buttons using the `<Icon>` component.
+
+
+<Story id="inputs-button--ghost-icon" />
+
+
+```tsx
+<Button variant="ghost_icon">
+  <Icon name="save" title="save action"></Icon>
+</Button>
+```
+## Compact
+
+Compact `Button` using `EdsProvider`
+
+
+<Story id="inputs-button--compact" />

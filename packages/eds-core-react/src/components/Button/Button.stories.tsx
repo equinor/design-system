@@ -4,14 +4,13 @@ import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { menu } from '@equinor/eds-icons'
+import { Stack as SBStack } from './../../../.storybook/components'
 // import { Group } from '../Group'
+import page from './Button.docs.mdx'
 
-const Wrapper = styled.div`
-  margin: 32px;
+const Stack = styled(SBStack)`
   display: grid;
-  grid-gap: 32px;
   grid-template-columns: repeat(4, fit-content(100%));
-  align-items: start;
 `
 
 const FullWidthWrapper = styled.div`
@@ -36,20 +35,32 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `Buttons allow users to take action with a single click or tap.
-        `,
-      },
+      page,
     },
   },
 } as Meta
 
-export const Default: Story<ButtonProps> = (args) => (
+export const Introduction: Story<ButtonProps> = (args) => (
   <Button {...args}>You can control me</Button>
 )
 
+Introduction.args = {
+  as: undefined,
+}
+
+export const Basic: Story<ButtonProps> = () => (
+  <Stack>
+    <Button>Contained</Button>
+    <Button variant="outlined">Outlined</Button>
+    <Button variant="ghost">Ghost</Button>
+    <Button variant="ghost_icon">
+      <Icon name="save" title="save action"></Icon>
+    </Button>
+  </Stack>
+)
+
 export const All: Story<ButtonProps> = () => (
-  <Wrapper>
+  <Stack>
     <Button>Primary</Button>
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
@@ -86,7 +97,7 @@ export const All: Story<ButtonProps> = () => (
     <Button variant="ghost_icon" disabled>
       <Icon name="save" title="save"></Icon>
     </Button>
-  </Wrapper>
+  </Stack>
 )
 
 export const Contained: Story<ButtonProps> = () => (
@@ -220,7 +231,7 @@ export const Ghost: Story<ButtonProps> = () => (
 )
 
 export const GhostIcon: Story<ButtonProps> = () => (
-  <Wrapper>
+  <Stack>
     <Button variant="ghost_icon">
       <Icon name="save" title="save action"></Icon>
     </Button>
@@ -233,7 +244,7 @@ export const GhostIcon: Story<ButtonProps> = () => (
     <Button variant="ghost_icon" disabled>
       <Icon name="save" title="save"></Icon>
     </Button>
-  </Wrapper>
+  </Stack>
 )
 
 export const Form: Story<ButtonProps> = () => {
@@ -327,14 +338,14 @@ export const Compact: Story<ButtonProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Wrapper>
+      <Stack>
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="ghost">Ghost</Button>
         <Button variant="ghost_icon">
           <Icon data={menu} title="Ghost icon menu"></Icon>
         </Button>
-      </Wrapper>
+      </Stack>
     </EdsProvider>
   )
 }
