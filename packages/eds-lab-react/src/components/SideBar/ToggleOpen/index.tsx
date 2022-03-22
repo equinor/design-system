@@ -1,10 +1,21 @@
 import React from 'react'
 import { Button, Icon, Tooltip, Typography } from '@equinor/eds-core-react'
-import { tokens } from '@equinor/eds-tokens'
+import { sidebar as tokens } from '../SideBar.tokens'
 import { first_page, last_page } from '@equinor/eds-icons'
 import styled from 'styled-components'
 
-const { colors, spacings, shape } = tokens
+const {
+  entities: {
+    toggleOpen: {
+      spacings: { right: mediumSpacing, top: mediumSmallSpacing },
+      typography: { color: iconColor },
+      states: {
+        hover: { background: expandHover },
+      },
+    },
+  },
+} = tokens
+
 interface ContainerProps {
   open?: boolean
 }
@@ -12,10 +23,10 @@ interface ContainerProps {
 const ToggleContainer = styled.div<ContainerProps>`
   display: ${(props) => (props.open ? 'grid' : 'flex')};
   grid-template-columns: repeat(10, 1fr);
-  grid-gap: ${spacings.comfortable.medium};
+  grid-gap: ${mediumSpacing};
   justify-content: center;
   margin-top: auto;
-  margin-bottom: ${spacings.comfortable.medium};
+  margin-bottom: ${mediumSpacing};
   ${(props) =>
     !props.open &&
     `
@@ -29,21 +40,21 @@ const LargeButton = styled.button`
   grid-column: 2 / 10;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: ${spacings.comfortable.medium};
+  grid-gap: ${mediumSpacing};
   align-items: center;
   background: none;
   border: none;
-  border-radius: ${shape.button.borderRadius};
-  padding: ${spacings.comfortable.medium_small};
-  margin-left: -${spacings.comfortable.medium};
-  margin-right: -${spacings.comfortable.medium};
+  border-radius: 4px;
+  padding: ${mediumSmallSpacing};
+  margin-left: -${mediumSpacing};
+  margin-right: -${mediumSpacing};
   > p {
     grid-column: 2;
     margin-left: -1px; // border size
   }
   &:hover {
     cursor: pointer;
-    background: ${colors.interactive.secondary__highlight.hex};
+    background: ${expandHover};
   }
 `
 
@@ -61,11 +72,7 @@ export const ToggleOpen: React.FC<ToggleOpenProps> = ({ isOpen, toggle }) => {
     return (
       <ToggleContainer open={isOpen}>
         <LargeButton onClick={toggle}>
-          <Icon
-            size={24}
-            data={first_page}
-            color={colors.text.static_icons__default.hex}
-          />
+          <Icon size={24} data={first_page} color={iconColor} />
           <Text variant="cell_text" group="table">
             Collapse
           </Text>
@@ -77,11 +84,7 @@ export const ToggleOpen: React.FC<ToggleOpenProps> = ({ isOpen, toggle }) => {
     <ToggleContainer open={isOpen}>
       <Tooltip title="Expand" placement="right">
         <Button onClick={toggle} color="secondary" variant="ghost_icon">
-          <Icon
-            size={24}
-            data={last_page}
-            color={colors.text.static_icons__default.hex}
-          />
+          <Icon size={24} data={last_page} color={iconColor} />
         </Button>
       </Tooltip>
     </ToggleContainer>

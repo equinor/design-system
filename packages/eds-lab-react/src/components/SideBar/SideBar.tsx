@@ -1,14 +1,13 @@
 import React, { forwardRef, useContext, useState } from 'react'
 import styled from 'styled-components'
-//import { tokens } from '@equinor/eds-tokens'
 import { sidebar as tokens } from './SideBar.tokens'
-import { spacingsTemplate, bordersTemplate } from '@equinor/eds-utils'
+import { bordersTemplate } from '@equinor/eds-utils'
 //import EquinorLogo from '../EquinorLogo'
 import { ToggleOpen } from './ToggleOpen'
 import { CreateItem } from './CreateItem'
 
 const { background, border, spacings } = tokens
-console.log(border)
+
 interface ContainerProps {
   open: boolean
   maxHeight?: string

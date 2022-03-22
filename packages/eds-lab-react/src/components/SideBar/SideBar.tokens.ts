@@ -19,21 +19,15 @@ const {
     },
     text: {
       static_icons__default: { rgba: expandTextColor },
-      static_icons__primary_white: { rgba: createTextColor },
+      static_icons__primary_white: { rgba: primaryWhite },
     },
   },
   spacings: {
     comfortable: { medium, large, medium_small },
   },
-  shape: {
-    icon_button: { borderRadius: iconBorderRadius },
-    button: { borderRadius: buttonBorderRadius },
-  },
 } = tokens
 
-type SideBarToken = ComponentToken
-
-export const sidebar: SideBarToken = {
+export const sidebar: ComponentToken = {
   background,
   spacings: {
     top: large,
@@ -47,16 +41,14 @@ export const sidebar: SideBarToken = {
     createItem: {
       background: createBtnColor,
       typography: {
-        color: createTextColor,
+        color: primaryWhite,
       },
       spacings: {
         right: large,
       },
       border: {
-        type: 'border',
-        color: borderColor,
-        width: '1px',
-        radius: iconBorderRadius,
+        type: 'bordergroup',
+        bottom: { color: borderColor, width: '1px', style: 'solid' },
       },
       states: {
         hover: {
@@ -68,12 +60,19 @@ export const sidebar: SideBarToken = {
       typography: {
         color: expandTextColor,
       },
+      border: {
+        type: 'bordergroup',
+        bottom: { color: borderColor, width: '1px', style: 'solid' },
+      },
       spacings: {
         bottom: medium,
       },
       states: {
         active: {
           background: menuActive,
+          typography: {
+            color: createBtnColor,
+          },
         },
         hover: {
           background: menuHover,
@@ -96,12 +95,12 @@ export const sidebar: SideBarToken = {
       },
     },
     toggleOpen: {
-      border: {
-        radius: buttonBorderRadius,
-      },
       spacings: {
         right: medium,
         top: medium_small,
+      },
+      typography: {
+        color: expandTextColor,
       },
       states: {
         hover: {

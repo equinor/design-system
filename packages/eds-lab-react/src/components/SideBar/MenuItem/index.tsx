@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react'
-import { tokens } from '@equinor/eds-tokens'
+import { sidebar as tokens } from '../SideBar.tokens'
+import { bordersTemplate } from '@equinor/eds-utils'
 import {
   Button,
   ButtonProps,
@@ -11,7 +12,26 @@ import styled from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
 import { useSideBar } from '../SideBar'
 
-const { colors, spacings } = tokens
+const {
+  entities: {
+    menuItem: {
+      border,
+      spacings: { bottom: mediumSpacing },
+      typography: { color: itemTextColor },
+      states: {
+        active: {
+          background: menuActiveBackground,
+          typography: { color: iconActive },
+        },
+        hover: { background: menuHoverBackground },
+        disabled: {
+          background: menuDisabledBackground,
+          typography: { color: menuDisabledText },
+        },
+      },
+    },
+  },
+} = tokens
 
 interface ContainerProps extends ButtonProps {
   active?: boolean
@@ -19,27 +39,24 @@ interface ContainerProps extends ButtonProps {
 }
 
 const Container = styled(Button)<ContainerProps>`
-  background: ${(props) =>
-    props.active
-      ? colors.interactive.primary__selected_highlight.hsla
-      : 'none'};
+  background: ${(props) => (props.active ? menuActiveBackground : 'none')};
   display: ${(props) => (props.open ? 'grid' : 'flex')};
   grid-template-columns: repeat(10, 1fr);
-  grid-gap: ${spacings.comfortable.medium};
+  grid-gap: ${mediumSpacing};
   justify-content: ${(props) => !props.open && 'center'};
   align-items: center;
-  border-bottom: 1px solid ${colors.ui.background__medium.hsla};
+  ${bordersTemplate(border)}
   text-decoration: none;
   min-height: 72px;
 
   &:hover {
     cursor: pointer;
-    background: ${colors.interactive.primary__selected_hover.hsla};
+    background: ${menuHoverBackground};
   }
 
   &:disabled {
-    background: ${colors.interactive.disabled__fill.hsla};
-    color: ${colors.interactive.disabled__text.hsla};
+    background: ${menuDisabledBackground};
+    color: ${menuDisabledText};
   }
 `
 
@@ -55,7 +72,7 @@ interface ItemTextProps {
 const ItemText = styled(Typography)<ItemTextProps>`
   font-weight: ${(props) => (props.active ? '500' : '400')};
   grid-column: 3 / -1;
-  color: ${colors.text.static_icons__default.hex};
+  color: ${itemTextColor};
   &::first-letter {
     text-transform: capitalize;
   }
@@ -83,9 +100,7 @@ export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
     const { isOpen } = useSideBar()
 
     const getIconColor = () => {
-      return isCurrentUrl()
-        ? colors.interactive.primary__resting.hsla
-        : colors.text.static_icons__default.hsla
+      return isCurrentUrl() ? iconActive : itemTextColor
     }
 
     if (isOpen) {
