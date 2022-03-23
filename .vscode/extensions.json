@@ -9,7 +9,6 @@
     "plievone.vscode-template-literal-editor",
     "bierner.lit-html",
     "stylelint.vscode-stylelint"
-    "deque-systems.vscode-axe-linter"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []

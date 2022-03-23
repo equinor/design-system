@@ -44,7 +44,6 @@
 	"styled-components.vscode-styled-components",
 	"seatonjiang.gitmoji-vscode",
 	"stylelint.vscode-stylelint"
-	"deque-systems.vscode-axe-linter"
 ],
   "forwardPorts": [9000],
   "portsAttributes": {
