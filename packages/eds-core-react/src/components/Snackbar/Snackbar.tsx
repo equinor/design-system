@@ -23,7 +23,6 @@ const StyledSnackbar = styled(Paper)<StyledProps>(({ theme, placement }) => {
     min-height: ${theme.minHeight};
     box-sizing: border-box;
     z-index: 1400;
-
     ${{
       top: placement.includes('top')
         ? theme.spacings.top

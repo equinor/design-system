@@ -21,7 +21,6 @@ type ContentProps = {
 const Content = styled.div<ContentProps>(({ theme, hasIcon }) => {
   return css`
     ${spacingsTemplate(theme.spacings)}
-
     display: grid;
     grid-template-columns: ${hasIcon ? 'min-content 1fr auto' : '1fr auto'};
     align-items: center;

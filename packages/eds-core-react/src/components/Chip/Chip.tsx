@@ -40,7 +40,6 @@ const StyledChips = styled.div.attrs<StyleProps>(
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   align-items: center;
-
   svg {
     fill: ${typography.color};
   }
@@ -48,17 +47,14 @@ const StyledChips = styled.div.attrs<StyleProps>(
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       color: ${states.hover.typography.color};
-
       svg {
         fill: ${states.hover.typography.color};
       }
     }
   }
-
   &:focus {
     outline: none;
   }
-
   &[data-focus-visible-added]:focus {
     ${outlineTemplate(states.focus.outline)}
   }
@@ -66,10 +62,8 @@ const StyledChips = styled.div.attrs<StyleProps>(
     ${outlineTemplate(states.focus.outline)}
   }
   ${bordersTemplate(border)}
-
   ${spacingsTemplate(spacings)}
   ${typographyTemplate(typography)}
-
   ${({ clickable }) =>
     clickable &&
     css`
@@ -79,7 +73,6 @@ const StyledChips = styled.div.attrs<StyleProps>(
         }
       }
     `}
-
   ${({ variant }) => {
     switch (variant) {
       case 'active':
@@ -109,7 +102,6 @@ const StyledChips = styled.div.attrs<StyleProps>(
         return ''
     }
   }}
-
   ${({ disabled }) =>
     disabled &&
     css`
@@ -130,13 +122,11 @@ const StyledChips = styled.div.attrs<StyleProps>(
         }
       }
     `}
-
   ${({ deletable }) =>
     deletable &&
     css`
       padding-right: 4px;
     `}
-
   ${({ onlyChild }) =>
     onlyChild
       ? css`

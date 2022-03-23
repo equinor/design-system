@@ -18,7 +18,6 @@ const StyledTableOfContents = styled.nav<TableOfContentsProps>(
     return css`
       margin-top: ${theme.spacings.top};
       margin-bottom: ${theme.spacings.bottom};
-
       ${sticky &&
       css`
         position: fixed;

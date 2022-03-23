@@ -8,6 +8,11 @@ type StyledProps = { isDisabled: boolean }
 const Input = styled(BaseInput)(
   ({ disabled, theme }) => css`
     /*  Track */
+    &:hover + span {
+      background-color: ${disabled
+        ? 'transparent'
+        : theme.states.hover.background};
+    }
     &:checked + span > span {
       background-color: ${disabled
         ? theme.states.disabled.background
@@ -19,11 +24,6 @@ const Input = styled(BaseInput)(
       background-color: ${disabled
         ? theme.states.disabled.background
         : theme.entities.handle.states.active.background};
-    }
-    &:hover + span {
-      background-color: ${disabled
-        ? 'transparent'
-        : theme.states.hover.background};
     }
     &:hover + span > span:last-child {
       background-color: ${disabled
@@ -43,7 +43,6 @@ const Track = styled.span<StyledProps>(
   }) => css`
     ${bordersTemplate(track.border)}
     border: none;
-
     width: ${track.width};
     height: ${track.height};
     background-color: ${track.background};

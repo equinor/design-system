@@ -28,8 +28,7 @@ const StyledTabList = styled(Tabs.List)`
   scrollbar-color: var(--track-color) var(--thumb-color);
   scrollbar-width: thin;
   padding-bottom: 8px;
-
-  // For Google Chrome/webkit
+  /* For Google Chrome/webkit */
   & ::-webkit-scrollbar {
     height: 8px;
   }

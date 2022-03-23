@@ -9,7 +9,6 @@ const StyledDialogTitle = styled.div(({ theme, children }) => {
     align-self: end;
     justify-self: start;
     margin-right: ${theme.entities.children.spacings.right};
-
     ${!children &&
     css`
       min-height: initial;

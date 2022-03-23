@@ -33,7 +33,6 @@ const StyledImage = styled.img<StyledImageProps>`
   height: 100%;
   text-align: center;
   color: transparent;
-
   ${({ disabled }) =>
     disabled &&
     css`

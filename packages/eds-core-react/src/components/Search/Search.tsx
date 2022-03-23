@@ -56,9 +56,7 @@ const Container = styled.span<ContainerProps>(
       svg {
         fill: ${icon.typography.color};
       }
-
       ${spacingsTemplate(spacings)}
-
       ${isFocused && bordersTemplate(states.focus.border)}
 
 
@@ -111,7 +109,6 @@ const SearchInput = styled(Input)(({ theme, disabled }) => {
     &[type='search']::-webkit-search-results-decoration {
       -webkit-appearance: none;
     }
-
     ${typographyTemplate(theme.typography)}
 
     &:focus {
@@ -140,7 +137,6 @@ const InsideButton = styled(Button)<InsideButtonProps>(
       right: ${button.spacings.right};
       height: ${button.height};
       width: ${button.width};
-
       ${isActive &&
       css`
         visibility: visible;

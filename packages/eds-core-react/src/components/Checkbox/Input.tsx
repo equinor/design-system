@@ -41,10 +41,10 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'checkbox' }) => ({
   &:focus {
     outline: none;
   }
-  &[data-focus-visible-added]:focus + svg {
+  &:focus-visible + svg {
     ${({ theme }) => outlineTemplate(theme.states.focus.outline)}
   }
-  &:focus-visible + svg {
+  &[data-focus-visible-added]:focus + svg {
     ${({ theme }) => outlineTemplate(theme.states.focus.outline)}
   }
   &:not(:checked) ~ svg path[name='checked'] {

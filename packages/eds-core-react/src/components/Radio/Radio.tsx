@@ -35,10 +35,10 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
     outline: none;
   }
 
-  &[data-focus-visible-added]:focus + svg {
+  &:focus-visible + svg {
     ${({ theme }) => outlineTemplate(theme.states.focus.outline)}
   }
-  &:focus-visible + svg {
+  &[data-focus-visible-added]:focus + svg {
     ${({ theme }) => outlineTemplate(theme.states.focus.outline)}
   }
 

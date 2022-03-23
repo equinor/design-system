@@ -12,7 +12,6 @@ const StyledCardHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 ${spacings.right} 0 ${spacings.left};
-
   > :not(:first-child) {
     margin-left: ${spacings.left};
   }

@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(2, 320px);
-  grid-gap: 32px 32px;
+  grid-gap: 32px;
   background: #ebebeb;
 `
 

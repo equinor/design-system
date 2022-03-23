@@ -44,21 +44,21 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
     }
     &[data-popper-placement^='top'] > .arrow {
       bottom: ${theme.entities.arrow.spacings.bottom};
-      .arrowSvg {
+      .arrow-svg {
         transform: rotate(-90deg);
       }
     }
 
     &[data-popper-placement^='bottom'] > .arrow {
       top: ${theme.entities.arrow.spacings.top};
-      .arrowSvg {
+      .arrow-svg {
         transform: rotate(90deg);
       }
     }
 
     &[data-popper-placement^='left'] > .arrow {
       right: ${theme.entities.arrow.spacings.right};
-      .arrowSvg {
+      .arrow-svg {
         transform: rotate(-180deg);
       }
     }
@@ -102,7 +102,7 @@ const PopoverArrow = styled.svg<ArrowProps>(({ theme }) => {
     height: ${theme.entities.arrow.height};
     position: absolute;
     fill: ${theme.background};
-    filter: drop-shadow(-4px 0px 2px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(-4px 0 2px rgba(0, 0, 0, 0.2));
   `
 })
 
@@ -179,7 +179,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             style={styles.arrow}
             className="arrow"
           >
-            <PopoverArrow className="arrowSvg">
+            <PopoverArrow className="arrow-svg">
               <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
             </PopoverArrow>
           </ArrowWrapper>

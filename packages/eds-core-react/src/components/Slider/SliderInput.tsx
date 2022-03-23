@@ -27,7 +27,7 @@ const thumb = css`
 
 const thumbHover = css`
   @media (hover: hover) and (pointer: fine) {
-    box-shadow: 0px 0px 0px 6px ${handle.states.hover.background};
+    box-shadow: 0 0 0 6px ${handle.states.hover.background};
     border-color: ${handle.states.hover.border.type === 'border' &&
     handle.states.hover.border.color};
   }
@@ -60,7 +60,6 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
   ::-moz-focus-outer {
     border: 0;
   }
-
   width: 100%;
   background: transparent;
   background: none;
@@ -78,6 +77,17 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
     &::-moz-range-thumb {
       ${outlineTemplate(handle.states.focus.outline)};
     }
+  }
+  /* Must be seperated code blocks for webkit and moz otherwise nothing will be applied */
+  &::-webkit-slider-thumb {
+    ${thumb}
+    margin-top: 6px;
+  }
+  &::-moz-range-thumb {
+    ${thumb}
+    /* Avoid too small circles, dunno why this is happening :/  */
+    height: 8px;
+    width: 8px;
   }
   &:focus-visible {
     z-index: 2;
@@ -105,6 +115,12 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
       ${thumbDisabled}
     }
   }
+  &::-webkit-slider-runnable-track {
+    ${track}
+  }
+  &::-moz-range-track {
+    ${track}
+  }
   &:disabled:hover,
   &:disabled:active {
     &::-webkit-slider-thumb {
@@ -121,29 +137,8 @@ const StyledSliderInput = styled.input.attrs<SliderInput>(() => ({
     }
   }
 
-  &:before,
-  &:after {
-  }
   &:after {
     right: 0;
-  }
-
-  /* Must be seperated code blocks for webkit and moz otherwise nothing will be applied */
-  &::-webkit-slider-thumb {
-    ${thumb}
-    margin-top: 6px;
-  }
-  &::-moz-range-thumb {
-    ${thumb}
-    /* Avoid too small circles, dunno why this is happening :/  */
-    height: 8px;
-    width: 8px;
-  }
-  &::-webkit-slider-runnable-track {
-    ${track}
-  }
-  &::-moz-range-track {
-    ${track}
   }
 `
 

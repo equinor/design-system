@@ -27,7 +27,6 @@ const StyledTooltip = styled.div<{ open: boolean }>`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   ${bordersTemplate(tokens.border)}
-
   background: ${tokens.background};
   z-index: 1500;
   white-space: nowrap;
@@ -39,21 +38,21 @@ const StyledTooltip = styled.div<{ open: boolean }>`
   }
   &[data-popper-placement^='top'] > .arrow {
     bottom: ${tokens.entities.arrow.spacings.bottom};
-    .arrowSvg {
+    .arrow-svg {
       transform: rotate(-90deg);
     }
   }
 
   &[data-popper-placement^='bottom'] > .arrow {
     top: ${tokens.entities.arrow.spacings.top};
-    .arrowSvg {
+    .arrow-svg {
       transform: rotate(90deg);
     }
   }
 
   &[data-popper-placement^='left'] > .arrow {
     right: ${tokens.entities.arrow.spacings.right};
-    .arrowSvg {
+    .arrow-svg {
       transform: rotate(-180deg);
     }
   }
@@ -199,7 +198,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 style={styles.arrow}
                 className="arrow"
               >
-                <TooltipArrow className="arrowSvg">
+                <TooltipArrow className="arrow-svg">
                   <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
                 </TooltipArrow>
               </ArrowWrapper>

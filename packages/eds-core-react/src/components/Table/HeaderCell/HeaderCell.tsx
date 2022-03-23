@@ -54,7 +54,6 @@ const StyledTableCell = styled.th((props: BaseProps) => {
   ${bordersTemplate(theme.border)}
   ${sortStylingHover}
   ${sortStylingActive}
-
   ${sticky
       ? css`
           position: sticky;

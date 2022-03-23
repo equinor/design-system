@@ -37,10 +37,8 @@ const Item = styled.button.attrs<StyleAttrsProps>(({ isFocused }) => ({
   width: auto;
   position: relative;
   z-index: 2;
-
   ${typographyTemplate(typography)}
   ${({ theme }) => spacingsTemplate(theme.entities.item.spacings)}
-
   ${({ active }) =>
     active &&
     css`
@@ -49,7 +47,6 @@ const Item = styled.button.attrs<StyleAttrsProps>(({ isFocused }) => ({
         color: ${activeToken.typography.color};
       }
     `}
-
   ${({ disabled }) =>
     disabled
       ? css`

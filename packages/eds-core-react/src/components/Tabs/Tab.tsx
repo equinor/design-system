@@ -28,7 +28,6 @@ const StyledTab = styled.button.attrs<TabProps>(
     font-size: 1rem;
     height: ${tab.height};
     ${spacingsTemplate(tab.spacings)}
-
     color: ${active
       ? tab.states.active.typography.color
       : tab.typography.color};
@@ -37,7 +36,6 @@ const StyledTab = styled.button.attrs<TabProps>(
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow-x: hidden;
-
     scroll-snap-align: end;
     scroll-snap-stop: always;
 
@@ -72,7 +70,6 @@ const StyledTab = styled.button.attrs<TabProps>(
             `}
       }
     }
-
     ${disabled
       ? bordersTemplate(tab.states.disabled.border)
       : bordersTemplate(tab.border)}

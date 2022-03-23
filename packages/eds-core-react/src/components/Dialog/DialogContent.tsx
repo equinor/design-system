@@ -18,7 +18,6 @@ const StyledDialogContent = styled.div<DialogContentProps>(
       &:last-child {
         padding-bottom: ${theme.entities.children.spacings.bottom};
       }
-
       ${scrollable &&
       css`
         min-height: initial;

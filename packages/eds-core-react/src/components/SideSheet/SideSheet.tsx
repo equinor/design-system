@@ -33,7 +33,6 @@ const StyledSideSheet = styled.div<StyleProps>`
   box-sizing: border-box;
   background: ${background};
   width: ${({ width }) => width};
-
   ${bordersTemplate(border)}
   ${spacingsTemplate(spacings)};
 `

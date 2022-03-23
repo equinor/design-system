@@ -13,9 +13,6 @@ const Input = styled(BaseInput)(
       entities: { handle, track },
     },
   }) => css`
-    &[data-focus-visible-added]:focus + span {
-      ${outlineTemplate(states.focus.outline)}
-    }
     &:focus-visible + span {
       ${outlineTemplate(states.focus.outline)}
     }
@@ -24,6 +21,9 @@ const Input = styled(BaseInput)(
       background-color: ${disabled
         ? states.disabled.background
         : track.states.active.background};
+    }
+    &[data-focus-visible-added]:focus + span {
+      ${outlineTemplate(states.focus.outline)}
     }
     /* Handle */
     &:checked + span > span:last-child {

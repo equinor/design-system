@@ -1,6 +1,58 @@
 {
+  "processors": [
+    "stylelint-processor-styled-components"
+  ],
+
   "extends": [
     "stylelint-config-standard",
+    "stylelint-config-styled-components",
     "stylelint-config-prettier"
-  ]
+  ],
+
+  "rules": {
+    "custom-property-pattern": null,
+    "rule-empty-line-before": [
+      "always-multi-line", {
+        "ignore": [
+          "after-comment",
+          "inside-block"
+        ]
+      }
+    ],
+    "color-function-notation": "legacy",
+    "alpha-value-notation": "number",
+    "value-keyword-case": [
+      "lower", {
+        "ignoreKeywords": [
+          "dummyValue"
+        ]
+      }
+    ],
+    "declaration-empty-line-before": "never",
+    "font-family-no-missing-generic-family-keyword": [
+      true, {
+        "ignoreFontFamilies": [
+          "Equinor"
+        ]
+      }
+    ],
+    "comment-empty-line-before": "never",
+    "no-descending-specificity": [
+      true, {
+        "ignore": [
+          "selectors-within-list"
+        ]
+      }
+    ],
+    "property-no-vendor-prefix": [
+      true, {
+        "ignoreProperties": [
+          "appearance"
+        ]
+      }
+    ],
+    "selector-pseudo-element-colon-notation": null,
+    "color-hex-length": "long",
+    "keyframes-name-pattern": ""
+  }
 }

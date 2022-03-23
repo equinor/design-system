@@ -31,7 +31,6 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
     border: none;
     height: ${theme.minHeight};
     box-shadow: ${boxShadow};
-
     ${outlineTemplate(activeOutline)}
     ${typographyTemplate(theme.typography)}
     ${spacingsTemplate(theme.spacings)};

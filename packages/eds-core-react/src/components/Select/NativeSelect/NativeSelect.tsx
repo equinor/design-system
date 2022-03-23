@@ -19,15 +19,13 @@ const StyledSelect = styled.select`
   border: none;
   border-radius: 0;
   box-shadow: ${tokens.boxShadow};
-
   ${typographyTemplate(tokens.typography)}
   ${({ theme }) =>
     css`
       height: ${theme.minHeight};
       ${spacingsTemplate(theme.entities.input.spacings)}
     `}
-
-  padding-right: calc(${tokens.entities.input.spacings.right} *2 + ${tokens
+  padding-right: calc(${tokens.entities.input.spacings.right} * 2 + ${tokens
     .entities.icon.width});
   display: block;
   margin: 0;

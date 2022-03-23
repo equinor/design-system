@@ -72,7 +72,6 @@ const StyledTextarea = styled.textarea<StyledProps>`
   background: ${input.background};
   height: auto;
   ${typographyTemplate(input.typography)}
-
   ${Variation}
   &::placeholder {
     color: ${input.entities.placeholder.typography.color};

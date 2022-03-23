@@ -10,33 +10,26 @@ const FullWidthInner = styled.span`
   height: 100%;
   display: flex;
   align-items: center;
-
   > :is(svg, img) {
     margin-top: var(--eds_button__margin_y, inherit);
     margin-bottom: var(--eds_button__margin_y, inherit);
   }
-
   > :is(svg, img):first-child {
     margin-right: var(--eds_button__fullwidth__icon__margin_x, 8px);
   }
-
   > :is(svg, img):last-child {
     margin-left: var(--eds_button__fullwidth__icon__margin_x, 8px);
   }
-
   > :is(svg, img):only-child {
     margin-left: auto;
     margin-right: auto;
   }
-
   > span:first-child {
     margin-left: var(--eds_button__fullwidth__margin_x, 32px);
   }
-
   > span:last-child {
     margin-right: var(--eds_button__fullwidth__margin_x, 32px);
   }
-
   > span:only-child {
     margin-right: 0;
     margin-left: 0;

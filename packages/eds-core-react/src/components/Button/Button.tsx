@@ -51,7 +51,6 @@ const Inner = styled.span`
   align-items: center;
   height: 100%;
   justify-content: center;
-
   & > :is(svg, img) {
     margin-top: var(--eds_button__icon__margin_y, 0);
     margin-bottom: var(--eds_button__icon__margin_y, 0);
@@ -72,15 +71,12 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
     background: ${theme.background};
     height: ${theme.height};
     width: ${theme.width};
-
     svg {
       justify-self: center;
     }
-
     ${spacingsTemplate(theme.spacings)}
     ${bordersTemplate(theme.border)}
     ${typographyTemplate(theme.typography)}
-
     &::before {
       position: absolute;
       top: 0;
@@ -89,7 +85,6 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
       min-height: auto;
       content: '';
     }
-
     &::after {
       position: absolute;
       top: -${clickbound?.offset?.top};
@@ -106,11 +101,9 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
         ${bordersTemplate(hover?.border)};
       }
     }
-
     &:focus {
       outline: none;
     }
-
     &[data-focus-visible-added]:focus {
       ${outlineTemplate(focus.outline)}
     }
@@ -121,7 +114,6 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
     &::-moz-focus-inner {
       border: 0;
     }
-
     &:disabled {
       cursor: not-allowed;
       background: ${disabled.background};

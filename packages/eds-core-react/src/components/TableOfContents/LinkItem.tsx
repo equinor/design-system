@@ -45,7 +45,6 @@ const StyledLinkItem = styled.li(({ theme }) => {
         &:hover {
           ${typographyTemplate(theme.states.hover.typography)}
           background: ${theme.states.hover.background};
-
           ${bordersTemplate(theme.states.hover.border)}
           svg {
             fill: ${theme.states.hover.entities.icon.background};

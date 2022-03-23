@@ -17,7 +17,6 @@ export const Icon = styled(Icon_)<IconProps>`
   cursor: pointer;
   padding: 1px;
   ${bordersTemplate(enabled.entities.icon.border)}
-
   z-index: 11;
 
   &:hover {
@@ -40,7 +39,6 @@ export const Icon = styled(Icon_)<IconProps>`
       }
     }};
   }
-
   ${({ disabled }) =>
     disabled &&
     css`

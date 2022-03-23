@@ -14,7 +14,6 @@ const StyledDialogActions = styled.div<DialogActionsProps>(
       &:last-child {
         padding-bottom: ${theme.entities.children.spacings.bottom};
       }
-
       ${!children &&
       css`
         min-height: initial;

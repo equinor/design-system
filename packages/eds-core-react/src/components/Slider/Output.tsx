@@ -20,7 +20,7 @@ const StyledOutput = styled.output<StyledProps>`
   padding: 0 5px;
   top: ${track.spacings.top};
   pointer-events: none;
-  /* Calculate the distance on the track*/
+  /* Calculate the distance on the track */
   margin-left: calc((var(--val) - var(--min)) / var(--dif) * var(--realWidth));
   /* Idea: Transform negative ((width of outline elem - handle width) / 2 (half of width for centering)) */
   transform: translate(calc(-1 * calc(var(--realWidth) / 2)));

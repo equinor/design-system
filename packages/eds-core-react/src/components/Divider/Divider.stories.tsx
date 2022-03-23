@@ -21,7 +21,7 @@ export default {
 
 const Wrapper = styled.div`
   padding: 32px;
-  background-color: #999;
+  background-color: #999999;
 `
 
 export const Default: Story<DividerProps> = (args) => <Divider {...args} />
