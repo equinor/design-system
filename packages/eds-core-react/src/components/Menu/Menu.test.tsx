@@ -138,32 +138,6 @@ describe('Menu', () => {
     await waitFor(() => expect(handleOnClick).toHaveBeenCalled())
     expect(handleOnClose).toHaveBeenCalled()
   })
-  it('has first menuItem focused when focus is set to first', async () => {
-    render(
-      <TestMenu open focus="first">
-        <Menu.Item>Item 1</Menu.Item>
-        <Menu.Item>Item 2</Menu.Item>
-        <Menu.Item>Item 3</Menu.Item>
-      </TestMenu>,
-    )
-    const menuItem = screen.getAllByRole('menuitem')[0]
-
-    // eslint-disable-next-line testing-library/no-node-access
-    await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
-  })
-  it('has last menuItem focused when focus is set to last', async () => {
-    render(
-      <TestMenu open focus="last">
-        <Menu.Item>Item 1</Menu.Item>
-        <Menu.Item>Item 2</Menu.Item>
-        <Menu.Item>Item 3</Menu.Item>
-      </TestMenu>,
-    )
-    const menuItem = screen.getAllByRole('menuitem')[2]
-
-    // eslint-disable-next-line testing-library/no-node-access
-    await waitFor(() => expect(document.activeElement == menuItem).toBeTruthy())
-  })
   it('has called onClose when Menu.Item is clicked from inside a Menu.Section', async () => {
     const handleOnClose = jest.fn()
     const handleOnClick = jest.fn()

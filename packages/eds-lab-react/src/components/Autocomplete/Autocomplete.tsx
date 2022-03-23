@@ -60,7 +60,7 @@ const StyledList = styled(List)(
     background-color: ${theme.background};
     box-shadow: ${theme.boxShadow};
     ${bordersTemplate(theme.border)}
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 300px;
     padding: 0;
     position: absolute;
