@@ -33,10 +33,10 @@ const {
   },
 } = tokens
 
-interface ContainerProps extends ButtonProps {
+type ContainerProps = {
   active?: boolean
   open?: boolean
-}
+} & ButtonProps
 
 const Container = styled(Button)<ContainerProps>`
   background: ${(props) => (props.active ? menuActiveBackground : 'none')};
@@ -65,7 +65,7 @@ const ItemIcon = styled(Icon)`
   margin-left: -4px;
 `
 
-interface ItemTextProps {
+type ItemTextProps = {
   active?: boolean
 }
 

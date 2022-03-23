@@ -25,7 +25,7 @@ const {
   },
 } = tokens
 
-interface ContainerProps {
+type ContainerProps = {
   open: boolean
 }
 const MenuButtonContainer = styled.div<ContainerProps>`
@@ -37,9 +37,9 @@ const MenuButtonContainer = styled.div<ContainerProps>`
   height: 100%;
   box-sizing: border-box;
 `
-interface CustomButtonProps extends ButtonProps {
+type CustomButtonProps = {
   open?: boolean
-}
+} & ButtonProps
 
 const CreateNewButton = styled(Button)<CustomButtonProps>`
   width: ${(props) => (props.open ? 'fit-content' : '40px')};
@@ -75,7 +75,7 @@ const Tooltip = styled(EDSTooltip)`
   }
 `
 
-interface CreateItemProps {
+type CreateItemProps = {
   createLabel: string
   onCreate: () => void
   isOpen: boolean

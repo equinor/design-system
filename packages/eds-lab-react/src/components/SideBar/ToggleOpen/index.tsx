@@ -16,7 +16,7 @@ const {
   },
 } = tokens
 
-interface ContainerProps {
+type ContainerProps = {
   open?: boolean
 }
 
@@ -62,7 +62,7 @@ const Text = styled(Typography)`
   font-weight: 400;
 `
 
-interface ToggleOpenProps {
+type ToggleOpenProps = {
   isOpen: boolean
   toggle: () => void
 }

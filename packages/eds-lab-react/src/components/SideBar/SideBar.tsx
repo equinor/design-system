@@ -8,7 +8,7 @@ import { CreateItem } from './CreateItem'
 
 const { background, border, spacings } = tokens
 
-interface ContainerProps {
+type ContainerProps = {
   open: boolean
   maxHeight?: string
 }
@@ -38,7 +38,7 @@ const TopContainer = styled.div`
   align-items: center;
 `
 
-interface SideBarContextType {
+type SideBarContextType = {
   isOpen: boolean
 }
 

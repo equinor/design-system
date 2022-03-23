@@ -3,7 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { MenuItem, MenuItemProps } from './index'
 import { home } from '@equinor/eds-icons'
-//import { waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '../SideBar'
 
