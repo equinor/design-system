@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import {
   Menu,
   MenuProps,
+  Dialog,
   Typography,
   Button,
   Icon,
@@ -289,4 +290,60 @@ Compact.parameters = {
       story: 'Compact `Menu` using `EdsProvider` ',
     },
   },
+}
+
+export const InDialog: Story<MenuProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+  const [isDialogOpen, setDialogIsOpen] = useState(false)
+  const handleOpen = () => {
+    setDialogIsOpen(true)
+  }
+  const handleClose = () => {
+    setDialogIsOpen(false)
+  }
+
+  const openMenu = () => {
+    setIsOpen(true)
+  }
+
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+  return (
+    <>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isDialogOpen} onClose={handleClose}>
+        <Dialog.Header>
+          <Button onClick={handleClose}>Close dialog</Button>
+        </Dialog.Header>
+        <Dialog.CustomContent>
+          <Button
+            ref={setAnchorEl}
+            id="anchor-compact"
+            aria-haspopup="true"
+            aria-expanded={isOpen}
+            aria-controls="menu-compact"
+            onClick={() => (isOpen ? closeMenu() : openMenu())}
+          >
+            Click to open Menu!
+          </Button>
+          <Menu
+            open={isOpen}
+            id="menu-compact"
+            aria-labelledby="anchor-compact"
+            onClose={closeMenu}
+            anchorEl={anchorEl}
+          >
+            <Menu.Item onClick={onClick}>Pressure</Menu.Item>
+            <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+            <Menu.Item onClick={onClick}>Cable</Menu.Item>
+          </Menu>
+        </Dialog.CustomContent>
+      </Dialog>
+    </>
+  )
 }
