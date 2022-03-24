@@ -29,7 +29,7 @@ scripts:
   build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
   export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0
   export:assets: pnpm --filter @equinor/eds-figma-broker assets BQjYMxdSdgRkdhKTDDU7L4KU
-  lint:css: stylelint --config ./.stylelint.json ./packages/eds-core-react/**/*.tsx
+  lint:css: stylelint --config ./.stylelint.json ./packages/**/**/*.tsx
 devDependencies:
   '@babel/core': ^7.13.15
   '@babel/eslint-parser': ^7.13.14

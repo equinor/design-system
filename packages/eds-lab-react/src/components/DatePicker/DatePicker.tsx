@@ -154,8 +154,8 @@ const Container = styled.div`
   }
   .react-datepicker__day-names {
     border-top: 1px solid #ececec;
-    margin: 10px 0 0 0;
-    padding: 10px 0 0 0;
+    margin: 10px 0 0;
+    padding: 10px 0 0;
     text-align: center;
   }
   .react-datepicker__day-name {
@@ -185,7 +185,7 @@ const Container = styled.div`
     background-color: unset;
   }
   .react-datepicker__day--disabled {
-    color: #ccc;
+    color: #cccccc;
   }
   .react-datepicker-popper {
     z-index: 4 !important;

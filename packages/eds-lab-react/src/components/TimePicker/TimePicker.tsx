@@ -28,7 +28,6 @@ const Container = styled.div`
   max-width: 102px;
   display: flex;
   flex-direction: column;
-  position: relative;
 `
 
 type StyledListItemType = {

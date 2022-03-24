@@ -60,6 +60,10 @@ exports[`Switch Matches snapshot 1`] = `
   grid: [input] 1fr / [input] 1fr;
 }
 
+.c3:hover + span {
+  background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+}
+
 .c3:checked + span > span {
   background-color: var(--eds_interactive_primary__selected_highlight,rgba(230,250,236,1));
 }
@@ -69,10 +73,6 @@ exports[`Switch Matches snapshot 1`] = `
   -ms-transform: translate(105%,-50%);
   transform: translate(105%,-50%);
   background-color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-}
-
-.c3:hover + span {
-  background-color: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
 }
 
 .c3:hover + span > span:last-child {

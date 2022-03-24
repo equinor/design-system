@@ -10,7 +10,7 @@ exports[`Simple slider Matches snapshot 1`] = `
   >
     <input
       aria-labelledby="test-one"
-      class="SliderInput__StyledSliderInput-sc-17orw4f-0 hPHsSm"
+      class="SliderInput__StyledSliderInput-sc-17orw4f-0 gzvpzh"
       id="test-one-thumb"
       max="100"
       min="0"

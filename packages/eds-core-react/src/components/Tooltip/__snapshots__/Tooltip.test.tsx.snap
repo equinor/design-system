@@ -29,7 +29,7 @@ exports[`Tooltip Matches snapshot 1`] = `
   bottom: -6px;
 }
 
-.c0[data-popper-placement^='top'] > .arrow .arrowSvg {
+.c0[data-popper-placement^='top'] > .arrow .arrow-svg {
   -webkit-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
@@ -39,7 +39,7 @@ exports[`Tooltip Matches snapshot 1`] = `
   top: -6px;
 }
 
-.c0[data-popper-placement^='bottom'] > .arrow .arrowSvg {
+.c0[data-popper-placement^='bottom'] > .arrow .arrow-svg {
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
@@ -49,7 +49,7 @@ exports[`Tooltip Matches snapshot 1`] = `
   right: -6px;
 }
 
-.c0[data-popper-placement^='left'] > .arrow .arrowSvg {
+.c0[data-popper-placement^='left'] > .arrow .arrow-svg {
   -webkit-transform: rotate(-180deg);
   -ms-transform: rotate(-180deg);
   transform: rotate(-180deg);
@@ -91,7 +91,7 @@ exports[`Tooltip Matches snapshot 1`] = `
     style="position: absolute;"
   >
     <svg
-      class="c2 arrowSvg"
+      class="c2 arrow-svg"
     >
       <path
         d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z"

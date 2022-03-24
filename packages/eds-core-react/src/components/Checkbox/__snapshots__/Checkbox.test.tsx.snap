@@ -21,12 +21,12 @@ exports[`Checkbox Matches snapshot 1`] = `
   outline: none;
 }
 
-.c2[data-focus-visible-added]:focus + svg {
+.c2:focus-visible + svg {
   outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 10px;
 }
 
-.c2:focus-visible + svg {
+.c2[data-focus-visible-added]:focus + svg {
   outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
   outline-offset: 10px;
 }

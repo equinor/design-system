@@ -52,7 +52,7 @@ exports[`NativeSelect Matches snapshot 1`] = `
   padding-top: 6px;
   padding-right: 8px;
   padding-bottom: 6px;
-  padding-right: calc(8px *2 + 24px);
+  padding-right: calc(8px * 2 + 24px);
   display: block;
   margin: 0;
   -webkit-appearance: none;
