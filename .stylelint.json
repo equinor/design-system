@@ -53,6 +53,7 @@
     ],
     "selector-pseudo-element-colon-notation": null,
     "color-hex-length": "long",
-    "keyframes-name-pattern": ""
+    "keyframes-name-pattern": "",
+    "selector-class-pattern": ""
   }
 }
