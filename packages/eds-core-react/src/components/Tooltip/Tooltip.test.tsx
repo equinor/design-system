@@ -40,7 +40,7 @@ describe('Tooltip', () => {
   })
   it('Should pass a11y test', async () => {
     const { container } = render(
-      <Tooltip title="Tooltip">
+      <Tooltip title="Tooltip" enterDelay={0}>
         <span>Test</span>
       </Tooltip>,
     )
@@ -48,15 +48,17 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
     fireEvent.mouseOver(content)
 
-    const results = await axe(container)
+    await act(async () => {
+      const results = await axe(container)
 
-    await waitFor(() => {
-      expect(results).toHaveNoViolations()
+      await waitFor(() => {
+        expect(results).toHaveNoViolations()
+      })
     })
   })
   it('Should pass a11y test with id & placement', async () => {
     const { container } = render(
-      <Tooltip title="Tooltip" id="a11y-tooltip" placement="top">
+      <Tooltip title="Tooltip" id="a11y-tooltip" placement="top" enterDelay={0}>
         <span>Test</span>
       </Tooltip>,
     )
@@ -64,10 +66,12 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
     fireEvent.mouseOver(content)
 
-    const results = await axe(container)
+    await act(async () => {
+      const results = await axe(container)
 
-    await waitFor(() => {
-      expect(results).toHaveNoViolations()
+      await waitFor(() => {
+        expect(results).toHaveNoViolations()
+      })
     })
   })
   it('can extend the css for the component', async () => {
