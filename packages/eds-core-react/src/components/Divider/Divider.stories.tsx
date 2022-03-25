@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Divider, DividerProps } from '../..'
 import { Story, Meta } from '@storybook/react/types-6-0'
+import { Stack as SBStack } from './../../../.storybook/components'
+import page from './Divider.docs.mdx'
 
 export default {
   title: 'Data Display/Divider',
@@ -11,33 +13,31 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `A divider is a thin line that separates content into clear groups.
-        `,
-      },
+      page,
     },
   },
 } as Meta
 
-const Wrapper = styled.div`
+const Stack = styled(SBStack)`
+  display: block;
   padding: 32px;
   background-color: #999;
 `
 
-export const Default: Story<DividerProps> = (args) => <Divider {...args} />
+export const Introduction: Story<DividerProps> = (args) => <Divider {...args} />
 
 export const Small: Story<DividerProps> = () => (
-  <Wrapper>
+  <Stack>
     <Divider color="lighter" variant="small" />
     <Divider color="light" variant="small" />
     <Divider variant="small" />
-  </Wrapper>
+  </Stack>
 )
 
 export const Medium: Story<DividerProps> = () => (
-  <Wrapper>
+  <Stack>
     <Divider color="lighter" />
     <Divider color="light" />
     <Divider />
-  </Wrapper>
+  </Stack>
 )
