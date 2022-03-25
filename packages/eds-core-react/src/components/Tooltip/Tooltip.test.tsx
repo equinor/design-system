@@ -9,6 +9,7 @@ import {
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import styled from 'styled-components'
 import { Tooltip, Button } from '../../'
 
@@ -35,6 +36,42 @@ describe('Tooltip', () => {
     await waitFor(() => {
       const tooltip = screen.getByRole('tooltip')
       expect(tooltip).toMatchSnapshot()
+    })
+  })
+  it('Should pass a11y test', async () => {
+    const { container } = render(
+      <Tooltip title="Tooltip" enterDelay={0}>
+        <span>Test</span>
+      </Tooltip>,
+    )
+
+    const content = screen.getByText('Test')
+    fireEvent.mouseOver(content)
+
+    await act(async () => {
+      const results = await axe(container)
+
+      await waitFor(() => {
+        expect(results).toHaveNoViolations()
+      })
+    })
+  })
+  it('Should pass a11y test with id & placement', async () => {
+    const { container } = render(
+      <Tooltip title="Tooltip" id="a11y-tooltip" placement="top" enterDelay={0}>
+        <span>Test</span>
+      </Tooltip>,
+    )
+
+    const content = screen.getByText('Test')
+    fireEvent.mouseOver(content)
+
+    await act(async () => {
+      const results = await axe(container)
+
+      await waitFor(() => {
+        expect(results).toHaveNoViolations()
+      })
     })
   })
   it('can extend the css for the component', async () => {
