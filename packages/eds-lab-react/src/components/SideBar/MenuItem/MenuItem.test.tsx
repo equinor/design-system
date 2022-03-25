@@ -27,10 +27,14 @@ test('Renders', () => {
 })
 
 test('Renders tooltip when closed', async () => {
-  customRender(<MenuItem {...defaultProps}></MenuItem>, {
-    wrapper: ({ children }) => SideBarWrapper(children),
-  })
+  customRender(
+    <MenuItem data-testid="sidebar-menu-item" {...defaultProps}></MenuItem>,
+    {
+      wrapper: ({ children }) => SideBarWrapper(children),
+    },
+  )
   const link = screen.getByTestId('sidebar-menu-item')
+  //const l = screen.getBy
 
   userEvent.hover(link)
 
@@ -39,9 +43,12 @@ test('Renders tooltip when closed', async () => {
 })
 
 test('Does not render tooltip when open', async () => {
-  customRender(<MenuItem {...defaultProps}></MenuItem>, {
-    wrapper: ({ children }) => SideBarWrapper(children, true),
-  })
+  customRender(
+    <MenuItem data-testid="sidebar-menu-item" {...defaultProps}></MenuItem>,
+    {
+      wrapper: ({ children }) => SideBarWrapper(children, true),
+    },
+  )
   const link = screen.getByTestId('sidebar-menu-item')
 
   userEvent.hover(link)

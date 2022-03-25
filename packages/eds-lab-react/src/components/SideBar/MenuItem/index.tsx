@@ -36,7 +36,12 @@ const {
 type ContainerProps = {
   active?: boolean
   open?: boolean
-} & ButtonProps
+} & StrippedButton
+
+type StrippedButton = Omit<
+  ButtonProps,
+  keyof React.ButtonHTMLAttributes<HTMLButtonElement>
+>
 
 const Container = styled(Button)<ContainerProps>`
   background: ${(props) => (props.active ? menuActiveBackground : 'none')};
@@ -95,7 +100,7 @@ export type MenuItemProps = {
   React.HTMLAttributes<HTMLAnchorElement>
 
 export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
-  ({ currentUrl, icon, name, link, onClick }, ref) => {
+  ({ currentUrl, icon, name, link, onClick, ...rest }, ref) => {
     const isCurrentUrl = () => currentUrl?.includes(link)
     const { isOpen } = useSideBar()
 
@@ -112,7 +117,7 @@ export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
           variant="ghost"
           open
           ref={ref}
-          data-testid="sidebar-menu-item"
+          {...rest}
         >
           {icon && <ItemIcon data={icon} color={getIconColor()} />}
           <ItemText variant="cell_text" group="table" active={isCurrentUrl()}>
@@ -131,7 +136,7 @@ export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
           variant="ghost"
           open={isOpen}
           ref={ref}
-          data-testid="sidebar-menu-item"
+          {...rest}
         >
           {icon && <ItemIcon data={icon} color={getIconColor()} />}
         </Container>
