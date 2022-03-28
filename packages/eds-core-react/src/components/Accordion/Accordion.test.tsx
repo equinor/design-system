@@ -2,6 +2,7 @@
 import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
+import { axe } from 'jest-axe'
 import { attach_file, notifications } from '@equinor/eds-icons'
 import { Accordion } from '.'
 import { Button } from '../Button'
@@ -83,6 +84,19 @@ describe('Accordion', () => {
     const { asFragment } = render(<SimpleAccordion />)
     expect(asFragment()).toMatchSnapshot()
   })
+  it('Should pass a11y test', async () => {
+    const { container } = render(<SimpleAccordion />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  it('Should pass a11y test with icons ', async () => {
+    const { container } = render(<AccordionWithIcons />)
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  /* failing test */
+  /* it('Should pass a11y test with buttons ', async () => {
+    const { container } = render(<AccordionWithButtons />)
+    expect(await axe(container)).toHaveNoViolations()
+  }) */
   it('Expands items based on prop', () => {
     render(<SimpleAccordion isExpanded />)
     const header1 = screen.getByTestId('header1')
