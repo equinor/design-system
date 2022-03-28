@@ -24,28 +24,34 @@ const Stack = styled(SBStack)`
   background-color: #999;
 `
 
-export const Introduction: Story<DividerProps> = (args) => <Divider {...args} />
+export const Introduction: Story<DividerProps> = (args) => (
+  <Stack>
+    <Divider {...args} />
+    <Divider {...args} />
+    <Divider {...args} />
+  </Stack>
+)
 
-export const Color: Story<DividerProps> = () => (
+/* export const Color: Story<DividerProps> = () => (
   <Stack>
     <Divider />
     <Divider color="lighter" />
     <Divider color="light" />
   </Stack>
-)
+) */
 
-export const Small: Story<DividerProps> = () => (
+/* export const Small: Story<DividerProps> = () => (
   <Stack>
     <Divider variant="small" />
     <Divider variant="small" />
     <Divider variant="small" />
   </Stack>
-)
+) */
 
-export const Medium: Story<DividerProps> = () => (
+/* export const Medium: Story<DividerProps> = () => (
   <Stack>
     <Divider />
     <Divider />
     <Divider />
   </Stack>
-)
+) */
