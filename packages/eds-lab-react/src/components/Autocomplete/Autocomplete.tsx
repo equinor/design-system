@@ -180,7 +180,7 @@ export type AutocompleteProps<T> = {
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
-  optionLabel: (option: T & { label?: string }) => string
+  optionLabel?: (option: T & { label?: string }) => string
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
   /** Disable option */
