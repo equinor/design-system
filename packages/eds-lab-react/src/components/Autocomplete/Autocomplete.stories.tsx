@@ -88,7 +88,9 @@ const stocks = [
   },
 ]
 
-export const Introduction: Story<AutocompleteProps<MyOptionType>> = (args) => {
+const optionLabel = (item: MyOptionType) => item.label
+
+export const Introduction: Story<AutocompleteProps<string>> = (args) => {
   return (
     <Stack>
       <Autocomplete {...args} />
@@ -99,7 +101,7 @@ export const Introduction: Story<AutocompleteProps<MyOptionType>> = (args) => {
 Introduction.bind({})
 Introduction.args = {
   label: 'Select a stock',
-  options: stocks,
+  options: stocks.map((item) => item.label),
   multiple: false,
   readOnly: false,
   disabled: false,
@@ -111,8 +113,17 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
 
   return (
     <Stack direction="column">
-      <Autocomplete label="Select a stock" options={options} />
-      <Autocomplete label="Select multiple stocks" options={options} multiple />
+      <Autocomplete
+        label="Select a stock"
+        options={options}
+        optionLabel={optionLabel}
+      />
+      <Autocomplete
+        label="Select multiple stocks"
+        options={options}
+        multiple
+        optionLabel={optionLabel}
+      />
     </Stack>
   )
 }
@@ -170,6 +181,7 @@ export const Readonly: Story<AutocompleteProps<MyOptionType>> = (args) => {
 
 Readonly.args = {
   options: stocks,
+  optionLabel,
 }
 
 export const Disabled: Story<AutocompleteProps<MyOptionType>> = (args) => {
@@ -187,6 +199,7 @@ export const Disabled: Story<AutocompleteProps<MyOptionType>> = (args) => {
 }
 OptionLabel.args = {
   options: stocks,
+  optionLabel,
 }
 
 export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
@@ -214,6 +227,7 @@ export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
 
 DisabledOption.args = {
   options: stocks,
+  optionLabel,
 }
 
 export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
@@ -240,6 +254,7 @@ export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
 
 PreselectedOptions.args = {
   options: stocks,
+  optionLabel,
 }
 
 export const OnOptionsChange: Story<AutocompleteProps<MyOptionType>> = (
@@ -264,6 +279,7 @@ export const OnOptionsChange: Story<AutocompleteProps<MyOptionType>> = (
         options={options}
         onOptionsChange={onChange}
         initialSelectedOptions={initialSelectedOptions}
+        optionLabel={optionLabel}
       />
       <Autocomplete
         label="Select multiple stocks"
@@ -271,6 +287,7 @@ export const OnOptionsChange: Story<AutocompleteProps<MyOptionType>> = (
         onOptionsChange={onChange}
         initialSelectedOptions={initialSelectedOptions}
         multiple
+        optionLabel={optionLabel}
       />
     </Stack>
   )
@@ -312,6 +329,7 @@ export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
 
 Compact.args = {
   options: stocks,
+  optionLabel,
 }
 
 type FormValues = {
@@ -342,13 +360,7 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
     defaultValues,
   })
   const [isSubmitted, updateIsSubmitted] = useState(false)
-  const [formData, updateFormData] = useState<FormData>(null)
-
-  const onSubmit = (data: FormData) => {
-    updateFormData(data)
-    updateIsSubmitted(true)
-    action('onSubmit')(data)
-  }
+  const [formData, updateFormData] = useState<FormValues>(null)
 
   return (
     <Container>
@@ -362,7 +374,13 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
           form library
         </a>
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit((data: FormValues) => {
+          updateFormData(data)
+          updateIsSubmitted(true)
+          action('onSubmit')(data)
+        })}
+      >
         {isSubmitted ? (
           <>
             <span>Submitted data:</span>
@@ -396,6 +414,7 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
                     aria-invalid={errors.fabFieldOne ? 'true' : 'false'}
                     aria-describedby="error-county-required"
                     aria-required
+                    optionLabel={optionLabel}
                   />
                 )}
               />
@@ -428,6 +447,7 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
                     options={counties.map((opt) => ({
                       label: opt,
                     }))}
+                    optionLabel={optionLabel}
                   />
                 )}
               />
@@ -494,6 +514,7 @@ export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
 
 CustomOptionsFilter.args = {
   options: stocks,
+  optionLabel,
 }
 
 export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
@@ -563,6 +584,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
         selectedOptions={selectedItems}
         onOptionsChange={onChange}
         multiple
+        optionLabel={optionLabel}
       />
     </Stack>
   )
@@ -570,6 +592,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
 
 SelectAll.args = {
   options: stocks,
+  optionLabel,
 }
 
 export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
@@ -595,4 +618,5 @@ export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
 }
 AutoWidth.args = {
   options: stocks,
+  optionLabel,
 }
