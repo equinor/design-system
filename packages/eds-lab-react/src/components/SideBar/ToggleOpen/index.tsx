@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { Button, Icon, Tooltip, Typography } from '@equinor/eds-core-react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { first_page, last_page } from '@equinor/eds-icons'
@@ -67,7 +67,7 @@ type ToggleOpenProps = {
   toggle: () => void
 }
 
-export const ToggleOpen: React.FC<ToggleOpenProps> = ({ isOpen, toggle }) => {
+export const ToggleOpen: FC<ToggleOpenProps> = ({ isOpen, toggle }) => {
   if (isOpen) {
     return (
       <ToggleContainer open={isOpen}>

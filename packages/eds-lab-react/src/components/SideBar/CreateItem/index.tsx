@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import {
   Button,
   ButtonProps,
@@ -81,7 +81,7 @@ type CreateItemProps = {
   isOpen: boolean
 }
 
-export const CreateItem: React.FC<CreateItemProps> = ({
+export const CreateItem: FC<CreateItemProps> = ({
   createLabel,
   onCreate,
   isOpen,

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import { HTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { bordersTemplate } from '@equinor/eds-utils'
 import {
@@ -40,7 +40,7 @@ type ContainerProps = {
 
 type StrippedButton = Omit<
   ButtonProps,
-  keyof React.ButtonHTMLAttributes<HTMLButtonElement>
+  keyof ButtonHTMLAttributes<HTMLButtonElement>
 >
 
 const Container = styled(Button)<ContainerProps>`
@@ -97,7 +97,7 @@ export type MenuItemType = {
 export type MenuItemProps = {
   currentUrl?: string
 } & MenuItemType &
-  React.HTMLAttributes<HTMLAnchorElement>
+  HTMLAttributes<HTMLAnchorElement>
 
 export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
   ({ currentUrl, icon, name, link, onClick, ...rest }, ref) => {

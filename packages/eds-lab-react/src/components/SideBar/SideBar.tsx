@@ -1,4 +1,10 @@
-import React, { forwardRef, useContext, useState } from 'react'
+import {
+  createContext,
+  HTMLAttributes,
+  forwardRef,
+  useContext,
+  useState,
+} from 'react'
 import styled from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate } from '@equinor/eds-utils'
@@ -50,9 +56,9 @@ export function useSideBar(): SideBarContextType {
   return context
 }
 
-export const SideBarContext = React.createContext<
-  SideBarContextType | undefined
->(undefined)
+export const SideBarContext = createContext<SideBarContextType | undefined>(
+  undefined,
+)
 
 type SidebarType = {
   onCreate?: () => void
@@ -60,7 +66,7 @@ type SidebarType = {
   open?: boolean
   maxHeight?: string
   onToggle?: (state: boolean) => void
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
 export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
   (
