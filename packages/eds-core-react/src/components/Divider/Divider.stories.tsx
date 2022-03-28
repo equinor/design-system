@@ -26,18 +26,26 @@ const Stack = styled(SBStack)`
 
 export const Introduction: Story<DividerProps> = (args) => <Divider {...args} />
 
+export const Color: Story<DividerProps> = () => (
+  <Stack>
+    <Divider />
+    <Divider color="lighter" />
+    <Divider color="light" />
+  </Stack>
+)
+
 export const Small: Story<DividerProps> = () => (
   <Stack>
-    <Divider color="lighter" variant="small" />
-    <Divider color="light" variant="small" />
+    <Divider variant="small" />
+    <Divider variant="small" />
     <Divider variant="small" />
   </Stack>
 )
 
 export const Medium: Story<DividerProps> = () => (
   <Stack>
-    <Divider color="lighter" />
-    <Divider color="light" />
+    <Divider />
+    <Divider />
     <Divider />
   </Stack>
 )
