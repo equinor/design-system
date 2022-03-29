@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Divider, DividerProps, Card, Typography, Icon } from '../..'
+import { Divider, DividerProps, Card, Typography, Avatar } from '../..'
 // import { chevron_left, edit_text, more_vertical } from '@equinor/eds-icons'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { Stack as SBStack } from './../../../.storybook/components'
@@ -69,6 +69,47 @@ export const FullBleed: Story<DividerProps> = () => (
           laborum.
         </Typography>
       </Card.Content>
+    </Card>
+  </Stack>
+)
+
+export const Inset: Story<DividerProps> = () => (
+  <Stack>
+    <Card style={{ width: '50%' }}>
+      <Card.Header>
+        <Card.HeaderTitle>
+          <Typography variant="h4">ALL</Typography>
+        </Card.HeaderTitle>
+      </Card.Header>
+      <Card.Header>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+        <Card.HeaderTitle>
+          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="body_short">
+            Ut enim ad minim veniam, quis nostrud exercitation.
+          </Typography>
+          <Divider style={{ width: '100%' }} variant="small" />
+        </Card.HeaderTitle>
+      </Card.Header>
+      <Card.Header>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+        <Card.HeaderTitle>
+          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="body_short">
+            Ut enim ad minim veniam, quis nostrud exercitation.
+          </Typography>
+          <Divider style={{ width: '100%' }} variant="small" />
+        </Card.HeaderTitle>
+      </Card.Header>
+      <Card.Header>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+        <Card.HeaderTitle>
+          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="body_short">
+            Ut enim ad minim veniam, quis nostrud exercitation.
+          </Typography>
+        </Card.HeaderTitle>
+      </Card.Header>
     </Card>
   </Stack>
 )
