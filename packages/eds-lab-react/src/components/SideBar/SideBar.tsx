@@ -5,38 +5,41 @@ import {
   useContext,
   useState,
 } from 'react'
-import styled from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
-import { bordersTemplate } from '@equinor/eds-utils'
+import { bordersTemplate, useToken } from '@equinor/eds-utils'
 //import EquinorLogo from '../EquinorLogo'
 import { ToggleOpen } from './ToggleOpen'
 import { CreateItem } from './CreateItem'
-
-const { background, border, spacings } = tokens
+import { useEds } from '@equinor/eds-core-react'
 
 type ContainerProps = {
   open: boolean
   maxHeight?: string
 }
 
-const Container = styled.div<ContainerProps>`
-  ${bordersTemplate(border)}
-  background-color: ${background};
+const Container = styled.div<ContainerProps>(({ theme, open, maxHeight }) => {
+return css`
+  ${bordersTemplate(theme.border)}
+  background-color: ${theme.background};
   display: flex;
   flex-direction: column;
-  padding-bottom: ${spacings.bottom};
+  padding-bottom: ${theme.spacings.bottom};
   overflow: hidden;
-  width: ${(props) => (props.open ? '256px' : '72px')};
-  min-width: ${(props) => (props.open ? '256px' : '72px')};
-  ${(props) => props.maxHeight && `max-height: ${props.maxHeight}`};
+  width: ${open ? '256px' : '72px'};
+  min-width: ${open ? '256px' : '72px'};
+  ${maxHeight && css({ maxHeight: maxHeight })}
 `
+})
 
-const LogoContainer = styled.div`
+const LogoContainer = styled.div(({ theme }) => {
+  return css`
   display: flex;
   justify-content: center;
   border-top: 1px solid rgba(220, 220, 220, 1); //how to solve this with bordersTemplate???
-  padding-top: ${spacings.top};
+  padding-top: ${theme.spacings.top};
 `
+})
 
 const TopContainer = styled.div`
   display: grid;
@@ -73,6 +76,8 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
     { onCreate, createLabel, onToggle, open = false, maxHeight, children },
     ref,
   ) => {
+    const { density } = useEds()
+    const token = useToken({ density }, tokens)
     const [isOpen, setIsOpen] = useState<boolean>(open)
 
     const handleToggle = () => {
@@ -81,22 +86,24 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
     }
 
     return (
-      <SideBarContext.Provider value={{ isOpen }}>
-        <Container open={isOpen} ref={ref} maxHeight={maxHeight}>
-          <TopContainer>
-            {onCreate && createLabel && (
-              <CreateItem
-                isOpen={isOpen}
-                createLabel={createLabel}
-                onCreate={onCreate}
-              />
-            )}
-            {children}
-          </TopContainer>
-          <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
-          <LogoContainer></LogoContainer>
-        </Container>
-      </SideBarContext.Provider>
+      <ThemeProvider theme={token}>
+        <SideBarContext.Provider value={{ isOpen }}>
+          <Container open={isOpen} ref={ref} maxHeight={maxHeight}>
+            <TopContainer>
+              {onCreate && createLabel && (
+                <CreateItem
+                  isOpen={isOpen}
+                  createLabel={createLabel}
+                  onCreate={onCreate}
+                />
+              )}
+              {children}
+            </TopContainer>
+            <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
+            <LogoContainer></LogoContainer>
+          </Container>
+        </SideBarContext.Provider>
+      </ThemeProvider>
     )
   },
 )
