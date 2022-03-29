@@ -13,7 +13,7 @@ const Stack = styled(SBStack)`
   grid-template-columns: repeat(4, fit-content(100%));
 `
 
-const FullWidthWrapper = styled.div`
+const FullWidthStack = styled.div`
   margin: 32px;
   display: grid;
   grid-gap: 16px;
@@ -101,7 +101,7 @@ export const All: Story<ButtonProps> = () => (
 )
 
 export const Contained: Story<ButtonProps> = () => (
-  <Wrapper>
+  <Stack>
     <Button>Primary</Button>
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
@@ -133,11 +133,11 @@ export const Contained: Story<ButtonProps> = () => (
       Disabled
       <Icon name="save" title="save"></Icon>
     </Button>
-  </Wrapper>
+  </Stack>
 )
 
 export const Outlined: Story<ButtonProps> = () => (
-  <Wrapper>
+  <Stack>
     <Button variant="outlined">Primary</Button>
     <Button variant="outlined" color="secondary">
       Secondary
@@ -180,11 +180,11 @@ export const Outlined: Story<ButtonProps> = () => (
       Disabled
       <Icon name="save" title="save"></Icon>
     </Button>
-  </Wrapper>
+  </Stack>
 )
 
 export const Ghost: Story<ButtonProps> = () => (
-  <Wrapper>
+  <Stack>
     <Button variant="ghost">Primary</Button>
     <Button variant="ghost" color="secondary">
       Secondary
@@ -227,7 +227,7 @@ export const Ghost: Story<ButtonProps> = () => (
       Disabled
       <Icon name="save" title="save"></Icon>
     </Button>
-  </Wrapper>
+  </Stack>
 )
 
 export const GhostIcon: Story<ButtonProps> = () => (
@@ -254,21 +254,21 @@ export const Form: Story<ButtonProps> = () => {
   }
 
   return (
-    <Wrapper>
+    <Stack>
       <form onSubmit={handleSubmit}>
         <Button type="submit">Submit form</Button>
       </form>
-    </Wrapper>
+    </Stack>
   )
 }
 
 export const FileUpload: Story<ButtonProps> = () => (
-  <Wrapper>
+  <Stack>
     <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
     <label htmlFor="file-upload">
       <Button as="span">Upload</Button>
     </label>
-  </Wrapper>
+  </Stack>
 )
 
 FileUpload.parameters = {
@@ -281,13 +281,13 @@ FileUpload.parameters = {
 }
 
 export const Link: Story<ButtonProps> = () => (
-  <Wrapper>
+  <Stack>
     <Button href="#">Link</Button>
-  </Wrapper>
+  </Stack>
 )
 
 export const FullWidth: Story<ButtonProps> = () => (
-  <FullWidthWrapper>
+  <FullWidthStack>
     <Button fullWidth>Primary</Button>
     <Button color="secondary" fullWidth>
       Secondary
@@ -325,7 +325,7 @@ export const FullWidth: Story<ButtonProps> = () => (
       Disabled
       <Icon name="save" title="save"></Icon>
     </Button>
-  </FullWidthWrapper>
+  </FullWidthStack>
 )
 
 export const Compact: Story<ButtonProps> = () => {
@@ -359,12 +359,12 @@ Compact.parameters = {
 }
 
 // export const ButtonGroup: Story<ButtonProps> = () => (
-//   <Wrapper style={{ gridGap: 0 }}>
+//   <Stack style={{ gridGap: 0 }}>
 //     <Group>
 //       <Button>Contained</Button>
 //       <Button variant="outlined">Outlined</Button>
 //       <Button variant="outlined">Outlined</Button>
 //       <Button variant="outlined">Outlined</Button>
 //     </Group>
-//   </Wrapper>
+//   </Stack>
 // )
