@@ -37,7 +37,7 @@ export const Introduction: Story<DividerProps> = (args) => (
 export const FullBleed: Story<DividerProps> = () => (
   <Stack>
     <Card style={{ width: '50%' }}>
-      <Card.Header style={{ backgroundColor: '#DCDCDC' }}>
+      <Card.Header>
         <Card.HeaderTitle>
           <Typography variant="h4">NEWS</Typography>
         </Card.HeaderTitle>
@@ -45,61 +45,30 @@ export const FullBleed: Story<DividerProps> = () => (
       <Card.Content>
         <Typography variant="caption">Today</Typography>
         <br />
-        <Typography variant="overline">
-          Leading images are full width.
-        </Typography>
+        <Typography variant="overline">News title</Typography>
         <Typography>
-          Use dividers occasionally, to create groupings rather than separate
-          individual items. Dividers should be noticeable in a layout, but not
-          clashing.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
       </Card.Content>
       <Divider style={{ width: '100%' }} variant="small" />
       <Card.Content>
-        <Typography variant="overline">
-          Leading images are full width.
-        </Typography>
+        <Typography variant="overline">News title</Typography>
         <Typography>
-          Use dividers occasionally, to create groupings rather than separate
-          individual items.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat.
         </Typography>
       </Card.Content>
       <Divider style={{ width: '100%' }} variant="small" />
       <Card.Content>
-        <Typography variant="overline">
-          Leading images are full width.
-        </Typography>
+        <Typography variant="overline">News title</Typography>
         <Typography>
-          Use dividers occasionally, to create groupings rather than separate
-          individual items. Dividers should only be used if elements can't be
-          split using white space.
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum.
         </Typography>
       </Card.Content>
     </Card>
   </Stack>
 )
-
-/* Is it needed? */
-/* export const Color: Story<DividerProps> = () => (
-  <Stack>
-    <Divider />
-    <Divider color="lighter" />
-    <Divider color="light" />
-  </Stack>
-) */
-
-/* export const Small: Story<DividerProps> = () => (
-  <Stack>
-    <Divider variant="small" />
-    <Divider variant="small" />
-    <Divider variant="small" />
-  </Stack>
-) */
-
-/* export const Medium: Story<DividerProps> = () => (
-  <Stack>
-    <Divider />
-    <Divider />
-    <Divider />
-  </Stack>
-) */
