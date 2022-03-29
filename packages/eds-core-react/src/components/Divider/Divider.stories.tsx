@@ -8,7 +8,6 @@ import {
   DividerProps,
   Typography,
 } from '../..'
-// import { chevron_left, edit_text, more_vertical } from '@equinor/eds-icons'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { Stack as SBStack } from './../../../.storybook/components'
 import page from './Divider.docs.mdx'
@@ -28,9 +27,7 @@ export default {
 } as Meta
 
 const Stack = styled(SBStack)`
-  /* display: block; */
   padding: 32px;
-  /* background-color: #999; */
   background: #ebebeb;
 `
 
