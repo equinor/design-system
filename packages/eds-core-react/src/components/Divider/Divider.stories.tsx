@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { Divider, DividerProps, Card, Typography, Avatar } from '../..'
+import {
+  Avatar,
+  Button,
+  Card,
+  Chip,
+  Divider,
+  DividerProps,
+  Typography,
+} from '../..'
 // import { chevron_left, edit_text, more_vertical } from '@equinor/eds-icons'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import { Stack as SBStack } from './../../../.storybook/components'
@@ -110,6 +118,41 @@ export const Inset: Story<DividerProps> = () => (
           </Typography>
         </Card.HeaderTitle>
       </Card.Header>
+    </Card>
+  </Stack>
+)
+
+export const Middle: Story<DividerProps> = () => (
+  <Stack>
+    <Card style={{ width: '50%' }}>
+      <Card.Header>
+        <Card.HeaderTitle>
+          <Typography variant="h4">TICKET</Typography>
+        </Card.HeaderTitle>
+        <Typography variant="h6">20.02.2020</Typography>
+      </Card.Header>
+      <Card.Content>
+        <Typography variant="overline">Description</Typography>
+        <Typography>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </Typography>
+        <Divider style={{ width: '100%' }} />
+      </Card.Content>
+      <Card.Content>
+        <Typography>Choose option</Typography>
+      </Card.Content>
+      <Card.Actions>
+        <Chip>active</Chip>
+        <Chip variant="active">pause</Chip>
+        <Chip>disable</Chip>
+        <Chip variant="error">stop</Chip>
+      </Card.Actions>
+      <Card.Actions>
+        <Button style={{ marginTop: '16px' }} variant="outlined">
+          SUBMIT TICKET
+        </Button>
+      </Card.Actions>
     </Card>
   </Stack>
 )
