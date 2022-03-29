@@ -14,7 +14,7 @@ import { useSideBar } from '../SideBar'
 
 const {
   entities: {
-    menuItem: {
+    sidebarItem: {
       border,
       spacings: { bottom: mediumSpacing },
       typography: { color: itemTextColor },
@@ -87,19 +87,19 @@ const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;
 `
 
-export type MenuItemType = {
+export type SidebarItemType = {
   icon?: IconData
   name: string
   link?: string
   onClick?: () => void
 }
 
-export type MenuItemProps = {
+export type SidebarItemProps = {
   currentUrl?: string
-} & MenuItemType &
+} & SidebarItemType &
   HTMLAttributes<HTMLAnchorElement>
 
-export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
+export const SidebarItem = forwardRef<HTMLAnchorElement, SidebarItemProps>(
   ({ currentUrl, icon, name, link, onClick, ...rest }, ref) => {
     const isCurrentUrl = () => currentUrl?.includes(link)
     const { isOpen } = useSideBar()
@@ -145,4 +145,4 @@ export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
   },
 )
 
-MenuItem.displayName = 'MenuItem'
+SidebarItem.displayName = 'SidebarItem'

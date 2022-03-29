@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react'
 //import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
-import { MenuItemType } from './MenuItem'
+import { SidebarItemType } from './SidebarItem'
 import { home, star_half } from '@equinor/eds-icons'
 
-const defaultMenuItems: MenuItemType[] = [
+const defaultMenuItems: SidebarItemType[] = [
   {
     name: 'Home',
     icon: home,

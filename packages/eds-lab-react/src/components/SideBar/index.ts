@@ -1,12 +1,12 @@
 import { SideBar as BaseSideBar } from './SideBar'
-import { MenuItem, MenuItemType as ItemType } from './MenuItem'
+import { SidebarItem, SidebarItemType as ItemType } from './SidebarItem'
 
 type SidebarType = typeof BaseSideBar & {
-  Item: typeof MenuItem
+  Item: typeof SidebarItem
 }
 
 const SideBar = BaseSideBar as SidebarType
-SideBar.Item = MenuItem
+SideBar.Item = SidebarItem
 SideBar.Item.displayName = 'SideBar.Item'
 
 export { SideBar }

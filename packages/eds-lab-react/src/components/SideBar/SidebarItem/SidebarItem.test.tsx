@@ -1,12 +1,12 @@
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { MenuItem, MenuItemProps } from './index'
+import { SidebarItem, SidebarItemProps } from './index'
 import { home } from '@equinor/eds-icons'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '../SideBar'
 
-const defaultProps: MenuItemProps = {
+const defaultProps: SidebarItemProps = {
   name: 'Home',
   currentUrl: 'http://localhost:3000/home',
   icon: home,
@@ -21,20 +21,22 @@ function SideBarWrapper(children: React.ReactChildren, isOpen?: boolean) {
 }
 
 test('Renders', () => {
-  customRender(<MenuItem {...defaultProps}></MenuItem>, {
+  customRender(<SidebarItem {...defaultProps}></SidebarItem>, {
     wrapper: ({ children }) => SideBarWrapper(children),
   })
 })
 
 test('Renders tooltip when closed', async () => {
   customRender(
-    <MenuItem data-testid="sidebar-menu-item" {...defaultProps}></MenuItem>,
+    <SidebarItem
+      data-testid="sidebar-menu-item"
+      {...defaultProps}
+    ></SidebarItem>,
     {
       wrapper: ({ children }) => SideBarWrapper(children),
     },
   )
   const link = screen.getByTestId('sidebar-menu-item')
-  //const l = screen.getBy
 
   userEvent.hover(link)
 
@@ -44,7 +46,10 @@ test('Renders tooltip when closed', async () => {
 
 test('Does not render tooltip when open', async () => {
   customRender(
-    <MenuItem data-testid="sidebar-menu-item" {...defaultProps}></MenuItem>,
+    <SidebarItem
+      data-testid="sidebar-menu-item"
+      {...defaultProps}
+    ></SidebarItem>,
     {
       wrapper: ({ children }) => SideBarWrapper(children, true),
     },
@@ -59,7 +64,7 @@ test('Does not render tooltip when open', async () => {
 })
 
 test('Renders name when open', () => {
-  customRender(<MenuItem {...defaultProps}></MenuItem>, {
+  customRender(<SidebarItem {...defaultProps}></SidebarItem>, {
     wrapper: ({ children }) => SideBarWrapper(children, true),
   })
 
@@ -67,7 +72,7 @@ test('Renders name when open', () => {
 })
 
 test('Does not render name when closed', () => {
-  customRender(<MenuItem {...defaultProps}></MenuItem>, {
+  customRender(<SidebarItem {...defaultProps}></SidebarItem>, {
     wrapper: ({ children }) => SideBarWrapper(children),
   })
 

@@ -56,7 +56,7 @@ export const sidebar: ComponentToken = {
         },
       },
     },
-    menuItem: {
+    sidebarItem: {
       typography: {
         color: expandTextColor,
       },

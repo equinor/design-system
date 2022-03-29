@@ -2,7 +2,7 @@ import { Story, Meta } from '@storybook/react'
 
 import { dashboard, favorite_outlined, history, home } from '@equinor/eds-icons'
 import { SideBar } from '../../components/SideBar'
-import { MenuItemType } from '../../components/SideBar/MenuItem'
+import { SidebarItemType } from './SidebarItem'
 
 export default {
   title: 'Components/SideBar',
@@ -17,7 +17,7 @@ export default {
 } as Meta
 
 export const Primary: Story = () => {
-  const menuItems: MenuItemType[] = [
+  const menuItems: SidebarItemType[] = [
     {
       name: 'home',
       icon: home,
@@ -50,7 +50,7 @@ export const Primary: Story = () => {
 }
 
 export const NoCreateAction: Story = () => {
-  const menuItems: MenuItemType[] = [
+  const menuItems: SidebarItemType[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
@@ -80,7 +80,7 @@ export const NoCreateAction: Story = () => {
 }
 
 export const WithCreateAction: Story = () => {
-  const menuItems: MenuItemType[] = [
+  const menuItems: SidebarItemType[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
@@ -113,7 +113,7 @@ export const WithCreateAction: Story = () => {
 }
 
 export const WithCurrentUrlAndCreate: Story = () => {
-  const menuItems: MenuItemType[] = [
+  const menuItems: SidebarItemType[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
