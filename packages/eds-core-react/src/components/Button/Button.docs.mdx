@@ -6,18 +6,17 @@ import { Button  } from '.'
 # Button 
 Buttons allow users to take action with a single click or tap
 
-<Links ariaUrl="https://www.w3.org/TR/wai-aria-practices/#button" 
-figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17394%3A47297" documentationUrl="https://eds.equinor.com/0b0c666ab/p/83185a-button/b/86826a"/>
+<Links 
+ariaUrl="https://www.w3.org/TR/wai-aria-practices/#button" 
+figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17394%3A47297" 
+documentationUrl="https://eds.equinor.com/0b0c666ab/p/83185a-button/b/86826a"
+sourceUrl="https://github.com/equinor/design-system/tree/develop/packages/eds-core-react/src/components/Button"
+npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
+/>
 
 <Story id="inputs-button--introduction" />
 <PropsTable />
 
-## Installation 
-
-Install the packages in your project directory with your package manager (npm/yarn/pnpm).
-```shell
-npm install @equinor/eds-core-react
-```
 
 ## Usage
 
@@ -43,9 +42,42 @@ The `ghost_icon` variant is meant for standalone icon buttons using the `<Icon>`
   <Icon name="save" title="save action"></Icon>
 </Button>
 ```
+
+## Color
+<Story id="inputs-button--color"/>
+
 ## Compact
 
 Compact `Button` using `EdsProvider`
-
-
 <Story id="inputs-button--compact" />
+
+## File upload
+
+Example of how to do file upload button. Please note this demo only works in Storybook Canvas (isolated example only).
+
+<Story id="inputs-button--file-upload" />
+
+```tsx
+
+<label htmlFor="file-upload">
+  <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
+  <Button as="span">Upload file</Button>
+</label>
+```
+
+## Progress button
+
+Use the `Progress` component if you need progress indication on a button. Make sure the 
+<Story id="inputs-button--progress-button" />
+
+
+## All
+
+Example All button combinations. 
+
+<Story id="inputs-button--all" />
+
+## Full width
+
+Examples of buttons
+<Story id="inputs-button--full-width" />
