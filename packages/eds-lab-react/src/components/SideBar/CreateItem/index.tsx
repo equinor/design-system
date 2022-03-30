@@ -89,7 +89,7 @@ const Tooltip = styled(EDSTooltip)`
   }
 `
 
-type CreateItemProps = {
+export type CreateItemProps = {
   createLabel: string
   onCreate: () => void
   isOpen: boolean
