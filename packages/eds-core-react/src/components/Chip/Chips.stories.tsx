@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '../..'
 import { Meta, Story } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
+import { Stack as SBStack } from './../../../.storybook/components'
+import page from './Chips.docs.mdx'
 
 const icons = {
   save,
@@ -10,7 +12,7 @@ const icons = {
 
 Icon.add(icons)
 
-const Wrapper = styled.div`
+const Stack = styled(SBStack)`
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(3, fit-content(100%));
@@ -21,11 +23,7 @@ export default {
   component: Chip,
   parameters: {
     docs: {
-      description: {
-        component: `Chips, also known as tags or badges, are
-        advanced badges that represent discrete information.
-        `,
-      },
+      page,
     },
   },
 } as Meta
@@ -37,12 +35,12 @@ const CatImage = (props: Partial<AvatarProps>) => (
   <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} alt="cat" {...props} />
 )
 
-export const Default: Story<ChipProps> = (args) => (
+export const Introduction: Story<ChipProps> = (args) => (
   <Chip {...args}>Play with me</Chip>
 )
 
 export const Text: Story<ChipProps> = () => (
-  <Wrapper>
+  <Stack>
     <Chip>normal</Chip>
     <Chip variant="active">active</Chip>
     <Chip variant="active" onDelete={handleDelete}>
@@ -63,11 +61,11 @@ export const Text: Story<ChipProps> = () => (
     <Chip onDelete={handleDelete} disabled>
       disabled
     </Chip>
-  </Wrapper>
+  </Stack>
 )
 
 export const TextAndIcon: Story<ChipProps> = () => (
-  <Wrapper>
+  <Stack>
     <Chip>
       <Icon name="save" />
       normal
@@ -108,10 +106,10 @@ export const TextAndIcon: Story<ChipProps> = () => (
       <Icon name="save" />
       disabled
     </Chip>
-  </Wrapper>
+  </Stack>
 )
 export const TextAndAvatar: Story<ChipProps> = () => (
-  <Wrapper>
+  <Stack>
     <Chip>
       <CatImage />
       normal
@@ -152,7 +150,7 @@ export const TextAndAvatar: Story<ChipProps> = () => (
       <CatImage />
       disabled
     </Chip>
-  </Wrapper>
+  </Stack>
 )
 
 TextAndIcon.storyName = 'Text and icon'
