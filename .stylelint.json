@@ -29,13 +29,6 @@
       }
     ],
     "declaration-empty-line-before": "never",
-    "font-family-no-missing-generic-family-keyword": [
-      true, {
-        "ignoreFontFamilies": [
-          "Equinor"
-        ]
-      }
-    ],
     "comment-empty-line-before": "never",
     "no-descending-specificity": [
       true, {

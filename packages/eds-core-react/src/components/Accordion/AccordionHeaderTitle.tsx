@@ -16,7 +16,7 @@ const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>(
       white-space: nowrap;
       overflow: hidden;
       text-align: left;
-      font-family: Equinor;
+      font-family: Equinor, sans-serif;
       color: ${isExpanded && !disabled
         ? theme.entities.header.states.active.typography?.color
         : 'inherit'};
