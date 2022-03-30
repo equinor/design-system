@@ -17,4 +17,19 @@ Informs users about a task and can contain critical information, requires decisi
 
 ## Usage
 
+Dialogs disable all app functionality when they appear, and remain on screen until confirmed, dismissed, or a required action has been taken.
+Dialogs are purposefully interruptive, so they should be used sparingly.
+
+<ul>
+    <li>Dialogs <strong>focus</strong> user attention to ensure their content is addressed.</li>
+    <li>Dialogs should be <strong>direct</strong> in communicating information and dedicated to completing a assignment.</li>
+    <li>Dialogs should appear in response to a user task or an action, with suitable or contextual information.</li>
+</ul>
+
+ ```tsx
+import { Dialog } from '@equinor/eds-core-react'
+
+<Dialog />
+```
+
 ## Examples
