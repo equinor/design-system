@@ -8,19 +8,13 @@ import {
 } from '@equinor/eds-core-react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { bordersTemplate } from '@equinor/eds-utils'
-import styled from 'styled-components'
+import styled, { css }  from 'styled-components'
 import { add } from '@equinor/eds-icons'
 
 const {
   entities: {
     createItem: {
-      background: buttonBackground,
-      border,
-      spacings: { right: largeSpacing },
       typography: { color: primaryWhite },
-      states: {
-        hover: { background: buttonHover },
-      },
     },
   },
 } = tokens
@@ -28,8 +22,14 @@ const {
 type ContainerProps = {
   open: boolean
 }
-const MenuButtonContainer = styled.div<ContainerProps>`
-  display: ${(props) => (props.open ? 'grid' : 'flex')};
+const MenuButtonContainer = styled.div<ContainerProps>(({ theme, open }) => {
+  const {
+    entities: {
+      createItem: { border },
+    },
+  } = theme
+  return css`
+  display: ${open ? 'grid' : 'flex'};
   ${bordersTemplate(border)}
   grid-template-columns: repeat(9, 1fr);
   justify-content: center;
@@ -37,28 +37,42 @@ const MenuButtonContainer = styled.div<ContainerProps>`
   height: 100%;
   box-sizing: border-box;
 `
+})
+
 type CustomButtonProps = {
   open?: boolean
 } & ButtonProps
 
-const CreateNewButton = styled(Button)<CustomButtonProps>`
-  width: ${(props) => (props.open ? 'fit-content' : '40px')};
-  height: ${(props) => (props.open ? '36px' : '40px')};
+const CreateNewButton = styled(Button)<CustomButtonProps>(({ theme, open }) => {
+  const {
+    entities: {
+      createItem: {
+        background: buttonBackground,
+        spacings: { right: largeSpacing },
+        states: {
+          hover: { background: buttonHover },
+        },
+      },
+    },
+  } = theme
+  return css`
+  width: ${open ? 'fit-content' : '40px'};
+  height: ${open ? '36px' : '40px'};
   background: ${buttonBackground};
-  border-radius: ${(props) => props.open && '100px'};
+  border-radius: ${open && '100px'};
   grid-column: 3;
-  ${(props) =>
-    props.open &&
+  ${ open &&
     `
   padding-right: ${largeSpacing};
   margin-left: -2px; /* border size */
   `};
 
   &:hover {
-    border-radius: ${(props) => props.open && '100px'};
+    border-radius: ${open && '100px'};
     background: ${buttonHover};
   }
 `
+})
 
 const CreateNewButtonText = styled(Typography)`
   font-weight: 400;
