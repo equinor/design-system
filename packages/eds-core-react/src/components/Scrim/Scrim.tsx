@@ -1,7 +1,11 @@
-import { forwardRef, MouseEvent, HTMLAttributes } from 'react'
+import { forwardRef, MouseEvent, HTMLAttributes, useRef } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import { useGlobalKeyPress, useHideBodyScroll } from '@equinor/eds-utils'
+import {
+  useGlobalKeyPress,
+  useHideBodyScroll,
+  useCombinedRefs,
+} from '@equinor/eds-utils'
 
 const { height, width, background } = tokens
 
@@ -37,13 +41,13 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   { children, onClose, open, isDismissable = false, ...rest },
   ref,
 ) {
+  const scrimRef = useRef<HTMLDivElement>(null)
+  const combinedScrimRef = useCombinedRefs<HTMLDivElement>(scrimRef, ref)
   const props = {
     ...rest,
     open,
     isDismissable,
-    ref,
   }
-
   useHideBodyScroll(open)
 
   useGlobalKeyPress('Escape', () => {
@@ -53,16 +57,11 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   })
 
   const handleMouseClose = (event: MouseEvent) => {
-    if (event) {
+    if (event && event.target === scrimRef.current) {
       if (event.type === 'click' && isDismissable && open) {
         onClose && onClose()
       }
     }
-  }
-
-  const handleContentClick = (event: MouseEvent) => {
-    // Avoid event bubbling inside dialog/content inside scrim
-    event.stopPropagation()
   }
 
   if (!open) {
@@ -70,8 +69,8 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   }
 
   return (
-    <StyledScrim onClick={handleMouseClose} {...props}>
-      <ScrimContent onClick={handleContentClick}>{children}</ScrimContent>
+    <StyledScrim onClick={handleMouseClose} ref={combinedScrimRef} {...props}>
+      <ScrimContent>{children}</ScrimContent>
     </StyledScrim>
   )
 })
