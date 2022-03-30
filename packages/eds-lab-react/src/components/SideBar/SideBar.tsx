@@ -19,26 +19,26 @@ type ContainerProps = {
 }
 
 const Container = styled.div<ContainerProps>(({ theme, open, maxHeight }) => {
-return css`
-  ${bordersTemplate(theme.border)}
-  background-color: ${theme.background};
-  display: flex;
-  flex-direction: column;
-  padding-bottom: ${theme.spacings.bottom};
-  overflow: hidden;
-  width: ${open ? '256px' : '72px'};
-  min-width: ${open ? '256px' : '72px'};
-  ${maxHeight && css({ maxHeight: maxHeight })}
-`
+  return css`
+    ${bordersTemplate(theme.border)}
+    background-color: ${theme.background};
+    display: flex;
+    flex-direction: column;
+    padding-bottom: ${theme.spacings.bottom};
+    overflow: hidden;
+    width: ${open ? '256px' : '72px'};
+    min-width: ${open ? '256px' : '72px'};
+    ${maxHeight && css({ maxHeight: maxHeight })}
+  `
 })
 
 const LogoContainer = styled.div(({ theme }) => {
   return css`
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid rgba(220, 220, 220, 1); //how to solve this with bordersTemplate???
-  padding-top: ${theme.spacings.top};
-`
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(220, 220, 220, 1); //how to solve this with bordersTemplate???
+    padding-top: ${theme.spacings.top};
+  `
 })
 
 const TopContainer = styled.div`
