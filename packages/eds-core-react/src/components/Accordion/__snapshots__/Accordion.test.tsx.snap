@@ -10,7 +10,7 @@ exports[`Accordion Matches snapshot 1`] = `
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
-  font-family: Equinor;
+  font-family: Equinor,sans-serif;
   color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
 }
 
