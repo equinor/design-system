@@ -10,6 +10,8 @@ import {
 } from '../..'
 import styled from 'styled-components'
 import { Story, Meta } from '@storybook/react/types-6-0'
+import { Stack } from './../../../.storybook/components'
+import page from './Dialog.docs.mdx'
 
 export default {
   title: 'Feedback/Dialog',
@@ -19,16 +21,14 @@ export default {
     isDismissable: false,
   },
   subcomponents: {
-    Actions: Dialog.Actions,
+    Header: Dialog.Header,
     Title: Dialog.Title,
     CustomContent: Dialog.CustomContent,
-    Header: Dialog.Header,
+    Actions: Dialog.Actions,
   },
   parameters: {
     docs: {
-      description: {
-        component: `A basic dialog component.`,
-      },
+      page,
     },
   },
 } as Meta
@@ -51,7 +51,7 @@ const Placeholder = styled.div`
   display: inline-block;
 `
 
-export const Default: Story<DialogProps> = (args) => {
+export const Introduction: Story<DialogProps> = (args) => {
   const { open, isDismissable } = args
   const [, updateArgs] = useArgs()
   const handleClose = () => {
@@ -61,7 +61,7 @@ export const Default: Story<DialogProps> = (args) => {
     updateArgs({ open: true })
   }
   return (
-    <>
+    <Stack>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -79,7 +79,7 @@ export const Default: Story<DialogProps> = (args) => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </>
+    </Stack>
   )
 }
 
