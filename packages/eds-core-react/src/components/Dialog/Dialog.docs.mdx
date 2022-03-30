@@ -33,3 +33,43 @@ import { Dialog } from '@equinor/eds-core-react'
 ```
 
 ## Examples
+
+### Dismissable
+
+`isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`.
+
+<Story id="feedback-dialog--dismissable" />
+
+### Text Plus Action
+
+<Story id="feedback-dialog--text-plus-action" />
+
+### Placeholder Plus Action
+
+<Story id="feedback-dialog--placeholder-plus-action" />
+
+### Placeholder Only
+
+<Story id="feedback-dialog--placeholder-only" />
+
+### Scrollable Plus Actions
+
+Most dialog content should avoid scrolling.
+<ul>
+    <li> When scrolling is required, the dialog title is pinned at the top, 
+         with action buttons pinned at the bottom. This ensures selected content stays visible alongside the title and buttons, 
+         even upon scroll.</li>
+    <li>Dialog does not scroll with elements outside of the dialog, such as the background.</li>
+</ul>
+
+<Story id="feedback-dialog--scrollable-plus-actions" />
+
+### No Title
+
+<Story id="feedback-dialog--no-title" />
+
+### Compact
+
+Compact `Dialog` using `EdsProvider`.
+
+<Story id="feedback-dialog--compact" />

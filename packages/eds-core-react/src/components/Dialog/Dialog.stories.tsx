@@ -4,6 +4,7 @@ import {
   Dialog,
   DialogProps,
   Button,
+  Radio,
   Typography,
   EdsProvider,
   Density,
@@ -51,6 +52,10 @@ const Placeholder = styled.div`
   display: inline-block;
 `
 
+const RadioWrapper = styled(Radio)`
+  display: flex;
+`
+
 export const Introduction: Story<DialogProps> = (args) => {
   const { open, isDismissable } = args
   const [, updateArgs] = useArgs()
@@ -75,7 +80,9 @@ export const Introduction: Story<DialogProps> = (args) => {
         <Dialog.Actions>
           <Wrapper>
             <Button onClick={handleClose}>OK</Button>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button variant="ghost" onClick={handleClose}>
+              Cancel
+            </Button>
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
@@ -92,7 +99,7 @@ export const Dismissable: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <>
+    <Stack>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -102,7 +109,7 @@ export const Dismissable: Story<DialogProps> = () => {
         </Dialog.Header>
         <Dialog.CustomContent>
           <Typography variant="body_short">
-            closes dialog on click outside and escape key.
+            Closes dialog on click outside and escape key.
           </Typography>
         </Dialog.CustomContent>
         <Dialog.Actions>
@@ -114,16 +121,8 @@ export const Dismissable: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </>
+    </Stack>
   )
-}
-Dismissable.parameters = {
-  docs: {
-    description: {
-      story:
-        '`isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`',
-    },
-  },
 }
 
 export const TextPlusAction: Story<DialogProps> = () => {
@@ -135,7 +134,7 @@ export const TextPlusAction: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <>
+    <Stack>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -155,7 +154,7 @@ export const TextPlusAction: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </>
+    </Stack>
   )
 }
 
@@ -168,7 +167,7 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <>
+    <Stack>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -188,7 +187,7 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </>
+    </Stack>
   )
 }
 
@@ -201,7 +200,7 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <>
+    <Stack>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -212,11 +211,11 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
         <Dialog.CustomContent>
           <Placeholder>
             Custom content in a larger placeholder. No actions, only ESC or
-            timedelay
+            timedelay.
           </Placeholder>
         </Dialog.CustomContent>
       </Dialog>
-    </>
+    </Stack>
   )
 }
 
@@ -229,7 +228,7 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <>
+    <Stack>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -238,16 +237,12 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
           <Dialog.Title>Scrollable + actions</Dialog.Title>
         </Dialog.Header>
         <Dialog.CustomContent scrollable>
-          <Typography variant="body_short">
-            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-            lot.
-          </Typography>
-          <Typography variant="body_short">
-            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
-            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
-            lot.
-          </Typography>
+          <RadioWrapper label="Black" name="first" />
+          <RadioWrapper label="Blue" defaultChecked name="second" />
+          <RadioWrapper label="Green" name="third" />
+          <RadioWrapper label="Read" name="fourth" />
+          <RadioWrapper label="White" name="fifth" />
+          <RadioWrapper label="Yellow" name="sixth" />
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Wrapper>
@@ -258,7 +253,7 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </>
+    </Stack>
   )
 }
 
@@ -271,7 +266,7 @@ export const NoTitle: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <>
+    <Stack>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -288,7 +283,7 @@ export const NoTitle: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </>
+    </Stack>
   )
 }
 
@@ -308,34 +303,30 @@ export const Compact: Story<DialogProps> = () => {
   }, [density])
 
   return (
-    <EdsProvider density={density}>
-      <Button aria-haspopup="dialog" onClick={handleOpen}>
-        Trigger Dialog
-      </Button>
-      <Dialog open={isOpen}>
-        <Dialog.Header>
-          <Dialog.Title>Compact</Dialog.Title>
-        </Dialog.Header>
-        <Dialog.CustomContent>
-          <Typography variant="body_short">Small description here.</Typography>
-        </Dialog.CustomContent>
-        <Dialog.Actions>
-          <Wrapper>
-            <Button onClick={handleClose}>OK</Button>
-            <Button onClick={handleClose} variant="ghost">
-              Cancel
-            </Button>
-          </Wrapper>
-        </Dialog.Actions>
-      </Dialog>
-    </EdsProvider>
+    <Stack>
+      <EdsProvider density={density}>
+        <Button aria-haspopup="dialog" onClick={handleOpen}>
+          Trigger Dialog
+        </Button>
+        <Dialog open={isOpen}>
+          <Dialog.Header>
+            <Dialog.Title>Compact</Dialog.Title>
+          </Dialog.Header>
+          <Dialog.CustomContent>
+            <Typography variant="body_short">
+              Small description here.
+            </Typography>
+          </Dialog.CustomContent>
+          <Dialog.Actions>
+            <Wrapper>
+              <Button onClick={handleClose}>OK</Button>
+              <Button onClick={handleClose} variant="ghost">
+                Cancel
+              </Button>
+            </Wrapper>
+          </Dialog.Actions>
+        </Dialog>
+      </EdsProvider>
+    </Stack>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Dialog` using `EdsProvider` ',
-    },
-  },
 }
