@@ -15,7 +15,7 @@ Icon.add(icons)
 const Stack = styled(SBStack)`
   display: grid;
   grid-gap: 32px;
-  grid-template-columns: repeat(3, fit-content(100%));
+  grid-template-columns: repeat(4, fit-content(100%));
 `
 
 export default {
@@ -36,30 +36,43 @@ const CatImage = (props: Partial<AvatarProps>) => (
 )
 
 export const Introduction: Story<ChipProps> = (args) => (
-  <Chip {...args}>Play with me</Chip>
+  <Stack>
+    <Chip {...args}>Play with me</Chip>
+  </Stack>
 )
 
 export const Text: Story<ChipProps> = () => (
   <Stack>
-    <Chip>normal</Chip>
-    <Chip variant="active">active</Chip>
-    <Chip variant="active" onDelete={handleDelete}>
-      active + deletable
-    </Chip>
-    <Chip variant="error">error</Chip>
-    <Chip variant="error" onDelete={handleDelete}>
-      error + deletable
-    </Chip>
-    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
-      error + deletable + clickable
-    </Chip>
+    <Chip>NORMAL</Chip>
+    <Chip variant="active">ACTIVE</Chip>
+    <Chip variant="error">ERROR</Chip>
+    <Chip disabled>DISABLED</Chip>
     <Chip onClick={handleClick}>clickable</Chip>
+    <Chip variant="active" onClick={handleClick}>
+      clickable
+    </Chip>
+    <Chip variant="error" onClick={handleClick}>
+      clickable
+    </Chip>
+    <Chip onDelete={handleDelete} disabled>
+      deletable
+    </Chip>
     <Chip onDelete={handleDelete}>deletable</Chip>
+    <Chip variant="active" onDelete={handleDelete}>
+      deletable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete}>
+      deletable
+    </Chip>
+    <div></div>
     <Chip onDelete={handleDelete} onClick={handleClick}>
       deletable + clickable
     </Chip>
-    <Chip onDelete={handleDelete} disabled>
-      disabled
+    <Chip variant="active" onDelete={handleDelete} onClick={handleClick}>
+      deletable + clickable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
+      deletable + clickable
     </Chip>
   </Stack>
 )
@@ -68,43 +81,60 @@ export const TextAndIcon: Story<ChipProps> = () => (
   <Stack>
     <Chip>
       <Icon name="save" />
-      normal
+      NORMAL
     </Chip>
     <Chip variant="active">
       <Icon name="save" />
-      active
-    </Chip>
-    <Chip variant="active" onDelete={handleDelete}>
-      <Icon name="save" />
-      active + deletable
+      ACTIVE
     </Chip>
     <Chip variant="error">
       <Icon name="save" />
-      error
+      ERROR
     </Chip>
-    <Chip variant="error" onDelete={handleDelete}>
+    <Chip disabled>
       <Icon name="save" />
-      error + deletable
-    </Chip>
-    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
-      <Icon name="save" />
-      error + deletable + clickable
+      DISABLED
     </Chip>
     <Chip onClick={handleClick}>
       <Icon name="save" />
       clickable
     </Chip>
+    <Chip variant="active" onClick={handleClick}>
+      <Icon name="save" />
+      clickable
+    </Chip>
+    <Chip variant="error" onClick={handleClick}>
+      <Icon name="save" />
+      clickable
+    </Chip>
+    <Chip onDelete={handleDelete} disabled>
+      <Icon name="save" />
+      deletable
+    </Chip>
     <Chip onDelete={handleDelete}>
       <Icon name="save" />
       deletable
     </Chip>
+    <Chip variant="active" onDelete={handleDelete}>
+      <Icon name="save" />
+      deletable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete}>
+      <Icon name="save" />
+      deletable
+    </Chip>
+    <div></div>
     <Chip onDelete={handleDelete} onClick={handleClick}>
       <Icon name="save" />
       deletable + clickable
     </Chip>
-    <Chip onDelete={handleDelete} disabled>
+    <Chip variant="active" onDelete={handleDelete} onClick={handleClick}>
       <Icon name="save" />
-      disabled
+      deletable + clickable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
+      <Icon name="save" />
+      deletable + clickable
     </Chip>
   </Stack>
 )
@@ -112,43 +142,60 @@ export const TextAndAvatar: Story<ChipProps> = () => (
   <Stack>
     <Chip>
       <CatImage />
-      normal
+      NORMAL
     </Chip>
     <Chip variant="active">
       <CatImage />
-      active
-    </Chip>
-    <Chip variant="active" onDelete={handleDelete}>
-      <CatImage />
-      active + deletable
+      ACTIVE
     </Chip>
     <Chip variant="error">
       <CatImage />
-      error
+      ERROR
     </Chip>
-    <Chip variant="error" onDelete={handleDelete}>
+    <Chip disabled>
       <CatImage />
-      error + deletable
-    </Chip>
-    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
-      <CatImage />
-      error + deletable + clickable
+      DISABLED
     </Chip>
     <Chip onClick={handleClick}>
       <CatImage />
       clickable
     </Chip>
+    <Chip variant="active" onClick={handleClick}>
+      <CatImage />
+      clickable
+    </Chip>
+    <Chip variant="error" onClick={handleClick}>
+      <CatImage />
+      clickable
+    </Chip>
+    <Chip onDelete={handleDelete} disabled>
+      <CatImage />
+      deletable
+    </Chip>
     <Chip onDelete={handleDelete}>
       <CatImage />
       deletable
     </Chip>
+    <Chip variant="active" onDelete={handleDelete}>
+      <CatImage />
+      deletable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete}>
+      <CatImage />
+      deletable
+    </Chip>
+    <div></div>
     <Chip onDelete={handleDelete} onClick={handleClick}>
       <CatImage />
       deletable + clickable
     </Chip>
-    <Chip onDelete={handleDelete} disabled>
+    <Chip variant="active" onDelete={handleDelete} onClick={handleClick}>
       <CatImage />
-      disabled
+      deletable + clickable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
+      <CatImage />
+      deletable + clickable
     </Chip>
   </Stack>
 )
