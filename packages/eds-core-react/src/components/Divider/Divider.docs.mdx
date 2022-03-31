@@ -1,0 +1,57 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Divider } from '.'
+
+# Divider
+Horizontal, thin line.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#separator"
+    figmaUrl="https://www.figma.com/file/luNobpDIWTuQ9rhyovGLBI/Desktop?node-id=624%3A0"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/343afd-divider/b/398446"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Divider/Divider.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+></Links>
+
+<Story id="data-display-divider--introduction"/>
+<PropsTable />
+
+## Usage
+
+The `Divider` brings clarity to layout by grouping and dividing content into groups. <br />
+ <ul>
+    <li>Dividers should be noticeable in a layout, but not clashing.</li>
+    <li>Dividers should only be used if elements can't be split using white space.</li>
+    <li>Use dividers occasionally, to create groupings rather than separate individual items.</li>
+    <li>Dividers can be used to establish rhythm and hierarchy.</li>
+  </ul>
+
+  ```tsx
+import { Divider } from '@equinor/eds-core-react'
+
+<Divider />
+```
+
+## Examples
+
+### Full-bleed dividers
+
+Full-bleed dividers separate content into segments and span the entire length of a layout.
+<ul>
+  <li>Separates list and layout elements.</li>
+  <li>Indicates where an element may expand.</li>
+  <li>Helps separate individual tiles.</li>
+</ul>
+<Story id="data-display-divider--full-bleed"/>
+
+### Inset dividers
+
+Use inset dividers to separate related content. 
+Use inset dividers when there are anchoring elements such as an icon or avatar.
+
+<Story id="data-display-divider--inset"/>
+
+### Middle dividers
+
+Middle dividers in the middle of a layout, separates related content.
+
+<Story id="data-display-divider--middle" />
