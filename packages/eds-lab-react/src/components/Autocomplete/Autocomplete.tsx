@@ -180,7 +180,7 @@ export type AutocompleteProps<T> = {
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
-  optionLabel?: (option: T & { label?: string }) => string
+  optionLabel?: (option: T) => string
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
   /** Disable option */
@@ -214,10 +214,7 @@ function AutocompleteInner<T>(
     optionsFilter,
     autoWidth,
     placeholder,
-    optionLabel = (item) =>
-      typeof item.label !== 'undefined'
-        ? item.label
-        : (item as unknown as string),
+    optionLabel = (item) => item as unknown as string,
     ...other
   } = props
   const anchorRef = useRef()
