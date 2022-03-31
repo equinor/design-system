@@ -7,9 +7,6 @@ import page from './Breadcrumbs.docs.mdx'
 
 const Stack = styled(SBStack)`
   margin: 42px;
-  /* display: grid; */
-  /* grid-auto-columns: auto; */
-  /* grid-gap: 8px; */
 `
 
 export default {
@@ -100,13 +97,6 @@ export const Collapsed: Story<BreadcrumbsProps> = () => (
   </Stack>
 )
 
-Collapsed.parameters = {
-  docs: {
-    storyDescription: `Choose collapse prop to use ellipses to indicate the middle pages.
-    Click ellipses (...) to expand.`,
-  },
-}
-
 export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
   <Stack>
     <Breadcrumbs>
@@ -127,12 +117,6 @@ export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
     </Breadcrumbs>
   </Stack>
 )
-TruncatedLabels.parameters = {
-  docs: {
-    storyDescription: `Choose maxWidth in pixels to truncate labels. Hover on label to see
-    full text.`,
-  },
-}
 TruncatedLabels.storyName = 'Truncated labels'
 
 export const Wrapped: Story<BreadcrumbsProps> = () => (
@@ -156,8 +140,3 @@ export const Wrapped: Story<BreadcrumbsProps> = () => (
     </Breadcrumbs>
   </Stack>
 )
-Wrapped.parameters = {
-  docs: {
-    storyDescription: `Wraps over two or more lines. Controlled by parent width.`,
-  },
-}
