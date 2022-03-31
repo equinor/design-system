@@ -2805,8 +2805,8 @@ export const flight_takeoff: IconData = {
     'M20.25 8.295c.8-.22 1.63.26 1.84 1.06.21.8-.26 1.62-1.07 1.85l-16.57 4.43-2.59-4.49 1.45-.39 1.97 1.54 4.97-1.33-4.14-7.17 1.93-.51 6.9 6.43 5.31-1.42zm1.27 10.42h-19v2h19v-2z',
 }
 
-export const communte: IconData = {
-  name: 'communte',
+export const commute: IconData = {
+  name: 'commute',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -2976,8 +2976,8 @@ export const memory: IconData = {
     'M21 11V9h-2V7c0-1.1-.9-2-2-2h-2V3h-2v2h-2V3H9v2H7c-1.1 0-2 .9-2 2v2H3v2h2v2H3v2h2v2c0 1.1.9 2 2 2h2v2h2v-2h2v2h2v-2h2c1.1 0 2-.9 2-2v-2h2v-2h-2v-2h2zM9 9h6v6H9V9zm2 4h2v-2h-2v2zm-4 4h10V7H7v10z',
 }
 
-export const headseat_mic: IconData = {
-  name: 'headseat_mic',
+export const headset_mic: IconData = {
+  name: 'headset_mic',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -3129,8 +3129,8 @@ export const device_unknown: IconData = {
     'M7 1h10c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2zm10 18V5H7v14h10zM12 6.72c-1.96 0-3.5 1.52-3.5 3.47h1.75c0-.93.82-1.75 1.75-1.75s1.75.82 1.75 1.75c0 .767-.505 1.163-1.072 1.608-.728.572-1.558 1.224-1.558 2.842h1.76c0-.945.61-1.488 1.24-2.05.678-.604 1.38-1.23 1.38-2.4 0-1.96-1.54-3.47-3.5-3.47zM13 18v-2h-2v2h2z',
 }
 
-export const desktop_windwos: IconData = {
-  name: 'desktop_windwos',
+export const desktop_windows: IconData = {
+  name: 'desktop_windows',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -3281,8 +3281,8 @@ export const fridge: IconData = {
     'm6 2 12 .01c1.1 0 2 .88 2 1.99v16c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V4a2 2 0 0 1 2-2zm2 3h2v3H8V5zm0 7h2v5H8v-5zm10 8H6v-9.02h12V20zM6 9h12V4H6v5z',
 }
 
-export const breifcase: IconData = {
-  name: 'breifcase',
+export const briefcase: IconData = {
+  name: 'briefcase',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -4244,8 +4244,8 @@ export const functions: IconData = {
   svgPathData: 'M18 4H6v2l6.5 6L6 18v2h12v-3h-7l5-5-5-5h7V4z',
 }
 
-export const format_stikethrough: IconData = {
-  name: 'format_stikethrough',
+export const format_strikethrough: IconData = {
+  name: 'format_strikethrough',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -4946,8 +4946,8 @@ export const mood_happy: IconData = {
     'M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM8.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-6.95 6c.7 1.19 1.97 2 3.45 2 1.48 0 2.75-.81 3.45-2h1.67a5.495 5.495 0 0 1-10.24 0h1.67zM4 12c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8-8 3.58-8 8z',
 }
 
-export const mood_extreamly_sad: IconData = {
-  name: 'mood_extreamly_sad',
+export const mood_extremely_sad: IconData = {
+  name: 'mood_extremely_sad',
   prefix: 'eds',
   height: '24',
   width: '24',
@@ -4955,8 +4955,8 @@ export const mood_extreamly_sad: IconData = {
     'M2 12C2 6.47 6.47 2 11.99 2 17.52 2 22 6.47 22 12s-4.49 10-10.01 10S2 17.53 2 12zm5.82 0 1.06-1.06L9.94 12 11 10.94 9.94 9.88 11 8.82 9.94 7.76 8.88 8.82 7.82 7.76 6.76 8.82l1.06 1.06-1.06 1.06L7.82 12zM12 13.5c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5zm0 6.5c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.12-11.18 1.06-1.06 1.06 1.06-1.06 1.06 1.06 1.06L16.18 12l-1.06-1.06L14.06 12 13 10.94l1.06-1.06L13 8.82l1.06-1.06 1.06 1.06z',
 }
 
-export const mood_extreamly_happy: IconData = {
-  name: 'mood_extreamly_happy',
+export const mood_extremely_happy: IconData = {
+  name: 'mood_extremely_happy',
   prefix: 'eds',
   height: '24',
   width: '24',
