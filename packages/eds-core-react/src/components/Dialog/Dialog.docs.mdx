@@ -29,7 +29,29 @@ Dialogs are purposefully interruptive, so they should be used sparingly.
  ```tsx
 import { Dialog } from '@equinor/eds-core-react'
 
-<Dialog />
+const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+<Button aria-haspopup="dialog" onClick={handleOpen}>
+  Trigger Dialog
+</Button>
+<Dialog open={isOpen}>
+  <Dialog.Header>
+    <Dialog.Title>Title</Dialog.Title>
+  </Dialog.Header>
+  <Dialog.CustomContent>
+    <Typography variant="body_short">Small description here.</Typography>
+  </Dialog.CustomContent>
+  <Dialog.Actions>
+    <Button onClick={handleClose}>OK</Button>
+    <Button variant="ghost" onClick={handleClose}>Cancel</Button>
+  </Dialog.Actions>
+</Dialog>
 ```
 
 ## Examples
