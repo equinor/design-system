@@ -2,16 +2,12 @@ import { FC } from 'react'
 import { Button, Icon, Tooltip, Typography } from '@equinor/eds-core-react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { first_page, last_page } from '@equinor/eds-icons'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const {
   entities: {
     toggleOpen: {
-      spacings: { right: mediumSpacing, top: mediumSmallSpacing },
       typography: { color: iconColor },
-      states: {
-        hover: { background: expandHover },
-      },
     },
   },
 } = tokens
@@ -20,43 +16,63 @@ type ContainerProps = {
   open?: boolean
 }
 
-const ToggleContainer = styled.div<ContainerProps>`
-  display: ${(props) => (props.open ? 'grid' : 'flex')};
-  grid-template-columns: repeat(10, 1fr);
-  grid-gap: ${mediumSpacing};
-  justify-content: center;
-  margin-top: auto;
-  margin-bottom: ${mediumSpacing};
-  ${(props) =>
-    !props.open &&
+const ToggleContainer = styled.div<ContainerProps>(({ theme, open }) => {
+  const {
+    entities: {
+      toggleOpen: {
+        spacings: { right: mediumSpacing },
+      },
+    },
+  } = theme
+  return css`
+    display: ${open ? 'grid' : 'flex'};
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: ${mediumSpacing};
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: ${mediumSpacing};
+    ${!open &&
     `
-    > button {
-      margin-left: -4px;
-    }
-  `}
-`
+      > button {
+        margin-left: -4px;
+      }
+    `}
+  `
+})
 
-const LargeButton = styled.button`
-  grid-column: 2 / 10;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: ${mediumSpacing};
-  align-items: center;
-  background: none;
-  border: none;
-  border-radius: 4px;
-  padding: ${mediumSmallSpacing};
-  margin-left: -${mediumSpacing};
-  margin-right: -${mediumSpacing};
-  > p {
-    grid-column: 2;
-    margin-left: -1px; // border size
-  }
-  &:hover {
-    cursor: pointer;
-    background: ${expandHover};
-  }
-`
+const LargeButton = styled.button(({ theme }) => {
+  const {
+    entities: {
+      toggleOpen: {
+        spacings: { right: mediumSpacing, top: mediumSmallSpacing },
+        states: {
+          hover: { background: expandHover },
+        },
+      },
+    },
+  } = theme
+  return css`
+    grid-column: 2 / 10;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: ${mediumSpacing};
+    align-items: center;
+    background: none;
+    border: none;
+    border-radius: 4px;
+    padding: ${mediumSmallSpacing};
+    margin-left: -${mediumSpacing};
+    margin-right: -${mediumSpacing};
+    > p {
+      grid-column: 2;
+      margin-left: -1px; // border size
+    }
+    &:hover {
+      cursor: pointer;
+      background: ${expandHover};
+    }
+  `
+})
 
 const Text = styled(Typography)`
   font-weight: 400;

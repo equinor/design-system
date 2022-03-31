@@ -8,25 +8,17 @@ import {
   Tooltip as EDSTooltip,
   Typography,
 } from '@equinor/eds-core-react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
 import { useSideBar } from '../SideBar'
 
 const {
   entities: {
     sidebarItem: {
-      border,
-      spacings: { bottom: mediumSpacing },
       typography: { color: itemTextColor },
       states: {
         active: {
-          background: menuActiveBackground,
           typography: { color: iconActive },
-        },
-        hover: { background: menuHoverBackground },
-        disabled: {
-          background: menuDisabledBackground,
-          typography: { color: menuDisabledText },
         },
       },
     },
@@ -43,27 +35,45 @@ type StrippedButton = Omit<
   keyof ButtonHTMLAttributes<HTMLButtonElement>
 >
 
-const Container = styled(Button)<ContainerProps>`
-  background: ${(props) => (props.active ? menuActiveBackground : 'none')};
-  display: ${(props) => (props.open ? 'grid' : 'flex')};
-  grid-template-columns: repeat(10, 1fr);
-  grid-gap: ${mediumSpacing};
-  justify-content: ${(props) => !props.open && 'center'};
-  align-items: center;
-  ${bordersTemplate(border)}
-  text-decoration: none;
-  min-height: 72px;
+const Container = styled(Button)<ContainerProps>(({ theme, open, active }) => {
+  const {
+    entities: {
+      sidebarItem: {
+        border,
+        spacings: { bottom: mediumSpacing },
+        states: {
+          active: { background: menuActiveBackground },
+          hover: { background: menuHoverBackground },
+          disabled: {
+            background: menuDisabledBackground,
+            typography: { color: menuDisabledText },
+          },
+        },
+      },
+    },
+  } = theme
+  return css`
+    background: ${active ? menuActiveBackground : 'none'};
+    display: ${open ? 'grid' : 'flex'};
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: ${mediumSpacing};
+    justify-content: ${!open && 'center'};
+    align-items: center;
+    ${bordersTemplate(border)}
+    text-decoration: none;
+    min-height: 72px;
 
-  &:hover {
-    cursor: pointer;
-    background: ${menuHoverBackground};
-  }
+    &:hover {
+      cursor: pointer;
+      background: ${menuHoverBackground};
+    }
 
-  &:disabled {
-    background: ${menuDisabledBackground};
-    color: ${menuDisabledText};
-  }
-`
+    &:disabled {
+      background: ${menuDisabledBackground};
+      color: ${menuDisabledText};
+    }
+  `
+})
 
 const ItemIcon = styled(Icon)`
   grid-column: 2;
@@ -74,14 +84,23 @@ type ItemTextProps = {
   active?: boolean
 }
 
-const ItemText = styled(Typography)<ItemTextProps>`
-  font-weight: ${(props) => (props.active ? '500' : '400')};
-  grid-column: 3 / -1;
-  color: ${itemTextColor};
-  &::first-letter {
-    text-transform: capitalize;
-  }
-`
+const ItemText = styled(Typography)<ItemTextProps>(({ theme, active }) => {
+  const {
+    entities: {
+      sidebarItem: {
+        typography: { color: itemTextColor },
+      },
+    },
+  } = theme
+  return css`
+    font-weight: ${active ? '500' : '400'};
+    grid-column: 3 / -1;
+    color: ${itemTextColor};
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  `
+})
 
 const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;
