@@ -1,0 +1,103 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Dialog } from '.'
+
+# Dialog
+
+Informs users about a task and can contain critical information, requires decisions, or involves multiple tasks, in a layer above the page.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/wai-aria-practices/#dialog_modal"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/059c0e-dialog/b/087c3e"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Dialog/Dialog.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+></Links>
+
+<Story id="feedback-dialog--introduction" />
+<PropsTable />
+
+## Usage
+
+Dialogs disable all app functionality when they appear, and remain on screen until confirmed, dismissed, or a required action has been taken.
+Dialogs are purposefully interruptive, so they should be used sparingly.
+
+<ul>
+    <li>Dialogs <strong>focus</strong> user attention to ensure their content is addressed.</li>
+    <li>Dialogs should be <strong>direct</strong> in communicating information and dedicated to completing a assignment.</li>
+    <li>Dialogs should appear in response to a user task or an action, with suitable or contextual information.</li>
+</ul>
+
+ ```tsx
+import { Dialog } from '@equinor/eds-core-react'
+
+const Demo = () => {
+    const [isOpen, setIsOpen] = useState(false)
+      const handleOpen = () => {
+        setIsOpen(true)
+      }
+      const handleClose = () => {
+        setIsOpen(false)
+      }
+
+    return (
+        <>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen}>
+        <Dialog.Header>
+          <Dialog.Title>Title</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">Small description here.</Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Button onClick={handleClose}>OK</Button>
+          <Button variant="ghost" onClick={handleClose}>Cancel</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+```
+
+## Examples
+
+### Dismissable
+
+`isDismissable={true}` closes dialog on click outside and escape key. Defaults to `false`.
+
+<Story id="feedback-dialog--dismissable" />
+
+### Text Plus Action
+
+<Story id="feedback-dialog--text-plus-action" />
+
+### Placeholder Plus Action
+
+<Story id="feedback-dialog--placeholder-plus-action" />
+
+### Placeholder Only
+
+<Story id="feedback-dialog--placeholder-only" />
+
+### Scrollable Plus Actions
+
+Most dialog content should avoid scrolling.
+<ul>
+    <li> When scrolling is required, the dialog title is pinned at the top, 
+         with action buttons pinned at the bottom. This ensures selected content stays visible alongside the title and buttons, 
+         even upon scroll.</li>
+    <li>Dialog does not scroll with elements outside of the dialog, such as the background.</li>
+</ul>
+
+<Story id="feedback-dialog--scrollable-plus-actions" />
+
+### No Title
+
+<Story id="feedback-dialog--no-title" />
+
+### Compact
+
+Compact `Dialog` using `EdsProvider`.
+
+<Story id="feedback-dialog--compact" />
