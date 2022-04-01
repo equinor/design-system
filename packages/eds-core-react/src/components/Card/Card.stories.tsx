@@ -37,6 +37,7 @@ export default {
   subcomponents: {
     Header: Card.Header,
     HeaderTitle: Card.HeaderTitle,
+    Content: Card.Content,
     Media: Card.Media,
     Actions: Card.Actions,
   },
