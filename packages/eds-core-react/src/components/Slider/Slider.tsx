@@ -6,6 +6,7 @@ import {
   MouseEvent,
   KeyboardEvent,
   FormEvent,
+  useEffect,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -214,6 +215,13 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const [sliderValue, setSliderValue] = useState(
     isRangeSlider ? value : [value],
   )
+
+  useEffect(() => {
+    if (value !== sliderValue) {
+      setSliderValue(isRangeSlider ? value : [value])
+    }
+  }, [value, sliderValue, isRangeSlider])
+
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
   const onValueChange = (
