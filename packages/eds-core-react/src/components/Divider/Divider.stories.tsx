@@ -78,6 +78,8 @@ export const FullBleed: Story<DividerProps> = () => (
   </Stack>
 )
 
+FullBleed.storyName = 'Full bleed'
+
 export const Inset: Story<DividerProps> = () => (
   <Stack>
     <Card style={{ width: '50%' }}>
