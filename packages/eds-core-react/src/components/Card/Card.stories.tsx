@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { Card, Avatar, Typography, Button, Icon, CardProps } from '../..'
 import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
+import page from './Card.docs.mdx'
 
 const icons = {
   more_vertical,
@@ -30,12 +31,7 @@ export default {
   component: Card,
   parameters: {
     docs: {
-      description: {
-        component: `A card displays content related to a single subject and
-        acts as an entry point to more detailed information. Card blocks can be
-        combined in a variety of ways.
-        `,
-      },
+      page,
     },
   },
   subcomponents: {
@@ -44,9 +40,9 @@ export default {
     Media: Card.Media,
     Actions: Card.Actions,
   },
-} as Meta
+} as ComponentMeta<typeof Card>
 
-export const Default: Story<CardProps> = (args) => (
+export const Introduction: Story<CardProps> = (args) => (
   <Wrapper>
     <Card {...args}>
       <Card.Header>
@@ -354,5 +350,4 @@ export const WithActions: Story<CardProps> = () => (
     </Card>
   </Wrapper>
 )
-
 WithActions.storyName = 'With actions'
