@@ -215,7 +215,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const [initalValue, setInitalValue] = useState<number[]>(
     isRangeSlider ? value : [value],
   )
-  const [sliderValue, setSliderValue] = useState(
+  const [sliderValue, setSliderValue] = useState<number[]>(
     isRangeSlider ? value : [value],
   )
 
