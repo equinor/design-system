@@ -212,15 +212,26 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   ref,
 ) {
   const isRangeSlider = Array.isArray(value)
+  const [initalValue, setInitalValue] = useState<number[]>(
+    isRangeSlider ? value : [value],
+  )
   const [sliderValue, setSliderValue] = useState(
     isRangeSlider ? value : [value],
   )
 
   useEffect(() => {
-    if (value !== sliderValue) {
-      setSliderValue(isRangeSlider ? value : [value])
+    if (isRangeSlider) {
+      if (initalValue[0] !== value[0] || initalValue[1] !== value[1]) {
+        setInitalValue(value)
+        setSliderValue(value)
+      }
+    } else {
+      if (value !== initalValue[0]) {
+        setInitalValue([value])
+        setSliderValue([value])
+      }
     }
-  }, [value, sliderValue, isRangeSlider])
+  }, [value, initalValue, isRangeSlider])
 
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
