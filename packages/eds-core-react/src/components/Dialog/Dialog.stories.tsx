@@ -330,3 +330,9 @@ export const Compact: Story<DialogProps> = () => {
     </Stack>
   )
 }
+
+TextPlusAction.storyName = 'Text plus action'
+PlaceholderPlusAction.storyName = 'Placeholder plus action'
+PlaceholderOnly.storyName = 'Placeholder only'
+ScrollablePlusActions.storyName = 'Scrollable plus actions'
+NoTitle.storyName = 'No title'
