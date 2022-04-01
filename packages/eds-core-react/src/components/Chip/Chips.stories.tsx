@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '../..'
 import { Meta, Story } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
-import { Stack as SBStack } from './../../../.storybook/components'
 import page from './Chips.docs.mdx'
 
 const icons = {
@@ -12,7 +11,7 @@ const icons = {
 
 Icon.add(icons)
 
-const Stack = styled(SBStack)`
+const Wrapper = styled.div`
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(4, fit-content(100%));
@@ -36,17 +35,17 @@ const CatImage = (props: Partial<AvatarProps>) => (
 )
 
 export const Introduction: Story<ChipProps> = (args) => (
-  <Stack>
+  <Wrapper>
     <Chip {...args}>Play with me</Chip>
-  </Stack>
+  </Wrapper>
 )
 
 export const Text: Story<ChipProps> = () => (
-  <Stack>
-    <Chip>NORMAL</Chip>
-    <Chip variant="active">ACTIVE</Chip>
-    <Chip variant="error">ERROR</Chip>
-    <Chip disabled>DISABLED</Chip>
+  <Wrapper>
+    <Chip>Normal</Chip>
+    <Chip variant="active">Active</Chip>
+    <Chip variant="error">Error</Chip>
+    <Chip disabled>Disabled</Chip>
     <Chip onClick={handleClick}>clickable</Chip>
     <Chip variant="active" onClick={handleClick}>
       clickable
@@ -74,26 +73,26 @@ export const Text: Story<ChipProps> = () => (
     <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
       deletable + clickable
     </Chip>
-  </Stack>
+  </Wrapper>
 )
 
 export const TextAndIcon: Story<ChipProps> = () => (
-  <Stack>
+  <Wrapper>
     <Chip>
       <Icon name="save" />
-      NORMAL
+      Normal
     </Chip>
     <Chip variant="active">
       <Icon name="save" />
-      ACTIVE
+      Active
     </Chip>
     <Chip variant="error">
       <Icon name="save" />
-      ERROR
+      Error
     </Chip>
     <Chip disabled>
       <Icon name="save" />
-      DISABLED
+      Disabled
     </Chip>
     <Chip onClick={handleClick}>
       <Icon name="save" />
@@ -136,25 +135,25 @@ export const TextAndIcon: Story<ChipProps> = () => (
       <Icon name="save" />
       deletable + clickable
     </Chip>
-  </Stack>
+  </Wrapper>
 )
 export const TextAndAvatar: Story<ChipProps> = () => (
-  <Stack>
+  <Wrapper>
     <Chip>
       <CatImage />
-      NORMAL
+      Normal
     </Chip>
     <Chip variant="active">
       <CatImage />
-      ACTIVE
+      Active
     </Chip>
     <Chip variant="error">
       <CatImage />
-      ERROR
+      Error
     </Chip>
     <Chip disabled>
       <CatImage />
-      DISABLED
+      Disabled
     </Chip>
     <Chip onClick={handleClick}>
       <CatImage />
@@ -197,7 +196,7 @@ export const TextAndAvatar: Story<ChipProps> = () => (
       <CatImage />
       deletable + clickable
     </Chip>
-  </Stack>
+  </Wrapper>
 )
 
 TextAndIcon.storyName = 'Text and icon'
