@@ -1,5 +1,14 @@
 import styled from 'styled-components'
-import { Card, Avatar, Typography, Button, Icon, CardProps } from '../..'
+import {
+  Avatar,
+  Button,
+  Card,
+  CardProps,
+  Chip,
+  Divider,
+  Icon,
+  Typography,
+} from '../..'
 import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'
 import { ComponentMeta, Story } from '@storybook/react'
 import page from './Card.docs.mdx'
@@ -102,36 +111,16 @@ export const TypeOfCards: Story<CardProps> = () => (
     </Card>
   </Wrapper>
 )
-TypeOfCards.storyName = 'Type variants'
+TypeOfCards.storyName = 'Container variants'
 
 export const CardHeaderVariants: Story<CardProps> = () => (
   <Wrapper>
-    <Card variant="info">
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="h4">Title goes here</Typography>
-          <Typography variant="body_short">Body short</Typography>
-        </Card.HeaderTitle>
-      </Card.Header>
-    </Card>
     <Card>
       <Card.Header>
         <Card.HeaderTitle>
           <Typography variant="h4">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
         </Card.HeaderTitle>
-        <Button variant="ghost_icon">
-          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
-        </Button>
-      </Card.Header>
-    </Card>
-    <Card variant="danger">
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="h4">Title goes here</Typography>
-          <Typography variant="body_short">Body short</Typography>
-        </Card.HeaderTitle>
-        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
       </Card.Header>
     </Card>
     <Card variant="info">
@@ -145,6 +134,35 @@ export const CardHeaderVariants: Story<CardProps> = () => (
     <Card>
       <Card.Header>
         <Card.HeaderTitle>
+          <Typography variant="h4">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.HeaderTitle>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+      </Card.Header>
+    </Card>
+    <Card variant="info">
+      <Card.Header>
+        <Card.HeaderTitle>
+          <Typography variant="h5">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.HeaderTitle>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
+      </Card.Header>
+    </Card>
+    <Card>
+      <Card.Header>
+        <Card.HeaderTitle>
+          <Typography variant="h4">Title goes here</Typography>
+          <Typography variant="body_short">Body short</Typography>
+        </Card.HeaderTitle>
+        <Button variant="ghost_icon">
+          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
+        </Button>
+      </Card.Header>
+    </Card>
+    <Card variant="info">
+      <Card.Header>
+        <Card.HeaderTitle>
           <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">Body short</Typography>
         </Card.HeaderTitle>
@@ -153,47 +171,45 @@ export const CardHeaderVariants: Story<CardProps> = () => (
         </Button>
       </Card.Header>
     </Card>
+    <Card variant="warning">
+      <Card.Header>
+        <Card.HeaderTitle>
+          <Typography variant="overline">Overline</Typography>
+          <Typography variant="h6">Title goes here</Typography>
+        </Card.HeaderTitle>
+      </Card.Header>
+    </Card>
     <Card variant="danger">
       <Card.Header>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
         <Card.HeaderTitle>
           <Typography variant="h5">Title goes here</Typography>
-          <Typography variant="body_short">Body short</Typography>
+          <Typography variant="caption">Caption</Typography>
         </Card.HeaderTitle>
-        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
       </Card.Header>
     </Card>
-    <Card>
+    <Card variant="warning">
       <Card.Header>
-        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
         <Card.HeaderTitle>
+          <Typography variant="overline">Overline</Typography>
           <Typography variant="h6">Title goes here</Typography>
-          <Typography variant="body_short">Caption</Typography>
         </Card.HeaderTitle>
+        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
       </Card.Header>
     </Card>
     <Card variant="danger">
       <Card.Header>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
         <Card.HeaderTitle>
-          <Typography variant="h6">Title goes here</Typography>
-          <Typography variant="body_short">Caption</Typography>
+          <Typography variant="h5">Title goes here</Typography>
+          <Typography variant="caption">Caption</Typography>
         </Card.HeaderTitle>
         <Button variant="ghost_icon">
           <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
         </Button>
       </Card.Header>
     </Card>
-
-    <Card>
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="overline">Overline</Typography>
-          <Typography variant="h6">Title goes here</Typography>
-        </Card.HeaderTitle>
-        <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
-      </Card.Header>
-    </Card>
-    <Card>
+    <Card variant="warning">
       <Card.Header>
         <Card.HeaderTitle>
           <Typography variant="overline">Overline</Typography>
@@ -202,14 +218,6 @@ export const CardHeaderVariants: Story<CardProps> = () => (
         <Button variant="ghost_icon">
           <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
         </Button>
-      </Card.Header>
-    </Card>
-    <Card>
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="overline">Overline</Typography>
-          <Typography variant="h6">Title goes here</Typography>
-        </Card.HeaderTitle>
       </Card.Header>
     </Card>
   </Wrapper>
@@ -352,3 +360,38 @@ export const WithActions: Story<CardProps> = () => (
   </Wrapper>
 )
 WithActions.storyName = 'With actions'
+
+export const WithDivider: Story<CardProps> = () => (
+  <Wrapper>
+    <Card>
+      <Card.Header>
+        <Card.HeaderTitle>
+          <Typography variant="h4">TICKET</Typography>
+        </Card.HeaderTitle>
+        <Typography variant="h6">20.02.2020</Typography>
+      </Card.Header>
+      <Card.Content>
+        <Typography variant="h5">Title</Typography>
+        <Typography variant="body_short">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </Typography>
+        <Divider style={{ width: '100%' }} />
+      </Card.Content>
+      <Card.Content>
+        <Typography variant="caption">Choose option</Typography>
+      </Card.Content>
+      <Card.Actions>
+        <Chip>active</Chip>
+        <Chip variant="active">pause</Chip>
+        <Chip>disable</Chip>
+        <Chip variant="error">stop</Chip>
+      </Card.Actions>
+      <Card.Actions>
+        <Button style={{ marginTop: '16px' }} variant="outlined">
+          SUBMIT TICKET
+        </Button>
+      </Card.Actions>
+    </Card>
+  </Wrapper>
+)
+WithDivider.storyName = 'With divider'

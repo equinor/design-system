@@ -22,7 +22,6 @@ A `Card` should be easy to scan for relevant and actionable information. <br />
     <li>A card is identifiable as a single, contained unit.</li>
     <li>A card can stand alone, without relying on surrounding elements for context.</li>
     <li>A card cannot merge with another card, or divide into multiple cards.</li>
-    <li>Elements, like text and images, should be placed on them in a way that clearly indicates hierarchy.</li>
     <li>Card blocks can be combined in a variety of ways.</li>
   </ul>
 
@@ -54,3 +53,39 @@ import { Card } from '@equinor/eds-core-react'
 ```
 
 ## Examples
+
+### Container variants
+
+<ul>
+    <li>The <code>container</code> is the only required block in a card.</li>
+    <li>There are four available <code>card/container</code> options:</li>
+</ul>
+
+<Story id="surfaces-card--type-of-cards" />
+
+### Header variants
+
+There are eleven title blocks to choose between:
+
+<Story id="surfaces-card--card-header-variants" />
+
+### With media
+
+Elements, like text and images, should be placed on them in a way that clearly indicates hierarchy.
+
+<Story id="surfaces-card--with-media" />
+
+### With actions
+
+<ul>
+    <li>A rule of thumb is to place them at the bottom of a card.</li>
+    <li>There are three supplemental action blocks to choose between:</li>
+</ul>
+
+<Story id="surfaces-card--with-actions" />
+
+### With divider
+
+Dividers can be used to separate areas in cards or to indicate sections of a card that can expand.
+
+<Story id="surfaces-card--with-divider" />
