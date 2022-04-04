@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '../..'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
 import page from './Chips.docs.mdx'
 
@@ -25,7 +25,7 @@ export default {
       page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Chip>
 
 const handleDelete = action('onDelete')
 const handleClick = action('onClick')
