@@ -306,7 +306,7 @@ export const WithActions: Story<CardProps> = () => (
 
       <Card.Actions>
         <Button>Cancel</Button>
-        <Button>OK</Button>
+        <Button variant="ghost">OK</Button>
       </Card.Actions>
     </Card>
     <Card>
