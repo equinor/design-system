@@ -8,7 +8,7 @@ import {
   DividerProps,
   Typography,
 } from '../..'
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { Story, ComponentMeta } from '@storybook/react'
 import { Stack as SBStack } from './../../../.storybook/components'
 import page from './Divider.docs.mdx'
 
@@ -24,7 +24,7 @@ export default {
       page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Divider>
 
 const Stack = styled(SBStack)`
   padding: 32px;
