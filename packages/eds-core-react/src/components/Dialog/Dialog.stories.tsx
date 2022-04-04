@@ -10,7 +10,7 @@ import {
   Density,
 } from '../..'
 import styled from 'styled-components'
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { Story, ComponentMeta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Dialog.docs.mdx'
 
@@ -32,7 +32,7 @@ export default {
       page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Dialog>
 
 const Wrapper = styled.div`
   display: grid;
@@ -157,6 +157,7 @@ export const TextPlusAction: Story<DialogProps> = () => {
     </Stack>
   )
 }
+TextPlusAction.storyName = 'Text plus action'
 
 export const PlaceholderPlusAction: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -190,6 +191,7 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
     </Stack>
   )
 }
+PlaceholderPlusAction.storyName = 'Placeholder plus action'
 
 export const PlaceholderOnly: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -206,18 +208,17 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
       </Button>
       <Dialog open={isOpen} isDismissable onClose={handleClose}>
         <Dialog.Header>
-          <Dialog.Title>Placeholder</Dialog.Title>
+          <Dialog.Title>View options</Dialog.Title>
         </Dialog.Header>
-        <Dialog.CustomContent>
-          <Placeholder>
-            Custom content in a larger placeholder. No actions, only ESC or
-            timedelay.
-          </Placeholder>
+        <Dialog.CustomContent scrollable>
+          <RadioWrapper label="Down" name="first" />
+          <RadioWrapper label="Up" defaultChecked name="second" />
         </Dialog.CustomContent>
       </Dialog>
     </Stack>
   )
 }
+PlaceholderOnly.storyName = 'Placeholder only'
 
 export const ScrollablePlusActions: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -256,6 +257,7 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
     </Stack>
   )
 }
+ScrollablePlusActions.storyName = 'Scrollable plus actions'
 
 export const NoTitle: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -286,6 +288,7 @@ export const NoTitle: Story<DialogProps> = () => {
     </Stack>
   )
 }
+NoTitle.storyName = 'No title'
 
 export const Compact: Story<DialogProps> = () => {
   const [isOpen, setIsOpen] = useState(false)
