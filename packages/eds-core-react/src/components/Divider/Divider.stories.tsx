@@ -8,7 +8,7 @@ import {
   DividerProps,
   Typography,
 } from '../..'
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { Story, ComponentMeta } from '@storybook/react'
 import { Stack as SBStack } from './../../../.storybook/components'
 import page from './Divider.docs.mdx'
 
@@ -24,7 +24,7 @@ export default {
       page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Divider>
 
 const Stack = styled(SBStack)`
   padding: 32px;
@@ -48,26 +48,26 @@ export const FullBleed: Story<DividerProps> = () => (
         </Card.HeaderTitle>
       </Card.Header>
       <Card.Content>
-        <Typography variant="caption">Today</Typography>
+        <Typography variant="overline">Today</Typography>
         <br />
-        <Typography variant="overline">News title</Typography>
-        <Typography>
+        <Typography variant="h5">News title</Typography>
+        <Typography variant="caption">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
       </Card.Content>
       <Divider style={{ width: '100%' }} variant="small" />
       <Card.Content>
-        <Typography variant="overline">News title</Typography>
-        <Typography>
+        <Typography variant="h5">News title</Typography>
+        <Typography variant="caption">
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
           nisi ut aliquip ex ea commodo consequat.
         </Typography>
       </Card.Content>
       <Divider style={{ width: '100%' }} variant="small" />
       <Card.Content>
-        <Typography variant="overline">News title</Typography>
-        <Typography>
+        <Typography variant="h5">News title</Typography>
+        <Typography variant="caption">
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
           dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
           proident, sunt in culpa qui officia deserunt mollit anim id est
@@ -77,6 +77,8 @@ export const FullBleed: Story<DividerProps> = () => (
     </Card>
   </Stack>
 )
+
+FullBleed.storyName = 'Full bleed'
 
 export const Inset: Story<DividerProps> = () => (
   <Stack>
@@ -89,7 +91,7 @@ export const Inset: Story<DividerProps> = () => (
       <Card.Header>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
         <Card.HeaderTitle>
-          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">
             Ut enim ad minim veniam, quis nostrud exercitation.
           </Typography>
@@ -99,7 +101,7 @@ export const Inset: Story<DividerProps> = () => (
       <Card.Header>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
         <Card.HeaderTitle>
-          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">
             Ut enim ad minim veniam, quis nostrud exercitation.
           </Typography>
@@ -109,7 +111,7 @@ export const Inset: Story<DividerProps> = () => (
       <Card.Header>
         <Avatar alt="Kitten" src="https://i.imgur.com/UM3mrju.jpg" size={40} />
         <Card.HeaderTitle>
-          <Typography variant="h6">Title goes here</Typography>
+          <Typography variant="h5">Title goes here</Typography>
           <Typography variant="body_short">
             Ut enim ad minim veniam, quis nostrud exercitation.
           </Typography>
@@ -129,15 +131,15 @@ export const Middle: Story<DividerProps> = () => (
         <Typography variant="h6">20.02.2020</Typography>
       </Card.Header>
       <Card.Content>
-        <Typography variant="overline">Description</Typography>
-        <Typography>
+        <Typography variant="h5">Description</Typography>
+        <Typography variant="body_short">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          eiusmod tempor incididunt ut labore et dolore.
         </Typography>
         <Divider style={{ width: '100%' }} />
       </Card.Content>
       <Card.Content>
-        <Typography>Choose option</Typography>
+        <Typography variant="caption">Choose option</Typography>
       </Card.Content>
       <Card.Actions>
         <Chip>active</Chip>
