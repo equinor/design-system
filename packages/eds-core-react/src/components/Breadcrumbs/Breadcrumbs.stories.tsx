@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Breadcrumbs, BreadcrumbsProps } from '../..'
 import { action } from '@storybook/addon-actions'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { Stack as SBStack } from './../../../.storybook/components'
 import page from './Breadcrumbs.docs.mdx'
 
@@ -20,7 +20,7 @@ export default {
       page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Breadcrumbs>
 
 const handleClick = (
   e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
