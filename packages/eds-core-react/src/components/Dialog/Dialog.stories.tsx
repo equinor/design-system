@@ -208,13 +208,11 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
       </Button>
       <Dialog open={isOpen} isDismissable onClose={handleClose}>
         <Dialog.Header>
-          <Dialog.Title>Placeholder</Dialog.Title>
+          <Dialog.Title>View options</Dialog.Title>
         </Dialog.Header>
-        <Dialog.CustomContent>
-          <Placeholder>
-            Custom content in a larger placeholder. No actions, only ESC or
-            timedelay.
-          </Placeholder>
+        <Dialog.CustomContent scrollable>
+          <RadioWrapper label="Down" name="first" />
+          <RadioWrapper label="Up" defaultChecked name="second" />
         </Dialog.CustomContent>
       </Dialog>
     </Stack>
