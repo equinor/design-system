@@ -75,7 +75,6 @@ describe('Dialog', () => {
     expect(screen.queryByText('OK')).toBeVisible()
     fireEvent.keyDown(dialog, {
       key: 'Escape',
-      keyCode: 27,
     })
     expect(dialog).not.toBeInTheDocument()
   })

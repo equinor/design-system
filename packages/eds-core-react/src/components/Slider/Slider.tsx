@@ -240,7 +240,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
   const handleKeyUp = (event: KeyboardEvent) => {
-    if (event.keyCode === 37 || event.keyCode === 39) {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       handleCommitedValue(event)
     }
   }
