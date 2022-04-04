@@ -6,7 +6,6 @@ import {
   Icon,
   Button,
   Menu,
-  MenuProps,
   TopBar,
   Snackbar,
   Tooltip,

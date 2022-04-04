@@ -29,6 +29,7 @@ describe('Input', () => {
   })
   it('Should pass a11y test when using label', async () => {
     const { container } = render(
+      // eslint-disable-next-line jsx-a11y/label-has-associated-control
       <label>
         Label text
         <Input />

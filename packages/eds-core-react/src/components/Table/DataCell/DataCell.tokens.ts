@@ -1,4 +1,3 @@
-import { CSSProp } from 'styled-components'
 import { tokens } from '@equinor/eds-tokens'
 import mergeDeepRight from 'ramda/src/mergeDeepRight'
 import type { ComponentToken } from '@equinor/eds-tokens'

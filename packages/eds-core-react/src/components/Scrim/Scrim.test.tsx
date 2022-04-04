@@ -59,7 +59,6 @@ describe('Scrim', () => {
     expect(screen.queryByText('OK')).toBeVisible()
     fireEvent.keyDown(scrim, {
       key: 'Escape',
-      keyCode: 27,
     })
     expect(scrim).not.toBeInTheDocument()
   })
@@ -92,7 +91,6 @@ describe('Scrim', () => {
     expect(screen.queryByText('OK')).toBeVisible()
     fireEvent.keyDown(scrim, {
       key: 'Escape',
-      keyCode: 27,
     })
     const overflow = document.body.style.overflow
     expect(overflow).toEqual(defaultOverflow)

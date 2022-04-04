@@ -7,7 +7,6 @@ import { Table } from '.'
 import styled from 'styled-components'
 import { tableCell as dataCellToken } from './DataCell/DataCell.tokens'
 import { token as headerCellToken } from './HeaderCell/HeaderCell.tokens'
-import { EdsProvider } from '../EdsProvider'
 
 const { Caption, Cell, Head, Row, Body } = Table
 
