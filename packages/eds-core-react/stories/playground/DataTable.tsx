@@ -11,7 +11,6 @@ import {
   Switch,
   Button,
   Menu,
-  MenuProps,
   SingleSelect,
 } from '../../src'
 import { save, more_vertical, copy, folder } from '@equinor/eds-icons'
