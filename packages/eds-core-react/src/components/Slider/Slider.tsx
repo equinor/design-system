@@ -212,16 +212,13 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   ref,
 ) {
   const isRangeSlider = Array.isArray(value)
-  const [initalValue, setInitalValue] = useState<number[]>(
-    isRangeSlider ? value : [value],
-  )
-  const [sliderValue, setSliderValue] = useState<number[]>(
-    isRangeSlider ? value : [value],
-  )
+  const parsedValue: number[] = isRangeSlider ? value : [value]
+  const [initalValue, setInitalValue] = useState<number[]>(parsedValue)
+  const [sliderValue, setSliderValue] = useState<number[]>(parsedValue)
 
   useEffect(() => {
     if (isRangeSlider) {
-      if (initalValue[0] !== value[0] || initalValue[1] !== value[1]) {
+      if (value[0] !== initalValue[0] || value[1] !== initalValue[1]) {
         setInitalValue(value)
         setSliderValue(value)
       }
