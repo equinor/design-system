@@ -6,6 +6,7 @@ import {
   MouseEvent,
   KeyboardEvent,
   FormEvent,
+  useEffect,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -211,9 +212,24 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   ref,
 ) {
   const isRangeSlider = Array.isArray(value)
-  const [sliderValue, setSliderValue] = useState(
-    isRangeSlider ? value : [value],
-  )
+  const parsedValue: number[] = isRangeSlider ? value : [value]
+  const [initalValue, setInitalValue] = useState<number[]>(parsedValue)
+  const [sliderValue, setSliderValue] = useState<number[]>(parsedValue)
+
+  useEffect(() => {
+    if (isRangeSlider) {
+      if (value[0] !== initalValue[0] || value[1] !== initalValue[1]) {
+        setInitalValue(value)
+        setSliderValue(value)
+      }
+    } else {
+      if (value !== initalValue[0]) {
+        setInitalValue([value])
+        setSliderValue([value])
+      }
+    }
+  }, [value, initalValue, isRangeSlider])
+
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
   const onValueChange = (
