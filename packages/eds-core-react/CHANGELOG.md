@@ -5,14 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.19.0] - 2022-04-04
+
+WIP
+
 ## [0.18.0] - 2022-02-18
 
 ### Added
 
 - Added support for `18`px `Icon` size in preparation for compact mode ([#1827](https://github.com/equinor/design-system/issues/1827))
 - `Tabs`: Enabled `Tabs.List` horizontal overflow. ([#1650](https://github.com/equinor/design-system/issues/1650))
-  - Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar. 
-  - Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list. 
+  - Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar.
+  - Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list.
 - New dependency: ([@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils)). Utility functions and hook have been moved out of eds-core-react and into its own package ([#1846](https://github.com/equinor/design-system/issues/1846))
 
 ### Changed
