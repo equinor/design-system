@@ -5,9 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.19.0] - 2022-04-04
+## [0.19.0] - 2022-04-05
 
-WIP
+### Added
+
+- `Menu` now supports keyhandling on anchor element for open & focus on `Enter`/`ArrowUp`/`ArrowDown` ([#1936](https://github.com/equinor/design-system/issues/1936))
+
+  - Users now need to store anchor element in `useState` for correct re-renders & listening events
+
+-
+
+### Changed
+
+- Adjustments to focus outline visibility ([#1733](https://github.com/equinor/design-system/issues/1733))
+
+### Fixed
+
+- `Menu` should no longer crash when using conditional rendering inside on children such as `Menu.Item` or `Menu.Section` ([#2015](https://github.com/equinor/design-system/issues/2015))
+- Hide top divider when `Menu.Section` is first child in `Menu` ([#2015](https://github.com/equinor/design-system/issues/2015))
+- `Scrim.Content` should now work with global eventlisteneres ([#2092](https://github.com/equinor/design-system/issues/2092))
+- `Slider` should now reposition dots correctly if value is changed ([#2118](https://github.com/equinor/design-system/issues/2118))
 
 ## [0.18.0] - 2022-02-18
 
