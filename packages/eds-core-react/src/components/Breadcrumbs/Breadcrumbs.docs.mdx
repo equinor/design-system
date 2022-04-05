@@ -1,0 +1,61 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Breadcrumbs } from '.'
+
+# Breadcrumbs
+
+Show the navigational path to users allowing them to navigate up the hierarchy.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/wai-aria-practices/#breadcrumb"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=18442%3A38077"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/787319-breadcrumbs/b/477a0a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Breadcrumbs/Breadcrumbs.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="navigation-breadcrumbs--introduction" />
+<PropsTable />
+
+## Usage
+
+`Breadcrumbs` are often placed horizontally before a page's main content.
+
+  ```tsx
+import { Breadcrumbs } from '@equinor/eds-core-react'
+
+<Breadcrumbs>
+    <Breadcrumbs.Breadcrumb href="#">
+      Item1
+    </Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb href="#">
+      Item2
+    </Breadcrumbs.Breadcrumb>
+    <Breadcrumbs.Breadcrumb href="#" aria-current="page">
+      Item3
+    </Breadcrumbs.Breadcrumb>
+</Breadcrumbs>
+```
+
+## Examples
+
+### Normal
+
+<Story id="navigation-breadcrumbs--normal" />
+
+### Collapsed
+
+Choose collapse prop to use ellipses to indicate the middle pages. Click ellipses (...) to expand.
+
+<Story id="navigation-breadcrumbs--collapsed" />
+
+### Truncated Labels
+
+Choose `maxWidth` in pixels to truncate labels. Hover on label to see full text.
+
+<Story id="navigation-breadcrumbs--truncated-labels" />
+
+### Wrapped
+
+Wraps over two or more lines. Controlled by parent width.
+
+<Story id="navigation-breadcrumbs--wrapped" />
