@@ -1,0 +1,45 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Chip } from '.'
+
+# Chip
+
+Chips, also known as tags or badges, are advanced badges that represent discrete information.
+
+<Links 
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=18618%3A0"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/95e67f-chip/b/95ad56"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Chip/Chip.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="data-display-chips--introduction"/>
+<PropsTable />
+
+## Usage
+
+Chips allow users to enter information, make selections, filter content, or trigger actions.
+<ul>
+    <li>Chips are <strong>compact</strong> components that represent discrete information.</li>
+    <li>Chips should be <strong>relevant</strong> to the content or task they represent.</li>
+    <li>Chips should make tasks easier to complete, or content easier to sort.</li>
+</ul>
+
+  ```tsx
+import { Chip } from '@equinor/eds-core-react'
+
+<Chip>tag</Chip>
+```
+
+## Examples
+
+### Text
+
+<Story id="data-display-chips--text" />
+
+### Text and Icon
+
+<Story id="data-display-chips--text-and-icon" />
+
+### Text and Avatar
+
+<Story id="data-display-chips--text-and-avatar" />
