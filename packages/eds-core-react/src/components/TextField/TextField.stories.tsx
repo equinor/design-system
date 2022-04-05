@@ -7,7 +7,7 @@ import {
   Button,
   Density,
 } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
 import {
   thumbs_up,
   warning_filled,
@@ -16,6 +16,7 @@ import {
 } from '@equinor/eds-icons'
 import styled from 'styled-components'
 import { Controller, useForm } from 'react-hook-form'
+import page from './TextField.docs.mdx'
 
 const icons = {
   thumbs_up,
@@ -58,14 +59,10 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `A text field lets users enter, interact and edit content,
-        typically in forms and dialogs.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof TextField>
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -73,7 +70,7 @@ const Wrapper = styled.div`
   grid-gap: 32px;
   grid-template-columns: repeat(2, fit-content(100%));
 `
-export const Default: Story<TextFieldProps> = (args) => (
+export const Introduction: Story<TextFieldProps> = (args) => (
   <TextField
     meta="meta"
     id="playWithMe"
