@@ -40,8 +40,8 @@
     "hooks"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.0",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
@@ -79,7 +79,7 @@
     "styled-components": ">=4.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.0",
+    "@babel/runtime": "^7.17.8",
     "@equinor/eds-tokens": "workspace:*",
     "@popperjs/core": "2.9.2",
     "react-popper": "2.2.5"
