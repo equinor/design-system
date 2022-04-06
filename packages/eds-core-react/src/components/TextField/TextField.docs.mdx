@@ -3,7 +3,7 @@ import { TextField } from '.'
 
 # TextField
 
-Lets users enter, interact and edit content, typically in forms.
+Lets users enter, interact and edit content, typically in forms and dialogs.
 
 <Links 
     ariaUrl="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#textbox"
@@ -17,5 +17,19 @@ Lets users enter, interact and edit content, typically in forms.
 <PropsTable />
 
 ## Usage
+
+`TextField` should be discoverable, clear and efficient.
+
+<ul>
+  <li>Text fields should stand out and point that users can input information.</li>
+  <li>Text field states should be <strong>clearly</strong> distinguish from one another.</li>
+  <li>Text fields should make it easy to understand the required information and to address any errors.</li>
+</ul>
+
+  ```tsx
+import { TextField } from '@equinor/eds-core-react'
+
+<TextField />
+```
 
 ## Examples
