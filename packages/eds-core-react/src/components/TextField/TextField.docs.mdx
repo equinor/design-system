@@ -33,3 +33,75 @@ import { TextField } from '@equinor/eds-core-react'
 ```
 
 ## Examples
+
+<ul>
+  <li><strong>Label text</strong> informs users as to what information is requested for a text field. 
+      Every text field should have a label.
+  </li>
+  <li><strong>Helper text</strong> gives additional guidance about the input field, 
+      such as how it will be used. It should only take up a single line.
+  </li>
+</ul>
+
+### Single line
+
+Single line text fields display only one line of text.
+
+<Story id="inputs-textfield--types" />
+
+### Multiline
+
+Multi-line text fields grow to accommodate multiple lines of text.
+
+<Story id="inputs-textfield--multiline" />
+
+### Multiline with `rowsMax`
+
+<Story id="inputs-textfield--multiline-rows-max" />
+
+### Multiline with fixed height
+
+Note that a multiline with fixed `height` overwrites the `rows` property. `rowsMax` overwrites fixed `height`, 
+so it is not recommended to use those together.
+
+<Story id="inputs-textfield--multiline-fixed-height" />
+
+### With units 
+
+Units are used for single line text field.
+
+<Story id="inputs-textfield--with-unit" />
+
+
+### With icons
+
+<Story id="inputs-textfield--with-icons" />
+
+### Variants
+
+Examples of validation states. You can add the icon in the helper text or inside the text input, both not in both places.
+
+<Story id="inputs-textfield--variants" />
+
+### Read only
+
+<Story id="inputs-textfield--read-only" />
+
+### Disabled
+
+<Story id="inputs-textfield--disabled" />
+
+### Compact
+
+Compact `TextField` uses `EdsProvider`
+
+<Story id="inputs-textfield--compact" />
+
+### Validation with React Hook Form
+
+How input validation is handled is up to the developer. In this example we use <a href="https://react-hook-form.com/">React Hook Form</a>.
+
+<Story id="inputs-textfield--validation-with-react-hook-form" />
+
+
+
