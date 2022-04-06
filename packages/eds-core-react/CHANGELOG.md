@@ -5,14 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.19.0] - 2022-04-06
+
+### Added
+
+- `Menu` now supports keyhandling on anchor element for open & focus on `Enter`/`ArrowUp`/`ArrowDown` ([#1936](https://github.com/equinor/design-system/issues/1936))
+
+  - Users now need to store anchor element in `useState` for correct re-renders & listening events
+
+### Removed
+
+- `Menu` no longer has `focus` property as focus is now handled internally ([#1936](https://github.com/equinor/design-system/issues/1936))
+
+### Changed
+
+- Adjustments to focus outline visibility ([#1733](https://github.com/equinor/design-system/issues/1733))
+
+### Fixed
+
+- `Menu` should no longer crash when using conditional rendering inside on children such as `Menu.Item` or `Menu.Section` ([#2015](https://github.com/equinor/design-system/issues/2015))
+- Hide top divider when `Menu.Section` is first child in `Menu` ([#2015](https://github.com/equinor/design-system/issues/2015))
+- `Scrim.Content` should now work with global eventlisteneres ([#2092](https://github.com/equinor/design-system/issues/2092))
+- `Slider` should now reposition dots correctly if value is changed ([#2118](https://github.com/equinor/design-system/issues/2118))
+
 ## [0.18.0] - 2022-02-18
 
 ### Added
 
 - Added support for `18`px `Icon` size in preparation for compact mode ([#1827](https://github.com/equinor/design-system/issues/1827))
 - `Tabs`: Enabled `Tabs.List` horizontal overflow. ([#1650](https://github.com/equinor/design-system/issues/1650))
-  - Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar. 
-  - Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list. 
+  - Added `scrollable` prop which adds `overflow-x: auto` to the tabs for users that wants a scrollbar.
+  - Otherwise this is now `overflow-x: hidden` and there is an example added in Storybook for how to implement "previous" and "next" buttons to navigate an overflowed list.
 - New dependency: ([@equinor/eds-utils](https://www.npmjs.com/package/@equinor/eds-utils)). Utility functions and hook have been moved out of eds-core-react and into its own package ([#1846](https://github.com/equinor/design-system/issues/1846))
 
 ### Changed
