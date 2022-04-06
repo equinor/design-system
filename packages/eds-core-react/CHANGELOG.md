@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - Users now need to store anchor element in `useState` for correct re-renders & listening events
 
+### Removed
+
+- `Menu` no longer has `focus` property as focus is now handled internally ([#1936](https://github.com/equinor/design-system/issues/1936))
+
 ### Changed
 
 - Adjustments to focus outline visibility ([#1733](https://github.com/equinor/design-system/issues/1733))
