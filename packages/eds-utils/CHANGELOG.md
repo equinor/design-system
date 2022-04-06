@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Support for passed `null` element type ([#2068](https://github.com/equinor/design-system/issues/2068))
+- Support for passed `null` element type on `useOutsideClick` hook ([#2068](https://github.com/equinor/design-system/issues/2068))
 
 ### Fixed
 
