@@ -28,4 +28,4 @@ jobs:
     needs: [check-variables]
     steps:
       - name: Print slot outputs
-        run: echo ${{ jobs.check-variables.outputs.slot }}
+        run: echo ${{ job.check-variables.outputs.slot }}
