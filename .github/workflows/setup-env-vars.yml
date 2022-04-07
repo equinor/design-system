@@ -11,25 +11,25 @@ on:
     outputs:
       tag:
         description: 'Package tag'
-        value: ${{ jobs.setup-environment.outputs.environment }}
+        value: ${{ jobs.tag.outputs.tag }}
       environment:
         description: 'Environment for running process'
-        value: ${{ jobs.setup-environment.outputs.environment }}
+        value: ${{ jobs.environment.outputs.environment }}
 jobs:
-  setup-environment:
+  environment:
     runs-on: ubuntu-latest
     env:
       INPUT_ENVIRONMENT: '${{ github.event.inputs.environment }}'
     outputs:
-      environment: ${{ steps.input-environment.outputs.value }} ${{ steps.default-environment.outputs.value }}
+      environment: ${{ steps.input.outputs.value }} ${{ steps.default.outputs.value }}
     steps:
-      - id: input-environment
+      - id: input
         if: "${{ env.INPUT_ENVIRONMENT != '' }}"
         run: echo "::set-output name=value::${{ env.INPUT_ENVIRONMENT }}"
-      - id: default-environment
+      - id: default
         if: "${{ env.INPUT_ENVIRONMENT == '' }}"
         run: echo "::set-output name=value::development"
-  setup-tag:
+  tag:
     runs-on: ubuntu-latest
     env:
       INPUT_TAG: '${{ github.event.inputs.tag }}'
