@@ -12,51 +12,11 @@ on:
       - develop
 jobs:
   setup:
-    name: Setup base files
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        run: |
-          REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          BRANCH="${GITHUB_REF/#refs\/heads\//}"
-
-          # Reference https://github.com/actions/checkout/issues/172
-          # Following code is based on logs of actions/checkout@v, with sparseCheckout stuff inserted in the middle
-          echo "Syncing repository: $GITHUB_REPOSITORY"
-          echo "Working directory is '$(pwd)' GITHUB_WORKSPACE=$GITHUB_WORKSPACE BRANCH=$BRANCH"
-          git version
-          git init $GITHUB_WORKSPACE
-          git remote add origin https://github.com/$GITHUB_REPOSITORY
-          git config --local gc.auto 0
-          # Now interesting part
-          git sparse-checkout init --cone
-          # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
-          # echo ...
-          git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
-          git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-      - name: Install pnpm
-        run: npm i --no-save pnpm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Install dependencies recursively
-        run: node_modules/.bin/pnpm m i
-      - name: Cache base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-lab
+    uses: equinor/design-system/.github/workflows/setup.yml@develop
+    with:
+      cacheKey: ${{ github.sha }}-lab
+    secrets:
+      npmToken: ${{ secrets.NPM_TOKEN }}
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
