@@ -18,7 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [setup-variables]
     steps:
-      - name: Workflow output
+      - name: Workflow environment
         run: echo ${{ needs.setup-variables.outputs.environment }}
+      - name: Workflow tag
+        run: echo ${{ needs.setup-variables.outputs.tag }}
       - name: Input output
         run: echo ${{ github.event.inputs.test-value }}
