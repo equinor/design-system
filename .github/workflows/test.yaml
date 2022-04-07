@@ -1,4 +1,4 @@
-name: Setup
+name: Testing actions
 on:
   push:
     branches:
@@ -27,3 +27,15 @@ jobs:
         run: echo ${{ needs.setup-variables.outputs.tag }}
       - name: Input output
         run: echo ${{ github.event.inputs.test-value }}
+  check-cache:
+    name: Check cache
+    runs-on: ubuntu-latest
+    needs: setup-variables
+    steps:
+      - name: Lookup cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: some-key
