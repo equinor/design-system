@@ -1,6 +1,9 @@
-name: Setup environment variables
+name: Setup
 on:
   workflow_call:
+    secrets:
+      npmToken:
+        required: true
     inputs:
       tag:
         type: string
@@ -8,34 +11,32 @@ on:
       environment:
         type: string
         required: false
+      cacheKey:
+        type: string
+        required: true
     outputs:
       tag:
         description: 'Package tag'
-        value: ${{ jobs.tag.outputs.tag }}
+        value: ${{ jobs.setup-variables.outputs.tag }}
       environment:
-        description: 'Environment for running process'
-        value: ${{ jobs.environment.outputs.environment }}
+        description: 'Environment'
+        value: ${{ jobs.setup-variables.outputs.environment }}
 jobs:
-  environment:
+  setup-variables:
     runs-on: ubuntu-latest
     env:
       INPUT_ENVIRONMENT: '${{ inputs.environment }}'
-    outputs:
-      environment: ${{ steps.input.outputs.value }} ${{ steps.default.outputs.value }}
-    steps:
-      - id: input
-        if: "${{ env.INPUT_ENVIRONMENT != '' }}"
-        run: echo "::set-output name=value::${{ env.INPUT_ENVIRONMENT }}"
-      - id: default
-        if: "${{ env.INPUT_ENVIRONMENT == '' }}"
-        run: echo "::set-output name=value::development"
-  tag:
-    runs-on: ubuntu-latest
-    env:
       INPUT_TAG: '${{ inputs.tag }}'
     outputs:
+      environment: ${{ steps.input-environment.outputs.value }} ${{ steps.default-environment.outputs.value }}
       tag: ${{ steps.input-tag.outputs.slot }} ${{ steps.default-tag.outputs.value }}
     steps:
+      - id: input-environment
+        if: "${{ env.INPUT_ENVIRONMENT != '' }}"
+        run: echo "::set-output name=value::${{ env.INPUT_ENVIRONMENT }}"
+      - id: default-environment
+        if: "${{ env.INPUT_ENVIRONMENT == '' }}"
+        run: echo "::set-output name=value::development"
       - id: input-tag
         if: "${{ env.INPUT_TAG != '' }}"
         run: echo "::set-output name=value::${{ env.INPUT_TAG }}"
