@@ -3,11 +3,34 @@ import { Snackbar } from '.'
 
 # Snackbar
 
-Provides brief temporary non-interrupting notifications at the bottom of the screen.
+Provides brief, temporary, non-interrupting notifications at the bottom of the screen.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/wai-aria-1.1/#alert"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=18618%3A3"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/626020-snackbar/b/15cfd0"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Snackbar/Snackbar.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
 
 <Story id="feedback-snackbar--introduction"/>
 <PropsTable />
 
 ## Usage
+
+`Snackbars` inform users of an activity that an app has performed or will perform. <br />
+ <ul>
+    <li>Only one snackbar may be displayed at a time.</li>
+    <li>Snackbars appear temporarily, and disappear on their own without claiming user input to be dismissed.</li>
+    <li>Snackbars are placed in the most suitable area of a UI, mainly at the bottom of the UI and in a front of app content.</li>
+    <li>Avoid placing a snackbar in front of frequently used touch targets or navigation.</li>
+  </ul>
+
+  ```tsx
+import { Snackbar } from '@equinor/eds-core-react'
+
+
+<Snackbar>Snackbar text</Snackbar>
+```
 
 ## Examples
