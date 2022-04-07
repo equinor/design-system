@@ -19,7 +19,7 @@ jobs:
   environment:
     runs-on: ubuntu-latest
     env:
-      INPUT_ENVIRONMENT: '${{ github.event.inputs.environment }}'
+      INPUT_ENVIRONMENT: '${{ inputs.environment }}'
     outputs:
       environment: ${{ steps.input.outputs.value }} ${{ steps.default.outputs.value }}
     steps:
@@ -32,7 +32,7 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     env:
-      INPUT_TAG: '${{ github.event.inputs.tag }}'
+      INPUT_TAG: '${{ inputs.tag }}'
     outputs:
       tag: ${{ steps.input-tag.outputs.slot }} ${{ steps.default-tag.outputs.value }}
     steps:
