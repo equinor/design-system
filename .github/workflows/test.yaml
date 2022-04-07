@@ -11,7 +11,7 @@ on:
         default: 'development'
 jobs:
   setup-environment:
-    uses: equinor/design-system/.github/workflows/reusable/setup-env-vars.yml@v1
+    uses: equinor/design-system/.github/workflows/setup-env-vars.yml@v1
     with:
       environment: '${{ github.event.inputs.test-value }}'
   print-variables:
