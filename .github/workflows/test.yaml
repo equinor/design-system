@@ -1,0 +1,31 @@
+name: Testing actions
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+    inputs:
+      test-value:
+        description: 'Test'
+        required: false
+        default: 'development'
+jobs:
+  check-variables:
+    runs-on: ubuntu-latest
+    env:
+      INPUT_SLOT: '${{ github.event.inputs.test-value }}'
+    outputs:
+      slot: ${{ steps.input-slot.outputs.slot }} ${{ steps.default-slot.outputs.slot }}
+    steps:
+      - id: input-slot
+        if: "${{ env.INPUT_SLOT != '' }}"
+        run: echo "::set-output name=slot::${{ env.INPUT_SLOT }}"
+      - id: default-slot
+        if: "${{ env.INPUT_SLOT == '' }}"
+        run: echo "::set-output name=slot::development"
+  print-variables:
+    runs-on: ubuntu-latest
+    needs: [check-variables]
+    steps:
+      - name: Print slot outputs
+        run: echo ${{ needs.check-variables.outputs }}
