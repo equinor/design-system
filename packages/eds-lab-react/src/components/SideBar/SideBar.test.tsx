@@ -28,11 +28,12 @@ test('Sidebar renders', () => {
   )
 })
 
-test('Renders action button when onAction prop is given', () => {
+test('Renders action button when onAction, actionLabel and actionIcon props are given', () => {
   render(
     <SideBar
       onAction={() => console.log('test')}
       actionLabel="actionLabel"
+      actionIcon={home}
       open={true}
     >
       {defaultMenuItems.map((m) => (

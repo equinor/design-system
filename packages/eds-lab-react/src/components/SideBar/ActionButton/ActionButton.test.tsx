@@ -3,10 +3,12 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ActionButton, ActionButtonProps } from './index'
 import { SideBar } from '../SideBar'
+import { add } from '@equinor/eds-icons'
 
 const defaultProps: ActionButtonProps = {
   actionLabel: 'Label',
   isOpen: false,
+  actionIcon: add,
   onAction: () => undefined,
 }
 
@@ -27,6 +29,7 @@ test('Renders label when open', () => {
   customRender(
     <ActionButton
       actionLabel="Label"
+      actionIcon={add}
       isOpen={true}
       onAction={() => undefined}
     ></ActionButton>,
@@ -41,6 +44,7 @@ test('Renders label when open', () => {
   customRender(
     <ActionButton
       actionLabel="Label"
+      actionIcon={add}
       isOpen={true}
       onAction={() => undefined}
     ></ActionButton>,
@@ -64,6 +68,7 @@ test('Fires onAction when clicked', () => {
 
   customRender(
     <ActionButton
+      actionIcon={add}
       actionLabel="Label"
       isOpen={true}
       onAction={onActionFn}

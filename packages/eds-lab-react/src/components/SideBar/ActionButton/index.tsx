@@ -9,7 +9,7 @@ import {
 import { sidebar as tokens } from '../SideBar.tokens'
 import { bordersTemplate } from '@equinor/eds-utils'
 import styled, { css } from 'styled-components'
-import { add } from '@equinor/eds-icons'
+import { IconData } from '@equinor/eds-icons'
 
 const {
   entities: {
@@ -91,12 +91,14 @@ const Tooltip = styled(EDSTooltip)`
 
 export type ActionButtonProps = {
   actionLabel: string
+  actionIcon: IconData
   onAction: () => void
   isOpen: boolean
 }
 
 export const ActionButton: FC<ActionButtonProps> = ({
   actionLabel,
+  actionIcon,
   onAction,
   isOpen,
 }) => {
@@ -104,7 +106,7 @@ export const ActionButton: FC<ActionButtonProps> = ({
     return (
       <MenuButtonContainer open={isOpen}>
         <ExtendedButton open variant="contained" onClick={onAction}>
-          <Icon data={add} color={primaryWhite} />
+          <Icon data={actionIcon} color={primaryWhite} />
           <ExtendedButtonText
             color={primaryWhite}
             variant="button"
@@ -120,7 +122,7 @@ export const ActionButton: FC<ActionButtonProps> = ({
     <Tooltip title={actionLabel} placement="right">
       <MenuButtonContainer open={isOpen}>
         <ExtendedButton variant="ghost_icon" onClick={onAction}>
-          <Icon data={add} color={primaryWhite} />
+          <Icon data={actionIcon} color={primaryWhite} />
         </ExtendedButton>
       </MenuButtonContainer>
     </Tooltip>
