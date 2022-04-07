@@ -54,16 +54,6 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ inputs.cacheKey }}
-      - id: cache-pnpm-store
-        name: Cache pnpm-store
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-store
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - id: checkout-files
         name: Checkout files
         if: steps.cache-files.outputs.cache-hit != 'true'
@@ -86,6 +76,16 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
+      - id: cache-pnpm-store
+        name: Cache pnpm-store
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-store
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - name: Install pnpm
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true' && steps.cache-files.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
