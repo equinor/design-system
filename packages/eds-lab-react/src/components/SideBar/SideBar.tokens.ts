@@ -9,8 +9,8 @@ const {
     },
     interactive: {
       focus: { rgba: focusColor },
-      primary__hover: { rgba: createBtnHoverColor },
-      primary__resting: { rgba: createBtnColor },
+      primary__hover: { rgba: primary__hover },
+      primary__resting: { rgba: primary__resting },
       primary__selected_highlight: { rgba: menuActive },
       primary__selected_hover: { rgba: menuHover },
       secondary__highlight: { rgba: expandHover },
@@ -38,8 +38,8 @@ export const sidebar: ComponentToken = {
     right: { color: borderColor, width: '1px', style: 'solid' },
   },
   entities: {
-    createItem: {
-      background: createBtnColor,
+    actionButton: {
+      background: primary__resting,
       typography: {
         color: primaryWhite,
       },
@@ -52,7 +52,7 @@ export const sidebar: ComponentToken = {
       },
       states: {
         hover: {
-          background: createBtnHoverColor,
+          background: primary__hover,
         },
       },
     },
@@ -71,7 +71,7 @@ export const sidebar: ComponentToken = {
         active: {
           background: menuActive,
           typography: {
-            color: createBtnColor,
+            color: primary__resting,
           },
         },
         hover: {
