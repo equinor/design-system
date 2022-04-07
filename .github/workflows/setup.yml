@@ -76,6 +76,7 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
+        # Run after checkout to get correct hashFiles
       - id: cache-pnpm-store
         name: Cache pnpm-store
         uses: actions/cache@v2
@@ -87,10 +88,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - name: Install pnpm
-        if: steps.cache-pnpm-store.outputs.cache-hit != 'true' && steps.cache-files.outputs.cache-hit != 'true'
+        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npmToken }}
       - name: Install dependencies recursively
-        if: steps.cache-pnpm-store.outputs.cache-hit != 'true' && steps.cache-files.outputs.cache-hit != 'true'
+        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
