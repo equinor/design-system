@@ -1,0 +1,44 @@
+name: Setup environment variables
+on:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: false
+      environment:
+        type: string
+        required: false
+    outputs:
+      tag:
+        description: 'Package tag'
+        value: ${{ jobs.setup-environment.outputs.environment }}
+      environment:
+        description: 'Environment for running process'
+        value: ${{ jobs.setup-environment.outputs.environment }}
+jobs:
+  setup-environment:
+    runs-on: ubuntu-latest
+    env:
+      INPUT_ENVIRONMENT: '${{ github.event.inputs.environment }}'
+    outputs:
+      environment: ${{ steps.input-environment.outputs.value }} ${{ steps.default-environment.outputs.value }}
+    steps:
+      - id: input-environment
+        if: "${{ env.INPUT_ENVIRONMENT != '' }}"
+        run: echo "::set-output name=value::${{ env.INPUT_ENVIRONMENT }}"
+      - id: default-environment
+        if: "${{ env.INPUT_ENVIRONMENT == '' }}"
+        run: echo "::set-output name=value::development"
+  setup-tag:
+    runs-on: ubuntu-latest
+    env:
+      INPUT_TAG: '${{ github.event.inputs.tag }}'
+    outputs:
+      tag: ${{ steps.input-tag.outputs.slot }} ${{ steps.default-tag.outputs.value }}
+    steps:
+      - id: input-tag
+        if: "${{ env.INPUT_TAG != '' }}"
+        run: echo "::set-output name=value::${{ env.INPUT_TAG }}"
+      - id: default-tag
+        if: "${{ env.INPUT_TAG == '' }}"
+        run: echo "::set-output name=value::next"
