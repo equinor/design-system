@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Snackbar, SnackbarProps, Button, EdsProvider, Density } from '../..'
 import { Story, Meta } from '@storybook/react'
+import page from './Snackbar.docs.mdx'
 
 export default {
   title: 'Feedback/Snackbar',
@@ -8,15 +9,12 @@ export default {
   subcomponents: { Action: Snackbar.Action },
   parameters: {
     docs: {
-      description: {
-        component: `Snackbars provide brief temporary non-interrupting notifications at the bottom of the screen.
-        `,
-      },
+      page,
     },
   },
 } as Meta
 
-export const Default: Story<SnackbarProps> = (args) => {
+export const Introduction: Story<SnackbarProps> = (args) => {
   const { open } = args
   const [visible, setVisible] = useState(open)
   return (
