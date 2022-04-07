@@ -1,0 +1,26 @@
+name: Testing actions
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+    inputs:
+      test-value:
+        description: 'Test'
+        required: false
+        default: 'development'
+jobs:
+  setup-variables:
+    uses: equinor/design-system/.github/workflows/setup-env-vars.yml@develop
+    with:
+      environment: ${{ github.event.inputs.test-value }}
+  print-variables:
+    runs-on: ubuntu-latest
+    needs: [setup-variables]
+    steps:
+      - name: Workflow environment
+        run: echo ${{ needs.setup-variables.outputs.environment }}
+      - name: Workflow tag
+        run: echo ${{ needs.setup-variables.outputs.tag }}
+      - name: Input output
+        run: echo ${{ github.event.inputs.test-value }}
