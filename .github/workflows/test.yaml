@@ -14,7 +14,7 @@ jobs:
     uses: equinor/design-system/.github/workflows/setup.yml@develop
     with:
       environment: ${{ github.event.inputs.test-value }}
-      cacheKey: some-key
+      cacheKey: some-key-1
     secrets:
       npmToken: some-token
   print-variables:
