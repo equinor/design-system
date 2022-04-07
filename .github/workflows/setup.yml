@@ -47,6 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: cache-files
+        name: Cache files
         uses: actions/cache@v2
         with:
           path: |
@@ -54,15 +55,17 @@ jobs:
             ~/.pnpm-store
           key: ${{ inputs.cacheKey }}
       - id: cache-pnpm-store
+        name: Cache pnpm-store
         uses: actions/cache@v2
         env:
-          cache-name: cache-pnpm-modules
+          cache-name: cache-pnpm-store
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - id: checkout-files
+        name: Checkout files
         if: steps.cache-files.outputs.cache-hit != 'true'
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
