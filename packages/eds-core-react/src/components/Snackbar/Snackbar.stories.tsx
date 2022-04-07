@@ -48,14 +48,6 @@ export const Simple: Story<SnackbarProps> = () => {
     </Stack>
   )
 }
-Simple.parameters = {
-  docs: {
-    description: {
-      story:
-        'Snackbars appear without warning, and don not require user interaction. When multiple snackbar updates are necessary, they should appear one at a time.',
-    },
-  },
-}
 
 export const WithAction: Story<SnackbarProps> = () => {
   const [withActionOpen, setWithActionOpen] = useState(false)
@@ -74,14 +66,6 @@ export const WithAction: Story<SnackbarProps> = () => {
   )
 }
 WithAction.storyName = 'With action'
-WithAction.parameters = {
-  docs: {
-    description: {
-      story:
-        'A snackbar can contain a single action, a single text button that lets users take action on a process performed by the app.',
-    },
-  },
-}
 
 export const Compact: Story<SnackbarProps> = () => {
   const [open, setOpen] = useState(false)
@@ -93,25 +77,19 @@ export const Compact: Story<SnackbarProps> = () => {
   }, [density])
 
   return (
-    <EdsProvider density={density}>
-      <Button type="button" onClick={() => setOpen(true)}>
-        Show a simple compact snackbar
-      </Button>
-      <Snackbar
-        open={open}
-        onClose={() => setOpen(false)}
-        autoHideDuration={5000}
-      >
-        Message goes here
-      </Snackbar>
-    </EdsProvider>
+    <Stack>
+      <EdsProvider density={density}>
+        <Button type="button" onClick={() => setOpen(true)}>
+          Show a simple compact snackbar
+        </Button>
+        <Snackbar
+          open={open}
+          onClose={() => setOpen(false)}
+          autoHideDuration={5000}
+        >
+          Message goes here
+        </Snackbar>
+      </EdsProvider>
+    </Stack>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Snackbar` using `EdsProvider` ',
-    },
-  },
 }
