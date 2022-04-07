@@ -44,10 +44,26 @@ jobs:
         if: "${{ env.INPUT_TAG == '' }}"
         run: echo "::set-output name=value::next"
   files:
-    name: Setup base files
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - id: cache-files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ inputs.cacheKey }}
+      - id: cache-pnpm-store
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-modules
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+      - id: checkout-files
+        if: steps.cache-files.outputs.cache-hit != 'true'
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           BRANCH="${GITHUB_REF/#refs\/heads\//}"
@@ -67,25 +83,11 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       - name: Install pnpm
+        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npmToken }}
       - name: Install dependencies recursively
+        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
-      - name: Cache base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ inputs.cacheKey }}
