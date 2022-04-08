@@ -1,0 +1,26 @@
+name: Build eds-core-react
+on:
+  workflow_call:
+    cacheKey:
+      type: string
+      required: true
+jobs:
+  build:
+    name: Build eds-core-react
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get cached files & pnpm store
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ inputs.cacheKey }}
+      - name: Types
+        run: node_modules/.bin/tsc -p ./packages/eds-core-react
+      - name: Lint
+        run: node_modules/.bin/pnpm run lint ./packages/eds-core-react
+      - name: Test
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run test
+      - name: Build
+        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build
