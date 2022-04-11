@@ -24,7 +24,7 @@ jobs:
   setup:
     uses: equinor/design-system/.github/workflows/setup.yml@develop
     with:
-      cacheKey: ${{ env.CACHE_KEY }}
+      cacheKey: ${{ github.sha }}-core
     secrets:
       npmToken: ${{ secrets.NPM_TOKEN }}
   packages:
