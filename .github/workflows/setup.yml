@@ -95,17 +95,3 @@ jobs:
       - name: Install dependencies recursively
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r setup.zip ./
-      - uses: actions/upload-artifact@v3
-        with:
-          name: setup-files
-          path: setup.zip
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r store.zip ~/.pnpm-store
-      - uses: actions/upload-artifact@v3
-        with:
-          name: store-files
-          path: store.zip
