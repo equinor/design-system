@@ -51,14 +51,8 @@ jobs:
         run: node_modules/.bin/pnpm run test
       - name: Lint packages
         run: node_modules/.bin/pnpm run lint:all
-      - name: Run type checks in core-react
-        run: node_modules/.bin/tsc -p ./packages/eds-core-react
-      - name: Run type checks in tokens
-        run: node_modules/.bin/tsc -p ./packages/eds-icons
-      - name: Run type checks in icons
-        run: node_modules/.bin/tsc -p ./packages/eds-tokens
-      - name: Run type checks in utils
-        run: node_modules/.bin/tsc -p ./packages/eds-utils
+      - name: Type check packages
+        run: node_modules/.bin/pnpm run types
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
