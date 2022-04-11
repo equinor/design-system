@@ -72,3 +72,42 @@ const Demo = () => {
 ```
 
 ## Examples
+
+### Activate `onClick`
+
+<ul>
+    <li>Popovers can be activated by hover or click.</li>
+    <li>To dismiss a popover, use the close icon, press the ESC key, open another popover or click outside the popover.</li>
+    <li>If there are no actions in the popover, then the close icon should be the first focusable element.</li>
+</ul>
+
+<Story id="data-display-popover--activate-on-click"/>
+
+### Activate `onHover`
+
+<ul>
+    <li>Remember to use both <code>onMouseEnter</code> and <code>onFocus</code> attributes to your trigger element to be able to open the popover.</li>
+    <li>A timeout delay (300ms) on <code>onMouseEnter</code> is recommended to avoid unwanted trigger while browsing.</li>
+</ul>
+
+<Story id="data-display-popover--activate-on-hover"/>
+
+### With Tooltip
+
+<Story id="data-display-popover--with-tooltip"/>
+
+### With close button
+
+<ul>
+    <li>In some cases an explicit close button is recommended.</li>
+    <li>Here is an example of how this can be implemented in the Header.</li>
+</ul>
+
+<Story id="data-display-popover--with-close-button"/>
+
+### Compact
+
+Compact `Popover` using `EdsProvider`.
+
+<Story id="data-display-popover--compact"/>
+

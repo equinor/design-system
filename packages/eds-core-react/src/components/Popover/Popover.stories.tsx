@@ -127,13 +127,7 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
     </Stack>
   )
 }
-
-ActivateOnClick.parameters = {
-  docs: {
-    storyDescription:
-      'Popovers can be activated by hover or click. To dismiss a popover, use the close icon, press the ESC key, open another popover or click outside the popover. If there are no actions in the popover, then the close icon should be the first focusable element.',
-  },
-}
+ActivateOnClick.storyName = 'Activate onClick'
 
 export const ActivateOnHover: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -188,13 +182,7 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
     </Stack>
   )
 }
-
-ActivateOnHover.parameters = {
-  docs: {
-    storyDescription:
-      'Remember to use both `onMouseEnter` and `onFocus` attributes to your trigger element to be able to open the popover. A timeout delay (300ms) on `onMouseEnter` is recommended to avoid unwanted trigger while browsing.',
-  },
-}
+ActivateOnHover.storyName = 'Activate onHover'
 
 export const WithTooltip: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -224,6 +212,51 @@ export const WithTooltip: Story<PopoverProps> = () => {
     </Stack>
   )
 }
+
+export const WithCloseButton: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  return (
+    <Stack>
+      <Button
+        id="click-popover-anchor"
+        aria-controls="click-popover"
+        ref={anchorRef}
+        onClick={openPopover}
+      >
+        Click to activate
+      </Button>
+
+      <Popover
+        id="click-popover"
+        aria-expanded={isOpen}
+        anchorEl={anchorRef.current}
+        onClose={closePopover}
+        open={isOpen}
+      >
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+          <Button
+            style={{ height: '32px', width: '32px' }}
+            variant="ghost_icon"
+            aria-label="Close popover"
+            onClick={closePopover}
+          >
+            <Icon name="close" data={close} size={24} />
+          </Button>
+        </Popover.Header>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
+      </Popover>
+    </Stack>
+  )
+}
+WithCloseButton.storyName = 'With close button'
 
 export const Compact: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -271,65 +304,4 @@ export const Compact: Story<PopoverProps> = () => {
       </Stack>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Popover` using `EdsProvider` ',
-    },
-  },
-}
-
-export const WithCloseButton: Story<PopoverProps> = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
-
-  const openPopover = () => setIsOpen(true)
-  const closePopover = () => setIsOpen(false)
-
-  return (
-    <Stack>
-      <Button
-        id="click-popover-anchor"
-        aria-controls="click-popover"
-        ref={anchorRef}
-        onClick={openPopover}
-      >
-        Click to activate
-      </Button>
-
-      <Popover
-        id="click-popover"
-        aria-expanded={isOpen}
-        anchorEl={anchorRef.current}
-        onClose={closePopover}
-        open={isOpen}
-      >
-        <Popover.Header>
-          <Popover.Title>Title</Popover.Title>
-          <Button
-            style={{ height: '32px', width: '32px' }}
-            variant="ghost_icon"
-            aria-label="Close popover"
-            onClick={closePopover}
-          >
-            <Icon name="close" data={close} size={24} />
-          </Button>
-        </Popover.Header>
-        <Popover.Content>
-          <Typography variant="body_short">Content</Typography>
-        </Popover.Content>
-      </Popover>
-    </Stack>
-  )
-}
-
-WithCloseButton.parameters = {
-  docs: {
-    description: {
-      story:
-        'In some cases an explicit close button is recommended. Here is an example of how this can be implemented in the Header.',
-    },
-  },
 }
