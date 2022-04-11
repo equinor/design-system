@@ -46,17 +46,8 @@ jobs:
   files:
     runs-on: ubuntu-latest
     steps:
-      - id: cache-files
-        name: Cache files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ inputs.cacheKey }}
       - id: checkout-files
         name: Checkout files
-        if: steps.cache-files.outputs.cache-hit != 'true'
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           BRANCH="${GITHUB_REF/#refs\/heads\//}"
@@ -95,3 +86,11 @@ jobs:
       - name: Install dependencies recursively
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
+      - id: cache-files
+        name: Cache files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ inputs.cacheKey }}
