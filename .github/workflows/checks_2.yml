@@ -38,13 +38,7 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}
-      - name: Use "packages" cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ env.CACHE_KEY }}-packages
+
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Test packages
@@ -59,7 +53,13 @@ jobs:
         run: node_modules/.bin/tsc -p ./packages/eds-tokens
       - name: Run type checks in utils
         run: node_modules/.bin/tsc -p ./packages/eds-utils
-
+      - name: Use "packages" cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-packages
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
