@@ -21,7 +21,7 @@ jobs:
       - id: print-env
         run: env
   setup:
-    uses: equinor/design-system/.github/workflows/setup.yml@develop
+    uses: equinor/design-system/.github/workflows/setup.yml@fix/MIM-2130-correct-slot-on-push
     with:
       cacheKey: ${{ github.sha }}-core
     secrets:
