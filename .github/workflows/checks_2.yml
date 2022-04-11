@@ -45,6 +45,24 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-packages
+      - id: cache-pnpm-store
+        name: Cache pnpm-store
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-store-force
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('packages/**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+      - name: Install pnpm
+        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
+        run: npm i --no-save pnpm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npmToken }}
+      - name: Install dependencies recursively
+        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
+        run: node_modules/.bin/pnpm m i
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Test packages
