@@ -45,14 +45,9 @@ export const Introduction: Story<ScrimProps> = (args) => {
 
   return (
     <Stack>
-      <Button onClick={handleOpen}>Trigger Scrim</Button>
+      <Button onClick={handleOpen}>SHOW SCRIN</Button>
       <Scrim {...args} open={open} onClose={handleClose}>
-        <TestContent>
-          <Typography variant="body_short">
-            Press close or hit “ESC” to close scrim.
-          </Typography>
-          <Button onClick={handleClose}>Close</Button>
-        </TestContent>
+        <Button onClick={handleClose}>HIDE SCRIN</Button>
       </Scrim>
     </Stack>
   )
