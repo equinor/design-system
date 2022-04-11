@@ -1,6 +1,8 @@
 import { Scrim, Button, Typography, ScrimProps } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
 import { useArgs } from '@storybook/client-api'
+import { Stack } from './../../../.storybook/components'
+import page from './Scrim.docs.mdx'
 
 import styled from 'styled-components'
 
@@ -24,16 +26,12 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `A scrim is a temporary visual effect that fades the general
-        interface while allowing the user to focus on an overlay.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Scrim>
 
-export const Default: Story<ScrimProps> = (args) => {
+export const Introduction: Story<ScrimProps> = (args) => {
   const { open } = args
   const [, updateArgs] = useArgs()
 
@@ -46,7 +44,7 @@ export const Default: Story<ScrimProps> = (args) => {
   }
 
   return (
-    <>
+    <Stack>
       <Button onClick={handleOpen}>Trigger Scrim</Button>
       <Scrim {...args} open={open} onClose={handleClose}>
         <TestContent>
@@ -56,6 +54,6 @@ export const Default: Story<ScrimProps> = (args) => {
           <Button onClick={handleClose}>Close</Button>
         </TestContent>
       </Scrim>
-    </>
+    </Stack>
   )
 }
