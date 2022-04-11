@@ -90,9 +90,11 @@ jobs:
       # - name: Install dependencies
       #   run: pnpm m install
       - id: cache-pnpm-store
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.pnpm-store
+          path: |
+            node_modules/.bin/pnpm
+            ~/.pnpm-store
           key: ${{ runner.os }}-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
       - name: Install pnpm
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
@@ -100,5 +102,5 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npmToken }}
       - name: Install dependencies recursively
-        # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
+        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
