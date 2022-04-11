@@ -18,9 +18,8 @@ jobs:
   print:
     runs-on: ubuntu-latest
     steps:
-      - id: print env
+      - id: print-env
         run: env
-
   setup:
     uses: equinor/design-system/.github/workflows/setup.yml@develop
     with:
