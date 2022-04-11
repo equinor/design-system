@@ -24,9 +24,6 @@ describe('Avatar', () => {
     const { container } = render(<Avatar alt="avatar" />)
     expect(await axe(container)).toHaveNoViolations()
   })
-  it('Should fail', () => {
-    expect(true).toBeFalsy()
-  })
   it('Can extend the css for the component', () => {
     render(<StyledAvatar alt="avatar" data-testid="avatar" />)
     const avatar = screen.getByTestId('avatar')
