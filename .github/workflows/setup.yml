@@ -1,9 +1,6 @@
 name: Setup
 on:
   workflow_call:
-    secrets:
-      npmToken:
-        required: true
     inputs:
       tag:
         type: string
@@ -76,6 +73,7 @@ jobs:
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
       - id: cache-pnpm-store
+        name: Cache pnpm-store
         uses: actions/cache@v3
         with:
           path: |
@@ -86,8 +84,6 @@ jobs:
       - name: Install pnpm
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npmToken }}
       - name: Install dependencies recursively
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
