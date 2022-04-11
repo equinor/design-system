@@ -79,16 +79,16 @@ jobs:
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
         # Run after checkout to get correct hashFiles
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 7.0.0-rc.3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm m install
+      # - uses: pnpm/action-setup@v2.0.1
+      #   with:
+      #     version: 7.0.0-rc.3
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: 'pnpm'
+      # - name: Install dependencies
+      #   run: pnpm m install
       # - id: cache-pnpm-store
       #   name: Cache pnpm-store
       #   uses: actions/cache@v2
