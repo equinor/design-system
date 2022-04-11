@@ -15,6 +15,12 @@ on:
 env:
   CACHE_KEY: ${{ github.sha }}-core
 jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - id: print env
+        run: env
+
   setup:
     uses: equinor/design-system/.github/workflows/setup.yml@develop
     with:
