@@ -94,8 +94,9 @@ jobs:
         with:
           path: |
             node_modules/.bin/pnpm
+            node_modules/pnpm
             ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-and-store-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
       - name: Install pnpm
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
