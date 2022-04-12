@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { Banner, Icon, Button, BannerProps, EdsProvider, Density } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
+import page from './Banner.docs.mdx'
 
 const icons = {
   save,
@@ -22,15 +23,12 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `Banners display important notifications and related optional actions.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Banner>
 
-export const Default: Story<BannerProps> = () => {
+export const Introduction: Story<BannerProps> = () => {
   //  Note: This example is not interactive, as Storybook
   // doesn't yet support to manipulate subcomponents via Storybook Args
   return (
