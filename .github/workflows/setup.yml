@@ -1,14 +1,11 @@
 name: Setup
 on:
   workflow_call:
-    secrets:
-      npmToken:
-        required: true
     inputs:
       tag:
         type: string
         required: false
-      environment:
+      stage:
         type: string
         required: false
       cacheKey:
@@ -18,24 +15,24 @@ on:
       tag:
         description: 'Package tag'
         value: ${{ jobs.variables.outputs.tag }}
-      environment:
-        description: 'Environment'
-        value: ${{ jobs.variables.outputs.environment }}
+      stage:
+        description: 'Stage'
+        value: ${{ jobs.variables.outputs.stage }}
 jobs:
   variables:
     runs-on: ubuntu-latest
     env:
-      INPUT_ENVIRONMENT: '${{ inputs.environment }}'
+      INPUT_STAGE: '${{ inputs.stage }}'
       INPUT_TAG: '${{ inputs.tag }}'
     outputs:
-      environment: ${{ steps.input-environment.outputs.value }} ${{ steps.default-environment.outputs.value }}
+      stage: ${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}
       tag: ${{ steps.input-tag.outputs.slot }} ${{ steps.default-tag.outputs.value }}
     steps:
-      - id: input-environment
-        if: "${{ env.INPUT_ENVIRONMENT != '' }}"
-        run: echo "::set-output name=value::${{ env.INPUT_ENVIRONMENT }}"
-      - id: default-environment
-        if: "${{ env.INPUT_ENVIRONMENT == '' }}"
+      - id: input-stage
+        if: "${{ env.INPUT_STAGE != '' }}"
+        run: echo "::set-output name=value::${{ env.INPUT_STAGE }}"
+      - id: default-stage
+        if: "${{ env.INPUT_STAGE == '' }}"
         run: echo "::set-output name=value::development"
       - id: input-tag
         if: "${{ env.INPUT_TAG != '' }}"
@@ -48,7 +45,7 @@ jobs:
     steps:
       - id: cache-files
         name: Cache files
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./*
@@ -56,7 +53,6 @@ jobs:
           key: ${{ inputs.cacheKey }}
       - id: checkout-files
         name: Checkout files
-        if: steps.cache-files.outputs.cache-hit != 'true'
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           BRANCH="${GITHUB_REF/#refs\/heads\//}"
@@ -76,22 +72,18 @@ jobs:
           # echo ...
           git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
           git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-        # Run after checkout to get correct hashFiles
       - id: cache-pnpm-store
         name: Cache pnpm-store
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
+        uses: actions/cache@v3
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+          path: |
+            node_modules/.bin/pnpm
+            node_modules/pnpm
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-and-store-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
       - name: Install pnpm
-        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
+        # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npmToken }}
       - name: Install dependencies recursively
-        if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
+        # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i

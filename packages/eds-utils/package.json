@@ -29,7 +29,8 @@
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.json",
     "test": "tsc -p tsconfig.test.json && jest",
-    "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\""
+    "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
+    "types": "tsc"
   },
   "keywords": [
     "eds",

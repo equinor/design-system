@@ -1,5 +1,5 @@
 name: eds
-engines: {pnpm: '>=5.13.5'}
+engines: { pnpm: '>=5.13.5' }
 scripts:
   lint: eslint
   lint:all: pnpm run lint .
@@ -15,6 +15,7 @@ scripts:
   build:utils: pnpm --filter @equinor/eds-utils run build
   build:tokens: pnpm --filter @equinor/eds-tokens run build
   build:icons: pnpm --filter @equinor/eds-icons run build
+  test: pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab
   test:core-react: pnpm --filter @equinor/eds-core-react run test
   test:lab: pnpm --filter @equinor/eds-lab-react run test
   test:utils: pnpm --filter @equinor/eds-utils run test
@@ -29,6 +30,7 @@ scripts:
   build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
   export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0
   export:assets: pnpm --filter @equinor/eds-figma-broker assets BQjYMxdSdgRkdhKTDDU7L4KU
+  types: pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types
 devDependencies:
   '@babel/core': ^7.17.8
   '@babel/eslint-parser': ^7.17.0
