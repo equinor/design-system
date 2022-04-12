@@ -3,7 +3,7 @@ import { Accordion } from '.'
 
 # Accordion
 
-An accordion allows users to collapse and expand sections of content.
+Allows users to collapse and expand sections of content.
 
 <Links 
     ariaUrl="https://www.w3.org/TR/wai-aria-practices/#accordion"
@@ -11,11 +11,28 @@ An accordion allows users to collapse and expand sections of content.
     documentationUrl="https://eds.equinor.com/0b0c666ab/p/3706ca-accordion/b/43756f"
     sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Accordion/Accordion.tsx"
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
-></Links>
+/>
 
 <Story id="surfaces-accordion--introduction" />
 <PropsTable />
 
 ## Usage
+
+<ul>
+    <li>Accordions are composed of a header area and a content area.</li>
+    <li>Accordions deliver large amounts of information in user-controlled sections.</li>
+    <li>Accordions can be used to group or hide information which helps to keep order and scannability on a page.</li>
+</ul>
+
+```tsx
+import { Accordion } from '@equinor/eds-core-react'
+
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Header>Header 1</Accordion.Header>
+    <Accordion.Panel>Content 1</Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
 
 ## Examples
