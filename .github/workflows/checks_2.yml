@@ -16,7 +16,7 @@ jobs:
   setup:
     uses: equinor/design-system/.github/workflows/setup.yml@develop
     with:
-      cacheKey: ${{ github.sha }}-core
+      cacheKey: ${{ github.sha }}
   packages:
     name: Check packages
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-core
+          key: ${{ github.sha }}
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Test packages
