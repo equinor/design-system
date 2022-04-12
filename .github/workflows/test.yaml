@@ -15,8 +15,6 @@ jobs:
     with:
       stage: ${{ github.event.inputs.test-value }}
       cacheKey: some-key-2
-    secrets:
-      npmToken: some-token
   print-variables:
     runs-on: ubuntu-latest
     needs: [setup]
