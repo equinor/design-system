@@ -18,4 +18,23 @@ Displays important notifications and related optional actions.
 
 ## Usage
 
+A banner displays an important, brief message, and provides actions for users to address. 
+It requires a user action to be dismissed.
+
+<ul>
+    <li>Banners are interruptive, but their level of interruption should match 
+        the information they hold and the context in which they appear.</li>
+    <li>Only one banner should be shown at a time.</li>
+</ul>
+
+```tsx
+import { Banner } from '@equinor/eds-core-react'
+
+<Banner>
+  <Banner.Message>
+    Banner message comes here.
+  </Banner.Message>
+</Banner>
+```
+
 ## Examples
