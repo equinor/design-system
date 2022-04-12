@@ -54,14 +54,14 @@ jobs:
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
-    needs: packages
+    needs: setup
     steps:
-      - name: Use "packages" cache
+      - name: Use "setup" cache
         uses: actions/cache@v3
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ env.CACHE_KEY }}-packages
+          key: ${{ env.CACHE_KEY }}
       - name: Build storybook
         run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build:storybook
