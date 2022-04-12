@@ -56,9 +56,8 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ inputs.cacheKey }}
-      - name: Print checkout path
-        run: echo "Passed paths for checkout - ${{ env.INPUT_PATHS }}"
       - id: checkout-files
+        if: steps.cache-files.outputs.cache-hit != 'true'
         name: Checkout files
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
