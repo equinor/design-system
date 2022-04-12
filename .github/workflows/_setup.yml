@@ -57,7 +57,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ inputs.cacheKey }}
       - name: Print checkout path
-        run: 'Passed paths for checkout: ${{ env.INPUT_PATHS }}'
+        run: echo "Passed paths for checkout - ${{ env.INPUT_PATHS }}"
       - id: checkout-files
         name: Checkout files
         run: |
