@@ -1,4 +1,4 @@
-name: Publish to Azure with Docker
+name: _Publish to Azure with Docker
 on:
   workflow_call:
     secrets:

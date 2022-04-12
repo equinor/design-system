@@ -1,4 +1,4 @@
-name: Setup
+name: _Setup
 on:
   workflow_call:
     inputs:
@@ -83,8 +83,6 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules/.bin/pnpm
-            node_modules/pnpm
             ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-and-store-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
       - name: Install pnpm
