@@ -1,21 +1,8 @@
-import { Scrim, Button, Typography, ScrimProps } from '../..'
+import { Button, Scrim, ScrimProps } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { useArgs } from '@storybook/client-api'
 import { Stack } from './../../../.storybook/components'
 import page from './Scrim.docs.mdx'
-
-import styled from 'styled-components'
-
-const TestContent = styled.div`
-  background: rgba(255, 146, 0, 0.5);
-  border: 1px dashed #ff9200;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 8px;
-  height: calc(250px - 16px);
-  margin-bottom: 12px;
-  width: 350px;
-`
 
 export default {
   title: 'Feedback/Scrim',
