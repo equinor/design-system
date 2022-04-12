@@ -17,8 +17,9 @@ jobs:
     uses: equinor/design-system/.github/workflows/_setup.yml@develop
     with:
       cacheKey: ${{ github.sha }}
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
   packages:
-    name: Check packages
+    name: Process packages
     runs-on: ubuntu-latest
     needs: setup
     steps:
