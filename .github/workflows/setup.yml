@@ -5,7 +5,7 @@ on:
       tag:
         type: string
         required: false
-      environment:
+      stage:
         type: string
         required: false
       cacheKey:
@@ -15,24 +15,24 @@ on:
       tag:
         description: 'Package tag'
         value: ${{ jobs.variables.outputs.tag }}
-      environment:
-        description: 'Environment'
-        value: ${{ jobs.variables.outputs.environment }}
+      stage:
+        description: 'Stage'
+        value: ${{ jobs.variables.outputs.stage }}
 jobs:
   variables:
     runs-on: ubuntu-latest
     env:
-      INPUT_ENVIRONMENT: '${{ inputs.environment }}'
+      INPUT_STAGE: '${{ inputs.stage }}'
       INPUT_TAG: '${{ inputs.tag }}'
     outputs:
-      environment: ${{ steps.input-environment.outputs.value }} ${{ steps.default-environment.outputs.value }}
+      stage: ${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}
       tag: ${{ steps.input-tag.outputs.slot }} ${{ steps.default-tag.outputs.value }}
     steps:
-      - id: input-environment
-        if: "${{ env.INPUT_ENVIRONMENT != '' }}"
-        run: echo "::set-output name=value::${{ env.INPUT_ENVIRONMENT }}"
-      - id: default-environment
-        if: "${{ env.INPUT_ENVIRONMENT == '' }}"
+      - id: input-stage
+        if: "${{ env.INPUT_STAGE != '' }}"
+        run: echo "::set-output name=value::${{ env.INPUT_STAGE }}"
+      - id: default-stage
+        if: "${{ env.INPUT_STAGE == '' }}"
         run: echo "::set-output name=value::development"
       - id: input-tag
         if: "${{ env.INPUT_TAG != '' }}"
