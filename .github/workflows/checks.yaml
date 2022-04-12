@@ -14,7 +14,7 @@ on:
       - develop
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/setup.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
     with:
       cacheKey: ${{ github.sha }}
   packages:
