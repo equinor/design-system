@@ -12,20 +12,13 @@ on:
   push:
     branches:
       - develop
-env:
-  CACHE_KEY: ${{ github.sha }}-core
 jobs:
-  print:
-    runs-on: ubuntu-latest
-    steps:
-      - id: print-env
-        run: env
   setup:
-    uses: equinor/design-system/.github/workflows/setup.yml@fix/MIM-2130-correct-slot-on-push
+    uses: equinor/design-system/.github/workflows/setup.yml@develop
     with:
       cacheKey: ${{ github.sha }}-core
   packages:
-    name: Build, test, lint & check packages
+    name: Check packages
     runs-on: ubuntu-latest
     needs: setup
     steps:
@@ -35,7 +28,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ env.CACHE_KEY }}
+          key: ${{ github.sha }}-core
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Test packages
