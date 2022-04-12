@@ -9,13 +9,14 @@ import {
   EdsProvider,
 } from '../..'
 import { useState, useEffect } from 'react'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import {
   attach_file,
   notifications,
   edit,
   delete_to_trash,
 } from '@equinor/eds-icons'
+import page from './Accordion.docs.mdx'
 
 Icon.add({ attach_file, notifications, edit, delete_to_trash })
 
@@ -36,15 +37,12 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `An accordion allows users to collapse and expand
-        sections of content.`,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Accordion>
 
-export const simple: Story<AccordionProps> = (args) => (
+export const Introduction: Story<AccordionProps> = (args) => (
   <Accordion {...args}>
     <Accordion.Item isExpanded>
       <Accordion.Header>Header 1</Accordion.Header>
