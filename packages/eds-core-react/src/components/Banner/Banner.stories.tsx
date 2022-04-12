@@ -41,7 +41,7 @@ export const Introduction: Story<BannerProps> = () => {
   )
 }
 
-export const IconAndText: Story<BannerProps> = () => (
+export const TextAndIcon: Story<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Icon>
@@ -59,6 +59,7 @@ export const IconAndText: Story<BannerProps> = () => (
     </Banner>
   </>
 )
+TextAndIcon.storyName = 'Text and icon'
 
 export const TextAndAction: Story<BannerProps> = () => (
   <>
@@ -85,8 +86,9 @@ export const TextAndAction: Story<BannerProps> = () => (
     </Banner>
   </>
 )
+TextAndAction.storyName = 'Text and action'
 
-export const IconAndTextAndActions: Story<BannerProps> = () => (
+export const TextAndIconAndAction: Story<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Icon variant="warning">
@@ -117,6 +119,7 @@ export const IconAndTextAndActions: Story<BannerProps> = () => (
     </Banner>
   </>
 )
+TextAndIconAndAction.storyName = 'Text and icon and actions'
 
 export const Compact: Story<BannerProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
@@ -157,12 +160,4 @@ export const Compact: Story<BannerProps> = () => {
       </Banner>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Banner` using `EdsProvider` ',
-    },
-  },
 }
