@@ -20,6 +20,7 @@ jobs:
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
+      stage: ${{ github.event.inputs.storybook-slot }}
   packages:
     name: Process packages
     runs-on: ubuntu-latest
