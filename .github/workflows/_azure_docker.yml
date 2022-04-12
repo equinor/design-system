@@ -1,0 +1,64 @@
+name: Publish to Azure with Docker
+on:
+  workflow_call:
+    secrets:
+      REGISTRY_LOGIN_SERVER:
+        required: true
+      REGISTRY_USERNAME:
+        required: true
+      REGISTRY_PASSWORD:
+        required: true
+      AZURE_CREDENTIALS:
+        required: true
+    inputs:
+      stage:
+        type: string
+        required: true
+      cacheKey:
+        type: string
+        required: true
+      dockerfilePath:
+        type: string
+        required: true
+jobs:
+  build_push_docker:
+    name: Build & Deploy Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use cache with storybook files
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ inputs.cacheKey }}
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Create docker image tag
+        id: image_tag
+        run: echo "::set-output name=image_tag::$(echo ${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }})"
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Login to registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build and push image
+        run: |
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ${{inputs.dockerfilePath }} .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
+      - name: Deploy to Web app
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'eds-storybook-react'
+          slot-name: '${{inputs.stage }}'
+          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}'

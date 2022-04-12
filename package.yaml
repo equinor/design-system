@@ -15,6 +15,8 @@ scripts:
   build:utils: pnpm --filter @equinor/eds-utils run build
   build:tokens: pnpm --filter @equinor/eds-tokens run build
   build:icons: pnpm --filter @equinor/eds-icons run build
+  build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
+  build:storybook:lab: pnpm --filter @equinor/eds-lab-react run build:storybook
   test: pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab
   test:core-react: pnpm --filter @equinor/eds-core-react run test
   test:lab: pnpm --filter @equinor/eds-lab-react run test
@@ -27,7 +29,6 @@ scripts:
   storybook: pnpm storybook:core-react
   storybook:lab: pnpm --filter @equinor/eds-lab-react run storybook
   graphics: pnpm --filter ./assets/woman run dev
-  build:storybook: pnpm --filter @equinor/eds-core-react run build:storybook
   export:tokens: pnpm --filter @equinor/eds-figma-broker tokens 0TbIXrrObWj80Cf7KucKYFL0
   export:assets: pnpm --filter @equinor/eds-figma-broker assets BQjYMxdSdgRkdhKTDDU7L4KU
   types: pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types
