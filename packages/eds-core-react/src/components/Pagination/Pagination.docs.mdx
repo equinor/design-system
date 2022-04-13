@@ -17,4 +17,17 @@ Allows long sets of data or content to bedivided into multiple pages with contro
 
 ## Usage
 
+<ul>
+    <li>When content will take a long time to load or is better viewed in smaller sets, 
+      pagination can be used to divide this content into multiple pages.</li>
+    <li>Pagination only loads one page at a time.</li>
+    <li>Do not lazy load content as the user scrolls when using pagination. </li>
+</ul>
+
+```tsx
+import { Pagination } from '@equinor/eds-core-react'
+
+<Pagination totalItems={8} />
+```
+
 ## Examples
