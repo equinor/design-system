@@ -18,4 +18,21 @@ Shows when hovered, focused or long-pressed (touch), and display information suc
 
 ## Usage
 
+The information provided should be very short and descriptive and explain icon meanings or differences between components.
+
+<ul>
+  <li>Tooltips should aim to have a single line of text that does not wrap, and is kept to under 80 characters in length.</li>
+  <li>The position of the tooltip is flexible, and they should always point to the component to which they give information about.</li>
+</ul>
+
+```tsx
+import { Tooltip } from '@equinor/eds-core-react'
+
+<Tooltip>
+  <Button variant="ghost_icon">
+    <Icon title="explore"></Icon>
+  </Button>
+</Tooltip>
+```
+
 ## Examples
