@@ -42,8 +42,12 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
-      - name: Print env
-        run: env
+      - name: If stage is lab
+        if: ${{ env.STAGE == 'lab' }}
+        run: 'Stage values, outputs - ${{ needs.setup.outputs.stage }}, env - ${{ env.STAGE }}'
+      - name: If stage is not lab
+        if: ${{ env.STAGE != 'lab' }}
+        run: 'Stage values, outputs - ${{ needs.setup.outputs.stage }}, env - ${{ env.STAGE }}'
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build lab storybook
