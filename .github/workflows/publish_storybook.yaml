@@ -42,13 +42,15 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      - name: Print env
+        run: env
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build lab storybook
-        if: ${{ env.STAGE == 'lab' }}
+        if: ${{ github.event.inputs.storybook-slot == 'lab' }}
         run: node_modules/.bin/pnpm build:storybook:lab
       - name: Build core-react storybook
-        if: ${{ env.STAGE != 'lab' }}
+        if: ${{ github.event.inputs.storybook-slot != 'lab' }}
         run: node_modules/.bin/pnpm build:storybook
 
   publish-storybook:
