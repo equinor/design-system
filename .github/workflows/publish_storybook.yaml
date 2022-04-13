@@ -63,7 +63,7 @@ jobs:
     with:
       stage: ${{ needs.setup.outputs.stage }}
       cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
-      dockerfilePath: ${{ (needs.setup.outputs.stage == 'development' || needs.setup.outputs.stage == 'production') && './packages/eds-core-react/Dockerfile.storybook' || './packages/eds-lab-react/Dockerfile.storybook' }}
+      dockerfilePath: ${{ github.event.inputs.storybook-slot == 'lab' && './packages/eds-lab-react/Dockerfile.storybook' || './packages/eds-core-react/Dockerfile.storybook' }}
     secrets:
       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
