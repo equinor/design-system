@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import { Pagination, PaginationProps, Button } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import { Stack } from './../../../.storybook/components'
+import page from './Pagination.docs.mdx'
 
 export default {
   title: 'Navigation/Pagination',
   component: Pagination,
   parameters: {
     docs: {
-      description: {
-        component: `Pagination allows long sets of data or content to be
-        divided into multiple pages with controls to navigate between these pages.
-        `,
-      },
+      page,
     },
   },
   args: {
@@ -27,10 +25,12 @@ export default {
       },
     },
   },
-} as Meta
+} as ComponentMeta<typeof Pagination>
 
-export const Default: Story<PaginationProps> = (args) => (
-  <Pagination {...args} />
+export const Introduction: Story<PaginationProps> = (args) => (
+  <Stack>
+    <Pagination {...args} />
+  </Stack>
 )
 
 export const Truncated: Story<PaginationProps> = () => (
