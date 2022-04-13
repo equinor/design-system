@@ -43,10 +43,10 @@ jobs:
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build core-react storybook
-        if: ${{ needs.setup.outputs.stage != lab }}
+        if: ${{ needs.setup.outputs.stage != "lab" }}
         run: node_modules/.bin/pnpm build:storybook
       - name: Build lab storybook
-        if: ${{ needs.setup.outputs.stage == lab }}
+        if: ${{ needs.setup.outputs.stage == "lab" }}
         run: node_modules/.bin/pnpm build:storybook:lab
   publish-storybook:
     needs: [setup, packages]
