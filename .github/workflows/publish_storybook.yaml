@@ -39,22 +39,22 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build core-react storybook
-        if: ${{ github.event.inputs.storybook-slot != 'lab' }}
+        if: ${{ needs.setup.outputs.stage != 'lab' }}
         run: node_modules/.bin/pnpm build:storybook
       - name: Build lab storybook
-        if: ${{ github.event.inputs.storybook-slot == 'lab' }}
+        if: ${{ needs.setup.outputs.stage == 'lab' }}
         run: node_modules/.bin/pnpm build:storybook:lab
   publish-storybook:
     needs: [setup, packages]
     uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
     with:
       stage: ${{ needs.setup.outputs.stage }}
-      cacheKey: ${{ github.sha }}-dist
-      dockerfilePath: ${{ (github.event.inputs.storybook-slot == 'development' || github.event.inputs.storybook-slot == 'production') && './packages/eds-core-react/Dockerfile.storybook' || './packages/eds-lab-react/Dockerfile.storybook' }}
+      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      dockerfilePath: ${{ (needs.setup.outputs.stage == 'development' || needs.setup.outputs.stage == 'production') && './packages/eds-core-react/Dockerfile.storybook' || './packages/eds-lab-react/Dockerfile.storybook' }}
     secrets:
       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
