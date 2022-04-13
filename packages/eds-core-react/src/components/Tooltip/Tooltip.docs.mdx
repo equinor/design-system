@@ -5,7 +5,7 @@ import { Tooltip } from '.'
 
 Shows when hovered, focused or long-pressed (touch), and display information such as a text label or a short description.
 
-<Links 
+<Links
     ariaUrl="https://www.w3.org/TR/wai-aria-practices/#tooltip"
     figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=18313%3A0"
     documentationUrl="https://eds.equinor.com/0b0c666ab/p/66a3cf-tooltip/b/398446"
@@ -36,3 +36,27 @@ import { Tooltip } from '@equinor/eds-core-react'
 ```
 
 ## Examples
+
+### With delay
+
+Tooltip opening is delayed with `300ms`.
+
+<Story id="data-display-tooltip--with-delay" />
+
+### On table cells
+
+Example of how `Tooltip` can be used on `Table.Cell`.
+
+<Story id="data-display-tooltip--on-table-cells" />
+
+### Long list with tooltips
+
+Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible.
+
+<Story id="data-display-tooltip--long-list-with-tooltips" />
+
+### Radio and checkboxes
+
+Inputs of type radio, checkbox and switch will have the tooltip applied to the input element. A good way to get the tooltip to also apply to the label is to simply wrap the input in a span.
+
+<Story id="data-display-tooltip--radio-and-checkboxes" />
