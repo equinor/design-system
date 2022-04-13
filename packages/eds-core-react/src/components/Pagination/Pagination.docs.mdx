@@ -31,3 +31,21 @@ import { Pagination } from '@equinor/eds-core-react'
 ```
 
 ## Examples
+
+### Truncated
+
+If the number of page exceeds the parent container, it will truncate the list.
+
+<Story id="navigation-pagination--truncated" />
+
+### With indicator
+
+The `withItemIndicator` displays total item count.
+
+<Story id="navigation-pagination--with-indicator" />
+
+### Dynamic `itemsPerPage`
+
+If `itemsPerPage` changes dynamically, the active page is set to 1.
+
+<Story id="navigation-pagination--dynamic" />
