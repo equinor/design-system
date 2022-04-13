@@ -48,16 +48,8 @@ jobs:
     env:
       INPUT_PATHS: '${{ inputs.checkout_paths }}'
     steps:
-      - id: cache-files
-        name: Cache files
-        uses: actions/cache@v3
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ inputs.cacheKey }}
       - id: checkout-files
-        if: steps.cache-files.outputs.cache-hit != 'true'
+        # if: steps.cache-files.outputs.cache-hit != 'true'
         name: Checkout files
         run: |
           REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
@@ -91,3 +83,11 @@ jobs:
       - name: Install dependencies recursively
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
+      - id: cache-files
+        name: Cache files
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ inputs.cacheKey }}
