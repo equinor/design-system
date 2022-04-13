@@ -9,44 +9,48 @@ import {
   Checkbox,
 } from '../..'
 import { data, columns, toCellValues } from '../../stories'
-import { Story, Meta } from '@storybook/react'
-
+import { Story, ComponentMeta } from '@storybook/react'
 import { explore } from '@equinor/eds-icons'
+import { Stack as SBStack } from './../../../.storybook/components'
+import page from './Tooltip.docs.mdx'
 
-const StoryCenter = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
+const Stack = styled(SBStack)({
   margin: '2.5rem',
 })
 
 export default {
   title: 'Data Display/Tooltip',
   component: Tooltip,
-} as Meta
+  parameters: {
+    docs: {
+      page,
+    },
+  },
+} as ComponentMeta<typeof Tooltip>
 
-export const Default: Story<TooltipProps> = (args) => (
-  <StoryCenter>
+export const Introduction: Story<TooltipProps> = (args) => (
+  <Stack>
     <Tooltip {...args}>
       <Button variant="ghost_icon">
         <Icon data={explore} title="explore"></Icon>
       </Button>
     </Tooltip>
-  </StoryCenter>
+  </Stack>
 )
-
-Default.bind({})
-Default.args = {
+Introduction.bind({})
+Introduction.args = {
   title: 'Explore more actions',
 }
+
 export const WithDelay: Story<TooltipProps> = () => {
   return (
-    <StoryCenter>
+    <Stack>
       <Tooltip enterDelay={300} title="Tooltip with delay">
         <Typography link href="#">
           Hover me!
         </Typography>
       </Tooltip>
-    </StoryCenter>
+    </Stack>
   )
 }
 WithDelay.parameters = {
@@ -59,7 +63,7 @@ WithDelay.parameters = {
 
 // export const DisabledInSafari: Story<TooltipProps> = () => {
 //   return (
-//     <StoryCenter>
+//     <Stack>
 //       <Tooltip title="Disabled button, but hover works">
 //         <span>
 //           <Button
@@ -71,7 +75,7 @@ WithDelay.parameters = {
 //           </Button>
 //         </span>
 //       </Tooltip>
-//     </StoryCenter>
+//     </Stack>
 //   )
 // }
 
