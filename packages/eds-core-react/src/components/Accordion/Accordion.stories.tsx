@@ -59,7 +59,7 @@ export const Introduction: Story<AccordionProps> = (args) => (
   </Accordion>
 )
 
-export const header: Story<AccordionProps> = () => {
+export const Header: Story<AccordionProps> = () => {
   return (
     <Wrapper>
       <Accordion headerLevel="h3" chevronPosition="left">
@@ -190,12 +190,4 @@ export const Compact: Story<AccordionProps> = () => {
       </EdsProvider>
     </Wrapper>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Accordion` using `EdsProvider` ',
-    },
-  },
 }
