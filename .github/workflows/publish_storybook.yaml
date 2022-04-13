@@ -42,12 +42,13 @@ jobs:
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Build packages
         run: node_modules/.bin/pnpm run build
-      - name: Build core-react storybook
-        if: ${{ needs.setup.outputs.stage != "lab" }}
-        run: node_modules/.bin/pnpm build:storybook
       - name: Build lab storybook
-        if: ${{ needs.setup.outputs.stage == "lab" }}
+        if: ${{ needs.setup.outputs.stage == 'lab' }}
         run: node_modules/.bin/pnpm build:storybook:lab
+      - name: Build core-react storybook
+        if: ${{ needs.setup.outputs.stage != 'lab' }}
+        run: node_modules/.bin/pnpm build:storybook
+
   publish-storybook:
     needs: [setup, packages]
     uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
