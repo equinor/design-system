@@ -21,6 +21,47 @@ export const Introduction: Story<SliderProps> = (args) => {
   )
 }
 
+export const SimpleSlider: Story<SliderProps> = () => (
+  <>
+    <span id="simple-slider">Slide me</span>
+    <Slider value={4} min={0} max={10} ariaLabelledby="simple-slider" />
+  </>
+)
+SimpleSlider.storyName = 'Simple slider'
+SimpleSlider.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
+
+export const SimpleSliderWithSteps: Story<SliderProps> = () => {
+  return (
+    <>
+      <span id="even-simpler-slider">
+        Simple slider, no dots, no min or max values, steps of 10
+      </span>
+      <Slider
+        ariaLabelledby="even-simpler-slider"
+        value={50}
+        step={10}
+        minMaxDots={false}
+        minMaxValues={false}
+      />
+    </>
+  )
+}
+
+SimpleSliderWithSteps.storyName = 'Simple slider with steps'
+SimpleSliderWithSteps.decorators = [
+  (Story) => (
+    <div style={{ margin: '3rem' }}>
+      <Story />
+    </div>
+  ),
+]
+
 export const RangeSlider: Story<SliderProps> = () => {
   const [value, updateValue] = useState([30, 70])
   const changeHandler = (
@@ -147,47 +188,6 @@ export const RangeSliderWithDates: Story<SliderProps> = () => {
 
 RangeSliderWithDates.storyName = 'Range slider with dates'
 RangeSliderWithDates.decorators = [
-  (Story) => (
-    <div style={{ margin: '3rem' }}>
-      <Story />
-    </div>
-  ),
-]
-
-export const SimpleSlider: Story<SliderProps> = () => (
-  <>
-    <span id="simple-slider">Slide me</span>
-    <Slider value={4} min={0} max={10} ariaLabelledby="simple-slider" />
-  </>
-)
-SimpleSlider.storyName = 'Simple slider'
-SimpleSlider.decorators = [
-  (Story) => (
-    <div style={{ margin: '3rem' }}>
-      <Story />
-    </div>
-  ),
-]
-
-export const SimpleSliderWithSteps: Story<SliderProps> = () => {
-  return (
-    <>
-      <span id="even-simpler-slider">
-        Simple slider, no dots, no min or max values, steps of 10
-      </span>
-      <Slider
-        ariaLabelledby="even-simpler-slider"
-        value={50}
-        step={10}
-        minMaxDots={false}
-        minMaxValues={false}
-      />
-    </>
-  )
-}
-
-SimpleSliderWithSteps.storyName = 'Simple slider with steps'
-SimpleSliderWithSteps.decorators = [
   (Story) => (
     <div style={{ margin: '3rem' }}>
       <Story />

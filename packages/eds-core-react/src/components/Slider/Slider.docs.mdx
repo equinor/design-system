@@ -29,7 +29,35 @@ Sliders reflect the current state of the settings they control.
 ```tsx
 import { Slider } from '@equinor/eds-core-react'
 
-<Slider />
+<Slider value={4} min={0} max={10} ariaLabelledby="simple-slider" />
 ```
 
 ## Examples
+
+### Simple slider
+
+<Story id="inputs-slider--simple-slider" />
+
+### Simple slider with steps
+
+<Story id="inputs-slider--simple-slider-with-steps" />
+
+### Range slider
+
+<Story id="inputs-slider--range-slider" />
+
+### Range slider with committed step
+
+<Story id="inputs-slider--range-slider-with-committed-step" />
+
+### Range slider with interval
+
+<Story id="inputs-slider--range-slider-with-interval" />
+
+### Range slider with dates
+
+<Story id="inputs-slider--range-slider-with-dates" />
+
+### Disabled
+
+<Story id="inputs-slider--disabled" />
