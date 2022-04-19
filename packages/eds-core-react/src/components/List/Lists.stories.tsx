@@ -67,7 +67,7 @@ export const Ordered: Story<ListProps> = () => (
   </List>
 )
 
-export const OrderedStartingOn15: Story<ListProps> = () => (
+export const WithStartOption: Story<ListProps> = () => (
   <List variant="numbered" start={start}>
     <List.Item>List item</List.Item>
     <List.Item>List item</List.Item>
@@ -79,3 +79,4 @@ export const OrderedStartingOn15: Story<ListProps> = () => (
     <List.Item>List item</List.Item>
   </List>
 )
+WithStartOption.storyName = 'With start option'
