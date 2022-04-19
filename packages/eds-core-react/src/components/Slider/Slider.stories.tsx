@@ -1,22 +1,19 @@
 import { useState, FormEvent } from 'react'
 import { Slider, SliderProps } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import page from './Slider.docs.mdx'
 
 export default {
   title: 'Inputs/Slider',
   component: Slider,
   parameters: {
     docs: {
-      description: {
-        component: `A slider is a flexible input that allows users to adjust
-        predefined values.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Slider>
 
-export const Default: Story<SliderProps> = (args) => {
+export const Introduction: Story<SliderProps> = (args) => {
   return (
     <div style={{ margin: '3rem' }}>
       <Slider {...args} />
