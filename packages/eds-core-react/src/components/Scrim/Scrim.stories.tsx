@@ -32,9 +32,9 @@ export const Introduction: Story<ScrimProps> = (args) => {
 
   return (
     <Stack>
-      <Button onClick={handleOpen}>SHOW SCRIN</Button>
+      <Button onClick={handleOpen}>SHOW SCRIM</Button>
       <Scrim {...args} open={open} onClose={handleClose}>
-        <Button onClick={handleClose}>HIDE SCRIN</Button>
+        <Button onClick={handleClose}>HIDE SCRIM</Button>
       </Scrim>
     </Stack>
   )
