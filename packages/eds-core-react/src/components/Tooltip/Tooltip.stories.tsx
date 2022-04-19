@@ -9,57 +9,55 @@ import {
   Checkbox,
 } from '../..'
 import { data, columns, toCellValues } from '../../stories'
-import { Story, Meta } from '@storybook/react'
-
+import { Story, ComponentMeta } from '@storybook/react'
 import { explore } from '@equinor/eds-icons'
+import { Stack as SBStack } from './../../../.storybook/components'
+import page from './Tooltip.docs.mdx'
 
-const StoryCenter = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
+const Stack = styled(SBStack)({
   margin: '2.5rem',
 })
 
 export default {
   title: 'Data Display/Tooltip',
   component: Tooltip,
-} as Meta
+  parameters: {
+    docs: {
+      page,
+    },
+  },
+} as ComponentMeta<typeof Tooltip>
 
-export const Default: Story<TooltipProps> = (args) => (
-  <StoryCenter>
+export const Introduction: Story<TooltipProps> = (args) => (
+  <Stack>
     <Tooltip {...args}>
       <Button variant="ghost_icon">
         <Icon data={explore} title="explore"></Icon>
       </Button>
     </Tooltip>
-  </StoryCenter>
+  </Stack>
 )
-
-Default.bind({})
-Default.args = {
+Introduction.bind({})
+Introduction.args = {
   title: 'Explore more actions',
 }
+
 export const WithDelay: Story<TooltipProps> = () => {
   return (
-    <StoryCenter>
+    <Stack>
       <Tooltip enterDelay={300} title="Tooltip with delay">
         <Typography link href="#">
           Hover me!
         </Typography>
       </Tooltip>
-    </StoryCenter>
+    </Stack>
   )
 }
-WithDelay.parameters = {
-  docs: {
-    description: {
-      story: 'Tooltip opening is delayed with `300ms`',
-    },
-  },
-}
+WithDelay.storyName = 'With delay'
 
 // export const DisabledInSafari: Story<TooltipProps> = () => {
 //   return (
-//     <StoryCenter>
+//     <Stack>
 //       <Tooltip title="Disabled button, but hover works">
 //         <span>
 //           <Button
@@ -71,7 +69,7 @@ WithDelay.parameters = {
 //           </Button>
 //         </span>
 //       </Tooltip>
-//     </StoryCenter>
+//     </Stack>
 //   )
 // }
 
@@ -86,71 +84,64 @@ export const OnTableCells: Story<TooltipProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   return (
-    <Table>
-      <Table.Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
-      </Table.Caption>
-      <Table.Head>
-        <Table.Row>
-          {columns.map((col) => (
-            <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
-          ))}
-        </Table.Row>
-      </Table.Head>
-      <Table.Body>
-        {cellValues?.map((row) => (
-          <Table.Row key={row.toString()}>
-            {row.map((cellValue) => {
-              return (
-                <Tooltip
-                  key={cellValue}
-                  placement="top"
-                  title={`Tooltip title for ` + cellValue}
-                >
-                  <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
-                </Tooltip>
-              )
-            })}
+    <Stack>
+      <Table>
+        <Table.Caption>
+          <Typography variant="h2">Fruits cost price</Typography>
+        </Table.Caption>
+        <Table.Head>
+          <Table.Row>
+            {columns.map((col) => (
+              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
+            ))}
           </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+        </Table.Head>
+        <Table.Body>
+          {cellValues?.map((row) => (
+            <Table.Row key={row.toString()}>
+              {row.map((cellValue) => {
+                return (
+                  <Tooltip
+                    key={cellValue}
+                    placement="top"
+                    title={`Tooltip title for ` + cellValue}
+                  >
+                    <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+                  </Tooltip>
+                )
+              })}
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Stack>
   )
 }
-OnTableCells.parameters = {
-  docs: {
-    description: {
-      story: 'Example of how `Tooltip` can be used on `Table.Cell`',
-    },
-  },
-}
+OnTableCells.storyName = 'On table cells'
 
-export const LonglistWithTooltips: Story<TooltipProps> = () => {
+export const LongListWithTooltips: Story<TooltipProps> = () => {
   const items = Array(100).fill(1)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '200px' }}>
-      {items.map((_, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <span key={i}>
-          <Tooltip title={`Icon ${i}`} placement="right">
-            <Icon data={explore} />
-          </Tooltip>
-        </span>
-      ))}
-    </div>
+    <Stack>
+      <div
+        style={{ display: 'flex', flexDirection: 'column', height: '200px' }}
+      >
+        {items.map((_, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <span key={i}>
+            <Tooltip title={`Icon ${i}`} placement="right">
+              <Icon data={explore} />
+            </Tooltip>
+          </span>
+        ))}
+      </div>
+    </Stack>
   )
 }
-LonglistWithTooltips.parameters = {
-  docs: {
-    description: {
-      story:
-        'Long list of elements that have a tooltip. Used for testing if tooltip "lag" when scrolling while tooltips are visible',
-    },
-  },
-}
+LongListWithTooltips.storyName = 'Long list with toolstips'
 
-export const radioAndCheckboxes: Story<TooltipProps> = () => (
+export const RadioAndCheckboxes: Story<TooltipProps> = () => (
   <>
     <Tooltip placement="top" title="tooltip on an input">
       <Checkbox label="Checkbox with tooltip" />
@@ -163,11 +154,4 @@ export const radioAndCheckboxes: Story<TooltipProps> = () => (
     </Tooltip>
   </>
 )
-radioAndCheckboxes.parameters = {
-  docs: {
-    description: {
-      story:
-        'Inputs of type radio, checkbox and switch will have the tooltip applied to the input element. A good way to get the tooltip to also apply to the label is to simply wrap the input in a span',
-    },
-  },
-}
+RadioAndCheckboxes.storyName = 'Radio and checkboxes'
