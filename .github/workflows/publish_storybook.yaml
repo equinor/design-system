@@ -48,27 +48,34 @@ jobs:
       - name: If stage is not lab
         if: ${{ env.STAGE != 'lab' }}
         run: echo 'Stage values, outputs - ${{ needs.setup.outputs.stage }}, env - ${{ env.STAGE }}'
-      - name: Build packages
-        run: node_modules/.bin/pnpm run build
-      - name: Build lab storybook
-        if: ${{ github.event.inputs.storybook-slot == 'lab' }}
-        run: node_modules/.bin/pnpm build:storybook:lab
-      - name: Build core-react storybook
-        if: ${{ github.event.inputs.storybook-slot != 'lab' }}
-        run: node_modules/.bin/pnpm build:storybook
+      - name: Testing if statement in run
+        run: |
+          if [[ ${{ needs.setup.outputs.stage }} == lab ]]; then
+            echo Stage was lab!
+          else
+            echo Stage was something else!
+          fi
+      # - name: Build packages
+      #   run: node_modules/.bin/pnpm run build
+      # - name: Build lab storybook
+      #   if: ${{ github.event.inputs.storybook-slot == 'lab' }}
+      #   run: node_modules/.bin/pnpm build:storybook:lab
+      # - name: Build core-react storybook
+      #   if: ${{ github.event.inputs.storybook-slot != 'lab' }}
+      #   run: node_modules/.bin/pnpm build:storybook
 
-  publish-storybook:
-    needs: [setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
-    with:
-      stage: ${{ needs.setup.outputs.stage }}
-      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
-      dockerfilePath: ${{ github.event.inputs.storybook-slot == 'lab' && './packages/eds-lab-react/Dockerfile.storybook' || './packages/eds-core-react/Dockerfile.storybook' }}
-    secrets:
-      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  # publish-storybook:
+  #   needs: [setup, packages]
+  #   uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
+  #   with:
+  #     stage: ${{ needs.setup.outputs.stage }}
+  #     cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+  #     dockerfilePath: ${{ github.event.inputs.storybook-slot == 'lab' && './packages/eds-lab-react/Dockerfile.storybook' || './packages/eds-core-react/Dockerfile.storybook' }}
+  #   secrets:
+  #     REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+  #     REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+  #     REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+  #     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   # build-storybook-core-react:
   #   name: Build Storybook core
   #   runs-on: ubuntu-latest
