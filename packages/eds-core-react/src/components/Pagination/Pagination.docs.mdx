@@ -1,0 +1,51 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Pagination } from '.'
+
+# Pagination
+
+Allows long sets of data or content to be divided into multiple pages with controls to navigate between these pages.
+
+<Links 
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17627%3A14"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/8560a6-pagination/b/977efb"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Pagination/Pagination.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+></Links>
+
+<Story id="navigation-pagination--introduction" />
+<PropsTable />
+
+## Usage
+
+<ul>
+    <li>When content will take a long time to load or is better viewed in smaller sets, 
+      pagination can be used to divide this content into multiple pages.</li>
+    <li>Pagination only loads one page at a time.</li>
+    <li>Do not lazy load content as the user scrolls when using pagination. </li>
+</ul>
+
+```tsx
+import { Pagination } from '@equinor/eds-core-react'
+
+<Pagination totalItems={8} />
+```
+
+## Examples
+
+### Truncated
+
+If the number of page exceeds the parent container, it will truncate the list.
+
+<Story id="navigation-pagination--truncated" />
+
+### With indicator
+
+The `withItemIndicator` displays total item count.
+
+<Story id="navigation-pagination--with-indicator" />
+
+### Dynamic `itemsPerPage`
+
+If `itemsPerPage` changes dynamically, the active page is set to 1.
+
+<Story id="navigation-pagination--dynamic" />

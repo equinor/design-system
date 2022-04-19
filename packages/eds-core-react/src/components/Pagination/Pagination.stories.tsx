@@ -1,17 +1,14 @@
 import { useState } from 'react'
 import { Pagination, PaginationProps, Button } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import page from './Pagination.docs.mdx'
 
 export default {
   title: 'Navigation/Pagination',
   component: Pagination,
   parameters: {
     docs: {
-      description: {
-        component: `Pagination allows long sets of data or content to be
-        divided into multiple pages with controls to navigate between these pages.
-        `,
-      },
+      page,
     },
   },
   args: {
@@ -27,9 +24,9 @@ export default {
       },
     },
   },
-} as Meta
+} as ComponentMeta<typeof Pagination>
 
-export const Default: Story<PaginationProps> = (args) => (
+export const Introduction: Story<PaginationProps> = (args) => (
   <Pagination {...args} />
 )
 
@@ -40,6 +37,7 @@ export const Truncated: Story<PaginationProps> = () => (
 export const WithIndicator: Story<PaginationProps> = () => (
   <Pagination totalItems={140} itemsPerPage={3} withItemIndicator />
 )
+WithIndicator.storyName = 'With indicator'
 
 export const Dynamic: Story<PaginationProps> = () => {
   const [currentPageIndex, setCurrentPageIndex] = useState(6)
@@ -97,11 +95,3 @@ export const Dynamic: Story<PaginationProps> = () => {
   )
 }
 Dynamic.storyName = 'Dynamic itemsPerPage'
-Dynamic.parameters = {
-  docs: {
-    description: {
-      story:
-        'if `itemsPerPage` changes dynamically, the active page is set to 1',
-    },
-  },
-}
