@@ -117,6 +117,12 @@ const SearchInput = styled(Input)(({ theme, disabled }) => {
     &:focus {
       outline: none;
     }
+    &:-webkit-autofill {
+      box-shadow: 0 0 0px 1000px ${theme.background} inset;
+    }
+    &:autofill {
+      box-shadow: 0 0 0px 1000px ${theme.background} inset;
+    }
     ${disabled &&
     css`
       cursor: not-allowed;
