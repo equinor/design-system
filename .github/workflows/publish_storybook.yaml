@@ -43,10 +43,10 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: If stage is lab
-        if: ${{ needs.setup.outputs.stage  }} == lab
+        if: ${{ env.STAGE }} == 'lab'
         run: echo 'Stage values, outputs - ${{ needs.setup.outputs.stage }}, env - ${{ env.STAGE }}'
       - name: If stage is not lab
-        if: ${{ needs.setup.outputs.stage }} != lab
+        if: ${{ env.STAGE }} != 'lab'
         run: echo 'Stage values, outputs - ${{ needs.setup.outputs.stage }}, env - ${{ env.STAGE }}'
       - name: Testing if statement in run
         run: |
