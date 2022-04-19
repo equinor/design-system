@@ -1,0 +1,115 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Popover } from '.'
+
+# Popover
+
+Is a floating card that provides more information or actions on hover or click.
+
+<Links 
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17515%3A0"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/8809df-popover/b/398446"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Popover/Popover.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="data-display-popover--introduction"/>
+<PropsTable />
+
+## Usage
+
+`Popover` provides excess or additional information that does not fit in the main content area. 
+<ul>
+    <li>A popover displays rich content in a non-modal dialog to describe or add additional
+        information when users hover over, focus on, or click an interactive element.</li>
+    <li>User can interact with popover content.</li>
+    <li>Use sparingly.</li>
+  </ul>
+
+  ```tsx
+import { Popover } from '@equinor/eds-core-react'
+
+const Demo = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleOpen = () => {
+      setIsOpen(true)
+    }
+    const handleClose = () => {
+      setIsOpen(false)
+    }
+
+    const referenceElement = useRef<HTMLButtonElement>(null)
+
+    return (
+        <>
+      <Button
+        aria-haspopup
+        id="default-popover-anchor"
+        aria-controls="default-popover"
+        aria-expanded={isOpen}
+        ref={referenceElement}
+        onClick={handleOpen}
+      >
+        Trigger Popover
+      </Button>
+
+      <Popover
+        open={isOpen}
+        id="default-popover"
+        anchorEl={referenceElement.current}
+        onClose={handleClose}
+      >
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+        </Popover.Header>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
+        <Popover.Actions>
+          <Button onClick={handleClose}>OK</Button>
+        </Popover.Actions>
+      </Popover>
+    </>
+  )
+}
+```
+
+## Examples
+
+### Activate `onClick`
+
+<ul>
+    <li>Popovers can be activated by hover or click.</li>
+    <li>To dismiss a popover, use the close icon, press the ESC key, open another popover or click outside the popover.</li>
+    <li>If there are no actions in the popover, then the close icon should be the first focusable element.</li>
+</ul>
+
+<Story id="data-display-popover--activate-on-click"/>
+
+### Activate `onHover`
+
+<ul>
+    <li>Remember to use both <code>onMouseEnter</code> and <code>onFocus</code> attributes to your trigger element to be able to open the popover.</li>
+    <li>A timeout delay (300ms) on <code>onMouseEnter</code> is recommended to avoid unwanted trigger while browsing.</li>
+</ul>
+
+<Story id="data-display-popover--activate-on-hover"/>
+
+### With Tooltip
+
+<Story id="data-display-popover--with-tooltip"/>
+
+### With close button
+
+<ul>
+    <li>In some cases an explicit close button is recommended.</li>
+    <li>Here is an example of how this can be implemented in the Header.</li>
+</ul>
+
+<Story id="data-display-popover--with-close-button"/>
+
+### Compact
+
+Compact `Popover` using `EdsProvider`.
+
+<Story id="data-display-popover--compact"/>
+

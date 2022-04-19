@@ -11,13 +11,13 @@ import {
   Density,
 } from '../..'
 import { more_vertical, close } from '@equinor/eds-icons'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
+import { Stack as SBStack } from './../../../.storybook/components'
+import page from './Popover.docs.mdx'
 
 const { Title, Content, Header, Actions } = Popover
 
-const StoryCenter = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
+const Stack = styled(SBStack)({
   margin: '10rem',
 })
 
@@ -25,14 +25,19 @@ export default {
   title: 'Data Display/Popover',
   component: Popover,
   subcomponents: {
+    Header,
     Title,
     Content,
-    Header,
     Actions,
   },
-} as Meta
+  parameters: {
+    docs: {
+      page,
+    },
+  },
+} as ComponentMeta<typeof Popover>
 
-export const Default: Story<PopoverProps> = (args) => {
+export const Introduction: Story<PopoverProps> = (args) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => {
@@ -51,7 +56,7 @@ export const Default: Story<PopoverProps> = (args) => {
   }, [args.open])
 
   return (
-    <StoryCenter>
+    <Stack>
       <Button
         aria-haspopup
         id="default-popover-anchor"
@@ -80,7 +85,7 @@ export const Default: Story<PopoverProps> = (args) => {
           <Button onClick={handleClose}>OK</Button>
         </Popover.Actions>
       </Popover>
-    </StoryCenter>
+    </Stack>
   )
 }
 
@@ -92,7 +97,7 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <StoryCenter>
+    <Stack>
       <Button
         id="click-popover-anchor"
         aria-controls="click-popover"
@@ -119,16 +124,10 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
           <Button onClick={closePopover}>OK</Button>
         </Popover.Actions>
       </Popover>
-    </StoryCenter>
+    </Stack>
   )
 }
-
-ActivateOnClick.parameters = {
-  docs: {
-    storyDescription:
-      'Popovers can be activated by hover or click. To dismiss a popover, use the close icon, press the ESC key, open another popover or click outside the popover. If there are no actions in the popover, then the close icon should be the first focusable element.',
-  },
-}
+ActivateOnClick.storyName = 'Activate onClick'
 
 export const ActivateOnHover: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -150,7 +149,7 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
   }
 
   return (
-    <StoryCenter>
+    <Stack>
       <Button
         id="hover-popover-anchor"
         aria-controls="hover-popover"
@@ -180,16 +179,10 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
           <Button onClick={handleClose}>OK</Button>
         </Popover.Actions>
       </Popover>
-    </StoryCenter>
+    </Stack>
   )
 }
-
-ActivateOnHover.parameters = {
-  docs: {
-    storyDescription:
-      'Remember to use both `onMouseEnter` and `onFocus` attributes to your trigger element to be able to open the popover. A timeout delay (300ms) on `onMouseEnter` is recommended to avoid unwanted trigger while browsing.',
-  },
-}
+ActivateOnHover.storyName = 'Activate onHover'
 
 export const WithTooltip: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -199,7 +192,7 @@ export const WithTooltip: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <StoryCenter>
+    <Stack>
       <Tooltip title="Menu">
         <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={more_vertical} />
@@ -216,64 +209,8 @@ export const WithTooltip: Story<PopoverProps> = () => {
         </Popover.Header>
         <Popover.Content>Content</Popover.Content>
       </Popover>
-    </StoryCenter>
+    </Stack>
   )
-}
-
-export const Compact: Story<PopoverProps> = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
-
-  const openPopover = () => setIsOpen(true)
-  const closePopover = () => setIsOpen(false)
-
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
-  return (
-    <EdsProvider density={density}>
-      <StoryCenter>
-        <Button
-          id="click-popover-anchor"
-          aria-controls="click-popover"
-          ref={anchorRef}
-          onClick={openPopover}
-        >
-          Click to activate
-        </Button>
-
-        <Popover
-          id="click-popover"
-          aria-expanded={isOpen}
-          anchorEl={anchorRef.current}
-          onClose={closePopover}
-          open={isOpen}
-        >
-          <Popover.Header>
-            <Popover.Title>Title</Popover.Title>
-          </Popover.Header>
-          <Popover.Content>
-            <Typography variant="body_short">Content</Typography>
-          </Popover.Content>
-          <Popover.Actions>
-            <Button onClick={closePopover}>OK</Button>
-          </Popover.Actions>
-        </Popover>
-      </StoryCenter>
-    </EdsProvider>
-  )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Popover` using `EdsProvider` ',
-    },
-  },
 }
 
 export const WithCloseButton: Story<PopoverProps> = () => {
@@ -284,7 +221,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <StoryCenter>
+    <Stack>
       <Button
         id="click-popover-anchor"
         aria-controls="click-popover"
@@ -316,15 +253,55 @@ export const WithCloseButton: Story<PopoverProps> = () => {
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
       </Popover>
-    </StoryCenter>
+    </Stack>
   )
 }
+WithCloseButton.storyName = 'With close button'
 
-WithCloseButton.parameters = {
-  docs: {
-    description: {
-      story:
-        'In some cases an explicit close button is recommended. Here is an example of how this can be implemented in the Header.',
-    },
-  },
+export const Compact: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Stack>
+        <Button
+          id="click-popover-anchor"
+          aria-controls="click-popover"
+          ref={anchorRef}
+          onClick={openPopover}
+        >
+          Click to activate
+        </Button>
+
+        <Popover
+          id="click-popover"
+          aria-expanded={isOpen}
+          anchorEl={anchorRef.current}
+          onClose={closePopover}
+          open={isOpen}
+        >
+          <Popover.Header>
+            <Popover.Title>Title</Popover.Title>
+          </Popover.Header>
+          <Popover.Content>
+            <Typography variant="body_short">Content</Typography>
+          </Popover.Content>
+          <Popover.Actions>
+            <Button onClick={closePopover}>OK</Button>
+          </Popover.Actions>
+        </Popover>
+      </Stack>
+    </EdsProvider>
+  )
 }
