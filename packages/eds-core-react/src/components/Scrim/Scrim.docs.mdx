@@ -1,0 +1,54 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Scrim } from '.'
+
+# Scrim
+
+Is a temporary visual effect that fades the general interface while allowing the user to focus on an overlay.
+
+<Links 
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=85%3A32"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/63a8f3-scrim/b/62906b"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Scrim/Scrim.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="feedback-scrim--introduction" />
+<PropsTable />
+
+## Usage
+
+A `Scrim` shows behind all other surfaces in an app, displaying contextual and actionable content.
+
+<ul>
+    <li>The scrim’s back layer is persistent, displaying controls and content that relate to the front layer.</li>
+    <li>The scrim focuses attention on one layer at a time.</li>
+    <li>The scrim is displayed at full width and holds primary content.</li>
+    <li>The scrim can be closed by either interacting with the front layer, using `esc` button or tapping a conceal affordance on either layer.</li>
+</ul>
+
+```tsx
+import { Scrim } from '@equinor/eds-core-react'
+
+const Demo = () => {
+    const [isOpen, setIsOpen] = useState(false)
+      const handleOpen = () => {
+        setIsOpen(true)
+      }
+      const handleClose = () => {
+        setIsOpen(false)
+      }
+
+    return (
+        <>
+      <Button onClick={handleOpen}>Open</Button>
+      <Scrim onClose={handleClose}>
+        <Button onClick={handleClose}>Close</Button>
+      </Scrim>
+    </>
+  )
+}
+```
+
+## Example: Scrim with Dialog
+
+<Story id="feedback-dialog--dismissable" />
