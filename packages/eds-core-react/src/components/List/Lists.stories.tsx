@@ -1,5 +1,6 @@
 import { List, ListProps } from '../..'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
+import page from './List.docs.mdx'
 
 const start = '15'
 
@@ -8,16 +9,13 @@ export default {
   component: List,
   parameters: {
     docs: {
-      description: {
-        component: `Lists organise information into related groups of content.
-        `,
-      },
+      page,
     },
   },
   subcomponents: { Item: List.Item },
-} as Meta
+} as ComponentMeta<typeof List>
 
-export const Default: Story<ListProps> = (args) => (
+export const Introduction: Story<ListProps> = (args) => (
   <List {...args}>
     <List.Item>List item</List.Item>
     <List.Item>List item</List.Item>
@@ -69,7 +67,7 @@ export const Ordered: Story<ListProps> = () => (
   </List>
 )
 
-export const OrderedStartingOn15: Story<ListProps> = () => (
+export const WithStartOption: Story<ListProps> = () => (
   <List variant="numbered" start={start}>
     <List.Item>List item</List.Item>
     <List.Item>List item</List.Item>
@@ -81,3 +79,4 @@ export const OrderedStartingOn15: Story<ListProps> = () => (
     <List.Item>List item</List.Item>
   </List>
 )
+WithStartOption.storyName = 'With start option'

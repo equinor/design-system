@@ -1,0 +1,49 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { List } from '.'
+
+# List
+
+Organise information into related groups of content.
+
+<Links 
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=18733%3A877"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/873a8b-list/b/398446"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/List/List.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="data-display-lists--introduction" />
+<PropsTable />
+
+## Usage
+
+Lists are a continuous group of text.
+
+<ul>
+    <li>Lists should be sorted in logical ways that make content easy to scan.</li>
+    <li>Lists present content in a way that makes it easy to identify.</li>
+</ul>
+
+```tsx
+import { List } from '@equinor/eds-core-react'
+
+<List>
+  <List.Item>List item</List.Item>
+  <List.Item>List item</List.Item>
+  <List.Item>List item</List.Item>
+</List>
+```
+
+## Examples
+
+### Unordered
+
+<Story id="data-display-lists--unordered" />
+
+### Ordered
+
+<Story id="data-display-lists--ordered" />
+
+### With `start` option
+
+<Story id="data-display-lists--with-start-option" />
