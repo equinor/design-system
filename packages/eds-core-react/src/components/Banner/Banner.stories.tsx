@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { Banner, Icon, Button, BannerProps, EdsProvider, Density } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
+import page from './Banner.docs.mdx'
 
 const icons = {
   save,
@@ -22,15 +23,12 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `Banners display important notifications and related optional actions.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Banner>
 
-export const Default: Story<BannerProps> = () => {
+export const Introduction: Story<BannerProps> = () => {
   //  Note: This example is not interactive, as Storybook
   // doesn't yet support to manipulate subcomponents via Storybook Args
   return (
@@ -43,7 +41,7 @@ export const Default: Story<BannerProps> = () => {
   )
 }
 
-export const IconAndText: Story<BannerProps> = () => (
+export const TextAndIcon: Story<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Icon>
@@ -61,6 +59,7 @@ export const IconAndText: Story<BannerProps> = () => (
     </Banner>
   </>
 )
+TextAndIcon.storyName = 'Text and icon'
 
 export const TextAndAction: Story<BannerProps> = () => (
   <>
@@ -87,8 +86,9 @@ export const TextAndAction: Story<BannerProps> = () => (
     </Banner>
   </>
 )
+TextAndAction.storyName = 'Text and action'
 
-export const IconAndTextAndActions: Story<BannerProps> = () => (
+export const TextAndIconAndAction: Story<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Icon variant="warning">
@@ -119,6 +119,7 @@ export const IconAndTextAndActions: Story<BannerProps> = () => (
     </Banner>
   </>
 )
+TextAndIconAndAction.storyName = 'Text and icon and actions'
 
 export const Compact: Story<BannerProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
@@ -159,12 +160,4 @@ export const Compact: Story<BannerProps> = () => {
       </Banner>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Banner` using `EdsProvider` ',
-    },
-  },
 }

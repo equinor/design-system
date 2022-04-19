@@ -1,0 +1,71 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Banner } from '.'
+
+# Banner
+
+Displays important notifications and related optional actions.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#banner"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17611%3A0"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/245b05-banner/b/22c859"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Banner/Banner.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="feedback-banner--introduction" />
+<PropsTable />
+
+## Usage
+
+A banner displays an important, brief message, and provides actions for users to address. 
+It requires a user action to be dismissed.
+
+<ul>
+    <li>Banners are interruptive, but their level of interruption should match 
+        the information they hold and the context in which they appear.</li>
+    <li>Only one banner should be shown at a time.</li>
+</ul>
+
+```tsx
+import { Banner } from '@equinor/eds-core-react'
+
+<Banner>
+  <Banner.Message>
+    Banner message comes here.
+  </Banner.Message>
+</Banner>
+```
+
+## Examples
+
+### Text and icon
+
+Banners can supplement their message using a supporting icon.
+
+<Story id="feedback-banner--text-and-icon" />
+
+### Text and action
+
+<ul>
+  <li>Buttons in banners should directly relate to a banner’s message and clearly represent the banner’s action.</li>
+  <li>Buttons must be labelled with text, not icons, for clarity.</li>
+  <li>Place buttons under the banner message, or on the same line if there is enough room to fit both.</li>
+</ul>
+
+<Story id="feedback-banner--text-and-action" />
+
+### Text and icon and action
+
+<ul>
+  <li>The banner message communicates a change or error within an app.</li>
+  <li>Banners should be considered as part of your overall in-app messaging strategy.</li>
+</ul>
+
+<Story id="feedback-banner--text-and-icon-and-action" />
+
+### Compact
+
+Compact `Banner` using `EdsProvider`.
+
+<Story id="feedback-banner--compact" />
