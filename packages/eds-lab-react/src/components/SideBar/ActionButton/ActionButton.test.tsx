@@ -6,9 +6,9 @@ import { SideBar } from '../SideBar'
 import { add } from '@equinor/eds-icons'
 
 const defaultProps: ActionButtonProps = {
-  actionLabel: 'Label',
+  label: 'Label',
   isOpen: false,
-  actionIcon: add,
+  icon: add,
   onAction: () => undefined,
 }
 
@@ -28,8 +28,8 @@ test('ActionButton Renders', () => {
 test('Renders label when open', () => {
   customRender(
     <ActionButton
-      actionLabel="Label"
-      actionIcon={add}
+      label="Label"
+      icon={add}
       isOpen={true}
       onAction={() => undefined}
     ></ActionButton>,
@@ -43,8 +43,8 @@ test('Renders label when open', () => {
 test('Renders label when open', () => {
   customRender(
     <ActionButton
-      actionLabel="Label"
-      actionIcon={add}
+      label="Label"
+      icon={add}
       isOpen={true}
       onAction={() => undefined}
     ></ActionButton>,
@@ -68,8 +68,8 @@ test('Fires onAction when clicked', () => {
 
   customRender(
     <ActionButton
-      actionIcon={add}
-      actionLabel="Label"
+      icon={add}
+      label="Label"
       isOpen={true}
       onAction={onActionFn}
     ></ActionButton>,
