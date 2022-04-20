@@ -43,6 +43,7 @@ jobs:
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
+        # Using this if statement as steps.if does not work with "needs.setup.outputs.stage" value
         run: |
           if [[ ${{ needs.setup.outputs.stage }} == lab ]]; then
             echo Running build:storybook:lab!
