@@ -261,6 +261,14 @@ exports[`Search Matches snapshot 1`] = `
   outline: none;
 }
 
+.c2:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px var(--eds_ui_background__light,rgba(247,247,247,1)) inset;
+}
+
+.c2:autofill {
+  box-shadow: 0 0 0px 1000px var(--eds_ui_background__light,rgba(247,247,247,1)) inset;
+}
+
 .c4 {
   visibility: hidden;
   position: absolute;
