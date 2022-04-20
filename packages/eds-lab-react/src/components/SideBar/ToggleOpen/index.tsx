@@ -29,7 +29,6 @@ const ToggleContainer = styled.div<ContainerProps>(({ theme, open }) => {
     grid-template-columns: repeat(10, 1fr);
     grid-gap: ${mediumSpacing};
     justify-content: center;
-    margin-top: auto;
     margin-bottom: ${mediumSpacing};
     ${!open &&
     `

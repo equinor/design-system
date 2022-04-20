@@ -46,6 +46,7 @@ const TopContainer = styled.div`
   display: grid;
   grid-auto-rows: 1fr;
   align-items: center;
+  margin-bottom: auto;
 `
 
 type SideBarContextType = {
@@ -68,6 +69,7 @@ type SidebarType = {
   onAction?: () => void
   actionLabel?: string
   actionIcon?: IconData
+  toggleButton?: 'top' | 'bottom'
   open?: boolean
   maxHeight?: string
   onToggle?: (state: boolean) => void
@@ -79,6 +81,7 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
       onAction,
       actionLabel,
       actionIcon,
+      toggleButton,
       onToggle,
       open = false,
       maxHeight,
@@ -99,6 +102,9 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
       <ThemeProvider theme={token}>
         <SideBarContext.Provider value={{ isOpen }}>
           <Container open={isOpen} ref={ref} maxHeight={maxHeight}>
+            {toggleButton && toggleButton === 'top' && (
+              <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
+            )}
             <TopContainer>
               {onAction && actionLabel && actionIcon && (
                 <ActionButton
@@ -110,7 +116,9 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
               )}
               {children}
             </TopContainer>
-            <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
+            {toggleButton && toggleButton === 'bottom' && (
+              <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
+            )}
             <LogoContainer></LogoContainer>
           </Container>
         </SideBarContext.Provider>

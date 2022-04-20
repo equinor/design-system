@@ -45,6 +45,7 @@ export const Primary: Story = () => {
       <SideBar
         actionLabel="Create story"
         actionIcon={add}
+        toggleButton="top"
         onAction={() => console.log('Created 🖋')}
       >
         {menuItems.map((m) => (
@@ -110,6 +111,7 @@ export const WithAction: Story = () => {
         actionLabel="Create a diamond"
         actionIcon={add}
         onAction={() => console.log('Created 💎')}
+        toggleButton="bottom"
       >
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
@@ -143,6 +145,7 @@ export const WithCurrentUrlAndAction: Story = () => {
       <SideBar
         actionLabel="Create story"
         actionIcon={add}
+        toggleButton="bottom"
         onAction={() => console.log('Created 🖋')}
       >
         {menuItems.map((m) => (
