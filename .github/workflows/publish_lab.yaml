@@ -12,337 +12,60 @@ on:
         default: 'lab'
 jobs:
   setup:
-    name: Setup base files
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    with:
+      cacheKey: ${{ github.sha }}
+      checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
+      stage: ${{ github.event.inputs.storybook-slot }}
+      tag: ${{ github.event.inputs.npm-tag }}
+  packages:
+    name: Process packages
     runs-on: ubuntu-latest
+    needs: [setup]
     steps:
-      - name: Checkout
-        run: |
-          REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          BRANCH="${GITHUB_REF/#refs\/heads\//}"
-
-          # Reference https://github.com/actions/checkout/issues/172
-          # Following code is based on logs of actions/checkout@v, with sparseCheckout stuff inserted in the middle
-          echo "Syncing repository: $GITHUB_REPOSITORY"
-          echo "Working directory is '$(pwd)' GITHUB_WORKSPACE=$GITHUB_WORKSPACE BRANCH=$BRANCH"
-          git version
-          git init $GITHUB_WORKSPACE
-          git remote add origin https://github.com/$GITHUB_REPOSITORY
-          git config --local gc.auto 0
-          # Now interesting part
-          git sparse-checkout init --cone
-          # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
-          # echo ...
-          git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
-          git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-      - name: Install pnpm
-        run: npm i --no-save pnpm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Install dependencies recursively
-        run: node_modules/.bin/pnpm m i
-      - name: Cache base files
-        uses: actions/cache@v2
+      - name: Use "setup" cache
+        uses: actions/cache@v3
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-  build-tokens:
-    name: Build eds-tokens
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
+          key: ${{ github.sha }}
+      - name: Use "dist" cache
+        uses: actions/cache@v3
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-      - name: Build
-        run: node_modules/.bin/pnpm --filter @equinor/eds-tokens run build
-      - name: Save build to cache
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-tokens
-          key: ${{ github.sha }}-build-tokens
-  build-icons:
-    name: Build eds-icons
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-      - name: Build
-        run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
-      - name: Save build to cache
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-icons
-          key: ${{ github.sha }}-build-icons
-  build-core-react:
-    name: Build eds-core-react
-    runs-on: ubuntu-latest
-    needs: [build-icons, build-tokens, build-utils]
-    steps:
-      - uses: actions/cache@v2
-        name: Get base files
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-      - name: Get eds-utils build
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-utils
-          key: ${{ github.sha }}-build-utils
-      - name: Get eds-icons build
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-icons
-          key: ${{ github.sha }}-build-icons
-      - name: Get eds-tokens build
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-tokens
-          key: ${{ github.sha }}-build-tokens
-      - name: Build
-        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react run build
-      - name: Save build to cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-core-react
-  test-utils:
-    name: Test eds-utils
-    runs-on: ubuntu-latest
-    needs: [build-tokens]
-    steps:
-      - uses: actions/cache@v2
-        name: Get base files
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-      - name: Get eds-tokens build
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-tokens
-          key: ${{ github.sha }}-build-tokens
-      - name: Test eds-utils
-        run: node_modules/.bin/pnpm --filter @equinor/eds-utils run test
-  build-utils:
-    name: Build eds-utils
-    runs-on: ubuntu-latest
-    needs: [test-utils]
-    steps:
-      - uses: actions/cache@v2
-        name: Get base files
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-      - name: Get eds-tokens build
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-tokens
-          key: ${{ github.sha }}-build-tokens
-      - name: Build
-        run: node_modules/.bin/pnpm --filter @equinor/eds-utils run build
-      - name: Save build to cache
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-utils
-          key: ${{ github.sha }}-build-utils
-  publish-utils:
-    name: Publish eds-utils to npm
-    runs-on: ubuntu-latest
-    needs: [build-utils]
-    steps:
-      - uses: actions/cache@v2
-        name: Get base files
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-      - name: Get eds-utils build
-        uses: actions/cache@v2
-        with:
-          path: ./packages/eds-utils
-          key: ${{ github.sha }}-build-utils
-      - name: Publish to npm
-        run: node_modules/.bin/pnpm --filter @equinor/eds-utils publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    needs: [build-core-react]
-    steps:
-      - name: Get core-react build
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-core-react
-      - name: Test eds-lab-react
-        run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react run test
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    needs: [build-core-react]
-    steps:
-      - name: Get core-react build
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-core-react
-      - name: Lint all packages
-        run: node_modules/.bin/pnpm run lint ./packages
-  types:
-    name: Check types
-    runs-on: ubuntu-latest
-    needs: [build-core-react]
-    steps:
-      - name: Get core-react build
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-core-react
-      - name: Run type checks in lab
-        run: node_modules/.bin/tsc -p ./packages/eds-lab-react
-  build-lab:
-    name: Build eds-lab-react
-    runs-on: ubuntu-latest
-    needs: [test, lint, types]
-    steps:
-      - uses: actions/cache@v2
-        name: Get base files
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-lab
-      - name: Get core-react build
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-core-react
-      - name: Build
-        run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react run build
-      - name: Save build to cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-lab
-  publish-lab:
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      - name: Build packages
+        run: node_modules/.bin/pnpm run build
+      - name: Build lab Storybook
+        run: node_modules/.bin/pnpm build:storybook:lab
+  npm:
     name: Publish eds-lab-react to npm
     runs-on: ubuntu-latest
-    needs: [build-lab, publish-utils]
+    needs: [setup, packages]
     steps:
-      - name: Get lab build
-        uses: actions/cache@v2
+      - name: Use "dist" cache
+        uses: actions/cache@v3
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-build-lab
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Publish to npm
-        run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
+        run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  build-storybook-lab:
-    name: Build Storybook lab
-    runs-on: ubuntu-latest
-    needs: [build-core-react]
-    steps:
-      - name: Get core-react build
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-core-react
-      - name: Build storybook
-        run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react run build:storybook
-      - uses: actions/cache@v2
-        name: Save build to cache
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-storybook
-  build_push_docker_lab:
-    name: Build & Deploy Docker lab
-    runs-on: ubuntu-latest
-    needs: [build-storybook-lab]
-    outputs:
-      image_tag: ${{ steps.tag_name.outputs.image_tag }})
-    steps:
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y%m%d')"
-      - name: Extract branch name
-        id: extract_branch
-        shell: bash
-        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Create docker image tag
-        id: image_tag
-        run: echo "::set-output name=image_tag::$(echo ${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }})"
-      - name: Get Storybook build from cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-storybook
-      - name: Login via Azure CLI
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Login to registry
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build and push image
-        run: |
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ./packages/eds-lab-react/Dockerfile.storybook .
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
-      - name: Deploy to Web app
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'eds-storybook-react'
-          slot-name: '${{ github.event.inputs.storybook-slot }}'
-          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}'
+  publish-storybook:
+    needs: [setup, packages]
+    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
+    with:
+      stage: ${{ needs.setup.outputs.stage }}
+      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
+    secrets:
+      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
