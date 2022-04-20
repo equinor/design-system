@@ -28,11 +28,12 @@ test('Sidebar renders', () => {
   )
 })
 
-test('Renders create new button when onCreate prop is given', () => {
+test('Renders action button when onAction, actionLabel and actionIcon props are given', () => {
   render(
     <SideBar
-      onCreate={() => console.log('test')}
-      createLabel="createlabel"
+      onAction={() => console.log('test')}
+      actionLabel="actionLabel"
+      actionIcon={home}
       open={true}
     >
       {defaultMenuItems.map((m) => (
@@ -40,7 +41,7 @@ test('Renders create new button when onCreate prop is given', () => {
       ))}
     </SideBar>,
   )
-  expect(screen.getByText('createlabel')).toBeInTheDocument()
+  expect(screen.getByText('actionLabel')).toBeInTheDocument()
 })
 
 test('Renders closed width when closed', () => {

@@ -1,13 +1,15 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { CreateItem, CreateItemProps } from './index'
+import { ActionButton, ActionButtonProps } from './index'
 import { SideBar } from '../SideBar'
+import { add } from '@equinor/eds-icons'
 
-const defaultProps: CreateItemProps = {
-  createLabel: 'Label',
+const defaultProps: ActionButtonProps = {
+  label: 'Label',
   isOpen: false,
-  onCreate: () => undefined,
+  icon: add,
+  onAction: () => undefined,
 }
 
 const customRender = (ui: React.ReactElement, options?: any) =>
@@ -17,19 +19,20 @@ function SideBarWrapper(children: React.ReactChildren, isOpen?: boolean) {
   return <SideBar open={isOpen}>{children}</SideBar>
 }
 
-test('CreateItem Renders', () => {
-  customRender(<CreateItem {...defaultProps}></CreateItem>, {
+test('ActionButton Renders', () => {
+  customRender(<ActionButton {...defaultProps}></ActionButton>, {
     wrapper: ({ children }) => SideBarWrapper(children),
   })
 })
 
 test('Renders label when open', () => {
   customRender(
-    <CreateItem
-      createLabel="Label"
+    <ActionButton
+      label="Label"
+      icon={add}
       isOpen={true}
-      onCreate={() => undefined}
-    ></CreateItem>,
+      onAction={() => undefined}
+    ></ActionButton>,
     {
       wrapper: ({ children }) => SideBarWrapper(children),
     },
@@ -39,11 +42,12 @@ test('Renders label when open', () => {
 
 test('Renders label when open', () => {
   customRender(
-    <CreateItem
-      createLabel="Label"
+    <ActionButton
+      label="Label"
+      icon={add}
       isOpen={true}
-      onCreate={() => undefined}
-    ></CreateItem>,
+      onAction={() => undefined}
+    ></ActionButton>,
     {
       wrapper: ({ children }) => SideBarWrapper(children),
     },
@@ -52,22 +56,23 @@ test('Renders label when open', () => {
 })
 
 test("Doesn't render label when closed", () => {
-  customRender(<CreateItem {...defaultProps}></CreateItem>, {
+  customRender(<ActionButton {...defaultProps}></ActionButton>, {
     wrapper: ({ children }) => SideBarWrapper(children),
   })
 
   expect(screen.queryByText('Label')).not.toBeInTheDocument()
 })
 
-test('Fires onCreate when clicked', () => {
-  const onCreateFn = jest.fn()
+test('Fires onAction when clicked', () => {
+  const onActionFn = jest.fn()
 
   customRender(
-    <CreateItem
-      createLabel="Label"
+    <ActionButton
+      icon={add}
+      label="Label"
       isOpen={true}
-      onCreate={onCreateFn}
-    ></CreateItem>,
+      onAction={onActionFn}
+    ></ActionButton>,
     {
       wrapper: ({ children }) => SideBarWrapper(children),
     },
@@ -77,5 +82,5 @@ test('Fires onCreate when clicked', () => {
 
   userEvent.click(btn)
 
-  expect(onCreateFn).toHaveBeenCalledTimes(1)
+  expect(onActionFn).toHaveBeenCalledTimes(1)
 })

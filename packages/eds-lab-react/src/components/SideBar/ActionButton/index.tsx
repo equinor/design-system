@@ -9,11 +9,11 @@ import {
 import { sidebar as tokens } from '../SideBar.tokens'
 import { bordersTemplate } from '@equinor/eds-utils'
 import styled, { css } from 'styled-components'
-import { add } from '@equinor/eds-icons'
+import { IconData } from '@equinor/eds-icons'
 
 const {
   entities: {
-    createItem: {
+    actionButton: {
       typography: { color: primaryWhite },
     },
   },
@@ -25,7 +25,7 @@ type ContainerProps = {
 const MenuButtonContainer = styled.div<ContainerProps>(({ theme, open }) => {
   const {
     entities: {
-      createItem: { border },
+      actionButton: { border },
     },
   } = theme
   return css`
@@ -43,10 +43,10 @@ type CustomButtonProps = {
   open?: boolean
 } & ButtonProps
 
-const CreateNewButton = styled(Button)<CustomButtonProps>(({ theme, open }) => {
+const ExtendedButton = styled(Button)<CustomButtonProps>(({ theme, open }) => {
   const {
     entities: {
-      createItem: {
+      actionButton: {
         background: buttonBackground,
         spacings: { right: largeSpacing },
         states: {
@@ -74,7 +74,7 @@ const CreateNewButton = styled(Button)<CustomButtonProps>(({ theme, open }) => {
   `
 })
 
-const CreateNewButtonText = styled(Typography)`
+const ExtendedButtonText = styled(Typography)`
   font-weight: 400;
   text-transform: lowercase;
   white-space: nowrap;
@@ -89,39 +89,41 @@ const Tooltip = styled(EDSTooltip)`
   }
 `
 
-export type CreateItemProps = {
-  createLabel: string
-  onCreate: () => void
+export type ActionButtonProps = {
+  label: string
+  icon: IconData
+  onAction: () => void
   isOpen: boolean
 }
 
-export const CreateItem: FC<CreateItemProps> = ({
-  createLabel,
-  onCreate,
+export const ActionButton: FC<ActionButtonProps> = ({
+  label,
+  icon,
+  onAction,
   isOpen,
 }) => {
   if (isOpen) {
     return (
       <MenuButtonContainer open={isOpen}>
-        <CreateNewButton open variant="contained" onClick={onCreate}>
-          <Icon data={add} color={primaryWhite} />
-          <CreateNewButtonText
+        <ExtendedButton open variant="contained" onClick={onAction}>
+          <Icon data={icon} color={primaryWhite} />
+          <ExtendedButtonText
             color={primaryWhite}
             variant="button"
             group="navigation"
           >
-            {createLabel}
-          </CreateNewButtonText>
-        </CreateNewButton>
+            {label}
+          </ExtendedButtonText>
+        </ExtendedButton>
       </MenuButtonContainer>
     )
   }
   return (
-    <Tooltip title={createLabel} placement="right">
+    <Tooltip title={label} placement="right">
       <MenuButtonContainer open={isOpen}>
-        <CreateNewButton variant="ghost_icon" onClick={onCreate}>
-          <Icon data={add} color={primaryWhite} />
-        </CreateNewButton>
+        <ExtendedButton variant="ghost_icon" onClick={onAction}>
+          <Icon data={icon} color={primaryWhite} />
+        </ExtendedButton>
       </MenuButtonContainer>
     </Tooltip>
   )

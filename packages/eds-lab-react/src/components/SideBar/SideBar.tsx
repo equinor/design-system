@@ -10,8 +10,9 @@ import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate, useToken } from '@equinor/eds-utils'
 //import EquinorLogo from '../EquinorLogo'
 import { ToggleOpen } from './ToggleOpen'
-import { CreateItem } from './CreateItem'
+import { ActionButton } from './ActionButton'
 import { useEds } from '@equinor/eds-core-react'
+import { IconData } from '@equinor/eds-icons'
 
 type ContainerProps = {
   open: boolean
@@ -64,8 +65,9 @@ export const SideBarContext = createContext<SideBarContextType | undefined>(
 )
 
 type SidebarType = {
-  onCreate?: () => void
-  createLabel?: string
+  onAction?: () => void
+  actionLabel?: string
+  actionIcon?: IconData
   open?: boolean
   maxHeight?: string
   onToggle?: (state: boolean) => void
@@ -73,7 +75,15 @@ type SidebarType = {
 
 export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
   (
-    { onCreate, createLabel, onToggle, open = false, maxHeight, children },
+    {
+      onAction,
+      actionLabel,
+      actionIcon,
+      onToggle,
+      open = false,
+      maxHeight,
+      children,
+    },
     ref,
   ) => {
     const { density } = useEds()
@@ -90,11 +100,12 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
         <SideBarContext.Provider value={{ isOpen }}>
           <Container open={isOpen} ref={ref} maxHeight={maxHeight}>
             <TopContainer>
-              {onCreate && createLabel && (
-                <CreateItem
+              {onAction && actionLabel && actionIcon && (
+                <ActionButton
                   isOpen={isOpen}
-                  createLabel={createLabel}
-                  onCreate={onCreate}
+                  icon={actionIcon}
+                  label={actionLabel}
+                  onAction={onAction}
                 />
               )}
               {children}

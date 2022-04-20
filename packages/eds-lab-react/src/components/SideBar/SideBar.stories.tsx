@@ -1,12 +1,18 @@
 import { Story, Meta } from '@storybook/react'
-import { dashboard, favorite_outlined, history, home } from '@equinor/eds-icons'
+import {
+  dashboard,
+  favorite_outlined,
+  history,
+  home,
+  add,
+} from '@equinor/eds-icons'
 import { SideBar } from '../../components/SideBar'
 import { SidebarItemType } from './SidebarItem'
 
 export default {
   title: 'Components/SideBar',
   body: `
-    Supports not having a create action if it isn't needed. Saves current open-state to localStorage with: 'amplify-sidebar-state: boolean'.
+    Sidebar component imported from Amplify
 
   `,
   component: SideBar,
@@ -37,8 +43,9 @@ export const Primary: Story = () => {
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
       <SideBar
-        createLabel="Create story"
-        onCreate={() => console.log('Created 🖋')}
+        actionLabel="Create story"
+        actionIcon={add}
+        onAction={() => console.log('Created 🖋')}
       >
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
@@ -48,7 +55,7 @@ export const Primary: Story = () => {
   )
 }
 
-export const NoCreateAction: Story = () => {
+export const NoAction: Story = () => {
   const menuItems: SidebarItemType[] = [
     {
       name: 'Dashboard',
@@ -78,7 +85,7 @@ export const NoCreateAction: Story = () => {
   )
 }
 
-export const WithCreateAction: Story = () => {
+export const WithAction: Story = () => {
   const menuItems: SidebarItemType[] = [
     {
       name: 'Dashboard',
@@ -100,8 +107,9 @@ export const WithCreateAction: Story = () => {
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
       <SideBar
-        createLabel="Create a diamond"
-        onCreate={() => console.log('Created 💎')}
+        actionLabel="Create a diamond"
+        actionIcon={add}
+        onAction={() => console.log('Created 💎')}
       >
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
@@ -111,7 +119,7 @@ export const WithCreateAction: Story = () => {
   )
 }
 
-export const WithCurrentUrlAndCreate: Story = () => {
+export const WithCurrentUrlAndAction: Story = () => {
   const menuItems: SidebarItemType[] = [
     {
       name: 'Dashboard',
@@ -133,8 +141,9 @@ export const WithCurrentUrlAndCreate: Story = () => {
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
       <SideBar
-        createLabel="Create story"
-        onCreate={() => console.log('Created 🖋')}
+        actionLabel="Create story"
+        actionIcon={add}
+        onAction={() => console.log('Created 🖋')}
       >
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
