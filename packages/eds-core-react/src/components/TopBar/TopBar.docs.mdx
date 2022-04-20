@@ -1,0 +1,49 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { TopBar } from '.'
+
+# TopBar
+
+Displays navigation and actions related to the interface.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/wai-aria-practices/#toolbar"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17620%3A0"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/90b824-top-bar/b/0338b2"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/TopBar/TopBar.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="navigation-topbar--introduction" />
+<PropsTable />
+
+## Usage
+
+Top bars span the full width of the viewport and are always the topmost component on a page.
+
+<ul>
+    <li>The top bar does not scroll away, being a consistent guidepost to users.</li>
+    <li>The top bar always has a title which is the same throughout the whole application group.</li>
+    <li>The top bar has one optional main navigational icon button which is always to the far left.</li>
+</ul>
+
+```tsx
+import { TopBar } from '@equinor/eds-core-react'
+
+<TopBar>
+    <TopBar.Header>Application name</TopBar.Header>
+</TopBar>
+```
+
+## Examples
+
+### With search and icons
+
+The actions on the far-right are standard.
+
+<Story id="navigation-topbar--with-search-and-icons" />
+
+### Compact
+
+Compact `TopBar` using `EdsProvider`.
+
+<Story id="navigation-topbar--compact" />

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { TopBar, Icon, Search, TopbarProps, EdsProvider, Density } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import page from './TopBar.docs.mdx'
 
 import {
   account_circle,
@@ -15,20 +16,16 @@ export default {
   title: 'Navigation/TopBar',
   component: TopBar,
   subcomponents: {
-    Actions: TopBar.Actions,
     Header: TopBar.Header,
     CustomContent: TopBar.CustomContent,
+    Actions: TopBar.Actions,
   },
   parameters: {
     docs: {
-      description: {
-        component: `The top bar displays navigation
-        and actions relating to the interface.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof TopBar>
 
 const icons = {
   account_circle,
@@ -54,7 +51,7 @@ const BodyWrapper = styled.div`
   justify-content: space-between;
 `
 
-export const Basic: Story<TopbarProps> = (props): JSX.Element => {
+export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
   return (
     <Wrapper>
       <TopBar {...props}>
@@ -147,12 +144,4 @@ export const Compact: Story<TopbarProps> = (): JSX.Element => {
       </TopBar>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `TopBar` using `EdsProvider` ',
-    },
-  },
 }
