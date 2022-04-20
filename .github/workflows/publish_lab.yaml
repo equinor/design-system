@@ -59,7 +59,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   publish-storybook:
     needs: [setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
+    uses: equinor/design-system/.github/workflows/_azure_docker.yml@refactor/MIM-2150-cleanup-actions
     with:
       stage: ${{ needs.setup.outputs.stage }}
       cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
