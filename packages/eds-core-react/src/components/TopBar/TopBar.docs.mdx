@@ -18,4 +18,20 @@ Displays navigation and actions related to the interface.
 
 ## Usage
 
+Top bars span the full width of the viewport and are always the topmost component on a page.
+
+<ul>
+    <li>The top bar does not scroll away, being a consistent guidepost to users.</li>
+    <li>The top bar always has a title which is the same throughout the whole application group.</li>
+    <li>The top bar has one optional main navigational icon button which is always to the far left.</li>
+</ul>
+
+```tsx
+import { TopBar } from '@equinor/eds-core-react'
+
+<TopBar>
+    <TopBar.Header>Application name</TopBar.Header>
+</TopBar>
+```
+
 ## Examples
