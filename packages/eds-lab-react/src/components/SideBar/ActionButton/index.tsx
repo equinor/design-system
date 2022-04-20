@@ -90,15 +90,15 @@ const Tooltip = styled(EDSTooltip)`
 `
 
 export type ActionButtonProps = {
-  actionLabel: string
-  actionIcon: IconData
+  label: string
+  icon: IconData
   onAction: () => void
   isOpen: boolean
 }
 
 export const ActionButton: FC<ActionButtonProps> = ({
-  actionLabel,
-  actionIcon,
+  label,
+  icon,
   onAction,
   isOpen,
 }) => {
@@ -106,23 +106,23 @@ export const ActionButton: FC<ActionButtonProps> = ({
     return (
       <MenuButtonContainer open={isOpen}>
         <ExtendedButton open variant="contained" onClick={onAction}>
-          <Icon data={actionIcon} color={primaryWhite} />
+          <Icon data={icon} color={primaryWhite} />
           <ExtendedButtonText
             color={primaryWhite}
             variant="button"
             group="navigation"
           >
-            {actionLabel}
+            {label}
           </ExtendedButtonText>
         </ExtendedButton>
       </MenuButtonContainer>
     )
   }
   return (
-    <Tooltip title={actionLabel} placement="right">
+    <Tooltip title={label} placement="right">
       <MenuButtonContainer open={isOpen}>
         <ExtendedButton variant="ghost_icon" onClick={onAction}>
-          <Icon data={actionIcon} color={primaryWhite} />
+          <Icon data={icon} color={primaryWhite} />
         </ExtendedButton>
       </MenuButtonContainer>
     </Tooltip>

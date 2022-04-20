@@ -103,8 +103,8 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
               {onAction && actionLabel && actionIcon && (
                 <ActionButton
                   isOpen={isOpen}
-                  actionIcon={actionIcon}
-                  actionLabel={actionLabel}
+                  icon={actionIcon}
+                  label={actionLabel}
                   onAction={onAction}
                 />
               )}
