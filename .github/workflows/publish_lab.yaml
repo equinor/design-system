@@ -42,7 +42,7 @@ jobs:
       - name: Build lab Storybook
         run: node_modules/.bin/pnpm build:storybook:lab
   npm:
-    name: Publish eds-lab-react to npm
+    name: Publish npm
     runs-on: ubuntu-latest
     needs: [setup, packages]
     steps:
@@ -58,6 +58,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   publish-storybook:
+    name: Publish Storybook
     needs: [setup, packages]
     uses: equinor/design-system/.github/workflows/_azure_docker.yml@refactor/MIM-2150-cleanup-actions
     with:
