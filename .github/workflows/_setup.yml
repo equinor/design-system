@@ -17,9 +17,11 @@ on:
     outputs:
       tag:
         description: 'Package tag'
+        type: string
         value: ${{ jobs.variables.outputs.tag }}
       stage:
         description: 'Stage'
+        type: string
         value: ${{ jobs.variables.outputs.stage }}
 jobs:
   variables:

@@ -54,7 +54,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Print tag
-        run: echo ${{ needs.setup.outputs.tag }}
+        run: echo '${{ needs.setup.outputs.tag }}'
       # - name: Publish to npm
       #   run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
       #   env:
