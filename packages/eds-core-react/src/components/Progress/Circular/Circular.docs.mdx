@@ -25,7 +25,7 @@ Is animated helper that indicate waiting time as content loads.
   <li>Progress indicators inform users about the current loading state giving them insight into the process.</li>
   <li>Progress indicators look and animate in ways that reflect the status of a process. They are never simply decorative.</li>
   <li>Progress indicators should be applied to all cases of a process in a consistent format.</li>
-  <li></li>
+  <li>They can be applied directly to a surface, such as a button or card.</li>
 </ul>
 
 ```tsx
@@ -35,3 +35,27 @@ import { CircularProgress } from '@equinor/eds-core-react'
 ```
 
 ## Examples
+
+### Indeterminate
+
+Indeterminate circular indicators grow and shrink in size while moving along the invisible track.
+
+<Story id="feedback-progress-indicators-circular--indeterminate" />
+
+### Determinate
+
+Determinate circular indicators fill the invisible, circular track with color, as the indicator moves from 0 to 360 degrees.
+
+<Story id="feedback-progress-indicators-circular--determinate" />
+
+### Colors
+
+<Story id="feedback-progress-indicators-circular--colors" />
+
+### Sizes
+
+<Story id="feedback-progress-indicators-circular--sizes" />
+
+### Inside button
+
+<Story id="feedback-progress-indicators-circular--inside-button" />
