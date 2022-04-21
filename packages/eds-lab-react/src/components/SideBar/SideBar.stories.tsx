@@ -47,6 +47,7 @@ export const Primary: Story = () => {
         actionLabel="Create story"
         actionIcon={add}
         toggleButton="top"
+        onToggle={(toggle) => console.log('toggled ', toggle)}
         onAction={() => console.log('Created 🖋')}
       >
         {menuItems.map((m) => (

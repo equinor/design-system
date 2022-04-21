@@ -71,7 +71,7 @@ test('Renders open width when open', () => {
 test('Triggers onToggle callback when closed', () => {
   const cb = jest.fn()
   render(
-    <SideBar open={true} onToggle={cb}>
+    <SideBar open={true} onToggle={cb} toggleButton="top">
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
@@ -87,7 +87,7 @@ test('Triggers onToggle callback when closed', () => {
 test('Triggers onToggle callback when opened', () => {
   const cb = jest.fn()
   render(
-    <SideBar open={false} onToggle={cb}>
+    <SideBar open={false} onToggle={cb} toggleButton="top">
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
@@ -103,7 +103,7 @@ test('Triggers onToggle callback when opened', () => {
 test('onToggle send correct state back', () => {
   const toggle = jest.fn()
   render(
-    <SideBar open={false} onToggle={toggle}>
+    <SideBar open={false} onToggle={toggle} toggleButton="top">
       {defaultMenuItems.map((m) => (
         <SideBar.Item key={m.name} {...m} />
       ))}
