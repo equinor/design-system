@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Progress, StarProgressProps } from '../../..'
-import { ComponentMeta, Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
 import { Stack as SBStack } from './../../../../.storybook/components'
 import page from './Star.docs.mdx'
