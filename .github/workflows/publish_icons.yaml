@@ -8,92 +8,45 @@ on:
         default: 'next'
 jobs:
   setup:
-    name: Setup base files
+    uses: equinor/design-system/.github/workflows/_setup.yml@refactor/MIM-2150-cleanup-actions
+    with:
+      cacheKey: ${{ github.sha }}
+      checkout_paths: packages/eds-icons
+      tag: ${{ github.event.inputs.npm-tag }}
+  packages:
+    name: Process packages
     runs-on: ubuntu-latest
+    needs: [setup]
     steps:
-      - name: Checkout
-        run: |
-          REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          BRANCH="${GITHUB_REF/#refs\/heads\//}"
-
-          # Reference https://github.com/actions/checkout/issues/172
-          # Following code is based on logs of actions/checkout@v, with sparseCheckout stuff inserted in the middle
-          echo "Syncing repository: $GITHUB_REPOSITORY"
-          echo "Working directory is '$(pwd)' GITHUB_WORKSPACE=$GITHUB_WORKSPACE BRANCH=$BRANCH"
-          git version
-          git init $GITHUB_WORKSPACE
-          git remote add origin https://github.com/$GITHUB_REPOSITORY
-          git config --local gc.auto 0
-          # Now interesting part
-          git sparse-checkout init --cone
-          # Add here contents of sparse-checkout line by line
-          git sparse-checkout set packages/eds-icons
-          # echo ...
-          git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
-          git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - name: Install pnpm
-        run: npm i --no-save pnpm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Install dependencies recursively
-        run: node_modules/.bin/pnpm m i
-      - name: Use base files cache
-        uses: actions/cache@v2
+      - name: Use "setup" cache
+        uses: actions/cache@v3
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
-  lint:
-    name: Lint eds-icons
+      - name: Use "dist" cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      - name: Build packages
+        run: node_modules/.bin/pnpm run build
+  publish-icons-package:
+    name: Publish utils to npm
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [packages, setup]
     steps:
-      - name: Use base files cache
-        uses: actions/cache@v2
+      - name: Use "dist" cache
+        uses: actions/cache@v3
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
-      - name: Lint
-        run: node_modules/.bin/pnpm run lint ./packages/eds-icons
-  build-icons:
-    name: Build eds-icons
-    runs-on: ubuntu-latest
-    needs: [lint]
-    steps:
-      - name: Get base files
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-
-          key: ${{ github.sha }}
-      - name: Use icons build cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-icons
-      - name: Build
-        run: node_modules/.bin/pnpm --filter @equinor/eds-icons run build
-
-  publish-icons:
-    name: Publish eds-icons to npm
-    runs-on: ubuntu-latest
-    needs: [build-icons]
-    steps:
-      - name: Use icons build cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-build-icons
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Publish to npm
-        run: node_modules/.bin/pnpm --filter @equinor/eds-icons publish --access public --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
+        run: node_modules/.bin/pnpm --filter @equinor/eds-icons publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
