@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { Progress, CircularProgressProps, Button, Typography } from '../../..'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
+import page from './Circular.docs.mdx'
 
 const Wrapper = styled.div`
   display: grid;
@@ -15,16 +16,12 @@ export default {
   parameters: {
     backgrounds: { default: 'light' },
     docs: {
-      description: {
-        component: `Progress indicators are animated helpers
-        that indicate waiting time as content loads.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Progress.Circular>
 
-export const Default: Story<CircularProgressProps> = (args) => {
+export const Introduction: Story<CircularProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
@@ -78,5 +75,3 @@ export const InsideButton: Story<CircularProgressProps> = () => (
     </Button>
   </Wrapper>
 )
-
-Default.storyName = 'Controllable example'
