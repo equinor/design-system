@@ -12,7 +12,7 @@ on:
         default: 'lab'
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@refactor/MIM-2150-cleanup-actions
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
@@ -76,7 +76,7 @@ jobs:
   publish-storybook:
     name: Publish Storybook
     needs: [setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@refactor/MIM-2150-cleanup-actions
+    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
     with:
       stage: ${{ needs.setup.outputs.stage }}
       cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
