@@ -10,7 +10,7 @@ jobs:
   setup:
     uses: equinor/design-system/.github/workflows/_setup.yml@refactor/MIM-2150-cleanup-actions
     with:
-      cacheKey: ${{ github.sha }}
+      cacheKey: ${{ github.sha }}-setup-tokens
       checkout_paths: packages/eds-tokens
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
@@ -24,7 +24,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-setup-tokens
       - name: Use "dist" cache
         uses: actions/cache@v3
         with:
@@ -34,8 +34,8 @@ jobs:
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Build packages
         run: node_modules/.bin/pnpm run build
-  publish-tokens-package:
-    name: Publish utils to npm
+  publish:
+    name: Publish to npm
     runs-on: ubuntu-latest
     needs: [packages, setup]
     steps:
