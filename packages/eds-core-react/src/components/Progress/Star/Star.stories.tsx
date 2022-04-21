@@ -31,7 +31,11 @@ export const Introduction: Story<StarProgressProps> = (args) => {
   )
 }
 
-export const Indeterminate: Story<StarProgressProps> = () => <Progress.Star />
+export const Indeterminate: Story<StarProgressProps> = () => (
+  <Stack>
+    <Progress.Star />
+  </Stack>
+)
 
 export const Determinate: Story<StarProgressProps> = () => {
   const progress = useMockProgress(0)
