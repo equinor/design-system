@@ -28,8 +28,8 @@ jobs:
       INPUT_STAGE: '${{ inputs.stage }}'
       INPUT_TAG: '${{ inputs.tag }}'
     outputs:
-      stage: ${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}
-      tag: ${{ steps.input-tag.outputs.slot }} ${{ steps.default-tag.outputs.value }}
+      stage: '${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}'
+      tag: '${{ steps.input-tag.outputs.value }} ${{ steps.default-tag.outputs.value }}'
     steps:
       - id: input-stage
         if: "${{ env.INPUT_STAGE != '' }}"
@@ -43,6 +43,8 @@ jobs:
       - id: default-tag
         if: "${{ env.INPUT_TAG == '' }}"
         run: echo "::set-output name=value::next"
+      - name: Print generated values
+        run: echo "tag - ${{ steps.input-tag.outputs.value }} ${{ steps.default-tag.outputs.value }}, stage - ${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}"
   files:
     runs-on: ubuntu-latest
     env:
