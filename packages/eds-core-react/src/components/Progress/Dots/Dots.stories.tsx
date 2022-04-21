@@ -33,7 +33,7 @@ Introduction.args = {
 }
 
 export const Colors: Story<DotProgressProps> = () => (
-  <Stack>
+  <Stack style={{ backgroundColor: '#ebebeb' }}>
     <div>
       <Typography variant="h4" as="h2">
         Primary
