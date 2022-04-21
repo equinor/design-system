@@ -7,7 +7,7 @@ on:
         required: true
         default: 'next'
       storybook-slot:
-        description: 'Azure webapp slot for Storybook'
+        description: 'Slot for Storybook (development | production | lab)'
         required: false
         default: 'lab'
 jobs:

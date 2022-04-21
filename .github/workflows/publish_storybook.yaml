@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       storybook-slot:
-        description: 'Azure webapp slot for Storybook (development | production | lab)'
+        description: 'Slot for Storybook (development | production | lab)'
         required: false
         default: 'development'
   push:
