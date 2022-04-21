@@ -1,4 +1,4 @@
-name: Publish lab
+name: Publish tokens
 on:
   workflow_dispatch:
     inputs:
