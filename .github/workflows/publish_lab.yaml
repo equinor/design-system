@@ -1,4 +1,4 @@
-name: Publish lab
+name: Publish lab-react
 on:
   workflow_dispatch:
     inputs:
