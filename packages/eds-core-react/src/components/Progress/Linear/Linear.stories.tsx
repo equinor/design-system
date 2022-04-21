@@ -35,17 +35,21 @@ export const Introduction: Story<LinearProgressProps> = (args) => {
 }
 
 export const Indeterminate: Story<LinearProgressProps> = () => (
-  <Progress.Linear aria-label="Progress bar label" />
+  <Stack>
+    <Progress.Linear aria-label="Progress bar label" />
+  </Stack>
 )
 
 export const Determinate: Story<LinearProgressProps> = () => {
   const progress = useMockProgress(0)
 
   return (
-    <Progress.Linear
-      variant="determinate"
-      value={progress}
-      aria-label="Progress bar label"
-    />
+    <Stack>
+      <Progress.Linear
+        variant="determinate"
+        value={progress}
+        aria-label="Progress bar label"
+      />
+    </Stack>
   )
 }
