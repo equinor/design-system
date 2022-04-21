@@ -1,5 +1,11 @@
-import { FC } from 'react'
-import { Button, Icon, Tooltip, Typography } from '@equinor/eds-core-react'
+import { forwardRef, ForwardRefExoticComponent } from 'react'
+import {
+  Button,
+  ButtonProps,
+  Icon,
+  Tooltip,
+  Typography,
+} from '@equinor/eds-core-react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { first_page, last_page } from '@equinor/eds-icons'
 import styled, { css } from 'styled-components'
@@ -79,29 +85,36 @@ const Text = styled(Typography)`
 
 type ToggleOpenProps = {
   isOpen: boolean
-  toggle: () => void
-}
+} & ButtonProps
 
-export const ToggleOpen: FC<ToggleOpenProps> = ({ isOpen, toggle }) => {
-  if (isOpen) {
+export const ToggleOpen: ForwardRefExoticComponent<ToggleOpenProps> =
+  forwardRef<HTMLButtonElement, ToggleOpenProps>(function ToggleOpen(
+    { isOpen, ...rest },
+    ref,
+  ) {
+    const props = {
+      ...rest,
+      ref,
+    }
+    if (isOpen) {
+      return (
+        <ToggleContainer open={isOpen}>
+          <LargeButton {...props}>
+            <Icon size={24} data={first_page} color={iconColor} />
+            <Text variant="cell_text" group="table">
+              Collapse
+            </Text>
+          </LargeButton>
+        </ToggleContainer>
+      )
+    }
     return (
       <ToggleContainer open={isOpen}>
-        <LargeButton onClick={toggle}>
-          <Icon size={24} data={first_page} color={iconColor} />
-          <Text variant="cell_text" group="table">
-            Collapse
-          </Text>
-        </LargeButton>
+        <Tooltip title="Expand" placement="right">
+          <Button {...props} color="secondary" variant="ghost_icon">
+            <Icon size={24} data={last_page} color={iconColor} />
+          </Button>
+        </Tooltip>
       </ToggleContainer>
     )
-  }
-  return (
-    <ToggleContainer open={isOpen}>
-      <Tooltip title="Expand" placement="right">
-        <Button onClick={toggle} color="secondary" variant="ghost_icon">
-          <Icon size={24} data={last_page} color={iconColor} />
-        </Button>
-      </Tooltip>
-    </ToggleContainer>
-  )
-}
+  })

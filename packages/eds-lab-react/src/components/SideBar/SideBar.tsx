@@ -4,6 +4,7 @@ import {
   forwardRef,
   useContext,
   useState,
+  useEffect,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
@@ -93,17 +94,25 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
     const token = useToken({ density }, tokens)
     const [isOpen, setIsOpen] = useState<boolean>(open)
 
-    const handleToggle = () => {
-      setIsOpen((o) => !o)
+    const handleToggle = (toggle: boolean) => {
+      setIsOpen(toggle)
       onToggle?.(!isOpen)
     }
+
+    useEffect(() => {
+      handleToggle(open)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open])
 
     return (
       <ThemeProvider theme={token}>
         <SideBarContext.Provider value={{ isOpen }}>
           <Container open={isOpen} ref={ref} maxHeight={maxHeight}>
             {toggleButton && toggleButton === 'top' && (
-              <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
+              <ToggleOpen
+                isOpen={isOpen}
+                onClick={() => handleToggle(!isOpen)}
+              />
             )}
             <TopContainer>
               {onAction && actionLabel && actionIcon && (
@@ -117,7 +126,10 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
               {children}
             </TopContainer>
             {toggleButton && toggleButton === 'bottom' && (
-              <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
+              <ToggleOpen
+                isOpen={isOpen}
+                onClick={() => handleToggle(!isOpen)}
+              />
             )}
             <LogoContainer></LogoContainer>
           </Container>

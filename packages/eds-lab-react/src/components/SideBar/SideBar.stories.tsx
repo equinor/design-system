@@ -43,6 +43,7 @@ export const Primary: Story = () => {
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
       <SideBar
+        open={true}
         actionLabel="Create story"
         actionIcon={add}
         toggleButton="top"
@@ -77,7 +78,7 @@ export const NoAction: Story = () => {
 
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
-      <SideBar>
+      <SideBar toggleButton="top">
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
         ))}
