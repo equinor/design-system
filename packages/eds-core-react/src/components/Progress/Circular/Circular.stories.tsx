@@ -26,7 +26,7 @@ export const Introduction: Story<CircularProgressProps> = (args) => {
   const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
   return (
-    <Stack>
+    <Stack style={{ backgroundColor: '#ebebeb' }}>
       <Progress.Circular {...args} value={progress} />
     </Stack>
   )

@@ -22,7 +22,7 @@ export default {
 } as ComponentMeta<typeof Progress.Dots>
 
 export const Introduction: Story<DotProgressProps> = (args) => (
-  <Stack>
+  <Stack style={{ backgroundColor: '#ebebeb' }}>
     <Progress.Dots {...args} />
   </Stack>
 )
