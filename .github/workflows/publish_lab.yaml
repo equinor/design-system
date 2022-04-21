@@ -18,31 +18,31 @@ jobs:
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
       stage: ${{ github.event.inputs.storybook-slot }}
       tag: ${{ github.event.inputs.npm-tag }}
-  # packages:
-  #   name: Process packages
-  #   runs-on: ubuntu-latest
-  #   needs: [setup]
-  #   steps:
-  #     - name: Use "setup" cache
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: |
-  #           ./*
-  #           ~/.pnpm-store
-  #         key: ${{ github.sha }}
-  #     - name: Use "dist" cache
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: |
-  #           ./*
-  #           ~/.pnpm-store
-  #         key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
-  #     - name: Build packages
-  #       run: node_modules/.bin/pnpm run build
-  #     - name: Build lab Storybook
-  #       run: node_modules/.bin/pnpm build:storybook:lab
-  npm:
-    name: Publish npm
+  packages:
+    name: Process packages
+    runs-on: ubuntu-latest
+    needs: [setup]
+    steps:
+      - name: Use "setup" cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}
+      - name: Use "dist" cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      - name: Build packages
+        run: node_modules/.bin/pnpm run build
+      - name: Build lab Storybook
+        run: node_modules/.bin/pnpm build:storybook:lab
+  publish-utils-package:
+    name: Publish utils to npm
     runs-on: ubuntu-latest
     needs: [setup]
     steps:
@@ -53,22 +53,36 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
-      - name: Print tag
-        run: echo '${{ needs.setup.outputs.tag }}'
-      # - name: Publish to npm
-      #   run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  # publish-storybook:
-  #   name: Publish Storybook
-  #   needs: [setup, packages]
-  #   uses: equinor/design-system/.github/workflows/_azure_docker.yml@refactor/MIM-2150-cleanup-actions
-  #   with:
-  #     stage: ${{ needs.setup.outputs.stage }}
-  #     cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
-  #     dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
-  #   secrets:
-  #     REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-  #     REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-  #     REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-  #     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Publish to npm
+        run: node_modules/.bin/pnpm --filter @equinor/eds-utils publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-lab-package:
+    name: Publish lab to npm
+    runs-on: ubuntu-latest
+    needs: [publish-utils-package]
+    steps:
+      - name: Use "dist" cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      - name: Publish to npm
+        run: node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-storybook:
+    name: Publish Storybook
+    needs: [setup, packages]
+    uses: equinor/design-system/.github/workflows/_azure_docker.yml@refactor/MIM-2150-cleanup-actions
+    with:
+      stage: ${{ needs.setup.outputs.stage }}
+      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
+    secrets:
+      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
