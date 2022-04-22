@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { Progress, DotProgressProps, Typography, Button } from '../../..'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
+import { Stack as SBStack } from './../../../../.storybook/components'
+import page from './Dots.docs.mdx'
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-gap: 32px;
+const Stack = styled(SBStack)`
+  padding: 32px;
   grid-template-columns: repeat(5, fit-content(100%));
 `
 
@@ -14,27 +15,25 @@ export default {
   parameters: {
     backgrounds: { default: 'light' },
     docs: {
-      description: {
-        component: `Progress indicators are animated helpers that indicate
-        waiting time as content loads.
-        `,
-      },
+      page,
     },
   },
   argTypes: {},
-} as Meta
+} as ComponentMeta<typeof Progress.Dots>
 
-export const Default: Story<DotProgressProps> = (args) => (
-  <Progress.Dots {...args} />
+export const Introduction: Story<DotProgressProps> = (args) => (
+  <Stack style={{ backgroundColor: '#ebebeb' }}>
+    <Progress.Dots {...args} />
+  </Stack>
 )
 
-Default.bind({})
-Default.args = {
+Introduction.bind({})
+Introduction.args = {
   color: 'primary',
 }
 
 export const Colors: Story<DotProgressProps> = () => (
-  <Wrapper>
+  <Stack style={{ backgroundColor: '#ebebeb' }}>
     <div>
       <Typography variant="h4" as="h2">
         Primary
@@ -53,24 +52,24 @@ export const Colors: Story<DotProgressProps> = () => (
       </Typography>
       <Progress.Dots color="neutral" />
     </div>
-  </Wrapper>
+  </Stack>
 )
 
 export const Sizes: Story<DotProgressProps> = () => (
-  <Wrapper>
+  <Stack>
     <Progress.Dots color="primary" size={32} />
     <Progress.Dots color="primary" size={48} />
     <Progress.Dots color="primary" size={64} />
-  </Wrapper>
+  </Stack>
 )
 
 export const InsideButton: Story<DotProgressProps> = () => (
-  <Wrapper>
+  <Stack>
     <Button>
       <Progress.Dots />
     </Button>
     <Button variant="ghost_icon">
       <Progress.Dots color="primary" />
     </Button>
-  </Wrapper>
+  </Stack>
 )

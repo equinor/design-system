@@ -1,0 +1,51 @@
+import { Links, PropsTable, Story } from './../../../../.storybook/components'
+import { StarProgress } from './..'
+
+# Star Progress
+
+Animated helper that indicate waiting time as content loads.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#progressbar"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17622%3A3"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/498ec5-progress-indicators/b/90464a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Progress/Star/StarProgress.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="feedback-progress-indicators-star--introduction" />
+<PropsTable />
+
+## Usage
+
+`Star progress` are to be used on splash screens and empty pages only.
+
+<ul>
+  <li>Progress indicators inform users about the current loading state giving them insight into the process.</li>
+  <li>Progress indicators look and animate in ways that reflect the status of a process. They are never simply decorative.</li>
+  <li>Progress indicators should be applied to all cases of a process in a consistent format.</li>
+</ul>
+
+```tsx
+import { StarProgress } from '@equinor/eds-core-react'
+
+<StarProgress />
+```
+
+## Examples
+
+### Indeterminate
+
+Indeterminate star indicators spins along the invisible track.
+
+<Story id="feedback-progress-indicators-star--indeterminate" />
+
+### Determinate
+
+Determinate star indicators fill the invisible, star track with color, as the indicator moves from 0 to 360 degrees.
+
+<Story id="feedback-progress-indicators-star--determinate" />
+
+### Sizes
+
+<Story id="feedback-progress-indicators-star--sizes" />

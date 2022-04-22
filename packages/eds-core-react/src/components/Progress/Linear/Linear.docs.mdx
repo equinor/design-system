@@ -1,0 +1,48 @@
+import { Links, PropsTable, Story } from './../../../../.storybook/components'
+import { LinearProgress } from './..'
+
+# Linear Progress
+
+Animated helper that indicate waiting time as content loads.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#progressbar"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17622%3A3"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/498ec5-progress-indicators/b/90464a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Progress/Linear/LinearProgress.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="feedback-progress-indicators-linear--introduction" />
+<PropsTable />
+
+## Usage
+
+`Linear progress` indicators are great to focus attention to an area.
+
+<ul>
+  <li>Progress indicators inform users about the current loading state giving them insight into the process.</li>
+  <li>Progress indicators look and animate in ways that reflect the status of a process. They are never simply decorative.</li>
+  <li>Progress indicators should be applied to all cases of a process in a consistent format.</li>
+  <li>Linear progress indicators are great for places like empty pages, at the bottom of the top bar, and in cards and lists.</li>
+</ul>
+
+```tsx
+import { LinearProgress } from '@equinor/eds-core-react'
+
+<LinearProgress />
+```
+
+## Examples
+
+### Indeterminate
+
+Indeterminate operations display the indicator continually growing and shrinking along the track until the process is complete.
+
+<Story id="feedback-progress-indicators-linear--indeterminate" />
+
+### Determinate
+
+Determinate operations display the indicator increasing in width from 0 to 100% of the track, in sync with the process’s progress.
+
+<Story id="feedback-progress-indicators-linear--determinate" />

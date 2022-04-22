@@ -1,0 +1,60 @@
+import { Links, PropsTable, Story } from './../../../../.storybook/components'
+import { CircularProgress } from './..'
+
+# Circular Progress
+
+Animated helper that indicate waiting time as content loads.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#progressbar"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17622%3A3"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/498ec5-progress-indicators/b/90464a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Progress/Circular/CircularProgress.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="feedback-progress-indicators-circular--introduction" />
+<PropsTable />
+
+## Usage
+
+`Circular progress` indicators are great for places like icons and empty pages. They should be used for short waiting times.
+
+<ul>
+  <li>Progress indicators inform users about the current loading state giving them insight into the process.</li>
+  <li>Progress indicators look and animate in ways that reflect the status of a process. They are never simply decorative.</li>
+  <li>Progress indicators should be applied to all cases of a process in a consistent format.</li>
+  <li>Circular progress indicators can be applied directly to a surface, such as a button or card.</li>
+</ul>
+
+```tsx
+import { CircularProgress } from '@equinor/eds-core-react'
+
+<CircularProgress />
+```
+
+## Examples
+
+### Indeterminate
+
+Indeterminate circular indicators spins along the invisible track.
+
+<Story id="feedback-progress-indicators-circular--indeterminate" />
+
+### Determinate
+
+Determinate circular indicators fill the invisible, circular track with color, as the indicator moves from 0 to 360 degrees.
+
+<Story id="feedback-progress-indicators-circular--determinate" />
+
+### Colors
+
+<Story id="feedback-progress-indicators-circular--colors" />
+
+### Sizes
+
+<Story id="feedback-progress-indicators-circular--sizes" />
+
+### Inside button
+
+<Story id="feedback-progress-indicators-circular--inside-button" />

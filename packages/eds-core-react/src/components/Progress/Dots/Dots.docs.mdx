@@ -1,0 +1,47 @@
+import { Links, PropsTable, Story } from './../../../../.storybook/components'
+import { DotProgress } from './..'
+
+# Dot Progress
+
+Animated helper that indicate waiting time as content loads.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#progressbar"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17622%3A3"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/498ec5-progress-indicators/b/90464a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Progress/Dots/DotProgress.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="feedback-progress-indicators-dots--introduction" />
+<PropsTable />
+
+## Usage
+
+`Dot progress` indicators are for use within buttons.
+
+<ul>
+  <li>Progress indicators inform users about the current loading state giving them insight into the process.</li>
+  <li>Progress indicators look and animate in ways that reflect the status of a process. They are never simply decorative.</li>
+  <li>Progress indicators should be applied to all cases of a process in a consistent format.</li>
+</ul>
+
+```tsx
+import { DotProgress } from '@equinor/eds-core-react'
+
+<DotProgress />
+```
+
+## Examples
+
+### Colors
+
+<Story id="feedback-progress-indicators-dots--colors" />
+
+### Sizes
+
+<Story id="feedback-progress-indicators-dots--sizes" />
+
+### Inside button
+
+<Story id="feedback-progress-indicators-dots--inside-button" />
