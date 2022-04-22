@@ -10,12 +10,7 @@ import {
   Density,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { Stack as SBStack } from './../../../.storybook/components'
 import page from './Search.docs.mdx'
-
-const Stack = styled(SBStack)`
-  padding: 32px;
-`
 
 const Columns = styled.div`
   display: grid;
@@ -57,14 +52,12 @@ const handleOnFocus = action('onFocus')
 export const Introduction: Story<SearchProps> = () => {
   // This story is not interactive, because Search has no props beyond the default HTML ones.
   return (
-    <Stack>
-      <Search
-        aria-label="sitewide"
-        id="search-normal"
-        placeholder="Search"
-        onChange={handleOnChange}
-      />
-    </Stack>
+    <Search
+      aria-label="sitewide"
+      id="search-normal"
+      placeholder="Search"
+      onChange={handleOnChange}
+    />
   )
 }
 
@@ -125,7 +118,6 @@ export const CenteredAndStyled: Story<SearchProps> = () => (
     />
   </Wrapper>
 )
-
 CenteredAndStyled.storyName = 'Centered and styled'
 
 export const InsideAForm: Story<SearchProps> = () => (
@@ -133,7 +125,6 @@ export const InsideAForm: Story<SearchProps> = () => (
     <Search placeholder="Search" onChange={handleOnChange} />
   </form>
 )
-
 InsideAForm.storyName = 'Inside a form element'
 
 export const Disabled: Story<SearchProps> = () => (
@@ -201,12 +192,4 @@ export const Compact: Story<SearchProps> = () => {
       />
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Search` using `EdsProvider` ',
-    },
-  },
 }
