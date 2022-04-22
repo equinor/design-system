@@ -9,7 +9,13 @@ import {
   EdsProvider,
   Density,
 } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import { Stack as SBStack } from './../../../.storybook/components'
+import page from './Search.docs.mdx'
+
+const Stack = styled(SBStack)`
+  padding: 32px;
+`
 
 const Columns = styled.div`
   display: grid;
@@ -39,28 +45,26 @@ export default {
   component: Search,
   parameters: {
     docs: {
-      description: {
-        component: `Search allows users to locate or refine content based on simple
-        words or phrases.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Search>
 
 const handleOnChange = action('onChange')
 const handleOnBlur = action('onBlur')
 const handleOnFocus = action('onFocus')
 
-export const Default: Story<SearchProps> = () => {
+export const Introduction: Story<SearchProps> = () => {
   // This story is not interactive, because Search has no props beyond the default HTML ones.
   return (
-    <Search
-      aria-label="sitewide"
-      id="search-normal"
-      placeholder="Search"
-      onChange={handleOnChange}
-    />
+    <Stack>
+      <Search
+        aria-label="sitewide"
+        id="search-normal"
+        placeholder="Search"
+        onChange={handleOnChange}
+      />
+    </Stack>
   )
 }
 
