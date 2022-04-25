@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { SideSheet, SideSheetProps, Button } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import page from './SideSheet.docs.mdx'
 
 export default {
   title: 'Surfaces/SideSheet',
@@ -11,17 +12,13 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `A side sheet is a a toggleable area that is anchored to the edge
-        of the viewport with supplementary content.
-        `,
-      },
+      page,
       source: {
         type: 'code',
       },
     },
   },
-} as Meta
+} as ComponentMeta<typeof SideSheet>
 
 const Child = styled.div`
   padding: 6px;
@@ -30,7 +27,7 @@ const Child = styled.div`
   border: 1px dashed #ff9200;
   border-radius: 4px;
 `
-export const Default: Story<SideSheetProps> = (args) => {
+export const Introduction: Story<SideSheetProps> = (args) => {
   const [toggle, setToggle] = useState(true)
   return (
     <div style={{ height: '400px', position: 'relative' }}>
