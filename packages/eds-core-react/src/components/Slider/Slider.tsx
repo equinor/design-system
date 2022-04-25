@@ -164,8 +164,8 @@ const SrOnlyLabel = styled.label`
 `
 
 export type SliderProps = {
-  /** Id for the elements that labels this slider */
-  ariaLabelledby: string
+  /** Id for the elements that labels this slider (NOTE: will be deprecated and removed in a future version of EDS, please use the native aria-labelledby instead) */
+  ariaLabelledby?: string
   /** Components value, range of numbers */
   value: number[] | number
   /** Function to be called when value change */
@@ -207,6 +207,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     step = 1,
     disabled,
     ariaLabelledby,
+    'aria-labelledby': ariaLabelledbyNative,
     ...rest
   },
   ref,
@@ -300,13 +301,25 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const inputIdB = useId(null, 'inputB')
   const inputId = useId(null, 'thumb')
 
+  const getAriaLabelledby = () => {
+    if (ariaLabelledbyNative) return ariaLabelledbyNative
+    if (ariaLabelledby) {
+      console.warn(
+        'Slider: The "ariaLabelledby" prop is deprecated and will be removed in a future version of EDS, please use the native "aria-labelledby" instead',
+      )
+      return ariaLabelledby
+    }
+    return null
+  }
+
   return (
     <>
       {isRangeSlider ? (
         <RangeWrapper
+          {...rest}
           ref={ref}
           role="group"
-          aria-labelledby={ariaLabelledby}
+          aria-labelledby={getAriaLabelledby()}
           valA={sliderValue[0]}
           valB={sliderValue[1]}
           max={max}
@@ -317,7 +330,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
-            {...rest}
             type="range"
             ref={minRange}
             value={sliderValue[0]}
@@ -342,7 +354,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
           <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
           <SliderInput
-            {...rest}
             type="range"
             value={sliderValue[1]}
             min={min}
@@ -368,6 +379,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         </RangeWrapper>
       ) : (
         <Wrapper
+          {...rest}
           ref={ref}
           max={max}
           min={min}
@@ -375,7 +387,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           disabled={disabled}
         >
           <SliderInput
-            {...rest}
             type="range"
             value={sliderValue[0]}
             min={min}
@@ -390,7 +401,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
               onValueChange(event)
             }}
             disabled={disabled}
-            aria-labelledby={ariaLabelledby}
+            aria-labelledby={getAriaLabelledby()}
             onMouseUp={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
           />
