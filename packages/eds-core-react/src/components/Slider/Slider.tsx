@@ -13,7 +13,7 @@ import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
 import { Output } from './Output'
 import { SliderInput } from './SliderInput'
-import { bordersTemplate } from '@equinor/eds-utils'
+import { bordersTemplate, useId } from '@equinor/eds-utils'
 
 const {
   entities: { track, handle, dot },
@@ -296,15 +296,14 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const inputIdA = `${ariaLabelledby}-thumb-a`
-  const inputIdB = `${ariaLabelledby}-thumb-b`
-  const inputId = `${ariaLabelledby}-thumb`
+  const inputIdA = useId(null, 'inputA')
+  const inputIdB = useId(null, 'inputB')
+  const inputId = useId(null, 'thumb')
 
   return (
     <>
       {isRangeSlider ? (
         <RangeWrapper
-          {...rest}
           ref={ref}
           role="group"
           aria-labelledby={ariaLabelledby}
@@ -318,11 +317,15 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           {minMaxDots && <WrapperGroupLabelDots />}
           <SrOnlyLabel htmlFor={inputIdA}>Value A</SrOnlyLabel>
           <SliderInput
+            {...rest}
             type="range"
             ref={minRange}
             value={sliderValue[0]}
             max={max}
             min={min}
+            aria-valuemax={max}
+            aria-valuemin={min}
+            aria-valuenow={sliderValue[0]}
             id={inputIdA}
             step={step}
             onChange={(event) => {
@@ -338,10 +341,14 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           {minMaxValues && <MinMax>{getFormattedText(min)}</MinMax>}
           <SrOnlyLabel htmlFor={inputIdB}>Value B</SrOnlyLabel>
           <SliderInput
+            {...rest}
             type="range"
             value={sliderValue[1]}
             min={min}
             max={max}
+            aria-valuemax={max}
+            aria-valuemin={min}
+            aria-valuenow={sliderValue[1]}
             id={inputIdB}
             step={step}
             ref={maxRange}
@@ -359,7 +366,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         </RangeWrapper>
       ) : (
         <Wrapper
-          {...rest}
           ref={ref}
           max={max}
           min={min}
@@ -367,10 +373,14 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           disabled={disabled}
         >
           <SliderInput
+            {...rest}
             type="range"
             value={sliderValue[0]}
             min={min}
             max={max}
+            aria-valuemax={max}
+            aria-valuemin={min}
+            aria-valuenow={sliderValue[0]}
             step={step}
             id={inputId}
             onChange={(event) => {
