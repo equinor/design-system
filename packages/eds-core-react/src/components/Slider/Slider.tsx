@@ -326,6 +326,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             aria-valuemax={max}
             aria-valuemin={min}
             aria-valuenow={sliderValue[0]}
+            aria-valuetext={getFormattedText(sliderValue[0]).toString()}
             id={inputIdA}
             step={step}
             onChange={(event) => {
@@ -349,6 +350,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             aria-valuemax={max}
             aria-valuemin={min}
             aria-valuenow={sliderValue[1]}
+            aria-valuetext={getFormattedText(sliderValue[1]).toString()}
             id={inputIdB}
             step={step}
             ref={maxRange}
@@ -381,6 +383,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             aria-valuemax={max}
             aria-valuemin={min}
             aria-valuenow={sliderValue[0]}
+            aria-valuetext={getFormattedText(sliderValue[0]).toString()}
             step={step}
             id={inputId}
             onChange={(event) => {
