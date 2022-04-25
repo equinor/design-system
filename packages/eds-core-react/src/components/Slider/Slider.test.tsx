@@ -30,7 +30,7 @@ const DateSlider = ({
     <Slider
       min={getUnixTime('2020-01-01')}
       max={getUnixTime('2020-01-31')}
-      ariaLabelledby={ariaLabelledby}
+      aria-labelledby={ariaLabelledby}
       step={60 * 60 * 24 * 1000}
       value={value}
       outputFunction={outputFunction}
@@ -41,7 +41,7 @@ const DateSlider = ({
 describe('Simple slider', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(
-      <Slider value={0} ariaLabelledby="test-one" />,
+      <Slider value={0} aria-labelledby="test-one" id="test" />,
     )
     expect(asFragment()).toMatchSnapshot()
   })
@@ -49,19 +49,19 @@ describe('Simple slider', () => {
     const { container } = render(
       <>
         <span id="a11y-test">Text</span>
-        <Slider value={40} ariaLabelledby="a11y-test" />
+        <Slider value={40} aria-labelledby="a11y-test" />
       </>,
     )
     expect(await axe(container)).toHaveNoViolations()
   })
   it('Creates a simple slider when providing a number as value', () => {
-    render(<Slider value={0} ariaLabelledby="test-one" />)
+    render(<Slider value={0} aria-labelledby="test-one" />)
     const input = screen.getByRole('slider')
 
     expect(input).toBeDefined()
   })
   it('Sets the aria label', () => {
-    render(<Slider value={5} ariaLabelledby="test-label" />)
+    render(<Slider value={5} aria-labelledby="test-label" />)
     const input = screen.getByRole('slider')
     expect(input).toHaveAttribute('aria-labelledby', 'test-label')
   })
@@ -72,7 +72,7 @@ describe('Simple slider', () => {
         min={4}
         max={10}
         step={2}
-        ariaLabelledby="test-minmax"
+        aria-labelledby="test-minmax"
       />,
     )
     const input = screen.getByRole('slider')
@@ -83,7 +83,7 @@ describe('Simple slider', () => {
   it('Updates output according to value change', () => {
     const handleChange = jest.fn()
     render(
-      <Slider value={5} ariaLabelledby="test-value" onChange={handleChange} />,
+      <Slider value={5} aria-labelledby="test-value" onChange={handleChange} />,
     )
     const input = screen.getByRole('slider')
     const outputValue = screen.getByRole('status')
@@ -96,7 +96,7 @@ describe('Simple slider', () => {
     render(
       <DateSlider
         value={getUnixTime('2020-01-01')}
-        ariaLabelledby="date-test"
+        aria-labelledby="date-test"
       />,
     )
     const input = screen.getByRole('slider')
@@ -107,7 +107,7 @@ describe('Simple slider', () => {
   })
   it('Has minimum and maximum values as default', () => {
     const { container } = render(
-      <Slider value={5} ariaLabelledby="test-default" min={0} max={100} />,
+      <Slider value={5} aria-labelledby="test-default" min={0} max={100} />,
     )
     expect(container).toHaveTextContent('0')
     expect(container).toHaveTextContent('100')
@@ -116,7 +116,7 @@ describe('Simple slider', () => {
     const { container } = render(
       <Slider
         value={5}
-        ariaLabelledby="test-default-off"
+        aria-labelledby="test-default-off"
         min={0}
         max={100}
         minMaxValues={false}
@@ -129,7 +129,7 @@ describe('Simple slider', () => {
 
 describe('Range slider', () => {
   it('Creates a range slider when providing an array as value', () => {
-    render(<Slider value={[0, 20]} ariaLabelledby="test-array" />)
+    render(<Slider value={[0, 20]} aria-labelledby="test-array" />)
     const inputs = screen.queryAllByRole('slider')
     expect(inputs).toHaveLength(2)
   })
@@ -140,7 +140,7 @@ describe('Range slider', () => {
         min={4}
         max={10}
         step={2}
-        ariaLabelledby="test-range-minmax"
+        aria-labelledby="test-range-minmax"
       />,
     )
     const input = screen.getAllByRole('slider')[1]
@@ -152,7 +152,11 @@ describe('Range slider', () => {
     const handleChange = jest.fn()
     const ariaId = 'test-rangechange'
     render(
-      <Slider value={[3, 6]} ariaLabelledby={ariaId} onChange={handleChange} />,
+      <Slider
+        value={[3, 6]}
+        aria-labelledby={ariaId}
+        onChange={handleChange}
+      />,
     )
 
     const inputA = screen.getAllByRole('slider')[0]
@@ -174,7 +178,7 @@ describe('Range slider', () => {
     render(
       <DateSlider
         value={[getUnixTime('2020-01-01'), getUnixTime('2020-01-31')]}
-        ariaLabelledby={ariaId}
+        aria-labelledby={ariaId}
       />,
     )
     const inputA = screen.getAllByRole('slider')[0]
@@ -191,7 +195,7 @@ describe('Range slider', () => {
   })
 
   it('Sets the aria label', () => {
-    render(<Slider value={[2, 4]} ariaLabelledby="test-rangelabel" />)
+    render(<Slider value={[2, 4]} aria-labelledby="test-rangelabel" />)
     const wrapper = screen.getByRole('group')
     expect(wrapper).toHaveAttribute('aria-labelledby', 'test-rangelabel')
   })
@@ -199,7 +203,7 @@ describe('Range slider', () => {
     const { container } = render(
       <Slider
         value={[2, 4]}
-        ariaLabelledby="test-rangedefault"
+        aria-labelledby="test-rangedefault"
         min={0}
         max={100}
       />,
@@ -211,7 +215,7 @@ describe('Range slider', () => {
     const { container } = render(
       <Slider
         value={[2, 4]}
-        ariaLabelledby="test-range-minmaxoff"
+        aria-labelledby="test-range-minmaxoff"
         min={0}
         max={100}
         minMaxValues={false}
