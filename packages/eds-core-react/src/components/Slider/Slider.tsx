@@ -297,9 +297,15 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const inputIdA = useId(null, 'inputA')
-  const inputIdB = useId(null, 'inputB')
-  const inputId = useId(null, 'thumb')
+  let inputIdA = useId(null, 'inputA')
+  let inputIdB = useId(null, 'inputB')
+  let inputId = useId(null, 'thumb')
+  const overrideId = rest['id'] ? rest['id'] : null
+  if (overrideId) {
+    inputIdA = `${overrideId}-thumb-a`
+    inputIdB = `${overrideId}-thumb-b`
+    inputId = `${overrideId}-thumb`
+  }
 
   const getAriaLabelledby = () => {
     if (ariaLabelledbyNative) return ariaLabelledbyNative
