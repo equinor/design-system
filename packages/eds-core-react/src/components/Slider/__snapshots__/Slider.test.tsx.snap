@@ -4,14 +4,19 @@ exports[`Simple slider Matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="Slider__Wrapper-sc-n1grrg-1 jxDwAm"
+    id="test"
     max="100"
     min="0"
     value="0"
   >
     <input
       aria-labelledby="test-one"
+      aria-valuemax="100"
+      aria-valuemin="0"
+      aria-valuenow="0"
+      aria-valuetext="0"
       class="SliderInput__StyledSliderInput-sc-17orw4f-0 hPHsSm"
-      id="test-one-thumb"
+      id="test-thumb"
       max="100"
       min="0"
       step="1"
@@ -20,7 +25,7 @@ exports[`Simple slider Matches snapshot 1`] = `
     />
     <output
       class="Output__StyledOutput-sc-1dy945x-0 ebnTLx"
-      for="test-one-thumb"
+      for="test-thumb"
       value="0"
     >
       0

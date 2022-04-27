@@ -13,7 +13,7 @@ import { slider as tokens } from './Slider.tokens'
 import { MinMax } from './MinMax'
 import { Output } from './Output'
 import { SliderInput } from './SliderInput'
-import { bordersTemplate } from '@equinor/eds-utils'
+import { bordersTemplate, useId } from '@equinor/eds-utils'
 
 const {
   entities: { track, handle, dot },
@@ -164,8 +164,8 @@ const SrOnlyLabel = styled.label`
 `
 
 export type SliderProps = {
-  /** Id for the elements that labels this slider */
-  ariaLabelledby: string
+  /** Id for the elements that labels this slider (NOTE: will be deprecated and removed in a future version of EDS, please use the native aria-labelledby instead) */
+  ariaLabelledby?: string
   /** Components value, range of numbers */
   value: number[] | number
   /** Function to be called when value change */
@@ -207,6 +207,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     step = 1,
     disabled,
     ariaLabelledby,
+    'aria-labelledby': ariaLabelledbyNative,
     ...rest
   },
   ref,
@@ -296,9 +297,26 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     }
   }
 
-  const inputIdA = `${ariaLabelledby}-thumb-a`
-  const inputIdB = `${ariaLabelledby}-thumb-b`
-  const inputId = `${ariaLabelledby}-thumb`
+  let inputIdA = useId(null, 'inputA')
+  let inputIdB = useId(null, 'inputB')
+  let inputId = useId(null, 'thumb')
+  if (rest['id']) {
+    const overrideId = rest['id']
+    inputIdA = `${overrideId}-thumb-a`
+    inputIdB = `${overrideId}-thumb-b`
+    inputId = `${overrideId}-thumb`
+  }
+
+  const getAriaLabelledby = () => {
+    if (ariaLabelledbyNative) return ariaLabelledbyNative
+    if (ariaLabelledby) {
+      console.warn(
+        'Slider: The "ariaLabelledby" prop is deprecated and will be removed in a future version of EDS, please use the native "aria-labelledby" instead',
+      )
+      return ariaLabelledby
+    }
+    return null
+  }
 
   return (
     <>
@@ -307,7 +325,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           {...rest}
           ref={ref}
           role="group"
-          aria-labelledby={ariaLabelledby}
+          aria-labelledby={getAriaLabelledby()}
           valA={sliderValue[0]}
           valB={sliderValue[1]}
           max={max}
@@ -323,6 +341,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             value={sliderValue[0]}
             max={max}
             min={min}
+            aria-valuemax={max}
+            aria-valuemin={min}
+            aria-valuenow={sliderValue[0]}
+            aria-valuetext={getFormattedText(sliderValue[0]).toString()}
             id={inputIdA}
             step={step}
             onChange={(event) => {
@@ -342,6 +364,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             value={sliderValue[1]}
             min={min}
             max={max}
+            aria-valuemax={max}
+            aria-valuemin={min}
+            aria-valuenow={sliderValue[1]}
+            aria-valuetext={getFormattedText(sliderValue[1]).toString()}
             id={inputIdB}
             step={step}
             ref={maxRange}
@@ -371,13 +397,17 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             value={sliderValue[0]}
             min={min}
             max={max}
+            aria-valuemax={max}
+            aria-valuemin={min}
+            aria-valuenow={sliderValue[0]}
+            aria-valuetext={getFormattedText(sliderValue[0]).toString()}
             step={step}
             id={inputId}
             onChange={(event) => {
               onValueChange(event)
             }}
             disabled={disabled}
-            aria-labelledby={ariaLabelledby}
+            aria-labelledby={getAriaLabelledby()}
             onMouseUp={(event) => handleCommitedValue(event)}
             onKeyUp={(event) => handleKeyUp(event)}
           />
