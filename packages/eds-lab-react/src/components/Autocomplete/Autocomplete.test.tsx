@@ -12,7 +12,9 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Autocomplete } from '.'
 
-const items = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]
+const itemObjects = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]
+const items = ['One', 'Two', 'Three']
+const optionLabel = (item: { label: 'item' }) => item.label
 const labelText = 'Select label test'
 
 afterEach(cleanup)
@@ -61,7 +63,7 @@ describe('Autocomplete', () => {
       <Autocomplete
         options={items}
         label={labelText}
-        initialSelectedOptions={[{ label: 'One' }, { label: 'Two' }]}
+        initialSelectedOptions={['One', 'Two']}
         multiple
       />,
     )
@@ -163,7 +165,7 @@ describe('Autocomplete', () => {
     fireEvent.keyDown(input, { key: 'ArrowDown' })
     const options = await within(optionsList).findAllByRole('option')
     expect(options).toHaveLength(2) // since one option is disabled
-    expect(await within(options[0]).findByText(items[1].label)).toBeDefined()
+    expect(await within(options[0]).findByText(items[1])).toBeDefined()
 
     const withDisabledOptions = await within(optionsList).findAllByRole(
       'option',
@@ -173,7 +175,7 @@ describe('Autocomplete', () => {
     )
     expect(withDisabledOptions[0]).toHaveAttribute('aria-hidden')
     expect(
-      await within(withDisabledOptions[0]).findByText(items[0].label),
+      await within(withDisabledOptions[0]).findByText(items[0]),
     ).toBeDefined()
   })
 
