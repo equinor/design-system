@@ -79,7 +79,7 @@ export const Introduction: Story<SideSheetProps> = (args) => {
   )
 }
 
-export const Filters: Story<SideSheetProps> = () => {
+export const Placement: Story<SideSheetProps> = () => {
   const cellValues = toCellValues(data, columns)
   const [toggle, setToggle] = useState(false)
   const [value, updateValue] = useState([1, 50])
@@ -176,9 +176,9 @@ export const Filters: Story<SideSheetProps> = () => {
   )
 }
 
-export const Details: Story<SideSheetProps> = () => {
+export const Scrolling: Story<SideSheetProps> = () => {
   const cellValues = toCellValues(data, columns)
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(false)
 
   const UnstyledList = styled.ul`
     margin: 0;
@@ -228,8 +228,12 @@ export const Details: Story<SideSheetProps> = () => {
           ))}
         </Table.Body>
       </Table>
-      <SideSheet open={toggle} onClose={() => setToggle(!toggle)}>
-        <div style={{ padding: '6px' }}>
+      <SideSheet
+        open={toggle}
+        onClose={() => setToggle(!toggle)}
+        style={{ overflowY: 'hidden' }}
+      >
+        <div style={{ padding: '6px', overflowY: 'auto', maxHeight: '80%' }}>
           <Typography variant="h4">Details</Typography>
           <TextField
             id="storybook-details"
@@ -237,7 +241,7 @@ export const Details: Story<SideSheetProps> = () => {
             inputIcon={<Icon name="edit" title="Add description" />}
             style={{ paddingTop: '16px' }}
           ></TextField>
-          <Divider style={{ marginLeft: '-20px', marginRight: '-20px' }} />
+          <Divider />
           <Typography variant="h6" color="disabled">
             Information
           </Typography>
@@ -251,19 +255,19 @@ export const Details: Story<SideSheetProps> = () => {
             <Icon name="file_description" title="description" color="#007079" />
             <Typography>description</Typography>
           </Wrapper>
-          <Divider style={{ marginLeft: '-20px', marginRight: '-20px' }} />
+          <Divider />
           <Typography variant="h6" color="disabled">
             Add labels
           </Typography>
           <UnstyledList>
             <li>
-              <Checkbox label="Fruits" name="multiple" value="first" />
+              <Checkbox label="Fruits" name="multiple" />
             </li>
             <li>
-              <Checkbox label="Vegetables" name="multiple" value="second" />
+              <Checkbox label="Vegetables" name="multiple" />
             </li>
             <li>
-              <Checkbox label="Favourites" name="multiple" value="third" />
+              <Checkbox label="Favourites" name="multiple" />
             </li>
           </UnstyledList>
         </div>
