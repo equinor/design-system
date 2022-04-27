@@ -10,7 +10,8 @@ import {
   EdsProvider,
   Density,
 } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import page from './Menu.docs.mdx'
 
 import { tokens } from '@equinor/eds-tokens'
 
@@ -32,7 +33,12 @@ export default {
     Item: Menu.Item,
     Section: Menu.Section,
   },
-} as Meta
+  parameters: {
+    docs: {
+      page,
+    },
+  },
+} as ComponentMeta<typeof Menu>
 
 const StoryCenter = styled.div({
   display: 'flex',
@@ -45,7 +51,7 @@ const onClick = (event: React.MouseEvent) => {
   event.stopPropagation()
 }
 
-export const Default: Story<MenuProps> = (args) => {
+export const Introduction: Story<MenuProps> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
@@ -89,9 +95,8 @@ export const Default: Story<MenuProps> = (args) => {
     </StoryCenter>
   )
 }
-
-Default.bind({})
-Default.args = {
+Introduction.bind({})
+Introduction.args = {
   placement: 'bottom-end',
 }
 
