@@ -11,6 +11,7 @@ import {
   Density,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
+import { Stack } from './../../../.storybook/components'
 import page from './Menu.docs.mdx'
 
 import { tokens } from '@equinor/eds-tokens'
@@ -40,12 +41,6 @@ export default {
   },
 } as ComponentMeta<typeof Menu>
 
-const StoryCenter = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
-  margin: '10rem',
-})
-
 const onClick = (event: React.MouseEvent) => {
   action('clicked')(event)
   event.stopPropagation()
@@ -69,7 +64,7 @@ export const Introduction: Story<MenuProps> = (args) => {
   }, [args.open])
 
   return (
-    <StoryCenter>
+    <Stack>
       <Button
         ref={setAnchorEl}
         id="anchor-default"
@@ -92,7 +87,7 @@ export const Introduction: Story<MenuProps> = (args) => {
         <Menu.Item onClick={onClick}>Bearing</Menu.Item>
         <Menu.Item onClick={onClick}>Cable</Menu.Item>
       </Menu>
-    </StoryCenter>
+    </Stack>
   )
 }
 Introduction.bind({})
@@ -112,7 +107,7 @@ export const Complex: Story<MenuProps> = () => {
   }
 
   return (
-    <StoryCenter>
+    <Stack>
       <Button
         ref={setAnchorEl}
         id="anchor-complex"
@@ -235,7 +230,7 @@ export const Complex: Story<MenuProps> = () => {
           </Menu.Item>
         </Menu.Section>
       </Menu>
-    </StoryCenter>
+    </Stack>
   )
 }
 
@@ -259,7 +254,7 @@ export const Compact: Story<MenuProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <StoryCenter>
+      <Stack>
         <Button
           ref={setAnchorEl}
           id="anchor-compact"
@@ -283,15 +278,7 @@ export const Compact: Story<MenuProps> = () => {
             <Menu.Item onClick={onClick}>Cable</Menu.Item>
           </Menu>
         </EdsProvider>
-      </StoryCenter>
+      </Stack>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Menu` using `EdsProvider` ',
-    },
-  },
 }
