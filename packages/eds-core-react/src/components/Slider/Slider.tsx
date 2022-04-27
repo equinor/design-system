@@ -300,8 +300,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   let inputIdA = useId(null, 'inputA')
   let inputIdB = useId(null, 'inputB')
   let inputId = useId(null, 'thumb')
-  const overrideId = rest['id'] ? rest['id'] : null
-  if (overrideId) {
+  if (rest['id']) {
+    const overrideId = rest['id']
     inputIdA = `${overrideId}-thumb-a`
     inputIdB = `${overrideId}-thumb-b`
     inputId = `${overrideId}-thumb`
