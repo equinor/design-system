@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useMemo,
+  useCallback,
 } from 'react'
 import { createPortal } from 'react-dom'
 import {
@@ -214,7 +215,7 @@ function AutocompleteInner<T>(
     optionsFilter,
     autoWidth,
     placeholder,
-    optionLabel = (item) => item as unknown as string,
+    optionLabel,
     ...other
   } = props
   const anchorRef = useRef()
@@ -264,10 +265,21 @@ function AutocompleteInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
+  const getLabel = useCallback(
+    (item: T) => {
+      if (!item) {
+        return ''
+      }
+
+      return optionLabel ? optionLabel(item) : (item as unknown as string)
+    },
+    [optionLabel],
+  )
+
   let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
     initialSelectedItem: initialSelectedOptions[0],
-    itemToString: (item) => (item ? optionLabel(item) : ''),
+    itemToString: getLabel,
     onInputValueChange: ({ inputValue }) => {
       setAvailableItems(
         options.filter((item) => {
@@ -275,9 +287,7 @@ function AutocompleteInner<T>(
             return optionsFilter(item, inputValue)
           }
 
-          return optionLabel(item)
-            .toLowerCase()
-            .includes(inputValue.toLowerCase())
+          return getLabel(item).toLowerCase().includes(inputValue.toLowerCase())
         }),
       )
     },
@@ -448,8 +458,8 @@ function AutocompleteInner<T>(
   const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
 
   const selectedItemsLabels = useMemo(
-    () => selectedItems.map(optionLabel),
-    [selectedItems, optionLabel],
+    () => selectedItems.map(getLabel),
+    [selectedItems, getLabel],
   )
 
   const optionsList = (
@@ -467,7 +477,7 @@ function AutocompleteInner<T>(
       {!isOpen
         ? null
         : availableItems.map((item, index) => {
-            const label = optionLabel(item)
+            const label = getLabel(item)
             const isDisabled = optionDisabled(item)
             const isSelected = selectedItemsLabels.includes(label)
             return (
