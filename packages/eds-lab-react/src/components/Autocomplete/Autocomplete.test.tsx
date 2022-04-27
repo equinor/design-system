@@ -5,6 +5,7 @@ import {
   fireEvent,
   screen,
   within,
+  waitFor,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
@@ -48,6 +49,32 @@ describe('Autocomplete', () => {
     expect(optionsList).toBeDefined()
     expect(optionsList).toHaveAccessibleName(labelText)
     expect(optionsList.nodeName).toBe('UL')
+  })
+
+  it('Has provided option label', async () => {
+    const labler = (text: string) => `${text}+1`
+    render(
+      <Autocomplete
+        options={itemObjects}
+        label={labelText}
+        optionLabel={(item) => labler(item.label)}
+      />,
+    )
+    const labeledNodes = await screen.findAllByLabelText(labelText)
+    const optionsList = labeledNodes[1]
+
+    const buttonNode = await screen.findByLabelText('toggle options', {
+      selector: 'button',
+    })
+    expect(optionsList.childNodes).toHaveLength(0)
+
+    fireEvent.click(buttonNode)
+    expect(await within(optionsList).findAllByRole('option')).toHaveLength(3)
+
+    const options = await within(optionsList).findAllByRole('option')
+    expect(within(options[0]).getByText(labler(items[0]))).toBeDefined()
+    expect(within(options[1]).getByText(labler(items[1]))).toBeDefined()
+    expect(within(options[2]).getByText(labler(items[2]))).toBeDefined()
   })
 
   it('Can be disabled', async () => {
@@ -97,7 +124,7 @@ describe('Autocomplete', () => {
     onOptionsChange: () => void
   }
 
-  const HandleMultipleSelect = ({ onOptionsChange }: ControlledProps) => {
+  const ControlledAutoComplete = ({ onOptionsChange }: ControlledProps) => {
     const [selected, setSelected] = useState([])
     return (
       <Autocomplete
@@ -115,18 +142,23 @@ describe('Autocomplete', () => {
 
   it('Can be a controlled component', async () => {
     const handleChange = jest.fn()
-    render(<HandleMultipleSelect onOptionsChange={handleChange} />)
+    render(<ControlledAutoComplete onOptionsChange={handleChange} />)
     const labeledNodes = await screen.findAllByLabelText(labelText)
     const optionsList = labeledNodes[1]
     const buttonNode = await screen.findByLabelText('toggle options', {
       selector: 'button',
     })
 
-    expect(handleChange).toHaveBeenCalledTimes(0)
+    await waitFor(() => {
+      expect(handleChange).toHaveBeenCalledTimes(0)
+    })
     fireEvent.click(buttonNode)
     const options = await within(optionsList).findAllByRole('option')
     fireEvent.click(options[2])
-    expect(handleChange).toHaveBeenCalledTimes(1)
+
+    await waitFor(() => {
+      expect(handleChange).toHaveBeenCalledTimes(1)
+    })
   })
 
   it('Can filter results by input value', async () => {
@@ -146,7 +178,9 @@ describe('Autocomplete', () => {
     fireEvent.change(input, {
       target: { value: 'ree' },
     })
-    expect(await within(optionsList).findAllByRole('option')).toHaveLength(1)
+    const filteredOptions = await within(optionsList).findAllByRole('option')
+    expect(filteredOptions).toHaveLength(1)
+    expect(within(filteredOptions[0]).getByText('Three')).toBeDefined()
   })
 
   it('Second option is first when first option is disabled', async () => {
