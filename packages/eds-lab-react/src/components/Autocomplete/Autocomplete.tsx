@@ -188,8 +188,7 @@ export type AutocompleteProps<T> = {
   optionDisabled?: (option: T) => boolean
   /** Filter function for options */
   optionsFilter?: (option: T, inputValue: string) => boolean
-  /** If `true` the width of the popper will adjust accordingly to the options label,
-   * else it will follow the width of the input */
+  /** If `true` the width of the dropdown will adjust accordingly to width of the input */
   autoWidth?: boolean
   /** Descriptive text for whats selected or about to be selected */
   placeholder?: string

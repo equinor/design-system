@@ -418,6 +418,7 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
                     aria-describedby="error-county-required"
                     aria-required
                     optionLabel={optionLabel}
+                    autoWidth
                   />
                 )}
               />
@@ -451,6 +452,7 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
                       label: opt,
                     }))}
                     optionLabel={optionLabel}
+                    autoWidth
                   />
                 )}
               />
@@ -474,6 +476,7 @@ export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
                     ]}
                     optionLabel={(opt) => `${opt.emoji} ${opt.label}`}
                     multiple
+                    autoWidth
                   />
                 )}
               />
