@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState, useEffect, useMemo } from 'react'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
@@ -21,9 +21,12 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        type: 'code',
+      },
     },
   },
-} as Meta
+} as ComponentMeta<typeof Autocomplete>
 
 type MyOptionType = {
   label: string
