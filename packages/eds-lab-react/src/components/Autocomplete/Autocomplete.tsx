@@ -271,7 +271,26 @@ function AutocompleteInner<T>(
         return ''
       }
 
-      return optionLabel ? optionLabel(item) : (item as unknown as string)
+      if (typeof item === 'object') {
+        if (optionLabel) {
+          return optionLabel(item)
+        } else {
+          throw new Error(
+            'Missing label. When using objects for options make sure to define the `optionLabel` property',
+          )
+        }
+      }
+
+      if (typeof item === 'string') {
+        return item
+      }
+      try {
+        return item?.toString()
+      } catch (error) {
+        throw new Error(
+          'Unable to find label, make sure your are using options as documented',
+        )
+      }
     },
     [optionLabel],
   )
