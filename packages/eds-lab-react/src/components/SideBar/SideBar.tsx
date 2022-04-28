@@ -4,6 +4,7 @@ import {
   forwardRef,
   useContext,
   useState,
+  useEffect,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
@@ -46,6 +47,7 @@ const TopContainer = styled.div`
   display: grid;
   grid-auto-rows: 1fr;
   align-items: center;
+  margin-bottom: auto;
 `
 
 type SideBarContextType = {
@@ -68,6 +70,7 @@ type SidebarType = {
   onAction?: () => void
   actionLabel?: string
   actionIcon?: IconData
+  toggleButton?: 'top' | 'bottom'
   open?: boolean
   maxHeight?: string
   onToggle?: (state: boolean) => void
@@ -79,6 +82,7 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
       onAction,
       actionLabel,
       actionIcon,
+      toggleButton,
       onToggle,
       open = false,
       maxHeight,
@@ -90,15 +94,26 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
     const token = useToken({ density }, tokens)
     const [isOpen, setIsOpen] = useState<boolean>(open)
 
-    const handleToggle = () => {
-      setIsOpen((o) => !o)
-      onToggle?.(!isOpen)
+    const handleToggle = (toggle: boolean) => {
+      setIsOpen(toggle)
+      onToggle?.(toggle)
     }
+
+    useEffect(() => {
+      handleToggle(open)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open])
 
     return (
       <ThemeProvider theme={token}>
         <SideBarContext.Provider value={{ isOpen }}>
           <Container open={isOpen} ref={ref} maxHeight={maxHeight}>
+            {toggleButton && toggleButton === 'top' && (
+              <ToggleOpen
+                isOpen={isOpen}
+                onClick={() => handleToggle(!isOpen)}
+              />
+            )}
             <TopContainer>
               {onAction && actionLabel && actionIcon && (
                 <ActionButton
@@ -110,7 +125,12 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
               )}
               {children}
             </TopContainer>
-            <ToggleOpen isOpen={isOpen} toggle={handleToggle} />
+            {toggleButton && toggleButton === 'bottom' && (
+              <ToggleOpen
+                isOpen={isOpen}
+                onClick={() => handleToggle(!isOpen)}
+              />
+            )}
             <LogoContainer></LogoContainer>
           </Container>
         </SideBarContext.Provider>

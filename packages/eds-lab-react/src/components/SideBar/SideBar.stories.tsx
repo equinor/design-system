@@ -6,7 +6,7 @@ import {
   home,
   add,
 } from '@equinor/eds-icons'
-import { SideBar } from '../../components/SideBar'
+import { SideBar, SidebarType } from '../../components/SideBar'
 import { SidebarItemType } from './SidebarItem'
 
 export default {
@@ -16,12 +16,22 @@ export default {
 
   `,
   component: SideBar,
+  args: {
+    actionLabel: 'Create story',
+    open: true,
+  },
   argTypes: {
     backgroundColor: { control: 'color' },
+    toggleButton: {
+      options: ['top', 'bottom', null],
+      control: {
+        type: 'select',
+      },
+    },
   },
 } as Meta
 
-export const Primary: Story = () => {
+export const Primary: Story<SidebarType> = (args) => {
   const menuItems: SidebarItemType[] = [
     {
       name: 'home',
@@ -43,9 +53,10 @@ export const Primary: Story = () => {
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
       <SideBar
-        actionLabel="Create story"
         actionIcon={add}
+        onToggle={(toggle) => console.log('toggled ', toggle)}
         onAction={() => console.log('Created 🖋')}
+        {...args}
       >
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
@@ -76,7 +87,7 @@ export const NoAction: Story = () => {
 
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
-      <SideBar>
+      <SideBar toggleButton="top">
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
         ))}
@@ -110,6 +121,7 @@ export const WithAction: Story = () => {
         actionLabel="Create a diamond"
         actionIcon={add}
         onAction={() => console.log('Created 💎')}
+        toggleButton="bottom"
       >
         {menuItems.map((m) => (
           <SideBar.Item key={m.name} {...m} />
@@ -143,6 +155,7 @@ export const WithCurrentUrlAndAction: Story = () => {
       <SideBar
         actionLabel="Create story"
         actionIcon={add}
+        toggleButton="bottom"
         onAction={() => console.log('Created 🖋')}
       >
         {menuItems.map((m) => (
