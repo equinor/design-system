@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useMemo,
+  useCallback,
 } from 'react'
 import { createPortal } from 'react-dom'
 import {
@@ -84,10 +85,6 @@ const StyledButton = styled(Button)(
   `,
 )
 
-type AutocompleteOption<T> = T & {
-  label: string
-}
-
 type IndexFinderType = <T>({
   calc,
   index,
@@ -157,17 +154,15 @@ const findPrevIndex: IndexFinderType = ({
   return prevIndex
 }
 
-export type AutocompleteChanges<T> = UseMultipleSelectionProps<
-  AutocompleteOption<T>
->
+export type AutocompleteChanges<T> = UseMultipleSelectionProps<T>
 
 export type AutocompleteProps<T> = {
   /** List of options to choose from */
-  options: AutocompleteOption<T>[]
+  options: T[]
   /** Label for the select element */
   label: string
   /** Array of initial selected items */
-  initialSelectedOptions?: AutocompleteOption<T>[]
+  initialSelectedOptions?: T[]
   /** Meta text, for instance unit */
   meta?: string
   /** Disabled state */
@@ -178,25 +173,22 @@ export type AutocompleteProps<T> = {
    * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
    * The items that should be selected. */
-  selectedOptions?: AutocompleteOption<T>[]
+  selectedOptions?: T[]
   /** Callback for the selected item change
    * changes.selectedItems gives the selected items
    */
-  onOptionsChange?: (
-    changes: AutocompleteChanges<AutocompleteOption<T>>,
-  ) => void
+  onOptionsChange?: (changes: AutocompleteChanges<T>) => void
   /** Enable multiselect */
   multiple?: boolean
   /**  Custom option label */
-  optionLabel?: (option: AutocompleteOption<T>) => string
+  optionLabel?: (option: T) => string
   /** Disable use of react portal for dropdown */
   disablePortal?: boolean
   /** Disable option */
-  optionDisabled?: (option: AutocompleteOption<T>) => boolean
+  optionDisabled?: (option: T) => boolean
   /** Filter function for options */
-  optionsFilter?: (option: AutocompleteOption<T>, inputValue: string) => boolean
-  /** If `true` the width of the popper will adjust accordingly to the options label,
-   * else it will follow the width of the input */
+  optionsFilter?: (option: T, inputValue: string) => boolean
+  /** If `true` the width of the dropdown will adjust accordingly to width of the input */
   autoWidth?: boolean
   /** Descriptive text for whats selected or about to be selected */
   placeholder?: string
@@ -217,12 +209,12 @@ function AutocompleteInner<T>(
     selectedOptions,
     multiple,
     initialSelectedOptions = [],
-    optionLabel = (item) => item.label,
     disablePortal,
     optionDisabled = () => false,
     optionsFilter,
     autoWidth,
     placeholder,
+    optionLabel,
     ...other
   } = props
   const anchorRef = useRef()
@@ -243,19 +235,18 @@ function AutocompleteInner<T>(
   )
   let placeholderText = placeholder
 
-  let multipleSelectionProps: UseMultipleSelectionProps<AutocompleteOption<T>> =
-    {
-      initialSelectedItems: multiple
-        ? initialSelectedOptions
-        : initialSelectedOptions[0]
-        ? [initialSelectedOptions[0]]
-        : [],
-      onSelectedItemsChange: (changes) => {
-        if (onOptionsChange) {
-          onOptionsChange(changes)
-        }
-      },
-    }
+  let multipleSelectionProps: UseMultipleSelectionProps<T> = {
+    initialSelectedItems: multiple
+      ? initialSelectedOptions
+      : initialSelectedOptions[0]
+      ? [initialSelectedOptions[0]]
+      : [],
+    onSelectedItemsChange: (changes) => {
+      if (onOptionsChange) {
+        onOptionsChange(changes)
+      }
+    },
+  }
 
   if (isControlled) {
     multipleSelectionProps = {
@@ -273,10 +264,40 @@ function AutocompleteInner<T>(
     setSelectedItems,
   } = useMultipleSelection(multipleSelectionProps)
 
-  let comboBoxProps: UseComboboxProps<AutocompleteOption<T>> = {
+  const getLabel = useCallback(
+    (item: T) => {
+      if (!item) {
+        return ''
+      }
+
+      if (typeof item === 'object') {
+        if (optionLabel) {
+          return optionLabel(item)
+        } else {
+          throw new Error(
+            'Missing label. When using objects for options make sure to define the `optionLabel` property',
+          )
+        }
+      }
+
+      if (typeof item === 'string') {
+        return item
+      }
+      try {
+        return item?.toString()
+      } catch (error) {
+        throw new Error(
+          'Unable to find label, make sure your are using options as documented',
+        )
+      }
+    },
+    [optionLabel],
+  )
+
+  let comboBoxProps: UseComboboxProps<T> = {
     items: availableItems,
     initialSelectedItem: initialSelectedOptions[0],
-    itemToString: (item) => (item ? optionLabel(item) : ''),
+    itemToString: getLabel,
     onInputValueChange: ({ inputValue }) => {
       setAvailableItems(
         options.filter((item) => {
@@ -284,9 +305,7 @@ function AutocompleteInner<T>(
             return optionsFilter(item, inputValue)
           }
 
-          return optionLabel(item)
-            .toLowerCase()
-            .includes(inputValue.toLowerCase())
+          return getLabel(item).toLowerCase().includes(inputValue.toLowerCase())
         }),
       )
     },
@@ -326,7 +345,7 @@ function AutocompleteInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownHome:
           return {
             ...changes,
-            highlightedIndex: findNextIndex<AutocompleteOption<T>>({
+            highlightedIndex: findNextIndex<T>({
               index: changes.highlightedIndex,
               availableItems,
               optionDisabled,
@@ -336,7 +355,7 @@ function AutocompleteInner<T>(
         case useCombobox.stateChangeTypes.InputKeyDownEnd:
           return {
             ...changes,
-            highlightedIndex: findPrevIndex<AutocompleteOption<T>>({
+            highlightedIndex: findPrevIndex<T>({
               index: changes.highlightedIndex,
               availableItems,
               optionDisabled,
@@ -373,7 +392,7 @@ function AutocompleteInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownHome:
             return {
               ...changes,
-              highlightedIndex: findNextIndex<AutocompleteOption<T>>({
+              highlightedIndex: findNextIndex<T>({
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
@@ -383,7 +402,7 @@ function AutocompleteInner<T>(
           case useCombobox.stateChangeTypes.InputKeyDownEnd:
             return {
               ...changes,
-              highlightedIndex: findPrevIndex<AutocompleteOption<T>>({
+              highlightedIndex: findPrevIndex<T>({
                 index: changes.highlightedIndex,
                 availableItems,
                 optionDisabled,
@@ -457,8 +476,8 @@ function AutocompleteInner<T>(
   const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
 
   const selectedItemsLabels = useMemo(
-    () => selectedItems.map(optionLabel),
-    [selectedItems, optionLabel],
+    () => selectedItems.map(getLabel),
+    [selectedItems, getLabel],
   )
 
   const optionsList = (
@@ -476,7 +495,7 @@ function AutocompleteInner<T>(
       {!isOpen
         ? null
         : availableItems.map((item, index) => {
-            const label = optionLabel(item)
+            const label = getLabel(item)
             const isDisabled = optionDisabled(item)
             const isSelected = selectedItemsLabels.includes(label)
             return (

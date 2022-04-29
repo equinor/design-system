@@ -14,6 +14,23 @@ The Autocomplete component allows users to choose one or multiple options from a
 
 The value must be chosen from a predefined list of values.
 
+
+```tsx
+
+const options = [
+  'Microsoft Corporation',
+   'Tesla, Inc',
+   'Apple Inc.',
+]
+
+<Autocomplete 
+  label="Stocks"
+  options={options}
+/>
+```
+
+When passing in objects as options, make sure you define the `optionLabel` function for wanted label. This function must return a string.
+
 ```tsx
 
 const options = [
@@ -25,23 +42,10 @@ const options = [
 <Autocomplete 
   label="Stocks"
   options={options}
+  optionLabel={(option) => option.label}
 />
 ```
 
-### Option structure
-
-The component accepts the following structure as a minimum. 
-```tsx
-type AutocompleteOption = {
-  label: string
-}
-```
-for instance
-```tsx
-const options = [
-   { label: 'Microsoft Corporation', symbol: 'MSFT' },
-]
-````
 
 ## Accessibility
 The property `label` is mandatory and make sure you have a descriptive label for screen readers.
