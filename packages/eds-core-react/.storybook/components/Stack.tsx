@@ -1,12 +1,17 @@
-import styled from 'styled-components'
+import styled, { CSSProperties } from 'styled-components'
 
-export const Stack = styled.div`
+type StackProps = {
+  direction?: CSSProperties['flexDirection']
+  align?: CSSProperties['alignItems']
+}
+
+export const Stack = styled.div<StackProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: ${({ align }) => align || 'center'};
   gap: 1rem;
   @media screen and (min-width: 600px) {
-    flex-direction: row;
+    flex-direction: ${({ direction }) => direction || 'row'};
   }
 `
