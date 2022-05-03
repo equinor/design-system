@@ -1,4 +1,4 @@
-import { forwardRef, SVGProps, Ref } from 'react'
+import { forwardRef, SVGProps, Ref, useEffect, useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import * as tokens from './CircularProgress.tokens'
 import type { CircularProgressToken } from './CircularProgress.tokens'
@@ -21,6 +21,18 @@ const Svg = styled.svg<SvgProps>`
       : css`
           transform: rotate(-90deg);
         `};
+`
+
+const SrOnlyOutput = styled.output`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 `
 
 const TrackCircle = styled.circle``
@@ -76,6 +88,7 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
       variant,
     }
     const token = getToken(color)
+    const [srProgress, setSrProgress] = useState(0)
 
     const circumference = 2 * Math.PI * ((48 - thickness) / 2)
 
@@ -95,36 +108,56 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
       }
     }
 
+    useEffect(() => {
+      if (variant === 'indeterminate') return
+      if (progress >= 25 && progress < 50) {
+        setSrProgress(25)
+      } else if (progress >= 50 && progress < 75) {
+        setSrProgress(50)
+      } else if (progress >= 75 && progress < 100) {
+        setSrProgress(75)
+      } else if (progress === 100) {
+        setSrProgress(100)
+      }
+    }, [progress, variant])
+
+    const getProgressFormatted = () => {
+      return `Loading ${srProgress}%`
+    }
+
     return (
-      <Svg
-        {...props}
-        viewBox="24 24 48 48"
-        role="progressbar"
-        height={size}
-        width={size}
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <TrackCircle
-          style={trackStyle}
-          cx={48}
-          cy={48}
-          r={(48 - thickness) / 2}
-          fill="none"
-          strokeWidth={thickness}
-          stroke={token.background}
-        />
-        <ProgressCircle
-          style={trackStyle}
-          cx={48}
-          cy={48}
-          r={(48 - thickness) / 2}
-          fill="none"
-          strokeLinecap="round"
-          strokeWidth={thickness}
-          strokeDasharray={variant === 'determinate' ? circumference : 48}
-          stroke={token.entities.progress.background}
-        />
-      </Svg>
+      <>
+        <Svg
+          {...props}
+          viewBox="24 24 48 48"
+          role="progressbar"
+          height={size}
+          width={size}
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <TrackCircle
+            style={trackStyle}
+            cx={48}
+            cy={48}
+            r={(48 - thickness) / 2}
+            fill="none"
+            strokeWidth={thickness}
+            stroke={token.background}
+          />
+          <ProgressCircle
+            style={trackStyle}
+            cx={48}
+            cy={48}
+            r={(48 - thickness) / 2}
+            fill="none"
+            strokeLinecap="round"
+            strokeWidth={thickness}
+            strokeDasharray={variant === 'determinate' ? circumference : 48}
+            stroke={token.entities.progress.background}
+          />
+        </Svg>
+        <SrOnlyOutput>{getProgressFormatted()}</SrOnlyOutput>
+      </>
     )
   },
 )
