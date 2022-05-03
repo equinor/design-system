@@ -55,8 +55,6 @@ render(<App />, document.getElementById('root'))
 
 ## Components
 
-### Available ✅
-
 - Accordion
 - Banner
 - Breadcrumbs
@@ -87,13 +85,3 @@ render(<App />, document.getElementById('root'))
 - Tooltip
 - TopBar
 - Typography
-
-### In progress 👷‍♀️
-
-- Navigation Drawer
-
-### TODO 🛠️
-
-- App launcher
-- Stepper
-
