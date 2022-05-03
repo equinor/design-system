@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Progress, StarProgressProps } from '../../..'
+import { useState, useEffect, useRef } from 'react'
+import { Progress, StarProgressProps, Button } from '../../..'
 import { ComponentMeta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
 import { Stack as SBStack } from './../../../../.storybook/components'
@@ -55,3 +56,43 @@ export const Sizes: Story<StarProgressProps> = () => (
     <Progress.Star size={48} />
   </Stack>
 )
+
+export const Accessibility: Story<StarProgressProps> = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timer.current) clearTimeout(timer.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isLoading && buttonRef.current && timer.current) {
+      buttonRef.current.focus()
+    }
+  }, [isLoading])
+
+  const resetProgress = () => {
+    setIsLoading(true)
+    timer.current = setTimeout(() => {
+      setIsLoading(false)
+    }, 6000)
+  }
+  return (
+    <Stack aria-busy={isLoading} aria-live="polite">
+      {isLoading ? (
+        <Progress.Star size={48} aria-label="Loading star accessibility test" />
+      ) : (
+        <Button
+          ref={buttonRef}
+          onClick={resetProgress}
+          aria-disabled={isLoading}
+        >
+          Click to load
+        </Button>
+      )}
+    </Stack>
+  )
+}
