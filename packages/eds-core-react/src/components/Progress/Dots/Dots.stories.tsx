@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useState, useEffect, useRef } from 'react'
 import { Progress, DotProgressProps, Typography, Button } from '../../..'
 import { ComponentMeta, Story } from '@storybook/react'
 import { Stack as SBStack } from './../../../../.storybook/components'
@@ -73,3 +74,35 @@ export const InsideButton: Story<DotProgressProps> = () => (
     </Button>
   </Stack>
 )
+
+export const Accessibility: Story<DotProgressProps> = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timer.current) clearTimeout(timer.current)
+    }
+  }, [])
+
+  const resetProgress = () => {
+    setIsLoading(true)
+    timer.current = setTimeout(() => {
+      setIsLoading(false)
+    }, 6000)
+  }
+  return (
+    <Stack aria-busy={isLoading} aria-live="polite">
+      <Button onClick={resetProgress} aria-disabled={isLoading}>
+        {isLoading ? (
+          <Progress.Dots
+            id="progress-bar-dots-accessibility"
+            aria-label="Loading dots accessibility test"
+          />
+        ) : (
+          <span>Click to load</span>
+        )}
+      </Button>
+    </Stack>
+  )
+}
