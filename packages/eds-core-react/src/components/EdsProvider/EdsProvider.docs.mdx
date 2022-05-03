@@ -2,16 +2,27 @@ import { Links, PropsTable, Story } from './../../../.storybook/components'
 import { Divider } from '.'
 
 # EdsProvider
-Provider
+Provider used to set global values for EDS react components.
 
 <Links 
     figmaUrl="https://www.figma.com/file/luNobpDIWTuQ9rhyovGLBI/Desktop?node-id=4950%3A0"
     npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+    ariaUrl="https://www.w3.org/TR/wai-aria-practices/"
 />
 
 <PropsTable />
 
 ## Usage
+
+
+Use the `EdsProvider` to encapsulate your whole application.
+```typescript
+import { EdsProvider } from '@equinor/eds-core-react'
+
+<EdsProvider>
+// Your app here
+</EdsProvider>
+```
 
 
 ## Examples
@@ -20,6 +31,8 @@ Provider
 
 
 Example of how to change density in your application using EDS components.
+
+It‘s important **not** to use `compact` as a direct value to density as that breaks comformity to WCAG 2.1 guidelines and makes it harder to use the application for users with either permanent disabilities, or temporary disabilities.
 
 <Story id="edsprovider--introduction"/>
 
