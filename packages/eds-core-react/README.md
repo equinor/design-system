@@ -55,31 +55,40 @@ render(<App />, document.getElementById('root'))
 
 ## Components
 
-### Available ✅
-
 - Accordion
+- Avatar
 - Banner
 - Breadcrumbs
 - Button
-- Cards
-- Chips
+- Card
+- Checkbox
+- Chip
 - Dialog
 - Divider
+- EdsProvider
 - Icon
+- Input
+- Label
 - List
 - Menu
 - Pagination
 - Popover
-- Progress indicators
+- Progress
+  - Circular
+  - Dots
+  - Linear
+  - Star
+- Radio
 - Scrim
 - Search
-- Select (Native Select)
-- Single Select
-- Multi Select
-- Selection Controls
+- Select
+  - Native Select
+  - Single Select
+  - Multi Select
 - Side Sheet
 - Slider
 - Snackbar
+- Switch
 - Table
 - Table of contents
 - Tabs
@@ -87,13 +96,3 @@ render(<App />, document.getElementById('root'))
 - Tooltip
 - TopBar
 - Typography
-
-### In progress 👷‍♀️
-
-- Navigation Drawer
-
-### TODO 🛠️
-
-- App launcher
-- Stepper
-
