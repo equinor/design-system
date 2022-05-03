@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useState, useEffect, useRef } from 'react'
 import { Progress, CircularProgressProps, Button, Typography } from '../../..'
 import { ComponentMeta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
@@ -41,10 +42,53 @@ export const Indeterminate: Story<CircularProgressProps> = () => {
 }
 
 export const Determinate: Story<CircularProgressProps> = () => {
-  const progress = useMockProgress(0)
+  const [progress, setProgress] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timer.current) clearInterval(timer.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isLoading && buttonRef.current && timer.current) {
+      buttonRef.current.focus()
+    }
+  }, [isLoading])
+
+  const resetProgress = () => {
+    setProgress(0)
+    setIsLoading(true)
+    timer.current = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === null) return null
+        if (oldProgress === 100) {
+          setIsLoading(false)
+          return 100
+        }
+        const diff = Math.random() * 10
+        return Math.min(oldProgress + diff, 100)
+      })
+    }, 1500)
+  }
+
   return (
-    <Stack>
-      <Progress.Circular variant="determinate" value={progress} />
+    <Stack aria-busy={isLoading} aria-live="polite">
+      {isLoading ? (
+        <Progress.Circular
+          id="progress-bar-circular"
+          variant="determinate"
+          aria-label="loading determinate progress test"
+          value={progress}
+        />
+      ) : (
+        <Button ref={buttonRef} onClick={resetProgress}>
+          Trigger loader
+        </Button>
+      )}
     </Stack>
   )
 }
@@ -88,3 +132,39 @@ export const InsideButton: Story<CircularProgressProps> = () => (
   </Stack>
 )
 InsideButton.storyName = 'Inside button'
+
+export const Accessibility: Story<CircularProgressProps> = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timer.current) clearTimeout(timer.current)
+    }
+  }, [])
+
+  const resetProgress = () => {
+    setIsLoading(true)
+    timer.current = setTimeout(() => {
+      setIsLoading(false)
+    }, 6000)
+  }
+  return (
+    <Stack aria-busy={isLoading} aria-live="polite">
+      <Button onClick={resetProgress} aria-disabled={isLoading}>
+        {isLoading ? (
+          <>
+            <Progress.Circular
+              size={16}
+              color="neutral"
+              aria-label="Loading circular accessibility test"
+            />
+            <span aria-hidden="true">Loading...</span>
+          </>
+        ) : (
+          <span>Click to load</span>
+        )}
+      </Button>
+    </Stack>
+  )
+}
