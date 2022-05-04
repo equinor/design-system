@@ -33,7 +33,7 @@ describe('Label', () => {
     const labelText = 'Some label'
     render(<Label label={labelText} />)
 
-    expect(screen.queryByText(labelText)).toBeInTheDocument()
+    expect(screen.getByText(labelText)).toBeInTheDocument()
   })
 
   it('Can add a meta text', () => {
@@ -41,7 +41,7 @@ describe('Label', () => {
     const metaText = 'Meta'
     render(<Label label={labelText} meta={metaText} />)
 
-    expect(screen.queryByText(metaText)).toBeInTheDocument()
+    expect(screen.getByText(metaText)).toBeInTheDocument()
   })
 
   const StyledLabel = styled(Label)`

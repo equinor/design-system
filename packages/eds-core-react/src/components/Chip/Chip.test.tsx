@@ -60,7 +60,7 @@ describe('Chips', () => {
   it('Has provided text', () => {
     const chipText = 'hello, I am a chip'
     render(<Chip>{chipText}</Chip>)
-    expect(screen.queryByText(chipText)).toBeDefined()
+    expect(screen.getByText(chipText)).toBeDefined()
   })
   it('Has provided Icon', () => {
     const chipText = 'hello, I am a chip'
@@ -71,8 +71,8 @@ describe('Chips', () => {
         {chipText}
       </Chip>,
     )
-    expect(screen.queryByText(chipText)).toBeDefined()
-    expect(screen.queryByTestId(iconTestId)).toBeDefined()
+    expect(screen.getByText(chipText)).toBeDefined()
+    expect(screen.getByTestId(iconTestId)).toBeDefined()
   })
   it('Has correct styling when Icon is provided', () => {
     const chipText = 'hello, I am a chip'
@@ -107,8 +107,8 @@ describe('Chips', () => {
         {chipText}
       </Chip>,
     )
-    expect(screen.queryByText(chipText)).toBeDefined()
-    expect(screen.queryByTestId(avatarTestId)).toBeDefined()
+    expect(screen.getByText(chipText)).toBeDefined()
+    expect(screen.getByTestId(avatarTestId)).toBeDefined()
     expect(screen.getByAltText('avatar')).toHaveAttribute('src', imageUrl)
   })
 
@@ -122,7 +122,7 @@ describe('Chips', () => {
         {chipText}
       </Chip>,
     )
-    const chip = screen.queryByText(chipText)
+    const chip = screen.getByText(chipText)
     const avatar = screen.queryByTestId(avatarTestId)
     expect(chip).toBeDefined()
     expect(chip).toHaveStyleRule('padding-left', '4px')

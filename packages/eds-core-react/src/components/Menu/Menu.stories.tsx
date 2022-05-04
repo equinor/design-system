@@ -46,6 +46,7 @@ const onClick = (event: React.MouseEvent) => {
 }
 
 export const Default: Story<MenuProps> = (args) => {
+  const { open: argsOpen } = args
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
@@ -58,9 +59,9 @@ export const Default: Story<MenuProps> = (args) => {
 
   // This is just for storybook and changes done via controls addon
   useEffect(() => {
-    setIsOpen(args.open)
+    setIsOpen(argsOpen)
     // eslint-disable-next-line react/destructuring-assignment
-  }, [args.open])
+  }, [argsOpen])
 
   return (
     <StoryCenter>

@@ -34,7 +34,7 @@ describe('DatePicker', () => {
 
       inputElement.focus()
       return Promise.resolve().then(() => {
-        expect(screen.queryByText(/28/i)).toBeTruthy()
+        expect(screen.getByText(/28/i)).toBeTruthy()
       })
     })
   })

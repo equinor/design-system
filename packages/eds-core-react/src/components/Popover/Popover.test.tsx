@@ -31,9 +31,9 @@ describe('Popover', () => {
         <div>some random content</div>
       </StyledPopover>,
     )
-    const container = screen.getByTestId('popover')
+    const container = await screen.findByTestId('popover')
 
-    await waitFor(() => expect(container).toMatchSnapshot())
+    expect(container).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
     const { container } = render(
@@ -70,6 +70,8 @@ describe('Popover', () => {
     const container = screen.getByTestId('popover')
     await waitFor(() => {
       expect(container).toBeDefined()
+    })
+    await waitFor(() => {
       expect(container).toHaveAttribute('data-popper-placement', 'right-start')
     })
   })
@@ -96,7 +98,7 @@ describe('Popover', () => {
     const placement = 'top'
     render(<TestPopover placement={placement} />)
     await waitFor(() => {
-      expect(screen.queryByText(placement)).toBeDefined()
+      expect(screen.getByText(placement)).toBeDefined()
     })
   })
   it("doesn't crash if Popover Content children is undefined", async () => {
@@ -108,7 +110,7 @@ describe('Popover', () => {
       </TestPopover>,
     )
     await waitFor(() => {
-      expect(screen.queryByText(placement)).toBeDefined()
+      expect(screen.getByText(placement)).toBeDefined()
     })
   })
   it("doesn't crash if Popover Title children is undefined", async () => {
@@ -120,7 +122,7 @@ describe('Popover', () => {
       </TestPopover>,
     )
     await waitFor(() => {
-      expect(screen.queryByText(placement)).toBeDefined()
+      expect(screen.getByText(placement)).toBeDefined()
     })
   })
 })

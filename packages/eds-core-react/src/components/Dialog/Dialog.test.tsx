@@ -98,9 +98,9 @@ describe('Dialog', () => {
         </Actions>
       </Dialog>,
     )
-    expect(screen.queryByTestId(testIdTitle)).toBeDefined()
-    expect(screen.queryByTestId(testIdCenter)).toBeDefined()
-    expect(screen.queryByTestId(testIdActions)).toBeDefined()
+    expect(screen.getByTestId(testIdTitle)).toBeDefined()
+    expect(screen.getByTestId(testIdCenter)).toBeDefined()
+    expect(screen.getByTestId(testIdActions)).toBeDefined()
   })
   it('Has scrollable content when scrollable props is present', () => {
     const testIdCenter = 'dialog-test-center'

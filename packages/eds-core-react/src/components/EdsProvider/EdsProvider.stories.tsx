@@ -17,6 +17,8 @@ export default {
 } as ComponentMeta<typeof EdsProvider>
 
 export const Introduction: Story<EdsProviderProps> = (args) => {
+  const { density: argsDensity } = args
+
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
   const [density, setDensity] =
     useState<EdsProviderProps['density']>('comfortable')
@@ -31,9 +33,9 @@ export const Introduction: Story<EdsProviderProps> = (args) => {
 
   // This is just for storybook and changes done via controls addon
   useEffect(() => {
-    setDensity(args.density)
+    setDensity(argsDensity)
     // eslint-disable-next-line react/destructuring-assignment
-  }, [args.density])
+  }, [argsDensity])
 
   return (
     <Stack direction="column" align="inherit">

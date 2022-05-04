@@ -179,7 +179,7 @@ export type SliderProps = {
     newValue: number[] | number,
   ) => void
   /** Function for formatting the output, e.g. with dates */
-  outputFunction?: (text: number) => string | number
+  outputFunction?: (text: number) => string
   /** Max value */
   max?: number
   /**  Min value */

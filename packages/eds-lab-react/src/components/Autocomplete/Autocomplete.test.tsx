@@ -15,7 +15,6 @@ import { Autocomplete } from '.'
 
 const itemObjects = [{ label: 'One' }, { label: 'Two' }, { label: 'Three' }]
 const items = ['One', 'Two', 'Three']
-const optionLabel = (item: { label: 'item' }) => item.label
 const labelText = 'Select label test'
 
 afterEach(cleanup)

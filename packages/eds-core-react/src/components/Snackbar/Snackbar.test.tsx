@@ -66,7 +66,7 @@ describe('Snackbar', () => {
         {message}
       </Snackbar>,
     )
-    expect(screen.queryByText(message)).toBeDefined()
+    expect(screen.getByText(message)).toBeDefined()
     await waitForElementToBeRemoved(() => screen.queryByText(message))
   })
   it('Can have one button attached', () => {
@@ -79,7 +79,7 @@ describe('Snackbar', () => {
         </Snackbar.Action>
       </Snackbar>,
     )
-    expect(screen.queryByText(buttonText)).toBeDefined()
+    expect(screen.getByText(buttonText)).toBeDefined()
   })
   it('Placement prop is placing the snackbar as expected', () => {
     render(

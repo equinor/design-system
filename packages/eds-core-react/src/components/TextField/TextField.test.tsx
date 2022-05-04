@@ -47,7 +47,7 @@ describe('TextField', () => {
     const labelText = 'Some label'
     render(<TextField id="test-label" label={labelText} />)
 
-    expect(screen.queryByText(labelText)).toBeInTheDocument()
+    expect(screen.getByText(labelText)).toBeInTheDocument()
   })
 
   it('Has correct default value', () => {

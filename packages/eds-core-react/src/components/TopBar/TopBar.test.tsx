@@ -90,7 +90,7 @@ describe('TopBar', () => {
   it('Has provided title', () => {
     const title = 'Some application title'
     render(<TopBar title={title} />)
-    expect(screen.queryByText(title)).toBeDefined()
+    expect(screen.getByText(title)).toBeDefined()
   })
 
   it('Has sticky position in container', () => {

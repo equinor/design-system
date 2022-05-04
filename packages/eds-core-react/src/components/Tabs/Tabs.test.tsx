@@ -38,7 +38,7 @@ const TabsWithPanels = ({
 }) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
 
-  const handleChange = (index) => {
+  const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
@@ -101,13 +101,13 @@ describe('Tabs', () => {
         </Tabs.List>
       </Tabs>,
     )
-    expect(screen.queryByRole('tablist')).toBeInTheDocument()
+    expect(screen.getByRole('tablist')).toBeInTheDocument()
     expect(screen.queryAllByRole('tab')).toHaveLength(3)
   })
   it('Merges forwarded and local refs', () => {
     render(<TabsWithRefs />)
-    expect(screen.queryByText('Active tab')).toBeInTheDocument()
-    expect(screen.queryByText('Inactive tab')).toBeInTheDocument()
+    expect(screen.getByText('Active tab')).toBeInTheDocument()
+    expect(screen.getByText('Inactive tab')).toBeInTheDocument()
   })
   it('Switches tabpanel when tab is clicked', () => {
     render(<TabsWithPanels />)
@@ -137,7 +137,7 @@ describe('Tabs', () => {
   it("Doesn't crash if no children is provided", () => {
     const testId = 'tabs'
     render(<Tabs data-testid={testId} />)
-    expect(screen.queryByTestId(testId)).toBeDefined()
+    expect(screen.getByTestId(testId)).toBeDefined()
   })
   it("Doesn't crash if no children is provided to Tabs.Panel", () => {
     const testId = 'tabspanel'
@@ -151,7 +151,7 @@ describe('Tabs', () => {
         </Tabs.Panels>
       </Tabs>,
     )
-    expect(screen.queryByTestId(testId)).toBeDefined()
+    expect(screen.getByTestId(testId)).toBeDefined()
   })
   it("Doesn't crash if no children is provided to Tabs.Tab", () => {
     const testId = 'tab'
@@ -165,7 +165,7 @@ describe('Tabs', () => {
         </Tabs.Panels>
       </Tabs>,
     )
-    expect(screen.queryByTestId(testId)).toBeDefined()
+    expect(screen.getByTestId(testId)).toBeDefined()
   })
   it("Doesn't crash if no children is provided to Tabs.List or Tabs.Panels", () => {
     const tablist = 'tablist'
@@ -176,7 +176,7 @@ describe('Tabs', () => {
         <Tabs.Panels data-testid={tabpanels}></Tabs.Panels>
       </Tabs>,
     )
-    expect(screen.queryByTestId(tablist)).toBeDefined()
-    expect(screen.queryByTestId(tabpanels)).toBeDefined()
+    expect(screen.getByTestId(tablist)).toBeDefined()
+    expect(screen.getByTestId(tabpanels)).toBeDefined()
   })
 })

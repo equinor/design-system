@@ -127,8 +127,8 @@ describe('Card', () => {
       </Card>,
     )
 
-    expect(screen.queryByText(title)).toBeDefined()
-    expect(screen.queryByText(subtitle)).toBeDefined()
+    expect(screen.getByText(title)).toBeDefined()
+    expect(screen.getByText(subtitle)).toBeDefined()
   })
   it('Has provided image source and placement in Media', () => {
     const fullWidth = 'fullWidth'
@@ -141,8 +141,8 @@ describe('Card', () => {
       </Card>,
     )
 
-    expect(screen.queryByText(fullWidth)).toBeDefined()
-    expect(screen.queryByText(src)).toBeDefined()
+    expect(screen.getByText(fullWidth)).toBeDefined()
+    expect(screen.getByText(src)).toBeDefined()
   })
   it('CardActions items are placed correctly', () => {
     render(

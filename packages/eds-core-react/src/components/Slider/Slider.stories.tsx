@@ -121,8 +121,8 @@ RangeSliderWithInterval.decorators = [
 ]
 
 export const RangeSliderWithDates: Story<SliderProps> = () => {
-  const outputFunction = (value) => {
-    const date = new Date(parseInt(value, 10))
+  const outputFunction = (value: number) => {
+    const date = new Date(value)
     return date.toLocaleDateString('nb-NO', {
       day: 'numeric',
       month: 'numeric',

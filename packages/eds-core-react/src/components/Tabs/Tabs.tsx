@@ -36,7 +36,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   const [tabsFocused, setTabsFocused] = useState(false)
   const [listenerAttached, setListenerAttached] = useState(false)
 
-  let blurTimer
+  let blurTimer: NodeJS.Timeout
 
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     setListenerAttached(false)
