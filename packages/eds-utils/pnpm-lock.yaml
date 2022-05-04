@@ -36,7 +36,7 @@ specifiers:
   rollup-plugin-delete: ^2.0.0
   styled-components: 5.3.0
   tsc-watch: ^4.6.0
-  typescript: ^4.6.3
+  typescript: ^4.6.4
 
 dependencies:
   '@babel/runtime': 7.17.8
@@ -75,8 +75,8 @@ devDependencies:
   rollup: 2.67.1
   rollup-plugin-delete: 2.0.0
   styled-components: 5.3.0_react-dom@17.0.2+react@17.0.2
-  tsc-watch: 4.6.0_typescript@4.6.3
-  typescript: 4.6.3
+  tsc-watch: 4.6.0_typescript@4.6.4
+  typescript: 4.6.4
 
 packages:
 
@@ -4602,7 +4602,7 @@ packages:
     resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
     dev: true
 
-  /tsc-watch/4.6.0_typescript@4.6.3:
+  /tsc-watch/4.6.0_typescript@4.6.4:
     resolution: {integrity: sha512-DRMADjFe44EDWb+YMIOj4b83UrU6le27L3/o0/9FlmA01ikFd5Dl9RD5h1hpeh0mQdIqXvwfHZszCcjhH3bAmQ==}
     engines: {node: '>=8.17.0'}
     hasBin: true
@@ -4614,7 +4614,7 @@ packages:
       ps-tree: 1.2.0
       string-argv: 0.1.2
       strip-ansi: 6.0.1
-      typescript: 4.6.3
+      typescript: 4.6.4
     dev: true
 
   /type-check/0.3.2:
@@ -4640,8 +4640,8 @@ packages:
       is-typedarray: 1.0.0
     dev: true
 
-  /typescript/4.6.3:
-    resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
+  /typescript/4.6.4:
+    resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
