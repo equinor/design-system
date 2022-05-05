@@ -38,7 +38,6 @@ export default {
 } as ComponentMeta<typeof Popover>
 
 export const Introduction: Story<PopoverProps> = (args) => {
-  const { open: argsOpen } = args
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => {
@@ -52,9 +51,10 @@ export const Introduction: Story<PopoverProps> = (args) => {
   const referenceElement = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    setIsOpen(argsOpen)
     // eslint-disable-next-line react/destructuring-assignment
-  }, [argsOpen])
+    setIsOpen(args.open)
+    // eslint-disable-next-line react/destructuring-assignment
+  }, [args.open])
 
   return (
     <Stack>
