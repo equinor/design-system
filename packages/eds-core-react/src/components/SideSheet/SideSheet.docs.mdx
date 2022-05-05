@@ -1,5 +1,6 @@
 import { Links, PropsTable, Story } from './../../../.storybook/components'
 import { SideSheet } from '.'
+import { Icon } from './../Icon'
 
 # SideSheet
 
@@ -29,13 +30,15 @@ A toggleable area that is anchored to the edge of the viewport with supplementar
 import { SideSheet } from '@equinor/eds-core-react'
 
 <SideSheet>
-  <Child>Children</Child>
+  // your content here
 </SideSheet>
 ```
 
 ## Examples
 
 ### Placement
+
+To open `SideSheet` press <Icon name="filter_list" size={18} color="#007079" /> icon.
 
 <ul>
   <li>Side sheets are anchored to the left or right edge of the screen.</li>
@@ -45,7 +48,9 @@ import { SideSheet } from '@equinor/eds-core-react'
 
 <Story id="surfaces-sidesheet--placement" />
 
-### Scrolling
+### Scrollable
+
+To open `SideSheet` press <Icon name="details" size={18} color="#007079" /> icon.
 
 <ul>
   <li>Side sheets can be vertically scrolled independent of the rest of the UI.</li>
@@ -53,4 +58,4 @@ import { SideSheet } from '@equinor/eds-core-react'
   <li>Side sheets cannot be horizontally scrolled.</li>
 </ul>
 
-<Story id="surfaces-sidesheet--scrolling" />
+<Story id="surfaces-sidesheet--scrollable" />
