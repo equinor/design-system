@@ -15,7 +15,7 @@ specifiers:
   eslint-plugin-react: ^7.29.4
   eslint-plugin-react-hooks: ^4.5.0
   eslint-plugin-testing-library: ^5.3.1
-  jest-axe: ^5.0.1
+  jest-axe: ^6.0.0
   prettier: 2.6.2
   typescript: ^4.6.4
 
@@ -34,7 +34,7 @@ devDependencies:
   eslint-plugin-react: 7.29.4_eslint@8.14.0
   eslint-plugin-react-hooks: 4.5.0_eslint@8.14.0
   eslint-plugin-testing-library: 5.3.1_eslint@8.14.0+typescript@4.6.4
-  jest-axe: 5.0.1
+  jest-axe: 6.0.0
   prettier: 2.6.2
   typescript: 4.6.4
 
@@ -595,11 +595,6 @@ packages:
 
   /axe-core/3.5.6:
     resolution: {integrity: sha512-LEUDjgmdJoA3LqklSTwKYqkjcZ4HKc4ddIYGSAiSkr46NTjzg2L9RNB+lekO9P7Dlpa87+hBtzc2Fzn/+GUWMQ==}
-    engines: {node: '>=4'}
-    dev: true
-
-  /axe-core/4.2.1:
-    resolution: {integrity: sha512-evY7DN8qSIbsW2H/TWQ1bX3sXN1d4MNb5Vb4n7BzPuCwRHdkZ1H2eNLuSh73EoQqkGKUtju2G2HCcjCfhvZIAA==}
     engines: {node: '>=4'}
     dev: true
 
@@ -1451,11 +1446,11 @@ packages:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
     dev: true
 
-  /jest-axe/5.0.1:
-    resolution: {integrity: sha512-MMOWA6gT4pcZGbTLS8ZEqABH08Lnj5bInfLPpn9ADWX2wFF++odbbh8csmSfkwKjHaioVPzlCtIypAtxFDx/rw==}
+  /jest-axe/6.0.0:
+    resolution: {integrity: sha512-gAh/2zoWii4Rbhe6IUIo5TTiseGJDCitFnDFwBNpIuaOciyQgVZue6jtd4W7oMoKHewKoRSuIol7t/MuGx+mqg==}
     engines: {node: '>= 10.0.0'}
     dependencies:
-      axe-core: 4.2.1
+      axe-core: 4.4.1
       chalk: 4.1.0
       jest-matcher-utils: 27.0.2
       lodash.merge: 4.6.2
@@ -1480,7 +1475,7 @@ packages:
     resolution: {integrity: sha512-Qczi5xnTNjkhcIB0Yy75Txt+Ez51xdhOxsukN7awzq2auZQGPHcQrJ623PZj0ECDEMOk2soxWx05EXdXGd1CbA==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-diff: 27.5.1
       jest-get-type: 27.5.1
       pretty-format: 27.5.1
