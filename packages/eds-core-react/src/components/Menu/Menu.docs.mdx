@@ -1,0 +1,81 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Menu } from '.'
+
+# Menu
+
+A temporary list of actions or functions, known as a `dropdown`. 
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/wai-aria-practices/#menubutton"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17627%3A3322"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/21aa80-menu/b/053059"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Menu/Menu.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+></Links>
+
+<Story id="navigation-menu--introduction" />
+<PropsTable />
+
+## Usage
+
+A `Menu` displays a list of choices on a temporary surface. They appear when users interact with a button.
+
+<ul>
+  <li>Menus should be easy to open, close, and interact with.</li>
+  <li>Menu content should be suited to user needs.</li>
+  <li>Menu items should be easy to scan.</li>
+</ul>
+
+```tsx
+import { Menu } from '@equinor/eds-core-react'
+
+const Demo = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
+
+  const openMenu = () => {
+    setIsOpen(true)
+  }
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+    return (
+        <>
+     <Button
+        ref={setAnchorEl}
+        id="anchor-default"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-controls="menu-default"
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
+      >
+        Click to open Menu!
+      </Button>
+      <Menu
+        open={isOpen}
+        id="menu-default"
+        aria-labelledby="anchor-default"
+        onClose={closeMenu}
+        anchorEl={anchorEl}
+      >
+        <Menu.Item onClick={onClick}>Pressure</Menu.Item>
+        <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+        <Menu.Item onClick={onClick}>Cable</Menu.Item>
+      </Menu>
+    </>
+  )
+}
+```
+
+## Examples
+
+### Complex
+
+<Story id="navigation-menu--complex" />
+
+### Compact
+
+Compact `Menu` using `EdsProvider`. 
+
+<Story id="navigation-menu--compact" />
