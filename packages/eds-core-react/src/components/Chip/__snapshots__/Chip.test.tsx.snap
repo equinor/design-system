@@ -21,7 +21,7 @@ exports[`Chips Matches snapshot 1`] = `
   padding-left: 4px;
   padding-right: 8px;
   margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(150,2,40,1));
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   font-family: Equinor;
   font-size: 0.750rem;
   font-weight: 500;
@@ -30,7 +30,7 @@ exports[`Chips Matches snapshot 1`] = `
 }
 
 .c0 svg {
-  fill: var(--eds_interactive_primary__resting,rgba(150,2,40,1));
+  fill: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
 }
 
 .c0:focus {

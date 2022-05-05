@@ -52,7 +52,7 @@ exports[`Input Matches snapshot 1`] = `
 .c0:focus {
   outline-offset: 0;
   box-shadow: none;
-  outline: 2px solid var(--eds_interactive_primary__resting,rgba(150,2,40,1));
+  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   outline-offset: 0px;
 }
 

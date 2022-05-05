@@ -49,7 +49,7 @@ exports[`Breadcrumbs Matches snapshot 1`] = `
   .c3:hover {
     -webkit-text-decoration: underline;
     text-decoration: underline;
-    color: var(--eds_interactive_primary__resting,rgba(150,2,40,1));
+    color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
     cursor: pointer;
   }
 }
