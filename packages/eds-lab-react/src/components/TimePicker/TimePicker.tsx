@@ -205,8 +205,6 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       getItemProps,
       openMenu,
       selectedItem,
-      reset,
-      inputValue,
     } = useCombobox(comboboxProps)
 
     const openSelect = () => {

@@ -11,10 +11,8 @@ const {
   spacings: {
     comfortable: {
       small: spacingSmall,
-      medium_small: spacingMediumSmall,
       medium: spacingMedium,
       large: spacingLarge,
-      xx_small,
     },
   },
   elevation: { temporary_nav: boxShadow },

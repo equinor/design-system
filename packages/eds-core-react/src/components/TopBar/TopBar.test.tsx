@@ -82,9 +82,9 @@ describe('TopBar', () => {
         </Actions>
       </TopBar>,
     )
-    expect(screen.queryByTestId(testIdHeader)).toBeDefined()
-    expect(screen.queryByTestId(testIdCenter)).toBeDefined()
-    expect(screen.queryByTestId(testIdActions)).toBeDefined()
+    expect(screen.getByTestId(testIdHeader)).toBeDefined()
+    expect(screen.getByTestId(testIdCenter)).toBeDefined()
+    expect(screen.getByTestId(testIdActions)).toBeDefined()
   })
 
   it('Has provided title', () => {

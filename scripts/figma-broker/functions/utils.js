@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-
 const removeForbiddenCharacters = (str) => {
   if (str) {
     return str.replace(/[|]|[.]|[-]|[–]|[—]/g, '').replace(/^[0-9]*/, '')
@@ -58,7 +57,7 @@ export const toDictDeep = R.curry(R.reduce)(
       R.pipe(
         R.split(new RegExp(/(^[^_]+)/)),
         R.filter(isNotEmpty),
-        R.map(R.curry(R.replace)(/\_*/, '')),
+        R.map(R.curry(R.replace)(/_*/, '')),
         R.lensPath,
       )(name),
       value,
@@ -72,7 +71,7 @@ export const toDictMode = R.curry(R.reduce)(
       R.pipe(
         R.split(new RegExp(/(^[^_]+)/)),
         R.filter(isNotEmpty),
-        R.map(R.curry(R.replace)(/\_*/, '')),
+        R.map(R.curry(R.replace)(/_*/, '')),
         (path) => (mode === 'default' ? path : ['_modes', mode, ...path]),
         R.lensPath,
       )(name),

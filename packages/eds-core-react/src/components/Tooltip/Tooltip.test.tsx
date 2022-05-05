@@ -47,12 +47,10 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
     fireEvent.mouseOver(content)
 
-    await act(async () => {
-      const results = await axe(container)
+    const results = await axe(container)
 
-      await waitFor(() => {
-        expect(results).toHaveNoViolations()
-      })
+    await waitFor(() => {
+      expect(results).toHaveNoViolations()
     })
   })
   it('Should pass a11y test with id & placement', async () => {

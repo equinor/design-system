@@ -71,6 +71,8 @@ describe('usePopper', () => {
 
     await waitFor(() => {
       expect(menu).toHaveAttribute('data-popper-placement', 'top')
+    })
+    await waitFor(() => {
       expect(content).toHaveAttribute('style')
     })
   })
@@ -85,6 +87,8 @@ describe('usePopper', () => {
 
     await waitFor(() => {
       expect(menu).toHaveAttribute('data-popper-placement', 'left')
+    })
+    await waitFor(() => {
       expect(content.style.transform).toBe('translate(-20px, 0px)')
     })
   })

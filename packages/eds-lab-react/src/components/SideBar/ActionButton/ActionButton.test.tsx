@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, RenderOptions } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ActionButton, ActionButtonProps } from './index'
 import { SideBar } from '../SideBar'
@@ -12,10 +12,12 @@ const defaultProps: ActionButtonProps = {
   onAction: () => undefined,
 }
 
-const customRender = (ui: React.ReactElement, options?: any) =>
-  render(ui, { ...options })
+const customRender = (
+  ui: React.ReactElement,
+  options?: Omit<RenderOptions, 'queries'>,
+) => render(ui, { ...options })
 
-function SideBarWrapper(children: React.ReactChildren, isOpen?: boolean) {
+function SideBarWrapper(children: React.ReactElement, isOpen?: boolean) {
   return <SideBar open={isOpen}>{children}</SideBar>
 }
 
