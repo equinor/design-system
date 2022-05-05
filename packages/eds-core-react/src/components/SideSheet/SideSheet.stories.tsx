@@ -238,6 +238,7 @@ export const Scrollable: Story<SideSheetProps> = () => {
       <Scrim
         open={open}
         onClose={() => setOpen(!open)}
+        isDismissable
         style={{ position: 'absolute' }}
       >
         <SideSheet
