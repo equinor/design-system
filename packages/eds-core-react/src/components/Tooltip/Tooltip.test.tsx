@@ -1,12 +1,5 @@
 /* eslint-disable no-undef */
-import {
-  fireEvent,
-  waitFor,
-  render,
-  cleanup,
-  screen,
-  act,
-} from '@testing-library/react'
+import { fireEvent, render, cleanup, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'

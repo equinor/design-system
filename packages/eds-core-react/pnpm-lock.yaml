@@ -13,7 +13,7 @@ specifiers:
   '@equinor/eds-utils': workspace:*
   '@popperjs/core': 2.9.2
   '@rollup/plugin-babel': ^5.3.1
-  '@rollup/plugin-commonjs': ^19.0.2
+  '@rollup/plugin-commonjs': ^22.0.0
   '@rollup/plugin-node-resolve': ^13.3.0
   '@storybook/addon-a11y': ^6.4.22
   '@storybook/addon-actions': ^6.4.22
@@ -27,20 +27,20 @@ specifiers:
   '@testing-library/react-hooks': ^8.0.0
   '@testing-library/user-event': ^14.1.1
   '@types/jest': ^27.5.0
-  '@types/ramda': ^0.27.66
+  '@types/ramda': ^0.28.12
   '@types/react': ^17.0.44
   '@types/react-dom': ^17.0.16
   '@types/styled-components': ^5.1.25
   '@types/testing-library__jest-dom': ^5.14.3
   babel-loader: ^8.2.5
-  babel-plugin-styled-components: ^1.13.3
+  babel-plugin-styled-components: ^2.0.7
   downshift: ^6.1.7
   jest: ^28.0.3
   jest-environment-jsdom: ^28.0.2
   jest-styled-components: ^7.0.8
   js-file-download: ^0.4.12
   postcss: ^8.4.13
-  ramda: ^0.27.2
+  ramda: ^0.28.0
   react: ^17.0.2
   react-dom: ^17.0.2
   react-fast-compare: 3.2.0
@@ -49,8 +49,8 @@ specifiers:
   rollup: ^2.72.0
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-postcss: ^4.0.2
-  styled-components: 5.3.0
-  tsc-watch: ^4.6.2
+  styled-components: 5.3.5
+  tsc-watch: ^5.0.3
   typescript: ^4.6.4
 
 dependencies:
@@ -72,7 +72,7 @@ devDependencies:
   '@babel/preset-react': 7.16.7_@babel+core@7.17.10
   '@babel/preset-typescript': 7.16.7_@babel+core@7.17.10
   '@rollup/plugin-babel': 5.3.1_b2ace10b8392be11fbae66c6d89d8c0c
-  '@rollup/plugin-commonjs': 19.0.2_rollup@2.72.0
+  '@rollup/plugin-commonjs': 22.0.0_rollup@2.72.0
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.72.0
   '@storybook/addon-a11y': 6.4.22_b49bddbe4b905ced4713cb857cca91fa
   '@storybook/addon-actions': 6.4.22_b49bddbe4b905ced4713cb857cca91fa
@@ -86,26 +86,26 @@ devDependencies:
   '@testing-library/react-hooks': 8.0.0_b49bddbe4b905ced4713cb857cca91fa
   '@testing-library/user-event': 14.1.1
   '@types/jest': 27.5.0
-  '@types/ramda': 0.27.66
+  '@types/ramda': 0.28.12
   '@types/react': 17.0.44
   '@types/react-dom': 17.0.16
   '@types/styled-components': 5.1.25
   '@types/testing-library__jest-dom': 5.14.3
   babel-loader: 8.2.5_@babel+core@7.17.10
-  babel-plugin-styled-components: 1.13.3_styled-components@5.3.0
+  babel-plugin-styled-components: 2.0.7_styled-components@5.3.5
   jest: 28.0.3
-  jest-styled-components: 7.0.8_styled-components@5.3.0
+  jest-styled-components: 7.0.8_styled-components@5.3.5
   js-file-download: 0.4.12
   postcss: 8.4.13
-  ramda: 0.27.2
+  ramda: 0.28.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-hook-form: 7.30.0_react@17.0.2
   rollup: 2.72.0
   rollup-plugin-delete: 2.0.0
   rollup-plugin-postcss: 4.0.2_postcss@8.4.13
-  styled-components: 5.3.0_react-dom@17.0.2+react@17.0.2
-  tsc-watch: 4.6.2_typescript@4.6.4
+  styled-components: 5.3.5_react-dom@17.0.2+react@17.0.2
+  tsc-watch: 5.0.3_typescript@4.6.4
   typescript: 4.6.4
 
 packages:
@@ -1662,6 +1662,12 @@ packages:
       '@emotion/memoize': 0.7.4
     dev: true
 
+  /@emotion/is-prop-valid/1.1.2:
+    resolution: {integrity: sha512-3QnhqeL+WW88YjYbQL5gUIkthuMw7a0NGbZ7wfFVk2kg/CK5w8w5FFa0RzWjyY1+sujN0NWbtSHH6OJmWHtJpQ==}
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: true
+
   /@emotion/memoize/0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
     dev: true
@@ -2176,11 +2182,11 @@ packages:
       rollup: 2.72.0
     dev: true
 
-  /@rollup/plugin-commonjs/19.0.2_rollup@2.72.0:
-    resolution: {integrity: sha512-gBjarfqlC7qs0AutpRW/hrFNm+cd2/QKxhwyFa+srbg1oX7rDsEU3l+W7LAUhsAp9mPJMAkXDhLbQaVwEaE8bA==}
-    engines: {node: '>= 8.0.0'}
+  /@rollup/plugin-commonjs/22.0.0_rollup@2.72.0:
+    resolution: {integrity: sha512-Ktvf2j+bAO+30awhbYoCaXpBcyPmJbaEUYClQns/+6SNCYFURbvBiNbWgHITEsIgDDWCDUclWRKEuf8cwZCFoQ==}
+    engines: {node: '>= 12.0.0'}
     peerDependencies:
-      rollup: ^2.38.3
+      rollup: ^2.68.0
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.72.0
       commondir: 1.0.1
@@ -3813,8 +3819,8 @@ packages:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
-  /@types/ramda/0.27.66:
-    resolution: {integrity: sha512-i2YW+E2U6NfMt3dp0RxNcejox+bxJUNDjB7BpYuRuoHIzv5juPHkJkNgcUOu+YSQEmaWu8cnAo/8r63C0NnuVA==}
+  /@types/ramda/0.28.12:
+    resolution: {integrity: sha512-01lBa/nWJMmzc7uwvN4pzoePRWMURV1uRpchCpomAFW1MvMSyOtHjj8/WpaCFrrBQ8Mvpasm/CK3YpcWbVcZ3g==}
     dependencies:
       ts-toolbelt: 6.15.5
     dev: true
@@ -4626,8 +4632,8 @@ packages:
       - supports-color
     dev: true
 
-  /babel-plugin-styled-components/1.13.3_styled-components@5.3.0:
-    resolution: {integrity: sha512-meGStRGv+VuKA/q0/jXxrPNWEm4LPfYIqxooDTdmh8kFsP/Ph7jJG5rUPwUPX3QHUvggwdbgdGpo88P/rRYsVw==}
+  /babel-plugin-styled-components/2.0.7_styled-components@5.3.5:
+    resolution: {integrity: sha512-i7YhvPgVqRKfoQ66toiZ06jPNA3p6ierpfUuEWxNF+fV27Uv5gxBkf8KZLHUCc1nFA9j6+80pYoIpqCeyW3/bA==}
     peerDependencies:
       styled-components: '>= 2'
     dependencies:
@@ -4635,7 +4641,8 @@ packages:
       '@babel/helper-module-imports': 7.16.7
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
-      styled-components: 5.3.0_react-dom@17.0.2+react@17.0.2
+      picomatch: 2.3.1
+      styled-components: 5.3.5_react-dom@17.0.2+react@17.0.2
     dev: true
 
   /babel-plugin-syntax-jsx/6.18.0:
@@ -8379,14 +8386,14 @@ packages:
       - supports-color
     dev: true
 
-  /jest-styled-components/7.0.8_styled-components@5.3.0:
+  /jest-styled-components/7.0.8_styled-components@5.3.5:
     resolution: {integrity: sha512-0KE54d0yIzKcvtOv8eikyjG3rFRtKYUyQovaoha3nondtZzXYGB3bhsvYgEegU08Iry0ndWx2+g9f5ZzD4I+0Q==}
     engines: {node: '>= 12'}
     peerDependencies:
       styled-components: '>= 5'
     dependencies:
       css: 3.0.0
-      styled-components: 5.3.0_react-dom@17.0.2+react@17.0.2
+      styled-components: 5.3.5_react-dom@17.0.2+react@17.0.2
     dev: true
 
   /jest-util/26.6.2:
@@ -10425,8 +10432,8 @@ packages:
     resolution: {integrity: sha1-oAGr7bP/YQd9T/HVd9RN536NCjU=}
     dev: true
 
-  /ramda/0.27.2:
-    resolution: {integrity: sha512-SbiLPU40JuJniHexQSAgad32hfwd+DRUdwF2PlVuI5RZD0/vahUco7R8vD86J/tcEKKF9vZrUVwgtmGCqlCKyA==}
+  /ramda/0.28.0:
+    resolution: {integrity: sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==}
     dev: true
 
   /randombytes/2.1.0:
@@ -11683,9 +11690,10 @@ packages:
       inline-style-parser: 0.1.1
     dev: true
 
-  /styled-components/5.3.0_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-bPJKwZCHjJPf/hwTJl6TbkSZg/3evha+XPEizrZUGb535jLImwDUdjTNxXqjjaASt2M4qO4AVfoHJNe3XB/tpQ==}
+  /styled-components/5.3.5_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-ndETJ9RKaaL6q41B69WudeqLzOpY1A/ET/glXkNZ2T7dPjPqpPCXXQjDFYZWwNnE5co0wX+gTCqx9mfxTmSIPg==}
     engines: {node: '>=10'}
+    requiresBuild: true
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -11693,10 +11701,10 @@ packages:
     dependencies:
       '@babel/helper-module-imports': 7.16.7
       '@babel/traverse': 7.17.10_supports-color@5.5.0
-      '@emotion/is-prop-valid': 0.8.8
+      '@emotion/is-prop-valid': 1.1.2
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
-      babel-plugin-styled-components: 1.13.3_styled-components@5.3.0
+      babel-plugin-styled-components: 2.0.7_styled-components@5.3.5
       css-to-react-native: 3.0.0
       hoist-non-react-statics: 3.3.2
       react: 17.0.2
@@ -12023,8 +12031,8 @@ packages:
     resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
     dev: true
 
-  /tsc-watch/4.6.2_typescript@4.6.4:
-    resolution: {integrity: sha512-eHWzZGkPmzXVGQKbqQgf3BFpGiZZw1jQ29ZOJeaSe8JfyUvphbd221NfXmmsJUGGPGA/nnaSS01tXipUcyxAxg==}
+  /tsc-watch/5.0.3_typescript@4.6.4:
+    resolution: {integrity: sha512-Hz2UawwELMSLOf0xHvAFc7anLeMw62cMVXr1flYmhRuOhOyOljwmb1l/O60ZwRyy1k7N1iC1mrn1QYM2zITfuw==}
     engines: {node: '>=8.17.0'}
     hasBin: true
     peerDependencies:

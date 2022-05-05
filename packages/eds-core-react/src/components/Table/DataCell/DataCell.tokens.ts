@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import mergeDeepRight from 'ramda/src/mergeDeepRight'
+import { mergeDeepRight } from 'ramda'
 import type { ComponentToken } from '@equinor/eds-tokens'
 import { Variants } from '../Table.types'
 

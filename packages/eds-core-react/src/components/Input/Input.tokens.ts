@@ -1,6 +1,6 @@
 import { tokens } from '@equinor/eds-tokens'
 import type { ComponentToken } from '@equinor/eds-tokens'
-import mergeDeepRight from 'ramda/src/mergeDeepRight'
+import { mergeDeepRight } from 'ramda'
 
 const {
   colors: {
