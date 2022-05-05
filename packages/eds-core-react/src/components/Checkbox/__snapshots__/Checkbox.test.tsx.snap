@@ -107,7 +107,7 @@ exports[`Checkbox Matches snapshot 1`] = `
       <svg
         aria-hidden="true"
         class="c3"
-        fill="var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))"
+        fill="var(--eds_interactive_primary__resting, rgba(150, 2, 40, 1))"
         height="24"
         viewBox="0 0 24 24"
         width="24"

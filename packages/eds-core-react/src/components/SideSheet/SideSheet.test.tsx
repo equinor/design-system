@@ -34,7 +34,6 @@ describe('SideSheet', () => {
     const variant = 'large'
     render(<SideSheet variant={variant} title={title} />)
     expect(screen.getByText(title)).toBeDefined()
-    expect(screen.getByText(variant)).toBeDefined()
   })
   it('Can extend the css for the component', () => {
     render(<StyledSidesheet data-testid="sidesheet" />)

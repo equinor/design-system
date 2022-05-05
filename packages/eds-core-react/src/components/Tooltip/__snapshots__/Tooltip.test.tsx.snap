@@ -80,15 +80,18 @@ exports[`Tooltip Matches snapshot 1`] = `
 
 <div
   class="c0"
+  data-popper-escaped="true"
+  data-popper-placement="bottom"
+  data-popper-reference-hidden="true"
   id="snapshot-tooltip"
   open=""
   role="tooltip"
-  style="position: absolute; left: 0px; top: 0px;"
+  style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 14px);"
 >
   Tooltip
   <div
     class="c1 arrow"
-    style="position: absolute;"
+    style="position: absolute; left: 0px; transform: translate(0px, 0px);"
   >
     <svg
       class="c2 arrowSvg"

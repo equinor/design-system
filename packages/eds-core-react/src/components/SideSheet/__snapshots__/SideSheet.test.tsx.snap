@@ -50,7 +50,7 @@ exports[`SideSheet Matches snapshot 1`] = `
   border: 0px solid transparent;
   border-radius: 50%;
   margin: 0;
-  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  color: var(--eds_interactive_primary__resting,rgba(150,2,40,1));
   font-family: Equinor;
   font-size: var(--eds_button__font_size,0.875rem);
   font-weight: 500;
@@ -162,7 +162,6 @@ exports[`SideSheet Matches snapshot 1`] = `
 
 <div
     class="c0"
-    id="side-sheet"
     width="480px"
   >
     <div

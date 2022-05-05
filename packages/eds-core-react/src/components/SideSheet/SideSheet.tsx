@@ -61,7 +61,7 @@ export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
     // Controller must set open={false} when pressing the close button
     return (
       open && (
-        <StyledSideSheet {...props} id="side-sheet">
+        <StyledSideSheet {...props}>
           <Header>
             <Typography variant="h2">{title}</Typography>
             <Button
