@@ -6,6 +6,7 @@ import React, {
   MouseEvent,
   KeyboardEvent,
   useEffect,
+  ChangeEvent,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -168,10 +169,10 @@ export type SliderProps = {
   /** Components value, range of numbers */
   value: number[] | number
   /** Function to be called when value change */
-  onChange?: (event: React.ChangeEvent, newValue: number[] | number) => void
+  onChange?: (event: ChangeEvent, newValue: number[] | number) => void
   /** Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
-    event: React.KeyboardEvent | React.MouseEvent,
+    event: MouseEvent | KeyboardEvent,
     newValue: number[] | number,
   ) => void
   /** Function for formatting the output, e.g. with dates */
@@ -229,7 +230,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
 
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
-  const onValueChange = (event: React.ChangeEvent, valueArrIdx?: number) => {
+  const onValueChange = (event: ChangeEvent, valueArrIdx?: number) => {
     const target = event.target as HTMLInputElement
     const changedValue = parseFloat(target.value)
     if (isRangeSlider) {
@@ -249,15 +250,13 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
       onChange(event, [changedValue])
     }
   }
-  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       handleCommitedValue(event)
     }
   }
 
-  const handleCommitedValue = (
-    event: React.KeyboardEvent | React.MouseEvent,
-  ) => {
+  const handleCommitedValue = (event: KeyboardEvent | MouseEvent) => {
     if (onChangeCommitted) {
       onChangeCommitted(event, sliderValue)
     }
