@@ -73,6 +73,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-styled-components": "^2.0.7",
     "jest": "^28.0.3",
+    "jest-environment-jsdom": "^28.0.2",
     "jest-styled-components": "^7.0.8",
     "js-file-download": "^0.4.12",
     "postcss": "^8.4.13",
@@ -99,7 +100,6 @@
     "@equinor/eds-utils": "workspace:*",
     "@popperjs/core": "2.9.2",
     "downshift": "^6.1.7",
-    "jest-environment-jsdom": "^28.0.2",
     "react-fast-compare": "3.2.0",
     "react-popper": "2.2.5"
   },
