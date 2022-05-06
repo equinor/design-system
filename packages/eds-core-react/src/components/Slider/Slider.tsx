@@ -1,4 +1,4 @@
-import React, {
+import {
   forwardRef,
   useState,
   useRef,
@@ -169,7 +169,10 @@ export type SliderProps = {
   /** Components value, range of numbers */
   value: number[] | number
   /** Function to be called when value change */
-  onChange?: (event: ChangeEvent, newValue: number[] | number) => void
+  onChange?: (
+    event: ChangeEvent<HTMLInputElement>,
+    newValue: number[] | number,
+  ) => void
   /** Function to be called when value is committed by mouseup event */
   onChangeCommitted?: (
     event: MouseEvent | KeyboardEvent,
@@ -230,9 +233,11 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
 
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
-  const onValueChange = (event: ChangeEvent, valueArrIdx?: number) => {
-    const target = event.target as HTMLInputElement
-    const changedValue = parseFloat(target.value)
+  const onValueChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    valueArrIdx?: number,
+  ) => {
+    const changedValue = parseFloat(event.target.value)
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
       newValue[valueArrIdx] = changedValue
