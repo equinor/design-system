@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, fireEvent, act } from '@testing-library/react'
+import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { DatePicker } from './DatePicker'

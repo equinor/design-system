@@ -1,4 +1,4 @@
-import { MouseEvent, memo, forwardRef } from 'react'
+import { MouseEvent, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import {
@@ -103,14 +103,11 @@ export type MenuItemProps = {
   onClick?: (e: React.MouseEvent) => void
 } & React.HTMLAttributes<HTMLButtonElement>
 
-export const MenuItem = memo(
-  forwardRef<HTMLButtonElement, MenuItemProps>(function MenuItem(
-    { children, disabled, index = 0, onClick, ...rest },
-    ref,
-  ) {
+export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
+  function MenuItem({ children, disabled, index = 0, onClick, ...rest }, ref) {
     const { focusedIndex, setFocusedIndex, onClose } = useMenu()
 
-    const toggleFocus = (index_) => {
+    const toggleFocus = (index_: number) => {
       if (focusedIndex !== index_) {
         setFocusedIndex(index_)
       }
@@ -147,7 +144,7 @@ export const MenuItem = memo(
         <Content>{children}</Content>
       </Item>
     )
-  }),
+  },
 )
 
 MenuItem.displayName = 'MenuItem'

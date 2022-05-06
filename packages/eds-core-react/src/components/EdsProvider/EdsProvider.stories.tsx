@@ -17,8 +17,6 @@ export default {
 } as ComponentMeta<typeof EdsProvider>
 
 export const Introduction: Story<EdsProviderProps> = (args) => {
-  const { density: argsDensity } = args
-
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
   const [density, setDensity] =
     useState<EdsProviderProps['density']>('comfortable')

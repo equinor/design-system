@@ -37,12 +37,12 @@ export const WithTimePicker: Story<DatePickerProps> = ({
   popperPlacement,
 }: DatePickerProps) => {
   const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date): void => {
+  const onChanged = (date: Date): void => {
     setStartDate(date)
   }
 
   const [timeValue, setTimeValue] = useState('11:00')
-  const onTimeChanged = (date): void => {
+  const onTimeChanged = (date: string): void => {
     setTimeValue(date)
   }
 
@@ -82,7 +82,7 @@ export const DatePickerDisabledBefore: Story<DatePickerProps> = ({
   popperPlacement,
 }: DatePickerProps) => {
   const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date): void => {
+  const onChanged = (date: Date): void => {
     setStartDate(date)
   }
 
@@ -121,7 +121,7 @@ export const DatePickerDisabledFuture: Story<DatePickerProps> = ({
   popperPlacement,
 }: DatePickerProps) => {
   const [startDate, setStartDate] = useState(dateValue)
-  const onChanged = (date): void => {
+  const onChanged = (date: Date): void => {
     setStartDate(date)
   }
 

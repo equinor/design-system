@@ -37,11 +37,12 @@ const writeJSTokens = (tokens) => {
   // writeFile(`${TOKENS_DIR}`, 'index', 'js', `export { tokens } from './base'`)
 }
 
-const writeJsonTokens = (tokens) => {
-  writeResults(tokens, PATHS_.BASE_TOKENS_JSON, 'json')
-}
+// const writeJsonTokens = (tokens) => {
+//   writeResults(tokens, PATHS_.BASE_TOKENS_JSON, 'json')
+// }
 
 const writeCSSTokens = (tokens) => {
+  let typographyCss
   const { root, elements } = R.pipe(
     R.reduce(
       (acc, { name, value }) => {
@@ -58,7 +59,7 @@ const writeCSSTokens = (tokens) => {
           case 'clickbounds':
             return { ...acc, root: [...acc.root, makeClickboundsCss(value)] }
           case 'typography':
-            const typographyCss = makeTypographyCss(value)
+            typographyCss = makeTypographyCss(value)
             return {
               ...acc,
               root: [...acc.root, typographyCss.root],

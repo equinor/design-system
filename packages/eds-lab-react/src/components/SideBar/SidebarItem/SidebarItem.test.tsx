@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, RenderOptions } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { SidebarItem, SidebarItemProps } from './index'
 import { home } from '@equinor/eds-icons'
@@ -13,10 +13,12 @@ const defaultProps: SidebarItemProps = {
   link: 'home',
 }
 
-const customRender = (ui: React.ReactElement, options?: any) =>
-  render(ui, { ...options })
+const customRender = (
+  ui: React.ReactElement,
+  options?: Omit<RenderOptions, 'queries'>,
+) => render(ui, { ...options })
 
-function SideBarWrapper(children: React.ReactChildren, isOpen?: boolean) {
+function SideBarWrapper(children: React.ReactElement, isOpen?: boolean) {
   return <SideBar open={isOpen}>{children}</SideBar>
 }
 
