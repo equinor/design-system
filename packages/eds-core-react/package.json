@@ -50,6 +50,7 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@mdx-js/react": "^2.1.1",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
@@ -81,12 +82,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.30.0",
+    "react-is": "^18.1.0",
     "rollup": "^2.72.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "styled-components": "5.3.5",
     "tsc-watch": "^5.0.3",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.0"
   },
   "peerDependencies": {
     "react": ">=16.8",
