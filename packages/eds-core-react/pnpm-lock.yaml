@@ -11,7 +11,7 @@ specifiers:
   '@equinor/eds-icons': workspace:*
   '@equinor/eds-tokens': workspace:*
   '@equinor/eds-utils': workspace:*
-  '@mdx-js/react': ^2.1.1
+  '@mdx-js/react': 1.6.22
   '@popperjs/core': 2.9.2
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.0
@@ -73,7 +73,7 @@ devDependencies:
   '@babel/preset-env': 7.17.10_@babel+core@7.17.10
   '@babel/preset-react': 7.16.7_@babel+core@7.17.10
   '@babel/preset-typescript': 7.16.7_@babel+core@7.17.10
-  '@mdx-js/react': 2.1.1_react@17.0.2
+  '@mdx-js/react': 1.6.22_react@17.0.2
   '@rollup/plugin-babel': 5.3.1_b2ace10b8392be11fbae66c6d89d8c0c
   '@rollup/plugin-commonjs': 22.0.0_rollup@2.72.0
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.72.0
@@ -2077,16 +2077,6 @@ packages:
       react: 17.0.2
     dev: true
 
-  /@mdx-js/react/2.1.1_react@17.0.2:
-    resolution: {integrity: sha512-7zlZDf5xmWH8I0kFE4DG91COOkxjaW9DX5f1HWztZpFcVua2gJgMYfIkFaDpO/DH/tWi6Mz+OheW4194r15igg==}
-    peerDependencies:
-      react: '>=16'
-    dependencies:
-      '@types/mdx': 2.0.1
-      '@types/react': 17.0.44
-      react: 17.0.2
-    dev: true
-
   /@mdx-js/util/1.6.22:
     resolution: {integrity: sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==}
     dev: true
@@ -3812,10 +3802,6 @@ packages:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
     dependencies:
       '@types/unist': 2.0.6
-    dev: true
-
-  /@types/mdx/2.0.1:
-    resolution: {integrity: sha512-JPEv4iAl0I+o7g8yVWDwk30es8mfVrjkvh5UeVR2sYPpZCK44vrAPsbJpIS+rJAUxLgaSAMKTEH5Vn5qd9XsrQ==}
     dev: true
 
   /@types/minimatch/3.0.5:
