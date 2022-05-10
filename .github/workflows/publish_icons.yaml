@@ -47,6 +47,6 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Publish to npm
-        run: node_modules/.bin/pnpm --filter @equinor/eds-icons publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        run: node_modules/.bin/pnpm --filter ./packages/eds-icons publish --access public --no-git-checks --tag ${{ needs.setup.outputs.tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

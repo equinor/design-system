@@ -43,10 +43,10 @@ export const Dynamic: Story<PaginationProps> = () => {
   const [currentPageIndex, setCurrentPageIndex] = useState(6)
   const [itemsPerPage, setItemsPerPage] = useState(10)
 
-  const changePage = (pageIndex) => {
+  const changePage = (pageIndex: number) => {
     setCurrentPageIndex(pageIndex)
   }
-  const changePageSize = (perPage) => {
+  const changePageSize = (perPage: number) => {
     setItemsPerPage(perPage)
   }
 

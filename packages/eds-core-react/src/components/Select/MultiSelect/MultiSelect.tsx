@@ -188,6 +188,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           <StyledInputWrapper {...getComboboxProps()}>
             <PaddedInput
               {...getInputProps(
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 getDropdownProps({
                   preventKeyAction: isOpen,
                   disabled: disabled,

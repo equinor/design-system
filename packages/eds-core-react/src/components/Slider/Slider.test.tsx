@@ -7,7 +7,7 @@ import type { SliderProps } from './Slider'
 
 afterEach(cleanup)
 
-const getUnixTime = (iso) => {
+const getUnixTime = (iso: string) => {
   return new Date(iso).getTime()
 }
 
@@ -15,8 +15,8 @@ const DateSlider = ({
   value,
   ariaLabelledby = 'date-range-slider',
 }: SliderProps) => {
-  function outputFunction(val) {
-    const date = new Date(parseInt(val, 10))
+  function outputFunction(val: number) {
+    const date = new Date(val)
     // The test node server doesn't have full i18n capabilities, using english is the easiest
     return date.toLocaleDateString('en-US', {
       weekday: 'long',

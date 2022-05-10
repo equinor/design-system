@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { Story, Meta } from '@storybook/react'
 import styled from 'styled-components'
 import {
@@ -60,7 +60,7 @@ const Middle = styled.div`
   grid-auto-rows: max-content max-content;
 `
 
-export const TestPage: Story = (args) => {
+export const TestPage: Story = () => {
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
   const [isOpenSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [isPopoverOpen, setPopoverOpen] = useState<boolean>(false)
@@ -75,12 +75,6 @@ export const TestPage: Story = (args) => {
   const closeMenu = () => {
     setOpenMenu(false)
   }
-
-  // This is just for storybook and changes done via controls addon
-  useEffect(() => {
-    setOpenMenu(args.open)
-    // eslint-disable-next-line react/destructuring-assignment
-  }, [args.open])
 
   return (
     <Container>
@@ -104,7 +98,6 @@ export const TestPage: Story = (args) => {
           </Button>
           <Menu
             open={isOpenMenu}
-            {...args}
             id="menu"
             aria-labelledby="anchor-menu"
             onClose={closeMenu}

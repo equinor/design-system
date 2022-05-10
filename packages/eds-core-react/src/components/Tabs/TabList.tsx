@@ -130,7 +130,10 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   const firstFocusableChild = focusableChildren[0]
   const lastFocusableChild = focusableChildren[focusableChildren.length - 1]
 
-  const handleTabsChange = (direction, fallbackTab) => {
+  const handleTabsChange = (
+    direction: 'left' | 'right',
+    fallbackTab: number,
+  ) => {
     const i = direction === 'left' ? 1 : -1
     const nextTab =
       focusableChildren[focusableChildren.indexOf(currentTab.current) - i]

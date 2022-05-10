@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "bent": "^7.3.12",
-    "http-server": "^14.0.0",
+    "http-server": "^14.1.0",
     "subset-font": "^1.4.0"
   }
 }

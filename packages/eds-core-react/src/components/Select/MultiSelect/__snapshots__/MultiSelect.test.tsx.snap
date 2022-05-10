@@ -57,7 +57,7 @@ exports[`MultiSelect Matches snapshot 2`] = `
   justify-content: center;
 }
 
-.c2 >:is(svg,img) {
+.c2 > :is(svg,img) {
   margin-top: var(--eds_button__icon__margin_y,0);
   margin-bottom: var(--eds_button__icon__margin_y,0);
 }

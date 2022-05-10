@@ -82,15 +82,15 @@ describe('TopBar', () => {
         </Actions>
       </TopBar>,
     )
-    expect(screen.queryByTestId(testIdHeader)).toBeDefined()
-    expect(screen.queryByTestId(testIdCenter)).toBeDefined()
-    expect(screen.queryByTestId(testIdActions)).toBeDefined()
+    expect(screen.getByTestId(testIdHeader)).toBeDefined()
+    expect(screen.getByTestId(testIdCenter)).toBeDefined()
+    expect(screen.getByTestId(testIdActions)).toBeDefined()
   })
 
   it('Has provided title', () => {
     const title = 'Some application title'
     render(<TopBar title={title} />)
-    expect(screen.queryByText(title)).toBeDefined()
+    expect(screen.getByTitle(title)).toBeDefined()
   })
 
   it('Has sticky position in container', () => {

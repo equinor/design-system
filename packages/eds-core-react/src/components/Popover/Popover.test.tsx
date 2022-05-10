@@ -27,13 +27,13 @@ afterEach(cleanup)
 describe('Popover', () => {
   it('Matches snapshot', async () => {
     render(
-      <StyledPopover open>
+      <StyledPopover open data-testid="popover">
         <div>some random content</div>
       </StyledPopover>,
     )
-    const container = screen.getByTestId('popover')
+    const container = await screen.findByTestId('popover')
 
-    await waitFor(() => expect(container).toMatchSnapshot())
+    expect(container).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
     const { container } = render(
@@ -53,7 +53,7 @@ describe('Popover', () => {
 
   it('can extend the css for the component', async () => {
     render(
-      <StyledPopover open>
+      <StyledPopover open data-testid="popover">
         <div>some random content</div>
       </StyledPopover>,
     )
@@ -63,13 +63,15 @@ describe('Popover', () => {
   })
   it('is visible when open is true & anchorEl is set', async () => {
     render(
-      <TestPopover open placement="right-start">
+      <TestPopover open placement="right-start" data-testid="popover">
         <div>some random content</div>
       </TestPopover>,
     )
     const container = screen.getByTestId('popover')
     await waitFor(() => {
       expect(container).toBeDefined()
+    })
+    await waitFor(() => {
       expect(container).toHaveAttribute('data-popper-placement', 'right-start')
     })
   })
@@ -94,33 +96,28 @@ describe('Popover', () => {
   })
   it("doesn't crash if no children is provided to Popover component", async () => {
     const placement = 'top'
-    render(<TestPopover placement={placement} />)
-    await waitFor(() => {
-      expect(screen.queryByText(placement)).toBeDefined()
-    })
+    render(<TestPopover placement={placement} data-testid="popover" />)
+
+    expect(await screen.findByTestId('popover')).toBeDefined()
   })
   it("doesn't crash if Popover Content children is undefined", async () => {
     const placement = 'top'
     render(
-      <TestPopover placement={placement}>
+      <TestPopover placement={placement} data-testid="popover">
         <Popover.Title>Title</Popover.Title>
         <Popover.Content></Popover.Content>
       </TestPopover>,
     )
-    await waitFor(() => {
-      expect(screen.queryByText(placement)).toBeDefined()
-    })
+    expect(await screen.findByTestId('popover')).toBeDefined()
   })
   it("doesn't crash if Popover Title children is undefined", async () => {
     const placement = 'top'
     render(
-      <TestPopover placement={placement}>
+      <TestPopover placement={placement} data-testid="popover">
         <Popover.Title></Popover.Title>
         <Popover.Content>Content</Popover.Content>
       </TestPopover>,
     )
-    await waitFor(() => {
-      expect(screen.queryByText(placement)).toBeDefined()
-    })
+    expect(await screen.findByTestId('popover')).toBeDefined()
   })
 })

@@ -27,7 +27,7 @@ exports[`SideSheet Matches snapshot 1`] = `
   justify-content: center;
 }
 
-.c4 >:is(svg,img) {
+.c4 > :is(svg,img) {
   margin-top: var(--eds_button__icon__margin_y,0);
   margin-bottom: var(--eds_button__icon__margin_y,0);
 }
@@ -162,7 +162,6 @@ exports[`SideSheet Matches snapshot 1`] = `
 
 <div
     class="c0"
-    id="side-sheet"
     width="480px"
   >
     <div

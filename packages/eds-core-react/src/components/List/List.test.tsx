@@ -46,7 +46,7 @@ describe('Lists', () => {
         <List.Item>Item 1</List.Item>
       </List>,
     )
-    expect(screen.queryByText('Item 1')).toBeInTheDocument()
+    expect(screen.getByText('Item 1')).toBeInTheDocument()
     expect(screen.getByRole('list').nodeName).toEqual('UL')
   })
   it('Renders an unordered list with variant bullet', () => {
@@ -55,7 +55,7 @@ describe('Lists', () => {
         <List.Item>Item 1</List.Item>
       </List>,
     )
-    expect(screen.queryByText('Item 1')).toBeInTheDocument()
+    expect(screen.getByText('Item 1')).toBeInTheDocument()
     expect(screen.getByRole('list').nodeName).toEqual('UL')
   })
   it('Renders an ordered list with variant numbered', () => {
@@ -64,7 +64,7 @@ describe('Lists', () => {
         <List.Item>Item 1</List.Item>
       </List>,
     )
-    expect(screen.queryByText('Item 1')).toBeInTheDocument()
+    expect(screen.getByText('Item 1')).toBeInTheDocument()
     expect(screen.getByRole('list').nodeName).toEqual('OL')
   })
   it('Can extend the css for the component', () => {

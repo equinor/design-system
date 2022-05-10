@@ -528,6 +528,7 @@ function AutocompleteInner<T>(
         <Container {...getComboboxProps()}>
           <StyledInput
             {...getInputProps(
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,

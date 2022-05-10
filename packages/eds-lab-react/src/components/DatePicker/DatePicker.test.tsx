@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render, cleanup, screen, fireEvent, act } from '@testing-library/react'
+import { render, cleanup, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { DatePicker } from './DatePicker'
@@ -21,46 +21,39 @@ describe('DatePicker', () => {
     const testDate = new Date(2021, 8, 8)
     const onChangedFunction = jest.fn()
 
-    await act(async () => {
-      render(
-        <DatePicker
-          id={'clickPicker'}
-          dateValue={testDate}
-          onChanged={onChangedFunction}
-          label={'Focus Test'}
-        />,
-      )
-      const inputElement = screen.getByLabelText('Focus Test')
+    render(
+      <DatePicker
+        id={'clickPicker'}
+        dateValue={testDate}
+        onChanged={onChangedFunction}
+        label={'Focus Test'}
+      />,
+    )
+    const inputElement = screen.getByLabelText('Focus Test')
 
-      inputElement.focus()
-      return Promise.resolve().then(() => {
-        expect(screen.queryByText(/28/i)).toBeTruthy()
-      })
-    })
+    inputElement.focus()
+
+    expect(await screen.findByText(/28/i)).toBeTruthy()
   })
 
   test('calendar should hide on selection', async () => {
     const testDate = new Date(2021, 8, 8)
     const onChangedFunction = jest.fn()
 
-    await act(async () => {
-      render(
-        <DatePicker
-          id={'clickPicker'}
-          dateValue={testDate}
-          onChanged={onChangedFunction}
-          label={'Focus Test'}
-        />,
-      )
-      const inputElement = screen.getByLabelText('Focus Test')
+    render(
+      <DatePicker
+        id={'clickPicker'}
+        dateValue={testDate}
+        onChanged={onChangedFunction}
+        label={'Focus Test'}
+      />,
+    )
+    const inputElement = screen.getByLabelText('Focus Test')
 
-      inputElement.focus()
+    inputElement.focus()
 
-      return Promise.resolve().then(() => {
-        const chooseDay = screen.getByText(/15/i)
-        fireEvent.click(chooseDay)
-        expect(screen.queryByText(/28/i)).toBeNull()
-      })
-    })
+    const chooseDay = await screen.findByText(/15/i)
+    fireEvent.click(chooseDay)
+    expect(screen.queryByText(/28/i)).toBeNull()
   })
 })

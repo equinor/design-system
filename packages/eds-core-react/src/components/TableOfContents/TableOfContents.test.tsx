@@ -69,7 +69,7 @@ describe('TableOfContents', () => {
         <LinkItem>Anchor</LinkItem>
       </TableOfContents>,
     )
-    expect(screen.queryByText(label)).toBeDefined()
+    expect(screen.getByText(label)).toBeDefined()
   })
 
   it('Has all provided content', () => {
@@ -82,6 +82,6 @@ describe('TableOfContents', () => {
         </LinkItem>
       </TableOfContents>,
     )
-    expect(screen.queryByTestId(testIdItem)).toBeDefined()
+    expect(screen.getByTestId(testIdItem)).toBeDefined()
   })
 })

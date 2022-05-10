@@ -5,8 +5,8 @@ import {
   HTMLAttributes,
   MouseEvent,
   KeyboardEvent,
-  FormEvent,
   useEffect,
+  ChangeEvent,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -170,7 +170,7 @@ export type SliderProps = {
   value: number[] | number
   /** Function to be called when value change */
   onChange?: (
-    event: FormEvent<HTMLDivElement>,
+    event: ChangeEvent<HTMLInputElement>,
     newValue: number[] | number,
   ) => void
   /** Function to be called when value is committed by mouseup event */
@@ -179,7 +179,7 @@ export type SliderProps = {
     newValue: number[] | number,
   ) => void
   /** Function for formatting the output, e.g. with dates */
-  outputFunction?: (text: number) => string | number
+  outputFunction?: (text: number) => string
   /** Max value */
   max?: number
   /**  Min value */
@@ -192,7 +192,7 @@ export type SliderProps = {
   minMaxValues?: boolean
   /** Disabled */
   disabled?: boolean
-} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
+} & HTMLAttributes<HTMLDivElement>
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   {
@@ -234,11 +234,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const minRange = useRef<HTMLInputElement>(null)
   const maxRange = useRef<HTMLInputElement>(null)
   const onValueChange = (
-    event: FormEvent<HTMLDivElement>,
+    event: ChangeEvent<HTMLInputElement>,
     valueArrIdx?: number,
   ) => {
-    const target = event.target as HTMLInputElement
-    const changedValue = parseFloat(target.value)
+    const changedValue = parseFloat(event.target.value)
     if (isRangeSlider) {
       const newValue = sliderValue.slice()
       newValue[valueArrIdx] = changedValue
@@ -256,13 +255,13 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
       onChange(event, [changedValue])
     }
   }
-  const handleKeyUp = (event: KeyboardEvent) => {
+  const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       handleCommitedValue(event)
     }
   }
 
-  const handleCommitedValue = (event: MouseEvent | KeyboardEvent) => {
+  const handleCommitedValue = (event: KeyboardEvent | MouseEvent) => {
     if (onChangeCommitted) {
       onChangeCommitted(event, sliderValue)
     }

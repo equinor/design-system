@@ -11,5 +11,5 @@ module.exports = {
   },
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
 }

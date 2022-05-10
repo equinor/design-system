@@ -60,7 +60,7 @@ export const makeColorCss = R.pipe(
   R.mapObjIndexed((group, groupName) =>
     R.mapObjIndexed(({ rgba }, name) => {
       const pureRgba = rgba.match(
-        /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\)/gi,
+        /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^)]*\)/gi,
       )
 
       return {

@@ -127,11 +127,10 @@ describe('Card', () => {
       </Card>,
     )
 
-    expect(screen.queryByText(title)).toBeDefined()
-    expect(screen.queryByText(subtitle)).toBeDefined()
+    expect(screen.getByText(title)).toBeDefined()
+    expect(screen.getByText(subtitle)).toBeDefined()
   })
   it('Has provided image source and placement in Media', () => {
-    const fullWidth = 'fullWidth'
     const src = 'https://i.imgur.com/UM3mrju.jpg'
     render(
       <Card>
@@ -140,9 +139,9 @@ describe('Card', () => {
         </Media>
       </Card>,
     )
-
-    expect(screen.queryByText(fullWidth)).toBeDefined()
-    expect(screen.queryByText(src)).toBeDefined()
+    const image = screen.getByAltText('alt')
+    expect(image).toBeDefined()
+    expect(image).toHaveAttribute('src', src)
   })
   it('CardActions items are placed correctly', () => {
     render(

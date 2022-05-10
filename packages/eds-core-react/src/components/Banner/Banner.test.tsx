@@ -79,7 +79,7 @@ describe('Banner', () => {
         <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
-    expect(screen.queryByText(bannerText)).toBeDefined()
+    expect(screen.getByText(bannerText)).toBeDefined()
   })
   it('Has provided Icon', () => {
     const bannerText = 'Banner test'
@@ -92,8 +92,8 @@ describe('Banner', () => {
         <Banner.Message>{bannerText}</Banner.Message>
       </Banner>,
     )
-    expect(screen.queryByText(bannerText)).toBeDefined()
-    expect(screen.queryByTestId(iconTestId)).toBeDefined()
+    expect(screen.getByText(bannerText)).toBeDefined()
+    expect(screen.getByTestId(iconTestId)).toBeDefined()
   })
   it('Has provided Actions', () => {
     const bannerText = 'Banner test'
@@ -106,8 +106,8 @@ describe('Banner', () => {
         </Banner.Actions>
       </Banner>,
     )
-    expect(screen.queryByText(bannerText)).toBeDefined()
-    expect(screen.queryByText(actionButtonText)).toBeDefined()
+    expect(screen.getByText(bannerText)).toBeDefined()
+    expect(screen.getByText(actionButtonText)).toBeDefined()
   })
 
   it('Has correct default icon styling as info color', () => {

@@ -32,9 +32,9 @@ describe('Menu', () => {
       </StyledMenu>,
     )
 
-    const menuContainer = screen.getByRole('menu', { hidden: true })
+    const menuContainer = await screen.findByRole('menu', { hidden: true })
 
-    await waitFor(() => expect(menuContainer).toMatchSnapshot())
+    expect(menuContainer).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
     const { container } = render(
@@ -95,6 +95,8 @@ describe('Menu', () => {
     const menuPaper = menuContainer.parentElement
     await waitFor(() => {
       expect(menuPaper).toBeDefined()
+    })
+    await waitFor(() => {
       expect(menuPaper).toHaveAttribute('data-popper-placement', 'right-start')
     })
   })

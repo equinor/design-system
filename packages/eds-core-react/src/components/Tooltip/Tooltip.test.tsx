@@ -1,12 +1,5 @@
 /* eslint-disable no-undef */
-import {
-  fireEvent,
-  waitFor,
-  render,
-  cleanup,
-  screen,
-  act,
-} from '@testing-library/react'
+import { fireEvent, render, cleanup, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import { axe } from 'jest-axe'
@@ -16,8 +9,6 @@ import { Tooltip, Button } from '../../'
 const StyledTooltip = styled(Tooltip)`
   background: red;
 `
-
-const enterDelayDefault = 100
 
 afterEach(cleanup)
 
@@ -33,10 +24,9 @@ describe('Tooltip', () => {
 
     fireEvent.mouseOver(content)
 
-    await waitFor(() => {
-      const tooltip = screen.getByRole('tooltip')
-      expect(tooltip).toMatchSnapshot()
-    })
+    const tooltip = await screen.findByRole('tooltip')
+
+    expect(tooltip).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
     const { container } = render(
@@ -45,16 +35,13 @@ describe('Tooltip', () => {
       </Tooltip>,
     )
 
-    const content = screen.getByText('Test')
+    const content = await screen.findByText('Test')
+
     fireEvent.mouseOver(content)
 
-    await act(async () => {
-      const results = await axe(container)
+    const results = await axe(container)
 
-      await waitFor(() => {
-        expect(results).toHaveNoViolations()
-      })
-    })
+    expect(results).toHaveNoViolations()
   })
   it('Should pass a11y test with id & placement', async () => {
     const { container } = render(
@@ -66,13 +53,9 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
     fireEvent.mouseOver(content)
 
-    await act(async () => {
-      const results = await axe(container)
+    const results = await axe(container)
 
-      await waitFor(() => {
-        expect(results).toHaveNoViolations()
-      })
-    })
+    expect(results).toHaveNoViolations()
   })
   it('can extend the css for the component', async () => {
     render(
@@ -85,10 +68,8 @@ describe('Tooltip', () => {
 
     fireEvent.mouseOver(content)
 
-    await waitFor(() => {
-      const tooltip = screen.getByRole('tooltip')
-      expect(tooltip).toHaveStyleRule('background', 'red')
-    })
+    const tooltip = await screen.findByRole('tooltip')
+    expect(tooltip).toHaveStyleRule('background', 'red')
   })
   it('is visible when content is being hovered', async () => {
     render(
@@ -98,12 +79,11 @@ describe('Tooltip', () => {
     )
 
     const content = screen.getByText('Test')
+
     fireEvent.mouseOver(content)
-    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
-    await waitFor(() => {
-      const tooltip = screen.getByRole('tooltip')
-      expect(tooltip).toHaveAttribute('data-popper-placement', 'right-start')
-    })
+
+    const tooltip = await screen.findByRole('tooltip')
+    expect(tooltip).toHaveAttribute('data-popper-placement', 'right-start')
   })
   it('renders with a correct title', async () => {
     render(
@@ -115,12 +95,11 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
-    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
-    await waitFor(() => {
-      const tooltip = screen.getByRole('tooltip')
-      expect(content).toBeDefined()
-      expect(tooltip).toBeDefined()
-    })
+
+    const tooltip = await screen.findByRole('tooltip')
+
+    expect(content).toBeDefined()
+    expect(tooltip).toBeDefined()
   })
   it('renders on focus', async () => {
     render(
@@ -132,10 +111,7 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.focusIn(content)
-    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)))
-    await waitFor(() => {
-      expect(screen.getByRole('tooltip')).toBeDefined()
-    })
+    expect(await screen.findByRole('tooltip')).toBeDefined()
   })
   it('shows after correct delay', async () => {
     render(
@@ -152,11 +128,11 @@ describe('Tooltip', () => {
     expect(screen.queryByText('Tooltip')).not.toBeInTheDocument()
 
     await act(() => new Promise((r) => setTimeout(r, 300)))
-    await waitFor(() => {
-      const tooltip = screen.getByRole('tooltip')
-      expect(content).toBeDefined()
-      expect(tooltip).toBeDefined()
-    })
+
+    const tooltip = await screen.findByRole('tooltip')
+
+    expect(content).toBeDefined()
+    expect(tooltip).toBeDefined()
   })
   it('child onFocus is called when focusd', () => {
     const handler = jest.fn()

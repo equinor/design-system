@@ -17,7 +17,7 @@ exports[`Search Matches snapshot 1`] = `
   justify-content: center;
 }
 
-.c5 >:is(svg,img) {
+.c5 > :is(svg,img) {
   margin-top: var(--eds_button__icon__margin_y,0);
   margin-bottom: var(--eds_button__icon__margin_y,0);
 }

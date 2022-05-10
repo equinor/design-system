@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens'
-import mergeDeepRight from 'ramda/src/mergeDeepRight'
+import { mergeDeepRight } from 'ramda'
 
 import { button } from './button'
 import { ButtonToken } from '../Button.types'

@@ -57,8 +57,8 @@ export const Introduction: Story<MenuProps> = (args) => {
     setIsOpen(false)
   }
 
-  // This is just for storybook and changes done via controls addon
   useEffect(() => {
+    // eslint-disable-next-line react/destructuring-assignment
     setIsOpen(args.open)
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.open])

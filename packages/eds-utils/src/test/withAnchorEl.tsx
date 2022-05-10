@@ -1,6 +1,5 @@
 /* eslint-disable import/export */
 import {
-  ElementType,
   ReactElement,
   ReactNode,
   cloneElement,
@@ -12,8 +11,8 @@ import {
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 
 const AllTheProviders = ({ children }: { children: ReactNode }) => {
-  const anchorRef = useRef(null)
-  const [anchorEl, setAnchorEl] = useState<ElementType>(null)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (anchorRef.current) {

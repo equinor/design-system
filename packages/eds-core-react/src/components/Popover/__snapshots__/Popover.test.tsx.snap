@@ -107,14 +107,17 @@ exports[`Popover Matches snapshot 1`] = `
 
 <div
   class="c0 c1 c2"
+  data-popper-escaped="true"
+  data-popper-placement="bottom"
+  data-popper-reference-hidden="true"
   data-testid="popover"
   elevation="0 1px 10px rgba(0, 0, 0, 0.2),0 4px 5px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14)"
   open=""
-  style="position: absolute; left: 0px; top: 0px;"
+  style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 10px);"
 >
   <div
     class="c3 arrow"
-    style="position: absolute;"
+    style="position: absolute; left: 0px; transform: translate(0px, 0px);"
   >
     <svg
       class="c4 arrowSvg"

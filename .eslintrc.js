@@ -3,6 +3,7 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    es6: true,
   },
   parser: '@babel/eslint-parser',
   parserOptions: {
@@ -84,11 +85,10 @@ module.exports = {
         'import/newline-after-import': ['error'],
         'import/prefer-default-export': ['off'],
         'import/namespace': ['error', { allowComputed: true }],
+        // TODO: Enable this rule once "functions" support is released https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
         'react/require-default-props': [
-          'warn',
-          {
-            forbidDefaultForRequired: true,
-          },
+          'off',
+          { forbidDefaultForRequired: true, functions: 'defaultArguments' },
         ],
         'react/react-in-jsx-scope': 'off',
         // 'react/jsx-boolean-value': ['warn'],
@@ -124,6 +124,12 @@ module.exports = {
         // '@typescript-eslint/no-unsafe-return': ['warn'],
         // '@typescript-eslint/no-unsafe-assignment': ['warn'],
         // '@typescript-eslint/no-explicit-any': ['warn'],
+        '@typescript-eslint/no-misused-promises': [
+          'error',
+          {
+            checksVoidReturn: false,
+          },
+        ],
       },
     },
     // Testing linting

@@ -51,6 +51,7 @@ export const Introduction: Story<PopoverProps> = (args) => {
   const referenceElement = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
+    // eslint-disable-next-line react/destructuring-assignment
     setIsOpen(args.open)
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.open])

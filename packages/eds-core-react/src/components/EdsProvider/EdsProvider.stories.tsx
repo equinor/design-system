@@ -31,6 +31,7 @@ export const Introduction: Story<EdsProviderProps> = (args) => {
 
   // This is just for storybook and changes done via controls addon
   useEffect(() => {
+    // eslint-disable-next-line react/destructuring-assignment
     setDensity(args.density)
     // eslint-disable-next-line react/destructuring-assignment
   }, [args.density])

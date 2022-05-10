@@ -1,7 +1,7 @@
 import { render, cleanup } from '@testing-library/react'
 import { useHideBodyScroll } from './useHideBodyScroll'
 
-const TestComponent = ({ hideScroll }) => {
+const TestComponent = ({ hideScroll }: { hideScroll: boolean }) => {
   useHideBodyScroll(hideScroll)
   return <div></div>
 }

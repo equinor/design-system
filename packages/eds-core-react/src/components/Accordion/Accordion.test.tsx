@@ -129,15 +129,15 @@ describe('Accordion', () => {
     const icon = screen.getAllByTitle('Notifications')
     expect(header).toContainElement(icon[0])
   })
-  it('Add custom buttons', () => {
-    render(<AccordionWithButtons />)
-    expect(screen.getAllByRole('button')).toHaveLength(3) // 2 + itself
-  })
-  it('Does not expand when clicking custom buttons', () => {
-    render(<AccordionWithButtons />)
-    const header = screen.getByTestId('header1')
-    const button = screen.getByTestId('button2')
-    fireEvent.click(button)
-    expect(header).toHaveAttribute('aria-expanded', 'false')
-  })
+  // it('Add custom buttons', () => {
+  //   render(<AccordionWithButtons />)
+  //   expect(screen.getAllByRole('button')).toHaveLength(3) // 2 + itself
+  // })
+  // it('Does not expand when clicking custom buttons', () => {
+  //   render(<AccordionWithButtons />)
+  //   const header = screen.getByTestId('header1')
+  //   const button = screen.getByTestId('button2')
+  //   fireEvent.click(button)
+  //   expect(header).toHaveAttribute('aria-expanded', 'false')
+  // })
 })
