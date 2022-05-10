@@ -9,7 +9,6 @@ import {
 import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate, useToken } from '@equinor/eds-utils'
-//import EquinorLogo from '../EquinorLogo'
 import { ToggleOpen } from './ToggleOpen'
 import { ActionButton } from './ActionButton'
 import { useEds } from '@equinor/eds-core-react'
@@ -34,12 +33,11 @@ const Container = styled.div<ContainerProps>(({ theme, open, maxHeight }) => {
   `
 })
 
-const LogoContainer = styled.div(({ theme }) => {
+const Footer = styled.div(() => {
   return css`
     display: flex;
     justify-content: center;
     border-top: 1px solid rgba(220, 220, 220, 1); //how to solve this with bordersTemplate???
-    padding-top: ${theme.spacings.top};
   `
 })
 
@@ -73,6 +71,7 @@ type SidebarType = {
   toggleButton?: 'top' | 'bottom'
   open?: boolean
   maxHeight?: string
+  footer?: JSX.Element
   onToggle?: (state: boolean) => void
 } & HTMLAttributes<HTMLDivElement>
 
@@ -86,6 +85,7 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
       onToggle,
       open = false,
       maxHeight,
+      footer,
       children,
     },
     ref,
@@ -131,7 +131,7 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
                 onClick={() => handleToggle(!isOpen)}
               />
             )}
-            <LogoContainer></LogoContainer>
+            {footer && <Footer>{footer}</Footer>}
           </Container>
         </SideBarContext.Provider>
       </ThemeProvider>
