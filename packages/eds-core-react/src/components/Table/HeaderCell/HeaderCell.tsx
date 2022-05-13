@@ -49,6 +49,7 @@ const StyledTableCell = styled.th((props: BaseProps) => {
     min-height: ${height};
     height: ${height};
     background: ${background};
+    box-sizing: border-box;
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
   ${bordersTemplate(theme.border)}
