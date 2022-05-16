@@ -16,14 +16,7 @@ import {
   UseComboboxGetMenuPropsOptions,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
-import {
-  Label,
-  Icon,
-  Input,
-  useEds,
-  List,
-  Button,
-} from '@equinor/eds-core-react'
+import { Label, Icon, Input, useEds, List, Button } from '../../'
 import { arrow_drop_down, arrow_drop_up, close } from '@equinor/eds-icons'
 import {
   multiSelect as multiSelectTokens,
