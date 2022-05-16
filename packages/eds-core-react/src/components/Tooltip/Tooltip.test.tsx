@@ -30,12 +30,12 @@ describe('Tooltip', () => {
   })
   it('Should pass a11y test', async () => {
     const { container } = render(
-      <Tooltip title="Tooltip" enterDelay={0}>
+      <Tooltip title="Tooltip">
         <span>Test</span>
       </Tooltip>,
     )
 
-    const content = await screen.findByText('Test')
+    const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
 
@@ -45,12 +45,13 @@ describe('Tooltip', () => {
   })
   it('Should pass a11y test with id & placement', async () => {
     const { container } = render(
-      <Tooltip title="Tooltip" id="a11y-tooltip" placement="top" enterDelay={0}>
+      <Tooltip title="Tooltip" id="a11y-tooltip" placement="top">
         <span>Test</span>
       </Tooltip>,
     )
 
     const content = screen.getByText('Test')
+
     fireEvent.mouseOver(content)
 
     const results = await axe(container)
