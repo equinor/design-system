@@ -1,6 +1,6 @@
 module.exports = {
   verbose: true,
-  setupFilesAfterEnv: ['./rtl.setup.ts'],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   transform: {
     '.(js|ts|tsx)': 'babel-jest',
   },
