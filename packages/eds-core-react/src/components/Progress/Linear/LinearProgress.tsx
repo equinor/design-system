@@ -129,7 +129,9 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
             <ProgressBar style={transformStyle} />
           )}
         </Track>
-        <SrOnlyOutput>{getProgressFormatted()}</SrOnlyOutput>
+        {variant === 'determinate' && (
+          <SrOnlyOutput>{getProgressFormatted()}</SrOnlyOutput>
+        )}
       </>
     )
   },

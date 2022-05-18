@@ -156,7 +156,9 @@ const CircularProgress = forwardRef<SVGSVGElement, CircularProgressProps>(
             stroke={token.entities.progress.background}
           />
         </Svg>
-        <SrOnlyOutput>{getProgressFormatted()}</SrOnlyOutput>
+        {variant === 'determinate' && (
+          <SrOnlyOutput>{getProgressFormatted()}</SrOnlyOutput>
+        )}
       </>
     )
   },
