@@ -37,23 +37,5 @@ exports[`LinearProgress  Matches snapshot 1`] = `
       class="c1"
     />
   </div>
-  .c0 {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  -webkit-clip: rect(0,0,0,0);
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-<output
-    class="c0"
-  >
-    Loading 0%
-  </output>
 </DocumentFragment>
 `;
