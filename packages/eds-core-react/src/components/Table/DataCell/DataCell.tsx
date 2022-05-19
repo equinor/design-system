@@ -26,6 +26,7 @@ const StyledTableCell = styled.td(({ theme, color }: BaseProps) => {
     height: ${height};
     background: ${backgroundColor};
     vertical-align: ${align.vertical};
+    box-sizing: border-box;
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
     ${bordersTemplate(border)}
