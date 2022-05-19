@@ -20,11 +20,11 @@ export type TabsProps = {
 const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   {
     activeTab = 0,
-    onChange,
+    onChange = () => null,
     onBlur,
     onFocus,
     variant = 'minWidth',
-    scrollable,
+    scrollable = false,
     id,
     ...props
   },
