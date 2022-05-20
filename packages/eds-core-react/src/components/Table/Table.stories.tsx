@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
 import {
   Table,
   TableProps,
@@ -15,8 +15,9 @@ import {
 } from '../..'
 import { arrow_down, arrow_up, accessible } from '@equinor/eds-icons'
 import { data, columns, Column, Data, SortDirection } from '../../stories/data'
-
 import { toCellValues } from '../../stories/toCellValues'
+import { Stack } from './../../../.storybook/components'
+import page from './Table.docs.mdx'
 
 Icon.add({ arrow_down, arrow_up })
 
@@ -25,12 +26,10 @@ const { Caption, Body, Row, Cell, Head } = Table
 export default {
   title: 'Data Display/Table',
   component: Table,
-  subcomponents: { Caption, Body, Row, Cell, Head },
+  subcomponents: { Head, Body, Caption, Row, Cell },
   parameters: {
     docs: {
-      description: {
-        component: `A basic table component`,
-      },
+      page,
     },
   },
   args: {
@@ -44,33 +43,35 @@ export default {
       },
     },
   },
-} as Meta
+} as ComponentMeta<typeof Table>
 
-export const simpleTable: Story<TableProps> = (args) => {
+export const introduction: Story<TableProps> = (args) => {
   const cellValues = toCellValues(data, columns)
 
   return (
-    <Table {...args}>
-      <Table.Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
-      </Table.Caption>
-      <Table.Head>
-        <Table.Row>
-          {columns.map((col) => (
-            <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
-          ))}
-        </Table.Row>
-      </Table.Head>
-      <Table.Body>
-        {cellValues?.map((row) => (
-          <Table.Row key={row.toString()}>
-            {row.map((cellValue) => (
-              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+    <Stack>
+      <Table {...args}>
+        <Table.Caption>
+          <Typography variant="h2">Fruits cost price</Typography>
+        </Table.Caption>
+        <Table.Head>
+          <Table.Row>
+            {columns.map((col) => (
+              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
             ))}
           </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+        </Table.Head>
+        <Table.Body>
+          {cellValues?.map((row) => (
+            <Table.Row key={row.toString()}>
+              {row.map((cellValue) => (
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+              ))}
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Stack>
   )
 }
 
