@@ -93,6 +93,19 @@ const GithubIcon = () => (
   </svg>
 )
 
+const NpmLink = ({ url }: { url: string }) => {
+  if (!url) return null
+
+  const [, packageName] = /package\/(.*)/g.exec(url)
+
+  return (
+    <Button variant="ghost" as="a" href={url}>
+      <NpmIcon />
+      <span>{packageName}</span>
+    </Button>
+  )
+}
+
 type LinksProps = {
   figmaUrl?: string
   ariaUrl?: string
@@ -126,16 +139,11 @@ export const Links = ({
         📝 &nbsp;Documentation
       </Button>
     )}
-    {npmUrl && (
-      <Button variant="ghost" as="a" href={npmUrl}>
-        <NpmIcon />
-        <span>Package</span>
-      </Button>
-    )}
+    {npmUrl && <NpmLink url={npmUrl} />}
     {sourceUrl && (
       <Button variant="ghost" as="a" href={sourceUrl}>
         <GithubIcon />
-        <span>Source</span>
+        <span>Github</span>
       </Button>
     )}
   </Stack>
