@@ -26,7 +26,7 @@ const { Caption, Body, Row, Cell, Head } = Table
 export default {
   title: 'Data Display/Table',
   component: Table,
-  subcomponents: { Head, Body, Caption, Row, Cell },
+  subcomponents: { Caption, Head, Body, Row, Cell },
   parameters: {
     docs: {
       page,
