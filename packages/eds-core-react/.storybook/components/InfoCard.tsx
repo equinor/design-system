@@ -1,4 +1,4 @@
-import { Card, Typography, Paper } from '../../src'
+import { Card, Typography, Paper, Button } from '../../src'
 import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 
@@ -34,9 +34,9 @@ export const InfoCard = ({
         <Typography variant="body_short">{description}</Typography>
       </Card.Content>
       <Card.Actions>
-        <Typography link href={url}>
+        <Button href={url} variant="outlined">
           {urlTitle}
-        </Typography>
+        </Button>
       </Card.Actions>
     </Card>
   </Paper>
