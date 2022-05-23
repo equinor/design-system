@@ -81,7 +81,7 @@ export const Accessibility: Story<StarProgressProps> = () => {
     }, 6000)
   }
   return (
-    <Stack aria-busy={isLoading} aria-live="polite">
+    <Stack aria-live="assertive">
       {isLoading ? (
         <Progress.Star size={48} aria-label="Loading star accessibility test" />
       ) : (

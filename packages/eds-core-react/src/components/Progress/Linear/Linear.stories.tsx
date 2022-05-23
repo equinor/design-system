@@ -110,7 +110,7 @@ export const Accessibility: Story<LinearProgressProps> = () => {
     }, 6000)
   }
   return (
-    <Stack aria-busy={isLoading} aria-live="polite">
+    <Stack aria-live="assertive">
       {isLoading ? (
         <Progress.Linear aria-label="Loading linear accessibility test" />
       ) : (

@@ -150,7 +150,7 @@ export const Accessibility: Story<CircularProgressProps> = () => {
     }, 6000)
   }
   return (
-    <Stack aria-busy={isLoading} aria-live="polite">
+    <Stack aria-busy={isLoading} aria-live="assertive">
       <Button onClick={resetProgress} aria-disabled={isLoading}>
         {isLoading ? (
           <>
