@@ -9,6 +9,7 @@ import { Tooltip, Button } from '../../'
 const StyledTooltip = styled(Tooltip)`
   background: red;
 `
+const openDelay = 100
 
 afterEach(cleanup)
 
@@ -23,6 +24,7 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     const tooltip = await screen.findByRole('tooltip')
 
@@ -38,6 +40,7 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     const results = await axe(container)
 
@@ -45,7 +48,7 @@ describe('Tooltip', () => {
   })
   it('Should pass a11y test with id & placement', async () => {
     const { container } = render(
-      <Tooltip title="Tooltip" id="a11y-tooltip" placement="top">
+      <Tooltip title="Tooltip" id="a11y-tooltip" placement="top" enterDelay={0}>
         <span>Test</span>
       </Tooltip>,
     )
@@ -53,6 +56,7 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     const results = await axe(container)
 
@@ -68,6 +72,7 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     const tooltip = await screen.findByRole('tooltip')
     expect(tooltip).toHaveStyleRule('background', 'red')
@@ -82,6 +87,7 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     const tooltip = await screen.findByRole('tooltip')
     expect(tooltip).toHaveAttribute('data-popper-placement', 'right-start')
@@ -96,6 +102,7 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.mouseOver(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     const tooltip = await screen.findByRole('tooltip')
 
@@ -112,6 +119,8 @@ describe('Tooltip', () => {
     const content = screen.getByText('Test')
 
     fireEvent.focusIn(content)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
+
     expect(await screen.findByRole('tooltip')).toBeDefined()
   })
   it('shows after correct delay', async () => {
@@ -135,7 +144,7 @@ describe('Tooltip', () => {
     expect(content).toBeDefined()
     expect(tooltip).toBeDefined()
   })
-  it('child onFocus is called when focusd', () => {
+  it('child onFocus is called when focusd', async () => {
     const handler = jest.fn()
     render(
       <Tooltip title="Tooltip">
@@ -144,7 +153,9 @@ describe('Tooltip', () => {
     )
 
     const button = screen.getByText('Test')
+
     fireEvent.focus(button)
+    await act(() => new Promise((r) => setTimeout(r, openDelay)))
 
     expect(handler).toBeCalled()
   })
