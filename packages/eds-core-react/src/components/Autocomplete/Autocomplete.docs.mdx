@@ -6,7 +6,7 @@ import * as icons from '@equinor/eds-icons'
 # Autocomplete 
 The Autocomplete component allows users to choose one or multiple options from a list
 
-<Story id="components-autocomplete--introduction" />
+<Story id="inputs-autocomplete--introduction" />
 <PropsTable />
 
 
@@ -53,50 +53,50 @@ The property `label` is mandatory and make sure you have a descriptive label for
 ## Multiple
 
 Enable the `multiple` property for multiple selection of values
-<Story id="components-autocomplete--multiple" />
+<Story id="inputs-autocomplete--multiple" />
 
 ## Option label
 
 Change the rendered & searchable value by using the `optionLabel` property.
-<Story id="components-autocomplete--option-label" />
+<Story id="inputs-autocomplete--option-label" />
 
 ## Read only
-<Story id="components-autocomplete--readonly" />
+<Story id="inputs-autocomplete--readonly" />
 
 ## Disabled
-<Story id="components-autocomplete--disabled" />
+<Story id="inputs-autocomplete--disabled" />
 
 
 ## Disabled option
 
 You can disable an option by setting the `disabled:true` on option
-<Story id="components-autocomplete--disabled-option" />
+<Story id="inputs-autocomplete--disabled-option" />
 
 
 ## Preselected options
-<Story id="components-autocomplete--preselected-options" />
+<Story id="inputs-autocomplete--preselected-options" />
 
 
 ## On options change
-<Story id="components-autocomplete--on-options-change" />
+<Story id="inputs-autocomplete--on-options-change" />
 
 ## Compact
 Compact `Autocomplete` using `EdsProvider`
-<Story id="components-autocomplete--compact" />
+<Story id="inputs-autocomplete--compact" />
 
 ## With React Hook Form
-<Story id="components-autocomplete--with-react-hook-form" />
+<Story id="inputs-autocomplete--with-react-hook-form" />
 
 ## Custom options filter
 
 You can specify the filter predicate for options by setting the `optionsFilter` callback. By default the inputValue is checked against the option label. 
 We stronlgy recommend always including all the characters a search might filter on in the label as it may seem confusing for users otherwise.
-<Story id="components-autocomplete--custom-options-filter" />
+<Story id="inputs-autocomplete--custom-options-filter" />
 
 ## With Select All option
 This is an example of how to make a "Select All" option for quicker selection. 
 Make sure to use `useMemo` if you are mutating the options in the render function to avoid object memory references bugs on re-renders.
-<Story id="components-autocomplete--select-all" />
+<Story id="inputs-autocomplete--select-all" />
 
 ## Options auto width 
-<Story id="components-autocomplete--auto-width" />
+<Story id="inputs-autocomplete--auto-width" />

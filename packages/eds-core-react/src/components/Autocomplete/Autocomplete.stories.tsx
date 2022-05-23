@@ -1,22 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState, useEffect, useMemo } from 'react'
-import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '../..'
+import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Story, ComponentMeta } from '@storybook/react'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
-import {
-  Typography,
-  EdsProvider,
-  Button,
-  Density,
-  Chip,
-} from '@equinor/eds-core-react'
+import { Typography, EdsProvider, Button, Density, Chip } from '../..'
 import { Stack } from '../../../.storybook/components'
 import page from './Autocomplete.docs.mdx'
 
 export default {
-  title: 'Components/Autocomplete',
+  title: 'Inputs/Autocomplete',
   component: Autocomplete,
   parameters: {
     docs: {
