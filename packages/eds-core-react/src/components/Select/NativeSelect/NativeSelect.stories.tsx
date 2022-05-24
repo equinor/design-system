@@ -29,6 +29,7 @@ export const Multiple: Story<NativeSelectProps> = () => (
     <option>Even another</option>
   </NativeSelect>
 )
+
 export const Disabled: Story<NativeSelectProps> = () => (
   <NativeSelect label="Label text" disabled id="disabled-select">
     <option>Pick one</option>
@@ -54,12 +55,4 @@ export const Compact: Story = () => {
       </NativeSelect>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `NativeSelect` using `EdsProvider` ',
-    },
-  },
 }
