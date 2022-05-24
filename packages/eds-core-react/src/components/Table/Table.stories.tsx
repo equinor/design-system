@@ -75,17 +75,12 @@ export const introduction: Story<TableProps> = (args) => {
   )
 }
 
-const FixedContainer = styled.div`
-  height: 200px;
-  overflow: auto;
-`
-
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
   const buttonIndex = cellValues[0].length - 1
 
   return (
-    <FixedContainer>
+    <Stack style={{ height: '200px', overflow: 'auto' }}>
       <Table>
         <Table.Caption>
           <Typography variant="h2">Fruits cost price</Typography>
@@ -113,9 +108,10 @@ export const FixedTableHeader: Story<TableProps> = () => {
           ))}
         </Table.Body>
       </Table>
-    </FixedContainer>
+    </Stack>
   )
 }
+FixedTableHeader.storyName = 'Fixed table header'
 
 export const CompactTable: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
@@ -195,40 +191,36 @@ export const CompactTable: Story<TableProps> = () => {
         </TopBar.Actions>
       </TopBar>
       <EdsProvider density={density}>
-        <Table>
-          <Table.Caption>
-            <Typography variant="h2">Fruits cost price</Typography>
-          </Table.Caption>
-          <Table.Head>
-            <Table.Row>
-              {columns.map((col) => (
-                <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
-              ))}
-            </Table.Row>
-          </Table.Head>
-          <Table.Body>
-            {cellValues?.map((row) => (
-              <Table.Row key={row.toString()}>
-                {row.map((cellValue) => (
-                  <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+        <Stack>
+          <Table>
+            <Table.Caption>
+              <Typography variant="h2">Fruits cost price</Typography>
+            </Table.Caption>
+            <Table.Head>
+              <Table.Row>
+                {columns.map((col) => (
+                  <Table.Cell key={`head-${col.accessor}`}>
+                    {col.name}
+                  </Table.Cell>
                 ))}
               </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+            </Table.Head>
+            <Table.Body>
+              {cellValues?.map((row) => (
+                <Table.Row key={row.toString()}>
+                  {row.map((cellValue) => (
+                    <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+                  ))}
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </Stack>
       </EdsProvider>
     </div>
   )
 }
-
-CompactTable.parameters = {
-  docs: {
-    description: {
-      story:
-        'Compact `Table` using `EdsProvider` (this will also apply compact on all nested components)',
-    },
-  },
-}
+CompactTable.storyName = 'Compact table'
 
 const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
@@ -309,38 +301,42 @@ export const Sortable: Story<TableProps> = () => {
   }, [state.columns, setState, sortData])
 
   return (
-    <Table>
-      <Table.Caption>
-        <Typography variant="h2">Fruits cost price</Typography>
-      </Table.Caption>
-      <Table.Head>
-        <Table.Row>
-          {state.columns.map((col) => (
-            <SortCell
-              sort={col.sortDirection}
-              key={`head-${col.accessor}`}
-              onClick={col.sortDirection ? () => onSortClick(col) : undefined}
-              isSorted={col.isSorted}
-            >
-              {col.name}
-              <Icon
-                name={
-                  col.sortDirection === 'descending' ? 'arrow_down' : 'arrow_up'
-                }
-              />
-            </SortCell>
-          ))}
-        </Table.Row>
-      </Table.Head>
-      <Table.Body>
-        {state.cellValues?.map((row) => (
-          <Table.Row key={row.toString()}>
-            {row.map((cellValue) => (
-              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+    <Stack>
+      <Table>
+        <Table.Caption>
+          <Typography variant="h2">Fruits cost price</Typography>
+        </Table.Caption>
+        <Table.Head>
+          <Table.Row>
+            {state.columns.map((col) => (
+              <SortCell
+                sort={col.sortDirection}
+                key={`head-${col.accessor}`}
+                onClick={col.sortDirection ? () => onSortClick(col) : undefined}
+                isSorted={col.isSorted}
+              >
+                {col.name}
+                <Icon
+                  name={
+                    col.sortDirection === 'descending'
+                      ? 'arrow_down'
+                      : 'arrow_up'
+                  }
+                />
+              </SortCell>
             ))}
           </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+        </Table.Head>
+        <Table.Body>
+          {state.cellValues?.map((row) => (
+            <Table.Row key={row.toString()}>
+              {row.map((cellValue) => (
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+              ))}
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Stack>
   )
 }
