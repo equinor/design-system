@@ -50,6 +50,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/react-hooks": "^7.0.2",
@@ -69,11 +70,13 @@
     "ramda": "^0.27.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-is": "^18.1.0",
     "rollup": "^2.72.0",
     "rollup-plugin-delete": "^2.0.0",
     "styled-components": "5.3.5",
     "tsc-watch": "^5.0.3",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.0"
   },
   "peerDependencies": {
     "react": ">=16.8",
