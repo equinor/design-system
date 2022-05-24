@@ -58,9 +58,12 @@ export const Primary: Story<SidebarType> = (args) => {
         onAction={() => console.log('Created 🖋')}
         {...args}
       >
-        {menuItems.map((m) => (
-          <SideBar.Item key={m.name} {...m} />
-        ))}
+        <SideBar.Content>
+          {menuItems.map((m) => (
+            <SideBar.Item key={m.name} {...m} />
+          ))}
+        </SideBar.Content>
+        <SideBar.Footer>Teets</SideBar.Footer>
       </SideBar>
     </div>
   )
@@ -88,9 +91,11 @@ export const NoAction: Story = () => {
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
       <SideBar toggleButton="top">
-        {menuItems.map((m) => (
-          <SideBar.Item key={m.name} {...m} />
-        ))}
+        <SideBar.Content>
+          {menuItems.map((m) => (
+            <SideBar.Item key={m.name} {...m} />
+          ))}
+        </SideBar.Content>
       </SideBar>
     </div>
   )
@@ -123,9 +128,11 @@ export const WithAction: Story = () => {
         onAction={() => console.log('Created 💎')}
         toggleButton="bottom"
       >
-        {menuItems.map((m) => (
-          <SideBar.Item key={m.name} {...m} />
-        ))}
+        <SideBar.Content>
+          {menuItems.map((m) => (
+            <SideBar.Item key={m.name} {...m} />
+          ))}
+        </SideBar.Content>
       </SideBar>
     </div>
   )
@@ -158,9 +165,11 @@ export const WithCurrentUrlAndAction: Story = () => {
         toggleButton="bottom"
         onAction={() => console.log('Created 🖋')}
       >
-        {menuItems.map((m) => (
-          <SideBar.Item key={m.name} {...m} />
-        ))}
+        <SideBar.Content>
+          {menuItems.map((m) => (
+            <SideBar.Item key={m.name} {...m} />
+          ))}
+        </SideBar.Content>
       </SideBar>
     </div>
   )

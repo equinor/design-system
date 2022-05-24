@@ -9,7 +9,6 @@ import {
 import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate, useToken } from '@equinor/eds-utils'
-//import EquinorLogo from '../EquinorLogo'
 import { ToggleOpen } from './ToggleOpen'
 import { ActionButton } from './ActionButton'
 import { useEds } from '@equinor/eds-core-react'
@@ -19,36 +18,6 @@ type ContainerProps = {
   open: boolean
   maxHeight?: string
 }
-
-const Container = styled.div<ContainerProps>(({ theme, open, maxHeight }) => {
-  return css`
-    ${bordersTemplate(theme.border)}
-    background-color: ${theme.background};
-    display: flex;
-    flex-direction: column;
-    padding-bottom: ${theme.spacings.bottom};
-    overflow: hidden;
-    width: ${open ? '256px' : '72px'};
-    min-width: ${open ? '256px' : '72px'};
-    ${maxHeight && css({ maxHeight: maxHeight })}
-  `
-})
-
-const LogoContainer = styled.div(({ theme }) => {
-  return css`
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid rgba(220, 220, 220, 1); //how to solve this with bordersTemplate???
-    padding-top: ${theme.spacings.top};
-  `
-})
-
-const TopContainer = styled.div`
-  display: grid;
-  grid-auto-rows: 1fr;
-  align-items: center;
-  margin-bottom: auto;
-`
 
 type SideBarContextType = {
   isOpen: boolean
@@ -64,6 +33,26 @@ export function useSideBar(): SideBarContextType {
 
 export const SideBarContext = createContext<SideBarContextType | undefined>(
   undefined,
+)
+
+const GridContainer = styled.div<ContainerProps>(
+  ({ theme, open, maxHeight }) => {
+    return css`
+      ${bordersTemplate(theme.border)}
+      display: grid;
+      grid-template-rows: 1fr auto;
+      height: 100%;
+      grid-template-areas:
+        'content'
+        'footer';
+      background-color: ${theme.background};
+      //padding-bottom: ${theme.spacings.bottom};
+      overflow: hidden;
+      width: ${open ? '256px' : '72px'};
+      min-width: ${open ? '256px' : '72px'};
+      ${maxHeight && css({ maxHeight: maxHeight })}
+    `
+  },
 )
 
 type SidebarType = {
@@ -107,32 +96,31 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarType>(
     return (
       <ThemeProvider theme={token}>
         <SideBarContext.Provider value={{ isOpen }}>
-          <Container open={isOpen} ref={ref} maxHeight={maxHeight}>
-            {toggleButton && toggleButton === 'top' && (
+          <GridContainer open={isOpen} ref={ref} maxHeight={maxHeight}>
+            {children}
+{/*             {toggleButton && toggleButton === 'top' && (
               <ToggleOpen
                 isOpen={isOpen}
                 onClick={() => handleToggle(!isOpen)}
               />
             )}
-            <TopContainer>
-              {onAction && actionLabel && actionIcon && (
-                <ActionButton
-                  isOpen={isOpen}
-                  icon={actionIcon}
-                  label={actionLabel}
-                  onAction={onAction}
-                />
-              )}
-              {children}
-            </TopContainer>
+            {onAction && actionLabel && actionIcon && (
+              <ActionButton
+                isOpen={isOpen}
+                icon={actionIcon}
+                label={actionLabel}
+                onAction={onAction}
+              />
+            )}
+            {children}
             {toggleButton && toggleButton === 'bottom' && (
               <ToggleOpen
                 isOpen={isOpen}
                 onClick={() => handleToggle(!isOpen)}
               />
             )}
-            <LogoContainer></LogoContainer>
-          </Container>
+            */}
+          </GridContainer>
         </SideBarContext.Provider>
       </ThemeProvider>
     )

@@ -34,7 +34,8 @@ const MenuButtonContainer = styled.div<ContainerProps>(({ theme, open }) => {
     grid-template-columns: repeat(9, 1fr);
     justify-content: center;
     align-items: center;
-    height: 100%;
+    //height: 100%;
+    height: 73px;
     box-sizing: border-box;
   `
 })
