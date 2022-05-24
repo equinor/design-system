@@ -48,8 +48,6 @@ Tables display information in an easy to scan format.
 import { Table } from '@equinor/eds-core-react'
 
 const Demo = () => {
-    const cellValues = toCellValues(data, columns)
-
     return (
         <Table>
         <Table.Caption>
@@ -57,19 +55,27 @@ const Demo = () => {
         </Table.Caption>
         <Table.Head>
             <Table.Row>
-            {columns.map((col) => (
-                                    <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
-                                ))}
+                <Table.Cell>Item no.</Table.Cell>
+                <Table.Cell>Name</Table.Cell>
+                <Table.Cell>Price</Table.Cell>
             </Table.Row>
         </Table.Head>
         <Table.Body>
-        {cellValues?.map((row) => (
-                        <Table.Row key={row.toString()}>
-            {row.map((cellValue) => (
-                                    <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
-                                ))}
+            <Table.Row>
+                <Table.Cell>123-456</Table.Cell>
+                <Table.Cell>Kiwi</Table.Cell>
+                <Table.Cell>1.5</Table.Cell>
             </Table.Row>
-                        ))}
+            <Table.Row>
+                <Table.Cell>789-012</Table.Cell>
+                <Table.Cell>Apple</Table.Cell>
+                <Table.Cell>0.5</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+                <Table.Cell>345-678</Table.Cell>
+                <Table.Cell>Mango</Table.Cell>
+                <Table.Cell>2.5</Table.Cell>
+            </Table.Row>
         </Table.Body>
     </Table>
     )
