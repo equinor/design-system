@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/addon-docs'
-import { Links, InfoCard } from '../../.storybook/components/'
+import { Links, InfoCard, Stack } from '../../.storybook/components/'
 import { Typography, List, Card } from '../../src'
 
 <Meta title="Welcome" />
@@ -19,6 +19,18 @@ import { Typography, List, Card } from '../../src'
 
 <Links sourceUrl="https://github.com/equinor/design-system" />
 
+
+
+<Stack direction="row" >
+<InfoCard title="Icons" description="Explore icons in EDS library" url="?path=/story/icons--preview" urlTitle="Browse icons"/>
+<InfoCard title="Tokens" description="Explore design tokens used in EDS" url="" urlTitle="Browse tokens"/>
+</Stack>
+
+<Typography variant="caption" style={{marginTop:'32px'}}>
+  If you want to get in touch with the team, you’ll find us in the Equinor slack channel  <Typography link href="https://equinor.slack.com/archives/CJT20H1B9">#eds-design-system</Typography>
+</Typography>
+
+
 <Typography variant="h2" style={{marginTop:'32px'}}>Packages</Typography>
 
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react" />
@@ -26,11 +38,3 @@ import { Typography, List, Card } from '../../src'
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-icons" />
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-tokens" />
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-utils" />
-
-<InfoCard title="Icons" description="Explore icons in EDS library" url="?path=/story/icons--preview" urlTitle="Browse icons"/>
-
-<Typography variant="caption" style={{marginTop:'32px'}}>
-  If you want to get in touch with the team, you’ll find us in the Equinor slack channel  <Typography link href="https://equinor.slack.com/archives/CJT20H1B9">#eds-design-system</Typography>
-</Typography>
-
-

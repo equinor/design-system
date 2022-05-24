@@ -23,7 +23,7 @@ export const InfoCard = ({
   url,
   urlTitle,
 }: InfoCardTypes) => (
-  <Paper elevation="raised">
+  <Paper elevation="raised" style={{ flex: '1' }}>
     <Card>
       <Card.Header>
         <Card.HeaderTitle>
