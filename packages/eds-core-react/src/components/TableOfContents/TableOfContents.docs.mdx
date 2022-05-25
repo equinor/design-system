@@ -17,4 +17,73 @@ A list of hyperlinks that scroll to anchored text on the same page.
 
 ## Usage
 
+Table of contents, also known as `anchors` or `article navigation`, link to anchored sections on a page. 
+
+<ul>
+    <li>They always link to the current page.</li>
+    <li>Table of contents can be placed either under the main heading and scroll away with the page, or to the right of the page's main content and be sticky.</li>
+</ul>
+
+```tsx
+import { TableOfContents } from '@equinor/eds-core-react'
+
+const Demo = () => {
+    return (
+    <>
+      <main>
+        <article>
+          <Typography variant="h1">Heading 1</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.
+          </Typography>
+          <Typography variant="h2" id="sub-section-one">Topic 1</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.
+          </Typography>
+          <Typography variant="h3">Heading 3</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.
+          </Typography>
+          <Typography variant="h2" id="sub-section-two">Topic 2</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.
+          </Typography>
+          <Typography variant="h3">Heading 3</Typography>
+          <Typography variant="body_long">
+            Lorem ipsum dolor sit amet consecteur dit lot. Lorem ipsum dolor sit
+            amet consecteur dit lot. Lorem ipsum dolor sit amet consecteur dit
+            lot.
+          </Typography>
+        </article>
+      </main>
+      <aside>
+        <TableOfContents>
+          <TableOfContents.LinkItem>
+            <Typography variant="body_short" link href="#sub-section-one">
+              <Icon name="subdirectory_arrow_right" size={16} />
+              <span>Topic 1</span>
+            </Typography>
+          </TableOfContents.LinkItem>
+          <TableOfContents.LinkItem title="Topic 2">
+            <Typography variant="body_short" link href="#sub-section-two">
+              <Icon name="subdirectory_arrow_right" size={16} />
+              <span>Topic 2</span>
+            </Typography>
+          </TableOfContents.LinkItem>
+        </TableOfContents>
+      </aside>
+    </>
+  )
+}
+
+```
+
 ## Examples
