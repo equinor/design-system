@@ -32,17 +32,6 @@ export default {
       page,
     },
   },
-  args: {
-    density: 'comfortable',
-  },
-  argTypes: {
-    density: {
-      options: ['comfortable', 'compact'],
-      control: {
-        type: 'select',
-      },
-    },
-  },
 } as ComponentMeta<typeof Table>
 
 export const introduction: Story<TableProps> = (args) => {
