@@ -9,8 +9,8 @@ import {
   EdsProvider,
 } from '../..'
 import { Story, Meta } from '@storybook/react'
-
 import { subdirectory_arrow_right } from '@equinor/eds-icons'
+import page from './TableOfContents.docs.mdx'
 
 const icons = {
   subdirectory_arrow_right,
@@ -26,11 +26,7 @@ export default {
   },
   parameters: {
     docs: {
-      description: {
-        component: `A table of contents is a list of hyperlinks that scroll
-        to anchored text on the same page.
-        `,
-      },
+      page,
     },
   },
 } as Meta
@@ -42,7 +38,7 @@ const Wrapper = styled.div`
   grid-template-columns: auto 14rem;
 `
 
-export const Example: Story<TableOfContentsProps> = (args) => {
+export const Introduction: Story<TableOfContentsProps> = (args) => {
   return (
     <Wrapper>
       <main>
