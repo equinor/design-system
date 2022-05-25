@@ -8,7 +8,7 @@ import {
   Density,
   EdsProvider,
 } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
 import { subdirectory_arrow_right } from '@equinor/eds-icons'
 import page from './TableOfContents.docs.mdx'
 
@@ -29,7 +29,7 @@ export default {
       page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof TableOfContents>
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -349,12 +349,4 @@ export const Compact: Story<TableOfContentsProps> = () => {
       </Wrapper>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `TableOfContents` using `EdsProvider` ',
-    },
-  },
 }
