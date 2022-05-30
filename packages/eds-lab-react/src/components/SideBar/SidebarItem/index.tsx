@@ -10,7 +10,7 @@ import {
 } from '@equinor/eds-core-react'
 import styled, { css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
-import { useSideBar } from '../SideBar'
+import { useSideBar } from '../SideBar.context'
 
 const {
   entities: {
