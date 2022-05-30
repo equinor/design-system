@@ -1,6 +1,7 @@
 import { Typography, TypographyProps, List } from '../..'
 import styled from 'styled-components'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
+import page from './Typography.docs.mdx'
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -15,7 +16,82 @@ const Grid = styled(Wrapper)`
 export default {
   title: 'Typography/Typography',
   component: Typography,
-} as Meta
+  parameters: {
+    docs: {
+      page,
+    },
+  },
+} as ComponentMeta<typeof Typography>
+
+export const Introduction: Story<TypographyProps> = () => (
+  <>
+    <Typography variant="h1" bold>
+      Heading 1 bold
+    </Typography>
+    <Typography variant="h2">Heading 2</Typography>
+    <ul>
+      <li>
+        <Typography variant="body_long_link">body_long_link</Typography>
+      </li>
+      <li>
+        <Typography variant="body_long_link">body_long_link</Typography>
+      </li>
+      <li>
+        <Typography variant="body_long_link">body_long_link</Typography>
+      </li>
+    </ul>
+    <Typography variant="h3">Heading 3</Typography>
+    <Typography variant="h4">Heading 4</Typography>
+    <Typography variant="overline">overline - subtitle</Typography>
+    <Typography variant="body_long">
+      body_long: It is a long established fact that a reader will be distracted
+      by the readable content of a page when looking at its{' '}
+      <Typography link href="#">
+        link
+      </Typography>{' '}
+      .
+    </Typography>
+    <Typography variant="body_short">
+      body_short: It is a long established fact that a reader will be distracted
+      by the readable content of a page when looking at its{' '}
+      <Typography link href="#">
+        link
+      </Typography>{' '}
+      . The point of using Lorem Ipsum is that it has a more-or-less normal
+      distribution of letters, as opposed to using Content here, content here,
+      making it look like readable English.
+    </Typography>
+    <Typography variant="h3">Heading 3</Typography>
+    <Typography variant="h4">Heading 4</Typography>
+    <Typography variant="overline">overline - subtitle</Typography>
+    <Typography variant="body_long_bold_italic">
+      &ldquo;body_long_bold_italic: It is a long established fact that a reader
+      will be distracted by the readable content of a page when looking at its
+      layout.&ldquo;
+    </Typography>
+    <Typography variant="body_short">
+      body_short: It is a long established fact that a reader will be distracted
+      by the readable content of a page when looking at its layout. The point of
+      using Lorem Ipsum is that it has a more-or-less normal distribution of
+      letters, as opposed to using Content here, content here, making it look
+      like readable English.
+    </Typography>
+    <Typography variant="h3">Heading 3</Typography>
+    <Typography variant="h4">Heading 4</Typography>
+    <Typography variant="overline">overline - subtitle</Typography>
+    <Typography variant="body_long">
+      body_long: It is a long established fact that a reader will be distracted
+      by the readable content of a page when looking at its layout.
+    </Typography>
+    <Typography variant="body_short">
+      body_short: It is a long established fact that a reader will be distracted
+      by the readable content of a page when looking at its layout. The point of
+      using Lorem Ipsum is that it has a more-or-less normal distribution of
+      letters, as opposed to using Content here, content here, making it look
+      like readable English.
+    </Typography>
+  </>
+)
 
 export const headings: Story<TypographyProps> = () => (
   <Grid>
