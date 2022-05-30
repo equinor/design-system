@@ -20,7 +20,7 @@ const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
       actionLabel,
       actionIcon,
       toggleButton,
-      onToggle,
+      onToggle: onToggleCallback,
       open = false,
       maxHeight,
       children,
@@ -28,19 +28,21 @@ const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
     },
     ref,
   ) {
-    const { isOpen, setIsOpen } = useSideBar()
-    const handleToggle = (toggle: boolean) => {
-      setIsOpen(toggle)
-      //onToggle?.(toggle)
-    }
+    const { isOpen, setIsOpen, onToggle, setOnToggle } = useSideBar()
 
     useEffect(() => {
-      handleToggle(open)
+      if (onToggle === null && onToggleCallback) {
+        setOnToggle(onToggleCallback)
+      }
+    }, [onToggle, onToggleCallback, setOnToggle])
+
+    useEffect(() => {
+      setIsOpen(open)
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open])
 
     return (
-      <GridContainer open={isOpen} ref={ref} maxHeight={maxHeight}>
+      <GridContainer {...rest} open={isOpen} ref={ref} maxHeight={maxHeight}>
         {children}
       </GridContainer>
     )
