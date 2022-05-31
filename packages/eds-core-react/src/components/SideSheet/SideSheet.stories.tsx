@@ -11,7 +11,6 @@ import {
   Search,
   Slider,
   Table,
-  TextField,
   TopBar,
   Typography,
 } from '../..'
@@ -63,7 +62,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(2, fit-content(100%));
-  padding-top: 16px;
+  padding: 16px 0 0 12px;
 `
 
 const SheetWrapper = styled.div`
@@ -194,24 +193,8 @@ export const Scrollable: Story<SideSheetProps> = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <Container>
-      <TopBar>
-        <TopBar.Header>Files</TopBar.Header>
-        <TopBar.CustomContent>
-          <Search
-            aria-label="sitewide"
-            id="search-normal"
-            placeholder="Search"
-          />
-        </TopBar.CustomContent>
-        <TopBar.Actions>
-          <Icons>
-            <Icon name="account_circle" size={16} title="user" />
-            <Icon name="notifications" size={16} title="notifications" />
-          </Icons>
-        </TopBar.Actions>
-      </TopBar>
-      <Table>
+    <>
+      <Table style={{ width: '100%' }}>
         <Table.Head>
           <Table.Row>
             {columns.map((col) => (
@@ -248,12 +231,6 @@ export const Scrollable: Story<SideSheetProps> = () => {
         >
           <SheetWrapper>
             <Typography variant="h4">Details</Typography>
-            <TextField
-              id="storybook-details"
-              placeholder="Add description"
-              inputIcon={<Icon name="edit" title="Add description" />}
-              style={{ paddingTop: '16px' }}
-            />
             <Divider />
             <Typography variant="h6" color="disabled">
               Information
@@ -294,6 +271,6 @@ export const Scrollable: Story<SideSheetProps> = () => {
           </SheetWrapper>
         </SideSheet>
       </Scrim>
-    </Container>
+    </>
   )
 }
