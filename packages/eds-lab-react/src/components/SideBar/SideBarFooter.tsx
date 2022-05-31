@@ -6,7 +6,6 @@ export type SideBarFooterProps = HTMLAttributes<HTMLDivElement>
 const StyledSideBarFooter = styled.div(({ theme }) => {
   return css`
     grid-area: footer;
-    border-top: 1px solid rgba(220, 220, 220, 1);
     padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
     :last-child {
       padding-bottom: ${theme.spacings.bottom};

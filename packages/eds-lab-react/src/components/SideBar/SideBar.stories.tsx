@@ -22,12 +22,6 @@ export default {
   },
   argTypes: {
     backgroundColor: { control: 'color' },
-    toggleButton: {
-      options: ['top', 'bottom', null],
-      control: {
-        type: 'select',
-      },
-    },
   },
 } as Meta
 
@@ -87,10 +81,7 @@ export const NoAction: Story = () => {
 
   return (
     <div style={{ display: 'flex', height: '95vh' }}>
-      <SideBar
-        toggleButton="top"
-        onToggle={(toggle) => console.log('toggled test ', toggle)}
-      >
+      <SideBar onToggle={(toggle) => console.log('toggled test ', toggle)}>
         <SideBar.Content>
           <SideBar.Toggle />
           {menuItems.map((m) => (
@@ -127,7 +118,6 @@ export const WithAction: Story = () => {
         actionLabel="Create a diamond"
         actionIcon={add}
         onAction={() => console.log('Created 💎')}
-        toggleButton="bottom"
       >
         <SideBar.Content>
           {menuItems.map((m) => (
@@ -163,7 +153,6 @@ export const WithCurrentUrlAndAction: Story = () => {
       <SideBar
         actionLabel="Create story"
         actionIcon={add}
-        toggleButton="bottom"
         onAction={() => console.log('Created 🖋')}
       >
         <SideBar.Content>

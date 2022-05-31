@@ -2,7 +2,6 @@ import { HTMLAttributes, forwardRef, useEffect } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate, useToken } from '@equinor/eds-utils'
-//import { ToggleOpen } from './ToggleOpen'
 //import { ActionButton } from './ActionButton'
 import { useEds } from '@equinor/eds-core-react'
 import { IconData } from '@equinor/eds-icons'
@@ -19,7 +18,6 @@ const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
       onAction,
       actionLabel,
       actionIcon,
-      toggleButton,
       onToggle: onToggleCallback,
       open = false,
       maxHeight,
@@ -73,7 +71,6 @@ type SidebarProps = {
   onAction?: () => void
   actionLabel?: string
   actionIcon?: IconData
-  toggleButton?: 'top' | 'bottom'
   open?: boolean
   maxHeight?: string
   onToggle?: (state: boolean) => void
@@ -85,7 +82,6 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarProps>(
       onAction,
       actionLabel,
       actionIcon,
-      toggleButton,
       onToggle,
       open = false,
       maxHeight,
@@ -101,7 +97,6 @@ export const SideBar = forwardRef<HTMLDivElement, SidebarProps>(
       onAction,
       actionLabel,
       actionIcon,
-      toggleButton,
       onToggle,
       open,
       maxHeight,
