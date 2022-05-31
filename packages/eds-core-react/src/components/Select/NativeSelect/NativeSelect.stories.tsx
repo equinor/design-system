@@ -1,22 +1,20 @@
 import { useState, useEffect } from 'react'
 import { NativeSelect, NativeSelectProps, EdsProvider, Density } from '../../..'
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { Story } from '@storybook/react/types-6-0'
+import { ComponentMeta } from '@storybook/react'
+import page from './NativeSelect.docs.mdx'
 
 export default {
   title: 'Inputs/Select/NativeSelect',
   component: NativeSelect,
   parameters: {
     docs: {
-      description: {
-        component: `The NativeSelect component allows users to choose one or
-        multiple items or options from a list.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof NativeSelect>
 
-export const Default: Story<NativeSelectProps> = (args) => (
+export const Introduction: Story<NativeSelectProps> = (args) => (
   <NativeSelect label="Label text" meta="m2" id="default-select" {...args}>
     <option>First option with a really really long text</option>
     <option>Second</option>
@@ -31,6 +29,7 @@ export const Multiple: Story<NativeSelectProps> = () => (
     <option>Even another</option>
   </NativeSelect>
 )
+
 export const Disabled: Story<NativeSelectProps> = () => (
   <NativeSelect label="Label text" disabled id="disabled-select">
     <option>Pick one</option>
@@ -56,12 +55,4 @@ export const Compact: Story = () => {
       </NativeSelect>
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `NativeSelect` using `EdsProvider` ',
-    },
-  },
 }
