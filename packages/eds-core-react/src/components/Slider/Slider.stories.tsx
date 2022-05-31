@@ -16,7 +16,7 @@ export default {
 export const Introduction: Story<SliderProps> = (args) => {
   return (
     <div style={{ margin: '3rem' }}>
-      <Slider {...args} />
+      <Slider aria-label="simple-slider" {...args} />
     </div>
   )
 }
