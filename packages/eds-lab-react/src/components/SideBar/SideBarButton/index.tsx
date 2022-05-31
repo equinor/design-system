@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { ForwardRefExoticComponent, forwardRef } from 'react'
 import {
   Button,
   ButtonProps,
@@ -7,6 +7,7 @@ import {
   Tooltip as EDSTooltip,
 } from '@equinor/eds-core-react'
 import { sidebar as tokens } from '../SideBar.tokens'
+import { useSideBar } from '../SideBar.context'
 import { bordersTemplate } from '@equinor/eds-utils'
 import styled, { css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
@@ -23,14 +24,8 @@ type ContainerProps = {
   open: boolean
 }
 const MenuButtonContainer = styled.div<ContainerProps>(({ theme, open }) => {
-  const {
-    entities: {
-      actionButton: { border },
-    },
-  } = theme
   return css`
     display: ${open ? 'grid' : 'flex'};
-    ${bordersTemplate(border)}
     grid-template-columns: repeat(9, 1fr);
     justify-content: center;
     align-items: center;
@@ -90,42 +85,44 @@ const Tooltip = styled(EDSTooltip)`
   }
 `
 
-export type ActionButtonProps = {
+export type SideBarButtonProps = {
   label: string
   icon: IconData
-  onAction: () => void
-  isOpen: boolean
-}
+} & ButtonProps
 
-export const ActionButton: FC<ActionButtonProps> = ({
-  label,
-  icon,
-  onAction,
-  isOpen,
-}) => {
-  if (isOpen) {
+export const SideBarButton: ForwardRefExoticComponent<SideBarButtonProps> =
+  forwardRef<HTMLButtonElement, SideBarButtonProps>(function SideBarToggle(
+    { label, icon, ...rest },
+    ref,
+  ) {
+    const props = {
+      ...rest,
+      ref,
+    }
+    const { isOpen } = useSideBar()
+    if (isOpen) {
+      return (
+        <MenuButtonContainer open={isOpen}>
+          <ExtendedButton open variant="contained" {...props}>
+            <Icon data={icon} color={primaryWhite} />
+            <ExtendedButtonText
+              color={primaryWhite}
+              variant="button"
+              group="navigation"
+            >
+              {label}
+            </ExtendedButtonText>
+          </ExtendedButton>
+        </MenuButtonContainer>
+      )
+    }
     return (
-      <MenuButtonContainer open={isOpen}>
-        <ExtendedButton open variant="contained" onClick={onAction}>
-          <Icon data={icon} color={primaryWhite} />
-          <ExtendedButtonText
-            color={primaryWhite}
-            variant="button"
-            group="navigation"
-          >
-            {label}
-          </ExtendedButtonText>
-        </ExtendedButton>
-      </MenuButtonContainer>
+      <Tooltip title={label} placement="right">
+        <MenuButtonContainer open={isOpen}>
+          <ExtendedButton variant="ghost_icon" {...props}>
+            <Icon data={icon} color={primaryWhite} />
+          </ExtendedButton>
+        </MenuButtonContainer>
+      </Tooltip>
     )
-  }
-  return (
-    <Tooltip title={label} placement="right">
-      <MenuButtonContainer open={isOpen}>
-        <ExtendedButton variant="ghost_icon" onClick={onAction}>
-          <Icon data={icon} color={primaryWhite} />
-        </ExtendedButton>
-      </MenuButtonContainer>
-    </Tooltip>
-  )
-}
+  })

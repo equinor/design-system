@@ -2,7 +2,6 @@ import { HTMLAttributes, forwardRef, useEffect } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate, useToken } from '@equinor/eds-utils'
-//import { ActionButton } from './ActionButton'
 import { useEds } from '@equinor/eds-core-react'
 import { IconData } from '@equinor/eds-icons'
 import { useSideBar, SideBarProvider } from './SideBar.context'
@@ -14,16 +13,7 @@ type ContainerProps = {
 
 const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
   function SideBarContainer(
-    {
-      onAction,
-      actionLabel,
-      actionIcon,
-      onToggle: onToggleCallback,
-      open = false,
-      maxHeight,
-      children,
-      ...rest
-    },
+    { onToggle: onToggleCallback, open = false, maxHeight, children, ...rest },
     ref,
   ) {
     const { isOpen, setIsOpen, onToggle, setOnToggle } = useSideBar()
@@ -77,26 +67,11 @@ type SidebarProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 export const SideBar = forwardRef<HTMLDivElement, SidebarProps>(
-  (
-    {
-      onAction,
-      actionLabel,
-      actionIcon,
-      onToggle,
-      open = false,
-      maxHeight,
-      children,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ onToggle, open = false, maxHeight, children, ...rest }, ref) => {
     const { density } = useEds()
     const token = useToken({ density }, tokens)
 
     const props = {
-      onAction,
-      actionLabel,
-      actionIcon,
       onToggle,
       open,
       maxHeight,

@@ -48,6 +48,7 @@ export const Primary: Story<SidebarType> = (args) => {
     <div style={{ display: 'flex', height: '95vh' }}>
       <SideBar {...args}>
         <SideBar.Content>
+          <SideBar.Button label="Create story" icon={add} />
           {menuItems.map((m) => (
             <SideBar.Item key={m.name} {...m} />
           ))}
@@ -84,6 +85,11 @@ export const NoAction: Story = () => {
       <SideBar onToggle={(toggle) => console.log('toggled test ', toggle)}>
         <SideBar.Content>
           <SideBar.Toggle />
+          <SideBar.Button
+            label="Create story"
+            icon={add}
+            onClick={() => console.log('clicked')}
+          />
           {menuItems.map((m) => (
             <SideBar.Item key={m.name} {...m} />
           ))}
