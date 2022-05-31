@@ -1,6 +1,8 @@
 import styled from 'styled-components'
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
 import { Avatar, AvatarProps, Typography } from '../..'
+import { Stack } from './../../../.storybook/components'
+import page from './Avatar.docs.mdx'
 
 const Container = styled.div`
   margin: 32px;
@@ -18,15 +20,15 @@ export default {
   component: Avatar,
   parameters: {
     docs: {
-      description: {
-        component: `An avatar is a small (user) picture. The avatar does not exist in Figma as a separate component.`,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Avatar>
 
-export const Default: Story<AvatarProps> = (args) => (
-  <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} {...args} />
+export const Introduction: Story<AvatarProps> = (args) => (
+  <Stack>
+    <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} {...args} />
+  </Stack>
 )
 
 export const Examples: Story<AvatarProps> = () => (
