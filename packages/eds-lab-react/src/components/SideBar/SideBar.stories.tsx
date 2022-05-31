@@ -7,7 +7,7 @@ import {
   add,
 } from '@equinor/eds-icons'
 import { SideBar, SidebarType } from '../../components/SideBar'
-import { SidebarItemType } from './SidebarItem'
+import { SidebarLinkType } from './SidebarItem'
 
 export default {
   title: 'Components/SideBar',
@@ -26,7 +26,7 @@ export default {
 } as Meta
 
 export const Primary: Story<SidebarType> = (args) => {
-  const menuItems: SidebarItemType[] = [
+  const menuItems: SidebarLinkType[] = [
     {
       name: 'home',
       icon: home,
@@ -50,7 +50,7 @@ export const Primary: Story<SidebarType> = (args) => {
         <SideBar.Content>
           <SideBar.Button label="Create story" icon={add} />
           {menuItems.map((m) => (
-            <SideBar.Item key={m.name} {...m} />
+            <SideBar.Link key={m.name} {...m} />
           ))}
         </SideBar.Content>
         <SideBar.Footer>
@@ -62,7 +62,7 @@ export const Primary: Story<SidebarType> = (args) => {
 }
 
 export const NoAction: Story = () => {
-  const menuItems: SidebarItemType[] = [
+  const menuItems: SidebarLinkType[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
@@ -91,7 +91,7 @@ export const NoAction: Story = () => {
             onClick={() => console.log('clicked')}
           />
           {menuItems.map((m) => (
-            <SideBar.Item key={m.name} {...m} />
+            <SideBar.Link key={m.name} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>
@@ -100,7 +100,7 @@ export const NoAction: Story = () => {
 }
 
 export const WithAction: Story = () => {
-  const menuItems: SidebarItemType[] = [
+  const menuItems: SidebarLinkType[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
@@ -127,7 +127,7 @@ export const WithAction: Story = () => {
       >
         <SideBar.Content>
           {menuItems.map((m) => (
-            <SideBar.Item key={m.name} {...m} />
+            <SideBar.Link key={m.name} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>
@@ -136,7 +136,7 @@ export const WithAction: Story = () => {
 }
 
 export const WithCurrentUrlAndAction: Story = () => {
-  const menuItems: SidebarItemType[] = [
+  const menuItems: SidebarLinkType[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
@@ -163,7 +163,7 @@ export const WithCurrentUrlAndAction: Story = () => {
       >
         <SideBar.Content>
           {menuItems.map((m) => (
-            <SideBar.Item key={m.name} {...m} />
+            <SideBar.Link key={m.name} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>
