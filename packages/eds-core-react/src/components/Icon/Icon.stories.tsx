@@ -29,7 +29,6 @@ export default {
 
 export const Introduction: Story<IconProps> = (args) => (
   <Stack>
-    {' '}
     <Icon {...args} />
   </Stack>
 )
