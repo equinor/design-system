@@ -1,6 +1,6 @@
 import { SideBar as BaseSideBar } from './SideBar'
 import { useSideBar } from './SideBar.context'
-import { SidebarLink, SidebarLinkType as LinkType } from './SidebarItem'
+import { SidebarLink, SidebarLinkType as LinkType } from './SidebarLink'
 import { SideBarContent, SideBarContentProps } from './SideBarContent'
 import { SideBarFooter, SideBarFooterProps } from './SideBarFooter'
 import { SideBarToggle } from './SideBarToggle'

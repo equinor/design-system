@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react'
 //import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
-import { SidebarItemType } from './SidebarItem'
+import { SidebarLinkType } from './SidebarLink'
 import { home, star_half } from '@equinor/eds-icons'
 
-const defaultMenuItems: SidebarItemType[] = [
+const defaultMenuItems: SidebarLinkType[] = [
   {
     name: 'Home',
     icon: home,
@@ -22,7 +22,7 @@ test('Sidebar renders', () => {
   render(
     <SideBar>
       {defaultMenuItems.map((m) => {
-        return <SideBar.Item key={m.name} currentUrl={currentUrl} {...m} />
+        return <SideBar.Link key={m.name} currentUrl={currentUrl} {...m} />
       })}
     </SideBar>,
   )
@@ -32,7 +32,7 @@ test('Renders closed width when closed', () => {
   render(
     <SideBar open={false}>
       {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
+        <SideBar.Link key={m.name} {...m} />
       ))}
     </SideBar>,
   )
@@ -44,7 +44,7 @@ test('Renders open width when open', () => {
   render(
     <SideBar open={true}>
       {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
+        <SideBar.Link key={m.name} {...m} />
       ))}
     </SideBar>,
   )
@@ -59,7 +59,7 @@ test('Triggers onToggle callback when closed', () => {
       <SideBar.Content>
         <SideBar.Toggle />
         {defaultMenuItems.map((m) => (
-          <SideBar.Item key={m.name} {...m} />
+          <SideBar.Link key={m.name} {...m} />
         ))}
       </SideBar.Content>
     </SideBar>,
@@ -78,7 +78,7 @@ test('Triggers onToggle callback when opened', () => {
       <SideBar.Content>
         <SideBar.Toggle />
         {defaultMenuItems.map((m) => (
-          <SideBar.Item key={m.name} {...m} />
+          <SideBar.Link key={m.name} {...m} />
         ))}
       </SideBar.Content>
     </SideBar>,
@@ -97,7 +97,7 @@ test('onToggle send correct state back', () => {
       <SideBar.Content>
         <SideBar.Toggle />
         {defaultMenuItems.map((m) => (
-          <SideBar.Item key={m.name} {...m} />
+          <SideBar.Link key={m.name} {...m} />
         ))}
       </SideBar.Content>
     </SideBar>,

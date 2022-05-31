@@ -8,7 +8,7 @@ import {
   add,
 } from '@equinor/eds-icons'
 import { SideBar, SidebarType, useSideBar } from '../../components/SideBar'
-import { SidebarLinkType } from './SidebarItem'
+import { SidebarLinkType } from './SidebarLink'
 
 export default {
   title: 'Components/SideBar',
