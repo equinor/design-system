@@ -4,24 +4,25 @@ import { Typography, List, Card } from '../../src'
 
 <Meta title="Welcome" />
 
-<Typography variant="h1">Equinor Design System Storybook</Typography>
+# Equinor Design System Storybook
 
-
-<Typography variant="ingress">
+<Stack direction="column" align="start">
+<Typography variant="ingress"  style={{marginTop:'16px'}}>
   This is the storybook for the implementation of the Equinor Design
   System. Our goal is to create and provided resources for web development in Equinor.
 </Typography>
 
-<Typography variant="body_short">
+
+<Typography variant="body_short"  style={{marginTop:'32px'}}>
   We have a <Typography link href="https://eds.equinor.com/">storefront</Typography> with
   extensive documentation for components, guidelines and patterns.
 </Typography>
 
+
 <Links sourceUrl="https://github.com/equinor/design-system" />
 
 
-
-<Stack direction="row" >
+<Stack direction="row" style={{marginTop:'32px',alignItems:'stretch'}}>
 <InfoCard title="Icons" description="Explore icons in EDS library" url="?path=/story/icons--preview" urlTitle="Browse icons"/>
 <InfoCard title="Tokens" description="Explore design tokens used in EDS" url="" urlTitle="Browse tokens"/>
 </Stack>
@@ -33,8 +34,25 @@ import { Typography, List, Card } from '../../src'
 
 <Typography variant="h2" style={{marginTop:'32px'}}>Packages</Typography>
 
+<Typography variant="h3" style={{marginTop:'32px'}}>@equinor/eds-core-react</Typography>
+
+[![core](https://img.shields.io/npm/v/@equinor/eds-core-react/latest)](https://www.npmjs.com/package/@equinor/eds-core-react)
+
+
+<Typography variant="h3" style={{marginTop:'32px'}}>@equinor/eds-lab-react</Typography>
+
+[![lab](https://img.shields.io/npm/v/@equinor/eds-lab-react/latest)](https://www.npmjs.com/package/@equinor/eds-lab-react)
+
+<Typography variant="h3" style={{marginTop:'32px'}}>@equinor/eds-tokens</Typography>
+
+[![tokens](https://img.shields.io/npm/v/@equinor/eds-tokens/latest)](https://www.npmjs.com/package/@equinor/eds-tokens)
+
+[![icons](https://img.shields.io/npm/v/@equinor/eds-icons/latest)](https://www.npmjs.com/package/@equinor/eds-icons)
+[![utils](https://img.shields.io/npm/v/@equinor/eds-utils/latest)](https://www.npmjs.com/package/@equinor/eds-utils)
+
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react" />
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-lab-react" />
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-icons" />
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-tokens" />
 <Links npmUrl="https://www.npmjs.com/package/@equinor/eds-utils" />
+</Stack>

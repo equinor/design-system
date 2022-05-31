@@ -23,21 +23,19 @@ export const InfoCard = ({
   url,
   urlTitle,
 }: InfoCardTypes) => (
-  <Paper elevation="raised" style={{ flex: '1' }}>
-    <Card>
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="h5">{title}</Typography>
-        </Card.HeaderTitle>
-      </Card.Header>
-      <Card.Content>
-        <Typography variant="body_short">{description}</Typography>
-      </Card.Content>
-      <Card.Actions>
-        <Button href={url} variant="outlined">
-          {urlTitle}
-        </Button>
-      </Card.Actions>
-    </Card>
-  </Paper>
+  <Card style={{ flex: '1' }}>
+    <Card.Header>
+      <Card.HeaderTitle>
+        <Typography variant="h5">{title}</Typography>
+      </Card.HeaderTitle>
+    </Card.Header>
+    <Card.Content>
+      <Typography variant="body_short">{description}</Typography>
+    </Card.Content>
+    <Card.Actions>
+      <Button href={url} variant="outlined">
+        {urlTitle}
+      </Button>
+    </Card.Actions>
+  </Card>
 )
