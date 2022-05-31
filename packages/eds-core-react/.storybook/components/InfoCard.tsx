@@ -17,13 +17,22 @@ type InfoCardTypes = {
   urlTitle?: string
 }
 
+const SBCard = styled(Card)`
+  align-items: initial;
+  grid-template-columns: none;
+  grid-template-rows: auto;
+  flex: 1;
+  border: 1px solid #000;
+  height: auto;
+`
+
 export const InfoCard = ({
   title,
   description,
   url,
   urlTitle,
 }: InfoCardTypes) => (
-  <Card style={{ flex: '1' }}>
+  <SBCard>
     <Card.Header>
       <Card.HeaderTitle>
         <Typography variant="h5">{title}</Typography>
@@ -37,5 +46,5 @@ export const InfoCard = ({
         {urlTitle}
       </Button>
     </Card.Actions>
-  </Card>
+  </SBCard>
 )
