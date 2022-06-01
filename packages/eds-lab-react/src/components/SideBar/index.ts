@@ -21,7 +21,7 @@ SideBar.Footer = SideBarFooter
 SideBar.Toggle = SideBarToggle
 SideBar.Button = SideBarButton
 
-SideBar.Link.displayName = 'SideBar.Item'
+SideBar.Link.displayName = 'SideBar.Link'
 SideBar.Content.displayName = 'SideBar.Content'
 SideBar.Footer.displayName = 'SideBar.Footer'
 SideBar.Toggle.displayName = 'SideBar.Toggle'
