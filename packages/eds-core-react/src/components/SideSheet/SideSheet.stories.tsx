@@ -8,10 +8,8 @@ import {
   Divider,
   Icon,
   Scrim,
-  Search,
   Slider,
   Table,
-  TopBar,
   Typography,
 } from '../..'
 import { toCellValues } from '../../stories/toCellValues'
@@ -41,21 +39,6 @@ const Child = styled.div`
   box-sizing: border-box;
   border: 1px dashed #ff9200;
   border-radius: 4px;
-`
-
-const Container = styled.div`
-  display: grid;
-  grid-template-rows: 64px auto;
-  height: 100%;
-`
-
-const Icons = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-  > * {
-    margin-left: 40px;
-  }
 `
 
 const Wrapper = styled.div`
@@ -92,7 +75,6 @@ export const Introduction: Story<SideSheetProps> = (args) => {
 
 export const Placement: Story<SideSheetProps> = () => {
   const cellValues = toCellValues(data, columns)
-  const [open, setOpen] = useState(false)
   const [value, updateValue] = useState([1, 50])
   const changeHandler = (
     event: FormEvent<HTMLDivElement>,
@@ -102,27 +84,8 @@ export const Placement: Story<SideSheetProps> = () => {
   }
 
   return (
-    <Container>
-      <TopBar>
-        <TopBar.Header>Files</TopBar.Header>
-        <TopBar.CustomContent>
-          <Search
-            aria-label="sitewide"
-            id="search-normal"
-            placeholder="Search"
-          />
-        </TopBar.CustomContent>
-        <TopBar.Actions>
-          <Icons>
-            <Icon name="account_circle" size={16} title="user" />
-            <Icon name="notifications" size={16} />
-            <Button variant="ghost_icon" onClick={() => setOpen(!open)}>
-              <Icon name="filter_list" size={16} />
-            </Button>
-          </Icons>
-        </TopBar.Actions>
-      </TopBar>
-      <Table>
+    <>
+      <Table style={{ width: '70%' }}>
         <Table.Head>
           <Table.Row>
             {columns.map((col) => (
@@ -140,51 +103,44 @@ export const Placement: Story<SideSheetProps> = () => {
           ))}
         </Table.Body>
       </Table>
-      <Scrim
-        open={open}
-        onClose={() => setOpen(!open)}
-        isDismissable
-        style={{ position: 'absolute' }}
-      >
-        <SideSheet open={open} onClose={() => setOpen(!open)}>
-          <div>
-            <Typography variant="h4">Filters</Typography>
-            <br />
-            <Typography variant="h6" color="disabled">
-              Labels
-            </Typography>
-            <UnstyledList>
-              <li>
-                <Checkbox
-                  label="Fruits"
-                  name="multiple"
-                  value="first"
-                  defaultChecked
-                />
-              </li>
-              <li>
-                <Checkbox label="Vegetables" name="multiple" value="second" />
-              </li>
-              <li>
-                <Checkbox label="Favourites" name="multiple" value="third" />
-              </li>
-            </UnstyledList>
-            <br />
-            <Typography id="range-slider-label" variant="h6" color="disabled">
-              Price range
-            </Typography>
-            <Slider
-              value={value}
-              onChange={changeHandler}
-              ariaLabelledby="range-slider-label"
-            />
-            <p style={{ marginTop: '1.5rem' }}>
-              <small>$: {value.join(', ')}</small>
-            </p>
-          </div>
-        </SideSheet>
-      </Scrim>
-    </Container>
+      <SideSheet open={true} style={{ height: '91%' }}>
+        <div>
+          <Typography variant="h4">Filters</Typography>
+          <br />
+          <Typography variant="h6" color="disabled">
+            Labels
+          </Typography>
+          <UnstyledList>
+            <li>
+              <Checkbox
+                label="Fruits"
+                name="multiple"
+                value="first"
+                defaultChecked
+              />
+            </li>
+            <li>
+              <Checkbox label="Vegetables" name="multiple" value="second" />
+            </li>
+            <li>
+              <Checkbox label="Favourites" name="multiple" value="third" />
+            </li>
+          </UnstyledList>
+          <br />
+          <Typography id="range-slider-label" variant="h6" color="disabled">
+            Price range
+          </Typography>
+          <Slider
+            value={value}
+            onChange={changeHandler}
+            ariaLabelledby="range-slider-label"
+          />
+          <p style={{ marginTop: '1.5rem' }}>
+            <small>$: {value.join(', ')}</small>
+          </p>
+        </div>
+      </SideSheet>
+    </>
   )
 }
 
@@ -211,7 +167,7 @@ export const Scrollable: Story<SideSheetProps> = () => {
               ))}
               <Table.Cell>
                 <Button variant="ghost_icon" onClick={() => setOpen(!open)}>
-                  <Icon name="details" size={16} title="details" />
+                  <Icon name="more_vertical" size={16} title="details" />
                 </Button>
               </Table.Cell>
             </Table.Row>
