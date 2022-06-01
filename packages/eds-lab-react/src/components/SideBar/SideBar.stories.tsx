@@ -14,6 +14,8 @@ import {
   useSideBar,
 } from '../../components/SideBar'
 
+const { Content, Footer, Link, Toggle, Button } = SideBar
+
 export default {
   title: 'Components/SideBar',
   body: `
@@ -21,8 +23,8 @@ export default {
 
   `,
   component: SideBar,
+  subcomponents: { Content, Footer, Link, Toggle, Button },
   args: {
-    actionLabel: 'Create story',
     open: true,
   },
   argTypes: {
