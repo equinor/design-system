@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import type { CSSObject } from 'styled-components'
 import * as tokens from './LinearProgress.tokens'
@@ -55,6 +55,18 @@ const IndeterminateProgressBar = styled.div`
     infinite;
 `
 
+const SrOnlyOutput = styled.output`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+`
+
 export type LinearProgressProps = {
   /** Variant
    * Use indeterminate when there is no progress value */
@@ -73,6 +85,8 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
       ...rest,
       ref,
     }
+    const [srProgress, setSrProgress] = useState(0)
+
     let barStyle: string
     if (variant === 'determinate') {
       if (value !== undefined) {
@@ -89,14 +103,36 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>(
       transform: barStyle,
     }
 
+    useEffect(() => {
+      if (variant === 'indeterminate') return
+      if (value >= 25 && value < 50) {
+        setSrProgress(25)
+      } else if (value >= 50 && value < 75) {
+        setSrProgress(50)
+      } else if (value >= 75 && value < 100) {
+        setSrProgress(75)
+      } else if (value === 100) {
+        setSrProgress(100)
+      }
+    }, [value, variant])
+
+    const getProgressFormatted = () => {
+      return `Loading ${srProgress}%`
+    }
+
     return (
-      <Track {...props} role="progressbar">
-        {variant === 'indeterminate' ? (
-          <IndeterminateProgressBar />
-        ) : (
-          <ProgressBar style={transformStyle} />
+      <>
+        <Track {...props} role="progressbar">
+          {variant === 'indeterminate' ? (
+            <IndeterminateProgressBar />
+          ) : (
+            <ProgressBar style={transformStyle} />
+          )}
+        </Track>
+        {variant === 'determinate' && (
+          <SrOnlyOutput>{getProgressFormatted()}</SrOnlyOutput>
         )}
-      </Track>
+      </>
     )
   },
 )
