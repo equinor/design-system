@@ -27,7 +27,11 @@ export default {
   },
 } as ComponentMeta<typeof Icon>
 
-export const Introduction: Story<IconProps> = (args) => <Icon {...args} />
+export const Introduction: Story<IconProps> = (args) => (
+  <Stack>
+    <Icon {...args} />
+  </Stack>
+)
 
 Introduction.args = {
   name: 'save',
@@ -36,7 +40,9 @@ Introduction.args = {
 }
 
 export const Accessibility: Story<IconProps> = () => (
-  <Icon name="save" title="Save me!" />
+  <Stack>
+    <Icon name="save" title="Save me!" />
+  </Stack>
 )
 
 export const Color: Story<IconProps> = () => (

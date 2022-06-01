@@ -1,11 +1,17 @@
 
-import { Story, PropsTable } from './../../../.storybook/components'
+import { Links, Story, PropsTable } from './../../../.storybook/components'
 import * as icons from '@equinor/eds-icons'
 import { Icon  } from '.'
 
 
 # Icon 
 Component for rendering icons from the `@equinor/eds-icons` package.
+
+<Links 
+    figmaUrl="https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/347dd6-system-icons/b/25520a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Icon/Icon.tsx"
+/>
 
 <Story id="icons-icon--introduction" />
 <PropsTable />
@@ -19,6 +25,8 @@ npm install @equinor/eds-core-react @equinor/eds-icons
 
 ## Usage
 
+System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. <br />
+They are to provide meaning at a glance. <br />
 The `Icon` can then render the icons in two ways: 
 
 ### Option 1 
@@ -59,6 +67,10 @@ If you are using the icons alone to convey meaning you need to provide the `titl
 
 
 ## Sizes
+Simple and clear icons require a strict underlying grid.
+<ul>
+    <li>When using compact mode the size of icons are 18px.</li>
+</ul>
 <Story id="icons-icon--sizes" />
 
 
