@@ -78,6 +78,7 @@ export const SingleCheckbox: Story<CheckboxProps> = () => {
     </UnstyledList>
   )
 }
+SingleCheckbox.storyName = 'Single checkbox'
 
 export const GroupedCheckbox: Story<CheckboxProps> = () => {
   const UnstyledList = styled.ul`
@@ -107,6 +108,7 @@ export const GroupedCheckbox: Story<CheckboxProps> = () => {
     </fieldset>
   )
 }
+GroupedCheckbox.storyName = 'Grouped checkboxes'
 
 type FormData = {
   favourites: string[]
@@ -220,8 +222,6 @@ export const WithFormsControl: Story<CheckboxProps> = () => {
     </div>
   )
 }
-
-GroupedCheckbox.storyName = 'Multiple checkboxes in a group'
 WithFormsControl.storyName = 'Example with React Hook Form'
 
 export const Compact: Story<CheckboxProps> = () => {
@@ -239,26 +239,10 @@ export const Compact: Story<CheckboxProps> = () => {
   )
 }
 
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Checkbox` using `EdsProvider` ',
-    },
-  },
-}
-
-export const alternativeToLabel: Story<CheckboxProps> = () => (
+export const AlternativeToLabel: Story<CheckboxProps> = () => (
   <Checkbox aria-label="This label is invisible, but read by screen-readers" />
 )
-
-alternativeToLabel.parameters = {
-  docs: {
-    description: {
-      story:
-        'To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. In such cases `aria-label` or `aria-labelledby` should be used',
-    },
-  },
-}
+AlternativeToLabel.storyName = 'Alternative to label'
 
 export const TableCheckbox: Story<CheckboxProps> = () => (
   <Table>
@@ -278,12 +262,4 @@ export const TableCheckbox: Story<CheckboxProps> = () => (
     </Table.Body>
   </Table>
 )
-
-TableCheckbox.parameters = {
-  docs: {
-    description: {
-      story:
-        'Example of usage with `Checkbox` and `aria-label` in tables for accessibility',
-    },
-  },
-}
+TableCheckbox.storyName = 'Table checkbox'
