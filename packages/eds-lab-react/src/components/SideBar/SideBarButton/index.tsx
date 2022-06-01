@@ -8,7 +8,6 @@ import {
 } from '@equinor/eds-core-react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { useSideBar } from '../SideBar.context'
-import { bordersTemplate } from '@equinor/eds-utils'
 import styled, { css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
 
@@ -23,13 +22,12 @@ const {
 type ContainerProps = {
   open: boolean
 }
-const MenuButtonContainer = styled.div<ContainerProps>(({ theme, open }) => {
+const MenuButtonContainer = styled.div<ContainerProps>(({ open }) => {
   return css`
     display: ${open ? 'grid' : 'flex'};
     grid-template-columns: repeat(9, 1fr);
     justify-content: center;
     align-items: center;
-    //height: 100%;
     height: 73px;
     box-sizing: border-box;
   `

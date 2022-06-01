@@ -7,8 +7,12 @@ import {
   home,
   add,
 } from '@equinor/eds-icons'
-import { SideBar, SidebarType, useSideBar } from '../../components/SideBar'
-import { SidebarLinkType } from './SidebarLink'
+import {
+  SideBar,
+  SidebarType,
+  SidebarLinkProps,
+  useSideBar,
+} from '../../components/SideBar'
 
 export default {
   title: 'Components/SideBar',
@@ -26,8 +30,13 @@ export default {
   },
 } as Meta
 
+const SidebarContainer = styled.div`
+  height: 60vh;
+  margin: -30px -20px;
+`
+
 export const Primary: Story<SidebarType> = (args) => {
-  const menuItems: SidebarLinkType[] = [
+  const menuItems: SidebarLinkProps[] = [
     {
       name: 'home',
       icon: home,
@@ -46,7 +55,7 @@ export const Primary: Story<SidebarType> = (args) => {
   ]
 
   return (
-    <div style={{ display: 'flex', height: '95vh' }}>
+    <SidebarContainer>
       <SideBar {...args}>
         <SideBar.Content>
           <SideBar.Toggle />
@@ -55,7 +64,7 @@ export const Primary: Story<SidebarType> = (args) => {
           ))}
         </SideBar.Content>
       </SideBar>
-    </div>
+    </SidebarContainer>
   )
 }
 
@@ -103,7 +112,7 @@ const LogoClosed = () => (
 )
 
 export const CustomContent: Story = () => {
-  const menuItems: SidebarLinkType[] = [
+  const menuItems: SidebarLinkProps[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
@@ -126,7 +135,7 @@ export const CustomContent: Story = () => {
   }
 
   return (
-    <div style={{ display: 'flex', height: '95vh' }}>
+    <SidebarContainer>
       <SideBar onToggle={(toggle) => console.log('SideBar expanded ', toggle)}>
         <SideBar.Content>
           {menuItems.map((m) => (
@@ -138,7 +147,7 @@ export const CustomContent: Story = () => {
           <Logo />
         </SideBar.Footer>
       </SideBar>
-    </div>
+    </SidebarContainer>
   )
 }
 CustomContent.parameters = {
@@ -149,8 +158,8 @@ CustomContent.parameters = {
   },
 }
 
-export const WithButton: Story = () => {
-  const menuItems: SidebarLinkType[] = [
+export const WithButtonAndCurrentUrl: Story = () => {
+  const menuItems: SidebarLinkProps[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
@@ -160,6 +169,7 @@ export const WithButton: Story = () => {
       name: 'history',
       icon: history,
       link: 'history',
+      currentUrl: 'history',
     },
     {
       name: 'favourites',
@@ -169,7 +179,7 @@ export const WithButton: Story = () => {
   ]
 
   return (
-    <div style={{ display: 'flex', height: '95vh' }}>
+    <SidebarContainer>
       <SideBar>
         <SideBar.Content>
           <SideBar.Button
@@ -185,38 +195,6 @@ export const WithButton: Story = () => {
           <SideBar.Toggle />
         </SideBar.Footer>
       </SideBar>
-    </div>
-  )
-}
-
-export const WithCurrentUrlAndAction: Story = () => {
-  const menuItems: SidebarLinkType[] = [
-    {
-      name: 'Dashboard',
-      icon: dashboard,
-      link: 'dashboard',
-    },
-    {
-      name: 'history',
-      icon: history,
-      link: 'history',
-    },
-    {
-      name: 'favourites',
-      icon: favorite_outlined,
-      link: 'favourites',
-    },
-  ]
-
-  return (
-    <div style={{ display: 'flex', height: '95vh' }}>
-      <SideBar>
-        <SideBar.Content>
-          {menuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
-          ))}
-        </SideBar.Content>
-      </SideBar>
-    </div>
+    </SidebarContainer>
   )
 }
