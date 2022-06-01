@@ -59,9 +59,6 @@ const GridContainer = styled.div<ContainerProps>(
 )
 
 type SidebarProps = {
-  onAction?: () => void
-  actionLabel?: string
-  actionIcon?: IconData
   open?: boolean
   maxHeight?: string
   onToggle?: (state: boolean) => void
