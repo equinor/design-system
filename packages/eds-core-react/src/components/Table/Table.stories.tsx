@@ -66,7 +66,6 @@ export const introduction: Story<TableProps> = (args) => {
 
 export const FixedTableHeader: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
-  const buttonIndex = cellValues[0].length - 1
 
   return (
     <Stack style={{ height: '200px', overflow: 'auto' }}>
@@ -84,14 +83,8 @@ export const FixedTableHeader: Story<TableProps> = () => {
         <Table.Body>
           {cellValues?.map((row) => (
             <Table.Row key={row.toString()}>
-              {row.map((cellValue, index) => (
-                <Table.Cell key={cellValue}>
-                  {index === buttonIndex ? (
-                    <Button variant="outlined">{cellValue}</Button>
-                  ) : (
-                    cellValue
-                  )}
-                </Table.Cell>
+              {row.map((cellValue) => (
+                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
               ))}
             </Table.Row>
           ))}
@@ -110,7 +103,7 @@ export const CompactTable: Story<TableProps> = () => {
     density: EdsProviderProps['density']
   }>({
     isOpen: false,
-    density: 'comfortable',
+    density: 'compact',
   })
 
   const { density, isOpen } = state
