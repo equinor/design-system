@@ -11,8 +11,9 @@ import {
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm } from 'react-hook-form'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
+import page from './Checkbox.docs.mdx'
 
 const Wrapper = styled(Checkbox)`
   display: flex;
@@ -23,16 +24,12 @@ export default {
   component: Checkbox,
   parameters: {
     docs: {
-      description: {
-        component: `Selection controls allow users to select options, make
-        decisions and set preferences.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Checkbox>
 
-export const Default: Story<CheckboxProps> = (args) => (
+export const Introduction: Story<CheckboxProps> = (args) => (
   <Checkbox label="Play with me" {...args} />
 )
 
