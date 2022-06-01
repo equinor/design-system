@@ -84,7 +84,7 @@ export type Column = {
 
 export const columns: Column[] = [
   {
-    name: 'Item nr',
+    name: 'Item no.',
     accessor: 'number',
     sortDirection: 'none',
   },

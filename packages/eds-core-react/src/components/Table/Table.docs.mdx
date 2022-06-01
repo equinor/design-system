@@ -1,0 +1,101 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Table } from '.'
+
+# Table
+
+Display data in a structured format.
+
+<Links 
+    ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/table/"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17481%3A1541"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/392109-table/b/398446"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Table/Table.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="data-display-table--introduction" />
+<PropsTable />
+
+## Usage
+
+Tables display information in an easy to scan format.
+
+<ul>
+    <li>Use tables if you are displaying information or data that will require minimal interaction such as editing or sorting.</li>
+    <li>Consider using a <a href="https://zeroheight.com/0b0c666ab/v/latest/p/65c95b-table-data-grid/b/398446">table data grid</a> if the table is using advanced functionalities.</li>
+    <li>Use tables to let users compare information in rows and columns.</li>
+</ul>
+
+<strong>Table Caption</strong>
+<ul>
+    <li>Describes the whole content of a table.</li>
+    <li>Helps users find, navigate and understand tables.</li>
+</ul>
+
+<strong>Table Header</strong>
+<ul>
+    <li>Tells users what the rows and columns represent.</li>
+    <li>The header row can have icons and text.</li>
+    <li>Icons can be used for sorting columns as well as a alternative text.</li>
+</ul>
+
+<strong>Table Cell</strong>
+<ul>
+    <li>The cell row can have icons, text, links, inputs, numbers, monospaced numbers and other custom content (by using the placeholder).</li>
+</ul>
+
+```tsx
+import { Table } from '@equinor/eds-core-react'
+
+const Demo = () => {
+    return (
+        <Table>
+        <Table.Caption>
+            <Typography variant="h2">Fruits cost price</Typography>
+        </Table.Caption>
+        <Table.Head>
+            <Table.Row>
+                <Table.Cell>Item no.</Table.Cell>
+                <Table.Cell>Name</Table.Cell>
+                <Table.Cell>Price</Table.Cell>
+            </Table.Row>
+        </Table.Head>
+        <Table.Body>
+            <Table.Row>
+                <Table.Cell>123-456</Table.Cell>
+                <Table.Cell>Kiwi</Table.Cell>
+                <Table.Cell>1.5</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+                <Table.Cell>789-012</Table.Cell>
+                <Table.Cell>Apple</Table.Cell>
+                <Table.Cell>0.5</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+                <Table.Cell>345-678</Table.Cell>
+                <Table.Cell>Mango</Table.Cell>
+                <Table.Cell>2.5</Table.Cell>
+            </Table.Row>
+        </Table.Body>
+    </Table>
+    )
+}
+```
+
+## Examples
+
+### Fixed table header
+
+<Story id="data-display-table--fixed-table-header" />
+
+### Compact table
+
+Compact `Table` using `EdsProvider` (this will also apply compact on all nested components).
+
+<Story id="data-display-table--compact-table" />
+
+### Sortable
+
+This is just an example demonstrating, how simple sorting can be done. There are many different ways to solve it.
+
+<Story id="data-display-table--sortable" />
