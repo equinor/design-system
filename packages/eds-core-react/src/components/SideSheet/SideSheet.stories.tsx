@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import {
   SideSheet,
@@ -7,6 +7,7 @@ import {
   Button,
   Divider,
   Icon,
+  List,
   Scrim,
   Slider,
   Table,
@@ -74,37 +75,68 @@ export const Introduction: Story<SideSheetProps> = (args) => {
 }
 
 export const Placement: Story<SideSheetProps> = () => {
-  const cellValues = toCellValues(data, columns)
-  const [value, updateValue] = useState([1, 50])
-  const changeHandler = (
-    event: FormEvent<HTMLDivElement>,
-    value: number[] | number,
-  ) => {
-    updateValue(value as number[])
+  const [toggle, setToggle] = useState(true)
+  const outputFunction = (value: number) => {
+    const date = new Date(value)
+    return date.toLocaleDateString('nb-NO', {
+      year: 'numeric',
+    })
+  }
+  const getUnixTime = (iso: string | number | Date) => {
+    return new Date(iso).getTime()
   }
 
   return (
     <>
-      <Table style={{ width: '70%' }}>
-        <Table.Head>
-          <Table.Row>
-            {columns.map((col) => (
-              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
-            ))}
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {cellValues?.map((row) => (
-            <Table.Row key={row.toString()}>
-              {row.map((cellValue) => (
-                <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
-              ))}
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-      <SideSheet open={true} style={{ height: '91%' }}>
-        <div>
+      <Button
+        variant="outlined"
+        onClick={() => setToggle(!toggle)}
+        style={{ float: 'right' }}
+      >
+        Filters
+      </Button>
+      <List variant="numbered">
+        <List.Item>
+          List of Tables
+          <List variant="bullet">
+            <List.Item>Products</List.Item>
+            <List.Item>Prices</List.Item>
+            <List.Item>Tax</List.Item>
+            <List.Item>Customers</List.Item>
+            <List.Item>Companies</List.Item>
+            <List.Item>Insurance</List.Item>
+          </List>
+        </List.Item>
+        <br />
+        <List.Item>
+          Graphs
+          <List variant="bullet">
+            <List.Item>Sell statistics</List.Item>
+            <List.Item>Usage statistics</List.Item>
+            <List.Item>Return statistics</List.Item>
+            <List.Item>Losses statistics</List.Item>
+            <List.Item>Profits statistics</List.Item>
+          </List>
+        </List.Item>
+        <br />
+        <List.Item>
+          Documentation
+          <List variant="bullet">
+            <List.Item>Comments</List.Item>
+            <List.Item>System Documentation</List.Item>
+            <List.Item>General Policies</List.Item>
+            <List.Item>Internal Policies</List.Item>
+            <List.Item>Manuals</List.Item>
+          </List>
+        </List.Item>
+      </List>
+
+      <SideSheet
+        open={toggle}
+        onClose={() => setToggle(!toggle)}
+        style={{ height: '90%' }}
+      >
+        <div style={{ padding: '0 5px' }}>
           <Typography variant="h4">Filters</Typography>
           <br />
           <Typography variant="h6" color="disabled">
@@ -113,31 +145,30 @@ export const Placement: Story<SideSheetProps> = () => {
           <UnstyledList>
             <li>
               <Checkbox
-                label="Fruits"
+                label="Tables"
                 name="multiple"
                 value="first"
                 defaultChecked
               />
             </li>
             <li>
-              <Checkbox label="Vegetables" name="multiple" value="second" />
+              <Checkbox label="Graphs" name="multiple" value="second" />
             </li>
             <li>
-              <Checkbox label="Favourites" name="multiple" value="third" />
+              <Checkbox label="Documentation" name="multiple" value="third" />
             </li>
           </UnstyledList>
           <br />
           <Typography id="range-slider-label" variant="h6" color="disabled">
-            Price range
+            Year range
           </Typography>
           <Slider
-            value={value}
-            onChange={changeHandler}
-            ariaLabelledby="range-slider-label"
+            min={getUnixTime('1960')}
+            max={getUnixTime('2020')}
+            ariaLabelledby="date-range-slider"
+            value={[getUnixTime('1980'), getUnixTime('2000')]}
+            outputFunction={outputFunction}
           />
-          <p style={{ marginTop: '1.5rem' }}>
-            <small>$: {value.join(', ')}</small>
-          </p>
         </div>
       </SideSheet>
     </>
