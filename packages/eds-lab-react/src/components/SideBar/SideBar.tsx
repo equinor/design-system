@@ -3,7 +3,6 @@ import styled, { css, ThemeProvider } from 'styled-components'
 import { sidebar as tokens } from './SideBar.tokens'
 import { bordersTemplate, useToken } from '@equinor/eds-utils'
 import { useEds } from '@equinor/eds-core-react'
-import { IconData } from '@equinor/eds-icons'
 import { useSideBar, SideBarProvider } from './SideBar.context'
 
 type ContainerProps = {
