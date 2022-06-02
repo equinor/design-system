@@ -222,7 +222,11 @@ export const Datepicker: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField id="date" label="Select date" type="date" />
     <TextField id="time" label="Select time" type="time" />
-    <TextField id="time" label="Select time" type="datetime-local" />
+    <TextField
+      id="datetime"
+      label="Select date and time"
+      type="datetime-local"
+    />
   </Wrapper>
 )
 Datepicker.storyName = 'Datepicker'
