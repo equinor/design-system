@@ -218,6 +218,15 @@ export const WithIcons: Story<TextFieldProps> = () => (
 )
 WithIcons.storyName = 'With icons'
 
+export const Datepicker: Story<TextFieldProps> = () => (
+  <Wrapper>
+    <TextField id="date" label="Select date" type="date" />
+    <TextField id="time" label="Select time" type="time" />
+    <TextField id="time" label="Select time" type="datetime-local" />
+  </Wrapper>
+)
+Datepicker.storyName = 'Datepicker'
+
 export const Variants: Story<TextFieldProps> = () => (
   <Wrapper>
     <TextField
