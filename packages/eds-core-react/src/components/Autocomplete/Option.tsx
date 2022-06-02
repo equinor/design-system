@@ -1,6 +1,7 @@
 import { forwardRef, LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { List, Checkbox } from '../..'
+import { List } from '../List'
+import { Checkbox } from '../Checkbox'
 import { typographyTemplate, spacingsTemplate } from '@equinor/eds-utils'
 
 type StyledListItemType = {
