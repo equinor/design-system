@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
 import { Story } from '@storybook/react/types-6-0'
 import { ComponentMeta } from '@storybook/react'
+import { Stack } from './../../../.storybook/components'
 import page from './Input.docs.mdx'
 
 export default {
@@ -23,8 +24,8 @@ const Wrapper = styled.div`
 `
 export const Introduction: Story<InputProps> = (args) => <Input {...args} />
 
-export const types: Story<InputProps> = () => (
-  <Wrapper>
+export const Types: Story<InputProps> = () => (
+  <Stack>
     <div>
       <Label htmlFor="textfield-normal" label="Normal" />
       <Input
@@ -61,8 +62,63 @@ export const types: Story<InputProps> = () => (
       <Label htmlFor="textfield-email" label="Email" />
       <Input type="email" id="textfield-email" placeholder="Placeholder text" />
     </div>
-  </Wrapper>
+  </Stack>
 )
+
+export const Variants: Story<InputProps> = () => (
+  <Stack>
+    <div>
+      <Label htmlFor="textfield-default" label="Default" />
+      <Input
+        id="textfield-default"
+        placeholder="Placeholder text"
+        autoComplete="off"
+      />
+    </div>
+    <div>
+      <Label htmlFor="textfield-success" label="Success" />
+      <Input
+        id="textfield-success"
+        placeholder="Placeholder text"
+        autoComplete="off"
+        variant="success"
+      />
+    </div>
+    <div>
+      <Label htmlFor="textfield-warning" label="Warning" />
+      <Input
+        id="textfield-warning"
+        placeholder="Placeholder text"
+        autoComplete="off"
+        variant="warning"
+      />
+    </div>
+    <div>
+      <Label htmlFor="textfield-error" label="Error" />
+      <Input
+        id="textfield-error"
+        placeholder="Placeholder text"
+        autoComplete="off"
+        variant="error"
+      />
+    </div>
+  </Stack>
+)
+
+export const Disabled: Story<InputProps> = () => (
+  <>
+    <Label htmlFor="textfield-disabled" label="Disabled" />
+    <Input id="textfield-disabled" placeholder="Placeholder text" disabled />
+  </>
+)
+
+export const ReadOnly: Story<InputProps> = () => (
+  <>
+    <Label htmlFor="textfield-readOnly" label="Read only" />
+    <Input id="textfield-readOnly" placeholder="Placeholder text" readOnly />
+  </>
+)
+ReadOnly.storyName = 'Read only'
 
 export const Accessiblity: Story<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
@@ -72,14 +128,6 @@ export const Accessiblity: Story<InputProps> = () => {
       <Input type="text" id="a11yExample" />
     </>
   )
-}
-
-Accessiblity.parameters = {
-  docs: {
-    description: {
-      story: "It's important to link the `Input` to the corresponding label.",
-    },
-  },
 }
 
 export const Compact: Story<InputProps> = () => {
@@ -97,12 +145,4 @@ export const Compact: Story<InputProps> = () => {
       <Input type="text" id="compact" />
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Input` using `EdsProvider` ',
-    },
-  },
 }
