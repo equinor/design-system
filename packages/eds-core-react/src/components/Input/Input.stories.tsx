@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { Story } from '@storybook/react/types-6-0'
+import { ComponentMeta } from '@storybook/react'
+import page from './Input.docs.mdx'
 
 export default {
   title: 'Inputs/Input',
   component: Input,
   parameters: {
     docs: {
-      description: {
-        component: `The **Input** component is intended to use if you need to more flexibility than the wrapped TextField or
-        select components give.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Input>
 
 const Wrapper = styled.div`
   margin: 32px;
@@ -23,7 +21,7 @@ const Wrapper = styled.div`
   grid-gap: 32px;
   grid-template-columns: repeat(2, fit-content(100%));
 `
-export const Default: Story<InputProps> = (args) => <Input {...args} />
+export const Introduction: Story<InputProps> = (args) => <Input {...args} />
 
 export const types: Story<InputProps> = () => (
   <Wrapper>
