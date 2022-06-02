@@ -128,18 +128,13 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const popoverRef = useCombinedRefs<HTMLDivElement>(ref, setPopperEl)
 
     useOutsideClick(popperEl, (e: MouseEvent) => {
-      if (
-        open &&
-        onClose !== null &&
-        anchorEl &&
-        !anchorEl.contains(e.target as Node)
-      ) {
+      if (open && onClose && anchorEl && !anchorEl.contains(e.target as Node)) {
         onClose()
       }
     })
 
     useGlobalKeyPress('Escape', () => {
-      if (onClose !== null && open) {
+      if (onClose && open) {
         onClose()
       }
     })
