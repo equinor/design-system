@@ -27,23 +27,18 @@ exports[`Card Matches snapshot 1`] = `
 }
 
 .c0 {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   width: 100%;
   position: relative;
   background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
   box-sizing: border-box;
-  display: grid;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   grid-gap: 16px;
-  grid-auto-columns: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-align-content: start;
-  -ms-flex-line-pack: start;
-  align-content: start;
   cursor: default;
   border-radius: 4px;
 }
