@@ -18,13 +18,8 @@ type InfoCardTypes = {
 }
 
 const SBCard = styled(Card)`
-  align-content: space-between;
-  height: auto;
-  grid-template-columns: none;
-  grid-template-rows: auto;
   border: 1px solid ${mossgreen100};
   max-width: 490px;
-  flex-grow: 1;
 `
 
 export const InfoCard = ({
