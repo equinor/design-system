@@ -1,0 +1,59 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { SideSheet } from '.'
+import { Icon } from './../Icon'
+
+# SideSheet
+
+A toggleable area that is anchored to the edge of the viewport with supplementary content.
+
+<Links 
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17790%3A0"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/17d96d-side-sheet/b/282ac1"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/SideSheet/SideSheet.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="surfaces-sidesheet--introduction" />
+<PropsTable />
+
+## Usage
+
+`SideSheet` is surfaces containing supplementary content.
+
+<ul>
+    <li>Side sheets contain content that supplements the screen’s primary UI region.</li>
+    <li>Side sheets display a wide variety of content and layouts.</li>
+    <li>Side sheets can be visible or hidden based on screen size or user need, and they often become bottom sheets on mobile.</li>
+</ul>
+
+```tsx
+import { SideSheet } from '@equinor/eds-core-react'
+
+<SideSheet>
+  // your content here
+</SideSheet>
+```
+
+## Examples
+
+### Placement
+
+<ul>
+  <li>Side sheets are anchored to the left or right edge of the screen.</li>
+  <li>Side sheets are a fixed width and typically span the height of the screen.</li>
+  <li>Side sheets can display a wide variety of content and layouts, ranging from a list of actions to supplemental content in a tabular layout.</li>
+</ul>
+
+<Story id="surfaces-sidesheet--placement" />
+
+### Scrollable
+
+To open `SideSheet` press <Icon name="more_vertical" size={18} color="#007079" /> icon.
+
+<ul>
+  <li>Side sheets can be vertically scrolled independent of the rest of the UI.</li>
+  <li>Side sheets scroll position allows contents to persist while the page is scrolled, and vice versa.</li>
+  <li>Side sheets cannot be horizontally scrolled.</li>
+</ul>
+
+<Story id="surfaces-sidesheet--scrollable" />
