@@ -1,0 +1,63 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Slider } from '.'
+
+# Slider
+
+Is a flexible input that allows users to adjust predefined values.
+
+<Links 
+    ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/slider/"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17490%3A95"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/550c4f-slider/b/86826a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Slider/Slider.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="inputs-slider--introduction" />
+<PropsTable />
+
+## Usage
+
+Sliders reflect the current state of the settings they control.
+
+<ul>
+    <li>Sliders should be used for making selections from a range of values.</li>
+    <li>When interacting with a slider, changes should be reflected back to a user immediately.</li>
+    <li>Sliders should present the full range of choices that are available to a user.</li>
+</ul>
+
+```tsx
+import { Slider } from '@equinor/eds-core-react'
+
+<Slider value={4} min={0} max={10} aria-label="simple-slider" />
+```
+
+## Examples
+
+### Simple slider
+
+<Story id="inputs-slider--simple-slider" />
+
+### Simple slider with steps
+
+<Story id="inputs-slider--simple-slider-with-steps" />
+
+### Range slider
+
+<Story id="inputs-slider--range-slider" />
+
+### Range slider with committed step
+
+<Story id="inputs-slider--range-slider-with-committed-step" />
+
+### Range slider with interval
+
+<Story id="inputs-slider--range-slider-with-interval" />
+
+### Range slider with dates
+
+<Story id="inputs-slider--range-slider-with-dates" />
+
+### Disabled
+
+<Story id="inputs-slider--disabled" />
