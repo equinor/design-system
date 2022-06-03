@@ -1,0 +1,72 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Checkbox } from '.'
+
+# Checkbox
+
+Allow users to select one or more items from a set, and can turn an option on or off.
+
+<Links 
+    ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=18442%3A38197"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/028476-selection-controls/b/86826a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Checkbox/Checkbox.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="inputs-selection-controls-checkbox--introduction" />
+<PropsTable />
+
+## Usage
+
+**Selection controls**
+
+<ul>
+    <li>Allow users to select options, make decisions and set preferences.</li>
+    <li>Are to be visible and understandable at a quick glance.</li>
+    <li>Are always accompanied with a clear label.</li>
+</ul>
+
+**Checkboxes**
+
+<ul>
+    <li>Make it easy to compare available options.</li>
+    <li>Have been in user interfaces for a long time and should be used as expected.</li>
+</ul>
+
+```tsx
+import { Checkbox } from '@equinor/eds-core-react'
+
+<Checkbox label="Label text" />
+```
+
+## Examples
+
+### Single checkbox
+
+<Story id="inputs-selection-controls-checkbox--single-checkbox" />
+
+### Grouped checkboxes
+
+<Story id="inputs-selection-controls-checkbox--grouped-checkbox" />
+
+### Example with `React Hook Form`
+
+<Story id="inputs-selection-controls-checkbox--with-forms-control" />
+
+### Compact
+
+Compact `Checkbox` using `EdsProvider`.
+
+<Story id="inputs-selection-controls-checkbox--compact" />
+
+### Alternative to label
+
+To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. In such cases `aria-label` or `aria-labelledby` should be used.
+
+<Story id="inputs-selection-controls-checkbox--alternative-to-label" />
+
+### Table checkbox
+
+Example of usage with `Checkbox` and `aria-label` in tables for accessibility.
+
+<Story id="inputs-selection-controls-checkbox--table-checkbox" />
