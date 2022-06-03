@@ -1,21 +1,19 @@
 import { Label, LabelProps, Input } from '../..'
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { Story } from '@storybook/react/types-6-0'
+import { ComponentMeta } from '@storybook/react'
+import page from './Label.docs.mdx'
 
 export default {
   title: 'Inputs/Label',
   component: Label,
   parameters: {
     docs: {
-      description: {
-        component: `The **Label** component is intended to use if you need to more flexibility than the wrapped TextField or
-        select components give.<br/>
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Label>
 
-export const Default: Story<LabelProps> = (args) => (
+export const Introduction: Story<LabelProps> = (args) => (
   <Label label="I'm a label, play with me!" {...args} />
 )
 
