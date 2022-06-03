@@ -20,7 +20,6 @@ export const Introduction: Story<LabelProps> = (args) => (
 export const WithMeta: Story<LabelProps> = () => (
   <Label label="Speed" meta="km/h" />
 )
-
 WithMeta.storyName = 'With meta text'
 
 export const Disabled: Story<LabelProps> = () => (
@@ -38,11 +37,4 @@ export const Accessiblity: Story<LabelProps> = () => {
       <Input type="text" id="speed" />
     </>
   )
-}
-Accessiblity.parameters = {
-  docs: {
-    storyDescription: `It's important to link the Label to the corresponding input element. Use the React version of the html for attribute htmlFor
-    as Label does not support to wrap the input field.
-    `,
-  },
 }
