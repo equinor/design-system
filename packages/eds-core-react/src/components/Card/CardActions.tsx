@@ -20,6 +20,7 @@ const StyledCardActions = styled.div<Pick<CSSObject, 'justifyContent'>>`
   align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
   padding: 0 ${spacings.right} 0 ${spacings.left};
+  margin-top: auto;
   :first-child {
     padding-top: ${spacings.top};
   }

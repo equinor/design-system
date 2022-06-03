@@ -16,16 +16,13 @@ export type CardProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledCard = styled.div<StyledCardProps>`
-  height: fit-content;
   width: 100%;
   position: relative;
   background-color: ${({ background }) => background};
   box-sizing: border-box;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-gap: 16px;
-  grid-auto-columns: auto;
-  align-items: center;
-  align-content: start;
   cursor: ${({ cursor }) => cursor};
   ${bordersTemplate(primary.border)};
 `
