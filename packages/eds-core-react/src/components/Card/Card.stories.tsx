@@ -31,6 +31,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(2, 320px);
+  align-items: start;
   grid-gap: 32px 32px;
   background: #ebebeb;
 `
@@ -361,37 +362,44 @@ export const WithActions: Story<CardProps> = () => (
 )
 WithActions.storyName = 'With actions'
 
-export const WithDivider: Story<CardProps> = () => (
-  <Wrapper>
-    <Card>
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="h4">TICKET</Typography>
-        </Card.HeaderTitle>
-        <Typography variant="h6">20.02.2020</Typography>
-      </Card.Header>
-      <Card.Content>
-        <Typography variant="h5">Title</Typography>
-        <Typography variant="body_short">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-        <Divider style={{ width: '100%' }} />
-      </Card.Content>
-      <Card.Content>
-        <Typography variant="caption">Choose option</Typography>
-      </Card.Content>
-      <Card.Actions>
-        <Chip>active</Chip>
-        <Chip variant="active">pause</Chip>
-        <Chip>disable</Chip>
-        <Chip variant="error">stop</Chip>
-      </Card.Actions>
-      <Card.Actions>
-        <Button style={{ marginTop: '16px' }} variant="outlined">
-          SUBMIT TICKET
-        </Button>
-      </Card.Actions>
-    </Card>
-  </Wrapper>
-)
+export const WithDivider: Story<CardProps> = () => {
+  const Row = styled.div`
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  `
+  return (
+    <Wrapper>
+      <Card>
+        <Card.Header>
+          <Card.HeaderTitle>
+            <Typography variant="h4">TICKET</Typography>
+          </Card.HeaderTitle>
+          <Typography variant="h6">20.02.2020</Typography>
+        </Card.Header>
+        <Card.Content>
+          <Typography variant="h5">Title</Typography>
+          <Typography variant="body_short">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </Typography>
+          <Divider style={{ width: '100%' }} />
+        </Card.Content>
+        <Card.Content>
+          <Typography variant="caption">Choose option</Typography>
+          <Row>
+            <Chip>active</Chip>
+            <Chip variant="active">pause</Chip>
+            <Chip>disable</Chip>
+            <Chip variant="error">stop</Chip>
+          </Row>
+        </Card.Content>
+        <Card.Actions>
+          <Button style={{ marginTop: '16px' }} variant="outlined">
+            SUBMIT TICKET
+          </Button>
+        </Card.Actions>
+      </Card>
+    </Wrapper>
+  )
+}
 WithDivider.storyName = 'With divider'
