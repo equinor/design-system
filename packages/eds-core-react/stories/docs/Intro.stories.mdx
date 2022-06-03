@@ -8,38 +8,58 @@ import { Typography, List, Card } from '../../src'
 
 <Typography variant="ingress"  style={{marginTop:'24px'}}>
   This is the storybook for the <Typography link href="https://reactjs.org/">React</Typography> implementation of the Equinor Design
-  System. Our goal is to create and provided building blocks & resources for web development in Equinor.   We have a <Typography link href="https://eds.equinor.com/">storefront</Typography> with
-  extensive documentation for components, guidelines and patterns.
+  System. Our goal is to create and provided building blocks & resources for web development in Equinor.
 </Typography>
 
 ![license](https://img.shields.io/github/license/equinor/design-system)
 ![github stars](https://img.shields.io/github/stars/equinor/design-system?style=social)
 
-<Stack direction="column" align="left">
+<Stack direction="row" align="left" style={{marginBottom:'24px'}}>
+<InfoCard title="How to get started" description="Read our readme on how to get started with code & fonts" url="https://github.com/equinor/design-system" urlTitle="Get started"/>
+
+<InfoCard title="Contribute" description="File a bug report, suggest a change, or open a pull request." url="https://github.com/equinor/design-system/issues/new/choose" urlTitle="Contribute"/>
+
+<InfoCard title="Guidelines" description="Read our documentation for components, guidelines and patterns" url="https://eds.equinor.com/" urlTitle="Read guidelines"/>
+
 <InfoCard title="Icons" description="Explore icons in EDS library" url="?path=/story/icons--preview" urlTitle="Browse icons"/>
 </Stack>
 
 
 
 
-<Typography variant="h2" style={{margin:"24px 0"}}>Packages</Typography>
 
+## Packages
+
+- `@equinor/eds-core-react` is the core package for the EDS React components.
+
+
+- `@equinor/eds-icons` is a collection of svg data for the EDS components and can be used together with the `Icon` component in @equinor/eds-core-react. You can also use this data for populating your own svg elements.
+
+
+- `@equinor/eds-tokens` is a collection our EDS design tokens.
+
+
+- `@equinor/eds-lab-react` is an experimental package for testing and new upcoming EDS React components.
+
+
+- `@equinor/eds-utils` is our utility library for internal use in our core and lab packages.
+
+
+### Latest versions
 
 [![core](https://img.shields.io/npm/v/@equinor/eds-core-react?color=%23c3f3d2&label=%40equinor%2Feds-core-react&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-core-react)
 
+[![icons](https://img.shields.io/npm/v/@equinor/eds-icons?color=%23c3f3d2&label=%40equinor%2Feds-icons&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-icons)
+
+
+[![tokens](https://img.shields.io/npm/v/@equinor/eds-tokens?color=%23c3f3d2&label=%40equinor%2Feds-tokens&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-tokens)
 
 
 [![lab](https://img.shields.io/npm/v/@equinor/eds-lab-react?color=%23c3f3d2&label=%40equinor%2Feds-lab-react&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-lab-react)
 
 
-[![tokens](https://img.shields.io/npm/v/@equinor/eds-tokens?color=%23c3f3d2&label=%40equinor%2Feds-tokens&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-tokens)
-
-[![icons](https://img.shields.io/npm/v/@equinor/eds-icons?color=%23c3f3d2&label=%40equinor%2Feds-icons&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-icons)
-
 [![utils](https://img.shields.io/npm/v/@equinor/eds-utils?color=%23c3f3d2&label=%40equinor%2Feds-utils&logo=npm&)](https://www.npmjs.com/package/@equinor/eds-utils)
 
 
-<Typography variant="h2" style={{marginTop:"32px"}}>Contact us</Typography>
-<Typography variant="caption" >
-  If you want to get in touch with the team, you’ll find us in the Equinor slack channel  <Typography link href="https://equinor.slack.com/archives/CJT20H1B9">#eds-design-system</Typography>
-</Typography>
+## Contact us
+If you want to get in touch with the team, you’ll find us in the Equinor slack channel [#eds-design-system<](https://equinor.slack.com/archives/CJT20H1B9">)
