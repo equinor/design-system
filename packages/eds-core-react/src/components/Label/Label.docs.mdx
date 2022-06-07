@@ -1,0 +1,39 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Label } from '.'
+
+# Label
+
+Is intended to use if you need to more flexibility than the wrapped TextField or select components give.
+
+<Links 
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Label/Label.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="inputs-label--introduction" />
+<PropsTable />
+
+## Usage
+
+```tsx
+import { Label } from '@equinor/eds-core-react'
+
+<Label label="label text" />
+```
+
+## Examples
+
+### With `meta` text
+
+<Story id="inputs-label--with-meta" />
+
+### Disabled
+
+<Story id="inputs-label--disabled" />
+
+### Accessiblity
+
+It's important to link the `Label` to the corresponding input element. 
+Use the React version of the html for attribute htmlFor as `Label` does not support to wrap the input field.
+
+<Story id="inputs-label--accessiblity" />
