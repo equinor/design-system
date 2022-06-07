@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2022-06-xx
+
+## Added
+
+- `zip_file`
+- `subsea_drone`
+- `onshore_drone`
+- `anchor`
+- `aerial_drone`
+
+## Fixed
+
+- Fixed typo in icons
+  - `communte` -> `commute`
+  - `headseat_mic` -> `headset_mic`
+  - `desktop_windwos` -> `desktop_windows`
+  - `breifcase` -> `briefcase`
+  - `format_stikethrough` -> `format_strikethrough`
+  - `mood_extreamly_sad` -> `mood_extremely_sad`
+  - `mood_extreamly_happy` -> `mood_extremely_happy`
+
 ## [0.10.0] - 2021-12-20
 
 ## Added
