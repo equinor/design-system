@@ -54,6 +54,7 @@ export type MultiSelectProps = {
   ) => void
 } & SelectHTMLAttributes<HTMLSelectElement>
 
+/** @deprecated Use `<Autocomplete multiple />` instead. */
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
   function MultiSelect(
     {
