@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Radio, RadioProps, Table, EdsProvider, Density } from '../..'
 import styled from 'styled-components'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
+import page from './Radio.docs.mdx'
 
 const Wrapper = styled(Radio)`
   display: flex;
@@ -13,15 +14,12 @@ export default {
   component: Radio,
   parameters: {
     docs: {
-      description: {
-        component:
-          'Selection controls allow users to select options, make decisions and set preferences. Parent must have `position: relative`',
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Radio>
 
-export const Default: Story<RadioProps> = (args) => (
+export const Introduction: Story<RadioProps> = (args) => (
   <Radio label="Play with me" {...args} />
 )
 
