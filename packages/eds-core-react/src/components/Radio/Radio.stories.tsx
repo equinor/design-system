@@ -38,6 +38,8 @@ export const SingleRadio: Story<RadioProps> = () => {
     </div>
   )
 }
+SingleRadio.storyName = 'Single radio buttons'
+
 export const GroupedRadio: Story<RadioProps> = () => {
   const [checked, updateChecked] = useState('one')
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,9 +90,12 @@ export const GroupedRadio: Story<RadioProps> = () => {
     </fieldset>
   )
 }
-
 GroupedRadio.storyName = 'Multiple radio buttons in a group'
-SingleRadio.storyName = 'Single radio buttons'
+
+export const AlternativeToLabel: Story<RadioProps> = () => (
+  <Radio aria-label="This label is invisible, but read by screen-readers" />
+)
+AlternativeToLabel.storyName = 'Alternative to label'
 
 export const Compact: Story<RadioProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
@@ -105,27 +110,6 @@ export const Compact: Story<RadioProps> = () => {
       <Radio label="I am compact" />
     </EdsProvider>
   )
-}
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Radio` using `EdsProvider` ',
-    },
-  },
-}
-
-export const alternativeToLabel: Story<RadioProps> = () => (
-  <Radio aria-label="This label is invisible, but read by screen-readers" />
-)
-
-alternativeToLabel.parameters = {
-  docs: {
-    description: {
-      story:
-        'To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. In such cases `aria-label` or `aria-labelledby` should be used',
-    },
-  },
 }
 
 export const TableRadio: Story<RadioProps> = () => (
@@ -146,12 +130,4 @@ export const TableRadio: Story<RadioProps> = () => (
     </Table.Body>
   </Table>
 )
-
-TableRadio.parameters = {
-  docs: {
-    description: {
-      story:
-        'Example of usage with `Radio` and `aria-label` in tables for accessibility',
-    },
-  },
-}
+TableRadio.storyName = 'Table radio'
