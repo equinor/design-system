@@ -419,7 +419,7 @@ export const Compact: Story<TextFieldProps> = () => {
   return (
     <EdsProvider density={density}>
       <Wrapper>
-        <EdsProvider density="compact">
+        <div style={{ width: '200px' }}>
           <TextField
             id="compact-textfield"
             defaultValue="150"
@@ -428,20 +428,19 @@ export const Compact: Story<TextFieldProps> = () => {
             unit="km/h"
             helperIcon={<Icon data={info_circle} title="Info" />}
             helperText="Helper information text over several lines so that it breaks"
-            style={{ width: '200px' }}
           />
-          <TextField
-            id="compact-textfield-multiline"
-            placeholder="Placeholder text that spans multiple lines as much as is possible."
-            label="Multiline"
-            multiline
-            rowsMax={10}
-            variant="warning"
-            inputIcon={<Icon name="warning_filled" title="Warning" />}
-            helperText="Helper information text thats very very very loooonooooooong"
-            style={{ resize: 'none' }}
-          />
-        </EdsProvider>
+        </div>
+        <TextField
+          id="compact-textfield-multiline"
+          placeholder="Placeholder text that spans multiple lines as much as is possible."
+          label="Multiline"
+          multiline
+          rowsMax={10}
+          variant="warning"
+          inputIcon={<Icon name="warning_filled" title="Warning" />}
+          helperText="Helper information text thats very very very loooonooooooong"
+          style={{ resize: 'none' }}
+        />
       </Wrapper>
     </EdsProvider>
   )
