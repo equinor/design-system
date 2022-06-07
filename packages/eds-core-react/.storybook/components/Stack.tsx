@@ -11,6 +11,7 @@ export const Stack = styled.div<StackProps>`
   justify-content: center;
   align-items: ${({ align }) => align || 'center'};
   gap: 1rem;
+  flex-wrap: wrap;
   @media screen and (min-width: 600px) {
     flex-direction: ${({ direction }) => direction || 'row'};
   }
