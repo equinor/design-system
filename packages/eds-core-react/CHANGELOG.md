@@ -11,10 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New component! 🎉 `Autocomplete` has been moved from our labs to core! ([#2201](https://github.com/equinor/design-system/pull/2201))
 
+### Changed
+
+- Improved `Progress` legibility ([#2182](https://github.com/equinor/design-system/pull/2182))
+- `Card` is now less opinonated making it easier to use inside flex/grid containers ([#2273](https://github.com/equinor/design-system/pull/2273))
+
 ### Deprecated
 
 - `MultiSelect` has been deprecated in favour of `<Autocomplete multiple />`. ([#1537](https://github.com/equinor/design-system/pull/1537))
 - `SingleSelect` has been deprecated in favour of `<Autocomplete />`. ([#1537](https://github.com/equinor/design-system/pull/1537))
+
+### Fixed
+
+- `Table.Cell` height should now be correct in `Table.Head` ([#2197](https://github.com/equinor/design-system/pull/2197))
+- `Tabs` should no longer throw error if `onChange` is not defined ([#2196](https://github.com/equinor/design-system/pull/2196))
+- `Popover` should now have correct typings for `onClose` ([#2264](https://github.com/equinor/design-system/pull/2264))
+- `Search` should no longer display blue background on Chrome when `autocomplete` is defined ([#2160](https://github.com/equinor/design-system/pull/2160))
 
 ## [0.19.0] - 2022-04-06
 
