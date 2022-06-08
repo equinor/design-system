@@ -14,7 +14,5 @@ export type ElevationTypes = keyof Elevations
 
 export { elevation }
 export const paper: ComponentToken = {
-  maxWidth: 'calc(100% - 32px)',
-  minWidth: '96px',
   background,
 }
