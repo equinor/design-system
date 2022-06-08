@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Switch, SwitchProps, EdsProvider, Table, Density } from '../..'
 import styled from 'styled-components'
-import { Meta, Story } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
+import page from './Switch.docs.mdx'
 
 type WrapperStyleProps = {
   darkMode?: boolean
@@ -24,15 +25,12 @@ export default {
   component: Switch,
   parameters: {
     docs: {
-      description: {
-        component: `Selection controls allow users to select options, make decisions and set preferences.
-        `,
-      },
+      page,
     },
   },
-} as Meta
+} as ComponentMeta<typeof Switch>
 
-export const Default: Story<SwitchProps> = (args) => (
+export const Introduction: Story<SwitchProps> = (args) => (
   <Switch label="Play with me" {...args} />
 )
 
