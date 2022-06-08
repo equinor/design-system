@@ -6,12 +6,15 @@ import {
   bordersTemplate,
   useToken,
 } from '@equinor/eds-utils'
+import { Paper, ElevationTypes } from '../Paper'
 import { topbar as topbarToken } from './TopBar.tokens'
 import { useEds } from '../EdsProvider'
 
-export type TopbarProps = HTMLAttributes<HTMLElement>
+export type TopbarProps = {
+  elevation?: ElevationTypes
+} & HTMLAttributes<HTMLDivElement>
 
-const StyledTopBar = styled.header(({ theme }) => {
+const StyledTopBar = styled(Paper)<TopbarProps>(({ theme }) => {
   return css`
     height: ${theme.height};
     top: 0;
@@ -30,15 +33,19 @@ const StyledTopBar = styled.header(({ theme }) => {
   `
 })
 
-export const TopBar = forwardRef<HTMLElement, TopbarProps>(function TopBar(
-  { children, ...props },
+export const TopBar = forwardRef<HTMLDivElement, TopbarProps>(function TopBar(
+  { children, elevation = 'none', ...props },
   ref,
 ) {
   const { density } = useEds()
   const token = useToken({ density }, topbarToken)
+  const rest = {
+    ...props,
+    ref,
+  }
   return (
     <ThemeProvider theme={token}>
-      <StyledTopBar {...props} ref={ref}>
+      <StyledTopBar elevation={elevation} {...rest}>
         {children}
       </StyledTopBar>
     </ThemeProvider>
