@@ -38,12 +38,12 @@ const icons = {
 Icon.add(icons)
 
 const Wrapper = styled.div.attrs({ tabIndex: 0 })`
-  height: 100vh;
+  height: 65vh;
   overflow: auto;
 `
 
 const BodyWrapper = styled.div`
-  height: 1500px;
+  height: 1000px;
   background: #ebebeb;
   display: flex;
   flex-direction: column;
