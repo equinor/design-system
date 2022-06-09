@@ -22,9 +22,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `The SingleSelect component allows users to choose one
-        item or option from a list.
-        `,
+        component: `#### ⚠️ DEPRECATED - Use **Autocomplete** instead.`,
       },
     },
   },
