@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
 import { Story } from '@storybook/react/types-6-0'
 import { ComponentMeta } from '@storybook/react'
@@ -16,12 +15,6 @@ export default {
   },
 } as ComponentMeta<typeof Input>
 
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 32px;
-  grid-template-columns: repeat(2, fit-content(100%));
-`
 export const Introduction: Story<InputProps> = (args) => <Input {...args} />
 
 export const Types: Story<InputProps> = () => (
