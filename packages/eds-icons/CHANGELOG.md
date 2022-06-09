@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.11.0] - 2022-06-xx
+## [0.11.0] - 2022-06-09
 
 ## Added
 
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
-- Fixed typo in icons
+- Fixed typo in icons. Make sure to update the following icons to fixed name
   - `communte` -> `commute`
   - `headseat_mic` -> `headset_mic`
   - `desktop_windwos` -> `desktop_windows`
@@ -25,6 +25,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `format_stikethrough` -> `format_strikethrough`
   - `mood_extreamly_sad` -> `mood_extremely_sad`
   - `mood_extreamly_happy` -> `mood_extremely_happy`
+
+## Removed
+
+- `communte`
+- `headseat_mic`
+- `desktop_windwos`
+- `breifcase`
+- `format_stikethrough`
+- `mood_extreamly_sad`
+- `mood_extreamly_happy`
 
 ## [0.10.0] - 2021-12-20
 
