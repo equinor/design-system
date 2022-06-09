@@ -7,6 +7,7 @@ import {
   KeyboardEvent,
   useEffect,
   ChangeEvent,
+  useCallback,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { slider as tokens } from './Slider.tokens'
@@ -164,7 +165,10 @@ const SrOnlyLabel = styled.label`
 `
 
 export type SliderProps = {
-  /** Id for the elements that labels this slider (NOTE: will be deprecated and removed in a future version of EDS, please use the native aria-labelledby instead) */
+  /**
+   * Id for the elements that labels this slider
+   * @deprecated  Use the `aria-labelledby` instead
+   * */
   ariaLabelledby?: string
   /** Components value, range of numbers */
   value: number[] | number
@@ -306,16 +310,11 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     inputId = `${overrideId}-thumb`
   }
 
-  const getAriaLabelledby = () => {
+  const getAriaLabelledby = useCallback(() => {
     if (ariaLabelledbyNative) return ariaLabelledbyNative
-    if (ariaLabelledby) {
-      console.warn(
-        'Slider: The "ariaLabelledby" prop is deprecated and will be removed in a future version of EDS, please use the native "aria-labelledby" instead',
-      )
-      return ariaLabelledby
-    }
+    if (ariaLabelledby) return ariaLabelledby
     return null
-  }
+  }, [ariaLabelledbyNative, ariaLabelledby])
 
   return (
     <>
