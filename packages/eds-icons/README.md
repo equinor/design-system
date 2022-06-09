@@ -39,23 +39,29 @@ Icon.add({ save }) // (this needs only be done once)
 
 ```
 
-### FAQ
+### Other web frameworks
 
-* If you are using NodeJS 13+ for module loading, it now has native ES modules support. Add `"type":"module"` to your apps `package.json` to enable this.
+You can render the EDS icons using plain [svg](https://developer.mozilla.org/en-US/docs/Web/SVG).
 
-* If you get a syntax error trying to import ES module, try importing the CJS module as not all loaders have support for ES modules yet
+⚠️ Due to how Figma parses and exports svg icons the following attributes must be added to your `<path>` element; `fill-rule="evenodd" clip-rule="evenodd"`.
 
-#### Rendering icons
+These are not included to reduce bundle size as they are needed for every icon.
 
-You can render it using plain [svg](https://developer.mozilla.org/en-US/docs/Web/SVG) or use our provided [React Icon component](#React) in [@equinor/eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react)
+```javascript
+import { save } from '@equinor/eds-icons'
 
-⚠️ Due to how Figma parses and exports svg icons the following attributes must be added to your `<path></path>` element; `fill-rule="evenodd" clip-rule="evenodd"`
+<svg viewBox={`0 0 ${save.width} ${save.height}`}>
+  <path d={save.svgPathData} fill-rule="evenodd" clip-rule="evenodd">
+</svg>
+```
 
-Use [EDS Assets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3)(Equinor Figma account needed🔒) or [storefront](https://eds.equinor.com/assets/system-icons/library/) for icon names. Spaces in icon names are replaced with underscores. 
+#### Icon names
+
+Use [EDS Assets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/Assets?node-id=2%3A3)(Equinor Figma account needed🔒) or our [icon preview in Storybook](https://eds-storybook-react.azurewebsites.net/?path=/story/icons--preview) for icon names. Spaces in icon names are replaced with underscores. 
 
 `star-filled -> star_filled`.
 
-### Example of javascript object data
+### Example of icon data
 
 ```javascript
 {
@@ -66,6 +72,12 @@ Use [EDS Assets in Figma](https://www.figma.com/file/BQjYMxdSdgRkdhKTDDU7L4KU/As
   svgPathData: 'M12 16.067l4.947 3.6-1.894-5.814L20 10.334h-6.067l-1.933-6-1.933 6H4l4.947 3.52-1.894 5.814 4.947-3.6z',
 }
 ```
+
+### FAQ
+
+* If you are using NodeJS 13+ for module loading, it now has native ES modules support. Add `"type":"module"` to your apps `package.json` to enable this.
+
+* If you get a syntax error trying to import ES module, try importing the CJS module as not all loaders have support for ES modules yet
 
 ## Credits
 
