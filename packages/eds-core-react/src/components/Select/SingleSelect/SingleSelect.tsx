@@ -47,6 +47,7 @@ export type SingleSelectProps = {
 const PaddedStyledListItem = styled(StyledListItem)`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
 `
+/** @deprecated Use `<Autocomplete />` instead */
 
 export const SingleSelect = forwardRef<HTMLDivElement, SingleSelectProps>(
   function SingleSelect(
