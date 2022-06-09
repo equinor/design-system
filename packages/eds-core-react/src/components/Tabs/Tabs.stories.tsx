@@ -12,6 +12,7 @@ import {
 } from '../..'
 import { ComponentMeta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import { Stack } from './../../../.storybook/components'
 import page from './Tabs.docs.mdx'
 
 export default {
@@ -62,16 +63,18 @@ const StyledTabList = styled(Tabs.List)`
 `
 
 export const Introduction: Story<TabsProps> = (args) => (
-  <Tabs {...args}>
-    <Tabs.List>
-      <Tabs.Tab>One</Tabs.Tab>
-      <Tabs.Tab>Two</Tabs.Tab>
-    </Tabs.List>
-    <Tabs.Panels>
-      <Tabs.Panel>Panel one</Tabs.Panel>
-      <Tabs.Panel>Panel two</Tabs.Panel>
-    </Tabs.Panels>
-  </Tabs>
+  <Stack>
+    <Tabs {...args}>
+      <Tabs.List>
+        <Tabs.Tab>One</Tabs.Tab>
+        <Tabs.Tab>Two</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panels>
+        <Tabs.Panel>Panel one</Tabs.Panel>
+        <Tabs.Panel>Panel two</Tabs.Panel>
+      </Tabs.Panels>
+    </Tabs>
+  </Stack>
 )
 
 export const States: Story<TabsProps> = () => {
@@ -82,17 +85,19 @@ export const States: Story<TabsProps> = () => {
   }, [])
 
   return (
-    <Tabs activeTab={2} onChange={noop}>
-      <Tabs.List>
-        <Tabs.Tab>Enabled</Tabs.Tab>
-        <Tabs.Tab disabled>Disabled</Tabs.Tab>
-        <Tabs.Tab active>Active</Tabs.Tab>
-        <Tabs.Tab data-hover>Hover</Tabs.Tab>
-        <Tabs.Tab data-focus ref={focusedRef}>
-          Focus
-        </Tabs.Tab>
-      </Tabs.List>
-    </Tabs>
+    <Stack>
+      <Tabs activeTab={2} onChange={noop}>
+        <Tabs.List>
+          <Tabs.Tab>Enabled</Tabs.Tab>
+          <Tabs.Tab disabled>Disabled</Tabs.Tab>
+          <Tabs.Tab active>Active</Tabs.Tab>
+          <Tabs.Tab data-hover>Hover</Tabs.Tab>
+          <Tabs.Tab data-focus ref={focusedRef}>
+            Focus
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs>
+    </Stack>
   )
 }
 
@@ -129,30 +134,23 @@ export const WithPanels: Story<TabsProps> = () => {
   }
 
   return (
-    <>
-      <Typography variant="body_long">
-        To navigate using they keyboard, use tab key to move from tab to tab
-        panel, shift + tab to go backwards, use left and right arrow keys to
-        move from between tabs (active tab must be focused). Focus outline is
-        only visible when navigating using the keyboard.
-      </Typography>
-      <Tabs activeTab={activeTab} onChange={handleChange}>
-        <Tabs.List>
-          <Tabs.Tab>Tab one</Tabs.Tab>
-          <Tabs.Tab>Tab two</Tabs.Tab>
-          <Tabs.Tab disabled>Tab three</Tabs.Tab>
-          <Tabs.Tab>Tab four</Tabs.Tab>
-        </Tabs.List>
-        <Tabs.Panels>
-          <Tabs.Panel>Panel one</Tabs.Panel>
-          <Tabs.Panel>Panel two</Tabs.Panel>
-          <Tabs.Panel>Panel three</Tabs.Panel>
-          <Tabs.Panel>Panel four</Tabs.Panel>
-        </Tabs.Panels>
-      </Tabs>
-    </>
+    <Tabs activeTab={activeTab} onChange={handleChange}>
+      <Tabs.List>
+        <Tabs.Tab>Tab one</Tabs.Tab>
+        <Tabs.Tab>Tab two</Tabs.Tab>
+        <Tabs.Tab disabled>Tab three</Tabs.Tab>
+        <Tabs.Tab>Tab four</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panels>
+        <Tabs.Panel>Panel one</Tabs.Panel>
+        <Tabs.Panel>Panel two</Tabs.Panel>
+        <Tabs.Panel>Panel three</Tabs.Panel>
+        <Tabs.Panel>Panel four</Tabs.Panel>
+      </Tabs.Panels>
+    </Tabs>
   )
 }
+WithPanels.storyName = 'With panels'
 
 export const WithSearch: Story<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
@@ -201,6 +199,7 @@ export const WithSearch: Story<TabsProps> = () => {
     </>
   )
 }
+WithSearch.storyName = 'With search'
 
 export const WithInputInPanel: Story<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
@@ -223,38 +222,37 @@ export const WithInputInPanel: Story<TabsProps> = () => {
   }
 
   return (
-    <>
-      <Tabs
-        style={{ marginTop: '2rem' }}
-        activeTab={activeTab}
-        onChange={handleChange}
-        variant="fullWidth"
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      >
-        <Tabs.List>
-          <Tabs.Tab>Tab with textfield</Tabs.Tab>
-          <Tabs.Tab>Other tab</Tabs.Tab>
-        </Tabs.List>
-        <Tabs.Panels>
-          <Tabs.Panel style={{ maxWidth: '20em' }}>
-            <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-              Panel one
-            </Typography>
-            <Search
-              value={searchText}
-              placeholder={'Search '}
-              onChange={handleOnTextChange}
-            />
-          </Tabs.Panel>
-          <Tabs.Panel>
-            <Typography variant="body_short">Panel two</Typography>
-          </Tabs.Panel>
-        </Tabs.Panels>
-      </Tabs>
-    </>
+    <Tabs
+      style={{ marginTop: '2rem' }}
+      activeTab={activeTab}
+      onChange={handleChange}
+      variant="fullWidth"
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+    >
+      <Tabs.List>
+        <Tabs.Tab>Tab with textfield</Tabs.Tab>
+        <Tabs.Tab>Other tab</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panels>
+        <Tabs.Panel style={{ maxWidth: '20em' }}>
+          <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
+            Panel one
+          </Typography>
+          <Search
+            value={searchText}
+            placeholder={'Search '}
+            onChange={handleOnTextChange}
+          />
+        </Tabs.Panel>
+        <Tabs.Panel>
+          <Typography variant="body_short">Panel two</Typography>
+        </Tabs.Panel>
+      </Tabs.Panels>
+    </Tabs>
   )
 }
+WithInputInPanel.storyName = 'With input in panel'
 
 export const WithStyledComponent: Story<TabsProps> = () => {
   const StyledTab = styled(Tabs.Tab)`
@@ -272,31 +270,27 @@ export const WithStyledComponent: Story<TabsProps> = () => {
   }
 
   const items = [
-    { name: 'Tab 1', value: 'Tab 1 body as plain text' },
-    { name: 'Tab 2', value: <Typography>Tab 2 body as typography</Typography> },
-    { name: 'Tab 3', value: <div>Tab 3 as div</div> },
+    { name: 'Tab 1', value: 'Tab 1 body as PLAIN TEXT' },
+    { name: 'Tab 2', value: <Typography>Tab 2 body as TYPOGRAPHY</Typography> },
+    { name: 'Tab 3', value: <div>Tab 3 as DIV</div> },
   ]
 
   return (
-    <>
-      <Typography variant="h1">
-        Tab with panels rendered from collection
-      </Typography>
-      <Tabs activeTab={activeTab} onChange={handleChange}>
-        <Tabs.List>
-          {items.map(({ name }) => (
-            <StyledTab key={name}>{name}</StyledTab>
-          ))}
-        </Tabs.List>
-        <Tabs.Panels>
-          {items.map(({ name, value }) => (
-            <StyledTabPanel key={name}>{value}</StyledTabPanel>
-          ))}
-        </Tabs.Panels>
-      </Tabs>
-    </>
+    <Tabs activeTab={activeTab} onChange={handleChange}>
+      <Tabs.List>
+        {items.map(({ name }) => (
+          <StyledTab key={name}>{name}</StyledTab>
+        ))}
+      </Tabs.List>
+      <Tabs.Panels>
+        {items.map(({ name, value }) => (
+          <StyledTabPanel key={name}>{value}</StyledTabPanel>
+        ))}
+      </Tabs.Panels>
+    </Tabs>
   )
 }
+WithStyledComponent.storyName = 'With styled component'
 
 export const Overflow: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -385,15 +379,7 @@ export const Overflow: Story<TabsProps> = () => {
     </Tabs>
   )
 }
-
-Overflow.parameters = {
-  docs: {
-    description: {
-      story:
-        'Tabs uses css `scroll-snap`, so in a case where there is overflow and the user wants to add next/previous buttons for scrolling, they can use `element.scrollTo` some amount and then css will take care of alignment',
-    },
-  },
-}
+Overflow.storyName = 'Overflow with next/previous buttons'
 
 export const OverflowScroll: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -417,15 +403,7 @@ export const OverflowScroll: Story<TabsProps> = () => {
     </Tabs>
   )
 }
-
-OverflowScroll.parameters = {
-  docs: {
-    description: {
-      story:
-        'In the case of tabs overflowing, and where next/previous buttons are not desired, the `scrollable` prop adds `overflow-x: auto` to the tabs list. Tabs uses css `scroll-snap` which handles alignment and tabs snapping into place. Note that scrollbar had been disabled for touch devices since the tabs are swipeable',
-    },
-  },
-}
+OverflowScroll.storyName = 'Overflow with default scrollbar'
 
 export const OverflowScrollStyled: Story<TabsProps> = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -475,14 +453,7 @@ export const OverflowScrollStyled: Story<TabsProps> = () => {
     </Tabs>
   )
 }
-
-OverflowScrollStyled.parameters = {
-  docs: {
-    description: {
-      story: ' The scrollbar styles for Tabs.List can be overwritten',
-    },
-  },
-}
+OverflowScrollStyled.storyName = 'Overflow with customized scrollbar'
 
 export const Compact: Story<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
@@ -494,33 +465,20 @@ export const Compact: Story<TabsProps> = () => {
   }, [density])
 
   return (
-    <EdsProvider density={density}>
-      <Tabs activeTab={2} onChange={noop}>
-        <Tabs.List>
-          <Tabs.Tab>Enabled</Tabs.Tab>
-          <Tabs.Tab disabled>Disabled</Tabs.Tab>
-          <Tabs.Tab active>Active</Tabs.Tab>
-          <Tabs.Tab data-hover>Hover</Tabs.Tab>
-          <Tabs.Tab data-focus ref={focusedRef}>
-            Focus
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs>
-    </EdsProvider>
+    <Stack>
+      <EdsProvider density={density}>
+        <Tabs activeTab={2} onChange={noop}>
+          <Tabs.List>
+            <Tabs.Tab>Enabled</Tabs.Tab>
+            <Tabs.Tab disabled>Disabled</Tabs.Tab>
+            <Tabs.Tab active>Active</Tabs.Tab>
+            <Tabs.Tab data-hover>Hover</Tabs.Tab>
+            <Tabs.Tab data-focus ref={focusedRef}>
+              Focus
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs>
+      </EdsProvider>
+    </Stack>
   )
 }
-
-Compact.parameters = {
-  docs: {
-    description: {
-      story: 'Compact `Tabs` using `EdsProvider` ',
-    },
-  },
-}
-
-WithSearch.storyName = 'With search'
-WithInputInPanel.storyName = 'With input in panel'
-WithStyledComponent.storyName = 'With styled component'
-Overflow.storyName = 'Overflow with next/previous buttons'
-OverflowScroll.storyName = 'Overflow with default scrollbar'
-OverflowScrollStyled.storyName = 'Overflow with customized scrollbar'

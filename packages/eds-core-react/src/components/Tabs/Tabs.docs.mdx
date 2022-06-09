@@ -39,8 +39,84 @@ import { Dialog } from '@equinor/eds-core-react'
       <Tabs.Panel>Panel one</Tabs.Panel>
       <Tabs.Panel>Panel two</Tabs.Panel>
     </Tabs.Panels>
-  </Tabs>
+</Tabs>
 
 ```
 
 ## Examples
+
+### States
+
+<Story id="navigation-tabs--states" />
+
+### Widths
+
+Tabs have:
+<ul>
+    <li><code>minWidth</code> width of Spacer/16 - Medium on each side of the label.</li>
+    <li><code>minWidth</code> width of 360px.</li>
+</ul>
+
+Tab width can be decided by three factors:
+<ol>
+    <li>The width of the space available being equally divided by the number of tabs. This method is only to be used for four tabs or less.</li>
+    <li>The width of the widest tab determining the width of all the tabs to provide visual balance. 
+        This should be used with caution ensuring all tabs will be seen in smaller layouts.</li>
+    <li>Each tab having its own minimum width to conserve space.</li>
+</ol>
+
+<Story id="navigation-tabs--widths" />
+
+### With panels
+
+To navigate using the keyboard use:
+<ul>
+    <li><code>TAB</code> to move from tab to tab panel.</li>
+    <li><code>SHIFT + TAB</code> to go backwards.</li>
+    <li><code>LEFT / RIGHT ARROW</code> to move from between tabs (active tab must be focused).</li>
+</ul>
+
+Focus outline is only visible when navigating using the keyboard.
+
+<Story id="navigation-tabs--with-panels" />
+
+### With search
+
+<Story id="navigation-tabs--with-search" />
+
+### With input in panel
+
+<Story id="navigation-tabs--with-input-in-panel" />
+
+### With styled component
+
+Tabs with panels rendered from collection.
+
+<Story id="navigation-tabs--with-styled-component" />
+
+### Overflow with next/previous buttons
+
+Tabs uses css `scroll-snap`, so in a case where there is overflow and the user wants to add next/previous buttons for scrolling, 
+they can use `element.scrollTo` some amount and then css will take care of alignment.
+
+<Story id="navigation-tabs--overflow" />
+
+### Overflow with default scrollbar
+
+In the case of tabs overflowing, and where next/previous buttons are not desired, the `scrollable` prop adds `overflow-x: auto` to the tabs list. 
+Tabs uses css `scroll-snap` which handles alignment and tabs snapping into place. 
+Note that scrollbar had been disabled for touch devices since the tabs are swipeable.
+
+<Story id="navigation-tabs--overflow-scroll" />
+
+### Overflow with customized scrollbar
+
+The scrollbar styles for `Tabs.List` can be overwritten.
+
+<Story id="navigation-tabs--overflow-scroll-styled" />
+
+### Compact
+
+Compact `Tabs` using `EdsProvider`.
+
+<Story id="navigation-tabs--compact" />
