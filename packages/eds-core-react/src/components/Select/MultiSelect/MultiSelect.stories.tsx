@@ -21,9 +21,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `The MultiSelect component allows users to choose one or
-        multiple items or options from a list.
-        `,
+        component: `#### ⚠️ DEPRECATED - Use **Autocomplete** instead.`,
       },
     },
   },
