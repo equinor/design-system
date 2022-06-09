@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Improved `Progress` legibility ([#2182](https://github.com/equinor/design-system/pull/2182))
+- Improved `Slider` legibility ([#2173](https://github.com/equinor/design-system/pull/2173))
 - `Card` is now less opinonated making it easier to use inside flex/grid containers ([#2273](https://github.com/equinor/design-system/pull/2273))
 - Upgraded dev dependencies, fixed missing types in Slider & removed `Menu.Item` memo as it was not working as intended ([#2183](https://github.com/equinor/design-system/pull/2183))
 
