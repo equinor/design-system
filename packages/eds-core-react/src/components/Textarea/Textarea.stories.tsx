@@ -12,3 +12,7 @@ export default {
     },
   },
 } as ComponentMeta<typeof Textarea>
+
+export const Introduction: Story<TextareaProps> = (args) => (
+  <Textarea {...args} />
+)
