@@ -39,9 +39,13 @@ Icon.add({ save }) // (this needs only be done once)
 
 ```
 
-### Other web
+### Other web frameworks
 
-Make sure to add the attributes `fill-rule="evenodd" clip-rule="evenodd"` to correctly [render icons](#rendering-icons).
+You can render the EDS icons using plain [svg](https://developer.mozilla.org/en-US/docs/Web/SVG).
+
+⚠️ Due to how Figma parses and exports svg icons the following attributes must be added to your `<path>` element; `fill-rule="evenodd" clip-rule="evenodd"`.
+
+These are not included to reduce bundle size as they are needed for every icon.
 
 ```javascript
 import { save } from '@equinor/eds-icons'
@@ -50,12 +54,6 @@ import { save } from '@equinor/eds-icons'
   <path d={save.svgPathData} fill-rule="evenodd" clip-rule="evenodd">
 </svg>
 ```
-
-#### Rendering icons
-
-You can render it using plain [svg](https://developer.mozilla.org/en-US/docs/Web/SVG) or use our provided [React Icon component](#React) in [@equinor/eds-core-react](https://www.npmjs.com/package/@equinor/eds-core-react)
-
-⚠️ Due to how Figma parses and exports svg icons the following attributes must be added to your `<path>` element; `fill-rule="evenodd" clip-rule="evenodd"`
 
 #### Icon names
 
