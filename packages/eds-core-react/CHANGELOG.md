@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.1] - 2022-06-09
+
+### Deprecated
+
+- `ariaLabelledby` has been deprecated on `Slider`. Use `aria-labelledby` instead. ([#2173](https://github.com/equinor/design-system/pull/2173))
+
 ## [0.20.0] - 2022-06-08
 
 ### Added
@@ -15,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Improved `Progress` legibility ([#2182](https://github.com/equinor/design-system/pull/2182))
+- Improved `Slider` legibility ([#2173](https://github.com/equinor/design-system/pull/2173))
 - `Card` is now less opinonated making it easier to use inside flex/grid containers ([#2273](https://github.com/equinor/design-system/pull/2273))
 - Upgraded dev dependencies, fixed missing types in Slider & removed `Menu.Item` memo as it was not working as intended ([#2183](https://github.com/equinor/design-system/pull/2183))
 
