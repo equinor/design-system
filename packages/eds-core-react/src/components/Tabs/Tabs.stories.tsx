@@ -10,8 +10,25 @@ import {
   EdsProvider,
   Density,
 } from '../..'
-import { Story, Meta } from '@storybook/react'
+import { ComponentMeta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import page from './Tabs.docs.mdx'
+
+export default {
+  title: 'Navigation/Tabs',
+  component: Tabs,
+  subcomponents: {
+    List: Tabs.List,
+    Tab: Tabs.Tab,
+    Panels: Tabs.Panels,
+    Panel: Tabs.Panel,
+  },
+  parameters: {
+    docs: {
+      page,
+    },
+  },
+} as ComponentMeta<typeof Tabs>
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
@@ -44,26 +61,7 @@ const StyledTabList = styled(Tabs.List)`
   }
 `
 
-export default {
-  title: 'Navigation/Tabs',
-  component: Tabs,
-  subcomponents: {
-    List: Tabs.List,
-    Tab: Tabs.Tab,
-    Panels: Tabs.Panels,
-    Panel: Tabs.Panel,
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: `Tabs organise related content across different views to be quickly navigated.
-        `,
-      },
-    },
-  },
-} as Meta
-
-export const Default: Story<TabsProps> = (args) => (
+export const Introduction: Story<TabsProps> = (args) => (
   <Tabs {...args}>
     <Tabs.List>
       <Tabs.Tab>One</Tabs.Tab>
