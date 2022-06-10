@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { Switch, SwitchProps, EdsProvider, Table, Density } from '../..'
 import styled from 'styled-components'
 import { ComponentMeta, Story } from '@storybook/react'
@@ -26,6 +26,8 @@ export const Introduction: Story<SwitchProps> = (args) => (
 )
 
 export const DefaultStates: Story<SwitchProps> = () => {
+  const [check, setCheck] = useState(false)
+
   return (
     <UnstyledList>
       <li>
@@ -39,6 +41,15 @@ export const DefaultStates: Story<SwitchProps> = () => {
       </li>
       <li>
         <Switch disabled defaultChecked label="You can't turn me off!" />
+      </li>
+      <li>
+        <Switch
+          label="I'm a controlled component"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setCheck(e.target.checked)
+          }}
+          checked={check}
+        />
       </li>
     </UnstyledList>
   )
