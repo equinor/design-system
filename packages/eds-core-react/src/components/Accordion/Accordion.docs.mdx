@@ -29,8 +29,21 @@ import { Accordion } from '@equinor/eds-core-react'
 
 <Accordion>
   <Accordion.Item>
-    <Accordion.Header>Header 1</Accordion.Header>
+    <Accordion.Header>Simple header</Accordion.Header>
     <Accordion.Panel>Content 1</Accordion.Panel>
+  </Accordion.Item>
+  <Accordion.Item>
+    <Accordion.Header>
+      <Accordion.HeaderTitle>
+        Header with actions
+      </Accordion.HeaderTitle>
+      <Accordion.HeaderActions>
+        <Button variant="ghost_icon">
+          <Icon name="edit" title="Edit" />
+        </Button>
+      </Accordion.HeaderActions>
+    </Accordion.Header>
+    <Accordion.Panel>Content 2</Accordion.Panel>
   </Accordion.Item>
 </Accordion>
 ```
@@ -40,7 +53,10 @@ import { Accordion } from '@equinor/eds-core-react'
 ### Header
 
 <ul>
-    <li>The header area must contain one action indicating that the section expands or collapses.</li>
+    <li>The header is accompanied with two subcomponents, <code>Accordion.HeaderTitle</code> and 
+    <code>Accordion.HeaderActions</code> which should be used if there is a need
+     for additional action buttons in the header. Raw text will get wrapped 
+     in an <code>Accordion.HeaderTitle</code> automatically.</li>
     <li>The expand/collapse functionality is tied to the entire header.</li>
 </ul>
 
