@@ -10,15 +10,18 @@ export type AccordionHeaderTitleProps = {
 
 const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>(
   ({ theme, isExpanded, disabled }) => {
+    const {
+      entities: { header },
+    } = theme
     return css`
-      flex: 1;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      flex-grow: 1;
       overflow: hidden;
       text-align: left;
-      font-family: Equinor;
       color: ${isExpanded && !disabled
-        ? theme.entities.header.states.active.typography?.color
+        ? header.states.active.typography?.color
         : 'inherit'};
     `
   },

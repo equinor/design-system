@@ -10,14 +10,25 @@ export type AccordionHeaderActionsProps = {
 
 const StyledAccordionHeaderActions = styled.span<AccordionHeaderActionsProps>(
   ({ theme, isExpanded, disabled }) => {
+    const {
+      entities: { header },
+    } = theme
     return css`
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      grid-column: 5 / 10;
-      grid-row: 1 / 1;
+      padding-right: ${header.spacings.right};
+      ${disabled
+        ? css({
+            color: header.states.disabled.typography.color,
+            cursor: 'not-allowed',
+          })
+        : css({
+            color: header.typography.color,
+            cursor: 'pointer',
+          })}
       color: ${isExpanded && !disabled
-        ? theme.entities.header.states.active.typography?.color
+        ? header.states.active.typography?.color
         : 'inherit'};
     `
   },

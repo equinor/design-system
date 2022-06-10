@@ -11,6 +11,7 @@ import styled, { css } from 'styled-components'
 import { chevron_down, chevron_up } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
 import { AccordionHeaderTitle } from './AccordionHeaderTitle'
+import { AccordionHeaderActions } from './AccordionHeaderActions'
 import { accordion as tokens } from './Accordion.tokens'
 import type { AccordionProps } from './Accordion.types'
 import {
@@ -24,10 +25,40 @@ const {
   entities: { chevron: chevronToken },
 } = tokens
 
-const StyledAccordionHeader = styled.div`
-  margin: 0;
-  padding: 0;
-`
+const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
+  ({ theme, disabled, parentIndex }) => {
+    const {
+      entities: { header },
+      border,
+    } = theme
+    return css`
+      margin: 0;
+      padding: 0;
+      height: ${header.height};
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      background-color: ${header.background};
+      ${bordersTemplate(border)}
+      border-top: ${parentIndex === 0 ? null : 'none'};
+      ${disabled
+        ? css({
+            color: header.states.disabled.typography.color,
+            cursor: 'not-allowed',
+          })
+        : css({
+            color: header.typography.color,
+            cursor: 'pointer',
+            '@media (hover: hover) and (pointer: fine)': {
+              ':hover': {
+                background: header.states.hover.background,
+              },
+            },
+          })}
+    `
+  },
+)
 
 type StyledAccordionHeaderButtonProps = {
   /** The ID of the panel */
@@ -49,14 +80,12 @@ const StyledAccordionHeaderButton =
       tabIndex: disabled ? -1 : 0,
       disabled,
     }),
-  )<StyledAccordionHeaderButtonProps>(({ theme, disabled, parentIndex }) => {
+  )<StyledAccordionHeaderButtonProps>(({ theme, disabled }) => {
     const {
       entities: { header, icon: iconToken },
-      border,
     } = theme
     return css`
       ${typographyTemplate(header.typography)}
-      ${bordersTemplate(border)}
       ${spacingsTemplate(header.spacings)}
       &[data-focus-visible-added]:focus {
         ${outlineTemplate(header.states.focus.outline)}
@@ -64,14 +93,12 @@ const StyledAccordionHeaderButton =
       &:focus-visible {
         ${outlineTemplate(header.states.focus.outline)}
       }
-      border-top: ${parentIndex === 0 ? null : 'none'};
-      width: 100%;
-      background: ${header.background};
-      height: ${header.height};
+      border: 0;
+      background-color: transparent;
       margin: 0;
       display: flex;
       align-items: center;
-      box-sizing: border-box;
+      flex-grow: 1;
       ${disabled
         ? css({
             color: header.states.disabled.typography.color,
@@ -80,11 +107,6 @@ const StyledAccordionHeaderButton =
         : css({
             color: header.typography.color,
             cursor: 'pointer',
-            '@media (hover: hover) and (pointer: fine)': {
-              ':hover': {
-                background: header.states.hover.background,
-              },
-            },
           })}
       > svg {
         color: ${iconToken.typography.color};
@@ -144,7 +166,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         }
       }
     }
-
     const handleKeyDown = (event: KeyboardEvent) => {
       const { key } = event
       if (key === 'Enter' || key === ' ') {
@@ -188,17 +209,36 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
           })
         }
 
+        if (child.type === AccordionHeaderActions) {
+          return
+        }
+
         return child
+      },
+    )
+
+    const headerActions = ReactChildren.map(
+      children,
+      (child: AccordionChild) => {
+        if (isValidElement(child) && child.type === AccordionHeaderActions) {
+          return cloneElement(child, {
+            isExpanded,
+            disabled,
+          })
+        }
       },
     )
 
     const newChildren = [chevron, headerChildren]
 
     return (
-      <StyledAccordionHeader as={headerLevel}>
+      <StyledAccordionHeader
+        disabled={disabled}
+        parentIndex={parentIndex}
+        as={headerLevel}
+      >
         <StyledAccordionHeaderButton
           isExpanded={isExpanded}
-          parentIndex={parentIndex}
           disabled={disabled}
           panelId={panelId}
           onClick={handleClick}
@@ -208,11 +248,10 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         >
           {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
         </StyledAccordionHeaderButton>
+        {headerActions && headerActions}
       </StyledAccordionHeader>
     )
   },
 )
-
-// AccordionHeader.displayName = 'EdsAccordionHeader'
 
 export { AccordionHeader }
