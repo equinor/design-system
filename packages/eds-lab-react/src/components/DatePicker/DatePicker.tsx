@@ -1,4 +1,10 @@
-import { useState, useCallback, forwardRef, InputHTMLAttributes } from 'react'
+import {
+  useState,
+  useCallback,
+  forwardRef,
+  InputHTMLAttributes,
+  useEffect,
+} from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
@@ -75,6 +81,10 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       },
       [onChanged],
     )
+
+    useEffect(() => {
+      onDateValueChange(dateValue)
+    }, [dateValue])
 
     return (
       <ThemeProvider theme={tokens}>
