@@ -120,6 +120,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
             <CalendarIcon
               name="calendar"
               className="calendar-icon"
+              color={tokens.colors.iconGray}
               data={calendar}
               size={24}
             />
@@ -229,17 +230,11 @@ const StyledDatepicker = styled(DatePicker)`
 `
 
 const CalendarIcon = styled(Icon)`
-  ${({ theme }) =>
-    css`
-      position: absolute;
-      z-index: 1;
-      width: 24px;
-      height: 24px;
-      top: 21px;
-      right: 6px;
-      color: ${theme.entities.title.typography.color};
-      cursor: pointer;
-    `}
+  position: absolute;
+  z-index: 1;
+  top: 21px;
+  right: 6px;
+  cursor: pointer;
 `
 
 export { ReactDatePicker as DatePicker }
