@@ -229,6 +229,7 @@ const DateLabel = styled.label`
 
     span {
       padding-left: 8px;
+      color: ${tokens.colors.iconGray};
     }
   `}
 `
