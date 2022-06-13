@@ -3,6 +3,8 @@ import {
   useCallback,
   forwardRef,
   InputHTMLAttributes,
+  useRef,
+  useImperativeHandle,
   useEffect,
 } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
@@ -86,13 +88,16 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       onDateValueChange(dateValue)
     }, [dateValue])
 
+    const localRef = useRef<any>()
+    useImperativeHandle(ref, () => localRef.current)
+
     return (
       <ThemeProvider theme={tokens}>
         <Container className={`date-picker ${className}`}>
           <DateLabel htmlFor={id} className={`date-label`}>
             <span>{label}</span>
             <StyledDatepicker
-              ref={ref}
+              ref={localRef}
               locale={locale}
               selected={date}
               className="eds-datepicker"
@@ -101,6 +106,17 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
               dateFormat={dateFormat}
               placeholderText={placeholder}
               id={id}
+              onKeyDown={(event) => {
+                // If you shift-tab while focusing the input-element, it should close the pop-over.
+                // Not currently supported by react-datepicker.
+                if (
+                  event.code === 'Tab' &&
+                  event.shiftKey &&
+                  (event.target as HTMLElement).nodeName == 'INPUT'
+                ) {
+                  localRef?.current?.setOpen(false)
+                }
+              }}
               filterDate={(date: Date): boolean => {
                 if (disableFuture) {
                   return new Date() > date
