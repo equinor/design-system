@@ -10,6 +10,9 @@ const {
     navigation: { menu_title, button },
   },
   colors: {
+    text: {
+      static_icons__tertiary: { rgba: iconTertiary },
+    },
     interactive: {
       primary__resting: { rgba: focusColor },
     },
@@ -30,6 +33,7 @@ export interface DatePickerToken extends ComponentToken {
   colors: {
     green13: string
     green100: string
+    iconGray: string
   }
 }
 
@@ -39,6 +43,7 @@ export const datePicker: DatePickerToken = {
   colors: {
     green13: primary13,
     green100: primary100,
+    iconGray: iconTertiary,
   },
   border: {
     type: 'border',
