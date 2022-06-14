@@ -10,7 +10,7 @@ import {
 } from '@equinor/eds-core-react'
 import styled, { css } from 'styled-components'
 import { IconData } from '@equinor/eds-icons'
-import { useSideBar } from '../SideBar'
+import { useSideBar } from '../SideBar.context'
 
 const {
   entities: {
@@ -106,19 +106,19 @@ const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;
 `
 
-export type SidebarItemType = {
+export type SidebarLinkType = {
   icon?: IconData
   name: string
   link?: string
   onClick?: () => void
 }
 
-export type SidebarItemProps = {
+export type SidebarLinkProps = {
   currentUrl?: string
-} & SidebarItemType &
+} & SidebarLinkType &
   HTMLAttributes<HTMLAnchorElement>
 
-export const SidebarItem = forwardRef<HTMLAnchorElement, SidebarItemProps>(
+export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
   ({ currentUrl, icon, name, link, onClick, ...rest }, ref) => {
     const isCurrentUrl = () => currentUrl?.includes(link)
     const { isOpen } = useSideBar()
@@ -164,4 +164,4 @@ export const SidebarItem = forwardRef<HTMLAnchorElement, SidebarItemProps>(
   },
 )
 
-SidebarItem.displayName = 'SidebarItem'
+SidebarLink.displayName = 'SidebarItem'

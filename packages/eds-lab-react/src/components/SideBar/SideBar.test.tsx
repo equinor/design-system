@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react'
 //import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
-import { SidebarItemType } from './SidebarItem'
+import { SidebarLinkType } from './SidebarLink'
 import { home, star_half } from '@equinor/eds-icons'
 
-const defaultMenuItems: SidebarItemType[] = [
+const defaultMenuItems: SidebarLinkType[] = [
   {
     name: 'Home',
     icon: home,
@@ -22,33 +22,17 @@ test('Sidebar renders', () => {
   render(
     <SideBar>
       {defaultMenuItems.map((m) => {
-        return <SideBar.Item key={m.name} currentUrl={currentUrl} {...m} />
+        return <SideBar.Link key={m.name} currentUrl={currentUrl} {...m} />
       })}
     </SideBar>,
   )
-})
-
-test('Renders action button when onAction, actionLabel and actionIcon props are given', () => {
-  render(
-    <SideBar
-      onAction={() => console.log('test')}
-      actionLabel="actionLabel"
-      actionIcon={home}
-      open={true}
-    >
-      {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
-      ))}
-    </SideBar>,
-  )
-  expect(screen.getByText('actionLabel')).toBeInTheDocument()
 })
 
 test('Renders closed width when closed', () => {
   render(
     <SideBar open={false}>
       {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
+        <SideBar.Link key={m.name} {...m} />
       ))}
     </SideBar>,
   )
@@ -60,7 +44,7 @@ test('Renders open width when open', () => {
   render(
     <SideBar open={true}>
       {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
+        <SideBar.Link key={m.name} {...m} />
       ))}
     </SideBar>,
   )
@@ -71,10 +55,13 @@ test('Renders open width when open', () => {
 test('Triggers onToggle callback when closed', () => {
   const cb = jest.fn()
   render(
-    <SideBar open={true} onToggle={cb} toggleButton="top">
-      {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
-      ))}
+    <SideBar open={true} onToggle={cb}>
+      <SideBar.Content>
+        <SideBar.Toggle />
+        {defaultMenuItems.map((m) => (
+          <SideBar.Link key={m.name} {...m} />
+        ))}
+      </SideBar.Content>
     </SideBar>,
   )
 
@@ -87,10 +74,13 @@ test('Triggers onToggle callback when closed', () => {
 test('Triggers onToggle callback when opened', () => {
   const cb = jest.fn()
   render(
-    <SideBar open={false} onToggle={cb} toggleButton="top">
-      {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
-      ))}
+    <SideBar open={false} onToggle={cb}>
+      <SideBar.Content>
+        <SideBar.Toggle />
+        {defaultMenuItems.map((m) => (
+          <SideBar.Link key={m.name} {...m} />
+        ))}
+      </SideBar.Content>
     </SideBar>,
   )
 
@@ -103,10 +93,13 @@ test('Triggers onToggle callback when opened', () => {
 test('onToggle send correct state back', () => {
   const toggle = jest.fn()
   render(
-    <SideBar open={false} onToggle={toggle} toggleButton="top">
-      {defaultMenuItems.map((m) => (
-        <SideBar.Item key={m.name} {...m} />
-      ))}
+    <SideBar open={false} onToggle={toggle}>
+      <SideBar.Content>
+        <SideBar.Toggle />
+        {defaultMenuItems.map((m) => (
+          <SideBar.Link key={m.name} {...m} />
+        ))}
+      </SideBar.Content>
     </SideBar>,
   )
 

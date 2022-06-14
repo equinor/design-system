@@ -6,7 +6,8 @@ import {
   Tooltip,
   Typography,
 } from '@equinor/eds-core-react'
-import { sidebar as tokens } from '../SideBar.tokens'
+import { useSideBar } from './SideBar.context'
+import { sidebar as tokens } from './SideBar.tokens'
 import { first_page, last_page } from '@equinor/eds-icons'
 import styled, { css } from 'styled-components'
 
@@ -83,38 +84,39 @@ const Text = styled(Typography)`
   font-weight: 400;
 `
 
-type ToggleOpenProps = {
-  isOpen: boolean
-} & ButtonProps
-
-export const ToggleOpen: ForwardRefExoticComponent<ToggleOpenProps> =
-  forwardRef<HTMLButtonElement, ToggleOpenProps>(function ToggleOpen(
-    { isOpen, ...rest },
+export const SideBarToggle: ForwardRefExoticComponent<ButtonProps> = forwardRef<
+  HTMLButtonElement,
+  ButtonProps
+>(function SideBarToggle({ ...rest }, ref) {
+  const props = {
+    ...rest,
     ref,
-  ) {
-    const props = {
-      ...rest,
-      ref,
-    }
-    if (isOpen) {
-      return (
-        <ToggleContainer open={isOpen}>
-          <LargeButton {...props}>
-            <Icon size={24} data={first_page} color={iconColor} />
-            <Text variant="cell_text" group="table">
-              Collapse
-            </Text>
-          </LargeButton>
-        </ToggleContainer>
-      )
-    }
+  }
+  const { isOpen, setIsOpen } = useSideBar()
+  if (isOpen) {
     return (
       <ToggleContainer open={isOpen}>
-        <Tooltip title="Expand" placement="right">
-          <Button {...props} color="secondary" variant="ghost_icon">
-            <Icon size={24} data={last_page} color={iconColor} />
-          </Button>
-        </Tooltip>
+        <LargeButton {...props} onClick={() => setIsOpen(!isOpen)}>
+          <Icon size={24} data={first_page} color={iconColor} />
+          <Text variant="cell_text" group="table">
+            Collapse
+          </Text>
+        </LargeButton>
       </ToggleContainer>
     )
-  })
+  }
+  return (
+    <ToggleContainer open={isOpen}>
+      <Tooltip title="Expand" placement="right">
+        <Button
+          {...props}
+          color="secondary"
+          variant="ghost_icon"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <Icon size={24} data={last_page} color={iconColor} />
+        </Button>
+      </Tooltip>
+    </ToggleContainer>
+  )
+})
