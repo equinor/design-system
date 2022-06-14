@@ -111,14 +111,14 @@ export const Header: Story<AccordionProps> = () => {
             <Accordion.HeaderActions>
               <Icon
                 name="warning_outlined"
-                title="Attach file"
+                title="Warning"
                 size={16}
                 color="currentColor"
                 style={{ marginRight: '16px' }}
               />
               <Icon
                 name="error_outlined"
-                title="Notifications"
+                title="Error"
                 size={16}
                 color="currentColor"
               />
