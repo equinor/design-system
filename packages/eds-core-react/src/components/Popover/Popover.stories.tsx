@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {
+  Label,
   Typography,
   Button,
   Popover,
@@ -10,7 +11,23 @@ import {
   EdsProvider,
   Density,
 } from '../..'
-import { more_vertical, close } from '@equinor/eds-icons'
+import {
+  apps,
+  calendar,
+  close,
+  contacts,
+  email,
+  home,
+  instrument,
+  more_vertical,
+  pipe_support,
+  platform,
+  settings,
+  sun,
+  support,
+  turbine,
+  waves,
+} from '@equinor/eds-icons'
 import { ComponentMeta, Story } from '@storybook/react'
 import { Stack as SBStack } from './../../../.storybook/components'
 import page from './Popover.docs.mdx'
@@ -20,6 +37,33 @@ const { Title, Content, Header, Actions } = Popover
 const Stack = styled(SBStack)({
   margin: '10rem',
 })
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(3, fit-content(100%));
+`
+
+const IconWrapper = styled.div`
+  display: block;
+`
+
+const StyledButton = styled(Button)`
+  &:hover {
+    border-radius: 2px;
+  }
+  &:focus {
+    border-radius: 2px;
+  }
+`
+
+const StyledLabel = styled(Label)`
+  width: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+`
 
 export default {
   title: 'Data Display/Popover',
@@ -306,3 +350,117 @@ export const Compact: Story<PopoverProps> = () => {
     </EdsProvider>
   )
 }
+
+export const AppLauncher: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  return (
+    <Stack style={{ margin: '20rem' }}>
+      <Tooltip title="App Launcher">
+        <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
+          <Icon data={apps} />
+        </Button>
+      </Tooltip>
+      <Popover
+        anchorEl={anchorRef.current}
+        open={isOpen}
+        onClose={closePopover}
+        placement="top"
+      >
+        <Popover.Content>
+          <Wrapper>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={home} />
+                <Label label="Home" />
+              </IconWrapper>
+            </StyledButton>
+            <Tooltip title="Calendar">
+              <StyledButton onClick={closePopover} variant="ghost_icon">
+                <IconWrapper>
+                  <Icon data={calendar} />
+                  <StyledLabel label="Calendar" />
+                </IconWrapper>
+              </StyledButton>
+            </Tooltip>
+            <Tooltip title="Settings">
+              <StyledButton onClick={closePopover} variant="ghost_icon">
+                <IconWrapper>
+                  <Icon data={settings} />
+                  <StyledLabel label="Settings" />
+                </IconWrapper>
+              </StyledButton>
+            </Tooltip>
+            <Tooltip title="Platforms">
+              <StyledButton onClick={closePopover} variant="ghost_icon">
+                <IconWrapper>
+                  <Icon data={platform} />
+                  <StyledLabel label="Platforms" />
+                </IconWrapper>
+              </StyledButton>
+            </Tooltip>
+            <Tooltip title="Instruments">
+              <StyledButton onClick={closePopover} variant="ghost_icon">
+                <IconWrapper>
+                  <Icon data={instrument} />
+                  <StyledLabel label="Instruments" />
+                </IconWrapper>
+              </StyledButton>
+            </Tooltip>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={pipe_support} />
+                <Label label="Pipes" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={sun} />
+                <Label label="Solar" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={waves} />
+                <Label label="Wave" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={turbine} />
+                <Label label="Wind" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={email} />
+                <Label label="Email" />
+              </IconWrapper>
+            </StyledButton>
+            <Tooltip title="Contacts">
+              <StyledButton onClick={closePopover} variant="ghost_icon">
+                <IconWrapper>
+                  <Icon data={contacts} />
+                  <StyledLabel label="Contacts" />
+                </IconWrapper>
+              </StyledButton>
+            </Tooltip>
+            <Tooltip title="Support">
+              <StyledButton onClick={closePopover} variant="ghost_icon">
+                <IconWrapper>
+                  <Icon data={support} />
+                  <StyledLabel label="Support" />
+                </IconWrapper>
+              </StyledButton>
+            </Tooltip>
+          </Wrapper>
+        </Popover.Content>
+      </Popover>
+    </Stack>
+  )
+}
+AppLauncher.storyName = 'App launcher'
