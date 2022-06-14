@@ -86,9 +86,9 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
 
     useEffect(() => {
       onDateValueChange(dateValue)
-    }, [dateValue])
+    }, [dateValue, onDateValueChange])
 
-    const localRef = useRef<any>()
+    const localRef = useRef<DatePicker | null>()
     useImperativeHandle(ref, () => localRef.current)
 
     return (
@@ -114,7 +114,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
                   event.shiftKey &&
                   (event.target as HTMLElement).nodeName == 'INPUT'
                 ) {
-                  localRef?.current?.setOpen(false)
+                  localRef.current?.setOpen(false)
                 }
               }}
               filterDate={(date: Date): boolean => {
