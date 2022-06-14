@@ -441,8 +441,10 @@ function AutocompleteInner<T>(
   } = useCombobox(comboBoxProps)
 
   useEffect(() => {
-    if (anchorRef.current) {
+    if (anchorRef.current && isOpen) {
       setAnchorEl(anchorRef.current)
+    } else {
+      setAnchorEl(null)
     }
     if (isControlled) {
       setSelectedItems(selectedOptions)
@@ -452,6 +454,16 @@ function AutocompleteInner<T>(
       setContainerEl(null)
     }
   }, [anchorRef, isControlled, isOpen, selectedOptions, setSelectedItems])
+
+  //"Turn on" popper on load to position menu correctly and then turn it off
+  useEffect(() => {
+    if (anchorRef.current) {
+      setAnchorEl(anchorRef.current)
+      setTimeout(() => {
+        setAnchorEl(null)
+      }, 1)
+    }
+  }, [])
 
   const { styles, attributes } = usePopper({
     anchorEl,
