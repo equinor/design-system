@@ -4,7 +4,7 @@ import * as icons from '@equinor/eds-icons'
 
 
 # Autocomplete 
-The Autocomplete component allows users to choose one or multiple options from a list
+The Autocomplete component allows users to choose one or multiple options from a list. The component is built using [Downshift](https://github.com/downshift-js/downshift) 
 
 <Story id="inputs-autocomplete--introduction" />
 <PropsTable />
@@ -77,8 +77,10 @@ You can disable an option by setting the `disabled:true` on option
 <Story id="inputs-autocomplete--preselected-options" />
 
 
-## On options change
-<Story id="inputs-autocomplete--on-options-change" />
+## Controlled
+
+Downshift controls its own state internally. If you need more controll you can define the `selectedOptions` to controlled the component state. When defining your own state the initial value needs to be an empty array. This is due to how [Downshift handles when a component is controlled or not](https://github.com/downshift-js/downshift#control-props).
+<Story id="inputs-autocomplete--controlled" />
 
 ## Compact
 Compact `Autocomplete` using `EdsProvider`

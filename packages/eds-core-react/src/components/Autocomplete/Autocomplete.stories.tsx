@@ -254,13 +254,10 @@ PreselectedOptions.args = {
   optionLabel,
 }
 
-export const OnOptionsChange: Story<AutocompleteProps<MyOptionType>> = (
-  args,
-) => {
+export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
-  const initialSelectedOptions = [options[0], options[1], options[5]]
-  const [selectedItems, setSelectedItems] = useState(initialSelectedOptions)
+  const [selectedItems, setSelectedItems] = useState<MyOptionType[]>([])
 
   const onChange = (changes: AutocompleteChanges<MyOptionType>) => {
     setSelectedItems(changes.selectedItems)
@@ -269,20 +266,20 @@ export const OnOptionsChange: Story<AutocompleteProps<MyOptionType>> = (
   return (
     <Stack direction="column">
       <Typography>
-        Selected items:{selectedItems.map((x) => x.label).toString()}
+        Selected items:{selectedItems?.map((x) => x.label).toString()}
       </Typography>
       <Autocomplete
         label="Select a stock"
         options={options}
         onOptionsChange={onChange}
-        initialSelectedOptions={initialSelectedOptions}
         optionLabel={optionLabel}
+        selectedOptions={selectedItems}
       />
       <Autocomplete
         label="Select multiple stocks"
         options={options}
         onOptionsChange={onChange}
-        initialSelectedOptions={initialSelectedOptions}
+        selectedOptions={selectedItems}
         multiple
         optionLabel={optionLabel}
       />
@@ -290,7 +287,7 @@ export const OnOptionsChange: Story<AutocompleteProps<MyOptionType>> = (
   )
 }
 
-OnOptionsChange.args = {
+Controlled.args = {
   options: stocks,
 }
 
