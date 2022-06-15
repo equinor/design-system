@@ -152,7 +152,7 @@ const findPrevIndex: IndexFinderType = ({
   return prevIndex
 }
 
-export type AutocompleteChanges<T> = UseMultipleSelectionProps<T>
+export type AutocompleteChanges<T> = { selectedItems: T[] }
 
 export type AutocompleteProps<T> = {
   /** List of options to choose from */
@@ -239,17 +239,24 @@ function AutocompleteInner<T>(
       : initialSelectedOptions[0]
       ? [initialSelectedOptions[0]]
       : [],
-    onSelectedItemsChange: (changes) => {
-      if (onOptionsChange) {
-        onOptionsChange(changes)
-      }
-    },
   }
 
-  if (isControlled) {
+  if (multiple) {
     multipleSelectionProps = {
       ...multipleSelectionProps,
-      selectedItems: selectedOptions,
+      onSelectedItemsChange: (changes) => {
+        if (onOptionsChange) {
+          const { selectedItems } = changes
+          onOptionsChange({ selectedItems })
+        }
+      },
+    }
+
+    if (isControlled) {
+      multipleSelectionProps = {
+        ...multipleSelectionProps,
+        selectedItems: selectedOptions,
+      }
     }
   }
 
@@ -368,7 +375,13 @@ function AutocompleteInner<T>(
   if (isControlled && !multiple) {
     comboBoxProps = {
       ...comboBoxProps,
-      selectedItem: selectedOptions[0],
+      selectedItem: selectedOptions[0] || null,
+      onSelectedItemChange: (changes) => {
+        if (onOptionsChange) {
+          const { selectedItem } = changes
+          onOptionsChange({ selectedItems: [selectedItem] })
+        }
+      },
     }
   }
 
