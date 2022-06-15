@@ -1,4 +1,12 @@
-import { useState, useCallback, forwardRef, InputHTMLAttributes } from 'react'
+import {
+  useState,
+  useCallback,
+  forwardRef,
+  InputHTMLAttributes,
+  useRef,
+  useImperativeHandle,
+  useEffect,
+} from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import enGb from 'date-fns/locale/en-GB'
@@ -76,13 +84,20 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
       [onChanged],
     )
 
+    useEffect(() => {
+      onDateValueChange(dateValue)
+    }, [dateValue, onDateValueChange])
+
+    const localRef = useRef<DatePicker | null>()
+    useImperativeHandle(ref, () => localRef.current)
+
     return (
       <ThemeProvider theme={tokens}>
         <Container className={`date-picker ${className}`}>
           <DateLabel htmlFor={id} className={`date-label`}>
             <span>{label}</span>
             <StyledDatepicker
-              ref={ref}
+              ref={localRef}
               locale={locale}
               selected={date}
               className="eds-datepicker"
@@ -91,6 +106,17 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
               dateFormat={dateFormat}
               placeholderText={placeholder}
               id={id}
+              onKeyDown={(event) => {
+                // If you shift-tab while focusing the input-element, it should close the pop-over.
+                // Not currently supported by react-datepicker.
+                if (
+                  event.code === 'Tab' &&
+                  event.shiftKey &&
+                  (event.target as HTMLElement).nodeName == 'INPUT'
+                ) {
+                  localRef.current?.setOpen(false)
+                }
+              }}
               filterDate={(date: Date): boolean => {
                 if (disableFuture) {
                   return new Date() > date
@@ -120,6 +146,7 @@ const ReactDatePicker = forwardRef<DatePickerRefProps, DatePickerProps>(
             <CalendarIcon
               name="calendar"
               className="calendar-icon"
+              color={tokens.colors.iconGray}
               data={calendar}
               size={24}
             />
@@ -202,6 +229,7 @@ const DateLabel = styled.label`
 
     span {
       padding-left: 8px;
+      color: ${tokens.colors.iconGray};
     }
   `}
 `
@@ -229,17 +257,11 @@ const StyledDatepicker = styled(DatePicker)`
 `
 
 const CalendarIcon = styled(Icon)`
-  ${({ theme }) =>
-    css`
-      position: absolute;
-      z-index: 1;
-      width: 24px;
-      height: 24px;
-      top: 21px;
-      right: 6px;
-      color: ${theme.entities.title.typography.color};
-      cursor: pointer;
-    `}
+  position: absolute;
+  z-index: 1;
+  top: 21px;
+  right: 6px;
+  cursor: pointer;
 `
 
 export { ReactDatePicker as DatePicker }
