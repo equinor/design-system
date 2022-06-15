@@ -1,0 +1,29 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Textarea } from '.'
+
+# Textarea
+
+Helper component - developed mainly for internal use. <br />
+Can be used as a building block for users requiring more flexibility than `TextField` provides and is used for collecting large amounts of textual data.
+
+<Links 
+    ariaUrl="https://www.w3.org/TR/wai-aria-1.1/#textbox"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Textarea/Textarea.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="inputs-textarea--introduction" />
+<PropsTable />
+
+## Usage
+
+<ul>
+    <li>In its simplest form is a multi-line text-field, useful for larger amounts of text.</li>
+    <li><strong>Label text</strong> - every <code>Textarea</code> should have a label.</li>
+</ul>
+
+```tsx
+import { Textarea } from '@equinor/eds-core-react'
+
+<Textarea />
+```
