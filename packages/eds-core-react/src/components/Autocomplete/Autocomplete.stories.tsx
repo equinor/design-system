@@ -94,7 +94,6 @@ export const Introduction: Story<AutocompleteProps<string>> = (args) => {
     </Stack>
   )
 }
-
 Introduction.bind({})
 Introduction.args = {
   label: 'Select a stock',
@@ -149,11 +148,12 @@ export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
     </Stack>
   )
 }
+OptionLabel.storyName = 'Option label'
 OptionLabel.args = {
   options: stocks,
 }
 
-export const Readonly: Story<AutocompleteProps<MyOptionType>> = (args) => {
+export const ReadOnly: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
   return (
     <Stack direction="column">
@@ -175,8 +175,8 @@ export const Readonly: Story<AutocompleteProps<MyOptionType>> = (args) => {
     </Stack>
   )
 }
-
-Readonly.args = {
+ReadOnly.storyName = 'Read only'
+ReadOnly.args = {
   options: stocks,
   optionLabel,
 }
@@ -221,7 +221,7 @@ export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
     </Stack>
   )
 }
-
+DisabledOption.storyName = 'Disabled option'
 DisabledOption.args = {
   options: stocks,
   optionLabel,
@@ -248,7 +248,7 @@ export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
     </Stack>
   )
 }
-
+PreselectedOptions.storyName = 'Preselected options'
 PreselectedOptions.args = {
   options: stocks,
   optionLabel,
@@ -286,7 +286,6 @@ export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
     </Stack>
   )
 }
-
 Controlled.args = {
   options: stocks,
 }
@@ -320,7 +319,6 @@ export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
     </EdsProvider>
   )
 }
-
 Compact.args = {
   options: stocks,
   optionLabel,
@@ -508,7 +506,7 @@ export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
     </Stack>
   )
 }
-
+CustomOptionsFilter.storyName = 'Custom options filter'
 CustomOptionsFilter.args = {
   options: stocks,
   optionLabel,
@@ -586,7 +584,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
     </Stack>
   )
 }
-
+SelectAll.storyName = 'Select all'
 SelectAll.args = {
   options: stocks,
   optionLabel,
@@ -613,6 +611,7 @@ export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
     </Stack>
   )
 }
+AutoWidth.storyName = 'Auto width'
 AutoWidth.args = {
   options: stocks,
   optionLabel,
