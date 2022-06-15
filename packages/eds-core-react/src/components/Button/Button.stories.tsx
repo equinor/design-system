@@ -47,9 +47,10 @@ export default {
 } as ComponentMeta<typeof Button>
 
 export const Introduction: Story<ButtonProps> = (args) => (
-  <Button {...args}>You can control me</Button>
+  <Stack>
+    <Button {...args}>You can control me</Button>
+  </Stack>
 )
-
 Introduction.args = {
   as: undefined,
 }
@@ -81,6 +82,7 @@ export const GhostIcon: Story<ButtonProps> = () => (
     </Button>
   </Stack>
 )
+GhostIcon.storyName = 'Ghost icon'
 
 export const Color: Story<ButtonProps> = () => (
   <Stack>
@@ -90,27 +92,13 @@ export const Color: Story<ButtonProps> = () => (
   </Stack>
 )
 
-export const Compact: Story<ButtonProps> = () => {
-  const [density, setDensity] = useState<Density>('comfortable')
-
-  useEffect(() => {
-    // Simulate user change
-    setDensity('compact')
-  }, [density])
-
-  return (
-    <EdsProvider density={density}>
-      <Stack>
-        <Button>Contained</Button>
-        <Button variant="outlined">Outlined</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button variant="ghost_icon">
-          <Icon data={menu} title="Ghost icon menu"></Icon>
-        </Button>
-      </Stack>
-    </EdsProvider>
-  )
-}
+export const Hierarchy: Story<ButtonProps> = () => (
+  <Stack>
+    <Button>Contained</Button>
+    <Button variant="outlined">Outlined</Button>
+    <Button variant="ghost">Ghost</Button>
+  </Stack>
+)
 
 export const FileUpload: Story<ButtonProps> = () => (
   <Stack>
@@ -125,6 +113,7 @@ export const FileUpload: Story<ButtonProps> = () => (
     </label>
   </Stack>
 )
+FileUpload.storyName = 'File upload'
 
 export const ProgressButton: Story<ButtonProps> = () => (
   <Stack>
@@ -142,6 +131,7 @@ export const ProgressButton: Story<ButtonProps> = () => (
     </Button>
   </Stack>
 )
+ProgressButton.storyName = 'Progress button'
 
 export const All: Story<ButtonProps> = () => (
   <Stack>
@@ -225,6 +215,29 @@ export const FullWidth: Story<ButtonProps> = () => (
     </Button>
   </FullWidthStack>
 )
+FullWidth.storyName = 'Full width'
+
+export const Compact: Story<ButtonProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Stack>
+        <Button>Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="ghost_icon">
+          <Icon data={menu} title="Ghost icon menu"></Icon>
+        </Button>
+      </Stack>
+    </EdsProvider>
+  )
+}
 
 // export const ButtonGroup: Story<ButtonProps> = () => (
 //   <Stack style={{ gridGap: 0 }}>
