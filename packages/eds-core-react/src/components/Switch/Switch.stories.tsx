@@ -27,7 +27,6 @@ export const Introduction: Story<SwitchProps> = (args) => (
 
 export const DefaultStates: Story<SwitchProps> = () => {
   const [check, setCheck] = useState(false)
-  const [value, updateValue] = useState('unchecked')
 
   return (
     <UnstyledList>
@@ -47,13 +46,10 @@ export const DefaultStates: Story<SwitchProps> = () => {
         <Switch
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setCheck(e.target.checked)
-            updateValue(e.target.checked ? 'checked' : 'unchecked')
           }}
           checked={check}
+          label={`Slider is ${check ? 'checked' : 'unchecked'}`}
         />
-        <label style={{ marginLeft: '12px', color: '#3d3d3d' }}>
-          Output from slider is {value}
-        </label>
       </li>
     </UnstyledList>
   )
