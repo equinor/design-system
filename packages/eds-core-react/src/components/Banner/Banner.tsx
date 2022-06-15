@@ -7,12 +7,14 @@ import {
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { spacingsTemplate, useToken } from '@equinor/eds-utils'
+import { Paper } from '../Paper'
+import type { Elevations } from '@equinor/eds-tokens'
 import { enabled as bannerToken } from './Banner.tokens'
 import { Divider } from '../Divider'
 import { BannerIcon } from './BannerIcon'
 import { useEds } from '../EdsProvider'
 
-const StyledBanner = styled.div``
+type allowedElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
 
 type ContentProps = {
   hasIcon: boolean
@@ -35,11 +37,12 @@ const NonMarginDivider = styled(Divider)`
 `
 
 export type BannerProps = {
+  elevation?: allowedElevations
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
 export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
-  { children, className, ...rest },
+  { children, className, elevation = 'none', ...rest },
   ref,
 ) {
   const childrenWhereBannerIcon: boolean[] = ReactChildren.map(
@@ -60,10 +63,15 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
 
   return (
     <ThemeProvider theme={token}>
-      <StyledBanner {...props} className={className} role="alert">
+      <Paper
+        {...props}
+        className={className}
+        elevation={elevation}
+        role="alert"
+      >
         <Content hasIcon={hasIcon}>{children}</Content>
         <NonMarginDivider color="light" />
-      </StyledBanner>
+      </Paper>
     </ThemeProvider>
   )
 })

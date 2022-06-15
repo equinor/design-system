@@ -28,11 +28,11 @@ export default {
   },
 } as ComponentMeta<typeof Banner>
 
-export const Introduction: Story<BannerProps> = () => {
+export const Introduction: Story<BannerProps> = (args) => {
   //  Note: This example is not interactive, as Storybook
   // doesn't yet support to manipulate subcomponents via Storybook Args
   return (
-    <Banner>
+    <Banner {...args}>
       <Banner.Message>
         This tag is not being preserved yet. Click start preservation to enable
         writing preservation records.

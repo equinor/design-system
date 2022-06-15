@@ -15,6 +15,9 @@ import {
 export default {
   title: 'Navigation/TopBar',
   component: TopBar,
+  args: {
+    elevation: 'raised',
+  },
   subcomponents: {
     Header: TopBar.Header,
     CustomContent: TopBar.CustomContent,

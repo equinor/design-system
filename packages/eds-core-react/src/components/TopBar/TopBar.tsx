@@ -6,12 +6,15 @@ import {
   bordersTemplate,
   useToken,
 } from '@equinor/eds-utils'
-import { Paper, ElevationTypes } from '../Paper'
+import { Paper } from '../Paper'
+import type { Elevations } from '@equinor/eds-tokens'
 import { topbar as topbarToken } from './TopBar.tokens'
 import { useEds } from '../EdsProvider'
 
+type allowedElevations = keyof Pick<Elevations, 'none' | 'raised'>
+
 export type TopbarProps = {
-  elevation?: ElevationTypes
+  elevation?: allowedElevations
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledTopBar = styled(Paper)<TopbarProps>(({ theme }) => {
