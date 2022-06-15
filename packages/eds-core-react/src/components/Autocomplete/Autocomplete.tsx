@@ -221,7 +221,21 @@ function AutocompleteInner<T>(
   const isMounted = useIsMounted()
 
   const isControlled = Boolean(selectedOptions)
-  const [availableItems, setAvailableItems] = useState(options)
+  const [inputOptions, setInputOptions] = useState(options)
+
+  useEffect(() => {
+    const availableHash = JSON.stringify(inputOptions)
+    const optionsHash = JSON.stringify(options)
+    if (availableHash !== optionsHash) {
+      setInputOptions(options)
+    }
+  }, [options, inputOptions])
+
+  useEffect(() => {
+    setAvailableItems(inputOptions)
+  }, [inputOptions])
+
+  const [availableItems, setAvailableItems] = useState(inputOptions)
   const disabledItems = useMemo(
     () => options.filter(optionDisabled),
     [options, optionDisabled],
