@@ -2,7 +2,7 @@
 
 exports[`Card Matches snapshot 1`] = `
 <DocumentFragment>
-  .c4 {
+  .c5 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -16,7 +16,7 @@ exports[`Card Matches snapshot 1`] = `
   text-align: left;
 }
 
-.c5 {
+.c6 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -27,6 +27,11 @@ exports[`Card Matches snapshot 1`] = `
 }
 
 .c0 {
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  box-shadow: 0 0 1px rgba(0,0,0,0.14);
+}
+
+.c1 {
   width: 100%;
   position: relative;
   background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
@@ -43,7 +48,7 @@ exports[`Card Matches snapshot 1`] = `
   border-radius: 4px;
 }
 
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -51,21 +56,21 @@ exports[`Card Matches snapshot 1`] = `
   width: auto;
 }
 
-.c1 > * {
+.c2 > * {
   width: 100%;
 }
 
-.c1:first-child img {
+.c2:first-child img {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
 
-.c1:last-child img {
+.c2:last-child img {
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -81,19 +86,19 @@ exports[`Card Matches snapshot 1`] = `
   padding: 0 16px 0 16px;
 }
 
-.c2 > :not(:first-child) {
+.c3 > :not(:first-child) {
   margin-left: 16px;
 }
 
-.c2:first-child {
+.c3:first-child {
   padding-top: 16px;
 }
 
-.c2:last-child {
+.c3:last-child {
   padding-bottom: 16px;
 }
 
-.c3 {
+.c4 {
   display: grid;
   -webkit-box-flex: 2;
   -webkit-flex-grow: 2;
@@ -103,11 +108,12 @@ exports[`Card Matches snapshot 1`] = `
 }
 
 <div
-    class="c0"
+    class="c0 c1"
     cursor="default"
+    elevation="0 0 1px rgba(0, 0, 0, 0.14)"
   >
     <div
-      class="c1"
+      class="c2"
     >
       <img
         alt="cat"
@@ -115,25 +121,25 @@ exports[`Card Matches snapshot 1`] = `
       />
     </div>
     <div
-      class="c2"
+      class="c3"
     >
       <div
-        class="c3"
+        class="c4"
       >
         <h5
-          class="c4"
+          class="c5"
         >
           Another interactive example
         </h5>
         <p
-          class="c5"
+          class="c6"
         >
           Unfortunately you cannot control children in storybook yet
         </p>
       </div>
     </div>
     <p
-      class="c5"
+      class="c6"
     >
       Leading images are full width, and go straight to the top - ignoring spacings
     </p>
