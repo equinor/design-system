@@ -1,0 +1,116 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Tabs } from '.'
+
+# Tabs
+
+Organise related content across different views to be quickly navigated.
+
+<Links 
+    ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17417%3A0"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/50d3be-tabs/b/94939a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Tabs/Tabs.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="navigation-tabs--introduction" />
+<PropsTable />
+
+## Usage
+
+Tabs allow for navigation between content that is related and has an equal hierarchy.
+
+<ul>
+    <li>Each tab's content should be noticeably different from the other.</li>
+    <li>Tabs allow for information to be presented in a space-saving layout.</li>
+    <li>Tab labels should provide clear and concise direction.</li>
+    <li>Note that if the label is longer than the maximum width it will be truncated and should have a tooltip provided.</li>
+</ul>
+
+```tsx
+import { Dialog } from '@equinor/eds-core-react'
+
+<Tabs>
+    <Tabs.List>
+      <Tabs.Tab>One</Tabs.Tab>
+      <Tabs.Tab>Two</Tabs.Tab>
+    </Tabs.List>
+    <Tabs.Panels>
+      <Tabs.Panel>Panel one</Tabs.Panel>
+      <Tabs.Panel>Panel two</Tabs.Panel>
+    </Tabs.Panels>
+</Tabs>
+
+```
+
+## Examples
+
+### States
+
+<Story id="navigation-tabs--states" />
+
+### Widths
+
+Tab width can be decided by three factors:
+<ol>
+    <li>The width of the space available being equally divided by the number of tabs. This method is only to be used for four tabs or less.</li>
+    <li>The width of the widest tab determining the width of all the tabs to provide visual balance. 
+        This should be used with caution ensuring all tabs will be seen in smaller layouts.</li>
+    <li>Each tab having its own minimum width to conserve space.</li>
+</ol>
+
+<Story id="navigation-tabs--widths" />
+
+### With panels
+
+To navigate using the keyboard use:
+<ul>
+    <li><code>TAB</code> to move from tab to tab panel.</li>
+    <li><code>SHIFT + TAB</code> to go backwards.</li>
+    <li><code>LEFT / RIGHT ARROW</code> to move from between tabs (active tab must be focused).</li>
+</ul>
+
+Focus outline is only visible when navigating using the keyboard.
+
+<Story id="navigation-tabs--with-panels" />
+
+### With search
+
+<Story id="navigation-tabs--with-search" />
+
+### With input in panel
+
+<Story id="navigation-tabs--with-input-in-panel" />
+
+### With styled component
+
+Tabs with panels rendered from collection.
+
+<Story id="navigation-tabs--with-styled-component" />
+
+### Overflow with next/previous buttons
+
+Tabs uses css `scroll-snap`, so in a case where there is overflow and the user wants to add next/previous buttons for scrolling, 
+they can use `element.scrollTo` some amount and then css will take care of alignment.
+
+<Story id="navigation-tabs--overflow" />
+
+### Overflow with default scrollbar
+
+In the case of tabs overflowing, and where next/previous buttons are not desired, the `scrollable` prop adds `overflow-x: auto` to the tabs list. 
+Tabs uses css `scroll-snap` which handles alignment and tabs snapping into place. 
+Note that scrollbar had been disabled for touch devices since the tabs are swipeable.
+
+<Story id="navigation-tabs--overflow-scroll" />
+
+### Overflow with customized scrollbar
+
+The scrollbar styles for `Tabs.List` can be overwritten.
+
+<Story id="navigation-tabs--overflow-scroll-styled" />
+
+### Compact
+
+Compact `Tabs` using `EdsProvider`.
+
+<Story id="navigation-tabs--compact" />
