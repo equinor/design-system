@@ -617,3 +617,44 @@ AutoWidth.args = {
   options: stocks,
   optionLabel,
 }
+
+export const OptionsUpdate: Story<AutocompleteProps<MyOptionType>> = () => {
+  const [loadingText, setLoadingText] = useState('Loading')
+  const [options, setOptions] = useState<{ label: string }[]>([
+    { label: 'Item 99' },
+  ])
+  const items = useMemo(
+    () => [
+      { label: 'Item 1' },
+      { label: 'Item 2' },
+      {
+        label: 'Item 3',
+      },
+    ],
+    [],
+  )
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadingText('Finished loading')
+      setOptions(items)
+    }, 3000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <Stack direction="column">
+      <Typography>{loadingText}</Typography>
+      <Autocomplete
+        optionLabel={(opt) => opt.label}
+        label="Select a stock"
+        options={options}
+        autoWidth
+      />
+    </Stack>
+  )
+}
+OptionsUpdate.args = {
+  options: stocks,
+  optionLabel,
+}
