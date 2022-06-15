@@ -1,0 +1,66 @@
+import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Switch } from '.'
+
+# Switch
+
+Selection controls allow users to select options, make decisions and set preferences.
+
+<Links 
+    ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/switch/"
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=18442%3A38197"
+    documentationUrl="https://eds.equinor.com/0b0c666ab/p/028476-selection-controls/b/86826a"
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Switch/Switch.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="inputs-selection-controls-switch--introduction" />
+<PropsTable />
+
+## Usage
+
+**Selection controls**
+
+<ul>
+    <li>Allow users to select options, make decisions and set preferences.</li>
+    <li>Are to be visible and understandable at a quick glance.</li>
+    <li>Are always accompanied with a clear label.</li>
+</ul>
+
+**Switch**
+
+<ul>
+    <li>Toggle a single item on or off.</li>
+    <li>Immediately activate or deactivate something.</li>
+     <li>Switches make it easy to compare available options.</li>
+</ul>
+
+```tsx
+import { Switch } from '@equinor/eds-core-react'
+
+<Switch label="Label text" />
+```
+
+## Examples
+
+### Default states
+
+<Story id="inputs-selection-controls-switch--default-states" />
+
+### Alternative to label
+
+To comply with accessibility, a `label` is always required on inputs. In some cases though, a visual label is not desirable. <br />
+In such cases `aria-label` or `aria-labelledby` should be used.
+
+<Story id="inputs-selection-controls-switch--alternative-to-label" />
+
+### Compact
+
+Compact `Switch` using `EdsProvider`.
+
+<Story id="inputs-selection-controls-switch--compact" />
+
+### Table switch
+
+Example of usage with `Switch` and `aria-label` in tables for accessibility.
+
+<Story id="inputs-selection-controls-switch--table-switch" />

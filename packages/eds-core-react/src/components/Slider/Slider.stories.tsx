@@ -52,7 +52,6 @@ export const SimpleSliderWithSteps: Story<SliderProps> = () => {
     </>
   )
 }
-
 SimpleSliderWithSteps.storyName = 'Simple slider with steps'
 SimpleSliderWithSteps.decorators = [
   (Story) => (
