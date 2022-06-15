@@ -65,7 +65,7 @@ const StyledList = styled(List)(
     position: absolute;
     right: 0;
     left: 0;
-    z-index: 50;
+    z-index: 1400;
   `,
 )
 
