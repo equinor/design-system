@@ -15,10 +15,19 @@ import {
   notifications,
   edit,
   delete_to_trash,
+  warning_outlined,
+  error_outlined,
 } from '@equinor/eds-icons'
 import page from './Accordion.docs.mdx'
 
-Icon.add({ attach_file, notifications, edit, delete_to_trash })
+Icon.add({
+  attach_file,
+  notifications,
+  edit,
+  delete_to_trash,
+  warning_outlined,
+  error_outlined,
+})
 
 const Wrapper = styled.div`
   & > *:not(:first-child) {
@@ -33,6 +42,7 @@ export default {
     Item: Accordion.Item,
     Header: Accordion.Header,
     HeaderTitle: Accordion.HeaderTitle,
+    HeaderActions: Accordion.HeaderActions,
     Panel: Accordion.Panel,
   },
   parameters: {
@@ -98,19 +108,21 @@ export const Header: Story<AccordionProps> = () => {
             <Accordion.HeaderTitle>
               Chevron left – custom icons right
             </Accordion.HeaderTitle>
-            <Icon
-              name="attach_file"
-              title="Attach file"
-              size={16}
-              color="currentColor"
-              style={{ marginRight: '32px' }}
-            />
-            <Icon
-              name="notifications"
-              title="Notifications"
-              size={16}
-              color="currentColor"
-            />
+            <Accordion.HeaderActions>
+              <Icon
+                name="warning_outlined"
+                title="Warning"
+                size={16}
+                color="currentColor"
+                style={{ marginRight: '16px' }}
+              />
+              <Icon
+                name="error_outlined"
+                title="Error"
+                size={16}
+                color="currentColor"
+              />
+            </Accordion.HeaderActions>
           </Accordion.Header>
         </Accordion.Item>
       </Accordion>
@@ -121,29 +133,30 @@ export const Header: Story<AccordionProps> = () => {
             <Accordion.HeaderTitle>
               Chevron left – interactive options right
             </Accordion.HeaderTitle>
-            <Button
-              variant="ghost_icon"
-              onClick={(
-                event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-              ) => {
-                action('clicked edit button')(event)
-                event.stopPropagation()
-              }}
-            >
-              <Icon name="edit" title="Edit" />
-            </Button>
-            <Button
-              variant="ghost_icon"
-              onClick={(
-                event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-              ) => {
-                action('clicked delete button')(event)
-                event.stopPropagation()
-              }}
-              style={{ marginRight: '-16px' }}
-            >
-              <Icon name="delete_to_trash" title="Delete" />
-            </Button>
+            <Accordion.HeaderActions>
+              <Button
+                variant="ghost_icon"
+                onClick={(
+                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                ) => {
+                  action('clicked edit button')(event)
+                  event.stopPropagation()
+                }}
+              >
+                <Icon name="edit" title="Edit" />
+              </Button>
+              <Button
+                variant="ghost_icon"
+                onClick={(
+                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                ) => {
+                  action('clicked delete button')(event)
+                  event.stopPropagation()
+                }}
+              >
+                <Icon name="delete_to_trash" title="Delete" />
+              </Button>
+            </Accordion.HeaderActions>
           </Accordion.Header>
         </Accordion.Item>
       </Accordion>
@@ -155,7 +168,43 @@ export const Header: Story<AccordionProps> = () => {
               Very long summary that will get truncated if the width of the
               header is narrower than the length of the text
             </Accordion.HeaderTitle>
+            <Accordion.HeaderActions>
+              <Button
+                variant="ghost_icon"
+                onClick={(
+                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                ) => {
+                  action('clicked edit button')(event)
+                  event.stopPropagation()
+                }}
+              >
+                <Icon name="edit" title="Edit" />
+              </Button>
+              <Button
+                variant="ghost_icon"
+                onClick={(
+                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                ) => {
+                  action('clicked delete button')(event)
+                  event.stopPropagation()
+                }}
+              >
+                <Icon name="delete_to_trash" title="Delete" />
+              </Button>
+              <Button
+                variant="ghost_icon"
+                onClick={(
+                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                ) => {
+                  action('clicked attach button')(event)
+                  event.stopPropagation()
+                }}
+              >
+                <Icon name="attach_file" title="attach file" />
+              </Button>
+            </Accordion.HeaderActions>
           </Accordion.Header>
+          <Accordion.Panel>Content</Accordion.Panel>
         </Accordion.Item>
       </Accordion>
     </Wrapper>
