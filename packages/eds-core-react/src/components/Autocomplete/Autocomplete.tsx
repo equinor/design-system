@@ -50,6 +50,11 @@ const StyledInput = styled(Input)(
         ${button.spacings.left} + ${button.spacings.right} +
           (${button.height} * 2)
       );
+
+      &[readOnly] {
+        padding-right: ${button.spacings.right};
+        width: calc(100% + ${button.spacings.right} + (${button.height} * 2));
+      }
     `
   },
 )
