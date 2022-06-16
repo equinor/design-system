@@ -23,10 +23,8 @@ const StyledTab = styled.button.attrs<TabProps>(
   return css`
     appearance: none;
     box-sizing: border-box;
-    font-family: inherit;
     border: none;
     outline: none;
-    font-size: 1rem;
     height: ${tab.height};
     ${spacingsTemplate(tab.spacings)}
     ${typographyTemplate(tab.typography)}
