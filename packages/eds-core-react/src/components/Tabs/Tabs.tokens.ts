@@ -24,7 +24,7 @@ const {
     focused: { width: focusOutlineWidth },
   },
   typography: {
-    navigation: { menu_tabs },
+    navigation: { menu_tabs, menu_title },
   },
 } = tokens
 
@@ -44,6 +44,9 @@ export const token: ComponentToken = {
             color: focusOutlineColor,
           },
         },
+      },
+      typography: {
+        ...menu_title,
       },
     },
     tab: {
