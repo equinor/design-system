@@ -11,10 +11,10 @@ import type { Elevations } from '@equinor/eds-tokens'
 import { topbar as topbarToken } from './TopBar.tokens'
 import { useEds } from '../EdsProvider'
 
-type allowedElevations = keyof Pick<Elevations, 'none' | 'raised'>
+type AvailableElevations = keyof Pick<Elevations, 'none' | 'raised'>
 
 export type TopbarProps = {
-  elevation?: allowedElevations
+  elevation?: AvailableElevations
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledTopBar = styled(Paper)<TopbarProps>(({ theme }) => {

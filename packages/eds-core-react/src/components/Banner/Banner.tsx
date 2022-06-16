@@ -14,7 +14,7 @@ import { Divider } from '../Divider'
 import { BannerIcon } from './BannerIcon'
 import { useEds } from '../EdsProvider'
 
-type allowedElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
+type AvailableElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
 
 type ContentProps = {
   hasIcon: boolean
@@ -37,7 +37,7 @@ const NonMarginDivider = styled(Divider)`
 `
 
 export type BannerProps = {
-  elevation?: allowedElevations
+  elevation?: AvailableElevations
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 

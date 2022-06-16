@@ -7,7 +7,7 @@ import { bordersTemplate } from '@equinor/eds-utils'
 
 const { primary } = tokens
 
-type allowedElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
+type AvailableElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
 
 type StyledCardProps = {
   background: string
@@ -18,7 +18,7 @@ export type CardProps = {
   /** Variant */
   variant?: 'default' | 'info' | 'warning' | 'danger'
   /** Elevation */
-  elevation?: allowedElevations
+  elevation?: AvailableElevations
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledCard = styled(Paper)<StyledCardProps>`
