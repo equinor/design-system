@@ -48,7 +48,7 @@ export const TopBar = forwardRef<HTMLDivElement, TopbarProps>(function TopBar(
   }
   return (
     <ThemeProvider theme={token}>
-      <StyledTopBar elevation={elevation} {...rest}>
+      <StyledTopBar forwardedAs={'header'} elevation={elevation} {...rest}>
         {children}
       </StyledTopBar>
     </ThemeProvider>
