@@ -81,7 +81,7 @@ export const States: Story<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    focusedRef.current.focus()
+    focusedRef.current?.focus()
   }, [])
 
   return (
@@ -311,12 +311,14 @@ export const Overflow: Story<TabsProps> = () => {
     const handleScroll = () => {
       if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
       delayToScrollEnd = setTimeout(() => {
-        cachedList.scrollLeft === 0
+        cachedList?.scrollLeft === 0
           ? setPrevDisabled(true)
           : setPrevDisabled(false)
-        containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth
-          ? setNextDisabled(true)
-          : setNextDisabled(false)
+        if (cachedList !== null) {
+          containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth
+            ? setNextDisabled(true)
+            : setNextDisabled(false)
+        }
       }, 20)
     }
 
@@ -328,7 +330,7 @@ export const Overflow: Story<TabsProps> = () => {
 
     return () => {
       if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
-      cachedList.removeEventListener('scroll', handleScroll)
+      cachedList?.removeEventListener('scroll', handleScroll)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerWidth, list, totalWidth])
@@ -339,9 +341,11 @@ export const Overflow: Story<TabsProps> = () => {
     const SCROLL_AMOUNT = 0.8
     let target = 0
     const signifier = direction === 'left' ? -1 : 1
-    target =
-      list.current.scrollLeft + signifier * containerWidth * SCROLL_AMOUNT
-    list.current.scrollTo(target, 0)
+    if (list.current !== null) {
+      target =
+        list.current.scrollLeft + signifier * containerWidth * SCROLL_AMOUNT
+    }
+    list.current?.scrollTo(target, 0)
   }
 
   return (
@@ -460,7 +464,7 @@ export const Compact: Story<TabsProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
-    focusedRef.current.focus()
+    focusedRef.current?.focus()
     setDensity('compact')
   }, [density])
 
