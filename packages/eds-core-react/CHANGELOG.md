@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.2] - 2022-06-16
+
+### Added
+
+- `Accordion` now has a new sub-component; `Accordion.HeaderActions`! This should make it easier to have interactive elements in the `Accordion.Header` while maintaining proper a11y. ([#2091](https://github.com/equinor/design-system/pull/2091))
+
+### Fixed
+
+- `Autocomplete`
+  - Should no longer trigger re-renders when closed. ([#2295](https://github.com/equinor/design-system/pull/2295))
+  - Should now correctly update if options are changed after initialization. ([#2304](https://github.com/equinor/design-system/pull/2304))
+  - `onOptionsChange` should now properly trigger when controlled in single select mode. ([#2300](https://github.com/equinor/design-system/pull/2300))
+  - Bumped dropdown `z-index` to match other EDS components. ([#2309](https://github.com/equinor/design-system/pull/2309))
+
 ## [0.20.1] - 2022-06-09
 
 ### Deprecated
