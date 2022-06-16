@@ -4,6 +4,7 @@ import {
   outlineTemplate,
   spacingsTemplate,
   bordersTemplate,
+  typographyTemplate,
 } from '@equinor/eds-utils'
 
 const StyledTab = styled.button.attrs<TabProps>(
@@ -28,6 +29,7 @@ const StyledTab = styled.button.attrs<TabProps>(
     font-size: 1rem;
     height: ${tab.height};
     ${spacingsTemplate(tab.spacings)}
+    ${typographyTemplate(tab.typography)}
 
     color: ${active
       ? tab.states.active.typography.color
