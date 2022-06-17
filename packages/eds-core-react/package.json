@@ -35,7 +35,7 @@
     "test:update-snapshots": "jest --updateSnapshot",
     "storybook": "start-storybook -p 9000 --ci",
     "build:storybook": "build-storybook -o storybook-build",
-    "types": "tsc"
+    "types": "tsc -p tsconfig.build.json"
   },
   "keywords": [
     "eds",
