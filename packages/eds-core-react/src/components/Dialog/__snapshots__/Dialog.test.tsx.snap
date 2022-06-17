@@ -2,8 +2,6 @@
 
 exports[`Dialog Matches snapshot 1`] = `
 .c0 {
-  min-width: 96px;
-  max-width: calc(100% - 32px);
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
   box-shadow: 0 11px 15px rgba(0,0,0,0.2),0 9px 46px rgba(0,0,0,0.12),0 24px 38px rgba(0,0,0,0.14);
 }

@@ -11,8 +11,6 @@ type StyledProps = {
 }
 
 const StyledPaper = styled.div<StyledProps>`
-  min-width: ${tokens.minWidth};
-  max-width: ${tokens.maxWidth};
   background: ${tokens.background};
   box-shadow: ${({ elevation }) => elevation};
 `

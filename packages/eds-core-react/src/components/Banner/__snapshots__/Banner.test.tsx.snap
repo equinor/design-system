@@ -2,7 +2,12 @@
 
 exports[`Banner Matches snapshot 1`] = `
 <DocumentFragment>
-  .c3 {
+  .c0 {
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  box-shadow: 0 0 1px rgba(0,0,0,0.14);
+}
+
+.c4 {
   border: none;
   background-color: var(--eds_ui_background__light,rgba(247,247,247,1));
   margin-top: 16px;
@@ -10,7 +15,7 @@ exports[`Banner Matches snapshot 1`] = `
   height: 1px;
 }
 
-.c1 {
+.c2 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -33,7 +38,7 @@ exports[`Banner Matches snapshot 1`] = `
   margin-right: 16px;
 }
 
-.c0 {
+.c1 {
   padding-left: 16px;
   padding-top: 16px;
   padding-right: 16px;
@@ -47,12 +52,12 @@ exports[`Banner Matches snapshot 1`] = `
   background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
 }
 
-.c4 {
+.c5 {
   margin: 0;
   height: 2px;
 }
 
-.c2 {
+.c3 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -63,14 +68,15 @@ exports[`Banner Matches snapshot 1`] = `
 }
 
 <div
-    class=""
+    class="c0"
+    elevation="0 0 1px rgba(0, 0, 0, 0.14)"
     role="alert"
   >
     <div
-      class="c0"
+      class="c1"
     >
       <span
-        class="c1"
+        class="c2"
       >
         <svg
           aria-hidden="true"
@@ -92,13 +98,13 @@ exports[`Banner Matches snapshot 1`] = `
         </svg>
       </span>
       <p
-        class="c2 "
+        class="c3 "
       >
         Banner message
       </p>
     </div>
     <hr
-      class="c3 c4"
+      class="c4 c5"
     />
   </div>
 </DocumentFragment>
