@@ -40,8 +40,9 @@ const Stack = styled(SBStack)({
 
 const Wrapper = styled.div`
   display: grid;
-  grid-gap: 32px;
+  grid-gap: 8px;
   grid-template-columns: repeat(3, fit-content(100%));
+  padding: 32px;
 `
 
 const IconWrapper = styled.div`
@@ -55,14 +56,8 @@ const StyledButton = styled(Button)`
   &:focus {
     border-radius: 2px;
   }
-`
-
-const StyledLabel = styled(Label)`
-  width: 30px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
+  width: 96px;
+  height: 96px;
 `
 
 export default {
@@ -359,7 +354,7 @@ export const AppLauncher: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <Stack style={{ margin: '20rem' }}>
+    <Stack style={{ margin: '32rem 0 0 0' }}>
       <Tooltip title="App Launcher">
         <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={apps} />
@@ -379,38 +374,30 @@ export const AppLauncher: Story<PopoverProps> = () => {
                 <Label label="Home" />
               </IconWrapper>
             </StyledButton>
-            <Tooltip title="Calendar">
-              <StyledButton onClick={closePopover} variant="ghost_icon">
-                <IconWrapper>
-                  <Icon data={calendar} />
-                  <StyledLabel label="Calendar" />
-                </IconWrapper>
-              </StyledButton>
-            </Tooltip>
-            <Tooltip title="Settings">
-              <StyledButton onClick={closePopover} variant="ghost_icon">
-                <IconWrapper>
-                  <Icon data={settings} />
-                  <StyledLabel label="Settings" />
-                </IconWrapper>
-              </StyledButton>
-            </Tooltip>
-            <Tooltip title="Platforms">
-              <StyledButton onClick={closePopover} variant="ghost_icon">
-                <IconWrapper>
-                  <Icon data={platform} />
-                  <StyledLabel label="Platforms" />
-                </IconWrapper>
-              </StyledButton>
-            </Tooltip>
-            <Tooltip title="Instruments">
-              <StyledButton onClick={closePopover} variant="ghost_icon">
-                <IconWrapper>
-                  <Icon data={instrument} />
-                  <StyledLabel label="Instruments" />
-                </IconWrapper>
-              </StyledButton>
-            </Tooltip>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={calendar} />
+                <Label label="Calendar" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={settings} />
+                <Label label="Settings" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={platform} />
+                <Label label="Platforms" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={instrument} />
+                <Label label="Instruments" />
+              </IconWrapper>
+            </StyledButton>
             <StyledButton onClick={closePopover} variant="ghost_icon">
               <IconWrapper>
                 <Icon data={pipe_support} />
@@ -441,22 +428,18 @@ export const AppLauncher: Story<PopoverProps> = () => {
                 <Label label="Email" />
               </IconWrapper>
             </StyledButton>
-            <Tooltip title="Contacts">
-              <StyledButton onClick={closePopover} variant="ghost_icon">
-                <IconWrapper>
-                  <Icon data={contacts} />
-                  <StyledLabel label="Contacts" />
-                </IconWrapper>
-              </StyledButton>
-            </Tooltip>
-            <Tooltip title="Support">
-              <StyledButton onClick={closePopover} variant="ghost_icon">
-                <IconWrapper>
-                  <Icon data={support} />
-                  <StyledLabel label="Support" />
-                </IconWrapper>
-              </StyledButton>
-            </Tooltip>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={contacts} />
+                <Label label="Contacts" />
+              </IconWrapper>
+            </StyledButton>
+            <StyledButton onClick={closePopover} variant="ghost_icon">
+              <IconWrapper>
+                <Icon data={support} />
+                <Label label="Support" />
+              </IconWrapper>
+            </StyledButton>
           </Wrapper>
         </Popover.Content>
       </Popover>
