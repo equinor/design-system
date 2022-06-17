@@ -27,10 +27,10 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "rollup -c && tsc -p tsconfig.json",
+    "build": "rollup -c && tsc -p tsconfig.build.json",
     "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
-    "types": "tsc"
+    "types": "tsc -p tsconfig.build.json"
   },
   "keywords": [
     "eds",
