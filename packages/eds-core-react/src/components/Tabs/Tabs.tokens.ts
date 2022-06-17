@@ -23,6 +23,9 @@ const {
   interactions: {
     focused: { width: focusOutlineWidth },
   },
+  typography: {
+    navigation: { menu_tabs, menu_title },
+  },
 } = tokens
 
 export const token: ComponentToken = {
@@ -42,6 +45,9 @@ export const token: ComponentToken = {
           },
         },
       },
+      typography: {
+        ...menu_title,
+      },
     },
     tab: {
       background: 'transparent',
@@ -59,6 +65,7 @@ export const token: ComponentToken = {
       typography: {
         color: defaultColor,
         textAlign: 'center',
+        ...menu_tabs,
       },
       border: {
         type: 'bordergroup',

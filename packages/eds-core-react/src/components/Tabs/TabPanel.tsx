@@ -1,6 +1,10 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { outlineTemplate, spacingsTemplate } from '@equinor/eds-utils'
+import {
+  outlineTemplate,
+  spacingsTemplate,
+  typographyTemplate,
+} from '@equinor/eds-utils'
 
 const StyledTabPanel = styled.div.attrs(
   (): HTMLAttributes<HTMLDivElement> => ({
@@ -14,6 +18,7 @@ const StyledTabPanel = styled.div.attrs(
 
   return css`
     ${spacingsTemplate(panel.spacings)}
+    ${typographyTemplate(panel.typography)}
     &:focus {
       outline: none;
     }
