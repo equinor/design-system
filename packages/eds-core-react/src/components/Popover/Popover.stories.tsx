@@ -51,10 +51,10 @@ const IconWrapper = styled.div`
 
 const StyledButton = styled(Button)`
   &:hover {
-    border-radius: 2px;
+    border-radius: 4px;
   }
   &:focus {
-    border-radius: 2px;
+    border-radius: 4px;
   }
   width: 96px;
   height: 96px;
@@ -354,7 +354,7 @@ export const AppLauncher: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <Stack style={{ margin: '32rem 0 0 0' }}>
+    <Stack style={{ marginTop: '32rem' }}>
       <Tooltip title="App Launcher">
         <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={apps} />
