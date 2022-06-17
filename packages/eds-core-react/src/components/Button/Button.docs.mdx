@@ -4,7 +4,7 @@ import { Button  } from '.'
 
 
 # Button 
-Buttons allow users to take action with a single click or tap
+Allows users to take action with a single click or tap.
 
 <Links 
 ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/button/" 
@@ -22,62 +22,55 @@ npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
 
 ```tsx
 import { Button } from '@equinor/eds-core-react'
+
 <Button>Click me!</Button>
 ```
-## Basic
+
+## Examples
+
+### Basic
 
 The `Button` come with four variants; `contained`, `outlined`, `ghost` and `ghost_icon`.
 <Story id="inputs-button--basic" />
 
-## Icon button
+### Icon button
 
 The `ghost_icon` variant is meant for standalone icon buttons using the `<Icon>` component.
-
-
 <Story id="inputs-button--ghost-icon" />
 
-
-```tsx
-<Button variant="ghost_icon">
-  <Icon name="save" title="save action"></Icon>
-</Button>
-```
-
-## Color
+### Color
 <Story id="inputs-button--color"/>
 
-## Compact
+### Hierarchy
 
-Compact `Button` using `EdsProvider`
-<Story id="inputs-button--compact" />
+Use variants to differentiate the hierarchy.
+<ul>
+  <li><code>Contained</code> - being high-emphasis.</li>
+  <li><code>Outlined</code> - being medium-emphasis.</li>
+  <li><code>Ghost</code> - being low-emphasis.</li>
+</ul>
+<Story id="inputs-button--hierarchy" />
 
-## File upload
+### File upload
 
 Example of how to do file upload button. Please note this demo only works in Storybook Canvas (isolated example only).
-
 <Story id="inputs-button--file-upload" />
 
-```tsx
+### Progress button
 
-<label htmlFor="file-upload">
-  <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
-  <Button as="span">Upload file</Button>
-</label>
-```
-
-## Progress button
-
-Use the `Progress` component if you need progress indication on a button. Make sure the 
+Use the `Progress` component if you need progress indication on a button.
 <Story id="inputs-button--progress-button" />
 
-
-## All
+### All
 
 Example All button combinations. 
-
 <Story id="inputs-button--all" />
 
-## Full width
+### Full width
 
-Examples of buttons
 <Story id="inputs-button--full-width" />
+
+### Compact
+
+Compact `Button` using `EdsProvider`.
+<Story id="inputs-button--compact" />
