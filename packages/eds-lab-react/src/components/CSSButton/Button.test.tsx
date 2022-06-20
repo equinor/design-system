@@ -5,18 +5,18 @@ import 'jest-styled-components'
 import styled from 'styled-components'
 import { Icon } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
-import { Button } from './Button'
+import { CSSButton } from './Button'
 import React from 'react'
 
 Icon.add({ save })
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(CSSButton)`
   position: relative;
   height: 100px;
   width: 100px;
 `
 
-const MarginButton = styled(Button)`
+const MarginButton = styled(CSSButton)`
   margin: 12px;
 `
 
@@ -24,14 +24,14 @@ afterEach(cleanup)
 
 describe('Button', () => {
   it('Matches snapshot', () => {
-    const { asFragment } = render(<Button>Button</Button>)
+    const { asFragment } = render(<CSSButton>Button</CSSButton>)
     expect(asFragment()).toMatchSnapshot()
   })
   it('Has provided icon when variant is icon', () => {
     render(
-      <Button variant="ghost_icon">
+      <CSSButton variant="ghost_icon">
         <Icon name="save" title="save me test" />
-      </Button>,
+      </CSSButton>,
     )
     expect(screen.getByLabelText('save me test')).toBeInTheDocument()
     expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
@@ -54,7 +54,7 @@ describe('Button', () => {
 
     render(
       <form onSubmit={onSubmit}>
-        <Button type="submit">Submit button</Button>
+        <CSSButton type="submit">Submit button</CSSButton>
       </form>,
     )
 
@@ -85,9 +85,9 @@ describe('Button', () => {
   // })
   it('Has provided icon when icon and text is defined', () => {
     render(
-      <Button>
+      <CSSButton>
         <Icon name="save" title="save"></Icon>Button
-      </Button>,
+      </CSSButton>,
     )
     expect(screen.getByLabelText('save')).toBeInTheDocument()
     expect(screen.queryByTestId('eds-icon-path')).toHaveAttribute(
@@ -96,7 +96,7 @@ describe('Button', () => {
     )
   })
   it('Renders as a link when href prop is defined', () => {
-    render(<Button href="/" />)
+    render(<CSSButton href="/" />)
     const button = screen.getByRole('link')
 
     expect(button).toBeInTheDocument()

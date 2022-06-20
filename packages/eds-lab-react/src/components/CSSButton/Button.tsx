@@ -29,7 +29,7 @@ export type ButtonProps = {
   fullWidth?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const CSSButton = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(
     {
       color = 'primary',

@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '.'
+import { CSSButton, ButtonProps } from '.'
 import { Icon, EdsProvider } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 import { Meta, Story } from '@storybook/react'
@@ -22,7 +22,7 @@ const FullWidthWrapper = styled.div`
 
 export default {
   title: 'Core-react experimental features/CSS Button',
-  component: Button,
+  component: CSSButton,
   argTypes: {
     as: {
       control: {
@@ -44,194 +44,194 @@ export default {
 } as Meta
 
 export const Default: Story<ButtonProps> = (args) => (
-  <Button {...args}>You can control me</Button>
+  <CSSButton {...args}>You can control me</CSSButton>
 )
 
 export const All: Story<ButtonProps> = () => (
   <Wrapper>
-    <Button>Primary</Button>
-    <Button color="secondary">Secondary</Button>
-    <Button color="danger">Danger</Button>
-    <Button disabled>Disabled</Button>
-    <Button variant="outlined">Primary</Button>
-    <Button variant="outlined" color="secondary">
+    <CSSButton>Primary</CSSButton>
+    <CSSButton color="secondary">Secondary</CSSButton>
+    <CSSButton color="danger">Danger</CSSButton>
+    <CSSButton disabled>Disabled</CSSButton>
+    <CSSButton variant="outlined">Primary</CSSButton>
+    <CSSButton variant="outlined" color="secondary">
       Secondary
-    </Button>
-    <Button variant="outlined" color="danger">
+    </CSSButton>
+    <CSSButton variant="outlined" color="danger">
       Danger
-    </Button>
-    <Button variant="outlined" disabled>
+    </CSSButton>
+    <CSSButton variant="outlined" disabled>
       Disabled
-    </Button>
-    <Button variant="ghost">Primary</Button>
-    <Button variant="ghost" color="secondary">
+    </CSSButton>
+    <CSSButton variant="ghost">Primary</CSSButton>
+    <CSSButton variant="ghost" color="secondary">
       Secondary
-    </Button>
-    <Button variant="ghost" color="danger">
+    </CSSButton>
+    <CSSButton variant="ghost" color="danger">
       Danger
-    </Button>
-    <Button variant="ghost" disabled>
+    </CSSButton>
+    <CSSButton variant="ghost" disabled>
       Disabled
-    </Button>
-    <Button variant="ghost_icon">
+    </CSSButton>
+    <CSSButton variant="ghost_icon">
       <Icon name="save" title="save action"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="secondary">
+    </CSSButton>
+    <CSSButton variant="ghost_icon" color="secondary">
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="danger">
+    </CSSButton>
+    <CSSButton variant="ghost_icon" color="danger">
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" disabled>
+    </CSSButton>
+    <CSSButton variant="ghost_icon" disabled>
       <Icon name="save" title="save"></Icon>
-    </Button>
+    </CSSButton>
   </Wrapper>
 )
 
 export const Contained: Story<ButtonProps> = () => (
   <Wrapper>
-    <Button>Primary</Button>
-    <Button color="secondary">Secondary</Button>
-    <Button color="danger">Danger</Button>
-    <Button disabled>Disabled</Button>
-    <Button>
+    <CSSButton>Primary</CSSButton>
+    <CSSButton color="secondary">Secondary</CSSButton>
+    <CSSButton color="danger">Danger</CSSButton>
+    <CSSButton disabled>Disabled</CSSButton>
+    <CSSButton>
       <Icon name="save" title="save"></Icon>Primary
-    </Button>
-    <Button color="secondary">
+    </CSSButton>
+    <CSSButton color="secondary">
       <Icon name="save" title="save"></Icon>Secondary
-    </Button>
-    <Button color="danger">
+    </CSSButton>
+    <CSSButton color="danger">
       <Icon name="save" title="save"></Icon>Danger
-    </Button>
-    <Button disabled>
+    </CSSButton>
+    <CSSButton disabled>
       <Icon name="save" title="save"></Icon>Disabled
-    </Button>
-    <Button>
+    </CSSButton>
+    <CSSButton>
       Primary <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="secondary">
+    </CSSButton>
+    <CSSButton color="secondary">
       Secondary
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="danger">
+    </CSSButton>
+    <CSSButton color="danger">
       Danger
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button disabled>
+    </CSSButton>
+    <CSSButton disabled>
       Disabled
       <Icon name="save" title="save"></Icon>
-    </Button>
+    </CSSButton>
   </Wrapper>
 )
 
 export const Outlined: Story<ButtonProps> = () => (
   <Wrapper>
-    <Button variant="outlined">Primary</Button>
-    <Button variant="outlined" color="secondary">
+    <CSSButton variant="outlined">Primary</CSSButton>
+    <CSSButton variant="outlined" color="secondary">
       Secondary
-    </Button>
-    <Button variant="outlined" color="danger">
+    </CSSButton>
+    <CSSButton variant="outlined" color="danger">
       Danger
-    </Button>
-    <Button variant="outlined" disabled>
+    </CSSButton>
+    <CSSButton variant="outlined" disabled>
       Disabled
-    </Button>
-    <Button variant="outlined">
+    </CSSButton>
+    <CSSButton variant="outlined">
       <Icon name="save" title="save"></Icon>
       Primary
-    </Button>
-    <Button variant="outlined" color="secondary">
+    </CSSButton>
+    <CSSButton variant="outlined" color="secondary">
       <Icon name="save" title="save"></Icon>
       Secondary
-    </Button>
-    <Button variant="outlined" color="danger">
+    </CSSButton>
+    <CSSButton variant="outlined" color="danger">
       <Icon name="save" title="save"></Icon>
       Danger
-    </Button>
-    <Button variant="outlined" disabled>
+    </CSSButton>
+    <CSSButton variant="outlined" disabled>
       <Icon name="save" title="save"></Icon>
       Disabled
-    </Button>
-    <Button variant="outlined">
+    </CSSButton>
+    <CSSButton variant="outlined">
       Primary
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="outlined" color="secondary">
+    </CSSButton>
+    <CSSButton variant="outlined" color="secondary">
       Secondary
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="outlined" color="danger">
+    </CSSButton>
+    <CSSButton variant="outlined" color="danger">
       Danger
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="outlined" disabled>
+    </CSSButton>
+    <CSSButton variant="outlined" disabled>
       Disabled
       <Icon name="save" title="save"></Icon>
-    </Button>
+    </CSSButton>
   </Wrapper>
 )
 
 export const Ghost: Story<ButtonProps> = () => (
   <Wrapper>
-    <Button variant="ghost">Primary</Button>
-    <Button variant="ghost" color="secondary">
+    <CSSButton variant="ghost">Primary</CSSButton>
+    <CSSButton variant="ghost" color="secondary">
       Secondary
-    </Button>
-    <Button variant="ghost" color="danger">
+    </CSSButton>
+    <CSSButton variant="ghost" color="danger">
       Danger
-    </Button>
-    <Button variant="ghost" disabled>
+    </CSSButton>
+    <CSSButton variant="ghost" disabled>
       Disabled
-    </Button>
-    <Button variant="ghost">
+    </CSSButton>
+    <CSSButton variant="ghost">
       <Icon name="save" title="save"></Icon>
       Primary
-    </Button>
-    <Button variant="ghost" color="secondary">
+    </CSSButton>
+    <CSSButton variant="ghost" color="secondary">
       <Icon name="save" title="save"></Icon>
       Secondary
-    </Button>
-    <Button variant="ghost" color="danger">
+    </CSSButton>
+    <CSSButton variant="ghost" color="danger">
       <Icon name="save" title="save"></Icon>
       Danger
-    </Button>
-    <Button variant="ghost" disabled>
+    </CSSButton>
+    <CSSButton variant="ghost" disabled>
       <Icon name="save" title="save"></Icon>
       Disabled
-    </Button>
-    <Button variant="ghost">
+    </CSSButton>
+    <CSSButton variant="ghost">
       Primary
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost" color="secondary">
+    </CSSButton>
+    <CSSButton variant="ghost" color="secondary">
       Secondary
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost" color="danger">
+    </CSSButton>
+    <CSSButton variant="ghost" color="danger">
       Danger
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost" disabled>
+    </CSSButton>
+    <CSSButton variant="ghost" disabled>
       Disabled
       <Icon name="save" title="save"></Icon>
-    </Button>
+    </CSSButton>
   </Wrapper>
 )
 
 export const GhostIcon: Story<ButtonProps> = () => (
   <Wrapper>
-    <Button variant="ghost_icon">
+    <CSSButton variant="ghost_icon">
       <Icon name="save" title="save action"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="secondary">
+    </CSSButton>
+    <CSSButton variant="ghost_icon" color="secondary">
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" color="danger">
+    </CSSButton>
+    <CSSButton variant="ghost_icon" color="danger">
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button variant="ghost_icon" disabled>
+    </CSSButton>
+    <CSSButton variant="ghost_icon" disabled>
       <Icon name="save" title="save"></Icon>
-    </Button>
+    </CSSButton>
   </Wrapper>
 )
 
@@ -244,7 +244,7 @@ export const Form: Story<ButtonProps> = () => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
-        <Button type="submit">Submit form</Button>
+        <CSSButton type="submit">Submit form</CSSButton>
       </form>
     </Wrapper>
   )
@@ -254,7 +254,7 @@ export const FileUpload: Story<ButtonProps> = () => (
   <Wrapper>
     <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
     <label htmlFor="file-upload">
-      <Button as="span">Upload</Button>
+      <CSSButton as="span">Upload</CSSButton>
     </label>
   </Wrapper>
 )
@@ -270,61 +270,61 @@ FileUpload.parameters = {
 
 export const Link: Story<ButtonProps> = () => (
   <Wrapper>
-    <Button href="#">Link</Button>
+    <CSSButton href="#">Link</CSSButton>
   </Wrapper>
 )
 
 export const FullWidth: Story<ButtonProps> = () => (
   <FullWidthWrapper>
-    <Button fullWidth>Primary</Button>
-    <Button color="secondary" fullWidth>
+    <CSSButton fullWidth>Primary</CSSButton>
+    <CSSButton color="secondary" fullWidth>
       Secondary
-    </Button>
-    <Button color="danger" fullWidth>
+    </CSSButton>
+    <CSSButton color="danger" fullWidth>
       Danger
-    </Button>
-    <Button disabled fullWidth>
+    </CSSButton>
+    <CSSButton disabled fullWidth>
       Disabled
-    </Button>
-    <Button fullWidth>
+    </CSSButton>
+    <CSSButton fullWidth>
       <Icon name="save" title="save"></Icon>Primary
-    </Button>
-    <Button color="secondary" fullWidth>
+    </CSSButton>
+    <CSSButton color="secondary" fullWidth>
       <Icon name="save" title="save"></Icon>Secondary
-    </Button>
-    <Button color="danger" fullWidth>
+    </CSSButton>
+    <CSSButton color="danger" fullWidth>
       <Icon name="save" title="save"></Icon>Danger
-    </Button>
-    <Button disabled fullWidth>
+    </CSSButton>
+    <CSSButton disabled fullWidth>
       <Icon name="save" title="save"></Icon>Disabled
-    </Button>
-    <Button fullWidth>
+    </CSSButton>
+    <CSSButton fullWidth>
       Primary <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="secondary" fullWidth>
+    </CSSButton>
+    <CSSButton color="secondary" fullWidth>
       Secondary
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button color="danger" fullWidth>
+    </CSSButton>
+    <CSSButton color="danger" fullWidth>
       Danger
       <Icon name="save" title="save"></Icon>
-    </Button>
-    <Button disabled fullWidth>
+    </CSSButton>
+    <CSSButton disabled fullWidth>
       Disabled
       <Icon name="save" title="save"></Icon>
-    </Button>
+    </CSSButton>
   </FullWidthWrapper>
 )
 
 export const Compact: Story<ButtonProps> = () => (
   <EdsProvider density="compact">
     <Wrapper>
-      <Button>Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="ghost_icon">
+      <CSSButton>Contained</CSSButton>
+      <CSSButton variant="outlined">Outlined</CSSButton>
+      <CSSButton variant="ghost">Ghost</CSSButton>
+      <CSSButton variant="ghost_icon">
         <Icon data={menu} title="Ghost icon menu"></Icon>
-      </Button>
+      </CSSButton>
     </Wrapper>
   </EdsProvider>
 )
