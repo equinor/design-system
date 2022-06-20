@@ -77,7 +77,7 @@ export type IconProps = {
 } & SVGProps<SVGSVGElement>
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
-  { size = 24, color = 'currentColor', name, rotation, title, data, ...rest },
+  { size, color = 'currentColor', name, rotation, title, data, ...rest },
   ref,
 ) {
   // eslint-disable-next-line prefer-const
