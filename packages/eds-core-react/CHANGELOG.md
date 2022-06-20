@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.3] - 2022-06-20
+
+### Added
+
+- ✨ Elevation options to Card/Banner/TopBar by @oddvernes in https://github.com/equinor/design-system/pull/2313
+
+### Fixed
+
+- 🐛 TypographyTemplate in Tab by @martalalik in https://github.com/equinor/design-system/pull/2316
+- 🐛 Improved Autocomplete object comparisons for showing all available options on open by @mimarz in https://github.com/equinor/design-system/pull/2322
+
 ## [0.20.2] - 2022-06-16
 
 ### Added
