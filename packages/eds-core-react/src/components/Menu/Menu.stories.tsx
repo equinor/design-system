@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { action } from '@storybook/addon-actions'
-import styled from 'styled-components'
 import {
   Menu,
   MenuProps,

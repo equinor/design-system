@@ -29,13 +29,13 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "rollup -c && tsc -p tsconfig.json",
+    "build": "rollup -c && tsc -p tsconfig.build.json",
     "test": "tsc -p tsconfig.test.json && jest",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
     "test:update-snapshots": "jest --updateSnapshot",
     "storybook": "start-storybook -p 9000 --ci",
     "build:storybook": "build-storybook -o storybook-build",
-    "types": "tsc"
+    "types": "tsc -p tsconfig.build.json"
   },
   "keywords": [
     "eds",

@@ -10,11 +10,5 @@
     "baseUrl": "."
   },
   "include": ["./src/**/*"],
-  "exclude": [
-    "node_modules",
-    "src/**/*.stories.ts*",
-    "src/**/*.test.ts*",
-    "src/stories",
-    "src/test"
-  ]
+  "exclude": ["node_modules"]
 }
