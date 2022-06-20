@@ -354,7 +354,7 @@ export const AppLauncher: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <Stack style={{ marginTop: '32rem' }}>
+    <Stack style={{ margin: '0 0 32rem 0' }}>
       <Tooltip title="App Launcher">
         <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={apps} />
