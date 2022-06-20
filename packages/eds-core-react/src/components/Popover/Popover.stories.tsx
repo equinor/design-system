@@ -38,28 +38,6 @@ const Stack = styled(SBStack)({
   margin: '10rem',
 })
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-gap: 8px;
-  grid-template-columns: repeat(3, fit-content(100%));
-  padding: 32px;
-`
-
-const IconWrapper = styled.div`
-  display: block;
-`
-
-const StyledButton = styled(Button)`
-  &:hover {
-    border-radius: 4px;
-  }
-  &:focus {
-    border-radius: 4px;
-  }
-  width: 96px;
-  height: 96px;
-`
-
 export default {
   title: 'Data Display/Popover',
   component: Popover,
@@ -347,6 +325,28 @@ export const Compact: Story<PopoverProps> = () => {
 }
 
 export const AppLauncher: Story<PopoverProps> = () => {
+  const Wrapper = styled.div`
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: repeat(3, fit-content(100%));
+    padding: 32px;
+  `
+
+  const IconWrapper = styled.div`
+    display: block;
+  `
+
+  const StyledButton = styled(Button)`
+    &:hover {
+      border-radius: 4px;
+    }
+    &:focus {
+      border-radius: 4px;
+    }
+    width: 96px;
+    height: 96px;
+  `
+
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
 
