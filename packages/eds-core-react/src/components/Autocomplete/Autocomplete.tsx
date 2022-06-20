@@ -330,7 +330,9 @@ function AutocompleteInner<T>(
     },
     onIsOpenChange: ({ selectedItem }) => {
       // Show all options when single select is reopened with a selected item
-      if (availableItems.length === 1 && selectedItem === availableItems[0]) {
+      const availableHash = JSON.stringify(availableItems[0])
+      const selectedsHash = JSON.stringify(selectedItem)
+      if (availableItems.length === 1 && selectedsHash === availableHash) {
         setAvailableItems(options)
       }
     },
@@ -393,7 +395,9 @@ function AutocompleteInner<T>(
       onSelectedItemChange: (changes) => {
         if (onOptionsChange) {
           const { selectedItem } = changes
-          onOptionsChange({ selectedItems: [selectedItem] })
+          onOptionsChange({
+            selectedItems: selectedItem ? [selectedItem] : [],
+          })
         }
       },
     }
