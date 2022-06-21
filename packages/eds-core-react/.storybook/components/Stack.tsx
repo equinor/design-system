@@ -3,12 +3,14 @@ import styled, { CSSProperties } from 'styled-components'
 type StackProps = {
   direction?: CSSProperties['flexDirection']
   align?: CSSProperties['alignItems']
+  display?: CSSProperties['display']
+  content?: CSSProperties['justifyContent']
 }
 
 export const Stack = styled.div<StackProps>`
-  display: flex;
+  display: ${({ display }) => display || 'flex'};
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${({ content }) => content || 'center'};
   align-items: ${({ align }) => align || 'center'};
   gap: 1rem;
   flex-wrap: wrap;
