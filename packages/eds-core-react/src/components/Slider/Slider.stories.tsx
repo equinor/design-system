@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react'
-import { Slider, SliderProps } from '../..'
+import { Label, Slider, SliderProps, Typography } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Slider.docs.mdx'
@@ -33,7 +33,7 @@ export const Introduction: Story<SliderProps> = (args) => {
 
 export const SimpleSlider: Story<SliderProps> = () => (
   <>
-    <span id="simple-slider">Slide me</span>
+    <Label label="Slide me" id="simple-slider" />
     <Slider value={4} min={0} max={10} aria-labelledby="simple-slider" />
   </>
 )
@@ -42,9 +42,10 @@ SimpleSlider.storyName = 'Simple slider'
 export const SimpleSliderWithSteps: Story<SliderProps> = () => {
   return (
     <>
-      <span id="even-simpler-slider">
-        Simple slider, no dots, no min or max values, steps of 10
-      </span>
+      <Label
+        label=" Simple slider, no dots, no min or max values, steps of 10"
+        id="even-simpler-slider"
+      />
       <Slider
         aria-labelledby="even-simpler-slider"
         value={50}
@@ -68,14 +69,15 @@ export const RangeSlider: Story<SliderProps> = () => {
 
   return (
     <>
-      <span id="range-slider-label">Range slider</span>
       <Slider
         value={value}
         onChange={changeHandler}
-        aria-labelledby="range-slider-label"
+        aria-label="Range slider"
       />
-      <p style={{ marginTop: '1.5rem' }}>
-        <small>Output from slider is {value.join(', ')}</small>
+      <p style={{ marginTop: '12px' }}>
+        <Typography variant="caption">
+          Output from slider is {value.join(', ')}
+        </Typography>
       </p>
     </>
   )
@@ -88,9 +90,6 @@ export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
 
   return (
     <>
-      <span id="range-slider-label-with-committed">
-        Range slider with a lot of steps
-      </span>
       <Slider
         value={value}
         onChange={(
@@ -101,16 +100,16 @@ export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
         }}
         min={0}
         max={500}
-        aria-labelledby="range-slider-label-with-committed"
         onChangeCommitted={(event, value) => {
           updateValueCommited(value as number[])
         }}
+        aria-label="Range slider with a lot of steps"
       />
-      <p style={{ marginTop: '1.5rem' }}>
-        <small>
+      <p style={{ marginTop: '12px' }}>
+        <Typography variant="caption">
           Committed output from slider is{' '}
           {valueCommited && valueCommited.join(', ')}
-        </small>
+        </Typography>
       </p>
     </>
   )
@@ -119,7 +118,7 @@ RangeSliderWithCommittedStep.storyName = 'Range slider with committed step'
 
 export const RangeSliderWithInterval: Story<SliderProps> = () => (
   <>
-    <span id="large-step-range-slider">Range slider with steps of 5</span>
+    <Label label="Range slider with steps of 5" id="large-step-range-slider" />
     <Slider
       aria-labelledby="large-step-range-slider"
       step={5}
@@ -146,14 +145,13 @@ export const RangeSliderWithDates: Story<SliderProps> = () => {
   }
   return (
     <>
-      <span id="date-range-slider">Date range slider with days</span>
       <Slider
         min={getUnixTime('2020-01-01')}
         max={getUnixTime('2020-01-31')}
-        aria-labelledby="date-range-slider"
         step={60 * 60 * 24 * 1000}
         value={[getUnixTime('2020-01-01'), getUnixTime('2020-01-31')]}
         outputFunction={outputFunction}
+        aria-label="Range slider with dates"
       />
     </>
   )
@@ -162,12 +160,6 @@ RangeSliderWithDates.storyName = 'Range slider with dates'
 
 export const Disabled: Story<SliderProps> = () => (
   <>
-    <label htmlFor="disabled-slider">Disabled slider</label>
-    <Slider
-      id="disabled-slider"
-      value={50}
-      disabled
-      aria-labelledby="disabled-slider"
-    />
+    <Slider value={50} disabled aria-label="Disabled Slider" />
   </>
 )
