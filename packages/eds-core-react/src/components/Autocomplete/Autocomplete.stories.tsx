@@ -324,159 +324,150 @@ Compact.args = {
   optionLabel,
 }
 
-type FormValues = {
-  fabFieldOne: string
-  fabFieldTwo: string
-  optionalField: string
+type MyFormValues = {
+  origin: string | null
+  favouriteCounty: string | null
+  fruits: { label: string; emoji: string }[]
 }
 
-const Field = styled.div`
-  margin: 1rem;
-`
-
-const Container = styled.div`
-  margin-bottom: 350px;
-`
-
 export const WithReactHookForm: Story<AutocompleteProps<MyOptionType>> = () => {
-  const defaultValues: FormValues = {
-    fabFieldOne: null,
-    fabFieldTwo: null,
-    optionalField: null,
+  const defaultValues: MyFormValues = {
+    origin: null,
+    favouriteCounty: null,
+    fruits: [],
   }
   const {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<FormValues>({
+    reset,
+    watch,
+  } = useForm<MyFormValues>({
     defaultValues,
   })
+
   const [isSubmitted, updateIsSubmitted] = useState(false)
-  const [formData, updateFormData] = useState<FormValues>(null)
+  const [formData, updateFormData] = useState<MyFormValues | null>(null)
+  const values = watch()
 
   return (
-    <Container>
-      <Typography variant="body_short" style={{ marginBottom: '1rem' }}>
-        Real life example with an external{' '}
-        <a
-          href="https://react-hook-form.com/"
-          rel="noreferrer noopener"
-          target="blank"
-        >
-          form library
-        </a>
-      </Typography>
-      <form
-        onSubmit={handleSubmit((data: FormValues) => {
-          updateFormData(data)
-          updateIsSubmitted(true)
-          action('onSubmit')(data)
-        })}
-      >
-        {isSubmitted ? (
-          <>
-            <span>Submitted data:</span>
-            <p>{JSON.stringify(formData)}</p>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                updateIsSubmitted(false)
-                updateFormData(null)
+    <form
+      onSubmit={handleSubmit((data: MyFormValues) => {
+        updateFormData(data)
+        updateIsSubmitted(true)
+        action('onSubmit')(data)
+      })}
+    >
+      {isSubmitted ? (
+        <>
+          <Typography variant="h4" style={{ marginBottom: '16px' }}>
+            Submitted data:
+          </Typography>
+          <Typography>{JSON.stringify(formData, null, 4)}</Typography>
+          <Button
+            style={{ marginTop: '16px' }}
+            variant="outlined"
+            onClick={() => {
+              updateIsSubmitted(false)
+              updateFormData(null)
+              reset()
+            }}
+          >
+            Reset
+          </Button>
+        </>
+      ) : (
+        <>
+          <div style={{ margin: '16px 0' }}>
+            <Controller
+              control={control}
+              name="origin"
+              rules={{ required: true }}
+              render={({ field: { onChange } }) => (
+                <Autocomplete
+                  onOptionsChange={({ selectedItems }) => {
+                    console.log('selected origin', selectedItems)
+                    const [selectedItem] = selectedItems
+                    onChange(selectedItem)
+                  }}
+                  selectedOptions={[values.origin]}
+                  label="Where are you from?"
+                  options={counties}
+                  aria-invalid={errors.origin ? 'true' : 'false'}
+                  aria-describedby="error-county-required"
+                  aria-required
+                  autoWidth
+                />
+              )}
+            />
+            <span
+              role="alert"
+              id="error-county-required"
+              style={{
+                color: 'red',
+                paddingTop: '0.5rem',
+                fontSize: '0.75rem',
+                display:
+                  errors.origin && errors.origin.type === 'required'
+                    ? 'block'
+                    : 'none',
               }}
             >
+              Hey you! This field is required
+            </span>
+          </div>
+          <div style={{ margin: '16px 0' }}>
+            <Controller
+              control={control}
+              name="favouriteCounty"
+              render={({ field: { onChange } }) => (
+                <Autocomplete
+                  onOptionsChange={({ selectedItems }) => {
+                    const [selectedItem] = selectedItems
+                    onChange(selectedItem)
+                  }}
+                  selectedOptions={[values.favouriteCounty]}
+                  label="Choose your favourite county"
+                  options={counties}
+                  autoWidth
+                />
+              )}
+            />
+          </div>
+          <div style={{ margin: '16px 0' }}>
+            <Controller
+              control={control}
+              name="fruits"
+              render={({ field: { onChange } }) => (
+                <Autocomplete
+                  onOptionsChange={({ selectedItems }) => {
+                    onChange(selectedItems)
+                  }}
+                  selectedOptions={values.fruits}
+                  label="Pick atleast two fruits (optional)"
+                  options={[
+                    { label: 'Banana', emoji: '🍌' },
+                    { label: 'Apple', emoji: '🍎' },
+                    { label: 'Grapes', emoji: '🍇' },
+                    { label: 'Kiwi', emoji: '🥝' },
+                    { label: 'Pineapple', emoji: '🍍' },
+                  ]}
+                  optionLabel={(opt) => `${opt?.emoji} ${opt?.label}`}
+                  multiple
+                  autoWidth
+                />
+              )}
+            />
+          </div>
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <Button type="submit">I have made my decisions!</Button>
+            <Button variant="outlined" onClick={() => reset()}>
               Reset
             </Button>
-          </>
-        ) : (
-          <>
-            <Field>
-              <Controller
-                control={control}
-                name="fabFieldOne"
-                rules={{ required: true }}
-                render={({ field: { onChange } }) => (
-                  <Autocomplete
-                    onOptionsChange={({ selectedItems }) =>
-                      onChange(selectedItems)
-                    }
-                    label="Where are you from?"
-                    options={counties.map((opt) => ({
-                      label: opt,
-                    }))}
-                    aria-invalid={errors.fabFieldOne ? 'true' : 'false'}
-                    aria-describedby="error-county-required"
-                    aria-required
-                    optionLabel={optionLabel}
-                    autoWidth
-                  />
-                )}
-              />
-              <span
-                role="alert"
-                id="error-county-required"
-                style={{
-                  color: 'red',
-                  paddingTop: '0.5rem',
-                  fontSize: '0.75rem',
-                  display:
-                    errors.fabFieldOne && errors.fabFieldOne.type === 'required'
-                      ? 'block'
-                      : 'none',
-                }}
-              >
-                Hey you! This field is required
-              </span>
-            </Field>
-            <Field>
-              <Controller
-                control={control}
-                name="fabFieldTwo"
-                render={({ field: { onChange } }) => (
-                  <Autocomplete
-                    onOptionsChange={({ selectedItems }) =>
-                      onChange(selectedItems)
-                    }
-                    label="Choose your favourite county"
-                    options={counties.map((opt) => ({
-                      label: opt,
-                    }))}
-                    optionLabel={optionLabel}
-                    autoWidth
-                  />
-                )}
-              />
-            </Field>
-            <Field>
-              <Controller
-                control={control}
-                name="optionalField"
-                render={({ field: { onChange } }) => (
-                  <Autocomplete
-                    onOptionsChange={({ selectedItems }) =>
-                      onChange(selectedItems)
-                    }
-                    label="Pick atleast two fruits (optional)"
-                    options={[
-                      { label: 'Banana', emoji: '🍌' },
-                      { label: 'Apple', emoji: '🍎' },
-                      { label: 'Grapes', emoji: '🍇' },
-                      { label: 'Kiwi', emoji: '🥝' },
-                      { label: 'Pineapple', emoji: '🍍' },
-                    ]}
-                    optionLabel={(opt) => `${opt.emoji} ${opt.label}`}
-                    multiple
-                    autoWidth
-                  />
-                )}
-              />
-            </Field>
-            <Button type="submit" style={{ marginTop: '1rem' }}>
-              I have made my decisions!
-            </Button>
-          </>
-        )}
-      </form>
-    </Container>
+          </div>
+        </>
+      )}
+    </form>
   )
 }
 
