@@ -388,10 +388,9 @@ function AutocompleteInner<T>(
     },
   }
 
-  if (isControlled && !multiple) {
+  if (!multiple) {
     comboBoxProps = {
       ...comboBoxProps,
-      selectedItem: selectedOptions[0] || null,
       onSelectedItemChange: (changes) => {
         if (onOptionsChange) {
           const { selectedItem } = changes
@@ -400,6 +399,13 @@ function AutocompleteInner<T>(
           })
         }
       },
+    }
+
+    if (isControlled) {
+      comboBoxProps = {
+        ...comboBoxProps,
+        selectedItem: selectedOptions[0] || null,
+      }
     }
   }
 
