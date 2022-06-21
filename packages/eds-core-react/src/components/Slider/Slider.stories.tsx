@@ -11,7 +11,6 @@ export default {
     docs: {
       page,
       source: {
-        type: 'dynamic',
         excludeDecorators: true,
       },
     },
@@ -39,23 +38,21 @@ export const SimpleSlider: Story<SliderProps> = () => (
 )
 SimpleSlider.storyName = 'Simple slider'
 
-export const SimpleSliderWithSteps: Story<SliderProps> = () => {
-  return (
-    <>
-      <Label
-        label=" Simple slider, no dots, no min or max values, steps of 10"
-        id="even-simpler-slider"
-      />
-      <Slider
-        aria-labelledby="even-simpler-slider"
-        value={50}
-        step={10}
-        minMaxDots={false}
-        minMaxValues={false}
-      />
-    </>
-  )
-}
+export const SimpleSliderWithSteps: Story<SliderProps> = () => (
+  <>
+    <Label
+      label=" Simple slider, no dots, no min or max values, steps of 10"
+      id="even-simpler-slider"
+    />
+    <Slider
+      aria-labelledby="even-simpler-slider"
+      value={50}
+      step={10}
+      minMaxDots={false}
+      minMaxValues={false}
+    />
+  </>
+)
 SimpleSliderWithSteps.storyName = 'Simple slider with steps'
 
 export const RangeSlider: Story<SliderProps> = () => {
@@ -74,11 +71,9 @@ export const RangeSlider: Story<SliderProps> = () => {
         onChange={changeHandler}
         aria-label="Range slider"
       />
-      <p style={{ marginTop: '12px' }}>
-        <Typography variant="caption">
-          Output from slider is {value.join(', ')}
-        </Typography>
-      </p>
+      <Typography variant="caption" style={{ marginTop: '12px' }}>
+        Output from slider is {value.join(', ')}
+      </Typography>
     </>
   )
 }
@@ -91,6 +86,7 @@ export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
   return (
     <>
       <Slider
+        aria-label="Range slider with a lot of steps"
         value={value}
         onChange={(
           event: ChangeEvent<HTMLInputElement>,
@@ -103,14 +99,11 @@ export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
         onChangeCommitted={(event, value) => {
           updateValueCommited(value as number[])
         }}
-        aria-label="Range slider with a lot of steps"
       />
-      <p style={{ marginTop: '12px' }}>
-        <Typography variant="caption">
-          Committed output from slider is{' '}
-          {valueCommited && valueCommited.join(', ')}
-        </Typography>
-      </p>
+      <Typography variant="caption" style={{ marginTop: '12px' }}>
+        Committed output from slider is{' '}
+        {valueCommited && valueCommited.join(', ')}
+      </Typography>
     </>
   )
 }
