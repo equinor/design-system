@@ -18,7 +18,11 @@ export default {
   decorators: [
     (Story) => {
       return (
-        <Stack direction="column" align="start" style={{ margin: '32px' }}>
+        <Stack
+          direction="column"
+          align="start"
+          style={{ margin: '32px', gap: '32px' }}
+        >
           <Story />
         </Stack>
       )
@@ -71,7 +75,7 @@ export const RangeSlider: Story<SliderProps> = () => {
         onChange={changeHandler}
         aria-label="Range slider"
       />
-      <Typography variant="caption" style={{ marginTop: '12px' }}>
+      <Typography variant="caption">
         Output from slider is {value.join(', ')}
       </Typography>
     </>
@@ -100,7 +104,7 @@ export const RangeSliderWithCommittedStep: Story<SliderProps> = () => {
           updateValueCommited(value as number[])
         }}
       />
-      <Typography variant="caption" style={{ marginTop: '12px' }}>
+      <Typography variant="caption">
         Committed output from slider is{' '}
         {valueCommited && valueCommited.join(', ')}
       </Typography>
