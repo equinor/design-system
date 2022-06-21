@@ -1,6 +1,7 @@
 import { useState, ChangeEvent } from 'react'
 import { Slider, SliderProps } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
+import { Stack } from './../../../.storybook/components'
 import page from './Slider.docs.mdx'
 
 export default {
@@ -18,9 +19,9 @@ export default {
   decorators: [
     (Story) => {
       return (
-        <div style={{ margin: '3em' }}>
+        <Stack direction="column" align="start" style={{ margin: '32px' }}>
           <Story />
-        </div>
+        </Stack>
       )
     },
   ],
