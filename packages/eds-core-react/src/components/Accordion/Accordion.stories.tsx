@@ -71,7 +71,7 @@ export const Introduction: Story<AccordionProps> = (args) => (
 
 export const Header: Story<AccordionProps> = () => {
   return (
-    <Wrapper>
+    <>
       <Accordion headerLevel="h3" chevronPosition="left">
         <Accordion.Item>
           <Accordion.Header>Chevron left</Accordion.Header>
@@ -207,9 +207,16 @@ export const Header: Story<AccordionProps> = () => {
           <Accordion.Panel>Content</Accordion.Panel>
         </Accordion.Item>
       </Accordion>
-    </Wrapper>
+    </>
   )
 }
+Header.decorators = [
+  (Story) => (
+    <Wrapper>
+      <Story />
+    </Wrapper>
+  ),
+]
 
 export const Compact: Story<AccordionProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
@@ -220,7 +227,7 @@ export const Compact: Story<AccordionProps> = () => {
   }, [density])
 
   return (
-    <Wrapper>
+    <>
       <EdsProvider density={density}>
         <Accordion>
           <Accordion.Item isExpanded>
@@ -237,6 +244,13 @@ export const Compact: Story<AccordionProps> = () => {
           </Accordion.Item>
         </Accordion>
       </EdsProvider>
-    </Wrapper>
+    </>
   )
 }
+Compact.decorators = [
+  (Story) => (
+    <Wrapper>
+      <Story />
+    </Wrapper>
+  ),
+]
