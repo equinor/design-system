@@ -7,23 +7,11 @@ import {
   Density,
   Progress,
 } from '../..'
-import styled from 'styled-components'
 import { Story, ComponentMeta } from '@storybook/react'
 import { menu } from '@equinor/eds-icons'
-import { Stack as SBStack } from './../../../.storybook/components'
+import { Stack } from './../../../.storybook/components'
 // import { Group } from '../Group'
 import page from './Button.docs.mdx'
-
-const Stack = styled(SBStack)`
-  display: grid;
-  grid-template-columns: repeat(4, fit-content(100%));
-`
-
-const FullWidthStack = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 16px;
-`
 
 export default {
   title: 'Inputs/Button',
@@ -42,32 +30,57 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
 } as ComponentMeta<typeof Button>
 
 export const Introduction: Story<ButtonProps> = (args) => (
-  <Stack>
-    <Button {...args}>You can control me</Button>
-  </Stack>
+  <Button {...args}>You can control me</Button>
 )
 Introduction.args = {
   as: undefined,
 }
+Introduction.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const Basic: Story<ButtonProps> = () => (
-  <Stack>
+  <>
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="ghost">Ghost</Button>
     <Button variant="ghost_icon">
       <Icon name="save" title="save action"></Icon>
     </Button>
-  </Stack>
+  </>
 )
+Basic.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const GhostIcon: Story<ButtonProps> = () => (
-  <Stack>
+  <>
     <Button variant="ghost_icon">
       <Icon name="save" title="save action"></Icon>
     </Button>
@@ -80,28 +93,64 @@ export const GhostIcon: Story<ButtonProps> = () => (
     <Button variant="ghost_icon" disabled>
       <Icon name="save" title="save"></Icon>
     </Button>
-  </Stack>
+  </>
 )
 GhostIcon.storyName = 'Ghost icon'
+GhostIcon.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const Color: Story<ButtonProps> = () => (
-  <Stack>
+  <>
     <Button color="primary">Primary</Button>
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
-  </Stack>
+  </>
 )
+Color.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const Hierarchy: Story<ButtonProps> = () => (
-  <Stack>
+  <>
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="ghost">Ghost</Button>
-  </Stack>
+  </>
 )
+Hierarchy.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const FileUpload: Story<ButtonProps> = () => (
-  <Stack>
+  <>
     <label htmlFor="file-upload">
       <input
         type="file"
@@ -111,12 +160,24 @@ export const FileUpload: Story<ButtonProps> = () => (
       />
       <Button as="span">Upload file</Button>
     </label>
-  </Stack>
+  </>
 )
 FileUpload.storyName = 'File upload'
+FileUpload.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const ProgressButton: Story<ButtonProps> = () => (
-  <Stack>
+  <>
     <Button>
       <Progress.Dots />
     </Button>
@@ -129,12 +190,24 @@ export const ProgressButton: Story<ButtonProps> = () => (
     <Button variant="ghost_icon">
       <Progress.Circular size={16} color="primary" />
     </Button>
-  </Stack>
+  </>
 )
 ProgressButton.storyName = 'Progress button'
+ProgressButton.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const All: Story<ButtonProps> = () => (
-  <Stack>
+  <>
     <Button>Primary</Button>
     <Button color="secondary">Secondary</Button>
     <Button color="danger">Danger</Button>
@@ -171,11 +244,23 @@ export const All: Story<ButtonProps> = () => (
     <Button variant="ghost_icon" disabled>
       <Icon name="save" title="save"></Icon>
     </Button>
-  </Stack>
+  </>
 )
+All.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 export const FullWidth: Story<ButtonProps> = () => (
-  <FullWidthStack>
+  <>
     <Button fullWidth>Primary</Button>
     <Button color="secondary" fullWidth>
       Secondary
@@ -213,9 +298,16 @@ export const FullWidth: Story<ButtonProps> = () => (
       Disabled
       <Icon name="save" title="save"></Icon>
     </Button>
-  </FullWidthStack>
+  </>
 )
 FullWidth.storyName = 'Full width'
+FullWidth.decorators = [
+  (Story) => (
+    <div style={{ margin: '32px', display: 'grid', gridGap: '16px' }}>
+      <Story />
+    </div>
+  ),
+]
 
 export const Compact: Story<ButtonProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
@@ -227,17 +319,29 @@ export const Compact: Story<ButtonProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Stack>
+      <>
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="ghost">Ghost</Button>
         <Button variant="ghost_icon">
           <Icon data={menu} title="Ghost icon menu"></Icon>
         </Button>
-      </Stack>
+      </>
     </EdsProvider>
   )
 }
+Compact.decorators = [
+  (Story) => (
+    <Stack
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, fit-content(100%))',
+      }}
+    >
+      <Story />
+    </Stack>
+  ),
+]
 
 // export const ButtonGroup: Story<ButtonProps> = () => (
 //   <Stack style={{ gridGap: 0 }}>

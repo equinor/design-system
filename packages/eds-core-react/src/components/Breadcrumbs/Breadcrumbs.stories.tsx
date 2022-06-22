@@ -20,7 +20,7 @@ export default {
   },
   decorators: [
     (Story) => (
-      <Stack style={{ margin: '32px' }}>
+      <Stack>
         <Story />
       </Stack>
     ),
