@@ -37,9 +37,9 @@ export default {
   },
 } as ComponentMeta<typeof Button>
 
-export const Introduction: Story<ButtonProps> = (args) => (
-  <Button {...args}>You can control me</Button>
-)
+export const Introduction: Story<ButtonProps> = (args) => {
+  return <Button {...args}>You can control me</Button>
+}
 Introduction.args = {
   as: undefined,
 }

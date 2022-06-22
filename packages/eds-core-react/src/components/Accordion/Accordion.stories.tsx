@@ -52,22 +52,24 @@ export default {
   },
 } as ComponentMeta<typeof Accordion>
 
-export const Introduction: Story<AccordionProps> = (args) => (
-  <Accordion {...args}>
-    <Accordion.Item isExpanded>
-      <Accordion.Header>Header 1</Accordion.Header>
-      <Accordion.Panel>Content 1</Accordion.Panel>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Header>Header 2</Accordion.Header>
-      <Accordion.Panel>Content 2</Accordion.Panel>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Header>Header 3</Accordion.Header>
-      <Accordion.Panel>Content 3</Accordion.Panel>
-    </Accordion.Item>
-  </Accordion>
-)
+export const Introduction: Story<AccordionProps> = (args) => {
+  return (
+    <Accordion {...args}>
+      <Accordion.Item isExpanded>
+        <Accordion.Header>Header 1</Accordion.Header>
+        <Accordion.Panel>Content 1</Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item>
+        <Accordion.Header>Header 2</Accordion.Header>
+        <Accordion.Panel>Content 2</Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item>
+        <Accordion.Header>Header 3</Accordion.Header>
+        <Accordion.Panel>Content 3</Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  )
+}
 
 export const Header: Story<AccordionProps> = () => {
   return (

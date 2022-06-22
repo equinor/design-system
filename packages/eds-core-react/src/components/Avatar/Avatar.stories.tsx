@@ -26,9 +26,9 @@ export default {
 
 const iconSize = 24
 
-export const Introduction: Story<AvatarProps> = (args) => (
-  <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} {...args} />
-)
+export const Introduction: Story<AvatarProps> = (args) => {
+  return <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} {...args} />
+}
 Introduction.decorators = [
   (Story) => {
     return (
