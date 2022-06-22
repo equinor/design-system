@@ -11,6 +11,7 @@ import {
 } from '../..'
 import { more_vertical, share, person_add, settings } from '@equinor/eds-icons'
 import { ComponentMeta, Story } from '@storybook/react'
+import { Stack } from './../../../.storybook/components'
 import page from './Card.docs.mdx'
 
 const icons = {
@@ -24,26 +25,9 @@ Icon.add(icons)
 
 const iconSize = 24
 
-const Wrapper = styled.div`
-  height: auto;
-  width: 100%;
-  padding: 32px;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: repeat(2, 320px);
-  align-items: start;
-  grid-gap: 32px 32px;
-  background: #ebebeb;
-`
-
 export default {
   title: 'Surfaces/Card',
   component: Card,
-  parameters: {
-    docs: {
-      page,
-    },
-  },
   subcomponents: {
     Header: Card.Header,
     HeaderTitle: Card.HeaderTitle,
@@ -51,45 +35,81 @@ export default {
     Media: Card.Media,
     Actions: Card.Actions,
   },
+  parameters: {
+    docs: {
+      page,
+      source: {
+        excludeDecorators: true,
+      },
+    },
+  },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack
+          style={{
+            height: 'auto',
+            width: '100%',
+            padding: '32px',
+            boxSizing: 'border-box',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 320px)',
+            gridGap: '32px 32px',
+            background: '#ebebeb',
+          }}
+        >
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Card>
 
-export const Introduction: Story<CardProps> = (args) => (
-  <Wrapper>
-    <Card {...args}>
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="h5">An interactive example</Typography>
-          <Typography variant="body_short">With some short content.</Typography>
-        </Card.HeaderTitle>
-        <Button variant="ghost_icon">
-          <Icon name="more_vertical" title="more action" size={iconSize}></Icon>
-        </Button>
-      </Card.Header>
-    </Card>
-    <Card {...args}>
-      <Card.Media fullWidth>
-        <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
-      </Card.Media>
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="h5">Another interactive example</Typography>
+export const Introduction: Story<CardProps> = (args) => {
+  return (
+    <>
+      <Card {...args}>
+        <Card.Header>
+          <Card.HeaderTitle>
+            <Typography variant="h5">An interactive example</Typography>
+            <Typography variant="body_short">
+              With some short content.
+            </Typography>
+          </Card.HeaderTitle>
+          <Button variant="ghost_icon">
+            <Icon
+              name="more_vertical"
+              title="more action"
+              size={iconSize}
+            ></Icon>
+          </Button>
+        </Card.Header>
+      </Card>
+      <Card {...args}>
+        <Card.Media fullWidth>
+          <img src="https://i.imgur.com/UM3mrju.jpg" alt="cat" />
+        </Card.Media>
+        <Card.Header>
+          <Card.HeaderTitle>
+            <Typography variant="h5">Another interactive example</Typography>
+            <Typography variant="body_short">
+              Unfortunately you cannot control children in storybook yet
+            </Typography>
+          </Card.HeaderTitle>
+        </Card.Header>
+        <Card.Content>
           <Typography variant="body_short">
-            Unfortunately you cannot control children in storybook yet
+            Leading images are full width, and go straight to the top - ignoring
+            spacings
           </Typography>
-        </Card.HeaderTitle>
-      </Card.Header>
-      <Card.Content>
-        <Typography variant="body_short">
-          Leading images are full width, and go straight to the top - ignoring
-          spacings
-        </Typography>
-      </Card.Content>
-    </Card>
-  </Wrapper>
-)
+        </Card.Content>
+      </Card>
+    </>
+  )
+}
 
 export const TypeOfCards: Story<CardProps> = () => (
-  <Wrapper>
+  <>
     <Card>
       <Card.Header>
         <Typography variant="h5">Default</Typography>
@@ -110,12 +130,12 @@ export const TypeOfCards: Story<CardProps> = () => (
         <Typography variant="h5">Danger</Typography>
       </Card.Header>
     </Card>
-  </Wrapper>
+  </>
 )
 TypeOfCards.storyName = 'Container variants'
 
 export const CardHeaderVariants: Story<CardProps> = () => (
-  <Wrapper>
+  <>
     <Card>
       <Card.Header>
         <Card.HeaderTitle>
@@ -221,7 +241,7 @@ export const CardHeaderVariants: Story<CardProps> = () => (
         </Button>
       </Card.Header>
     </Card>
-  </Wrapper>
+  </>
 )
 CardHeaderVariants.storyName = 'Header variants'
 
@@ -232,7 +252,7 @@ export const WithMedia: Story<CardProps> = () => {
     </Card.Media>
   )
   return (
-    <Wrapper>
+    <>
       <Card>
         <CardMediafullWidth />
         <Card.Header>
@@ -285,13 +305,13 @@ export const WithMedia: Story<CardProps> = () => {
           </Typography>
         </Card.Content>
       </Card>
-    </Wrapper>
+    </>
   )
 }
 WithMedia.storyName = 'With media'
 
 export const WithActions: Story<CardProps> = () => (
-  <Wrapper>
+  <>
     <Card>
       <Card.Header>
         <Card.HeaderTitle>
@@ -358,7 +378,7 @@ export const WithActions: Story<CardProps> = () => (
         </Button>
       </Card.Actions>
     </Card>
-  </Wrapper>
+  </>
 )
 WithActions.storyName = 'With actions'
 
@@ -369,7 +389,7 @@ export const WithDivider: Story<CardProps> = () => {
     margin-top: 16px;
   `
   return (
-    <Wrapper>
+    <>
       <Card>
         <Card.Header>
           <Card.HeaderTitle>
@@ -399,7 +419,7 @@ export const WithDivider: Story<CardProps> = () => {
           </Button>
         </Card.Actions>
       </Card>
-    </Wrapper>
+    </>
   )
 }
 WithDivider.storyName = 'With divider'
