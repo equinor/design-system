@@ -26,9 +26,8 @@ export default {
     (Story) => {
       return (
         <Stack
-          display="grid"
-          content="start"
           style={{
+            display: 'grid',
             gridGap: '32px',
             gridTemplateColumns: 'repeat(4, fit-content(100%))',
           }}
