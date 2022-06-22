@@ -1,13 +1,8 @@
-import styled from 'styled-components'
 import { Breadcrumbs, BreadcrumbsProps } from '../..'
 import { action } from '@storybook/addon-actions'
 import { ComponentMeta, Story } from '@storybook/react'
-import { Stack as SBStack } from './../../../.storybook/components'
+import { Stack } from './../../../.storybook/components'
 import page from './Breadcrumbs.docs.mdx'
-
-const Stack = styled(SBStack)`
-  margin: 42px;
-`
 
 export default {
   title: 'Navigation/Breadcrumbs',
@@ -18,8 +13,18 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => (
+      <Stack style={{ margin: '32px' }}>
+        <Story />
+      </Stack>
+    ),
+  ],
 } as ComponentMeta<typeof Breadcrumbs>
 
 const handleClick = (
@@ -32,7 +37,7 @@ const handleClick = (
 
 export const Introduction: Story<BreadcrumbsProps> = (args) => {
   return (
-    <Stack>
+    <>
       <Breadcrumbs {...args}>
         <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
           Label One
@@ -50,12 +55,12 @@ export const Introduction: Story<BreadcrumbsProps> = (args) => {
           Label Five
         </Breadcrumbs.Breadcrumb>
       </Breadcrumbs>
-    </Stack>
+    </>
   )
 }
 
 export const Normal: Story<BreadcrumbsProps> = () => (
-  <Stack>
+  <>
     <Breadcrumbs>
       <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Store
@@ -71,11 +76,11 @@ export const Normal: Story<BreadcrumbsProps> = () => (
         Apple
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
-  </Stack>
+  </>
 )
 
 export const Collapsed: Story<BreadcrumbsProps> = () => (
-  <Stack>
+  <>
     <Breadcrumbs collapse>
       <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Store
@@ -94,11 +99,11 @@ export const Collapsed: Story<BreadcrumbsProps> = () => (
         Apple Juice
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
-  </Stack>
+  </>
 )
 
 export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
-  <Stack>
+  <>
     <Breadcrumbs>
       <Breadcrumbs.Breadcrumb href="#" maxWidth={30} onClick={handleClick}>
         Store
@@ -115,12 +120,12 @@ export const TruncatedLabels: Story<BreadcrumbsProps> = () => (
         Apple
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
-  </Stack>
+  </>
 )
 TruncatedLabels.storyName = 'Truncated labels'
 
 export const Wrapped: Story<BreadcrumbsProps> = () => (
-  <Stack style={{ width: 300 }}>
+  <>
     <Breadcrumbs>
       <Breadcrumbs.Breadcrumb href="#" onClick={handleClick}>
         Label One
@@ -138,5 +143,12 @@ export const Wrapped: Story<BreadcrumbsProps> = () => (
         Label Five
       </Breadcrumbs.Breadcrumb>
     </Breadcrumbs>
-  </Stack>
+  </>
 )
+Wrapped.decorators = [
+  (Story) => (
+    <Stack style={{ width: '300px' }}>
+      <Story />
+    </Stack>
+  ),
+]
