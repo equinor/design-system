@@ -13,11 +13,8 @@ import { action } from '@storybook/addon-actions'
 import { useForm } from 'react-hook-form'
 import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
+import { Stack } from './../../../.storybook/components'
 import page from './Checkbox.docs.mdx'
-
-const Wrapper = styled(Checkbox)`
-  display: flex;
-`
 
 export default {
   title: 'Inputs/Selection Controls/Checkbox',
@@ -25,13 +22,25 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Checkbox>
 
-export const Introduction: Story<CheckboxProps> = (args) => (
-  <Checkbox label="Play with me" {...args} />
-)
+export const Introduction: Story<CheckboxProps> = (args) => {
+  return <Checkbox label="Play with me" {...args} />
+}
 
 export const SingleCheckbox: Story<CheckboxProps> = () => {
   // Use this to set the input to indeterminate = true as this must be done via JavaScript
@@ -131,6 +140,10 @@ export const WithFormsControl: Story<CheckboxProps> = () => {
     updateIsSubmitted(true)
     action('onSubmit')(data)
   }
+
+  const Wrapper = styled(Checkbox)`
+    display: flex;
+  `
 
   return (
     <div>
