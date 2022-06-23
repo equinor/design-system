@@ -11,14 +11,28 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
 } as ComponentMeta<typeof Input>
 
-export const Introduction: Story<InputProps> = (args) => <Input {...args} />
+export const Introduction: Story<InputProps> = (args) => {
+  return <Input {...args} />
+}
+Introduction.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ padding: '32px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Types: Story<InputProps> = () => (
-  <Stack>
+  <>
     <div>
       <Label htmlFor="textfield-normal" label="Normal" />
       <Input
@@ -55,11 +69,20 @@ export const Types: Story<InputProps> = () => (
       <Label htmlFor="textfield-email" label="Email" />
       <Input type="email" id="textfield-email" placeholder="Placeholder text" />
     </div>
-  </Stack>
+  </>
 )
+Types.decorators = [
+  (Story) => {
+    return (
+      <Stack>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Variants: Story<InputProps> = () => (
-  <Stack>
+  <>
     <div>
       <Label htmlFor="textfield-default" label="Default" />
       <Input
@@ -95,8 +118,17 @@ export const Variants: Story<InputProps> = () => (
         variant="error"
       />
     </div>
-  </Stack>
+  </>
 )
+Variants.decorators = [
+  (Story) => {
+    return (
+      <Stack>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Disabled: Story<InputProps> = () => (
   <>
