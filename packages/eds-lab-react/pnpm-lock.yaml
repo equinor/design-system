@@ -52,7 +52,6 @@ specifiers:
   react-fast-compare: 3.2.0
   react-hook-form: ^7.30.0
   react-is: ^18.1.0
-  react-popper: 2.2.5
   rollup: ^2.72.0
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-postcss: ^4.0.2
@@ -72,7 +71,6 @@ dependencies:
   downshift: 6.1.7_react@17.0.2
   react-datepicker: 4.7.0_sfoxds7t5ydpegc3knd667wn6m
   react-fast-compare: 3.2.0
-  react-popper: 2.2.5_ufxtanscm3hcgtxbdcfg2j6lma
 
 devDependencies:
   '@babel/cli': 7.17.10_@babel+core@7.17.10

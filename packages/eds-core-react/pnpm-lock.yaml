@@ -48,7 +48,6 @@ specifiers:
   react-fast-compare: 3.2.0
   react-hook-form: ^7.30.0
   react-is: ^18.1.0
-  react-popper: 2.2.5
   rollup: ^2.72.0
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-postcss: ^4.0.2
@@ -65,7 +64,6 @@ dependencies:
   '@popperjs/core': 2.9.2
   downshift: 6.1.7_react@17.0.2
   react-fast-compare: 3.2.0
-  react-popper: 2.2.5_ufxtanscm3hcgtxbdcfg2j6lma
 
 devDependencies:
   '@babel/cli': 7.17.10_@babel+core@7.17.10
@@ -10960,6 +10958,7 @@ packages:
       react: 17.0.2
       react-fast-compare: 3.2.0
       warning: 4.0.3
+    dev: true
 
   /react-refresh/0.11.0:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==}
@@ -11029,7 +11028,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-    dev: true
 
   /read-pkg-up/7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
@@ -12844,6 +12842,7 @@ packages:
     resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
     dependencies:
       loose-envify: 1.4.0
+    dev: true
 
   /watchpack-chokidar2/2.0.1:
     resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==}
