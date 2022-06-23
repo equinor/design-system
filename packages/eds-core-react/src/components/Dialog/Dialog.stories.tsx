@@ -30,8 +30,20 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Dialog>
 
 const Wrapper = styled.div`
@@ -40,16 +52,6 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(2, fit-content(100%));
   justify-content: end;
   justify-self: end;
-`
-
-const Placeholder = styled.div`
-  background: rgba(255, 146, 0, 0.15);
-  border: 1px dashed #ff9200;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 8px;
-  width: 100%;
-  display: inline-block;
 `
 
 const RadioWrapper = styled(Radio)`
@@ -66,7 +68,7 @@ export const Introduction: Story<DialogProps> = (args) => {
     updateArgs({ open: true })
   }
   return (
-    <Stack>
+    <>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -86,7 +88,7 @@ export const Introduction: Story<DialogProps> = (args) => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </Stack>
+    </>
   )
 }
 
@@ -99,7 +101,7 @@ export const Dismissable: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <Stack>
+    <>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -121,7 +123,7 @@ export const Dismissable: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </Stack>
+    </>
   )
 }
 
@@ -134,7 +136,7 @@ export const TextPlusAction: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <Stack>
+    <>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -154,7 +156,7 @@ export const TextPlusAction: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </Stack>
+    </>
   )
 }
 TextPlusAction.storyName = 'Text plus action'
@@ -167,8 +169,19 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
   const handleClose = () => {
     setIsOpen(false)
   }
+
+  const Placeholder = styled.div`
+    background: rgba(255, 146, 0, 0.15);
+    border: 1px dashed #ff9200;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    display: inline-block;
+  `
+
   return (
-    <Stack>
+    <>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -188,7 +201,7 @@ export const PlaceholderPlusAction: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </Stack>
+    </>
   )
 }
 PlaceholderPlusAction.storyName = 'Placeholder plus action'
@@ -202,7 +215,7 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <Stack>
+    <>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -215,7 +228,7 @@ export const PlaceholderOnly: Story<DialogProps> = () => {
           <RadioWrapper label="Up" defaultChecked name="second" />
         </Dialog.CustomContent>
       </Dialog>
-    </Stack>
+    </>
   )
 }
 PlaceholderOnly.storyName = 'Placeholder only'
@@ -229,7 +242,7 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <Stack>
+    <>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -254,7 +267,7 @@ export const ScrollablePlusActions: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </Stack>
+    </>
   )
 }
 ScrollablePlusActions.storyName = 'Scrollable plus actions'
@@ -268,7 +281,7 @@ export const NoTitle: Story<DialogProps> = () => {
     setIsOpen(false)
   }
   return (
-    <Stack>
+    <>
       <Button aria-haspopup="dialog" onClick={handleOpen}>
         Trigger Dialog
       </Button>
@@ -285,7 +298,7 @@ export const NoTitle: Story<DialogProps> = () => {
           </Wrapper>
         </Dialog.Actions>
       </Dialog>
-    </Stack>
+    </>
   )
 }
 NoTitle.storyName = 'No title'
@@ -306,30 +319,26 @@ export const Compact: Story<DialogProps> = () => {
   }, [density])
 
   return (
-    <Stack>
-      <EdsProvider density={density}>
-        <Button aria-haspopup="dialog" onClick={handleOpen}>
-          Trigger Dialog
-        </Button>
-        <Dialog open={isOpen}>
-          <Dialog.Header>
-            <Dialog.Title>Compact</Dialog.Title>
-          </Dialog.Header>
-          <Dialog.CustomContent>
-            <Typography variant="body_short">
-              Small description here.
-            </Typography>
-          </Dialog.CustomContent>
-          <Dialog.Actions>
-            <Wrapper>
-              <Button onClick={handleClose}>OK</Button>
-              <Button onClick={handleClose} variant="ghost">
-                Cancel
-              </Button>
-            </Wrapper>
-          </Dialog.Actions>
-        </Dialog>
-      </EdsProvider>
-    </Stack>
+    <EdsProvider density={density}>
+      <Button aria-haspopup="dialog" onClick={handleOpen}>
+        Trigger Dialog
+      </Button>
+      <Dialog open={isOpen}>
+        <Dialog.Header>
+          <Dialog.Title>Compact</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">Small description here.</Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Wrapper>
+            <Button onClick={handleClose}>OK</Button>
+            <Button onClick={handleClose} variant="ghost">
+              Cancel
+            </Button>
+          </Wrapper>
+        </Dialog.Actions>
+      </Dialog>
+    </EdsProvider>
   )
 }
