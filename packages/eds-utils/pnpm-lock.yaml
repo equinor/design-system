@@ -9,7 +9,7 @@ specifiers:
   '@babel/preset-typescript': ^7.16.7
   '@babel/runtime': ^7.17.9
   '@equinor/eds-tokens': workspace:*
-  '@popperjs/core': 2.9.2
+  '@popperjs/core': 2.11.5
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.0
   '@rollup/plugin-node-resolve': ^13.3.0
@@ -34,7 +34,7 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-is: ^18.1.0
-  react-popper: 2.2.5
+  react-popper: 2.3.0
   rollup: ^2.72.0
   rollup-plugin-delete: ^2.0.0
   styled-components: 5.3.5
@@ -45,8 +45,8 @@ specifiers:
 dependencies:
   '@babel/runtime': 7.17.9
   '@equinor/eds-tokens': link:../eds-tokens
-  '@popperjs/core': 2.9.2
-  react-popper: 2.2.5_ufxtanscm3hcgtxbdcfg2j6lma
+  '@popperjs/core': 2.11.5
+  react-popper: 2.3.0_kz2vxbzpsgxv356x2ucg6oykdm
 
 devDependencies:
   '@babel/cli': 7.17.10_@babel+core@7.17.10
@@ -1701,8 +1701,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@popperjs/core/2.9.2:
-    resolution: {integrity: sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==}
+  /@popperjs/core/2.11.5:
+    resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
     dev: false
 
   /@rollup/plugin-babel/5.3.1_wkwocc4dsk7bd65om3dnrhmmbq:
@@ -4201,7 +4201,6 @@ packages:
   /object-assign/4.1.1:
     resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /object-keys/1.1.1:
     resolution: {integrity: sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==}
@@ -4415,7 +4414,6 @@ packages:
       object-assign: 4.1.1
       react: 17.0.2
       scheduler: 0.20.2
-    dev: true
 
   /react-error-boundary/3.1.4_react@17.0.2:
     resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
@@ -4443,14 +4441,16 @@ packages:
     resolution: {integrity: sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==}
     dev: true
 
-  /react-popper/2.2.5_ufxtanscm3hcgtxbdcfg2j6lma:
-    resolution: {integrity: sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==}
+  /react-popper/2.3.0_kz2vxbzpsgxv356x2ucg6oykdm:
+    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
     peerDependencies:
       '@popperjs/core': ^2.0.0
-      react: ^16.8.0 || ^17
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: ^16.8.0 || ^17 || ^18
     dependencies:
-      '@popperjs/core': 2.9.2
+      '@popperjs/core': 2.11.5
       react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
       react-fast-compare: 3.2.0
       warning: 4.0.3
     dev: false
@@ -4461,7 +4461,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-    dev: true
 
   /readdirp/3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
@@ -4606,7 +4605,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-    dev: true
 
   /schema-utils/2.7.1:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
