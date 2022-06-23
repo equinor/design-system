@@ -29,14 +29,10 @@ import {
   waves,
 } from '@equinor/eds-icons'
 import { ComponentMeta, Story } from '@storybook/react'
-import { Stack as SBStack } from './../../../.storybook/components'
+import { Stack } from './../../../.storybook/components'
 import page from './Popover.docs.mdx'
 
 const { Title, Content, Header, Actions } = Popover
-
-const Stack = styled(SBStack)({
-  margin: '10rem',
-})
 
 export default {
   title: 'Data Display/Popover',
@@ -50,6 +46,9 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
 } as ComponentMeta<typeof Popover>
@@ -74,7 +73,7 @@ export const Introduction: Story<PopoverProps> = (args) => {
   }, [args.open])
 
   return (
-    <Stack>
+    <>
       <Button
         aria-haspopup
         id="default-popover-anchor"
@@ -103,9 +102,18 @@ export const Introduction: Story<PopoverProps> = (args) => {
           <Button onClick={handleClose}>OK</Button>
         </Popover.Actions>
       </Popover>
-    </Stack>
+    </>
   )
 }
+Introduction.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ margin: '160px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const ActivateOnClick: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -115,7 +123,7 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <Stack>
+    <>
       <Button
         id="click-popover-anchor"
         aria-controls="click-popover"
@@ -142,10 +150,19 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
           <Button onClick={closePopover}>OK</Button>
         </Popover.Actions>
       </Popover>
-    </Stack>
+    </>
   )
 }
 ActivateOnClick.storyName = 'Activate onClick'
+ActivateOnClick.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ margin: '160px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const ActivateOnHover: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -167,7 +184,7 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
   }
 
   return (
-    <Stack>
+    <>
       <Button
         id="hover-popover-anchor"
         aria-controls="hover-popover"
@@ -197,10 +214,19 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
           <Button onClick={handleClose}>OK</Button>
         </Popover.Actions>
       </Popover>
-    </Stack>
+    </>
   )
 }
 ActivateOnHover.storyName = 'Activate onHover'
+ActivateOnHover.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ margin: '160px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const WithTooltip: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -210,7 +236,7 @@ export const WithTooltip: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <Stack>
+    <>
       <Tooltip title="Menu">
         <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={more_vertical} />
@@ -227,9 +253,18 @@ export const WithTooltip: Story<PopoverProps> = () => {
         </Popover.Header>
         <Popover.Content>Content</Popover.Content>
       </Popover>
-    </Stack>
+    </>
   )
 }
+WithTooltip.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ margin: '160px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const WithCloseButton: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -239,7 +274,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <Stack>
+    <>
       <Button
         id="click-popover-anchor"
         aria-controls="click-popover"
@@ -271,10 +306,19 @@ export const WithCloseButton: Story<PopoverProps> = () => {
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
       </Popover>
-    </Stack>
+    </>
   )
 }
 WithCloseButton.storyName = 'With close button'
+WithCloseButton.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ margin: '160px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Compact: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -292,37 +336,44 @@ export const Compact: Story<PopoverProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Stack>
-        <Button
-          id="click-popover-anchor"
-          aria-controls="click-popover"
-          ref={anchorRef}
-          onClick={openPopover}
-        >
-          Click to activate
-        </Button>
+      <Button
+        id="click-popover-anchor"
+        aria-controls="click-popover"
+        ref={anchorRef}
+        onClick={openPopover}
+      >
+        Click to activate
+      </Button>
 
-        <Popover
-          id="click-popover"
-          aria-expanded={isOpen}
-          anchorEl={anchorRef.current}
-          onClose={closePopover}
-          open={isOpen}
-        >
-          <Popover.Header>
-            <Popover.Title>Title</Popover.Title>
-          </Popover.Header>
-          <Popover.Content>
-            <Typography variant="body_short">Content</Typography>
-          </Popover.Content>
-          <Popover.Actions>
-            <Button onClick={closePopover}>OK</Button>
-          </Popover.Actions>
-        </Popover>
-      </Stack>
+      <Popover
+        id="click-popover"
+        aria-expanded={isOpen}
+        anchorEl={anchorRef.current}
+        onClose={closePopover}
+        open={isOpen}
+      >
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
+        </Popover.Header>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
+        <Popover.Actions>
+          <Button onClick={closePopover}>OK</Button>
+        </Popover.Actions>
+      </Popover>
     </EdsProvider>
   )
 }
+Compact.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ margin: '160px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const AppLauncher: Story<PopoverProps> = () => {
   const Wrapper = styled.div`
@@ -354,7 +405,7 @@ export const AppLauncher: Story<PopoverProps> = () => {
   const closePopover = () => setIsOpen(false)
 
   return (
-    <Stack style={{ margin: '0 0 32rem 0' }}>
+    <>
       <Tooltip title="App Launcher">
         <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={apps} />
@@ -443,7 +494,16 @@ export const AppLauncher: Story<PopoverProps> = () => {
           </Wrapper>
         </Popover.Content>
       </Popover>
-    </Stack>
+    </>
   )
 }
 AppLauncher.storyName = 'App launcher'
+AppLauncher.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ margin: '0 0 512px 0' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
