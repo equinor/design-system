@@ -36,8 +36,20 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Menu>
 
 const onClick = (event: React.MouseEvent) => {
@@ -63,7 +75,7 @@ export const Introduction: Story<MenuProps> = (args) => {
   }, [args.open])
 
   return (
-    <Stack>
+    <>
       <Button
         ref={setAnchorEl}
         id="anchor-default"
@@ -86,7 +98,7 @@ export const Introduction: Story<MenuProps> = (args) => {
         <Menu.Item onClick={onClick}>Bearing</Menu.Item>
         <Menu.Item onClick={onClick}>Cable</Menu.Item>
       </Menu>
-    </Stack>
+    </>
   )
 }
 Introduction.bind({})
@@ -106,7 +118,7 @@ export const Complex: Story<MenuProps> = () => {
   }
 
   return (
-    <Stack>
+    <>
       <Button
         ref={setAnchorEl}
         id="anchor-complex"
@@ -229,7 +241,7 @@ export const Complex: Story<MenuProps> = () => {
           </Menu.Item>
         </Menu.Section>
       </Menu>
-    </Stack>
+    </>
   )
 }
 
@@ -253,31 +265,29 @@ export const Compact: Story<MenuProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Stack>
-        <Button
-          ref={setAnchorEl}
-          id="anchor-compact"
-          aria-haspopup="true"
-          aria-expanded={isOpen}
-          aria-controls="menu-compact"
-          onClick={() => (isOpen ? closeMenu() : openMenu())}
+      <Button
+        ref={setAnchorEl}
+        id="anchor-compact"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-controls="menu-compact"
+        onClick={() => (isOpen ? closeMenu() : openMenu())}
+      >
+        Click to open Menu!
+      </Button>
+      <EdsProvider density="compact">
+        <Menu
+          open={isOpen}
+          id="menu-compact"
+          aria-labelledby="anchor-compact"
+          onClose={closeMenu}
+          anchorEl={anchorEl}
         >
-          Click to open Menu!
-        </Button>
-        <EdsProvider density="compact">
-          <Menu
-            open={isOpen}
-            id="menu-compact"
-            aria-labelledby="anchor-compact"
-            onClose={closeMenu}
-            anchorEl={anchorEl}
-          >
-            <Menu.Item onClick={onClick}>Pressure</Menu.Item>
-            <Menu.Item onClick={onClick}>Bearing</Menu.Item>
-            <Menu.Item onClick={onClick}>Cable</Menu.Item>
-          </Menu>
-        </EdsProvider>
-      </Stack>
+          <Menu.Item onClick={onClick}>Pressure</Menu.Item>
+          <Menu.Item onClick={onClick}>Bearing</Menu.Item>
+          <Menu.Item onClick={onClick}>Cable</Menu.Item>
+        </Menu>
+      </EdsProvider>
     </EdsProvider>
   )
 }
