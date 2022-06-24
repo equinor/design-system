@@ -3,6 +3,7 @@ import { Switch, SwitchProps, EdsProvider, Table, Density } from '../..'
 import styled from 'styled-components'
 import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
+import { Stack } from './../../../.storybook/components'
 import page from './Switch.docs.mdx'
 
 const UnstyledList = styled.ul`
@@ -17,13 +18,25 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Switch>
 
-export const Introduction: Story<SwitchProps> = (args) => (
-  <Switch label="Play with me" {...args} />
-)
+export const Introduction: Story<SwitchProps> = (args) => {
+  return <Switch label="Play with me" {...args} />
+}
 
 export const DefaultStates: Story<SwitchProps> = () => {
   const [check, setCheck] = useState(false)
