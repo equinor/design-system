@@ -45,12 +45,7 @@ Introduction.args = {
 }
 Introduction.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
@@ -68,12 +63,7 @@ export const Basic: Story<ButtonProps> = () => (
 )
 Basic.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
@@ -98,12 +88,7 @@ export const GhostIcon: Story<ButtonProps> = () => (
 GhostIcon.storyName = 'Ghost icon'
 GhostIcon.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
@@ -118,12 +103,7 @@ export const Color: Story<ButtonProps> = () => (
 )
 Color.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
@@ -138,39 +118,22 @@ export const Hierarchy: Story<ButtonProps> = () => (
 )
 Hierarchy.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
 ]
 
 export const FileUpload: Story<ButtonProps> = () => (
-  <>
-    <label htmlFor="file-upload">
-      <input
-        type="file"
-        id="file-upload"
-        style={{ display: 'none' }}
-        multiple
-      />
-      <Button as="span">Upload file</Button>
-    </label>
-  </>
+  <label htmlFor="file-upload">
+    <input type="file" id="file-upload" style={{ display: 'none' }} multiple />
+    <Button as="span">Upload file</Button>
+  </label>
 )
 FileUpload.storyName = 'File upload'
 FileUpload.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
@@ -195,12 +158,7 @@ export const ProgressButton: Story<ButtonProps> = () => (
 ProgressButton.storyName = 'Progress button'
 ProgressButton.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
@@ -319,25 +277,18 @@ export const Compact: Story<ButtonProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <>
-        <Button>Contained</Button>
-        <Button variant="outlined">Outlined</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button variant="ghost_icon">
-          <Icon data={menu} title="Ghost icon menu"></Icon>
-        </Button>
-      </>
+      <Button>Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="ghost_icon">
+        <Icon data={menu} title="Ghost icon menu"></Icon>
+      </Button>
     </EdsProvider>
   )
 }
 Compact.decorators = [
   (Story) => (
-    <Stack
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, fit-content(100%))',
-      }}
-    >
+    <Stack>
       <Story />
     </Stack>
   ),
