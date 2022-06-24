@@ -11,10 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 📝 App launcher documentation by @martalalik in https://github.com/equinor/design-system/pull/2303
 
-### Changed
-
-- ⬆️ Upgrade popperjs dependencies by @mimarz in https://github.com/equinor/design-system/pull/2347
-
 ### Fixed
 
 - 🐛 Using `Icon` `data` should work properly if `size` is not defined by @mimarz in https://github.com/equinor/design-system/pull/2327
