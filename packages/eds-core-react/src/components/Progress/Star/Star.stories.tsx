@@ -1,15 +1,9 @@
-import styled from 'styled-components'
 import { useState, useEffect, useRef } from 'react'
 import { Progress, StarProgressProps, Button } from '../../..'
 import { ComponentMeta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
-import { Stack as SBStack } from './../../../../.storybook/components'
+import { Stack } from './../../../../.storybook/components'
 import page from './Star.docs.mdx'
-
-const Stack = styled(SBStack)`
-  padding: 32px;
-  grid-template-columns: repeat(5, fit-content(100%));
-`
 
 export default {
   title: 'Feedback/Progress Indicators/Star',
@@ -17,44 +11,49 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack
+          style={{
+            padding: '32px',
+            gridTemplateColumns: 'repeat(5, fit-content(100%)',
+          }}
+        >
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Progress.Star>
 
 export const Introduction: Story<StarProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
-  return (
-    <Stack>
-      <Progress.Star value={progress} {...args} />
-    </Stack>
-  )
+  return <Progress.Star value={progress} {...args} />
 }
 
-export const Indeterminate: Story<StarProgressProps> = () => (
-  <Stack>
-    <Progress.Star />
-  </Stack>
-)
+export const Indeterminate: Story<StarProgressProps> = () => <Progress.Star />
 
 export const Determinate: Story<StarProgressProps> = () => {
   const progress = useMockProgress(0)
-  return (
-    <Stack>
-      <Progress.Star value={progress} variant="determinate" />{' '}
-    </Stack>
-  )
+  return <Progress.Star value={progress} variant="determinate" />
 }
 
 export const Sizes: Story<StarProgressProps> = () => (
-  <Stack>
+  <>
     <Progress.Star size={16} />
     <Progress.Star size={24} />
     <Progress.Star size={32} />
     <Progress.Star size={40} />
     <Progress.Star size={48} />
-  </Stack>
+  </>
 )
 
 export const Accessibility: Story<StarProgressProps> = () => {
@@ -81,7 +80,7 @@ export const Accessibility: Story<StarProgressProps> = () => {
     }, 6000)
   }
   return (
-    <Stack aria-live="assertive">
+    <div aria-live="assertive">
       {isLoading ? (
         <Progress.Star size={48} aria-label="Loading star accessibility test" />
       ) : (
@@ -93,6 +92,6 @@ export const Accessibility: Story<StarProgressProps> = () => {
           Click to load
         </Button>
       )}
-    </Stack>
+    </div>
   )
 }
