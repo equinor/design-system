@@ -86,8 +86,8 @@
   "dependencies": {
     "@babel/runtime": "^7.17.9",
     "@equinor/eds-tokens": "workspace:*",
-    "@popperjs/core": "2.9.2",
-    "react-popper": "2.2.5"
+    "@popperjs/core": "2.11.5",
+    "react-popper": "2.3.0"
   },
   "engines": {
     "pnpm": ">=4",

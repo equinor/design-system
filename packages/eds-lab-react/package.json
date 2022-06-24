@@ -109,8 +109,7 @@
     "date-fns": "^2.28.0",
     "downshift": "^6.1.7",
     "react-datepicker": "^4.7.0",
-    "react-fast-compare": "3.2.0",
-    "react-popper": "2.2.5"
+    "react-fast-compare": "3.2.0"
   },
   "engines": {
     "pnpm": ">=4",

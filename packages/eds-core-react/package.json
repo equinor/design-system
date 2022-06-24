@@ -104,8 +104,7 @@
     "@equinor/eds-utils": "workspace:*",
     "@popperjs/core": "2.9.2",
     "downshift": "^6.1.7",
-    "react-fast-compare": "3.2.0",
-    "react-popper": "2.2.5"
+    "react-fast-compare": "3.2.0"
   },
   "engines": {
     "pnpm": ">=4",
