@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.4] - 2022-06-24
+
+### Added
+
+- 📝 App launcher documentation by @martalalik in https://github.com/equinor/design-system/pull/2303
+
+### Changed
+
+- ⬆️ Upgrade popperjs dependencies by @mimarz in https://github.com/equinor/design-system/pull/2347
+
+### Fixed
+
+- 🐛 Using Icon data should work properly if `size` is not defined by @mimarz in https://github.com/equinor/design-system/pull/2327
+- 🐛 Fixed TextField `style` prop being sent container and inner input by @mimarz in https://github.com/equinor/design-system/pull/2337
+
 ## [0.20.3] - 2022-06-20
 
 ### Added
