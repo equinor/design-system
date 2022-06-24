@@ -17,8 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- 🐛 Using Icon data should work properly if `size` is not defined by @mimarz in https://github.com/equinor/design-system/pull/2327
-- 🐛 Fixed TextField `style` prop being sent container and inner input by @mimarz in https://github.com/equinor/design-system/pull/2337
+- 🐛 Using `Icon` `data` should work properly if `size` is not defined by @mimarz in https://github.com/equinor/design-system/pull/2327
+- 🐛 Fixed `TextField` `style` prop being sent container and inner input by @mimarz in https://github.com/equinor/design-system/pull/2337
+- 🐛 Fixed `Autocomplete` `onOptionsChange` when not controlled & cleaned up react hooks form example by @mimarz in https://github.com/equinor/design-system/pull/2335
 
 ## [0.20.3] - 2022-06-20
 
