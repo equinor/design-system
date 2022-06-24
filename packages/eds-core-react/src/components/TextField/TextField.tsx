@@ -75,6 +75,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       inputIcon,
       helperIcon,
       rowsMax,
+      style,
       ...other
     },
     ref,
@@ -105,7 +106,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     const containerProps = {
       ref,
       className,
-      style: other.style,
+      style,
     }
 
     const labelProps = {
