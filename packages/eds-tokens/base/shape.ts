@@ -84,8 +84,8 @@ export const shape = {
     borderRadius: '4px',
   },
   icon_button: {
-    minHeight: '48px',
-    minWidth: '48px',
+    minHeight: '40px',
+    minWidth: '40px',
     borderRadius: '100px',
   },
   field: {
