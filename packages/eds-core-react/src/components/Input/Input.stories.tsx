@@ -16,6 +16,15 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Input>
 
 export const Introduction: Story<InputProps> = (args) => {
@@ -24,7 +33,7 @@ export const Introduction: Story<InputProps> = (args) => {
 Introduction.decorators = [
   (Story) => {
     return (
-      <Stack style={{ padding: '32px' }}>
+      <Stack direction="column" align="start">
         <Story />
       </Stack>
     )
@@ -71,15 +80,6 @@ export const Types: Story<InputProps> = () => (
     </div>
   </>
 )
-Types.decorators = [
-  (Story) => {
-    return (
-      <Stack>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Variants: Story<InputProps> = () => (
   <>
@@ -120,15 +120,6 @@ export const Variants: Story<InputProps> = () => (
     </div>
   </>
 )
-Variants.decorators = [
-  (Story) => {
-    return (
-      <Stack>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Disabled: Story<InputProps> = () => (
   <>
@@ -136,6 +127,15 @@ export const Disabled: Story<InputProps> = () => (
     <Input id="textfield-disabled" placeholder="Placeholder text" disabled />
   </>
 )
+Disabled.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="start">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const ReadOnly: Story<InputProps> = () => (
   <>
@@ -144,6 +144,15 @@ export const ReadOnly: Story<InputProps> = () => (
   </>
 )
 ReadOnly.storyName = 'Read only'
+ReadOnly.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="start">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Accessiblity: Story<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
@@ -154,6 +163,15 @@ export const Accessiblity: Story<InputProps> = () => {
     </>
   )
 }
+Accessiblity.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="start">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Compact: Story<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
@@ -171,3 +189,12 @@ export const Compact: Story<InputProps> = () => {
     </EdsProvider>
   )
 }
+Compact.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="start">
+        <Story />
+      </Stack>
+    )
+  },
+]
