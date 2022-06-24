@@ -22,6 +22,15 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Avatar>
 
 const iconSize = 24
@@ -29,15 +38,6 @@ const iconSize = 24
 export const Introduction: Story<AvatarProps> = (args) => {
   return <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} {...args} />
 }
-Introduction.decorators = [
-  (Story) => {
-    return (
-      <Stack>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Size: Story<AvatarProps> = () => (
   <>
@@ -48,35 +48,15 @@ export const Size: Story<AvatarProps> = () => (
     <Avatar src={'https://i.imgur.com/UM3mrju.jpg'} size={48} alt="avatar" />
   </>
 )
-Size.decorators = [
-  (Story) => {
-    return (
-      <Stack>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Disabled: Story<AvatarProps> = () => (
-  <>
-    <Avatar
-      src={'https://i.imgur.com/UM3mrju.jpg'}
-      disabled
-      size={48}
-      alt="avatar"
-    />
-  </>
+  <Avatar
+    src={'https://i.imgur.com/UM3mrju.jpg'}
+    disabled
+    size={48}
+    alt="avatar"
+  />
 )
-Disabled.decorators = [
-  (Story) => {
-    return (
-      <Stack>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Context: Story<AvatarProps> = () => (
   <>
