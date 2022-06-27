@@ -13,7 +13,12 @@ import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
 
 type Colors = 'primary' | 'secondary' | 'danger'
-type Variants = 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
+type Variants =
+  | 'contained'
+  | 'contained_icon'
+  | 'outlined'
+  | 'ghost'
+  | 'ghost_icon'
 
 const getVariant = (
   tokenSet: ButtonTokenSet,
@@ -26,6 +31,8 @@ const getVariant = (
       return tokenSet.ghost_icon
     case 'outlined':
       return tokenSet.outlined
+    case 'contained_icon':
+      return tokenSet.contained_icon
     case 'contained':
     default:
       return tokenSet.contained
@@ -139,9 +146,9 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
 
 export type ButtonProps = {
   /**  Specifies color */
-  color?: 'primary' | 'secondary' | 'danger'
+  color?: Colors
   /** Specifies which variant to use */
-  variant?: 'contained' | 'outlined' | 'ghost' | 'ghost_icon'
+  variant?: Variants
   /**
    * URL link destination
    * If defined, an 'a' element is used as root instead of 'button'

@@ -9,7 +9,7 @@ import {
 } from '../..'
 import styled from 'styled-components'
 import { Story, ComponentMeta } from '@storybook/react'
-import { menu } from '@equinor/eds-icons'
+import { menu, add, save } from '@equinor/eds-icons'
 import { Stack as SBStack } from './../../../.storybook/components'
 // import { Group } from '../Group'
 import page from './Button.docs.mdx'
@@ -58,31 +58,46 @@ Introduction.args = {
 export const Basic: Story<ButtonProps> = () => (
   <Stack>
     <Button>Contained</Button>
+    <Button variant="contained_icon" aria-label="add action">
+      <Icon data={add}></Icon>
+    </Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="ghost">Ghost</Button>
-    <Button variant="ghost_icon">
-      <Icon name="save" title="save action"></Icon>
+    <Button variant="ghost_icon" aria-label="save action">
+      <Icon data={save}></Icon>
     </Button>
   </Stack>
 )
 
-export const GhostIcon: Story<ButtonProps> = () => (
+export const IconButton: Story<ButtonProps> = () => (
   <Stack>
-    <Button variant="ghost_icon">
-      <Icon name="save" title="save action"></Icon>
+    <Button variant="ghost_icon" aria-label="save action">
+      <Icon data={save}></Icon>
     </Button>
-    <Button variant="ghost_icon" color="secondary">
-      <Icon name="save" title="save"></Icon>
+    <Button variant="ghost_icon" color="secondary" aria-label="save action">
+      <Icon data={save}></Icon>
     </Button>
-    <Button variant="ghost_icon" color="danger">
-      <Icon name="save" title="save"></Icon>
+    <Button variant="ghost_icon" color="danger" aria-label="save action">
+      <Icon data={save}></Icon>
     </Button>
-    <Button variant="ghost_icon" disabled>
-      <Icon name="save" title="save"></Icon>
+    <Button variant="ghost_icon" disabled aria-label="save action">
+      <Icon data={save}></Icon>
+    </Button>
+    <Button variant="contained_icon" aria-label="add action">
+      <Icon data={add}></Icon>
+    </Button>
+    <Button variant="contained_icon" color="secondary" aria-label="add action">
+      <Icon data={add}></Icon>
+    </Button>
+    <Button variant="contained_icon" color="danger" aria-label="add action">
+      <Icon data={add}></Icon>
+    </Button>
+    <Button variant="contained_icon" disabled aria-label="add action">
+      <Icon data={add}></Icon>
     </Button>
   </Stack>
 )
-GhostIcon.storyName = 'Ghost icon'
+IconButton.storyName = 'Ghost icon'
 
 export const Color: Story<ButtonProps> = () => (
   <Stack>
@@ -159,17 +174,29 @@ export const All: Story<ButtonProps> = () => (
     <Button variant="ghost" disabled>
       Disabled
     </Button>
-    <Button variant="ghost_icon">
+    <Button variant="ghost_icon" aria-label="save action">
       <Icon name="save" title="save action"></Icon>
     </Button>
-    <Button variant="ghost_icon" color="secondary">
-      <Icon name="save" title="save"></Icon>
+    <Button variant="ghost_icon" color="secondary" aria-label="save action">
+      <Icon data={save}></Icon>
     </Button>
-    <Button variant="ghost_icon" color="danger">
-      <Icon name="save" title="save"></Icon>
+    <Button variant="ghost_icon" color="danger" aria-label="save action">
+      <Icon data={save}></Icon>
     </Button>
-    <Button variant="ghost_icon" disabled>
-      <Icon name="save" title="save"></Icon>
+    <Button variant="ghost_icon" disabled aria-label="save action">
+      <Icon data={save}></Icon>
+    </Button>
+    <Button variant="contained_icon" aria-label="add action">
+      <Icon data={add}></Icon>
+    </Button>
+    <Button variant="contained_icon" color="secondary" aria-label="add action">
+      <Icon data={add}></Icon>
+    </Button>
+    <Button variant="contained_icon" color="danger" aria-label="add action">
+      <Icon data={add}></Icon>
+    </Button>
+    <Button variant="contained_icon" disabled aria-label="add action">
+      <Icon data={add}></Icon>
     </Button>
   </Stack>
 )
@@ -187,31 +214,31 @@ export const FullWidth: Story<ButtonProps> = () => (
       Disabled
     </Button>
     <Button fullWidth>
-      <Icon name="save" title="save"></Icon>Primary
+      <Icon data={save}></Icon>Primary
     </Button>
     <Button color="secondary" fullWidth>
-      <Icon name="save" title="save"></Icon>Secondary
+      <Icon data={save}></Icon>Secondary
     </Button>
     <Button color="danger" fullWidth>
-      <Icon name="save" title="save"></Icon>Danger
+      <Icon data={save}></Icon>Danger
     </Button>
     <Button disabled fullWidth>
-      <Icon name="save" title="save"></Icon>Disabled
+      <Icon data={save}></Icon>Disabled
     </Button>
     <Button fullWidth>
-      Primary <Icon name="save" title="save"></Icon>
+      Primary <Icon data={save}></Icon>
     </Button>
     <Button color="secondary" fullWidth>
       Secondary
-      <Icon name="save" title="save"></Icon>
+      <Icon data={save}></Icon>
     </Button>
     <Button color="danger" fullWidth>
       Danger
-      <Icon name="save" title="save"></Icon>
+      <Icon data={save}></Icon>
     </Button>
     <Button disabled fullWidth>
       Disabled
-      <Icon name="save" title="save"></Icon>
+      <Icon data={save}></Icon>
     </Button>
   </FullWidthStack>
 )
