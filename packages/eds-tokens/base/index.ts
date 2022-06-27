@@ -3,8 +3,8 @@ import { colors } from './colors'
 import { elevation } from './elevation'
 import { interactions } from './interactions'
 import { shape } from './shape'
-import { spacings } from './spacings'
 import { typography } from './typography'
+import { spacings } from './spacings'
 
 export const tokens = {
   clickbounds,
@@ -12,6 +12,6 @@ export const tokens = {
   elevation,
   interactions,
   shape,
-  spacings,
   typography,
+  spacings,
 }

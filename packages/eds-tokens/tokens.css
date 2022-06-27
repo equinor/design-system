@@ -115,8 +115,8 @@
   --eds_shape_corners_min_width: 36px;
   --eds_shape_corners_border_radius: 4px;
 
-  --eds_shape_icon_button_min_height: 48px;
-  --eds_shape_icon_button_min_width: 48px;
+  --eds_shape_icon_button_min_height: 40px;
+  --eds_shape_icon_button_min_width: 40px;
   --eds_shape_icon_button_border_radius: 100px;
 
   --eds_shape_field_min_height: 56px;
@@ -127,6 +127,8 @@
 
   --eds_shape_caret_min_height: 8px;
   --eds_shape_caret_min_width: 8px;
+  font-size:16px;
+  font-family: Equinor;
 
   --eds_spacing_xxx_large: 48px;
   --eds_spacing_xx_large: 40px;
@@ -138,6 +140,4 @@
   --eds_spacing_x_small: 4px;
   --eds_spacing_xx_small: 2px;
 
-  font-size:16px;
-  font-family: Equinor;
 }
