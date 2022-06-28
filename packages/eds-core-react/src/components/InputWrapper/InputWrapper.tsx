@@ -1,6 +1,8 @@
-import { HTMLAttributes, forwardRef } from 'react'
+import { HTMLAttributes, forwardRef, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import { Label } from '../Label'
+import { HelperText } from './HelperText'
+import { Icon } from '../Icon'
 import { useEds } from './../EdsProvider'
 
 export const Box = styled.div`
@@ -22,7 +24,7 @@ const Unit = styled.span<UnitType>`
   margin-top: 3px;
 `
 
-const Adornments = styled.div`
+export const Adornments = styled.div`
   display: flex;
   justify-content: center;
   height: 100%;
@@ -36,14 +38,26 @@ export type InputWrapperProps = {
   meta: string
   /** Disabled state */
   disabled?: boolean
-
   /** Read Only */
   readOnly?: boolean
+  /** Helper text icon */
+  helperIcon?: typeof Icon
+  /** Helper text */
+  helperText?: string
 } & HTMLAttributes<HTMLDivElement>
 
 export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
   function InputWrapper(
-    { disabled, readOnly, label, meta, children, ...other },
+    {
+      disabled,
+      readOnly,
+      label,
+      meta,
+      children,
+      helperIcon,
+      helperText,
+      ...other
+    },
     ref,
   ) {
     const { density } = useEds()
@@ -52,6 +66,7 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
       <Box {...other} ref={ref}>
         <Label label={label} meta={meta} />
         {children}
+        <HelperText icon={helperIcon} text={helperText}></HelperText>
       </Box>
     )
   },

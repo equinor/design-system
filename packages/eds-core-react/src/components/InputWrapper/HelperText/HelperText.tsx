@@ -35,6 +35,10 @@ type HelperTextProps = {
 
 const TextfieldHelperText = forwardRef<HTMLDivElement, HelperTextProps>(
   function TextfieldHelperText({ text, icon, ...rest }, ref) {
+    if (!text) {
+      return null
+    }
+
     return (
       <Container ref={ref} {...rest}>
         {icon && <Icon size={16}>{icon}</Icon>}
