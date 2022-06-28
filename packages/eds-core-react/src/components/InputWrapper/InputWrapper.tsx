@@ -1,19 +1,14 @@
-import { ReactNode, forwardRef } from 'react'
+import { HTMLAttributes, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { Label } from '../Label'
 import { useEds } from './../EdsProvider'
 
-type InputWrapperType = {
-  isFocused?: boolean
-  isDisabled?: boolean
-  isReadOnly?: boolean
-  variant?: string
-  inputIcon?: ReactNode
-  unit?: string
-  multiline?: boolean
-}
-
-export const Box = styled.div<InputWrapperType>``
+export const Box = styled.div`
+  display: grid;
+  gap: 8px;
+  grid-template-columns: auto;
+  align-items: center;
+`
 
 type UnitType = {
   isDisabled: boolean
@@ -29,13 +24,12 @@ const Unit = styled.span<UnitType>`
 
 const Adornments = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
   height: 100%;
   align-self: flex-start;
 `
 
-type InputWrapperProps = {
+export type InputWrapperProps = {
   /** Label */
   label: string
   /** Meta */
@@ -45,7 +39,7 @@ type InputWrapperProps = {
 
   /** Read Only */
   readOnly?: boolean
-}
+} & HTMLAttributes<HTMLDivElement>
 
 export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
   function InputWrapper(

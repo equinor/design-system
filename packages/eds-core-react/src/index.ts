@@ -35,4 +35,5 @@ export * from './components/Switch'
 export * from './components/EdsProvider'
 export * from './components/Paper'
 export * from './components/Autocomplete'
+export * from './components/InputWrapper'
 /* eslint-enable */
