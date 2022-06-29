@@ -30,12 +30,16 @@ const StyledAccordionHeaderTitle = styled.span<AccordionHeaderTitleProps>(
 const AccordionHeaderTitle = forwardRef<
   HTMLSpanElement,
   AccordionHeaderTitleProps
->(function AccordionHeaderTitle({ isExpanded, disabled, children }, ref) {
+>(function AccordionHeaderTitle(
+  { isExpanded, disabled, children, ...rest },
+  ref,
+) {
   return (
     <StyledAccordionHeaderTitle
       ref={ref}
       isExpanded={isExpanded}
       disabled={disabled}
+      {...rest}
     >
       {children}
     </StyledAccordionHeaderTitle>
