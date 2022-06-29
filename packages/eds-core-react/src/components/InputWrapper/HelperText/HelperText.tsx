@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react'
+import React, { forwardRef, useMemo, cloneElement, ReactElement } from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '@equinor/eds-utils'
 import { helperText as tokens } from './HelperText.token'
@@ -10,38 +10,38 @@ type VariationProps = {
   isDisabled?: boolean
 }
 
-type StyledProps = {
-  spacings?: Spacing
-}
-
-const Container = styled.div<StyledProps>`
-  display: flex;
-  align-items: flex-start;
-  margin-top: ${({ spacings }) => spacings.top};
+const Container = styled.div`
+  display: grid;
+  gap: 8px;
+  grid-auto-flow: column;
+  align-items: start;
+  justify-content: start;
+  color: ${tokens.typography.color};
 `
-const Text = styled.p<StyledProps & VariationProps>`
+const Text = styled.p<VariationProps>`
   ${typographyTemplate(tokens.typography)}
-  margin: 0 0 0 ${({ spacings }) => spacings.left};
 `
 
 type HelperTextProps = {
   /** Helper text */
   text?: string
   /** Icon */
-  icon?: ReactNode
+  icon?: ReactElement
   /** Disabled */
   disabled?: boolean
 }
 
 const TextfieldHelperText = forwardRef<HTMLDivElement, HelperTextProps>(
   function TextfieldHelperText({ text, icon, ...rest }, ref) {
+    const smallIcon = useMemo(() => cloneElement(icon, { size: 16 }), [icon])
+
     if (!text) {
       return null
     }
 
     return (
       <Container ref={ref} {...rest}>
-        {icon && <Icon size={16}>{icon}</Icon>}
+        {smallIcon}
         <Text>{text}</Text>
       </Container>
     )

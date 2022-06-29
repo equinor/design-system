@@ -18,7 +18,10 @@ export type HelperTextProps = {
 
 export const helperText: HelperTextProps = {
   background: colors.ui.background__light.hex,
-  typography: typography.input.helper,
+  typography: {
+    ...typography.input.helper,
+    color: colors.text.static_icons__tertiary.rgba,
+  },
   spacings: {
     comfortable: {
       left: comfortable.small,
