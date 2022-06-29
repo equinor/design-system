@@ -18,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `toolbox_rope`
 - `badge`
 - `hand_radio`
-- `wind_turbine_farm`
 - `substation_onshore`
 - `substation_offshore`
 - `expand`
