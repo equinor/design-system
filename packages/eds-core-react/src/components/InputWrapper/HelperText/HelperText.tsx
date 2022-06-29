@@ -33,15 +33,13 @@ type HelperTextProps = {
 
 const TextfieldHelperText = forwardRef<HTMLDivElement, HelperTextProps>(
   function TextfieldHelperText({ text, icon, ...rest }, ref) {
-    const smallIcon = useMemo(() => cloneElement(icon, { size: 16 }), [icon])
-
     if (!text) {
       return null
     }
 
     return (
       <Container ref={ref} {...rest}>
-        {smallIcon}
+        {icon}
         <Text>{text}</Text>
       </Container>
     )

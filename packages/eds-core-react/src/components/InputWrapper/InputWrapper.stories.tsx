@@ -1,6 +1,6 @@
 import { Story, ComponentMeta } from '@storybook/react'
-import { accessible, dropper } from '@equinor/eds-icons'
-import { InputWrapper, InputWrapperProps, Input, Icon } from '../..'
+import { accessible, dropper, clear, search } from '@equinor/eds-icons'
+import { InputWrapper, InputWrapperProps, Input, Icon, Button } from '../..'
 import styled from 'styled-components'
 
 export default {
@@ -18,17 +18,28 @@ const StrippedInput = styled(Input)`
   }
 `
 
+const SmallButton = styled(Button)`
+  height: 24px;
+  width: 24px;
+`
+
 export const Introduction: Story<InputWrapperProps> = (args) => (
   <InputWrapper
     label="I'm a label, play with me!"
-    helperIcon={<Icon data={accessible} />}
+    meta="meta tag"
+    helperIcon={<Icon data={accessible} size={16} />}
     {...args}
   >
-    <InputWrapper.Adornments>left</InputWrapper.Adornments>
+    <InputWrapper.Adornments>
+      <Icon data={search} size={16} />
+    </InputWrapper.Adornments>
     <StrippedInput />
     <InputWrapper.Adornments>
       right
-      <Icon data={dropper} />
+      <Icon data={dropper} size={16} />
+      <SmallButton variant="ghost_icon">
+        <Icon data={clear} size={16} />
+      </SmallButton>
     </InputWrapper.Adornments>
   </InputWrapper>
 )

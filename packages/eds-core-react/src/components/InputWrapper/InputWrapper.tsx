@@ -57,9 +57,9 @@ export const Adornments = styled.div(({ theme }) => {
 
 export type InputWrapperProps = {
   /** Label */
-  label: string
+  label?: string
   /** Meta */
-  meta: string
+  meta?: string
   /** Disabled state */
   disabled?: boolean
   /** Read Only */
