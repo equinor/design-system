@@ -201,6 +201,7 @@ function AutocompleteInner<T>(
     label,
     meta,
     className,
+    style,
     disabled = false,
     readOnly = false,
     onOptionsChange,
@@ -564,7 +565,7 @@ function AutocompleteInner<T>(
 
   return (
     <ThemeProvider theme={token}>
-      <Container className={className} ref={ref}>
+      <Container className={className} style={style} ref={ref}>
         <Label
           {...getLabelProps()}
           label={label}
