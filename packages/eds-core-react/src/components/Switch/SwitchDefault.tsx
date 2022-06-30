@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, Ref, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { bordersTemplate } from '@equinor/eds-utils'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
@@ -84,12 +84,14 @@ const Handle = styled.span<StyledProps>(
 
 type SwitchDefaultProps = {
   disabled?: boolean
-}
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'disabled'> & {
+    ref?: Ref<HTMLInputElement>
+  }
 
 export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
-  function SwitchDefault({ disabled, ...rest }, ref) {
+  function SwitchDefault({ disabled, className, style, ...rest }, ref) {
     return (
-      <GridWrapper>
+      <GridWrapper className={className} style={style}>
         <Input {...rest} ref={ref} disabled={disabled} />
         <BaseInputWrapper>
           <Track isDisabled={disabled} />

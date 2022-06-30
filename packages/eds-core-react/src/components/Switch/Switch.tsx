@@ -37,7 +37,7 @@ export type SwitchProps = {
   }
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
-  { size = 'default', disabled, label, className, ...rest },
+  { size = 'default', disabled, label, className, style, ...rest },
   ref,
 ) {
   const { density } = useEds()
@@ -48,7 +48,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   return (
     <ThemeProvider theme={token}>
       {label ? (
-        <StyledLabel isDisabled={disabled} className={className}>
+        <StyledLabel isDisabled={disabled} className={className} style={style}>
           {size === 'small' ? (
             <SwitchSmall disabled={disabled} {...rest} ref={ref} />
           ) : (
@@ -57,9 +57,21 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
           {label && <Label>{label}</Label>}
         </StyledLabel>
       ) : size === 'small' ? (
-        <SwitchSmall disabled={disabled} {...rest} ref={ref} />
+        <SwitchSmall
+          disabled={disabled}
+          className={className}
+          style={style}
+          {...rest}
+          ref={ref}
+        />
       ) : (
-        <SwitchDefault disabled={disabled} {...rest} ref={ref} />
+        <SwitchDefault
+          disabled={disabled}
+          className={className}
+          style={style}
+          {...rest}
+          ref={ref}
+        />
       )}
     </ThemeProvider>
   )
