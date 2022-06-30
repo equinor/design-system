@@ -66,10 +66,10 @@ We use [pnpm][] as the package manager, because it’s fast, space efficient, an
 
     $ npm install -g pnpm
 
-Install dependencies using the shorthand version of `pnpm multi install`
+Install dependencies & build using our `init` script:
 
     $ cd design-system
-    $ pnpm m i
+    $ pnpm run init
 
 [pnpm]: https://pnpm.js.org
 
