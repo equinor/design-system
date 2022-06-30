@@ -169,6 +169,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     defaultValue = '',
     value,
     className = '',
+    style,
     disabled = false,
     onBlur,
     onFocus,
@@ -238,6 +239,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   const containerProps = {
     isFocused,
     className,
+    style,
     disabled,
     role: 'search',
     'aria-label': rest['aria-label'],
