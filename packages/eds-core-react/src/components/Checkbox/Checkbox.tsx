@@ -35,11 +35,11 @@ export type CheckboxProps = {
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
-    { label, disabled = false, indeterminate, className, ...rest },
+    { label, disabled = false, indeterminate, className, style, ...rest },
     ref,
   ) {
     return label ? (
-      <StyledLabel disabled={disabled} className={className}>
+      <StyledLabel disabled={disabled} className={className} style={style}>
         <CheckboxInput
           {...rest}
           disabled={disabled}
@@ -51,6 +51,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     ) : (
       <CheckboxInput
         {...rest}
+        className={className}
+        style={style}
         disabled={disabled}
         ref={ref}
         indeterminate={indeterminate}

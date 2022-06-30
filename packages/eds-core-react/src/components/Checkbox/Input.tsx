@@ -98,7 +98,10 @@ export type InputProps = {
   }
 
 export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
-  function CheckboxInput({ disabled = false, indeterminate, ...rest }, ref) {
+  function CheckboxInput(
+    { disabled = false, indeterminate, style, className, ...rest },
+    ref,
+  ) {
     const { density } = useEds()
     const token = useToken({ density }, tokens)
 
@@ -109,6 +112,8 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
 
     const inputWrapperProps = {
       disabled,
+      style,
+      className,
     }
 
     const inputProps = {
