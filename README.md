@@ -66,6 +66,8 @@ We use [pnpm][] as the package manager, because it’s fast, space efficient, an
 
     $ npm install -g pnpm
 
+Currently the project only runs on up to Node.js `v16.15`  
+
 Install dependencies & build using our `init` script:
 
     $ cd design-system
