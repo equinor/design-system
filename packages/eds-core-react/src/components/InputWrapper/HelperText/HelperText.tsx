@@ -1,9 +1,13 @@
-import React, { forwardRef, useMemo, cloneElement, ReactElement } from 'react'
+import {
+  forwardRef,
+  ReactNode,
+  useMemo,
+  cloneElement,
+  ReactElement,
+} from 'react'
 import styled from 'styled-components'
 import { typographyTemplate } from '@equinor/eds-utils'
 import { helperText as tokens } from './HelperText.token'
-import { Icon } from '../../Icon'
-import type { Spacing } from '@equinor/eds-tokens'
 
 type VariationProps = {
   isFocused?: boolean
@@ -26,7 +30,7 @@ type HelperTextProps = {
   /** Helper text */
   text?: string
   /** Icon */
-  icon?: ReactElement
+  icon?: ReactNode
   /** Disabled */
   disabled?: boolean
 }

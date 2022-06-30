@@ -33,7 +33,7 @@ export const Introduction: Story<InputWrapperProps> = (args) => (
     <InputWrapper.Adornments>
       <Icon data={search} size={16} />
     </InputWrapper.Adornments>
-    <StrippedInput />
+    <Input />
     <InputWrapper.Adornments>
       right
       <Icon data={dropper} size={16} />

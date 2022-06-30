@@ -1,4 +1,4 @@
-import { HTMLAttributes, forwardRef, ReactElement } from 'react'
+import { HTMLAttributes, forwardRef, ReactElement, ReactNode } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
@@ -20,9 +20,6 @@ const Field = styled.div(({ theme }) => {
   const {
     states: {
       focus: { outline: focusOutline },
-      active: { outline: activeOutline },
-      disabled,
-      readOnly,
     },
     boxShadow,
   } = theme
@@ -65,7 +62,7 @@ export type InputWrapperProps = {
   /** Read Only */
   readOnly?: boolean
   /** Helper text icon */
-  helperIcon?: ReactElement
+  helperIcon?: ReactNode
   /** Helper text */
   helperText?: string
 } & HTMLAttributes<HTMLDivElement>
@@ -85,7 +82,7 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
     ref,
   ) {
     const { density } = useEds()
-    const token = inputToken.input
+    const token = useToken({ density }, inputToken.input)
 
     return (
       <ThemeProvider theme={token}>
