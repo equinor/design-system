@@ -114,7 +114,7 @@ export type RadioProps = {
   }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  { label, disabled = false, className, ...rest },
+  { label, disabled = false, className, style, ...rest },
   ref,
 ) {
   const { density } = useEds()
@@ -141,7 +141,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   return (
     <ThemeProvider theme={token}>
       {label ? (
-        <StyledLabel disabled={disabled} className={className}>
+        <StyledLabel disabled={disabled} className={className} style={style}>
           <InputWrapper disabled={disabled}>
             <Input
               {...rest}
@@ -154,7 +154,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
           <LabelText>{label}</LabelText>
         </StyledLabel>
       ) : (
-        <InputWrapper disabled={disabled}>
+        <InputWrapper disabled={disabled} className={className} style={style}>
           <Input {...rest} ref={ref} disabled={disabled} iconSize={iconSize} />
           {renderSVG}
         </InputWrapper>
