@@ -4,7 +4,7 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   colors: {
     ui: {
-      background__medium: { rgba: borderColor },
+      background__medium: { rgba: background__medium },
       background__default: { rgba: background },
     },
     interactive: {
@@ -12,7 +12,6 @@ const {
       primary__hover: { rgba: primary__hover },
       primary__resting: { rgba: primary__resting },
       primary__selected_highlight: { rgba: menuActive },
-      primary__selected_hover: { rgba: menuHover },
       secondary__highlight: { rgba: expandHover },
       disabled__fill: { rgba: menuDisabledBackground },
       disabled__text: { rgba: menuDisabledText },
@@ -35,7 +34,7 @@ export const sidebar: ComponentToken = {
   },
   border: {
     type: 'bordergroup',
-    right: { color: borderColor, width: '1px', style: 'solid' },
+    right: { color: background__medium, width: '1px', style: 'solid' },
   },
   entities: {
     actionButton: {
@@ -48,7 +47,7 @@ export const sidebar: ComponentToken = {
       },
       border: {
         type: 'bordergroup',
-        bottom: { color: borderColor, width: '1px', style: 'solid' },
+        bottom: { color: background__medium, width: '1px', style: 'solid' },
       },
       states: {
         hover: {
@@ -62,7 +61,7 @@ export const sidebar: ComponentToken = {
       },
       border: {
         type: 'bordergroup',
-        bottom: { color: borderColor, width: '1px', style: 'solid' },
+        bottom: { color: background__medium, width: '1px', style: 'solid' },
       },
       spacings: {
         bottom: medium,
@@ -75,7 +74,7 @@ export const sidebar: ComponentToken = {
           },
         },
         hover: {
-          background: menuHover,
+          background: background__medium,
         },
         focus: {
           outline: {

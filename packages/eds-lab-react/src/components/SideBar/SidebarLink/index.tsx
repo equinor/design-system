@@ -53,7 +53,7 @@ const Container = styled(Button)<ContainerProps>(({ theme, open, active }) => {
     },
   } = theme
   return css`
-    background: ${active ? menuActiveBackground : 'none'};
+    background-color: ${active ? menuActiveBackground : 'none'};
     display: ${open ? 'grid' : 'flex'};
     grid-template-columns: repeat(10, 1fr);
     grid-gap: ${mediumSpacing};
@@ -62,14 +62,12 @@ const Container = styled(Button)<ContainerProps>(({ theme, open, active }) => {
     ${bordersTemplate(border)}
     text-decoration: none;
     min-height: 72px;
-
     &:hover {
       cursor: pointer;
-      background: ${menuHoverBackground};
+      background-color: ${active ? menuActiveBackground : menuHoverBackground};
     }
-
     &:disabled {
-      background: ${menuDisabledBackground};
+      background-color: ${menuDisabledBackground};
       color: ${menuDisabledText};
     }
   `
@@ -89,13 +87,17 @@ const ItemText = styled(Typography)<ItemTextProps>(({ theme, active }) => {
     entities: {
       sidebarItem: {
         typography: { color: itemTextColor },
+        states: {
+          active: {
+            typography: { color: itemActiveTextColor },
+          },
+        },
       },
     },
   } = theme
   return css`
-    font-weight: ${active ? '500' : '400'};
     grid-column: 3 / -1;
-    color: ${itemTextColor};
+    color: ${active ? itemActiveTextColor : itemTextColor};
     &::first-letter {
       text-transform: capitalize;
     }
