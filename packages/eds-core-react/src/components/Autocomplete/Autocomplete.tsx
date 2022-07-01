@@ -333,7 +333,7 @@ function AutocompleteInner<T>(
       const availableHash = JSON.stringify(availableItems[0])
       const selectedsHash = JSON.stringify(selectedItem)
       if (availableItems.length === 1 && selectedsHash === availableHash) {
-        setAvailableItems(options)
+        setAvailableItems(inputOptions)
       }
     },
     onStateChange: ({ type, selectedItem }) => {
