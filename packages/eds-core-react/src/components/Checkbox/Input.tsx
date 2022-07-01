@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import { forwardRef, Ref, InputHTMLAttributes } from 'react'
+import { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import {
   checkbox,
@@ -93,9 +93,7 @@ export type InputProps = {
    * set the native element to indeterminate yourself.
    */
   indeterminate?: boolean
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'disabled'> & {
-    ref?: Ref<HTMLInputElement>
-  }
+} & InputHTMLAttributes<HTMLInputElement>
 
 export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
   function CheckboxInput(

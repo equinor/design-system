@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import { forwardRef, Ref, InputHTMLAttributes } from 'react'
+import { forwardRef, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { checkbox as tokens } from './Checkbox.tokens'
 import { typographyTemplate } from '@equinor/eds-utils'
@@ -29,9 +29,7 @@ export type CheckboxProps = {
    * set the native element to indeterminate yourself.
    */
   indeterminate?: boolean
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'disabled'> & {
-    ref?: Ref<HTMLInputElement>
-  }
+} & InputHTMLAttributes<HTMLInputElement>
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(

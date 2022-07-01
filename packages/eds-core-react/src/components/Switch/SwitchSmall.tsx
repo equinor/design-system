@@ -1,4 +1,4 @@
-import { forwardRef, Ref, InputHTMLAttributes } from 'react'
+import { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 import { outlineTemplate } from '@equinor/eds-utils'
@@ -81,9 +81,7 @@ const Handle = styled.span(
 
 type SwitchSmallProps = {
   disabled?: boolean
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'disabled'> & {
-    ref?: Ref<HTMLInputElement>
-  }
+} & InputHTMLAttributes<HTMLInputElement>
 
 export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
   function SwitchSmall({ disabled, className, style, ...rest }, ref) {
