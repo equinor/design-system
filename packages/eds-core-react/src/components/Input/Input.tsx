@@ -11,6 +11,10 @@ import {
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 
+const Container = styled.div`
+  position: relative;
+`
+
 const StyledInput = styled.input(({ theme }: StyledProps) => {
   const {
     states: {
