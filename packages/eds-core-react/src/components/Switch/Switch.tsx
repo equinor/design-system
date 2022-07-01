@@ -32,7 +32,7 @@ export type SwitchProps = {
   size?: 'default' | 'small'
   /** If true, the switch will be disabled */
   disabled?: boolean
-} & InputHTMLAttributes<HTMLInputElement>
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   { size = 'default', disabled, label, className, style, ...rest },
