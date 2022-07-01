@@ -41,6 +41,13 @@ export const input: InputToken = {
     ...typography.input.text,
     color: static_icons__default.rgba,
   },
+  outline: {
+    type: 'outline',
+    color: 'transparent',
+    width: '1px',
+    style: 'solid',
+    offset: '0px',
+  },
   entities: {
     placeholder: {
       typography: {
@@ -58,15 +65,7 @@ export const input: InputToken = {
       background: 'transparent',
       boxShadow: 'none',
     },
-    active: {
-      outline: {
-        type: 'outline',
-        color: 'transparent',
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
+    active: {},
     focus: {
       outline: {
         type: 'outline',
@@ -93,16 +92,14 @@ export const input: InputToken = {
 
 export const error: InputToken = mergeDeepRight(input, {
   boxShadow: 'inset 0px -1px 0px 0px transparent',
+  outline: {
+    type: 'outline',
+    color: danger__resting.rgba,
+    width: '1px',
+    style: 'solid',
+    offset: '0px',
+  },
   states: {
-    active: {
-      outline: {
-        type: 'outline',
-        color: danger__resting.rgba,
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
     focus: {
       outline: {
         type: 'outline',
@@ -117,16 +114,14 @@ export const error: InputToken = mergeDeepRight(input, {
 
 export const warning: InputToken = mergeDeepRight(input, {
   boxShadow: 'inset 0px -1px 0px 0px transparent',
+  outline: {
+    type: 'outline',
+    color: warning__resting.rgba,
+    width: '1px',
+    style: 'solid',
+    offset: '0px',
+  },
   states: {
-    active: {
-      outline: {
-        type: 'outline',
-        color: warning__resting.rgba,
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
     focus: {
       outline: {
         type: 'outline',
@@ -141,16 +136,14 @@ export const warning: InputToken = mergeDeepRight(input, {
 
 export const success: InputToken = mergeDeepRight(input, {
   boxShadow: 'inset 0px -1px 0px 0px transparent',
+  outline: {
+    type: 'outline',
+    color: success__resting.rgba,
+    width: '1px',
+    style: 'solid',
+    offset: '0px',
+  },
   states: {
-    active: {
-      outline: {
-        type: 'outline',
-        color: success__resting.rgba,
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
     focus: {
       outline: {
         type: 'outline',

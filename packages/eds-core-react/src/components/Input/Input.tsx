@@ -19,10 +19,10 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
   const {
     states: {
       focus: { outline: focusOutline },
-      active: { outline: activeOutline },
       disabled,
       readOnly,
     },
+    outline,
     boxShadow,
   } = theme
 
@@ -36,7 +36,7 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
     height: ${theme.minHeight};
     box-shadow: ${boxShadow};
 
-    ${outlineTemplate(activeOutline)}
+    ${outlineTemplate(outline)}
     ${typographyTemplate(theme.typography)}
     ${spacingsTemplate(theme.spacings)};
 
@@ -103,7 +103,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 
   return (
     <ThemeProvider theme={token}>
-      <StyledInput {...inputProps} />
+      <Container>
+        <StyledInput {...inputProps} />
+      </Container>
     </ThemeProvider>
   )
 })
