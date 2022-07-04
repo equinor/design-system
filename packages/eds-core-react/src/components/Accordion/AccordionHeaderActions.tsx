@@ -37,12 +37,16 @@ const StyledAccordionHeaderActions = styled.span<AccordionHeaderActionsProps>(
 const AccordionHeaderActions = forwardRef<
   HTMLSpanElement,
   AccordionHeaderActionsProps
->(function AccordionHeaderActions({ isExpanded, disabled, children }, ref) {
+>(function AccordionHeaderActions(
+  { isExpanded, disabled, children, ...rest },
+  ref,
+) {
   return (
     <StyledAccordionHeaderActions
       ref={ref}
       isExpanded={isExpanded}
       disabled={disabled}
+      {...rest}
     >
       {children}
     </StyledAccordionHeaderActions>

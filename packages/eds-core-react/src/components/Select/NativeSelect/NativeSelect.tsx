@@ -89,6 +89,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
       label,
       children,
       className,
+      style,
       selectRef,
       id,
       meta,
@@ -104,6 +105,7 @@ export const NativeSelect = forwardRef<HTMLDivElement, NativeSelectProps>(
     const containerProps = {
       ref,
       className,
+      style,
     }
 
     const selectProps = {
