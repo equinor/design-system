@@ -1,11 +1,5 @@
 import { ForwardRefExoticComponent, forwardRef } from 'react'
-import {
-  Button,
-  ButtonProps,
-  Icon,
-  Typography,
-  Tooltip as EDSTooltip,
-} from '@equinor/eds-core-react'
+import { Button, ButtonProps, Icon, Tooltip } from '@equinor/eds-core-react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import { useSideBar } from '../SideBar.context'
 import styled, { css } from 'styled-components'
@@ -25,7 +19,7 @@ type ContainerProps = {
 const MenuButtonContainer = styled.div<ContainerProps>(({ open }) => {
   return css`
     display: ${open ? 'grid' : 'flex'};
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: 8px 1fr 8px;
     justify-content: center;
     align-items: center;
     height: 73px;
@@ -33,55 +27,20 @@ const MenuButtonContainer = styled.div<ContainerProps>(({ open }) => {
   `
 })
 
-type CustomButtonProps = {
-  open?: boolean
-} & ButtonProps
-
-const ExtendedButton = styled(Button)<CustomButtonProps>(({ theme, open }) => {
+const ExtendedButton = styled(Button)(({ theme }) => {
   const {
     entities: {
       actionButton: {
-        background: buttonBackground,
         spacings: { right: largeSpacing },
-        states: {
-          hover: { background: buttonHover },
-        },
       },
     },
   } = theme
   return css`
-    width: ${open ? 'fit-content' : '40px'};
-    height: ${open ? '36px' : '40px'};
-    background: ${buttonBackground};
-    border-radius: ${open && '100px'};
-    grid-column: 3;
-    ${open &&
-    `
-  padding-right: ${largeSpacing};
-  margin-left: -2px; /* border size */
-  `};
-
-    &:hover {
-      border-radius: ${open && '100px'};
-      background: ${buttonHover};
-    }
+    grid-column: 2;
+    width: fit-content;
+    padding-right: ${largeSpacing};
   `
 })
-
-const ExtendedButtonText = styled(Typography)`
-  font-weight: 400;
-  text-transform: lowercase;
-  white-space: nowrap;
-  &::first-letter {
-    text-transform: uppercase;
-  }
-`
-
-const Tooltip = styled(EDSTooltip)`
-  &::first-letter {
-    text-transform: uppercase;
-  }
-`
 
 export type SideBarButtonProps = {
   label: string
@@ -90,36 +49,33 @@ export type SideBarButtonProps = {
 
 export const SideBarButton: ForwardRefExoticComponent<SideBarButtonProps> =
   forwardRef<HTMLButtonElement, SideBarButtonProps>(function SideBarToggle(
-    { label, icon, ...rest },
+    { label, icon, style, className, ...rest },
     ref,
   ) {
     const props = {
       ...rest,
       ref,
     }
+    const styleProps = {
+      style,
+      className,
+    }
     const { isOpen } = useSideBar()
     if (isOpen) {
       return (
-        <MenuButtonContainer open={isOpen}>
+        <MenuButtonContainer open={isOpen} {...styleProps}>
           <ExtendedButton open variant="contained" {...props}>
-            <Icon data={icon} color={primaryWhite} />
-            <ExtendedButtonText
-              color={primaryWhite}
-              variant="button"
-              group="navigation"
-            >
-              {label}
-            </ExtendedButtonText>
+            <Icon data={icon} color={primaryWhite} /> {label}
           </ExtendedButton>
         </MenuButtonContainer>
       )
     }
     return (
       <Tooltip title={label} placement="right">
-        <MenuButtonContainer open={isOpen}>
-          <ExtendedButton variant="ghost_icon" {...props}>
+        <MenuButtonContainer open={isOpen} {...styleProps}>
+          <Button variant="contained_icon" {...props}>
             <Icon data={icon} color={primaryWhite} />
-          </ExtendedButton>
+          </Button>
         </MenuButtonContainer>
       </Tooltip>
     )
