@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef } from 'react'
+import { InputHTMLAttributes, forwardRef, ReactNode } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
@@ -11,9 +11,36 @@ import {
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 
-const Container = styled.div`
-  position: relative;
-`
+const Container = styled.div(({ theme }) => {
+  const {
+    states: {
+      focus: { outline: focusOutline },
+      disabled,
+      readOnly,
+    },
+    outline,
+  } = theme
+
+  return css`
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+    box-sizing: border-box;
+    border: none;
+    background: ${theme.background};
+    height: ${theme.minHeight};
+    box-shadow: ${theme.boxShadow};
+    ${outlineTemplate(theme.outline)}
+    ${spacingsTemplate(theme.spacings)}
+
+    &:active,
+    &:focus-within {
+      outline-offset: 0;
+      box-shadow: none;
+      ${outlineTemplate(focusOutline)}
+    }
+  `
+})
 
 const StyledInput = styled.input(({ theme }: StyledProps) => {
   const {
@@ -23,32 +50,21 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
       readOnly,
     },
     outline,
-    boxShadow,
   } = theme
 
   return css`
     width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    appearance: none;
-    background: ${theme.background};
     border: none;
-    height: ${theme.minHeight};
-    box-shadow: ${boxShadow};
+    background: transparent;
 
-    ${outlineTemplate(outline)}
     ${typographyTemplate(theme.typography)}
-    ${spacingsTemplate(theme.spacings)};
+
+    &:focus {
+      outline: none;
+    }
 
     &::placeholder {
       color: ${theme.entities.placeholder.typography.color};
-    }
-
-    &:active,
-    &:focus {
-      outline-offset: 0;
-      box-shadow: none;
-      ${outlineTemplate(focusOutline)}
     }
 
     &:disabled {
@@ -68,6 +84,17 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
   `
 })
 
+export const Adornments = styled.div(({ theme }) => {
+  return css`
+    display: flex;
+    column-gap: 8px;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    ${typographyTemplate(theme.entities.adornment.typography)}
+  `
+})
+
 type StyledProps = {
   theme: InputToken
 }
@@ -83,10 +110,21 @@ export type InputProps = {
   type?: string
   /** Read Only */
   readOnly?: boolean
+  /** Left adornments */
+  leftAdornments?: ReactNode
+  /** Right adornments */
+  rightAdornments?: ReactNode
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { variant = 'default', disabled = false, type = 'text', ...other },
+  {
+    variant = 'default',
+    disabled = false,
+    type = 'text',
+    leftAdornments,
+    rightAdornments,
+    ...other
+  },
   ref,
 ) {
   const actualVariant = variant === 'default' ? 'input' : variant
@@ -104,7 +142,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <ThemeProvider theme={token}>
       <Container>
+        <Adornments>{leftAdornments}</Adornments>
         <StyledInput {...inputProps} />
+        <Adornments>{rightAdornments}</Adornments>
       </Container>
     </ThemeProvider>
   )

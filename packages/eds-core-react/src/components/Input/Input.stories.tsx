@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
+import { Story, ComponentMeta } from '@storybook/react'
+import { anchor } from '@equinor/eds-icons'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
-import { Story } from '@storybook/react/types-6-0'
-import { ComponentMeta } from '@storybook/react'
+import styled from 'styled-components'
 import { Stack } from './../../../.storybook/components'
 import page from './Input.docs.mdx'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
 
 export default {
   title: 'Inputs/Input',
@@ -136,6 +139,34 @@ export const Compact: Story<InputProps> = () => {
     <EdsProvider density={density}>
       <Label htmlFor="compact" label="Compact" />
       <Input type="text" id="compact" />
+    </EdsProvider>
+  )
+}
+
+const SmallButton = styled(Button)`
+  height: 24px;
+  width: 24px;
+`
+
+export const WithAdornments: Story<InputProps> = () => {
+  return (
+    <EdsProvider>
+      <Label htmlFor="adornments" label="With adornments" />
+      <Input
+        type="text"
+        id="adornments"
+        leftAdornments={
+          <>
+            <SmallButton variant="ghost_icon">IT</SmallButton>
+          </>
+        }
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={16}></Icon>
+          </>
+        }
+      />
     </EdsProvider>
   )
 }

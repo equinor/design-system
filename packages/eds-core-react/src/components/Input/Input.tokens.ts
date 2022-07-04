@@ -54,6 +54,19 @@ export const input: InputToken = {
         color: static_icons__tertiary.rgba,
       },
     },
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: static_icons__tertiary.rgba,
+      },
+      states: {
+        disabled: {
+          typography: {
+            color: disabled__text.rgba,
+          },
+        },
+      },
+    },
   },
   states: {
     disabled: {
