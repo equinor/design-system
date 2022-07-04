@@ -28,6 +28,8 @@ const {
 
 export const sidebar: ComponentToken = {
   background,
+  minWidth: '66px',
+  maxWidth: '256px',
   spacings: {
     top: large,
     bottom: large,
@@ -56,6 +58,7 @@ export const sidebar: ComponentToken = {
       },
     },
     sidebarItem: {
+      minHeight: '48px',
       typography: {
         color: expandTextColor,
       },
