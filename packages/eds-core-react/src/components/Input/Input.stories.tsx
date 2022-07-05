@@ -151,10 +151,69 @@ const SmallButton = styled(Button)`
 export const WithAdornments: Story<InputProps> = () => {
   return (
     <EdsProvider>
-      <Label htmlFor="adornments" label="With adornments" />
+      <Label htmlFor="adornments-error" label="Default" />
       <Input
         type="text"
-        id="adornments"
+        id="adornments-error"
+        variant="error"
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={16}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-warning" label="Default" />
+      <Input
+        type="text"
+        id="adornments-warning"
+        variant="warning"
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={16}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-success" label="Default" />
+      <Input
+        type="text"
+        id="adornments-success"
+        variant="success"
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={16}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-disabled" label="Disabled" />
+      <Input
+        type="text"
+        id="adornments-disabled"
+        disabled
+        leftAdornments={
+          <>
+            <SmallButton disabled variant="ghost_icon">
+              IT
+            </SmallButton>
+          </>
+        }
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={16}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-readonly" label="Readonly" />
+      <Input
+        type="text"
+        id="adornments-readonly"
+        readOnly
         leftAdornments={
           <>
             <SmallButton variant="ghost_icon">IT</SmallButton>

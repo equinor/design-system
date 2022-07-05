@@ -123,6 +123,21 @@ export const error: InputToken = mergeDeepRight(input, {
       },
     },
   },
+  entities: {
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: danger__resting.rgba,
+      },
+      states: {
+        focus: {
+          outline: {
+            color: danger__hover.rgba,
+          },
+        },
+      },
+    },
+  },
 })
 
 export const warning: InputToken = mergeDeepRight(input, {
@@ -145,6 +160,21 @@ export const warning: InputToken = mergeDeepRight(input, {
       },
     },
   },
+  entities: {
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: warning__resting.rgba,
+      },
+      states: {
+        focus: {
+          outline: {
+            color: warning__hover.rgba,
+          },
+        },
+      },
+    },
+  },
 })
 
 export const success: InputToken = mergeDeepRight(input, {
@@ -164,6 +194,21 @@ export const success: InputToken = mergeDeepRight(input, {
         color: success__hover.rgba,
         style: 'solid',
         offset: '0px',
+      },
+    },
+  },
+  entities: {
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: success__resting.rgba,
+      },
+      states: {
+        focus: {
+          outline: {
+            color: success__hover.rgba,
+          },
+        },
       },
     },
   },

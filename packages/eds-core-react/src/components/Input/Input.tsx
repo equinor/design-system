@@ -11,57 +11,63 @@ import {
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 
-const Container = styled.div(({ theme }) => {
-  const {
-    states: {
-      focus: { outline: focusOutline },
-      disabled,
-      readOnly,
-    },
-    outline,
-  } = theme
+const Container = styled.div(({ theme, disabled, readOnly }: StyledProps) => {
+  const { states } = theme
 
   return css`
-    display: flex;
-    flex-direction: row;
-    column-gap: 8px;
-    box-sizing: border-box;
+    --eds-input-adornment-color: ${theme.entities.adornment.typography.color};
+
     border: none;
-    background: ${theme.background};
+    display: flex;
+    column-gap: 8px;
+    flex-direction: row;
+    box-sizing: border-box;
     height: ${theme.minHeight};
     box-shadow: ${theme.boxShadow};
+    background: ${theme.background};
     ${outlineTemplate(theme.outline)}
     ${spacingsTemplate(theme.spacings)}
+    ${typographyTemplate(theme.typography)}
 
-    &:active,
+
     &:focus-within {
       outline-offset: 0;
       box-shadow: none;
-      ${outlineTemplate(focusOutline)}
+      ${outlineTemplate(states.focus.outline)}
+      --eds-input-adornment-color: ${theme.entities.adornment?.states.focus
+        ?.outline.color};
     }
+
+    ${disabled &&
+    css`
+      --eds-input-adornment-color: ${states.disabled.typography.color};
+      color: ${states.disabled.typography.color};
+      cursor: not-allowed;
+      box-shadow: none;
+      outline: none;
+      &:focus-within {
+        outline: none;
+      }
+    `}
+    ${readOnly &&
+    css`
+      background: ${states.readOnly.background};
+      box-shadow: ${states.readOnly.boxShadow};
+    `}
   `
 })
 
 const StyledInput = styled.input(({ theme }: StyledProps) => {
   const {
-    states: {
-      focus: { outline: focusOutline },
-      disabled,
-      readOnly,
-    },
-    outline,
+    states: { disabled },
   } = theme
 
   return css`
     width: 100%;
     border: none;
     background: transparent;
-
     ${typographyTemplate(theme.typography)}
-
-    &:focus {
-      outline: none;
-    }
+    outline: none;
 
     &::placeholder {
       color: ${theme.entities.placeholder.typography.color};
@@ -70,21 +76,11 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
     &:disabled {
       color: ${disabled.typography.color};
       cursor: not-allowed;
-      box-shadow: none;
-      outline: none;
-      &:focus,
-      &:active {
-        outline: none;
-      }
-    }
-    &[readOnly] {
-      background: ${readOnly.background};
-      box-shadow: ${readOnly.boxShadow};
     }
   `
 })
 
-export const Adornments = styled.div(({ theme }) => {
+export const Adornments = styled.div(({ theme }: StyledProps) => {
   return css`
     display: flex;
     column-gap: 8px;
@@ -92,12 +88,13 @@ export const Adornments = styled.div(({ theme }) => {
     align-items: center;
     width: fit-content;
     ${typographyTemplate(theme.entities.adornment.typography)}
+    color: var(--eds-input-adornment-color);
   `
 })
 
 type StyledProps = {
   theme: InputToken
-}
+} & Required<Pick<InputProps, 'readOnly' | 'disabled'>>
 
 export type InputProps = {
   /** Placeholder */
@@ -123,6 +120,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     type = 'text',
     leftAdornments,
     rightAdornments,
+    readOnly,
+    className,
+    style,
     ...other
   },
   ref,
@@ -136,15 +136,32 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     ref,
     type,
     disabled,
+    readOnly,
     ...other,
+  }
+
+  const containerProps = {
+    disabled,
+    readOnly,
+    className,
+    style,
+  }
+
+  const adornmentProps = {
+    disabled,
+    readOnly,
   }
 
   return (
     <ThemeProvider theme={token}>
-      <Container>
-        <Adornments>{leftAdornments}</Adornments>
+      <Container {...containerProps}>
+        {leftAdornments ? (
+          <Adornments {...adornmentProps}>{leftAdornments}</Adornments>
+        ) : null}
         <StyledInput {...inputProps} />
-        <Adornments>{rightAdornments}</Adornments>
+        {rightAdornments ? (
+          <Adornments {...adornmentProps}>{rightAdornments}</Adornments>
+        ) : null}
       </Container>
     </ThemeProvider>
   )
