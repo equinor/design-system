@@ -72,7 +72,6 @@ Basic.decorators = [
   ),
 ]
 
-
 export const IconButton: Story<ButtonProps> = () => (
   <>
     <Button variant="ghost_icon" aria-label="save action">
