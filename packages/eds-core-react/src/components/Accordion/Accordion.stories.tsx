@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import {
   Accordion,
@@ -29,12 +28,6 @@ Icon.add({
   error_outlined,
 })
 
-const Wrapper = styled.div`
-  & > *:not(:first-child) {
-    margin-top: 16px;
-  }
-`
-
 export default {
   title: 'Surfaces/Accordion',
   component: Accordion,
@@ -50,6 +43,13 @@ export default {
       page,
     },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ display: 'grid', gap: '16px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof Accordion>
 
 export const Introduction: Story<AccordionProps> = (args) => {
@@ -212,13 +212,6 @@ export const Header: Story<AccordionProps> = () => {
     </>
   )
 }
-Header.decorators = [
-  (Story) => (
-    <Wrapper>
-      <Story />
-    </Wrapper>
-  ),
-]
 
 export const Compact: Story<AccordionProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
@@ -249,10 +242,3 @@ export const Compact: Story<AccordionProps> = () => {
     </>
   )
 }
-Compact.decorators = [
-  (Story) => (
-    <Wrapper>
-      <Story />
-    </Wrapper>
-  ),
-]
