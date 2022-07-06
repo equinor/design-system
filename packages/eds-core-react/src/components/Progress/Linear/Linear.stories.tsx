@@ -2,8 +2,7 @@ import { Progress, LinearProgressProps, Button } from '../../..'
 import { useState, useEffect, useRef } from 'react'
 import { ComponentMeta, Story } from '@storybook/react'
 import { useMockProgress } from '../../../stories'
-import styled from 'styled-components'
-import { Stack as SBStack } from './../../../../.storybook/components'
+import { Stack } from './../../../../.storybook/components'
 import page from './Linear.docs.mdx'
 
 export default {
@@ -14,31 +13,41 @@ export default {
       page,
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack
+          style={{
+            padding: '32px',
+            gridTemplateColumns: 'repeat(5, fit-content(100%)',
+          }}
+        >
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Progress.Linear>
-
-const Stack = styled(SBStack)`
-  padding: 32px;
-`
 
 export const Introduction: Story<LinearProgressProps> = (args) => {
   const { value = 0, variant } = args
   const progress = useMockProgress(variant === 'indeterminate' ? null : value)
 
   return (
-    <Stack>
+    <>
       <Progress.Linear
         value={progress}
         {...args}
         aria-label="Progress bar label"
       />
-    </Stack>
+    </>
   )
 }
 
 export const Indeterminate: Story<LinearProgressProps> = () => (
-  <Stack>
+  <>
     <Progress.Linear aria-label="Progress bar label" />
-  </Stack>
+  </>
 )
 
 export const Determinate: Story<LinearProgressProps> = () => {
@@ -76,7 +85,7 @@ export const Determinate: Story<LinearProgressProps> = () => {
   }
 
   return (
-    <Stack aria-busy={isLoading} aria-live="polite">
+    <div aria-busy={isLoading} aria-live="polite">
       {isLoading ? (
         <Progress.Linear
           variant="determinate"
@@ -88,7 +97,7 @@ export const Determinate: Story<LinearProgressProps> = () => {
           Trigger progress
         </Button>
       )}
-    </Stack>
+    </div>
   )
 }
 
@@ -110,7 +119,7 @@ export const Accessibility: Story<LinearProgressProps> = () => {
     }, 6000)
   }
   return (
-    <Stack aria-live="assertive">
+    <div aria-live="assertive">
       {isLoading ? (
         <Progress.Linear aria-label="Loading linear accessibility test" />
       ) : (
@@ -122,6 +131,6 @@ export const Accessibility: Story<LinearProgressProps> = () => {
           Click to load
         </Button>
       )}
-    </Stack>
+    </div>
   )
 }

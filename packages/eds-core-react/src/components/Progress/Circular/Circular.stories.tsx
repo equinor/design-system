@@ -30,9 +30,7 @@ Introduction.decorators = [
     return (
       <Stack
         style={{
-          backgroundColor: '#ebebeb',
           padding: '32px',
-          gridTemplateColumns: 'repeat(5, fit-content(100%)',
         }}
       >
         <Story />
