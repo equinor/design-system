@@ -29,7 +29,7 @@ const {
 export type InputToken = ComponentToken
 
 export const input: InputToken = {
-  minHeight: shape.straight.minHeight,
+  height: shape.straight.minHeight,
   background,
   spacings: {
     left: small,
@@ -41,10 +41,30 @@ export const input: InputToken = {
     ...typography.input.text,
     color: static_icons__default.rgba,
   },
+  outline: {
+    type: 'outline',
+    color: 'transparent',
+    width: '1px',
+    style: 'solid',
+    offset: '0px',
+  },
   entities: {
     placeholder: {
       typography: {
         color: static_icons__tertiary.rgba,
+      },
+    },
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: static_icons__tertiary.rgba,
+      },
+      states: {
+        disabled: {
+          typography: {
+            color: disabled__text.rgba,
+          },
+        },
       },
     },
   },
@@ -58,15 +78,7 @@ export const input: InputToken = {
       background: 'transparent',
       boxShadow: 'none',
     },
-    active: {
-      outline: {
-        type: 'outline',
-        color: 'transparent',
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
+    active: {},
     focus: {
       outline: {
         type: 'outline',
@@ -92,72 +104,87 @@ export const input: InputToken = {
 }
 
 export const error: InputToken = mergeDeepRight(input, {
-  boxShadow: 'inset 0px -1px 0px 0px transparent',
+  boxShadow: 'none',
+  outline: {
+    color: danger__resting.rgba,
+  },
   states: {
-    active: {
-      outline: {
-        type: 'outline',
-        color: danger__resting.rgba,
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
     focus: {
       outline: {
-        type: 'outline',
-        width: '2px',
         color: danger__hover.rgba,
-        style: 'solid',
-        offset: '0px',
+      },
+    },
+  },
+  entities: {
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: danger__resting.rgba,
+      },
+      states: {
+        focus: {
+          outline: {
+            color: danger__hover.rgba,
+          },
+        },
       },
     },
   },
 })
 
 export const warning: InputToken = mergeDeepRight(input, {
-  boxShadow: 'inset 0px -1px 0px 0px transparent',
+  boxShadow: 'none',
+  outline: {
+    color: warning__resting.rgba,
+  },
   states: {
-    active: {
-      outline: {
-        type: 'outline',
-        color: warning__resting.rgba,
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
     focus: {
       outline: {
-        type: 'outline',
-        width: '2px',
         color: warning__hover.rgba,
-        style: 'solid',
-        offset: '0px',
+      },
+    },
+  },
+  entities: {
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: warning__resting.rgba,
+      },
+      states: {
+        focus: {
+          outline: {
+            color: warning__hover.rgba,
+          },
+        },
       },
     },
   },
 })
 
 export const success: InputToken = mergeDeepRight(input, {
-  boxShadow: 'inset 0px -1px 0px 0px transparent',
+  boxShadow: 'none',
+  outline: {
+    color: success__resting.rgba,
+  },
   states: {
-    active: {
-      outline: {
-        type: 'outline',
-        color: success__resting.rgba,
-        width: '1px',
-        style: 'solid',
-        offset: '0px',
-      },
-    },
     focus: {
       outline: {
-        type: 'outline',
-        width: '2px',
         color: success__hover.rgba,
-        style: 'solid',
-        offset: '0px',
+      },
+    },
+  },
+  entities: {
+    adornment: {
+      typography: {
+        ...typography.input.label,
+        color: success__resting.rgba,
+      },
+      states: {
+        focus: {
+          outline: {
+            color: success__hover.rgba,
+          },
+        },
       },
     },
   },
