@@ -12,17 +12,17 @@ import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 
 const Container = styled.div(({ theme, disabled, readOnly }: StyledProps) => {
-  const { states } = theme
+  const { states, entities } = theme
 
   return css`
-    --eds-input-adornment-color: ${theme.entities.adornment.typography.color};
+    --eds-input-adornment-color: ${entities.adornment.typography.color};
 
-    border: none;
     display: flex;
-    column-gap: 8px;
     flex-direction: row;
+    column-gap: 8px;
+    border: none;
     box-sizing: border-box;
-    height: ${theme.minHeight};
+    height: ${theme.height};
     box-shadow: ${theme.boxShadow};
     background: ${theme.background};
     ${outlineTemplate(theme.outline)}
@@ -31,11 +31,11 @@ const Container = styled.div(({ theme, disabled, readOnly }: StyledProps) => {
 
 
     &:focus-within {
-      outline-offset: 0;
+      --eds-input-adornment-color: ${entities.adornment?.states.focus?.outline
+        .color};
+
       box-shadow: none;
       ${outlineTemplate(states.focus.outline)}
-      --eds-input-adornment-color: ${theme.entities.adornment?.states.focus
-        ?.outline.color};
     }
 
     ${disabled &&
@@ -50,10 +50,10 @@ const Container = styled.div(({ theme, disabled, readOnly }: StyledProps) => {
       }
     `}
     ${readOnly &&
-    css`
-      background: ${states.readOnly.background};
-      box-shadow: ${states.readOnly.boxShadow};
-    `}
+    css({
+      background: states.readOnly.background,
+      boxShadow: states.readOnly.boxShadow,
+    })}
   `
 })
 

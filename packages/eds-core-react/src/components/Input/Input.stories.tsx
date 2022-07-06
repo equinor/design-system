@@ -160,7 +160,7 @@ export const WithAdornments: Story<InputProps> = () => {
         rightAdornments={
           <>
             unit
-            <Icon data={anchor} size={16}></Icon>
+            <Icon data={anchor} size={18}></Icon>
           </>
         }
       />
@@ -173,7 +173,7 @@ export const WithAdornments: Story<InputProps> = () => {
         rightAdornments={
           <>
             unit
-            <Icon data={anchor} size={16}></Icon>
+            <Icon data={anchor} size={18}></Icon>
           </>
         }
       />
@@ -186,7 +186,7 @@ export const WithAdornments: Story<InputProps> = () => {
         rightAdornments={
           <>
             unit
-            <Icon data={anchor} size={16}></Icon>
+            <Icon data={anchor} size={18}></Icon>
           </>
         }
       />
@@ -205,7 +205,7 @@ export const WithAdornments: Story<InputProps> = () => {
         rightAdornments={
           <>
             unit
-            <Icon data={anchor} size={16}></Icon>
+            <Icon data={anchor} size={18}></Icon>
           </>
         }
       />
@@ -222,7 +222,7 @@ export const WithAdornments: Story<InputProps> = () => {
         rightAdornments={
           <>
             unit
-            <Icon data={anchor} size={16}></Icon>
+            <Icon data={anchor} size={18}></Icon>
           </>
         }
       />
