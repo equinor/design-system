@@ -154,6 +154,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       children,
       toggleExpanded,
       disabled,
+      className,
+      style,
       ...props
     },
     ref,
@@ -236,6 +238,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         disabled={disabled}
         parentIndex={parentIndex}
         as={headerLevel}
+        className={className}
+        style={style}
       >
         <StyledAccordionHeaderButton
           isExpanded={isExpanded}

@@ -31,8 +31,8 @@ exports[`Pagination Matches snapshot 1`] = `
   cursor: pointer;
   display: inline-block;
   background: transparent;
-  height: 48px;
-  width: 48px;
+  height: 40px;
+  width: 40px;
   padding-left: 0;
   padding-top: var(--eds_button__padding_y,0);
   padding-right: 0;
@@ -64,7 +64,7 @@ exports[`Pagination Matches snapshot 1`] = `
 .c3::after {
   position: absolute;
   top: -0;
-  left: -0px;
+  left: -4px;
   width: 48px;
   height: 48px;
   content: '';
