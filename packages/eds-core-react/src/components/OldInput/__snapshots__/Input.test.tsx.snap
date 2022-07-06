@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  border: none;
+  height: 36px;
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  outline: 1px solid transparent;
+  outline-offset: 0px;
+  margin: 0;
+  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  -webkit-letter-spacing: 0.025em;
+  -moz-letter-spacing: 0.025em;
+  -ms-letter-spacing: 0.025em;
+  letter-spacing: 0.025em;
+  text-align: left;
+  padding-left: 8px;
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+}
+
+.c0::-webkit-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c0::-moz-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c0:-ms-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c0::placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c0:active,
+.c0:focus {
+  outline-offset: 0;
+  box-shadow: none;
+  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  outline-offset: 0px;
+}
+
+.c0:disabled {
+  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  cursor: not-allowed;
+  box-shadow: none;
+  outline: none;
+}
+
+.c0:disabled:focus,
+.c0:disabled:active {
+  outline: none;
+}
+
+.c0[readOnly] {
+  background: transparent;
+  box-shadow: none;
+}
+
+<input
+    class="c0"
+    readonly=""
+    type="text"
+    value="input value"
+  />
+</DocumentFragment>
+`;
