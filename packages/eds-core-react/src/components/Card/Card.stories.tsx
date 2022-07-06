@@ -1,10 +1,8 @@
-import styled from 'styled-components'
 import {
   Avatar,
   Button,
   Card,
   CardProps,
-  Chip,
   Divider,
   Icon,
   Typography,
@@ -48,13 +46,10 @@ export default {
       return (
         <Stack
           style={{
-            height: 'auto',
-            width: '100%',
             padding: '32px',
-            boxSizing: 'border-box',
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 320px)',
-            gridGap: '32px 32px',
+            gridGap: '32px',
             background: '#ebebeb',
           }}
         >
@@ -383,11 +378,6 @@ export const WithActions: Story<CardProps> = () => (
 WithActions.storyName = 'With actions'
 
 export const WithDivider: Story<CardProps> = () => {
-  const Row = styled.div`
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-  `
   return (
     <>
       <Card>
@@ -398,20 +388,15 @@ export const WithDivider: Story<CardProps> = () => {
           <Typography variant="h6">20.02.2020</Typography>
         </Card.Header>
         <Card.Content>
-          <Typography variant="h5">Title</Typography>
           <Typography variant="body_short">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </Typography>
           <Divider style={{ width: '100%' }} />
-        </Card.Content>
-        <Card.Content>
-          <Typography variant="caption">Choose option</Typography>
-          <Row>
-            <Chip>active</Chip>
-            <Chip variant="active">pause</Chip>
-            <Chip>disable</Chip>
-            <Chip variant="error">stop</Chip>
-          </Row>
+          <Typography variant="body_short">
+            Donec eget pulvinar ipsum. Phasellus dictum turpis at metus
+            malesuada sollicitudin. Sed sollicitudin mauris dolor, vel tincidunt
+            dolor mollis vitae
+          </Typography>
         </Card.Content>
         <Card.Actions>
           <Button style={{ marginTop: '16px' }} variant="outlined">
