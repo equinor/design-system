@@ -108,7 +108,7 @@ export const Introduction: Story<PopoverProps> = (args) => {
 Introduction.decorators = [
   (Story) => {
     return (
-      <Stack style={{ margin: '160px' }}>
+      <Stack style={{ padding: '160px' }}>
         <Story />
       </Stack>
     )
@@ -157,7 +157,7 @@ ActivateOnClick.storyName = 'Activate onClick'
 ActivateOnClick.decorators = [
   (Story) => {
     return (
-      <Stack style={{ margin: '160px' }}>
+      <Stack style={{ padding: '160px' }}>
         <Story />
       </Stack>
     )
@@ -221,7 +221,7 @@ ActivateOnHover.storyName = 'Activate onHover'
 ActivateOnHover.decorators = [
   (Story) => {
     return (
-      <Stack style={{ margin: '160px' }}>
+      <Stack style={{ padding: '160px' }}>
         <Story />
       </Stack>
     )
@@ -259,7 +259,7 @@ export const WithTooltip: Story<PopoverProps> = () => {
 WithTooltip.decorators = [
   (Story) => {
     return (
-      <Stack style={{ margin: '160px' }}>
+      <Stack style={{ padding: '160px' }}>
         <Story />
       </Stack>
     )
@@ -313,7 +313,7 @@ WithCloseButton.storyName = 'With close button'
 WithCloseButton.decorators = [
   (Story) => {
     return (
-      <Stack style={{ margin: '160px' }}>
+      <Stack style={{ padding: '160px' }}>
         <Story />
       </Stack>
     )
@@ -368,7 +368,7 @@ export const Compact: Story<PopoverProps> = () => {
 Compact.decorators = [
   (Story) => {
     return (
-      <Stack style={{ margin: '160px' }}>
+      <Stack style={{ padding: '160px' }}>
         <Story />
       </Stack>
     )
