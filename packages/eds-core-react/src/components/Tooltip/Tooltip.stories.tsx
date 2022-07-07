@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useRef } from 'react'
 import {
   Tooltip,
   TooltipProps,
@@ -43,13 +44,28 @@ Introduction.args = {
 }
 
 export const WithDelay: Story<TooltipProps> = () => {
+  const anchorRef = useRef()
+  const anchorRef2 = useRef<HTMLElement>()
   return (
     <Stack>
       <Tooltip enterDelay={300} title="Tooltip with delay">
-        <Typography link href="#">
+        <Typography
+          link
+          href="#"
+          ref={anchorRef}
+          onMouseOver={() => console.log(anchorRef)}
+        >
           Hover me!
         </Typography>
       </Tooltip>
+      <Typography
+        link
+        href="#"
+        ref={anchorRef2}
+        onMouseOver={() => console.log(anchorRef2)}
+      >
+        Hover me 2!
+      </Typography>
     </Stack>
   )
 }
