@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import {
   Avatar,
   Button,
@@ -9,7 +8,7 @@ import {
   Typography,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { Stack as SBStack } from './../../../.storybook/components'
+import { Stack } from './../../../.storybook/components'
 import page from './Divider.docs.mdx'
 
 export default {
@@ -22,14 +21,12 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
 } as ComponentMeta<typeof Divider>
-
-const Stack = styled(SBStack)`
-  padding: 32px;
-  background: #ebebeb;
-`
 
 export const Introduction: Story<DividerProps> = (args) => (
   <>
@@ -40,7 +37,7 @@ export const Introduction: Story<DividerProps> = (args) => (
 )
 
 export const FullBleed: Story<DividerProps> = () => (
-  <Stack>
+  <>
     <Card style={{ width: '50%' }}>
       <Card.Header>
         <Card.HeaderTitle>
@@ -75,13 +72,21 @@ export const FullBleed: Story<DividerProps> = () => (
         </Typography>
       </Card.Content>
     </Card>
-  </Stack>
+  </>
 )
-
 FullBleed.storyName = 'Full bleed'
+FullBleed.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ padding: '32px', background: '#ebebeb' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Inset: Story<DividerProps> = () => (
-  <Stack>
+  <>
     <Card style={{ width: '50%' }}>
       <Card.Header>
         <Card.HeaderTitle>
@@ -118,11 +123,20 @@ export const Inset: Story<DividerProps> = () => (
         </Card.HeaderTitle>
       </Card.Header>
     </Card>
-  </Stack>
+  </>
 )
+Inset.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ padding: '32px', background: '#ebebeb' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Middle: Story<DividerProps> = () => (
-  <Stack>
+  <>
     <Card style={{ width: '50%' }}>
       <Card.Header>
         <Card.HeaderTitle>
@@ -153,5 +167,14 @@ export const Middle: Story<DividerProps> = () => (
         </Button>
       </Card.Actions>
     </Card>
-  </Stack>
+  </>
 )
+Middle.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ padding: '32px', background: '#ebebeb' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]

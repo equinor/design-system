@@ -3,11 +3,8 @@ import { Radio, RadioProps, Table, EdsProvider, Density } from '../..'
 import styled from 'styled-components'
 import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
+import { Stack } from './../../../.storybook/components'
 import page from './Radio.docs.mdx'
-
-const Wrapper = styled(Radio)`
-  display: flex;
-`
 
 export default {
   title: 'Inputs/Selection Controls/Radio',
@@ -15,27 +12,53 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Radio>
 
-export const Introduction: Story<RadioProps> = (args) => (
-  <Radio label="Play with me" {...args} />
-)
+const UnstyledList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+`
+
+export const Introduction: Story<RadioProps> = (args) => {
+  return <Radio label="Play with me" {...args} />
+}
 
 export const SingleRadio: Story<RadioProps> = () => {
   return (
-    <div>
-      <Wrapper label="Check me" name="first" />
-      <Wrapper label="You can't check me!" disabled name="second" />
-      <Wrapper label="I'm preselected" defaultChecked name="third" />
-      <Wrapper
-        label="You can't uncheck me!"
-        disabled
-        defaultChecked
-        name="fourth"
-      />
-    </div>
+    <UnstyledList>
+      <li>
+        <Radio label="Check me" name="first" />
+      </li>
+      <li>
+        <Radio label="You can't check me!" disabled name="second" />
+      </li>
+      <li>
+        <Radio label="I'm preselected" defaultChecked name="third" />
+      </li>
+      <li>
+        <Radio
+          label="You can't uncheck me!"
+          disabled
+          defaultChecked
+          name="fourth"
+        />
+      </li>
+    </UnstyledList>
   )
 }
 SingleRadio.storyName = 'Single radio buttons'
@@ -45,11 +68,7 @@ export const GroupedRadio: Story<RadioProps> = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateChecked(event.target.value)
   }
-  const UnstyledList = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  `
+
   return (
     <fieldset>
       <legend>

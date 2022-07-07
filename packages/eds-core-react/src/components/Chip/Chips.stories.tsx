@@ -1,8 +1,8 @@
 import { action } from '@storybook/addon-actions'
-import styled from 'styled-components'
 import { Icon, Chip, ChipProps, Avatar, AvatarProps } from '../..'
 import { ComponentMeta, Story } from '@storybook/react'
 import { save } from '@equinor/eds-icons'
+import { Stack } from './../../../.storybook/components'
 import page from './Chips.docs.mdx'
 
 const icons = {
@@ -11,20 +11,32 @@ const icons = {
 
 Icon.add(icons)
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-gap: 32px;
-  grid-template-columns: repeat(4, fit-content(100%));
-`
-
 export default {
   title: 'Data Display/Chips',
   component: Chip,
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack
+          style={{
+            display: 'grid',
+            gridGap: '32px',
+            gridTemplateColumns: 'repeat(4, fit-content(100%))',
+          }}
+        >
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Chip>
 
 const handleDelete = action('onDelete')
@@ -35,13 +47,11 @@ const CatImage = (props: Partial<AvatarProps>) => (
 )
 
 export const Introduction: Story<ChipProps> = (args) => (
-  <Wrapper>
-    <Chip {...args}>Play with me</Chip>
-  </Wrapper>
+  <Chip {...args}>Play with me</Chip>
 )
 
 export const Text: Story<ChipProps> = () => (
-  <Wrapper>
+  <>
     <Chip>Normal</Chip>
     <Chip variant="active">Active</Chip>
     <Chip variant="error">Error</Chip>
@@ -73,11 +83,11 @@ export const Text: Story<ChipProps> = () => (
     <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
       deletable + clickable
     </Chip>
-  </Wrapper>
+  </>
 )
 
 export const TextAndIcon: Story<ChipProps> = () => (
-  <Wrapper>
+  <>
     <Chip>
       <Icon name="save" />
       Normal
@@ -135,69 +145,69 @@ export const TextAndIcon: Story<ChipProps> = () => (
       <Icon name="save" />
       deletable + clickable
     </Chip>
-  </Wrapper>
+  </>
 )
-export const TextAndAvatar: Story<ChipProps> = () => (
-  <Wrapper>
-    <Chip>
-      <CatImage />
-      Normal
-    </Chip>
-    <Chip variant="active">
-      <CatImage />
-      Active
-    </Chip>
-    <Chip variant="error">
-      <CatImage />
-      Error
-    </Chip>
-    <Chip disabled>
-      <CatImage />
-      Disabled
-    </Chip>
-    <Chip onClick={handleClick}>
-      <CatImage />
-      clickable
-    </Chip>
-    <Chip variant="active" onClick={handleClick}>
-      <CatImage />
-      clickable
-    </Chip>
-    <Chip variant="error" onClick={handleClick}>
-      <CatImage />
-      clickable
-    </Chip>
-    <Chip onDelete={handleDelete} disabled>
-      <CatImage />
-      deletable
-    </Chip>
-    <Chip onDelete={handleDelete}>
-      <CatImage />
-      deletable
-    </Chip>
-    <Chip variant="active" onDelete={handleDelete}>
-      <CatImage />
-      deletable
-    </Chip>
-    <Chip variant="error" onDelete={handleDelete}>
-      <CatImage />
-      deletable
-    </Chip>
-    <div></div>
-    <Chip onDelete={handleDelete} onClick={handleClick}>
-      <CatImage />
-      deletable + clickable
-    </Chip>
-    <Chip variant="active" onDelete={handleDelete} onClick={handleClick}>
-      <CatImage />
-      deletable + clickable
-    </Chip>
-    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
-      <CatImage />
-      deletable + clickable
-    </Chip>
-  </Wrapper>
-)
-
 TextAndIcon.storyName = 'Text and icon'
+
+export const TextAndAvatar: Story<ChipProps> = () => (
+  <>
+    <Chip>
+      <CatImage />
+      Normal
+    </Chip>
+    <Chip variant="active">
+      <CatImage />
+      Active
+    </Chip>
+    <Chip variant="error">
+      <CatImage />
+      Error
+    </Chip>
+    <Chip disabled>
+      <CatImage />
+      Disabled
+    </Chip>
+    <Chip onClick={handleClick}>
+      <CatImage />
+      clickable
+    </Chip>
+    <Chip variant="active" onClick={handleClick}>
+      <CatImage />
+      clickable
+    </Chip>
+    <Chip variant="error" onClick={handleClick}>
+      <CatImage />
+      clickable
+    </Chip>
+    <Chip onDelete={handleDelete} disabled>
+      <CatImage />
+      deletable
+    </Chip>
+    <Chip onDelete={handleDelete}>
+      <CatImage />
+      deletable
+    </Chip>
+    <Chip variant="active" onDelete={handleDelete}>
+      <CatImage />
+      deletable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete}>
+      <CatImage />
+      deletable
+    </Chip>
+    <div></div>
+    <Chip onDelete={handleDelete} onClick={handleClick}>
+      <CatImage />
+      deletable + clickable
+    </Chip>
+    <Chip variant="active" onDelete={handleDelete} onClick={handleClick}>
+      <CatImage />
+      deletable + clickable
+    </Chip>
+    <Chip variant="error" onDelete={handleDelete} onClick={handleClick}>
+      <CatImage />
+      deletable + clickable
+    </Chip>
+  </>
+)
 TextAndAvatar.storyName = 'Text and avatar'

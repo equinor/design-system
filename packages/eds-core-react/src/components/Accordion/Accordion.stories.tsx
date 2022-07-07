@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import {
   Accordion,
@@ -29,12 +28,6 @@ Icon.add({
   error_outlined,
 })
 
-const Wrapper = styled.div`
-  & > *:not(:first-child) {
-    margin-top: 16px;
-  }
-`
-
 export default {
   title: 'Surfaces/Accordion',
   component: Accordion,
@@ -50,28 +43,37 @@ export default {
       page,
     },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ display: 'grid', gap: '16px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof Accordion>
 
-export const Introduction: Story<AccordionProps> = (args) => (
-  <Accordion {...args}>
-    <Accordion.Item isExpanded>
-      <Accordion.Header>Header 1</Accordion.Header>
-      <Accordion.Panel>Content 1</Accordion.Panel>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Header>Header 2</Accordion.Header>
-      <Accordion.Panel>Content 2</Accordion.Panel>
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Header>Header 3</Accordion.Header>
-      <Accordion.Panel>Content 3</Accordion.Panel>
-    </Accordion.Item>
-  </Accordion>
-)
+export const Introduction: Story<AccordionProps> = (args) => {
+  return (
+    <Accordion {...args}>
+      <Accordion.Item isExpanded>
+        <Accordion.Header>Header 1</Accordion.Header>
+        <Accordion.Panel>Content 1</Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item>
+        <Accordion.Header>Header 2</Accordion.Header>
+        <Accordion.Panel>Content 2</Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item>
+        <Accordion.Header>Header 3</Accordion.Header>
+        <Accordion.Panel>Content 3</Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  )
+}
 
 export const Header: Story<AccordionProps> = () => {
   return (
-    <Wrapper>
+    <>
       <Accordion headerLevel="h3" chevronPosition="left">
         <Accordion.Item>
           <Accordion.Header>Chevron left</Accordion.Header>
@@ -207,7 +209,7 @@ export const Header: Story<AccordionProps> = () => {
           <Accordion.Panel>Content</Accordion.Panel>
         </Accordion.Item>
       </Accordion>
-    </Wrapper>
+    </>
   )
 }
 
@@ -220,7 +222,7 @@ export const Compact: Story<AccordionProps> = () => {
   }, [density])
 
   return (
-    <Wrapper>
+    <>
       <EdsProvider density={density}>
         <Accordion>
           <Accordion.Item isExpanded>
@@ -237,6 +239,6 @@ export const Compact: Story<AccordionProps> = () => {
           </Accordion.Item>
         </Accordion>
       </EdsProvider>
-    </Wrapper>
+    </>
   )
 }

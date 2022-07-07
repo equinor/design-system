@@ -1,14 +1,8 @@
-import styled from 'styled-components'
 import { useState, useEffect, useRef } from 'react'
 import { Progress, DotProgressProps, Typography, Button } from '../../..'
 import { ComponentMeta, Story } from '@storybook/react'
-import { Stack as SBStack } from './../../../../.storybook/components'
+import { Stack } from './../../../../.storybook/components'
 import page from './Dots.docs.mdx'
-
-const Stack = styled(SBStack)`
-  padding: 32px;
-  grid-template-columns: repeat(5, fit-content(100%));
-`
 
 export default {
   title: 'Feedback/Progress Indicators/Dots',
@@ -17,24 +11,37 @@ export default {
     backgrounds: { default: 'light' },
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
   argTypes: {},
 } as ComponentMeta<typeof Progress.Dots>
 
-export const Introduction: Story<DotProgressProps> = (args) => (
-  <Stack style={{ backgroundColor: '#ebebeb' }}>
-    <Progress.Dots {...args} />
-  </Stack>
-)
-
+export const Introduction: Story<DotProgressProps> = (args) => {
+  return <Progress.Dots {...args} />
+}
 Introduction.bind({})
 Introduction.args = {
   color: 'primary',
 }
+Introduction.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        style={{
+          padding: '32px',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Colors: Story<DotProgressProps> = () => (
-  <Stack style={{ backgroundColor: '#ebebeb' }}>
+  <>
     <div>
       <Typography variant="h4" as="h2">
         Primary
@@ -53,27 +60,70 @@ export const Colors: Story<DotProgressProps> = () => (
       </Typography>
       <Progress.Dots color="neutral" />
     </div>
-  </Stack>
+  </>
 )
+Colors.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        style={{
+          padding: '32px',
+          gridTemplateColumns: 'repeat(5, fit-content(100%))',
+          backgroundColor: '#ebebeb',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Sizes: Story<DotProgressProps> = () => (
-  <Stack>
+  <>
     <Progress.Dots color="primary" size={32} />
     <Progress.Dots color="primary" size={48} />
     <Progress.Dots color="primary" size={64} />
-  </Stack>
+  </>
 )
+Sizes.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        style={{
+          padding: '32px',
+          gridTemplateColumns: 'repeat(5, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const InsideButton: Story<DotProgressProps> = () => (
-  <Stack>
+  <>
     <Button>
       <Progress.Dots />
     </Button>
     <Button variant="ghost_icon">
       <Progress.Dots color="primary" />
     </Button>
-  </Stack>
+  </>
 )
+InsideButton.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        style={{
+          padding: '32px',
+          gridTemplateColumns: 'repeat(5, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Accessibility: Story<DotProgressProps> = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -92,7 +142,7 @@ export const Accessibility: Story<DotProgressProps> = () => {
     }, 6000)
   }
   return (
-    <Stack aria-busy={isLoading} aria-live="assertive">
+    <div aria-busy={isLoading} aria-live="assertive">
       <Button onClick={resetProgress} aria-disabled={isLoading}>
         {isLoading ? (
           <Progress.Dots
@@ -103,6 +153,20 @@ export const Accessibility: Story<DotProgressProps> = () => {
           <span>Click to load</span>
         )}
       </Button>
-    </Stack>
+    </div>
   )
 }
+Accessibility.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        style={{
+          padding: '32px',
+          gridTemplateColumns: 'repeat(5, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]

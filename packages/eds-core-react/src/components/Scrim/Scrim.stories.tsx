@@ -14,8 +14,20 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Scrim>
 
 export const Introduction: Story<ScrimProps> = (args) => {
@@ -31,11 +43,11 @@ export const Introduction: Story<ScrimProps> = (args) => {
   }
 
   return (
-    <Stack>
+    <>
       <Button onClick={handleOpen}>SHOW SCRIM</Button>
       <Scrim {...args} open={open} onClose={handleClose}>
         <Button onClick={handleClose}>HIDE SCRIM</Button>
       </Scrim>
-    </Stack>
+    </>
   )
 }

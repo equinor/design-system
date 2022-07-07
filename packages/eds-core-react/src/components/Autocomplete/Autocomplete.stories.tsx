@@ -2,7 +2,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
 import { Story, ComponentMeta } from '@storybook/react'
-import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { useForm, Controller } from 'react-hook-form'
 import { Typography, EdsProvider, Button, Density, Chip } from '../..'
@@ -630,7 +629,7 @@ export const OptionsUpdate: Story<AutocompleteProps<MyOptionType>> = () => {
       setOptions(items)
     }, 3000)
     return () => clearTimeout(timer)
-  }, [])
+  }, [items])
 
   return (
     <Stack direction="column">

@@ -23,16 +23,25 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Icon>
 
-export const Introduction: Story<IconProps> = (args) => (
-  <Stack>
-    <Icon {...args} />
-  </Stack>
-)
-
+export const Introduction: Story<IconProps> = (args) => {
+  return <Icon {...args} />
+}
 Introduction.args = {
   name: 'save',
   size: 24,
@@ -40,34 +49,32 @@ Introduction.args = {
 }
 
 export const Accessibility: Story<IconProps> = () => (
-  <Stack>
-    <Icon name="save" title="Save me!" />
-  </Stack>
+  <Icon name="save" title="Save me!" />
 )
 
 export const Color: Story<IconProps> = () => (
-  <Stack>
+  <>
     <Icon name="save" color={'red'} />
     <Icon name="save" color={'green'} />
     <Icon name="save" color={'blue'} />
-  </Stack>
+  </>
 )
 
 export const Rotations: Story<IconProps> = () => (
-  <Stack>
+  <>
     <Icon name="pregnant_woman" rotation={90} />
     <Icon name="pregnant_woman" rotation={180} />
     <Icon name="pregnant_woman" rotation={270} />
-  </Stack>
+  </>
 )
 
 export const Sizes: Story<IconProps> = () => (
-  <Stack>
+  <>
     <Icon name="fullscreen" size={16} />
     <Icon name="fullscreen" size={18} />
     <Icon name="fullscreen" size={24} />
     <Icon name="fullscreen" size={32} />
     <Icon name="fullscreen" size={40} />
     <Icon name="fullscreen" size={48} />
-  </Stack>
+  </>
 )
