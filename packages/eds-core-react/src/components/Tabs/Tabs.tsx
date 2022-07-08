@@ -1,8 +1,15 @@
-import { forwardRef, useState, HTMLAttributes, useEffect, useRef } from 'react'
+import {
+  forwardRef,
+  useState,
+  HTMLAttributes,
+  useEffect,
+  useRef,
+  useMemo,
+} from 'react'
 import { TabsProvider } from './Tabs.context'
 import { Variants } from './Tabs.types'
 import { token as tabsToken } from './Tabs.tokens'
-import { useId, useToken, useCombinedRefs } from '@equinor/eds-utils'
+import { useId, useToken, mergeRefs } from '@equinor/eds-utils'
 import { ThemeProvider } from 'styled-components'
 import { useEds } from '../EdsProvider'
 
@@ -32,7 +39,10 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
 ) {
   const tabsId = useId(id, 'tabs')
   const tabsRef = useRef<HTMLDivElement>(null)
-  const combinedTabsRef = useCombinedRefs<HTMLDivElement>(tabsRef, ref)
+  const combinedTabsRef = useMemo(
+    () => mergeRefs<HTMLDivElement>(tabsRef, ref),
+    [tabsRef, ref],
+  )
   const [tabsFocused, setTabsFocused] = useState(false)
   const [listenerAttached, setListenerAttached] = useState(false)
 
