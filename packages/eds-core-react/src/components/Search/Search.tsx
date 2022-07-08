@@ -247,7 +247,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     onClick: handleOnClick,
   }
   const combinedRef = useMemo(
-    () => mergeRefs<HTMLDivElement>(inputRef, ref),
+    () => mergeRefs<HTMLInputElement>(inputRef, ref),
     [inputRef, ref],
   )
 
