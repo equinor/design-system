@@ -1,10 +1,10 @@
-import { forwardRef, MouseEvent, HTMLAttributes, useRef } from 'react'
+import { forwardRef, MouseEvent, HTMLAttributes, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
 import {
   useGlobalKeyPress,
   useHideBodyScroll,
-  useCombinedRefs,
+  mergeRefs,
 } from '@equinor/eds-utils'
 
 const { height, width, background } = tokens
@@ -42,7 +42,11 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   ref,
 ) {
   const scrimRef = useRef<HTMLDivElement>(null)
-  const combinedScrimRef = useCombinedRefs<HTMLDivElement>(scrimRef, ref)
+
+  const combinedScrimRef = useMemo(
+    () => mergeRefs<HTMLDivElement>(scrimRef, ref),
+    [scrimRef, ref],
+  )
   const props = {
     ...rest,
     open,
