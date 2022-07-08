@@ -1,4 +1,4 @@
-import { forwardRef, useState, TextareaHTMLAttributes } from 'react'
+import { forwardRef, useState, TextareaHTMLAttributes, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import * as tokens from '../Input/Input.tokens'
 import type { InputToken } from '../Input/Input.tokens'
@@ -7,7 +7,7 @@ import {
   spacingsTemplate,
   outlineTemplate,
   useAutoResize,
-  useCombinedRefs,
+  mergeRefs,
 } from '@equinor/eds-utils'
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
@@ -123,9 +123,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const padding = parseInt(top) + parseInt(bottom)
     const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
     useAutoResize(textareaEl, rowsMax ? maxHeight : null)
+    const combinedRef = useMemo(
+      () => mergeRefs<HTMLTextAreaElement>(ref, setTextareaEl),
+      [setTextareaEl, ref],
+    )
 
     const inputProps = {
-      ref: useCombinedRefs<HTMLTextAreaElement>(ref, setTextareaEl),
+      ref: combinedRef,
       type,
       disabled,
       variant,
