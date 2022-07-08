@@ -5,6 +5,7 @@ import {
   InputHTMLAttributes,
   RefAttributes,
   forwardRef,
+  useMemo,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { search, close } from '@equinor/eds-icons'
@@ -18,7 +19,7 @@ import {
   typographyTemplate,
   setReactInputValue,
   bordersTemplate,
-  useCombinedRefs,
+  mergeRefs,
   useToken,
 } from '@equinor/eds-utils'
 
@@ -245,12 +246,16 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     'aria-label': rest['aria-label'],
     onClick: handleOnClick,
   }
+  const combinedRef = useMemo(
+    () => mergeRefs<HTMLDivElement>(inputRef, ref),
+    [inputRef, ref],
+  )
 
   const inputProps = applyControllingProps(
     {
       ...rest,
       disabled,
-      ref: useCombinedRefs<HTMLInputElement>(inputRef, ref),
+      ref: combinedRef,
       type: 'search',
       role: 'searchbox',
       'aria-label': 'search input',
