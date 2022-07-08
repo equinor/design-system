@@ -26,15 +26,15 @@ function useAutoResize(
 ): void;
 ```
 
-### useCombinedRefs
+### mergeRefs
 
-Can be used to combine multiple refs into a single ref, which then can then be passed to a component or DOM node.
+This was formerly a hook called `useCombinedRefs`, but has been renamed and turned into a utility function. Can be used to combine multiple refs into a single ref, which then can then be passed to a component or DOM node.
 
-Returns a memoized function that calls passed refs sequentially with passed element.
+Returns a function that calls passed refs sequentially with passed element.
 
 ```ts
-function useCombinedRefs(
-  ...refs: Ref<T>[]
+function mergeRefs(
+  ...refs: (MutableRefObject<T> | LegacyRef<T>)[]
 ): RefCallback<T>;
 ```
 
