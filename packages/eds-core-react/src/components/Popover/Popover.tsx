@@ -4,6 +4,7 @@ import {
   HTMLAttributes,
   SVGProps,
   useEffect,
+  useMemo,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Paper } from '../Paper'
@@ -14,7 +15,7 @@ import {
   useOutsideClick,
   Placement,
   useGlobalKeyPress,
-  useCombinedRefs,
+  mergeRefs,
   useToken,
 } from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
@@ -125,7 +126,10 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const [popperEl, setPopperEl] = useState<HTMLElement>(null)
     const [storedAnchorEl, setStoredAnchorEl] = useState<HTMLElement>(null)
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
-    const popoverRef = useCombinedRefs<HTMLDivElement>(ref, setPopperEl)
+    const popoverRef = useMemo(
+      () => mergeRefs<HTMLDivElement>(ref, setPopperEl),
+      [setPopperEl, ref],
+    )
 
     useOutsideClick(popperEl, (e: MouseEvent) => {
       if (open && onClose && anchorEl && !anchorEl.contains(e.target as Node)) {
