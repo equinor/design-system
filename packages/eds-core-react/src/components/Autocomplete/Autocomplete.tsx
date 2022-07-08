@@ -167,6 +167,8 @@ export type AutocompleteProps<T> = {
   disabled?: boolean
   /** Read Only */
   readOnly?: boolean
+  /** Hide clear button even when items are selected */
+  hideClearButton?: boolean
   /** If this prop is used, the select will become a controlled component. Use an empty
    * array [] if there will be no initial selected items
    * Note that this prop replaces the need for ```initialSelectedItems```
@@ -204,6 +206,7 @@ function AutocompleteInner<T>(
     style,
     disabled = false,
     readOnly = false,
+    hideClearButton = false,
     onOptionsChange,
     selectedOptions,
     multiple,
@@ -521,7 +524,8 @@ function AutocompleteInner<T>(
     resetCombobox()
     resetSelection()
   }
-  const showClearButton = (selectedItems.length > 0 || inputValue) && !readOnly
+  const showClearButton =
+    (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
 
   const selectedItemsLabels = useMemo(
     () => selectedItems.map(getLabel),
