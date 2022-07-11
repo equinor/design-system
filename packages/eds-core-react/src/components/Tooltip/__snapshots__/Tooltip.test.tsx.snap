@@ -25,40 +25,6 @@ exports[`Tooltip Matches snapshot 1`] = `
   height: 8px;
 }
 
-.c0[data-popper-placement^='top'] > .arrow {
-  bottom: -6px;
-}
-
-.c0[data-popper-placement^='top'] > .arrow .arrowSvg {
-  -webkit-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-}
-
-.c0[data-popper-placement^='bottom'] > .arrow {
-  top: -6px;
-}
-
-.c0[data-popper-placement^='bottom'] > .arrow .arrowSvg {
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
-.c0[data-popper-placement^='left'] > .arrow {
-  right: -6px;
-}
-
-.c0[data-popper-placement^='left'] > .arrow .arrowSvg {
-  -webkit-transform: rotate(-180deg);
-  -ms-transform: rotate(-180deg);
-  transform: rotate(-180deg);
-}
-
-.c0[data-popper-placement^='right'] > .arrow {
-  left: -6px;
-}
-
 .c1,
 .c1::before {
   position: absolute;
@@ -80,18 +46,15 @@ exports[`Tooltip Matches snapshot 1`] = `
 
 <div
   class="c0"
-  data-popper-escaped="true"
-  data-popper-placement="bottom"
-  data-popper-reference-hidden="true"
-  id="snapshot-tooltip"
-  open=""
+  id="floating-ui-0"
   role="tooltip"
-  style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 14px);"
+  style="position: absolute; top: 14px; left: 8px;"
+  tabindex="-1"
 >
   Tooltip
   <div
     class="c1 arrow"
-    style="position: absolute; left: 0px; transform: translate(0px, 0px);"
+    style="left: 0px; top: -6px; transform: rotate(90deg);"
   >
     <svg
       class="c2 arrowSvg"
