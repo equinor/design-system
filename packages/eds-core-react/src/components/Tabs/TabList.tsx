@@ -13,7 +13,7 @@ import {
   Children as ReactChildren,
 } from 'react'
 import styled from 'styled-components'
-import { useCombinedRefs } from '@equinor/eds-utils'
+import { mergeRefs } from '@equinor/eds-utils'
 import { TabsContext } from './Tabs.context'
 import { Variants } from './Tabs.types'
 
@@ -105,8 +105,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
   const Tabs = ReactChildren.map(children, (child: TabChild, index: number) => {
     const tabRef =
       index === activeTab
-        ? // eslint-disable-next-line react-hooks/rules-of-hooks
-          useCombinedRefs<HTMLButtonElement>(child.ref, selectedTabRef)
+        ? mergeRefs<HTMLButtonElement>(child.ref, selectedTabRef)
         : child.ref
 
     return cloneElement(child, {

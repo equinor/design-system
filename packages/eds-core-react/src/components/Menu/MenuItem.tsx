@@ -2,7 +2,7 @@ import { MouseEvent, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { menu as tokens } from './Menu.tokens'
 import {
-  useCombinedRefs,
+  mergeRefs,
   outlineTemplate,
   spacingsTemplate,
   typographyTemplate,
@@ -124,7 +124,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
     return (
       <Item
         {...props}
-        ref={useCombinedRefs<HTMLButtonElement>(ref, (el) => {
+        ref={mergeRefs<HTMLButtonElement>(ref, (el) => {
           if (isFocused) {
             requestAnimationFrame(() => {
               if (el !== null) el.focus()

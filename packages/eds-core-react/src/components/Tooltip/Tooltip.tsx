@@ -6,6 +6,7 @@ import {
   SVGProps,
   useEffect,
   cloneElement,
+  useMemo,
 } from 'react'
 import * as ReactDom from 'react-dom'
 import styled from 'styled-components'
@@ -19,7 +20,7 @@ import {
   useId,
   useGlobalKeyPress,
   useIsMounted,
-  useCombinedRefs,
+  mergeRefs,
 } from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 
@@ -117,11 +118,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
     const [open, setOpen] = useState(false)
     const openTimer = useRef<ReturnType<typeof setTimeout>>()
-    const tooltipRef = useCombinedRefs<HTMLDivElement>(setPopperEl, ref)
+    const tooltipRef = useMemo(
+      () => mergeRefs<HTMLDivElement>(setPopperEl, ref),
+      [setPopperEl, ref],
+    )
     const anchorRef = useRef<HTMLElement>()
-    const combinedChilddRef = useCombinedRefs<HTMLElement>(
-      anchorRef,
-      children?.ref,
+    const combinedChilddRef = useMemo(
+      () => mergeRefs<HTMLElement>(anchorRef, children?.ref),
+      [anchorRef, children?.ref],
     )
     const tooltipId = useId(id, 'tooltip')
     const containerId = 'eds-tooltip-container'

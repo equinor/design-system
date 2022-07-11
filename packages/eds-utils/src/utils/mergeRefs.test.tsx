@@ -1,9 +1,9 @@
 import { render, cleanup, screen } from '@testing-library/react'
 import { forwardRef, createRef } from 'react'
-import { useCombinedRefs } from './useCombinedRefs'
+import { mergeRefs } from './mergeRefs'
 
 const Component = forwardRef<HTMLDivElement>((props, ref) => {
-  const targetRef = useCombinedRefs(ref)
+  const targetRef = mergeRefs<HTMLDivElement>(ref)
   return <div {...props} ref={targetRef} />
 })
 Component.displayName = 'Component'
