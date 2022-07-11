@@ -45,30 +45,6 @@ const StyledTooltip = styled.div`
     width: ${tokens.entities.arrow.width};
     height: ${tokens.entities.arrow.height};
   }
-  &[data-popper-placement^='top'] > .arrow {
-    bottom: ${tokens.entities.arrow.spacings.bottom};
-    .arrowSvg {
-      transform: rotate(-90deg);
-    }
-  }
-
-  &[data-popper-placement^='bottom'] > .arrow {
-    top: ${tokens.entities.arrow.spacings.top};
-    .arrowSvg {
-      transform: rotate(90deg);
-    }
-  }
-
-  &[data-popper-placement^='left'] > .arrow {
-    right: ${tokens.entities.arrow.spacings.right};
-    .arrowSvg {
-      transform: rotate(-180deg);
-    }
-  }
-
-  &[data-popper-placement^='right'] > .arrow {
-    left: ${tokens.entities.arrow.spacings.left};
-  }
 `
 
 const ArrowWrapper = styled.div`
@@ -188,7 +164,10 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const updatedChildren = cloneElement(children, {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      ...getReferenceProps({ ref: anchorRef, ...children.props }),
+      ...getReferenceProps({
+        ref: anchorRef,
+        ...children.props,
+      }),
     })
 
     return (
