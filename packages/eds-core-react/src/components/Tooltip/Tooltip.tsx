@@ -137,15 +137,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       whileElementsMounted: autoUpdate,
     })
 
-    const anchorRef = useMemo(
-      () => mergeRefs<HTMLElement>(reference, children?.ref),
-      [reference, children?.ref],
-    )
-    const tooltipRef = useMemo(
-      () => mergeRefs<HTMLDivElement>(floating, ref),
-      [floating, ref],
-    )
-
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(context, { delay: { open: enterDelay } }),
       useFocus(context),
