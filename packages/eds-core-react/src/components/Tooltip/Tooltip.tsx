@@ -39,26 +39,13 @@ const StyledTooltip = styled.div`
   background: ${tokens.background};
   z-index: 1500;
   white-space: nowrap;
-
-  .arrow {
-    z-index: -1;
-    width: ${tokens.entities.arrow.width};
-    height: ${tokens.entities.arrow.height};
-  }
 `
 
 const ArrowWrapper = styled.div`
-  &,
-  &::before {
-    position: absolute;
-    width: ${tokens.entities.arrow.width};
-    height: ${tokens.entities.arrow.height};
-    z-index: -1;
-  }
-
-  &::before {
-    content: '';
-  }
+  position: absolute;
+  width: ${tokens.entities.arrow.width};
+  height: ${tokens.entities.arrow.height};
+  z-index: -1;
 `
 
 type ArrowProps = {
@@ -85,7 +72,7 @@ export type TooltipProps = {
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    { title, placement = 'bottom', children, enterDelay = 100, ...rest },
+    { title, placement = 'bottom', children, style, enterDelay = 100, ...rest },
     ref,
   ) {
     const arrowRef = useRef<HTMLDivElement>(null)
@@ -100,6 +87,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       strategy,
       context,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      placement: finalPlacement,
     } = useFloating({
       placement,
       open,
@@ -133,7 +121,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       right: 'left',
       bottom: 'top',
       left: 'right',
-    }[placement.split('-')[0]]
+    }[finalPlacement.split('-')[0]]
 
     let arrowTransform = 'none'
     switch (staticSide) {
@@ -178,6 +166,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               {...getFloatingProps({
                 ref: tooltipRef,
                 style: {
+                  ...style,
                   position: strategy,
                   top: y ?? 0,
                   left: x ?? 0,
@@ -185,7 +174,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               })}
             >
               {title}
-              <ArrowWrapper ref={arrowRef} className="arrow">
+              <ArrowWrapper ref={arrowRef}>
                 <TooltipArrow className="arrowSvg">
                   <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
                 </TooltipArrow>
