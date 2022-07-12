@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { useRef } from 'react'
 import {
   Tooltip,
   TooltipProps,

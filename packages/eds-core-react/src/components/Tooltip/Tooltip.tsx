@@ -163,10 +163,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     const updatedChildren = cloneElement(children, {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       ...getReferenceProps({
         ref: anchorRef,
-        ...children.props,
+        ...(children.props as HTMLAttributes<HTMLElement>),
       }),
     })
 
