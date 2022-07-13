@@ -33,56 +33,11 @@ exports[`Popover Matches snapshot 1`] = `
   z-index: 1400;
 }
 
-.c1 .arrow {
-  z-index: -1;
-  width: 6px;
-  height: 8px;
-}
-
-.c1[data-popper-placement^='top'] > .arrow {
-  bottom: -5px;
-}
-
-.c1[data-popper-placement^='top'] > .arrow .arrowSvg {
-  -webkit-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-}
-
-.c1[data-popper-placement^='bottom'] > .arrow {
-  top: -5px;
-}
-
-.c1[data-popper-placement^='bottom'] > .arrow .arrowSvg {
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
-.c1[data-popper-placement^='left'] > .arrow {
-  right: -5px;
-}
-
-.c1[data-popper-placement^='left'] > .arrow .arrowSvg {
-  -webkit-transform: rotate(-180deg);
-  -ms-transform: rotate(-180deg);
-  transform: rotate(-180deg);
-}
-
-.c1[data-popper-placement^='right'] > .arrow {
-  left: -5px;
-}
-
-.c3,
-.c3::before {
+.c3 {
   position: absolute;
   width: 6px;
   height: 8px;
   z-index: -1;
-}
-
-.c3::before {
-  content: '';
 }
 
 .c5 {
@@ -105,17 +60,15 @@ exports[`Popover Matches snapshot 1`] = `
 
 <div
   class="c0 c1 c2"
-  data-popper-escaped="true"
-  data-popper-placement="bottom"
-  data-popper-reference-hidden="true"
   data-testid="popover"
   elevation="0 1px 10px rgba(0, 0, 0, 0.2),0 4px 5px rgba(0, 0, 0, 0.12),0 2px 4px rgba(0, 0, 0, 0.14)"
   open=""
-  style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 10px);"
+  style="position: absolute; top: 14px; left: 8px;"
+  tabindex="-1"
 >
   <div
     class="c3 arrow"
-    style="position: absolute; left: 0px; transform: translate(0px, 0px);"
+    style="top: -6px; transform: rotate(90deg); left: 0px;"
   >
     <svg
       class="c4 arrowSvg"
