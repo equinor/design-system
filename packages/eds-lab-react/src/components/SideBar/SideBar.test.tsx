@@ -48,7 +48,7 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '72px' })
+    expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '66px' })
   })
 
   it('Renders open width when open', () => {
@@ -76,7 +76,7 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    const collapse = screen.getByRole('button', { name: /collapse/i })
+    const collapse = screen.getByRole('button')
     userEvent.click(collapse)
 
     expect(cb).toHaveBeenCalled()
