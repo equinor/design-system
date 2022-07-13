@@ -102,6 +102,7 @@
     "@equinor/eds-icons": "workspace:*",
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
+    "@floating-ui/react-dom-interactions": "^0.6.6",
     "@popperjs/core": "2.9.2",
     "downshift": "^6.1.7",
     "react-fast-compare": "3.2.0"

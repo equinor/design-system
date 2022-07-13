@@ -4,27 +4,34 @@ import {
   useState,
   HTMLAttributes,
   SVGProps,
-  useEffect,
   cloneElement,
   useMemo,
 } from 'react'
-import * as ReactDom from 'react-dom'
 import styled from 'styled-components'
 import {
   spacingsTemplate,
   typographyTemplate,
   bordersTemplate,
-  joinHandlers,
-  usePopper,
-  Placement,
-  useId,
-  useGlobalKeyPress,
-  useIsMounted,
   mergeRefs,
 } from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
+import {
+  Placement,
+  offset,
+  flip,
+  shift,
+  arrow,
+  autoUpdate,
+  useFloating,
+  useInteractions,
+  useHover,
+  useFocus,
+  useRole,
+  useDismiss,
+  FloatingPortal,
+} from '@floating-ui/react-dom-interactions'
 
-const StyledTooltip = styled.div<{ open: boolean }>`
+const StyledTooltip = styled.div`
   ${typographyTemplate(tokens.typography)}
   ${spacingsTemplate(tokens.spacings)}
   ${bordersTemplate(tokens.border)}
@@ -32,50 +39,13 @@ const StyledTooltip = styled.div<{ open: boolean }>`
   background: ${tokens.background};
   z-index: 1500;
   white-space: nowrap;
-
-  .arrow {
-    z-index: -1;
-    width: ${tokens.entities.arrow.width};
-    height: ${tokens.entities.arrow.height};
-  }
-  &[data-popper-placement^='top'] > .arrow {
-    bottom: ${tokens.entities.arrow.spacings.bottom};
-    .arrowSvg {
-      transform: rotate(-90deg);
-    }
-  }
-
-  &[data-popper-placement^='bottom'] > .arrow {
-    top: ${tokens.entities.arrow.spacings.top};
-    .arrowSvg {
-      transform: rotate(90deg);
-    }
-  }
-
-  &[data-popper-placement^='left'] > .arrow {
-    right: ${tokens.entities.arrow.spacings.right};
-    .arrowSvg {
-      transform: rotate(-180deg);
-    }
-  }
-
-  &[data-popper-placement^='right'] > .arrow {
-    left: ${tokens.entities.arrow.spacings.left};
-  }
 `
 
 const ArrowWrapper = styled.div`
-  &,
-  &::before {
-    position: absolute;
-    width: ${tokens.entities.arrow.width};
-    height: ${tokens.entities.arrow.height};
-    z-index: -1;
-  }
-
-  &::before {
-    content: '';
-  }
+  position: absolute;
+  width: ${tokens.entities.arrow.width};
+  height: ${tokens.entities.arrow.height};
+  z-index: -1;
 `
 
 type ArrowProps = {
@@ -102,114 +72,116 @@ export type TooltipProps = {
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    {
-      title,
-      placement = 'bottom',
-      children,
-      enterDelay = 100,
-      id,
-      style,
-      ...rest
-    },
+    { title, placement = 'bottom', children, style, enterDelay = 100, ...rest },
     ref,
   ) {
-    const isMounted = useIsMounted()
-    const [popperEl, setPopperEl] = useState<HTMLElement>(null)
-    const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
+    const arrowRef = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
-    const openTimer = useRef<ReturnType<typeof setTimeout>>()
-    const tooltipRef = useMemo(
-      () => mergeRefs<HTMLDivElement>(setPopperEl, ref),
-      [setPopperEl, ref],
-    )
-    const anchorRef = useRef<HTMLElement>()
-    const combinedChilddRef = useMemo(
-      () => mergeRefs<HTMLElement>(anchorRef, children?.ref),
-      [anchorRef, children?.ref],
-    )
-    const tooltipId = useId(id, 'tooltip')
-    const containerId = 'eds-tooltip-container'
-    const shouldOpen = isMounted && title !== ''
+    const shouldOpen = title !== ''
 
-    useEffect(() => {
-      if (document.getElementById(containerId) === null) {
-        const tooltipContainerElement = document.createElement('div')
-        tooltipContainerElement.id = containerId
-        document.body.appendChild(tooltipContainerElement)
-      }
-      return () => {
-        clearTimeout(openTimer.current)
-      }
-    }, [])
-
-    const openTooltip = () => {
-      if (shouldOpen) {
-        clearTimeout(openTimer.current)
-
-        openTimer.current = setTimeout(() => {
-          setOpen(true)
-        }, enterDelay)
-      }
-    }
-
-    const closeTooltip = () => {
-      clearTimeout(openTimer.current)
-      setOpen(false)
-    }
-
-    useGlobalKeyPress('Escape', () => closeTooltip())
-
-    const { styles, attributes } = usePopper({
-      anchorEl: anchorRef.current,
-      popperEl,
-      arrowRef,
+    const {
+      x,
+      y,
+      reference,
+      floating,
+      strategy,
+      context,
+      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      placement: finalPlacement,
+    } = useFloating({
       placement,
-      offset: 14,
-    })
-
-    const props = {
       open,
-      style: { ...styles.popper, ...style },
-      ...rest,
-      ...attributes.popper,
+      onOpenChange: setOpen,
+      middleware: [
+        offset(14),
+        flip(),
+        shift({ padding: 8 }),
+        arrow({ element: arrowRef }),
+      ],
+      whileElementsMounted: autoUpdate,
+    })
+    const anchorRef = useMemo(
+      () => mergeRefs<HTMLElement>(reference, children?.ref),
+      [reference, children?.ref],
+    )
+    const tooltipRef = useMemo(
+      () => mergeRefs<HTMLDivElement>(floating, ref),
+      [floating, ref],
+    )
+
+    const { getReferenceProps, getFloatingProps } = useInteractions([
+      useHover(context, { delay: { open: enterDelay } }),
+      useFocus(context),
+      useRole(context, { role: 'tooltip' }),
+      useDismiss(context),
+    ])
+
+    const staticSide = {
+      top: 'bottom',
+      right: 'left',
+      bottom: 'top',
+      left: 'right',
+    }[finalPlacement.split('-')[0]]
+
+    let arrowTransform = 'none'
+    switch (staticSide) {
+      case 'right':
+        arrowTransform = 'rotateY(180deg)'
+        break
+      case 'left':
+        arrowTransform = 'none'
+        break
+      case 'top':
+        arrowTransform = 'rotate(90deg)'
+        break
+      case 'bottom':
+        arrowTransform = 'rotate(-90deg)'
+        break
     }
 
-    const childProps = children.props as HTMLAttributes<HTMLElement>
+    if (arrowRef.current) {
+      Object.assign(arrowRef.current.style, {
+        left: arrowX != null ? `${arrowX}px` : '',
+        top: arrowY != null ? `${arrowY}px` : '',
+        right: '',
+        bottom: '',
+        [staticSide]: '-6px',
+        transform: arrowTransform,
+      })
+    }
+
     const updatedChildren = cloneElement(children, {
-      ref: combinedChilddRef,
-      'aria-describedby': open ? tooltipId : null,
-      onMouseOver: joinHandlers(openTooltip, childProps.onMouseOver),
-      onMouseLeave: joinHandlers(closeTooltip, childProps.onMouseLeave),
-      onPointerEnter: joinHandlers(openTooltip, childProps.onPointerEnter),
-      onPointerLeave: joinHandlers(closeTooltip, childProps.onPointerLeave),
-      onBlur: joinHandlers(closeTooltip, childProps.onBlur),
-      onFocus: joinHandlers(openTooltip, childProps.onFocus),
-    } as HTMLAttributes<HTMLElement>)
+      ...getReferenceProps({
+        ref: anchorRef,
+        ...(children.props as HTMLAttributes<HTMLElement>),
+      }),
+    })
 
     return (
       <>
-        {shouldOpen &&
-          open &&
-          ReactDom.createPortal(
+        <FloatingPortal id="eds-tooltip-container">
+          {shouldOpen && open && (
             <StyledTooltip
-              id={tooltipId}
-              role="tooltip"
-              ref={tooltipRef}
-              {...props}
+              {...rest}
+              {...getFloatingProps({
+                ref: tooltipRef,
+                style: {
+                  ...style,
+                  position: strategy,
+                  top: y ?? 0,
+                  left: x ?? 0,
+                },
+              })}
             >
               {title}
-              <ArrowWrapper
-                ref={setArrowRef}
-                style={styles.arrow}
-                className="arrow"
-              >
+              <ArrowWrapper ref={arrowRef}>
                 <TooltipArrow className="arrowSvg">
                   <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
                 </TooltipArrow>
               </ArrowWrapper>
-            </StyledTooltip>,
-            document.getElementById(containerId),
+            </StyledTooltip>
           )}
+        </FloatingPortal>
         {updatedChildren}
       </>
     )

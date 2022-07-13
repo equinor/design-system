@@ -95,6 +95,12 @@ describe('Breadcrumbs', () => {
     )
   })
   it('should crop the labels and have tooltip on hover when maxWidth is defined', async () => {
+    const mockResizeObserver = jest.fn(() => ({
+      observe: jest.fn(),
+      disconnect: jest.fn(),
+      unobserve: jest.fn(),
+    }))
+    window.ResizeObserver = mockResizeObserver
     render(
       <Breadcrumbs>
         <Breadcrumb maxWidth={30}>Label 1</Breadcrumb>
@@ -105,7 +111,7 @@ describe('Breadcrumbs', () => {
     const crumb = screen.getAllByText(/^Label\s\d$/)
     expect(crumb[0]).toHaveStyleRule('max-width', '30px')
 
-    fireEvent.mouseOver(crumb[0])
+    fireEvent.mouseEnter(crumb[0])
 
     await act(() => new Promise((r) => setTimeout(r, 100)))
 
