@@ -1,9 +1,9 @@
 import {
   forwardRef,
-  useState,
+  useLayoutEffect,
   HTMLAttributes,
   SVGProps,
-  useEffect,
+  useRef,
   useMemo,
 } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
@@ -11,15 +11,22 @@ import { Paper } from '../Paper'
 import {
   typographyTemplate,
   bordersTemplate,
-  usePopper,
-  useOutsideClick,
-  Placement,
-  useGlobalKeyPress,
   mergeRefs,
   useToken,
 } from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
+import {
+  Placement,
+  offset,
+  flip,
+  shift,
+  arrow,
+  autoUpdate,
+  useFloating,
+  useInteractions,
+  useDismiss,
+} from '@floating-ui/react-dom-interactions'
 
 type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
@@ -37,52 +44,15 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
     max-width: ${theme.maxWidth};
     ${bordersTemplate(theme.border)}
     z-index: 1400;
-
-    .arrow {
-      z-index: -1;
-      width: ${theme.entities.arrow.width};
-      height: ${theme.entities.arrow.height};
-    }
-    &[data-popper-placement^='top'] > .arrow {
-      bottom: ${theme.entities.arrow.spacings.bottom};
-      .arrowSvg {
-        transform: rotate(-90deg);
-      }
-    }
-
-    &[data-popper-placement^='bottom'] > .arrow {
-      top: ${theme.entities.arrow.spacings.top};
-      .arrowSvg {
-        transform: rotate(90deg);
-      }
-    }
-
-    &[data-popper-placement^='left'] > .arrow {
-      right: ${theme.entities.arrow.spacings.right};
-      .arrowSvg {
-        transform: rotate(-180deg);
-      }
-    }
-
-    &[data-popper-placement^='right'] > .arrow {
-      left: ${theme.entities.arrow.spacings.left};
-    }
   `
 })
 
 const ArrowWrapper = styled.div(({ theme }) => {
   return css`
-    &,
-    &::before {
-      position: absolute;
-      width: ${theme.entities.arrow.width};
-      height: ${theme.entities.arrow.height};
-      z-index: -1;
-    }
-
-    &::before {
-      content: '';
-    }
+    position: absolute;
+    width: ${theme.entities.arrow.width};
+    height: ${theme.entities.arrow.height};
+    z-index: -1;
   `
 })
 
@@ -120,45 +90,81 @@ export type PopoverProps = {
 
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   function Popover(
-    { children, placement = 'bottom', anchorEl, open, onClose, ...rest },
+    { children, placement = 'bottom', anchorEl, style, open, onClose, ...rest },
     ref,
   ) {
-    const [popperEl, setPopperEl] = useState<HTMLElement>(null)
-    const [storedAnchorEl, setStoredAnchorEl] = useState<HTMLElement>(null)
-    const [arrowRef, setArrowRef] = useState<HTMLDivElement | null>(null)
+    const arrowRef = useRef<HTMLDivElement>(null)
+
+    const {
+      x,
+      y,
+      reference,
+      floating,
+      strategy,
+      context,
+      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      placement: finalPlacement,
+    } = useFloating({
+      placement,
+      open,
+      onOpenChange: onClose,
+      middleware: [
+        offset(14),
+        flip(),
+        shift({ padding: 8 }),
+        arrow({ element: arrowRef }),
+      ],
+      whileElementsMounted: autoUpdate,
+    })
+
+    useLayoutEffect(() => {
+      reference(anchorEl)
+    }, [anchorEl, reference])
+
     const popoverRef = useMemo(
-      () => mergeRefs<HTMLDivElement>(ref, setPopperEl),
-      [setPopperEl, ref],
+      () => mergeRefs<HTMLDivElement>(floating, ref),
+      [floating, ref],
     )
 
-    useOutsideClick(popperEl, (e: MouseEvent) => {
-      if (open && onClose && anchorEl && !anchorEl.contains(e.target as Node)) {
-        onClose()
-      }
-    })
+    const { getFloatingProps } = useInteractions([useDismiss(context)])
 
-    useGlobalKeyPress('Escape', () => {
-      if (onClose && open) {
-        onClose()
-      }
-    })
+    const staticSide = {
+      top: 'bottom',
+      right: 'left',
+      bottom: 'top',
+      left: 'right',
+    }[finalPlacement.split('-')[0]]
 
-    useEffect(() => {
-      open ? setStoredAnchorEl(anchorEl) : setStoredAnchorEl(null)
-      return () => setStoredAnchorEl(null)
-    }, [anchorEl, open])
+    let arrowTransform = 'none'
+    switch (staticSide) {
+      case 'right':
+        arrowTransform = 'rotateY(180deg)'
+        break
+      case 'left':
+        arrowTransform = 'none'
+        break
+      case 'top':
+        arrowTransform = 'rotate(90deg)'
+        break
+      case 'bottom':
+        arrowTransform = 'rotate(-90deg)'
+        break
+    }
 
-    const { styles, attributes } = usePopper({
-      anchorEl: storedAnchorEl,
-      popperEl,
-      arrowRef,
-      placement,
-    })
+    if (arrowRef.current) {
+      Object.assign(arrowRef.current.style, {
+        left: arrowX != null ? `${arrowX}px` : '',
+        top: arrowY != null ? `${arrowY}px` : '',
+        right: '',
+        bottom: '',
+        [staticSide]: '-6px',
+        transform: arrowTransform,
+      })
+    }
 
     const props = {
       open,
       ...rest,
-      ...attributes.popper,
     }
 
     const { density } = useEds()
@@ -167,16 +173,19 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <ThemeProvider theme={token}>
         <PopoverPaper
-          ref={popoverRef}
           elevation="overlay"
-          style={styles.popper}
           {...props}
+          {...getFloatingProps({
+            ref: popoverRef,
+            style: {
+              ...style,
+              position: strategy,
+              top: y ?? 0,
+              left: x ?? 0,
+            },
+          })}
         >
-          <ArrowWrapper
-            ref={setArrowRef}
-            style={styles.arrow}
-            className="arrow"
-          >
+          <ArrowWrapper ref={arrowRef} className="arrow">
             <PopoverArrow className="arrowSvg">
               <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
             </PopoverArrow>
