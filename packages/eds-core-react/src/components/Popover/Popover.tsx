@@ -1,6 +1,7 @@
 import {
   forwardRef,
   useLayoutEffect,
+  useEffect,
   HTMLAttributes,
   SVGProps,
   useRef,
@@ -100,6 +101,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       y,
       reference,
       floating,
+      refs,
+      update,
       strategy,
       context,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
@@ -114,7 +117,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         shift({ padding: 8 }),
         arrow({ element: arrowRef }),
       ],
-      whileElementsMounted: autoUpdate,
     })
 
     useLayoutEffect(() => {
@@ -125,6 +127,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       () => mergeRefs<HTMLDivElement>(floating, ref),
       [floating, ref],
     )
+
+    useEffect(() => {
+      if (refs.reference.current && refs.floating.current && open) {
+        return autoUpdate(refs.reference.current, refs.floating.current, update)
+      }
+    }, [refs.reference, refs.floating, update, open])
 
     const { getFloatingProps } = useInteractions([useDismiss(context)])
 
