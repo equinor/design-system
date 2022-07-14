@@ -23,6 +23,15 @@ const StyledPopover = styled(TestPopover)`
 `
 
 afterEach(cleanup)
+const mockResizeObserver = jest.fn(() => ({
+  observe: jest.fn(),
+  disconnect: jest.fn(),
+  unobserve: jest.fn(),
+}))
+
+beforeAll(() => {
+  window.ResizeObserver = mockResizeObserver
+})
 
 describe('Popover', () => {
   it('Matches snapshot', async () => {
@@ -72,7 +81,7 @@ describe('Popover', () => {
       expect(container).toBeDefined()
     })
     await waitFor(() => {
-      expect(container).toHaveAttribute('data-popper-placement', 'right-start')
+      expect(container).toHaveAttribute('open')
     })
   })
 
