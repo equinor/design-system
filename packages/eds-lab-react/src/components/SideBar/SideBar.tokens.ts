@@ -9,10 +9,8 @@ const {
     },
     interactive: {
       focus: { rgba: focusColor },
-      primary__hover: { rgba: primary__hover },
       primary__resting: { rgba: primary__resting },
       primary__selected_highlight: { rgba: menuActive },
-      secondary__highlight: { rgba: expandHover },
       disabled__fill: { rgba: menuDisabledBackground },
       disabled__text: { rgba: menuDisabledText },
     },
@@ -22,7 +20,7 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium, large, medium_small },
+    comfortable: { medium, large },
   },
 } = tokens
 
@@ -40,21 +38,11 @@ export const sidebar: ComponentToken = {
   },
   entities: {
     actionButton: {
-      background: primary__resting,
       typography: {
         color: primaryWhite,
       },
       spacings: {
         right: large,
-      },
-      border: {
-        type: 'bordergroup',
-        bottom: { color: background__medium, width: '1px', style: 'solid' },
-      },
-      states: {
-        hover: {
-          background: primary__hover,
-        },
       },
     },
     sidebarItem: {
@@ -65,9 +53,6 @@ export const sidebar: ComponentToken = {
       border: {
         type: 'bordergroup',
         bottom: { color: background__medium, width: '1px', style: 'solid' },
-      },
-      spacings: {
-        bottom: medium,
       },
       states: {
         active: {
@@ -99,15 +84,9 @@ export const sidebar: ComponentToken = {
     toggleOpen: {
       spacings: {
         right: medium,
-        top: medium_small,
       },
       typography: {
         color: expandTextColor,
-      },
-      states: {
-        hover: {
-          background: expandHover,
-        },
       },
     },
   },

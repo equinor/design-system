@@ -6,7 +6,6 @@ export type SideBarContentProps = HTMLAttributes<HTMLDivElement>
 const StyledSideBarContent = styled.div(({ theme }) => {
   return css`
     grid-area: content;
-    padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
     :last-child {
       padding-bottom: ${theme.spacings.bottom};
     }
