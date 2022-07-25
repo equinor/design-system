@@ -48,10 +48,9 @@ const GridContainer = styled.div<ContainerProps>(
         'content'
         'footer';
       background-color: ${theme.background};
-      //padding-bottom: ${theme.spacings.bottom};
       overflow: hidden;
-      width: ${open ? '256px' : '72px'};
-      min-width: ${open ? '256px' : '72px'};
+      width: ${open ? theme.maxWidth : theme.minWidth};
+      min-width: ${open ? theme.maxWidth : theme.minWidth};
       ${maxHeight && css({ maxHeight: maxHeight })}
     `
   },

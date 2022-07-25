@@ -4,16 +4,13 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   colors: {
     ui: {
-      background__medium: { rgba: borderColor },
+      background__medium: { rgba: background__medium },
       background__default: { rgba: background },
     },
     interactive: {
       focus: { rgba: focusColor },
-      primary__hover: { rgba: primary__hover },
       primary__resting: { rgba: primary__resting },
       primary__selected_highlight: { rgba: menuActive },
-      primary__selected_hover: { rgba: menuHover },
-      secondary__highlight: { rgba: expandHover },
       disabled__fill: { rgba: menuDisabledBackground },
       disabled__text: { rgba: menuDisabledText },
     },
@@ -23,49 +20,39 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium, large, medium_small },
+    comfortable: { medium, large },
   },
 } = tokens
 
 export const sidebar: ComponentToken = {
   background,
+  minWidth: '66px',
+  maxWidth: '256px',
   spacings: {
     top: large,
     bottom: large,
   },
   border: {
     type: 'bordergroup',
-    right: { color: borderColor, width: '1px', style: 'solid' },
+    right: { color: background__medium, width: '1px', style: 'solid' },
   },
   entities: {
     actionButton: {
-      background: primary__resting,
       typography: {
         color: primaryWhite,
       },
       spacings: {
         right: large,
       },
-      border: {
-        type: 'bordergroup',
-        bottom: { color: borderColor, width: '1px', style: 'solid' },
-      },
-      states: {
-        hover: {
-          background: primary__hover,
-        },
-      },
     },
     sidebarItem: {
+      minHeight: '48px',
       typography: {
         color: expandTextColor,
       },
       border: {
         type: 'bordergroup',
-        bottom: { color: borderColor, width: '1px', style: 'solid' },
-      },
-      spacings: {
-        bottom: medium,
+        bottom: { color: background__medium, width: '1px', style: 'solid' },
       },
       states: {
         active: {
@@ -75,7 +62,7 @@ export const sidebar: ComponentToken = {
           },
         },
         hover: {
-          background: menuHover,
+          background: background__medium,
         },
         focus: {
           outline: {
@@ -97,15 +84,9 @@ export const sidebar: ComponentToken = {
     toggleOpen: {
       spacings: {
         right: medium,
-        top: medium_small,
       },
       typography: {
         color: expandTextColor,
-      },
-      states: {
-        hover: {
-          background: expandHover,
-        },
       },
     },
   },

@@ -3,10 +3,9 @@ import styled, { css } from 'styled-components'
 
 export type SideBarFooterProps = HTMLAttributes<HTMLDivElement>
 
-const StyledSideBarFooter = styled.div(({ theme }) => {
+const StyledSideBarFooter = styled.div(() => {
   return css`
     grid-area: footer;
-    padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
   `
 })
 
