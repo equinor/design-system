@@ -42,6 +42,8 @@ jobs:
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Build packages
         run: node_modules/.bin/pnpm run build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build Storybook
         # Using this if statement as steps.if does not work with "needs.setup.outputs.stage" value
         run: |

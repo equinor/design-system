@@ -39,6 +39,8 @@ jobs:
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Build packages
         run: node_modules/.bin/pnpm run build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build Storybook
         run: node_modules/.bin/pnpm build:storybook
   publish-utils-package:
