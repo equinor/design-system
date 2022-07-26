@@ -54,9 +54,9 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Publish to npm
-        run: node_modules/.bin/pnpm --filter @equinor/eds-utils publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          node_modules/.bin/pnpm --filter @equinor/eds-utils publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
   publish-core-package:
     name: Publish core-react to npm
     runs-on: ubuntu-latest
@@ -70,9 +70,9 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Publish to npm
-        run: node_modules/.bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          node_modules/.bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
   publish-storybook:
     name: Publish Storybook
     needs: [setup, packages]
