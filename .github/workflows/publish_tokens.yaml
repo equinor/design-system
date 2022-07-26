@@ -34,8 +34,6 @@ jobs:
           key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
       - name: Build packages
         run: node_modules/.bin/pnpm run build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   publish:
     name: Publish to npm
     runs-on: ubuntu-latest
