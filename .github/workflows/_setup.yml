@@ -85,8 +85,6 @@ jobs:
       - name: Install dependencies recursively
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: node_modules/.bin/pnpm m i
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - id: cache-files
         name: Cache files
         uses: actions/cache@v3
