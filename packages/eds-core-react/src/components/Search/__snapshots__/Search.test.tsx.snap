@@ -2,7 +2,7 @@
 
 exports[`Search Matches snapshot 1`] = `
 <DocumentFragment>
-  .c5 {
+  .c6 {
   display: grid;
   grid-gap: var(--eds_button__gap,8px);
   grid-auto-flow: column;
@@ -17,12 +17,12 @@ exports[`Search Matches snapshot 1`] = `
   justify-content: center;
 }
 
-.c5 > :is(svg,img) {
+.c6 > :is(svg,img) {
   margin-top: var(--eds_button__icon__margin_y,0);
   margin-bottom: var(--eds_button__icon__margin_y,0);
 }
 
-.c3 {
+.c4 {
   margin: 0;
   padding: 0;
   -webkit-text-decoration: none;
@@ -48,11 +48,11 @@ exports[`Search Matches snapshot 1`] = `
   text-align: center;
 }
 
-.c3 svg {
+.c4 svg {
   justify-self: center;
 }
 
-.c3::before {
+.c4::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -61,7 +61,7 @@ exports[`Search Matches snapshot 1`] = `
   content: '';
 }
 
-.c3::after {
+.c4::after {
   position: absolute;
   top: -0;
   left: -4px;
@@ -70,25 +70,25 @@ exports[`Search Matches snapshot 1`] = `
   content: '';
 }
 
-.c3:focus {
+.c4:focus {
   outline: none;
 }
 
-.c3[data-focus-visible-added]:focus {
+.c4[data-focus-visible-added]:focus {
   outline: 2px dashed rgba(0,112,121,1);
   outline-offset: -2px;
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline: 2px dashed rgba(0,112,121,1);
   outline-offset: -2px;
 }
 
-.c3::-moz-focus-inner {
+.c4::-moz-focus-inner {
   border: 0;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   background: transparent;
   border: 1px solid transparent;
@@ -102,18 +102,27 @@ exports[`Search Matches snapshot 1`] = `
 }
 
 .c1 {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-column-gap: 8px;
+  column-gap: 8px;
   border: none;
+  box-sizing: border-box;
   height: 36px;
   box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
   outline: 1px solid transparent;
   outline-offset: 0px;
+  padding-left: 8px;
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
   margin: 0;
   color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
   font-family: Equinor;
@@ -125,51 +134,51 @@ exports[`Search Matches snapshot 1`] = `
   -ms-letter-spacing: 0.025em;
   letter-spacing: 0.025em;
   text-align: left;
-  padding-left: 8px;
-  padding-top: 6px;
-  padding-right: 8px;
-  padding-bottom: 6px;
 }
 
-.c1::-webkit-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c1::-moz-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c1:-ms-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c1::placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c1:active,
-.c1:focus {
-  outline-offset: 0;
+.c1:focus-within {
   box-shadow: none;
   outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   outline-offset: 0px;
 }
 
-.c1:disabled {
+.c3 {
+  width: 100%;
+  border: none;
+  background: transparent;
+  margin: 0;
+  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  -webkit-letter-spacing: 0.025em;
+  -moz-letter-spacing: 0.025em;
+  -ms-letter-spacing: 0.025em;
+  letter-spacing: 0.025em;
+  text-align: left;
+  outline: none;
+}
+
+.c3::-webkit-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c3::-moz-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c3:-ms-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c3::placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c3:disabled {
   color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
   cursor: not-allowed;
-  box-shadow: none;
-  outline: none;
-}
-
-.c1:disabled:focus,
-.c1:disabled:active {
-  outline: none;
-}
-
-.c1[readOnly] {
-  background: transparent;
-  box-shadow: none;
 }
 
 .c0 {
@@ -269,7 +278,7 @@ exports[`Search Matches snapshot 1`] = `
   box-shadow: 0 0 0px 1000px var(--eds_ui_background__light,rgba(247,247,247,1)) inset;
 }
 
-.c4 {
+.c5 {
   visibility: hidden;
   position: absolute;
   right: 8px;
@@ -278,7 +287,7 @@ exports[`Search Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c3:hover {
+  .c4:hover {
     background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
     border: 0px solid transparent;
     border-radius: 50%;
@@ -286,7 +295,7 @@ exports[`Search Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c3:disabled:hover {
+  .c4:disabled:hover {
     background: transparent;
   }
 }
@@ -320,22 +329,26 @@ exports[`Search Matches snapshot 1`] = `
         height="24"
       />
     </svg>
-    <input
-      aria-label="search input"
+    <div
       class="c1 c2"
-      role="searchbox"
-      type="search"
-      value=""
-    />
+    >
+      <input
+        aria-label="search input"
+        class="c3"
+        role="searchbox"
+        type="search"
+        value=""
+      />
+    </div>
     <button
       aria-label="clear search"
-      class="c3 c4"
+      class="c4 c5"
       tabindex="0"
       title="clear"
       type="button"
     >
       <span
-        class="c5"
+        class="c6"
       >
         <svg
           aria-hidden="true"

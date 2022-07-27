@@ -29,18 +29,27 @@ exports[`SingleSelect Matches snapshot 1`] = `
 }
 
 .c4 {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-column-gap: 8px;
+  column-gap: 8px;
   border: none;
+  box-sizing: border-box;
   height: 36px;
   box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
   outline: 1px solid transparent;
   outline-offset: 0px;
+  padding-left: 8px;
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
   margin: 0;
   color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
   font-family: Equinor;
@@ -52,54 +61,54 @@ exports[`SingleSelect Matches snapshot 1`] = `
   -ms-letter-spacing: 0.025em;
   letter-spacing: 0.025em;
   text-align: left;
-  padding-left: 8px;
-  padding-top: 6px;
-  padding-right: 8px;
-  padding-bottom: 6px;
 }
 
-.c4::-webkit-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4::-moz-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4:-ms-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4::placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4:active,
-.c4:focus {
-  outline-offset: 0;
+.c4:focus-within {
   box-shadow: none;
   outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
   outline-offset: 0px;
 }
 
-.c4:disabled {
+.c6 {
+  width: 100%;
+  border: none;
+  background: transparent;
+  margin: 0;
+  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  -webkit-letter-spacing: 0.025em;
+  -moz-letter-spacing: 0.025em;
+  -ms-letter-spacing: 0.025em;
+  letter-spacing: 0.025em;
+  text-align: left;
+  outline: none;
+}
+
+.c6::-webkit-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c6::-moz-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c6:-ms-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c6::placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c6:disabled {
   color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
   cursor: not-allowed;
-  box-shadow: none;
-  outline: none;
 }
 
-.c4:disabled:focus,
-.c4:disabled:active {
-  outline: none;
-}
-
-.c4[readOnly] {
-  background: transparent;
-  box-shadow: none;
-}
-
-.c9 {
+.c10 {
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -109,7 +118,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
   text-align: left;
 }
 
-.c8 {
+.c9 {
   display: grid;
   grid-gap: var(--eds_button__gap,8px);
   grid-auto-flow: column;
@@ -124,12 +133,12 @@ exports[`SingleSelect Matches snapshot 1`] = `
   justify-content: center;
 }
 
-.c8 > :is(svg,img) {
+.c9 > :is(svg,img) {
   margin-top: var(--eds_button__icon__margin_y,0);
   margin-bottom: var(--eds_button__icon__margin_y,0);
 }
 
-.c6 {
+.c7 {
   margin: 0;
   padding: 0;
   -webkit-text-decoration: none;
@@ -155,11 +164,11 @@ exports[`SingleSelect Matches snapshot 1`] = `
   text-align: center;
 }
 
-.c6 svg {
+.c7 svg {
   justify-self: center;
 }
 
-.c6::before {
+.c7::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -168,7 +177,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
   content: '';
 }
 
-.c6::after {
+.c7::after {
   position: absolute;
   top: -0;
   left: -4px;
@@ -177,25 +186,25 @@ exports[`SingleSelect Matches snapshot 1`] = `
   content: '';
 }
 
-.c6:focus {
+.c7:focus {
   outline: none;
 }
 
-.c6[data-focus-visible-added]:focus {
+.c7[data-focus-visible-added]:focus {
   outline: 2px dashed rgba(0,112,121,1);
   outline-offset: -2px;
 }
 
-.c6:focus-visible {
+.c7:focus-visible {
   outline: 2px dashed rgba(0,112,121,1);
   outline-offset: -2px;
 }
 
-.c6::-moz-focus-inner {
+.c7::-moz-focus-inner {
   border: 0;
 }
 
-.c6:disabled {
+.c7:disabled {
   cursor: not-allowed;
   background: transparent;
   border: 1px solid transparent;
@@ -216,7 +225,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
   padding-right: calc( 24px + 8px + 8px + 0px );
 }
 
-.c10 {
+.c11 {
   background-color: var(--eds_ui_background__default,rgba(255,255,255,1));
   box-shadow: 0 7px 8px rgba(0,0,0,0.2),0 5px 22px rgba(0,0,0,0.12),0 12px 17px rgba(0,0,0,0.14);
   overflow-y: scroll;
@@ -230,7 +239,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
   z-index: 50;
 }
 
-.c7 {
+.c8 {
   position: absolute;
   right: 8px;
   height: 24px;
@@ -244,7 +253,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c6:hover {
+  .c7:hover {
     background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
     border: 0px solid transparent;
     border-radius: 50%;
@@ -252,7 +261,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
 }
 
 @media (hover:hover) and (pointer:fine) {
-  .c6:disabled:hover {
+  .c7:disabled:hover {
     background: transparent;
   }
 }
@@ -278,26 +287,30 @@ exports[`SingleSelect Matches snapshot 1`] = `
       class="c3"
       role="combobox"
     >
-      <input
-        aria-autocomplete="list"
-        aria-controls="downshift-0-menu"
-        aria-labelledby="downshift-0-label"
-        autocomplete="off"
+      <div
         class="c4 c5"
-        id="downshift-0-input"
-        type="text"
-        value=""
-      />
+      >
+        <input
+          aria-autocomplete="list"
+          aria-controls="downshift-0-menu"
+          aria-labelledby="downshift-0-label"
+          autocomplete="off"
+          class="c6"
+          id="downshift-0-input"
+          type="text"
+          value=""
+        />
+      </div>
       <button
         aria-label="toggle options"
-        class="c6 c7"
+        class="c7 c8"
         id="downshift-0-toggle-button"
         tabindex="-1"
         title="open"
         type="button"
       >
         <span
-          class="c8"
+          class="c9"
         >
           <svg
             aria-hidden="true"
@@ -322,7 +335,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
     </div>
     <ul
       aria-labelledby="downshift-0-label"
-      class="c9 c10"
+      class="c10 c11"
       id="downshift-0-menu"
       role="listbox"
     />
