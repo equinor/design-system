@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, forwardRef, ReactNode } from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
 import {
@@ -11,8 +11,8 @@ import {
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
 
-const Container = styled.div(({ theme, disabled, readOnly }: StyledProps) => {
-  const { states, entities } = theme
+const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
+  const { states, entities } = token
 
   return css`
     --eds-input-adornment-color: ${entities.adornment.typography.color};
@@ -22,12 +22,12 @@ const Container = styled.div(({ theme, disabled, readOnly }: StyledProps) => {
     column-gap: 8px;
     border: none;
     box-sizing: border-box;
-    height: ${theme.height};
-    box-shadow: ${theme.boxShadow};
-    background: ${theme.background};
-    ${outlineTemplate(theme.outline)}
-    ${spacingsTemplate(theme.spacings)}
-    ${typographyTemplate(theme.typography)}
+    height: ${token.height};
+    box-shadow: ${token.boxShadow};
+    background: ${token.background};
+    ${outlineTemplate(token.outline)}
+    ${spacingsTemplate(token.spacings)}
+    ${typographyTemplate(token.typography)}
 
 
     &:focus-within {
@@ -57,20 +57,20 @@ const Container = styled.div(({ theme, disabled, readOnly }: StyledProps) => {
   `
 })
 
-const StyledInput = styled.input(({ theme }: StyledProps) => {
+const StyledInput = styled.input(({ token }: StyledProps) => {
   const {
     states: { disabled },
-  } = theme
+  } = token
 
   return css`
     width: 100%;
     border: none;
     background: transparent;
-    ${typographyTemplate(theme.typography)}
+    ${typographyTemplate(token.typography)}
     outline: none;
 
     &::placeholder {
-      color: ${theme.entities.placeholder.typography.color};
+      color: ${token.entities.placeholder.typography.color};
     }
 
     &:disabled {
@@ -80,20 +80,20 @@ const StyledInput = styled.input(({ theme }: StyledProps) => {
   `
 })
 
-export const Adornments = styled.div(({ theme }: StyledProps) => {
+export const Adornments = styled.div(({ token }: StyledProps) => {
   return css`
     display: flex;
     column-gap: 8px;
     justify-content: center;
     align-items: center;
     width: fit-content;
-    ${typographyTemplate(theme.entities.adornment.typography)}
+    ${typographyTemplate(token.entities.adornment.typography)}
     color: var(--eds-input-adornment-color);
   `
 })
 
 type StyledProps = {
-  theme: InputToken
+  token: InputToken
 } & Required<Pick<InputProps, 'readOnly' | 'disabled'>>
 
 export type InputProps = {
@@ -130,13 +130,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const actualVariant = variant === 'default' ? 'input' : variant
   const inputVariant = tokens[actualVariant]
   const { density } = useEds()
-  const token = useToken({ density }, inputVariant)
+  const token = useToken({ density }, inputVariant)()
 
   const inputProps = {
     ref,
     type,
     disabled,
     readOnly,
+    token,
     ...other,
   }
 
@@ -145,24 +146,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     readOnly,
     className,
     style,
+    token,
   }
 
   const adornmentProps = {
     disabled,
     readOnly,
+    token,
   }
 
   return (
-    <ThemeProvider theme={token}>
-      <Container {...containerProps}>
-        {leftAdornments ? (
-          <Adornments {...adornmentProps}>{leftAdornments}</Adornments>
-        ) : null}
-        <StyledInput {...inputProps} />
-        {rightAdornments ? (
-          <Adornments {...adornmentProps}>{rightAdornments}</Adornments>
-        ) : null}
-      </Container>
-    </ThemeProvider>
+    // Not using <ThemeProvider> because of cascading styling messing with adornments
+    <Container {...containerProps}>
+      {leftAdornments ? (
+        <Adornments {...adornmentProps}>{leftAdornments}</Adornments>
+      ) : null}
+      <StyledInput {...inputProps} />
+      {rightAdornments ? (
+        <Adornments {...adornmentProps}>{rightAdornments}</Adornments>
+      ) : null}
+    </Container>
   )
 })

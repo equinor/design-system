@@ -92,7 +92,7 @@ export const input: InputToken = {
   boxShadow: 'inset 0px -1px 0px 0px ' + static_icons__tertiary.rgba,
   modes: {
     compact: {
-      minHeight: shape._modes.compact.straight.minHeight,
+      height: shape._modes.compact.straight.minHeight,
       spacings: {
         left: x_small,
         right: x_small,

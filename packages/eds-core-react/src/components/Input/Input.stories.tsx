@@ -288,3 +288,13 @@ export const WithAdornments: Story<InputProps> = () => {
     </EdsProvider>
   )
 }
+
+WithAdornments.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="start">
+        <Story />
+      </Stack>
+    )
+  },
+]
