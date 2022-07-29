@@ -55,6 +55,7 @@ export const selectTokens: ComponentToken = {
   entities: {
     button: {
       height: '24px',
+      width: '24px',
       spacings: {
         left: spacingSmall,
         right: spacingSmall,

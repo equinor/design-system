@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef, ReactNode } from 'react'
+import { InputHTMLAttributes, forwardRef, ReactNode, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
@@ -10,6 +10,7 @@ import {
 } from '@equinor/eds-utils'
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
+import { ComponentToken } from '@equinor/eds-tokens'
 
 const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
   const { states, entities } = token
@@ -17,8 +18,10 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
   return css`
     --eds-input-adornment-color: ${entities.adornment.typography.color};
 
-    display: flex;
-    flex-direction: row;
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: auto auto auto;
     column-gap: 8px;
     border: none;
     box-sizing: border-box;
@@ -26,7 +29,6 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     box-shadow: ${token.boxShadow};
     background: ${token.background};
     ${outlineTemplate(token.outline)}
-    ${spacingsTemplate(token.spacings)}
     ${typographyTemplate(token.typography)}
 
 
@@ -66,6 +68,7 @@ const StyledInput = styled.input(({ token }: StyledProps) => {
     width: 100%;
     border: none;
     background: transparent;
+    ${spacingsTemplate(token.spacings)}
     ${typographyTemplate(token.typography)}
     outline: none;
 
@@ -80,17 +83,30 @@ const StyledInput = styled.input(({ token }: StyledProps) => {
   `
 })
 
-export const Adornments = styled.div(({ token }: StyledProps) => {
-  return css`
-    display: flex;
-    column-gap: 8px;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    ${typographyTemplate(token.entities.adornment.typography)}
-    color: var(--eds-input-adornment-color);
-  `
-})
+type AdornmentProps = {
+  token: InputToken
+  width: string
+  left?: number
+  right?: number
+}
+
+export const Adornments = styled.div(
+  ({ token, width, left, right }: AdornmentProps) => {
+    return css`
+      top: 0;
+      bottom: 0;
+      left: ${left};
+      right: ${right};
+      width: ${width}px;
+      display: flex;
+      column-gap: 8px;
+      justify-content: center;
+      align-items: center;
+      ${typographyTemplate(token.entities.adornment.typography)}
+      color: var(--eds-input-adornment-color);
+    `
+  },
+)
 
 type StyledProps = {
   token: InputToken
@@ -109,8 +125,12 @@ export type InputProps = {
   readOnly?: boolean
   /** Left adornments */
   leftAdornments?: ReactNode
+  /** Left adornments width */
+  leftAdornmentsWidth?: number
   /** Right adornments */
   rightAdornments?: ReactNode
+  /** Right adornments width */
+  rightAdornmentsWidth?: number
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -120,6 +140,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     type = 'text',
     leftAdornments,
     rightAdornments,
+    leftAdornmentsWidth,
+    rightAdornmentsWidth,
     readOnly,
     className,
     style,
@@ -132,12 +154,30 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const { density } = useEds()
   const token = useToken({ density }, inputVariant)()
 
+  const updatedToken = useMemo(
+    (): ComponentToken => ({
+      ...token,
+      // spacings: {
+      //   left:
+      //     typeof leftAdornmentsWidth !== 'undefined'
+      //       ? `${leftAdornmentsWidth}px`
+      //       : token.spacings.left,
+      //   right:
+      //     typeof rightAdornmentsWidth !== 'undefined'
+      //       ? `${rightAdornmentsWidth}px`
+      //       : token.spacings.right,
+      // },
+    }),
+    [leftAdornmentsWidth, rightAdornmentsWidth, token],
+  )
   const inputProps = {
     ref,
     type,
     disabled,
     readOnly,
-    token,
+    token: updatedToken,
+    leftAdornmentsWidth,
+    rightAdornmentsWidth,
     ...other,
   }
 
@@ -146,24 +186,29 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     readOnly,
     className,
     style,
-    token,
+    token: updatedToken,
   }
 
-  const adornmentProps = {
-    disabled,
-    readOnly,
-    token,
+  const leftAdornmentProps = {
+    token: updatedToken,
+    width: leftAdornmentsWidth,
+    left: 0,
+  }
+  const rightAdornmentProps = {
+    token: updatedToken,
+    width: rightAdornmentsWidth,
+    right: 0,
   }
 
   return (
     // Not using <ThemeProvider> because of cascading styling messing with adornments
     <Container {...containerProps}>
       {leftAdornments ? (
-        <Adornments {...adornmentProps}>{leftAdornments}</Adornments>
+        <Adornments {...leftAdornmentProps}>{leftAdornments}</Adornments>
       ) : null}
       <StyledInput {...inputProps} />
       {rightAdornments ? (
-        <Adornments {...adornmentProps}>{rightAdornments}</Adornments>
+        <Adornments {...rightAdornmentProps}>{rightAdornments}</Adornments>
       ) : null}
     </Container>
   )
