@@ -98,10 +98,12 @@ describe('TextField', () => {
         inputIcon={<Icon data={save} />}
       />,
     )
+    const textFieldContainer =
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByLabelText(labelText).parentElement.parentElement
+
     // eslint-disable-next-line testing-library/no-node-access
-    const inputNode = screen.getByLabelText(labelText).parentElement
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(inputNode.querySelectorAll('svg')).toHaveLength(1)
+    expect(textFieldContainer.querySelectorAll('svg')).toHaveLength(1)
   })
   it('Can have an icon by the helper text', () => {
     const helperText = 'Help me'
