@@ -6,6 +6,9 @@ tasks:
     init: |
       pnpm install
       pnpm recursive install --filter ./packages
+      echo "Dependencies installed"
+      pnpm build:utils
+      echo "Utils built"
       gp sync-done install
     command: pnpm storybook:core-react
   - name: Lint
