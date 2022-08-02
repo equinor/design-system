@@ -210,12 +210,29 @@ const SmallButton = styled(Button)`
 export const WithAdornments: Story<InputProps> = () => {
   return (
     <EdsProvider>
-      <Label htmlFor="adornments-error" label="Default" />
+      <Label htmlFor="adornments-default" label="Default" />
+      <Input
+        type="text"
+        id="adornments-default"
+        placeholder="Placeholder text Placeholder text"
+        leftAdornmentsWidth={40}
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={18}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-error" label="Error" />
       <Input
         type="text"
         id="adornments-error"
         variant="error"
+        leftAdornmentsWidth={40}
         leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
         rightAdornments={
           <>
             unit
@@ -223,12 +240,14 @@ export const WithAdornments: Story<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="adornments-warning" label="Default" />
+      <Label htmlFor="adornments-warning" label="Warning" />
       <Input
         type="text"
         id="adornments-warning"
         variant="warning"
+        leftAdornmentsWidth={40}
         leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
         rightAdornments={
           <>
             unit
@@ -236,12 +255,14 @@ export const WithAdornments: Story<InputProps> = () => {
           </>
         }
       />
-      <Label htmlFor="adornments-success" label="Default" />
+      <Label htmlFor="adornments-success" label="Success" />
       <Input
         type="text"
         id="adornments-success"
         variant="success"
+        leftAdornmentsWidth={40}
         leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
         rightAdornments={
           <>
             unit
@@ -254,6 +275,9 @@ export const WithAdornments: Story<InputProps> = () => {
         type="text"
         id="adornments-disabled"
         disabled
+        placeholder="Placeholder text Placeholder text"
+        value="Some text Some textSome textSome text"
+        leftAdornmentsWidth={40}
         leftAdornments={
           <>
             <SmallButton disabled variant="ghost_icon">
@@ -261,6 +285,7 @@ export const WithAdornments: Story<InputProps> = () => {
             </SmallButton>
           </>
         }
+        rightAdornmentsWidth={52}
         rightAdornments={
           <>
             unit
@@ -273,11 +298,13 @@ export const WithAdornments: Story<InputProps> = () => {
         type="text"
         id="adornments-readonly"
         readOnly
+        leftAdornmentsWidth={40}
         leftAdornments={
           <>
             <SmallButton variant="ghost_icon">IT</SmallButton>
           </>
         }
+        rightAdornmentsWidth={52}
         rightAdornments={
           <>
             unit

@@ -17,7 +17,9 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
 
   return css`
     --eds-input-adornment-color: ${entities.adornment.typography.color};
+    --eds-input-color: ${token.typography.color};
 
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -27,8 +29,6 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     box-shadow: ${token.boxShadow};
     background: ${token.background};
     ${outlineTemplate(token.outline)}
-    ${typographyTemplate(token.typography)}
-
 
     &:focus-within {
       --eds-input-adornment-color: ${entities.adornment?.states.focus?.outline
@@ -41,13 +41,9 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     ${disabled &&
     css`
       --eds-input-adornment-color: ${states.disabled.typography.color};
-      color: ${states.disabled.typography.color};
+      --eds-input-color: ${states.disabled.typography.color};
       cursor: not-allowed;
       box-shadow: none;
-      outline: none;
-      &:focus-within {
-        outline: none;
-      }
     `}
     ${readOnly &&
     css({
@@ -58,10 +54,6 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
 })
 
 const StyledInput = styled.input(({ token }: StyledProps) => {
-  const {
-    states: { disabled },
-  } = token
-
   return css`
     width: 100%;
     border: none;
@@ -75,7 +67,7 @@ const StyledInput = styled.input(({ token }: StyledProps) => {
     }
 
     &:disabled {
-      color: ${disabled.typography.color};
+      color: var(--eds-input-color);
       cursor: not-allowed;
     }
   `
@@ -83,15 +75,13 @@ const StyledInput = styled.input(({ token }: StyledProps) => {
 
 type AdornmentProps = {
   token: InputToken
-  width: number
 }
 
-const Adornments = styled.div<AdornmentProps>(({ token, width }) => {
+const Adornments = styled.div<AdornmentProps>(({ token }) => {
   return css`
     position: absolute;
     top: 0;
     bottom: 0;
-    width: ${width};
     display: flex;
     align-items: center;
     ${typographyTemplate(token.entities.adornment.typography)}
@@ -197,11 +187,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 
   const leftAdornmentProps = {
     token: updatedToken,
-    width: leftAdornmentsWidth,
   }
   const rightAdornmentProps = {
     token: updatedToken,
-    width: rightAdornmentsWidth,
   }
 
   return (
