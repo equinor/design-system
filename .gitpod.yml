@@ -37,6 +37,5 @@ vscode:
     - esbenp.prettier-vscode
     - stylelint.vscode-stylelint
     - eamodio.gitlens
-    - coenraads.bracket-pair-colorizer-2
     - dbaeumer.vscode-eslint
     - pflannery.vscode-versionlens
