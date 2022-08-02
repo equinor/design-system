@@ -587,18 +587,20 @@ function AutocompleteInner<T>(
                     <Icon data={close} size={16} />
                   </StyledButton>
                 )}
-                <StyledButton
-                  variant="ghost_icon"
-                  {...getToggleButtonProps({ disabled: disabled || readOnly })}
-                  aria-label={'toggle options'}
-                  title="open"
-                >
-                  {!readOnly && (
+                {!readOnly && (
+                  <StyledButton
+                    variant="ghost_icon"
+                    {...getToggleButtonProps({
+                      disabled: disabled || readOnly,
+                    })}
+                    aria-label={'toggle options'}
+                    title="open"
+                  >
                     <Icon
                       data={isOpen ? arrow_drop_up : arrow_drop_down}
                     ></Icon>
-                  )}
-                </StyledButton>
+                  </StyledButton>
+                )}
               </>
             }
             {...other}

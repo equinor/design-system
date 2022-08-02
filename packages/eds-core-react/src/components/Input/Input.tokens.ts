@@ -59,6 +59,10 @@ export const input: InputToken = {
         ...typography.input.label,
         color: static_icons__tertiary.rgba,
       },
+      spacings: {
+        left: small,
+        right: small,
+      },
       states: {
         disabled: {
           typography: {
