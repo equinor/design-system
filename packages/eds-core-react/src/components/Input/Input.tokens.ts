@@ -30,6 +30,7 @@ export type InputToken = ComponentToken
 
 export const input: InputToken = {
   height: shape.straight.minHeight,
+  width: '100%',
   background,
   spacings: {
     left: small,

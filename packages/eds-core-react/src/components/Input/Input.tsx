@@ -2,15 +2,22 @@ import { InputHTMLAttributes, forwardRef, ReactNode, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
-import {
-  typographyTemplate,
-  spacingsTemplate,
-  outlineTemplate,
-  useToken,
-} from '@equinor/eds-utils'
+import { spacingsTemplate, outlineTemplate, useToken } from '@equinor/eds-utils'
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
-import { ComponentToken } from '@equinor/eds-tokens'
+import { ComponentToken, Typography } from '@equinor/eds-tokens'
+
+const typographyMixin = (typography: Partial<Typography>) => {
+  const { fontFamily, fontSize, fontWeight, lineHeight, letterSpacing } =
+    typography
+  return css({
+    fontFamily,
+    fontSize,
+    fontWeight,
+    lineHeight,
+    letterSpacing,
+  })
+}
 
 const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
   const { states, entities } = token
@@ -20,7 +27,7 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     --eds-input-color: ${token.typography.color};
 
     position: relative;
-    width: 100%;
+    width: ${token.width};
     display: flex;
     flex-direction: row;
     border: none;
@@ -59,7 +66,7 @@ const StyledInput = styled.input(({ token }: StyledProps) => {
     border: none;
     background: transparent;
     ${spacingsTemplate(token.spacings)}
-    ${typographyTemplate(token.typography)}
+    ${typographyMixin(token.typography)}
     outline: none;
 
     &::placeholder {
@@ -84,7 +91,7 @@ const Adornments = styled.div<AdornmentProps>(({ token }) => {
     bottom: 0;
     display: flex;
     align-items: center;
-    ${typographyTemplate(token.entities.adornment.typography)}
+    ${typographyMixin(token.entities.adornment.typography)}
     color: var(--eds-input-adornment-color);
   `
 })
@@ -172,8 +179,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     disabled,
     readOnly,
     token: updatedToken,
-    leftAdornmentsWidth,
-    rightAdornmentsWidth,
     ...other,
   }
 

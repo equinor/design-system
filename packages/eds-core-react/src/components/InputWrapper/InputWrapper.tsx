@@ -4,12 +4,7 @@ import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { useEds } from './../EdsProvider'
 import { inputToken } from './InputWrapper.tokens'
-import {
-  outlineTemplate,
-  useToken,
-  spacingsTemplate,
-  typographyTemplate,
-} from '@equinor/eds-utils'
+import { outlineTemplate, useToken } from '@equinor/eds-utils'
 
 const Container = styled.div`
   display: grid;
@@ -39,19 +34,6 @@ const Field = styled.div(({ theme }) => {
   `
 })
 
-export const Adornments = styled.div(({ theme }) => {
-  return css`
-    display: flex;
-    column-gap: 8px;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-
-    ${spacingsTemplate(theme.spacings)}
-    ${typographyTemplate(theme.entities.adornment.typography)}
-  `
-})
-
 export type InputWrapperProps = {
   /** Label */
   label?: string
@@ -69,16 +51,7 @@ export type InputWrapperProps = {
 
 export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
   function InputWrapper(
-    {
-      disabled,
-      readOnly,
-      label,
-      meta,
-      children,
-      helperIcon,
-      helperText,
-      ...other
-    },
+    { label, meta, children, helperIcon, helperText, ...other },
     ref,
   ) {
     const { density } = useEds()
