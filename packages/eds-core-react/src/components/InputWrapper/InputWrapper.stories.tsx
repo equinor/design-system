@@ -8,16 +8,6 @@ export default {
   component: InputWrapper,
 } as ComponentMeta<typeof InputWrapper>
 
-const StrippedInput = styled(Input)`
-  box-shadow: none;
-  background: none;
-  padding: 0;
-  &:active,
-  &:focus {
-    outline: none;
-  }
-`
-
 const SmallButton = styled(Button)`
   height: 24px;
   width: 24px;
@@ -30,17 +20,7 @@ export const Introduction: Story<InputWrapperProps> = (args) => (
     helperIcon={<Icon data={accessible} size={16} />}
     {...args}
   >
-    <InputWrapper.Adornments>
-      <Icon data={search} size={16} />
-    </InputWrapper.Adornments>
     <Input />
-    <InputWrapper.Adornments>
-      right
-      <Icon data={dropper} size={16} />
-      <SmallButton variant="ghost_icon">
-        <Icon data={clear} size={16} />
-      </SmallButton>
-    </InputWrapper.Adornments>
   </InputWrapper>
 )
 

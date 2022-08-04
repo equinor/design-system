@@ -4,35 +4,14 @@ import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { useEds } from './../EdsProvider'
 import { inputToken } from './InputWrapper.tokens'
-import { outlineTemplate, useToken } from '@equinor/eds-utils'
+import { useToken } from '@equinor/eds-utils'
 
-const Container = styled.div`
-  display: grid;
-  gap: 8px;
+const Container = styled.div``
+
+const WrapperHelperText = styled(HelperText)`
+  margin-top: 8px;
+  margin-left: 8px;
 `
-
-const Field = styled.div(({ theme }) => {
-  const {
-    states: {
-      focus: { outline: focusOutline },
-    },
-    boxShadow,
-  } = theme
-
-  return css`
-    display: flex;
-    flex-direction: row;
-    column-gap: 8px;
-    background: ${theme.background};
-    height: ${theme.minHeight};
-    box-shadow: ${boxShadow};
-
-    &:focus-within {
-      ${outlineTemplate(focusOutline)}
-      box-shadow: none;
-    }
-  `
-})
 
 export type InputWrapperProps = {
   /** Label */
@@ -61,8 +40,11 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
       <ThemeProvider theme={token}>
         <Container {...other} ref={ref}>
           <Label label={label} meta={meta} />
-          <Field tabIndex={0}>{children}</Field>
-          <HelperText icon={helperIcon} text={helperText}></HelperText>
+          {children}
+          <WrapperHelperText
+            icon={helperIcon}
+            text={helperText}
+          ></WrapperHelperText>
         </Container>
       </ThemeProvider>
     )
