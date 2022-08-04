@@ -106,7 +106,18 @@ exports[`Search Matches snapshot 1`] = `
   --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
   --eds-input-color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
   position: relative;
+  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  --eds-input-color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border: none;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -118,6 +129,7 @@ exports[`Search Matches snapshot 1`] = `
   box-sizing: border-box;
   height: 36px;
   box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
   background: var(--eds_ui_background__light,rgba(247,247,247,1));
   outline: 1px solid transparent;
   outline-offset: 0px;
@@ -137,14 +149,17 @@ exports[`Search Matches snapshot 1`] = `
   padding-top: 6px;
   padding-right: 8px;
   padding-bottom: 6px;
+  margin: 0;
+  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
   font-family: Equinor;
   font-size: 1.000rem;
   font-weight: 400;
+  line-height: 1.500em;
   -webkit-letter-spacing: 0.025em;
   -moz-letter-spacing: 0.025em;
   -ms-letter-spacing: 0.025em;
   letter-spacing: 0.025em;
-  line-height: 1.500em;
+  text-align: left;
   outline: none;
 }
 
