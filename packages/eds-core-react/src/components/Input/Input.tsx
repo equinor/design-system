@@ -1,23 +1,16 @@
 import { InputHTMLAttributes, forwardRef, ReactNode, useMemo } from 'react'
 import styled, { css } from 'styled-components'
+import { ComponentToken } from '@equinor/eds-tokens'
+import {
+  typographyMixin,
+  spacingsTemplate,
+  outlineTemplate,
+  useToken,
+} from '@equinor/eds-utils'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
-import { spacingsTemplate, outlineTemplate, useToken } from '@equinor/eds-utils'
 import type { Variants } from '../TextField/types'
 import { useEds } from '../EdsProvider'
-import { ComponentToken, Typography } from '@equinor/eds-tokens'
-
-const typographyMixin = (typography: Partial<Typography>) => {
-  const { fontFamily, fontSize, fontWeight, lineHeight, letterSpacing } =
-    typography
-  return css({
-    fontFamily,
-    fontSize,
-    fontWeight,
-    lineHeight,
-    letterSpacing,
-  })
-}
 
 const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
   const { states, entities } = token
