@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
+import { Story, ComponentMeta } from '@storybook/react'
+import { anchor } from '@equinor/eds-icons'
 import { Input, InputProps, Label, EdsProvider, Density } from '../..'
-import { Story } from '@storybook/react/types-6-0'
-import { ComponentMeta } from '@storybook/react'
+import styled from 'styled-components'
 import { Stack } from './../../../.storybook/components'
 import page from './Input.docs.mdx'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
 
 export default {
   title: 'Inputs/Input',
@@ -190,6 +193,130 @@ export const Compact: Story<InputProps> = () => {
   )
 }
 Compact.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column" align="start">
+        <Story />
+      </Stack>
+    )
+  },
+]
+
+const SmallButton = styled(Button)`
+  height: 24px;
+  width: 24px;
+`
+
+export const WithAdornments: Story<InputProps> = () => {
+  return (
+    <EdsProvider>
+      <Label htmlFor="adornments-default" label="Default" />
+      <Input
+        type="text"
+        id="adornments-default"
+        placeholder="Placeholder text Placeholder text"
+        leftAdornmentsWidth={40}
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={18}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-error" label="Error" />
+      <Input
+        type="text"
+        id="adornments-error"
+        variant="error"
+        leftAdornmentsWidth={40}
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={18}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-warning" label="Warning" />
+      <Input
+        type="text"
+        id="adornments-warning"
+        variant="warning"
+        leftAdornmentsWidth={40}
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={18}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-success" label="Success" />
+      <Input
+        type="text"
+        id="adornments-success"
+        variant="success"
+        leftAdornmentsWidth={40}
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
+        rightAdornmentsWidth={52}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={18}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-disabled" label="Disabled" />
+      <Input
+        type="text"
+        id="adornments-disabled"
+        disabled
+        placeholder="Placeholder text Placeholder text"
+        value="Some text Some textSome textSome text"
+        leftAdornmentsWidth={40}
+        leftAdornments={
+          <>
+            <SmallButton disabled variant="ghost_icon">
+              IT
+            </SmallButton>
+          </>
+        }
+        rightAdornmentsWidth={52}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={18}></Icon>
+          </>
+        }
+      />
+      <Label htmlFor="adornments-readonly" label="Readonly" />
+      <Input
+        type="text"
+        id="adornments-readonly"
+        readOnly
+        leftAdornmentsWidth={40}
+        leftAdornments={
+          <>
+            <SmallButton variant="ghost_icon">IT</SmallButton>
+          </>
+        }
+        rightAdornmentsWidth={52}
+        rightAdornments={
+          <>
+            unit
+            <Icon data={anchor} size={18}></Icon>
+          </>
+        }
+      />
+    </EdsProvider>
+  )
+}
+
+WithAdornments.decorators = [
   (Story) => {
     return (
       <Stack direction="column" align="start">

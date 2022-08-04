@@ -20,9 +20,9 @@ const Variation = ({ variant, token, density }: StyledProps) => {
   }
 
   const {
+    outline,
     states: {
       focus: { outline: focusOutline },
-      active: { outline: activeOutline },
     },
     boxShadow,
   } = token
@@ -35,7 +35,7 @@ const Variation = ({ variant, token, density }: StyledProps) => {
   return css`
     border: none;
     ${spacingsTemplate(spacings)}
-    ${outlineTemplate(activeOutline)}
+    ${outlineTemplate(outline)}
     box-shadow: ${boxShadow};
 
     &:active,

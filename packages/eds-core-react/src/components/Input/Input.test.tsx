@@ -8,18 +8,6 @@ import { Input } from './Input'
 import * as tokens from './Input.tokens'
 import { trimSpaces } from '@equinor/eds-utils'
 
-const {
-  error: {
-    states: { active: activeError },
-  },
-  success: {
-    states: { active: activeSuccess },
-  },
-  warning: {
-    states: { active: activeWarning },
-  },
-} = tokens
-
 afterEach(cleanup)
 
 describe('Input', () => {
@@ -57,12 +45,13 @@ describe('Input', () => {
         <Input id="test-success" variant="success" />
       </label>,
     )
-    const inputNode = screen.getByLabelText(label)
+    // eslint-disable-next-line testing-library/no-node-access
+    const inputWrapper = screen.getByLabelText(label).parentElement
 
-    expect(inputNode).toHaveStyleRule(
+    expect(inputWrapper).toHaveStyleRule(
       'outline',
-      `${activeSuccess.outline.width} solid ${trimSpaces(
-        activeSuccess.outline.color,
+      `${tokens.input.outline.width} solid ${trimSpaces(
+        tokens.success.outline.color,
       )}`,
     )
   })
@@ -75,12 +64,13 @@ describe('Input', () => {
         <Input id="test-warning" variant="warning" />
       </label>,
     )
-    const inputNode = screen.getByLabelText(label)
+    // eslint-disable-next-line testing-library/no-node-access
+    const inputWrapper = screen.getByLabelText(label).parentElement
 
-    expect(inputNode).toHaveStyleRule(
+    expect(inputWrapper).toHaveStyleRule(
       'outline',
-      `${activeWarning.outline.width} solid ${trimSpaces(
-        activeWarning.outline.color,
+      `${tokens.input.outline.width} solid ${trimSpaces(
+        tokens.warning.outline.color,
       )}`,
     )
   })
@@ -93,22 +83,23 @@ describe('Input', () => {
         <Input id="test-error" variant="error" />
       </label>,
     )
-    const inputNode = screen.getByLabelText(label)
+    // eslint-disable-next-line testing-library/no-node-access
+    const inputWrapper = screen.getByLabelText(label).parentElement
 
-    expect(inputNode).toHaveStyleRule(
+    expect(inputWrapper).toHaveStyleRule(
       'outline',
-      `${activeError.outline.width} solid ${trimSpaces(
-        activeError.outline.color,
+      `${tokens.input.outline.width} solid ${trimSpaces(
+        tokens.error.outline.color,
       )}`,
     )
   })
 
-  const StyledTextField = styled(Input)`
+  const StyledInput = styled(Input)`
     margin-top: 48px;
   `
   it('Can extend the css of the component', () => {
     render(
-      <StyledTextField
+      <StyledInput
         id="test-css-extend"
         variant="error"
         value="textfield"
@@ -116,9 +107,9 @@ describe('Input', () => {
       />,
     )
 
-    expect(screen.getByDisplayValue('textfield')).toHaveStyleRule(
-      'margin-top',
-      '48px',
-    )
+    // eslint-disable-next-line testing-library/no-node-access
+    const inputWrapper = screen.getByDisplayValue('textfield').parentElement
+
+    expect(inputWrapper).toHaveStyleRule('margin-top', '48px')
   })
 })
