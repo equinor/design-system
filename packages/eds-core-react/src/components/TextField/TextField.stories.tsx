@@ -14,8 +14,8 @@ import {
   error_filled,
   info_circle,
 } from '@equinor/eds-icons'
-import styled from 'styled-components'
 import { Controller, useForm } from 'react-hook-form'
+import { Stack } from '../../../.storybook/components'
 import page from './TextField.docs.mdx'
 
 const icons = {
@@ -62,14 +62,17 @@ export default {
       page,
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof TextField>
 
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 32px;
-  grid-template-columns: repeat(3, fit-content(100%));
-`
 export const Introduction: Story<TextFieldProps> = (args) => (
   <TextField
     meta="meta"
@@ -85,7 +88,7 @@ export const Introduction: Story<TextFieldProps> = (args) => (
 )
 
 export const Types: Story<TextFieldProps> = () => (
-  <Wrapper>
+  <>
     <TextField
       id="textfield-normal"
       placeholder="Placeholder text"
@@ -104,7 +107,7 @@ export const Types: Story<TextFieldProps> = () => (
       id="textfield-search"
       placeholder="Placeholder text"
       label="Search"
-      helperText="Helper Text"
+      helperText="Helper text"
     />
     <TextField
       type="email"
@@ -122,23 +125,37 @@ export const Types: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper Text"
     />
-  </Wrapper>
+  </>
 )
 Types.storyName = 'Single line'
+Types.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Multiline: Story<TextFieldProps> = () => (
-  <>
-    <TextField
-      id="storybook-multiline"
-      placeholder="Placeholder text"
-      label="Label"
-      helperText="Helper Text"
-      meta="Meta"
-      multiline
-      style={{ resize: 'none' }}
-      rows={3}
-    />
-  </>
+  <TextField
+    id="storybook-multiline"
+    placeholder="Placeholder text"
+    label="Label"
+    helperText="Helper Text"
+    meta="Meta"
+    multiline
+    style={{ resize: 'none' }}
+    rows={3}
+  />
 )
 
 export const MultilineRowsMax: Story<TextFieldProps> = () => (
@@ -176,7 +193,7 @@ export const MultilineFixedHeight: Story<TextFieldProps> = () => (
 MultilineFixedHeight.storyName = 'Multiline with fixed height'
 
 export const WithUnit: Story<TextFieldProps> = () => (
-  <Wrapper>
+  <>
     <TextField
       id="storybook-unit"
       placeholder="Placeholder text"
@@ -191,12 +208,27 @@ export const WithUnit: Story<TextFieldProps> = () => (
       unit="km/h"
       type="number"
     />
-  </Wrapper>
+  </>
 )
 WithUnit.storyName = 'With units'
+WithUnit.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const WithIcons: Story<TextFieldProps> = () => (
-  <Wrapper>
+  <>
     <TextField
       id="icons-text"
       defaultValue="Input text"
@@ -214,12 +246,28 @@ export const WithIcons: Story<TextFieldProps> = () => (
       rows={3}
       inputIcon={<Icon name="comment" title="Comment" />}
     />
-  </Wrapper>
+  </>
 )
 WithIcons.storyName = 'With icons'
+WithIcons.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Datepicker: Story<TextFieldProps> = () => (
-  <Wrapper>
+  <>
     <TextField id="date" label="Select date" type="date" />
     <TextField id="time" label="Select time" type="time" />
     <TextField
@@ -227,12 +275,27 @@ export const Datepicker: Story<TextFieldProps> = () => (
       label="Select date and time"
       type="datetime-local"
     />
-  </Wrapper>
+  </>
 )
 Datepicker.storyName = 'Datepicker'
+Datepicker.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Variants: Story<TextFieldProps> = () => (
-  <Wrapper>
+  <>
     <TextField
       id="storybook-error"
       placeholder="Placeholder text"
@@ -320,11 +383,27 @@ export const Variants: Story<TextFieldProps> = () => (
       variant="success"
       helperIcon={<Icon name="thumbs_up" title="Success" />}
     />
-  </Wrapper>
+  </>
 )
+Variants.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const ReadOnly: Story<TextFieldProps> = () => (
-  <Wrapper>
+  <>
     <TextField
       id="storybook-readonly"
       placeholder="Placeholder text"
@@ -379,12 +458,28 @@ export const ReadOnly: Story<TextFieldProps> = () => (
       helperText="helper text"
       inputIcon={<Icon name="error_filled" title="Error" />}
     />
-  </Wrapper>
+  </>
 )
 ReadOnly.storyName = 'Read only'
+ReadOnly.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Disabled: Story<TextFieldProps> = () => (
-  <Wrapper>
+  <>
     <TextField
       id="storybook-unit-four"
       placeholder="500"
@@ -405,8 +500,24 @@ export const Disabled: Story<TextFieldProps> = () => (
       helperText="helper text"
       inputIcon={<Icon name="comment_important" title="Comment important" />}
     />
-  </Wrapper>
+  </>
 )
+Disabled.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Compact: Story<TextFieldProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
@@ -418,33 +529,47 @@ export const Compact: Story<TextFieldProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Wrapper>
-        <div style={{ width: '200px' }}>
-          <TextField
-            id="compact-textfield"
-            defaultValue="150"
-            label="Single line"
-            meta="Meta"
-            unit="km/h"
-            helperIcon={<Icon data={info_circle} title="Info" />}
-            helperText="Helper information text over several lines so that it breaks"
-          />
-        </div>
+      <div style={{ width: '200px' }}>
         <TextField
-          id="compact-textfield-multiline"
-          placeholder="Placeholder text that spans multiple lines as much as is possible."
-          label="Multiline"
-          multiline
-          rowsMax={10}
-          variant="warning"
-          inputIcon={<Icon name="warning_filled" title="Warning" />}
-          helperText="Helper information text thats very very very loooonooooooong"
-          style={{ resize: 'none' }}
+          id="compact-textfield"
+          defaultValue="150"
+          label="Single line"
+          meta="Meta"
+          unit="km/h"
+          helperIcon={<Icon data={info_circle} title="Info" />}
+          helperText="Helper information text over several lines so that it breaks"
         />
-      </Wrapper>
+      </div>
+      <TextField
+        id="compact-textfield-multiline"
+        placeholder="Placeholder text that spans multiple lines as much as is possible."
+        label="Multiline"
+        multiline
+        rowsMax={10}
+        variant="warning"
+        inputIcon={<Icon name="warning_filled" title="Warning" />}
+        helperText="Helper information text thats very very very loooonooooooong"
+        style={{ resize: 'none' }}
+      />
     </EdsProvider>
   )
 }
+Compact.decorators = [
+  (Story) => {
+    return (
+      <Stack
+        align="baseline"
+        style={{
+          display: 'grid',
+          gridGap: '32px',
+          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+        }}
+      >
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
   const { handleSubmit, control } = useForm({
