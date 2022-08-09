@@ -26,6 +26,7 @@ export const Introduction: Story<InputWrapperProps> = (args) => {
         variant={color}
         leftAdornmentsWidth={24 + 8}
         leftAdornments={<Icon data={dropper} size={18} />}
+        rightAdornmentsWidth={24 + 8}
         rightAdornments={
           <SmallButton aria-label="search" variant="contained_icon">
             <Icon data={search} size={18} />

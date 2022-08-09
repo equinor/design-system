@@ -18,7 +18,7 @@ const Container = styled.div<ContainerProps>(({ color }) =>
   }),
 )
 
-type HelperTextProps = {
+export type HelperTextProps = {
   /** Helper text */
   text?: string
   /** Icon */
