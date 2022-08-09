@@ -1,20 +1,33 @@
-import { useEffect, HTMLAttributes, forwardRef, useState } from 'react'
-import * as ReactDom from 'react-dom'
+import {
+  useEffect,
+  useLayoutEffect,
+  HTMLAttributes,
+  forwardRef,
+  useMemo,
+} from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { useMenu, MenuProvider } from './Menu.context'
 import { Paper } from '../Paper'
 import { MenuList } from './MenuList'
 import {
-  useOutsideClick,
-  usePopper,
-  Placement,
+  mergeRefs,
   useGlobalKeyPress,
-  useIsMounted,
   useToken,
   bordersTemplate,
 } from '@equinor/eds-utils'
 import { menu as tokens } from './Menu.tokens'
 import { useEds } from '../EdsProvider'
+import {
+  Placement,
+  offset,
+  flip,
+  shift,
+  autoUpdate,
+  useFloating,
+  useInteractions,
+  useDismiss,
+  FloatingPortal,
+} from '@floating-ui/react-dom-interactions'
 
 type MenuPaperProps = {
   open: boolean
@@ -30,20 +43,10 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   ${bordersTemplate(border)};
   ${({ open }) => css({ visibility: open ? null : 'hidden' })}
 `
-type MenuContainerProps = MenuProps & {
-  containerEl: HTMLElement
-}
 
-const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
+const MenuContainer = forwardRef<HTMLDivElement, MenuProps>(
   function MenuContainer(
-    {
-      children,
-      anchorEl,
-      onClose: onCloseCallback,
-      open,
-      containerEl,
-      ...rest
-    },
+    { children, anchorEl, onClose: onCloseCallback, open, ...rest },
     ref,
   ) {
     const { setOnClose, onClose, setInitialFocus } = useMenu()
@@ -82,12 +85,6 @@ const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [anchorEl])
 
-    useOutsideClick(containerEl, (e: MouseEvent) => {
-      if (open && onClose !== null && !anchorEl.contains(e.target as Node)) {
-        onClose()
-      }
-    })
-
     useGlobalKeyPress('Escape', () => {
       if (open && onClose !== null) {
         onClose()
@@ -125,54 +122,73 @@ export type MenuProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
-  { anchorEl, open, placement = 'auto', style, className, ...rest },
+  { anchorEl, open, placement = 'bottom', onClose, style, className, ...rest },
   ref,
 ) {
-  const [containerEl, setContainerEl] = useState<HTMLElement>(null)
-  const [storedAnchorEl, setStoredAnchorEl] = useState<HTMLElement>(null)
-  const isMounted = useIsMounted()
   const { density } = useEds()
   const token = useToken({ density }, tokens)
 
-  useEffect(() => {
-    open ? setStoredAnchorEl(anchorEl) : setStoredAnchorEl(null)
-    return () => setStoredAnchorEl(null)
-  }, [anchorEl, open])
+  const { x, y, reference, floating, refs, update, strategy, context } =
+    useFloating({
+      placement,
+      open,
+      onOpenChange: onClose,
+      middleware: [offset(4), flip(), shift({ padding: 8 })],
+    })
 
-  const { styles, attributes } = usePopper({
-    anchorEl: storedAnchorEl,
-    popperEl: containerEl,
-    placement,
-    offset: 4,
-  })
+  useLayoutEffect(() => {
+    reference(anchorEl)
+  }, [anchorEl, reference])
+
+  const popoverRef = useMemo(
+    () => mergeRefs<HTMLDivElement>(floating, ref),
+    [floating, ref],
+  )
+  useEffect(() => {
+    if (refs.reference.current && refs.floating.current && open) {
+      return autoUpdate(refs.reference.current, refs.floating.current, update)
+    }
+  }, [refs.reference, refs.floating, update, open])
+
+  const { getFloatingProps } = useInteractions([
+    useDismiss(context, { escapeKey: false }),
+  ])
 
   const props = {
     open,
-    style: { ...styles.popper, ...style },
     className,
-    ...attributes.popper,
   }
 
   const menuProps = {
     ...rest,
+    onClose,
     anchorEl,
     open,
-    containerEl,
   }
 
   return (
     <>
-      {isMounted &&
-        ReactDom.createPortal(
-          <ThemeProvider theme={token}>
-            <MenuPaper elevation="raised" ref={setContainerEl} {...props}>
-              <MenuProvider>
-                <MenuContainer {...menuProps} ref={ref} />
-              </MenuProvider>
-            </MenuPaper>
-          </ThemeProvider>,
-          document.body,
-        )}
+      <FloatingPortal id="eds-menu-container">
+        <ThemeProvider theme={token}>
+          <MenuPaper
+            elevation="raised"
+            {...props}
+            {...getFloatingProps({
+              ref: popoverRef,
+              style: {
+                ...style,
+                position: strategy,
+                top: y ?? 0,
+                left: x ?? 0,
+              },
+            })}
+          >
+            <MenuProvider>
+              <MenuContainer {...menuProps} ref={ref} />
+            </MenuProvider>
+          </MenuPaper>
+        </ThemeProvider>
+      </FloatingPortal>
     </>
   )
 })
