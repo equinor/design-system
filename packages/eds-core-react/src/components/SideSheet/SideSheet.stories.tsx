@@ -28,7 +28,7 @@ export default {
     docs: {
       page,
       source: {
-        type: 'code',
+        excludeDecorators: true,
       },
     },
   },
