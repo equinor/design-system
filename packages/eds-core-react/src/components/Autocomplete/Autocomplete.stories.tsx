@@ -15,10 +15,19 @@ export default {
     docs: {
       page,
       source: {
-        type: 'code',
+        excludeDecorators: true,
       },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack direction="column">
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Autocomplete>
 
 type MyOptionType = {
@@ -87,11 +96,7 @@ const stocks = [
 const optionLabel = (item: MyOptionType) => item.label
 
 export const Introduction: Story<AutocompleteProps<string>> = (args) => {
-  return (
-    <Stack>
-      <Autocomplete {...args} />
-    </Stack>
-  )
+  return <Autocomplete {...args} />
 }
 Introduction.bind({})
 Introduction.args = {
@@ -107,7 +112,7 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete
         label="Select a stock"
         options={options}
@@ -119,7 +124,7 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
         multiple
         optionLabel={optionLabel}
       />
-    </Stack>
+    </>
   )
 }
 Multiple.args = {
@@ -130,7 +135,7 @@ export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete
         label="Select a stock"
         options={options}
@@ -144,7 +149,7 @@ export const OptionLabel: Story<AutocompleteProps<MyOptionType>> = (args) => {
         initialSelectedOptions={[options[0]]}
         multiple
       />
-    </Stack>
+    </>
   )
 }
 OptionLabel.storyName = 'Option label'
@@ -155,7 +160,7 @@ OptionLabel.args = {
 export const ReadOnly: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete
         label="Select a stock"
         initialSelectedOptions={[options[0]]}
@@ -171,7 +176,7 @@ export const ReadOnly: Story<AutocompleteProps<MyOptionType>> = (args) => {
         readOnly
         {...args}
       />
-    </Stack>
+    </>
   )
 }
 ReadOnly.storyName = 'Read only'
@@ -182,7 +187,7 @@ ReadOnly.args = {
 
 export const Disabled: Story<AutocompleteProps<MyOptionType>> = (args) => {
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete label="Select a stock" disabled {...args} />
       <Autocomplete
         label="Select multiple stocks"
@@ -190,7 +195,7 @@ export const Disabled: Story<AutocompleteProps<MyOptionType>> = (args) => {
         multiple
         {...args}
       />
-    </Stack>
+    </>
   )
 }
 OptionLabel.args = {
@@ -205,7 +210,7 @@ export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
   const isOptionDisabled = (item: MyOptionType) =>
     item === options[0] || item === options[options.length - 1]
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete
         label="Select a stock"
         optionDisabled={isOptionDisabled}
@@ -217,7 +222,7 @@ export const DisabledOption: Story<AutocompleteProps<MyOptionType>> = (
         {...args}
         multiple
       />
-    </Stack>
+    </>
   )
 }
 DisabledOption.storyName = 'Disabled option'
@@ -232,7 +237,7 @@ export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
   const { options } = args
 
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete
         label="Select a stock"
         initialSelectedOptions={[options[0]]}
@@ -244,7 +249,7 @@ export const PreselectedOptions: Story<AutocompleteProps<MyOptionType>> = (
         multiple
         {...args}
       />
-    </Stack>
+    </>
   )
 }
 PreselectedOptions.storyName = 'Preselected options'
@@ -263,7 +268,7 @@ export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
   }
 
   return (
-    <Stack direction="column">
+    <>
       <Typography>
         Selected items:{selectedItems?.map((x) => x.label).toString()}
       </Typography>
@@ -282,7 +287,7 @@ export const Controlled: Story<AutocompleteProps<MyOptionType>> = (args) => {
         multiple
         optionLabel={optionLabel}
       />
-    </Stack>
+    </>
   )
 }
 Controlled.args = {
@@ -300,21 +305,19 @@ export const Compact: Story<AutocompleteProps<MyOptionType>> = (args) => {
 
   return (
     <EdsProvider density={density}>
-      <Stack direction="column">
-        <Autocomplete
-          label="Select a stock"
-          initialSelectedOptions={[options[0]]}
-          options={options}
-          {...args}
-        />
-        <Autocomplete
-          label="Select multiple stocks"
-          initialSelectedOptions={[options[0], options[1]]}
-          options={options}
-          multiple
-          {...args}
-        />
-      </Stack>
+      <Autocomplete
+        label="Select a stock"
+        initialSelectedOptions={[options[0]]}
+        options={options}
+        {...args}
+      />
+      <Autocomplete
+        label="Select multiple stocks"
+        initialSelectedOptions={[options[0], options[1]]}
+        options={options}
+        multiple
+        {...args}
+      />
     </EdsProvider>
   )
 }
@@ -481,7 +484,7 @@ export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
       .toLowerCase()
       .includes(inputValue.toLocaleLowerCase())
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete
         label="Select a stock"
         optionsFilter={optionsFilter}
@@ -493,7 +496,7 @@ export const CustomOptionsFilter: Story<AutocompleteProps<MyOptionType>> = (
         optionsFilter={optionsFilter}
         {...args}
       />
-    </Stack>
+    </>
   )
 }
 CustomOptionsFilter.storyName = 'Custom options filter'
@@ -553,8 +556,14 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
     setSelectedItems(selectedItems.filter((x) => !(x.label === itemLabel)))
 
   return (
-    <Stack direction="column">
-      <Stack>
+    <>
+      <div
+        style={{
+          display: 'grid',
+          gap: '16px',
+          gridTemplateColumns: 'repeat(4, fit-content(100%))',
+        }}
+      >
         {selectedItems
           .filter((option) => !(option.label === selectAllOption.label))
           .map((x) => (
@@ -562,7 +571,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
               {x.label}
             </Chip>
           ))}
-      </Stack>
+      </div>
       <Autocomplete
         label="Select multiple stocks"
         options={optionsWithAll}
@@ -571,7 +580,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
         multiple
         optionLabel={optionLabel}
       />
-    </Stack>
+    </>
   )
 }
 SelectAll.storyName = 'Select all'
@@ -584,7 +593,7 @@ export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
   const { options } = args
 
   return (
-    <Stack direction="column">
+    <>
       <Autocomplete
         optionLabel={(opt) => `${opt.trend} ${opt.label}`}
         label="Select a stock"
@@ -598,7 +607,7 @@ export const AutoWidth: Story<AutocompleteProps<MyOptionType>> = (args) => {
         multiple
         autoWidth
       />
-    </Stack>
+    </>
   )
 }
 AutoWidth.storyName = 'Auto width'
@@ -632,7 +641,7 @@ export const OptionsUpdate: Story<AutocompleteProps<MyOptionType>> = () => {
   }, [items])
 
   return (
-    <Stack direction="column">
+    <>
       <Typography>{loadingText}</Typography>
       <Autocomplete
         optionLabel={(opt) => opt.label}
@@ -640,7 +649,7 @@ export const OptionsUpdate: Story<AutocompleteProps<MyOptionType>> = () => {
         options={options}
         autoWidth
       />
-    </Stack>
+    </>
   )
 }
 OptionsUpdate.args = {
