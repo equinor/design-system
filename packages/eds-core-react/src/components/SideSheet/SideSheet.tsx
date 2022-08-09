@@ -22,6 +22,8 @@ export type SideSheetProps = {
   onClose?: (Event) => void
   /** Open / close Side Sheet */
   open?: boolean
+  /** Override width of Side Sheet */
+  width?: string
 } & HTMLAttributes<HTMLDivElement>
 
 const StyledSideSheet = styled.div<StyleProps>`
@@ -49,13 +51,21 @@ const Header = styled.div`
 
 export const SideSheet = forwardRef<HTMLDivElement, SideSheetProps>(
   function SideSheet(
-    { variant = 'medium', title = '', children, open = true, onClose, ...rest },
+    {
+      variant = 'medium',
+      width,
+      title = '',
+      children,
+      open = true,
+      onClose,
+      ...rest
+    },
     ref,
   ) {
     const props = {
       ...rest,
       ref,
-      width: variants[variant],
+      width: width || variants[variant],
     }
 
     // Controller must set open={false} when pressing the close button
