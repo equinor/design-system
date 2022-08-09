@@ -1,1 +1,1 @@
-export type Variants = 'fullWidth' | 'minWidth'
+export type Variants = 'fullWidth' | 'minWidth' | ''
