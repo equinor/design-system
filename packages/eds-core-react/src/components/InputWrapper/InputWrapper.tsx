@@ -1,8 +1,8 @@
 import { HTMLAttributes, forwardRef, ReactNode, useMemo } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { useToken } from '@equinor/eds-utils'
-import { Label as _Label } from '../Label'
-import { HelperText as _HelperText } from './HelperText'
+import { useToken, useId } from '@equinor/eds-utils'
+import { Label as _Label, LabelProps } from '../Label'
+import { HelperText as _HelperText, HelperTextProps } from './HelperText'
 import { useEds } from './../EdsProvider'
 import { inputToken as tokens } from './InputWrapper.tokens'
 
@@ -33,11 +33,25 @@ export type InputWrapperProps = {
   helperText?: string
   /** Highlight color */
   color?: 'error' | 'warning' | 'success'
+  /** Label props */
+  labelProps?: LabelProps
+  /** Helpertext props */
+  helperProps?: HelperTextProps
 } & HTMLAttributes<HTMLDivElement>
 
 export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
   function InputWrapper(
-    { label, meta, children, helperIcon, helperText, color, ...other },
+    {
+      label,
+      meta,
+      children,
+      helperIcon,
+      helperText,
+      color,
+      labelProps,
+      helperProps,
+      ...other
+    },
     ref,
   ) {
     const { density } = useEds()
@@ -52,16 +66,22 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
         : _token.entities.helperText.typography.color
     }, [token, other.disabled])
 
+    const helperTextId = useId(null, 'helpertext')
+
     return (
       <ThemeProvider theme={token}>
         <Container {...other} ref={ref}>
-          <Label label={label} meta={meta} />
+          <Label label={label} meta={meta} {...labelProps} />
           {children}
-          <HelperText
-            icon={helperIcon}
-            text={helperText}
-            color={helperTextColor}
-          ></HelperText>
+          {helperText && (
+            <HelperText
+              id={helperTextId}
+              icon={helperIcon}
+              text={helperText}
+              color={helperTextColor}
+              {...helperProps}
+            ></HelperText>
+          )}
         </Container>
       </ThemeProvider>
     )
