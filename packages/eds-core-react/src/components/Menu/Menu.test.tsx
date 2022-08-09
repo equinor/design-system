@@ -73,15 +73,16 @@ describe('Menu', () => {
     })
   })
   it('Can extend the css for the component', async () => {
-    const { container } = render(
-      <StyledMenu open>
+    render(
+      <StyledMenu open data-testid="menu">
         <div>some random content</div>
       </StyledMenu>,
     )
+    const container = screen.getByTestId('menu')
 
     await waitFor(() =>
       // eslint-disable-next-line testing-library/no-node-access
-      expect(container.nextSibling).toHaveStyleRule('background', 'red'),
+      expect(container.parentElement).toHaveStyleRule('background', 'red'),
     )
   })
   it('is visible when open is true & anchorEl is set', async () => {
@@ -97,7 +98,7 @@ describe('Menu', () => {
       expect(menuPaper).toBeDefined()
     })
     await waitFor(() => {
-      expect(menuPaper).toHaveAttribute('data-popper-placement', 'right-start')
+      expect(menuPaper).not.toHaveStyleRule('visibility', 'hidden')
     })
   })
   it('has rendered Menu.Item', async () => {
