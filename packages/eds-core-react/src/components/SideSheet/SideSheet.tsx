@@ -22,7 +22,7 @@ export type SideSheetProps = {
   onClose?: (Event) => void
   /** Open / close Side Sheet */
   open?: boolean
-  /** Manualy controls width of Side Sheet */
+  /** Override width of Side Sheet */
   width?: string
 } & HTMLAttributes<HTMLDivElement>
 
