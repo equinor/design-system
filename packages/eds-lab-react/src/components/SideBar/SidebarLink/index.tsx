@@ -1,6 +1,6 @@
 import { HTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react'
 import { sidebar as tokens } from '../SideBar.tokens'
-import { bordersTemplate } from '@equinor/eds-utils'
+import { bordersTemplate, outlineTemplate } from '@equinor/eds-utils'
 import {
   Button,
   ButtonProps,
@@ -44,6 +44,7 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
         states: {
           active: { background: menuActiveBackground },
           hover: { background: menuHoverBackground },
+          focus,
           disabled: {
             background: menuDisabledBackground,
             typography: { color: menuDisabledText },
@@ -67,6 +68,9 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
     &:disabled {
       background-color: ${menuDisabledBackground};
       color: ${menuDisabledText};
+    }
+    &:focus-visible {
+      ${outlineTemplate(focus.outline)};
     }
   `
 })
@@ -126,6 +130,7 @@ export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
       return (
         <Container
           as="a"
+          tabIndex={0}
           active={isCurrentUrl()}
           onClick={onClick}
           variant="ghost"
@@ -143,6 +148,7 @@ export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
     return (
       <Tooltip title={name} placement="right">
         <Container
+          tabIndex={0}
           as="a"
           active={isCurrentUrl()}
           onClick={onClick}
