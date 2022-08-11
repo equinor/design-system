@@ -33,6 +33,7 @@ exports[`SideSheet Matches snapshot 1`] = `
 }
 
 .c3 {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-text-decoration: none;

@@ -63,6 +63,7 @@ exports[`MultiSelect Matches snapshot 2`] = `
 }
 
 .c0 {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-text-decoration: none;
