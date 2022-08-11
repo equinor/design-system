@@ -40,9 +40,6 @@ export default {
 export const Introduction: Story<ButtonProps> = (args) => {
   return <Button {...args}>You can control me</Button>
 }
-Introduction.args = {
-  as: undefined,
-}
 Introduction.decorators = [
   (Story) => (
     <Stack>

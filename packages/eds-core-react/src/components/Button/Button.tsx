@@ -1,4 +1,4 @@
-import { forwardRef, ElementType, ButtonHTMLAttributes } from 'react'
+import { forwardRef, ButtonHTMLAttributes } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { token as buttonToken } from './tokens'
 import { ButtonTokenSet, ButtonToken } from './Button.types'
@@ -8,6 +8,7 @@ import {
   outlineTemplate,
   spacingsTemplate,
   useToken,
+  OverridableComponent,
 } from '@equinor/eds-utils'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
@@ -156,8 +157,6 @@ export type ButtonProps = {
   href?: string
   /** Is the button disabled */
   disabled?: boolean
-  /** Change html element. */
-  as?: ElementType
   /** Type of button
    * @default 'button'
    */
@@ -166,8 +165,8 @@ export type ButtonProps = {
   fullWidth?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button(
+export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
+  forwardRef(function Button(
     {
       color = 'primary',
       variant = 'contained',
@@ -183,8 +182,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const { density } = useEds()
     const token = useToken({ density }, getToken(variant, color))
 
-    const as: ElementType =
-      href && !disabled ? 'a' : other.as ? other.as : 'button'
+    const as = href && !disabled ? 'a' : other.as ? other.as : 'button'
+
     const type = href || other.as ? undefined : 'button'
 
     tabIndex = disabled ? -1 : tabIndex
@@ -210,5 +209,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         </ButtonBase>
       </ThemeProvider>
     )
-  },
-)
+  })
