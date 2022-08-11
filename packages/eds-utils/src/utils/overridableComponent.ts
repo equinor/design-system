@@ -1,10 +1,12 @@
-export type OverridableComponent<Component, Element extends HTMLElement> = {
-  (props: Component & React.RefAttributes<Element>): ReturnType<React.FC>
+import { RefAttributes, FC, ElementType, ComponentPropsWithRef } from 'react'
 
-  <As extends React.ElementType>(
+export type OverridableComponent<Component, Element extends HTMLElement> = {
+  (props: Component & RefAttributes<Element>): ReturnType<FC>
+
+  <As extends ElementType>(
     props: {
       as: As
     } & Component &
-      Omit<React.ComponentPropsWithRef<As>, keyof Component>,
-  ): ReturnType<React.FC>
+      Omit<ComponentPropsWithRef<As>, keyof Component>,
+  ): ReturnType<FC>
 }
