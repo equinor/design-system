@@ -71,6 +71,7 @@ const ButtonBase = styled.button(({ theme }: { theme: ButtonToken }) => {
   const { focus, hover, disabled } = states
 
   return css`
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     text-decoration: none;
