@@ -29,7 +29,7 @@ export default {
           style={{
             display: 'grid',
             gridGap: '32px',
-            gridTemplateColumns: 'repeat(4, fit-content(100%))',
+            gridTemplateColumns: 'repeat(4, auto)',
           }}
         >
           <Story />

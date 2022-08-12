@@ -139,7 +139,7 @@ Types.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />
@@ -221,7 +221,7 @@ WithUnit.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />
@@ -260,7 +260,7 @@ WithIcons.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />
@@ -288,7 +288,7 @@ Datepicker.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />
@@ -396,7 +396,7 @@ Variants.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />
@@ -472,7 +472,7 @@ ReadOnly.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />
@@ -513,7 +513,7 @@ Disabled.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />
@@ -565,7 +565,7 @@ Compact.decorators = [
         style={{
           display: 'grid',
           gridGap: '32px',
-          gridTemplateColumns: 'repeat(3, fit-content(100%))',
+          gridTemplateColumns: 'repeat(3, auto)',
         }}
       >
         <Story />

@@ -561,7 +561,7 @@ export const SelectAll: Story<AutocompleteProps<MyOptionType>> = (args) => {
         style={{
           display: 'grid',
           gap: '16px',
-          gridTemplateColumns: 'repeat(4, fit-content(100%))',
+          gridTemplateColumns: 'repeat(4, auto)',
         }}
       >
         {selectedItems

@@ -22,7 +22,6 @@ export default {
         <Stack
           style={{
             padding: '32px',
-            gridTemplateColumns: 'repeat(5, fit-content(100%)',
           }}
         >
           <Story />

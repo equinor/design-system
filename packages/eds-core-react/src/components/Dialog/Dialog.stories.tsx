@@ -49,7 +49,7 @@ export default {
 const Wrapper = styled.div`
   display: grid;
   column-gap: 16px;
-  grid-template-columns: repeat(2, fit-content(100%));
+  grid-template-columns: repeat(2, auto);
   justify-content: end;
   justify-self: end;
 `
