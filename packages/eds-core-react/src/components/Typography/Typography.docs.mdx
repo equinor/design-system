@@ -3,7 +3,8 @@ import { Typography } from '.'
 
 # Typography
 
-Presents hierarchy and organises information as clearly and efficiently as possible.
+Presents hierarchy and organises information as clearly and efficiently as possible, <br />
+therefore text sizes and styles were developed to balance content density and reading comfort.
 
 <Links 
     figmaUrl="https://www.figma.com/file/0TbIXrrObWj80Cf7KucKYFL0/Design-Tokens?node-id=2%3A4"
@@ -16,5 +17,32 @@ Presents hierarchy and organises information as clearly and efficiently as possi
 <PropsTable />
 
 ## Usage
+
+**Typeface**
+
+The `Equinor` typeface is the primary typeface and is available in four weights:
+
+<ul>
+  <li><code>light</code>,</li>
+  <li><code>regular</code>,</li>
+  <li><code>medium</code>,</li>
+  <li><code>bold</code>,</li>
+  <li>with accompanying <code>italics</code>.</li>
+</ul>
+
+Please do not use <code>light</code> in digital interfaces except in special cases where the font size is over <code>48px</code>.
+
+**Paragraph**
+
+<ul>
+  <li>Paragraph length is the number of characters in a line of text, this includes spaces.</li>
+  <li>To ensure readability, line length should be 55-80 characters.</li>
+</ul>
+
+```tsx
+import { Typography } from '@equinor/eds-core-react'
+
+<Typography>Sample text</Typography>
+```
 
 ## Examples
