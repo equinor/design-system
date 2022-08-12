@@ -1,6 +1,6 @@
-import { HTMLAttributes, forwardRef, ReactNode, useMemo } from 'react'
+import { HTMLAttributes, forwardRef, useMemo, ReactNode } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { useToken, useId } from '@equinor/eds-utils'
+import { useToken } from '@equinor/eds-utils'
 import { Label as _Label, LabelProps } from '../Label'
 import { HelperText as _HelperText, HelperTextProps } from './HelperText'
 import { useEds } from './../EdsProvider'
@@ -21,37 +21,23 @@ const Label = styled(_Label)`
 export type InputWrapperProps = {
   /** Label */
   label?: string
-  /** Meta */
-  meta?: string
   /** Disabled state */
   disabled?: boolean
   /** Read Only */
   readOnly?: boolean
-  /** Helper text icon */
-  helperIcon?: ReactNode
-  /** Helper text */
-  helperText?: string
   /** Highlight color */
   color?: 'error' | 'warning' | 'success'
   /** Label props */
-  labelProps?: LabelProps
+  labelProps: LabelProps
   /** Helpertext props */
   helperProps?: HelperTextProps
+  /** Input or Textarea */
+  children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
 export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
   function InputWrapper(
-    {
-      label,
-      meta,
-      children,
-      helperIcon,
-      helperText,
-      color,
-      labelProps,
-      helperProps,
-      ...other
-    },
+    { children, color, label, labelProps = {}, helperProps = {}, ...other },
     ref,
   ) {
     const { density } = useEds()
@@ -66,21 +52,16 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
         : _token.entities.helperText.typography.color
     }, [token, other.disabled])
 
-    const helperTextId = useId(null, 'helpertext')
+    const hasHelperText = Boolean(helperProps.text)
+    const hasLabel = Boolean(label)
 
     return (
       <ThemeProvider theme={token}>
         <Container {...other} ref={ref}>
-          <Label label={label} meta={meta} {...labelProps} />
+          {hasLabel && <Label label={label} {...{ label, ...labelProps }} />}
           {children}
-          {helperText && (
-            <HelperText
-              id={helperTextId}
-              icon={helperIcon}
-              text={helperText}
-              color={helperTextColor}
-              {...helperProps}
-            ></HelperText>
+          {hasHelperText && (
+            <HelperText color={helperTextColor} {...helperProps}></HelperText>
           )}
         </Container>
       </ThemeProvider>
