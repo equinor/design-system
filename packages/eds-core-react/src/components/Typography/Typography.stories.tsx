@@ -28,7 +28,7 @@ export default {
   decorators: [
     (Story) => {
       return (
-        <Stack>
+        <Stack align="baseline">
           <Story />
         </Stack>
       )
@@ -40,7 +40,7 @@ export const Introduction: Story<TypographyProps> = (args) => {
   return <Typography {...args}>Sample text</Typography>
 }
 
-export const headings: Story<TypographyProps> = () => (
+export const Headings: Story<TypographyProps> = () => (
   <Grid>
     <Typography variant="h1" bold>
       Heading 1 bold
@@ -54,7 +54,7 @@ export const headings: Story<TypographyProps> = () => (
   </Grid>
 )
 
-export const paragraphs = (): JSX.Element => (
+export const Paragraphs = (): JSX.Element => (
   <Grid>
     <Typography variant="body_short" link href="#">
       Body short link
@@ -236,8 +236,8 @@ GroupsOverview.parameters = {
   },
 }
 
-export const colors = (): JSX.Element => (
-  <Grid>
+export const Colors = (): JSX.Element => (
+  <>
     <Typography color="primary"> Primary</Typography>
     <Typography color="secondary">Secondary</Typography>
     <Typography color="danger">Danger</Typography>
@@ -246,57 +246,62 @@ export const colors = (): JSX.Element => (
     <Typography color="disabled">Disabled</Typography>
     <Typography color="currentColor">CSS currentColor</Typography>
     <Typography color="pink">CSS pink</Typography>
-  </Grid>
+  </>
 )
 
-export const custom = (): JSX.Element => (
-  <Grid>
-    <Typography group="navigation" variant="label">
-      Navigation / Label
-    </Typography>
-    <Typography group="navigation" variant="menu_title">
-      Navigation / Menu / Title
-    </Typography>
-    <Typography group="table" variant="cell_text">
-      Table / Cell / Text
-    </Typography>
-    <Typography
-      group="table"
-      variant="cell_text"
-      token={{ fontWeight: 'medium' }}
-    >
-      Table / Cell / Text / Medium
-    </Typography>
-    <Typography group="table" variant="cell_text" bold>
-      Table / Cell / Text / Bold
-    </Typography>
-    <Typography group="table" variant="cell_text" link href="#">
-      Table / Cell / Text / Bold / Link
-    </Typography>
-
-    <Typography variant="h3" token={{ fontWeight: 700 }}>
-      Heading 3 Bold
-    </Typography>
-    <Typography variant="ingress" token={{ fontWeight: 'bold' }}>
-      Ingress Bold
-    </Typography>
-    <Typography
-      token={{
-        color: 'purple',
-        fontFamily: 'Arial',
-        fontSize: '1.875rem',
-        fontWeight: 300,
-        lineHeight: '1.714em',
-        textTransform: 'uppercase',
-      }}
-    >
-      Custom token
-    </Typography>
-  </Grid>
+export const Custom = (): JSX.Element => (
+  <>
+    <div>
+      <Typography group="navigation" variant="label">
+        Navigation / Label
+      </Typography>
+      <Typography group="navigation" variant="menu_title">
+        Navigation / Menu / Title
+      </Typography>
+    </div>
+    <div>
+      <Typography group="table" variant="cell_text">
+        Table / Cell / Text
+      </Typography>
+      <Typography
+        group="table"
+        variant="cell_text"
+        token={{ fontWeight: 'medium' }}
+      >
+        Table / Cell / Text / Medium
+      </Typography>
+      <Typography group="table" variant="cell_text" bold>
+        Table / Cell / Text / Bold
+      </Typography>
+      <Typography group="table" variant="cell_text" link href="#">
+        Table / Cell / Text / Bold / Link
+      </Typography>
+    </div>
+    <div>
+      <Typography variant="h3" token={{ fontWeight: 700 }}>
+        Heading 3 Bold
+      </Typography>
+      <Typography variant="ingress" token={{ fontWeight: 'bold' }}>
+        Ingress Bold
+      </Typography>
+      <Typography
+        token={{
+          color: 'purple',
+          fontFamily: 'Arial',
+          fontSize: '1.875rem',
+          fontWeight: 300,
+          lineHeight: '1.714em',
+          textTransform: 'uppercase',
+        }}
+      >
+        Custom token
+      </Typography>
+    </div>
+  </>
 )
 
 export const Lines = (): JSX.Element => (
-  <Wrapper>
+  <>
     <Typography variant="body_long" lines={2}>
       Cupcake ipsum dolor sit amet caramels powder. Chocolate powder donut
       bonbon candy canes brownie donut wafer. Cake topping oat cake cheesecake.
@@ -308,11 +313,11 @@ export const Lines = (): JSX.Element => (
       lollipop cake. Jelly-o bonbon marshmallow powder carrot cake icing carrot
       cake. Cheesecake brownie jelly beans soufflé icing.
     </Typography>
-  </Wrapper>
+  </>
 )
 
 export const Link: Story<TypographyProps> = () => (
-  <Grid>
+  <>
     <Typography link href="#">
       Link
     </Typography>
@@ -336,11 +341,14 @@ export const Link: Story<TypographyProps> = () => (
       marshmallow wafer marzipan. Sesame snaps wafer apple pie sweet roll
       chocolate bar fruitcake.
     </Typography>
-  </Grid>
+  </>
 )
-
-Link.parameters = {
-  docs: {
-    storyDescription: 'Link used in body of text',
+Link.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ justifyContent: 'start' }}>
+        <Story />
+      </Stack>
+    )
   },
-}
+]
