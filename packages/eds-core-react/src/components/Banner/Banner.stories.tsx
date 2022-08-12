@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ComponentMeta, Story } from '@storybook/react'
+import { Stack } from '../../../.storybook/components/'
 import { Banner, Icon, Button, BannerProps, EdsProvider, Density } from '../..'
 import { save, thumbs_up, thumbs_down, mood_sad } from '@equinor/eds-icons'
 import page from './Banner.docs.mdx'
@@ -24,8 +25,24 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack
+          direction="column"
+          align="stretch"
+          style={{ background: '#ebebeb', padding: '32px' }}
+        >
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Banner>
 
 export const Introduction: Story<BannerProps> = (args) => {
@@ -65,23 +82,20 @@ export const TextAndAction: Story<BannerProps> = () => (
   <>
     <Banner>
       <Banner.Message>
-        You are signed on with another account than Equinor account:
-        name.lastname@mail.com.
+        Please confirm that you want do this action.
       </Banner.Message>
       <Banner.Actions>
-        <Button variant="ghost">Sign out</Button>
-        <Button variant="ghost">OK</Button>
+        <Button>OK</Button>
+        <Button variant="outlined">Cancel</Button>
       </Banner.Actions>
     </Banner>
     <Banner>
       <Banner.Message>
-        You are signed on with another account than Equinor account:
-        name.lastname@mail.com. This means you have to do something to be able
-        to use this service.
+        Please confirm that you want do this other action.
       </Banner.Message>
       <Banner.Actions placement="bottom">
-        <Button variant="ghost">Sign out</Button>
-        <Button variant="ghost">OK</Button>
+        <Button>OK</Button>
+        <Button variant="outlined">Sign out</Button>
       </Banner.Actions>
     </Banner>
   </>
@@ -114,7 +128,7 @@ export const TextAndIconAndAction: Story<BannerProps> = () => (
       </Banner.Message>
       <Banner.Actions placement="bottom">
         <Button>First action</Button>
-        <Button color="secondary">Second action</Button>
+        <Button variant="outlined">Second action</Button>
       </Banner.Actions>
     </Banner>
   </>
@@ -155,7 +169,7 @@ export const Compact: Story<BannerProps> = () => {
         </Banner.Message>
         <Banner.Actions placement="bottom">
           <Button>First action</Button>
-          <Button color="secondary">Second action</Button>
+          <Button variant="outlined">Second action</Button>
         </Banner.Actions>
       </Banner>
     </EdsProvider>
