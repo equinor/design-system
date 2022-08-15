@@ -21,13 +21,13 @@ export const Introduction: Story<InputWrapperProps> = (args) => {
 
   return (
     <InputWrapper
+      label={"I'm a label, play with me!"}
       helperProps={{
         id: helperTextId,
         icon: <Icon data={accessible} size={18} />,
       }}
       labelProps={{
         htmlFor: inputId,
-        label: "I'm a label, play with me!",
         meta: 'meta tag',
       }}
       {...args}
