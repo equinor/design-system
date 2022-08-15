@@ -1,4 +1,4 @@
-import { Links, PropsTable, Story } from './../../../.storybook/components'
+import { Links, PropsTable, Story, Stack, TypographyGroups } from './../../../.storybook/components'
 import { Typography } from '.'
 
 # Typography
@@ -39,11 +39,21 @@ Please do not use <code>light</code> in digital interfaces except in special cas
   <li>To ensure readability, line length should be 55-80 characters.</li>
 </ul>
 
+
 ```tsx
 import { Typography } from '@equinor/eds-core-react'
 
 <Typography>Sample text</Typography>
 ```
+
+## Overview
+
+Typography groups with included varints:  
+
+Example: `<Typography group="input" variant="label"></Typography>`. <br />
+Variants under `heading` and `paragraph` don’t require the group parameter.
+
+<Story id="typography-typography--groups-overview" />
 
 ## Examples
 
