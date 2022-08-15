@@ -11,6 +11,9 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
   decorators: [
@@ -19,7 +22,6 @@ export default {
         <Stack
           style={{
             padding: '32px',
-            gridTemplateColumns: 'repeat(5, fit-content(100%)',
           }}
         >
           <Story />

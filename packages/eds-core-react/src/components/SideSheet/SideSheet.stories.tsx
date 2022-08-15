@@ -28,7 +28,7 @@ export default {
     docs: {
       page,
       source: {
-        type: 'code',
+        excludeDecorators: true,
       },
     },
   },
@@ -45,7 +45,7 @@ const Child = styled.div`
 const Wrapper = styled.div`
   display: grid;
   grid-gap: 32px;
-  grid-template-columns: repeat(2, fit-content(100%));
+  grid-template-columns: repeat(2, auto);
   padding: 16px 0 0 12px;
 `
 

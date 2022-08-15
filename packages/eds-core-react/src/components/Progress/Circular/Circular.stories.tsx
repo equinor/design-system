@@ -48,7 +48,6 @@ Indeterminate.decorators = [
       <Stack
         style={{
           padding: '32px',
-          gridTemplateColumns: 'repeat(5, fit-content(100%)',
         }}
       >
         <Story />
@@ -114,7 +113,6 @@ Determinate.decorators = [
       <Stack
         style={{
           padding: '32px',
-          gridTemplateColumns: 'repeat(5, fit-content(100%)',
         }}
       >
         <Story />
@@ -145,7 +143,6 @@ Colors.decorators = [
       <Stack
         style={{
           padding: '32px',
-          gridTemplateColumns: 'repeat(5, fit-content(100%)',
           backgroundColor: '#ebebeb',
         }}
       >
@@ -170,7 +167,6 @@ Sizes.decorators = [
       <Stack
         style={{
           padding: '32px',
-          gridTemplateColumns: 'repeat(5, fit-content(100%)',
         }}
       >
         <Story />
@@ -197,7 +193,6 @@ InsideButton.decorators = [
       <Stack
         style={{
           padding: '32px',
-          gridTemplateColumns: 'repeat(5, fit-content(100%)',
         }}
       >
         <Story />
@@ -248,7 +243,6 @@ Accessibility.decorators = [
       <Stack
         style={{
           padding: '32px',
-          gridTemplateColumns: 'repeat(5, fit-content(100%)',
         }}
       >
         <Story />

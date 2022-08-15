@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import {
   Tooltip,
   TooltipProps,
@@ -11,12 +10,8 @@ import {
 import { data, columns, toCellValues } from '../../stories'
 import { Story, ComponentMeta } from '@storybook/react'
 import { explore } from '@equinor/eds-icons'
-import { Stack as SBStack } from './../../../.storybook/components'
+import { Stack } from './../../../.storybook/components'
 import page from './Tooltip.docs.mdx'
-
-const Stack = styled(SBStack)({
-  margin: '2.5rem',
-})
 
 export default {
   title: 'Data Display/Tooltip',
@@ -24,18 +19,28 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Tooltip>
 
 export const Introduction: Story<TooltipProps> = (args) => (
-  <Stack>
-    <Tooltip {...args}>
-      <Button variant="ghost_icon">
-        <Icon data={explore} title="explore"></Icon>
-      </Button>
-    </Tooltip>
-  </Stack>
+  <Tooltip {...args}>
+    <Button variant="ghost_icon">
+      <Icon data={explore} title="explore"></Icon>
+    </Button>
+  </Tooltip>
 )
 Introduction.bind({})
 Introduction.args = {
@@ -44,13 +49,11 @@ Introduction.args = {
 
 export const WithDelay: Story<TooltipProps> = () => {
   return (
-    <Stack>
-      <Tooltip enterDelay={300} title="Tooltip with delay">
-        <Typography link href="#">
-          Hover me!
-        </Typography>
-      </Tooltip>
-    </Stack>
+    <Tooltip enterDelay={300} title="Tooltip with delay">
+      <Typography link href="#">
+        Hover me!
+      </Typography>
+    </Tooltip>
   )
 }
 WithDelay.storyName = 'With delay'
@@ -84,37 +87,35 @@ export const OnTableCells: Story<TooltipProps> = () => {
   const cellValues = toCellValues(data, columns)
 
   return (
-    <Stack>
-      <Table>
-        <Table.Caption>
-          <Typography variant="h2">Fruits cost price</Typography>
-        </Table.Caption>
-        <Table.Head>
-          <Table.Row>
-            {columns.map((col) => (
-              <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
-            ))}
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {cellValues?.map((row) => (
-            <Table.Row key={row.toString()}>
-              {row.map((cellValue) => {
-                return (
-                  <Tooltip
-                    key={cellValue}
-                    placement="top"
-                    title={`Tooltip title for ` + cellValue}
-                  >
-                    <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
-                  </Tooltip>
-                )
-              })}
-            </Table.Row>
+    <Table>
+      <Table.Caption>
+        <Typography variant="h2">Fruits cost price</Typography>
+      </Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          {columns.map((col) => (
+            <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
           ))}
-        </Table.Body>
-      </Table>
-    </Stack>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {cellValues?.map((row) => (
+          <Table.Row key={row.toString()}>
+            {row.map((cellValue) => {
+              return (
+                <Tooltip
+                  key={cellValue}
+                  placement="top"
+                  title={`Tooltip title for ` + cellValue}
+                >
+                  <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+                </Tooltip>
+              )
+            })}
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
   )
 }
 OnTableCells.storyName = 'On table cells'
@@ -123,20 +124,16 @@ export const LongListWithTooltips: Story<TooltipProps> = () => {
   const items = Array(100).fill(1)
 
   return (
-    <Stack>
-      <div
-        style={{ display: 'flex', flexDirection: 'column', height: '200px' }}
-      >
-        {items.map((_, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <span key={i}>
-            <Tooltip title={`Icon ${i}`} placement="right">
-              <Icon data={explore} />
-            </Tooltip>
-          </span>
-        ))}
-      </div>
-    </Stack>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '200px' }}>
+      {items.map((_, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <span key={i}>
+          <Tooltip title={`Icon ${i}`} placement="right">
+            <Icon data={explore} />
+          </Tooltip>
+        </span>
+      ))}
+    </div>
   )
 }
 LongListWithTooltips.storyName = 'Long list with toolstips'

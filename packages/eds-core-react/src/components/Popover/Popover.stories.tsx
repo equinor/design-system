@@ -379,7 +379,7 @@ export const AppLauncher: Story<PopoverProps> = () => {
   const Wrapper = styled.div`
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: repeat(3, fit-content(100%));
+    grid-template-columns: repeat(3, auto);
     padding: 32px;
   `
 

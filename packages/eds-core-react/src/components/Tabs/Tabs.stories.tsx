@@ -27,6 +27,9 @@ export default {
   parameters: {
     docs: {
       page,
+      source: {
+        excludeDecorators: true,
+      },
     },
   },
 } as ComponentMeta<typeof Tabs>
@@ -62,8 +65,8 @@ const StyledTabList = styled(Tabs.List)`
   }
 `
 
-export const Introduction: Story<TabsProps> = (args) => (
-  <Stack>
+export const Introduction: Story<TabsProps> = (args) => {
+  return (
     <Tabs {...args}>
       <Tabs.List>
         <Tabs.Tab>One</Tabs.Tab>
@@ -74,8 +77,17 @@ export const Introduction: Story<TabsProps> = (args) => (
         <Tabs.Panel>Panel two</Tabs.Panel>
       </Tabs.Panels>
     </Tabs>
-  </Stack>
-)
+  )
+}
+Introduction.decorators = [
+  (Story) => {
+    return (
+      <Stack>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const States: Story<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
@@ -85,21 +97,28 @@ export const States: Story<TabsProps> = () => {
   }, [])
 
   return (
-    <Stack>
-      <Tabs activeTab={2} onChange={noop}>
-        <Tabs.List>
-          <Tabs.Tab>Enabled</Tabs.Tab>
-          <Tabs.Tab disabled>Disabled</Tabs.Tab>
-          <Tabs.Tab active>Active</Tabs.Tab>
-          <Tabs.Tab data-hover>Hover</Tabs.Tab>
-          <Tabs.Tab data-focus ref={focusedRef}>
-            Focus
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs>
-    </Stack>
+    <Tabs activeTab={2} onChange={noop}>
+      <Tabs.List>
+        <Tabs.Tab>Enabled</Tabs.Tab>
+        <Tabs.Tab disabled>Disabled</Tabs.Tab>
+        <Tabs.Tab active>Active</Tabs.Tab>
+        <Tabs.Tab data-hover>Hover</Tabs.Tab>
+        <Tabs.Tab data-focus ref={focusedRef}>
+          Focus
+        </Tabs.Tab>
+      </Tabs.List>
+    </Tabs>
   )
 }
+States.decorators = [
+  (Story) => {
+    return (
+      <Stack>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Widths: Story<TabsProps> = () => {
   return (
@@ -151,6 +170,15 @@ export const WithPanels: Story<TabsProps> = () => {
   )
 }
 WithPanels.storyName = 'With panels'
+WithPanels.decorators = [
+  (Story) => {
+    return (
+      <Stack>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const WithSearch: Story<TabsProps> = () => {
   const [searchText, setSearchText] = useState('')
@@ -469,20 +497,27 @@ export const Compact: Story<TabsProps> = () => {
   }, [density])
 
   return (
-    <Stack>
-      <EdsProvider density={density}>
-        <Tabs activeTab={2} onChange={noop}>
-          <Tabs.List>
-            <Tabs.Tab>Enabled</Tabs.Tab>
-            <Tabs.Tab disabled>Disabled</Tabs.Tab>
-            <Tabs.Tab active>Active</Tabs.Tab>
-            <Tabs.Tab data-hover>Hover</Tabs.Tab>
-            <Tabs.Tab data-focus ref={focusedRef}>
-              Focus
-            </Tabs.Tab>
-          </Tabs.List>
-        </Tabs>
-      </EdsProvider>
-    </Stack>
+    <EdsProvider density={density}>
+      <Tabs activeTab={2} onChange={noop}>
+        <Tabs.List>
+          <Tabs.Tab>Enabled</Tabs.Tab>
+          <Tabs.Tab disabled>Disabled</Tabs.Tab>
+          <Tabs.Tab active>Active</Tabs.Tab>
+          <Tabs.Tab data-hover>Hover</Tabs.Tab>
+          <Tabs.Tab data-focus ref={focusedRef}>
+            Focus
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs>
+    </EdsProvider>
   )
 }
+Compact.decorators = [
+  (Story) => {
+    return (
+      <Stack>
+        <Story />
+      </Stack>
+    )
+  },
+]
