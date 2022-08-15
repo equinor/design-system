@@ -19,6 +19,13 @@ const StyledButton = styled(Button)`
 const MarginButton = styled(Button)`
   margin: 12px;
 `
+const LinkButton = ({ to }: { to: string }) => {
+  return (
+    <a href={to} target="_blank" rel="noreferrer">
+      click
+    </a>
+  )
+}
 
 afterEach(cleanup)
 
@@ -134,6 +141,13 @@ describe('Button', () => {
     const button = screen.getByRole('link')
 
     expect(button).toBeInTheDocument()
+  })
+  it('Can be cast as another component', () => {
+    render(<Button as={LinkButton} to="/" />)
+    const button = screen.getByRole('link')
+
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveAttribute('target', '_blank')
   })
   it('Can change margins', () => {
     render(<MarginButton>Test me!</MarginButton>)
