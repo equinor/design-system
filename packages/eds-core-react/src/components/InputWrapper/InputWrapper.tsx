@@ -31,7 +31,7 @@ export type InputWrapperProps = {
   labelProps: LabelProps
   /** Helpertext props */
   helperProps?: HelperTextProps
-  /** Input or Textarea */
+  /** Input or Textarea elements */
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
@@ -53,7 +53,7 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
     }, [token, other.disabled])
 
     const hasHelperText = Boolean(helperProps.text)
-    const hasLabel = Boolean(label)
+    const hasLabel = Boolean(label || labelProps.label)
 
     return (
       <ThemeProvider theme={token}>
