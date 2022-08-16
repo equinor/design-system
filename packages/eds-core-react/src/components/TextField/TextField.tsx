@@ -10,10 +10,13 @@ import { Field } from './Field'
 import { Label } from '../Label'
 import { HelperText } from './HelperText'
 import { TextFieldProvider } from './TextField.context'
+import { InputWrapper } from '../InputWrapper'
+import { Input, InputProps } from '../Input'
 import type { Variants } from './types'
 import { textfield as tokens } from './TextField.tokens'
 import { useToken, useId } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
+import { Textarea } from '../Textarea'
 
 const Container = styled.div`
   min-width: 100px;
@@ -44,7 +47,7 @@ export type TextFieldProps = {
   /** Specifies max rows for multiline input */
   rowsMax?: number
   /** Input ref */
-  inputRef?: Ref<HTMLInputElement> | Ref<HTMLTextAreaElement>
+  inputRef?: Ref<HTMLInputElement>
   /** InputIcon */
   inputIcon?: ReactNode
   /** HelperIcon */
@@ -53,10 +56,7 @@ export type TextFieldProps = {
   value?: string
   /** Read Only */
   readOnly?: boolean
-} & (
-  | InputHTMLAttributes<HTMLInputElement>
-  | TextareaHTMLAttributes<HTMLTextAreaElement>
-)
+} & InputHTMLAttributes<HTMLInputElement>
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   function TextField(
@@ -81,17 +81,19 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     ref,
   ) {
     const helperTextId = useId(null, 'helpertext')
-    const inputProps = {
+    const inputProps: InputProps = {
       'aria-describedby': helperTextId,
-      multiline,
       disabled,
       placeholder,
       id,
       variant,
-      ref: inputRef,
-      inputIcon,
-      unit,
-      rowsMax,
+
+      rightAdornments: (
+        <>
+          {inputIcon}
+          {unit}
+        </>
+      ),
       ...other,
     }
 
@@ -124,13 +126,17 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <Container {...containerProps}>
+        {/* <Container {...containerProps}>
           <TextFieldProvider>
             {showLabel && <Label {...labelProps} />}
             <Field {...inputProps} />
             {showHelperText && <HelperText {...helperProps} />}
           </TextFieldProvider>
-        </Container>
+        </Container> */}
+
+        <InputWrapper helperProps={helperProps} labelProps={labelProps}>
+          {multiline ? <Textarea /> : <Input ref={inputRef} {...inputProps} />}
+        </InputWrapper>
       </ThemeProvider>
     )
   },
