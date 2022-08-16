@@ -79,7 +79,11 @@ Compact `Button` using `EdsProvider`.
 ### Using the 'as' prop to render as another component
 
 The `as` prop allows you to render the `Button` as another html element or even react component. 
-This is useful if you want to use the `Button` as as a navigation component for a third party routing library such as react-router.
+
+```tsx
+<Button as="a" href="/about" target="_blank" rel="noreferrer">About</Button>
+```
+This is especially useful if you want to use the `Button` as as a navigation component for a third party routing library such as react-router.
 
 ```tsx
 import { Link } from "react-router-dom"
