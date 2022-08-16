@@ -130,6 +130,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
 }
 
 .c6 {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-text-decoration: none;

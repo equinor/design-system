@@ -75,3 +75,19 @@ Example All button combinations.
 
 Compact `Button` using `EdsProvider`.
 <Story id="inputs-button--compact" />
+
+### Using the 'as' prop to render as another component
+
+The `as` prop allows you to render the `Button` as another html element or even react component. 
+
+```tsx
+<Button as="a" href="/about" target="_blank" rel="noreferrer">About</Button>
+```
+This is especially useful if you want to use the `Button` as as a navigation component for a third party routing library such as react-router.
+
+```tsx
+import { Link } from "react-router-dom"
+import { Button } from '@equinor/eds-core-react'
+
+<Button as={Link} to="/about">About</Button>
+```
