@@ -5,19 +5,11 @@ import { Stack } from './../../../.storybook/components'
 import page from './Typography.docs.mdx'
 import { tokens, Typography as TypographyType } from '@equinor/eds-tokens'
 
-const {
-  colors: {
-    infographic: {
-      primary__moss_green_100: { rgba: mossgreen100 },
-    },
-  },
-  typography,
-} = tokens
+const { typography } = tokens
 
 const SBCard = styled(Card)`
-  border: 1px solid ${mossgreen100};
   max-width: 290px;
-  display: table-cell;
+  display: block;
 `
 
 export default {
@@ -42,23 +34,30 @@ export default {
   ],
 } as ComponentMeta<typeof Typography>
 
-export const GroupsOverview = () => {
-  return Object.entries(typography).map(([key, group]) => (
-    <SBCard key={key}>
-      <Card.Header>
-        <Card.HeaderTitle>
-          <Typography variant="h5">{key}</Typography>
-        </Card.HeaderTitle>
-      </Card.Header>
-      <Divider />
-      {Object.entries(group).map(([key, token]) => (
-        <Card.Content key={key}>
-          <Typography token={token as TypographyType}>{key}</Typography>
-        </Card.Content>
-      ))}
-    </SBCard>
-  ))
+export const Introduction: Story<TypographyProps> = (args) => {
+  return <Typography {...args}>Sample text</Typography>
 }
+
+export const GroupsOverview = () => {
+  return Object.entries(typography)
+    .filter(([key]) => key !== '_modes')
+    .map(([key, group]) => (
+      <SBCard key={key} elevation="raised">
+        <Card.Header>
+          <Card.HeaderTitle>
+            <Typography variant="h5">{key}</Typography>
+          </Card.HeaderTitle>
+        </Card.Header>
+        <Divider />
+        {Object.entries(group).map(([key, token]) => (
+          <Card.Content key={key}>
+            <Typography token={token as TypographyType}>{key}</Typography>
+          </Card.Content>
+        ))}
+      </SBCard>
+    ))
+}
+GroupsOverview.storyName = 'Groups overview'
 GroupsOverview.decorators = [
   (Story) => {
     return (
@@ -68,10 +67,6 @@ GroupsOverview.decorators = [
     )
   },
 ]
-
-export const Introduction: Story<TypographyProps> = (args) => {
-  return <Typography {...args}>Sample text</Typography>
-}
 
 export const Colors: Story<TypographyProps> = () => (
   <>
@@ -86,7 +81,7 @@ export const Colors: Story<TypographyProps> = () => (
   </>
 )
 
-export const Custom: Story<TypographyProps> = () => (
+export const TokenProperty: Story<TypographyProps> = () => (
   <>
     <div>
       <Typography group="navigation" variant="label">
@@ -136,6 +131,7 @@ export const Custom: Story<TypographyProps> = () => (
     </div>
   </>
 )
+TokenProperty.storyName = 'Token property'
 
 export const Lines: Story<TypographyProps> = () => (
   <>

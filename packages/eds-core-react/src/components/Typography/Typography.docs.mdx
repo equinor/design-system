@@ -20,6 +20,24 @@ therefore text sizes and styles were developed to balance content density and re
 
 **Typeface**
 
+The `Equinor` typeface is not included in `EDS` by default. It is available from the EDS CDN.
+
+<ul>
+  <li>All the fonts:</li>
+</ul>
+
+```tsx
+<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-font.css" />
+```
+
+<ul>
+  <li>Individual font:</li>
+</ul>
+
+```tsx
+<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-regular.css" />
+```
+
 The `Equinor` typeface is the primary typeface and is available in four weights:
 
 <ul>
@@ -39,6 +57,7 @@ Please do not use <code>light</code> in digital interfaces except in special cas
   <li>To ensure readability, line length should be 55-80 characters.</li>
 </ul>
 
+**Component**
 
 ```tsx
 import { Typography } from '@equinor/eds-core-react'
@@ -61,9 +80,26 @@ Variants under `heading` and `paragraph` don’t require the group parameter.
 
 <Story id="typography-typography--colors" />
 
-### Custom
+### Token property
 
-<Story id="typography-typography--custom" />
+The `token` property allows manipulate the appearance of the typography. <br />
+Properties: 
+
+<ul>
+  <li><code>color</code>,</li>
+  <li><code>fontFamily</code>,</li>
+  <li><code>fontSize</code>,</li>
+  <li><code>fontWeight</code>,</li>
+  <li><code>fontStyle</code>,</li>
+  <li><code>fontFeature</code>,</li>
+  <li><code>lineHeight</code>,</li>
+  <li><code>textAlign</code>,</li>
+  <li><code>textTransform</code>,</li>
+  <li><code>textDecoration</code>,</li>
+  <li><code>letterSpacing</code>.</li>
+</ul>
+
+<Story id="typography-typography--token-property" />
 
 ### Lines
 

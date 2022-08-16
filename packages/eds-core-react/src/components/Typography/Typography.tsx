@@ -118,6 +118,7 @@ export type TypographyProps = {
   link?: boolean
   /** Typography colors. */
   color?: ColorVariants | string
+  /** Token. */
   token?: Partial<TypographyType>
   /** Number of lines. */
   lines?: number
