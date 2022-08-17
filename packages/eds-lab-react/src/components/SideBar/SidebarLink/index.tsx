@@ -1,6 +1,10 @@
 import { HTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react'
 import { sidebar as tokens } from '../SideBar.tokens'
-import { bordersTemplate, outlineTemplate } from '@equinor/eds-utils'
+import {
+  bordersTemplate,
+  outlineTemplate,
+  OverridableComponent,
+} from '@equinor/eds-utils'
 import {
   Button,
   ButtonProps,
@@ -104,15 +108,12 @@ const ItemText = styled(Typography)<ItemTextProps>(({ theme, active }) => {
 const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;
 `
-type OverridableComponent<Component, Element extends HTMLElement> = {
-  (props: Component & React.RefAttributes<Element>): ReturnType<React.FC>
 
-  <As extends React.ElementType>(
-    props: {
-      as: As
-    } & Component &
-      Omit<React.ComponentPropsWithRef<As>, keyof Component>,
-  ): ReturnType<React.FC>
+type OverridableSubComponent = OverridableComponent<
+  SidebarLinkProps,
+  HTMLAnchorElement
+> & {
+  displayName?: string
 }
 
 export type SidebarLinkType = {
@@ -127,10 +128,7 @@ export type SidebarLinkProps = {
 } & SidebarLinkType &
   HTMLAttributes<HTMLAnchorElement>
 
-export const SidebarLink: OverridableComponent<
-  SidebarLinkProps,
-  HTMLAnchorElement
-> = forwardRef(
+export const SidebarLink: OverridableSubComponent = forwardRef(
   ({ currentUrl, icon, name, link, onClick, as = 'a', ...rest }, ref) => {
     const isCurrentUrl = () => currentUrl?.includes(link)
     const { isOpen } = useSideBar()
