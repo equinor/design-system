@@ -104,6 +104,16 @@ const ItemText = styled(Typography)<ItemTextProps>(({ theme, active }) => {
 const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;
 `
+type OverridableComponent<Component, Element extends HTMLElement> = {
+  (props: Component & React.RefAttributes<Element>): ReturnType<React.FC>
+
+  <As extends React.ElementType>(
+    props: {
+      as: As
+    } & Component &
+      Omit<React.ComponentPropsWithRef<As>, keyof Component>,
+  ): ReturnType<React.FC>
+}
 
 export type SidebarLinkType = {
   icon?: IconData
@@ -117,8 +127,11 @@ export type SidebarLinkProps = {
 } & SidebarLinkType &
   HTMLAttributes<HTMLAnchorElement>
 
-export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
-  ({ currentUrl, icon, name, link, onClick, ...rest }, ref) => {
+export const SidebarLink: OverridableComponent<
+  SidebarLinkProps,
+  HTMLAnchorElement
+> = forwardRef(
+  ({ currentUrl, icon, name, link, onClick, as = 'a', ...rest }, ref) => {
     const isCurrentUrl = () => currentUrl?.includes(link)
     const { isOpen } = useSideBar()
 
@@ -129,7 +142,7 @@ export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
     if (isOpen) {
       return (
         <Container
-          as="a"
+          as={as}
           tabIndex={0}
           active={isCurrentUrl()}
           onClick={onClick}
@@ -149,7 +162,7 @@ export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
       <Tooltip title={name} placement="right">
         <Container
           tabIndex={0}
-          as="a"
+          as={as}
           active={isCurrentUrl()}
           onClick={onClick}
           variant="ghost"
