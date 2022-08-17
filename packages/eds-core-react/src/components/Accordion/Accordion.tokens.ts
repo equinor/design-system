@@ -28,6 +28,9 @@ const {
   interactions: {
     focused: { width: focusOutlineWidth },
   },
+  typography: {
+    input: { text },
+  },
 } = tokens
 
 type AccordionToken = ComponentToken & {
@@ -95,6 +98,7 @@ export const accordion: AccordionToken = {
         right: mediumSpacing,
         top: mediumSpacing,
       },
+      typography: { ...text },
     },
     icon: {
       typography: {
