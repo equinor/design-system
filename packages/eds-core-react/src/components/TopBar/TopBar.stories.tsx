@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { TopBar, Icon, Search, TopbarProps, EdsProvider, Density } from '../..'
+import {
+  TopBar,
+  Icon,
+  Search,
+  TopbarProps,
+  EdsProvider,
+  Density,
+  Typography,
+} from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import page from './TopBar.docs.mdx'
 
@@ -44,6 +52,7 @@ const BodyWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  padding: 16px;
 `
 
 export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
@@ -58,9 +67,15 @@ export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
         </TopBar.Header>
       </TopBar>
       <BodyWrapper>
-        <p>Top of page</p>
-        <p>Middle of page</p>
-        <p>Bottom of page</p>
+        <Typography group="input" variant="text">
+          Top of page
+        </Typography>
+        <Typography group="input" variant="text">
+          Middle of page
+        </Typography>
+        <Typography group="input" variant="text">
+          Bottom of page
+        </Typography>
       </BodyWrapper>
     </>
   )
