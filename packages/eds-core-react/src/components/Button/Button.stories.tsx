@@ -10,7 +10,7 @@ import {
 import { Story, ComponentMeta } from '@storybook/react'
 import { menu, add, save } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
-// import { Group } from '../Group'
+import { Group } from '../Group'
 import page from './Button.docs.mdx'
 
 export default {
@@ -319,13 +319,46 @@ Compact.decorators = [
   ),
 ]
 
-// export const ButtonGroup: Story<ButtonProps> = () => (
-//   <Stack style={{ gridGap: 0 }}>
-//     <Group>
-//       <Button>Contained</Button>
-//       <Button variant="outlined">Outlined</Button>
-//       <Button variant="outlined">Outlined</Button>
-//       <Button variant="outlined">Outlined</Button>
-//     </Group>
-//   </Stack>
-// )
+export const ButtonGroup: Story<ButtonProps> = () => (
+  <Group>
+    <Button>Contained</Button>
+    <Button variant="outlined">Outlined</Button>
+    <Button variant="outlined">Outlined</Button>
+    <Button variant="outlined">Outlined</Button>
+  </Group>
+)
+ButtonGroup.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const CompactButtonGroup: Story<ButtonProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Group>
+        <Button>Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined">Outlined</Button>
+      </Group>
+    </EdsProvider>
+  )
+}
+CompactButtonGroup.storyName = 'Compact button group'
+CompactButtonGroup.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
