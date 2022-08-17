@@ -11,6 +11,9 @@ const {
   spacings: {
     comfortable: { xx_small: spacingXXS, medium: spacingMedium },
   },
+  typography: {
+    paragraph: { body_short },
+  },
 } = tokens
 
 type SidesheetToken = ComponentToken
@@ -26,6 +29,7 @@ export const comfortable: SidesheetToken = {
     type: 'bordergroup',
     left: { color: borderColor, width: spacingXXS, style: 'solid' },
   },
+  typography: { ...body_short },
 }
 
 export const variants = {
