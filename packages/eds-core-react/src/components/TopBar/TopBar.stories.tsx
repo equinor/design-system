@@ -45,8 +45,13 @@ const icons = {
 
 Icon.add(icons)
 
+const Wrapper = styled.div.attrs({ tabIndex: 0 })`
+  height: 65vh;
+  overflow: auto;
+`
+
 const BodyWrapper = styled.div`
-  height: 500px;
+  height: 1000px;
   background: #ebebeb;
   display: flex;
   flex-direction: column;
@@ -57,7 +62,7 @@ const BodyWrapper = styled.div`
 
 export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
   return (
-    <>
+    <Wrapper>
       <TopBar {...props}>
         <TopBar.Header>
           <>
@@ -77,7 +82,7 @@ export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
           Bottom of page
         </Typography>
       </BodyWrapper>
-    </>
+    </Wrapper>
   )
 }
 
