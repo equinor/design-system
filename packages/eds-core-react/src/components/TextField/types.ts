@@ -1,4 +1,4 @@
-export type Variants = 'error' | 'warning' | 'success' | 'default'
+export type Variants = 'error' | 'warning' | 'success'
 
 export type ColorStateProps = {
   color: string

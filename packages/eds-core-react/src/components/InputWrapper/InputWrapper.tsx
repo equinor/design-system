@@ -5,6 +5,7 @@ import { Label as _Label, LabelProps } from '../Label'
 import { HelperText as _HelperText, HelperTextProps } from './HelperText'
 import { useEds } from './../EdsProvider'
 import { inputToken as tokens } from './InputWrapper.tokens'
+import { Variants } from '../TextField/types'
 
 const Container = styled.div``
 
@@ -26,7 +27,7 @@ export type InputWrapperProps = {
   /** Read Only */
   readOnly?: boolean
   /** Highlight color */
-  color?: 'error' | 'warning' | 'success'
+  color?: Variants
   /** Label props */
   labelProps: LabelProps
   /** Helpertext props */

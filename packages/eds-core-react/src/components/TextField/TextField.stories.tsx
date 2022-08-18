@@ -33,9 +33,9 @@ export default {
     inputIcon: {
       options: ['error', 'warning', 'success'],
       mapping: {
-        error: [<Icon name="error_filled" key="error" />],
-        warning: [<Icon name="warning_filled" key="warning" />],
-        success: [<Icon name="thumbs_up" key="thumbs" />],
+        error: [<Icon name="error_filled" key="error" size={18} />],
+        warning: [<Icon name="warning_filled" key="warning" size={18} />],
+        success: [<Icon name="thumbs_up" key="thumbs" size={18} />],
       },
       control: {
         type: 'select',
@@ -46,9 +46,9 @@ export default {
     helperIcon: {
       options: ['error', 'warning', 'success'],
       mapping: {
-        error: [<Icon name="error_filled" key="error" />],
-        warning: [<Icon name="warning_filled" key="warning" />],
-        success: [<Icon name="thumbs_up" key="thumbs" />],
+        error: [<Icon name="error_filled" key="error" size={18} />],
+        warning: [<Icon name="warning_filled" key="warning" size={18} />],
+        success: [<Icon name="thumbs_up" key="thumbs" size={18} />],
       },
       control: {
         type: 'select',
@@ -77,25 +77,24 @@ export default {
 } as ComponentMeta<typeof TextField>
 
 export const Introduction: Story<TextFieldProps> = (args) => (
-  <TextField
-    meta="meta"
-    id="playWithMe"
-    label="Play with me"
-    unit="Unit"
-    helperText="Helper text"
-    style={{ resize: 'none' }}
-    rows={3}
-    rowsMax={7}
-    {...args}
-  ></TextField>
+  <TextField {...args}></TextField>
 )
+
+Introduction.bind({})
+Introduction.args = {
+  unit: 'unit',
+  meta: 'meta',
+  id: 'playWithMe',
+  label: 'Play with me',
+  helperText: 'helper text',
+}
 
 export const Types: Story<TextFieldProps> = () => (
   <>
     <TextField
       id="textfield-normal"
       placeholder="Placeholder text"
-      label="Label"
+      label="Text"
       autoComplete="off"
     />
     <TextField
@@ -117,7 +116,6 @@ export const Types: Story<TextFieldProps> = () => (
       id="textfield-email"
       placeholder="Placeholder text"
       label="Email"
-      meta="Meta"
       helperText="Helper Text"
     />
     <TextField
@@ -125,12 +123,11 @@ export const Types: Story<TextFieldProps> = () => (
       id="textfield-password"
       placeholder="Placeholder text"
       label="Password"
-      meta="Meta"
       helperText="Helper Text"
+      inputIcon={<Icon name="thumbs_up" key="thumbs" size={16} />}
     />
   </>
 )
-Types.storyName = 'Single line'
 Types.decorators = [
   (Story) => {
     return (
@@ -151,10 +148,7 @@ Types.decorators = [
 export const Multiline: Story<TextFieldProps> = () => (
   <TextField
     id="storybook-multiline"
-    placeholder="Placeholder text"
-    label="Label"
-    helperText="Helper Text"
-    meta="Meta"
+    label="Multiline"
     multiline
     style={{ resize: 'none' }}
     rows={3}
@@ -164,15 +158,13 @@ export const Multiline: Story<TextFieldProps> = () => (
 export const MultilineRowsMax: Story<TextFieldProps> = () => (
   <TextField
     id="storybook-multiline-three"
-    placeholder="Placeholder text"
-    label="Label"
+    label="Multiline with max 10 rows"
     multiline
     style={{ resize: 'none' }}
     rows={3}
     rowsMax={10}
   />
 )
-MultilineRowsMax.storyName = 'Multiline with rowsMax'
 
 export const MultilineFixedHeight: Story<TextFieldProps> = () => (
   <TextField
@@ -602,7 +594,7 @@ export const ValidationWithReactHookForm: Story<TextFieldProps> = () => {
               invalid ? <Icon data={error_filled} title="error" /> : undefined
             }
             helperText={error?.message}
-            variant={invalid ? 'error' : 'default'}
+            variant={invalid ? 'error' : undefined}
           />
         )}
       />

@@ -135,10 +135,7 @@ export type InputProps = {
   rightAdornmentsWidth?: number
   /** Right adornments ref */
   rightAdornmentsRef?: ForwardedRef<HTMLDivElement>
-} & (
-  | InputHTMLAttributes<HTMLInputElement>
-  | TextareaHTMLAttributes<HTMLTextAreaElement>
-)
+} & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {

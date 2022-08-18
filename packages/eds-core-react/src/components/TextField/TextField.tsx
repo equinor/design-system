@@ -82,7 +82,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       disabled,
       multiline = false,
       className,
-      variant = 'default',
+      variant,
       inputRef,
       inputIcon,
       helperIcon,
@@ -129,8 +129,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 
     const helperProps = {
       id: helperTextId,
-      variant,
-      helperText,
+      text: helperText,
       icon: helperIcon,
       disabled,
     }
@@ -139,6 +138,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       ref,
       className,
       style,
+      color: variant,
     }
 
     const labelProps = {
@@ -164,7 +164,11 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           </TextFieldProvider>
         </Container> */}
 
-        <InputWrapper helperProps={helperProps} labelProps={labelProps}>
+        <InputWrapper
+          helperProps={helperProps}
+          labelProps={labelProps}
+          {...containerProps}
+        >
           {multiline ? (
             <Textarea ref={textareaRef} {...textareaProps} />
           ) : (
