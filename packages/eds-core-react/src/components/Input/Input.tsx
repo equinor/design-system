@@ -1,4 +1,11 @@
-import { InputHTMLAttributes, forwardRef, ReactNode, useMemo } from 'react'
+import {
+  InputHTMLAttributes,
+  forwardRef,
+  ReactNode,
+  useMemo,
+  ForwardedRef,
+  TextareaHTMLAttributes,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { ComponentToken } from '@equinor/eds-tokens'
 import {
@@ -126,7 +133,12 @@ export type InputProps = {
   rightAdornments?: ReactNode
   /** Right adornments width */
   rightAdornmentsWidth?: number
-} & InputHTMLAttributes<HTMLInputElement>
+  /** Right adornments ref */
+  rightAdornmentsRef?: ForwardedRef<HTMLDivElement>
+} & (
+  | InputHTMLAttributes<HTMLInputElement>
+  | TextareaHTMLAttributes<HTMLTextAreaElement>
+)
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
@@ -137,6 +149,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     rightAdornments,
     leftAdornmentsWidth,
     rightAdornmentsWidth,
+    rightAdornmentsRef,
     readOnly,
     className,
     style,
@@ -187,6 +200,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     token: updatedToken,
   }
   const rightAdornmentProps = {
+    ref: rightAdornmentsRef,
     token: updatedToken,
   }
 

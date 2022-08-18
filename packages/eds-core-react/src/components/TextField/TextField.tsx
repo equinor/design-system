@@ -4,6 +4,13 @@ import {
   TextareaHTMLAttributes,
   forwardRef,
   Ref,
+  useRef,
+  useEffect,
+  useMemo,
+  useState,
+  ForwardedRef,
+  RefObject,
+  useCallback,
 } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { Field } from './Field'
@@ -42,12 +49,14 @@ export type TextFieldProps = {
   placeholder?: string
   /** Disabled */
   disabled?: boolean
-  /** Multiline input */
+  /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
   multiline?: boolean
-  /** Specifies max rows for multiline input */
+  /**  Maximum number of rows if `multiline` is set to `true` */
   rowsMax?: number
   /** Input ref */
-  inputRef?: Ref<HTMLInputElement>
+  inputRef?: ForwardedRef<HTMLInputElement>
+  /** Textarea ref when multiline is set to `true` */
+  textareaRef?: ForwardedRef<HTMLTextAreaElement>
   /** InputIcon */
   inputIcon?: ReactNode
   /** HelperIcon */
@@ -56,7 +65,10 @@ export type TextFieldProps = {
   value?: string
   /** Read Only */
   readOnly?: boolean
-} & InputHTMLAttributes<HTMLInputElement>
+} & (
+  | InputHTMLAttributes<HTMLInputElement>
+  | TextareaHTMLAttributes<HTMLTextAreaElement>
+)
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   function TextField(
@@ -68,7 +80,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       helperText,
       placeholder,
       disabled,
-      multiline,
+      multiline = false,
       className,
       variant = 'default',
       inputRef,
@@ -76,25 +88,43 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       helperIcon,
       rowsMax,
       style,
+      textareaRef,
       ...other
     },
     ref,
   ) {
     const helperTextId = useId(null, 'helpertext')
-    const inputProps: InputProps = {
+
+    const [adornmentRef, setAdornmentRef] = useState<HTMLDivElement>()
+
+    const rightAdornmentsWidth = useCallback(() => {
+      if (adornmentRef) {
+        return adornmentRef.offsetWidth
+      }
+      return 0
+    }, [adornmentRef])
+
+    const inputProps = {
       'aria-describedby': helperTextId,
+      'aria-invalid': variant === 'error' || undefined,
       disabled,
       placeholder,
       id,
       variant,
-
+      rightAdornmentsRef: setAdornmentRef,
       rightAdornments: (
         <>
           {inputIcon}
-          {unit}
+          <span>{unit}</span>
         </>
       ),
+      rightAdornmentsWidth: rightAdornmentsWidth() + 8,
       ...other,
+    }
+
+    const textareaProps = {
+      ...inputProps,
+      rowsMax,
     }
 
     const helperProps = {
@@ -135,7 +165,11 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         </Container> */}
 
         <InputWrapper helperProps={helperProps} labelProps={labelProps}>
-          {multiline ? <Textarea /> : <Input ref={inputRef} {...inputProps} />}
+          {multiline ? (
+            <Textarea ref={textareaRef} {...textareaProps} />
+          ) : (
+            <Input ref={inputRef} {...inputProps} />
+          )}
         </InputWrapper>
       </ThemeProvider>
     )

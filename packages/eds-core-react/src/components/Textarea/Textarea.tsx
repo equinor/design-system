@@ -97,7 +97,7 @@ export type TextareaProps = {
   type?: string
   /** Read Only */
   readOnly?: boolean
-  /** Specifies max rows for multiline input */
+  /** Specifies max rows for multiline  */
   rowsMax?: number
 } & TextareaHTMLAttributes<HTMLTextAreaElement>
 
