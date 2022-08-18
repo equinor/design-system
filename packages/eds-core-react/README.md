@@ -15,6 +15,14 @@ If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
 npm install typescript --save-dev
 ```
 
+### Fonts
+
+ The Equinor typeface is not included and needs to be added to the head of your project. Its available from the EDS CDN:
+
+```html
+<link rel="stylesheet" href="https://eds-static.equinor.com/font/equinor-font.css" />
+```
+
 ## Usage
 
 ```jsx
