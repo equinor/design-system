@@ -1,6 +1,10 @@
 import { HTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react'
 import { sidebar as tokens } from '../SideBar.tokens'
-import { bordersTemplate } from '@equinor/eds-utils'
+import {
+  bordersTemplate,
+  outlineTemplate,
+  OverridableComponent,
+} from '@equinor/eds-utils'
 import {
   Button,
   ButtonProps,
@@ -44,6 +48,7 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
         states: {
           active: { background: menuActiveBackground },
           hover: { background: menuHoverBackground },
+          focus,
           disabled: {
             background: menuDisabledBackground,
             typography: { color: menuDisabledText },
@@ -67,6 +72,9 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
     &:disabled {
       background-color: ${menuDisabledBackground};
       color: ${menuDisabledText};
+    }
+    &:focus-visible {
+      ${outlineTemplate(focus.outline)};
     }
   `
 })
@@ -101,6 +109,13 @@ const Tooltip = styled(EDSTooltip)`
   text-transform: capitalize;
 `
 
+type OverridableSubComponent = OverridableComponent<
+  SidebarLinkProps,
+  HTMLAnchorElement
+> & {
+  displayName?: string
+}
+
 export type SidebarLinkType = {
   icon?: IconData
   name: string
@@ -113,8 +128,8 @@ export type SidebarLinkProps = {
 } & SidebarLinkType &
   HTMLAttributes<HTMLAnchorElement>
 
-export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
-  ({ currentUrl, icon, name, link, onClick, ...rest }, ref) => {
+export const SidebarLink: OverridableSubComponent = forwardRef(
+  ({ currentUrl, icon, name, link, onClick, as = 'a', ...rest }, ref) => {
     const isCurrentUrl = () => currentUrl?.includes(link)
     const { isOpen } = useSideBar()
 
@@ -125,7 +140,8 @@ export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
     if (isOpen) {
       return (
         <Container
-          as="a"
+          as={as}
+          tabIndex={0}
           active={isCurrentUrl()}
           onClick={onClick}
           variant="ghost"
@@ -143,7 +159,8 @@ export const SidebarLink = forwardRef<HTMLAnchorElement, SidebarLinkProps>(
     return (
       <Tooltip title={name} placement="right">
         <Container
-          as="a"
+          tabIndex={0}
+          as={as}
           active={isCurrentUrl()}
           onClick={onClick}
           variant="ghost"

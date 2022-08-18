@@ -70,7 +70,7 @@ export const sidebar: ComponentToken = {
             style: 'dashed',
             type: 'outline',
             width: '2px',
-            offset: '2px',
+            offset: '-2px',
           },
         },
         disabled: {

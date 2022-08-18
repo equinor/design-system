@@ -39,7 +39,7 @@ const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
 const GridContainer = styled.div<ContainerProps>(
   ({ theme, open, maxHeight }) => {
     return css`
-      box-sizing: border-box;
+      box-sizing: content-box;
       ${bordersTemplate(theme.border)}
       display: grid;
       grid-template-rows: 1fr auto;
