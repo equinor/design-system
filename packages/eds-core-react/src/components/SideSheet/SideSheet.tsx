@@ -1,13 +1,17 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { clear } from '@equinor/eds-icons'
-import { spacingsTemplate, bordersTemplate } from '@equinor/eds-utils'
+import {
+  spacingsTemplate,
+  bordersTemplate,
+  typographyTemplate,
+} from '@equinor/eds-utils'
 import { Typography } from '../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { comfortable as tokens, variants } from './SideSheet.tokens'
 
-const { background, spacings, border } = tokens
+const { background, spacings, border, typography } = tokens
 
 type StyleProps = {
   width: string
@@ -38,6 +42,7 @@ const StyledSideSheet = styled.div<StyleProps>`
 
   ${bordersTemplate(border)}
   ${spacingsTemplate(spacings)};
+  ${typographyTemplate(typography)}
 `
 
 const Header = styled.div`

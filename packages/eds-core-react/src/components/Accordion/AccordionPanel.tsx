@@ -1,6 +1,10 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { bordersTemplate, spacingsTemplate } from '@equinor/eds-utils'
+import {
+  bordersTemplate,
+  spacingsTemplate,
+  typographyTemplate,
+} from '@equinor/eds-utils'
 
 export type AccordionPanelProps = {
   /** The ID of the element that controls the panel */
@@ -26,6 +30,7 @@ const StyledAccordionPanel = styled.div.attrs(
   return css`
     ${bordersTemplate(border)}
     ${spacingsTemplate(panel.spacings)}
+    ${typographyTemplate(panel.typography)}
     background: ${header.background};
     min-height: 96px;
     box-sizing: border-box;

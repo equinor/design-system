@@ -90,6 +90,17 @@ exports[`Accordion Matches snapshot 1`] = `
   padding-top: 16px;
   padding-right: 16px;
   padding-bottom: 16px;
+  margin: 0;
+  color: rgba(0,0,0,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  -webkit-letter-spacing: 0.025em;
+  -moz-letter-spacing: 0.025em;
+  -ms-letter-spacing: 0.025em;
+  letter-spacing: 0.025em;
+  text-align: left;
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
   min-height: 96px;
   box-sizing: border-box;
