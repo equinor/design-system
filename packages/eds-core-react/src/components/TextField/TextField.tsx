@@ -3,32 +3,18 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   forwardRef,
-  Ref,
-  useRef,
-  useEffect,
-  useMemo,
   useState,
   ForwardedRef,
-  RefObject,
   useCallback,
 } from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import { Field } from './Field'
-import { Label } from '../Label'
-import { HelperText } from './HelperText'
-import { TextFieldProvider } from './TextField.context'
+import { ThemeProvider } from 'styled-components'
 import { InputWrapper } from '../InputWrapper'
-import { Input, InputProps } from '../Input'
+import { Input } from '../Input'
 import type { Variants } from './types'
 import { textfield as tokens } from './TextField.tokens'
 import { useToken, useId } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 import { Textarea } from '../Textarea'
-
-const Container = styled.div`
-  min-width: 100px;
-  width: 100%;
-`
 
 export type TextFieldProps = {
   /** @ignore */
@@ -148,22 +134,11 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       disabled,
     }
 
-    const showLabel = label || meta
-    const showHelperText = helperText
-
     const { density } = useEds()
     const token = useToken({ density }, tokens)
 
     return (
       <ThemeProvider theme={token}>
-        {/* <Container {...containerProps}>
-          <TextFieldProvider>
-            {showLabel && <Label {...labelProps} />}
-            <Field {...inputProps} />
-            {showHelperText && <HelperText {...helperProps} />}
-          </TextFieldProvider>
-        </Container> */}
-
         <InputWrapper
           helperProps={helperProps}
           labelProps={labelProps}
