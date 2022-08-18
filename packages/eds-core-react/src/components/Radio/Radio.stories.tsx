@@ -1,13 +1,5 @@
 import { useState, useEffect } from 'react'
-import {
-  Radio,
-  RadioProps,
-  Table,
-  EdsProvider,
-  Density,
-  Label,
-  Typography,
-} from '../..'
+import { Radio, RadioProps, Table, EdsProvider, Density, Label } from '../..'
 import styled from 'styled-components'
 import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
@@ -126,25 +118,13 @@ AlternativeToLabel.storyName = 'Alternative to label'
 
 export const CustomLabel: Story<RadioProps> = () => {
   return (
-    <div style={{ display: 'contents' }}>
-      <Label label="Label" />
-      <Radio name="radio" />
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <Label htmlFor="custom_label" label="Custom Label" />
+      <Radio id="custom_label" name="radio" />
     </div>
   )
 }
 CustomLabel.storyName = 'Custom label'
-
-export const CustomText: Story<RadioProps> = () => {
-  return (
-    <div style={{ display: 'contents' }}>
-      <Typography group="input" variant="label">
-        Label
-      </Typography>
-      <Radio name="radio" />
-    </div>
-  )
-}
-CustomText.storyName = 'Custom text as a label'
 
 export const Compact: Story<RadioProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
