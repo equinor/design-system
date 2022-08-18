@@ -84,38 +84,62 @@ export const Colors: Story<TypographyProps> = () => (
 export const TokenProperty: Story<TypographyProps> = () => (
   <>
     <div>
-      <Typography group="navigation" variant="label">
-        Navigation / Label
+      <Typography
+        group="navigation"
+        variant="label"
+        token={{ textAlign: 'center', lineHeight: '2em' }}
+      >
+        Navigation / Label / Text Align
       </Typography>
-      <Typography group="navigation" variant="menu_title">
-        Navigation / Menu / Title
+      <Typography
+        group="navigation"
+        variant="menu_title"
+        token={{ textDecoration: 'line-through', lineHeight: '2em' }}
+      >
+        Navigation / Menu Title / Text Decoration
+      </Typography>
+      <Typography
+        group="navigation"
+        variant="label"
+        token={{ textTransform: 'uppercase', lineHeight: '2em' }}
+      >
+        Navigation / Label / Text Transform
       </Typography>
     </div>
     <div>
-      <Typography group="table" variant="cell_text">
-        Table / Cell / Text
+      <Typography
+        group="table"
+        variant="cell_header"
+        token={{ fontFamily: 'Arial' }}
+      >
+        Table / Cell Hearder / Font Family
       </Typography>
       <Typography
         group="table"
         variant="cell_text"
-        token={{ fontWeight: 'medium' }}
+        token={{ fontSize: '1.5rem' }}
       >
-        Table / Cell / Text / Medium
+        Table / Cell Text / Font Size
       </Typography>
-      <Typography group="table" variant="cell_text" bold>
-        Table / Cell / Text / Bold
+      <Typography
+        group="table"
+        variant="cell_text_bold"
+        token={{ fontStyle: 'italic' }}
+      >
+        Table / Cell Text Bold / Font Style
       </Typography>
-      <Typography group="table" variant="cell_text" link href="#">
-        Table / Cell / Text / Bold / Link
+      <Typography
+        group="table"
+        variant="cell_numeric_monospaced"
+        token={{ fontWeight: 300 }}
+      >
+        Table / Cell Numeric / Font Weight
       </Typography>
     </div>
     <div>
-      <Typography variant="h3" token={{ fontWeight: 700 }}>
-        Heading 3 Bold
-      </Typography>
-      <Typography variant="ingress" token={{ fontWeight: 'bold' }}>
-        Ingress Bold
-      </Typography>
+      <Typography token={{ color: 'purple' }}>Color</Typography>
+      <Typography token={{ lineHeight: '400%' }}>Line Hight</Typography>
+      <Typography token={{ letterSpacing: '4px' }}>Letter Spacing</Typography>
       <Typography
         token={{
           color: 'purple',

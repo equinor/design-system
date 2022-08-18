@@ -85,19 +85,21 @@ Variants under `heading` and `paragraph` don’t require the group parameter.
 The `token` property allows manipulate the appearance of the typography. <br />
 Properties: 
 
-<ul>
-  <li><code>color</code>,</li>
-  <li><code>fontFamily</code>,</li>
-  <li><code>fontSize</code>,</li>
-  <li><code>fontWeight</code>,</li>
-  <li><code>fontStyle</code>,</li>
-  <li><code>fontFeature</code>,</li>
-  <li><code>lineHeight</code>,</li>
-  <li><code>textAlign</code>,</li>
-  <li><code>textTransform</code>,</li>
-  <li><code>textDecoration</code>,</li>
-  <li><code>letterSpacing</code>.</li>
-</ul>
+```tsx
+const myToken = {
+    textAlign,
+    textDecoration,
+    textTransform,
+    fontFamily,
+    fontSize,
+    fontStyle,
+    fontWeight,
+    fontFeature,
+    color,
+    lineHeight,
+    letterSpacing,
+}
+```
 
 <Story id="typography-typography--token-property" />
 
