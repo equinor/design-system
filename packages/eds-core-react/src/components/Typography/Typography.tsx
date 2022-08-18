@@ -5,7 +5,11 @@ import {
   AnchorHTMLAttributes,
 } from 'react'
 import styled, { css } from 'styled-components'
-import { typographyTemplate, outlineTemplate } from '@equinor/eds-utils'
+import {
+  typographyTemplate,
+  outlineTemplate,
+  OverridableComponent,
+} from '@equinor/eds-utils'
 import {
   quickVariants,
   colors,
@@ -122,12 +126,10 @@ export type TypographyProps = {
   token?: Partial<TypographyType>
   /** Number of lines. */
   lines?: number
-  /** Change html element. */
-  as?: ElementType
 } & (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)
 
-export const Typography = forwardRef<HTMLElement, TypographyProps>(
-  function Typography(
+export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
+  forwardRef(function Typography(
     {
       variant = 'body_short',
       children,
@@ -173,7 +175,6 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
         {children}
       </StyledTypography>
     )
-  },
-)
+  })
 
 // Typography.displayName = 'EdsTypography'
