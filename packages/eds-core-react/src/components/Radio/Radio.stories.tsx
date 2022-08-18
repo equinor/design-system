@@ -1,6 +1,15 @@
-import { useState, useEffect } from 'react'
-import { Radio, RadioProps, Table, EdsProvider, Density } from '../..'
+import { useState, useEffect, ChangeEvent } from 'react'
+import {
+  Radio,
+  RadioProps,
+  Table,
+  EdsProvider,
+  Density,
+  Label,
+  Typography,
+} from '../..'
 import styled from 'styled-components'
+import { tokens } from '@equinor/eds-tokens'
 import { ComponentMeta, Story } from '@storybook/react'
 import { data } from '../../stories/data'
 import { Stack } from './../../../.storybook/components'
@@ -27,6 +36,14 @@ export default {
     },
   ],
 } as ComponentMeta<typeof Radio>
+
+const {
+  colors: {
+    interactive: {
+      table__cell__fill_hover: { rgba: hoverColor },
+    },
+  },
+} = tokens
 
 const UnstyledList = styled.ul`
   margin: 0;
@@ -115,6 +132,71 @@ export const AlternativeToLabel: Story<RadioProps> = () => (
   <Radio aria-label="This label is invisible, but read by screen-readers" />
 )
 AlternativeToLabel.storyName = 'Alternative to label'
+
+export const CustomLabel: Story<RadioProps> = () => {
+  const Control = styled.div`
+    display: flex;
+    &:hover {
+      background: ${hoverColor};
+    }
+  `
+  const FilledLabel = styled(Label)`
+    cursor: pointer;
+    align-items: center;
+    width: 100%;
+  `
+
+  const [selectedValue, setSelectedValue] = useState('')
+  const onChange = (event: ChangeEvent<HTMLInputElement>) =>
+    setSelectedValue(event.target.value)
+
+  return (
+    <>
+      <Typography variant="h3" id="radiogroup-label">
+        Select one
+      </Typography>
+      <div role="radiogroup" aria-labelledby="radiogroup-label">
+        <Control>
+          <FilledLabel htmlFor="radio-1" label="Label 1" />
+          <Radio
+            id="radio-1"
+            value="1"
+            checked={selectedValue === '1'}
+            onChange={onChange}
+          />
+        </Control>
+        <Control>
+          <FilledLabel htmlFor="radio-2" label="Label 2" />
+          <Radio
+            id="radio-2"
+            value="2"
+            checked={selectedValue === '2'}
+            onChange={onChange}
+          />
+        </Control>
+        <Control>
+          <FilledLabel htmlFor="radio-3" label="Label 3" />
+          <Radio
+            id="radio-3"
+            value="3"
+            checked={selectedValue === '3'}
+            onChange={onChange}
+          />
+        </Control>
+      </div>
+    </>
+  )
+}
+CustomLabel.storyName = 'Custom label'
+CustomLabel.decorators = [
+  (Story) => {
+    return (
+      <Stack direction="column">
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const Compact: Story<RadioProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
