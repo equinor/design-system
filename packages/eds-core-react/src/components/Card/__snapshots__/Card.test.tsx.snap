@@ -44,7 +44,6 @@ exports[`Card Matches snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   grid-gap: 16px;
-  cursor: default;
   border-radius: 4px;
 }
 
@@ -109,7 +108,6 @@ exports[`Card Matches snapshot 1`] = `
 
 <div
     class="c0 c1"
-    cursor="default"
     elevation="0 0 1px rgba(0, 0, 0, 0.14)"
   >
     <div
