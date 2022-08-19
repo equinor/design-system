@@ -1,0 +1,31 @@
+import { Story, PropsTable, Links } from './../../../.storybook/components'
+import { Button, Group } from '.'
+
+# Group
+
+Is used to group related buttons.
+
+<Links 
+documentationUrl="https://eds.equinor.com/0b0c666ab/p/22cd7f-toggle-button/b/86826a"
+sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Group/Group.tsx"
+npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
+/>
+
+<Story id="inputs-group--introduction" />
+<PropsTable />
+
+## Usage
+
+The buttons can be grouped by wrapping them with the `ButtonGroup` component.
+
+```tsx
+import { Button, Group } from '@equinor/eds-core-react'
+
+<Group>
+  <Button>Click me!</Button>
+  <Button>Click me!</Button>
+  <Button>Click me!</Button>
+</Group>
+```
+
+## Examples

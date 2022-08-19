@@ -319,22 +319,6 @@ Compact.decorators = [
   ),
 ]
 
-export const ButtonGroup: Story<ButtonProps> = () => (
-  <Group>
-    <Button>Contained</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
-  </Group>
-)
-ButtonGroup.decorators = [
-  (Story) => (
-    <Stack>
-      <Story />
-    </Stack>
-  ),
-]
-
 export const CompactButtonGroup: Story<ButtonProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
