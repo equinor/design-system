@@ -45,6 +45,7 @@ const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
     max-width: ${theme.maxWidth};
     ${bordersTemplate(theme.border)}
     z-index: 1400;
+    overflow: auto;
   `
 })
 
