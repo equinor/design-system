@@ -15,6 +15,19 @@ const SBCard = styled(Card)`
 export default {
   title: 'Typography/Typography',
   component: Typography,
+  argTypes: {
+    as: {
+      description: 'Change the HTML element',
+      table: {
+        type: {
+          summary: 'ElementType<any>',
+        },
+      },
+      control: {
+        type: null,
+      },
+    },
+  },
   parameters: {
     docs: {
       page,
