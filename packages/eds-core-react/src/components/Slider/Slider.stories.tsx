@@ -141,22 +141,18 @@ export const RangeSliderWithDates: Story<SliderProps> = () => {
     return new Date(iso).getTime()
   }
   return (
-    <>
-      <Slider
-        min={getUnixTime('2020-01-01')}
-        max={getUnixTime('2020-01-31')}
-        step={60 * 60 * 24 * 1000}
-        value={[getUnixTime('2020-01-01'), getUnixTime('2020-01-31')]}
-        outputFunction={outputFunction}
-        aria-label="Range slider with dates"
-      />
-    </>
+    <Slider
+      min={getUnixTime('2020-01-01')}
+      max={getUnixTime('2020-01-31')}
+      step={60 * 60 * 24 * 1000}
+      value={[getUnixTime('2020-01-01'), getUnixTime('2020-01-31')]}
+      outputFunction={outputFunction}
+      aria-label="Range slider with dates"
+    />
   )
 }
 RangeSliderWithDates.storyName = 'Range slider with dates'
 
 export const Disabled: Story<SliderProps> = () => (
-  <>
-    <Slider value={50} disabled aria-label="Disabled Slider" />
-  </>
+  <Slider value={50} disabled aria-label="Disabled Slider" />
 )

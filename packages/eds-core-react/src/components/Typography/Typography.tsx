@@ -106,14 +106,23 @@ const StyledTypography = styled.p<StyledProps>`
 `
 
 export type TypographyProps = {
+  /** Typography variants, specifies which variant to use. */
   variant?: TypographyVariants
+  /** Typography groups, specifies which group to use. */
   group?: TypographyGroups
+  /** Bold text. */
   bold?: boolean
+  /** Italic text. */
   italic?: boolean
+  /** Link. */
   link?: boolean
+  /** Typography colors. */
   color?: ColorVariants | string
+  /** Token. */
   token?: Partial<TypographyType>
+  /** Number of lines. */
   lines?: number
+  /** Change html element. */
   as?: ElementType
 } & (HTMLAttributes<HTMLElement> | AnchorHTMLAttributes<HTMLAnchorElement>)
 
