@@ -11,7 +11,6 @@ type AvailableElevations = keyof Pick<Elevations, 'none' | 'raised' | 'overlay'>
 
 type StyledCardProps = {
   background: string
-  cursor: string
 } & HTMLAttributes<HTMLDivElement>
 
 export type CardProps = {
@@ -29,16 +28,13 @@ const StyledCard = styled(Paper)<StyledCardProps>`
   display: flex;
   flex-direction: column;
   grid-gap: 16px;
-  cursor: ${({ cursor }) => cursor};
   ${bordersTemplate(primary.border)};
 `
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { children, variant = 'default', elevation = 'none', onClick, ...rest },
+  { children, variant = 'default', elevation = 'none', ...rest },
   ref,
 ) {
-  const cursor = onClick ? 'pointer' : 'default'
-
   const cardVariant = variant === 'default' ? 'primary' : variant
 
   const token = tokens[cardVariant]
@@ -46,12 +42,11 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   const props = {
     ref,
     background: token.background,
-    cursor,
     ...rest,
   }
 
   return (
-    <StyledCard elevation={elevation} {...props} onClick={onClick}>
+    <StyledCard elevation={elevation} {...props}>
       {children}
     </StyledCard>
   )
