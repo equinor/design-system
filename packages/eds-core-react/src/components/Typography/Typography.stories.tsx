@@ -222,3 +222,18 @@ Link.decorators = [
     )
   },
 ]
+
+export const As: Story<TypographyProps> = () => (
+  <Typography variant="h2" as="h4">
+    I am a &lt;h4&gt; styled as a &lt;h2&gt;
+  </Typography>
+)
+As.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ justifyContent: 'start' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
