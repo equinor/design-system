@@ -60,5 +60,9 @@ export const Group = forwardRef<HTMLDivElement, GroupProps>(function Group(
     vertical,
     ...rest,
   }
-  return <GroupBase {...props}>{children}</GroupBase>
+  return (
+    <GroupBase role="group" {...props}>
+      {children}
+    </GroupBase>
+  )
 })
