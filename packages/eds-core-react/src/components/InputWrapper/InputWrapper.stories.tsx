@@ -1,8 +1,8 @@
 import { Story, ComponentMeta } from '@storybook/react'
 import { accessible, dropper, search } from '@equinor/eds-icons'
+import { Stack } from './../../../.storybook/components'
 import { InputWrapper, InputWrapperProps, Input, Icon, Button } from '../..'
 import styled from 'styled-components'
-import { useId } from '@equinor/eds-utils'
 
 export default {
   title: 'Inputs/InputWrapper',
@@ -16,35 +16,20 @@ const SmallButton = styled(Button)`
 
 export const Introduction: Story<InputWrapperProps> = (args) => {
   const { color } = args
-  const inputId = useId(null, 'inputwrapper-input')
-  const helperTextId = useId(null, 'inputwrapper-helpertext')
-
+  const inputId = 'some-input-id'
+  const helperTextId = 'some-helper-id'
+  const helperProps = {
+    text: 'helperText',
+  }
   return (
     <InputWrapper
-      label={"I'm a label, play with me!"}
-      helperProps={{
-        id: helperTextId,
-        icon: <Icon data={accessible} size={18} />,
-      }}
+      helperProps={helperProps}
       labelProps={{
-        htmlFor: inputId,
-        meta: 'meta tag',
+        label: "I'm a label, play with me!",
       }}
       {...args}
     >
-      <Input
-        id={inputId}
-        variant={color}
-        aria-describedby={helperTextId}
-        leftAdornmentsWidth={24 + 8}
-        leftAdornments={<Icon data={dropper} size={18} />}
-        rightAdornmentsWidth={24 + 8}
-        rightAdornments={
-          <SmallButton aria-label="search" variant="contained_icon">
-            <Icon data={search} size={18} />
-          </SmallButton>
-        }
-      />
+      <Input />
     </InputWrapper>
   )
 }

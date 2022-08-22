@@ -2,7 +2,7 @@ import {
   InputHTMLAttributes,
   forwardRef,
   ReactNode,
-  ForwardedRef,
+  useState,
   useCallback,
 } from 'react'
 import styled, { css } from 'styled-components'
@@ -126,14 +126,8 @@ export type InputProps = {
   readOnly?: boolean
   /** Left adornments */
   leftAdornments?: ReactNode
-  /** Left adornments width */
-  leftAdornmentsWidth?: number
   /** Right adornments */
   rightAdornments?: ReactNode
-  /** Right adornments width */
-  rightAdornmentsWidth?: number
-  /** Right adornments ref */
-  rightAdornmentsRef?: ForwardedRef<HTMLDivElement>
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -143,9 +137,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     type = 'text',
     leftAdornments,
     rightAdornments,
-    leftAdornmentsWidth,
-    rightAdornmentsWidth,
-    rightAdornmentsRef,
     readOnly,
     className,
     style,
@@ -156,19 +147,31 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
   const { density } = useEds()
   const token = useToken({ density }, inputVariant)()
+
+  const [rightAdornmentsRef, setRightAdornmentsRef] = useState<HTMLDivElement>()
+  const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
+
+  const rightAdornmentsWidth = useCallback(() => {
+    if (rightAdornmentsRef) {
+      return rightAdornmentsRef.offsetWidth
+    }
+    return 0
+  }, [rightAdornmentsRef])()
+
+  const leftAdornmentsWidth = useCallback(() => {
+    if (leftAdornmentsRef) {
+      return leftAdornmentsRef.offsetWidth
+    }
+    return 0
+  }, [leftAdornmentsRef])()
+
   const updatedToken = useCallback(
     (): ComponentToken => ({
       ...token,
       spacings: {
         ...token.spacings,
-        left:
-          typeof leftAdornmentsWidth !== 'undefined'
-            ? `${leftAdornmentsWidth}px`
-            : token.spacings.left,
-        right:
-          typeof rightAdornmentsWidth !== 'undefined'
-            ? `${rightAdornmentsWidth}px`
-            : token.spacings.right,
+        left: `${leftAdornmentsWidth + parseInt(token.spacings.left)}px`,
+        right: `${rightAdornmentsWidth + parseInt(token.spacings.right)}px`,
       },
     }),
     [leftAdornmentsWidth, rightAdornmentsWidth, token],
@@ -192,10 +195,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   }
 
   const leftAdornmentProps = {
+    ref: setLeftAdornmentsRef,
     token: updatedToken,
   }
   const rightAdornmentProps = {
-    ref: rightAdornmentsRef,
+    ref: setRightAdornmentsRef,
     token: updatedToken,
   }
 

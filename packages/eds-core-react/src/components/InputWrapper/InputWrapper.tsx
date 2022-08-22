@@ -35,17 +35,27 @@ export type InputWrapperProps = {
   /** Highlight color */
   color?: Variants
   /** Label props */
-  labelProps: LabelProps
+  labelProps?: LabelProps
   /** Helpertext props */
   helperProps?: HelperTextProps
-  /** Input or Textarea elements */
+  /** Helper Icon */
+  helperIcon?: ReactNode
+  /** Input or Textarea element */
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
 /** InputWrapper is a internal skeleton component for structering form elements  */
 export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
   function InputWrapper(
-    { children, color, label, labelProps = {}, helperProps = {}, ...other },
+    {
+      children,
+      color,
+      label,
+      labelProps = {},
+      helperProps = {},
+      helperIcon,
+      ...other
+    },
     ref,
   ) {
     const { density } = useEds()
@@ -53,23 +63,26 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
     const inputToken = tokens[actualVariant]
     const token = useToken({ density }, inputToken)
 
-    const helperTextColor = useCallback(() => {
+    const helperTextColor = useMemo(() => {
       const _token = token()
       return other.disabled
         ? _token.entities.helperText.states.disabled.typography.color
         : _token.entities.helperText.typography.color
-    }, [token, other.disabled])()
+    }, [token, other.disabled])
 
-    const hasHelperText = Boolean(helperProps.text)
-    const hasLabel = Boolean(label || labelProps.label)
+    const hasHelperText = Boolean(helperProps?.text)
+    const hasLabel = Boolean(label || labelProps?.label)
 
     return (
       <ThemeProvider theme={token}>
         <Container {...other} ref={ref}>
-          {hasLabel && <Label label={label} {...{ label, ...labelProps }} />}
+          {hasLabel && <Label {...{ label, ...labelProps }} />}
           {children}
           {hasHelperText && (
-            <HelperText color={helperTextColor} {...helperProps}></HelperText>
+            <HelperText
+              color={helperTextColor}
+              {...{ icon: helperIcon, ...helperProps }}
+            />
           )}
         </Container>
       </ThemeProvider>

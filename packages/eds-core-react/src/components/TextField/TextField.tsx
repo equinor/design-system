@@ -7,12 +7,10 @@ import {
   ForwardedRef,
   useCallback,
 } from 'react'
-import { ThemeProvider } from 'styled-components'
 import { InputWrapper } from '../InputWrapper'
 import { Input } from '../Input'
 import type { Variants } from './types'
-import { textfield as tokens } from './TextField.tokens'
-import { useToken, useId } from '@equinor/eds-utils'
+import { useId } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 import { Textarea } from '../Textarea'
 
@@ -81,15 +79,6 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   ) {
     const helperTextId = useId(null, 'helpertext')
 
-    const [adornmentRef, setAdornmentRef] = useState<HTMLDivElement>()
-
-    const rightAdornmentsWidth = useCallback(() => {
-      if (adornmentRef) {
-        return adornmentRef.offsetWidth
-      }
-      return 0
-    }, [adornmentRef])
-
     const inputProps = {
       'aria-describedby': helperTextId,
       'aria-invalid': variant === 'error' || undefined,
@@ -97,14 +86,12 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       placeholder,
       id,
       variant,
-      rightAdornmentsRef: setAdornmentRef,
       rightAdornments: (
         <>
           {inputIcon}
           <span>{unit}</span>
         </>
       ),
-      rightAdornmentsWidth: rightAdornmentsWidth() + 8,
       ...other,
     }
 
@@ -135,22 +122,19 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     }
 
     const { density } = useEds()
-    const token = useToken({ density }, tokens)
 
     return (
-      <ThemeProvider theme={token}>
-        <InputWrapper
-          helperProps={helperProps}
-          labelProps={labelProps}
-          {...containerProps}
-        >
-          {multiline ? (
-            <Textarea ref={textareaRef} {...textareaProps} />
-          ) : (
-            <Input ref={inputRef} {...inputProps} />
-          )}
-        </InputWrapper>
-      </ThemeProvider>
+      <InputWrapper
+        helperProps={helperProps}
+        labelProps={labelProps}
+        {...containerProps}
+      >
+        {multiline ? (
+          <Textarea ref={textareaRef} {...textareaProps} />
+        ) : (
+          <Input ref={inputRef} {...inputProps} />
+        )}
+      </InputWrapper>
     )
   },
 )
