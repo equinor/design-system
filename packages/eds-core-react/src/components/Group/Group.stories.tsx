@@ -74,18 +74,15 @@ export const Split: Story<GroupProps> = () => {
   }
 
   return (
-    <Group>
-      <Button ref={setAnchorEl} variant="outlined">
-        {options[selectedIndex]}
-      </Button>
+    <Group style={{ gap: '1px' }}>
+      <Button ref={setAnchorEl}>{options[selectedIndex]}</Button>
       <Button
-        style={{ position: 'absolute', height: '36px' }}
-        variant="contained_icon"
         aria-label="select task action"
         aria-haspopup="true"
         aria-controls="menu-default"
         id="anchor-split"
         onClick={() => (isOpen ? closeMenu() : openMenu())}
+        style={{ padding: '0 4px' }}
       >
         <Icon name="arrow_drop_down" title="arrow_down"></Icon>
       </Button>

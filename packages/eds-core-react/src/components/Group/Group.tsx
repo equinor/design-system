@@ -37,6 +37,7 @@ const GroupBase = styled.div<GroupProps>`
           }
         `
       : css`
+          display: flex;
           > :first-child {
             border-top-left-radius: ${radius};
             border-bottom-left-radius: ${radius};
