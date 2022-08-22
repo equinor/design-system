@@ -2,9 +2,8 @@ import {
   InputHTMLAttributes,
   forwardRef,
   ReactNode,
-  useMemo,
   ForwardedRef,
-  TextareaHTMLAttributes,
+  useCallback,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { ComponentToken } from '@equinor/eds-tokens'
@@ -139,7 +138,7 @@ export type InputProps = {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
-    variant = 'default',
+    variant,
     disabled = false,
     type = 'text',
     leftAdornments,
@@ -154,12 +153,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   },
   ref,
 ) {
-  const actualVariant = variant === 'default' ? 'input' : variant
-  const inputVariant = tokens[actualVariant]
+  const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
   const { density } = useEds()
   const token = useToken({ density }, inputVariant)()
-
-  const updatedToken = useMemo(
+  const updatedToken = useCallback(
     (): ComponentToken => ({
       ...token,
       spacings: {
@@ -175,7 +172,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       },
     }),
     [leftAdornmentsWidth, rightAdornmentsWidth, token],
-  )
+  )()
+
   const inputProps = {
     ref,
     type,
