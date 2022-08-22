@@ -74,11 +74,12 @@ export const Split: Story<GroupProps> = () => {
   }
 
   return (
-    <Group aria-label="split button">
+    <Group>
       <Button ref={setAnchorEl} variant="outlined">
         {options[selectedIndex]}
       </Button>
       <Button
+        style={{ position: 'absolute', height: '36px' }}
         variant="contained_icon"
         aria-label="select task action"
         aria-haspopup="true"
