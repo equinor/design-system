@@ -1,4 +1,5 @@
-import { Button, Group, GroupProps } from '../..'
+import { useState, useEffect } from 'react'
+import { Button, Density, EdsProvider, Group, GroupProps } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import { Stack } from './../../../.storybook/components'
 import page from './Group.docs.mdx'
@@ -31,5 +32,40 @@ export const Introduction: Story<GroupProps> = (args) => {
       <Button variant="outlined">Outlined</Button>
       <Button variant="outlined">Outlined</Button>
     </Group>
+  )
+}
+
+export const Vertical: Story<GroupProps> = () => (
+  <Group vertical>
+    <Button>Contained</Button>
+    <Button variant="outlined">Outlined</Button>
+    <Button variant="outlined">Outlined</Button>
+    <Button variant="outlined">Outlined</Button>
+  </Group>
+)
+
+export const Compact: Story<GroupProps> = () => {
+  const [density, setDensity] = useState<Density>('comfortable')
+
+  useEffect(() => {
+    // Simulate user change
+    setDensity('compact')
+  }, [density])
+
+  return (
+    <EdsProvider density={density}>
+      <Group>
+        <Button>Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined">Outlined</Button>
+      </Group>
+      <Group vertical>
+        <Button>Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined">Outlined</Button>
+      </Group>
+    </EdsProvider>
   )
 }
