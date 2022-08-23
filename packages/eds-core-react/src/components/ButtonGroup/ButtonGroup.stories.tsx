@@ -4,18 +4,18 @@ import {
   Button,
   Density,
   EdsProvider,
-  Group,
-  GroupProps,
+  ButtonGroup,
+  ButtonGroupProps,
   Icon,
   Menu,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { Stack } from './../../../.storybook/components'
-import page from './Group.docs.mdx'
+import { Stack } from '../../../.storybook/components'
+import page from './ButtonGroup.docs.mdx'
 
 export default {
-  title: 'Inputs/Group',
-  component: Group,
+  title: 'Inputs/ButtonGroup',
+  component: ButtonGroup,
   parameters: {
     docs: {
       page,
@@ -31,29 +31,29 @@ export default {
       </Stack>
     ),
   ],
-} as ComponentMeta<typeof Group>
+} as ComponentMeta<typeof ButtonGroup>
 
-export const Introduction: Story<GroupProps> = (args) => {
+export const Introduction: Story<ButtonGroupProps> = (args) => {
   return (
-    <Group aria-label="button group" {...args}>
+    <ButtonGroup aria-label="button group" {...args}>
       <Button>Contained</Button>
       <Button variant="outlined">Outlined</Button>
       <Button variant="outlined">Outlined</Button>
       <Button variant="outlined">Outlined</Button>
-    </Group>
+    </ButtonGroup>
   )
 }
 
-export const Vertical: Story<GroupProps> = () => (
-  <Group aria-label="button group vertical" vertical>
+export const Vertical: Story<ButtonGroupProps> = () => (
+  <ButtonGroup aria-label="vertical" vertical>
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
-  </Group>
+  </ButtonGroup>
 )
 
-export const Split: Story<GroupProps> = () => {
+export const Split: Story<ButtonGroupProps> = () => {
   const options = ['Create task', 'Update task', 'Delete task']
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>(null)
@@ -74,7 +74,7 @@ export const Split: Story<GroupProps> = () => {
   }
 
   return (
-    <Group aria-label="split button" style={{ gap: '1px' }}>
+    <ButtonGroup aria-label="split button" style={{ gap: '1px' }}>
       <Button>{options[selectedIndex]}</Button>
       <Button
         ref={setAnchorEl}
@@ -106,11 +106,11 @@ export const Split: Story<GroupProps> = () => {
           </Menu.Item>
         ))}
       </Menu>
-    </Group>
+    </ButtonGroup>
   )
 }
 
-export const Compact: Story<GroupProps> = () => {
+export const Compact: Story<ButtonGroupProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
@@ -120,18 +120,18 @@ export const Compact: Story<GroupProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Group aria-label="button group compact">
+      <ButtonGroup aria-label="button group compact">
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
-      </Group>
-      <Group aria-label="button group compact" vertical>
+      </ButtonGroup>
+      <ButtonGroup aria-label="vertical button group compact" vertical>
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
-      </Group>
+      </ButtonGroup>
     </EdsProvider>
   )
 }

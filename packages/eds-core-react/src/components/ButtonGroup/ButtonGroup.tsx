@@ -1,17 +1,17 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { group as tokens } from './Group.tokens'
+import { group as tokens } from './ButtonGroup.tokens'
 
 const { border } = tokens
 
-export type GroupProps = {
-  /** Display Group in vertical direction. */
+export type ButtonGroupProps = {
+  /** Display ButtonGroup vertically. */
   vertical?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 const radius = border.type === 'border' && border.radius
 
-const GroupBase = styled.div<GroupProps>`
+const ButtonGroupBase = styled.div<ButtonGroupProps>`
   > * {
     border-radius: 0;
     @media (hover: hover) and (pointer: fine) {
@@ -52,18 +52,17 @@ const GroupBase = styled.div<GroupProps>`
         `}
 `
 
-export const Group = forwardRef<HTMLDivElement, GroupProps>(function Group(
-  { children, vertical, ...rest },
-  ref,
-) {
-  const props = {
-    ref,
-    vertical,
-    ...rest,
-  }
-  return (
-    <GroupBase role="group" {...props}>
-      {children}
-    </GroupBase>
-  )
-})
+export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
+  function ButtonGroup({ children, vertical, ...rest }, ref) {
+    const props = {
+      ref,
+      vertical,
+      ...rest,
+    }
+    return (
+      <ButtonGroupBase role="group" {...props}>
+        {children}
+      </ButtonGroupBase>
+    )
+  },
+)

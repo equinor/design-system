@@ -1,61 +1,62 @@
 import { Story, PropsTable, Links } from './../../../.storybook/components'
-import { Button, Group } from '.'
+import { Button, ButtonGroup } from '.'
 
-# Group
+# ButtonGroup
 
 Is used to group related buttons.
 
 <Links 
 ariaUrl="https://w3c.github.io/aria/#group"
-documentationUrl="https://eds.equinor.com/0b0c666ab/p/22cd7f-toggle-button/b/86826a"
 sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Group/Group.tsx"
 npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
 />
 
-<Story id="inputs-group--introduction" />
+<Story id="inputs-buttongroup--introduction" />
 <PropsTable />
 
 ## Usage
 
-The buttons can be grouped by wrapping them with the `Group` component.
+The buttons can be grouped by wrapping them with the `ButtonGroup` component.
 
 ```tsx
-import { Button, Group } from '@equinor/eds-core-react'
+import { Button, ButtonGroup } from '@equinor/eds-core-react'
 
-<Group aria-label="button group">
+<ButtonGroup aria-label="button group">
   <Button>Click me!</Button>
   <Button>Click me!</Button>
   <Button>Click me!</Button>
-</Group>
+</ButtonGroup>
 ```
 
 ### Accessibility
 
 #### ARIA
 <ul>
-  <li>Group has <code>role="group"</code>. </li>
+  <li>ButtonGroup has <code>role="group"</code>.</li>
   <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
 </ul>
 
 #### Keyboard
-
-The button behavior follows standard keyboard semantics.
+<ul>
+  <li>Navigate between buttons with the tab key.</li>
+  <li>The button behavior follows standard keyboard semantics.</li>
+</ul>
 
 ## Examples
 
 ### Vertical
 
-The `Group` can be displayed vertically using the `vertical` prop.
+The `ButtonGroup` can be displayed vertically using the `vertical` prop.
 
-<Story id="inputs-group--vertical" />
+<Story id="inputs-buttongroup--vertical" />
 
 ### Split
 
-`Group` can also be used to create a split button. <br />
+`ButtonGroup` can also be used to create a split button. <br />
 The dropdown can change the button action (as in this example) or be used to immediately trigger a related action.
-<Story id="inputs-group--split" />
+<Story id="inputs-buttongroup--split" />
 
 ### Compact
 
-Compact `Group` using `EdsProvider`.
-<Story id="inputs-group--compact" />
+Compact `ButtonGroup` using `EdsProvider`.
+<Story id="inputs-buttongroup--compact" />
