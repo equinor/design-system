@@ -103,11 +103,10 @@ export type TextareaProps = {
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   function Textarea(
-    { variant = 'default', disabled = false, type = 'text', rowsMax, ...other },
+    { variant, disabled = false, type = 'text', rowsMax, ...other },
     ref,
   ) {
-    const actualVariant = variant === 'default' ? 'input' : variant
-    const inputVariant = tokens[actualVariant]
+    const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
     const [textareaEl, setTextareaEl] = useState<HTMLTextAreaElement>(null)
     const { density } = useEds()
     const spacings =
