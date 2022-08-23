@@ -15,6 +15,19 @@ const SBCard = styled(Card)`
 export default {
   title: 'Typography/Typography',
   component: Typography,
+  argTypes: {
+    as: {
+      description: 'Change the HTML element',
+      table: {
+        type: {
+          summary: 'ElementType<any>',
+        },
+      },
+      control: {
+        type: null,
+      },
+    },
+  },
   parameters: {
     docs: {
       page,
@@ -201,6 +214,21 @@ export const Link: Story<TypographyProps> = () => (
   </>
 )
 Link.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ justifyContent: 'start' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
+
+export const As: Story<TypographyProps> = () => (
+  <Typography variant="h2" as="h4">
+    I am a &lt;h4&gt; styled as a &lt;h2&gt;
+  </Typography>
+)
+As.decorators = [
   (Story) => {
     return (
       <Stack style={{ justifyContent: 'start' }}>

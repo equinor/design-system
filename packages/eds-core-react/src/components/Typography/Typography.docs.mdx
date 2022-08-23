@@ -112,3 +112,18 @@ const myToken = {
 Link used in body of text.
 
 <Story id="typography-typography--link" />
+
+### Using the 'as' prop to render as another component
+
+The `as` prop allows you to render `Typography` as another html element or even react component. 
+
+<Story id="typography-typography--as" />
+
+This is useful if you want to use `Typography` with a third party routing library such as react-router.
+
+```tsx
+import { Link } from "react-router-dom"
+import { Typography } from '@equinor/eds-core-react'
+
+<Typography as={Link} to="/about" link>About</Typography>
+```
