@@ -6,6 +6,7 @@ import { Button, Group } from '.'
 Is used to group related buttons.
 
 <Links 
+ariaUrl="https://w3c.github.io/aria/#group"
 documentationUrl="https://eds.equinor.com/0b0c666ab/p/22cd7f-toggle-button/b/86826a"
 sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Group/Group.tsx"
 npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
@@ -27,6 +28,12 @@ import { Button, Group } from '@equinor/eds-core-react'
   <Button>Click me!</Button>
 </Group>
 ```
+
+### Accessibility
+
+In addition, `Group` should be given an explicit label, as most assistive technologies will otherwise not announce them, 
+despite the presence of the correct role attribute. 
+In the examples provided here, we use `aria-label`, but alternatives such as `aria-labelledby` can also be used.
 
 ## Examples
 

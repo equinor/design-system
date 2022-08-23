@@ -35,7 +35,7 @@ export default {
 
 export const Introduction: Story<GroupProps> = (args) => {
   return (
-    <Group {...args}>
+    <Group aria-label="button group" {...args}>
       <Button>Contained</Button>
       <Button variant="outlined">Outlined</Button>
       <Button variant="outlined">Outlined</Button>
@@ -45,7 +45,7 @@ export const Introduction: Story<GroupProps> = (args) => {
 }
 
 export const Vertical: Story<GroupProps> = () => (
-  <Group vertical>
+  <Group aria-label="button group vertical" vertical>
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
@@ -74,9 +74,10 @@ export const Split: Story<GroupProps> = () => {
   }
 
   return (
-    <Group style={{ gap: '1px' }}>
-      <Button ref={setAnchorEl}>{options[selectedIndex]}</Button>
+    <Group aria-label="split button" style={{ gap: '1px' }}>
+      <Button>{options[selectedIndex]}</Button>
       <Button
+        ref={setAnchorEl}
         aria-label="select task action"
         aria-haspopup="true"
         aria-controls="menu-default"
@@ -119,13 +120,13 @@ export const Compact: Story<GroupProps> = () => {
 
   return (
     <EdsProvider density={density}>
-      <Group>
+      <Group aria-label="button group compact">
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
       </Group>
-      <Group vertical>
+      <Group aria-label="button group compact" vertical>
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
