@@ -17,12 +17,12 @@ npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
 
 ## Usage
 
-The buttons can be grouped by wrapping them with the `ButtonGroup` component.
+The buttons can be grouped by wrapping them with the `Group` component.
 
 ```tsx
 import { Button, Group } from '@equinor/eds-core-react'
 
-<Group>
+<Group aria-label="button group">
   <Button>Click me!</Button>
   <Button>Click me!</Button>
   <Button>Click me!</Button>
@@ -31,9 +31,15 @@ import { Button, Group } from '@equinor/eds-core-react'
 
 ### Accessibility
 
-In addition, `Group` should be given an explicit label, as most assistive technologies will otherwise not announce them, 
-despite the presence of the correct role attribute. 
-In the examples provided here, we use `aria-label`, but alternatives such as `aria-labelledby` can also be used.
+#### ARIA
+<ul>
+  <li>Group has <code>role="group"</code>. </li>
+  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
+</ul>
+
+#### Keyboard
+
+The button behavior follows standard keyboard semantics.
 
 ## Examples
 
