@@ -3,23 +3,18 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   forwardRef,
-  useState,
   ForwardedRef,
-  useCallback,
 } from 'react'
 import { InputWrapper } from '../InputWrapper'
 import { Input } from '../Input'
 import type { Variants } from './types'
 import { useId } from '@equinor/eds-utils'
-import { useEds } from '../EdsProvider'
 import { Textarea } from '../Textarea'
 
-export type TextFieldProps = {
-  /** @ignore */
-  className?: string
+type SharedTextFieldProps = {
   /** Variants */
   variant?: Variants
-  /** Input unique id */
+  /** Input unique id. This is required to ensure accesibility */
   id: string
   /** Label text */
   label?: string
@@ -29,30 +24,29 @@ export type TextFieldProps = {
   unit?: string
   /** Helper text */
   helperText?: string
-  /** Placeholder text */
-  placeholder?: string
-  /** Disabled */
-  disabled?: boolean
-  /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
-  multiline?: boolean
+  /** InputIcon */
+  inputIcon?: ReactNode
+  /** HelperIcon */
+  helperIcon?: ReactNode
   /**  Maximum number of rows if `multiline` is set to `true` */
   rowsMax?: number
   /** Input ref */
   inputRef?: ForwardedRef<HTMLInputElement>
   /** Textarea ref when multiline is set to `true` */
   textareaRef?: ForwardedRef<HTMLTextAreaElement>
-  /** InputIcon */
-  inputIcon?: ReactNode
-  /** HelperIcon */
-  helperIcon?: ReactNode
-  /** Value */
-  value?: string
-  /** Read Only */
-  readOnly?: boolean
-} & (
-  | InputHTMLAttributes<HTMLInputElement>
-  | TextareaHTMLAttributes<HTMLTextAreaElement>
-)
+}
+
+export type TextFieldProps = SharedTextFieldProps &
+  (
+    | ({
+        /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
+        multiline: true
+      } & TextareaHTMLAttributes<HTMLTextAreaElement>)
+    | ({
+        /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
+        multiline?: false
+      } & InputHTMLAttributes<HTMLInputElement>)
+  )
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   function TextField(
@@ -67,12 +61,12 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       multiline = false,
       className,
       variant,
-      inputRef,
       inputIcon,
       helperIcon,
-      rowsMax,
       style,
+      rowsMax,
       textareaRef,
+      inputRef,
       ...other
     },
     ref,
@@ -95,9 +89,9 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       ...other,
     }
 
-    const textareaProps = {
-      ...inputProps,
+    const textAreaProps = {
       rowsMax,
+      ...inputProps,
     }
 
     const helperProps = {
@@ -121,8 +115,6 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       disabled,
     }
 
-    const { density } = useEds()
-
     return (
       <InputWrapper
         helperProps={helperProps}
@@ -130,7 +122,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         {...containerProps}
       >
         {multiline ? (
-          <Textarea ref={textareaRef} {...textareaProps} />
+          <Textarea ref={textareaRef} {...textAreaProps} />
         ) : (
           <Input ref={inputRef} {...inputProps} />
         )}
