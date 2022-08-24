@@ -310,7 +310,7 @@ export const Compact: Story<ButtonProps> = () => {
       <Button variant="ghost_icon" aria-label="menu action">
         <Icon data={menu} title="Ghost icon menu"></Icon>
       </Button>
-      <Button.Group ria-label="button group compact">
+      <Button.Group aria-label="button group compact">
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
