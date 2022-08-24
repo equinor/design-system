@@ -5,11 +5,11 @@ import {
   forwardRef,
   ForwardedRef,
 } from 'react'
+import { useId } from '@equinor/eds-utils'
 import { InputWrapper } from '../InputWrapper'
 import { Input } from '../Input'
-import type { Variants } from './types'
-import { useId } from '@equinor/eds-utils'
 import { Textarea } from '../Textarea'
+import type { Variants } from '../types'
 
 type FieldProps = SharedTextFieldProps &
   React.HTMLAttributes<HTMLTextAreaElement | HTMLInputElement>

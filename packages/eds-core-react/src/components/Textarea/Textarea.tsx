@@ -9,7 +9,7 @@ import {
   useAutoResize,
   mergeRefs,
 } from '@equinor/eds-utils'
-import type { Variants } from '../TextField/types'
+import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
 
 const { input } = tokens

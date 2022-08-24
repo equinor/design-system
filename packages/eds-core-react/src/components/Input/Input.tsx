@@ -15,7 +15,7 @@ import {
 } from '@equinor/eds-utils'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
-import type { Variants } from '../TextField/types'
+import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
 
 const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {

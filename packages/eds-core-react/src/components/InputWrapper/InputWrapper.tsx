@@ -11,7 +11,7 @@ import { Label as _Label, LabelProps } from '../Label'
 import { HelperText as _HelperText, HelperTextProps } from './HelperText'
 import { useEds } from './../EdsProvider'
 import { inputToken as tokens } from './InputWrapper.tokens'
-import { Variants } from '../TextField/types'
+import { Variants } from '../types'
 
 const Container = styled.div``
 
