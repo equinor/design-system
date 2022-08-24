@@ -2,7 +2,6 @@
 import { Story, PropsTable, Links } from './../../../.storybook/components'
 import { Button } from '.'
 
-
 # Button 
 Allows users to take action with a single click or tap.
 
@@ -45,42 +44,43 @@ import { Button } from '@equinor/eds-core-react'
 ## Examples
 
 ### Basic
-
 The `Button` come with four variants; `contained`, `outlined`, `ghost` and `ghost_icon`.
+
 <Story id="inputs-button--basic" />
 
 ### Icon button
-
 The `ghost_icon` & `contained_icon`variant is meant for standalone icon buttons using the `<Icon>` component.  
 Make sure to defined `aria-label` with descriptive text of `Button` interaction.
+
 <Story id="inputs-button--icon-button" />
 
 ### Color
+
 <Story id="inputs-button--color"/>
 
 ### Hierarchy
-
 Use variants to differentiate the hierarchy.
 <ul>
   <li><code>Contained</code> - being high-emphasis.</li>
   <li><code>Outlined</code> - being medium-emphasis.</li>
   <li><code>Ghost</code> - being low-emphasis.</li>
 </ul>
+
 <Story id="inputs-button--hierarchy" />
 
 ### File upload
-
 Example of how to do file upload button. Please note this demo only works in Storybook Canvas (isolated example only).
+
 <Story id="inputs-button--file-upload" />
 
 ### Progress button
-
 Use the `Progress` component if you need progress indication on a button.
+
 <Story id="inputs-button--progress-button" />
 
 ### All
-
 Example All button combinations. 
+
 <Story id="inputs-button--all" />
 
 ### Full width
@@ -88,6 +88,48 @@ Example All button combinations.
 <Story id="inputs-button--full-width" />
 
 ### Compact
-
 Compact `Button` using `EdsProvider`.
+
 <Story id="inputs-button--compact" />
+
+## Button.Group
+Is used to group related buttons.
+
+### Usage
+The buttons can be grouped by wrapping them with the `Button.Group` component.
+
+```tsx
+import { Button } from '@equinor/eds-core-react'
+
+<Button.Group aria-label="button group">
+  <Button>Click me!</Button>
+  <Button>Click me!</Button>
+  <Button>Click me!</Button>
+</Button.Group>
+```
+
+### Accessibility
+
+#### ARIA
+<ul>
+  <li>Button.Group has <code>role="group"</code>.</li>
+  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
+</ul>
+
+## Examples
+
+### Horizontal
+The `Button.Group` is displayed horizontally by default.
+
+<Story id="inputs-button--group-horizontal" />
+
+### Vertical
+The `Button.Group` can be displayed vertically using the `vertical` prop.
+
+<Story id="inputs-button--group-vertical" />
+
+### Split
+`Button.Group` can also be used to create a split button. <br />
+The dropdown can change the button action (as in this example) or be used to immediately trigger a related action.
+
+<Story id="inputs-button--group-split" />
