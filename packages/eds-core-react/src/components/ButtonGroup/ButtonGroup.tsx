@@ -12,6 +12,7 @@ export type ButtonGroupProps = {
 const radius = border.type === 'border' && border.radius
 
 const ButtonGroupBase = styled.div<ButtonGroupProps>`
+  display: flex;
   > * {
     border-radius: 0;
     @media (hover: hover) and (pointer: fine) {
@@ -23,7 +24,7 @@ const ButtonGroupBase = styled.div<ButtonGroupProps>`
   ${({ vertical }) =>
     vertical
       ? css`
-          display: grid;
+          flex-direction: column;
           > :first-child {
             border-top-left-radius: ${radius};
             border-top-right-radius: ${radius};
@@ -37,7 +38,6 @@ const ButtonGroupBase = styled.div<ButtonGroupProps>`
           }
         `
       : css`
-          display: flex;
           > :first-child {
             border-top-left-radius: ${radius};
             border-bottom-left-radius: ${radius};
