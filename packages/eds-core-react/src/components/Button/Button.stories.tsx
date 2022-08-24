@@ -256,30 +256,30 @@ export const FullWidth: Story<ButtonProps> = () => (
     <Button disabled fullWidth>
       Disabled
     </Button>
-    <Button fullWidth>
+    <Button fullWidth aria-label="save action">
       <Icon data={save}></Icon>Primary
     </Button>
-    <Button color="secondary" fullWidth>
+    <Button color="secondary" fullWidth aria-label="save action">
       <Icon data={save}></Icon>Secondary
     </Button>
-    <Button color="danger" fullWidth>
+    <Button color="danger" fullWidth aria-label="save action">
       <Icon data={save}></Icon>Danger
     </Button>
-    <Button disabled fullWidth>
+    <Button disabled fullWidth aria-label="save action">
       <Icon data={save}></Icon>Disabled
     </Button>
-    <Button fullWidth>
+    <Button fullWidth aria-label="save action">
       Primary <Icon data={save}></Icon>
     </Button>
-    <Button color="secondary" fullWidth>
+    <Button color="secondary" fullWidth aria-label="save action">
       Secondary
       <Icon data={save}></Icon>
     </Button>
-    <Button color="danger" fullWidth>
+    <Button color="danger" fullWidth aria-label="save action">
       Danger
       <Icon data={save}></Icon>
     </Button>
-    <Button disabled fullWidth>
+    <Button disabled fullWidth aria-label="save action">
       Disabled
       <Icon data={save}></Icon>
     </Button>
@@ -307,7 +307,7 @@ export const Compact: Story<ButtonProps> = () => {
       <Button>Contained</Button>
       <Button variant="outlined">Outlined</Button>
       <Button variant="ghost">Ghost</Button>
-      <Button variant="ghost_icon">
+      <Button variant="ghost_icon" aria-label="menu action">
         <Icon data={menu} title="Ghost icon menu"></Icon>
       </Button>
       <Button.Group ria-label="button group compact">
