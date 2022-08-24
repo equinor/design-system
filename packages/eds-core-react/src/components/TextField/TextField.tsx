@@ -11,6 +11,19 @@ import type { Variants } from './types'
 import { useId } from '@equinor/eds-utils'
 import { Textarea } from '../Textarea'
 
+type FieldProps = SharedTextFieldProps &
+  React.HTMLAttributes<HTMLTextAreaElement | HTMLInputElement>
+/** Proxy component for working around typescript and element type switching */
+const Field = forwardRef<HTMLTextAreaElement | HTMLInputElement, FieldProps>(
+  function Field(props, ref) {
+    return props.multiline ? (
+      <Textarea ref={ref as ForwardedRef<HTMLTextAreaElement>} {...props} />
+    ) : (
+      <Input ref={ref as ForwardedRef<HTMLInputElement>} {...props} />
+    )
+  },
+)
+
 type SharedTextFieldProps = {
   /** Variants */
   variant?: Variants
@@ -34,18 +47,14 @@ type SharedTextFieldProps = {
   inputRef?: ForwardedRef<HTMLInputElement>
   /** Textarea ref when multiline is set to `true` */
   textareaRef?: ForwardedRef<HTMLTextAreaElement>
+  /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
+  multiline: boolean
 }
 
 export type TextFieldProps = SharedTextFieldProps &
   (
-    | ({
-        /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
-        multiline: true
-      } & TextareaHTMLAttributes<HTMLTextAreaElement>)
-    | ({
-        /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
-        multiline?: false
-      } & InputHTMLAttributes<HTMLInputElement>)
+    | TextareaHTMLAttributes<HTMLTextAreaElement>
+    | InputHTMLAttributes<HTMLInputElement>
   )
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
@@ -73,7 +82,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   ) {
     const helperTextId = useId(null, 'helpertext')
 
-    const inputProps = {
+    const fieldProps = {
       'aria-describedby': helperTextId,
       'aria-invalid': variant === 'error' || undefined,
       disabled,
@@ -86,12 +95,10 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           <span>{unit}</span>
         </>
       ),
-      ...other,
-    }
-
-    const textAreaProps = {
       rowsMax,
-      ...inputProps,
+      ref: inputRef || textareaRef,
+      multiline,
+      ...other,
     }
 
     const helperProps = {
@@ -121,11 +128,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         labelProps={labelProps}
         {...containerProps}
       >
-        {multiline ? (
-          <Textarea ref={textareaRef} {...textAreaProps} />
-        ) : (
-          <Input ref={inputRef} {...inputProps} />
-        )}
+        <Field {...fieldProps} />
       </InputWrapper>
     )
   },
