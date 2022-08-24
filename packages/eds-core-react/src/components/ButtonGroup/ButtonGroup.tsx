@@ -12,7 +12,7 @@ export type ButtonGroupProps = {
 const radius = border.type === 'border' && border.radius
 
 const ButtonGroupBase = styled.div<ButtonGroupProps>`
-  display: flex;
+  display: inline-flex;
   > * {
     border-radius: 0;
     @media (hover: hover) and (pointer: fine) {
