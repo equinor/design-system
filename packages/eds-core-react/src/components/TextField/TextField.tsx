@@ -48,7 +48,7 @@ type SharedTextFieldProps = {
   /** Textarea ref when multiline is set to `true` */
   textareaRef?: ForwardedRef<HTMLTextAreaElement>
   /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
-  multiline: boolean
+  multiline?: boolean
 }
 
 export type TextFieldProps = SharedTextFieldProps &
