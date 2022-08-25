@@ -1,5 +1,6 @@
-import { forwardRef } from 'react'
+import { forwardRef, ElementType } from 'react'
 import styled, { css } from 'styled-components'
+import { OverridableComponent } from '@equinor/eds-utils'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
@@ -24,6 +25,12 @@ const StyledTypography = styled(Typography)<StyledProps>`
   color: ${typography.color};
   ${({ maxWidth }) => css({ maxWidth })}
 `
+type OverridableSubComponent = OverridableComponent<
+  BreadcrumbProps,
+  HTMLAnchorElement
+> & {
+  displayName?: string
+}
 
 export type BreadcrumbProps = {
   /* Max label width in pixels,
@@ -33,21 +40,30 @@ export type BreadcrumbProps = {
   children: string
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
-export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
-  function Breadcrumb({ children, maxWidth, href, ...other }, ref) {
+export const Breadcrumb: OverridableSubComponent = forwardRef(
+  function Breadcrumb({ children, maxWidth, href, as, ...other }, ref) {
     const props = {
       ...other,
       href,
       ref,
       maxWidth,
     }
+
     const showTooltip = maxWidth > 0
     const isHrefDefined = href !== undefined
+    let forwardedAs: ElementType
+    if (as) {
+      forwardedAs = as
+    } else if (isHrefDefined) {
+      forwardedAs = 'a'
+    } else {
+      forwardedAs = 'span'
+    }
 
     const crumb = (
       <StyledTypography
         link={isHrefDefined}
-        forwardedAs={isHrefDefined ? null : 'span'}
+        forwardedAs={forwardedAs}
         variant="body_short"
         {...props}
       >
