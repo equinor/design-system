@@ -38,6 +38,8 @@ export type BreadcrumbProps = {
   maxWidth?: number
   /** Children is breadcrumb text */
   children: string
+  /** Override element type */
+  as?: ElementType
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const Breadcrumb: OverridableSubComponent = forwardRef(
