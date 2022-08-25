@@ -313,3 +313,7 @@ WithAdornments.decorators = [
     )
   },
 ]
+
+export const casted: Story<InputProps> = (args) => {
+  return <Input as="textarea" {...args} />
+}

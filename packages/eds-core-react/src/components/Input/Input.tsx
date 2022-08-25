@@ -12,6 +12,7 @@ import {
   spacingsTemplate,
   outlineTemplate,
   useToken,
+  OverridableComponent,
 } from '@equinor/eds-utils'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
@@ -128,95 +129,102 @@ export type InputProps = {
   leftAdornments?: ReactNode
   /** Right adornments */
   rightAdornments?: ReactNode
+  /** Cast the input to another element */
+  as?: 'input' | 'textarea'
 } & InputHTMLAttributes<HTMLInputElement>
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    variant,
-    disabled = false,
-    type = 'text',
-    leftAdornments,
-    rightAdornments,
-    readOnly,
-    className,
-    style,
-    ...other
-  },
-  ref,
-) {
-  const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
-  const { density } = useEds()
-  const token = useToken({ density }, inputVariant)()
-
-  const [rightAdornmentsRef, setRightAdornmentsRef] = useState<HTMLDivElement>()
-  const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
-
-  const rightAdornmentsWidth = useCallback(() => {
-    if (rightAdornmentsRef) {
-      return rightAdornmentsRef.offsetWidth
-    }
-    return 0
-  }, [rightAdornmentsRef])()
-
-  const leftAdornmentsWidth = useCallback(() => {
-    if (leftAdornmentsRef) {
-      return leftAdornmentsRef.offsetWidth
-    }
-    return 0
-  }, [leftAdornmentsRef])()
-
-  const updatedToken = useCallback(
-    (): ComponentToken => ({
-      ...token,
-      spacings: {
-        ...token.spacings,
-        left: `${leftAdornmentsWidth + parseInt(token.spacings.left)}px`,
-        right: `${rightAdornmentsWidth + parseInt(token.spacings.right)}px`,
-      },
-    }),
-    [leftAdornmentsWidth, rightAdornmentsWidth, token],
-  )()
-
-  const inputProps = {
+export const Input: OverridableComponent<InputProps, HTMLInputElement> =
+  forwardRef<HTMLInputElement, InputProps>(function Input(
+    {
+      variant,
+      disabled = false,
+      type = 'text',
+      leftAdornments,
+      rightAdornments,
+      readOnly,
+      className,
+      style,
+      ...other
+    },
     ref,
-    type,
-    disabled,
-    readOnly,
-    token: updatedToken,
-    ...other,
-  }
+  ) {
+    const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
+    const { density } = useEds()
+    const token = useToken({ density }, inputVariant)()
 
-  const containerProps = {
-    disabled,
-    readOnly,
-    className,
-    style,
-    token: updatedToken,
-  }
+    const [rightAdornmentsRef, setRightAdornmentsRef] =
+      useState<HTMLDivElement>()
+    const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
 
-  const leftAdornmentProps = {
-    ref: setLeftAdornmentsRef,
-    token: updatedToken,
-  }
-  const rightAdornmentProps = {
-    ref: setRightAdornmentsRef,
-    token: updatedToken,
-  }
+    const rightAdornmentsWidth = useCallback(() => {
+      if (rightAdornmentsRef) {
+        return rightAdornmentsRef.offsetWidth
+      }
+      return 0
+    }, [rightAdornmentsRef])()
 
-  return (
-    // Not using <ThemeProvider> because of cascading styling messing with adornments
-    <Container {...containerProps}>
-      {leftAdornments ? (
-        <LeftAdornments {...leftAdornmentProps}>
-          {leftAdornments}
-        </LeftAdornments>
-      ) : null}
-      <StyledInput {...inputProps} />
-      {rightAdornments ? (
-        <RightAdornments {...rightAdornmentProps}>
-          {rightAdornments}
-        </RightAdornments>
-      ) : null}
-    </Container>
-  )
-})
+    const leftAdornmentsWidth = useCallback(() => {
+      if (leftAdornmentsRef) {
+        return leftAdornmentsRef.offsetWidth
+      }
+      return 0
+    }, [leftAdornmentsRef])()
+
+    const updatedToken = useCallback(
+      (): ComponentToken => ({
+        ...token,
+        spacings: {
+          ...token.spacings,
+          left: `${leftAdornmentsWidth + parseInt(token.spacings.left)}px`,
+          right: `${rightAdornmentsWidth + parseInt(token.spacings.right)}px`,
+        },
+      }),
+      [leftAdornmentsWidth, rightAdornmentsWidth, token],
+    )()
+
+    const inputProps = {
+      ref,
+      type,
+      disabled,
+      readOnly,
+      token: updatedToken,
+      style: {
+        resize: style?.resize,
+      },
+      ...other,
+    }
+
+    const containerProps = {
+      disabled,
+      readOnly,
+      className,
+      style,
+      token: updatedToken,
+    }
+
+    const leftAdornmentProps = {
+      ref: setLeftAdornmentsRef,
+      token: updatedToken,
+    }
+    const rightAdornmentProps = {
+      ref: setRightAdornmentsRef,
+      token: updatedToken,
+    }
+
+    return (
+      // Not using <ThemeProvider> because of cascading styling messing with adornments
+      <Container {...containerProps}>
+        {leftAdornments ? (
+          <LeftAdornments {...leftAdornmentProps}>
+            {leftAdornments}
+          </LeftAdornments>
+        ) : null}
+        <StyledInput {...inputProps} />
+        {rightAdornments ? (
+          <RightAdornments {...rightAdornmentProps}>
+            {rightAdornments}
+          </RightAdornments>
+        ) : null}
+      </Container>
+    )
+  })
