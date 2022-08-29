@@ -16,7 +16,7 @@ describe('TextField', () => {
       <TextField id="textfield" label="textfield" />,
     )
 
-    expect(asFragment).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
   it('Should pas a11y test', async () => {
     const { container } = render(<TextField id="textfield" label="textfield" />)

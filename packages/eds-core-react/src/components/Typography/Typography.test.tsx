@@ -36,7 +36,7 @@ describe('Typography', () => {
       </Typography>,
     )
 
-    expect(asFragment).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
     const { container } = render(<Typography>Text</Typography>)

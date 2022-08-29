@@ -1,3 +1,147 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TextField Matches snapshot 1`] = `[Function]`;
+exports[`TextField Matches snapshot 1`] = `
+<DocumentFragment>
+  .c4 {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  border: none;
+  height: 36px;
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  outline: 1px solid transparent;
+  outline-offset: 0px;
+  margin: 0;
+  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500em;
+  -webkit-letter-spacing: 0.025em;
+  -moz-letter-spacing: 0.025em;
+  -ms-letter-spacing: 0.025em;
+  letter-spacing: 0.025em;
+  text-align: left;
+  padding-left: 8px;
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+}
+
+.c4::-webkit-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4::-moz-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4:-ms-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4::placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4:active,
+.c4:focus {
+  outline-offset: 0;
+  box-shadow: none;
+  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  outline-offset: 0px;
+}
+
+.c4:disabled {
+  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
+  cursor: not-allowed;
+  box-shadow: none;
+  outline: none;
+}
+
+.c4:disabled:focus,
+.c4:disabled:active {
+  outline: none;
+}
+
+.c4[readOnly] {
+  background: transparent;
+  box-shadow: none;
+}
+
+.c5 {
+  outline: none;
+}
+
+.c5:active,
+.c5:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.c3 {
+  box-shadow: inset 0 -1px 0 0 #6f6f6f;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  margin: 0;
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  text-align: left;
+  margin-left: 8px;
+  margin-right: 8px;
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c2 {
+  margin: 0;
+}
+
+.c0 {
+  min-width: 100px;
+  width: 100%;
+}
+
+<div
+    class="c0"
+  >
+    <label
+      class="c1"
+      for="textfield"
+    >
+      <span
+        class="c2"
+      >
+        textfield
+      </span>
+    </label>
+    <div
+      class="c3"
+    >
+      <input
+        aria-describedby="eds-helpertext-69568"
+        aria-invalid="false"
+        class="c4 c5"
+        id="textfield"
+        type="text"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

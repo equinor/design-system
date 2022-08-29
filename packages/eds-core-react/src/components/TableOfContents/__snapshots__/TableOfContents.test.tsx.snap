@@ -1,3 +1,135 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TableOfContents Matches snapshot 1`] = `[Function]`;
+exports[`TableOfContents Matches snapshot 1`] = `
+<DocumentFragment>
+  .c3 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.250em;
+  text-align: left;
+}
+
+.c1 {
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.600em;
+  -webkit-letter-spacing: 0.069em;
+  -moz-letter-spacing: 0.069em;
+  -ms-letter-spacing: 0.069em;
+  letter-spacing: 0.069em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.c0 {
+  margin-top: 48px;
+  margin-bottom: 32px;
+}
+
+.c4 {
+  margin: 0;
+  padding: 0;
+}
+
+.c2 {
+  margin: 0;
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: left;
+}
+
+.c5 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c5 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  margin: 0;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  font-family: Equinor;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.143em;
+  text-align: left;
+  padding-left: 18px;
+  padding-top: 10px;
+  padding-right: 18px;
+  padding-bottom: 10px;
+  height: 1.143em;
+  width: calc(189px - 36px);
+  display: block;
+  position: relative;
+}
+
+.c5 a svg {
+  fill: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  margin-right: 8px;
+  vertical-align: text-bottom;
+}
+
+.c5 a span {
+  max-width: 115px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: text-bottom;
+  display: inline-block;
+}
+
+.c5 a:focus {
+  outline: 1px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 2px;
+}
+
+.c5 a:active {
+  outline: none;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c5 a:hover {
+    margin: 0;
+    color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+    font-family: Equinor;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.143em;
+    text-align: left;
+    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+  }
+
+  .c5 a:hover svg {
+    fill: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+  }
+}
+
+<nav
+    class="c0"
+    label=""
+  >
+    <p
+      class="c1 c2"
+    />
+    <ul
+      class="c3 c4"
+    >
+      <li
+        class="c5"
+      >
+        Anchor
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
