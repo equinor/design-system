@@ -17,7 +17,7 @@ import {
   accessible,
   notifications,
   fullscreen,
-  grid_on,
+  apps,
 } from '@equinor/eds-icons'
 
 export default {
@@ -40,7 +40,7 @@ const icons = {
   accessible,
   notifications,
   fullscreen,
-  grid_on,
+  apps,
 }
 
 Icon.add(icons)
@@ -66,7 +66,7 @@ export const Introduction: Story<TopbarProps> = (props): JSX.Element => {
       <TopBar {...props}>
         <TopBar.Header>
           <>
-            <Icon name="grid_on" size={16} />
+            <Icon name="apps" />
             Application name - subtitle
           </>
         </TopBar.Header>
@@ -99,7 +99,7 @@ export const WithSearchAndIcons: Story<TopbarProps> = (): JSX.Element => {
   return (
     <TopBar>
       <TopBar.Header>
-        <Icon name="grid_on" size={16} />
+        <Icon name="apps" />
         Application name - subtitle
       </TopBar.Header>
       <TopBar.CustomContent>
@@ -138,7 +138,7 @@ export const Compact: Story<TopbarProps> = (): JSX.Element => {
     <EdsProvider density={density}>
       <TopBar>
         <TopBar.Header>
-          <Icon name="grid_on" size={16} />
+          <Icon name="apps" />
           Application name - subtitle
         </TopBar.Header>
         <TopBar.CustomContent>
