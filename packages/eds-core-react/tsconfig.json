@@ -7,8 +7,7 @@
     "emitDeclarationOnly": true,
     "isolatedModules": true,
     "outDir": "./dist",
-    "baseUrl": ".",
-    "preserveSymlinks": true
+    "baseUrl": "."
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]
