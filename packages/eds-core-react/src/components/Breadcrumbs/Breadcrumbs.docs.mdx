@@ -59,3 +59,21 @@ Choose `maxWidth` in pixels to truncate labels. Hover on label to see full text.
 Wraps over two or more lines. Controlled by parent width.
 
 <Story id="navigation-breadcrumbs--wrapped" />
+
+### Third-party routing libraries
+
+Use the `as` prop on `Breadcrumbs.Breadcrumb` to utilize third party routers such as react-router with `Breadcrumbs`
+
+```tsx
+import { Link } from "react-router-dom"
+import { Breadcrumbs } from '@equinor/eds-core-react'
+
+<Breadcrumbs>
+  <Breadcrumbs.Breadcrumb as={Link} to="/">
+    Home
+  </Breadcrumbs.Breadcrumb>
+  <Breadcrumbs.Breadcrumb as={Link} to="/about" aria-current="page">
+    About
+  </Breadcrumbs.Breadcrumb>
+</Breadcrumbs>
+```

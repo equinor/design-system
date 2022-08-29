@@ -1,5 +1,6 @@
-import { forwardRef } from 'react'
+import { forwardRef, ElementType, useMemo } from 'react'
 import styled, { css } from 'styled-components'
+import { OverridableComponent } from '@equinor/eds-utils'
 import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
@@ -24,6 +25,12 @@ const StyledTypography = styled(Typography)<StyledProps>`
   color: ${typography.color};
   ${({ maxWidth }) => css({ maxWidth })}
 `
+type OverridableSubComponent = OverridableComponent<
+  BreadcrumbProps,
+  HTMLAnchorElement
+> & {
+  displayName?: string
+}
 
 export type BreadcrumbProps = {
   /* Max label width in pixels,
@@ -31,23 +38,31 @@ export type BreadcrumbProps = {
   maxWidth?: number
   /** Children is breadcrumb text */
   children: string
+  /** Override element type */
+  as?: ElementType
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
-export const Breadcrumb = forwardRef<HTMLAnchorElement, BreadcrumbProps>(
-  function Breadcrumb({ children, maxWidth, href, ...other }, ref) {
+export const Breadcrumb: OverridableSubComponent = forwardRef(
+  function Breadcrumb({ children, maxWidth, href, as, ...other }, ref) {
     const props = {
       ...other,
       href,
       ref,
       maxWidth,
     }
+
     const showTooltip = maxWidth > 0
     const isHrefDefined = href !== undefined
+
+    const forwardedAs: ElementType = useMemo(
+      () => (as ? as : isHrefDefined ? 'a' : 'span'),
+      [as, isHrefDefined],
+    )
 
     const crumb = (
       <StyledTypography
         link={isHrefDefined}
-        forwardedAs={isHrefDefined ? null : 'span'}
+        forwardedAs={forwardedAs}
         variant="body_short"
         {...props}
       >
