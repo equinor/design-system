@@ -26,7 +26,7 @@ const {
 
 export const sidebar: ComponentToken = {
   background,
-  minWidth: '66px',
+  minWidth: '72px',
   maxWidth: '256px',
   spacings: {
     top: large,
