@@ -27,9 +27,6 @@ export default {
   args: {
     open: true,
   },
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as Meta
 
 const SidebarContainer = styled.div`
