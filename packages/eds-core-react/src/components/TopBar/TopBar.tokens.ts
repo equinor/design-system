@@ -14,8 +14,8 @@ export const topbar: TopBarToken = {
   background: colors.ui.background__default.rgba,
   typography: navigation.menu_title,
   spacings: {
-    left: comfortable.xx_large,
-    right: comfortable.xx_large,
+    left: comfortable.large,
+    right: comfortable.large,
     top: comfortable.small,
     bottom: comfortable.small,
   },
