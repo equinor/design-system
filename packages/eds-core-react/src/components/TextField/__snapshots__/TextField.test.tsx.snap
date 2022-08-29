@@ -135,7 +135,7 @@ exports[`TextField Matches snapshot 1`] = `
       class="c3"
     >
       <input
-        aria-describedby="eds-helpertext-69568"
+        aria-describedby="eds-helpertext-12346"
         aria-invalid="false"
         class="c4 c5"
         id="textfield"

@@ -12,10 +12,11 @@ afterEach(cleanup)
 
 describe('TextField', () => {
   it('Matches snapshot', () => {
+    jest.spyOn(Math, 'random').mockReturnValue(0.123456789)
     const { asFragment } = render(
       <TextField id="textfield" label="textfield" />,
     )
-
+    jest.spyOn(Math, 'random').mockRestore()
     expect(asFragment()).toMatchSnapshot()
   })
   it('Should pas a11y test', async () => {
