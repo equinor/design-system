@@ -1,3 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TopBar Matches snapshot 1`] = `[Function]`;
+exports[`TopBar Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  box-shadow: 0 0 1px rgba(0,0,0,0.14);
+}
+
+.c1 {
+  height: 64px;
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  background: var(--eds_ui_background__default,rgba(255,255,255,1));
+  box-sizing: border-box;
+  z-index: 1100;
+  display: grid;
+  grid-column-gap: 24px;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: 'left center right';
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 2px solid var(--eds_ui_background__light,rgba(247,247,247,1));
+  padding-left: 24px;
+  padding-top: 8px;
+  padding-right: 24px;
+  padding-bottom: 8px;
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.000em;
+  -webkit-letter-spacing: 0.013em;
+  -moz-letter-spacing: 0.013em;
+  -ms-letter-spacing: 0.013em;
+  letter-spacing: 0.013em;
+  text-align: left;
+}
+
+.c4 {
+  grid-area: right;
+  text-align: right;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  grid-area: left;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 24px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  grid-area: center;
+}
+
+<header
+    class="c0 c1"
+    elevation="0 0 1px rgba(0, 0, 0, 0.14)"
+  >
+    <div
+      class="c2"
+    >
+      <button
+        type="button"
+      >
+        Click me!
+      </button>
+    </div>
+    <div
+      class="c3"
+    >
+      <input
+        type="text"
+      />
+    </div>
+    <div
+      class="c4"
+    >
+      <p>
+        icon
+      </p>
+    </div>
+  </header>
+</DocumentFragment>
+`;
