@@ -1,4 +1,4 @@
-import { forwardRef, ElementType } from 'react'
+import { forwardRef, ElementType, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { OverridableComponent } from '@equinor/eds-utils'
 import { Typography } from '../Typography'
@@ -53,14 +53,11 @@ export const Breadcrumb: OverridableSubComponent = forwardRef(
 
     const showTooltip = maxWidth > 0
     const isHrefDefined = href !== undefined
-    let forwardedAs: ElementType
-    if (as) {
-      forwardedAs = as
-    } else if (isHrefDefined) {
-      forwardedAs = 'a'
-    } else {
-      forwardedAs = 'span'
-    }
+
+    const forwardedAs: ElementType = useMemo(
+      () => (as ? as : isHrefDefined ? 'a' : 'span'),
+      [as, isHrefDefined],
+    )
 
     const crumb = (
       <StyledTypography
