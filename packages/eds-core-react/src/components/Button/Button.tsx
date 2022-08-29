@@ -8,7 +8,7 @@ import {
   outlineTemplate,
   spacingsTemplate,
   useToken,
-  OverridableComponent,
+  createPolymorphicComponent,
 } from '@equinor/eds-utils'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
@@ -164,50 +164,53 @@ export type ButtonProps = {
   type?: string
   /** FullWidth (stretched) button  */
   fullWidth?: boolean
-} & ButtonHTMLAttributes<HTMLButtonElement>
+} & Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'tabIndex'> & {
+    as?: keyof JSX.IntrinsicElements
+  }
 
-export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
-  forwardRef(function Button(
-    {
-      color = 'primary',
-      variant = 'contained',
-      children,
-      disabled = false,
-      href,
-      tabIndex = 0,
-      fullWidth = false,
-      ...other
-    },
+const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    color = 'primary',
+    variant = 'contained',
+    children,
+    disabled = false,
+    href,
+    tabIndex = 0,
+    fullWidth = false,
+    ...other
+  },
+  ref,
+) {
+  const { density } = useEds()
+  const token = useToken({ density }, getToken(variant, color))
+
+  const as = href && !disabled ? 'a' : other.as ? other.as : 'button'
+
+  const type = href || other.as ? undefined : 'button'
+
+  tabIndex = disabled ? -1 : tabIndex
+
+  const buttonProps = {
     ref,
-  ) {
-    const { density } = useEds()
-    const token = useToken({ density }, getToken(variant, color))
+    as,
+    href,
+    type,
+    disabled,
+    tabIndex,
+    ...other,
+  }
 
-    const as = href && !disabled ? 'a' : other.as ? other.as : 'button'
+  return (
+    <ThemeProvider theme={token}>
+      <ButtonBase {...buttonProps}>
+        {fullWidth ? (
+          <InnerFullWidth>{children}</InnerFullWidth>
+        ) : (
+          <Inner>{children}</Inner>
+        )}
+      </ButtonBase>
+    </ThemeProvider>
+  )
+})
 
-    const type = href || other.as ? undefined : 'button'
-
-    tabIndex = disabled ? -1 : tabIndex
-
-    const buttonProps = {
-      ref,
-      as,
-      href,
-      type,
-      disabled,
-      tabIndex,
-      ...other,
-    }
-
-    return (
-      <ThemeProvider theme={token}>
-        <ButtonBase {...buttonProps}>
-          {fullWidth ? (
-            <InnerFullWidth>{children}</InnerFullWidth>
-          ) : (
-            <Inner>{children}</Inner>
-          )}
-        </ButtonBase>
-      </ThemeProvider>
-    )
-  })
+export const Button = createPolymorphicComponent<'button', ButtonProps>(_Button)
