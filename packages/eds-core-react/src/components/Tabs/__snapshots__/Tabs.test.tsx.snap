@@ -178,11 +178,11 @@ exports[`Tabs Matches snapshot 1`] = `
       role="tablist"
     >
       <button
-        aria-controls="eds-tabs-78907-panel-1"
+        aria-controls="test-panel-1"
         aria-disabled="false"
         aria-selected="true"
         class="c1"
-        id="eds-tabs-78907-tab-1"
+        id="test-tab-1"
         role="tab"
         tabindex="0"
         type="button"
@@ -190,11 +190,11 @@ exports[`Tabs Matches snapshot 1`] = `
         Tab one
       </button>
       <button
-        aria-controls="eds-tabs-78907-panel-2"
+        aria-controls="test-panel-2"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="eds-tabs-78907-tab-2"
+        id="test-tab-2"
         role="tab"
         tabindex="-1"
         type="button"
@@ -202,11 +202,11 @@ exports[`Tabs Matches snapshot 1`] = `
         Tab two
       </button>
       <button
-        aria-controls="eds-tabs-78907-panel-3"
+        aria-controls="test-panel-3"
         aria-disabled="false"
         aria-selected="false"
         class="c2"
-        id="eds-tabs-78907-tab-3"
+        id="test-tab-3"
         role="tab"
         tabindex="-1"
         type="button"
