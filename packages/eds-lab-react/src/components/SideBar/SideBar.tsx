@@ -7,12 +7,11 @@ import { useSideBar, SideBarProvider } from './SideBar.context'
 
 type ContainerProps = {
   open: boolean
-  maxHeight?: string
 }
 
 const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
   function SideBarContainer(
-    { onToggle: onToggleCallback, open = false, maxHeight, children, ...rest },
+    { onToggle: onToggleCallback, open = false, children, ...rest },
     ref,
   ) {
     const { isOpen, setIsOpen, onToggle, setOnToggle } = useSideBar()
@@ -29,48 +28,43 @@ const SideBarContainer = forwardRef<HTMLDivElement, SidebarProps>(
     }, [open])
 
     return (
-      <GridContainer {...rest} open={isOpen} ref={ref} maxHeight={maxHeight}>
+      <GridContainer {...rest} open={isOpen} ref={ref}>
         {children}
       </GridContainer>
     )
   },
 )
 
-const GridContainer = styled.div<ContainerProps>(
-  ({ theme, open, maxHeight }) => {
-    return css`
-      box-sizing: content-box;
-      ${bordersTemplate(theme.border)}
-      display: grid;
-      grid-template-rows: 1fr auto;
-      height: 100%;
-      grid-template-areas:
-        'content'
-        'footer';
-      background-color: ${theme.background};
-      overflow: hidden;
-      width: ${open ? theme.maxWidth : theme.minWidth};
-      min-width: ${open ? theme.maxWidth : theme.minWidth};
-      ${maxHeight && css({ maxHeight: maxHeight })}
-    `
-  },
-)
+const GridContainer = styled.div<ContainerProps>(({ theme, open }) => {
+  return css`
+    box-sizing: content-box;
+    ${bordersTemplate(theme.border)}
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: 100%;
+    grid-template-areas:
+      'content'
+      'footer';
+    background-color: ${theme.background};
+    overflow: hidden;
+    width: ${open ? theme.maxWidth : theme.minWidth};
+    min-width: ${open ? theme.maxWidth : theme.minWidth};
+  `
+})
 
 type SidebarProps = {
   open?: boolean
-  maxHeight?: string
   onToggle?: (state: boolean) => void
 } & HTMLAttributes<HTMLDivElement>
 
 export const SideBar = forwardRef<HTMLDivElement, SidebarProps>(
-  ({ onToggle, open = false, maxHeight, children, ...rest }, ref) => {
+  ({ onToggle, open = false, children, ...rest }, ref) => {
     const { density } = useEds()
     const token = useToken({ density }, tokens)
 
     const props = {
       onToggle,
       open,
-      maxHeight,
       children,
       ...rest,
     }
