@@ -1,3 +1,6 @@
+// Move this util to core-react as there is a bug with infering types in other packages when this was in @equinor/eds-utils
+// more info: https://github.com/paynecodes/ts-repro-type-annotation-require-symlinks
+
 import React from 'react'
 
 type ExtendedProps<

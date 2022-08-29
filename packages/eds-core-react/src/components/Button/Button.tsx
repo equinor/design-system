@@ -12,6 +12,7 @@ import {
 } from '@equinor/eds-utils'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '../EdsProvider'
+import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants =
