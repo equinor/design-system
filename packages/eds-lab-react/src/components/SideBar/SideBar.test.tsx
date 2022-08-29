@@ -48,7 +48,7 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '66px' })
+    expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '72px' })
   })
 
   it('Renders open width when open', () => {
