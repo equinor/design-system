@@ -10,7 +10,7 @@ Extracts design decisions into [design tokens] from Figma using the [Figma Web A
 ### Setup
 
 1. Go to Figma and generate a new personal access token (Found under your account settings)
-2. Add an `.env` file in the root or if you are using Codespaces, go to `Github Settings` → `Codespaces` and create a new secret. Give it the name `FIGMA_TOKEN`, paste your token as value, and select `equinor/design-system` in the repository access select menu.
+2. Add an `.env` file in the root of `figma-broker` or if you are using Codespaces, go to `Github Settings` → `Codespaces` and create a new secret. Give it the name `FIGMA_TOKEN`, paste your token as value, and select `equinor/design-system` in the repository access select menu.
 3. Set `FIGMA_TOKEN` env variable to the new personal access token
 
 ### Run

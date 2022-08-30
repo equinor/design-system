@@ -27,13 +27,17 @@ export const processFigmaFile = (result) => ({
 export async function fetchFigmaFile(fileId) {
   // https://www.figma.com/developers/docs#get-files-endpoint
   const url = `https://api.figma.com/v1/files/${fileId}`
-  return fetch(url, options()).then(handleResponse)
+  return fetch(url, options())
+    .then(handleResponse)
+    .catch((error) => console.error(`Error fetching file from figma`, error))
 }
 
 export async function fetchFigmaImageUrls(fileId, ids, format = 'svg') {
   // https://www.figma.com/developers/docs#get-images-endpoint
   const url = `https://api.figma.com/v1/images/${fileId}?ids=${ids}&format=${format}`
-  return fetch(url, options()).then(handleResponse)
+  return fetch(url, options())
+    .then(handleResponse)
+    .catch((error) => console.error(`Error fetching file from figma`, error))
 }
 
 export async function getFigmaFile({ fileId, force = 'false' }) {
