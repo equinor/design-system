@@ -13,6 +13,7 @@ import {
   SidebarLinkProps,
   useSideBar,
 } from '../../components/SideBar'
+import { TopBar } from '@equinor/eds-core-react'
 
 const { Content, Footer, Link, Toggle, Button } = SideBar
 
@@ -32,6 +33,9 @@ export default {
 const SidebarContainer = styled.div`
   height: 60vh;
   margin: -30px -20px;
+`
+const StyledSidebar = styled(SideBar)`
+  height: calc(100% - 64px);
 `
 
 export const Primary: Story<SidebarType> = (args) => {
@@ -68,7 +72,7 @@ export const Primary: Story<SidebarType> = (args) => {
 }
 
 const LogoContainer = styled.div`
-  border-top: 1px solid rgba(220, 220, 220, 1);
+  border-top: 2px solid rgba(247, 247, 247, 1);
   padding-top: 16px;
   padding-bottom: 16px;
   height: 36px;
@@ -179,7 +183,10 @@ export const WithButtonAndCurrentUrl: Story = () => {
 
   return (
     <SidebarContainer>
-      <SideBar>
+      <TopBar>
+        <TopBar.Header>Application name - subtitle</TopBar.Header>
+      </TopBar>
+      <StyledSidebar>
         <SideBar.Content>
           <SideBar.Button
             label="Create story"
@@ -193,7 +200,7 @@ export const WithButtonAndCurrentUrl: Story = () => {
         <SideBar.Footer>
           <SideBar.Toggle />
         </SideBar.Footer>
-      </SideBar>
+      </StyledSidebar>
     </SidebarContainer>
   )
 }
