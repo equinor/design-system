@@ -30,7 +30,7 @@ const ToggleContainer = styled.div<ContainerProps>(({ theme }) => {
     width: ${minWidth};
     display: grid;
     place-items: center;
-    margin-bottom: ${mediumSpacing};
+    margin-block: ${mediumSpacing};
   `
 })
 
