@@ -63,7 +63,7 @@ const TabsWithPanels = ({
 describe('Tabs', () => {
   it('Matches snapshot', () => {
     const { asFragment } = render(
-      <Tabs onChange={noop}>
+      <Tabs id="test" onChange={noop}>
         <Tabs.List>
           <Tabs.Tab>Tab one</Tabs.Tab>
           <Tabs.Tab>Tab two</Tabs.Tab>
@@ -72,7 +72,7 @@ describe('Tabs', () => {
       </Tabs>,
     )
 
-    expect(asFragment).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
   it('Should pass a11y test', async () => {
     const { container } = render(

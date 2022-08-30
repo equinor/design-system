@@ -1,3 +1,219 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tabs Matches snapshot 1`] = `[Function]`;
+exports[`Tabs Matches snapshot 1`] = `
+<DocumentFragment>
+  .c0 {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  overflow-x: hidden;
+  -webkit-scroll-snap-type: x mandatory;
+  -moz-scroll-snap-type: x mandatory;
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+}
+
+.c1 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.000em;
+  -webkit-letter-spacing: 0.013em;
+  -moz-letter-spacing: 0.013em;
+  -ms-letter-spacing: 0.013em;
+  letter-spacing: 0.013em;
+  text-align: left;
+  color: var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  background-color: transparent;
+  position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  -webkit-scroll-snap-align: end;
+  -moz-scroll-snap-align: end;
+  -ms-scroll-snap-align: end;
+  scroll-snap-align: end;
+  -webkit-scroll-snap-stop: always;
+  -moz-scroll-snap-stop: always;
+  -ms-scroll-snap-stop: always;
+  scroll-snap-stop: always;
+  border-bottom: 2px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+  border-bottom: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1[data-focus],
+.c1[data-focus-visible-added]:focus {
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: -2px;
+}
+
+.c1:focus-visible {
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: -2px;
+}
+
+.c1::-moz-focus-inner {
+  border: 0;
+}
+
+.c2 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0;
+  color: rgba(61,61,61,1);
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 500;
+  line-height: 1.000em;
+  -webkit-letter-spacing: 0.013em;
+  -moz-letter-spacing: 0.013em;
+  -ms-letter-spacing: 0.013em;
+  letter-spacing: 0.013em;
+  text-align: left;
+  color: rgba(61,61,61,1);
+  background-color: transparent;
+  position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  -webkit-scroll-snap-align: end;
+  -moz-scroll-snap-align: end;
+  -ms-scroll-snap-align: end;
+  scroll-snap-align: end;
+  -webkit-scroll-snap-stop: always;
+  -moz-scroll-snap-stop: always;
+  -ms-scroll-snap-stop: always;
+  scroll-snap-stop: always;
+  border-bottom: 2px solid var(--eds_ui_background__medium,rgba(220,220,220,1));
+}
+
+.c2:focus {
+  outline: none;
+}
+
+.c2[data-focus],
+.c2[data-focus-visible-added]:focus {
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: -2px;
+}
+
+.c2:focus-visible {
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: -2px;
+}
+
+.c2::-moz-focus-inner {
+  border: 0;
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  .c0 {
+    -webkit-scroll-behavior: smooth;
+    -moz-scroll-behavior: smooth;
+    -ms-scroll-behavior: smooth;
+    scroll-behavior: smooth;
+  }
+}
+
+@media (hover:none) {
+  .c0 {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    -webkit-scrollbar-width: 0;
+    -moz-scrollbar-width: 0;
+    -ms-scrollbar-width: 0;
+    scrollbar-width: 0;
+  }
+
+  .c0 ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c1[data-hover],
+  .c1:hover {
+    color: var(--eds_interactive_primary__hover,rgba(0,79,85,1));
+    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    cursor: pointer;
+  }
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .c2[data-hover],
+  .c2:hover {
+    color: rgba(61,61,61,1);
+    background: var(--eds_interactive_primary__hover_alt,rgba(222,237,238,1));
+    cursor: pointer;
+  }
+}
+
+<div>
+    <div
+      class="c0"
+      role="tablist"
+    >
+      <button
+        aria-controls="test-panel-1"
+        aria-disabled="false"
+        aria-selected="true"
+        class="c1"
+        id="test-tab-1"
+        role="tab"
+        tabindex="0"
+        type="button"
+      >
+        Tab one
+      </button>
+      <button
+        aria-controls="test-panel-2"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="test-tab-2"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Tab two
+      </button>
+      <button
+        aria-controls="test-panel-3"
+        aria-disabled="false"
+        aria-selected="false"
+        class="c2"
+        id="test-tab-3"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Tab three
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
