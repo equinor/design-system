@@ -504,50 +504,33 @@ function AutocompleteInner<T>(
     }
   }, [isControlled, selectedOptions, setSelectedItems])
 
-  //"Turn on" popper on load to position menu correctly and then turn it off
-  /*   useEffect(() => {
-    if (anchorRef.current) {
-      setAnchorEl(anchorRef.current)
-      setTimeout(() => {
-        setAnchorEl(null)
-      }, 1)
-    }
-  }, []) */
-
-  /*   const { styles, attributes } = usePopper({
-    anchorEl,
-    popperEl: containerEl,
-    placement: 'bottom-start',
-    offset: 4,
-    autoWidth,
-  }) */
-
   const openSelect = () => {
     if (!isOpen && !(disabled || readOnly)) {
       openMenu()
     }
   }
 
-  const { x, y, refs, reference, floating, strategy, context } = useFloating({
-    placement: 'bottom-start',
-    /* open: isOpen,
-    onOpenChange: openSelect, */
-    middleware: [
-      offset(4),
-      flip(),
-      shift({ padding: 8 }),
-      size({
-        apply({ rects, availableHeight, elements }) {
-          Object.assign(elements.floating.style, {
-            width: `${rects.reference.width}px`,
-            maxHeight: `${availableHeight}px`,
-          })
-        },
-        padding: 10,
-      }),
-    ],
-    whileElementsMounted: autoUpdate,
-  })
+  const { x, y, refs, reference, floating, strategy, context } =
+    useFloating<HTMLInputElement>({
+      placement: 'bottom-start',
+      /* open: isOpen,
+      onOpenChange: openSelect, */
+      middleware: [
+        offset(4),
+        flip(),
+        shift({ padding: 8 }),
+        size({
+          apply({ rects, availableHeight, elements }) {
+            Object.assign(elements.floating.style, {
+              width: `${rects.reference.width}px`,
+              maxHeight: `${availableHeight}px`,
+            })
+          },
+          padding: 10,
+        }),
+      ],
+      whileElementsMounted: autoUpdate,
+    })
 
   const { getFloatingProps } = useInteractions([])
 
@@ -625,7 +608,7 @@ function AutocompleteInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-                ref: refs.reference as MutableRefObject<HTMLInputElement | null>,
+                ref: refs.reference,
               }),
             )}
             placeholder={placeholderText}
