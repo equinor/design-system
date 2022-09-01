@@ -4,6 +4,7 @@ import {
   Button,
   ButtonProps,
   ButtonGroupProps,
+  ToggleButtonProps,
   Icon,
   EdsProvider,
   Density,
@@ -422,3 +423,17 @@ GroupSplit.decorators = [
     </Stack>
   ),
 ]
+
+export const ToggleButton: Story<ToggleButtonProps> = () => (
+  <Button.Toggle>
+    <Button variant="outlined" aria-label="menu action">
+      <Icon data={menu} title="Ghost icon menu"></Icon>
+    </Button>
+    <Button variant="outlined" aria-label="menu action">
+      <Icon data={menu} title="Ghost icon menu"></Icon>
+    </Button>
+    <Button variant="outlined" aria-label="menu action">
+      <Icon data={menu} title="Ghost icon menu"></Icon>
+    </Button>
+  </Button.Toggle>
+)
