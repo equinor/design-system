@@ -7,7 +7,6 @@ import {
   useRef,
   useMemo,
   useCallback,
-  MutableRefObject,
 } from 'react'
 import {
   useCombobox,
@@ -28,16 +27,9 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Autocomplete.tokens'
-import {
-  useToken,
-  usePopper,
-  useIsMounted,
-  bordersTemplate,
-  mergeRefs,
-} from '@equinor/eds-utils'
+import { useToken, bordersTemplate } from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
 import {
-  Placement,
   offset,
   flip,
   shift,
@@ -45,10 +37,6 @@ import {
   autoUpdate,
   useFloating,
   useInteractions,
-  useHover,
-  useFocus,
-  useRole,
-  useDismiss,
   FloatingPortal,
 } from '@floating-ui/react-dom-interactions'
 
@@ -237,9 +225,6 @@ function AutocompleteInner<T>(
     ...other
   } = props
   const anchorRef = useRef<HTMLInputElement>(null)
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>()
-  const [containerEl, setContainerEl] = useState<HTMLElement>()
-  const isMounted = useIsMounted()
 
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
@@ -510,7 +495,7 @@ function AutocompleteInner<T>(
     }
   }
 
-  const { x, y, refs, reference, floating, strategy, context } =
+  const { x, y, refs, reference, floating, strategy } =
     useFloating<HTMLInputElement>({
       placement: 'bottom-start',
       /* open: isOpen,
@@ -551,14 +536,7 @@ function AutocompleteInner<T>(
   )
 
   const optionsList = (
-    <StyledList
-      {...getMenuProps(
-        {
-          /*  ref: refs.floating, */
-          'aria-multiselectable': multiple ? 'true' : null,
-        },
-        { suppressRefError: true },
-      )}
+    <div
       {...getFloatingProps({
         ref: floating,
         style: {
@@ -568,27 +546,36 @@ function AutocompleteInner<T>(
         },
       })}
     >
-      {!isOpen
-        ? null
-        : availableItems.map((item, index) => {
-            const label = getLabel(item)
-            const isDisabled = optionDisabled(item)
-            const isSelected = selectedItemsLabels.includes(label)
-            return (
-              <AutocompleteOption
-                key={label}
-                value={label}
-                multiple={multiple}
-                highlighted={
-                  highlightedIndex === index && !isDisabled ? 'true' : 'false'
-                }
-                isSelected={isSelected}
-                isDisabled={isDisabled}
-                {...getItemProps({ item, index, disabled })}
-              />
-            )
-          })}
-    </StyledList>
+      <StyledList
+        {...getMenuProps(
+          {
+            'aria-multiselectable': multiple ? 'true' : null,
+          },
+          { suppressRefError: true },
+        )}
+      >
+        {!isOpen
+          ? null
+          : availableItems.map((item, index) => {
+              const label = getLabel(item)
+              const isDisabled = optionDisabled(item)
+              const isSelected = selectedItemsLabels.includes(label)
+              return (
+                <AutocompleteOption
+                  key={label}
+                  value={label}
+                  multiple={multiple}
+                  highlighted={
+                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                  }
+                  isSelected={isSelected}
+                  isDisabled={isDisabled}
+                  {...getItemProps({ item, index, disabled })}
+                />
+              )
+            })}
+      </StyledList>
+    </div>
   )
 
   return (
