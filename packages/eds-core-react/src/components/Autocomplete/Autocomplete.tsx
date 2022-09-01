@@ -13,7 +13,6 @@ import {
   UseComboboxProps,
   useMultipleSelection,
   UseMultipleSelectionProps,
-  UseComboboxGetMenuPropsOptions,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
@@ -27,7 +26,7 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Autocomplete.tokens'
-import { useToken, bordersTemplate } from '@equinor/eds-utils'
+import { useToken, useIsMounted, bordersTemplate } from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
 import {
   offset,
@@ -225,7 +224,8 @@ function AutocompleteInner<T>(
     ...other
   } = props
   const anchorRef = useRef<HTMLInputElement>(null)
-
+  //for some reason, this call to useIsmounted is required for autocomplete without multiple to work
+  const isMounted = useIsMounted()
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
 
@@ -495,7 +495,7 @@ function AutocompleteInner<T>(
     }
   }
 
-  const { x, y, refs, reference, floating, strategy } =
+  const { x, y, refs, update, reference, floating, strategy } =
     useFloating<HTMLInputElement>({
       placement: 'bottom-start',
       /* open: isOpen,
@@ -514,7 +514,6 @@ function AutocompleteInner<T>(
           padding: 10,
         }),
       ],
-      whileElementsMounted: autoUpdate,
     })
 
   const { getFloatingProps } = useInteractions([])
@@ -522,6 +521,12 @@ function AutocompleteInner<T>(
   useLayoutEffect(() => {
     reference(anchorRef.current)
   }, [anchorRef, reference])
+
+  useEffect(() => {
+    if (refs.reference.current && refs.floating.current && isOpen) {
+      return autoUpdate(refs.reference.current, refs.floating.current, update)
+    }
+  }, [refs.reference, refs.floating, update, isOpen])
 
   const clear = () => {
     resetCombobox()
