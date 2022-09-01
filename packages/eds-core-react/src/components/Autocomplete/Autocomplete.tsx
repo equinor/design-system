@@ -26,7 +26,7 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Autocomplete.tokens'
-import { useToken, useIsMounted, bordersTemplate } from '@equinor/eds-utils'
+import { useToken, bordersTemplate } from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
 import {
   offset,
@@ -220,8 +220,7 @@ function AutocompleteInner<T>(
     ...other
   } = props
   const anchorRef = useRef<HTMLInputElement>(null)
-  //for some reason, this call to useIsmounted is required for autocomplete without multiple to work
-  const isMounted = useIsMounted()
+
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
 
