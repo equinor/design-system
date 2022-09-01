@@ -66,10 +66,6 @@ const StyledList = styled(List)(
     overflow-y: auto;
     max-height: 300px;
     padding: 0;
-    position: absolute;
-    right: 0;
-    left: 0;
-    z-index: 1400;
   `,
 )
 
@@ -498,16 +494,15 @@ function AutocompleteInner<T>(
   const { x, y, refs, update, reference, floating, strategy } =
     useFloating<HTMLInputElement>({
       placement: 'bottom-start',
-      /* open: isOpen,
-      onOpenChange: openSelect, */
       middleware: [
         offset(4),
         flip(),
         shift({ padding: 8 }),
         size({
           apply({ rects, availableHeight, elements }) {
+            const anchorWidth = `${rects.reference.width}px`
             Object.assign(elements.floating.style, {
-              width: `${rects.reference.width}px`,
+              width: `${autoWidth ? anchorWidth : 'auto'}`,
               maxHeight: `${availableHeight}px`,
             })
           },
