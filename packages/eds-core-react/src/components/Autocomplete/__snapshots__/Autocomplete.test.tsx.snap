@@ -52,10 +52,6 @@ exports[`Autocomplete Matches snapshot 1`] = `
   overflow-y: auto;
   max-height: 300px;
   padding: 0;
-  position: absolute;
-  right: 0;
-  left: 0;
-  z-index: 1400;
 }
 
 @media (hover:hover) and (pointer:fine) {
@@ -69,12 +65,8 @@ exports[`Autocomplete Matches snapshot 1`] = `
 <ul
   aria-labelledby="downshift-0-label"
   class="c0 c1"
-  data-popper-escaped="true"
-  data-popper-placement="bottom-start"
-  data-popper-reference-hidden="true"
   id="downshift-0-menu"
   role="listbox"
-  style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 4px);"
 >
   <li
     active="false"

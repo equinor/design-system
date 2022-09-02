@@ -3,17 +3,16 @@ import {
   useState,
   HTMLAttributes,
   useEffect,
+  useLayoutEffect,
   useRef,
   useMemo,
   useCallback,
 } from 'react'
-import { createPortal } from 'react-dom'
 import {
   useCombobox,
   UseComboboxProps,
   useMultipleSelection,
   UseMultipleSelectionProps,
-  UseComboboxGetMenuPropsOptions,
 } from 'downshift'
 import styled, { ThemeProvider, css } from 'styled-components'
 import { Button } from '../Button'
@@ -27,13 +26,18 @@ import {
   multiSelect as multiSelectTokens,
   selectTokens as selectTokens,
 } from './Autocomplete.tokens'
-import {
-  useToken,
-  usePopper,
-  useIsMounted,
-  bordersTemplate,
-} from '@equinor/eds-utils'
+import { useToken, bordersTemplate } from '@equinor/eds-utils'
 import { AutocompleteOption } from './Option'
+import {
+  offset,
+  flip,
+  shift,
+  size,
+  autoUpdate,
+  useFloating,
+  useInteractions,
+  FloatingPortal,
+} from '@floating-ui/react-dom-interactions'
 
 const Container = styled.div`
   position: relative;
@@ -62,10 +66,6 @@ const StyledList = styled(List)(
     overflow-y: auto;
     max-height: 300px;
     padding: 0;
-    position: absolute;
-    right: 0;
-    left: 0;
-    z-index: 1400;
   `,
 )
 
@@ -219,10 +219,7 @@ function AutocompleteInner<T>(
     optionLabel,
     ...other
   } = props
-  const anchorRef = useRef()
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement>()
-  const [containerEl, setContainerEl] = useState<HTMLElement>()
-  const isMounted = useIsMounted()
+  const anchorRef = useRef<HTMLInputElement>(null)
 
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
@@ -482,43 +479,48 @@ function AutocompleteInner<T>(
   } = useCombobox(comboBoxProps)
 
   useEffect(() => {
-    if (anchorRef.current && isOpen) {
-      setAnchorEl(anchorRef.current)
-    } else {
-      setAnchorEl(null)
-    }
     if (isControlled) {
       setSelectedItems(selectedOptions)
     }
-    return () => {
-      setAnchorEl(null)
-      setContainerEl(null)
-    }
-  }, [anchorRef, isControlled, isOpen, selectedOptions, setSelectedItems])
-
-  //"Turn on" popper on load to position menu correctly and then turn it off
-  useEffect(() => {
-    if (anchorRef.current) {
-      setAnchorEl(anchorRef.current)
-      setTimeout(() => {
-        setAnchorEl(null)
-      }, 1)
-    }
-  }, [])
-
-  const { styles, attributes } = usePopper({
-    anchorEl,
-    popperEl: containerEl,
-    placement: 'bottom-start',
-    offset: 4,
-    autoWidth,
-  })
+  }, [isControlled, selectedOptions, setSelectedItems])
 
   const openSelect = () => {
     if (!isOpen && !(disabled || readOnly)) {
       openMenu()
     }
   }
+
+  const { x, y, refs, update, reference, floating, strategy } =
+    useFloating<HTMLInputElement>({
+      placement: 'bottom-start',
+      middleware: [
+        offset(4),
+        flip(),
+        shift({ padding: 8 }),
+        size({
+          apply({ rects, availableHeight, elements }) {
+            const anchorWidth = `${rects.reference.width}px`
+            Object.assign(elements.floating.style, {
+              width: `${autoWidth ? anchorWidth : 'auto'}`,
+              maxHeight: `${availableHeight}px`,
+            })
+          },
+          padding: 10,
+        }),
+      ],
+    })
+
+  const { getFloatingProps } = useInteractions([])
+
+  useLayoutEffect(() => {
+    reference(anchorRef.current)
+  }, [anchorRef, reference])
+
+  useLayoutEffect(() => {
+    if (refs.reference.current && refs.floating.current && isOpen) {
+      return autoUpdate(refs.reference.current, refs.floating.current, update)
+    }
+  }, [refs.reference, refs.floating, update, isOpen])
 
   const clear = () => {
     resetCombobox()
@@ -533,38 +535,46 @@ function AutocompleteInner<T>(
   )
 
   const optionsList = (
-    <StyledList
-      {...getMenuProps(
-        {
-          ref: setContainerEl,
-          style: styles.popper as UseComboboxGetMenuPropsOptions['style'],
-          'aria-multiselectable': multiple ? 'true' : null,
-          ...attributes.popper,
+    <div
+      {...getFloatingProps({
+        ref: floating,
+        style: {
+          position: strategy,
+          top: y ?? 0,
+          left: x ?? 0,
         },
-        { suppressRefError: true },
-      )}
+      })}
     >
-      {!isOpen
-        ? null
-        : availableItems.map((item, index) => {
-            const label = getLabel(item)
-            const isDisabled = optionDisabled(item)
-            const isSelected = selectedItemsLabels.includes(label)
-            return (
-              <AutocompleteOption
-                key={label}
-                value={label}
-                multiple={multiple}
-                highlighted={
-                  highlightedIndex === index && !isDisabled ? 'true' : 'false'
-                }
-                isSelected={isSelected}
-                isDisabled={isDisabled}
-                {...getItemProps({ item, index, disabled })}
-              />
-            )
-          })}
-    </StyledList>
+      <StyledList
+        {...getMenuProps(
+          {
+            'aria-multiselectable': multiple ? 'true' : null,
+          },
+          { suppressRefError: true },
+        )}
+      >
+        {!isOpen
+          ? null
+          : availableItems.map((item, index) => {
+              const label = getLabel(item)
+              const isDisabled = optionDisabled(item)
+              const isSelected = selectedItemsLabels.includes(label)
+              return (
+                <AutocompleteOption
+                  key={label}
+                  value={label}
+                  multiple={multiple}
+                  highlighted={
+                    highlightedIndex === index && !isDisabled ? 'true' : 'false'
+                  }
+                  isSelected={isSelected}
+                  isDisabled={isDisabled}
+                  {...getItemProps({ item, index, disabled })}
+                />
+              )
+            })}
+      </StyledList>
+    </div>
   )
 
   return (
@@ -584,7 +594,7 @@ function AutocompleteInner<T>(
               getDropdownProps({
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
-                ref: anchorRef,
+                ref: refs.reference,
               }),
             )}
             placeholder={placeholderText}
@@ -616,11 +626,13 @@ function AutocompleteInner<T>(
             )}
           </StyledButton>
         </Container>
-        {disablePortal
-          ? optionsList
-          : !isMounted
-          ? null
-          : createPortal(optionsList, document.body)}
+        {disablePortal ? (
+          optionsList
+        ) : (
+          <FloatingPortal id="eds-autocomplete-container">
+            {optionsList}
+          </FloatingPortal>
+        )}
       </Container>
     </ThemeProvider>
   )
