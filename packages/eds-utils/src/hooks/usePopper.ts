@@ -46,6 +46,7 @@ const autoWidthModifier = {
   },
 } as PopperModifier
 
+/** @deprecated This hook is no longer used internally and will be removed in a future version. */
 export const usePopper = ({
   anchorEl = null,
   popperEl = null,
