@@ -3,6 +3,7 @@ import { render, screen, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
 import { SidebarLinkType } from './SidebarLink'
+import { sidebar as tokens } from './SideBar.tokens'
 import { home, star_half } from '@equinor/eds-icons'
 
 const defaultMenuItems: SidebarLinkType[] = [
@@ -48,7 +49,9 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '66px' })
+    expect(screen.getAllByRole('generic')[2]).toHaveStyle({
+      width: tokens.minWidth,
+    })
   })
 
   it('Renders open width when open', () => {
@@ -60,7 +63,9 @@ describe('Sidebar', () => {
       </SideBar>,
     )
 
-    expect(screen.getAllByRole('generic')[2]).toHaveStyle({ width: '256px' })
+    expect(screen.getAllByRole('generic')[2]).toHaveStyle({
+      width: tokens.maxWidth,
+    })
   })
 
   it('Triggers onToggle callback when closed', () => {

@@ -4,6 +4,7 @@ import type { ComponentToken } from '@equinor/eds-tokens'
 const {
   colors: {
     ui: {
+      background__light: { rgba: background__light },
       background__medium: { rgba: background__medium },
       background__default: { rgba: background },
     },
@@ -26,7 +27,7 @@ const {
 
 export const sidebar: ComponentToken = {
   background,
-  minWidth: '66px',
+  minWidth: '72px',
   maxWidth: '256px',
   spacings: {
     top: large,
@@ -34,7 +35,7 @@ export const sidebar: ComponentToken = {
   },
   border: {
     type: 'bordergroup',
-    right: { color: background__medium, width: '1px', style: 'solid' },
+    right: { color: background__light, width: '2px', style: 'solid' },
   },
   entities: {
     actionButton: {
@@ -52,7 +53,7 @@ export const sidebar: ComponentToken = {
       },
       border: {
         type: 'bordergroup',
-        bottom: { color: background__medium, width: '1px', style: 'solid' },
+        bottom: { color: background__light, width: '2px', style: 'solid' },
       },
       states: {
         active: {
