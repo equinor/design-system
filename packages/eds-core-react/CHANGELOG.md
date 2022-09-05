@@ -8,25 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.21.0] - 2022-09-05
 
 ### Fixed
-- 💄 Fixes to make sure both `style` and `className` are applied to outermost element (switch, NativeSelect, Radio, Checkbox, Search, Autocomplete) by @oddvernes in https://github.com/equinor/design-system/pull/2367
+- 💄 Fixes to make sure both `style` and `className` are applied to outermost element (changes to `switch`, `NativeSelect`, `Radio`, `Checkbox`, `Search`, `Autocomplete`) by @oddvernes in https://github.com/equinor/design-system/pull/2367
 - 🐛 Popover: changed to `overflow: auto` by @oddvernes in https://github.com/equinor/design-system/pull/2431
 
 ### Added
-- ✨ `Autocomplete`: added disable clear button prop (`hideClearButton`) by @Simrayz in https://github.com/equinor/design-system/pull/2378
+- ✨ `Autocomplete`: Added disable clear button prop (`hideClearButton`) by @Simrayz in https://github.com/equinor/design-system/pull/2378
 - ✨ Added `width` prop to `SideSheet` by @martalalik in https://github.com/equinor/design-system/pull/2399
 - ✨ `Button` is now a proper overridable component (can be rendered as another component/element-type with the `as` prop and typescript will only allow valid props for that component) by @oddvernes in https://github.com/equinor/design-system/pull/2410
 - ✨ Make `Typography` an overridable component by @oddvernes in https://github.com/equinor/design-system/pull/2432
 - ✨ Make `Breadcrumb` an overridable component by @oddvernes in https://github.com/equinor/design-system/pull/2442
-
 - ✨ Created `Button.Group` wrapper component by @martalalik in https://github.com/equinor/design-system/pull/2420
+
 ### Changed
-- ♻️ replaced `popperjs` with `floating-UI` in `Tooltip` by @oddvernes in https://github.com/equinor/design-system/pull/2377
-- ♻️ replaced `popperjs` with `floating-UI` in `Popover` by @oddvernes in https://github.com/equinor/design-system/pull/2384
-- ♻️ replaced `popperjs` with `floating-UI` in `Menu` by @oddvernes in https://github.com/equinor/design-system/pull/2405
-- ♻️ replaced `popperjs` with `floating-UI` in `Autocomplete` by @oddvernes in https://github.com/equinor/design-system/pull/2460
+- ♻️ Replaced `popperjs` with `floating-UI` in `Tooltip` by @oddvernes in https://github.com/equinor/design-system/pull/2377
+- ♻️ Replaced `popperjs` with `floating-UI` in `Popover` by @oddvernes in https://github.com/equinor/design-system/pull/2384
+- ♻️ Replaced `popperjs` with `floating-UI` in `Menu` by @oddvernes in https://github.com/equinor/design-system/pull/2405
+- ♻️ Replaced `popperjs` with `floating-UI` in `Autocomplete` by @oddvernes in https://github.com/equinor/design-system/pull/2460
 - 📝 Updated `Typography` documentation in storybook by @martalalik in https://github.com/equinor/design-system/pull/2247
 - 🗑️ `Card`: removed logic to style cursor based on `onClick` listener being present by @oddvernes in https://github.com/equinor/design-system/pull/2436
-- 💄 `Topbar` inline padding reduced from 40 to 24px by @oddvernes in https://github.com/equinor/design-system/pull/2451
+- 💄 `Topbar`: inline padding reduced from 40 to 24px by @oddvernes in https://github.com/equinor/design-system/pull/2451
 
 ## [0.20.4] - 2022-06-24
 
