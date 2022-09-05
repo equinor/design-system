@@ -13,7 +13,6 @@ specifiers:
   '@equinor/eds-tokens': workspace:*
   '@equinor/eds-utils': workspace:*
   '@mdx-js/react': 1.6.22
-  '@popperjs/core': 2.9.2
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.0
   '@rollup/plugin-node-resolve': ^13.3.0
@@ -66,7 +65,6 @@ dependencies:
   '@equinor/eds-icons': link:../eds-icons
   '@equinor/eds-tokens': link:../eds-tokens
   '@equinor/eds-utils': link:../eds-utils
-  '@popperjs/core': 2.9.2
   date-fns: 2.28.0
   downshift: 6.1.7_react@17.0.2
   react-datepicker: 4.7.0_sfoxds7t5ydpegc3knd667wn6m
@@ -4938,6 +4936,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -6829,6 +6828,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -9473,6 +9473,7 @@ packages:
 
   /nan/2.15.0:
     resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
+    requiresBuild: true
     dev: true
     optional: true
 

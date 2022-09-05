@@ -13,7 +13,6 @@ specifiers:
   '@equinor/eds-utils': workspace:*
   '@floating-ui/react-dom-interactions': ^0.6.6
   '@mdx-js/react': 1.6.22
-  '@popperjs/core': 2.9.2
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.0
   '@rollup/plugin-node-resolve': ^13.3.0
@@ -63,7 +62,6 @@ dependencies:
   '@equinor/eds-tokens': link:../eds-tokens
   '@equinor/eds-utils': link:../eds-utils
   '@floating-ui/react-dom-interactions': 0.6.6_wsn53pslsboo2rytzocxzsur7i
-  '@popperjs/core': 2.9.2
   downshift: 6.1.7_react@17.0.2
   react-fast-compare: 3.2.0
 
@@ -2220,6 +2218,7 @@ packages:
 
   /@popperjs/core/2.9.2:
     resolution: {integrity: sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==}
+    dev: true
 
   /@rollup/plugin-babel/5.3.1_wkwocc4dsk7bd65om3dnrhmmbq:
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
