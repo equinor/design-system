@@ -1,0 +1,52 @@
+import { PropsTable, Story, Links } from './../../../.storybook/components'
+import { SideBar } from '.'
+
+# SideBar
+
+Sidebar is a layout component anchored to the left hand side of the screen. 
+It has a toggleable collapsed and expanded state.
+
+
+<Links 
+    
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=28061%3A102280"
+    /* documentationUrl="does not exist yet" */
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-lab-react/src/components/SideBar/SideBar.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="components-sidebar--primary" />
+<PropsTable />
+
+## Usage
+
+`SideBar` is anchored to the left side of the screen. If it is used together with `TopBar`, 
+`SideBar` should be below it, and not run over or under the `TopBar`.
+
+<ul>
+    <li>The Sidebar does not scroll away, being a consistent guidepost to users.</li>
+</ul>
+
+```tsx
+import { SideBar } from '@equinor/eds-lab-react'
+
+<SideBar>
+    <SideBar.Content>
+      <SideBar.Toggle />
+      <SideBar.Link name="home" icon={home} href="/" />
+      <SideBar.Link name="dashboard" icon={dashboard} href="/dashboard" />
+    </SideBar.Content>
+</SideBar>
+```
+
+## Examples
+
+### With custom content
+
+Use <code>useSideBar</code> to detect sidebar state in your custom content if it needs to be modified based on open/closed state.
+
+<Story id="components-sidebar--custom-content" />
+
+### With Button and CurrentUrl
+
+<Story id="components-sidebar--with-button-and-current-url" />

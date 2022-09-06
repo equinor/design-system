@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react'
+import { Story, ComponentMeta } from '@storybook/react'
 import styled from 'styled-components'
 import {
   dashboard,
@@ -14,21 +14,23 @@ import {
   useSideBar,
 } from '../../components/SideBar'
 import { TopBar } from '@equinor/eds-core-react'
+import page from './SideBar.docs.mdx'
 
 const { Content, Footer, Link, Toggle, Button } = SideBar
 
 export default {
   title: 'Components/SideBar',
-  body: `
-    Sidebar component imported from Amplify
-
-  `,
   component: SideBar,
   subcomponents: { Content, Footer, Link, Toggle, Button },
   args: {
     open: true,
   },
-} as Meta
+  parameters: {
+    docs: {
+      page,
+    },
+  },
+} as ComponentMeta<typeof SideBar>
 
 const SidebarContainer = styled.div`
   height: 60vh;
@@ -152,13 +154,6 @@ export const CustomContent: Story = () => {
       </SideBar>
     </SidebarContainer>
   )
-}
-CustomContent.parameters = {
-  docs: {
-    description: {
-      story: ` Use <code>useSideBar</code> to detect sidebar state in your custom content if it needs to be modified based on open/closed state.`,
-    },
-  },
 }
 
 export const WithButtonAndCurrentUrl: Story = () => {
