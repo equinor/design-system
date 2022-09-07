@@ -1,15 +1,20 @@
-import { forwardRef } from 'react'
-import { createPortal } from 'react-dom'
+import { forwardRef, useMemo } from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
 import {
   typographyTemplate,
   bordersTemplate,
   useToken,
+  mergeRefs,
 } from '@equinor/eds-utils'
 import { Paper } from '../Paper'
 import { Scrim } from '../Scrim'
 import { dialog as dialogToken } from './Dialog.tokens'
 import { useEds } from '../EdsProvider'
+import {
+  FloatingPortal,
+  useFloating,
+  FloatingFocusManager,
+} from '@floating-ui/react-dom-interactions'
 
 const StyledDialog = styled(Paper).attrs<DialogProps>({
   tabIndex: 0,
@@ -43,34 +48,37 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
   { children, open, onClose, isDismissable = false, ...props },
   ref,
 ) {
-  const rest = {
-    ...props,
-    open,
-    ref,
-  }
   const { density } = useEds()
   const token = useToken({ density }, dialogToken)
+  const { floating, context } = useFloating()
   const handleDismiss = () => {
     onClose && onClose()
   }
 
-  if (!open) {
-    return null
+  const dialogRef = useMemo(
+    () => mergeRefs<HTMLDivElement>(floating, ref),
+    [floating, ref],
+  )
+
+  const rest = {
+    ...props,
+    open,
   }
 
   return (
-    <>
-      {createPortal(
-        <ThemeProvider theme={token}>
+    <FloatingPortal id="eds-dialog-container">
+      <ThemeProvider theme={token}>
+        {open && (
           <Scrim open isDismissable={isDismissable} onClose={handleDismiss}>
-            <StyledDialog elevation="above_scrim" {...rest}>
-              {children}
-            </StyledDialog>
+            <FloatingFocusManager context={context} modal returnFocus>
+              <StyledDialog elevation="above_scrim" {...rest} ref={dialogRef}>
+                {children}
+              </StyledDialog>
+            </FloatingFocusManager>
           </Scrim>
-        </ThemeProvider>,
-        document.body,
-      )}
-    </>
+        )}
+      </ThemeProvider>
+    </FloatingPortal>
   )
 })
 
