@@ -1,1 +1,1 @@
-export { HelperText } from './HelperText'
+export * from './HelperText'

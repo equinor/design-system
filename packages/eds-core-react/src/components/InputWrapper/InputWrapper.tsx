@@ -63,12 +63,12 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
     const inputToken = tokens[actualVariant]
     const token = useToken({ density }, inputToken)
 
-    const helperTextColor = useMemo(() => {
+    const helperTextColor = useCallback(() => {
       const _token = token()
       return other.disabled
         ? _token.entities.helperText.states.disabled.typography.color
         : _token.entities.helperText.typography.color
-    }, [token, other.disabled])
+    }, [token, other.disabled])()
 
     const hasHelperText = Boolean(helperProps?.text)
     const hasLabel = Boolean(label || labelProps?.label)

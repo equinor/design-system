@@ -22,7 +22,7 @@ const Text = styled.p`
   ${typographyMixin(tokens.typography)};
 `
 
-type HelperTextProps = {
+export type HelperTextProps = {
   /** Helper text */
   text?: string
   /** Icon */

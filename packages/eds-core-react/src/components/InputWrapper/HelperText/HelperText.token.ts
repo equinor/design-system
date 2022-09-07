@@ -37,26 +37,3 @@ export const helperText: HelperTextProps = {
     },
   },
 }
-
-const colorVariants = {
-  default: {
-    color: colors.text.static_icons__tertiary.hex,
-    disabledColor: colors.interactive.disabled__text.hex,
-    focusColor: colors.text.static_icons__tertiary.hex,
-  },
-  error: {
-    color: colors.interactive.danger__text.hex,
-    disabledColor: colors.interactive.disabled__text.hex,
-    focusColor: colors.interactive.danger__hover.hex,
-  },
-  warning: {
-    color: colors.interactive.warning__text.hex,
-    disabledColor: colors.interactive.disabled__text.hex,
-    focusColor: colors.interactive.warning__hover.hex,
-  },
-  success: {
-    color: colors.interactive.success__text.hex,
-    disabledColor: colors.interactive.disabled__text.hex,
-    focusColor: colors.interactive.success__hover.hex,
-  },
-}

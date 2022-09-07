@@ -90,6 +90,7 @@ const Adornments = styled.div<AdornmentProps>(({ token }) => {
     top: ${token.spacings.top};
     bottom: ${token.spacings.bottom};
     display: flex;
+    align-items: center;
     ${typographyMixin(token.entities.adornment.typography)}
     color: var(--eds-input-adornment-color);
   `

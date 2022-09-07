@@ -105,6 +105,9 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       text: helperText,
       icon: helperIcon,
       disabled,
+      style: {
+        alignItems: '',
+      },
     }
 
     const containerProps = {
