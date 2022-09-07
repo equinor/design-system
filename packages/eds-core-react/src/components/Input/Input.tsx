@@ -1,9 +1,10 @@
 import {
-  InputHTMLAttributes,
   forwardRef,
   ReactNode,
   useState,
   useCallback,
+  CSSProperties,
+  ElementType,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { ComponentToken } from '@equinor/eds-tokens'
@@ -32,7 +33,6 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     flex-direction: row;
     border: none;
     box-sizing: border-box;
-    height: ${token.height};
     box-shadow: ${token.boxShadow};
     background: ${token.background};
     ${outlineTemplate(token.outline)}
@@ -87,10 +87,9 @@ type AdornmentProps = {
 const Adornments = styled.div<AdornmentProps>(({ token }) => {
   return css`
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: ${token.spacings.top};
+    bottom: ${token.spacings.bottom};
     display: flex;
-    align-items: center;
     ${typographyMixin(token.entities.adornment.typography)}
     color: var(--eds-input-adornment-color);
   `
@@ -130,8 +129,11 @@ export type InputProps = {
   /** Right adornments */
   rightAdornments?: ReactNode
   /** Cast the input to another element */
-  as?: 'input' | 'textarea'
-} & InputHTMLAttributes<HTMLInputElement>
+  as?: ElementType
+  /**  */
+  className?: string
+  style?: CSSProperties
+}
 
 export const Input: OverridableComponent<InputProps, HTMLInputElement> =
   forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -150,44 +152,35 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
   ) {
     const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
     const { density } = useEds()
-    const token = useToken({ density }, inputVariant)()
+    const _token = useToken({ density }, inputVariant)()
 
     const [rightAdornmentsRef, setRightAdornmentsRef] =
       useState<HTMLDivElement>()
     const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
 
-    const rightAdornmentsWidth = useCallback(() => {
-      if (rightAdornmentsRef) {
-        return rightAdornmentsRef.offsetWidth
-      }
-      return 0
-    }, [rightAdornmentsRef])()
-
-    const leftAdornmentsWidth = useCallback(() => {
-      if (leftAdornmentsRef) {
-        return leftAdornmentsRef.offsetWidth
-      }
-      return 0
-    }, [leftAdornmentsRef])()
-
-    const updatedToken = useCallback(
-      (): ComponentToken => ({
-        ...token,
+    const token = useCallback((): ComponentToken => {
+      const leftAdornmentsWidth = leftAdornmentsRef
+        ? leftAdornmentsRef.clientWidth
+        : 0
+      const rightAdornmentsWidth = rightAdornmentsRef
+        ? rightAdornmentsRef.clientWidth
+        : 0
+      return {
+        ..._token,
         spacings: {
-          ...token.spacings,
-          left: `${leftAdornmentsWidth + parseInt(token.spacings.left)}px`,
-          right: `${rightAdornmentsWidth + parseInt(token.spacings.right)}px`,
+          ..._token.spacings,
+          left: `${leftAdornmentsWidth + parseInt(_token.spacings.left)}px`,
+          right: `${rightAdornmentsWidth + parseInt(_token.spacings.right)}px`,
         },
-      }),
-      [leftAdornmentsWidth, rightAdornmentsWidth, token],
-    )()
+      }
+    }, [leftAdornmentsRef, rightAdornmentsRef, _token])()
 
     const inputProps = {
       ref,
       type,
       disabled,
       readOnly,
-      token: updatedToken,
+      token,
       style: {
         resize: style?.resize,
       },
@@ -199,16 +192,16 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       readOnly,
       className,
       style,
-      token: updatedToken,
+      token,
     }
 
     const leftAdornmentProps = {
       ref: setLeftAdornmentsRef,
-      token: updatedToken,
+      token,
     }
     const rightAdornmentProps = {
       ref: setRightAdornmentsRef,
-      token: updatedToken,
+      token,
     }
 
     return (
@@ -219,7 +212,13 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
             {leftAdornments}
           </LeftAdornments>
         ) : null}
-        <StyledInput {...inputProps} />
+        <StyledInput
+          {...inputProps}
+          style={{
+            paddingLeft: token.spacings.left,
+            paddingRight: token.spacings.right,
+          }}
+        />
         {rightAdornments ? (
           <RightAdornments {...rightAdornmentProps}>
             {rightAdornments}

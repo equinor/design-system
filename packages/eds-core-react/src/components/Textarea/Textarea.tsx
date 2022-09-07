@@ -1,90 +1,16 @@
-import { forwardRef, useState, TextareaHTMLAttributes, useMemo } from 'react'
-import styled, { css } from 'styled-components'
-import * as tokens from '../Input/Input.tokens'
-import type { InputToken } from '../Input/Input.tokens'
 import {
-  typographyTemplate,
-  spacingsTemplate,
-  outlineTemplate,
-  useAutoResize,
-  mergeRefs,
-} from '@equinor/eds-utils'
+  forwardRef,
+  useState,
+  TextareaHTMLAttributes,
+  useCallback,
+} from 'react'
+import * as tokens from '../Input/Input.tokens'
+import { mergeRefs, useAutoResize } from '@equinor/eds-utils'
 import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
+import { Input } from '../Input'
 
 const { input } = tokens
-
-const Variation = ({ variant, token, density }: StyledProps) => {
-  if (!variant) {
-    return ``
-  }
-
-  const {
-    outline,
-    states: {
-      focus: { outline: focusOutline },
-    },
-    boxShadow,
-  } = token
-
-  let spacings = input.spacings
-  if (density === 'compact') {
-    spacings = input.modes.compact.spacings
-  }
-
-  return css`
-    border: none;
-    ${spacingsTemplate(spacings)}
-    ${outlineTemplate(outline)}
-    box-shadow: ${boxShadow};
-
-    &:active,
-    &:focus {
-      outline-offset: 0;
-      box-shadow: none;
-      ${outlineTemplate(focusOutline)}
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      box-shadow: none;
-      outline: none;
-      &:focus,
-      &:active {
-        outline: none;
-      }
-    }
-  `
-}
-
-type StyledProps = {
-  token: InputToken
-  variant: string
-  density: string
-}
-
-const StyledTextarea = styled.textarea<StyledProps>`
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  border: none;
-  appearance: none;
-  background: ${input.background};
-  height: auto;
-  ${typographyTemplate(input.typography)}
-
-  ${Variation}
-  &::placeholder {
-    color: ${input.entities.placeholder.typography.color};
-  }
-  &:disabled {
-    color: ${input.states.disabled.typography.color};
-  }
-  &[readOnly] {
-    box-shadow: ${input.states.readOnly.boxShadow};
-    background: ${input.states.readOnly.background};
-  }
-`
 
 export type TextareaProps = {
   /** Placeholder */
@@ -122,10 +48,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const padding = parseInt(top) + parseInt(bottom)
     const maxHeight = parseFloat(lineHeight) * fontSize * rowsMax + padding
     useAutoResize(textareaEl, rowsMax ? maxHeight : null)
-    const combinedRef = useMemo(
+    const combinedRef = useCallback(
       () => mergeRefs<HTMLTextAreaElement>(ref, setTextareaEl),
       [setTextareaEl, ref],
-    )
+    )()
 
     const inputProps = {
       ref: combinedRef,
@@ -137,6 +63,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...other,
     }
 
-    return <StyledTextarea {...inputProps} />
+    return <Input as="textarea" {...inputProps} />
   },
 )
