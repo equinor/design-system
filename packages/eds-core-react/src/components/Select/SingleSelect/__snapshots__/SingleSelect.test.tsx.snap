@@ -32,9 +32,6 @@ exports[`SingleSelect Matches snapshot 1`] = `
   --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
   --eds-input-color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
   position: relative;
-  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-  --eds-input-color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
-  position: relative;
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -45,27 +42,10 @@ exports[`SingleSelect Matches snapshot 1`] = `
   flex-direction: row;
   border: none;
   box-sizing: border-box;
-  height: 36px;
   box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
   background: var(--eds_ui_background__light,rgba(247,247,247,1));
   outline: 1px solid transparent;
   outline-offset: 0px;
-}
-
-.c4:focus-within {
-  box-shadow: none;
-  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  outline-offset: 0px;
-}
-
-.c6 {
-  width: 100%;
-  border: none;
-  background: transparent;
-  padding-left: 8px;
-  padding-top: 6px;
-  padding-right: 8px;
-  padding-bottom: 6px;
 }
 
 .c4:focus-within {
@@ -304,6 +284,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
           autocomplete="off"
           class="c6"
           id="downshift-0-input"
+          style="padding-left: 8px; padding-right: 8px;"
           type="text"
           value=""
         />
