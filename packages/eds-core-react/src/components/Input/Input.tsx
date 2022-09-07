@@ -82,32 +82,34 @@ const StyledInput = styled.input(({ token }: StyledProps) => {
 
 type AdornmentProps = {
   token: InputToken
+  position?: 'left' | 'right'
 }
 
-const Adornments = styled.div<AdornmentProps>(({ token }) => {
-  return css`
-    position: absolute;
-    top: ${token.spacings.top};
-    bottom: ${token.spacings.bottom};
-    display: flex;
-    align-items: center;
-    ${typographyMixin(token.entities.adornment.typography)}
-    color: var(--eds-input-adornment-color);
-  `
-})
+const Adornments = styled.div<AdornmentProps>(
+  ({ token, position = 'right' }) => {
+    return css`
+      position: absolute;
+      top: ${token.spacings.top};
+      bottom: ${token.spacings.bottom};
+      display: flex;
+      align-items: center;
+      ${typographyMixin(token.entities.adornment.typography)}
+      color: var(--eds-input-adornment-color);
 
-const LeftAdornments = styled(Adornments)(
-  ({ token }) => css`
-    left: 0;
-    padding-left: ${token.entities.adornment.spacings.left};
-  `,
-)
-
-const RightAdornments = styled(Adornments)(
-  ({ token }) => css`
-    right: 0;
-    padding-right: ${token.entities.adornment.spacings.right};
-  `,
+      ${() => {
+        if (position === 'left') {
+          return css`
+            left: 0;
+            padding-left: ${token.entities.adornment.spacings.left};
+          `
+        }
+        return css`
+          right: 0;
+          padding-right: ${token.entities.adornment.spacings.right};
+        `
+      }}
+    `
+  },
 )
 
 type StyledProps = {
@@ -209,9 +211,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       // Not using <ThemeProvider> because of cascading styling messing with adornments
       <Container {...containerProps}>
         {leftAdornments ? (
-          <LeftAdornments {...leftAdornmentProps}>
+          <Adornments position="left" {...leftAdornmentProps}>
             {leftAdornments}
-          </LeftAdornments>
+          </Adornments>
         ) : null}
         <StyledInput
           {...inputProps}
@@ -221,9 +223,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           }}
         />
         {rightAdornments ? (
-          <RightAdornments {...rightAdornmentProps}>
+          <Adornments position="right" {...rightAdornmentProps}>
             {rightAdornments}
-          </RightAdornments>
+          </Adornments>
         ) : null}
       </Container>
     )
