@@ -82,8 +82,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   ) {
     const helperTextId = useId(null, 'helpertext')
 
-    const fieldProps = {
-      'aria-describedby': helperTextId,
+    let fieldProps = {
       'aria-invalid': variant === 'error' || undefined,
       disabled,
       placeholder,
@@ -101,8 +100,8 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       ...other,
     }
 
-    const helperProps = {
-      id: helperTextId,
+    let helperProps = {
+      id: null,
       text: helperText,
       icon: helperIcon,
       disabled,
@@ -120,6 +119,17 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       label,
       meta,
       disabled,
+    }
+
+    if (helperText) {
+      fieldProps = {
+        'aria-describedby': helperTextId,
+        ...fieldProps,
+      }
+      helperProps = {
+        id: helperTextId,
+        ...helperProps,
+      }
     }
 
     return (
