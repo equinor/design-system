@@ -88,22 +88,19 @@ const StyledInput = styled.input(
 
 type AdornmentProps = {
   token: InputToken
-  position?: 'left' | 'right'
 }
 
-const Adornments = styled.div<AdornmentProps>(
-  ({ token, position = 'right' }) => {
-    return css`
-      position: absolute;
-      top: ${token.spacings.top};
-      bottom: ${token.spacings.bottom};
-      display: flex;
-      align-items: center;
-      ${typographyMixin(token.entities.adornment.typography)}
-      color: var(--eds-input-adornment-color);
-    `
-  },
-)
+const Adornments = styled.div<AdornmentProps>(({ token }) => {
+  return css`
+    position: absolute;
+    top: ${token.spacings.top};
+    bottom: ${token.spacings.bottom};
+    display: flex;
+    align-items: center;
+    ${typographyMixin(token.entities.adornment.typography)}
+    color: var(--eds-input-adornment-color);
+  `
+})
 
 const LeftAdornments = styled(Adornments)(
   ({ token }) => css`
@@ -237,7 +234,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           {...inputProps}
         />
         {rightAdornments ? (
-          <RightAdornments position="right" {..._rightAdornmentProps}>
+          <RightAdornments {..._rightAdornmentProps}>
             {rightAdornments}
           </RightAdornments>
         ) : null}
