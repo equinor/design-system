@@ -140,6 +140,10 @@ export type InputProps = {
   leftAdornmentsProps?: ComponentPropsWithoutRef<'div'>
   /** Right adornments props */
   rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
+  /** Manually specify left adornments width. The width will be the dom element width if not defined */
+  leftAdornmentsWidth?: number
+  /**  Manually specify right adornments width. The width will be the dom element width if not defined */
+  rightAdornmentsWidth?: number
   /** Cast the input to another element */
   as?: ElementType
   /**  */
@@ -160,6 +164,8 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       style,
       leftAdornmentsProps,
       rightAdornmentsProps,
+      leftAdornmentsWidth,
+      rightAdornmentsWidth,
       ...other
     },
     ref,
@@ -173,21 +179,27 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
 
     const token = useCallback((): ComponentToken => {
-      const leftAdornmentsWidth = leftAdornmentsRef
-        ? leftAdornmentsRef.clientWidth
-        : 0
-      const rightAdornmentsWidth = rightAdornmentsRef
-        ? rightAdornmentsRef.clientWidth
-        : 0
+      const _leftAdornmentsWidth =
+        leftAdornmentsWidth ||
+        (leftAdornmentsRef ? leftAdornmentsRef.clientWidth : 0)
+      const _rightAdornmentsWidth =
+        rightAdornmentsWidth ||
+        (rightAdornmentsRef ? rightAdornmentsRef.clientWidth : 0)
       return {
         ..._token,
         spacings: {
           ..._token.spacings,
-          left: `${leftAdornmentsWidth + parseInt(_token.spacings.left)}px`,
-          right: `${rightAdornmentsWidth + parseInt(_token.spacings.right)}px`,
+          left: `${_leftAdornmentsWidth + parseInt(_token.spacings.left)}px`,
+          right: `${_rightAdornmentsWidth + parseInt(_token.spacings.right)}px`,
         },
       }
-    }, [leftAdornmentsRef, rightAdornmentsRef, _token])()
+    }, [
+      leftAdornmentsWidth,
+      leftAdornmentsRef,
+      rightAdornmentsWidth,
+      rightAdornmentsRef,
+      _token,
+    ])()
 
     const inputProps = {
       ref,
