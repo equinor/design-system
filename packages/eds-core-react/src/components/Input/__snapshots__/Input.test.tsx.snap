@@ -47,6 +47,8 @@ exports[`Input Matches snapshot 1`] = `
   letter-spacing: 0.025em;
   line-height: 1.500em;
   outline: none;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .c1::-webkit-input-placeholder {
@@ -77,7 +79,7 @@ exports[`Input Matches snapshot 1`] = `
     <input
       class="c1"
       readonly=""
-      style="padding-left: 8px; padding-right: 8px;"
+      style="resize: none;"
       type="text"
       value="input value"
     />

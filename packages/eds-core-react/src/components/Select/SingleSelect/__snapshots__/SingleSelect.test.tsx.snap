@@ -71,6 +71,8 @@ exports[`SingleSelect Matches snapshot 1`] = `
   letter-spacing: 0.025em;
   line-height: 1.500em;
   outline: none;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .c6::-webkit-input-placeholder {
@@ -284,7 +286,7 @@ exports[`SingleSelect Matches snapshot 1`] = `
           autocomplete="off"
           class="c6"
           id="downshift-0-input"
-          style="padding-left: 8px; padding-right: 8px;"
+          style="resize: none;"
           type="text"
           value=""
         />
