@@ -101,23 +101,23 @@ const Adornments = styled.div<AdornmentProps>(
       align-items: center;
       ${typographyMixin(token.entities.adornment.typography)}
       color: var(--eds-input-adornment-color);
-
-      ${() => {
-        if (position === 'left') {
-          return css`
-            left: 0;
-            padding-left: ${token.entities.adornment.spacings.left};
-          `
-        }
-        return css`
-          right: 0;
-          padding-right: ${token.entities.adornment.spacings.right};
-        `
-      }}
     `
   },
 )
 
+const LeftAdornments = styled(Adornments)(
+  ({ token }) => css`
+    left: 0;
+    padding-left: ${token.entities.adornment.spacings.left};
+  `,
+)
+
+const RightAdornments = styled(Adornments)(
+  ({ token }) => css`
+    right: 0;
+    padding-right: ${token.entities.adornment.spacings.right};
+  `,
+)
 type StyledProps = {
   token: InputToken
   paddingLeft?: string
@@ -227,9 +227,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       // Not using <ThemeProvider> because of cascading styling messing with adornments
       <Container {...containerProps}>
         {leftAdornments ? (
-          <Adornments position="left" {..._leftAdornmentProps}>
+          <LeftAdornments {..._leftAdornmentProps}>
             {leftAdornments}
-          </Adornments>
+          </LeftAdornments>
         ) : null}
         <StyledInput
           paddingLeft={token.spacings.left}
@@ -237,9 +237,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           {...inputProps}
         />
         {rightAdornments ? (
-          <Adornments position="right" {..._rightAdornmentProps}>
+          <RightAdornments position="right" {..._rightAdornmentProps}>
             {rightAdornments}
-          </Adornments>
+          </RightAdornments>
         ) : null}
       </Container>
     )
