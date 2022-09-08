@@ -46,9 +46,9 @@ export default {
     helperIcon: {
       options: ['error', 'warning', 'success'],
       mapping: {
-        error: [<Icon name="error_filled" key="error" size={18} />],
-        warning: [<Icon name="warning_filled" key="warning" size={18} />],
-        success: [<Icon name="thumbs_up" key="thumbs" size={18} />],
+        error: [<Icon name="error_filled" key="error" size={16} />],
+        warning: [<Icon name="warning_filled" key="warning" size={16} />],
+        success: [<Icon name="thumbs_up" key="thumbs" size={16} />],
       },
       control: {
         type: 'select',
@@ -298,7 +298,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Validation error"
       variant="error"
-      helperIcon={<Icon name="error_filled" title="Error" />}
+      helperIcon={<Icon name="error_filled" title="Error" size={16} />}
     />
     <TextField
       id="storybook-error-two"
@@ -318,7 +318,7 @@ export const Variants: Story<TextFieldProps> = () => (
       rows={3}
       helperText="Validation error"
       variant="error"
-      helperIcon={<Icon name="error_filled" title="Error" />}
+      helperIcon={<Icon name="error_filled" title="Error" size={16} />}
     />
     <TextField
       id="storybook-warning"
@@ -327,7 +327,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper/warning text"
       variant="warning"
-      helperIcon={<Icon name="warning_filled" title="Warning" />}
+      helperIcon={<Icon name="warning_filled" title="Warning" size={16} />}
     />
     <TextField
       id="storybook-warning-two"
@@ -356,7 +356,7 @@ export const Variants: Story<TextFieldProps> = () => (
       meta="Meta"
       helperText="Helper text"
       variant="success"
-      helperIcon={<Icon name="thumbs_up" title="Success" />}
+      helperIcon={<Icon name="thumbs_up" title="Success" size={16} />}
     />
     <TextField
       id="storybook-success-two"
@@ -376,7 +376,7 @@ export const Variants: Story<TextFieldProps> = () => (
       rows={3}
       helperText="Helper text"
       variant="success"
-      helperIcon={<Icon name="thumbs_up" title="Success" />}
+      helperIcon={<Icon name="thumbs_up" title="Success" size={16} />}
     />
   </>
 )
@@ -531,7 +531,7 @@ export const Compact: Story<TextFieldProps> = () => {
           label="Single line"
           meta="Meta"
           unit="km/h"
-          helperIcon={<Icon data={info_circle} title="Info" />}
+          helperIcon={<Icon data={info_circle} title="Info" size={16} />}
           helperText="Helper information text over several lines so that it breaks"
         />
       </div>
