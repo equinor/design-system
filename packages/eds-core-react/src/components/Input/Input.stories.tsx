@@ -22,7 +22,7 @@ export default {
   decorators: [
     (Story) => {
       return (
-        <Stack>
+        <Stack align="stretch" direction="column">
           <Story />
         </Stack>
       )
@@ -33,53 +33,20 @@ export default {
 export const Introduction: Story<InputProps> = (args) => {
   return <Input {...args} />
 }
-Introduction.decorators = [
-  (Story) => {
-    return (
-      <Stack direction="column" align="start">
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Types: Story<InputProps> = () => (
   <>
     <div>
-      <Label htmlFor="textfield-normal" label="Normal" />
-      <Input
-        id="textfield-normal"
-        placeholder="Placeholder text"
-        autoComplete="off"
-      />
+      <Label htmlFor="textfield-normal" label="Text" />
+      <Input id="textfield-normal" autoComplete="off" />
     </div>
     <div>
       <Label htmlFor="textfield-number" label="Number" />
-      <Input
-        type="number"
-        id="textfield-number"
-        placeholder="Placeholder text"
-      />
-    </div>
-    <div>
-      <Label htmlFor="textfield-search" label="Search" />
-      <Input
-        type="search"
-        id="textfield-search"
-        placeholder="Placeholder text"
-      />
+      <Input type="number" id="textfield-number" />
     </div>
     <div>
       <Label htmlFor="textfield-password" label="Password" />
-      <Input
-        type="password"
-        id="textfield-password"
-        placeholder="Placeholder text"
-      />
-    </div>
-    <div>
-      <Label htmlFor="textfield-email" label="Email" />
-      <Input type="email" id="textfield-email" placeholder="Placeholder text" />
+      <Input type="password" id="textfield-password" />
     </div>
   </>
 )
@@ -147,15 +114,6 @@ export const ReadOnly: Story<InputProps> = () => (
   </>
 )
 ReadOnly.storyName = 'Read only'
-ReadOnly.decorators = [
-  (Story) => {
-    return (
-      <Stack direction="column" align="start">
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Accessiblity: Story<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
@@ -166,15 +124,6 @@ export const Accessiblity: Story<InputProps> = () => {
     </>
   )
 }
-Accessiblity.decorators = [
-  (Story) => {
-    return (
-      <Stack direction="column" align="start">
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Compact: Story<InputProps> = () => {
   // To wrap the input component inside the label element is not yet supported
@@ -270,11 +219,9 @@ export const WithAdornments: Story<InputProps> = () => {
         placeholder="Placeholder text Placeholder text"
         value="Some text Some textSome textSome text"
         leftAdornments={
-          <>
-            <SmallButton disabled variant="ghost_icon">
-              IT
-            </SmallButton>
-          </>
+          <SmallButton disabled variant="ghost_icon">
+            IT
+          </SmallButton>
         }
         rightAdornments={
           <>
@@ -288,11 +235,7 @@ export const WithAdornments: Story<InputProps> = () => {
         type="text"
         id="adornments-readonly"
         readOnly
-        leftAdornments={
-          <>
-            <SmallButton variant="ghost_icon">IT</SmallButton>
-          </>
-        }
+        leftAdornments={<SmallButton variant="ghost_icon">IT</SmallButton>}
         rightAdornments={
           <>
             unit
@@ -303,16 +246,6 @@ export const WithAdornments: Story<InputProps> = () => {
     </EdsProvider>
   )
 }
-
-WithAdornments.decorators = [
-  (Story) => {
-    return (
-      <Stack direction="column" align="start">
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const casted: Story<InputProps> = (args) => {
   return <Input as="textarea" {...args} />
