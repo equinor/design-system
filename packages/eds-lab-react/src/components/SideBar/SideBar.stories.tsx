@@ -45,17 +45,14 @@ export const Primary: Story<SidebarType> = (args) => {
     {
       name: 'home',
       icon: home,
-      link: 'home',
     },
     {
       name: 'history',
       icon: history,
-      link: 'history',
     },
     {
       name: 'favourites',
       icon: favorite_outlined,
-      link: 'favourites',
     },
   ]
 
@@ -121,17 +118,14 @@ export const CustomContent: Story = () => {
     {
       name: 'Dashboard',
       icon: dashboard,
-      link: 'dashboard',
     },
     {
       name: 'history',
       icon: history,
-      link: 'history',
     },
     {
       name: 'favourites',
       icon: favorite_outlined,
-      link: 'favourites',
     },
   ]
   const Logo = () => {
@@ -156,23 +150,19 @@ export const CustomContent: Story = () => {
   )
 }
 
-export const WithButtonAndCurrentUrl: Story = () => {
+export const WithButton: Story = () => {
   const menuItems: SidebarLinkProps[] = [
     {
       name: 'Dashboard',
       icon: dashboard,
-      link: 'dashboard',
     },
     {
       name: 'history',
       icon: history,
-      link: 'history',
-      currentUrl: 'history',
     },
     {
       name: 'favourites',
       icon: favorite_outlined,
-      link: 'favourites',
     },
   ]
 
