@@ -1,10 +1,4 @@
-import {
-  HTMLAttributes,
-  forwardRef,
-  useMemo,
-  ReactNode,
-  useCallback,
-} from 'react'
+import { HTMLAttributes, forwardRef, ReactNode, useCallback } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { useToken } from '@equinor/eds-utils'
 import { Label as _Label, LabelProps } from '../Label'

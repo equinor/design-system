@@ -5,6 +5,7 @@ import {
   useCallback,
   CSSProperties,
   ElementType,
+  ComponentPropsWithoutRef,
 } from 'react'
 import styled, { css } from 'styled-components'
 import { ComponentToken } from '@equinor/eds-tokens'
@@ -60,25 +61,30 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
   `
 })
 
-const StyledInput = styled.input(({ token }: StyledProps) => {
-  return css`
-    width: 100%;
-    border: none;
-    background: transparent;
-    ${spacingsTemplate(token.spacings)}
-    ${typographyMixin(token.typography)}
-    outline: none;
+const StyledInput = styled.input(
+  ({ token, paddingLeft, paddingRight }: StyledProps) => {
+    return css`
+      width: 100%;
+      border: none;
+      background: transparent;
+      ${spacingsTemplate(token.spacings)}
+      ${typographyMixin(token.typography)}
+      outline: none;
 
-    &::placeholder {
-      color: ${token.entities.placeholder.typography.color};
-    }
+      padding-left: ${paddingLeft};
+      padding-right: ${paddingRight};
 
-    &:disabled {
-      color: var(--eds-input-color);
-      cursor: not-allowed;
-    }
-  `
-})
+      &::placeholder {
+        color: ${token.entities.placeholder.typography.color};
+      }
+
+      &:disabled {
+        color: var(--eds-input-color);
+        cursor: not-allowed;
+      }
+    `
+  },
+)
 
 type AdornmentProps = {
   token: InputToken
@@ -114,6 +120,8 @@ const Adornments = styled.div<AdornmentProps>(
 
 type StyledProps = {
   token: InputToken
+  paddingLeft?: string
+  paddingRight?: string
 } & Required<Pick<InputProps, 'readOnly' | 'disabled'>>
 
 export type InputProps = {
@@ -131,6 +139,10 @@ export type InputProps = {
   leftAdornments?: ReactNode
   /** Right adornments */
   rightAdornments?: ReactNode
+  /** Left adornments props */
+  leftAdornmentsProps?: ComponentPropsWithoutRef<'div'>
+  /** Right adornments props */
+  rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
   /** Cast the input to another element */
   as?: ElementType
   /**  */
@@ -149,6 +161,8 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       readOnly,
       className,
       style,
+      leftAdornmentsProps,
+      rightAdornmentsProps,
       ...other
     },
     ref,
@@ -185,7 +199,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       readOnly,
       token,
       style: {
-        resize: style?.resize,
+        resize: 'none',
       },
       ...other,
     }
@@ -198,11 +212,13 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       token,
     }
 
-    const leftAdornmentProps = {
+    const _leftAdornmentProps = {
+      ...leftAdornmentsProps,
       ref: setLeftAdornmentsRef,
       token,
     }
-    const rightAdornmentProps = {
+    const _rightAdornmentProps = {
+      ...rightAdornmentsProps,
       ref: setRightAdornmentsRef,
       token,
     }
@@ -211,19 +227,17 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       // Not using <ThemeProvider> because of cascading styling messing with adornments
       <Container {...containerProps}>
         {leftAdornments ? (
-          <Adornments position="left" {...leftAdornmentProps}>
+          <Adornments position="left" {..._leftAdornmentProps}>
             {leftAdornments}
           </Adornments>
         ) : null}
         <StyledInput
+          paddingLeft={token.spacings.left}
+          paddingRight={token.spacings.right}
           {...inputProps}
-          style={{
-            paddingLeft: token.spacings.left,
-            paddingRight: token.spacings.right,
-          }}
         />
         {rightAdornments ? (
-          <Adornments position="right" {...rightAdornmentProps}>
+          <Adornments position="right" {..._rightAdornmentProps}>
             {rightAdornments}
           </Adornments>
         ) : null}

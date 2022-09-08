@@ -63,6 +63,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...other,
     }
 
-    return <Input as="textarea" {...inputProps} />
+    const adornmentsToTop = { style: { alignItems: 'flex-start' } }
+
+    return (
+      <Input
+        as="textarea"
+        {...inputProps}
+        rightAdornmentsProps={adornmentsToTop}
+        leftAdornmentsProps={adornmentsToTop}
+      />
+    )
   },
 )
