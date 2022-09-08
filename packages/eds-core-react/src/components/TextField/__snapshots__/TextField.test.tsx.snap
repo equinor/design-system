@@ -2,92 +2,7 @@
 
 exports[`TextField Matches snapshot 1`] = `
 <DocumentFragment>
-  .c4 {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: var(--eds_ui_background__light,rgba(247,247,247,1));
-  border: none;
-  height: 36px;
-  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-  outline: 1px solid transparent;
-  outline-offset: 0px;
-  margin: 0;
-  color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
-  font-family: Equinor;
-  font-size: 1.000rem;
-  font-weight: 400;
-  line-height: 1.500em;
-  -webkit-letter-spacing: 0.025em;
-  -moz-letter-spacing: 0.025em;
-  -ms-letter-spacing: 0.025em;
-  letter-spacing: 0.025em;
-  text-align: left;
-  padding-left: 8px;
-  padding-top: 6px;
-  padding-right: 8px;
-  padding-bottom: 6px;
-}
-
-.c4::-webkit-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4::-moz-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4:-ms-input-placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4::placeholder {
-  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
-}
-
-.c4:active,
-.c4:focus {
-  outline-offset: 0;
-  box-shadow: none;
-  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
-  outline-offset: 0px;
-}
-
-.c4:disabled {
-  color: var(--eds_interactive__disabled__text,rgba(190,190,190,1));
-  cursor: not-allowed;
-  box-shadow: none;
-  outline: none;
-}
-
-.c4:disabled:focus,
-.c4:disabled:active {
-  outline: none;
-}
-
-.c4[readOnly] {
-  background: transparent;
-  box-shadow: none;
-}
-
-.c5 {
-  outline: none;
-}
-
-.c5:active,
-.c5:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.c3 {
-  box-shadow: inset 0 -1px 0 0 #6f6f6f;
-}
-
-.c1 {
+  .c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -113,16 +28,106 @@ exports[`TextField Matches snapshot 1`] = `
   margin: 0;
 }
 
-.c0 {
-  min-width: 100px;
+.c1 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.c3 {
+  --eds-input-adornment-color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  --eds-input-color: var(--eds_text__static_icons__default,rgba(61,61,61,1));
+  position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border: none;
+  box-sizing: border-box;
+  box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+  background: var(--eds_ui_background__light,rgba(247,247,247,1));
+  outline: 1px solid transparent;
+  outline-offset: 0px;
+}
+
+.c3:focus-within {
+  box-shadow: none;
+  outline: 2px solid var(--eds_interactive_primary__resting,rgba(0,112,121,1));
+  outline-offset: 0px;
+}
+
+.c4 {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding-left: 8px;
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+  font-family: Equinor;
+  font-size: 1.000rem;
+  font-weight: 400;
+  -webkit-letter-spacing: 0.025em;
+  -moz-letter-spacing: 0.025em;
+  -ms-letter-spacing: 0.025em;
+  letter-spacing: 0.025em;
+  line-height: 1.500em;
+  outline: none;
+}
+
+.c4::-webkit-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4::-moz-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4:-ms-input-placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4::placeholder {
+  color: var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
+}
+
+.c4:disabled {
+  color: var(--eds-input-color);
+  cursor: not-allowed;
+}
+
+.c5 {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: Equinor;
+  font-size: 0.750rem;
+  font-weight: 500;
+  line-height: 1.333em;
+  color: var(--eds-input-adornment-color);
+}
+
+.c6 {
+  right: 0;
+  padding-right: 8px;
 }
 
 <div
-    class="c0"
+    class=""
   >
     <label
-      class="c1"
+      class="c0 c1"
       for="textfield"
     >
       <span
@@ -135,12 +140,16 @@ exports[`TextField Matches snapshot 1`] = `
       class="c3"
     >
       <input
-        aria-describedby="eds-helpertext-12346"
-        aria-invalid="false"
-        class="c4 c5"
+        class="c4"
         id="textfield"
+        style="padding-left: 8px; padding-right: 8px;"
         type="text"
       />
+      <div
+        class="c5 c6"
+      >
+        <span />
+      </div>
     </div>
   </div>
 </DocumentFragment>
