@@ -1,4 +1,12 @@
-import { InputHTMLAttributes, forwardRef, ReactNode, useMemo } from 'react'
+import {
+  forwardRef,
+  ReactNode,
+  useState,
+  useCallback,
+  CSSProperties,
+  ElementType,
+  ComponentPropsWithoutRef,
+} from 'react'
 import styled, { css } from 'styled-components'
 import { ComponentToken } from '@equinor/eds-tokens'
 import {
@@ -6,10 +14,11 @@ import {
   spacingsTemplate,
   outlineTemplate,
   useToken,
+  OverridableComponent,
 } from '@equinor/eds-utils'
 import { inputToken as tokens } from './Input.tokens'
 import type { InputToken } from './Input.tokens'
-import type { Variants } from '../TextField/types'
+import type { Variants } from '../types'
 import { useEds } from '../EdsProvider'
 
 const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
@@ -25,7 +34,6 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     flex-direction: row;
     border: none;
     box-sizing: border-box;
-    height: ${token.height};
     box-shadow: ${token.boxShadow};
     background: ${token.background};
     ${outlineTemplate(token.outline)}
@@ -53,25 +61,30 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
   `
 })
 
-const StyledInput = styled.input(({ token }: StyledProps) => {
-  return css`
-    width: 100%;
-    border: none;
-    background: transparent;
-    ${spacingsTemplate(token.spacings)}
-    ${typographyMixin(token.typography)}
-    outline: none;
+const StyledInput = styled.input(
+  ({ token, paddingLeft, paddingRight }: StyledProps) => {
+    return css`
+      width: 100%;
+      border: none;
+      background: transparent;
+      ${spacingsTemplate(token.spacings)}
+      ${typographyMixin(token.typography)}
+      outline: none;
 
-    &::placeholder {
-      color: ${token.entities.placeholder.typography.color};
-    }
+      padding-left: ${paddingLeft};
+      padding-right: ${paddingRight};
 
-    &:disabled {
-      color: var(--eds-input-color);
-      cursor: not-allowed;
-    }
-  `
-})
+      &::placeholder {
+        color: ${token.entities.placeholder.typography.color};
+      }
+
+      &:disabled {
+        color: var(--eds-input-color);
+        cursor: not-allowed;
+      }
+    `
+  },
+)
 
 type AdornmentProps = {
   token: InputToken
@@ -80,8 +93,8 @@ type AdornmentProps = {
 const Adornments = styled.div<AdornmentProps>(({ token }) => {
   return css`
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: ${token.spacings.top};
+    bottom: ${token.spacings.bottom};
     display: flex;
     align-items: center;
     ${typographyMixin(token.entities.adornment.typography)}
@@ -102,9 +115,10 @@ const RightAdornments = styled(Adornments)(
     padding-right: ${token.entities.adornment.spacings.right};
   `,
 )
-
 type StyledProps = {
   token: InputToken
+  paddingLeft?: string
+  paddingRight?: string
 } & Required<Pick<InputProps, 'readOnly' | 'disabled'>>
 
 export type InputProps = {
@@ -120,90 +134,110 @@ export type InputProps = {
   readOnly?: boolean
   /** Left adornments */
   leftAdornments?: ReactNode
-  /** Left adornments width */
-  leftAdornmentsWidth?: number
   /** Right adornments */
   rightAdornments?: ReactNode
-  /** Right adornments width */
-  rightAdornmentsWidth?: number
-} & InputHTMLAttributes<HTMLInputElement>
+  /** Left adornments props */
+  leftAdornmentsProps?: ComponentPropsWithoutRef<'div'>
+  /** Right adornments props */
+  rightAdornmentsProps?: ComponentPropsWithoutRef<'div'>
+  /** Cast the input to another element */
+  as?: ElementType
+  /**  */
+  className?: string
+  style?: CSSProperties
+}
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    variant = 'default',
-    disabled = false,
-    type = 'text',
-    leftAdornments,
-    rightAdornments,
-    leftAdornmentsWidth,
-    rightAdornmentsWidth,
-    readOnly,
-    className,
-    style,
-    ...other
-  },
-  ref,
-) {
-  const actualVariant = variant === 'default' ? 'input' : variant
-  const inputVariant = tokens[actualVariant]
-  const { density } = useEds()
-  const token = useToken({ density }, inputVariant)()
-
-  const updatedToken = useMemo(
-    (): ComponentToken => ({
-      ...token,
-      spacings: {
-        ...token.spacings,
-        left:
-          typeof leftAdornmentsWidth !== 'undefined'
-            ? `${leftAdornmentsWidth}px`
-            : token.spacings.left,
-        right:
-          typeof rightAdornmentsWidth !== 'undefined'
-            ? `${rightAdornmentsWidth}px`
-            : token.spacings.right,
-      },
-    }),
-    [leftAdornmentsWidth, rightAdornmentsWidth, token],
-  )
-  const inputProps = {
+export const Input: OverridableComponent<InputProps, HTMLInputElement> =
+  forwardRef<HTMLInputElement, InputProps>(function Input(
+    {
+      variant,
+      disabled = false,
+      type = 'text',
+      leftAdornments,
+      rightAdornments,
+      readOnly,
+      className,
+      style,
+      leftAdornmentsProps,
+      rightAdornmentsProps,
+      ...other
+    },
     ref,
-    type,
-    disabled,
-    readOnly,
-    token: updatedToken,
-    ...other,
-  }
+  ) {
+    const inputVariant = tokens[variant] ? tokens[variant] : tokens.input
+    const { density } = useEds()
+    const _token = useToken({ density }, inputVariant)()
 
-  const containerProps = {
-    disabled,
-    readOnly,
-    className,
-    style,
-    token: updatedToken,
-  }
+    const [rightAdornmentsRef, setRightAdornmentsRef] =
+      useState<HTMLDivElement>()
+    const [leftAdornmentsRef, setLeftAdornmentsRef] = useState<HTMLDivElement>()
 
-  const leftAdornmentProps = {
-    token: updatedToken,
-  }
-  const rightAdornmentProps = {
-    token: updatedToken,
-  }
+    const token = useCallback((): ComponentToken => {
+      const leftAdornmentsWidth = leftAdornmentsRef
+        ? leftAdornmentsRef.clientWidth
+        : 0
+      const rightAdornmentsWidth = rightAdornmentsRef
+        ? rightAdornmentsRef.clientWidth
+        : 0
+      return {
+        ..._token,
+        spacings: {
+          ..._token.spacings,
+          left: `${leftAdornmentsWidth + parseInt(_token.spacings.left)}px`,
+          right: `${rightAdornmentsWidth + parseInt(_token.spacings.right)}px`,
+        },
+      }
+    }, [leftAdornmentsRef, rightAdornmentsRef, _token])()
 
-  return (
-    // Not using <ThemeProvider> because of cascading styling messing with adornments
-    <Container {...containerProps}>
-      {leftAdornments ? (
-        <LeftAdornments {...leftAdornmentProps}>
-          {leftAdornments}
-        </LeftAdornments>
-      ) : null}
-      <StyledInput {...inputProps} />
-      {rightAdornments ? (
-        <RightAdornments {...rightAdornmentProps}>
-          {rightAdornments}
-        </RightAdornments>
-      ) : null}
-    </Container>
-  )
-})
+    const inputProps = {
+      ref,
+      type,
+      disabled,
+      readOnly,
+      token,
+      style: {
+        resize: 'none',
+      },
+      ...other,
+    }
+
+    const containerProps = {
+      disabled,
+      readOnly,
+      className,
+      style,
+      token,
+    }
+
+    const _leftAdornmentProps = {
+      ...leftAdornmentsProps,
+      ref: setLeftAdornmentsRef,
+      token,
+    }
+    const _rightAdornmentProps = {
+      ...rightAdornmentsProps,
+      ref: setRightAdornmentsRef,
+      token,
+    }
+
+    return (
+      // Not using <ThemeProvider> because of cascading styling messing with adornments
+      <Container {...containerProps}>
+        {leftAdornments ? (
+          <LeftAdornments {..._leftAdornmentProps}>
+            {leftAdornments}
+          </LeftAdornments>
+        ) : null}
+        <StyledInput
+          paddingLeft={token.spacings.left}
+          paddingRight={token.spacings.right}
+          {...inputProps}
+        />
+        {rightAdornments ? (
+          <RightAdornments {..._rightAdornmentProps}>
+            {rightAdornments}
+          </RightAdornments>
+        ) : null}
+      </Container>
+    )
+  })

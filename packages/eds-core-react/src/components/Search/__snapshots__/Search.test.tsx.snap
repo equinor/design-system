@@ -116,7 +116,6 @@ exports[`Search Matches snapshot 1`] = `
   flex-direction: row;
   border: none;
   box-sizing: border-box;
-  height: 36px;
   box-shadow: inset 0px -1px 0px 0px var(--eds_text__static_icons__tertiary,rgba(111,111,111,1));
   background: var(--eds_ui_background__light,rgba(247,247,247,1));
   outline: 1px solid transparent;
@@ -321,6 +320,7 @@ exports[`Search Matches snapshot 1`] = `
         aria-label="search input"
         class="c3"
         role="searchbox"
+        style="padding-left: 8px; padding-right: 8px;"
         type="search"
         value=""
       />

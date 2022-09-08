@@ -1,7 +1,7 @@
 import { forwardRef, ReactNode, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { tokens } from '@equinor/eds-tokens'
-import { Typography } from '../Typography'
+import { typographyMixin } from '@equinor/eds-utils'
+import { helperText as tokens } from './HelperText.token'
 
 type ContainerProps = {
   color?: string
@@ -17,6 +17,10 @@ const Container = styled.div<ContainerProps>(({ color }) =>
     color,
   }),
 )
+const Text = styled.p`
+  margin: 0;
+  ${typographyMixin(tokens.typography)};
+`
 
 export type HelperTextProps = {
   /** Helper text */
@@ -27,14 +31,9 @@ export type HelperTextProps = {
   color?: string
 } & HTMLAttributes<HTMLDivElement>
 
-export const HelperText = forwardRef<HTMLDivElement, HelperTextProps>(
+const TextfieldHelperText = forwardRef<HTMLDivElement, HelperTextProps>(
   function TextfieldHelperText(
-    {
-      text,
-      icon,
-      color = tokens.colors.text.static_icons__tertiary.rgba,
-      ...rest
-    },
+    { text, icon, color = tokens.typography.color, ...rest },
     ref,
   ) {
     if (!text) {
@@ -44,10 +43,10 @@ export const HelperText = forwardRef<HTMLDivElement, HelperTextProps>(
     return (
       <Container {...{ ...rest, color, ref }}>
         {icon}
-        <Typography group="input" variant="helper" color={color}>
-          {text}
-        </Typography>
+        <Text>{text}</Text>
       </Container>
     )
   },
 )
+
+export { TextfieldHelperText as HelperText }
