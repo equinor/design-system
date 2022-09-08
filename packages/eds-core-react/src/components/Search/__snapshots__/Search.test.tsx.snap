@@ -145,6 +145,8 @@ exports[`Search Matches snapshot 1`] = `
   letter-spacing: 0.025em;
   line-height: 1.500em;
   outline: none;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .c3::-webkit-input-placeholder {
@@ -323,7 +325,7 @@ exports[`Search Matches snapshot 1`] = `
         aria-label="search input"
         class="c3"
         role="searchbox"
-        style="padding-left: 8px; padding-right: 8px;"
+        style="resize: none;"
         type="search"
         value=""
       />

@@ -76,6 +76,8 @@ exports[`TextField Matches snapshot 1`] = `
   letter-spacing: 0.025em;
   line-height: 1.500em;
   outline: none;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .c4::-webkit-input-placeholder {
@@ -125,6 +127,7 @@ exports[`TextField Matches snapshot 1`] = `
 
 <div
     class=""
+    style="width: 100%;"
   >
     <label
       class="c0 c1"
@@ -142,7 +145,7 @@ exports[`TextField Matches snapshot 1`] = `
       <input
         class="c4"
         id="textfield"
-        style="padding-left: 8px; padding-right: 8px;"
+        style="resize: none;"
         type="text"
       />
       <div
