@@ -424,16 +424,29 @@ GroupSplit.decorators = [
   ),
 ]
 
-export const ToggleButton: Story<ToggleButtonProps> = () => (
-  <Button.Toggle>
-    <Button variant="outlined" aria-label="menu action">
-      <Icon data={menu} title="Ghost icon menu"></Icon>
-    </Button>
-    <Button variant="outlined" aria-label="menu action">
-      <Icon data={menu} title="Ghost icon menu"></Icon>
-    </Button>
-    <Button variant="outlined" aria-label="menu action">
-      <Icon data={menu} title="Ghost icon menu"></Icon>
-    </Button>
-  </Button.Toggle>
-)
+export const ToggleButton: Story<ToggleButtonProps> = () => {
+  const [value, setValue] = useState<string[] | null>(['right'])
+  const handleChange = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    updateFormat: string[] | string,
+  ) => {
+    console.log('YO!')
+    setValue(updateFormat as string[])
+    console.log('value', value)
+    console.log('setValue', setValue)
+  }
+
+  return (
+    <Button.Toggle onChange={handleChange} value={value}>
+      <Button value="right" variant="outlined" aria-label="menu action">
+        <Icon data={menu} title="Ghost icon menu"></Icon>
+      </Button>
+      <Button value="center" variant="outlined" aria-label="menu action">
+        <Icon data={menu} title="Ghost icon menu"></Icon>
+      </Button>
+      <Button value="left" variant="outlined" aria-label="menu action">
+        <Icon data={menu} title="Ghost icon menu"></Icon>
+      </Button>
+    </Button.Toggle>
+  )
+}
