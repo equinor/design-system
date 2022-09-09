@@ -14,9 +14,7 @@ import { SideBar } from '../SideBar'
 
 const defaultProps: SidebarLinkProps = {
   name: 'Home',
-  currentUrl: 'http://localhost:3000/home',
   icon: home,
-  link: 'home',
 }
 
 const customRender = (

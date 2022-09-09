@@ -119,22 +119,19 @@ type OverridableSubComponent = OverridableComponent<
 export type SidebarLinkType = {
   icon?: IconData
   name: string
-  link?: string
+  active?: boolean
   onClick?: () => void
 }
 
-export type SidebarLinkProps = {
-  currentUrl?: string
-} & SidebarLinkType &
+export type SidebarLinkProps = SidebarLinkType &
   HTMLAttributes<HTMLAnchorElement>
 
 export const SidebarLink: OverridableSubComponent = forwardRef(
-  ({ currentUrl, icon, name, link, onClick, as = 'a', ...rest }, ref) => {
-    const isCurrentUrl = () => currentUrl?.includes(link)
+  ({ icon, name, active, onClick, as = 'a', ...rest }, ref) => {
     const { isOpen } = useSideBar()
 
     const getIconColor = () => {
-      return isCurrentUrl() ? iconActive : itemTextColor
+      return active ? iconActive : itemTextColor
     }
 
     if (isOpen) {
@@ -142,14 +139,14 @@ export const SidebarLink: OverridableSubComponent = forwardRef(
         <Container
           as={as}
           tabIndex={0}
-          active={isCurrentUrl()}
+          active={active}
           onClick={onClick}
           variant="ghost"
           ref={ref}
           {...rest}
         >
           {icon && <Icon data={icon} color={getIconColor()} />}
-          <ItemText variant="cell_text" group="table" active={isCurrentUrl()}>
+          <ItemText variant="cell_text" group="table" active={active}>
             {name}
           </ItemText>
         </Container>
@@ -161,7 +158,7 @@ export const SidebarLink: OverridableSubComponent = forwardRef(
         <Container
           tabIndex={0}
           as={as}
-          active={isCurrentUrl()}
+          active={active}
           onClick={onClick}
           variant="ghost"
           ref={ref}
