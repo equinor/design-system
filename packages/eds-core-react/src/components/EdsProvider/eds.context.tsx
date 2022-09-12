@@ -13,10 +13,12 @@ type State = {
 }
 
 const initalState: State = {
+  /** Density for all components inside `EdsProvider` */
   density: 'comfortable',
 }
 
 type UseEdsProps<T> = {
+  /** Use this to update the `density` from nested components in `EdsProvider` */
   setDensity: (density: Density) => void
 } & T
 
@@ -29,9 +31,12 @@ export type EdsProviderProps = {
 
 export const EdsProvider: React.FC<EdsProviderProps> = ({
   children,
-  density = 'comfortable',
+  density,
 }) => {
-  const [state, setState] = useState<State>({ ...initalState, density })
+  const [state, setState] = useState<State>({
+    ...initalState,
+    density: density || 'comfortable',
+  })
 
   const setDensity = (density: Density) =>
     setState((prevState) => ({ ...prevState, density }))
@@ -44,6 +49,7 @@ export const EdsProvider: React.FC<EdsProviderProps> = ({
 
   const value = {
     density: state.density,
+    setDensity,
   }
   return <EdsContext.Provider value={value}>{children}</EdsContext.Provider>
 }
