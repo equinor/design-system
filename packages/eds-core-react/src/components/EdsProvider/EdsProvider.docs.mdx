@@ -10,7 +10,11 @@ Provider used to set global values for EDS react components.
     ariaUrl="https://www.w3.org/TR/wai-aria-practices/"
 />
 
+<Story id="edsprovider--introduction"/>
+
 <PropsTable />
+
+
 
 ## Usage
 
@@ -25,14 +29,27 @@ import { EdsProvider } from '@equinor/eds-core-react'
 ```
 
 
+## Accessibility
+
+Be aware that only setting `density` to `compact` and not providing option to switch, breaks comformity to WCAG 2.1 guidelines and makes it harder to use the application for users with either permanent disabilities, or temporary disabilities.
+
+
 ## Examples
 
-### Density switcher
+Examples of how to change density in your application using EDS components.
+
+#### Nested density switcher
+
+Use `useEds` to get & set `EdsProvider` values.  
+
+⚠️ `useEds` only works from nested component inside `EdsProvider` as its built using [React Context](https://reactjs.org/docs/context.html)
+
+<Story id="edsprovider--nested-components-density" />
 
 
-Example of how to change density in your application using EDS components.
+#### Custom state
 
-It‘s important **not** to use `compact` as a direct value to density as that breaks comformity to WCAG 2.1 guidelines and makes it harder to use the application for users with either permanent disabilities, or temporary disabilities.
+If you have your own state managment you can just set the `density` prop on `EdsProvider`
+<Story id="edsprovider--custom-state"/>
 
-<Story id="edsprovider--introduction"/>
 
