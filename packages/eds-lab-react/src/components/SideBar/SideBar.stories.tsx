@@ -16,12 +16,16 @@ import {
 import { TopBar } from '@equinor/eds-core-react'
 import page from './SideBar.docs.mdx'
 
-const { Content, Footer, Link, Toggle, Button } = SideBar
-
 export default {
   title: 'Components/SideBar',
   component: SideBar,
-  subcomponents: { Content, Footer, Link, Toggle, Button },
+  subcomponents: {
+    Content: SideBar.Content,
+    Footer: SideBar.Footer,
+    Link: SideBar.Link,
+    Toggle: SideBar.Toggle,
+    Button: SideBar.Button,
+  },
   args: {
     open: true,
   },
@@ -170,6 +174,47 @@ export const WithButton: Story = () => {
             icon={add}
             onClick={() => console.log('clicked')}
           />
+          {menuItems.map((m) => (
+            <SideBar.Link key={m.name} {...m} />
+          ))}
+        </SideBar.Content>
+        <SideBar.Footer>
+          <SideBar.Toggle />
+        </SideBar.Footer>
+      </SideBar>
+    </SidebarContainer>
+  )
+}
+
+export const ActivePath: Story = () => {
+  type LinkProps = SidebarLinkProps & {
+    href: string
+  }
+  const menuItems: LinkProps[] = [
+    {
+      name: 'Dashboard',
+      icon: dashboard,
+      href: '#',
+      active: true,
+    },
+    {
+      name: 'history',
+      icon: history,
+      href: '#',
+      active: false,
+    },
+    {
+      name: 'favourites',
+      icon: favorite_outlined,
+      href: '#',
+      active: false,
+    },
+  ]
+
+  return (
+    <SidebarContainer>
+      <SideBar>
+        <SideBar.Content>
           {menuItems.map((m) => (
             <SideBar.Link key={m.name} {...m} />
           ))}
