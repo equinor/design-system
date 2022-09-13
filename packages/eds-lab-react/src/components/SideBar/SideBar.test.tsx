@@ -30,11 +30,10 @@ beforeAll(() => {
 
 describe('Sidebar', () => {
   it('Sidebar renders', () => {
-    const currentUrl = 'home'
     render(
       <SideBar>
         {defaultMenuItems.map((m) => {
-          return <SideBar.Link key={m.name} currentUrl={currentUrl} {...m} />
+          return <SideBar.Link key={m.name} {...m} />
         })}
       </SideBar>,
     )
