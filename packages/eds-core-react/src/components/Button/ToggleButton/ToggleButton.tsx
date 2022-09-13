@@ -1,37 +1,47 @@
 import {
   HTMLAttributes,
   cloneElement,
-  Children as RecatChildren,
+  Children as ReactChildren,
   forwardRef,
   ReactElement,
   useState,
 } from 'react'
-import { Variants } from './ToggleButton.types'
-import { Button } from '..'
+import { Button, ButtonProps, ButtonGroupProps } from '..'
 
 export type ToggleButtonProps = {
-  /** Current selected value. */
-  value: string[] | string
-  /** Determine selection option */
-  variant?: Variants
-  /** Callback fired when the state changes. */
-  onChange?: (event: React.MouseEvent, newValue: string[] | string) => void
-} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
+  /** Multiple */
+  multiple?: boolean
+} & HTMLAttributes<HTMLDivElement> &
+  Pick<ButtonGroupProps, 'vertical'>
 
 export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
-  function ToggleButton({ children, value, onChange, ...props }, ref) {
-    const [selectedButton, setSelectedButton] = useState<number[] | number>(
-      Array(RecatChildren.toArray(children).length),
+  function ToggleButton({ children, multiple, ...props }, ref) {
+    const [selectedIndexes, setSelectedIndexes] = useState<number[]>([])
+
+    const updatedChildren = ReactChildren.map(
+      children,
+      (child, index: number) => {
+        const isSelected = selectedIndexes.includes(index)
+
+        const buttonProps: ButtonProps = {
+          'aria-pressed': isSelected ? true : undefined,
+          variant: isSelected ? 'contained' : 'outlined',
+          onClick: () => {
+            if (multiple) {
+              setSelectedIndexes((prevSelectedIndexes) =>
+                prevSelectedIndexes.includes(index)
+                  ? prevSelectedIndexes.filter((i) => i !== index)
+                  : [...prevSelectedIndexes, index],
+              )
+            } else {
+              setSelectedIndexes([index])
+            }
+          },
+        }
+        return cloneElement(child as ReactElement, buttonProps)
+      },
     )
 
-    const updatedChildren = RecatChildren.map(children, (child, index) => {
-      return cloneElement(child as ReactElement, {
-        'aria-pressed': true,
-        value,
-        index,
-        onChange,
-      })
-    })
     return (
       <Button.Group ref={ref} {...props}>
         {updatedChildren}

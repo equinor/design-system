@@ -12,7 +12,7 @@ import {
   Progress,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { menu, add, save } from '@equinor/eds-icons'
+import { menu, add, save, edit, copy } from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
@@ -425,27 +425,16 @@ GroupSplit.decorators = [
 ]
 
 export const ToggleButton: Story<ToggleButtonProps> = () => {
-  const [value, setValue] = useState<string[] | null>(['right'])
-  const handleChange = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    updateFormat: string[] | string,
-  ) => {
-    console.log('YO!')
-    setValue(updateFormat as string[])
-    console.log('value', value)
-    console.log('setValue', setValue)
-  }
-
   return (
-    <Button.Toggle onChange={handleChange} value={value}>
-      <Button value="right" variant="outlined" aria-label="menu action">
-        <Icon data={menu} title="Ghost icon menu"></Icon>
+    <Button.Toggle multiple vertical>
+      <Button aria-label="save action">
+        <Icon data={save} title="Ghost icon save"></Icon>
       </Button>
-      <Button value="center" variant="outlined" aria-label="menu action">
-        <Icon data={menu} title="Ghost icon menu"></Icon>
+      <Button aria-label="edit action">
+        <Icon data={edit} title="Ghost icon edit"></Icon>
       </Button>
-      <Button value="left" variant="outlined" aria-label="menu action">
-        <Icon data={menu} title="Ghost icon menu"></Icon>
+      <Button aria-label="copy action">
+        <Icon data={copy} title="Ghost icon copy"></Icon>
       </Button>
     </Button.Toggle>
   )
