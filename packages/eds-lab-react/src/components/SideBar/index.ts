@@ -1,8 +1,8 @@
 import { SideBar as BaseSideBar } from './SideBar'
 import { useSideBar } from './SideBar.context'
 import { SidebarLink, SidebarLinkProps } from './SidebarLink'
-import { SideBarContent, SideBarContentProps } from './SideBarContent'
-import { SideBarFooter, SideBarFooterProps } from './SideBarFooter'
+import { SideBarContent } from './SideBarContent'
+import { SideBarFooter } from './SideBarFooter'
 import { SideBarToggle } from './SideBarToggle'
 import { SideBarButton } from './SideBarButton'
 
@@ -28,9 +28,4 @@ SideBar.Toggle.displayName = 'SideBar.Toggle'
 SideBar.Button.displayName = 'SideBar.Button'
 
 export { SideBar, useSideBar }
-export type {
-  SidebarType,
-  SidebarLinkProps,
-  SideBarContentProps,
-  SideBarFooterProps,
-}
+export type { SidebarType, SidebarLinkProps }

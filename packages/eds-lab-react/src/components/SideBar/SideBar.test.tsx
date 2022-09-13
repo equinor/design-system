@@ -2,11 +2,11 @@ import { render, screen, cleanup } from '@testing-library/react'
 //import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
-import { SidebarLinkType } from './SidebarLink'
+import { SidebarLinkProps } from './SidebarLink'
 import { sidebar as tokens } from './SideBar.tokens'
 import { home, star_half } from '@equinor/eds-icons'
 
-const defaultMenuItems: SidebarLinkType[] = [
+const defaultMenuItems: SidebarLinkProps[] = [
   {
     name: 'Home',
     icon: home,
