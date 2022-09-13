@@ -45,7 +45,7 @@ const ExtendedButton = styled(Button)(({ theme }) => {
 export type SideBarButtonProps = {
   label: string
   icon: IconData
-} & ButtonProps
+} & Omit<ButtonProps, 'href' | 'type' | 'fullWidth' | 'variant'>
 
 export const SideBarButton: ForwardRefExoticComponent<SideBarButtonProps> =
   forwardRef<HTMLButtonElement, SideBarButtonProps>(function SideBarToggle(
