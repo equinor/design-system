@@ -20,35 +20,22 @@ Allows users to locate or refine content based on simple words or phrases.
 
 `Search` can be used as a primary way of discovering content.
 
-<ul>
-    <li>Search placeholder text should always say "Search".</li>
-    <li>Search should replace the center custom content, placeholder of the top bar.</li>
-    <li>Search can be a button icon that is expanded into the search field if search is less common in the application.</li>
-</ul>
-
 ```tsx
 import { Search } from '@equinor/eds-core-react'
 
-<Serach />
+<form>
+  <Search aria-label="Search for something"/>
+</form>
 ```
 
+## Accessibility 
+
+* Use either a `label` or `aria-label` for description of whats being searched
+* `Search` should be used inside a `form`
+
+<Story id="inputs-search--accessibility" />
+
 ## Examples
-
-### With `onFocus` and `onBlur`
-
-<Story id="inputs-search--with-on-focus-and-blur" />
-
-### With predefined value
-
-<Story id="inputs-search--with-predefined-value" />
-
-### Centered and styled
-
-<Story id="inputs-search--centered-and-styled" />
-
-### Inside a form element
-
-<Story id="inputs-search--inside-a-form" />
 
 ### Disabled
 
