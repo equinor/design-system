@@ -34,14 +34,16 @@ const InsideButton = styled(Button)`
 export type SearchProps = InputHTMLAttributes<HTMLInputElement>
 
 export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
-  { onChange, ...rest },
+  { onChange, style, className, ...rest },
   ref,
 ) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [showClear, setShowClear] = useState(Boolean(rest.defaultValue))
 
   useEffect(() => {
-    setShowClear(Boolean(rest.value))
+    if (rest.value) {
+      setShowClear(Boolean(rest.value))
+    }
   }, [rest.value])
 
   const clearInputValue = () => {
@@ -60,7 +62,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   )
 
   return (
-    <InputWrapper role="search">
+    <InputWrapper role="search" style={style} className={className}>
       <SearchInput
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           handleOnChange(e)
