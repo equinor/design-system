@@ -1,13 +1,6 @@
 import { useState, useEffect } from 'react'
 import { action } from '@storybook/addon-actions'
-import {
-  Search,
-  Typography,
-  Button,
-  SearchProps,
-  EdsProvider,
-  Density,
-} from '../..'
+import { Search, Button, SearchProps, EdsProvider, Density } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
 import page from './Search.docs.mdx'
 
