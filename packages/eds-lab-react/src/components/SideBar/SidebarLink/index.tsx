@@ -116,15 +116,12 @@ type OverridableSubComponent = OverridableComponent<
   displayName?: string
 }
 
-export type SidebarLinkType = {
+export type SidebarLinkProps = {
   icon?: IconData
   name: string
   active?: boolean
   onClick?: () => void
-}
-
-export type SidebarLinkProps = SidebarLinkType &
-  HTMLAttributes<HTMLAnchorElement>
+} & HTMLAttributes<HTMLAnchorElement>
 
 export const SidebarLink: OverridableSubComponent = forwardRef(
   ({ icon, name, active, onClick, as = 'a', ...rest }, ref) => {
