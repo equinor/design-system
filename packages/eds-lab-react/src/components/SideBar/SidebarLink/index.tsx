@@ -1,4 +1,9 @@
-import { HTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react'
+import {
+  ButtonHTMLAttributes,
+  forwardRef,
+  AnchorHTMLAttributes,
+  ElementType,
+} from 'react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import {
   bordersTemplate,
@@ -117,55 +122,57 @@ type OverridableSubComponent = OverridableComponent<
 }
 
 export type SidebarLinkProps = {
-  icon?: IconData
+  icon: IconData
   name: string
   active?: boolean
   onClick?: () => void
-} & HTMLAttributes<HTMLAnchorElement>
+  as?: ElementType
+} & AnchorHTMLAttributes<HTMLAnchorElement>
 
-export const SidebarLink: OverridableSubComponent = forwardRef(
-  ({ icon, name, active, onClick, as = 'a', ...rest }, ref) => {
-    const { isOpen } = useSideBar()
+export const SidebarLink: OverridableSubComponent = forwardRef<
+  HTMLAnchorElement,
+  SidebarLinkProps
+>(({ icon, name, active, onClick, as = 'a', ...rest }, ref) => {
+  const { isOpen } = useSideBar()
 
-    const getIconColor = () => {
-      return active ? iconActive : itemTextColor
-    }
+  const getIconColor = () => {
+    return active ? iconActive : itemTextColor
+  }
 
-    if (isOpen) {
-      return (
-        <Container
-          as={as}
-          tabIndex={0}
-          active={active}
-          onClick={onClick}
-          variant="ghost"
-          ref={ref}
-          {...rest}
-        >
-          {icon && <Icon data={icon} color={getIconColor()} />}
-          <ItemText variant="cell_text" group="table" active={active}>
-            {name}
-          </ItemText>
-        </Container>
-      )
-    }
-
+  if (isOpen) {
     return (
-      <Tooltip title={name} placement="right">
-        <Container
-          tabIndex={0}
-          as={as}
-          active={active}
-          onClick={onClick}
-          variant="ghost"
-          ref={ref}
-          {...rest}
-        >
-          {icon && <Icon data={icon} color={getIconColor()} />}
-        </Container>
-      </Tooltip>
+      <Container
+        as={as}
+        tabIndex={0}
+        active={active}
+        onClick={onClick}
+        variant="ghost"
+        ref={ref}
+        {...rest}
+      >
+        {icon && <Icon data={icon} color={getIconColor()} />}
+        <ItemText variant="cell_text" group="table" active={active}>
+          {name}
+        </ItemText>
+      </Container>
     )
-  },
-)
+  }
+
+  return (
+    <Tooltip title={name} placement="right">
+      <Container
+        tabIndex={0}
+        as={as}
+        active={active}
+        onClick={onClick}
+        variant="ghost"
+        ref={ref}
+        {...rest}
+      >
+        {icon && <Icon data={icon} color={getIconColor()} />}
+      </Container>
+    </Tooltip>
+  )
+})
 
 SidebarLink.displayName = 'SidebarItem'
