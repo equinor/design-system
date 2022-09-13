@@ -29,6 +29,7 @@ const Container = styled.div(({ token, disabled, readOnly }: StyledProps) => {
     --eds-input-color: ${token.typography.color};
 
     position: relative;
+    height: ${token.height};
     width: ${token.width};
     display: flex;
     flex-direction: row;

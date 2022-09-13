@@ -22,7 +22,9 @@ describe('Search', () => {
     const { getComputedStyle } = window
     window.getComputedStyle = (elt) => getComputedStyle(elt)
 
-    const { container } = render(<Search />)
+    const { container } = render(
+      <Search aria-label="Expect user to declare label" />,
+    )
     await act(async () => {
       const result = await axe(container)
       expect(result).toHaveNoViolations()
@@ -37,11 +39,11 @@ describe('Search', () => {
   it('Has rendered provided value in input field', () => {
     const value = 'provided value'
 
-    render(<Search value={value} />)
+    render(<Search value={value} data-testid="search" />)
 
-    const searchBox = screen.queryByRole('searchbox')
+    const searchInput = screen.getByTestId('search')
 
-    expect(searchBox).toHaveValue(value)
+    expect(searchInput).toHaveValue(value)
   })
   it('Has called onChange once with event & new value, when value is changed', () => {
     const searchId = 'search-id-when-testing'
@@ -54,11 +56,16 @@ describe('Search', () => {
     })
 
     render(
-      <Search id={searchId} value="some old value" onChange={handleOnChange} />,
+      <Search
+        id={searchId}
+        value="some old value"
+        onChange={handleOnChange}
+        data-testid="search"
+      />,
     )
-    const searchBox = screen.queryByRole('searchbox')
+    const searchInput = screen.queryByTestId('search')
 
-    fireEvent.change(searchBox, {
+    fireEvent.change(searchInput, {
       target: { value: newValue },
     })
 
@@ -81,15 +88,15 @@ describe('Search', () => {
         id={searchId}
         defaultValue="initial value"
         onChange={handleOnChange}
+        data-testid="search"
       />,
     )
     const clearButton = screen.queryByRole('button')
-    const searchBox = screen.queryByRole('searchbox')
-
+    const searchInput = screen.queryByTestId('search')
     fireEvent.click(clearButton)
 
     expect(handleOnChange).toHaveBeenCalled()
-    expect(searchBox).toHaveValue('')
+    expect(searchInput).toHaveValue('')
     expect(callbackValue).toEqual('')
     expect(callbackId).toEqual(searchId)
   })
@@ -101,10 +108,12 @@ describe('Search', () => {
       callbackId = id as string
     })
 
-    render(<Search id={searchId} onFocus={handleOnFocus} />)
-    const searchBox = screen.queryByRole('searchbox')
+    render(
+      <Search id={searchId} onFocus={handleOnFocus} data-testid="search" />,
+    )
+    const searchInput = screen.queryByTestId('search')
 
-    fireEvent.focus(searchBox)
+    fireEvent.focus(searchInput)
 
     expect(handleOnFocus).toHaveBeenCalled()
     expect(callbackId).toEqual(searchId)
@@ -116,22 +125,22 @@ describe('Search', () => {
       callbackId = id as string
     })
 
-    render(<Search id={searchId} onBlur={handleOnBlur} />)
-    const searchBox = screen.queryByRole('searchbox')
+    render(<Search id={searchId} onBlur={handleOnBlur} data-testid="search" />)
+    const searchInput = screen.queryByTestId('search')
 
-    fireEvent.blur(searchBox)
+    fireEvent.blur(searchInput)
 
     expect(handleOnBlur).toHaveBeenCalled()
     expect(callbackId).toEqual(searchId)
   })
 
   it('Has new value, when value property is changed after first render', () => {
-    const { rerender } = render(<Search value="old" />)
+    const { rerender } = render(<Search value="old" data-testid="search-old" />)
 
-    rerender(<Search value="new" />)
+    rerender(<Search value="new" data-testid="search-new" />)
 
-    const searchBox: HTMLInputElement = screen.queryByRole('searchbox')
+    const searchInput: HTMLInputElement = screen.queryByTestId('search-new')
 
-    expect(searchBox.value).toEqual('new')
+    expect(searchInput.value).toEqual('new')
   })
 })
