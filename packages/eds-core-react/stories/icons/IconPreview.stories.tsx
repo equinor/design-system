@@ -1,26 +1,23 @@
 import { useState, useMemo } from 'react'
 import { Story, Meta } from '@storybook/react'
+import { HeaderMdx } from '@storybook/addon-docs'
 import styled from 'styled-components'
-import { Icon, Button, Typography, TableOfContents, Search } from '../../src'
+import { Icon, Button, Typography, Search } from '../../src'
 import { download, IconData } from '@equinor/eds-icons'
 import fileDownload from 'js-file-download'
 import systemIcons from '../assets/icons/system-icons.json'
+import page from './IconPreview.docs.mdx'
 
 export default {
   title: 'Icons',
   parameters: {
-    viewMode: 'canvas',
+    docs: {
+      page,
+    },
   },
 } as Meta
 
-const Wrapper = styled.div`
-  margin: 32px;
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: auto 14rem;
-`
-
-const Label = styled(Typography)`
+const IconLabel = styled(Typography)`
   text-align: center;
   margin: 4px;
 `
@@ -43,6 +40,8 @@ const Group = styled.ul`
   column-gap: 1rem;
   margin: 0;
   padding: 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
 `
 
 const IconItem = styled.li`
@@ -65,7 +64,8 @@ const IconItem = styled.li`
 `
 
 const StyledSearch = styled(Search)`
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  margin-top: 32px;
 `
 
 const downloadAsSvg = (data: string | Blob, name: string) =>
@@ -77,6 +77,7 @@ type IconType = {
 
 export const Preview: Story = () => {
   const [searchValue, setSearchValue] = useState<string>('')
+
   const iconsByGroup = useMemo(() => {
     return systemIcons.reduce((acc, val) => {
       if (val.name.includes(searchValue)) {
@@ -91,57 +92,44 @@ export const Preview: Story = () => {
       }
     }, {} as Record<string, IconType[]>)
   }, [searchValue])
+
   return (
-    <Wrapper>
-      <main>
-        <StyledSearch
-          aria-label="Search for icons"
-          id="search-normal"
-          placeholder="Search"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchValue(event.target.value)
-          }
-        />
-        {Object.keys(iconsByGroup).map((key) => {
-          return (
-            <article key={key}>
-              <Typography variant="h2" id={key}>
-                {key}
-              </Typography>
-              <Group>
-                {iconsByGroup[key].map((icon: IconType) => {
-                  const { name } = icon
-                  return (
-                    <IconItem key={name}>
-                      <Icon data={icon} />
-                      <Label>{name}</Label>
-                      <DownloadLabel
-                        variant="outlined"
-                        onClick={() => downloadAsSvg(icon.value, name)}
-                      >
-                        <Icon data={download} />
-                        SVG
-                      </DownloadLabel>
-                    </IconItem>
-                  )
-                })}
-              </Group>
-            </article>
-          )
-        })}
-      </main>
-      <aside>
-        <TableOfContents sticky>
-          {Object.keys(iconsByGroup).map((item) => (
-            <TableOfContents.LinkItem key={item} title={item}>
-              <Typography href={`#` + item} link variant="body_short">
-                <Icon name="subdirectory_arrow_right" size={16} />
-                <span>{item}</span>
-              </Typography>
-            </TableOfContents.LinkItem>
-          ))}
-        </TableOfContents>
-      </aside>
-    </Wrapper>
+    <>
+      <StyledSearch
+        aria-label="Search for icons"
+        id="search-normal"
+        placeholder="Search"
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          setSearchValue(event.target.value)
+        }
+      />
+      {Object.keys(iconsByGroup).map((key) => {
+        return (
+          <div key={key}>
+            <HeaderMdx id={key} as="h2">
+              {key}
+            </HeaderMdx>
+            <Group>
+              {iconsByGroup[key].map((icon: IconType) => {
+                const { name } = icon
+                return (
+                  <IconItem key={name}>
+                    <Icon data={icon} />
+                    <IconLabel>{name}</IconLabel>
+                    <DownloadLabel
+                      variant="outlined"
+                      onClick={() => downloadAsSvg(icon.value, name)}
+                    >
+                      <Icon data={download} />
+                      SVG
+                    </DownloadLabel>
+                  </IconItem>
+                )
+              })}
+            </Group>
+          </div>
+        )
+      })}
+    </>
   )
 }
