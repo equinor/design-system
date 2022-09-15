@@ -280,13 +280,11 @@ export const Draggable: Story<SideSheetProps> = () => {
       position: absolute;
       height: 100%;
       width: 4px;
-      //border-left: 4px solid;
       left: -2px;
       top: 0;
       transition: background-color 150ms ease;
       transition-delay: 150ms;
       background-color: ${dragging ? 'var(--primary)' : 'transparent'};
-      //border-color: ${dragging ? 'var(--primary)' : 'transparent'};
       cursor: ${dragging ? 'col-resize' : 'default'};
       &:hover {
         cursor: col-resize;
@@ -302,6 +300,7 @@ export const Draggable: Story<SideSheetProps> = () => {
       setMaxWidth(node.getBoundingClientRect().width - 20)
     }
   }, [])
+
   const minWidth = 200
   const [width, setWidth] = useState(300)
   const [isDragging, setIsDragging] = useState(false)
@@ -310,6 +309,7 @@ export const Draggable: Story<SideSheetProps> = () => {
 
   const startDrag = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
+
     pointerX = e.clientX
     setIsDragging(true)
     window.addEventListener('mouseup', stopDrag, { once: true })
@@ -322,9 +322,9 @@ export const Draggable: Story<SideSheetProps> = () => {
     setTimeout(() => (throttling = false), 32)
     e.preventDefault()
 
-    const delta = pointerX - e.clientX
+    const deltaX = pointerX - e.clientX
     setWidth((prevWidth) => {
-      const newWidth = prevWidth + delta
+      const newWidth = prevWidth + deltaX
       if (newWidth < minWidth) {
         return minWidth
       }
