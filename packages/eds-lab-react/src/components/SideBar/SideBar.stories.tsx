@@ -231,6 +231,9 @@ export const WithTopbar: Story = () => {
   const SidebarContainerWithTopbar = styled(SidebarContainer)`
     display: grid;
     grid-template-rows: auto 1fr;
+    & > header {
+      position: static;
+    }
   `
 
   const menuItems: SidebarLinkProps[] = [
