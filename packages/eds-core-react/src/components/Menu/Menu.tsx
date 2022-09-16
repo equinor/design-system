@@ -41,7 +41,7 @@ const MenuPaper = styled(Paper)<MenuPaperProps>`
   width: fit-content;
   min-width: fit-content;
   ${bordersTemplate(border)};
-  ${({ open }) => css({ visibility: open ? null : 'hidden' })}
+  ${({ open }) => css({ display: open ? 'block' : 'none' })};
 `
 
 const MenuContainer = forwardRef<HTMLDivElement, MenuProps>(
