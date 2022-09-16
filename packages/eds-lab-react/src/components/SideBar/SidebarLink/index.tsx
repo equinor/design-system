@@ -122,8 +122,11 @@ type OverridableSubComponent = OverridableComponent<
 }
 
 export type SidebarLinkProps = {
+  /** Icon*/
   icon: IconData
+  /** Label text */
   name: string
+  /** Active/current url */
   active?: boolean
   onClick?: () => void
   as?: ElementType
@@ -132,7 +135,10 @@ export type SidebarLinkProps = {
 export const SidebarLink: OverridableSubComponent = forwardRef<
   HTMLAnchorElement,
   SidebarLinkProps
->(({ icon, name, active, onClick, as = 'a', ...rest }, ref) => {
+>(function SidebarLink(
+  { icon, name, active, onClick, as = 'a', ...rest },
+  ref,
+) {
   const { isOpen } = useSideBar()
 
   const getIconColor = () => {
@@ -175,4 +181,4 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
   )
 })
 
-SidebarLink.displayName = 'SidebarItem'
+SidebarLink.displayName = 'SideBar.Link'
