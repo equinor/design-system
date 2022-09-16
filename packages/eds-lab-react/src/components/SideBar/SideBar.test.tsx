@@ -8,11 +8,11 @@ import { home, star_half } from '@equinor/eds-icons'
 
 const defaultMenuItems: SidebarLinkProps[] = [
   {
-    name: 'Home',
+    label: 'Home',
     icon: home,
   },
   {
-    name: 'Another Link',
+    label: 'Another Link',
     icon: star_half,
   },
 ]
@@ -33,7 +33,7 @@ describe('Sidebar', () => {
     render(
       <SideBar>
         {defaultMenuItems.map((m) => {
-          return <SideBar.Link key={m.name} {...m} />
+          return <SideBar.Link key={m.label} {...m} />
         })}
       </SideBar>,
     )
@@ -43,7 +43,7 @@ describe('Sidebar', () => {
     render(
       <SideBar open={false}>
         {defaultMenuItems.map((m) => (
-          <SideBar.Link key={m.name} {...m} />
+          <SideBar.Link key={m.label} {...m} />
         ))}
       </SideBar>,
     )
@@ -57,7 +57,7 @@ describe('Sidebar', () => {
     render(
       <SideBar open={true}>
         {defaultMenuItems.map((m) => (
-          <SideBar.Link key={m.name} {...m} />
+          <SideBar.Link key={m.label} {...m} />
         ))}
       </SideBar>,
     )
@@ -74,7 +74,7 @@ describe('Sidebar', () => {
         <SideBar.Content>
           <SideBar.Toggle />
           {defaultMenuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>,
@@ -93,7 +93,7 @@ describe('Sidebar', () => {
         <SideBar.Content>
           <SideBar.Toggle />
           {defaultMenuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>,
@@ -112,7 +112,7 @@ describe('Sidebar', () => {
         <SideBar.Content>
           <SideBar.Toggle />
           {defaultMenuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>,

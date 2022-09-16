@@ -125,7 +125,7 @@ export type SidebarLinkProps = {
   /** Icon*/
   icon: IconData
   /** Label text */
-  name: string
+  label: string
   /** Active/current url */
   active?: boolean
   onClick?: () => void
@@ -136,7 +136,7 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
   HTMLAnchorElement,
   SidebarLinkProps
 >(function SidebarLink(
-  { icon, name, active, onClick, as = 'a', ...rest },
+  { icon, label, active, onClick, as = 'a', ...rest },
   ref,
 ) {
   const { isOpen } = useSideBar()
@@ -158,14 +158,14 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
       >
         {icon && <Icon data={icon} color={getIconColor()} />}
         <ItemText variant="cell_text" group="table" active={active}>
-          {name}
+          {label}
         </ItemText>
       </Container>
     )
   }
 
   return (
-    <Tooltip title={name} placement="right">
+    <Tooltip title={label} placement="right">
       <Container
         tabIndex={0}
         as={as}

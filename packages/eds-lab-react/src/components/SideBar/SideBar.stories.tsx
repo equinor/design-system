@@ -44,15 +44,15 @@ const SidebarContainer = styled.div`
 export const Primary: Story<SidebarType> = (args) => {
   const menuItems: SidebarLinkProps[] = [
     {
-      name: 'home',
+      label: 'home',
       icon: home,
     },
     {
-      name: 'history',
+      label: 'history',
       icon: history,
     },
     {
-      name: 'favourites',
+      label: 'favourites',
       icon: favorite_outlined,
     },
   ]
@@ -63,7 +63,7 @@ export const Primary: Story<SidebarType> = (args) => {
         <SideBar.Content>
           <SideBar.Toggle />
           {menuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>
@@ -113,15 +113,15 @@ const LogoClosed = () => (
 export const CustomContent: Story = () => {
   const menuItems: SidebarLinkProps[] = [
     {
-      name: 'Dashboard',
+      label: 'Dashboard',
       icon: dashboard,
     },
     {
-      name: 'history',
+      label: 'history',
       icon: history,
     },
     {
-      name: 'favourites',
+      label: 'favourites',
       icon: favorite_outlined,
     },
   ]
@@ -137,7 +137,7 @@ export const CustomContent: Story = () => {
       <SideBar onToggle={(toggle) => console.log('SideBar expanded ', toggle)}>
         <SideBar.Content>
           {menuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
         <SideBar.Footer>
@@ -152,15 +152,15 @@ export const CustomContent: Story = () => {
 export const WithButton: Story = () => {
   const menuItems: SidebarLinkProps[] = [
     {
-      name: 'Dashboard',
+      label: 'Dashboard',
       icon: dashboard,
     },
     {
-      name: 'history',
+      label: 'history',
       icon: history,
     },
     {
-      name: 'favourites',
+      label: 'favourites',
       icon: favorite_outlined,
     },
   ]
@@ -175,7 +175,7 @@ export const WithButton: Story = () => {
             onClick={() => console.log('clicked')}
           />
           {menuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
         <SideBar.Footer>
@@ -192,19 +192,19 @@ export const ActivePath: Story = () => {
   }
   const menuItems: LinkProps[] = [
     {
-      name: 'Dashboard',
+      label: 'Dashboard',
       icon: dashboard,
       href: '#',
       active: true,
     },
     {
-      name: 'history',
+      label: 'history',
       icon: history,
       href: '#',
       active: false,
     },
     {
-      name: 'favourites',
+      label: 'favourites',
       icon: favorite_outlined,
       href: '#',
       active: false,
@@ -216,7 +216,7 @@ export const ActivePath: Story = () => {
       <SideBar>
         <SideBar.Content>
           {menuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
         <SideBar.Footer>
@@ -238,15 +238,15 @@ export const WithTopbar: Story = () => {
 
   const menuItems: SidebarLinkProps[] = [
     {
-      name: 'Dashboard',
+      label: 'Dashboard',
       icon: dashboard,
     },
     {
-      name: 'history',
+      label: 'history',
       icon: history,
     },
     {
-      name: 'favourites',
+      label: 'favourites',
       icon: favorite_outlined,
     },
   ]
@@ -255,14 +255,14 @@ export const WithTopbar: Story = () => {
     <SidebarContainerWithTopbar>
       <TopBar>
         <TopBar.Header>
-          <LogoClosed /> Application name - subtitle
+          <LogoClosed /> Application label - subtitle
         </TopBar.Header>
       </TopBar>
       <SideBar>
         <SideBar.Content>
           <SideBar.Toggle />
           {menuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>
