@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react'
+import { useState, useEffect, useRef, useCallback, useLayoutEffect } from 'react'
 import styled from 'styled-components'
 import {
   Tabs,
@@ -328,40 +328,64 @@ export const Overflow: Story<TabsProps> = () => {
   const [prevDisabled, setPrevDisabled] = useState(true)
   const [nextDisabled, setNextDisabled] = useState(false)
 
+/*   const list = useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+
+    }
+  }, []) */
+
   const handleChange = (index: number) => {
     setActiveTab(index)
   }
 
+  let debounceResize: ReturnType<typeof setTimeout>
+  let debounceScroll: ReturnType<typeof setTimeout>
+
+  const observer = new ResizeObserver((entries) => {
+    entries.forEach((entry) => {
+      console.log('observer ', entry.borderBoxSize[0].inlineSize)
+      setContainerWidth(Math.round(entry.borderBoxSize[0].inlineSize))
+      handleScroll()
+    })
+  })
+
+  const handleScroll = () => {
+    if (debounceScroll) clearTimeout(debounceScroll)
+    debounceScroll = setTimeout(() => {
+      console.log('handlescroll')
+      list.current.scrollLeft === 0
+        ? setPrevDisabled(true)
+        : setPrevDisabled(false)
+      if (list.current !== null) {
+        console.log('containerWidth ', containerWidth)
+        const atEndIsh =
+          Math.abs(
+            containerWidth + Math.round(list.current.scrollLeft) - totalWidth,
+          ) <= 5
+
+        atEndIsh ? setNextDisabled(true) : setNextDisabled(false)
+      }
+    }, 20)
+  }
+
   useLayoutEffect(() => {
     const cachedList = list.current
-    let delayToScrollEnd: ReturnType<typeof setTimeout>
-
-    const handleScroll = () => {
-      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
-      delayToScrollEnd = setTimeout(() => {
-        cachedList?.scrollLeft === 0
-          ? setPrevDisabled(true)
-          : setPrevDisabled(false)
-        if (cachedList !== null) {
-          containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth
-            ? setNextDisabled(true)
-            : setNextDisabled(false)
-        }
-      }, 20)
-    }
-
+    console.log('useLayoutEffect')
     if (cachedList) {
-      setContainerWidth(cachedList.clientWidth)
       setTotalWidth(cachedList.scrollWidth)
+      setContainerWidth(cachedList.clientWidth)
+      observer.observe(cachedList)
       cachedList.addEventListener('scroll', handleScroll, { passive: true })
     }
 
     return () => {
-      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
+      if (debounceScroll) clearTimeout(debounceScroll)
+      if (debounceResize) clearTimeout(debounceResize)
       cachedList?.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerWidth, list, totalWidth])
+  }, [list, totalWidth])
 
   const scroll = (direction: string) => {
     //Tabs have "scroll-snap-align: end" so we need to scroll less than
