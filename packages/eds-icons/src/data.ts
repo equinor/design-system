@@ -1,5 +1,14 @@
 import type { IconData } from './types'
 
+export const filter_alt_active: IconData = {
+  name: 'filter_alt_active',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M9.962 13s-3.73-4.8-5.75-7.39A.998.998 0 0 1 5.002 4h13.91c.83 0 1.3.95.79 1.61-2.02 2.59-5.74 7.39-5.74 7.39v6c0 .55-.45 1-1 1h-2c-.55 0-1-.45-1-1v-6z',
+}
+
 export const layers_off: IconData = {
   name: 'layers_off',
   prefix: 'eds',
@@ -497,6 +506,33 @@ export const fullscreen: IconData = {
   },
 }
 
+export const expand_screen: IconData = {
+  name: 'expand_screen',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M13 5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0V7.414l-3.793 3.793a1 1 0 0 1-1.414-1.414L16.586 6H14a1 1 0 0 1-1-1zM11.207 14.207a1 1 0 0 0-1.414-1.414L6 16.586V14a1 1 0 1 0-2 0v5a1 1 0 0 0 1 1h5a1 1 0 1 0 0-2H7.414l3.793-3.793z',
+}
+
+export const collapse_screen: IconData = {
+  name: 'collapse_screen',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M20.207 4.293a1 1 0 0 1 0 1.414L16.414 9.5H19a1 1 0 1 1 0 2h-5a1 1 0 0 1-1-1v-5a1 1 0 1 1 2 0v2.586l3.793-3.793a1 1 0 0 1 1.414 0zM4.5 14a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0v-2.586l-3.793 3.793a1 1 0 0 1-1.414-1.414L8.086 15H5.5a1 1 0 0 1-1-1z',
+}
+
+export const filter_alt_off: IconData = {
+  name: 'filter_alt_off',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'm3.414 2 17.352 17.352-1.414 1.414L14 15.414V19c0 .583-.424 1-1 1h-1.907C10.518 20 10 19.583 10 19v-6S6.768 8.865 4.41 5.825L2 3.415 3.414 2zM19.74 5.61c-1.219 1.563-3.057 3.932-4.323 5.564l-1.41-1.41L17 6h-6.757l-2-2H18.95c.83 0 1.3.95.79 1.61z',
+}
+
 export const signature: IconData = {
   name: 'signature',
   prefix: 'eds',
@@ -557,7 +593,7 @@ export const priority_low: IconData = {
   height: '24',
   width: '24',
   svgPathData:
-    'M8.5 17.5C4.92 17.5 2 14.58 2 11s2.92-6.5 6.5-6.5H12v2H8.5C6.02 6.5 4 8.52 4 11s2.02 4.5 4.5 4.5H9v-2l3 3-3 3v-2h-.5zM22 4.5h-8v2h8v-2zm0 5.5h-8v2h8v-2zm-8 5.5h8v2h-8v-2z',
+    'M8.5 17.5C4.92 17.5 2 14.58 2 11s2.92-6.5 6.5-6.5H12v2H8.5C6.02 6.5 4 8.52 4 11s2.02 4.5 4.5 4.5H9V13l4 3.5L9 20v-2.5h-.5zM22 4.5h-8v2h8v-2zm0 5.5h-8v2h8v-2zm-8 5.5h8v2h-8v-2z',
 }
 
 export const priority_high: IconData = {
@@ -566,7 +602,7 @@ export const priority_high: IconData = {
   height: '24',
   width: '24',
   svgPathData:
-    'M8.5 6.5C4.92 6.5 2 9.42 2 13s2.92 6.5 6.5 6.5H12v-2H8.5C6.02 17.5 4 15.48 4 13s2.02-4.5 4.5-4.5H9v2l3-3-3-3v2h-.5zm13.5 0h-8v2h8v-2zm0 5.5h-8v2h8v-2zm-8 5.5h8v2h-8v-2z',
+    'M8.5 6.5C4.92 6.5 2 9.42 2 13s2.92 6.5 6.5 6.5H12v-2H8.5C6.02 17.5 4 15.48 4 13s2.02-4.5 4.5-4.5H9V11l4-3.5L9 4v2.5h-.5zm13.5 0h-8v2h8v-2zm0 5.5h-8v2h8v-2zm-8 5.5h8v2h-8v-2z',
 }
 
 export const inbox: IconData = {
@@ -1813,6 +1849,15 @@ export const power_bi: IconData = {
   width: '24',
   svgPathData:
     'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h2v-2H4V6h16v12h-1v2h1c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7 15h2v5H7v-5zM10 13h2v7h-2v-7zM13 14h2v6h-2v-6zM16 11h2v9h-2v-9z',
+}
+
+export const slack: IconData = {
+  name: 'slack',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData:
+    'M7.362 14.11a1.682 1.682 0 0 1-3.362 0 1.688 1.688 0 0 1 1.681-1.682h1.681v1.681zm.847 0a1.688 1.688 0 0 1 1.682-1.682 1.688 1.688 0 0 1 1.68 1.681v4.21A1.688 1.688 0 0 1 9.892 20a1.684 1.684 0 0 1-1.682-1.681v-4.21zm1.682-6.747A1.684 1.684 0 0 1 8.209 5.68 1.688 1.688 0 0 1 9.891 4a1.688 1.688 0 0 1 1.68 1.681v1.681h-1.68zm0 .846a1.686 1.686 0 0 1 1.68 1.682 1.686 1.686 0 0 1-1.68 1.68H5.68A1.688 1.688 0 0 1 4 9.892a1.684 1.684 0 0 1 1.681-1.682h4.21zm6.746 1.682a1.682 1.682 0 0 1 1.682-1.682A1.688 1.688 0 0 1 20 9.891a1.688 1.688 0 0 1-1.681 1.68h-1.681v-1.68zm-.846 0a1.688 1.688 0 0 1-1.682 1.68 1.686 1.686 0 0 1-1.68-1.68V5.68A1.688 1.688 0 0 1 14.108 4a1.682 1.682 0 0 1 1.682 1.681v4.21zm-1.682 6.746a1.68 1.68 0 0 1 1.682 1.682A1.686 1.686 0 0 1 14.109 20a1.688 1.688 0 0 1-1.68-1.681v-1.681h1.68zm0-.846a1.688 1.688 0 0 1-1.68-1.682 1.686 1.686 0 0 1 1.68-1.68h4.21A1.688 1.688 0 0 1 20 14.108a1.682 1.682 0 0 1-1.681 1.682h-4.21z',
 }
 
 export const blocked_off: IconData = {
