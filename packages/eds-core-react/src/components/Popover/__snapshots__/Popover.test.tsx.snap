@@ -7,6 +7,7 @@ exports[`Popover Matches snapshot 1`] = `
 }
 
 .c1 {
+  display: grid;
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -14,7 +15,6 @@ exports[`Popover Matches snapshot 1`] = `
   font-weight: 500;
   line-height: 1.500em;
   text-align: left;
-  display: grid;
   grid-auto-columns: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;

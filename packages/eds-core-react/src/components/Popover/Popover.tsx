@@ -33,9 +33,8 @@ type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
 const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
   return css`
-    ${{ visibility: open ? null : 'hidden' }}
+    ${{ display: open ? 'grid' : 'none' }}
     ${typographyTemplate(theme.typography)}
-    display: grid;
     grid-auto-columns: auto;
     align-items: center;
     align-content: start;
