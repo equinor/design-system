@@ -110,7 +110,7 @@ const LogoClosed = () => (
   </svg>
 )
 
-export const CustomContent: Story = () => {
+export const CustomContent: Story<SidebarType> = () => {
   const menuItems: SidebarLinkProps[] = [
     {
       label: 'Dashboard',
@@ -149,7 +149,7 @@ export const CustomContent: Story = () => {
   )
 }
 
-export const WithButton: Story = () => {
+export const WithButton: Story<SidebarType> = () => {
   const menuItems: SidebarLinkProps[] = [
     {
       label: 'Dashboard',
@@ -186,7 +186,7 @@ export const WithButton: Story = () => {
   )
 }
 
-export const ActivePath: Story = () => {
+export const ActivePath: Story<SidebarType> = () => {
   type LinkProps = SidebarLinkProps & {
     href: string
   }
@@ -227,7 +227,7 @@ export const ActivePath: Story = () => {
   )
 }
 
-export const WithTopbar: Story = () => {
+export const WithTopbar: Story<SidebarType> = () => {
   const SidebarContainerWithTopbar = styled(SidebarContainer)`
     display: grid;
     grid-template-rows: auto 1fr;
