@@ -181,4 +181,4 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
   )
 })
 
-SidebarLink.displayName = 'SideBar.Link'
+SidebarLink.displayName = 'SidebarLink'
