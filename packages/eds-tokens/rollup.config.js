@@ -1,6 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve'
 import typescript from 'rollup-plugin-typescript2'
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 import del from 'rollup-plugin-delete'
 import pkg from './package.json'
 import commonjsPkg from './commonjs/package.json'
@@ -16,7 +15,6 @@ export default [
       del({ targets: 'dist/*', runOnce: true }),
       resolve(),
       typescript({ useTsconfigDeclarationDir: true }),
-      sizeSnapshot(),
     ],
     output: [
       {
