@@ -134,5 +134,43 @@ The dropdown can change the button action (as in this example) or be used to imm
 
 <Story id="inputs-button--group-split" />
 
+## Button.Toggle
+Is used to group related **options**.
+
+### Usage
+
+The `Button.Toggle`
+<ul>
+  <li>emphasizes groups of related <code>Toggle</code> buttons,</li>
+  <li>controls the selected state of its child buttons when given its own `selected` prop.</li>
+</ul>
+
+```tsx
+import { Button } from '@equinor/eds-core-react'
+import { save, edit, copy } from '@equinor/eds-icons'
+
+<Button.Toggle aria-label="toggle button group">
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
+  </Button>
+  <Button aria-label="edit action">
+    <Icon data={edit} title="Ghost icon edit"></Icon>
+  </Button>
+  <Button aria-label="copy action">
+    <Icon data={copy} title="Ghost icon copy"></Icon>
+  </Button>
+</Button.Toggle>
+```
+
+### Accessibility
+
+#### ARIA
+<ul>
+  <li>Button.Toggle sets <code>aria-pressed="bool"</code> according to the button state.</li>
+  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
+</ul>
+
+## Examples
+
 ### Toggle Button
 <Story id="inputs-button--toggle-button" />
