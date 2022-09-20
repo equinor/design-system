@@ -72,9 +72,7 @@ If used together with `TopBar`, the layout should be handled with css-grid to en
 `SideBar.Link` requires both `label` and `icon` due to the visual style of the collapsed state. 
 Navigation can be done with `href`, or in the case of a third party routing library, one can use the `as` prop 
 to override component type and allow their specific props. 
-`SideBar.Link` have an `active` prop that should be used to visualize the current path. 
-We do not provide logic for detecting current path, as different projects and third party routers 
-have different needs and behaviours around this, and may have their own tools or hooks to simplify this.
+Use the `active` property to indicate current active path when used for navigation.
 <Story id="components-sidebar--active-path" />
 
 ### With custom content
