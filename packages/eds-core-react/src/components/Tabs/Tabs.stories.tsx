@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import {
   Tabs,
@@ -10,6 +10,7 @@ import {
   EdsProvider,
   Density,
 } from '../..'
+import { mergeRefs } from '@equinor/eds-utils'
 import { ComponentMeta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Stack } from './../../../.storybook/components'
@@ -321,8 +322,9 @@ export const WithStyledComponent: Story<TabsProps> = () => {
 WithStyledComponent.storyName = 'With styled component'
 
 export const Overflow: Story<TabsProps> = () => {
-  const [activeTab, setActiveTab] = useState(0)
   const list = useRef<HTMLDivElement>(null)
+  const debounceScroll = useRef<ReturnType<typeof setTimeout>>(null)
+  const [activeTab, setActiveTab] = useState(0)
   const [containerWidth, setContainerWidth] = useState(0)
   const [totalWidth, setTotalWidth] = useState(0)
   const [prevDisabled, setPrevDisabled] = useState(true)
@@ -332,36 +334,53 @@ export const Overflow: Story<TabsProps> = () => {
     setActiveTab(index)
   }
 
-  useLayoutEffect(() => {
+  const handleScroll = useCallback(() => {
+    if (debounceScroll.current) clearTimeout(debounceScroll.current)
+    debounceScroll.current = setTimeout(() => {
+      if (!list.current) return
+      list.current.scrollLeft === 0
+        ? setPrevDisabled(true)
+        : setPrevDisabled(false)
+
+      const atEndIsh =
+        Math.abs(
+          containerWidth + Math.round(list.current.scrollLeft) - totalWidth,
+        ) <= 5
+
+      atEndIsh ? setNextDisabled(true) : setNextDisabled(false)
+    }, 20)
+  }, [containerWidth, totalWidth])
+
+  const resizeObserver = useMemo(
+    () =>
+      new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          setContainerWidth(Math.round(entry.borderBoxSize[0].inlineSize))
+          handleScroll()
+        })
+      }),
+    [handleScroll],
+  )
+
+  const listCallback = useCallback(
+    (node: HTMLDivElement) => {
+      if (!node) return
+      setTotalWidth(node.scrollWidth)
+      setContainerWidth(node.clientWidth)
+      resizeObserver.observe(node)
+      node.addEventListener('scroll', handleScroll, { passive: true })
+    },
+    [handleScroll, resizeObserver],
+  )
+
+  useEffect(() => {
     const cachedList = list.current
-    let delayToScrollEnd: ReturnType<typeof setTimeout>
-
-    const handleScroll = () => {
-      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
-      delayToScrollEnd = setTimeout(() => {
-        cachedList?.scrollLeft === 0
-          ? setPrevDisabled(true)
-          : setPrevDisabled(false)
-        if (cachedList !== null) {
-          containerWidth + Math.ceil(cachedList.scrollLeft) === totalWidth
-            ? setNextDisabled(true)
-            : setNextDisabled(false)
-        }
-      }, 20)
-    }
-
-    if (cachedList) {
-      setContainerWidth(cachedList.clientWidth)
-      setTotalWidth(cachedList.scrollWidth)
-      cachedList.addEventListener('scroll', handleScroll, { passive: true })
-    }
-
     return () => {
-      if (delayToScrollEnd) clearTimeout(delayToScrollEnd)
+      if (debounceScroll.current) clearTimeout(debounceScroll.current)
       cachedList?.removeEventListener('scroll', handleScroll)
+      resizeObserver.disconnect()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerWidth, list, totalWidth])
+  }, [handleScroll, resizeObserver])
 
   const scroll = (direction: string) => {
     //Tabs have "scroll-snap-align: end" so we need to scroll less than
@@ -388,7 +407,7 @@ export const Overflow: Story<TabsProps> = () => {
         >
           <Icon name="chevron_left" />
         </NavButton>
-        <Tabs.List ref={list}>
+        <Tabs.List ref={mergeRefs<HTMLDivElement>(list, listCallback)}>
           {Array.from({ length: 20 }, (_, i) => (
             <Tabs.Tab key={i}>Tab Title {i + 1}</Tabs.Tab>
           ))}
