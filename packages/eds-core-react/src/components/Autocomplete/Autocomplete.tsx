@@ -542,7 +542,7 @@ function AutocompleteInner<T>(
           position: strategy,
           top: y ?? 0,
           left: x ?? 0,
-          zIndex: 1500,
+          zIndex: 1400,
         },
       })}
     >
