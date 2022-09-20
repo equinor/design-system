@@ -425,8 +425,13 @@ GroupSplit.decorators = [
 ]
 
 export const ToggleButton: Story<ToggleButtonProps> = () => {
+  const [selectedButtons, setSelectedButtons] = useState([0, 2])
+  // const changeHandler = () => {
+  //   console.log('selectedButtons', selectedButtons)
+  // }
+
   return (
-    <Button.Toggle multiple vertical>
+    <Button.Toggle multiple selected={selectedButtons}>
       <Button aria-label="save action">
         <Icon data={save} title="Ghost icon save"></Icon>
       </Button>

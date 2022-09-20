@@ -5,18 +5,33 @@ import {
   forwardRef,
   ReactElement,
   useState,
+  useEffect,
 } from 'react'
 import { Button, ButtonProps, ButtonGroupProps } from '..'
 
 export type ToggleButtonProps = {
   /** Multiple */
   multiple?: boolean
-} & HTMLAttributes<HTMLDivElement> &
+  /** Array of selected buttons */
+  selected?: number[]
+  /** OnChange */
+  onChange?: (indexes: number[]) => void
+} & Omit<HTMLAttributes<HTMLElement>, 'onChange'> &
   Pick<ButtonGroupProps, 'vertical'>
 
 export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
-  function ToggleButton({ children, multiple, ...props }, ref) {
-    const [selectedIndexes, setSelectedIndexes] = useState<number[]>([])
+  function ToggleButton(
+    { children, multiple, selected, onChange, ...props },
+    ref,
+  ) {
+    const [selectedIndexes, setSelectedIndexes] = useState<number[]>(selected)
+    const isInitialSelected = Array.isArray(selected)
+
+    useEffect(() => {
+      if (isInitialSelected) {
+        setSelectedIndexes(selected)
+      }
+    }, [selected, isInitialSelected])
 
     const updatedChildren = ReactChildren.map(
       children,
@@ -28,11 +43,13 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
           variant: isSelected ? 'contained' : 'outlined',
           onClick: () => {
             if (multiple) {
-              setSelectedIndexes((prevSelectedIndexes) =>
-                prevSelectedIndexes.includes(index)
+              setSelectedIndexes((prevSelectedIndexes) => {
+                const updatedSelection = prevSelectedIndexes.includes(index)
                   ? prevSelectedIndexes.filter((i) => i !== index)
-                  : [...prevSelectedIndexes, index],
-              )
+                  : [...prevSelectedIndexes, index]
+
+                return updatedSelection
+              })
             } else {
               setSelectedIndexes([index])
             }
