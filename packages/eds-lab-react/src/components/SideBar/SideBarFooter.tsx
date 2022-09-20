@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 
-export type SideBarFooterProps = HTMLAttributes<HTMLDivElement>
+type SideBarFooterProps = HTMLAttributes<HTMLDivElement>
 
 const StyledSideBarFooter = styled.div(() => {
   return css`

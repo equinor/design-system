@@ -1,5 +1,5 @@
-import { forwardRef, ForwardRefExoticComponent } from 'react'
-import { Button, ButtonProps, Icon, Tooltip } from '@equinor/eds-core-react'
+import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from 'react'
+import { Button, Icon, Tooltip } from '@equinor/eds-core-react'
 import { useSideBar } from './SideBar.context'
 import { sidebar as tokens } from './SideBar.tokens'
 import { expand, collapse } from '@equinor/eds-icons'
@@ -34,26 +34,29 @@ const ToggleContainer = styled.div<ContainerProps>(({ theme }) => {
   `
 })
 
-export const SideBarToggle: ForwardRefExoticComponent<ButtonProps> = forwardRef<
-  HTMLButtonElement,
-  ButtonProps
->(function SideBarToggle({ ...rest }, ref) {
-  const props = {
-    ...rest,
+type SideBarToggleProps = HTMLAttributes<HTMLDivElement>
+
+export const SideBarToggle: ForwardRefExoticComponent<SideBarToggleProps> =
+  forwardRef<HTMLDivElement, SideBarToggleProps>(function SideBarToggle(
+    { ...rest },
     ref,
-  }
-  const { isOpen, setIsOpen } = useSideBar()
-  return (
-    <ToggleContainer open={isOpen}>
-      <Tooltip title={isOpen ? 'Collapse' : 'Expand'} placement="right">
-        <Button
-          {...props}
-          variant="ghost_icon"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <Icon size={24} data={isOpen ? collapse : expand} color={iconColor} />
-        </Button>
-      </Tooltip>
-    </ToggleContainer>
-  )
-})
+  ) {
+    const props = {
+      ...rest,
+      ref,
+    }
+    const { isOpen, setIsOpen } = useSideBar()
+    return (
+      <ToggleContainer open={isOpen} {...props}>
+        <Tooltip title={isOpen ? 'Collapse' : 'Expand'} placement="right">
+          <Button variant="ghost_icon" onClick={() => setIsOpen(!isOpen)}>
+            <Icon
+              size={24}
+              data={isOpen ? collapse : expand}
+              color={iconColor}
+            />
+          </Button>
+        </Tooltip>
+      </ToggleContainer>
+    )
+  })

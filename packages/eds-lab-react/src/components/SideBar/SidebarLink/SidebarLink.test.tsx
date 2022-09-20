@@ -13,10 +13,8 @@ import userEvent from '@testing-library/user-event'
 import { SideBar } from '../SideBar'
 
 const defaultProps: SidebarLinkProps = {
-  name: 'Home',
-  currentUrl: 'http://localhost:3000/home',
+  label: 'Home',
   icon: home,
-  link: 'home',
 }
 
 const customRender = (
@@ -82,7 +80,7 @@ describe('Sidebar link', () => {
     )
   })
 
-  it('Renders name when open', () => {
+  it('Renders label when open', () => {
     customRender(<SidebarLink {...defaultProps}></SidebarLink>, {
       wrapper: ({ children }) => SideBarWrapper(children, true),
     })
@@ -90,7 +88,7 @@ describe('Sidebar link', () => {
     expect(screen.getByText('Home')).toHaveTextContent('Home')
   })
 
-  it('Does not render name when closed', () => {
+  it('Does not render label when closed', () => {
     customRender(<SidebarLink {...defaultProps}></SidebarLink>, {
       wrapper: ({ children }) => SideBarWrapper(children),
     })

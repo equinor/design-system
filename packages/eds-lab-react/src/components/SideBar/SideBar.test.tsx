@@ -2,17 +2,17 @@ import { render, screen, cleanup } from '@testing-library/react'
 //import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { SideBar } from '.'
-import { SidebarLinkType } from './SidebarLink'
+import { SidebarLinkProps } from './SidebarLink'
 import { sidebar as tokens } from './SideBar.tokens'
 import { home, star_half } from '@equinor/eds-icons'
 
-const defaultMenuItems: SidebarLinkType[] = [
+const defaultMenuItems: SidebarLinkProps[] = [
   {
-    name: 'Home',
+    label: 'Home',
     icon: home,
   },
   {
-    name: 'Another Link',
+    label: 'Another Link',
     icon: star_half,
   },
 ]
@@ -30,11 +30,10 @@ beforeAll(() => {
 
 describe('Sidebar', () => {
   it('Sidebar renders', () => {
-    const currentUrl = 'home'
     render(
       <SideBar>
         {defaultMenuItems.map((m) => {
-          return <SideBar.Link key={m.name} currentUrl={currentUrl} {...m} />
+          return <SideBar.Link key={m.label} {...m} />
         })}
       </SideBar>,
     )
@@ -44,7 +43,7 @@ describe('Sidebar', () => {
     render(
       <SideBar open={false}>
         {defaultMenuItems.map((m) => (
-          <SideBar.Link key={m.name} {...m} />
+          <SideBar.Link key={m.label} {...m} />
         ))}
       </SideBar>,
     )
@@ -58,7 +57,7 @@ describe('Sidebar', () => {
     render(
       <SideBar open={true}>
         {defaultMenuItems.map((m) => (
-          <SideBar.Link key={m.name} {...m} />
+          <SideBar.Link key={m.label} {...m} />
         ))}
       </SideBar>,
     )
@@ -75,7 +74,7 @@ describe('Sidebar', () => {
         <SideBar.Content>
           <SideBar.Toggle />
           {defaultMenuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>,
@@ -94,7 +93,7 @@ describe('Sidebar', () => {
         <SideBar.Content>
           <SideBar.Toggle />
           {defaultMenuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>,
@@ -113,7 +112,7 @@ describe('Sidebar', () => {
         <SideBar.Content>
           <SideBar.Toggle />
           {defaultMenuItems.map((m) => (
-            <SideBar.Link key={m.name} {...m} />
+            <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
       </SideBar>,
