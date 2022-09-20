@@ -315,7 +315,7 @@ export const Compact: Story<ButtonProps> = () => {
       <Button variant="ghost_icon" aria-label="menu action">
         <Icon data={menu} title="Ghost icon menu"></Icon>
       </Button>
-      <Button.Group aria-label="button group compact">
+      <Button.Group aria-label="compact">
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
@@ -333,7 +333,7 @@ Compact.decorators = [
 ]
 
 export const GroupHorizontal: Story<ButtonGroupProps> = () => (
-  <Button.Group aria-label="button group">
+  <Button.Group aria-label="primary">
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
