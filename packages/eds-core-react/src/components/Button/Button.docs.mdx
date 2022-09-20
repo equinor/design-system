@@ -101,7 +101,7 @@ The buttons can be grouped by wrapping them with the `Button.Group` component.
 ```tsx
 import { Button } from '@equinor/eds-core-react'
 
-<Button.Group aria-label="button group">
+<Button.Group aria-label="primary">
   <Button>Click me!</Button>
   <Button>Click me!</Button>
   <Button>Click me!</Button>
@@ -142,22 +142,27 @@ Is used to group related **options**.
 The `Button.Toggle`
 <ul>
   <li>emphasizes groups of related <code>Toggle</code> buttons,</li>
-  <li>controls the selected state of its child buttons when given its own `selected` prop.</li>
+  <li>controls the selected state of its child buttons when given its own <code>selected</code> prop.</li>
 </ul>
 
 ```tsx
 import { Button } from '@equinor/eds-core-react'
-import { save, edit, copy } from '@equinor/eds-icons'
+import { save } from '@equinor/eds-icons'
 
-<Button.Toggle aria-label="toggle button group">
+const [selectedButton, setSelectedButton] = useState([])
+const handleChange = (indexes: number[]) => {
+  setSelectedButton(indexes)
+}
+
+<Button.Toggle aria-label="actions" selected={selectedButton} onChange={handleChange}>
   <Button aria-label="save action">
     <Icon data={save} title="Ghost icon save"></Icon>
   </Button>
-  <Button aria-label="edit action">
-    <Icon data={edit} title="Ghost icon edit"></Icon>
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
   </Button>
-  <Button aria-label="copy action">
-    <Icon data={copy} title="Ghost icon copy"></Icon>
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
   </Button>
 </Button.Toggle>
 ```
@@ -172,5 +177,26 @@ import { save, edit, copy } from '@equinor/eds-icons'
 
 ## Examples
 
-### Toggle Button
-<Story id="inputs-button--toggle-button" />
+### Exclusive selection
+
+With exclusive selection, selecting one option deselects any other.
+
+<Story id="inputs-button--toggle-exclusive-selection" />
+
+### Multiple
+
+Multiple selection allows for logically-grouped options, to have multiple options selected, by using the `multiple` prop.
+
+<Story id="inputs-button--toggle-multiple" />
+
+### Enforced
+
+To enforce at least one button to be active, you can adapt your `handleChange` function.
+
+<Story id="inputs-button--toggle-enforced" />
+
+### Vertical
+
+The `Button.Toggle` can be displayed vertically using the `vertical` prop.
+
+<Story id="inputs-button--toggle-vertical" />

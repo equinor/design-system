@@ -12,7 +12,17 @@ import {
   Progress,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { menu, add, save, edit, copy } from '@equinor/eds-icons'
+import {
+  menu,
+  add,
+  save,
+  edit,
+  copy,
+  calendar,
+  time,
+  alarm,
+  timer,
+} from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
@@ -428,14 +438,18 @@ GroupSplit.decorators = [
   ),
 ]
 
-export const ToggleButton: Story<ToggleButtonProps> = () => {
-  const [selectedButtons, setSelectedButtons] = useState([0, 2])
+export const ToggleExclusiveSelection: Story<ToggleButtonProps> = () => {
+  const [selectedButton, setSelectedButton] = useState([])
   const handleChange = (indexes: number[]) => {
-    setSelectedButtons(indexes)
+    setSelectedButton(indexes)
   }
 
   return (
-    <Button.Toggle multiple selected={selectedButtons} onChange={handleChange}>
+    <Button.Toggle
+      selected={selectedButton}
+      onChange={handleChange}
+      aria-label="file actions"
+    >
       <Button aria-label="save action">
         <Icon data={save} title="Ghost icon save"></Icon>
       </Button>
@@ -448,3 +462,114 @@ export const ToggleButton: Story<ToggleButtonProps> = () => {
     </Button.Toggle>
   )
 }
+ToggleExclusiveSelection.storyName = 'Toggle Exclusive selection'
+ToggleExclusiveSelection.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const ToggleMultiple: Story<ToggleButtonProps> = () => {
+  const [selectedButtons, setSelectedButtons] = useState([])
+  const handleChange = (indexes: number[]) => {
+    setSelectedButtons(indexes)
+  }
+
+  return (
+    <Button.Toggle
+      multiple
+      selected={selectedButtons}
+      onChange={handleChange}
+      aria-label="file actions"
+    >
+      <Button aria-label="calendar">
+        <Icon data={calendar} title="Ghost icon calendar"></Icon>
+      </Button>
+      <Button aria-label="time">
+        <Icon data={time} title="Ghost icon time"></Icon>
+      </Button>
+      <Button aria-label="alarm">
+        <Icon data={alarm} title="Ghost icon alarm"></Icon>
+      </Button>
+      <Button aria-label="timer" disabled>
+        <Icon data={timer} title="Ghost icon timer"></Icon>
+      </Button>
+    </Button.Toggle>
+  )
+}
+ToggleMultiple.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const ToggleEnforced: Story<ToggleButtonProps> = () => {
+  const [selectedButtons, setSelectedButtons] = useState([0, 1])
+  const handleChange = (indexes: number[]) => {
+    setSelectedButtons(indexes)
+  }
+
+  return (
+    <Button.Toggle
+      multiple
+      selected={selectedButtons}
+      onChange={handleChange}
+      aria-label="file actions"
+    >
+      <Button aria-label="calendar">
+        <Icon data={calendar} title="Ghost icon calendar"></Icon>
+      </Button>
+      <Button aria-label="time">
+        <Icon data={time} title="Ghost icon time"></Icon>
+      </Button>
+      <Button aria-label="alarm">
+        <Icon data={alarm} title="Ghost icon alarm"></Icon>
+      </Button>
+    </Button.Toggle>
+  )
+}
+ToggleEnforced.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const ToggleVertical: Story<ToggleButtonProps> = () => {
+  const [selectedButton, setSelectedButton] = useState([])
+  const handleChange = (indexes: number[]) => {
+    setSelectedButton(indexes)
+  }
+
+  return (
+    <Button.Toggle
+      vertical
+      selected={selectedButton}
+      onChange={handleChange}
+      aria-label="file actions"
+    >
+      <Button aria-label="save action">
+        <Icon data={save} title="Ghost icon save"></Icon>
+      </Button>
+      <Button aria-label="edit action">
+        <Icon data={edit} title="Ghost icon edit"></Icon>
+      </Button>
+      <Button aria-label="copy action">
+        <Icon data={copy} title="Ghost icon copy"></Icon>
+      </Button>
+    </Button.Toggle>
+  )
+}
+ToggleVertical.storyName = 'Toggle Vertical'
+ToggleVertical.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
