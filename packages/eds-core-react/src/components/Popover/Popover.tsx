@@ -33,18 +33,11 @@ type StyledPopoverProps = Pick<PopoverProps, 'open'>
 
 const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
   return css`
-    ${{ display: open ? 'grid' : 'none' }}
+    ${{ display: open ? 'block' : 'none' }}
     ${typographyTemplate(theme.typography)}
-    grid-auto-columns: auto;
-    align-items: center;
-    align-content: start;
     background: ${theme.background};
-    width: max-content;
-    max-height: ${theme.maxHeight};
-    max-width: ${theme.maxWidth};
     ${bordersTemplate(theme.border)}
     z-index: 1400;
-    overflow: auto;
   `
 })
 
@@ -61,6 +54,10 @@ const InnerWrapper = styled.div(({ theme }) => {
   return css`
     display: grid;
     grid-gap: ${theme.spacings.bottom};
+    max-height: ${theme.maxHeight};
+    width: max-content;
+    max-width: ${theme.maxWidth};
+    overflow: auto;
   `
 })
 
