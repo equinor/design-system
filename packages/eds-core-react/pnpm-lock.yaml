@@ -47,14 +47,12 @@ specifiers:
   react-dom: ^17.0.2
   react-fast-compare: 3.2.0
   react-hook-form: ^7.36.0
-  react-is: ^18.2.0
   rollup: ^2.79.0
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-postcss: ^4.0.2
   styled-components: 5.3.5
   tsc-watch: ^5.0.3
   typescript: ^4.8.3
-  webpack: ^5.74.0
 
 dependencies:
   '@babel/runtime': 7.19.0
@@ -105,14 +103,12 @@ devDependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-hook-form: 7.36.0_react@17.0.2
-  react-is: 18.2.0
   rollup: 2.79.0
   rollup-plugin-delete: 2.0.0
   rollup-plugin-postcss: 4.0.2_postcss@8.4.16
   styled-components: 5.3.5_v5ja746gkdtknuc6tj46sve3be
   tsc-watch: 5.0.3_typescript@4.8.3
   typescript: 4.8.3
-  webpack: 5.74.0
 
 packages:
 
@@ -5073,7 +5069,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10590,17 +10586,6 @@ packages:
     peerDependenciesMeta:
       bluebird:
         optional: true
-    dev: true
-
-  /promise-inflight/1.0.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-    dependencies:
-      bluebird: 3.7.2
     dev: true
 
   /promise.allsettled/1.0.5:
