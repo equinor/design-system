@@ -15,16 +15,15 @@ type AvailableElevations = keyof Pick<Elevations, 'none' | 'raised'>
 
 export type TopbarProps = {
   elevation?: AvailableElevations
+  /** Topbar will stick to top when scrolling. */
+  sticky?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
-const StyledTopBar = styled(Paper)<TopbarProps>(({ theme }) => {
+const StyledTopBar = styled(Paper)<TopbarProps>(({ theme, sticky }) => {
   return css`
     height: ${theme.height};
-    top: 0;
-    position: sticky;
     background: ${theme.background};
     box-sizing: border-box;
-    z-index: 1100;
     display: grid;
     grid-column-gap: ${theme.spacings.left};
     grid-template-columns: auto 1fr auto;
@@ -33,11 +32,18 @@ const StyledTopBar = styled(Paper)<TopbarProps>(({ theme }) => {
     ${bordersTemplate(theme.border)}
     ${spacingsTemplate(theme.spacings)};
     ${typographyTemplate(theme.typography)}
+
+    ${sticky &&
+    css`
+      position: sticky;
+      top: 0;
+      z-index: 1100;
+    `}
   `
 })
 
 export const TopBar = forwardRef<HTMLDivElement, TopbarProps>(function TopBar(
-  { children, elevation = 'none', ...props },
+  { children, elevation = 'none', sticky = true, ...props },
   ref,
 ) {
   const { density } = useEds()
@@ -48,7 +54,12 @@ export const TopBar = forwardRef<HTMLDivElement, TopbarProps>(function TopBar(
   }
   return (
     <ThemeProvider theme={token}>
-      <StyledTopBar forwardedAs={'header'} elevation={elevation} {...rest}>
+      <StyledTopBar
+        forwardedAs={'header'}
+        elevation={elevation}
+        sticky={sticky}
+        {...rest}
+      >
         {children}
       </StyledTopBar>
     </ThemeProvider>
