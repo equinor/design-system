@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import styled from 'styled-components'
+import { useState, useCallback } from 'react'
+import styled, { css } from 'styled-components'
+import { tokens } from '@equinor/eds-tokens'
 import {
   SideSheet,
   SideSheetProps,
@@ -33,6 +34,14 @@ export default {
     },
   },
 } as ComponentMeta<typeof SideSheet>
+
+const {
+  colors: {
+    interactive: {
+      primary__resting: { rgba: primaryColor },
+    },
+  },
+} = tokens
 
 const Child = styled.div`
   padding: 6px;
@@ -259,5 +268,132 @@ export const Scrollable: Story<SideSheetProps> = () => {
         </SideSheet>
       </Scrim>
     </>
+  )
+}
+
+export const Draggable: Story<SideSheetProps> = () => {
+  const [toggle, setToggle] = useState(true)
+
+  const DragTarget = styled.div<{ dragging: boolean }>(({ dragging }) => {
+    return css`
+      --primary: ${primaryColor};
+      position: absolute;
+      height: 100%;
+      width: 12px;
+      left: -6px;
+      top: 0;
+      cursor: ${dragging ? 'col-resize' : 'default'};
+      &::after {
+        transition: background-color 150ms ease;
+        transition-delay: 150ms;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 4px;
+        transform: translateX(-50%);
+        height: 100%;
+        background-color: ${dragging ? 'var(--primary)' : 'transparent'};
+      }
+      &:hover {
+        cursor: col-resize;
+        &::after {
+          transition-delay: 200ms;
+          background-color: var(--primary);
+        }
+      }
+    `
+  })
+
+  const [maxWidth, setMaxWidth] = useState(0)
+  const containerRef = useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+      setMaxWidth(node.getBoundingClientRect().width - 20)
+    }
+  }, [])
+
+  const minWidth = 200
+  const [width, setWidth] = useState(300)
+  const [isDragging, setIsDragging] = useState(false)
+  let pointerX: number
+  let throttling = false
+
+  const startDrag = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+
+    pointerX = e.clientX
+    setIsDragging(true)
+    window.addEventListener('mouseup', stopDrag, { once: true })
+    window.addEventListener('mousemove', handleDrag)
+  }
+
+  const handleDrag = (e: MouseEvent) => {
+    if (throttling) return
+    throttling = true
+    setTimeout(() => (throttling = false), 32)
+    e.preventDefault()
+
+    const deltaX = pointerX - e.clientX
+    setWidth((prevWidth) => {
+      const newWidth = prevWidth + deltaX
+      if (newWidth < minWidth) {
+        return minWidth
+      }
+      if (newWidth > maxWidth) {
+        return maxWidth
+      }
+      return newWidth
+    })
+    pointerX = e.clientX
+  }
+
+  const stopDrag = () => {
+    window.removeEventListener('mousemove', handleDrag)
+    setIsDragging(false)
+  }
+
+  return (
+    <div ref={containerRef} style={{ height: '450px', isolation: 'isolate' }}>
+      <Button
+        variant="outlined"
+        onClick={() => setToggle(!toggle)}
+        style={{ float: 'right' }}
+      >
+        Filters
+      </Button>
+
+      <SideSheet
+        open={toggle}
+        onClose={() => setToggle(!toggle)}
+        width={`${width}px`}
+      >
+        <DragTarget onMouseDown={startDrag} dragging={isDragging} />
+        <div style={{ padding: '0 8px' }}>
+          <Typography variant="h4">Filters</Typography>
+          <br />
+          <Typography variant="h6" color="disabled">
+            Labels
+          </Typography>
+          <UnstyledList>
+            <li>
+              <Checkbox
+                label="Tables"
+                name="multiple"
+                value="first"
+                defaultChecked
+              />
+            </li>
+            <li>
+              <Checkbox label="Graphs" name="multiple" value="second" />
+            </li>
+            <li>
+              <Checkbox label="Documentation" name="multiple" value="third" />
+            </li>
+          </UnstyledList>
+          <br />
+          <Slider min={0} max={100} aria-label="slider" value={[20, 70]} />
+        </div>
+      </SideSheet>
+    </div>
   )
 }
