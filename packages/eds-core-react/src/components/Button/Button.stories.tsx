@@ -493,7 +493,7 @@ export const ToggleMultiple: Story<ToggleButtonProps> = () => {
       <Button aria-label="alarm">
         <Icon data={alarm} title="Ghost icon alarm"></Icon>
       </Button>
-      <Button aria-label="timer" disabled>
+      <Button aria-label="timer">
         <Icon data={timer} title="Ghost icon timer"></Icon>
       </Button>
     </Button.Toggle>
