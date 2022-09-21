@@ -7,7 +7,7 @@ exports[`Popover Matches snapshot 1`] = `
 }
 
 .c1 {
-  display: grid;
+  display: block;
   margin: 0;
   color: rgba(61,61,61,1);
   font-family: Equinor;
@@ -15,23 +15,9 @@ exports[`Popover Matches snapshot 1`] = `
   font-weight: 500;
   line-height: 1.500em;
   text-align: left;
-  grid-auto-columns: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-align-content: start;
-  -ms-flex-line-pack: start;
-  align-content: start;
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  max-height: 80vh;
-  max-width: 560px;
   border-radius: 4px;
   z-index: 1400;
-  overflow: auto;
 }
 
 .c3 {
@@ -44,6 +30,12 @@ exports[`Popover Matches snapshot 1`] = `
 .c5 {
   display: grid;
   grid-gap: 16px;
+  max-height: 80vh;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  max-width: 560px;
+  overflow: auto;
 }
 
 .c4 {
