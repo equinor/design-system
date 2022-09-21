@@ -325,7 +325,7 @@ export const Compact: Story<ButtonProps> = () => {
       <Button variant="ghost_icon" aria-label="menu action">
         <Icon data={menu} title="Ghost icon menu"></Icon>
       </Button>
-      <Button.Group aria-label="compact">
+      <Button.Group aria-label="compact actions">
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
@@ -343,7 +343,7 @@ Compact.decorators = [
 ]
 
 export const GroupHorizontal: Story<ButtonGroupProps> = () => (
-  <Button.Group aria-label="primary">
+  <Button.Group aria-label="primary actions">
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
@@ -359,7 +359,7 @@ GroupHorizontal.decorators = [
 ]
 
 export const GroupVertical: Story<ButtonGroupProps> = () => (
-  <Button.Group aria-label="vertical" vertical>
+  <Button.Group aria-label="vertical actions" vertical>
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
@@ -395,7 +395,7 @@ export const GroupSplit: Story<ButtonGroupProps> = () => {
   }
 
   return (
-    <Button.Group aria-label="split button" style={{ gap: '1px' }}>
+    <Button.Group aria-label="split buttons" style={{ gap: '1px' }}>
       <Button>{options[selectedIndex]}</Button>
       <Button
         ref={setAnchorEl}
@@ -464,7 +464,7 @@ ToggleExclusiveSelection.decorators = [
 
 export const ToggleMultiple: Story<ToggleButtonProps> = () => {
   return (
-    <Button.Toggle multiple aria-label="file actions">
+    <Button.Toggle multiple aria-label="date and time actions">
       <Button aria-label="calendar">
         <Icon data={calendar} title="Ghost icon calendar"></Icon>
       </Button>
@@ -499,7 +499,7 @@ export const ToggleControlled: Story<ToggleButtonProps> = () => {
       multiple
       selectedIndexes={selectedButtons}
       onChange={handleChange}
-      aria-label="file actions"
+      aria-label="date and time actions"
     >
       <Button aria-label="calendar">
         <Icon data={calendar} title="Ghost icon calendar"></Icon>
