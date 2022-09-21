@@ -439,17 +439,8 @@ GroupSplit.decorators = [
 ]
 
 export const ToggleExclusiveSelection: Story<ToggleButtonProps> = () => {
-  const [selectedButton, setSelectedButton] = useState([])
-  const handleChange = (indexes: number[]) => {
-    setSelectedButton(indexes)
-  }
-
   return (
-    <Button.Toggle
-      selected={selectedButton}
-      onChange={handleChange}
-      aria-label="file actions"
-    >
+    <Button.Toggle aria-label="file actions">
       <Button aria-label="save action">
         <Icon data={save} title="Ghost icon save"></Icon>
       </Button>
@@ -472,18 +463,8 @@ ToggleExclusiveSelection.decorators = [
 ]
 
 export const ToggleMultiple: Story<ToggleButtonProps> = () => {
-  const [selectedButtons, setSelectedButtons] = useState([])
-  const handleChange = (indexes: number[]) => {
-    setSelectedButtons(indexes)
-  }
-
   return (
-    <Button.Toggle
-      multiple
-      selected={selectedButtons}
-      onChange={handleChange}
-      aria-label="file actions"
-    >
+    <Button.Toggle multiple aria-label="file actions">
       <Button aria-label="calendar">
         <Icon data={calendar} title="Ghost icon calendar"></Icon>
       </Button>
@@ -507,7 +488,7 @@ ToggleMultiple.decorators = [
   ),
 ]
 
-export const ToggleEnforced: Story<ToggleButtonProps> = () => {
+export const ToggleControlled: Story<ToggleButtonProps> = () => {
   const [selectedButtons, setSelectedButtons] = useState([0, 1])
   const handleChange = (indexes: number[]) => {
     setSelectedButtons(indexes)
@@ -532,41 +513,7 @@ export const ToggleEnforced: Story<ToggleButtonProps> = () => {
     </Button.Toggle>
   )
 }
-ToggleEnforced.decorators = [
-  (Story) => (
-    <Stack>
-      <Story />
-    </Stack>
-  ),
-]
-
-export const ToggleVertical: Story<ToggleButtonProps> = () => {
-  const [selectedButton, setSelectedButton] = useState([])
-  const handleChange = (indexes: number[]) => {
-    setSelectedButton(indexes)
-  }
-
-  return (
-    <Button.Toggle
-      vertical
-      selected={selectedButton}
-      onChange={handleChange}
-      aria-label="file actions"
-    >
-      <Button aria-label="save action">
-        <Icon data={save} title="Ghost icon save"></Icon>
-      </Button>
-      <Button aria-label="edit action">
-        <Icon data={edit} title="Ghost icon edit"></Icon>
-      </Button>
-      <Button aria-label="copy action">
-        <Icon data={copy} title="Ghost icon copy"></Icon>
-      </Button>
-    </Button.Toggle>
-  )
-}
-ToggleVertical.storyName = 'Toggle Vertical'
-ToggleVertical.decorators = [
+ToggleControlled.decorators = [
   (Story) => (
     <Stack>
       <Story />

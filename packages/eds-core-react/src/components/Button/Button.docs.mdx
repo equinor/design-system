@@ -149,12 +149,7 @@ The `Button.Toggle`
 import { Button } from '@equinor/eds-core-react'
 import { save } from '@equinor/eds-icons'
 
-const [selectedButton, setSelectedButton] = useState([])
-const handleChange = (indexes: number[]) => {
-  setSelectedButton(indexes)
-}
-
-<Button.Toggle aria-label="actions" selected={selectedButton} onChange={handleChange}>
+<Button.Toggle aria-label="actions">
   <Button aria-label="save action">
     <Icon data={save} title="Ghost icon save"></Icon>
   </Button>
@@ -179,7 +174,7 @@ const handleChange = (indexes: number[]) => {
 
 ### Exclusive selection
 
-With exclusive selection, selecting one option deselects any other.
+Exclusive selection is a default sate, which means that by, selecting one option deselects any other.
 
 <Story id="inputs-button--toggle-exclusive-selection" />
 
@@ -189,14 +184,8 @@ Multiple selection allows for logically-grouped options, to have multiple option
 
 <Story id="inputs-button--toggle-multiple" />
 
-### Enforced
+### Controlled
 
-To enforce at least one button to be active, you can adapt your `handleChange` function.
+To enforce at least one button to be active, you can adapt your `handleChange` function with `selected` property.
 
-<Story id="inputs-button--toggle-enforced" />
-
-### Vertical
-
-The `Button.Toggle` can be displayed vertically using the `vertical` prop.
-
-<Story id="inputs-button--toggle-vertical" />
+<Story id="inputs-button--toggle-controlled" />
