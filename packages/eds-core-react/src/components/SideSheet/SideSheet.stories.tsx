@@ -279,17 +279,28 @@ export const Draggable: Story<SideSheetProps> = () => {
       --primary: ${primaryColor};
       position: absolute;
       height: 100%;
-      width: 4px;
-      left: -2px;
+      width: 12px;
+      left: -6px;
       top: 0;
-      transition: background-color 150ms ease;
-      transition-delay: 150ms;
-      background-color: ${dragging ? 'var(--primary)' : 'transparent'};
       cursor: ${dragging ? 'col-resize' : 'default'};
+      &::after {
+        transition: background-color 150ms ease;
+        transition-delay: 150ms;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 4px;
+        transform: translateX(-50%);
+        height: 100%;
+        background-color: ${dragging ? 'var(--primary)' : 'transparent'};
+      }
       &:hover {
         cursor: col-resize;
-        background-color: var(--primary);
-        transition-delay: 200ms;
+        &::after {
+          transition-delay: 200ms;
+          background-color: var(--primary);
+        }
       }
     `
   })
