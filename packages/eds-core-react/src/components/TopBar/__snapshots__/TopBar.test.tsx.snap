@@ -9,12 +9,8 @@ exports[`TopBar Matches snapshot 1`] = `
 
 .c1 {
   height: 64px;
-  top: 0;
-  position: -webkit-sticky;
-  position: sticky;
   background: var(--eds_ui_background__default,rgba(255,255,255,1));
   box-sizing: border-box;
-  z-index: 1100;
   display: grid;
   grid-column-gap: 24px;
   grid-template-columns: auto 1fr auto;
@@ -39,6 +35,10 @@ exports[`TopBar Matches snapshot 1`] = `
   -ms-letter-spacing: 0.013em;
   letter-spacing: 0.013em;
   text-align: left;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1100;
 }
 
 .c4 {
