@@ -251,10 +251,7 @@ exports[`Search Matches snapshot 1`] = `
   text-align: left;
 }
 
-.c2[type='search']::-webkit-search-decoration,
-.c2[type='search']::-webkit-search-cancel-button,
-.c2[type='search']::-webkit-search-results-button,
-.c2[type='search']::-webkit-search-results-decoration {
+.c2[type='search']::-webkit-search-decoration,.c2[type='search']::-webkit-search-cancel-button,.c2[type='search']::-webkit-search-results-button,.c2[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
