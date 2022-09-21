@@ -497,7 +497,7 @@ export const ToggleControlled: Story<ToggleButtonProps> = () => {
   return (
     <Button.Toggle
       multiple
-      selected={selectedButtons}
+      selectedIndexes={selectedButtons}
       onChange={handleChange}
       aria-label="file actions"
     >

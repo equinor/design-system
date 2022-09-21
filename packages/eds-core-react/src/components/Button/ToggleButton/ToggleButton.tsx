@@ -13,7 +13,7 @@ export type ToggleButtonProps = {
   /** Multiple */
   multiple?: boolean
   /** Array of selected indexses. */
-  selected?: number[]
+  selectedIndexes?: number[]
   /** OnChange */
   onChange?: (indexes: number[]) => void
 } & Omit<HTMLAttributes<HTMLElement>, 'onChange'> &
@@ -21,23 +21,23 @@ export type ToggleButtonProps = {
 
 export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
   function ToggleButton(
-    { children, multiple, selected, onChange, ...props },
+    { children, multiple, selectedIndexes, onChange, ...props },
     ref,
   ) {
-    const [selectedIndexes, setSelectedIndexes] = useState<number[]>(
-      selected || [],
+    const [pickedIndexes, setPickedIndexes] = useState<number[]>(
+      selectedIndexes || [],
     )
 
     useEffect(() => {
-      if (Array.isArray(selected)) {
-        setSelectedIndexes(selected)
+      if (Array.isArray(selectedIndexes)) {
+        setPickedIndexes(selectedIndexes)
       }
-    }, [selected])
+    }, [selectedIndexes])
 
     const updatedChildren = ReactChildren.map(
       children,
       (child, index: number) => {
-        const isSelected = selectedIndexes.includes(index)
+        const isSelected = pickedIndexes.includes(index)
 
         const buttonProps: ButtonProps = {
           'aria-pressed': isSelected ? true : undefined,
@@ -46,11 +46,11 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
             let updatedSelection = [index]
 
             if (multiple) {
-              updatedSelection = selectedIndexes.includes(index)
-                ? selectedIndexes.filter((i) => i !== index)
-                : [...selectedIndexes, index]
+              updatedSelection = pickedIndexes.includes(index)
+                ? pickedIndexes.filter((i) => i !== index)
+                : [...pickedIndexes, index]
             }
-            setSelectedIndexes(updatedSelection)
+            setPickedIndexes(updatedSelection)
             if (onChange) {
               onChange(updatedSelection)
             }

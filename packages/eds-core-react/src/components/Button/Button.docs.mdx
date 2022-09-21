@@ -142,7 +142,7 @@ Is used to group related **options**.
 The `Button.Toggle`
 <ul>
   <li>emphasizes groups of related <code>Toggle</code> buttons,</li>
-  <li>controls the selected state of its child buttons when given its own <code>selected</code> prop.</li>
+  <li>controls the selected state of its child buttons when given its own <code>selectedIndexes</code> prop.</li>
 </ul>
 
 ```tsx
@@ -186,6 +186,6 @@ Multiple selection allows for logically-grouped options, to have multiple option
 
 ### Controlled
 
-To enforce at least one button to be active, you can adapt your `handleChange` function with `selected` property.
+To enforce at least one button to be active, you can adapt your `handleChange` function with `selectedIndexes` prop.
 
 <Story id="inputs-button--toggle-controlled" />
