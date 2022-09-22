@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {
+  Autocomplete,
   Label,
   Typography,
   Button,
@@ -314,6 +315,79 @@ WithCloseButton.decorators = [
   (Story) => {
     return (
       <Stack style={{ padding: '160px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
+
+export const NotDismissable: Story<PopoverProps> = () => {
+  const Wrapper = styled.div`
+    display: grid;
+    grid-gap: 6px;
+    :last-child {
+      padding-bottom: 6px;
+    }
+  `
+
+  const counties = [
+    'Oslo',
+    'Rogaland',
+    'Møre og Romsdal',
+    'Nordland',
+    'Viken',
+    'Innlandet',
+    'Vestfold og Telemark',
+    'Agder',
+    'Vestland',
+    'Trøndelag',
+    'Troms og Finnmark',
+  ]
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  return (
+    <>
+      <Button
+        id="click-popover-anchor"
+        aria-controls="click-popover"
+        ref={anchorRef}
+        onClick={openPopover}
+      >
+        Click to activate
+      </Button>
+
+      <Popover
+        id="click-popover"
+        aria-expanded={isOpen}
+        anchorEl={anchorRef.current}
+        open={isOpen}
+      >
+        <Popover.Header>
+          <Popover.Title>With Autocomplete</Popover.Title>
+        </Popover.Header>
+        <Popover.Content>
+          <Wrapper>
+            <Autocomplete label="Select a counties" options={counties} />
+            <Autocomplete label="Select a counties" options={counties} />
+          </Wrapper>
+        </Popover.Content>
+        <Popover.Actions>
+          <Button onClick={closePopover}>OK</Button>
+        </Popover.Actions>
+      </Popover>
+    </>
+  )
+}
+NotDismissable.storyName = 'Not dismissable'
+NotDismissable.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ padding: '260px' }}>
         <Story />
       </Stack>
     )
