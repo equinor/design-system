@@ -8,9 +8,9 @@ specifiers:
   '@babel/preset-react': ^7.18.6
   '@babel/preset-typescript': ^7.18.6
   '@babel/runtime': ^7.19.0
-  '@equinor/eds-icons': workspace:0.14.0
-  '@equinor/eds-tokens': workspace:0.7.1
-  '@equinor/eds-utils': workspace:0.3.0
+  '@equinor/eds-icons': workspace:*
+  '@equinor/eds-tokens': workspace:*
+  '@equinor/eds-utils': workspace:*
   '@floating-ui/react-dom-interactions': ^0.6.6
   '@mdx-js/react': 1.6.22
   '@rollup/plugin-babel': ^5.3.1
@@ -5060,7 +5060,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10558,17 +10558,6 @@ packages:
     peerDependenciesMeta:
       bluebird:
         optional: true
-    dev: true
-
-  /promise-inflight/1.0.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-    dependencies:
-      bluebird: 3.7.2
     dev: true
 
   /promise.allsettled/1.0.5:
