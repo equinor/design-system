@@ -1,22 +1,14 @@
 import { forwardRef, MouseEvent, HTMLAttributes, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 import { scrim as tokens } from './Scrim.tokens'
-import {
-  useGlobalKeyPress,
-  useHideBodyScroll,
-  mergeRefs,
-} from '@equinor/eds-utils'
+import { useGlobalKeyPress, mergeRefs } from '@equinor/eds-utils'
+import { FloatingOverlay } from '@floating-ui/react-dom-interactions'
 
-const { height, width, background } = tokens
+const { background } = tokens
 
-const StyledScrim = styled.div`
-  width: ${width};
-  height: ${height};
+const StyledScrim = styled(FloatingOverlay)`
   background: ${background};
-  position: fixed;
   z-index: 1300;
-  top: 0;
-  left: 0;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -47,12 +39,6 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
     () => mergeRefs<HTMLDivElement>(scrimRef, ref),
     [scrimRef, ref],
   )
-  const props = {
-    ...rest,
-    open,
-    isDismissable,
-  }
-  useHideBodyScroll(open)
 
   useGlobalKeyPress('Escape', () => {
     if (isDismissable && onClose && open) {
@@ -73,7 +59,12 @@ export const Scrim = forwardRef<HTMLDivElement, ScrimProps>(function Scrim(
   }
 
   return (
-    <StyledScrim onClick={handleMouseClose} ref={combinedScrimRef} {...props}>
+    <StyledScrim
+      lockScroll
+      onClick={handleMouseClose}
+      ref={combinedScrimRef}
+      {...rest}
+    >
       <ScrimContent>{children}</ScrimContent>
     </StyledScrim>
   )
