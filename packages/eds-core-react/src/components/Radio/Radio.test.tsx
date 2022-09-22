@@ -91,13 +91,13 @@ describe('Radio', () => {
     expect(one).not.toBeChecked()
     expect(two).toBeChecked()
   })
-  it('Can be disabled', () => {
+  it('Can be disabled', async () => {
     render(<Radio label="Radio" disabled />)
     const one = screen.getByLabelText('Radio')
     expect(one).not.toBeChecked()
     // Can't use fireEvent
     // See https://github.com/testing-library/react-testing-library/issues/275
-    userEvent.click(one)
+    await userEvent.click(one)
     expect(one).not.toBeChecked()
   })
 })

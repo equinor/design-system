@@ -55,7 +55,7 @@ describe('Sidebar link', () => {
     )
     const link = screen.getByTestId('sidebar-menu-item')
 
-    userEvent.hover(link)
+    await userEvent.hover(link)
 
     await screen.findByRole('tooltip')
     expect(screen.getByRole('tooltip')).toHaveTextContent('Home')
@@ -73,7 +73,7 @@ describe('Sidebar link', () => {
     )
     const link = screen.getByTestId('sidebar-menu-item')
 
-    userEvent.hover(link)
+    await userEvent.hover(link)
 
     await waitFor(() =>
       expect(screen.queryByRole('tooltip')).not.toBeInTheDocument(),

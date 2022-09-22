@@ -55,7 +55,7 @@ describe('Switch', () => {
     const smallSwitch = screen.getByLabelText(labelText)
     expect(smallSwitch).toBeDefined()
   })
-  it('Can be disabled', () => {
+  it('Can be disabled', async () => {
     render(
       <div>
         <Switch label="Checkbox one" disabled />
@@ -63,7 +63,7 @@ describe('Switch', () => {
     )
     const one = screen.getByLabelText('Checkbox one')
     expect(one).not.toBeChecked()
-    userEvent.click(one)
+    await userEvent.click(one)
     expect(one).not.toBeChecked()
   })
   it('Can be set as default on without being a controlled component', () => {
