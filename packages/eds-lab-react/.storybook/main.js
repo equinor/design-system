@@ -11,6 +11,10 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
   ],
+  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-webpack5',
+  },
   webpackFinal: async (config) => {
     config.resolve = {
       ...config.resolve,
