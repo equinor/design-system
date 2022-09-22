@@ -1,10 +1,10 @@
-import React, {
+import {
   forwardRef,
   ElementType,
   ButtonHTMLAttributes,
   createElement,
 } from 'react'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import { InnerFullWidth } from './InnerFullWidth'
 import { useEds } from '@equinor/eds-core-react'
 import './button.css'
