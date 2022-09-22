@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { useToken } from './useToken'
 import type { ComponentToken } from '@equinor/eds-tokens'
 
