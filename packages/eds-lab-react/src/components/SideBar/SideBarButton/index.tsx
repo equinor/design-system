@@ -16,29 +16,30 @@ const {
 type ContainerProps = {
   open: boolean
 }
-const MenuButtonContainer = styled.div<ContainerProps>(({ open }) => {
-  return css`
-    display: ${open ? 'grid' : 'flex'};
-    grid-template-columns: 8px 1fr 8px;
-    justify-content: center;
-    align-items: center;
-    height: 73px;
-    box-sizing: border-box;
-  `
-})
-
-const ExtendedButton = styled(Button)(({ theme }) => {
+const MenuButtonContainer = styled.div<ContainerProps>(({ open, theme }) => {
   const {
     entities: {
       actionButton: {
-        spacings: { right: largeSpacing },
+        spacings: { right, left, top, bottom },
       },
     },
   } = theme
   return css`
+    display: ${open ? 'grid' : 'flex'};
+    grid-template-columns: ${left} 1fr ${right};
+    justify-content: center;
+    align-items: center;
+    margin-block-start: ${top};
+    margin-block-end: ${bottom};
+    box-sizing: border-box;
+  `
+})
+
+const ExtendedButton = styled(Button)(() => {
+  return css`
+    height: 40px;
     grid-column: 2;
     width: fit-content;
-    padding-right: ${largeSpacing};
   `
 })
 
