@@ -38,6 +38,7 @@ const Container = styled.a<ContainerProps>(({ theme, $active }) => {
       sidebarItem: {
         minHeight,
         border,
+        spacings: { bottom: marginBottom },
         states: {
           active: { background: menuActiveBackground },
           hover: { background: menuHoverBackground },
@@ -58,6 +59,9 @@ const Container = styled.a<ContainerProps>(({ theme, $active }) => {
     ${bordersTemplate(border)}
     text-decoration: none;
     min-height: ${minHeight};
+    &:last-of-type {
+      margin-block-end: ${marginBottom};
+    }
     &:hover {
       cursor: pointer;
       background-color: ${$active ? menuActiveBackground : menuHoverBackground};

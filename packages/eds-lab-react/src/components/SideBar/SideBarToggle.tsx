@@ -22,7 +22,7 @@ const ToggleContainer = styled.div<ContainerProps>(({ theme }) => {
     minWidth,
     entities: {
       toggleOpen: {
-        spacings: { right: mediumSpacing },
+        spacings: { right: mediumSpacing, top, bottom },
       },
     },
   } = theme
@@ -30,7 +30,8 @@ const ToggleContainer = styled.div<ContainerProps>(({ theme }) => {
     width: ${minWidth};
     display: grid;
     place-items: center;
-    margin-block: ${mediumSpacing};
+    margin-block-start: ${top};
+    margin-block-end: ${bottom};
   `
 })
 
