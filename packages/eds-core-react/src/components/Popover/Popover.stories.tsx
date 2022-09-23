@@ -321,15 +321,7 @@ WithCloseButton.decorators = [
   },
 ]
 
-export const NotDismissable: Story<PopoverProps> = () => {
-  const Wrapper = styled.div`
-    display: grid;
-    grid-gap: 6px;
-    :last-child {
-      padding-bottom: 6px;
-    }
-  `
-
+export const PersistentPopover: Story<PopoverProps> = () => {
   const counties = [
     'Oslo',
     'Rogaland',
@@ -371,10 +363,7 @@ export const NotDismissable: Story<PopoverProps> = () => {
           <Popover.Title>With Autocomplete</Popover.Title>
         </Popover.Header>
         <Popover.Content>
-          <Wrapper>
-            <Autocomplete label="Select a counties" options={counties} />
-            <Autocomplete label="Select a counties" options={counties} />
-          </Wrapper>
+          <Autocomplete label="Select a county" options={counties} />
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={closePopover}>OK</Button>
@@ -383,11 +372,11 @@ export const NotDismissable: Story<PopoverProps> = () => {
     </>
   )
 }
-NotDismissable.storyName = 'Not dismissable'
-NotDismissable.decorators = [
+PersistentPopover.storyName = 'Persistent popover'
+PersistentPopover.decorators = [
   (Story) => {
     return (
-      <Stack style={{ padding: '260px' }}>
+      <Stack style={{ padding: '200px' }}>
         <Story />
       </Stack>
     )
