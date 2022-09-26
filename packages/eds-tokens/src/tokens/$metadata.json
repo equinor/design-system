@@ -1,7 +1,7 @@
 {
   "tokenSetOrder": [
-    "scale/light",
-    "scale/dark",
+    "core/color/light",
+    "core/color/dark",
     "theme/default",
     "theme/comfortable",
     "theme/compact",
