@@ -252,7 +252,9 @@ export const WithTooltip: Story<PopoverProps> = () => {
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
         </Popover.Header>
-        <Popover.Content>Content</Popover.Content>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
       </Popover>
     </>
   )
