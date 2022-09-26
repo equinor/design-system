@@ -68,9 +68,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <Input
         as="textarea"
-        {...inputProps}
         rightAdornmentsProps={adornmentsToTop}
         leftAdornmentsProps={adornmentsToTop}
+        style={{ height: 'auto' }}
+        {...inputProps}
       />
     )
   },
