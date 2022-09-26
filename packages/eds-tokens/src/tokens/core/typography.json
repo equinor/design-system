@@ -1,1 +1,68 @@
-{}
+{
+  "line-height": {
+    "1": {
+      "value": "12",
+      "type": "lineHeights"
+    },
+    "2": {
+      "value": "14",
+      "type": "lineHeights"
+    },
+    "3": {
+      "value": "14",
+      "type": "lineHeights"
+    },
+    "4": {
+      "value": "16",
+      "type": "lineHeights"
+    },
+    "5": {
+      "value": "18",
+      "type": "lineHeights"
+    },
+    "6": {
+      "value": "20",
+      "type": "lineHeights"
+    },
+    "7": {
+      "value": "22",
+      "type": "lineHeights"
+    },
+    "8": {
+      "value": "24",
+      "type": "lineHeights"
+    },
+    "9": {
+      "value": "26",
+      "type": "lineHeights"
+    },
+    "10": {
+      "value": "28",
+      "type": "lineHeights"
+    },
+    "11": {
+      "value": "32",
+      "type": "lineHeights"
+    },
+    "12": {
+      "value": "36",
+      "type": "lineHeights"
+    },
+    "13": {
+      "value": "40",
+      "type": "lineHeights"
+    },
+    "14": {
+      "value": "44",
+      "type": "lineHeights"
+    },
+    "15": {
+      "value": "48",
+      "type": "lineHeights"
+    },
+    "16": {
+      "value": "52",
+      "type": "lineHeights"
+    }
+  }
+}
