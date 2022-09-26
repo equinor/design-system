@@ -14,28 +14,12 @@ const {
   },
 } = tokens
 
-const dividerHeight = 1
-
-const reduceByValue = (subtractValue: number) => (valueWithUnit: string) => {
-  const valueAndUnit = valueWithUnit
-    .split(/(\d+)/)
-    .filter((val) => val.length > 0)
-
-  return `${parseInt(valueAndUnit[0]) - subtractValue}` + valueAndUnit[1]
-}
-
-const reduceValueByDividerHeight = reduceByValue(dividerHeight)
-
 type DividerToken = ComponentToken
 
 type DividerVariantsToken = {
   lighter: DividerToken
   light: DividerToken
   mediumColor: DividerToken
-}
-
-export const baseDivider: DividerToken = {
-  height: `${dividerHeight}px`,
 }
 
 export const divider: DividerVariantsToken = {
@@ -51,17 +35,15 @@ export const divider: DividerVariantsToken = {
 }
 
 export const small: DividerToken = {
-  ...baseDivider,
   spacings: {
     top: spacingSmall,
-    bottom: reduceValueByDividerHeight(spacingSmall),
+    bottom: spacingSmall,
   },
 }
 
 export const medium: DividerToken = {
-  ...baseDivider,
   spacings: {
     top: spacingMedium,
-    bottom: reduceValueByDividerHeight(spacingMedium),
+    bottom: spacingMedium,
   },
 }
