@@ -6,6 +6,8 @@ import {
   ReactElement,
   useState,
   useEffect,
+  isValidElement,
+  AllHTMLAttributes,
 } from 'react'
 import { Button, ButtonProps, ButtonGroupProps } from '..'
 
@@ -38,11 +40,15 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
       children,
       (child, index: number) => {
         const isSelected = pickedIndexes.includes(index)
+        const childElement = child as ReactElement<
+          AllHTMLAttributes<HTMLElement>
+        >
 
         const buttonProps: ButtonProps = {
           'aria-pressed': isSelected ? true : undefined,
           variant: isSelected ? 'contained' : 'outlined',
           onClick: () => {
+            childElement.props?.onClick
             let updatedSelection = [index]
 
             if (multiple) {
@@ -56,7 +62,10 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
             }
           },
         }
-        return cloneElement(child as ReactElement, buttonProps)
+
+        if (isValidElement(child) && child.type === Button) {
+          return cloneElement(child as ReactElement, buttonProps)
+        }
       },
     )
 
