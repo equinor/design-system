@@ -64,5 +64,75 @@
       "value": "52",
       "type": "lineHeights"
     }
+  },
+  "font-family": {
+    "default": {
+      "value": "Equinor",
+      "type": "fontFamilies"
+    },
+    "mono": {
+      "value": "Equinor Mono",
+      "type": "fontFamilies"
+    }
+  },
+  "font-size": {
+    "0": {
+      "value": "{scale.f0}*{scale.r}^(-3/{scale.n})",
+      "type": "fontSizes"
+    },
+    "1": {
+      "value": "{scale.f0}*{scale.r}^(-2/{scale.n})",
+      "type": "fontSizes"
+    },
+    "2": {
+      "value": "{scale.f0}*{scale.r}^(-1/{scale.n})",
+      "type": "fontSizes"
+    },
+    "3": {
+      "value": "{scale.f0}*{scale.r}^(0/{scale.n})",
+      "type": "fontSizes"
+    },
+    "4": {
+      "value": "{scale.f0}*{scale.r}^(1/{scale.n})",
+      "type": "fontSizes"
+    },
+    "5": {
+      "value": "{scale.f0}*{scale.r}^(2/{scale.n})",
+      "type": "fontSizes"
+    },
+    "6": {
+      "value": "{scale.f0}*{scale.r}^(3/{scale.n})",
+      "type": "fontSizes"
+    },
+    "7": {
+      "value": "{scale.f0}*{scale.r}^(4/{scale.n})",
+      "type": "fontSizes"
+    },
+    "8": {
+      "value": "{scale.f0}*{scale.r}^(5/{scale.n})",
+      "type": "fontSizes"
+    },
+    "9": {
+      "value": "{scale.f0}*{scale.r}^(6/{scale.n})",
+      "type": "fontSizes"
+    },
+    "10": {
+      "value": "{scale.f0}*{scale.r}^(7/{scale.n})",
+      "type": "fontSizes"
+    }
+  },
+  "scale": {
+    "r": {
+      "value": "2",
+      "type": "other"
+    },
+    "f0": {
+      "value": "16",
+      "type": "other"
+    },
+    "n": {
+      "value": "5",
+      "type": "other"
+    }
   }
 }
