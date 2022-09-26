@@ -1,5 +1,8 @@
 {
   "tokenSetOrder": [
-    "global"
+    "scale/light.json",
+    "scale/dark.json",
+    "theme/light.json",
+    "theme/dark.json"
   ]
 }
