@@ -1,0 +1,19 @@
+{
+  "scale": {
+    "r": {
+      "value": "2",
+      "type": "other",
+      "description": "Ratio"
+    },
+    "f0": {
+      "value": "16",
+      "type": "other",
+      "description": "Fundamental frequency"
+    },
+    "n": {
+      "value": "5",
+      "type": "other",
+      "description": "Number of notes"
+    }
+  }
+}

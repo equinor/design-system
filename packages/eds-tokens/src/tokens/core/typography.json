@@ -120,19 +120,5 @@
       "value": "{scale.f0}*{scale.r}^(7/{scale.n})",
       "type": "fontSizes"
     }
-  },
-  "scale": {
-    "r": {
-      "value": "2",
-      "type": "other"
-    },
-    "f0": {
-      "value": "16",
-      "type": "other"
-    },
-    "n": {
-      "value": "5",
-      "type": "other"
-    }
   }
 }

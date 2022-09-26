@@ -1,12 +1,13 @@
 {
   "tokenSetOrder": [
+    "core/scale",
+    "core/typography",
     "core/color/light",
     "core/color/dark",
     "theme/default",
     "theme/comfortable",
     "theme/compact",
     "theme/light",
-    "theme/dark",
-    "core/typography"
+    "theme/dark"
   ]
 }
