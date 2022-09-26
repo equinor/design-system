@@ -439,8 +439,17 @@ GroupSplit.decorators = [
 ]
 
 export const ToggleExclusiveSelection: Story<ToggleButtonProps> = () => {
+  const [selectedButtons, setSelectedButtons] = useState([0])
+  const handleChange = (indexes: number[]) => {
+    setSelectedButtons(indexes)
+  }
+
   return (
-    <Button.Toggle aria-label="file actions">
+    <Button.Toggle
+      selectedIndexes={selectedButtons}
+      onChange={handleChange}
+      aria-label="file actions"
+    >
       <Button aria-label="save action">
         <Icon data={save} title="Ghost icon save"></Icon>
       </Button>
