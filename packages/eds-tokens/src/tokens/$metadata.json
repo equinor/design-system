@@ -1,8 +1,11 @@
 {
   "tokenSetOrder": [
-    "scale/light.json",
-    "scale/dark.json",
-    "theme/light.json",
-    "theme/dark.json"
+    "scale/light",
+    "scale/dark",
+    "theme/default",
+    "theme/comfortable",
+    "theme/compact",
+    "theme/light",
+    "theme/dark"
   ]
 }
