@@ -29,13 +29,13 @@ export type DividerProps = {
   /** Vertical spacings */
   variant?: 'small' | 'medium'
   /** Divider thickness in px*/
-  thickness?: '1' | '2'
+  size?: '1' | '2'
   /** @ignore */
   className?: string
 } & HTMLAttributes<HTMLHRElement>
 
 export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
-  { color = 'medium', variant = 'medium', thickness = '1', ...rest },
+  { color = 'medium', variant = 'medium', size = '1', ...rest },
   ref,
 ) {
   const colorValue = color === 'medium' ? 'mediumColor' : color
@@ -44,7 +44,7 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
     backgroundColor: divider[colorValue].background,
     marginTop: tokens[variant].spacings.top,
     marginBottom: tokens[variant].spacings.bottom,
-    dividerHeight: parseInt(thickness),
+    dividerHeight: parseInt(size),
     ...rest,
   }
   return <StyledDivider {...props} ref={ref} />
