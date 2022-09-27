@@ -58,7 +58,6 @@ const InnerWrapper = styled.div(({ theme }) => {
     width: max-content;
     max-width: ${theme.maxWidth};
     overflow: auto;
-    padding: ${theme.spacings.top} 0 ${theme.spacings.bottom} 0;
   `
 })
 

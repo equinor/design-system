@@ -10,6 +10,12 @@ const StyledPopoverActions = styled.div(({ theme }) => {
     grid-auto-flow: column;
     align-items: center;
     padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
+    :first-child {
+      padding-top: ${theme.spacings.top};
+    }
+    :last-child {
+      padding-bottom: ${theme.spacings.bottom};
+    }
   `
 })
 
