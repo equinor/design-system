@@ -44,26 +44,25 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
           AllHTMLAttributes<HTMLElement>
         >
 
-        const buttonProps: ButtonProps = {
-          'aria-pressed': isSelected ? true : undefined,
-          variant: isSelected ? 'contained' : 'outlined',
-          onClick: () => {
-            childElement.props?.onClick
-            let updatedSelection = [index]
-
-            if (multiple) {
-              updatedSelection = pickedIndexes.includes(index)
-                ? pickedIndexes.filter((i) => i !== index)
-                : [...pickedIndexes, index]
-            }
-            setPickedIndexes(updatedSelection)
-            if (onChange) {
-              onChange(updatedSelection)
-            }
-          },
-        }
-
         if (isValidElement(child) && child.type === Button) {
+          const buttonProps: ButtonProps = {
+            'aria-pressed': isSelected ? true : undefined,
+            variant: isSelected ? 'contained' : 'outlined',
+            onClick: (e) => {
+              childElement.props?.onClick?.(e)
+              let updatedSelection = [index]
+
+              if (multiple) {
+                updatedSelection = pickedIndexes.includes(index)
+                  ? pickedIndexes.filter((i) => i !== index)
+                  : [...pickedIndexes, index]
+              }
+              setPickedIndexes(updatedSelection)
+              if (onChange) {
+                onChange(updatedSelection)
+              }
+            },
+          }
           return cloneElement(child as ReactElement, buttonProps)
         }
       },
