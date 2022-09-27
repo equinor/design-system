@@ -53,7 +53,7 @@
     "@mdx-js/react": "1.6.22",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-node-resolve": "^14.1.0",
     "@storybook/addon-a11y": "^6.5.12",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-docs": "^6.5.12",
@@ -69,7 +69,7 @@
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "^29.0.3",
     "@types/ramda": "^0.28.15",
-    "@types/react": "^18.0.20",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
     "@types/testing-library__jest-dom": "^5.14.5",
@@ -83,8 +83,8 @@
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.36.0",
-    "rollup": "^2.79.0",
+    "react-hook-form": "^7.36.1",
+    "rollup": "^2.79.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "styled-components": "5.3.5",
@@ -102,7 +102,7 @@
     "@equinor/eds-tokens": "workspace:*",
     "@equinor/eds-utils": "workspace:*",
     "@floating-ui/react-dom-interactions": "^0.6.6",
-    "downshift": "^6.1.11"
+    "downshift": "^6.1.12"
   },
   "engines": {
     "pnpm": ">=4",
