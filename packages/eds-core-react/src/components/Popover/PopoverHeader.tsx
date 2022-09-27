@@ -9,8 +9,7 @@ const StyledPopoverHeader = styled.div(({ theme }) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: ${theme.entities.title.spacings.top} ${theme.spacings.right} 0
-      ${theme.spacings.left};
+    padding: 0 ${theme.spacings.right} 0 ${theme.spacings.left};
   `
 })
 
