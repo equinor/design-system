@@ -36,7 +36,6 @@ exports[`Popover Matches snapshot 1`] = `
   width: max-content;
   max-width: 560px;
   overflow: auto;
-  padding: 16px 0 16px 0;
 }
 
 .c4 {
