@@ -101,7 +101,7 @@ The buttons can be grouped by wrapping them with the `Button.Group` component.
 ```tsx
 import { Button } from '@equinor/eds-core-react'
 
-<Button.Group aria-label="button group">
+<Button.Group aria-label="primary">
   <Button>Click me!</Button>
   <Button>Click me!</Button>
   <Button>Click me!</Button>
@@ -112,7 +112,7 @@ import { Button } from '@equinor/eds-core-react'
 
 #### ARIA
 <ul>
-  <li>Button.Group has <code>role="group"</code>.</li>
+  <li>Button.Group has <code>role="group"</code>. The word <code>group</code> will be read by assistive technologies.</li>
   <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
 </ul>
 
@@ -133,3 +133,59 @@ The `Button.Group` can be displayed vertically using the `vertical` prop.
 The dropdown can change the button action (as in this example) or be used to immediately trigger a related action.
 
 <Story id="inputs-button--group-split" />
+
+## Button.Toggle
+Is used to group related **options**.
+
+### Usage
+
+The `Button.Toggle`
+<ul>
+  <li>emphasizes groups of related <code>Toggle</code> buttons,</li>
+  <li>controls the selected state of its child buttons when given its own <code>selectedIndexes</code> prop.</li>
+</ul>
+
+```tsx
+import { Button } from '@equinor/eds-core-react'
+import { save } from '@equinor/eds-icons'
+
+<Button.Toggle aria-label="actions">
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
+  </Button>
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
+  </Button>
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
+  </Button>
+</Button.Toggle>
+```
+
+### Accessibility
+
+#### ARIA
+<ul>
+  <li>Button.Toggle sets <code>aria-pressed="bool"</code> according to the button state.</li>
+  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
+</ul>
+
+## Examples
+
+### Single selection
+
+Single selection is a default state, which means that by, selecting one option deselects any other.
+
+<Story id="inputs-button--toggle-exclusive-selection" />
+
+### Multiple selection
+
+Multiple selection allows for logically-grouped options, to have multiple options selected, by using the `multiple` prop.
+
+<Story id="inputs-button--toggle-multiple" />
+
+### Controlled
+
+To controll at least one button to be active, you can adapt your `handleChange` function with `selectedIndexes` prop.
+
+<Story id="inputs-button--toggle-controlled" />

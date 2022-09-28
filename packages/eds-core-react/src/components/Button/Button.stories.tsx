@@ -4,6 +4,7 @@ import {
   Button,
   ButtonProps,
   ButtonGroupProps,
+  ToggleButtonProps,
   Icon,
   EdsProvider,
   Density,
@@ -11,13 +12,27 @@ import {
   Progress,
 } from '../..'
 import { Story, ComponentMeta } from '@storybook/react'
-import { menu, add, save } from '@equinor/eds-icons'
+import {
+  menu,
+  add,
+  save,
+  edit,
+  copy,
+  calendar,
+  time,
+  alarm,
+  timer,
+} from '@equinor/eds-icons'
 import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
 export default {
   title: 'Inputs/Button',
   component: Button,
+  subcomponents: {
+    Group: Button.Group,
+    Toggle: Button.Toggle,
+  },
   args: {
     as: 'button',
   },
@@ -310,7 +325,7 @@ export const Compact: Story<ButtonProps> = () => {
       <Button variant="ghost_icon" aria-label="menu action">
         <Icon data={menu} title="Ghost icon menu"></Icon>
       </Button>
-      <Button.Group aria-label="button group compact">
+      <Button.Group aria-label="compact actions">
         <Button>Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="outlined">Outlined</Button>
@@ -328,7 +343,7 @@ Compact.decorators = [
 ]
 
 export const GroupHorizontal: Story<ButtonGroupProps> = () => (
-  <Button.Group aria-label="button group">
+  <Button.Group aria-label="primary actions">
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
@@ -344,7 +359,7 @@ GroupHorizontal.decorators = [
 ]
 
 export const GroupVertical: Story<ButtonGroupProps> = () => (
-  <Button.Group aria-label="vertical" vertical>
+  <Button.Group aria-label="vertical actions" vertical>
     <Button>Contained</Button>
     <Button variant="outlined">Outlined</Button>
     <Button variant="outlined">Outlined</Button>
@@ -380,7 +395,7 @@ export const GroupSplit: Story<ButtonGroupProps> = () => {
   }
 
   return (
-    <Button.Group aria-label="split button" style={{ gap: '1px' }}>
+    <Button.Group aria-label="split buttons" style={{ gap: '1px' }}>
       <Button>{options[selectedIndex]}</Button>
       <Button
         ref={setAnchorEl}
@@ -416,6 +431,89 @@ export const GroupSplit: Story<ButtonGroupProps> = () => {
   )
 }
 GroupSplit.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const ToggleExclusiveSelection: Story<ToggleButtonProps> = () => {
+  return (
+    <Button.Toggle aria-label="file actions">
+      <Button aria-label="save action">
+        <Icon data={save} title="Ghost icon save"></Icon>
+      </Button>
+      <Button aria-label="edit action">
+        <Icon data={edit} title="Ghost icon edit"></Icon>
+      </Button>
+      <Button aria-label="copy action">
+        <Icon data={copy} title="Ghost icon copy"></Icon>
+      </Button>
+    </Button.Toggle>
+  )
+}
+ToggleExclusiveSelection.storyName = 'Toggle Exclusive selection'
+ToggleExclusiveSelection.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const ToggleMultiple: Story<ToggleButtonProps> = () => {
+  return (
+    <Button.Toggle multiple aria-label="date and time actions">
+      <Button aria-label="calendar">
+        <Icon data={calendar} title="Ghost icon calendar"></Icon>
+      </Button>
+      <Button aria-label="time">
+        <Icon data={time} title="Ghost icon time"></Icon>
+      </Button>
+      <Button aria-label="alarm">
+        <Icon data={alarm} title="Ghost icon alarm"></Icon>
+      </Button>
+      <Button aria-label="timer">
+        <Icon data={timer} title="Ghost icon timer"></Icon>
+      </Button>
+    </Button.Toggle>
+  )
+}
+ToggleMultiple.decorators = [
+  (Story) => (
+    <Stack>
+      <Story />
+    </Stack>
+  ),
+]
+
+export const ToggleControlled: Story<ToggleButtonProps> = () => {
+  const [selectedButtons, setSelectedButtons] = useState([0, 1])
+  const handleChange = (indexes: number[]) => {
+    setSelectedButtons(indexes)
+  }
+
+  return (
+    <Button.Toggle
+      multiple
+      selectedIndexes={selectedButtons}
+      onChange={handleChange}
+      aria-label="date and time actions"
+    >
+      <Button aria-label="calendar">
+        <Icon data={calendar} title="Ghost icon calendar"></Icon>
+      </Button>
+      <Button aria-label="time">
+        <Icon data={time} title="Ghost icon time"></Icon>
+      </Button>
+      <Button aria-label="alarm">
+        <Icon data={alarm} title="Ghost icon alarm"></Icon>
+      </Button>
+    </Button.Toggle>
+  )
+}
+ToggleControlled.decorators = [
   (Story) => (
     <Stack>
       <Story />
