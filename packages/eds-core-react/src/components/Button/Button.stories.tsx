@@ -13,7 +13,7 @@ import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
 export default {
-  title: 'Inputs/Buttons/Button',
+  title: 'Inputs/Button/Button',
   component: Button,
   args: {
     as: 'button',

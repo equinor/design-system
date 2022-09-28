@@ -14,7 +14,7 @@ import { Stack } from './../../../../.storybook/components'
 import page from './ToggleButton.docs.mdx'
 
 export default {
-  title: 'Inputs/Buttons/Toggle',
+  title: 'Inputs/Button/Toggle',
   component: Button.Toggle,
   parameters: {
     docs: {
