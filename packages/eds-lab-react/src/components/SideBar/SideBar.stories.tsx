@@ -141,7 +141,7 @@ export const CustomContent: Story<SidebarType> = () => {
         </SideBar.Content>
         <SideBar.Footer>
           <SideBar.Toggle />
-          <Divider color="light" style={{ marginBlock: 0 }} />
+          <Divider size="2" color="light" style={{ marginBlock: 0 }} />
           <Logo />
         </SideBar.Footer>
       </SideBar>
@@ -174,7 +174,7 @@ export const WithButton: Story<SidebarType> = () => {
             icon={add}
             onClick={() => console.log('clicked')}
           />
-          <Divider color="light" style={{ marginBlockEnd: 0 }} />
+          <Divider size="2" color="light" style={{ marginBlockEnd: 0 }} />
           {menuItems.map((m) => (
             <SideBar.Link key={m.label} {...m} />
           ))}
@@ -266,13 +266,13 @@ export const WithTopbar: Story<SidebarType> = () => {
             icon={add}
             onClick={() => console.log('clicked')}
           />
-          <Divider color="light" style={{ marginBlockEnd: 0 }} />
+          <Divider size="2" color="light" style={{ marginBlockEnd: 0 }} />
           {menuItems.map((m) => (
             <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
         <SideBar.Footer>
-          <Divider color="light" />
+          <Divider size="2" color="light" />
           <SideBar.Toggle />
         </SideBar.Footer>
       </SideBar>
