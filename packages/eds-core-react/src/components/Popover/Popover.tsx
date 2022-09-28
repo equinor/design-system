@@ -185,8 +185,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             style: {
               ...style,
               position: strategy,
-              top: y ?? 0,
-              left: x ?? 0,
+              top: y || 0,
+              left: x || 0,
             },
           })}
         >

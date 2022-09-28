@@ -178,8 +178,8 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
               style: {
                 ...style,
                 position: strategy,
-                top: y ?? 0,
-                left: x ?? 0,
+                top: y || 0,
+                left: x || 0,
               },
             })}
           >
