@@ -35,7 +35,7 @@ const {
 } = tokens
 
 type ContainerProps = {
-  active?: boolean
+  $active?: boolean
 } & StrippedButton
 
 type StrippedButton = Omit<
@@ -43,7 +43,7 @@ type StrippedButton = Omit<
   keyof ButtonHTMLAttributes<HTMLButtonElement>
 >
 
-const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
+const Container = styled(Button)<ContainerProps>(({ theme, $active }) => {
   const {
     minWidth,
     entities: {
@@ -63,7 +63,7 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
     },
   } = theme
   return css`
-    background-color: ${active ? menuActiveBackground : 'none'};
+    background-color: ${$active ? menuActiveBackground : 'none'};
     display: grid;
     grid-template-columns: ${minWidth} 1fr;
     place-items: center;
@@ -72,7 +72,7 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
     min-height: ${minHeight};
     &:hover {
       cursor: pointer;
-      background-color: ${active ? menuActiveBackground : menuHoverBackground};
+      background-color: ${$active ? menuActiveBackground : menuHoverBackground};
     }
     &:disabled {
       background-color: ${menuDisabledBackground};
@@ -150,7 +150,7 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
       <Container
         as={as}
         tabIndex={0}
-        active={active}
+        $active={active}
         onClick={onClick}
         variant="ghost"
         ref={ref}
@@ -169,7 +169,7 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
       <Container
         tabIndex={0}
         as={as}
-        active={active}
+        $active={active}
         onClick={onClick}
         variant="ghost"
         ref={ref}
