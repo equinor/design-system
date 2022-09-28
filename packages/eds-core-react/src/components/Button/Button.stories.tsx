@@ -13,11 +13,8 @@ import { Stack } from './../../../.storybook/components'
 import page from './Button.docs.mdx'
 
 export default {
-  title: 'Inputs/Button',
+  title: 'Inputs/Buttons/Button',
   component: Button,
-  subcomponents: {
-    Toggle: Button.Toggle,
-  },
   args: {
     as: 'button',
   },
