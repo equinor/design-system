@@ -92,47 +92,11 @@ Compact `Button` using `EdsProvider`.
 
 <Story id="inputs-button--compact" />
 
-## Button.Group
-Is used to group related buttons.
 
-### Usage
-The buttons can be grouped by wrapping them with the `Button.Group` component.
 
-```tsx
-import { Button } from '@equinor/eds-core-react'
 
-<Button.Group aria-label="primary">
-  <Button>Click me!</Button>
-  <Button>Click me!</Button>
-  <Button>Click me!</Button>
-</Button.Group>
-```
 
-### Accessibility
 
-#### ARIA
-<ul>
-  <li>Button.Group has <code>role="group"</code>. The word <code>group</code> will be read by assistive technologies.</li>
-  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
-</ul>
-
-## Examples
-
-### Horizontal
-The `Button.Group` is displayed horizontally by default.
-
-<Story id="inputs-button--group-horizontal" />
-
-### Vertical
-The `Button.Group` can be displayed vertically using the `vertical` prop.
-
-<Story id="inputs-button--group-vertical" />
-
-### Split
-`Button.Group` can also be used to create a split button. <br />
-The dropdown can change the button action (as in this example) or be used to immediately trigger a related action.
-
-<Story id="inputs-button--group-split" />
 
 ## Button.Toggle
 Is used to group related **options**.
