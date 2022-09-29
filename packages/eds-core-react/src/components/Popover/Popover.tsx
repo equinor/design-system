@@ -85,11 +85,22 @@ export type PopoverProps = {
   anchorEl?: HTMLElement | null
   /** Is Popover open */
   open: boolean
+  /** Disable use of react portal for dropdown */
+  disablePortal?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   function Popover(
-    { children, placement = 'bottom', anchorEl, style, open, onClose, ...rest },
+    {
+      children,
+      placement = 'bottom',
+      anchorEl,
+      style,
+      open,
+      onClose,
+      disablePortal,
+      ...rest
+    },
     ref,
   ) {
     const arrowRef = useRef<HTMLDivElement>(null)
@@ -176,30 +187,36 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const { density } = useEds()
     const token = useToken({ density }, popoverToken)
 
+    const popover = (
+      <PopoverPaper
+        elevation="overlay"
+        {...props}
+        {...getFloatingProps({
+          ref: popoverRef,
+          style: {
+            ...style,
+            position: strategy,
+            top: y || 0,
+            left: x || 0,
+          },
+        })}
+      >
+        <ArrowWrapper ref={arrowRef} className="arrow">
+          <PopoverArrow className="arrowSvg">
+            <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+          </PopoverArrow>
+        </ArrowWrapper>
+        <InnerWrapper>{children}</InnerWrapper>
+      </PopoverPaper>
+    )
+
     return (
       <ThemeProvider theme={token}>
-        <FloatingPortal id="eds-popover-container">
-          <PopoverPaper
-            elevation="overlay"
-            {...props}
-            {...getFloatingProps({
-              ref: popoverRef,
-              style: {
-                ...style,
-                position: strategy,
-                top: y || 0,
-                left: x || 0,
-              },
-            })}
-          >
-            <ArrowWrapper ref={arrowRef} className="arrow">
-              <PopoverArrow className="arrowSvg">
-                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-              </PopoverArrow>
-            </ArrowWrapper>
-            <InnerWrapper>{children}</InnerWrapper>
-          </PopoverPaper>
-        </FloatingPortal>
+        {disablePortal ? (
+          { popover }
+        ) : (
+          <FloatingPortal id="eds-popover-container">{popover}</FloatingPortal>
+        )}
       </ThemeProvider>
     )
   },

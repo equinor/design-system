@@ -52,6 +52,15 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Popover>
 
 export const Introduction: Story<PopoverProps> = (args) => {
@@ -106,15 +115,15 @@ export const Introduction: Story<PopoverProps> = (args) => {
     </>
   )
 }
-Introduction.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// Introduction.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ padding: '160px' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
 
 export const ActivateOnClick: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -155,15 +164,15 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
   )
 }
 ActivateOnClick.storyName = 'Activate onClick'
-ActivateOnClick.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// ActivateOnClick.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ padding: '160px' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
 
 export const ActivateOnHover: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -219,15 +228,15 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
   )
 }
 ActivateOnHover.storyName = 'Activate onHover'
-ActivateOnHover.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// ActivateOnHover.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ padding: '160px' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
 
 export const WithTooltip: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -259,15 +268,15 @@ export const WithTooltip: Story<PopoverProps> = () => {
     </>
   )
 }
-WithTooltip.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// WithTooltip.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ padding: '160px' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
 
 export const WithCloseButton: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -313,15 +322,15 @@ export const WithCloseButton: Story<PopoverProps> = () => {
   )
 }
 WithCloseButton.storyName = 'With close button'
-WithCloseButton.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// WithCloseButton.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ padding: '160px' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
 
 export const PersistentPopover: Story<PopoverProps> = () => {
   const counties = [
@@ -375,15 +384,15 @@ export const PersistentPopover: Story<PopoverProps> = () => {
   )
 }
 PersistentPopover.storyName = 'Persistent popover'
-PersistentPopover.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '200px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// PersistentPopover.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ padding: '200px' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
 
 export const Compact: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -430,15 +439,15 @@ export const Compact: Story<PopoverProps> = () => {
     </EdsProvider>
   )
 }
-Compact.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// Compact.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ padding: '160px' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
 
 export const AppLauncher: Story<PopoverProps> = () => {
   const Wrapper = styled.div`
@@ -563,12 +572,12 @@ export const AppLauncher: Story<PopoverProps> = () => {
   )
 }
 AppLauncher.storyName = 'App launcher'
-AppLauncher.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ margin: '0 0 600px 0' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
+// AppLauncher.decorators = [
+//   (Story) => {
+//     return (
+//       <Stack style={{ margin: '0 0 600px 0' }}>
+//         <Story />
+//       </Stack>
+//     )
+//   },
+// ]
