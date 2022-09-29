@@ -566,7 +566,7 @@ AppLauncher.storyName = 'App launcher'
 AppLauncher.decorators = [
   (Story) => {
     return (
-      <Stack style={{ margin: '0 0 512px 0' }}>
+      <Stack style={{ margin: '0 0 600px 0' }}>
         <Story />
       </Stack>
     )

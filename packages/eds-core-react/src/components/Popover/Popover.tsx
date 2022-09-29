@@ -27,6 +27,7 @@ import {
   useFloating,
   useInteractions,
   useDismiss,
+  FloatingPortal,
 } from '@floating-ui/react-dom-interactions'
 
 type StyledPopoverProps = Pick<PopoverProps, 'open'>
@@ -177,26 +178,28 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <PopoverPaper
-          elevation="overlay"
-          {...props}
-          {...getFloatingProps({
-            ref: popoverRef,
-            style: {
-              ...style,
-              position: strategy,
-              top: y || 0,
-              left: x || 0,
-            },
-          })}
-        >
-          <ArrowWrapper ref={arrowRef} className="arrow">
-            <PopoverArrow className="arrowSvg">
-              <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
-            </PopoverArrow>
-          </ArrowWrapper>
-          <InnerWrapper>{children}</InnerWrapper>
-        </PopoverPaper>
+        <FloatingPortal id="eds-popover-container">
+          <PopoverPaper
+            elevation="overlay"
+            {...props}
+            {...getFloatingProps({
+              ref: popoverRef,
+              style: {
+                ...style,
+                position: strategy,
+                top: y || 0,
+                left: x || 0,
+              },
+            })}
+          >
+            <ArrowWrapper ref={arrowRef} className="arrow">
+              <PopoverArrow className="arrowSvg">
+                <path d="M0.504838 4.86885C-0.168399 4.48524 -0.168399 3.51476 0.504838 3.13115L6 8.59227e-08L6 8L0.504838 4.86885Z" />
+              </PopoverArrow>
+            </ArrowWrapper>
+            <InnerWrapper>{children}</InnerWrapper>
+          </PopoverPaper>
+        </FloatingPortal>
       </ThemeProvider>
     )
   },
