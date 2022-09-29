@@ -5,13 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.22.0] - 2022-09-29
+
+### Fixed
+
+- ♻️ Replaced usage of nullish coalescing operator by @mimarz in https://github.com/equinor/design-system/pull/2530
+- 🐛 Popover: removed `overflow: hidden` from `Popover.Content` by @martalalik in https://github.com/equinor/design-system/pull/2524
+- 🐛 Tabs, storybook: scroll with prev/next buttons story improvements by @oddvernes in https://github.com/equinor/design-system/pull/2500
+- 🐛 Autocomplete: fixed missing z-index on dropdown by @oddvernes in https://github.com/equinor/design-system/pull/2503
+- 🐛 Popover: fixed missing arrow by @oddvernes in https://github.com/equinor/design-system/pull/2507
+
+### Added
+
+- ✨ Created new `ToggleButton` component by @martalalik in https://github.com/equinor/design-system/pull/2458
+- ✨ Divider: Added `size` prop by @oddvernes in https://github.com/equinor/design-system/pull/2519
+- 📝 Sidesheet, storybook: Drag-to-resize sidesheet story by @oddvernes in https://github.com/equinor/design-system/pull/2491
+- 📝 Popover, storybook: Persistent popover story by @martalalik in https://github.com/equinor/design-system/pull/2511
+- ✨ TopBar: Added `sticky` prop to toggle static or sticky positioning by @martalalik in https://github.com/equinor/design-system/pull/2508
+
+### Changed
+
+- 🎨 Scrim: Use Floating-UI `FloatingOverlay` to improve scroll-lock and remove content jump by @martalalik in https://github.com/equinor/design-system/pull/2513
+
 ## [0.21.0] - 2022-09-08
 
 ### Fixed
+
 - 💄 Fixes to make sure both `style` and `className` are applied to outermost element (changes to `switch`, `NativeSelect`, `Radio`, `Checkbox`, `Search`, `Autocomplete`) by @oddvernes in https://github.com/equinor/design-system/pull/2367
 - 🐛 Popover: changed to `overflow: auto` by @oddvernes in https://github.com/equinor/design-system/pull/2431
 
 ### Added
+
 - ✨ `Autocomplete`: Added disable clear button prop (`hideClearButton`) by @Simrayz in https://github.com/equinor/design-system/pull/2378
 - ✨ Added `width` prop to `SideSheet` by @martalalik in https://github.com/equinor/design-system/pull/2399
 - ✨ `Button` is now a proper overridable component (can be rendered as another component/element-type with the `as` prop and typescript will only allow valid props for that component) by @oddvernes in https://github.com/equinor/design-system/pull/2410
@@ -20,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✨ Created `Button.Group` wrapper component by @martalalik in https://github.com/equinor/design-system/pull/2420
 
 ### Changed
+
 - ♻️ Replaced `popperjs` with `floating-UI` in `Tooltip` by @oddvernes in https://github.com/equinor/design-system/pull/2377
 - ♻️ Replaced `popperjs` with `floating-UI` in `Popover` by @oddvernes in https://github.com/equinor/design-system/pull/2384
 - ♻️ Replaced `popperjs` with `floating-UI` in `Menu` by @oddvernes in https://github.com/equinor/design-system/pull/2405
