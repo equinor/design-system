@@ -9,7 +9,8 @@ import {
   isValidElement,
   AllHTMLAttributes,
 } from 'react'
-import { Button, ButtonProps, ButtonGroupProps } from '..'
+import { Button, ButtonProps } from '../Button'
+import { ButtonGroupProps, ButtonGroup } from '../ButtonGroup'
 
 export type ToggleButtonProps = {
   /** Multiple */
@@ -69,9 +70,9 @@ export const ToggleButton = forwardRef<HTMLDivElement, ToggleButtonProps>(
     )
 
     return (
-      <Button.Group ref={ref} {...props}>
+      <ButtonGroup ref={ref} {...props}>
         {updatedChildren}
-      </Button.Group>
+      </ButtonGroup>
     )
   },
 )
