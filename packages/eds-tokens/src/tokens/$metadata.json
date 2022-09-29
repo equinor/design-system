@@ -1,8 +1,8 @@
 {
   "tokenSetOrder": [
     "core/scale",
-    "core/typography",
     "core/spacing",
+    "core/typography",
     "core/color/light",
     "core/color/dark",
     "theme/default",
