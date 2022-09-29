@@ -13,7 +13,7 @@ sourceUrl="https://github.com/equinor/design-system/tree/develop/packages/eds-co
 npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
 />
 
-<Story id="inputs-button--introduction" />
+<Story id="inputs-button-button--introduction" />
 <PropsTable />
 
 
@@ -46,17 +46,17 @@ import { Button } from '@equinor/eds-core-react'
 ### Basic
 The `Button` come with four variants; `contained`, `outlined`, `ghost` and `ghost_icon`.
 
-<Story id="inputs-button--basic" />
+<Story id="inputs-button-button--basic" />
 
 ### Icon button
 The `ghost_icon` & `contained_icon`variant is meant for standalone icon buttons using the `<Icon>` component.  
 Make sure to defined `aria-label` with descriptive text of `Button` interaction.
 
-<Story id="inputs-button--icon-button" />
+<Story id="inputs-button-button--icon-button" />
 
 ### Color
 
-<Story id="inputs-button--color"/>
+<Story id="inputs-button-button--color"/>
 
 ### Hierarchy
 Use variants to differentiate the hierarchy.
@@ -66,126 +66,28 @@ Use variants to differentiate the hierarchy.
   <li><code>Ghost</code> - being low-emphasis.</li>
 </ul>
 
-<Story id="inputs-button--hierarchy" />
+<Story id="inputs-button-button--hierarchy" />
 
 ### File upload
 Example of how to do file upload button. Please note this demo only works in Storybook Canvas (isolated example only).
 
-<Story id="inputs-button--file-upload" />
+<Story id="inputs-button-button--file-upload" />
 
 ### Progress button
 Use the `Progress` component if you need progress indication on a button.
 
-<Story id="inputs-button--progress-button" />
+<Story id="inputs-button-button--progress-button" />
 
 ### All
 Example All button combinations. 
 
-<Story id="inputs-button--all" />
+<Story id="inputs-button-button--all" />
 
 ### Full width
 
-<Story id="inputs-button--full-width" />
+<Story id="inputs-button-button--full-width" />
 
 ### Compact
 Compact `Button` using `EdsProvider`.
 
-<Story id="inputs-button--compact" />
-
-## Button.Group
-Is used to group related buttons.
-
-### Usage
-The buttons can be grouped by wrapping them with the `Button.Group` component.
-
-```tsx
-import { Button } from '@equinor/eds-core-react'
-
-<Button.Group aria-label="primary">
-  <Button>Click me!</Button>
-  <Button>Click me!</Button>
-  <Button>Click me!</Button>
-</Button.Group>
-```
-
-### Accessibility
-
-#### ARIA
-<ul>
-  <li>Button.Group has <code>role="group"</code>. The word <code>group</code> will be read by assistive technologies.</li>
-  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
-</ul>
-
-## Examples
-
-### Horizontal
-The `Button.Group` is displayed horizontally by default.
-
-<Story id="inputs-button--group-horizontal" />
-
-### Vertical
-The `Button.Group` can be displayed vertically using the `vertical` prop.
-
-<Story id="inputs-button--group-vertical" />
-
-### Split
-`Button.Group` can also be used to create a split button. <br />
-The dropdown can change the button action (as in this example) or be used to immediately trigger a related action.
-
-<Story id="inputs-button--group-split" />
-
-## Button.Toggle
-Is used to group related **options**.
-
-### Usage
-
-The `Button.Toggle`
-<ul>
-  <li>emphasizes groups of related <code>Toggle</code> buttons,</li>
-  <li>controls the selected state of its child buttons when given its own <code>selectedIndexes</code> prop.</li>
-</ul>
-
-```tsx
-import { Button } from '@equinor/eds-core-react'
-import { save } from '@equinor/eds-icons'
-
-<Button.Toggle aria-label="actions">
-  <Button aria-label="save action">
-    <Icon data={save} title="Ghost icon save"></Icon>
-  </Button>
-  <Button aria-label="save action">
-    <Icon data={save} title="Ghost icon save"></Icon>
-  </Button>
-  <Button aria-label="save action">
-    <Icon data={save} title="Ghost icon save"></Icon>
-  </Button>
-</Button.Toggle>
-```
-
-### Accessibility
-
-#### ARIA
-<ul>
-  <li>Button.Toggle sets <code>aria-pressed="bool"</code> according to the button state.</li>
-  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
-</ul>
-
-## Examples
-
-### Single selection
-
-Single selection is a default state, which means that by, selecting one option deselects any other.
-
-<Story id="inputs-button--toggle-exclusive-selection" />
-
-### Multiple selection
-
-Multiple selection allows for logically-grouped options, to have multiple options selected, by using the `multiple` prop.
-
-<Story id="inputs-button--toggle-multiple" />
-
-### Controlled
-
-To controll at least one button to be active, you can adapt your `handleChange` function with `selectedIndexes` prop.
-
-<Story id="inputs-button--toggle-controlled" />
+<Story id="inputs-button-button--compact" />

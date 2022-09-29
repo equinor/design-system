@@ -1,0 +1,71 @@
+import { Story, PropsTable, Links } from './../../../../.storybook/components'
+import { Button } from './..'
+
+# Toggle
+
+Is used to group related **options**.
+
+<Links 
+ariaUrl="https://w3c.github.io/aria/#aria-pressed" 
+figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=17394%3A48481" 
+documentationUrl="https://eds.equinor.com/0b0c666ab/p/22cd7f-toggle-button/b/86826a"
+sourceUrl="https://github.com/equinor/design-system/tree/develop/packages/eds-core-react/src/components/Button/ToggleButton"
+npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
+/>
+
+<Story id="inputs-button-toggle--introduction" />
+<PropsTable />
+
+## Usage
+
+The `Button.Toggle`
+<ul>
+  <li>emphasizes groups of related <code>Toggle</code> buttons,</li>
+  <li>controls the selected state of its child buttons when given its own <code>selectedIndexes</code> prop.</li>
+</ul>
+
+```tsx
+import { Button } from '@equinor/eds-core-react'
+import { save } from '@equinor/eds-icons'
+
+<Button.Toggle aria-label="actions">
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
+  </Button>
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
+  </Button>
+  <Button aria-label="save action">
+    <Icon data={save} title="Ghost icon save"></Icon>
+  </Button>
+</Button.Toggle>
+```
+
+## Accessibility
+
+### ARIA
+
+<ul>
+  <li>Button.Toggle sets <code>aria-pressed="bool"</code> according to the button state.</li>
+  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
+</ul>
+
+## Examples
+
+### Single selection
+
+Single selection is a default state, which means that by, selecting one option deselects any other.
+
+<Story id="inputs-button-toggle--single-selection" />
+
+### Multiple selection
+
+Multiple selection allows for logically-grouped options, to have multiple options selected, by using the `multiple` prop.
+
+<Story id="inputs-button-toggle--multiple-selection" />
+
+### Controlled
+
+To controll at least one button to be active, you can adapt your `handleChange` function with `selectedIndexes` prop.
+
+<Story id="inputs-button-toggle--controlled" />

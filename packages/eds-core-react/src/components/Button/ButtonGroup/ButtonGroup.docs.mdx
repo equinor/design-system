@@ -1,0 +1,55 @@
+import { Story, PropsTable, Links } from './../../../../.storybook/components'
+import { Button } from './..'
+
+# Group
+
+Is used to **group** related Buttons.
+
+<Links 
+ariaUrl="https://w3c.github.io/aria/#group" 
+sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/Button/ButtonGroup"
+npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react/"
+/>
+
+<Story id="inputs-button-group--introduction" />
+<PropsTable />
+
+## Usage
+
+The buttons can be grouped by wrapping them with the `Button.Group` component.
+
+```tsx
+import { Button } from '@equinor/eds-core-react'
+
+<Button.Group aria-label="primary">
+  <Button>Click me!</Button>
+  <Button>Click me!</Button>
+  <Button>Click me!</Button>
+</Button.Group>
+```
+
+## Accessibility
+
+### ARIA
+<ul>
+  <li>Button.Group has <code>role="group"</code>. The word <code>group</code> will be read by assistive technologies.</li>
+  <li>You should provide an accessible label with <code>aria-label="label"</code>, <code>aria-labelledby="id"</code> or <code>&lt;label&gt;</code>.</li>
+</ul>
+
+## Examples
+
+### Orientation
+The `Button.Group` is displayed horizontally by default, can be displayed vertically using the `vertical` prop.
+
+<Story id="inputs-button-group--horizontal" />
+
+### Split
+`Button.Group` can also be used to create a split button. <br />
+The dropdown can change the button action (as in this example) or be used to immediately trigger a related action.
+
+<Story id="inputs-button-group--split" />
+
+### Compact
+Compact `Button` using `EdsProvider`.
+
+<Story id="inputs-button-group--compact" />
