@@ -15,5 +15,29 @@
       "type": "other",
       "description": "Number of notes"
     }
+  },
+  "grid": {
+    "base": {
+      "value": "4",
+      "type": "other"
+    }
+  },
+  "factor": {
+    "xs": {
+      "value": "1",
+      "type": "other"
+    },
+    "sm": {
+      "value": "1.1",
+      "type": "other"
+    },
+    "md": {
+      "value": "1.25",
+      "type": "other"
+    },
+    "lg": {
+      "value": "1.5",
+      "type": "other"
+    }
   }
 }
