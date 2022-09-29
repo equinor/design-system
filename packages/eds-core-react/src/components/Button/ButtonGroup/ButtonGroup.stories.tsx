@@ -45,10 +45,10 @@ export const Introduction: Story<ButtonGroupProps> = (args) => {
 
 export const Horizontal: Story<ButtonGroupProps> = () => (
   <Button.Group aria-label="primary actions">
-    <Button>Contained</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
   </Button.Group>
 )
 
