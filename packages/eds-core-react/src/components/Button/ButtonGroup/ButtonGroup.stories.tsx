@@ -54,10 +54,10 @@ export const Horizontal: Story<ButtonGroupProps> = () => (
 
 export const Vertical: Story<ButtonGroupProps> = () => (
   <Button.Group aria-label="vertical actions" vertical>
-    <Button>Contained</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="outlined">Outlined</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
   </Button.Group>
 )
 
