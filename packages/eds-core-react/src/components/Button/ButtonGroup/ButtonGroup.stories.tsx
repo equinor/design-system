@@ -129,10 +129,10 @@ export const Compact: Story<ButtonGroupProps> = () => {
   return (
     <EdsProvider density={density}>
       <Button.Group aria-label="compact actions">
-        <Button>Contained</Button>
-        <Button variant="outlined">Outlined</Button>
-        <Button variant="outlined">Outlined</Button>
-        <Button variant="outlined">Outlined</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
       </Button.Group>
     </EdsProvider>
   )
