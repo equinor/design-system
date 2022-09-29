@@ -35,10 +35,10 @@ export default {
 export const Introduction: Story<ButtonGroupProps> = (args) => {
   return (
     <Button.Group {...args} aria-label="primary actions">
-      <Button>Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="outlined">Outlined</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
     </Button.Group>
   )
 }
