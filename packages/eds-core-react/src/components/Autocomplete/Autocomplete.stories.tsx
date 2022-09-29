@@ -91,6 +91,31 @@ const stocks = [
     symbol: 'BRK',
     trend: '📈',
   },
+  {
+    label: 'Awilco LNG',
+    symbol: 'ALNG',
+    trend: '📈',
+  },
+  {
+    label: 'Kahoot! ASA',
+    symbol: 'KAHOT',
+    trend: '📈',
+  },
+  {
+    label: 'Nordic Semiconductor',
+    symbol: 'NCO',
+    trend: '📈',
+  },
+  {
+    label: 'Vår energi ASA',
+    symbol: 'VAR',
+    trend: '📈',
+  },
+  {
+    label: 'Rivian Automotive A',
+    symbol: 'RIVN',
+    trend: '📈',
+  },
 ]
 
 const optionLabel = (item: MyOptionType) => item.label
