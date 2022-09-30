@@ -225,12 +225,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           <FloatingPortal id="eds-popover-container">
             {trapFocus
               ? open && (
-                  <FloatingFocusManager
-                    context={context}
-                    modal={false}
-                    returnFocus
-                    order={['floating', 'content']}
-                  >
+                  <FloatingFocusManager context={context} modal={false}>
                     {popover}
                   </FloatingFocusManager>
                 )
@@ -238,7 +233,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
                   <FloatingFocusManager
                     context={context}
                     modal={false}
-                    returnFocus
                     order={['reference', 'content']}
                   >
                     {popover}

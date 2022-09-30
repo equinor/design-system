@@ -147,9 +147,9 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Popover.Actions>
+        {/* <Popover.Actions>
           <Button onClick={closePopover}>OK</Button>
-        </Popover.Actions>
+        </Popover.Actions> */}
       </Popover>
     </>
   )
