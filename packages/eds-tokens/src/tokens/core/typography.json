@@ -496,102 +496,104 @@
     }
   },
   "component": {
-    "h6": {
-      "value": {
-        "typography": "{typography.loose.3}",
-        "fontWeights": "{fontWeight.bold}",
-        "paddingTop": "{spacing.19}",
-        "paddingBottom": "{spacing.9}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
+    "headers": {
+      "3": {
+        "value": {
+          "typography": "{typography.comfortable.3}",
+          "fontWeights": "{fontWeight.bold}",
+          "paddingTop": "{spacing.19}",
+          "paddingBottom": "{spacing.9}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition",
+        "description": "Add to both textframe and parent autolayout frame"
       },
-      "type": "composition",
-      "description": "Add to both textframe and parent autolayout frame"
-    },
-    "h5": {
-      "value": {
-        "typography": "{typography.comfortable.4}",
-        "fontWeights": "{fontWeight.bold}",
-        "paddingTop": "{spacing.19}",
-        "paddingBottom": "{spacing.9}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
+      "4": {
+        "value": {
+          "typography": "{typography.comfortable.4}",
+          "fontWeights": "{fontWeight.bold}",
+          "paddingTop": "{spacing.19}",
+          "paddingBottom": "{spacing.9}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition"
       },
-      "type": "composition"
-    },
-    "h4": {
-      "value": {
-        "typography": "{typography.comfortable.5}",
-        "fontWeights": "{fontWeight.medium}",
-        "paddingTop": "{spacing.20}",
-        "paddingBottom": "{spacing.8}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
+      "5": {
+        "value": {
+          "typography": "{typography.comfortable.5}",
+          "fontWeights": "{fontWeight.medium}",
+          "paddingTop": "{spacing.20}",
+          "paddingBottom": "{spacing.8}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition"
       },
-      "type": "composition"
-    },
-    "h3": {
-      "value": {
-        "typography": "{typography.compressed.6}",
-        "fontWeights": "{fontWeight.medium}",
-        "paddingTop": "{spacing.19}",
-        "paddingBottom": "{spacing.9}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
+      "6": {
+        "value": {
+          "typography": "{typography.compressed.6}",
+          "fontWeights": "{fontWeight.medium}",
+          "paddingTop": "{spacing.19}",
+          "paddingBottom": "{spacing.9}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition"
       },
-      "type": "composition"
-    },
-    "h2": {
-      "value": {
-        "typography": "{typography.compressed.7}",
-        "fontWeights": "{fontWeight.regular}",
-        "paddingTop": "{spacing.20}",
-        "paddingBottom": "{spacing.8}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
+      "7": {
+        "value": {
+          "typography": "{typography.compressed.7}",
+          "fontWeights": "{fontWeight.regular}",
+          "paddingTop": "{spacing.20}",
+          "paddingBottom": "{spacing.8}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition"
       },
-      "type": "composition"
-    },
-    "h1": {
-      "value": {
-        "typography": "{typography.compressed.8}",
-        "fontWeights": "{fontWeight.regular}",
-        "paddingTop": "{spacing.20}",
-        "paddingBottom": "{spacing.8}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
+      "8": {
+        "value": {
+          "typography": "{typography.compressed.8}",
+          "fontWeights": "{fontWeight.regular}",
+          "paddingTop": "{spacing.20}",
+          "paddingBottom": "{spacing.8}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition"
       },
-      "type": "composition"
-    },
-    "h1+": {
-      "value": {
-        "typography": "{typography.tight.9}",
-        "fontWeights": "{fontWeight.regular}",
-        "paddingTop": "{spacing.20}",
-        "paddingBottom": "{spacing.8}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
+      "9": {
+        "value": {
+          "typography": "{typography.tight.9}",
+          "fontWeights": "{fontWeight.regular}",
+          "paddingTop": "{spacing.20}",
+          "paddingBottom": "{spacing.8}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition"
       },
-      "type": "composition"
-    },
-    "h1++": {
-      "value": {
-        "typography": "{typography.tight.10}",
-        "fontWeights": "{fontWeight.regular}",
-        "paddingTop": "{spacing.3}",
-        "paddingBottom": "{spacing.7}",
-        "paddingLeft": "{spacing.0}",
-        "paddingRight": "{spacing.0}",
-        "itemSpacing": "{spacing.0}"
-      },
-      "type": "composition"
+      "10": {
+        "value": {
+          "typography": "{typography.tight.10}",
+          "fontWeights": "{fontWeight.regular}",
+          "paddingTop": "{spacing.3}",
+          "paddingBottom": "{spacing.7}",
+          "paddingLeft": "{spacing.0}",
+          "paddingRight": "{spacing.0}",
+          "itemSpacing": "{spacing.0}"
+        },
+        "type": "composition"
+      }
     }
   },
   "paragraphSpacing": {
