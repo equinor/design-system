@@ -116,9 +116,14 @@ const StyledAccordionHeaderButton =
 
 type StyledIconProps = Omit<AccordionProps, 'headerLevel'>
 
-const StyledIcon = styled(Icon)(({ chevronPosition }: StyledIconProps) =>
-  chevronPosition === 'left' ? { marginRight: '32px' } : { marginLeft: '16px' },
-)
+const StyledIcon = styled(Icon)(({ chevronPosition }: StyledIconProps) => {
+  return css`
+    flex-shrink: 0;
+    ${chevronPosition === 'left'
+      ? css({ marginRight: '32px' })
+      : css({ marginLeft: '16px' })}
+  `
+})
 
 export type AccordionHeaderProps = {
   /** The id of the button that toggles expansion */
