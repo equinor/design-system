@@ -5,17 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2022-10-03
+
 ## [0.3.0] - 2022-09-08
 
 ### Added
+
 - ✨ Added `mergeRefs` utility function, this replaces `useCombinedRefs` and works the same way, except it doesn't internally memoize the ref, by @oddvernes in https://github.com/equinor/design-system/pull/2381
 - ✨ Added OverridableComponent type by @oddvernes in https://github.com/equinor/design-system/pull/2410
 
 ### Removed
+
 - 🗑️ `useCombinedRefs` was removed/renamed to `mergeRefs` by @oddvernes in https://github.com/equinor/design-system/pull/2381
 
 ### Deprecated
+
 - 🗑️ Marked `usePopper` as Deprecated by @oddvernes in https://github.com/equinor/design-system/pull/2463
+
 ## [0.2.3] - 2022-06-24
 
 ### Changed

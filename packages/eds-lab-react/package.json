@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-lab-react",
-  "version": "0.4.2-dev.20220726",
+  "version": "0.5.0-dev.20221003",
   "description": "The lab for the Equinor Design System",
   "sideEffects": [
     "**/*.css"
