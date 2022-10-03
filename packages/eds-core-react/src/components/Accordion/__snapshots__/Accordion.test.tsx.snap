@@ -81,6 +81,9 @@ exports[`Accordion Matches snapshot 1`] = `
 }
 
 .c2 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   margin-right: 32px;
 }
 
