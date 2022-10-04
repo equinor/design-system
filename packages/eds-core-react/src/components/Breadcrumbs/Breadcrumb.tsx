@@ -5,7 +5,7 @@ import { Typography } from '../Typography'
 import { Tooltip } from '../Tooltip'
 import { breadcrumbs as tokens } from './Breadcrumbs.tokens'
 
-type StyledProps = Pick<BreadcrumbProps, 'maxWidth'>
+type StyledProps = { $maxWidth?: number }
 
 const { states, typography } = tokens
 
@@ -23,7 +23,7 @@ const StyledTypography = styled(Typography)<StyledProps>`
   display: inline-block;
   text-decoration: none;
   color: ${typography.color};
-  ${({ maxWidth }) => css({ maxWidth })}
+  ${({ $maxWidth }) => css({ maxWidth: $maxWidth })}
 `
 type OverridableSubComponent = OverridableComponent<
   BreadcrumbProps,
@@ -48,7 +48,6 @@ export const Breadcrumb: OverridableSubComponent = forwardRef(
       ...other,
       href,
       ref,
-      maxWidth,
     }
 
     const showTooltip = maxWidth > 0
@@ -64,6 +63,7 @@ export const Breadcrumb: OverridableSubComponent = forwardRef(
         link={isHrefDefined}
         forwardedAs={forwardedAs}
         variant="body_short"
+        $maxWidth={maxWidth}
         {...props}
       >
         {children}
