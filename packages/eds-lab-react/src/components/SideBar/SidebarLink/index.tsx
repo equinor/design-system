@@ -1,9 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  forwardRef,
-  AnchorHTMLAttributes,
-  ElementType,
-} from 'react'
+import { forwardRef, AnchorHTMLAttributes, ElementType } from 'react'
 import { sidebar as tokens } from '../SideBar.tokens'
 import {
   bordersTemplate,
@@ -11,8 +6,6 @@ import {
   OverridableComponent,
 } from '@equinor/eds-utils'
 import {
-  Button,
-  ButtonProps,
   Icon,
   Tooltip as EDSTooltip,
   Typography,
@@ -35,15 +28,10 @@ const {
 } = tokens
 
 type ContainerProps = {
-  active?: boolean
-} & StrippedButton
+  $active?: boolean
+}
 
-type StrippedButton = Omit<
-  ButtonProps,
-  keyof ButtonHTMLAttributes<HTMLButtonElement>
->
-
-const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
+const Container = styled.a<ContainerProps>(({ theme, $active }) => {
   const {
     minWidth,
     entities: {
@@ -63,7 +51,7 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
     },
   } = theme
   return css`
-    background-color: ${active ? menuActiveBackground : 'none'};
+    background-color: ${$active ? menuActiveBackground : 'none'};
     display: grid;
     grid-template-columns: ${minWidth} 1fr;
     place-items: center;
@@ -72,7 +60,7 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
     min-height: ${minHeight};
     &:hover {
       cursor: pointer;
-      background-color: ${active ? menuActiveBackground : menuHoverBackground};
+      background-color: ${$active ? menuActiveBackground : menuHoverBackground};
     }
     &:disabled {
       background-color: ${menuDisabledBackground};
@@ -85,10 +73,10 @@ const Container = styled(Button)<ContainerProps>(({ theme, active }) => {
 })
 
 type ItemTextProps = {
-  active?: boolean
+  $active?: boolean
 }
 
-const ItemText = styled(Typography)<ItemTextProps>(({ theme, active }) => {
+const ItemText = styled(Typography)<ItemTextProps>(({ theme, $active }) => {
   const {
     entities: {
       sidebarItem: {
@@ -103,7 +91,7 @@ const ItemText = styled(Typography)<ItemTextProps>(({ theme, active }) => {
   } = theme
   return css`
     justify-self: start;
-    color: ${active ? itemActiveTextColor : itemTextColor};
+    color: ${$active ? itemActiveTextColor : itemTextColor};
     &::first-letter {
       text-transform: capitalize;
     }
@@ -150,14 +138,13 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
       <Container
         as={as}
         tabIndex={0}
-        active={active}
+        $active={active}
         onClick={onClick}
-        variant="ghost"
         ref={ref}
         {...rest}
       >
         {icon && <Icon data={icon} color={getIconColor()} />}
-        <ItemText variant="cell_text" group="table" active={active}>
+        <ItemText variant="cell_text" group="table" $active={active}>
           {label}
         </ItemText>
       </Container>
@@ -169,9 +156,8 @@ export const SidebarLink: OverridableSubComponent = forwardRef<
       <Container
         tabIndex={0}
         as={as}
-        active={active}
+        $active={active}
         onClick={onClick}
-        variant="ghost"
         ref={ref}
         {...rest}
       >
