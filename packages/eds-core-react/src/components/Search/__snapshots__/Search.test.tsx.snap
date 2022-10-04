@@ -90,20 +90,6 @@ exports[`Search Matches snapshot 1`] = `
   color: var(--eds-input-adornment-color);
 }
 
-.c2[type='search']::-webkit-search-decoration,.c2[type='search']::-webkit-search-cancel-button,.c2[type='search']::-webkit-search-results-button,.c2[type='search']::-webkit-search-results-decoration {
-  -webkit-appearance: none;
-}
-
-.c2:focus {
-  outline: none;
-}
-
-.c2:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px var(--eds_ui_background__light,rgba(247,247,247,1)) inset;
-}
-
-.c2:autofill {
-  box-shadow: 0 0 0px 1000px var(--eds_ui_background__light,rgba(247,247,247,1)) inset;
 .c3 {
   left: 0;
   padding-left: 8px;
@@ -114,10 +100,7 @@ exports[`Search Matches snapshot 1`] = `
   padding-right: 8px;
 }
 
-.c1 input[type='search']::-webkit-search-decoration,
-.c1 input[type='search']::-webkit-search-cancel-button,
-.c1 input[type='search']::-webkit-search-results-button,
-.c1 input[type='search']::-webkit-search-results-decoration {
+.c1 input[type='search']::-webkit-search-decoration,.c1 input[type='search']::-webkit-search-cancel-button,.c1 input[type='search']::-webkit-search-results-button,.c1 input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
