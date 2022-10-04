@@ -148,6 +148,7 @@ export const Multiple: Story<AutocompleteProps<MyOptionType>> = (args) => {
         options={options}
         multiple
         optionLabel={optionLabel}
+        clearSearchOnChange={false}
       />
     </>
   )

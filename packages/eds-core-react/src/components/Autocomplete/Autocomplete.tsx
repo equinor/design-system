@@ -7,6 +7,7 @@ import {
   useRef,
   useMemo,
   useCallback,
+  ChangeEvent,
 } from 'react'
 import {
   useCombobox,
@@ -192,6 +193,8 @@ export type AutocompleteProps<T> = {
   autoWidth?: boolean
   /** Descriptive text for whats selected or about to be selected */
   placeholder?: string
+  /** */
+  clearSearchOnChange?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 function AutocompleteInner<T>(
@@ -217,12 +220,15 @@ function AutocompleteInner<T>(
     autoWidth,
     placeholder,
     optionLabel,
+    clearSearchOnChange = true,
     ...other
   } = props
   const anchorRef = useRef<HTMLInputElement>(null)
 
   const isControlled = Boolean(selectedOptions)
   const [inputOptions, setInputOptions] = useState(options)
+  const [availableItems, setAvailableItems] = useState(inputOptions)
+  const [typedInputValue, setTypedInputValue] = useState<string>('')
 
   useEffect(() => {
     const availableHash = JSON.stringify(inputOptions)
@@ -236,7 +242,6 @@ function AutocompleteInner<T>(
     setAvailableItems(inputOptions)
   }, [inputOptions])
 
-  const [availableItems, setAvailableItems] = useState(inputOptions)
   const disabledItems = useMemo(
     () => options.filter(optionDisabled),
     [options, optionDisabled],
@@ -450,12 +455,19 @@ function AutocompleteInner<T>(
               ...changes,
               isOpen: true, // keep menu open after selection.
               highlightedIndex: state.highlightedIndex,
-              inputValue: '', // don't add the item string as input value at selection.
+              inputValue: !clearSearchOnChange ? typedInputValue : '',
             }
           case useCombobox.stateChangeTypes.InputBlur:
             return {
               ...changes,
-              inputValue: '', // don't add the item string as input value at selection.
+              inputValue: !clearSearchOnChange ? typedInputValue : '',
+            }
+          case useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem:
+            return {
+              ...changes,
+              inputValue: !clearSearchOnChange
+                ? typedInputValue
+                : changes.inputValue,
             }
           default:
             return changes
@@ -525,6 +537,7 @@ function AutocompleteInner<T>(
   const clear = () => {
     resetCombobox()
     resetSelection()
+    setTypedInputValue('')
   }
   const showClearButton =
     (selectedItems.length > 0 || inputValue) && !readOnly && !hideClearButton
@@ -596,6 +609,8 @@ function AutocompleteInner<T>(
                 preventKeyAction: multiple ? isOpen : undefined,
                 disabled,
                 ref: refs.reference,
+                onChange: (e: ChangeEvent<HTMLInputElement>) =>
+                  setTypedInputValue(e?.currentTarget?.value),
               }),
             )}
             placeholder={placeholderText}
