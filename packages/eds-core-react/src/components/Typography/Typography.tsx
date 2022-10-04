@@ -74,13 +74,13 @@ const toVariantName = (
 
 type StyledProps = {
   typography: Partial<TypographyType>
-  link: boolean
+  $link: boolean
   color: ColorVariants
   lines: number
 }
 
 const StyledTypography = styled.p<StyledProps>`
-  ${({ typography, link }) => typographyTemplate(typography, link)}
+  ${({ typography, $link }) => typographyTemplate(typography, $link)}
   ${({ color }) => css({ color: findColor(color) })}
   ${({ lines }) =>
     //https://caniuse.com/#feat=css-line-clamp
@@ -94,8 +94,8 @@ const StyledTypography = styled.p<StyledProps>`
         text-overflow: ellipsis;
       }
     `}
-  ${({ link }) =>
-    link &&
+  ${({ $link }) =>
+    $link &&
     css`
       &:focus {
         outline: none;
@@ -168,7 +168,7 @@ export const Typography: OverridableComponent<TypographyProps, HTMLElement> =
       <StyledTypography
         as={as}
         typography={{ ...typography, ...token }}
-        link={link}
+        $link={link}
         ref={ref}
         {...other}
       >
