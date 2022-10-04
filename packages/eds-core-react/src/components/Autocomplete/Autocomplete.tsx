@@ -460,7 +460,7 @@ function AutocompleteInner<T>(
           case useCombobox.stateChangeTypes.InputBlur:
             return {
               ...changes,
-              inputValue: !clearSearchOnChange ? typedInputValue : '',
+              inputValue: '',
             }
           case useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem:
             return {
