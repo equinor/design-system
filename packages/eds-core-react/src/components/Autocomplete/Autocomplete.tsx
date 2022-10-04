@@ -193,7 +193,7 @@ export type AutocompleteProps<T> = {
   autoWidth?: boolean
   /** Descriptive text for whats selected or about to be selected */
   placeholder?: string
-  /** */
+  /** Toggle if input is cleared when an options is selected when `multiple` is `true`*/
   clearSearchOnChange?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
