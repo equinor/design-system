@@ -84,7 +84,7 @@ describe('Checkbox', () => {
     expect(checkbox).not.toBeChecked()
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
-  it('Can be disabeld', () => {
+  it('Can be disabeld', async () => {
     render(
       <div>
         <Checkbox label="Checkbox one" disabled />
@@ -92,7 +92,7 @@ describe('Checkbox', () => {
     )
     const one = screen.getByLabelText('Checkbox one')
     expect(one).not.toBeChecked()
-    userEvent.click(one)
+    await userEvent.click(one)
     expect(one).not.toBeChecked()
   })
 })

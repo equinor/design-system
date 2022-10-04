@@ -50,7 +50,7 @@ test("Doesn't render label when closed", () => {
   expect(screen.queryByText('Label')).not.toBeInTheDocument()
 })
 
-test('Fires onClick when clicked', () => {
+test('Fires onClick when clicked', async () => {
   const onActionFn = jest.fn()
 
   customRender(
@@ -66,7 +66,7 @@ test('Fires onClick when clicked', () => {
 
   const btn = screen.getByText('Label')
 
-  userEvent.click(btn)
+  await userEvent.click(btn)
 
   expect(onActionFn).toHaveBeenCalledTimes(1)
 })

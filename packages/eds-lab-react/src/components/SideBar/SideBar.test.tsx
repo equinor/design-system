@@ -67,7 +67,7 @@ describe('Sidebar', () => {
     })
   })
 
-  it('Triggers onToggle callback when closed', () => {
+  it('Triggers onToggle callback when closed', async () => {
     const cb = jest.fn()
     render(
       <SideBar open={true} onToggle={cb}>
@@ -81,12 +81,12 @@ describe('Sidebar', () => {
     )
 
     const collapse = screen.getByRole('button')
-    userEvent.click(collapse)
+    await userEvent.click(collapse)
 
     expect(cb).toHaveBeenCalled()
   })
 
-  it('Triggers onToggle callback when opened', () => {
+  it('Triggers onToggle callback when opened', async () => {
     const cb = jest.fn()
     render(
       <SideBar open={false} onToggle={cb}>
@@ -100,12 +100,12 @@ describe('Sidebar', () => {
     )
 
     const expand = screen.getByRole('button')
-    userEvent.click(expand)
+    await userEvent.click(expand)
 
     expect(cb).toHaveBeenCalled()
   })
 
-  it('onToggle send correct state back', () => {
+  it('onToggle send correct state back', async () => {
     const toggle = jest.fn()
     render(
       <SideBar open={false} onToggle={toggle}>
@@ -119,7 +119,7 @@ describe('Sidebar', () => {
     )
 
     const expand = screen.getByRole('button')
-    userEvent.click(expand)
+    await userEvent.click(expand)
 
     expect(toggle).toBeCalled()
     expect(toggle).toHaveBeenCalledWith(true) // Since we send in false to start with

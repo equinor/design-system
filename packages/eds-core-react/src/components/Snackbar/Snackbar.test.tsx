@@ -67,7 +67,9 @@ describe('Snackbar', () => {
       </Snackbar>,
     )
     expect(screen.getByText(message)).toBeDefined()
-    await waitForElementToBeRemoved(() => screen.queryByText(message))
+    await waitForElementToBeRemoved(() => screen.queryByText(message), {
+      timeout: 1500,
+    })
   })
   it('Can have one button attached', () => {
     const buttonText = "I'm the button"

@@ -5,6 +5,7 @@ import {
   Children as ReactChildren,
   isValidElement,
   cloneElement,
+  ReactElement,
 } from 'react'
 import styled, { css } from 'styled-components'
 import * as tokens from './Banner.tokens'
@@ -54,7 +55,7 @@ export const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
       return (
         (isValidElement(child) &&
           child.type === Icon &&
-          cloneElement(child, {
+          cloneElement(child as ReactElement, {
             color,
           })) ||
         child

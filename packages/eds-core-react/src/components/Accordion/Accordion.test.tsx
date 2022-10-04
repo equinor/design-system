@@ -5,7 +5,6 @@ import 'jest-styled-components'
 import { axe } from 'jest-axe'
 import { attach_file, notifications } from '@equinor/eds-icons'
 import { Accordion } from '.'
-import { Button } from '../Button'
 import { Icon } from '../Icon'
 import type { AccordionProps } from './Accordion.types'
 import React from 'react'
@@ -45,34 +44,6 @@ const AccordionWithIcons = () => (
         <Accordion.HeaderTitle>Summary</Accordion.HeaderTitle>
         <Icon name="attach_file" title="Attach file" size={16} />
         <Icon name="notifications" title="Notifications" size={16} />
-      </Accordion.Header>
-      <Accordion.Panel>Details</Accordion.Panel>
-    </Accordion.Item>
-  </Accordion>
-)
-
-const AccordionWithButtons = () => (
-  <Accordion>
-    <Accordion.Item>
-      <Accordion.Header data-testid="header1">
-        <Accordion.HeaderTitle>Summary</Accordion.HeaderTitle>
-        <Button
-          variant="ghost_icon"
-          onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-            event.stopPropagation()
-          }
-        >
-          <Icon name="attach_file" title="Attach file" />
-        </Button>
-        <Button
-          variant="ghost_icon"
-          data-testid="button2"
-          onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-            event.stopPropagation()
-          }
-        >
-          <Icon name="notifications" title="Notifications" />
-        </Button>
       </Accordion.Header>
       <Accordion.Panel>Details</Accordion.Panel>
     </Accordion.Item>

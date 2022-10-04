@@ -164,7 +164,6 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                   // eslint-disable-next-line react/no-array-index-key
                   <ListItem key={`list-item ${index}`}>
                     <PaginationItem
-                      {...page}
                       aria-label={getAriaLabel(page as number, activePage)}
                       aria-current={activePage}
                       page={page as number}

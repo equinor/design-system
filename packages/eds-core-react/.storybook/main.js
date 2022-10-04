@@ -1,8 +1,5 @@
-const path = require('path')
-
 module.exports = {
   stories: [
-    '../stories/docs/*.stories.@(ts|tsx|mdx)',
     '../src/**/*.stories.@(ts|tsx|mdx)',
     '../stories/**/*.stories.@(ts|tsx|mdx)',
   ],
@@ -11,4 +8,11 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
   ],
+  features: {
+    interactionsDebugger: true, // enable playback controls
+  },
+  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-webpack5',
+  },
 }
