@@ -19,6 +19,14 @@ exports[`Tabs Matches snapshot 1`] = `
   -moz-appearance: none;
   appearance: none;
   box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   border: none;
   outline: none;
   height: 48px;
@@ -40,6 +48,8 @@ exports[`Tabs Matches snapshot 1`] = `
   position: relative;
   white-space: nowrap;
   text-overflow: ellipsis;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   overflow-x: hidden;
   -webkit-scroll-snap-align: end;
   -moz-scroll-snap-align: end;
@@ -77,6 +87,14 @@ exports[`Tabs Matches snapshot 1`] = `
   -moz-appearance: none;
   appearance: none;
   box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   border: none;
   outline: none;
   height: 48px;
@@ -98,6 +116,8 @@ exports[`Tabs Matches snapshot 1`] = `
   position: relative;
   white-space: nowrap;
   text-overflow: ellipsis;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   overflow-x: hidden;
   -webkit-scroll-snap-align: end;
   -moz-scroll-snap-align: end;
