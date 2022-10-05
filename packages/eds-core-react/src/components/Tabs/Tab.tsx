@@ -1,11 +1,19 @@
-import { forwardRef, ButtonHTMLAttributes } from 'react'
+import { forwardRef, ButtonHTMLAttributes, ElementType } from 'react'
 import styled, { css } from 'styled-components'
 import {
   outlineTemplate,
   spacingsTemplate,
   bordersTemplate,
   typographyTemplate,
+  OverridableComponent,
 } from '@equinor/eds-utils'
+
+type OverridableSubComponent = OverridableComponent<
+  TabProps,
+  HTMLButtonElement
+> & {
+  displayName?: string
+}
 
 const StyledTab = styled.button.attrs<TabProps>(
   ({ active = false, disabled = false }) => ({
@@ -23,6 +31,8 @@ const StyledTab = styled.button.attrs<TabProps>(
   return css`
     appearance: none;
     box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
     border: none;
     outline: none;
     height: ${tab.height};
@@ -36,6 +46,7 @@ const StyledTab = styled.button.attrs<TabProps>(
     position: relative;
     white-space: nowrap;
     text-overflow: ellipsis;
+    text-decoration: none;
     overflow-x: hidden;
 
     scroll-snap-align: end;
@@ -85,11 +96,13 @@ export type TabProps = {
   active?: boolean
   /** If `true`, the tab will be disabled. */
   disabled?: boolean
+  /** Override element type */
+  as?: ElementType
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
-  props,
-  ref,
-) {
+export const Tab: OverridableSubComponent = forwardRef<
+  HTMLButtonElement,
+  TabProps
+>(function Tab(props, ref) {
   return <StyledTab ref={ref} {...props} />
 })
