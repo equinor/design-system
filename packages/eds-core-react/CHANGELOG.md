@@ -5,7 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.23.0] - 2022-10-03
+## [0.23.0] - 2022-10-05
+
+### Fixed
+
+- 🐛 Accordion: fixed shrinking icon by @oddvernes in https://github.com/equinor/design-system/pull/2540
+
+### Changed
+
+- ⬆️ Upgrade to React 18 by @mimarz in https://github.com/equinor/design-system/pull/2510
+- 🐛 Breadcrumb/Typography: use transient props by @oddvernes in https://github.com/equinor/design-system/pull/2542
 
 ## [0.22.0] - 2022-09-29
 
