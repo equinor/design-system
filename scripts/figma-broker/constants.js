@@ -6,7 +6,7 @@ const STORYBOOK_DIR = '../../packages/eds-core-react/stories'
 
 export const PATHS = {
   TOKENS: TOKENS_DIR,
-  BASE_TOKENS: `${TOKENS_DIR}/base`,
+  BASE_TOKENS: `${TOKENS_DIR}/src/base`,
   COMPONENTS_TOKENS: `${TOKENS_DIR}/components`,
   ASSETS_ICONS: `${ASSETS_DIR}/icons`,
   SASS: `${COMMON_DIR}/public/sass`,

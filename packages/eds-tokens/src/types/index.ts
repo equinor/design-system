@@ -1,5 +1,5 @@
-import { typography } from '../../base/typography'
-import { elevation } from '../../base/elevation'
+import { typography } from '../base/typography'
+import { elevation } from '../base/elevation'
 
 export * from './borders'
 export * from './focus'
