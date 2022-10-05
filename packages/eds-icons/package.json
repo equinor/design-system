@@ -24,7 +24,7 @@
     "commonjs/*"
   ],
   "scripts": {
-    "build": "rollup -c && tsc -p tsconfig.json",
+    "build": "rollup -c && tsc",
     "dev": "rollup -c -w",
     "types": "tsc"
   },
