@@ -7,7 +7,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-module stg './storage.bicep' = {
+module stg './storybook.bicep' = {
   name: 'storageDeployment'
   scope: rg
   params: {
