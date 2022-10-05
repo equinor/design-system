@@ -41,12 +41,6 @@
     "hooks"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.19.1",
-    "@babel/plugin-transform-runtime": "^7.19.1",
-    "@babel/preset-env": "^7.19.1",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
@@ -86,6 +80,7 @@
     "@babel/runtime": "^7.19.0",
     "@equinor/eds-tokens": "workspace:*",
     "@popperjs/core": "2.11.6",
+    "babel-jest": "^29.1.2",
     "react-popper": "2.3.0"
   },
   "engines": {

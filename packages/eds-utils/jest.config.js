@@ -2,7 +2,7 @@ module.exports = {
   verbose: true,
   setupFilesAfterEnv: ['./rtl.setup.ts'],
   transform: {
-    '.(js|ts|tsx)': 'babel-jest',
+    '.(js|ts|tsx)': '<rootDir>/src/test/transformers/babelJest.js',
   },
   moduleNameMapper: {
     '\\.(css)$': '<rootDir>/src/test/__mocks__/styleMock.js',
