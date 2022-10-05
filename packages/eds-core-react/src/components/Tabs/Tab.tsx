@@ -14,16 +14,20 @@ type OverridableSubComponent = OverridableComponent<
 > & {
   displayName?: string
 }
+type StyledTabProps = {
+  $active?: boolean
+  disabled: boolean
+}
 
-const StyledTab = styled.button.attrs<TabProps>(
-  ({ active = false, disabled = false }) => ({
+const StyledTab = styled.button.attrs<StyledTabProps>(
+  ({ $active = false, disabled = false }) => ({
     type: 'button',
     role: 'tab',
-    'aria-selected': active,
+    'aria-selected': $active,
     'aria-disabled': disabled,
-    tabIndex: active ? '0' : '-1',
+    tabIndex: $active ? '0' : '-1',
   }),
-)<TabProps>(({ theme, active, disabled }) => {
+)<StyledTabProps>(({ theme, $active, disabled }) => {
   const {
     entities: { tab },
   } = theme
@@ -39,7 +43,7 @@ const StyledTab = styled.button.attrs<TabProps>(
     ${spacingsTemplate(tab.spacings)}
     ${typographyTemplate(tab.typography)}
 
-    color: ${active
+    color: ${$active
       ? tab.states.active.typography.color
       : tab.typography.color};
     background-color: ${tab.background};
@@ -69,7 +73,7 @@ const StyledTab = styled.button.attrs<TabProps>(
     @media (hover: hover) and (pointer: fine) {
       &[data-hover],
       &:hover {
-        color: ${active
+        color: ${$active
           ? tab.states.active.states.hover.typography.color
           : tab.typography.color};
         ${disabled
@@ -87,7 +91,7 @@ const StyledTab = styled.button.attrs<TabProps>(
     ${disabled
       ? bordersTemplate(tab.states.disabled.border)
       : bordersTemplate(tab.border)}
-    ${active && bordersTemplate(tab.states.active.border)}
+    ${$active && bordersTemplate(tab.states.active.border)}
   `
 })
 
@@ -103,6 +107,6 @@ export type TabProps = {
 export const Tab: OverridableSubComponent = forwardRef<
   HTMLButtonElement,
   TabProps
->(function Tab(props, ref) {
-  return <StyledTab ref={ref} {...props} />
+>(function Tab({ active, ...rest }, ref) {
+  return <StyledTab ref={ref} $active={active} {...rest} />
 })
