@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.23.0] - 2022-10-03
 
+### Fixed
+
+- 🐛 Accordion: fixed shrinking icon by @oddvernes in https://github.com/equinor/design-system/pull/2540
+
+### Changed
+
+- ⬆️ Upgrade to React 18 by @mimarz in https://github.com/equinor/design-system/pull/2510
+- 🐛 Breadcrumb/Typography: use transient props by @oddvernes in https://github.com/equinor/design-system/pull/2542
+
 ## [0.22.0] - 2022-09-29
 
 ### Fixed
