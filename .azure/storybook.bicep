@@ -10,7 +10,7 @@ param location string = resourceGroup().location
 @description('The storage account sku name.')
 param storageSku string = 'Standard_LRS'
 
-resource steds 'Microsoft.Storage/storageAccounts@2021-09-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -26,15 +26,6 @@ resource contributorRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022
   scope: subscription()
   // This is the Storage Account Contributor role, which is the minimum role permission we can give. See https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#:~:text=17d1049b-9a84-46fb-8f53-869881c3d3ab
   name: '17d1049b-9a84-46fb-8f53-869881c3d3ab'
-}
-
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
-  name: storageAccountName
-  location: location
-  kind: 'StorageV2'
-  sku: {
-    name: storageSku
-  }
 }
 
 resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
