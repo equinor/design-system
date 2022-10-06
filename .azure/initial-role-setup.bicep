@@ -1,6 +1,6 @@
 // This file needs to be run when subscription is new. With owner rights.
-// $myActions='("Microsoft.Resources/resources/read","Microsoft.Resources/subscriptions/resourceGroups/read")'
-// az deployment sub create --location northeurope --name customContributor --template-file initial-role-setup.bicep --parameters actions=$myActions
+// az account set --subscription 918bb82f-406f-4a8b-b12e-fe2559a56dbc
+// az deployment sub create --location northeurope --name customContributor --template-file initial-role-setup.bicep
 
 targetScope = 'subscription'
 

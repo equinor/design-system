@@ -10,6 +10,9 @@ param location string = resourceGroup().location
 @description('The storage account sku name.')
 param storageSku string = 'Standard_LRS'
 
+@description('The path to the web index document.')
+param indexDocumentPath string = 'index.html'
+
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
   name: storageAccountName
   location: location
@@ -69,6 +72,10 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
       {
         name: 'StorageAccountName'
         value: storageAccount.name
+      }
+      {
+        name: 'IndexDocumentPath'
+        value: indexDocumentPath
       }
     ]
   }
