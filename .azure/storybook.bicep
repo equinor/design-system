@@ -36,6 +36,12 @@ resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-
   location: location
 }
 
+@description('The path to the web error document.')
+param errorDocument404Path string = 'error.html'
+
+@description('The contents of the web error document.')
+param errorDocument404Contents string = '<h1>Example 404 error page</h1>'
+
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
   name: guid(resourceGroup().id, managedIdentity.id, contributorRoleDefinition.id)
@@ -76,6 +82,14 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
       {
         name: 'IndexDocumentPath'
         value: indexDocumentPath
+      }
+      {
+        name: 'ErrorDocument404Path'
+        value: errorDocument404Path
+      }
+      {
+        name: 'ErrorDocument404Contents'
+        value: errorDocument404Contents
       }
     ]
   }
