@@ -11,7 +11,7 @@ module stg './storybook.bicep' = {
   name: 'storageDeployment'
   scope: rg
   params: {
-    storageAccountName: 'steds'
+    storageAccountName: 'st-storybook'
     location: location
   }
 }
