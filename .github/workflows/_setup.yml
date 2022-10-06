@@ -78,7 +78,7 @@ jobs:
         with:
           path: |
             ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-and-store-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-and-store-force-update-20220413-${{ hashFiles('packages/**/pnpm-lock.yaml') }}
       - name: Install pnpm
         # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
         run: npm i --no-save pnpm
