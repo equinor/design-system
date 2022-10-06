@@ -49,4 +49,4 @@ jobs:
       - name: Publish to npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
-          node_modules/.bin/pnpm --filter ./packages/eds-icons publish --access public --no-git-checks --tag ${{ needs.setup.outputs.tag }}
+          node_modules/.bin/pnpm --filter @equinor/eds-icons publish --access public --no-git-checks --tag ${{ needs.setup.outputs.tag }}
