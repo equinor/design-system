@@ -335,10 +335,7 @@ function AutocompleteInner<T>(
       )
     },
     onIsOpenChange: ({ selectedItem }) => {
-      // Show all options when single select is reopened with a selected item
-      const availableHash = JSON.stringify(availableItems[0])
-      const selectedsHash = JSON.stringify(selectedItem)
-      if (availableItems.length === 1 && selectedsHash === availableHash) {
+      if (!multiple && selectedItem !== null) {
         setAvailableItems(options)
       }
     },
