@@ -643,16 +643,17 @@ AutoWidth.args = {
 
 export const OptionsUpdate: Story<AutocompleteProps<MyOptionType>> = () => {
   const [loadingText, setLoadingText] = useState('Loading')
-  const [options, setOptions] = useState<{ label: string }[]>([
-    { label: 'Item 99' },
+  const [options, setOptions] = useState<{ id: number; showIcon: boolean }[]>([
+    { id: 99, showIcon: false },
   ])
   const items = useMemo(
     () => [
-      { label: 'Item 1' },
-      { label: 'Item 2' },
-      {
-        label: 'Item 3',
-      },
+      { id: 1, showIcon: false },
+      { id: 11, showIcon: true },
+      { id: 111, showIcon: true },
+      { id: 12, showIcon: false },
+      { id: 2, showIcon: true },
+      { id: 3, showIcon: false },
     ],
     [],
   )
@@ -669,7 +670,7 @@ export const OptionsUpdate: Story<AutocompleteProps<MyOptionType>> = () => {
     <>
       <Typography>{loadingText}</Typography>
       <Autocomplete
-        optionLabel={(opt) => opt.label}
+        optionLabel={(opt) => `${opt.showIcon ? '🔄' : ''}Item ${opt.id}`}
         label="Select a stock"
         options={options}
         autoWidth
