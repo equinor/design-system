@@ -1,21 +1,33 @@
-import { forwardRef, ButtonHTMLAttributes } from 'react'
+import { forwardRef, ButtonHTMLAttributes, ElementType } from 'react'
 import styled, { css } from 'styled-components'
 import {
   outlineTemplate,
   spacingsTemplate,
   bordersTemplate,
   typographyTemplate,
+  OverridableComponent,
 } from '@equinor/eds-utils'
 
-const StyledTab = styled.button.attrs<TabProps>(
-  ({ active = false, disabled = false }) => ({
+type OverridableSubComponent = OverridableComponent<
+  TabProps,
+  HTMLButtonElement
+> & {
+  displayName?: string
+}
+type StyledTabProps = {
+  $active?: boolean
+  disabled: boolean
+}
+
+const StyledTab = styled.button.attrs<StyledTabProps>(
+  ({ $active = false, disabled = false }) => ({
     type: 'button',
     role: 'tab',
-    'aria-selected': active,
+    'aria-selected': $active,
     'aria-disabled': disabled,
-    tabIndex: active ? '0' : '-1',
+    tabIndex: $active ? '0' : '-1',
   }),
-)<TabProps>(({ theme, active, disabled }) => {
+)<StyledTabProps>(({ theme, $active, disabled }) => {
   const {
     entities: { tab },
   } = theme
@@ -23,19 +35,22 @@ const StyledTab = styled.button.attrs<TabProps>(
   return css`
     appearance: none;
     box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
     border: none;
     outline: none;
     height: ${tab.height};
     ${spacingsTemplate(tab.spacings)}
     ${typographyTemplate(tab.typography)}
 
-    color: ${active
+    color: ${$active
       ? tab.states.active.typography.color
       : tab.typography.color};
     background-color: ${tab.background};
     position: relative;
     white-space: nowrap;
     text-overflow: ellipsis;
+    text-decoration: none;
     overflow-x: hidden;
 
     scroll-snap-align: end;
@@ -58,7 +73,7 @@ const StyledTab = styled.button.attrs<TabProps>(
     @media (hover: hover) and (pointer: fine) {
       &[data-hover],
       &:hover {
-        color: ${active
+        color: ${$active
           ? tab.states.active.states.hover.typography.color
           : tab.typography.color};
         ${disabled
@@ -76,7 +91,7 @@ const StyledTab = styled.button.attrs<TabProps>(
     ${disabled
       ? bordersTemplate(tab.states.disabled.border)
       : bordersTemplate(tab.border)}
-    ${active && bordersTemplate(tab.states.active.border)}
+    ${$active && bordersTemplate(tab.states.active.border)}
   `
 })
 
@@ -85,11 +100,13 @@ export type TabProps = {
   active?: boolean
   /** If `true`, the tab will be disabled. */
   disabled?: boolean
+  /** Override element type */
+  as?: ElementType
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
-  props,
-  ref,
-) {
-  return <StyledTab ref={ref} {...props} />
+export const Tab: OverridableSubComponent = forwardRef<
+  HTMLButtonElement,
+  TabProps
+>(function Tab({ active, ...rest }, ref) {
+  return <StyledTab ref={ref} $active={active} {...rest} />
 })

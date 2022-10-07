@@ -74,6 +74,21 @@ Focus outline is only visible when navigating using the keyboard.
 
 <Story id="navigation-tabs--with-panels" />
 
+### With third party routers
+`Tabs.Tab` can be rendered as another component using the `as` prop.
+```tsx
+import { Tabs } from '@equinor/eds-core-react'
+import { Link, Outlet } from "react-router-dom";
+
+  <Tabs>
+  <Tabs.List>
+      <Tabs.Tab as={Link} to="/foo/bar">bar</Tabs.Tab>
+      <Tabs.Tab as={Link} to="/foo/baz">baz</Tabs.Tab>
+  </Tabs.List>
+  <Outlet />
+  </Tabs>
+```
+
 ### With search
 
 <Story id="navigation-tabs--with-search" />
