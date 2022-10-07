@@ -1,8 +1,9 @@
 module.exports = {
   verbose: true,
-  setupFilesAfterEnv: ['./rtl.setup.ts'],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   transform: {
-    '.(js|ts|tsx)': 'babel-jest',
+    '.(js|ts|tsx)':
+      '<rootDir>/node_modules/@equinor/eds-utils/src/test/transformers/babelJest.js',
   },
   moduleNameMapper: {
     '\\.(css)$':

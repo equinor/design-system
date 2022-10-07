@@ -38,6 +38,7 @@ export default [
       babel({
         babelHelpers: 'runtime',
         extensions,
+        rootMode: 'upward',
       }),
     ],
     output: [
