@@ -14,6 +14,13 @@ tasks:
       pnpm recursive install --filter "./packages/**"
       echo "Dependencies installed"
       gp sync-done install
+  - name: Build utils
+    init: |
+      gp sync-await install
+      pnpm build:utils
+      echo "Utils built"
+      gp sync-done utils
+    command: pnpm storybook:core-react
 ports:
   - port: 9000
     onOpen: open-preview
