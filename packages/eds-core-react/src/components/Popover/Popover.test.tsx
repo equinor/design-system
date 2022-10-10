@@ -107,7 +107,7 @@ describe('Popover', () => {
     const placement = 'top'
     render(<TestPopover placement={placement} data-testid="popover" />)
 
-    expect(await screen.findByTestId('popover')).toBeDefined()
+    expect(await screen.queryByTestId('popover')).toBeDefined()
   })
   it("doesn't crash if Popover Content children is undefined", async () => {
     const placement = 'top'
@@ -117,7 +117,7 @@ describe('Popover', () => {
         <Popover.Content></Popover.Content>
       </TestPopover>,
     )
-    expect(await screen.findByTestId('popover')).toBeDefined()
+    expect(await screen.queryByTestId('popover')).toBeDefined()
   })
   it("doesn't crash if Popover Title children is undefined", async () => {
     const placement = 'top'
@@ -127,6 +127,6 @@ describe('Popover', () => {
         <Popover.Content>Content</Popover.Content>
       </TestPopover>,
     )
-    expect(await screen.findByTestId('popover')).toBeDefined()
+    expect(await screen.queryByTestId('popover')).toBeDefined()
   })
 })
