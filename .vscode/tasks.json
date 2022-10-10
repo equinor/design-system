@@ -10,7 +10,7 @@
       ],
       "group": {
         "kind": "test",
-        "isDefault": false
+        "isDefault": true
       },
       "presentation": {
         "group": "test",
@@ -19,7 +19,7 @@
         "panel": "dedicated",
       },
       "runOptions": {
-        "runOn": "folderOpen"
+        "runOn": "default"
       }
     },
     {
@@ -31,7 +31,7 @@
       ],
       "group": {
         "kind": "test",
-        "isDefault": false
+        "isDefault": true
       },
       "presentation": {
         "group": "test",
@@ -40,7 +40,7 @@
         "panel": "dedicated",
       },
       "runOptions": {
-        "runOn": "folderOpen"
+        "runOn": "default"
       }
     },
     {
@@ -52,7 +52,7 @@
       ],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       },
       "presentation": {
         "group": "run",
