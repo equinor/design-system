@@ -10,7 +10,7 @@
       ],
       "group": {
         "kind": "test",
-        "isDefault": true
+        "isDefault": false
       },
       "presentation": {
         "group": "test",
@@ -31,7 +31,7 @@
       ],
       "group": {
         "kind": "test",
-        "isDefault": true
+        "isDefault": false
       },
       "presentation": {
         "group": "test",
@@ -52,7 +52,7 @@
       ],
       "group": {
         "kind": "build",
-        "isDefault": true
+        "isDefault": false
       },
       "presentation": {
         "group": "run",
