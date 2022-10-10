@@ -12,6 +12,14 @@ tasks:
       pnpm build:tokens
       gp sync-done install
     command: pnpm storybook:core-react
+  - name: Lint
+    init: gp sync-await install
+    command: pnpm lint:core-react
+    openMode: split-right
+  - name: Test
+    init: gp sync-await install
+    command: pnpm test:core-react
+    openMode: split-right
 ports:
   - port: 9000
     onOpen: open-preview
