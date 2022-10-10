@@ -1,4 +1,7 @@
 {
+  "extensions.ignoreRecommendations": true,
+  "git.rebaseWhenSync": true,
+  "git.autofetch": true,
   "yaml.schemas": {
     "http://json.schemastore.org/prettierrc": ".prettier.yaml",
     "http://json.schemastore.org/eslintrc": ".eslintrc.yaml"
@@ -12,5 +15,9 @@
   "editor.formatOnSave": true,
   "prettier.prettierPath": "./node_modules/prettier",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "task.allowAutomaticTasks": "on"
+  "task.allowAutomaticTasks": "off",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "svg.preview.mode": "img",
 }
