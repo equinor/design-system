@@ -126,6 +126,7 @@ exports[`Accordion Matches snapshot 1`] = `
           class="c1"
           data-testid="header1"
           tabindex="0"
+          type="button"
         >
           <svg
             aria-hidden="true"
