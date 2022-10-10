@@ -7,9 +7,9 @@ tasks:
       pnpm install
       pnpm recursive install --filter "./packages/**"
     init: |
+      pnpm build:tokens
       pnpm build:utils
       pnpm build:icons
-      pnpm build:tokens
       gp sync-done install
     command: pnpm storybook:core-react
   - name: Lint
