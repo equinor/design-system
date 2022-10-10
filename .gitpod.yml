@@ -11,7 +11,7 @@ tasks:
     init: |
       gp sync-await pnpm
       pnpm Install
-      pnpm recursive install --filter ./packages
+      pnpm recursive install --filter "./packages/**"
       echo "Dependencies installed"
       gp sync-done install
 ports:
