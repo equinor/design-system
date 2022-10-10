@@ -455,6 +455,7 @@ function AutocompleteInner<T>(
               inputValue: !clearSearchOnChange ? typedInputValue : '',
             }
           case useCombobox.stateChangeTypes.InputBlur:
+            setTypedInputValue('')
             return {
               ...changes,
               inputValue: '',
