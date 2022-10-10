@@ -2,10 +2,18 @@
 #  file: .gitpod.Dockerfile
 
 tasks:
-  - name: Install
+  - name: Install pnpm
     init: |
       npm i -g pnpm
+      echo "Pnpm installed"
       gp sync-done pnpm
+  - name: Install dependencies
+    init: |
+      gp sync-await pnpm
+      pnpm Install
+      pnpm recursive install --filter ./packages
+      echo "Dependencies installed"
+      gp sync-done install
 ports:
   - port: 9000
     onOpen: open-preview
