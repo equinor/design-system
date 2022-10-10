@@ -131,6 +131,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         shift({ padding: 8 }),
         arrow({ element: arrowRef }),
       ],
+      whileElementsMounted: autoUpdate,
     })
 
     useLayoutEffect(() => {
@@ -142,47 +143,42 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       [floating, ref],
     )
 
-    useEffect(() => {
-      if (refs.reference.current && refs.floating.current && open) {
-        return autoUpdate(refs.reference.current, refs.floating.current, update)
-      }
-    }, [refs.reference, refs.floating, update, open])
-
     const { getFloatingProps } = useInteractions([useDismiss(context)])
 
-    const staticSide = {
-      top: 'bottom',
-      right: 'left',
-      bottom: 'top',
-      left: 'right',
-    }[finalPlacement.split('-')[0]]
+    useEffect(() => {
+      if (arrowRef.current) {
+        const staticSide = {
+          top: 'bottom',
+          right: 'left',
+          bottom: 'top',
+          left: 'right',
+        }[finalPlacement.split('-')[0]]
 
-    let arrowTransform = 'none'
-    switch (staticSide) {
-      case 'right':
-        arrowTransform = 'rotateY(180deg)'
-        break
-      case 'left':
-        arrowTransform = 'none'
-        break
-      case 'top':
-        arrowTransform = 'rotate(90deg)'
-        break
-      case 'bottom':
-        arrowTransform = 'rotate(-90deg)'
-        break
-    }
-
-    if (arrowRef.current) {
-      Object.assign(arrowRef.current.style, {
-        left: arrowX != null ? `${arrowX}px` : '',
-        top: arrowY != null ? `${arrowY}px` : '',
-        right: '',
-        bottom: '',
-        [staticSide]: '-6px',
-        transform: arrowTransform,
-      })
-    }
+        let arrowTransform = 'none'
+        switch (staticSide) {
+          case 'right':
+            arrowTransform = 'rotateY(180deg)'
+            break
+          case 'left':
+            arrowTransform = 'none'
+            break
+          case 'top':
+            arrowTransform = 'rotate(90deg)'
+            break
+          case 'bottom':
+            arrowTransform = 'rotate(-90deg)'
+            break
+        }
+        Object.assign(arrowRef.current.style, {
+          left: arrowX != null ? `${arrowX}px` : '',
+          top: arrowY != null ? `${arrowY}px` : '',
+          right: '',
+          bottom: '',
+          [staticSide]: '-6px',
+          transform: arrowTransform,
+        })
+      }
+    }, [arrowRef.current, arrowX, arrowY])
 
     const props = {
       open,
@@ -225,19 +221,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           <FloatingPortal id="eds-popover-container">
             {trapFocus
               ? open && (
-                  <FloatingFocusManager context={context} modal={false}>
+                  <FloatingFocusManager context={context} modal={true}>
                     {popover}
                   </FloatingFocusManager>
                 )
-              : open && (
-                  <FloatingFocusManager
-                    context={context}
-                    modal={false}
-                    order={['reference', 'content']}
-                  >
-                    {popover}
-                  </FloatingFocusManager>
-                )}
+              : open && popover}
           </FloatingPortal>
         )}
       </>
