@@ -16,8 +16,4 @@
   "prettier.prettierPath": "./node_modules/prettier",
   "typescript.tsdk": "node_modules/typescript/lib",
   "task.allowAutomaticTasks": "off",
-  "[svg]": {
-    "editor.defaultFormatter": "jock.svg"
-  },
-  "svg.preview.mode": "img",
 }

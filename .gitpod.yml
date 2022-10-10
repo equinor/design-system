@@ -2,7 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: Install dependencies
+  - name: Storybook
     before: |
       pnpm install
       pnpm recursive install --filter "./packages/**"
