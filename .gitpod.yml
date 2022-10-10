@@ -1,29 +1,11 @@
-image:
-  file: .gitpod.Dockerfile
+#image:
+#  file: .gitpod.Dockerfile
 
 tasks:
   - name: Install
     init: |
-      pnpm install
-      pnpm recursive install --filter ./packages
-      echo "Dependencies installed"
-      gp sync-done install
-  - name: Utils
-    init: |
-      gp sync-await install
-      pnpm build:utils
-      echo "Utils built"
-      gp sync-done utils
-    command: pnpm storybook:core-react
-  - name: Lint
-    init: gp sync-await utils
-    command: pnpm lint:core-react
-    openMode: split-right
-  - name: Test
-    init: gp sync-await utils
-    command: pnpm test:core-react
-    openMode: split-right
-
+      npm i -g pnpm
+      gp sync-done pnpm
 ports:
   - port: 9000
     onOpen: open-preview
