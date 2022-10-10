@@ -19,7 +19,7 @@
         "panel": "dedicated",
       },
       "runOptions": {
-        "runOn": "folderOpen"
+        "runOn": "default"
       }
     },
     {
@@ -40,7 +40,7 @@
         "panel": "dedicated",
       },
       "runOptions": {
-        "runOn": "folderOpen"
+        "runOn": "default"
       }
     },
     {
