@@ -7,16 +7,20 @@ tasks:
       pnpm install
       pnpm recursive install --filter ./packages
       echo "Dependencies installed"
+      gp sync-done install
+  - name: Utils
+    init: |
+      gp sync-await install
       pnpm build:utils
       echo "Utils built"
-      gp sync-done install
+      gp sync-done utils
     command: pnpm storybook:core-react
   - name: Lint
-    init: gp sync-await install
+    init: gp sync-await utils
     command: pnpm lint:core-react
     openMode: split-right
   - name: Test
-    init: gp sync-await install
+    init: gp sync-await utils
     command: pnpm test:core-react
     openMode: split-right
 
