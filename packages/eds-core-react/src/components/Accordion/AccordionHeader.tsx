@@ -1,5 +1,6 @@
 import {
   KeyboardEvent,
+  MouseEvent,
   Children as ReactChildren,
   cloneElement,
   forwardRef,
@@ -165,7 +166,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     },
     ref,
   ) {
-    const handleClick = () => {
+    const handleClick = (e: MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
       if (!disabled) {
         toggleExpanded()
         if (props.onToggle) {
@@ -173,14 +176,15 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         }
       }
     }
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const { key } = event
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const { key } = e
       if (key === 'Enter' || key === ' ') {
         toggleExpanded()
         if (props.onToggle) {
           props.onToggle()
         }
-        event.preventDefault()
+        e.preventDefault()
+        e.stopPropagation()
       }
     }
 
@@ -253,6 +257,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           ref={ref}
+          type="button"
           {...props}
         >
           {chevronPosition === 'left' ? newChildren : newChildren.reverse()}
