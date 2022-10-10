@@ -149,14 +149,6 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
-          <Button
-            style={{ height: '32px', width: '32px' }}
-            variant="ghost_icon"
-            aria-label="Close popover"
-            onClick={closePopover}
-          >
-            <Icon name="close" data={close} size={24} />
-          </Button>
         </Popover.Header>
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
@@ -242,6 +234,43 @@ export const WithTooltip: Story<PopoverProps> = () => {
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
+        </Popover.Header>
+        <Popover.Content>
+          <Typography variant="body_short">Content</Typography>
+        </Popover.Content>
+      </Popover>
+    </>
+  )
+}
+
+export const WithCloseButton: Story<PopoverProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const anchorRef = useRef<HTMLButtonElement>(null)
+
+  const openPopover = () => setIsOpen(true)
+  const closePopover = () => setIsOpen(false)
+
+  return (
+    <>
+      <Button
+        id="click-popover-anchor"
+        aria-controls="click-popover"
+        ref={anchorRef}
+        onClick={openPopover}
+      >
+        Click to activate
+      </Button>
+
+      <Popover
+        id="click-popover"
+        aria-expanded={isOpen}
+        anchorEl={anchorRef.current}
+        onClose={closePopover}
+        open={isOpen}
+        trapFocus
+      >
+        <Popover.Header>
+          <Popover.Title>Title</Popover.Title>
           <Button
             style={{ height: '32px', width: '32px' }}
             variant="ghost_icon"
@@ -258,52 +287,7 @@ export const WithTooltip: Story<PopoverProps> = () => {
     </>
   )
 }
-
-// export const WithCloseButton: Story<PopoverProps> = () => {
-//   const [isOpen, setIsOpen] = useState<boolean>(false)
-//   const anchorRef = useRef<HTMLButtonElement>(null)
-
-//   const openPopover = () => setIsOpen(true)
-//   const closePopover = () => setIsOpen(false)
-
-//   return (
-//     <>
-//       <Button
-//         id="click-popover-anchor"
-//         aria-controls="click-popover"
-//         ref={anchorRef}
-//         onClick={openPopover}
-//       >
-//         Click to activate
-//       </Button>
-
-//       <Popover
-//         id="click-popover"
-//         aria-expanded={isOpen}
-//         anchorEl={anchorRef.current}
-//         onClose={closePopover}
-//         open={isOpen}
-//         trapFocus
-//       >
-//         <Popover.Header>
-//           <Popover.Title>Title</Popover.Title>
-//           <Button
-//             style={{ height: '32px', width: '32px' }}
-//             variant="ghost_icon"
-//             aria-label="Close popover"
-//             onClick={closePopover}
-//           >
-//             <Icon name="close" data={close} size={24} />
-//           </Button>
-//         </Popover.Header>
-//         <Popover.Content>
-//           <Typography variant="body_short">Content</Typography>
-//         </Popover.Content>
-//       </Popover>
-//     </>
-//   )
-// }
-// WithCloseButton.storyName = 'With close button'
+WithCloseButton.storyName = 'With close button'
 
 export const PersistentPopover: Story<PopoverProps> = () => {
   const counties = [
@@ -394,14 +378,6 @@ export const Compact: Story<PopoverProps> = () => {
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
-          <Button
-            style={{ height: '32px', width: '32px' }}
-            variant="ghost_icon"
-            aria-label="Close popover"
-            onClick={closePopover}
-          >
-            <Icon name="close" data={close} size={24} />
-          </Button>
         </Popover.Header>
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
