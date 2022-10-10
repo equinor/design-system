@@ -1,5 +1,5 @@
-FROM gitpod/workspace-full
+FROM gitpod/workspace-full:latest
 
 USER gitpod
-
-RUN brew install pnpm
+RUN bash -c 'nvm install v17'
+RUN brew install pnpm@7
