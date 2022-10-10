@@ -533,6 +533,14 @@ export const filter_alt_off: IconData = {
     'm3.414 2 17.352 17.352-1.414 1.414L14 15.414V19c0 .583-.424 1-1 1h-1.907C10.518 20 10 19.583 10 19v-6S6.768 8.865 4.41 5.825L2 3.415 3.414 2zM19.74 5.61c-1.219 1.563-3.057 3.932-4.323 5.564l-1.41-1.41L17 6h-6.757l-2-2H18.95c.83 0 1.3.95.79 1.61z',
 }
 
+export const in_progress: IconData = {
+  name: 'in_progress',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'M12 18V6a6 6 0 1 0 0 12zm0-14a8 8 0 1 1 0 16 8 8 0 0 1 0-16z',
+}
+
 export const signature: IconData = {
   name: 'signature',
   prefix: 'eds',
