@@ -131,10 +131,8 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
   return (
     <>
       <Button
-        aria-haspopup
         id="click-popover-anchor"
         aria-controls="click-popover"
-        aria-expanded={isOpen}
         ref={anchorRef}
         onClick={openPopover}
       >
@@ -142,6 +140,7 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
       </Button>
 
       <Popover
+        aria-expanded={isOpen}
         id="click-popover"
         anchorEl={anchorRef.current}
         onClose={closePopover}
@@ -182,7 +181,6 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
   return (
     <>
       <Button
-        aria-haspopup
         id="hover-popover-anchor"
         aria-controls="hover-popover"
         aria-expanded={isOpen}
@@ -223,20 +221,11 @@ export const WithTooltip: Story<PopoverProps> = () => {
   return (
     <>
       <Tooltip title="Menu">
-        <Button
-          aria-haspopup
-          id="click-popover-anchor"
-          aria-controls="click-popover"
-          aria-expanded={isOpen}
-          ref={anchorRef}
-          variant="ghost_icon"
-          onClick={openPopover}
-        >
+        <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={more_vertical} />
         </Button>
       </Tooltip>
       <Popover
-        id="click-popover"
         anchorEl={anchorRef.current}
         open={isOpen}
         onClose={closePopover}
@@ -263,10 +252,8 @@ export const WithCloseButton: Story<PopoverProps> = () => {
   return (
     <>
       <Button
-        aria-haspopup
         id="click-popover-anchor"
         aria-controls="click-popover"
-        aria-expanded={isOpen}
         ref={anchorRef}
         onClick={openPopover}
       >
@@ -279,6 +266,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
         onClose={closePopover}
         open={isOpen}
         trapFocus
+        aria-expanded={isOpen}
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -324,10 +312,8 @@ export const PersistentPopover: Story<PopoverProps> = () => {
   return (
     <>
       <Button
-        aria-haspopup
         id="click-popover-anchor"
         aria-controls="click-popover"
-        aria-expanded={isOpen}
         ref={anchorRef}
         onClick={openPopover}
       >
@@ -336,6 +322,7 @@ export const PersistentPopover: Story<PopoverProps> = () => {
 
       <Popover
         id="click-popover"
+        aria-expanded={isOpen}
         anchorEl={anchorRef.current}
         open={isOpen}
         placement="top"
@@ -373,10 +360,8 @@ export const Compact: Story<PopoverProps> = () => {
   return (
     <EdsProvider density={density}>
       <Button
-        aria-haspopup
         id="click-popover-anchor"
         aria-controls="click-popover"
-        aria-expanded={isOpen}
         ref={anchorRef}
         onClick={openPopover}
       >
@@ -385,6 +370,7 @@ export const Compact: Story<PopoverProps> = () => {
 
       <Popover
         id="click-popover"
+        aria-expanded={isOpen}
         anchorEl={anchorRef.current}
         onClose={closePopover}
         open={isOpen}
@@ -433,20 +419,11 @@ export const AppLauncher: Story<PopoverProps> = () => {
   return (
     <>
       <Tooltip title="App Launcher">
-        <Button
-          aria-haspopup
-          id="click-popover-anchor"
-          aria-controls="click-popover"
-          aria-expanded={isOpen}
-          ref={anchorRef}
-          variant="ghost_icon"
-          onClick={openPopover}
-        >
+        <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
           <Icon data={apps} />
         </Button>
       </Tooltip>
       <Popover
-        id="click-popover"
         anchorEl={anchorRef.current}
         open={isOpen}
         onClose={closePopover}
