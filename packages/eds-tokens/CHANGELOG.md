@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0] - 2022-10-05
 
+### Removed
+
+- 🔥 Remove commonjs path for in eds-icons & eds-tokens by @mimarz in https://github.com/equinor/design-system/pull/2571
+
+### Changed
+
+- 🔧 Conform packages build, test & linting by @mimarz in https://github.com/equinor/design-system/pull/2555
+
 ## [0.7.1] - 2022-06-09
 
 ### Changed

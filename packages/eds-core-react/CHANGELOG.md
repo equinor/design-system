@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.24.0] - 2022-10-06
 
+### Added
+
+- ✨ Autocomplete: Support for toggling if input is cleared on selection by @mimarz in https://github.com/equinor/design-system/pull/2545
+- ✨Polymorphic tabs by @oddvernes in https://github.com/equinor/design-system/pull/2556
+
+### Changed
+
+- ♻️ Autocomplete: Always show all options on re-open after selection by @mimarz in https://github.com/equinor/design-system/pull/2562
+- ⬆️ upgraded floating-ui to v0.10.1 by @oddvernes in https://github.com/equinor/design-system/pull/2554
+- 🔧 Conform packages build, test & linting by @mimarz in https://github.com/equinor/design-system/pull/2555
+
+### Fixed
+
+- 🐛 Accordion: prevent toggle from submitting form by @oddvernes in https://github.com/equinor/design-system/pull/2567
+
+**Full Changelog**: https://github.com/equinor/design-system/compare/eds-core-react@0.23.0...eds-core-react@0.24.0
+
 ## [0.23.0] - 2022-10-05
 
 ### Fixed

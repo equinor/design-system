@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ⬆️ Upgrade to React 18 by @mimarz in https://github.com/equinor/design-system/pull/2510
 - 🐛Sidebar link active warning by @oddvernes in https://github.com/equinor/design-system/pull/2531
+- 💄 Sidebar spacing by @oddvernes in https://github.com/equinor/design-system/pull/2543
 
 ## [0.4.2] - 2022-06-20
 
