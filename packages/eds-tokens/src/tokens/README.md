@@ -13,7 +13,7 @@ To use the plugin:
 1. Add `equinor/design-system` as repository
 1. Add `packages/eds-tokens/src/tokens` as `file path`
 
-For questions or comments use [#eds-design-system][slack] on Slack or DM @vnys
+For questions or comments use [#eds-design-system][slack] on Slack or <abbr title="Direct message">DM</abbr> @vnys
 
 [slack]: https://equinor.slack.com/archives/CJT20H1B9
 [ft]: https://www.figmatokens.com/
