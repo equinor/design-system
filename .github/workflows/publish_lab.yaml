@@ -36,7 +36,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build lab Storybook
@@ -52,7 +52,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
       - name: Publish to npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
@@ -68,7 +68,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
       - name: Publish to npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
@@ -79,7 +79,7 @@ jobs:
     uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
     with:
       stage: ${{ needs.setup.outputs.stage }}
-      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-lab
       dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
     secrets:
       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}

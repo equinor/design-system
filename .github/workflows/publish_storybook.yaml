@@ -39,7 +39,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
       - name: Build packages
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
@@ -57,7 +57,7 @@ jobs:
     uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
     with:
       stage: ${{ needs.setup.outputs.stage }}
-      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
       # For some reason using "needs.setup.outputs.stage" does not work so using "github.event.inputs.storybook-slot" instead
       dockerfilePath: ${{  github.event.inputs.storybook-slot == 'lab' && './packages/eds-lab-react/Dockerfile.storybook' || './packages/eds-core-react/Dockerfile.storybook' }}
     secrets:

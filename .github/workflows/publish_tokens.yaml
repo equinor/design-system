@@ -31,7 +31,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-tokens
       - name: Build packages
         run: node_modules/.bin/pnpm run build
   publish:
@@ -45,7 +45,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-tokens
       - name: Publish to npm
         run: |
           node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
