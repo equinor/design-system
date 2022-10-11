@@ -120,6 +120,15 @@ export const Introduction: Story<PopoverProps> = (args) => {
     </>
   )
 }
+Introduction.decorators = [
+  (Story) => {
+    return (
+      <Stack style={{ padding: '100px' }}>
+        <Story />
+      </Stack>
+    )
+  },
+]
 
 export const ActivateOnClick: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -146,6 +155,7 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
         onClose={closePopover}
         open={isOpen}
         placement="top"
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -198,6 +208,7 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
         onClose={handleClose}
         open={isOpen}
         placement="top"
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -266,6 +277,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
         onClose={closePopover}
         open={isOpen}
         trapFocus
+        withinPortal
         aria-expanded={isOpen}
       >
         <Popover.Header>
@@ -327,6 +339,7 @@ export const PersistentPopover: Story<PopoverProps> = () => {
         open={isOpen}
         placement="top"
         trapFocus
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>With Autocomplete</Popover.Title>
@@ -375,6 +388,7 @@ export const Compact: Story<PopoverProps> = () => {
         onClose={closePopover}
         open={isOpen}
         placement="top"
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -429,6 +443,7 @@ export const AppLauncher: Story<PopoverProps> = () => {
         onClose={closePopover}
         placement="top"
         trapFocus
+        withinPortal
       >
         <Popover.Content>
           <Wrapper>
