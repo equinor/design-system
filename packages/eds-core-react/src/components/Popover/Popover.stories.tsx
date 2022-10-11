@@ -229,46 +229,6 @@ ActivateOnHover.decorators = [
   },
 ]
 
-export const WithTooltip: Story<PopoverProps> = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const anchorRef = useRef<HTMLButtonElement>(null)
-
-  const openPopover = () => setIsOpen(true)
-  const closePopover = () => setIsOpen(false)
-
-  return (
-    <>
-      <Tooltip title="Menu">
-        <Button ref={anchorRef} variant="ghost_icon" onClick={openPopover}>
-          <Icon data={more_vertical} />
-        </Button>
-      </Tooltip>
-      <Popover
-        anchorEl={anchorRef.current}
-        open={isOpen}
-        onClose={closePopover}
-        placement="top"
-      >
-        <Popover.Header>
-          <Popover.Title>Title</Popover.Title>
-        </Popover.Header>
-        <Popover.Content>
-          <Typography variant="body_short">Content</Typography>
-        </Popover.Content>
-      </Popover>
-    </>
-  )
-}
-WithTooltip.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
-
 export const WithCloseButton: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
