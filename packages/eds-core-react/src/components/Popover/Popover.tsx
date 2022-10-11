@@ -31,11 +31,8 @@ import {
   FloatingFocusManager,
 } from '@floating-ui/react-dom-interactions'
 
-type StyledPopoverProps = Pick<PopoverProps, 'open'>
-
-const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
+const PopoverPaper = styled(Paper)(({ theme }) => {
   return css`
-    ${{ display: open ? 'block' : 'none' }}
     ${typographyTemplate(theme.typography)}
     background: ${theme.background};
     ${bordersTemplate(theme.border)}
@@ -86,10 +83,10 @@ export type PopoverProps = {
   anchorEl?: HTMLElement | null
   /** Is Popover open */
   open: boolean
-  /** Disable use of react portal for dropdown */
-  disablePortal?: boolean
+  /** initializes react portal for dropdown, default to false. */
+  withinPortal?: boolean
   /** Determines whether focus should be trapped within dropdown,
-   * default to false */
+   * default to false. */
   trapFocus?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
@@ -102,7 +99,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       style,
       open,
       onClose,
-      disablePortal,
+      withinPortal,
       trapFocus,
       ...rest
     },
@@ -215,10 +212,20 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return (
       <>
-        {disablePortal ? (
-          popover
+        {withinPortal ? (
+          open && (
+            <FloatingPortal id="eds-popover-container">
+              {trapFocus
+                ? open && (
+                    <FloatingFocusManager context={context} modal={true}>
+                      {popover}
+                    </FloatingFocusManager>
+                  )
+                : open && popover}
+            </FloatingPortal>
+          )
         ) : (
-          <FloatingPortal id="eds-popover-container">
+          <>
             {trapFocus
               ? open && (
                   <FloatingFocusManager context={context} modal={true}>
@@ -226,7 +233,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
                   </FloatingFocusManager>
                 )
               : open && popover}
-          </FloatingPortal>
+          </>
         )}
       </>
     )
