@@ -1,4 +1,0 @@
-{
-  "type": "commonjs",
-  "main": "../dist/tokens.cjs.js"
-}
