@@ -15,5 +15,5 @@ To use the plugin:
 
 For questions or comments use [#eds-design-system][slack] on Slack or DM @vnys
 
-slack: https://equinor.slack.com/archives/CJT20H1B9
-ft: https://www.figmatokens.com/
+[slack]: https://equinor.slack.com/archives/CJT20H1B9
+[ft]: https://www.figmatokens.com/
