@@ -13,7 +13,7 @@ import {
   SidebarLinkProps,
   useSideBar,
 } from '../../components/SideBar'
-import { TopBar } from '@equinor/eds-core-react'
+import { TopBar, Divider } from '@equinor/eds-core-react'
 import page from './SideBar.docs.mdx'
 
 export default {
@@ -72,7 +72,6 @@ export const Primary: Story<SidebarType> = (args) => {
 }
 
 const LogoContainer = styled.div`
-  border-top: 2px solid rgba(247, 247, 247, 1);
   padding-top: 16px;
   padding-bottom: 16px;
   height: 36px;
@@ -142,6 +141,7 @@ export const CustomContent: Story<SidebarType> = () => {
         </SideBar.Content>
         <SideBar.Footer>
           <SideBar.Toggle />
+          <Divider size="2" color="light" style={{ marginBlock: 0 }} />
           <Logo />
         </SideBar.Footer>
       </SideBar>
@@ -174,6 +174,7 @@ export const WithButton: Story<SidebarType> = () => {
             icon={add}
             onClick={() => console.log('clicked')}
           />
+          <Divider size="2" color="light" style={{ marginBlockEnd: 0 }} />
           {menuItems.map((m) => (
             <SideBar.Link key={m.label} {...m} />
           ))}
@@ -260,11 +261,20 @@ export const WithTopbar: Story<SidebarType> = () => {
       </TopBar>
       <SideBar>
         <SideBar.Content>
-          <SideBar.Toggle />
+          <SideBar.Button
+            label="Create story"
+            icon={add}
+            onClick={() => console.log('clicked')}
+          />
+          <Divider size="2" color="light" style={{ marginBlockEnd: 0 }} />
           {menuItems.map((m) => (
             <SideBar.Link key={m.label} {...m} />
           ))}
         </SideBar.Content>
+        <SideBar.Footer>
+          <Divider size="2" color="light" />
+          <SideBar.Toggle />
+        </SideBar.Footer>
       </SideBar>
     </SidebarContainerWithTopbar>
   )

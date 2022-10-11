@@ -43,11 +43,18 @@ export const sidebar: ComponentToken = {
         color: primaryWhite,
       },
       spacings: {
+        top: '0',
+        bottom: medium,
         right: large,
+        left: large,
       },
     },
     sidebarItem: {
       minHeight: '48px',
+      spacings: {
+        top: '0',
+        bottom: medium,
+      },
       typography: {
         color: expandTextColor,
       },
@@ -85,6 +92,8 @@ export const sidebar: ComponentToken = {
     toggleOpen: {
       spacings: {
         right: medium,
+        top: '0',
+        bottom: medium,
       },
       typography: {
         color: expandTextColor,
