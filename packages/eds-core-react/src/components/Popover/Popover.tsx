@@ -112,8 +112,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       y,
       reference,
       floating,
-      refs,
-      update,
       strategy,
       context,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
@@ -175,7 +173,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           transform: arrowTransform,
         })
       }
-    }, [arrowRef.current, arrowX, arrowY])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [arrowRef.current, arrowX, arrowY, finalPlacement])
 
     const props = {
       open,
@@ -213,17 +212,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <>
         {withinPortal ? (
-          open && (
-            <FloatingPortal id="eds-popover-container">
-              {trapFocus
-                ? open && (
-                    <FloatingFocusManager context={context} modal={true}>
-                      {popover}
-                    </FloatingFocusManager>
-                  )
-                : open && popover}
-            </FloatingPortal>
-          )
+          <FloatingPortal id="eds-popover-container">
+            {open && trapFocus
+              ? open && (
+                  <FloatingFocusManager context={context} modal={true}>
+                    {popover}
+                  </FloatingFocusManager>
+                )
+              : open && popover}
+          </FloatingPortal>
         ) : (
           <>
             {trapFocus
