@@ -20,7 +20,8 @@
     "davidanson.vscode-markdownlint",
     "ionutvmi.path-autocomplete",
     "2gua.rainbow-brackets",
-    "jock.svg"
+    "jock.svg",
+    "github.vscode-pull-request-github"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []

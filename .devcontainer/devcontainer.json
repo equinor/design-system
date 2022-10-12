@@ -50,7 +50,8 @@
     "davidanson.vscode-markdownlint",
     "ionutvmi.path-autocomplete",
     "2gua.rainbow-brackets",
-    "jock.svg"
+    "jock.svg",
+    "github.vscode-pull-request-github"
   ],
   "forwardPorts": [9000],
   "portsAttributes": {
