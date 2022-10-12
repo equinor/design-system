@@ -19,6 +19,11 @@ exports[`Popover Matches snapshot 1`] = `
   z-index: 1400;
 }
 
+.c1:focus-visible {
+  outline: 2px dashed var(--eds_interactive__focus,rgba(0,112,121,1));
+  outline-offset: 0px;
+}
+
 .c3 {
   position: absolute;
   width: 6px;
