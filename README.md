@@ -4,9 +4,17 @@ The EDS is the official design system of Equinor and is to be used when designin
 
 While the design system itself lives in [Figma][], this repository contains implementations of the EDS in code.
 
+## Quick links
+
+- [Storybook](https://eds-storybook-react.azurewebsites.net/)
+- [Figma](https://www.figma.com/files/682286909510540417/team/590517879490131675/EDS---Equinor-Design-System?fuid=677437722215124736)
+- [Storefront](https://eds.equinor.com)
+- [Slack](https://equinor.slack.com/archives/CJT20H1B9)
+  
 ## Table of contents
 
 - [Equinor Design System](#equinor-design-system)
+  - [Quick links](#quick-links)
   - [Table of contents](#table-of-contents)
   - [Status](#status)
   - [How to run](#how-to-run)
