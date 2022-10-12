@@ -34,17 +34,24 @@
     }
   },
   "extensions": [
-	"dbaeumer.vscode-eslint",
-	"esbenp.prettier-vscode",
-	"editorconfig.editorconfig",
-	"redhat.vscode-yaml",
-	"vtrois.gitmoji-vscode",
-	"silvenon.mdx",
-	"jock.svg",
-	"styled-components.vscode-styled-components",
-	"seatonjiang.gitmoji-vscode",
-	"deque-systems.vscode-axe-linter"
-],
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "redhat.vscode-yaml",
+    "unifiedjs.vscode-mdx",
+    "deque-systems.vscode-axe-linter",
+    "styled-components.vscode-styled-components",
+    "aaron-bond.better-comments",
+    "seatonjiang.gitmoji-vscode",
+    "usernamehw.errorlens",
+    "donjayamanne.githistory",
+    "ms-vsliveshare.vsliveshare-pack",
+    "davidanson.vscode-markdownlint",
+    "ionutvmi.path-autocomplete",
+    "2gua.rainbow-brackets",
+    "jock.svg"
+  ],
   "forwardPorts": [9000],
   "portsAttributes": {
     "9000": {
