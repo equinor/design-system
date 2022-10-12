@@ -1,0 +1,14 @@
+{
+  "tokenSetOrder": [
+    "core/scale",
+    "core/spacing",
+    "core/typography",
+    "core/color/light",
+    "core/color/dark",
+    "theme/default",
+    "theme/comfortable",
+    "theme/compact",
+    "theme/light",
+    "theme/dark"
+  ]
+}
