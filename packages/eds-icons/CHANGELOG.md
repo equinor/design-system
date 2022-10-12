@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.15.0] - 2022-10-10
+## [0.15.0] - 2022-10-12
 
 ### Added
 
 - `in_progress`
+
+### Removed
+
+- 🔥 Remove commonjs path for in eds-icons & eds-tokens by @mimarz in https://github.com/equinor/design-system/pull/2571
+
+### Changed
+
+- 🔧 Conform packages build, test & linting by @mimarz in https://github.com/equinor/design-system/pull/2555
 
 ## [0.14.0] - 2022-09-19
 
