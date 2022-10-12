@@ -14,6 +14,7 @@ import {
   bordersTemplate,
   mergeRefs,
   useToken,
+  outlineTemplate,
 } from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
@@ -32,11 +33,18 @@ import {
 } from '@floating-ui/react-dom-interactions'
 
 const PopoverPaper = styled(Paper)(({ theme }) => {
+  const {
+    entities: { paper },
+  } = theme
+
   return css`
     ${typographyTemplate(theme.typography)}
     background: ${theme.background};
     ${bordersTemplate(theme.border)}
     z-index: 1400;
+    &:focus-visible {
+      ${outlineTemplate(paper.states.focus.outline)}
+    }
   `
 })
 
