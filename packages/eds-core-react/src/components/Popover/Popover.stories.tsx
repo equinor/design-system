@@ -92,7 +92,7 @@ export const Introduction: Story<PopoverProps> = (args) => {
           <Popover.Title>Title</Popover.Title>
         </Popover.Header>
         <Popover.Content>
-          <Typography variant="body_short">Content</Typography>
+          <Typography variant="body_short">Popover content</Typography>
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={handleClose}>OK</Button>
@@ -139,7 +139,7 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
           <Popover.Title>Title</Popover.Title>
         </Popover.Header>
         <Popover.Content>
-          <Typography variant="body_short">Content</Typography>
+          <Typography variant="body_short">Popover content</Typography>
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={closePopover}>OK</Button>
@@ -201,7 +201,7 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
           <Popover.Title>Title</Popover.Title>
         </Popover.Header>
         <Popover.Content>
-          <Typography variant="body_short">Content</Typography>
+          <Typography variant="body_short">Popover content</Typography>
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={handleClose}>OK</Button>
@@ -236,7 +236,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
         ref={anchorRef}
         onClick={openPopover}
       >
-        Click to activate
+        Open popover
       </Button>
 
       <Popover
@@ -257,7 +257,7 @@ export const WithCloseButton: Story<PopoverProps> = () => {
           </Button>
         </Popover.Header>
         <Popover.Content>
-          <Typography variant="body_short">Content</Typography>
+          <Typography variant="body_short">Popover content</Typography>
         </Popover.Content>
       </Popover>
     </>
@@ -303,7 +303,7 @@ export const PersistentPopover: Story<PopoverProps> = () => {
         ref={anchorRef}
         onClick={openPopover}
       >
-        Click to activate
+        Open popover
       </Button>
 
       <Popover anchorEl={anchorRef.current} open={isOpen} placement="top">
@@ -353,7 +353,7 @@ export const Compact: Story<PopoverProps> = () => {
         ref={anchorRef}
         onClick={openPopover}
       >
-        Click to activate
+        Open popover
       </Button>
 
       <Popover
@@ -366,7 +366,7 @@ export const Compact: Story<PopoverProps> = () => {
           <Popover.Title>Title</Popover.Title>
         </Popover.Header>
         <Popover.Content>
-          <Typography variant="body_short">Content</Typography>
+          <Typography variant="body_short">Popover content</Typography>
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={closePopover}>OK</Button>
