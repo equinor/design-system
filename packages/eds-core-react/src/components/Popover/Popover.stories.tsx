@@ -52,6 +52,15 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <Stack>
+          <Story />
+        </Stack>
+      )
+    },
+  ],
 } as ComponentMeta<typeof Popover>
 
 export const Introduction: Story<PopoverProps> = (args) => {
@@ -95,13 +104,18 @@ export const Introduction: Story<PopoverProps> = (args) => {
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
+          <Button
+            style={{ height: '32px', width: '32px' }}
+            variant="ghost_icon"
+            aria-label="Close popover"
+            onClick={handleClose}
+          >
+            <Icon name="close" data={close} size={24} />
+          </Button>
         </Popover.Header>
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Popover.Actions>
-          <Button onClick={handleClose}>OK</Button>
-        </Popover.Actions>
       </Popover>
     </>
   )
@@ -109,7 +123,7 @@ export const Introduction: Story<PopoverProps> = (args) => {
 Introduction.decorators = [
   (Story) => {
     return (
-      <Stack style={{ padding: '160px' }}>
+      <Stack style={{ padding: '100px' }}>
         <Story />
       </Stack>
     )
@@ -135,11 +149,13 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
       </Button>
 
       <Popover
-        id="click-popover"
         aria-expanded={isOpen}
+        id="click-popover"
         anchorEl={anchorRef.current}
         onClose={closePopover}
         open={isOpen}
+        placement="top"
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -147,23 +163,11 @@ export const ActivateOnClick: Story<PopoverProps> = () => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Popover.Actions>
-          <Button onClick={closePopover}>OK</Button>
-        </Popover.Actions>
       </Popover>
     </>
   )
 }
 ActivateOnClick.storyName = 'Activate onClick'
-ActivateOnClick.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const ActivateOnHover: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -204,6 +208,7 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
         onClose={handleClose}
         open={isOpen}
         placement="top"
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -211,23 +216,11 @@ export const ActivateOnHover: Story<PopoverProps> = () => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Popover.Actions>
-          <Button onClick={handleClose}>OK</Button>
-        </Popover.Actions>
       </Popover>
     </>
   )
 }
 ActivateOnHover.storyName = 'Activate onHover'
-ActivateOnHover.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const WithTooltip: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -259,15 +252,6 @@ export const WithTooltip: Story<PopoverProps> = () => {
     </>
   )
 }
-WithTooltip.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const WithCloseButton: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -289,10 +273,12 @@ export const WithCloseButton: Story<PopoverProps> = () => {
 
       <Popover
         id="click-popover"
-        aria-expanded={isOpen}
         anchorEl={anchorRef.current}
         onClose={closePopover}
         open={isOpen}
+        trapFocus
+        withinPortal
+        aria-expanded={isOpen}
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -313,15 +299,6 @@ export const WithCloseButton: Story<PopoverProps> = () => {
   )
 }
 WithCloseButton.storyName = 'With close button'
-WithCloseButton.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const PersistentPopover: Story<PopoverProps> = () => {
   const counties = [
@@ -360,6 +337,9 @@ export const PersistentPopover: Story<PopoverProps> = () => {
         aria-expanded={isOpen}
         anchorEl={anchorRef.current}
         open={isOpen}
+        placement="top"
+        trapFocus
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>With Autocomplete</Popover.Title>
@@ -375,15 +355,6 @@ export const PersistentPopover: Story<PopoverProps> = () => {
   )
 }
 PersistentPopover.storyName = 'Persistent popover'
-PersistentPopover.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '200px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const Compact: Story<PopoverProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -416,6 +387,8 @@ export const Compact: Story<PopoverProps> = () => {
         anchorEl={anchorRef.current}
         onClose={closePopover}
         open={isOpen}
+        placement="top"
+        withinPortal
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
@@ -423,22 +396,10 @@ export const Compact: Story<PopoverProps> = () => {
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Popover.Actions>
-          <Button onClick={closePopover}>OK</Button>
-        </Popover.Actions>
       </Popover>
     </EdsProvider>
   )
 }
-Compact.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ padding: '160px' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]
 
 export const AppLauncher: Story<PopoverProps> = () => {
   const Wrapper = styled.div`
@@ -481,6 +442,8 @@ export const AppLauncher: Story<PopoverProps> = () => {
         open={isOpen}
         onClose={closePopover}
         placement="top"
+        trapFocus
+        withinPortal
       >
         <Popover.Content>
           <Wrapper>
@@ -563,12 +526,3 @@ export const AppLauncher: Story<PopoverProps> = () => {
   )
 }
 AppLauncher.storyName = 'App launcher'
-AppLauncher.decorators = [
-  (Story) => {
-    return (
-      <Stack style={{ margin: '0 0 512px 0' }}>
-        <Story />
-      </Stack>
-    )
-  },
-]

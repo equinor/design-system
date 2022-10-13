@@ -105,14 +105,13 @@ describe('Popover', () => {
   })
   it("doesn't crash if no children is provided to Popover component", async () => {
     const placement = 'top'
-    render(<TestPopover placement={placement} data-testid="popover" />)
-
+    render(<TestPopover placement={placement} data-testid="popover" open />)
     expect(await screen.findByTestId('popover')).toBeDefined()
   })
   it("doesn't crash if Popover Content children is undefined", async () => {
     const placement = 'top'
     render(
-      <TestPopover placement={placement} data-testid="popover">
+      <TestPopover placement={placement} data-testid="popover" open>
         <Popover.Title>Title</Popover.Title>
         <Popover.Content></Popover.Content>
       </TestPopover>,
@@ -122,7 +121,7 @@ describe('Popover', () => {
   it("doesn't crash if Popover Title children is undefined", async () => {
     const placement = 'top'
     render(
-      <TestPopover placement={placement} data-testid="popover">
+      <TestPopover placement={placement} data-testid="popover" open>
         <Popover.Title></Popover.Title>
         <Popover.Content>Content</Popover.Content>
       </TestPopover>,
