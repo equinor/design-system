@@ -91,8 +91,8 @@ export const sidebar: ComponentToken = {
     },
     toggleOpen: {
       spacings: {
-        top: '4px',
-        bottom: '4px',
+        top: '8px',
+        bottom: '8px',
       },
       typography: {
         color: expandTextColor,
