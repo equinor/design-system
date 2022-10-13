@@ -230,6 +230,9 @@ const DateLabel = styled.label`
     span {
       padding-left: 8px;
       color: ${tokens.colors.iconGray};
+      &:empty {
+        display: none;
+      }
     }
   `}
 `
@@ -259,7 +262,7 @@ const StyledDatepicker = styled(DatePicker)`
 const CalendarIcon = styled(Icon)`
   position: absolute;
   z-index: 1;
-  top: 21px;
+  bottom: 7px;
   right: 6px;
   cursor: pointer;
 `

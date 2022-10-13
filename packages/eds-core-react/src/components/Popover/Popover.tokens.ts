@@ -9,12 +9,18 @@ const {
     ui: {
       background__default: { rgba: background },
     },
+    interactive: {
+      focus: { rgba: focusOutlineColor },
+    },
   },
   spacings: {
     comfortable: { medium: spacingMedium, small: spacingSmall },
   },
   shape: {
     corners: { borderRadius },
+  },
+  interactions: {
+    focused: { width: focusOutlineWidth },
   },
 } = tokens
 
@@ -39,6 +45,18 @@ export const popover: Popover = {
     title: {
       spacings: {
         top: '12px',
+      },
+    },
+    paper: {
+      states: {
+        focus: {
+          outline: {
+            type: 'outline',
+            width: focusOutlineWidth,
+            style: 'dashed',
+            color: focusOutlineColor,
+          },
+        },
       },
     },
   },

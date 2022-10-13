@@ -57,21 +57,37 @@ const Demo = () => {
         id="default-popover"
         anchorEl={referenceElement.current}
         onClose={handleClose}
+        trapFocus
       >
         <Popover.Header>
           <Popover.Title>Title</Popover.Title>
+          <Button
+            style={{ height: '32px', width: '32px' }}
+            variant="ghost_icon"
+            aria-label="Close popover"
+            onClick={closePopover}
+          >
+            <Icon name="close" data={close} size={24} />
+          </Button>
         </Popover.Header>
         <Popover.Content>
           <Typography variant="body_short">Content</Typography>
         </Popover.Content>
-        <Popover.Actions>
-          <Button onClick={handleClose}>OK</Button>
-        </Popover.Actions>
       </Popover>
     </>
   )
 }
 ```
+
+## Accessibility
+
+### `trapFocus`
+
+It is recommended to use <code>trapFocus</code> in every Popover which contains active elements.
+
+<ul>
+  <li>While using a keyboard <code>trapFocus</code> brings focus onto the first active element in a Popover.</li>
+</ul>
 
 ## Examples
 
@@ -90,16 +106,14 @@ const Demo = () => {
 <ul>
     <li>Remember to use both <code>onMouseEnter</code> and <code>onFocus</code> attributes to your trigger element to be able to open the popover.</li>
     <li>A timeout delay (300ms) on <code>onMouseEnter</code> is recommended to avoid unwanted trigger while browsing.</li>
+    <li>Using activ elemnets inside a Popover when <code>onHover</code>, is not recommended.</li>
 </ul>
 
 <Story id="data-display-popover--activate-on-hover"/>
 
 ### With close button
 
-<ul>
-    <li>In some cases an explicit close button is recommended.</li>
-    <li>Here is an example of how this can be implemented in the Header.</li>
-</ul>
+In some cases an explicit close button is recommended.
 
 <Story id="data-display-popover--with-close-button"/>
 

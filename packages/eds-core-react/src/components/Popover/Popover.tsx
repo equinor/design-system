@@ -14,6 +14,7 @@ import {
   bordersTemplate,
   mergeRefs,
   useToken,
+  outlineTemplate,
 } from '@equinor/eds-utils'
 import { popover as popoverToken } from './Popover.tokens'
 import { useEds } from '../EdsProvider'
@@ -27,17 +28,23 @@ import {
   useFloating,
   useInteractions,
   useDismiss,
+  FloatingPortal,
+  FloatingFocusManager,
 } from '@floating-ui/react-dom-interactions'
 
-type StyledPopoverProps = Pick<PopoverProps, 'open'>
+const PopoverPaper = styled(Paper)(({ theme }) => {
+  const {
+    entities: { paper },
+  } = theme
 
-const PopoverPaper = styled(Paper)<StyledPopoverProps>(({ theme, open }) => {
   return css`
-    ${{ display: open ? 'block' : 'none' }}
     ${typographyTemplate(theme.typography)}
     background: ${theme.background};
     ${bordersTemplate(theme.border)}
     z-index: 1400;
+    &:focus-visible {
+      ${outlineTemplate(paper.states.focus.outline)}
+    }
   `
 })
 
@@ -84,11 +91,26 @@ export type PopoverProps = {
   anchorEl?: HTMLElement | null
   /** Is Popover open */
   open: boolean
+  /** initializes react portal for dropdown, default to false. */
+  withinPortal?: boolean
+  /** Determines whether focus should be trapped within dropdown,
+   * default to false. */
+  trapFocus?: boolean
 } & HTMLAttributes<HTMLDivElement>
 
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   function Popover(
-    { children, placement = 'bottom', anchorEl, style, open, onClose, ...rest },
+    {
+      children,
+      placement = 'bottom',
+      anchorEl,
+      style,
+      open,
+      onClose,
+      withinPortal,
+      trapFocus,
+      ...rest
+    },
     ref,
   ) {
     const arrowRef = useRef<HTMLDivElement>(null)
@@ -98,8 +120,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       y,
       reference,
       floating,
-      refs,
-      update,
       strategy,
       context,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
@@ -114,6 +134,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         shift({ padding: 8 }),
         arrow({ element: arrowRef }),
       ],
+      whileElementsMounted: autoUpdate,
     })
 
     useLayoutEffect(() => {
@@ -125,47 +146,43 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       [floating, ref],
     )
 
-    useEffect(() => {
-      if (refs.reference.current && refs.floating.current && open) {
-        return autoUpdate(refs.reference.current, refs.floating.current, update)
-      }
-    }, [refs.reference, refs.floating, update, open])
-
     const { getFloatingProps } = useInteractions([useDismiss(context)])
 
-    const staticSide = {
-      top: 'bottom',
-      right: 'left',
-      bottom: 'top',
-      left: 'right',
-    }[finalPlacement.split('-')[0]]
+    useEffect(() => {
+      if (arrowRef.current) {
+        const staticSide = {
+          top: 'bottom',
+          right: 'left',
+          bottom: 'top',
+          left: 'right',
+        }[finalPlacement.split('-')[0]]
 
-    let arrowTransform = 'none'
-    switch (staticSide) {
-      case 'right':
-        arrowTransform = 'rotateY(180deg)'
-        break
-      case 'left':
-        arrowTransform = 'none'
-        break
-      case 'top':
-        arrowTransform = 'rotate(90deg)'
-        break
-      case 'bottom':
-        arrowTransform = 'rotate(-90deg)'
-        break
-    }
-
-    if (arrowRef.current) {
-      Object.assign(arrowRef.current.style, {
-        left: arrowX != null ? `${arrowX}px` : '',
-        top: arrowY != null ? `${arrowY}px` : '',
-        right: '',
-        bottom: '',
-        [staticSide]: '-6px',
-        transform: arrowTransform,
-      })
-    }
+        let arrowTransform = 'none'
+        switch (staticSide) {
+          case 'right':
+            arrowTransform = 'rotateY(180deg)'
+            break
+          case 'left':
+            arrowTransform = 'none'
+            break
+          case 'top':
+            arrowTransform = 'rotate(90deg)'
+            break
+          case 'bottom':
+            arrowTransform = 'rotate(-90deg)'
+            break
+        }
+        Object.assign(arrowRef.current.style, {
+          left: arrowX != null ? `${arrowX}px` : '',
+          top: arrowY != null ? `${arrowY}px` : '',
+          right: '',
+          bottom: '',
+          [staticSide]: '-6px',
+          transform: arrowTransform,
+        })
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [arrowRef.current, arrowX, arrowY, finalPlacement])
 
     const props = {
       open,
@@ -175,7 +192,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const { density } = useEds()
     const token = useToken({ density }, popoverToken)
 
-    return (
+    const popover = (
       <ThemeProvider theme={token}>
         <PopoverPaper
           elevation="overlay"
@@ -198,6 +215,32 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           <InnerWrapper>{children}</InnerWrapper>
         </PopoverPaper>
       </ThemeProvider>
+    )
+
+    return (
+      <>
+        {withinPortal ? (
+          <FloatingPortal id="eds-popover-container">
+            {open && trapFocus
+              ? open && (
+                  <FloatingFocusManager context={context} modal={true}>
+                    {popover}
+                  </FloatingFocusManager>
+                )
+              : open && popover}
+          </FloatingPortal>
+        ) : (
+          <>
+            {trapFocus
+              ? open && (
+                  <FloatingFocusManager context={context} modal={true}>
+                    {popover}
+                  </FloatingFocusManager>
+                )
+              : open && popover}
+          </>
+        )}
+      </>
     )
   },
 )
