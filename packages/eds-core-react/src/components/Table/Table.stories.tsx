@@ -324,3 +324,32 @@ export const Sortable: Story<TableProps> = () => {
     </Table>
   )
 }
+
+export const VirtualScrolling: Story<TableProps> = () => {
+  const cellValues = toCellValues(data, columns)
+
+  return (
+    <Table>
+      <Table.Caption>
+        <Typography variant="h2">Fruits cost price</Typography>
+      </Table.Caption>
+      <Table.Head sticky>
+        <Table.Row>
+          {columns.map((col) => (
+            <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
+          ))}
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {cellValues?.map((row) => (
+          <Table.Row key={row.toString()}>
+            {row.map((cellValue) => (
+              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+            ))}
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  )
+}
+VirtualScrolling.storyName = 'Virtual scrolling'
