@@ -18,6 +18,7 @@ import { data, columns, Column, Data, SortDirection } from '../../stories/data'
 import { toCellValues } from '../../stories/toCellValues'
 import { Stack } from './../../../.storybook/components'
 import page from './Table.docs.mdx'
+import { FixedSizeList as List } from 'react-window'
 
 Icon.add({ arrow_down, arrow_up })
 
@@ -328,27 +329,33 @@ export const Sortable: Story<TableProps> = () => {
 export const VirtualScrolling: Story<TableProps> = () => {
   const cellValues = toCellValues(data, columns)
 
+  const row = ({ style }) => (
+    <Table.Body style={style}>
+      {cellValues?.map((row) => (
+        <Table.Row key={row.toString()}>
+          {row.map((cellValue) => (
+            <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
+          ))}
+        </Table.Row>
+      ))}
+    </Table.Body>
+  )
+
   return (
     <Table>
       <Table.Caption>
         <Typography variant="h2">Fruits cost price</Typography>
       </Table.Caption>
-      <Table.Head sticky>
+      <Table.Head>
         <Table.Row>
           {columns.map((col) => (
             <Table.Cell key={`head-${col.accessor}`}>{col.name}</Table.Cell>
           ))}
         </Table.Row>
       </Table.Head>
-      <Table.Body>
-        {cellValues?.map((row) => (
-          <Table.Row key={row.toString()}>
-            {row.map((cellValue) => (
-              <Table.Cell key={cellValue}>{cellValue}</Table.Cell>
-            ))}
-          </Table.Row>
-        ))}
-      </Table.Body>
+      <List height={150} itemCount={1000} itemSize={50}>
+        {row}
+      </List>
     </Table>
   )
 }
