@@ -6,6 +6,7 @@ import {
   SVGProps,
   cloneElement,
   useMemo,
+  useEffect,
 } from 'react'
 import styled from 'styled-components'
 import {
@@ -116,39 +117,41 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       useDismiss(context),
     ])
 
-    const staticSide = {
-      top: 'bottom',
-      right: 'left',
-      bottom: 'top',
-      left: 'right',
-    }[finalPlacement.split('-')[0]]
+    useEffect(() => {
+      const staticSide = {
+        top: 'bottom',
+        right: 'left',
+        bottom: 'top',
+        left: 'right',
+      }[finalPlacement.split('-')[0]]
 
-    let arrowTransform = 'none'
-    switch (staticSide) {
-      case 'right':
-        arrowTransform = 'rotateY(180deg)'
-        break
-      case 'left':
-        arrowTransform = 'none'
-        break
-      case 'top':
-        arrowTransform = 'rotate(90deg)'
-        break
-      case 'bottom':
-        arrowTransform = 'rotate(-90deg)'
-        break
-    }
+      let arrowTransform = 'none'
+      switch (staticSide) {
+        case 'right':
+          arrowTransform = 'rotateY(180deg)'
+          break
+        case 'left':
+          arrowTransform = 'none'
+          break
+        case 'top':
+          arrowTransform = 'rotate(90deg)'
+          break
+        case 'bottom':
+          arrowTransform = 'rotate(-90deg)'
+          break
+      }
 
-    if (arrowRef.current) {
-      Object.assign(arrowRef.current.style, {
-        left: arrowX != null ? `${arrowX}px` : '',
-        top: arrowY != null ? `${arrowY}px` : '',
-        right: '',
-        bottom: '',
-        [staticSide]: '-6px',
-        transform: arrowTransform,
-      })
-    }
+      if (arrowRef.current) {
+        Object.assign(arrowRef.current.style, {
+          left: arrowX != null ? `${arrowX}px` : '',
+          top: arrowY != null ? `${arrowY}px` : '',
+          right: '',
+          bottom: '',
+          [staticSide]: '-6px',
+          transform: arrowTransform,
+        })
+      }
+    })
 
     const updatedChildren = cloneElement(children, {
       ...getReferenceProps({
