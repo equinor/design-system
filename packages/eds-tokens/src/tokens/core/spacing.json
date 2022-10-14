@@ -170,5 +170,30 @@
       "value": "{grid.base}*20",
       "type": "other"
     }
+  },
+  "container": {
+    "12": {
+      "tight": {
+        "2": {
+          "value": {
+            "horizontalPadding": "{spacing.12}",
+            "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.2} - {capHeight.2}) / 2)",
+            "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.2} / {grid.base}) - {lineHeight.tight.2} - roundTo({spacing.12} - ({lineHeight.tight.2} - {capHeight.2}) / 2)",
+            "typography": "{typography.tight.2}"
+          },
+          "type": "composition"
+        },
+        "3": {
+          "value": {
+            "horizontalPadding": "{spacing.12}",
+            "paddingBottom": "roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)",
+            "paddingTop": "{spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)",
+            "typography": "{typography.tight.3}"
+          },
+          "type": "composition",
+          "description": "Padding-bottom: roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\nPadding-top: {spacing.12} * 2 + {grid.base} * ceil({capHeight.3} / {grid.base}) - {lineHeight.tight.3} - roundTo({spacing.12} - ({lineHeight.tight.3} - {capHeight.3}) / 2)\n\nReferencing {container.12.tight.3.paddingBottom} in paddingTop results in the wrong number"
+        }
+      }
+    }
   }
 }

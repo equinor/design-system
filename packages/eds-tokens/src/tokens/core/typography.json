@@ -1,4 +1,10 @@
 {
+  "const": {
+    "capHeight": {
+      "value": "0.7",
+      "type": "other"
+    }
+  },
   "fontFamily": {
     "default": {
       "value": "Equinor",
@@ -838,6 +844,52 @@
         "type": "lineHeights",
         "description": "42/64"
       }
+    }
+  },
+  "capHeight": {
+    "0": {
+      "value": "roundTo({fontSize.0} * {const.capHeight})",
+      "type": "other"
+    },
+    "1": {
+      "value": "roundTo({fontSize.1} * {const.capHeight})",
+      "type": "other"
+    },
+    "2": {
+      "value": "roundTo({fontSize.2} * {const.capHeight})",
+      "type": "other"
+    },
+    "3": {
+      "value": "roundTo({fontSize.3} * {const.capHeight})",
+      "type": "other"
+    },
+    "4": {
+      "value": "roundTo({fontSize.4} * {const.capHeight})",
+      "type": "other"
+    },
+    "5": {
+      "value": "roundTo({fontSize.5} * {const.capHeight})",
+      "type": "other"
+    },
+    "6": {
+      "value": "roundTo({fontSize.6} * {const.capHeight})",
+      "type": "other"
+    },
+    "7": {
+      "value": "roundTo({fontSize.7} * {const.capHeight})",
+      "type": "other"
+    },
+    "8": {
+      "value": "roundTo({fontSize.8} * {const.capHeight})",
+      "type": "other"
+    },
+    "9": {
+      "value": "roundTo({fontSize.9} * {const.capHeight})",
+      "type": "other"
+    },
+    "10": {
+      "value": "roundTo({fontSize.10} * {const.capHeight})",
+      "type": "other"
     }
   }
 }
