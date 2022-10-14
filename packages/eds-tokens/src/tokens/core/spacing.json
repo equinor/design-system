@@ -83,6 +83,22 @@
     "20": {
       "value": "20",
       "type": "spacing"
+    },
+    "21": {
+      "value": "21",
+      "type": "spacing"
+    },
+    "22": {
+      "value": "22",
+      "type": "spacing"
+    },
+    "23": {
+      "value": "23",
+      "type": "spacing"
+    },
+    "24": {
+      "value": "24",
+      "type": "spacing"
     }
   },
   "grid": {
