@@ -1,0 +1,149 @@
+name: Publish all packages
+on:
+  workflow_dispatch:
+    inputs:
+      npm-tag:
+        description: 'Tag for npm packages (next | latest)'
+        required: true
+        default: 'next'
+      storybook-slot:
+        description: 'Slot for Storybook (development | production | lab | test)'
+        required: false
+        default: 'development'
+jobs:
+  setup:
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    with:
+      cacheKey: ${{ github.sha }}
+      checkout_paths: packages
+      stage: ${{ github.event.inputs.storybook-slot }}
+      tag: ${{ github.event.inputs.npm-tag }}
+  packages:
+    name: Process packages
+    runs-on: ubuntu-latest
+    needs: [setup]
+    steps:
+      - name: Use "setup" cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}
+      - name: Use built packages cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      - name: Build packages
+        run: node_modules/.bin/pnpm run build
+      - name: Build Storybook
+        run: node_modules/.bin/pnpm build:storybook
+  publish-icons:
+    name: Publish icons to npm
+    runs-on: ubuntu-latest
+    needs: [packages, setup]
+    steps:
+      - name: Use built packages cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      - name: Publish to npm
+        run: |
+          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          node_modules/.bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+  publish-tokens:
+    name: Publish tokens to npm
+    runs-on: ubuntu-latest
+    needs: [packages, setup]
+    steps:
+      - name: Use built packages cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      - name: Publish to npm
+        run: |
+          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          node_modules/.bin/pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+  publish-utils-package:
+    name: Publish utils to npm
+    runs-on: ubuntu-latest
+    needs: [packages, setup, publish-tokens]
+    steps:
+      - name: Use built packages cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      - name: Publish to npm
+        run: |
+          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          node_modules/.bin/pnpm --filter @equinor/eds-utils publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+  publish-lab-package:
+    name: Publish lab to npm
+    runs-on: ubuntu-latest
+    needs: [publish-utils-package, setup]
+    steps:
+      - name: Use built packages cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      - name: Publish to npm
+        run: |
+          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          node_modules/.bin/pnpm --filter @equinor/eds-lab-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+  publish-storybook-lab:
+    name: Publish Storybook
+    needs: [publish-lab-package, setup, packages]
+    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
+    with:
+      stage: lab
+      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      dockerfilePath: './packages/eds-lab-react/Dockerfile.storybook'
+    secrets:
+      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  publish-core-package:
+    name: Publish core-react to npm
+    runs-on: ubuntu-latest
+    needs: [publish-utils-package, publish-icons, publish-tokens, setup]
+    steps:
+      - name: Use built packages cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      - name: Publish to npm
+        run: |
+          node_modules/.bin/pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
+          node_modules/.bin/pnpm --filter @equinor/eds-core-react publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+  publish-storybook:
+    name: Publish Storybook
+    needs: [publish-core-package, setup, packages]
+    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
+    with:
+      stage: ${{ needs.setup.outputs.stage }}
+      cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-all-packages
+      dockerfilePath: './packages/eds-core-react/Dockerfile.storybook'
+    secrets:
+      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
