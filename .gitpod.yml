@@ -44,7 +44,7 @@ vscode:
     - aaron-bond.better-comments
     - seatonjiang.gitmoji-vscode
     - usernamehw.errorlens
-    - donjayamanne.githistory
+    - eamodio.gitlens
     - ms-vsliveshare.vsliveshare-pack
     - davidanson.vscode-markdownlint
     - ionutvmi.path-autocomplete
