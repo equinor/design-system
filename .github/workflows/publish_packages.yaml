@@ -41,6 +41,8 @@ jobs:
         run: node_modules/.bin/pnpm run build
       - name: Build Storybook
         run: node_modules/.bin/pnpm build:storybook
+      - name: Build lab Storybook
+        run: node_modules/.bin/pnpm build:storybook:lab
   publish-icons:
     name: Publish icons to npm
     runs-on: ubuntu-latest
