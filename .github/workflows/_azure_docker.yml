@@ -41,7 +41,7 @@ jobs:
         run: echo "branch=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')" >> $GITHUB_ENV
       - name: Create docker image tag
         id: image_tag
-        run: echo "image_tag=$(echo ${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }})" >> $GITHUB_ENV
+        run: echo "image_tag=$(echo ${{ github.run_number }}_${{ env.branch }}_${{ env.date }})" >> $GITHUB_ENV
       - name: Login via Azure CLI
         uses: azure/login@v1
         with:
