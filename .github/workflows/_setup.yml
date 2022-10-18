@@ -33,16 +33,16 @@ jobs:
     steps:
       - id: input-stage
         if: "${{ env.INPUT_STAGE != '' }}"
-        run: echo "::set-output name=value::${{ env.INPUT_STAGE }}"
+        run: echo "value=${{ env.INPUT_STAGE }}" >> $GITHUB_ENV
       - id: default-stage
         if: "${{ env.INPUT_STAGE == '' }}"
-        run: echo "::set-output name=value::development"
+        run: echo "value=development" >> $GITHUB_ENV
       - id: input-tag
         if: "${{ env.INPUT_TAG != '' }}"
-        run: echo "::set-output name=value::${{ env.INPUT_TAG }}"
+        run: echo "value=${{ env.INPUT_TAG }}" >> $GITHUB_ENV
       - id: default-tag
         if: "${{ env.INPUT_TAG == '' }}"
-        run: echo "::set-output name=value::next"
+        run: echo "value=next" >> $GITHUB_ENV
       - name: Print generated values
         run: echo "tag - ${{ steps.input-tag.outputs.value }} ${{ steps.default-tag.outputs.value }}, stage - ${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}"
   files:
