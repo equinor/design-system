@@ -21,7 +21,7 @@ const {
     },
   },
   spacings: {
-    comfortable: { medium, large },
+    comfortable: { medium, large, small },
   },
 } = tokens
 
@@ -91,8 +91,8 @@ export const sidebar: ComponentToken = {
     },
     toggleOpen: {
       spacings: {
-        top: '8px',
-        bottom: '8px',
+        top: small,
+        bottom: small,
       },
       typography: {
         color: expandTextColor,
