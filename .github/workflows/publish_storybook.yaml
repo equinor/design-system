@@ -16,7 +16,7 @@ on:
       - 'packages/eds-icons/**'
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@develop
+    uses: equinor/design-system/.github/workflows/_setup.yml@chore/MIM-2580-update-deprecated-gh-actions-set-output
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
