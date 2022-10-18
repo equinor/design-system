@@ -38,7 +38,7 @@ export type InputWrapperProps = {
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
-/** InputWrapper is a internal skeleton component for structering form elements  */
+/** InputWrapper is a internal skeleton component for structuring input elements  */
 export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
   function InputWrapper(
     {
