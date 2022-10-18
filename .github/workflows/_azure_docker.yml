@@ -34,14 +34,14 @@ jobs:
           key: ${{ inputs.cacheKey }}
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+        run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_ENV
       - name: Extract branch name
         id: extract_branch
         shell: bash
-        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')"
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')" >> $GITHUB_ENV
       - name: Create docker image tag
         id: image_tag
-        run: echo "::set-output name=image_tag::$(echo ${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }})"
+        run: echo "image_tag=$(echo ${{ github.run_number }}_${{ env.branch }}_${{ env.date }})" >> $GITHUB_ENV
       - name: Login via Azure CLI
         uses: azure/login@v1
         with:
@@ -54,11 +54,11 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build and push image
         run: |
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ${{inputs.dockerfilePath }} .
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.image_tag }} -f ${{inputs.dockerfilePath }} .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.image_tag }}
       - name: Deploy to Web app
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'eds-storybook-react'
           slot-name: '${{inputs.stage }}'
-          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}'
+          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.image_tag }}'
