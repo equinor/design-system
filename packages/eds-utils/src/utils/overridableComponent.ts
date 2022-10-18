@@ -5,7 +5,7 @@ export type OverridableComponent<Component, Element extends HTMLElement> = {
 
   <As extends ElementType>(
     props: {
-      as: As
+      as?: As
     } & Component &
       Omit<ComponentPropsWithRef<As>, keyof Component>,
   ): ReturnType<FC>

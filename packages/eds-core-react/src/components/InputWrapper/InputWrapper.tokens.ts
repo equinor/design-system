@@ -29,8 +29,7 @@ const {
 export type InputToken = ComponentToken
 
 export const input: InputToken = {
-  height: shape.straight.minHeight,
-  width: '100%',
+  minHeight: shape.straight.minHeight,
   background,
   spacings: {
     left: small,
@@ -42,27 +41,17 @@ export const input: InputToken = {
     ...typography.input.text,
     color: static_icons__default.rgba,
   },
-  outline: {
-    type: 'outline',
-    color: 'transparent',
-    width: '1px',
-    style: 'solid',
-    offset: '0px',
-  },
   entities: {
     placeholder: {
       typography: {
         color: static_icons__tertiary.rgba,
       },
     },
-    adornment: {
+
+    helperText: {
       typography: {
         ...typography.input.label,
         color: static_icons__tertiary.rgba,
-      },
-      spacings: {
-        left: small,
-        right: small,
       },
       states: {
         disabled: {
@@ -83,7 +72,15 @@ export const input: InputToken = {
       background: 'transparent',
       boxShadow: 'none',
     },
-    active: {},
+    active: {
+      outline: {
+        type: 'outline',
+        color: 'transparent',
+        width: '1px',
+        style: 'solid',
+        offset: '0px',
+      },
+    },
     focus: {
       outline: {
         type: 'outline',
@@ -97,7 +94,7 @@ export const input: InputToken = {
   boxShadow: 'inset 0px -1px 0px 0px ' + static_icons__tertiary.rgba,
   modes: {
     compact: {
-      height: shape._modes.compact.straight.minHeight,
+      minHeight: shape._modes.compact.straight.minHeight,
       spacings: {
         left: x_small,
         right: x_small,
@@ -121,17 +118,10 @@ export const error: InputToken = mergeDeepRight(input, {
     },
   },
   entities: {
-    adornment: {
+    helperText: {
       typography: {
         ...typography.input.label,
-        color: danger__resting.rgba,
-      },
-      states: {
-        focus: {
-          outline: {
-            color: danger__hover.rgba,
-          },
-        },
+        color: danger__hover.rgba,
       },
     },
   },
@@ -150,17 +140,10 @@ export const warning: InputToken = mergeDeepRight(input, {
     },
   },
   entities: {
-    adornment: {
+    helperText: {
       typography: {
         ...typography.input.label,
-        color: warning__resting.rgba,
-      },
-      states: {
-        focus: {
-          outline: {
-            color: warning__hover.rgba,
-          },
-        },
+        color: warning__hover.rgba,
       },
     },
   },
@@ -179,17 +162,10 @@ export const success: InputToken = mergeDeepRight(input, {
     },
   },
   entities: {
-    adornment: {
+    helperText: {
       typography: {
         ...typography.input.label,
-        color: success__resting.rgba,
-      },
-      states: {
-        focus: {
-          outline: {
-            color: success__hover.rgba,
-          },
-        },
+        color: success__hover.rgba,
       },
     },
   },

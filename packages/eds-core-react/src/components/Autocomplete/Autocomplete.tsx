@@ -44,21 +44,6 @@ const Container = styled.div`
   position: relative;
 `
 
-const StyledInput = styled(Input)(
-  ({
-    theme: {
-      entities: { button },
-    },
-  }) => {
-    return css`
-      padding-right: calc(
-        ${button.spacings.left} + ${button.spacings.right} +
-          (${button.height} * 2)
-      );
-    `
-  },
-)
-
 const StyledList = styled(List)(
   ({ theme }) => css`
     background-color: ${theme.background};
@@ -76,11 +61,8 @@ const StyledButton = styled(Button)(
       entities: { button },
     },
   }) => css`
-    position: absolute;
     height: ${button.height};
     width: ${button.height};
-    right: ${button.spacings.right};
-    top: ${button.spacings.top};
   `,
 )
 
@@ -600,7 +582,7 @@ function AutocompleteInner<T>(
         />
 
         <Container {...getComboboxProps()}>
-          <StyledInput
+          <Input
             {...getInputProps(
               // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               getDropdownProps({
@@ -615,30 +597,38 @@ function AutocompleteInner<T>(
             readOnly={readOnly}
             onFocus={openSelect}
             onClick={openSelect}
+            rightAdornmentsWidth={24 * 2 + 8 + 8}
+            rightAdornments={
+              <>
+                {showClearButton && (
+                  <StyledButton
+                    variant="ghost_icon"
+                    disabled={disabled || readOnly}
+                    aria-label={'clear options'}
+                    title="clear"
+                    onClick={clear}
+                  >
+                    <Icon data={close} size={16} />
+                  </StyledButton>
+                )}
+                {!readOnly && (
+                  <StyledButton
+                    variant="ghost_icon"
+                    {...getToggleButtonProps({
+                      disabled: disabled || readOnly,
+                    })}
+                    aria-label={'toggle options'}
+                    title="open"
+                  >
+                    <Icon
+                      data={isOpen ? arrow_drop_up : arrow_drop_down}
+                    ></Icon>
+                  </StyledButton>
+                )}
+              </>
+            }
             {...other}
           />
-          {showClearButton && (
-            <StyledButton
-              variant="ghost_icon"
-              disabled={disabled || readOnly}
-              aria-label={'clear options'}
-              title="clear"
-              onClick={clear}
-              style={{ right: 32 }}
-            >
-              <Icon data={close} size={16} />
-            </StyledButton>
-          )}
-          <StyledButton
-            variant="ghost_icon"
-            {...getToggleButtonProps({ disabled: disabled || readOnly })}
-            aria-label={'toggle options'}
-            title="open"
-          >
-            {!readOnly && (
-              <Icon data={isOpen ? arrow_drop_up : arrow_drop_down}></Icon>
-            )}
-          </StyledButton>
         </Container>
         {disablePortal ? (
           optionsList
