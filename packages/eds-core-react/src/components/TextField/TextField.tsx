@@ -3,29 +3,31 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   forwardRef,
-  Ref,
+  ForwardedRef,
 } from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import { Field } from './Field'
-import { Label } from '../Label'
-import { HelperText } from './HelperText'
-import { TextFieldProvider } from './TextField.context'
-import type { Variants } from './types'
-import { textfield as tokens } from './TextField.tokens'
-import { useToken, useId } from '@equinor/eds-utils'
-import { useEds } from '../EdsProvider'
+import { useId } from '@equinor/eds-utils'
+import { InputWrapper } from '../InputWrapper'
+import { Input } from '../Input'
+import { Textarea } from '../Textarea'
+import type { Variants } from '../types'
 
-const Container = styled.div`
-  min-width: 100px;
-  width: 100%;
-`
+type FieldProps = SharedTextFieldProps &
+  React.HTMLAttributes<HTMLTextAreaElement | HTMLInputElement>
+/** Proxy component for working around typescript and element type switching */
+const Field = forwardRef<HTMLTextAreaElement | HTMLInputElement, FieldProps>(
+  function Field(props, ref) {
+    return props.multiline ? (
+      <Textarea ref={ref as ForwardedRef<HTMLTextAreaElement>} {...props} />
+    ) : (
+      <Input ref={ref as ForwardedRef<HTMLInputElement>} {...props} />
+    )
+  },
+)
 
-export type TextFieldProps = {
-  /** @ignore */
-  className?: string
+type SharedTextFieldProps = {
   /** Variants */
   variant?: Variants
-  /** Input unique id */
+  /** Input unique id. This is required to ensure accesibility */
   id: string
   /** Label text */
   label?: string
@@ -35,28 +37,25 @@ export type TextFieldProps = {
   unit?: string
   /** Helper text */
   helperText?: string
-  /** Placeholder text */
-  placeholder?: string
-  /** Disabled */
-  disabled?: boolean
-  /** Multiline input */
-  multiline?: boolean
-  /** Specifies max rows for multiline input */
-  rowsMax?: number
-  /** Input ref */
-  inputRef?: Ref<HTMLInputElement> | Ref<HTMLTextAreaElement>
   /** InputIcon */
   inputIcon?: ReactNode
   /** HelperIcon */
   helperIcon?: ReactNode
-  /** Value */
-  value?: string
-  /** Read Only */
-  readOnly?: boolean
-} & (
-  | InputHTMLAttributes<HTMLInputElement>
-  | TextareaHTMLAttributes<HTMLTextAreaElement>
-)
+  /**  Maximum number of rows if `multiline` is set to `true` */
+  rowsMax?: number
+  /** Input ref */
+  inputRef?: ForwardedRef<HTMLInputElement>
+  /** Textarea ref when multiline is set to `true` */
+  textareaRef?: ForwardedRef<HTMLTextAreaElement>
+  /** If `true` a `textarea` is rendered for multiline support. Make sure to use `textareaRef` if you need to access reference element  */
+  multiline?: boolean
+}
+
+export type TextFieldProps = SharedTextFieldProps &
+  (
+    | TextareaHTMLAttributes<HTMLTextAreaElement>
+    | InputHTMLAttributes<HTMLInputElement>
+  )
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   function TextField(
@@ -68,37 +67,42 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       helperText,
       placeholder,
       disabled,
-      multiline,
+      multiline = false,
       className,
-      variant = 'default',
-      inputRef,
+      variant,
       inputIcon,
       helperIcon,
-      rowsMax,
       style,
+      rowsMax,
+      textareaRef,
+      inputRef,
       ...other
     },
     ref,
   ) {
     const helperTextId = useId(null, 'helpertext')
-    const inputProps = {
-      'aria-describedby': helperTextId,
-      multiline,
+
+    let fieldProps = {
+      'aria-invalid': variant === 'error' || undefined,
       disabled,
       placeholder,
       id,
       variant,
-      ref: inputRef,
-      inputIcon,
-      unit,
+      rightAdornments: (
+        <>
+          {inputIcon}
+          <span>{unit}</span>
+        </>
+      ),
       rowsMax,
+      ref: inputRef || textareaRef,
+      multiline,
       ...other,
     }
 
-    const helperProps = {
-      id: helperTextId,
-      variant,
-      helperText,
+    let helperProps = {
+      id: null,
+      text: helperText,
       icon: helperIcon,
       disabled,
     }
@@ -106,7 +110,11 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     const containerProps = {
       ref,
       className,
-      style,
+      style: {
+        width: '100%',
+        ...style,
+      },
+      color: variant,
     }
 
     const labelProps = {
@@ -116,22 +124,25 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       disabled,
     }
 
-    const showLabel = label || meta
-    const showHelperText = helperText
-
-    const { density } = useEds()
-    const token = useToken({ density }, tokens)
+    if (helperText) {
+      fieldProps = {
+        'aria-describedby': helperTextId,
+        ...fieldProps,
+      }
+      helperProps = {
+        id: helperTextId,
+        ...helperProps,
+      }
+    }
 
     return (
-      <ThemeProvider theme={token}>
-        <Container {...containerProps}>
-          <TextFieldProvider>
-            {showLabel && <Label {...labelProps} />}
-            <Field {...inputProps} />
-            {showHelperText && <HelperText {...helperProps} />}
-          </TextFieldProvider>
-        </Container>
-      </ThemeProvider>
+      <InputWrapper
+        helperProps={helperProps}
+        labelProps={labelProps}
+        {...containerProps}
+      >
+        <Field {...fieldProps} />
+      </InputWrapper>
     )
   },
 )

@@ -15,5 +15,5 @@
   "editor.formatOnSave": true,
   "prettier.prettierPath": "./node_modules/prettier",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "task.allowAutomaticTasks": "off",
+  "task.allowAutomaticTasks": "off"
 }
