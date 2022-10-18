@@ -54,11 +54,11 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build and push image
         run: |
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }} -f ${{inputs.dockerfilePath }} .
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.image_tag }} -f ${{inputs.dockerfilePath }} .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.image_tag }}
       - name: Deploy to Web app
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'eds-storybook-react'
           slot-name: '${{inputs.stage }}'
-          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ steps.image_tag.outputs.image_tag }}'
+          images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.image_tag }}'
