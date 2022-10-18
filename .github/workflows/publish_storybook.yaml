@@ -16,7 +16,7 @@ on:
       - 'packages/eds-icons/**'
 jobs:
   setup:
-    uses: equinor/design-system/.github/workflows/_setup.yml@chore/MIM-2580-update-deprecated-gh-actions-set-output
+    uses: equinor/design-system/.github/workflows/_setup.yml@develop
     with:
       cacheKey: ${{ github.sha }}
       checkout_paths: packages/eds-core-react packages/eds-tokens packages/eds-icons packages/eds-lab-react packages/eds-utils
@@ -54,7 +54,7 @@ jobs:
           fi
   publish-storybook:
     needs: [setup, packages]
-    uses: equinor/design-system/.github/workflows/_azure_docker.yml@chore/MIM-2580-update-deprecated-gh-actions-set-output
+    uses: equinor/design-system/.github/workflows/_azure_docker.yml@develop
     with:
       stage: ${{ needs.setup.outputs.stage }}
       cacheKey: ${{ github.sha }}-dist-${{ needs.setup.outputs.stage }}-storybook
