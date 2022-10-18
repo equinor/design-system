@@ -28,23 +28,23 @@ jobs:
       INPUT_STAGE: '${{ inputs.stage }}'
       INPUT_TAG: '${{ inputs.tag }}'
     outputs:
-      stage: '${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}'
-      tag: '${{ steps.input-tag.outputs.value }} ${{ steps.default-tag.outputs.value }}'
+      stage: '${{ env.stage}}'
+      tag: '${{ env.tag }}'
     steps:
       - id: input-stage
         if: "${{ env.INPUT_STAGE != '' }}"
-        run: echo "value=${{ env.INPUT_STAGE }}" >> $GITHUB_ENV
+        run: echo "stage=${{ env.INPUT_STAGE }}" >> $GITHUB_ENV
       - id: default-stage
         if: "${{ env.INPUT_STAGE == '' }}"
-        run: echo "value=development" >> $GITHUB_ENV
+        run: echo "stage=development" >> $GITHUB_ENV
       - id: input-tag
         if: "${{ env.INPUT_TAG != '' }}"
-        run: echo "value=${{ env.INPUT_TAG }}" >> $GITHUB_ENV
+        run: echo "tag=${{ env.INPUT_TAG }}" >> $GITHUB_ENV
       - id: default-tag
         if: "${{ env.INPUT_TAG == '' }}"
-        run: echo "value=next" >> $GITHUB_ENV
+        run: echo "tag=next" >> $GITHUB_ENV
       - name: Print generated values
-        run: echo "tag - ${{ steps.input-tag.outputs.value }} ${{ steps.default-tag.outputs.value }}, stage - ${{ steps.input-stage.outputs.value }} ${{ steps.default-stage.outputs.value }}"
+        run: echo "tag -> ${{ env.tag }}, stage -> ${{ env.stage}}"
   files:
     runs-on: ubuntu-latest
     env:
