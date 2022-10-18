@@ -128,7 +128,7 @@ export const LongListWithTooltips: Story<TooltipProps> = () => {
       {items.map((_, i) => (
         // eslint-disable-next-line react/no-array-index-key
         <span key={i}>
-          <Tooltip title={`Icon ${i}`} placement="right" aria-live="polite">
+          <Tooltip title={`Icon ${i}`} placement="right">
             <Icon data={explore} />
           </Tooltip>
         </span>
@@ -144,7 +144,7 @@ export const RadioAndCheckboxes: Story<TooltipProps> = () => (
       <Checkbox label="Checkbox with tooltip" />
     </Tooltip>
     <br />
-    <Tooltip title="Tooltip on a span around input" aria-live="polite">
+    <Tooltip title="Tooltip on a span around input">
       <span>
         <Checkbox label="Checkbox in span with tooltip" />
       </span>
