@@ -16,6 +16,9 @@ import page from './ToggleButton.docs.mdx'
 export default {
   title: 'Inputs/Button/Toggle',
   component: Button.Toggle,
+  argTypes: {
+    selectedIndexes: { control: 'text' },
+  },
   parameters: {
     docs: {
       page,
