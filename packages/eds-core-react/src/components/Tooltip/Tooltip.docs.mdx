@@ -35,6 +35,17 @@ import { Tooltip } from '@equinor/eds-core-react'
 </Tooltip>
 ```
 
+## Accessibility
+
+Keep in mind that if `Tooltip` is added to a non-focusable element, it is inaccessible to people dependent on keyboard navigation and assistive technologies.
+
+### ARIA
+
+<ul>
+  <li>Tooltip container has <code>role="tooltip"</code>.</li>
+  <li>The element that triggers the tooltip references the tooltip element with <code>aria-describedby</code>.</li>
+</ul>
+
 ## Examples
 
 ### With delay
