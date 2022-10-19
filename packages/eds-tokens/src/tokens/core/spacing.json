@@ -2381,6 +2381,26 @@
     "centered": {
       "12": {
         "tight": {
+          "0": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.0} - {lineHeight.tight.0}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.0} - {lineHeight.tight.0}) / 2",
+              "typography": "{typography.tight.0}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.0} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.0} / {grid.base}))"
+          },
+          "1": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.1} - {lineHeight.tight.1}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.1} - {lineHeight.tight.1}) / 2",
+              "typography": "{typography.tight.1}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.1} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.1} / {grid.base}))"
+          },
           "2": {
             "value": {
               "horizontalPadding": "{spacing.12}",
