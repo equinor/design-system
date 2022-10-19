@@ -2410,6 +2410,66 @@
             },
             "type": "composition",
             "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+          },
+          "5": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.5} - {lineHeight.tight.5}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.5} - {lineHeight.tight.5}) / 2",
+              "typography": "{typography.tight.5}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+          },
+          "6": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.6} - {lineHeight.tight.6}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.6} - {lineHeight.tight.6}) / 2",
+              "typography": "{typography.tight.6}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+          },
+          "7": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.7} - {lineHeight.tight.7}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.7} - {lineHeight.tight.7}) / 2",
+              "typography": "{typography.tight.7}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+          },
+          "8": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.8} - {lineHeight.tight.8}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.8} - {lineHeight.tight.8}) / 2",
+              "typography": "{typography.tight.8}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+          },
+          "9": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.9} - {lineHeight.tight.9}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.9} - {lineHeight.tight.9}) / 2",
+              "typography": "{typography.tight.9}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
+          },
+          "10": {
+            "value": {
+              "horizontalPadding": "{spacing.12}",
+              "paddingBottom": "({spacing.12} * 2 + {capHeight.snappedToGrid.10} - {lineHeight.tight.10}) / 2",
+              "paddingTop": "({spacing.12} * 2 + {capHeight.snappedToGrid.10} - {lineHeight.tight.10}) / 2",
+              "typography": "{typography.tight.10}"
+            },
+            "type": "composition",
+            "description": "Capheight rounded to nearest gridline (9.8 ≈ 10 ≈ 12): {grid.base} * ceil({capHeight.2} / {grid.base})\nComputed container height (36): ({spacing.12} * 2) + ({grid.base} * ceil({capHeight.2} / {grid.base}))"
           }
         }
       }
