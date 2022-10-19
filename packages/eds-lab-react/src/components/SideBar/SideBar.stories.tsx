@@ -232,9 +232,6 @@ export const WithTopbar: Story<SidebarType> = () => {
   const SidebarContainerWithTopbar = styled(SidebarContainer)`
     display: grid;
     grid-template-rows: auto 1fr;
-    & > header {
-      position: static;
-    }
   `
 
   const menuItems: SidebarLinkProps[] = [
@@ -254,7 +251,7 @@ export const WithTopbar: Story<SidebarType> = () => {
 
   return (
     <SidebarContainerWithTopbar>
-      <TopBar>
+      <TopBar sticky={false}>
         <TopBar.Header>
           <LogoClosed /> Application label - subtitle
         </TopBar.Header>
@@ -272,7 +269,7 @@ export const WithTopbar: Story<SidebarType> = () => {
           ))}
         </SideBar.Content>
         <SideBar.Footer>
-          <Divider size="2" color="light" />
+          <Divider size="2" color="light" style={{ marginBlockEnd: 0 }} />
           <SideBar.Toggle />
         </SideBar.Footer>
       </SideBar>

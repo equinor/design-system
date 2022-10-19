@@ -3,15 +3,9 @@ import styled, { css } from 'styled-components'
 
 type SideBarContentProps = HTMLAttributes<HTMLDivElement>
 
-const StyledSideBarContent = styled.div(({ theme }) => {
+const StyledSideBarContent = styled.div(() => {
   return css`
     grid-area: content;
-    :last-child {
-      padding-bottom: ${theme.spacings.bottom};
-    }
-    :first-child {
-      padding-top: ${theme.spacings.top};
-    }
   `
 })
 

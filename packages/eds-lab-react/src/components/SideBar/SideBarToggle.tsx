@@ -22,7 +22,7 @@ const ToggleContainer = styled.div<ContainerProps>(({ theme }) => {
     minWidth,
     entities: {
       toggleOpen: {
-        spacings: { right: mediumSpacing, top, bottom },
+        spacings: { top, bottom },
       },
     },
   } = theme
