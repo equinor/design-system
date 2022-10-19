@@ -847,49 +847,97 @@
     }
   },
   "capHeight": {
-    "0": {
-      "value": "roundTo({fontSize.0} * {const.capHeight})",
-      "type": "other"
+    "rounded": {
+      "0": {
+        "value": "roundTo({fontSize.0} * {const.capHeight})",
+        "type": "other"
+      },
+      "1": {
+        "value": "roundTo({fontSize.1} * {const.capHeight})",
+        "type": "other"
+      },
+      "2": {
+        "value": "roundTo({fontSize.2} * {const.capHeight})",
+        "type": "other"
+      },
+      "3": {
+        "value": "roundTo({fontSize.3} * {const.capHeight})",
+        "type": "other"
+      },
+      "4": {
+        "value": "roundTo({fontSize.4} * {const.capHeight})",
+        "type": "other"
+      },
+      "5": {
+        "value": "roundTo({fontSize.5} * {const.capHeight})",
+        "type": "other"
+      },
+      "6": {
+        "value": "roundTo({fontSize.6} * {const.capHeight})",
+        "type": "other"
+      },
+      "7": {
+        "value": "roundTo({fontSize.7} * {const.capHeight})",
+        "type": "other"
+      },
+      "8": {
+        "value": "roundTo({fontSize.8} * {const.capHeight})",
+        "type": "other"
+      },
+      "9": {
+        "value": "roundTo({fontSize.9} * {const.capHeight})",
+        "type": "other"
+      },
+      "10": {
+        "value": "roundTo({fontSize.10} * {const.capHeight})",
+        "type": "other"
+      }
     },
-    "1": {
-      "value": "roundTo({fontSize.1} * {const.capHeight})",
-      "type": "other"
-    },
-    "2": {
-      "value": "roundTo({fontSize.2} * {const.capHeight})",
-      "type": "other"
-    },
-    "3": {
-      "value": "roundTo({fontSize.3} * {const.capHeight})",
-      "type": "other"
-    },
-    "4": {
-      "value": "roundTo({fontSize.4} * {const.capHeight})",
-      "type": "other"
-    },
-    "5": {
-      "value": "roundTo({fontSize.5} * {const.capHeight})",
-      "type": "other"
-    },
-    "6": {
-      "value": "roundTo({fontSize.6} * {const.capHeight})",
-      "type": "other"
-    },
-    "7": {
-      "value": "roundTo({fontSize.7} * {const.capHeight})",
-      "type": "other"
-    },
-    "8": {
-      "value": "roundTo({fontSize.8} * {const.capHeight})",
-      "type": "other"
-    },
-    "9": {
-      "value": "roundTo({fontSize.9} * {const.capHeight})",
-      "type": "other"
-    },
-    "10": {
-      "value": "roundTo({fontSize.10} * {const.capHeight})",
-      "type": "other"
+    "snappedToGrid": {
+      "0": {
+        "value": "{grid.base} * ceil({capHeight.rounded.0} / {grid.base})",
+        "type": "other"
+      },
+      "1": {
+        "value": "{grid.base} * ceil({capHeight.rounded.1} / {grid.base})",
+        "type": "other"
+      },
+      "2": {
+        "value": "{grid.base} * ceil({capHeight.rounded.2} / {grid.base})",
+        "type": "other"
+      },
+      "3": {
+        "value": "{grid.base} * ceil({capHeight.rounded.3} / {grid.base})",
+        "type": "other"
+      },
+      "4": {
+        "value": "{grid.base} * ceil({capHeight.rounded.4} / {grid.base})",
+        "type": "other"
+      },
+      "5": {
+        "value": "{grid.base} * ceil({capHeight.rounded.5} / {grid.base})",
+        "type": "other"
+      },
+      "6": {
+        "value": "{grid.base} * ceil({capHeight.rounded.6} / {grid.base})",
+        "type": "other"
+      },
+      "7": {
+        "value": "{grid.base} * ceil({capHeight.rounded.7} / {grid.base})",
+        "type": "other"
+      },
+      "8": {
+        "value": "{grid.base} * ceil({capHeight.rounded.8} / {grid.base})",
+        "type": "other"
+      },
+      "9": {
+        "value": "{grid.base} * ceil({capHeight.rounded.9} / {grid.base})",
+        "type": "other"
+      },
+      "10": {
+        "value": "{grid.base} * ceil({capHeight.rounded.10} / {grid.base})",
+        "type": "other"
+      }
     }
   }
 }
