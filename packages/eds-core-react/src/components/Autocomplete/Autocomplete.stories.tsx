@@ -11,6 +11,10 @@ import page from './Autocomplete.docs.mdx'
 export default {
   title: 'Inputs/Autocomplete',
   component: Autocomplete,
+  argTypes: {
+    selectedOptions: { control: { type: null } },
+    ref: { control: { type: null } },
+  },
   parameters: {
     docs: {
       page,
