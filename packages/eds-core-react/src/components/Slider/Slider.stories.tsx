@@ -7,6 +7,9 @@ import page from './Slider.docs.mdx'
 export default {
   title: 'Inputs/Slider',
   component: Slider,
+  argTypes: {
+    value: { control: { type: null } },
+  },
   parameters: {
     docs: {
       page,
