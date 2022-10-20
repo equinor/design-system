@@ -2723,7 +2723,8 @@
     "inline": {
       "4": {
         "value": {
-          "horizontalPadding": "{spacing.4}"
+          "horizontalPadding": "{spacing.4}",
+          "verticalPadding": "0"
         },
         "type": "composition"
       },
@@ -2735,7 +2736,9 @@
       },
       "12": {
         "value": {
-          "horizontalPadding": "{spacing.12}"
+          "horizontalPadding": "{spacing.12}",
+          "verticalPadding": "0",
+          "itemSpacing": "0"
         },
         "type": "composition"
       },
