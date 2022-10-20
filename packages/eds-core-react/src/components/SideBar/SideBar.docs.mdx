@@ -1,0 +1,92 @@
+import { PropsTable, Story, Links } from './../../../.storybook/components'
+import { SideBar } from '.'
+
+# SideBar
+
+Sidebar is a layout component anchored to the left hand side of the screen. 
+It has a toggleable collapsed and expanded state.
+
+
+<Links 
+    
+    figmaUrl="https://www.figma.com/file/0bGXR2sCwMVSDNyyzu5BXrO5/UI%E2%80%94User-Interface?node-id=28061%3A102280"
+    /* documentationUrl="does not exist yet" */
+    sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/SideBar/SideBar.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Story id="navigation-sidebar--primary" />
+<PropsTable />
+
+## Usage
+
+`SideBar` is anchored to the left side of the screen. If it is used together with `TopBar`, 
+`SideBar` should be below it, and not run over or under the `TopBar`.
+
+<ul>
+    <li>The Sidebar does not scroll away, being a consistent guidepost to users.</li>
+    <li><code>SideBar.Content</code> and <code>SideBar.Footer</code> are subcomponents for layout. 
+    You should normally use these to contain the other content.</li>
+    <li><code>SideBar.Toggle</code> is optional and should be placed either at the top or in the footer.</li>
+</ul>
+
+```tsx
+import { SideBar, SidebarLinkProps } from '@equinor/eds-lab-react'
+  const menuItemsInitial: SidebarLinkProps[] = [
+    {
+      name: 'Home',
+      icon: home,
+      href: '/',
+      active: false,
+    },
+    {
+      name: 'Dashboard',
+      icon: dashboard,
+      href: '/dashboard',
+      active: false,
+    },
+  ]
+  const [menuItems, setMenuItems] = useState(menuItemsInitial)
+  const updateActive = () => {
+    /* Logic to update active state of links */
+  }
+
+  <SideBar>
+      <SideBar.Content>
+        <SideBar.Toggle />
+        {menuItems.map((m) => (
+            <SideBar.Link key={m.name} {...m} />
+          ))}
+      </SideBar.Content>
+  </SideBar>
+```
+
+## Examples
+
+### With TopBar
+If used together with `TopBar`, the layout should be handled with css-grid to ensure the sidebar does not extend beyond the screen and creates overflow.
+<Story id="navigation-sidebar--with-topbar" />
+
+### SideBar.Link
+
+`SideBar.Link` requires both `label` and `icon` due to the visual style of the collapsed state. 
+Navigation can be done with `href`, or in the case of a third party routing library, one can use the `as` prop 
+to override component type and allow their specific props. 
+Use the `active` property to indicate current active path when used for navigation.
+<Story id="navigation-sidebar--active-path" />
+
+### With custom content
+
+Use <code>useSideBar</code> to detect sidebar state in your custom content if it needs to be modified based on expanded/collapsed state. 
+Here it is used to make the footer with two states.
+```tsx
+import { SideBar, useSideBar } from '@equinor/eds-lab-react'
+```
+<Story id="navigation-sidebar--custom-content" />
+
+### With Button
+
+`SideBar.Button` can be used to perform actions. It must have an icon and a label.
+<Story id="navigation-sidebar--with-button" />
+
+
