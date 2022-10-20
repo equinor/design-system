@@ -51,9 +51,13 @@ const options = [
 ```
 
 ## Accessibility
-The property `label` is mandatory and make sure you have a descriptive label for screen readers.
 
-If `clearSearchOnChange` is set to `false` make sure `label` has description of how many options are selected for screen readers.
+### ARIA
+
+<ul>
+  <li>The property <code>label</code> is mandatory and make sure you have a descriptive label for screen readers.</li>
+  <li>If <code>clearSearchOnChange</code> is set to <code>false</code> make sure <code>label</code> has description of how many options are selected for screen readers.</li>
+</ul>
 
 ## Examples
 
@@ -107,6 +111,6 @@ Make sure to use `useMemo` if you are mutating the options in the render functio
 ### Options `autoWidth` 
 <Story id="inputs-autocomplete--auto-width" />
 
-## Options update
-Story for testing if options are correctly update if changed after initialization
+### Options update
+Story for testing if options are correctly update if changed after initialization.
 <Story id="inputs-autocomplete--options-update" />
