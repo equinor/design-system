@@ -93,10 +93,6 @@ Introduction.decorators = [
 export const States: Story<TabsProps> = () => {
   const focusedRef = useRef<HTMLButtonElement>(null)
 
-  useEffect(() => {
-    focusedRef.current?.focus()
-  }, [])
-
   return (
     <Tabs activeTab={2} onChange={noop}>
       <Tabs.List>
@@ -511,7 +507,6 @@ export const Compact: Story<TabsProps> = () => {
   const [density, setDensity] = useState<Density>('comfortable')
 
   useEffect(() => {
-    focusedRef.current?.focus()
     setDensity('compact')
   }, [density])
 
