@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, RenderOptions } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SideBarButton, SideBarButtonProps } from './index'
-import { SideBar } from '../SideBar'
+import { SideBar } from '../'
 import { add } from '@equinor/eds-icons'
 
 const defaultProps: SideBarButtonProps = {
@@ -23,27 +23,27 @@ function SideBarWrapperClosed(children: React.ReactElement) {
 }
 
 test('SideBarButton Renders', () => {
-  customRender(<SideBarButton {...defaultProps}></SideBarButton>, {
+  customRender(<SideBar.Button {...defaultProps}></SideBar.Button>, {
     wrapper: ({ children }) => SideBarWrapperOpen(children),
   })
 })
 
 test('Renders label when open', () => {
-  customRender(<SideBarButton label="Label" icon={add}></SideBarButton>, {
+  customRender(<SideBar.Button label="Label" icon={add}></SideBar.Button>, {
     wrapper: ({ children }) => SideBarWrapperOpen(children),
   })
   expect(screen.getByText('Label')).toBeInTheDocument()
 })
 
 test('Renders label when open', () => {
-  customRender(<SideBarButton label="Label" icon={add}></SideBarButton>, {
+  customRender(<SideBar.Button label="Label" icon={add}></SideBar.Button>, {
     wrapper: ({ children }) => SideBarWrapperOpen(children),
   })
   expect(screen.getByText('Label')).toBeInTheDocument()
 })
 
 test("Doesn't render label when closed", () => {
-  customRender(<SideBarButton {...defaultProps}></SideBarButton>, {
+  customRender(<SideBar.Button {...defaultProps}></SideBar.Button>, {
     wrapper: ({ children }) => SideBarWrapperClosed(children),
   })
 
@@ -54,11 +54,11 @@ test('Fires onClick when clicked', async () => {
   const onActionFn = jest.fn()
 
   customRender(
-    <SideBarButton
+    <SideBar.Button
       icon={add}
       label="Label"
       onClick={onActionFn}
-    ></SideBarButton>,
+    ></SideBar.Button>,
     {
       wrapper: ({ children }) => SideBarWrapperOpen(children),
     },
