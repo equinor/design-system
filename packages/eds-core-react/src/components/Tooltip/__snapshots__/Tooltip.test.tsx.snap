@@ -19,6 +19,18 @@ exports[`Tooltip Matches snapshot 1`] = `
   white-space: nowrap;
 }
 
+.c0::before {
+  content: '; Has tooltip: ';
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
 .c1 {
   position: absolute;
   width: 6px;

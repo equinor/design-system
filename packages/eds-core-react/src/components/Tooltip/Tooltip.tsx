@@ -40,6 +40,17 @@ const StyledTooltip = styled.div`
   background: ${tokens.background};
   z-index: 1500;
   white-space: nowrap;
+
+  &::before {
+    content: '; Has tooltip: ';
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
 `
 
 const ArrowWrapper = styled.div`
