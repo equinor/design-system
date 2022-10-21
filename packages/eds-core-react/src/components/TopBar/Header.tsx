@@ -7,7 +7,7 @@ const StyledHeader = styled.div`
   grid-area: left;
   display: grid;
   grid-template-columns: auto auto;
-  grid-gap: 24px;
+  grid-gap: 12px;
   align-items: center;
 `
 
