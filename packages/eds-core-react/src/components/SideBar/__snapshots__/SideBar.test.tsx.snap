@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar Matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="SideBar__GridContainer-sc-a84pkc-0 kkqqiV"
+    open=""
+  >
+    <div
+      class="SideBarContent__StyledSideBarContent-sc-kq9ra8-0 bDhpGQ"
+    >
+      <div
+        class="SideBarToggle__ToggleContainer-sc-1w5e44y-0 ecyKCL"
+        open=""
+      >
+        <button
+          class="Button__ButtonBase-sc-1hs0myn-1 fMCItm"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="Button__Inner-sc-1hs0myn-0 dCQxQD"
+          >
+            <svg
+              aria-hidden="true"
+              class="Icon__StyledSvg-sc-6evbi1-0"
+              fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="Icon__StyledPath-sc-6evbi1-1"
+                clip-rule="evenodd"
+                d="M7.437 12 13 17.355 11.287 19 4 12l7.287-7L13 6.645 7.437 12zm7 0L20 17.355 18.287 19 11 12l7.288-7L20 6.645 14.437 12z"
+                data-testid="eds-icon-path"
+                fill-rule="evenodd"
+                height="24"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+      <div
+        class="SideBarButton__MenuButtonContainer-sc-15xlkyo-0 dESwJG"
+        open=""
+      >
+        <button
+          class="Button__ButtonBase-sc-1hs0myn-1 iwPiaG SideBarButton__ExtendedButton-sc-15xlkyo-1 coyIua"
+          open=""
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="Button__Inner-sc-1hs0myn-0 dCQxQD"
+          >
+            <svg
+              aria-hidden="true"
+              class="Icon__StyledSvg-sc-6evbi1-0"
+              fill="var(--eds_text__static_icons__primary_white, rgba(255, 255, 255, 1))"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="Icon__StyledPath-sc-6evbi1-1"
+                clip-rule="evenodd"
+                d="M5 12.5H2l10-9 10 9h-3v8h-6v-6h-2v6H5v-8zm12-1.81-5-4.5-5 4.5v7.81h2v-6h6v6h2v-7.81z"
+                data-testid="eds-icon-path"
+                fill-rule="evenodd"
+                height="24"
+              />
+            </svg>
+             test
+          </span>
+        </button>
+      </div>
+      <a
+        class="SidebarLink__Container-sc-gbehcj-0 drRfLp"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="Icon__StyledSvg-sc-6evbi1-0"
+          fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="Icon__StyledPath-sc-6evbi1-1"
+            clip-rule="evenodd"
+            d="M5 12.5H2l10-9 10 9h-3v8h-6v-6h-2v6H5v-8zm12-1.81-5-4.5-5 4.5v7.81h2v-6h6v6h2v-7.81z"
+            data-testid="eds-icon-path"
+            fill-rule="evenodd"
+            height="24"
+          />
+        </svg>
+        <p
+          class="Typography__StyledTypography-sc-179guof-0 blJuQu SidebarLink__ItemText-sc-gbehcj-1 bhzIlo"
+        >
+          Home
+        </p>
+      </a>
+      <a
+        class="SidebarLink__Container-sc-gbehcj-0 drRfLp"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="Icon__StyledSvg-sc-6evbi1-0"
+          fill="var(--eds_text__static_icons__default, rgba(61, 61, 61, 1))"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="Icon__StyledPath-sc-6evbi1-1"
+            clip-rule="evenodd"
+            d="m22 9.24-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4V6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"
+            data-testid="eds-icon-path"
+            fill-rule="evenodd"
+            height="24"
+          />
+        </svg>
+        <p
+          class="Typography__StyledTypography-sc-179guof-0 blJuQu SidebarLink__ItemText-sc-gbehcj-1 bhzIlo"
+        >
+          Another Link
+        </p>
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;
